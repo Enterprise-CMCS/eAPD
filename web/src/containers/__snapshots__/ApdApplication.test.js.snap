@@ -36,7 +36,7 @@ exports[`apd (application) component renders correctly 1`] = `
       <Connect(All) />
       <Connect(ScheduleSummary) />
       <ProposedBudget />
-      <Connect(AssurancesAndCompliance) />
+      <AssurancesAndCompliance />
       <Connect(ExecutiveSummary) />
       <Connect(ExportAndSubmit) />
     </div>
