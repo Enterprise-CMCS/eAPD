@@ -1,107 +1,187 @@
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 
-import {
-  plain as AssurancesAndCompliance,
-  mapStateToProps,
-  mapDispatchToProps,
-  LinkOrText
-} from './AssurancesAndCompliance';
-import { updateApd } from '../actions/apd';
+import AssurancesAndCompliance, { LinkOrText } from './AssurancesAndCompliance';
+import { EDIT_APD } from '../actions/editApd';
+
+const mockStore = configureStore();
 
 describe('assurances and compliance component', () => {
   describe('main component', () => {
-    const sandbox = sinon.createSandbox();
-
-    const props = {
-      sections: {
-        procurement: [
-          { title: '42 CFR Part 495.348', checked: false, explanation: '' },
-          { title: 'SMM Section 11267', checked: true, explanation: '' },
-          { title: '45 CFR Part 95.615', checked: '', explanation: '' },
-          { title: '45 CFR Part 75.326', checked: true, explanation: '' }
-        ],
-        recordsAccess: [
-          {
-            title: '42 CFR Part 495.350',
-            checked: false,
-            explanation: 'some words'
-          },
-          { title: '42 CFR Part 495.352', checked: true, explanation: '' },
-          { title: '42 CFR Part 495.346', checked: true, explanation: '' },
-          {
-            title: '42 CFR Part 433.112(b)(5) - (9)',
-            checked: true,
-            explanation: ''
-          },
-          {
-            title: '45 CFR Part 95.615',
-            checked: false,
-            explanation: 'other words'
-          },
-          { title: 'SMM Section 11267', checked: true, explanation: '' }
-        ],
-        security: [
-          {
-            title: '45 CFR 164 Securities and Privacy',
-            checked: true,
-            explanation: ''
+    const state = {
+      apd: {
+        data: {
+          federalCitations: {
+            procurement: [
+              { title: '42 CFR Part 495.348', checked: true, explanation: '' },
+              { title: 'SMM Section 11267', checked: true, explanation: '' },
+              { title: '45 CFR Part 95.615', checked: '', explanation: '' },
+              { title: '45 CFR Part 75.326', checked: false, explanation: '' }
+            ],
+            recordsAccess: [
+              {
+                title: '42 CFR Part 495.350',
+                checked: false,
+                explanation: 'some words'
+              },
+              { title: '42 CFR Part 495.352', checked: true, explanation: '' },
+              { title: '42 CFR Part 495.346', checked: true, explanation: '' },
+              {
+                title: '42 CFR Part 433.112(b)(5) - (9)',
+                checked: true,
+                explanation: ''
+              },
+              {
+                title: '45 CFR Part 95.615',
+                checked: true,
+                explanation: 'other words'
+              },
+              { title: 'SMM Section 11267', checked: true, explanation: '' }
+            ],
+            softwareRights: [
+              { title: '42 CFR Part 495.360', checked: true, explanation: '' },
+              { title: '45 CFR Part 95.617', checked: true, explanation: '' },
+              { title: '42 CFR Part 431.300', checked: false, explanation: '' },
+              { title: '42 CFR Part 433.112', checked: true, explanation: '' }
+            ],
+            security: [
+              {
+                title: '45 CFR 164 Securities and Privacy',
+                checked: false,
+                explanation: ''
+              }
+            ]
           }
-        ],
-        softwareRights: [
-          { title: '42 CFR Part 495.360', checked: true, explanation: '' },
-          { title: '45 CFR Part 95.617', checked: true, explanation: '' },
-          { title: '42 CFR Part 431.300', checked: true, explanation: '' },
-          { title: '42 CFR Part 433.112', checked: true, explanation: '' }
-        ]
-      },
-      updateApd: sandbox.spy()
+        }
+      }
     };
 
+    const store = mockStore(state);
+
     beforeEach(() => {
-      sandbox.resetHistory();
+      store.clearActions();
     });
 
     test('renders correctly', () => {
-      expect(shallow(<AssurancesAndCompliance {...props} />)).toMatchSnapshot();
+      expect(
+        mount(
+          <Provider store={store}>
+            <AssurancesAndCompliance />
+          </Provider>
+        )
+      ).toMatchSnapshot();
+    });
+
+    test('dispatches when a citation is toggled yes/no', () => {
+      const component = mount(
+        <Provider store={store}>
+          <AssurancesAndCompliance />
+        </Provider>
+      );
+
+      // Based on the state above, there are four sections to test. We need
+      // to target one radio button in each section. There are two per
+      // assurance item, so the indices we need to target are:
+      //   Procurement: 0/1 (yes/no)
+      //   Records access: 8/9
+      //   Software rights: 20/21
+      //   Security: 28/29
+
+      component
+        .find('Choice')
+        .at(0)
+        .prop('onChange')();
+      component
+        .find('Choice')
+        .at(9)
+        .prop('onChange')();
+      component
+        .find('Choice')
+        .at(21)
+        .prop('onChange')();
+      component
+        .find('Choice')
+        .at(28)
+        .prop('onChange')();
+
+      expect(store.getActions()).toEqual([
+        {
+          type: EDIT_APD,
+          path: '/federalCitations/procurement/0/checked',
+          value: true
+        },
+        {
+          type: EDIT_APD,
+          path: '/federalCitations/recordsAccess/0/checked',
+          value: false
+        },
+        {
+          type: EDIT_APD,
+          path: '/federalCitations/softwareRights/0/checked',
+          value: false
+        },
+        {
+          type: EDIT_APD,
+          path: '/federalCitations/security/0/checked',
+          value: true
+        }
+      ]);
     });
 
     test('dispatches when text is changed', () => {
-      const component = shallow(<AssurancesAndCompliance {...props} />);
+      const component = mount(
+        <Provider store={store}>
+          <AssurancesAndCompliance />
+        </Provider>
+      );
+
+      // Based on the state above, there should be four textareas:
+      // 1) 4th procurement item
+      // 2) 1st records access item
+      // 3) 3rd software rights item
+      // 4) 1st security item
 
       component
-        .find('ChoiceComponent')
-        .at(1) // choice 0 is yes, choice 1 is no
-        .dive()
-        .find('Choice')
-        .dive()
         .find('TextArea')
-        .simulate('change', { target: { value: 'new text' } });
+        .at(0)
+        .prop('onChange')({ target: { value: 'new text 1' } });
+      component
+        .find('TextArea')
+        .at(1)
+        .prop('onChange')({ target: { value: 'new text 2' } });
+      component
+        .find('TextArea')
+        .at(2)
+        .prop('onChange')({ target: { value: 'new text 3' } });
+      component
+        .find('TextArea')
+        .at(3)
+        .prop('onChange')({ target: { value: 'new text 4' } });
 
-      expect(
-        props.updateApd.calledWith({
-          federalCitation: { procurement: { 0: { explanation: 'new text' } } }
-        })
-      );
-    });
-
-    test('maps state to props', () => {
-      const state = {
-        apd: {
-          data: {
-            federalCitations: 'this is here'
-          }
+      expect(store.getActions()).toEqual([
+        {
+          type: EDIT_APD,
+          path: '/federalCitations/procurement/3/explanation',
+          value: 'new text 1'
+        },
+        {
+          type: EDIT_APD,
+          path: '/federalCitations/recordsAccess/0/explanation',
+          value: 'new text 2'
+        },
+        {
+          type: EDIT_APD,
+          path: '/federalCitations/softwareRights/2/explanation',
+          value: 'new text 3'
+        },
+        {
+          type: EDIT_APD,
+          path: '/federalCitations/security/0/explanation',
+          value: 'new text 4'
         }
-      };
-
-      expect(mapStateToProps(state)).toEqual({
-        sections: 'this is here'
-      });
-    });
-
-    test('maps dispatch to props', () => {
-      expect(mapDispatchToProps).toEqual({ updateApd });
+      ]);
     });
   });
 

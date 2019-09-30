@@ -1,5 +1,6 @@
 export * from './symbols';
 
+export * from './assurancesAndCompliance';
 export * from './incentivePayments';
 export * from './keyPersonnel';
 export * from './overview';
