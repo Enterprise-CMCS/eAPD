@@ -1498,7 +1498,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                     ?
                   </legend>
                   <ChoiceComponent
-                    checked={false}
+                    checked={true}
                     name="apd-assurances-yes-explanation-recordsAccess-45_CFR_Part_95.615"
                     onChange={[Function]}
                     size="small"
@@ -1507,7 +1507,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                   >
                     <div>
                       <Choice
-                        checked={false}
+                        checked={true}
                         inputPlacement="left"
                         name="apd-assurances-yes-explanation-recordsAccess-45_CFR_Part_95.615"
                         onChange={[Function]}
@@ -1521,7 +1521,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           aria-relevant={null}
                         >
                           <input
-                            checked={false}
+                            checked={true}
                             className="ds-c-choice ds-c-choice--small"
                             id="radio_apd-assurances-yes-explanation-recordsAccess-45_CFR_Part_95.615_19"
                             name="apd-assurances-yes-explanation-recordsAccess-45_CFR_Part_95.615"
@@ -1549,7 +1549,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                     </div>
                   </ChoiceComponent>
                   <ChoiceComponent
-                    checked={true}
+                    checked={false}
                     checkedChildren={
                       <div
                         className="ds-c-choice__checkedChild"
@@ -1571,7 +1571,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                   >
                     <div>
                       <Choice
-                        checked={true}
+                        checked={false}
                         checkedChildren={
                           <div
                             className="ds-c-choice__checkedChild"
@@ -1598,7 +1598,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           aria-relevant="additions text"
                         >
                           <input
-                            checked={true}
+                            checked={false}
                             className="ds-c-choice ds-c-choice--small"
                             id="radio_apd-assurances-no-explanation-recordsAccess-45_CFR_Part_95.615_20"
                             name="apd-assurances-no-explanation-recordsAccess-45_CFR_Part_95.615"
@@ -1621,64 +1621,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                               </span>
                             </label>
                           </FormLabel>
-                          <div
-                            className="ds-c-choice__checkedChild"
-                          >
-                            <TextArea
-                              label="Please explain"
-                              name="explanation-recordsAccess-45_CFR_Part_95.615"
-                              onChange={[Function]}
-                              rows={5}
-                              value="other words"
-                            >
-                              <TextField
-                                fieldClassName="visibility--screen"
-                                label="Please explain"
-                                multiline={true}
-                                name="explanation-recordsAccess-45_CFR_Part_95.615"
-                                onChange={[Function]}
-                                rows={5}
-                                type="text"
-                                value="other words"
-                              >
-                                <div
-                                  className="ds-u-clearfix"
-                                >
-                                  <FormLabel
-                                    component="label"
-                                    fieldId="textfield_21"
-                                  >
-                                    <label
-                                      className="ds-c-label"
-                                      htmlFor="textfield_21"
-                                    >
-                                      <span
-                                        className=""
-                                      >
-                                        Please explain
-                                      </span>
-                                    </label>
-                                  </FormLabel>
-                                  <textarea
-                                    className="ds-c-field visibility--screen"
-                                    id="textfield_21"
-                                    name="explanation-recordsAccess-45_CFR_Part_95.615"
-                                    onChange={[Function]}
-                                    rows={5}
-                                    value="other words"
-                                  />
-                                </div>
-                              </TextField>
-                              <div
-                                className="visibility--print"
-                              >
-                                <span>
-                                  other words
-                                  <br />
-                                </span>
-                              </div>
-                            </TextArea>
-                          </div>
                         </div>
                       </Choice>
                     </div>
@@ -1735,7 +1677,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           <input
                             checked={true}
                             className="ds-c-choice ds-c-choice--small"
-                            id="radio_apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267_22"
+                            id="radio_apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267_21"
                             name="apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267"
                             onChange={[Function]}
                             type="radio"
@@ -1743,11 +1685,11 @@ exports[`assurances and compliance component main component renders correctly 1`
                           />
                           <FormLabel
                             component="label"
-                            fieldId="radio_apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267_22"
+                            fieldId="radio_apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267_21"
                           >
                             <label
                               className="ds-c-label"
-                              htmlFor="radio_apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267_22"
+                              htmlFor="radio_apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267_21"
                             >
                               <span
                                 className=""
@@ -1812,7 +1754,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           <input
                             checked={false}
                             className="ds-c-choice ds-c-choice--small"
-                            id="radio_apd-assurances-no-explanation-recordsAccess-SMM_Section_11267_23"
+                            id="radio_apd-assurances-no-explanation-recordsAccess-SMM_Section_11267_22"
                             name="apd-assurances-no-explanation-recordsAccess-SMM_Section_11267"
                             onChange={[Function]}
                             type="radio"
@@ -1820,11 +1762,11 @@ exports[`assurances and compliance component main component renders correctly 1`
                           />
                           <FormLabel
                             component="label"
-                            fieldId="radio_apd-assurances-no-explanation-recordsAccess-SMM_Section_11267_23"
+                            fieldId="radio_apd-assurances-no-explanation-recordsAccess-SMM_Section_11267_22"
                           >
                             <label
                               className="ds-c-label"
-                              htmlFor="radio_apd-assurances-no-explanation-recordsAccess-SMM_Section_11267_23"
+                              htmlFor="radio_apd-assurances-no-explanation-recordsAccess-SMM_Section_11267_22"
                             >
                               <span
                                 className=""
@@ -1893,7 +1835,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           <input
                             checked={true}
                             className="ds-c-choice ds-c-choice--small"
-                            id="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360_24"
+                            id="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360_23"
                             name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360"
                             onChange={[Function]}
                             type="radio"
@@ -1901,11 +1843,11 @@ exports[`assurances and compliance component main component renders correctly 1`
                           />
                           <FormLabel
                             component="label"
-                            fieldId="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360_24"
+                            fieldId="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360_23"
                           >
                             <label
                               className="ds-c-label"
-                              htmlFor="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360_24"
+                              htmlFor="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360_23"
                             >
                               <span
                                 className=""
@@ -1970,7 +1912,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           <input
                             checked={false}
                             className="ds-c-choice ds-c-choice--small"
-                            id="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360_25"
+                            id="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360_24"
                             name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360"
                             onChange={[Function]}
                             type="radio"
@@ -1978,11 +1920,11 @@ exports[`assurances and compliance component main component renders correctly 1`
                           />
                           <FormLabel
                             component="label"
-                            fieldId="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360_25"
+                            fieldId="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360_24"
                           >
                             <label
                               className="ds-c-label"
-                              htmlFor="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360_25"
+                              htmlFor="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360_24"
                             >
                               <span
                                 className=""
@@ -2041,7 +1983,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           <input
                             checked={true}
                             className="ds-c-choice ds-c-choice--small"
-                            id="radio_apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617_26"
+                            id="radio_apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617_25"
                             name="apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617"
                             onChange={[Function]}
                             type="radio"
@@ -2049,11 +1991,11 @@ exports[`assurances and compliance component main component renders correctly 1`
                           />
                           <FormLabel
                             component="label"
-                            fieldId="radio_apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617_26"
+                            fieldId="radio_apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617_25"
                           >
                             <label
                               className="ds-c-label"
-                              htmlFor="radio_apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617_26"
+                              htmlFor="radio_apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617_25"
                             >
                               <span
                                 className=""
@@ -2118,7 +2060,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           <input
                             checked={false}
                             className="ds-c-choice ds-c-choice--small"
-                            id="radio_apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617_27"
+                            id="radio_apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617_26"
                             name="apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617"
                             onChange={[Function]}
                             type="radio"
@@ -2126,11 +2068,11 @@ exports[`assurances and compliance component main component renders correctly 1`
                           />
                           <FormLabel
                             component="label"
-                            fieldId="radio_apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617_27"
+                            fieldId="radio_apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617_26"
                           >
                             <label
                               className="ds-c-label"
-                              htmlFor="radio_apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617_27"
+                              htmlFor="radio_apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617_26"
                             >
                               <span
                                 className=""
@@ -2170,7 +2112,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                     ?
                   </legend>
                   <ChoiceComponent
-                    checked={true}
+                    checked={false}
                     name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300"
                     onChange={[Function]}
                     size="small"
@@ -2179,7 +2121,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                   >
                     <div>
                       <Choice
-                        checked={true}
+                        checked={false}
                         inputPlacement="left"
                         name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300"
                         onChange={[Function]}
@@ -2193,9 +2135,9 @@ exports[`assurances and compliance component main component renders correctly 1`
                           aria-relevant={null}
                         >
                           <input
-                            checked={true}
+                            checked={false}
                             className="ds-c-choice ds-c-choice--small"
-                            id="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300_28"
+                            id="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300_27"
                             name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300"
                             onChange={[Function]}
                             type="radio"
@@ -2203,11 +2145,11 @@ exports[`assurances and compliance component main component renders correctly 1`
                           />
                           <FormLabel
                             component="label"
-                            fieldId="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300_28"
+                            fieldId="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300_27"
                           >
                             <label
                               className="ds-c-label"
-                              htmlFor="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300_28"
+                              htmlFor="radio_apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300_27"
                             >
                               <span
                                 className=""
@@ -2221,7 +2163,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                     </div>
                   </ChoiceComponent>
                   <ChoiceComponent
-                    checked={false}
+                    checked={true}
                     checkedChildren={
                       <div
                         className="ds-c-choice__checkedChild"
@@ -2243,7 +2185,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                   >
                     <div>
                       <Choice
-                        checked={false}
+                        checked={true}
                         checkedChildren={
                           <div
                             className="ds-c-choice__checkedChild"
@@ -2270,9 +2212,9 @@ exports[`assurances and compliance component main component renders correctly 1`
                           aria-relevant="additions text"
                         >
                           <input
-                            checked={false}
+                            checked={true}
                             className="ds-c-choice ds-c-choice--small"
-                            id="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300_29"
+                            id="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300_28"
                             name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300"
                             onChange={[Function]}
                             type="radio"
@@ -2280,11 +2222,11 @@ exports[`assurances and compliance component main component renders correctly 1`
                           />
                           <FormLabel
                             component="label"
-                            fieldId="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300_29"
+                            fieldId="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300_28"
                           >
                             <label
                               className="ds-c-label"
-                              htmlFor="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300_29"
+                              htmlFor="radio_apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300_28"
                             >
                               <span
                                 className=""
@@ -2293,6 +2235,63 @@ exports[`assurances and compliance component main component renders correctly 1`
                               </span>
                             </label>
                           </FormLabel>
+                          <div
+                            className="ds-c-choice__checkedChild"
+                          >
+                            <TextArea
+                              label="Please explain"
+                              name="explanation-softwareRights-42_CFR_Part_431.300"
+                              onChange={[Function]}
+                              rows={5}
+                              value=""
+                            >
+                              <TextField
+                                fieldClassName="visibility--screen"
+                                label="Please explain"
+                                multiline={true}
+                                name="explanation-softwareRights-42_CFR_Part_431.300"
+                                onChange={[Function]}
+                                rows={5}
+                                type="text"
+                                value=""
+                              >
+                                <div
+                                  className="ds-u-clearfix"
+                                >
+                                  <FormLabel
+                                    component="label"
+                                    fieldId="textfield_29"
+                                  >
+                                    <label
+                                      className="ds-c-label"
+                                      htmlFor="textfield_29"
+                                    >
+                                      <span
+                                        className=""
+                                      >
+                                        Please explain
+                                      </span>
+                                    </label>
+                                  </FormLabel>
+                                  <textarea
+                                    className="ds-c-field visibility--screen"
+                                    id="textfield_29"
+                                    name="explanation-softwareRights-42_CFR_Part_431.300"
+                                    onChange={[Function]}
+                                    rows={5}
+                                    value=""
+                                  />
+                                </div>
+                              </TextField>
+                              <div
+                                className="visibility--print"
+                              >
+                                <span>
+                                  <br />
+                                </span>
+                              </div>
+                            </TextArea>
+                          </div>
                         </div>
                       </Choice>
                     </div>
@@ -2488,7 +2487,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                     ?
                   </legend>
                   <ChoiceComponent
-                    checked={true}
+                    checked={false}
                     name="apd-assurances-yes-explanation-security-45_CFR_164_Securities_and_Privacy"
                     onChange={[Function]}
                     size="small"
@@ -2497,7 +2496,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                   >
                     <div>
                       <Choice
-                        checked={true}
+                        checked={false}
                         inputPlacement="left"
                         name="apd-assurances-yes-explanation-security-45_CFR_164_Securities_and_Privacy"
                         onChange={[Function]}
@@ -2511,7 +2510,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           aria-relevant={null}
                         >
                           <input
-                            checked={true}
+                            checked={false}
                             className="ds-c-choice ds-c-choice--small"
                             id="radio_apd-assurances-yes-explanation-security-45_CFR_164_Securities_and_Privacy_32"
                             name="apd-assurances-yes-explanation-security-45_CFR_164_Securities_and_Privacy"
@@ -2539,7 +2538,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                     </div>
                   </ChoiceComponent>
                   <ChoiceComponent
-                    checked={false}
+                    checked={true}
                     checkedChildren={
                       <div
                         className="ds-c-choice__checkedChild"
@@ -2561,7 +2560,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                   >
                     <div>
                       <Choice
-                        checked={false}
+                        checked={true}
                         checkedChildren={
                           <div
                             className="ds-c-choice__checkedChild"
@@ -2588,7 +2587,7 @@ exports[`assurances and compliance component main component renders correctly 1`
                           aria-relevant="additions text"
                         >
                           <input
-                            checked={false}
+                            checked={true}
                             className="ds-c-choice ds-c-choice--small"
                             id="radio_apd-assurances-no-explanation-security-45_CFR_164_Securities_and_Privacy_33"
                             name="apd-assurances-no-explanation-security-45_CFR_164_Securities_and_Privacy"
@@ -2611,6 +2610,63 @@ exports[`assurances and compliance component main component renders correctly 1`
                               </span>
                             </label>
                           </FormLabel>
+                          <div
+                            className="ds-c-choice__checkedChild"
+                          >
+                            <TextArea
+                              label="Please explain"
+                              name="explanation-security-45_CFR_164_Securities_and_Privacy"
+                              onChange={[Function]}
+                              rows={5}
+                              value=""
+                            >
+                              <TextField
+                                fieldClassName="visibility--screen"
+                                label="Please explain"
+                                multiline={true}
+                                name="explanation-security-45_CFR_164_Securities_and_Privacy"
+                                onChange={[Function]}
+                                rows={5}
+                                type="text"
+                                value=""
+                              >
+                                <div
+                                  className="ds-u-clearfix"
+                                >
+                                  <FormLabel
+                                    component="label"
+                                    fieldId="textfield_34"
+                                  >
+                                    <label
+                                      className="ds-c-label"
+                                      htmlFor="textfield_34"
+                                    >
+                                      <span
+                                        className=""
+                                      >
+                                        Please explain
+                                      </span>
+                                    </label>
+                                  </FormLabel>
+                                  <textarea
+                                    className="ds-c-field visibility--screen"
+                                    id="textfield_34"
+                                    name="explanation-security-45_CFR_164_Securities_and_Privacy"
+                                    onChange={[Function]}
+                                    rows={5}
+                                    value=""
+                                  />
+                                </div>
+                              </TextField>
+                              <div
+                                className="visibility--print"
+                              >
+                                <span>
+                                  <br />
+                                </span>
+                              </div>
+                            </TextArea>
+                          </div>
                         </div>
                       </Choice>
                     </div>
