@@ -2,7 +2,7 @@ import { apply_patch as applyPatch } from 'jsonpatch';
 import u from 'updeep';
 
 import {
-  ADD_ACTIVITY as ADD_ACTIVITY_LEGACY,
+  ADD_ACTIVITY,
   ADD_ACTIVITY_CONTRACTOR,
   ADD_ACTIVITY_GOAL,
   ADD_ACTIVITY_EXPENSE,
@@ -20,7 +20,6 @@ import {
   UPDATE_ACTIVITY
 } from '../actions/activities';
 import { SAVE_APD_SUCCESS, SELECT_APD } from '../actions/apd';
-import { ADD_ACTIVITY } from '../actions/editActivity';
 import { ADD_APD_YEAR, REMOVE_APD_YEAR } from '../actions/editApd';
 
 import {
@@ -105,7 +104,7 @@ const quarterlyFFPEntry = () =>
     {}
   );
 
-const newActivity = ({
+export const newActivity = ({
   name = '',
   fundingSource = 'HIT',
   years = [],
@@ -256,18 +255,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ACTIVITY: {
-      const activity = newActivity({ years: action.state.apd.data.years });
-      return applyPatch(state, [
-        { op: 'add', path: '/allKeys/-', value: activity.key },
-        {
-          op: 'add',
-          path: `/byKey/${activity.key}`,
-          value: activity
-        }
-      ]);
-    }
-
-    case ADD_ACTIVITY_LEGACY: {
       const activity = newActivity({ years: action.years });
       return {
         byKey: {

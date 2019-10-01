@@ -1,60 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the (Activity) EntryDetails component renders correctly 1`] = `
-<div
-  className="activity--body activity--body__collapsed activity--body__notfirst"
-  id="activity-activity-key"
->
-  <Review
-    editContent={
-      <div
-        className="nowrap visibility--screen"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
-          type="button"
-          variation="transparent"
-        >
-          Edit
-        </Button>
-      </div>
+<ContextProvider
+  value={
+    Object {
+      "activity": Object {
+        "key": "activity key",
+        "name": "activity name",
+      },
+      "index": 2,
     }
-    editText="Edit"
-    heading="Activity 3: activity name"
-    headingLevel={4}
-  />
+  }
+>
   <div
-    className="visibility--print"
+    className="activity--body activity--body__collapsed activity--body__notfirst"
+    id="activity-activity key"
   >
-    <Connect(Description)
-      aKey="activity-key"
+    <Review
+      editContent={
+        <div
+          className="nowrap visibility--screen"
+        >
+          <Button
+            onClick={[Function]}
+            size="small"
+            type="button"
+            variation="transparent"
+          >
+            Edit
+          </Button>
+        </div>
+      }
+      editText="Edit"
+      heading="Activity 3: activity name"
+      headingLevel={4}
     />
-    <Connect(Goals)
-      aKey="activity-key"
-    />
-    <Connect(Schedule)
-      aKey="activity-key"
-    />
-    <Costs
-      aKey="activity-key"
-    />
-    <Connect(ContractorResources)
-      aKey="activity-key"
-    />
-    <Connect(CostAllocate)
-      aKey="activity-key"
-    />
-    <Connect(StandardsAndConditions)
-      aKey="activity-key"
-    />
-    <Button
-      onClick={[Function]}
-      type="button"
-      variation="primary"
+    <div
+      className="visibility--print"
     >
-      Done
-    </Button>
+      <Connect(Description)
+        aKey="activity key"
+      />
+      <Connect(Goals)
+        aKey="activity key"
+      />
+      <Connect(Schedule)
+        aKey="activity key"
+      />
+      <Costs
+        aKey="activity key"
+      />
+      <Connect(ContractorResources)
+        aKey="activity key"
+      />
+      <Connect(CostAllocate)
+        aKey="activity key"
+      />
+      <Connect(StandardsAndConditions)
+        aKey="activity key"
+      />
+      <Button
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        Done
+      </Button>
+    </div>
   </div>
-</div>
+</ContextProvider>
 `;

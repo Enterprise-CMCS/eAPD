@@ -1,31 +1,31 @@
-import { ADD_ACTIVITY, EDIT_ACTIVITY, REMOVE_ACTIVITY } from './symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
 import { updateBudget } from '../apd';
 
 export const addActivity = () => (dispatch, getState) => {
   dispatch({
-    type: ADD_ACTIVITY,
+    type: ADD_APD_ITEM,
+    path: '/activities/-',
     state: getState()
   });
   dispatch(updateBudget());
 };
 
-export const removeActivity = key => (dispatch, getState) => {
+export const removeActivity = (index, { global = window } = {}) => dispatch => {
   if (global.confirm('Do you really want to delete this activity?')) {
-    const index = getState().activities.allKeys.indexOf(key);
-    dispatch({ type: REMOVE_ACTIVITY, index, key });
+    dispatch({ type: REMOVE_APD_ITEM, path: `/activities/${index}` });
     dispatch(updateBudget());
   }
 };
 
 export const setActivityName = (index, name) => ({
-  type: EDIT_ACTIVITY,
+  type: EDIT_APD,
   path: `/activities/${index}/name`,
   value: name
 });
 
 export const setActivityFundingSource = (index, source) => dispatch => {
   dispatch({
-    type: EDIT_ACTIVITY,
+    type: EDIT_APD,
     path: `/activities/${index}/fundingSource`,
     value: source
   });

@@ -10,16 +10,12 @@ import {
 import Waypoint from '../ConnectedWaypoint';
 import { addActivity, removeActivity } from '../../actions/editActivity';
 import { Section, Subsection } from '../../components/Section';
-import {
-  selectActivityKeys,
-  selectAllActivities
-} from '../../reducers/activities.selectors';
+import { selectAllActivities } from '../../reducers/activities.selectors';
 
 const All = () => {
   const dispatch = useDispatch();
 
-  const { activityKeys, activities } = useSelector(state => ({
-    activityKeys: selectActivityKeys(state),
+  const { activities } = useSelector(state => ({
     activities: selectAllActivities(state)
   }));
 
@@ -27,7 +23,13 @@ const All = () => {
 
   const update = () => {};
 
-  const remove = key => dispatch(removeActivity(key));
+  const remove = key => {
+    activities.forEach(({ key: activityKey }, i) => {
+      if (activityKey === key) {
+        dispatch(removeActivity(i));
+      }
+    });
+  };
 
   return (
     <Waypoint id="activities-overview">
@@ -52,9 +54,14 @@ const All = () => {
             onDeleteClick={remove}
           />
         </Subsection>
-        {activityKeys.map((key, idx) => (
-          <Waypoint id={key} key={key}>
-            <EntryDetails aKey={key} num={idx + 1} />
+        {activities.map((activity, index) => (
+          <Waypoint id={activity.key} key={activity.key}>
+            <EntryDetails
+              activity={activity}
+              index={index}
+              aKey={activity.key}
+              num={index + 1}
+            />
           </Waypoint>
         ))}
       </Section>
