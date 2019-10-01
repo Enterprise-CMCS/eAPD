@@ -80,7 +80,7 @@ const EntryDetails = ({ activity, index }) => {
       >
         <Review heading={title} headingLevel={4} editContent={editContent} />
         <div className={collapsed ? 'visibility--print' : ''}>
-          <Overview aKey={aKey} />
+          <Overview />
           <Goals aKey={aKey} />
           <Schedule aKey={aKey} />
           <Costs aKey={aKey} />

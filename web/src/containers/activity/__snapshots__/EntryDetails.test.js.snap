@@ -38,9 +38,7 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
     <div
       className="visibility--print"
     >
-      <Connect(Description)
-        aKey="activity key"
-      />
+      <Connect(Description) />
       <Connect(Goals)
         aKey="activity key"
       />
