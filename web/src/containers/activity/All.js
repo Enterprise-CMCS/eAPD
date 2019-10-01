@@ -56,12 +56,7 @@ const All = () => {
         </Subsection>
         {activities.map((activity, index) => (
           <Waypoint id={activity.key} key={activity.key}>
-            <EntryDetails
-              activity={activity}
-              index={index}
-              aKey={activity.key}
-              num={index + 1}
-            />
+            <EntryDetails activity={activity} index={index} />
           </Waypoint>
         ))}
       </Section>

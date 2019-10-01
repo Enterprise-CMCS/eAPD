@@ -491,7 +491,6 @@ exports[`the Activities component renders correctly 1`] = `
                 <EntryDetails
                   activity="activity 1"
                   index={0}
-                  num={1}
                 />
               </ConnectedWaypoint>
             </Connect(ConnectedWaypoint)>
@@ -520,7 +519,6 @@ exports[`the Activities component renders correctly 1`] = `
                 <EntryDetails
                   activity="activity 2"
                   index={1}
-                  num={2}
                 />
               </ConnectedWaypoint>
             </Connect(ConnectedWaypoint)>
@@ -549,7 +547,6 @@ exports[`the Activities component renders correctly 1`] = `
                 <EntryDetails
                   activity="activity 3"
                   index={2}
-                  num={3}
                 />
               </ConnectedWaypoint>
             </Connect(ConnectedWaypoint)>
