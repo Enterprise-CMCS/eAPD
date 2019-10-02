@@ -116,5 +116,10 @@ export const selectActivitiesSidebar = createSelector(
     }))
 );
 
-export const selectContractorsByActivityIndex = (state, { activityIndex }) =>
-  state.apd.data.activities[activityIndex].contractorResources;
+export const selectContractorsByActivityIndex = (state, { activityIndex }) => {
+  const activity = selectActivityByIndex(state, { activityIndex });
+  if (activity) {
+    return activity.contractorResources;
+  }
+  return null;
+};
