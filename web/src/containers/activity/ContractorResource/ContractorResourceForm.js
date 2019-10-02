@@ -1,6 +1,9 @@
 import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useMemo } from 'react';
+import React, { Fragment, useContext, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { ActivityContext } from '../ActivityContext';
 
 import Choice from '../../../components/Choice';
 import DateField from '../../../components/DateField';
@@ -9,45 +12,55 @@ import Dollars from '../../../components/Dollars';
 import TextArea from '../../../components/TextArea';
 import NumberField from '../../../components/NumberField';
 
+import {
+  setContractorDescription,
+  setContractorEndDate,
+  setContractorIsHourly,
+  setContractorName,
+  setContractorStartDate,
+  setContractorTotalCost,
+  setContractorCostForYear,
+  setContractorNumberOfHoursForYear,
+  setContractorHourlyRateForYear
+} from '../../../actions/editActivity';
+
 const ContractorResourceForm = ({
   index,
-  item: { desc, end, hourly, key, name, start, totalCost, years },
-  handleChange,
-  handleHourlyChange,
-  handleTermChange,
-  handleUseHourly,
-  handleYearChange
+  item: { desc, end, hourly, key, name, start, totalCost, years }
 }) => {
+  const dispatch = useDispatch();
+  const { index: activityIndex } = useContext(ActivityContext);
+
   const apdFFYs = useMemo(() => Object.keys(years), [years]);
 
-  const startDateChangeHandler = useCallback(
-    (_, dateStr) => {
-      handleTermChange(index)({ end, start: dateStr });
-    },
-    [end]
-  );
-  const endDateChangeHandler = useCallback(
-    (_, dateStr) => {
-      handleTermChange(index)({ end: dateStr, start });
-    },
-    [start]
-  );
+  const getHandler = action => ({ target: { value } }) => {
+    dispatch(action(activityIndex, index, value));
+  };
 
-  const handle = {
-    changeDesc: useCallback(handleChange(index, 'desc'), []),
-    changeHourlyHours: useCallback(
-      ffy => handleHourlyChange(index, ffy, 'hours'),
-      [index]
-    ),
-    changeHourlyRate: useCallback(
-      ffy => handleHourlyChange(index, ffy, 'rate'),
-      [index]
-    ),
-    changeName: useCallback(handleChange(index, 'name'), []),
-    changeTotalCost: useCallback(handleChange(index, 'totalCost'), []),
-    changeYearCost: useCallback(ffy => handleYearChange(index, ffy), [index]),
-    setUseHourlyOff: useCallback(handleUseHourly(key, false), []),
-    setUseHourlyOn: useCallback(handleUseHourly(key, true), [])
+  const getDateHandler = action => (_, dateStr) => {
+    dispatch(action(activityIndex, index, dateStr));
+  };
+
+  const setHourlyOff = () => {
+    dispatch(setContractorIsHourly(activityIndex, index, false));
+  };
+
+  const setHourlyOn = () => {
+    dispatch(setContractorIsHourly(activityIndex, index, true));
+  };
+
+  const getHandlerForYearlyCost = year => ({ target: { value } }) => {
+    dispatch(setContractorCostForYear(activityIndex, index, year, value));
+  };
+
+  const getHandlerForYearlyHours = year => ({ target: { value } }) => {
+    dispatch(
+      setContractorNumberOfHoursForYear(activityIndex, index, year, value)
+    );
+  };
+
+  const getHandlerForYearlyHourlyRate = year => ({ target: { value } }) => {
+    dispatch(setContractorHourlyRateForYear(activityIndex, index, year, value));
   };
 
   return (
@@ -57,27 +70,27 @@ const ContractorResourceForm = ({
         label="Contractor Name"
         name="contractor-name"
         value={name}
-        onChange={handle.changeName}
+        onChange={getHandler(setContractorName)}
       />
       <TextArea
         label="Description of Services"
         name="contractor-description"
         rows={5}
         value={desc}
-        onChange={handle.changeDesc}
+        onChange={getHandler(setContractorDescription)}
       />
       <FormLabel>Contract Term</FormLabel>
       <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
         <DateField
           label="Start"
           value={start}
-          onChange={startDateChangeHandler}
+          onChange={getDateHandler(setContractorStartDate)}
         />
         <DateField
           label="End"
           hint=""
           value={end}
-          onChange={endDateChangeHandler}
+          onChange={getDateHandler(setContractorEndDate)}
         />
       </div>
       <DollarField
@@ -85,7 +98,7 @@ const ContractorResourceForm = ({
         name="contractor-total-cost"
         size="medium"
         value={totalCost}
-        onChange={handle.changeTotalCost}
+        onChange={getHandler(setContractorTotalCost)}
       />
 
       <fieldset className="ds-c-fieldset">
@@ -95,7 +108,7 @@ const ContractorResourceForm = ({
           name={`apd-activity-contractor-hourly-${key}-no`}
           value="no"
           checked={!hourly.useHourly}
-          onChange={handle.setUseHourlyOff}
+          onChange={setHourlyOff}
         >
           No
         </Choice>
@@ -104,7 +117,7 @@ const ContractorResourceForm = ({
           name={`apd-activity-contractor-hourly-${key}-yes`}
           value="yes"
           checked={hourly.useHourly}
-          onChange={handle.setUseHourlyOn}
+          onChange={setHourlyOn}
           checkedChildren={
             <div className="ds-c-choice__checkedChild">
               {apdFFYs.map(ffy => (
@@ -118,7 +131,7 @@ const ContractorResourceForm = ({
                       type="number"
                       size="medium"
                       value={hourly.data[ffy].hours}
-                      onChange={handle.changeHourlyHours(ffy)}
+                      onChange={getHandlerForYearlyHours(ffy)}
                     />
                     <DollarField
                       className="ds-u-margin-left--1"
@@ -127,7 +140,7 @@ const ContractorResourceForm = ({
                       labelClassName="ds-u-margin-top--1"
                       size="medium"
                       value={hourly.data[ffy].rate}
-                      onChange={handle.changeHourlyRate(ffy)}
+                      onChange={getHandlerForYearlyHourlyRate(ffy)}
                     />
                   </div>
                 </Fragment>
@@ -157,7 +170,7 @@ const ContractorResourceForm = ({
             disabled={hourly.useHourly}
             size="medium"
             value={years[ffy]}
-            onChange={handle.changeYearCost(ffy)}
+            onChange={getHandlerForYearlyCost(ffy)}
           />
         ))
       )}
@@ -176,12 +189,7 @@ ContractorResourceForm.propTypes = {
     start: PropTypes.string,
     totalCost: PropTypes.number,
     years: PropTypes.object
-  }).isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleHourlyChange: PropTypes.func.isRequired,
-  handleTermChange: PropTypes.func.isRequired,
-  handleUseHourly: PropTypes.func.isRequired,
-  handleYearChange: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default ContractorResourceForm;
