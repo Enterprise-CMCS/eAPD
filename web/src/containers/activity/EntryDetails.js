@@ -67,7 +67,7 @@ const EntryDetails = ({ activity, index }) => {
   );
 
   return (
-    <Provider value={{ activity, index }}>
+    <Provider value={{ index }}>
       <div
         id={`activity-${activity.key}`}
         className={`activity--body activity--body__${
@@ -77,7 +77,7 @@ const EntryDetails = ({ activity, index }) => {
       >
         <Review heading={title} headingLevel={4} editContent={editContent} />
         <div className={collapsed ? 'visibility--print' : ''}>
-          <Overview />
+          <Overview activityIndex={index} />
           <Goals aKey={activity.key} />
           <Schedule aKey={activity.key} />
           <Costs aKey={activity.key} />

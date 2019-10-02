@@ -73,40 +73,52 @@ export const setContractorCostForYear = (
   contractorIndex,
   year,
   cost
-) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/years/${year}`,
-  value: cost
-});
+) => dispatch => {
+  dispatch({
+    type: EDIT_APD,
+    path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/years/${year}`,
+    value: cost
+  });
+  dispatch(updateBudget());
+};
 
 export const setContractorIsHourly = (
   activityIndex,
   contractorIndex,
   isHourly
-) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/hourly/useHourly`,
-  value: isHourly
-});
+) => dispatch => {
+  dispatch({
+    type: EDIT_APD,
+    path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/hourly/useHourly`,
+    value: isHourly
+  });
+  dispatch(updateBudget());
+};
 
 export const setContractorHourlyRateForYear = (
   activityIndex,
   contractorIndex,
   year,
   rate
-) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/hourly/data/${year}/rate`,
-  value: rate
-});
+) => dispatch => {
+  dispatch({
+    type: EDIT_APD,
+    path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/hourly/data/${year}/rate`,
+    value: rate
+  });
+  dispatch(updateBudget());
+};
 
 export const setContractorNumberOfHoursForYear = (
   activityIndex,
   contractorIndex,
   year,
   hours
-) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/hourly/data/${year}/hours`,
-  value: hours
-});
+) => dispatch => {
+  dispatch({
+    type: EDIT_APD,
+    path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/hourly/data/${year}/hours`,
+    value: hours
+  });
+  dispatch(updateBudget());
+};

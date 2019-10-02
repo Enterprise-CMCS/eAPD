@@ -12,12 +12,15 @@ exports[`the ContractorResources component renders correctly 1`] = `
     allowDeleteAll={false}
     className={null}
     collapsed={[Function]}
-    expanded={[Function]}
-    handleChange={[Function]}
-    handleHourlyChange={[Function]}
-    handleTermChange={[Function]}
-    handleUseHourly={[Function]}
-    handleYearChange={[Function]}
+    expanded={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(ContractorResourceForm)",
+        "type": [Function],
+      }
+    }
     list={
       Array [
         Object {

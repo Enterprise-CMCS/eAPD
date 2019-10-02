@@ -1,7 +1,7 @@
 import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useContext, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { ActivityContext } from '../ActivityContext';
 
@@ -26,41 +26,47 @@ import {
 
 const ContractorResourceForm = ({
   index,
-  item: { desc, end, hourly, key, name, start, totalCost, years }
+  item: { desc, end, hourly, key, name, start, totalCost, years },
+  setDescription,
+  setEndDate,
+  setIsHourly,
+  setName,
+  setStartDate,
+  setTotalCost,
+  setCostForYear,
+  setNumberOfHoursForYear,
+  setHourlyRateForYear
 }) => {
-  const dispatch = useDispatch();
   const { index: activityIndex } = useContext(ActivityContext);
 
   const apdFFYs = useMemo(() => Object.keys(years), [years]);
 
   const getHandler = action => ({ target: { value } }) => {
-    dispatch(action(activityIndex, index, value));
+    action(activityIndex, index, value);
   };
 
   const getDateHandler = action => (_, dateStr) => {
-    dispatch(action(activityIndex, index, dateStr));
+    action(activityIndex, index, dateStr);
   };
 
   const setHourlyOff = () => {
-    dispatch(setContractorIsHourly(activityIndex, index, false));
+    setIsHourly(activityIndex, index, false);
   };
 
   const setHourlyOn = () => {
-    dispatch(setContractorIsHourly(activityIndex, index, true));
+    setIsHourly(activityIndex, index, true);
   };
 
   const getHandlerForYearlyCost = year => ({ target: { value } }) => {
-    dispatch(setContractorCostForYear(activityIndex, index, year, value));
+    setCostForYear(activityIndex, index, year, value);
   };
 
   const getHandlerForYearlyHours = year => ({ target: { value } }) => {
-    dispatch(
-      setContractorNumberOfHoursForYear(activityIndex, index, year, value)
-    );
+    setNumberOfHoursForYear(activityIndex, index, year, value);
   };
 
   const getHandlerForYearlyHourlyRate = year => ({ target: { value } }) => {
-    dispatch(setContractorHourlyRateForYear(activityIndex, index, year, value));
+    setHourlyRateForYear(activityIndex, index, year, value);
   };
 
   return (
@@ -70,27 +76,27 @@ const ContractorResourceForm = ({
         label="Contractor Name"
         name="contractor-name"
         value={name}
-        onChange={getHandler(setContractorName)}
+        onChange={getHandler(setName)}
       />
       <TextArea
         label="Description of Services"
         name="contractor-description"
         rows={5}
         value={desc}
-        onChange={getHandler(setContractorDescription)}
+        onChange={getHandler(setDescription)}
       />
       <FormLabel>Contract Term</FormLabel>
       <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
         <DateField
           label="Start"
           value={start}
-          onChange={getDateHandler(setContractorStartDate)}
+          onChange={getDateHandler(setStartDate)}
         />
         <DateField
           label="End"
           hint=""
           value={end}
-          onChange={getDateHandler(setContractorEndDate)}
+          onChange={getDateHandler(setEndDate)}
         />
       </div>
       <DollarField
@@ -98,7 +104,7 @@ const ContractorResourceForm = ({
         name="contractor-total-cost"
         size="medium"
         value={totalCost}
-        onChange={getHandler(setContractorTotalCost)}
+        onChange={getHandler(setTotalCost)}
       />
 
       <fieldset className="ds-c-fieldset">
@@ -189,7 +195,33 @@ ContractorResourceForm.propTypes = {
     start: PropTypes.string,
     totalCost: PropTypes.number,
     years: PropTypes.object
-  }).isRequired
+  }).isRequired,
+  setDescription: PropTypes.func.isRequired,
+  setEndDate: PropTypes.func.isRequired,
+  setIsHourly: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired,
+  setStartDate: PropTypes.func.isRequired,
+  setTotalCost: PropTypes.func.isRequired,
+  setCostForYear: PropTypes.func.isRequired,
+  setNumberOfHoursForYear: PropTypes.func.isRequired,
+  setHourlyRateForYear: PropTypes.func.isRequired
 };
 
-export default ContractorResourceForm;
+const mapDispatchToProps = {
+  setDescription: setContractorDescription,
+  setEndDate: setContractorEndDate,
+  setIsHourly: setContractorIsHourly,
+  setName: setContractorName,
+  setStartDate: setContractorStartDate,
+  setTotalCost: setContractorTotalCost,
+  setCostForYear: setContractorCostForYear,
+  setNumberOfHoursForYear: setContractorNumberOfHoursForYear,
+  setHourlyRateForYear: setContractorHourlyRateForYear
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ContractorResourceForm);
+
+export { ContractorResourceForm as plain, mapDispatchToProps };

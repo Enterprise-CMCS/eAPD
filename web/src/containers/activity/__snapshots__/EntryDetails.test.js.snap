@@ -4,10 +4,6 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
 <ContextProvider
   value={
     Object {
-      "activity": Object {
-        "key": "activity key",
-        "name": "activity name",
-      },
       "index": 2,
     }
   }
@@ -38,7 +34,9 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
     <div
       className="visibility--print"
     >
-      <Connect(Description) />
+      <Connect(ActivityOverview)
+        activityIndex={2}
+      />
       <Connect(Goals)
         aKey="activity key"
       />
@@ -49,7 +47,7 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
         aKey="activity key"
       />
       <Connect(ContractorResources)
-        aKey="activity key"
+        activityIndex={2}
       />
       <Connect(CostAllocate)
         aKey="activity key"

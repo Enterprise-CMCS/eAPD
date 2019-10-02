@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import {
   ContractorResourceForm,
@@ -8,24 +8,30 @@ import {
 } from './ContractorResource';
 import FormAndReviewList from '../../components/FormAndReviewList';
 
-import { addContractor, removeContractor } from '../../actions/editActivity';
+import {
+  addContractor as addAction,
+  removeContractor as removeAction
+} from '../../actions/editActivity';
 
 import { selectContractorsByActivityIndex } from '../../reducers/activities.selectors';
 
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
-const ContractorResources = ({ activityIndex, contractors }) => {
-  const dispatch = useDispatch();
-
+const ContractorResources = ({
+  activityIndex,
+  addContractor,
+  contractors,
+  removeContractor
+}) => {
   const handleAdd = () => {
-    dispatch(addContractor(activityIndex));
+    addContractor(activityIndex);
   };
 
   const handleDelete = key => {
     contractors.forEach(({ key: contractorKey }, i) => {
       if (contractorKey === key) {
-        dispatch(removeContractor(activityIndex, i));
+        removeContractor(activityIndex, i);
       }
     });
   };
@@ -47,11 +53,22 @@ const ContractorResources = ({ activityIndex, contractors }) => {
 
 ContractorResources.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  contractors: PropTypes.array.isRequired
+  addContractor: PropTypes.func.isRequired,
+  contractors: PropTypes.array.isRequired,
+  removeContractor: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  contractors: selectContractorsByActivityIndex(state, ownProps)
+const mapStateToProps = (state, { activityIndex }) => ({
+  contractors: selectContractorsByActivityIndex(state, { activityIndex })
 });
 
-export default connect(mapStateToProps)(ContractorResources);
+const mapDispatchToProps = {
+  addContractor: addAction,
+  removeContractor: removeAction
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContractorResources);
+export { ContractorResources as plain, mapStateToProps, mapDispatchToProps };
