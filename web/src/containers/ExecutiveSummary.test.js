@@ -47,25 +47,27 @@ describe('executive summary component', () => {
 
   test('maps state to props', () => {
     const state = {
-      activities: {
-        byKey: {
-          a1: {
-            key: 'a1',
-            name: 'activity 1',
-            // Hiram Revels is seated to the United States Senate
-            plannedEndDate: '1870-02-25',
-            // Shirley Chisholm is seated to the United States House of Representatives
-            plannedStartDate: '1969-01-03',
-            summary: 'first activity'
-          },
-          a2: {
-            key: 'a2',
-            name: 'activity 2',
-            summary: 'second activity'
-          }
+      apd: {
+        data: {
+          activities: [
+            {
+              key: 'a1',
+              name: 'activity 1',
+              // Hiram Revels is seated to the United States Senate
+              plannedEndDate: '1870-02-25',
+              // Shirley Chisholm is seated to the United States House of Representatives
+              plannedStartDate: '1969-01-03',
+              summary: 'first activity'
+            },
+            {
+              key: 'a2',
+              name: 'activity 2',
+              summary: 'second activity'
+            }
+          ],
+          years: ['1', '2']
         }
       },
-      apd: { data: { years: ['1', '2'] } },
       budget: {
         activities: {
           a1: {

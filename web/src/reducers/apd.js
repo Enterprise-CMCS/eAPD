@@ -2,6 +2,7 @@ import diff from 'lodash.difference';
 import u from 'updeep';
 import { apply_patch as applyPatch } from 'jsonpatch';
 
+import { newActivity } from './activities';
 import {
   ADD_APD_KEY_PERSON,
   CREATE_APD_SUCCESS,
@@ -148,6 +149,10 @@ export const getPatchesForAddingItem = (state, path) => {
   switch (path) {
     case '/keyPersonnel/-':
       return [{ op: 'add', path, value: getKeyPersonnel(state.data.years) }];
+    case '/activities/-':
+      return [
+        { op: 'add', path, value: newActivity({ years: state.data.years }) }
+      ];
     default:
       return [{ op: 'add', path, value: null }];
   }

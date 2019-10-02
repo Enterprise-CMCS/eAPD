@@ -70,45 +70,47 @@ describe('schedule summary component', () => {
 
   test('maps state to props', () => {
     const state = {
-      activities: {
-        byKey: {
-          key1: {
-            name: 'activity 1',
-            // Chuck Yeager became the first person to break the sound barrier.
-            plannedEndDate: '1947-10-14',
-            // The Centennial Light, a 60-watt lightbulb was installed at a
-            // firehouse in Livermore, California, where it's still lit.
-            plannedStartDate: '1901-01-01',
-            schedule: [
-              // Sandra Day O'Connor, first woman to serve on the US Supreme
-              // Court, retires.
-              { endDate: '2006-01-31', milestone: '1-one' },
-              // Thurgood Marshall, first African-American to serve on the US
-              // Supreme Court, retires.
-              { endDate: '1991-10-01', milestone: '1-two' },
-              // Samuel Nelson, first person to retire from the US Supreme
-              // Court, retires.
-              { endDate: '1872-11-28', milestone: '1-three' }
-            ]
-          },
-          key2: {
-            name: 'activity 2',
-            // Franklin Pierce becomes President, and kicks off a truly bizarre
-            // episode in American military history.
-            plannedEndDate: '1853-03-04',
-            // The United States Camel Corps is created. Seriously, look it up.
-            plannedStartDate: '1855-03-03',
-            schedule: [
-              // The Army sells its camels at auction, giving up the project.
-              { endDate: '1864-06-06', milestone: '2-one' },
-              // The last of the Army camels is sighted for the last time,
-              // wandering the desert. Nobody knows what happened to it after
-              // that, but through at least 1883, stories pop up from time to
-              // time of a giant camel overturning wagons and trampling people
-              // to death. They're probably not entirely true, though.
-              { endDate: '1873-08-08', milestone: '2-two' }
-            ]
-          }
+      apd: {
+        data: {
+          activities: [
+            {
+              name: 'activity 1',
+              // Chuck Yeager became the first person to break the sound barrier.
+              plannedEndDate: '1947-10-14',
+              // The Centennial Light, a 60-watt lightbulb was installed at a
+              // firehouse in Livermore, California, where it's still lit.
+              plannedStartDate: '1901-01-01',
+              schedule: [
+                // Sandra Day O'Connor, first woman to serve on the US Supreme
+                // Court, retires.
+                { endDate: '2006-01-31', milestone: '1-one' },
+                // Thurgood Marshall, first African-American to serve on the US
+                // Supreme Court, retires.
+                { endDate: '1991-10-01', milestone: '1-two' },
+                // Samuel Nelson, first person to retire from the US Supreme
+                // Court, retires.
+                { endDate: '1872-11-28', milestone: '1-three' }
+              ]
+            },
+            {
+              name: 'activity 2',
+              // Franklin Pierce becomes President, and kicks off a truly bizarre
+              // episode in American military history.
+              plannedEndDate: '1853-03-04',
+              // The United States Camel Corps is created. Seriously, look it up.
+              plannedStartDate: '1855-03-03',
+              schedule: [
+                // The Army sells its camels at auction, giving up the project.
+                { endDate: '1864-06-06', milestone: '2-one' },
+                // The last of the Army camels is sighted for the last time,
+                // wandering the desert. Nobody knows what happened to it after
+                // that, but through at least 1883, stories pop up from time to
+                // time of a giant camel overturning wagons and trampling people
+                // to death. They're probably not entirely true, though.
+                { endDate: '1873-08-08', milestone: '2-two' }
+              ]
+            }
+          ]
         }
       }
     };

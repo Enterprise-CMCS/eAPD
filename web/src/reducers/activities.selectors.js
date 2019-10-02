@@ -2,15 +2,14 @@ import { createSelector } from 'reselect';
 import { selectApdData } from './apd.selectors';
 import { stateDateRangeToDisplay, stateDateToDisplay } from '../util';
 
-export const selectActivityKeys = ({ activities: { allKeys } }) => allKeys;
-
-export const selectActivitiesByKey = ({ activities: { byKey } }) => byKey;
-
 export const selectActivityByKey = ({ activities: { byKey } }, { aKey }) =>
   byKey[aKey];
 
-export const selectAllActivities = ({ activities: { byKey } }) =>
-  Object.values(byKey);
+export const selectAllActivities = ({
+  apd: {
+    data: { activities }
+  }
+}) => activities;
 
 const selectBudgetForActivity = ({ budget }, { aKey }) =>
   budget.activities[aKey];
@@ -51,11 +50,11 @@ export const makeSelectCostAllocateFFPBudget = () =>
   );
 
 export const selectActivitySchedule = createSelector(
-  [selectActivitiesByKey],
-  byKey => {
+  [selectAllActivities],
+  apdActivities => {
     const activities = [];
 
-    Object.values(byKey).forEach(
+    apdActivities.forEach(
       ({ name, plannedEndDate, plannedStartDate, schedule }) => {
         const milestones = [];
         activities.push({
@@ -94,11 +93,11 @@ export const selectActivityStatePersonnel = (state, aKey) =>
   selectActivityByKey(state, { aKey }).statePersonnel;
 
 export const selectActivitiesSidebar = createSelector(
-  [selectActivityKeys, selectActivitiesByKey],
-  (allKeys, byKey) =>
-    allKeys.map(key => ({
+  [selectAllActivities],
+  activities =>
+    activities.map(({ key, name }) => ({
       key,
       anchor: `activity-${key}`,
-      name: byKey[key].name
+      name
     }))
 );

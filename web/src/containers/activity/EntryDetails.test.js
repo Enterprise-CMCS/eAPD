@@ -1,41 +1,19 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as EntryDetails, mapStateToProps } from './EntryDetails';
+import EntryDetails from './EntryDetails';
 
 describe('the (Activity) EntryDetails component', () => {
   const props = {
     activity: {
+      key: 'activity key',
       name: 'activity name'
     },
-    aKey: 'activity-key',
-    num: 3
+    index: 2
   };
 
   test('renders correctly', () => {
     const component = shallow(<EntryDetails {...props} />);
     expect(component).toMatchSnapshot();
-  });
-
-  test('maps redux state to component props', () => {
-    const activity = {
-      fundingSource: 'FUNDING!',
-      name: 'activity name'
-    };
-
-    expect(
-      mapStateToProps(
-        {
-          activities: {
-            byKey: {
-              key: activity
-            }
-          }
-        },
-        { aKey: 'key', num: 3 }
-      )
-    ).toEqual({
-      activity
-    });
   });
 });

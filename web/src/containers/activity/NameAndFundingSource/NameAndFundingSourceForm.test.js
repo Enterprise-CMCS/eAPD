@@ -1,14 +1,18 @@
-import { shallow } from 'enzyme';
-import sinon from 'sinon';
+import { mount } from 'enzyme';
 import React from 'react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
+import { UPDATE_BUDGET } from '../../../actions/apd';
+import { EDIT_APD } from '../../../actions/editApd';
 
 import NameAndFundingSource from './NameAndFundingSourceForm';
 
-describe('the ContractorResourceForm component', () => {
-  const sandbox = sinon.createSandbox();
+const mockStore = configureStore([thunk]);
 
+describe('the activity name and funding source component', () => {
   const props = {
-    handleChange: sandbox.spy(),
     index: 1,
     item: {
       fundingSource: 'Uncle Scrooge',
@@ -17,32 +21,60 @@ describe('the ContractorResourceForm component', () => {
     }
   };
 
+  const store = mockStore('test state');
+
   beforeEach(() => {
-    sandbox.resetHistory();
+    store.clearActions();
   });
 
   it('renders correctly', () => {
-    const component = shallow(<NameAndFundingSource {...props} />);
+    const component = mount(
+      <Provider store={store}>
+        <NameAndFundingSource {...props} />
+      </Provider>
+    );
     expect(component).toMatchSnapshot();
   });
 
   it('handles changing the activity name', () => {
-    const component = shallow(<NameAndFundingSource {...props} />);
+    const component = mount(
+      <Provider store={store}>
+        <NameAndFundingSource {...props} />
+      </Provider>
+    );
 
-    component
-      .find('TextField')
-      .simulate('change', { target: { value: 'new value' } });
+    component.find('TextField').prop('onChange')({
+      target: { value: 'new value' }
+    });
 
-    expect(props.handleChange.calledWith(1, { name: 'new value ' }));
+    expect(store.getActions()).toEqual([
+      // The index that we pass via props is 1, but the name-and-funding-source
+      // forms are built from a list of only the editable activities. Index 0
+      // in the editable list is index 1 in the list of all activities. To
+      // account for that, the form will increment the index by 1. Thus, when
+      // 1 gets passed in, we expect that to become 2 when an edit happens.
+      { type: EDIT_APD, path: '/activities/2/name', value: 'new value' }
+    ]);
   });
 
   it('handles changing the funding source/program type', () => {
-    const component = shallow(<NameAndFundingSource {...props} />);
+    const component = mount(
+      <Provider store={store}>
+        <NameAndFundingSource {...props} />
+      </Provider>
+    );
 
-    component
-      .find('ChoiceList')
-      .simulate('change', { target: { value: 'new value' } });
+    component.find('ChoiceList').prop('onChange')({
+      target: { value: 'new value' }
+    });
 
-    expect(props.handleChange.calledWith(1, { fundingSource: 'new value ' }));
+    expect(store.getActions()).toEqual([
+      {
+        type: EDIT_APD,
+        path: '/activities/2/fundingSource',
+        value: 'new value'
+      },
+      { type: UPDATE_BUDGET, state: 'test state' }
+    ]);
   });
 });

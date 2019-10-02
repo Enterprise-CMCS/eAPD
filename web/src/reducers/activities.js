@@ -104,7 +104,7 @@ const quarterlyFFPEntry = () =>
     {}
   );
 
-const newActivity = ({
+export const newActivity = ({
   name = '',
   fundingSource = 'HIT',
   years = [],
