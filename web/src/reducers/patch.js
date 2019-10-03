@@ -14,10 +14,6 @@ import {
   getPatchesToAddYear as getApdPatchesToAddYear,
   getPatchesToRemoveYear as getApdPatchesToRemoveYear
 } from './apd';
-import {
-  getPatchesToAddYear as getActivityPatchesToAddYear,
-  getPatchesToRemoveYear as getActivityPatchesToRemoveYear
-} from './activities';
 
 const initialState = [];
 
@@ -47,8 +43,7 @@ const reducer = (state = initialState, action) => {
     case ADD_APD_YEAR:
       return [
         ...state,
-        ...getApdPatchesToAddYear(action.state.apd, action.value),
-        ...getActivityPatchesToAddYear(action.state.activities, action.value)
+        ...getApdPatchesToAddYear(action.state.apd, action.value)
       ];
 
     case EDIT_APD: {
@@ -88,8 +83,7 @@ const reducer = (state = initialState, action) => {
     case REMOVE_APD_YEAR:
       return [
         ...state,
-        ...getApdPatchesToRemoveYear(action.state.apd, action.value),
-        ...getActivityPatchesToRemoveYear(action.state.activities, action.value)
+        ...getApdPatchesToRemoveYear(action.state.apd, action.value)
       ];
 
     default:
