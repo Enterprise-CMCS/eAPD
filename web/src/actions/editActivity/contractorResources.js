@@ -1,6 +1,10 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
 import { updateBudget } from '../apd';
 
+/**
+ * Add a new contractor resource to an activity
+ * @param {Number} activityIndex Index of the activity to add the contractor to
+ */
 export const addContractor = activityIndex => (dispatch, getState) => {
   dispatch({
     type: ADD_APD_ITEM,
@@ -10,6 +14,13 @@ export const addContractor = activityIndex => (dispatch, getState) => {
   dispatch(updateBudget());
 };
 
+/**
+ * Remove a contractor resource from an activity
+ * @param {Number} activityIndex Index of the activity to remove the contractor from
+ * @param {Number} contractorIndex Index of the contractor to remove
+ * @param {Object} di Dependency injection object
+ * @param {Object} di.global The window object, which provides window.confirm
+ */
 export const removeContractor = (
   activityIndex,
   contractorIndex,
@@ -26,12 +37,24 @@ export const removeContractor = (
   }
 };
 
+/**
+ * Rename a contractor resource
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {String} name New name
+ */
 export const setContractorName = (activityIndex, contractorIndex, name) => ({
   type: EDIT_APD,
   path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/name`,
   value: name
 });
 
+/**
+ * Change a contractor description
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {String} description New description
+ */
 export const setContractorDescription = (
   activityIndex,
   contractorIndex,
@@ -42,12 +65,24 @@ export const setContractorDescription = (
   value: description
 });
 
+/**
+ * Change a contractor end date
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {String} date New end date, in the form 'YYYY-MM-DD'
+ */
 export const setContractorEndDate = (activityIndex, contractorIndex, date) => ({
   type: EDIT_APD,
   path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/end`,
   value: date
 });
 
+/**
+ * Change a contractor start date
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {String} date New start date, in the form 'YYYY-MM-DD'
+ */
 export const setContractorStartDate = (
   activityIndex,
   contractorIndex,
@@ -58,6 +93,12 @@ export const setContractorStartDate = (
   value: date
 });
 
+/**
+ * Change a contractor total cost
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {Number} cost New total cost of the contractor resource
+ */
 export const setContractorTotalCost = (
   activityIndex,
   contractorIndex,
@@ -68,6 +109,13 @@ export const setContractorTotalCost = (
   value: cost
 });
 
+/**
+ * Change a contractor cost for a federal fiscal year
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {String} year Year to update, four-digit
+ * @param {Number} cost New contractor cost for the year
+ */
 export const setContractorCostForYear = (
   activityIndex,
   contractorIndex,
@@ -82,6 +130,12 @@ export const setContractorCostForYear = (
   dispatch(updateBudget());
 };
 
+/**
+ * Set whether a contractor is an hourly cost
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {Boolean} isHourly Whether the contractor is an hourly cost
+ */
 export const setContractorIsHourly = (
   activityIndex,
   contractorIndex,
@@ -95,6 +149,13 @@ export const setContractorIsHourly = (
   dispatch(updateBudget());
 };
 
+/**
+ * Set the hourly cost of the contractor for a federal fiscal year
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {String} year Year to update, four-digit
+ * @param {Number} rate Hourly cost of the contractor for the year
+ */
 export const setContractorHourlyRateForYear = (
   activityIndex,
   contractorIndex,
@@ -109,6 +170,13 @@ export const setContractorHourlyRateForYear = (
   dispatch(updateBudget());
 };
 
+/**
+ * Set the number of hours to be worked by a contractor for a federal fiscal year
+ * @param {Number} activityIndex Index of the activity the contractor is in
+ * @param {Number} contractorIndex Index of the contractor to change
+ * @param {String} year Year to update, four-digit
+ * @param {Number} hours Number of hours the contractor will work for the year
+ */
 export const setContractorNumberOfHoursForYear = (
   activityIndex,
   contractorIndex,
