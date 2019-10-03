@@ -11,6 +11,21 @@ export const selectApdYears = ({
   }
 }) => years;
 
+export const selectPreviousHITHIEActivities = createSelector(
+  [selectApdData],
+  ({ previousActivityExpenses }) =>
+    Object.entries(previousActivityExpenses).reduce(
+      (o, [year, expenses]) => ({
+        ...o,
+        [year]: {
+          federalActual: expenses.hithie.federalActual,
+          totalApproved: expenses.hithie.totalApproved
+        }
+      }),
+      {}
+    )
+);
+
 export const selectPreviousActivityExpensesTotals = createSelector(
   [selectApdData],
   ({ previousActivityExpenses }) =>
