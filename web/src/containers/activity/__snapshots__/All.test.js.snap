@@ -35,7 +35,15 @@ exports[`the Activities component renders correctly 1`] = `
         allowDeleteAll={true}
         className="ds-u-border-bottom--0"
         collapsed={[Function]}
-        expanded={[Function]}
+        expanded={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(NameAndFundingSourceForm)",
+            "type": [Function],
+          }
+        }
         list={
           Array [
             Object {
