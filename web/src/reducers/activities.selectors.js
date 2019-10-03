@@ -5,6 +5,20 @@ import { stateDateRangeToDisplay, stateDateToDisplay } from '../util';
 export const selectActivityByKey = ({ activities: { byKey } }, { aKey }) =>
   byKey[aKey];
 
+export const selectActivityByIndex = (
+  {
+    apd: {
+      data: { activities }
+    }
+  },
+  { activityIndex }
+) => {
+  if (+activityIndex >= 0 && +activityIndex < activities.length) {
+    return activities[activityIndex];
+  }
+  return null;
+};
+
 export const selectAllActivities = ({
   apd: {
     data: { activities }
@@ -101,3 +115,11 @@ export const selectActivitiesSidebar = createSelector(
       name
     }))
 );
+
+export const selectContractorsByActivityIndex = (state, { activityIndex }) => {
+  const activity = selectActivityByIndex(state, { activityIndex });
+  if (activity) {
+    return activity.contractorResources;
+  }
+  return null;
+};

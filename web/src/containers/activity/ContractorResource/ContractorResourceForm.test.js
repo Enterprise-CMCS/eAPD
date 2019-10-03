@@ -1,18 +1,18 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
-import ContractorForm from './ContractorResourceForm';
+jest.spyOn(React, 'useContext');
+React.useContext.mockImplementation(() => ({
+  index: 'activity index'
+}));
+
+// Have to require() this because import statements get executed before
+// anything else, but we need that spyOn call to happen first. So...
+// this is how we can enforce the order we need.
+const { plain: ContractorForm } = require('./ContractorResourceForm');
 
 describe('the ContractorResourceForm component', () => {
-  const sandbox = sinon.createSandbox();
-
   const props = {
-    handleChange: sandbox.stub(),
-    handleHourlyChange: sandbox.spy(),
-    handleTermChange: sandbox.stub(),
-    handleUseHourly: sandbox.spy(),
-    handleYearChange: sandbox.spy(),
     index: 1,
     item: {
       desc: 'They cleaned up the latrines after the Battle of Hastings',
@@ -39,11 +39,28 @@ describe('the ContractorResourceForm component', () => {
         '1066': 300,
         '1067': 400
       }
-    }
+    },
+    setDescription: jest.fn(),
+    setEndDate: jest.fn(),
+    setIsHourly: jest.fn(),
+    setName: jest.fn(),
+    setStartDate: jest.fn(),
+    setTotalCost: jest.fn(),
+    setCostForYear: jest.fn(),
+    setNumberOfHoursForYear: jest.fn(),
+    setHourlyRateForYear: jest.fn()
   };
 
   beforeEach(() => {
-    sandbox.resetHistory();
+    props.setDescription.mockClear();
+    props.setEndDate.mockClear();
+    props.setIsHourly.mockClear();
+    props.setName.mockClear();
+    props.setStartDate.mockClear();
+    props.setTotalCost.mockClear();
+    props.setCostForYear.mockClear();
+    props.setNumberOfHoursForYear.mockClear();
+    props.setHourlyRateForYear.mockClear();
   });
 
   test('renders correctly', () => {
@@ -57,67 +74,152 @@ describe('the ContractorResourceForm component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  describe('handles changing fields', () => {
-    [
-      ['name', 'contractor-name'],
-      ['desc', 'contractor-description'],
-      ['totalCost', 'contractor-total-cost']
-    ].forEach(([propName, fieldName]) => {
-      it(`handles changing the ${propName} prop`, () => {
-        const handler = sinon.spy();
-        props.handleChange.returns(handler);
+  test('handles changing the contractor name', () => {
+    const component = shallow(<ContractorForm {...props} />);
+    component
+      .findWhere(c => c.prop('name') === 'contractor-name')
+      .simulate('change', { target: { value: 'new value' } });
 
-        const component = shallow(<ContractorForm {...props} />);
-
-        component
-          .findWhere(c => c.prop('name') === fieldName)
-          .simulate('change', { target: { value: 'new value' } });
-
-        expect(props.handleChange.calledWith(1, propName)).toEqual(true);
-        expect(handler.calledWith({ target: { value: 'new value' } })).toEqual(
-          true
-        );
-      });
-    });
-
-    it('handles changing the start date', () => {
-      const handler = sinon.spy();
-      props.handleTermChange.returns(handler);
-
-      const component = shallow(<ContractorForm {...props} />);
-      component
-        .findWhere(c => c.name() === 'DateField' && c.prop('label') === 'Start')
-        .simulate('change', 'ignored stuff', 'new start date');
-
-      expect(props.handleTermChange.calledWith(1)).toEqual(true);
-      expect(
-        handler.calledWith({
-          end: '1066-10-15',
-          start: 'new start date'
-        })
-      ).toEqual(true);
-    });
-
-    it('handles changing the end date', () => {
-      const handler = sinon.spy();
-      props.handleTermChange.returns(handler);
-
-      const component = shallow(<ContractorForm {...props} />);
-      component
-        .findWhere(c => c.name() === 'DateField' && c.prop('label') === 'End')
-        .simulate('change', 'ignored stuff', 'new end date');
-
-      expect(props.handleTermChange.calledWith(1)).toEqual(true);
-      expect(
-        handler.calledWith({
-          end: 'new end date',
-          start: '1066-10-14'
-        })
-      ).toEqual(true);
-    });
+    expect(props.setName).toHaveBeenCalledWith(
+      'activity index',
+      1,
+      'new value'
+    );
   });
 
-  // I'm not sure how to test changing the number of hours and hourly rate
-  // fields because they are nodes passed as props to a Choice. Really not
-  // clear about how to get those...
+  test('handles changing the contractor description', () => {
+    const component = shallow(<ContractorForm {...props} />);
+    component
+      .findWhere(c => c.prop('name') === 'contractor-description')
+      .simulate('change', { target: { value: 'new value' } });
+
+    expect(props.setDescription).toHaveBeenCalledWith(
+      'activity index',
+      1,
+      'new value'
+    );
+  });
+
+  test('handles changing the contractor total cost', () => {
+    const component = shallow(<ContractorForm {...props} />);
+    component
+      .findWhere(c => c.prop('name') === 'contractor-total-cost')
+      .simulate('change', { target: { value: 'new value' } });
+
+    expect(props.setTotalCost).toHaveBeenCalledWith(
+      'activity index',
+      1,
+      'new value'
+    );
+  });
+
+  test('handles changing the contractor start date', () => {
+    const component = shallow(<ContractorForm {...props} />);
+    component
+      .findWhere(c => c.name() === 'DateField' && c.prop('label') === 'Start')
+      .simulate('change', 'ignored stuff', 'new start date');
+
+    expect(props.setStartDate).toHaveBeenCalledWith(
+      'activity index',
+      1,
+      'new start date'
+    );
+  });
+
+  test('handles changing the contractor end date', () => {
+    const component = shallow(<ContractorForm {...props} />);
+    component
+      .findWhere(c => c.name() === 'DateField' && c.prop('label') === 'End')
+      .simulate('change', 'ignored stuff', 'new end date');
+
+    expect(props.setEndDate).toHaveBeenCalledWith(
+      'activity index',
+      1,
+      'new end date'
+    );
+  });
+
+  test('handles toggling hourly resource off', () => {
+    const component = shallow(<ContractorForm {...props} />);
+    component
+      .findWhere(
+        c => c.name() === 'ChoiceComponent' && c.prop('value') === 'no'
+      )
+      .simulate('change');
+
+    expect(props.setIsHourly).toHaveBeenCalledWith('activity index', 1, false);
+  });
+
+  test('handles toggling hourly resource on', () => {
+    const component = shallow(<ContractorForm {...props} />);
+    component
+      .findWhere(
+        c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes'
+      )
+      .simulate('change');
+
+    expect(props.setIsHourly).toHaveBeenCalledWith('activity index', 1, true);
+  });
+
+  test('handles changing the contractor yearly cost', () => {
+    props.item.hourly.useHourly = false;
+    const component = shallow(<ContractorForm {...props} />);
+
+    component
+      .findWhere(c => c.prop('name') === 'contractor-cost-ffy-1066')
+      .simulate('change', { target: { value: 773 } });
+
+    expect(props.setCostForYear).toHaveBeenCalledWith(
+      'activity index',
+      1,
+      '1066',
+      773
+    );
+  });
+
+  test('handles changing the contractor yearly cost', () => {
+    props.item.hourly.useHourly = true;
+    const parentComponent = shallow(<ContractorForm {...props} />);
+    const component = shallow(
+      parentComponent
+        .findWhere(
+          c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes'
+        )
+        .prop('checkedChildren')
+    );
+
+    component
+      .findWhere(c => c.prop('name') === 'contractor-num-hours-ffy-1066')
+      .simulate('change', { target: { value: 3752 } });
+
+    expect(props.setNumberOfHoursForYear).toHaveBeenCalledWith(
+      'activity index',
+      1,
+      '1066',
+      3752
+    );
+  });
+
+  test('handles changing the contractor yearly cost', () => {
+    props.item.hourly.useHourly = true;
+    const parentComponent = shallow(<ContractorForm {...props} />);
+    const component = shallow(
+      parentComponent
+        .findWhere(
+          c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes'
+        )
+        .prop('checkedChildren')
+    );
+
+    component
+      .findWhere(c => c.prop('name') === 'contractor-hourly-rate-ffy-1067')
+      .simulate('change', { target: { value: 9364 } });
+
+    expect(props.setHourlyRateForYear).toHaveBeenCalledWith(
+      'activity index',
+      1,
+      '1067',
+      9364
+    );
+  });
 });

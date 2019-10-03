@@ -27,10 +27,7 @@ const makeTitle = ({ name, fundingSource }, i) => {
 const EntryDetails = ({ activity, index }) => {
   const container = useRef();
 
-  const aKey = activity.key;
-  const num = index + 1;
-
-  const [collapsed, internalSetCollapsed] = useState(num > 1);
+  const [collapsed, internalSetCollapsed] = useState(index > 0);
   const setCollapsed = newCollapsed => {
     if (newCollapsed) {
       const { top } = container.current.getBoundingClientRect();
@@ -42,10 +39,10 @@ const EntryDetails = ({ activity, index }) => {
     internalSetCollapsed(newCollapsed);
   };
 
-  const title = useMemo(() => makeTitle(activity, num), [
+  const title = useMemo(() => makeTitle(activity, index + 1), [
     activity.fundingSource,
     activity.name,
-    num
+    index
   ]);
 
   const editContent = useMemo(
@@ -70,23 +67,23 @@ const EntryDetails = ({ activity, index }) => {
   );
 
   return (
-    <Provider value={{ activity, index }}>
+    <Provider value={{ index }}>
       <div
-        id={`activity-${aKey}`}
+        id={`activity-${activity.key}`}
         className={`activity--body activity--body__${
           collapsed ? 'collapsed' : 'expanded'
-        } activity--body__${num === 1 ? 'first' : 'notfirst'}`}
+        } activity--body__${index === 0 ? 'first' : 'notfirst'}`}
         ref={container}
       >
         <Review heading={title} headingLevel={4} editContent={editContent} />
         <div className={collapsed ? 'visibility--print' : ''}>
-          <Overview />
-          <Goals aKey={aKey} />
-          <Schedule aKey={aKey} />
-          <Costs aKey={aKey} />
-          <ContractorResources aKey={aKey} />
-          <CostAllocate aKey={aKey} />
-          <StandardsAndConditions aKey={aKey} />
+          <Overview activityIndex={index} />
+          <Goals aKey={activity.key} />
+          <Schedule aKey={activity.key} />
+          <Costs aKey={activity.key} />
+          <ContractorResources activityIndex={index} />
+          <CostAllocate aKey={activity.key} />
+          <StandardsAndConditions aKey={activity.key} />
           <Button variation="primary" onClick={() => setCollapsed(true)}>
             Done
           </Button>

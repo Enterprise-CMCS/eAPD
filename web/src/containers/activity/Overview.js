@@ -1,19 +1,17 @@
 import { FormLabel } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { useMemo, useCallback, useContext } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import { ActivityContext } from './ActivityContext';
 import { t } from '../../i18n';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
 import RichText from '../../components/RichText';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import TextArea from '../../components/TextArea';
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-const Description = props => {
-  const { updateActivity } = props;
-  const { activity } = useContext(ActivityContext);
+const ActivityOverview = ({ activity, updateActivity }) => {
   const { alternatives, description, summary } = activity;
 
   const overviewLabel = useMemo(
@@ -134,8 +132,15 @@ const Description = props => {
   );
 };
 
-Description.propTypes = {
+ActivityOverview.propTypes = {
+  activity: PropTypes.object.isRequired,
   updateActivity: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state, { activityIndex }) => {
+  return {
+    activity: selectActivityByIndex(state, { activityIndex })
+  };
 };
 
 const mapDispatchToProps = {
@@ -143,6 +148,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(Description);
+)(ActivityOverview);
