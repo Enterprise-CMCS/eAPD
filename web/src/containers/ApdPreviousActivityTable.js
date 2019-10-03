@@ -138,4 +138,8 @@ export default connect(
   mapDispatchToProps
 )(ApdPreviousActivityTable);
 
-export { ApdPreviousActivityTable, mapStateToProps, mapDispatchToProps };
+export {
+  ApdPreviousActivityTable as plain,
+  mapStateToProps,
+  mapDispatchToProps
+};

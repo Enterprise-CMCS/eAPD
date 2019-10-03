@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  ApdPreviousActivityTable,
+  plain as ApdPreviousActivityTable,
   mapStateToProps,
   mapDispatchToProps
 } from './ApdPreviousActivityTable';

@@ -26,6 +26,18 @@ export const selectPreviousHITHIEActivities = createSelector(
     )
 );
 
+export const selectPreviousMMISActivities = createSelector(
+  [selectApdData],
+  ({ previousActivityExpenses }) =>
+    Object.entries(previousActivityExpenses).reduce(
+      (o, [year, expenses]) => ({
+        ...o,
+        [year]: expenses.mmis
+      }),
+      {}
+    )
+);
+
 export const selectPreviousActivityExpensesTotals = createSelector(
   [selectApdData],
   ({ previousActivityExpenses }) =>
