@@ -11,6 +11,25 @@ export const selectApdYears = ({
   }
 }) => years;
 
+export const selectSummary = createSelector(
+  [selectApdData],
+  ({
+    narrativeHIE,
+    narrativeHIT,
+    narrativeMMIS,
+    programOverview,
+    years,
+    yearOptions
+  }) => ({
+    narrativeHIE,
+    narrativeHIT,
+    narrativeMMIS,
+    programOverview,
+    years,
+    yearOptions
+  })
+);
+
 export const selectKeyPersonnel = createSelector(
   [selectApdData],
   ({ keyPersonnel }) => keyPersonnel

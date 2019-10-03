@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import Waypoint from './ConnectedWaypoint';
 import {
@@ -15,30 +16,33 @@ import RichText from '../components/RichText';
 import Instruction from '../components/Instruction';
 import { Section } from '../components/Section';
 import { t } from '../i18n';
+import { selectSummary } from '../reducers/apd.selectors';
 
-const ApdSummary = () => {
-  const dispatch = useDispatch();
-
-  const {
-    narrativeHIE,
-    narrativeHIT,
-    narrativeMMIS,
-    programOverview,
-    years,
-    yearOptions
-  } = useSelector(({ apd: { data } }) => data);
-
+const ApdSummary = ({
+  addApdYear,
+  narrativeHIE,
+  narrativeHIT,
+  narrativeMMIS,
+  programOverview,
+  removeApdYear,
+  setHIE,
+  setHIT,
+  setMMIS,
+  setOverview,
+  years,
+  yearOptions
+}) => {
   const handleYears = e => {
     const { value } = e.target;
     if (years.includes(value)) {
-      dispatch(removeYear(value));
+      removeApdYear(value);
     } else {
-      dispatch(addYear(value));
+      addApdYear(value);
     }
   };
 
   const syncRichText = action => html => {
-    dispatch(action(html));
+    action(html);
   };
 
   return (
@@ -64,7 +68,7 @@ const ApdSummary = () => {
           <Instruction source="apd.introduction.instruction" />
           <RichText
             content={programOverview}
-            onSync={syncRichText(setProgramOverview)}
+            onSync={syncRichText(setOverview)}
             editorClassName="rte-textarea-l"
           />
         </div>
@@ -72,7 +76,7 @@ const ApdSummary = () => {
           <Instruction source="apd.hit.instruction" />
           <RichText
             content={narrativeHIT}
-            onSync={syncRichText(setNarrativeForHIT)}
+            onSync={syncRichText(setHIT)}
             editorClassName="rte-textarea-l"
           />
         </div>
@@ -80,7 +84,7 @@ const ApdSummary = () => {
           <Instruction source="apd.hie.instruction" />
           <RichText
             content={narrativeHIE}
-            onSync={syncRichText(setNarrativeForHIE)}
+            onSync={syncRichText(setHIE)}
             editorClassName="rte-textarea-l"
           />
         </div>
@@ -88,7 +92,7 @@ const ApdSummary = () => {
           <Instruction source="apd.mmis.instruction" />
           <RichText
             content={narrativeMMIS}
-            onSync={syncRichText(setNarrativeForMMIS)}
+            onSync={syncRichText(setMMIS)}
             editorClassName="rte-textarea-l"
           />
         </div>
@@ -97,4 +101,35 @@ const ApdSummary = () => {
   );
 };
 
-export default ApdSummary;
+ApdSummary.propTypes = {
+  addApdYear: PropTypes.func.isRequired,
+  removeApdYear: PropTypes.func.isRequired,
+  narrativeHIE: PropTypes.string.isRequired,
+  narrativeHIT: PropTypes.string.isRequired,
+  narrativeMMIS: PropTypes.string.isRequired,
+  programOverview: PropTypes.string.isRequired,
+  setHIE: PropTypes.func.isRequired,
+  setHIT: PropTypes.func.isRequired,
+  setMMIS: PropTypes.func.isRequired,
+  setOverview: PropTypes.func.isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired
+};
+
+const mapStateToProps = selectSummary;
+
+const mapDispatchToProps = {
+  addApdYear: addYear,
+  removeApdYear: removeYear,
+  setHIE: setNarrativeForHIE,
+  setHIT: setNarrativeForHIT,
+  setMMIS: setNarrativeForMMIS,
+  setOverview: setProgramOverview
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdSummary);
+
+export { ApdSummary as plain, mapStateToProps, mapDispatchToProps };

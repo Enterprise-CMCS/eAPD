@@ -1,96 +1,108 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 
-import ApdSummary from './ApdSummary';
-import { UPDATE_BUDGET } from '../actions/apd';
-import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from '../actions/editApd';
+import {
+  plain as ApdSummary,
+  mapStateToProps,
+  mapDispatchToProps
+} from './ApdSummary';
 
-const mockStore = configureStore([thunk]);
-
-// The rich text editor explodes in Enzyme - literally it exhausts v8's memory
-// and crashes. So we can mock it to a do-nothing, since we're not actually
-// interested in testing it here.
-jest.mock('../components/RichText');
+import {
+  addYear,
+  removeYear,
+  setNarrativeForHIE,
+  setNarrativeForHIT,
+  setNarrativeForMMIS,
+  setProgramOverview
+} from '../actions/editApd';
 
 describe('apd summary component', () => {
-  const state = {
-    apd: {
-      data: {
-        narrativeHIE: 'about hie',
-        narrativeHIT: 'about hit',
-        narrativeMMIS: 'about mmis',
-        programOverview: 'about the program',
-        yearOptions: ['1', '2', '3'],
-        years: ['1', '2']
-      }
-    }
+  const props = {
+    narrativeHIE: 'about hie',
+    narrativeHIT: 'about hit',
+    narrativeMMIS: 'about mmis',
+    programOverview: 'about the program',
+    addApdYear: jest.fn(),
+    removeApdYear: jest.fn(),
+    setHIE: jest.fn(),
+    setHIT: jest.fn(),
+    setMMIS: jest.fn(),
+    setOverview: jest.fn(),
+    yearOptions: ['1', '2', '3'],
+    years: ['1', '2']
   };
-  const store = mockStore(state);
 
   beforeEach(() => {
-    store.clearActions();
+    props.addApdYear.mockClear();
+    props.removeApdYear.mockClear();
+    props.setHIE.mockClear();
+    props.setHIT.mockClear();
+    props.setMMIS.mockClear();
+    props.setOverview.mockClear();
   });
 
   test('renders correctly', () => {
-    expect(
-      mount(
-        <Provider store={store}>
-          <ApdSummary />
-        </Provider>
-      )
-    ).toMatchSnapshot();
+    expect(shallow(<ApdSummary {...props} />)).toMatchSnapshot();
   });
 
   test('dispatches on text change', () => {
-    mount(
-      <Provider store={store}>
-        <ApdSummary />
-      </Provider>
-    )
+    shallow(<ApdSummary {...props} />)
       .find('RichText')
       .at(0)
       .prop('onSync')('this is some html');
 
     // this one is based on knowledge that the program overview comes first
-    expect(store.getActions()).toEqual([
-      {
-        type: EDIT_APD,
-        path: '/programOverview',
-        value: 'this is some html'
-      }
-    ]);
+    expect(props.setOverview).toHaveBeenCalledWith('this is some html');
   });
 
   test('dispatches when adding a year', () => {
-    // add a year
-    mount(
-      <Provider store={store}>
-        <ApdSummary />
-      </Provider>
-    )
+    shallow(<ApdSummary {...props} />)
       .find('ChoiceComponent[value="3"]')
-      .prop('onChange')({ target: { value: '3' } });
-    expect(store.getActions()).toEqual([
-      { type: ADD_APD_YEAR, value: '3', state },
-      { type: UPDATE_BUDGET, state }
-    ]);
+      .simulate('change', { target: { value: '3' } });
+
+    expect(props.addApdYear).toHaveBeenCalledWith('3');
   });
 
   test('dispatches when removing a year', () => {
-    // remove a year
-    mount(
-      <Provider store={store}>
-        <ApdSummary />
-      </Provider>
-    )
+    shallow(<ApdSummary {...props} />)
       .find('ChoiceComponent[value="2"]')
-      .prop('onChange')({ target: { value: '2' } });
-    expect(store.getActions()).toEqual([
-      { type: REMOVE_APD_YEAR, value: '2', state },
-      { type: UPDATE_BUDGET, state }
-    ]);
+      .simulate('change', { target: { value: '2' } });
+
+    expect(props.removeApdYear).toHaveBeenCalledWith('2');
+  });
+
+  test('maps state to props', () => {
+    expect(
+      mapStateToProps({
+        apd: {
+          data: {
+            narrativeHIE: 'over hill',
+            narrativeHIT: 'under mountain',
+            narrativeMMIS: 'tangent slope',
+            programOverview: 'arc-cosine thing',
+            years: 'the actual years',
+            yearOptions: 'all of the years'
+          }
+        }
+      })
+    ).toEqual({
+      narrativeHIE: 'over hill',
+      narrativeHIT: 'under mountain',
+      narrativeMMIS: 'tangent slope',
+      programOverview: 'arc-cosine thing',
+      years: 'the actual years',
+      yearOptions: 'all of the years'
+    });
+  });
+
+  test('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      addApdYear: addYear,
+      removeApdYear: removeYear,
+      setHIE: setNarrativeForHIE,
+      setHIT: setNarrativeForHIT,
+      setMMIS: setNarrativeForMMIS,
+      setOverview: setProgramOverview
+    });
   });
 });
