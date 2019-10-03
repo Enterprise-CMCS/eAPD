@@ -42,4 +42,6 @@ const user = (state = initialState, action) => {
   }
 };
 
+export const selectState = state => state.user.data.state;
+
 export default user;

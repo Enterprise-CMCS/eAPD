@@ -16,6 +16,11 @@ export const selectKeyPersonnel = createSelector(
   ({ keyPersonnel }) => keyPersonnel
 );
 
+export const selectStateProfile = createSelector(
+  [selectApdData],
+  ({ stateProfile }) => stateProfile
+);
+
 export const selectPreviousHITHIEActivities = createSelector(
   [selectApdData],
   ({ previousActivityExpenses }) =>
