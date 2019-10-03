@@ -174,6 +174,48 @@ describe('APD reducer', () => {
   it('should handle adding an APD year', () => {
     const state = {
       data: {
+        activities: [
+          {
+            costAllocation: {
+              '1742': 'yes',
+              '1743': 'no'
+            },
+            contractorResources: [
+              {
+                hourly: {
+                  data: {
+                    '1742': { hours: 20, rate: 22 },
+                    '1743': { hours: 25, rate: 27 }
+                  }
+                },
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            quarterlyFFP: {
+              '1742': 'sometimes',
+              '1743': 'rarely'
+            },
+            statePersonnel: [
+              {
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ]
+          }
+        ],
         incentivePayments: {
           ehAmt: {
             '1742': { 1: 1, 2: 1, 3: 1, 4: 1 },
@@ -206,6 +248,75 @@ describe('APD reducer', () => {
 
     expect(apd(state, { type: ADD_APD_YEAR, value: '1741' })).toEqual({
       data: {
+        activities: [
+          {
+            costAllocation: {
+              '1741': { other: 0, ffp: { federal: 90, state: 10 } },
+              '1742': 'yes',
+              '1743': 'no'
+            },
+            contractorResources: [
+              {
+                hourly: {
+                  data: {
+                    '1741': { hours: '', rate: '' },
+                    '1742': { hours: 20, rate: 22 },
+                    '1743': { hours: 25, rate: 27 }
+                  }
+                },
+                years: {
+                  '1741': 0,
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  '1741': 0,
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            quarterlyFFP: {
+              '1741': {
+                1: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                2: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                3: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                4: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                }
+              },
+              '1742': 'sometimes',
+              '1743': 'rarely'
+            },
+            statePersonnel: [
+              {
+                years: {
+                  '1741': { amt: '', perc: '' },
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ]
+          }
+        ],
         incentivePayments: {
           ehAmt: {
             '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
@@ -245,6 +356,75 @@ describe('APD reducer', () => {
   it('should handle removing an APD year', () => {
     const state = {
       data: {
+        activities: [
+          {
+            costAllocation: {
+              '1741': { other: 0, ffp: { federal: 90, state: 10 } },
+              '1742': 'yes',
+              '1743': 'no'
+            },
+            contractorResources: [
+              {
+                hourly: {
+                  data: {
+                    '1741': { hours: '', rate: '' },
+                    '1742': { hours: 20, rate: 22 },
+                    '1743': { hours: 25, rate: 27 }
+                  }
+                },
+                years: {
+                  '1741': 0,
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  '1741': 0,
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            quarterlyFFP: {
+              '1741': {
+                1: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                2: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                3: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                4: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                }
+              },
+              '1742': 'sometimes',
+              '1743': 'rarely'
+            },
+            statePersonnel: [
+              {
+                years: {
+                  '1741': { amt: '', perc: '' },
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ]
+          }
+        ],
         incentivePayments: {
           ehAmt: {
             '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
@@ -282,6 +462,48 @@ describe('APD reducer', () => {
 
     expect(apd(state, { type: REMOVE_APD_YEAR, value: '1741' })).toEqual({
       data: {
+        activities: [
+          {
+            costAllocation: {
+              '1742': 'yes',
+              '1743': 'no'
+            },
+            contractorResources: [
+              {
+                hourly: {
+                  data: {
+                    '1742': { hours: 20, rate: 22 },
+                    '1743': { hours: 25, rate: 27 }
+                  }
+                },
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            quarterlyFFP: {
+              '1742': 'sometimes',
+              '1743': 'rarely'
+            },
+            statePersonnel: [
+              {
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ]
+          }
+        ],
         incentivePayments: {
           ehAmt: {
             '1742': { 1: 1, 2: 1, 3: 1, 4: 1 },

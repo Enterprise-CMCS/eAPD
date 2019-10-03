@@ -49,7 +49,7 @@ const newMilestone = (milestone = '', endDate = '') => ({
   endDate
 });
 
-const statePersonDefaultYear = () => ({ amt: '', perc: '' });
+export const statePersonDefaultYear = () => ({ amt: '', perc: '' });
 const newStatePerson = years => ({
   key: generateKey(),
   initialCollapsed: false,
@@ -58,8 +58,8 @@ const newStatePerson = years => ({
   years: arrToObj(years, statePersonDefaultYear())
 });
 
-const contractorDefaultYear = () => 0;
-const contractorDefaultHourly = () => ({ hours: '', rate: '' });
+export const contractorDefaultYear = () => 0;
+export const contractorDefaultHourly = () => ({ hours: '', rate: '' });
 export const newContractor = years => ({
   key: generateKey(),
   initialCollapsed: false,
@@ -76,7 +76,7 @@ export const newContractor = years => ({
   }
 });
 
-const expenseDefaultYear = () => 0;
+export const expenseDefaultYear = () => 0;
 
 const newExpense = years => ({
   key: generateKey(),
@@ -86,12 +86,12 @@ const newExpense = years => ({
   years: arrToObj(years, expenseDefaultYear())
 });
 
-const costAllocationEntry = (other = 0, federal = 90, state = 10) => ({
+export const costAllocationEntry = (other = 0, federal = 90, state = 10) => ({
   other,
   ffp: { federal, state }
 });
 
-const quarterlyFFPEntry = () =>
+export const quarterlyFFPEntry = () =>
   [1, 2, 3, 4].reduce(
     (acc, quarter) => ({
       ...acc,
