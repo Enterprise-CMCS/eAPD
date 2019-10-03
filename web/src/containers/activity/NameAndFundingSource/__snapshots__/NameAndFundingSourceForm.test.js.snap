@@ -1,227 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the activity name and funding source component renders correctly 1`] = `
-<Provider
-  store={
-    Object {
-      "clearActions": [Function],
-      "dispatch": [Function],
-      "getActions": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
+<Fragment>
+  <TextField
+    autoFocus="true"
+    label="Activity name"
+    name="activity-name"
+    onChange={[Function]}
+    type="text"
+    value="Buying bikes for Huey, Dewey, and Louie"
+  />
+  <ChoiceList
+    choices={
+      Array [
+        Object {
+          "checked": false,
+          "label": "HIT",
+          "value": "HIT",
+        },
+        Object {
+          "checked": false,
+          "label": "HIE",
+          "value": "HIE",
+        },
+        Object {
+          "checked": false,
+          "label": "MMIS",
+          "value": "MMIS",
+        },
+      ]
     }
-  }
->
-  <NameAndFundingSourceForm
-    index={1}
-    item={
-      Object {
-        "fundingSource": "Uncle Scrooge",
-        "key": "key 1",
-        "name": "Buying bikes for Huey, Dewey, and Louie",
-      }
-    }
-  >
-    <TextField
-      autoFocus="true"
-      label="Activity name"
-      name="activity-name"
-      onChange={[Function]}
-      type="text"
-      value="Buying bikes for Huey, Dewey, and Louie"
-    >
-      <div
-        className="ds-u-clearfix"
-      >
-        <FormLabel
-          component="label"
-          fieldId="textfield_1"
-        >
-          <label
-            className="ds-c-label"
-            htmlFor="textfield_1"
-          >
-            <span
-              className=""
-            >
-              Activity name
-            </span>
-          </label>
-        </FormLabel>
-        <input
-          autoFocus="true"
-          className="ds-c-field"
-          id="textfield_1"
-          name="activity-name"
-          onChange={[Function]}
-          type="text"
-          value="Buying bikes for Huey, Dewey, and Louie"
-        />
-      </div>
-    </TextField>
-    <ChoiceList
-      choices={
-        Array [
-          Object {
-            "checked": false,
-            "label": "HIT",
-            "value": "HIT",
-          },
-          Object {
-            "checked": false,
-            "label": "HIE",
-            "value": "HIE",
-          },
-          Object {
-            "checked": false,
-            "label": "MMIS",
-            "value": "MMIS",
-          },
-        ]
-      }
-      label="Program type"
-      name="program-type"
-      onChange={[Function]}
-    >
-      <fieldset
-        className="ds-c-fieldset"
-      >
-        <FormLabel
-          component="legend"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            <span
-              className=""
-            >
-              Program type
-            </span>
-          </legend>
-        </FormLabel>
-        <Choice
-          checked={false}
-          inputPlacement="left"
-          key="HIT"
-          name="program-type"
-          onChange={[Function]}
-          type="radio"
-          value="HIT"
-        >
-          <div
-            aria-atomic={null}
-            aria-live={null}
-            aria-relevant={null}
-          >
-            <input
-              checked={false}
-              className="ds-c-choice"
-              id="radio_program-type_2"
-              name="program-type"
-              onChange={[Function]}
-              type="radio"
-              value="HIT"
-            />
-            <FormLabel
-              component="label"
-              fieldId="radio_program-type_2"
-            >
-              <label
-                className="ds-c-label"
-                htmlFor="radio_program-type_2"
-              >
-                <span
-                  className=""
-                >
-                  HIT
-                </span>
-              </label>
-            </FormLabel>
-          </div>
-        </Choice>
-        <Choice
-          checked={false}
-          inputPlacement="left"
-          key="HIE"
-          name="program-type"
-          onChange={[Function]}
-          type="radio"
-          value="HIE"
-        >
-          <div
-            aria-atomic={null}
-            aria-live={null}
-            aria-relevant={null}
-          >
-            <input
-              checked={false}
-              className="ds-c-choice"
-              id="radio_program-type_3"
-              name="program-type"
-              onChange={[Function]}
-              type="radio"
-              value="HIE"
-            />
-            <FormLabel
-              component="label"
-              fieldId="radio_program-type_3"
-            >
-              <label
-                className="ds-c-label"
-                htmlFor="radio_program-type_3"
-              >
-                <span
-                  className=""
-                >
-                  HIE
-                </span>
-              </label>
-            </FormLabel>
-          </div>
-        </Choice>
-        <Choice
-          checked={false}
-          inputPlacement="left"
-          key="MMIS"
-          name="program-type"
-          onChange={[Function]}
-          type="radio"
-          value="MMIS"
-        >
-          <div
-            aria-atomic={null}
-            aria-live={null}
-            aria-relevant={null}
-          >
-            <input
-              checked={false}
-              className="ds-c-choice"
-              id="radio_program-type_4"
-              name="program-type"
-              onChange={[Function]}
-              type="radio"
-              value="MMIS"
-            />
-            <FormLabel
-              component="label"
-              fieldId="radio_program-type_4"
-            >
-              <label
-                className="ds-c-label"
-                htmlFor="radio_program-type_4"
-              >
-                <span
-                  className=""
-                >
-                  MMIS
-                </span>
-              </label>
-            </FormLabel>
-          </div>
-        </Choice>
-      </fieldset>
-    </ChoiceList>
-  </NameAndFundingSourceForm>
-</Provider>
+    label="Program type"
+    name="program-type"
+    onChange={[Function]}
+  />
+</Fragment>
 `;
