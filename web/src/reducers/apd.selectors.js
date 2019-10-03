@@ -34,6 +34,9 @@ export const selectSummary = ({
 export const selectKeyPersonnel = state => state.apd.data.keyPersonnel;
 export const selectStateProfile = state => state.apd.data.stateProfile;
 
+export const selectPreviousActivitySummary = state =>
+  state.apd.data.previousActivitySummary;
+
 export const selectPreviousHITHIEActivities = createSelector(
   [selectApdData],
   ({ previousActivityExpenses }) =>
