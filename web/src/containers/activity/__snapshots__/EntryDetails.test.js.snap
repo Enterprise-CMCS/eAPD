@@ -28,7 +28,7 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
         </div>
       }
       editText="Edit"
-      heading="Activity 3: activity name"
+      heading="Activity 3: activity name (money pit)"
       headingLevel={4}
     />
     <div

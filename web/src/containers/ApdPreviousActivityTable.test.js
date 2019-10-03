@@ -1,67 +1,98 @@
-import { mount } from 'enzyme';
-import { Provider } from 'react-redux';
+import { shallow } from 'enzyme';
 import React from 'react';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 
-import ApdPreviousActivityTable from './ApdPreviousActivityTable';
-import { EDIT_APD } from '../actions/editApd';
+import {
+  plain as ApdPreviousActivityTable,
+  mapStateToProps,
+  mapDispatchToProps
+} from './ApdPreviousActivityTable';
 
-const mockStore = configureStore([thunk]);
+import {
+  setPreviousActivityApprovedExpenseForHITandHIE,
+  setPreviousActivityFederalActualExpenseForHITandHIE
+} from '../actions/editApd';
 
 describe('apd previous activity table, mmis component', () => {
-  const state = {
-    apd: {
-      data: {
-        previousActivityExpenses: {
-          '1': {
-            hithie: {
-              federalActual: 10,
-              totalApproved: 20
-            }
-          },
-          '2': {
-            hithie: {
-              federalActual: 100,
-              totalApproved: 200
-            }
-          }
-        }
+  const props = {
+    previousActivityExpenses: {
+      '1': {
+        federalActual: 10,
+        totalApproved: 20
+      },
+      '2': {
+        federalActual: 100,
+        totalApproved: 200
       }
-    }
+    },
+    setActual: jest.fn(),
+    setApproved: jest.fn()
   };
 
-  const store = mockStore(state);
-
   beforeEach(() => {
-    store.clearActions();
+    props.setActual.mockClear();
+    props.setApproved.mockClear();
   });
 
   test('renders correctly', () => {
-    expect(
-      mount(
-        <Provider store={store}>
-          <ApdPreviousActivityTable />
-        </Provider>
-      )
-    ).toMatchSnapshot();
+    expect(shallow(<ApdPreviousActivityTable {...props} />)).toMatchSnapshot();
   });
 
-  test('dispatches on a change', () => {
-    mount(
-      <Provider store={store}>
-        <ApdPreviousActivityTable />
-      </Provider>
-    )
+  test('handles changing an approved expense', () => {
+    shallow(<ApdPreviousActivityTable {...props} />)
       .find('DollarField[name="hithie-approved-total-1"]')
-      .prop('onChange')({ target: { value: 'new value' } });
+      .simulate('change', { target: { value: 'new value' } });
 
-    expect(store.getActions()).toEqual([
-      {
-        type: EDIT_APD,
-        path: '/previousActivityExpenses/1/hithie/totalApproved',
-        value: 'new value'
+    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value');
+  });
+
+  test('handles changing an actual expense', () => {
+    shallow(<ApdPreviousActivityTable {...props} />)
+      .find('DollarField[name="hithie-actual-federal-1"]')
+      .simulate('change', { target: { value: 'new value' } });
+
+    expect(props.setActual).toHaveBeenCalledWith('1', 'new value');
+  });
+
+  test('maps state to props', () => {
+    expect(
+      mapStateToProps({
+        apd: {
+          data: {
+            previousActivityExpenses: {
+              '1': {
+                hithie: {
+                  federalActual: 1,
+                  totalApproved: 2
+                },
+                mmis: {
+                  some: 'junk'
+                }
+              },
+              '2': {
+                hithie: {
+                  federalActual: 3,
+                  totalApproved: 4
+                },
+                mmis: {
+                  more: 'garbage'
+                }
+              }
+            }
+          }
+        }
+      })
+    ).toEqual({
+      previousActivityExpenses: {
+        '1': { federalActual: 1, totalApproved: 2 },
+        '2': { federalActual: 3, totalApproved: 4 }
       }
-    ]);
+    });
+  });
+
+  test('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setActual: setPreviousActivityFederalActualExpenseForHITandHIE,
+      setApproved: setPreviousActivityApprovedExpenseForHITandHIE
+    });
   });
 });

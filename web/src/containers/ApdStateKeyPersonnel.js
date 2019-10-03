@@ -1,28 +1,17 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { ApdKeyPersonForm, ApdKeyPersonReview } from './ApdKeyPerson';
 import { addKeyPerson, removeKeyPerson } from '../actions/editApd';
 import FormAndReviewList from '../components/FormAndReviewList';
+import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 
-const ApdStateKeyPersonnel = () => {
-  const dispatch = useDispatch();
-
-  const { poc, years } = useSelector(
-    ({
-      apd: {
-        data: { keyPersonnel, years: yearsFromAPD }
-      }
-    }) => ({
-      poc: keyPersonnel,
-      years: yearsFromAPD
-    })
-  );
-
+const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
   const deletePerson = key => {
     const index = poc.findIndex(p => p.key === key);
     if (index >= 0) {
-      dispatch(removeKeyPerson(index));
+      remove(index);
     }
   };
 
@@ -32,13 +21,33 @@ const ApdStateKeyPersonnel = () => {
       list={poc}
       collapsed={ApdKeyPersonReview}
       expanded={ApdKeyPersonForm}
-      onAddClick={() => dispatch(addKeyPerson())}
+      onAddClick={() => add()}
       onDeleteClick={deletePerson}
       years={years}
     />
   );
 };
 
-export default ApdStateKeyPersonnel;
+ApdStateKeyPersonnel.propTypes = {
+  add: PropTypes.func.isRequired,
+  poc: PropTypes.arrayOf(PropTypes.object).isRequired,
+  remove: PropTypes.func.isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
-export { ApdStateKeyPersonnel as plain };
+const mapStateToProps = state => ({
+  poc: selectKeyPersonnel(state),
+  years: selectApdYears(state)
+});
+
+const mapDispatchToProps = {
+  add: addKeyPerson,
+  remove: removeKeyPerson
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdStateKeyPersonnel);
+
+export { ApdStateKeyPersonnel as plain, mapStateToProps, mapDispatchToProps };

@@ -1,6 +1,9 @@
 import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useRef, useState } from 'react';
+import { connect } from 'react-redux';
+
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
 import { Provider } from './ActivityContext';
 import ContractorResources from './ContractorResources';
@@ -24,10 +27,10 @@ const makeTitle = ({ name, fundingSource }, i) => {
   return title;
 };
 
-const EntryDetails = ({ activity, index }) => {
+const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
   const container = useRef();
 
-  const [collapsed, internalSetCollapsed] = useState(index > 0);
+  const [collapsed, internalSetCollapsed] = useState(activityIndex > 0);
   const setCollapsed = newCollapsed => {
     if (newCollapsed) {
       const { top } = container.current.getBoundingClientRect();
@@ -39,11 +42,10 @@ const EntryDetails = ({ activity, index }) => {
     internalSetCollapsed(newCollapsed);
   };
 
-  const title = useMemo(() => makeTitle(activity, index + 1), [
-    activity.fundingSource,
-    activity.name,
-    index
-  ]);
+  const title = useMemo(
+    () => makeTitle({ name, fundingSource }, activityIndex + 1),
+    [fundingSource, name, activityIndex]
+  );
 
   const editContent = useMemo(
     () => (
@@ -67,23 +69,23 @@ const EntryDetails = ({ activity, index }) => {
   );
 
   return (
-    <Provider value={{ index }}>
+    <Provider value={{ index: activityIndex }}>
       <div
-        id={`activity-${activity.key}`}
+        id={`activity-${activityKey}`}
         className={`activity--body activity--body__${
           collapsed ? 'collapsed' : 'expanded'
-        } activity--body__${index === 0 ? 'first' : 'notfirst'}`}
+        } activity--body__${activityIndex === 0 ? 'first' : 'notfirst'}`}
         ref={container}
       >
         <Review heading={title} headingLevel={4} editContent={editContent} />
         <div className={collapsed ? 'visibility--print' : ''}>
-          <Overview activityIndex={index} />
-          <Goals aKey={activity.key} />
-          <Schedule aKey={activity.key} />
-          <Costs aKey={activity.key} />
-          <ContractorResources activityIndex={index} />
-          <CostAllocate aKey={activity.key} />
-          <StandardsAndConditions aKey={activity.key} />
+          <Overview activityIndex={activityIndex} />
+          <Goals aKey={activityKey} />
+          <Schedule aKey={activityKey} />
+          <Costs aKey={activityKey} />
+          <ContractorResources activityIndex={activityIndex} />
+          <CostAllocate aKey={activityKey} />
+          <StandardsAndConditions aKey={activityKey} />
           <Button variation="primary" onClick={() => setCollapsed(true)}>
             Done
           </Button>
@@ -94,8 +96,23 @@ const EntryDetails = ({ activity, index }) => {
 };
 
 EntryDetails.propTypes = {
-  activity: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  activityKey: PropTypes.string.isRequired,
+  fundingSource: PropTypes.string.isRequired,
+  name: PropTypes.string
 };
 
-export default EntryDetails;
+EntryDetails.defaultProps = {
+  name: ''
+};
+
+const mapStateToProps = (state, { activityIndex }) => {
+  const { fundingSource, key, name } = selectActivityByIndex(state, {
+    activityIndex
+  });
+  return { activityKey: key, fundingSource, name };
+};
+
+export default connect(mapStateToProps)(EntryDetails);
+
+export { EntryDetails as plain, mapStateToProps };

@@ -1,444 +1,138 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`apd summary component renders correctly 1`] = `
-<Provider
-  store={
-    Object {
-      "clearActions": [Function],
-      "dispatch": [Function],
-      "getActions": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-    }
-  }
+<Connect(ConnectedWaypoint)
+  id="apd-summary"
 >
-  <ApdSummary>
-    <Connect(ConnectedWaypoint)
-      id="apd-summary"
+  <Section
+    id="apd-summary"
+    isNumbered={true}
+    resource="apd"
+  >
+    <h3
+      className="ds-h3 subsection--title"
     >
-      <ConnectedWaypoint
-        id="apd-summary"
-        scrollTo={[Function]}
-      >
-        <Waypoint
-          bottomOffset="90%"
-          debug={false}
-          fireOnRapidScroll={true}
-          horizontal={false}
-          onEnter={[Function]}
-          onLeave={[Function]}
-          onPositionChange={[Function]}
-          topOffset="0px"
-        >
-          <span
-            style={
-              Object {
-                "fontSize": 0,
-              }
-            }
-          />
-        </Waypoint>
-        <Section
-          id="apd-summary"
-          isNumbered={true}
-          resource="apd"
-        >
-          <section
-            className="numbered-section"
-            id="apd-summary"
-          >
-            <h2
-              className="ds-h2"
-            >
-              Program Summary
-            </h2>
-            <span
-              className="ds-text--lead"
-            >
-              Provide an introduction to the state program. Include context for this funding request by providing information such as current size, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section.
-            </span>
-            <h3
-              className="ds-h3 subsection--title"
-            >
-              Program Overview
-            </h3>
-            <Instruction
-              args={null}
-              headingDisplay={
-                Object {
-                  "className": "ds-h3",
-                  "level": "h3",
-                }
-              }
-              reverse={false}
-              source="apd.overview.instruction"
-            >
-              <div>
-                <div
-                  className="visibility--screen"
-                >
-                  <p
-                    className="ds-u-font-weight--bold"
-                  >
-                    Choose the federal fiscal year(s) this APD covers.
-                  </p>
-                </div>
-              </div>
-            </Instruction>
-            <ChoiceComponent
-              checked={true}
-              key="1"
-              name="apd year 1"
-              onChange={[Function]}
-              type="checkbox"
-              value="1"
-            >
-              <div>
-                <Choice
-                  checked={true}
-                  inputPlacement="left"
-                  name="apd year 1"
-                  onChange={[Function]}
-                  type="checkbox"
-                  value="1"
-                >
-                  <div
-                    aria-atomic={null}
-                    aria-live={null}
-                    aria-relevant={null}
-                  >
-                    <input
-                      checked={true}
-                      className="ds-c-choice"
-                      id="checkbox_apd year 1_1"
-                      name="apd year 1"
-                      onChange={[Function]}
-                      type="checkbox"
-                      value="1"
-                    />
-                    <FormLabel
-                      component="label"
-                      fieldId="checkbox_apd year 1_1"
-                    >
-                      <label
-                        className="ds-c-label"
-                        htmlFor="checkbox_apd year 1_1"
-                      >
-                        <span
-                          className=""
-                        >
-                          1
-                        </span>
-                      </label>
-                    </FormLabel>
-                  </div>
-                </Choice>
-              </div>
-            </ChoiceComponent>
-            <ChoiceComponent
-              checked={true}
-              key="2"
-              name="apd year 2"
-              onChange={[Function]}
-              type="checkbox"
-              value="2"
-            >
-              <div>
-                <Choice
-                  checked={true}
-                  inputPlacement="left"
-                  name="apd year 2"
-                  onChange={[Function]}
-                  type="checkbox"
-                  value="2"
-                >
-                  <div
-                    aria-atomic={null}
-                    aria-live={null}
-                    aria-relevant={null}
-                  >
-                    <input
-                      checked={true}
-                      className="ds-c-choice"
-                      id="checkbox_apd year 2_2"
-                      name="apd year 2"
-                      onChange={[Function]}
-                      type="checkbox"
-                      value="2"
-                    />
-                    <FormLabel
-                      component="label"
-                      fieldId="checkbox_apd year 2_2"
-                    >
-                      <label
-                        className="ds-c-label"
-                        htmlFor="checkbox_apd year 2_2"
-                      >
-                        <span
-                          className=""
-                        >
-                          2
-                        </span>
-                      </label>
-                    </FormLabel>
-                  </div>
-                </Choice>
-              </div>
-            </ChoiceComponent>
-            <ChoiceComponent
-              checked={false}
-              key="3"
-              name="apd year 3"
-              onChange={[Function]}
-              type="checkbox"
-              value="3"
-            >
-              <div>
-                <Choice
-                  checked={false}
-                  inputPlacement="left"
-                  name="apd year 3"
-                  onChange={[Function]}
-                  type="checkbox"
-                  value="3"
-                >
-                  <div
-                    aria-atomic={null}
-                    aria-live={null}
-                    aria-relevant={null}
-                  >
-                    <input
-                      checked={false}
-                      className="ds-c-choice"
-                      id="checkbox_apd year 3_3"
-                      name="apd year 3"
-                      onChange={[Function]}
-                      type="checkbox"
-                      value="3"
-                    />
-                    <FormLabel
-                      component="label"
-                      fieldId="checkbox_apd year 3_3"
-                    >
-                      <label
-                        className="ds-c-label"
-                        htmlFor="checkbox_apd year 3_3"
-                      >
-                        <span
-                          className=""
-                        >
-                          3
-                        </span>
-                      </label>
-                    </FormLabel>
-                  </div>
-                </Choice>
-              </div>
-            </ChoiceComponent>
-            <div
-              className="ds-u-margin-y--3"
-            >
-              <Instruction
-                args={null}
-                headingDisplay={
-                  Object {
-                    "className": "ds-h3",
-                    "level": "h3",
-                  }
-                }
-                reverse={false}
-                source="apd.introduction.instruction"
-              >
-                <div>
-                  <h3
-                    className="ds-h3"
-                  >
-                    Program Introduction
-                  </h3>
-                  <div
-                    className="visibility--screen"
-                  >
-                    <Md
-                      content="Provide a high-level introduction to the state program. Include the history and context of the program and the state’s future vision for it."
-                      wrapper="p"
-                    >
-                      <p
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "Provide a high-level introduction to the state program. Include the history and context of the program and the state’s future vision for it.",
-                          }
-                        }
-                      />
-                    </Md>
-                  </div>
-                </div>
-              </Instruction>
-              <RichText
-                content="about the program"
-                editorClassName="rte-textarea-l"
-                onSync={[Function]}
-              />
-            </div>
-            <div
-              className="ds-u-margin-bottom--3"
-            >
-              <Instruction
-                args={null}
-                headingDisplay={
-                  Object {
-                    "className": "ds-h3",
-                    "level": "h3",
-                  }
-                }
-                reverse={false}
-                source="apd.hit.instruction"
-              >
-                <div>
-                  <h3
-                    className="ds-h3"
-                  >
-                    HIT Overview
-                  </h3>
-                  <div
-                    className="visibility--screen"
-                  >
-                    <Md
-                      content="Briefly summarize planned HIT-funded activities contained within this APD."
-                      wrapper="p"
-                    >
-                      <p
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "Briefly summarize planned HIT-funded activities contained within this APD.",
-                          }
-                        }
-                      />
-                    </Md>
-                  </div>
-                </div>
-              </Instruction>
-              <RichText
-                content="about hit"
-                editorClassName="rte-textarea-l"
-                onSync={[Function]}
-              />
-            </div>
-            <div
-              className="ds-u-margin-bottom--3"
-            >
-              <Instruction
-                args={null}
-                headingDisplay={
-                  Object {
-                    "className": "ds-h3",
-                    "level": "h3",
-                  }
-                }
-                reverse={false}
-                source="apd.hie.instruction"
-              >
-                <div>
-                  <h3
-                    className="ds-h3"
-                  >
-                    HIE Overview
-                  </h3>
-                  <div
-                    className="visibility--screen"
-                  >
-                    <Md
-                      content="Summarize planned HIE-funded activities within this APD.
-If there are no HIE activities, enter “No HIE activities.”
-
-[ol] Description of the state’s HIE approach (statewide, sub-state health information organization (HIO), etc.);
-Anticipated risks and mitigation strategies;
-The short and long term value proposition to providers;
-The role of state government in governance and policy-setting. [/ol]"
-                      wrapper="p"
-                    >
-                      <p
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "Summarize planned HIE-funded activities within this APD.<br />
-If there are no HIE activities, enter “No HIE activities.”<br />
-<br />
-<ol><li>Description of the state’s HIE approach (statewide, sub-state health information organization (HIO), etc.);</li><li>Anticipated risks and mitigation strategies;</li><li>The short and long term value proposition to providers;</li><li>The role of state government in governance and policy-setting.</li></ol>",
-                          }
-                        }
-                      />
-                    </Md>
-                    <Md
-                      className="instruction-box"
-                      content="CMS recommends that states connect with regional CMS HITECH contacts prior to developing an HIE funding request. HIE funding requests are complex. Early consultation with CMS facilitates a more efficient approval process."
-                      wrapper="p"
-                    >
-                      <p
-                        className="instruction-box"
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "CMS recommends that states connect with regional CMS HITECH contacts prior to developing an HIE funding request. HIE funding requests are complex. Early consultation with CMS facilitates a more efficient approval process.",
-                          }
-                        }
-                      />
-                    </Md>
-                  </div>
-                </div>
-              </Instruction>
-              <RichText
-                content="about hie"
-                editorClassName="rte-textarea-l"
-                onSync={[Function]}
-              />
-            </div>
-            <div>
-              <Instruction
-                args={null}
-                headingDisplay={
-                  Object {
-                    "className": "ds-h3",
-                    "level": "h3",
-                  }
-                }
-                reverse={false}
-                source="apd.mmis.instruction"
-              >
-                <div>
-                  <h3
-                    className="ds-h3"
-                  >
-                    MMIS Overview
-                  </h3>
-                  <div
-                    className="visibility--screen"
-                  >
-                    <Md
-                      content="Briefly summarize planned MMIS-funded activities contained within this APD.
-If there are no MMIS activities, enter “No MMIS activities.”"
-                      wrapper="p"
-                    >
-                      <p
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "Briefly summarize planned MMIS-funded activities contained within this APD.<br />
-If there are no MMIS activities, enter “No MMIS activities.”",
-                          }
-                        }
-                      />
-                    </Md>
-                  </div>
-                </div>
-              </Instruction>
-              <RichText
-                content="about mmis"
-                editorClassName="rte-textarea-l"
-                onSync={[Function]}
-              />
-            </div>
-          </section>
-        </Section>
-      </ConnectedWaypoint>
-    </Connect(ConnectedWaypoint)>
-  </ApdSummary>
-</Provider>
+      Program Overview
+    </h3>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      reverse={false}
+      source="apd.overview.instruction"
+    />
+    <ChoiceComponent
+      checked={true}
+      key="1"
+      name="apd year 1"
+      onChange={[Function]}
+      type="checkbox"
+      value="1"
+    >
+      1
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={true}
+      key="2"
+      name="apd year 2"
+      onChange={[Function]}
+      type="checkbox"
+      value="2"
+    >
+      2
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={false}
+      key="3"
+      name="apd year 3"
+      onChange={[Function]}
+      type="checkbox"
+      value="3"
+    >
+      3
+    </ChoiceComponent>
+    <div
+      className="ds-u-margin-y--3"
+    >
+      <Instruction
+        args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
+        reverse={false}
+        source="apd.introduction.instruction"
+      />
+      <RichText
+        content="about the program"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div
+      className="ds-u-margin-bottom--3"
+    >
+      <Instruction
+        args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
+        reverse={false}
+        source="apd.hit.instruction"
+      />
+      <RichText
+        content="about hit"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div
+      className="ds-u-margin-bottom--3"
+    >
+      <Instruction
+        args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
+        reverse={false}
+        source="apd.hie.instruction"
+      />
+      <RichText
+        content="about hie"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div>
+      <Instruction
+        args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
+        reverse={false}
+        source="apd.mmis.instruction"
+      />
+      <RichText
+        content="about mmis"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+  </Section>
+</Connect(ConnectedWaypoint)>
 `;

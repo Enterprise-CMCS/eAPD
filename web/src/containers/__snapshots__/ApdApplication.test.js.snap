@@ -31,12 +31,12 @@ exports[`apd (application) component renders correctly 1`] = `
          APD
       </h1>
       <ApdStateProfile />
-      <ApdSummary />
-      <PreviousActivities />
-      <All />
+      <Connect(ApdSummary) />
+      <Connect(PreviousActivities) />
+      <Connect(All) />
       <Connect(ScheduleSummary) />
       <ProposedBudget />
-      <AssurancesAndCompliance />
+      <Connect(AssurancesAndCompliance) />
       <Connect(ExecutiveSummary) />
       <Connect(ExportAndSubmit) />
     </div>

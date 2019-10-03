@@ -2,7 +2,16 @@ import diff from 'lodash.difference';
 import u from 'updeep';
 import { apply_patch as applyPatch } from 'jsonpatch';
 
-import { newActivity, newContractor } from './activities';
+import {
+  contractorDefaultHourly,
+  contractorDefaultYear,
+  costAllocationEntry,
+  expenseDefaultYear,
+  newActivity,
+  newContractor,
+  quarterlyFFPEntry,
+  statePersonDefaultYear
+} from './activities';
 import {
   ADD_APD_KEY_PERSON,
   CREATE_APD_SUCCESS,
@@ -52,6 +61,49 @@ export const getPatchesToAddYear = (state, year) => {
     }
   ];
 
+  state.data.activities.forEach((activity, activityIndex) => {
+    activity.contractorResources.forEach((_, i) => {
+      patches.push({
+        op: 'add',
+        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/data/${year}`,
+        value: contractorDefaultHourly()
+      });
+      patches.push({
+        op: 'add',
+        path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`,
+        value: contractorDefaultYear()
+      });
+    });
+
+    activity.expenses.forEach((_, i) => {
+      patches.push({
+        op: 'add',
+        path: `/activities/${activityIndex}/expenses/${i}/years/${year}`,
+        value: expenseDefaultYear()
+      });
+    });
+
+    activity.statePersonnel.forEach((_, i) => {
+      patches.push({
+        op: 'add',
+        path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`,
+        value: statePersonDefaultYear()
+      });
+    });
+
+    patches.push({
+      op: 'add',
+      path: `/activities/${activityIndex}/costAllocation/${year}`,
+      value: costAllocationEntry()
+    });
+
+    patches.push({
+      op: 'add',
+      path: `/activities/${activityIndex}/quarterlyFFP/${year}`,
+      value: quarterlyFFPEntry()
+    });
+  });
+
   state.data.keyPersonnel.forEach((_, i) => {
     patches.push({
       op: 'add',
@@ -85,6 +137,43 @@ export const getPatchesToRemoveYear = (state, year) => {
       path: `/incentivePayments/epCt/${year}`
     }
   ];
+
+  state.data.activities.forEach((activity, activityIndex) => {
+    activity.contractorResources.forEach((_, i) => {
+      patches.push({
+        op: 'remove',
+        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/data/${year}`
+      });
+      patches.push({
+        op: 'remove',
+        path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`
+      });
+    });
+
+    activity.expenses.forEach((_, i) => {
+      patches.push({
+        op: 'remove',
+        path: `/activities/${activityIndex}/expenses/${i}/years/${year}`
+      });
+    });
+
+    activity.statePersonnel.forEach((_, i) => {
+      patches.push({
+        op: 'remove',
+        path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`
+      });
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/activities/${activityIndex}/costAllocation/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/activities/${activityIndex}/quarterlyFFP/${year}`
+    });
+  });
 
   state.data.keyPersonnel.forEach((_, i) => {
     patches.push({

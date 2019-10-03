@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
@@ -12,37 +13,34 @@ import {
   setPreviousActivityFederalActualExpenseforMMIS90FFP
 } from '../actions/editApd';
 import { TABLE_HEADERS } from '../constants';
+import { selectPreviousMMISActivities } from '../reducers/apd.selectors';
 
-const ApdPreviousActivityTableMMIS = () => {
-  const dispatch = useDispatch();
-
-  const previousActivityExpenses = useSelector(
-    state => state.apd.data.previousActivityExpenses
-  );
-
+const ApdPreviousActivityTableMMIS = ({
+  previousActivityExpenses,
+  setActual50,
+  setActual75,
+  setActual90,
+  setApproved50,
+  setApproved75,
+  setApproved90
+}) => {
   const years = Object.keys(previousActivityExpenses);
 
   const getActualsHandler = (year, ffp) => {
     switch (+ffp) {
       case 50:
         return ({ target: { value } }) => {
-          dispatch(
-            setPreviousActivityFederalActualExpenseforMMIS50FFP(year, value)
-          );
+          setActual50(year, value);
         };
 
       case 75:
         return ({ target: { value } }) => {
-          dispatch(
-            setPreviousActivityFederalActualExpenseforMMIS75FFP(year, value)
-          );
+          setActual75(year, value);
         };
 
       case 90:
         return ({ target: { value } }) => {
-          dispatch(
-            setPreviousActivityFederalActualExpenseforMMIS90FFP(year, value)
-          );
+          setActual90(year, value);
         };
 
       default:
@@ -54,17 +52,17 @@ const ApdPreviousActivityTableMMIS = () => {
     switch (+ffp) {
       case 50:
         return ({ target: { value } }) => {
-          dispatch(setPreviousActivityApprovedExpenseforMMIS50FFP(year, value));
+          setApproved50(year, value);
         };
 
       case 75:
         return ({ target: { value } }) => {
-          dispatch(setPreviousActivityApprovedExpenseforMMIS75FFP(year, value));
+          setApproved75(year, value);
         };
 
       case 90:
         return ({ target: { value } }) => {
-          dispatch(setPreviousActivityApprovedExpenseforMMIS90FFP(year, value));
+          setApproved90(year, value);
         };
 
       default:
@@ -117,7 +115,7 @@ const ApdPreviousActivityTableMMIS = () => {
           </thead>
           <tbody>
             {years.map(year => {
-              const expenses = previousActivityExpenses[year].mmis[level];
+              const expenses = previousActivityExpenses[year][level];
               const federalApproved = (expenses.totalApproved * level) / 100;
 
               return (
@@ -171,4 +169,36 @@ const ApdPreviousActivityTableMMIS = () => {
   );
 };
 
-export default ApdPreviousActivityTableMMIS;
+ApdPreviousActivityTableMMIS.propTypes = {
+  previousActivityExpenses: PropTypes.object.isRequired,
+  setActual50: PropTypes.func.isRequired,
+  setActual75: PropTypes.func.isRequired,
+  setActual90: PropTypes.func.isRequired,
+  setApproved50: PropTypes.func.isRequired,
+  setApproved75: PropTypes.func.isRequired,
+  setApproved90: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  previousActivityExpenses: selectPreviousMMISActivities(state)
+});
+
+const mapDispatchToProps = {
+  setActual50: setPreviousActivityFederalActualExpenseforMMIS50FFP,
+  setActual75: setPreviousActivityFederalActualExpenseforMMIS75FFP,
+  setActual90: setPreviousActivityFederalActualExpenseforMMIS90FFP,
+  setApproved50: setPreviousActivityApprovedExpenseforMMIS50FFP,
+  setApproved75: setPreviousActivityApprovedExpenseforMMIS75FFP,
+  setApproved90: setPreviousActivityApprovedExpenseforMMIS90FFP
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdPreviousActivityTableMMIS);
+
+export {
+  ApdPreviousActivityTableMMIS as plain,
+  mapStateToProps,
+  mapDispatchToProps
+};
