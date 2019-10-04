@@ -1058,8 +1058,8 @@ exports.seed = async knex => {
               percentTime: '1.00',
               hasCosts: true,
               costs: [
-                { cost: 100000, year: 2020 },
-                { cost: 100000, year: 2021 }
+                { year: '2020', cost: 100000 },
+                { year: '2021', cost: 100000 }
               ]
             },
             {
@@ -1069,7 +1069,7 @@ exports.seed = async knex => {
               isPrimary: false,
               percentTime: '0.30',
               hasCosts: false,
-              costs: []
+              costs: [{ year: '2020', cost: 0 }, { year: '2021', cost: 0 }]
             }
           ],
           narrativeHIE:
