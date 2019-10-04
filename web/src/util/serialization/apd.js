@@ -149,7 +149,10 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
   return replaceNulls({
     ...apd,
     activities: activities.map(a => deserializeActivity(a, years)),
-    federalCitations: federalCitations || initialAssurances,
+    federalCitations:
+      Object.keys(federalCitations).length > 0
+        ? federalCitations
+        : initialAssurances,
     incentivePayments: incentivePaymentsSerializer.fromAPI(incentivePayments),
     keyPersonnel: keyPersonnel.map(p => ({
       ...p,
