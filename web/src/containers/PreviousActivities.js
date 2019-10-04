@@ -1,23 +1,19 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
-import { setPreviousActivitySummary } from '../actions/editApd';
-import RichText from '../components/RichText';
-import { Section, Subsection } from '../components/Section';
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
 import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
 import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
 import Waypoint from './ConnectedWaypoint';
+import { setPreviousActivitySummary } from '../actions/editApd';
+import RichText from '../components/RichText';
+import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
+import { selectPreviousActivitySummary } from '../reducers/apd.selectors';
 
-const PreviousActivities = () => {
-  const dispatch = useDispatch();
-
-  const onChange = value => dispatch(setPreviousActivitySummary(value));
-
-  const previousActivitySummary = useSelector(
-    state => state.apd.data.previousActivitySummary
-  );
+const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
+  const onChange = value => setSummary(value);
 
   return (
     <Waypoint id="prev-activities-overview">
@@ -51,4 +47,22 @@ const PreviousActivities = () => {
   );
 };
 
-export default PreviousActivities;
+PreviousActivities.propTypes = {
+  previousActivitySummary: PropTypes.string.isRequired,
+  setSummary: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  previousActivitySummary: selectPreviousActivitySummary(state)
+});
+
+const mapDispatchToProps = {
+  setSummary: setPreviousActivitySummary
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PreviousActivities);
+
+export { PreviousActivities as plain, mapStateToProps, mapDispatchToProps };

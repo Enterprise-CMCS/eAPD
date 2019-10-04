@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import {
   setIncentiveEHCount,
@@ -20,30 +21,30 @@ import { formatNum } from '../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 
-const IncentivePayments = () => {
-  const dispatch = useDispatch();
-
+const IncentivePayments = ({
+  data,
+  setEHCount,
+  setEPCount,
+  setEHPayment,
+  setEPPayment,
+  totals,
+  years
+}) => {
   const updateEHPayment = (year, quarter) => ({ target: { value } }) => {
-    dispatch(setIncentiveEHPayment(year, quarter, value));
+    setEHPayment(year, quarter, value);
   };
 
   const updateEHCount = (year, quarter) => ({ target: { value } }) => {
-    dispatch(setIncentiveEHCount(year, quarter, value));
+    setEHCount(year, quarter, value);
   };
 
   const updateEPPayment = (year, quarter) => ({ target: { value } }) => {
-    dispatch(setIncentiveEPPayment(year, quarter, value));
+    setEPPayment(year, quarter, value);
   };
 
   const updateEPCount = (year, quarter) => ({ target: { value } }) => {
-    dispatch(setIncentiveEPCount(year, quarter, value));
+    setEPCount(year, quarter, value);
   };
-
-  const { data, totals, years } = useSelector(state => ({
-    data: selectIncentivePayments(state),
-    totals: selectIncentivePaymentTotals(state),
-    years: selectApdYears(state)
-  }));
 
   return (
     <Fragment>
@@ -169,4 +170,32 @@ const IncentivePayments = () => {
   );
 };
 
-export default IncentivePayments;
+IncentivePayments.propTypes = {
+  data: PropTypes.object.isRequired,
+  setEHCount: PropTypes.func.isRequired,
+  setEPCount: PropTypes.func.isRequired,
+  setEHPayment: PropTypes.func.isRequired,
+  setEPPayment: PropTypes.func.isRequired,
+  totals: PropTypes.object.isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired
+};
+
+const mapStateToProps = state => ({
+  data: selectIncentivePayments(state),
+  totals: selectIncentivePaymentTotals(state),
+  years: selectApdYears(state)
+});
+
+const mapDispatchToProps = {
+  setEHCount: setIncentiveEHCount,
+  setEPCount: setIncentiveEPCount,
+  setEHPayment: setIncentiveEHPayment,
+  setEPPayment: setIncentiveEPPayment
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IncentivePayments);
+
+export { IncentivePayments as plain, mapStateToProps, mapDispatchToProps };

@@ -1,38 +1,53 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 
-import Activities from './All';
+import { addActivity, removeActivity } from '../../actions/editActivity';
 
-const mockStore = configureStore([thunk]);
-
-// Mock out the EntryDetails, so it doesn't get pulled into these tests
-jest.mock('./EntryDetails');
-require('./EntryDetails').default.mockImplementation(() => null);
+import {
+  plain as Activities,
+  mapStateToProps,
+  mapDispatchToProps
+} from './All';
 
 describe('the Activities component', () => {
-  const state = {
-    apd: {
-      data: {
-        activities: ['activity 1', 'activity 2', 'activity 3']
-      }
-    }
+  const props = {
+    add: jest.fn(),
+    first: { first: 'activity' },
+    keys: ['key1', 'key2', 'key3'],
+    other: [{ second: 'activity' }, { third: 'activity' }],
+    remove: jest.fn()
   };
 
-  const store = mockStore(state);
-
   beforeEach(() => {
-    store.clearActions();
+    props.add.mockClear();
+    props.remove.mockClear();
   });
 
   test('renders correctly', () => {
-    const component = mount(
-      <Provider store={store}>
-        <Activities />
-      </Provider>
-    );
+    const component = shallow(<Activities {...props} />);
     expect(component).toMatchSnapshot();
+  });
+
+  test('maps state to props', () => {
+    const state = {
+      apd: {
+        data: {
+          activities: [{ key: 'key1' }, { key: 'key2' }, { key: 'key3' }]
+        }
+      }
+    };
+
+    expect(mapStateToProps(state)).toEqual({
+      first: { key: 'key1' },
+      keys: ['key1', 'key2', 'key3'],
+      other: [{ key: 'key2' }, { key: 'key3' }]
+    });
+  });
+
+  test('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      add: addActivity,
+      remove: removeActivity
+    });
   });
 });

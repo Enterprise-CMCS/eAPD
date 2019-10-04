@@ -1,27 +1,30 @@
 import { ChoiceList, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import {
   setActivityName,
   setActivityFundingSource
 } from '../../../actions/editActivity';
 
-const NameAndFundingSourceForm = ({ index, item: { fundingSource, name } }) => {
-  const dispatch = useDispatch();
-
+const NameAndFundingSourceForm = ({
+  index,
+  item: { fundingSource, name },
+  setFundingSource,
+  setName
+}) => {
   const changeName = useCallback(({ target: { value } }) => {
     // These forms are built from the list of editable activities, which is
     // all activities except the first one. So the local list index starts at
     // 0, but it corresponds to index 1 in the full list. To handle that, just
     // increment the local index by one when updating the activity.
-    dispatch(setActivityName(index + 1, value));
+    setName(index + 1, value);
   });
 
   const changeFundingSource = useCallback(({ target: { value } }) => {
     // Same thing here.
-    dispatch(setActivityFundingSource(index + 1, value));
+    setFundingSource(index + 1, value);
   });
 
   return (
@@ -52,7 +55,19 @@ NameAndFundingSourceForm.propTypes = {
   item: PropTypes.shape({
     fundingSource: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  setFundingSource: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired
 };
 
-export default NameAndFundingSourceForm;
+const mapDispatchToProps = {
+  setFundingSource: setActivityFundingSource,
+  setName: setActivityName
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NameAndFundingSourceForm);
+
+export { NameAndFundingSourceForm as plain, mapDispatchToProps };

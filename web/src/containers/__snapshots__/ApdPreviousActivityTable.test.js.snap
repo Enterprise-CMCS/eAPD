@@ -1,530 +1,169 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`apd previous activity table, mmis component renders correctly 1`] = `
-<Provider
-  store={
-    Object {
-      "clearActions": [Function],
-      "dispatch": [Function],
-      "getActions": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-    }
-  }
+<table
+  className="budget-table"
 >
-  <ApdPreviousActivityTable>
-    <table
-      className="budget-table"
-    >
-      <caption
-        className="ds-h4"
+  <caption
+    className="ds-h4"
+  >
+    HIT + HIE
+  </caption>
+  <thead>
+    <tr>
+      <th
+        id="prev_act_hit_header_ffy"
       >
-        HIT + HIE
-      </caption>
-      <thead>
-        <tr>
-          <th
-            id="prev_act_hit_header_ffy"
-          >
-            <span
-              className="ds-u-visibility--screen-reader"
-            >
-              Year
-            </span>
-          </th>
-          <th
-            id="prev_act_hithie_total"
-          >
-            <span>
-              Total computable
-              <br />
-              (Federal + state)
-            </span>
-          </th>
-          <th
-            colSpan="2"
-            id="prev_act_hithie_federal"
-          >
-            <span>
-              Federal share 
-              <strong>
-                90
-                %
-              </strong>
-               FFP
-            </span>
-          </th>
-        </tr>
-        <tr>
-          <th
-            aria-hidden="true"
-          />
-          <th
-            className="ds-u-text-align--right"
-            id="prev_act_hithie_total_approved"
-          >
-            Approved
-          </th>
-          <th
-            className="ds-u-text-align--right"
-            id="prev_act_hithie_federal_approved"
-          >
-            Approved
-          </th>
-          <th
-            className="ds-u-text-align--right"
-            id="prev_act_hithie_federal_actual"
-          >
-            Actual
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          key="1"
+        <span
+          className="ds-u-visibility--screen-reader"
         >
-          <th
-            headers="prev_act_hit_header_ffy"
-            id="prev_act_hithie_row_1"
-          >
-            FFY 1
-          </th>
-          <td
-            headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
-          >
-            <DollarField
-              className="budget-table--input-holder"
-              fieldClassName="budget-table--input__number"
-              label="total approved funding for HIT and HIE for FFY 1, state plus federal"
-              labelClassName="sr-only"
-              name="hithie-approved-total-1"
-              onBlur={null}
-              onChange={[Function]}
-              value={20}
-            >
-              <NumberField
-                className="budget-table--input-holder"
-                fieldClassName="budget-table--input__number"
-                fieldRef={null}
-                label="total approved funding for HIT and HIE for FFY 1, state plus federal"
-                labelClassName="sr-only"
-                mask="currency"
-                name="hithie-approved-total-1"
-                onBlur={[Function]}
-                onChange={[Function]}
-                value="20"
-              >
-                <TextField
-                  className="budget-table--input-holder"
-                  fieldClassName="budget-table--input__number"
-                  fieldRef={
-                    Object {
-                      "current": <input
-                        aria-label="total approved funding for HIT and HIE for FFY 1, state plus federal. Enter amount in dollars."
-                        class="ds-c-field ds-c-field--currency budget-table--input__number"
-                        id="textfield_1"
-                        name="hithie-approved-total-1"
-                        type="text"
-                        value="20"
-                      />,
-                    }
-                  }
-                  label="total approved funding for HIT and HIE for FFY 1, state plus federal"
-                  labelClassName="sr-only"
-                  mask="currency"
-                  name="hithie-approved-total-1"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  type="text"
-                  value="20"
-                >
-                  <div
-                    className="ds-u-clearfix budget-table--input-holder"
-                  >
-                    <FormLabel
-                      className="sr-only"
-                      component="label"
-                      fieldId="textfield_1"
-                    >
-                      <label
-                        className="ds-c-label sr-only"
-                        htmlFor="textfield_1"
-                      >
-                        <span
-                          className=""
-                        >
-                          total approved funding for HIT and HIE for FFY 1, state plus federal
-                        </span>
-                      </label>
-                    </FormLabel>
-                    <div
-                      className="ds-c-field-mask ds-c-field-mask--currency"
-                    >
-                      <div
-                        className="ds-c-field__before ds-c-field__before--currency"
-                      >
-                        $
-                      </div>
-                      <Mask
-                        mask="currency"
-                      >
-                        <input
-                          aria-label="total approved funding for HIT and HIE for FFY 1, state plus federal. Enter amount in dollars."
-                          className="ds-c-field ds-c-field--currency budget-table--input__number"
-                          id="textfield_1"
-                          name="hithie-approved-total-1"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          type="text"
-                          value="20"
-                        />
-                      </Mask>
-                    </div>
-                  </div>
-                </TextField>
-              </NumberField>
-            </DollarField>
-          </td>
-          <td
-            className="budget-table--number"
-            headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_approved"
-          >
-            <Dollars
-              long={false}
-            >
-              <span
-                className="visibility--screen"
-              >
-                $18
-              </span>
-              <span
-                className="visibility--print"
-              >
-                $18
-              </span>
-            </Dollars>
-          </td>
-          <td
-            headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
-          >
-            <DollarField
-              className="budget-table--input-holder"
-              fieldClassName="budget-table--input__number"
-              label="actual federal share for HIT and HIE for FFY 1"
-              labelClassName="sr-only"
-              name="hithie-actual-federal-1"
-              onBlur={null}
-              onChange={[Function]}
-              value={10}
-            >
-              <NumberField
-                className="budget-table--input-holder"
-                fieldClassName="budget-table--input__number"
-                fieldRef={null}
-                label="actual federal share for HIT and HIE for FFY 1"
-                labelClassName="sr-only"
-                mask="currency"
-                name="hithie-actual-federal-1"
-                onBlur={[Function]}
-                onChange={[Function]}
-                value="10"
-              >
-                <TextField
-                  className="budget-table--input-holder"
-                  fieldClassName="budget-table--input__number"
-                  fieldRef={
-                    Object {
-                      "current": <input
-                        aria-label="actual federal share for HIT and HIE for FFY 1. Enter amount in dollars."
-                        class="ds-c-field ds-c-field--currency budget-table--input__number"
-                        id="textfield_2"
-                        name="hithie-actual-federal-1"
-                        type="text"
-                        value="10"
-                      />,
-                    }
-                  }
-                  label="actual federal share for HIT and HIE for FFY 1"
-                  labelClassName="sr-only"
-                  mask="currency"
-                  name="hithie-actual-federal-1"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  type="text"
-                  value="10"
-                >
-                  <div
-                    className="ds-u-clearfix budget-table--input-holder"
-                  >
-                    <FormLabel
-                      className="sr-only"
-                      component="label"
-                      fieldId="textfield_2"
-                    >
-                      <label
-                        className="ds-c-label sr-only"
-                        htmlFor="textfield_2"
-                      >
-                        <span
-                          className=""
-                        >
-                          actual federal share for HIT and HIE for FFY 1
-                        </span>
-                      </label>
-                    </FormLabel>
-                    <div
-                      className="ds-c-field-mask ds-c-field-mask--currency"
-                    >
-                      <div
-                        className="ds-c-field__before ds-c-field__before--currency"
-                      >
-                        $
-                      </div>
-                      <Mask
-                        mask="currency"
-                      >
-                        <input
-                          aria-label="actual federal share for HIT and HIE for FFY 1. Enter amount in dollars."
-                          className="ds-c-field ds-c-field--currency budget-table--input__number"
-                          id="textfield_2"
-                          name="hithie-actual-federal-1"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          type="text"
-                          value="10"
-                        />
-                      </Mask>
-                    </div>
-                  </div>
-                </TextField>
-              </NumberField>
-            </DollarField>
-          </td>
-        </tr>
-        <tr
-          key="2"
+          Year
+        </span>
+      </th>
+      <th
+        id="prev_act_hithie_total"
+      >
+        <span>
+          Total computable
+          <br />
+          (Federal + state)
+        </span>
+      </th>
+      <th
+        colSpan="2"
+        id="prev_act_hithie_federal"
+      >
+        <span>
+          Federal share 
+          <strong>
+            90
+            %
+          </strong>
+           FFP
+        </span>
+      </th>
+    </tr>
+    <tr>
+      <th
+        aria-hidden="true"
+      />
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_total_approved"
+      >
+        Approved
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_federal_approved"
+      >
+        Approved
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_federal_actual"
+      >
+        Actual
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      key="1"
+    >
+      <th
+        headers="prev_act_hit_header_ffy"
+        id="prev_act_hithie_row_1"
+      >
+        FFY 1
+      </th>
+      <td
+        headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
+      >
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
+          label="total approved funding for HIT and HIE for FFY 1, state plus federal"
+          labelClassName="sr-only"
+          name="hithie-approved-total-1"
+          onBlur={null}
+          onChange={[Function]}
+          value={20}
+        />
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_approved"
+      >
+        <Dollars
+          long={false}
         >
-          <th
-            headers="prev_act_hit_header_ffy"
-            id="prev_act_hithie_row_2"
-          >
-            FFY 2
-          </th>
-          <td
-            headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
-          >
-            <DollarField
-              className="budget-table--input-holder"
-              fieldClassName="budget-table--input__number"
-              label="total approved funding for HIT and HIE for FFY 2, state plus federal"
-              labelClassName="sr-only"
-              name="hithie-approved-total-2"
-              onBlur={null}
-              onChange={[Function]}
-              value={200}
-            >
-              <NumberField
-                className="budget-table--input-holder"
-                fieldClassName="budget-table--input__number"
-                fieldRef={null}
-                label="total approved funding for HIT and HIE for FFY 2, state plus federal"
-                labelClassName="sr-only"
-                mask="currency"
-                name="hithie-approved-total-2"
-                onBlur={[Function]}
-                onChange={[Function]}
-                value="200"
-              >
-                <TextField
-                  className="budget-table--input-holder"
-                  fieldClassName="budget-table--input__number"
-                  fieldRef={
-                    Object {
-                      "current": <input
-                        aria-label="total approved funding for HIT and HIE for FFY 2, state plus federal. Enter amount in dollars."
-                        class="ds-c-field ds-c-field--currency budget-table--input__number"
-                        id="textfield_3"
-                        name="hithie-approved-total-2"
-                        type="text"
-                        value="200"
-                      />,
-                    }
-                  }
-                  label="total approved funding for HIT and HIE for FFY 2, state plus federal"
-                  labelClassName="sr-only"
-                  mask="currency"
-                  name="hithie-approved-total-2"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  type="text"
-                  value="200"
-                >
-                  <div
-                    className="ds-u-clearfix budget-table--input-holder"
-                  >
-                    <FormLabel
-                      className="sr-only"
-                      component="label"
-                      fieldId="textfield_3"
-                    >
-                      <label
-                        className="ds-c-label sr-only"
-                        htmlFor="textfield_3"
-                      >
-                        <span
-                          className=""
-                        >
-                          total approved funding for HIT and HIE for FFY 2, state plus federal
-                        </span>
-                      </label>
-                    </FormLabel>
-                    <div
-                      className="ds-c-field-mask ds-c-field-mask--currency"
-                    >
-                      <div
-                        className="ds-c-field__before ds-c-field__before--currency"
-                      >
-                        $
-                      </div>
-                      <Mask
-                        mask="currency"
-                      >
-                        <input
-                          aria-label="total approved funding for HIT and HIE for FFY 2, state plus federal. Enter amount in dollars."
-                          className="ds-c-field ds-c-field--currency budget-table--input__number"
-                          id="textfield_3"
-                          name="hithie-approved-total-2"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          type="text"
-                          value="200"
-                        />
-                      </Mask>
-                    </div>
-                  </div>
-                </TextField>
-              </NumberField>
-            </DollarField>
-          </td>
-          <td
-            className="budget-table--number"
-            headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_approved"
-          >
-            <Dollars
-              long={false}
-            >
-              <span
-                className="visibility--screen"
-              >
-                $180
-              </span>
-              <span
-                className="visibility--print"
-              >
-                $180
-              </span>
-            </Dollars>
-          </td>
-          <td
-            headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
-          >
-            <DollarField
-              className="budget-table--input-holder"
-              fieldClassName="budget-table--input__number"
-              label="actual federal share for HIT and HIE for FFY 2"
-              labelClassName="sr-only"
-              name="hithie-actual-federal-2"
-              onBlur={null}
-              onChange={[Function]}
-              value={100}
-            >
-              <NumberField
-                className="budget-table--input-holder"
-                fieldClassName="budget-table--input__number"
-                fieldRef={null}
-                label="actual federal share for HIT and HIE for FFY 2"
-                labelClassName="sr-only"
-                mask="currency"
-                name="hithie-actual-federal-2"
-                onBlur={[Function]}
-                onChange={[Function]}
-                value="100"
-              >
-                <TextField
-                  className="budget-table--input-holder"
-                  fieldClassName="budget-table--input__number"
-                  fieldRef={
-                    Object {
-                      "current": <input
-                        aria-label="actual federal share for HIT and HIE for FFY 2. Enter amount in dollars."
-                        class="ds-c-field ds-c-field--currency budget-table--input__number"
-                        id="textfield_4"
-                        name="hithie-actual-federal-2"
-                        type="text"
-                        value="100"
-                      />,
-                    }
-                  }
-                  label="actual federal share for HIT and HIE for FFY 2"
-                  labelClassName="sr-only"
-                  mask="currency"
-                  name="hithie-actual-federal-2"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  type="text"
-                  value="100"
-                >
-                  <div
-                    className="ds-u-clearfix budget-table--input-holder"
-                  >
-                    <FormLabel
-                      className="sr-only"
-                      component="label"
-                      fieldId="textfield_4"
-                    >
-                      <label
-                        className="ds-c-label sr-only"
-                        htmlFor="textfield_4"
-                      >
-                        <span
-                          className=""
-                        >
-                          actual federal share for HIT and HIE for FFY 2
-                        </span>
-                      </label>
-                    </FormLabel>
-                    <div
-                      className="ds-c-field-mask ds-c-field-mask--currency"
-                    >
-                      <div
-                        className="ds-c-field__before ds-c-field__before--currency"
-                      >
-                        $
-                      </div>
-                      <Mask
-                        mask="currency"
-                      >
-                        <input
-                          aria-label="actual federal share for HIT and HIE for FFY 2. Enter amount in dollars."
-                          className="ds-c-field ds-c-field--currency budget-table--input__number"
-                          id="textfield_4"
-                          name="hithie-actual-federal-2"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          type="text"
-                          value="100"
-                        />
-                      </Mask>
-                    </div>
-                  </div>
-                </TextField>
-              </NumberField>
-            </DollarField>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </ApdPreviousActivityTable>
-</Provider>
+          18
+        </Dollars>
+      </td>
+      <td
+        headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
+      >
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
+          label="actual federal share for HIT and HIE for FFY 1"
+          labelClassName="sr-only"
+          name="hithie-actual-federal-1"
+          onBlur={null}
+          onChange={[Function]}
+          value={10}
+        />
+      </td>
+    </tr>
+    <tr
+      key="2"
+    >
+      <th
+        headers="prev_act_hit_header_ffy"
+        id="prev_act_hithie_row_2"
+      >
+        FFY 2
+      </th>
+      <td
+        headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
+      >
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
+          label="total approved funding for HIT and HIE for FFY 2, state plus federal"
+          labelClassName="sr-only"
+          name="hithie-approved-total-2"
+          onBlur={null}
+          onChange={[Function]}
+          value={200}
+        />
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_approved"
+      >
+        <Dollars
+          long={false}
+        >
+          180
+        </Dollars>
+      </td>
+      <td
+        headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
+      >
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
+          label="actual federal share for HIT and HIE for FFY 2"
+          labelClassName="sr-only"
+          name="hithie-actual-federal-2"
+          onBlur={null}
+          onChange={[Function]}
+          value={100}
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;

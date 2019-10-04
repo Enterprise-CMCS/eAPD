@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
 import EntryDetails from './EntryDetails';
@@ -12,21 +13,13 @@ import { addActivity, removeActivity } from '../../actions/editActivity';
 import { Section, Subsection } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
 
-const All = () => {
-  const dispatch = useDispatch();
+const All = ({ add, first, keys, other, remove }) => {
+  const onAdd = () => add();
 
-  const { activities } = useSelector(state => ({
-    activities: selectAllActivities(state)
-  }));
-
-  const add = () => dispatch(addActivity());
-
-  const update = () => {};
-
-  const remove = key => {
-    activities.forEach(({ key: activityKey }, i) => {
+  const onRemove = key => {
+    keys.forEach(({ key: activityKey }, i) => {
       if (activityKey === key) {
-        dispatch(removeActivity(i));
+        remove(i);
       }
     });
   };
@@ -36,31 +29,54 @@ const All = () => {
       <Section isNumbered id="activities" resource="activities">
         <Waypoint id="activities-list" />
         <Subsection id="activities-list" resource="activities.list" open>
-          <NameAndFundingSourceReview
-            item={activities[0]}
-            index={-1}
-            disableExpand
-          />
+          <NameAndFundingSourceReview item={first} index={-1} disableExpand />
           <FormAndReviewList
             addButtonText="Add another activity"
             allowDeleteAll
-            list={activities.slice(1)}
+            list={other}
             className="ds-u-border-bottom--0"
             collapsed={NameAndFundingSourceReview}
             expanded={NameAndFundingSourceForm}
             noDataMessage={false}
-            onAddClick={add}
-            handleChange={update}
-            onDeleteClick={remove}
+            onAddClick={onAdd}
+            onDeleteClick={onRemove}
           />
         </Subsection>
-        {activities.map((activity, index) => (
-          <Waypoint id={activity.key} key={activity.key}>
-            <EntryDetails activity={activity} index={index} />
+        {keys.map((key, index) => (
+          <Waypoint id={key} key={key}>
+            <EntryDetails activityIndex={index} />
           </Waypoint>
         ))}
       </Section>
     </Waypoint>
   );
 };
-export default All;
+
+All.propTypes = {
+  add: PropTypes.func.isRequired,
+  first: PropTypes.object.isRequired,
+  keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  other: PropTypes.arrayOf(PropTypes.object).isRequired,
+  remove: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => {
+  const activities = selectAllActivities(state);
+  return {
+    first: activities[0],
+    keys: activities.map(({ key }) => key),
+    other: activities.slice(1)
+  };
+};
+
+const mapDispatchToProps = {
+  add: addActivity,
+  remove: removeActivity
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(All);
+
+export { All as plain, mapStateToProps, mapDispatchToProps };

@@ -1,14 +1,16 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 
-import KeyPersonForm from './ApdKeyPersonForm';
-import { UPDATE_BUDGET } from '../../actions/apd';
-import { EDIT_APD } from '../../actions/editApd';
+import { plain as KeyPersonForm, mapDispatchToProps } from './ApdKeyPersonForm';
 
-const mockStore = configureStore([thunk]);
+import {
+  setKeyPersonCost,
+  setKeyPersonEmail,
+  setKeyPersonHasCosts,
+  setKeyPersonName,
+  setKeyPersonPercentTime,
+  setKeyPersonRole
+} from '../../actions/editApd';
 
 describe('the ApdKeyPersonForm component', () => {
   const props = {
@@ -25,19 +27,26 @@ describe('the ApdKeyPersonForm component', () => {
       percentTime: '32',
       position: 'The Builder'
     },
+
+    setCost: jest.fn(),
+    setEmail: jest.fn(),
+    setHasCosts: jest.fn(),
+    setName: jest.fn(),
+    setRole: jest.fn(),
+    setTime: jest.fn(),
+
     years: ['1992', '1993']
   };
 
-  const store = mockStore('old state');
-
-  const component = mount(
-    <Provider store={store}>
-      <KeyPersonForm {...props} />
-    </Provider>
-  );
+  const component = shallow(<KeyPersonForm {...props} />);
 
   beforeEach(() => {
-    store.clearActions();
+    props.setCost.mockClear();
+    props.setEmail.mockClear();
+    props.setHasCosts.mockClear();
+    props.setName.mockClear();
+    props.setRole.mockClear();
+    props.setTime.mockClear();
   });
 
   it('renders correctly', () => {
@@ -46,30 +55,25 @@ describe('the ApdKeyPersonForm component', () => {
 
   it('renders correctly if the person does not have costs', () => {
     expect(
-      mount(
-        <Provider store={store}>
-          <KeyPersonForm {...props} item={{ ...props.item, hasCosts: false }} />
-        </Provider>
+      shallow(
+        <KeyPersonForm {...props} item={{ ...props.item, hasCosts: false }} />
       )
     ).toMatchSnapshot();
   });
 
   describe('events', () => {
     [
-      ['apd-state-profile-pocname1', '/keyPersonnel/1/name'],
-      ['apd-state-profile-pocemail1', '/keyPersonnel/1/email'],
-      ['apd-state-profile-pocposition1', '/keyPersonnel/1/position'],
-      ['apd-state-profile-pocpercentTime1', '/keyPersonnel/1/percentTime']
-    ].forEach(([formName, path]) => {
-      it(`handles changing the ${path}`, () => {
+      ['apd-state-profile-pocname1', 'name', props.setName],
+      ['apd-state-profile-pocemail1', 'email', props.setEmail],
+      ['apd-state-profile-pocposition1', 'role', props.setRole],
+      ['apd-state-profile-pocpercentTime1', 'time', props.setTime]
+    ].forEach(([formName, property, action]) => {
+      it(`handles changing the ${property}`, () => {
         component
           .findWhere(c => c.prop('name') === formName)
-          .first()
-          .prop('onChange')({ target: { value: 'new value' } });
+          .simulate('change', { target: { value: 'new value' } });
 
-        expect(store.getActions()).toEqual([
-          { type: EDIT_APD, path, value: 'new value' }
-        ]);
+        expect(action).toHaveBeenCalledWith('new value', 1);
       });
     });
 
@@ -78,19 +82,9 @@ describe('the ApdKeyPersonForm component', () => {
         .findWhere(
           c => c.name() === 'ChoiceComponent' && c.prop('value') === 'no'
         )
-        .prop('onChange')();
+        .simulate('change');
 
-      expect(store.getActions()).toEqual([
-        {
-          type: EDIT_APD,
-          path: '/keyPersonnel/1/hasCosts',
-          value: false
-        },
-        {
-          type: UPDATE_BUDGET,
-          state: 'old state'
-        }
-      ]);
+      expect(props.setHasCosts).toHaveBeenCalledWith(false, 1);
     });
 
     it('handles toggling hasCosts on', () => {
@@ -98,23 +92,13 @@ describe('the ApdKeyPersonForm component', () => {
         .findWhere(
           c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes'
         )
-        .prop('onChange')();
+        .simulate('change');
 
-      expect(store.getActions()).toEqual([
-        {
-          type: EDIT_APD,
-          path: '/keyPersonnel/1/hasCosts',
-          value: true
-        },
-        {
-          type: UPDATE_BUDGET,
-          state: 'old state'
-        }
-      ]);
+      expect(props.setHasCosts).toHaveBeenCalledWith(true, 1);
     });
 
     it('handles changing cost for FFY', () => {
-      const hasCostsForm = mount(
+      const hasCostsForm = shallow(
         component
           .findWhere(
             c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes'
@@ -125,19 +109,20 @@ describe('the ApdKeyPersonForm component', () => {
       hasCostsForm
         .find('DollarField')
         .first()
-        .prop('onChange')({ target: { value: 9000 } });
+        .simulate('change', { target: { value: 9000 } });
 
-      expect(store.getActions()).toEqual([
-        {
-          type: EDIT_APD,
-          path: '/keyPersonnel/1/costs/1992',
-          value: 9000
-        },
-        {
-          type: UPDATE_BUDGET,
-          state: 'old state'
-        }
-      ]);
+      expect(props.setCost(9000, 1, 1992));
+    });
+  });
+
+  it('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setCost: setKeyPersonCost,
+      setEmail: setKeyPersonEmail,
+      setHasCosts: setKeyPersonHasCosts,
+      setName: setKeyPersonName,
+      setRole: setKeyPersonRole,
+      setTime: setKeyPersonPercentTime
     });
   });
 });

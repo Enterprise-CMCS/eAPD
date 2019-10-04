@@ -1,559 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the Activities component renders correctly 1`] = `
-<Provider
-  store={
-    Object {
-      "clearActions": [Function],
-      "dispatch": [Function],
-      "getActions": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-    }
-  }
+<Connect(ConnectedWaypoint)
+  id="activities-overview"
 >
-  <All>
+  <Section
+    id="activities"
+    isNumbered={true}
+    resource="activities"
+  >
     <Connect(ConnectedWaypoint)
-      id="activities-overview"
+      id="activities-list"
+    />
+    <Subsection
+      headerClassName={null}
+      id="activities-list"
+      nested={false}
+      open={true}
+      resource="activities.list"
     >
-      <ConnectedWaypoint
-        id="activities-overview"
-        scrollTo={[Function]}
-      >
-        <Waypoint
-          bottomOffset="90%"
-          debug={false}
-          fireOnRapidScroll={true}
-          horizontal={false}
-          onEnter={[Function]}
-          onLeave={[Function]}
-          onPositionChange={[Function]}
-          topOffset="0px"
-        >
-          <span
-            style={
-              Object {
-                "fontSize": 0,
-              }
-            }
-          />
-        </Waypoint>
-        <Section
-          id="activities"
-          isNumbered={true}
-          resource="activities"
-        >
-          <section
-            className="numbered-section"
-            id="activities"
-          >
-            <h2
-              className="ds-h2"
-            >
-              Program Activities
-            </h2>
-            <span
-              className="ds-text--lead"
-            >
-              Explain the goals, timelines, and costs associated with each activity. Activities are narrowly scoped bodies of work that comprise the APD as described within the Program Overview section.
-            </span>
-            <Connect(ConnectedWaypoint)
-              id="activities-list"
-            >
-              <ConnectedWaypoint
-                id="activities-list"
-                scrollTo={[Function]}
-              >
-                <Waypoint
-                  bottomOffset="90%"
-                  debug={false}
-                  fireOnRapidScroll={true}
-                  horizontal={false}
-                  onEnter={[Function]}
-                  onLeave={[Function]}
-                  onPositionChange={[Function]}
-                  topOffset="0px"
-                >
-                  <span
-                    style={
-                      Object {
-                        "fontSize": 0,
-                      }
-                    }
-                  />
-                </Waypoint>
-              </ConnectedWaypoint>
-            </Connect(ConnectedWaypoint)>
-            <Subsection
-              headerClassName={null}
-              id="activities-list"
-              nested={false}
-              open={true}
-              resource="activities.list"
-            >
-              <h3
-                className=" subsection--title ds-h3"
-                id="activities-list"
-              >
-                Activity List
-              </h3>
-              <Instruction
-                args={null}
-                headingDisplay={
-                  Object {
-                    "className": "ds-h3",
-                    "level": "h3",
-                  }
-                }
-                reverse={false}
-                source="activities.list.instruction"
-              >
-                <div>
-                  <div
-                    className="visibility--screen"
-                  >
-                    <p
-                      className="ds-u-font-weight--bold"
-                    >
-                      List as many activities as necessary to cover all scope related to this APD.
-                    </p>
-                    <Md
-                      content="Examples of individual activities include: auditing, environmental scans, HIE registry development, CQM database development, data and analytics, HIE onboarding, etc."
-                      wrapper="p"
-                    >
-                      <p
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "Examples of individual activities include: auditing, environmental scans, HIE registry development, CQM database development, data and analytics, HIE onboarding, etc.",
-                          }
-                        }
-                      />
-                    </Md>
-                    <Md
-                      className="instruction-box"
-                      content="Program administration pertains to implementing the EHR Incentive program itself, including state and contractor costs associated with operating EHR incentive program and SLR enhancements/upgrades. All APDs must provide activity details for program administration."
-                      wrapper="p"
-                    >
-                      <p
-                        className="instruction-box"
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "Program administration pertains to implementing the EHR Incentive program itself, including state and contractor costs associated with operating EHR incentive program and SLR enhancements/upgrades. All APDs must provide activity details for program administration.",
-                          }
-                        }
-                      />
-                    </Md>
-                  </div>
-                </div>
-              </Instruction>
-              <NameAndFundingSourceReview
-                disableExpand={true}
-                expand={[Function]}
-                index={-1}
-                item="activity 1"
-                onDeleteClick={null}
-              >
-                <StandardReview
-                  editHref={null}
-                  heading="1. undefined"
-                  headingLevel={4}
-                  onDeleteClick={null}
-                  onEditClick={null}
-                >
-                  <Review
-                    editContent={
-                      <div
-                        className="nowrap visibility--screen"
-                      />
-                    }
-                    editText="Edit"
-                    heading="1. undefined"
-                    headingLevel={4}
-                  >
-                    <div
-                      className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
-                    >
-                      <div
-                        className="ds-u-margin-right--2"
-                      >
-                        <h4
-                          className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
-                        >
-                          1. undefined
-                        </h4>
-                        <div
-                          className="ds-c-review__body"
-                        >
-                          <strong>
-                            Program type:
-                          </strong>
-                           
-                        </div>
-                      </div>
-                      <div
-                        className="nowrap visibility--screen"
-                      />
-                    </div>
-                  </Review>
-                </StandardReview>
-              </NameAndFundingSourceReview>
-              <FormAndReviewList
-                addButtonText="Add another activity"
-                allowDeleteAll={true}
-                className="ds-u-border-bottom--0"
-                collapsed={[Function]}
-                expanded={[Function]}
-                handleChange={[Function]}
-                list={
-                  Array [
-                    "activity 2",
-                    "activity 3",
-                  ]
-                }
-                noDataMessage={false}
-                onAddClick={[Function]}
-                onDeleteClick={[Function]}
-              >
-                <div
-                  className="form-and-review-list ds-u-border-bottom--0"
-                >
-                  <FormAndReviewItem
-                    collapsedComponent={[Function]}
-                    expandedComponent={[Function]}
-                    handleChange={[Function]}
-                    index={0}
-                    initialCollapsed={true}
-                    item="activity 2"
-                    onDeleteClick={[Function]}
-                  >
-                    <div
-                      className="form-and-review-list--item__collapsed"
-                    >
-                      <NameAndFundingSourceReview
-                        disableExpand={false}
-                        expand={[Function]}
-                        handleChange={[Function]}
-                        index={0}
-                        item="activity 2"
-                        onDeleteClick={[Function]}
-                      >
-                        <StandardReview
-                          editHref={null}
-                          heading="2. undefined"
-                          headingLevel={4}
-                          onDeleteClick={[Function]}
-                          onEditClick={[Function]}
-                        >
-                          <Review
-                            editContent={
-                              <div
-                                className="nowrap visibility--screen"
-                              >
-                                <Button
-                                  onClick={[Function]}
-                                  size="small"
-                                  type="button"
-                                  variation="transparent"
-                                >
-                                  Edit
-                                </Button>
-                                <React.Fragment>
-                                  |
-                                  <Button
-                                    onClick={[Function]}
-                                    size="small"
-                                    type="button"
-                                    variation="transparent"
-                                  >
-                                    Remove
-                                  </Button>
-                                </React.Fragment>
-                              </div>
-                            }
-                            editText="Edit"
-                            heading="2. undefined"
-                            headingLevel={4}
-                          >
-                            <div
-                              className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
-                            >
-                              <div
-                                className="ds-u-margin-right--2"
-                              >
-                                <h4
-                                  className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
-                                >
-                                  2. undefined
-                                </h4>
-                                <div
-                                  className="ds-c-review__body"
-                                >
-                                  <strong>
-                                    Program type:
-                                  </strong>
-                                   
-                                </div>
-                              </div>
-                              <div
-                                className="nowrap visibility--screen"
-                              >
-                                <Button
-                                  onClick={[Function]}
-                                  size="small"
-                                  type="button"
-                                  variation="transparent"
-                                >
-                                  <button
-                                    className="ds-c-button ds-c-button--transparent ds-c-button--small"
-                                    onClick={[Function]}
-                                    type="button"
-                                  >
-                                    Edit
-                                  </button>
-                                </Button>
-                                |
-                                <Button
-                                  onClick={[Function]}
-                                  size="small"
-                                  type="button"
-                                  variation="transparent"
-                                >
-                                  <button
-                                    className="ds-c-button ds-c-button--transparent ds-c-button--small"
-                                    onClick={[Function]}
-                                    type="button"
-                                  >
-                                    Remove
-                                  </button>
-                                </Button>
-                              </div>
-                            </div>
-                          </Review>
-                        </StandardReview>
-                      </NameAndFundingSourceReview>
-                    </div>
-                  </FormAndReviewItem>
-                  <FormAndReviewItem
-                    collapsedComponent={[Function]}
-                    expandedComponent={[Function]}
-                    handleChange={[Function]}
-                    index={1}
-                    initialCollapsed={true}
-                    item="activity 3"
-                    onDeleteClick={[Function]}
-                  >
-                    <div
-                      className="form-and-review-list--item__collapsed"
-                    >
-                      <NameAndFundingSourceReview
-                        disableExpand={false}
-                        expand={[Function]}
-                        handleChange={[Function]}
-                        index={1}
-                        item="activity 3"
-                        onDeleteClick={[Function]}
-                      >
-                        <StandardReview
-                          editHref={null}
-                          heading="3. undefined"
-                          headingLevel={4}
-                          onDeleteClick={[Function]}
-                          onEditClick={[Function]}
-                        >
-                          <Review
-                            editContent={
-                              <div
-                                className="nowrap visibility--screen"
-                              >
-                                <Button
-                                  onClick={[Function]}
-                                  size="small"
-                                  type="button"
-                                  variation="transparent"
-                                >
-                                  Edit
-                                </Button>
-                                <React.Fragment>
-                                  |
-                                  <Button
-                                    onClick={[Function]}
-                                    size="small"
-                                    type="button"
-                                    variation="transparent"
-                                  >
-                                    Remove
-                                  </Button>
-                                </React.Fragment>
-                              </div>
-                            }
-                            editText="Edit"
-                            heading="3. undefined"
-                            headingLevel={4}
-                          >
-                            <div
-                              className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
-                            >
-                              <div
-                                className="ds-u-margin-right--2"
-                              >
-                                <h4
-                                  className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
-                                >
-                                  3. undefined
-                                </h4>
-                                <div
-                                  className="ds-c-review__body"
-                                >
-                                  <strong>
-                                    Program type:
-                                  </strong>
-                                   
-                                </div>
-                              </div>
-                              <div
-                                className="nowrap visibility--screen"
-                              >
-                                <Button
-                                  onClick={[Function]}
-                                  size="small"
-                                  type="button"
-                                  variation="transparent"
-                                >
-                                  <button
-                                    className="ds-c-button ds-c-button--transparent ds-c-button--small"
-                                    onClick={[Function]}
-                                    type="button"
-                                  >
-                                    Edit
-                                  </button>
-                                </Button>
-                                |
-                                <Button
-                                  onClick={[Function]}
-                                  size="small"
-                                  type="button"
-                                  variation="transparent"
-                                >
-                                  <button
-                                    className="ds-c-button ds-c-button--transparent ds-c-button--small"
-                                    onClick={[Function]}
-                                    type="button"
-                                  >
-                                    Remove
-                                  </button>
-                                </Button>
-                              </div>
-                            </div>
-                          </Review>
-                        </StandardReview>
-                      </NameAndFundingSourceReview>
-                    </div>
-                  </FormAndReviewItem>
-                  <Button
-                    className="visibility--screen"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <button
-                      className="ds-c-button visibility--screen"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      Add another activity
-                    </button>
-                  </Button>
-                </div>
-              </FormAndReviewList>
-            </Subsection>
-            <Connect(ConnectedWaypoint)>
-              <ConnectedWaypoint
-                scrollTo={[Function]}
-              >
-                <Waypoint
-                  bottomOffset="90%"
-                  debug={false}
-                  fireOnRapidScroll={true}
-                  horizontal={false}
-                  onEnter={[Function]}
-                  onLeave={[Function]}
-                  onPositionChange={[Function]}
-                  topOffset="0px"
-                >
-                  <span
-                    style={
-                      Object {
-                        "fontSize": 0,
-                      }
-                    }
-                  />
-                </Waypoint>
-                <EntryDetails
-                  activity="activity 1"
-                  index={0}
-                />
-              </ConnectedWaypoint>
-            </Connect(ConnectedWaypoint)>
-            <Connect(ConnectedWaypoint)>
-              <ConnectedWaypoint
-                scrollTo={[Function]}
-              >
-                <Waypoint
-                  bottomOffset="90%"
-                  debug={false}
-                  fireOnRapidScroll={true}
-                  horizontal={false}
-                  onEnter={[Function]}
-                  onLeave={[Function]}
-                  onPositionChange={[Function]}
-                  topOffset="0px"
-                >
-                  <span
-                    style={
-                      Object {
-                        "fontSize": 0,
-                      }
-                    }
-                  />
-                </Waypoint>
-                <EntryDetails
-                  activity="activity 2"
-                  index={1}
-                />
-              </ConnectedWaypoint>
-            </Connect(ConnectedWaypoint)>
-            <Connect(ConnectedWaypoint)>
-              <ConnectedWaypoint
-                scrollTo={[Function]}
-              >
-                <Waypoint
-                  bottomOffset="90%"
-                  debug={false}
-                  fireOnRapidScroll={true}
-                  horizontal={false}
-                  onEnter={[Function]}
-                  onLeave={[Function]}
-                  onPositionChange={[Function]}
-                  topOffset="0px"
-                >
-                  <span
-                    style={
-                      Object {
-                        "fontSize": 0,
-                      }
-                    }
-                  />
-                </Waypoint>
-                <EntryDetails
-                  activity="activity 3"
-                  index={2}
-                />
-              </ConnectedWaypoint>
-            </Connect(ConnectedWaypoint)>
-          </section>
-        </Section>
-      </ConnectedWaypoint>
+      <NameAndFundingSourceReview
+        disableExpand={true}
+        expand={[Function]}
+        index={-1}
+        item={
+          Object {
+            "first": "activity",
+          }
+        }
+        onDeleteClick={null}
+      />
+      <FormAndReviewList
+        addButtonText="Add another activity"
+        allowDeleteAll={true}
+        className="ds-u-border-bottom--0"
+        collapsed={[Function]}
+        expanded={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(NameAndFundingSourceForm)",
+            "type": [Function],
+          }
+        }
+        list={
+          Array [
+            Object {
+              "second": "activity",
+            },
+            Object {
+              "third": "activity",
+            },
+          ]
+        }
+        noDataMessage={false}
+        onAddClick={[Function]}
+        onDeleteClick={[Function]}
+      />
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="key1"
+      key="key1"
+    >
+      <Connect(EntryDetails)
+        activityIndex={0}
+      />
     </Connect(ConnectedWaypoint)>
-  </All>
-</Provider>
+    <Connect(ConnectedWaypoint)
+      id="key2"
+      key="key2"
+    >
+      <Connect(EntryDetails)
+        activityIndex={1}
+      />
+    </Connect(ConnectedWaypoint)>
+    <Connect(ConnectedWaypoint)
+      id="key3"
+      key="key3"
+    >
+      <Connect(EntryDetails)
+        activityIndex={2}
+      />
+    </Connect(ConnectedWaypoint)>
+  </Section>
+</Connect(ConnectedWaypoint)>
 `;

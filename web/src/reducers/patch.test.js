@@ -63,6 +63,15 @@ describe('JSON patch reducer', () => {
         state: {
           apd: {
             data: {
+              activities: [
+                {
+                  contractorResources: [{ hourly: { data: {} }, years: {} }],
+                  costAllocation: {},
+                  expenses: [{ years: {} }],
+                  quarterlyFFP: {},
+                  statePersonnel: [{ years: {} }]
+                }
+              ],
               incentivePayments: {},
               keyPersonnel: [{ costs: {} }],
               years: []
@@ -97,6 +106,20 @@ describe('JSON patch reducer', () => {
         state: {
           apd: {
             data: {
+              activities: [
+                {
+                  contractorResources: [
+                    {
+                      hourly: { data: { '2019': 'this gets deleted' } },
+                      years: { '2019': 'this gets deleted' }
+                    }
+                  ],
+                  costAllocation: { '2019': 'this gets deleted' },
+                  expenses: [{ years: { '2019': 'this gets deleted' } }],
+                  quarterlyFFP: { '2019': 'this gets deleted' },
+                  statePersonnel: [{ years: { '2019': 'this gets deleted' } }]
+                }
+              ],
               incentivePayments: { '2019': 'this gets deleted' },
               keyPersonnel: [{ costs: { '2019': 'this gets deleted' } }],
               years: ['2019']

@@ -1,6 +1,7 @@
 import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
+import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import {
   setMedicaidDirectorEmail,
@@ -13,36 +14,30 @@ import {
   setMedicaidOfficeZip
 } from '../actions/editApd';
 import { t } from '../i18n';
+import { selectStateProfile } from '../reducers/apd.selectors';
+import { selectState } from '../reducers/user';
 import { STATES } from '../util';
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';
 
-const ApdStateProfile = () => {
-  const dispatch = useDispatch();
+const ApdStateProfile = ({
+  defaultStateID,
+  setEmail,
+  setName,
+  setPhone,
+  setAddress1,
+  setAddress2,
+  setCity,
+  setState,
+  setZip,
+  stateProfile
+}) => {
+  const { medicaidDirector, medicaidOffice } = stateProfile;
 
   const handleChange = action => ({ target: { value } }) => {
-    dispatch(action(value));
+    action(value);
   };
-
-  const {
-    defaultStateID,
-    stateProfile: { medicaidDirector, medicaidOffice }
-  } = useSelector(
-    ({
-      apd: {
-        data: { stateProfile }
-      },
-      user: {
-        data: {
-          state: { id }
-        }
-      }
-    }) => ({
-      defaultStateID: id.toUpperCase(),
-      stateProfile
-    })
-  );
 
   return (
     <Fragment>
@@ -54,19 +49,19 @@ const ApdStateProfile = () => {
           name="apd-state-profile-mdname"
           label={t(`${dirTRoot}.labels.name`)}
           value={medicaidDirector.name}
-          onChange={handleChange(setMedicaidDirectorName)}
+          onChange={handleChange(setName)}
         />
         <TextField
           name="apd-state-profile-mdemail"
           label={t(`${dirTRoot}.labels.email`)}
           value={medicaidDirector.email}
-          onChange={handleChange(setMedicaidDirectorEmail)}
+          onChange={handleChange(setEmail)}
         />
         <TextField
           name="apd-state-profile-mdphone"
           label={t(`${dirTRoot}.labels.phone`)}
           value={medicaidDirector.phone}
-          onChange={handleChange(setMedicaidDirectorPhoneNumber)}
+          onChange={handleChange(setPhone)}
         />
       </fieldset>
 
@@ -78,14 +73,14 @@ const ApdStateProfile = () => {
           name="apd-state-profile-addr1"
           label={t(`${offTRoot}.labels.address1`)}
           value={medicaidOffice.address1}
-          onChange={handleChange(setMedicaidOfficeAddress1)}
+          onChange={handleChange(setAddress1)}
         />
         <TextField
           name="apd-state-profile-addr2"
           label={t(`${offTRoot}.labels.address2`)}
           hint="Optional"
           value={medicaidOffice.address2}
-          onChange={handleChange(setMedicaidOfficeAddress2)}
+          onChange={handleChange(setAddress2)}
         />
         <div className="ds-l-row">
           <TextField
@@ -93,7 +88,7 @@ const ApdStateProfile = () => {
             label={t(`${offTRoot}.labels.city`)}
             value={medicaidOffice.city}
             className="ds-l-col--6"
-            onChange={handleChange(setMedicaidOfficeCity)}
+            onChange={handleChange(setCity)}
           />
           <div className="ds-u-clearfix ds-l-col--6">
             <FormLabel component="label">
@@ -103,7 +98,7 @@ const ApdStateProfile = () => {
               name="apd-state-profile-state"
               label={t(`${offTRoot}.labels.state`)}
               value={medicaidOffice.state || defaultStateID}
-              onChange={handleChange(setMedicaidOfficeState)}
+              onChange={handleChange(setState)}
             >
               {STATES.map(({ id, name }) => (
                 <option key={name} value={id.toUpperCase()}>
@@ -118,11 +113,48 @@ const ApdStateProfile = () => {
           label={t(`${offTRoot}.labels.zip`)}
           value={medicaidOffice.zip}
           mask="zip"
-          onChange={handleChange(setMedicaidOfficeZip)}
+          onChange={handleChange(setZip)}
         />
       </fieldset>
     </Fragment>
   );
 };
 
-export default ApdStateProfile;
+ApdStateProfile.propTypes = {
+  defaultStateID: PropTypes.string.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired,
+  setPhone: PropTypes.func.isRequired,
+  setAddress1: PropTypes.func.isRequired,
+  setAddress2: PropTypes.func.isRequired,
+  setCity: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
+  setZip: PropTypes.func.isRequired,
+  stateProfile: PropTypes.shape({
+    medicaidDirector: PropTypes.object,
+    medicaidOffice: PropTypes.object
+  }).isRequired
+};
+
+const mapStateToProps = state => ({
+  defaultStateID: selectState(state).id,
+  stateProfile: selectStateProfile(state)
+});
+
+const mapDispatchToProps = {
+  setEmail: setMedicaidDirectorEmail,
+  setName: setMedicaidDirectorName,
+  setPhone: setMedicaidDirectorPhoneNumber,
+  setAddress1: setMedicaidOfficeAddress1,
+  setAddress2: setMedicaidOfficeAddress2,
+  setCity: setMedicaidOfficeCity,
+  setState: setMedicaidOfficeState,
+  setZip: setMedicaidOfficeZip
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdStateProfile);
+
+export { ApdStateProfile as plain, mapStateToProps, mapDispatchToProps };

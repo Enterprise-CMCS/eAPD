@@ -1,7 +1,7 @@
 import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { t } from '../../i18n';
 import Choice from '../../components/Choice';
@@ -23,20 +23,24 @@ const tRoot = 'apd.stateProfile.keyPersonnel';
 const PersonForm = ({
   index,
   item: { costs, email, hasCosts, name, percentTime, position },
+  setCost,
+  setEmail,
+  setHasCosts,
+  setName,
+  setRole,
+  setTime,
   years
 }) => {
-  const dispatch = useDispatch();
-
   const handleChange = action => ({ target: { value } }) => {
-    dispatch(action(value, index));
+    action(value, index);
   };
 
-  const setHasCosts = newHasCosts => () => {
-    dispatch(setKeyPersonHasCosts(newHasCosts, index));
+  const setPersonHasCosts = newHasCosts => () => {
+    setHasCosts(newHasCosts, index);
   };
 
   const setCostForYear = year => ({ target: { value } }) => {
-    dispatch(setKeyPersonCost(value, index, year));
+    setCost(value, index, year);
   };
 
   const primary = index === 0;
@@ -56,26 +60,26 @@ const PersonForm = ({
         name={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
         value={name}
-        onChange={handleChange(setKeyPersonName)}
+        onChange={handleChange(setName)}
       />
       <TextField
         name={`apd-state-profile-pocemail${index}`}
         label={t(`${tRoot}.labels.email`)}
         value={email}
-        onChange={handleChange(setKeyPersonEmail)}
+        onChange={handleChange(setEmail)}
       />
       <TextField
         name={`apd-state-profile-pocposition${index}`}
         label={t(`${tRoot}.labels.position`)}
         value={position}
-        onChange={handleChange(setKeyPersonRole)}
+        onChange={handleChange(setRole)}
       />
       <PercentField
         name={`apd-state-profile-pocpercentTime${index}`}
         label={t(`${tRoot}.labels.percentTime`)}
         value={percentTime || 0}
         size="small"
-        onChange={handleChange(setKeyPersonPercentTime)}
+        onChange={handleChange(setTime)}
       />
 
       <fieldset className="ds-c-fieldset">
@@ -85,7 +89,7 @@ const PersonForm = ({
           name={`apd-state-profile-hascosts-no${index}`}
           value="no"
           checked={!hasCosts}
-          onChange={setHasCosts(false)}
+          onChange={setPersonHasCosts(false)}
         >
           No
         </Choice>
@@ -94,7 +98,7 @@ const PersonForm = ({
           name={`apd-state-profile-hascosts-yes${index}`}
           value="yes"
           checked={hasCosts}
-          onChange={setHasCosts(true)}
+          onChange={setPersonHasCosts(true)}
           checkedChildren={
             <div className="ds-c-choice__checkedChild ds-l-form-row">
               {years.map(ffy => (
@@ -134,7 +138,27 @@ PersonForm.propTypes = {
       .isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
+  setCost: PropTypes.func.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  setHasCosts: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired,
+  setRole: PropTypes.func.isRequired,
+  setTime: PropTypes.func.isRequired,
   years: PropTypes.array.isRequired
 };
 
-export default PersonForm;
+const mapDispatchToProps = {
+  setCost: setKeyPersonCost,
+  setEmail: setKeyPersonEmail,
+  setHasCosts: setKeyPersonHasCosts,
+  setName: setKeyPersonName,
+  setRole: setKeyPersonRole,
+  setTime: setKeyPersonPercentTime
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(PersonForm);
+
+export { PersonForm as plain, mapDispatchToProps };
