@@ -19,7 +19,6 @@ import {
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
   REMOVE_APD_KEY_PERSON,
-  SELECT_APD,
   SET_SELECT_APD_ON_LOAD,
   SUBMIT_APD_SUCCESS,
   UPDATE_APD,
@@ -33,6 +32,7 @@ import {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } from '../actions/editApd';
+import { SELECT_APD } from '../actions/app';
 import { defaultAPDYearOptions, generateKey } from '../util';
 
 export const getPatchesToAddYear = (state, year) => {
@@ -206,7 +206,7 @@ export const getKeyPersonnel = (years = []) => ({
   expanded: true,
   hasCosts: false,
   isPrimary: false,
-  percentTime: 0,
+  percentTime: '0',
   name: '',
   position: '',
   key: generateKey(),

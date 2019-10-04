@@ -10,7 +10,9 @@ import { Subsection } from '../../components/Section';
 
 const CostAllocate = props => {
   const { activity, updateActivity } = props;
-  const { costAllocationDesc, otherFundingDesc } = activity;
+  const {
+    costAllocationNarrative: { methodology, otherSources }
+  } = activity;
 
   const sync = name => html => {
     updateActivity(activity.key, { [name]: html });
@@ -27,7 +29,7 @@ const CostAllocate = props => {
           }}
         />
         <RichText
-          content={costAllocationDesc}
+          content={methodology}
           onSync={sync('costAllocationDesc')}
           editorClassName="rte-textarea-l"
         />
@@ -42,7 +44,7 @@ const CostAllocate = props => {
           }}
         />
         <RichText
-          content={otherFundingDesc}
+          content={otherSources}
           onSync={sync('otherFundingDesc')}
           editorClassName="rte-textarea-l"
         />

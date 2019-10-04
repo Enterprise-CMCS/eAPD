@@ -19,8 +19,9 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { SAVE_APD_SUCCESS, SELECT_APD } from '../actions/apd';
+import { SAVE_APD_SUCCESS } from '../actions/apd';
 import { ADD_APD_YEAR, REMOVE_APD_YEAR } from '../actions/editApd';
+import { SELECT_APD } from '../actions/app';
 
 import {
   arrToObj,
@@ -54,7 +55,7 @@ const newStatePerson = years => ({
   key: generateKey(),
   initialCollapsed: false,
   title: '',
-  desc: '',
+  description: '',
   years: arrToObj(years, statePersonDefaultYear())
 });
 
@@ -64,7 +65,7 @@ export const newContractor = years => ({
   key: generateKey(),
   initialCollapsed: false,
   name: '',
-  desc: '',
+  description: '',
   start: '',
   end: '',
   files: [],
@@ -82,7 +83,7 @@ const newExpense = years => ({
   key: generateKey(),
   initialCollapsed: false,
   category: 'Hardware, software, and licensing',
-  desc: '',
+  description: '',
   years: arrToObj(years, expenseDefaultYear())
 });
 
@@ -113,6 +114,10 @@ export const newActivity = ({
   alternatives: '',
   contractorResources: [newContractor(years)],
   costAllocation: arrToObj(years, costAllocationEntry()),
+  costAllocationNarrative: {
+    methodology: '',
+    otherSources: ''
+  },
   costAllocationDesc: '',
   description: '',
   expenses: [newExpense(years)],

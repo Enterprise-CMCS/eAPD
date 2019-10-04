@@ -26,7 +26,7 @@ import {
 
 const ContractorResourceForm = ({
   index,
-  item: { desc, end, hourly, key, name, start, totalCost, years },
+  item: { description, end, hourly, key, name, start, totalCost, years },
   setDescription,
   setEndDate,
   setIsHourly,
@@ -82,7 +82,7 @@ const ContractorResourceForm = ({
         label="Description of Services"
         name="contractor-description"
         rows={5}
-        value={desc}
+        value={description}
         onChange={getHandler(setDescription)}
       />
       <FormLabel>Contract Term</FormLabel>
@@ -187,7 +187,7 @@ const ContractorResourceForm = ({
 ContractorResourceForm.propTypes = {
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
-    desc: PropTypes.string,
+    description: PropTypes.string,
     end: PropTypes.string,
     hourly: PropTypes.object,
     key: PropTypes.string,

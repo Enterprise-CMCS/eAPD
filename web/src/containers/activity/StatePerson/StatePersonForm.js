@@ -7,7 +7,7 @@ import TextArea from '../../../components/TextArea';
 import NumberField from '../../../components/NumberField';
 
 const StatePersonForm = ({
-  item: { desc, title, years },
+  item: { description, title, years },
   handleEditCost,
   handleEditFTE,
   handleEditPersonDesc,
@@ -48,7 +48,7 @@ const StatePersonForm = ({
         label="Description"
         rows={5}
         name="desc"
-        value={desc}
+        value={description}
         onChange={editDesc}
       />
       {Object.entries(years).map(([year, { amt, perc }]) => (
@@ -84,7 +84,7 @@ StatePersonForm.propTypes = {
   handleEditPersonTitle: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
-    desc: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired
