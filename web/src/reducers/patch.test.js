@@ -7,7 +7,7 @@ import {
   REMOVE_APD_YEAR
 } from '../actions/editApd';
 
-import reducer, { getHasChanges } from './patch';
+import reducer from './patch';
 
 describe('JSON patch reducer', () => {
   it('provides an initial state', () => {
@@ -160,15 +160,5 @@ describe('JSON patch reducer', () => {
     expect(
       reducer([], { type: REMOVE_APD_ITEM, path: '/path/to/remove' })
     ).toEqual([{ op: 'remove', path: '/path/to/remove' }]);
-  });
-});
-
-describe('JSON patch selector', () => {
-  it('returns false if there are no pending patches', () => {
-    expect(getHasChanges({ patch: [] })).toEqual(false);
-  });
-
-  it('returns true if there are pending patches', () => {
-    expect(getHasChanges({ patch: [''] })).toEqual(true);
   });
 });

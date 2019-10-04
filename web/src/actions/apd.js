@@ -1,5 +1,7 @@
 import { push } from 'connected-react-router';
 
+import { selectApdData } from '../reducers/apd.selectors';
+import { selectHasChanges, selectPatches } from '../reducers/patch.selectors';
 import { getIsAdmin } from '../reducers/user.selector';
 import axios from '../util/api';
 import { fromAPI, toAPI } from '../util/serialization/apd';
@@ -149,72 +151,78 @@ export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
   return null;
 };
 
-export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
-  const {
-    apd: { data: updatedApd },
-    activities,
-    dirty
-  } = state();
+export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, getState) => {
+  const state = getState();
+  const hasChanges = selectHasChanges(state);
 
-  if (!dirty.dirty) {
+  // const {
+  //   apd: { data: updatedApd },
+  //   activities,
+  //   dirty
+  // } = state();
+
+  if (!hasChanges) {
     return Promise.resolve();
   }
 
   dispatch(requestSave());
 
-  const apd = serialize(updatedApd, activities);
+  const { id: apdID } = selectApdData(state);
+  const patches = selectPatches(state);
 
-  // These are the fields we want to remove if they aren't dirty.
-  const filterAPDFields = [
-    'federalCitations',
-    'incentivePayments',
-    'narrativeHIE',
-    'narrativeHIT',
-    'narrativeMMIS',
-    'programOverview',
-    'previousActivityExpenses',
-    'previousActivitySummary',
-    'stateProfile'
-  ];
-  const filterActivityFields = [
-    'contractorResources',
-    'costAllocation',
-    'costAllocationNarrative',
-    'expenses',
-    'goals',
-    'schedule',
-    'standardsAndConditions',
-    'statePersonnel',
-    'quarterlyFFP'
-  ];
+  // const apd = serialize(updatedApd, activities);
 
-  filterAPDFields.forEach(field => {
-    if (!dirty.data.apd[field]) {
-      delete apd[field];
-    }
-  });
+  // // These are the fields we want to remove if they aren't dirty.
+  // const filterAPDFields = [
+  //   'federalCitations',
+  //   'incentivePayments',
+  //   'narrativeHIE',
+  //   'narrativeHIT',
+  //   'narrativeMMIS',
+  //   'programOverview',
+  //   'previousActivityExpenses',
+  //   'previousActivitySummary',
+  //   'stateProfile'
+  // ];
+  // const filterActivityFields = [
+  //   'contractorResources',
+  //   'costAllocation',
+  //   'costAllocationNarrative',
+  //   'expenses',
+  //   'goals',
+  //   'schedule',
+  //   'standardsAndConditions',
+  //   'statePersonnel',
+  //   'quarterlyFFP'
+  // ];
 
-  for (let i = apd.activities.length - 1; i >= 0; i -= 1) {
-    const activity = apd.activities[i];
-    if (!dirty.data.activities.byKey[activity.key]) {
-      // If this activity isn't dirty, strip it from the list to save,
-      // but then add just its ID back - this prevents it from being
-      // deleted by the API synchronization.
-      apd.activities.splice(i, 1);
-      apd.activities.push({ id: activity.id });
-    } else {
-      const dirtyActivity = dirty.data.activities.byKey[activity.key];
-      // Get rid of any activity fields that aren't dirty.
-      filterActivityFields.forEach(field => {
-        if (!dirtyActivity[field]) {
-          delete activity[field];
-        }
-      });
-    }
-  }
+  // filterAPDFields.forEach(field => {
+  //   if (!dirty.data.apd[field]) {
+  //     delete apd[field];
+  //   }
+  // });
+
+  // for (let i = apd.activities.length - 1; i >= 0; i -= 1) {
+  //   const activity = apd.activities[i];
+  //   if (!dirty.data.activities.byKey[activity.key]) {
+  //     // If this activity isn't dirty, strip it from the list to save,
+  //     // but then add just its ID back - this prevents it from being
+  //     // deleted by the API synchronization.
+  //     apd.activities.splice(i, 1);
+  //     apd.activities.push({ id: activity.id });
+  //   } else {
+  //     const dirtyActivity = dirty.data.activities.byKey[activity.key];
+  //     // Get rid of any activity fields that aren't dirty.
+  //     filterActivityFields.forEach(field => {
+  //       if (!dirtyActivity[field]) {
+  //         delete activity[field];
+  //       }
+  //     });
+  //   }
+  // }
 
   return axios
-    .put(`/apds/${updatedApd.id}`, apd)
+    .patch(`/apds/${apdID}`, patches)
     .then(res => {
       dispatch(saveSuccess(res.data));
       return res.data;

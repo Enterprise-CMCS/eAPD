@@ -92,5 +92,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
-
-export const getHasChanges = ({ patch }) => patch.length > 0;
