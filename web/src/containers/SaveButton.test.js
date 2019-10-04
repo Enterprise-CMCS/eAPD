@@ -80,19 +80,17 @@ describe('save button component', () => {
 
   test('maps state to props', () => {
     const state = {
-      dirty: {
-        dirty: 'dirty state'
-      },
       errors: {
         saveApd: 'save apd error'
       },
+      patch: [],
       working: {
         saveApd: 'save apd working'
       }
     };
 
     expect(mapStateToProps(state)).toEqual({
-      dirty: 'dirty state',
+      dirty: false,
       error: 'save apd error',
       working: 'save apd working'
     });

@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import stickybits from 'stickybits';
 
 import { saveApd } from '../actions/apd';
-import { getIsDirty } from '../reducers/dirty';
 import { getSaveApdError } from '../reducers/errors';
+import { selectHasChanges } from '../reducers/patch.selectors';
 import { getSaveApdWorking } from '../reducers/working';
 
 const getButtonContent = (dirty, working) => {
@@ -115,7 +115,7 @@ SaveButton.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  dirty: getIsDirty(state),
+  dirty: selectHasChanges(state),
   error: getSaveApdError(state),
   working: getSaveApdWorking(state)
 });
