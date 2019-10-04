@@ -7,9 +7,9 @@ import { updateActivity as updateActivityAction } from '../../actions/activities
 import Instruction from '../../components/Instruction';
 import RichText from '../../components/RichText';
 import { Subsection } from '../../components/Section';
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-const CostAllocate = props => {
-  const { activity, updateActivity } = props;
+const CostAllocate = ({ activity, updateActivity }) => {
   const { costAllocationDesc, otherFundingDesc } = activity;
 
   const sync = name => html => {
@@ -58,9 +58,11 @@ CostAllocate.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
-  activity: byKey[aKey]
-});
+export const mapStateToProps = (state, { activityIndex }) => {
+  return {
+    activity: selectActivityByIndex(state, { activityIndex })
+  };
+};
 
 export const mapDispatchToProps = {
   updateActivity: updateActivityAction

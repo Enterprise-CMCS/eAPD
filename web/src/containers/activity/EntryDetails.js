@@ -82,7 +82,7 @@ const EntryDetails = ({ activity, index }) => {
           <Schedule aKey={activity.key} />
           <Costs aKey={activity.key} />
           <ContractorResources activityIndex={index} />
-          <CostAllocate aKey={activity.key} />
+          <CostAllocate activityIndex={index} aKey={activity.key} />
           <StandardsAndConditions aKey={activity.key} />
           <Button variation="primary" onClick={() => setCollapsed(true)}>
             Done
