@@ -2,10 +2,10 @@ import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
-import u from 'updeep';
 
 import * as actions from './apd';
 import * as appActions from './app';
+import { UPDATE_BUDGET } from './budget';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
@@ -122,7 +122,7 @@ describe('apd actions', () => {
 
     const expectedActions = [
       { type: appActions.SELECT_APD, apd: 'deserialized apd' },
-      { type: actions.UPDATE_BUDGET, state },
+      { type: UPDATE_BUDGET, state },
       { type: 'FAKE_PUSH', pushRoute: '/apd' }
     ];
 
@@ -178,7 +178,7 @@ describe('apd actions', () => {
         { type: actions.CREATE_APD_REQUEST },
         { type: actions.CREATE_APD_SUCCESS, data: apd },
         { type: appActions.SELECT_APD, apd },
-        { type: actions.UPDATE_BUDGET, state },
+        { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: '/apd' }
       ];
 
@@ -232,17 +232,6 @@ describe('apd actions', () => {
     });
   });
 
-  it('updateBudget should create UPDATE_BUDGET action', () => {
-    const state = { this: 'is', my: 'state ' };
-    const store = mockStore(state);
-
-    const expectedActions = [{ type: actions.UPDATE_BUDGET, state }];
-
-    store.dispatch(actions.updateBudget());
-
-    expect(store.getActions()).toEqual(expectedActions);
-  });
-
   describe('update APD', () => {
     it('creates UPDATE_APD action and does not update the budget if the APD years did not change', () => {
       const store = mockStore({});
@@ -270,7 +259,7 @@ describe('apd actions', () => {
           updates
         },
         {
-          type: actions.UPDATE_BUDGET,
+          type: UPDATE_BUDGET,
           state: {}
         }
       ];

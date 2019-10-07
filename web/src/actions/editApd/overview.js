@@ -1,5 +1,5 @@
 import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from './symbols';
-import { updateBudget } from '../apd';
+import { updateBudget } from '../budget';
 
 /**
  * Add a fiscal year to the APD

@@ -4,12 +4,13 @@ import sinon from 'sinon';
 
 import * as actions from './activities';
 import * as apdActions from './apd';
+import { UPDATE_BUDGET } from './budget';
 
 const mockStore = configureStore([thunk]);
 
 describe('activities actions', () => {
   const updatedBudgetAction = state => ({
-    type: apdActions.UPDATE_BUDGET,
+    type: UPDATE_BUDGET,
     state
   });
 
@@ -36,7 +37,7 @@ describe('activities actions', () => {
         type: actions.ADD_ACTIVITY,
         years: 'years'
       },
-      { type: apdActions.UPDATE_BUDGET, state },
+      { type: UPDATE_BUDGET, state },
       { type: actions.ADD_ACTIVITY_DIRTY, data: newActivity }
     ];
 
@@ -161,7 +162,7 @@ describe('activities actions', () => {
 
     const expectedActions = [
       { type: actions.UPDATE_ACTIVITY, key: 'activity key', updates },
-      { type: apdActions.UPDATE_BUDGET, state }
+      { type: UPDATE_BUDGET, state }
     ];
 
     store.dispatch(actions.updateActivity('activity key', updates, true));
@@ -229,7 +230,7 @@ describe('activities actions', () => {
         type: actions.TOGGLE_ACTIVITY_CONTRACTOR_HOURLY,
         ...payload
       },
-      { type: apdActions.UPDATE_BUDGET, state }
+      { type: UPDATE_BUDGET, state }
     ];
 
     store.dispatch(

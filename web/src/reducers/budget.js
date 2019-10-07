@@ -1,4 +1,4 @@
-import { UPDATE_BUDGET } from '../actions/apd';
+import { UPDATE_BUDGET } from '../actions/budget';
 import { arrToObj } from '../util';
 import roundedPercents from '../util/roundedPercents';
 

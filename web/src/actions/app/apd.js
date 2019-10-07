@@ -1,8 +1,8 @@
 import { push } from 'connected-react-router';
 
 import { SELECT_APD } from './symbols';
-import { updateBudget } from '../apd';
-import { EDIT_APD } from '../editApd';
+import { updateBudget } from '../budget';
+import { EDIT_APD } from '../editApd/symbols';
 import axios from '../../util/api';
 import { fromAPI, initialAssurances } from '../../util/serialization/apd';
 
