@@ -3,18 +3,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CostAllocateFFP from './CostAllocateFFP';
-import { updateActivity as updateActivityAction } from '../../actions/activities';
+import {setCostAllocationMethodology, setCostAllocationOtherFunding} from '../../actions/editActivity'
 import Instruction from '../../components/Instruction';
 import RichText from '../../components/RichText';
 import { Subsection } from '../../components/Section';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-const CostAllocate = ({ activity, updateActivity }) => {
+const CostAllocate = ({ activity, activityIndex, setMethodology, updateActivity }) => {
   const { costAllocationDesc, otherFundingDesc } = activity;
-
-  const sync = name => html => {
-    updateActivity(activity.key, { [name]: html });
-  };
+  const syncMethodology = html => setMethodology(activityIndex, html);
+  const syncOtherFunding = html => setOtherFunding(activityIndex, html);
 
   return (
     <Subsection resource="activities.costAllocate" nested>
@@ -28,7 +26,7 @@ const CostAllocate = ({ activity, updateActivity }) => {
         />
         <RichText
           content={costAllocationDesc}
-          onSync={sync('costAllocationDesc')}
+          onSync={syncMethodology}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -43,7 +41,7 @@ const CostAllocate = ({ activity, updateActivity }) => {
         />
         <RichText
           content={otherFundingDesc}
-          onSync={sync('otherFundingDesc')}
+          onSync={syncOtherFunding}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -55,7 +53,9 @@ const CostAllocate = ({ activity, updateActivity }) => {
 
 CostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  setMethodology: PropTypes.func.isRequired,
+  setOtherFunding: PropTypes.func.isRequired
 };
 
 export const mapStateToProps = (state, { activityIndex }) => {
@@ -65,7 +65,8 @@ export const mapStateToProps = (state, { activityIndex }) => {
 };
 
 export const mapDispatchToProps = {
-  updateActivity: updateActivityAction
+  setMethodology: setCostAllocationMethodology,
+  setOtherFunding: setCostAllocationOtherFunding
 };
 
 export { CostAllocate as CostAllocateRaw };
