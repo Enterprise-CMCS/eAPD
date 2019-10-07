@@ -428,10 +428,7 @@ jobs:
   # ===== Shared jobs =====
   # These all depend on "install dependencies" running first.
 
-  # Uses snyk to scan the installed dependencies for known vulnerabilities.
-  # Using the CLI instead of the web app means it scans actually-installed
-  # dependencies instead of "potentially-installed" dependencies, as inferred
-  # from the package.json file.
+  # Uses npm audit to scan the installed dependencies for known vulnerabilities.
   dependency vulnerability scan:
     parameters:
       path:
@@ -447,8 +444,7 @@ jobs:
           name: vulnerability scan
           working_directory: ~/project/<< parameters.path >>
           command: |
-            npx snyk auth $SNYK_TOKEN
-            npx snyk test
+            npm audit
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
