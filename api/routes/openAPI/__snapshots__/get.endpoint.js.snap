@@ -23,25 +23,31 @@ Object {
                   "format": "date-time",
                   "type": "string",
                 },
-                "hourlyData": Object {
-                  "items": Object {
-                    "properties": Object {
-                      "hours": Object {
-                        "description": "Number of hours this contractor works/ed",
-                        "type": "number",
-                      },
-                      "rates": Object {
-                        "description": "Hourly rate for this contractor",
-                        "type": "number",
-                      },
-                      "year": Object {
-                        "description": "Year this hourly rate applies to",
-                        "type": "string",
+                "hourly": Object {
+                  "properties": Object {
+                    "data": Object {
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "properties": Object {
+                            "hours": Object {
+                              "description": "Number of hours the contractor is expected to work for the given federal fiscal year",
+                              "type": "number",
+                            },
+                            "rate": Object {
+                              "description": "Contractor hourly rate for the given federal fiscal year",
+                              "type": "number",
+                            },
+                          },
+                          "type": "object",
+                        },
                       },
                     },
-                    "type": "object",
+                    "useHourly": Object {
+                      "description": "Whether to use hourly rates for this contractor",
+                      "type": "boolean",
+                    },
                   },
-                  "type": "array",
+                  "type": "object",
                 },
                 "name": Object {
                   "description": "Name of the contractor resource",
@@ -56,26 +62,15 @@ Object {
                   "description": "Contractor resource total cost",
                   "type": "number",
                 },
-                "useHourly": Object {
-                  "description": "Whether to use hourly rates for this contractor",
-                  "type": "boolean",
-                },
                 "years": Object {
-                  "items": Object {
-                    "description": "Details of each year the contractor resource will be working",
-                    "properties": Object {
-                      "cost": Object {
-                        "description": "Contractor resource cost of the year",
-                        "type": "number",
-                      },
-                      "year": Object {
-                        "description": "Year this detail applies to",
-                        "type": "string",
-                      },
+                  "description": "Details of each year the contractor resource will be working",
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{4}$": Object {
+                      "description": "Contractor resource cost of the year",
+                      "type": "number",
                     },
-                    "type": "object",
                   },
-                  "type": "array",
                 },
               },
               "type": "object",
@@ -83,28 +78,31 @@ Object {
             "type": "array",
           },
           "costAllocation": Object {
-            "items": Object {
-              "properties": Object {
-                "federalPercent": Object {
-                  "description": "Federal share for this activity for this year, from 0 to 1",
-                  "type": "number",
+            "type": "object",
+            "x-patternProperties": Object {
+              "^[0-9]{4}$": Object {
+                "properties": Object {
+                  "ffp": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "description": "Federal share for this activity for this year, from 0 to 100",
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "description": "State share for this activity for this year, from 0 to 100",
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "other": Object {
+                    "description": "Other amount (dollars) for this activity for this year",
+                    "type": "number",
+                  },
                 },
-                "otherAmount": Object {
-                  "description": "Other amount (dollars) for this activity for this year",
-                  "type": "number",
-                },
-                "statePercent": Object {
-                  "description": "State share for this activity for this year, from 0 to 1",
-                  "type": "number",
-                },
-                "year": Object {
-                  "description": "Federal fiscal year this cost allocation applies to",
-                  "type": "number",
-                },
+                "type": "object",
               },
-              "type": "object",
             },
-            "type": "array",
           },
           "costAllocationNarrative": Object {
             "properties": Object {
@@ -135,22 +133,15 @@ Object {
                   "description": "Short description of the expense",
                   "type": "string",
                 },
-                "entries": Object {
-                  "items": Object {
-                    "description": "Expense entry",
-                    "properties": Object {
-                      "amount": Object {
-                        "description": "Expense entry amount",
-                        "type": "number",
-                      },
-                      "year": Object {
-                        "description": "Expense entry year",
-                        "type": "string",
-                      },
+                "years": Object {
+                  "description": "Expense entry",
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{4}$": Object {
+                      "description": "Expense amount for the given federal fiscal year",
+                      "type": "number",
                     },
-                    "type": "object",
                   },
-                  "type": "array",
                 },
               },
               "type": "object",
@@ -197,89 +188,83 @@ Object {
             "type": "string",
           },
           "quarterlyFFP": Object {
-            "items": Object {
-              "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
-              "properties": Object {
-                "q1": Object {
-                  "description": "First fiscal quarter FFP",
-                  "properties": Object {
-                    "combined": Object {
-                      "description": "Percent of the federal share of the FFY total to be paid in this quarter",
-                      "type": "number",
+            "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
+            "type": "object",
+            "x-patternProperties": Object {
+              "^[0-9]{4}$": Object {
+                "properties": Object {
+                  "1": Object {
+                    "properties": Object {
+                      "combined": Object {
+                        "description": "Combined cost for the first quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
+                      "contractors": Object {
+                        "description": "Contractor costs for the first quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "description": "In-house (state personnel + non-personnel) costs for the first quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
                     },
-                    "contractors": Object {
-                      "description": "Percent of the federal share of the FFY total contractor expense to be paid in this quarter",
-                      "type": "number",
-                    },
-                    "state": Object {
-                      "description": "Percent of the federal share of the FFY total state expense to be paid in this quarter",
-                      "type": "number",
-                    },
+                    "type": "object",
                   },
-                  "type": "object",
-                },
-                "q2": Object {
-                  "description": "Second fiscal quarter FFP",
-                  "properties": Object {
-                    "combined": Object {
-                      "description": "Percent of the federal share of the FFY total to be paid in this quarter",
-                      "type": "number",
+                  "2": Object {
+                    "properties": Object {
+                      "combined": Object {
+                        "description": "Combined cost for the second quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
+                      "contractors": Object {
+                        "description": "Contractor costs for the second quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "description": "In-house (state personnel + non-personnel) costs for the second quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
                     },
-                    "contractors": Object {
-                      "description": "Percent of the federal share of the FFY total contractor expense to be paid in this quarter",
-                      "type": "number",
-                    },
-                    "state": Object {
-                      "description": "Percent of the federal share of the FFY total state expense to be paid in this quarter",
-                      "type": "number",
-                    },
+                    "type": "object",
                   },
-                  "type": "object",
-                },
-                "q3": Object {
-                  "description": "Third fiscal quarter FFP",
-                  "properties": Object {
-                    "combined": Object {
-                      "description": "Percent of the federal share of the FFY total to be paid in this quarter",
-                      "type": "number",
+                  "3": Object {
+                    "properties": Object {
+                      "combined": Object {
+                        "description": "Combined cost for the third quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
+                      "contractors": Object {
+                        "description": "Contractor costs for the third quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "description": "In-house (state personnel + non-personnel) costs for the third quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
                     },
-                    "contractors": Object {
-                      "description": "Percent of the federal share of the FFY total contractor expense to be paid in this quarter",
-                      "type": "number",
-                    },
-                    "state": Object {
-                      "description": "Percent of the federal share of the FFY total state expense to be paid in this quarter",
-                      "type": "number",
-                    },
+                    "type": "object",
                   },
-                  "type": "object",
-                },
-                "q4": Object {
-                  "description": "Fourth fiscal quarter FFP",
-                  "properties": Object {
-                    "combined": Object {
-                      "description": "Percent of the federal share of the FFY total to be paid in this quarter",
-                      "type": "number",
+                  "4": Object {
+                    "properties": Object {
+                      "combined": Object {
+                        "description": "Combined cost for the fourth quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
+                      "contractors": Object {
+                        "description": "Contractor costs for the fourth quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "description": "In-house (state personnel + non-personnel) costs for the fourth quarter of the given federal fiscal year",
+                        "type": "number",
+                      },
                     },
-                    "contractors": Object {
-                      "description": "Percent of the federal share of the FFY total contractor expense to be paid in this quarter",
-                      "type": "number",
-                    },
-                    "state": Object {
-                      "description": "Percent of the federal share of the FFY total state expense to be paid in this quarter",
-                      "type": "number",
-                    },
+                    "type": "object",
                   },
-                  "type": "object",
                 },
-                "year": Object {
-                  "description": "Federal fiscal year this quarterly FFP applies to",
-                  "type": "number",
-                },
+                "type": "object",
               },
-              "type": "object",
             },
-            "type": "array",
           },
           "schedule": Object {
             "items": Object {
@@ -322,24 +307,22 @@ Object {
                   "type": "string",
                 },
                 "years": Object {
-                  "items": Object {
-                    "properties": Object {
-                      "cost": Object {
-                        "description": "This personnel's cost for the given federal fiscal year",
-                        "type": "number",
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{4}$": Object {
+                      "properties": Object {
+                        "amt": Object {
+                          "description": "State personnel's total cost for the federal fiscal year",
+                          "type": "number",
+                        },
+                        "perc": Object {
+                          "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year",
+                          "type": "number",
+                        },
                       },
-                      "fte": Object {
-                        "description": "Percent of time this personnel is dedicating to the activity",
-                        "type": "number",
-                      },
-                      "year": Object {
-                        "description": "Federal fiscal year this information applies to",
-                        "type": "string",
-                      },
+                      "type": "object",
                     },
-                    "type": "object",
                   },
-                  "type": "array",
                 },
               },
               "type": "object",
@@ -372,19 +355,18 @@ Object {
           "incentivePayments": Object {
             "items": Object {
               "properties": Object {
-                "q1": Object {
-                  "$ref": "#/components/schemas/incentivePaymentQuarter",
+                "ehAmt": Object {
+                  "$ref": "#/components/schemas/incentivePaymentType",
                 },
-                "q2": Object {
-                  "$ref": "#/components/schemas/incentivePaymentQuarter",
+                "ehCt": Object {
+                  "$ref": "#/components/schemas/incentivePaymentType",
                 },
-                "q3": Object {
-                  "$ref": "#/components/schemas/incentivePaymentQuarter",
+                "epAmt": Object {
+                  "$ref": "#/components/schemas/incentivePaymentType",
                 },
-                "q4": Object {
-                  "$ref": "#/components/schemas/incentivePaymentQuarter",
+                "epCt": Object {
+                  "$ref": "#/components/schemas/incentivePaymentType",
                 },
-                "year": Object {},
               },
               "type": "object",
             },
@@ -394,20 +376,13 @@ Object {
             "items": Object {
               "properties": Object {
                 "costs": Object {
-                  "items": Object {
-                    "properties": Object {
-                      "cost": Object {
-                        "description": "Person's cost for the given year",
-                        "type": "number",
-                      },
-                      "year": Object {
-                        "description": "Federal fiscal year this cost is attributable to",
-                        "type": "string",
-                      },
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{4}$": Object {
+                      "description": "Person's cost for the year described by the property name",
+                      "type": "number",
                     },
-                    "type": "object",
                   },
-                  "type": "array",
                 },
                 "email": Object {
                   "description": "Person's email address",
@@ -429,8 +404,8 @@ Object {
                   "type": "string",
                 },
                 "percentTime": Object {
-                  "description": "Percent of this person's time dedicated to the project, as a faction between 0 and 1.",
-                  "maximum": 1,
+                  "description": "Percent of this person's time dedicated to the project, between 0 and 100.",
+                  "maximum": 100,
                   "minimum": 0,
                   "type": "number",
                 },
@@ -460,114 +435,64 @@ Object {
             "type": "string",
           },
           "previousActivityExpenses": Object {
-            "items": Object {
-              "properties": Object {
-                "hie": Object {
-                  "description": "HIE-funded expenses",
-                  "properties": Object {
-                    "federalActual": Object {
-                      "description": "Total federal share actually spent",
-                      "type": "number",
+            "type": "object",
+            "x-patternProperties": Object {
+              "^[0-9]{4}$": Object {
+                "properties": Object {
+                  "hithie": Object {
+                    "description": "HIT- and HIE-funded expenses",
+                    "properties": Object {
+                      "federalActual": Object {
+                        "description": "Total federal share actually spent",
+                        "type": "number",
+                      },
+                      "totalApproved": Object {
+                        "description": "Total approved in the previous APD",
+                        "type": "number",
+                      },
                     },
-                    "federalApproved": Object {
-                      "description": "Total federal share approved in the previous APD",
-                      "type": "number",
-                    },
-                    "stateActual": Object {
-                      "description": "Total state share actually spent",
-                      "type": "number",
-                    },
-                    "stateApproved": Object {
-                      "description": "Total state share approved in the previous APD",
-                      "type": "number",
-                    },
+                    "type": "object",
                   },
-                  "type": "object",
-                },
-                "hit": Object {
-                  "description": "HIT-funded expenses",
-                  "properties": Object {
-                    "federalActual": Object {
-                      "description": "Total federal share actually spent",
-                      "type": "number",
+                  "mmis": Object {
+                    "description": "HIT-funded expenses",
+                    "properties": Object {
+                      "50": Object {
+                        "federalActual": Object {
+                          "description": "Total federal share actually spent",
+                          "type": "number",
+                        },
+                        "totalApproved": Object {
+                          "description": "Total approved in the previous APD",
+                          "type": "number",
+                        },
+                      },
+                      "75": Object {
+                        "federalActual": Object {
+                          "description": "Total federal share actually spent",
+                          "type": "number",
+                        },
+                        "totalApproved": Object {
+                          "description": "Total approved in the previous APD",
+                          "type": "number",
+                        },
+                      },
+                      "90": Object {
+                        "federalActual": Object {
+                          "description": "Total federal share actually spent",
+                          "type": "number",
+                        },
+                        "totalApproved": Object {
+                          "description": "Total approved in the previous APD",
+                          "type": "number",
+                        },
+                      },
                     },
-                    "federalApproved": Object {
-                      "description": "Total federal share approved in the previous APD",
-                      "type": "number",
-                    },
-                    "stateActual": Object {
-                      "description": "Total state share actually spent",
-                      "type": "number",
-                    },
-                    "stateApproved": Object {
-                      "description": "Total state share approved in the previous APD",
-                      "type": "number",
-                    },
+                    "type": "object",
                   },
-                  "type": "object",
                 },
-                "mmis": Object {
-                  "description": "HIT-funded expenses",
-                  "properties": Object {
-                    "federal50Actual": Object {
-                      "description": "Total federal 50% share actually spent",
-                      "type": "number",
-                    },
-                    "federal50Approved": Object {
-                      "description": "Total federal 50% share approved in the previous APD",
-                      "type": "number",
-                    },
-                    "federal75Actual": Object {
-                      "description": "Total federal 75% share actually spent",
-                      "type": "number",
-                    },
-                    "federal75Approved": Object {
-                      "description": "Total federal 75% share approved in the previous APD",
-                      "type": "number",
-                    },
-                    "federal90Actual": Object {
-                      "description": "Total federal 90% share actually spent",
-                      "type": "number",
-                    },
-                    "federal90Approved": Object {
-                      "description": "Total federal 90% share approved in the previous APD",
-                      "type": "number",
-                    },
-                    "state10Actual": Object {
-                      "description": "Total state 10% share actually spent",
-                      "type": "number",
-                    },
-                    "state10Approved": Object {
-                      "description": "Total state 10% share approved in the previous APD",
-                      "type": "number",
-                    },
-                    "state25Actual": Object {
-                      "description": "Total state 25% share actually spent",
-                      "type": "number",
-                    },
-                    "state25Approved": Object {
-                      "description": "Total state 25% share approved in the previous APD",
-                      "type": "number",
-                    },
-                    "state50Actual": Object {
-                      "description": "Total state 50% share actually spent",
-                      "type": "number",
-                    },
-                    "state50Approved": Object {
-                      "description": "Total state 50% share approved in the previous APD",
-                      "type": "number",
-                    },
-                  },
-                  "type": "object",
-                },
-                "year": Object {
-                  "description": "Federal fiscal year this information applies to",
-                  "type": "string",
-                },
+                "type": "object",
               },
-              "type": "object",
             },
-            "type": "array",
           },
           "previousActivitySummary": Object {
             "description": "High-level outline of activities approved in previous APD",
@@ -636,29 +561,38 @@ Object {
           },
           "years": Object {
             "items": Object {
-              "type": "number",
+              "type": "string",
             },
             "type": "array",
           },
         },
         "type": "object",
       },
-      "incentivePaymentQuarter": Object {
-        "properties": Object {
-          "ehCount": Object {
-            "type": "number",
-          },
-          "ehPayment": Object {
-            "type": "number",
-          },
-          "epCount": Object {
-            "type": "number",
-          },
-          "epPayment": Object {
-            "type": "number",
+      "incentivePaymentType": Object {
+        "type": "object",
+        "x-patternProperties": Object {
+          "^[0-9]{4}$": Object {
+            "properties": Object {
+              "1": Object {
+                "description": "EH payment amount for the first quarter of the given fiscal year",
+                "type": "number",
+              },
+              "2": Object {
+                "description": "EH payment amount for the second quarter of the given fiscal year",
+                "type": "number",
+              },
+              "3": Object {
+                "description": "EH payment amount for the third quarter of the given fiscal year",
+                "type": "number",
+              },
+              "4": Object {
+                "description": "EH payment amount for the fourth quarter of the given fiscal year",
+                "type": "number",
+              },
+            },
+            "type": "object",
           },
         },
-        "type": "object",
       },
       "state": Object {
         "properties": Object {

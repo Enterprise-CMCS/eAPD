@@ -86,8 +86,8 @@ describe('APD endpoint | PATCH /apds/:id', () => {
           { op: 'replace', path: '/name', value: 'new APD name' },
           {
             op: 'replace',
-            path: '/activities/1/costAllocation/0/federalPercent',
-            value: '0.8'
+            path: '/activities/1/costAllocation/2019/ffp/federal',
+            value: 80
           }
         ]
       });
