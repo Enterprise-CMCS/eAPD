@@ -14,7 +14,7 @@ describe('the NonPersonnelCostForm component', () => {
       index={83}
       item={{
         category: 'cost category',
-        desc: 'cost desc',
+        description: 'cost desc',
         years: {
           7473: 2398235,
           7474: 72323

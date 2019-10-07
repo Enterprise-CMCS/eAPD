@@ -5,6 +5,7 @@ import sinon from 'sinon';
 import u from 'updeep';
 
 import * as actions from './apd';
+import * as appActions from './app';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
@@ -104,7 +105,11 @@ describe('apd actions', () => {
   });
 
   it('selectAPD should create SELECT_APD action, redirect to /apd, and saves APD ID to local storage', async () => {
-    const apd = { id: 'apd-id', selected: 'apd goes here' };
+    const apd = {
+      id: 'apd-id',
+      selected: 'apd goes here',
+      federalCitations: { already: 'exists' }
+    };
     fetchMock.onGet('/apds/apd-id').reply(200, apd);
 
     const deserialize = sinon.stub().returns('deserialized apd');
@@ -116,13 +121,13 @@ describe('apd actions', () => {
     const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
     const expectedActions = [
-      { type: actions.SELECT_APD, apd: 'deserialized apd' },
+      { type: appActions.SELECT_APD, apd: 'deserialized apd' },
       { type: actions.UPDATE_BUDGET, state },
       { type: 'FAKE_PUSH', pushRoute: '/apd' }
     ];
 
     await store.dispatch(
-      actions.selectApd('apd-id', { deserialize, global, pushRoute })
+      appActions.selectApd('apd-id', { deserialize, global, pushRoute })
     );
 
     expect(store.getActions()).toEqual(expectedActions);
@@ -151,10 +156,10 @@ describe('apd actions', () => {
   describe('create APD', () => {
     // TODO: But for real.
     it('adds the new APD to the store and switches to it on success', () => {
-      const newapd = { id: 'bloop' };
+      const newapd = { id: 'bloop', federalCitations: { already: 'exist' } };
       fetchMock.onPost('/apds').reply(200, newapd);
 
-      const apd = { id: 'apd-id' };
+      const apd = { id: 'apd-id', federalCitations: { already: 'exist' } };
       const deserialize = sinon.stub().returns(apd);
 
       fetchMock.onGet('/apds/apd-id').reply(200, apd);
@@ -172,7 +177,7 @@ describe('apd actions', () => {
       const expectedActions = [
         { type: actions.CREATE_APD_REQUEST },
         { type: actions.CREATE_APD_SUCCESS, data: apd },
-        { type: actions.SELECT_APD, apd: { id: 'apd-id' } },
+        { type: appActions.SELECT_APD, apd },
         { type: actions.UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: '/apd' }
       ];
@@ -468,15 +473,7 @@ describe('apd actions', () => {
         }
       },
       activities: {},
-      dirty: {
-        data: {
-          apd: {},
-          activities: {
-            byKey: {}
-          }
-        },
-        dirty: true
-      }
+      patch: []
     };
 
     beforeEach(() => {
@@ -489,14 +486,15 @@ describe('apd actions', () => {
       // of the previous test's mutations. 😬
       serialize.returns(JSON.parse(JSON.stringify(serializedApd)));
 
-      state.dirty.dirty = true;
+      state.patch = ['these', 'get', 'sent', 'off'];
+
       fetchMock.reset();
     });
 
     it('creates save request but does not actually send save if not dirty', () => {
-      state.dirty.dirty = false;
+      state.patch.length = 0;
       const store = mockStore(state);
-      fetchMock.onPut('/apds/id-to-update').reply(403, [{ foo: 'bar' }]);
+      fetchMock.onPatch('/apds/id-to-update').reply(403, [{ foo: 'bar' }]);
 
       const expectedActions = [{ type: actions.SAVE_APD_REQUEST }];
 
@@ -510,160 +508,45 @@ describe('apd actions', () => {
 
     it('creates save request and logged-out actions if the user is not logged in', () => {
       const store = mockStore(state);
-      fetchMock.onPut('/apds/id-to-update').reply(403, [{ foo: 'bar' }]);
+      fetchMock.onPatch('/apds/id-to-update').reply(403, [{ foo: 'bar' }]);
 
       const expectedActions = [
         { type: actions.SAVE_APD_REQUEST },
         { type: actions.SAVE_APD_FAILURE, data: 'save-apd.not-logged-in' }
       ];
 
-      return store.dispatch(actions.saveApd({ serialize })).catch(() => {
+      return store.dispatch(actions.saveApd()).catch(() => {
         expect(store.getActions()).toEqual(expectedActions);
-        expect(serialize.calledWith(state.apd.data, state.activities)).toEqual(
-          true
-        );
       });
     });
 
     it('creates save request and save failure actions if the save fails', () => {
       const store = mockStore(state);
-      fetchMock.onPut('/apds/id-to-update').reply(400, [{ foo: 'bar' }]);
+      fetchMock.onPatch('/apds/id-to-update').reply(400, [{ foo: 'bar' }]);
 
       const expectedActions = [
         { type: actions.SAVE_APD_REQUEST },
         { type: actions.SAVE_APD_FAILURE }
       ];
 
-      return store.dispatch(actions.saveApd({ serialize })).catch(() => {
+      return store.dispatch(actions.saveApd()).catch(() => {
         expect(store.getActions()).toEqual(expectedActions);
-        expect(serialize.calledWith(state.apd.data, state.activities)).toEqual(
-          true
-        );
       });
     });
 
-    describe('successful saves when APD props are dirty', () => {
-      const defaultDirtyObject = {
-        // these get reversed in the process of removing the clean ones
-        activities: [{ id: 'activity 2' }, { id: 'activity 1' }],
-        id: 'id-to-update',
-        pointsOfContact: 'people to call if stuff goes sour',
-        summary: 'apd summary',
-        years: ['1992', '1993']
-      };
+    it('saves and does all the good things', () => {
+      const updatedApd = {};
+      const store = mockStore(state);
 
-      Object.entries({
-        'no prop': undefined,
-        federalCitations: 'CFR 395.2362.472462.2352.36 (b) three',
-        incentivePayments: 'money to do good work',
-        narrativeHIE: 'HIE narrative text',
-        narrativeHIT: 'HIT narrative text',
-        narrativeMMIS: 'MMIS narrative text',
-        programOverview: 'APD overview text',
-        previousActivityExpenses: 'money we spent last time',
-        previousActivitySummary: 'other activities happened in the past',
-        stateProfile: 'we like long walks on the beach'
-      }).forEach(([prop, content]) => {
-        it(`saves correctly when ${prop} is dirty`, () => {
-          const store = mockStore(
-            u({ dirty: { data: { apd: { [prop]: true } } } }, state)
-          );
-          fetchMock
-            .onPut(
-              '/apds/id-to-update',
-              content
-                ? {
-                    ...defaultDirtyObject,
-                    [prop]: content
-                  }
-                : defaultDirtyObject
-            )
-            .reply(200, { foo: 'bar' });
+      fetchMock.onPatch('/apds/id-to-update').reply(200, updatedApd);
 
-          const expectedActions = [
-            { type: actions.SAVE_APD_REQUEST },
-            { type: actions.SAVE_APD_SUCCESS, data: { foo: 'bar' } }
-          ];
+      const expectedActions = [
+        { type: actions.SAVE_APD_REQUEST },
+        { type: actions.SAVE_APD_SUCCESS, data: updatedApd }
+      ];
 
-          return store.dispatch(actions.saveApd({ serialize })).then(() => {
-            expect(store.getActions()).toEqual(expectedActions);
-            expect(
-              serialize.calledWith(state.apd.data, state.activities)
-            ).toEqual(true);
-          });
-        });
-      });
-    });
-
-    describe('successful saves when APD activity props are dirty', () => {
-      const defaultDirtyObject = {
-        activities: [
-          {
-            alternatives: 'alternatives approach',
-            description: 'activity description',
-            fundingSource: 'funding source',
-            id: 'activity 1',
-            key: 'activity 1',
-            name: 'activity name',
-            summary: 'activity summary'
-          },
-          { id: 'activity 2' }
-        ],
-        id: 'id-to-update',
-        pointsOfContact: 'people to call if stuff goes sour',
-        summary: 'apd summary',
-        years: ['1992', '1993']
-      };
-
-      Object.entries({
-        'no prop': undefined,
-        contractorResources: 'contractors',
-        costAllocation: 'give us those dollars',
-        costAllocationNarrative: 'cost allocation narrative',
-        expenses: 'paper, pens, airplanes, and bouncy castles',
-        goals: 'build the best Medicaid IT system ever seen',
-        schedule: 'before the heat death of the universe',
-        standardsAndConditions: 'florp',
-        statePersonnel: 'the people who work here',
-        quarterlyFFP: 'we want money a little at a time'
-      }).forEach(([prop, content]) => {
-        it(`saves correctly when activity ${prop} is dirty`, () => {
-          const store = mockStore(
-            u(
-              {
-                dirty: {
-                  data: {
-                    activities: { byKey: { 'activity 1': { [prop]: true } } }
-                  }
-                }
-              },
-              state
-            )
-          );
-          fetchMock
-            .onPut(
-              '/apds/id-to-update',
-              content
-                ? u(
-                    { activities: { 0: { [prop]: content } } },
-                    defaultDirtyObject
-                  )
-                : defaultDirtyObject
-            )
-            .reply(200, { foo: 'bar' });
-
-          const expectedActions = [
-            { type: actions.SAVE_APD_REQUEST },
-            { type: actions.SAVE_APD_SUCCESS, data: { foo: 'bar' } }
-          ];
-
-          return store.dispatch(actions.saveApd({ serialize })).then(() => {
-            expect(store.getActions()).toEqual(expectedActions);
-            expect(
-              serialize.calledWith(state.apd.data, state.activities)
-            ).toEqual(true);
-          });
-        });
+      return store.dispatch(actions.saveApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
       });
     });
   });

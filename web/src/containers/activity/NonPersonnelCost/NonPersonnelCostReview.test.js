@@ -12,7 +12,7 @@ describe('the NonPersonnelCostReview component', () => {
       index={53}
       item={{
         category: 'test category',
-        desc: 'test desc',
+        description: 'test desc',
         years: {
           1487: 347293,
           1488: 234797

@@ -118,7 +118,6 @@ export const newActivity = ({
     methodology: '',
     otherSources: ''
   },
-  costAllocationDesc: '',
   description: '',
   expenses: [newExpense(years)],
   fundingSource,
@@ -128,7 +127,6 @@ export const newActivity = ({
   name,
   plannedEndDate: '',
   plannedStartDate: '',
-  otherFundingDesc: '',
   schedule: [newMilestone()],
   statePersonnel: [newStatePerson(years)],
   summary: '',

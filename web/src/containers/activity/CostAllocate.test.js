@@ -14,8 +14,10 @@ describe('the CostAllocate component', () => {
   const props = {
     activity: {
       key: 'activity key',
-      costAllocationDesc: 'cost allocation',
-      otherFundingDesc: 'other funding'
+      costAllocationNarrative: {
+        methodology: 'cost allocation',
+        otherSources: 'other funding'
+      }
     },
     years: ['1066', '1067'],
     updateActivity: sinon.stub()
