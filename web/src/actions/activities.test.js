@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import sinon from 'sinon';
 
 import * as actions from './activities';
-import * as apdActions from './apd';
 import { UPDATE_BUDGET } from './budget';
 
 const mockStore = configureStore([thunk]);
