@@ -18,53 +18,66 @@ exports.seed = async knex => {
               contractorResources: [
                 {
                   description: 'Maintain SLR',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': {
+                        hours: '',
+                        rate: ''
+                      },
+                      '2021': {
+                        hours: '',
+                        rate: ''
+                      }
+                    },
+                    useHourly: false
+                  },
                   name: 'Super SLR Incorporated',
-                  start: null,
+                  start: '',
                   totalCost: 32423,
-                  useHourly: false,
-                  years: [
-                    { cost: 999756, year: 2020 },
-                    { cost: 342444, year: 2021 }
-                  ]
+                  years: {
+                    '2020': 999756,
+                    '2021': 342444
+                  }
                 },
                 {
                   description: 'Technology consulting and planning services.',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': {
+                        hours: '',
+                        rate: ''
+                      },
+                      '2021': {
+                        hours: '',
+                        rate: ''
+                      }
+                    },
+                    useHourly: false
+                  },
                   name: 'Tech Consulting Inc.',
-                  start: null,
+                  start: '',
                   totalCost: 473573,
-                  useHourly: false,
-                  years: [
-                    { cost: 333000, year: 2020 },
-                    { cost: 200000, year: 2021 }
-                  ]
+                  years: { '2020': 333000, '2021': 200000 }
                 }
               ],
-              costAllocation: [
-                {
-                  year: 2020,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+              costAllocation: {
+                '2020': {
+                  ffp: {
+                    federal: 90,
+                    state: 10
+                  },
+                  other: 0
                 },
-                {
-                  year: 2021,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+                '2021': {
+                  ffp: {
+                    federal: 90,
+                    state: 10
+                  },
+                  other: 0
                 }
-              ],
+              },
               costAllocationNarrative: {
                 methodology:
                   '<p>No cost allocation is necessary for this activity.</p>\n',
@@ -77,29 +90,19 @@ exports.seed = async knex => {
                 {
                   description: '',
                   category: 'Training and outreach',
-                  entries: [
-                    { year: '2020', amount: 40000 },
-                    { year: '2021', amount: 40000 }
-                  ]
+                  years: { '2020': 40000, '2021': 40000 }
                 },
                 {
                   description: '',
                   category: 'Travel',
-                  entries: [
-                    { year: '2020', amount: 35000 },
-                    { year: '2021', amount: 35000 }
-                  ]
+                  years: { '2020': 35000, '2021': 35000 }
                 },
                 {
                   description: '',
                   category: 'Hardware, software, and licensing',
-                  entries: [
-                    { year: '2020', amount: 700000 },
-                    { year: '2021', amount: 0 }
-                  ]
+                  years: { '2020': 700000, '2021': 0 }
                 }
               ],
-              files: [],
               fundingSource: 'HIT',
               goals: [
                 {
@@ -116,24 +119,21 @@ exports.seed = async knex => {
                 }
               ],
               name: 'Program Administration',
-              plannedEndDate: null,
-              plannedStartDate: null,
+              plannedEndDate: '',
+              plannedStartDate: '',
               schedule: [
                 {
                   endDate: '2018-09-07',
                   milestone:
-                    'Implementation of Final Rule and Stage 3 System Developments',
-                  status: null
+                    'Implementation of Final Rule and Stage 3 System Developments'
                 },
                 {
                   endDate: '2017-12-31',
-                  milestone: 'Environmental Scan Completion',
-                  status: null
+                  milestone: 'Environmental Scan Completion'
                 },
                 {
                   endDate: '2018-05-30',
-                  milestone: 'HIT Roadmap Development',
-                  status: null
+                  milestone: 'HIT Roadmap Development'
                 }
               ],
               standardsAndConditions: {
@@ -154,95 +154,93 @@ exports.seed = async knex => {
                   title: 'Project Assistant',
                   description:
                     'Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.',
-                  years: [
-                    { cost: 86000, fte: 1, year: 2020 },
-                    { cost: 88000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 86000, perc: 1 },
+                    '2021': { amt: 88000, perc: 1 }
+                  }
                 },
                 {
                   title:
                     'EHR Incentive Program Meaningful Use Coordinator (Research Analyst III)',
                   description:
                     'Develop and monitor reports, assist data users in developing and managing queries.',
-                  years: [
-                    { cost: 101115, fte: 1, year: 2020 },
-                    { cost: 102111, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 101115, perc: 1 },
+                    '2021': { amt: 102111, perc: 1 }
+                  }
                 },
                 {
                   title: 'IT Liaison',
                   description:
                     'Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.',
-                  years: [
-                    { cost: 101000, fte: 1, year: 2020 },
-                    { cost: 104000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 101000, perc: 1 },
+                    '2021': { amt: 104000, perc: 1 }
+                  }
                 },
                 {
                   title: 'Accountant III',
                   description:
                     'Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.',
-                  years: [
-                    { cost: 101000, fte: 3, year: 2020 },
-                    { cost: 109000, fte: 3, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 101000, perc: 3 },
+                    '2021': { amt: 109000, perc: 3 }
+                  }
                 },
                 {
                   title: 'Public Information Officer',
                   description:
                     'Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program',
-                  years: [
-                    { cost: 165000, fte: 0.5, year: 2020 },
-                    { cost: 170000, fte: 0.5, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 165000, perc: 0.5 },
+                    '2021': { amt: 170000, perc: 0.5 }
+                  }
                 },
                 {
                   title: 'Systems Chief',
                   description:
                     'Coordinate office resources, manage staff, budget, and resource assignments, and report program status.',
-                  years: [
-                    { cost: 135000, fte: 0.5, year: 2020 },
-                    { cost: 140000, fte: 0.5, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 135000, perc: 0.5 },
+                    '2021': { amt: 140000, perc: 0.5 }
+                  }
                 },
                 {
                   title:
                     'Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)',
                   description:
                     'Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.',
-                  years: [
-                    { cost: 110012, fte: 1, year: 2020 },
-                    { cost: 111102, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 110012, perc: 1 },
+                    '2021': { amt: 111102, perc: 1 }
+                  }
                 },
                 {
                   title: 'System Analyst (Analyst Programmer IV)',
                   description:
                     'Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.',
-                  years: [
-                    { cost: 98987, fte: 4, year: 2020 },
-                    { cost: 99897, fte: 4, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 98987, perc: 4 },
+                    '2021': { amt: 99897, perc: 4 }
+                  }
                 }
               ],
               summary:
                 'Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.',
-              quarterlyFFP: [
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2020
+              quarterlyFFP: {
+                '2020': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 },
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2021
+                '2021': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 }
-              ]
+              }
             },
             {
               alternatives:
@@ -250,55 +248,64 @@ exports.seed = async knex => {
               contractorResources: [
                 {
                   description: 'Hosting and development support.',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': {
+                        hours: '',
+                        rate: ''
+                      },
+                      '2021': {
+                        hours: '',
+                        rate: ''
+                      }
+                    },
+                    useHourly: false
+                  },
 
                   name: 'Interface Vendor Inc.',
-                  start: null,
+                  start: '',
                   totalCost: 26453574,
-                  useHourly: false,
-                  years: [
-                    { cost: 650000, year: 2020 },
-                    { cost: 750000, year: 2021 }
-                  ]
+                  years: { '2020': 650000, '2021': 750000 }
                 },
                 {
                   description: 'Interface M&O contractor.',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
-
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': {
+                        hours: '',
+                        rate: ''
+                      },
+                      '2021': {
+                        hours: '',
+                        rate: ''
+                      }
+                    },
+                    useHourly: false
+                  },
                   name: 'TBD',
-                  start: null,
+                  start: '',
                   totalCost: 7398,
-                  useHourly: false,
-                  years: [
-                    { cost: 0, year: 2020 },
-                    { cost: 1000000, year: 2021 }
-                  ]
+                  years: { '2020': 0, '2021': 1000000 }
                 }
               ],
-              costAllocation: [
-                {
-                  year: 2020,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+              costAllocation: {
+                '2020': {
+                  ffp: {
+                    federal: 90,
+                    state: 10
+                  },
+                  other: 0
                 },
-                {
-                  year: 2021,
-                  federalPercent: '0.75',
-                  statePercent: '0.25',
-                  otherAmount: 0
+                '2021': {
+                  ffp: {
+                    federal: 75,
+                    state: 25
+                  },
+                  other: 0
                 }
-              ],
+              },
               costAllocationNarrative: {
                 methodology:
                   '<p>No cost allocation is necessary for this activity.</p>\n',
@@ -310,13 +317,9 @@ exports.seed = async knex => {
                 {
                   description: '',
                   category: 'Travel',
-                  entries: [
-                    { year: '2020', amount: 0 },
-                    { year: '2021', amount: 0 }
-                  ]
+                  years: { '2020': 0, '2021': 0 }
                 }
               ],
-              files: [],
               fundingSource: 'MMIS',
               goals: [
                 {
@@ -327,18 +330,16 @@ exports.seed = async knex => {
                 }
               ],
               name: 'HIE Claims Data Analytics',
-              plannedEndDate: null,
-              plannedStartDate: null,
+              plannedEndDate: '',
+              plannedStartDate: '',
               schedule: [
                 {
                   endDate: '2018-12-31',
-                  milestone: 'Implement MMIS-HIE Interface',
-                  status: null
+                  milestone: 'Implement MMIS-HIE Interface'
                 },
                 {
                   endDate: '2018-12-31',
-                  milestone: 'Develop MMIS-HIE Interface Requirements',
-                  status: null
+                  milestone: 'Develop MMIS-HIE Interface Requirements'
                 }
               ],
               standardsAndConditions: {
@@ -358,91 +359,89 @@ exports.seed = async knex => {
                 {
                   title: 'Project Assistant',
                   description: 'Assist with stuff',
-                  years: [
-                    { cost: 98000, fte: 1, year: 2020 },
-                    { cost: 99000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 98000, perc: 1 },
+                    '2021': { amt: 99000, perc: 1 }
+                  }
                 },
                 {
                   title: 'MMIS Project Manager',
                   description:
                     'This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info',
-                  years: [
-                    { cost: 140000, fte: 1, year: 2020 },
-                    { cost: 144000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 140000, perc: 1 },
+                    '2021': { amt: 144000, perc: 1 }
+                  }
                 },
                 {
                   title: 'MMIS Trainer',
                   description:
                     'Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System',
-                  years: [
-                    { cost: 115000, fte: 1, year: 2020 },
-                    { cost: 115000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 115000, perc: 1 },
+                    '2021': { amt: 115000, perc: 1 }
+                  }
                 },
                 {
                   title: 'Programmer IV',
                   description:
                     'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
-                  years: [
-                    { cost: 140000, fte: 1, year: 2020 },
-                    { cost: 145000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 140000, perc: 1 },
+                    '2021': { amt: 145000, perc: 1 }
+                  }
                 },
                 {
                   title: 'Security IT',
                   description: 'Make sure its secure.',
-                  years: [
-                    { cost: 115000, fte: 1, year: 2020 },
-                    { cost: 120000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 115000, perc: 1 },
+                    '2021': { amt: 120000, perc: 1 }
+                  }
                 },
                 {
                   title: 'Operations Specialist',
                   description: 'Run the day to day.',
-                  years: [
-                    { cost: 125000, fte: 1, year: 2020 },
-                    { cost: 130000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 125000, perc: 1 },
+                    '2021': { amt: 130000, perc: 1 }
+                  }
                 },
                 {
                   title: 'Programmer V',
                   description:
                     'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
-                  years: [
-                    { cost: 150000, fte: 2, year: 2020 },
-                    { cost: 155000, fte: 3, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 150000, perc: 2 },
+                    '2021': { amt: 155000, perc: 3 }
+                  }
                 },
                 {
                   title: 'Programmer III',
                   description:
                     'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
-                  years: [
-                    { cost: 120000, fte: 1, year: 2020 },
-                    { cost: 125000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 120000, perc: 1 },
+                    '2021': { amt: 125000, perc: 1 }
+                  }
                 }
               ],
               summary:
                 'To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. ',
-              quarterlyFFP: [
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2020
+              quarterlyFFP: {
+                '2020': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 },
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2021
+                '2021': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 }
-              ]
+              }
             },
             {
               alternatives:
@@ -450,34 +449,37 @@ exports.seed = async knex => {
               contractorResources: [
                 {
                   description: '',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': { hours: '', rate: '' },
+                      '2021': { hours: '', rate: '' }
+                    },
+                    useHourly: false
+                  },
 
                   name: '',
-                  start: null,
+                  start: '',
                   totalCost: 3496874,
-                  useHourly: false,
-                  years: [{ cost: 0, year: 2020 }, { cost: 0, year: 2021 }]
+                  years: { '2020': 0, '2021': 0 }
                 }
               ],
-              costAllocation: [
-                {
-                  year: 2020,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+              costAllocation: {
+                '2020': {
+                  ffp: {
+                    federal: 90,
+                    state: 10
+                  },
+                  other: 0
                 },
-                {
-                  year: 2021,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+                '2021': {
+                  ffp: {
+                    federal: 90,
+                    state: 10
+                  },
+                  other: 0
                 }
-              ],
+              },
               costAllocationNarrative: {
                 methodology: '',
                 otherSources: ''
@@ -488,13 +490,9 @@ exports.seed = async knex => {
                 {
                   description: '',
                   category: 'Hardware, software, and licensing',
-                  entries: [
-                    { year: '2020', amount: 0 },
-                    { year: '2021', amount: 0 }
-                  ]
+                  years: { '2020': 0, '2021': 0 }
                 }
               ],
-              files: [],
               fundingSource: 'HIE',
               goals: [
                 {
@@ -507,66 +505,55 @@ exports.seed = async knex => {
                 }
               ],
               name: 'HIE Enhancement and Onboarding',
-              plannedEndDate: null,
-              plannedStartDate: null,
+              plannedEndDate: '',
+              plannedStartDate: '',
               schedule: [
                 {
                   endDate: '2021-09-30',
-                  milestone: 'Onboard providers to assistance program',
-                  status: null
+                  milestone: 'Onboard providers to assistance program'
                 },
                 {
                   endDate: '2020-12-31',
-                  milestone: 'Development of Roadmap',
-                  status: null
+                  milestone: 'Development of Roadmap'
                 },
                 {
                   endDate: '2020-01-01',
-                  milestone: 'HIE Staff Augmentation',
-                  status: null
+                  milestone: 'HIE Staff Augmentation'
                 },
                 {
                   endDate: '2020-01-01',
-                  milestone: 'Modules for Care Coordination',
-                  status: null
+                  milestone: 'Modules for Care Coordination'
                 },
                 {
                   endDate: '2021-09-30',
-                  milestone: 'Provider Onboarding',
-                  status: null
+                  milestone: 'Provider Onboarding'
                 },
                 {
                   endDate: '2020-01-01',
-                  milestone: 'EDIE System Implementation',
-                  status: null
+                  milestone: 'EDIE System Implementation'
                 },
                 {
                   endDate: '2020-12-31',
-                  milestone: 'Develop myAlaska HIE Authentication Requirements',
-                  status: null
+                  milestone: 'Develop myAlaska HIE Authentication Requirements'
                 },
                 {
                   endDate: '2020-03-31',
                   milestone:
-                    'Completion of requirements gathering to prepare to receive ELR',
-                  status: null
+                    'Completion of requirements gathering to prepare to receive ELR'
                 },
                 {
                   endDate: '2020-12-31',
                   milestone:
-                    'Configuration of internal BizTalk HL7 processes to translate the HL7 messages to PRISM',
-                  status: null
+                    'Configuration of internal BizTalk HL7 processes to translate the HL7 messages to PRISM'
                 },
                 {
                   endDate: '2020-09-30',
-                  milestone: 'Onboard Lab Providers',
-                  status: null
+                  milestone: 'Onboard Lab Providers'
                 },
                 {
                   endDate: '2018-12-31',
                   milestone:
-                    'Establishment of program requirements and outreach strategy',
-                  status: null
+                    'Establishment of program requirements and outreach strategy'
                 }
               ],
               standardsAndConditions: {
@@ -588,29 +575,27 @@ exports.seed = async knex => {
                     'Services Integration Architect/ Programmer (Analyst Programmer V)',
                   description:
                     'Lead technical architecture design and development efforts for designing, implementing and maintaining services integrations leveraging resources such as the MCI, MPI and state HIE along with other DHSS Business Systems.',
-                  years: [
-                    { cost: 115000, fte: 4, year: 2020 },
-                    { cost: 119000, fte: 4, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 115000, perc: 4 },
+                    '2021': { amt: 119000, perc: 4 }
+                  }
                 }
               ],
               summary: 'Statewide HIE enhancement and onboarding.',
-              quarterlyFFP: [
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2020
+              quarterlyFFP: {
+                '2020': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 },
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2021
+                '2021': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 }
-              ]
+              }
             },
             {
               alternatives:
@@ -618,52 +603,51 @@ exports.seed = async knex => {
               contractorResources: [
                 {
                   description: '',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
-
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': { hours: '', rate: '' },
+                      '2021': { hours: '', rate: '' }
+                    },
+                    useHourly: false
+                  },
                   name: 'RFP Planning Vendor Inc.',
-                  start: null,
+                  start: '',
                   totalCost: 4368734,
-                  useHourly: false,
-                  years: [{ cost: 500000, year: 2020 }, { cost: 0, year: 2021 }]
+                  years: { '2020': 500000, '2021': 0 }
                 },
                 {
                   description: '',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
-
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': { hours: '', rate: '' },
+                      '2021': { hours: '', rate: '' }
+                    },
+                    useHourly: false
+                  },
                   name: 'Blue Button Builder Inc.',
-                  start: null,
+                  start: '',
                   totalCost: 35246,
-                  useHourly: false,
-                  years: [
-                    { cost: 0, year: 2020 },
-                    { cost: 2000000, year: 2021 }
-                  ]
+                  years: { '2020': 0, '2021': 2000000 }
                 }
               ],
-              costAllocation: [
-                {
-                  year: 2020,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+              costAllocation: {
+                '2020': {
+                  ffp: {
+                    federal: 90,
+                    state: 10
+                  },
+                  other: 0
                 },
-                {
-                  year: 2021,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+                '2021': {
+                  ffp: {
+                    federal: 90,
+                    state: 10
+                  },
+                  other: 0
                 }
-              ],
+              },
               costAllocationNarrative: {
                 methodology: '',
                 otherSources: ''
@@ -674,13 +658,9 @@ exports.seed = async knex => {
                 {
                   description: '',
                   category: 'Hardware, software, and licensing',
-                  entries: [
-                    { year: '2020', amount: 0 },
-                    { year: '2021', amount: 0 }
-                  ]
+                  years: { '2020': 0, '2021': 0 }
                 }
               ],
-              files: [],
               fundingSource: 'HIE',
               goals: [
                 {
@@ -689,23 +669,20 @@ exports.seed = async knex => {
                 }
               ],
               name: 'Medicaid Blue Button',
-              plannedEndDate: null,
-              plannedStartDate: null,
+              plannedEndDate: '',
+              plannedStartDate: '',
               schedule: [
                 {
                   endDate: '2020-04-01',
-                  milestone: 'PHR/Blue Button HIE Build',
-                  status: null
+                  milestone: 'PHR/Blue Button HIE Build'
                 },
                 {
                   endDate: '2018-12-31',
-                  milestone: 'Blue Button Implementation',
-                  status: null
+                  milestone: 'Blue Button Implementation'
                 },
                 {
                   endDate: '2018-12-31',
-                  milestone: 'On-Boarding of PHR/Blue Button Participants',
-                  status: null
+                  milestone: 'On-Boarding of PHR/Blue Button Participants'
                 }
               ],
               standardsAndConditions: {
@@ -725,30 +702,28 @@ exports.seed = async knex => {
                 {
                   title: '',
                   description: '',
-                  years: [
-                    { cost: 0, fte: 0, year: 2020 },
-                    { cost: 0, fte: 0, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 0, perc: 0 },
+                    '2021': { amt: 0, perc: 0 }
+                  }
                 }
               ],
               summary:
                 'DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE.',
-              quarterlyFFP: [
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2020
+              quarterlyFFP: {
+                '2020': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 },
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2021
+                '2021': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 }
-              ]
+              }
             },
             {
               alternatives:
@@ -756,52 +731,57 @@ exports.seed = async knex => {
               contractorResources: [
                 {
                   description: 'Gateway Implementation.',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
-
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': {
+                        hours: '',
+                        rate: ''
+                      },
+                      '2021': {
+                        hours: '',
+                        rate: ''
+                      }
+                    },
+                    useHourly: false
+                  },
                   name: 'TBD',
-                  start: null,
+                  start: '',
                   totalCost: 246477,
-                  useHourly: false,
-                  years: [
-                    { cost: 0, year: 2020 },
-                    { cost: 1500000, year: 2021 }
-                  ]
+                  years: { '2020': 0, '2021': 1500000 }
                 },
                 {
                   description: 'Gateway Development Planning and RFP',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
-
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': {
+                        hours: '',
+                        rate: ''
+                      },
+                      '2021': {
+                        hours: '',
+                        rate: ''
+                      }
+                    },
+                    useHourly: false
+                  },
                   name: 'Gateway Vendor Inc.',
-                  start: null,
+                  start: '',
                   totalCost: 7473747,
-                  useHourly: false,
-                  years: [{ cost: 500000, year: 2020 }, { cost: 0, year: 2021 }]
+                  years: { '2020': 500000, '2021': 0 }
                 }
               ],
-              costAllocation: [
-                {
-                  year: 2020,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+              costAllocation: {
+                '2020': {
+                  ffp: { federal: 90, state: 10 },
+                  other: 0
                 },
-                {
-                  year: 2021,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+                '2021': {
+                  ffp: { federal: 90, state: 10 },
+                  other: 0
                 }
-              ],
+              },
               costAllocationNarrative: {
                 methodology: '',
                 otherSources: ''
@@ -812,13 +792,9 @@ exports.seed = async knex => {
                 {
                   description: '',
                   category: 'Hardware, software, and licensing',
-                  entries: [
-                    { year: '2020', amount: 0 },
-                    { year: '2021', amount: 0 }
-                  ]
+                  years: { '2020': 0, '2021': 0 }
                 }
               ],
-              files: [],
               fundingSource: 'HIE',
               goals: [
                 {
@@ -832,23 +808,20 @@ exports.seed = async knex => {
                 }
               ],
               name: 'Public Health System Modernization',
-              plannedEndDate: null,
-              plannedStartDate: null,
+              plannedEndDate: '',
+              plannedStartDate: '',
               schedule: [
                 {
                   endDate: '2017-03-31',
-                  milestone: 'PH Completion of requirements gathering',
-                  status: null
+                  milestone: 'PH Completion of requirements gathering'
                 },
                 {
                   endDate: '2021-09-30',
-                  milestone: 'PH Development and implementation of CRM Tool',
-                  status: null
+                  milestone: 'PH Development and implementation of CRM Tool'
                 },
                 {
                   endDate: '2021-09-30',
-                  milestone: 'PH Connection of Public Health systems to HIE',
-                  status: null
+                  milestone: 'PH Connection of Public Health systems to HIE'
                 }
               ],
               standardsAndConditions: {
@@ -868,30 +841,28 @@ exports.seed = async knex => {
                 {
                   title: '',
                   description: '',
-                  years: [
-                    { cost: 0, fte: 0, year: 2020 },
-                    { cost: 0, fte: 0, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 0, perc: 0 },
+                    '2021': { amt: 0, perc: 0 }
+                  }
                 }
               ],
               summary:
                 'The purpose of PH modernization is to provide Medicaid EPs and EHs with the tools to improve the coordination of care, transition of care and the availability of specialty registries; increasing the number of providers attesting for meaningful use.',
-              quarterlyFFP: [
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2020
+              quarterlyFFP: {
+                '2020': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 },
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2021
+                '2021': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 }
-              ]
+              }
             },
             {
               alternatives:
@@ -900,55 +871,51 @@ exports.seed = async knex => {
                 {
                   description:
                     'Research for and RFP development for MITA 3.0 SSA',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
-
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': { hours: '', rate: '' },
+                      '2021': { hours: '', rate: '' }
+                    },
+                    useHourly: false
+                  },
                   name: 'Tech Consulting Inc.',
-                  start: null,
+                  start: '',
                   totalCost: 264574,
-                  useHourly: false,
-                  years: [
-                    { cost: 450000, year: 2020 },
-                    { cost: 150000, year: 2021 }
-                  ]
+                  years: { '2020': 450000, '2021': 150000 }
                 },
                 {
                   description: 'MITA 3.0 implementation.',
-                  end: null,
-                  files: [],
-                  hourlyData: [
-                    { year: 2020, hours: 0, rate: 0 },
-                    { year: 2021, hours: 0, rate: 0 }
-                  ],
-
+                  end: '',
+                  hourly: {
+                    data: {
+                      '2020': { hours: '', rate: '' },
+                      '2021': { hours: '', rate: '' }
+                    },
+                    useHourly: false
+                  },
                   name: 'TBD',
-                  start: null,
+                  start: '',
                   totalCost: 64574,
-                  useHourly: false,
-                  years: [
-                    { cost: 200000, year: 2020 },
-                    { cost: 500000, year: 2021 }
-                  ]
+                  years: { '2020': 200000, '2021': 500000 }
                 }
               ],
-              costAllocation: [
-                {
-                  year: 2020,
-                  federalPercent: '0.50',
-                  statePercent: '0.50',
-                  otherAmount: 0
+              costAllocation: {
+                '2020': {
+                  ffp: {
+                    federal: 50,
+                    state: 50
+                  },
+                  other: 0
                 },
-                {
-                  year: 2021,
-                  federalPercent: '0.90',
-                  statePercent: '0.10',
-                  otherAmount: 0
+                '2021': {
+                  ffp: {
+                    federal: 90,
+                    state: 10
+                  },
+                  other: 0
                 }
-              ],
+              },
               costAllocationNarrative: {
                 methodology: '',
                 otherSources: ''
@@ -959,13 +926,9 @@ exports.seed = async knex => {
                 {
                   description: '',
                   category: 'Equipment and supplies',
-                  entries: [
-                    { year: '2020', amount: 25000 },
-                    { year: '2021', amount: 25000 }
-                  ]
+                  years: { '2020': 25000, '2021': 25000 }
                 }
               ],
-              files: [],
               fundingSource: 'HIT',
               goals: [
                 {
@@ -975,18 +938,16 @@ exports.seed = async knex => {
                 }
               ],
               name: 'MITA 3.0 Assessment',
-              plannedEndDate: null,
-              plannedStartDate: null,
+              plannedEndDate: '',
+              plannedStartDate: '',
               schedule: [
                 {
                   endDate: '2020-02-28',
-                  milestone: 'MITA 3.0 SS-A Project',
-                  status: null
+                  milestone: 'MITA 3.0 SS-A Project'
                 },
                 {
                   endDate: '2020-12-31',
-                  milestone: 'HITECH SS-A Assessment',
-                  status: null
+                  milestone: 'HITECH SS-A Assessment'
                 }
               ],
               standardsAndConditions: {
@@ -1006,70 +967,67 @@ exports.seed = async knex => {
                 {
                   title: 'State MITA Person',
                   description: '1',
-                  years: [
-                    { cost: 100000, fte: 0.5, year: 2020 },
-                    { cost: 100000, fte: 1, year: 2021 }
-                  ]
+                  years: {
+                    '2020': { amt: 100000, perc: 0.5 },
+                    '2021': { amt: 100000, perc: 1 }
+                  }
                 }
               ],
               summary:
                 'DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.',
-              quarterlyFFP: [
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2020
+              quarterlyFFP: {
+                '2020': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 },
-                {
-                  q1: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q2: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q3: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  q4: { combined: 0.25, contractors: 0.25, state: 0.25 },
-                  year: 2021
+                '2021': {
+                  '1': { combined: 25, contractors: 25, state: 25 },
+                  '2': { combined: 25, contractors: 25, state: 25 },
+                  '3': { combined: 25, contractors: 25, state: 25 },
+                  '4': { combined: 25, contractors: 25, state: 25 }
                 }
-              ]
+              }
             }
           ],
           federalCitations: {},
-          incentivePayments: [
-            {
-              q1: { ehPayment: 0, ehCount: 0, epPayment: 0, epCount: 0 },
-              q2: { ehPayment: 0, ehCount: 0, epPayment: 0, epCount: 0 },
-              q3: { ehPayment: 0, ehCount: 0, epPayment: 0, epCount: 0 },
-              q4: { ehPayment: 0, ehCount: 0, epPayment: 0, epCount: 0 },
-              year: '2020'
+          incentivePayments: {
+            ehAmt: {
+              '2020': { '1': 0, '2': 0, '3': 0, '4': 0 },
+              '2021': { '1': 0, '2': 0, '3': 0, '4': 0 }
             },
-            {
-              q1: { ehPayment: 0, ehCount: 0, epPayment: 0, epCount: 0 },
-              q2: { ehPayment: 0, ehCount: 0, epPayment: 0, epCount: 0 },
-              q3: { ehPayment: 0, ehCount: 0, epPayment: 0, epCount: 0 },
-              q4: { ehPayment: 0, ehCount: 0, epPayment: 0, epCount: 0 },
-              year: '2021'
+            ehCt: {
+              '2020': { '1': 0, '2': 0, '3': 0, '4': 0 },
+              '2021': { '1': 0, '2': 0, '3': 0, '4': 0 }
+            },
+            epAmt: {
+              '2020': { '1': 0, '2': 0, '3': 0, '4': 0 },
+              '2021': { '1': 0, '2': 0, '3': 0, '4': 0 }
+            },
+            epCt: {
+              '2020': { '1': 0, '2': 0, '3': 0, '4': 0 },
+              '2021': { '1': 0, '2': 0, '3': 0, '4': 0 }
             }
-          ],
+          },
           keyPersonnel: [
             {
               name: 'James Holden',
               position: 'HIT Coordinator',
               email: 'JimPushesButtons@tycho.com',
               isPrimary: true,
-              percentTime: '1.00',
+              percentTime: '100',
               hasCosts: true,
-              costs: [
-                { year: '2020', cost: 100000 },
-                { year: '2021', cost: 100000 }
-              ]
+              costs: { '2020': 100000, '2021': 100000 }
             },
             {
               name: 'Fred Johnson',
               position: 'State Medicaid Director',
               email: 'FJohnson@tycho.com',
               isPrimary: false,
-              percentTime: '0.30',
+              percentTime: '30',
               hasCosts: false,
-              costs: [{ year: '2020', cost: 0 }, { year: '2021', cost: 0 }]
+              costs: { '2020': 0, '2021': 0 }
             }
           ],
           narrativeHIE:
@@ -1078,35 +1036,32 @@ exports.seed = async knex => {
             '<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>\n<p></p>\n<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2021).</span></p>',
           narrativeMMIS:
             "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>\n<p>Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho's HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>",
-          previousActivityExpenses: [
-            {
+          previousActivityExpenses: {
+            '2017': {
               hithie: { federalActual: 140000, totalApproved: 280000 },
               mmis: {
                 '50': { federalActual: 23445, totalApproved: 82545 },
                 '75': { federalActual: 23440, totalApproved: 75340 },
                 '90': { federalActual: 235720, totalApproved: 262460 }
-              },
-              year: '2017'
+              }
             },
-            {
+            '2018': {
               hithie: { federalActual: 146346, totalApproved: 234526 },
               mmis: {
                 '50': { federalActual: 129387, totalApproved: 375445 },
                 '75': { federalActual: 413246, totalApproved: 654455 },
                 '90': { federalActual: 614544, totalApproved: 863455 }
-              },
-              year: '2018'
+              }
             },
-            {
+            '2019': {
               hithie: { federalActual: 320000, totalApproved: 540000 },
               mmis: {
                 '50': { federalActual: 0, totalApproved: 0 },
                 '75': { federalActual: 0, totalApproved: 0 },
                 '90': { federalActual: 0, totalApproved: 0 }
-              },
-              year: '2019'
+              }
             }
-          ],
+          },
           previousActivitySummary:
             '<p><span style="font-size: 18px;"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>\n<p>As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.</p>\n<p></p>\n<p>Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the State’s audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the state’s accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.</p>\n<p></p>\n<p>IAPD Funding Milestones and Expenditures</p>\n<p>The first IAPDU which was approved by CMS in October 2012 requested funding for HIT initiatives. The primary focus of the activities in the IAPDU # 2, which was approved in April 2013 was support of MU Stage 1, preparation for MU Stage 2, and the ongoing administration of the EHR Incentive Payment program. Subsequent IAPD submissions requested continued funding to support program operations and modernization of enterprise systems.</p>\n<p></p>\n<p>Tycho recently transitioned to a new state-wide financial system and it would be overly burdensome and a manual process to detail expenses out in the method done in previous HITECH IAPD submissions. Tycho has elected to report expenditures based on the CMS-64 line reporting for HITECH as this will be the most audible method due to the state’s transition to a new financial system.</p>\n<p>Detailed List of Expenditure Types:</p>\n<ul>\n<li>State personnel</li>\n<li>Travel and conferences: CMS Regional Meeting, attendance at local/Anchorage-based conferences to support EHR Incentive Program and Meaningful Use, and other HIT/HIE related conferences such as StateHealth IT Connect, IT Solutions Management (ISM) annual conference</li>\n<li>Contract payments for State Level Registry solution</li>\n<li>Contract payments for post-payment audits for the Medicaid EHR Incentive Program</li>\n<li>Contract payments for Technical Assistance for EHR Incentive Program and other HITECH activities identified in HITECH IAPD</li>\n<li>Contract payments for MITA 3.0 COTS solution as outlined in HITECH IAPD to support the development of a HITECH MITA 3.0 State Self-Assessment</li>\n<li>Administrative costs: copy paper, office supplies</li>\n</ul>',
           programOverview:
