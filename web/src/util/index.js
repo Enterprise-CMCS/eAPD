@@ -179,21 +179,6 @@ export const generateKey = (() => {
   };
 })();
 
-export const addKeys = obj => {
-  let next = [];
-
-  if (Array.isArray(obj)) {
-    next = obj;
-  } else if (typeof obj === 'object') {
-    obj.key = generateKey();
-    next = Object.values(obj);
-  }
-
-  next.forEach(o => {
-    addKeys(o);
-  });
-};
-
 /**
  * Convert a YYYY-MM-DD date string from state format into a
  * consistent display format

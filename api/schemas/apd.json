@@ -73,6 +73,7 @@
               "required": [
                 "description",
                 "end",
+                "hourly",
                 "name",
                 "start",
                 "totalCost",
@@ -87,6 +88,7 @@
                 "hourly": {
                   "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly",
                   "type": "object",
+                  "required": ["data", "useHourly"],
                   "properties": {
                     "data": {
                       "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/data",
@@ -94,6 +96,7 @@
                         "^[0-9]{4}$": {
                           "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year",
                           "type": "object",
+                          "required": ["hours", "rate"],
                           "properties": {
                             "hours": {
                               "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/hours",
@@ -127,6 +130,7 @@
                   "type": "object",
                   "patternProperties": {
                     "^[0-9]{4}$": {
+                      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/years/year",
                       "type": "number"
                     }
                   }
@@ -141,10 +145,12 @@
               "^[0-9]{4}$": {
                 "$id": "#/properties/activities/items/properties/costAllocation/year",
                 "type": "object",
+                "required": ["ffp", "other"],
                 "properties": {
                   "ffp": {
                     "$id": "#/properties/activities/items/properties/costAllocation/year/ffp",
                     "type": "object",
+                    "required": ["federal", "state"],
                     "properties": {
                       "federal": {
                         "$id": "#/properties/activities/items/properties/costAllocation/year/ffp/federal",
@@ -347,6 +353,7 @@
                     "^[0-9]{4}$": {
                       "$id": "#/properties/activities/items/properties/statePersonnel/items/properties/years/year",
                       "type": "object",
+                      "required": ["amt", "perc"],
                       "properties": {
                         "amt": {
                           "$id": "#/properties/activities/items/properties/statePersonnel/items/properties/years/year/amount",
@@ -374,10 +381,12 @@
               "^[0-9]{4}$": {
                 "$id": "#/properties/activities/items/properties/quarterlyFFP/year",
                 "type": "object",
+                "required": ["1", "2", "3", "4"],
                 "properties": {
                   "1": {
                     "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q1",
                     "type": "object",
+                    "required": ["combined", "contractors", "state"],
                     "properties": {
                       "combined": {
                         "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q1/combined",
@@ -396,6 +405,7 @@
                   "2": {
                     "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q2",
                     "type": "object",
+                    "required": ["combined", "contractors", "state"],
                     "properties": {
                       "combined": {
                         "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q2/combined",
@@ -414,6 +424,7 @@
                   "3": {
                     "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q3",
                     "type": "object",
+                    "required": ["combined", "contractors", "state"],
                     "properties": {
                       "combined": {
                         "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q3/combined",
@@ -432,6 +443,7 @@
                   "4": {
                     "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q4",
                     "type": "object",
+                    "required": ["combined", "contractors", "state"],
                     "properties": {
                       "combined": {
                         "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q4/combined",
@@ -577,47 +589,77 @@
       "type": "string"
     },
     "previousActivityExpenses": {
+      "$id": "#/properties/previousActivityExpenses",
       "type": "object",
       "patternProperties": {
         "^[0-9]{4}$": {
+          "$id": "#/properties/previousActivityExpenses/year",
           "type": "object",
+          "required": ["hithie", "mmis"],
           "properties": {
             "hithie": {
+              "$id": "#/properties/previousActivityExpenses/year/hithie",
               "type": "object",
+              "required": ["federalActual", "totalApproved"],
               "properties": {
                 "federalActual": {
+                  "$id": "#/properties/previousActivityExpenses/year/hithie/federalActual",
                   "type": "number"
                 },
                 "totalApproved": {
+                  "$id": "#/properties/previousActivityExpenses/year/hithie/totalApproved",
                   "type": "number"
                 }
               }
             },
             "mmis": {
+              "$id": "#/properties/previousActivityExpenses/year/mmis",
               "type": "object",
+              "required": ["50", "75", "90"],
               "properties": {
                 "50": {
-                  "federalActual": {
-                    "type": "number"
-                  },
-                  "totalApproved": {
-                    "type": "number"
+                  "$id": "#/properties/previousActivityExpenses/year/mmis/50",
+                  "type": "object",
+                  "required": ["federalActual", "totalApproved"],
+                  "properties": {
+                    "federalActual": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/50/federalActaul",
+                      "type": "number"
+                    },
+                    "totalApproved": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/50/totalApproved",
+                      "type": "number"
+                    }
                   }
                 },
                 "75": {
-                  "federalActual": {
-                    "type": "number"
-                  },
-                  "totalApproved": {
-                    "type": "number"
+                  "$id": "#/properties/previousActivityExpenses/year/mmis/75",
+                  "type": "object",
+                  "required": ["federalActual", "totalApproved"],
+                  "properties": {
+                    "federalActual": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/75/federalActual",
+                      "type": "number"
+                    },
+                    "totalApproved": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/75/totalApproved",
+                      "type": "number"
+                    }
                   }
                 },
                 "90": {
-                  "federalActual": {
-                    "type": "number"
-                  },
-                  "totalApproved": {
-                    "type": "number"
+                  "$id": "#/properties/previousActivityExpenses/year/mmis/90",
+                  "type": "object",
+                  "required": ["federalActual", "totalApproved"],
+                  "properties": {
+                    "federalActual": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/90/federalActual",
+                      "type": "number"
+                    },
+                    "totalApproved": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/90/totalApproved",
+                      "type": "number"
+                    }
                   }
                 }
               }
