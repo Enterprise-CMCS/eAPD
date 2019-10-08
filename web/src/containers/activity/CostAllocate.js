@@ -3,13 +3,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CostAllocateFFP from './CostAllocateFFP';
-import {setCostAllocationMethodology, setCostAllocationOtherFunding} from '../../actions/editActivity'
+import {
+  setCostAllocationMethodology,
+  setCostAllocationOtherFunding
+} from '../../actions/editActivity';
 import Instruction from '../../components/Instruction';
 import RichText from '../../components/RichText';
 import { Subsection } from '../../components/Section';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-const CostAllocate = ({ activity, activityIndex, setMethodology, updateActivity }) => {
+const CostAllocate = ({
+  activity,
+  activityIndex,
+  setMethodology
+ }) => {
   const { costAllocationDesc, otherFundingDesc } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
   const syncOtherFunding = html => setOtherFunding(activityIndex, html);
