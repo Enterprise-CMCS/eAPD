@@ -37,11 +37,22 @@ Object {
         Object {
           "description": "Maintain SLR",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "Super SLR Incorporated",
           "start": "",
           "totalCost": 32423,
-          "useHourly": false,
           "years": Object {
             "2019": 999756,
             "2020": 342444,
@@ -50,11 +61,22 @@ Object {
         Object {
           "description": "Technology consulting and planning services.",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "Tech Consulting Inc.",
           "start": "",
           "totalCost": 473573,
-          "useHourly": false,
           "years": Object {
             "2019": 333000,
             "2020": 200000,
@@ -350,11 +372,22 @@ Object {
         Object {
           "description": "Hosting and development support.",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "Interface Vendor Inc.",
           "start": "",
           "totalCost": 26453574,
-          "useHourly": false,
           "years": Object {
             "2019": 650000,
             "2020": 750000,
@@ -363,11 +396,22 @@ Object {
         Object {
           "description": "Interface M&O contractor.",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "TBD",
           "start": "",
           "totalCost": 7398,
-          "useHourly": false,
           "years": Object {
             "2019": 0,
             "2020": 1000000,
@@ -699,11 +743,22 @@ Object {
         Object {
           "description": "",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "",
           "start": "",
           "totalCost": 3496874,
-          "useHourly": false,
           "years": Object {
             "2019": 0,
             "2020": 0,
@@ -958,11 +1013,22 @@ Object {
         Object {
           "description": "",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "RFP Planning Vendor Inc.",
           "start": "",
           "totalCost": 4368734,
-          "useHourly": false,
           "years": Object {
             "2019": 500000,
             "2020": 0,
@@ -971,11 +1037,22 @@ Object {
         Object {
           "description": "",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "Blue Button Builder Inc.",
           "start": "",
           "totalCost": 35246,
-          "useHourly": false,
           "years": Object {
             "2019": 0,
             "2020": 2000000,
@@ -1135,11 +1212,22 @@ Object {
         Object {
           "description": "Gateway Implementation.",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "TBD",
           "start": "",
           "totalCost": 246477,
-          "useHourly": false,
           "years": Object {
             "2019": 0,
             "2020": 1500000,
@@ -1148,11 +1236,22 @@ Object {
         Object {
           "description": "Gateway Development Planning and RFP",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "Gateway Vendor Inc.",
           "start": "",
           "totalCost": 7473747,
-          "useHourly": false,
           "years": Object {
             "2019": 500000,
             "2020": 0,
@@ -1343,11 +1442,22 @@ Object {
         Object {
           "description": "Research for and RFP development for MITA 3.0 SSA",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "Tech Consulting Inc.",
           "start": "",
           "totalCost": 264574,
-          "useHourly": false,
           "years": Object {
             "2019": 450000,
             "2020": 150000,
@@ -1356,11 +1466,22 @@ Object {
         Object {
           "description": "MITA 3.0 implementation.",
           "end": "",
-          "hourlyData": Array [],
+          "hourly": Object {
+            "data": Object {
+              "2019": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "2020": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
           "name": "TBD",
           "start": "",
           "totalCost": 64574,
-          "useHourly": false,
           "years": Object {
             "2019": 200000,
             "2020": 500000,
@@ -1373,7 +1494,7 @@ Object {
             "federal": 50,
             "state": 50,
           },
-          "otherAmount": 125000,
+          "other": 125000,
         },
         "2020": Object {
           "ffp": Object {

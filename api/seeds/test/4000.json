@@ -7,21 +7,31 @@
         {
           "description": "Maintain SLR",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "Super SLR Incorporated",
           "start": "",
           "totalCost": 32423,
-          "useHourly": false,
           "years": { "2019": 999756, "2020": 342444 }
         },
         {
           "description": "Technology consulting and planning services.",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "Tech Consulting Inc.",
           "start": "",
           "totalCost": 473573,
-          "useHourly": false,
           "years": { "2019": 333000, "2020": 200000 }
         }
       ],
@@ -192,21 +202,31 @@
         {
           "description": "Hosting and development support.",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "Interface Vendor Inc.",
           "start": "",
           "totalCost": 26453574,
-          "useHourly": false,
           "years": { "2019": 650000, "2020": 750000 }
         },
         {
           "description": "Interface M&O contractor.",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "TBD",
           "start": "",
           "totalCost": 7398,
-          "useHourly": false,
           "years": { "2019": 0, "2020": 1000000 }
         }
       ],
@@ -359,11 +379,16 @@
         {
           "description": "",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "",
           "start": "",
           "totalCost": 3496874,
-          "useHourly": false,
           "years": { "2019": 0, "2020": 0 }
         }
       ],
@@ -497,21 +522,31 @@
         {
           "description": "",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "RFP Planning Vendor Inc.",
           "start": "",
           "totalCost": 4368734,
-          "useHourly": false,
           "years": { "2019": 500000, "2020": 0 }
         },
         {
           "description": "",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "Blue Button Builder Inc.",
           "start": "",
           "totalCost": 35246,
-          "useHourly": false,
           "years": { "2019": 0, "2020": 2000000 }
         }
       ],
@@ -609,21 +644,31 @@
         {
           "description": "Gateway Implementation.",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "TBD",
           "start": "",
           "totalCost": 246477,
-          "useHourly": false,
           "years": { "2019": 0, "2020": 1500000 }
         },
         {
           "description": "Gateway Development Planning and RFP",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "Gateway Vendor Inc.",
           "start": "",
           "totalCost": 7473747,
-          "useHourly": false,
           "years": { "2019": 500000, "2020": 0 }
         }
       ],
@@ -725,28 +770,38 @@
         {
           "description": "Research for and RFP development for MITA 3.0 SSA",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "Tech Consulting Inc.",
           "start": "",
           "totalCost": 264574,
-          "useHourly": false,
           "years": { "2019": 450000, "2020": 150000 }
         },
         {
           "description": "MITA 3.0 implementation.",
           "end": "",
-          "hourlyData": [],
+          "hourly": {
+            "data": {
+              "2019": { "hours": "", "rate": "" },
+              "2020": { "hours": "", "rate": "" }
+            },
+            "useHourly": false
+          },
           "name": "TBD",
           "start": "",
           "totalCost": 64574,
-          "useHourly": false,
           "years": { "2019": 200000, "2020": 500000 }
         }
       ],
       "costAllocation": {
         "2019": {
           "ffp": { "federal": 50, "state": 50 },
-          "otherAmount": 125000
+          "other": 125000
         },
         "2020": {
           "ffp": { "federal": 90, "state": 10 },
