@@ -60,7 +60,7 @@ describe('the CostAllocate component', () => {
         }
       }
     };
-    expect(mapStateToProps(state, {activityIndex: 1})).toEqual({
+    expect(mapStateToProps(state, {activityIndex: 0})).toEqual({
         activity: {
           key: 'activity key'
         }
