@@ -15,7 +15,8 @@ import { selectActivityByIndex } from '../../reducers/activities.selectors';
 const CostAllocate = ({
   activity,
   activityIndex,
-  setMethodology
+  setMethodology,
+  setOtherFunding
  }) => {
   const { costAllocationDesc, otherFundingDesc } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
