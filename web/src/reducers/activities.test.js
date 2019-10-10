@@ -1,4 +1,5 @@
 import sinon from 'sinon';
+import { SELECT_APD } from '../actions/app/symbols';
 
 // The last person on the moon re-boards the Lunar Excursion Module on December
 // 13, 1972.  (As everyone knows, December is the 11th month.)  FFY 1973.  Set
@@ -30,7 +31,7 @@ describe('activities reducer', () => {
   const newContractor = keyFn => ({
     key: keyFn(),
     initialCollapsed: false,
-    desc: '',
+    description: '',
     end: '',
     name: '',
     start: '',
@@ -49,7 +50,7 @@ describe('activities reducer', () => {
   const newPerson = keyFn => ({
     key: keyFn(),
     initialCollapsed: false,
-    desc: '',
+    description: '',
     title: '',
     years: { '1973': { amt: '', perc: '' }, '1974': { amt: '', perc: '' } }
   });
@@ -65,7 +66,7 @@ describe('activities reducer', () => {
     key: keyFn(),
     initialCollapsed: false,
     category: 'Hardware, software, and licensing',
-    desc: '',
+    description: '',
     years: { '1973': 0, '1974': 0 }
   });
 
@@ -80,7 +81,10 @@ describe('activities reducer', () => {
     key: keyFn(),
     alternatives: '',
     contractorResources: [newContractor(keyFn)],
-    costAllocationDesc: '',
+    costAllocationNarrative: {
+      methodology: '',
+      otherSources: ''
+    },
     costAllocation: {
       '1973': { ffp: { federal: 90, state: 10 }, other: 0 },
       '1974': { ffp: { federal: 90, state: 10 }, other: 0 }
@@ -95,7 +99,6 @@ describe('activities reducer', () => {
     plannedEndDate: '',
     schedule: [newMilestone(keyFn)],
     name: '',
-    otherFundingDesc: '',
     standardsAndConditions: {
       businessResults: '',
       documentation: '',
@@ -669,7 +672,7 @@ describe('activities reducer', () => {
             replaced: true
           },
           {
-            type: 'SELECT_APD',
+            type: SELECT_APD,
             data: {
               activities: []
             }
@@ -700,7 +703,7 @@ describe('activities reducer', () => {
             replaced: true
           },
           {
-            type: 'SELECT_APD',
+            type: SELECT_APD,
             apd: {
               activities: [
                 { key: 'a' },

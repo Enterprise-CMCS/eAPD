@@ -14,7 +14,7 @@ describe('the StatePersonForm component', () => {
     <StatePersonForm
       index={83}
       item={{
-        desc: 'personnel desc',
+        description: 'personnel desc',
         title: 'personnel title',
         years: {
           7473: 2398235,

@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { UPDATE_BUDGET } from '../apd';
+import { UPDATE_BUDGET } from '../budget';
 
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from './symbols';
 import {

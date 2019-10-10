@@ -13,8 +13,10 @@ describe('the CostAllocate component', () => {
     activityIndex: 1,
     activity: {
       key: 'activity key',
-      costAllocationDesc: 'cost allocation',
-      otherFundingDesc: 'other funding'
+      costAllocationNarrative: {
+        methodology: 'cost allocation',
+        otherSources: 'other funding'
+      }
     },
     years: ['1066', '1067'],
     setMethodology: jest.fn(),

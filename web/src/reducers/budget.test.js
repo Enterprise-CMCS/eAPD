@@ -1,5 +1,5 @@
 import budget from './budget';
-import { UPDATE_BUDGET } from '../actions/apd';
+import { UPDATE_BUDGET } from '../actions/budget';
 
 describe('budget reducer', () => {
   const initialState = {

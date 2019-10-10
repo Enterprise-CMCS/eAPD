@@ -52,6 +52,7 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
       />
       <Connect(CostAllocate)
         aKey="activity key"
+        activityIndex={2}
       />
       <Connect(StandardsAndConditions)
         aKey="activity key"

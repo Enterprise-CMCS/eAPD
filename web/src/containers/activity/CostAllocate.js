@@ -17,8 +17,10 @@ const CostAllocate = ({
   activityIndex,
   setMethodology,
   setOtherFunding
- }) => {
-  const { costAllocationDesc, otherFundingDesc } = activity;
+}) => {
+  const {
+    costAllocationNarrative: { methodology, otherSources }
+  } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
   const syncOtherFunding = html => setOtherFunding(activityIndex, html);
 
@@ -33,7 +35,7 @@ const CostAllocate = ({
           }}
         />
         <RichText
-          content={costAllocationDesc}
+          content={methodology}
           onSync={syncMethodology}
           editorClassName="rte-textarea-l"
         />
@@ -48,7 +50,7 @@ const CostAllocate = ({
           }}
         />
         <RichText
-          content={otherFundingDesc}
+          content={otherSources}
           onSync={syncOtherFunding}
           editorClassName="rte-textarea-l"
         />

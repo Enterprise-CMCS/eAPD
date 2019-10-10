@@ -86,23 +86,35 @@ module.exports = {
                 type: 'string',
                 description: 'Description'
               },
-              hourlyData: arrayOf({
+              hourly: {
                 type: 'object',
                 properties: {
-                  hours: {
-                    type: 'number',
-                    description: 'Number of hours this contractor works/ed'
+                  data: {
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          hours: {
+                            type: 'number',
+                            description:
+                              'Number of hours the contractor is expected to work for the given federal fiscal year'
+                          },
+                          rate: {
+                            type: 'number',
+                            description:
+                              'Contractor hourly rate for the given federal fiscal year'
+                          }
+                        }
+                      }
+                    }
                   },
-                  rates: {
-                    type: 'number',
-                    description: 'Hourly rate for this contractor'
-                  },
-                  year: {
-                    type: 'string',
-                    description: 'Year this hourly rate applies to'
+                  useHourly: {
+                    type: 'boolean',
+                    description:
+                      'Whether to use hourly rates for this contractor'
                   }
                 }
-              }),
+              },
               start: {
                 type: 'string',
                 format: 'date-time',
@@ -119,25 +131,17 @@ module.exports = {
                 type: 'number',
                 description: 'Contractor resource total cost'
               },
-              useHourly: {
-                type: 'boolean',
-                description: 'Whether to use hourly rates for this contractor'
-              },
-              years: arrayOf({
+              years: {
                 type: 'object',
                 description:
                   'Details of each year the contractor resource will be working',
-                properties: {
-                  year: {
-                    type: 'string',
-                    description: 'Year this detail applies to'
-                  },
-                  cost: {
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'number',
                     description: 'Contractor resource cost of the year'
                   }
                 }
-              })
+              }
             }
           }),
           costAllocationNarrative: {
@@ -153,31 +157,36 @@ module.exports = {
               }
             }
           },
-          costAllocation: arrayOf({
+          costAllocation: {
             type: 'object',
-            properties: {
-              federalPercent: {
-                type: 'number',
-                description:
-                  'Federal share for this activity for this year, from 0 to 1'
-              },
-              statePercent: {
-                type: 'number',
-                description:
-                  'State share for this activity for this year, from 0 to 1'
-              },
-              otherAmount: {
-                type: 'number',
-                description:
-                  'Other amount (dollars) for this activity for this year'
-              },
-              year: {
-                type: 'number',
-                description:
-                  'Federal fiscal year this cost allocation applies to'
+            'x-patternProperties': {
+              '^[0-9]{4}$': {
+                type: 'object',
+                properties: {
+                  ffp: {
+                    type: 'object',
+                    properties: {
+                      federal: {
+                        type: 'number',
+                        description:
+                          'Federal share for this activity for this year, from 0 to 100'
+                      },
+                      state: {
+                        type: 'number',
+                        description:
+                          'State share for this activity for this year, from 0 to 100'
+                      }
+                    }
+                  },
+                  other: {
+                    type: 'number',
+                    description:
+                      'Other amount (dollars) for this activity for this year'
+                  }
+                }
               }
             }
-          }),
+          },
           goals: arrayOf({
             type: 'object',
             description: 'Activity goal',
@@ -205,20 +214,17 @@ module.exports = {
                 type: 'string',
                 description: 'Short description of the expense'
               },
-              entries: arrayOf({
+              years: {
                 type: 'object',
                 description: 'Expense entry',
-                properties: {
-                  year: {
-                    type: 'string',
-                    description: 'Expense entry year'
-                  },
-                  amount: {
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'number',
-                    description: 'Expense entry amount'
+                    description:
+                      'Expense amount for the given federal fiscal year'
                   }
                 }
-              })
+              }
             }
           }),
           schedule: arrayOf({
@@ -259,122 +265,119 @@ module.exports = {
                 type: 'boolean',
                 description: '"Key Personnel" designation'
               },
-              years: arrayOf({
+              years: {
                 type: 'object',
-                properties: {
-                  cost: {
-                    type: 'number',
-                    description: `This personnel's cost for the given federal fiscal year`
-                  },
-                  fte: {
-                    type: 'number',
-                    description:
-                      'Percent of time this personnel is dedicating to the activity'
-                  },
-                  year: {
-                    type: 'string',
-                    description:
-                      'Federal fiscal year this information applies to'
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      amt: {
+                        type: 'number',
+                        description: `State personnel's total cost for the federal fiscal year`
+                      },
+                      perc: {
+                        type: 'number',
+                        description:
+                          'Number of FTEs this state personnel will spend on the project for the federal fiscal year'
+                      }
+                    }
                   }
                 }
-              })
+              }
             }
           }),
-          quarterlyFFP: arrayOf({
+          quarterlyFFP: {
             type: 'object',
             description:
               'Federal share of this activity cost, by expense type, per fiscal quarter',
-            properties: {
-              q1: {
+            'x-patternProperties': {
+              '^[0-9]{4}$': {
                 type: 'object',
-                description: 'First fiscal quarter FFP',
                 properties: {
-                  combined: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  '1': {
+                    type: 'object',
+                    properties: {
+                      combined: {
+                        type: 'number',
+                        description:
+                          'Combined cost for the first quarter of the given federal fiscal year'
+                      },
+                      contractors: {
+                        type: 'number',
+                        description:
+                          'Contractor costs for the first quarter of the given federal fiscal year'
+                      },
+                      state: {
+                        type: 'number',
+                        description:
+                          'In-house (state personnel + non-personnel) costs for the first quarter of the given federal fiscal year'
+                      }
+                    }
                   },
-                  contractors: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  '2': {
+                    type: 'object',
+                    properties: {
+                      combined: {
+                        type: 'number',
+                        description:
+                          'Combined cost for the second quarter of the given federal fiscal year'
+                      },
+                      contractors: {
+                        type: 'number',
+                        description:
+                          'Contractor costs for the second quarter of the given federal fiscal year'
+                      },
+                      state: {
+                        type: 'number',
+                        description:
+                          'In-house (state personnel + non-personnel) costs for the second quarter of the given federal fiscal year'
+                      }
+                    }
                   },
-                  state: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  '3': {
+                    type: 'object',
+                    properties: {
+                      combined: {
+                        type: 'number',
+                        description:
+                          'Combined cost for the third quarter of the given federal fiscal year'
+                      },
+                      contractors: {
+                        type: 'number',
+                        description:
+                          'Contractor costs for the third quarter of the given federal fiscal year'
+                      },
+                      state: {
+                        type: 'number',
+                        description:
+                          'In-house (state personnel + non-personnel) costs for the third quarter of the given federal fiscal year'
+                      }
+                    }
+                  },
+                  '4': {
+                    type: 'object',
+                    properties: {
+                      combined: {
+                        type: 'number',
+                        description:
+                          'Combined cost for the fourth quarter of the given federal fiscal year'
+                      },
+                      contractors: {
+                        type: 'number',
+                        description:
+                          'Contractor costs for the fourth quarter of the given federal fiscal year'
+                      },
+                      state: {
+                        type: 'number',
+                        description:
+                          'In-house (state personnel + non-personnel) costs for the fourth quarter of the given federal fiscal year'
+                      }
+                    }
                   }
                 }
-              },
-              q2: {
-                type: 'object',
-                description: 'Second fiscal quarter FFP',
-                properties: {
-                  combined: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total to be paid in this quarter'
-                  },
-                  contractors: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
-                  },
-                  state: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
-                  }
-                }
-              },
-              q3: {
-                type: 'object',
-                description: 'Third fiscal quarter FFP',
-                properties: {
-                  combined: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total to be paid in this quarter'
-                  },
-                  contractors: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
-                  },
-                  state: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
-                  }
-                }
-              },
-              q4: {
-                type: 'object',
-                description: 'Fourth fiscal quarter FFP',
-                properties: {
-                  combined: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total to be paid in this quarter'
-                  },
-                  contractors: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
-                  },
-                  state: {
-                    type: 'number',
-                    description:
-                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
-                  }
-                }
-              },
-              year: {
-                type: 'number',
-                description: 'Federal fiscal year this quarterly FFP applies to'
               }
             }
-          })
+          }
         }
       },
       apd: {
@@ -400,31 +403,25 @@ module.exports = {
           incentivePayments: arrayOf({
             type: 'object',
             properties: {
-              year: {},
-              q1: { $ref: '#/components/schemas/incentivePaymentQuarter' },
-              q2: { $ref: '#/components/schemas/incentivePaymentQuarter' },
-              q3: { $ref: '#/components/schemas/incentivePaymentQuarter' },
-              q4: { $ref: '#/components/schemas/incentivePaymentQuarter' }
+              ehAmt: { $ref: '#/components/schemas/incentivePaymentType' },
+              ehCt: { $ref: '#/components/schemas/incentivePaymentType' },
+              epAmt: { $ref: '#/components/schemas/incentivePaymentType' },
+              epCt: { $ref: '#/components/schemas/incentivePaymentType' }
             }
           }),
           keyPersonnel: arrayOf({
             type: 'object',
             properties: {
               id: { type: 'number' },
-              costs: arrayOf({
+              costs: {
                 type: 'object',
-                properties: {
-                  cost: {
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'number',
-                    description: `Person's cost for the given year`
-                  },
-                  year: {
-                    type: 'string',
-                    description:
-                      'Federal fiscal year this cost is attributable to'
+                    description: `Person's cost for the year described by the property name`
                   }
                 }
-              }),
+              },
               email: { type: 'string', description: `Person's email address` },
               hasCosts: {
                 type: 'boolean',
@@ -439,9 +436,9 @@ module.exports = {
               name: { type: 'string', description: `Person's name` },
               percentTime: {
                 type: 'number',
-                description: `Percent of this person's time dedicated to the project, as a faction between 0 and 1.`,
+                description: `Percent of this person's time dedicated to the project, between 0 and 100.`,
                 minimum: 0,
-                maximum: 1
+                maximum: 100
               },
               position: { type: 'string', description: `Person's position` }
             }
@@ -461,123 +458,66 @@ module.exports = {
             description:
               'Brief description of MMIS-funded activities contained in this APD'
           },
-          previousActivityExpenses: arrayOf({
+          previousActivityExpenses: {
             type: 'object',
-            properties: {
-              year: {
-                type: 'string',
-                description: 'Federal fiscal year this information applies to'
-              },
-              hie: {
+            'x-patternProperties': {
+              '^[0-9]{4}$': {
                 type: 'object',
-                description: 'HIE-funded expenses',
                 properties: {
-                  federalActual: {
-                    type: 'number',
-                    description: 'Total federal share actually spent'
+                  hithie: {
+                    type: 'object',
+                    description: 'HIT- and HIE-funded expenses',
+                    properties: {
+                      federalActual: {
+                        type: 'number',
+                        description: 'Total federal share actually spent'
+                      },
+                      totalApproved: {
+                        type: 'number',
+                        description: 'Total approved in the previous APD'
+                      }
+                    }
                   },
-                  federalApproved: {
-                    type: 'number',
-                    description:
-                      'Total federal share approved in the previous APD'
-                  },
-                  stateActual: {
-                    type: 'number',
-                    description: 'Total state share actually spent'
-                  },
-                  stateApproved: {
-                    type: 'number',
-                    description:
-                      'Total state share approved in the previous APD'
-                  }
-                }
-              },
-              hit: {
-                type: 'object',
-                description: 'HIT-funded expenses',
-                properties: {
-                  federalActual: {
-                    type: 'number',
-                    description: 'Total federal share actually spent'
-                  },
-                  federalApproved: {
-                    type: 'number',
-                    description:
-                      'Total federal share approved in the previous APD'
-                  },
-                  stateActual: {
-                    type: 'number',
-                    description: 'Total state share actually spent'
-                  },
-                  stateApproved: {
-                    type: 'number',
-                    description:
-                      'Total state share approved in the previous APD'
-                  }
-                }
-              },
-              mmis: {
-                type: 'object',
-                description: 'HIT-funded expenses',
-                properties: {
-                  federal90Actual: {
-                    type: 'number',
-                    description: 'Total federal 90% share actually spent'
-                  },
-                  federal90Approved: {
-                    type: 'number',
-                    description:
-                      'Total federal 90% share approved in the previous APD'
-                  },
-                  state10Actual: {
-                    type: 'number',
-                    description: 'Total state 10% share actually spent'
-                  },
-                  state10Approved: {
-                    type: 'number',
-                    description:
-                      'Total state 10% share approved in the previous APD'
-                  },
-                  federal75Actual: {
-                    type: 'number',
-                    description: 'Total federal 75% share actually spent'
-                  },
-                  federal75Approved: {
-                    type: 'number',
-                    description:
-                      'Total federal 75% share approved in the previous APD'
-                  },
-                  state25Actual: {
-                    type: 'number',
-                    description: 'Total state 25% share actually spent'
-                  },
-                  state25Approved: {
-                    type: 'number',
-                    description:
-                      'Total state 25% share approved in the previous APD'
-                  },
-                  federal50Actual: {
-                    type: 'number',
-                    description: 'Total federal 50% share actually spent'
-                  },
-                  federal50Approved: {
-                    type: 'number',
-                    description:
-                      'Total federal 50% share approved in the previous APD'
-                  },
-                  state50Actual: {
-                    type: 'number',
-                    description: 'Total state 50% share actually spent'
-                  },
-                  state50Approved: {
-                    type: 'number',
-                    description:
-                      'Total state 50% share approved in the previous APD'
+                  mmis: {
+                    type: 'object',
+                    description: 'HIT-funded expenses',
+                    properties: {
+                      50: {
+                        federalActual: {
+                          type: 'number',
+                          description: 'Total federal share actually spent'
+                        },
+                        totalApproved: {
+                          type: 'number',
+                          description: 'Total approved in the previous APD'
+                        }
+                      },
+                      75: {
+                        federalActual: {
+                          type: 'number',
+                          description: 'Total federal share actually spent'
+                        },
+                        totalApproved: {
+                          type: 'number',
+                          description: 'Total approved in the previous APD'
+                        }
+                      },
+                      90: {
+                        federalActual: {
+                          type: 'number',
+                          description: 'Total federal share actually spent'
+                        },
+                        totalApproved: {
+                          type: 'number',
+                          description: 'Total approved in the previous APD'
+                        }
+                      }
+                    }
                   }
                 }
               }
             }
-          }),
+          },
           previousActivitySummary: {
             type: 'string',
             description:
@@ -645,17 +585,38 @@ module.exports = {
             description: 'Timestamp of the last save to this APD'
           },
           years: arrayOf({
-            type: 'number'
+            type: 'string'
           })
         }
       },
-      incentivePaymentQuarter: {
+      incentivePaymentType: {
         type: 'object',
-        properties: {
-          ehPayment: { type: 'number' },
-          ehCount: { type: 'number' },
-          epPayment: { type: 'number' },
-          epCount: { type: 'number' }
+        'x-patternProperties': {
+          '^[0-9]{4}$': {
+            type: 'object',
+            properties: {
+              '1': {
+                type: 'number',
+                description:
+                  'EH payment amount for the first quarter of the given fiscal year'
+              },
+              '2': {
+                type: 'number',
+                description:
+                  'EH payment amount for the second quarter of the given fiscal year'
+              },
+              '3': {
+                type: 'number',
+                description:
+                  'EH payment amount for the third quarter of the given fiscal year'
+              },
+              '4': {
+                type: 'number',
+                description:
+                  'EH payment amount for the fourth quarter of the given fiscal year'
+              }
+            }
+          }
         }
       },
       state: {

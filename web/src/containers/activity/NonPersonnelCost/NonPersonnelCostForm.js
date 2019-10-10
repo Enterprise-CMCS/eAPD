@@ -11,7 +11,7 @@ const NonPersonnelCostForm = ({
   handleEditDesc,
   handleEditCategory,
   index,
-  item: { category, desc, years }
+  item: { category, description, years }
 }) => {
   const editCategory = useCallback(
     ({ target: { value } }) => handleEditCategory(index, value),
@@ -58,7 +58,7 @@ const NonPersonnelCostForm = ({
         label="Description"
         rows={5}
         name="desc"
-        value={desc}
+        value={description}
         onChange={editDesc}
       />
       {Object.entries(years).map(([year, cost]) => (
@@ -82,7 +82,7 @@ NonPersonnelCostForm.propTypes = {
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
     category: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired
 };

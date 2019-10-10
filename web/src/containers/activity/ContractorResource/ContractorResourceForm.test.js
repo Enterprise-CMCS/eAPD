@@ -15,7 +15,7 @@ describe('the ContractorResourceForm component', () => {
   const props = {
     index: 1,
     item: {
-      desc: 'They cleaned up the latrines after the Battle of Hastings',
+      description: 'They cleaned up the latrines after the Battle of Hastings',
       end: '1066-10-15',
       hourly: {
         useHourly: false,

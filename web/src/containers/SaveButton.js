@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import stickybits from 'stickybits';
 
 import { saveApd } from '../actions/apd';
-import { getIsDirty } from '../reducers/dirty';
 import { getSaveApdError } from '../reducers/errors';
+import { selectHasChanges } from '../reducers/patch.selectors';
 import { getSaveApdWorking } from '../reducers/working';
 
 const getButtonContent = (dirty, working) => {
@@ -69,7 +69,7 @@ class SaveButton extends PureComponent {
   };
 
   render() {
-    const { dirty, error, working } = this.props;
+    const { error, needsSave, working } = this.props;
     const { hasFetched, success } = this.state;
 
     let alert = null;
@@ -91,7 +91,7 @@ class SaveButton extends PureComponent {
       }
     }
 
-    const buttonVariant = dirty ? 'primary' : 'success';
+    const buttonVariant = needsSave ? 'primary' : 'success';
 
     return (
       <div
@@ -100,7 +100,7 @@ class SaveButton extends PureComponent {
       >
         <div className="save-button--alert">{alert}</div>
         <Button variation={buttonVariant} onClick={this.save}>
-          {getButtonContent(dirty, working)}
+          {getButtonContent(needsSave, working)}
         </Button>
       </div>
     );
@@ -108,15 +108,15 @@ class SaveButton extends PureComponent {
 }
 
 SaveButton.propTypes = {
-  dirty: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+  needsSave: PropTypes.bool.isRequired,
   saveApd: PropTypes.func.isRequired,
   working: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-  dirty: getIsDirty(state),
   error: getSaveApdError(state),
+  needsSave: selectHasChanges(state),
   working: getSaveApdWorking(state)
 });
 

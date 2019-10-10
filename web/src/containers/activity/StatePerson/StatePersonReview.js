@@ -5,7 +5,7 @@ import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 
 const StatePersonReview = ({
-  item: { desc, title, years },
+  item: { description, title, years },
   expand,
   index,
   onDeleteClick
@@ -17,7 +17,7 @@ const StatePersonReview = ({
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >
-      {desc}
+      {description}
       <div className="ds-u-margin-top--2">
         {Object.entries(years).map(([year, { amt, perc }]) => (
           <div key={year}>
@@ -35,7 +35,7 @@ StatePersonReview.propTypes = {
 
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
-    desc: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired,

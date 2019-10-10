@@ -1,5 +1,5 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from './symbols';
-import { updateBudget } from '../apd';
+import { updateBudget } from '../budget';
 
 /**
  * Add a new key person to the APD

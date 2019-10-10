@@ -1,4 +1,5 @@
 import sinon from 'sinon';
+import { SELECT_APD } from '../actions/app/symbols';
 
 // The Hubble Space Telescope was launched on the space shuttle Discovery on
 // April 24, 1990.  FFY 1990.  Set this clock before we import code under test,
@@ -146,7 +147,7 @@ describe('APD reducer', () => {
   it('should handle selecting an APD', () => {
     expect(
       apd(initialState, {
-        type: 'SELECT_APD',
+        type: SELECT_APD,
         apd: {
           value: `hurr hurr i'm a burr`,
           // Some nobles are tossed out a window in the Second Defenestration
@@ -565,7 +566,7 @@ describe('APD reducer', () => {
               expanded: true,
               hasCosts: false,
               isPrimary: false,
-              percentTime: 0,
+              percentTime: '0',
               name: '',
               position: '',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
@@ -661,7 +662,7 @@ describe('APD reducer', () => {
             initialCollapsed: false,
             isPrimary: false,
             name: '',
-            percentTime: 0,
+            percentTime: '0',
             position: '',
             key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }
@@ -880,7 +881,7 @@ describe('APD reducer helper methods', () => {
             expanded: true,
             hasCosts: false,
             isPrimary: false,
-            percentTime: 0,
+            percentTime: '0',
             name: '',
             position: '',
             key: expect.stringMatching(/^[a-f0-9]{8}$/),
