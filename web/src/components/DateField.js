@@ -22,7 +22,9 @@ const joinDate = ({ day, month, year }) => {
     return '';
   }
 
-  return `${year}-${month}-${day}`;
+  return `${year}-${month < 10 ? `0${month}` : month}-${
+    day < 10 ? `0${day}` : day
+  }`;
 };
 
 const DateField = ({ value, onChange, ...rest }) => {

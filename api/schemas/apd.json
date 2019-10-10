@@ -3,7 +3,7 @@
     "optionalFullDate": {
       "$id": "#/definitions/fullDate",
       "anyOf": [
-        { "type": "string", "format": "date-time" },
+        { "type": "string", "format": "date" },
         { "type": "string", "enum": [""] }
       ]
     },
@@ -257,8 +257,7 @@
               "properties": {
                 "endDate": {
                   "$id": "#/properties/activities/items/properties/schedule/items/properties/endDate",
-                  "format": "date",
-                  "type": "string"
+                  "$ref": "#/definitions/optionalFullDate"
                 },
                 "milestone": {
                   "$id": "#/properties/activities/items/properties/schedule/items/properties/milestone",

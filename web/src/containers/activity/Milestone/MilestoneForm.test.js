@@ -1,12 +1,21 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import MilestoneForm from './MilestoneForm';
+import {
+  setMilestoneEndDate,
+  setMilestoneName
+} from '../../../actions/editActivity';
+
+jest.spyOn(React, 'useContext');
+React.useContext.mockImplementation(() => ({
+  index: 'activity index'
+}));
+
+const { plain: MilestoneForm, mapDispatchToProps } = require('./MilestoneForm');
 
 describe('the MilestoneForm component', () => {
-  const onChangeDate = jest.fn();
-  const onChangeName = jest.fn();
-  const collapse = jest.fn();
+  const setEndDate = jest.fn();
+  const setName = jest.fn();
 
   const component = shallow(
     <MilestoneForm
@@ -18,15 +27,14 @@ describe('the MilestoneForm component', () => {
         endDate: '1942-8-16',
         name: 'Milestone name'
       }}
-      onChangeDate={onChangeDate}
-      onChangeName={onChangeName}
+      setEndDate={setEndDate}
+      setName={setName}
     />
   );
 
   beforeEach(() => {
-    onChangeDate.mockClear();
-    onChangeName.mockClear();
-    collapse.mockClear();
+    setEndDate.mockClear();
+    setName.mockClear();
   });
 
   test('renders correctly', () => {
@@ -38,14 +46,25 @@ describe('the MilestoneForm component', () => {
       component
         .find('TextField')
         .simulate('change', { target: { value: 'new name' } });
-      expect(onChangeName).toHaveBeenCalledWith(3252, 'new name');
+      expect(setName).toHaveBeenCalledWith('activity index', 3252, 'new name');
     });
 
     test('handles changing the milestone date', () => {
       component
         .find('DateField')
         .simulate('change', 'ignored text', 'new date');
-      expect(onChangeDate).toHaveBeenCalledWith(3252, 'new date');
+      expect(setEndDate).toHaveBeenCalledWith(
+        'activity index',
+        3252,
+        'new date'
+      );
+    });
+  });
+
+  it('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setEndDate: setMilestoneEndDate,
+      setName: setMilestoneName
     });
   });
 });

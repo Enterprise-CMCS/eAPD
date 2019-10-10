@@ -7,15 +7,15 @@ import {
   mapStateToProps
 } from './Schedule';
 import {
-  addActivityMilestone,
-  removeActivityMilestone,
-  updateActivity
-} from '../../actions/activities';
+  addMilestone,
+  removeMilestone,
+  setActivityEndDate,
+  setActivityStartDate
+} from '../../actions/editActivity';
 
 describe('the Schedule (milestones) component', () => {
   const props = {
     activity: {
-      key: 'activity key',
       // The Battle of the Scheldt results in a key Allied victory, when
       // Canadian forces successfully opened shipping routes to Antwerp, enabling
       // supplies to reach Allied forces in northwest Europe.
@@ -30,17 +30,20 @@ describe('the Schedule (milestones) component', () => {
         }
       ]
     },
-    addActivityMilestone: jest.fn(),
-    removeActivityMilestone: jest.fn(),
-    updateActivity: jest.fn()
+    activityIndex: 7,
+    add: jest.fn(),
+    remove: jest.fn(),
+    setEndDate: jest.fn(),
+    setStartDate: jest.fn()
   };
 
   const component = shallow(<Schedule {...props} />);
 
   beforeEach(() => {
-    props.addActivityMilestone.mockClear();
-    props.removeActivityMilestone.mockClear();
-    props.updateActivity.mockClear();
+    props.add.mockClear();
+    props.remove.mockClear();
+    props.setEndDate.mockClear();
+    props.setStartDate.mockClear();
   });
 
   it('renders correctly', () => {
@@ -52,32 +55,13 @@ describe('the Schedule (milestones) component', () => {
     it('handles adding a new milestone', () => {
       list.prop('onAddClick')();
 
-      expect(props.addActivityMilestone).toHaveBeenCalledWith('activity key');
+      expect(props.add).toHaveBeenCalledWith(7);
     });
 
     it('handles removing a milestone', () => {
-      list.prop('onDeleteClick')('milestone key');
+      list.prop('onDeleteClick')('milestone 1');
 
-      expect(props.removeActivityMilestone).toHaveBeenCalledWith(
-        'activity key',
-        'milestone key'
-      );
-    });
-
-    it('handles updating a milestone name', () => {
-      list.prop('onChangeName')(7, 'new name');
-
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        schedule: { 7: { milestone: 'new name' } }
-      });
-    });
-
-    it('handles updating a milestone end date', () => {
-      list.prop('onChangeDate')(7, 'new end date');
-
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        schedule: { 7: { endDate: 'new end date' } }
-      });
+      expect(props.remove).toHaveBeenCalledWith(7, 0);
     });
 
     it('updates activity start date', () => {
@@ -85,9 +69,7 @@ describe('the Schedule (milestones) component', () => {
         .find('DateField')
         .at(0)
         .prop('onChange')(null, 'new date');
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        plannedStartDate: 'new date'
-      });
+      expect(props.setStartDate).toHaveBeenCalledWith(7, 'new date');
     });
 
     it('updates activity end date', () => {
@@ -95,33 +77,31 @@ describe('the Schedule (milestones) component', () => {
         .find('DateField')
         .at(1)
         .prop('onChange')(null, 'other date');
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        plannedEndDate: 'other date'
-      });
+      expect(props.setEndDate).toHaveBeenCalledWith(7, 'other date');
     });
   });
 
   describe('redux', () => {
     it('map state to props', () => {
       const state = {
-        activities: {
-          byKey: {
-            badKey: 'bad activity',
-            goodKey: 'good activity'
+        apd: {
+          data: {
+            activities: ['activity 1', 'activity 2', 'activity 3']
           }
         }
       };
 
-      expect(mapStateToProps(state, { aKey: 'goodKey' })).toEqual({
-        activity: 'good activity'
+      expect(mapStateToProps(state, { activityIndex: 2 })).toEqual({
+        activity: 'activity 3'
       });
     });
 
     it('map dispatch to props', () => {
       expect(mapDispatchToProps).toEqual({
-        addActivityMilestone,
-        removeActivityMilestone,
-        updateActivity
+        add: addMilestone,
+        remove: removeMilestone,
+        setEndDate: setActivityEndDate,
+        setStartDate: setActivityStartDate
       });
     });
   });
