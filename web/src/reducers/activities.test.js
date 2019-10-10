@@ -58,7 +58,6 @@ describe('activities reducer', () => {
     key: keyFn(),
     initialCollapsed: false,
     description: '',
-    expanded: true,
     objective: ''
   });
 

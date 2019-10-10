@@ -8,6 +8,7 @@ exports[`the GoalForm component renders correctly 1`] = `
     hint=""
     label="Goal name"
     name="name"
+    onChange={[Function]}
     type="text"
     value="goal description"
   />
@@ -16,6 +17,7 @@ exports[`the GoalForm component renders correctly 1`] = `
     hint="Briefly describe how the state will measure progress toward the identified goal."
     label="Benchmarks"
     name="milestones"
+    onChange={[Function]}
     rows={6}
     value="goal objective"
   />

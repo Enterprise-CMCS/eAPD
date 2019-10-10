@@ -123,3 +123,11 @@ export const selectContractorsByActivityIndex = (state, { activityIndex }) => {
   }
   return null;
 };
+
+export const selectGoalsByActivityIndex = (state, { activityIndex }) => {
+  const activity = selectActivityByIndex(state, { activityIndex });
+  if (activity) {
+    return activity.goals;
+  }
+  return null;
+};
