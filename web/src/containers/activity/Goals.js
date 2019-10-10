@@ -25,6 +25,7 @@ const Goals = ({ activityIndex, add, goals, remove }) => {
   return (
     <Subsection resource="activities.goals" nested>
       <FormAndReviewList
+        activityIndex={activityIndex}
         addButtonText="Add a goal"
         list={goals}
         collapsed={GoalReview}

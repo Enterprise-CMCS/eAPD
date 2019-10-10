@@ -1,9 +1,7 @@
 import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useContext, useMemo } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { connect } from 'react-redux';
-
-import { ActivityContext } from '../ActivityContext';
 
 import Choice from '../../../components/Choice';
 import DateField from '../../../components/DateField';
@@ -25,6 +23,7 @@ import {
 } from '../../../actions/editActivity';
 
 const ContractorResourceForm = ({
+  activityIndex,
   index,
   item: { description, end, hourly, key, name, start, totalCost, years },
   setDescription,
@@ -37,8 +36,6 @@ const ContractorResourceForm = ({
   setNumberOfHoursForYear,
   setHourlyRateForYear
 }) => {
-  const { index: activityIndex } = useContext(ActivityContext);
-
   const apdFFYs = useMemo(() => Object.keys(years), [years]);
 
   const getHandler = action => ({ target: { value } }) => {
@@ -185,6 +182,7 @@ const ContractorResourceForm = ({
 };
 
 ContractorResourceForm.propTypes = {
+  activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
     description: PropTypes.string,

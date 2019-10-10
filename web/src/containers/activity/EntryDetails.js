@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-import { Provider } from './ActivityContext';
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
 import Costs from './Costs';
@@ -69,29 +68,27 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
   );
 
   return (
-    <Provider value={{ index: activityIndex }}>
-      <div
-        id={`activity-${activityKey}`}
-        className={`activity--body activity--body__${
-          collapsed ? 'collapsed' : 'expanded'
-        } activity--body__${activityIndex === 0 ? 'first' : 'notfirst'}`}
-        ref={container}
-      >
-        <Review heading={title} headingLevel={4} editContent={editContent} />
-        <div className={collapsed ? 'visibility--print' : ''}>
-          <Overview activityIndex={activityIndex} />
-          <Goals activityIndex={activityIndex} aKey={activityKey} />
-          <Schedule activityIndex={activityIndex} />
-          <Costs aKey={activityKey} />
-          <ContractorResources activityIndex={activityIndex} />
-          <CostAllocate activityIndex={activityIndex} aKey={activityKey} />
-          <StandardsAndConditions aKey={activityKey} />
-          <Button variation="primary" onClick={() => setCollapsed(true)}>
-            Done
-          </Button>
-        </div>
+    <div
+      id={`activity-${activityKey}`}
+      className={`activity--body activity--body__${
+        collapsed ? 'collapsed' : 'expanded'
+      } activity--body__${activityIndex === 0 ? 'first' : 'notfirst'}`}
+      ref={container}
+    >
+      <Review heading={title} headingLevel={4} editContent={editContent} />
+      <div className={collapsed ? 'visibility--print' : ''}>
+        <Overview activityIndex={activityIndex} />
+        <Goals activityIndex={activityIndex} aKey={activityKey} />
+        <Schedule activityIndex={activityIndex} />
+        <Costs aKey={activityKey} />
+        <ContractorResources activityIndex={activityIndex} />
+        <CostAllocate activityIndex={activityIndex} aKey={activityKey} />
+        <StandardsAndConditions aKey={activityKey} />
+        <Button variation="primary" onClick={() => setCollapsed(true)}>
+          Done
+        </Button>
       </div>
-    </Provider>
+    </div>
   );
 };
 

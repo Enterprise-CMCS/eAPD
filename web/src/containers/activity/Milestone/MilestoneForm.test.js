@@ -1,17 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
+import { plain as MilestoneForm, mapDispatchToProps } from './MilestoneForm';
+
 import {
   setMilestoneEndDate,
   setMilestoneName
 } from '../../../actions/editActivity';
-
-jest.spyOn(React, 'useContext');
-React.useContext.mockImplementation(() => ({
-  index: 'activity index'
-}));
-
-const { plain: MilestoneForm, mapDispatchToProps } = require('./MilestoneForm');
 
 describe('the MilestoneForm component', () => {
   const setEndDate = jest.fn();
@@ -19,13 +14,14 @@ describe('the MilestoneForm component', () => {
 
   const component = shallow(
     <MilestoneForm
+      activityIndex={225}
       index={3252}
       item={{
         // Operation Torch, the Allied invasion of North Africa, is launched
         // to relieve pressure on Egypt and provide an invasion route into
         // southern Europe,
         endDate: '1942-8-16',
-        name: 'Milestone name'
+        milestone: 'Milestone name'
       }}
       setEndDate={setEndDate}
       setName={setName}
@@ -46,18 +42,14 @@ describe('the MilestoneForm component', () => {
       component
         .find('TextField')
         .simulate('change', { target: { value: 'new name' } });
-      expect(setName).toHaveBeenCalledWith('activity index', 3252, 'new name');
+      expect(setName).toHaveBeenCalledWith(225, 3252, 'new name');
     });
 
     test('handles changing the milestone date', () => {
       component
         .find('DateField')
         .simulate('change', 'ignored text', 'new date');
-      expect(setEndDate).toHaveBeenCalledWith(
-        'activity index',
-        3252,
-        'new date'
-      );
+      expect(setEndDate).toHaveBeenCalledWith(225, 3252, 'new date');
     });
   });
 

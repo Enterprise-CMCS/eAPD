@@ -1,18 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-jest.spyOn(React, 'useContext');
-React.useContext.mockImplementation(() => ({
-  index: 'activity index'
-}));
-
-// Have to require() this because import statements get executed before
-// anything else, but we need that spyOn call to happen first. So...
-// this is how we can enforce the order we need.
-const { plain: ContractorForm } = require('./ContractorResourceForm');
+import { plain as ContractorForm } from './ContractorResourceForm';
 
 describe('the ContractorResourceForm component', () => {
   const props = {
+    activityIndex: 43,
     index: 1,
     item: {
       description: 'They cleaned up the latrines after the Battle of Hastings',
@@ -80,11 +73,7 @@ describe('the ContractorResourceForm component', () => {
       .findWhere(c => c.prop('name') === 'contractor-name')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setName).toHaveBeenCalledWith(
-      'activity index',
-      1,
-      'new value'
-    );
+    expect(props.setName).toHaveBeenCalledWith(43, 1, 'new value');
   });
 
   test('handles changing the contractor description', () => {
@@ -93,11 +82,7 @@ describe('the ContractorResourceForm component', () => {
       .findWhere(c => c.prop('name') === 'contractor-description')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setDescription).toHaveBeenCalledWith(
-      'activity index',
-      1,
-      'new value'
-    );
+    expect(props.setDescription).toHaveBeenCalledWith(43, 1, 'new value');
   });
 
   test('handles changing the contractor total cost', () => {
@@ -106,11 +91,7 @@ describe('the ContractorResourceForm component', () => {
       .findWhere(c => c.prop('name') === 'contractor-total-cost')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setTotalCost).toHaveBeenCalledWith(
-      'activity index',
-      1,
-      'new value'
-    );
+    expect(props.setTotalCost).toHaveBeenCalledWith(43, 1, 'new value');
   });
 
   test('handles changing the contractor start date', () => {
@@ -119,11 +100,7 @@ describe('the ContractorResourceForm component', () => {
       .findWhere(c => c.name() === 'DateField' && c.prop('label') === 'Start')
       .simulate('change', 'ignored stuff', 'new start date');
 
-    expect(props.setStartDate).toHaveBeenCalledWith(
-      'activity index',
-      1,
-      'new start date'
-    );
+    expect(props.setStartDate).toHaveBeenCalledWith(43, 1, 'new start date');
   });
 
   test('handles changing the contractor end date', () => {
@@ -132,11 +109,7 @@ describe('the ContractorResourceForm component', () => {
       .findWhere(c => c.name() === 'DateField' && c.prop('label') === 'End')
       .simulate('change', 'ignored stuff', 'new end date');
 
-    expect(props.setEndDate).toHaveBeenCalledWith(
-      'activity index',
-      1,
-      'new end date'
-    );
+    expect(props.setEndDate).toHaveBeenCalledWith(43, 1, 'new end date');
   });
 
   test('handles toggling hourly resource off', () => {
@@ -147,7 +120,7 @@ describe('the ContractorResourceForm component', () => {
       )
       .simulate('change');
 
-    expect(props.setIsHourly).toHaveBeenCalledWith('activity index', 1, false);
+    expect(props.setIsHourly).toHaveBeenCalledWith(43, 1, false);
   });
 
   test('handles toggling hourly resource on', () => {
@@ -158,7 +131,7 @@ describe('the ContractorResourceForm component', () => {
       )
       .simulate('change');
 
-    expect(props.setIsHourly).toHaveBeenCalledWith('activity index', 1, true);
+    expect(props.setIsHourly).toHaveBeenCalledWith(43, 1, true);
   });
 
   test('handles changing the contractor yearly cost', () => {
@@ -169,12 +142,7 @@ describe('the ContractorResourceForm component', () => {
       .findWhere(c => c.prop('name') === 'contractor-cost-ffy-1066')
       .simulate('change', { target: { value: 773 } });
 
-    expect(props.setCostForYear).toHaveBeenCalledWith(
-      'activity index',
-      1,
-      '1066',
-      773
-    );
+    expect(props.setCostForYear).toHaveBeenCalledWith(43, 1, '1066', 773);
   });
 
   test('handles changing the contractor yearly cost', () => {
@@ -193,7 +161,7 @@ describe('the ContractorResourceForm component', () => {
       .simulate('change', { target: { value: 3752 } });
 
     expect(props.setNumberOfHoursForYear).toHaveBeenCalledWith(
-      'activity index',
+      43,
       1,
       '1066',
       3752
@@ -216,7 +184,7 @@ describe('the ContractorResourceForm component', () => {
       .simulate('change', { target: { value: 9364 } });
 
     expect(props.setHourlyRateForYear).toHaveBeenCalledWith(
-      'activity index',
+      43,
       1,
       '1067',
       9364

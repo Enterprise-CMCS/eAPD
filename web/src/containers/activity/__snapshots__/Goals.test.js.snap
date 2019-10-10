@@ -8,6 +8,7 @@ exports[`activity Goals component renders properly 1`] = `
   resource="activities.goals"
 >
   <FormAndReviewList
+    activityIndex="activity index"
     addButtonText="Add a goal"
     allowDeleteAll={false}
     className={null}

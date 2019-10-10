@@ -56,6 +56,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     />
     <hr />
     <FormAndReviewList
+      activityIndex={7}
       addButtonText="Add another milestone"
       allowDeleteAll={false}
       className={null}

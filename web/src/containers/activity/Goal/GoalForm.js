@@ -1,9 +1,8 @@
 import { TextField } from '@cmsgov/design-system-core';
 
 import PropTypes from 'prop-types';
-import React, { Fragment, useContext, useMemo } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { ActivityContext } from '../ActivityContext';
 import { t } from '../../../i18n';
 import TextArea from '../../../components/TextArea';
 import {
@@ -12,13 +11,12 @@ import {
 } from '../../../actions/editActivity';
 
 const GoalForm = ({
+  activityIndex,
   item: { description, objective },
   index,
   setDescription,
   setObjective
 }) => {
-  const { index: activityIndex } = useContext(ActivityContext);
-
   const changeDescription = useMemo(
     () => ({ target: { value } }) => {
       setDescription(activityIndex, index, value);
@@ -67,6 +65,7 @@ const GoalForm = ({
 };
 
 GoalForm.propTypes = {
+  activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
     description: PropTypes.string,

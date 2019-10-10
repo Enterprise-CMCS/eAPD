@@ -81,6 +81,7 @@ const Schedule = ({
           <hr />
 
           <FormAndReviewList
+            activityIndex={activityIndex}
             addButtonText={t('activities.schedule.addMilestoneButtonText')}
             list={activity.schedule}
             collapsed={MilestoneReview}

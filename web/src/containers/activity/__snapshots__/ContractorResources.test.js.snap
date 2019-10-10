@@ -8,6 +8,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
   resource="activities.contractorResources"
 >
   <FormAndReviewList
+    activityIndex="activity index"
     addButtonText="Add another contractor"
     allowDeleteAll={false}
     className={null}
