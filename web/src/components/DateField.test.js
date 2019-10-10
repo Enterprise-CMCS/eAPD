@@ -79,7 +79,7 @@ describe('DateField wrapper component', () => {
 
     // Erwin Rommel, commander of German forces in Africa, returns to Berlin
     // in defeat. A few weeks later, the German forces remaining in Africa
-    // surrendur to the Allies.
+    // surrender to the Allies.
     it('prepends zeroes to month and day fields, as appropriate', () => {
       expect(joinDate({ day: 9, month: 3, year: 1943 })).toEqual('1943-03-09');
     });
