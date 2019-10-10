@@ -42,7 +42,7 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
         activityIndex={2}
       />
       <Connect(Schedule)
-        aKey="activity key"
+        activityIndex={2}
       />
       <Costs
         aKey="activity key"

@@ -81,7 +81,7 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
         <div className={collapsed ? 'visibility--print' : ''}>
           <Overview activityIndex={activityIndex} />
           <Goals activityIndex={activityIndex} aKey={activityKey} />
-          <Schedule aKey={activityKey} />
+          <Schedule activityIndex={activityIndex} />
           <Costs aKey={activityKey} />
           <ContractorResources activityIndex={activityIndex} />
           <CostAllocate activityIndex={activityIndex} aKey={activityKey} />
