@@ -33,7 +33,6 @@ describe('the CostAllocate component', () => {
 
   test('updates activity when text is changed', () => {
     const component = shallow(<CostAllocate {...props} />);
-    const mockedEvent = 
 
     component
       .find('RichText')
