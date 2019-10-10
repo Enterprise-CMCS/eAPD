@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
 import {
@@ -7,23 +6,24 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './CostAllocate';
-import { updateActivity } from '../../actions/activities';
+import { setCostAllocationMethodology, setCostAllocationOtherFunding } from '../../actions/editActivity/costAllocate';
 
 describe('the CostAllocate component', () => {
-  const sandbox = sinon.createSandbox();
   const props = {
+    activityIndex: 1,
     activity: {
       key: 'activity key',
       costAllocationDesc: 'cost allocation',
       otherFundingDesc: 'other funding'
     },
     years: ['1066', '1067'],
-    updateActivity: sinon.stub()
+    setMethodology: jest.fn(),
+    setOtherFunding: jest.fn()
   };
 
   beforeEach(() => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
+    props.setMethodology.mockClear();
+    props.setOtherFunding.mockClear();
   });
 
   test('renders correctly', () => {
@@ -37,44 +37,39 @@ describe('the CostAllocate component', () => {
     component
       .find('RichText')
       .filterWhere(n => n.props().content === 'cost allocation')
-      .simulate('sync', 'bloop');
-    expect(
-      props.updateActivity.calledWith('activity id', {
-        costAllocationDesc: 'bloop'
-      })
-    );
+      .prop('onSync')('bloop');
+    expect(props.setMethodology).toHaveBeenCalledWith(1, 'bloop');
 
     component
       .find('RichText')
       .filterWhere(n => n.props().content === 'other funding')
-      .simulate('sync', 'florp');
-    expect(
-      props.updateActivity.calledWith('activity id', {
-        otherFundingDesc: 'florp'
-      })
-    );
+      .prop('onSync')('florp');
+    expect(props.setOtherFunding).toHaveBeenCalledWith(1, 'florp');
   });
 
   test('maps redux state to component props', () => {
-    expect(
-      mapStateToProps(
-        {
-          activities: {
-            byKey: {
-              key: 'this is the activity'
+    const state = {
+      apd: {
+        data: {
+          activities: [
+            {
+              key: 'activity key'
             }
-          }
-        },
-        { aKey: 'key' }
-      )
-    ).toEqual({
-      activity: 'this is the activity'
+          ]
+        }
+      }
+    };
+    expect(mapStateToProps(state, {activityIndex: 0})).toEqual({
+        activity: {
+          key: 'activity key'
+        }
     });
   });
 
   test('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      updateActivity
+      setMethodology: setCostAllocationMethodology,
+      setOtherFunding: setCostAllocationOtherFunding
     });
   });
 });
