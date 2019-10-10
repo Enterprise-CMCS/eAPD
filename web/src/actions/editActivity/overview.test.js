@@ -1,76 +1,33 @@
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-
-import { UPDATE_BUDGET } from '../budget';
-
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { EDIT_APD } from '../editApd/symbols';
 
 import {
-  addActivity,
-  removeActivity,
-  setActivityName,
-  setActivityFundingSource
+  setActivityAlternatives,
+  setActivityDescription,
+  setActivityOverview
 } from './overview';
 
-const mockStore = configureStore([thunk]);
-
-describe('APD activity edit actions for overview section', () => {
-  const store = mockStore('test state');
-
-  beforeEach(() => {
-    store.clearActions();
-  });
-
-  it('dispatches an action for adding an activity', () => {
-    store.dispatch(addActivity());
-
-    expect(store.getActions()).toEqual([
-      {
-        type: ADD_APD_ITEM,
-        path: '/activities/-',
-        state: 'test state'
-      },
-      { type: UPDATE_BUDGET, state: 'test state' }
-    ]);
-  });
-
-  it('dispatches an action for removing an activity if confirmed', () => {
-    const global = { confirm: jest.fn().mockReturnValue(true) };
-
-    store.dispatch(removeActivity(3, { global }));
-
-    expect(store.getActions()).toEqual([
-      { type: REMOVE_APD_ITEM, path: '/activities/3' },
-      { type: UPDATE_BUDGET, state: 'test state' }
-    ]);
-  });
-
-  it('does not dispatch an action for removing an activity if denied', () => {
-    const global = { confirm: jest.fn().mockReturnValue(false) };
-
-    store.dispatch(removeActivity(3, { global }));
-
-    expect(store.getActions()).toEqual([]);
-  });
-
-  it('dispatches an action for setting an activity name', () => {
-    expect(setActivityName(53, 'new name')).toEqual({
+describe('APD activity edit actions for activity overview section', () => {
+  it('dispatches an action for setting an activity statement of alternatives', () => {
+    expect(setActivityAlternatives(17, 'new alternatives')).toEqual({
       type: EDIT_APD,
-      path: '/activities/53/name',
-      value: 'new name'
+      path: '/activities/17/alternatives',
+      value: 'new alternatives'
     });
   });
 
-  it('dispatches an action for setting an activity funding source', () => {
-    store.dispatch(setActivityFundingSource(13, 'funding source'));
+  it('dispatches an action for setting an activity description', () => {
+    expect(setActivityDescription(17, 'new description')).toEqual({
+      type: EDIT_APD,
+      path: '/activities/17/description',
+      value: 'new description'
+    });
+  });
 
-    expect(store.getActions()).toEqual([
-      {
-        type: EDIT_APD,
-        path: '/activities/13/fundingSource',
-        value: 'funding source'
-      },
-      { type: UPDATE_BUDGET, state: 'test state' }
-    ]);
+  it('dispatches an action for setting an activity overview', () => {
+    expect(setActivityOverview(17, 'new overview')).toEqual({
+      type: EDIT_APD,
+      path: '/activities/17/summary',
+      value: 'new overview'
+    });
   });
 });
