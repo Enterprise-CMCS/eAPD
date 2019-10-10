@@ -1,70 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the (Activity) EntryDetails component renders correctly 1`] = `
-<ContextProvider
-  value={
-    Object {
-      "index": 2,
-    }
-  }
+<div
+  className="activity--body activity--body__collapsed activity--body__notfirst"
+  id="activity-activity key"
 >
-  <div
-    className="activity--body activity--body__collapsed activity--body__notfirst"
-    id="activity-activity key"
-  >
-    <Review
-      editContent={
-        <div
-          className="nowrap visibility--screen"
-        >
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            Edit
-          </Button>
-        </div>
-      }
-      editText="Edit"
-      heading="Activity 3: activity name (money pit)"
-      headingLevel={4}
-    />
-    <div
-      className="visibility--print"
-    >
-      <Connect(ActivityOverview)
-        activityIndex={2}
-      />
-      <Connect(Goals)
-        aKey="activity key"
-        activityIndex={2}
-      />
-      <Connect(Schedule)
-        activityIndex={2}
-      />
-      <Costs
-        aKey="activity key"
-      />
-      <Connect(ContractorResources)
-        activityIndex={2}
-      />
-      <Connect(CostAllocate)
-        aKey="activity key"
-        activityIndex={2}
-      />
-      <Connect(StandardsAndConditions)
-        aKey="activity key"
-      />
-      <Button
-        onClick={[Function]}
-        type="button"
-        variation="primary"
+  <Review
+    editContent={
+      <div
+        className="nowrap visibility--screen"
       >
-        Done
-      </Button>
-    </div>
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent"
+        >
+          Edit
+        </Button>
+      </div>
+    }
+    editText="Edit"
+    heading="Activity 3: activity name (money pit)"
+    headingLevel={4}
+  />
+  <div
+    className="visibility--print"
+  >
+    <Connect(ActivityOverview)
+      activityIndex={2}
+    />
+    <Connect(Goals)
+      aKey="activity key"
+      activityIndex={2}
+    />
+    <Connect(Schedule)
+      activityIndex={2}
+    />
+    <Costs
+      aKey="activity key"
+    />
+    <Connect(ContractorResources)
+      activityIndex={2}
+    />
+    <Connect(CostAllocate)
+      aKey="activity key"
+      activityIndex={2}
+    />
+    <Connect(StandardsAndConditions)
+      aKey="activity key"
+    />
+    <Button
+      onClick={[Function]}
+      type="button"
+      variation="primary"
+    >
+      Done
+    </Button>
   </div>
-</ContextProvider>
+</div>
 `;

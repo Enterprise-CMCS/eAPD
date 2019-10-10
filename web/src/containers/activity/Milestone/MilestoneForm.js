@@ -1,9 +1,8 @@
 import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useContext } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import { ActivityContext } from '../ActivityContext';
 import {
   setMilestoneEndDate,
   setMilestoneName
@@ -11,13 +10,12 @@ import {
 import DateField from '../../../components/DateField';
 
 const MilestoneForm = ({
+  activityIndex,
   index,
   item: { endDate, milestone },
   setEndDate,
   setName
 }) => {
-  const { index: activityIndex } = useContext(ActivityContext);
-
   const changeDate = useCallback(
     (_, dateStr) => setEndDate(activityIndex, index, dateStr),
     []
@@ -48,6 +46,7 @@ const MilestoneForm = ({
 };
 
 MilestoneForm.propTypes = {
+  activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
     endDate: PropTypes.string.isRequired,

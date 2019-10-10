@@ -1,20 +1,16 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
+import { plain as GoalForm, mapDispatchToProps } from './GoalForm';
+
 import {
   setGoalDescription,
   setGoalObjective
 } from '../../../actions/editActivity';
 
-jest.spyOn(React, 'useContext');
-React.useContext.mockImplementation(() => ({
-  index: 'activity index'
-}));
-
-const { plain: GoalForm, mapDispatchToProps } = require('./GoalForm');
-
 describe('the GoalForm component', () => {
   const props = {
+    activityIndex: 93,
     index: 1,
     item: {
       description: 'goal description',
@@ -41,11 +37,7 @@ describe('the GoalForm component', () => {
       .findWhere(c => c.prop('name') === 'name')
       .simulate('change', { target: { value: 'new name' } });
 
-    expect(props.setDescription).toHaveBeenCalledWith(
-      'activity index',
-      1,
-      'new name'
-    );
+    expect(props.setDescription).toHaveBeenCalledWith(93, 1, 'new name');
   });
 
   it('it handles changing the goal objective', () => {
@@ -54,11 +46,7 @@ describe('the GoalForm component', () => {
       .findWhere(c => c.prop('name') === 'milestones')
       .simulate('change', { target: { value: 'new objective' } });
 
-    expect(props.setObjective).toHaveBeenCalledWith(
-      'activity index',
-      1,
-      'new objective'
-    );
+    expect(props.setObjective).toHaveBeenCalledWith(93, 1, 'new objective');
   });
 
   it('maps dispatch actions to props', () => {
