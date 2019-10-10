@@ -631,6 +631,42 @@ describe('APD reducer', () => {
         }
       });
     });
+
+    it('should add a new activity state personnel', () => {
+      const state = {
+        data: {
+          activities: [{ statePersonnel: [] }],
+          years: ['1403', '1404']
+        }
+      };
+
+      expect(
+        apd(state, {
+          type: ADD_APD_ITEM,
+          path: `/activities/0/statePersonnel/-`
+        })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              statePersonnel: [
+                {
+                  description: '',
+                  initialCollapsed: false,
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  title: '',
+                  years: {
+                    '1403': { amt: '', perc: '' },
+                    '1404': { amt: '', perc: '' }
+                  }
+                }
+              ]
+            }
+          ],
+          years: ['1403', '1404']
+        }
+      });
+    });
   });
 
   describe('should handle an APD item being removed', () => {
