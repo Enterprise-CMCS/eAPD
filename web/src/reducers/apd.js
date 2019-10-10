@@ -9,6 +9,7 @@ import {
   expenseDefaultYear,
   newActivity,
   newContractor,
+  newGoal,
   quarterlyFFPEntry,
   statePersonDefaultYear
 } from './activities';
@@ -245,6 +246,9 @@ export const getPatchesForAddingItem = (state, path) => {
     default:
       if (/^\/activities\/\d+\/contractorResources\/-$/.test(path)) {
         return [{ op: 'add', path, value: newContractor(state.data.years) }];
+      }
+      if (/^\/activities\/\d+\/goals\/-$/.test(path)) {
+        return [{ op: 'add', path, value: newGoal() }];
       }
       return [{ op: 'add', path, value: null }];
   }

@@ -2,26 +2,20 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { plain as Goals, mapStateToProps, mapDispatchToProps } from './Goals';
-import {
-  addActivityGoal,
-  removeActivityGoal,
-  updateActivity
-} from '../../actions/activities';
+import { addGoal, removeGoal } from '../../actions/editActivity';
 
 describe('activity Goals component', () => {
   const props = {
-    activityKey: 'activity key',
-    goals: ['some', 'goals', 'here'],
-    addActivityGoal: jest.fn(),
-    removeActivityGoal: jest.fn(),
-    updateActivity: jest.fn()
+    activityIndex: 'activity index',
+    goals: [{ key: 'goal 1' }, { key: 'goal 2' }, { key: 'goal 3' }],
+    add: jest.fn(),
+    remove: jest.fn()
   };
   const component = shallow(<Goals {...props} />);
 
   beforeEach(() => {
-    props.addActivityGoal.mockClear();
-    props.removeActivityGoal.mockClear();
-    props.updateActivity.mockClear();
+    props.add.mockClear();
+    props.remove.mockClear();
   });
 
   it('renders properly', () => {
@@ -33,49 +27,38 @@ describe('activity Goals component', () => {
 
     it('handles adding a new goal', () => {
       list.prop('onAddClick')();
-      expect(props.addActivityGoal).toHaveBeenCalledWith('activity key');
+      expect(props.add).toHaveBeenCalledWith('activity index');
     });
 
     it('handles deleting a goal', () => {
-      list.prop('onDeleteClick')('goal key');
-      expect(props.removeActivityGoal).toHaveBeenCalledWith(
-        'activity key',
-        'goal key'
-      );
-    });
-
-    it('handles editing a goal', () => {
-      const update = jest.fn();
-      props.updateActivity.mockReturnValue(update);
-
-      const changeHandler = list.prop('handleChange')(3, 'field name');
-      changeHandler({ target: { value: 'new value' } });
-
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        goals: { 3: { 'field name': 'new value' } }
-      });
+      list.prop('onDeleteClick')('goal 2');
+      expect(props.remove).toHaveBeenCalledWith('activity index', 1);
     });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      addActivityGoal,
-      removeActivityGoal,
-      updateActivity
+      add: addGoal,
+      remove: removeGoal
     });
   });
 
   it('maps appropriate state to props', () => {
     const state = {
-      activities: {
-        byKey: { 'activity-key': { goals: 'these are goals from state' } }
+      apd: {
+        data: {
+          activities: [
+            'activity 1',
+            'activity 2',
+            { goals: 'these are goals from state' }
+          ]
+        }
       }
     };
 
-    const ownProps = { aKey: 'activity-key' };
+    const ownProps = { activityIndex: 2 };
 
     expect(mapStateToProps(state, ownProps)).toEqual({
-      activityKey: 'activity-key',
       goals: 'these are goals from state'
     });
   });
