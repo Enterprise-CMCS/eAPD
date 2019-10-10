@@ -4,14 +4,24 @@ import React, { useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
 
 import { t } from '../../i18n';
-import { updateActivity as updateActivityAction } from '../../actions/activities';
+import {
+  setActivityAlternatives,
+  setActivityDescription,
+  setActivityOverview
+} from '../../actions/editActivity';
 import RichText from '../../components/RichText';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-const ActivityOverview = ({ activity, updateActivity }) => {
+const ActivityOverview = ({
+  activity,
+  activityIndex,
+  setAlternatives,
+  setDescription,
+  setOverview
+}) => {
   const { alternatives, description, summary } = activity;
 
   const overviewLabel = useMemo(
@@ -29,7 +39,7 @@ const ActivityOverview = ({ activity, updateActivity }) => {
     []
   );
   const overviewOnChange = useCallback(
-    ({ target: { value } }) => updateActivity(activity.key, { summary: value }),
+    ({ target: { value } }) => setOverview(activityIndex, value),
     [activity.key]
   );
 
@@ -60,7 +70,7 @@ const ActivityOverview = ({ activity, updateActivity }) => {
   );
   const syncDescription = useCallback(
     html => {
-      updateActivity(activity.key, { description: html });
+      setDescription(activityIndex, html);
     },
     [activity.key]
   );
@@ -81,7 +91,7 @@ const ActivityOverview = ({ activity, updateActivity }) => {
   );
   const syncAlternatives = useCallback(
     html => {
-      updateActivity(activity.key, { alternatives: html });
+      setAlternatives(activityIndex, html);
     },
     [activity.key]
   );
@@ -134,7 +144,10 @@ const ActivityOverview = ({ activity, updateActivity }) => {
 
 ActivityOverview.propTypes = {
   activity: PropTypes.object.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  setAlternatives: PropTypes.func.isRequired,
+  setDescription: PropTypes.func.isRequired,
+  setOverview: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => {
@@ -144,10 +157,14 @@ const mapStateToProps = (state, { activityIndex }) => {
 };
 
 const mapDispatchToProps = {
-  updateActivity: updateActivityAction
+  setAlternatives: setActivityAlternatives,
+  setDescription: setActivityDescription,
+  setOverview: setActivityOverview
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ActivityOverview);
+
+export { ActivityOverview as plain, mapStateToProps, mapDispatchToProps };
