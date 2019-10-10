@@ -23,7 +23,7 @@ describe('the CostAllocate component', () => {
 
   beforeEach(() => {
     props.setMethodology.mockClear(),
-    props.setOtherFunding.mockClear()
+    props.setOtherFunding.mockClear();
   });
 
   test('renders correctly', () => {
