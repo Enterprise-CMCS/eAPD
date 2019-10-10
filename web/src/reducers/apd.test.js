@@ -576,6 +576,33 @@ describe('APD reducer', () => {
         }
       });
     });
+
+    it('should add a new activity goal', () => {
+      const state = {
+        data: {
+          activities: [{ goals: [] }]
+        }
+      };
+
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/goals/-` })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              goals: [
+                {
+                  description: '',
+                  initialCollapsed: false,
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  objective: ''
+                }
+              ]
+            }
+          ]
+        }
+      });
+    });
   });
 
   describe('should handle an APD item being removed', () => {

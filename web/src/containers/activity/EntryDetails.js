@@ -80,7 +80,7 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
         <Review heading={title} headingLevel={4} editContent={editContent} />
         <div className={collapsed ? 'visibility--print' : ''}>
           <Overview activityIndex={activityIndex} />
-          <Goals aKey={activityKey} />
+          <Goals activityIndex={activityIndex} aKey={activityKey} />
           <Schedule aKey={activityKey} />
           <Costs aKey={activityKey} />
           <ContractorResources activityIndex={activityIndex} />

@@ -34,11 +34,10 @@ export const setKeyGenerator = fn => {
   generateKey = fn;
 };
 
-const newGoal = () => ({
+export const newGoal = () => ({
   key: generateKey(),
   initialCollapsed: false,
   description: '',
-  expanded: true,
   objective: ''
 });
 
