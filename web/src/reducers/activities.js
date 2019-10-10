@@ -42,7 +42,7 @@ export const newGoal = () => ({
   objective: ''
 });
 
-const newMilestone = (milestone = '', endDate = '') => ({
+export const newMilestone = (milestone = '', endDate = '') => ({
   initialCollapsed: false,
   key: generateKey(),
   milestone,

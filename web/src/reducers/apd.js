@@ -10,6 +10,7 @@ import {
   newActivity,
   newContractor,
   newGoal,
+  newMilestone,
   quarterlyFFPEntry,
   statePersonDefaultYear
 } from './activities';
@@ -249,6 +250,9 @@ export const getPatchesForAddingItem = (state, path) => {
       }
       if (/^\/activities\/\d+\/goals\/-$/.test(path)) {
         return [{ op: 'add', path, value: newGoal() }];
+      }
+      if (/^\/activities\/\d+\/schedule\/-$/.test(path)) {
+        return [{ op: 'add', path, value: newMilestone() }];
       }
       return [{ op: 'add', path, value: null }];
   }
