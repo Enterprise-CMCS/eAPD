@@ -21,7 +21,6 @@ exports[`activity costs wrapper (around personnel and non-personnel)  renders pr
     Non-Personnel
   </h6>
   <Connect(NonPersonnelCosts)
-    aKey="activity key"
     activityIndex="activity index"
   />
 </Subsection>

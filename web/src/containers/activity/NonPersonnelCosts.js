@@ -8,53 +8,37 @@ import {
   NonPersonnelCostReview
 } from './NonPersonnelCost';
 
-// import NonPersonnelCost from './NonPersonnelCost';
 import {
-  addActivityExpense,
-  removeActivityExpense,
-  updateActivity as updateActivityAction
-} from '../../actions/activities';
+  addNonPersonnelCost,
+  removeNonPersonnelCost
+} from '../../actions/editActivity';
 import { selectActivityNonPersonnelCosts } from '../../reducers/activities.selectors';
 import Instruction from '../../components/Instruction';
 import { t } from '../../i18n';
 
 const NonPersonnelCosts = ({
-  activityKey,
+  activityIndex,
   addExpense,
   expenses,
-  removeExpense,
-  updateActivity
+  removeExpense
 }) => {
   const handleDelete = useCallback(key => {
-    removeExpense(activityKey, key);
+    expenses.forEach(({ key: expenseKey }, i) => {
+      if (expenseKey === key) {
+        removeExpense(activityIndex, i);
+      }
+    });
   });
 
   const handleAdd = useCallback(() => {
-    addExpense(activityKey);
-  });
-
-  const handleEditCategory = useCallback((index, category) => {
-    updateActivity(activityKey, { expenses: { [index]: { category } } });
-  });
-
-  const handleEditCost = useCallback((index, year, cost) => {
-    updateActivity(
-      activityKey,
-      {
-        expenses: { [index]: { years: { [year]: cost } } }
-      },
-      true
-    );
-  });
-
-  const handleEditDesc = useCallback((index, desc) => {
-    updateActivity(activityKey, { expenses: { [index]: { desc } } });
+    addExpense(activityIndex);
   });
 
   return (
     <Fragment>
       <Instruction source="activities.expenses.instruction" />
       <FormAndReviewList
+        activityIndex={activityIndex}
         addButtonText="Add another non-personnel cost"
         list={expenses}
         collapsed={NonPersonnelCostReview}
@@ -62,31 +46,25 @@ const NonPersonnelCosts = ({
         noDataMessage={t('activities.expenses.noDataNotice')}
         onAddClick={handleAdd}
         onDeleteClick={handleDelete}
-        handleEditCategory={handleEditCategory}
-        handleEditCost={handleEditCost}
-        handleEditDesc={handleEditDesc}
       />
     </Fragment>
   );
 };
 
 NonPersonnelCosts.propTypes = {
-  activityKey: PropTypes.string.isRequired,
+  activityIndex: PropTypes.number.isRequired,
   expenses: PropTypes.array.isRequired,
   addExpense: PropTypes.func.isRequired,
-  removeExpense: PropTypes.func.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  removeExpense: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, { aKey }) => ({
-  activityKey: aKey,
-  expenses: selectActivityNonPersonnelCosts(state, aKey)
+const mapStateToProps = (state, { activityIndex }) => ({
+  expenses: selectActivityNonPersonnelCosts(state, activityIndex)
 });
 
 const mapDispatchToProps = {
-  addExpense: addActivityExpense,
-  removeExpense: removeActivityExpense,
-  updateActivity: updateActivityAction
+  addExpense: addNonPersonnelCost,
+  removeExpense: removeNonPersonnelCost
 };
 
 export default connect(

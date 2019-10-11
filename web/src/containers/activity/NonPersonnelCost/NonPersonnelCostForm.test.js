@@ -1,16 +1,25 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import NonPersonnelCostForm from './NonPersonnelCostForm';
+import {
+  plain as NonPersonnelCostForm,
+  mapDispatchToProps
+} from './NonPersonnelCostForm';
+
+import {
+  setNonPersonnelCostCategory,
+  setNonPersonnelCostDescription,
+  setNonPersonnelCostForYear
+} from '../../../actions/editActivity';
 
 describe('the NonPersonnelCostForm component', () => {
-  const collapse = jest.fn();
-  const handleEditCost = jest.fn();
-  const handleEditDesc = jest.fn();
-  const handleEditCategory = jest.fn();
+  const setCategory = jest.fn();
+  const setCost = jest.fn();
+  const setDescription = jest.fn();
 
   const component = shallow(
     <NonPersonnelCostForm
+      activityIndex={44}
       index={83}
       item={{
         category: 'cost category',
@@ -20,17 +29,16 @@ describe('the NonPersonnelCostForm component', () => {
           7474: 72323
         }
       }}
-      handleEditCost={handleEditCost}
-      handleEditDesc={handleEditDesc}
-      handleEditCategory={handleEditCategory}
+      setCategory={setCategory}
+      setCost={setCost}
+      setDescription={setDescription}
     />
   );
 
   beforeEach(() => {
-    collapse.mockClear();
-    handleEditCost.mockClear();
-    handleEditDesc.mockClear();
-    handleEditCategory.mockClear();
+    setCategory.mockClear();
+    setCost.mockClear();
+    setDescription.mockClear();
   });
 
   test('renders correctly', () => {
@@ -43,21 +51,29 @@ describe('the NonPersonnelCostForm component', () => {
         .find('DollarField')
         .first()
         .simulate('change', { target: { value: 'new total' } });
-      expect(handleEditCost).toHaveBeenCalledWith(83, '7473', 'new total');
+      expect(setCost).toHaveBeenCalledWith(44, 83, '7473', 'new total');
     });
 
     test('handles changing the cost category', () => {
       component
         .find('Select')
         .simulate('change', { target: { value: 'new category' } });
-      expect(handleEditCategory).toHaveBeenCalledWith(83, 'new category');
+      expect(setCategory).toHaveBeenCalledWith(44, 83, 'new category');
     });
 
     test('handles changing the cost desc', () => {
       component
         .find('TextArea')
         .simulate('change', { target: { value: 'new desc' } });
-      expect(handleEditDesc).toHaveBeenCalledWith(83, 'new desc');
+      expect(setDescription).toHaveBeenCalledWith(44, 83, 'new desc');
+    });
+  });
+
+  it('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setCategory: setNonPersonnelCostCategory,
+      setDescription: setNonPersonnelCostDescription,
+      setCost: setNonPersonnelCostForYear
     });
   });
 });

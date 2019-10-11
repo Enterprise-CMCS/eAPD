@@ -78,11 +78,11 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
       <Review heading={title} headingLevel={4} editContent={editContent} />
       <div className={collapsed ? 'visibility--print' : ''}>
         <Overview activityIndex={activityIndex} />
-        <Goals activityIndex={activityIndex} aKey={activityKey} />
+        <Goals activityIndex={activityIndex} />
         <Schedule activityIndex={activityIndex} />
-        <Costs activityIndex={activityIndex} aKey={activityKey} />
+        <Costs activityIndex={activityIndex} />
         <ContractorResources activityIndex={activityIndex} />
-        <CostAllocate activityIndex={activityIndex} aKey={activityKey} />
+        <CostAllocate activityIndex={activityIndex} />
         <StandardsAndConditions aKey={activityKey} />
         <Button variation="primary" onClick={() => setCollapsed(true)}>
           Done

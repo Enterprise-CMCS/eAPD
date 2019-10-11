@@ -31,21 +31,18 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
       activityIndex={2}
     />
     <Connect(Goals)
-      aKey="activity key"
       activityIndex={2}
     />
     <Connect(Schedule)
       activityIndex={2}
     />
     <Costs
-      aKey="activity key"
       activityIndex={2}
     />
     <Connect(ContractorResources)
       activityIndex={2}
     />
     <Connect(CostAllocate)
-      aKey="activity key"
       activityIndex={2}
     />
     <Connect(StandardsAndConditions)

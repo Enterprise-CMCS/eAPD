@@ -632,6 +632,39 @@ describe('APD reducer', () => {
       });
     });
 
+    it('should add a new activity non-personnel cost', () => {
+      const state = {
+        data: {
+          activities: [{ expenses: [] }],
+          years: ['1403', '1404']
+        }
+      };
+
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/expenses/-` })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              expenses: [
+                {
+                  category: 'Hardware, software, and licensing',
+                  description: '',
+                  initialCollapsed: false,
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  years: {
+                    '1403': 0,
+                    '1404': 0
+                  }
+                }
+              ]
+            }
+          ],
+          years: ['1403', '1404']
+        }
+      });
+    });
+
     it('should add a new activity state personnel', () => {
       const state = {
         data: {

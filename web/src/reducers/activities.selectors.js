@@ -100,8 +100,8 @@ export const selectActivitySchedule = createSelector(
   }
 );
 
-export const selectActivityNonPersonnelCosts = (state, aKey) =>
-  selectActivityByKey(state, { aKey }).expenses;
+export const selectActivityNonPersonnelCosts = (state, activityIndex) =>
+  selectActivityByIndex(state, { activityIndex }).expenses;
 
 export const selectActivityStatePersonnel = (state, { activityIndex }) =>
   selectActivityByIndex(state, { activityIndex }).statePersonnel;
