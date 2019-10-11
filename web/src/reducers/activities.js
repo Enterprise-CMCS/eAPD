@@ -78,7 +78,7 @@ export const newContractor = years => ({
 
 export const expenseDefaultYear = () => 0;
 
-const newExpense = years => ({
+export const newExpense = years => ({
   key: generateKey(),
   initialCollapsed: false,
   category: 'Hardware, software, and licensing',
