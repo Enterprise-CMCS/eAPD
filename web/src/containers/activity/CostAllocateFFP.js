@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 import CostAllocateFFPYearTotal from './CostAllocateFFPYearTotal';
-import { updateActivity as updateActivityAction } from '../../actions/activities';
 import {
   setCostAllocationFFPFundingSplit,
   setCostAllocationFFPOtherFunding
@@ -98,7 +97,8 @@ CostAllocateFFP.propTypes = {
   activityIndex: PropTypes.string.isRequired,
   byYearData: PropTypes.array.isRequired,
   costAllocation: PropTypes.object.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  setFundingSplit: PropTypes.func.isRequired,
+  setOtherFunding: PropTypes.func.isRequired
 };
 
 export const makeMapStateToProps = () => {
@@ -109,8 +109,7 @@ export const makeMapStateToProps = () => {
 
 export const mapDispatchToProps = {
   setFundingSplit: setCostAllocationFFPFundingSplit,
-  setOtherFunding: setCostAllocationFFPOtherFunding,
-  updateActivity: updateActivityAction
+  setOtherFunding: setCostAllocationFFPOtherFunding
 };
 
 export { CostAllocateFFP as CostAllocateFFPRaw };
