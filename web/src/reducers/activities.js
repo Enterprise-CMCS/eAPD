@@ -50,7 +50,7 @@ export const newMilestone = (milestone = '', endDate = '') => ({
 });
 
 export const statePersonDefaultYear = () => ({ amt: '', perc: '' });
-const newStatePerson = years => ({
+export const newStatePerson = years => ({
   key: generateKey(),
   initialCollapsed: false,
   title: '',

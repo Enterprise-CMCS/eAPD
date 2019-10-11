@@ -9,7 +9,7 @@
     },
     "optionalNumber": {
       "$id": "#/definitions/optionalNumber",
-      "anyOf": [{ "type": "number" }, { "type": "string", "enum": [""] }]
+      "anyOf": [{ "type": "number" }, { "type": "string", "pattern": "\\d*" }]
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",

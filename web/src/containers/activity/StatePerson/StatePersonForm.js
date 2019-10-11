@@ -1,36 +1,47 @@
 import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
+import { connect } from 'react-redux';
+
+import {
+  setPersonnelFTEForYear,
+  setPersonnelCostForYear,
+  setPersonnelDescription,
+  setPersonnelTitle
+} from '../../../actions/editActivity';
 
 import DollarField from '../../../components/DollarField';
 import TextArea from '../../../components/TextArea';
 import NumberField from '../../../components/NumberField';
 
 const StatePersonForm = ({
+  activityIndex,
   item: { description, title, years },
-  handleEditCost,
-  handleEditFTE,
-  handleEditPersonDesc,
-  handleEditPersonTitle,
-  index
+  index,
+  setCost,
+  setDescription,
+  setFTE,
+  setTitle
 }) => {
   const editTitle = useCallback(
-    ({ target: { value } }) => handleEditPersonTitle(index, value),
+    ({ target: { value } }) => setTitle(activityIndex, index, value),
     [index]
   );
 
   const editDesc = useCallback(
-    ({ target: { value } }) => handleEditPersonDesc(index, value),
+    ({ target: { value } }) => setDescription(activityIndex, index, value),
     [index]
   );
 
   const getEditCostForYear = useCallback(
-    year => ({ target: { value } }) => handleEditCost(index, year, value),
+    year => ({ target: { value } }) =>
+      setCost(activityIndex, index, year, value),
     [index]
   );
 
   const getEditFTEForYear = useCallback(
-    year => ({ target: { value } }) => handleEditFTE(index, year, value),
+    year => ({ target: { value } }) =>
+      setFTE(activityIndex, index, year, value),
     [index]
   );
 
@@ -78,16 +89,29 @@ const StatePersonForm = ({
 };
 
 StatePersonForm.propTypes = {
-  handleEditCost: PropTypes.func.isRequired,
-  handleEditFTE: PropTypes.func.isRequired,
-  handleEditPersonDesc: PropTypes.func.isRequired,
-  handleEditPersonTitle: PropTypes.func.isRequired,
+  activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
     description: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
-  }).isRequired
+  }).isRequired,
+  setCost: PropTypes.func.isRequired,
+  setDescription: PropTypes.func.isRequired,
+  setFTE: PropTypes.func.isRequired,
+  setTitle: PropTypes.func.isRequired
 };
 
-export default StatePersonForm;
+const mapDispatchToProps = {
+  setFTE: setPersonnelFTEForYear,
+  setCost: setPersonnelCostForYear,
+  setDescription: setPersonnelDescription,
+  setTitle: setPersonnelTitle
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(StatePersonForm);
+
+export { StatePersonForm as plain, mapDispatchToProps };

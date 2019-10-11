@@ -80,7 +80,7 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
         <Overview activityIndex={activityIndex} />
         <Goals activityIndex={activityIndex} aKey={activityKey} />
         <Schedule activityIndex={activityIndex} />
-        <Costs aKey={activityKey} />
+        <Costs activityIndex={activityIndex} aKey={activityKey} />
         <ContractorResources activityIndex={activityIndex} />
         <CostAllocate activityIndex={activityIndex} aKey={activityKey} />
         <StandardsAndConditions aKey={activityKey} />
