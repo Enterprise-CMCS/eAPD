@@ -17,17 +17,14 @@ import { makeSelectCostAllocateFFP } from '../../reducers/activities.selectors';
 
 class CostAllocateFFP extends Component {
   setOther = year => e => {
-    const { activityIndex, setFundingSplit } = this.props;
-    setFundingSplit(activityIndex, year, e.target.value);
-  }
+    const { activityIndex, setOtherFunding } = this.props;
+    setOtherFunding(activityIndex, year, e.target.value);
+  };
 
-  handleFFP = year => e => {
-    const { aKey, updateActivity } = this.props;
-    const { value } = e.target;
-    const [federal, state] = value.split('-').map(Number);
-    const updates = { costAllocation: { [year]: { ffp: { federal, state } } } };
-
-    updateActivity(aKey, updates, true);
+  setFederalStateSplit = year => e => {
+    const {activityIndex, setFundingSplit } = this.props;
+    const [federal, state] = e.target.value.split('-').map(Number);
+    setFundingSplit(activityIndex, year, federal, state);
   };
 
   render() {
@@ -69,7 +66,7 @@ class CostAllocateFFP extends Component {
                   { label: '50-50', value: '50-50' }
                 ]}
                 value={ffpSelectVal}
-                onChange={this.handleFFP(year)}
+                onChange={this.setFederalStateSplit(year)}
               />
               <div className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2">
                 <p className="ds-u-margin-bottom--0">

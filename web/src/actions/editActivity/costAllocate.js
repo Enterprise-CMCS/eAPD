@@ -16,17 +16,25 @@ export const setCostAllocationOtherFunding = (index, otherFunding) => ({
 export const setCostAllocationFFPFundingSplit = (
   index,
   year,
-  fundingSource,
-  percentage) => ({
-  type: EDIT_APD,
-  path: `/activities/${index}/costAllocation/${year}/ffp/${fundingSource}`,
-  value: percentage
-});
+  federal,
+  state) => dispatch => {
+    dispatch({
+      type: EDIT_APD,
+      path: `/activities/${index}/costAllocation/${year}/ffp/federal`,
+      value: federal
+    });
+    dispatch({
+      type: EDIT_APD,
+      path: `/activities/${index}/costAllocation/${year}/ffp/state`,
+      value: state
+    });
+    dispatch(updateBudget());
+  };
 
 export const setCostAllocationFFPOtherFunding = (
   index,
   year,
-  otherFunding) => dispatch =>{
+  otherFunding) => dispatch => {
     dispatch({
       type: EDIT_APD,
       path: `/activities/${index}/costAllocation/${year}/other`,
