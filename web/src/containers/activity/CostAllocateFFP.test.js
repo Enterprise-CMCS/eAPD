@@ -18,21 +18,25 @@ React.useContext.mockImplementation(() => ({
 
 describe('the CostAllocateFFP component', () => {
   const state = {
-    activities: {
-      0: {
-        costAllocation: {
-          '1066': {
-            other: 10,
-            ffp: {
-              federal: 90,
-              state: 10
-            }
-          },
-          '1067': {
-            other: 0,
-            ffp: {
-              federal: 10,
-              state: 90
+    apd: {
+      data: {
+        activities: {
+          0: {
+            costAllocation: {
+              '1066': {
+                other: 10,
+                ffp: {
+                  federal: 90,
+                  state: 10
+                }
+              },
+              '1067': {
+                other: 0,
+                ffp: {
+                  federal: 10,
+                  state: 90
+                }
+              }
             }
           }
         }
@@ -84,7 +88,7 @@ describe('the CostAllocateFFP component', () => {
         year: '1067'
       }
     ],
-    costAllocation: state.activities[0].costAllocation,
+    costAllocation: state.apd.data.activities[0].costAllocation,
     setFundingSplit: jest.fn(),
     setOtherFunding: jest.fn()
   };
@@ -121,8 +125,7 @@ describe('the CostAllocateFFP component', () => {
 
   test('maps redux state to component props', () => {
     const mapStateToProps = makeMapStateToProps();
-
-    expect(mapStateToProps(state, { aKey: 'key' })).toEqual({
+    expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
       byYearData: [
         {
           allocations: {
@@ -145,7 +148,7 @@ describe('the CostAllocateFFP component', () => {
           year: '1067'
         }
       ],
-      costAllocation: state.activities[0].costAllocation
+      costAllocation: state.apd.data.activities[0].costAllocation
     });
   });
 

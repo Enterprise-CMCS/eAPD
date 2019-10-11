@@ -30,7 +30,7 @@ const selectBudgetForActivity = ({ budget }, { aKey }) =>
 
 export const makeSelectCostAllocateFFP = () =>
   createSelector(
-    [selectActivityByKey, selectBudgetForActivity],
+    [selectActivityByIndex, selectBudgetForActivity],
     (activity, budget) => {
       const { costAllocation } = activity;
       const { costsByFFY } = budget;

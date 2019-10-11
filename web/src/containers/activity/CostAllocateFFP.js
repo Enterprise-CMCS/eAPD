@@ -94,7 +94,7 @@ class CostAllocateFFP extends Component {
 
 CostAllocateFFP.propTypes = {
   aKey: PropTypes.string.isRequired,
-  activityIndex: PropTypes.string.isRequired,
+  activityIndex: PropTypes.number.isRequired,
   byYearData: PropTypes.array.isRequired,
   costAllocation: PropTypes.object.isRequired,
   setFundingSplit: PropTypes.func.isRequired,
