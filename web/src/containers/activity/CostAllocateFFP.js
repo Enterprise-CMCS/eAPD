@@ -6,21 +6,20 @@ import { connect } from 'react-redux';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 import CostAllocateFFPYearTotal from './CostAllocateFFPYearTotal';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
+import {
+  setCostAllocationFFPFundingSplit,
+  setCostAllocationFFPOtherFunding
+} from '../../actions/editActivity';
 import DollarField from '../../components/DollarField';
 import Dollars from '../../components/Dollars';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFP } from '../../reducers/activities.selectors';
 
 class CostAllocateFFP extends Component {
-  handleOther = year => e => {
-    const { aKey, updateActivity } = this.props;
-    const { value } = e.target;
-    const updates = {
-      costAllocation: { [year]: { other: +value.replace(/[^\d]/g, '') } }
-    };
-
-    updateActivity(aKey, updates, true);
-  };
+  setOther = year => e => {
+    const { activityIndex, setFundingSplit } = this.props;
+    setFundingSplit(activityIndex, year, e.target.value);
+  }
 
   handleFFP = year => e => {
     const { aKey, updateActivity } = this.props;
@@ -49,7 +48,7 @@ class CostAllocateFFP extends Component {
                 labelClassName="ds-h5"
                 name={`cost-allocate-other-${year}`}
                 value={costAllocation[year].other || '0'}
-                onChange={this.handleOther(year)}
+                onChange={this.setOther(year)}
               />
 
               <p className="ds-h4 ds-u-display--block">
@@ -99,6 +98,7 @@ class CostAllocateFFP extends Component {
 
 CostAllocateFFP.propTypes = {
   aKey: PropTypes.string.isRequired,
+  activityIndex: PropTypes.string.isRequired,
   byYearData: PropTypes.array.isRequired,
   costAllocation: PropTypes.object.isRequired,
   updateActivity: PropTypes.func.isRequired
@@ -111,6 +111,8 @@ export const makeMapStateToProps = () => {
 };
 
 export const mapDispatchToProps = {
+  setFundingSplit: setCostAllocationFFPFundingSplit,
+  setOtherFunding: setCostAllocationFFPOtherFunding,
   updateActivity: updateActivityAction
 };
 
