@@ -1,7 +1,5 @@
 [![Build status](https://img.shields.io/circleci/project/github/18F/cms-hitech-apd.svg)](https://circleci.com/gh/18F/workflows/cms-hitech-apd)
 [![Test coverage](https://img.shields.io/codecov/c/github/18F/cms-hitech-apd.svg)](https://codecov.io/gh/18F/cms-hitech-apd)
-[![Known Vulnerabilities](https://snyk.io/test/github/18f/cms-hitech-apd/badge.svg?targetFile=web%2Fpackage.json)](https://snyk.io/test/github/18f/cms-hitech-apd?targetFile=web%2Fpackage.json)
-[![Known Vulnerabilities](https://snyk.io/test/github/18f/cms-hitech-apd/badge.svg?targetFile=api%2Fpackage.json)](https://snyk.io/test/github/18f/cms-hitech-apd?targetFile=api%2Fpackage.json)
 ![Node.js >= 10.14](https://img.shields.io/badge/node-%3E%3D%2010.14-brightgreen.svg)
 
 # CMS eAPD app
@@ -11,7 +9,7 @@ creation, submission, review, and approval of Medicaid APDs and their
 associated contract documents. It is currently limited to HITECH but may
 potentially be expanded to other Medicaid programs in the future.
 
-*Please note:* Any content contained in screenshots from the application within
+_Please note:_ Any content contained in screenshots from the application within
 the `cms-hitech-apd` repo should be considered test data being used for development purposes ONLY.
 Project, financial, and timeline information is NOT representative of any production data from actual users.
 

@@ -9,7 +9,7 @@ services:
       - 5432
 
   api-for-testing:
-    image: cms-eapd/api:bac2caeb56c618af7936836e12c36423
+    image: cms-eapd/api:fc809fba04bcb42ef7e6119150fb0b30
     depends_on:
       - db
     environment:
