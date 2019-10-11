@@ -15,7 +15,7 @@ export const removeNonPersonnelCost = (
   costIndex,
   { global = window } = {}
 ) => dispatch => {
-  if (global.confirm('Do you really want to delete this personnel entry?')) {
+  if (global.confirm('Do you really want to delete this non-personnel cost?')) {
     dispatch({
       type: REMOVE_APD_ITEM,
       path: `/activities/${activityIndex}/expenses/${costIndex}`
