@@ -5,4 +5,5 @@ export * from './goals';
 export * from './nonPersonnelCosts';
 export * from './overview';
 export * from './scheduleAndMilestones';
+export * from './standardsAndConditions';
 export * from './statePersonnel';
