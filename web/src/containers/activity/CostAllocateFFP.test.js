@@ -33,23 +33,23 @@ describe('the CostAllocateFFP component', () => {
             }
           }
         }]
-      },
-      budget: {
-        activities: {
-          key: {
-            costsByFFY: {
-              '1066': {
-                medicaidShare: 1550,
-                federal: 1430,
-                state: 120,
-                total: 1970
-              },
-              '1067': {
-                medicaidShare: 8870,
-                federal: 8770,
-                state: 100,
-                total: 9889
-              }
+      }
+    },
+    budget: {
+      activities: {
+        key: {
+          costsByFFY: {
+            '1066': {
+              medicaidShare: 1550,
+              federal: 1430,
+              state: 120,
+              total: 1970
+            },
+            '1067': {
+              medicaidShare: 8870,
+              federal: 8770,
+              state: 100,
+              total: 9889
             }
           }
         }
