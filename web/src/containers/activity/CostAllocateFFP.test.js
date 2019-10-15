@@ -11,52 +11,45 @@ import {
   setCostAllocationFFPOtherFunding
 } from '../../actions/editActivity';
 
-jest.spyOn(React, 'useContext');
-React.useContext.mockImplementation(() => ({
-  index: 'activity index'
-}));
-
 describe('the CostAllocateFFP component', () => {
   const state = {
     apd: {
       data: {
-        activities: {
-          0: {
-            costAllocation: {
-              '1066': {
-                other: 10,
-                ffp: {
-                  federal: 90,
-                  state: 10
-                }
-              },
-              '1067': {
-                other: 0,
-                ffp: {
-                  federal: 10,
-                  state: 90
-                }
+        activities: [{
+          costAllocation: {
+            '1066': {
+              other: 10,
+              ffp: {
+                federal: 90,
+                state: 10
+              }
+            },
+            '1067': {
+              other: 0,
+              ffp: {
+                federal: 10,
+                state: 90
               }
             }
           }
-        }
-      }
-    },
-    budget: {
-      activities: {
-        key: {
-          costsByFFY: {
-            '1066': {
-              medicaidShare: 1550,
-              federal: 1430,
-              state: 120,
-              total: 1970
-            },
-            '1067': {
-              medicaidShare: 8870,
-              federal: 8770,
-              state: 100,
-              total: 9889
+        }]
+      },
+      budget: {
+        activities: {
+          key: {
+            costsByFFY: {
+              '1066': {
+                medicaidShare: 1550,
+                federal: 1430,
+                state: 120,
+                total: 1970
+              },
+              '1067': {
+                medicaidShare: 8870,
+                federal: 8770,
+                state: 100,
+                total: 9889
+              }
             }
           }
         }
@@ -125,7 +118,7 @@ describe('the CostAllocateFFP component', () => {
 
   test('maps redux state to component props', () => {
     const mapStateToProps = makeMapStateToProps();
-    expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
+    expect(mapStateToProps(state, { activityIndex: 0, aKey: 'key' })).toEqual({
       byYearData: [
         {
           allocations: {
