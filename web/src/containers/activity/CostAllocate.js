@@ -56,7 +56,7 @@ const CostAllocate = ({
         />
       </div>
       <hr />
-      <CostAllocateFFP aKey={activity.key} />
+      <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex}/>
     </Subsection>
   );
 };
