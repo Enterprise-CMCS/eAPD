@@ -61,7 +61,7 @@ export const setContractorDescription = (
   description
 ) => ({
   type: EDIT_APD,
-  path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/desc`,
+  path: `/activities/${activityIndex}/contractorResources/${contractorIndex}/description`,
   value: description
 });
 

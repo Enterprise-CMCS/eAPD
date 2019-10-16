@@ -80,7 +80,7 @@ describe('APD activity edit actions for contractor resources section', () => {
   it('dispatches an action for setting a contractor description', () => {
     expect(setContractorDescription(17, 9, 'new desc')).toEqual({
       type: EDIT_APD,
-      path: '/activities/17/contractorResources/9/desc',
+      path: '/activities/17/contractorResources/9/description',
       value: 'new desc'
     });
   });
