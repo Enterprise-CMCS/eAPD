@@ -27,7 +27,7 @@ class CostAllocateFFP extends Component {
   };
 
   render() {
-    const { byYearData, costAllocation, aKey } = this.props;
+    const { activityIndex, byYearData, costAllocation, aKey } = this.props;
 
     return (
       <Fragment>
@@ -81,7 +81,11 @@ class CostAllocateFFP extends Component {
                   <Dollars long>{allocations.state}</Dollars>
                 </p>
               </div>
-              <CostAllocateFFPQuarterly aKey={aKey} year={year} />
+              <CostAllocateFFPQuarterly
+                activityIndex={activityIndex}
+                aKey={aKey}
+                year={year}
+              />
               <hr />
             </div>
           )

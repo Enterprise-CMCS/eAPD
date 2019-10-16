@@ -101,6 +101,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       </p>
     </div>
     <Connect(CostAllocateFFPQuarterly)
+      activityIndex={0}
       year="1066"
     />
     <hr />
@@ -199,6 +200,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       </p>
     </div>
     <Connect(CostAllocateFFPQuarterly)
+      activityIndex={0}
       year="1067"
     />
     <hr />
