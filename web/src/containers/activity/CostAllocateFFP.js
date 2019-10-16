@@ -21,7 +21,7 @@ class CostAllocateFFP extends Component {
   };
 
   setFederalStateSplit = year => e => {
-    const {activityIndex, setFundingSplit } = this.props;
+    const { activityIndex, setFundingSplit } = this.props;
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
   };
@@ -82,11 +82,12 @@ class CostAllocateFFP extends Component {
                 </p>
               </div>
               <CostAllocateFFPQuarterly aKey={aKey} year={year} />
-              <CostAllocateFFPYearTotal aKey={aKey} />
               <hr />
             </div>
           )
         )}
+        <CostAllocateFFPYearTotal aKey={aKey} />
+        <hr />
       </Fragment>
     );
   }

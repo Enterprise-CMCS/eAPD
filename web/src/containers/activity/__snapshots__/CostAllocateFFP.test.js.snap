@@ -103,7 +103,6 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
     <Connect(CostAllocateFFPQuarterly)
       year="1066"
     />
-    <Connect(CostAllocateFFPYearTotal) />
     <hr />
   </div>
   <div
@@ -202,8 +201,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
     <Connect(CostAllocateFFPQuarterly)
       year="1067"
     />
-    <Connect(CostAllocateFFPYearTotal) />
     <hr />
   </div>
+  <Connect(CostAllocateFFPYearTotal) />
+  <hr />
 </Fragment>
 `;
