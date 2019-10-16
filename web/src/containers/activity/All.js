@@ -17,7 +17,7 @@ const All = ({ add, first, keys, other, remove }) => {
   const onAdd = () => add();
 
   const onRemove = key => {
-    keys.forEach(({ key: activityKey }, i) => {
+    keys.forEach((activityKey, i) => {
       if (activityKey === key) {
         remove(i);
       }
