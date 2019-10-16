@@ -18,7 +18,6 @@ const CostAllocateFFPYearTotal = ({ quarterlyFFP, years }) => {
 
   return (
     <Fragment>
-      <hr />
       <h6 className="ds-h3">{`Total FFY ${years[0]} - ${
         years[years.length - 1]
       }`}</h6>

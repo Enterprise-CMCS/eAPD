@@ -7,7 +7,9 @@ import {
   setCostAllocationMethodology,
   setCostAllocationOtherFunding,
   setCostAllocationFFPFundingSplit,
-  setCostAllocationFFPOtherFunding
+  setCostAllocationFFPOtherFunding,
+  setFFPForContractorCostsForFiscalQuarter,
+  setFFPForInHouseCostsForFiscalQuarter
 } from './costAllocate';
 
 const mockStore = configureStore([thunk]);
@@ -54,7 +56,7 @@ describe('APD activity edit actions for cost allocation section', () => {
         value: 300
       },
       { type: UPDATE_BUDGET, state: 'test state' }
-    ])
+    ]);
   });
 
   it('dispatches an action for setting the cost allocation FFP other funding', () => {
@@ -71,6 +73,30 @@ describe('APD activity edit actions for cost allocation section', () => {
         value: 400
       },
       { type: UPDATE_BUDGET, state: 'test state' }
-    ])
+    ]);
+  });
+
+  it('dispatches an action for setting the FFP payment for contractor costs for a fiscal quarter', () => {
+    store.dispatch(setFFPForContractorCostsForFiscalQuarter(1, 2020, 4, 340));
+    expect(store.getActions()).toEqual([
+      {
+        type: EDIT_APD,
+        path: '/activities/1/quarterlyFFP/2020/4/contractors',
+        value: 340
+      },
+      { type: UPDATE_BUDGET, state: 'test state' }
+    ]);
+  });
+
+  it('dispatches an action for setting the FFP payment for in-house costs for a fiscal quarter', () => {
+    store.dispatch(setFFPForInHouseCostsForFiscalQuarter(1, 2020, 2, 400));
+    expect(store.getActions()).toEqual([
+      {
+        type: EDIT_APD,
+        path: '/activities/1/quarterlyFFP/2020/2/state',
+        value: 400
+      },
+      { type: UPDATE_BUDGET, state: 'test state' }
+    ]);
   });
 });

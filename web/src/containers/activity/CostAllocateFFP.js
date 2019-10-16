@@ -21,13 +21,13 @@ class CostAllocateFFP extends Component {
   };
 
   setFederalStateSplit = year => e => {
-    const {activityIndex, setFundingSplit } = this.props;
+    const { activityIndex, setFundingSplit } = this.props;
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
   };
 
   render() {
-    const { byYearData, costAllocation, aKey } = this.props;
+    const { activityIndex, byYearData, costAllocation, aKey } = this.props;
 
     return (
       <Fragment>
@@ -81,12 +81,17 @@ class CostAllocateFFP extends Component {
                   <Dollars long>{allocations.state}</Dollars>
                 </p>
               </div>
-              <CostAllocateFFPQuarterly aKey={aKey} year={year} />
-              <CostAllocateFFPYearTotal aKey={aKey} />
+              <CostAllocateFFPQuarterly
+                activityIndex={activityIndex}
+                aKey={aKey}
+                year={year}
+              />
               <hr />
             </div>
           )
         )}
+        <CostAllocateFFPYearTotal aKey={aKey} />
+        <hr />
       </Fragment>
     );
   }

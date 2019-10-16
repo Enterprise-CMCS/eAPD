@@ -381,80 +381,19 @@
                 "$id": "#/properties/activities/items/properties/quarterlyFFP/year",
                 "type": "object",
                 "required": ["1", "2", "3", "4"],
-                "properties": {
-                  "1": {
-                    "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q1",
+                "patternProperties": {
+                  "^(1|2|3|4)$": {
+                    "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter",
                     "type": "object",
                     "required": ["combined", "contractors", "state"],
                     "properties": {
-                      "combined": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q1/combined",
-                        "type": "number"
-                      },
                       "contractors": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q1/contractors",
-                        "type": "number"
+                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/contractors",
+                        "$ref": "#/definitions/optionalNumber"
                       },
                       "state": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q1/state",
-                        "type": "number"
-                      }
-                    }
-                  },
-                  "2": {
-                    "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q2",
-                    "type": "object",
-                    "required": ["combined", "contractors", "state"],
-                    "properties": {
-                      "combined": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q2/combined",
-                        "type": "number"
-                      },
-                      "contractors": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q2/contractors",
-                        "type": "number"
-                      },
-                      "state": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q2/state",
-                        "type": "number"
-                      }
-                    }
-                  },
-                  "3": {
-                    "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q3",
-                    "type": "object",
-                    "required": ["combined", "contractors", "state"],
-                    "properties": {
-                      "combined": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q3/combined",
-                        "type": "number"
-                      },
-                      "contractors": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q3/contractors",
-                        "type": "number"
-                      },
-                      "state": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q3/state",
-                        "type": "number"
-                      }
-                    }
-                  },
-                  "4": {
-                    "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q4",
-                    "type": "object",
-                    "required": ["combined", "contractors", "state"],
-                    "properties": {
-                      "combined": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q4/combined",
-                        "type": "number"
-                      },
-                      "contractors": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q4/contractors",
-                        "type": "number"
-                      },
-                      "state": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/q4/state",
-                        "type": "number"
+                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/state",
+                        "$ref": "#/definitions/optionalNumber"
                       }
                     }
                   }
