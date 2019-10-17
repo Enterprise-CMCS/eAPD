@@ -1,4 +1,3 @@
-import { apply_patch as applyPatch } from 'jsonpatch';
 import u from 'updeep';
 
 import {
