@@ -10,8 +10,8 @@ description:
   input:
     label: Goal name
     hint: >- 
-    Examples of goals include: improved health outcomes for benficiaries, transformation of public health services,
-    enabling implementation of other initiatives, etc.
+      Examples of goals include: improved health outcomes for benficiaries, transformation of public health services,
+      enabling implementation of other initiatives, etc.
     
 
 objective:
