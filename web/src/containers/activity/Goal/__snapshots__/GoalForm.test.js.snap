@@ -5,7 +5,7 @@ exports[`the GoalForm component renders correctly 1`] = `
   <TextField
     autoFocus="true"
     className="data-entry-box"
-    hint=""
+    hint="Examples of goals include: improved health outcomes for benficiaries, transformation of public health services, enabling implementation of other initiatives, etc."
     label="Goal name"
     name="name"
     type="text"
@@ -13,7 +13,7 @@ exports[`the GoalForm component renders correctly 1`] = `
   />
   <TextArea
     className="data-entry-box"
-    hint="Briefly describe how the state will measure progress toward the identified goal."
+    hint="Explain how the state will make measurable progress towards the activity goal."
     label="Benchmarks"
     name="milestones"
     rows={6}
