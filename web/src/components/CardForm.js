@@ -46,7 +46,7 @@ const CardForm = ({
           </h1>
           <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
-              {!!legend && <legend className="sr-only">{legend}</legend>}
+              {!!legend && <legend className="ds-u-visibility--screen-reader">{legend}</legend>}
 
               {children}
 

@@ -78,7 +78,7 @@ class IncentivePayments extends Component {
                               className="budget-table--input-holder"
                               fieldClassName="budget-table--input__number"
                               label={`${id} payments for ${year}, quarter ${q}`}
-                              labelClassName="sr-only"
+                              labelClassName="ds-u-visibility--screen-reader"
                               name={`${id}-payments-${year}-q${q}`}
                               value={data[id][year][q] || ''}
                               onChange={this.handleChange(id, year, q)}

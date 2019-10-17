@@ -85,7 +85,7 @@ class CostAllocateFFPQuarterly extends Component {
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
-                        labelClassName="sr-only"
+                        labelClassName="ds-u-visibility--screen-reader"
                         name={`ffp-${aKey}-${year}-${q}-${name}`}
                         onChange={this.handleChange(year, q, name)}
                         value={quarterlyFFP[year][q][name].percent * 100}
