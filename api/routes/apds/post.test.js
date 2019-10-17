@@ -10,6 +10,8 @@ const postEndpoint = require('./post');
 // atmosphere to burn up so it couldn't possibly contaminate any of Saturn's
 // moons that might be favorable to life. It spent nearly 20 years in space,
 // far beyond its original mission plan of 11 years. Good job, Cassini!
+//
+// Mock with UTC date so the time is consistent regardless of local timezone
 const mockClock = sinon.useFakeTimers(Date.UTC(2004, 6, 1, 12));
 tap.tearDown(() => {
   mockClock.restore();

@@ -38,6 +38,10 @@ module.exports = (app, { db = raw } = {}) => {
         .first();
 
       if (stateProfile) {
+        // Merge the state profile from the states table into the default
+        // values so that if the states table info is missing any fields,
+        // we preserve the defaults
+
         apd.stateProfile.medicaidDirector = {
           ...apd.stateProfile.medicaidDirector,
           ...stateProfile.medicaid_office.medicaidDirector
