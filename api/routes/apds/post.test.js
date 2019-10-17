@@ -10,7 +10,7 @@ const postEndpoint = require('./post');
 // atmosphere to burn up so it couldn't possibly contaminate any of Saturn's
 // moons that might be favorable to life. It spent nearly 20 years in space,
 // far beyond its original mission plan of 11 years. Good job, Cassini!
-const mockClock = sinon.useFakeTimers(new Date(2004, 6, 1).getTime());
+const mockClock = sinon.useFakeTimers(Date.UTC(2004, 6, 1, 12));
 tap.tearDown(() => {
   mockClock.restore();
 });
@@ -308,7 +308,7 @@ tap.test('apds POST endpoint', async endpointTest => {
       test.same(res.send.args[0][0], {
         ...expectedApd,
         id: 'apd id',
-        updated: '2004-07-01T05:00:00.000Z'
+        updated: '2004-07-01T12:00:00.000Z'
       });
     });
   });
