@@ -385,7 +385,7 @@
                   "^(1|2|3|4)$": {
                     "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter",
                     "type": "object",
-                    "required": ["combined", "contractors", "state"],
+                    "required": ["contractors", "state"],
                     "properties": {
                       "contractors": {
                         "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/contractors",

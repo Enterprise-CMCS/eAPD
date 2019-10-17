@@ -13,7 +13,6 @@ const mockClock = sinon.useFakeTimers(new Date(1972, 11, 13).getTime());
 // library computes years as soon as it's loaded, so...  require() is left
 // alone, so it will come after the clock fakery.  :pixar-joy:
 const imported = require('./activities');
-const { ADD_APD_YEAR, REMOVE_APD_YEAR } = require('../actions/editApd');
 
 const activities = imported.default;
 const { setKeyGenerator } = imported;

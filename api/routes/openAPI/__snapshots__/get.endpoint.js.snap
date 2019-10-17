@@ -4,319 +4,102 @@ exports[`open-api endpoint | GET /open-api 1`] = `
 Object {
   "components": Object {
     "schemas": Object {
-      "activity": Object {
+      "apd": Object {
         "properties": Object {
-          "alernatives": Object {
-            "description": "Alternative considerations for the activity",
-            "type": "string",
-          },
-          "contractorResources": Object {
+          "activities": Object {
             "items": Object {
-              "description": "Activity contractor resource",
               "properties": Object {
-                "description": Object {
-                  "description": "Description",
+                "alernatives": Object {
+                  "description": "Alternative considerations for the activity",
                   "type": "string",
                 },
-                "end": Object {
-                  "description": "When the contractor resource will end work; date only",
-                  "format": "date-time",
-                  "type": "string",
+                "contractorResources": Object {
+                  "items": Object {
+                    "description": "Activity contractor resource",
+                    "properties": Object {
+                      "description": Object {
+                        "description": "Description",
+                        "type": "string",
+                      },
+                      "end": Object {
+                        "description": "When the contractor resource will end work; date only",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "hourly": Object {
+                        "properties": Object {
+                          "data": Object {
+                            "x-patternProperties": Object {
+                              "^[0-9]{4}$": Object {
+                                "properties": Object {
+                                  "hours": Object {
+                                    "description": "Number of hours the contractor is expected to work for the given federal fiscal year",
+                                    "type": "number",
+                                  },
+                                  "rate": Object {
+                                    "description": "Contractor hourly rate for the given federal fiscal year",
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                            },
+                          },
+                          "useHourly": Object {
+                            "description": "Whether to use hourly rates for this contractor",
+                            "type": "boolean",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "name": Object {
+                        "description": "Name of the contractor resource",
+                        "type": "string",
+                      },
+                      "start": Object {
+                        "description": "When the contractor resource will begin work; date only",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "totalCost": Object {
+                        "description": "Contractor resource total cost",
+                        "type": "number",
+                      },
+                      "years": Object {
+                        "description": "Details of each year the contractor resource will be working",
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "description": "Contractor resource cost of the year",
+                            "type": "number",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
                 },
-                "hourly": Object {
-                  "properties": Object {
-                    "data": Object {
-                      "x-patternProperties": Object {
-                        "^[0-9]{4}$": Object {
+                "costAllocation": Object {
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{4}$": Object {
+                      "properties": Object {
+                        "ffp": Object {
                           "properties": Object {
-                            "hours": Object {
-                              "description": "Number of hours the contractor is expected to work for the given federal fiscal year",
+                            "federal": Object {
+                              "description": "Federal share for this activity for this year, from 0 to 100",
                               "type": "number",
                             },
-                            "rate": Object {
-                              "description": "Contractor hourly rate for the given federal fiscal year",
+                            "state": Object {
+                              "description": "State share for this activity for this year, from 0 to 100",
                               "type": "number",
                             },
                           },
                           "type": "object",
                         },
-                      },
-                    },
-                    "useHourly": Object {
-                      "description": "Whether to use hourly rates for this contractor",
-                      "type": "boolean",
-                    },
-                  },
-                  "type": "object",
-                },
-                "name": Object {
-                  "description": "Name of the contractor resource",
-                  "type": "string",
-                },
-                "start": Object {
-                  "description": "When the contractor resource will begin work; date only",
-                  "format": "date-time",
-                  "type": "string",
-                },
-                "totalCost": Object {
-                  "description": "Contractor resource total cost",
-                  "type": "number",
-                },
-                "years": Object {
-                  "description": "Details of each year the contractor resource will be working",
-                  "type": "object",
-                  "x-patternProperties": Object {
-                    "^[0-9]{4}$": Object {
-                      "description": "Contractor resource cost of the year",
-                      "type": "number",
-                    },
-                  },
-                },
-              },
-              "type": "object",
-            },
-            "type": "array",
-          },
-          "costAllocation": Object {
-            "type": "object",
-            "x-patternProperties": Object {
-              "^[0-9]{4}$": Object {
-                "properties": Object {
-                  "ffp": Object {
-                    "properties": Object {
-                      "federal": Object {
-                        "description": "Federal share for this activity for this year, from 0 to 100",
-                        "type": "number",
-                      },
-                      "state": Object {
-                        "description": "State share for this activity for this year, from 0 to 100",
-                        "type": "number",
-                      },
-                    },
-                    "type": "object",
-                  },
-                  "other": Object {
-                    "description": "Other amount (dollars) for this activity for this year",
-                    "type": "number",
-                  },
-                },
-                "type": "object",
-              },
-            },
-          },
-          "costAllocationNarrative": Object {
-            "properties": Object {
-              "methodology": Object {
-                "description": "Description of the cost allocation methodology",
-                "type": "string",
-              },
-              "otherSources": Object {
-                "description": "Description of other funding sources",
-                "type": "string",
-              },
-            },
-            "type": "object",
-          },
-          "description": Object {
-            "description": "Activity description",
-            "type": "string",
-          },
-          "expenses": Object {
-            "items": Object {
-              "description": "Activity expense",
-              "properties": Object {
-                "category": Object {
-                  "description": "Expense category, such as \\"Hardware, software, and licensing\\"",
-                  "type": "string",
-                },
-                "description": Object {
-                  "description": "Short description of the expense",
-                  "type": "string",
-                },
-                "years": Object {
-                  "description": "Expense entry",
-                  "type": "object",
-                  "x-patternProperties": Object {
-                    "^[0-9]{4}$": Object {
-                      "description": "Expense amount for the given federal fiscal year",
-                      "type": "number",
-                    },
-                  },
-                },
-              },
-              "type": "object",
-            },
-            "type": "array",
-          },
-          "fundingSource": Object {
-            "description": "Federal funding source that applies to this activity",
-            "type": "string",
-          },
-          "goals": Object {
-            "items": Object {
-              "description": "Activity goal",
-              "properties": Object {
-                "description": Object {
-                  "description": "Goal description",
-                  "type": "string",
-                },
-                "objective": Object {
-                  "description": "Goal objective",
-                  "type": "string",
-                },
-              },
-              "type": "object",
-            },
-            "type": "array",
-          },
-          "id": Object {
-            "description": "Activity globally-unique ID",
-            "type": "number",
-          },
-          "name": Object {
-            "description": "Activity name, unique within an APD",
-            "type": "string",
-          },
-          "plannedEndDate": Object {
-            "description": "The date this activity is planned to begin",
-            "format": "date-time",
-            "type": "string",
-          },
-          "plannedStartDate": Object {
-            "description": "The date this activity is planned to be completed",
-            "format": "date-time",
-            "type": "string",
-          },
-          "quarterlyFFP": Object {
-            "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
-            "type": "object",
-            "x-patternProperties": Object {
-              "^[0-9]{4}$": Object {
-                "properties": Object {
-                  "1": Object {
-                    "properties": Object {
-                      "combined": Object {
-                        "description": "Combined cost for the first quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                      "contractors": Object {
-                        "description": "Contractor costs for the first quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                      "state": Object {
-                        "description": "In-house (state personnel + non-personnel) costs for the first quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                    },
-                    "type": "object",
-                  },
-                  "2": Object {
-                    "properties": Object {
-                      "combined": Object {
-                        "description": "Combined cost for the second quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                      "contractors": Object {
-                        "description": "Contractor costs for the second quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                      "state": Object {
-                        "description": "In-house (state personnel + non-personnel) costs for the second quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                    },
-                    "type": "object",
-                  },
-                  "3": Object {
-                    "properties": Object {
-                      "combined": Object {
-                        "description": "Combined cost for the third quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                      "contractors": Object {
-                        "description": "Contractor costs for the third quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                      "state": Object {
-                        "description": "In-house (state personnel + non-personnel) costs for the third quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                    },
-                    "type": "object",
-                  },
-                  "4": Object {
-                    "properties": Object {
-                      "combined": Object {
-                        "description": "Combined cost for the fourth quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                      "contractors": Object {
-                        "description": "Contractor costs for the fourth quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                      "state": Object {
-                        "description": "In-house (state personnel + non-personnel) costs for the fourth quarter of the given federal fiscal year",
-                        "type": "number",
-                      },
-                    },
-                    "type": "object",
-                  },
-                },
-                "type": "object",
-              },
-            },
-          },
-          "schedule": Object {
-            "items": Object {
-              "description": "Activity schedule item",
-              "properties": Object {
-                "endDate": Object {
-                  "description": "The date this milestone is planned to be met",
-                  "format": "date-time",
-                  "type": "string",
-                },
-                "milestone": Object {
-                  "description": "The name of the milestone this schedule entry refers to",
-                  "type": "string",
-                },
-                "status": Object {
-                  "description": "The status of the milestone",
-                  "type": "string",
-                },
-              },
-              "type": "object",
-            },
-            "type": "array",
-          },
-          "standardsAndConditions": Object {
-            "type": "object",
-          },
-          "statePersonnel": Object {
-            "items": Object {
-              "properties": Object {
-                "description": Object {
-                  "description": "Description of the role",
-                  "type": "string",
-                },
-                "keyPersonnel": Object {
-                  "description": "\\"Key Personnel\\" designation",
-                  "type": "boolean",
-                },
-                "title": Object {
-                  "description": "Title for the state personnel",
-                  "type": "string",
-                },
-                "years": Object {
-                  "type": "object",
-                  "x-patternProperties": Object {
-                    "^[0-9]{4}$": Object {
-                      "properties": Object {
-                        "amt": Object {
-                          "description": "State personnel's total cost for the federal fiscal year",
-                          "type": "number",
-                        },
-                        "perc": Object {
-                          "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year",
+                        "other": Object {
+                          "description": "Other amount (dollars) for this activity for this year",
                           "type": "number",
                         },
                       },
@@ -324,23 +107,206 @@ Object {
                     },
                   },
                 },
+                "costAllocationNarrative": Object {
+                  "properties": Object {
+                    "methodology": Object {
+                      "description": "Description of the cost allocation methodology",
+                      "type": "string",
+                    },
+                    "otherSources": Object {
+                      "description": "Description of other funding sources",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "description": Object {
+                  "description": "Activity description",
+                  "type": "string",
+                },
+                "expenses": Object {
+                  "items": Object {
+                    "description": "Activity expense",
+                    "properties": Object {
+                      "category": Object {
+                        "description": "Expense category, such as \\"Hardware, software, and licensing\\"",
+                        "type": "string",
+                      },
+                      "description": Object {
+                        "description": "Short description of the expense",
+                        "type": "string",
+                      },
+                      "years": Object {
+                        "description": "Expense entry",
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "description": "Expense amount for the given federal fiscal year",
+                            "type": "number",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "fundingSource": Object {
+                  "description": "Federal funding source that applies to this activity",
+                  "type": "string",
+                },
+                "goals": Object {
+                  "items": Object {
+                    "description": "Activity goal",
+                    "properties": Object {
+                      "description": Object {
+                        "description": "Goal description",
+                        "type": "string",
+                      },
+                      "objective": Object {
+                        "description": "Goal objective",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "name": Object {
+                  "description": "Activity name, unique within an APD",
+                  "type": "string",
+                },
+                "plannedEndDate": Object {
+                  "description": "The date this activity is planned to begin",
+                  "format": "date-time",
+                  "type": "string",
+                },
+                "plannedStartDate": Object {
+                  "description": "The date this activity is planned to be completed",
+                  "format": "date-time",
+                  "type": "string",
+                },
+                "quarterlyFFP": Object {
+                  "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{4}$": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[1-4]$": Object {
+                          "properties": Object {
+                            "contractors": Object {
+                              "description": "Contractor costs for the given quarter of the given federal fiscal year",
+                              "type": "number",
+                            },
+                            "state": Object {
+                              "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year",
+                              "type": "number",
+                            },
+                          },
+                          "type": "object",
+                        },
+                      },
+                    },
+                  },
+                },
+                "schedule": Object {
+                  "items": Object {
+                    "description": "Activity schedule item",
+                    "properties": Object {
+                      "endDate": Object {
+                        "description": "The date this milestone is planned to be met",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "milestone": Object {
+                        "description": "The name of the milestone this schedule entry refers to",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "standardsAndConditions": Object {
+                  "description": "Description of the 11 standards and conditions",
+                  "properties": Object {
+                    "businessResults": Object {
+                      "type": "string",
+                    },
+                    "documentation": Object {
+                      "type": "string",
+                    },
+                    "industryStandards": Object {
+                      "type": "string",
+                    },
+                    "interoperability": Object {
+                      "type": "string",
+                    },
+                    "keyPersonnel": Object {
+                      "type": "string",
+                    },
+                    "leverage": Object {
+                      "type": "string",
+                    },
+                    "minimizeCost": Object {
+                      "type": "string",
+                    },
+                    "mita": Object {
+                      "type": "string",
+                    },
+                    "mitigationStrategy": Object {
+                      "type": "string",
+                    },
+                    "modularity": Object {
+                      "type": "string",
+                    },
+                    "reporting": Object {
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "statePersonnel": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "description": Object {
+                        "description": "Description of the role",
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "description": "Title for the state personnel",
+                        "type": "string",
+                      },
+                      "years": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "properties": Object {
+                              "amt": Object {
+                                "description": "State personnel's total cost for the federal fiscal year",
+                                "type": "number",
+                              },
+                              "perc": Object {
+                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "summary": Object {
+                  "description": "Short summary of the activity",
+                  "type": "string",
+                },
               },
               "type": "object",
-            },
-            "type": "array",
-          },
-          "summary": Object {
-            "description": "Short summary of the activity",
-            "type": "string",
-          },
-        },
-        "type": "object",
-      },
-      "apd": Object {
-        "properties": Object {
-          "activities": Object {
-            "items": Object {
-              "$ref": "#/components/schemas/activity",
             },
             "type": "array",
           },
@@ -353,24 +319,24 @@ Object {
             "type": "number",
           },
           "incentivePayments": Object {
-            "items": Object {
-              "properties": Object {
-                "ehAmt": Object {
-                  "$ref": "#/components/schemas/incentivePaymentType",
-                },
-                "ehCt": Object {
-                  "$ref": "#/components/schemas/incentivePaymentType",
-                },
-                "epAmt": Object {
-                  "$ref": "#/components/schemas/incentivePaymentType",
-                },
-                "epCt": Object {
-                  "$ref": "#/components/schemas/incentivePaymentType",
+            "description": "APD incentive payments",
+            "type": "object",
+            "x-patternProperties": Object {
+              "^e[hc](Amt|Ct)$": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[1-4]$": Object {
+                        "description": "EH or EC payment or count for the given federal fiscal year and quarter",
+                        "type": "number",
+                      },
+                    },
+                  },
                 },
               },
-              "type": "object",
             },
-            "type": "array",
           },
           "keyPersonnel": Object {
             "items": Object {
@@ -391,9 +357,6 @@ Object {
                 "hasCosts": Object {
                   "description": "Whether the person has costs attributable to the project",
                   "type": "boolean",
-                },
-                "id": Object {
-                  "type": "number",
                 },
                 "isPrimary": Object {
                   "description": "Whether the person is the primary point of contact for the APD",
@@ -502,6 +465,10 @@ Object {
             "description": "An overview of the overall program",
             "type": "string",
           },
+          "state": Object {
+            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase",
+            "type": "string",
+          },
           "stateProfile": Object {
             "description": "The state profile for this specific APD",
             "properties": Object {
@@ -562,92 +529,6 @@ Object {
           "years": Object {
             "items": Object {
               "type": "string",
-            },
-            "type": "array",
-          },
-        },
-        "type": "object",
-      },
-      "incentivePaymentType": Object {
-        "type": "object",
-        "x-patternProperties": Object {
-          "^[0-9]{4}$": Object {
-            "properties": Object {
-              "1": Object {
-                "description": "EH payment amount for the first quarter of the given fiscal year",
-                "type": "number",
-              },
-              "2": Object {
-                "description": "EH payment amount for the second quarter of the given fiscal year",
-                "type": "number",
-              },
-              "3": Object {
-                "description": "EH payment amount for the third quarter of the given fiscal year",
-                "type": "number",
-              },
-              "4": Object {
-                "description": "EH payment amount for the fourth quarter of the given fiscal year",
-                "type": "number",
-              },
-            },
-            "type": "object",
-          },
-        },
-      },
-      "state": Object {
-        "properties": Object {
-          "id": Object {
-            "description": "State, territory, or district ID (2-letter abbreviation, lowercase)",
-            "type": "string",
-          },
-          "medicaid_office": Object {
-            "description": "Address of the state, territory, or district Medicaid office",
-            "properties": Object {
-              "address": Object {
-                "description": "Street address",
-                "type": "string",
-              },
-              "city": Object {
-                "description": "City",
-                "type": "string",
-              },
-              "zip": Object {
-                "description": "ZIP code",
-                "type": "string",
-              },
-            },
-            "type": "object",
-          },
-          "name": Object {
-            "description": "State, territory, or district name",
-            "type": "string",
-          },
-          "program_benefits": Object {
-            "description": "Planned benefits of the program",
-            "type": "string",
-          },
-          "program_vision": Object {
-            "description": "Program vision statement",
-            "type": "string",
-          },
-          "state_pocs": Object {
-            "items": Object {
-              "description": "A list of points of contact for the state, territory, or district",
-              "properties": Object {
-                "email": Object {
-                  "description": "Point of contact's email address",
-                  "type": "string",
-                },
-                "name": Object {
-                  "description": "Point of contact's name",
-                  "type": "string",
-                },
-                "position": Object {
-                  "description": "Point of contact's position in the state, territory, or district",
-                  "type": "string",
-                },
-              },
-              "type": "object",
             },
             "type": "array",
           },
