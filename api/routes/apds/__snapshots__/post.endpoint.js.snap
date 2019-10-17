@@ -15,13 +15,13 @@ Object {
               "hours": 0,
               "id": 1,
               "rate": 0,
-              "year": 2019,
+              "year": 2020,
             },
             Object {
               "hours": 0,
               "id": 2,
               "rate": 0,
-              "year": 2020,
+              "year": 2021,
             },
           ],
           "id": 1,
@@ -33,12 +33,12 @@ Object {
             Object {
               "cost": 0,
               "id": 1,
-              "year": 2019,
+              "year": 2020,
             },
             Object {
               "cost": 0,
               "id": 2,
-              "year": 2020,
+              "year": 2021,
             },
           ],
         },
@@ -48,13 +48,13 @@ Object {
           "federalPercent": "0.90",
           "otherAmount": 0,
           "statePercent": "0.10",
-          "year": 2019,
+          "year": 2020,
         },
         Object {
           "federalPercent": "0.90",
           "otherAmount": 0,
           "statePercent": "0.10",
-          "year": 2020,
+          "year": 2021,
         },
       ],
       "costAllocationNarrative": Object {
@@ -70,12 +70,12 @@ Object {
             Object {
               "amount": 0,
               "id": 1,
-              "year": "2019",
+              "year": "2020",
             },
             Object {
               "amount": 0,
               "id": 2,
-              "year": "2020",
+              "year": "2021",
             },
           ],
           "id": 1,
@@ -116,7 +116,7 @@ Object {
             "contractors": 0,
             "state": 0,
           },
-          "year": 2019,
+          "year": 2020,
         },
         Object {
           "q1": Object {
@@ -139,7 +139,7 @@ Object {
             "contractors": 0,
             "state": 0,
           },
-          "year": 2020,
+          "year": 2021,
         },
       ],
       "schedule": Array [
@@ -173,13 +173,13 @@ Object {
               "cost": 0,
               "fte": 0,
               "id": 1,
-              "year": 2019,
+              "year": 2020,
             },
             Object {
               "cost": 0,
               "fte": 0,
               "id": 2,
-              "year": 2020,
+              "year": 2021,
             },
           ],
         },
@@ -215,7 +215,7 @@ Object {
         "epCount": null,
         "epPayment": 0,
       },
-      "year": "2019",
+      "year": "2020",
     },
     Object {
       "q1": Object {
@@ -242,7 +242,7 @@ Object {
         "epCount": null,
         "epPayment": 0,
       },
-      "year": "2020",
+      "year": "2021",
     },
   ],
   "keyPersonnel": Array [
@@ -261,6 +261,27 @@ Object {
   "narrativeHIT": "",
   "narrativeMMIS": "",
   "previousActivityExpenses": Array [
+    Object {
+      "hithie": Object {
+        "federalActual": 0,
+        "totalApproved": 0,
+      },
+      "mmis": Object {
+        "50": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "75": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "90": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+      },
+      "year": "2020",
+    },
     Object {
       "hithie": Object {
         "federalActual": 0,
@@ -303,27 +324,6 @@ Object {
       },
       "year": "2018",
     },
-    Object {
-      "hithie": Object {
-        "federalActual": 0,
-        "totalApproved": 0,
-      },
-      "mmis": Object {
-        "50": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-        "75": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-        "90": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-      },
-      "year": "2017",
-    },
   ],
   "previousActivitySummary": "",
   "programOverview": "",
@@ -344,8 +344,8 @@ Object {
   },
   "status": "draft",
   "years": Array [
-    "2019",
     "2020",
+    "2021",
   ],
 }
 `;
