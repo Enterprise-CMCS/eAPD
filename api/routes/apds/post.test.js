@@ -4,9 +4,20 @@ const sinon = require('sinon');
 const { can } = require('../../middleware');
 const postEndpoint = require('./post');
 
+// The Cassini probe enters orbit around Saturn, about 7 years after launch.
+// On its long journey, it surveyed Venus, Earth, an asteroid, and Jupiter.
+// It orbited Saturn for 13 years before being sent into the planet's
+// atmosphere to burn up so it couldn't possibly contaminate any of Saturn's
+// moons that might be favorable to life. It spent nearly 20 years in space,
+// far beyond its original mission plan of 11 years. Good job, Cassini!
+const mockClock = sinon.useFakeTimers(new Date(2004, 6, 1).getTime());
+tap.tearDown(() => {
+  mockClock.restore();
+});
+
 tap.test('apds POST endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
-  const app = { post: sinon.stub() };
+  const app = { post: sandbox.stub() };
 
   endpointTest.test('setup', async test => {
     postEndpoint(app);
@@ -28,28 +39,7 @@ tap.test('apds POST endpoint', async endpointTest => {
       end: sandbox.stub()
     };
 
-    const ApdModel = {
-      fetch: sandbox.stub(),
-      forge: sandbox.stub(),
-      where: sandbox.stub(),
-      withRelated: 'relations!'
-    };
-    const apd = {
-      get: sandbox.stub(),
-      save: sandbox.stub(),
-      synchronize: sandbox.stub()
-    };
-    const apdObject = {
-      toJSON: sandbox.stub()
-    };
-
-    const dataBuilder = sandbox.stub();
-
-    const db = sinon.stub().returns({
-      where: sinon.stub().returns({
-        update: sinon.stub().resolves()
-      })
-    });
+    const db = sandbox.stub();
 
     tests.beforeEach(async () => {
       sandbox.resetBehavior();
@@ -59,34 +49,12 @@ tap.test('apds POST endpoint', async endpointTest => {
       res.status.returns(res);
       res.end.returns(res);
 
-      apdObject.toJSON.returns({
-        activities: [],
-        federalCitations: null,
-        stateProfile: { medicaidOffice: {} }
-      });
-
-      ApdModel.forge.returns(apd);
-
-      ApdModel.where.returns({
-        fetch: sandbox
-          .stub()
-          .withArgs({ withRelated: 'relations!' })
-          .resolves(apdObject)
-      });
-
-      apd.get.withArgs('id').returns('new apd id');
-      apd.save.resolves();
-      apd.synchronize.resolves();
-
-      postEndpoint(app, { ApdModel, db, getNewApd: dataBuilder });
-      handler = app.post.args
-        .slice(-1)[0]
-        .slice(-1)
-        .pop();
+      postEndpoint(app, { db });
+      handler = app.post.args.pop().pop();
     });
 
     tests.test('sends a 500 code for database errors', async test => {
-      ApdModel.forge.throws(new Error('boop'));
+      db.throws(new Error('boop'));
       await handler(req, res);
 
       test.ok(res.status.calledWith(500), 'HTTP status set to 500');
@@ -94,48 +62,254 @@ tap.test('apds POST endpoint', async endpointTest => {
     });
 
     tests.test('sends back the new APD if everything works', async test => {
-      const data = { this: 'is', some: 'apd', data: 'here' };
-      dataBuilder.resolves(data);
+      const dbSelectStateProfileChain = {
+        select: sinon.stub(),
+        where: sinon.stub(),
+        first: sinon.stub().resolves({
+          medicaid_office: {
+            medicaidDirector: {},
+            medicaidOffice: {}
+          }
+        })
+      };
+      dbSelectStateProfileChain.select.returns({
+        where: dbSelectStateProfileChain.where
+      });
+      dbSelectStateProfileChain.where.returns({
+        first: dbSelectStateProfileChain.first
+      });
+
+      db.withArgs('states')
+        .onFirstCall()
+        .returns(dbSelectStateProfileChain);
+
+      const dbInsertAPDChain = {
+        insert: sinon.stub(),
+        returning: sinon
+          .stub()
+          .onFirstCall()
+          .resolves(['apd id'])
+      };
+      dbInsertAPDChain.insert.returns({
+        returning: dbInsertAPDChain.returning
+      });
+
+      db.withArgs('apds')
+        .onFirstCall()
+        .returns(dbInsertAPDChain);
+
+      const expectedApd = {
+        activities: [
+          {
+            alternatives: '',
+            contractorResources: [
+              {
+                description: '',
+                end: '',
+                hourly: {
+                  data: {
+                    '2004': { hours: '', rate: '' },
+                    '2005': { hours: '', rate: '' }
+                  },
+                  useHourly: false
+                },
+                name: '',
+                start: '',
+                totalCost: 0,
+                years: { '2004': 0, '2005': 0 }
+              }
+            ],
+            costAllocation: {
+              '2004': { ffp: { federal: 90, state: 10 }, other: 0 },
+              '2005': { ffp: { federal: 90, state: 10 }, other: 0 }
+            },
+            costAllocationNarrative: {
+              methodology: '',
+              otherSources: ''
+            },
+            description: '',
+            expenses: [
+              {
+                category: '',
+                description: '',
+                years: { '2004': 0, '2005': 0 }
+              }
+            ],
+            fundingSource: 'HIT',
+            goals: [{ description: '', objective: '' }],
+            name: 'Program Administration',
+            plannedEndDate: '',
+            plannedStartDate: '',
+            schedule: [{ endDate: '', milestone: '' }],
+            standardsAndConditions: {
+              businessResults: '',
+              documentation: '',
+              industryStandards: '',
+              interoperability: '',
+              keyPersonnel: '',
+              leverage: '',
+              minimizeCost: '',
+              mitigationStrategy: '',
+              modularity: '',
+              mita: '',
+              reporting: ''
+            },
+            statePersonnel: [
+              {
+                description: '',
+                title: '',
+                years: {
+                  '2004': { amt: 0, perc: 0 },
+                  '2005': { amt: 0, perc: 0 }
+                }
+              }
+            ],
+            summary: '',
+            quarterlyFFP: {
+              '2004': {
+                1: { contractors: 0, state: 0 },
+                2: { contractors: 0, state: 0 },
+                3: { contractors: 0, state: 0 },
+                4: { contractors: 0, state: 0 }
+              },
+              '2005': {
+                1: { contractors: 0, state: 0 },
+                2: { contractors: 0, state: 0 },
+                3: { contractors: 0, state: 0 },
+                4: { contractors: 0, state: 0 }
+              }
+            }
+          }
+        ],
+        federalCitations: {},
+        incentivePayments: {
+          ehAmt: {
+            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+          },
+          ehCt: {
+            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+          },
+          epAmt: {
+            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+          },
+          epCt: {
+            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+          }
+        },
+        keyPersonnel: [
+          {
+            costs: { '2004': 0, '2005': 0 },
+            email: '',
+            hasCosts: false,
+            isPrimary: true,
+            name: '',
+            percentTime: '',
+            position: ''
+          }
+        ],
+        name: 'ST-2004-07-01-HITECH-APD',
+        narrativeHIE: '',
+        narrativeHIT: '',
+        narrativeMMIS: '',
+        previousActivityExpenses: {
+          '2004': {
+            hithie: {
+              federalActual: 0,
+              totalApproved: 0
+            },
+            mmis: {
+              90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            }
+          },
+          '2003': {
+            hithie: {
+              federalActual: 0,
+              totalApproved: 0
+            },
+            mmis: {
+              90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            }
+          },
+          '2002': {
+            hithie: {
+              federalActual: 0,
+              totalApproved: 0
+            },
+            mmis: {
+              90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            }
+          }
+        },
+        previousActivitySummary: '',
+        programOverview: '',
+        stateProfile: {
+          medicaidDirector: {
+            email: '',
+            name: '',
+            phone: ''
+          },
+          medicaidOffice: {
+            address1: '',
+            address2: '',
+            city: '',
+            state: '',
+            zip: ''
+          }
+        },
+        years: ['2004', '2005']
+      };
 
       await handler(req, res);
 
+      // Fetches the state Medicaid director and office info from the state
+      // table to use as defaults for the new APD
       test.ok(
-        ApdModel.forge.calledWith({
+        dbSelectStateProfileChain.select.calledWith('medicaid_office'),
+        'gets the Medicaid office metadata'
+      );
+      test.ok(
+        dbSelectStateProfileChain.where.calledWith({ id: 'st' }),
+        'only for the target state'
+      );
+
+      // Saves the new APD
+      test.ok(
+        dbInsertAPDChain.insert.calledWith({
           state_id: 'st',
-          status: 'draft'
+          status: 'draft',
+          document: sinon.match.object
         }),
-        'new APD is created'
+        'saves the new APD to the database'
       );
-
-      test.ok(apd.save.calledOnce, 'new APD is saved');
-      test.ok(
-        apd.save.calledBefore(dataBuilder),
-        'APD is created and saved before data is built'
-      );
-      test.ok(
-        dataBuilder.calledBefore(apd.synchronize),
-        'APD is synchronized after data is built'
+      test.same(
+        dbInsertAPDChain.insert.args[0][0].document,
+        expectedApd,
+        'saves the expected document'
       );
       test.ok(
-        apd.synchronize.calledWith(data),
-        'APD is synchronized with initial data'
+        dbInsertAPDChain.returning.calledWith('id'),
+        'and gets the new APD ID'
       );
 
       test.ok(
-        apd.synchronize.calledBefore(ApdModel.where),
-        'updated APD is fetched after synchronization'
+        res.send.calledWith(sinon.match.object),
+        'responds with the new APD object'
       );
-      test.ok(
-        ApdModel.where.calledWith({ id: 'new apd id' }),
-        'only the newly-created APD is fetched'
-      );
-
-      test.ok(
-        ApdModel.where.calledBefore(ApdModel.fetch),
-        'model query filter is set before fetching'
-      );
-
-      test.ok(res.send.calledWith(apdObject), 'sends back the new APD');
+      test.same(res.send.args[0][0], {
+        ...expectedApd,
+        id: 'apd id',
+        updated: '2004-07-01T05:00:00.000Z'
+      });
     });
   });
 });

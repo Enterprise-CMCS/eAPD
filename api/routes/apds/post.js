@@ -1,58 +1,78 @@
+const Ajv = require('ajv');
+const moment = require('moment');
+
 const logger = require('../../logger')('apds route post');
 const { raw } = require('../../db');
-const { apd: defaultApdModel } = require('../../db').models;
 const { can } = require('../../middleware');
 
-const defaultGetNewApd = require('./post.data');
+const getNewApd = require('./post.data');
 
-module.exports = (
-  app,
-  { db = raw, getNewApd = defaultGetNewApd, ApdModel = defaultApdModel } = {}
-) => {
+const apdSchema = require('../../schemas/apd.json');
+
+const ajv = new Ajv({
+  allErrors: true,
+  jsonPointers: true,
+  removeAdditional: true
+});
+
+const validatorFunction = ajv.compile({
+  ...apdSchema,
+  additionalProperties: false
+});
+
+module.exports = (app, { db = raw } = {}) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res) => {
     logger.silly(req, 'handling POST /apds route');
 
     try {
-      const newApd = ApdModel.forge({
-        state_id: req.user.state,
-        status: 'draft'
-      });
-      await newApd.save();
+      const apd = getNewApd();
 
-      const apdContent = await getNewApd(req.user.state);
-      await newApd.synchronize(apdContent);
+      apd.name = `${req.user.state.toUpperCase()}-${moment(Date.now()).format(
+        'YYYY-MM-DD'
+      )}-HITECH-APD`;
 
-      const apd = await ApdModel.where({ id: newApd.get('id') }).fetch({
-        withRelated: ApdModel.withRelated
-      });
+      const stateProfile = await db('states')
+        .select('medicaid_office')
+        .where({ id: req.user.state })
+        .first();
 
-      const document = apd.toJSON();
+      if (stateProfile) {
+        apd.stateProfile.medicaidDirector = {
+          ...apd.stateProfile.medicaidDirector,
+          ...stateProfile.medicaid_office.medicaidDirector
+        };
 
-      document.activities = document.activities.map(activity => ({
-        ...activity,
-        costAllocationNarrative: {
-          ...activity.costAllocationNarrative,
-          methodology: activity.costAllocationNarrative.methodology || '',
-          otherSources: activity.costAllocationNarrative.otherSources || ''
-        }
-      }));
-
-      if (!document.federalCitations) {
-        document.federalCitations = {};
-      }
-      if (!document.stateProfile.medicaidOffice.address2) {
-        document.stateProfile.medicaidOffice.address2 = '';
+        apd.stateProfile.medicaidOffice = {
+          ...apd.stateProfile.medicaidOffice,
+          ...stateProfile.medicaid_office.medicaidOffice
+        };
+        delete apd.stateProfile.medicaidOffice.director;
       }
 
-      await db('apds')
-        .where({ id: newApd.get('id') })
-        .update({ document });
+      const valid = validatorFunction(apd);
+      if (!valid) {
+        logger.error(req, 'Newly-created APD fails validation');
+        logger.error(req, validatorFunction.errors);
+        return res.status(500).end();
+      }
 
-      res.send(apd);
+      const id = await db('apds')
+        .insert({
+          state_id: req.user.state,
+          status: 'draft',
+          document: apd
+        })
+        .returning('id');
+
+      return res.send({
+        ...apd,
+        id: id[0],
+        updated: new Date().toISOString()
+      });
     } catch (e) {
       logger.error(req, e);
-      res.status(500).end();
+      return res.status(500).end();
     }
   });
 };
