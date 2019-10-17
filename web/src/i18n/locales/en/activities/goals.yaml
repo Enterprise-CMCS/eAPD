@@ -3,23 +3,20 @@ instruction:
   short: >-
     
   detail: >-
-    Explain the state’s goals for this activity. Goals are outcomes the state
-    is pursuing through the activity. In addition to listing the goal, briefly
-    describe how each goal relates to the vision identified in the program
-    summary.
-  helpText: >-
-    Examples of goals include:
-    improved health outcomes for benficiaries, transformation of public health services,
-    enabling implementation of other initiatives, etc.
+    Performance goals should explain what outcomes are expected for an individual activity. These are high-level and relate to the vision outline in the program summary.
 noDataNotice: There are no goals set for this activity.
 
 description:
   input:
     label: Goal name
+    hint: >- 
+      Examples of goals include: improved health outcomes for benficiaries, transformation of public health services,
+      enabling implementation of other initiatives, etc.
+    
 
 objective:
   input:
     label: Benchmarks
     hint: >-
-      Briefly describe how the state will measure progress toward the identified goal.
+     Explain how the state will make measurable progress towards the activity goal.
 
