@@ -18,7 +18,7 @@ const getNewApd = () => {
     yearsToCover.reduce(
       (acc, year) => ({
         ...acc,
-        [year]: typeof obj === 'function' ? obj() : obj
+        [year]: obj
       }),
       {}
     );
