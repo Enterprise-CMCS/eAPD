@@ -26,6 +26,7 @@ exports[`the Activities component renders correctly 1`] = `
         item={
           Object {
             "first": "activity",
+            "key": "key1",
           }
         }
         onDeleteClick={null}
@@ -47,9 +48,11 @@ exports[`the Activities component renders correctly 1`] = `
         list={
           Array [
             Object {
+              "key": "key2",
               "second": "activity",
             },
             Object {
+              "key": "key3",
               "third": "activity",
             },
           ]

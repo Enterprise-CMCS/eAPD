@@ -13,11 +13,11 @@ import { addActivity, removeActivity } from '../../actions/editActivity';
 import { Section, Subsection } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
 
-const All = ({ add, first, keys, other, remove }) => {
+const All = ({ add, first, other, remove }) => {
   const onAdd = () => add();
 
   const onRemove = key => {
-    keys.forEach((activityKey, i) => {
+    [first, ...other].forEach(({ key: activityKey }, i) => {
       if (activityKey === key) {
         remove(i);
       }
@@ -42,7 +42,7 @@ const All = ({ add, first, keys, other, remove }) => {
             onDeleteClick={onRemove}
           />
         </Subsection>
-        {keys.map((key, index) => (
+        {[first, ...other].map(({ key }, index) => (
           <Waypoint id={key} key={key}>
             <EntryDetails activityIndex={index} />
           </Waypoint>
@@ -55,7 +55,6 @@ const All = ({ add, first, keys, other, remove }) => {
 All.propTypes = {
   add: PropTypes.func.isRequired,
   first: PropTypes.object.isRequired,
-  keys: PropTypes.arrayOf(PropTypes.string).isRequired,
   other: PropTypes.arrayOf(PropTypes.object).isRequired,
   remove: PropTypes.func.isRequired
 };
@@ -64,7 +63,6 @@ const mapStateToProps = state => {
   const activities = selectAllActivities(state);
   return {
     first: activities[0],
-    keys: activities.map(({ key }) => key),
     other: activities.slice(1)
   };
 };
