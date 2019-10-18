@@ -36,48 +36,8 @@ const StandardsAndConditions = ({
   setModularity,
   setReporting
 }) => {
-  const syncBusinessResults = html => {
-    setBusinessResults(activityIndex, html);
-  };
-
-  const syncDocumentation = html => {
-    setDocumentation(activityIndex, html);
-  };
-
-  const syncIndustryStandards = html => {
-    setIndustryStandards(activityIndex, html);
-  };
-
-  const syncInteroperability = html => {
-    setInteroperability(activityIndex, html);
-  };
-
-  const syncKeyPersonnel = html => {
-    setKeyPersonnel(activityIndex, html);
-  };
-
-  const syncLeverage = html => {
-    setLeverage(activityIndex, html);
-  };
-
-  const syncMinimizeCost = html => {
-    setMinimizeCost(activityIndex, html);
-  };
-
-  const syncMITA = html => {
-    setMITA(activityIndex, html);
-  };
-
-  const syncMitigationStrategy = html => {
-    setMitigationStrategy(activityIndex, html);
-  };
-
-  const syncModularity = html => {
-    setModularity(activityIndex, html);
-  };
-
-  const syncReporting = html => {
-    setReporting(activityIndex, html);
+  const getHandler = action => html => {
+    action(activityIndex, html);
   };
 
   return (
@@ -92,7 +52,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.modularity}
-          onSync={syncModularity}
+          onSync={getHandler(setModularity)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -107,7 +67,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.mita}
-          onSync={syncMITA}
+          onSync={getHandler(setMITA)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -122,7 +82,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.industryStandards}
-          onSync={syncIndustryStandards}
+          onSync={getHandler(setIndustryStandards)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -137,7 +97,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.leverage}
-          onSync={syncLeverage}
+          onSync={getHandler(setLeverage)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -152,7 +112,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.businessResults}
-          onSync={syncBusinessResults}
+          onSync={getHandler(setBusinessResults)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -167,7 +127,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.reporting}
-          onSync={syncReporting}
+          onSync={getHandler(setReporting)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -182,7 +142,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.interoperability}
-          onSync={syncInteroperability}
+          onSync={getHandler(setInteroperability)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -197,7 +157,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.mitigationStrategy}
-          onSync={syncMitigationStrategy}
+          onSync={getHandler(setMitigationStrategy)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -212,7 +172,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.keyPersonnel}
-          onSync={syncKeyPersonnel}
+          onSync={getHandler(setKeyPersonnel)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -227,7 +187,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.documentation}
-          onSync={syncDocumentation}
+          onSync={getHandler(setDocumentation)}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -242,7 +202,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.minimizeCost}
-          onSync={syncMinimizeCost}
+          onSync={getHandler(d)}
           editorClassName="rte-textarea-l"
         />
       </div>
