@@ -36,8 +36,10 @@ const reducer = (state = initialState, action) => {
       return initialState;
 
     case ADD_APD_ITEM: {
-      const patches = getApdPatchesForAddingItem(action.state.apd, action.path);
-      return [...state, ...patches];
+      return [
+        ...state,
+        ...getApdPatchesForAddingItem(action.state.apd, action.path)
+      ];
     }
 
     case ADD_APD_YEAR:
