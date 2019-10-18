@@ -1,14 +1,7 @@
 const tap = require('tap');
 const sandbox = require('sinon').createSandbox();
 
-const middleware = require('./apd');
-
-const OtherModel = {
-  where: sandbox.stub(),
-  fetch: sandbox.stub(),
-  withRelated: {},
-  modelName: ''
-};
+const { loadApd, userCanAccessAPD, userCanEditAPD } = require('./apd');
 
 const res = {
   status: sandbox.stub(),
@@ -22,8 +15,6 @@ tap.test('APD-related middleware', async middlewareTests => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
-    OtherModel.modelName = '';
-
     res.status.returns(res);
     res.send.returns(res);
     res.end.returns(res);
@@ -32,174 +23,88 @@ tap.test('APD-related middleware', async middlewareTests => {
   });
 
   middlewareTests.test('load apd', async loadApdTests => {
-    loadApdTests.test('from an APD model', async apdModelTest => {
-      apdModelTest.beforeEach(async () => {
-        OtherModel.modelName = 'apd';
-        OtherModel.where.withArgs({ id: 9 }).returns(OtherModel);
-      });
+    const db = sandbox.stub();
 
-      apdModelTest.test(
-        'when there is an error loading the APD',
-        async invalidTest => {
-          OtherModel.fetch.rejects();
+    const where = sandbox.stub();
+    const first = sandbox.stub();
 
-          const req = { meta: {}, params: { 'apd-id': 9 } };
-          await middleware.loadApd(OtherModel, 'apd-id')(req, res, next);
-
-          invalidTest.ok(
-            res.status.calledWith(500),
-            'HTTP status is set to 500'
-          );
-          invalidTest.ok(res.end.calledOnce, 'response is closed');
-          invalidTest.ok(next.notCalled, 'next is not called');
-        }
-      );
-
-      apdModelTest.test(
-        'when there is no associated APD',
-        async invalidTest => {
-          OtherModel.fetch.resolves(false);
-
-          const req = { meta: {}, params: { 'apd-id': 9 } };
-          await middleware.loadApd(OtherModel, 'apd-id')(req, res, next);
-
-          invalidTest.ok(
-            res.status.calledWith(404),
-            'HTTP status is set to 404'
-          );
-          invalidTest.ok(res.end.calledOnce, 'response is closed');
-          invalidTest.ok(next.notCalled, 'next is not called');
-        }
-      );
-
-      apdModelTest.test('when there is an associated APD', async validTest => {
-        const apd = { hello: 'world' };
-        OtherModel.fetch.resolves(apd);
-
-        const req = { meta: {}, params: { 'apd-id': 9 } };
-        await middleware.loadApd(OtherModel, 'apd-id')(req, res, next);
-
-        validTest.ok(res.status.notCalled, 'HTTP status is not set');
-        validTest.ok(res.end.notCalled, 'response is not closed');
-        validTest.ok(next.calledOnce, 'next is called');
-        validTest.equal(
-          req.meta.apd,
-          apd,
-          'sets the APD on the request object'
-        );
-      });
+    loadApdTests.beforeEach(async () => {
+      db.returns({ where });
+      where.returns({ first });
     });
 
-    loadApdTests.test('from a non-APD model', async apdModelTest => {
-      apdModelTest.test(
-        'when there is an error loading the non-APD object',
-        async invalidTest => {
-          OtherModel.where.withArgs({ id: 9 }).returns(OtherModel);
-          OtherModel.fetch.rejects();
+    loadApdTests.test(
+      'when there is an error loading the APD',
+      async invalidTest => {
+        first.rejects();
 
-          const req = { meta: {}, params: { 'obj-id': 9 } };
-          await middleware.loadApd(OtherModel, 'obj-id')(req, res, next);
+        const req = { meta: {}, params: { 'apd-id': 9 } };
+        await loadApd({ db })(req, res, next);
 
-          invalidTest.ok(
-            res.status.calledWith(500),
-            'HTTP status is set to 500'
-          );
-          invalidTest.ok(res.end.calledOnce, 'response is closed');
-          invalidTest.ok(next.notCalled, 'next is not called');
-        }
-      );
+        invalidTest.ok(res.status.calledWith(500), 'HTTP status is set to 500');
+        invalidTest.ok(res.end.calledOnce, 'response is closed');
+        invalidTest.ok(next.notCalled, 'next is not called');
+      }
+    );
 
-      apdModelTest.test(
-        'when the non-APD object does not exist',
-        async invalidTest => {
-          OtherModel.where.withArgs({ id: 9 }).returns(OtherModel);
-          OtherModel.fetch.resolves(false);
+    loadApdTests.test('when there is no associated APD', async invalidTest => {
+      first.resolves(null);
 
-          const req = { meta: {}, params: { 'obj-id': 9 } };
-          await middleware.loadApd(OtherModel, 'obj-id')(req, res, next);
+      const req = { meta: {}, params: { 'apd-id': 9 } };
+      await loadApd()(req, res, next);
 
-          invalidTest.ok(
-            res.status.calledWith(404),
-            'HTTP status is set to 404'
-          );
-          invalidTest.ok(res.end.calledOnce, 'response is closed');
-          invalidTest.ok(next.notCalled, 'next is not called');
-        }
-      );
+      invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 404');
+      invalidTest.ok(res.end.calledOnce, 'response is closed');
+      invalidTest.ok(next.notCalled, 'next is not called');
+    });
 
-      apdModelTest.test(
-        'when the non-APD object does not have an APD',
-        async invalidTest => {
-          OtherModel.where.withArgs({ id: 9 }).returns(OtherModel);
-          OtherModel.fetch.resolves({
-            related: sandbox
-              .stub()
-              .withArgs('apd')
-              .returns(false)
-          });
+    loadApdTests.test('when there is an associated APD', async validTest => {
+      first.resolves({
+        document: {
+          this: 'is the APD document'
+        },
+        id: 'apd id',
+        state_id: 'apd state',
+        status: 'draft or something',
+        updated_at: 'in the past'
+      });
 
-          const req = { meta: {}, params: { 'obj-id': 9 } };
-          await middleware.loadApd(OtherModel, 'obj-id')(req, res, next);
+      const req = { meta: {}, params: { 'apd-id': 9 } };
+      await loadApd()(req, res, next);
 
-          invalidTest.ok(
-            res.status.calledWith(404),
-            'HTTP status is set to 404'
-          );
-          invalidTest.ok(res.end.calledOnce, 'response is closed');
-          invalidTest.ok(next.notCalled, 'next is not called');
-        }
-      );
-
-      apdModelTest.test(
-        'when there is an associated object with an APD',
-        async validTest => {
-          const apd = { hello: 'world' };
-          OtherModel.where.withArgs({ id: 9 }).returns(OtherModel);
-          OtherModel.fetch.resolves({
-            related: sandbox
-              .stub()
-              .withArgs('apd')
-              .returns(apd)
-          });
-
-          const req = { meta: {}, params: { 'apd-id': 9 } };
-          await middleware.loadApd(OtherModel, 'apd-id')(req, res, next);
-
-          validTest.ok(res.status.notCalled, 'HTTP status is not set');
-          validTest.ok(res.end.notCalled, 'response is not closed');
-          validTest.ok(next.calledOnce, 'next is called');
-          validTest.equal(
-            req.meta.apd,
-            apd,
-            'sets the APD on the request object'
-          );
-        }
+      validTest.ok(res.status.notCalled, 'HTTP status is not set');
+      validTest.ok(res.end.notCalled, 'response is not closed');
+      validTest.ok(next.calledOnce, 'next is called');
+      validTest.same(
+        req.meta.apd,
+        {
+          this: 'is the APD document',
+          id: 'apd id',
+          state: 'apd state',
+          status: 'draft or something',
+          updated: 'in the past'
+        },
+        'sets the APD on the request object'
       );
     });
   });
 
   middlewareTests.test('user can access apd', async accessApdTests => {
-    const apdFromDb = {
-      get: sandbox.stub()
-    };
+    const loadApdMock = sandbox.stub();
+    const loadApdFake = () => loadApdMock;
 
     accessApdTests.beforeEach(async () => {
-      OtherModel.where.returns(OtherModel);
-      OtherModel.fetch.resolves({
-        related: sandbox.stub().returns(apdFromDb)
-      });
-      apdFromDb.get.withArgs('id').returns('florp');
+      loadApdMock.yields();
     });
 
     accessApdTests.test(
       'sends a 404 if the user does not have access to the APD',
       async invalidTest => {
         const req = {
-          user: { model: { apds: sandbox.stub().resolves([1, 2, 3]) } },
-          meta: {},
-          params: { 'apd-id': 'florp' }
+          user: { state: 'not florp' },
+          meta: { apd: { state: 'florp' } }
         };
-        await middleware.userCanAccessAPD(OtherModel, 'apd-id')(req, res, next);
+        await userCanAccessAPD({ loadApd: loadApdFake })(req, res, next);
 
         invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 404');
         invalidTest.ok(res.end.calledOnce, 'response is closed');
@@ -210,13 +115,11 @@ tap.test('APD-related middleware', async middlewareTests => {
     accessApdTests.test(
       'passes if the user has access to the APD',
       async validTest => {
-        apdFromDb.get.withArgs('status').returns('draft');
         const req = {
-          user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
-          meta: {},
-          params: { 'apd-id': 'florp' }
+          user: { state: 'florp' },
+          meta: { apd: { state: 'florp' } }
         };
-        await middleware.userCanAccessAPD(OtherModel, 'apd-id')(req, res, next);
+        await userCanAccessAPD({ loadApd: loadApdFake })(req, res, next);
 
         validTest.ok(res.status.notCalled, 'HTTP status is not set');
         validTest.ok(res.end.notCalled, 'response is not closed');
@@ -226,42 +129,23 @@ tap.test('APD-related middleware', async middlewareTests => {
   });
 
   middlewareTests.test('user can edit apd', async tests => {
-    const apdFromDb = {
-      get: sandbox.stub()
-    };
+    const userCanAccessAPDMock = sandbox.stub();
+    const userCanAccessAPDFake = () => userCanAccessAPDMock;
 
     tests.beforeEach(async () => {
-      OtherModel.where.returns(OtherModel);
-      OtherModel.fetch.resolves({
-        related: sandbox.stub().returns(apdFromDb)
-      });
-      apdFromDb.get.withArgs('id').returns('florp');
+      userCanAccessAPDMock.yields();
     });
-
-    tests.test(
-      'sends a 404 if the user does not have access to the APD',
-      async invalidTest => {
-        const req = {
-          user: { model: { apds: sandbox.stub().resolves([1, 2, 3]) } },
-          meta: {},
-          params: { 'apd-id': 'florp' }
-        };
-        await middleware.userCanEditAPD(OtherModel, 'apd-id')(req, res, next);
-
-        invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 404');
-        invalidTest.ok(res.end.calledOnce, 'response is closed');
-        invalidTest.ok(next.notCalled, 'next is not called');
-      }
-    );
 
     tests.test('sends a 400 if the APD is not editable', async test => {
       const req = {
-        user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
-        meta: {},
-        params: { 'apd-id': 'florp' }
+        meta: { apd: { status: 'not draft' } }
       };
 
-      await middleware.userCanEditAPD(OtherModel, 'apd-id')(req, res, next);
+      await userCanEditAPD({ userCanAccessAPD: userCanAccessAPDFake })(
+        req,
+        res,
+        next
+      );
 
       test.ok(res.status.calledWith(400), 'HTTP status is set to 400');
       test.ok(
@@ -273,76 +157,14 @@ tap.test('APD-related middleware', async middlewareTests => {
     });
 
     tests.test('passes if the user has access to the APD', async validTest => {
-      apdFromDb.get.withArgs('status').returns('draft');
       const req = {
-        user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
-        meta: {},
-        params: { 'apd-id': 'florp' }
+        meta: { apd: { status: 'draft' } }
       };
-      await middleware.userCanEditAPD(OtherModel, 'apd-id')(req, res, next);
+      await userCanEditAPD()(req, res, next);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not set');
       validTest.ok(res.end.notCalled, 'response is not closed');
       validTest.ok(next.calledOnce, 'next is called');
-    });
-  });
-
-  middlewareTests.test('load activity', async loadActivityTests => {
-    loadActivityTests.test(
-      'when there is an error loading the activity',
-      async invalidTest => {
-        OtherModel.where.withArgs({ id: 7 }).returns(OtherModel);
-        OtherModel.fetch.rejects();
-        const req = { meta: {}, params: { 'activity-id': 7 } };
-
-        await middleware.loadActivity(OtherModel, 'activity-id')(
-          req,
-          res,
-          next
-        );
-
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status is set to 500');
-        invalidTest.ok(res.end.calledOnce, 'response is closed');
-        invalidTest.ok(next.notCalled, 'next is not called');
-      }
-    );
-
-    loadActivityTests.test(
-      'when the activity does not exist',
-      async invalidTest => {
-        OtherModel.where.withArgs({ id: 7 }).returns(OtherModel);
-        OtherModel.fetch.resolves(false);
-        const req = { meta: {}, params: { 'activity-id': 7 } };
-
-        await middleware.loadActivity('activity-id', OtherModel)(
-          req,
-          res,
-          next
-        );
-
-        invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 404');
-        invalidTest.ok(res.end.calledOnce, 'response is not closed');
-        invalidTest.ok(next.notCalled, 'next is called');
-      }
-    );
-
-    loadActivityTests.test('when the activity does exist', async validTest => {
-      const activity = { hello: 'world' };
-      OtherModel.where.withArgs({ id: 7 }).returns(OtherModel);
-      OtherModel.fetch.resolves(activity);
-      OtherModel.withRelated = 'chickens are related to dinosaurs';
-      const req = { meta: {}, params: { 'activity-id': 7 } };
-
-      await middleware.loadActivity('activity-id', OtherModel)(req, res, next);
-
-      validTest.ok(res.status.notCalled, 'HTTP status is not set');
-      validTest.ok(res.end.notCalled, 'response is not closed');
-      validTest.ok(next.calledOnce, 'next is called');
-      validTest.equal(
-        req.meta.activity,
-        activity,
-        'sets the activity on the request'
-      );
     });
   });
 });
