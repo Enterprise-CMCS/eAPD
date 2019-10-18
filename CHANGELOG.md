@@ -6,7 +6,10 @@ Anticipated release: TBD
 
 #### 🐛 Bugs fixed
 
-#### 🐛 Bugs fixed
+#### ⚙️ Behind the scenes
+
+- Switched from a relational data model for APDs to a document-oriented model ([#1793], [#1794], [#1796], [#1798], [#1800], [#1826])
+- Removed unused code ([#1799])
 
 # v1.1.0
 
@@ -137,4 +140,11 @@ Pilot release to select state partners
 [#1769]: https://github.com/18F/cms-hitech-apd/issues/1769
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
 [#1775]: https://github.com/18F/cms-hitech-apd/issues/1775
+[#1793]: https://github.com/18F/cms-hitech-apd/issues/1793
+[#1794]: https://github.com/18F/cms-hitech-apd/issues/1794
+[#1796]: https://github.com/18F/cms-hitech-apd/issues/1796
+[#1798]: https://github.com/18F/cms-hitech-apd/issues/1798
+[#1799]: https://github.com/18F/cms-hitech-apd/issues/1799
+[#1800]: https://github.com/18F/cms-hitech-apd/issues/1800
 [#1820]: https://github.com/18F/cms-hitech-apd/issues/1820
+[#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
