@@ -45,7 +45,6 @@ const PersonForm = ({
 
   const primary = index === 0;
 
-  console.log(Object.values(costs));
   const totalCost = Object.values(costs).reduce(
     (sum, value) => sum + +value,
     0

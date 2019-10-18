@@ -202,7 +202,7 @@ const StandardsAndConditions = ({
         />
         <RichText
           content={activity.standardsAndConditions.minimizeCost}
-          onSync={getHandler(d)}
+          onSync={getHandler(setMinimizeCost)}
           editorClassName="rte-textarea-l"
         />
       </div>
