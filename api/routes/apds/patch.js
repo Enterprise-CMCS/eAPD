@@ -10,6 +10,7 @@ const apdSchema = require('../../schemas/apd.json');
 const ajv = new Ajv({
   allErrors: true,
   jsonPointers: true,
+  // The validator will remove any fields that aren't in the schema
   removeAdditional: true
 });
 
@@ -73,6 +74,8 @@ module.exports = (
         if (!valid) {
           logger.error(
             req,
+            // Rather than send back the full error from the validator, pull out just the relevant bits
+            // and fetch the value that's causing the error.
             validateApd.errors.map(({ dataPath, message }) => ({
               dataPath,
               message,

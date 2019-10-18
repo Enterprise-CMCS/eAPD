@@ -51,11 +51,15 @@ module.exports = (app, { db = raw } = {}) => {
           ...apd.stateProfile.medicaidOffice,
           ...stateProfile.medicaid_office.medicaidOffice
         };
+        // An old version of the model had the director info contained inside the office field, so
+        // just in case we're still hitting a really old source, delete the director from the office
         delete apd.stateProfile.medicaidOffice.director;
       }
 
       const valid = validatorFunction(apd);
       if (!valid) {
+        // This is just here to protect us from the case where the APD schema changed but the
+        // APD creation function was not also updated
         logger.error(req, 'Newly-created APD fails validation');
         logger.error(req, validatorFunction.errors);
         return res.status(500).end();

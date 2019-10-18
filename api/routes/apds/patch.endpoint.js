@@ -94,7 +94,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something
-      // fancy with the snapshots, just pull out the name and test it with a
+      // fancy with the snapshots, just pull out the date and test it with a
       // regex.
       const { updated } = body;
       delete body.updated;
