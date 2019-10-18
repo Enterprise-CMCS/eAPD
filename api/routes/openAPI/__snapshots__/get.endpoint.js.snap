@@ -862,61 +862,6 @@ Object {
           "APDs",
         ],
       },
-      "put": Object {
-        "description": "Update an APD in the system.  If state profile information is included, the profile information is also updated for the user's state.",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the apd to update",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "number",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/apd",
-              },
-            },
-          },
-          "description": "The new values for the apd.  All fields are optional.",
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/apd",
-                },
-              },
-            },
-            "description": "The update was successful",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The apd ID does not match any known apds for the user",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Update a specific APD",
-        "tags": Array [
-          "APDs",
-        ],
-      },
     },
     "/auth/activities": Object {
       "get": Object {

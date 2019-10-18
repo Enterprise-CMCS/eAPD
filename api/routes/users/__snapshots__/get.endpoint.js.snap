@@ -3,6 +3,15 @@
 exports[`users endpoint | GET /users when authenticated 1`] = `
 Array [
   Object {
+    "email": "all-permissions-no-state",
+    "id": 2001,
+    "name": "Superman",
+    "phone": null,
+    "position": "User without a home",
+    "role": "admin",
+    "state": null,
+  },
+  Object {
     "email": "no-permissions",
     "id": 2010,
     "name": "Lucy Ricardo",
@@ -19,15 +28,6 @@ Array [
     "position": "User that can do anything at all",
     "role": "admin",
     "state": "mn",
-  },
-  Object {
-    "email": "all-permissions-no-state",
-    "id": 2001,
-    "name": "Superman",
-    "phone": null,
-    "position": "User without a home",
-    "role": "admin",
-    "state": null,
   },
 ]
 `;
