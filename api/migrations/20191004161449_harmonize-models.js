@@ -23,9 +23,6 @@ exports.up = async knex => {
         activity.contractorResources.forEach(c => {
           delete c.files;
 
-          c.description = c.desc;
-          delete c.desc;
-
           c.hourly = {
             useHourly: c.useHourly || false,
             data: (c.hourlyData || []).reduce(
