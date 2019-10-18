@@ -9,7 +9,6 @@
         {
           "description": null,
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 9900,
           "name": null,
@@ -23,7 +22,6 @@
       "costAllocationNarrative": { "methodology": null, "otherSources": null },
       "description": null,
       "expenses": [],
-      "files": [],
       "fundingSource": null,
       "goals": [],
       "name": null,

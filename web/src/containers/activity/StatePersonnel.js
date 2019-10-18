@@ -2,11 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  addActivityStatePerson,
-  removeActivityStatePerson,
-  updateActivity as updateActivityAction
-} from '../../actions/activities';
+import { addPersonnel, removePersonnel } from '../../actions/editActivity';
 import { selectActivityStatePersonnel } from '../../reducers/activities.selectors';
 
 import Instruction from '../../components/Instruction';
@@ -15,84 +11,48 @@ import { t } from '../../i18n';
 import FormAndReviewList from '../../components/FormAndReviewList';
 import { StatePersonForm, StatePersonReview } from './StatePerson';
 
-const StatePersonnel = ({
-  activityKey,
-  addPerson,
-  personnel,
-  removePerson,
-  updateActivity
-}) => {
+const StatePersonnel = ({ activityIndex, add, personnel, remove }) => {
   const handleDelete = useCallback(key => {
-    removePerson(activityKey, key);
+    personnel.forEach(({ key: personnelKey }, i) => {
+      if (personnelKey === key) {
+        remove(activityIndex, i);
+      }
+    });
   });
 
-  const handleAdd = useCallback(() => addPerson(activityKey));
-
-  const handleEditCost = useCallback((idx, year, amt) =>
-    updateActivity(
-      activityKey,
-      {
-        statePersonnel: { [idx]: { years: { [year]: { amt } } } }
-      },
-      true
-    )
-  );
-
-  const handleEditFTE = useCallback((idx, year, perc) =>
-    updateActivity(
-      activityKey,
-      {
-        statePersonnel: { [idx]: { years: { [year]: { perc } } } }
-      },
-      true
-    )
-  );
-
-  const handleEditPersonDesc = useCallback((idx, desc) => {
-    updateActivity(activityKey, { statePersonnel: { [idx]: { desc } } });
-  });
-
-  const handleEditPersonTitle = useCallback((idx, title) => {
-    updateActivity(activityKey, { statePersonnel: { [idx]: { title } } });
-  });
+  const handleAdd = useCallback(() => add(activityIndex));
 
   return (
     <Fragment>
       <Instruction source="activities.statePersonnel.instruction" />
       <FormAndReviewList
+        activityIndex={activityIndex}
         addButtonText={t('activities.statePersonnel.addButtonText')}
-        onAddClick={handleAdd}
         list={personnel}
         collapsed={StatePersonReview}
         expanded={StatePersonForm}
         noDataMessage={t('activities.statePersonnel.noDataNotice')}
+        onAddClick={handleAdd}
         onDeleteClick={handleDelete}
-        handleEditCost={handleEditCost}
-        handleEditFTE={handleEditFTE}
-        handleEditPersonDesc={handleEditPersonDesc}
-        handleEditPersonTitle={handleEditPersonTitle}
       />
     </Fragment>
   );
 };
 
 StatePersonnel.propTypes = {
-  activityKey: PropTypes.string.isRequired,
-  addPerson: PropTypes.func.isRequired,
+  activityIndex: PropTypes.string.isRequired,
+  add: PropTypes.func.isRequired,
   personnel: PropTypes.array.isRequired,
-  removePerson: PropTypes.func.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, { aKey }) => ({
-  activityKey: aKey,
-  personnel: selectActivityStatePersonnel(state, aKey)
+const mapStateToProps = (state, { activityIndex }) => ({
+  personnel: selectActivityStatePersonnel(state, { activityIndex })
 });
 
 const mapDispatchToProps = {
-  addPerson: addActivityStatePerson,
-  removePerson: removeActivityStatePerson,
-  updateActivity: updateActivityAction
+  add: addPersonnel,
+  remove: removePersonnel
 };
 
 export default connect(

@@ -1,29 +1,44 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import {
   plain as ApdSummary,
   mapStateToProps,
   mapDispatchToProps
 } from './ApdSummary';
-import { updateApd } from '../actions/apd';
+
+import {
+  addYear,
+  removeYear,
+  setNarrativeForHIE,
+  setNarrativeForHIT,
+  setNarrativeForMMIS,
+  setProgramOverview
+} from '../actions/editApd';
 
 describe('apd summary component', () => {
   const props = {
-    apd: {
-      narrativeHIE: 'about hie',
-      narrativeHIT: 'about hit',
-      narrativeMMIS: 'about mmis',
-      programOverview: 'about the program',
-      yearOptions: ['1', '2', '3'],
-      years: ['1', '2']
-    },
-    updateApd: sinon.spy()
+    narrativeHIE: 'about hie',
+    narrativeHIT: 'about hit',
+    narrativeMMIS: 'about mmis',
+    programOverview: 'about the program',
+    addApdYear: jest.fn(),
+    removeApdYear: jest.fn(),
+    setHIE: jest.fn(),
+    setHIT: jest.fn(),
+    setMMIS: jest.fn(),
+    setOverview: jest.fn(),
+    yearOptions: ['1', '2', '3'],
+    years: ['1', '2']
   };
 
   beforeEach(() => {
-    props.updateApd.resetHistory();
+    props.addApdYear.mockClear();
+    props.removeApdYear.mockClear();
+    props.setHIE.mockClear();
+    props.setHIT.mockClear();
+    props.setMMIS.mockClear();
+    props.setOverview.mockClear();
   });
 
   test('renders correctly', () => {
@@ -37,40 +52,57 @@ describe('apd summary component', () => {
       .prop('onSync')('this is some html');
 
     // this one is based on knowledge that the program overview comes first
-    expect(
-      props.updateApd.calledWith({ programOverview: 'this is some html' })
-    );
+    expect(props.setOverview).toHaveBeenCalledWith('this is some html');
   });
 
-  test('dispatches on a year change', () => {
-    // add a year
+  test('dispatches when adding a year', () => {
     shallow(<ApdSummary {...props} />)
       .find('ChoiceComponent[value="3"]')
       .simulate('change', { target: { value: '3' } });
-    expect(props.updateApd.calledWith({ years: ['1', '2', '3'] }));
 
-    // remove a year
+    expect(props.addApdYear).toHaveBeenCalledWith('3');
+  });
+
+  test('dispatches when removing a year', () => {
     shallow(<ApdSummary {...props} />)
       .find('ChoiceComponent[value="2"]')
       .simulate('change', { target: { value: '2' } });
-    expect(props.updateApd.calledWith({ years: ['1'] }));
+
+    expect(props.removeApdYear).toHaveBeenCalledWith('2');
   });
 
   test('maps state to props', () => {
-    const state = {
-      apd: {
-        data: 'apd data',
-        other: 'props',
-        go: 'here'
-      }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      apd: 'apd data'
+    expect(
+      mapStateToProps({
+        apd: {
+          data: {
+            narrativeHIE: 'over hill',
+            narrativeHIT: 'under mountain',
+            narrativeMMIS: 'tangent slope',
+            programOverview: 'arc-cosine thing',
+            years: 'the actual years',
+            yearOptions: 'all of the years'
+          }
+        }
+      })
+    ).toEqual({
+      narrativeHIE: 'over hill',
+      narrativeHIT: 'under mountain',
+      narrativeMMIS: 'tangent slope',
+      programOverview: 'arc-cosine thing',
+      years: 'the actual years',
+      yearOptions: 'all of the years'
     });
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ updateApd });
+    expect(mapDispatchToProps).toEqual({
+      addApdYear: addYear,
+      removeApdYear: removeYear,
+      setHIE: setNarrativeForHIE,
+      setHIT: setNarrativeForHIT,
+      setMMIS: setNarrativeForMMIS,
+      setOverview: setProgramOverview
+    });
   });
 });

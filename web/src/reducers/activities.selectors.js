@@ -2,22 +2,35 @@ import { createSelector } from 'reselect';
 import { selectApdData } from './apd.selectors';
 import { stateDateRangeToDisplay, stateDateToDisplay } from '../util';
 
-export const selectActivityKeys = ({ activities: { allKeys } }) => allKeys;
-
-export const selectActivitiesByKey = ({ activities: { byKey } }) => byKey;
-
 export const selectActivityByKey = ({ activities: { byKey } }, { aKey }) =>
   byKey[aKey];
 
-export const selectAllActivities = ({ activities: { byKey } }) =>
-  Object.values(byKey);
+export const selectActivityByIndex = (
+  {
+    apd: {
+      data: { activities }
+    }
+  },
+  { activityIndex }
+) => {
+  if (+activityIndex >= 0 && +activityIndex < activities.length) {
+    return activities[activityIndex];
+  }
+  return null;
+};
+
+export const selectAllActivities = ({
+  apd: {
+    data: { activities }
+  }
+}) => activities;
 
 const selectBudgetForActivity = ({ budget }, { aKey }) =>
   budget.activities[aKey];
 
 export const makeSelectCostAllocateFFP = () =>
   createSelector(
-    [selectActivityByKey, selectBudgetForActivity],
+    [selectActivityByIndex, selectBudgetForActivity],
     (activity, budget) => {
       const { costAllocation } = activity;
       const { costsByFFY } = budget;
@@ -51,11 +64,11 @@ export const makeSelectCostAllocateFFPBudget = () =>
   );
 
 export const selectActivitySchedule = createSelector(
-  [selectActivitiesByKey],
-  byKey => {
+  [selectAllActivities],
+  apdActivities => {
     const activities = [];
 
-    Object.values(byKey).forEach(
+    apdActivities.forEach(
       ({ name, plannedEndDate, plannedStartDate, schedule }) => {
         const milestones = [];
         activities.push({
@@ -87,18 +100,34 @@ export const selectActivitySchedule = createSelector(
   }
 );
 
-export const selectActivityNonPersonnelCosts = (state, aKey) =>
-  selectActivityByKey(state, { aKey }).expenses;
+export const selectActivityNonPersonnelCosts = (state, activityIndex) =>
+  selectActivityByIndex(state, { activityIndex }).expenses;
 
-export const selectActivityStatePersonnel = (state, aKey) =>
-  selectActivityByKey(state, { aKey }).statePersonnel;
+export const selectActivityStatePersonnel = (state, { activityIndex }) =>
+  selectActivityByIndex(state, { activityIndex }).statePersonnel;
 
 export const selectActivitiesSidebar = createSelector(
-  [selectActivityKeys, selectActivitiesByKey],
-  (allKeys, byKey) =>
-    allKeys.map(key => ({
+  [selectAllActivities],
+  activities =>
+    activities.map(({ key, name }) => ({
       key,
       anchor: `activity-${key}`,
-      name: byKey[key].name
+      name
     }))
 );
+
+export const selectContractorsByActivityIndex = (state, { activityIndex }) => {
+  const activity = selectActivityByIndex(state, { activityIndex });
+  if (activity) {
+    return activity.contractorResources;
+  }
+  return null;
+};
+
+export const selectGoalsByActivityIndex = (state, { activityIndex }) => {
+  const activity = selectActivityByIndex(state, { activityIndex });
+  if (activity) {
+    return activity.goals;
+  }
+  return null;
+};

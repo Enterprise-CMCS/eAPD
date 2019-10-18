@@ -36,9 +36,13 @@ describe('Sidebar component', () => {
 
   test('maps state to props', () => {
     const state = {
-      activities: {
-        byKey: { key1: { name: 'activity 1' }, key2: { name: 'activity 2' } },
-        allKeys: ['key1', 'key2']
+      apd: {
+        data: {
+          activities: [
+            { key: 'key1', name: 'activity 1' },
+            { key: 'key2', name: 'activity 2' }
+          ]
+        }
       },
       navigation: {
         activeSection: 'where the runners are'

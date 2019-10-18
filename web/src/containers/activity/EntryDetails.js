@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
+
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
 import Costs from './Costs';
@@ -24,10 +26,10 @@ const makeTitle = ({ name, fundingSource }, i) => {
   return title;
 };
 
-const EntryDetails = ({ activity, aKey, num }) => {
+const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
   const container = useRef();
 
-  const [collapsed, internalSetCollapsed] = useState(num > 1);
+  const [collapsed, internalSetCollapsed] = useState(activityIndex > 0);
   const setCollapsed = newCollapsed => {
     if (newCollapsed) {
       const { top } = container.current.getBoundingClientRect();
@@ -39,11 +41,10 @@ const EntryDetails = ({ activity, aKey, num }) => {
     internalSetCollapsed(newCollapsed);
   };
 
-  const title = useMemo(() => makeTitle(activity, num), [
-    activity.fundingSource,
-    activity.name,
-    num
-  ]);
+  const title = useMemo(
+    () => makeTitle({ name, fundingSource }, activityIndex + 1),
+    [fundingSource, name, activityIndex]
+  );
 
   const editContent = useMemo(
     () => (
@@ -68,21 +69,21 @@ const EntryDetails = ({ activity, aKey, num }) => {
 
   return (
     <div
-      id={`activity-${aKey}`}
+      id={`activity-${activityKey}`}
       className={`activity--body activity--body__${
         collapsed ? 'collapsed' : 'expanded'
-      } activity--body__${num === 1 ? 'first' : 'notfirst'}`}
+      } activity--body__${activityIndex === 0 ? 'first' : 'notfirst'}`}
       ref={container}
     >
       <Review heading={title} headingLevel={4} editContent={editContent} />
       <div className={collapsed ? 'visibility--print' : ''}>
-        <Overview aKey={aKey} />
-        <Goals aKey={aKey} />
-        <Schedule aKey={aKey} />
-        <Costs aKey={aKey} />
-        <ContractorResources aKey={aKey} />
-        <CostAllocate aKey={aKey} />
-        <StandardsAndConditions aKey={aKey} />
+        <Overview activityIndex={activityIndex} />
+        <Goals activityIndex={activityIndex} />
+        <Schedule activityIndex={activityIndex} />
+        <Costs activityIndex={activityIndex} />
+        <ContractorResources activityIndex={activityIndex} />
+        <CostAllocate activityIndex={activityIndex} />
+        <StandardsAndConditions activityIndex={activityIndex} />
         <Button variation="primary" onClick={() => setCollapsed(true)}>
           Done
         </Button>
@@ -92,16 +93,23 @@ const EntryDetails = ({ activity, aKey, num }) => {
 };
 
 EntryDetails.propTypes = {
-  activity: PropTypes.object.isRequired,
-  aKey: PropTypes.string.isRequired,
-  num: PropTypes.number.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  activityKey: PropTypes.string.isRequired,
+  fundingSource: PropTypes.string.isRequired,
+  name: PropTypes.string
 };
 
-export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => {
-  const activity = byKey[aKey];
-
-  return { activity };
+EntryDetails.defaultProps = {
+  name: ''
 };
 
-export { EntryDetails as plain };
+const mapStateToProps = (state, { activityIndex }) => {
+  const { fundingSource, key, name } = selectActivityByIndex(state, {
+    activityIndex
+  });
+  return { activityKey: key, fundingSource, name };
+};
+
 export default connect(mapStateToProps)(EntryDetails);
+
+export { EntryDetails as plain, mapStateToProps };

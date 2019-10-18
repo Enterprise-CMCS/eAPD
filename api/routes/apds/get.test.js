@@ -7,11 +7,14 @@ const getEndpoint = require('./get');
 tap.test('apds GET endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = { get: sandbox.stub() };
-  const toJSON = sandbox.stub();
-  const ApdModel = {
-    where: sandbox.stub(),
-    fetchAll: sandbox.stub()
+
+  const db = sinon.stub();
+  const dbReturns = {
+    first: sinon.stub(),
+    select: sinon.stub(),
+    where: sinon.stub()
   };
+
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -22,7 +25,8 @@ tap.test('apds GET endpoint', async endpointTest => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
-    ApdModel.where.returns(ApdModel);
+    db.withArgs('apds').returns(dbReturns);
+    dbReturns.where.returns(dbReturns);
 
     res.status.returns(res);
     res.send.returns(res);
@@ -43,7 +47,7 @@ tap.test('apds GET endpoint', async endpointTest => {
   endpointTest.test('get all apds handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, ApdModel);
+      getEndpoint(app, { db });
       handler = app.get.args.find(args => args[0] === '/apds')[2];
       done();
     });
@@ -51,7 +55,7 @@ tap.test('apds GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        ApdModel.fetchAll.rejects();
+        dbReturns.select.rejects();
 
         await handler({ params: {}, user: { state: 'va' } }, res);
 
@@ -73,31 +77,35 @@ tap.test('apds GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends apds', async validTest => {
-      ApdModel.fetchAll.resolves({ toJSON });
-      ApdModel.withRelated = 'this is related stuff';
-      toJSON.returns([
+      dbReturns.select.resolves([
         {
+          document: {
+            name: 'apd a',
+            years: 'years a'
+          },
           id: 'a',
-          name: 'apd a',
           status: 'status a',
-          updated: 'updated a',
-          years: 'years a',
+          updated_at: 'updated a',
           other: 'stuff'
         },
         {
+          document: {
+            name: 'apd b',
+            years: 'years b'
+          },
           id: 'b',
-          name: 'apd b',
           status: 'status b',
-          updated: 'updated b',
-          years: 'years b',
+          updated_at: 'updated b',
           gets: 'removed'
         },
         {
+          document: {
+            name: 'apd c',
+            years: 'years c'
+          },
           id: 'c',
-          name: 'apd c',
           status: 'status c',
-          updated: 'updated c',
-          years: 'years c',
+          updated_at: 'updated c',
           from: 'results'
         }
       ]);
@@ -105,7 +113,7 @@ tap.test('apds GET endpoint', async endpointTest => {
       await handler({ params: {}, user: { state: 'va' } }, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
-      validTest.ok(ApdModel.where.calledWith({ state_id: 'va' }));
+      validTest.ok(dbReturns.where.calledWith({ state_id: 'va' }));
       validTest.ok(
         res.send.calledWith([
           {
@@ -139,11 +147,14 @@ tap.test('apds GET endpoint', async endpointTest => {
 tap.test('apds/:id GET endpoint', async tests => {
   const sandbox = sinon.createSandbox();
   const app = { get: sandbox.stub() };
-  const toJSON = sandbox.stub();
-  const ApdModel = {
-    where: sandbox.stub(),
-    fetchAll: sandbox.stub()
+
+  const db = sinon.stub();
+  const dbReturns = {
+    first: sinon.stub(),
+    select: sinon.stub(),
+    where: sinon.stub()
   };
+
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -154,7 +165,8 @@ tap.test('apds/:id GET endpoint', async tests => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
-    ApdModel.where.returns(ApdModel);
+    db.withArgs('apds').returns(dbReturns);
+    dbReturns.where.returns(dbReturns);
 
     res.status.returns(res);
     res.send.returns(res);
@@ -179,7 +191,7 @@ tap.test('apds/:id GET endpoint', async tests => {
   tests.test('get single apd handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, ApdModel);
+      getEndpoint(app, { db });
       handler = app.get.args.find(args => args[0] === '/apds/:id(\\d+)')[2];
       done();
     });
@@ -187,7 +199,7 @@ tap.test('apds/:id GET endpoint', async tests => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async test => {
-        ApdModel.fetchAll.rejects();
+        dbReturns.first.rejects();
 
         await handler({ params: { id: '1' }, user: { state: 'va' } }, res);
 
@@ -211,36 +223,44 @@ tap.test('apds/:id GET endpoint', async tests => {
     handlerTest.test(
       'sends a not found error if there are no valid APds',
       async test => {
-        ApdModel.fetchAll.resolves({ toJSON });
-        ApdModel.withRelated = 'this is related stuff';
-        toJSON.returns([]);
+        dbReturns.first.returns(null);
 
         await handler({ params: { id: '1' }, user: { state: 'va' } }, res);
 
         test.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        test.ok(ApdModel.where.calledWith({ id: '1', state_id: 'va' }));
+        test.ok(dbReturns.where.calledWith({ id: '1', state_id: 'va' }));
         test.ok(res.send.notCalled, 'no body is sent');
         test.ok(res.end.called, 'response is terminated');
       }
     );
 
     handlerTest.test('sends apd', async test => {
-      ApdModel.fetchAll.resolves({ toJSON });
-      ApdModel.withRelated = 'this is related stuff';
-      toJSON.returns([
-        { id: 'a', updated: 'updated a', years: 'years a', other: 'stuff' }
-      ]);
+      dbReturns.first.returns({
+        document: {
+          stuff: 'from',
+          document: 'column',
+          goes: 'here'
+        },
+        id: 'id',
+        state_id: 'state',
+        status: 'status',
+        updated_at: 'updated at',
+        other: 'stuff'
+      });
 
       await handler({ params: { id: '1' }, user: { state: 'va' } }, res);
 
       test.ok(res.status.notCalled, 'HTTP status not explicitly set');
-      test.ok(ApdModel.where.calledWith({ id: '1', state_id: 'va' }));
+      test.ok(dbReturns.where.calledWith({ id: '1', state_id: 'va' }));
       test.ok(
         res.send.calledWith({
-          id: 'a',
-          updated: 'updated a',
-          years: 'years a',
-          other: 'stuff'
+          id: 'id',
+          stuff: 'from',
+          document: 'column',
+          goes: 'here',
+          state: 'state',
+          status: 'status',
+          updated: 'updated at'
         }),
         'APD info is sent back'
       );

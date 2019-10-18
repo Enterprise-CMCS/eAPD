@@ -1,16 +1,24 @@
 import sinon from 'sinon';
+import { SELECT_APD } from '../actions/app/symbols';
 
 // The Hubble Space Telescope was launched on the space shuttle Discovery on
 // April 24, 1990.  FFY 1990.  Set this clock before we import code under test,
 // so that the stuff we import will use our faked-out clock.
 const mockClock = sinon.useFakeTimers(new Date(1990, 3, 24).getTime());
 
-const { default: apd } = require('./apd');
+const { default: apd, getPatchesForAddingItem } = require('./apd');
 const {
   SUBMIT_APD_SUCCESS,
   WITHDRAW_APD_SUCCESS,
   SAVE_APD_SUCCESS
 } = require('../actions/apd');
+const {
+  ADD_APD_ITEM,
+  ADD_APD_YEAR,
+  EDIT_APD,
+  REMOVE_APD_ITEM,
+  REMOVE_APD_YEAR
+} = require('../actions/editApd');
 
 describe('APD reducer', () => {
   afterAll(() => {
@@ -139,7 +147,7 @@ describe('APD reducer', () => {
   it('should handle selecting an APD', () => {
     expect(
       apd(initialState, {
-        type: 'SELECT_APD',
+        type: SELECT_APD,
         apd: {
           value: `hurr hurr i'm a burr`,
           // Some nobles are tossed out a window in the Second Defenestration
@@ -161,6 +169,562 @@ describe('APD reducer', () => {
     expect(apd(initialState, { type: 'SET_SELECT_APD_ON_LOAD' })).toEqual({
       ...initialState,
       selectAPDOnLoad: true
+    });
+  });
+
+  it('should handle adding an APD year', () => {
+    const state = {
+      data: {
+        activities: [
+          {
+            costAllocation: {
+              '1742': 'yes',
+              '1743': 'no'
+            },
+            contractorResources: [
+              {
+                hourly: {
+                  data: {
+                    '1742': { hours: 20, rate: 22 },
+                    '1743': { hours: 25, rate: 27 }
+                  }
+                },
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            quarterlyFFP: {
+              '1742': 'sometimes',
+              '1743': 'rarely'
+            },
+            statePersonnel: [
+              {
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ]
+          }
+        ],
+        incentivePayments: {
+          ehAmt: {
+            '1742': { 1: 1, 2: 1, 3: 1, 4: 1 },
+            '1743': { 1: 2, 2: 2, 3: 2, 4: 2 }
+          },
+          ehCt: {
+            '1742': { 1: 3, 2: 3, 3: 3, 4: 3 },
+            '1743': { 1: 4, 2: 4, 3: 4, 4: 4 }
+          },
+          epAmt: {
+            '1742': { 1: 5, 2: 5, 3: 5, 4: 5 },
+            '1743': { 1: 6, 2: 6, 3: 6, 4: 6 }
+          },
+          epCt: {
+            '1742': { 1: 7, 2: 7, 3: 7, 4: 7 },
+            '1743': { 1: 8, 2: 8, 3: 8, 4: 8 }
+          }
+        },
+        keyPersonnel: [
+          {
+            costs: {
+              '1742': 1,
+              '1243': 2
+            }
+          }
+        ],
+        years: ['1742', '1743']
+      }
+    };
+
+    expect(apd(state, { type: ADD_APD_YEAR, value: '1741' })).toEqual({
+      data: {
+        activities: [
+          {
+            costAllocation: {
+              '1741': { other: 0, ffp: { federal: 90, state: 10 } },
+              '1742': 'yes',
+              '1743': 'no'
+            },
+            contractorResources: [
+              {
+                hourly: {
+                  data: {
+                    '1741': { hours: '', rate: '' },
+                    '1742': { hours: 20, rate: 22 },
+                    '1743': { hours: 25, rate: 27 }
+                  }
+                },
+                years: {
+                  '1741': 0,
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  '1741': 0,
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            quarterlyFFP: {
+              '1741': {
+                1: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                2: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                3: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                4: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                }
+              },
+              '1742': 'sometimes',
+              '1743': 'rarely'
+            },
+            statePersonnel: [
+              {
+                years: {
+                  '1741': { amt: '', perc: '' },
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ]
+          }
+        ],
+        incentivePayments: {
+          ehAmt: {
+            '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '1742': { 1: 1, 2: 1, 3: 1, 4: 1 },
+            '1743': { 1: 2, 2: 2, 3: 2, 4: 2 }
+          },
+          ehCt: {
+            '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '1742': { 1: 3, 2: 3, 3: 3, 4: 3 },
+            '1743': { 1: 4, 2: 4, 3: 4, 4: 4 }
+          },
+          epAmt: {
+            '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '1742': { 1: 5, 2: 5, 3: 5, 4: 5 },
+            '1743': { 1: 6, 2: 6, 3: 6, 4: 6 }
+          },
+          epCt: {
+            '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '1742': { 1: 7, 2: 7, 3: 7, 4: 7 },
+            '1743': { 1: 8, 2: 8, 3: 8, 4: 8 }
+          }
+        },
+        keyPersonnel: [
+          {
+            costs: {
+              '1741': 0,
+              '1742': 1,
+              '1243': 2
+            }
+          }
+        ],
+        years: ['1741', '1742', '1743']
+      }
+    });
+  });
+
+  it('should handle removing an APD year', () => {
+    const state = {
+      data: {
+        activities: [
+          {
+            costAllocation: {
+              '1741': { other: 0, ffp: { federal: 90, state: 10 } },
+              '1742': 'yes',
+              '1743': 'no'
+            },
+            contractorResources: [
+              {
+                hourly: {
+                  data: {
+                    '1741': { hours: '', rate: '' },
+                    '1742': { hours: 20, rate: 22 },
+                    '1743': { hours: 25, rate: 27 }
+                  }
+                },
+                years: {
+                  '1741': 0,
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  '1741': 0,
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            quarterlyFFP: {
+              '1741': {
+                1: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                2: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                3: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                4: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                }
+              },
+              '1742': 'sometimes',
+              '1743': 'rarely'
+            },
+            statePersonnel: [
+              {
+                years: {
+                  '1741': { amt: '', perc: '' },
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ]
+          }
+        ],
+        incentivePayments: {
+          ehAmt: {
+            '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '1742': { 1: 1, 2: 1, 3: 1, 4: 1 },
+            '1743': { 1: 2, 2: 2, 3: 2, 4: 2 }
+          },
+          ehCt: {
+            '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '1742': { 1: 3, 2: 3, 3: 3, 4: 3 },
+            '1743': { 1: 4, 2: 4, 3: 4, 4: 4 }
+          },
+          epAmt: {
+            '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '1742': { 1: 5, 2: 5, 3: 5, 4: 5 },
+            '1743': { 1: 6, 2: 6, 3: 6, 4: 6 }
+          },
+          epCt: {
+            '1741': { 1: 0, 2: 0, 3: 0, 4: 0 },
+            '1742': { 1: 7, 2: 7, 3: 7, 4: 7 },
+            '1743': { 1: 8, 2: 8, 3: 8, 4: 8 }
+          }
+        },
+        keyPersonnel: [
+          {
+            costs: {
+              '1741': 0,
+              '1742': 1,
+              '1243': 2
+            }
+          }
+        ],
+        years: ['1741', '1742', '1743']
+      }
+    };
+
+    expect(apd(state, { type: REMOVE_APD_YEAR, value: '1741' })).toEqual({
+      data: {
+        activities: [
+          {
+            costAllocation: {
+              '1742': 'yes',
+              '1743': 'no'
+            },
+            contractorResources: [
+              {
+                hourly: {
+                  data: {
+                    '1742': { hours: 20, rate: 22 },
+                    '1743': { hours: 25, rate: 27 }
+                  }
+                },
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ],
+            quarterlyFFP: {
+              '1742': 'sometimes',
+              '1743': 'rarely'
+            },
+            statePersonnel: [
+              {
+                years: {
+                  '1742': 0,
+                  '1743': 0
+                }
+              }
+            ]
+          }
+        ],
+        incentivePayments: {
+          ehAmt: {
+            '1742': { 1: 1, 2: 1, 3: 1, 4: 1 },
+            '1743': { 1: 2, 2: 2, 3: 2, 4: 2 }
+          },
+          ehCt: {
+            '1742': { 1: 3, 2: 3, 3: 3, 4: 3 },
+            '1743': { 1: 4, 2: 4, 3: 4, 4: 4 }
+          },
+          epAmt: {
+            '1742': { 1: 5, 2: 5, 3: 5, 4: 5 },
+            '1743': { 1: 6, 2: 6, 3: 6, 4: 6 }
+          },
+          epCt: {
+            '1742': { 1: 7, 2: 7, 3: 7, 4: 7 },
+            '1743': { 1: 8, 2: 8, 3: 8, 4: 8 }
+          }
+        },
+        keyPersonnel: [
+          {
+            costs: {
+              '1742': 1,
+              '1243': 2
+            }
+          }
+        ],
+        years: ['1742', '1743']
+      }
+    });
+  });
+
+  describe('should handle an APD item being added', () => {
+    it('should add arbitrary items', () => {
+      const state = {
+        data: {
+          theArray: [1, 2, 4, 5]
+        }
+      };
+      expect(apd(state, { type: ADD_APD_ITEM, path: '/theArray/2' })).toEqual({
+        data: { theArray: [1, 2, null, 4, 5] }
+      });
+    });
+
+    it('should add a new state key personnel', () => {
+      const state = {
+        data: {
+          keyPersonnel: [],
+          years: ['1', '2']
+        }
+      };
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: '/keyPersonnel/-' })
+      ).toEqual({
+        data: {
+          keyPersonnel: [
+            {
+              costs: { '1': 0, '2': 0 },
+              email: '',
+              expanded: true,
+              hasCosts: false,
+              isPrimary: false,
+              percentTime: '0',
+              name: '',
+              position: '',
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: false
+            }
+          ],
+          years: ['1', '2']
+        }
+      });
+    });
+
+    it('should add a new activity goal', () => {
+      const state = {
+        data: {
+          activities: [{ goals: [] }]
+        }
+      };
+
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/goals/-` })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              goals: [
+                {
+                  description: '',
+                  initialCollapsed: false,
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  objective: ''
+                }
+              ]
+            }
+          ]
+        }
+      });
+    });
+
+    it('should add a new activity milestone', () => {
+      const state = {
+        data: {
+          activities: [{ schedule: [] }]
+        }
+      };
+
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/schedule/-` })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              schedule: [
+                {
+                  endDate: '',
+                  initialCollapsed: false,
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  milestone: ''
+                }
+              ]
+            }
+          ]
+        }
+      });
+    });
+
+    it('should add a new activity non-personnel cost', () => {
+      const state = {
+        data: {
+          activities: [{ expenses: [] }],
+          years: ['1403', '1404']
+        }
+      };
+
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/expenses/-` })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              expenses: [
+                {
+                  category: 'Hardware, software, and licensing',
+                  description: '',
+                  initialCollapsed: false,
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  years: {
+                    '1403': 0,
+                    '1404': 0
+                  }
+                }
+              ]
+            }
+          ],
+          years: ['1403', '1404']
+        }
+      });
+    });
+
+    it('should add a new activity state personnel', () => {
+      const state = {
+        data: {
+          activities: [{ statePersonnel: [] }],
+          years: ['1403', '1404']
+        }
+      };
+
+      expect(
+        apd(state, {
+          type: ADD_APD_ITEM,
+          path: `/activities/0/statePersonnel/-`
+        })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              statePersonnel: [
+                {
+                  description: '',
+                  initialCollapsed: false,
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  title: '',
+                  years: {
+                    '1403': { amt: '', perc: '' },
+                    '1404': { amt: '', perc: '' }
+                  }
+                }
+              ]
+            }
+          ],
+          years: ['1403', '1404']
+        }
+      });
+    });
+  });
+
+  describe('should handle an APD item being removed', () => {
+    const state = {
+      data: {
+        items: [1, 2, 3, 4, 5]
+      }
+    };
+    expect(apd(state, { type: REMOVE_APD_ITEM, path: '/items/2' })).toEqual({
+      data: { items: [1, 2, 4, 5] }
+    });
+  });
+
+  it('should handle an APD edit', () => {
+    const state = {
+      data: {
+        overview: 'bleep'
+      }
+    };
+    expect(
+      apd(state, { type: EDIT_APD, path: '/overview', value: 'bloop' })
+    ).toEqual({
+      data: {
+        overview: 'bloop'
+      }
     });
   });
 
@@ -194,7 +758,7 @@ describe('APD reducer', () => {
             initialCollapsed: false,
             isPrimary: false,
             name: '',
-            percentTime: 0,
+            percentTime: '0',
             position: '',
             key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }
@@ -386,5 +950,41 @@ describe('APD reducer', () => {
     expect(
       apd({ data: { status: 'not draft' } }, { type: WITHDRAW_APD_SUCCESS })
     ).toEqual({ data: { status: 'draft' } });
+  });
+});
+
+describe('APD reducer helper methods', () => {
+  describe('it can get patches for adding new APD items', () => {
+    it(`gets patches for paths that don't need anything special`, () => {
+      expect(getPatchesForAddingItem({}, '/fake/path')).toEqual([
+        { op: 'add', path: '/fake/path', value: null }
+      ]);
+    });
+
+    it('gets patches for adding a key personnel', () => {
+      expect(
+        getPatchesForAddingItem(
+          { data: { years: ['1', '2'] } },
+          '/keyPersonnel/-'
+        )
+      ).toEqual([
+        {
+          op: 'add',
+          path: '/keyPersonnel/-',
+          value: {
+            costs: { '1': 0, '2': 0 },
+            email: '',
+            expanded: true,
+            hasCosts: false,
+            isPrimary: false,
+            percentTime: '0',
+            name: '',
+            position: '',
+            key: expect.stringMatching(/^[a-f0-9]{8}$/),
+            initialCollapsed: false
+          }
+        }
+      ]);
+    });
   });
 });

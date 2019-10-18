@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { updateApd as updateApdAction } from '../actions/apd';
+import {
+  setIncentiveEHCount,
+  setIncentiveEPCount,
+  setIncentiveEHPayment,
+  setIncentiveEPPayment
+} from '../actions/editApd';
 import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
 import NumberField from '../components/NumberField';
@@ -12,100 +17,167 @@ import {
   selectIncentivePayments,
   selectIncentivePaymentTotals
 } from '../reducers/apd.selectors';
-import { INCENTIVE_ENTRIES } from '../util';
 import { formatNum } from '../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 
-const formatNumber = (type, number) =>
-  type === 'amount' ? <Dollars>{number}</Dollars> : formatNum(number);
-
-class IncentivePayments extends Component {
-  handleChange = (key, year, quarter) => e => {
-    const { value } = e.target;
-    const incentivePayments = { [key]: { [year]: { [quarter]: value } } };
-    const { updateApd: action } = this.props;
-    action({ incentivePayments });
+const IncentivePayments = ({
+  data,
+  setEHCount,
+  setEPCount,
+  setEHPayment,
+  setEPPayment,
+  totals,
+  years
+}) => {
+  const updateEHPayment = (year, quarter) => ({ target: { value } }) => {
+    setEHPayment(year, quarter, value);
   };
 
-  render() {
-    const { data, totals, years } = this.props;
+  const updateEHCount = (year, quarter) => ({ target: { value } }) => {
+    setEHCount(year, quarter, value);
+  };
 
-    return (
-      <Fragment>
-        {years.map(year => (
-          <Fragment key={year}>
-            <table className="budget-table">
-              <caption className="ds-u-visibility--screen-reader">
-                {t('ffy', { year })} Incentive Payments by Quarter
-              </caption>
-              <thead>
-                <tr>
-                  <th>
-                    <span aria-hidden="true">{t('ffy', { year })}</span>
-                  </th>
-                  <Fragment key={year}>
-                    {QUARTERS.map(q => (
-                      <th
-                        key={q}
-                        className="ds-u-text-align--right"
-                        scope="col"
-                      >
-                        {t('table.quarter', { q })}
-                      </th>
-                    ))}
-                    <th
-                      className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
-                      scope="col"
-                    >
-                      {t('table.subtotal')}
+  const updateEPPayment = (year, quarter) => ({ target: { value } }) => {
+    setEPPayment(year, quarter, value);
+  };
+
+  const updateEPCount = (year, quarter) => ({ target: { value } }) => {
+    setEPCount(year, quarter, value);
+  };
+
+  return (
+    <Fragment>
+      {years.map(year => (
+        <Fragment key={year}>
+          <table className="budget-table">
+            <caption className="ds-u-visibility--screen-reader">
+              {t('ffy', { year })} Incentive Payments by Quarter
+            </caption>
+            <thead>
+              <tr>
+                <th>
+                  <span aria-hidden="true">{t('ffy', { year })}</span>
+                </th>
+                <Fragment key={year}>
+                  {QUARTERS.map(q => (
+                    <th key={q} className="ds-u-text-align--right" scope="col">
+                      {t('table.quarter', { q })}
                     </th>
-                  </Fragment>
-                </tr>
-              </thead>
-              <tbody>
-                {INCENTIVE_ENTRIES.map(({ id, name, type }) => {
-                  const InputComponent =
-                    type === 'amount' ? DollarField : NumberField;
+                  ))}
+                  <th
+                    className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
+                    scope="col"
+                  >
+                    {t('table.subtotal')}
+                  </th>
+                </Fragment>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">EH Payments</th>
+                <Fragment key={year}>
+                  {QUARTERS.map(q => (
+                    <td key={q}>
+                      <DollarField
+                        className="budget-table--input-holder"
+                        fieldClassName="budget-table--input__number"
+                        label={`ehAmt payments for ${year}, quarter ${q}`}
+                        labelClassName="sr-only"
+                        name={`ehAmt-payments-${year}-q${q}`}
+                        value={data.ehAmt[year][q] || ''}
+                        onChange={updateEHPayment(year, q)}
+                      />
+                    </td>
+                  ))}
+                  <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
+                    <Dollars>{totals.ehAmt.byYear[year]}</Dollars>
+                  </td>
+                </Fragment>
+              </tr>
 
-                  return (
-                    <tr key={id}>
-                      <th scope="row">{name}</th>
-                      <Fragment key={year}>
-                        {QUARTERS.map(q => (
-                          <td key={q}>
-                            <InputComponent
-                              className="budget-table--input-holder"
-                              fieldClassName="budget-table--input__number"
-                              label={`${id} payments for ${year}, quarter ${q}`}
-                              labelClassName="sr-only"
-                              name={`${id}-payments-${year}-q${q}`}
-                              value={data[id][year][q] || ''}
-                              onChange={this.handleChange(id, year, q)}
-                            />
-                          </td>
-                        ))}
-                        <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
-                          {formatNumber(type, totals[id].byYear[year])}
-                        </td>
-                      </Fragment>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </Fragment>
-        ))}
-      </Fragment>
-    );
-  }
-}
+              <tr>
+                <th scope="row">EH Count (optional)</th>
+                <Fragment key={year}>
+                  {QUARTERS.map(q => (
+                    <td key={q}>
+                      <NumberField
+                        className="budget-table--input-holder"
+                        fieldClassName="budget-table--input__number"
+                        label={`ehCt payments for ${year}, quarter ${q}`}
+                        labelClassName="sr-only"
+                        name={`ehCt-payments-${year}-q${q}`}
+                        value={data.ehCt[year][q] || ''}
+                        onChange={updateEHCount(year, q)}
+                      />
+                    </td>
+                  ))}
+                  <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
+                    {formatNum(totals.ehCt.byYear[year])}
+                  </td>
+                </Fragment>
+              </tr>
+
+              <tr>
+                <th scope="row">EP Payments</th>
+                <Fragment key={year}>
+                  {QUARTERS.map(q => (
+                    <td key={q}>
+                      <DollarField
+                        className="budget-table--input-holder"
+                        fieldClassName="budget-table--input__number"
+                        label={`epAmt payments for ${year}, quarter ${q}`}
+                        labelClassName="sr-only"
+                        name={`epAmt-payments-${year}-q${q}`}
+                        value={data.epAmt[year][q] || ''}
+                        onChange={updateEPPayment(year, q)}
+                      />
+                    </td>
+                  ))}
+                  <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
+                    <Dollars>{totals.epAmt.byYear[year]}</Dollars>
+                  </td>
+                </Fragment>
+              </tr>
+
+              <tr>
+                <th scope="row">EP Count (optional)</th>
+                <Fragment key={year}>
+                  {QUARTERS.map(q => (
+                    <td key={q}>
+                      <NumberField
+                        className="budget-table--input-holder"
+                        fieldClassName="budget-table--input__number"
+                        label={`epCt payments for ${year}, quarter ${q}`}
+                        labelClassName="sr-only"
+                        name={`epCt-payments-${year}-q${q}`}
+                        value={data.epCt[year][q] || ''}
+                        onChange={updateEPCount(year, q)}
+                      />
+                    </td>
+                  ))}
+                  <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
+                    {formatNum(totals.epCt.byYear[year])}
+                  </td>
+                </Fragment>
+              </tr>
+            </tbody>
+          </table>
+        </Fragment>
+      ))}
+    </Fragment>
+  );
+};
 
 IncentivePayments.propTypes = {
   data: PropTypes.object.isRequired,
+  setEHCount: PropTypes.func.isRequired,
+  setEPCount: PropTypes.func.isRequired,
+  setEHPayment: PropTypes.func.isRequired,
+  setEPPayment: PropTypes.func.isRequired,
   totals: PropTypes.object.isRequired,
-  updateApd: PropTypes.func.isRequired,
-  years: PropTypes.array.isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapStateToProps = state => ({
@@ -114,7 +186,12 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
-const mapDispatchToProps = { updateApd: updateApdAction };
+const mapDispatchToProps = {
+  setEHCount: setIncentiveEHCount,
+  setEPCount: setIncentiveEPCount,
+  setEHPayment: setIncentiveEHPayment,
+  setEPPayment: setIncentiveEPPayment
+};
 
 export default connect(
   mapStateToProps,

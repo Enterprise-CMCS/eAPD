@@ -2,7 +2,6 @@
 
 exports[`the CostAllocateFFPYearTotal component renders correctly 1`] = `
 <Fragment>
-  <hr />
   <h6
     className="ds-h3"
   >

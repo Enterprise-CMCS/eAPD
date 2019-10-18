@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { selectActivitiesByKey } from './activities.selectors';
+import { selectAllActivities } from './activities.selectors';
 import { ACTIVITY_FUNDING_SOURCES, stateDateRangeToDisplay } from '../util';
 
 const selectBudget = ({ budget }) => budget;
@@ -22,10 +22,10 @@ export const selectBudgetActivitiesByFundingSource = createSelector(
 );
 
 export const selectBudgetExecutiveSummary = createSelector(
-  [selectActivitiesByKey, selectBudget],
-  (byKey, budget) => {
-    const data = Object.entries(byKey).map(
-      ([key, { name, plannedEndDate, plannedStartDate, summary }]) => {
+  [selectAllActivities, selectBudget],
+  (activities, budget) => {
+    const data = activities.map(
+      ({ key, name, plannedEndDate, plannedStartDate, summary }) => {
         const activityCosts = budget.activities[key].costsByFFY;
 
         return {

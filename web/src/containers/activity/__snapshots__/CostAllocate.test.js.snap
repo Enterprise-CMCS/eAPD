@@ -50,6 +50,7 @@ exports[`the CostAllocate component renders correctly 1`] = `
   <hr />
   <Connect(CostAllocateFFP)
     aKey="activity key"
+    activityIndex={1}
   />
 </Subsection>
 `;

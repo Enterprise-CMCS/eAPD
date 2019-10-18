@@ -1,24 +1,29 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
-import GoalForm from './GoalForm';
+import { plain as GoalForm, mapDispatchToProps } from './GoalForm';
+
+import {
+  setGoalDescription,
+  setGoalObjective
+} from '../../../actions/editActivity';
 
 describe('the GoalForm component', () => {
-  const sandbox = sinon.createSandbox();
-
   const props = {
-    handleChange: sandbox.stub(),
+    activityIndex: 93,
     index: 1,
     item: {
       description: 'goal description',
       key: 'goal key',
       objective: 'goal objective'
-    }
+    },
+    setDescription: jest.fn(),
+    setObjective: jest.fn()
   };
 
   beforeEach(() => {
-    sandbox.resetHistory();
+    props.setDescription.mockClear();
+    props.setDescription.mockClear();
   });
 
   test('renders correctly', () => {
@@ -27,28 +32,27 @@ describe('the GoalForm component', () => {
   });
 
   it('it handles changing the goal description', () => {
-    const handler = sinon.spy();
-    props.handleChange.withArgs(1, 'description').returns(handler);
-
     const component = shallow(<GoalForm {...props} />);
     component
       .findWhere(c => c.prop('name') === 'name')
-      .simulate('change', 'new name');
+      .simulate('change', { target: { value: 'new name' } });
 
-    expect(props.handleChange.calledWith(1, 'description')).toEqual(true);
-    expect(handler.calledWith('new name')).toEqual(true);
+    expect(props.setDescription).toHaveBeenCalledWith(93, 1, 'new name');
   });
 
   it('it handles changing the goal objective', () => {
-    const handler = sinon.spy();
-    props.handleChange.withArgs(1, 'objective').returns(handler);
-
     const component = shallow(<GoalForm {...props} />);
     component
       .findWhere(c => c.prop('name') === 'milestones')
-      .simulate('change', 'new objective');
+      .simulate('change', { target: { value: 'new objective' } });
 
-    expect(props.handleChange.calledWith(1, 'objective')).toEqual(true);
-    expect(handler.calledWith('new objective')).toEqual(true);
+    expect(props.setObjective).toHaveBeenCalledWith(93, 1, 'new objective');
+  });
+
+  it('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setDescription: setGoalDescription,
+      setObjective: setGoalObjective
+    });
   });
 });

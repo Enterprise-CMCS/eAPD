@@ -1,21 +1,27 @@
 import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
+import { connect } from 'react-redux';
 
+import {
+  setMilestoneEndDate,
+  setMilestoneName
+} from '../../../actions/editActivity';
 import DateField from '../../../components/DateField';
 
 const MilestoneForm = ({
+  activityIndex,
   index,
   item: { endDate, milestone },
-  onChangeDate,
-  onChangeName
+  setEndDate,
+  setName
 }) => {
   const changeDate = useCallback(
-    (_, dateStr) => onChangeDate(index, dateStr),
+    (_, dateStr) => setEndDate(activityIndex, index, dateStr),
     []
   );
   const changeName = useCallback(
-    ({ target: { value } }) => onChangeName(index, value),
+    ({ target: { value } }) => setName(activityIndex, index, value),
     []
   );
 
@@ -40,13 +46,24 @@ const MilestoneForm = ({
 };
 
 MilestoneForm.propTypes = {
+  activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
     endDate: PropTypes.string.isRequired,
     milestone: PropTypes.string.isRequired
   }).isRequired,
-  onChangeDate: PropTypes.func.isRequired,
-  onChangeName: PropTypes.func.isRequired
+  setEndDate: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired
 };
 
-export default MilestoneForm;
+const mapDispatchToProps = {
+  setEndDate: setMilestoneEndDate,
+  setName: setMilestoneName
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(MilestoneForm);
+
+export { MilestoneForm as plain, mapDispatchToProps };

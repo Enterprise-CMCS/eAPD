@@ -8,17 +8,32 @@ exports[`activity Goals component renders properly 1`] = `
   resource="activities.goals"
 >
   <FormAndReviewList
+    activityIndex="activity index"
     addButtonText="Add a goal"
     allowDeleteAll={false}
     className={null}
     collapsed={[Function]}
-    expanded={[Function]}
+    expanded={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(GoalForm)",
+        "type": [Function],
+      }
+    }
     handleChange={[Function]}
     list={
       Array [
-        "some",
-        "goals",
-        "here",
+        Object {
+          "key": "goal 1",
+        },
+        Object {
+          "key": "goal 2",
+        },
+        Object {
+          "key": "goal 3",
+        },
       ]
     }
     noDataMessage="Additional costs for this activity are missing."

@@ -1,8 +1,8 @@
 const logger = require('../../logger')('apds route get');
-const defaultApdModel = require('../../db').models.apd;
+const { raw: knex } = require('../../db');
 const { can } = require('../../middleware');
 
-module.exports = (app, ApdModel = defaultApdModel) => {
+module.exports = (app, { db = knex } = {}) => {
   logger.silly('setting up GET /apds route');
 
   app.get('/apds', can('view-document'), async (req, res) => {
@@ -16,16 +16,18 @@ module.exports = (app, ApdModel = defaultApdModel) => {
         return res.status(401).end();
       }
 
-      const whereCondits = { state_id: stateId };
-      const apds = (await ApdModel.where(whereCondits).fetchAll())
-        .toJSON()
-        .map(({ id, name, status, updated, years }) => ({
+      const apds = (await db('apds')
+        .where({ state_id: stateId })
+        .select(['document', 'id', 'status', 'updated_at'])).map(
+        // eslint-disable-next-line camelcase
+        ({ document: { name, years }, id, status, updated_at }) => ({
           id,
           name,
           status,
-          updated,
+          updated: updated_at,
           years
-        }));
+        })
+      );
 
       logger.silly(req, `got apds:`);
       logger.silly(req, apds.map(({ id, name }) => ({ id, name })));
@@ -47,17 +49,21 @@ module.exports = (app, ApdModel = defaultApdModel) => {
         return res.status(401).end();
       }
 
-      const whereCondits = { id: req.params.id, state_id: stateId };
-      const apds = (await ApdModel.where(whereCondits).fetchAll({
-        withRelated: ApdModel.withRelated
-      })).toJSON();
+      const apdFromDB = await db('apds')
+        .where({ id: req.params.id, state_id: stateId })
+        .first('document', 'id', 'state_id', 'status', 'updated_at');
 
-      if (apds.length) {
-        logger.silly(
-          req,
-          `got single apd, id=${apds[0].id}, name="${apds[0].name}"`
-        );
-        return res.send(apds[0]);
+      if (apdFromDB) {
+        const apd = {
+          ...apdFromDB.document,
+          id: apdFromDB.id,
+          state: apdFromDB.state_id,
+          status: apdFromDB.status,
+          updated: apdFromDB.updated_at
+        };
+
+        logger.silly(req, `got single apd, id=${apd.id}, name="${apd.name}"`);
+        return res.send(apd);
       }
 
       logger.verbose('apd does not exist');

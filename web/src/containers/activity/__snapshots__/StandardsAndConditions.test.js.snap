@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Schedule (milestones) component renders correctly 1`] = `
+<Subsection
+  headerClassName={null}
+  id={null}
+  nested={true}
+  resource="activities.standardsAndConditions"
+>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.modularity.instruction"
+    />
+    <RichText
+      content="modulartiy"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.mita.instruction"
+    />
+    <RichText
+      content="mita"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.industryStandards.instruction"
+    />
+    <RichText
+      content="industry standards"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.leverage.instruction"
+    />
+    <RichText
+      content="leverage"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.businessResults.instruction"
+    />
+    <RichText
+      content="business results"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.reporting.instruction"
+    />
+    <RichText
+      content="reporting"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.interoperability.instruction"
+    />
+    <RichText
+      content=""
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.mitigationStrategy.instruction"
+    />
+    <RichText
+      content="mitigation strategy"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.keyPersonnel.instruction"
+    />
+    <RichText
+      content="key personnel"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.documentation.instruction"
+    />
+    <RichText
+      content="documentation"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="ds-u-margin-bottom--6"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h6",
+        }
+      }
+      reverse={false}
+      source="activities.standardsAndConditions.minimizeCost.instruction"
+    />
+    <RichText
+      content="minimize cost"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+</Subsection>
+`;
