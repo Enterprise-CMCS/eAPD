@@ -6,18 +6,18 @@ import StatePersonnel from './StatePersonnel';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
-const Costs = ({ aKey }) => (
+const Costs = ({ activityIndex }) => (
   <Subsection resource="activities.costs" nested>
     <h6 className="ds-h4">{t('activities.costs.subtitles.personnel')}</h6>
-    <StatePersonnel aKey={aKey} />
+    <StatePersonnel activityIndex={activityIndex} />
 
     <h6 className="ds-h4">{t('activities.costs.subtitles.nonPersonnel')}</h6>
-    <Expenses aKey={aKey} />
+    <Expenses activityIndex={activityIndex} />
   </Subsection>
 );
 
 Costs.propTypes = {
-  aKey: PropTypes.string.isRequired
+  activityIndex: PropTypes.number.isRequired
 };
 
 export default Costs;

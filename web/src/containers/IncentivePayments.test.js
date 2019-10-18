@@ -1,13 +1,18 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import {
   plain as IncentivePayments,
   mapStateToProps,
   mapDispatchToProps
 } from './IncentivePayments';
-import { updateApd } from '../actions/apd';
+
+import {
+  setIncentiveEHCount,
+  setIncentiveEPCount,
+  setIncentiveEHPayment,
+  setIncentiveEPPayment
+} from '../actions/editApd';
 
 describe('incentive payments component', () => {
   const props = {
@@ -18,74 +23,74 @@ describe('incentive payments component', () => {
       epCt: { '1': [25, 26, 27, 28], '2': [29, 30, 31, 32] }
     },
     totals: {
-      ehAmt: {
-        byYear: { '1': 10, '2': 26 },
-        allYears: 36
-      },
-      ehCt: {
-        byYear: { '1': 42, '2': 58 },
-        allYears: 100
-      },
-      epAmt: {
-        byYear: { '1': 74, '2': 90 },
-        allYears: 164
-      },
-      epCt: {
-        byYear: { '1': 106, '2': 122 },
-        allYears: 228
-      }
+      ehAmt: { allYears: 36, byYear: { '1': 10, '2': 26 } },
+      ehCt: { allYears: 100, byYear: { '1': 42, '2': 58 } },
+      epAmt: { allYears: 164, byYear: { '1': 74, '2': 90 } },
+      epCt: { allYears: 228, byYear: { '1': 106, '2': 122 } }
     },
-    years: ['1', '2']
+    years: ['1', '2'],
+    setEHCount: jest.fn(),
+    setEPCount: jest.fn(),
+    setEHPayment: jest.fn(),
+    setEPPayment: jest.fn()
   };
 
-  test('renders correctly', () => {
-    const component = shallow(
-      <IncentivePayments {...props} updateApd={() => {}} />
-    );
+  beforeEach(() => {
+    props.setEHCount.mockClear();
+    props.setEPCount.mockClear();
+    props.setEHPayment.mockClear();
+    props.setEPPayment.mockClear();
+  });
+
+  it('renders correctly', () => {
+    const component = shallow(<IncentivePayments {...props} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('handles changes', () => {
-    const updateApdProp = sinon.spy();
-    const component = shallow(
-      <IncentivePayments {...props} updateApd={updateApdProp} />
-    );
+  it('handles changes', () => {
+    const component = shallow(<IncentivePayments {...props} />);
 
-    const types = ['ehAmt', 'ehCt', 'epAmt', 'epCt'];
-    const years = ['1', '2'];
+    const actions = [
+      props.setEHPayment,
+      props.setEHCount,
+      props.setEPPayment,
+      props.setEPCount
+    ];
 
-    component.find('InputHolder').forEach((c, i) => {
+    [
+      // The first pair of dollar/number fields will be for the EH things
+      // for the first year, and the first quarter
+      component.find('DollarField').at(0),
+      component.find('NumberField').at(0),
+      // We do all quarters of EH for a year before switching over to EP,
+      // so the 5th (index 4) pair will be for EP, first year, first quarter
+      component.find('DollarField').at(4),
+      component.find('NumberField').at(4)
+    ].forEach((c, i) => {
       c.simulate('change', { target: { value: 99 } });
 
-      const q = (i % 4) + 1;
-      const year =
-        years[Math.floor(Math.floor(i / 4) / types.length) % years.length];
-      const type = types[Math.floor(i / 4) % types.length];
+      const action = actions[Math.floor(i / 4) % actions.length];
 
-      expect(
-        updateApdProp.calledWith({
-          incentivePayments: { [type]: { [year]: { [q]: 99 } } }
-        })
-      ).toBeTruthy();
+      expect(action).toHaveBeenCalledWith('1', 1, 99);
     });
   });
 
-  test('maps state to props', () => {
-    const state = {
-      apd: {
-        data: {
-          incentivePayments: {
-            ehAmt: { '1': [1, 2, 3, 4], '2': [5, 6, 7, 8] },
-            ehCt: { '1': [9, 10, 11, 12], '2': [13, 14, 15, 16] },
-            epAmt: { '1': [17, 18, 19, 20], '2': [21, 22, 23, 24] },
-            epCt: { '1': [25, 26, 27, 28], '2': [29, 30, 31, 32] }
-          },
-          years: ['1', '2']
+  it('maps state to props', () => {
+    expect(
+      mapStateToProps({
+        apd: {
+          data: {
+            incentivePayments: {
+              ehAmt: { '1': [1, 2, 3, 4], '2': [5, 6, 7, 8] },
+              ehCt: { '1': [9, 10, 11, 12], '2': [13, 14, 15, 16] },
+              epAmt: { '1': [17, 18, 19, 20], '2': [21, 22, 23, 24] },
+              epCt: { '1': [25, 26, 27, 28], '2': [29, 30, 31, 32] }
+            },
+            years: ['1', '2']
+          }
         }
-      }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
+      })
+    ).toEqual({
       data: {
         ehAmt: { '1': [1, 2, 3, 4], '2': [5, 6, 7, 8] },
         ehCt: { '1': [9, 10, 11, 12], '2': [13, 14, 15, 16] },
@@ -93,28 +98,21 @@ describe('incentive payments component', () => {
         epCt: { '1': [25, 26, 27, 28], '2': [29, 30, 31, 32] }
       },
       totals: {
-        ehAmt: {
-          byYear: { '1': 10, '2': 26 },
-          allYears: 36
-        },
-        ehCt: {
-          byYear: { '1': 42, '2': 58 },
-          allYears: 100
-        },
-        epAmt: {
-          byYear: { '1': 74, '2': 90 },
-          allYears: 164
-        },
-        epCt: {
-          byYear: { '1': 106, '2': 122 },
-          allYears: 228
-        }
+        ehAmt: { allYears: 36, byYear: { '1': 10, '2': 26 } },
+        ehCt: { allYears: 100, byYear: { '1': 42, '2': 58 } },
+        epAmt: { allYears: 164, byYear: { '1': 74, '2': 90 } },
+        epCt: { allYears: 228, byYear: { '1': 106, '2': 122 } }
       },
       years: ['1', '2']
     });
   });
 
-  test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ updateApd });
+  it('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setEHCount: setIncentiveEHCount,
+      setEPCount: setIncentiveEPCount,
+      setEHPayment: setIncentiveEHPayment,
+      setEPPayment: setIncentiveEPPayment
+    });
   });
 });

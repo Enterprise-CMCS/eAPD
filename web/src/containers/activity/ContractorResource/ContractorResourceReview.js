@@ -6,7 +6,7 @@ import { stateDateRangeToDisplay } from '../../../util';
 
 const ContractorResourceReview = ({
   index,
-  item: { desc, end, name, start, totalCost, years },
+  item: { description, end, name, start, totalCost, years },
   expand,
   onDeleteClick
 }) => {
@@ -25,7 +25,7 @@ const ContractorResourceReview = ({
       onEditClick={expand}
     >
       <p className="ds-u-margin-top--0">
-        {desc || 'Description of Services not specified'}
+        {description || 'Description of Services not specified'}
       </p>
       <ul className="ds-c-list--bare">
         <li>
@@ -49,7 +49,7 @@ ContractorResourceReview.propTypes = {
   expand: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
-    desc: PropTypes.string,
+    description: PropTypes.string,
     end: PropTypes.string,
     name: PropTypes.string,
     start: PropTypes.string,

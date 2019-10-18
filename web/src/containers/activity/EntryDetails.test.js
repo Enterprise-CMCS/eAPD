@@ -5,11 +5,10 @@ import { plain as EntryDetails, mapStateToProps } from './EntryDetails';
 
 describe('the (Activity) EntryDetails component', () => {
   const props = {
-    activity: {
-      name: 'activity name'
-    },
-    aKey: 'activity-key',
-    num: 3
+    activityIndex: 2,
+    activityKey: 'activity key',
+    fundingSource: 'money pit',
+    name: 'activity name'
   };
 
   test('renders correctly', () => {
@@ -17,25 +16,40 @@ describe('the (Activity) EntryDetails component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('maps redux state to component props', () => {
-    const activity = {
-      fundingSource: 'FUNDING!',
-      name: 'activity name'
+  test('maps state to props', () => {
+    const state = {
+      apd: {
+        data: {
+          activities: [
+            {
+              fundingSource: 'money pit',
+              key: 'key1',
+              name: 'that free money guy'
+            },
+            {
+              fundingSource: 'black market kidneys',
+              key: 'key2',
+              name: 'scary alley'
+            },
+            {
+              fundingSource: 'appropriations',
+              key: 'key3',
+              name: 'Congress Dollars'
+            },
+            {
+              fundingSource: 'blackjack',
+              key: 'key4',
+              name: 'Lucky Pete'
+            }
+          ]
+        }
+      }
     };
 
-    expect(
-      mapStateToProps(
-        {
-          activities: {
-            byKey: {
-              key: activity
-            }
-          }
-        },
-        { aKey: 'key', num: 3 }
-      )
-    ).toEqual({
-      activity
+    expect(mapStateToProps(state, { activityIndex: 2 })).toEqual({
+      activityKey: 'key3',
+      fundingSource: 'appropriations',
+      name: 'Congress Dollars'
     });
   });
 });

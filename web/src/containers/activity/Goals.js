@@ -1,71 +1,58 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { GoalForm, GoalReview } from './Goal';
 import FormAndReviewList from '../../components/FormAndReviewList';
-import {
-  addActivityGoal as addActivityGoalAction,
-  removeActivityGoal as removeActivityGoalAction,
-  updateActivity as updateActivityAction
-} from '../../actions/activities';
+import { addGoal, removeGoal } from '../../actions/editActivity';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
+import { selectGoalsByActivityIndex } from '../../reducers/activities.selectors';
 
-class Goals extends Component {
-  handleDelete = key => {
-    const { activityKey, removeActivityGoal } = this.props;
-    removeActivityGoal(activityKey, key);
+const Goals = ({ activityIndex, add, goals, remove }) => {
+  const handleAdd = () => {
+    add(activityIndex);
   };
 
-  handleAdd = () => {
-    const { activityKey, addActivityGoal } = this.props;
-    addActivityGoal(activityKey);
+  const handleDelete = key => {
+    goals.forEach(({ key: goalKey }, i) => {
+      if (goalKey === key) {
+        remove(activityIndex, i);
+      }
+    });
   };
 
-  handleChange = (index, field) => ({ target: { value } }) => {
-    const { activityKey, updateActivity } = this.props;
-    const updates = { goals: { [index]: { [field]: value } } };
-    updateActivity(activityKey, updates);
-  };
-
-  render() {
-    const { goals } = this.props;
-
-    return (
-      <Subsection resource="activities.goals" nested>
-        <FormAndReviewList
-          addButtonText="Add a goal"
-          list={goals}
-          collapsed={GoalReview}
-          expanded={GoalForm}
-          noDataMessage={t('activities.expenses.noDataNotice')}
-          onAddClick={this.handleAdd}
-          handleChange={this.handleChange}
-          onDeleteClick={this.handleDelete}
-        />
-      </Subsection>
-    );
-  }
-}
-
-Goals.propTypes = {
-  activityKey: PropTypes.string.isRequired,
-  goals: PropTypes.array.isRequired,
-  addActivityGoal: PropTypes.func.isRequired,
-  removeActivityGoal: PropTypes.func.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  return (
+    <Subsection resource="activities.goals" nested>
+      <FormAndReviewList
+        activityIndex={activityIndex}
+        addButtonText="Add a goal"
+        list={goals}
+        collapsed={GoalReview}
+        expanded={GoalForm}
+        noDataMessage={t('activities.expenses.noDataNotice')}
+        onAddClick={handleAdd}
+        onDeleteClick={handleDelete}
+        handleChange={() => {}}
+      />
+    </Subsection>
+  );
 };
 
-const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
-  activityKey: aKey,
-  goals: byKey[aKey].goals
+Goals.propTypes = {
+  activityIndex: PropTypes.number.isRequired,
+  goals: PropTypes.array.isRequired,
+  add: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state, { activityIndex }) => ({
+  goals: selectGoalsByActivityIndex(state, { activityIndex })
 });
 
 const mapDispatchToProps = {
-  addActivityGoal: addActivityGoalAction,
-  removeActivityGoal: removeActivityGoalAction,
-  updateActivity: updateActivityAction
+  add: addGoal,
+  remove: removeGoal
 };
 
 export default connect(

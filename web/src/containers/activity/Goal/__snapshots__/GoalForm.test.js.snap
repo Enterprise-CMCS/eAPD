@@ -8,6 +8,7 @@ exports[`the GoalForm component renders correctly 1`] = `
     hint="Examples of goals include: improved health outcomes for benficiaries, transformation of public health services, enabling implementation of other initiatives, etc."
     label="Goal name"
     name="name"
+    onChange={[Function]}
     type="text"
     value="goal description"
   />
@@ -16,6 +17,7 @@ exports[`the GoalForm component renders correctly 1`] = `
     hint="Explain how the state will make measurable progress towards the activity goal."
     label="Benchmarks"
     name="milestones"
+    onChange={[Function]}
     rows={6}
     value="goal objective"
   />

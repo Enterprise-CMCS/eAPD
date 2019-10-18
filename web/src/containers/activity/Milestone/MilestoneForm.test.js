@@ -1,32 +1,36 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import MilestoneForm from './MilestoneForm';
+import { plain as MilestoneForm, mapDispatchToProps } from './MilestoneForm';
+
+import {
+  setMilestoneEndDate,
+  setMilestoneName
+} from '../../../actions/editActivity';
 
 describe('the MilestoneForm component', () => {
-  const onChangeDate = jest.fn();
-  const onChangeName = jest.fn();
-  const collapse = jest.fn();
+  const setEndDate = jest.fn();
+  const setName = jest.fn();
 
   const component = shallow(
     <MilestoneForm
+      activityIndex={225}
       index={3252}
       item={{
         // Operation Torch, the Allied invasion of North Africa, is launched
         // to relieve pressure on Egypt and provide an invasion route into
         // southern Europe,
         endDate: '1942-8-16',
-        name: 'Milestone name'
+        milestone: 'Milestone name'
       }}
-      onChangeDate={onChangeDate}
-      onChangeName={onChangeName}
+      setEndDate={setEndDate}
+      setName={setName}
     />
   );
 
   beforeEach(() => {
-    onChangeDate.mockClear();
-    onChangeName.mockClear();
-    collapse.mockClear();
+    setEndDate.mockClear();
+    setName.mockClear();
   });
 
   test('renders correctly', () => {
@@ -38,14 +42,21 @@ describe('the MilestoneForm component', () => {
       component
         .find('TextField')
         .simulate('change', { target: { value: 'new name' } });
-      expect(onChangeName).toHaveBeenCalledWith(3252, 'new name');
+      expect(setName).toHaveBeenCalledWith(225, 3252, 'new name');
     });
 
     test('handles changing the milestone date', () => {
       component
         .find('DateField')
         .simulate('change', 'ignored text', 'new date');
-      expect(onChangeDate).toHaveBeenCalledWith(3252, 'new date');
+      expect(setEndDate).toHaveBeenCalledWith(225, 3252, 'new date');
+    });
+  });
+
+  it('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setEndDate: setMilestoneEndDate,
+      setName: setMilestoneName
     });
   });
 });

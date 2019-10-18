@@ -5,6 +5,8 @@ import Costs from './Costs';
 
 describe('activity costs wrapper (around personnel and non-personnel) ', () => {
   it('renders properly', () => {
-    expect(shallow(<Costs aKey="activity key" />)).toMatchSnapshot();
+    expect(
+      shallow(<Costs activityIndex="activity index" aKey="activity key" />)
+    ).toMatchSnapshot();
   });
 });

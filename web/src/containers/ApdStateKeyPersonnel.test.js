@@ -6,45 +6,40 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ApdStateKeyPersonnel';
-import {
-  addKeyPerson,
-  removeKeyPerson,
-  updateApd,
-  updateBudget
-} from '../actions/apd';
+import { addKeyPerson, removeKeyPerson } from '../actions/editApd';
 
 describe('apd state profile, Medicaid office component', () => {
   const props = {
-    addKeyPerson: jest.fn(),
+    add: jest.fn(),
     poc: [
       {
         key: 'person1',
         name: 'person name',
+        email: 'person1@theplace.gov',
         position: 'unobservable',
+        percentTime: 27,
         hasCosts: true,
         costs: { '1': 100, '2': 200 }
       },
       {
         key: 'person2',
         name: '',
+        email: 'person2@theplace.gov',
         position: '',
+        percentTime: 72,
         hasCosts: false,
         costs: { '1': 0, '2': 0 }
       }
     ],
-    removeKeyPerson: jest.fn(),
-    updateApd: jest.fn(),
-    updateBudget: jest.fn(),
+    remove: jest.fn(),
     years: ['1', '2']
   };
 
   const component = shallow(<KeyPersonnel {...props} />);
 
   beforeEach(() => {
-    props.addKeyPerson.mockClear();
-    props.removeKeyPerson.mockClear();
-    props.updateApd.mockClear();
-    props.updateBudget.mockClear();
+    props.add.mockClear();
+    props.remove.mockClear();
   });
 
   test('renders correctly', () => {
@@ -56,61 +51,32 @@ describe('apd state profile, Medicaid office component', () => {
 
     it('handles adding a new key person', () => {
       list.prop('onAddClick')();
-      expect(props.addKeyPerson).toHaveBeenCalledWith();
+      expect(props.add).toHaveBeenCalled();
     });
 
     it('handles deleting a key person', () => {
-      list.prop('onDeleteClick')('person key');
-      expect(props.removeKeyPerson).toHaveBeenCalledWith('person key');
-    });
-
-    it('handles editing a non-expense property of a key person', () => {
-      list.prop('handleChange')(3, 'field', 'new value');
-      expect(props.updateApd).toHaveBeenCalledWith({
-        keyPersonnel: { 3: { field: 'new value' } }
-      });
-      expect(props.updateBudget).not.toHaveBeenCalled();
-    });
-
-    it('handles editing an expense property of a key person', () => {
-      list.prop('handleChange')(3, 'field', 'new value', true);
-      expect(props.updateApd).toHaveBeenCalledWith({
-        keyPersonnel: { 3: { field: 'new value' } }
-      });
-      expect(props.updateBudget).toHaveBeenCalled();
-    });
-
-    it('handles changing a key person FFY cost', () => {
-      list.prop('handleYearChange')(3, 2004, 'new cost');
-      expect(props.updateApd).toHaveBeenCalledWith({
-        keyPersonnel: { 3: { costs: { 2004: 'new cost' } } }
-      });
-      expect(props.updateBudget).toHaveBeenCalled();
+      list.prop('onDeleteClick')('person1');
+      expect(props.remove).toHaveBeenCalledWith(0);
     });
   });
 
-  test('maps state to props', () => {
-    const state = {
-      apd: {
-        data: {
-          keyPersonnel: 'key people',
-          years: 'some years'
+  it('maps state to props', () => {
+    expect(
+      mapStateToProps({
+        apd: {
+          data: {
+            keyPersonnel: 'these are my people',
+            years: 'and these are my years'
+          }
         }
-      }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      poc: 'key people',
-      years: 'some years'
-    });
+      })
+    ).toEqual({ poc: 'these are my people', years: 'and these are my years' });
   });
 
-  test('maps dispatch to props', () => {
+  it('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      addKeyPerson,
-      removeKeyPerson,
-      updateApd,
-      updateBudget
+      add: addKeyPerson,
+      remove: removeKeyPerson
     });
   });
 });

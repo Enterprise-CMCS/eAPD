@@ -5,34 +5,29 @@ import { connect } from 'react-redux';
 
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 import CostAllocateFFPYearTotal from './CostAllocateFFPYearTotal';
-import { updateActivity as updateActivityAction } from '../../actions/activities';
+import {
+  setCostAllocationFFPFundingSplit,
+  setCostAllocationFFPOtherFunding
+} from '../../actions/editActivity';
 import DollarField from '../../components/DollarField';
 import Dollars from '../../components/Dollars';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFP } from '../../reducers/activities.selectors';
 
 class CostAllocateFFP extends Component {
-  handleOther = year => e => {
-    const { aKey, updateActivity } = this.props;
-    const { value } = e.target;
-    const updates = {
-      costAllocation: { [year]: { other: +value.replace(/[^\d]/g, '') } }
-    };
-
-    updateActivity(aKey, updates, true);
+  setOther = year => e => {
+    const { activityIndex, setOtherFunding } = this.props;
+    setOtherFunding(activityIndex, year, e.target.value);
   };
 
-  handleFFP = year => e => {
-    const { aKey, updateActivity } = this.props;
-    const { value } = e.target;
-    const [federal, state] = value.split('-').map(Number);
-    const updates = { costAllocation: { [year]: { ffp: { federal, state } } } };
-
-    updateActivity(aKey, updates, true);
+  setFederalStateSplit = year => e => {
+    const { activityIndex, setFundingSplit } = this.props;
+    const [federal, state] = e.target.value.split('-').map(Number);
+    setFundingSplit(activityIndex, year, federal, state);
   };
 
   render() {
-    const { byYearData, costAllocation, aKey } = this.props;
+    const { activityIndex, byYearData, costAllocation, aKey } = this.props;
 
     return (
       <Fragment>
@@ -49,7 +44,7 @@ class CostAllocateFFP extends Component {
                 labelClassName="ds-h5"
                 name={`cost-allocate-other-${year}`}
                 value={costAllocation[year].other || '0'}
-                onChange={this.handleOther(year)}
+                onChange={this.setOther(year)}
               />
 
               <p className="ds-h4 ds-u-display--block">
@@ -70,7 +65,7 @@ class CostAllocateFFP extends Component {
                   { label: '50-50', value: '50-50' }
                 ]}
                 value={ffpSelectVal}
-                onChange={this.handleFFP(year)}
+                onChange={this.setFederalStateSplit(year)}
               />
               <div className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2">
                 <p className="ds-u-margin-bottom--0">
@@ -86,12 +81,17 @@ class CostAllocateFFP extends Component {
                   <Dollars long>{allocations.state}</Dollars>
                 </p>
               </div>
-              <CostAllocateFFPQuarterly aKey={aKey} year={year} />
-              <CostAllocateFFPYearTotal aKey={aKey} />
+              <CostAllocateFFPQuarterly
+                activityIndex={activityIndex}
+                aKey={aKey}
+                year={year}
+              />
               <hr />
             </div>
           )
         )}
+        <CostAllocateFFPYearTotal aKey={aKey} />
+        <hr />
       </Fragment>
     );
   }
@@ -99,9 +99,11 @@ class CostAllocateFFP extends Component {
 
 CostAllocateFFP.propTypes = {
   aKey: PropTypes.string.isRequired,
+  activityIndex: PropTypes.number.isRequired,
   byYearData: PropTypes.array.isRequired,
   costAllocation: PropTypes.object.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  setFundingSplit: PropTypes.func.isRequired,
+  setOtherFunding: PropTypes.func.isRequired
 };
 
 export const makeMapStateToProps = () => {
@@ -111,7 +113,8 @@ export const makeMapStateToProps = () => {
 };
 
 export const mapDispatchToProps = {
-  updateActivity: updateActivityAction
+  setFundingSplit: setCostAllocationFFPFundingSplit,
+  setOtherFunding: setCostAllocationFFPOtherFunding
 };
 
 export { CostAllocateFFP as CostAllocateFFPRaw };

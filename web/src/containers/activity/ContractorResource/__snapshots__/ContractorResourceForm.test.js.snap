@@ -6,12 +6,14 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     autoFocus={true}
     label="Contractor Name"
     name="contractor-name"
+    onChange={[Function]}
     type="text"
     value="Honey Dipper Dan"
   />
   <TextArea
     label="Description of Services"
     name="contractor-description"
+    onChange={[Function]}
     rows={5}
     value="They cleaned up the latrines after the Battle of Hastings"
   />
@@ -39,7 +41,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     label="Total Contract Cost"
     name="contractor-total-cost"
     onBlur={null}
-    onChange={null}
+    onChange={[Function]}
     size="medium"
     value={12345}
   />
@@ -54,6 +56,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     <ChoiceComponent
       checked={true}
       name="apd-activity-contractor-hourly-key 1-no"
+      onChange={[Function]}
       type="radio"
       value="no"
     >
@@ -80,6 +83,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1066"
+                onChange={[Function]}
                 size="medium"
                 type="number"
                 value={10}
@@ -90,7 +94,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1066"
                 onBlur={null}
-                onChange={null}
+                onChange={[Function]}
                 size="medium"
                 value={100}
               />
@@ -111,6 +115,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1067"
+                onChange={[Function]}
                 size="medium"
                 type="number"
                 value={20}
@@ -121,7 +126,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1067"
                 onBlur={null}
-                onChange={null}
+                onChange={[Function]}
                 size="medium"
                 value={200}
               />
@@ -130,6 +135,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
         </div>
       }
       name="apd-activity-contractor-hourly-key 1-yes"
+      onChange={[Function]}
       type="radio"
       value="yes"
     >
@@ -142,7 +148,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     label="FFY 1066 Cost"
     name="contractor-cost-ffy-1066"
     onBlur={null}
-    onChange={null}
+    onChange={[Function]}
     size="medium"
     value={300}
   />
@@ -152,7 +158,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     label="FFY 1067 Cost"
     name="contractor-cost-ffy-1067"
     onBlur={null}
-    onChange={null}
+    onChange={[Function]}
     size="medium"
     value={400}
   />
@@ -165,12 +171,14 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     autoFocus={true}
     label="Contractor Name"
     name="contractor-name"
+    onChange={[Function]}
     type="text"
     value="Honey Dipper Dan"
   />
   <TextArea
     label="Description of Services"
     name="contractor-description"
+    onChange={[Function]}
     rows={5}
     value="They cleaned up the latrines after the Battle of Hastings"
   />
@@ -198,7 +206,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     label="Total Contract Cost"
     name="contractor-total-cost"
     onBlur={null}
-    onChange={null}
+    onChange={[Function]}
     size="medium"
     value={12345}
   />
@@ -213,6 +221,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     <ChoiceComponent
       checked={false}
       name="apd-activity-contractor-hourly-key 1-no"
+      onChange={[Function]}
       type="radio"
       value="no"
     >
@@ -239,6 +248,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1066"
+                onChange={[Function]}
                 size="medium"
                 type="number"
                 value={10}
@@ -249,7 +259,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1066"
                 onBlur={null}
-                onChange={null}
+                onChange={[Function]}
                 size="medium"
                 value={100}
               />
@@ -270,6 +280,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1067"
+                onChange={[Function]}
                 size="medium"
                 type="number"
                 value={20}
@@ -280,7 +291,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1067"
                 onBlur={null}
-                onChange={null}
+                onChange={[Function]}
                 size="medium"
                 value={200}
               />
@@ -289,6 +300,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
         </div>
       }
       name="apd-activity-contractor-hourly-key 1-yes"
+      onChange={[Function]}
       type="radio"
       value="yes"
     >

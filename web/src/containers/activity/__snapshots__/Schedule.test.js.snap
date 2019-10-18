@@ -56,11 +56,20 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     />
     <hr />
     <FormAndReviewList
+      activityIndex={7}
       addButtonText="Add another milestone"
       allowDeleteAll={false}
       className={null}
       collapsed={[Function]}
-      expanded={[Function]}
+      expanded={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(MilestoneForm)",
+          "type": [Function],
+        }
+      }
       list={
         Array [
           Object {
@@ -72,8 +81,6 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       }
       noDataMessage="Add milestones for this activity."
       onAddClick={[Function]}
-      onChangeDate={[Function]}
-      onChangeName={[Function]}
       onDeleteClick={[Function]}
     />
   </div>

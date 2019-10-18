@@ -14,15 +14,20 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
     source="activities.statePersonnel.instruction"
   />
   <FormAndReviewList
+    activityIndex={72}
     addButtonText="Add another personnel"
     allowDeleteAll={false}
     className={null}
     collapsed={[Function]}
-    expanded={[Function]}
-    handleEditCost={[Function]}
-    handleEditFTE={[Function]}
-    handleEditPersonDesc={[Function]}
-    handleEditPersonTitle={[Function]}
+    expanded={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(StatePersonForm)",
+        "type": [Function],
+      }
+    }
     list={
       Array [
         Object {

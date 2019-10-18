@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the ContractorResourceForm component renders correctly 1`] = `
+exports[`the activity name and funding source component renders correctly 1`] = `
 <Fragment>
   <TextField
     autoFocus="true"

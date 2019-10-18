@@ -54,7 +54,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             ?
           </legend>
           <ChoiceComponent
-            checked={false}
+            checked={true}
             name="apd-assurances-yes-explanation-procurement-42_CFR_Part_495.348"
             onChange={[Function]}
             size="small"
@@ -64,7 +64,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             Yes
           </ChoiceComponent>
           <ChoiceComponent
-            checked={true}
+            checked={false}
             checkedChildren={
               <div
                 className="ds-c-choice__checkedChild"
@@ -207,7 +207,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             ?
           </legend>
           <ChoiceComponent
-            checked={true}
+            checked={false}
             name="apd-assurances-yes-explanation-procurement-45_CFR_Part_75.326"
             onChange={[Function]}
             size="small"
@@ -217,7 +217,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             Yes
           </ChoiceComponent>
           <ChoiceComponent
-            checked={false}
+            checked={true}
             checkedChildren={
               <div
                 className="ds-c-choice__checkedChild"
@@ -472,7 +472,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             ?
           </legend>
           <ChoiceComponent
-            checked={false}
+            checked={true}
             name="apd-assurances-yes-explanation-recordsAccess-45_CFR_Part_95.615"
             onChange={[Function]}
             size="small"
@@ -482,7 +482,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             Yes
           </ChoiceComponent>
           <ChoiceComponent
-            checked={true}
+            checked={false}
             checkedChildren={
               <div
                 className="ds-c-choice__checkedChild"
@@ -686,7 +686,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             ?
           </legend>
           <ChoiceComponent
-            checked={true}
+            checked={false}
             name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300"
             onChange={[Function]}
             size="small"
@@ -696,7 +696,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             Yes
           </ChoiceComponent>
           <ChoiceComponent
-            checked={false}
+            checked={true}
             checkedChildren={
               <div
                 className="ds-c-choice__checkedChild"
@@ -798,7 +798,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             ?
           </legend>
           <ChoiceComponent
-            checked={true}
+            checked={false}
             name="apd-assurances-yes-explanation-security-45_CFR_164_Securities_and_Privacy"
             onChange={[Function]}
             size="small"
@@ -808,7 +808,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             Yes
           </ChoiceComponent>
           <ChoiceComponent
-            checked={false}
+            checked={true}
             checkedChildren={
               <div
                 className="ds-c-choice__checkedChild"

@@ -5,7 +5,7 @@ import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 
 const NonPersonnelCostReview = ({
-  item: { category, desc, years },
+  item: { category, description, years },
   expand,
   index,
   onDeleteClick
@@ -17,7 +17,7 @@ const NonPersonnelCostReview = ({
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >
-      {desc}
+      {description}
       <div className="ds-u-margin-top--2">
         {Object.entries(years).map(([year, cost]) => (
           <div key={year}>
@@ -32,7 +32,7 @@ const NonPersonnelCostReview = ({
 NonPersonnelCostReview.propTypes = {
   item: PropTypes.shape({
     category: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired,
   expand: PropTypes.func.isRequired,

@@ -1,109 +1,131 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Waypoint from './ConnectedWaypoint';
-import { updateApd as updateApdAction } from '../actions/apd';
+import {
+  addYear,
+  removeYear,
+  setNarrativeForHIE,
+  setNarrativeForHIT,
+  setNarrativeForMMIS,
+  setProgramOverview
+} from '../actions/editApd';
 import Choice from '../components/Choice';
 import RichText from '../components/RichText';
 import Instruction from '../components/Instruction';
 import { Section } from '../components/Section';
 import { t } from '../i18n';
+import { selectSummary } from '../reducers/apd.selectors';
 
-class ApdSummary extends Component {
-  handleYears = e => {
+const ApdSummary = ({
+  addApdYear,
+  narrativeHIE,
+  narrativeHIT,
+  narrativeMMIS,
+  programOverview,
+  removeApdYear,
+  setHIE,
+  setHIT,
+  setMMIS,
+  setOverview,
+  years,
+  yearOptions
+}) => {
+  const handleYears = e => {
     const { value } = e.target;
-    const { apd, updateApd } = this.props;
-    const { years } = apd;
-
-    const yearsNew = years.includes(value)
-      ? years.filter(y => y !== value)
-      : [...years, value].sort();
-
-    updateApd({ years: yearsNew });
+    if (years.includes(value)) {
+      removeApdYear(value);
+    } else {
+      addApdYear(value);
+    }
   };
 
-  syncRichText = name => html => {
-    const { updateApd } = this.props;
-    updateApd({ [name]: html });
+  const syncRichText = action => html => {
+    action(html);
   };
 
-  render() {
-    const {
-      apd: {
-        years,
-        yearOptions,
-        programOverview,
-        narrativeHIT,
-        narrativeHIE,
-        narrativeMMIS
-      }
-    } = this.props;
+  return (
+    <Waypoint id="apd-summary">
+      <Section isNumbered id="apd-summary" resource="apd">
+        <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
+        <Instruction source="apd.overview.instruction" />
 
-    return (
-      <Waypoint id="apd-summary">
-        <Section isNumbered id="apd-summary" resource="apd">
-          <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
-          <Instruction source="apd.overview.instruction" />
+        {yearOptions.map(option => (
+          <Choice
+            key={option}
+            checked={years.includes(option)}
+            name={`apd year ${option}`}
+            onChange={handleYears}
+            type="checkbox"
+            value={option}
+          >
+            {option}
+          </Choice>
+        ))}
 
-          {yearOptions.map(option => (
-            <Choice
-              key={option}
-              checked={years.includes(option)}
-              name={`apd year ${option}`}
-              onChange={this.handleYears}
-              type="checkbox"
-              value={option}
-            >
-              {option}
-            </Choice>
-          ))}
-
-          <div className="ds-u-margin-y--3">
-            <Instruction source="apd.introduction.instruction" />
-            <RichText
-              content={programOverview}
-              onSync={this.syncRichText('programOverview')}
-              editorClassName="rte-textarea-l"
-            />
-          </div>
-          <div className="ds-u-margin-bottom--3">
-            <Instruction source="apd.hit.instruction" />
-            <RichText
-              content={narrativeHIT}
-              onSync={this.syncRichText('narrativeHIT')}
-              editorClassName="rte-textarea-l"
-            />
-          </div>
-          <div className="ds-u-margin-bottom--3">
-            <Instruction source="apd.hie.instruction" />
-            <RichText
-              content={narrativeHIE}
-              onSync={this.syncRichText('narrativeHIE')}
-              editorClassName="rte-textarea-l"
-            />
-          </div>
-          <div>
-            <Instruction source="apd.mmis.instruction" />
-            <RichText
-              content={narrativeMMIS}
-              onSync={this.syncRichText('narrativeMMIS')}
-              editorClassName="rte-textarea-l"
-            />
-          </div>
-        </Section>
-      </Waypoint>
-    );
-  }
-}
-
-ApdSummary.propTypes = {
-  apd: PropTypes.object.isRequired,
-  updateApd: PropTypes.func.isRequired
+        <div className="ds-u-margin-y--3">
+          <Instruction source="apd.introduction.instruction" />
+          <RichText
+            content={programOverview}
+            onSync={syncRichText(setOverview)}
+            editorClassName="rte-textarea-l"
+          />
+        </div>
+        <div className="ds-u-margin-bottom--3">
+          <Instruction source="apd.hit.instruction" />
+          <RichText
+            content={narrativeHIT}
+            onSync={syncRichText(setHIT)}
+            editorClassName="rte-textarea-l"
+          />
+        </div>
+        <div className="ds-u-margin-bottom--3">
+          <Instruction source="apd.hie.instruction" />
+          <RichText
+            content={narrativeHIE}
+            onSync={syncRichText(setHIE)}
+            editorClassName="rte-textarea-l"
+          />
+        </div>
+        <div>
+          <Instruction source="apd.mmis.instruction" />
+          <RichText
+            content={narrativeMMIS}
+            onSync={syncRichText(setMMIS)}
+            editorClassName="rte-textarea-l"
+          />
+        </div>
+      </Section>
+    </Waypoint>
+  );
 };
 
-const mapStateToProps = ({ apd: { data } }) => ({ apd: data });
-const mapDispatchToProps = { updateApd: updateApdAction };
+ApdSummary.propTypes = {
+  addApdYear: PropTypes.func.isRequired,
+  removeApdYear: PropTypes.func.isRequired,
+  narrativeHIE: PropTypes.string.isRequired,
+  narrativeHIT: PropTypes.string.isRequired,
+  narrativeMMIS: PropTypes.string.isRequired,
+  programOverview: PropTypes.string.isRequired,
+  setHIE: PropTypes.func.isRequired,
+  setHIT: PropTypes.func.isRequired,
+  setMMIS: PropTypes.func.isRequired,
+  setOverview: PropTypes.func.isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired
+};
+
+const mapStateToProps = selectSummary;
+
+const mapDispatchToProps = {
+  addApdYear: addYear,
+  removeApdYear: removeYear,
+  setHIE: setNarrativeForHIE,
+  setHIT: setNarrativeForHIT,
+  setMMIS: setNarrativeForMMIS,
+  setOverview: setProgramOverview
+};
 
 export default connect(
   mapStateToProps,

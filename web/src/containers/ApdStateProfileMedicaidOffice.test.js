@@ -1,16 +1,26 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import {
   plain as StateProfile,
   mapStateToProps,
   mapDispatchToProps
 } from './ApdStateProfileMedicaidOffice';
-import { updateApd } from '../actions/apd';
+
+import {
+  setMedicaidDirectorEmail,
+  setMedicaidDirectorName,
+  setMedicaidDirectorPhoneNumber,
+  setMedicaidOfficeAddress1,
+  setMedicaidOfficeAddress2,
+  setMedicaidOfficeCity,
+  setMedicaidOfficeState,
+  setMedicaidOfficeZip
+} from '../actions/editApd';
 
 describe('apd state profile, Medicaid office component', () => {
   const props = {
+    defaultStateID: 'mn',
     stateProfile: {
       medicaidDirector: {
         name: 'name',
@@ -25,59 +35,115 @@ describe('apd state profile, Medicaid office component', () => {
         zip: 'zip'
       }
     },
-    updateApd: sinon.spy()
+    setEmail: jest.fn(),
+    setName: jest.fn(),
+    setPhone: jest.fn(),
+    setAddress1: jest.fn(),
+    setAddress2: jest.fn(),
+    setCity: jest.fn(),
+    setState: jest.fn(),
+    setZip: jest.fn()
   };
 
   beforeEach(() => {
-    props.updateApd.resetHistory();
+    props.setEmail.mockClear();
+    props.setName.mockClear();
+    props.setPhone.mockClear();
+    props.setAddress1.mockClear();
+    props.setAddress2.mockClear();
+    props.setCity.mockClear();
+    props.setState.mockClear();
+    props.setZip.mockClear();
   });
 
   test('renders correctly', () => {
-    const localProps = JSON.parse(JSON.stringify(props));
-
-    // all good
-    expect(
-      shallow(<StateProfile {...localProps} updateApd={props.updateApd} />)
-    ).toMatchSnapshot();
-
-    // name length validation
-    localProps.stateProfile.medicaidDirector.name = 'a';
-    expect(
-      shallow(<StateProfile {...localProps} updateApd={props.updateApd} />)
-    ).toMatchSnapshot();
+    expect(shallow(<StateProfile {...props} />)).toMatchSnapshot();
   });
 
-  test('dispatches on text change', () => {
-    shallow(<StateProfile {...props} />)
-      .find('TextField')
-      .at(0)
-      .simulate('change', { target: { value: 'new text' } });
+  [
+    {
+      testName: 'director name change',
+      fieldName: 'apd-state-profile-mdname',
+      action: props.setName
+    },
+    {
+      testName: 'director email change',
+      fieldName: 'apd-state-profile-mdemail',
+      action: props.setEmail
+    },
+    {
+      testName: 'director phone number change',
+      fieldName: 'apd-state-profile-mdphone',
+      action: props.setPhone
+    },
+    {
+      testName: 'office address line 1 change',
+      fieldName: 'apd-state-profile-addr1',
+      action: props.setAddress1
+    },
+    {
+      testName: 'office address line 2 change',
+      fieldName: 'apd-state-profile-addr2',
+      action: props.setAddress2
+    },
+    {
+      testName: 'office city change',
+      fieldName: 'apd-state-profile-city',
+      action: props.setCity
+    },
+    {
+      testName: 'office state change',
+      fieldName: 'apd-state-profile-state',
+      action: props.setState
+    },
+    {
+      testName: 'office zip change',
+      fieldName: 'apd-state-profile-zip',
+      action: props.setZip
+    }
+  ].forEach(({ testName, fieldName, action }) => {
+    test(`dispatches on ${testName}`, () => {
+      const component = shallow(<StateProfile {...props} />);
 
-    // based on knowledge that director name is first
-    expect(
-      props.updateApd.calledWith({
-        stateProfile: { medicaidDirector: { name: 'new text' } }
-      })
-    );
+      component
+        .findWhere(c => c.prop('name') === fieldName)
+        .first()
+        .simulate('change', { target: { value: 'new text' } });
+
+      expect(action).toHaveBeenCalledWith('new text');
+    });
   });
 
   test('maps state to props', () => {
-    const state = {
-      apd: {
-        data: {
-          stateProfile: 'state profile'
+    expect(
+      mapStateToProps({
+        apd: {
+          data: {
+            stateProfile: 'this is the state, from the side'
+          }
+        },
+        user: {
+          data: {
+            state: { id: 'mn' }
+          }
         }
-      },
-      user: { data: { state: { id: 'logged-in state id' } } }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      defaultStateID: 'LOGGED-IN STATE ID',
-      stateProfile: 'state profile'
+      })
+    ).toEqual({
+      defaultStateID: 'mn',
+      stateProfile: 'this is the state, from the side'
     });
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ updateApd });
+    expect(mapDispatchToProps).toEqual({
+      setEmail: setMedicaidDirectorEmail,
+      setName: setMedicaidDirectorName,
+      setPhone: setMedicaidDirectorPhoneNumber,
+      setAddress1: setMedicaidOfficeAddress1,
+      setAddress2: setMedicaidOfficeAddress2,
+      setCity: setMedicaidOfficeCity,
+      setState: setMedicaidOfficeState,
+      setZip: setMedicaidOfficeZip
+    });
   });
 });

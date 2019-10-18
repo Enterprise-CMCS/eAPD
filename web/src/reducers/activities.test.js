@@ -1,4 +1,5 @@
 import sinon from 'sinon';
+import { SELECT_APD } from '../actions/app/symbols';
 
 // The last person on the moon re-boards the Lunar Excursion Module on December
 // 13, 1972.  (As everyone knows, December is the 11th month.)  FFY 1973.  Set
@@ -29,7 +30,7 @@ describe('activities reducer', () => {
   const newContractor = keyFn => ({
     key: keyFn(),
     initialCollapsed: false,
-    desc: '',
+    description: '',
     end: '',
     name: '',
     start: '',
@@ -48,7 +49,7 @@ describe('activities reducer', () => {
   const newPerson = keyFn => ({
     key: keyFn(),
     initialCollapsed: false,
-    desc: '',
+    description: '',
     title: '',
     years: { '1973': { amt: '', perc: '' }, '1974': { amt: '', perc: '' } }
   });
@@ -57,7 +58,6 @@ describe('activities reducer', () => {
     key: keyFn(),
     initialCollapsed: false,
     description: '',
-    expanded: true,
     objective: ''
   });
 
@@ -65,7 +65,7 @@ describe('activities reducer', () => {
     key: keyFn(),
     initialCollapsed: false,
     category: 'Hardware, software, and licensing',
-    desc: '',
+    description: '',
     years: { '1973': 0, '1974': 0 }
   });
 
@@ -80,7 +80,10 @@ describe('activities reducer', () => {
     key: keyFn(),
     alternatives: '',
     contractorResources: [newContractor(keyFn)],
-    costAllocationDesc: '',
+    costAllocationNarrative: {
+      methodology: '',
+      otherSources: ''
+    },
     costAllocation: {
       '1973': { ffp: { federal: 90, state: 10 }, other: 0 },
       '1974': { ffp: { federal: 90, state: 10 }, other: 0 }
@@ -95,7 +98,6 @@ describe('activities reducer', () => {
     plannedEndDate: '',
     schedule: [newMilestone(keyFn)],
     name: '',
-    otherFundingDesc: '',
     standardsAndConditions: {
       businessResults: '',
       documentation: '',
@@ -412,148 +414,6 @@ describe('activities reducer', () => {
     });
   });
 
-  describe('it responds to APD updates', () => {
-    const type = 'UPDATE_APD';
-
-    it(`doesn't do anything if APD years aren't being updated`, () => {
-      expect(activities(stateWithOne, { type, updates: {} })).toEqual(
-        stateWithOne
-      );
-    });
-
-    it('adds year-based pieces if a new year was added', () => {
-      expect(
-        activities(stateWithOne, {
-          type,
-          updates: { years: ['1973', '1974', '1975'] }
-        })
-      ).toEqual({
-        ...stateWithOne,
-        byKey: {
-          '1': {
-            ...stateWithOne.byKey['1'],
-            contractorResources: [
-              {
-                ...stateWithOne.byKey['1'].contractorResources[0],
-                hourly: {
-                  ...stateWithOne.byKey['1'].contractorResources[0].hourly,
-                  data: {
-                    ...stateWithOne.byKey['1'].contractorResources[0].hourly
-                      .data,
-                    '1975': { hours: '', rate: '' }
-                  }
-                },
-                years: {
-                  ...stateWithOne.byKey['1'].contractorResources[0].years,
-                  '1975': 0
-                }
-              }
-            ],
-            costAllocation: {
-              ...stateWithOne.byKey['1'].costAllocation,
-              '1975': { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            expenses: [
-              {
-                ...stateWithOne.byKey['1'].expenses[0],
-                years: {
-                  ...stateWithOne.byKey['1'].expenses[0].years,
-                  '1975': 0
-                }
-              }
-            ],
-            statePersonnel: [
-              {
-                ...stateWithOne.byKey['1'].statePersonnel[0],
-                years: {
-                  ...stateWithOne.byKey['1'].statePersonnel[0].years,
-                  '1975': { amt: '', perc: '' }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              ...stateWithOne.byKey['1'].quarterlyFFP,
-              '1975': {
-                '1': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
-                },
-                '2': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
-                },
-                '3': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
-                },
-                '4': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
-                }
-              }
-            },
-            years: ['1973', '1974', '1975']
-          }
-        }
-      });
-    });
-
-    it('removes year-based pieces if a year was removed', () => {
-      expect(
-        activities(stateWithOne, { type, updates: { years: ['1973'] } })
-      ).toEqual({
-        ...stateWithOne,
-        byKey: {
-          '1': {
-            ...stateWithOne.byKey['1'],
-            contractorResources: [
-              {
-                ...stateWithOne.byKey['1'].contractorResources[0],
-                hourly: {
-                  ...stateWithOne.byKey['1'].contractorResources[0].hourly,
-                  data: {
-                    '1973': { hours: '', rate: '' }
-                  }
-                },
-                years: {
-                  '1973': 0
-                }
-              }
-            ],
-            costAllocation: {
-              '1973': { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            expenses: [
-              {
-                ...stateWithOne.byKey['1'].expenses[0],
-                years: {
-                  '1973': 0
-                }
-              }
-            ],
-            statePersonnel: [
-              {
-                ...stateWithOne.byKey['1'].statePersonnel[0],
-                years: {
-                  '1973': { amt: '', perc: '' }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              '1973': stateWithOne.byKey['1'].quarterlyFFP['1973'],
-              total: stateWithOne.byKey['1'].quarterlyFFP.total
-            },
-            years: ['1973']
-          }
-        }
-      });
-    });
-  });
-
   describe('handles receiving an APD', () => {
     it(`adds a default activity if the APD doesn't have any`, () => {
       const key = () => 'default key';
@@ -567,7 +427,7 @@ describe('activities reducer', () => {
             replaced: true
           },
           {
-            type: 'SELECT_APD',
+            type: SELECT_APD,
             data: {
               activities: []
             }
@@ -598,7 +458,7 @@ describe('activities reducer', () => {
             replaced: true
           },
           {
-            type: 'SELECT_APD',
+            type: SELECT_APD,
             apd: {
               activities: [
                 { key: 'a' },

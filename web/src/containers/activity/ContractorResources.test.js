@@ -6,16 +6,11 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ContractorResources';
-import {
-  addActivityContractor,
-  removeActivityContractor,
-  toggleActivityContractorHourly,
-  updateActivity
-} from '../../actions/activities';
+import { addContractor, removeContractor } from '../../actions/editActivity';
 
 describe('the ContractorResources component', () => {
   const props = {
-    activityKey: 'activity key',
+    activityIndex: 'activity index',
     contractors: [
       {
         id: 'contractor 1',
@@ -63,11 +58,8 @@ describe('the ContractorResources component', () => {
         }
       }
     ],
-    years: ['1066', '1067'],
     addContractor: jest.fn(),
-    removeContractor: jest.fn(),
-    toggleContractorHourly: jest.fn(),
-    updateActivity: jest.fn()
+    removeContractor: jest.fn()
   };
 
   const component = shallow(<ContractorResources {...props} />);
@@ -75,8 +67,6 @@ describe('the ContractorResources component', () => {
   beforeEach(() => {
     props.addContractor.mockClear();
     props.removeContractor.mockClear();
-    props.toggleContractorHourly.mockClear();
-    props.updateActivity.mockClear();
   });
 
   test('renders correctly', () => {
@@ -88,90 +78,12 @@ describe('the ContractorResources component', () => {
 
     it('handles adding a new contractor resource', () => {
       list.prop('onAddClick')();
-      expect(props.addContractor).toHaveBeenCalledWith('activity key');
+      expect(props.addContractor).toHaveBeenCalledWith('activity index');
     });
 
     it('handles deleting a contractor resource', () => {
-      list.prop('onDeleteClick')('contractor key');
-      expect(props.removeContractor).toHaveBeenCalledWith(
-        'activity key',
-        'contractor key'
-      );
-    });
-
-    it('handles setting contractor hourly flag', () => {
-      list.prop('handleUseHourly')('contractor key', 'flag value')();
-      expect(props.toggleContractorHourly).toHaveBeenCalledWith(
-        'activity key',
-        'contractor key',
-        'flag value'
-      );
-    });
-
-    it('handles changing non-expense contractor info', () => {
-      list.prop('handleChange')(3, 'field')({ target: { value: 'new value' } });
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        contractorResources: { 3: { field: 'new value' } }
-      });
-    });
-
-    it('handles changing contract term (dates)', () => {
-      list.prop('handleTermChange')(3)({
-        start: 'start date',
-        end: 'end date'
-      });
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        contractorResources: { 3: { start: 'start date', end: 'end date' } }
-      });
-    });
-
-    it('handles changing hourly rate', () => {
-      list.prop('handleHourlyChange')(0, 1997, 'rate')({
-        target: { value: 997 }
-      });
-      expect(props.updateActivity).toHaveBeenCalledWith(
-        'activity key',
-        {
-          contractorResources: {
-            0: {
-              years: { 1997: 99700 },
-              hourly: { data: { 1997: { rate: 997 } } }
-            }
-          }
-        },
-        true
-      );
-    });
-
-    it('handles changing total number of hours', () => {
-      list.prop('handleHourlyChange')(0, 1997, 'hours')({
-        target: { value: 15 }
-      });
-      expect(props.updateActivity).toHaveBeenCalledWith(
-        'activity key',
-        {
-          contractorResources: {
-            0: {
-              years: { 1997: 225 },
-              hourly: { data: { 1997: { hours: 15 } } }
-            }
-          }
-        },
-        true
-      );
-    });
-
-    it('handles changing contract total cost for an FFY', () => {
-      list.prop('handleYearChange')(3, 1997)({
-        target: { value: 'new value' }
-      });
-      expect(props.updateActivity).toHaveBeenCalledWith(
-        'activity key',
-        {
-          contractorResources: { 3: { years: { 1997: 'new value' } } }
-        },
-        true
-      );
+      list.prop('onDeleteClick')('key 2');
+      expect(props.removeContractor).toHaveBeenCalledWith('activity index', 1);
     });
   });
 
@@ -179,26 +91,24 @@ describe('the ContractorResources component', () => {
     expect(
       mapStateToProps(
         {
-          activities: {
-            byKey: {
-              key: { contractorResources: 'contractorz' }
+          apd: {
+            data: {
+              activities: [
+                { contractorResources: 'contractorx' },
+                { contractorResources: 'contractory' },
+                { contractorResources: 'contractorz' }
+              ]
             }
           }
         },
-        { aKey: 'key' }
+        { activityIndex: 2 }
       )
     ).toEqual({
-      activityKey: 'key',
       contractors: 'contractorz'
     });
   });
 
   test('maps dispatch actions to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      addContractor: addActivityContractor,
-      removeContractor: removeActivityContractor,
-      toggleContractorHourly: toggleActivityContractorHourly,
-      updateActivity
-    });
+    expect(mapDispatchToProps).toEqual({ addContractor, removeContractor });
   });
 });
