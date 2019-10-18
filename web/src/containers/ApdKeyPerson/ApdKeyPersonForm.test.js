@@ -73,7 +73,7 @@ describe('the ApdKeyPersonForm component', () => {
           .findWhere(c => c.prop('name') === formName)
           .simulate('change', { target: { value: 'new value' } });
 
-        expect(action).toHaveBeenCalledWith('new value', 1);
+        expect(action).toHaveBeenCalledWith(1, 'new value');
       });
     });
 
@@ -84,7 +84,7 @@ describe('the ApdKeyPersonForm component', () => {
         )
         .simulate('change');
 
-      expect(props.setHasCosts).toHaveBeenCalledWith(false, 1);
+      expect(props.setHasCosts).toHaveBeenCalledWith(1, false);
     });
 
     it('handles toggling hasCosts on', () => {
@@ -94,7 +94,7 @@ describe('the ApdKeyPersonForm component', () => {
         )
         .simulate('change');
 
-      expect(props.setHasCosts).toHaveBeenCalledWith(true, 1);
+      expect(props.setHasCosts).toHaveBeenCalledWith(1, true);
     });
 
     it('handles changing cost for FFY', () => {
@@ -111,7 +111,7 @@ describe('the ApdKeyPersonForm component', () => {
         .first()
         .simulate('change', { target: { value: 9000 } });
 
-      expect(props.setCost(9000, 1, 1992));
+      expect(props.setCost(1, 1992, 9000));
     });
   });
 

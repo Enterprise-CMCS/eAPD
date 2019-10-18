@@ -33,10 +33,10 @@ export const removeKeyPerson = (
 
 /**
  * Set a key person's name
- * @param {String} name Key person's new name
  * @param {Number} index Index of the key person to update
+ * @param {String} name Key person's new name
  */
-export const setKeyPersonName = (name, index) => ({
+export const setKeyPersonName = (index, name) => ({
   type: EDIT_APD,
   path: `/keyPersonnel/${index}/name`,
   value: name
@@ -44,10 +44,10 @@ export const setKeyPersonName = (name, index) => ({
 
 /**
  * Set a key person's email
- * @param {String} email Key person's new email
  * @param {Number} index Index of the key person to update
+ * @param {String} email Key person's new email
  */
-export const setKeyPersonEmail = (email, index) => ({
+export const setKeyPersonEmail = (index, email) => ({
   type: EDIT_APD,
   path: `/keyPersonnel/${index}/email`,
   value: email
@@ -55,10 +55,10 @@ export const setKeyPersonEmail = (email, index) => ({
 
 /**
  * Set a key peron's role
- * @param {String} role Key person's new role
  * @param {Number} index Index of the key person to update
+ * @param {String} role Key person's new role
  */
-export const setKeyPersonRole = (role, index) => ({
+export const setKeyPersonRole = (index, role) => ({
   type: EDIT_APD,
   path: `/keyPersonnel/${index}/position`,
   value: role
@@ -66,10 +66,10 @@ export const setKeyPersonRole = (role, index) => ({
 
 /**
  * Set a key person's time committment
- * @param {Number} percent Percent of the key person's time to be dedicated to the APD
  * @param {Number} index Index of the key person to update
+ * @param {Number} percent Percent of the key person's time to be dedicated to the APD
  */
-export const setKeyPersonPercentTime = (percent, index) => ({
+export const setKeyPersonPercentTime = (index, percent) => ({
   type: EDIT_APD,
   path: `/keyPersonnel/${index}/percentTime`,
   value: percent
@@ -77,10 +77,10 @@ export const setKeyPersonPercentTime = (percent, index) => ({
 
 /**
  * Set whether a key person has costs for the APD
- * @param {Boolean} hasCosts Whether the key person has costs that need to be included in the APD
  * @param {Number} index Index of the key person to update
+ * @param {Boolean} hasCosts Whether the key person has costs that need to be included in the APD
  */
-export const setKeyPersonHasCosts = (hasCosts, index) => dispatch => {
+export const setKeyPersonHasCosts = (index, hasCosts) => dispatch => {
   dispatch({
     type: EDIT_APD,
     path: `/keyPersonnel/${index}/hasCosts`,
@@ -91,11 +91,11 @@ export const setKeyPersonHasCosts = (hasCosts, index) => dispatch => {
 
 /**
  * Set a key person's costs for a federal fiscal year
- * @param {Number} cost The key person's costs to be included in the APD
  * @param {Number} index Index of the key person to update
  * @param {String} year Year the cost applies to, four-digit
+ * @param {Number} cost The key person's costs to be included in the APD
  */
-export const setKeyPersonCost = (cost, index, year) => dispatch => {
+export const setKeyPersonCost = (index, year, cost) => dispatch => {
   dispatch({
     type: EDIT_APD,
     path: `/keyPersonnel/${index}/costs/${year}`,

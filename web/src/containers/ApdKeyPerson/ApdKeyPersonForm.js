@@ -32,19 +32,20 @@ const PersonForm = ({
   years
 }) => {
   const handleChange = action => ({ target: { value } }) => {
-    action(value, index);
+    action(index, value);
   };
 
   const setPersonHasCosts = newHasCosts => () => {
-    setHasCosts(newHasCosts, index);
+    setHasCosts(index, newHasCosts);
   };
 
   const setCostForYear = year => ({ target: { value } }) => {
-    setCost(value, index, year);
+    setCost(index, year, value);
   };
 
   const primary = index === 0;
 
+  console.log(Object.values(costs));
   const totalCost = Object.values(costs).reduce(
     (sum, value) => sum + +value,
     0

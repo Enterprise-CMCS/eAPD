@@ -59,7 +59,7 @@ describe('APD edit actions for APD key personnel', () => {
   });
 
   it('dispatches an action for setting a key person name', () => {
-    expect(setKeyPersonName('person name', 1)).toEqual({
+    expect(setKeyPersonName(1, 'person name')).toEqual({
       type: EDIT_APD,
       path: '/keyPersonnel/1/name',
       value: 'person name'
@@ -67,7 +67,7 @@ describe('APD edit actions for APD key personnel', () => {
   });
 
   it('dispatches an action for setting a key person email', () => {
-    expect(setKeyPersonEmail('person email', 3)).toEqual({
+    expect(setKeyPersonEmail(3, 'person email')).toEqual({
       type: EDIT_APD,
       path: '/keyPersonnel/3/email',
       value: 'person email'
@@ -75,7 +75,7 @@ describe('APD edit actions for APD key personnel', () => {
   });
 
   it('dispatches an action for setting a key person role', () => {
-    expect(setKeyPersonRole('person role', 5)).toEqual({
+    expect(setKeyPersonRole(5, 'person role')).toEqual({
       type: EDIT_APD,
       path: '/keyPersonnel/5/position',
       value: 'person role'
@@ -83,7 +83,7 @@ describe('APD edit actions for APD key personnel', () => {
   });
 
   it('dispatches an action for setting a key person percent time', () => {
-    expect(setKeyPersonPercentTime('percent time', 7)).toEqual({
+    expect(setKeyPersonPercentTime(7, 'percent time')).toEqual({
       type: EDIT_APD,
       path: '/keyPersonnel/7/percentTime',
       value: 'percent time'
@@ -92,7 +92,7 @@ describe('APD edit actions for APD key personnel', () => {
 
   it('dispatches an action for setting whether a key person has costs', () => {
     const store = mockStore('state');
-    store.dispatch(setKeyPersonHasCosts(true, 11));
+    store.dispatch(setKeyPersonHasCosts(11, true));
 
     expect(store.getActions()).toEqual([
       {
@@ -109,7 +109,7 @@ describe('APD edit actions for APD key personnel', () => {
 
   it('dispatches an action for setting a key person cost for a year', () => {
     const store = mockStore('another state');
-    store.dispatch(setKeyPersonCost(3572, 13, 1973));
+    store.dispatch(setKeyPersonCost(13, 1973, 3572));
 
     expect(store.getActions()).toEqual([
       {
