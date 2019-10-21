@@ -76,8 +76,6 @@ const CostAllocateFFPQuarterly = ({
         </tr>
       </thead>
       <tbody>
-        {/* {['state', 'contractors'].map(name => ( */}
-
         <tr>
           <th rowSpan="2" scope="row">
             {t('activities.costAllocate.quarterly.expenseNames.state')}

@@ -188,7 +188,7 @@ exports[`card form wrapper renders a legend if provided 1`] = `
             className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
           >
             <legend
-              className="sr-only"
+              className="ds-u-visibility--screen-reader"
             >
               of zelda
             </legend>
