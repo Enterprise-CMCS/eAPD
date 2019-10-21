@@ -35,6 +35,7 @@ const login = async (
   if (response.statusCode === 200) {
     return cookies;
   }
+  throw new Error('Failed to login');
 };
 
 const unauthenticatedTest = (method, url) =>
