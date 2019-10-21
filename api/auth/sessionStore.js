@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const logger = require('../logger')('session management');
-const { raw: knex } = require('../db');
+const { knex } = require('../db');
 
 const sessionLifetimeMilliseconds =
   +process.env.SESSION_LIFETIME_MINUTES * 60 * 1000;

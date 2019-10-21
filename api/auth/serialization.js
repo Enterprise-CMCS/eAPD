@@ -1,5 +1,5 @@
 const logger = require('../logger')('user serialization');
-const defaultUserModel = require('../db').models.user;
+const { knex } = require('../db');
 
 const { addUserSession, getUserIDFromSession } = require('./sessionStore');
 
@@ -21,31 +21,44 @@ module.exports.serializeUser = async (
 module.exports.deserializeUser = async (
   sessionID,
   done,
-  {
-    sessionStore: { getUserID = getUserIDFromSession } = {},
-    userModel = defaultUserModel
-  } = {}
+  { db = knex, sessionStore: { getUserID = getUserIDFromSession } = {} } = {}
 ) => {
   try {
     logger.silly(`attempting to deserialize a user, session = ${sessionID}`);
 
     const userID = await getUserID(sessionID);
     if (userID) {
-      const user = await userModel
-        .where({ id: userID })
-        .fetch({ withRelated: ['state'] });
+      const user = await knex('users')
+        .where('id', userID)
+        .first();
+
+      const authRole = await db('auth_roles')
+        .where('name', user.auth_role)
+        .select('id')
+        .first();
+
+      const authActivityIDs = authRole
+        ? await db('auth_role_activity_mapping')
+            .where('role_id', authRole.id)
+            .select('activity_id')
+        : [];
+
+      const authActivityNames = await db('auth_activities')
+        // eslint-disable-next-line camelcase
+        .whereIn('id', authActivityIDs.map(({ activity_id }) => activity_id))
+        .select('name');
+
       if (user) {
         logger.silly(`successfully deserialized the user`);
         done(null, {
-          username: user.get('email'),
-          id: user.get('id'),
-          name: user.get('name'),
-          phone: user.get('phone'),
-          position: user.get('position'),
-          role: user.get('auth_role'),
-          state: user.get('state_id'),
-          activities: await user.activities(),
-          model: user
+          username: user.email,
+          id: user.id,
+          name: user.name,
+          phone: user.phone,
+          position: user.position,
+          role: user.auth_role,
+          state: user.state_id,
+          activities: authActivityNames.map(({ name }) => name)
         });
       } else {
         logger.verbose(`could not deserialize user`, userID);

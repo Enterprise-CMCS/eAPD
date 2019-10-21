@@ -1,9 +1,15 @@
+const defaultZxcvbn = require('zxcvbn');
+const validate = require('./validate');
+const defaultHash = require('../../auth/passwordHash');
 const logger = require('../../logger')('users route post');
-const defaultUserModel = require('../../db').models.user;
+const { knex } = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = (app, UserModel = defaultUserModel) => {
+module.exports = (
+  app,
+  { db = knex, hash = defaultHash, zxcvbn = defaultZxcvbn } = {}
+) => {
   logger.silly('setting up POST /users route');
   app.post('/users', can('add-users'), async (req, res) => {
     logger.silly(req, 'handling POST /users route');
@@ -19,25 +25,44 @@ module.exports = (app, UserModel = defaultUserModel) => {
         audit.set('email', req.body.email);
         audit.set('password', '<new password>');
 
-        // If these values are not passed in, don't set them at all, even
-        // to undefined.  Undefined will make the data model explode.
-        if (req.body.name) {
-          audit.set('name', req.body.name);
-          posted.name = req.body.name;
-        }
-        if (req.body.role) {
-          audit.set('auth_role', req.body.role);
-          posted.auth_role = req.body.role;
-        }
+        ['name', 'position', 'phone'].forEach(field => {
+          if (req.body[field]) {
+            audit.set(field, req.body[field]);
+            posted[field] = req.body[field];
+          }
+        });
         if (req.body.state) {
-          audit.set('state_id', req.body.state);
           posted.state_id = req.body.state;
         }
-
-        const user = UserModel.forge(posted);
+        if (req.body.role) {
+          posted.auth_role = req.body.role;
+        }
 
         try {
-          await user.validate();
+          // const otherUsersWithThisEmail = await db('users')
+          //   .whereRaw('LOWER(email) = ?', [posted.email.toLowerCase()])
+          //   .select();
+
+          // if (otherUsersWithThisEmail.length) {
+          //   logger.verbose(`user with email already exists [${posted.email}]`);
+          //   throw new Error('email-exists');
+          // }
+
+          // logger.silly('new email is unique!');
+
+          // const passwordScore = zxcvbn(posted.password, [
+          //   posted.email,
+          //   posted.name || ''
+          // ]);
+          // if (passwordScore.score < 3) {
+          //   logger.verbose(
+          //     `password is too weak: score ${passwordScore.score}`
+          //   );
+          //   throw new Error('weak-password');
+          // }
+
+          // logger.silly('password is sufficiently complex; hashing it');
+          await validate(posted);
         } catch (e) {
           logger.verbose('validation fail');
           return res
@@ -46,9 +71,13 @@ module.exports = (app, UserModel = defaultUserModel) => {
             .end();
         }
 
-        await user.save();
+        posted.password = hash.hashSync(posted.password);
 
-        audit.set('id', user.get('id'));
+        const userID = await db('users')
+          .insert(posted)
+          .returning('id');
+
+        audit.set('id', userID[0]);
         audit.log();
 
         logger.silly(req, 'all done');

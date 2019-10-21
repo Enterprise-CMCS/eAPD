@@ -1,18 +1,11 @@
+const validate = require('./validate');
+const defaultHash = require('../../auth/passwordHash');
 const logger = require('../../logger')('users route post');
-const defaultRoleModel = require('../../db').models.role;
-const defaultStateModel = require('../../db').models.state;
-const defaultUserModel = require('../../db').models.user;
+const { knex } = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = (
-  app,
-  {
-    RoleModel = defaultRoleModel,
-    StateModel = defaultStateModel,
-    UserModel = defaultUserModel
-  } = {}
-) => {
+module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
   logger.silly('setting up PUT /users/:id route');
   app.put('/users/:id', can('add-users'), async (req, res) => {
     const audit = auditor(auditor.actions.MODIFY_ACCOUNT, req);
@@ -34,7 +27,9 @@ module.exports = (
         delete req.body.role;
       }
 
-      const targetUser = await UserModel.where({ id: targetID }).fetch();
+      const targetUser = await db('users')
+        .where('id', targetID)
+        .first();
       if (!targetUser) {
         logger.info(
           req,
@@ -43,75 +38,38 @@ module.exports = (
         return res.status(404).end();
       }
       audit.target({
-        id: targetUser.get('id'),
-        emmail: targetUser.get('email')
+        id: targetUser.id,
+        emmail: targetUser.email
       });
-      logger.verbose(
-        req,
-        `request to modify user [${targetUser.get('email')}]`
-      );
+      logger.verbose(req, `request to modify user [${targetUser.email}]`);
 
-      // These fields aren't related to other tables, so we can update them
-      // all willy-nilly.
+      const update = {};
+
       ['email', 'name', 'password', 'position', 'phone'].forEach(field => {
         if (req.body[field]) {
           audit.set(field, req.body[field]);
-          targetUser.set(field, req.body[field]);
+          update[field] = req.body[field];
         }
       });
-
-      // For state and role, however, they're related to other tables, so we
-      // need to make sure the provided values are valid.
       if (req.body.state) {
-        const validStates = await StateModel.fetchAll({
-          columns: ['id']
-        });
-
-        const validStateIDs = validStates.map(state => state.get('id'));
-
-        if (validStateIDs.some(role => role === req.body.state)) {
-          audit.set('state_id', req.body.state);
-          targetUser.set('state_id', req.body.state);
-        } else {
-          logger.verbose(`state [${req.body.state}] is invalid`);
-          return res
-            .status(400)
-            .send({ error: 'edit-account.invalid-state' })
-            .end();
-        }
+        update.state_id = req.body.state;
       }
-
       if (req.body.role) {
-        const validRoles = await RoleModel.fetchAll({
-          columns: ['name']
-        });
-
-        const validRoleNames = validRoles.map(role => role.get('name'));
-
-        if (validRoleNames.some(role => role === req.body.role)) {
-          audit.set('auth_role', req.body.role);
-          targetUser.set('auth_role', req.body.role);
-        } else {
-          logger.verbose(`role [${req.body.role}] is invalid`);
-          return res
-            .status(400)
-            .send({ error: 'edit-account.invalid-role' })
-            .end();
-        }
+        update.auth_role = req.body.role;
       }
 
-      // And provide a way to unset the user's state or role.
+      // Provide a way to unset the user's state or role.
       if (req.body.state === '') {
         audit.set('state_id', null);
-        targetUser.set('state_id', null);
+        update.state_id = null;
       }
       if (req.body.role === '') {
         audit.set('auth_role', null);
-        targetUser.set('auth_role', null);
+        update.auth_role = null;
       }
 
       try {
-        await targetUser.validate();
+        await validate(update);
       } catch (e) {
         return res
           .status(400)
@@ -119,7 +77,19 @@ module.exports = (
           .end();
       }
 
-      await targetUser.save();
+      if (update.password) {
+        update.password = hash.hashSync(update.password);
+      }
+      if (update.phone) {
+        update.phone = update.phone.replace(/[^\d]/g, '');
+      }
+
+      if (Object.keys(update).length) {
+        await db('users')
+          .where('id', targetID)
+          .update(update);
+      }
+
       audit.log();
       logger.silly(req, 'all done');
       return res.status(204).end();

@@ -3,7 +3,7 @@ const { apply_patch: applyPatch } = require('jsonpatch');
 const jsonpointer = require('jsonpointer');
 
 const logger = require('../../logger')('apds route put');
-const { raw: knex } = require('../../db');
+const { knex } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
 const apdSchema = require('../../schemas/apd.json');
 
@@ -90,7 +90,9 @@ module.exports = (
 
         const updateTime = new Date().toISOString();
 
-        await db('apds')
+        const transaction = await db.transaction();
+
+        await transaction('apds')
           .where('id', req.params.id)
           .update({
             document: updatedDocument,
@@ -104,10 +106,12 @@ module.exports = (
         // If the state profile was changed for the APD, also persist it to
         // the state, so future APDs will get it for free.
         if (stateProfileChanged) {
-          await db('states')
+          await transaction('states')
             .where('id', stateID)
             .update({ medicaid_office: updatedDocument.stateProfile });
         }
+
+        await transaction.commit();
 
         return res.send({
           ...updatedDocument,

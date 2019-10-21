@@ -1,7 +1,7 @@
 const logger = require('../logger')('apd middleware');
 const { cache } = require('./cache');
 
-const { raw: knex } = require('../db');
+const { knex } = require('../db');
 
 /**
  * @description Middleware to load an APD into the request "meta" property

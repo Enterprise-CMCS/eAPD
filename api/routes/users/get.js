@@ -1,36 +1,47 @@
 const logger = require('../../logger')('users route get');
-const defaultUserModel = require('../../db').models.user;
+const { knex } = require('../../db');
 const can = require('../../middleware').can;
 
-const allUsersHandler = async (req, res, UserModel) => {
+const sendableUser = user => ({
+  id: user.id,
+  email: user.email,
+  name: user.name,
+  position: user.position,
+  phone: user.phone,
+  state: user.state_id,
+  role: user.auth_role
+});
+
+const allUsersHandler = async (req, res, db) => {
   logger.silly(req, 'handling GET /users route');
   try {
-    const users = await UserModel.fetchAll();
+    const users = (await db('users').select()).map(sendableUser);
     logger.silly(
       req,
       'sending users',
-      users
-        .toJSON()
-        .map(
-          ({ id, email, name, state, role }) =>
-            `id: ${id}, email: ${email}, name: ${name}, state: ${state}, auth role: ${role}`
-        )
+      users.map(
+        ({ id, email, name, state, role }) =>
+          `id: ${id}, email: ${email}, name: ${name}, state: ${state}, auth role: ${role}`
+      )
     );
-    res.send(users.toJSON());
+    res.send(users);
   } catch (e) {
     logger.error(req, e);
     res.status(500).end();
   }
 };
 
-const oneUserHandler = async (req, res, UserModel) => {
+const oneUserHandler = async (req, res, db) => {
   logger.silly(req, 'handling GET /users/:id route');
   logger.silly(req, 'got a request for a single user', req.params.id);
   try {
-    const user = await UserModel.where({ id: Number(req.params.id) }).fetch();
+    const user = await db('users')
+      .where({ id: Number(req.params.id) })
+      .first();
+
     if (user) {
-      logger.silly(req, 'sending user', user.toJSON());
-      res.send(user.toJSON());
+      logger.silly(req, 'sending user', sendableUser(user));
+      res.send(sendableUser(user));
     } else {
       logger.verbose(req, `no user found [${req.params.id}]`);
       res.status(404).end();
@@ -41,13 +52,13 @@ const oneUserHandler = async (req, res, UserModel) => {
   }
 };
 
-module.exports = (app, UserModel = defaultUserModel) => {
+module.exports = (app, { db = knex } = {}) => {
   logger.silly('setting up GET /users route');
   app.get('/users', can('view-users'), (req, res) =>
-    allUsersHandler(req, res, UserModel)
+    allUsersHandler(req, res, db)
   );
   logger.silly('setting up GET /users/:id route');
   app.get('/users/:id', can('view-users'), (req, res) =>
-    oneUserHandler(req, res, UserModel)
+    oneUserHandler(req, res, db)
   );
 };

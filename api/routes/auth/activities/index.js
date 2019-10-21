@@ -1,21 +1,20 @@
 const logger = require('../../../logger')('auth activities route index');
-const defaultActivityModel = require('../../../db').models.activity;
+const { knex } = require('../../../db');
 const { can } = require('../../../middleware');
 
-module.exports = (app, ActivityModel = defaultActivityModel) => {
+module.exports = (app, { db = knex } = {}) => {
   logger.silly('setting up GET /auth/activities route');
   app.get('/auth/activities', can('view-roles'), async (req, res) => {
     logger.silly(req, 'handling GET /auth/activities');
     try {
-      const activities = await ActivityModel.fetchAll();
+      const activities = await db('auth_activities').select();
       logger.silly(
         req,
         `got all the activities: ${activities
-          .toJSON()
-          .reduce((acc, { name }) => [...acc, name], [])
+          .map(({ name }) => name)
           .join(', ')}`
       );
-      res.send(activities.toJSON());
+      res.send(activities);
     } catch (e) {
       logger.error(req, e);
       res.status(500).end();
