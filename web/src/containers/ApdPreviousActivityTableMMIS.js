@@ -131,7 +131,7 @@ const ApdPreviousActivityTableMMIS = ({
                       fieldClassName="budget-table--input__number"
                       label={`total approved funding for MMIS at the ${level}/${100 -
                         level} level for FFY ${year}, state plus federal`}
-                      labelClassName="sr-only"
+                      labelClassName="ds-u-visibility--screen-reader"
                       name={`approved-total-mmis${level}-${year}`}
                       value={expenses.totalApproved}
                       onChange={getApprovedHandler(year, level)}
@@ -153,7 +153,7 @@ const ApdPreviousActivityTableMMIS = ({
                       fieldClassName="budget-table--input__number"
                       label={`actual federal share for MMIS at the ${level}/${100 -
                         level} level for FFY ${year}`}
-                      labelClassName="sr-only"
+                      labelClassName="ds-u-visibility--screen-reader"
                       name={`actual-federal-mmis${level}-${year}`}
                       value={expenses.federalActual}
                       onChange={getActualsHandler(year, level)}
