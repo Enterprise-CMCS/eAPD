@@ -1,4 +1,3 @@
-const defaultZxcvbn = require('zxcvbn');
 const validate = require('./validate');
 const defaultHash = require('../../auth/passwordHash');
 const logger = require('../../logger')('users route post');
@@ -6,10 +5,7 @@ const { knex } = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = (
-  app,
-  { db = knex, hash = defaultHash, zxcvbn = defaultZxcvbn } = {}
-) => {
+module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
   logger.silly('setting up POST /users route');
   app.post('/users', can('add-users'), async (req, res) => {
     logger.silly(req, 'handling POST /users route');
@@ -39,29 +35,6 @@ module.exports = (
         }
 
         try {
-          // const otherUsersWithThisEmail = await db('users')
-          //   .whereRaw('LOWER(email) = ?', [posted.email.toLowerCase()])
-          //   .select();
-
-          // if (otherUsersWithThisEmail.length) {
-          //   logger.verbose(`user with email already exists [${posted.email}]`);
-          //   throw new Error('email-exists');
-          // }
-
-          // logger.silly('new email is unique!');
-
-          // const passwordScore = zxcvbn(posted.password, [
-          //   posted.email,
-          //   posted.name || ''
-          // ]);
-          // if (passwordScore.score < 3) {
-          //   logger.verbose(
-          //     `password is too weak: score ${passwordScore.score}`
-          //   );
-          //   throw new Error('weak-password');
-          // }
-
-          // logger.silly('password is sufficiently complex; hashing it');
           await validate(posted);
         } catch (e) {
           logger.verbose('validation fail');
