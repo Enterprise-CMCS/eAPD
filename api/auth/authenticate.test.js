@@ -5,26 +5,31 @@ const lib = require('./authenticate.js');
 
 const sandbox = sinon.createSandbox();
 
-const userModel = {
-  query: sandbox.stub(),
-  fetch: sandbox.stub()
+const db = sandbox.stub();
+const knexStubs = {
+  first: sandbox.stub(),
+  select: sandbox.stub(),
+  update: sandbox.stub(),
+  where: sandbox.stub(),
+  whereIn: sandbox.stub(),
+  whereRaw: sandbox.stub()
 };
-const get = sandbox.stub();
-const save = sandbox.stub();
-const set = sandbox.spy();
 
 const hash = {
   compare: sandbox.stub()
 };
 
-const auth = lib(userModel, hash);
+const auth = lib({ db, hash });
 
 tap.test('local authentication', async authTest => {
   const doneCallback = sandbox.spy();
   authTest.beforeEach(done => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
-    userModel.query.returns({ query: userModel.query, fetch: userModel.fetch });
+
+    db.returns(knexStubs);
+    Object.values(knexStubs).forEach(stub => stub.returns(knexStubs));
+
     done();
   });
 
@@ -63,10 +68,7 @@ tap.test('local authentication', async authTest => {
     nonceTests.test('invalid jwt', async test => {
       await auth('', '', doneCallback);
 
-      test.ok(
-        userModel.fetch.notCalled,
-        'never get as far as querying the database'
-      );
+      test.ok(db.notCalled, 'database is never called');
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
     });
 
@@ -78,10 +80,7 @@ tap.test('local authentication', async authTest => {
 
       await auth(badNonce, '', doneCallback);
 
-      test.ok(
-        userModel.fetch.notCalled,
-        'never get as far as querying the database'
-      );
+      test.ok(db.notCalled, 'database is never called');
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
     });
 
@@ -95,10 +94,7 @@ tap.test('local authentication', async authTest => {
         doneCallback
       );
 
-      test.ok(
-        userModel.fetch.notCalled,
-        'never get as far as querying the database'
-      );
+      test.ok(db.notCalled, 'database is never called');
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
     });
 
@@ -109,10 +105,7 @@ tap.test('local authentication', async authTest => {
 
       await auth(nonce, '', doneCallback);
 
-      test.ok(
-        userModel.fetch.notCalled,
-        'never get as far as querying the database'
-      );
+      test.ok(db.notCalled, 'database is never called');
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
 
       clock.restore();
@@ -120,21 +113,9 @@ tap.test('local authentication', async authTest => {
   });
 
   authTest.test('with a database error', async errorTest => {
-    userModel.fetch.rejects();
+    knexStubs.first.rejects();
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
-
-    errorTest.ok(
-      userModel.query.calledOnce,
-      'one set of QUERY clauses is added'
-    );
-    errorTest.ok(
-      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
-      'it is the QUERY we expect'
-    );
-    errorTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
-
-    errorTest.ok(hash.compare.notCalled, 'does not compare passwords');
 
     errorTest.equal(doneCallback.callCount, 1, 'called done callback once');
     errorTest.ok(
@@ -144,19 +125,9 @@ tap.test('local authentication', async authTest => {
   });
 
   authTest.test('with no valid user', async noUserTest => {
-    userModel.fetch.resolves();
+    knexStubs.first.resolves();
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
-
-    noUserTest.ok(
-      userModel.query.calledOnce,
-      'one set of QUERY clauses is added'
-    );
-    noUserTest.ok(
-      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
-      'it is the QUERY we expect'
-    );
-    noUserTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
     noUserTest.ok(hash.compare.notCalled, 'does not compare password');
 
@@ -165,71 +136,48 @@ tap.test('local authentication', async authTest => {
   });
 
   authTest.test('with locked account', async invalidTest => {
-    get.withArgs('locked_until').returns(Date.now() + 5000);
-    userModel.fetch.resolves({ get, save, set });
+    knexStubs.first.resolves({ locked_until: Date.now() + 5000 });
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
 
-    invalidTest.ok(
-      userModel.query.calledOnce,
-      'one set of QUERY clauses is added'
-    );
-    invalidTest.ok(
-      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
-      'it is the QUERY we expect'
-    );
-    invalidTest.ok(
-      userModel.fetch.calledOnce,
-      'the query is executed one time'
-    );
-
-    invalidTest.ok(set.notCalled, 'user data model is not updated');
     invalidTest.ok(hash.compare.notCalled, 'password is never checked');
     invalidTest.equal(doneCallback.callCount, 1, 'called done callback once');
     invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
   });
 
-  authTest.test('with locked account', async invalidTest => {
-    get.withArgs('email').returns('hello@world');
-    get.withArgs('password').returns('test-password');
-    get.withArgs('id').returns(57);
-    get.withArgs('locked_until').returns(500);
-    userModel.fetch.resolves({ get, save, set });
+  authTest.test(
+    'with locked account, but lock is expired',
+    async invalidTest => {
+      knexStubs.first.resolves({
+        email: 'hello@world',
+        password: 'test-password',
+        id: 57,
+        locked_until: 500
+      });
+      knexStubs.update.resolves();
 
-    await auth(lib.getNonce('user'), 'password', doneCallback);
+      await auth(lib.getNonce('user'), 'password', doneCallback);
 
-    invalidTest.ok(
-      userModel.query.calledOnce,
-      'one set of QUERY clauses is added'
-    );
-    invalidTest.ok(
-      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
-      'it is the QUERY we expect'
-    );
-    invalidTest.ok(
-      userModel.fetch.calledOnce,
-      'the query is executed one time'
-    );
+      invalidTest.ok(
+        knexStubs.update.calledWith({
+          failed_logons: null,
+          locked_until: null
+        }),
+        'lock is cleared'
+      );
 
-    invalidTest.ok(
-      set.calledWith('failed_logons', null),
-      'failed logon data is reset'
-    );
-    invalidTest.ok(
-      set.calledWith('locked_until', null),
-      'account lock is reset'
-    );
-    invalidTest.ok(save.calledAfter(set), 'data model changes are saved');
-    invalidTest.equal(doneCallback.callCount, 1, 'called done callback once');
-    invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
-  });
+      invalidTest.equal(doneCallback.callCount, 1, 'called done callback once');
+      invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
+    }
+  );
 
   authTest.test('with invalid password', async invalidTest => {
-    get.withArgs('email').returns('hello@world');
-    get.withArgs('password').returns('test-password');
-    get.withArgs('id').returns(57);
-    get.withArgs('locked_until').returns(0);
-    userModel.fetch.resolves({ get, save, set });
+    knexStubs.first.resolves({
+      email: 'hello@world',
+      password: 'test-password',
+      id: 57,
+      locked_until: 0
+    });
     hash.compare.resolves(false);
 
     const clock = sinon.useFakeTimers();
@@ -239,19 +187,6 @@ tap.test('local authentication', async authTest => {
 
     clock.restore();
 
-    invalidTest.ok(
-      userModel.query.calledOnce,
-      'one set of QUERY clauses is added'
-    );
-    invalidTest.ok(
-      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
-      'it is the QUERY we expect'
-    );
-    invalidTest.ok(
-      userModel.fetch.calledOnce,
-      'the query is executed one time'
-    );
-
     invalidTest.ok(hash.compare.calledOnce, 'password is compared one time');
     invalidTest.ok(
       hash.compare.calledWith('password', 'test-password'),
@@ -259,10 +194,9 @@ tap.test('local authentication', async authTest => {
     );
 
     invalidTest.ok(
-      set.calledWith('failed_logons', [54321012345]),
+      knexStubs.update.calledWith({ failed_logons: [54321012345] }),
       'saves the failed logon'
     );
-    invalidTest.ok(save.calledAfter(set), 'data model changes are saved');
 
     invalidTest.equal(doneCallback.callCount, 1, 'called done callback once');
     invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
@@ -271,14 +205,13 @@ tap.test('local authentication', async authTest => {
   authTest.test(
     'with invalid password and several previous failed attempts',
     async invalidTest => {
-      get.withArgs('email').returns('hello@world');
-      get.withArgs('password').returns('test-password');
-      get.withArgs('id').returns(57);
-      get
-        .withArgs('failed_logons')
-        .returns([54321012341, 54321012342, 54321012343, 54321012344]);
-      get.withArgs('locked_until').returns(0);
-      userModel.fetch.resolves({ get, save, set });
+      knexStubs.first.resolves({
+        email: 'hello@world',
+        password: 'test-password',
+        id: 57,
+        locked_until: 0,
+        failed_logons: [54321012341, 54321012342, 54321012343, 54321012344]
+      });
       hash.compare.resolves(false);
 
       process.env.AUTH_LOCK_FAILED_ATTEMPTS_COUNT = 5;
@@ -292,39 +225,18 @@ tap.test('local authentication', async authTest => {
       clock.restore();
 
       invalidTest.ok(
-        userModel.query.calledOnce,
-        'one set of QUERY clauses is added'
-      );
-      invalidTest.ok(
-        userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
-        'it is the QUERY we expect'
-      );
-      invalidTest.ok(
-        userModel.fetch.calledOnce,
-        'the query is executed one time'
-      );
-
-      invalidTest.ok(hash.compare.calledOnce, 'password is compared one time');
-      invalidTest.ok(
-        hash.compare.calledWith('password', 'test-password'),
-        'password is compared to database value'
-      );
-
-      invalidTest.ok(
-        set.calledWith('failed_logons', [
-          54321012341,
-          54321012342,
-          54321012343,
-          54321012344,
-          54321012345
-        ]),
-        'saves the failed logon'
-      );
-      invalidTest.ok(
-        set.calledWith('locked_until', 54321012345 + 1800000),
+        knexStubs.update.calledWith({
+          locked_until: 54321012345 + 1800000,
+          failed_logons: [
+            54321012341,
+            54321012342,
+            54321012343,
+            54321012344,
+            54321012345
+          ]
+        }),
         'account is marked as locked'
       );
-      invalidTest.ok(save.calledAfter(set), 'data model changes are saved');
 
       invalidTest.equal(doneCallback.callCount, 1, 'called done callback once');
       invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
@@ -334,14 +246,13 @@ tap.test('local authentication', async authTest => {
   authTest.test(
     'with invalid password and several outdated previous failed attempts',
     async invalidTest => {
-      get.withArgs('email').returns('hello@world');
-      get.withArgs('password').returns('test-password');
-      get.withArgs('id').returns(57);
-      get
-        .withArgs('failed_logons')
-        .returns([44321012341, 44321012342, 44321012343, 44321012344]);
-      get.withArgs('locked_until').returns(0);
-      userModel.fetch.resolves({ get, save, set });
+      knexStubs.first.resolves({
+        email: 'hello@world',
+        password: 'test-password',
+        id: 57,
+        locked_until: 0,
+        failed_logons: [44321012341, 44321012342, 44321012343, 44321012344]
+      });
       hash.compare.resolves(false);
 
       process.env.AUTH_LOCK_FAILED_ATTEMPTS_COUNT = 5;
@@ -355,33 +266,11 @@ tap.test('local authentication', async authTest => {
       clock.restore();
 
       invalidTest.ok(
-        userModel.query.calledOnce,
-        'one set of QUERY clauses is added'
-      );
-      invalidTest.ok(
-        userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
-        'it is the QUERY we expect'
-      );
-      invalidTest.ok(
-        userModel.fetch.calledOnce,
-        'the query is executed one time'
-      );
-
-      invalidTest.ok(hash.compare.calledOnce, 'password is compared one time');
-      invalidTest.ok(
-        hash.compare.calledWith('password', 'test-password'),
-        'password is compared to database value'
-      );
-
-      invalidTest.ok(
-        set.calledWith('failed_logons', [54321012345]),
-        'saves the failed logon'
-      );
-      invalidTest.notOk(
-        set.calledWith('locked_until'),
+        knexStubs.update.calledWith({
+          failed_logons: [54321012345]
+        }),
         'account is not marked as locked'
       );
-      invalidTest.ok(save.calledAfter(set), 'data model changes are saved');
 
       invalidTest.equal(doneCallback.callCount, 1, 'called done callback once');
       invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
@@ -389,45 +278,22 @@ tap.test('local authentication', async authTest => {
   );
 
   authTest.test('with a valid user', async validTest => {
-    get.withArgs('email').returns('hello@world');
-    get.withArgs('password').returns('test-password');
-    get.withArgs('id').returns(57);
-    get.withArgs('auth_role').returns('do a barrel role');
-    get.withArgs('state_id').returns('liquid');
-
-    const model = {
-      activities: sinon.stub().resolves('play fetch'),
-      get,
-      save,
-      set
-    };
-    userModel.fetch.resolves(model);
+    knexStubs.first.resolves({
+      email: 'hello@world',
+      password: 'test-password',
+      id: 57,
+      auth_role: 'do a barrel role',
+      state_id: 'liquid'
+    });
+    knexStubs.select
+      .withArgs('activity_id')
+      .resolves([{ activity_id: 1 }, { activity_id: 2 }]);
+    knexStubs.select
+      .withArgs('name')
+      .resolves([{ name: 'activity 1' }, { name: 'activity 2' }]);
     hash.compare.resolves(true);
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
-
-    validTest.ok(
-      userModel.query.calledOnce,
-      'one set of QUERY clauses is added'
-    );
-    validTest.ok(
-      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
-      'it is the QUERY we expect'
-    );
-    validTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
-
-    validTest.ok(hash.compare.calledOnce, 'password is compared one time');
-    validTest.ok(
-      hash.compare.calledWith('password', 'test-password'),
-      'password is compared to database value'
-    );
-
-    validTest.ok(
-      set.calledWith('failed_logons', null),
-      'failed logon data is reset'
-    );
-    validTest.ok(set.calledWith('locked_until', null), 'account lock is reset');
-    validTest.ok(save.calledAfter(set), 'data model changes are saved');
 
     validTest.equal(doneCallback.callCount, 1, 'called done callback once');
     validTest.ok(
@@ -436,8 +302,7 @@ tap.test('local authentication', async authTest => {
         id: 57,
         role: 'do a barrel role',
         state: 'liquid',
-        activities: 'play fetch',
-        model
+        activities: ['activity 1', 'activity 2']
       }),
       'did not get an error message, did get a user object'
     );
