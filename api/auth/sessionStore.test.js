@@ -8,7 +8,7 @@ let clock;
 // Drop in a mock for the knex raw object before we require the session store
 // module, since it doesn't have dependency injection.
 const db = sandbox.stub();
-require('../db').raw = db;
+require('../db').knex = db;
 
 const dbQueryBuilder = {
   andWhere: sandbox.stub(),

@@ -6,6 +6,7 @@ const authenticate = require('./authenticate');
 const serialization = require('./serialization');
 const sessionFunction = require('./session')();
 const { removeUserSession } = require('./sessionStore');
+const { knex } = require('../db');
 
 const defaultStrategies = [new LocalStrategy(authenticate())];
 
@@ -23,6 +24,7 @@ module.exports.setup = function setup(
   app,
   {
     auth = authenticate,
+    db = knex,
     deserializeUser = serialization.deserializeUser,
     passport = Passport,
     removeSession = removeUserSession,
@@ -74,19 +76,20 @@ module.exports.setup = function setup(
     passport.authenticate('local'),
     (req, res) =>
       new Promise(resolve => {
-        deserializeUser(req.session.passport.user, (err, user) => {
+        deserializeUser(req.session.passport.user, async (err, user) => {
           if (err) {
             res.status(500).end();
             return resolve();
           }
 
+          const state = await db('states')
+            .where('id', user.state)
+            .select('id', 'name')
+            .first();
+
           res.send({
             ...user,
-            state: {
-              id: user.model.related('state').get('id'),
-              name: user.model.related('state').get('name')
-            },
-            model: undefined
+            state
           });
           return resolve();
         });

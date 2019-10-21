@@ -2,7 +2,7 @@ const Ajv = require('ajv');
 const moment = require('moment');
 
 const logger = require('../../logger')('apds route post');
-const { raw } = require('../../db');
+const { knex } = require('../../db');
 const { can } = require('../../middleware');
 
 const getNewApd = require('./post.data');
@@ -20,7 +20,7 @@ const validatorFunction = ajv.compile({
   additionalProperties: false
 });
 
-module.exports = (app, { db = raw } = {}) => {
+module.exports = (app, { db = knex } = {}) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res) => {
     logger.silly(req, 'handling POST /apds route');

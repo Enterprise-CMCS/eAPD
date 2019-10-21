@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const defaultHash = require('./passwordHash');
 const logger = require('../logger')('authentication');
-const defaultUserModel = require('../db').models.user;
+const { knex } = require('../db');
 
 // This value doesn't need to be persisted between process instances of the
 // server. It only needs to persist between the request for the nonce and the
@@ -10,7 +10,7 @@ const defaultUserModel = require('../db').models.user;
 // should somewhat increase security - automatic key cycling!
 const NONCE_SECRET = crypto.randomBytes(64);
 
-module.exports = (userModel = defaultUserModel, hash = defaultHash) => async (
+module.exports = (db = knex, hash = defaultHash) => async (
   nonce,
   password,
   done
@@ -30,13 +30,13 @@ module.exports = (userModel = defaultUserModel, hash = defaultHash) => async (
     const username = verified.username;
     logger.verbose(`authentication request for [${username}]`);
 
-    const user = await userModel
-      .query('whereRaw', 'LOWER(email) = ?', [username.toLowerCase()])
-      .fetch({ withRelated: ['state'] });
+    const user = await db('users')
+      .whereRaw('LOWER(email) = ?', [username.toLowerCase()])
+      .first();
 
-    if (user && user.get('locked_until')) {
+    if (user && user.locked_until) {
       // If the lock date is still in the future, we can bail out now.
-      if (user.get('locked_until') > Date.now()) {
+      if (user.locked_until > Date.now()) {
         logger.warn(
           'account is locked due to excessive failed logons; not processing request'
         );
@@ -44,25 +44,40 @@ module.exports = (userModel = defaultUserModel, hash = defaultHash) => async (
       }
 
       // The lock has expired, so go ahead and clear it.
-      user.set('failed_logons', null);
-      user.set('locked_until', null);
-      await user.save();
+      await db('users')
+        .where('id', user.id)
+        .update({ failed_logons: null, locked_until: null });
     }
 
-    if (user && (await hash.compare(password, user.get('password')))) {
+    if (user && (await hash.compare(password, user.password))) {
       logger.verbose(`authenticated user [${username}]`);
 
-      user.set('failed_logons', null);
-      user.set('locked_until', null);
-      user.save();
+      await db('users')
+        .where('id', user.id)
+        .update({ failed_logons: null, locked_until: null });
+
+      const authRole = await db('auth_roles')
+        .where('name', user.auth_role)
+        .select('id')
+        .first();
+
+      const authActivityIDs = authRole
+        ? await db('auth_role_activity_mapping')
+            .where('role_id', authRole.id)
+            .select('activity_id')
+        : [];
+
+      const authActivityNames = await db('auth_activities')
+        // eslint-disable-next-line camelcase
+        .whereIn('id', authActivityIDs.map(({ activity_id }) => activity_id))
+        .select('name');
 
       return done(null, {
-        username: user.get('email'),
-        id: user.get('id'),
-        role: user.get('auth_role'),
-        state: user.get('state_id'),
-        activities: await user.activities(),
-        model: user
+        username: user.email,
+        id: user.id,
+        role: user.auth_role,
+        state: user.state_id,
+        activities: authActivityNames.map(({ name }) => name)
       });
     }
 
@@ -75,20 +90,24 @@ module.exports = (userModel = defaultUserModel, hash = defaultHash) => async (
       // E.g., if the rule is to lock accounts after 5 failed logon attempts
       // within 10 minutes, we only need to look at the failed logon attempts
       // within the past 10 minutes. Logons longer ago than that are irrelevant
-      const failedLogons = (user.get('failed_logons') || []).filter(
+      const failedLogons = (user.failed_logons || []).filter(
         failure => failure > Date.now() - windowTime
       );
       failedLogons.push(Date.now());
 
-      user.set('failed_logons', failedLogons);
+      const update = {
+        failed_logons: JSON.stringify(failedLogons)
+      };
 
       if (failedLogons.length >= +process.env.AUTH_LOCK_FAILED_ATTEMPTS_COUNT) {
         const duration =
           +process.env.AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES * 60000;
-        user.set('locked_until', Date.now() + duration);
+        update.locked_until = Date.now() + duration;
       }
 
-      await user.save();
+      await db('users')
+        .where('id', user.id)
+        .update(update);
     }
 
     logger.verbose(`no user found or password mismatch for [${username}]`);

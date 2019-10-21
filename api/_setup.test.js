@@ -11,8 +11,6 @@ const tap = require('tap');
 require('./env');
 
 require('./db');
-require('./db/authorization');
-require('./db/user');
 
 require('./auth');
 require('./auth/authenticate');

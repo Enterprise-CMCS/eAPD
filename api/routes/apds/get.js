@@ -1,5 +1,5 @@
 const logger = require('../../logger')('apds route get');
-const { raw: knex } = require('../../db');
+const { knex } = require('../../db');
 const { can } = require('../../middleware');
 
 module.exports = (app, { db = knex } = {}) => {

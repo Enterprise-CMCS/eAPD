@@ -1,6 +1,6 @@
 const logger = require('../../logger')('apds route get');
 const { can, userCanEditAPD } = require('../../middleware');
-const { raw: knex } = require('../../db');
+const { knex } = require('../../db');
 
 module.exports = (app, { db = knex } = {}) => {
   logger.silly('setting up DELETE /apds/:id route');
