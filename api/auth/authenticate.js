@@ -10,7 +10,7 @@ const { knex } = require('../db');
 // should somewhat increase security - automatic key cycling!
 const NONCE_SECRET = crypto.randomBytes(64);
 
-module.exports = (db = knex, hash = defaultHash) => async (
+module.exports = ({ db = knex, hash = defaultHash } = {}) => async (
   nonce,
   password,
   done
@@ -96,7 +96,7 @@ module.exports = (db = knex, hash = defaultHash) => async (
       failedLogons.push(Date.now());
 
       const update = {
-        failed_logons: JSON.stringify(failedLogons)
+        failed_logons: failedLogons
       };
 
       if (failedLogons.length >= +process.env.AUTH_LOCK_FAILED_ATTEMPTS_COUNT) {
