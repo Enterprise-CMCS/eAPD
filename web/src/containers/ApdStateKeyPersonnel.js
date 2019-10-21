@@ -1,40 +1,19 @@
 import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { ApdKeyPersonForm, ApdKeyPersonReview } from './ApdKeyPerson';
+import { addKeyPerson, removeKeyPerson } from '../actions/editApd';
 import FormAndReviewList from '../components/FormAndReviewList';
+import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 
-import {
-  addKeyPerson,
-  removeKeyPerson,
-  updateApd as updateApdAction,
-  updateBudget
-} from '../actions/apd';
-
-const ApdStateKeyPersonnel = ({
-  addKeyPerson: addPerson,
-  poc,
-  removeKeyPerson: deletePerson,
-  updateApd,
-  updateBudget: dispatchBudget,
-  years
-}) => {
-  const handleChange = useCallback((index, field, value, isExpense = false) => {
-    updateApd({ keyPersonnel: { [index]: { [field]: value } } });
-    if (isExpense) {
-      dispatchBudget();
+const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
+  const deletePerson = key => {
+    const index = poc.findIndex(p => p.key === key);
+    if (index >= 0) {
+      remove(index);
     }
-  }, []);
-
-  const handleYearChange = useCallback((index, year, value) => {
-    updateApd({
-      keyPersonnel: {
-        [index]: { costs: { [year]: value } }
-      }
-    });
-    dispatchBudget();
-  }, []);
+  };
 
   return (
     <FormAndReviewList
@@ -42,9 +21,7 @@ const ApdStateKeyPersonnel = ({
       list={poc}
       collapsed={ApdKeyPersonReview}
       expanded={ApdKeyPersonForm}
-      onAddClick={addPerson}
-      handleChange={handleChange}
-      handleYearChange={handleYearChange}
+      onAddClick={() => add()}
       onDeleteClick={deletePerson}
       years={years}
     />
@@ -52,28 +29,20 @@ const ApdStateKeyPersonnel = ({
 };
 
 ApdStateKeyPersonnel.propTypes = {
-  addKeyPerson: PropTypes.func.isRequired,
-  poc: PropTypes.array.isRequired,
-  removeKeyPerson: PropTypes.func.isRequired,
-  updateApd: PropTypes.func.isRequired,
-  updateBudget: PropTypes.func.isRequired,
-  years: PropTypes.array.isRequired
+  add: PropTypes.func.isRequired,
+  poc: PropTypes.arrayOf(PropTypes.object).isRequired,
+  remove: PropTypes.func.isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
-const mapStateToProps = ({
-  apd: {
-    data: { keyPersonnel, years }
-  }
-}) => ({
-  poc: keyPersonnel,
-  years
+const mapStateToProps = state => ({
+  poc: selectKeyPersonnel(state),
+  years: selectApdYears(state)
 });
 
 const mapDispatchToProps = {
-  addKeyPerson,
-  removeKeyPerson,
-  updateApd: updateApdAction,
-  updateBudget
+  add: addKeyPerson,
+  remove: removeKeyPerson
 };
 
 export default connect(

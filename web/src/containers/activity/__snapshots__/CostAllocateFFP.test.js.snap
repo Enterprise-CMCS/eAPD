@@ -101,11 +101,8 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       </p>
     </div>
     <Connect(CostAllocateFFPQuarterly)
-      aKey="activity key"
+      activityIndex={0}
       year="1066"
-    />
-    <Connect(CostAllocateFFPYearTotal)
-      aKey="activity key"
     />
     <hr />
   </div>
@@ -203,13 +200,12 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       </p>
     </div>
     <Connect(CostAllocateFFPQuarterly)
-      aKey="activity key"
+      activityIndex={0}
       year="1067"
-    />
-    <Connect(CostAllocateFFPYearTotal)
-      aKey="activity key"
     />
     <hr />
   </div>
+  <Connect(CostAllocateFFPYearTotal) />
+  <hr />
 </Fragment>
 `;

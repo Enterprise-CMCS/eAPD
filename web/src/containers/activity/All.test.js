@@ -1,36 +1,54 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { AllRaw as Activities, mapStateToProps } from './All';
+import { addActivity, removeActivity } from '../../actions/editActivity';
+
+import {
+  plain as Activities,
+  mapStateToProps,
+  mapDispatchToProps
+} from './All';
 
 describe('the Activities component', () => {
   const props = {
-    activityKeys: ['1', '2', '3'],
-    activities: ['activity 1', 'activity 2', 'activity 3'],
     add: jest.fn(),
-    remove: jest.fn(),
-    update: jest.fn()
+    first: { first: 'activity', key: 'key1' },
+    other: [
+      { key: 'key2', second: 'activity' },
+      { key: 'key3', third: 'activity' }
+    ],
+    remove: jest.fn()
   };
+
+  beforeEach(() => {
+    props.add.mockClear();
+    props.remove.mockClear();
+  });
 
   test('renders correctly', () => {
     const component = shallow(<Activities {...props} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('maps redux state to component props', () => {
-    expect(
-      mapStateToProps({
-        activities: {
-          allKeys: ['1', 'two', '3'],
-          byKey: {
-            key1: 'activity 1',
-            key2: 'activity 2'
-          }
+  test('maps state to props', () => {
+    const state = {
+      apd: {
+        data: {
+          activities: [{ key: 'key1' }, { key: 'key2' }, { key: 'key3' }]
         }
-      })
-    ).toEqual({
-      activityKeys: ['1', 'two', '3'],
-      activities: ['activity 1', 'activity 2']
+      }
+    };
+
+    expect(mapStateToProps(state)).toEqual({
+      first: { key: 'key1' },
+      other: [{ key: 'key2' }, { key: 'key3' }]
+    });
+  });
+
+  test('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      add: addActivity,
+      remove: removeActivity
     });
   });
 });

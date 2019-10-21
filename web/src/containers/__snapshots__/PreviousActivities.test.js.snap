@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`previous activities component renders correctly if data is not loaded 1`] = `
+exports[`previous activities component renders correctly 1`] = `
 <Connect(ConnectedWaypoint)
   id="prev-activities-overview"
 >
@@ -24,7 +24,7 @@ exports[`previous activities component renders correctly if data is not loaded 1
         Previous Activities Summary
       </h4>
       <RichText
-        content="previous"
+        content="bob"
         editorClassName="rte-textarea-l"
         onSync={[Function]}
       />

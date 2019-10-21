@@ -47,25 +47,10 @@ describe('utility functions', () => {
     arrToObj,
     generateKey,
     getParams,
-    replaceNulls,
     stateDateToDisplay,
     stateDateRangeToDisplay,
     stateLookup
   } = load();
-
-  test('replace nulls with empty strings in an object', () => {
-    expect(replaceNulls({ foo: null, bar: 123 })).toEqual({
-      foo: '',
-      bar: 123
-    });
-
-    expect(replaceNulls({ foo: { bar: null, baz: 'abc' }, foo2: 123 })).toEqual(
-      {
-        foo: { bar: '', baz: 'abc' },
-        foo2: 123
-      }
-    );
-  });
 
   test('apply a function to numbers in an object, deeply', () => {
     expect(applyToNumbers({ a: 1, b: 2, c: { d: 7 } }, () => 'boop')).toEqual({

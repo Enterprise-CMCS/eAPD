@@ -1,39 +1,48 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import StatePersonForm from './StatePersonForm';
+import {
+  plain as StatePersonForm,
+  mapDispatchToProps
+} from './StatePersonForm';
+
+import {
+  setPersonnelFTEForYear,
+  setPersonnelCostForYear,
+  setPersonnelDescription,
+  setPersonnelTitle
+} from '../../../actions/editActivity';
 
 describe('the StatePersonForm component', () => {
-  const collapse = jest.fn();
-  const handleEditCost = jest.fn();
-  const handleEditFTE = jest.fn();
-  const handleEditPersonDesc = jest.fn();
-  const handleEditPersonTitle = jest.fn();
+  const setCost = jest.fn();
+  const setDescription = jest.fn();
+  const setFTE = jest.fn();
+  const setTitle = jest.fn();
 
   const component = shallow(
     <StatePersonForm
+      activityIndex={6}
       index={83}
       item={{
-        desc: 'personnel desc',
+        description: 'personnel desc',
         title: 'personnel title',
         years: {
           7473: 2398235,
           7474: 72323
         }
       }}
-      handleEditCost={handleEditCost}
-      handleEditFTE={handleEditFTE}
-      handleEditPersonDesc={handleEditPersonDesc}
-      handleEditPersonTitle={handleEditPersonTitle}
+      setCost={setCost}
+      setDescription={setDescription}
+      setFTE={setFTE}
+      setTitle={setTitle}
     />
   );
 
   beforeEach(() => {
-    collapse.mockClear();
-    handleEditCost.mockClear();
-    handleEditFTE.mockClear();
-    handleEditPersonDesc.mockClear();
-    handleEditPersonTitle.mockClear();
+    setCost.mockClear();
+    setDescription.mockClear();
+    setFTE.mockClear();
+    setTitle.mockClear();
   });
 
   test('renders correctly', () => {
@@ -45,14 +54,14 @@ describe('the StatePersonForm component', () => {
       component
         .findWhere(c => c.name() === 'TextField' && c.prop('name') === 'title')
         .simulate('change', { target: { value: 'new title' } });
-      expect(handleEditPersonTitle).toHaveBeenCalledWith(83, 'new title');
+      expect(setTitle).toHaveBeenCalledWith(6, 83, 'new title');
     });
 
     test('handles changing the personnel desc', () => {
       component
         .findWhere(c => c.name() === 'TextArea' && c.prop('name') === 'desc')
         .simulate('change', { target: { value: 'new desc' } });
-      expect(handleEditPersonDesc).toHaveBeenCalledWith(83, 'new desc');
+      expect(setDescription).toHaveBeenCalledWith(6, 83, 'new desc');
     });
 
     test('handles changing the personnel cost total for a year', () => {
@@ -60,7 +69,7 @@ describe('the StatePersonForm component', () => {
         .find('DollarField')
         .first()
         .simulate('change', { target: { value: 'new total' } });
-      expect(handleEditCost).toHaveBeenCalledWith(83, '7473', 'new total');
+      expect(setCost).toHaveBeenCalledWith(6, 83, '7473', 'new total');
     });
 
     test('handles changing the personnel FTE for a year', () => {
@@ -68,7 +77,16 @@ describe('the StatePersonForm component', () => {
         .findWhere(c => c.name() === 'NumberField' && c.prop('name') === 'ftes')
         .first()
         .simulate('change', { target: { value: 'new ftes' } });
-      expect(handleEditFTE).toHaveBeenCalledWith(83, '7473', 'new ftes');
+      expect(setFTE).toHaveBeenCalledWith(6, 83, '7473', 'new ftes');
+    });
+  });
+
+  it('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setFTE: setPersonnelFTEForYear,
+      setCost: setPersonnelCostForYear,
+      setDescription: setPersonnelDescription,
+      setTitle: setPersonnelTitle
     });
   });
 });

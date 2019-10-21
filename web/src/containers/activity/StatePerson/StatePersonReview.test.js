@@ -11,7 +11,7 @@ describe('the StatePersonReview component', () => {
     <StatePersonReview
       index={53}
       item={{
-        desc: 'test desc',
+        description: 'test desc',
         title: 'test desc',
         years: {
           2003: { amt: 85938, perc: 3 },

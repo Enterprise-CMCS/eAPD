@@ -23,7 +23,12 @@ exports[`the Activities component renders correctly 1`] = `
         disableExpand={true}
         expand={[Function]}
         index={-1}
-        item="activity 1"
+        item={
+          Object {
+            "first": "activity",
+            "key": "key1",
+          }
+        }
         onDeleteClick={null}
       />
       <FormAndReviewList
@@ -31,44 +36,54 @@ exports[`the Activities component renders correctly 1`] = `
         allowDeleteAll={true}
         className="ds-u-border-bottom--0"
         collapsed={[Function]}
-        expanded={[Function]}
-        handleChange={[MockFunction]}
+        expanded={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(NameAndFundingSourceForm)",
+            "type": [Function],
+          }
+        }
         list={
           Array [
-            "activity 2",
-            "activity 3",
+            Object {
+              "key": "key2",
+              "second": "activity",
+            },
+            Object {
+              "key": "key3",
+              "third": "activity",
+            },
           ]
         }
         noDataMessage={false}
-        onAddClick={[MockFunction]}
-        onDeleteClick={[MockFunction]}
+        onAddClick={[Function]}
+        onDeleteClick={[Function]}
       />
     </Subsection>
     <Connect(ConnectedWaypoint)
-      id="1"
-      key="1"
+      id="key1"
+      key="key1"
     >
       <Connect(EntryDetails)
-        aKey="1"
-        num={1}
+        activityIndex={0}
       />
     </Connect(ConnectedWaypoint)>
     <Connect(ConnectedWaypoint)
-      id="2"
-      key="2"
+      id="key2"
+      key="key2"
     >
       <Connect(EntryDetails)
-        aKey="2"
-        num={2}
+        activityIndex={1}
       />
     </Connect(ConnectedWaypoint)>
     <Connect(ConnectedWaypoint)
-      id="3"
-      key="3"
+      id="key3"
+      key="key3"
     >
       <Connect(EntryDetails)
-        aKey="3"
-        num={3}
+        activityIndex={2}
       />
     </Connect(ConnectedWaypoint)>
   </Section>

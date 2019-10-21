@@ -1,30 +1,38 @@
 import { FormLabel, Select } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
+import { connect } from 'react-redux';
 
+import {
+  setNonPersonnelCostCategory,
+  setNonPersonnelCostDescription,
+  setNonPersonnelCostForYear
+} from '../../../actions/editActivity';
 import DollarField from '../../../components/DollarField';
 import TextArea from '../../../components/TextArea';
 import { getLabelID } from '../../../util';
 
 const NonPersonnelCostForm = ({
-  handleEditCost,
-  handleEditDesc,
-  handleEditCategory,
+  activityIndex,
   index,
-  item: { category, desc, years }
+  item: { category, description, years },
+  setCategory,
+  setDescription,
+  setCost
 }) => {
   const editCategory = useCallback(
-    ({ target: { value } }) => handleEditCategory(index, value),
+    ({ target: { value } }) => setCategory(activityIndex, index, value),
     [index]
   );
 
   const editDesc = useCallback(
-    ({ target: { value } }) => handleEditDesc(index, value),
+    ({ target: { value } }) => setDescription(activityIndex, index, value),
     [index]
   );
 
   const getEditCostForYear = useCallback(
-    year => ({ target: { value } }) => handleEditCost(index, year, value),
+    year => ({ target: { value } }) =>
+      setCost(activityIndex, index, year, value),
     [index]
   );
 
@@ -58,7 +66,7 @@ const NonPersonnelCostForm = ({
         label="Description"
         rows={5}
         name="desc"
-        value={desc}
+        value={description}
         onChange={editDesc}
       />
       {Object.entries(years).map(([year, cost]) => (
@@ -76,15 +84,27 @@ const NonPersonnelCostForm = ({
 };
 
 NonPersonnelCostForm.propTypes = {
-  handleEditCost: PropTypes.func.isRequired,
-  handleEditDesc: PropTypes.func.isRequired,
-  handleEditCategory: PropTypes.func.isRequired,
+  activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
     category: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
-  }).isRequired
+  }).isRequired,
+  setCategory: PropTypes.func.isRequired,
+  setDescription: PropTypes.func.isRequired,
+  setCost: PropTypes.func.isRequired
 };
 
-export default NonPersonnelCostForm;
+const mapDispatchToProps = {
+  setCategory: setNonPersonnelCostCategory,
+  setDescription: setNonPersonnelCostDescription,
+  setCost: setNonPersonnelCostForYear
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NonPersonnelCostForm);
+
+export { NonPersonnelCostForm as plain, mapDispatchToProps };

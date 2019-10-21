@@ -13,7 +13,7 @@ exports[`activity costs wrapper (around personnel and non-personnel)  renders pr
     Personnel
   </h6>
   <Connect(StatePersonnel)
-    aKey="activity key"
+    activityIndex="activity index"
   />
   <h6
     className="ds-h4"
@@ -21,7 +21,7 @@ exports[`activity costs wrapper (around personnel and non-personnel)  renders pr
     Non-Personnel
   </h6>
   <Connect(NonPersonnelCosts)
-    aKey="activity key"
+    activityIndex="activity index"
   />
 </Subsection>
 `;

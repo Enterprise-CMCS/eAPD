@@ -8,146 +8,112 @@ Object {
       "contractorResources": Array [
         Object {
           "description": "",
-          "end": null,
-          "files": Array [],
-          "hourlyData": Array [
-            Object {
-              "hours": 0,
-              "id": 1,
-              "rate": 0,
-              "year": 2020,
+          "end": "",
+          "hourly": Object {
+            "data": Object {
+              "2020": Object {
+                "hours": 0,
+                "rate": 0,
+              },
+              "2021": Object {
+                "hours": 0,
+                "rate": 0,
+              },
             },
-            Object {
-              "hours": 0,
-              "id": 2,
-              "rate": 0,
-              "year": 2021,
-            },
-          ],
-          "id": 1,
+            "useHourly": false,
+          },
           "name": "",
-          "start": null,
+          "start": "",
           "totalCost": 0,
-          "useHourly": false,
-          "years": Array [
-            Object {
-              "cost": 0,
-              "id": 1,
-              "year": 2020,
-            },
-            Object {
-              "cost": 0,
-              "id": 2,
-              "year": 2021,
-            },
-          ],
+          "years": Object {
+            "2020": 0,
+            "2021": 0,
+          },
         },
       ],
-      "costAllocation": Array [
-        Object {
-          "federalPercent": "0.90",
-          "otherAmount": 0,
-          "statePercent": "0.10",
-          "year": 2020,
+      "costAllocation": Object {
+        "2020": Object {
+          "ffp": Object {
+            "federal": 90,
+            "state": 10,
+          },
+          "other": 0,
         },
-        Object {
-          "federalPercent": "0.90",
-          "otherAmount": 0,
-          "statePercent": "0.10",
-          "year": 2021,
+        "2021": Object {
+          "ffp": Object {
+            "federal": 90,
+            "state": 10,
+          },
+          "other": 0,
         },
-      ],
+      },
       "costAllocationNarrative": Object {
-        "methodology": null,
-        "otherSources": null,
+        "methodology": "",
+        "otherSources": "",
       },
       "description": "",
       "expenses": Array [
         Object {
           "category": "",
           "description": "",
-          "entries": Array [
-            Object {
-              "amount": 0,
-              "id": 1,
-              "year": "2020",
-            },
-            Object {
-              "amount": 0,
-              "id": 2,
-              "year": "2021",
-            },
-          ],
-          "id": 1,
+          "years": Object {
+            "2020": 0,
+            "2021": 0,
+          },
         },
       ],
-      "files": Array [],
       "fundingSource": "HIT",
       "goals": Array [
         Object {
           "description": "",
-          "id": 1,
           "objective": "",
         },
       ],
-      "id": 1,
       "name": "Program Administration",
-      "plannedEndDate": null,
-      "plannedStartDate": null,
-      "quarterlyFFP": Array [
-        Object {
-          "q1": Object {
-            "combined": 0,
+      "plannedEndDate": "",
+      "plannedStartDate": "",
+      "quarterlyFFP": Object {
+        "2020": Object {
+          "1": Object {
             "contractors": 0,
             "state": 0,
           },
-          "q2": Object {
-            "combined": 0,
+          "2": Object {
             "contractors": 0,
             "state": 0,
           },
-          "q3": Object {
-            "combined": 0,
+          "3": Object {
             "contractors": 0,
             "state": 0,
           },
-          "q4": Object {
-            "combined": 0,
+          "4": Object {
             "contractors": 0,
             "state": 0,
           },
-          "year": 2020,
         },
-        Object {
-          "q1": Object {
-            "combined": 0,
+        "2021": Object {
+          "1": Object {
             "contractors": 0,
             "state": 0,
           },
-          "q2": Object {
-            "combined": 0,
+          "2": Object {
             "contractors": 0,
             "state": 0,
           },
-          "q3": Object {
-            "combined": 0,
+          "3": Object {
             "contractors": 0,
             "state": 0,
           },
-          "q4": Object {
-            "combined": 0,
+          "4": Object {
             "contractors": 0,
             "state": 0,
           },
-          "year": 2021,
         },
-      ],
+      },
       "schedule": Array [
         Object {
-          "endDate": null,
-          "id": 1,
+          "endDate": "",
           "milestone": "",
-          "status": null,
         },
       ],
       "standardsAndConditions": Object {
@@ -166,102 +132,101 @@ Object {
       "statePersonnel": Array [
         Object {
           "description": "",
-          "id": 1,
           "title": "",
-          "years": Array [
-            Object {
-              "cost": 0,
-              "fte": 0,
-              "id": 1,
-              "year": 2020,
+          "years": Object {
+            "2020": Object {
+              "amt": 0,
+              "perc": 0,
             },
-            Object {
-              "cost": 0,
-              "fte": 0,
-              "id": 2,
-              "year": 2021,
+            "2021": Object {
+              "amt": 0,
+              "perc": 0,
             },
-          ],
+          },
         },
       ],
       "summary": "",
     },
   ],
-  "federalCitations": null,
+  "federalCitations": Object {},
   "id": 1,
-  "incentivePayments": Array [
-    Object {
-      "q1": Object {
-        "ehCount": null,
-        "ehPayment": 0,
-        "epCount": null,
-        "epPayment": 0,
+  "incentivePayments": Object {
+    "ehAmt": Object {
+      "2020": Object {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
       },
-      "q2": Object {
-        "ehCount": null,
-        "ehPayment": 0,
-        "epCount": null,
-        "epPayment": 0,
+      "2021": Object {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
       },
-      "q3": Object {
-        "ehCount": null,
-        "ehPayment": 0,
-        "epCount": null,
-        "epPayment": 0,
-      },
-      "q4": Object {
-        "ehCount": null,
-        "ehPayment": 0,
-        "epCount": null,
-        "epPayment": 0,
-      },
-      "year": "2020",
     },
-    Object {
-      "q1": Object {
-        "ehCount": null,
-        "ehPayment": 0,
-        "epCount": null,
-        "epPayment": 0,
+    "ehCt": Object {
+      "2020": Object {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
       },
-      "q2": Object {
-        "ehCount": null,
-        "ehPayment": 0,
-        "epCount": null,
-        "epPayment": 0,
+      "2021": Object {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
       },
-      "q3": Object {
-        "ehCount": null,
-        "ehPayment": 0,
-        "epCount": null,
-        "epPayment": 0,
-      },
-      "q4": Object {
-        "ehCount": null,
-        "ehPayment": 0,
-        "epCount": null,
-        "epPayment": 0,
-      },
-      "year": "2021",
     },
-  ],
+    "epAmt": Object {
+      "2020": Object {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+      },
+      "2021": Object {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+      },
+    },
+    "epCt": Object {
+      "2020": Object {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+      },
+      "2021": Object {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+      },
+    },
+  },
   "keyPersonnel": Array [
     Object {
-      "costs": Array [],
-      "email": null,
+      "costs": Object {
+        "2020": 0,
+        "2021": 0,
+      },
+      "email": "",
       "hasCosts": false,
-      "id": 1,
       "isPrimary": true,
-      "name": null,
-      "percentTime": "0.00",
-      "position": null,
+      "name": "",
+      "percentTime": "",
+      "position": "",
     },
   ],
   "narrativeHIE": "",
   "narrativeHIT": "",
   "narrativeMMIS": "",
-  "previousActivityExpenses": Array [
-    Object {
+  "previousActivityExpenses": Object {
+    "2018": Object {
       "hithie": Object {
         "federalActual": 0,
         "totalApproved": 0,
@@ -280,9 +245,8 @@ Object {
           "totalApproved": 0,
         },
       },
-      "year": "2020",
     },
-    Object {
+    "2019": Object {
       "hithie": Object {
         "federalActual": 0,
         "totalApproved": 0,
@@ -301,9 +265,8 @@ Object {
           "totalApproved": 0,
         },
       },
-      "year": "2019",
     },
-    Object {
+    "2020": Object {
       "hithie": Object {
         "federalActual": 0,
         "totalApproved": 0,
@@ -322,27 +285,24 @@ Object {
           "totalApproved": 0,
         },
       },
-      "year": "2018",
-    },
-  ],
-  "previousActivitySummary": "",
-  "programOverview": "",
-  "state": "mn",
-  "stateProfile": Object {
-    "medicaidDirector": Object {
-      "email": null,
-      "name": null,
-      "phone": null,
-    },
-    "medicaidOffice": Object {
-      "address1": null,
-      "address2": null,
-      "city": null,
-      "state": null,
-      "zip": null,
     },
   },
-  "status": "draft",
+  "previousActivitySummary": "",
+  "programOverview": "",
+  "stateProfile": Object {
+    "medicaidDirector": Object {
+      "email": "",
+      "name": "",
+      "phone": "",
+    },
+    "medicaidOffice": Object {
+      "address1": "",
+      "address2": "",
+      "city": "",
+      "state": "",
+      "zip": "",
+    },
+  },
   "years": Array [
     "2020",
     "2021",

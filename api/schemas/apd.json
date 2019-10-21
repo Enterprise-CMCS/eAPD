@@ -1,0 +1,679 @@
+{
+  "definitions": {
+    "optionalFullDate": {
+      "$id": "#/definitions/fullDate",
+      "anyOf": [
+        { "type": "string", "format": "date" },
+        { "type": "string", "enum": [""] }
+      ]
+    },
+    "optionalNumber": {
+      "$id": "#/definitions/optionalNumber",
+      "anyOf": [{ "type": "number" }, { "type": "string", "pattern": "\\d*" }]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://eapd.cms.gov/apd.json",
+  "type": "object",
+  "required": [
+    "name",
+    "activities",
+    "federalCitations",
+    "incentivePayments",
+    "keyPersonnel",
+    "narrativeHIE",
+    "narrativeHIT",
+    "narrativeMMIS",
+    "previousActivityExpenses",
+    "previousActivitySummary",
+    "programOverview",
+    "stateProfile",
+    "years"
+  ],
+  "properties": {
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string"
+    },
+    "activities": {
+      "$id": "#/properties/activities",
+      "type": "array",
+      "items": {
+        "$id": "#/properties/activities/items",
+        "type": "object",
+        "required": [
+          "alternatives",
+          "contractorResources",
+          "costAllocation",
+          "costAllocationNarrative",
+          "description",
+          "expenses",
+          "fundingSource",
+          "goals",
+          "name",
+          "plannedEndDate",
+          "plannedStartDate",
+          "schedule",
+          "standardsAndConditions",
+          "statePersonnel",
+          "summary",
+          "quarterlyFFP"
+        ],
+        "properties": {
+          "alternatives": {
+            "$id": "#/properties/activities/items/properties/alternatives",
+            "type": "string"
+          },
+          "contractorResources": {
+            "$id": "#/properties/activities/items/properties/contractorResources",
+            "type": "array",
+            "items": {
+              "$id": "#/properties/activities/items/properties/contractorResources/items",
+              "type": "object",
+              "required": [
+                "description",
+                "end",
+                "hourly",
+                "name",
+                "start",
+                "totalCost",
+                "years"
+              ],
+              "properties": {
+                "description": {
+                  "$id": "#/properties/activities/items/properties/contractorResources/items/properties/description",
+                  "type": "string"
+                },
+                "end": { "$ref": "#/definitions/optionalFullDate" },
+                "hourly": {
+                  "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly",
+                  "type": "object",
+                  "required": ["data", "useHourly"],
+                  "properties": {
+                    "data": {
+                      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/data",
+                      "patternProperties": {
+                        "^[0-9]{4}$": {
+                          "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year",
+                          "type": "object",
+                          "required": ["hours", "rate"],
+                          "properties": {
+                            "hours": {
+                              "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/hours",
+                              "$ref": "#/definitions/optionalNumber"
+                            },
+                            "rate": {
+                              "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/rate",
+                              "$ref": "#/definitions/optionalNumber"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "useHourly": {
+                      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/useHourly",
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "name": {
+                  "$id": "#/properties/activities/items/properties/contractorResources/items/properties/name",
+                  "type": "string"
+                },
+                "start": { "$ref": "#/definitions/optionalFullDate" },
+                "totalCost": {
+                  "$id": "#/properties/activities/items/properties/contractorResources/items/properties/totalCost",
+                  "type": "integer"
+                },
+                "years": {
+                  "$id": "#/properties/activities/items/properties/contractorResources/items/properties/years",
+                  "type": "object",
+                  "patternProperties": {
+                    "^[0-9]{4}$": {
+                      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/years/year",
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "costAllocation": {
+            "$id": "#/properties/activities/items/properties/costAllocation",
+            "type": "object",
+            "patternProperties": {
+              "^[0-9]{4}$": {
+                "$id": "#/properties/activities/items/properties/costAllocation/year",
+                "type": "object",
+                "required": ["ffp", "other"],
+                "properties": {
+                  "ffp": {
+                    "$id": "#/properties/activities/items/properties/costAllocation/year/ffp",
+                    "type": "object",
+                    "required": ["federal", "state"],
+                    "properties": {
+                      "federal": {
+                        "$id": "#/properties/activities/items/properties/costAllocation/year/ffp/federal",
+                        "type": "number"
+                      },
+                      "state": {
+                        "$id": "#/properties/activities/items/properties/costAllocation/year/ffp/state",
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "other": {
+                    "$id": "#/properties/activities/items/properties/costAllocation/year/other",
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "costAllocationNarrative": {
+            "$id": "#/properties/activities/items/properties/costAllocationNarrative",
+            "type": "object",
+            "required": ["methodology", "otherSources"],
+            "properties": {
+              "methodology": {
+                "$id": "#/properties/activities/items/properties/costAllocationNarrative/properties/methodology",
+                "type": "string"
+              },
+              "otherSources": {
+                "$id": "#/properties/activities/items/properties/costAllocationNarrative/properties/otherSources",
+                "type": "string"
+              }
+            }
+          },
+          "description": {
+            "$id": "#/properties/activities/items/properties/description",
+            "type": "string"
+          },
+          "expenses": {
+            "$id": "#/properties/activities/items/properties/expenses",
+            "type": "array",
+            "items": {
+              "$id": "#/properties/activities/items/properties/expenses/items",
+              "type": "object",
+              "required": ["description", "category", "years"],
+              "properties": {
+                "description": {
+                  "$id": "#/properties/activities/items/properties/expenses/items/properties/description",
+                  "type": "string"
+                },
+                "category": {
+                  "$id": "#/properties/activities/items/properties/expenses/items/properties/category",
+                  "type": "string"
+                },
+                "years": {
+                  "$id": "#/properties/activities/items/properties/expenses/items/properties/years",
+                  "type": "object",
+                  "patternProperties": {
+                    "^[0-9]{4}$": {
+                      "$id": "#/properties/activities/items/properties/expenses/items/properties/years/year",
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "fundingSource": {
+            "$id": "#/properties/activities/items/properties/fundingSource",
+            "enum": ["HIE", "HIT", "MMIS"]
+          },
+          "goals": {
+            "$id": "#/properties/activities/items/properties/goals",
+            "type": "array",
+            "items": {
+              "$id": "#/properties/activities/items/properties/goals/items",
+              "type": "object",
+              "required": ["description", "objective"],
+              "properties": {
+                "description": {
+                  "$id": "#/properties/activities/items/properties/goals/items/properties/description",
+                  "type": "string"
+                },
+                "objective": {
+                  "$id": "#/properties/activities/items/properties/goals/items/properties/objective",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "name": {
+            "$id": "#/properties/activities/items/properties/name",
+            "type": "string"
+          },
+          "plannedEndDate": { "$ref": "#/definitions/optionalFullDate" },
+          "plannedStartDate": { "$ref": "#/definitions/optionalFullDate" },
+          "schedule": {
+            "$id": "#/properties/activities/items/properties/schedule",
+            "type": "array",
+            "items": {
+              "$id": "#/properties/activities/items/properties/schedule/items",
+              "type": "object",
+              "required": ["endDate", "milestone"],
+              "properties": {
+                "endDate": {
+                  "$id": "#/properties/activities/items/properties/schedule/items/properties/endDate",
+                  "$ref": "#/definitions/optionalFullDate"
+                },
+                "milestone": {
+                  "$id": "#/properties/activities/items/properties/schedule/items/properties/milestone",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "standardsAndConditions": {
+            "$id": "#/properties/activities/items/properties/standardsAndConditions",
+            "type": "object",
+            "required": [
+              "businessResults",
+              "documentation",
+              "industryStandards",
+              "interoperability",
+              "keyPersonnel",
+              "leverage",
+              "minimizeCost",
+              "mitigationStrategy",
+              "modularity",
+              "mita",
+              "reporting"
+            ],
+            "properties": {
+              "businessResults": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/businessResults",
+                "type": "string"
+              },
+              "documentation": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/documentation",
+                "type": "string"
+              },
+              "industryStandards": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/industryStandards",
+                "type": "string"
+              },
+              "interoperability": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/interoperability",
+                "type": "string"
+              },
+              "keyPersonnel": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/keyPersonnel",
+                "type": "string"
+              },
+              "leverage": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/leverage",
+                "type": "string"
+              },
+              "minimizeCost": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/minimizeCost",
+                "type": "string"
+              },
+              "mitigationStrategy": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/mitigationStrategy",
+                "type": "string"
+              },
+              "modularity": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/modularity",
+                "type": "string"
+              },
+              "mita": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/mita",
+                "type": "string"
+              },
+              "reporting": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/reporting",
+                "type": "string"
+              }
+            }
+          },
+          "statePersonnel": {
+            "$id": "#/properties/activities/items/properties/statePersonnel",
+            "type": "array",
+            "items": {
+              "$id": "#/properties/activities/items/properties/statePersonnel/items",
+              "type": "object",
+              "required": ["title", "description", "years"],
+              "properties": {
+                "title": {
+                  "$id": "#/properties/activities/items/properties/statePersonnel/items/properties/title",
+                  "type": "string"
+                },
+                "description": {
+                  "$id": "#/properties/activities/items/properties/statePersonnel/items/properties/description",
+                  "type": "string"
+                },
+                "years": {
+                  "$id": "#/properties/activities/items/properties/statePersonnel/items/properties/years",
+                  "type": "object",
+                  "patternProperties": {
+                    "^[0-9]{4}$": {
+                      "$id": "#/properties/activities/items/properties/statePersonnel/items/properties/years/year",
+                      "type": "object",
+                      "required": ["amt", "perc"],
+                      "properties": {
+                        "amt": {
+                          "$id": "#/properties/activities/items/properties/statePersonnel/items/properties/years/year/amount",
+                          "$ref": "#/definitions/optionalNumber"
+                        },
+                        "perc": {
+                          "$id": "#/properties/activities/items/properties/statePersonnel/items/properties/years/year/fte",
+                          "$ref": "#/definitions/optionalNumber"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "summary": {
+            "$id": "#/properties/activities/items/properties/summary",
+            "type": "string"
+          },
+          "quarterlyFFP": {
+            "$id": "#/properties/activities/items/properties/quarterlyFFP",
+            "type": "object",
+            "patternProperties": {
+              "^[0-9]{4}$": {
+                "$id": "#/properties/activities/items/properties/quarterlyFFP/year",
+                "type": "object",
+                "required": ["1", "2", "3", "4"],
+                "patternProperties": {
+                  "^(1|2|3|4)$": {
+                    "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter",
+                    "type": "object",
+                    "required": ["contractors", "state"],
+                    "properties": {
+                      "contractors": {
+                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/contractors",
+                        "$ref": "#/definitions/optionalNumber"
+                      },
+                      "state": {
+                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/state",
+                        "$ref": "#/definitions/optionalNumber"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "federalCitations": {
+      "$id": "#/properties/federalCitations",
+      "type": "object",
+      "required": [],
+      "patternProperties": {
+        "^.+$": {
+          "$id": "#/properties/federalCitations/property",
+          "type": "array",
+          "items": {
+            "$id": "#/properties/federalCitations/property/items",
+            "type": "object",
+            "required": ["title", "checked", "explanation"],
+            "properties": {
+              "title": {
+                "$id": "#/properties/federalCitations/property/items/properties/title",
+                "type": "string"
+              },
+              "checked": {
+                "$id": "#/properties/federalCitations/property/items/properties/checked",
+                "type": ["boolean", "string"],
+                "pattern": "^$"
+              },
+              "explanation": {
+                "$id": "#/properties/federalCitations/property/items/properties/explanation",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "incentivePayments": {
+      "$id": "#/properties/incentivePayments",
+      "type": "object",
+      "required": ["ehAmt", "ehCt", "epAmt", "epCt"],
+      "patternProperties": {
+        "^e(h|p)(Amt|Ct)$": {
+          "$id": "#/properties/incentivePayments/type",
+          "type": "object",
+          "patternProperties": {
+            "^[0-9]{4}$": {
+              "$id": "#/properties/incentivePayments/type/year",
+              "type": "object",
+              "required": ["1", "2", "3", "4"],
+              "patternProperties": {
+                "^[0-9]$": {
+                  "$id": "#/properties/incentivePayments/type/year/quarter",
+                  "$ref": "#/definitions/optionalNumber"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "keyPersonnel": {
+      "$id": "#/properties/keyPersonnel",
+      "type": "array",
+      "items": {
+        "$id": "#/properties/keyPersonnel/items",
+        "type": "object",
+        "required": [
+          "name",
+          "position",
+          "email",
+          "isPrimary",
+          "percentTime",
+          "hasCosts",
+          "costs"
+        ],
+        "properties": {
+          "name": {
+            "$id": "#/properties/keyPersonnel/items/properties/name",
+            "type": "string"
+          },
+          "position": {
+            "$id": "#/properties/keyPersonnel/items/properties/position",
+            "type": "string"
+          },
+          "email": {
+            "$id": "#/properties/keyPersonnel/items/properties/email",
+            "type": "string"
+          },
+          "isPrimary": {
+            "$id": "#/properties/keyPersonnel/items/properties/isPrimary",
+            "type": "boolean"
+          },
+          "percentTime": {
+            "$id": "#/properties/keyPersonnel/items/properties/percentTime",
+            "type": "string",
+            "pattern": "^1?[0-9]{0,2}$"
+          },
+          "hasCosts": {
+            "$id": "#/properties/keyPersonnel/items/properties/hasCosts",
+            "type": "boolean"
+          },
+          "costs": {
+            "$id": "#/properties/keyPersonnel/items/properties/costs",
+            "type": "object",
+            "patternProperties": {
+              "^[0-9]{4}$": {
+                "$id": "#/properties/keyPersonnel/items/properties/costs/year",
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "narrativeHIE": {
+      "$id": "#/properties/narrativeHIE",
+      "type": "string"
+    },
+    "narrativeHIT": {
+      "$id": "#/properties/narrativeHIT",
+      "type": "string"
+    },
+    "narrativeMMIS": {
+      "$id": "#/properties/narrativeMMIS",
+      "type": "string"
+    },
+    "previousActivityExpenses": {
+      "$id": "#/properties/previousActivityExpenses",
+      "type": "object",
+      "patternProperties": {
+        "^[0-9]{4}$": {
+          "$id": "#/properties/previousActivityExpenses/year",
+          "type": "object",
+          "required": ["hithie", "mmis"],
+          "properties": {
+            "hithie": {
+              "$id": "#/properties/previousActivityExpenses/year/hithie",
+              "type": "object",
+              "required": ["federalActual", "totalApproved"],
+              "properties": {
+                "federalActual": {
+                  "$id": "#/properties/previousActivityExpenses/year/hithie/federalActual",
+                  "type": "number"
+                },
+                "totalApproved": {
+                  "$id": "#/properties/previousActivityExpenses/year/hithie/totalApproved",
+                  "type": "number"
+                }
+              }
+            },
+            "mmis": {
+              "$id": "#/properties/previousActivityExpenses/year/mmis",
+              "type": "object",
+              "required": ["50", "75", "90"],
+              "properties": {
+                "50": {
+                  "$id": "#/properties/previousActivityExpenses/year/mmis/50",
+                  "type": "object",
+                  "required": ["federalActual", "totalApproved"],
+                  "properties": {
+                    "federalActual": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/50/federalActaul",
+                      "type": "number"
+                    },
+                    "totalApproved": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/50/totalApproved",
+                      "type": "number"
+                    }
+                  }
+                },
+                "75": {
+                  "$id": "#/properties/previousActivityExpenses/year/mmis/75",
+                  "type": "object",
+                  "required": ["federalActual", "totalApproved"],
+                  "properties": {
+                    "federalActual": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/75/federalActual",
+                      "type": "number"
+                    },
+                    "totalApproved": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/75/totalApproved",
+                      "type": "number"
+                    }
+                  }
+                },
+                "90": {
+                  "$id": "#/properties/previousActivityExpenses/year/mmis/90",
+                  "type": "object",
+                  "required": ["federalActual", "totalApproved"],
+                  "properties": {
+                    "federalActual": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/90/federalActual",
+                      "type": "number"
+                    },
+                    "totalApproved": {
+                      "$id": "#/properties/previousActivityExpenses/year/mmis/90/totalApproved",
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "previousActivitySummary": {
+      "$id": "#/properties/previousActivitySummary",
+      "type": "string"
+    },
+    "programOverview": {
+      "$id": "#/properties/programOverview",
+      "type": "string"
+    },
+    "stateProfile": {
+      "$id": "#/properties/stateProfile",
+      "type": "object",
+      "required": ["medicaidDirector", "medicaidOffice"],
+      "properties": {
+        "medicaidDirector": {
+          "$id": "#/properties/stateProfile/properties/medicaidDirector",
+          "type": "object",
+          "required": ["name", "email", "phone"],
+          "properties": {
+            "name": {
+              "$id": "#/properties/stateProfile/properties/medicaidDirector/properties/name",
+              "type": "string"
+            },
+            "email": {
+              "$id": "#/properties/stateProfile/properties/medicaidDirector/properties/email",
+              "type": "string"
+            },
+            "phone": {
+              "$id": "#/properties/stateProfile/properties/medicaidDirector/properties/phone",
+              "type": "string"
+            }
+          }
+        },
+        "medicaidOffice": {
+          "$id": "#/properties/stateProfile/properties/medicaidOffice",
+          "type": "object",
+          "required": ["address1", "address2", "city", "state", "zip"],
+          "properties": {
+            "address1": {
+              "$id": "#/properties/stateProfile/properties/medicaidOffice/properties/address1",
+              "type": "string"
+            },
+            "address2": {
+              "$id": "#/properties/stateProfile/properties/medicaidOffice/properties/address2",
+              "type": "string"
+            },
+            "city": {
+              "$id": "#/properties/stateProfile/properties/medicaidOffice/properties/city",
+              "type": "string"
+            },
+            "state": {
+              "$id": "#/properties/stateProfile/properties/medicaidOffice/properties/state",
+              "type": "string"
+            },
+            "zip": {
+              "$id": "#/properties/stateProfile/properties/medicaidOffice/properties/zip",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "years": {
+      "$id": "#/properties/years",
+      "type": "array",
+      "items": {
+        "$id": "#/properties/years/items",
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { UPDATE_BUDGET } from '../actions/apd';
+import { UPDATE_BUDGET } from '../actions/budget';
 import { arrToObj } from '../util';
 import roundedPercents from '../util/roundedPercents';
 
@@ -133,7 +133,7 @@ const buildBudget = bigState => {
 
   // Since all of our expenses are tied up in activities, we'll start
   // by looking at all of them and doing Magic Math™. (It's not magic.)
-  Object.values(bigState.activities.byKey).forEach(activity => {
+  bigState.apd.data.activities.forEach(activity => {
     // We need to know the funding source so we know where to apply
     // this data in the big rollup budget.
     const fundingSource = activity.fundingSource.toLowerCase();
@@ -517,7 +517,7 @@ const buildBudget = bigState => {
   // object whose keys are FFYs and whose values are an array of percentages
   // for fiscal quarters.
   const percentPerQuarter = Object.entries(
-    Object.values(bigState.activities.byKey).filter(
+    bigState.apd.data.activities.filter(
       a => a.name === 'Program Administration'
     )[0].quarterlyFFP
   ).reduce(

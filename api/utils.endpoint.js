@@ -71,6 +71,7 @@ module.exports = {
   request: {
     delete: requestFor('delete'),
     get: requestFor('get'),
+    patch: requestFor('patch'),
     post: requestFor('post'),
     put: requestFor('put'),
     jar: request.jar

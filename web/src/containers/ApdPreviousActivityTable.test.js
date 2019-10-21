@@ -1,70 +1,98 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import {
   plain as ApdPreviousActivityTable,
   mapStateToProps,
   mapDispatchToProps
 } from './ApdPreviousActivityTable';
-import { updateApd } from '../actions/apd';
+
+import {
+  setPreviousActivityApprovedExpenseForHITandHIE,
+  setPreviousActivityFederalActualExpenseForHITandHIE
+} from '../actions/editApd';
 
 describe('apd previous activity table, mmis component', () => {
   const props = {
     previousActivityExpenses: {
       '1': {
-        hithie: {
-          federalActual: 10,
-          totalApproved: 20
-        }
+        federalActual: 10,
+        totalApproved: 20
       },
       '2': {
-        hithie: {
-          federalActual: 100,
-          totalApproved: 200
-        }
+        federalActual: 100,
+        totalApproved: 200
       }
     },
-    updateApd: sinon.spy()
+    setActual: jest.fn(),
+    setApproved: jest.fn()
   };
 
   beforeEach(() => {
-    props.updateApd.resetHistory();
+    props.setActual.mockClear();
+    props.setApproved.mockClear();
   });
 
   test('renders correctly', () => {
     expect(shallow(<ApdPreviousActivityTable {...props} />)).toMatchSnapshot();
   });
 
-  test('dispatches on a change', () => {
+  test('handles changing an approved expense', () => {
     shallow(<ApdPreviousActivityTable {...props} />)
       .find('DollarField[name="hithie-approved-total-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(
-      props.updateApd.calledWith({
-        previousActivityExpenses: {
-          '1': { hithie: { totalApproved: 'new value' } }
-        }
-      })
-    );
+    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value');
+  });
+
+  test('handles changing an actual expense', () => {
+    shallow(<ApdPreviousActivityTable {...props} />)
+      .find('DollarField[name="hithie-actual-federal-1"]')
+      .simulate('change', { target: { value: 'new value' } });
+
+    expect(props.setActual).toHaveBeenCalledWith('1', 'new value');
   });
 
   test('maps state to props', () => {
-    const state = {
-      apd: {
-        data: {
-          previousActivityExpenses: 'previous activities'
+    expect(
+      mapStateToProps({
+        apd: {
+          data: {
+            previousActivityExpenses: {
+              '1': {
+                hithie: {
+                  federalActual: 1,
+                  totalApproved: 2
+                },
+                mmis: {
+                  some: 'junk'
+                }
+              },
+              '2': {
+                hithie: {
+                  federalActual: 3,
+                  totalApproved: 4
+                },
+                mmis: {
+                  more: 'garbage'
+                }
+              }
+            }
+          }
         }
+      })
+    ).toEqual({
+      previousActivityExpenses: {
+        '1': { federalActual: 1, totalApproved: 2 },
+        '2': { federalActual: 3, totalApproved: 4 }
       }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      previousActivityExpenses: 'previous activities'
     });
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ updateApd });
+    expect(mapDispatchToProps).toEqual({
+      setActual: setPreviousActivityFederalActualExpenseForHITandHIE,
+      setApproved: setPreviousActivityApprovedExpenseForHITandHIE
+    });
   });
 });

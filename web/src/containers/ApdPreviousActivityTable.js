@@ -4,22 +4,27 @@ import { connect } from 'react-redux';
 
 import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
-import { updateApd } from '../actions/apd';
+import {
+  setPreviousActivityApprovedExpenseForHITandHIE,
+  setPreviousActivityFederalActualExpenseForHITandHIE
+} from '../actions/editApd';
 import { TABLE_HEADERS } from '../constants';
+
+import { selectPreviousHITHIEActivities } from '../reducers/apd.selectors';
 
 const ApdPreviousActivityTable = ({
   previousActivityExpenses,
-  updateApd: dispatchUpdateApd
+  setActual,
+  setApproved
 }) => {
   const years = Object.keys(previousActivityExpenses);
 
-  const handleChange = (year, program, type) => e => {
-    const update = {
-      previousActivityExpenses: {
-        [year]: { [program]: { [type]: e.target.value } }
-      }
-    };
-    dispatchUpdateApd(update);
+  const getActualsHandler = year => ({ target: { value } }) => {
+    setActual(year, value);
+  };
+
+  const getApprovedHandler = year => ({ target: { value } }) => {
+    setApproved(year, value);
   };
 
   return (
@@ -60,7 +65,7 @@ const ApdPreviousActivityTable = ({
       <tbody>
         {years.map(year => {
           const federalApproved =
-            previousActivityExpenses[year].hithie.totalApproved * 0.9;
+            previousActivityExpenses[year].totalApproved * 0.9;
 
           return (
             <tr key={year}>
@@ -80,8 +85,8 @@ const ApdPreviousActivityTable = ({
                   label={`total approved funding for HIT and HIE for FFY ${year}, state plus federal`}
                   labelClassName="ds-u-visibility--screen-reader"
                   name={`hithie-approved-total-${year}`}
-                  value={previousActivityExpenses[year].hithie.totalApproved}
-                  onChange={handleChange(year, 'hithie', 'totalApproved')}
+                  value={previousActivityExpenses[year].totalApproved}
+                  onChange={getApprovedHandler(year)}
                 />
               </td>
 
@@ -101,8 +106,8 @@ const ApdPreviousActivityTable = ({
                   label={`actual federal share for HIT and HIE for FFY ${year}`}
                   labelClassName="ds-u-visibility--screen-reader"
                   name={`hithie-actual-federal-${year}`}
-                  value={previousActivityExpenses[year].hithie.federalActual}
-                  onChange={handleChange(year, 'hithie', 'federalActual')}
+                  value={previousActivityExpenses[year].federalActual}
+                  onChange={getActualsHandler(year)}
                 />
               </td>
             </tr>
@@ -115,18 +120,18 @@ const ApdPreviousActivityTable = ({
 
 ApdPreviousActivityTable.propTypes = {
   previousActivityExpenses: PropTypes.object.isRequired,
-  updateApd: PropTypes.func.isRequired
+  setActual: PropTypes.func.isRequired,
+  setApproved: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({
-  apd: {
-    data: { previousActivityExpenses }
-  }
-}) => ({
-  previousActivityExpenses
+const mapStateToProps = state => ({
+  previousActivityExpenses: selectPreviousHITHIEActivities(state)
 });
 
-const mapDispatchToProps = { updateApd };
+const mapDispatchToProps = {
+  setActual: setPreviousActivityFederalActualExpenseForHITandHIE,
+  setApproved: setPreviousActivityApprovedExpenseForHITandHIE
+};
 
 export default connect(
   mapStateToProps,

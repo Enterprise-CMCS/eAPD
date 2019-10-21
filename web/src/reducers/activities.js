@@ -18,7 +18,8 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { SAVE_APD_SUCCESS, SELECT_APD, UPDATE_APD } from '../actions/apd';
+import { SAVE_APD_SUCCESS } from '../actions/apd';
+import { SELECT_APD } from '../actions/app';
 
 import {
   arrToObj,
@@ -32,37 +33,36 @@ export const setKeyGenerator = fn => {
   generateKey = fn;
 };
 
-const newGoal = () => ({
+export const newGoal = () => ({
   key: generateKey(),
   initialCollapsed: false,
   description: '',
-  expanded: true,
   objective: ''
 });
 
-const newMilestone = (milestone = '', endDate = '') => ({
+export const newMilestone = (milestone = '', endDate = '') => ({
   initialCollapsed: false,
   key: generateKey(),
   milestone,
   endDate
 });
 
-const statePersonDefaultYear = () => ({ amt: '', perc: '' });
-const newStatePerson = years => ({
+export const statePersonDefaultYear = () => ({ amt: '', perc: '' });
+export const newStatePerson = years => ({
   key: generateKey(),
   initialCollapsed: false,
   title: '',
-  desc: '',
+  description: '',
   years: arrToObj(years, statePersonDefaultYear())
 });
 
-const contractorDefaultYear = () => 0;
-const contractorDefaultHourly = () => ({ hours: '', rate: '' });
-const newContractor = years => ({
+export const contractorDefaultYear = () => 0;
+export const contractorDefaultHourly = () => ({ hours: '', rate: '' });
+export const newContractor = years => ({
   key: generateKey(),
   initialCollapsed: false,
   name: '',
-  desc: '',
+  description: '',
   start: '',
   end: '',
   files: [],
@@ -74,22 +74,22 @@ const newContractor = years => ({
   }
 });
 
-const expenseDefaultYear = () => 0;
+export const expenseDefaultYear = () => 0;
 
-const newExpense = years => ({
+export const newExpense = years => ({
   key: generateKey(),
   initialCollapsed: false,
   category: 'Hardware, software, and licensing',
-  desc: '',
+  description: '',
   years: arrToObj(years, expenseDefaultYear())
 });
 
-const costAllocationEntry = (other = 0, federal = 90, state = 10) => ({
+export const costAllocationEntry = (other = 0, federal = 90, state = 10) => ({
   other,
   ffp: { federal, state }
 });
 
-const quarterlyFFPEntry = () =>
+export const quarterlyFFPEntry = () =>
   [1, 2, 3, 4].reduce(
     (acc, quarter) => ({
       ...acc,
@@ -102,7 +102,7 @@ const quarterlyFFPEntry = () =>
     {}
   );
 
-const newActivity = ({
+export const newActivity = ({
   name = '',
   fundingSource = 'HIT',
   years = [],
@@ -111,7 +111,10 @@ const newActivity = ({
   alternatives: '',
   contractorResources: [newContractor(years)],
   costAllocation: arrToObj(years, costAllocationEntry()),
-  costAllocationDesc: '',
+  costAllocationNarrative: {
+    methodology: '',
+    otherSources: ''
+  },
   description: '',
   expenses: [newExpense(years)],
   fundingSource,
@@ -121,7 +124,6 @@ const newActivity = ({
   name,
   plannedEndDate: '',
   plannedStartDate: '',
-  otherFundingDesc: '',
   schedule: [newMilestone()],
   statePersonnel: [newStatePerson(years)],
   summary: '',
@@ -337,85 +339,7 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
-    case UPDATE_APD:
-      if (action.updates.years) {
-        const { years } = action.updates;
-        const update = { byKey: {} };
 
-        const fixupYears = (obj, defaultValue) => {
-          // Can't clone in the typical way because the incoming
-          // object derives from redux state and preventExtensions()
-          // has been called on it.  That means we can't add
-          // years if necessary.  To get around that, stringify
-          // then parse.  It's brute force but it works.
-          const out = JSON.parse(JSON.stringify(obj));
-
-          Object.keys(obj).forEach(year => {
-            if (!years.includes(year)) {
-              delete out[year];
-            }
-          });
-
-          years.forEach(year => {
-            if (!out[year]) {
-              out[year] = defaultValue();
-            }
-          });
-
-          return out;
-        };
-
-        const fixupExpenses = (objects, defaultValue) => () => {
-          // contractorResources, statePersonnel, and expenses
-          // are all arrays with years subproperties
-          if (Array.isArray(objects)) {
-            return objects.map(({ hourly, years: objYears, ...rest }) => {
-              if (hourly) {
-                return {
-                  ...rest,
-                  hourly: {
-                    ...hourly,
-                    data: fixupYears(hourly.data, contractorDefaultHourly)
-                  },
-                  years: fixupYears(objYears, defaultValue)
-                };
-              }
-
-              return {
-                ...rest,
-                years: fixupYears(objYears, defaultValue)
-              };
-            });
-          }
-          // but costAllocation is just an object whose properties
-          // are the years
-          return fixupYears(objects, defaultValue);
-        };
-
-        Object.entries(state.byKey).forEach(([key, activity]) => {
-          update.byKey[key] = {
-            years,
-            statePersonnel: fixupExpenses(
-              activity.statePersonnel,
-              statePersonDefaultYear
-            ),
-            contractorResources: fixupExpenses(
-              activity.contractorResources,
-              contractorDefaultYear
-            ),
-            expenses: fixupExpenses(activity.expenses, expenseDefaultYear),
-            costAllocation: fixupExpenses(
-              activity.costAllocation,
-              costAllocationEntry
-            ),
-            quarterlyFFP: () =>
-              fixupYears(activity.quarterlyFFP, quarterlyFFPEntry)
-          };
-        });
-
-        return u(update, state);
-      }
-      return state;
     case SELECT_APD: {
       const byKey = {};
       ((action.apd || {}).activities || []).forEach(a => {
