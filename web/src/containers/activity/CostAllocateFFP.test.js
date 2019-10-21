@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
 import {
@@ -7,15 +6,16 @@ import {
   makeMapStateToProps,
   mapDispatchToProps
 } from './CostAllocateFFP';
-import { updateActivity } from '../../actions/activities';
+import {
+  setCostAllocationFFPFundingSplit,
+  setCostAllocationFFPOtherFunding
+} from '../../actions/editActivity';
 
 describe('the CostAllocateFFP component', () => {
-  const sandbox = sinon.createSandbox();
-
   const state = {
-    activities: {
-      byKey: {
-        key: {
+    apd: {
+      data: {
+        activities: [{
           costAllocation: {
             '1066': {
               other: 10,
@@ -32,7 +32,7 @@ describe('the CostAllocateFFP component', () => {
               }
             }
           }
-        }
+        }]
       }
     },
     budget: {
@@ -58,7 +58,7 @@ describe('the CostAllocateFFP component', () => {
   };
 
   const props = {
-    aKey: 'activity key',
+    activityIndex: 0,
     byYearData: [
       {
         allocations: {
@@ -81,13 +81,14 @@ describe('the CostAllocateFFP component', () => {
         year: '1067'
       }
     ],
-    costAllocation: state.activities.byKey.key.costAllocation,
-    updateActivity: sandbox.stub()
+    costAllocation: state.apd.data.activities[0].costAllocation,
+    setFundingSplit: jest.fn(),
+    setOtherFunding: jest.fn()
   };
 
   beforeEach(() => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
+    props.setFundingSplit.mockClear();
+    props.setOtherFunding.mockClear();
   });
 
   test('renders correctly', () => {
@@ -100,15 +101,9 @@ describe('the CostAllocateFFP component', () => {
     component
       .find('DollarField')
       .filterWhere(n => n.props().value === 10)
-      .simulate('change', { target: { value: '150' } });
+      .simulate('change', { target: { value: 150 } });
 
-    expect(
-      props.updateActivity.calledWith(
-        'activity key',
-        { costAllocation: { '1066': { other: 150 } } },
-        true
-      )
-    );
+    expect(props.setOtherFunding).toHaveBeenCalledWith(0, '1066', 150);
   });
 
   test('handles changes to cost allocation dropdown', () => {
@@ -118,19 +113,12 @@ describe('the CostAllocateFFP component', () => {
       .filterWhere(n => n.props().value === '90-10')
       .simulate('change', { target: { value: '35-65' } });
 
-    expect(
-      props.updateActivity.calledWith(
-        'activity key',
-        { costAllocation: { '1066': { ffp: { federal: 35, state: 65 } } } },
-        true
-      )
-    );
+    expect(props.setFundingSplit).toHaveBeenCalledWith(0, '1066', 35, 65);
   });
 
   test('maps redux state to component props', () => {
     const mapStateToProps = makeMapStateToProps();
-
-    expect(mapStateToProps(state, { aKey: 'key' })).toEqual({
+    expect(mapStateToProps(state, { activityIndex: 0, aKey: 'key' })).toEqual({
       byYearData: [
         {
           allocations: {
@@ -153,13 +141,14 @@ describe('the CostAllocateFFP component', () => {
           year: '1067'
         }
       ],
-      costAllocation: state.activities.byKey.key.costAllocation
+      costAllocation: state.apd.data.activities[0].costAllocation
     });
   });
 
   test('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      updateActivity
+      setFundingSplit: setCostAllocationFFPFundingSplit,
+      setOtherFunding: setCostAllocationFFPOtherFunding
     });
   });
 });

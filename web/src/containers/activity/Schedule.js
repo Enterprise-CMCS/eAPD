@@ -6,46 +6,44 @@ import FormAndReviewList from '../../components/FormAndReviewList';
 import { MilestoneForm, MilestoneReview } from './Milestone';
 
 import {
-  addActivityMilestone as addActivityMilestoneAction,
-  removeActivityMilestone as removeActivityMilestoneAction,
-  updateActivity as updateActivityAction
-} from '../../actions/activities';
+  addMilestone,
+  removeMilestone,
+  setActivityEndDate,
+  setActivityStartDate
+} from '../../actions/editActivity';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import DateField from '../../components/DateField';
 import { t } from '../../i18n';
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import { stateDateToDisplay } from '../../util';
 
 const Schedule = ({
   activity,
-  addActivityMilestone,
-  removeActivityMilestone,
-  updateActivity
+  activityIndex,
+  add,
+  remove,
+  setEndDate,
+  setStartDate
 }) => {
   const handleAdd = useCallback(() => {
-    addActivityMilestone(activity.key);
+    add(activityIndex);
   });
 
   const handleActivityStartChange = useCallback((_, dateStr) => {
-    updateActivity(activity.key, { plannedStartDate: dateStr });
+    setStartDate(activityIndex, dateStr);
   });
 
   const handleActivityEndChange = useCallback((_, dateStr) => {
-    updateActivity(activity.key, { plannedEndDate: dateStr });
-  });
-
-  const handleMilestoneNameChange = useCallback((index, name) => {
-    updateActivity(activity.key, {
-      schedule: { [index]: { milestone: name } }
-    });
-  });
-
-  const handleMilestoneDateChange = useCallback((index, date) => {
-    updateActivity(activity.key, { schedule: { [index]: { endDate: date } } });
+    setEndDate(activityIndex, dateStr);
   });
 
   const handleDelete = useCallback(key => {
-    removeActivityMilestone(activity.key, key);
+    activity.schedule.forEach(({ key: milestoneKey }, i) => {
+      if (milestoneKey === key) {
+        remove(activityIndex, i);
+      }
+    });
   });
 
   return (
@@ -83,14 +81,13 @@ const Schedule = ({
           <hr />
 
           <FormAndReviewList
+            activityIndex={activityIndex}
             addButtonText={t('activities.schedule.addMilestoneButtonText')}
             list={activity.schedule}
             collapsed={MilestoneReview}
             expanded={MilestoneForm}
             noDataMessage={t('activities.schedule.noMilestonesNotice')}
             onAddClick={handleAdd}
-            onChangeName={handleMilestoneNameChange}
-            onChangeDate={handleMilestoneDateChange}
             onDeleteClick={handleDelete}
           />
         </div>
@@ -101,19 +98,22 @@ const Schedule = ({
 
 Schedule.propTypes = {
   activity: PropTypes.object.isRequired,
-  addActivityMilestone: PropTypes.func.isRequired,
-  removeActivityMilestone: PropTypes.func.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  add: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  setEndDate: PropTypes.func.isRequired,
+  setStartDate: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
-  activity: byKey[aKey]
+const mapStateToProps = (state, { activityIndex }) => ({
+  activity: selectActivityByIndex(state, { activityIndex })
 });
 
 const mapDispatchToProps = {
-  addActivityMilestone: addActivityMilestoneAction,
-  removeActivityMilestone: removeActivityMilestoneAction,
-  updateActivity: updateActivityAction
+  add: addMilestone,
+  remove: removeMilestone,
+  setEndDate: setActivityEndDate,
+  setStartDate: setActivityStartDate
 };
 
 export default connect(

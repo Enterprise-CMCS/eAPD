@@ -8,14 +8,13 @@ import {
 } from './NonPersonnelCosts';
 
 import {
-  addActivityExpense,
-  removeActivityExpense,
-  updateActivity
-} from '../../actions/activities';
+  addNonPersonnelCost,
+  removeNonPersonnelCost
+} from '../../actions/editActivity';
 
 describe('activity non-personnel costs subsection', () => {
   const props = {
-    activityKey: 'activity key',
+    activityIndex: 58,
     addExpense: jest.fn(),
     expenses: [
       {
@@ -29,15 +28,13 @@ describe('activity non-personnel costs subsection', () => {
         }
       }
     ],
-    removeExpense: jest.fn(),
-    updateActivity: jest.fn()
+    removeExpense: jest.fn()
   };
   const component = shallow(<NonPersonnelCosts {...props} />);
 
   beforeEach(() => {
     props.addExpense.mockClear();
     props.removeExpense.mockClear();
-    props.updateActivity.mockClear();
   });
 
   it('renders correctly', () => {
@@ -49,40 +46,12 @@ describe('activity non-personnel costs subsection', () => {
 
     it('handles adding a new cost', () => {
       list.prop('onAddClick')();
-      expect(props.addExpense).toHaveBeenCalledWith('activity key');
+      expect(props.addExpense).toHaveBeenCalledWith(58);
     });
 
     it('handles deleting a cost', () => {
       list.prop('onDeleteClick')('cost key');
-      expect(props.removeExpense).toHaveBeenCalledWith(
-        'activity key',
-        'cost key'
-      );
-    });
-
-    it('handles editing a cost category', () => {
-      list.prop('handleEditCategory')(3, 'new category');
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        expenses: { 3: { category: 'new category' } }
-      });
-    });
-
-    it('handles editing a cost description', () => {
-      list.prop('handleEditDesc')(3, 'new description');
-      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-        expenses: { 3: { desc: 'new description' } }
-      });
-    });
-
-    it('handles editing a cost for a fiscal year', () => {
-      list.prop('handleEditCost')(3, 1997, 'new cost');
-      expect(props.updateActivity).toHaveBeenCalledWith(
-        'activity key',
-        {
-          expenses: { 3: { years: { 1997: 'new cost' } } }
-        },
-        true
-      );
+      expect(props.removeExpense).toHaveBeenCalledWith(58, 0);
     });
   });
 
@@ -90,25 +59,31 @@ describe('activity non-personnel costs subsection', () => {
     expect(
       mapStateToProps(
         {
-          activities: {
-            byKey: {
-              'activity 1': {
-                expenses: 'these are expenses'
-              },
-              'activity 2': {}
+          apd: {
+            data: {
+              activities: [
+                {
+                  expenses: 'these are wrong expenses'
+                },
+                {
+                  expenses: 'these are wrong expenses'
+                },
+                {
+                  expenses: 'these are expenses'
+                }
+              ]
             }
           }
         },
-        { aKey: 'activity 1' }
+        { activityIndex: 2 }
       )
-    ).toEqual({ activityKey: 'activity 1', expenses: 'these are expenses' });
+    ).toEqual({ expenses: 'these are expenses' });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      addExpense: addActivityExpense,
-      removeExpense: removeActivityExpense,
-      updateActivity
+      addExpense: addNonPersonnelCost,
+      removeExpense: removeNonPersonnelCost
     });
   });
 });

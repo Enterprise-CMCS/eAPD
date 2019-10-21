@@ -79,6 +79,85 @@ const openAPI = {
         }
       }
     },
+    patch: {
+      tags: ['APDs'],
+      summary: 'Update a specific APD',
+      description: `Update an APD in the system using a set of JSON Patch objects. If state profile information is included, the profile information is also updated for the APD's state.`,
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the apd to update',
+          required: true,
+          schema: {
+            type: 'number'
+          }
+        }
+      ],
+      requestBody: {
+        description:
+          'A set of JSON Patch objects to be applied to the APD to change it',
+        required: true,
+        content: jsonResponse(
+          arrayOf({
+            type: 'object',
+            description: 'A JSON Patch object',
+            properties: {
+              op: {
+                type: 'string',
+                enum: ['add', 'remove', 'replace'],
+                description:
+                  'The JSON Patch operation. This API only supports add, remove, and replace.'
+              },
+              path: {
+                type: 'string',
+                description:
+                  'The path of the value to be operated on, specified as a JSON Pointer'
+              },
+              value: {
+                description:
+                  'For add or replace operations, the new value to be applied'
+              }
+            }
+          })
+        )
+      },
+      responses: {
+        200: {
+          description: 'The update was successful',
+          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+        },
+        400: {
+          description: 'The update failed due to a problem with the input data',
+          content: jsonResponse({
+            oneOf: [
+              {
+                ...arrayOf({
+                  type: 'object',
+                  description:
+                    'If the requested patch caused a validation failure, the API will return a list of invalid paths',
+                  properties: {
+                    path: {
+                      type: 'string',
+                      description:
+                        'A JSON Pointer path whose patched value is invalid'
+                    }
+                  }
+                })
+              },
+              {
+                type: 'null',
+                description:
+                  'If the requested patch failed for unknown reasons, nothing will be returned'
+              }
+            ]
+          })
+        },
+        404: {
+          description: 'The apd ID does not match any known apds for the user'
+        }
+      }
+    },
     put: {
       tags: ['APDs'],
       summary: 'Update a specific APD',

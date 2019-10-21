@@ -1,8 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
-
-import { updateApd } from '../actions/apd';
 
 import {
   plain as PreviousActivities,
@@ -10,43 +7,39 @@ import {
   mapDispatchToProps
 } from './PreviousActivities';
 
+import { setPreviousActivitySummary } from '../actions/editApd';
+
 describe('previous activities component', () => {
-  test('renders correctly if data is not loaded', () => {
-    const component = shallow(
-      <PreviousActivities
-        previousActivitySummary="previous"
-        updateApd={() => {}}
-      />
-    );
+  const props = {
+    previousActivitySummary: 'bob',
+    setSummary: jest.fn()
+  };
+
+  beforeEach(() => {
+    props.setSummary.mockClear();
+  });
+
+  it('renders correctly', () => {
+    const component = shallow(<PreviousActivities {...props} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('updates on text change', () => {
-    const updateApdProps = sinon.spy();
-    const component = shallow(
-      <PreviousActivities
-        previousActivitySummary="previous"
-        updateApd={updateApdProps}
-      />
-    );
+  it('updates on text change', () => {
+    const component = shallow(<PreviousActivities {...props} />);
     component.find('RichText').prop('onSync')('this is html');
 
+    expect(props.setSummary).toHaveBeenCalledWith('this is html');
+  });
+
+  it('maps state to props', () => {
     expect(
-      updateApdProps.calledWith({ previousActivitySummary: 'this is html' })
-    ).toBeTruthy();
+      mapStateToProps({ apd: { data: { previousActivitySummary: 'summary' } } })
+    ).toEqual({ previousActivitySummary: 'summary' });
   });
 
-  test('maps state to props', () => {
-    const state = {
-      apd: { data: { previousActivitySummary: 'moop moop' } }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      previousActivitySummary: 'moop moop'
+  it('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setSummary: setPreviousActivitySummary
     });
-  });
-
-  test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ updateApd });
   });
 });

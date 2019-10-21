@@ -253,17 +253,3 @@ export const applyToNumbers = (obj, fn) => {
   });
   return o;
 };
-
-export const replaceNulls = (obj, newValue = '') => {
-  const replace = o => {
-    Object.keys(o).forEach(k => {
-      // eslint-disable-next-line no-param-reassign
-      if (o[k] === null) o[k] = newValue;
-      else if (typeof o[k] === 'object') replace(o[k]);
-    });
-  };
-
-  const objNew = JSON.parse(JSON.stringify(obj));
-  replace(objNew);
-  return objNew;
-};
