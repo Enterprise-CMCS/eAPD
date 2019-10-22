@@ -1,11 +1,9 @@
-const validate = require('./validate');
-const defaultHash = require('../../auth/passwordHash');
 const logger = require('../../logger')('users route post');
-const { knex } = require('../../db');
+const { createUser, validateUser } = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
+module.exports = app => {
   logger.silly('setting up POST /users route');
   app.post('/users', can('add-users'), async (req, res) => {
     logger.silly(req, 'handling POST /users route');
@@ -35,7 +33,7 @@ module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
         }
 
         try {
-          await validate(posted);
+          await validateUser(posted);
         } catch (e) {
           logger.verbose('validation fail');
           return res
@@ -44,11 +42,7 @@ module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
             .end();
         }
 
-        posted.password = hash.hashSync(posted.password);
-
-        const userID = await db('users')
-          .insert(posted)
-          .returning('id');
+        const userID = await createUser(posted);
 
         audit.set('id', userID[0]);
         audit.log();

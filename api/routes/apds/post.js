@@ -28,13 +28,13 @@ module.exports = (app, { db = knex } = {}) => {
     try {
       const apd = getNewApd();
 
-      apd.name = `${req.user.state.toUpperCase()}-${moment(Date.now()).format(
-        'YYYY-MM-DD'
-      )}-HITECH-APD`;
+      apd.name = `${req.user.state.id.toUpperCase()}-${moment(
+        Date.now()
+      ).format('YYYY-MM-DD')}-HITECH-APD`;
 
       const stateProfile = await db('states')
         .select('medicaid_office')
-        .where({ id: req.user.state })
+        .where({ id: req.user.state.id })
         .first();
 
       if (stateProfile) {
@@ -67,7 +67,7 @@ module.exports = (app, { db = knex } = {}) => {
 
       const id = await db('apds')
         .insert({
-          state_id: req.user.state,
+          state_id: req.user.state.id,
           status: 'draft',
           document: apd
         })

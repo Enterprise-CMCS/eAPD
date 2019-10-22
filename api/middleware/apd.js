@@ -59,7 +59,7 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
         // ...then get a list of APDs this user is associated with
 
         // Make sure there's overlap
-        if (req.meta.apd.state === req.user.state) {
+        if (req.meta.apd.state === req.user.state.id) {
           next();
         } else {
           logger.verbose(req, 'user does not have access to the APD');
