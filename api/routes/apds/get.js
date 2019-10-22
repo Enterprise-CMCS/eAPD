@@ -9,7 +9,7 @@ module.exports = (app, { db = knex } = {}) => {
     logger.silly(req, 'handling GET /apds');
 
     try {
-      const stateId = req.user.state;
+      const stateId = req.user.state.id;
 
       if (!stateId) {
         logger.verbose('user does not have an associated state');
@@ -42,7 +42,7 @@ module.exports = (app, { db = knex } = {}) => {
     logger.silly(req, 'handling GET /apds/:id');
 
     try {
-      const stateId = req.user.state;
+      const stateId = req.user.state.id;
 
       if (!stateId) {
         logger.verbose('user does not have an associated state');

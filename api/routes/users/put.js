@@ -1,11 +1,9 @@
-const validate = require('./validate');
-const defaultHash = require('../../auth/passwordHash');
-const logger = require('../../logger')('users route post');
-const { knex } = require('../../db');
+const logger = require('../../logger')('users route put');
+const { getUserByID, updateUser, validateUser } = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
+module.exports = app => {
   logger.silly('setting up PUT /users/:id route');
   app.put('/users/:id', can('add-users'), async (req, res) => {
     const audit = auditor(auditor.actions.MODIFY_ACCOUNT, req);
@@ -27,9 +25,7 @@ module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
         delete req.body.role;
       }
 
-      const targetUser = await db('users')
-        .where('id', targetID)
-        .first();
+      const targetUser = await getUserByID(targetID);
       if (!targetUser) {
         logger.info(
           req,
@@ -43,9 +39,17 @@ module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
       });
       logger.verbose(req, `request to modify user [${targetUser.email}]`);
 
-      const update = {};
+      const update = {
+        id: targetID
+      };
 
-      ['email', 'name', 'password', 'position', 'phone'].forEach(field => {
+      // Externally we call this field "username" because I don't even know,
+      // but internally it's called "email", so switch it back here.
+      if (req.body.username) {
+        update.email = req.body.username;
+      }
+
+      ['name', 'password', 'position', 'phone'].forEach(field => {
         if (req.body[field]) {
           audit.set(field, req.body[field]);
           update[field] = req.body[field];
@@ -69,7 +73,7 @@ module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
       }
 
       try {
-        await validate(update);
+        await validateUser(update);
       } catch (e) {
         return res
           .status(400)
@@ -77,19 +81,7 @@ module.exports = (app, { db = knex, hash = defaultHash } = {}) => {
           .end();
       }
 
-      if (update.password) {
-        update.password = hash.hashSync(update.password);
-      }
-      if (update.phone) {
-        update.phone = update.phone.replace(/[^\d]/g, '');
-      }
-
-      if (Object.keys(update).length) {
-        await db('users')
-          .where('id', targetID)
-          .update(update);
-      }
-
+      await updateUser(targetID, update);
       audit.log();
       logger.silly(req, 'all done');
       return res.status(204).end();

@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const defaultHash = require('./passwordHash');
 const logger = require('../logger')('authentication');
-const { knex } = require('../db');
+const { getUserByEmail, sanitizeUser, updateUser } = require('../db');
 
 // This value doesn't need to be persisted between process instances of the
 // server. It only needs to persist between the request for the nonce and the
@@ -10,7 +10,7 @@ const { knex } = require('../db');
 // should somewhat increase security - automatic key cycling!
 const NONCE_SECRET = crypto.randomBytes(64);
 
-module.exports = ({ db = knex, hash = defaultHash } = {}) => async (
+module.exports = ({ hash = defaultHash } = {}) => async (
   nonce,
   password,
   done
@@ -30,9 +30,7 @@ module.exports = ({ db = knex, hash = defaultHash } = {}) => async (
     const username = verified.username;
     logger.verbose(`authentication request for [${username}]`);
 
-    const user = await db('users')
-      .whereRaw('LOWER(email) = ?', [username.toLowerCase()])
-      .first();
+    const user = await getUserByEmail(username, { clean: false });
 
     if (user && user.locked_until) {
       // If the lock date is still in the future, we can bail out now.
@@ -44,41 +42,13 @@ module.exports = ({ db = knex, hash = defaultHash } = {}) => async (
       }
 
       // The lock has expired, so go ahead and clear it.
-      await db('users')
-        .where('id', user.id)
-        .update({ failed_logons: null, locked_until: null });
+      await updateUser(user.id, { failed_logons: null, locked_until: null });
     }
 
     if (user && (await hash.compare(password, user.password))) {
       logger.verbose(`authenticated user [${username}]`);
 
-      await db('users')
-        .where('id', user.id)
-        .update({ failed_logons: null, locked_until: null });
-
-      const authRole = await db('auth_roles')
-        .where('name', user.auth_role)
-        .select('id')
-        .first();
-
-      const authActivityIDs = authRole
-        ? await db('auth_role_activity_mapping')
-            .where('role_id', authRole.id)
-            .select('activity_id')
-        : [];
-
-      const authActivityNames = await db('auth_activities')
-        // eslint-disable-next-line camelcase
-        .whereIn('id', authActivityIDs.map(({ activity_id }) => activity_id))
-        .select('name');
-
-      return done(null, {
-        username: user.email,
-        id: user.id,
-        role: user.auth_role,
-        state: user.state_id,
-        activities: authActivityNames.map(({ name }) => name)
-      });
+      return done(null, sanitizeUser(user));
     }
 
     // If the user was found and we're here, then the password didn't match.
@@ -105,9 +75,7 @@ module.exports = ({ db = knex, hash = defaultHash } = {}) => async (
         update.locked_until = Date.now() + duration;
       }
 
-      await db('users')
-        .where('id', user.id)
-        .update(update);
+      await updateUser(user.id, update);
     }
 
     logger.verbose(`no user found or password mismatch for [${username}]`);
