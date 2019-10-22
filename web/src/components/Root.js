@@ -12,7 +12,6 @@ const Root = ({ history, store }) => {
   
   return (
     <Provider store={store}>
-      <UpgradeBrowser />
       <ConnectedRouter history={history}>
         <App />
       </ConnectedRouter>
