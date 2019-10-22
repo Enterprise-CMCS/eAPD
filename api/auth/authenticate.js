@@ -96,7 +96,7 @@ module.exports = ({ db = knex, hash = defaultHash } = {}) => async (
       failedLogons.push(Date.now());
 
       const update = {
-        failed_logons: failedLogons
+        failed_logons: JSON.stringify(failedLogons)
       };
 
       if (failedLogons.length >= +process.env.AUTH_LOCK_FAILED_ATTEMPTS_COUNT) {
