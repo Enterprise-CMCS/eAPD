@@ -9,9 +9,10 @@ import { isBrowserOutdated } from '../util/browser';
 
 const Root = ({ history, store }) => {
   if (isBrowserOutdated()) return <UpgradeBrowser />;
-
+  
   return (
     <Provider store={store}>
+      <UpgradeBrowser />
       <ConnectedRouter history={history}>
         <App />
       </ConnectedRouter>
