@@ -2,7 +2,7 @@ const Ajv = require('ajv');
 const moment = require('moment');
 
 const logger = require('../../logger')('apds route post');
-const { knex } = require('../../db');
+const { createAPD: ga, getStateProfile: gs } = require('../../db');
 const { can } = require('../../middleware');
 
 const getNewApd = require('./post.data');
@@ -20,7 +20,7 @@ const validatorFunction = ajv.compile({
   additionalProperties: false
 });
 
-module.exports = (app, { db = knex } = {}) => {
+module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res) => {
     logger.silly(req, 'handling POST /apds route');
@@ -32,12 +32,9 @@ module.exports = (app, { db = knex } = {}) => {
         Date.now()
       ).format('YYYY-MM-DD')}-HITECH-APD`;
 
-      const stateProfile = await db('states')
-        .select('medicaid_office')
-        .where({ id: req.user.state.id })
-        .first();
+      const stateProfile = await getStateProfile(req.user.state.id);
 
-      if (stateProfile) {
+      if (stateProfile && stateProfile.medicaid_office) {
         // Merge the state profile from the states table into the default
         // values so that if the states table info is missing any fields,
         // we preserve the defaults
@@ -65,17 +62,15 @@ module.exports = (app, { db = knex } = {}) => {
         return res.status(500).end();
       }
 
-      const id = await db('apds')
-        .insert({
-          state_id: req.user.state.id,
-          status: 'draft',
-          document: apd
-        })
-        .returning('id');
+      const id = await createAPD({
+        state_id: req.user.state.id,
+        status: 'draft',
+        document: apd
+      });
 
       return res.send({
         ...apd,
-        id: id[0],
+        id,
         updated: new Date().toISOString()
       });
     } catch (e) {

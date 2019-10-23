@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const logger = require('../logger')('session management');
-const { knex } = require('../db');
+const { raw: db } = require('../db');
 
 const sessionLifetimeMilliseconds =
   +process.env.SESSION_LIFETIME_MINUTES * 60 * 1000;
@@ -8,7 +8,7 @@ const sessionLifetimeMilliseconds =
 const removeExpired = async () => {
   logger.silly('removing expired sessions');
   try {
-    await knex('auth_sessions')
+    await db('auth_sessions')
       .where('expiration', '<', Date.now())
       .del();
   } catch (e) {
@@ -32,7 +32,7 @@ const addUserSession = async userID => {
   );
 
   try {
-    await knex('auth_sessions').insert({
+    await db('auth_sessions').insert({
       session_id: sessionID,
       user_id: userID,
       expiration: Date.now() + sessionLifetimeMilliseconds
@@ -59,7 +59,7 @@ const getUserIDFromSession = async sessionID => {
   logger.silly(`fetching user ID for session ${sessionID}`);
 
   try {
-    const session = await knex('auth_sessions')
+    const session = await db('auth_sessions')
       .where('session_id', sessionID)
       .andWhere('expiration', '>', Date.now())
       .select('user_id')
@@ -68,7 +68,7 @@ const getUserIDFromSession = async sessionID => {
     if (session) {
       logger.silly(`got user ID ${session.user_id}`);
       logger.silly(`extending session lifetime`);
-      await knex('auth_sessions')
+      await db('auth_sessions')
         .where('session_id', sessionID)
         .update({ expiration: Date.now() + sessionLifetimeMilliseconds });
       return session.user_id;
@@ -91,7 +91,7 @@ const getUserIDFromSession = async sessionID => {
 const removeUserSession = async sessionID => {
   logger.silly(`deleting session ${sessionID}`);
   try {
-    await knex('auth_sessions')
+    await db('auth_sessions')
       .where('session_id', sessionID)
       .del();
   } catch (e) {

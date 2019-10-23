@@ -3,7 +3,7 @@ const { apply_patch: applyPatch } = require('jsonpatch');
 const jsonpointer = require('jsonpointer');
 
 const logger = require('../../logger')('apds route put');
-const { knex } = require('../../db');
+const { getAPDByID: ga, updateAPDDocument: ua } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
 const apdSchema = require('../../schemas/apd.json');
 
@@ -25,7 +25,12 @@ const staticFields = ['/name'];
 
 module.exports = (
   app,
-  { db = knex, patchObject = applyPatch, validateApd = validatorFunction } = {}
+  {
+    getAPDByID = ga,
+    patchObject = applyPatch,
+    updateAPDDocument = ua,
+    validateApd = validatorFunction
+  } = {}
 ) => {
   logger.silly('setting up PATCH /apds/:id route');
   app.patch(
@@ -55,9 +60,7 @@ module.exports = (
           document: currentDocument,
           state_id: stateID,
           status
-        } = await db('apds')
-          .where('id', req.params.id)
-          .first('document', 'state_id', 'status');
+        } = await getAPDByID(req.params.id);
 
         let updatedDocument;
         try {
@@ -88,30 +91,11 @@ module.exports = (
             .end();
         }
 
-        const updateTime = new Date().toISOString();
-
-        const transaction = await db.transaction();
-
-        await transaction('apds')
-          .where('id', req.params.id)
-          .update({
-            document: updatedDocument,
-            updated_at: updateTime
-          });
-
-        const stateProfileChanged = patch.some(p =>
-          p.path.startsWith('/stateProfile/')
+        const updateTime = await updateAPDDocument(
+          req.params.id,
+          stateID,
+          updatedDocument
         );
-
-        // If the state profile was changed for the APD, also persist it to
-        // the state, so future APDs will get it for free.
-        if (stateProfileChanged) {
-          await transaction('states')
-            .where('id', stateID)
-            .update({ medicaid_office: updatedDocument.stateProfile });
-        }
-
-        await transaction.commit();
 
         return res.send({
           ...updatedDocument,

@@ -1,13 +1,13 @@
 const logger = require('../../../logger')('auth activities route index');
-const { knex } = require('../../../db');
+const { getAuthActivities: ga } = require('../../../db');
 const { can } = require('../../../middleware');
 
-module.exports = (app, { db = knex } = {}) => {
+module.exports = (app, { getAuthActivities = ga } = {}) => {
   logger.silly('setting up GET /auth/activities route');
   app.get('/auth/activities', can('view-roles'), async (req, res) => {
     logger.silly(req, 'handling GET /auth/activities');
     try {
-      const activities = await db('auth_activities').select();
+      const activities = await getAuthActivities();
       logger.silly(
         req,
         `got all the activities: ${activities
