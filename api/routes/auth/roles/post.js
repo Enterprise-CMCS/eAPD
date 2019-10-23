@@ -1,8 +1,19 @@
 const logger = require('../../../logger')('roles route post');
-const { knex } = require('../../../db');
+const {
+  createAuthRole: cr,
+  getAuthActivitiesByIDs: gai,
+  getAuthRoleByName: grn
+} = require('../../../db');
 const { can } = require('../../../middleware');
 
-module.exports = (app, { db = knex } = {}) => {
+module.exports = (
+  app,
+  {
+    createAuthRole = cr,
+    getAuthActivitiesByIDs = gai,
+    getAuthRoleByName = grn
+  } = {}
+) => {
   logger.silly('setting up POST /auth/roles route');
   app.post('/auth/roles', can('create-roles'), async (req, res) => {
     logger.silly(req, 'handling POST /auth/roles route');
@@ -19,11 +30,7 @@ module.exports = (app, { db = knex } = {}) => {
           throw new Error('missing-name');
         }
 
-        if (
-          await db('auth_roles')
-            .where('name', req.body.name)
-            .first()
-        ) {
+        if (await getAuthRoleByName(req.body.name)) {
           logger.verbose('another role already has this name');
           throw new Error('duplicate-name');
         }
@@ -44,9 +51,9 @@ module.exports = (app, { db = knex } = {}) => {
         }
         logger.silly('all role activities are numbers');
 
-        const validActivities = await db('auth_activities')
-          .whereIn('id', req.body.activities)
-          .select();
+        const validActivities = await getAuthActivitiesByIDs(
+          req.body.activities
+        );
         if (validActivities.length < req.body.activities.length) {
           logger.verbose('one or more activitiy IDs are invalid');
           throw new Error('invalid-activities');
@@ -64,27 +71,14 @@ module.exports = (app, { db = knex } = {}) => {
 
       logger.silly(req, 'request is valid, creating new role');
 
-      const transaction = await db.transaction();
-      const roleID = await transaction('auth_roles')
-        .insert({ name: req.body.name })
-        .returning('id');
+      const roleID = await createAuthRole(req.body.name, req.body.activities);
 
-      logger.silly(req, 'attaching activities', req.body.activities);
-      await transaction('auth_role_activity_mapping').insert(
-        req.body.activities.map(activityID => ({
-          role_id: roleID[0],
-          activity_id: activityID
-        }))
-      );
-
-      await transaction.commit();
-
-      const activities = (await db('auth_activities')
-        .whereIn('id', req.body.activities)
-        .select('name')).map(({ name }) => name);
+      const activities = (await getAuthActivitiesByIDs(
+        req.body.activities
+      )).map(({ name }) => name);
 
       const role = {
-        id: roleID[0],
+        id: roleID,
         name: req.body.name,
         activities
       };

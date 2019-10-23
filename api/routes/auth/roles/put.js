@@ -1,8 +1,21 @@
 const logger = require('../../../logger')('roles route put');
-const { knex } = require('../../../db');
+const {
+  getAuthActivitiesByIDs: gai,
+  getAuthRoleByID: gri,
+  getAuthRoleByName: grn,
+  updateAuthRole: ur
+} = require('../../../db');
 const { can } = require('../../../middleware');
 
-module.exports = (app, { db = knex } = {}) => {
+module.exports = (
+  app,
+  {
+    getAuthActivitiesByIDs = gai,
+    getAuthRoleByID = gri,
+    getAuthRoleByName = grn,
+    updateAuthRole = ur
+  } = {}
+) => {
   logger.silly('setting up PUT /auth/roles/:id route');
   app.put('/auth/roles/:id', can('edit-roles'), async (req, res) => {
     logger.silly(req, 'handling PUT /auth/roles/:id route');
@@ -11,18 +24,13 @@ module.exports = (app, { db = knex } = {}) => {
 
       const roleID = +req.params.id;
 
-      const role = await db('auth_roles')
-        .where('id', roleID)
-        .first();
+      const role = await getAuthRoleByID(roleID);
       if (!role) {
         logger.verbose(req, `no role found for [${roleID}]`);
         return res.status(404).end();
       }
 
-      const userRole = await db('auth_roles')
-        .where('name', req.user.role)
-        .select('id')
-        .first();
+      const userRole = await getAuthRoleByName(req.user.role);
       if (userRole.id === role.id) {
         logger.info(req, `requested to update user's own role [${roleID}]`);
         return res.status(403).end();
@@ -41,11 +49,7 @@ module.exports = (app, { db = knex } = {}) => {
           throw new Error('missing-name');
         }
 
-        if (
-          await db('auth_roles')
-            .where('name', req.body.name)
-            .first()
-        ) {
+        if (await getAuthRoleByName(req.body.name)) {
           logger.verbose('another role already has this name');
           throw new Error('duplicate-name');
         }
@@ -66,9 +70,9 @@ module.exports = (app, { db = knex } = {}) => {
         }
         logger.silly('all role activities are numbers');
 
-        const validActivities = await db('auth_activities')
-          .whereIn('id', req.body.activities)
-          .select();
+        const validActivities = await getAuthActivitiesByIDs(
+          req.body.activities
+        );
         if (validActivities.length < req.body.activities.length) {
           logger.verbose('one or more activitiy IDs are invalid');
           throw new Error('invalid-activities');
@@ -86,31 +90,11 @@ module.exports = (app, { db = knex } = {}) => {
 
       logger.silly(req, 'request is valid');
 
-      const transaction = await db.transaction();
-      if (req.body.name) {
-        await transaction('auth_roles')
-          .where('id', roleID)
-          .update({ name: req.body.name });
-      }
+      await updateAuthRole(roleID, req.body.name, req.body.activities);
 
-      logger.silly(req, 'removing previous activities');
-      await transaction('auth_role_activity_mapping')
-        .where('role_id', role.id)
-        .delete();
-
-      logger.silly(req, 'adding new activities', req.body.activities);
-      await transaction('auth_role_activity_mapping').insert(
-        req.body.activities.map(activity => ({
-          role_id: role.id,
-          activity_id: activity
-        }))
-      );
-
-      await transaction.commit();
-
-      const activities = (await db('auth_activities')
-        .whereIn('id', req.body.activities)
-        .select('name')).map(({ name }) => name);
+      const activities = (await getAuthActivitiesByIDs(
+        req.body.activities
+      )).map(({ name }) => name);
 
       const updatedRole = {
         id: roleID,
