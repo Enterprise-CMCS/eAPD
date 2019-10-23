@@ -2,7 +2,7 @@ const defaultZxcvbn = require('zxcvbn');
 const logger = require('../logger')('user db');
 const defaultHash = require('../auth/passwordHash');
 
-const db = require('./knex');
+const knex = require('./knex');
 
 const sanitizeUser = user => ({
   activities: user.activities,
@@ -15,7 +15,7 @@ const sanitizeUser = user => ({
   username: user.email
 });
 
-const populateUser = async user => {
+const populateUser = async (user, { db = knex } = {}) => {
   if (user) {
     const populatedUser = user;
 
@@ -59,15 +59,19 @@ const populateUser = async user => {
   return user;
 };
 
-const deleteUserByID = async id =>
+const deleteUserByID = async (id, { db = knex } = {}) =>
   db('users')
     .where('id', id)
     .delete();
 
-const getAllUsers = async ({ clean = true } = {}) => {
+const getAllUsers = async ({
+  clean = true,
+  db = knex,
+  populate = populateUser
+} = {}) => {
   const users = await db('users').select();
 
-  const full = await Promise.all(users.map(populateUser));
+  const full = await Promise.all(users.map(populate));
 
   if (clean) {
     return full.map(sanitizeUser);
@@ -75,8 +79,11 @@ const getAllUsers = async ({ clean = true } = {}) => {
   return full;
 };
 
-const getUserByEmail = async (email, { clean = true } = {}) => {
-  const user = await populateUser(
+const getUserByEmail = async (
+  email,
+  { clean = true, db = knex, populate = populateUser } = {}
+) => {
+  const user = await populate(
     await db('users')
       .whereRaw('LOWER(email) = ?', [email.toLowerCase()])
       .first()
@@ -85,10 +92,13 @@ const getUserByEmail = async (email, { clean = true } = {}) => {
   return user && clean ? sanitizeUser(user) : user;
 };
 
-const getUserByID = async (id, { clean = true } = {}) => {
-  const user = await populateUser(
+const getUserByID = async (
+  id,
+  { clean = true, db = knex, populate = populateUser } = {}
+) => {
+  const user = await populate(
     await db('users')
-      .where('users.id', id)
+      .where('id', id)
       .first()
   );
 
@@ -98,7 +108,7 @@ const getUserByID = async (id, { clean = true } = {}) => {
 const validateUser = async (
   // eslint-disable-next-line camelcase
   { id, email, password, auth_role, phone, state_id },
-  { zxcvbn = defaultZxcvbn } = {}
+  { db = knex, zxcvbn = defaultZxcvbn } = {}
 ) => {
   /* eslint-disable camelcase */
   if (email) {
@@ -176,8 +186,11 @@ const validateUser = async (
   }
 };
 
-const createUser = async (user, { hash = defaultHash } = {}) => {
-  await validateUser(user);
+const createUser = async (
+  user,
+  { db = knex, hash = defaultHash, validate = validateUser } = {}
+) => {
+  await validate(user);
 
   const save = { ...user };
   if (user.password) {
@@ -194,8 +207,12 @@ const createUser = async (user, { hash = defaultHash } = {}) => {
   return ids[0];
 };
 
-const updateUser = async (userID, user, { hash = defaultHash } = {}) => {
-  await validateUser(user);
+const updateUser = async (
+  userID,
+  user,
+  { db = knex, hash = defaultHash, validate = validateUser } = {}
+) => {
+  await validate(user);
 
   if (!Object.keys(user).length) {
     return;
@@ -220,6 +237,7 @@ module.exports = {
   getAllUsers,
   getUserByEmail,
   getUserByID,
+  populateUser,
   sanitizeUser,
   updateUser,
   validateUser
