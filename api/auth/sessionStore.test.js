@@ -8,7 +8,6 @@ let clock;
 // Drop in a mock for the knex raw object before we require the session store
 // module, since it doesn't have dependency injection.
 const db = sandbox.stub();
-require('../db').knex = db;
 
 const dbQueryBuilder = {
   andWhere: sandbox.stub(),
@@ -59,7 +58,7 @@ tap.test('session store module', async tests => {
     addTests.test('error saving to the database', async test => {
       dbQueryBuilder.insert.rejects(new Error());
 
-      const sessionID = await sessionStore.addUserSession('user id');
+      const sessionID = await sessionStore.addUserSession('user id', { db });
 
       test.ok(
         dbQueryBuilder.insert.calledWith({
@@ -75,7 +74,7 @@ tap.test('session store module', async tests => {
     addTests.test('session is saved to the database', async test => {
       dbQueryBuilder.insert.resolves();
 
-      const sessionID = await sessionStore.addUserSession('user id');
+      const sessionID = await sessionStore.addUserSession('user id', { db });
 
       test.ok(
         dbQueryBuilder.insert.calledWith({
@@ -108,7 +107,9 @@ tap.test('session store module', async tests => {
     getTests.test('error fetching from the database', async test => {
       dbQueryBuilder.first.rejects(new Error());
 
-      const userID = await sessionStore.getUserIDFromSession('session id');
+      const userID = await sessionStore.getUserIDFromSession('session id', {
+        db
+      });
 
       test.ok(expiredSessionsAreDeleted(), 'expired sessions are deleted');
       test.ok(queryIsCorrect(), 'queries for a matching, non-expired session');
@@ -118,7 +119,9 @@ tap.test('session store module', async tests => {
     getTests.test('no user matching the session ID', async test => {
       dbQueryBuilder.first.resolves(null);
 
-      const userID = await sessionStore.getUserIDFromSession('session id');
+      const userID = await sessionStore.getUserIDFromSession('session id', {
+        db
+      });
 
       test.ok(expiredSessionsAreDeleted(), 'expired sessions are deleted');
       test.ok(queryIsCorrect(), 'queries for a matching, non-expired session');
@@ -132,7 +135,9 @@ tap.test('session store module', async tests => {
       // sessions doesn't mess us up
       dbQueryBuilder.del.rejects();
 
-      const userID = await sessionStore.getUserIDFromSession('session id');
+      const userID = await sessionStore.getUserIDFromSession('session id', {
+        db
+      });
 
       test.ok(expiredSessionsAreDeleted(), 'expired sessions are deleted');
       test.ok(queryIsCorrect(), 'queries for a matching, non-expired session');
@@ -148,7 +153,7 @@ tap.test('session store module', async tests => {
     removeTests.test('with a database error', async test => {
       dbQueryBuilder.del.rejects(new Error());
 
-      await sessionStore.removeUserSession('session id');
+      await sessionStore.removeUserSession('session id', { db });
 
       test.ok(
         dbQueryBuilder.where.calledWith('session_id', 'session id'),
@@ -163,7 +168,7 @@ tap.test('session store module', async tests => {
     removeTests.test('with success', async test => {
       dbQueryBuilder.del.resolves();
 
-      await sessionStore.removeUserSession('session id');
+      await sessionStore.removeUserSession('session id', { db });
 
       test.ok(
         dbQueryBuilder.where.calledWith('session_id', 'session id'),

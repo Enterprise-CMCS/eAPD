@@ -1,11 +1,11 @@
 const crypto = require('crypto');
 const logger = require('../logger')('session management');
-const { raw: db } = require('../db');
+const { raw: knex } = require('../db');
 
 const sessionLifetimeMilliseconds =
   +process.env.SESSION_LIFETIME_MINUTES * 60 * 1000;
 
-const removeExpired = async () => {
+const removeExpired = async ({ db = knex } = {}) => {
   logger.silly('removing expired sessions');
   try {
     await db('auth_sessions')
@@ -25,7 +25,7 @@ const removeExpired = async () => {
  * @returns {Promise<String>} Resolves the new session ID or null if the
  *                            there is an error saving the session.
  */
-const addUserSession = async userID => {
+const addUserSession = async (userID, { db = knex } = {}) => {
   const sessionID = crypto.randomBytes(48).toString('base64');
   logger.verbose(
     `adding session for user ${userID}, session ID = ${sessionID}`
@@ -54,8 +54,8 @@ const addUserSession = async userID => {
  *                            or null if there is an error or the session does
  *                            not exist.
  */
-const getUserIDFromSession = async sessionID => {
-  await removeExpired();
+const getUserIDFromSession = async (sessionID, { db = knex } = {}) => {
+  await removeExpired({ db });
   logger.silly(`fetching user ID for session ${sessionID}`);
 
   try {
@@ -88,7 +88,7 @@ const getUserIDFromSession = async sessionID => {
  *
  * @returns {Promise} Resolves when finished.
  */
-const removeUserSession = async sessionID => {
+const removeUserSession = async (sessionID, { db = knex } = {}) => {
   logger.silly(`deleting session ${sessionID}`);
   try {
     await db('auth_sessions')
