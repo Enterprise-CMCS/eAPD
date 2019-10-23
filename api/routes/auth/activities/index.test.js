@@ -9,9 +9,9 @@ tap.test('auth activities GET endpoint', async endpointTest => {
   const app = {
     get: sandbox.stub()
   };
-  const ActivityModel = {
-    fetchAll: sandbox.stub()
-  };
+
+  const getAuthActivities = sandbox.stub();
+
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -28,7 +28,7 @@ tap.test('auth activities GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    getEndpoint(app, ActivityModel);
+    getEndpoint(app);
 
     setupTest.ok(
       app.get.calledWith(
@@ -43,7 +43,7 @@ tap.test('auth activities GET endpoint', async endpointTest => {
   endpointTest.test('get all activities handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, ActivityModel);
+      getEndpoint(app, { getAuthActivities });
       handler = app.get.args.find(args => args[0] === '/auth/activities')[2];
       done();
     });
@@ -51,7 +51,7 @@ tap.test('auth activities GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        ActivityModel.fetchAll.rejects();
+        getAuthActivities.rejects();
 
         await handler({}, res);
 
@@ -62,26 +62,14 @@ tap.test('auth activities GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends back a list of activities', async validTest => {
-      const toJSON = sinon.stub();
-      toJSON.returns([
-        { name: 'auth activity 1' },
-        { name: 'auth activity 2' },
-        { name: 'auth activity 3' }
-      ]);
-      const activities = { toJSON };
-      ActivityModel.fetchAll.resolves(activities);
+      const activities = [{ name: 'one' }, { name: 'two' }, { name: 'three' }];
+
+      getAuthActivities.resolves(activities);
 
       await handler({}, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-      validTest.ok(
-        res.send.calledWith([
-          { name: 'auth activity 1' },
-          { name: 'auth activity 2' },
-          { name: 'auth activity 3' }
-        ]),
-        'body is JSON-ified activities'
-      );
+      validTest.ok(res.send.calledWith(activities), 'body is activities');
     });
   });
 });

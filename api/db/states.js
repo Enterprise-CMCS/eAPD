@@ -1,10 +1,12 @@
 const db = require('./knex');
 
-const getStateProfile = async stateID =>
-  db('states')
+const getStateProfile = async stateID => {
+  const profile = db('states')
     .select('medicaid_office')
     .where('id', stateID)
     .first();
+  return profile.medicaid_office;
+};
 
 const updateStateProfile = async (
   stateID,

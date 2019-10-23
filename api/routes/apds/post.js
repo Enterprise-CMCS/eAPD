@@ -34,19 +34,19 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
 
       const stateProfile = await getStateProfile(req.user.state.id);
 
-      if (stateProfile && stateProfile.medicaid_office) {
+      if (stateProfile) {
         // Merge the state profile from the states table into the default
         // values so that if the states table info is missing any fields,
         // we preserve the defaults
 
         apd.stateProfile.medicaidDirector = {
           ...apd.stateProfile.medicaidDirector,
-          ...stateProfile.medicaid_office.medicaidDirector
+          ...stateProfile.medicaidDirector
         };
 
         apd.stateProfile.medicaidOffice = {
           ...apd.stateProfile.medicaidOffice,
-          ...stateProfile.medicaid_office.medicaidOffice
+          ...stateProfile.medicaidOffice
         };
         // An old version of the model had the director info contained inside the office field, so
         // just in case we're still hitting a really old source, delete the director from the office
