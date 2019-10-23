@@ -1,5 +1,5 @@
 const logger = require('../logger')('user serialization');
-const { getUserByID } = require('../db');
+const { getUserByID: gu } = require('../db');
 
 const { addUserSession, getUserIDFromSession } = require('./sessionStore');
 
@@ -21,7 +21,10 @@ module.exports.serializeUser = async (
 module.exports.deserializeUser = async (
   sessionID,
   done,
-  { sessionStore: { getUserID = getUserIDFromSession } = {} } = {}
+  {
+    getUserByID = gu,
+    sessionStore: { getUserID = getUserIDFromSession } = {}
+  } = {}
 ) => {
   try {
     logger.silly(`attempting to deserialize a user, session = ${sessionID}`);

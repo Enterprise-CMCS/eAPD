@@ -1,9 +1,16 @@
 const logger = require('../../logger')('users route put');
-const { getUserByID, updateUser, validateUser } = require('../../db');
+const {
+  getUserByID: gu,
+  updateUser: uu,
+  validateUser: vu
+} = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = app => {
+module.exports = (
+  app,
+  { getUserByID = gu, updateUser = uu, validateUser = vu } = {}
+) => {
   logger.silly('setting up PUT /users/:id route');
   app.put('/users/:id', can('add-users'), async (req, res) => {
     const audit = auditor(auditor.actions.MODIFY_ACCOUNT, req);
@@ -39,9 +46,7 @@ module.exports = app => {
       });
       logger.verbose(req, `request to modify user [${targetUser.email}]`);
 
-      const update = {
-        id: targetID
-      };
+      const update = {};
 
       // Externally we call this field "username" because I don't even know,
       // but internally it's called "email", so switch it back here.
@@ -72,17 +77,19 @@ module.exports = app => {
         update.auth_role = null;
       }
 
-      try {
-        await validateUser(update);
-      } catch (e) {
-        return res
-          .status(400)
-          .send({ error: `edit-account.${e.message}` })
-          .end();
-      }
+      if (Object.keys(update).length) {
+        try {
+          await validateUser(update);
+        } catch (e) {
+          return res
+            .status(400)
+            .send({ error: `edit-account.${e.message}` })
+            .end();
+        }
 
-      await updateUser(targetID, update);
-      audit.log();
+        await updateUser(targetID, update);
+        audit.log();
+      }
       logger.silly(req, 'all done');
       return res.status(204).end();
     } catch (e) {

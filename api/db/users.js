@@ -59,6 +59,11 @@ const populateUser = async user => {
   return user;
 };
 
+const deleteUserByID = async id =>
+  db('users')
+    .where('id', id)
+    .delete();
+
 const getAllUsers = async ({ clean = true } = {}) => {
   const users = await db('users').select();
 
@@ -182,9 +187,11 @@ const createUser = async (user, { hash = defaultHash } = {}) => {
     save.phone = user.phone.replace(/[^\d]/g, '');
   }
 
-  return db('users')
+  const ids = await db('users')
     .insert(save)
     .returning('id');
+
+  return ids[0];
 };
 
 const updateUser = async (userID, user, { hash = defaultHash } = {}) => {
@@ -209,6 +216,7 @@ const updateUser = async (userID, user, { hash = defaultHash } = {}) => {
 
 module.exports = {
   createUser,
+  deleteUserByID,
   getAllUsers,
   getUserByEmail,
   getUserByID,

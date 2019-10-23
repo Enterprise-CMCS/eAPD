@@ -1,9 +1,9 @@
 const logger = require('../../logger')('users route post');
-const { createUser, validateUser } = require('../../db');
+const { createUser: cu, validateUser: vu } = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = app => {
+module.exports = (app, { createUser = cu, validateUser = vu } = {}) => {
   logger.silly('setting up POST /users route');
   app.post('/users', can('add-users'), async (req, res) => {
     logger.silly(req, 'handling POST /users route');
@@ -44,7 +44,7 @@ module.exports = app => {
 
         const userID = await createUser(posted);
 
-        audit.set('id', userID[0]);
+        audit.set('id', userID);
         audit.log();
 
         logger.silly(req, 'all done');

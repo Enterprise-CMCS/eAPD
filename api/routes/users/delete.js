@@ -1,9 +1,9 @@
 const logger = require('../../logger')('users route get');
-const { knex } = require('../../db');
+const { deleteUserByID: du, getUserByID: gu } = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = (app, { db = knex } = {}) => {
+module.exports = (app, { deleteUserByID = du, getUserByID = gu } = {}) => {
   logger.silly('setting up DELETE /users/:id route');
   app.delete('/users/:id', can('delete-users'), async (req, res) => {
     logger.silly(req, 'handling DELETE /users/:id route');
@@ -21,9 +21,7 @@ module.exports = (app, { db = knex } = {}) => {
         return res.status(403).end();
       }
 
-      const targetUser = await db('users')
-        .where('id', targetID)
-        .first();
+      const targetUser = await getUserByID(targetID);
 
       if (!targetUser) {
         logger.info(
@@ -36,9 +34,7 @@ module.exports = (app, { db = knex } = {}) => {
       audit.target({ id: targetID, email: targetUser.email });
 
       logger.silly(req, 'destroying user');
-      await db('users')
-        .where('id', targetID)
-        .delete();
+      await deleteUserByID(targetID);
       audit.log();
       logger.silly(req, 'okay, all good');
       return res.status(204).end();
