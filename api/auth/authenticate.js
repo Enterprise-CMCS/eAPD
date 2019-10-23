@@ -2,7 +2,11 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const defaultHash = require('./passwordHash');
 const logger = require('../logger')('authentication');
-const { getUserByEmail, sanitizeUser, updateUser } = require('../db');
+const {
+  getUserByEmail: gue,
+  sanitizeUser: su,
+  updateUser: uu
+} = require('../db');
 
 // This value doesn't need to be persisted between process instances of the
 // server. It only needs to persist between the request for the nonce and the
@@ -10,11 +14,12 @@ const { getUserByEmail, sanitizeUser, updateUser } = require('../db');
 // should somewhat increase security - automatic key cycling!
 const NONCE_SECRET = crypto.randomBytes(64);
 
-module.exports = ({ hash = defaultHash } = {}) => async (
-  nonce,
-  password,
-  done
-) => {
+module.exports = ({
+  getUserByEmail = gue,
+  hash = defaultHash,
+  sanitizeUser = su,
+  updateUser = uu
+} = {}) => async (nonce, password, done) => {
   try {
     logger.verbose(`got authentication request. decoding jwt...`);
     let verified = false;

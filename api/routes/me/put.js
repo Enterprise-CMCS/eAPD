@@ -1,11 +1,18 @@
 const auditor = require('../../audit');
-const { getUserByID, updateUser, validateUser } = require('../../db');
+const {
+  getUserByID: gu,
+  updateUser: uu,
+  validateUser: vu
+} = require('../../db');
 const logger = require('../../logger')('me route put');
 const loggedIn = require('../../middleware').loggedIn;
 
 const editableFields = ['name', 'password', 'phone', 'position'];
 
-module.exports = app => {
+module.exports = (
+  app,
+  { getUserByID = gu, updateUser = uu, validateUser = vu } = {}
+) => {
   logger.silly('setting up PUT endpoint');
   app.put('/me', loggedIn, async (req, res) => {
     const audit = auditor(auditor.actions.MODIFY_ACCOUNT, req);

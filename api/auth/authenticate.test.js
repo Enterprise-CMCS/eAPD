@@ -3,32 +3,25 @@ const tap = require('tap');
 const sinon = require('sinon');
 const lib = require('./authenticate.js');
 
-const sandbox = sinon.createSandbox();
-
-const db = sandbox.stub();
-const knexStubs = {
-  first: sandbox.stub(),
-  select: sandbox.stub(),
-  update: sandbox.stub(),
-  where: sandbox.stub(),
-  whereIn: sandbox.stub(),
-  whereRaw: sandbox.stub()
-};
-
-const hash = {
-  compare: sandbox.stub()
-};
-
-const auth = lib({ db, hash });
-
 tap.test('local authentication', async authTest => {
+  const sandbox = sinon.createSandbox();
+
+  const getUserByEmail = sandbox.stub();
+  const hash = {
+    compare: sandbox.stub()
+  };
+  const sanitizeUser = sandbox.stub();
+  const updateUser = sandbox.stub();
+
+  const auth = lib({ getUserByEmail, hash, sanitizeUser, updateUser });
+
   const doneCallback = sandbox.spy();
+
   authTest.beforeEach(done => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
-    db.returns(knexStubs);
-    Object.values(knexStubs).forEach(stub => stub.returns(knexStubs));
+    updateUser.resolves();
 
     done();
   });
@@ -68,7 +61,6 @@ tap.test('local authentication', async authTest => {
     nonceTests.test('invalid jwt', async test => {
       await auth('', '', doneCallback);
 
-      test.ok(db.notCalled, 'database is never called');
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
     });
 
@@ -80,7 +72,6 @@ tap.test('local authentication', async authTest => {
 
       await auth(badNonce, '', doneCallback);
 
-      test.ok(db.notCalled, 'database is never called');
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
     });
 
@@ -94,7 +85,6 @@ tap.test('local authentication', async authTest => {
         doneCallback
       );
 
-      test.ok(db.notCalled, 'database is never called');
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
     });
 
@@ -105,15 +95,14 @@ tap.test('local authentication', async authTest => {
 
       await auth(nonce, '', doneCallback);
 
-      test.ok(db.notCalled, 'database is never called');
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
 
       clock.restore();
     });
   });
 
-  authTest.test('with a database error', async errorTest => {
-    knexStubs.first.rejects();
+  authTest.test('with an unexpected error', async errorTest => {
+    getUserByEmail.rejects();
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
 
@@ -125,7 +114,7 @@ tap.test('local authentication', async authTest => {
   });
 
   authTest.test('with no valid user', async noUserTest => {
-    knexStubs.first.resolves();
+    getUserByEmail(null);
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
 
@@ -136,7 +125,7 @@ tap.test('local authentication', async authTest => {
   });
 
   authTest.test('with locked account', async invalidTest => {
-    knexStubs.first.resolves({ locked_until: Date.now() + 5000 });
+    getUserByEmail.resolves({ locked_until: Date.now() + 5000 });
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
 
@@ -148,21 +137,18 @@ tap.test('local authentication', async authTest => {
   authTest.test(
     'with locked account, but lock is expired',
     async invalidTest => {
-      knexStubs.first.resolves({
+      getUserByEmail.resolves({
         email: 'hello@world',
         password: 'test-password',
         id: 57,
         locked_until: 500
       });
-      knexStubs.update.resolves();
+      updateUser.resolves();
 
       await auth(lib.getNonce('user'), 'password', doneCallback);
 
       invalidTest.ok(
-        knexStubs.update.calledWith({
-          failed_logons: null,
-          locked_until: null
-        }),
+        updateUser.calledWith(57, { failed_logons: null, locked_until: null }),
         'lock is cleared'
       );
 
@@ -172,7 +158,7 @@ tap.test('local authentication', async authTest => {
   );
 
   authTest.test('with invalid password', async invalidTest => {
-    knexStubs.first.resolves({
+    getUserByEmail.resolves({
       email: 'hello@world',
       password: 'test-password',
       id: 57,
@@ -194,7 +180,9 @@ tap.test('local authentication', async authTest => {
     );
 
     invalidTest.ok(
-      knexStubs.update.calledWith({ failed_logons: [54321012345] }),
+      updateUser.calledWith(57, {
+        failed_logons: JSON.stringify([54321012345])
+      }),
       'saves the failed logon'
     );
 
@@ -205,7 +193,7 @@ tap.test('local authentication', async authTest => {
   authTest.test(
     'with invalid password and several previous failed attempts',
     async invalidTest => {
-      knexStubs.first.resolves({
+      getUserByEmail.resolves({
         email: 'hello@world',
         password: 'test-password',
         id: 57,
@@ -225,15 +213,15 @@ tap.test('local authentication', async authTest => {
       clock.restore();
 
       invalidTest.ok(
-        knexStubs.update.calledWith({
+        updateUser.calledWith(57, {
           locked_until: 54321012345 + 1800000,
-          failed_logons: [
+          failed_logons: JSON.stringify([
             54321012341,
             54321012342,
             54321012343,
             54321012344,
             54321012345
-          ]
+          ])
         }),
         'account is marked as locked'
       );
@@ -246,7 +234,7 @@ tap.test('local authentication', async authTest => {
   authTest.test(
     'with invalid password and several outdated previous failed attempts',
     async invalidTest => {
-      knexStubs.first.resolves({
+      getUserByEmail.resolves({
         email: 'hello@world',
         password: 'test-password',
         id: 57,
@@ -266,8 +254,8 @@ tap.test('local authentication', async authTest => {
       clock.restore();
 
       invalidTest.ok(
-        knexStubs.update.calledWith({
-          failed_logons: [54321012345]
+        updateUser.calledWith(57, {
+          failed_logons: JSON.stringify([54321012345])
         }),
         'account is not marked as locked'
       );
@@ -278,32 +266,21 @@ tap.test('local authentication', async authTest => {
   );
 
   authTest.test('with a valid user', async validTest => {
-    knexStubs.first.resolves({
+    getUserByEmail.resolves({
       email: 'hello@world',
       password: 'test-password',
       id: 57,
       auth_role: 'do a barrel role',
-      state_id: 'liquid'
+      state: 'liquid'
     });
-    knexStubs.select
-      .withArgs('activity_id')
-      .resolves([{ activity_id: 1 }, { activity_id: 2 }]);
-    knexStubs.select
-      .withArgs('name')
-      .resolves([{ name: 'activity 1' }, { name: 'activity 2' }]);
+    sanitizeUser.returns('sanitized user');
     hash.compare.resolves(true);
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
 
     validTest.equal(doneCallback.callCount, 1, 'called done callback once');
     validTest.ok(
-      doneCallback.calledWith(null, {
-        username: 'hello@world',
-        id: 57,
-        role: 'do a barrel role',
-        state: 'liquid',
-        activities: ['activity 1', 'activity 2']
-      }),
+      doneCallback.calledWith(null, 'sanitized user'),
       'did not get an error message, did get a user object'
     );
   });
