@@ -1,4 +1,5 @@
 const sinon = require('sinon');
+
 const sandbox = sinon.createSandbox();
 const db = sinon.stub();
 

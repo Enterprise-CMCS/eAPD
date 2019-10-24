@@ -1,5 +1,5 @@
 const tap = require('tap');
-const dbMock = require('./dbMock');
+const dbMock = require('./dbMock.test');
 
 const { getStateProfile, updateStateProfile } = require('./states');
 
