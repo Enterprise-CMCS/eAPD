@@ -10,12 +10,7 @@ const browsers = [
     id: 'firefox',
     name: 'Mozilla Firefox',
     link: 'https://www.mozilla.org/en-US/firefox/new/'
-  },
-  {
-    id: 'safari',
-    name: 'Apple Safari',
-    link: 'https://support.apple.com/en-us/HT204416'
-  }
+  } 
 ];
 
 const UpgradeBrowser = () => (
