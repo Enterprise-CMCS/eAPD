@@ -1,27 +1,19 @@
-const sinon = require('sinon');
 const tap = require('tap');
+const dbMock = require('./dbMock');
 
 const { getStateProfile, updateStateProfile } = require('./states');
 
 tap.test('database wrappers / states', async statesTests => {
+  const db = dbMock('states');
+
+  statesTests.beforeEach(async () => {
+    dbMock.reset();
+  });
+
   statesTests.test('gets a state profile', async test => {
-    const queryBuilder = {
-      select: sinon
-        .stub()
-        .withArgs('medicaid_office')
-        .returnsThis(),
-
-      where: sinon
-        .stub()
-        .withArgs('id', 'state id')
-        .returnsThis(),
-
-      first: sinon.stub().resolves({ medicaid_office: 'this is the stuff' })
-    };
-    const db = sinon
-      .stub()
-      .withArgs('states')
-      .returns(queryBuilder);
+    db.select.withArgs('medicaid_office').returnsThis();
+    db.where.withArgs('id', 'state id').returnsThis();
+    db.first.resolves({ medicaid_office: 'this is the stuff' });
 
     const profile = await getStateProfile('state id', { db });
 
@@ -34,18 +26,11 @@ tap.test('database wrappers / states', async statesTests => {
       ['using the database directly', 'db']
     ].map(([name, prop]) =>
       updateTests.test(name, async test => {
-        const queryBuilder = {
-          where: sinon.stub(),
-          update: sinon.stub()
-        };
-
-        queryBuilder.where.withArgs('id', 'state id').returnsThis();
-        queryBuilder.update.rejects();
-        queryBuilder.update
+        db.where.withArgs('id', 'state id').returnsThis();
+        db.update.rejects();
+        db.update
           .withArgs({ medicaid_office: 'this is the profile' })
           .resolves();
-
-        const db = sinon.stub().returns(queryBuilder);
 
         test.resolves(
           updateStateProfile('state id', 'this is the profile', {

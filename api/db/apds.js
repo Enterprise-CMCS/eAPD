@@ -1,36 +1,41 @@
-const db = require('./knex');
+const knex = require('./knex');
 const { updateStateProfile } = require('./states');
 
-const createAPD = async apd => {
+const createAPD = async (apd, { db = knex } = {}) => {
   const ids = await db('apds')
     .insert(apd)
     .returning('id');
   return ids[0];
 };
 
-const deleteAPDByID = async id => {
+const deleteAPDByID = async (id, { db = knex }) => {
   await db('apds')
     .where('id', id)
     .update({ status: 'archived' });
 };
 
-const getAllAPDsByState = async stateID =>
+const getAllAPDsByState = async (stateID, { db = knex }) =>
   db('apds')
     .where('state_id', stateID)
     .select('document', 'id', 'state_id', 'status', 'updated_at');
 
-const getAPDByID = async id =>
+const getAPDByID = async (id, { db = knex }) =>
   db('apds')
     .where('id', id)
     .first('document', 'id', 'state_id', 'status', 'updated_at');
 
-const getAPDByIDAndState = async (id, stateID) =>
+const getAPDByIDAndState = async (id, stateID, { db = knex }) =>
   db('apds')
     .where('id', id)
     .andWhere('state_id', stateID)
     .first('document', 'id', 'state_id', 'status', 'updated_at');
 
-const updateAPDDocument = async (id, stateID, document) => {
+const updateAPDDocument = async (
+  id,
+  stateID,
+  document,
+  { db = knex, updateProfile = updateStateProfile }
+) => {
   const updateTime = new Date().toISOString();
 
   const transaction = await db.transaction();
@@ -38,7 +43,9 @@ const updateAPDDocument = async (id, stateID, document) => {
     .where('id', id)
     .update({ document, updated_at: updateTime });
 
-  await updateStateProfile(stateID, document.stateProfile, { transaction });
+  if (document.stateProfile) {
+    await updateProfile(stateID, document.stateProfile, { transaction });
+  }
 
   await transaction.commit();
 

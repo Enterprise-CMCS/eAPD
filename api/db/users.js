@@ -43,8 +43,8 @@ const populateUser = async (user, { db = knex } = {}) => {
 
     if (user.state_id) {
       const state = await db('states')
-        .select('id', 'name')
         .where('id', user.state_id)
+        .select('id', 'name')
         .first();
       populatedUser.state = state;
     } else {
@@ -108,13 +108,13 @@ const getUserByID = async (
 const validateUser = async (
   // eslint-disable-next-line camelcase
   { id, email, password, auth_role, phone, state_id },
-  { db = knex, zxcvbn = defaultZxcvbn } = {}
+  { db = knex, getUser = getUserByEmail, zxcvbn = defaultZxcvbn } = {}
 ) => {
   /* eslint-disable camelcase */
   if (email) {
     logger.silly('checking email');
 
-    const usersWithEmail = await getUserByEmail(email);
+    const usersWithEmail = await getUser(email);
 
     if (usersWithEmail && usersWithEmail.id !== id) {
       logger.verbose(`user with email already exists [${email}]`);

@@ -1,6 +1,6 @@
-const db = require('./knex');
+const knex = require('./knex');
 
-const createAuthRole = async (name, activityIDs) => {
+const createAuthRole = async (name, activityIDs, { db = knex } = {}) => {
   const transaction = await db.transaction();
 
   const roleID = await transaction('auth_roles')
@@ -19,7 +19,7 @@ const createAuthRole = async (name, activityIDs) => {
   return roleID[0];
 };
 
-const deleteAuthRole = async roleID => {
+const deleteAuthRole = async (roleID, { db = knex } = {}) => {
   const transaction = await db.transaction();
 
   await transaction('auth_role_activity_mapping')
@@ -33,24 +33,25 @@ const deleteAuthRole = async roleID => {
   await transaction.commit();
 };
 
-const getAuthActivities = async () => db('auth_activities').select();
+const getAuthActivities = async ({ db = knex } = {}) =>
+  db('auth_activities').select();
 
-const getAuthActivitiesByIDs = async ids =>
+const getAuthActivitiesByIDs = async (ids, { db = knex } = {}) =>
   db('auth_activities')
     .whereIn('id', ids)
     .select();
 
-const getAuthRoleByID = async roleID =>
+const getAuthRoleByID = async (roleID, { db = knex } = {}) =>
   db('auth_roles')
     .where('id', roleID)
     .first();
 
-const getAuthRoleByName = async roleName =>
+const getAuthRoleByName = async (roleName, { db = knex } = {}) =>
   db('auth_roles')
     .where('name', roleName)
     .first();
 
-const getAuthRoles = async () => {
+const getAuthRoles = async ({ db = knex } = {}) => {
   const roles = await db('auth_roles').select();
   await Promise.all(
     roles.map(async role => {
@@ -70,7 +71,7 @@ const getAuthRoles = async () => {
   return roles;
 };
 
-const updateAuthRole = async (id, name, activities) => {
+const updateAuthRole = async (id, name, activities, { db = knex } = {}) => {
   const transaction = await db.transaction();
   if (name) {
     await transaction('auth_roles')
