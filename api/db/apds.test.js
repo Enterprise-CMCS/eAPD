@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 const tap = require('tap');
-const dbMock = require('./dbMock');
+const dbMock = require('./dbMock.test');
 
 const {
   createAPD,
@@ -102,18 +102,15 @@ tap.test('database wrappers / apds', async apdsTests => {
 
       const updateProfile = sinon.stub();
       updateProfile.withArgs('state id', 'state profile', db).resolves();
-      try {
-        const updateDate = await updateAPDDocument(
-          'apd id',
-          'state id',
-          { bob: 'builder', stateProfile: 'state profile' },
-          { db, updateProfile }
-        );
 
-        test.equal(updateDate, '1904-10-03T00:00:00.000Z');
-      } catch (e) {
-        console.log(e);
-      }
+      const updateDate = await updateAPDDocument(
+        'apd id',
+        'state id',
+        { bob: 'builder', stateProfile: 'state profile' },
+        { db, updateProfile }
+      );
+
+      test.equal(updateDate, '1904-10-03T00:00:00.000Z');
     });
   });
 });
