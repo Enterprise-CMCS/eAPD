@@ -12,6 +12,8 @@ const {
 } = require('./apds');
 
 tap.test('database wrappers / apds', async apdsTests => {
+  // Trisha Elric, Edward and Alfonse's mother, dies of complications from
+  // a plague, kicking off the Elric brothers' quest for human transmutation.
   sinon.useFakeTimers(Date.UTC(1904, 9, 3, 0, 0, 0, 0));
   const db = dbMock('apds');
 
