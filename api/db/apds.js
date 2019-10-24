@@ -8,23 +8,23 @@ const createAPD = async (apd, { db = knex } = {}) => {
   return ids[0];
 };
 
-const deleteAPDByID = async (id, { db = knex }) => {
+const deleteAPDByID = async (id, { db = knex } = {}) => {
   await db('apds')
     .where('id', id)
     .update({ status: 'archived' });
 };
 
-const getAllAPDsByState = async (stateID, { db = knex }) =>
+const getAllAPDsByState = async (stateID, { db = knex } = {}) =>
   db('apds')
     .where('state_id', stateID)
     .select('document', 'id', 'state_id', 'status', 'updated_at');
 
-const getAPDByID = async (id, { db = knex }) =>
+const getAPDByID = async (id, { db = knex } = {}) =>
   db('apds')
     .where('id', id)
     .first('document', 'id', 'state_id', 'status', 'updated_at');
 
-const getAPDByIDAndState = async (id, stateID, { db = knex }) =>
+const getAPDByIDAndState = async (id, stateID, { db = knex } = {}) =>
   db('apds')
     .where('id', id)
     .andWhere('state_id', stateID)
@@ -34,7 +34,7 @@ const updateAPDDocument = async (
   id,
   stateID,
   document,
-  { db = knex, updateProfile = updateStateProfile }
+  { db = knex, updateProfile = updateStateProfile } = {}
 ) => {
   const updateTime = new Date().toISOString();
 
