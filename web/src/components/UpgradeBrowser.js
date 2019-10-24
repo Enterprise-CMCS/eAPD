@@ -34,7 +34,7 @@ const UpgradeBrowser = () => (
               <img
                 src={`/static/img/browsers/${id}.svg`}
                 alt={id}
-                style={{'width': '60px'}}
+                style={{'width': '60px', 'height': '60px'}}
                 className=""
                 />
               <p>{name}</p>
