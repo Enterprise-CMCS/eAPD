@@ -12,38 +12,46 @@ import thunk from 'redux-thunk';
 import { initI18n } from './i18n';
 import reducer from './reducers';
 import Root from './components/Root';
+import { browserIsRed } from './util/browser';
+import { html } from './components/UpgradeBrowser';
 
-// Set locale based on browser language
-// if it matches one of our SUPPORTED_LOCALES
-// otherwise, set to DEFAULT_LOCALE ("en")
-initI18n();
+if (browserIsRed) {
+  document.getElementById('app').innerHTML = `
+  <div style="margin: 30px;">
+    <div class="ds-col-4 ds-c-alert ds-c-alert--error">${html}</div>
+  </div>`;
+} else {
+  // Set locale based on browser language
+  // if it matches one of our SUPPORTED_LOCALES
+  // otherwise, set to DEFAULT_LOCALE ("en")
+  initI18n();
 
-const history = createHistory();
+  const history = createHistory();
 
-const middleware = [thunk, routerMiddleware(history), createLogger()];
+  const middleware = [thunk, routerMiddleware(history), createLogger()];
 
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-/* eslint-enable */
-const store = createStore(
-  reducer(history), 
-  composeEnhancers(
-    applyMiddleware(...middleware),
-  )
-);
-
-const render = (Component, props) => {
-  ReactDOM.render(
-    <AppContainer>
-      <Component {...props} />
-    </AppContainer>,
-    document.getElementById('app')
+  /* eslint-disable no-underscore-dangle */
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  /* eslint-enable */
+  const store = createStore(
+    reducer(history),
+    composeEnhancers(applyMiddleware(...middleware))
   );
-};
 
-module.hot.accept('./components/Root.js', () => {
-  const HotRoot = require('./components/Root').default; // eslint-disable-line global-require
-  render(HotRoot, { history, store });
-});
+  const render = (Component, props) => {
+    ReactDOM.render(
+      <AppContainer>
+        <Component {...props} />
+      </AppContainer>,
+      document.getElementById('app')
+    );
+  };
 
-render(Root, { history, store });
+  module.hot.accept('./components/Root.js', () => {
+    const HotRoot = require('./components/Root').default; // eslint-disable-line global-require
+    render(HotRoot, { history, store });
+  });
+
+  render(Root, { history, store });
+}
