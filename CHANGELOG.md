@@ -3,6 +3,7 @@
 Anticipated release: TBD
 
 #### 🚀 New features
+- Alert users on yellow support browsers that they should upgrade ([#1904])
 
 #### 🐛 Bugs fixed
 
@@ -138,3 +139,4 @@ Pilot release to select state partners
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
 [#1775]: https://github.com/18F/cms-hitech-apd/issues/1775
 [#1820]: https://github.com/18F/cms-hitech-apd/issues/1820
+[#1904]: https://github.com/18F/cms-hitech-apd/pull/1904
