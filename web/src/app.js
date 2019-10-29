@@ -15,6 +15,8 @@ import { browserIsRed } from './util/browser';
 import { html } from './components/UpgradeBrowser';
 
 if (browserIsRed) {
+  // For browsers we don't support at all, use native DOM APIs to add the
+  // warning box since we can't be certain that React will work.
   document.getElementById('app').innerHTML = `
   <div style="margin: 30px;">
     <div class="ds-col-4 ds-c-alert ds-c-alert--error">${html}</div>
