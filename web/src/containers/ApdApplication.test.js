@@ -17,7 +17,7 @@ describe('apd (application) component', () => {
         <ApdApplication
           apdName="test name"
           apdSelected
-          dirty
+          needsSave
           isAdmin={false}
           place={{}}
           selectApdOnLoad={() => {}}
@@ -33,7 +33,7 @@ describe('apd (application) component', () => {
         <ApdApplication
           apdName="another apd"
           apdSelected={false}
-          dirty={false}
+          needsSave={false}
           isAdmin={false}
           place={{}}
           selectApdOnLoad={selectApdOnLoadProp}
@@ -50,7 +50,7 @@ describe('apd (application) component', () => {
         <ApdApplication
           apdName="third"
           apdSelected={false}
-          dirty={false}
+          needsSave={false}
           isAdmin
           place={{}}
           selectApdOnLoad={selectApdOnLoadProp}
@@ -70,9 +70,7 @@ describe('apd (application) component', () => {
           years: ['dinkus', 'dorkus', 'durkus']
         }
       },
-      dirty: {
-        dirty: 'moop moop'
-      },
+      patch: [1, 2, 3],
       user: {
         data: {
           state: 'place'
@@ -83,8 +81,8 @@ describe('apd (application) component', () => {
     expect(mapStateToProps(state)).toEqual({
       apdName: 'florp',
       apdSelected: true,
-      dirty: 'moop moop',
       isAdmin: false,
+      needsSave: true,
       place: 'place',
       year: 'dinkus-durkus'
     });
@@ -95,8 +93,8 @@ describe('apd (application) component', () => {
     expect(mapStateToProps(state)).toEqual({
       apdName: 'florp',
       apdSelected: false,
-      dirty: 'moop moop',
       isAdmin: false,
+      needsSave: true,
       place: 'place',
       year: ''
     });

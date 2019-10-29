@@ -17,15 +17,12 @@ import {
   statePersonDefaultYear
 } from './activities';
 import {
-  ADD_APD_KEY_PERSON,
   CREATE_APD_SUCCESS,
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
-  REMOVE_APD_KEY_PERSON,
   SET_SELECT_APD_ON_LOAD,
   SUBMIT_APD_SUCCESS,
-  UPDATE_APD,
   WITHDRAW_APD_SUCCESS,
   SAVE_APD_SUCCESS
 } from '../actions/apd';
@@ -320,17 +317,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, data: applyPatch(state.data, patches) };
     }
 
-    // ------------------
-
-    case ADD_APD_KEY_PERSON:
-      return u(
-        {
-          data: {
-            keyPersonnel: pocs => [...pocs, getKeyPersonnel()]
-          }
-        },
-        state
-      );
     case CREATE_APD_SUCCESS:
       return u(
         {
@@ -363,16 +349,6 @@ const reducer = (state = initialState, action) => {
     }
     case GET_APD_FAILURE:
       return { ...state, fetching: false, error: action.error };
-    case REMOVE_APD_KEY_PERSON:
-      return u(
-        {
-          data: {
-            keyPersonnel: people =>
-              people.filter(({ key }) => key !== action.key)
-          }
-        },
-        state
-      );
     case SAVE_APD_SUCCESS:
       return {
         ...state,
@@ -401,54 +377,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, selectAPDOnLoad: true };
     case SUBMIT_APD_SUCCESS:
       return u({ data: { status: 'submitted' } }, state);
-
-    case UPDATE_APD: {
-      if (!action.updates.years) {
-        return u({ data: { ...action.updates } }, state);
-      }
-
-      const { years } = action.updates;
-      const { years: yearsPrev } = state.data;
-
-      // this should never happen, but being defensive
-      if (years.length === yearsPrev.length) return state;
-
-      const hasNewYear = years.length > yearsPrev.length;
-      const yearDelta = (hasNewYear
-        ? diff(years, yearsPrev)
-        : diff(yearsPrev, years))[0];
-
-      const incentivePayments = JSON.parse(
-        JSON.stringify(state.data.incentivePayments)
-      );
-
-      Object.keys(incentivePayments).forEach(key => {
-        if (!hasNewYear) delete incentivePayments[key][yearDelta];
-        else incentivePayments[key][yearDelta] = { 1: 0, 2: 0, 3: 0, 4: 0 };
-      });
-
-      const keyPersonnel = JSON.parse(JSON.stringify(state.data.keyPersonnel));
-      if (hasNewYear) {
-        keyPersonnel.forEach(kp => {
-          kp.costs[yearDelta] = 0;
-        });
-      } else {
-        keyPersonnel.forEach(kp => delete kp.costs[yearDelta]);
-      }
-
-      // using updeep was not deleting year objects (even
-      // though `incentivePayments` was changed), hence using
-      // the traditional way to update state here
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          years,
-          incentivePayments,
-          keyPersonnel
-        }
-      };
-    }
 
     case WITHDRAW_APD_SUCCESS:
       return u({ data: { status: 'draft' } }, state);
