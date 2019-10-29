@@ -158,36 +158,6 @@ const openAPI = {
         }
       }
     },
-    put: {
-      tags: ['APDs'],
-      summary: 'Update a specific APD',
-      description: `Update an APD in the system.  If state profile information is included, the profile information is also updated for the user's state.`,
-      parameters: [
-        {
-          name: 'id',
-          in: 'path',
-          description: 'The ID of the apd to update',
-          required: true,
-          schema: {
-            type: 'number'
-          }
-        }
-      ],
-      requestBody: {
-        description: 'The new values for the apd.  All fields are optional.',
-        required: true,
-        content: jsonResponse({ $ref: '#/components/schemas/apd' })
-      },
-      responses: {
-        200: {
-          description: 'The update was successful',
-          content: jsonResponse({ $ref: '#/components/schemas/apd' })
-        },
-        404: {
-          description: 'The apd ID does not match any known apds for the user'
-        }
-      }
-    },
     delete: {
       tags: ['APDs'],
       summary: 'Archive an APD',

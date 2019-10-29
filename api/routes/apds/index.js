@@ -3,7 +3,6 @@ const del = require('./delete');
 const get = require('./get');
 const patch = require('./patch');
 const post = require('./post');
-const put = require('./put');
 const submitted = require('./submitted/get');
 
 module.exports = (
@@ -13,7 +12,6 @@ module.exports = (
     getEndpoint = get,
     patchEndpoint = patch,
     postEndpoint = post,
-    putEndpoint = put,
     submittedEndpoints = submitted
   } = {}
 ) => {
@@ -25,8 +23,6 @@ module.exports = (
   patchEndpoint(app);
   logger.silly('setting up POST endpoint');
   postEndpoint(app);
-  logger.silly('setting up PUT endpoint');
-  putEndpoint(app);
 
   logger.silly('setting up submitted APD endpoints');
   submittedEndpoints(app);
