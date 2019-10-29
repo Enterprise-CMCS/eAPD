@@ -1,4 +1,3 @@
-import diff from 'lodash.difference';
 import u from 'updeep';
 import { apply_patch as applyPatch } from 'jsonpatch';
 
