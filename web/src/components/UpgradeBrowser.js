@@ -17,8 +17,8 @@ const html = `<div class="ds-c-alert__body">
   <h3 class="ds-c-alert__heading">Please upgrade your browser.</h3>
   <p class="ds-c-alert__text ds-u-measure--wide">
     It looks like you may be using an out-of-date web browser that we don’t
-    support. Please download or upgrade to one of these browsers to use this
-    site.
+    support. Please download or upgrade to one of these browsers to use the
+    Centers for Medicare & Medicaid Services (CMS) eAPD site.
   </p>
   <div class="ds-l-row">
   ${browsers
