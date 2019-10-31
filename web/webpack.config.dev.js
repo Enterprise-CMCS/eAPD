@@ -25,19 +25,7 @@ const config = {
       },
 
       // In dev, load our styles directly into the generated JS. That way
-      // we got hot reloading on our CSS and Sass as well.
-
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          { loader: 'css-loader', options: { sourceMap: true } },
-          {
-            loader: 'postcss-loader',
-            options: { sourceMap: 'inline' }
-          }
-        ]
-      },
+      // we got hot reloading on our Sass as well.
       {
         test: /\.scss$/,
         use: [

@@ -1,54 +1,59 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Editor } from 'react-draft-wysiwyg';
+import tinymce from 'tinymce/tinymce';
+import { Editor } from '@tinymce/tinymce-react';
 
-import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../util/editor';
+// A theme is also required
+import 'tinymce/themes/silver';
+
+// Any plugins you want to use has to be imported
+import 'tinymce/plugins/image';
+import 'tinymce/plugins/imagetools';
+import 'tinymce/plugins/link';
+import 'tinymce/plugins/paste';
+import 'tinymce/plugins/spellchecker';
+
+require.context(
+  'file-loader?name=[path][name].[ext]&context=node_modules/tinymce!tinymce/skins',
+  true,
+  /.*/
+);
+
+// Initialize the app
+tinymce.init({
+  browser_spellcheck: true,
+  selector: '#tiny',
+  plugins: ['link', 'paste', 'spellchecker']
+});
 
 class RichText extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      content: htmlToEditor(props.content),
-      lastContent: props.content
+      content: props.content
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const { content, lastContent } = this.state;
-    if (nextProps.content !== lastContent) {
-      this.setState({
-        content: htmlToEditor(nextProps.content),
-        lastContent: nextProps.content
-      });
-    }
-    return nextState.content !== content;
-  }
-
   onEditorChange = newContent => {
-    this.setState({ content: newContent });
-  };
-
-  onBlur = () => {
     const { onSync } = this.props;
-    const { content } = this.state;
-
-    const html = editorToHtml(content);
-    onSync(html);
+    this.setState({ content: newContent });
+    onSync(newContent);
   };
 
   render() {
-    const { editorClassName } = this.props;
     const { content } = this.state;
 
     return (
       <Editor
-        toolbar={EDITOR_CONFIG}
-        editorState={content}
-        onEditorStateChange={this.onEditorChange}
-        onBlur={this.onBlur}
-        editorClassName={editorClassName}
-        spellCheck
+        init={{
+          browser_spellcheck: true,
+          paste_data_images: true,
+          plugins: ['image', 'imagetools', 'link', 'paste', 'spellchecker'],
+          menubar: ''
+        }}
+        value={content}
+        onEditorChange={this.onEditorChange}
       />
     );
   }
@@ -56,14 +61,12 @@ class RichText extends Component {
 
 RichText.propTypes = {
   content: PropTypes.string,
-  onSync: PropTypes.func,
-  editorClassName: PropTypes.string
+  onSync: PropTypes.func
 };
 
 RichText.defaultProps = {
   content: '',
-  onSync: () => {},
-  editorClassName: 'rte-textarea-m'
+  onSync: () => {}
 };
 
 export default RichText;
