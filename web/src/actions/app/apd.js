@@ -10,6 +10,7 @@ const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
 export const selectApd = (
   id,
+  route,
   { deserialize = fromAPI, global = window, pushRoute = push } = {}
 ) => dispatch =>
   axios.get(`/apds/${id}`).then(req => {
@@ -29,7 +30,7 @@ export const selectApd = (
     }
 
     dispatch(updateBudget());
-    dispatch(pushRoute('/apd'));
+    dispatch(pushRoute(route));
 
     if (global.localStorage) {
       global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);

@@ -23,6 +23,7 @@ const StateDashboard = (
     createApd: create,
     deleteApd: del,
     fetching,
+    route,
     selectApd: select,
     state
   },
@@ -30,7 +31,7 @@ const StateDashboard = (
 ) => {
   const open = id => e => {
     e.preventDefault();
-    select(id);
+    select(id, route);
   };
 
   const delApd = apd => () => {
@@ -113,11 +114,16 @@ const StateDashboard = (
 StateDashboard.propTypes = {
   apds: PropType.array.isRequired,
   fetching: PropType.bool.isRequired,
+  route: PropType.string,
   state: PropType.object.isRequired,
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired
 };
+
+StateDashboard.defaultProps = {
+  route: '/apd'
+}
 
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
