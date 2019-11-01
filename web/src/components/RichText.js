@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import tinymce from 'tinymce/tinymce';
+import 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
 
 // A theme is also required
 import 'tinymce/themes/silver';
 
 // Any plugins you want to use has to be imported
-import 'tinymce/plugins/image';
-import 'tinymce/plugins/imagetools';
-import 'tinymce/plugins/link';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/spellchecker';
 
@@ -18,13 +15,6 @@ require.context(
   true,
   /.*/
 );
-
-// Initialize the app
-tinymce.init({
-  browser_spellcheck: true,
-  selector: '#tiny',
-  plugins: ['link', 'paste', 'spellchecker']
-});
 
 class RichText extends Component {
   constructor(props) {
@@ -48,9 +38,9 @@ class RichText extends Component {
       <Editor
         init={{
           browser_spellcheck: true,
+          menubar: '',
           paste_data_images: true,
-          plugins: ['image', 'imagetools', 'link', 'paste', 'spellchecker'],
-          menubar: ''
+          plugins: ['paste', 'spellchecker']
         }}
         value={content}
         onEditorChange={this.onEditorChange}
