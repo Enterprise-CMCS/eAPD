@@ -60,8 +60,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
-        <th
+        <td
           aria-hidden="true"
+          className="th"
         />
         <th
           className="ds-u-text-align--right"
@@ -232,8 +233,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
-        <th
+        <td
           aria-hidden="true"
+          className="th"
         />
         <th
           className="ds-u-text-align--right"
@@ -404,8 +406,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
-        <th
+        <td
           aria-hidden="true"
+          className="th"
         />
         <th
           className="ds-u-text-align--right"

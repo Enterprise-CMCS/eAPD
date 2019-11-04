@@ -41,7 +41,7 @@ const ApdPreviousActivityTable = ({
           </th>
         </tr>
         <tr>
-          <th aria-hidden="true" />
+          <td className="th" aria-hidden="true" />
           <th
             id="prev_act_hithie_total_approved"
             className="ds-u-text-align--right"
