@@ -73,7 +73,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </thead>
     <tbody>
       <tr
-        className={false}
+        className=""
         key="state"
       >
         <th
@@ -132,7 +132,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className={false}
+        className=""
         key="contractors"
       >
         <th
@@ -317,7 +317,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </thead>
     <tbody>
       <tr
-        className={false}
+        className=""
         key="state"
       >
         <th
@@ -376,7 +376,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className={false}
+        className=""
         key="contractors"
       >
         <th
@@ -515,7 +515,8 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </thead>
     <tbody>
       <tr
-        className={false}
+        className=""
+        key="state"
       >
         <th
           scope="row"
@@ -533,7 +534,8 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className={false}
+        className=""
+        key="contractors"
       >
         <th
           scope="row"
@@ -552,6 +554,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       </tr>
       <tr
         className="budget-table--row__highlight budget-table--total"
+        key="combined"
       >
         <th
           scope="row"
@@ -641,7 +644,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </thead>
     <tbody>
       <tr
-        className={false}
+        className=""
         key="state"
       >
         <th
@@ -700,7 +703,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className={false}
+        className=""
         key="contractors"
       >
         <th
@@ -885,7 +888,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </thead>
     <tbody>
       <tr
-        className={false}
+        className=""
         key="state"
       >
         <th
@@ -944,7 +947,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className={false}
+        className=""
         key="contractors"
       >
         <th
@@ -1083,7 +1086,8 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </thead>
     <tbody>
       <tr
-        className={false}
+        className=""
+        key="state"
       >
         <th
           scope="row"
@@ -1101,7 +1105,8 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className={false}
+        className=""
+        key="contractors"
       >
         <th
           scope="row"
@@ -1120,6 +1125,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       </tr>
       <tr
         className="budget-table--row__highlight budget-table--total"
+        key="combined"
       >
         <th
           scope="row"

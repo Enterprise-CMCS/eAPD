@@ -15,22 +15,20 @@ const categoryLookup = {
 function DataRow({ data, title }) {
   return (
     <tr
-      className={ title===categoryLookup.combined ? 'budget-table--subtotal budget-table--row__highlight' : '' }
+      className={
+        title === categoryLookup.combined
+          ? 'budget-table--subtotal budget-table--row__highlight'
+          : ''
+      }
     >
       <th scope="row">{title}</th>
-      <td
-        className="budget-table--number"
-      >
+      <td className="budget-table--number">
         <Dollars>{data.medicaid}</Dollars>
       </td>
-      <td
-        className="budget-table--number"
-      >
+      <td className="budget-table--number">
         <Dollars>{data.federal}</Dollars>
       </td>
-      <td
-        className="budget-table--number"
-      >
+      <td className="budget-table--number">
         <Dollars>{data.state}</Dollars>
       </td>
     </tr>
@@ -66,28 +64,16 @@ DataRowGroup.propTypes = {
 const HeaderRow = ({ yr }) => {
   return (
     <tr>
-      <th
-        key={yr}
-        id={`summary-budget-fy-${yr}`}
-      >
+      <th key={yr} id={`summary-budget-fy-${yr}`}>
         {yr === 'total' ? 'Total' : `FFY ${yr}`}
       </th>
-      <th
-        className="ds-u-text-align--right"
-        scope="col"
-      >
+      <th className="ds-u-text-align--right" scope="col">
         Medicaid Total
       </th>
-      <th
-        className="ds-u-text-align--right"
-        scope="col"
-      >
+      <th className="ds-u-text-align--right" scope="col">
         Federal Total
       </th>
-      <th
-        className="ds-u-text-align--right"
-        scope="col"
-      >
+      <th className="ds-u-text-align--right" scope="col">
         State Total
       </th>
     </tr>
@@ -100,7 +86,9 @@ HeaderRow.propTypes = {
 
 const BudgetSummary = ({ activities, data, years }) => (
   <Fragment>
-    <h4 className="ds-h4" aria-hidden="true">HIT Activities</h4>
+    <h4 className="ds-h4" aria-hidden="true">
+      HIT Activities
+    </h4>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
@@ -115,7 +103,9 @@ const BudgetSummary = ({ activities, data, years }) => (
       </table>
     ))}
 
-    <h4 className="ds-h4" aria-hidden="true">HIE Activities</h4>
+    <h4 className="ds-h4" aria-hidden="true">
+      HIE Activities
+    </h4>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
@@ -130,7 +120,9 @@ const BudgetSummary = ({ activities, data, years }) => (
       </table>
     ))}
 
-    <h4 className="ds-h4" aria-hidden="true">MMIS Activities</h4>
+    <h4 className="ds-h4" aria-hidden="true">
+      MMIS Activities
+    </h4>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
@@ -146,28 +138,17 @@ const BudgetSummary = ({ activities, data, years }) => (
     ))}
 
     <table className="budget-table">
-      <caption className="ds-h4">
-        Project Activities Totals
-      </caption>
+      <caption className="ds-h4">Project Activities Totals</caption>
       <thead>
         <tr>
           <th id="summary-budget-null1" />
-          <th
-            scope="col"
-            className="ds-u-text-align--right"
-          >
+          <th scope="col" className="ds-u-text-align--right">
             Medicaid Total
           </th>
-          <th
-            scope="col"
-            className="ds-u-text-align--right"
-          >
+          <th scope="col" className="ds-u-text-align--right">
             Federal Total
           </th>
-          <th
-            scope="col"
-            className="ds-u-text-align--right"
-          >
+          <th scope="col" className="ds-u-text-align--right">
             State Total
           </th>
         </tr>
@@ -178,11 +159,13 @@ const BudgetSummary = ({ activities, data, years }) => (
           return (
             <tr
               key={ffy}
-              className={ffy === "total" && "budget-table--row__highlight budget-table--total"}
+              className={
+                ffy === 'total'
+                  ? 'budget-table--row__highlight budget-table--total'
+                  : ''
+              }
             >
-              <th scope="row">
-                {ffy === 'total' ? 'Total' : `FFY ${ffy}`}
-              </th>
+              <th scope="row">{ffy === 'total' ? 'Total' : `FFY ${ffy}`}</th>
               <td className="budget-table--number">
                 <Dollars>{combined.medicaid}</Dollars>
               </td>

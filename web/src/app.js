@@ -1,6 +1,6 @@
 import '@babel/polyfill';
 
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import React from 'react';
 import { render } from 'react-dom';
 import { routerMiddleware } from 'connected-react-router';
@@ -17,7 +17,7 @@ import Root from './components/Root';
 // otherwise, set to DEFAULT_LOCALE ("en")
 initI18n();
 
-const history = createHistory();
+const history = createBrowserHistory();
 
 const middleware = [thunk, routerMiddleware(history)];
 if (process.env.NODE_ENV !== 'production') {

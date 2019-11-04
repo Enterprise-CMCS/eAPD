@@ -1,6 +1,6 @@
 import '@babel/polyfill';
 
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
@@ -18,7 +18,7 @@ import Root from './components/Root';
 // otherwise, set to DEFAULT_LOCALE ("en")
 initI18n();
 
-const history = createHistory();
+const history = createBrowserHistory();
 
 const middleware = [thunk, routerMiddleware(history), createLogger()];
 
@@ -26,10 +26,8 @@ const middleware = [thunk, routerMiddleware(history), createLogger()];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 const store = createStore(
-  reducer(history), 
-  composeEnhancers(
-    applyMiddleware(...middleware),
-  )
+  reducer(history),
+  composeEnhancers(applyMiddleware(...middleware))
 );
 
 const render = (Component, props) => {

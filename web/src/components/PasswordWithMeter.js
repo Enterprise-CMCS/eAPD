@@ -7,7 +7,7 @@ import Choice from './Choice';
 class Password extends Component {
   state = { showPassword: false, strength: 0 };
 
-  componentWillMount() {
+  componentDidMount() {
     const { value } = this.props;
     if (value) {
       this.changePassword({ target: { value } });
