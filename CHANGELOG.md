@@ -3,9 +3,13 @@
 Anticipated release: TBD
 
 #### 🚀 New features
+
 - Alert users on yellow support browsers that they should upgrade ([#1904])
 
 #### 🐛 Bugs fixed
+
+- Fixed an issue where the label for the state name dropdown in the State Profile section was not correctly associated ([#1779])
+- Fixed an issue where some table header cells were empty ([#1780])
 
 #### ⚙️ Behind the scenes
 
@@ -141,6 +145,8 @@ Pilot release to select state partners
 [#1769]: https://github.com/18F/cms-hitech-apd/issues/1769
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
 [#1775]: https://github.com/18F/cms-hitech-apd/issues/1775
+[#1779]: https://github.com/18F/cms-hitech-apd/issues/1779
+[#1780]: https://github.com/18F/cms-hitech-apd/issues/1780
 [#1793]: https://github.com/18F/cms-hitech-apd/issues/1793
 [#1794]: https://github.com/18F/cms-hitech-apd/issues/1794
 [#1796]: https://github.com/18F/cms-hitech-apd/issues/1796
@@ -150,4 +156,3 @@ Pilot release to select state partners
 [#1820]: https://github.com/18F/cms-hitech-apd/issues/1820
 [#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
 [#1904]: https://github.com/18F/cms-hitech-apd/pull/1904
-
