@@ -16,6 +16,35 @@ require.context(
   /.*/
 );
 
+const setupTinyMCE = editor => {
+  editor.ui.registry.addButton('eapdImageUpload', {
+    icon: 'image',
+    onAction() {
+      const fileButton = document.createElement('input');
+      fileButton.setAttribute('type', 'file');
+      fileButton.setAttribute('accept', 'image/*');
+      fileButton.addEventListener(
+        'change',
+        () => {
+          const selectedFile = fileButton.files[0];
+          if (selectedFile) {
+            const reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+              editor.insertContent(`<img src="${reader.result}">`);
+            });
+
+            reader.readAsDataURL(selectedFile);
+          }
+        },
+        false
+      );
+      fileButton.click();
+    },
+    tooltip: 'Insert an image'
+  });
+};
+
 class RichText extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +69,10 @@ class RichText extends Component {
           browser_spellcheck: true,
           menubar: '',
           paste_data_images: true,
-          plugins: ['paste', 'spellchecker']
+          plugins: ['paste', 'spellchecker'],
+          setup: setupTinyMCE,
+          toolbar:
+            'undo redo | style | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | eapdImageUpload'
         }}
         value={content}
         onEditorChange={this.onEditorChange}
