@@ -5,13 +5,12 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import App from './App';
 import UpgradeBrowser from './UpgradeBrowser';
-import { isBrowserOutdated } from '../util/browser';
+import { browserIsYellow } from '../util/browser';
 
 const Root = ({ history, store }) => {
-  
   return (
     <Provider store={store}>
-    { isBrowserOutdated() && <UpgradeBrowser /> }
+      {browserIsYellow && <UpgradeBrowser />}
       <ConnectedRouter history={history}>
         <App />
       </ConnectedRouter>
