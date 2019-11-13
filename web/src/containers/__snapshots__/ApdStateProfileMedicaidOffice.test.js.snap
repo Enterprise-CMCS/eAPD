@@ -67,10 +67,12 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       >
         <FormLabel
           component="label"
+          fieldId="apd-state-profile-state"
         >
           State
         </FormLabel>
         <Select
+          id="apd-state-profile-state"
           label="State"
           name="apd-state-profile-state"
           onChange={[Function]}

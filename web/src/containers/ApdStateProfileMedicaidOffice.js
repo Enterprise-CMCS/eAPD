@@ -91,10 +91,11 @@ const ApdStateProfile = ({
             onChange={handleChange(setCity)}
           />
           <div className="ds-u-clearfix ds-l-col--6">
-            <FormLabel component="label">
+            <FormLabel component="label" fieldId="apd-state-profile-state">
               {t(`${offTRoot}.labels.state`)}
             </FormLabel>
             <Select
+              id="apd-state-profile-state"
               name="apd-state-profile-state"
               label={t(`${offTRoot}.labels.state`)}
               value={medicaidOffice.state || defaultStateID}
