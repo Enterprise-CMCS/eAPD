@@ -9,6 +9,7 @@ import { getAPDYearRange } from '../reducers/apd';
 import { getUserStateOrTerritory } from '../reducers/user.selector';
 import ApdStateProfile from '../components/ApdStateProfilePrint';
 import ApdSummary from '../containers/ApdSummaryPrint';
+import PreviousActivities from '../containers/PreviousActivitiesPrint';
 
 class ApdPrintView extends Component {
     constructor(props) {
@@ -38,8 +39,8 @@ class ApdPrintView extends Component {
                     keyPersonnel={this.props.apd.keyPersonnel}
                 />
                 <ApdSummary />    
-                
-                <h2>Results of Previous Activities</h2>
+                <PreviousActivities />
+
                 <h3>Prior Activities Overview</h3>
                 <h3>Actual Costs</h3>
                 <h2>Activities</h2>
@@ -53,7 +54,6 @@ class ApdPrintView extends Component {
                 <h2>Executive Summary</h2>
                 <h3>Activities Summary</h3>
                 <h3>Program Budget Tables</h3>
-                {this.props.apd.narrativeHIE}
             </div>
         )
     }
