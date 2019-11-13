@@ -30,14 +30,14 @@ services:
     ports:
       - 8080:8001
   
-  storybook:
-    image: cms-eapd/web:5b40469b515713141a365a8d57f9c947
-    volumes:
-      - ./web:/app
-      - /app/node_modules
-    command: npm run storybook
-    ports:
-      - 8082:9001
+  # storybook:
+  #   image: cms-eapd/web:2554b1560989ef5ab8793fb4b0849363
+  #   volumes:
+  #     - ./web:/app
+  #     - /app/node_modules
+  #   command: npm run storybook
+  #   ports:
+  #     - 8082:9001
 
   api:
     build: ./api

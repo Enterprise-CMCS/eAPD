@@ -6,11 +6,9 @@ import { getIsAdmin } from '../reducers/user.selector';
 import axios from '../util/api';
 import { fromAPI } from '../util/serialization/apd';
 import { selectApd } from './app';
-import { updateBudget } from './budget';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
-export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
 export const CREATE_APD = 'CREATE_APD';
 export const CREATE_APD_REQUEST = 'CREATE_APD_REQUEST';
 export const CREATE_APD_SUCCESS = 'CREATE_APD_SUCCESS';
@@ -21,7 +19,6 @@ export const DELETE_APD_FAILURE = Symbol('delete apd : failure');
 export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
-export const REMOVE_APD_KEY_PERSON = 'REMOVE_APD_KEY_PERSON';
 export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
@@ -29,7 +26,6 @@ export const SELECT_APD = 'SELECT_APD';
 export const SUBMIT_APD_REQUEST = 'SUBMIT_APD_REQUEST';
 export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
 export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
-export const UPDATE_APD = 'UPDATE_APD';
 export const WITHDRAW_APD_REQUEST = Symbol('withdraw apd request');
 export const WITHDRAW_APD_SUCCESS = Symbol('withdraw apd success');
 export const WITHDRAW_APD_FAILURE = Symbol('withdraw apd failure');
@@ -42,26 +38,9 @@ export const selectApdOnLoad = () => (dispatch, getState) => {
   }
 };
 
-export const addKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
-export const removeKeyPerson = (key, { global = window } = {}) => dispatch => {
-  if (global.confirm('Do you really want to delete this key person?')) {
-    dispatch({
-      type: REMOVE_APD_KEY_PERSON,
-      key
-    });
-  }
-};
-
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
 export const failApd = error => ({ type: GET_APD_FAILURE, error });
-
-export const updateApd = updates => dispatch => {
-  dispatch({ type: UPDATE_APD, updates });
-  if (updates.years) {
-    dispatch(updateBudget());
-  }
-};
 
 export const createRequest = () => ({ type: CREATE_APD_REQUEST });
 export const createSuccess = data => ({ type: CREATE_APD_SUCCESS, data });

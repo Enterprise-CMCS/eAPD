@@ -2,9 +2,6 @@ import { createSelector } from 'reselect';
 import { selectApdData } from './apd.selectors';
 import { stateDateRangeToDisplay, stateDateToDisplay } from '../util';
 
-export const selectActivityByKey = ({ activities: { byKey } }, { aKey }) =>
-  byKey[aKey];
-
 export const selectActivityByIndex = (
   {
     apd: {
