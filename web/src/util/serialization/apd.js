@@ -82,6 +82,10 @@ export const fromAPI = apdAPI => {
         ? federalCitations
         : initialAssurances,
 
-    keyPersonnel: keyPersonnel.map(kp => ({ ...kp, initialCollapsed: true }))
+    keyPersonnel: keyPersonnel.map(kp => ({
+      ...kp,
+      initialCollapsed: true,
+      key: generateKey()
+    }))
   };
 };

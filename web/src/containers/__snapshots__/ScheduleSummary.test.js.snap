@@ -50,7 +50,9 @@ exports[`schedule summary component renders correctly 1`] = `
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr
+            key="one-one-03/16/1996"
+          >
             <td
               className="ds-u-border-right--0"
             >
@@ -62,7 +64,9 @@ exports[`schedule summary component renders correctly 1`] = `
               03/16/1996
             </td>
           </tr>
-          <tr>
+          <tr
+            key="one-two-05/23/1970"
+          >
             <td
               className="ds-u-border-right--0"
             >
@@ -111,7 +115,9 @@ exports[`schedule summary component renders correctly 1`] = `
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr
+            key="three-one-10/06/2016"
+          >
             <td
               className="ds-u-border-right--0"
             >
@@ -123,7 +129,9 @@ exports[`schedule summary component renders correctly 1`] = `
               10/06/2016
             </td>
           </tr>
-          <tr>
+          <tr
+            key="two-two-06/25/2014"
+          >
             <td
               className="ds-u-border-right--0"
             >
@@ -135,7 +143,9 @@ exports[`schedule summary component renders correctly 1`] = `
               06/25/2014
             </td>
           </tr>
-          <tr>
+          <tr
+            key="two-three-08/21/1965"
+          >
             <td
               className="ds-u-border-right--0"
             >
@@ -184,7 +194,9 @@ exports[`schedule summary component renders correctly 1`] = `
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr
+            key="three-one-06/09/2018"
+          >
             <td
               className="ds-u-border-right--0"
             >

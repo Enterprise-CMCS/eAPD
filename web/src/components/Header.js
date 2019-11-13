@@ -126,11 +126,12 @@ Header.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
-  ariaExpanded: PropTypes.bool.isRequired,
+  ariaExpanded: PropTypes.bool,
   showSiteTitle: PropTypes.bool.isRequired
 };
 
 Header.defaultProps = {
+  ariaExpanded: false,
   currentUser: null
 };
 
