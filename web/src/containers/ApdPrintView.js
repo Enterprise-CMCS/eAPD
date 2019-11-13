@@ -4,19 +4,16 @@ import { connect } from 'react-redux';
 
 import { selectApd } from '../actions/app'
 import { selectApdData } from '../reducers/apd.selectors';
+import { selectBudget } from '../reducers/budget.selectors.js';
 import { getAPDYearRange } from '../reducers/apd';
 import { getUserStateOrTerritory } from '../reducers/user.selector';
+import ApdStateProfile from '../components/ApdStateProfilePrint';
+import ApdSummary from '../containers/ApdSummaryPrint';
 
 class ApdPrintView extends Component {
     constructor(props) {
         super(props);
         this.props.selectApd(5, '/print');
-    }
-
-    EssaySection = () => {
-        return (
-            <div>words</div>
-        );
     }
 
     render() {
@@ -25,19 +22,38 @@ class ApdPrintView extends Component {
             year
         } = this.props;
 
-        if(!this.props.apd) {
+        if(!Object.keys(this.props.apd).length) {
             return null;
         }
-        
 
-
-        return(
+       
+        return (
             <div className="site-body ds-l-container">
                 <h1 id="start-main-content" className="ds-h1 apd--title">
                     <span className="ds-h6 ds-u-display--block">{this.props.apd.name}</span>
                     {place.name} {year} APD
                 </h1>
-
+                <ApdStateProfile 
+                    stateProfile={this.props.apd.stateProfile}
+                    keyPersonnel={this.props.apd.keyPersonnel}
+                />
+                <ApdSummary />    
+                
+                <h2>Results of Previous Activities</h2>
+                <h3>Prior Activities Overview</h3>
+                <h3>Actual Costs</h3>
+                <h2>Activities</h2>
+                <h3>Activitiy List</h3>
+                <h2>Activity Schedule Summary</h2>
+                <h2>Proposed Budget</h2>
+                <h3>Summary Budget Table</h3>
+                <h3>Quarterly Federal Share</h3>
+                <h3>Estimated Quarterly Incentive Payment</h3>
+                <h2>Assurances and Compliance</h2>
+                <h2>Executive Summary</h2>
+                <h3>Activities Summary</h3>
+                <h3>Program Budget Tables</h3>
+                {this.props.apd.narrativeHIE}
             </div>
         )
     }
@@ -45,6 +61,7 @@ class ApdPrintView extends Component {
 
 const mapStateToProps = state => ({
     apd: selectApdData(state),
+    budget: selectBudget(state),
     place: getUserStateOrTerritory(state),
     year: getAPDYearRange(state)
 })

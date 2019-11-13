@@ -357,8 +357,7 @@ const reducer = (state = initialState, action) => {
             [apd.id]: { ...apd, updated: getHumanTimestamp(apd.updated) }
           }),
           {}
-        ),
-        data: { ...initialState.data }
+        )
       };
     }
     case GET_APD_FAILURE:

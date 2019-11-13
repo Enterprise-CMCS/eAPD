@@ -5,7 +5,7 @@ import MedicaidOffice from '../containers/ApdStateProfileMedicaidOffice';
 import KeyPersonnel from '../containers/ApdStateKeyPersonnel';
 import Waypoint from '../containers/ConnectedWaypoint';
 
-const ApdStateProfile = () => (
+const ApdStateProfile = ({apd}) => (
   <Waypoint id="apd-state-profile-overview">
     <Section isNumbered id="apd-state-profile" resource="apd.stateProfile">
       <Waypoint id="apd-state-profile-office" />
