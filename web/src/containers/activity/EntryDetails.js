@@ -75,7 +75,11 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
       } activity--body__${activityIndex === 0 ? 'first' : 'notfirst'}`}
       ref={container}
     >
-      <Review heading={title} headingLevel={4} editContent={editContent} />
+      <Review heading={title} headingLevel={4} editContent={editContent}>
+        {[
+          /* children are required, so send an empty array to suppress errors */
+        ]}
+      </Review>
       <div className={collapsed ? 'visibility--print' : ''}>
         <Overview activityIndex={activityIndex} />
         <Goals activityIndex={activityIndex} />
