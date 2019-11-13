@@ -21,7 +21,7 @@ import {
   getAPDYearRange,
   getIsAnAPDSelected
 } from '../reducers/apd';
-import { getIsDirty } from '../reducers/dirty';
+import { selectHasChanges } from '../reducers/patch.selectors';
 import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
 const unsavedPrompt =
@@ -32,8 +32,8 @@ class ApdApplication extends Component {
     // Hook the browser's beforeunload event to catch page reloads or manual
     // changes to the URL bar while the APD is loaded.
     this.unloadListener = window.addEventListener('beforeunload', e => {
-      const { dirty } = this.props;
-      if (dirty) {
+      const { needsSave } = this.props;
+      if (needsSave) {
         e.preventDefault();
         e.returnValue = unsavedPrompt;
       }
@@ -53,8 +53,8 @@ class ApdApplication extends Component {
     const {
       apdName,
       apdSelected,
-      dirty,
       isAdmin,
+      needsSave,
       place,
       selectApdOnLoad: dispatchSelectApdOnLoad,
       year
@@ -73,7 +73,7 @@ class ApdApplication extends Component {
       <div className="site-body ds-l-container">
         {/* Use a redux-router prompt to hook in-app navigations */}
         <Prompt
-          when={dirty}
+          when={needsSave}
           message={location => {
             // If we're navigating to a hash but on the same page, don't do the
             // prompt - nothing is reloading, so we're good.
@@ -111,8 +111,8 @@ class ApdApplication extends Component {
 ApdApplication.propTypes = {
   apdName: PropTypes.string,
   apdSelected: PropTypes.bool.isRequired,
-  dirty: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  needsSave: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
   selectApdOnLoad: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired
@@ -123,8 +123,8 @@ ApdApplication.defaultProps = { apdName: '' };
 const mapStateToProps = state => ({
   apdName: getAPDName(state),
   apdSelected: getIsAnAPDSelected(state),
-  dirty: getIsDirty(state),
   isAdmin: getIsAdmin(state),
+  needsSave: selectHasChanges(state),
   place: getUserStateOrTerritory(state),
   year: getAPDYearRange(state)
 });

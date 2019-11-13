@@ -6,7 +6,6 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ExecutiveSummary';
-import { expandActivitySection } from '../actions/activities';
 import { jumpTo } from '../actions/navigation';
 
 describe('executive summary component', () => {
@@ -39,9 +38,7 @@ describe('executive summary component', () => {
   };
 
   test('renders correctly', () => {
-    const component = shallow(
-      <ExecutiveSummary {...props} expandSection={() => {}} />
-    );
+    const component = shallow(<ExecutiveSummary {...props} />);
     expect(component).toMatchSnapshot();
   });
 
@@ -125,7 +122,6 @@ describe('executive summary component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      expandSection: expandActivitySection,
       jumpTo
     });
   });
