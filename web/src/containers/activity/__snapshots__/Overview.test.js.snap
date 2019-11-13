@@ -12,6 +12,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
     hint="Details for the activity go in the following sections."
     label="Provide a short overview of the activity."
     max={280}
+    name="activity overview"
     onChange={[Function]}
     rows={6}
     value=""

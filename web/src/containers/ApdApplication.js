@@ -109,7 +109,7 @@ class ApdApplication extends Component {
 }
 
 ApdApplication.propTypes = {
-  apdName: PropTypes.string.isRequired,
+  apdName: PropTypes.string,
   apdSelected: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   needsSave: PropTypes.bool.isRequired,
@@ -117,6 +117,8 @@ ApdApplication.propTypes = {
   selectApdOnLoad: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired
 };
+
+ApdApplication.defaultProps = { apdName: '' };
 
 const mapStateToProps = state => ({
   apdName: getAPDName(state),
