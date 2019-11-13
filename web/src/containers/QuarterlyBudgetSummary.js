@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
 
-import Dollars from '../components/Dollars';
-import { t } from '../i18n';
+import Dollars from "../components/Dollars";
+import { t } from "../i18n";
 
-const FUNDING_SOURCES = [['hitAndHie', 'HIT and HIE'], ['mmis', 'MMIS']];
+const FUNDING_SOURCES = [["hitAndHie", "HIT and HIE"], ["mmis", "MMIS"]];
 const QUARTERS = [1, 2, 3, 4];
 const EXPENSE_NAME_DISPLAY = {
-  state: t('proposedBudget.quarterlyBudget.expenseNames.state'),
-  contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractor'),
-  combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
+  state: t("proposedBudget.quarterlyBudget.expenseNames.state"),
+  contractors: t("proposedBudget.quarterlyBudget.expenseNames.contractor"),
+  combined: t("proposedBudget.quarterlyBudget.expenseNames.combined")
 };
 
 const QuarterlyBudgetSummary = ({ budget, years }) => {
@@ -27,7 +27,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
             {years.map(year => (
               <table className="budget-table" key={year}>
                 <caption className="ds-u-visibility--screen-reader">
-                  {t('ffy', { year })} {sourceDisplay}
+                  {t("ffy", { year })} {sourceDisplay}
                 </caption>
                 <colgroup>
                   <col className="budget-table--col-header__fixed-width" />
@@ -36,7 +36,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 <thead>
                   <tr>
                     <th>
-                      <span aria-hidden="true">{t('ffy', { year })}</span>
+                      <span aria-hidden="true">{t("ffy", { year })}</span>
                     </th>
                     {QUARTERS.map(q => (
                       <th
@@ -44,14 +44,14 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                         className="ds-u-text-align--right"
                         scope="col"
                       >
-                        {t('table.quarter', { q })}
+                        {t("table.quarter", { q })}
                       </th>
                     ))}
                     <th
                       className="ds-u-text-align--right budget-table--subtotal"
                       scope="col"
                     >
-                      {t('table.subtotal')}
+                      {t("table.subtotal")}
                     </th>
                   </tr>
                 </thead>
@@ -60,9 +60,9 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                     <tr
                       key={name}
                       className={
-                        name === 'combined'
-                          ? 'budget-table--row__highlight budget-table--total'
-                          : ''
+                        name === "combined"
+                          ? "budget-table--row__highlight budget-table--total"
+                          : ""
                       }
                     >
                       <th scope="row">{EXPENSE_NAME_DISPLAY[name]}</th>
@@ -86,17 +86,16 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               </colgroup>
               <thead>
                 <tr>
-                  <th>Total {sourceDisplay}</th>
-                  <th />
+                  <th colSpan={2}>Total {sourceDisplay}</th>
                 </tr>
               </thead>
               <tbody>
                 {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                   <tr
                     className={
-                      name === 'combined'
-                        ? 'budget-table--row__highlight budget-table--total'
-                        : ''
+                      name === "combined"
+                        ? "budget-table--row__highlight budget-table--total"
+                        : ""
                     }
                     key={name}
                   >

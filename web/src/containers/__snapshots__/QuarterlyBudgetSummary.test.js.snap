@@ -506,11 +506,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </colgroup>
     <thead>
       <tr>
-        <th>
+        <th
+          colSpan={2}
+        >
           Total 
           HIT and HIE
         </th>
-        <th />
       </tr>
     </thead>
     <tbody>
@@ -1077,11 +1078,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </colgroup>
     <thead>
       <tr>
-        <th>
+        <th
+          colSpan={2}
+        >
           Total 
           MMIS
         </th>
-        <th />
       </tr>
     </thead>
     <tbody>

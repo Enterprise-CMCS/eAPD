@@ -479,7 +479,8 @@ exports[`budget summary component renders correctly 1`] = `
     </caption>
     <thead>
       <tr>
-        <th
+        <td
+          className="th"
           id="summary-budget-null1"
         />
         <th
