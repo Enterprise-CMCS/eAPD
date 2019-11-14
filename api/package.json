@@ -99,5 +99,8 @@
     "testPathIgnorePatterns": [
       "utils.endpoint.js"
     ]
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }
