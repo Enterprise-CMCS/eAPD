@@ -12,11 +12,11 @@ import {
   setMedicaidOfficeCity,
   setMedicaidOfficeState,
   setMedicaidOfficeZip
-} from '../actions/editApd';
-import { t } from '../i18n';
-import { selectStateProfile } from '../reducers/apd.selectors';
-import { selectState } from '../reducers/user';
-import { STATES } from '../util';
+} from '../../actions/editApd';
+import { t } from '../../i18n';
+import { selectStateProfile } from '../../reducers/apd.selectors';
+import { selectState } from '../../reducers/user';
+import { STATES } from '../../util';
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';

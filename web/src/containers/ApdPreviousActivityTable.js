@@ -11,7 +11,6 @@ import {
 import { TABLE_HEADERS } from '../constants';
 
 import { selectPreviousHITHIEActivities } from '../reducers/apd.selectors';
-import ApdStateProfile from '../components/ApdStateProfilePrint';
 
 const ApdPreviousActivityTable = ({
   isViewOnly,

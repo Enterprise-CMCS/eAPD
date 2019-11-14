@@ -2,7 +2,7 @@ import NoMatch from './components/NoMatch';
 import CreateAccount from './containers/admin/CreateAccount';
 import Dashboard from './containers/Dashboard';
 import ApdApplication from './containers/ApdApplication';
-import ApdPrintView from './containers/ApdPrintView';
+import ApdViewOnly from './containers/viewOnly/Apd';
 import EditAccount from './containers/admin/EditAccount';
 import MyAccount from './containers/admin/MyAccount';
 import Login from './containers/Login';
@@ -11,7 +11,7 @@ import Logout from './containers/Logout';
 const routes = [
   { path: '/', component: Dashboard, exact: true, isPublic: false },
   { path: '/apd', component: ApdApplication, exact: true, isPublic: false },
-  { path: '/print', component: ApdPrintView, exact: true, isPublic: false },
+  { path: '/print', component: ApdViewOnly, exact: true, isPublic: false },
 
   { path: '/create-account', component: CreateAccount, isAdmin: true },
   { path: '/edit-account', component: EditAccount, isAdmin: true },
