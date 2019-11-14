@@ -41,8 +41,6 @@ class ApdPrintView extends Component {
                 <ApdSummary />    
                 <PreviousActivities />
 
-                <h3>Prior Activities Overview</h3>
-                <h3>Actual Costs</h3>
                 <h2>Activities</h2>
                 <h3>Activitiy List</h3>
                 <h2>Activity Schedule Summary</h2>
