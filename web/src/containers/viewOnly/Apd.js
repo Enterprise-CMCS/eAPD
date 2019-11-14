@@ -2,16 +2,16 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { selectApd } from '../actions/app'
-import { selectApdData } from '../reducers/apd.selectors';
-import { selectBudget } from '../reducers/budget.selectors.js';
-import { getAPDYearRange } from '../reducers/apd';
-import { getUserStateOrTerritory } from '../reducers/user.selector';
-import ApdStateProfile from '../components/ApdStateProfilePrint';
-import ApdSummary from '../containers/ApdSummaryPrint';
-import PreviousActivities from '../containers/PreviousActivitiesPrint';
+import { selectApd } from '../../actions/app'
+import { selectApdData } from '../../reducers/apd.selectors';
+import { selectBudget } from '../../reducers/budget.selectors.js';
+import { getAPDYearRange } from '../../reducers/apd';
+import { getUserStateOrTerritory } from '../../reducers/user.selector';
+import ApdStateProfile from './ApdStateProfile';
+import ApdSummary from './ApdSummary';
+import PreviousActivities from './PreviousActivities';
 
-class ApdPrintView extends Component {
+class ApdViewOnly extends Component {
     constructor(props) {
         super(props);
         this.props.selectApd(5, '/print');
@@ -69,4 +69,4 @@ const mapDispatchToProps = { selectApd };
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ApdPrintView);
+)(ApdViewOnly);

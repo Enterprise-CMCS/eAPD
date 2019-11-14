@@ -1,6 +1,6 @@
 import React, { Fragment, useMemo } from 'react';
 
-import Dollars from './Dollars';
+import Dollars from '../../components/Dollars';
 
 
 const ApdStateProfile = ({stateProfile, keyPersonnel}) => {

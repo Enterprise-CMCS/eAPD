@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
-import { selectSummary } from '../reducers/apd.selectors';
+import { t } from '../../i18n';
+import { selectSummary } from '../../reducers/apd.selectors';
 
 const ApdSummary = ({
   narrativeHIE,
