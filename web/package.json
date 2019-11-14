@@ -178,5 +178,8 @@
       "\\.js?$": "babel-jest",
       "\\.yaml$": "yaml-jest"
     }
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }
