@@ -114,34 +114,67 @@ export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
   return null;
 };
 
-export const saveApd = () => (dispatch, getState) => {
-  const state = getState();
-  const hasChanges = selectHasChanges(state);
+export const saveApd = (() => {
+  let isSaving = false;
+  let saveTimer = null;
+  let queued = false;
 
-  if (!hasChanges) {
-    return Promise.resolve();
-  }
+  return () => (dispatch, getState) => {
+    if (isSaving) {
+      queued = true;
+      return Promise.resolve();
+    }
 
-  dispatch(requestSave());
+    if (saveTimer) {
+      clearTimeout(saveTimer);
+    }
 
-  const { id: apdID } = selectApdData(state);
-  const patches = selectPatches(state);
+    return new Promise(resolve => {
+      saveTimer = setTimeout(() => {
+        saveTimer = null;
+        const state = getState();
+        const hasChanges = selectHasChanges(state);
 
-  return axios
-    .patch(`/apds/${apdID}`, patches)
-    .then(res => {
-      dispatch(saveSuccess(res.data));
-      return res.data;
-    })
-    .catch(error => {
-      if (error.response.status === 403) {
-        dispatch(saveFailure('save-apd.not-logged-in'));
-      } else {
-        dispatch(saveFailure());
-      }
-      throw error;
+        if (!hasChanges) {
+          return Promise.resolve();
+        }
+
+        isSaving = true;
+        dispatch(requestSave());
+
+        const { id: apdID } = selectApdData(state);
+        const patches = selectPatches(state);
+
+        return resolve(
+          axios
+            .patch(`/apds/${apdID}`, patches)
+            .then(res => {
+              dispatch(saveSuccess(res.data));
+              isSaving = false;
+              if (queued) {
+                dispatch(saveApd());
+                queued = false;
+              }
+              return res.data;
+            })
+            .catch(error => {
+              if (error.response.status === 403) {
+                dispatch(saveFailure('save-apd.not-logged-in'));
+              } else {
+                dispatch(saveFailure());
+              }
+              if (queued) {
+                dispatch(saveApd());
+                queued = false;
+              }
+              isSaving = false;
+              throw error;
+            })
+        );
+      }, 300);
     });
-};
+  };
+})();
 
 export const deleteApd = (id, { fetch = fetchApd } = {}) => dispatch => {
   dispatch({ type: DELETE_APD_REQUEST });
