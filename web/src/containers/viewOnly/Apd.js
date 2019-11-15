@@ -11,6 +11,7 @@ import ApdStateProfile from "./ApdStateProfile";
 import ApdSummary from "./ApdSummary";
 import PreviousActivities from "./PreviousActivities";
 import ScheduleSummary from "./ScheduleSummary";
+import ProposedBudget from "./ProposedBudget";
 
 class ApdViewOnly extends Component {
   constructor(props) {
@@ -43,10 +44,7 @@ class ApdViewOnly extends Component {
         <h2>Activities</h2>
         <h3>Activitiy List</h3>
         <ScheduleSummary />
-        <h2>Proposed Budget</h2>
-        <h3>Summary Budget Table</h3>
-        <h3>Quarterly Federal Share</h3>
-        <h3>Estimated Quarterly Incentive Payment</h3>
+        <ProposedBudget />
         <h2>Assurances and Compliance</h2>
         <h2>Executive Summary</h2>
         <h3>Activities Summary</h3>
