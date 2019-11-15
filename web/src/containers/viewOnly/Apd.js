@@ -12,6 +12,7 @@ import ApdSummary from "./ApdSummary";
 import PreviousActivities from "./PreviousActivities";
 import ScheduleSummary from "./ScheduleSummary";
 import ProposedBudget from "./ProposedBudget";
+import AssuranceAndCompliance from "./AssurancesAndCompliance";
 
 class ApdViewOnly extends Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class ApdViewOnly extends Component {
   }
 
   render() {
-    const { place, year } = this.props;
+    const { budget, place, year } = this.props;
 
-    if (!Object.keys(this.props.apd).length) {
+    if (!Object.keys(this.props.apd).length || budget.years.length === 0) {
       return null;
     }
 
@@ -45,7 +46,7 @@ class ApdViewOnly extends Component {
         <h3>Activitiy List</h3>
         <ScheduleSummary />
         <ProposedBudget />
-        <h2>Assurances and Compliance</h2>
+        <AssuranceAndCompliance />
         <h2>Executive Summary</h2>
         <h3>Activities Summary</h3>
         <h3>Program Budget Tables</h3>
