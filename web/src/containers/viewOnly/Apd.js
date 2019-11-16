@@ -10,6 +10,7 @@ import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import ApdStateProfile from './ApdStateProfile';
 import ApdSummary from './ApdSummary';
 import PreviousActivities from './PreviousActivities';
+import Activities from './activities/All.js';
 
 class ApdViewOnly extends Component {
     constructor(props) {
@@ -40,8 +41,8 @@ class ApdViewOnly extends Component {
                 />
                 <ApdSummary />    
                 <PreviousActivities />
+                <Activities activities={this.props.apd.activities} />
 
-                <h2>Activities</h2>
                 <h3>Activitiy List</h3>
                 <h2>Activity Schedule Summary</h2>
                 <h2>Proposed Budget</h2>
