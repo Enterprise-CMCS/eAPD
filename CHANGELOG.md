@@ -8,6 +8,8 @@ Anticipated release: December 2, 2019
 
 #### ⚙️ Behind the scenes
 
+- Removed unused code ([#1801])
+
 # 2.0.1
 
 Released: November 18, 2019
@@ -33,7 +35,7 @@ Released: November 18, 2019
 #### ⚙️ Behind the scenes
 
 - Switched from a relational data model for APDs to a document-oriented model ([#1793], [#1794], [#1796], [#1798], [#1800], [#1826])
-- Removed unused code ([#1799], [#1801])
+- Removed unused code ([#1799])
 
 # v1.1.0
 
