@@ -10,10 +10,11 @@ import { getUserStateOrTerritory } from "../../reducers/user.selector";
 import ApdStateProfile from "./ApdStateProfile";
 import ApdSummary from "./ApdSummary";
 import PreviousActivities from "./PreviousActivities";
-import Activities from './activities/All.js';
+import Activities from "./activities/All.js";
 import ScheduleSummary from "./ScheduleSummary";
 import ProposedBudget from "./ProposedBudget";
 import AssuranceAndCompliance from "./AssurancesAndCompliance";
+import ExecutiveSummary from "./ExecutiveSummary";
 
 class ApdViewOnly extends Component {
   constructor(props) {
@@ -22,33 +23,36 @@ class ApdViewOnly extends Component {
   }
 
   render() {
-    const { budget, place, year } = this.props;
+    const { apd, budget, place, year } = this.props;
 
-    if (!Object.keys(this.props.apd).length || budget.years.length === 0) {
+    if (!Object.keys(apd).length || budget.years.length === 0) {
+      return null;
+    }
+
+    const activityKeys = apd.activities.map(({ key }) => key);
+    if (
+      Object.keys(budget.activities).some(key => activityKeys.indexOf(key) < 0)
+    ) {
       return null;
     }
 
     return (
       <div className="site-body ds-l-container">
         <h1 id="start-main-content" className="ds-h1 apd--title">
-          <span className="ds-h6 ds-u-display--block">
-            {this.props.apd.name}
-          </span>
+          <span className="ds-h6 ds-u-display--block">{apd.name}</span>
           {place.name} {year} APD
         </h1>
         <ApdStateProfile
-          stateProfile={this.props.apd.stateProfile}
-          keyPersonnel={this.props.apd.keyPersonnel}
+          stateProfile={apd.stateProfile}
+          keyPersonnel={apd.keyPersonnel}
         />
         <ApdSummary />
         <PreviousActivities />
-        <Activities activities={this.props.apd.activities} />
+        <Activities activities={apd.activities} />
         <ScheduleSummary />
         <ProposedBudget />
         <AssuranceAndCompliance />
-        <h2>Executive Summary</h2>
-        <h3>Activities Summary</h3>
-        <h3>Program Budget Tables</h3>
+        <ExecutiveSummary />
       </div>
     );
   }
