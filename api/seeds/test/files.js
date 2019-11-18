@@ -15,34 +15,4 @@ exports.seed = async knex => {
     { id: 5003, key: 'download.txt' },
     { id: 5004, key: 'not real' }
   ]);
-
-  await knex('activity_files').insert([
-    {
-      file_id: 5000,
-      activity_id: 4100
-    },
-    {
-      file_id: 5004,
-      activity_id: 4100
-    },
-    {
-      file_id: 5001,
-      activity_id: 4110
-    }
-  ]);
-
-  await knex('activity_contractor_files').insert([
-    {
-      file_id: 5002,
-      activity_contractor_resource_id: 4300
-    },
-    {
-      file_id: 5002,
-      activity_contractor_resource_id: 4301
-    },
-    {
-      file_id: 5003,
-      activity_contractor_resource_id: 9900
-    }
-  ]);
 };

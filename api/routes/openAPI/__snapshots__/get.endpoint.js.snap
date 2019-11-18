@@ -637,41 +637,6 @@ Object {
         ],
       },
     },
-    "/apds/submitted": Object {
-      "get": Object {
-        "description": "Get a list of all submitted APDs known to the system",
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "items": Object {
-                    "$ref": "#/components/schemas/apd",
-                  },
-                  "type": "array",
-                },
-              },
-            },
-            "description": "The list of submitted APDs",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Get all of the submitted APDs (i.e., not draft)",
-        "tags": Array [
-          "APDs",
-        ],
-      },
-    },
     "/apds/{id}": Object {
       "delete": Object {
         "description": "Updates an APD's status to \\"archive\\" and prevents it from being edited",

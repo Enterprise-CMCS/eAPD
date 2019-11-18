@@ -8,12 +8,14 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
 
   const app = { delete: sandbox.stub() };
+  const db = sandbox.stub();
+  const where = sandbox.stub();
+  const update = sandbox.stub();
 
   const req = {
     meta: {
       apd: {
-        save: sandbox.stub(),
-        set: sandbox.stub()
+        id: 'apd id'
       }
     }
   };
@@ -27,6 +29,9 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
+
+    db.returns({ where });
+    where.returns({ update });
 
     res.status.returns(res);
     res.send.returns(res);
@@ -48,10 +53,10 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   });
 
   endpointTest.test('handles unexpected errors', async test => {
-    endpoint(app);
+    endpoint(app, { db });
     const handler = app.delete.args.find(args => args[0] === '/apds/:id').pop();
 
-    req.meta.apd.set.throws(new Error('random thing gone wrong'));
+    update.throws(new Error('random thing gone wrong'));
 
     await handler(req, res);
 
@@ -61,22 +66,15 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   });
 
   endpointTest.test('updates the status and saves', async test => {
-    endpoint(app);
+    endpoint(app, { db });
     const handler = app.delete.args.find(args => args[0] === '/apds/:id').pop();
 
-    req.meta.apd.save.resolves();
+    update.resolves();
 
     await handler(req, res);
 
-    test.ok(
-      req.meta.apd.set.calledWith('status', 'archived'),
-      'apd status is set to archived'
-    );
-    test.ok(
-      req.meta.apd.set.calledBefore(req.meta.apd.save),
-      'status is set before apd is saved'
-    );
-    test.ok(req.meta.apd.save.calledOnce, 'apd is saved');
+    test.ok(where.calledWith('id', 'apd id'), 'the right APD is updated');
+    test.ok(update.calledWith({ status: 'archived' }), 'APD is archived');
     test.ok(res.status.calledWith(204), 'HTTP status set to 204');
     test.ok(res.send.notCalled, 'no body is sent');
     test.ok(res.end.called, 'response is terminated');
