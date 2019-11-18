@@ -1,6 +1,24 @@
 # Next release
 
-Anticipated release: TBD
+Anticipated release: December 2, 2019
+
+#### 🚀 New features
+
+#### 🐛 Bugs fixed
+
+#### ⚙️ Behind the scenes
+
+# 2.0.1
+
+Released: November 18, 2019
+
+#### 🐛 Bugs fixed
+
+- Updated dependencies with known vulnerabilities
+
+# 2.0.0
+
+Released: November 18, 2019
 
 #### 🚀 New features
 
