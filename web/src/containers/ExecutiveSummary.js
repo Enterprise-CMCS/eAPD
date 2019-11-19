@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Waypoint from './ConnectedWaypoint';
-import { expandActivitySection } from '../actions/activities';
 import Dollars from '../components/Dollars';
 import Review from '../components/Review';
 import { Section, Subsection } from '../components/Section';
@@ -128,7 +127,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  expandSection: expandActivitySection,
   jumpTo
 };
 

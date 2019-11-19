@@ -92,7 +92,7 @@ const ApdPreviousActivityTableMMIS = ({
               </th>
             </tr>
             <tr>
-              <th aria-hidden="true" />
+              <td className="th" aria-hidden="true" />
               <th
                 id={`prev_act_mmis${level}_total_approved`}
                 className="ds-u-text-align--right"

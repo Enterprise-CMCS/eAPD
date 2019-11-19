@@ -159,7 +159,7 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
       <caption className="ds-h4">Project Activities Totals</caption>
       <thead>
         <tr>
-          <th id="summary-budget-null1" />
+          <td className="th" id="summary-budget-null1" />
           <th scope="col" className="ds-u-text-align--right">
             Medicaid Total
           </th>
@@ -178,8 +178,9 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
             <tr
               key={ffy}
               className={
-                ffy === "total" &&
-                "budget-table--row__highlight budget-table--total"
+                ffy === "total"
+                  ? "budget-table--row__highlight budget-table--total"
+                  : ""
               }
             >
               <th scope="row">{ffy === "total" ? "Total" : `FFY ${ffy}`}</th>

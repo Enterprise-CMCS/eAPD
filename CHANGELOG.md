@@ -1,11 +1,36 @@
 # Next release
 
-Anticipated release: TBD
+Anticipated release: December 2, 2019
 
 #### 🚀 New features
-- Alert users on yellow support browsers that they should upgrade ([#1904])
 
 #### 🐛 Bugs fixed
+
+#### ⚙️ Behind the scenes
+
+- Removed unused code ([#1801])
+
+# 2.0.1
+
+Released: November 18, 2019
+
+#### 🐛 Bugs fixed
+
+- Updated dependencies with known vulnerabilities
+
+# 2.0.0
+
+Released: November 18, 2019
+
+#### 🚀 New features
+
+- Alert users on yellow support browsers that they should upgrade ([#1904])
+- Don't try to load the page on unsupported browsers ([#1882])
+
+#### 🐛 Bugs fixed
+
+- Fixed an issue where the label for the state name dropdown in the State Profile section was not correctly associated ([#1779])
+- Fixed an issue where some table header cells were empty ([#1780])
 
 #### ⚙️ Behind the scenes
 
@@ -141,13 +166,16 @@ Pilot release to select state partners
 [#1769]: https://github.com/18F/cms-hitech-apd/issues/1769
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
 [#1775]: https://github.com/18F/cms-hitech-apd/issues/1775
+[#1779]: https://github.com/18F/cms-hitech-apd/issues/1779
+[#1780]: https://github.com/18F/cms-hitech-apd/issues/1780
 [#1793]: https://github.com/18F/cms-hitech-apd/issues/1793
 [#1794]: https://github.com/18F/cms-hitech-apd/issues/1794
 [#1796]: https://github.com/18F/cms-hitech-apd/issues/1796
 [#1798]: https://github.com/18F/cms-hitech-apd/issues/1798
 [#1799]: https://github.com/18F/cms-hitech-apd/issues/1799
 [#1800]: https://github.com/18F/cms-hitech-apd/issues/1800
+[#1801]: https://github.com/18F/cms-hitech-apd/issues/1801
 [#1820]: https://github.com/18F/cms-hitech-apd/issues/1820
 [#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
+[#1882]: https://github.com/18F/cms-hitech-apd/issues/1882
 [#1904]: https://github.com/18F/cms-hitech-apd/pull/1904
-

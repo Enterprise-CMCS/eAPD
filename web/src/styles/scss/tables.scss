@@ -66,7 +66,8 @@ td {
     tr + tr {
       border-top: 1px solid $color-gray-light;
     }
-    th {
+    th,
+    td.th {
       background-color: $color-gray-lighter;
       white-space: pre-line;
       /* used for highlights in a column */

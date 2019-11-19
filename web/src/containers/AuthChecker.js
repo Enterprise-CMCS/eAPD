@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { checkAuth } from '../actions/auth';
 
 class AuthChecker extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { checkAuth: action } = this.props;
     action();
   }

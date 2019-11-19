@@ -38,16 +38,16 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
     <Fragment>
       <table className="budget-table">
         <caption className="ds-h4">
-          HIT + HIE{" "}
+          HIT + HIE{' '}
           <span className="ds-u-visibility--screen-reader">
             executive summary
           </span>
         </caption>
         <thead>
           <tr>
-            <th id="program-budget-table-null1" />
-            <th colSpan="2" id={thId("hit")}>
-              {t("executiveSummary.budgetTable.hit")}
+            <td className="th" id="program-budget-table-null1" />
+            <th colSpan="2" id={thId('hit')}>
+              {t('executiveSummary.budgetTable.hit')}
             </th>
             <th colSpan="2" id={thId("hie")}>
               {t("executiveSummary.budgetTable.hie")}
@@ -57,9 +57,9 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             </th>
           </tr>
           <tr>
-            <th id="program-budget-table-null2" />
-            <th className="ds-u-text-align--right" id={thId("hit", "fed")}>
-              {t("executiveSummary.budgetTable.fedShare")}
+            <td className="th" id="program-budget-table-null2" />
+            <th className="ds-u-text-align--right" id={thId('hit', 'fed')}>
+              {t('executiveSummary.budgetTable.fedShare')}
             </th>
             <th className="ds-u-text-align--right" id={thId("hit", "state")}>
               {t("executiveSummary.budgetTable.stateShare")}
@@ -75,15 +75,15 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             </th>
             <th
               className="ds-u-text-align--right"
-              id={thId("combined", "state")}
+              id={thId('combined', 'state')}
             >
-              {t("executiveSummary.budgetTable.stateShare")}
+              {t('executiveSummary.budgetTable.stateShare')}
             </th>
             <th
               className="ds-u-text-align--right"
-              id={thId("combined", "total")}
+              id={thId('combined', 'total')}
             >
-              {t("executiveSummary.budgetTable.grandTotal")}
+              {t('executiveSummary.budgetTable.grandTotal')}
             </th>
           </tr>
         </thead>
@@ -92,9 +92,9 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             <tr
               key={year}
               className={
-                display === "Total"
-                  ? "budget-table--total budget-table--row__highlight"
-                  : ""
+                display === 'Total'
+                  ? 'budget-table--total budget-table--row__highlight'
+                  : ''
               }
             >
               <th
@@ -145,16 +145,16 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
 
       <table className="budget-table">
         <caption className="ds-h4">
-          MMIS{" "}
+          MMIS{' '}
           <span className="ds-u-visibility--screen-reader">
             executive summary
           </span>
         </caption>
         <thead>
           <tr>
-            <th id="program-budget-table-null3" />
-            <th colSpan="2" id={thId("mmis90")}>
-              {t("executiveSummary.budgetTable.mmis90")}
+            <td className="th" id="program-budget-table-null3" />
+            <th colSpan="2" id={thId('mmis90')}>
+              {t('executiveSummary.budgetTable.mmis90')}
             </th>
             <th colSpan="2" id={thId("mmis75")}>
               {t("executiveSummary.budgetTable.mmis75")}
@@ -167,9 +167,9 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             </th>
           </tr>
           <tr>
-            <th id="program-budget-table-null4" />
-            <th className="ds-u-text-align--right" id={thId("mmis90", "fed")}>
-              {t("executiveSummary.budgetTable.fedShare")}
+            <td className="th" id="program-budget-table-null4" />
+            <th className="ds-u-text-align--right" id={thId('mmis90', 'fed')}>
+              {t('executiveSummary.budgetTable.fedShare')}
             </th>
             <th className="ds-u-text-align--right" id={thId("mmis90", "state")}>
               {t("executiveSummary.budgetTable.stateShare")}
@@ -188,21 +188,21 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             </th>
             <th
               className="ds-u-text-align--right"
-              id={thId("mmisTotal", "fed")}
+              id={thId('mmisTotal', 'fed')}
             >
-              {t("executiveSummary.budgetTable.fedShare")}
+              {t('executiveSummary.budgetTable.fedShare')}
             </th>
             <th
               className="ds-u-text-align--right"
-              id={thId("mmisTotal", "state")}
+              id={thId('mmisTotal', 'state')}
             >
-              {t("executiveSummary.budgetTable.stateShare")}
+              {t('executiveSummary.budgetTable.stateShare')}
             </th>
             <th
               className="ds-u-text-align--right"
-              id={thId("mmisTotal", "total")}
+              id={thId('mmisTotal', 'total')}
             >
-              {t("executiveSummary.budgetTable.grandTotal")}
+              {t('executiveSummary.budgetTable.grandTotal')}
             </th>
           </tr>
         </thead>
@@ -211,9 +211,9 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             <tr
               key={year}
               className={
-                display === "Total"
-                  ? "budget-table--total budget-table--row__highlight"
-                  : ""
+                display === 'Total'
+                  ? 'budget-table--total budget-table--row__highlight'
+                  : ''
               }
             >
               <th

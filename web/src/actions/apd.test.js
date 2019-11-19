@@ -35,43 +35,6 @@ describe('apd actions', () => {
     });
   });
 
-  it('addApdKeyPerson should create ADD_APD_KEY_PERSON action', () => {
-    expect(actions.addKeyPerson()).toEqual({
-      type: actions.ADD_APD_KEY_PERSON
-    });
-  });
-
-  describe('removeApdKeyPerson should create REMOVE_APD_KEY_PERSON action', () => {
-    const global = {
-      confirm: jest.fn()
-    };
-
-    it('dispatches nothing if the user does not confirm', () => {
-      global.confirm.mockReset();
-      global.confirm.mockReturnValue(false);
-      const store = mockStore();
-
-      store.dispatch(actions.removeKeyPerson('key', { global }));
-      expect(global.confirm).toHaveBeenCalled();
-      expect(store.getActions()).toEqual([]);
-    });
-
-    it('dispatches the expected action if the user confirms', () => {
-      global.confirm.mockReset();
-      global.confirm.mockReturnValue(true);
-      const store = mockStore();
-
-      store.dispatch(actions.removeKeyPerson('key', { global }));
-      expect(global.confirm).toHaveBeenCalled();
-      expect(store.getActions()).toEqual([
-        {
-          type: actions.REMOVE_APD_KEY_PERSON,
-          key: 'key'
-        }
-      ]);
-    });
-  });
-
   it('requestSave should create SAVE_APD_REQUEST action', () => {
     expect(actions.requestSave()).toEqual({ type: actions.SAVE_APD_REQUEST });
   });
@@ -229,42 +192,6 @@ describe('apd actions', () => {
           { type: 'apd fetch' }
         ]);
       });
-    });
-  });
-
-  describe('update APD', () => {
-    it('creates UPDATE_APD action and does not update the budget if the APD years did not change', () => {
-      const store = mockStore({});
-      const updates = {};
-      store.dispatch(actions.updateApd(updates));
-
-      const expectedActions = [
-        {
-          type: actions.UPDATE_APD,
-          updates
-        }
-      ];
-
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-
-    it('creates UPDATE_APD action and UPDATE_BUDGET if the APD years changed', () => {
-      const store = mockStore({});
-      const updates = { years: true };
-      store.dispatch(actions.updateApd(updates));
-
-      const expectedActions = [
-        {
-          type: actions.UPDATE_APD,
-          updates
-        },
-        {
-          type: UPDATE_BUDGET,
-          state: {}
-        }
-      ];
-
-      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 

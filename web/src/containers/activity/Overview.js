@@ -103,6 +103,7 @@ const ActivityOverview = ({
       nested
     >
       <TextArea
+        name="activity overview"
         label={overviewLabel}
         hint={overviewHint}
         max={280}
