@@ -9,9 +9,9 @@ const Activities = ({activities}) => {
   return (
     <div>
       <ActivityList activities={activities} />
-      <h2>Activity Details</h2>
-      {activities.map((activity) => (
-        <Activity activity={activity} />
+      <hr />
+      {activities.map((activity, index) => (
+        <Activity activity={activity} activityIndex={index} />
       ))}
     </div>
   )

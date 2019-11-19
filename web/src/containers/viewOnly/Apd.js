@@ -38,21 +38,34 @@ class ApdViewOnly extends Component {
 
     return (
       <div className="site-body ds-l-container">
-        <h1 id="start-main-content" className="ds-h1 apd--title">
+        <h1 id="start-main-content" className="ds-h1 ds-u-margin-top--2">
           <span className="ds-h6 ds-u-display--block">{apd.name}</span>
           {place.name} {year} APD
         </h1>
+        <ExecutiveSummary />
+        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
+        <hr className="ds-u-border--dark ds-u-margin--0" /> 
         <ApdStateProfile
           stateProfile={apd.stateProfile}
           keyPersonnel={apd.keyPersonnel}
         />
+        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
+        <hr className="ds-u-border--dark ds-u-margin--0" />
         <ApdSummary />
+        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
+        <hr className="ds-u-border--dark ds-u-margin--0" />
         <PreviousActivities />
+        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
+        <hr className="ds-u-border--dark ds-u-margin--0" />
         <Activities activities={apd.activities} />
+        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
         <ScheduleSummary />
+        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
+        <hr className="ds-u-border--dark ds-u-margin--0" />
         <ProposedBudget />
+        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
+        <hr className="ds-u-border--dark ds-u-margin--0" />
         <AssuranceAndCompliance />
-        <ExecutiveSummary />
       </div>
     );
   }
