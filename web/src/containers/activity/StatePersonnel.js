@@ -40,7 +40,7 @@ const StatePersonnel = ({ activityIndex, add, personnel, remove }) => {
 };
 
 StatePersonnel.propTypes = {
-  activityIndex: PropTypes.string.isRequired,
+  activityIndex: PropTypes.number.isRequired,
   add: PropTypes.func.isRequired,
   personnel: PropTypes.array.isRequired,
   remove: PropTypes.func.isRequired

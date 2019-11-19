@@ -60,8 +60,9 @@ const QuarterlyBudgetSummary = ({ budget, viewOnly, years }) => {
                     <tr
                       key={name}
                       className={
-                        name === "combined" &&
-                        "budget-table--row__highlight budget-table--total"
+                        name === "combined"
+                          ? "budget-table--row__highlight budget-table--total"
+                          : ""
                       }
                     >
                       <th scope="row">{EXPENSE_NAME_DISPLAY[name]}</th>
@@ -89,17 +90,18 @@ const QuarterlyBudgetSummary = ({ budget, viewOnly, years }) => {
               </colgroup>
               <thead>
                 <tr>
-                  <th>Total {sourceDisplay}</th>
-                  <th />
+                  <th colSpan={2}>Total {sourceDisplay}</th>
                 </tr>
               </thead>
               <tbody>
                 {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                   <tr
                     className={
-                      name === "combined" &&
-                      "budget-table--row__highlight budget-table--total"
+                      name === "combined"
+                        ? "budget-table--row__highlight budget-table--total"
+                        : ""
                     }
+                    key={name}
                   >
                     <th scope="row">{EXPENSE_NAME_DISPLAY[name]}</th>
                     <td className="budget-table--total budget-table--number">

@@ -14,7 +14,7 @@ const TextArea = ({ value, ...props }) => {
       />
       <div className="visibility--print">
         {`${value}`.split('\n').map(v => (
-          <span>
+          <span key={v}>
             {v}
             <br />
           </span>

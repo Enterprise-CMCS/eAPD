@@ -39,10 +39,14 @@ const FormAndReviewItem = ({
 };
 
 FormAndReviewItem.propTypes = {
-  collapsedComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
-    .isRequired,
-  expandedComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
-    .isRequired,
+  collapsedComponent: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.elementType
+  ]).isRequired,
+  expandedComponent: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.elementType
+  ]).isRequired,
   initialCollapsed: PropTypes.bool
 };
 
@@ -102,8 +106,10 @@ FormAndReviewList.propTypes = {
   addButtonText: PropTypes.string,
   allowDeleteAll: PropTypes.bool,
   className: PropTypes.string,
-  collapsed: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
-  expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
+  collapsed: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
+    .isRequired,
+  expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
+    .isRequired,
   list: PropTypes.array.isRequired,
   noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onAddClick: PropTypes.func,

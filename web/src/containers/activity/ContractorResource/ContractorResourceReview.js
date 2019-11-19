@@ -54,7 +54,7 @@ ContractorResourceReview.propTypes = {
     name: PropTypes.string,
     start: PropTypes.string,
     totalCost: PropTypes.number,
-    years: PropTypes.array
+    years: PropTypes.object
   }).isRequired,
   onDeleteClick: PropTypes.func
 };

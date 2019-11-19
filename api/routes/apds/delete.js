@@ -1,7 +1,8 @@
 const logger = require('../../logger')('apds route get');
 const { can, userCanEditAPD } = require('../../middleware');
+const { raw: knex } = require('../../db');
 
-module.exports = app => {
+module.exports = (app, { db = knex } = {}) => {
   logger.silly('setting up DELETE /apds/:id route');
 
   app.delete(
@@ -10,8 +11,9 @@ module.exports = app => {
     userCanEditAPD(),
     async (req, res) => {
       try {
-        req.meta.apd.set('status', 'archived');
-        await req.meta.apd.save();
+        await db('apds')
+          .where('id', req.meta.apd.id)
+          .update({ status: 'archived' });
         res.status(204).end();
       } catch (e) {
         logger.error(req, e);
