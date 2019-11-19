@@ -5,7 +5,7 @@ import Dollars from '../../../components/Dollars';
 
 import CostAllocateFFP from "../../activity/CostAllocateFFP";
 
-const Activity = ({activity}) => {
+const Activity = ({activity, activityIndex}) => {
   const buildGoal = (goal) => {
     return (
       <Fragment>
@@ -141,44 +141,47 @@ const Activity = ({activity}) => {
 
   return (
     <Fragment>
-      <h3>{activity.name}</h3>
+      <h2>Activity {activityIndex + 1} ({activity.name})</h2>
       <p><strong>Activity Summary:</strong> {activity.summary}</p>
-      <h4>Activity Overview</h4>
+      <h3>Activity Overview</h3>
       <div dangerouslySetInnerHTML={{__html: activity.description}} />
       <hr />
 
-      <h4>Statement of alternative considerations and supporting justification</h4>
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small><br/>Statement of Alternative Considerations and Supporting Justification</h3>
       <div dangerouslySetInnerHTML={{__html: activity.alternatives}} />
       <hr />
 
-      <h4>Performance Goals and Benchmarks</h4>
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small><br/>Performance Goals and Benchmarks</h3>
       {activity.goals.map((goal) => buildGoal(goal))}
       <hr />
 
-      <h4>Activity Schedule</h4>
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small><br/>Schedule</h3>
       <p><strong>Planned start date: </strong>{activity.plannedStartDate || 'None provided'}</p>
       <p><strong>Planned end date: </strong>{activity.plannedEndDate || 'None provided'}</p>
-      <h4>Milestones</h4>
+      <h3>Milestones</h3>
       {activity.schedule.map((milestone, index) => buildMilestone(milestone, index))}
       <hr />
 
-      <h4>In-House Cost Categories: State Personnel</h4>
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small><br/>In-House Cost Categories: State Personnel</h3>
       {activity.statePersonnel.map((person, index) => buildPerson(person, index))}
+      <hr />
 
-      <h4>In-House Cost Categories: Non-Personnel</h4>
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small><br/>In-House Cost Categories: Non-Personnel</h3>
       {activity.expenses.map((expense, index) => buildExpense(expense, index))}
 
-      <h4>Private Contractor Costs</h4>
+      <hr />
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small><br/>Private Contractor Costs</h3>
       {activity.contractorResources.map((contractor, index) => buildContractor(contractor, index))}
       <hr />
 
-      <h4>Cost Allocation</h4>
-      <h5>Description of Cost Allocation Methodology</h5>
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small><br/>Cost Allocation</h3>
+      <h4>Description of Cost Allocation Methodology</h4>
       <div dangerouslySetInnerHTML={{__html: activity.costAllocationNarrative.methodology}} />
-      <h5>Description of Other Funding</h5>
+      <h4>Description of Other Funding</h4>
       <div dangerouslySetInnerHTML={{__html: activity.costAllocationNarrative.otherSources}} />
 
-      <h4>Federal Financial Participation (FFP) and Cost Allocation</h4>
+      <hr />
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small></h3>
       <CostAllocateFFP
         aKey={activity.key}
         activityIndex={0}
@@ -186,8 +189,9 @@ const Activity = ({activity}) => {
         isViewOnly
       />
   
-      <h4>Standards and Conditions</h4>
+      <h3><small>Activity {activityIndex + 1} ({activity.name})</small><br/> Standards and Conditions</h3>
       {Object.entries(activity.standardsAndConditions).map(([key, description]) => buildStandardsAndConditions(key, description))}
+      <hr />
     </Fragment>
   )
 };

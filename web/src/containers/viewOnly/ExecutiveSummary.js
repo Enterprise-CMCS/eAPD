@@ -19,13 +19,33 @@ class ExecutiveSummary extends PureComponent {
     return (
       <div>
         <h2>Executive Summary</h2>
-        <h3>Activities Summary</h3>
+        <Review
+          heading="Total cost of all activities"
+          headingLevel={3}
+          className="ds-u-border--0"
+        >
+          <ul className="ds-c-list--bare">
+            <li>
+              <strong>Federal Fiscal Years requested:</strong> FFY{" "}
+              {years.join(", ")}
+            </li>
+            <li>
+              <strong>Medicaid share:</strong>{" "}
+              <Dollars long>{total.medicaid}</Dollars> (
+              <Dollars long>{total.federal}</Dollars> Federal share)
+            </li>
+            <li>
+              <strong>Total funding request:</strong>{" "}
+              <Dollars long>{total.combined}</Dollars>
+            </li>
+          </ul>
+        </Review>
         {data.map((activity, i) => (
           <Review
             key={activity.key}
             heading={`Activity ${i + 1}: ${activity.name ||
               t("activities.noNameYet")}`}
-            headingLevel={4}
+            headingLevel={3}
             className={i === data.length - 1 ? "ds-u-border-bottom--0" : ""}
           >
             {activity.summary && <p>{activity.summary}</p>}
@@ -46,28 +66,6 @@ class ExecutiveSummary extends PureComponent {
             </ul>
           </Review>
         ))}
-        <hr className="ds-u-border--dark ds-u-margin--0" />
-        <Review
-          heading="Total cost"
-          headingLevel={4}
-          className="ds-u-border--0"
-        >
-          <ul className="ds-c-list--bare">
-            <li>
-              <strong>Federal Fiscal Years requested:</strong> FFY{" "}
-              {years.join(", ")}
-            </li>
-            <li>
-              <strong>Medicaid share:</strong>{" "}
-              <Dollars long>{total.medicaid}</Dollars> (
-              <Dollars long>{total.federal}</Dollars> Federal share)
-            </li>
-            <li>
-              <strong>Total funding request:</strong>{" "}
-              <Dollars long>{total.combined}</Dollars>
-            </li>
-          </ul>
-        </Review>
 
         <h3>Program Budget Tables</h3>
         <ExecutiveSummaryBudget isViewOnly />
