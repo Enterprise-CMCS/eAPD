@@ -17,11 +17,6 @@ import AssuranceAndCompliance from "./AssurancesAndCompliance";
 import ExecutiveSummary from "./ExecutiveSummary";
 
 class ApdViewOnly extends Component {
-  constructor(props) {
-    super(props);
-    this.props.selectApd(5, "/print");
-  }
-
   render() {
     const { apd, budget, place, year } = this.props;
 
