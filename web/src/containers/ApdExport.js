@@ -2,13 +2,14 @@ import { Button } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import Waypoint from './ConnectedWaypoint';
 import { printApd } from '../actions/print';
 import { Section } from '../components/Section';
 import { FileDownload } from '../components/Icons';
 
-const ExportAndSubmit = ({ printApd: print }) => (
+const ExportAndSubmit = ({ printApd: print, push }) => (
   <Waypoint id="export-and-submit">
     <Section isNumbered id="export-and-submit" resource="exportAndSubmit">
     <h3 className="ds-h3">Download</h3>
@@ -35,7 +36,7 @@ const ExportAndSubmit = ({ printApd: print }) => (
         size="big"
         variation="primary"
         className="ds-u-margin-top--2"
-        onClick={print}
+        onClick={() => push('/print')}
       >
         Export
         <span className="ds-u-margin-left--2">
@@ -57,7 +58,7 @@ ExportAndSubmit.propTypes = {
   printApd: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = { printApd };
+const mapDispatchToProps = { push };
 
 export default connect(
   null,
