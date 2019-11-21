@@ -1,8 +1,11 @@
 import React from 'react'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Button } from '@cmsgov/design-system-core';
 import { FileDownload } from '../../components/Icons';
+import { printApd } from '../../actions/print';
 
-const ExportInstructions = () => {
+const ExportInstructions = ({ printApd: print }) => {
 
 return (
   <div className="instruction-box ds-u-margin-top--4 ds-u-margin-bottom--4 visibility--screen">
@@ -30,7 +33,7 @@ return (
         size="big"
         variation="primary"
         className="ds-u-margin-top--2"
-        onClick={() => push('/print')}
+        onClick={print}
       >
         Export
         <span className="ds-u-margin-left--2">
@@ -46,5 +49,12 @@ return (
     </div>
   )
 };
+ExportInstructions.propTypes = {
+    printApd: PropTypes.func.isRequired
+  };
+  
+  const mapDispatchToProps = { printApd };
 
-export default ExportInstructions;
+export default connect(
+  null,
+  mapDispatchToProps)(ExportInstructions);
