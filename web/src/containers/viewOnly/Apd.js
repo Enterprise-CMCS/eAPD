@@ -15,6 +15,7 @@ import ScheduleSummary from "./ScheduleSummary";
 import ProposedBudget from "./ProposedBudget";
 import AssuranceAndCompliance from "./AssurancesAndCompliance";
 import ExecutiveSummary from "./ExecutiveSummary";
+import ExportInstructions from "./Export";
 
 class ApdViewOnly extends Component {
   render() {
@@ -33,6 +34,7 @@ class ApdViewOnly extends Component {
 
     return (
       <div className="site-body ds-l-container">
+        <ExportInstructions />
         <h1 id="start-main-content" className="ds-h1 ds-u-margin-top--2">
           <span className="ds-h6 ds-u-display--block">{apd.name}</span>
           {place.name} {year} APD
