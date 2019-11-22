@@ -3,6 +3,7 @@ import { push } from 'connected-react-router';
 import { SELECT_APD } from './symbols';
 import { updateBudget } from '../budget';
 import { EDIT_APD } from '../editApd/symbols';
+import { ariaAnnounceApdLoaded, ariaAnnounceApdLoading } from '../aria';
 import axios from '../../util/api';
 import { fromAPI, initialAssurances } from '../../util/serialization/apd';
 
@@ -11,8 +12,10 @@ const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 export const selectApd = (
   id,
   { deserialize = fromAPI, global = window, pushRoute = push } = {}
-) => dispatch =>
-  axios.get(`/apds/${id}`).then(req => {
+) => dispatch => {
+  dispatch(ariaAnnounceApdLoading());
+
+  return axios.get(`/apds/${id}`).then(req => {
     const apd = deserialize(req.data);
 
     dispatch({ type: SELECT_APD, apd });
@@ -30,10 +33,12 @@ export const selectApd = (
 
     dispatch(updateBudget());
     dispatch(pushRoute('/apd'));
+    dispatch(ariaAnnounceApdLoaded());
 
     if (global.localStorage) {
       global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
     }
   });
+};
 
 export default selectApd;
