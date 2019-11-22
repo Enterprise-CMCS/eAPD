@@ -35,7 +35,6 @@ class ApdViewOnly extends Component {
 
     return (
       <div className="site-body ds-l-container">
-        <ExportInstructions />
         <h1 id="start-main-content" className="ds-h1 ds-u-margin-top--2">
           <span className="ds-h6 ds-u-display--block">{apd.name}</span>
           {place.name} {year} APD
@@ -64,6 +63,7 @@ class ApdViewOnly extends Component {
         <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
         <hr className="ds-u-border--dark ds-u-margin--0" />
         <AssuranceAndCompliance />
+        <ExportInstructions />
       </div>
     );
   }

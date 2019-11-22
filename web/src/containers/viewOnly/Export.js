@@ -9,7 +9,7 @@ const ExportInstructions = ({ printApd: print }) => {
 
 return (
   <div className="instruction-box ds-u-margin-top--4 ds-u-margin-bottom--4 visibility--screen">
-    <h3 className="ds-h3">How to Download This APD</h3>
+    <h3 className="ds-h3">How to download this APD</h3>
       <p>
         Download a copy of your APD to review your work offline or as the first
         step in submitting a completed APD to CMS. If you make changes, follow these
