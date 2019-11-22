@@ -10,7 +10,7 @@ Anticipated release: December 2, 2019
 
 #### ⚙️ Behind the scenes
 
-- Removed unused code ([#1801])
+- Removed unused code ([#1801], [#1802])
 
 # 2.0.1
 
@@ -33,6 +33,7 @@ Released: November 18, 2019
 
 - Fixed an issue where the label for the state name dropdown in the State Profile section was not correctly associated ([#1779])
 - Fixed an issue where some table header cells were empty ([#1780])
+- Fixed an issue where the account management and logout links in the header were unresponsive from the APD page ([#1914])
 
 #### ⚙️ Behind the scenes
 
@@ -181,4 +182,5 @@ Pilot release to select state partners
 [#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
 [#1882]: https://github.com/18F/cms-hitech-apd/issues/1882
 [#1904]: https://github.com/18F/cms-hitech-apd/pull/1904
+[#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925

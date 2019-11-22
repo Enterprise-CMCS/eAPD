@@ -7,12 +7,6 @@ const defaultBase = require('./base');
 const user = require('./user');
 const authorization = require('./authorization');
 const state = require('./state');
-const apd = require('./apd');
-const apdIncentivePayment = require('./apdIncentivePayment');
-const apdKeyPersonnel = require('./apdKeyPersonnel');
-const apdVersion = require('./apdVersion');
-const previousActivityExpense = require('./apdPreviousActivityExpense');
-const apdActivity = require('./activity');
 const file = require('./file');
 
 const exportedModels = {};
@@ -28,12 +22,6 @@ const setup = (
     user(),
     authorization(),
     state(),
-    apd(),
-    apdIncentivePayment(),
-    apdKeyPersonnel(),
-    apdVersion(),
-    previousActivityExpense(),
-    apdActivity(),
     file()
   ]
 ) => {

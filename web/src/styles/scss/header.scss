@@ -97,6 +97,7 @@ header {
   padding-top: $spacer-1;
   padding-bottom: $spacer-1;
   background-color: $color-primary-darkest;
+  z-index: 1;
 
   &[aria-hidden="true"] {
     display: none;
