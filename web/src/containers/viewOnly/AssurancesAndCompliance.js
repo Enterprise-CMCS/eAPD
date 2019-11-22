@@ -31,7 +31,7 @@ const AssurancesAndCompliance = ({ citations }) => {
                 }
                 {checked === '' && <div className='fake-radio-button' />}
                 {title}
-                {!checked && (
+                {checked === false && (
                   <Fragment>
                     <br />
                     <strong>Explanation:</strong>{' '}

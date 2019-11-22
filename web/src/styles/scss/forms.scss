@@ -137,7 +137,6 @@ div.form--computed-value__input-aligned {
   min-height: 20px;
   padding-left: 28px;
   padding-top: 0;
-  margin: 8px 0;
   position: relative;
   display: inline;
 
@@ -151,7 +150,7 @@ div.form--computed-value__input-aligned {
     box-sizing: border-box;
     content: "\a0";
     left: 0;
-    line-height: 32px;
+    line-height: 1.5;
     position: absolute;
     text-indent: .15em;
   }
