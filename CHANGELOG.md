@@ -8,7 +8,7 @@ Anticipated release: December 2, 2019
 
 #### ⚙️ Behind the scenes
 
-- Removed unused code ([#1801])
+- Removed unused code ([#1801], [#1802])
 
 # 2.0.1
 
