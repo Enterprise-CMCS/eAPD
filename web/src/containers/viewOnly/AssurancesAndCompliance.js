@@ -16,10 +16,21 @@ const AssurancesAndCompliance = ({ citations }) => {
           <h4 className="ds-h4">
             {t(`assurancesAndCompliance.headings.${name}`)}
           </h4>
-          <ul>
+          <ul className="ds-c-list--bare">
             {citations[name].map(({ title, checked, explanation }) => (
               <li key={title}>
-                {checked ? <CheckCircle /> : <TimesCircle />} {title}
+                {checked === true &&
+                  <span style={{ 'fontSize': '20px', 'paddingRight': '8px' }}>
+                    <CheckCircle />
+                  </span>
+                }
+                {checked === false &&
+                  <span style={{ 'fontSize': '20px', 'paddingRight': '8px' }}>
+                    <TimesCircle />
+                  </span>
+                }
+                {checked === '' && <div className='fake-radio-button' />}
+                {title}
                 {!checked && (
                   <Fragment>
                     <br />
