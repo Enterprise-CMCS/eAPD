@@ -19,6 +19,8 @@ import ExportInstructions from "./Export";
 class ApdViewOnly extends Component {
   componentDidMount = () => window.scrollTo(0, 0);
 
+  componentDidUpdate = () => window.scrollTo(0, 0);
+
   render() {
     const { apd, budget, place, year } = this.props;
 
