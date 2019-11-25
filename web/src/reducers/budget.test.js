@@ -742,24 +742,24 @@ describe('budget reducer', () => {
             },
             '1933': {
               '1': {
-                state: { dollars: 247, percent: 0.25 },
+                state: { dollars: 248, percent: 0.25 },
                 contractors: { dollars: 450, percent: 0.5 },
-                combined: { dollars: 697, percent: 0 }
+                combined: { dollars: 698, percent: 0 }
               },
               '2': {
-                state: { dollars: 247, percent: 0.25 },
-                contractors: { dollars: 180, percent: 0.2 },
-                combined: { dollars: 427, percent: 0 }
-              },
-              '3': {
                 state: { dollars: 248, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 428, percent: 0 }
               },
+              '3': {
+                state: { dollars: 247, percent: 0.25 },
+                contractors: { dollars: 180, percent: 0.2 },
+                combined: { dollars: 427, percent: 0 }
+              },
               '4': {
-                state: { dollars: 248, percent: 0.25 },
+                state: { dollars: 247, percent: 0.25 },
                 contractors: { dollars: 90, percent: 0.1 },
-                combined: { dollars: 338, percent: 0 }
+                combined: { dollars: 337, percent: 0 }
               },
               subtotal: {
                 state: { dollars: 990, percent: 1 },
@@ -876,17 +876,17 @@ describe('budget reducer', () => {
       federalShareByFFYQuarter: {
         hitAndHie: {
           '1931': {
-            '1': { contractors: 1530, state: 1561, combined: 3091 },
+            '1': { contractors: 1530, state: 1562, combined: 3092 },
             '2': { contractors: 810, state: 1449, combined: 2259 },
-            '3': { contractors: 900, state: 2255, combined: 3155 },
+            '3': { contractors: 900, state: 2254, combined: 3154 },
             '4': { contractors: 360, state: 1530, combined: 1890 },
             subtotal: { contractors: 3600, state: 6795, combined: 10395 }
           },
           '1932': {
-            '1': { contractors: 1710, state: 2047, combined: 3757 },
-            '2': { contractors: 720, state: 1867, combined: 2587 },
-            '3': { contractors: 810, state: 2228, combined: 3038 },
-            '4': { contractors: 360, state: 1688, combined: 2048 },
+            '1': { contractors: 1710, state: 2048, combined: 3758 },
+            '2': { contractors: 720, state: 1868, combined: 2588 },
+            '3': { contractors: 810, state: 2227, combined: 3037 },
+            '4': { contractors: 360, state: 1687, combined: 2047 },
             subtotal: { contractors: 3600, state: 7830, combined: 11430 }
           },
           '1933': {
@@ -914,10 +914,10 @@ describe('budget reducer', () => {
             subtotal: { contractors: 600, state: 1000, combined: 1600 }
           },
           '1933': {
-            '1': { contractors: 450, state: 247, combined: 697 },
-            '2': { contractors: 180, state: 247, combined: 427 },
-            '3': { contractors: 180, state: 248, combined: 428 },
-            '4': { contractors: 90, state: 248, combined: 338 },
+            '1': { contractors: 450, state: 248, combined: 698 },
+            '2': { contractors: 180, state: 248, combined: 428 },
+            '3': { contractors: 180, state: 247, combined: 427 },
+            '4': { contractors: 90, state: 247, combined: 337 },
             subtotal: { contractors: 900, state: 990, combined: 1890 }
           },
           total: { contractors: 1800, state: 2440, combined: 4240 }
@@ -964,8 +964,8 @@ describe('budget reducer', () => {
         contractors: {
           '1931': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
           '1932': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
-          '1933': { federal: 600, state: 66, medicaid: 666, total: 1000 },
-          total: { federal: 2400, state: 266, medicaid: 2666, total: 3000 }
+          '1933': { federal: 600, state: 67, medicaid: 667, total: 1000 },
+          total: { federal: 2400, state: 267, medicaid: 2667, total: 3000 }
         },
         expenses: {
           '1931': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
@@ -978,11 +978,11 @@ describe('budget reducer', () => {
           '1932': { federal: 2250, state: 250, medicaid: 2500, total: 2500 },
           '1933': {
             federal: 14100,
-            state: 1567,
-            medicaid: 15667,
+            state: 1566,
+            medicaid: 15666,
             total: 16000
           },
-          total: { federal: 17385, state: 1932, medicaid: 19317, total: 19650 }
+          total: { federal: 17385, state: 1931, medicaid: 19316, total: 19650 }
         }
       },
       hitAndHie: {
@@ -1010,8 +1010,8 @@ describe('budget reducer', () => {
         contractors: {
           '1931': { federal: 3600, state: 400, medicaid: 4000, total: 4000 },
           '1932': { federal: 3600, state: 400, medicaid: 4000, total: 4000 },
-          '1933': { federal: 3300, state: 366, medicaid: 3666, total: 4000 },
-          total: { federal: 10500, state: 1166, medicaid: 11666, total: 12000 }
+          '1933': { federal: 3300, state: 367, medicaid: 3667, total: 4000 },
+          total: { federal: 10500, state: 1167, medicaid: 11667, total: 12000 }
         },
         expenses: {
           '1931': { federal: 3600, state: 400, medicaid: 4000, total: 4000 },
@@ -1024,11 +1024,11 @@ describe('budget reducer', () => {
           '1932': { federal: 4230, state: 470, medicaid: 4700, total: 4700 },
           '1933': {
             federal: 15630,
-            state: 1737,
-            medicaid: 17367,
+            state: 1736,
+            medicaid: 17366,
             total: 17700
           },
-          total: { federal: 23055, state: 2562, medicaid: 25617, total: 25950 }
+          total: { federal: 23055, state: 2561, medicaid: 25616, total: 25950 }
         }
       },
       mmis: {
@@ -1040,9 +1040,9 @@ describe('budget reducer', () => {
         },
         contractors: {
           '1931': { federal: 300, state: 300, medicaid: 600, total: 1000 },
-          '1932': { federal: 500, state: 166, medicaid: 666, total: 1000 },
+          '1932': { federal: 500, state: 167, medicaid: 667, total: 1000 },
           '1933': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
-          total: { federal: 1700, state: 566, medicaid: 2266, total: 3000 }
+          total: { federal: 1700, state: 567, medicaid: 2267, total: 3000 }
         },
         expenses: {
           '1931': { federal: 300, state: 300, medicaid: 600, total: 1000 },
@@ -1052,9 +1052,9 @@ describe('budget reducer', () => {
         },
         statePersonnel: {
           '1931': { federal: 150, state: 150, medicaid: 300, total: 500 },
-          '1932': { federal: 500, state: 167, medicaid: 667, total: 1000 },
+          '1932': { federal: 500, state: 166, medicaid: 666, total: 1000 },
           '1933': { federal: 90, state: 10, medicaid: 100, total: 100 },
-          total: { federal: 740, state: 327, medicaid: 1067, total: 1600 }
+          total: { federal: 740, state: 326, medicaid: 1066, total: 1600 }
         }
       },
       mmisByFFP: {
