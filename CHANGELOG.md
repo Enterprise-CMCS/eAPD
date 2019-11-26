@@ -4,11 +4,15 @@ Anticipated release: December 2, 2019
 
 #### 🚀 New features
 
+- Display a loading screen while waiting for the APD to load so users can tell the app is doing something. ([#1368])
+
 #### 🐛 Bugs fixed
+
+- Fixed a bug where contractor hourly rates were not used in budget calculations ([#1925])
 
 #### ⚙️ Behind the scenes
 
-- Removed unused code ([#1801])
+- Removed unused code ([#1801], [#1802])
 
 # 2.0.1
 
@@ -31,6 +35,7 @@ Released: November 18, 2019
 
 - Fixed an issue where the label for the state name dropdown in the State Profile section was not correctly associated ([#1779])
 - Fixed an issue where some table header cells were empty ([#1780])
+- Fixed an issue where the account management and logout links in the header were unresponsive from the APD page ([#1914])
 
 #### ⚙️ Behind the scenes
 
@@ -124,6 +129,7 @@ Released: July 9, 2019
 Pilot release to select state partners
 
 [#1304]: https://github.com/18F/cms-hitech-apd/issues/1304
+[#1368]: https://github.com/18F/cms-hitech-apd/issues/1368
 [#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
 [#1434]: https://github.com/18F/cms-hitech-apd/issues/1434
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
@@ -179,3 +185,5 @@ Pilot release to select state partners
 [#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
 [#1882]: https://github.com/18F/cms-hitech-apd/issues/1882
 [#1904]: https://github.com/18F/cms-hitech-apd/pull/1904
+[#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
+[#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
