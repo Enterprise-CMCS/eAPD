@@ -18,7 +18,7 @@ services:
 
   web:
     build: ./web
-    image: cms-eapd/web:ab60e77f25cb28254c1e13993795e729
+    image: cms-eapd/web:40ef019e57c625f8ae906f22962c5740
     environment:
       - API_URL=http://localhost:8081
     volumes:
@@ -29,15 +29,6 @@ services:
       - /app/node_modules
     ports:
       - 8080:8001
-  
-  storybook:
-    image: cms-eapd/web:ab60e77f25cb28254c1e13993795e729
-    volumes:
-      - ./web:/app
-      - /app/node_modules
-    command: npm run storybook
-    ports:
-      - 8082:9001
 
   api:
     build: ./api
