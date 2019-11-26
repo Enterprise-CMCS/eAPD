@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { selectApd } from "../../actions/app";
-import { selectApdData } from "../../reducers/apd.selectors";
-import { selectBudget } from "../../reducers/budget.selectors.js";
-import { getAPDYearRange } from "../../reducers/apd";
-import { getUserStateOrTerritory } from "../../reducers/user.selector";
-import ApdStateProfile from "./ApdStateProfile";
-import ApdSummary from "./ApdSummary";
-import PreviousActivities from "./PreviousActivities";
-import Activities from "./activities/All.js";
-import ScheduleSummary from "./ScheduleSummary";
-import ProposedBudget from "./ProposedBudget";
-import AssuranceAndCompliance from "./AssurancesAndCompliance";
-import ExecutiveSummary from "./ExecutiveSummary";
-import ExportInstructions from "./Export";
+import { selectApd } from '../../actions/app';
+import { selectApdData } from '../../reducers/apd.selectors';
+import { selectBudget } from '../../reducers/budget.selectors.js';
+import { getAPDYearRange } from '../../reducers/apd';
+import { getUserStateOrTerritory } from '../../reducers/user.selector';
+import ApdStateProfile from './ApdStateProfile';
+import ApdSummary from './ApdSummary';
+import PreviousActivities from './PreviousActivities';
+import Activities from './activities/All.js';
+import ScheduleSummary from './ScheduleSummary';
+import ProposedBudget from './ProposedBudget';
+import AssuranceAndCompliance from './AssurancesAndCompliance';
+import ExecutiveSummary from './ExecutiveSummary';
+import ExportInstructions from './Export';
 
 class ApdViewOnly extends Component {
   componentDidMount = () => window.scrollTo(0, 0);
@@ -43,7 +43,7 @@ class ApdViewOnly extends Component {
         </h1>
         <ExecutiveSummary />
         <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
-        <hr className="ds-u-border--dark ds-u-margin--0" /> 
+        <hr className="ds-u-border--dark ds-u-margin--0" />
         <ApdStateProfile
           stateProfile={apd.stateProfile}
           keyPersonnel={apd.keyPersonnel}

@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react';
 
-import BudgetSummary from "../BudgetSummary";
-import IncentivePayments from "../IncentivePayments";
-import QuarterlyBudgetSummary from "../QuarterlyBudgetSummary";
+import BudgetSummary from '../BudgetSummary';
+import IncentivePayments from '../IncentivePayments';
+import QuarterlyBudgetSummary from '../QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
   <div>
     <h2>Proposed Budget</h2>
 
     <h3>Summary Budget Table</h3>
-    <BudgetSummary viewOnly />
+    <BudgetSummary isViewOnly />
 
     <h3>Quarterly Federal Share</h3>
-    <QuarterlyBudgetSummary viewOnly />
+    <QuarterlyBudgetSummary isViewOnly />
 
     <h3>Incentive Payments</h3>
-    <IncentivePayments viewOnly />
+    <IncentivePayments isViewOnly />
   </div>
 );
 

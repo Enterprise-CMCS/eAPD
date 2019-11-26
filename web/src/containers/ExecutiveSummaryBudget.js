@@ -1,12 +1,12 @@
-import PropTypes from "prop-types";
-import React, { Fragment } from "react";
-import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
-import Dollars from "../components/Dollars";
-import { t } from "../i18n";
+import Dollars from '../components/Dollars';
+import { t } from '../i18n';
 
 const thId = (program, share) =>
-  `program-budget-table-${program}${share ? `-${share}` : ""}`;
+  `program-budget-table-${program}${share ? `-${share}` : ''}`;
 const tdHdrs = (program, share) =>
   `program-budget-table-${program} program-budget-table-${program}-${share}`;
 
@@ -22,7 +22,7 @@ DollarCell.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
 
-DollarCell.defaultProps = { headers: "", long: false };
+DollarCell.defaultProps = { headers: '', long: false };
 
 const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
   const { hit, hie, hitAndHie, mmisByFFP, years } = budget;
@@ -30,8 +30,8 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
   if (!years.length) return null;
 
   const rowKeys = [
-    ...years.map(year => ({ year, display: t("ffy", { year }) })),
-    { year: "total", display: "Total" }
+    ...years.map(year => ({ year, display: t('ffy', { year }) })),
+    { year: 'total', display: 'Total' }
   ];
 
   return (
@@ -49,11 +49,11 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             <th colSpan="2" id={thId('hit')}>
               {t('executiveSummary.budgetTable.hit')}
             </th>
-            <th colSpan="2" id={thId("hie")}>
-              {t("executiveSummary.budgetTable.hie")}
+            <th colSpan="2" id={thId('hie')}>
+              {t('executiveSummary.budgetTable.hie')}
             </th>
-            <th colSpan="3" id={thId("combined")}>
-              {t("executiveSummary.budgetTable.hitHie")}
+            <th colSpan="3" id={thId('combined')}>
+              {t('executiveSummary.budgetTable.hitHie')}
             </th>
           </tr>
           <tr>
@@ -61,17 +61,17 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             <th className="ds-u-text-align--right" id={thId('hit', 'fed')}>
               {t('executiveSummary.budgetTable.fedShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("hit", "state")}>
-              {t("executiveSummary.budgetTable.stateShare")}
+            <th className="ds-u-text-align--right" id={thId('hit', 'state')}>
+              {t('executiveSummary.budgetTable.stateShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("hie", "fed")}>
-              {t("executiveSummary.budgetTable.fedShare")}
+            <th className="ds-u-text-align--right" id={thId('hie', 'fed')}>
+              {t('executiveSummary.budgetTable.fedShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("hie", "state")}>
-              {t("executiveSummary.budgetTable.stateShare")}
+            <th className="ds-u-text-align--right" id={thId('hie', 'state')}>
+              {t('executiveSummary.budgetTable.stateShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("combined", "fed")}>
-              {t("executiveSummary.budgetTable.fedShare")}
+            <th className="ds-u-text-align--right" id={thId('combined', 'fed')}>
+              {t('executiveSummary.budgetTable.fedShare')}
             </th>
             <th
               className="ds-u-text-align--right"
@@ -106,37 +106,37 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
               <DollarCell
                 value={hit.combined[year].federal}
                 long={isViewOnly}
-                headers={tdHdrs("hit", "fed")}
+                headers={tdHdrs('hit', 'fed')}
               />
               <DollarCell
                 value={hit.combined[year].state}
                 long={isViewOnly}
-                headers={tdHdrs("hit", "state")}
+                headers={tdHdrs('hit', 'state')}
               />
               <DollarCell
                 value={hie.combined[year].federal}
                 long={isViewOnly}
-                headers={tdHdrs("hie", "fed")}
+                headers={tdHdrs('hie', 'fed')}
               />
               <DollarCell
                 value={hie.combined[year].state}
                 long={isViewOnly}
-                headers={tdHdrs("hie", "state")}
+                headers={tdHdrs('hie', 'state')}
               />
               <DollarCell
                 value={hitAndHie.combined[year].federal}
                 long={isViewOnly}
-                headers={tdHdrs("combined", "fed")}
+                headers={tdHdrs('combined', 'fed')}
               />
               <DollarCell
                 value={hitAndHie.combined[year].state}
                 long={isViewOnly}
-                headers={tdHdrs("combined", "state")}
+                headers={tdHdrs('combined', 'state')}
               />
               <DollarCell
                 value={hitAndHie.combined[year].medicaid}
                 long={isViewOnly}
-                headers={tdHdrs("combined", "total")}
+                headers={tdHdrs('combined', 'total')}
               />
             </tr>
           ))}
@@ -156,14 +156,14 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             <th colSpan="2" id={thId('mmis90')}>
               {t('executiveSummary.budgetTable.mmis90')}
             </th>
-            <th colSpan="2" id={thId("mmis75")}>
-              {t("executiveSummary.budgetTable.mmis75")}
+            <th colSpan="2" id={thId('mmis75')}>
+              {t('executiveSummary.budgetTable.mmis75')}
             </th>
-            <th colSpan="2" id={thId("mmis50")}>
-              {t("executiveSummary.budgetTable.mmis50")}
+            <th colSpan="2" id={thId('mmis50')}>
+              {t('executiveSummary.budgetTable.mmis50')}
             </th>
-            <th colSpan="3" id={thId("mmisTotal")}>
-              {t("executiveSummary.budgetTable.mmisTotal")}
+            <th colSpan="3" id={thId('mmisTotal')}>
+              {t('executiveSummary.budgetTable.mmisTotal')}
             </th>
           </tr>
           <tr>
@@ -171,20 +171,20 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
             <th className="ds-u-text-align--right" id={thId('mmis90', 'fed')}>
               {t('executiveSummary.budgetTable.fedShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("mmis90", "state")}>
-              {t("executiveSummary.budgetTable.stateShare")}
+            <th className="ds-u-text-align--right" id={thId('mmis90', 'state')}>
+              {t('executiveSummary.budgetTable.stateShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("mmis75", "fed")}>
-              {t("executiveSummary.budgetTable.fedShare")}
+            <th className="ds-u-text-align--right" id={thId('mmis75', 'fed')}>
+              {t('executiveSummary.budgetTable.fedShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("mmis75", "state")}>
-              {t("executiveSummary.budgetTable.stateShare")}
+            <th className="ds-u-text-align--right" id={thId('mmis75', 'state')}>
+              {t('executiveSummary.budgetTable.stateShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("mmis50", "fed")}>
-              {t("executiveSummary.budgetTable.fedShare")}
+            <th className="ds-u-text-align--right" id={thId('mmis50', 'fed')}>
+              {t('executiveSummary.budgetTable.fedShare')}
             </th>
-            <th className="ds-u-text-align--right" id={thId("mmis50", "state")}>
-              {t("executiveSummary.budgetTable.stateShare")}
+            <th className="ds-u-text-align--right" id={thId('mmis50', 'state')}>
+              {t('executiveSummary.budgetTable.stateShare')}
             </th>
             <th
               className="ds-u-text-align--right"
@@ -223,49 +223,49 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
                 {display}
               </th>
               <DollarCell
-                value={mmisByFFP["90-10"][year].federal}
+                value={mmisByFFP['90-10'][year].federal}
                 long={isViewOnly}
-                headers={tdHdrs("mmis90", "fed")}
+                headers={tdHdrs('mmis90', 'fed')}
               />
               <DollarCell
-                value={mmisByFFP["90-10"][year].state}
+                value={mmisByFFP['90-10'][year].state}
                 long={isViewOnly}
-                headers={tdHdrs("mmis90", "state")}
+                headers={tdHdrs('mmis90', 'state')}
               />
               <DollarCell
-                value={mmisByFFP["75-25"][year].federal}
+                value={mmisByFFP['75-25'][year].federal}
                 long={isViewOnly}
-                headers={tdHdrs("mmis75", "fed")}
+                headers={tdHdrs('mmis75', 'fed')}
               />
               <DollarCell
-                value={mmisByFFP["75-25"][year].state}
+                value={mmisByFFP['75-25'][year].state}
                 long={isViewOnly}
-                headers={tdHdrs("mmis75", "state")}
+                headers={tdHdrs('mmis75', 'state')}
               />
               <DollarCell
-                value={mmisByFFP["50-50"][year].federal}
+                value={mmisByFFP['50-50'][year].federal}
                 long={isViewOnly}
-                headers={tdHdrs("mmis50", "fed")}
+                headers={tdHdrs('mmis50', 'fed')}
               />
               <DollarCell
-                value={mmisByFFP["50-50"][year].state}
+                value={mmisByFFP['50-50'][year].state}
                 long={isViewOnly}
-                headers={tdHdrs("mmis50", "state")}
+                headers={tdHdrs('mmis50', 'state')}
               />
               <DollarCell
                 value={mmisByFFP.combined[year].federal}
                 long={isViewOnly}
-                headers={tdHdrs("mmisTotal", "fed")}
+                headers={tdHdrs('mmisTotal', 'fed')}
               />
               <DollarCell
                 value={mmisByFFP.combined[year].state}
                 long={isViewOnly}
-                headers={tdHdrs("mmisTotal", "state")}
+                headers={tdHdrs('mmisTotal', 'state')}
               />
               <DollarCell
                 value={mmisByFFP.combined[year].medicaid}
                 long={isViewOnly}
-                headers={tdHdrs("mmisTotal", "total")}
+                headers={tdHdrs('mmisTotal', 'total')}
               />
             </tr>
           ))}
