@@ -1,35 +1,35 @@
-import PropTypes from "prop-types";
-import React, { Fragment } from "react";
-import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
-import Dollars from "../components/Dollars";
-import { selectBudgetActivitiesByFundingSource } from "../reducers/budget.selectors";
+import Dollars from '../components/Dollars';
+import { selectBudgetActivitiesByFundingSource } from '../reducers/budget.selectors';
 
 const categoryLookup = {
-  statePersonnel: "Project State Staff",
-  expenses: "Non-Personnel",
-  contractors: "Contracted Resources",
-  combined: "Subtotal"
+  statePersonnel: 'Project State Staff',
+  expenses: 'Non-Personnel',
+  contractors: 'Contracted Resources',
+  combined: 'Subtotal'
 };
 
-function DataRow({ data, title, viewOnly }) {
+function DataRow({ data, title, isViewOnly }) {
   return (
     <tr
       className={
         title === categoryLookup.combined
-          ? "budget-table--subtotal budget-table--row__highlight"
-          : ""
+          ? 'budget-table--subtotal budget-table--row__highlight'
+          : ''
       }
     >
       <th scope="row">{title}</th>
       <td className="budget-table--number">
-        <Dollars long={viewOnly}>{data.medicaid}</Dollars>
+        <Dollars long={isViewOnly}>{data.medicaid}</Dollars>
       </td>
       <td className="budget-table--number">
-        <Dollars long={viewOnly}>{data.federal}</Dollars>
+        <Dollars long={isViewOnly}>{data.federal}</Dollars>
       </td>
       <td className="budget-table--number">
-        <Dollars long={viewOnly}>{data.state}</Dollars>
+        <Dollars long={isViewOnly}>{data.state}</Dollars>
       </td>
     </tr>
   );
@@ -38,10 +38,10 @@ function DataRow({ data, title, viewOnly }) {
 DataRow.propTypes = {
   data: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  viewOnly: PropTypes.bool.isRequired
+  isViewOnly: PropTypes.bool.isRequired
 };
 
-const DataRowGroup = ({ data, entries, viewOnly, year }) => (
+const DataRowGroup = ({ data, entries, isViewOnly, year }) => (
   <Fragment>
     {Object.keys(data).map(key => (
       <DataRow
@@ -50,7 +50,7 @@ const DataRowGroup = ({ data, entries, viewOnly, year }) => (
         data={data[key][year]}
         entries={entries}
         title={categoryLookup[key]}
-        viewOnly={viewOnly}
+        isViewOnly={isViewOnly}
         year={year}
       />
     ))}
@@ -60,7 +60,7 @@ const DataRowGroup = ({ data, entries, viewOnly, year }) => (
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
   entries: PropTypes.array.isRequired,
-  viewOnly: PropTypes.bool.isRequired,
+  isViewOnly: PropTypes.bool.isRequired,
   year: PropTypes.string.isRequired
 };
 
@@ -68,7 +68,7 @@ const HeaderRow = ({ yr }) => {
   return (
     <tr>
       <th key={yr} id={`summary-budget-fy-${yr}`}>
-        {yr === "total" ? "Total" : `FFY ${yr}`}
+        {yr === 'total' ? 'Total' : `FFY ${yr}`}
       </th>
       <th className="ds-u-text-align--right" scope="col">
         Medicaid Total
@@ -87,12 +87,12 @@ HeaderRow.propTypes = {
   yr: PropTypes.string.isRequired
 };
 
-const BudgetSummary = ({ activities, data, viewOnly, years }) => (
+const BudgetSummary = ({ activities, data, isViewOnly, years }) => (
   <Fragment>
     <h4 className="ds-h4" aria-hidden="true">
       HIT Activities
     </h4>
-    {[...years, "total"].map(yr => (
+    {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
           FFY {yr} HIT Activities
@@ -104,7 +104,7 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
           <DataRowGroup
             data={data.hit}
             entries={activities.hit}
-            viewOnly={viewOnly}
+            isViewOnly={isViewOnly}
             year={yr}
           />
         </tbody>
@@ -114,7 +114,7 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
     <h4 className="ds-h4" aria-hidden="true">
       HIE Activities
     </h4>
-    {[...years, "total"].map(yr => (
+    {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
           FFY {yr} HIE Activities
@@ -126,7 +126,7 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
           <DataRowGroup
             data={data.hie}
             entries={activities.hie}
-            viewOnly={viewOnly}
+            isViewOnly={isViewOnly}
             year={yr}
           />
         </tbody>
@@ -136,7 +136,7 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
     <h4 className="ds-h4" aria-hidden="true">
       MMIS Activities
     </h4>
-    {[...years, "total"].map(yr => (
+    {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
           FFY {yr} MMIS Activities
@@ -148,7 +148,7 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
           <DataRowGroup
             data={data.mmis}
             entries={activities.mmis}
-            viewOnly={viewOnly}
+            isViewOnly={isViewOnly}
             year={yr}
           />
         </tbody>
@@ -178,20 +178,20 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
             <tr
               key={ffy}
               className={
-                ffy === "total"
-                  ? "budget-table--row__highlight budget-table--total"
-                  : ""
+                ffy === 'total'
+                  ? 'budget-table--row__highlight budget-table--total'
+                  : ''
               }
             >
-              <th scope="row">{ffy === "total" ? "Total" : `FFY ${ffy}`}</th>
+              <th scope="row">{ffy === 'total' ? 'Total' : `FFY ${ffy}`}</th>
               <td className="budget-table--number">
-                <Dollars long={viewOnly}>{combined.medicaid}</Dollars>
+                <Dollars long={isViewOnly}>{combined.medicaid}</Dollars>
               </td>
               <td className="budget-table--number">
-                <Dollars long={viewOnly}>{combined.federal}</Dollars>
+                <Dollars long={isViewOnly}>{combined.federal}</Dollars>
               </td>
               <td className="budget-table--number">
-                <Dollars long={viewOnly}>{combined.state}</Dollars>
+                <Dollars long={isViewOnly}>{combined.state}</Dollars>
               </td>
             </tr>
           );
@@ -204,11 +204,11 @@ const BudgetSummary = ({ activities, data, viewOnly, years }) => (
 BudgetSummary.propTypes = {
   activities: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
-  viewOnly: PropTypes.bool,
+  isViewOnly: PropTypes.bool,
   years: PropTypes.array.isRequired
 };
 
-BudgetSummary.defaultProps = { viewOnly: false };
+BudgetSummary.defaultProps = { isViewOnly: false };
 
 const mapStateToProps = state => {
   return {
