@@ -28,6 +28,10 @@ class ApdViewOnly extends Component {
       return null;
     }
 
+    // This check is to ensure the budget has been calculated. If it hasn't, we
+    // can't display everything, so just bail. This can happen very briefly
+    // between the time an APD is selected and before the budget is calculated,
+    // but the resulting unhandled exceptions stop the app.
     const activityKeys = apd.activities.map(({ key }) => key);
     if (
       Object.keys(budget.activities).some(key => activityKeys.indexOf(key) < 0)
