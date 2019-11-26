@@ -5,6 +5,7 @@ import sinon from 'sinon';
 
 import * as actions from './apd';
 import * as appActions from './app';
+import { ARIA_ANNOUNCE_CHANGE } from './aria';
 import { UPDATE_BUDGET } from './budget';
 import axios from '../util/api';
 
@@ -84,9 +85,14 @@ describe('apd actions', () => {
     const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
     const expectedActions = [
+      { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading' },
       { type: appActions.SELECT_APD, apd: 'deserialized apd' },
       { type: UPDATE_BUDGET, state },
-      { type: 'FAKE_PUSH', pushRoute: '/apd' }
+      { type: 'FAKE_PUSH', pushRoute: '/apd' },
+      {
+        type: ARIA_ANNOUNCE_CHANGE,
+        message: 'Your APD is loaded and ready to edit'
+      }
     ];
 
     await store.dispatch(
@@ -140,9 +146,14 @@ describe('apd actions', () => {
       const expectedActions = [
         { type: actions.CREATE_APD_REQUEST },
         { type: actions.CREATE_APD_SUCCESS, data: apd },
+        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading' },
         { type: appActions.SELECT_APD, apd },
         { type: UPDATE_BUDGET, state },
-        { type: 'FAKE_PUSH', pushRoute: '/apd' }
+        { type: 'FAKE_PUSH', pushRoute: '/apd' },
+        {
+          type: ARIA_ANNOUNCE_CHANGE,
+          message: 'Your APD is loaded and ready to edit'
+        }
       ];
 
       return store
