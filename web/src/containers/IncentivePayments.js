@@ -80,7 +80,7 @@ const IncentivePayments = ({
                 <th scope="row">EH Payments</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <td key={q}>
+                    <td key={q} className="budget-table--number">
                       {isViewOnly ? (
                         <Dollars long>{data.ehAmt[year][q] || ''}</Dollars>
                       ) : (
@@ -106,7 +106,7 @@ const IncentivePayments = ({
                 <th scope="row">EH Count (optional)</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <td key={q}>
+                    <td key={q} className="budget-table--number">
                       {isViewOnly ? (
                         data.ehCt[year][q] || 0
                       ) : (
@@ -132,7 +132,7 @@ const IncentivePayments = ({
                 <th scope="row">EP Payments</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <td key={q}>
+                    <td key={q} className="budget-table--number">
                       {isViewOnly ? (
                         <Dollars long>{data.epAmt[year][q] || ''}</Dollars>
                       ) : (
@@ -158,7 +158,7 @@ const IncentivePayments = ({
                 <th scope="row">EP Count (optional)</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <td key={q}>
+                    <td key={q} className="budget-table--number">
                       {isViewOnly ? (
                         data.epCt[year][q] || 0
                       ) : (
