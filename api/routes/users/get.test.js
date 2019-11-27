@@ -9,11 +9,10 @@ tap.test('user GET endpoint', async endpointTest => {
   const app = {
     get: sandbox.stub()
   };
-  const UserModel = {
-    where: sandbox.stub(),
-    fetch: sandbox.stub(),
-    fetchAll: sandbox.stub()
-  };
+
+  const getAllUsers = sandbox.stub();
+  const getUserByID = sandbox.stub();
+
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -28,13 +27,11 @@ tap.test('user GET endpoint', async endpointTest => {
     res.send.returns(res);
     res.end.returns(res);
 
-    UserModel.where.returns(UserModel);
-
     done();
   });
 
   endpointTest.test('setup', async setupTest => {
-    getEndpoint(app, UserModel);
+    getEndpoint(app);
 
     setupTest.ok(
       app.get.calledWith('/users/:id', can('view-users'), sinon.match.func),
@@ -49,7 +46,7 @@ tap.test('user GET endpoint', async endpointTest => {
   endpointTest.test('get all users handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, UserModel);
+      getEndpoint(app, { getAllUsers });
       handler = app.get.args.find(args => args[0] === '/users')[2];
       done();
     });
@@ -57,7 +54,7 @@ tap.test('user GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        UserModel.fetchAll.rejects();
+        getAllUsers.rejects();
 
         await handler({}, res);
 
@@ -68,45 +65,13 @@ tap.test('user GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends back a list of users', async validTest => {
-      UserModel.fetchAll.resolves({
-        toJSON: sinon.stub().returns([
-          {
-            id: 1,
-            email: 'user@one.com',
-            name: 'User 1',
-            state: 'us1',
-            role: 'role 1'
-          },
-          {
-            id: 2,
-            email: 'user@two.net',
-            name: 'User 2',
-            state: 'us2',
-            role: 'role 2'
-          }
-        ])
-      });
+      getAllUsers.resolves('these are all the users');
 
       await handler({}, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith([
-          {
-            id: 1,
-            email: 'user@one.com',
-            name: 'User 1',
-            state: 'us1',
-            role: 'role 1'
-          },
-          {
-            id: 2,
-            email: 'user@two.net',
-            name: 'User 2',
-            state: 'us2',
-            role: 'role 2'
-          }
-        ]),
+        res.send.calledWith('these are all the users'),
         'body is set to the list of users'
       );
     });
@@ -115,7 +80,7 @@ tap.test('user GET endpoint', async endpointTest => {
   endpointTest.test('get single user handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, UserModel);
+      getEndpoint(app, { getUserByID });
       handler = app.get.args.find(args => args[0] === '/users/:id')[2];
       done();
     });
@@ -123,14 +88,10 @@ tap.test('user GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        UserModel.fetch.rejects();
+        getUserByID.rejects();
 
         await handler({ params: { id: 1 } }, res);
 
-        invalidTest.ok(
-          UserModel.where.calledWith({ id: 1 }),
-          'looks for only the specific user'
-        );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
@@ -140,13 +101,9 @@ tap.test('user GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a not-found error if the requested user does not exist',
       async invalidTest => {
-        UserModel.fetch.resolves();
+        getUserByID.resolves();
         await handler({ params: { id: 1 } }, res);
 
-        invalidTest.ok(
-          UserModel.where.calledWith({ id: 1 }),
-          'looks for only the specific user'
-        );
         invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
@@ -154,19 +111,12 @@ tap.test('user GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends the requested user', async validTest => {
-      UserModel.fetch.resolves({
-        toJSON: sinon.stub().returns('user-as-json')
-      });
-
+      getUserByID.resolves('here is a user');
       await handler({ params: { id: 1 } }, res);
 
-      validTest.ok(
-        UserModel.where.calledWith({ id: 1 }),
-        'looks for only the specific user'
-      );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith('user-as-json'),
+        res.send.calledWith('here is a user'),
         'requested user is sent'
       );
     });

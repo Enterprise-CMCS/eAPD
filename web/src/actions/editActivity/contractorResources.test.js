@@ -22,7 +22,56 @@ import {
 const mockStore = configureStore([thunk]);
 
 describe('APD activity edit actions for contractor resources section', () => {
-  const store = mockStore('test state');
+  const state = {
+    apd: {
+      data: {
+        activities: [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          {
+            contractorResources: [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              {
+                hourly: {
+                  data: {
+                    '1997': {
+                      hours: 1234,
+                      rate: 4321
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  };
+
+  const store = mockStore(state);
 
   beforeEach(() => {
     store.clearActions();
@@ -35,9 +84,9 @@ describe('APD activity edit actions for contractor resources section', () => {
       {
         type: ADD_APD_ITEM,
         path: '/activities/17/contractorResources/-',
-        state: 'test state'
+        state
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -54,7 +103,7 @@ describe('APD activity edit actions for contractor resources section', () => {
         type: REMOVE_APD_ITEM,
         path: '/activities/17/contractorResources/9'
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -118,7 +167,7 @@ describe('APD activity edit actions for contractor resources section', () => {
         path: '/activities/17/contractorResources/9/years/1997',
         value: 2358
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -131,7 +180,7 @@ describe('APD activity edit actions for contractor resources section', () => {
         path: '/activities/17/contractorResources/9/hourly/useHourly',
         value: 'new flag'
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -144,7 +193,13 @@ describe('APD activity edit actions for contractor resources section', () => {
         path: '/activities/17/contractorResources/9/hourly/data/1997/rate',
         value: 6442
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      {
+        type: EDIT_APD,
+        path: '/activities/17/contractorResources/9/years/1997',
+        // 1234 hours * 6442 rate = 7949428
+        value: 7949428
+      },
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -157,7 +212,13 @@ describe('APD activity edit actions for contractor resources section', () => {
         path: '/activities/17/contractorResources/9/hourly/data/1997/hours',
         value: 3
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      {
+        type: EDIT_APD,
+        path: '/activities/17/contractorResources/9/years/1997',
+        // 3 hours * 4321 rate = 12963
+        value: 12963
+      },
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 });

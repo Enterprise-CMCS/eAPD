@@ -9,11 +9,10 @@ tap.test('user DELETE endpoint', async endpointTest => {
   const app = {
     delete: sandbox.stub()
   };
-  const UserModel = {
-    where: sandbox.stub(),
-    fetch: sandbox.stub()
-  };
-  const destroy = sandbox.stub();
+
+  const deleteUserByID = sandbox.stub();
+  const getUserByID = sandbox.stub();
+
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -28,7 +27,7 @@ tap.test('user DELETE endpoint', async endpointTest => {
     res.send.returns(res);
     res.end.returns(res);
 
-    UserModel.where.returns(UserModel);
+    deleteUserByID.resolves();
 
     done();
   });
@@ -49,7 +48,7 @@ tap.test('user DELETE endpoint', async endpointTest => {
   endpointTest.test('delete user handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      deleteEndpoint(app, UserModel);
+      deleteEndpoint(app, { deleteUserByID, getUserByID });
       handler = app.delete.args.find(args => args[0] === '/users/:id')[2];
       done();
     });
@@ -57,14 +56,10 @@ tap.test('user DELETE endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        UserModel.fetch.rejects();
+        getUserByID.rejects();
 
         await handler({ user: {}, params: { id: 1 } }, res);
 
-        invalidTest.ok(
-          UserModel.where.calledWith({ id: 1 }),
-          'looks for only the specific user'
-        );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
@@ -76,8 +71,6 @@ tap.test('user DELETE endpoint', async endpointTest => {
       async invalidTest => {
         await handler({ user: {}, params: { id: 'abc' } }, res);
 
-        invalidTest.ok(UserModel.where.notCalled, 'database is not queried');
-        invalidTest.ok(UserModel.fetch.notCalled, 'database is not queried');
         invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
@@ -89,8 +82,6 @@ tap.test('user DELETE endpoint', async endpointTest => {
       async invalidTest => {
         await handler({ user: { id: 1 }, params: { id: 1 } }, res);
 
-        invalidTest.ok(UserModel.where.notCalled, 'database is not queried');
-        invalidTest.ok(UserModel.fetch.notCalled, 'database is not queried');
         invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
@@ -100,14 +91,9 @@ tap.test('user DELETE endpoint', async endpointTest => {
     handlerTest.test(
       'sends a not-found error if the requested user does not exist',
       async invalidTest => {
-        UserModel.fetch.resolves();
+        getUserByID.resolves();
         await handler({ user: {}, params: { id: '1' } }, res);
 
-        invalidTest.ok(
-          UserModel.where.calledWith({ id: 1 }),
-          'looks for only the specific user'
-        );
-        invalidTest.ok(UserModel.fetch.calledOnce, 'fetches just once');
         invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
@@ -115,20 +101,10 @@ tap.test('user DELETE endpoint', async endpointTest => {
     );
 
     handlerTest.test('deletes the requested user', async validTest => {
-      UserModel.fetch.resolves({
-        destroy,
-        get: sinon.stub().returns()
-      });
-      destroy.resolves();
-
+      getUserByID.resolves({ email: 'someone' });
       await handler({ user: {}, params: { id: 1 } }, res);
 
-      validTest.ok(
-        UserModel.where.calledWith({ id: 1 }),
-        'looks for only the specific user'
-      );
-      validTest.ok(UserModel.fetch.calledOnce, 'fetches just once');
-      validTest.ok(destroy.calledOnce, 'model is destroyed');
+      validTest.ok(deleteUserByID.calledWith(1));
       validTest.ok(res.status.calledWith(204), 'HTTP status set to 204');
       validTest.ok(res.send.notCalled, 'no body is sent');
       validTest.ok(res.end.called, 'response is terminated');
