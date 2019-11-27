@@ -5,7 +5,6 @@ Our Docker configuration consists of four containers:
 1. PostgreSQL database
 2. API
 3. Web app
-4. Storybook
 
 The PostgreSQL database container is based on the official image from Docker
 Hub, so there is no customization.
@@ -24,7 +23,7 @@ When started, the container will listen on your local machine's port 8081.
 It uses [nodemon](https://npm.im/nodemon) to watch for file changes and will
 restart the API whenever it detects changes in the API source code.
 
-### Web app and Storybook
+### Web app
 
 The web app image is built from the `/web/Dockerfile` config. The web
 `package.json` and `package-lock.json` files are added to the container and
@@ -32,11 +31,8 @@ then `npm ci` is run. This installs packages and versions from the lockfile
 so as to closely mirror the deployed environment. Once built, The image is
 named `cms-eapd/web`.
 
-The web app and Storybook containers both use the web app image.
-
-When started, the web app container will listen on your local machine's port
-8080, and the Storybook container will listen on port 8082. The web app
-container is using [webpack-dev-server](https://npm.im/webpack-dev-server)
-and the Storybook container is doing whatever magic Storybook does, to watch
-for file changes and will rebuild the web app whenever they detect changes in
-the app source code.
+When started, the web app container will listen on your local machine's
+port 8080. The web app container is using
+[webpack-dev-server](https://npm.im/webpack-dev-server) to watch for file
+changes and will rebuild the web app whenever they detect changes in the
+app source code.
