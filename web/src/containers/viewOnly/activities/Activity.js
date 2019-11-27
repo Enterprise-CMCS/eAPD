@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import Dollars from '../../../components/Dollars';
 
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
+import { stateDateToDisplay } from '../../../util';
 
 const Activity = ({ activity, activityIndex }) => {
   const buildGoal = goal => {
@@ -28,7 +29,8 @@ const Activity = ({ activity, activityIndex }) => {
           </strong>
         </p>
         <p>
-          <em>Planned end date: </em> {milestone.endDate || 'None provided'}
+          <em>Planned end date: </em>{' '}
+          {stateDateToDisplay(milestone.endDate) || 'None provided'}
         </p>
       </Fragment>
     );
