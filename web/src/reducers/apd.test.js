@@ -113,7 +113,7 @@ describe('APD reducer', () => {
             updated: 'October 14, 1066, 6:00 PM GMT'
           }
         },
-        data,
+        data: initialState.data,
         error: '',
         fetching: false,
         loaded: true,

@@ -1,17 +1,17 @@
-import PropTypes from "prop-types";
-import React, { Fragment, PureComponent } from "react";
-import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
-import ExecutiveSummaryBudget from "../ExecutiveSummaryBudget";
-import Dollars from "../../components/Dollars";
-import Review from "../../components/Review";
-import { t } from "../../i18n";
+import ExecutiveSummaryBudget from '../ExecutiveSummaryBudget';
+import Dollars from '../../components/Dollars';
+import Review from '../../components/Review';
+import { t } from '../../i18n';
 
-import { selectApdYears } from "../../reducers/apd.selectors";
+import { selectApdYears } from '../../reducers/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
-} from "../../reducers/budget.selectors";
+} from '../../reducers/budget.selectors';
 
 class ExecutiveSummary extends PureComponent {
   render() {
@@ -26,16 +26,16 @@ class ExecutiveSummary extends PureComponent {
         >
           <ul className="ds-c-list--bare">
             <li>
-              <strong>Federal Fiscal Years requested:</strong> FFY{" "}
-              {years.join(", ")}
+              <strong>Federal Fiscal Years requested:</strong> FFY{' '}
+              {years.join(', ')}
             </li>
             <li>
-              <strong>Medicaid share:</strong>{" "}
+              <strong>Medicaid share:</strong>{' '}
               <Dollars long>{total.medicaid}</Dollars> (
               <Dollars long>{total.federal}</Dollars> Federal share)
             </li>
             <li>
-              <strong>Total funding request:</strong>{" "}
+              <strong>Total funding request:</strong>{' '}
               <Dollars long>{total.combined}</Dollars>
             </li>
           </ul>
@@ -44,9 +44,9 @@ class ExecutiveSummary extends PureComponent {
           <Review
             key={activity.key}
             heading={`Activity ${i + 1}: ${activity.name ||
-              t("activities.noNameYet")}`}
+              t('activities.noNameYet')}`}
             headingLevel={3}
-            className={i === data.length - 1 ? "ds-u-border-bottom--0" : ""}
+            className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >
             {activity.summary && <p>{activity.summary}</p>}
 
@@ -55,11 +55,11 @@ class ExecutiveSummary extends PureComponent {
                 <strong>Date:</strong> {activity.dateRange}
               </li>
               <li>
-                <strong>Total cost of activity:</strong>{" "}
+                <strong>Total cost of activity:</strong>{' '}
                 <Dollars long>{activity.combined}</Dollars>
               </li>
               <li>
-                <strong>Medicaid share:</strong>{" "}
+                <strong>Medicaid share:</strong>{' '}
                 <Dollars long>{activity.medicaid}</Dollars> (
                 <Dollars long>{activity.federal}</Dollars> Federal share)
               </li>

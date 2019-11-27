@@ -91,7 +91,11 @@ describe('apd actions', () => {
     ];
 
     await store.dispatch(
-      appActions.selectApd('apd-id', { deserialize, global, pushRoute })
+      appActions.selectApd('apd-id', '/test', {
+        deserialize,
+        global,
+        pushRoute
+      })
     );
 
     expect(store.getActions()).toEqual(expectedActions);
