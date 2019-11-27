@@ -67,7 +67,7 @@ describe('apd actions', () => {
     expect(store.getActions()).toEqual([]);
   });
 
-  it('selectAPD should create SELECT_APD action, redirect to /apd, and saves APD ID to local storage', async () => {
+  it('selectAPD should create SELECT_APD action, redirect to provided route, and save APD ID to local storage', async () => {
     const apd = {
       id: 'apd-id',
       selected: 'apd goes here',
@@ -79,6 +79,7 @@ describe('apd actions', () => {
 
     const state = { apd: { byId: { apdID: 'hello there' } } };
     const store = mockStore(state);
+    const testRoute = '/test';
 
     const global = { localStorage: { setItem: sinon.stub() } };
     const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
@@ -86,7 +87,7 @@ describe('apd actions', () => {
     const expectedActions = [
       { type: appActions.SELECT_APD, apd: 'deserialized apd' },
       { type: UPDATE_BUDGET, state },
-      { type: 'FAKE_PUSH', pushRoute: '/apd' }
+      { type: 'FAKE_PUSH', pushRoute: testRoute }
     ];
 
     await store.dispatch(
