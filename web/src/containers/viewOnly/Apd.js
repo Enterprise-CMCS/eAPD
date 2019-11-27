@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 import { selectApd } from '../../actions/app';
 import { selectApdData } from '../../reducers/apd.selectors';
-import { selectBudget } from '../../reducers/budget.selectors.js';
+import { selectBudget } from '../../reducers/budget.selectors';
 import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import ApdStateProfile from './ApdStateProfile';
 import ApdSummary from './ApdSummary';
 import PreviousActivities from './PreviousActivities';
-import Activities from './activities/All.js';
+import Activities from './activities/All';
 import ScheduleSummary from './ScheduleSummary';
 import ProposedBudget from './ProposedBudget';
 import AssuranceAndCompliance from './AssurancesAndCompliance';

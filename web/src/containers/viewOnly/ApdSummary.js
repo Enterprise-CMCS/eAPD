@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../../i18n';
 import { selectSummary } from '../../reducers/apd.selectors';
 
 const ApdSummary = ({
@@ -15,19 +14,18 @@ const ApdSummary = ({
     <div>
       <h2>Program summary</h2>
       <h3>Program introduction</h3>
-      <p dangerouslySetInnerHTML={{__html: programOverview}}/>
+      <p dangerouslySetInnerHTML={{ __html: programOverview }} />
 
       <h3>HIT overview</h3>
-      <p dangerouslySetInnerHTML={{__html: narrativeHIT}}/>
+      <p dangerouslySetInnerHTML={{ __html: narrativeHIT }} />
 
       <h3>HIE overview</h3>
-      <p dangerouslySetInnerHTML={{__html: narrativeHIE}}/>
+      <p dangerouslySetInnerHTML={{ __html: narrativeHIE }} />
 
       <h3>MMIS overview</h3>
-      <p dangerouslySetInnerHTML={{__html: narrativeMMIS}}/>
+      <p dangerouslySetInnerHTML={{ __html: narrativeMMIS }} />
     </div>
-  )
-
+  );
 };
 
 ApdSummary.propTypes = {
@@ -39,6 +37,4 @@ ApdSummary.propTypes = {
 
 const mapStateToProps = selectSummary;
 
-export default connect(
-  mapStateToProps
-)(ApdSummary);
+export default connect(mapStateToProps)(ApdSummary);
