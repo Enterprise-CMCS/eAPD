@@ -11,11 +11,11 @@ describe('apd export component', () => {
   });
 
   test('routes to print preview', () => {
-    const push = sinon.spy();
-    const component = shallow(<ExportAndSubmit push={push} />);
+    const fakePush = sinon.spy();
+    const component = shallow(<ExportAndSubmit push={fakePush} />);
     component.find('Button').simulate('click');
 
-    expect(push.calledOnce).toEqual(true);
+    expect(fakePush.calledOnce).toEqual(true);
   });
 
   test('maps dispatch to props', () => {

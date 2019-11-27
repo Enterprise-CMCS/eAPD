@@ -25,7 +25,7 @@ const ActivityList = ({ activities }) => {
 };
 
 ActivityList.propTypes = {
-  activities: PropTypes.object.isRequired
+  activities: PropTypes.array.isRequired
 };
 
 export default ActivityList;
