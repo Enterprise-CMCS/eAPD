@@ -89,7 +89,7 @@ describe('apd actions', () => {
       { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading' },
       { type: appActions.SELECT_APD, apd: 'deserialized apd' },
       { type: UPDATE_BUDGET, state },
-      { type: 'FAKE_PUSH', pushRoute: testRoute }
+      { type: 'FAKE_PUSH', pushRoute: testRoute },
       {
         type: ARIA_ANNOUNCE_CHANGE,
         message: 'Your APD is loaded and ready to edit'
