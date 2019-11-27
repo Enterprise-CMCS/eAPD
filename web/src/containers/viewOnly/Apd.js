@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -74,7 +75,12 @@ class ApdViewOnly extends Component {
     );
   }
 }
-
+ApdViewOnly.propTypes = {
+  apd: PropTypes.object.isRequired,
+  budget: PropTypes.object.isRequired,
+  place: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired
+};
 const mapStateToProps = state => ({
   apd: selectApdData(state),
   budget: selectBudget(state),

@@ -79,12 +79,10 @@ const Activity = ({ activity, activityIndex }) => {
     const contractTerm = () => {
       if (!contractor.start && !contractor.end) {
         return 'Dates not specified';
-      } else {
-        const start =
-          contractor.start === '' ? 'unspecified' : contractor.start;
-        const end = contractor.end === '' ? 'unspecified' : contractor.end;
-        return `${start} — ${end}`;
       }
+      const start = contractor.start === '' ? 'unspecified' : contractor.start;
+      const end = contractor.end === '' ? 'unspecified' : contractor.end;
+      return `${start} — ${end}`;
     };
 
     return (
@@ -309,7 +307,8 @@ const Activity = ({ activity, activityIndex }) => {
 };
 
 Activity.propTypes = {
-  activities: PropTypes.object.isRequired
+  activity: PropTypes.array.isRequired,
+  activityIndex: PropTypes.string.isRequired
 };
 
 export default Activity;

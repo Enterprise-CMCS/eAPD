@@ -6,13 +6,13 @@ import { push } from 'connected-react-router';
 import Waypoint from './ConnectedWaypoint';
 import { Section } from '../components/Section';
 
-const ExportAndSubmit = ({ push }) => (
+const ExportAndSubmit = () => (
   <Waypoint id="export-and-submit">
     <Section isNumbered id="export-and-submit" resource="exportAndSubmit">
       <h3 className="ds-h3">Review and Download</h3>
       <p>
-        On the next page, you'll be able to review and download a copy of your
-        APD as the first step in submitting a completed APD to CMS.
+        On the next page, you`&apos;`ll be able to review and download a copy of
+        your APD as the first step in submitting a completed APD to CMS.
       </p>
       <Button
         size="big"
