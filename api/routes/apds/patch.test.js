@@ -12,15 +12,9 @@ tap.test('apds PATCH endpoint', async tests => {
     patch: sandbox.spy()
   };
 
-  const db = sandbox.stub();
-  const dbReturns = {
-    first: sandbox.stub(),
-    update: sandbox.stub(),
-    where: sandbox.stub()
-  };
-
+  const getAPDByID = sandbox.stub();
   const patchObject = sandbox.stub();
-
+  const updateAPDDocument = sandbox.stub();
   const validateApd = sandbox.stub();
 
   const res = {
@@ -33,15 +27,17 @@ tap.test('apds PATCH endpoint', async tests => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
-    db.returns(dbReturns);
-    dbReturns.where.returns(dbReturns);
-
     res.send.returns(res);
     res.status.returns(res);
 
     validateApd.errors = [];
 
-    patchEndpoint(app, { db, patchObject, validateApd });
+    patchEndpoint(app, {
+      getAPDByID,
+      patchObject,
+      updateAPDDocument,
+      validateApd
+    });
     handler = app.patch.args[0][app.patch.args[0].length - 1];
   });
 
@@ -75,7 +71,7 @@ tap.test('apds PATCH endpoint', async tests => {
   );
 
   tests.test('fails gracefully on arbitrary database error', async test => {
-    db.throws(new Error('fake error'));
+    getAPDByID.throws(new Error('fake error'));
     await handler({ body: [], params: { id: 'apd id' } }, res);
 
     test.ok(res.status.calledWith(500), 'sends an HTTP 500 status');
@@ -85,22 +81,13 @@ tap.test('apds PATCH endpoint', async tests => {
   tests.test(
     'fails gracefully if there is an error patching the document',
     async test => {
-      dbReturns.first.resolves({ document: 'old document' });
+      getAPDByID.resolves({ document: 'old document' });
       patchObject.throws(new Error('fake error'));
 
       const patches = ['patch 1', 'patch 2'];
 
       await handler({ body: patches, params: { id: 'apd id' } }, res);
 
-      test.ok(db.calledWith('apds'), 'queries the apds table');
-      test.ok(
-        dbReturns.where.calledWith('id', 'apd id'),
-        'just for the requested apd'
-      );
-      test.ok(
-        dbReturns.first.calledWith('document', 'state_id', 'status'),
-        'gets just the relevant fields'
-      );
       test.ok(patchObject.calledWith('old document', patches));
       test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
@@ -117,7 +104,7 @@ tap.test('apds PATCH endpoint', async tests => {
       }
     };
 
-    dbReturns.first.resolves({ document: 'old document' });
+    getAPDByID.resolves({ document: 'old document' });
     patchObject.returns(patchedDocument);
     validateApd.returns(false);
     validateApd.errors = [
@@ -128,15 +115,6 @@ tap.test('apds PATCH endpoint', async tests => {
 
     await handler({ body: patches, params: { id: 'apd id' } }, res);
 
-    test.ok(db.calledWith('apds'), 'queries the apds table');
-    test.ok(
-      dbReturns.where.calledWith('id', 'apd id'),
-      'just for the requested apd'
-    );
-    test.ok(
-      dbReturns.first.calledWith('document', 'state_id', 'status'),
-      'gets just the relevant fields'
-    );
     test.ok(patchObject.calledWith('old document', patches), 'applies patches');
     test.ok(
       validateApd.calledWith(patchedDocument),
@@ -155,7 +133,7 @@ tap.test('apds PATCH endpoint', async tests => {
   });
 
   tests.test('saves the updated document if everything is good', async test => {
-    dbReturns.first.resolves({
+    getAPDByID.resolves({
       document: 'old document',
       state_id: 'state id',
       status: 'status'
@@ -163,105 +141,25 @@ tap.test('apds PATCH endpoint', async tests => {
     const patchedDocument = { key1: 'value 1' };
     patchObject.returns(patchedDocument);
     validateApd.returns(true);
+    updateAPDDocument.resolves('update time');
+
     const patches = [{ path: 'path 1' }, { path: 'path 2' }];
 
     await handler({ body: patches, params: { id: 'apd id' } }, res);
 
-    test.ok(db.calledWith('apds'), 'queries the apds table');
     test.ok(
-      dbReturns.where.calledWith('id', 'apd id'),
-      'just for the requested apd'
+      updateAPDDocument.calledWith('apd id', 'state id', patchedDocument),
+      'updates the right set of things'
     );
-    test.ok(
-      dbReturns.first.calledWith('document', 'state_id', 'status'),
-      'gets just the relevant fields'
-    );
-    test.ok(patchObject.calledWith('old document', patches), 'applies patches');
-    test.ok(
-      validateApd.calledWith(patchedDocument),
-      'validates the new document'
-    );
-    test.ok(db.calledWith('apds'), 'updates the apds table');
-    test.ok(
-      dbReturns.where.calledWith('id', 'apd id'),
-      'just for the requested apd'
-    );
-    test.ok(
-      dbReturns.update.calledWith({
-        document: patchedDocument,
-        updated_at: sinon.match.string
-      }),
-      'updates the relevant fields'
-    );
+
     test.ok(
       res.send.calledWith({
         ...patchedDocument,
         id: 'apd id',
         state: 'state id',
         status: 'status',
-        updated: sinon.match.string
+        updated: 'update time'
       })
     );
   });
-
-  tests.test(
-    'saves the updated document and updates the state profile if everything is good',
-    async test => {
-      dbReturns.first.resolves({
-        document: 'old document',
-        state_id: 'state id',
-        status: 'status'
-      });
-      const patchedDocument = { stateProfile: 'new state profile' };
-      patchObject.returns(patchedDocument);
-      validateApd.returns(true);
-      const patches = [{ path: '/stateProfile/name' }, { path: 'path 2' }];
-
-      await handler({ body: patches, params: { id: 'apd id' } }, res);
-
-      test.ok(db.calledWith('apds'), 'queries the apds table');
-      test.ok(
-        dbReturns.where.calledWith('id', 'apd id'),
-        'just for the requested apd'
-      );
-      test.ok(
-        dbReturns.first.calledWith('document', 'state_id', 'status'),
-        'gets just the relevant fields'
-      );
-      test.ok(
-        patchObject.calledWith('old document', patches),
-        'applies patches'
-      );
-      test.ok(
-        validateApd.calledWith(patchedDocument),
-        'validates the new document'
-      );
-      test.ok(db.calledWith('apds'), 'updates the apds table');
-      test.ok(
-        dbReturns.where.calledWith('id', 'apd id'),
-        'just for the requested apd'
-      );
-      test.ok(
-        dbReturns.update.calledWith({
-          document: patchedDocument,
-          updated_at: sinon.match.string
-        }),
-        'updates the relevant fields'
-      );
-      test.ok(db.calledWith('states'), 'updates the states table');
-      test.ok(dbReturns.where('id', 'state id', `just for the APD's state`));
-      test.ok(
-        dbReturns.update.calledWith({ medicaid_office: 'new state profile' })
-      );
-      test.ok(
-        res.send.calledWith({
-          ...patchedDocument,
-          id: 'apd id',
-          state: 'state id',
-          status: 'status',
-          updated: sinon.match.string
-        })
-      );
-    }
-  );
 });

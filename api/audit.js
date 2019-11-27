@@ -29,7 +29,7 @@ module.exports = (action, req) => {
           logger.audit(`AUDIT ACTION: ${action.toString()}`, {
             actor: {
               id: req.user.id,
-              email: req.user.model.get('email'),
+              email: req.user.email,
               ip: req.ip
             },
             action: { [actionsToProps[action]]: data },

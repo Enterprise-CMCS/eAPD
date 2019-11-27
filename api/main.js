@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const uuid = require('uuid/v1');
 const logger = require('./logger')('main');
-require('./db').setup();
 const auth = require('./auth');
 const routes = require('./routes');
 const endpointCoverage = require('./endpointCoverageMiddleware');
