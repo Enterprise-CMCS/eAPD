@@ -7,7 +7,7 @@ import { plain as ExportAndSubmit, mapDispatchToProps } from './ApdExport';
 
 describe('apd export component', () => {
   test('renders correctly', () => {
-    expect(shallow(<ExportAndSubmit printApd={() => {}} />)).toMatchSnapshot();
+    expect(shallow(<ExportAndSubmit push={() => {}} />)).toMatchSnapshot();
   });
 
   test('routes to print preview', () => {

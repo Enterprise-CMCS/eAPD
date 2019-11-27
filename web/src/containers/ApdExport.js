@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Button } from '@cmsgov/design-system-core';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -6,7 +7,7 @@ import { push } from 'connected-react-router';
 import Waypoint from './ConnectedWaypoint';
 import { Section } from '../components/Section';
 
-const ExportAndSubmit = () => (
+const ExportAndSubmit = ({ push: pushRoute }) => (
   <Waypoint id="export-and-submit">
     <Section isNumbered id="export-and-submit" resource="exportAndSubmit">
       <h3 className="ds-h3">Review and Download</h3>
@@ -18,13 +19,17 @@ const ExportAndSubmit = () => (
         size="big"
         variation="primary"
         className="ds-u-margin-top--2"
-        onClick={() => push('/print')}
+        onClick={() => pushRoute('/print')}
       >
         Continue to Review
       </Button>
     </Section>
   </Waypoint>
 );
+
+ExportAndSubmit.propTypes = {
+  push: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = { push };
 
