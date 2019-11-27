@@ -33,7 +33,10 @@ export const selectUsersSorted = createSelector(
   [selectUsers],
   users => {
     return [...users].sort(
-      ({ name: nameA, email: emailA }, { name: nameB, email: emailB }) => {
+      (
+        { name: nameA, username: emailA },
+        { name: nameB, username: emailB }
+      ) => {
         const sortA = (nameA || emailA).toLowerCase();
         const sortB = (nameB || emailB).toLowerCase();
 

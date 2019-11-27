@@ -44,7 +44,7 @@ class EditAccount extends Component {
     const { changePassword, user } = this.state;
 
     if (user) {
-      const { email, name, password, phone, position, state, role } = user;
+      const { name, password, phone, position, state, username, role } = user;
 
       return (
         <Fragment>
@@ -60,8 +60,8 @@ class EditAccount extends Component {
 
           <TextField
             label="Email"
-            name="email"
-            value={email}
+            name="username"
+            value={username}
             onChange={this.handleEditAccount}
           />
 
@@ -88,7 +88,7 @@ class EditAccount extends Component {
             id="modify_account_state"
             name="state"
             size="medium"
-            value={state}
+            value={state.id}
             onChange={this.handleEditAccount}
           >
             <option value="">None</option>
@@ -172,6 +172,7 @@ class EditAccount extends Component {
 
   handleEditAccount = e => {
     const { name, value } = e.target;
+
     this.setState(prev => ({ user: { ...prev.user, [name]: value } }));
   };
 
@@ -222,7 +223,7 @@ class EditAccount extends Component {
             <option value="">Select...</option>
             {users.map(u => (
               <option key={u.id} value={`${u.id}`}>
-                {`${u.name ? `${u.name} - ` : ''}${u.email}`}
+                {`${u.name ? `${u.name} - ` : ''}${u.username}`}
               </option>
             ))}
           </Select>

@@ -1,5 +1,3 @@
-require('../../db').setup();
-
 exports.seed = async knex => {
   const { state_id } = await knex('users').first('state_id'); // eslint-disable-line camelcase
 

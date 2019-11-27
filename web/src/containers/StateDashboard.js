@@ -1,6 +1,6 @@
 import { Button } from '@cmsgov/design-system-core';
 import PropType from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
@@ -10,12 +10,13 @@ import { selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 
-const Loading = () => (
+const Loading = ({ children }) => (
   <div className="ds-h2 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
     <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
-    Loading APDs
+    {children}
   </div>
 );
+Loading.propTypes = { children: PropType.node.isRequired };
 
 const StateDashboard = (
   {
@@ -29,7 +30,15 @@ const StateDashboard = (
   },
   { global = window } = {}
 ) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const createNew = () => {
+    setIsLoading(true);
+    create();
+  };
+
   const open = id => e => {
+    setIsLoading(true);
     e.preventDefault();
     select(id, route);
   };
@@ -39,6 +48,10 @@ const StateDashboard = (
       del(apd.id);
     }
   };
+
+  if (isLoading) {
+    return <Loading>Loading your APD</Loading>;
+  }
 
   return (
     <div
@@ -58,15 +71,17 @@ const StateDashboard = (
             <Button
               variation="primary"
               className="ds-u-float--right"
-              onClick={create}
+              onClick={createNew}
             >
-              Create new <span className="ds-u-visibility--screen-reader">APD</span>&nbsp;&nbsp;
+              Create new{' '}
+              <span className="ds-u-visibility--screen-reader">APD</span>
+              &nbsp;&nbsp;
               <Icon icon={faPlusCircle} />
             </Button>
           </div>
         </div>
       </div>
-      {fetching ? <Loading /> : null}
+      {fetching ? <Loading>Loading APDs</Loading> : null}
       {!fetching && apds.length === 0 ? (
         <div className="ds-l-row">
           <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2 ds-u-padding-bottom--5 ds-u-color--muted">
@@ -84,7 +99,9 @@ const StateDashboard = (
               <div className="ds-u-display--inline-block">
                 <h3 className="ds-u-margin-top--0">
                   <a href="#!" onClick={open(apd.id)}>
-                    <span className="ds-u-visibility--screen-reader">Edit APD: </span>
+                    <span className="ds-u-visibility--screen-reader">
+                      Edit APD:{' '}
+                    </span>
                     {apd.name}
                   </a>
                 </h3>
@@ -100,7 +117,11 @@ const StateDashboard = (
                   size="small"
                   onClick={delApd(apd)}
                 >
-                  Delete <span className="ds-u-visibility--screen-reader"> this APD</span>
+                  Delete{' '}
+                  <span className="ds-u-visibility--screen-reader">
+                    {' '}
+                    this APD
+                  </span>
                 </Button>
               </div>
             </div>

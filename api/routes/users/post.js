@@ -1,9 +1,9 @@
 const logger = require('../../logger')('users route post');
-const defaultUserModel = require('../../db').models.user;
+const { createUser: cu, validateUser: vu } = require('../../db');
 const can = require('../../middleware').can;
 const auditor = require('../../audit');
 
-module.exports = (app, UserModel = defaultUserModel) => {
+module.exports = (app, { createUser = cu, validateUser = vu } = {}) => {
   logger.silly('setting up POST /users route');
   app.post('/users', can('add-users'), async (req, res) => {
     logger.silly(req, 'handling POST /users route');
@@ -19,25 +19,21 @@ module.exports = (app, UserModel = defaultUserModel) => {
         audit.set('email', req.body.email);
         audit.set('password', '<new password>');
 
-        // If these values are not passed in, don't set them at all, even
-        // to undefined.  Undefined will make the data model explode.
-        if (req.body.name) {
-          audit.set('name', req.body.name);
-          posted.name = req.body.name;
-        }
-        if (req.body.role) {
-          audit.set('auth_role', req.body.role);
-          posted.auth_role = req.body.role;
-        }
+        ['name', 'position', 'phone'].forEach(field => {
+          if (req.body[field]) {
+            audit.set(field, req.body[field]);
+            posted[field] = req.body[field];
+          }
+        });
         if (req.body.state) {
-          audit.set('state_id', req.body.state);
           posted.state_id = req.body.state;
         }
-
-        const user = UserModel.forge(posted);
+        if (req.body.role) {
+          posted.auth_role = req.body.role;
+        }
 
         try {
-          await user.validate();
+          await validateUser(posted);
         } catch (e) {
           logger.verbose('validation fail');
           return res
@@ -46,9 +42,9 @@ module.exports = (app, UserModel = defaultUserModel) => {
             .end();
         }
 
-        await user.save();
+        const userID = await createUser(posted);
 
-        audit.set('id', user.get('id'));
+        audit.set('id', userID);
         audit.log();
 
         logger.silly(req, 'all done');

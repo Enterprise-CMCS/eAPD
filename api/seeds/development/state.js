@@ -13,13 +13,6 @@ exports.seed = async knex => {
           email: 'c.fudge@ministry.magic',
           phone: '5551234567'
         }
-      }),
-      state_pocs: JSON.stringify([
-        {
-          name: 'Corinne Johnson',
-          email: 'corinne@thatplace',
-          position: 'Head of Muggle Studies'
-        }
-      ])
+      })
     });
 };
