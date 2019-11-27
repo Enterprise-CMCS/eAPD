@@ -33,7 +33,7 @@ tap.test('apds POST endpoint', async endpointTest => {
   endpointTest.test('handler tests', async tests => {
     let handler;
 
-    const req = { user: { state: 'st' } };
+    const req = { user: { state: { id: 'st' } } };
 
     const res = {
       send: sandbox.stub(),
@@ -41,7 +41,8 @@ tap.test('apds POST endpoint', async endpointTest => {
       end: sandbox.stub()
     };
 
-    const db = sandbox.stub();
+    const createAPD = sandbox.stub();
+    const getStateProfile = sandbox.stub();
 
     tests.beforeEach(async () => {
       sandbox.resetBehavior();
@@ -51,55 +52,30 @@ tap.test('apds POST endpoint', async endpointTest => {
       res.status.returns(res);
       res.end.returns(res);
 
-      postEndpoint(app, { db });
+      postEndpoint(app, { createAPD, getStateProfile });
       handler = app.post.args.pop().pop();
     });
 
     tests.test('sends a 500 code for database errors', async test => {
-      db.throws(new Error('boop'));
+      getStateProfile.throws(new Error('boop'));
       await handler(req, res);
 
       test.ok(res.status.calledWith(500), 'HTTP status set to 500');
       test.ok(res.end.calledOnce, 'response is terminated');
     });
 
+    tests.test(
+      'sends a 500 if the newly-generated APD fails schema validation',
+      async test => {
+        getStateProfile.resolves({ medicaidDirector: { name: 3 } });
+        await handler(req, res);
+
+        test.ok(res.status.calledWith(500), 'HTTP status set to 500');
+        test.ok(res.end.calledOnce, 'response is terminated');
+      }
+    );
+
     tests.test('sends back the new APD if everything works', async test => {
-      const dbSelectStateProfileChain = {
-        select: sinon.stub(),
-        where: sinon.stub(),
-        first: sinon.stub().resolves({
-          medicaid_office: {
-            medicaidDirector: {},
-            medicaidOffice: {}
-          }
-        })
-      };
-      dbSelectStateProfileChain.select.returns({
-        where: dbSelectStateProfileChain.where
-      });
-      dbSelectStateProfileChain.where.returns({
-        first: dbSelectStateProfileChain.first
-      });
-
-      db.withArgs('states')
-        .onFirstCall()
-        .returns(dbSelectStateProfileChain);
-
-      const dbInsertAPDChain = {
-        insert: sinon.stub(),
-        returning: sinon
-          .stub()
-          .onFirstCall()
-          .resolves(['apd id'])
-      };
-      dbInsertAPDChain.insert.returns({
-        returning: dbInsertAPDChain.returning
-      });
-
-      db.withArgs('apds')
-        .onFirstCall()
-        .returns(dbInsertAPDChain);
-
       const expectedApd = {
         activities: [
           {
@@ -258,60 +234,47 @@ tap.test('apds POST endpoint', async endpointTest => {
           medicaidDirector: {
             email: '',
             name: '',
-            phone: ''
+            phone: '',
+            bert: 'ernie'
           },
           medicaidOffice: {
             address1: '',
             address2: '',
             city: '',
             state: '',
-            zip: ''
+            zip: '',
+            bigBird: 'grover'
           }
         },
         years: ['2004', '2005']
       };
 
+      getStateProfile.resolves({
+        medicaidDirector: { bert: 'ernie' },
+        medicaidOffice: { bigBird: 'grover' }
+      });
+
+      createAPD.resolves('apd id');
+
       await handler(req, res);
 
-      // Fetches the state Medicaid director and office info from the state
-      // table to use as defaults for the new APD
       test.ok(
-        dbSelectStateProfileChain.select.calledWith('medicaid_office'),
-        'gets the Medicaid office metadata'
-      );
-      test.ok(
-        dbSelectStateProfileChain.where.calledWith({ id: 'st' }),
-        'only for the target state'
-      );
-
-      // Saves the new APD
-      test.ok(
-        dbInsertAPDChain.insert.calledWith({
+        {
           state_id: 'st',
           status: 'draft',
-          document: sinon.match.object
-        }),
-        'saves the new APD to the database'
+          document: createAPD.calledWith(expectedApd)
+        },
+        'expected APD is created'
       );
       test.same(
-        dbInsertAPDChain.insert.args[0][0].document,
-        expectedApd,
-        'saves the expected document'
-      );
-      test.ok(
-        dbInsertAPDChain.returning.calledWith('id'),
-        'and gets the new APD ID'
-      );
-
-      test.ok(
-        res.send.calledWith(sinon.match.object),
+        res.send.args[0][0],
+        {
+          ...expectedApd,
+          id: 'apd id',
+          updated: '2004-07-01T12:00:00.000Z'
+        },
         'responds with the new APD object'
       );
-      test.same(res.send.args[0][0], {
-        ...expectedApd,
-        id: 'apd id',
-        updated: '2004-07-01T12:00:00.000Z'
-      });
     });
   });
 });
