@@ -30,9 +30,7 @@ The web app image is built from the `/web/Dockerfile` config. The web
 `package.json` and `package-lock.json` files are added to the container and
 then `npm ci` is run. This installs packages and versions from the lockfile
 so as to closely mirror the deployed environment. Once built, The image is
-named `cms-eapd/web`. It is then tagged with the MD5 hash of the
-`web/package-lock.json` file. This way, when the `package-lock.json` changes,
-docker-compose will know to rebuild the image.
+named `cms-eapd/web`.
 
 The web app and Storybook containers both use the web app image.
 
@@ -42,12 +40,3 @@ container is using [webpack-dev-server](https://npm.im/webpack-dev-server)
 and the Storybook container is doing whatever magic Storybook does, to watch
 for file changes and will rebuild the web app whenever they detect changes in
 the app source code.
-
-### Updating the image tags
-
-When you install or update dependencies, you will need to make sure the
-`docker-compose.yml` file gets updated with new tags for the API and web app
-images. Simply running `npm install` or `npm ci` in the `/api` or `/web`
-directories will update the `docker-compose.yml` file for you. Note that these
-commands must be run on your local machine, not inside one of the Docker
-containers.
