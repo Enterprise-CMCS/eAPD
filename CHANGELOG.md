@@ -4,6 +4,8 @@ Anticipated release: December 2, 2019
 
 #### 🚀 New features
 
+- Added a print preview page ([#1921])
+
 #### 🐛 Bugs fixed
 
 #### ⚙️ Behind the scenes
@@ -179,3 +181,4 @@ Pilot release to select state partners
 [#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
 [#1882]: https://github.com/18F/cms-hitech-apd/issues/1882
 [#1904]: https://github.com/18F/cms-hitech-apd/pull/1904
+[#1921]: https://github.com/18F/cms-hitech-apd/pull/1921
