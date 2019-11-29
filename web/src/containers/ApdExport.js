@@ -12,7 +12,7 @@ const ExportAndSubmit = ({ push: pushRoute }) => (
     <Section isNumbered id="export-and-submit" resource="exportAndSubmit">
       <h3 className="ds-h3">Review and Download</h3>
       <p>
-        On the next page, you`&apos;`ll be able to review and download a copy of
+        On the next page, you will be able to review and download a copy of
         your APD as the first step in submitting a completed APD to CMS.
       </p>
       <Button
