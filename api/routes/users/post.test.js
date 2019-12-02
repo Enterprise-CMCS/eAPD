@@ -10,14 +10,8 @@ tap.test('user POST endpoint', async endpointTest => {
     post: sandbox.stub()
   };
 
-  const User = {
-    get: sandbox.stub(),
-    save: sandbox.stub(),
-    validate: sandbox.stub()
-  };
-  const UserModel = {
-    forge: sandbox.stub()
-  };
+  const createUser = sandbox.stub();
+  const validateUser = sandbox.stub();
 
   const res = {
     status: sandbox.stub(),
@@ -33,13 +27,11 @@ tap.test('user POST endpoint', async endpointTest => {
     res.send.returns(res);
     res.end.returns(res);
 
-    UserModel.forge.returns(User);
-
     done();
   });
 
   endpointTest.test('setup', async setupTest => {
-    postEndpoint(app, UserModel);
+    postEndpoint(app);
 
     setupTest.ok(
       app.post.calledWith('/users', can('add-users'), sinon.match.func),
@@ -51,7 +43,7 @@ tap.test('user POST endpoint', async endpointTest => {
     let handler;
 
     handlerTest.beforeEach(done => {
-      postEndpoint(app, UserModel);
+      postEndpoint(app, { createUser, validateUser });
       handler = app.post.args[0][2];
       done();
     });
@@ -80,7 +72,7 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'rejects if the data model validation fails',
       async invalidTest => {
-        User.validate.rejects(new Error('invalidate-test'));
+        validateUser.rejects(new Error('invalidate-test'));
 
         await handler(
           {
@@ -101,8 +93,8 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error inserting a new user',
       async invalidTest => {
-        User.validate.resolves();
-        User.save.rejects();
+        validateUser.resolves();
+        createUser.rejects();
 
         await handler(
           {
@@ -120,14 +112,19 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'inserts a new user and returns a success for a valid, new user',
       async validTest => {
-        User.validate.resolves();
-        User.save.resolves();
+        validateUser.resolves();
+        createUser.resolves([1]);
 
         await handler(
           {
             body: {
               email: 'all-permissions-and-state',
+              name: 'their new name',
               password: 'password',
+              phone: 'phone number',
+              position: 'position',
+              role: 'auth role',
+              state: 'state id',
               junk: 'thrown away'
             }
           },
@@ -135,45 +132,16 @@ tap.test('user POST endpoint', async endpointTest => {
         );
 
         validTest.ok(
-          UserModel.forge.calledWith({
+          createUser.calledWith({
+            auth_role: 'auth role',
             email: 'all-permissions-and-state',
-            password: 'password'
-          }),
-          'correct model is forged'
-        );
-        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
-        validTest.ok(res.send.notCalled, 'does not send a message');
-        validTest.ok(res.end.called, 'response is terminated');
-      }
-    );
-
-    handlerTest.test(
-      'inserts a new user and returns a success for a valid, new user with name and state',
-      async validTest => {
-        User.validate.resolves();
-        User.save.resolves();
-
-        await handler(
-          {
-            body: {
-              email: 'all-permissions-and-state',
-              password: 'password',
-              name: 'bob',
-              state: 'mo',
-              junk: 'thrown away'
-            }
-          },
-          res
-        );
-
-        validTest.ok(
-          UserModel.forge.calledWith({
-            email: 'all-permissions-and-state',
+            name: 'their new name',
             password: 'password',
-            name: 'bob',
-            state_id: 'mo'
+            phone: 'phone number',
+            position: 'position',
+            state_id: 'state id'
           }),
-          'correct model is forged'
+          'user is created with only the accepted fields'
         );
         validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
         validTest.ok(res.send.notCalled, 'does not send a message');

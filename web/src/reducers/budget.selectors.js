@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { selectAllActivities } from './activities.selectors';
 import { ACTIVITY_FUNDING_SOURCES, stateDateRangeToDisplay } from '../util';
 
-const selectBudget = ({ budget }) => budget;
+export const selectBudget = ({ budget }) => budget;
 
 export const selectBudgetActivitiesByFundingSource = createSelector(
   [selectBudget],

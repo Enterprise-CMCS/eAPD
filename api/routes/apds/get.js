@@ -1,24 +1,25 @@
 const logger = require('../../logger')('apds route get');
-const { raw: knex } = require('../../db');
+const { getAllAPDsByState: gas, getAPDByIDAndState: ga } = require('../../db');
 const { can } = require('../../middleware');
 
-module.exports = (app, { db = knex } = {}) => {
+module.exports = (
+  app,
+  { getAllAPDsByState = gas, getAPDByIDAndState = ga } = {}
+) => {
   logger.silly('setting up GET /apds route');
 
   app.get('/apds', can('view-document'), async (req, res) => {
     logger.silly(req, 'handling GET /apds');
 
     try {
-      const stateId = req.user.state;
+      const stateId = req.user.state.id;
 
       if (!stateId) {
         logger.verbose('user does not have an associated state');
         return res.status(401).end();
       }
 
-      const apds = (await db('apds')
-        .where({ state_id: stateId })
-        .select(['document', 'id', 'status', 'updated_at'])).map(
+      const apds = (await getAllAPDsByState(stateId)).map(
         // eslint-disable-next-line camelcase
         ({ document: { name, years }, id, status, updated_at }) => ({
           id,
@@ -42,16 +43,14 @@ module.exports = (app, { db = knex } = {}) => {
     logger.silly(req, 'handling GET /apds/:id');
 
     try {
-      const stateId = req.user.state;
+      const stateId = req.user.state.id;
 
       if (!stateId) {
         logger.verbose('user does not have an associated state');
         return res.status(401).end();
       }
 
-      const apdFromDB = await db('apds')
-        .where({ id: req.params.id, state_id: stateId })
-        .first('document', 'id', 'state_id', 'status', 'updated_at');
+      const apdFromDB = await getAPDByIDAndState(req.params.id, stateId);
 
       if (apdFromDB) {
         const apd = {

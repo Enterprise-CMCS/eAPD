@@ -58,8 +58,6 @@ then run `docker-compose up`. This will do several things:
    hook it up to the database
 3. create a container for the web application, download all of its
    dependencies, and build it
-4. create a container for the component
-   [Storybook](https://github.com/storybooks/storybook)
 
 This could take a few minutes. Once it's finished, everything is installed,
 configured, and running. However, the database will still be empty, so that
@@ -79,9 +77,6 @@ You should now be able to open the app at
 `em@il.com` and password `password` to view a state account, complete with
 a filled-in APD. There is also an admin account with username `admin` and
 password `password`.
-
-You can also view the component Storybook at
-[http://localhost:8082](http://localhost:8082)
 
 See the [testing documentation](docs/testing.md) for information about running tests.
 

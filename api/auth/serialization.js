@@ -1,5 +1,5 @@
 const logger = require('../logger')('user serialization');
-const defaultUserModel = require('../db').models.user;
+const { getUserByID: gu } = require('../db');
 
 const { addUserSession, getUserIDFromSession } = require('./sessionStore');
 
@@ -22,8 +22,8 @@ module.exports.deserializeUser = async (
   sessionID,
   done,
   {
-    sessionStore: { getUserID = getUserIDFromSession } = {},
-    userModel = defaultUserModel
+    getUserByID = gu,
+    sessionStore: { getUserID = getUserIDFromSession } = {}
   } = {}
 ) => {
   try {
@@ -31,22 +31,11 @@ module.exports.deserializeUser = async (
 
     const userID = await getUserID(sessionID);
     if (userID) {
-      const user = await userModel
-        .where({ id: userID })
-        .fetch({ withRelated: ['state'] });
+      const user = await getUserByID(userID);
+
       if (user) {
         logger.silly(`successfully deserialized the user`);
-        done(null, {
-          username: user.get('email'),
-          id: user.get('id'),
-          name: user.get('name'),
-          phone: user.get('phone'),
-          position: user.get('position'),
-          role: user.get('auth_role'),
-          state: user.get('state_id'),
-          activities: await user.activities(),
-          model: user
-        });
+        done(null, user);
       } else {
         logger.verbose(`could not deserialize user`, userID);
         done(null, null);

@@ -25,7 +25,9 @@ describe('users endpoint | GET /users', () => {
     });
 
     expect(response.statusCode).toEqual(200);
-    expect(body).toMatchSnapshot();
+    expect(
+      body.sort(({ id: a }, { id: b }) => (a > b ? 1 : -1))
+    ).toMatchSnapshot();
   });
 });
 

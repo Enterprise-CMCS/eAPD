@@ -28,6 +28,7 @@ const IncentivePayments = ({
   setEHPayment,
   setEPPayment,
   totals,
+  isViewOnly,
   years
 }) => {
   const updateEHPayment = (year, quarter) => ({ target: { value } }) => {
@@ -79,16 +80,20 @@ const IncentivePayments = ({
                 <th scope="row">EH Payments</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <td key={q}>
-                      <DollarField
-                        className="budget-table--input-holder"
-                        fieldClassName="budget-table--input__number"
-                        label={`ehAmt payments for ${year}, quarter ${q}`}
-                        labelClassName="sr-only"
-                        name={`ehAmt-payments-${year}-q${q}`}
-                        value={data.ehAmt[year][q] || ''}
-                        onChange={updateEHPayment(year, q)}
-                      />
+                    <td key={q} className="budget-table--number">
+                      {isViewOnly ? (
+                        <Dollars long>{data.ehAmt[year][q] || ''}</Dollars>
+                      ) : (
+                        <DollarField
+                          className="budget-table--input-holder"
+                          fieldClassName="budget-table--input__number"
+                          label={`ehAmt payments for ${year}, quarter ${q}`}
+                          labelClassName="sr-only"
+                          name={`ehAmt-payments-${year}-q${q}`}
+                          value={data.ehAmt[year][q] || ''}
+                          onChange={updateEHPayment(year, q)}
+                        />
+                      )}
                     </td>
                   ))}
                   <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
@@ -101,16 +106,20 @@ const IncentivePayments = ({
                 <th scope="row">EH Count (optional)</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <td key={q}>
-                      <NumberField
-                        className="budget-table--input-holder"
-                        fieldClassName="budget-table--input__number"
-                        label={`ehCt payments for ${year}, quarter ${q}`}
-                        labelClassName="sr-only"
-                        name={`ehCt-payments-${year}-q${q}`}
-                        value={data.ehCt[year][q] || ''}
-                        onChange={updateEHCount(year, q)}
-                      />
+                    <td key={q} className="budget-table--number">
+                      {isViewOnly ? (
+                        data.ehCt[year][q] || 0
+                      ) : (
+                        <NumberField
+                          className="budget-table--input-holder"
+                          fieldClassName="budget-table--input__number"
+                          label={`ehCt payments for ${year}, quarter ${q}`}
+                          labelClassName="sr-only"
+                          name={`ehCt-payments-${year}-q${q}`}
+                          value={data.ehCt[year][q] || ''}
+                          onChange={updateEHCount(year, q)}
+                        />
+                      )}
                     </td>
                   ))}
                   <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
@@ -123,16 +132,20 @@ const IncentivePayments = ({
                 <th scope="row">EP Payments</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <td key={q}>
-                      <DollarField
-                        className="budget-table--input-holder"
-                        fieldClassName="budget-table--input__number"
-                        label={`epAmt payments for ${year}, quarter ${q}`}
-                        labelClassName="sr-only"
-                        name={`epAmt-payments-${year}-q${q}`}
-                        value={data.epAmt[year][q] || ''}
-                        onChange={updateEPPayment(year, q)}
-                      />
+                    <td key={q} className="budget-table--number">
+                      {isViewOnly ? (
+                        <Dollars long>{data.epAmt[year][q] || ''}</Dollars>
+                      ) : (
+                        <DollarField
+                          className="budget-table--input-holder"
+                          fieldClassName="budget-table--input__number"
+                          label={`epAmt payments for ${year}, quarter ${q}`}
+                          labelClassName="sr-only"
+                          name={`epAmt-payments-${year}-q${q}`}
+                          value={data.epAmt[year][q] || ''}
+                          onChange={updateEPPayment(year, q)}
+                        />
+                      )}
                     </td>
                   ))}
                   <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
@@ -145,16 +158,20 @@ const IncentivePayments = ({
                 <th scope="row">EP Count (optional)</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <td key={q}>
-                      <NumberField
-                        className="budget-table--input-holder"
-                        fieldClassName="budget-table--input__number"
-                        label={`epCt payments for ${year}, quarter ${q}`}
-                        labelClassName="sr-only"
-                        name={`epCt-payments-${year}-q${q}`}
-                        value={data.epCt[year][q] || ''}
-                        onChange={updateEPCount(year, q)}
-                      />
+                    <td key={q} className="budget-table--number">
+                      {isViewOnly ? (
+                        data.epCt[year][q] || 0
+                      ) : (
+                        <NumberField
+                          className="budget-table--input-holder"
+                          fieldClassName="budget-table--input__number"
+                          label={`epCt payments for ${year}, quarter ${q}`}
+                          labelClassName="sr-only"
+                          name={`epCt-payments-${year}-q${q}`}
+                          value={data.epCt[year][q] || ''}
+                          onChange={updateEPCount(year, q)}
+                        />
+                      )}
                     </td>
                   ))}
                   <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
@@ -177,8 +194,11 @@ IncentivePayments.propTypes = {
   setEHPayment: PropTypes.func.isRequired,
   setEPPayment: PropTypes.func.isRequired,
   totals: PropTypes.object.isRequired,
+  isViewOnly: PropTypes.bool,
   years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
+
+IncentivePayments.defaultProps = { isViewOnly: false };
 
 const mapStateToProps = state => ({
   data: selectIncentivePayments(state),
