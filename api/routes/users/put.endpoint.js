@@ -58,7 +58,9 @@ describe('users endpoint | PUT /users/:userID', () => {
       });
 
       it('...with an existing email address', async () => {
-        const { response, body } = await put(2001, { email: 'no-permissions' });
+        const { response, body } = await put(2001, {
+          username: 'no-permissions'
+        });
 
         expect(response.statusCode).toEqual(400);
         expect(body).toMatchSnapshot();
@@ -87,7 +89,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           response: { statusCode },
           body
         } = await put(2001, {
-          email: 'test email',
+          username: 'test email',
           junk: 'gets ignored',
           name: 'test name',
           password: '$Q^ki$^jw^KW%Kw46rtJSFGJ',
@@ -126,7 +128,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           response: { statusCode },
           body
         } = await put(2000, {
-          email: 'own email',
+          username: 'own email',
           name: 'test name',
           phone: '123',
           position: 'test position',

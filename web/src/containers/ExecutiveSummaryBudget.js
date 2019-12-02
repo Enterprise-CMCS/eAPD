@@ -10,20 +10,21 @@ const thId = (program, share) =>
 const tdHdrs = (program, share) =>
   `program-budget-table-${program} program-budget-table-${program}-${share}`;
 
-const DollarCell = ({ headers, value }) => (
+const DollarCell = ({ headers, long, value }) => (
   <td className="budget-table--number" headers={headers}>
-    <Dollars>{value}</Dollars>
+    <Dollars long={long}>{value}</Dollars>
   </td>
 );
 
 DollarCell.propTypes = {
   headers: PropTypes.string,
+  long: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
 
-DollarCell.defaultProps = { headers: '' };
+DollarCell.defaultProps = { headers: '', long: false };
 
-const ExecutiveSummaryBudget = ({ budget }) => {
+const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
   const { hit, hie, hitAndHie, mmisByFFP, years } = budget;
 
   if (!years.length) return null;
@@ -104,30 +105,37 @@ const ExecutiveSummaryBudget = ({ budget }) => {
               </th>
               <DollarCell
                 value={hit.combined[year].federal}
+                long={isViewOnly}
                 headers={tdHdrs('hit', 'fed')}
               />
               <DollarCell
                 value={hit.combined[year].state}
+                long={isViewOnly}
                 headers={tdHdrs('hit', 'state')}
               />
               <DollarCell
                 value={hie.combined[year].federal}
+                long={isViewOnly}
                 headers={tdHdrs('hie', 'fed')}
               />
               <DollarCell
                 value={hie.combined[year].state}
+                long={isViewOnly}
                 headers={tdHdrs('hie', 'state')}
               />
               <DollarCell
                 value={hitAndHie.combined[year].federal}
+                long={isViewOnly}
                 headers={tdHdrs('combined', 'fed')}
               />
               <DollarCell
                 value={hitAndHie.combined[year].state}
+                long={isViewOnly}
                 headers={tdHdrs('combined', 'state')}
               />
               <DollarCell
                 value={hitAndHie.combined[year].medicaid}
+                long={isViewOnly}
                 headers={tdHdrs('combined', 'total')}
               />
             </tr>
@@ -216,38 +224,47 @@ const ExecutiveSummaryBudget = ({ budget }) => {
               </th>
               <DollarCell
                 value={mmisByFFP['90-10'][year].federal}
+                long={isViewOnly}
                 headers={tdHdrs('mmis90', 'fed')}
               />
               <DollarCell
                 value={mmisByFFP['90-10'][year].state}
+                long={isViewOnly}
                 headers={tdHdrs('mmis90', 'state')}
               />
               <DollarCell
                 value={mmisByFFP['75-25'][year].federal}
+                long={isViewOnly}
                 headers={tdHdrs('mmis75', 'fed')}
               />
               <DollarCell
                 value={mmisByFFP['75-25'][year].state}
+                long={isViewOnly}
                 headers={tdHdrs('mmis75', 'state')}
               />
               <DollarCell
                 value={mmisByFFP['50-50'][year].federal}
+                long={isViewOnly}
                 headers={tdHdrs('mmis50', 'fed')}
               />
               <DollarCell
                 value={mmisByFFP['50-50'][year].state}
+                long={isViewOnly}
                 headers={tdHdrs('mmis50', 'state')}
               />
               <DollarCell
                 value={mmisByFFP.combined[year].federal}
+                long={isViewOnly}
                 headers={tdHdrs('mmisTotal', 'fed')}
               />
               <DollarCell
                 value={mmisByFFP.combined[year].state}
+                long={isViewOnly}
                 headers={tdHdrs('mmisTotal', 'state')}
               />
               <DollarCell
                 value={mmisByFFP.combined[year].medicaid}
+                long={isViewOnly}
                 headers={tdHdrs('mmisTotal', 'total')}
               />
             </tr>
@@ -259,8 +276,11 @@ const ExecutiveSummaryBudget = ({ budget }) => {
 };
 
 ExecutiveSummaryBudget.propTypes = {
-  budget: PropTypes.object.isRequired
+  budget: PropTypes.object.isRequired,
+  isViewOnly: PropTypes.bool
 };
+
+ExecutiveSummaryBudget.defaultProps = { isViewOnly: false };
 
 const mapStateToProps = ({ budget }) => ({ budget });
 

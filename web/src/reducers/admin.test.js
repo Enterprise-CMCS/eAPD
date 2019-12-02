@@ -57,11 +57,11 @@ describe('admin reducer', () => {
 
   describe('selectors', () => {
     const users = [
-      { name: 'Barbara', email: 'barbara@yahoo.com' },
-      { name: 'Xander', email: 'xander@sunnydale.org' },
-      { name: null, email: 'george@weasleygags.co.uk' },
-      { name: 'Elizabeth', email: 'queen@uk' },
-      { name: null, email: 'devilbaby@hotmail.com' }
+      { name: 'Barbara', username: 'barbara@yahoo.com' },
+      { name: 'Xander', username: 'xander@sunnydale.org' },
+      { name: null, username: 'george@weasleygags.co.uk' },
+      { name: 'Elizabeth', username: 'queen@uk' },
+      { name: null, username: 'devilbaby@hotmail.com' }
     ];
 
     it('selectUsers selector returns users', () => {
@@ -70,11 +70,11 @@ describe('admin reducer', () => {
 
     it('selectUsersSorted returns users in a sorted order', () => {
       expect(selectUsersSorted({ admin: { users } })).toEqual([
-        { name: 'Barbara', email: 'barbara@yahoo.com' },
-        { name: null, email: 'devilbaby@hotmail.com' },
-        { name: 'Elizabeth', email: 'queen@uk' },
-        { name: null, email: 'george@weasleygags.co.uk' },
-        { name: 'Xander', email: 'xander@sunnydale.org' }
+        { name: 'Barbara', username: 'barbara@yahoo.com' },
+        { name: null, username: 'devilbaby@hotmail.com' },
+        { name: 'Elizabeth', username: 'queen@uk' },
+        { name: null, username: 'george@weasleygags.co.uk' },
+        { name: 'Xander', username: 'xander@sunnydale.org' }
       ]);
     });
   });
