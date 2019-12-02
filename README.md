@@ -80,10 +80,6 @@ password `password`.
 
 See the [testing documentation](docs/testing.md) for information about running tests.
 
-Note that our Docker configuration uses named images and tags, which can create
-orphaned images. See the [Docker configuration documentation](docs/docker.md)
-for more information.
-
 ### manually
 
 From your command line, switch to the directory where you put the code and
