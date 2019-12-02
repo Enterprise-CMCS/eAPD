@@ -15,7 +15,7 @@ exports[`apd export component renders correctly 1`] = `
       Review and Download
     </h3>
     <p>
-      On the next page, you\`'\`ll be able to review and download a copy of your APD as the first step in submitting a completed APD to CMS.
+      On the next page, you will be able to review and download a copy of your APD as the first step in submitting a completed APD to CMS.
     </p>
     <Button
       className="ds-u-margin-top--2"
