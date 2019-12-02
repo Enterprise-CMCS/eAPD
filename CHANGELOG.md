@@ -4,6 +4,7 @@ Anticipated release: December 2, 2019
 
 #### 🚀 New features
 
+- Added a print preview page ([#1921])
 - Display a loading screen while waiting for the APD to load so users can tell the app is doing something. ([#1368])
 
 #### 🐛 Bugs fixed
@@ -187,5 +188,11 @@ Pilot release to select state partners
 [#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
 [#1882]: https://github.com/18F/cms-hitech-apd/issues/1882
 [#1904]: https://github.com/18F/cms-hitech-apd/pull/1904
+
+<<<<<<< HEAD
+[#1921]: https://github.com/18F/cms-hitech-apd/pull/1921
+=======
 [#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
+
+> > > > > > > master
