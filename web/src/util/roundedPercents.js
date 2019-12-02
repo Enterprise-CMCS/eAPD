@@ -39,7 +39,12 @@ const roundedPercents = (number = 0, percents = [1]) => {
     // all of the difference is accounted for.
     const indicesByLargestRemainder = [...Array(realNumbers.length)]
       .map((_, i) => i)
-      .sort((a, b) => (realRemainders[a] > realRemainders[b] ? -1 : 1));
+      .sort((a, b) => {
+        if (realRemainders[a] === realRemainders[b]) {
+          return 0;
+        }
+        return realRemainders[a] > realRemainders[b] ? -1 : 1;
+      });
 
     for (let i = 0; i < difference; i += 1) {
       roundedNumbers[indicesByLargestRemainder[i]] += 1;
