@@ -241,22 +241,9 @@ tap.test('authentication setup', async authTest => {
     });
   });
 
-  authTest.test('POST login endpoint behaves as expected', async postTest => {
-    const deserializeUser = sinon.stub();
-
-    authSetup(app, { deserializeUser });
+  authTest.test('POST login endpoint behaves as expected', async test => {
+    authSetup(app);
     const post = app.post.args.find(a => a[0] === '/auth/login')[2];
-
-    const state = sinon.stub();
-    state.withArgs('id').returns('state id');
-    state.withArgs('name').returns('state name');
-
-    deserializeUser.yields(null, {
-      info: 'deserialized user from session',
-      model: {
-        related: sinon.stub().returns({ get: state })
-      }
-    });
 
     const req = {
       session: {
@@ -266,23 +253,16 @@ tap.test('authentication setup', async authTest => {
       },
       user: {
         im: 'weasel',
-        ir: 'baboon',
-        model: {
-          related: sinon
-            .stub()
-            .withArgs('state')
-            .returns({ get: state })
-        }
+        ir: 'baboon'
       }
     };
 
     await post(req, res);
 
-    postTest.ok(
+    test.ok(
       res.send.calledWith({
-        info: 'deserialized user from session',
-        model: undefined,
-        state: { id: 'state id', name: 'state name' }
+        im: 'weasel',
+        ir: 'baboon'
       }),
       'HTTP body is set to the user ID'
     );

@@ -10,22 +10,13 @@ tap.test('me PUT endpoint', async endpointTest => {
     put: sandbox.stub()
   };
 
+  const getUserByID = sandbox.stub();
+  const updateUser = sandbox.stub();
+  const validateUser = sandbox.stub();
+
   const req = {
-    session: { passport: { user: 'session id' } },
     user: {
-      id: 'one',
-      model: {
-        get: sandbox.stub(),
-        set: sandbox.stub(),
-        save: sandbox.stub(),
-        validate: sandbox.stub(),
-        related: sinon
-          .stub()
-          .withArgs('state')
-          .returns({
-            get: sinon.stub().returns('state info')
-          })
-      }
+      id: 'one'
     }
   };
 
@@ -56,11 +47,10 @@ tap.test('me PUT endpoint', async endpointTest => {
   });
 
   endpointTest.test('update self handler', async tests => {
-    const deserialize = sandbox.stub();
     let handler;
 
     tests.beforeEach(async () => {
-      endpoint(app, { deserialize });
+      endpoint(app, { getUserByID, updateUser, validateUser });
       handler = app.put.args.filter(arg => arg[0] === '/me')[0][2];
     });
 
@@ -84,13 +74,9 @@ tap.test('me PUT endpoint', async endpointTest => {
 
         await handler(req, res);
 
+        test.ok(updateUser.notCalled, 'user is not updated');
         test.ok(
-          res.send.calledWith(
-            sinon.match({
-              id: 'one',
-              state: { id: 'state info', name: 'state info' }
-            })
-          ),
+          res.send.calledWith({ id: 'one' }),
           'sends back the user object'
         );
       }
@@ -107,35 +93,11 @@ tap.test('me PUT endpoint', async endpointTest => {
         };
       });
 
-      const fieldsAreUpdated = test => {
-        test.notOk(
-          req.user.model.set.calledWith('email'),
-          'email is NOT updated'
-        );
-        test.ok(
-          req.user.model.set.calledWith('name', 'new name'),
-          'name is updated'
-        );
-        test.ok(
-          req.user.model.set.calledWith('password', 'new password'),
-          'password is updated'
-        );
-        test.ok(
-          req.user.model.set.calledWith('phone', 'new phone'),
-          'phone is updated'
-        );
-        test.ok(
-          req.user.model.set.calledWith('position', 'new position'),
-          'position is updated'
-        );
-      };
-
       changesTests.test('validation fails', async test => {
-        req.user.model.validate.rejects(new Error('validation'));
+        validateUser.rejects(new Error('validation'));
         await handler(req, res);
 
-        fieldsAreUpdated(test);
-
+        test.ok(updateUser.notCalled, 'user is not updated');
         test.ok(res.status.calledWith(400), 'HTTP status 400 set');
         test.ok(
           res.send.calledWith({ error: 'edit-self.validation' }),
@@ -144,31 +106,24 @@ tap.test('me PUT endpoint', async endpointTest => {
         test.ok(res.end.calledOnce, 'response is terminated');
       });
 
-      changesTests.test('deserialization fails', async test => {
-        deserialize.yields('error', null);
-
-        await handler(req, res);
-
-        fieldsAreUpdated(test);
-
-        test.ok(res.status.calledWith(500), 'HTTP status 500 set');
-        test.ok(res.send.notCalled, 'no content is sent');
-        test.ok(res.end.calledOnce, 'response is terminated');
-      });
-
       changesTests.test('everything is happy', async test => {
-        deserialize.yields(null, req.user);
+        validateUser.resolves();
+        getUserByID.resolves('updated user object');
 
         await handler(req, res);
 
-        fieldsAreUpdated(test);
+        updateUser.calledWith(
+          'one',
+          {
+            name: 'new name',
+            password: 'new password',
+            phone: 'new phone',
+            position: 'new position'
+          },
+          'updates the updateable fields, stripping out email'
+        );
         test.ok(
-          res.send.calledWith(
-            sinon.match({
-              id: 'one',
-              state: { id: 'state info', name: 'state info' }
-            })
-          ),
+          res.send.calledWith('updated user object'),
           'sends back the user object'
         );
       });

@@ -27,6 +27,9 @@ import {
   faTimesCircle
 } from '@fortawesome/free-regular-svg-icons';
 
+const CheckCircle = ({ ...props }) => (
+  <FontAwesomeIcon icon={faCheckCircle} {...props} />
+);
 const File = ({ ...props }) => <FontAwesomeIcon icon={faFileAlt} {...props} />;
 const FileDownload = () => <FontAwesomeIcon icon={faFileDownload} />;
 const LockIcon = () => <FontAwesomeIcon icon={faLock} />;
@@ -49,6 +52,7 @@ export {
   faSpinner,
   faTimesCircle,
   faUnlock,
+  CheckCircle,
   File,
   FileDownload,
   LockIcon,
