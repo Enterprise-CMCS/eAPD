@@ -64,6 +64,7 @@ exports[`incentive payments component renders correctly 1`] = `
           EH Payments
         </th>
         <td
+          className="budget-table--number"
           key="1"
         >
           <DollarField
@@ -78,6 +79,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="2"
         >
           <DollarField
@@ -92,6 +94,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="3"
         >
           <DollarField
@@ -106,6 +109,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="4"
         >
           <DollarField
@@ -136,6 +140,7 @@ exports[`incentive payments component renders correctly 1`] = `
           EH Count (optional)
         </th>
         <td
+          className="budget-table--number"
           key="1"
         >
           <NumberField
@@ -150,6 +155,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="2"
         >
           <NumberField
@@ -164,6 +170,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="3"
         >
           <NumberField
@@ -178,6 +185,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="4"
         >
           <NumberField
@@ -204,6 +212,7 @@ exports[`incentive payments component renders correctly 1`] = `
           EP Payments
         </th>
         <td
+          className="budget-table--number"
           key="1"
         >
           <DollarField
@@ -218,6 +227,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="2"
         >
           <DollarField
@@ -232,6 +242,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="3"
         >
           <DollarField
@@ -246,6 +257,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="4"
         >
           <DollarField
@@ -276,6 +288,7 @@ exports[`incentive payments component renders correctly 1`] = `
           EP Count (optional)
         </th>
         <td
+          className="budget-table--number"
           key="1"
         >
           <NumberField
@@ -290,6 +303,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="2"
         >
           <NumberField
@@ -304,6 +318,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="3"
         >
           <NumberField
@@ -318,6 +333,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="4"
         >
           <NumberField
@@ -401,6 +417,7 @@ exports[`incentive payments component renders correctly 1`] = `
           EH Payments
         </th>
         <td
+          className="budget-table--number"
           key="1"
         >
           <DollarField
@@ -415,6 +432,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="2"
         >
           <DollarField
@@ -429,6 +447,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="3"
         >
           <DollarField
@@ -443,6 +462,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="4"
         >
           <DollarField
@@ -473,6 +493,7 @@ exports[`incentive payments component renders correctly 1`] = `
           EH Count (optional)
         </th>
         <td
+          className="budget-table--number"
           key="1"
         >
           <NumberField
@@ -487,6 +508,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="2"
         >
           <NumberField
@@ -501,6 +523,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="3"
         >
           <NumberField
@@ -515,6 +538,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="4"
         >
           <NumberField
@@ -541,6 +565,7 @@ exports[`incentive payments component renders correctly 1`] = `
           EP Payments
         </th>
         <td
+          className="budget-table--number"
           key="1"
         >
           <DollarField
@@ -555,6 +580,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="2"
         >
           <DollarField
@@ -569,6 +595,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="3"
         >
           <DollarField
@@ -583,6 +610,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="4"
         >
           <DollarField
@@ -613,6 +641,7 @@ exports[`incentive payments component renders correctly 1`] = `
           EP Count (optional)
         </th>
         <td
+          className="budget-table--number"
           key="1"
         >
           <NumberField
@@ -627,6 +656,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="2"
         >
           <NumberField
@@ -641,6 +671,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="3"
         >
           <NumberField
@@ -655,6 +686,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
+          className="budget-table--number"
           key="4"
         >
           <NumberField

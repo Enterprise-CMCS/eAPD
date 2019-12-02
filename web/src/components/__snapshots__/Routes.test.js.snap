@@ -30,6 +30,20 @@ exports[`Routes component renders correctly 1`] = `
     key="/apd"
     path="/apd"
   />
+  <Connect(PrivateRoute)
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(ApdViewOnly)",
+        "type": [Function],
+      }
+    }
+    exact={true}
+    key="/print"
+    path="/print"
+  />
   <Connect(AdminRoute)
     component={
       Object {

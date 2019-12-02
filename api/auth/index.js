@@ -69,27 +69,7 @@ module.exports.setup = function setup(
 
   // Add a local authentication endpoint
   logger.silly('setting up a local login handler');
-  app.post(
-    '/auth/login',
-    passport.authenticate('local'),
-    (req, res) =>
-      new Promise(resolve => {
-        deserializeUser(req.session.passport.user, (err, user) => {
-          if (err) {
-            res.status(500).end();
-            return resolve();
-          }
-
-          res.send({
-            ...user,
-            state: {
-              id: user.model.related('state').get('id'),
-              name: user.model.related('state').get('name')
-            },
-            model: undefined
-          });
-          return resolve();
-        });
-      })
-  );
+  app.post('/auth/login', passport.authenticate('local'), (req, res) => {
+    res.send(req.user);
+  });
 };

@@ -24,6 +24,7 @@ const CostAllocateFFPQuarterly = ({
   activityIndex,
   aKey,
   announce,
+  isViewOnly,
   quarterlyFFP,
   setContractorFFP,
   setInHouseFFP,
@@ -82,7 +83,10 @@ const CostAllocateFFPQuarterly = ({
           </th>
           {QUARTERS.map(q => (
             <td key={q}>
-              <PercentField
+              {isViewOnly ?
+                <p className="budget-table--number">{quarterlyFFP[year][q].state.percent * 100} %</p>
+              :
+                <PercentField
                 className="budget-table--input-holder"
                 fieldClassName="budget-table--input__number"
                 label={`federal share for ffy ${year}, quarter ${q}, state`}
@@ -91,7 +95,8 @@ const CostAllocateFFPQuarterly = ({
                 onChange={setInHouse(q)}
                 value={quarterlyFFP[year][q].state.percent * 100}
                 aria-controls={`ffp-${activityIndex}-${year}-${q}-state-dollar-equivalent`}
-              />
+                />
+              }
             </td>
           ))}
           <td className="budget-table--number budget-table--subtotal">
@@ -117,16 +122,20 @@ const CostAllocateFFPQuarterly = ({
           </th>
           {QUARTERS.map(q => (
             <td key={q}>
-              <PercentField
-                className="budget-table--input-holder"
-                fieldClassName="budget-table--input__number"
-                label={`federal share for ffy ${year}, quarter ${q}, contractors`}
-                labelClassName="sr-only"
-                name={`ffp-${activityIndex}-${year}-${q}-contractors`}
-                onChange={setContractor(q)}
-                value={quarterlyFFP[year][q].contractors.percent * 100}
-                aria-controls={`ffp-${activityIndex}-${year}-${q}-contractors-dollar-equivalent`}
-              />
+              {isViewOnly ?
+                <p className="budget-table--number">{quarterlyFFP[year][q].contractors.percent * 100} %</p>
+              :
+                <PercentField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  label={`federal share for ffy ${year}, quarter ${q}, contractors`}
+                  labelClassName="sr-only"
+                  name={`ffp-${activityIndex}-${year}-${q}-contractors`}
+                  onChange={setContractor(q)}
+                  value={quarterlyFFP[year][q].contractors.percent * 100}
+                  aria-controls={`ffp-${activityIndex}-${year}-${q}-contractors-dollar-equivalent`}
+                />
+              }
             </td>
           ))}
           <td className="budget-table--number budget-table--subtotal">
@@ -172,6 +181,7 @@ CostAllocateFFPQuarterly.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   aKey: PropTypes.string.isRequired,
   announce: PropTypes.func.isRequired,
+  isViewOnly: PropTypes.bool.isRequired,
   quarterlyFFP: PropTypes.object.isRequired,
   setContractorFFP: PropTypes.func.isRequired,
   setInHouseFFP: PropTypes.func.isRequired,

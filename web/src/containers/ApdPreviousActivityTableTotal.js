@@ -6,7 +6,7 @@ import Dollars from '../components/Dollars';
 import { TABLE_HEADERS } from '../constants';
 import { selectPreviousActivityExpensesTotals } from '../reducers/apd.selectors';
 
-const ApdPreviousActivityTableMMIS = ({ totals }) => {
+const ApdPreviousActivityTableMMIS = ({ totals, isViewOnly }) => {
   const years = Object.keys(totals);
 
   return (
@@ -39,14 +39,14 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
                 headers={`prev_act_total_row_${year} prev_act_total_approved`}
                 className="budget-table--number"
               >
-                <Dollars>{expenses.approved}</Dollars>
+                <Dollars long={isViewOnly}>{expenses.approved}</Dollars>
               </td>
 
               <td
                 headers={`prev_act_total_row_${year} prev_act_total_actual`}
                 className="budget-table--number"
               >
-                <Dollars>{expenses.actual}</Dollars>
+                <Dollars long={isViewOnly}>{expenses.actual}</Dollars>
               </td>
             </tr>
           );
@@ -57,7 +57,12 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
 };
 
 ApdPreviousActivityTableMMIS.propTypes = {
+  isViewOnly: PropTypes.bool,
   totals: PropTypes.object.isRequired
+};
+
+ApdPreviousActivityTableMMIS.defaultProps = {
+  isViewOnly: false
 };
 
 const mapStateToProps = state => ({
