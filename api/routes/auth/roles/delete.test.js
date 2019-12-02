@@ -9,10 +9,11 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
   const app = {
     delete: sandbox.stub()
   };
-  const RoleModel = {
-    fetch: sandbox.stub(),
-    where: sandbox.stub()
-  };
+
+  const deleteAuthRole = sandbox.stub();
+  const getAuthRoleByID = sandbox.stub();
+  const getAuthRoleByName = sandbox.stub();
+
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -29,7 +30,7 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    deleteEndpoint(app, RoleModel);
+    deleteEndpoint(app);
 
     setupTest.ok(
       app.delete.calledWith(
@@ -44,7 +45,11 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
   endpointTest.test('delete role handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      deleteEndpoint(app, RoleModel);
+      deleteEndpoint(app, {
+        deleteAuthRole,
+        getAuthRoleByID,
+        getAuthRoleByName
+      });
       handler = app.delete.args.find(args => args[0] === '/auth/roles/:id')[2];
       done();
     });
@@ -53,8 +58,7 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
       'sends a not found error if requesting to delete a role that does not exist',
       async notFoundTest => {
         const req = { user: { role: 'user-role' }, params: { id: 1 } };
-        RoleModel.where.withArgs({ id: 1 }).returns({ fetch: RoleModel.fetch });
-        RoleModel.fetch.resolves(null);
+        getAuthRoleByID.resolves(null);
 
         await handler(req, res);
 
@@ -68,15 +72,9 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
       'sends an unauthorized error if requesting to delete a role that the user belongs to',
       async unauthorizedTest => {
         const req = { user: { role: 'user-role' }, params: { id: 1 } };
-        const get = sinon
-          .stub()
-          .withArgs('id')
-          .returns('role-id');
-        RoleModel.where.withArgs({ id: 1 }).returns({ fetch: RoleModel.fetch });
-        RoleModel.where
-          .withArgs({ name: 'user-role' })
-          .returns({ fetch: RoleModel.fetch });
-        RoleModel.fetch.resolves({ get });
+
+        getAuthRoleByID.resolves({ id: 'role id' });
+        getAuthRoleByName.resolves({ id: 'role id' });
 
         await handler(req, res);
 
@@ -93,29 +91,7 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
       'sends a server error if anything goes wrong',
       async saveTest => {
         const req = { user: { role: 'user-role' }, params: { id: 1 } };
-        const get = sinon
-          .stub()
-          .withArgs('id')
-          .returns('role-id-2');
-        const fetch = sinon.stub();
-        const destroy = sinon.stub().resolves();
-        const save = sinon.stub().rejects();
-        const detach = sinon.stub();
-
-        RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
-        RoleModel.where
-          .withArgs({ name: 'user-role' })
-          .returns({ fetch: sinon.stub().resolves({ get }) });
-
-        fetch.resolves({
-          save,
-          activities: () => ({ detach }),
-          destroy,
-          get: sinon
-            .stub()
-            .withArgs('id')
-            .returns('another-role-id')
-        });
+        getAuthRoleByID.rejects();
 
         await handler(req, res);
 
@@ -125,43 +101,16 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
 
     handlerTest.test('deletes a role', async saveTest => {
       const req = { user: { role: 'user-role' }, params: { id: 1 } };
-      const get = sinon
-        .stub()
-        .withArgs('id')
-        .returns('role-id-2');
-      const fetch = sinon.stub();
-      const destroy = sinon.stub().resolves();
-      const save = sinon.stub().resolves();
-      const detach = sinon.stub();
 
-      RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
-      RoleModel.where
-        .withArgs({ name: 'user-role' })
-        .returns({ fetch: sinon.stub().resolves({ get }) });
-
-      fetch.resolves({
-        save,
-        activities: () => ({ detach }),
-        destroy,
-        get: sinon
-          .stub()
-          .withArgs('id')
-          .returns('another-role-id')
-      });
+      getAuthRoleByID.resolves({ id: 'delete this one' });
+      getAuthRoleByName.resolves({ id: `user's role` });
+      deleteAuthRole.resolves();
 
       await handler(req, res);
 
       saveTest.ok(
-        detach.calledWithExactly(),
-        'activity associations are removed'
-      );
-      saveTest.ok(
-        save.calledAfter(detach),
-        'model is saved after activities are disassociated'
-      );
-      saveTest.ok(
-        destroy.calledAfter(save),
-        'model is destroyed after saving disassociation'
+        deleteAuthRole.calledWith('delete this one'),
+        'deletes the right role'
       );
       saveTest.ok(res.status.calledWith(204), 'HTTP status set to 204');
       saveTest.ok(res.end.calledOnce, 'response is terminated');

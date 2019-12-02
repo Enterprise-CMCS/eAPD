@@ -2,7 +2,7 @@ const Ajv = require('ajv');
 const moment = require('moment');
 
 const logger = require('../../logger')('apds route post');
-const { raw } = require('../../db');
+const { createAPD: ga, getStateProfile: gs } = require('../../db');
 const { can } = require('../../middleware');
 
 const getNewApd = require('./post.data');
@@ -20,7 +20,7 @@ const validatorFunction = ajv.compile({
   additionalProperties: false
 });
 
-module.exports = (app, { db = raw } = {}) => {
+module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res) => {
     logger.silly(req, 'handling POST /apds route');
@@ -28,14 +28,11 @@ module.exports = (app, { db = raw } = {}) => {
     try {
       const apd = getNewApd();
 
-      apd.name = `${req.user.state.toUpperCase()}-${moment(Date.now()).format(
-        'YYYY-MM-DD'
-      )}-HITECH-APD`;
+      apd.name = `${req.user.state.id.toUpperCase()}-${moment(
+        Date.now()
+      ).format('YYYY-MM-DD')}-HITECH-APD`;
 
-      const stateProfile = await db('states')
-        .select('medicaid_office')
-        .where({ id: req.user.state })
-        .first();
+      const stateProfile = await getStateProfile(req.user.state.id);
 
       if (stateProfile) {
         // Merge the state profile from the states table into the default
@@ -44,12 +41,12 @@ module.exports = (app, { db = raw } = {}) => {
 
         apd.stateProfile.medicaidDirector = {
           ...apd.stateProfile.medicaidDirector,
-          ...stateProfile.medicaid_office.medicaidDirector
+          ...stateProfile.medicaidDirector
         };
 
         apd.stateProfile.medicaidOffice = {
           ...apd.stateProfile.medicaidOffice,
-          ...stateProfile.medicaid_office.medicaidOffice
+          ...stateProfile.medicaidOffice
         };
         // An old version of the model had the director info contained inside the office field, so
         // just in case we're still hitting a really old source, delete the director from the office
@@ -65,17 +62,15 @@ module.exports = (app, { db = raw } = {}) => {
         return res.status(500).end();
       }
 
-      const id = await db('apds')
-        .insert({
-          state_id: req.user.state,
-          status: 'draft',
-          document: apd
-        })
-        .returning('id');
+      const id = await createAPD({
+        state_id: req.user.state.id,
+        status: 'draft',
+        document: apd
+      });
 
       return res.send({
         ...apd,
-        id: id[0],
+        id,
         updated: new Date().toISOString()
       });
     } catch (e) {

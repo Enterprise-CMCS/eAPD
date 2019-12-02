@@ -13,6 +13,7 @@ import { TABLE_HEADERS } from '../constants';
 import { selectPreviousHITHIEActivities } from '../reducers/apd.selectors';
 
 const ApdPreviousActivityTable = ({
+  isViewOnly,
   previousActivityExpenses,
   setActual,
   setApproved
@@ -78,8 +79,14 @@ const ApdPreviousActivityTable = ({
 
               <td
                 headers={`prev_act_hithie_row_${year} prev_act_hithie_total prev_act_hithie_total_approved`}
+                className={isViewOnly ? 'budget-table--number' : ''}
               >
-                <DollarField
+                {isViewOnly ?
+                  <Dollars long>
+                    {previousActivityExpenses[year].totalApproved}
+                  </Dollars>
+                : 
+                  <DollarField
                   className="budget-table--input-holder"
                   fieldClassName="budget-table--input__number"
                   label={`total approved funding for HIT and HIE for FFY ${year}, state plus federal`}
@@ -87,20 +94,27 @@ const ApdPreviousActivityTable = ({
                   name={`hithie-approved-total-${year}`}
                   value={previousActivityExpenses[year].totalApproved}
                   onChange={getApprovedHandler(year)}
-                />
+                  />
+                }
               </td>
 
               <td
                 headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_approved`}
                 className="budget-table--number"
               >
-                <Dollars>{federalApproved}</Dollars>
+                <Dollars long={isViewOnly}>{federalApproved}</Dollars>
               </td>
 
               <td
                 headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_actual`}
+                className={isViewOnly ? 'budget-table--number' : ''}
               >
-                <DollarField
+                {isViewOnly ?
+                  <Dollars long>
+                    {previousActivityExpenses[year].federalActual}
+                  </Dollars>
+                : 
+                  <DollarField
                   className="budget-table--input-holder"
                   fieldClassName="budget-table--input__number"
                   label={`actual federal share for HIT and HIE for FFY ${year}`}
@@ -108,7 +122,8 @@ const ApdPreviousActivityTable = ({
                   name={`hithie-actual-federal-${year}`}
                   value={previousActivityExpenses[year].federalActual}
                   onChange={getActualsHandler(year)}
-                />
+                  />
+                }
               </td>
             </tr>
           );
@@ -119,9 +134,14 @@ const ApdPreviousActivityTable = ({
 };
 
 ApdPreviousActivityTable.propTypes = {
+  isViewOnly: PropTypes.bool,
   previousActivityExpenses: PropTypes.object.isRequired,
   setActual: PropTypes.func.isRequired,
   setApproved: PropTypes.func.isRequired
+};
+
+ApdPreviousActivityTable.defaultProps = {
+  isViewOnly: false
 };
 
 const mapStateToProps = state => ({
