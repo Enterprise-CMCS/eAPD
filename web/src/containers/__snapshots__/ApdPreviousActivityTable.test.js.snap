@@ -79,6 +79,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         FFY 1
       </th>
       <td
+        className=""
         headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
       >
         <DollarField
@@ -103,6 +104,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </Dollars>
       </td>
       <td
+        className=""
         headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
       >
         <DollarField
@@ -127,6 +129,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         FFY 2
       </th>
       <td
+        className=""
         headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
       >
         <DollarField
@@ -151,6 +154,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </Dollars>
       </td>
       <td
+        className=""
         headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
       >
         <DollarField

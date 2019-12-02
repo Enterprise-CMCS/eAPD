@@ -11,6 +11,7 @@ const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
 export const selectApd = (
   id,
+  route,
   { deserialize = fromAPI, global = window, pushRoute = push } = {}
 ) => dispatch => {
   dispatch(ariaAnnounceApdLoading());
@@ -32,7 +33,7 @@ export const selectApd = (
     }
 
     dispatch(updateBudget());
-    dispatch(pushRoute('/apd'));
+    dispatch(pushRoute(route));
     dispatch(ariaAnnounceApdLoaded());
 
     if (global.localStorage) {
