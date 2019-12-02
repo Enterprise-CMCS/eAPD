@@ -19,7 +19,7 @@ describe('admin page > edit account', () => {
       mapStateToProps({
         admin: {
           roles: 'a list of roles',
-          users: [{ email: 'and a list of users' }]
+          users: [{ username: 'and a list of users' }]
         },
         auth: {
           user: 'the current user'
@@ -31,7 +31,7 @@ describe('admin page > edit account', () => {
       currentUser: 'the current user',
       error: 'that error',
       roles: 'a list of roles',
-      users: [{ email: 'and a list of users' }],
+      users: [{ username: 'and a list of users' }],
       working: 'hard, playing likewise'
     });
   });
@@ -48,12 +48,12 @@ describe('admin page > edit account', () => {
             {
               id: 1,
               name: 'Alice',
-              email: 'alice@wonderland.org',
-              state: 'wa',
+              username: 'alice@wonderland.org',
+              state: { id: 'wa' },
               role: 'three'
             },
-            { id: 2, name: 'Bob', email: 'bobross@happylittletrees.net' },
-            { id: 3, name: null, email: 'nohface@yubabasplace.com' }
+            { id: 2, name: 'Bob', username: 'bobross@happylittletrees.net' },
+            { id: 3, name: null, username: 'nohface@yubabasplace.com' }
           ]}
           editAccount={sinon.spy()}
         />
@@ -75,12 +75,12 @@ describe('admin page > edit account', () => {
           {
             id: 1,
             name: 'Alice',
-            email: 'alice@wonderland.org',
-            state: 'wa',
+            username: 'alice@wonderland.org',
+            state: { id: 'wa' },
             role: 'three'
           },
-          { id: 2, name: 'Bob', email: 'bobross@happylittletrees.net' },
-          { id: 3, name: null, email: 'nohface@yubabasplace.com' }
+          { id: 2, name: 'Bob', username: 'bobross@happylittletrees.net' },
+          { id: 3, name: null, username: 'nohface@yubabasplace.com' }
         ]}
         editAccount={sinon.spy()}
       />
@@ -92,7 +92,7 @@ describe('admin page > edit account', () => {
       component.findWhere(c => c.prop('name') === fieldName).props();
 
     expect(getPropsFor('name').value).toEqual('Alice');
-    expect(getPropsFor('email').value).toEqual('alice@wonderland.org');
+    expect(getPropsFor('username').value).toEqual('alice@wonderland.org');
     expect(getPropsFor('phone').value).toEqual('');
     expect(getPropsFor('position').value).toEqual('');
     expect(getPropsFor('state').value).toEqual('wa');
@@ -111,22 +111,22 @@ describe('admin page > edit account', () => {
           {
             id: 1,
             name: 'Alice',
-            email: 'alice@wonderland.org',
-            state: 'wa',
+            username: 'alice@wonderland.org',
+            state: { id: 'wa' },
             role: 'three'
           },
           {
             id: 2,
             name: 'Bob',
-            email: 'bobross@happylittletrees.net',
-            state: '',
+            username: 'bobross@happylittletrees.net',
+            state: { id: '' },
             role: ''
           },
           {
             id: 3,
             name: null,
-            email: 'nohface@yubabasplace.com',
-            state: '',
+            username: 'nohface@yubabasplace.com',
+            state: { id: '' },
             role: ''
           }
         ]}
@@ -140,7 +140,9 @@ describe('admin page > edit account', () => {
       component.findWhere(c => c.prop('name') === fieldName).props();
 
     expect(getPropsFor('name').value).toEqual('Bob');
-    expect(getPropsFor('email').value).toEqual('bobross@happylittletrees.net');
+    expect(getPropsFor('username').value).toEqual(
+      'bobross@happylittletrees.net'
+    );
     expect(getPropsFor('phone').value).toEqual('');
     expect(getPropsFor('position').value).toEqual('');
     expect(getPropsFor('state').value).toEqual('');
@@ -162,18 +164,18 @@ describe('admin page > edit account', () => {
           {
             id: 1,
             name: 'Alice',
-            email: 'alice@wonderland.org',
-            state: 'wa',
+            username: 'alice@wonderland.org',
+            state: { id: 'wa' },
             role: 'three'
           },
           {
             id: 2,
             name: 'Bob',
-            email: 'bobross@happylittletrees.net',
-            state: 'wa',
+            username: 'bobross@happylittletrees.net',
+            state: { id: 'wa' },
             role: 'seven'
           },
-          { id: 3, name: null, email: 'nohface@yubabasplace.com' }
+          { id: 3, name: null, username: 'nohface@yubabasplace.com' }
         ]}
         editAccount={editAccount}
       />
@@ -187,7 +189,7 @@ describe('admin page > edit account', () => {
         .simulate('change', { target: { name, value } });
 
     change('name', 'Barbara');
-    change('email', 'barbara.eden@bottle.com');
+    change('username', 'barbara.eden@bottle.com');
     change('phone', '202-555-5555');
     change('position', 'Director of Genies');
     change('state', 'fl');
@@ -201,7 +203,7 @@ describe('admin page > edit account', () => {
       editAccount.calledWith({
         id: 2,
         name: 'Barbara',
-        email: 'barbara.eden@bottle.com',
+        username: 'barbara.eden@bottle.com',
         phone: '202-555-5555',
         position: 'Director of Genies',
         state: 'fl',

@@ -8,9 +8,7 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
 
   const app = { delete: sandbox.stub() };
-  const db = sandbox.stub();
-  const where = sandbox.stub();
-  const update = sandbox.stub();
+  const deleteAPDByID = sandbox.stub();
 
   const req = {
     meta: {
@@ -29,9 +27,6 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
-
-    db.returns({ where });
-    where.returns({ update });
 
     res.status.returns(res);
     res.send.returns(res);
@@ -53,10 +48,10 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   });
 
   endpointTest.test('handles unexpected errors', async test => {
-    endpoint(app, { db });
+    endpoint(app, { deleteAPDByID });
     const handler = app.delete.args.find(args => args[0] === '/apds/:id').pop();
 
-    update.throws(new Error('random thing gone wrong'));
+    deleteAPDByID.rejects(new Error('random thing gone wrong'));
 
     await handler(req, res);
 
@@ -66,15 +61,14 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   });
 
   endpointTest.test('updates the status and saves', async test => {
-    endpoint(app, { db });
+    endpoint(app, { deleteAPDByID });
     const handler = app.delete.args.find(args => args[0] === '/apds/:id').pop();
 
-    update.resolves();
+    deleteAPDByID.resolves();
 
     await handler(req, res);
 
-    test.ok(where.calledWith('id', 'apd id'), 'the right APD is updated');
-    test.ok(update.calledWith({ status: 'archived' }), 'APD is archived');
+    test.ok(deleteAPDByID.calledWith('apd id'), 'the right APD is deleted');
     test.ok(res.status.calledWith(204), 'HTTP status set to 204');
     test.ok(res.send.notCalled, 'no body is sent');
     test.ok(res.end.called, 'response is terminated');

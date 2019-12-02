@@ -1,21 +1,19 @@
 const logger = require('../logger')('apd middleware');
 const { cache } = require('./cache');
 
-const { raw: knex } = require('../db');
+const { getAPDByID: ga } = require('../db');
 
 /**
  * @description Middleware to load an APD into the request "meta" property
  * @param {Object} injection Dependency injection
  * @param {Object} injection.db A Knex object to use for queries
  */
-module.exports.loadApd = ({ db = knex } = {}) =>
+module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
   cache(['loadApd'], () => {
     const loadApd = async (req, res, next) => {
       logger.silly(req, 'loading APD for request');
       try {
-        const apdFromDB = await db('apds')
-          .where({ id: +req.params.id })
-          .first('document', 'id', 'state_id', 'status', 'updated_at');
+        const apdFromDB = await getAPDByID(+req.params.id);
 
         if (apdFromDB) {
           req.meta.apd = {
@@ -59,7 +57,7 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
         // ...then get a list of APDs this user is associated with
 
         // Make sure there's overlap
-        if (req.meta.apd.state === req.user.state) {
+        if (req.meta.apd.state === req.user.state.id) {
           next();
         } else {
           logger.verbose(req, 'user does not have access to the APD');

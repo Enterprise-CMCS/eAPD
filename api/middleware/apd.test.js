@@ -23,23 +23,15 @@ tap.test('APD-related middleware', async middlewareTests => {
   });
 
   middlewareTests.test('load apd', async loadApdTests => {
-    const db = sandbox.stub();
-
-    const where = sandbox.stub();
-    const first = sandbox.stub();
-
-    loadApdTests.beforeEach(async () => {
-      db.returns({ where });
-      where.returns({ first });
-    });
+    const getAPDByID = sandbox.stub();
 
     loadApdTests.test(
       'when there is an error loading the APD',
       async invalidTest => {
-        first.rejects();
+        getAPDByID.rejects();
 
         const req = { meta: {}, params: { 'apd-id': 9 } };
-        await loadApd({ db })(req, res, next);
+        await loadApd({ getAPDByID })(req, res, next);
 
         invalidTest.ok(res.status.calledWith(500), 'HTTP status is set to 500');
         invalidTest.ok(res.end.calledOnce, 'response is closed');
@@ -48,10 +40,10 @@ tap.test('APD-related middleware', async middlewareTests => {
     );
 
     loadApdTests.test('when there is no associated APD', async invalidTest => {
-      first.resolves(null);
+      getAPDByID.resolves(null);
 
       const req = { meta: {}, params: { 'apd-id': 9 } };
-      await loadApd()(req, res, next);
+      await loadApd({ getAPDByID })(req, res, next);
 
       invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 404');
       invalidTest.ok(res.end.calledOnce, 'response is closed');
@@ -59,7 +51,7 @@ tap.test('APD-related middleware', async middlewareTests => {
     });
 
     loadApdTests.test('when there is an associated APD', async validTest => {
-      first.resolves({
+      getAPDByID.resolves({
         document: {
           this: 'is the APD document'
         },
@@ -70,7 +62,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       });
 
       const req = { meta: {}, params: { 'apd-id': 9 } };
-      await loadApd()(req, res, next);
+      await loadApd({ getAPDByID })(req, res, next);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not set');
       validTest.ok(res.end.notCalled, 'response is not closed');
@@ -116,7 +108,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       'passes if the user has access to the APD',
       async validTest => {
         const req = {
-          user: { state: 'florp' },
+          user: { state: { id: 'florp' } },
           meta: { apd: { state: 'florp' } }
         };
         await userCanAccessAPD({ loadApd: loadApdFake })(req, res, next);
