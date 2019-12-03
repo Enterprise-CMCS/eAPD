@@ -21,10 +21,6 @@ workflows:
   test, build, and deploy:
     jobs:
       # independent jobs
-      - check docker-compose image tags:
-          filters:
-            tags:
-              only: /.*/
       - install dependencies:
           filters:
             tags:
@@ -208,21 +204,6 @@ jobs:
   # ===== Independent jobs =====
   # These jobs don't rely on anything else having happened first, and cut
   # across both backend and frontend.
-
-  # Checks that the image tags in the docker-compose.yml file match the md5
-  # hashes of the backend and frontend package-lock.json files.
-  check docker-compose image tags:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - run:
-          name: check docker-compose image tags
-          working_directory: ~/project
-          command: |
-            echo "`cat docker-compose.yml | grep -m1 cms-eapd/api: | sed 's/.*image: cms-eapd\/api://'` api/package-lock.json" > hashes.md5
-            echo "`cat docker-compose.yml | grep -m1 cms-eapd/web: | sed 's/.*image: cms-eapd\/web://'` web/package-lock.json" >> hashes.md5
-            md5sum -c hashes.md5
 
   # Installs npm dependencies for the frontend and backend pieces, then saves
   # those in the workflow workspace. Save the npm cache to CircleCI cache to
