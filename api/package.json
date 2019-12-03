@@ -14,8 +14,7 @@
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --no-timeout --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
     "test-endpoints": "jest --runInBand '.+\\.endpoint\\.js'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
-    "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\"",
-    "postinstall": "sed -i'.backup' -e 's/\\(image: cms-eapd\\/api:\\).*/\\1'`md5 -q package-lock.json`'/g' ../docker-compose.yml && rm ../docker-compose.yml.backup && sed -i'.backup' -e 's/\\(image: cms-eapd\\/api:\\).*/\\1'`md5 -q package-lock.json`'/g' docker-compose.endpoint-tests.yml && rm docker-compose.endpoint-tests.yml.backup || true"
+    "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -54,17 +53,16 @@
   "dependencies": {
     "ajv": "^6.10.2",
     "body-parser": "^1.19.0",
-    "bookshelf": "^0.12.1",
     "compression": "^1.7.3",
     "cookies": "^0.7.3",
     "cors": "^2.8.5",
-    "dotenv": "^8.1.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs-blob-store": "^5.2.1",
     "jsonpatch": "^3.0.1",
     "jsonpointer": "^4.0.1",
     "jsonwebtoken": "^8.5.0",
-    "knex": "^0.14.6",
+    "knex": "^0.19.5",
     "moment": "^2.24.0",
     "multer": "^1.4.2",
     "passport": "^0.4.0",
@@ -78,18 +76,18 @@
     "node": "^10.14"
   },
   "devDependencies": {
-    "colors": "^1.3.3",
-    "eslint": "^6.3.0",
+    "colors": "^1.4.0",
+    "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-config-prettier": "^6.2.0",
+    "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
     "jest": "^24.9.0",
-    "nodemon": "^1.19.2",
+    "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
     "request": "^2.88.0",
-    "sinon": "^7.4.2",
+    "sinon": "^7.5.0",
     "stream-mock": "^2.0.5",
-    "tap": "^14.6.1"
+    "tap": "^14.8.0"
   },
   "jest": {
     "testMatch": [

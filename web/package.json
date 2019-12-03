@@ -13,8 +13,7 @@
     "start": "webpack-dev-server --config webpack.config.dev.js",
     "test": "TZ=utc jest --collectCoverage",
     "test-watch": "jest --watch",
-    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\"",
-    "postinstall": "sed -i'.backup' -e 's/\\(image: cms-eapd\\/web:\\).*/\\1'`md5 -q package-lock.json`'/g' ../docker-compose.yml && rm ../docker-compose.yml.backup || true"
+    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
   },
   "repository": {
     "type": "git",

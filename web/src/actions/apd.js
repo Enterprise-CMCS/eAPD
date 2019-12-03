@@ -55,7 +55,7 @@ export const createApd = ({
     .then(async req => {
       const apd = deserialize(req.data);
       dispatch(createSuccess(apd));
-      await dispatch(selectApd(apd.id, { deserialize, pushRoute }));
+      await dispatch(selectApd(apd.id, '/apd', { deserialize, pushRoute }));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
