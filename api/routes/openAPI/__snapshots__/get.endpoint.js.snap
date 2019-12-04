@@ -828,6 +828,128 @@ Object {
         ],
       },
     },
+    "/apds/{id}/files": Object {
+      "post": Object {
+        "description": "Uploads a file, associates it with a given APD, and stores any provided metadata.",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd the file is associated with",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "multipart/form-data": Object {
+              "schema": Object {
+                "properties": Object {
+                  "file": Object {
+                    "description": "The file body",
+                    "format": "binary",
+                    "type": "string",
+                  },
+                  "metadata": Object {
+                    "description": "arbitrary metadata to attach to the file",
+                    "type": "object",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "url": Object {
+                    "description": "The URL of the uploaded file, absolute, relative to the API host",
+                    "type": "string",
+                  },
+                },
+              },
+            },
+            "description": "The URL of the uploaded file, absolute, relative to the API host",
+          },
+          "401": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "403": Object {
+            "description": "Not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "sessionCookie": Array [],
+          },
+        ],
+        "summary": "Upload a file associated with an APD",
+        "tags": Array [
+          "APDs",
+          "files",
+        ],
+      },
+    },
+    "/apds/{id}/files/{fileID}": Object {
+      "get": Object {
+        "description": "Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd the file is associated with",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+          Object {
+            "description": "The ID of the file to get",
+            "in": "path",
+            "name": "fileID",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "*/*": Object {
+                "format": "binary",
+                "type": "string",
+              },
+            },
+            "description": "The file",
+          },
+          "401": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "403": Object {
+            "description": "Not logged in",
+          },
+          "404": Object {
+            "description": "The file does not belong to the APD or does not exist",
+          },
+        },
+        "security": Array [
+          Object {
+            "sessionCookie": Array [],
+          },
+        ],
+        "summary": "Get a file associated with an APD",
+        "tags": Array [
+          "APDs",
+          "files",
+        ],
+      },
+    },
     "/auth/activities": Object {
       "get": Object {
         "description": "Get a list of all activities in the system",
