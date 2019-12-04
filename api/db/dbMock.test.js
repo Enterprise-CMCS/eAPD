@@ -10,6 +10,7 @@ const reset = () => {
 
 const getQueryBuilder = () => ({
   andWhere: sandbox.stub(),
+  count: sandbox.stub(),
   delete: sandbox.stub(),
   first: sandbox.stub(),
   insert: sandbox.stub(),
