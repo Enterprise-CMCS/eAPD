@@ -876,11 +876,17 @@ Object {
             },
             "description": "The URL of the uploaded file, absolute, relative to the API host",
           },
+          "400": Object {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable",
+          },
           "401": Object {
             "description": "Does not have permission to this activity",
           },
           "403": Object {
             "description": "Not logged in",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
