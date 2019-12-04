@@ -6,6 +6,7 @@ const getModule = () => {
 };
 
 const local = require('./local');
+const s3 = require('./s3');
 
 tap.test('file storage index', async tests => {
   tests.test(
@@ -33,5 +34,12 @@ tap.test('file storage index', async tests => {
     const module = getModule();
 
     test.same(module, local);
+  });
+
+  tests.test('returns the S3 store provider if configured', async test => {
+    process.env.FILE_STORE = 's3';
+    const module = getModule();
+
+    test.same(module, s3);
   });
 });
