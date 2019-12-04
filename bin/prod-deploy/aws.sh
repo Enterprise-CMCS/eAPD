@@ -1,9 +1,17 @@
 #!/bin/bash
 
 # Call with the following arguments:
+#    --API_AWS_ACCESS_KEY_ID          | AWS key used for read/write to S3
+#                                     |----------------------------------------
+#    --API_AWS_SECRET_ACCESS_KEY      | AWS key used for read/write to S3
+#                                     |----------------------------------------
 #    --API_DATABASE_URL <psql url>    | PostgreSQL database URL the API should
 #                                     | use. This is written into the API's
 #                                     | configuration.
+#                                     |----------------------------------------
+#    --API_FILE_S3_BUCKET <name>      | The name of the S3 bucket the API will
+#                                     | read and write files to. ONLY the name,
+#                                     | NOT the S3 URI.
 #                                     |----------------------------------------
 #    --API_PBKDF2_ITERATIONS <number> | Number of PBKDF2 iterations the server
 #                                     | should use for hashing user passwords.
@@ -103,8 +111,11 @@ function addBuildUrlToUserData() {
 # it into the user-data script.
 #
 # Expects global variables:
+#   API_AWS_ACCESS_KEY_ID - AWS key used for read/write to S3
+#   API_AWS_SECRET_ACCESS_KEY - AWS key used for read/write to S3
 #   API_PORT - port the API should listen on
 #   API_DATABASE_URL - PostgreSQL database URL the API should use
+#   API_FILE_S3_BUCKET - S3 bucket name for reading/writing files
 #   API_PBKDF2_ITERATIONS - Number of iterations for hashing passwords
 #   API_SESSION_SECRET - The secret key used to sign session tokens
 function addEcosystemToUserData() {
@@ -115,9 +126,13 @@ function addEcosystemToUserData() {
       instances: 1,
       autorestart: true,
       env: {
+        AWS_ACCESS_KEY_ID: '$API_AWS_ACCESS_KEY_ID',
+        AWS_SECRET_ACCESS_KEY: '$API_AWS_SECRET_ACCESS_KEY',
         AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 5,
         AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
         AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES: 30,
+        FILE_STORE: 's3',
+        FILE_S3_BUCKET: '$API_FILE_S3_BUCKET',
         NODE_ENV: 'production',
         PBKDF2_ITERATIONS: '$API_PBKDF2_ITERATIONS',
         PORT: '$API_PORT',
