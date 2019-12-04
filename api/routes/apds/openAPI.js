@@ -236,6 +236,13 @@ const openAPI = {
                 'The URL of the uploaded file, absolute, relative to the API host'
             }
           })
+        },
+        400: {
+          description:
+            'Invalid request, such as requesting to archive an APD that is not editable'
+        },
+        404: {
+          description: 'The apd ID does not match any known apds for the user'
         }
       }
     }

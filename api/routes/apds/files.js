@@ -1,4 +1,4 @@
-const logger = require('../../logger')('apds route images');
+const logger = require('../../logger')('apds file routes');
 const { can, userCanAccessAPD, userCanEditAPD } = require('../../middleware');
 const {
   createNewFileForAPD: cf,

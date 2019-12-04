@@ -7,7 +7,7 @@ exports.seed = async knex => {
   await knex('apd_files').insert([
     {
       apd_id: 4000,
-      id: 'bf520e38-9b63-4e8b-82c1-da8fb58f5668',
+      id: '74aa0d06-ae6f-472f-8999-6ca0487c494f',
       metadata: '{"some":"metadata","in":"here"}'
     }
   ]);
