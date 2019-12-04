@@ -867,10 +867,13 @@ Object {
             "content": Object {
               "application/json": Object {
                 "schema": Object {
-                  "url": Object {
-                    "description": "The URL of the uploaded file, absolute, relative to the API host",
-                    "type": "string",
+                  "properties": Object {
+                    "url": Object {
+                      "description": "The URL of the uploaded file, absolute, relative to the API host",
+                      "type": "string",
+                    },
                   },
+                  "type": "object",
                 },
               },
             },
@@ -928,8 +931,10 @@ Object {
           "200": Object {
             "content": Object {
               "*/*": Object {
-                "format": "binary",
-                "type": "string",
+                "schema": Object {
+                  "format": "binary",
+                  "type": "string",
+                },
               },
             },
             "description": "The file",

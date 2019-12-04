@@ -230,10 +230,13 @@ const openAPI = {
           description:
             'The URL of the uploaded file, absolute, relative to the API host',
           content: jsonResponse({
-            url: {
-              type: 'string',
-              description:
-                'The URL of the uploaded file, absolute, relative to the API host'
+            type: 'object',
+            properties: {
+              url: {
+                type: 'string',
+                description:
+                  'The URL of the uploaded file, absolute, relative to the API host'
+              }
             }
           })
         },
@@ -277,7 +280,7 @@ const openAPI = {
       responses: {
         200: {
           description: 'The file',
-          content: { '*/*': { type: 'string', format: 'binary' } }
+          content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
         },
         404: {
           description: 'The file does not belong to the APD or does not exist'
