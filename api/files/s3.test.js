@@ -1,4 +1,3 @@
-const awsS3 = require('aws-sdk/clients/s3');
 const sinon = require('sinon');
 const tap = require('tap');
 
