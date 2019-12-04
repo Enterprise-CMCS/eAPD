@@ -4,6 +4,8 @@ Anticipated release: December 16, 2019
 
 #### 🚀 New features
 
+- Upload files from the rich text editor instead of embedding them directly into the text ([#1735])
+
 #### 🐛 Bugs fixed
 
 #### ⚙️ Behind the scenes
@@ -170,6 +172,7 @@ Pilot release to select state partners
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
 [#1729]: https://github.com/18F/cms-hitech-apd/issues/1729
 [#1732]: https://github.com/18F/cms-hitech-apd/issues/1732
+[#1735]: https://github.com/18F/cms-hitech-apd/issues/1735
 [#1736]: https://github.com/18F/cms-hitech-apd/issues/1736
 [#1739]: https://github.com/18F/cms-hitech-apd/issues/1739
 [#1745]: https://github.com/18F/cms-hitech-apd/pull/1745
