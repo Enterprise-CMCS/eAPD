@@ -25,6 +25,10 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - owasp zap scan:
+          filters:
+            tags:
+              only: /.*/
       - validate openapi:
           filters:
             tags:
@@ -270,54 +274,26 @@ jobs:
 
   # Runs backend API integration/end-to-end tests.
   backend api endpoint test:
-    docker:
-      - image: node:10
-        environment:
-          - NODE_ENV=test
-          - FILE_STORE=local
-          - FILE_PATH=test-data/files
-          - ENDPOINT_COVERAGE_CAPTURE=yes
-      - image: postgres:latest
-        name: db
-        environment:
-          - POSTGRES_USER=postgres
-          - POSTGRES_PASSWORD=cms
-          - POSTGRES_DB=hitech_apd_test
+    machine:
+      image: circleci/classic:latest
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
       - run:
-          name: get wait-on
-          command: |
-            npm i -g wait-on
-      - run:
-          name: wait for database
-          command: wait-on tcp:db:5432 -t 300000
-      - run:
-          name: database migration
+          name: build API image
           working_directory: ~/project/api
-          command: npm run migrate
-      - run:
-          name: database seed
-          working_directory: ~/project/api
-          command: npm run seed
-      - run:
-          name: start the API
-          working_directory: ~/project/api
-          command: echo "[]" > endpoint-data.json && npm start
-          background: true
-      - run:
-          name: wait for API
-          command: wait-on tcp:localhost:8000 -t 300000
+          command: docker build -t cms-eapd/api ./
       - run:
           name: run tests
           working_directory: ~/project/api
-          command: npm run test-endpoints
-      - run:
-          name: print coverage info
-          working_directory: ~/project/api
-          command: mv endpoint-data.json endpoint-tests && node endpoint-tests/endpoint-coverage.js
+          command: |
+            # Switch to Node 10.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 10
+            nvm alias default v10
+            ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
   backend lint:
@@ -426,6 +402,36 @@ jobs:
           working_directory: ~/project/<< parameters.path >>
           command: |
             npm audit
+
+  owasp zap scan:
+    machine:
+      image: circleci/classic:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: build API image
+          working_directory: ~/project/api
+          command: docker build -t cms-eapd/api ./
+      - run:
+          name: start everything up
+          working_directory: ~/project/api
+          command: |
+            docker-compose -f docker-compose.endpoint-tests.yml up -d
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
+      - run:
+          name: run owasp zap
+          command: |
+            docker run \
+              --network api_default \
+              -v /tmp:/zap/wrk \
+              owasp/zap2docker-weekly \
+              zap-api-scan.py \
+              -g api-scan.conf \
+              -t http://api-for-testing:8000/open-api \
+              -f openapi
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
