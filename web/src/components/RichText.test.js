@@ -1,24 +1,19 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import RichText from './RichText';
 
 describe('RichText component', () => {
-  // Can't test rendering against a snapshot because the react-draft-wysiwyg
-  // component internally creates random IDs/keys, so it's nondeterministic.
-  test('survives blurring if no onSync method is provided', () => {
-    const component = shallow(<RichText />);
-    component.simulate('blur');
+  test('renders as expected', () => {
+    expect(
+      shallow(<RichText content="initial rich text value" />)
+    ).toMatchSnapshot();
   });
 
-  test('synchronizes on blur', () => {
-    const onSync = sinon.spy();
+  test('calls the change handler when the content changes', () => {
+    const onSync = jest.fn();
     const component = shallow(<RichText onSync={onSync} />);
-    component.simulate('blur');
-    expect(onSync.calledOnce).toBeTruthy();
+    component.prop('onEditorChange')('this is the new stuff');
+    expect(onSync).toHaveBeenCalledWith('this is the new stuff');
   });
-
-  // All the other tests are pretty tough because they rely on knowing
-  // something about the internal behavior of react-draft-wysiwyg
 });
