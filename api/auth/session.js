@@ -99,26 +99,13 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
           {
             httpOnly: true,
             maxAge: sessionLifetimeMilliseconds,
-            overwrite: true,
-            // The Same-Site cookie property will be required by Chrome and
-            // possibly Firefox starting in February, 2020. "lax" seems like
-            // the one we want, but honestly not 100% clear.
-            sameSite: 'lax',
-            // Lax Same-Site property will also require secure cookies in
-            // Chrome, so I guess we have to set that too. Only in production
-            // environments, though, where we actually have HTTPS setup.
-            secure: process.env.NODE_ENV === 'production'
+            overwrite: true
           }
         );
       } else {
         // Else, write a cookie with an immediate expiration
         logger.silly('expiring/setting empty session cookie');
-        cookies.set(COOKIE_NAME, '', {
-          maxAge: 0,
-          httpOnly: true,
-          sameSite: 'lax',
-          secure: process.env.NODE_ENV === 'production'
-        });
+        cookies.set(COOKIE_NAME, '', { maxAge: 0, httpOnly: true });
       }
 
       // Now call the original writeHead method

@@ -124,12 +124,7 @@ tap.test('session functions', async tests => {
           res.writeHead('arg1', 'arg2');
 
           test.ok(
-            cookies.set.calledWith('token', '', {
-              maxAge: 0,
-              httpOnly: true,
-              sameSite: 'lax',
-              secure: false
-            }),
+            cookies.set.calledWith('token', '', { maxAge: 0, httpOnly: true }),
             'cookie is empty and expired'
           );
           test.ok(
@@ -158,9 +153,7 @@ tap.test('session functions', async tests => {
           cookies.set.calledWith('token', sinon.match.string, {
             httpOnly: true,
             maxAge: 60000,
-            overwrite: true,
-            sameSite: 'lax',
-            secure: false
+            overwrite: true
           }),
           'sets the cookie'
         );
@@ -207,9 +200,7 @@ tap.test('session functions', async tests => {
             cookies.set.calledWith('token', sinon.match.string, {
               httpOnly: true,
               maxAge: 60000,
-              overwrite: true,
-              sameSite: 'lax',
-              secure: false
+              overwrite: true
             }),
             'sets the cookie'
           );
@@ -247,12 +238,7 @@ tap.test('session functions', async tests => {
 
         test.same(req.session, {}, 'session is emptied');
         test.ok(
-          cookies.set.calledWith('token', '', {
-            maxAge: 0,
-            httpOnly: true,
-            sameSite: 'lax',
-            secure: false
-          }),
+          cookies.set.calledWith('token', '', { maxAge: 0, httpOnly: true }),
           'cookie is empty and expired'
         );
       }
@@ -273,12 +259,7 @@ tap.test('session functions', async tests => {
 
       test.same(req.session, {}, 'session is emptied');
       test.ok(
-        cookies.set.calledWith('token', '', {
-          maxAge: 0,
-          httpOnly: true,
-          sameSite: 'lax',
-          secure: false
-        }),
+        cookies.set.calledWith('token', '', { maxAge: 0, httpOnly: true }),
         'cookie is empty and expired'
       );
     });
