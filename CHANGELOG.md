@@ -22,6 +22,7 @@ Released: December 3, 2019
 #### 🐛 Bugs fixed
 
 - Fixed a bug where contractor hourly rates were not used in budget calculations ([#1925])
+- Switches to a new rich text editor that is better supported ([#1871])
 
 #### ⚙️ Behind the scenes
 
@@ -199,6 +200,7 @@ Pilot release to select state partners
 [#1803]: https://github.com/18F/cms-hitech-apd/issues/1803
 [#1820]: https://github.com/18F/cms-hitech-apd/issues/1820
 [#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
+[#1871]: https://github.com/18F/cms-hitech-apd/issues/1871
 [#1882]: https://github.com/18F/cms-hitech-apd/issues/1882
 [#1904]: https://github.com/18F/cms-hitech-apd/pull/1904
 [#1921]: https://github.com/18F/cms-hitech-apd/pull/1921
