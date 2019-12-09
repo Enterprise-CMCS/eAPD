@@ -422,6 +422,9 @@ jobs:
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
+          name: pull owasp zap docker image
+          command: docker pull owasp/zap2docker-weekly
+      - run:
           name: run owasp zap
           command: |
             docker run \
