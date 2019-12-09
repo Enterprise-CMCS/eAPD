@@ -99,7 +99,15 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
           {
             httpOnly: true,
             maxAge: sessionLifetimeMilliseconds,
-            overwrite: true
+            overwrite: true,
+            // The Same-Site cookie property will be required by Chrome and
+            // possibly Firefox starting in February, 2020. "lax" seems like
+            // the one we want, but honestly not 100% clear.
+            sameSite: 'lax',
+            // Lax Same-Site property will also require secure cookies in
+            // Chrome, so I guess we have to set that too. Only in production
+            // environments, though, where we actually have HTTPS setup.
+            secure: process.env.NODE_ENV === 'production'
           }
         );
       } else {
