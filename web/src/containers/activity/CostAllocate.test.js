@@ -6,7 +6,10 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './CostAllocate';
-import { setCostAllocationMethodology, setCostAllocationOtherFunding } from '../../actions/editActivity/costAllocate';
+import {
+  setCostAllocationMethodology,
+  setCostAllocationOtherFunding
+} from '../../actions/editActivity/costAllocate';
 
 describe('the CostAllocate component', () => {
   const props = {
@@ -37,13 +40,13 @@ describe('the CostAllocate component', () => {
     const component = shallow(<CostAllocate {...props} />);
 
     component
-      .find('RichText')
+      .find('Connect(RichText)')
       .filterWhere(n => n.props().content === 'cost allocation')
       .prop('onSync')('bloop');
     expect(props.setMethodology).toHaveBeenCalledWith(1, 'bloop');
 
     component
-      .find('RichText')
+      .find('Connect(RichText)')
       .filterWhere(n => n.props().content === 'other funding')
       .prop('onSync')('florp');
     expect(props.setOtherFunding).toHaveBeenCalledWith(1, 'florp');
@@ -61,10 +64,10 @@ describe('the CostAllocate component', () => {
         }
       }
     };
-    expect(mapStateToProps(state, {activityIndex: 0})).toEqual({
-        activity: {
-          key: 'activity key'
-        }
+    expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
+      activity: {
+        key: 'activity key'
+      }
     });
   });
 
