@@ -2,17 +2,17 @@ import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import axios from '../../util/api';
-
-const mockStore = configureStore([thunk]);
-const fetchMock = new MockAdapter(axios);
-
 import {
   UPLOAD_FILE_FAILURE,
   UPLOAD_FILE_REQUEST,
   UPLOAD_FILE_SUCCESS
 } from './symbols';
 import { uploadFile } from './uploadFile';
+
+import axios from '../../util/api';
+
+const mockStore = configureStore([thunk]);
+const fetchMock = new MockAdapter(axios);
 
 describe('APD edit actions for uploading files', () => {
   const reader = {
