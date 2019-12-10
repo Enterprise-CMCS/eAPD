@@ -43,7 +43,7 @@ const setupTinyMCE = upload => editor => {
       fileButton.setAttribute('accept', 'image/*');
       fileButton.addEventListener(
         'change',
-        () => fileButtonOnClick(fileButton, editor, upload),
+        fileButtonOnClick(fileButton, editor, upload),
         false
       );
       fileButton.click();
