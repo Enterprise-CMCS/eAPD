@@ -4,6 +4,8 @@ Anticipated release: December 16, 2019
 
 #### 🚀 New features
 
+- Make disabled button state more explicit ([#1957])
+
 #### 🐛 Bugs fixed
 
 #### ⚙️ Behind the scenes
@@ -203,3 +205,4 @@ Pilot release to select state partners
 [#1921]: https://github.com/18F/cms-hitech-apd/pull/1921
 [#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
+[#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
