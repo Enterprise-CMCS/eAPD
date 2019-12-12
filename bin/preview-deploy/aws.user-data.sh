@@ -156,6 +156,8 @@ echo "module.exports = {
       AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 15,
       AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
       AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES: 10,
+      FILE_PATH: '__files',
+      FILE_STORE: 'local',
       NODE_ENV: 'development',
       PBKDF2_ITERATIONS: '__PBKDF2_ITERATIONS__',
       PORT: '8000',

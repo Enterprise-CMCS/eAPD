@@ -47,7 +47,7 @@ describe('apd summary component', () => {
 
   test('dispatches on text change', () => {
     shallow(<ApdSummary {...props} />)
-      .find('RichText')
+      .find('Connect(RichText)')
       .at(0)
       .prop('onSync')('this is some html');
 
