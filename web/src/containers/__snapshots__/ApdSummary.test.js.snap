@@ -69,7 +69,7 @@ exports[`apd summary component renders correctly 1`] = `
         reverse={false}
         source="apd.introduction.instruction"
       />
-      <RichText
+      <Connect(RichText)
         content="about the program"
         editorClassName="rte-textarea-l"
         onSync={[Function]}
@@ -89,7 +89,7 @@ exports[`apd summary component renders correctly 1`] = `
         reverse={false}
         source="apd.hit.instruction"
       />
-      <RichText
+      <Connect(RichText)
         content="about hit"
         editorClassName="rte-textarea-l"
         onSync={[Function]}
@@ -109,7 +109,7 @@ exports[`apd summary component renders correctly 1`] = `
         reverse={false}
         source="apd.hie.instruction"
       />
-      <RichText
+      <Connect(RichText)
         content="about hie"
         editorClassName="rte-textarea-l"
         onSync={[Function]}
@@ -127,7 +127,7 @@ exports[`apd summary component renders correctly 1`] = `
         reverse={false}
         source="apd.mmis.instruction"
       />
-      <RichText
+      <Connect(RichText)
         content="about mmis"
         editorClassName="rte-textarea-l"
         onSync={[Function]}

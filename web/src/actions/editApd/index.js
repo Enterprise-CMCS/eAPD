@@ -6,3 +6,4 @@ export * from './keyPersonnel';
 export * from './overview';
 export * from './previousActivities';
 export * from './stateProfile';
+export * from './uploadFile';

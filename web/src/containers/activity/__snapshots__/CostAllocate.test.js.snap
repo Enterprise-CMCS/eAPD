@@ -21,7 +21,7 @@ exports[`the CostAllocate component renders correctly 1`] = `
       reverse={false}
       source="activities.costAllocate.methodology.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="cost allocation"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -41,7 +41,7 @@ exports[`the CostAllocate component renders correctly 1`] = `
       reverse={false}
       source="activities.costAllocate.otherFunding.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="other funding"
       editorClassName="rte-textarea-l"
       onSync={[Function]}

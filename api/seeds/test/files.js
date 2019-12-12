@@ -4,15 +4,11 @@ exports.seed = async knex => {
   // 42xx IDs refer to goals
   // 43xx IDs refer to objectives
 
-  await knex('files').insert([
+  await knex('apd_files').insert([
     {
-      id: 5000,
-      key: 'download.txt',
+      apd_id: 4000,
+      id: '74aa0d06-ae6f-472f-8999-6ca0487c494f',
       metadata: '{"some":"metadata","in":"here"}'
-    },
-    { id: 5001, key: 'download.txt' },
-    { id: 5002, key: 'download.txt' },
-    { id: 5003, key: 'download.txt' },
-    { id: 5004, key: 'not real' }
+    }
   ]);
 };
