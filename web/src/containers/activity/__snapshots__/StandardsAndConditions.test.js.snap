@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the Schedule (milestones) component renders correctly 1`] = `
-<Subsection
-  headerClassName={null}
-  id={null}
-  nested={true}
-  resource="activities.standardsAndConditions"
->
+<Fragment>
+  <h4
+    className="ds-h4"
+  >
+    Standards & Conditions
+  </h4>
   <div
-    className="ds-u-margin-bottom--6"
+    className="ds-u-margin-bottom--6 ds-u-margin-top--3"
   >
     <h5
       className="ds-h5 ds-u-margin-bottom--3"
@@ -49,5 +49,5 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       />
     </div>
   </div>
-</Subsection>
+</Fragment>
 `;
