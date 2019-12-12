@@ -269,62 +269,14 @@
           "standardsAndConditions": {
             "$id": "#/properties/activities/items/properties/standardsAndConditions",
             "type": "object",
-            "required": [
-              "businessResults",
-              "documentation",
-              "industryStandards",
-              "interoperability",
-              "keyPersonnel",
-              "leverage",
-              "minimizeCost",
-              "mitigationStrategy",
-              "modularity",
-              "mita",
-              "reporting"
-            ],
+            "required": ["doesNotSupport", "supports"],
             "properties": {
-              "businessResults": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/businessResults",
+              "doesNotSupport": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/doesNotSupport",
                 "type": "string"
               },
-              "documentation": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/documentation",
-                "type": "string"
-              },
-              "industryStandards": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/industryStandards",
-                "type": "string"
-              },
-              "interoperability": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/interoperability",
-                "type": "string"
-              },
-              "keyPersonnel": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/keyPersonnel",
-                "type": "string"
-              },
-              "leverage": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/leverage",
-                "type": "string"
-              },
-              "minimizeCost": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/minimizeCost",
-                "type": "string"
-              },
-              "mitigationStrategy": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/mitigationStrategy",
-                "type": "string"
-              },
-              "modularity": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/modularity",
-                "type": "string"
-              },
-              "mita": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/mita",
-                "type": "string"
-              },
-              "reporting": {
-                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/reporting",
+              "supports": {
+                "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/supports",
                 "type": "string"
               }
             }
