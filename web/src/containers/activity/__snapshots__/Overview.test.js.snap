@@ -27,8 +27,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
     >
       Include as much detail as is necessary to explain the activity.
     </FormLabel>
-    <RichText
-      content=""
+    <Connect(RichText)
       editorClassName="rte-textarea-l"
       onSync={[Function]}
     />
@@ -54,8 +53,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
       reverse={false}
       source="activities.overview.activityAlternativesInput"
     />
-    <RichText
-      content=""
+    <Connect(RichText)
       editorClassName="rte-textarea-l"
       onSync={[Function]}
     />

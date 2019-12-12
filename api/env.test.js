@@ -11,6 +11,8 @@ tap.test('environment setup', async envTest => {
     { name: 'AUTH_LOCK_FAILED_ATTEMPTS_COUNT', type: 'number' },
     { name: 'AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES', type: 'number' },
     { name: 'AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES', type: 'number' },
+    { name: 'FILE_PATH', type: 'string' },
+    { name: 'FILE_STORE', type: 'string' },
     { name: 'PORT', type: 'number' },
     { name: 'SESSION_SECRET', type: 'object' },
     { name: 'SESSION_LIFETIME_MINUTES', type: 'number' },

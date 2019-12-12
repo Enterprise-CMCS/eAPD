@@ -6,12 +6,14 @@ const apdsIndex = require('./index');
 tap.test('apds endpoint setup', async endpointTest => {
   const app = {};
   const deleteEndpoint = sinon.spy();
+  const filesEndpoints = sinon.spy();
   const getEndpoint = sinon.spy();
   const patchEndpoint = sinon.spy();
   const postEndpoint = sinon.spy();
 
   apdsIndex(app, {
     deleteEndpoint,
+    filesEndpoints,
     getEndpoint,
     patchEndpoint,
     postEndpoint
@@ -32,5 +34,9 @@ tap.test('apds endpoint setup', async endpointTest => {
   endpointTest.ok(
     postEndpoint.calledWith(app),
     'apds POST endpoint is setup with the app'
+  );
+  endpointTest.ok(
+    filesEndpoints.calledWith(app),
+    'apds files endpoints are setup with the app'
   );
 });

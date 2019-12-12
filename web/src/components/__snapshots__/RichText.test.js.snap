@@ -6,6 +6,7 @@ exports[`RichText component renders as expected 1`] = `
   init={
     Object {
       "browser_spellcheck": true,
+      "images_upload_handler": [Function],
       "menubar": "",
       "paste_data_images": true,
       "plugins": Array [
