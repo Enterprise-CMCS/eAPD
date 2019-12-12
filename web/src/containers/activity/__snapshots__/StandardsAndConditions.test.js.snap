@@ -21,7 +21,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.modularity.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="modulartiy"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -41,7 +41,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.mita.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="mita"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -61,7 +61,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.industryStandards.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="industry standards"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -81,7 +81,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.leverage.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="leverage"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -101,7 +101,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.businessResults.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="business results"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -121,7 +121,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.reporting.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="reporting"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -141,8 +141,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.interoperability.instruction"
     />
-    <RichText
-      content=""
+    <Connect(RichText)
       editorClassName="rte-textarea-l"
       onSync={[Function]}
     />
@@ -161,7 +160,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.mitigationStrategy.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="mitigation strategy"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -181,7 +180,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.keyPersonnel.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="key personnel"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -201,7 +200,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.documentation.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="documentation"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
@@ -221,7 +220,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       reverse={false}
       source="activities.standardsAndConditions.minimizeCost.instruction"
     />
-    <RichText
+    <Connect(RichText)
       content="minimize cost"
       editorClassName="rte-textarea-l"
       onSync={[Function]}
