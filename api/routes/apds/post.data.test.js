@@ -64,17 +64,8 @@ tap.test('APD data initializer', async test => {
         plannedStartDate: '',
         schedule: [{ endDate: '', milestone: '' }],
         standardsAndConditions: {
-          businessResults: '',
-          documentation: '',
-          industryStandards: '',
-          interoperability: '',
-          keyPersonnel: '',
-          leverage: '',
-          minimizeCost: '',
-          mitigationStrategy: '',
-          modularity: '',
-          mita: '',
-          reporting: ''
+          doesNotSupport: '',
+          supports: ''
         },
         statePersonnel: [
           {

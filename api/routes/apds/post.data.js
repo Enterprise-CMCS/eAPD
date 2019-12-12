@@ -74,17 +74,8 @@ const getNewApd = () => {
           }
         ],
         standardsAndConditions: {
-          businessResults: '',
-          documentation: '',
-          industryStandards: '',
-          interoperability: '',
-          keyPersonnel: '',
-          leverage: '',
-          minimizeCost: '',
-          mitigationStrategy: '',
-          modularity: '',
-          mita: '',
-          reporting: ''
+          doesNotSupport: '',
+          supports: ''
         },
         statePersonnel: [
           {

@@ -117,17 +117,8 @@ Object {
         },
       ],
       "standardsAndConditions": Object {
-        "businessResults": "",
-        "documentation": "",
-        "industryStandards": "",
-        "interoperability": "",
-        "keyPersonnel": "",
-        "leverage": "",
-        "minimizeCost": "",
-        "mita": "",
-        "mitigationStrategy": "",
-        "modularity": "",
-        "reporting": "",
+        "doesNotSupport": "",
+        "supports": "",
       },
       "statePersonnel": Array [
         Object {
