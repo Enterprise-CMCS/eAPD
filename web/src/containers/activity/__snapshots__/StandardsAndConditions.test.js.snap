@@ -10,221 +10,44 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
   <div
     className="ds-u-margin-bottom--6"
   >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.modularity.instruction"
-    />
+    <h5
+      className="ds-h5 ds-u-margin-bottom--3"
+    >
+      Include a description about how this activity will support the Medicaid standards and conditions
+       
+      <a
+        href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112"
+      >
+        42 CFR 433.112
+      </a>
+      .
+    </h5>
     <Connect(RichText)
-      content="modulartiy"
-      editorClassName="rte-textarea-l"
+      content="support"
+      editorClassName="rte-textarea-1"
       onSync={[Function]}
     />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
+    <div
+      className="ds-c-choice__checkedChild ds-u-margin-top--3"
+    >
+      <h5
+        className="ds-h5"
+      >
+        If this activity does not support the Medicaid standards and conditions, please explain.
+      </h5>
+      <TextArea
+        label=""
+        name="activity-set-standards-and-conditions-non-support"
+        onChange={[Function]}
+        rows={6}
+        style={
+          Object {
+            "maxWidth": "initial",
+          }
         }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.mita.instruction"
-    />
-    <Connect(RichText)
-      content="mita"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.industryStandards.instruction"
-    />
-    <Connect(RichText)
-      content="industry standards"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.leverage.instruction"
-    />
-    <Connect(RichText)
-      content="leverage"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.businessResults.instruction"
-    />
-    <Connect(RichText)
-      content="business results"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.reporting.instruction"
-    />
-    <Connect(RichText)
-      content="reporting"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.interoperability.instruction"
-    />
-    <Connect(RichText)
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.mitigationStrategy.instruction"
-    />
-    <Connect(RichText)
-      content="mitigation strategy"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.keyPersonnel.instruction"
-    />
-    <Connect(RichText)
-      content="key personnel"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.documentation.instruction"
-    />
-    <Connect(RichText)
-      content="documentation"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
-  </div>
-  <div
-    className="ds-u-margin-bottom--6"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.standardsAndConditions.minimizeCost.instruction"
-    />
-    <Connect(RichText)
-      content="minimize cost"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
-    />
+        value="does not support"
+      />
+    </div>
   </div>
 </Subsection>
 `;
