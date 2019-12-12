@@ -8,67 +8,28 @@ import {
 } from './StandardsAndConditions';
 
 import {
-  setActivityStandardsBusinessResults,
-  setActivityStandardsDocumentation,
-  setActivityStandardsIndustryStandards,
-  setActivityStandardsInteroperability,
-  setActivityStandardsKeyPersonnel,
-  setActivityStandardsLeverage,
-  setActivityStandardsMinimizeCost,
-  setActivityStandardsMITA,
-  setActivityStandardsMitigationStrategy,
-  setActivityStandardsModularity,
-  setActivityStandardsReporting
+  setActivityStandardAndConditionDoesNotSupportExplanation,
+  setActivityStandardAndConditionSupportExplanation
 } from '../../actions/editActivity';
 
 describe('the Schedule (milestones) component', () => {
   const props = {
     activity: {
-      // The Battle of the Scheldt results in a key Allied victory, when
-      // Canadian forces successfully opened shipping routes to Antwerp, enabling
-      // supplies to reach Allied forces in northwest Europe.
       standardsAndConditions: {
-        businessResults: 'business results',
-        documentation: 'documentation',
-        industryStandards: 'industry standards',
-        interoperabiliyt: 'interoperability',
-        keyPersonnel: 'key personnel',
-        leverage: 'leverage',
-        minimizeCost: 'minimize cost',
-        mita: 'mita',
-        mitigationStrategy: 'mitigation strategy',
-        modularity: 'modulartiy',
-        reporting: 'reporting'
+        doesNotSupport: 'does not support',
+        supports: 'support'
       }
     },
     activityIndex: 7,
-    setBusinessResults: jest.fn(),
-    setDocumentation: jest.fn(),
-    setIndustryStandards: jest.fn(),
-    setInteroperability: jest.fn(),
-    setKeyPersonnel: jest.fn(),
-    setLeverage: jest.fn(),
-    setMinimizeCost: jest.fn(),
-    setMITA: jest.fn(),
-    setMitigationStrategy: jest.fn(),
-    setModularity: jest.fn(),
-    setReporting: jest.fn()
+    setDoesNotSupport: jest.fn(),
+    setSupport: jest.fn()
   };
 
   const component = shallow(<StandardsAndConditions {...props} />);
 
   beforeEach(() => {
-    props.setBusinessResults.mockClear();
-    props.setDocumentation.mockClear();
-    props.setIndustryStandards.mockClear();
-    props.setInteroperability.mockClear();
-    props.setKeyPersonnel.mockClear();
-    props.setLeverage.mockClear();
-    props.setMinimizeCost.mockClear();
-    props.setMITA.mockClear();
-    props.setMitigationStrategy.mockClear();
-    props.setModularity.mockClear();
-    props.setReporting.mockClear();
+    props.setDoesNotSupport.mockClear();
+    props.setSupport.mockClear();
   });
 
   it('renders correctly', () => {
@@ -76,106 +37,19 @@ describe('the Schedule (milestones) component', () => {
   });
 
   describe('events', () => {
-    // These tests are based on the order in which these fields are rendered
-
-    it('updates activity modularity standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(0)
-        .prop('onSync')('new modularity');
-      expect(props.setModularity).toHaveBeenCalledWith(7, 'new modularity');
-    });
-
-    it('updates activity MITA standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(1)
-        .prop('onSync')('new mita');
-      expect(props.setMITA).toHaveBeenCalledWith(7, 'new mita');
-    });
-
-    it('updates activity industry standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(2)
-        .prop('onSync')('new industry standards');
-      expect(props.setIndustryStandards).toHaveBeenCalledWith(
+    it('updates explanation for not supporting standards and conditions', () => {
+      component.find('TextArea').prop('onChange')({
+        target: { value: 'new not support' }
+      });
+      expect(props.setDoesNotSupport).toHaveBeenCalledWith(
         7,
-        'new industry standards'
+        'new not support'
       );
     });
 
-    it('updates activity leverage standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(3)
-        .prop('onSync')('new leverage');
-      expect(props.setLeverage).toHaveBeenCalledWith(7, 'new leverage');
-    });
-
-    it('updates activity business results standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(4)
-        .prop('onSync')('new business results');
-      expect(props.setBusinessResults).toHaveBeenCalledWith(
-        7,
-        'new business results'
-      );
-    });
-
-    it('updates activity reporting standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(5)
-        .prop('onSync')('new reporting');
-      expect(props.setReporting).toHaveBeenCalledWith(7, 'new reporting');
-    });
-
-    it('updates activity interoperability standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(6)
-        .prop('onSync')('new interop');
-      expect(props.setInteroperability).toHaveBeenCalledWith(7, 'new interop');
-    });
-
-    it('updates activity mitigation strategy standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(7)
-        .prop('onSync')('new mitigation');
-      expect(props.setMitigationStrategy).toHaveBeenCalledWith(
-        7,
-        'new mitigation'
-      );
-    });
-
-    it('updates activity key personnel standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(8)
-        .prop('onSync')('new person');
-      expect(props.setKeyPersonnel).toHaveBeenCalledWith(7, 'new person');
-    });
-
-    it('updates activity documentation standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(9)
-        .prop('onSync')('new documentation');
-      expect(props.setDocumentation).toHaveBeenCalledWith(
-        7,
-        'new documentation'
-      );
-    });
-
-    it('updates activity minimize cost standards', () => {
-      component
-        .find('Connect(RichText)')
-        .at(10)
-        .prop('onSync')('new minimum cost');
-      expect(props.setMinimizeCost).toHaveBeenCalledWith(7, 'new minimum cost');
+    it('updates description of supporting standards and conditions', () => {
+      component.find('Connect(RichText)').prop('onSync')('new support');
+      expect(props.setSupport).toHaveBeenCalledWith(7, 'new support');
     });
   });
 
@@ -196,17 +70,8 @@ describe('the Schedule (milestones) component', () => {
 
     it('map dispatch to props', () => {
       expect(mapDispatchToProps).toEqual({
-        setBusinessResults: setActivityStandardsBusinessResults,
-        setDocumentation: setActivityStandardsDocumentation,
-        setIndustryStandards: setActivityStandardsIndustryStandards,
-        setInteroperability: setActivityStandardsInteroperability,
-        setKeyPersonnel: setActivityStandardsKeyPersonnel,
-        setLeverage: setActivityStandardsLeverage,
-        setMinimizeCost: setActivityStandardsMinimizeCost,
-        setMITA: setActivityStandardsMITA,
-        setMitigationStrategy: setActivityStandardsMitigationStrategy,
-        setModularity: setActivityStandardsModularity,
-        setReporting: setActivityStandardsReporting
+        setDoesNotSupport: setActivityStandardAndConditionDoesNotSupportExplanation,
+        setSupport: setActivityStandardAndConditionSupportExplanation
       });
     });
   });

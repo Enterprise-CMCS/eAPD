@@ -1,25 +1,19 @@
 import { EDIT_APD } from '../editApd/symbols';
 
-const getAction = propertyName => (activityIndex, newValue) => ({
+export const setActivityStandardAndConditionDoesNotSupportExplanation = (
+  activityIndex,
+  explanation
+) => ({
   type: EDIT_APD,
-  path: `/activities/${activityIndex}/standardsAndConditions/${propertyName}`,
-  value: newValue
+  path: `/activities/${activityIndex}/standardsAndConditions/doesNotSupport`,
+  value: explanation
 });
 
-export const setActivityStandardsBusinessResults = getAction('businessResults');
-export const setActivityStandardsDocumentation = getAction('documentation');
-export const setActivityStandardsIndustryStandards = getAction(
-  'industryStandards'
-);
-export const setActivityStandardsInteroperability = getAction(
-  'interoperability'
-);
-export const setActivityStandardsKeyPersonnel = getAction('keyPersonnel');
-export const setActivityStandardsLeverage = getAction('leverage');
-export const setActivityStandardsMinimizeCost = getAction('minimizeCost');
-export const setActivityStandardsMITA = getAction('mita');
-export const setActivityStandardsMitigationStrategy = getAction(
-  'mitigationStrategy'
-);
-export const setActivityStandardsModularity = getAction('modularity');
-export const setActivityStandardsReporting = getAction('reporting');
+export const setActivityStandardAndConditionSupportExplanation = (
+  activityIndex,
+  explanation
+) => ({
+  type: EDIT_APD,
+  path: `/activities/${activityIndex}/standardsAndConditions/supports`,
+  value: explanation
+});
