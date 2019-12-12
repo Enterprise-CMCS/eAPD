@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -8,7 +8,6 @@ import {
 } from '../../actions/editActivity';
 
 import RichText from '../../components/RichText';
-import { Subsection } from '../../components/Section';
 import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
@@ -18,8 +17,9 @@ const StandardsAndConditions = ({
   setDoesNotSupport,
   setSupport
 }) => (
-  <Subsection resource="activities.standardsAndConditions" nested>
-    <div className="ds-u-margin-bottom--6">
+  <Fragment>
+    <h4 className="ds-h4">Standards & Conditions</h4>
+    <div className="ds-u-margin-bottom--6 ds-u-margin-top--3">
       <h5 className="ds-h5 ds-u-margin-bottom--3">
         Include a description about how this activity will support the Medicaid
         standards and conditions{' '}
@@ -53,7 +53,7 @@ const StandardsAndConditions = ({
         />
       </div>
     </div>
-  </Subsection>
+  </Fragment>
 );
 
 StandardsAndConditions.propTypes = {
