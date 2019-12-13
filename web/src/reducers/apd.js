@@ -20,9 +20,7 @@ import {
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
-  SET_SELECT_APD_ON_LOAD,
-  SUBMIT_APD_SUCCESS,
-  WITHDRAW_APD_SUCCESS
+  SET_SELECT_APD_ON_LOAD
 } from '../actions/apd';
 import {
   ADD_APD_ITEM,
@@ -372,11 +370,6 @@ const reducer = (state = initialState, action) => {
       };
     case SET_SELECT_APD_ON_LOAD:
       return { ...state, selectAPDOnLoad: true };
-    case SUBMIT_APD_SUCCESS:
-      return u({ data: { status: 'submitted' } }, state);
-
-    case WITHDRAW_APD_SUCCESS:
-      return u({ data: { status: 'draft' } }, state);
 
     default:
       return state;
