@@ -3,7 +3,7 @@ import React from 'react';
 import sinon from 'sinon';
 
 import { plain as ExportInstructions, mapDispatchToProps } from './Export';
-import { printApd } from '../../actions/print';
+import { printApd } from '../../actions/app';
 
 describe('apd export component', () => {
   test('renders correctly', () => {

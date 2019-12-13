@@ -1,7 +1,8 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { NAVIGATION_SCROLL_TO_WAYPOINT, jumpTo, scrollTo } from './navigation';
+import { jumpTo, scrollTo } from './navigation';
+import { NAVIGATION_SCROLL_TO_WAYPOINT } from './symbols';
 
 const mockStore = configureStore([thunk]);
 
