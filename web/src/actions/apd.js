@@ -17,13 +17,6 @@ export const DELETE_APD_FAILURE = Symbol('delete apd : failure');
 export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
-export const SELECT_APD = 'SELECT_APD';
-export const SUBMIT_APD_REQUEST = 'SUBMIT_APD_REQUEST';
-export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
-export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
-export const WITHDRAW_APD_REQUEST = Symbol('withdraw apd request');
-export const WITHDRAW_APD_SUCCESS = Symbol('withdraw apd success');
-export const WITHDRAW_APD_FAILURE = Symbol('withdraw apd failure');
 
 export const SET_SELECT_APD_ON_LOAD = 'SET_SELECT_APD_ON_LOAD';
 export const selectApdOnLoad = () => (dispatch, getState) => {
