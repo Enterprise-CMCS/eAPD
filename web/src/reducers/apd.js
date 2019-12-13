@@ -22,8 +22,7 @@ import {
   GET_APD_FAILURE,
   SET_SELECT_APD_ON_LOAD,
   SUBMIT_APD_SUCCESS,
-  WITHDRAW_APD_SUCCESS,
-  SAVE_APD_SUCCESS
+  WITHDRAW_APD_SUCCESS
 } from '../actions/apd';
 import {
   ADD_APD_ITEM,
@@ -32,7 +31,7 @@ import {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } from '../actions/editApd';
-import { SELECT_APD } from '../actions/app';
+import { SAVE_APD_SUCCESS, SELECT_APD } from '../actions/app';
 import { defaultAPDYearOptions, generateKey } from '../util';
 
 export const getPatchesToAddYear = (state, year) => {

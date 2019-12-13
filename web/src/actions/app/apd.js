@@ -1,13 +1,52 @@
 import { push } from 'connected-react-router';
 
-import { SELECT_APD } from './symbols';
+import {
+  SAVE_APD_FAILURE,
+  SAVE_APD_REQUEST,
+  SAVE_APD_SUCCESS,
+  SELECT_APD
+} from './symbols';
 import { updateBudget } from '../budget';
 import { EDIT_APD } from '../editApd/symbols';
 import { ariaAnnounceApdLoaded, ariaAnnounceApdLoading } from '../aria';
+import { selectApdData } from '../../reducers/apd.selectors';
+import {
+  selectHasChanges,
+  selectPatches
+} from '../../reducers/patch.selectors';
 import axios from '../../util/api';
 import { fromAPI, initialAssurances } from '../../util/serialization/apd';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
+
+export const saveApd = () => (dispatch, getState) => {
+  const state = getState();
+  const hasChanges = selectHasChanges(state);
+
+  if (!hasChanges) {
+    return Promise.resolve();
+  }
+
+  dispatch({ type: SAVE_APD_REQUEST });
+
+  const { id: apdID } = selectApdData(state);
+  const patches = selectPatches(state);
+
+  return axios
+    .patch(`/apds/${apdID}`, patches)
+    .then(res => {
+      dispatch({ type: SAVE_APD_SUCCESS, data: res.data });
+      return res.data;
+    })
+    .catch(error => {
+      if (error.response.status === 403) {
+        dispatch({ type: SAVE_APD_FAILURE, data: 'save-apd.not-logged-in' });
+      } else {
+        dispatch({ type: SAVE_APD_FAILURE });
+      }
+      throw error;
+    });
+};
 
 export const selectApd = (
   id,
@@ -41,5 +80,3 @@ export const selectApd = (
     }
   });
 };
-
-export default selectApd;
