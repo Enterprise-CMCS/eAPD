@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 
 import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
 import Instruction from '../components/Instruction';
-import { deleteApd } from '../actions/apd';
-import { createApd, selectApd } from '../actions/app';
+import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 

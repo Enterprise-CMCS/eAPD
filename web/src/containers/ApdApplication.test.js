@@ -7,7 +7,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ApdApplication';
-import { selectApdOnLoad } from '../actions/apd';
+import { setApdToSelectOnLoad } from '../actions/app';
 
 describe('apd (application) component', () => {
   test('renders correctly', () => {
@@ -20,7 +20,7 @@ describe('apd (application) component', () => {
           needsSave
           isAdmin={false}
           place={{}}
-          selectApdOnLoad={() => {}}
+          setApdToSelectOnLoad={() => {}}
           year="the year"
         />
       )
@@ -36,7 +36,7 @@ describe('apd (application) component', () => {
           needsSave={false}
           isAdmin={false}
           place={{}}
-          selectApdOnLoad={selectApdOnLoadProp}
+          setApdToSelectOnLoad={selectApdOnLoadProp}
           year="the past"
         />
       )
@@ -53,7 +53,7 @@ describe('apd (application) component', () => {
           needsSave={false}
           isAdmin
           place={{}}
-          selectApdOnLoad={selectApdOnLoadProp}
+          setApdToSelectOnLoad={selectApdOnLoadProp}
           year="the future"
         />
       )
@@ -101,6 +101,6 @@ describe('apd (application) component', () => {
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ selectApdOnLoad });
+    expect(mapDispatchToProps).toEqual({ setApdToSelectOnLoad });
   });
 });
