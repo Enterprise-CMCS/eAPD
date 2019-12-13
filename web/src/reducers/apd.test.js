@@ -7,11 +7,8 @@ import { SELECT_APD } from '../actions/app/symbols';
 const mockClock = sinon.useFakeTimers(new Date(1990, 3, 24).getTime());
 
 const { default: apd, getPatchesForAddingItem } = require('./apd');
-const {
-  SUBMIT_APD_SUCCESS,
-  WITHDRAW_APD_SUCCESS,
-  SAVE_APD_SUCCESS
-} = require('../actions/apd');
+const { SAVE_APD_SUCCESS } = require('../actions/app');
+const { SUBMIT_APD_SUCCESS, WITHDRAW_APD_SUCCESS } = require('../actions/apd');
 const {
   ADD_APD_ITEM,
   ADD_APD_YEAR,

@@ -1,7 +1,5 @@
 import { push } from 'connected-react-router';
 
-import { selectApdData } from '../reducers/apd.selectors';
-import { selectHasChanges, selectPatches } from '../reducers/patch.selectors';
 import { getIsAdmin } from '../reducers/user.selector';
 import axios from '../util/api';
 import { fromAPI } from '../util/serialization/apd';
@@ -19,9 +17,6 @@ export const DELETE_APD_FAILURE = Symbol('delete apd : failure');
 export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
-export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
-export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
-export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
 export const SELECT_APD = 'SELECT_APD';
 export const SUBMIT_APD_REQUEST = 'SUBMIT_APD_REQUEST';
 export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
@@ -62,10 +57,6 @@ export const createApd = ({
       dispatch(createFailure(reason));
     });
 };
-
-export const requestSave = () => ({ type: SAVE_APD_REQUEST });
-export const saveSuccess = data => ({ type: SAVE_APD_SUCCESS, data });
-export const saveFailure = data => ({ type: SAVE_APD_FAILURE, data });
 
 export const fetchApd = ({
   global = window,
@@ -112,35 +103,6 @@ export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
   }
 
   return null;
-};
-
-export const saveApd = () => (dispatch, getState) => {
-  const state = getState();
-  const hasChanges = selectHasChanges(state);
-
-  if (!hasChanges) {
-    return Promise.resolve();
-  }
-
-  dispatch(requestSave());
-
-  const { id: apdID } = selectApdData(state);
-  const patches = selectPatches(state);
-
-  return axios
-    .patch(`/apds/${apdID}`, patches)
-    .then(res => {
-      dispatch(saveSuccess(res.data));
-      return res.data;
-    })
-    .catch(error => {
-      if (error.response.status === 403) {
-        dispatch(saveFailure('save-apd.not-logged-in'));
-      } else {
-        dispatch(saveFailure());
-      }
-      throw error;
-    });
 };
 
 export const deleteApd = (id, { fetch = fetchApd } = {}) => dispatch => {
