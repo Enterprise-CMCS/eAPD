@@ -4,19 +4,29 @@ import {
   CREATE_APD_FAILURE,
   CREATE_APD_REQUEST,
   CREATE_APD_SUCCESS,
+  DELETE_APD_FAILURE,
+  DELETE_APD_REQUEST,
+  DELETE_APD_SUCCESS,
+  FETCH_ALL_APDS_FAILURE,
+  FETCH_ALL_APDS_REQUEST,
+  FETCH_ALL_APDS_SUCCESS,
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS,
-  SELECT_APD
+  SELECT_APD,
+  SET_APD_TO_SELECT_ON_LOAD
 } from './symbols';
 import { updateBudget } from '../budget';
 import { EDIT_APD } from '../editApd/symbols';
 import { ariaAnnounceApdLoaded, ariaAnnounceApdLoading } from '../aria';
+
 import { selectApdData } from '../../reducers/apd.selectors';
 import {
   selectHasChanges,
   selectPatches
 } from '../../reducers/patch.selectors';
+import { getIsAdmin } from '../../reducers/user.selector';
+
 import axios from '../../util/api';
 import { fromAPI, initialAssurances } from '../../util/serialization/apd';
 
@@ -84,6 +94,13 @@ export const selectApd = (
   });
 };
 
+export const setApdToSelectOnLoad = () => (dispatch, getState) => {
+  const isAdmin = getIsAdmin(getState());
+  if (!isAdmin) {
+    dispatch({ type: SET_APD_TO_SELECT_ON_LOAD });
+  }
+};
+
 export const createApd = ({
   deserialize = fromAPI,
   pushRoute = push
@@ -99,5 +116,59 @@ export const createApd = ({
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
       dispatch({ type: CREATE_APD_FAILURE, data: reason });
+    });
+};
+
+export const fetchAllApds = ({
+  global = window,
+  pushRoute = push,
+  select = selectApd
+} = {}) => (dispatch, getState) => {
+  dispatch({ type: FETCH_ALL_APDS_REQUEST });
+
+  const url = `/apds`;
+
+  return axios
+    .get(url)
+    .then(async req => {
+      const apd = Array.isArray(req.data) ? req.data : null;
+      dispatch({
+        type: FETCH_ALL_APDS_SUCCESS,
+        data: apd.filter(({ status }) => status !== 'archived')
+      });
+
+      const {
+        apd: { selectAPDOnLoad }
+      } = getState();
+      if (
+        selectAPDOnLoad &&
+        global.localStorage &&
+        global.localStorage.getItem(LAST_APD_ID_STORAGE_KEY)
+      ) {
+        await dispatch(
+          select(global.localStorage.getItem('last-apd-id'), {
+            global,
+            pushRoute
+          })
+        );
+      }
+    })
+    .catch(error => {
+      const reason = error.response ? error.response.data : 'N/A';
+      dispatch({ type: FETCH_ALL_APDS_FAILURE, error: reason });
+    });
+};
+
+export const deleteApd = (id, { fetch = fetchAllApds } = {}) => dispatch => {
+  dispatch({ type: DELETE_APD_REQUEST });
+
+  return axios
+    .delete(`/apds/${id}`)
+    .then(() => {
+      dispatch({ type: DELETE_APD_SUCCESS });
+      dispatch(fetch());
+    })
+    .catch(() => {
+      dispatch({ type: DELETE_APD_FAILURE });
     });
 };

@@ -1,6 +1,6 @@
 import axios from '../util/api';
 
-import { fetchApd } from './apd';
+import { fetchAllApds } from './app';
 import { getRoles, getUsers } from './admin';
 
 export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
@@ -28,7 +28,7 @@ export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
 const loadData = activities => dispatch => {
   if (activities.includes('view-document')) {
-    dispatch(fetchApd());
+    dispatch(fetchAllApds());
   }
   if (activities.includes('view-users')) {
     dispatch(getUsers());

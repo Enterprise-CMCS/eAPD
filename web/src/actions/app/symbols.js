@@ -15,3 +15,5 @@ export const SAVE_APD_REQUEST = Symbol('save apd request');
 export const SAVE_APD_SUCCESS = Symbol('save apd success');
 
 export const SELECT_APD = Symbol('select apd');
+
+export const SET_APD_TO_SELECT_ON_LOAD = Symbol('set apd to select on load');
