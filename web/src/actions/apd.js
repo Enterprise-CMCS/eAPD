@@ -2,12 +2,10 @@ import { push } from 'connected-react-router';
 
 import { getIsAdmin } from '../reducers/user.selector';
 import axios from '../util/api';
-import { fromAPI } from '../util/serialization/apd';
 import { selectApd } from './app';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
-export const CREATE_APD = 'CREATE_APD';
 export const CREATE_APD_REQUEST = 'CREATE_APD_REQUEST';
 export const CREATE_APD_SUCCESS = 'CREATE_APD_SUCCESS';
 export const CREATE_APD_FAILURE = 'CREATE_APD_FAILURE';
@@ -29,27 +27,6 @@ export const selectApdOnLoad = () => (dispatch, getState) => {
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
 export const failApd = error => ({ type: GET_APD_FAILURE, error });
-
-export const createRequest = () => ({ type: CREATE_APD_REQUEST });
-export const createSuccess = data => ({ type: CREATE_APD_SUCCESS, data });
-export const createFailure = () => ({ type: CREATE_APD_FAILURE });
-export const createApd = ({
-  deserialize = fromAPI,
-  pushRoute = push
-} = {}) => dispatch => {
-  dispatch(createRequest());
-  return axios
-    .post('/apds')
-    .then(async req => {
-      const apd = deserialize(req.data);
-      dispatch(createSuccess(apd));
-      await dispatch(selectApd(apd.id, '/apd', { deserialize, pushRoute }));
-    })
-    .catch(error => {
-      const reason = error.response ? error.response.data : 'N/A';
-      dispatch(createFailure(reason));
-    });
-};
 
 export const fetchApd = ({
   global = window,
@@ -86,16 +63,6 @@ export const fetchApd = ({
       const reason = error.response ? error.response.data : 'N/A';
       dispatch(failApd(reason));
     });
-};
-
-const shouldFetchApd = state => !state.apd.loaded;
-
-export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
-  if (shouldFetchApd(getState())) {
-    return dispatch(fetchApd());
-  }
-
-  return null;
 };
 
 export const deleteApd = (id, { fetch = fetchApd } = {}) => dispatch => {

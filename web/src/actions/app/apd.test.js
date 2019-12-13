@@ -2,8 +2,11 @@ import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { saveApd, selectApd } from './apd';
+import { createApd, saveApd, selectApd } from './apd';
 import {
+  CREATE_APD_FAILURE,
+  CREATE_APD_REQUEST,
+  CREATE_APD_SUCCESS,
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS,
@@ -17,6 +20,45 @@ const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios);
 
 describe('application-level actions', () => {
+  describe('create a new apd', () => {
+    it('on success, adds the new APD to the store and switches to it', async () => {
+      const newapd = { id: 'bloop', federalCitations: { already: 'exist' } };
+      fetchMock.onPost('/apds').reply(200, newapd);
+
+      const apd = { id: 'apd-id', federalCitations: { already: 'exist' } };
+      const deserialize = jest.fn().mockReturnValue(apd);
+
+      fetchMock.onGet('/apds/apd-id').reply(200, apd);
+
+      const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+      const state = {
+        apd: {
+          byId: {
+            bloop: { hello: 'world' }
+          }
+        }
+      };
+      const store = mockStore(state);
+
+      const expectedActions = [
+        { type: CREATE_APD_REQUEST },
+        { type: CREATE_APD_SUCCESS, data: apd },
+        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading' },
+        { type: SELECT_APD, apd },
+        { type: UPDATE_BUDGET, state },
+        { type: 'FAKE_PUSH', pushRoute: '/apd' },
+        {
+          type: ARIA_ANNOUNCE_CHANGE,
+          message: 'Your APD is loaded and ready to edit'
+        }
+      ];
+
+      await store.dispatch(createApd({ deserialize, pushRoute }));
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
   describe('save APD to API', () => {
     const state = {
       notification: { open: false, queue: [] },
