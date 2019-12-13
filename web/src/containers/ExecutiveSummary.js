@@ -9,7 +9,7 @@ import Review from '../components/Review';
 import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
 
-import { jumpTo } from '../actions/navigation';
+import { jumpTo } from '../actions/app';
 import { selectApdYears } from '../reducers/apd.selectors';
 import {
   selectBudgetExecutiveSummary,

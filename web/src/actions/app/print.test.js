@@ -2,7 +2,8 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
 
-import * as actions from './print';
+import { printApd } from './print';
+import { PRINT_APD } from './symbols';
 
 const mockStore = configureStore([thunk]);
 
@@ -14,9 +15,9 @@ describe('print actions', () => {
 
     const store = mockStore({});
 
-    store.dispatch(actions.printApd({ global }));
+    store.dispatch(printApd({ global }));
 
-    expect(store.getActions()).toEqual([{ type: actions.PRINT_APD }]);
+    expect(store.getActions()).toEqual([{ type: PRINT_APD }]);
     expect(global.print.calledOnce).toEqual(true);
   });
 });

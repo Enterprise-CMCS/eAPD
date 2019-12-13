@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
 
 import { t } from '../i18n';
-import { jumpTo } from '../actions/navigation';
+import { jumpTo } from '../actions/app';
 import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
 
