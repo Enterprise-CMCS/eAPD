@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
 import Instruction from '../components/Instruction';
-import { createApd, deleteApd } from '../actions/apd';
-import { selectApd } from '../actions/app';
+import { deleteApd } from '../actions/apd';
+import { createApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 
@@ -144,7 +144,7 @@ StateDashboard.propTypes = {
 
 StateDashboard.defaultProps = {
   route: '/apd'
-}
+};
 
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),

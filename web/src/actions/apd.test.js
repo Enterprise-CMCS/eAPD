@@ -4,9 +4,6 @@ import thunk from 'redux-thunk';
 import sinon from 'sinon';
 
 import * as actions from './apd';
-import { SELECT_APD } from './app';
-import { ARIA_ANNOUNCE_CHANGE } from './aria';
-import { UPDATE_BUDGET } from './budget';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
@@ -54,80 +51,6 @@ describe('apd actions', () => {
     await store.dispatch(actions.selectApdOnLoad());
 
     expect(store.getActions()).toEqual([]);
-  });
-
-  it('createRequest should create CREATE_APD_REQUEST action', () => {
-    expect(actions.createRequest()).toEqual({
-      type: actions.CREATE_APD_REQUEST
-    });
-  });
-
-  it('createSuccess should create CREATE_APD_SUCCESS action', () => {
-    expect(actions.createSuccess()).toEqual({
-      type: actions.CREATE_APD_SUCCESS
-    });
-  });
-
-  it('createFailure should create CREATE_APD_FAILURE action', () => {
-    expect(actions.createFailure()).toEqual({
-      type: actions.CREATE_APD_FAILURE
-    });
-  });
-
-  describe('create APD', () => {
-    // TODO: But for real.
-    it('adds the new APD to the store and switches to it on success', () => {
-      const newapd = { id: 'bloop', federalCitations: { already: 'exist' } };
-      fetchMock.onPost('/apds').reply(200, newapd);
-
-      const apd = { id: 'apd-id', federalCitations: { already: 'exist' } };
-      const deserialize = sinon.stub().returns(apd);
-
-      fetchMock.onGet('/apds/apd-id').reply(200, apd);
-
-      const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
-      const state = {
-        apd: {
-          byId: {
-            bloop: { hello: 'world' }
-          }
-        }
-      };
-      const store = mockStore(state);
-
-      const expectedActions = [
-        { type: actions.CREATE_APD_REQUEST },
-        { type: actions.CREATE_APD_SUCCESS, data: apd },
-        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading' },
-        { type: SELECT_APD, apd },
-        { type: UPDATE_BUDGET, state },
-        { type: 'FAKE_PUSH', pushRoute: '/apd' },
-        {
-          type: ARIA_ANNOUNCE_CHANGE,
-          message: 'Your APD is loaded and ready to edit'
-        }
-      ];
-
-      return store
-        .dispatch(actions.createApd({ deserialize, pushRoute }))
-        .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
-        });
-    });
-
-    it('does not do very much if it fails, either', () => {
-      fetchMock.onPost('/apds').reply(403);
-      const store = mockStore();
-
-      const expectedActions = [
-        { type: actions.CREATE_APD_REQUEST },
-        { type: actions.CREATE_APD_FAILURE }
-      ];
-
-      return store.dispatch(actions.createApd()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
-    });
   });
 
   describe('delete an APD', () => {
@@ -264,34 +187,6 @@ describe('apd actions', () => {
       return store.dispatch(actions.fetchApd()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
-    });
-  });
-
-  describe('fetch APD data if needed (async)', () => {
-    it('fetches data if it is not already loaded', async () => {
-      const store = mockStore({
-        apd: {
-          loaded: false
-        }
-      });
-
-      const expectedActions = [{ type: actions.GET_APD_REQUEST }];
-
-      await store.dispatch(actions.fetchApdDataIfNeeded());
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining(expectedActions)
-      );
-    });
-
-    it('does not fetch data if it is already loaded', async () => {
-      const store = mockStore({
-        apd: {
-          loaded: true
-        }
-      });
-
-      await store.dispatch(actions.fetchApdDataIfNeeded());
-      expect(store.getActions()).toEqual([]);
     });
   });
 });

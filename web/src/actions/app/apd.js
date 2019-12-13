@@ -1,6 +1,9 @@
 import { push } from 'connected-react-router';
 
 import {
+  CREATE_APD_FAILURE,
+  CREATE_APD_REQUEST,
+  CREATE_APD_SUCCESS,
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS,
@@ -79,4 +82,22 @@ export const selectApd = (
       global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
     }
   });
+};
+
+export const createApd = ({
+  deserialize = fromAPI,
+  pushRoute = push
+} = {}) => dispatch => {
+  dispatch({ type: CREATE_APD_REQUEST });
+  return axios
+    .post('/apds')
+    .then(async req => {
+      const apd = deserialize(req.data);
+      dispatch({ type: CREATE_APD_SUCCESS, data: apd });
+      await dispatch(selectApd(apd.id, '/apd', { deserialize, pushRoute }));
+    })
+    .catch(error => {
+      const reason = error.response ? error.response.data : 'N/A';
+      dispatch({ type: CREATE_APD_FAILURE, data: reason });
+    });
 };
