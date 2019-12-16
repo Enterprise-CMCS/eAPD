@@ -11,6 +11,7 @@ footer {
     align-items: center;
     img {
       width: 100%; /* fix for IE */
+      max-width: 180px;
     }
   }
 

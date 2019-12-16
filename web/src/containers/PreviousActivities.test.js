@@ -26,7 +26,7 @@ describe('previous activities component', () => {
 
   it('updates on text change', () => {
     const component = shallow(<PreviousActivities {...props} />);
-    component.find('RichText').prop('onSync')('this is html');
+    component.find('Connect(RichText)').prop('onSync')('this is html');
 
     expect(props.setSummary).toHaveBeenCalledWith('this is html');
   });
