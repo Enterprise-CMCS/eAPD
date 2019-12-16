@@ -1,4 +1,4 @@
-import { SAVE_APD_SUCCESS } from '../actions/apd';
+import { SAVE_APD_REQUEST, SAVE_APD_SUCCESS } from '../actions/apd';
 import {
   ADD_APD_ITEM,
   ADD_APD_YEAR,
@@ -14,8 +14,16 @@ describe('JSON patch reducer', () => {
     expect(reducer(undefined, {})).toEqual([]);
   });
 
-  it('resets to the initial state when an APD is saved', () => {
-    expect(reducer({}, { type: SAVE_APD_SUCCESS })).toEqual([]);
+  it('removes the already-saved entries when an APD is successfully saved', () => {
+    // Prime the reducer by trigger a save request. The state at this point is
+    // marked for saving and should be removed when the safe is cucessful
+    reducer(['a', 'b', 'c'], { type: SAVE_APD_REQUEST });
+
+    // Now do a successful save and make sure those previous elements were
+    // removed, but new elements are left alone
+    expect(
+      reducer(['a', 'b', 'c', 'e', 'f'], { type: SAVE_APD_SUCCESS })
+    ).toEqual(['e', 'f']);
   });
 
   it('pushes a new edit to the list when an APD is edited', () => {
