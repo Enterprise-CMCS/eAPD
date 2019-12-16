@@ -44,7 +44,7 @@ describe('activity overview/summary section (in the activity body)', () => {
   it('handles changing the activity description', () => {
     const component = shallow(<ActivityOverview {...props} />);
     component
-      .find('RichText')
+      .find('Connect(RichText)')
       .at(0) // makes an assumption about what order these components appear in
       .prop('onSync')('new description');
 
@@ -54,7 +54,7 @@ describe('activity overview/summary section (in the activity body)', () => {
   it('handles changing the activity statement of alternatives', () => {
     const component = shallow(<ActivityOverview {...props} />);
     component
-      .find('RichText')
+      .find('Connect(RichText)')
       .at(1) // makes an assumption about what order these components appear in
       .prop('onSync')('new alternatives');
 

@@ -80,7 +80,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity modularity standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(0)
         .prop('onSync')('new modularity');
       expect(props.setModularity).toHaveBeenCalledWith(7, 'new modularity');
@@ -88,7 +88,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity MITA standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(1)
         .prop('onSync')('new mita');
       expect(props.setMITA).toHaveBeenCalledWith(7, 'new mita');
@@ -96,7 +96,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity industry standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(2)
         .prop('onSync')('new industry standards');
       expect(props.setIndustryStandards).toHaveBeenCalledWith(
@@ -107,7 +107,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity leverage standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(3)
         .prop('onSync')('new leverage');
       expect(props.setLeverage).toHaveBeenCalledWith(7, 'new leverage');
@@ -115,7 +115,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity business results standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(4)
         .prop('onSync')('new business results');
       expect(props.setBusinessResults).toHaveBeenCalledWith(
@@ -126,7 +126,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity reporting standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(5)
         .prop('onSync')('new reporting');
       expect(props.setReporting).toHaveBeenCalledWith(7, 'new reporting');
@@ -134,7 +134,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity interoperability standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(6)
         .prop('onSync')('new interop');
       expect(props.setInteroperability).toHaveBeenCalledWith(7, 'new interop');
@@ -142,7 +142,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity mitigation strategy standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(7)
         .prop('onSync')('new mitigation');
       expect(props.setMitigationStrategy).toHaveBeenCalledWith(
@@ -153,7 +153,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity key personnel standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(8)
         .prop('onSync')('new person');
       expect(props.setKeyPersonnel).toHaveBeenCalledWith(7, 'new person');
@@ -161,7 +161,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity documentation standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(9)
         .prop('onSync')('new documentation');
       expect(props.setDocumentation).toHaveBeenCalledWith(
@@ -172,7 +172,7 @@ describe('the Schedule (milestones) component', () => {
 
     it('updates activity minimize cost standards', () => {
       component
-        .find('RichText')
+        .find('Connect(RichText)')
         .at(10)
         .prop('onSync')('new minimum cost');
       expect(props.setMinimizeCost).toHaveBeenCalledWith(7, 'new minimum cost');
