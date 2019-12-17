@@ -478,17 +478,19 @@ jobs:
           when: on_fail
           name: notify on deployment failure
           command: |
-            curl -X "POST" "${SLACK_WEBHOOK_URL}" \
-              -H "Content-Type: application/json; charset=utf-8" \
-              -d $'{
-                "attachments": [
-                  {
-                    "color": "#d83933",
-                    "fallback": "<< parameters.env >> backend deployment has failed",
-                    "text": "<< parameters.env >> backend deployment has failed"
-                  }
-                ]
-              }'
+            if [ -n "${SLACK_WEBHOOK_URL}" ]; then
+              curl -X "POST" "${SLACK_WEBHOOK_URL}" \
+                -H "Content-Type: application/json; charset=utf-8" \
+                -d $'{
+                  "attachments": [
+                    {
+                      "color": "#d83933",
+                      "fallback": "<< parameters.env >> backend deployment has failed",
+                      "text": "<< parameters.env >> backend deployment has failed"
+                    }
+                  ]
+                }'
+            fi
             false
 
   # Cleans up preview deploys that are no longer associated with open pull
@@ -535,17 +537,19 @@ jobs:
           when: on_fail
           name: notify on deployment failure
           command: |
-            curl -X "POST" "${SLACK_WEBHOOK_URL}" \
-              -H "Content-Type: application/json; charset=utf-8" \
-              -d $'{
-                "attachments": [
-                  {
-                    "color": "#d83933",
-                    "fallback": "<< parameters.env >> frontend deployment has failed",
-                    "text": "<< parameters.env >> frontend deployment has failed"
-                  }
-                ]
-              }'
+            if [ -n "${SLACK_WEBHOOK_URL}" ]; then
+              curl -X "POST" "${SLACK_WEBHOOK_URL}" \
+                -H "Content-Type: application/json; charset=utf-8" \
+                -d $'{
+                  "attachments": [
+                    {
+                      "color": "#d83933",
+                      "fallback": "<< parameters.env >> frontend deployment has failed",
+                      "text": "<< parameters.env >> frontend deployment has failed"
+                    }
+                  ]
+                }'
+            fi
             false
 
   # Preview deployment, used to put up preview links in pull requests
