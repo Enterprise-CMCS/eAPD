@@ -7,11 +7,11 @@
 }
 
 .site-sidebar {
-  top: 50px;
-  width: 212px;
+  width: 212px; // fix for IE
   position: fixed;
   max-height: 100vh;
   overflow-y: auto;
+  float: left;
   + .site-main {
     margin-left: 244px; // sidebar width plus $spacer-4
   }
