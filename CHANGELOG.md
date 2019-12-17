@@ -8,7 +8,11 @@ Anticipated release: December 16, 2019
 
 #### 🐛 Bugs fixed
 
+- Fixed an issue with the sidebar scrolling into the footer ([#1967])
+
 #### ⚙️ Behind the scenes
+
+- Added OWASP ZAP active security scan in continuous integration and deployment ([#1928])
 
 # 2.1.0
 
@@ -207,3 +211,5 @@ Pilot release to select state partners
 [#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
+[#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
+[#1928]: https://github.com/18F/cms-hitech-apd/issues/1928
