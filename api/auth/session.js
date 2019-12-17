@@ -97,15 +97,26 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
             }
           ),
           {
+            domain:
+              process.env.NODE_ENV === 'production' ? '.cms.gov' : undefined,
             httpOnly: true,
             maxAge: sessionLifetimeMilliseconds,
-            overwrite: true
+            overwrite: true,
+            sameSite: 'strict',
+            secure: process.env.NODE_ENV === 'production'
           }
         );
       } else {
         // Else, write a cookie with an immediate expiration
         logger.silly('expiring/setting empty session cookie');
-        cookies.set(COOKIE_NAME, '', { maxAge: 0, httpOnly: true });
+        cookies.set(COOKIE_NAME, '', {
+          domain:
+            process.env.NODE_ENV === 'production' ? '.cms.gov' : undefined,
+          maxAge: 0,
+          httpOnly: true,
+          sameSite: 'strict',
+          secure: process.env.NODE_ENV === 'production'
+        });
       }
 
       // Now call the original writeHead method
