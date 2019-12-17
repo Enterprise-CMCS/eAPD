@@ -8,6 +8,8 @@ Anticipated release: December 16, 2019
 
 #### 🐛 Bugs fixed
 
+- Fixed an issue with the sidebar scrolling into the footer ([#1967])
+
 #### ⚙️ Behind the scenes
 
 # 2.1.0
@@ -206,3 +208,4 @@ Pilot release to select state partners
 [#1921]: https://github.com/18F/cms-hitech-apd/pull/1921
 [#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
+[#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
