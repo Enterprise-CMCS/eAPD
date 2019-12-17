@@ -5,6 +5,7 @@ Anticipated release: December 16, 2019
 #### 🚀 New features
 - Make disabled button state more explicit ([#1957])
 - Upload files from the rich text editor instead of embedding them directly into the text ([#1735])
+- Made the rich text areas resize to fit their contents
 
 #### 🐛 Bugs fixed
 
