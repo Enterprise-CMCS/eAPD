@@ -10,6 +10,8 @@ Anticipated release: December 16, 2019
 
 #### ⚙️ Behind the scenes
 
+- Added OWASP ZAP active security scan in continuous integration and deployment ([#1928])
+
 # 2.1.0
 
 Released: December 3, 2019
@@ -206,3 +208,4 @@ Pilot release to select state partners
 [#1921]: https://github.com/18F/cms-hitech-apd/pull/1921
 [#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
+[#1928]: https://github.com/18F/cms-hitech-apd/issues/1928
