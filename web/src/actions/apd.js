@@ -136,7 +136,7 @@ export const saveApd = (() => {
         const hasChanges = selectHasChanges(state);
 
         if (!hasChanges) {
-          return Promise.resolve();
+          return resolve();
         }
 
         isSaving = true;
