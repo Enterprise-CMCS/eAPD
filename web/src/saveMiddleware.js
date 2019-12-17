@@ -7,7 +7,7 @@ import {
 } from './actions/editApd';
 import { saveApd } from './actions/apd';
 
-const saveMiddleware = store => next => action => {
+const saveMiddleware = (store, { save = saveApd } = {}) => next => action => {
   const result = next(action);
   switch (action.type) {
     case ADD_APD_ITEM:
@@ -15,7 +15,7 @@ const saveMiddleware = store => next => action => {
     case EDIT_APD:
     case REMOVE_APD_ITEM:
     case REMOVE_APD_YEAR:
-      store.dispatch(saveApd());
+      store.dispatch(save());
       break;
     default:
       break;
