@@ -251,37 +251,35 @@ const Activity = ({ activity, activityIndex }) => {
         <br /> Standards and Conditions
       </h3>
 
-      {activity.standardsAndConditions.supports && (
-        <Fragment>
-          <h4>
-            This activity supports the Medicaid standards and conditions from 42
-            CFR 433.112.
-          </h4>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: activity.standardsAndConditions.supports
-            }}
-          />
-        </Fragment>
+      <h4>
+        This activity supports the Medicaid standards and conditions from 42 CFR
+        433.112.
+      </h4>
+      {activity.standardsAndConditions.supports ? (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: activity.standardsAndConditions.supports
+          }}
+        />
+      ) : (
+        <div>
+          No response was provided for how this activity will support the
+          Medicaid standards and conditions.
+        </div>
       )}
 
-      {activity.standardsAndConditions.doesNotSupport && (
-        <Fragment>
-          <h4>
-            This activity does not support the Medicaid standards and conditions
-            from 42 CFR 433.112.
-          </h4>
-          <div>{activity.standardsAndConditions.doesNotSupport}</div>
-        </Fragment>
+      <h4>
+        This activity does not support the Medicaid standards and conditions
+        from 42 CFR 433.112.
+      </h4>
+      {activity.standardsAndConditions.doesNotSupport ? (
+        <div>{activity.standardsAndConditions.doesNotSupport}</div>
+      ) : (
+        <div>
+          No response was provided for how this activity will support the
+          Medicaid standards and conditions.
+        </div>
       )}
-
-      {!activity.standardsAndConditions.supports &&
-        !activity.standardsAndConditions.doesNotSupport && (
-          <h4>
-            This activity does not answer whether it supports the Medicaid
-            standards and conditions from 42 CFR 433.112.
-          </h4>
-        )}
 
       <hr />
     </Fragment>
