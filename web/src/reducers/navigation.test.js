@@ -1,4 +1,4 @@
-import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/navigation';
+import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/app';
 import reducer, { selectActiveSection } from './navigation';
 
 describe('navigation reducer', () => {

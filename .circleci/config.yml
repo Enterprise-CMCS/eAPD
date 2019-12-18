@@ -460,10 +460,10 @@ jobs:
             apt-get -qq install jq -y
             pip install --quiet awscli
             ./aws.sh \
-              --API_AWS_ACCESS_KEY_ID "${<< parameters.env >>_API_AWS_ACCESS_KEY_ID" \
-              --API_AWS_SECRET_ACCESS_KEY "${<< parameters.env >>_API_AWS_SECRET_ACCESS_KEY" \
+              --API_AWS_ACCESS_KEY_ID "${<< parameters.env >>_API_AWS_ACCESS_KEY_ID}" \
+              --API_AWS_SECRET_ACCESS_KEY "${<< parameters.env >>_API_AWS_SECRET_ACCESS_KEY}" \
               --API_DATABASE_URL "${<< parameters.env >>_API_DATABASE_URL}" \
-              --API_FILE_S3_BUCKET "${<< parameters.env >>_API_FILE_S3_BUCKET" \
+              --API_FILE_S3_BUCKET "${<< parameters.env >>_API_FILE_S3_BUCKET}" \
               --API_PBKDF2_ITERATIONS "${<< parameters.env >>_API_PBKDF2_ITERATIONS}" \
               --API_PORT "${<< parameters.env >>_API_PORT}" \
               --API_SESSION_SECRET "${<< parameters.env >>_API_SESSION_SECRET}" \
@@ -474,6 +474,24 @@ jobs:
               --AWS_TARGET_GROUP "${<< parameters.env >>_API_AWS_TARGET_GROUP}" \
               --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \
               --ENVIRONMENT "$(echo '<< parameters.env >>' | tr '[:upper:]' '[:lower:]')"
+      - run:
+          when: on_fail
+          name: notify on deployment failure
+          command: |
+            if [ -n "${SLACK_WEBHOOK_URL}" ]; then
+              curl -X "POST" "${SLACK_WEBHOOK_URL}" \
+                -H "Content-Type: application/json; charset=utf-8" \
+                -d $'{
+                  "attachments": [
+                    {
+                      "color": "#d83933",
+                      "fallback": "<< parameters.env >> backend deployment has failed",
+                      "text": "<< parameters.env >> backend deployment has failed"
+                    }
+                  ]
+                }'
+            fi
+            false
 
   # Cleans up preview deploys that are no longer associated with open pull
   # requests.
@@ -515,7 +533,25 @@ jobs:
             # Copy up index.html separately, so we can set metadata on it to
             # disable client cacheing
             aws s3 cp web/dist/index.html "${<< parameters.env >>_WEB_AWS_S3_BUCKET}/index.html" --metadata '{"Cache-Control":"no-cache"}' --region ${<< parameters.env >>_WEB_AWS_REGION}
-  
+      - run:
+          when: on_fail
+          name: notify on deployment failure
+          command: |
+            if [ -n "${SLACK_WEBHOOK_URL}" ]; then
+              curl -X "POST" "${SLACK_WEBHOOK_URL}" \
+                -H "Content-Type: application/json; charset=utf-8" \
+                -d $'{
+                  "attachments": [
+                    {
+                      "color": "#d83933",
+                      "fallback": "<< parameters.env >> frontend deployment has failed",
+                      "text": "<< parameters.env >> frontend deployment has failed"
+                    }
+                  ]
+                }'
+            fi
+            false
+
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
     docker:

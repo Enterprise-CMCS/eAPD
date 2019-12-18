@@ -13,7 +13,7 @@ import ProposedBudget from './ProposedBudget';
 import SaveButton from './SaveButton';
 import ScheduleSummary from './ScheduleSummary';
 import Sidebar from './Sidebar';
-import { selectApdOnLoad } from '../actions/apd';
+import { setApdToSelectOnLoad } from '../actions/app';
 import StateProfile from '../components/ApdStateProfile';
 
 import {
@@ -56,7 +56,7 @@ class ApdApplication extends Component {
       isAdmin,
       needsSave,
       place,
-      selectApdOnLoad: dispatchSelectApdOnLoad,
+      setApdToSelectOnLoad: dispatchSelectApdOnLoad,
       year
     } = this.props;
 
@@ -114,7 +114,7 @@ ApdApplication.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   needsSave: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
-  selectApdOnLoad: PropTypes.func.isRequired,
+  setApdToSelectOnLoad: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired
 };
 
@@ -129,7 +129,7 @@ const mapStateToProps = state => ({
   year: getAPDYearRange(state)
 });
 
-const mapDispatchToProps = { selectApdOnLoad };
+const mapDispatchToProps = { setApdToSelectOnLoad };
 
 export default connect(
   mapStateToProps,
