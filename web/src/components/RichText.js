@@ -8,6 +8,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import 'tinymce/themes/silver';
 
 // Any plugins you want to use have to be imported
+import 'tinymce/plugins/autoresize';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/spellchecker';
 
@@ -83,11 +84,12 @@ class RichText extends Component {
     return (
       <Editor
         init={{
+          autoresize_bottom_margin: 0,
           browser_spellcheck: true,
           images_upload_handler: uploadImage(upload),
           menubar: '',
           paste_data_images: true,
-          plugins: ['paste', 'spellchecker'],
+          plugins: ['autoresize', 'paste', 'spellchecker'],
           setup: setupTinyMCE(upload),
           toolbar:
             'undo redo | style | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | eapdImageUpload'
