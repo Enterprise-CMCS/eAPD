@@ -102,7 +102,7 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
             httpOnly: true,
             maxAge: sessionLifetimeMilliseconds,
             overwrite: true,
-            sameSite: 'strict',
+            sameSite: 'none',
             secure: process.env.NODE_ENV === 'production'
           }
         );
@@ -114,7 +114,7 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
             process.env.NODE_ENV === 'production' ? '.cms.gov' : undefined,
           maxAge: 0,
           httpOnly: true,
-          sameSite: 'strict',
+          sameSite: 'none',
           secure: process.env.NODE_ENV === 'production'
         });
       }
