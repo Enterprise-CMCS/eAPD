@@ -1,6 +1,6 @@
 import u from 'updeep';
 
-import { SAVE_APD_SUCCESS } from '../actions/apd';
+import { SAVE_APD_SUCCESS } from '../actions/app';
 import {
   ADD_APD_ITEM,
   ADD_APD_YEAR,

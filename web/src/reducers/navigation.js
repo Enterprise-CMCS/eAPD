@@ -1,4 +1,4 @@
-import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/navigation';
+import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/app';
 
 const initialState = {
   activeSection: 'apd-state-profile-overview'

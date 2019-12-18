@@ -8,10 +8,13 @@ const mockClock = sinon.useFakeTimers(new Date(1990, 3, 24).getTime());
 
 const { default: apd, getPatchesForAddingItem } = require('./apd');
 const {
-  SUBMIT_APD_SUCCESS,
-  WITHDRAW_APD_SUCCESS,
-  SAVE_APD_SUCCESS
-} = require('../actions/apd');
+  CREATE_APD_SUCCESS,
+  FETCH_ALL_APDS_FAILURE,
+  FETCH_ALL_APDS_REQUEST,
+  FETCH_ALL_APDS_SUCCESS,
+  SAVE_APD_SUCCESS,
+  SET_APD_TO_SELECT_ON_LOAD
+} = require('../actions/app');
 const {
   ADD_APD_ITEM,
   ADD_APD_YEAR,
@@ -41,7 +44,7 @@ describe('APD reducer', () => {
   it('should handle creating an APD', () => {
     expect(
       apd(initialState, {
-        type: 'CREATE_APD_SUCCESS',
+        type: CREATE_APD_SUCCESS,
         data: {
           id: 'apd-id',
           // Queen Elizabeth II is born
@@ -68,8 +71,8 @@ describe('APD reducer', () => {
     });
   });
 
-  it('should handle a request to get an APD', () => {
-    expect(apd(initialState, { type: 'GET_APD_REQUEST' })).toEqual({
+  it('should handle a request to get all APDs', () => {
+    expect(apd(initialState, { type: FETCH_ALL_APDS_REQUEST })).toEqual({
       byId: {},
       data: { ...initialState.data },
       fetching: true,
@@ -79,61 +82,54 @@ describe('APD reducer', () => {
     });
   });
 
-  describe('should handle a successful APD get', () => {
-    let data;
-    let expected;
+  it('should handle successfully getting all APDs', () => {
+    const data = [
+      {
+        id: 'apd-id-1',
+        name: 'my first apd',
+        // Laika the dog is launched into space
+        updated: '1957-11-03T06:30:00Z'
+      },
+      {
+        id: 'apd-id-2',
+        name: 'a second apd',
+        // The Battle of Hastings, essentially completing the Norman conquest
+        // of England and securing William the Conqueror's seat on the throne
+        updated: '1066-10-14T18:00:00Z'
+      }
+    ];
 
-    beforeEach(() => {
-      data = [
-        {
+    const expected = {
+      byId: {
+        'apd-id-1': {
           id: 'apd-id-1',
           name: 'my first apd',
-          // Laika the dog is launched into space
-          updated: '1957-11-03T06:30:00Z'
+          updated: 'November 3, 1957, 6:30 AM GMT'
         },
-        {
+        'apd-id-2': {
           id: 'apd-id-2',
           name: 'a second apd',
-          // The Battle of Hastings, essentially completing the Norman conquest
-          // of England and securing William the Conqueror's seat on the throne
-          updated: '1066-10-14T18:00:00Z'
+          updated: 'October 14, 1066, 6:00 PM GMT'
         }
-      ];
+      },
+      data: initialState.data,
+      error: '',
+      fetching: false,
+      loaded: true,
+      selectAPDOnLoad: false
+    };
 
-      expected = {
-        byId: {
-          'apd-id-1': {
-            id: 'apd-id-1',
-            name: 'my first apd',
-            updated: 'November 3, 1957, 6:30 AM GMT'
-          },
-          'apd-id-2': {
-            id: 'apd-id-2',
-            name: 'a second apd',
-            updated: 'October 14, 1066, 6:00 PM GMT'
-          }
-        },
-        data: initialState.data,
-        error: '',
-        fetching: false,
-        loaded: true,
-        selectAPDOnLoad: false
-      };
-    });
-
-    it('sets values from the API, and defaults otherwise', () => {
-      expect(
-        apd(initialState, {
-          type: 'GET_APD_SUCCESS',
-          data
-        })
-      ).toEqual(expected);
-    });
+    expect(
+      apd(initialState, {
+        type: FETCH_ALL_APDS_SUCCESS,
+        data
+      })
+    ).toEqual(expected);
   });
 
-  it('should handle an unsuccessful APD get', () => {
+  it('should handle unsuccessfully getting all APDs', () => {
     expect(
-      apd(initialState, { type: 'GET_APD_FAILURE', error: 'some error' })
+      apd(initialState, { type: FETCH_ALL_APDS_FAILURE, error: 'some error' })
     ).toEqual({
       byId: {},
       data: { ...initialState.data },
@@ -166,7 +162,7 @@ describe('APD reducer', () => {
   });
 
   it('should handle enabling auto-load for an APD', () => {
-    expect(apd(initialState, { type: 'SET_SELECT_APD_ON_LOAD' })).toEqual({
+    expect(apd(initialState, { type: SET_APD_TO_SELECT_ON_LOAD })).toEqual({
       ...initialState,
       selectAPDOnLoad: true
     });
@@ -764,18 +760,6 @@ describe('APD reducer', () => {
       },
       { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
     );
-  });
-
-  it('should handle APD submission success', () => {
-    expect(
-      apd({ data: { status: 'draft' } }, { type: SUBMIT_APD_SUCCESS })
-    ).toEqual({ data: { status: 'submitted' } });
-  });
-
-  it('should handle APD withdrawal success', () => {
-    expect(
-      apd({ data: { status: 'not draft' } }, { type: WITHDRAW_APD_SUCCESS })
-    ).toEqual({ data: { status: 'draft' } });
   });
 });
 
