@@ -15,8 +15,8 @@ describe('JSON patch reducer', () => {
   });
 
   it('removes the already-saved entries when an APD is successfully saved', () => {
-    // Prime the reducer by trigger a save request. The state at this point is
-    // marked for saving and should be removed when the safe is cucessful
+    // Prime the reducer by triggering a save request. The state at this point is
+    // marked for saving and should be removed when the save is successful
     reducer(['a', 'b', 'c'], { type: SAVE_APD_REQUEST });
 
     // Now do a successful save and make sure those previous elements were
