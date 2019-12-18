@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import { plain as Waypoint, mapDispatchToProps } from './ConnectedWaypoint';
 
-import { scrollTo } from '../actions/navigation';
+import { scrollTo } from '../actions/app';
 
 describe('connected waypoint higher-order component', () => {
   const props = {

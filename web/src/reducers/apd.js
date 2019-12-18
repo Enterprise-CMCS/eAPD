@@ -16,23 +16,21 @@ import {
   statePersonDefaultYear
 } from './activities';
 import {
-  CREATE_APD_SUCCESS,
-  GET_APD_REQUEST,
-  GET_APD_SUCCESS,
-  GET_APD_FAILURE,
-  SET_SELECT_APD_ON_LOAD,
-  SUBMIT_APD_SUCCESS,
-  WITHDRAW_APD_SUCCESS,
-  SAVE_APD_SUCCESS
-} from '../actions/apd';
-import {
   ADD_APD_ITEM,
   ADD_APD_YEAR,
   EDIT_APD,
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } from '../actions/editApd';
-import { SELECT_APD } from '../actions/app';
+import {
+  CREATE_APD_SUCCESS,
+  FETCH_ALL_APDS_FAILURE,
+  FETCH_ALL_APDS_REQUEST,
+  FETCH_ALL_APDS_SUCCESS,
+  SAVE_APD_SUCCESS,
+  SELECT_APD,
+  SET_APD_TO_SELECT_ON_LOAD
+} from '../actions/app';
 import { defaultAPDYearOptions, generateKey } from '../util';
 
 export const getPatchesToAddYear = (state, year) => {
@@ -329,9 +327,9 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
-    case GET_APD_REQUEST:
+    case FETCH_ALL_APDS_REQUEST:
       return { ...state, fetching: true, error: '' };
-    case GET_APD_SUCCESS: {
+    case FETCH_ALL_APDS_SUCCESS: {
       return {
         ...state,
         fetching: false,
@@ -345,7 +343,7 @@ const reducer = (state = initialState, action) => {
         )
       };
     }
-    case GET_APD_FAILURE:
+    case FETCH_ALL_APDS_FAILURE:
       return { ...state, fetching: false, error: action.error };
     case SAVE_APD_SUCCESS:
       return {
@@ -371,13 +369,8 @@ const reducer = (state = initialState, action) => {
           yearOptions: defaultAPDYearOptions
         }
       };
-    case SET_SELECT_APD_ON_LOAD:
+    case SET_APD_TO_SELECT_ON_LOAD:
       return { ...state, selectAPDOnLoad: true };
-    case SUBMIT_APD_SUCCESS:
-      return u({ data: { status: 'submitted' } }, state);
-
-    case WITHDRAW_APD_SUCCESS:
-      return u({ data: { status: 'draft' } }, state);
 
     default:
       return state;

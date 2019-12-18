@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ExecutiveSummary';
-import { jumpTo } from '../actions/navigation';
+import { jumpTo } from '../actions/app';
 
 describe('executive summary component', () => {
   const props = {
