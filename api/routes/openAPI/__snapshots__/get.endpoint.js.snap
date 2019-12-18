@@ -231,37 +231,12 @@ Object {
                 "standardsAndConditions": Object {
                   "description": "Description of the 11 standards and conditions",
                   "properties": Object {
-                    "businessResults": Object {
+                    "doesNotSupport": Object {
+                      "description": "If this activity does not support the standards and conditions, an explanation of why not",
                       "type": "string",
                     },
-                    "documentation": Object {
-                      "type": "string",
-                    },
-                    "industryStandards": Object {
-                      "type": "string",
-                    },
-                    "interoperability": Object {
-                      "type": "string",
-                    },
-                    "keyPersonnel": Object {
-                      "type": "string",
-                    },
-                    "leverage": Object {
-                      "type": "string",
-                    },
-                    "minimizeCost": Object {
-                      "type": "string",
-                    },
-                    "mita": Object {
-                      "type": "string",
-                    },
-                    "mitigationStrategy": Object {
-                      "type": "string",
-                    },
-                    "modularity": Object {
-                      "type": "string",
-                    },
-                    "reporting": Object {
+                    "supports": Object {
+                      "description": "A description of how this activity supports the standards and conditions",
                       "type": "string",
                     },
                   },

@@ -135,17 +135,8 @@ exports.seed = async knex => {
                 }
               ],
               standardsAndConditions: {
-                businessResults: '',
-                documentation: '',
-                industryStandards: '',
-                interoperability: '',
-                keyPersonnel: '',
-                leverage: '',
-                minimizeCost: '',
-                mitigationStrategy: '',
-                modularity: '',
-                mita: '',
-                reporting: ''
+                doesNotSupport: '',
+                supports: ''
               },
               statePersonnel: [
                 {
@@ -341,17 +332,8 @@ exports.seed = async knex => {
                 }
               ],
               standardsAndConditions: {
-                businessResults: '',
-                documentation: '',
-                industryStandards: '',
-                interoperability: '',
-                keyPersonnel: '',
-                leverage: '',
-                minimizeCost: '',
-                mitigationStrategy: '',
-                modularity: '',
-                mita: '',
-                reporting: ''
+                doesNotSupport: '',
+                supports: ''
               },
               statePersonnel: [
                 {
@@ -555,17 +537,8 @@ exports.seed = async knex => {
                 }
               ],
               standardsAndConditions: {
-                businessResults: '',
-                documentation: '',
-                industryStandards: '',
-                interoperability: '',
-                keyPersonnel: '',
-                leverage: '',
-                minimizeCost: '',
-                mitigationStrategy: '',
-                modularity: '',
-                mita: '',
-                reporting: ''
+                doesNotSupport: '',
+                supports: ''
               },
               statePersonnel: [
                 {
@@ -684,17 +657,8 @@ exports.seed = async knex => {
                 }
               ],
               standardsAndConditions: {
-                businessResults: '',
-                documentation: '',
-                industryStandards: '',
-                interoperability: '',
-                keyPersonnel: '',
-                leverage: '',
-                minimizeCost: '',
-                mitigationStrategy: '',
-                modularity: '',
-                mita: '',
-                reporting: ''
+                doesNotSupport: '',
+                supports: ''
               },
               statePersonnel: [
                 {
@@ -823,17 +787,8 @@ exports.seed = async knex => {
                 }
               ],
               standardsAndConditions: {
-                businessResults: '',
-                documentation: '',
-                industryStandards: '',
-                interoperability: '',
-                keyPersonnel: '',
-                leverage: '',
-                minimizeCost: '',
-                mitigationStrategy: '',
-                modularity: '',
-                mita: '',
-                reporting: ''
+                doesNotSupport: '',
+                supports: ''
               },
               statePersonnel: [
                 {
@@ -949,17 +904,8 @@ exports.seed = async knex => {
                 }
               ],
               standardsAndConditions: {
-                businessResults: '',
-                documentation: '',
-                industryStandards: '',
-                interoperability: '',
-                keyPersonnel: '',
-                leverage: '',
-                minimizeCost: '',
-                mitigationStrategy: '',
-                modularity: '',
-                mita: '',
-                reporting: ''
+                doesNotSupport: '',
+                supports: ''
               },
               statePersonnel: [
                 {

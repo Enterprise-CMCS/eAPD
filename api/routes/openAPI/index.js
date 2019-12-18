@@ -257,37 +257,14 @@ module.exports = {
                 type: 'object',
                 description: 'Description of the 11 standards and conditions',
                 properties: {
-                  businessResults: {
+                  doesNotSupport: {
+                    description:
+                      'If this activity does not support the standards and conditions, an explanation of why not',
                     type: 'string'
                   },
-                  documentation: {
-                    type: 'string'
-                  },
-                  industryStandards: {
-                    type: 'string'
-                  },
-                  interoperability: {
-                    type: 'string'
-                  },
-                  keyPersonnel: {
-                    type: 'string'
-                  },
-                  leverage: {
-                    type: 'string'
-                  },
-                  minimizeCost: {
-                    type: 'string'
-                  },
-                  mitigationStrategy: {
-                    type: 'string'
-                  },
-                  modularity: {
-                    type: 'string'
-                  },
-                  mita: {
-                    type: 'string'
-                  },
-                  reporting: {
+                  supports: {
+                    description:
+                      'A description of how this activity supports the standards and conditions',
                     type: 'string'
                   }
                 }
