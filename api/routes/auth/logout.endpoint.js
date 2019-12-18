@@ -18,7 +18,7 @@ describe('logout endpoint | /auth/logout', () => {
         .every(
           cookie =>
             cookie ===
-            'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict; httponly'
+            'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=none; httponly'
         )
     ).toBeTruthy();
   });
@@ -36,7 +36,7 @@ describe('logout endpoint | /auth/logout', () => {
         .every(
           cookie =>
             cookie ===
-            'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict; httponly'
+            'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=none; httponly'
         )
     ).toBeTruthy();
   });
