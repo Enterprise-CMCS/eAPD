@@ -1,6 +1,4 @@
-export const NAVIGATION_SCROLL_TO_WAYPOINT = Symbol(
-  'navigation : scroll to waypoint'
-);
+import { NAVIGATION_SCROLL_TO_WAYPOINT } from './symbols';
 
 let jumping = false;
 

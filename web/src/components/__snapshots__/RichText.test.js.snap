@@ -5,11 +5,13 @@ exports[`RichText component renders as expected 1`] = `
   cloudChannel="5"
   init={
     Object {
+      "autoresize_bottom_margin": 0,
       "browser_spellcheck": true,
       "images_upload_handler": [Function],
       "menubar": "",
       "paste_data_images": true,
       "plugins": Array [
+        "autoresize",
         "paste",
         "spellchecker",
       ],

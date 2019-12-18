@@ -7,7 +7,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './Sidebar';
-import { jumpTo } from '../actions/navigation';
+import { jumpTo } from '../actions/app';
 
 describe('Sidebar component', () => {
   const props = {

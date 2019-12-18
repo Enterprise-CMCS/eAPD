@@ -25,6 +25,17 @@ section > fieldset {
   }
 }
 
+button,
+.ds-c-button {
+  &:disabled {
+    // pointer events and cursor style are mutually exclusive.
+    // Leave pointer-events: none set for disabled classes, but set it to all here because
+    // the disabled attribute will disable button interactions for us anyway.
+    pointer-events: all !important;
+    cursor: not-allowed;
+  }
+}
+
 .data-entry-box .ds-c-label {
   margin-top: 0;
 }
@@ -148,10 +159,10 @@ div.form--computed-value__input-aligned {
     background-color: #fff;
     border: 2px solid #212121;
     box-sizing: border-box;
-    content: "\a0";
+    content: '\a0';
     left: 0;
     line-height: 1.5;
     position: absolute;
-    text-indent: .15em;
+    text-indent: 0.15em;
   }
 }
