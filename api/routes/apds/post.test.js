@@ -120,17 +120,8 @@ tap.test('apds POST endpoint', async endpointTest => {
             plannedStartDate: '',
             schedule: [{ endDate: '', milestone: '' }],
             standardsAndConditions: {
-              businessResults: '',
-              documentation: '',
-              industryStandards: '',
-              interoperability: '',
-              keyPersonnel: '',
-              leverage: '',
-              minimizeCost: '',
-              mitigationStrategy: '',
-              modularity: '',
-              mita: '',
-              reporting: ''
+              doesNotSupport: '',
+              supports: ''
             },
             statePersonnel: [
               {

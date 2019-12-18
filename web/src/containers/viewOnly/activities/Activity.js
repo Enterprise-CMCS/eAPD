@@ -124,56 +124,6 @@ const Activity = ({ activity, activityIndex }) => {
     );
   };
 
-  const buildStandardsAndConditions = (key, description) => {
-    let title;
-    switch (key) {
-      case 'modularity':
-        title = 'Modularity';
-        break;
-      case 'mita':
-        title = 'Medicaid Information Technology Architecture (MITA)';
-        break;
-      case 'industryStandards':
-        title = 'Industry Standards';
-        break;
-      case 'leverage':
-        title = 'Leverage';
-        break;
-      case 'businessResults':
-        title = 'Business Results';
-        break;
-      case 'reporting':
-        title = 'Reporting';
-        break;
-      case 'interoperability':
-        title = 'Interoperability';
-        break;
-      case 'mitigationStrategy':
-        title = 'Mitigation Strategy';
-        break;
-      case 'keyPersonnel':
-        title = 'Key Personnel';
-        break;
-      case 'documentation':
-        title = 'Documentation';
-        break;
-      case 'minimizeCost':
-        title =
-          'Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System';
-        break;
-      default:
-        title = '';
-    }
-    return (
-      <Fragment>
-        <p>
-          <strong>{title}</strong>
-        </p>
-        <p>{description === '' ? 'No description provided' : description}</p>
-      </Fragment>
-    );
-  };
-
   return (
     <Fragment>
       <h2>
@@ -300,9 +250,41 @@ const Activity = ({ activity, activityIndex }) => {
         </small>
         <br /> Standards and Conditions
       </h3>
-      {Object.entries(activity.standardsAndConditions).map(
-        ([key, description]) => buildStandardsAndConditions(key, description)
+
+      <p>
+        <strong>
+          This activity supports the Medicaid standards and conditions from 42
+          CFR 433.112.
+        </strong>
+      </p>
+      {activity.standardsAndConditions.supports ? (
+        <p
+          dangerouslySetInnerHTML={{
+            __html: activity.standardsAndConditions.supports
+          }}
+        />
+      ) : (
+        <p>
+          No response was provided for how this activity will support the
+          Medicaid standards and conditions.
+        </p>
       )}
+
+      <p>
+        <strong>
+          This activity does not support the Medicaid standards and conditions
+          from 42 CFR 433.112.
+        </strong>
+      </p>
+      {activity.standardsAndConditions.doesNotSupport ? (
+        <p>{activity.standardsAndConditions.doesNotSupport}</p>
+      ) : (
+        <p>
+          No response was provided for how this activity will support the
+          Medicaid standards and conditions.
+        </p>
+      )}
+
       <hr />
     </Fragment>
   );
