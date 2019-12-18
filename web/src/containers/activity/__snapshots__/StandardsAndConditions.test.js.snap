@@ -5,13 +5,13 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
   <h4
     className="ds-h4"
   >
-    Standards & Conditions
+    Standards and Conditions
   </h4>
   <div
     className="ds-u-margin-bottom--6 ds-u-margin-top--3"
   >
-    <h5
-      className="ds-h5 ds-u-margin-bottom--3"
+    <p
+      className="ds-u-margin-bottom--3"
     >
       Include a description about how this activity will support the Medicaid standards and conditions
        
@@ -21,7 +21,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
         42 CFR 433.112
       </a>
       .
-    </h5>
+    </p>
     <Connect(RichText)
       content="support"
       editorClassName="rte-textarea-1"
@@ -30,13 +30,8 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     <div
       className="ds-c-choice__checkedChild ds-u-margin-top--3"
     >
-      <h5
-        className="ds-h5"
-      >
-        If this activity does not support the Medicaid standards and conditions, please explain.
-      </h5>
       <TextArea
-        label=""
+        label="If this activity does not support the Medicaid standards and conditions, please explain."
         name="activity-set-standards-and-conditions-non-support"
         onChange={[Function]}
         rows={6}

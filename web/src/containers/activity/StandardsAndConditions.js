@@ -18,16 +18,16 @@ const StandardsAndConditions = ({
   setSupport
 }) => (
   <Fragment>
-    <h4 className="ds-h4">Standards & Conditions</h4>
+    <h4 className="ds-h4">Standards and Conditions</h4>
     <div className="ds-u-margin-bottom--6 ds-u-margin-top--3">
-      <h5 className="ds-h5 ds-u-margin-bottom--3">
+      <p className="ds-u-margin-bottom--3">
         Include a description about how this activity will support the Medicaid
         standards and conditions{' '}
         <a href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112">
           42 CFR 433.112
         </a>
         .
-      </h5>
+      </p>
 
       <RichText
         content={activity.standardsAndConditions.supports}
@@ -36,13 +36,8 @@ const StandardsAndConditions = ({
       />
 
       <div className="ds-c-choice__checkedChild ds-u-margin-top--3">
-        <h5 className="ds-h5">
-          If this activity does not support the Medicaid standards and
-          conditions, please explain.
-        </h5>
-
         <TextArea
-          label=""
+          label="If this activity does not support the Medicaid standards and conditions, please explain."
           name="activity-set-standards-and-conditions-non-support"
           onChange={({ target: { value } }) =>
             setDoesNotSupport(activityIndex, value)
