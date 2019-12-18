@@ -1,4 +1,4 @@
-export const ARIA_ANNOUNCE_CHANGE = 'ARIA_ANNOUNCE_CHANGE';
+export const ARIA_ANNOUNCE_CHANGE = Symbol('aria change announcement');
 
 export const ariaAnnounceFFPQuarterly = (aKey, year, q, name) => (
   dispatch,
