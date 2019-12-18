@@ -125,7 +125,6 @@ tap.test('session functions', async tests => {
 
           test.ok(
             cookies.set.calledWith('token', '', {
-              domain: undefined,
               maxAge: 0,
               httpOnly: true,
               sameSite: 'none',
@@ -157,7 +156,6 @@ tap.test('session functions', async tests => {
 
         test.ok(
           cookies.set.calledWith('token', sinon.match.string, {
-            domain: undefined,
             httpOnly: true,
             maxAge: 60000,
             overwrite: true,
@@ -207,7 +205,6 @@ tap.test('session functions', async tests => {
 
           test.ok(
             cookies.set.calledWith('token', sinon.match.string, {
-              domain: undefined,
               httpOnly: true,
               maxAge: 60000,
               overwrite: true,
@@ -251,7 +248,6 @@ tap.test('session functions', async tests => {
         test.same(req.session, {}, 'session is emptied');
         test.ok(
           cookies.set.calledWith('token', '', {
-            domain: undefined,
             maxAge: 0,
             httpOnly: true,
             sameSite: 'none',
@@ -278,7 +274,6 @@ tap.test('session functions', async tests => {
       test.same(req.session, {}, 'session is emptied');
       test.ok(
         cookies.set.calledWith('token', '', {
-          domain: undefined,
           maxAge: 0,
           httpOnly: true,
           sameSite: 'none',
