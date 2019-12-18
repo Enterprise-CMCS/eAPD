@@ -13,7 +13,7 @@ import {
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS
-} from '../actions/apd';
+} from '../actions/app';
 
 import { t } from '../i18n';
 

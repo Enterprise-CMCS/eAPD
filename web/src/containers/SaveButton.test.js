@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
-import { saveApd } from '../actions/apd';
+import { saveApd } from '../actions/app';
 
 import {
   plain as SaveButton,
