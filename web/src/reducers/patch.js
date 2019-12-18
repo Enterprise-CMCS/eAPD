@@ -1,6 +1,6 @@
 import u from 'updeep';
 
-import { SAVE_APD_SUCCESS } from '../actions/app';
+import { SAVE_APD_REQUEST, SAVE_APD_SUCCESS } from '../actions/app';
 import {
   ADD_APD_ITEM,
   ADD_APD_YEAR,
@@ -30,10 +30,19 @@ const indexOfLastReplacePatch = (patches, path) => {
   return false;
 };
 
+let patchesPendingSave = 0;
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SAVE_APD_SUCCESS:
-      return initialState;
+    case SAVE_APD_REQUEST:
+      patchesPendingSave = state.length;
+      return state;
+
+    case SAVE_APD_SUCCESS: {
+      const newState = state.slice(patchesPendingSave);
+      patchesPendingSave = 0;
+      return newState;
+    }
 
     case ADD_APD_ITEM: {
       return [
@@ -70,7 +79,7 @@ const reducer = (state = initialState, action) => {
       // we need to push the second update as a separate patch.
       const indexToUpdate = indexOfLastReplacePatch(state, action.path);
 
-      if (indexToUpdate !== false) {
+      if (indexToUpdate !== false && indexToUpdate >= patchesPendingSave) {
         return u({ [indexToUpdate]: { value: action.value } }, state);
       }
       return [
