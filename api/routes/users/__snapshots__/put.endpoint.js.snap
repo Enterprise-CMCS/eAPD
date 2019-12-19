@@ -32,4 +32,6 @@ Object {
 }
 `;
 
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with new content but same email address 1`] = `undefined`;
+
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with no content 1`] = `""`;

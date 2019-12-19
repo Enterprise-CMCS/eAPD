@@ -88,7 +88,7 @@ class EditAccount extends Component {
             id="modify_account_state"
             name="state"
             size="medium"
-            value={state.id}
+            value={state}
             onChange={this.handleEditAccount}
           >
             <option value="">None</option>
@@ -167,7 +167,7 @@ class EditAccount extends Component {
 
     const user = users.filter(u => u.id === +value).reduce((_, u) => u, null);
 
-    this.setState({ userID: +value, user });
+    this.setState({ userID: +value, user: { ...user, state: user.state.id } });
   };
 
   handleEditAccount = e => {
