@@ -6,6 +6,8 @@ Anticipated release: January 6, 2019
 
 #### 🐛 Bugs fixed
 
+- Fixed a bug where an admin could not edit a user's account without changing that user's email address ([#1973])
+
 #### ⚙️ Behind the scenes
 
 # 2.2.0
@@ -228,3 +230,4 @@ Pilot release to select state partners
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
+[#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
