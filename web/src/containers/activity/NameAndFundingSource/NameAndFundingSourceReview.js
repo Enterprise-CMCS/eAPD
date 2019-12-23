@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import Review from '../../../components/Review';
 
@@ -11,14 +11,26 @@ const NameAndFundingSourceReview = ({
   onDeleteClick
 }) => {
   return (
-    <Review
-      heading={`${index + 2}. ${name}`}
-      headingLevel={4}
-      onDeleteClick={disableExpand ? null : onDeleteClick}
-      onEditClick={disableExpand ? null : expand}
+    <div
+      className={`activity--body activity--body__collapsed activity--body__${
+        index === -1 ? 'first' : 'notfirst'
+      }`}
     >
-      <strong>Program type:</strong> {fundingSource}
-    </Review>
+      <Review
+        heading={
+          <Fragment>
+            {index + 2}. {name}{' '}
+            <span style={{ fontWeight: 'normal' }}>
+              {index === -1 && <em>(required activity)</em>} |
+            </span>{' '}
+            <span>{fundingSource}</span>
+          </Fragment>
+        }
+        headingLevel={4}
+        // onDeleteClick={disableExpand ? null : onDeleteClick}
+        onEditClick={disableExpand ? null : expand}
+      />
+    </div>
   );
 };
 
