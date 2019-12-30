@@ -7,12 +7,11 @@ const NameAndFundingSourceReview = ({
   disableExpand,
   item: { fundingSource, name },
   expand,
-  index,
-  onDeleteClick
+  index
 }) => {
   return (
     <div
-      className={`activity--body activity--body__collapsed activity--body__${
+      className={`ds-u-padding-y--1 activity--body activity--body__collapsed activity--body__${
         index === -1 ? 'first' : 'notfirst'
       }`}
     >
@@ -20,14 +19,13 @@ const NameAndFundingSourceReview = ({
         heading={
           <Fragment>
             {index + 2}. {name}{' '}
-            <span style={{ fontWeight: 'normal' }}>
-              {index === -1 && <em>(required activity)</em>} |
-            </span>{' '}
-            <span>{fundingSource}</span>
+            {index === -1 && (
+              <em style={{ fontWeight: 'normal' }}>(required activity)</em>
+            )}{' '}
+            | {fundingSource}
           </Fragment>
         }
         headingLevel={4}
-        // onDeleteClick={disableExpand ? null : onDeleteClick}
         onEditClick={disableExpand ? null : expand}
       />
     </div>
@@ -41,14 +39,12 @@ NameAndFundingSourceReview.propTypes = {
     name: PropTypes.string.isRequired
   }).isRequired,
   expand: PropTypes.func,
-  index: PropTypes.number.isRequired,
-  onDeleteClick: PropTypes.func
+  index: PropTypes.number.isRequired
 };
 
 NameAndFundingSourceReview.defaultProps = {
   disableExpand: false,
-  expand: () => {},
-  onDeleteClick: null
+  expand: () => {}
 };
 
 export default NameAndFundingSourceReview;
