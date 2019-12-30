@@ -4,6 +4,8 @@ Anticipated release: January 6, 2019
 
 #### 🚀 New features
 
+- Updated the activity section ([#1942])
+
 #### 🐛 Bugs fixed
 
 #### ⚙️ Behind the scenes
@@ -225,6 +227,7 @@ Pilot release to select state partners
 [#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
 [#1928]: https://github.com/18F/cms-hitech-apd/issues/1928
+[#1942]: https://github.com/18F/cms-hitech-apd/issues/1942
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
