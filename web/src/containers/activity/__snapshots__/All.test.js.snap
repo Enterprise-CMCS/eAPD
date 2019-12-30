@@ -29,7 +29,6 @@ exports[`the Activities component renders correctly 1`] = `
             "key": "key1",
           }
         }
-        onDeleteClick={null}
       />
       <FormAndReviewList
         addButtonText="Add another activity"
