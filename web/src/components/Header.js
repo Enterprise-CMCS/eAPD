@@ -53,11 +53,9 @@ class Header extends Component {
         <div className="ds-l-container">
           <div className="ds-l-row">
             <div className="ds-l-col--12 ds-l-md-col--4 site-title">
-              {showSiteTitle && <Link to="/">{t('titleBasic')}</Link>}
-              {!showSiteTitle && !authenticated && (
+              {showSiteTitle || !authenticated ? (
                 <Link to="/">{t('titleBasic')}</Link>
-              )}
-              {!showSiteTitle && authenticated && (
+              ) : (
                 <Link to="/">
                   <Icon icon={faChevronLeft} size="sm" />
                   {isAdmin

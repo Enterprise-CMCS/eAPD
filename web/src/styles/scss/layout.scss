@@ -1,9 +1,15 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
 // needed for sticky footer
 .site {
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 100vh;
+
+  &.site--gray {
+    background-color: $color-gray-lightest;
+  }
 }
 
 .site-sidebar {
