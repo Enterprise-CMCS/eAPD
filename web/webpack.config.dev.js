@@ -35,13 +35,18 @@ const config = {
           'postcss-loader',
           {
             loader: 'sass-loader',
-            options: { includePaths: [path.resolve(__dirname, 'node_modules')] }
+            options: {
+              sassOptions: {
+                includePaths: [path.resolve(__dirname, 'node_modules')]
+              }
+            }
           }
         ]
       },
       {
         test: /\.(woff2?|ttf|otf|eot|svg)$/,
-        loader: 'file-loader'
+        loader: 'file-loader',
+        options: { esModule: false }
       },
       {
         test: /\.yaml$/,
