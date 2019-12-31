@@ -8,6 +8,8 @@ Anticipated release: January 6, 2019
 
 #### ⚙️ Behind the scenes
 
+- Updated to the latest version of the CMS Design System ([#1981])
+
 # 2.2.0
 
 Released: December 18, 2019
@@ -228,3 +230,4 @@ Pilot release to select state partners
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
+[#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
