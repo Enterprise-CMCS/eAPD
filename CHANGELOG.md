@@ -8,6 +8,8 @@ Anticipated release: January 6, 2019
 
 #### ⚙️ Behind the scenes
 
+- Updated dependencies
+
 # 2.2.0
 
 Released: December 18, 2019
