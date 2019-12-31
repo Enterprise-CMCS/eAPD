@@ -34,7 +34,7 @@ const GoalForm = ({
   return (
     <Fragment>
       <TextField
-        autoFocus="true"
+        autoFocus
         name="name"
         className="data-entry-box"
         label={t('activities.goals.description.input.label', {

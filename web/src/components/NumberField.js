@@ -19,10 +19,14 @@ const NumberField = ({ fieldRef, ...props }) => {
     };
   }, []);
 
+  const setRef = ref => {
+    textField.current = ref;
+  };
+
   // A bug in the CMS design system says the fieldRef prop must be a function,
   // but React also accepts objects. Objects are the newer approach, so we'll
   // stick with that and just accept the prop types warning for now.
-  return <TextField {...props} fieldRef={textField} />;
+  return <TextField {...props} inputRef={setRef} />;
 };
 
 NumberField.propTypes = {

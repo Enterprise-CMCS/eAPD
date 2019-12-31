@@ -20,29 +20,32 @@ describe('NumberField component', () => {
   });
 
   it('selects the text field content if the value is zero', () => {
-    const component = mount(
+    const ref = { current: null };
+
+    mount(
       <NumberField
+        fieldRef={ref}
         label="test label"
         name="test name"
         size="medium"
         className="stuff"
-        value="123"
+        value="0"
         onChange={jest.fn()}
       />
     );
 
-    const field = component.find('TextField').prop('fieldRef').current;
+    ref.current.select = jest.fn();
+    ref.current.focus();
 
-    field.select = jest.fn();
-    field.value = '0';
-    field.focus();
-
-    expect(field.select).toHaveBeenCalled();
+    expect(ref.current.select).toHaveBeenCalled();
   });
 
   it('does not select the text field content if the value is not zero', () => {
-    const component = mount(
+    const ref = { current: null };
+
+    mount(
       <NumberField
+        fieldRef={ref}
         label="test label"
         name="test name"
         size="medium"
@@ -52,18 +55,18 @@ describe('NumberField component', () => {
       />
     );
 
-    const field = component.find('TextField').prop('fieldRef').current;
+    ref.current.select = jest.fn();
+    ref.current.focus();
 
-    field.select = jest.fn();
-    field.value = '1';
-    field.focus();
-
-    expect(field.select).not.toHaveBeenCalled();
+    expect(ref.current.select).not.toHaveBeenCalled();
   });
 
-  it('does not select the text field content if the value is not zero', () => {
+  it('removes the inputc field event listeners when the NumberField component is unmounted', () => {
+    const ref = { current: null };
+
     const component = mount(
       <NumberField
+        fieldRef={ref}
         label="test label"
         name="test name"
         size="medium"
@@ -73,11 +76,11 @@ describe('NumberField component', () => {
       />
     );
 
-    const field = component.find('TextField').prop('fieldRef').current;
-
-    field.removeEventListener = jest.fn();
+    const removeEventListener = jest.fn();
+    ref.current.removeEventListener = removeEventListener;
     component.unmount();
 
-    expect(field.removeEventListener).toHaveBeenCalled();
+    expect(removeEventListener).toHaveBeenCalled();
+    expect(ref.current).toEqual(null);
   });
 });

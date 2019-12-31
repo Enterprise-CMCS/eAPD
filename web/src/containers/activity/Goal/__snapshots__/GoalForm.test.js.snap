@@ -3,7 +3,7 @@
 exports[`the GoalForm component renders correctly 1`] = `
 <Fragment>
   <TextField
-    autoFocus="true"
+    autoFocus={true}
     className="data-entry-box"
     hint="Examples of goals include: improved health outcomes for benficiaries, transformation of public health services, enabling implementation of other initiatives, etc."
     label="Goal name"
