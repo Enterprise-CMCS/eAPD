@@ -1,4 +1,4 @@
-import { ChoiceList } from '@cmsgov/design-system-core';
+import { Dropdown } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -27,7 +27,13 @@ class CostAllocateFFP extends Component {
   };
 
   render() {
-    const { activityIndex, byYearData, costAllocation, aKey, isViewOnly } = this.props;
+    const {
+      activityIndex,
+      byYearData,
+      costAllocation,
+      aKey,
+      isViewOnly
+    } = this.props;
 
     return (
       <Fragment>
@@ -39,22 +45,22 @@ class CostAllocateFFP extends Component {
               <p>
                 <Dollars long>{total}</Dollars>
               </p>
-              {isViewOnly ?
+              {isViewOnly ? (
                 <>
                   <p className="ds-h4 ds-u-display--block">
                     {t('activities.costAllocate.ffp.labels.other')}
                   </p>
                   <Dollars long>{costAllocation[year].other}</Dollars>
                 </>
-              :
+              ) : (
                 <DollarField
-                label={t('activities.costAllocate.ffp.labels.other')}
-                labelClassName="ds-h5"
-                name={`cost-allocate-other-${year}`}
-                value={costAllocation[year].other || '0'}
-                onChange={this.setOther(year)}
+                  label={t('activities.costAllocate.ffp.labels.other')}
+                  labelClassName="ds-h5"
+                  name={`cost-allocate-other-${year}`}
+                  value={costAllocation[year].other || '0'}
+                  onChange={this.setOther(year)}
                 />
-              }
+              )}
 
               <p className="ds-h4 ds-u-display--block">
                 {t('activities.costAllocate.ffp.medicaidShare')}
@@ -62,17 +68,18 @@ class CostAllocateFFP extends Component {
               <p>
                 <Dollars long>{medicaidShare}</Dollars>
               </p>
-              
-              
-              {isViewOnly ?
-                <p><strong>Federal-State Split: </strong>{ffpSelectVal}</p>
-              :
-                <ChoiceList
+
+              {isViewOnly ? (
+                <p>
+                  <strong>Federal-State Split: </strong>
+                  {ffpSelectVal}
+                </p>
+              ) : (
+                <Dropdown
                   name={`ffp-${year}`}
-                  type="select"
                   label={t('activities.costAllocate.ffp.labels.fedStateSplit')}
                   labelClassName="ds-h5"
-                  choices={[
+                  options={[
                     { label: '90-10', value: '90-10' },
                     { label: '75-25', value: '75-25' },
                     { label: '50-50', value: '50-50' }
@@ -80,7 +87,7 @@ class CostAllocateFFP extends Component {
                   value={ffpSelectVal}
                   onChange={this.setFederalStateSplit(year)}
                 />
-              }
+              )}
               <div className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2">
                 <p className="ds-u-margin-bottom--0">
                   <strong>Federal</strong>

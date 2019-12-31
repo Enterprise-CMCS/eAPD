@@ -30,17 +30,7 @@ exports[`PercentField component renders correctly 1`] = `
   >
     <TextField
       className="stuff"
-      fieldRef={
-        Object {
-          "current": <input
-            class="ds-c-field ds-c-field--medium"
-            id="textfield_1"
-            name="test name"
-            type="text"
-            value="123"
-          />,
-        }
-      }
+      inputRef={[Function]}
       label="test label"
       name="test name"
       onChange={[MockFunction]}
@@ -54,10 +44,12 @@ exports[`PercentField component renders correctly 1`] = `
         <FormLabel
           component="label"
           fieldId="textfield_1"
+          id="textfield_label_2"
         >
           <label
             className="ds-c-label"
             htmlFor="textfield_1"
+            id="textfield_label_2"
           >
             <span
               className=""

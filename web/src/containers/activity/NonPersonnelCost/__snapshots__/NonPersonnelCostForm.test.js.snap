@@ -16,7 +16,7 @@ exports[`the NonPersonnelCostForm component renders correctly 1`] = `
     Category
   </FormLabel>
   <Select
-    autoFocus="true"
+    autoFocus={true}
     id="eapd-form-label-12321"
     name="category"
     onChange={[Function]}

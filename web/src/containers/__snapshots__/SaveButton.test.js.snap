@@ -10,6 +10,7 @@ exports[`save button component handles changing based on behavior shows error al
   >
     <Alert
       className="ds-u-margin-bottom--2"
+      role="region"
       variation="error"
     >
       Now there is an error
@@ -35,6 +36,7 @@ exports[`save button component handles changing based on behavior shows success 
   >
     <Alert
       className="ds-u-margin-bottom--2"
+      role="region"
       variation="success"
     >
       Save successful!

@@ -3,7 +3,7 @@
 exports[`the activity name and funding source component renders correctly 1`] = `
 <Fragment>
   <TextField
-    autoFocus="true"
+    autoFocus={true}
     label="Activity name"
     name="activity-name"
     onChange={[Function]}

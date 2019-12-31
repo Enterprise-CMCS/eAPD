@@ -43,7 +43,7 @@ const NonPersonnelCostForm = ({
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
       <FormLabel fieldId={selectID}>Category</FormLabel>
       <Select
-        autoFocus="true"
+        autoFocus
         id={selectID}
         name="category"
         value={category}
