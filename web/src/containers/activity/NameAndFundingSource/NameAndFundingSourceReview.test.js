@@ -10,8 +10,7 @@ describe('the NameAndFundingSourceReview component', () => {
     item: {
       fundingSource: 'Rich Uncle Pennybags',
       name: 'Getting out of jail'
-    },
-    onDeleteClick: jest.fn()
+    }
   };
 
   it('renders correctly when expanding is enabled', () => {
@@ -22,7 +21,7 @@ describe('the NameAndFundingSourceReview component', () => {
       props.expand
     );
     expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
-      props.onDeleteClick
+      null
     );
   });
 
