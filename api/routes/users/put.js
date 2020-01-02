@@ -79,7 +79,7 @@ module.exports = (
 
       if (Object.keys(update).length) {
         try {
-          await validateUser(update);
+          await validateUser({ ...update, id: targetID });
         } catch (e) {
           return res
             .status(400)
