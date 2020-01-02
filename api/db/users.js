@@ -212,7 +212,7 @@ const updateUser = async (
   user,
   { db = knex, hash = defaultHash, validate = validateUser } = {}
 ) => {
-  await validate(user);
+  await validate({ ...user, id: userID });
 
   if (!Object.keys(user).length) {
     return;
