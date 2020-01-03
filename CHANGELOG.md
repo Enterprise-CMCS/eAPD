@@ -1,14 +1,19 @@
 # Next release
 
-Anticipated release: January 6, 2019
+Anticipated release: January 6, 2020
 
 #### 🚀 New features
+
+- Updated the activity section ([#1942])
 
 #### 🐛 Bugs fixed
 
 - Fixed a bug where the login and admin screens could have a white box at the bottom in tall browser windows ([#1766])
+- Fixed a bug where an admin could not edit a user's account without changing that user's email address ([#1973])
 
 #### ⚙️ Behind the scenes
+
+- Updated dependencies
 
 # 2.2.0
 
@@ -228,6 +233,8 @@ Pilot release to select state partners
 [#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
 [#1928]: https://github.com/18F/cms-hitech-apd/issues/1928
+[#1942]: https://github.com/18F/cms-hitech-apd/issues/1942
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
+[#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
