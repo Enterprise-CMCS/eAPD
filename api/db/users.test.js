@@ -301,13 +301,23 @@ tap.test('database wrappers / users', async usersTests => {
     updateUserTests.test('with an invalid user', async test => {
       validate.rejects();
 
-      test.rejects(updateUser('user id', {}, { db, hash, validate }));
+      test.rejects(
+        updateUser('user id', { the: 'user' }, { db, hash, validate })
+      );
+      test.ok(
+        validate.calledWith({ id: 'user id', the: 'user' }),
+        'user ID is included in the validation call'
+      );
     });
 
     updateUserTests.test('with no updates', async test => {
       validate.resolves();
 
       test.resolves(updateUser('user id', {}, { db, hash, validate }));
+      test.ok(
+        validate.calledWith({ id: 'user id' }),
+        'user ID is included in the validation call'
+      );
     });
 
     updateUserTests.test('with updates', async test => {
@@ -333,6 +343,15 @@ tap.test('database wrappers / users', async usersTests => {
           },
           { db, hash, validate }
         )
+      );
+      test.ok(
+        validate.calledWith({
+          id: 'user id',
+          name: 'user name',
+          password: 'plain password',
+          phone: '123-456-7890'
+        }),
+        'user ID is included in the validation call'
       );
     });
   });

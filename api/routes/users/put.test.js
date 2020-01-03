@@ -107,6 +107,10 @@ tap.test('user PUT endpoint', async endpointTest => {
             updateUser.calledWith(2, { name: 'value' }),
             `auth_role is not updated`
           );
+          test.ok(
+            validateUser.calledWith({ id: 2, name: 'value' }),
+            'user ID is included in the validation call'
+          );
         }
       );
 
@@ -120,6 +124,10 @@ tap.test('user PUT endpoint', async endpointTest => {
           updateUser.calledWith(1, { email: 'value' }),
           `email is updated on user`
         );
+        test.ok(
+          validateUser.calledWith({ id: 1, email: 'value' }),
+          'user ID is included in the validation call'
+        );
       });
 
       propertyTests.test('state property becomes state_id', async test => {
@@ -131,6 +139,10 @@ tap.test('user PUT endpoint', async endpointTest => {
         test.ok(
           updateUser.calledWith(1, { state_id: 'value' }),
           `state is updated on user`
+        );
+        test.ok(
+          validateUser.calledWith({ id: 1, state_id: 'value' }),
+          'user ID is included in the validation call'
         );
       });
 
@@ -144,6 +156,10 @@ tap.test('user PUT endpoint', async endpointTest => {
           updateUser.calledWith(1, { state_id: null }),
           `state is updated on user`
         );
+        test.ok(
+          validateUser.calledWith({ id: 1, state_id: null }),
+          'user ID is included in the validation call'
+        );
       });
 
       propertyTests.test('role property becomes auth_role', async test => {
@@ -156,6 +172,10 @@ tap.test('user PUT endpoint', async endpointTest => {
           updateUser.calledWith(1, { auth_role: 'value' }),
           `role is updated on user`
         );
+        test.ok(
+          validateUser.calledWith({ id: 1, auth_role: 'value' }),
+          'user ID is included in the validation call'
+        );
       });
 
       propertyTests.test('empty role sets auth_role to null', async test => {
@@ -167,6 +187,10 @@ tap.test('user PUT endpoint', async endpointTest => {
         test.ok(
           updateUser.calledWith(1, { auth_role: null }),
           `state is updated on user`
+        );
+        test.ok(
+          validateUser.calledWith({ id: 1, auth_role: null }),
+          'user ID is included in the validation call'
         );
       });
 
@@ -184,6 +208,10 @@ tap.test('user PUT endpoint', async endpointTest => {
           test.ok(
             updateUser.calledWith(1, { [prop]: 'value' }),
             `${prop} is updated on user`
+          );
+          test.ok(
+            validateUser.calledWith({ id: 1, [prop]: 'value' }),
+            'user ID is included in the validation call'
           );
         })
       );
@@ -214,6 +242,17 @@ tap.test('user PUT endpoint', async endpointTest => {
           }),
 
           'all of the properties are updated'
+        );
+        test.ok(
+          validateUser.calledWith({
+            id: 1,
+            email: 'email-value',
+            name: 'name-value',
+            password: 'password-value',
+            position: 'position-value',
+            phone: 'phone-value'
+          }),
+          'user ID is included in the validation call'
         );
       });
 
@@ -258,6 +297,10 @@ tap.test('user PUT endpoint', async endpointTest => {
             res
           );
 
+          test.ok(
+            validateUser.calledWith({ id: 2, name: 'new name' }),
+            'user ID is included in the validation call'
+          );
           test.ok(res.status.calledWith(400), 'HTTP status set to 400');
           test.ok(
             res.send.calledWith({ error: 'edit-account.error message' }),
@@ -283,6 +326,10 @@ tap.test('user PUT endpoint', async endpointTest => {
           res
         );
 
+        test.ok(
+          validateUser.calledWith({ id: 2, name: 'new name' }),
+          'user ID is included in the validation call'
+        );
         test.ok(updateUser.calledOnce, 'user model is saved');
         test.ok(
           updateUser.calledAfter(validateUser),
