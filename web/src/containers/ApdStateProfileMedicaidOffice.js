@@ -1,4 +1,4 @@
-import { Dropdown, FormLabel, TextField } from '@cmsgov/design-system-core';
+import { Dropdown, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -148,9 +148,6 @@ const mapDispatchToProps = {
   setZip: setMedicaidOfficeZip
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ApdStateProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(ApdStateProfile);
 
 export { ApdStateProfile as plain, mapStateToProps, mapDispatchToProps };
