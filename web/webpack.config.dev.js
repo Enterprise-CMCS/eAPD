@@ -35,7 +35,11 @@ const config = {
           'postcss-loader',
           {
             loader: 'sass-loader',
-            options: { includePaths: [path.resolve(__dirname, 'node_modules')] }
+            options: {
+              sassOptions: {
+                includePaths: [path.resolve(__dirname, 'node_modules')]
+              }
+            }
           }
         ]
       },

@@ -1,14 +1,20 @@
 # Next release
 
-Anticipated release: January 6, 2019
+Anticipated release: January 6, 2020
 
 #### 🚀 New features
 
+- Updated the activity section ([#1942])
+
 #### 🐛 Bugs fixed
+
+- Fixed a bug where the login and admin screens could have a white box at the bottom in tall browser windows ([#1766])
+- Fixed a bug where an admin could not edit a user's account without changing that user's email address ([#1973])
 
 #### ⚙️ Behind the scenes
 
 - Updated to the latest version of the CMS Design System ([#1981])
+- Updated dependencies
 
 # 2.2.0
 
@@ -203,6 +209,7 @@ Pilot release to select state partners
 [#1756]: https://github.com/18F/cms-hitech-apd/issues/1756
 [#1762]: https://github.com/18F/cms-hitech-apd/issues/1762
 [#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
+[#1766]: https://github.com/18F/cms-hitech-apd/issues/1766
 [#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
 [#1769]: https://github.com/18F/cms-hitech-apd/issues/1769
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
@@ -227,7 +234,14 @@ Pilot release to select state partners
 [#1914]: https://github.com/18F/cms-hitech-apd/issues/1914
 [#1925]: https://github.com/18F/cms-hitech-apd/issues/1925
 [#1928]: https://github.com/18F/cms-hitech-apd/issues/1928
+[#1942]: https://github.com/18F/cms-hitech-apd/issues/1942
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
+
+<<<<<<< HEAD
 [#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
+=======
+[#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
+
+> > > > > > > master
