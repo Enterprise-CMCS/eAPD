@@ -15,6 +15,7 @@ Anticipated release: January 6, 2020
 
 - Updated to the latest version of the CMS Design System ([#1981])
 - Updated dependencies
+- Added browser security headers to frontend web responses ([#1966])
 
 # 2.2.0
 
@@ -237,11 +238,7 @@ Pilot release to select state partners
 [#1942]: https://github.com/18F/cms-hitech-apd/issues/1942
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
+[#1966]: https://github.com/18F/cms-hitech-apd/issues/1966
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
-
-<<<<<<< HEAD
 [#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
-=======
 [#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
-
-> > > > > > > master
