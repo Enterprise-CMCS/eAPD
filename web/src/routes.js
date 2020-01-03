@@ -13,11 +13,21 @@ const routes = [
   { path: '/apd', component: ApdApplication, exact: true, isPublic: false },
   { path: '/print', component: ApdViewOnly, exact: true, isPublic: false },
 
-  { path: '/create-account', component: CreateAccount, isAdmin: true },
-  { path: '/edit-account', component: EditAccount, isAdmin: true },
+  {
+    path: '/create-account',
+    component: CreateAccount,
+    isAdmin: true,
+    isCard: true
+  },
+  {
+    path: '/edit-account',
+    component: EditAccount,
+    isAdmin: true,
+    isCard: true
+  },
 
-  { path: '/me', component: MyAccount, isPublic: false },
-  { path: '/login', component: Login, isPublic: true },
+  { path: '/me', component: MyAccount, isPublic: false, isCard: true },
+  { path: '/login', component: Login, isPublic: true, isCard: true },
   { path: '/logout', component: Logout, isPublic: false },
   { component: NoMatch, isPublic: true }
 ];

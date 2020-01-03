@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import Review from '../../../components/Review';
 
@@ -7,18 +7,28 @@ const NameAndFundingSourceReview = ({
   disableExpand,
   item: { fundingSource, name },
   expand,
-  index,
-  onDeleteClick
+  index
 }) => {
   return (
-    <Review
-      heading={`${index + 2}. ${name}`}
-      headingLevel={4}
-      onDeleteClick={disableExpand ? null : onDeleteClick}
-      onEditClick={disableExpand ? null : expand}
+    <div
+      className={`ds-u-padding-y--1 activity--body activity--body__collapsed activity--body__${
+        index === -1 ? 'first' : 'notfirst'
+      }`}
     >
-      <strong>Program type:</strong> {fundingSource}
-    </Review>
+      <Review
+        heading={
+          <Fragment>
+            {index + 2}. {name}{' '}
+            {index === -1 && (
+              <em style={{ fontWeight: 'normal' }}>(required activity)</em>
+            )}{' '}
+            | {fundingSource}
+          </Fragment>
+        }
+        headingLevel={4}
+        onEditClick={disableExpand ? null : expand}
+      />
+    </div>
   );
 };
 
@@ -29,14 +39,12 @@ NameAndFundingSourceReview.propTypes = {
     name: PropTypes.string.isRequired
   }).isRequired,
   expand: PropTypes.func,
-  index: PropTypes.number.isRequired,
-  onDeleteClick: PropTypes.func
+  index: PropTypes.number.isRequired
 };
 
 NameAndFundingSourceReview.defaultProps = {
   disableExpand: false,
-  expand: () => {},
-  onDeleteClick: null
+  expand: () => {}
 };
 
 export default NameAndFundingSourceReview;

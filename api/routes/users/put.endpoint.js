@@ -80,6 +80,45 @@ describe('users endpoint | PUT /users/:userID', () => {
         expect(body).toMatchSnapshot();
       });
 
+      // This makes sure the duplicate-email check doesn't flag accounts that
+      // are keeping their email address the same.
+      // https://github.com/18F/cms-hitech-apd/issues/1973
+      it('...with new content but same email address', async () => {
+        const { password: oldPasswordHash } = await db('users')
+          .where({ id: 2001 })
+          .first();
+
+        const {
+          response: { statusCode },
+          body
+        } = await put(2001, {
+          username: 'all-permissions-no-state',
+          name: 'test name',
+          phone: '123',
+          position: 'test position',
+          state: 'hi',
+          role: 'state SME',
+          useless: 'is discarded'
+        });
+
+        expect(statusCode).toEqual(204);
+        expect(body).toMatchSnapshot();
+
+        const user = await db('users')
+          .where({ id: 2001 })
+          .first();
+
+        expect(user).toMatchObject({
+          auth_role: 'state SME',
+          email: 'all-permissions-no-state',
+          name: 'test name',
+          password: oldPasswordHash,
+          phone: '123',
+          position: 'test position',
+          state_id: 'hi'
+        });
+      });
+
       it('...with all new content, plus some junk', async () => {
         const { password: oldPasswordHash } = await db('users')
           .where({ id: 2001 })
