@@ -45,8 +45,7 @@ const config = {
       },
       {
         test: /\.(woff2?|ttf|otf|eot|svg)$/,
-        loader: 'file-loader',
-        options: { esModule: false }
+        loader: 'file-loader'
       },
       {
         test: /\.yaml$/,
