@@ -54,6 +54,7 @@ exports[`Routes component renders correctly 1`] = `
         "type": [Function],
       }
     }
+    isCard={true}
     key="/create-account"
     path="/create-account"
   />
@@ -67,6 +68,7 @@ exports[`Routes component renders correctly 1`] = `
         "type": [Function],
       }
     }
+    isCard={true}
     key="/edit-account"
     path="/edit-account"
   />
@@ -80,6 +82,7 @@ exports[`Routes component renders correctly 1`] = `
         "type": [Function],
       }
     }
+    isCard={true}
     key="/me"
     path="/me"
   />
@@ -93,6 +96,7 @@ exports[`Routes component renders correctly 1`] = `
         "type": [Function],
       }
     }
+    isCard={true}
     key="/login"
     path="/login"
   />

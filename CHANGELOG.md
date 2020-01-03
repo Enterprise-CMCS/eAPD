@@ -8,6 +8,7 @@ Anticipated release: January 6, 2020
 
 #### 🐛 Bugs fixed
 
+- Fixed a bug where the login and admin screens could have a white box at the bottom in tall browser windows ([#1766])
 - Fixed a bug where an admin could not edit a user's account without changing that user's email address ([#1973])
 
 #### ⚙️ Behind the scenes
@@ -207,6 +208,7 @@ Pilot release to select state partners
 [#1756]: https://github.com/18F/cms-hitech-apd/issues/1756
 [#1762]: https://github.com/18F/cms-hitech-apd/issues/1762
 [#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
+[#1766]: https://github.com/18F/cms-hitech-apd/issues/1766
 [#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
 [#1769]: https://github.com/18F/cms-hitech-apd/issues/1769
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
