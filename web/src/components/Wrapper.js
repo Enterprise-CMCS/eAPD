@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router';
 import Header from './Header';
 import Footer from './Footer';
+import routes from '../routes';
 
-const grayPaths = ['/create-account', '/edit-account', '/login', '/me'];
+const cardRoutes = routes.filter(r => r.isCard).map(r => r.path);
 
 const Wrapper = ({ children, isDev, location: { pathname } }) => {
   useEffect(() => {
@@ -15,7 +16,7 @@ const Wrapper = ({ children, isDev, location: { pathname } }) => {
     }
   }, []);
 
-  const isGray = grayPaths.indexOf(pathname) >= 0;
+  const isGray = cardRoutes.indexOf(pathname) >= 0;
   const showSiteTitle = pathname === '/';
 
   return (
