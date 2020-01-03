@@ -39,7 +39,7 @@ if (process.env.VCAP_SERVICES) {
 }
 
 dotenv.config();
-process.env = Object.assign({}, defaults, upsEnv, process.env);
+process.env = { ...defaults, ...upsEnv, ...process.env };
 
 // Don't require this until process.env is finished setting up, since that
 // defines how the logger works.

@@ -64,6 +64,7 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
                     "width": "8px",
                   }
                 }
+                swapOpacity={false}
                 symbol={false}
                 title=""
                 transform={null}
@@ -110,6 +111,7 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
                         "width": "14px",
                       }
                     }
+                    swapOpacity={false}
                     symbol={false}
                     title=""
                     transform={null}
@@ -154,6 +156,7 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
                         "width": "14px",
                       }
                     }
+                    swapOpacity={false}
                     symbol={false}
                     title=""
                     transform={null}
@@ -234,6 +237,7 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                     "width": "8px",
                   }
                 }
+                swapOpacity={false}
                 symbol={false}
                 title=""
                 transform={null}
@@ -280,6 +284,7 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                         "width": "14px",
                       }
                     }
+                    swapOpacity={false}
                     symbol={false}
                     title=""
                     transform={null}
@@ -324,6 +329,7 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                         "width": "14px",
                       }
                     }
+                    swapOpacity={false}
                     symbol={false}
                     title=""
                     transform={null}
@@ -380,6 +386,7 @@ exports[`Header component renders the admin home title when an admin user is at 
             rotation={null}
             size="sm"
             spin={false}
+            swapOpacity={false}
             symbol={false}
             title=""
             transform={null}
@@ -434,6 +441,7 @@ exports[`Header component renders the admin home title when an admin user is at 
                     "width": "8px",
                   }
                 }
+                swapOpacity={false}
                 symbol={false}
                 title=""
                 transform={null}
@@ -480,6 +488,7 @@ exports[`Header component renders the admin home title when an admin user is at 
                         "width": "14px",
                       }
                     }
+                    swapOpacity={false}
                     symbol={false}
                     title=""
                     transform={null}
@@ -524,6 +533,7 @@ exports[`Header component renders the admin home title when an admin user is at 
                         "width": "14px",
                       }
                     }
+                    swapOpacity={false}
                     symbol={false}
                     title=""
                     transform={null}
@@ -580,6 +590,7 @@ exports[`Header component renders the state user home title when a state user is
             rotation={null}
             size="sm"
             spin={false}
+            swapOpacity={false}
             symbol={false}
             title=""
             transform={null}
@@ -634,6 +645,7 @@ exports[`Header component renders the state user home title when a state user is
                     "width": "8px",
                   }
                 }
+                swapOpacity={false}
                 symbol={false}
                 title=""
                 transform={null}
@@ -680,6 +692,7 @@ exports[`Header component renders the state user home title when a state user is
                         "width": "14px",
                       }
                     }
+                    swapOpacity={false}
                     symbol={false}
                     title=""
                     transform={null}
@@ -724,6 +737,7 @@ exports[`Header component renders the state user home title when a state user is
                         "width": "14px",
                       }
                     }
+                    swapOpacity={false}
                     symbol={false}
                     title=""
                     transform={null}

@@ -17,6 +17,28 @@ workflows:
     jobs:
       - cleanup preview deploys
 
+  # Workflow to scan dependencies for vulnerabilities every night
+  nightly dependency vulnerability scan:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *'
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - install dependencies
+      - dependency vulnerability scan:
+          name: backend dependency vulnerability scan
+          path: api
+          requires:
+            - install dependencies
+      - dependency vulnerability scan:
+          name: frontend dependency vulnerability scan
+          path: web
+          requires:
+            - install dependencies
+  
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
     jobs:
@@ -532,7 +554,7 @@ jobs:
             aws s3 sync web/dist "${<< parameters.env >>_WEB_AWS_S3_BUCKET}" --region ${<< parameters.env >>_WEB_AWS_REGION} --delete
             # Copy up index.html separately, so we can set metadata on it to
             # disable client cacheing
-            aws s3 cp web/dist/index.html "${<< parameters.env >>_WEB_AWS_S3_BUCKET}/index.html" --metadata '{"Cache-Control":"no-cache"}' --region ${<< parameters.env >>_WEB_AWS_REGION}
+            aws s3 cp web/dist/index.html "${<< parameters.env >>_WEB_AWS_S3_BUCKET}/index.html" --cache-control no-cache --region ${<< parameters.env >>_WEB_AWS_REGION}
       - run:
           when: on_fail
           name: notify on deployment failure
