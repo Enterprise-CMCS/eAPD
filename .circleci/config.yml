@@ -17,6 +17,28 @@ workflows:
     jobs:
       - cleanup preview deploys
 
+  # Workflow to scan dependencies for vulnerabilities every night
+  nightly dependency vulnerability scan:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *'
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - install dependencies
+      - dependency vulnerability scan:
+          name: backend dependency vulnerability scan
+          path: api
+          requires:
+            - install dependencies
+      - dependency vulnerability scan:
+          name: frontend dependency vulnerability scan
+          path: web
+          requires:
+            - install dependencies
+  
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
     jobs:
