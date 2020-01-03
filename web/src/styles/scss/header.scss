@@ -6,6 +6,7 @@ header {
   letter-spacing: 0.6px;
 
   a,
+  a:visited,
   button,
   .ds-c-button {
     color: $color-white;
@@ -50,7 +51,6 @@ header {
     transition-timing-function: ease-in;
     transition: 0.2s;
   }
-
 
   li {
     list-style: none;
@@ -99,7 +99,7 @@ header {
   background-color: $color-primary-darkest;
   z-index: 1;
 
-  &[aria-hidden="true"] {
+  &[aria-hidden='true'] {
     display: none;
   }
 

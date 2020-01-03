@@ -1,4 +1,4 @@
-import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
+import { Dropdown, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -91,22 +91,17 @@ const ApdStateProfile = ({
             onChange={handleChange(setCity)}
           />
           <div className="ds-u-clearfix ds-l-col--6">
-            <FormLabel component="label" fieldId="apd-state-profile-state">
-              {t(`${offTRoot}.labels.state`)}
-            </FormLabel>
-            <Select
+            <Dropdown
               id="apd-state-profile-state"
               name="apd-state-profile-state"
               label={t(`${offTRoot}.labels.state`)}
               value={medicaidOffice.state || defaultStateID}
               onChange={handleChange(setState)}
-            >
-              {STATES.map(({ id, name }) => (
-                <option key={name} value={id.toUpperCase()}>
-                  {name}
-                </option>
-              ))}
-            </Select>
+              options={STATES.map(({ id, name }) => ({
+                label: name,
+                value: id.toUpperCase()
+              }))}
+            />
           </div>
         </div>
         <TextField
@@ -153,9 +148,6 @@ const mapDispatchToProps = {
   setZip: setMedicaidOfficeZip
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ApdStateProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(ApdStateProfile);
 
 export { ApdStateProfile as plain, mapStateToProps, mapDispatchToProps };

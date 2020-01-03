@@ -230,6 +230,7 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
   className="form-and-review-list "
 >
   <Alert
+    role="region"
     variation="error"
   >
     displayed when there is no data
@@ -263,6 +264,7 @@ exports[`FormAndReviewList component renders properly without an add button if t
   className="form-and-review-list "
 >
   <Alert
+    role="region"
     variation="error"
   >
     displayed when there is no data

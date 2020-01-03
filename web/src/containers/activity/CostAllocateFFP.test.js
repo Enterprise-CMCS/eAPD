@@ -15,24 +15,26 @@ describe('the CostAllocateFFP component', () => {
   const state = {
     apd: {
       data: {
-        activities: [{
-          costAllocation: {
-            '1066': {
-              other: 10,
-              ffp: {
-                federal: 90,
-                state: 10
-              }
-            },
-            '1067': {
-              other: 0,
-              ffp: {
-                federal: 10,
-                state: 90
+        activities: [
+          {
+            costAllocation: {
+              '1066': {
+                other: 10,
+                ffp: {
+                  federal: 90,
+                  state: 10
+                }
+              },
+              '1067': {
+                other: 0,
+                ffp: {
+                  federal: 10,
+                  state: 90
+                }
               }
             }
           }
-        }]
+        ]
       }
     },
     budget: {
@@ -109,7 +111,7 @@ describe('the CostAllocateFFP component', () => {
   test('handles changes to cost allocation dropdown', () => {
     const component = shallow(<CostAllocateFFP {...props} />);
     component
-      .find('ChoiceList')
+      .find('Dropdown')
       .filterWhere(n => n.props().value === '90-10')
       .simulate('change', { target: { value: '35-65' } });
 

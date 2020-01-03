@@ -41,18 +41,7 @@ exports[`DollarField component passes back numeric values on change, but still r
   >
     <TextField
       className="stuff"
-      fieldRef={
-        Object {
-          "current": <input
-            aria-label="test label. Enter amount in dollars."
-            class="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_4"
-            name="test name"
-            type="text"
-            value="123,456"
-          />,
-        }
-      }
+      inputRef={[Function]}
       label="test label"
       mask="currency"
       name="test name"
@@ -67,11 +56,13 @@ exports[`DollarField component passes back numeric values on change, but still r
       >
         <FormLabel
           component="label"
-          fieldId="textfield_4"
+          fieldId="textfield_7"
+          id="textfield_label_8"
         >
           <label
             className="ds-c-label"
-            htmlFor="textfield_4"
+            htmlFor="textfield_7"
+            id="textfield_label_8"
           >
             <span
               className=""
@@ -94,7 +85,7 @@ exports[`DollarField component passes back numeric values on change, but still r
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
-              id="textfield_4"
+              id="textfield_7"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
@@ -132,18 +123,7 @@ exports[`DollarField component renders correctly for non-numeric initial values 
   >
     <TextField
       className="stuff"
-      fieldRef={
-        Object {
-          "current": <input
-            aria-label="test label. Enter amount in dollars."
-            class="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_1"
-            name="test name"
-            type="text"
-            value=""
-          />,
-        }
-      }
+      inputRef={[Function]}
       label="test label"
       mask="currency"
       name="test name"
@@ -159,10 +139,12 @@ exports[`DollarField component renders correctly for non-numeric initial values 
         <FormLabel
           component="label"
           fieldId="textfield_1"
+          id="textfield_label_2"
         >
           <label
             className="ds-c-label"
             htmlFor="textfield_1"
+            id="textfield_label_2"
           >
             <span
               className=""
@@ -190,7 +172,7 @@ exports[`DollarField component renders correctly for non-numeric initial values 
               onBlur={[Function]}
               onChange={[Function]}
               type="text"
-              value=""
+              value="abc"
             />
           </Mask>
         </div>
@@ -223,18 +205,7 @@ exports[`DollarField component renders correctly, adds commas to big numbers, pa
   >
     <TextField
       className="stuff"
-      fieldRef={
-        Object {
-          "current": <input
-            aria-label="test label. Enter amount in dollars."
-            class="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_3"
-            name="test name"
-            type="text"
-            value="123,321"
-          />,
-        }
-      }
+      inputRef={[Function]}
       label="test label"
       mask="currency"
       name="test name"
@@ -249,11 +220,13 @@ exports[`DollarField component renders correctly, adds commas to big numbers, pa
       >
         <FormLabel
           component="label"
-          fieldId="textfield_3"
+          fieldId="textfield_5"
+          id="textfield_label_6"
         >
           <label
             className="ds-c-label"
-            htmlFor="textfield_3"
+            htmlFor="textfield_5"
+            id="textfield_label_6"
           >
             <span
               className=""
@@ -276,7 +249,7 @@ exports[`DollarField component renders correctly, adds commas to big numbers, pa
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
-              id="textfield_3"
+              id="textfield_5"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
@@ -314,18 +287,7 @@ exports[`DollarField component renders correctly, does not add commas to small n
   >
     <TextField
       className="stuff"
-      fieldRef={
-        Object {
-          "current": <input
-            aria-label="test label. Enter amount in dollars."
-            class="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_2"
-            name="test name"
-            type="text"
-            value="123"
-          />,
-        }
-      }
+      inputRef={[Function]}
       label="test label"
       mask="currency"
       name="test name"
@@ -340,11 +302,13 @@ exports[`DollarField component renders correctly, does not add commas to small n
       >
         <FormLabel
           component="label"
-          fieldId="textfield_2"
+          fieldId="textfield_3"
+          id="textfield_label_4"
         >
           <label
             className="ds-c-label"
-            htmlFor="textfield_2"
+            htmlFor="textfield_3"
+            id="textfield_label_4"
           >
             <span
               className=""
@@ -367,7 +331,7 @@ exports[`DollarField component renders correctly, does not add commas to small n
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
-              id="textfield_2"
+              id="textfield_3"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
@@ -441,18 +405,7 @@ exports[`DollarField component rounds numbers when the component loses focus, bu
   >
     <TextField
       className="stuff"
-      fieldRef={
-        Object {
-          "current": <input
-            aria-label="test label. Enter amount in dollars."
-            class="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_5"
-            name="test name"
-            type="text"
-            value="123,457"
-          />,
-        }
-      }
+      inputRef={[Function]}
       label="test label"
       mask="currency"
       name="test name"
@@ -467,11 +420,13 @@ exports[`DollarField component rounds numbers when the component loses focus, bu
       >
         <FormLabel
           component="label"
-          fieldId="textfield_5"
+          fieldId="textfield_9"
+          id="textfield_label_10"
         >
           <label
             className="ds-c-label"
-            htmlFor="textfield_5"
+            htmlFor="textfield_9"
+            id="textfield_label_10"
           >
             <span
               className=""
@@ -494,7 +449,7 @@ exports[`DollarField component rounds numbers when the component loses focus, bu
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
-              id="textfield_5"
+              id="textfield_9"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
