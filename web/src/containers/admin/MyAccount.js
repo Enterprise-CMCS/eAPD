@@ -1,6 +1,6 @@
 import { Button, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { editSelf } from '../../actions/admin';
@@ -18,7 +18,6 @@ const MyAccount = ({
 }) => {
   const [changePassword, setChangePassword] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [user, setUser] = useState({
     name: initialName,
     password: '',
@@ -38,12 +37,11 @@ const MyAccount = ({
   // Success has to be derived.  It can't be stored in the app state because
   // if it was, then the next time this form was loaded, it would show the
   // success state even though it wouldn't be accurate anymore.
-  if (hasFetched) {
-    const newSuccess = !working && !error;
-    if (newSuccess !== success) {
-      setSuccess(newSuccess);
-    }
-  }
+  const success = useMemo(() => hasFetched && !working && !error, [
+    error,
+    hasFetched,
+    working
+  ]);
 
   const saveAccount = e => {
     e.preventDefault();

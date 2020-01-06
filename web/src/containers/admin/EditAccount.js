@@ -5,7 +5,7 @@ import {
   TextField
 } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import { editAccount as editAccountDispatch } from '../../actions/admin';
@@ -27,19 +27,17 @@ const EditAccount = ({
 }) => {
   const [changePassword, setChangePassword] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [userID, setUserID] = useState('');
   const [user, setUser] = useState(null);
 
   // Success has to be derived.  It can't be stored in the app state because
   // if it was, then the next time this form was loaded, it would show the
   // success state even though it wouldn't be accurate anymore.
-  if (hasFetched) {
-    const newSuccess = !working && !error;
-    if (newSuccess !== success) {
-      setSuccess(newSuccess);
-    }
-  }
+  const success = useMemo(() => hasFetched && !working && !error, [
+    error,
+    hasFetched,
+    working
+  ]);
 
   const handlePickAccount = ({ target: { value } }) => {
     const newUser = users
