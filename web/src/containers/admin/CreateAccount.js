@@ -1,6 +1,6 @@
 import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import CardForm from '../../components/CardForm';
 import Password from '../../components/PasswordWithMeter';
@@ -16,13 +16,12 @@ const CreateUser = ({ createUser, error, roles, working }) => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [state, setState] = useState('');
-  const [success, setSuccess] = useState(false);
 
   // Success has to be derived.  It can't be stored in the app state because
   // if it was, then the next time this form was loaded, it would show the
   // success state even though it wouldn't be accurate anymore.
-  if (hasFetched) {
-    const newSuccess = !working && !error;
+  const success = useMemo(() => {
+    const newSuccess = hasFetched && !working && !error;
 
     // On a successful save, we need to blank out the local user state so
     // we can start inputting another user.
@@ -33,12 +32,10 @@ const CreateUser = ({ createUser, error, roles, working }) => {
       setPassword('');
       setRole('');
       setState('');
-
-      if (!success) {
-        setSuccess(true);
-      }
     }
-  }
+
+    return newSuccess;
+  }, [error, hasFetched, working]);
 
   const changeEmail = ({ target: { value } }) => setEmail(value);
   const changeName = ({ target: { value } }) => setName(value);

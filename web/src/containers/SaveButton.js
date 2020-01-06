@@ -1,6 +1,6 @@
 import { Alert, Button, Spinner } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import stickybits from 'stickybits';
 
@@ -27,17 +27,15 @@ const getButtonContent = (dirty, working) => {
 
 const SaveButton = ({ error, needsSave, saveApd: action, working }) => {
   const [hasFetched, setHasFetched] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   // Success has to be derived.  It can't be stored in the app state because
   // if it was, then the next time this form was loaded, it would show the
   // success state even though it wouldn't be accurate anymore.
-  if (hasFetched) {
-    const newSuccess = !working && !error;
-    if (newSuccess !== success) {
-      setSuccess(newSuccess);
-    }
-  }
+  const success = useMemo(() => hasFetched && !working && !error, [
+    error,
+    hasFetched,
+    working
+  ]);
 
   useEffect(() => {
     stickybits('#apd-save-button', { verticalPosition: 'bottom' });
