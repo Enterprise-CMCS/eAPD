@@ -1,3 +1,8 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+// This rule throws a false-positive on empty table header cells, so just
+// disable it for now.
+// https://github.com/evcohen/eslint-plugin-jsx-a11y/issues/637
+
 import React, { Fragment } from 'react';
 
 import RenderViewbox from './RenderViewbox';

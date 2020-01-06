@@ -124,6 +124,7 @@ const Activity = ({ activity, activityIndex }) => {
     );
   };
 
+  /* eslint-disable react/no-danger */
   return (
     <Fragment>
       <h2>

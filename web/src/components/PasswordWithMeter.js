@@ -5,7 +5,10 @@ import zxcvbn from '../lazy/zxcvbn';
 import Choice from './Choice';
 
 class Password extends Component {
-  state = { showPassword: false, strength: 0 };
+  constructor() {
+    super();
+    this.state = { showPassword: false, strength: 0 };
+  }
 
   componentDidMount() {
     const { value } = this.props;

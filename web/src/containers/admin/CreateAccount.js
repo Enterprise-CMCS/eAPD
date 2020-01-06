@@ -1,6 +1,6 @@
 import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import CardForm from '../../components/CardForm';
 import Password from '../../components/PasswordWithMeter';
@@ -9,150 +9,127 @@ import { createUser as createUserDispatch } from '../../actions/admin';
 import { getAddAccountError } from '../../reducers/errors';
 import { getAddAccountWorking } from '../../reducers/working';
 
-class CreateUser extends Component {
-  state = {
-    hasFetched: false,
-    name: '',
-    email: '',
-    password: '',
-    role: '',
-    state: '',
-    success: false
-  };
+const CreateUser = ({ createUser, error, roles, working }) => {
+  const [email, setEmail] = useState('');
+  const [hasFetched, setHasFetched] = useState(false);
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
+  const [state, setState] = useState('');
+  const [success, setSuccess] = useState(false);
 
-  static getDerivedStateFromProps({ error, working }, { hasFetched }) {
-    // Success has to be derived.  It can't be stored in the app state because
-    // if it was, then the next time this form was loaded, it would show the
-    // success state even though it wouldn't be accurate anymore.
-    if (hasFetched) {
-      const update = { success: !working && !error };
+  // Success has to be derived.  It can't be stored in the app state because
+  // if it was, then the next time this form was loaded, it would show the
+  // success state even though it wouldn't be accurate anymore.
+  if (hasFetched) {
+    const newSuccess = !working && !error;
 
-      // And because this component is creating a new user, that user is stored
-      // in component state too - so in a success condition, where the user was
-      // saved, blank out the state so another new user can be created.  We
-      // also need to reset hasFetched or else every prop change would reset
-      // the user stored in component state.
-      if (update.success) {
-        update.hasFetched = false;
-        update.name = '';
-        update.email = '';
-        update.password = '';
-        update.role = '';
-        update.state = '';
+    // On a successful save, we need to blank out the local user state so
+    // we can start inputting another user.
+    if (newSuccess) {
+      setEmail('');
+      setHasFetched(false);
+      setName('');
+      setPassword('');
+      setRole('');
+      setState('');
+
+      if (!success) {
+        setSuccess(true);
       }
-      return update;
     }
-    return null;
   }
 
-  handleChange = e => {
-    const { name: key, value } = e.target;
-    const change = { [key]: value };
+  const changeEmail = ({ target: { value } }) => setEmail(value);
+  const changeName = ({ target: { value } }) => setName(value);
+  const changePassword = ({ target: { value } }) => setPassword(value);
+  const changeRole = ({ target: { value } }) => setRole(value);
+  const changeState = ({ target: { value } }) => setState(value);
 
-    this.setState(change);
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-
-    const { email, name, password, role, state } = this.state;
-
-    const { createUser } = this.props;
 
     // Once we've attempted to save these changes, it's valid to show success
     // or error messages.  Since error messages are persisted in app state,
     // it's possible there's an error sitting there from a previous instance
     // of this form.  This flag makes sure we don't show any error messages
     // until this instance of the form has tried to save.
-    this.setState({ hasFetched: true });
+    setHasFetched(true);
     createUser({ email, name, password, role, state });
   };
 
-  render() {
-    const { error, roles, working } = this.props;
-    const {
-      hasFetched,
-      name,
-      email,
-      password,
-      role,
-      state,
-      success
-    } = this.state;
+  return (
+    <Fragment>
+      <CardForm
+        title="Create account"
+        sectionName="administrator"
+        error={hasFetched && error}
+        success={success && 'Account created'}
+        working={working}
+        onSave={handleSubmit}
+      >
+        <TextField
+          label="Name"
+          name="name"
+          ariaLabel="please enter the user's full name"
+          value={name || ''}
+          onChange={changeName}
+        />
 
-    return (
-      <Fragment>
-        <CardForm
-          title="Create account"
-          sectionName="administrator"
-          error={hasFetched && error}
-          success={success && 'Account created'}
-          working={working}
-          onSave={this.handleSubmit}
+        <TextField
+          label="Email"
+          name="email"
+          value={email}
+          onChange={changeEmail}
+        />
+
+        <FormLabel component="label" fieldId="create_account_state">
+          State
+        </FormLabel>
+        <Select
+          id="create_account_state"
+          name="state"
+          size="medium"
+          value={state}
+          onChange={changeState}
         >
-          <TextField
-            label="Name"
-            name="name"
-            ariaLabel="please enter the user's full name"
-            value={name || ''}
-            onChange={this.handleChange}
-          />
+          <option value="">None</option>
+          {STATES.map(s => (
+            <option key={s.id} value={s.id}>
+              {s.name}
+            </option>
+          ))}
+        </Select>
 
-          <TextField
-            label="Email"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
+        <FormLabel component="label" fieldId="create_account_role">
+          Authorization role
+        </FormLabel>
+        <Select
+          id="create_account_role"
+          name="role"
+          size="medium"
+          value={role || ''}
+          onChange={changeRole}
+        >
+          <option value="">None</option>
+          {roles.map(r => (
+            <option key={r.name} value={r.name}>
+              {toSentenceCase(r.name)}
+            </option>
+          ))}
+        </Select>
 
-          <FormLabel component="label" fieldId="create_account_state">
-            State
-          </FormLabel>
-          <Select
-            id="create_account_state"
-            name="state"
-            size="medium"
-            value={state}
-            onChange={this.handleChange}
-          >
-            <option value="">None</option>
-            {STATES.map(s => (
-              <option key={s.id} value={s.id}>
-                {s.name}
-              </option>
-            ))}
-          </Select>
-
-          <FormLabel component="label" fieldId="create_account_role">
-            Authorization role
-          </FormLabel>
-          <Select
-            id="create_account_role"
-            name="role"
-            size="medium"
-            value={role || ''}
-            onChange={this.handleChange}
-          >
-            <option value="">None</option>
-            {roles.map(r => (
-              <option key={r.name} value={r.name}>
-                {toSentenceCase(r.name)}
-              </option>
-            ))}
-          </Select>
-
-          <Password
-            value={password}
-            compareTo={[email, name]}
-            onChange={this.handleChange}
-            showMeter
-            className="mb2"
-          />
-        </CardForm>
-      </Fragment>
-    );
-  }
-}
+        <Password
+          value={password}
+          compareTo={[email, name]}
+          onChange={changePassword}
+          showMeter
+          className="mb2"
+        />
+      </CardForm>
+    </Fragment>
+  );
+};
 
 CreateUser.propTypes = {
   createUser: PropTypes.func.isRequired,
@@ -171,9 +148,6 @@ const mapDispatchToProps = {
   createUser: createUserDispatch
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateUser);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
 
 export { CreateUser as plain };
