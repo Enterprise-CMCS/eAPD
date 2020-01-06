@@ -23,6 +23,8 @@
 
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-filename-extension": 0,
+    "react/jsx-fragments": 0,
+    "react/jsx-props-no-spreading": 0,
     "react/no-array-index-key": "warn"
   },
   "env": {
