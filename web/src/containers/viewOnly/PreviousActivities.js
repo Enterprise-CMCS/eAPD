@@ -14,6 +14,7 @@ const PreviousActivities = ({ previousActivitySummary }) => {
     <div>
       <h2>Results of Previous Activities</h2>
       <div dangerouslySetInnerHTML={{ __html: previousActivitySummary }} />
+      <hr className="subsection-rule" />
       <h3>Actual Costs of Previous Activities</h3>
       <ApdPreviousActivityTableHI isViewOnly />
       <ApdPreviousActivityTableMMIS isViewOnly />
