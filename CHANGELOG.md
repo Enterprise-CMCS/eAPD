@@ -1,6 +1,16 @@
 # Next release
 
-Anticipated release: January 6, 2020
+Anticipated release: January 20, 2020
+
+#### 🚀 New features
+
+#### 🐛 Bugs fixed
+
+#### ⚙️ Behind the scenes
+
+# 2.3.0
+
+Released: January 6, 2020
 
 #### 🚀 New features
 
