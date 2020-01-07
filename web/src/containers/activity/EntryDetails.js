@@ -80,6 +80,7 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
           className="ds-c-dialog--full"
           onExit={() => setShowModal(false)}
           closeButtonVariation="transparent"
+          title={title}
           actions={[
             <Button variation="primary" onClick={() => setShowModal(false)}>
               Done
