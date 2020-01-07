@@ -1,4 +1,4 @@
-import { Button, Review } from '@cmsgov/design-system-core';
+import { Button, Review, Dialog } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
@@ -30,6 +30,7 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
   const container = useRef();
 
   const [collapsed, internalSetCollapsed] = useState(activityIndex > 0);
+  const [showModal, setShowModal] = useState(false);
   const setCollapsed = newCollapsed => {
     if (newCollapsed) {
       const { top } = container.current.getBoundingClientRect();
@@ -52,15 +53,9 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
         <Button
           size="small"
           variation="transparent"
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={() => setShowModal(true)}
         >
-          {collapsed ? (
-            'Edit'
-          ) : (
-            <Fragment>
-              <TimesCircle /> Close
-            </Fragment>
-          )}
+          Edit
         </Button>
       </div>
     ),
@@ -80,18 +75,26 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
           /* children are required, so send an empty array to suppress errors */
         ]}
       </Review>
-      <div className={collapsed ? 'visibility--print' : ''}>
-        <Overview activityIndex={activityIndex} />
-        <Goals activityIndex={activityIndex} />
-        <Schedule activityIndex={activityIndex} />
-        <Costs activityIndex={activityIndex} />
-        <ContractorResources activityIndex={activityIndex} />
-        <CostAllocate activityIndex={activityIndex} />
-        <StandardsAndConditions activityIndex={activityIndex} />
-        <Button variation="primary" onClick={() => setCollapsed(true)}>
-          Done
-        </Button>
-      </div>
+      {showModal && (
+        <Dialog
+          className="ds-c-dialog--full"
+          onExit={() => setShowModal(false)}
+          closeButtonVariation="transparent"
+          actions={[
+            <Button variation="primary" onClick={() => setShowModal(false)}>
+              Done
+            </Button>
+          ]}
+        >
+          <Overview activityIndex={activityIndex} />
+          <Goals activityIndex={activityIndex} />
+          <Schedule activityIndex={activityIndex} />
+          <Costs activityIndex={activityIndex} />
+          <ContractorResources activityIndex={activityIndex} />
+          <CostAllocate activityIndex={activityIndex} />
+          <StandardsAndConditions activityIndex={activityIndex} />
+        </Dialog>
+      )}
     </div>
   );
 };
