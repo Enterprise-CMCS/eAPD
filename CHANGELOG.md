@@ -1,6 +1,16 @@
 # Next release
 
-Anticipated release: January 6, 2020
+Anticipated release: January 20, 2020
+
+#### 🚀 New features
+
+#### 🐛 Bugs fixed
+
+#### ⚙️ Behind the scenes
+
+# 2.3.0
+
+Released: January 6, 2020
 
 #### 🚀 New features
 
@@ -238,10 +248,5 @@ Pilot release to select state partners
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
-
-<<<<<<< HEAD
 [#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
-=======
 [#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
-
-> > > > > > > master
