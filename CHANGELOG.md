@@ -8,6 +8,8 @@ Anticipated release: January 20, 2020
 
 #### ⚙️ Behind the scenes
 
+- Added browser security headers to frontend web responses ([#1966])
+
 # 2.3.0
 
 Released: January 6, 2020
@@ -25,7 +27,6 @@ Released: January 6, 2020
 
 - Updated to the latest version of the CMS Design System ([#1981])
 - Updated dependencies
-- Added browser security headers to frontend web responses ([#1966])
 
 # 2.2.0
 
