@@ -1,4 +1,4 @@
-import { Button, Dialog } from '@cmsgov/design-system-core';
+import { Button, Dialog, Tabs, TabPanel } from '@cmsgov/design-system-core';
 
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -14,43 +14,7 @@ import StandardsAndConditions from './StandardsAndConditions';
 const ActivityDialog = props => {
   const { title, activityIndex } = props;
   const [showModal, setShowModal] = useState(true);
-  const titleElement = (
-    <Fragment>
-      <span>{title}</span>
-      <nav className="dialog--nav">
-        <ul className="ds-c-list ds-c-list--bare">
-          <li className="active">
-            <a href={`#activity-overview-${activityIndex}`}>
-              Activity overview
-            </a>
-          </li>
-          <li>
-            <a href={`#activity-goals-${activityIndex}`}>Goals</a>
-          </li>
-          <li>
-            <a href={`#activity-cost-categories-${activityIndex}`}>
-              In-house cost categories
-            </a>
-          </li>
-          <li>
-            <a href={`#activity-contractor-costs-${activityIndex}`}>
-              Private contractor costs
-            </a>
-          </li>
-          <li>
-            <a href={`#activity-cost-allocation-${activityIndex}`}>
-              Cost allocation
-            </a>
-          </li>
-          <li>
-            <a href={`#activity-ffp-${activityIndex}`}>
-              FFP and cost allocation
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </Fragment>
-  );
+
   return (
     showModal && (
       <Dialog
@@ -63,15 +27,39 @@ const ActivityDialog = props => {
         className="ds-c-dialog--full"
         closeButtonVariation="transparent"
         onExit={() => setShowModal(false)}
-        title={titleElement}
+        title={title}
       >
-        <Overview activityIndex={activityIndex} />
-        <Goals activityIndex={activityIndex} />
-        <Schedule activityIndex={activityIndex} />
-        <Costs activityIndex={activityIndex} />
-        <ContractorResources activityIndex={activityIndex} />
-        <CostAllocate activityIndex={activityIndex} />
-        <StandardsAndConditions activityIndex={activityIndex} />
+        <Tabs>
+          <TabPanel
+            id={`#activity-overview-${activityIndex}`}
+            tab="Activity overview"
+          >
+            <Overview activityIndex={activityIndex} />
+            <StandardsAndConditions activityIndex={activityIndex} />
+          </TabPanel>
+          <TabPanel id={`#activity-goals-${activityIndex}`} tab="Goals">
+            <Goals activityIndex={activityIndex} />
+            <Schedule activityIndex={activityIndex} />
+          </TabPanel>
+          <TabPanel
+            id={`#activity-cost-categories-${activityIndex}`}
+            tab="In-house cost categories"
+          >
+            <Costs activityIndex={activityIndex} />
+          </TabPanel>
+          <TabPanel
+            id={`#activity-contractor-costs-${activityIndex}`}
+            tab="Private contractor costs"
+          >
+            <ContractorResources activityIndex={activityIndex} />
+          </TabPanel>
+          <TabPanel
+            id={`#activity-cost-allocation-${activityIndex}`}
+            tab="Cost allocation"
+          >
+            <CostAllocate activityIndex={activityIndex} />
+          </TabPanel>
+        </Tabs>
       </Dialog>
     )
   );
