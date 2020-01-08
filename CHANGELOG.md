@@ -4,6 +4,8 @@ Anticipated release: January 20, 2020
 
 #### 🚀 New features
 
+- Remove the unsaved changes/logout warnings because we have automatic saves now! [(#1995)]
+
 #### 🐛 Bugs fixed
 
 - Fixed a bug where everything was in italics. [(#1998)]
@@ -257,6 +259,7 @@ Pilot release to select state partners
 [#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
 [#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
 [#1985]: https://github.com/18F/cms-hitech-apd/issues/1985
-[#1998]: https://github.com/18F/cms-hitech-apd/issues/1998
 [#1990]: https://github.com/18F/cms-hitech-apd/issues/1990
 [#1991]: https://github.com/18F/cms-hitech-apd/issues/1991
+[#1995]: https://github.com/18F/cms-hitech-apd/issues/1995
+[#1998]: https://github.com/18F/cms-hitech-apd/issues/1998
