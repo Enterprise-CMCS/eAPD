@@ -1,1 +1,48 @@
 @import '@cmsgov/design-system-support/src/settings/index';
+
+.ds-c-dialog {
+  .subsection--title:first-child {
+    border-top: none;
+  }
+}
+h1#dialog-title {
+  margin-bottom: 0;
+}
+.ds-c-dialog__header {
+  position: sticky;
+  top: 0;
+  background-color: $color-white;
+  z-index: 99999;
+  border-bottom: 1px solid $color-gray;
+}
+.dialog--nav {
+  margin-top: $spacer-2;
+  ul {
+    display: flex;
+  }
+
+  li {
+    border-left: 1px solid $color-gray;
+    font-size: $small-font-size;
+    font-weight: normal;
+    margin: 0 $spacer-1 $spacer-1;
+    padding: 0 $spacer-1;
+    a {
+      text-decoration: none;
+      color: $color-gray;
+    }
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-bottom: $spacer-1; // CMS design system override
+    }
+    &.active {
+      border-left: 2px solid $color-primary;
+      font-weight: bold;
+      a {
+        color: $color-primary;
+      }
+    }
+  }
+}
