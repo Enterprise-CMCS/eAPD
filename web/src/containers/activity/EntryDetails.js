@@ -12,7 +12,6 @@ import Overview from './Overview';
 import Goals from './Goals';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
-import { TimesCircle } from '../../components/Icons';
 import { t } from '../../i18n';
 
 const makeTitle = ({ name, fundingSource }, i) => {
@@ -62,6 +61,44 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
     [collapsed]
   );
 
+  const titleElement = (
+    <Fragment>
+      <span>{title}</span>
+      <nav className="dialog--nav">
+        <ul className="ds-c-list ds-c-list--bare">
+          <li className="active">
+            <a href={`#activity-overview-${activityIndex}`}>
+              Activity overview
+            </a>
+          </li>
+          <li>
+            <a href={`#activity-goals-${activityIndex}`}>Goals</a>
+          </li>
+          <li>
+            <a href={`#activity-cost-categories-${activityIndex}`}>
+              In-house cost categories
+            </a>
+          </li>
+          <li>
+            <a href={`#activity-contractor-costs-${activityIndex}`}>
+              Private contractor costs
+            </a>
+          </li>
+          <li>
+            <a href={`#activity-cost-allocation-${activityIndex}`}>
+              Cost allocation
+            </a>
+          </li>
+          <li>
+            <a href={`#activity-ffp-${activityIndex}`}>
+              FFP and cost allocation
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </Fragment>
+  );
+
   return (
     <div
       id={`activity-${activityKey}`}
@@ -77,15 +114,16 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
       </Review>
       {showModal && (
         <Dialog
-          className="ds-c-dialog--full"
-          onExit={() => setShowModal(false)}
-          closeButtonVariation="transparent"
-          title={title}
           actions={[
             <Button variation="primary" onClick={() => setShowModal(false)}>
               Done
             </Button>
           ]}
+          ariaCloseLabel={`Close modal for ${title}`}
+          className="ds-c-dialog--full"
+          closeButtonVariation="transparent"
+          onExit={() => setShowModal(false)}
+          title={titleElement}
         >
           <Overview activityIndex={activityIndex} />
           <Goals activityIndex={activityIndex} />
