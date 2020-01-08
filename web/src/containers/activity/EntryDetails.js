@@ -22,45 +22,31 @@ const makeTitle = ({ name, fundingSource }, i) => {
 const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
   const container = useRef();
 
-  const [collapsed, internalSetCollapsed] = useState(activityIndex > 0);
   const [showModal, setShowModal] = useState(false);
-  const setCollapsed = newCollapsed => {
-    if (newCollapsed) {
-      const { top } = container.current.getBoundingClientRect();
-      if (top < 0 || top > window.innerHeight) {
-        container.current.scrollIntoView({ behavior: 'auto' });
-        container.current.focus();
-      }
-    }
-    internalSetCollapsed(newCollapsed);
-  };
 
   const title = useMemo(
     () => makeTitle({ name, fundingSource }, activityIndex + 1),
     [fundingSource, name, activityIndex]
   );
 
-  const editContent = useMemo(
-    () => (
-      <div className="nowrap visibility--screen">
-        <Button
-          size="small"
-          variation="transparent"
-          onClick={() => setShowModal(true)}
-        >
-          Edit
-        </Button>
-      </div>
-    ),
-    [collapsed]
+  const editContent = (
+    <div className="nowrap visibility--screen">
+      <Button
+        size="small"
+        variation="transparent"
+        onClick={() => setShowModal(true)}
+      >
+        Edit
+      </Button>
+    </div>
   );
 
   return (
     <div
       id={`activity-${activityKey}`}
       className={`activity--body activity--body__${
-        collapsed ? 'collapsed' : 'expanded'
-      } activity--body__${activityIndex === 0 ? 'first' : 'notfirst'}`}
+        activityIndex === 0 ? 'first' : 'notfirst'
+      }`}
       ref={container}
     >
       <Review heading={title} headingLevel={4} editContent={editContent}>
