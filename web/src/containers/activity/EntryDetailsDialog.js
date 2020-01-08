@@ -18,14 +18,10 @@ const ActivityDialog = props => {
   return (
     showModal && (
       <Dialog
-        actions={[
-          <Button variation="primary" onClick={() => setShowModal(false)}>
-            Done
-          </Button>
-        ]}
         ariaCloseLabel={`Close modal for ${title}`}
         className="ds-c-dialog--full"
         closeButtonVariation="transparent"
+        closeText="Save and close"
         onExit={() => setShowModal(false)}
         title={title}
       >
