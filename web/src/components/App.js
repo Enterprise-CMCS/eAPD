@@ -8,7 +8,7 @@ import AuthChecker from '../containers/AuthChecker';
 import IdleLogout from '../containers/IdleLogout';
 
 const App = () => (
-  <Wrapper isDev={process.env.NODE_ENV !== 'production'}>
+  <Wrapper>
     <AriaAnnounce />
     <Broadcast />
     <IdleLogout />
