@@ -28,10 +28,6 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
     try {
       const apd = getNewApd();
 
-      apd.name = `${req.user.state.id.toUpperCase()}-${moment(
-        Date.now()
-      ).format('YYYY-MM-DD')}-HITECH-APD`;
-
       const stateProfile = await getStateProfile(req.user.state.id);
 
       if (stateProfile) {

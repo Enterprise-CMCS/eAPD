@@ -180,7 +180,7 @@ tap.test('apds POST endpoint', async endpointTest => {
             position: ''
           }
         ],
-        name: 'ST-2004-07-01-HITECH-APD',
+        name: 'HITECH IAPD',
         narrativeHIE: '',
         narrativeHIT: '',
         narrativeMMIS: '',
