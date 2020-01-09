@@ -4,6 +4,8 @@ Anticipated release: January 20, 2020
 
 #### 🚀 New features
 
+- Changed the APD name to `HITECH IAPD` ([#1821], [#1993])
+
 #### 🐛 Bugs fixed
 
 - Fixed a bug where everything was in italics. [(#1998)]
@@ -240,6 +242,7 @@ Pilot release to select state partners
 [#1802]: https://github.com/18F/cms-hitech-apd/issues/1802
 [#1803]: https://github.com/18F/cms-hitech-apd/issues/1803
 [#1820]: https://github.com/18F/cms-hitech-apd/issues/1820
+[#1821]: https://github.com/18F/cms-hitech-apd/issues/1821
 [#1826]: https://github.com/18F/cms-hitech-apd/issues/1826
 [#1871]: https://github.com/18F/cms-hitech-apd/issues/1871
 [#1882]: https://github.com/18F/cms-hitech-apd/issues/1882
@@ -256,4 +259,5 @@ Pilot release to select state partners
 [#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
 [#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
 [#1985]: https://github.com/18F/cms-hitech-apd/issues/1985
+[#1993]: https://github.com/18F/cms-hitech-apd/issues/1993
 [#1998]: https://github.com/18F/cms-hitech-apd/issues/1998
