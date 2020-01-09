@@ -1,6 +1,6 @@
 import { Alert, Button, Spinner } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import stickybits from 'stickybits';
 
@@ -25,28 +25,27 @@ const getButtonContent = (dirty, working) => {
   return 'Save';
 };
 
-class SaveButton extends PureComponent {
-  state = {
-    hasFetched: false,
-    success: false
+const SaveButton = ({ error, needsSave, saveApd: action, working }) => {
+  const [hasFetched, setHasFetched] = useState(false);
+
+  // Success has to be derived.  It can't be stored in the app state because
+  // if it was, then the next time this form was loaded, it would show the
+  // success state even though it wouldn't be accurate anymore.
+  const success = useMemo(() => hasFetched && !working && !error, [
+    error,
+    hasFetched,
+    working
+  ]);
+
+  useEffect(() => {
+    stickybits('#apd-save-button', { verticalPosition: 'bottom' });
+  }, []);
+
+  const clearFetched = () => {
+    setHasFetched(false);
   };
 
-  static getDerivedStateFromProps({ error, working }, { hasFetched }) {
-    // Success has to be derived.  It can't be stored in the app state because
-    // if it was, then the next time this form was loaded, it would show the
-    // success state even though it wouldn't be accurate anymore.
-    if (hasFetched) {
-      const success = !working && !error;
-      return { success };
-    }
-    return null;
-  }
-
-  componentDidMount() {
-    stickybits('#apd-save-button', { verticalPosition: 'bottom' });
-  }
-
-  setSuccessTimer = (() => {
+  const setSuccessTimer = (() => {
     let alertTimer = null;
     return () => {
       if (alertTimer) {
@@ -54,58 +53,48 @@ class SaveButton extends PureComponent {
         // success dialog when it runs out rather than five seconds from now
         clearTimeout(alertTimer);
       }
-      alertTimer = setTimeout(this.clearFetched, 5000);
+      alertTimer = setTimeout(clearFetched, 5000);
     };
   })();
 
-  clearFetched = () => {
-    this.setState({ hasFetched: false });
-  };
-
-  save = () => {
-    const { saveApd: action } = this.props;
-    this.setState({ hasFetched: true });
+  const save = () => {
+    setHasFetched(true);
     action();
   };
 
-  render() {
-    const { error, needsSave, working } = this.props;
-    const { hasFetched, success } = this.state;
-
-    let alert = null;
-    if (hasFetched) {
-      if (error) {
-        alert = (
-          <Alert variation="error" className="ds-u-margin-bottom--2">
-            {error}
-          </Alert>
-        );
-      }
-      if (success) {
-        alert = (
-          <Alert variation="success" className="ds-u-margin-bottom--2">
-            Save successful!
-          </Alert>
-        );
-        this.setSuccessTimer();
-      }
+  let alert = null;
+  if (hasFetched) {
+    if (error) {
+      alert = (
+        <Alert variation="error" className="ds-u-margin-bottom--2">
+          {error}
+        </Alert>
+      );
     }
-
-    const buttonVariant = needsSave ? 'primary' : 'success';
-
-    return (
-      <div
-        id="apd-save-button"
-        className="save-button--container ds-u-margin-bottom--3 visibility--screen"
-      >
-        <div className="save-button--alert">{alert}</div>
-        <Button variation={buttonVariant} onClick={this.save}>
-          {getButtonContent(needsSave, working)}
-        </Button>
-      </div>
-    );
+    if (success) {
+      alert = (
+        <Alert variation="success" className="ds-u-margin-bottom--2">
+          Save successful!
+        </Alert>
+      );
+      setSuccessTimer();
+    }
   }
-}
+
+  const buttonVariant = needsSave ? 'primary' : 'success';
+
+  return (
+    <div
+      id="apd-save-button"
+      className="save-button--container ds-u-margin-bottom--3 visibility--screen"
+    >
+      <div className="save-button--alert">{alert}</div>
+      <Button variation={buttonVariant} onClick={save}>
+        {getButtonContent(needsSave, working)}
+      </Button>
+    </div>
+  );
+};
 
 SaveButton.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
@@ -122,9 +111,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { saveApd };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SaveButton);
+export default connect(mapStateToProps, mapDispatchToProps)(SaveButton);
 
 export { SaveButton as plain, mapStateToProps, mapDispatchToProps };
