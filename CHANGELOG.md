@@ -6,6 +6,8 @@ Anticipated release: January 20, 2020
 
 #### 🐛 Bugs fixed
 
+- Fixed a bug where everything was in italics. [(#1998)]
+
 #### ⚙️ Behind the scenes
 
 - Added browser security headers to frontend web responses ([#1966])
@@ -254,3 +256,4 @@ Pilot release to select state partners
 [#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
 [#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
 [#1985]: https://github.com/18F/cms-hitech-apd/issues/1985
+[#1998]: https://github.com/18F/cms-hitech-apd/issues/1998
