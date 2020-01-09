@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import {
   plain as MyAccount,
@@ -87,8 +86,8 @@ describe('my account page', () => {
       position: 'Table Cleaner'
     };
 
-    const editAccount = sinon.spy();
-    const preventDefault = sinon.spy();
+    const editAccount = jest.fn();
+    const preventDefault = jest.fn();
 
     const component = shallow(
       <MyAccount
@@ -104,8 +103,16 @@ describe('my account page', () => {
       .props()
       .onSave({ preventDefault });
 
-    expect(preventDefault.calledOnce).toEqual(true);
-    expect(editAccount.calledWith(user)).toEqual(true);
+    expect(preventDefault).toHaveBeenCalled();
+    expect(editAccount).toHaveBeenCalledWith(
+      {
+        name: 'Tina Belcher',
+        password: '',
+        phone: '1-800-BURGERS',
+        position: 'Table Cleaner'
+      },
+      false
+    );
 
     // When there is no error (thus, success)
     expect(component).toMatchSnapshot();

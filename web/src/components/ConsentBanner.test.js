@@ -2,14 +2,13 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
+import ConsentBanner from './ConsentBanner';
+
 describe('Consent banner component', () => {
-  let ConsentBanner;
   const onAgree = sinon.spy();
 
   beforeEach(() => {
-    jest.resetModules();
     onAgree.resetHistory();
-    ConsentBanner = require('./ConsentBanner').default; // eslint-disable-line global-require
   });
 
   describe('when there is no cookie', () => {

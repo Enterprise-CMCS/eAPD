@@ -4,7 +4,10 @@ import RenderViewbox from '../RenderViewbox';
 import Instruction from '../../components/Instruction';
 
 class InstructionStory extends Component {
-  state = { reverse: false };
+  constructor() {
+    super();
+    this.state = { reverse: false };
+  }
 
   toggle = () => this.setState(prev => ({ reverse: !prev.reverse }));
 

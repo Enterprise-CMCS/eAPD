@@ -10,6 +10,8 @@ const ApdSummary = ({
   narrativeMMIS,
   programOverview
 }) => {
+  /* eslint-disable react/no-danger */
+
   return (
     <div>
       <h2>Program summary</h2>

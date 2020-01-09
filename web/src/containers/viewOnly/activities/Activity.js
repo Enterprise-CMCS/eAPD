@@ -105,13 +105,13 @@ const Activity = ({ activity, activityIndex }) => {
             <li key={year}>
               <strong>{year} Costs:</strong> <Dollars>{cost}</Dollars>
               {contractor.hourly.useHourly === true && (
-                <>
+                <Fragment>
                   <p>Number of hours: {contractor.hourly.data[year].hours}</p>
                   <p>
                     Hourly rate:{' '}
                     <Dollars>{contractor.hourly.data[year].rate}</Dollars>
                   </p>
-                </>
+                </Fragment>
               )}
             </li>
           ))}
@@ -124,6 +124,7 @@ const Activity = ({ activity, activityIndex }) => {
     );
   };
 
+  /* eslint-disable react/no-danger */
   return (
     <Fragment>
       <h2>
