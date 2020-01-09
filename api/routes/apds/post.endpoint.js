@@ -30,12 +30,14 @@ describe('APD endpoint | POST /apds', () => {
 
     expect(statusCode).toEqual(200);
 
-    // The updated date is based on when the APD is saved. Rather than figure
-    // out something fancy with the snapshots, just pull out the date and test
-    // it with a regex.
-    const { updated } = body;
+    // The created and updated dates are based on when the APD is saved. Rather
+    // than figure out something fancy with the snapshots, just pull out the
+    // dates and test them with a regex.
+    const { created, updated } = body;
+    delete body.created;
     delete body.updated;
 
+    expect(created).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
     expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
     expect(body).toMatchSnapshot();
   });
