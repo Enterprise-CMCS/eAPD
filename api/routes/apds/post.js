@@ -1,5 +1,4 @@
 const Ajv = require('ajv');
-const moment = require('moment');
 
 const logger = require('../../logger')('apds route post');
 const { createAPD: ga, getStateProfile: gs } = require('../../db');
