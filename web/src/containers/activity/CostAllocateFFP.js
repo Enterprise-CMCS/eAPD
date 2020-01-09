@@ -46,12 +46,12 @@ class CostAllocateFFP extends Component {
                 <Dollars long>{total}</Dollars>
               </p>
               {isViewOnly ? (
-                <>
+                <Fragment>
                   <p className="ds-h4 ds-u-display--block">
                     {t('activities.costAllocate.ffp.labels.other')}
                   </p>
                   <Dollars long>{costAllocation[year].other}</Dollars>
-                </>
+                </Fragment>
               ) : (
                 <DollarField
                   label={t('activities.costAllocate.ffp.labels.other')}

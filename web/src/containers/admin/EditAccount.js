@@ -5,7 +5,7 @@ import {
   TextField
 } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import { editAccount as editAccountDispatch } from '../../actions/admin';
@@ -17,32 +17,69 @@ import { getEditAccountError } from '../../reducers/errors';
 import { getEditAccountWorking } from '../../reducers/working';
 import { STATES, toSentenceCase } from '../../util';
 
-class EditAccount extends Component {
-  state = {
-    changePassword: false,
-    hasFetched: false,
-    success: false,
-    userID: '',
-    user: null
+const EditAccount = ({
+  currentUser,
+  editAccount,
+  error,
+  roles,
+  users,
+  working
+}) => {
+  const [changePassword, setChangePassword] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
+  const [userID, setUserID] = useState('');
+  const [user, setUser] = useState(null);
+
+  // Success has to be derived.  It can't be stored in the app state because
+  // if it was, then the next time this form was loaded, it would show the
+  // success state even though it wouldn't be accurate anymore.
+  const success = useMemo(() => hasFetched && !working && !error, [
+    error,
+    hasFetched,
+    working
+  ]);
+
+  const handlePickAccount = ({ target: { value } }) => {
+    const newUser = users
+      .filter(u => u.id === +value)
+      .reduce((_, u) => u, null);
+    setUserID(+value);
+    setUser({ ...newUser, state: newUser.state.id });
   };
 
-  static getDerivedStateFromProps({ error, working }, { hasFetched }) {
-    // Success has to be derived.  It can't be stored in the app state because
-    // if it was, then the next time this form was loaded, it would show the
-    // success state even though it wouldn't be accurate anymore.
+  const changeUserEmail = ({ target: { value } }) =>
+    setUser({ ...user, username: value });
+  const changeUserName = ({ target: { value } }) =>
+    setUser({ ...user, name: value });
+  const changeUserPassword = ({ target: { value } }) =>
+    setUser({ ...user, password: value });
+  const changeUserPhone = ({ target: { value } }) =>
+    setUser({ ...user, phone: value });
+  const changeUserPosition = ({ target: { value } }) =>
+    setUser({ ...user, position: value });
+  const changeUserRole = ({ target: { value } }) =>
+    setUser({ ...user, role: value });
 
-    if (hasFetched) {
-      return {
-        success: !working && !error
-      };
-    }
-    return null;
-  }
+  const changeUserState = ({ target: { value } }) =>
+    setUser({ ...user, state: value });
 
-  getForm = () => {
-    const { currentUser, roles } = this.props;
-    const { changePassword, user } = this.state;
+  const saveAccount = e => {
+    e.preventDefault();
+    // Once we've attempted to save these changes, it's valid to show success
+    // or error messages.  Since error messages are persisted in app state,
+    // it's possible there's an error sitting there from a previous instance
+    // of this form.  This flag makes sure we don't show any error messages
+    // until this instance of the form has tried to save.
+    setHasFetched(true);
+    editAccount(user, changePassword);
+  };
 
+  const toggleChangePassword = e => {
+    e.preventDefault();
+    setChangePassword(!changePassword);
+  };
+
+  const getForm = () => {
     if (user) {
       const { name, password, phone, position, state, username, role } = user;
 
@@ -55,14 +92,14 @@ class EditAccount extends Component {
             label="Name"
             name="name"
             value={name || ''}
-            onChange={this.handleEditAccount}
+            onChange={changeUserName}
           />
 
           <TextField
             label="Email"
             name="username"
             value={username}
-            onChange={this.handleEditAccount}
+            onChange={changeUserEmail}
           />
 
           <TextField
@@ -71,14 +108,14 @@ class EditAccount extends Component {
             size="medium"
             mask="phone"
             value={phone || ''}
-            onChange={this.handleEditAccount}
+            onChange={changeUserPhone}
           />
 
           <TextField
             label="Position"
             name="position"
             value={position || ''}
-            onChange={this.handleEditAccount}
+            onChange={changeUserPosition}
           />
 
           <FormLabel component="label" fieldId="modify_account_state">
@@ -89,7 +126,7 @@ class EditAccount extends Component {
             name="state"
             size="medium"
             value={state}
-            onChange={this.handleEditAccount}
+            onChange={changeUserState}
           >
             <option value="">None</option>
             {STATES.map(s => (
@@ -107,7 +144,7 @@ class EditAccount extends Component {
             name="role"
             size="medium"
             value={role || ''}
-            onChange={this.handleEditAccount}
+            onChange={changeUserRole}
             disabled={currentUser.id === user.id}
           >
             <option value="">None</option>
@@ -138,7 +175,7 @@ class EditAccount extends Component {
                   }
                   variation="transparent"
                   className="ds-u-padding-y--0"
-                  onClick={this.toggleChangePassword}
+                  onClick={toggleChangePassword}
                   purpose="change password"
                 >
                   {changePassword ? <UnlockIcon /> : <LockIcon />} Change
@@ -152,7 +189,7 @@ class EditAccount extends Component {
               showMeter
               title="New password"
               value={password}
-              onChange={this.handleEditAccount}
+              onChange={changeUserPassword}
             />
           )}
         </Fragment>
@@ -161,79 +198,40 @@ class EditAccount extends Component {
     return null;
   };
 
-  handlePickAccount = e => {
-    const { users } = this.props;
-    const { value } = e.target;
+  const onSave = !!userID && saveAccount;
 
-    const user = users.filter(u => u.id === +value).reduce((_, u) => u, null);
-
-    this.setState({ userID: +value, user: { ...user, state: user.state.id } });
-  };
-
-  handleEditAccount = e => {
-    const { name, value } = e.target;
-
-    this.setState(prev => ({ user: { ...prev.user, [name]: value } }));
-  };
-
-  editAccount = e => {
-    e.preventDefault();
-    const { editAccount } = this.props;
-    const { changePassword, user } = this.state;
-
-    // Once we've attempted to save these changes, it's valid to show success
-    // or error messages.  Since error messages are persisted in app state,
-    // it's possible there's an error sitting there from a previous instance
-    // of this form.  This flag makes sure we don't show any error messages
-    // until this instance of the form has tried to save.
-    this.setState({ hasFetched: true });
-    editAccount(user, changePassword);
-  };
-
-  toggleChangePassword = e => {
-    e.preventDefault();
-    this.setState(prev => ({ changePassword: !prev.changePassword }));
-  };
-
-  render() {
-    const { error, users, working } = this.props;
-    const { hasFetched, success, userID } = this.state;
-
-    const onSave = !!userID && this.editAccount;
-
-    return (
-      <Fragment>
-        <CardForm
-          title="Manage accounts"
-          sectionName="administrator"
-          error={hasFetched && error}
-          success={success && 'Account saved'}
-          working={working}
-          onSave={onSave}
+  return (
+    <Fragment>
+      <CardForm
+        title="Manage accounts"
+        sectionName="administrator"
+        error={hasFetched && error}
+        success={success && 'Account saved'}
+        working={working}
+        onSave={onSave}
+      >
+        <FormLabel component="label" fieldId="modify_account_user">
+          Account to edit
+        </FormLabel>
+        <Select
+          id="modify_account_user"
+          name="userID"
+          value={`${userID}`}
+          onChange={handlePickAccount}
         >
-          <FormLabel component="label" fieldId="modify_account_user">
-            Account to edit
-          </FormLabel>
-          <Select
-            id="modify_account_user"
-            name="userID"
-            value={`${userID}`}
-            onChange={this.handlePickAccount}
-          >
-            <option value="">Select...</option>
-            {users.map(u => (
-              <option key={u.id} value={`${u.id}`}>
-                {`${u.name ? `${u.name} - ` : ''}${u.username}`}
-              </option>
-            ))}
-          </Select>
+          <option value="">Select...</option>
+          {users.map(u => (
+            <option key={u.id} value={`${u.id}`}>
+              {`${u.name ? `${u.name} - ` : ''}${u.username}`}
+            </option>
+          ))}
+        </Select>
 
-          {this.getForm()}
-        </CardForm>
-      </Fragment>
-    );
-  }
-}
+        {getForm()}
+      </CardForm>
+    </Fragment>
+  );
+};
 
 EditAccount.propTypes = {
   currentUser: PropTypes.object.isRequired,
@@ -254,9 +252,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { editAccount: editAccountDispatch };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditAccount);
+export default connect(mapStateToProps, mapDispatchToProps)(EditAccount);
 
 export { EditAccount as plain, mapStateToProps, mapDispatchToProps };
