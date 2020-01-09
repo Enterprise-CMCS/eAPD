@@ -262,6 +262,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         {
           ...expectedApd,
           id: 'apd id',
+          created: '2004-07-01T12:00:00.000Z',
           updated: '2004-07-01T12:00:00.000Z'
         },
         'responds with the new APD object'

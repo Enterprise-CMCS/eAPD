@@ -67,6 +67,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       return res.send({
         ...apd,
         id,
+        created: new Date().toISOString(),
         updated: new Date().toISOString()
       });
     } catch (e) {
