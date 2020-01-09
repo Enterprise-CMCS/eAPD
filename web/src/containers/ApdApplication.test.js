@@ -15,6 +15,7 @@ describe('apd (application) component', () => {
     expect(
       shallow(
         <ApdApplication
+          apdCreated="creation date"
           apdName="test name"
           apdSelected
           needsSave
@@ -31,6 +32,7 @@ describe('apd (application) component', () => {
     expect(
       shallow(
         <ApdApplication
+          apdCreated="creation date"
           apdName="another apd"
           apdSelected={false}
           needsSave={false}
@@ -48,6 +50,7 @@ describe('apd (application) component', () => {
     expect(
       shallow(
         <ApdApplication
+          apdCreated="creation date"
           apdName="third"
           apdSelected={false}
           needsSave={false}
@@ -65,6 +68,7 @@ describe('apd (application) component', () => {
     const state = {
       apd: {
         data: {
+          created: 'creation date',
           id: 'bloop',
           name: 'florp',
           years: ['dinkus', 'dorkus', 'durkus']
@@ -79,6 +83,7 @@ describe('apd (application) component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
+      apdCreated: 'creation date',
       apdName: 'florp',
       apdSelected: true,
       isAdmin: false,
@@ -91,6 +96,7 @@ describe('apd (application) component', () => {
     delete state.apd.data.years;
 
     expect(mapStateToProps(state)).toEqual({
+      apdCreated: 'creation date',
       apdName: 'florp',
       apdSelected: false,
       isAdmin: false,
