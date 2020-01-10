@@ -12,6 +12,7 @@ Anticipated release: January 20, 2020
 
 - Added browser security headers to frontend web responses ([#1966])
 - Updated dependencies ([#1985])
+- Removed some old, unused dev tools and rearranged some analytics code ([#1990], [#1991])
 
 # 2.3.0
 
@@ -257,3 +258,5 @@ Pilot release to select state partners
 [#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
 [#1985]: https://github.com/18F/cms-hitech-apd/issues/1985
 [#1998]: https://github.com/18F/cms-hitech-apd/issues/1998
+[#1990]: https://github.com/18F/cms-hitech-apd/issues/1990
+[#1991]: https://github.com/18F/cms-hitech-apd/issues/1991
