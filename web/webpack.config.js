@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 if (!process.env.IDLE_LOGOUT_TIME_MINUTES) {
   delete process.env.IDLE_LOGOUT_TIME_MINUTES;
@@ -49,17 +50,13 @@ const config = {
           },
 
           // Converts the local disk paths from css-loader into their final
-          // paths relative to the dist directory.
-          'extract-loader',
+          // paths relative to the dist directory, then pulls everything
+          // together
+          MiniCssExtractPlugin.loader,
 
           // Interprets any url() and @import statements and resolves them to
           // their full path on the local disk.
           'css-loader',
-
-          // Doesn't do anything. Probably legacy? But leave it for now, and
-          // we can remove it later when we've got time to make sure it doesn't
-          // break anything.
-          'resolve-url-loader',
 
           // Handles resolving and importing all the CSS files, so we end up
           // with one nice, big file to deal with. Also adds vendor prefixes
@@ -98,6 +95,7 @@ const config = {
   // replaces "process.env.____" with the values defined in the actual
   // environment at build time
   plugins: [
+    new MiniCssExtractPlugin(),
     new webpack.EnvironmentPlugin({
       API_URL: null,
       IDLE_LOGOUT_TIME_MINUTES: 15
