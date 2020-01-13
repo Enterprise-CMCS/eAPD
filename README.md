@@ -85,7 +85,7 @@ running tests.
 Check out the [technical documentation](/wiki/Dev%3A-Index) for a deeper dive into
 how the app works.
 
-## Development
+## Contributing
 
 We would be happy to receive pull requests to fix bugs or make improvements,
 though we can't make any promises about having time to review or accept them.
