@@ -46,30 +46,18 @@ code as [a ZIP file](https://github.com/18F/cms-hitech-apd/archive/master.zip).
 We recommend using [Docker](https://www.docker.com) to run the app locally. We
 provide a Docker configuration that will quickly install and build everything
 you need, so don't have to. It'll also take care of getting everything running
-and connected. If you don't have or can't use Docker, you can also run
-everything [manually](#/wiki/Dev%3A-Index#Manually).
+and connected. For more details, [see our wiki](/wiki/Dev%3A-Index#Docker). If
+you don't have or can't use Docker, you can also run everything
+[manually](#/wiki/Dev%3A-Index#Manually).
 
 From your command line, switch to the directory where you put the code and
-then run `docker-compose up`. This will do several things:
-
-1. create a PostgreSQL database in a container
-2. create a container for the API server, download all of its dependencies, and
-   hook it up to the database
-3. create a container for the web application, download all of its
-   dependencies, and build it
-
-This could take a few minutes. Once it's finished, everything is installed,
-configured, and running. However, the database will still be empty, so that
-needs to be created and populated with starter data. To do that, run:
+then run `docker-compose up`. This step could take a few minutes. Once it's
+finished, run:
 
 ```shell
 docker-compose exec api npm run migrate
 docker-compose exec api npm run seed
 ```
-
-This will create database tables and put in some data the app needs to run,
-like the list of states and territories and a user account you can use to
-log into the app.
 
 You should now be able to open the app at
 [http://localhost:8080](http://localhost:8080). You can log in with username
