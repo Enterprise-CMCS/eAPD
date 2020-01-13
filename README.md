@@ -42,11 +42,11 @@ code as [a ZIP file](https://github.com/18F/cms-hitech-apd/archive/master.zip).
 
 ### Making it run
 
-There are a couple of ways to get the app running after you've got it on your
-computer. If you have [Docker](https://www.docker.com), we provide a Docker
-configuration that will quickly install and build everything you need, so don't
-have to. It'll also take care of getting everything running and connected.
-If you don't have or can't use Docker, you can also do it [manually](#manually).
+We recommend using [Docker](https://www.docker.com) to run the app locally. We
+provide a Docker configuration that will quickly install and build everything
+you need, so don't have to. It'll also take care of getting everything running
+and connected. If you don't have or can't use Docker, you can also run
+everything [manually](#manually).
 
 ### docker
 
@@ -78,7 +78,7 @@ You should now be able to open the app at
 a filled-in APD. There is also an admin account with username `admin` and
 password `password`.
 
-See the [testing documentation](docs/testing.md) for information about running tests.
+See the [testing documentation](/wiki/Dev%3A-Testing) for information about running tests.
 
 ### manually
 
@@ -99,7 +99,7 @@ API server. They're not started yet, though. Next, you need to make sure
 have an available connection to a PostgreSQL database somewhere else).
 
 The next step is to set your
-[environment variables](docs/api-configuration.md). On Linux and MacOS, you
+[environment variables](/wiki/Dev%3A-API-Configuration). On Linux and MacOS, you
 can just set them in your command line:
 
 ```shell
@@ -172,7 +172,7 @@ npm run storybook
 
 The Storybook is now running at http://localhost:9001
 
-See the [testing documentation](docs/testing.md) for information about running tests.
+See the [testing documentation](/wiki/Dev%3A-Testing) for information about running tests.
 
 ### development
 
@@ -183,7 +183,7 @@ our [contributing](CONTRIBUTING.md) guide for info about our policies.
 
 ### deeper documentation
 
-Check out the [technical documentation](docs/index.md) for a deeper dive into
+Check out the [technical documentation](/wiki/Dev%3A-Index) for a deeper dive into
 how the app works.
 
 ## Public domain
