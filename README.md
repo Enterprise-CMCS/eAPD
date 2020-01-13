@@ -46,9 +46,10 @@ code as [a ZIP file](https://github.com/18F/cms-hitech-apd/archive/master.zip).
 We recommend using [Docker](https://www.docker.com) to run the app locally. We
 provide a Docker configuration that will quickly install and build everything
 you need, so don't have to. It'll also take care of getting everything running
-and connected. For more details, [see our wiki](/wiki/Dev%3A-Index#Docker). If
-you don't have or can't use Docker, you can also run everything
-[manually](#/wiki/Dev%3A-Index#Manually).
+and connected. For more details,
+[see our wiki](https://github.com/18F/cms-hitech-apd/wiki/Dev%3A-Index#Docker).
+If you don't have or can't use Docker, you can also run everything
+[manually](https://github.com/18F/cms-hitech-apd/wiki/Dev%3A-Index#Manually).
 
 From your command line, switch to the directory where you put the code and
 then run `docker-compose up`. This step could take a few minutes. Once it's
@@ -65,13 +66,15 @@ You should now be able to open the app at
 a filled-in APD. There is also an admin account with username `admin` and
 password `password`.
 
-See the [testing documentation](/wiki/Dev%3A-Testing) for information about
-running tests.
+See the
+[testing documentation](https://github.com/18F/cms-hitech-apd/wiki/Dev%3A-Testing)
+for information about running tests.
 
 ### More technical documentation
 
-Check out the [technical documentation](/wiki/Dev%3A-Index) for a deeper dive into
-how the app works.
+Check out the
+[technical documentation](https://github.com/18F/cms-hitech-apd/wiki/Dev%3A-Index)
+for a deeper dive into how the app works.
 
 ## Contributing
 
