@@ -24,6 +24,9 @@ const ExecutiveSummary = props => {
     setActivityIndexForModal(index);
     setShowModal(true);
   };
+  const closeModal = () => {
+    setShowModal(false);
+  };
   return (
     <Waypoint id="executive-summary-overview">
       <Section isNumbered id="executive-summary" resource="executiveSummary">
@@ -65,8 +68,11 @@ const ExecutiveSummary = props => {
           ))}
           {showModal && (
             <ActivityDialog
-              title="title"
+              title={`Activity ${activityIndexForModal + 1}: ${
+                data[activityIndexForModal].name
+              }`}
               activityIndex={activityIndexForModal}
+              closeModal={closeModal}
             />
           )}
           <hr className="ds-u-border--dark ds-u-margin--0" />
