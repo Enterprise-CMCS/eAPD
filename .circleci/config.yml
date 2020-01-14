@@ -423,7 +423,7 @@ jobs:
           name: vulnerability scan
           working_directory: ~/project/<< parameters.path >>
           command: |
-            npm audit
+            npx -p npm-audit-resolver check-audit
 
   owasp zap scan:
     machine:
