@@ -12,8 +12,13 @@ import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
 
 const ActivityDialog = props => {
-  const { title, activityIndex } = props;
+  const { title, activityIndex, closeModal } = props;
   const [showModal, setShowModal] = useState(true);
+
+  const handleOnExit = () => {
+    setShowModal(false);
+    closeModal();
+  };
 
   return (
     showModal && (
@@ -22,7 +27,7 @@ const ActivityDialog = props => {
         className="ds-c-dialog--full"
         closeButtonVariation="transparent"
         closeText="Save and close"
-        onExit={() => setShowModal(false)}
+        onExit={() => handleOnExit()}
         title={title}
       >
         <Tabs>
