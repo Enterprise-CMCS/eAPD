@@ -1,3 +1,22 @@
+hr.section-rule {
+  border: 2px solid black !important;
+  margin-top: 2em;
+  margin-bottom: -1em;
+}
+
+hr.subsection-rule {
+  margin-top: 2em;
+  margin-bottom: -1em;
+}
+
+.viewonly-activity-header {
+  border-top: 1px solid black;
+  small {
+    font-weight: lighter;
+    text-transform: uppercase;
+  }
+}
+
 @media print {
   body {
     background-color: white;
@@ -94,7 +113,7 @@
   div.form--with-reviews {
     border-bottom: none;
   }
-  
+
   .public-DraftEditor-content {
     border: 0;
   }
