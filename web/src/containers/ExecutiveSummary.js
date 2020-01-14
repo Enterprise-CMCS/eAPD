@@ -7,9 +7,7 @@ import Waypoint from './ConnectedWaypoint';
 import Dollars from '../components/Dollars';
 import Review from '../components/Review';
 import { Section, Subsection } from '../components/Section';
-import { t } from '../i18n';
 
-import { jumpTo } from '../actions/app';
 import { selectApdYears } from '../reducers/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
@@ -67,7 +65,7 @@ const ExecutiveSummary = props => {
           ))}
           {showModal && (
             <ActivityDialog
-              title={data[activityIndexForModal].name}
+              title="title"
               activityIndex={activityIndexForModal}
             />
           )}

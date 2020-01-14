@@ -24,6 +24,10 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
 
   const [showModal, setShowModal] = useState(false);
 
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   const title = useMemo(
     () => makeTitle({ name, fundingSource }, activityIndex + 1),
     [fundingSource, name, activityIndex]
@@ -55,7 +59,11 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
         ]}
       </Review>
       {showModal && (
-        <ActivityDialog title={title} activityIndex={activityIndex} />
+        <ActivityDialog
+          title={title}
+          activityIndex={activityIndex}
+          closeModal={closeModal}
+        />
       )}
     </div>
   );
