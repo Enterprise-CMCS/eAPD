@@ -5,6 +5,7 @@ Anticipated release: January 20, 2020
 #### 🚀 New features
 
 - Remove the unsaved changes/logout warnings because we have automatic saves now! [(#1995)]
+- Improved the layout of the exported PDF ([#1961])
 
 #### 🐛 Bugs fixed
 
@@ -254,6 +255,7 @@ Pilot release to select state partners
 [#1942]: https://github.com/18F/cms-hitech-apd/issues/1942
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
+[#1961]: https://github.com/18F/cms-hitech-apd/issues/1961
 [#1966]: https://github.com/18F/cms-hitech-apd/issues/1966
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
 [#1973]: https://github.com/18F/cms-hitech-apd/issues/1973

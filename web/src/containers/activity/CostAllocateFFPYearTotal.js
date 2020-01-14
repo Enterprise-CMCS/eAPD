@@ -22,16 +22,18 @@ const CostAllocateFFPYearTotal = ({ quarterlyFFP, years }) => {
         years[years.length - 1]
       }`}</h6>
       {['state', 'contractors'].map(name => (
-        <Fragment key={name}>
-          <p className="ds-h5">{EXPENSE_NAME_DISPLAY[name]}</p>
-          <p>
+        <p className="ds-h5" key={name}>
+          {EXPENSE_NAME_DISPLAY[name]}:{' '}
+          <span className="ds-u-font-weight--normal">
             <Dollars long>{quarterlyFFP.total[name]}</Dollars>
-          </p>
-        </Fragment>
+          </span>
+        </p>
       ))}
-      <p className="ds-h5">{EXPENSE_NAME_DISPLAY.combined}</p>
-      <p>
-        <Dollars long>{quarterlyFFP.total.combined}</Dollars>
+      <p className="ds-h5">
+        {EXPENSE_NAME_DISPLAY.combined}:{' '}
+        <span className="ds-u-font-weight--normal">
+          <Dollars long>{quarterlyFFP.total.combined}</Dollars>
+        </span>
       </p>
     </Fragment>
   );
@@ -49,9 +51,6 @@ const makeMapStateToProps = () => {
   return mapStateToProps;
 };
 
-export default connect(
-  makeMapStateToProps,
-  null
-)(CostAllocateFFPYearTotal);
+export default connect(makeMapStateToProps, null)(CostAllocateFFPYearTotal);
 
 export { CostAllocateFFPYearTotal as raw, makeMapStateToProps };
