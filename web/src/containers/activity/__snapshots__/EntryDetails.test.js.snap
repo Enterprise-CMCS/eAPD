@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the (Activity) EntryDetails component renders correctly 1`] = `
+exports[`the (Activity) EntryDetails component renders correctly with the modal closed 1`] = `
 <div
-  className="activity--body activity--body__collapsed activity--body__notfirst"
+  className="activity--body activity--body__notfirst"
   id="activity-activity key"
 >
   <Review
@@ -24,37 +24,37 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
     heading="Activity 3: activity name (money pit)"
     headingLevel={4}
   />
-  <div
-    className="visibility--print"
-  >
-    <Connect(ActivityOverview)
-      activityIndex={2}
-    />
-    <Connect(Goals)
-      activityIndex={2}
-    />
-    <Connect(Schedule)
-      activityIndex={2}
-    />
-    <Costs
-      activityIndex={2}
-    />
-    <Connect(ContractorResources)
-      activityIndex={2}
-    />
-    <Connect(CostAllocate)
-      activityIndex={2}
-    />
-    <Connect(StandardsAndConditions)
-      activityIndex={2}
-    />
-    <Button
-      onClick={[Function]}
-      type="button"
-      variation="primary"
-    >
-      Done
-    </Button>
-  </div>
+</div>
+`;
+
+exports[`the (Activity) EntryDetails component renders correctly with the modal open 1`] = `
+<div
+  className="activity--body activity--body__notfirst"
+  id="activity-activity key"
+>
+  <Review
+    editContent={
+      <div
+        className="nowrap visibility--screen"
+      >
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent"
+        >
+          Edit
+        </Button>
+      </div>
+    }
+    editText="Edit"
+    heading="Activity 3: activity name (money pit)"
+    headingLevel={4}
+  />
+  <ActivityDialog
+    activityIndex={2}
+    closeModal={[Function]}
+    title="Activity 3: activity name (money pit)"
+  />
 </div>
 `;

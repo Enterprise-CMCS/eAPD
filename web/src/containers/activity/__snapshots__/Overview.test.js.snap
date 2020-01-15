@@ -3,8 +3,8 @@
 exports[`activity overview/summary section (in the activity body) renders correctly 1`] = `
 <Subsection
   headerClassName="header-with-top-margin"
-  id={null}
-  nested={true}
+  id="activity-overview-37"
+  nested={false}
   resource="activities.overview"
 >
   <TextArea

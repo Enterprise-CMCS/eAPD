@@ -1,12 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import {
-  plain as ExecutiveSummary,
-  mapStateToProps,
-  mapDispatchToProps
-} from './ExecutiveSummary';
-import { jumpTo } from '../actions/app';
+import { plain as ExecutiveSummary, mapStateToProps } from './ExecutiveSummary';
 
 describe('executive summary component', () => {
   const props = {
@@ -28,7 +23,6 @@ describe('executive summary component', () => {
         medicaid: 2150
       }
     ],
-    jumpTo: jest.fn(),
     total: {
       combined: 10,
       federal: 20,
@@ -37,8 +31,21 @@ describe('executive summary component', () => {
     years: ['1', '2']
   };
 
-  test('renders correctly', () => {
+  test('renders correctly with the modal closed', () => {
     const component = shallow(<ExecutiveSummary {...props} />);
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly with the modal open', () => {
+    const component = shallow(<ExecutiveSummary {...props} />);
+    const review = component
+      .find('StandardReview')
+      .first()
+      .dive();
+    review
+      .dive()
+      .find('Button')
+      .simulate('click');
     expect(component).toMatchSnapshot();
   });
 
@@ -117,12 +124,6 @@ describe('executive summary component', () => {
         medicaid: 1460
       },
       years: ['1', '2']
-    });
-  });
-
-  test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      jumpTo
     });
   });
 });
