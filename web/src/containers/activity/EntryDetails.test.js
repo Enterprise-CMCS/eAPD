@@ -11,8 +11,15 @@ describe('the (Activity) EntryDetails component', () => {
     name: 'activity name'
   };
 
-  test('renders correctly', () => {
+  test('renders correctly with the modal closed', () => {
     const component = shallow(<EntryDetails {...props} />);
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly with the modal open', () => {
+    const component = shallow(<EntryDetails {...props} />);
+    const review = component.find('Review').dive();
+    review.find('Button').simulate('click');
     expect(component).toMatchSnapshot();
   });
 
