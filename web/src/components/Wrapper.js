@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router';
 import Header from './Header';
 import Footer from './Footer';
@@ -7,15 +7,7 @@ import routes from '../routes';
 
 const cardRoutes = routes.filter(r => r.isCard).map(r => r.path);
 
-const Wrapper = ({ children, isDev, location: { pathname } }) => {
-  useEffect(() => {
-    if (isDev) {
-      const script = document.createElement('script');
-      script.src = '/_dev/tota11y.min.js';
-      document.body.appendChild(script);
-    }
-  }, []);
-
+const Wrapper = ({ children, location: { pathname } }) => {
   const isGray = cardRoutes.indexOf(pathname) >= 0;
   const showSiteTitle = pathname === '/';
 
@@ -33,7 +25,6 @@ const Wrapper = ({ children, isDev, location: { pathname } }) => {
 
 Wrapper.propTypes = {
   children: PropTypes.node.isRequired,
-  isDev: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired

@@ -1,12 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App component renders correctly 1`] = `
-<withRouter(Wrapper)
-  isDev={true}
->
+<withRouter(Wrapper)>
   <Connect(AriaAnnounce) />
   <Broadcast />
-  <withRouter(Connect(IdleLogout)) />
   <Connect(AuthChecker)>
     <Routes />
   </Connect(AuthChecker)>

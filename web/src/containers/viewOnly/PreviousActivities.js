@@ -9,16 +9,18 @@ import ApdPreviousActivityTableTotal from '../ApdPreviousActivityTableTotal';
 import { selectPreviousActivitySummary } from '../../reducers/apd.selectors';
 
 const PreviousActivities = ({ previousActivitySummary }) => {
+  /* eslint-disable react/no-danger */
   return (
     <div>
       <h2>Results of Previous Activities</h2>
-      <div dangerouslySetInnerHTML={{__html: previousActivitySummary}} />
+      <div dangerouslySetInnerHTML={{ __html: previousActivitySummary }} />
+      <hr className="subsection-rule" />
       <h3>Actual Costs of Previous Activities</h3>
-      <ApdPreviousActivityTableHI isViewOnly/>
+      <ApdPreviousActivityTableHI isViewOnly />
       <ApdPreviousActivityTableMMIS isViewOnly />
       <ApdPreviousActivityTableTotal isViewOnly />
     </div>
-  )
+  );
 };
 
 PreviousActivities.propTypes = {
@@ -29,6 +31,4 @@ const mapStateToProps = state => ({
   previousActivitySummary: selectPreviousActivitySummary(state)
 });
 
-export default connect(
-  mapStateToProps
-)(PreviousActivities);
+export default connect(mapStateToProps)(PreviousActivities);

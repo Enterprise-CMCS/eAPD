@@ -105,13 +105,13 @@ const Activity = ({ activity, activityIndex }) => {
             <li key={year}>
               <strong>{year} Costs:</strong> <Dollars>{cost}</Dollars>
               {contractor.hourly.useHourly === true && (
-                <>
+                <Fragment>
                   <p>Number of hours: {contractor.hourly.data[year].hours}</p>
                   <p>
                     Hourly rate:{' '}
                     <Dollars>{contractor.hourly.data[year].rate}</Dollars>
                   </p>
-                </>
+                </Fragment>
               )}
             </li>
           ))}
@@ -124,19 +124,21 @@ const Activity = ({ activity, activityIndex }) => {
     );
   };
 
+  /* eslint-disable react/no-danger */
   return (
     <Fragment>
+      <hr className="section-rule" />
       <h2>
         Activity {activityIndex + 1} ({activity.name})
       </h2>
       <p>
         <strong>Activity Summary:</strong> {activity.summary}
       </p>
+      <hr className="subsection-rule" />
       <h3>Activity Overview</h3>
       <div dangerouslySetInnerHTML={{ __html: activity.description }} />
-      <hr />
 
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
@@ -144,9 +146,8 @@ const Activity = ({ activity, activityIndex }) => {
         Statement of Alternative Considerations and Supporting Justification
       </h3>
       <div dangerouslySetInnerHTML={{ __html: activity.alternatives }} />
-      <hr />
 
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
@@ -154,9 +155,8 @@ const Activity = ({ activity, activityIndex }) => {
         Performance Goals and Benchmarks
       </h3>
       {activity.goals.map(goal => buildGoal(goal))}
-      <hr />
 
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
@@ -175,9 +175,8 @@ const Activity = ({ activity, activityIndex }) => {
       {activity.schedule.map((milestone, index) =>
         buildMilestone(milestone, index)
       )}
-      <hr />
 
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
@@ -187,9 +186,8 @@ const Activity = ({ activity, activityIndex }) => {
       {activity.statePersonnel.map((person, index) =>
         buildPerson(person, index)
       )}
-      <hr />
 
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
@@ -198,8 +196,7 @@ const Activity = ({ activity, activityIndex }) => {
       </h3>
       {activity.expenses.map((expense, index) => buildExpense(expense, index))}
 
-      <hr />
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
@@ -209,9 +206,8 @@ const Activity = ({ activity, activityIndex }) => {
       {activity.contractorResources.map((contractor, index) =>
         buildContractor(contractor, index)
       )}
-      <hr />
 
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
@@ -231,11 +227,12 @@ const Activity = ({ activity, activityIndex }) => {
         }}
       />
 
-      <hr />
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
+        <br />
+        Federal Financial Participation (FFP) and Cost Allocation
       </h3>
       <CostAllocateFFP
         aKey={activity.key}
@@ -244,7 +241,7 @@ const Activity = ({ activity, activityIndex }) => {
         isViewOnly
       />
 
-      <h3>
+      <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
@@ -284,8 +281,6 @@ const Activity = ({ activity, activityIndex }) => {
           Medicaid standards and conditions.
         </p>
       )}
-
-      <hr />
     </Fragment>
   );
 };

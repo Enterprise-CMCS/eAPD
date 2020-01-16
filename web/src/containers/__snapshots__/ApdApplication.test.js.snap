@@ -4,10 +4,6 @@ exports[`apd (application) component renders correctly 1`] = `
 <div
   className="site-body ds-l-container"
 >
-  <Prompt
-    message={[Function]}
-    when={true}
-  />
   <div
     className="ds-u-margin--0"
   >

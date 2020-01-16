@@ -39,12 +39,15 @@ const html = `<div class="ds-c-alert__body">
   </div>
 </div>`;
 
-const UpgradeBrowser = () => (
-  <div
-    className="ds-c-alert ds-c-alert--warn"
-    dangerouslySetInnerHTML={{ __html: html }}
-  />
-);
+const UpgradeBrowser = () => {
+  /* eslint-disable react/no-danger */
+  return (
+    <div
+      className="ds-c-alert ds-c-alert--warn"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+};
 
 export default UpgradeBrowser;
 
