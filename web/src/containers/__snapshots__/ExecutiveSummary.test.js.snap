@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`executive summary component renders correctly with the modal closed 1`] = `
+exports[`executive summary component renders correctly 1`] = `
 <Connect(ConnectedWaypoint)
   id="executive-summary-overview"
 >
@@ -208,7 +208,7 @@ exports[`executive summary component renders correctly with the modal closed 1`]
 </Connect(ConnectedWaypoint)>
 `;
 
-exports[`executive summary component renders correctly with the modal open 1`] = `
+exports[`executive summary component renders correctly 2`] = `
 <Connect(ConnectedWaypoint)
   id="executive-summary-overview"
 >
@@ -349,6 +349,214 @@ exports[`executive summary component renders correctly with the modal open 1`] =
         closeModal={[Function]}
         title="Activity 1: activity 1"
       />
+      <hr
+        className="ds-u-border--dark ds-u-margin--0"
+      />
+      <StandardReview
+        className="ds-u-border--0"
+        editHref={null}
+        heading="Total cost"
+        headingLevel={4}
+        onDeleteClick={null}
+        onEditClick={null}
+      >
+        <p>
+          Verify that this information is correct. Edit activities above to make changes.
+        </p>
+        <ul
+          className="ds-c-list--bare"
+        >
+          <li>
+            <strong>
+              Federal Fiscal Years requested:
+            </strong>
+             FFY
+             
+            1, 2
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              30
+            </Dollars>
+             (
+            <Dollars
+              long={true}
+            >
+              20
+            </Dollars>
+             Federal share)
+          </li>
+          <li>
+            <strong>
+              Total funding request:
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              10
+            </Dollars>
+          </li>
+        </ul>
+      </StandardReview>
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="executive-summary-budget-table"
+    />
+    <Subsection
+      headerClassName={null}
+      id="executive-summary-budget-table"
+      nested={false}
+      resource="executiveSummary.budgetTable"
+    >
+      <Connect(ExecutiveSummaryBudget) />
+    </Subsection>
+  </Section>
+</Connect(ConnectedWaypoint)>
+`;
+
+exports[`executive summary component renders correctly 3`] = `
+<Connect(ConnectedWaypoint)
+  id="executive-summary-overview"
+>
+  <Section
+    id="executive-summary"
+    isNumbered={true}
+    resource="executiveSummary"
+  >
+    <Connect(ConnectedWaypoint)
+      id="executive-summary-summary"
+    />
+    <Subsection
+      headerClassName={null}
+      id="executive-summary-summary"
+      nested={false}
+      resource="executiveSummary.summary"
+    >
+      <StandardReview
+        className=""
+        editHref=""
+        heading={
+          <React.Fragment>
+            Activity 
+            1
+            : 
+            activity 1
+          </React.Fragment>
+        }
+        headingLevel={4}
+        key="a1"
+        onDeleteClick={null}
+        onEditClick={[Function]}
+      >
+        <p>
+          first activity
+        </p>
+        <ul
+          className="ds-c-list--bare"
+        >
+          <li>
+            <strong>
+              Date:
+            </strong>
+             
+          </li>
+          <li>
+            <strong>
+              Total cost of activity:
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              950
+            </Dollars>
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              1150
+            </Dollars>
+             (
+            <Dollars
+              long={true}
+            >
+              1050
+            </Dollars>
+             Federal share)
+          </li>
+        </ul>
+      </StandardReview>
+      <StandardReview
+        className="ds-u-border-bottom--0"
+        editHref=""
+        heading={
+          <React.Fragment>
+            Activity 
+            2
+            : 
+            activity 2
+          </React.Fragment>
+        }
+        headingLevel={4}
+        key="a2"
+        onDeleteClick={null}
+        onEditClick={[Function]}
+      >
+        <p>
+          second activity
+        </p>
+        <ul
+          className="ds-c-list--bare"
+        >
+          <li>
+            <strong>
+              Date:
+            </strong>
+             
+          </li>
+          <li>
+            <strong>
+              Total cost of activity:
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              310
+            </Dollars>
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              2150
+            </Dollars>
+             (
+            <Dollars
+              long={true}
+            >
+              2050
+            </Dollars>
+             Federal share)
+          </li>
+        </ul>
+      </StandardReview>
       <hr
         className="ds-u-border--dark ds-u-margin--0"
       />

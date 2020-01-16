@@ -27,7 +27,7 @@ exports[`the (Activity) EntryDetails component renders correctly with the modal 
 </div>
 `;
 
-exports[`the (Activity) EntryDetails component renders correctly with the modal open 1`] = `
+exports[`the (Activity) EntryDetails component renders correctly with the modal closed 2`] = `
 <div
   className="activity--body activity--body__notfirst"
   id="activity-activity key"
@@ -55,6 +55,33 @@ exports[`the (Activity) EntryDetails component renders correctly with the modal 
     activityIndex={2}
     closeModal={[Function]}
     title="Activity 3: activity name (money pit)"
+  />
+</div>
+`;
+
+exports[`the (Activity) EntryDetails component renders correctly with the modal closed 3`] = `
+<div
+  className="activity--body activity--body__notfirst"
+  id="activity-activity key"
+>
+  <Review
+    editContent={
+      <div
+        className="nowrap visibility--screen"
+      >
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent"
+        >
+          Edit
+        </Button>
+      </div>
+    }
+    editText="Edit"
+    heading="Activity 3: activity name (money pit)"
+    headingLevel={4}
   />
 </div>
 `;

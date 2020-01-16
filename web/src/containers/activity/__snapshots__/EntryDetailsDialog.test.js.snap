@@ -13,7 +13,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
 >
   <Tabs>
     <TabPanel
-      id="#activity-overview-2"
+      id="activity-overview-2-tab"
       selected={false}
       tab="Activity overview"
     >
@@ -25,7 +25,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
       />
     </TabPanel>
     <TabPanel
-      id="#activity-goals-2"
+      id="activity-goals-2-tab"
       selected={false}
       tab="Goals"
     >
@@ -37,7 +37,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
       />
     </TabPanel>
     <TabPanel
-      id="#activity-cost-categories-2"
+      id="activity-cost-categories-2-tab"
       selected={false}
       tab="In-house cost categories"
     >
@@ -46,7 +46,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
       />
     </TabPanel>
     <TabPanel
-      id="#activity-contractor-costs-2"
+      id="activity-contractor-costs-2-tab"
       selected={false}
       tab="Private contractor costs"
     >
@@ -55,7 +55,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
       />
     </TabPanel>
     <TabPanel
-      id="#activity-cost-allocation-2"
+      id="activity-cost-allocation-2-tab"
       selected={false}
       tab="Cost allocation"
     >
