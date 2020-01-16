@@ -1,6 +1,6 @@
-import { Button, Dialog, Tabs, TabPanel } from '@cmsgov/design-system-core';
+import { Dialog, Tabs, TabPanel } from '@cmsgov/design-system-core';
 
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import ContractorResources from './ContractorResources';

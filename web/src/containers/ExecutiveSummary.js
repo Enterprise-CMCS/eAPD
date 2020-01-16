@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, PureComponent, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
@@ -14,7 +14,7 @@ import {
   selectBudgetGrandTotal
 } from '../reducers/budget.selectors';
 
-import ActivityDialog from './activity/EntryDetailsDialog.js';
+import ActivityDialog from './activity/EntryDetailsDialog';
 
 const ExecutiveSummary = props => {
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +44,7 @@ const ExecutiveSummary = props => {
                 </Fragment>
               }
               headingLevel={4}
-              editHref={''}
+              editHref=""
               onEditClick={() => openModal(i)}
               className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
             >
