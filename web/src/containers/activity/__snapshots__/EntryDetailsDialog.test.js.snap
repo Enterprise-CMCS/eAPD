@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Activity Dialog component renders correctly 1`] = `
+<Dialog
+  ariaCloseLabel="Close modal for activity name"
+  className="ds-c-dialog--full"
+  closeButtonVariation="transparent"
+  closeText="Save and close"
+  escapeExitDisabled={false}
+  onExit={[Function]}
+  title="activity name"
+  underlayClickExits={false}
+>
+  <Tabs>
+    <TabPanel
+      id="#activity-overview-2"
+      selected={false}
+      tab="Activity overview"
+    >
+      <Connect(ActivityOverview)
+        activityIndex={2}
+      />
+      <Connect(StandardsAndConditions)
+        activityIndex={2}
+      />
+    </TabPanel>
+    <TabPanel
+      id="#activity-goals-2"
+      selected={false}
+      tab="Goals"
+    >
+      <Connect(Goals)
+        activityIndex={2}
+      />
+      <Connect(Schedule)
+        activityIndex={2}
+      />
+    </TabPanel>
+    <TabPanel
+      id="#activity-cost-categories-2"
+      selected={false}
+      tab="In-house cost categories"
+    >
+      <Costs
+        activityIndex={2}
+      />
+    </TabPanel>
+    <TabPanel
+      id="#activity-contractor-costs-2"
+      selected={false}
+      tab="Private contractor costs"
+    >
+      <Connect(ContractorResources)
+        activityIndex={2}
+      />
+    </TabPanel>
+    <TabPanel
+      id="#activity-cost-allocation-2"
+      selected={false}
+      tab="Cost allocation"
+    >
+      <Connect(CostAllocate)
+        activityIndex={2}
+      />
+    </TabPanel>
+  </Tabs>
+</Dialog>
+`;

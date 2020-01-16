@@ -68,7 +68,8 @@ const ActivityDialog = props => {
 
 ActivityDialog.propTypes = {
   title: PropTypes.string.isRequired,
-  activityIndex: PropTypes.number.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 
 export default ActivityDialog;
