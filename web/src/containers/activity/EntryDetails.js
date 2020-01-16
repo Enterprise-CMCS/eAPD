@@ -1,10 +1,10 @@
-import { Button, Review, Dialog } from '@cmsgov/design-system-core';
+import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { useMemo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
-import ActivityDialog from './EntryDetailsDialog.js';
+import ActivityDialog from './EntryDetailsDialog';
 
 import { t } from '../../i18n';
 
