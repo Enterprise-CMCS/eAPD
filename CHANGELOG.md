@@ -5,6 +5,7 @@ Anticipated release: January 6, 2020
 #### 🚀 New features
 
 - Updated the activity section ([#1942])
+- Activities now open in modals for a cleaner editing experience ([#1997])
 
 #### 🐛 Bugs fixed
 
@@ -238,10 +239,6 @@ Pilot release to select state partners
 [#1947]: https://github.com/18F/cms-hitech-apd/issues/1947
 [#1957]: https://github.com/18F/cms-hitech-apd/pull/1957
 [#1967]: https://github.com/18F/cms-hitech-apd/pull/1967
-
-<<<<<<< HEAD
 [#1981]: https://github.com/18F/cms-hitech-apd/issues/1981
-=======
 [#1973]: https://github.com/18F/cms-hitech-apd/issues/1973
-
-> > > > > > > master
+[#1997]: https://github.com/18F/cms-hitech-apd/pull/1997
