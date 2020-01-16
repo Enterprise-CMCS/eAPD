@@ -6,6 +6,7 @@ Anticipated release: January 20, 2020
 
 - Remove the unsaved changes/logout warnings because we have automatic saves now! [(#1995)]
 - Improved the layout of the exported PDF ([#1961])
+- Activities now open in modals for a cleaner editing experience ([#1997])
 
 #### 🐛 Bugs fixed
 
@@ -24,7 +25,6 @@ Released: January 6, 2020
 #### 🚀 New features
 
 - Updated the activity section ([#1942])
-- Activities now open in modals for a cleaner editing experience ([#1997])
 
 #### 🐛 Bugs fixed
 

@@ -31,13 +31,10 @@ describe('executive summary component', () => {
     years: ['1', '2']
   };
 
-  test('renders correctly with the modal closed', () => {
+  test('renders correctly', () => {
     const component = shallow(<ExecutiveSummary {...props} />);
     expect(component).toMatchSnapshot();
-  });
 
-  test('renders correctly with the modal open', () => {
-    const component = shallow(<ExecutiveSummary {...props} />);
     const review = component
       .find('StandardReview')
       .first()
@@ -46,6 +43,13 @@ describe('executive summary component', () => {
       .dive()
       .find('Button')
       .simulate('click');
+
+    // Modal is now open
+    expect(component).toMatchSnapshot();
+
+    component.find('ActivityDialog').prop('closeModal')();
+
+    // Modal is now closed again
     expect(component).toMatchSnapshot();
   });
 
