@@ -46,29 +46,24 @@ class ApdViewOnly extends Component {
           <span className="ds-h6 ds-u-display--block">{apd.name}</span>
           {place.name} {year} APD
         </h1>
+        <hr className="section-rule" />
         <ExecutiveSummary />
-        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
-        <hr className="ds-u-border--dark ds-u-margin--0" />
+        <hr className="section-rule" />
         <ApdStateProfile
           stateProfile={apd.stateProfile}
           keyPersonnel={apd.keyPersonnel}
         />
-        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
-        <hr className="ds-u-border--dark ds-u-margin--0" />
+        <hr className="section-rule" />
         <ApdSummary />
-        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
-        <hr className="ds-u-border--dark ds-u-margin--0" />
+        <hr className="section-rule" />
         <PreviousActivities />
-        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
-        <hr className="ds-u-border--dark ds-u-margin--0" />
+        <hr className="section-rule" />
         <Activities activities={apd.activities} />
         <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
         <ScheduleSummary />
-        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
-        <hr className="ds-u-border--dark ds-u-margin--0" />
+        <hr className="section-rule" />
         <ProposedBudget />
-        <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
-        <hr className="ds-u-border--dark ds-u-margin--0" />
+        <hr className="section-rule" />
         <AssuranceAndCompliance />
         <ExportInstructions />
       </div>
@@ -90,7 +85,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { selectApd };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ApdViewOnly);
+export default connect(mapStateToProps, mapDispatchToProps)(ApdViewOnly);
