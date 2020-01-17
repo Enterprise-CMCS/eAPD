@@ -67,6 +67,7 @@ class ExecutiveSummary extends PureComponent {
           </Review>
         ))}
 
+        <hr className="subsection-rule" />
         <h3>Program Budget Tables</h3>
         <ExecutiveSummaryBudget isViewOnly />
       </div>
@@ -86,9 +87,6 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(ExecutiveSummary);
+export default connect(mapStateToProps, null)(ExecutiveSummary);
 
 export { ExecutiveSummary as plain, mapStateToProps };

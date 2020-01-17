@@ -18,12 +18,15 @@ const ApdSummary = ({
       <h3>Program introduction</h3>
       <p dangerouslySetInnerHTML={{ __html: programOverview }} />
 
+      <hr className="subsection-rule" />
       <h3>HIT overview</h3>
       <p dangerouslySetInnerHTML={{ __html: narrativeHIT }} />
 
+      <hr className="subsection-rule" />
       <h3>HIE overview</h3>
       <p dangerouslySetInnerHTML={{ __html: narrativeHIE }} />
 
+      <hr className="subsection-rule" />
       <h3>MMIS overview</h3>
       <p dangerouslySetInnerHTML={{ __html: narrativeMMIS }} />
     </div>
