@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 const FormAndReviewItem = ({
   collapsedComponent: Collapsed,
   expandedComponent: Expanded,
+  extraButtons,
+  index,
   initialCollapsed,
   ...rest
 }) => {
@@ -23,17 +25,22 @@ const FormAndReviewItem = ({
   if (collapsed) {
     return (
       <div ref={container} className="form-and-review-list--item__collapsed">
-        <Collapsed {...rest} expand={expand} />
+        <Collapsed index={index} {...rest} expand={expand} />
       </div>
     );
   }
 
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
-      <Expanded {...rest} collapse={collapse} />
+      <Expanded index={index} {...rest} collapse={collapse} />
       <Button variation="primary" onClick={collapse}>
         Done
       </Button>
+      {extraButtons.map(({ onClick, text }) => (
+        <Button className="ds-u-margin-left--2" onClick={() => onClick(index)}>
+          {text}
+        </Button>
+      ))}
     </div>
   );
 };
@@ -47,10 +54,13 @@ FormAndReviewItem.propTypes = {
     PropTypes.string,
     PropTypes.elementType
   ]).isRequired,
+  extraButtons: PropTypes.array,
+  index: PropTypes.number.isRequired,
   initialCollapsed: PropTypes.bool
 };
 
 FormAndReviewItem.defaultProps = {
+  extraButtons: [],
   initialCollapsed: true
 };
 
@@ -60,6 +70,7 @@ const FormAndReviewList = ({
   className,
   collapsed,
   expanded,
+  extraItemButtons,
   list,
   noDataMessage,
   onAddClick,
@@ -81,6 +92,7 @@ const FormAndReviewList = ({
             key={item.key}
             collapsedComponent={collapsed}
             expandedComponent={expanded}
+            extraButtons={extraItemButtons}
             index={index}
             initialCollapsed={item.initialCollapsed}
             item={item}
@@ -110,6 +122,7 @@ FormAndReviewList.propTypes = {
     .isRequired,
   expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
     .isRequired,
+  extraItemButtons: PropTypes.array,
   list: PropTypes.array.isRequired,
   noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onAddClick: PropTypes.func,
@@ -120,6 +133,7 @@ FormAndReviewList.defaultProps = {
   addButtonText: null,
   allowDeleteAll: false,
   className: null,
+  extraItemButtons: [],
   noDataMessage: null,
   onAddClick: null,
   onDeleteClick: null

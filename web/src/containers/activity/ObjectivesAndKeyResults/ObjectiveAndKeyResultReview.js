@@ -3,29 +3,33 @@ import React from 'react';
 import Review from '../../../components/Review';
 
 const GoalReview = ({
-  item: { description, objective },
-  index,
+  item: { keyResults, objective },
   expand,
   onDeleteClick
 }) => (
   <Review
-    heading={`${index + 1}. ${description || ''}`}
+    heading="Objective:"
     headingLevel={6}
     onDeleteClick={onDeleteClick}
     onEditClick={expand}
   >
-    <p className="ds-u-margin-top--2">
-      <strong>Benchmark:</strong> {objective}
-    </p>
+    <h5 className="ds-h4 ds-u-margin-top--2">{objective}</h5>
+    {keyResults.map(({ baseline, keyResult, target }) => (
+      <p key={keyResult} className="ds-u-margin-top--2">
+        <strong>Key result:</strong> {keyResult}
+        <br />
+        <strong>Target:</strong> {target}
+        <br />
+        <strong>Baseline:</strong> {baseline}
+      </p>
+    ))}
   </Review>
 );
 
 GoalReview.propTypes = {
   expand: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
   item: PropTypes.shape({
-    description: PropTypes.string,
-    key: PropTypes.string,
+    keyResults: PropTypes.array,
     objective: PropTypes.string
   }).isRequired,
   onDeleteClick: PropTypes.func

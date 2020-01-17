@@ -6,18 +6,24 @@ export const setKeyGenerator = fn => {
   generateKey = fn;
 };
 
-export const newGoal = () => ({
-  key: generateKey(),
-  initialCollapsed: false,
-  description: '',
-  objective: ''
-});
-
 export const newMilestone = (milestone = '', endDate = '') => ({
   initialCollapsed: false,
   key: generateKey(),
   milestone,
   endDate
+});
+
+export const newObjectiveKeyResult = () => ({
+  baseline: '',
+  keyResult: '',
+  target: ''
+});
+
+export const newObjective = () => ({
+  key: generateKey(),
+  initialCollapsed: false,
+  objective: '',
+  keyResults: [newObjectiveKeyResult()]
 });
 
 export const statePersonDefaultYear = () => ({ amt: '', perc: '' });
@@ -91,12 +97,12 @@ export const newActivity = ({
   description: '',
   expenses: [newExpense(years)],
   fundingSource,
-  goals: [newGoal()],
   initialCollapsed: false,
   key: generateKey(),
   name,
   plannedEndDate: '',
   plannedStartDate: '',
+  objectives: [newObjective()],
   schedule: [newMilestone()],
   statePersonnel: [newStatePerson(years)],
   summary: '',

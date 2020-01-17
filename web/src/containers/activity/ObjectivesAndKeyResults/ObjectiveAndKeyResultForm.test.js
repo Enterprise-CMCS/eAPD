@@ -1,11 +1,16 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as GoalForm, mapDispatchToProps } from './GoalForm';
+import {
+  plain as GoalForm,
+  mapDispatchToProps
+} from './ObjectiveAndKeyResultForm';
 
 import {
-  setGoalDescription,
-  setGoalObjective
+  setObjective,
+  setObjectiveKeyResult,
+  setObjectiveKeyResultTarget,
+  setObjectiveKeyResultBaseline
 } from '../../../actions/editActivity';
 
 describe('the GoalForm component', () => {
@@ -51,8 +56,10 @@ describe('the GoalForm component', () => {
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setDescription: setGoalDescription,
-      setObjective: setGoalObjective
+      setObjective,
+      setKR: setObjectiveKeyResult,
+      setTarget: setObjectiveKeyResultTarget,
+      setBaseline: setObjectiveKeyResultBaseline
     });
   });
 });
