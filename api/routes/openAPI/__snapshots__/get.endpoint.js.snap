@@ -155,26 +155,42 @@ Object {
                   "description": "Federal funding source that applies to this activity",
                   "type": "string",
                 },
-                "goals": Object {
+                "name": Object {
+                  "description": "Activity name, unique within an APD",
+                  "type": "string",
+                },
+                "objectives": Object {
                   "items": Object {
-                    "description": "Activity goal",
+                    "description": "Activity objective",
                     "properties": Object {
-                      "description": Object {
-                        "description": "Goal description",
-                        "type": "string",
+                      "keyResults": Object {
+                        "items": Object {
+                          "properties": Object {
+                            "baseline": Object {
+                              "description": "Key result baseline",
+                              "type": "string",
+                            },
+                            "keyResult": Object {
+                              "description": "Key result",
+                              "type": "string",
+                            },
+                            "target": Object {
+                              "description": "Key result target",
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "type": "array",
                       },
                       "objective": Object {
-                        "description": "Goal objective",
+                        "description": "Objective description",
                         "type": "string",
                       },
                     },
                     "type": "object",
                   },
                   "type": "array",
-                },
-                "name": Object {
-                  "description": "Activity name, unique within an APD",
-                  "type": "string",
                 },
                 "plannedEndDate": Object {
                   "description": "The date this activity is planned to begin",

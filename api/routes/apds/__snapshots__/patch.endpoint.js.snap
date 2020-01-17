@@ -140,29 +140,40 @@ Object {
         },
       ],
       "fundingSource": "HIT",
-      "goals": Array [
+      "name": "Program Administration",
+      "objectives": Array [
         Object {
-          "description": "<p>Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.</p>
-<p></p>
-",
-          "objective": "<ol>
-<li>Complete SLR modifications by 11/1/18</li>
-<li>Accept attestations through 4/30/19.</li>
-</ol>
-",
+          "keyResults": Array [
+            Object {
+              "baseline": "",
+              "keyResult": "Complete SLR modifications by 11/1/18",
+              "target": "",
+            },
+            Object {
+              "baseline": "",
+              "keyResult": "Accept attestations through 4/30/19.",
+              "target": "",
+            },
+          ],
+          "objective": "Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.",
         },
         Object {
-          "description": "<p>Provide support to EPs and EHs through attestation process.</p>
-",
-          "objective": "<ol>
+          "keyResults": Array [
+            Object {
+              "baseline": "",
+              "keyResult": "<ol>
 <li>Guidance available on Tycho's websites</li>
 <li>Office hours availble for EPs and EHs</li>
 <li>Site visits, as needed, for EPs and EHs</li>
 </ol>
 ",
+              "target": "",
+            },
+          ],
+          "objective": "<p>Provide support to EPs and EHs through attestation process.</p>
+",
         },
       ],
-      "name": "Program Administration",
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
@@ -457,18 +468,24 @@ Object {
         },
       ],
       "fundingSource": "MMIS",
-      "goals": Array [
+      "name": "HIE Claims Data Analytics",
+      "objectives": Array [
         Object {
-          "description": "<p>Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.&nbsp;</p>
-",
-          "objective": "<ol>
-<li>Hire contracted support to build an open API for the DW that the HIE and PHR can consume.</li>
-<li>Provide support for using open API for DW</li>
-</ol>
-",
+          "keyResults": Array [
+            Object {
+              "baseline": "",
+              "keyResult": "Hire contracted support to build an open API for the DW that the HIE and PHR can consume.",
+              "target": "",
+            },
+            Object {
+              "baseline": "",
+              "keyResult": "Provide support for using open API for DW",
+              "target": "",
+            },
+          ],
+          "objective": "Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
         },
       ],
-      "name": "HIE Claims Data Analytics",
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
@@ -840,21 +857,29 @@ Object {
         },
       ],
       "fundingSource": "HIE",
-      "goals": Array [
+      "name": "HIE Enhancement and Onboarding",
+      "objectives": Array [
         Object {
-          "description": "<p>Plan to do a thing.</p>
-",
-          "objective": "<p>Do a thing.</p>
-",
+          "keyResults": Array [
+            Object {
+              "baseline": "",
+              "keyResult": "Do a thing.",
+              "target": "",
+            },
+          ],
+          "objective": "Plan to do a thing.",
         },
         Object {
-          "description": "<p>Onboard 100 providers.</p>
-",
-          "objective": "<p>100 providers onboarded.</p>
-",
+          "keyResults": Array [
+            Object {
+              "baseline": "7",
+              "keyResult": "100 providers onboarded.",
+              "target": "100",
+            },
+          ],
+          "objective": "Onboard 100 providers.",
         },
       ],
-      "name": "HIE Enhancement and Onboarding",
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
@@ -1071,15 +1096,19 @@ Object {
         },
       ],
       "fundingSource": "HIE",
-      "goals": Array [
+      "name": "Medicaid Blue Button",
+      "objectives": Array [
         Object {
-          "description": "<p>Build blue button.</p>
-",
-          "objective": "<p>Test blue button with 10 providers.</p>
-",
+          "keyResults": Array [
+            Object {
+              "baseline": "3 providers",
+              "keyResult": "Test blue button with 10 providers.",
+              "target": "10 providers",
+            },
+          ],
+          "objective": "Build blue button.",
         },
       ],
-      "name": "Medicaid Blue Button",
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
@@ -1291,21 +1320,29 @@ Object {
         },
       ],
       "fundingSource": "HIE",
-      "goals": Array [
+      "name": "Public Health System Modernization",
+      "objectives": Array [
         Object {
-          "description": "<p>Identifiy PH needs</p>
-",
-          "objective": "<p>Complete a build/implementation plan by Summery 2019</p>
-",
+          "keyResults": Array [
+            Object {
+              "baseline": "",
+              "keyResult": "Complete a build/implementation plan by Summery 2019",
+              "target": "",
+            },
+          ],
+          "objective": "Identifiy PH needs",
         },
         Object {
-          "description": "<p>Connect PH systems to HIE</p>
-",
-          "objective": "<p>Connect all 3 PH systems to HIE by Fall 2019</p>
-",
+          "keyResults": Array [
+            Object {
+              "baseline": "",
+              "keyResult": "Connect all 3 PH systems to HIE by Fall 2019",
+              "target": "",
+            },
+          ],
+          "objective": "Connect PH systems to HIE",
         },
       ],
-      "name": "Public Health System Modernization",
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
@@ -1477,15 +1514,19 @@ Object {
         },
       ],
       "fundingSource": "HIT",
-      "goals": Array [
+      "name": "MITA 3.0 Assessment",
+      "objectives": Array [
         Object {
-          "description": "<p>Complete MITA 3.0 HITECH portion.</p>
-",
-          "objective": "<p>&nbsp;Complete MITA 3.0 HITECH portion by July 2019</p>
-",
+          "keyResults": Array [
+            Object {
+              "baseline": "",
+              "keyResult": "Complete MITA 3.0 HITECH portion by July 2019",
+              "target": "",
+            },
+          ],
+          "objective": "Complete MITA 3.0 HITECH portion.",
         },
       ],
-      "name": "MITA 3.0 Assessment",
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
