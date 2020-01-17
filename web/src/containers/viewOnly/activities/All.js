@@ -8,7 +8,7 @@ const Activities = ({ activities }) => {
   return (
     <div>
       <ActivityList activities={activities} />
-      <hr />
+
       {activities.map((activity, index) => (
         <Activity activity={activity} activityIndex={index} />
       ))}
