@@ -9,39 +9,53 @@ exports[`the CostAllocateFFPYearTotal component renders correctly 1`] = `
   </h6>
   <p
     className="ds-h5"
+    key="state"
   >
     In-House Costs
-  </p>
-  <p>
-    <Dollars
-      long={true}
+    :
+     
+    <span
+      className="ds-u-font-weight--normal"
     >
-      300
-    </Dollars>
+      <Dollars
+        long={true}
+      >
+        300
+      </Dollars>
+    </span>
   </p>
   <p
     className="ds-h5"
+    key="contractors"
   >
     Private Contractor Costs
-  </p>
-  <p>
-    <Dollars
-      long={true}
+    :
+     
+    <span
+      className="ds-u-font-weight--normal"
     >
-      200
-    </Dollars>
+      <Dollars
+        long={true}
+      >
+        200
+      </Dollars>
+    </span>
   </p>
   <p
     className="ds-h5"
   >
     Total Enhanced FFP
-  </p>
-  <p>
-    <Dollars
-      long={true}
+    :
+     
+    <span
+      className="ds-u-font-weight--normal"
     >
-      100
-    </Dollars>
+      <Dollars
+        long={true}
+      >
+        100
+      </Dollars>
+    </span>
   </p>
 </Fragment>
 `;

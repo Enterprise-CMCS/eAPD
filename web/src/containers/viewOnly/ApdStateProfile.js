@@ -67,7 +67,7 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
         {stateProfile.medicaidOffice.city}, {stateProfile.medicaidOffice.state}{' '}
         {stateProfile.medicaidOffice.zip}
       </addr>
-
+      <hr className="section-rule" />
       <h2>Key Personnel and Program Management</h2>
       <ol className="ds-u-padding-left--0">
         {keyPersonnel.map((person, index) => buildPerson(person, index))}
