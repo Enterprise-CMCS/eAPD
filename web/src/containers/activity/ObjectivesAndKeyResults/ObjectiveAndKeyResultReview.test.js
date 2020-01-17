@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import GoalReview from './GoalReview';
+import GoalReview from './ObjectiveAndKeyResultReview';
 
 describe('the GoalReview component', () => {
   const sandbox = sinon.createSandbox();

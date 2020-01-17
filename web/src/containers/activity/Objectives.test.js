@@ -1,8 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as Goals, mapStateToProps, mapDispatchToProps } from './Goals';
-import { addGoal, removeGoal } from '../../actions/editActivity';
+import {
+  plain as ObjectivesAndKeyResults,
+  mapStateToProps,
+  mapDispatchToProps
+} from './Objectives';
+import { addObjective, removeObjective } from '../../actions/editActivity';
 
 describe('activity Goals component', () => {
   const props = {
@@ -11,7 +15,7 @@ describe('activity Goals component', () => {
     add: jest.fn(),
     remove: jest.fn()
   };
-  const component = shallow(<Goals {...props} />);
+  const component = shallow(<ObjectivesAndKeyResults {...props} />);
 
   beforeEach(() => {
     props.add.mockClear();
@@ -38,8 +42,8 @@ describe('activity Goals component', () => {
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      add: addGoal,
-      remove: removeGoal
+      add: addObjective,
+      remove: removeObjective
     });
   });
 
