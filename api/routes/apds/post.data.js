@@ -58,13 +58,13 @@ const getNewApd = () => {
           }
         ],
         fundingSource: 'HIT',
-        goals: [
+        name: 'Program Administration',
+        objectives: [
           {
-            description: '',
-            objective: ''
+            objective: '',
+            keyResults: [{ baseline: '', keyResult: '', target: '' }]
           }
         ],
-        name: 'Program Administration',
         plannedEndDate: '',
         plannedStartDate: '',
         schedule: [

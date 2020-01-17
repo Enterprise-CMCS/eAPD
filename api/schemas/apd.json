@@ -49,7 +49,6 @@
           "description",
           "expenses",
           "fundingSource",
-          "goals",
           "name",
           "plannedEndDate",
           "plannedStartDate",
@@ -222,17 +221,40 @@
             "$id": "#/properties/activities/items/properties/fundingSource",
             "enum": ["HIE", "HIT", "MMIS"]
           },
-          "goals": {
-            "$id": "#/properties/activities/items/properties/goals",
+          "name": {
+            "$id": "#/properties/activities/items/properties/name",
+            "type": "string"
+          },
+          "objectives": {
+            "$id": "#/properties/activities/items/properties/objectives",
             "type": "array",
             "items": {
-              "$id": "#/properties/activities/items/properties/goals/items",
+              "$id": "#/properties/activities/items/properties/objectives/items",
               "type": "object",
-              "required": ["description", "objective"],
+              "required": ["keyResults", "objective"],
               "properties": {
-                "description": {
-                  "$id": "#/properties/activities/items/properties/goals/items/properties/description",
-                  "type": "string"
+                "keyResults": {
+                  "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults",
+                  "type": "array",
+                  "items": {
+                    "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults/items",
+                    "type": "object",
+                    "required": ["baseline", "keyResult", "target"],
+                    "properties": {
+                      "baseline": {
+                        "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults/items/properties/baseline",
+                        "type": "string"
+                      },
+                      "keyResult": {
+                        "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults/items/properties/keyResult",
+                        "type": "string"
+                      },
+                      "target": {
+                        "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults/items/properties/target",
+                        "type": "string"
+                      }
+                    }
+                  }
                 },
                 "objective": {
                   "$id": "#/properties/activities/items/properties/goals/items/properties/objective",
@@ -240,10 +262,6 @@
                 }
               }
             }
-          },
-          "name": {
-            "$id": "#/properties/activities/items/properties/name",
-            "type": "string"
           },
           "plannedEndDate": { "$ref": "#/definitions/optionalFullDate" },
           "plannedStartDate": { "$ref": "#/definitions/optionalFullDate" },
