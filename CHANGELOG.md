@@ -6,6 +6,7 @@ Anticipated release: January 20, 2020
 
 - Remove the unsaved changes/logout warnings because we have automatic saves now! [(#1995)]
 - Improved the layout of the exported PDF ([#1961])
+- Added loading state for rich text editor()([#2015)])
 
 #### 🐛 Bugs fixed
 
@@ -265,3 +266,4 @@ Pilot release to select state partners
 [#1991]: https://github.com/18F/cms-hitech-apd/issues/1991
 [#1995]: https://github.com/18F/cms-hitech-apd/issues/1995
 [#1998]: https://github.com/18F/cms-hitech-apd/issues/1998
+[#2015]: https://github.com/18F/cms-hitech-apd/pull/2015
