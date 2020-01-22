@@ -35,7 +35,10 @@ const ActivityDialog = props => {
           <Overview activityIndex={activityIndex} />
           <StandardsAndConditions activityIndex={activityIndex} />
         </TabPanel>
-        <TabPanel id={`activity-goals-${activityIndex}-tab`} tab="Goals">
+        <TabPanel
+          id={`activity-goals-${activityIndex}-tab`}
+          tab="Objectives and key results"
+        >
           <Objectives activityIndex={activityIndex} />
           <Schedule activityIndex={activityIndex} />
         </TabPanel>

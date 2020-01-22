@@ -27,7 +27,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
     <TabPanel
       id="activity-goals-2-tab"
       selected={false}
-      tab="Goals"
+      tab="Objectives and key results"
     >
       <Connect(Objectives)
         activityIndex={2}
