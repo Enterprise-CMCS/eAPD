@@ -16,7 +16,13 @@ import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { selectOKRsByActivityIndex } from '../../reducers/activities.selectors';
 
-const Goals = ({ activityIndex, add, addKeyResult, objectives, remove }) => {
+const Objectives = ({
+  activityIndex,
+  add,
+  addKeyResult,
+  objectives,
+  remove
+}) => {
   const handleAdd = () => {
     add(activityIndex);
   };
@@ -56,7 +62,7 @@ const Goals = ({ activityIndex, add, addKeyResult, objectives, remove }) => {
   );
 };
 
-Goals.propTypes = {
+Objectives.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   add: PropTypes.func.isRequired,
   addKeyResult: PropTypes.func.isRequired,
@@ -74,6 +80,6 @@ const mapDispatchToProps = {
   remove: removeObjective
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Goals);
+export default connect(mapStateToProps, mapDispatchToProps)(Objectives);
 
-export { Goals as plain, mapStateToProps, mapDispatchToProps };
+export { Objectives as plain, mapStateToProps, mapDispatchToProps };
