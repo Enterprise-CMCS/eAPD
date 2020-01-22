@@ -1,29 +1,35 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
-import GoalReview from './ObjectiveAndKeyResultReview';
+import ObjectiveAndKeyResultReview from './ObjectiveAndKeyResultReview';
 
-describe('the GoalReview component', () => {
-  const sandbox = sinon.createSandbox();
-
+describe('the ObjectiveAndKeyResultReview component', () => {
   const props = {
-    expand: sandbox.spy(),
+    expand: jest.fn(),
     index: 1,
     item: {
-      description: 'goal description',
-      key: 'goal key',
-      objective: 'goal objective'
+      key: 'objective key',
+      objective: 'objective description',
+      keyResults: [
+        {
+          key: 'kr 1',
+          keyResult: 'first kr',
+          target: '93 million miles',
+          baseline: '37 inches'
+        },
+        {
+          key: 'kr 2',
+          keyResult: 'second kr',
+          target: '1 AU',
+          baseline: 'the moon'
+        }
+      ]
     },
-    onDeleteClick: sandbox.spy()
+    onDeleteClick: jest.fn()
   };
 
-  beforeEach(() => {
-    sandbox.resetHistory();
-  });
-
   test('renders correctly', () => {
-    const component = shallow(<GoalReview {...props} />);
+    const component = shallow(<ObjectiveAndKeyResultReview {...props} />);
     expect(component).toMatchSnapshot();
 
     expect(component.find('StandardReview').prop('onEditClick')).toEqual(

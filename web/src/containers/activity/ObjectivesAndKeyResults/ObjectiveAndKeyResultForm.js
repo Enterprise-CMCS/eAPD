@@ -10,7 +10,7 @@ import {
   setObjectiveKeyResultBaseline
 } from '../../../actions/editActivity';
 
-const GoalForm = ({
+const ObjectiveAndKeyResultForm = ({
   activityIndex,
   item: { keyResults, objective },
   index,
@@ -50,8 +50,11 @@ const GoalForm = ({
         onChange={changeObjective}
       />
 
-      {keyResults.map(({ keyResult, target, baseline }, i) => (
-        <div className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0">
+      {keyResults.map(({ key, keyResult, target, baseline }, i) => (
+        <div
+          key={key}
+          className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+        >
           <TextField
             name="key-result"
             label="Key result"
@@ -60,7 +63,7 @@ const GoalForm = ({
             onChange={changeKeyResult(i)}
           />
           <TextField
-            name="key-result"
+            name="kr-target"
             className="data-entry-box"
             label="Target"
             hint="Provide a numerical measure for your key result if applicable."
@@ -68,7 +71,7 @@ const GoalForm = ({
             onChange={changeTarget(i)}
           />
           <TextField
-            name="key-result"
+            name="kr-baseline"
             className="data-entry-box"
             label="Baseline"
             hint="Provide where you are with this goal now if applicable. Use the same units as your target."
@@ -81,7 +84,7 @@ const GoalForm = ({
   );
 };
 
-GoalForm.propTypes = {
+ObjectiveAndKeyResultForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
@@ -101,6 +104,6 @@ const mapDispatchToProps = {
   setBaseline: setObjectiveKeyResultBaseline
 };
 
-export default connect(null, mapDispatchToProps)(GoalForm);
+export default connect(null, mapDispatchToProps)(ObjectiveAndKeyResultForm);
 
-export { GoalForm as plain, mapDispatchToProps };
+export { ObjectiveAndKeyResultForm as plain, mapDispatchToProps };

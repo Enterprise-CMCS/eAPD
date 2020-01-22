@@ -6,13 +6,22 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './Objectives';
-import { addObjective, removeObjective } from '../../actions/editActivity';
+import {
+  addObjective,
+  addObjectiveKeyResult,
+  removeObjective
+} from '../../actions/editActivity';
 
-describe('activity Goals component', () => {
+describe('activity Objectives and Key Results component', () => {
   const props = {
     activityIndex: 'activity index',
-    goals: [{ key: 'goal 1' }, { key: 'goal 2' }, { key: 'goal 3' }],
+    objectives: [
+      { key: 'objective 1' },
+      { key: 'objective 2' },
+      { key: 'objective 3' }
+    ],
     add: jest.fn(),
+    addKeyResult: jest.fn(),
     remove: jest.fn()
   };
   const component = shallow(<ObjectivesAndKeyResults {...props} />);
@@ -29,13 +38,13 @@ describe('activity Goals component', () => {
   describe('events', () => {
     const list = component.find('FormAndReviewList');
 
-    it('handles adding a new goal', () => {
+    it('handles adding a new objective', () => {
       list.prop('onAddClick')();
       expect(props.add).toHaveBeenCalledWith('activity index');
     });
 
-    it('handles deleting a goal', () => {
-      list.prop('onDeleteClick')('goal 2');
+    it('handles deleting an objective', () => {
+      list.prop('onDeleteClick')('objective 2');
       expect(props.remove).toHaveBeenCalledWith('activity index', 1);
     });
   });
@@ -43,6 +52,7 @@ describe('activity Goals component', () => {
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
       add: addObjective,
+      addKeyResult: addObjectiveKeyResult,
       remove: removeObjective
     });
   });
@@ -54,7 +64,7 @@ describe('activity Goals component', () => {
           activities: [
             'activity 1',
             'activity 2',
-            { goals: 'these are goals from state' }
+            { objectives: 'these are OKRs from state' }
           ]
         }
       }
@@ -63,7 +73,7 @@ describe('activity Goals component', () => {
     const ownProps = { activityIndex: 2 };
 
     expect(mapStateToProps(state, ownProps)).toEqual({
-      goals: 'these are goals from state'
+      objectives: 'these are OKRs from state'
     });
   });
 });

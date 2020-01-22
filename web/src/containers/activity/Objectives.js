@@ -7,12 +7,16 @@ import {
   ObjectiveAndKeyResultReview
 } from './ObjectivesAndKeyResults';
 import FormAndReviewList from '../../components/FormAndReviewList';
-import { addObjectiveKeyResult } from '../../actions/editActivity';
+import {
+  addObjective,
+  addObjectiveKeyResult,
+  removeObjective
+} from '../../actions/editActivity';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { selectOKRsByActivityIndex } from '../../reducers/activities.selectors';
 
-const Goals = ({ activityIndex, add, addKeyResult, okrs, remove }) => {
+const Goals = ({ activityIndex, add, addKeyResult, objectives, remove }) => {
   const handleAdd = () => {
     add(activityIndex);
   };
@@ -22,7 +26,7 @@ const Goals = ({ activityIndex, add, addKeyResult, okrs, remove }) => {
   };
 
   const handleDelete = key => {
-    okrs.forEach(({ key: okrKey }, i) => {
+    objectives.forEach(({ key: okrKey }, i) => {
       if (okrKey === key) {
         remove(activityIndex, i);
       }
@@ -36,8 +40,8 @@ const Goals = ({ activityIndex, add, addKeyResult, okrs, remove }) => {
     >
       <FormAndReviewList
         activityIndex={activityIndex}
-        addButtonText="Add a goal"
-        list={okrs}
+        addButtonText="Add another objective"
+        list={objectives}
         collapsed={ObjectiveAndKeyResultReview}
         expanded={ObjectiveAndKeyResultForm}
         extraItemButtons={[
@@ -54,18 +58,20 @@ const Goals = ({ activityIndex, add, addKeyResult, okrs, remove }) => {
 
 Goals.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  okrs: PropTypes.array.isRequired,
   add: PropTypes.func.isRequired,
   addKeyResult: PropTypes.func.isRequired,
+  objectives: PropTypes.array.isRequired,
   remove: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  okrs: selectOKRsByActivityIndex(state, { activityIndex })
+  objectives: selectOKRsByActivityIndex(state, { activityIndex })
 });
 
 const mapDispatchToProps = {
-  addKeyResult: addObjectiveKeyResult
+  add: addObjective,
+  addKeyResult: addObjectiveKeyResult,
+  remove: removeObjective
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Goals);
