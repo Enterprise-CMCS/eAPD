@@ -114,7 +114,12 @@ tap.test('apds POST endpoint', async endpointTest => {
               }
             ],
             fundingSource: 'HIT',
-            goals: [{ description: '', objective: '' }],
+            objectives: [
+              {
+                objective: '',
+                keyResults: [{ baseline: '', keyResult: '', target: '' }]
+              }
+            ],
             name: 'Program Administration',
             plannedEndDate: '',
             plannedStartDate: '',
