@@ -37,7 +37,11 @@ const FormAndReviewItem = ({
         Done
       </Button>
       {extraButtons.map(({ onClick, text }) => (
-        <Button className="ds-u-margin-left--2" onClick={() => onClick(index)}>
+        <Button
+          key={text}
+          className="ds-u-margin-left--2"
+          onClick={() => onClick(index)}
+        >
           {text}
         </Button>
       ))}

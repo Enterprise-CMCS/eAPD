@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  plain as GoalForm,
+  plain as ObjectiveAndKeyResultForm,
   mapDispatchToProps
 } from './ObjectiveAndKeyResultForm';
 
@@ -13,45 +13,83 @@ import {
   setObjectiveKeyResultBaseline
 } from '../../../actions/editActivity';
 
-describe('the GoalForm component', () => {
+describe('the ObjectiveAndKeyResultForm component', () => {
   const props = {
     activityIndex: 93,
     index: 1,
     item: {
-      description: 'goal description',
-      key: 'goal key',
-      objective: 'goal objective'
+      key: 'objective key',
+      objective: 'objective description',
+      keyResults: [
+        {
+          key: 'kr key 1',
+          keyResult: 'metric 1',
+          target: 'goal 1',
+          baseline: 'starting 1'
+        },
+        {
+          key: 'kr key 2',
+          keyResult: 'metric 2',
+          target: 'goal 2',
+          baseline: 'starting 2'
+        }
+      ]
     },
-    setDescription: jest.fn(),
-    setObjective: jest.fn()
+    setBaseline: jest.fn(),
+    setKR: jest.fn(),
+    setObjective: jest.fn(),
+    setTarget: jest.fn()
   };
 
   beforeEach(() => {
-    props.setDescription.mockClear();
-    props.setDescription.mockClear();
+    props.setBaseline.mockClear();
+    props.setKR.mockClear();
+    props.setObjective.mockClear();
+    props.setTarget.mockClear();
   });
 
   test('renders correctly', () => {
-    const component = shallow(<GoalForm {...props} />);
+    const component = shallow(<ObjectiveAndKeyResultForm {...props} />);
     expect(component).toMatchSnapshot();
   });
 
-  it('it handles changing the goal description', () => {
-    const component = shallow(<GoalForm {...props} />);
+  it('it handles changing the OKR objective', () => {
+    const component = shallow(<ObjectiveAndKeyResultForm {...props} />);
     component
-      .findWhere(c => c.prop('name') === 'name')
-      .simulate('change', { target: { value: 'new name' } });
-
-    expect(props.setDescription).toHaveBeenCalledWith(93, 1, 'new name');
-  });
-
-  it('it handles changing the goal objective', () => {
-    const component = shallow(<GoalForm {...props} />);
-    component
-      .findWhere(c => c.prop('name') === 'milestones')
+      .findWhere(c => c.prop('name') === 'objective')
       .simulate('change', { target: { value: 'new objective' } });
 
     expect(props.setObjective).toHaveBeenCalledWith(93, 1, 'new objective');
+  });
+
+  it('handles changing a key result', () => {
+    const component = shallow(<ObjectiveAndKeyResultForm {...props} />);
+    component
+      .findWhere(c => c.prop('name') === 'key-result')
+      .at(0)
+      .simulate('change', { target: { value: 'new kr' } });
+
+    expect(props.setKR).toHaveBeenCalledWith(93, 1, 0, 'new kr');
+  });
+
+  it('handles changing a key result target', () => {
+    const component = shallow(<ObjectiveAndKeyResultForm {...props} />);
+    component
+      .findWhere(c => c.prop('name') === 'kr-target')
+      .at(1)
+      .simulate('change', { target: { value: 'new target' } });
+
+    expect(props.setTarget).toHaveBeenCalledWith(93, 1, 1, 'new target');
+  });
+
+  it('handles changing a key result baseline', () => {
+    const component = shallow(<ObjectiveAndKeyResultForm {...props} />);
+    component
+      .findWhere(c => c.prop('name') === 'kr-baseline')
+      .at(0)
+      .simulate('change', { target: { value: 'new baseline' } });
+
+    expect(props.setBaseline).toHaveBeenCalledWith(93, 1, 0, 'new baseline');
   });
 
   it('maps dispatch actions to props', () => {

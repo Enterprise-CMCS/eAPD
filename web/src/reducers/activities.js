@@ -14,6 +14,7 @@ export const newMilestone = (milestone = '', endDate = '') => ({
 });
 
 export const newObjectiveKeyResult = () => ({
+  key: generateKey(),
   baseline: '',
   keyResult: '',
   target: ''
@@ -84,8 +85,7 @@ export const quarterlyFFPEntry = () =>
 export const newActivity = ({
   name = '',
   fundingSource = 'HIT',
-  years = [],
-  ...rest
+  years = []
 } = {}) => ({
   alternatives: '',
   contractorResources: [newContractor(years)],
@@ -123,6 +123,5 @@ export const newActivity = ({
   years,
   meta: {
     expanded: name === 'Program Administration'
-  },
-  ...rest
+  }
 });

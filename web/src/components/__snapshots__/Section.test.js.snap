@@ -23,7 +23,7 @@ exports[`Section component renders correctly with resource containing title, sub
   <h2
     className="ds-h2"
   >
-    Performance Goals and Benchmarks
+    Objectives and Key Results
   </h2>
   <span
     className="ds-text--lead"
@@ -54,7 +54,7 @@ exports[`Subsection component renders correctly 1`] = `
     className=" subsection--title ds-h3"
     id={null}
   >
-    Performance Goals and Benchmarks
+    Objectives and Key Results
   </h3>
   <Instruction
     args={null}
@@ -77,7 +77,7 @@ exports[`Subsection component uses the passed-in heading class 1`] = `
     className="bobs-burgers subsection--title ds-h3"
     id={null}
   >
-    Performance Goals and Benchmarks
+    Objectives and Key Results
   </h3>
   <Instruction
     args={null}

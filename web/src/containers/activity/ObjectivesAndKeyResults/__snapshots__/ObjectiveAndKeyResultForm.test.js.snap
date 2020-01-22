@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ObjectiveAndKeyResultForm component renders correctly 1`] = `
+<Fragment>
+  <TextField
+    autoFocus={true}
+    className="data-entry-box"
+    hint="Describe what you are trying to achieve"
+    label="Objective"
+    name="objective"
+    onChange={[Function]}
+    type="text"
+    value="objective description"
+  />
+  <div
+    className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+    key="kr key 1"
+  >
+    <TextField
+      hint="Describe how you will measure progress towards achieving your objective."
+      label="Key result"
+      name="key-result"
+      onChange={[Function]}
+      type="text"
+      value="metric 1"
+    />
+    <TextField
+      className="data-entry-box"
+      hint="Provide a numerical measure for your key result if applicable."
+      label="Target"
+      name="kr-target"
+      onChange={[Function]}
+      type="text"
+      value="goal 1"
+    />
+    <TextField
+      className="data-entry-box"
+      hint="Provide where you are with this goal now if applicable. Use the same units as your target."
+      label="Baseline"
+      name="kr-baseline"
+      onChange={[Function]}
+      type="text"
+      value="starting 1"
+    />
+  </div>
+  <div
+    className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+    key="kr key 2"
+  >
+    <TextField
+      hint="Describe how you will measure progress towards achieving your objective."
+      label="Key result"
+      name="key-result"
+      onChange={[Function]}
+      type="text"
+      value="metric 2"
+    />
+    <TextField
+      className="data-entry-box"
+      hint="Provide a numerical measure for your key result if applicable."
+      label="Target"
+      name="kr-target"
+      onChange={[Function]}
+      type="text"
+      value="goal 2"
+    />
+    <TextField
+      className="data-entry-box"
+      hint="Provide where you are with this goal now if applicable. Use the same units as your target."
+      label="Baseline"
+      name="kr-baseline"
+      onChange={[Function]}
+      type="text"
+      value="starting 2"
+    />
+  </div>
+</Fragment>
+`;

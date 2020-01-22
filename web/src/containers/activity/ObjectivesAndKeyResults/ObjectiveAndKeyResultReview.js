@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Review from '../../../components/Review';
 
-const GoalReview = ({
+const ObjectiveAndKeyResultReview = ({
   item: { keyResults, objective },
   expand,
   onDeleteClick
@@ -14,8 +14,8 @@ const GoalReview = ({
     onEditClick={expand}
   >
     <h5 className="ds-h4 ds-u-margin-top--2">{objective}</h5>
-    {keyResults.map(({ baseline, keyResult, target }) => (
-      <p key={keyResult} className="ds-u-margin-top--2">
+    {keyResults.map(({ baseline, key, keyResult, target }) => (
+      <p key={key} className="ds-u-margin-top--2">
         <strong>Key result:</strong> {keyResult}
         <br />
         <strong>Target:</strong> {target}
@@ -26,7 +26,7 @@ const GoalReview = ({
   </Review>
 );
 
-GoalReview.propTypes = {
+ObjectiveAndKeyResultReview.propTypes = {
   expand: PropTypes.func.isRequired,
   item: PropTypes.shape({
     keyResults: PropTypes.array,
@@ -35,8 +35,8 @@ GoalReview.propTypes = {
   onDeleteClick: PropTypes.func
 };
 
-GoalReview.defaultProps = {
+ObjectiveAndKeyResultReview.defaultProps = {
   onDeleteClick: null
 };
 
-export default GoalReview;
+export default ObjectiveAndKeyResultReview;
