@@ -1,18 +1,11 @@
 import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import ActivityDialog from './EntryDetailsDialog';
 
-import ContractorResources from './ContractorResources';
-import CostAllocate from './CostAllocate';
-import Costs from './Costs';
-import Overview from './Overview';
-import Goals from './Goals';
-import Schedule from './Schedule';
-import StandardsAndConditions from './StandardsAndConditions';
-import { TimesCircle } from '../../components/Icons';
 import { t } from '../../i18n';
 
 const makeTitle = ({ name, fundingSource }, i) => {
@@ -29,16 +22,10 @@ const makeTitle = ({ name, fundingSource }, i) => {
 const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
   const container = useRef();
 
-  const [collapsed, internalSetCollapsed] = useState(activityIndex > 0);
-  const setCollapsed = newCollapsed => {
-    if (newCollapsed) {
-      const { top } = container.current.getBoundingClientRect();
-      if (top < 0 || top > window.innerHeight) {
-        container.current.scrollIntoView({ behavior: 'auto' });
-        container.current.focus();
-      }
-    }
-    internalSetCollapsed(newCollapsed);
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   const title = useMemo(
@@ -46,33 +33,24 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
     [fundingSource, name, activityIndex]
   );
 
-  const editContent = useMemo(
-    () => (
-      <div className="nowrap visibility--screen">
-        <Button
-          size="small"
-          variation="transparent"
-          onClick={() => setCollapsed(!collapsed)}
-        >
-          {collapsed ? (
-            'Edit'
-          ) : (
-            <Fragment>
-              <TimesCircle /> Close
-            </Fragment>
-          )}
-        </Button>
-      </div>
-    ),
-    [collapsed]
+  const editContent = (
+    <div className="nowrap visibility--screen">
+      <Button
+        size="small"
+        variation="transparent"
+        onClick={() => setShowModal(true)}
+      >
+        Edit
+      </Button>
+    </div>
   );
 
   return (
     <div
       id={`activity-${activityKey}`}
       className={`activity--body activity--body__${
-        collapsed ? 'collapsed' : 'expanded'
-      } activity--body__${activityIndex === 0 ? 'first' : 'notfirst'}`}
+        activityIndex === 0 ? 'first' : 'notfirst'
+      }`}
       ref={container}
     >
       <Review heading={title} headingLevel={4} editContent={editContent}>
@@ -80,18 +58,13 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
           /* children are required, so send an empty array to suppress errors */
         ]}
       </Review>
-      <div className={collapsed ? 'visibility--print' : ''}>
-        <Overview activityIndex={activityIndex} />
-        <Goals activityIndex={activityIndex} />
-        <Schedule activityIndex={activityIndex} />
-        <Costs activityIndex={activityIndex} />
-        <ContractorResources activityIndex={activityIndex} />
-        <CostAllocate activityIndex={activityIndex} />
-        <StandardsAndConditions activityIndex={activityIndex} />
-        <Button variation="primary" onClick={() => setCollapsed(true)}>
-          Done
-        </Button>
-      </div>
+      {showModal && (
+        <ActivityDialog
+          title={title}
+          activityIndex={activityIndex}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };

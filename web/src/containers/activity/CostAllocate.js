@@ -25,7 +25,10 @@ const CostAllocate = ({
   const syncOtherFunding = html => setOtherFunding(activityIndex, html);
 
   return (
-    <Subsection resource="activities.costAllocate" nested>
+    <Subsection
+      resource="activities.costAllocate"
+      id={`activity-cost-allocation-${activityIndex}`}
+    >
       <div className="data-entry-box">
         <Instruction
           source="activities.costAllocate.methodology.instruction"
@@ -56,7 +59,7 @@ const CostAllocate = ({
         />
       </div>
       <hr />
-      <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex}/>
+      <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex} />
     </Subsection>
   );
 };
