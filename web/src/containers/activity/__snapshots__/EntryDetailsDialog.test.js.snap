@@ -29,7 +29,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
       selected={false}
       tab="Goals"
     >
-      <Connect(Goals)
+      <Connect(Objectives)
         activityIndex={2}
       />
       <Connect(Schedule)
