@@ -11,7 +11,7 @@ const ajv = new Ajv({
   allErrors: true,
   jsonPointers: true,
   // The validator will remove any fields that aren't in the schema
-  removeAdditional: true
+  removeAdditional: 'all'
 });
 
 const validatorFunction = ajv.compile({
