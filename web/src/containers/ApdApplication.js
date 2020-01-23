@@ -26,6 +26,7 @@ import {
 import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
 const ApdApplication = ({
+  apdCreated,
   apdName,
   apdSelected,
   isAdmin,
