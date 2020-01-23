@@ -53,7 +53,8 @@ If you don't have or can't use Docker, you can also run everything
 
 From your command line, switch to the directory where you put the code and
 then run `docker-compose up`. This step could take a few minutes. Once it's
-finished, run:
+finished, you can populate the database. While the docker process is still
+running, open a new terminal window or tab and run:
 
 ```shell
 docker-compose exec api npm run migrate
