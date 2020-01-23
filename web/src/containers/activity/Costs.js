@@ -7,7 +7,10 @@ import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
 const Costs = ({ activityIndex }) => (
-  <Subsection resource="activities.costs" nested>
+  <Subsection
+    resource="activities.costs"
+    id={`activity-cost-categories-${activityIndex}`}
+  >
     <h6 className="ds-h4">{t('activities.costs.subtitles.personnel')}</h6>
     <StatePersonnel activityIndex={activityIndex} />
 
