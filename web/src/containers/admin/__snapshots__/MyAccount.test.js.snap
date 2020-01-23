@@ -387,6 +387,7 @@ exports[`my account page renders 3`] = `
       </div>
     </div>
     <Password
+      className=""
       compareTo={Array []}
       onChange={[Function]}
       showMeter={true}
