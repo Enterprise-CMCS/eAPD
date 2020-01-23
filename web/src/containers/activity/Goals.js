@@ -23,7 +23,10 @@ const Goals = ({ activityIndex, add, goals, remove }) => {
   };
 
   return (
-    <Subsection resource="activities.goals" nested>
+    <Subsection
+      resource="activities.goals"
+      id={`activity-goals-${activityIndex}`}
+    >
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText="Add a goal"

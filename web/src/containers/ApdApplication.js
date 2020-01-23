@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Prompt, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Activities from './activity/All';
 import AssurancesAndCompliance from './AssurancesAndCompliance';
@@ -22,102 +22,59 @@ import {
   getAPDYearRange,
   getIsAnAPDSelected
 } from '../reducers/apd';
-import { selectHasChanges } from '../reducers/patch.selectors';
+
 import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
-const unsavedPrompt =
-  'You have unsaved changes to your APD. Do you want to leave this page without saving?';
-
-class ApdApplication extends Component {
-  componentDidMount() {
-    // Hook the browser's beforeunload event to catch page reloads or manual
-    // changes to the URL bar while the APD is loaded.
-    this.unloadListener = window.addEventListener('beforeunload', e => {
-      const { needsSave } = this.props;
-      if (needsSave) {
-        e.preventDefault();
-        e.returnValue = unsavedPrompt;
-      }
-    });
+const ApdApplication = ({
+  apdName,
+  apdSelected,
+  isAdmin,
+  place,
+  setApdToSelectOnLoad: dispatchSelectApdOnLoad,
+  year
+}) => {
+  if (isAdmin) {
+    return <Redirect to="/" />;
   }
 
-  componentWillUnmount() {
-    // Clean up our event handler when the component unloads, so we don't keep
-    // prompting the user about the same dirty APD they already said to reload
-    if (this.unloadListener) {
-      window.removeEventListener('beforeunload', this.unloadListener);
-      this.unloadListener = null;
-    }
+  if (!apdSelected) {
+    dispatchSelectApdOnLoad('/apd');
+    return <Redirect to="/" />;
   }
 
-  render() {
-    const {
-      apdCreated,
-      apdName,
-      apdSelected,
-      isAdmin,
-      needsSave,
-      place,
-      setApdToSelectOnLoad: dispatchSelectApdOnLoad,
-      year
-    } = this.props;
-
-    if (isAdmin) {
-      return <Redirect to="/" />;
-    }
-
-    if (!apdSelected) {
-      dispatchSelectApdOnLoad('/apd');
-      return <Redirect to="/" />;
-    }
-
-    return (
-      <div className="site-body ds-l-container">
-        {/* Use a redux-router prompt to hook in-app navigations */}
-        <Prompt
-          when={needsSave}
-          message={location => {
-            // If we're navigating to a hash but on the same page, don't do the
-            // prompt - nothing is reloading, so we're good.
-            if (location.pathname === '/apd') {
-              return true;
-            }
-            return unsavedPrompt;
-          }}
-        />
-        <div className="ds-u-margin--0">
-          <Sidebar place={place} />
-          <div className="site-main ds-u-padding-top--2">
-            <h1 id="start-main-content" className="ds-h1 apd--title">
-              <span className="ds-h6 ds-u-display--block">
-                <strong>Created:</strong> {apdCreated}
-              </span>
-              {apdName} | FFY {year}
-            </h1>
-            <StateProfile />
-            <ApdSummary />
-            <PreviousActivities />
-            <Activities />
-            <ScheduleSummary />
-            <ProposedBudget />
-            <AssurancesAndCompliance />
-            <ExecutiveSummary />
-            <Export />
-          </div>
+  return (
+    <div className="site-body ds-l-container">
+      <div className="ds-u-margin--0">
+        <Sidebar place={place} />
+        <div className="site-main ds-u-padding-top--2">
+          <h1 id="start-main-content" className="ds-h1 apd--title">
+            <span className="ds-h6 ds-u-display--block">
+              <strong>Created:</strong> {apdCreated}
+            </span>
+            {apdName} | FFY {year}
+          </h1>
+          <StateProfile />
+          <ApdSummary />
+          <PreviousActivities />
+          <Activities />
+          <ScheduleSummary />
+          <ProposedBudget />
+          <AssurancesAndCompliance />
+          <ExecutiveSummary />
+          <Export />
         </div>
-
-        <SaveButton />
       </div>
-    );
-  }
-}
+
+      <SaveButton />
+    </div>
+  );
+};
 
 ApdApplication.propTypes = {
   apdCreated: PropTypes.string.isRequired,
   apdName: PropTypes.string,
   apdSelected: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
-  needsSave: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
   setApdToSelectOnLoad: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired
@@ -130,7 +87,6 @@ const mapStateToProps = state => ({
   apdName: getAPDName(state),
   apdSelected: getIsAnAPDSelected(state),
   isAdmin: getIsAdmin(state),
-  needsSave: selectHasChanges(state),
   place: getUserStateOrTerritory(state),
   year: getAPDYearRange(state)
 });

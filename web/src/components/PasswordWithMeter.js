@@ -31,7 +31,7 @@ class Password extends Component {
   };
 
   render() {
-    const { compareTo, title, value, showMeter, ...rest } = this.props;
+    const { className, title, value, showMeter } = this.props;
     const { showPassword, strength } = this.state;
 
     let passwordQuality = 'Password strength: Weak';
@@ -44,7 +44,7 @@ class Password extends Component {
     }
 
     return (
-      <div {...rest}>
+      <div className={className || undefined}>
         <div className="password-input">
           <Choice
             className="password-input--show-password ds-u-float--right"
@@ -93,6 +93,7 @@ class Password extends Component {
 }
 
 Password.propTypes = {
+  className: PropTypes.string,
   compareTo: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func,
   title: PropTypes.string,
@@ -101,6 +102,7 @@ Password.propTypes = {
 };
 
 Password.defaultProps = {
+  className: '',
   compareTo: [],
   onChange: () => {},
   title: 'Password',

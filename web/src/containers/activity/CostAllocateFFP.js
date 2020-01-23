@@ -37,37 +37,60 @@ class CostAllocateFFP extends Component {
 
     return (
       <Fragment>
-        <h5 className="ds-h4">{t('activities.costAllocate.ffp.title')}</h5>
+        {!isViewOnly && (
+          <h5 className="ds-h4">{t('activities.costAllocate.ffp.title')}</h5>
+        )}
         {byYearData.map(
           ({ year, total, medicaidShare, ffpSelectVal, allocations }) => (
             <div key={year}>
-              <h6 className="ds-h3">FFY {year}:</h6>
-              <p>
-                <Dollars long>{total}</Dollars>
-              </p>
               {isViewOnly ? (
                 <Fragment>
-                  <p className="ds-h4 ds-u-display--block">
-                    {t('activities.costAllocate.ffp.labels.other')}
+                  <p className="ds-h3 ds-u-margin-y--2">
+                    FFY {year}:{' '}
+                    <span className="ds-u-font-weight--normal">
+                      <Dollars long>{total}</Dollars>
+                    </span>
                   </p>
-                  <Dollars long>{costAllocation[year].other}</Dollars>
+                  <p className="ds-h4 ds-u-margin-y--2">
+                    {t('activities.costAllocate.ffp.labels.other')}:{' '}
+                    <span className="ds-u-font-weight--normal">
+                      <Dollars long>{costAllocation[year].other}</Dollars>
+                    </span>
+                  </p>
                 </Fragment>
               ) : (
-                <DollarField
-                  label={t('activities.costAllocate.ffp.labels.other')}
-                  labelClassName="ds-h5"
-                  name={`cost-allocate-other-${year}`}
-                  value={costAllocation[year].other || '0'}
-                  onChange={this.setOther(year)}
-                />
+                <Fragment>
+                  <h6 className="ds-h3">FFY {year}:</h6>
+                  <p>
+                    <Dollars long>{total}</Dollars>
+                  </p>
+                  <DollarField
+                    label={t('activities.costAllocate.ffp.labels.other')}
+                    labelClassName="ds-h5"
+                    name={`cost-allocate-other-${year}`}
+                    value={costAllocation[year].other || '0'}
+                    onChange={this.setOther(year)}
+                  />
+                </Fragment>
               )}
 
-              <p className="ds-h4 ds-u-display--block">
-                {t('activities.costAllocate.ffp.medicaidShare')}
-              </p>
-              <p>
-                <Dollars long>{medicaidShare}</Dollars>
-              </p>
+              {isViewOnly ? (
+                <p className="ds-h4 ds-u-margin-y--2">
+                  {t('activities.costAllocate.ffp.medicaidShare')}:{' '}
+                  <span className="ds-u-font-weight--normal">
+                    <Dollars long>{medicaidShare}</Dollars>
+                  </span>
+                </p>
+              ) : (
+                <Fragment>
+                  <p className="ds-h4 ds-u-display--block">
+                    {t('activities.costAllocate.ffp.medicaidShare')}
+                  </p>
+                  <p>
+                    <Dollars long>{medicaidShare}</Dollars>
+                  </p>
+                </Fragment>
+              )}
 
               {isViewOnly ? (
                 <p>
@@ -113,7 +136,7 @@ class CostAllocateFFP extends Component {
           )
         )}
         <CostAllocateFFPYearTotal aKey={aKey} />
-        <hr />
+        {!isViewOnly && <hr />}
       </Fragment>
     );
   }

@@ -4,8 +4,8 @@ module.exports = {
     connection: {
       host: process.env.DEV_DB_HOST || 'db',
       database: 'hitech_apd',
-      user: 'postgres',
-      password: 'cms'
+      user: process.env.DEV_DB_USER || 'postgres',
+      password: process.env.DEV_DB_PASSWORD || 'cms'
     }
   },
 
