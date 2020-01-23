@@ -3,8 +3,8 @@
 exports[`activity Goals component renders properly 1`] = `
 <Subsection
   headerClassName={null}
-  id={null}
-  nested={true}
+  id="activity-goals-activity index"
+  nested={false}
   resource="activities.goals"
 >
   <FormAndReviewList

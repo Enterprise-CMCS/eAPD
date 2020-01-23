@@ -25,9 +25,6 @@
 #                                     | tokens. This is written into the API's
 #                                     | configuration.
 #                                     |----------------------------------------
-#    --AWS_AMI <AMI ID>               | Image ID of the AMI to use for the new
-#                                     | instance
-#                                     |----------------------------------------
 #    --AWS_REGION <AWS region name>   | The AWS region the instance should be
 #                                     | created in
 #                                     |----------------------------------------
@@ -70,8 +67,11 @@ function deployAPItoEC2() {
   PREV_INSTANCE_INFOS=$(findExistingInstances)
   echo "• Found previous instances: $PREV_INSTANCE_INFOS"
 
+  AMI_ID=$(findAMI)
+  echo "• Using most recent EAST-RH AMI: $AMI_ID"
+
   # Create new EC2 instance
-  INSTANCE_ID=$(createNewInstance)
+  INSTANCE_ID=$(createNewInstance $AMI_ID)
   echo "• Created instance $INSTANCE_ID"
 
   # Wait for the instance to become ready.  This will happen once the VM is
@@ -181,21 +181,31 @@ function configureAWS() {
 
 # Create a new EC2 instance. Echos the new instance ID.
 #
+# $1 - Image ID of the AMI to use for this instance
+#
 # Expects global variables:
-#   AWS_AMI	 - Image ID of the AMI to use for this instance
 #   AWS_SECURITY_GROUP - ID of the security group for this instance
 #   AWS_SUBNET - ID of the subnet this instance should be attached to
 #   ENVIRONMENT - name of the environment being deployed to; lowercase
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type c4.large \
-    --image-id $AWS_AMI	 \
+    --image-id $1 \
     --security-group-ids $AWS_SECURITY_GROUP \
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
+}
+
+# Finds the most recent EAST-RH gold AMI and returns the ID
+function findAMI() {
+  aws ec2 describe-images \
+    --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
+    --filter 'Name=is-public,Values=false' \
+    --filter 'Name=name,Values=EAST-RH*' \
+    | jq -r -c 'sort_by(.date)|last|.id'
 }
 
 # Finds any existing instances for the environment. Echos a newline-delimited

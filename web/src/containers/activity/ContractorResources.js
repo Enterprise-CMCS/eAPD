@@ -37,7 +37,10 @@ const ContractorResources = ({
   };
 
   return (
-    <Subsection resource="activities.contractorResources" nested>
+    <Subsection
+      resource="activities.contractorResources"
+      id={`activity-contractor-costs-${activityIndex}`}
+    >
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText="Add another contractor"

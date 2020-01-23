@@ -423,7 +423,7 @@ jobs:
           name: vulnerability scan
           working_directory: ~/project/<< parameters.path >>
           command: |
-            npm audit
+            npx -p npm-audit-resolver check-audit
 
   owasp zap scan:
     machine:
@@ -489,7 +489,6 @@ jobs:
               --API_PBKDF2_ITERATIONS "${<< parameters.env >>_API_PBKDF2_ITERATIONS}" \
               --API_PORT "${<< parameters.env >>_API_PORT}" \
               --API_SESSION_SECRET "${<< parameters.env >>_API_SESSION_SECRET}" \
-              --AWS_AMI "${<< parameters.env >>_API_AWS_AMI}" \
               --AWS_REGION "${<< parameters.env >>_API_AWS_REGION}" \
               --AWS_SECURITY_GROUP "${<< parameters.env >>_API_AWS_SECURITY_GROUP}" \
               --AWS_SUBNET "${<< parameters.env >>_API_AWS_SUBNET}" \

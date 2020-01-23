@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import {
   plain as ApdApplication,
@@ -11,49 +10,48 @@ import { setApdToSelectOnLoad } from '../actions/app';
 
 describe('apd (application) component', () => {
   test('renders correctly', () => {
-    // non-admin, dirty
+    const selectApdOnLoadProp = jest.fn();
+
+    // non-admin, APD already selected
     expect(
       shallow(
         <ApdApplication
           apdCreated="creation date"
           apdName="test name"
           apdSelected
-          needsSave
           isAdmin={false}
           place={{}}
-          setApdToSelectOnLoad={() => {}}
+          setApdToSelectOnLoad={selectApdOnLoadProp}
           year="the year"
         />
       )
     ).toMatchSnapshot();
+    expect(selectApdOnLoadProp).not.toHaveBeenCalled();
 
-    // non-admin, clean
-    const selectApdOnLoadProp = sinon.spy();
+    // non-admin, APD not already selected
     expect(
       shallow(
         <ApdApplication
           apdCreated="creation date"
           apdName="another apd"
           apdSelected={false}
-          needsSave={false}
           isAdmin={false}
           place={{}}
           setApdToSelectOnLoad={selectApdOnLoadProp}
-          year="the past"
+          year="the year"
         />
       )
     ).toMatchSnapshot();
-    expect(selectApdOnLoadProp.calledWith('/apd')).toBeTruthy();
+    expect(selectApdOnLoadProp).toHaveBeenCalledWith('/apd');
 
     // admin
-    selectApdOnLoadProp.resetHistory();
+    selectApdOnLoadProp.mockClear();
     expect(
       shallow(
         <ApdApplication
           apdCreated="creation date"
           apdName="third"
           apdSelected={false}
-          needsSave={false}
           isAdmin
           place={{}}
           setApdToSelectOnLoad={selectApdOnLoadProp}
@@ -61,7 +59,7 @@ describe('apd (application) component', () => {
         />
       )
     ).toMatchSnapshot();
-    expect(selectApdOnLoadProp.notCalled).toBeTruthy();
+    expect(selectApdOnLoadProp).not.toHaveBeenCalled();
   });
 
   test('maps state to props', () => {
@@ -74,7 +72,6 @@ describe('apd (application) component', () => {
           years: ['dinkus', 'dorkus', 'durkus']
         }
       },
-      patch: [1, 2, 3],
       user: {
         data: {
           state: 'place'
@@ -87,7 +84,6 @@ describe('apd (application) component', () => {
       apdName: 'florp',
       apdSelected: true,
       isAdmin: false,
-      needsSave: true,
       place: 'place',
       year: 'dinkus-durkus'
     });
@@ -100,7 +96,6 @@ describe('apd (application) component', () => {
       apdName: 'florp',
       apdSelected: false,
       isAdmin: false,
-      needsSave: true,
       place: 'place',
       year: ''
     });
