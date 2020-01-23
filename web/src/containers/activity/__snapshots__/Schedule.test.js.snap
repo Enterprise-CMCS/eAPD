@@ -4,7 +4,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
 <Subsection
   headerClassName={null}
   id={null}
-  nested={true}
+  nested={false}
   resource="activities.schedule"
 >
   <div
