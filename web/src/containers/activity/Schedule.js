@@ -47,7 +47,7 @@ const Schedule = ({
   });
 
   return (
-    <Subsection resource="activities.schedule" nested>
+    <Subsection resource="activities.schedule">
       <Fragment>
         <div className="ds-u-padding-y--0 visibility--screen">
           <DateField

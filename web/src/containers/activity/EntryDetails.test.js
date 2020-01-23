@@ -11,8 +11,19 @@ describe('the (Activity) EntryDetails component', () => {
     name: 'activity name'
   };
 
-  test('renders correctly', () => {
+  test('renders correctly with the modal closed', () => {
     const component = shallow(<EntryDetails {...props} />);
+    expect(component).toMatchSnapshot();
+
+    const review = component.find('Review').dive();
+    review.find('Button').simulate('click');
+
+    // Modal is now open
+    expect(component).toMatchSnapshot();
+
+    component.find('ActivityDialog').prop('closeModal')();
+
+    // Modal is now closed again
     expect(component).toMatchSnapshot();
   });
 
