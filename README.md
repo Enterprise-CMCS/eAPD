@@ -61,7 +61,7 @@ then run `docker-compose up`. This will do several things:
 
 This could take a few minutes. Once it's finished, everything is installed,
 configured, and running. However, the database will still be empty, so that
-needs to be created and populated with starter data. To do that, run:
+needs to be created and populated with starter data. To do that, while the docker process is still running, open a new terminal window and run:
 
 ```shell
 docker-compose exec api npm run migrate
@@ -153,7 +153,7 @@ npm start
 That starts up a special server that will build and serve the web application.
 
 You should now be able to open the app at
-[http://localhost:8080](http://localhost:8080). You can log in with username
+[http://localhost:8001](http://localhost:8001). You can log in with username
 `em@il.com` and password `password` to view a state account, complete with
 a filled-in APD. There is also an admin account with username `admin` and
 password `password`.
