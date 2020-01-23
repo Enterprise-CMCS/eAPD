@@ -86,12 +86,7 @@ const Login = ({
           value={username}
           onChange={changeUsername}
         />
-        <Password
-          title="Password"
-          ariaLabel="Enter the password for this account."
-          value={password}
-          onChange={changePassword}
-        />
+        <Password title="Password" value={password} onChange={changePassword} />
       </CardForm>
     </Fragment>
   );
