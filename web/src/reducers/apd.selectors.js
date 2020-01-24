@@ -123,3 +123,5 @@ export const selectApdDashboard = createSelector(
   ({ byId }) =>
     Object.values(byId).map(({ id, name, updated }) => ({ id, name, updated }))
 );
+
+export const selectLastSavedTimestamp = state => state.apd.data.updated;
