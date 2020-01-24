@@ -47,6 +47,8 @@ describe('APD reducer', () => {
         type: CREATE_APD_SUCCESS,
         data: {
           id: 'apd-id',
+          // King George VI is born
+          created: '1895-12-14T00:00:00Z',
           // Queen Elizabeth II is born
           updated: '1926-04-21T00:00:00Z',
           other: 'data',
@@ -57,6 +59,7 @@ describe('APD reducer', () => {
       byId: {
         'apd-id': {
           id: 'apd-id',
+          created: 'December 14, 1895',
           other: 'data',
           goes: 'here',
           updated: 'April 21, 1926, 12:00 AM GMT',
@@ -86,12 +89,16 @@ describe('APD reducer', () => {
     const data = [
       {
         id: 'apd-id-1',
+        // Albert the monkey is launched into space.
+        created: '1948-06-11T00:00:00Z',
         name: 'my first apd',
         // Laika the dog is launched into space
         updated: '1957-11-03T06:30:00Z'
       },
       {
         id: 'apd-id-2',
+        // By law, England includes Wales.
+        created: '1746-01-01T00:00:00Z',
         name: 'a second apd',
         // The Battle of Hastings, essentially completing the Norman conquest
         // of England and securing William the Conqueror's seat on the throne
@@ -103,11 +110,13 @@ describe('APD reducer', () => {
       byId: {
         'apd-id-1': {
           id: 'apd-id-1',
+          created: 'June 11, 1948',
           name: 'my first apd',
           updated: 'November 3, 1957, 6:30 AM GMT'
         },
         'apd-id-2': {
           id: 'apd-id-2',
+          created: 'January 1, 1746',
           name: 'a second apd',
           updated: 'October 14, 1066, 6:00 PM GMT'
         }
@@ -145,6 +154,10 @@ describe('APD reducer', () => {
       apd(initialState, {
         type: SELECT_APD,
         apd: {
+          // A priest led an angry mob to the town council chambers and threw
+          // them out a window. The king literally died of shock. This was the
+          // First Defenestration of Prague.
+          created: '1419-07-30T00:00:00Z',
           value: `hurr hurr i'm a burr`,
           // Some nobles are tossed out a window in the Second Defenestration
           // of Prague, kicking off the Thirty Years' War
@@ -154,6 +167,7 @@ describe('APD reducer', () => {
     ).toEqual({
       ...initialState,
       data: {
+        created: 'July 30, 1419',
         value: `hurr hurr i'm a burr`,
         updated: 'May 23, 1618, 10:30 AM GMT',
         yearOptions: ['1990', '1991', '1992']
@@ -748,8 +762,14 @@ describe('APD reducer', () => {
         },
         {
           type: SAVE_APD_SUCCESS,
-          // US Department of Health and Human Services is created
-          data: { id: 'apdID', updated: '1953-04-11T00:00:00Z' }
+          data: {
+            id: 'apdID',
+            // Medicare and Medicaid are created, 546 years to the day after
+            // the First Defenestration of Prague.
+            created: '1965-07-30T00:00:00Z',
+            // US Department of Health and Human Services is created
+            updated: '1953-04-11T00:00:00Z'
+          }
         }
       )
     ).toEqual(
@@ -757,10 +777,14 @@ describe('APD reducer', () => {
         a: 'alpha',
         b: 'beta',
         byId: {
-          apdID: { name: 'Bobbert', updated: 'April 11, 1953, 12:00 AM GMT' },
+          apdID: {
+            name: 'Bobbert',
+            updated: 'April 11, 1953, 12:00 AM GMT'
+          },
           otherID: { name: 'Jimbob', updated: 'in the future' }
         },
         data: {
+          created: 'July 30, 1965',
           name: 'Timmothert',
           updated: 'April 11, 1953, 12:00 AM GMT'
         }
