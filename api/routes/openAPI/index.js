@@ -44,6 +44,11 @@ module.exports = {
             type: 'number',
             description: 'APD ID'
           },
+          created: {
+            type: 'string',
+            format: 'date-time',
+            description: 'Timestamp of when this APD was created'
+          },
           name: {
             type: 'string',
             description:

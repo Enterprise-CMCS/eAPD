@@ -17,18 +17,18 @@ const deleteAPDByID = async (id, { db = knex } = {}) => {
 const getAllAPDsByState = async (stateID, { db = knex } = {}) =>
   db('apds')
     .where('state_id', stateID)
-    .select('document', 'id', 'state_id', 'status', 'updated_at');
+    .select('created_at', 'document', 'id', 'state_id', 'status', 'updated_at');
 
 const getAPDByID = async (id, { db = knex } = {}) =>
   db('apds')
     .where('id', id)
-    .first('document', 'id', 'state_id', 'status', 'updated_at');
+    .first('created_at', 'document', 'id', 'state_id', 'status', 'updated_at');
 
 const getAPDByIDAndState = async (id, stateID, { db = knex } = {}) =>
   db('apds')
     .where('id', id)
     .andWhere('state_id', stateID)
-    .first('document', 'id', 'state_id', 'status', 'updated_at');
+    .first('created_at', 'document', 'id', 'state_id', 'status', 'updated_at');
 
 const updateAPDDocument = async (
   id,
