@@ -114,7 +114,7 @@ const getNewApd = () => {
         position: ''
       }
     ],
-    name: '',
+    name: 'HITECH IAPD',
     narrativeHIE: '',
     narrativeHIT: '',
     narrativeMMIS: '',

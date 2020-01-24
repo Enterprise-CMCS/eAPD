@@ -285,6 +285,11 @@ Object {
             },
             "type": "array",
           },
+          "created": Object {
+            "description": "Timestamp of when this APD was created",
+            "format": "date-time",
+            "type": "string",
+          },
           "federalCitations": Object {
             "description": "Federal citations that states must assert compliance with. This is a free-form object.",
             "type": "object",
@@ -536,6 +541,11 @@ Object {
                 "schema": Object {
                   "items": Object {
                     "properties": Object {
+                      "created": Object {
+                        "description": "Timestamp of when this APD was created",
+                        "format": "date-time",
+                        "type": "string",
+                      },
                       "id": Object {
                         "description": "APD ID",
                         "type": "number",

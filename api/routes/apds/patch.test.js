@@ -134,6 +134,7 @@ tap.test('apds PATCH endpoint', async tests => {
 
   tests.test('saves the updated document if everything is good', async test => {
     getAPDByID.resolves({
+      created_at: 'created at',
       document: 'old document',
       state_id: 'state id',
       status: 'status'
@@ -155,6 +156,7 @@ tap.test('apds PATCH endpoint', async tests => {
     test.ok(
       res.send.calledWith({
         ...patchedDocument,
+        created: 'created at',
         id: 'apd id',
         state: 'state id',
         status: 'status',
