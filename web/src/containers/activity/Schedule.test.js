@@ -7,8 +7,6 @@ import {
   mapStateToProps
 } from './Schedule';
 import {
-  addMilestone,
-  removeMilestone,
   setActivityEndDate,
   setActivityStartDate
 } from '../../actions/editActivity';
@@ -20,19 +18,9 @@ describe('the Schedule (milestones) component', () => {
       // Canadian forces successfully opened shipping routes to Antwerp, enabling
       // supplies to reach Allied forces in northwest Europe.
       plannedEndDate: '1944-11-08',
-      plannedStartDate: '1944-10-02',
-      schedule: [
-        {
-          key: 'milestone 1',
-          milestone: 'Liberation Day',
-          // The Netherlands is liberated from Nazi control.
-          endDate: '1945-05-05'
-        }
-      ]
+      plannedStartDate: '1944-10-02'
     },
     activityIndex: 7,
-    add: jest.fn(),
-    remove: jest.fn(),
     setEndDate: jest.fn(),
     setStartDate: jest.fn()
   };
@@ -40,8 +28,6 @@ describe('the Schedule (milestones) component', () => {
   const component = shallow(<Schedule {...props} />);
 
   beforeEach(() => {
-    props.add.mockClear();
-    props.remove.mockClear();
     props.setEndDate.mockClear();
     props.setStartDate.mockClear();
   });
@@ -51,19 +37,6 @@ describe('the Schedule (milestones) component', () => {
   });
 
   describe('events', () => {
-    const list = component.find('FormAndReviewList');
-    it('handles adding a new milestone', () => {
-      list.prop('onAddClick')();
-
-      expect(props.add).toHaveBeenCalledWith(7);
-    });
-
-    it('handles removing a milestone', () => {
-      list.prop('onDeleteClick')('milestone 1');
-
-      expect(props.remove).toHaveBeenCalledWith(7, 0);
-    });
-
     it('updates activity start date', () => {
       component
         .find('DateField')
@@ -98,8 +71,6 @@ describe('the Schedule (milestones) component', () => {
 
     it('map dispatch to props', () => {
       expect(mapDispatchToProps).toEqual({
-        add: addMilestone,
-        remove: removeMilestone,
         setEndDate: setActivityEndDate,
         setStartDate: setActivityStartDate
       });
