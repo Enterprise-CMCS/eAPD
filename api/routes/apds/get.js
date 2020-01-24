@@ -20,9 +20,17 @@ module.exports = (
       }
 
       const apds = (await getAllAPDsByState(stateId)).map(
-        // eslint-disable-next-line camelcase
-        ({ document: { name, years }, id, status, updated_at }) => ({
+        ({
+          // eslint-disable-next-line camelcase
+          created_at,
+          document: { name, years },
           id,
+          status,
+          // eslint-disable-next-line camelcase
+          updated_at
+        }) => ({
+          id,
+          created: created_at,
           name,
           status,
           updated: updated_at,
@@ -31,7 +39,10 @@ module.exports = (
       );
 
       logger.silly(req, `got apds:`);
-      logger.silly(req, apds.map(({ id, name }) => ({ id, name })));
+      logger.silly(
+        req,
+        apds.map(({ id, name }) => ({ id, name }))
+      );
       return res.send(apds);
     } catch (e) {
       logger.error(req, e);
@@ -56,6 +67,7 @@ module.exports = (
         const apd = {
           ...apdFromDB.document,
           id: apdFromDB.id,
+          created: apdFromDB.created_at,
           state: apdFromDB.state_id,
           status: apdFromDB.status,
           updated: apdFromDB.updated_at

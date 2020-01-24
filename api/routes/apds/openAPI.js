@@ -20,6 +20,11 @@ const openAPI = {
                   type: 'number',
                   description: 'APD ID'
                 },
+                created: {
+                  type: 'string',
+                  format: 'date-time',
+                  description: 'Timestamp of when this APD was created'
+                },
                 status: {
                   type: 'string',
                   description:
