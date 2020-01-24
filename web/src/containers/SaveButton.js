@@ -77,7 +77,6 @@ const SaveButton = ({
 
   let alert = null;
   if (hasFetched) {
-    console.log('saved at: ', savedAt);
     if (error) {
       alert = (
         <Alert variation="error" className="ds-u-margin-bottom--2" role="alert">
@@ -114,7 +113,8 @@ SaveButton.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   needsSave: PropTypes.bool.isRequired,
   saveApd: PropTypes.func.isRequired,
-  working: PropTypes.bool.isRequired
+  working: PropTypes.bool.isRequired,
+  savedAt: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
