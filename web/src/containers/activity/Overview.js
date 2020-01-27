@@ -100,7 +100,7 @@ const ActivityOverview = ({
     <Subsection
       headerClassName="header-with-top-margin"
       resource="activities.overview"
-      nested
+      id={`activity-overview-${activityIndex}`}
     >
       <TextArea
         name="activity overview"

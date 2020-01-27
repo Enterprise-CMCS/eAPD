@@ -183,14 +183,20 @@ export const getPatchesToRemoveYear = (state, year) => {
   return patches;
 };
 
-const getHumanTimestamp = iso8601 => {
+const getHumanDatestamp = iso8601 => {
   const d = new Date(iso8601);
 
   return `${d.toLocaleDateString('en-us', {
     month: 'long',
     day: 'numeric',
     year: 'numeric'
-  })}, ${d.toLocaleTimeString('en-us', {
+  })}`;
+};
+
+const getHumanTimestamp = iso8601 => {
+  const d = new Date(iso8601);
+
+  return `${getHumanDatestamp(iso8601)}, ${d.toLocaleTimeString('en-us', {
     timeZoneName: 'short',
     hour12: true,
     hour: 'numeric',
@@ -210,6 +216,12 @@ export const getKeyPersonnel = (years = []) => ({
   key: generateKey(),
   initialCollapsed: false
 });
+
+export const getAPDCreation = ({
+  apd: {
+    data: { created }
+  }
+}) => created;
 
 export const getAPDName = ({
   apd: {
@@ -320,6 +332,7 @@ const reducer = (state = initialState, action) => {
           byId: {
             [action.data.id]: {
               ...action.data,
+              created: getHumanDatestamp(action.data.created),
               updated: getHumanTimestamp(action.data.updated),
               yearOptions: defaultAPDYearOptions
             }
@@ -337,7 +350,11 @@ const reducer = (state = initialState, action) => {
         byId: action.data.reduce(
           (acc, apd) => ({
             ...acc,
-            [apd.id]: { ...apd, updated: getHumanTimestamp(apd.updated) }
+            [apd.id]: {
+              ...apd,
+              created: getHumanDatestamp(apd.created),
+              updated: getHumanTimestamp(apd.updated)
+            }
           }),
           {}
         )
@@ -357,6 +374,7 @@ const reducer = (state = initialState, action) => {
         },
         data: {
           ...state.data,
+          created: getHumanDatestamp(action.data.created),
           updated: getHumanTimestamp(action.data.updated)
         }
       };
@@ -365,6 +383,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         data: {
           ...action.apd,
+          created: getHumanDatestamp(action.apd.created),
           updated: getHumanTimestamp(action.apd.updated),
           yearOptions: defaultAPDYearOptions
         }
