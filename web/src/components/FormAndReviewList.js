@@ -71,6 +71,12 @@ const FormAndReviewList = ({
     className
   );
 
+  const [hasAdded, setHasAdded] = useState(false);
+  const addClick = e => {
+    setHasAdded(true);
+    onAddClick(e);
+  };
+
   return (
     <div className={combinedClassName}>
       {list.length === 0 && noDataMessage !== false ? (
@@ -82,7 +88,7 @@ const FormAndReviewList = ({
             collapsedComponent={collapsed}
             expandedComponent={expanded}
             index={index}
-            initialCollapsed={item.initialCollapsed}
+            initialCollapsed={!(hasAdded && index === list.length - 1)}
             item={item}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
@@ -94,7 +100,7 @@ const FormAndReviewList = ({
         ))
       )}
       {onAddClick && (
-        <Button className="visibility--screen" onClick={onAddClick}>
+        <Button className="visibility--screen" onClick={addClick}>
           {addButtonText || 'Add another'}
         </Button>
       )}

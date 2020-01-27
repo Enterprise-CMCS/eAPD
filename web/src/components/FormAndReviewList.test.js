@@ -45,8 +45,6 @@ describe('FormAndReviewList component', () => {
           />
         )
       ).toMatchSnapshot();
-      // If the snapshot changes, manually inspect it to make sure the
-      // initialCollapsed prop gets sent down to FormAndReviewItem correctly
     });
 
     it('with just one item', () => {
@@ -179,13 +177,17 @@ describe('FormAndReviewList component', () => {
         addButtonText="text for adding a new button"
         collapsed={jest.fn()}
         expanded={jest.fn()}
-        list={[]}
+        list={[{ key: 'item 1' }, { key: 'item2' }]}
         noDataMessage="displayed when there is no data"
         onAddClick={onAddClick}
         onDeleteClick={jest.fn()}
       />
     );
     component.find('Button').simulate('click');
+
+    // verify that initialCollapsed is now set to false for the second
+    // item, but still true for the first
+    expect(component).toMatchSnapshot();
 
     expect(onAddClick).toHaveBeenCalled();
   });
