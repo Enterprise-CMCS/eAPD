@@ -61,13 +61,13 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: CREATE_APD_REQUEST },
         { type: CREATE_APD_SUCCESS, data: apd },
-        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading' },
+        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD, apd },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: '/apd' },
         {
           type: ARIA_ANNOUNCE_CHANGE,
-          message: 'Your APD is loaded and ready to edit'
+          message: 'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
         }
       ];
 
