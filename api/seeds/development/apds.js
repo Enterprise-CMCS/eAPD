@@ -8,7 +8,7 @@ exports.seed = async knex => {
         status: 'draft',
         years: '["2020", "2021"]',
         document: {
-          name: 'MO-2019-10-03-HITECH-APD',
+          name: 'HITECH IAPD',
           activities: [
             {
               alternatives:

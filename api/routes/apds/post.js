@@ -1,5 +1,4 @@
 const Ajv = require('ajv');
-const moment = require('moment');
 
 const logger = require('../../logger')('apds route post');
 const { createAPD: ga, getStateProfile: gs } = require('../../db');
@@ -27,10 +26,6 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
 
     try {
       const apd = getNewApd();
-
-      apd.name = `${req.user.state.id.toUpperCase()}-${moment(
-        Date.now()
-      ).format('YYYY-MM-DD')}-HITECH-APD`;
 
       const stateProfile = await getStateProfile(req.user.state.id);
 
@@ -71,6 +66,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       return res.send({
         ...apd,
         id,
+        created: new Date().toISOString(),
         updated: new Date().toISOString()
       });
     } catch (e) {
