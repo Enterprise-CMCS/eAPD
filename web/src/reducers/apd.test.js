@@ -579,8 +579,7 @@ describe('APD reducer', () => {
               percentTime: '0',
               name: '',
               position: '',
-              key: expect.stringMatching(/^[a-f0-9]{8}$/),
-              initialCollapsed: false
+              key: expect.stringMatching(/^[a-f0-9]{8}$/)
             }
           ],
           years: ['1', '2']
@@ -604,7 +603,6 @@ describe('APD reducer', () => {
               goals: [
                 {
                   description: '',
-                  initialCollapsed: false,
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   objective: ''
                 }
@@ -631,7 +629,6 @@ describe('APD reducer', () => {
               schedule: [
                 {
                   endDate: '',
-                  initialCollapsed: false,
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   milestone: ''
                 }
@@ -660,7 +657,6 @@ describe('APD reducer', () => {
                 {
                   category: 'Hardware, software, and licensing',
                   description: '',
-                  initialCollapsed: false,
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   years: {
                     '1403': 0,
@@ -695,7 +691,6 @@ describe('APD reducer', () => {
               statePersonnel: [
                 {
                   description: '',
-                  initialCollapsed: false,
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   title: '',
                   years: {
@@ -814,8 +809,7 @@ describe('APD reducer helper methods', () => {
             percentTime: '0',
             name: '',
             position: '',
-            key: expect.stringMatching(/^[a-f0-9]{8}$/),
-            initialCollapsed: false
+            key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }
         }
       ]);

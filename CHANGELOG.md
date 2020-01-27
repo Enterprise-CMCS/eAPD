@@ -9,6 +9,7 @@ Anticipated release: February 3, 2020
 #### 🐛 Bugs fixed
 
 - Fixed a bug where toggling the "show password" checkbox on passwords caused the text field to be changed to "Show password" [(#2023)]
+- Fixed a bug where adding a new list item to an activity (goal, milestone, expense, etc.) caused that new item to be expanded every time the activity was opened until the page was reloaded. [(#2026)]
 
 #### ⚙️ Behind the scenes
 
@@ -19,3 +20,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#1821]: https://github.com/18F/cms-hitech-apd/issues/1821
 [#1993]: https://github.com/18F/cms-hitech-apd/issues/1993
 [#2023]: https://github.com/18F/cms-hitech-apd/issues/2023
+[#2026]: https://github.com/18F/cms-hitech-apd/issues/2026
