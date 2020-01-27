@@ -47,7 +47,6 @@ export const expenseDefaultYear = () => 0;
 
 export const newExpense = years => ({
   key: generateKey(),
-
   category: 'Hardware, software, and licensing',
   description: '',
   years: arrToObj(years, expenseDefaultYear())
