@@ -14,7 +14,11 @@ describe('RichText component', () => {
   test('renders as expected', () => {
     expect(
       shallow(
-        <RichText content="initial rich text value" uploadFile={jest.fn()} />
+        <RichText
+          id="test-id"
+          content="initial rich text value"
+          uploadFile={jest.fn()}
+        />
       )
     ).toMatchSnapshot();
   });
@@ -130,31 +134,44 @@ describe('RichText component', () => {
 
   describe('handles uploading an image with drag-and-drop', () => {
     const upload = jest.fn();
+    const onSync = jest.fn();
     const blob = { blob: jest.fn() };
     const success = jest.fn();
     const failure = jest.fn();
 
+    global.tinyMCE = {
+      get: jest.fn()
+    };
+    const getContent = jest.fn();
+
     beforeEach(() => {
       upload.mockReset();
+      onSync.mockReset();
       blob.blob.mockReset();
       success.mockReset();
       failure.mockReset();
+      getContent.mockReset();
+      global.tinyMCE.get.mockReset();
+      global.tinyMCE.get.mockReturnValue({ getContent });
     });
 
     it('returns a url if the upload is successful', async () => {
       upload.mockResolvedValue('this is a url');
-      await uploadImage(upload)(blob, success, failure);
+      getContent.mockReturnValue('this is content');
+      await uploadImage(upload, 'dom id', onSync)(blob, success, failure);
 
       expect(success).toHaveBeenCalledWith('this is a url');
       expect(failure).not.toHaveBeenCalled();
+      expect(onSync).toHaveBeenCalledWith('this is content');
     });
 
     it('calls the failure callback if the upload is not successful', async () => {
       upload.mockReturnValue(Promise.reject());
-      await uploadImage(upload)(blob, success, failure);
+      await uploadImage(upload, 'dom id', onSync)(blob, success, failure);
 
       expect(success).not.toHaveBeenCalled();
       expect(failure).toHaveBeenCalled();
+      expect(onSync).not.toHaveBeenCalled();
     });
   });
 

@@ -53,10 +53,19 @@ const setupTinyMCE = upload => editor => {
   });
 };
 
-const uploadImage = upload => (blob, success, failure) =>
+const uploadImage = (upload, domID, onSync) => (blob, success, failure) =>
   upload(blob.blob())
     .then(url => {
       success(url);
+      /* global tinyMCE */
+      // ☝️ lets eslint know that tinyMCE is defined. Once we've told Tiny the
+      // URL of the uploaded image, it'll update the content of the textbox,
+      // but it does NOT call the change event. That means that dropped images
+      // aren't saved as IMG tags unless the user makes additional changes to
+      // the textbox content. To get around that, we can get a reference to
+      // the editor, pull the content, and manually trigger the event.
+      const editor = tinyMCE.get(domID);
+      onSync(editor.getContent());
     })
     .catch(() => {
       failure();
@@ -78,15 +87,16 @@ class RichText extends Component {
   };
 
   render() {
-    const { uploadFile: upload } = this.props;
+    const { id, onSync, uploadFile: upload } = this.props;
     const { content } = this.state;
 
     return (
       <Editor
+        id={id}
         init={{
           autoresize_bottom_margin: 0,
           browser_spellcheck: true,
-          images_upload_handler: uploadImage(upload),
+          images_upload_handler: uploadImage(upload, id, onSync),
           menubar: '',
           paste_data_images: true,
           plugins: ['autoresize', 'paste', 'spellchecker'],
@@ -103,21 +113,20 @@ class RichText extends Component {
 
 RichText.propTypes = {
   content: PropTypes.string,
+  id: PropTypes.string,
   onSync: PropTypes.func,
   uploadFile: PropTypes.func.isRequired
 };
 
 RichText.defaultProps = {
   content: '',
+  id: `rte-${generateKey()}`,
   onSync: () => {}
 };
 
 const mapDispatchToProps = { uploadFile };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(RichText);
+export default connect(null, mapDispatchToProps)(RichText);
 
 export {
   RichText as plain,
