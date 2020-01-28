@@ -16,7 +16,6 @@ describe('activities reducer helpers', () => {
   it('can create a new contractor resource', () => {
     expect(newContractor(['1991', '1992'])).toEqual({
       key: '--- key ---',
-      initialCollapsed: false,
       name: '',
       description: '',
       start: '',
@@ -37,7 +36,6 @@ describe('activities reducer helpers', () => {
   it('can create a new non-personnel expense', () => {
     expect(newExpense(['1472'])).toEqual({
       key: '--- key ---',
-      initialCollapsed: false,
       category: 'Hardware, software, and licensing',
       description: '',
       years: { '1472': 0 }
@@ -47,7 +45,6 @@ describe('activities reducer helpers', () => {
   it('can create a new activity milestone', () => {
     expect(newMilestone()).toEqual({
       key: '--- key ---',
-      initialCollapsed: false,
       milestone: '',
       endDate: ''
     });
@@ -56,7 +53,6 @@ describe('activities reducer helpers', () => {
   it('can create a new activity objective', () => {
     expect(newObjective()).toEqual({
       key: '--- key ---',
-      initialCollapsed: false,
       objective: '',
       keyResults: [
         { key: '--- key ---', baseline: '', keyResult: '', target: '' }
@@ -76,7 +72,6 @@ describe('activities reducer helpers', () => {
   it('can create a new state personnel expense', () => {
     expect(newStatePerson(['8732', 'bob'])).toEqual({
       key: '--- key ---',
-      initialCollapsed: false,
       title: '',
       description: '',
       years: { '8732': { amt: '', perc: '' }, bob: { amt: '', perc: '' } }
@@ -89,7 +84,6 @@ describe('activities reducer helpers', () => {
       contractorResources: [
         {
           key: '--- key ---',
-          initialCollapsed: false,
           name: '',
           description: '',
           start: '',
@@ -114,14 +108,12 @@ describe('activities reducer helpers', () => {
       expenses: [
         {
           key: '--- key ---',
-          initialCollapsed: false,
           category: 'Hardware, software, and licensing',
           description: '',
           years: { '2020': 0 }
         }
       ],
       fundingSource: 'HIT',
-      initialCollapsed: false,
       key: '--- key ---',
       name: '',
       plannedEndDate: '',
@@ -129,7 +121,6 @@ describe('activities reducer helpers', () => {
       objectives: [
         {
           key: '--- key ---',
-          initialCollapsed: false,
           objective: '',
           keyResults: [
             { key: '--- key ---', baseline: '', keyResult: '', target: '' }
@@ -139,7 +130,6 @@ describe('activities reducer helpers', () => {
       schedule: [
         {
           key: '--- key ---',
-          initialCollapsed: false,
           milestone: '',
           endDate: ''
         }
@@ -147,7 +137,6 @@ describe('activities reducer helpers', () => {
       statePersonnel: [
         {
           key: '--- key ---',
-          initialCollapsed: false,
           title: '',
           description: '',
           years: { '2020': { amt: '', perc: '' } }

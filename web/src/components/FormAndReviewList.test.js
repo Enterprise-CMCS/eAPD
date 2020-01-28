@@ -15,8 +15,8 @@ describe('FormAndReviewList component', () => {
             collapsed={jest.fn()}
             expanded={jest.fn()}
             list={[
-              { initialCollapsed: true, key: 'one' },
-              { initialCollapsed: false, key: 'two' }
+              { initialExpanded: false, key: 'one' },
+              { initialExpanded: true, key: 'two' }
             ]}
             noDataMessage="displayed when there is no data"
             onAddClick={jest.fn()}
@@ -36,8 +36,8 @@ describe('FormAndReviewList component', () => {
             collapsed={jest.fn()}
             expanded={jest.fn()}
             list={[
-              { initialCollapsed: true, key: 'one' },
-              { initialCollapsed: false, key: 'two' }
+              { initialExpanded: false, key: 'one' },
+              { initialExpanded: true, key: 'two' }
             ]}
             noDataMessage="displayed when there is no data"
             onAddClick={jest.fn()}
@@ -45,8 +45,6 @@ describe('FormAndReviewList component', () => {
           />
         )
       ).toMatchSnapshot();
-      // If the snapshot changes, manually inspect it to make sure the
-      // initialCollapsed prop gets sent down to FormAndReviewItem correctly
     });
 
     it('with just one item', () => {
@@ -56,7 +54,7 @@ describe('FormAndReviewList component', () => {
             addButtonText="text for adding a new button"
             collapsed={jest.fn()}
             expanded={jest.fn()}
-            list={[{ initialCollapsed: true, key: 'one' }]}
+            list={[{ key: 'one' }]}
             noDataMessage="displayed when there is no data"
             onAddClick={jest.fn()}
             onDeleteClick={jest.fn()}
@@ -75,7 +73,7 @@ describe('FormAndReviewList component', () => {
             allowDeleteAll
             collapsed={jest.fn()}
             expanded={jest.fn()}
-            list={[{ initialCollapsed: true, key: 'one' }]}
+            list={[{ key: 'one' }]}
             noDataMessage="displayed when there is no data"
             onAddClick={jest.fn()}
             onDeleteClick={jest.fn()}
@@ -141,7 +139,7 @@ describe('FormAndReviewList component', () => {
       <FormAndReviewItem
         collapsedComponent={Collapsed}
         expandedComponent={Expanded}
-        initialCollapsed
+        initialExpanded={false}
         index={1}
         prop1="passed down"
         prop2="passed down"
@@ -247,13 +245,17 @@ describe('FormAndReviewList component', () => {
         addButtonText="text for adding a new button"
         collapsed={jest.fn()}
         expanded={jest.fn()}
-        list={[]}
+        list={[{ key: 'item 1' }, { key: 'item2' }]}
         noDataMessage="displayed when there is no data"
         onAddClick={onAddClick}
         onDeleteClick={jest.fn()}
       />
     );
     component.find('Button').simulate('click');
+
+    // verify that initialExpanded is now set to true for the second
+    // item, but still false for the first
+    expect(component).toMatchSnapshot();
 
     expect(onAddClick).toHaveBeenCalled();
   });
