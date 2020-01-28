@@ -124,7 +124,7 @@ tap.test('APD data initializer', async test => {
         position: ''
       }
     ],
-    name: '',
+    name: 'HITECH IAPD',
     narrativeHIE: '',
     narrativeHIT: '',
     narrativeMMIS: '',

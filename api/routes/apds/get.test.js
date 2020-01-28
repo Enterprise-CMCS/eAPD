@@ -71,6 +71,7 @@ tap.test('apds GET endpoint', async endpointTest => {
     handlerTest.test('sends apds', async validTest => {
       getAllAPDsByState.resolves([
         {
+          created_at: 'created a',
           document: {
             name: 'apd a',
             years: 'years a'
@@ -81,6 +82,7 @@ tap.test('apds GET endpoint', async endpointTest => {
           other: 'stuff'
         },
         {
+          created_at: 'created b',
           document: {
             name: 'apd b',
             years: 'years b'
@@ -91,6 +93,7 @@ tap.test('apds GET endpoint', async endpointTest => {
           gets: 'removed'
         },
         {
+          created_at: 'created c',
           document: {
             name: 'apd c',
             years: 'years c'
@@ -109,6 +112,7 @@ tap.test('apds GET endpoint', async endpointTest => {
         res.send.calledWith([
           {
             id: 'a',
+            created: 'created a',
             name: 'apd a',
             status: 'status a',
             updated: 'updated a',
@@ -116,6 +120,7 @@ tap.test('apds GET endpoint', async endpointTest => {
           },
           {
             id: 'b',
+            created: 'created b',
             name: 'apd b',
             status: 'status b',
             updated: 'updated b',
@@ -123,6 +128,7 @@ tap.test('apds GET endpoint', async endpointTest => {
           },
           {
             id: 'c',
+            created: 'created c',
             name: 'apd c',
             status: 'status c',
             updated: 'updated c',
@@ -224,6 +230,7 @@ tap.test('apds/:id GET endpoint', async tests => {
 
     handlerTest.test('sends apd', async test => {
       getAPDByIDAndState.returns({
+        created_at: 'created at',
         document: {
           stuff: 'from',
           document: 'column',
@@ -244,6 +251,7 @@ tap.test('apds/:id GET endpoint', async tests => {
       test.ok(res.status.notCalled, 'HTTP status not explicitly set');
       test.ok(
         res.send.calledWith({
+          created: 'created at',
           id: 'id',
           stuff: 'from',
           document: 'column',
