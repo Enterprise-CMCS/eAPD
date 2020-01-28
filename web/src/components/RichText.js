@@ -76,7 +76,8 @@ class RichText extends Component {
     super(props);
 
     this.state = {
-      content: props.content
+      content: props.content,
+      id: props.id || `rte-${generateKey()}`
     };
   }
 
@@ -87,8 +88,8 @@ class RichText extends Component {
   };
 
   render() {
-    const { id, onSync, uploadFile: upload } = this.props;
-    const { content } = this.state;
+    const { onSync, uploadFile: upload } = this.props;
+    const { content, id } = this.state;
 
     return (
       <div className="rte--wrapper">
@@ -122,16 +123,13 @@ RichText.propTypes = {
 
 RichText.defaultProps = {
   content: '',
-  id: `rte-${generateKey()}`,
+  id: '',
   onSync: () => {}
 };
 
 const mapDispatchToProps = { uploadFile };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(RichText);
+export default connect(null, mapDispatchToProps)(RichText);
 
 export {
   RichText as plain,
