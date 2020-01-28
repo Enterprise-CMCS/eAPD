@@ -15,6 +15,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       "type": [Function],
     }
   }
+  extraItemButtons={Array []}
   list={
     Array [
       Object {
