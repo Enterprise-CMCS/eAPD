@@ -4,6 +4,7 @@ Anticipated release: February 3, 2020
 
 #### 🚀 New features
 
+- Changed activity goals to activity objectives and key results (OKRs) ([#2007])
 - Make autosave more screen-reader friendly [(#2020)]
 - Changed the APD name to `HITECH IAPD` ([#1821], [#1993])
 - Added loading state for rich text editor ([#2015])
@@ -17,6 +18,8 @@ Anticipated release: February 3, 2020
 # Previous releases
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
+
+[#2007]: https://github.com/18F/cms-hitech-apd/issues/2007
 [#1821]: https://github.com/18F/cms-hitech-apd/issues/1821
 [#1993]: https://github.com/18F/cms-hitech-apd/issues/199
 [#2015]: https://github.com/18F/cms-hitech-apd/pull/2015

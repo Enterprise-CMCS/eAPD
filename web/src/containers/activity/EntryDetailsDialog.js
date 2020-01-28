@@ -7,7 +7,7 @@ import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
 import Costs from './Costs';
 import Overview from './Overview';
-import Goals from './Goals';
+import Objectives from './Objectives';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
 
@@ -35,8 +35,11 @@ const ActivityDialog = props => {
           <Overview activityIndex={activityIndex} />
           <StandardsAndConditions activityIndex={activityIndex} />
         </TabPanel>
-        <TabPanel id={`activity-goals-${activityIndex}-tab`} tab="Goals">
-          <Goals activityIndex={activityIndex} />
+        <TabPanel
+          id={`activity-goals-${activityIndex}-tab`}
+          tab="Objectives and key results"
+        >
+          <Objectives activityIndex={activityIndex} />
           <Schedule activityIndex={activityIndex} />
         </TabPanel>
         <TabPanel

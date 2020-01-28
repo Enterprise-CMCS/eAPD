@@ -28,6 +28,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
         "type": [Function],
       }
     }
+    extraItemButtons={Array []}
     list={
       Array [
         Object {
