@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 const FormAndReviewItem = ({
   collapsedComponent: Collapsed,
   expandedComponent: Expanded,
-  initialCollapsed,
+  initialExpanded,
   ...rest
 }) => {
   const container = useRef(null);
-  const [collapsed, setCollapsed] = useState(initialCollapsed);
+  const [collapsed, setCollapsed] = useState(!initialExpanded);
   const collapse = useCallback(() => {
     const { top } = container.current.getBoundingClientRect();
     if (top < 0 || top > window.innerHeight) {
@@ -47,11 +47,11 @@ FormAndReviewItem.propTypes = {
     PropTypes.string,
     PropTypes.elementType
   ]).isRequired,
-  initialCollapsed: PropTypes.bool
+  initialExpanded: PropTypes.bool
 };
 
 FormAndReviewItem.defaultProps = {
-  initialCollapsed: true
+  initialExpanded: false
 };
 
 const FormAndReviewList = ({
@@ -88,7 +88,7 @@ const FormAndReviewList = ({
             collapsedComponent={collapsed}
             expandedComponent={expanded}
             index={index}
-            initialCollapsed={!(hasAdded && index === list.length - 1)}
+            initialExpanded={hasAdded && index === list.length - 1}
             item={item}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
