@@ -41,25 +41,23 @@ export const fromAPI = apdAPI => {
         statePersonnel,
         ...activity
       }) => ({
-        key: generateKey(),
-
         ...activity,
+
+        key: generateKey(),
 
         // These properties need some massaging into reducer state
         contractorResources: contractorResources.map(c => ({
-          key: generateKey(),
-          ...c
+          ...c,
+          key: generateKey()
         })),
 
         expenses: expenses.map(e => ({
           key: generateKey(),
-          initialCollapsed: true,
           ...e
         })),
 
         objectives: objectives.map(o => ({
           ...o,
-          initialCollapsed: true,
           key: generateKey(),
           keyResults: o.keyResults.map(kr => ({
             key: generateKey(),
@@ -69,13 +67,11 @@ export const fromAPI = apdAPI => {
 
         schedule: schedule.map(s => ({
           ...s,
-          initialCollapsed: true,
           key: generateKey()
         })),
 
         statePersonnel: statePersonnel.map(s => ({
           key: generateKey(),
-          initialCollapsed: true,
           ...s
         }))
       })
@@ -88,7 +84,6 @@ export const fromAPI = apdAPI => {
 
     keyPersonnel: keyPersonnel.map(kp => ({
       ...kp,
-      initialCollapsed: true,
       key: generateKey()
     }))
   };

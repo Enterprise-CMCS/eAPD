@@ -1,12 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FormAndReviewList component add button calls add event 1`] = `
+<div
+  className="form-and-review-list "
+>
+  <FormAndReviewItem
+    collapsedComponent={[MockFunction]}
+    expandedComponent={[MockFunction]}
+    extraButtons={Array []}
+    index={0}
+    initialExpanded={false}
+    item={
+      Object {
+        "key": "item 1",
+      }
+    }
+    key="item 1"
+    onDeleteClick={[Function]}
+  />
+  <FormAndReviewItem
+    collapsedComponent={[MockFunction]}
+    expandedComponent={[MockFunction]}
+    extraButtons={Array []}
+    index={1}
+    initialExpanded={true}
+    item={
+      Object {
+        "key": "item2",
+      }
+    }
+    key="item2"
+    onDeleteClick={[Function]}
+  />
+  <Button
+    className="visibility--screen"
+    onClick={[Function]}
+    type="button"
+  >
+    text for adding a new button
+  </Button>
+</div>
+`;
+
 exports[`FormAndReviewList component expands and collapses items 1`] = `
 <FormAndReviewItem
   collapsedComponent={[Function]}
   expandedComponent={[Function]}
   extraButtons={Array []}
   index={1}
-  initialCollapsed={true}
+  initialExpanded={false}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -33,7 +75,7 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
   expandedComponent={[Function]}
   extraButtons={Array []}
   index={1}
-  initialCollapsed={true}
+  initialExpanded={false}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -73,7 +115,7 @@ exports[`FormAndReviewList component expands and collapses items 3`] = `
   expandedComponent={[Function]}
   extraButtons={Array []}
   index={1}
-  initialCollapsed={true}
+  initialExpanded={false}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -108,7 +150,7 @@ exports[`FormAndReviewList component handles extra buttons on list items passes 
       ]
     }
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
         "key": "key 1",
@@ -119,7 +161,7 @@ exports[`FormAndReviewList component handles extra buttons on list items passes 
   />
   <Button
     className="visibility--screen"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     Add another
@@ -134,6 +176,7 @@ exports[`FormAndReviewList component handles extra buttons on list items renders
   <Expanded
     collapse={[Function]}
     index={1}
+    initialCollapsed={false}
   />
   <Button
     onClick={[Function]}
@@ -170,10 +213,10 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
     expandedComponent={[MockFunction]}
     extraButtons={Array []}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": true,
+        "initialExpanded": false,
         "key": "one",
       }
     }
@@ -185,10 +228,10 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
     expandedComponent={[MockFunction]}
     extraButtons={Array []}
     index={1}
-    initialCollapsed={false}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": false,
+        "initialExpanded": true,
         "key": "two",
       }
     }
@@ -197,7 +240,7 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
   />
   <Button
     className="visibility--screen"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     text for adding a new button
@@ -214,10 +257,9 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
     expandedComponent={[MockFunction]}
     extraButtons={Array []}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": true,
         "key": "one",
       }
     }
@@ -226,7 +268,7 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
   />
   <Button
     className="visibility--screen"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     text for adding a new button
@@ -243,10 +285,9 @@ exports[`FormAndReviewList component renders properly with just one item and all
     expandedComponent={[MockFunction]}
     extraButtons={Array []}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": true,
         "key": "one",
       }
     }
@@ -255,7 +296,7 @@ exports[`FormAndReviewList component renders properly with just one item and all
   />
   <Button
     className="visibility--screen"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     text for adding a new button
@@ -272,10 +313,10 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
     expandedComponent={[MockFunction]}
     extraButtons={Array []}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": true,
+        "initialExpanded": false,
         "key": "one",
       }
     }
@@ -287,10 +328,10 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
     expandedComponent={[MockFunction]}
     extraButtons={Array []}
     index={1}
-    initialCollapsed={false}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": false,
+        "initialExpanded": true,
         "key": "two",
       }
     }
@@ -299,7 +340,7 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
   />
   <Button
     className="visibility--screen"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     text for adding a new button
@@ -319,7 +360,7 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
   </Alert>
   <Button
     className="visibility--screen"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     text for adding a new button
@@ -333,7 +374,7 @@ exports[`FormAndReviewList component renders properly with no items and noDataMe
 >
   <Button
     className="visibility--screen"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     text for adding a new button
