@@ -15,7 +15,8 @@ describe('save button component', () => {
     error: false,
     needsSave: false,
     saveApd: sinon.spy(),
-    working: false
+    working: false,
+    savedAt: 'some time recently'
   };
 
   beforeEach(() => {
@@ -88,13 +89,19 @@ describe('save button component', () => {
       patch: [],
       working: {
         saveApd: 'save apd working'
+      },
+      apd: {
+        data: {
+          updated: 'noonish'
+        }
       }
     };
 
     expect(mapStateToProps(state)).toEqual({
       error: 'save apd error',
       needsSave: false,
-      working: 'save apd working'
+      working: 'save apd working',
+      savedAt: 'noonish'
     });
   });
 

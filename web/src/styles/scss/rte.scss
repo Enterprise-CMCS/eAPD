@@ -1,0 +1,17 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.rte--wrapper {
+  min-height: 100px;
+  background-color: $color-gray-lightest;
+  position: relative;
+  &:before {
+    height: 100px;
+    width: 100%;
+    content: 'Loading text editor...';
+    position: absolute;
+    top: 35px;
+    text-align: center;
+    color: $color-gray;
+    font-style: italic;
+  }
+}
