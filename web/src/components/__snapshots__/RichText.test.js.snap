@@ -6,6 +6,7 @@ exports[`RichText component renders as expected 1`] = `
 >
   <Editor
     cloudChannel="5"
+    id="test-id"
     init={
       Object {
         "autoresize_bottom_margin": 0,
