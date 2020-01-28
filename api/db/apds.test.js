@@ -40,7 +40,14 @@ tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.test('getting all APDs for a state', async test => {
     db.where.withArgs('state_id', 'state id').returnsThis();
     db.select
-      .withArgs('document', 'id', 'state_id', 'status', 'updated_at')
+      .withArgs(
+        'created_at',
+        'document',
+        'id',
+        'state_id',
+        'status',
+        'updated_at'
+      )
       .resolves('some apds');
 
     const apds = await getAllAPDsByState('state id', { db });
@@ -51,7 +58,14 @@ tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.test('getting a single APD by ID', async test => {
     db.where.withArgs('id', 'apd id').returnsThis();
     db.first
-      .withArgs('document', 'id', 'state_id', 'status', 'updated_at')
+      .withArgs(
+        'created_at',
+        'document',
+        'id',
+        'state_id',
+        'status',
+        'updated_at'
+      )
       .resolves('an apd');
 
     const apds = await getAPDByID('apd id', { db });
@@ -63,7 +77,14 @@ tap.test('database wrappers / apds', async apdsTests => {
     db.where.withArgs('id', 'apd id').returnsThis();
     db.andWhere.withArgs('state_id', 'state id').returnsThis();
     db.first
-      .withArgs('document', 'id', 'state_id', 'status', 'updated_at')
+      .withArgs(
+        'created_at',
+        'document',
+        'id',
+        'state_id',
+        'status',
+        'updated_at'
+      )
       .resolves('an apd');
 
     const apds = await getAPDByIDAndState('apd id', 'state id', { db });

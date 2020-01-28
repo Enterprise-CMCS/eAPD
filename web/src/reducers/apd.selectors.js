@@ -118,10 +118,13 @@ export const selectIncentivePaymentTotals = createSelector(
   }
 );
 
-export const selectApdDashboard = createSelector(
-  [selectApds],
-  ({ byId }) =>
-    Object.values(byId).map(({ id, name, updated }) => ({ id, name, updated }))
+export const selectApdDashboard = createSelector([selectApds], ({ byId }) =>
+  Object.values(byId).map(({ id, created, name, updated }) => ({
+    id,
+    created,
+    name,
+    updated
+  }))
 );
 
 export const selectLastSavedTimestamp = state => state.apd.data.updated;

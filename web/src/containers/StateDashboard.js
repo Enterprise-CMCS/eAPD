@@ -96,7 +96,7 @@ const StateDashboard = (
                 <File size="lg" color="#046b99" />
               </div>
               <div className="ds-u-display--inline-block">
-                <h3 className="ds-u-margin-top--0">
+                <h3 className="ds-u-margin-y--0">
                   <a href="#!" onClick={open(apd.id)}>
                     <span className="ds-u-visibility--screen-reader">
                       Edit APD:{' '}
@@ -107,6 +107,9 @@ const StateDashboard = (
                 <ul className="ds-c-list--bare">
                   <li>
                     <strong>Last edited:</strong> {apd.updated}
+                  </li>
+                  <li>
+                    <strong>Created:</strong> {apd.created}
                   </li>
                 </ul>
               </div>
@@ -157,7 +160,4 @@ const mapDispatchToProps = {
   selectApd
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StateDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(StateDashboard);

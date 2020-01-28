@@ -17,6 +17,7 @@ import { setApdToSelectOnLoad } from '../actions/app';
 import StateProfile from '../components/ApdStateProfile';
 
 import {
+  getAPDCreation,
   getAPDName,
   getAPDYearRange,
   getIsAnAPDSelected
@@ -25,6 +26,7 @@ import {
 import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
 const ApdApplication = ({
+  apdCreated,
   apdName,
   apdSelected,
   isAdmin,
@@ -47,8 +49,10 @@ const ApdApplication = ({
         <Sidebar place={place} />
         <div className="site-main ds-u-padding-top--2">
           <h1 id="start-main-content" className="ds-h1 apd--title">
-            <span className="ds-h6 ds-u-display--block">{apdName}</span>
-            {place.name} {year} APD
+            <span className="ds-h6 ds-u-display--block">
+              <strong>Created:</strong> {apdCreated}
+            </span>
+            {apdName} | FFY {year}
           </h1>
           <StateProfile />
           <ApdSummary />
@@ -68,6 +72,7 @@ const ApdApplication = ({
 };
 
 ApdApplication.propTypes = {
+  apdCreated: PropTypes.string.isRequired,
   apdName: PropTypes.string,
   apdSelected: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
@@ -79,6 +84,7 @@ ApdApplication.propTypes = {
 ApdApplication.defaultProps = { apdName: '' };
 
 const mapStateToProps = state => ({
+  apdCreated: getAPDCreation(state),
   apdName: getAPDName(state),
   apdSelected: getIsAnAPDSelected(state),
   isAdmin: getIsAdmin(state),

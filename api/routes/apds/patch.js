@@ -57,6 +57,7 @@ module.exports = (
         );
 
         const {
+          created_at: created,
           document: currentDocument,
           state_id: stateID,
           status
@@ -100,6 +101,7 @@ module.exports = (
         return res.send({
           ...updatedDocument,
           id: req.params.id,
+          created,
           state: stateID,
           status,
           updated: updateTime
