@@ -40,50 +40,5 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     </p>
     <hr />
   </div>
-  <div
-    className="mb3"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h6",
-        }
-      }
-      reverse={false}
-      source="activities.schedule.milestone.instruction"
-    />
-    <hr />
-    <FormAndReviewList
-      activityIndex={7}
-      addButtonText="Add another milestone"
-      allowDeleteAll={false}
-      className={null}
-      collapsed={[Function]}
-      expanded={
-        Object {
-          "$$typeof": Symbol(react.memo),
-          "WrappedComponent": [Function],
-          "compare": null,
-          "displayName": "Connect(MilestoneForm)",
-          "type": [Function],
-        }
-      }
-      extraItemButtons={Array []}
-      list={
-        Array [
-          Object {
-            "endDate": "1945-05-05",
-            "key": "milestone 1",
-            "milestone": "Liberation Day",
-          },
-        ]
-      }
-      noDataMessage="Add milestones for this activity."
-      onAddClick={[Function]}
-      onDeleteClick={[Function]}
-    />
-  </div>
 </Subsection>
 `;
