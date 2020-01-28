@@ -10,7 +10,7 @@ exports[`save button component handles changing based on behavior shows error al
   >
     <Alert
       className="ds-u-margin-bottom--2"
-      role="region"
+      role="alert"
       variation="error"
     >
       Now there is an error
@@ -22,6 +22,13 @@ exports[`save button component handles changing based on behavior shows error al
     variation="success"
   >
     Saved
+     
+    <span
+      className="ds-u-visibility--screen-reader"
+    >
+      on 
+      some time recently
+    </span>
   </Button>
 </div>
 `;
@@ -48,6 +55,13 @@ exports[`save button component handles changing based on behavior shows success 
     variation="success"
   >
     Saved
+     
+    <span
+      className="ds-u-visibility--screen-reader"
+    >
+      on 
+      some time recently
+    </span>
   </Button>
 </div>
 `;
@@ -66,6 +80,13 @@ exports[`save button component handles changing based on behavior shows success 
     variation="success"
   >
     Saved
+     
+    <span
+      className="ds-u-visibility--screen-reader"
+    >
+      on 
+      some time recently
+    </span>
   </Button>
 </div>
 `;
@@ -84,6 +105,13 @@ exports[`save button component renders if does not need saving, not working, no 
     variation="success"
   >
     Saved
+     
+    <span
+      className="ds-u-visibility--screen-reader"
+    >
+      on 
+      some time recently
+    </span>
   </Button>
 </div>
 `;
@@ -102,6 +130,13 @@ exports[`save button component renders if does not need saving, working, no erro
     variation="success"
   >
     Saved
+     
+    <span
+      className="ds-u-visibility--screen-reader"
+    >
+      on 
+      some time recently
+    </span>
   </Button>
 </div>
 `;
