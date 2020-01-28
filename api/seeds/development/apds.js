@@ -102,18 +102,43 @@ exports.seed = async knex => {
                 }
               ],
               fundingSource: 'HIT',
-              goals: [
+              objectives: [
                 {
-                  description:
-                    'Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.',
                   objective:
-                    '- Complete SLR modifications by 11/1/18\n- Accept attestations through 4/30/19.'
+                    'Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.',
+                  keyResults: [
+                    {
+                      baseline: '13% complete',
+                      keyResult: 'Complete SLR modifications by 11/1/18',
+                      target: '100% complete'
+                    },
+                    {
+                      baseline: 'not accepting attestations',
+                      keyResult: 'Accept attestations through 4/30/19.',
+                      target: 'all attestations accepted'
+                    }
+                  ]
                 },
                 {
-                  description:
-                    'Provide support to EPs and EHs through attestation process.',
                   objective:
-                    "- Guidance available on Tycho's websites\n- Office hours availble for EPs and EHs\n- Site visits, as needed, for EPs and EHs"
+                    'Provide support to EPs and EHs through attestation process.',
+                  keyResults: [
+                    {
+                      baseline: 'not available',
+                      keyResult: "Guidance available on Tycho's websites",
+                      target: 'available'
+                    },
+                    {
+                      baseline: 'not available',
+                      keyResult: 'Office hours availble for EPs and EHs',
+                      target: 'available'
+                    },
+                    {
+                      baseline: 'unvisited sites',
+                      keyResult: 'Site visits, as needed, for EPs and EHs',
+                      target: 'sites visited'
+                    }
+                  ]
                 }
               ],
               name: 'Program Administration',
@@ -310,12 +335,23 @@ exports.seed = async knex => {
                 }
               ],
               fundingSource: 'MMIS',
-              goals: [
+              objectives: [
                 {
-                  description:
-                    'Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.',
                   objective:
-                    '- Hire contracted support to build an open API for the DW that the HIE and PHR can consume.\n- Provide support for using open API for DW'
+                    'Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.',
+                  keyResults: [
+                    {
+                      baseline: 'no contractor',
+                      keyResult:
+                        'Hire contracted support to build an open API for the DW that the HIE and PHR can consume.',
+                      target: 'yes contractor'
+                    },
+                    {
+                      baseline: 'no support',
+                      keyResult: 'Provide support for using open API for DW',
+                      target: 'yes support'
+                    }
+                  ]
                 }
               ],
               name: 'HIE Claims Data Analytics',
@@ -474,14 +510,26 @@ exports.seed = async knex => {
                 }
               ],
               fundingSource: 'HIE',
-              goals: [
+              objectives: [
                 {
-                  description: 'Plan to do a thing.',
-                  objective: 'Do a thing.'
+                  objective: 'Plan to do a thing.',
+                  keyResults: [
+                    {
+                      baseline: '',
+                      keyResult: 'Do a thing.',
+                      target: ''
+                    }
+                  ]
                 },
                 {
-                  description: 'Onboard 100 providers.',
-                  objective: '100 providers onboarded.'
+                  objective: 'Onboard 100 providers.',
+                  keyResults: [
+                    {
+                      baseline: '7 providers onboarded',
+                      keyResult: '100 providers onboarded.',
+                      target: '100 providers onboarded'
+                    }
+                  ]
                 }
               ],
               name: 'HIE Enhancement and Onboarding',
@@ -633,10 +681,16 @@ exports.seed = async knex => {
                 }
               ],
               fundingSource: 'HIE',
-              goals: [
+              objectives: [
                 {
-                  description: 'Build blue button.',
-                  objective: 'Test blue button with 10 providers.'
+                  objective: 'Build blue button.',
+                  keyResults: [
+                    {
+                      baseline: '0 providers',
+                      keyResult: 'Test blue button with 10 providers.',
+                      target: '10 providers'
+                    }
+                  ]
                 }
               ],
               name: 'Medicaid Blue Button',
@@ -758,15 +812,27 @@ exports.seed = async knex => {
                 }
               ],
               fundingSource: 'HIE',
-              goals: [
+              objectives: [
                 {
-                  description: 'Identifiy PH needs',
-                  objective:
-                    'Complete a build/implementation plan by Summery 2020'
+                  objective: 'Identifiy PH needs',
+                  keyResults: [
+                    {
+                      baseline: 'incomplete',
+                      keyResult:
+                        'Complete a build/implementation plan by Summery 2020',
+                      target: 'complete'
+                    }
+                  ]
                 },
                 {
-                  description: 'Connect PH systems to HIE',
-                  objective: 'Connect all 3 PH systems to HIE by Fall 2020'
+                  objective: 'Connect PH systems to HIE',
+                  keyResults: [
+                    {
+                      baseline: '0 systems connected',
+                      keyResult: 'Connect all 3 PH systems to HIE by Fall 2020',
+                      target: '3 systems connected'
+                    }
+                  ]
                 }
               ],
               name: 'Public Health System Modernization',
@@ -883,11 +949,17 @@ exports.seed = async knex => {
                 }
               ],
               fundingSource: 'HIT',
-              goals: [
+              objectives: [
                 {
-                  description: 'Complete MITA 3.0 HITECH portion.',
-                  objective:
-                    '&nbsp;Complete MITA 3.0 HITECH portion by July 2020'
+                  objective: 'Complete MITA 3.0 HITECH portion.',
+                  keyResults: [
+                    {
+                      baseline: '',
+                      keyResult:
+                        'Complete MITA 3.0 HITECH portion by July 2020',
+                      target: ''
+                    }
+                  ]
                 }
               ],
               name: 'MITA 3.0 Assessment',

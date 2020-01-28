@@ -36,7 +36,7 @@ export const fromAPI = apdAPI => {
       ({
         contractorResources,
         expenses,
-        goals,
+        objectives,
         schedule,
         statePersonnel,
         ...activity
@@ -56,9 +56,13 @@ export const fromAPI = apdAPI => {
           ...e
         })),
 
-        goals: goals.map(g => ({
-          ...g,
-          key: generateKey()
+        objectives: objectives.map(o => ({
+          ...o,
+          key: generateKey(),
+          keyResults: o.keyResults.map(kr => ({
+            key: generateKey(),
+            ...kr
+          }))
         })),
 
         schedule: schedule.map(s => ({

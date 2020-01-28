@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity Objectives and Key Results component renders properly 1`] = `
+<Subsection
+  headerClassName={null}
+  id="activity-goals-activity index"
+  nested={false}
+  resource="activities.goals"
+>
+  <FormAndReviewList
+    activityIndex="activity index"
+    addButtonText="Add another objective"
+    allowDeleteAll={false}
+    className={null}
+    collapsed={[Function]}
+    expanded={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(ObjectiveAndKeyResultForm)",
+        "type": [Function],
+      }
+    }
+    extraItemButtons={
+      Array [
+        Object {
+          "onClick": [Function],
+          "text": "Add another key result",
+        },
+      ]
+    }
+    handleChange={[Function]}
+    list={
+      Array [
+        Object {
+          "key": "objective 1",
+        },
+        Object {
+          "key": "objective 2",
+        },
+        Object {
+          "key": "objective 3",
+        },
+      ]
+    }
+    noDataMessage="Additional costs for this activity are missing."
+    onAddClick={[Function]}
+    onDeleteClick={[Function]}
+  />
+</Subsection>
+`;

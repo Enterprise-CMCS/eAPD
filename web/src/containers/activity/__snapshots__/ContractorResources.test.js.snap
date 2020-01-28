@@ -22,6 +22,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
         "type": [Function],
       }
     }
+    extraItemButtons={Array []}
     list={
       Array [
         Object {
