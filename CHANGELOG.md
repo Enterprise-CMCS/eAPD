@@ -17,6 +17,8 @@ Anticipated release: February 3, 2020
 
 #### ⚙️ Behind the scenes
 
+- Split up some code components to make them more reusable ([#2005])
+
 # Previous releases
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
@@ -29,3 +31,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2026]: https://github.com/18F/cms-hitech-apd/issues/2026
 [#2017]: https://github.com/18F/cms-hitech-apd/issues/2017
 [#2020]: https://github.com/18F/cms-hitech-apd/pull/2028
+[#2005]: https://github.com/18F/cms-hitech-apd/issues/2005

@@ -3,6 +3,7 @@ import contractorResources from './contractorResources.yaml';
 import costAllocate from './costAllocate.yaml';
 import expenses from './expenses.yaml';
 import goals from './goals.yaml';
+import milestones from './milestones.yaml';
 import overview from './overview.yaml';
 import schedule from './schedule.yaml';
 import standardsAndConditions from './standardsAndConditions.yaml';
@@ -14,6 +15,7 @@ export default {
   costAllocate,
   expenses,
   goals,
+  milestones,
   overview,
   schedule,
   standardsAndConditions,
