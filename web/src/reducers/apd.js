@@ -215,7 +215,6 @@ export const getKeyPersonnel = (years = []) => ({
   name: '',
   position: '',
   key: generateKey(),
-  initialCollapsed: false
 });
 
 export const getAPDCreation = ({

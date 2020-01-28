@@ -7,7 +7,6 @@ export const setKeyGenerator = fn => {
 };
 
 export const newMilestone = (milestone = '', endDate = '') => ({
-  initialCollapsed: false,
   key: generateKey(),
   milestone,
   endDate
@@ -22,7 +21,6 @@ export const newObjectiveKeyResult = () => ({
 
 export const newObjective = () => ({
   key: generateKey(),
-  initialCollapsed: false,
   objective: '',
   keyResults: [newObjectiveKeyResult()]
 });
@@ -30,7 +28,6 @@ export const newObjective = () => ({
 export const statePersonDefaultYear = () => ({ amt: '', perc: '' });
 export const newStatePerson = years => ({
   key: generateKey(),
-  initialCollapsed: false,
   title: '',
   description: '',
   years: arrToObj(years, statePersonDefaultYear())
@@ -40,7 +37,6 @@ export const contractorDefaultYear = () => 0;
 export const contractorDefaultHourly = () => ({ hours: '', rate: '' });
 export const newContractor = years => ({
   key: generateKey(),
-  initialCollapsed: false,
   name: '',
   description: '',
   start: '',
@@ -58,7 +54,6 @@ export const expenseDefaultYear = () => 0;
 
 export const newExpense = years => ({
   key: generateKey(),
-  initialCollapsed: false,
   category: 'Hardware, software, and licensing',
   description: '',
   years: arrToObj(years, expenseDefaultYear())
@@ -97,7 +92,6 @@ export const newActivity = ({
   description: '',
   expenses: [newExpense(years)],
   fundingSource,
-  initialCollapsed: false,
   key: generateKey(),
   name,
   plannedEndDate: '',
