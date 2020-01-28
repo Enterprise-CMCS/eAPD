@@ -67,7 +67,8 @@ describe('application-level actions', () => {
         { type: 'FAKE_PUSH', pushRoute: '/apd' },
         {
           type: ARIA_ANNOUNCE_CHANGE,
-          message: 'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
+          message:
+            'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
         }
       ];
 
@@ -311,13 +312,14 @@ describe('application-level actions', () => {
     const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
     const expectedActions = [
-      { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading' },
+      { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
       { type: SELECT_APD, apd: 'deserialized apd' },
       { type: UPDATE_BUDGET, state },
       { type: 'FAKE_PUSH', pushRoute: testRoute },
       {
         type: ARIA_ANNOUNCE_CHANGE,
-        message: 'Your APD is loaded and ready to edit'
+        message:
+          'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
       }
     ];
 
