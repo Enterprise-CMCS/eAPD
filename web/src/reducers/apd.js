@@ -9,8 +9,9 @@ import {
   newActivity,
   newContractor,
   newExpense,
-  newGoal,
   newMilestone,
+  newObjective,
+  newObjectiveKeyResult,
   newStatePerson,
   quarterlyFFPEntry,
   statePersonDefaultYear
@@ -258,8 +259,11 @@ export const getPatchesForAddingItem = (state, path) => {
       if (/^\/activities\/\d+\/expenses\/-$/.test(path)) {
         return [{ op: 'add', path, value: newExpense(state.data.years) }];
       }
-      if (/^\/activities\/\d+\/goals\/-$/.test(path)) {
-        return [{ op: 'add', path, value: newGoal() }];
+      if (/^\/activities\/\d+\/objectives\/-$/.test(path)) {
+        return [{ op: 'add', path, value: newObjective() }];
+      }
+      if (/^\/activities\/\d+\/objectives\/\d+\/keyResults\/-$/.test(path)) {
+        return [{ op: 'add', path, value: newObjectiveKeyResult() }];
       }
       if (/^\/activities\/\d+\/schedule\/-$/.test(path)) {
         return [{ op: 'add', path, value: newMilestone() }];

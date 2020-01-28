@@ -58,7 +58,12 @@ tap.test('APD data initializer', async test => {
           }
         ],
         fundingSource: 'HIT',
-        goals: [{ description: '', objective: '' }],
+        objectives: [
+          {
+            objective: '',
+            keyResults: [{ baseline: '', keyResult: '', target: '' }]
+          }
+        ],
         name: 'Program Administration',
         plannedEndDate: '',
         plannedStartDate: '',

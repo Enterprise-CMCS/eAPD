@@ -52,13 +52,10 @@ export const makeSelectCostAllocateFFP = () =>
   );
 
 export const makeSelectCostAllocateFFPBudget = () =>
-  createSelector(
-    [selectApdData, selectBudgetForActivity],
-    (apd, budget) => ({
-      quarterlyFFP: budget ? budget.quarterlyFFP : null,
-      years: apd.years
-    })
-  );
+  createSelector([selectApdData, selectBudgetForActivity], (apd, budget) => ({
+    quarterlyFFP: budget ? budget.quarterlyFFP : null,
+    years: apd.years
+  }));
 
 export const selectActivitySchedule = createSelector(
   [selectAllActivities],
@@ -117,6 +114,14 @@ export const selectContractorsByActivityIndex = (state, { activityIndex }) => {
   const activity = selectActivityByIndex(state, { activityIndex });
   if (activity) {
     return activity.contractorResources;
+  }
+  return null;
+};
+
+export const selectOKRsByActivityIndex = (state, { activityIndex }) => {
+  const activity = selectActivityByIndex(state, { activityIndex });
+  if (activity) {
+    return activity.objectives;
   }
   return null;
 };

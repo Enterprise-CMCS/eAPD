@@ -587,23 +587,30 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new activity goal', () => {
+    it('should add a new activity objective and key result', () => {
       const state = {
         data: {
-          activities: [{ goals: [] }]
+          activities: [{ objectives: [] }]
         }
       };
 
       expect(
-        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/goals/-` })
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/objectives/-` })
       ).toEqual({
         data: {
           activities: [
             {
-              goals: [
+              objectives: [
                 {
-                  description: '',
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  keyResults: [
+                    {
+                      key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                      keyResult: '',
+                      baseline: '',
+                      target: ''
+                    }
+                  ],
                   objective: ''
                 }
               ]

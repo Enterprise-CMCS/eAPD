@@ -6,16 +6,23 @@ export const setKeyGenerator = fn => {
   generateKey = fn;
 };
 
-export const newGoal = () => ({
-  key: generateKey(),
-  description: '',
-  objective: ''
-});
-
 export const newMilestone = (milestone = '', endDate = '') => ({
   key: generateKey(),
   milestone,
   endDate
+});
+
+export const newObjectiveKeyResult = () => ({
+  key: generateKey(),
+  baseline: '',
+  keyResult: '',
+  target: ''
+});
+
+export const newObjective = () => ({
+  key: generateKey(),
+  objective: '',
+  keyResults: [newObjectiveKeyResult()]
 });
 
 export const statePersonDefaultYear = () => ({ amt: '', perc: '' });
@@ -73,8 +80,7 @@ export const quarterlyFFPEntry = () =>
 export const newActivity = ({
   name = '',
   fundingSource = 'HIT',
-  years = [],
-  ...rest
+  years = []
 } = {}) => ({
   alternatives: '',
   contractorResources: [newContractor(years)],
@@ -86,11 +92,11 @@ export const newActivity = ({
   description: '',
   expenses: [newExpense(years)],
   fundingSource,
-  goals: [newGoal()],
   key: generateKey(),
   name,
   plannedEndDate: '',
   plannedStartDate: '',
+  objectives: [newObjective()],
   schedule: [newMilestone()],
   statePersonnel: [newStatePerson(years)],
   summary: '',
@@ -111,6 +117,5 @@ export const newActivity = ({
   years,
   meta: {
     expanded: name === 'Program Administration'
-  },
-  ...rest
+  }
 });
