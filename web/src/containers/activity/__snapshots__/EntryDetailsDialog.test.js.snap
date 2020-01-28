@@ -35,6 +35,9 @@ exports[`the Activity Dialog component renders correctly 1`] = `
       <Connect(Schedule)
         activityIndex={2}
       />
+      <Connect(Milestone)
+        activityIndex={2}
+      />
     </TabPanel>
     <TabPanel
       id="activity-cost-categories-2-tab"
