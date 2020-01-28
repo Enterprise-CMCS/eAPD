@@ -13,10 +13,11 @@ export const ariaAnnounceFFPQuarterly = (aKey, year, q, name) => (
 
 export const ariaAnnounceApdLoading = () => ({
   type: ARIA_ANNOUNCE_CHANGE,
-  message: 'Your APD is loading'
+  message: 'Your APD is loading.'
 });
 
 export const ariaAnnounceApdLoaded = () => ({
   type: ARIA_ANNOUNCE_CHANGE,
-  message: 'Your APD is loaded and ready to edit'
+  message:
+    'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
 });

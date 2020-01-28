@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ObjectiveAndKeyResultReview component renders correctly 1`] = `
+<StandardReview
+  editHref={null}
+  heading="Objective:"
+  headingLevel={6}
+  onDeleteClick={[MockFunction]}
+  onEditClick={[MockFunction]}
+>
+  <h5
+    className="ds-h4 ds-u-margin-top--2"
+  >
+    objective description
+  </h5>
+  <p
+    className="ds-u-margin-top--2"
+    key="kr 1"
+  >
+    <strong>
+      Key result:
+    </strong>
+     
+    first kr
+    <br />
+    <strong>
+      Target:
+    </strong>
+     
+    93 million miles
+    <br />
+    <strong>
+      Baseline:
+    </strong>
+     
+    37 inches
+  </p>
+  <p
+    className="ds-u-margin-top--2"
+    key="kr 2"
+  >
+    <strong>
+      Key result:
+    </strong>
+     
+    second kr
+    <br />
+    <strong>
+      Target:
+    </strong>
+     
+    1 AU
+    <br />
+    <strong>
+      Baseline:
+    </strong>
+     
+    the moon
+  </p>
+</StandardReview>
+`;

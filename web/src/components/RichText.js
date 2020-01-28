@@ -91,22 +91,24 @@ class RichText extends Component {
     const { content } = this.state;
 
     return (
-      <Editor
-        id={id}
-        init={{
-          autoresize_bottom_margin: 0,
-          browser_spellcheck: true,
-          images_upload_handler: uploadImage(upload, id, onSync),
-          menubar: '',
-          paste_data_images: true,
-          plugins: ['autoresize', 'paste', 'spellchecker'],
-          setup: setupTinyMCE(upload),
-          toolbar:
-            'undo redo | style | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | eapdImageUpload'
-        }}
-        value={content}
-        onEditorChange={this.onEditorChange}
-      />
+      <div className="rte--wrapper">
+        <Editor
+          id={id}
+          init={{
+            autoresize_bottom_margin: 0,
+            browser_spellcheck: true,
+            images_upload_handler: uploadImage(upload, id, onSync),
+            menubar: '',
+            paste_data_images: true,
+            plugins: ['autoresize', 'paste', 'spellchecker'],
+            setup: setupTinyMCE(upload),
+            toolbar:
+              'undo redo | style | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | eapdImageUpload'
+          }}
+          value={content}
+          onEditorChange={this.onEditorChange}
+        />
+      </div>
     );
   }
 }
@@ -126,7 +128,10 @@ RichText.defaultProps = {
 
 const mapDispatchToProps = { uploadFile };
 
-export default connect(null, mapDispatchToProps)(RichText);
+export default connect(
+  null,
+  mapDispatchToProps
+)(RichText);
 
 export {
   RichText as plain,

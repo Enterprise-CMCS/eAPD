@@ -63,13 +63,19 @@ Object {
         },
       ],
       "fundingSource": "HIT",
-      "goals": Array [
+      "name": "Program Administration",
+      "objectives": Array [
         Object {
-          "description": "",
+          "keyResults": Array [
+            Object {
+              "baseline": "",
+              "keyResult": "",
+              "target": "",
+            },
+          ],
           "objective": "",
         },
       ],
-      "name": "Program Administration",
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {

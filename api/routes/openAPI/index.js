@@ -202,20 +202,6 @@ module.exports = {
                   }
                 }
               },
-              goals: arrayOf({
-                type: 'object',
-                description: 'Activity goal',
-                properties: {
-                  description: {
-                    type: 'string',
-                    description: 'Goal description'
-                  },
-                  objective: {
-                    type: 'string',
-                    description: 'Goal objective'
-                  }
-                }
-              }),
               expenses: arrayOf({
                 type: 'object',
                 description: 'Activity expense',
@@ -239,6 +225,30 @@ module.exports = {
                           'Expense amount for the given federal fiscal year'
                       }
                     }
+                  }
+                }
+              }),
+              objectives: arrayOf({
+                type: 'object',
+                description: 'Activity objective',
+                properties: {
+                  keyResults: arrayOf({
+                    type: 'object',
+                    properties: {
+                      baseline: {
+                        type: 'string',
+                        description: 'Key result baseline'
+                      },
+                      keyResult: { type: 'string', description: 'Key result' },
+                      target: {
+                        type: 'string',
+                        description: 'Key result target'
+                      }
+                    }
+                  }),
+                  objective: {
+                    type: 'string',
+                    description: 'Objective description'
                   }
                 }
               }),

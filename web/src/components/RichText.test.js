@@ -27,7 +27,7 @@ describe('RichText component', () => {
     const onSync = jest.fn();
     const component = shallow(
       <RichText onSync={onSync} uploadFile={jest.fn()} />
-    );
+    ).find('Editor');
     component.prop('onEditorChange')('this is the new stuff');
     expect(onSync).toHaveBeenCalledWith('this is the new stuff');
   });
