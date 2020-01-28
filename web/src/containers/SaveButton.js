@@ -7,11 +7,17 @@ import stickybits from 'stickybits';
 import { saveApd } from '../actions/app';
 import { getSaveApdError } from '../reducers/errors';
 import { selectHasChanges } from '../reducers/patch.selectors';
+import { selectLastSavedTimestamp } from '../reducers/apd.selectors';
 import { getSaveApdWorking } from '../reducers/working';
 
-const getButtonContent = (dirty, working) => {
+const getButtonContent = (dirty, working, savedAt) => {
   if (!dirty) {
-    return 'Saved';
+    return (
+      <Fragment>
+        Saved{' '}
+        <span className="ds-u-visibility--screen-reader">on {savedAt}</span>
+      </Fragment>
+    );
   }
 
   if (working) {
@@ -25,7 +31,13 @@ const getButtonContent = (dirty, working) => {
   return 'Save';
 };
 
-const SaveButton = ({ error, needsSave, saveApd: action, working }) => {
+const SaveButton = ({
+  error,
+  needsSave,
+  saveApd: action,
+  working,
+  savedAt
+}) => {
   const [hasFetched, setHasFetched] = useState(false);
 
   // Success has to be derived.  It can't be stored in the app state because
@@ -34,7 +46,8 @@ const SaveButton = ({ error, needsSave, saveApd: action, working }) => {
   const success = useMemo(() => hasFetched && !working && !error, [
     error,
     hasFetched,
-    working
+    working,
+    savedAt
   ]);
 
   useEffect(() => {
@@ -66,7 +79,7 @@ const SaveButton = ({ error, needsSave, saveApd: action, working }) => {
   if (hasFetched) {
     if (error) {
       alert = (
-        <Alert variation="error" className="ds-u-margin-bottom--2">
+        <Alert variation="error" className="ds-u-margin-bottom--2" role="alert">
           {error}
         </Alert>
       );
@@ -90,7 +103,7 @@ const SaveButton = ({ error, needsSave, saveApd: action, working }) => {
     >
       <div className="save-button--alert">{alert}</div>
       <Button variation={buttonVariant} onClick={save}>
-        {getButtonContent(needsSave, working)}
+        {getButtonContent(needsSave, working, savedAt)}
       </Button>
     </div>
   );
@@ -100,17 +113,22 @@ SaveButton.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   needsSave: PropTypes.bool.isRequired,
   saveApd: PropTypes.func.isRequired,
-  working: PropTypes.bool.isRequired
+  working: PropTypes.bool.isRequired,
+  savedAt: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   error: getSaveApdError(state),
   needsSave: selectHasChanges(state),
-  working: getSaveApdWorking(state)
+  working: getSaveApdWorking(state),
+  savedAt: selectLastSavedTimestamp(state)
 });
 
 const mapDispatchToProps = { saveApd };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SaveButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SaveButton);
 
 export { SaveButton as plain, mapStateToProps, mapDispatchToProps };

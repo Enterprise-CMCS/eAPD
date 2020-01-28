@@ -4,6 +4,7 @@ Anticipated release: February 3, 2020
 
 #### 🚀 New features
 
+- Make autosave more screen-reader friendly [(#2020)]
 - Changed the APD name to `HITECH IAPD` ([#1821], [#1993])
 - Added loading state for rich text editor ([#2015])
 
@@ -20,3 +21,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#1993]: https://github.com/18F/cms-hitech-apd/issues/199
 [#2015]: https://github.com/18F/cms-hitech-apd/pull/2015
 [#2023]: https://github.com/18F/cms-hitech-apd/issues/2023
+[#2020]: https://github.com/18F/cms-hitech-apd/pull/2028
