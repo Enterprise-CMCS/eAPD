@@ -17,7 +17,6 @@ describe('activity state personnel costs subsection', () => {
       {
         category: 'test category',
         desc: 'test desc',
-        initialCollapsed: false,
         key: 'personnel key',
         years: {
           2027: 34355,

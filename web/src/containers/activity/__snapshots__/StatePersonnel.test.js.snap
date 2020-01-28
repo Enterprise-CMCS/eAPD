@@ -34,7 +34,6 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
         Object {
           "category": "test category",
           "desc": "test desc",
-          "initialCollapsed": false,
           "key": "personnel key",
           "years": Object {
             "2027": 34355,
