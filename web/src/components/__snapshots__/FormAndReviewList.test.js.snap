@@ -8,7 +8,7 @@ exports[`FormAndReviewList component add button calls add event 1`] = `
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
         "key": "item 1",
@@ -21,7 +21,7 @@ exports[`FormAndReviewList component add button calls add event 1`] = `
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
     index={1}
-    initialCollapsed={false}
+    initialExpanded={true}
     item={
       Object {
         "key": "item2",
@@ -44,7 +44,7 @@ exports[`FormAndReviewList component expands and collapses items 1`] = `
 <FormAndReviewItem
   collapsedComponent={[Function]}
   expandedComponent={[Function]}
-  initialCollapsed={true}
+  initialExpanded={false}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -68,7 +68,7 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
 <FormAndReviewItem
   collapsedComponent={[Function]}
   expandedComponent={[Function]}
-  initialCollapsed={true}
+  initialExpanded={false}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -105,7 +105,7 @@ exports[`FormAndReviewList component expands and collapses items 3`] = `
 <FormAndReviewItem
   collapsedComponent={[Function]}
   expandedComponent={[Function]}
-  initialCollapsed={true}
+  initialExpanded={false}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -133,10 +133,10 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": true,
+        "initialExpanded": false,
         "key": "one",
       }
     }
@@ -147,10 +147,10 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
     index={1}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": false,
+        "initialExpanded": true,
         "key": "two",
       }
     }
@@ -175,10 +175,9 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": true,
         "key": "one",
       }
     }
@@ -203,10 +202,9 @@ exports[`FormAndReviewList component renders properly with just one item and all
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": true,
         "key": "one",
       }
     }
@@ -231,10 +229,10 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
     index={0}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": true,
+        "initialExpanded": false,
         "key": "one",
       }
     }
@@ -245,10 +243,10 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
     index={1}
-    initialCollapsed={true}
+    initialExpanded={false}
     item={
       Object {
-        "initialCollapsed": false,
+        "initialExpanded": true,
         "key": "two",
       }
     }
