@@ -20,7 +20,6 @@ describe('activity non-personnel costs subsection', () => {
       {
         category: 'test category',
         desc: 'test desc',
-        initialCollapsed: false,
         key: 'cost key',
         years: {
           2027: 34355,

@@ -7,11 +7,11 @@ const FormAndReviewItem = ({
   expandedComponent: Expanded,
   extraButtons,
   index,
-  initialCollapsed,
+  initialExpanded,
   ...rest
 }) => {
   const container = useRef(null);
-  const [collapsed, setCollapsed] = useState(initialCollapsed);
+  const [collapsed, setCollapsed] = useState(!initialExpanded);
   const collapse = useCallback(() => {
     const { top } = container.current.getBoundingClientRect();
     if (top < 0 || top > window.innerHeight) {
@@ -60,12 +60,12 @@ FormAndReviewItem.propTypes = {
   ]).isRequired,
   extraButtons: PropTypes.array,
   index: PropTypes.number.isRequired,
-  initialCollapsed: PropTypes.bool
+  initialExpanded: PropTypes.bool
 };
 
 FormAndReviewItem.defaultProps = {
   extraButtons: [],
-  initialCollapsed: true
+  initialExpanded: true
 };
 
 const FormAndReviewList = ({
@@ -86,6 +86,12 @@ const FormAndReviewList = ({
     className
   );
 
+  const [hasAdded, setHasAdded] = useState(false);
+  const addClick = e => {
+    setHasAdded(true);
+    onAddClick(e);
+  };
+
   return (
     <div className={combinedClassName}>
       {list.length === 0 && noDataMessage !== false ? (
@@ -98,7 +104,7 @@ const FormAndReviewList = ({
             expandedComponent={expanded}
             extraButtons={extraItemButtons}
             index={index}
-            initialCollapsed={item.initialCollapsed}
+            initialExpanded={hasAdded && index === list.length - 1}
             item={item}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
@@ -110,7 +116,7 @@ const FormAndReviewList = ({
         ))
       )}
       {onAddClick && (
-        <Button className="visibility--screen" onClick={onAddClick}>
+        <Button className="visibility--screen" onClick={addClick}>
           {addButtonText || 'Add another'}
         </Button>
       )}
