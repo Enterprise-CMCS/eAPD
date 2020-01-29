@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { selectApdData } from './apd.selectors';
+import { selectApdData, selectApdYears } from './apd.selectors';
 import { stateDateRangeToDisplay, stateDateToDisplay } from '../util';
 
 export const selectActivityByIndex = (
@@ -56,6 +56,83 @@ export const makeSelectCostAllocateFFPBudget = () =>
     quarterlyFFP: budget ? budget.quarterlyFFP : null,
     years: apd.years
   }));
+
+export const selectActivityCostSummary = createSelector(
+  selectApdYears,
+  selectActivityByIndex,
+  (
+    {
+      apd: {
+        data: { activities }
+      },
+      budget
+    },
+    { activityIndex }
+  ) => budget.activities[activities[activityIndex].key],
+  (
+    {
+      apd: {
+        data: { keyPersonnel, years }
+      }
+    },
+    { activityIndex }
+  ) =>
+    years.reduce(
+      (o, ffy) => ({
+        ...o,
+        [ffy]:
+          activityIndex === 0
+            ? keyPersonnel.map(kp => ({
+                description: `${kp.name} (APD Key Personnel)`,
+                totalCost: kp.hasCosts ? kp.costs[ffy] : 0,
+                unitCost: null,
+                units: null
+              }))
+            : []
+      }),
+      []
+    ),
+  (years, activity, budget, keyPersonnel) => {
+    const summary = years.reduce(
+      (o, year) => ({
+        ...o,
+        [year]: {
+          contractorResources: activity.contractorResources.map(c => ({
+            description: c.name,
+            totalCost: c.years[year],
+            unitCost: c.hourly.useHourly ? c.hourly.data[year].rate : null,
+            units: c.hourly.useHourly
+              ? `${c.hourly.data[year].hours} hours`
+              : null
+          })),
+          federalPercent: 0,
+          federalShare: budget.costsByFFY[year].federal,
+          keyPersonnel: keyPersonnel[year],
+          medicaidShare: budget.costsByFFY[year].medicaidShare,
+          nonPersonnel: activity.expenses.map(e => ({
+            description: e.category,
+            totalCost: e.years[year],
+            unitCost: null,
+            units: null
+          })),
+          otherFunding: activity.costAllocation[year].other,
+          statePercent: 0,
+          statePersonnel: activity.statePersonnel.map(p => ({
+            description: p.title,
+            totalCost: p.years[year].amt * p.years[year].perc,
+            unitCost: p.years[year].amt,
+            units: `${p.years[year].perc} FTE`
+          })),
+          stateShare: budget.costsByFFY[year].state,
+          totalCost: budget.costsByFFY[year].total
+        }
+      }),
+      {}
+    );
+
+    return summary;
+  }
+);
 
 export const selectActivitySchedule = createSelector(
   [selectAllActivities],

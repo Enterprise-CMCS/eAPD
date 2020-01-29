@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import CostAllocateFFP from './CostAllocateFFP';
@@ -10,11 +10,34 @@ import {
 import Instruction from '../../components/Instruction';
 import RichText from '../../components/RichText';
 import { Subsection } from '../../components/Section';
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import {
+  selectActivityByIndex,
+  selectActivityCostSummary
+} from '../../reducers/activities.selectors';
+import Dollars from '../../components/Dollars';
+import DollarField from '../../components/DollarField';
+
+const CostSummaryRows = ({ items }) =>
+  items.map(({ description, totalCost, unitCost, units }) => (
+    <tr key={description}>
+      <td />
+      <td>{description}</td>
+      <td className="budget-table--number">
+        {unitCost !== null && <Dollars long>{unitCost}</Dollars>}
+      </td>
+      <td className="budget-table--number">{unitCost !== null && '×'}</td>
+      <td className="budget-table--number">{units}</td>
+      <td className="budget-table--number">{unitCost !== null && '='}</td>
+      <td className="budget-table--number">
+        <Dollars long>{totalCost}</Dollars>
+      </td>
+    </tr>
+  ));
 
 const CostAllocate = ({
   activity,
   activityIndex,
+  costSummary,
   setMethodology,
   setOtherFunding
 }) => {
@@ -43,7 +66,6 @@ const CostAllocate = ({
           editorClassName="rte-textarea-l"
         />
       </div>
-
       <div className="data-entry-box">
         <Instruction
           source="activities.costAllocate.otherFunding.instruction"
@@ -58,8 +80,116 @@ const CostAllocate = ({
           editorClassName="rte-textarea-l"
         />
       </div>
+      <div className="data-entry-box">
+        <h6 className="ds-h5">Other funding amount</h6>
+        <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
+          <DollarField
+            className="ds-u-padding-y--2"
+            label={`FFY ${'2020'}`}
+            value="35"
+          />
+          <DollarField
+            className="ds-u-padding-y--2"
+            label={`FFY ${'2021'}`}
+            value="55"
+          />
+        </div>
+      </div>
       <hr />
-      <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex} />
+      {true && (
+        <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex} />
+      )}
+      {Object.keys(costSummary).map(ffy => (
+        <Fragment key={ffy}>
+          <h5 className="ds-h2">FFY {ffy}</h5>
+          <table className="budget-table">
+            <tbody>
+              <tr>
+                <th colSpan="7" style={{ backgroundColor: '#d6d7d9' }}>
+                  State Personnel (In-House)
+                </th>
+              </tr>
+              <CostSummaryRows items={costSummary[ffy].keyPersonnel} />
+              <CostSummaryRows items={costSummary[ffy].statePersonnel} />
+              <tr className="budget-table--subtotal budget-table--row__highlight">
+                <td />
+                <td>State Personnel Subtotal</td>
+                <td colSpan="4" />
+                <td className="budget-table--number">
+                  <Dollars long>5</Dollars>
+                </td>
+              </tr>
+              <tr>
+                <th colSpan="7" style={{ backgroundColor: '#d6d7d9' }}>
+                  Non-Personnel (In-House)
+                </th>
+              </tr>
+              <CostSummaryRows items={costSummary[ffy].nonPersonnel} />
+              <tr className="budget-table--subtotal budget-table--row__highlight">
+                <td />
+                <td>Non-Personnel Subtotal</td>
+                <td colSpan="4" />
+                <td className="budget-table--number">
+                  <Dollars long>5</Dollars>
+                </td>
+              </tr>
+              <tr>
+                <th colSpan="7" style={{ backgroundColor: '#d6d7d9' }}>
+                  Private Contractor
+                </th>
+              </tr>
+              <CostSummaryRows items={costSummary[ffy].contractorResources} />
+              <tr className="budget-table--subtotal budget-table--row__highlight">
+                <td />
+                <td>Private Contractor Subtotal</td>
+                <td colSpan="4" />
+                <td className="budget-table--number">
+                  <Dollars long>5</Dollars>
+                </td>
+              </tr>
+              <tr className="budget-table--subtotal">
+                <td colSpan="6">Activity Total Cost</td>
+                <td className="budget-table--number">
+                  <Dollars long>{costSummary[ffy].totalCost}</Dollars>
+                </td>
+              </tr>
+              <tr>
+                <td />
+                <td>Other Funding</td>
+                <td colSpan="3" />
+                <td>-</td>
+                <td className="budget-table--number">
+                  <Dollars long>{costSummary[ffy].otherFunding}</Dollars>
+                </td>
+              </tr>
+              <tr className="budget-table--subtotal budget-table--row__highlight">
+                <td />
+                <td>Medicaid Share</td>
+                <td colSpan="4" />
+                <td className="budget-table--number">
+                  <Dollars long>{costSummary[ffy].medicaidShare}</Dollars>
+                </td>
+              </tr>
+              <CostSummaryRows
+                items={[
+                  {
+                    description: 'Federal Share',
+                    totalCost: costSummary[ffy].federalShare,
+                    unitCost: costSummary[ffy].medicaidShare,
+                    units: '90%'
+                  },
+                  {
+                    description: 'State Share',
+                    totalCost: costSummary[ffy].stateShare,
+                    unitCost: costSummary[ffy].medicaidShare,
+                    units: '10%'
+                  }
+                ]}
+              />
+            </tbody>
+          </table>
+        </Fragment>
+      ))}
     </Subsection>
   );
 };
@@ -67,15 +197,15 @@ const CostAllocate = ({
 CostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
+  costSummary: PropTypes.array.isRequired,
   setMethodology: PropTypes.func.isRequired,
   setOtherFunding: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = (state, { activityIndex }) => {
-  return {
-    activity: selectActivityByIndex(state, { activityIndex })
-  };
-};
+export const mapStateToProps = (state, { activityIndex }) => ({
+  activity: selectActivityByIndex(state, { activityIndex }),
+  costSummary: selectActivityCostSummary(state, { activityIndex })
+});
 
 export const mapDispatchToProps = {
   setMethodology: setCostAllocationMethodology,
@@ -83,7 +213,4 @@ export const mapDispatchToProps = {
 };
 
 export { CostAllocate as CostAllocateRaw };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CostAllocate);
+export default connect(mapStateToProps, mapDispatchToProps)(CostAllocate);

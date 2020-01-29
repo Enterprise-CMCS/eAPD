@@ -12,7 +12,7 @@ const StatePersonReview = ({
 }) => {
   return (
     <Review
-      heading={`${index + 1}. ${title}`}
+      heading={`${index + 1 || 'APD Key Personnel'}. ${title}`}
       headingLevel={6}
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
