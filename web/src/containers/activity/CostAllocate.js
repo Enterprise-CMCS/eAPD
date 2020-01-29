@@ -99,6 +99,34 @@ const CostAllocate = ({
       {true && (
         <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex} />
       )}
+      <h5 className="ds-h2">
+        FFY {Object.keys(costSummary)[0]}-{Object.keys(costSummary).pop()}{' '}
+        Totals
+      </h5>
+      <p>
+        The total cost of the <strong>{activity.name}</strong> activity is{' '}
+        <strong>
+          <Dollars long>50000032</Dollars>
+        </strong>
+        . Because of other funding of{' '}
+        <strong>
+          <Dollars long>23423</Dollars>
+        </strong>
+        , the total cost to Medicaid is{' '}
+        <strong>
+          <Dollars long>234235236</Dollars>
+        </strong>
+        . This activity is using a <strong>90/10</strong> funding split,
+        resulting in a federal share of{' '}
+        <strong>
+          <Dollars long>234234234</Dollars>
+        </strong>{' '}
+        and a STATE_NAME share of{' '}
+        <strong>
+          <Dollars long>73734</Dollars>
+        </strong>
+        .
+      </p>
       {Object.keys(costSummary).map(ffy => (
         <Fragment key={ffy}>
           <h5 className="ds-h2">FFY {ffy}</h5>
