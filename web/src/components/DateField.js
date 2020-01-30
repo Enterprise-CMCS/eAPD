@@ -53,7 +53,6 @@ const DateField = ({ value, onChange, ...rest }) => {
       });
       return null;
     }
-    console.log('fired onComponentBlur');
 
     let message = [];
     let dayInvalid = false;
@@ -88,16 +87,6 @@ const DateField = ({ value, onChange, ...rest }) => {
         'Invalid date - is the day number too high for the provided month and year?'
       );
     }
-    console.log(
-      'message: ',
-      message,
-      'dayInvalid: ',
-      dayInvalid,
-      'monthInvalid: ',
-      monthInvalid,
-      'yearInvalid: ',
-      yearInvalid
-    );
 
     setErrorInfo({
       errorMessage: message.join(' '),
