@@ -54,7 +54,7 @@ const DateField = ({ value, onChange, ...rest }) => {
       return null;
     }
 
-    let message = [];
+    const message = [];
     let dayInvalid = false;
     let monthInvalid = false;
     let yearInvalid = false;
