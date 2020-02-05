@@ -41,7 +41,7 @@ const DateField = ({ value, onChange, ...rest }) => {
   const getErrorMsg = () => {
     const date = moment(value, 'YYYY-M-D', true);
     if (value === null || value === undefined || value.length === 0) {
-      return null;
+      return;
     }
 
     if (date.isValid()) {
@@ -51,7 +51,7 @@ const DateField = ({ value, onChange, ...rest }) => {
         monthInvalid: false,
         yearInvalid: false
       });
-      return null;
+      return;
     }
 
     const message = [];
