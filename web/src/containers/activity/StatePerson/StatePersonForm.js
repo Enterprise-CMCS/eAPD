@@ -11,6 +11,7 @@ import {
 } from '../../../actions/editActivity';
 
 import DollarField from '../../../components/DollarField';
+import Dollars from '../../../components/Dollars';
 import TextArea from '../../../components/TextArea';
 import NumberField from '../../../components/NumberField';
 
@@ -81,6 +82,10 @@ const StatePersonForm = ({
               value={perc}
               onChange={getEditFTEForYear(year)}
             />
+            <p>
+              <strong>Total: </strong>
+              <Dollars long>{amt * perc}</Dollars>
+            </p>
           </div>
         </Fragment>
       ))}
@@ -109,9 +114,6 @@ const mapDispatchToProps = {
   setTitle: setPersonnelTitle
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(StatePersonForm);
+export default connect(null, mapDispatchToProps)(StatePersonForm);
 
 export { StatePersonForm as plain, mapDispatchToProps };
