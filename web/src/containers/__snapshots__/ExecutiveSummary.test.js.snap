@@ -75,6 +75,68 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
              Federal share)
           </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              5232
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              23626
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2883
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              848622
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              2468252
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              826
+            </Dollars>
+             Federal share
+          </li>
         </ul>
       </StandardReview>
       <StandardReview
@@ -134,6 +196,68 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
              Federal share)
           </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              26926
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              989264
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2356
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              54634738
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              73
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              643
+            </Dollars>
+             Federal share
+          </li>
         </ul>
       </StandardReview>
       <hr
@@ -189,6 +313,64 @@ exports[`executive summary component renders correctly 1`] = `
             >
               10
             </Dollars>
+          </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              5232
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            />
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2883
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              848622
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            />
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              826
+            </Dollars>
+             Federal share
           </li>
         </ul>
       </StandardReview>
@@ -283,6 +465,68 @@ exports[`executive summary component renders correctly 2`] = `
             </Dollars>
              Federal share)
           </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              5232
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              23626
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2883
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              848622
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              2468252
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              826
+            </Dollars>
+             Federal share
+          </li>
         </ul>
       </StandardReview>
       <StandardReview
@@ -341,6 +585,68 @@ exports[`executive summary component renders correctly 2`] = `
               2050
             </Dollars>
              Federal share)
+          </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              26926
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              989264
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2356
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              54634738
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              73
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              643
+            </Dollars>
+             Federal share
           </li>
         </ul>
       </StandardReview>
@@ -402,6 +708,64 @@ exports[`executive summary component renders correctly 2`] = `
             >
               10
             </Dollars>
+          </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              5232
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            />
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2883
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              848622
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            />
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              826
+            </Dollars>
+             Federal share
           </li>
         </ul>
       </StandardReview>
@@ -496,6 +860,68 @@ exports[`executive summary component renders correctly 3`] = `
             </Dollars>
              Federal share)
           </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              5232
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              23626
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2883
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              848622
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              2468252
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              826
+            </Dollars>
+             Federal share
+          </li>
         </ul>
       </StandardReview>
       <StandardReview
@@ -555,6 +981,68 @@ exports[`executive summary component renders correctly 3`] = `
             </Dollars>
              Federal share)
           </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              26926
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              989264
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2356
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              54634738
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            >
+              73
+            </Dollars>
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              643
+            </Dollars>
+             Federal share
+          </li>
         </ul>
       </StandardReview>
       <hr
@@ -610,6 +1098,64 @@ exports[`executive summary component renders correctly 3`] = `
             >
               10
             </Dollars>
+          </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              5232
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            />
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              2883
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              848622
+            </Dollars>
+             |
+             
+            <Dollars
+              long={true}
+            />
+             Medicaid share |
+             
+            <Dollars
+              long={true}
+            >
+              826
+            </Dollars>
+             Federal share
           </li>
         </ul>
       </StandardReview>
