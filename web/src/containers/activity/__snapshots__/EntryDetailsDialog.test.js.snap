@@ -42,7 +42,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
     <TabPanel
       id="activity-cost-categories-2-tab"
       selected={false}
-      tab="In-house cost categories"
+      tab="State cost categories"
     >
       <Costs
         activityIndex={2}
