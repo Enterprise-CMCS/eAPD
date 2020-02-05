@@ -1,6 +1,6 @@
 # Next release
 
-Anticipated release: February 17, 2020
+Anticipated release: February 18, 2020
 
 #### 🚀 New features
 
