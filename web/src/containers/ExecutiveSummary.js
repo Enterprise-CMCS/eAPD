@@ -49,7 +49,6 @@ const ExecutiveSummary = props => {
               className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
             >
               {activity.summary && <p>{activity.summary}</p>}
-
               <ul className="ds-c-list--bare">
                 <li>
                   <strong>Date:</strong> {activity.dateRange}
@@ -63,6 +62,19 @@ const ExecutiveSummary = props => {
                   <Dollars long>{activity.medicaid}</Dollars> (
                   <Dollars long>{activity.federal}</Dollars> Federal share)
                 </li>
+                {Object.entries(activity.ffys).map(
+                  ([ffy, { medicaidShare, federal, total: ffyTotal }], j) => (
+                    <li
+                      key={ffy}
+                      className={j === 0 ? 'ds-u-margin-top--2' : ''}
+                    >
+                      <strong>FFY {ffy}:</strong>{' '}
+                      <Dollars long>{ffyTotal}</Dollars> |{' '}
+                      <Dollars long>{medicaidShare}</Dollars> Medicaid share |{' '}
+                      <Dollars long>{federal}</Dollars> Federal share
+                    </li>
+                  )
+                )}
               </ul>
             </Review>
           ))}
@@ -99,6 +111,16 @@ const ExecutiveSummary = props => {
                 <strong>Total funding request:</strong>{' '}
                 <Dollars long>{total.combined}</Dollars>
               </li>
+              {Object.entries(total.ffys).map(
+                ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
+                  <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
+                    <strong>FFY {ffy}:</strong>{' '}
+                    <Dollars long>{ffyTotal}</Dollars> |{' '}
+                    <Dollars long>{medicaid}</Dollars> Medicaid share |{' '}
+                    <Dollars long>{federal}</Dollars> Federal share
+                  </li>
+                )
+              )}
             </ul>
           </Review>
         </Subsection>
@@ -127,9 +149,6 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(ExecutiveSummary);
+export default connect(mapStateToProps, null)(ExecutiveSummary);
 
 export { ExecutiveSummary as plain, mapStateToProps };
