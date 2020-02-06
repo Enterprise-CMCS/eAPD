@@ -4,6 +4,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import { removeActivity } from '../../actions/editActivity';
 import ActivityDialog from './EntryDetailsDialog';
 
 import { t } from '../../i18n';
@@ -19,13 +20,23 @@ const makeTitle = ({ name, fundingSource }, i) => {
   return title;
 };
 
-const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
+const EntryDetails = ({
+  activityIndex,
+  fundingSource,
+  activityKey,
+  name,
+  remove
+}) => {
   const container = useRef();
 
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const onRemove = () => {
+    remove(activityIndex);
   };
 
   const title = useMemo(
@@ -35,6 +46,9 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
 
   const editContent = (
     <div className="nowrap visibility--screen">
+      <Button size="small" variation="transparent" onClick={onRemove}>
+        Delete
+      </Button>
       <Button
         size="small"
         variation="transparent"
@@ -73,7 +87,8 @@ EntryDetails.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   activityKey: PropTypes.string.isRequired,
   fundingSource: PropTypes.string.isRequired,
-  name: PropTypes.string
+  name: PropTypes.string,
+  remove: PropTypes.func.isRequired
 };
 
 EntryDetails.defaultProps = {
@@ -87,6 +102,13 @@ const mapStateToProps = (state, { activityIndex }) => {
   return { activityKey: key, fundingSource, name };
 };
 
-export default connect(mapStateToProps)(EntryDetails);
+const mapDispatchToProps = {
+  remove: removeActivity
+};
 
-export { EntryDetails as plain, mapStateToProps };
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EntryDetails);
+
+export { EntryDetails as plain, mapStateToProps, mapDispatchToProps };
