@@ -60,8 +60,9 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           {Object.entries(person.years).map(([year, { amt, perc }]) => (
             <li key={year}>
-              <strong>{year} Costs:</strong> <Dollars>{amt}</Dollars> |{' '}
-              <strong>FTEs:</strong> {perc}
+              <strong>{year} Costs:</strong> <Dollars long>{amt}</Dollars> |{' '}
+              <strong>FTEs:</strong> {perc} | <strong>Total:</strong>{' '}
+              <Dollars long>{perc * amt}</Dollars>
             </li>
           ))}
         </ul>
@@ -81,7 +82,7 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           {Object.entries(expense.years).map(([year, cost]) => (
             <li key={year}>
-              <strong>{year} Costs:</strong> <Dollars>{cost}</Dollars>
+              <strong>{year} Costs:</strong> <Dollars long>{cost}</Dollars>
             </li>
           ))}
         </ul>
@@ -115,13 +116,13 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           {Object.entries(contractor.years).map(([year, cost]) => (
             <li key={year}>
-              <strong>{year} Costs:</strong> <Dollars>{cost}</Dollars>
+              <strong>{year} Costs:</strong> <Dollars long>{cost}</Dollars>
               {contractor.hourly.useHourly === true && (
                 <Fragment>
                   <p>Number of hours: {contractor.hourly.data[year].hours}</p>
                   <p>
                     Hourly rate:{' '}
-                    <Dollars>{contractor.hourly.data[year].rate}</Dollars>
+                    <Dollars long>{contractor.hourly.data[year].rate}</Dollars>
                   </p>
                 </Fragment>
               )}
@@ -130,7 +131,7 @@ const Activity = ({ activity, activityIndex }) => {
         </ul>
         <p>
           <strong>Total cost: </strong>
-          <Dollars>{contractor.totalCost}</Dollars>
+          <Dollars long>{contractor.totalCost}</Dollars>
         </p>
       </Fragment>
     );

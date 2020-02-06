@@ -39,7 +39,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
       onBlur={null}
       onChange={[Function]}
       size="medium"
-      value=""
+      value={2398235}
     />
     <NumberField
       fieldRef={null}
@@ -48,7 +48,18 @@ exports[`the StatePersonForm component renders correctly 1`] = `
       onChange={[Function]}
       size="medium"
       type="number"
+      value={3}
     />
+    <p>
+      <strong>
+        Total: 
+      </strong>
+      <Dollars
+        long={true}
+      >
+        7194705
+      </Dollars>
+    </p>
   </div>
   <h5
     className="ds-h5"
@@ -65,7 +76,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
       onBlur={null}
       onChange={[Function]}
       size="medium"
-      value=""
+      value={72323}
     />
     <NumberField
       fieldRef={null}
@@ -74,7 +85,18 @@ exports[`the StatePersonForm component renders correctly 1`] = `
       onChange={[Function]}
       size="medium"
       type="number"
+      value={1}
     />
+    <p>
+      <strong>
+        Total: 
+      </strong>
+      <Dollars
+        long={true}
+      >
+        72323
+      </Dollars>
+    </p>
   </div>
 </Fragment>
 `;
