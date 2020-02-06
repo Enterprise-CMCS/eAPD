@@ -8,6 +8,8 @@ Anticipated release: February 18, 2020
 
 #### 🐛 Bugs fixed
 
+- Fixed a bug where autosave happened too often, causing performance issues, and potentially inconsistent saved data.
+
 #### ⚙️ Behind the scenes
 
 # Previous releases
