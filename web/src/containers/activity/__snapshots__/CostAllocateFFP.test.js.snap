@@ -22,7 +22,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       headingDisplay={
         Object {
           "className": "ds-h4",
-          "level": "h7",
+          "level": "p",
         }
       }
       reverse={false}
@@ -32,6 +32,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       className="budget-table"
       style={
         Object {
+          "minWidth": "350px",
           "width": "fit-content",
         }
       }
@@ -115,6 +116,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       className="budget-table"
       style={
         Object {
+          "minWidth": "350px",
           "width": "fit-content",
         }
       }
@@ -236,7 +238,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       headingDisplay={
         Object {
           "className": "ds-h4",
-          "level": "h7",
+          "level": "p",
         }
       }
       reverse={false}
@@ -246,6 +248,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       className="budget-table"
       style={
         Object {
+          "minWidth": "350px",
           "width": "fit-content",
         }
       }
@@ -329,6 +332,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       className="budget-table"
       style={
         Object {
+          "minWidth": "350px",
           "width": "fit-content",
         }
       }
