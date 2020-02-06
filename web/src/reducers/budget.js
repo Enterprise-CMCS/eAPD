@@ -96,7 +96,10 @@ const initialState = years => ({
 // Convert things to numbers, or default to zero.
 const n = x => +x || 0;
 
-const buildBudget = bigState => {
+const buildBudget = incomingBigState => {
+  // Clone the incoming state, so we don't accidentally change anything.
+  const bigState = JSON.parse(JSON.stringify(incomingBigState));
+
   // Get a shell of our new state object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
   // to have a bunch of code checking for it.
