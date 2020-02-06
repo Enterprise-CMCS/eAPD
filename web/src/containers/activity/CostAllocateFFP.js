@@ -68,14 +68,14 @@ class CostAllocateFFP extends Component {
                   <Instruction
                     source="activities.costAllocate.ffp.otherFundingInstruction"
                     headingDisplay={{
-                      level: 'h7',
+                      level: 'p',
                       className: 'ds-h4'
                     }}
                   />
 
                   <table
                     className="budget-table"
-                    style={{ width: 'fit-content' }}
+                    style={{ minWidth: '350px', width: 'fit-content' }}
                   >
                     <caption className="ds-u-visibility--screen-reader">
                       Review the total activity cost, enter any other funding
@@ -126,7 +126,7 @@ class CostAllocateFFP extends Component {
 
                   <table
                     className="budget-table"
-                    style={{ width: 'fit-content' }}
+                    style={{ minWidth: '350px', width: 'fit-content' }}
                   >
                     <caption className="ds-u-visibility--screen-reader">
                       Review the total activity cost, enter any other funding
