@@ -13,6 +13,8 @@ const makeTitle = ({ name, fundingSource }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
   if (name) {
     title += `: ${name}`;
+  } else {
+    title += `: New Activity`;
   }
   if (fundingSource) {
     title += ` (${fundingSource})`;
