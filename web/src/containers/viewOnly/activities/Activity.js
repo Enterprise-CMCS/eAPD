@@ -6,15 +6,27 @@ import CostAllocateFFP from '../../activity/CostAllocateFFP';
 import { stateDateToDisplay } from '../../../util';
 
 const Activity = ({ activity, activityIndex }) => {
-  const buildGoal = goal => {
+  const buildObjective = objective => {
     return (
       <Fragment>
         <p>
-          <strong>Goal: </strong> {goal.description}
+          <strong>Objective: </strong> {objective.objective}
         </p>
         <p>
-          <strong>Benchmarks: </strong>
-          {goal.objective}
+          <strong>Key Results: </strong>
+          <ul>
+            {objective.keyResults.map(
+              ({ baseline, key, keyResult, target }) => (
+                <li key={key} className="ds-u-margin-top--2">
+                  <strong>{keyResult}</strong>
+                  <br />
+                  <strong>Target:</strong> {target}
+                  <br />
+                  <strong>Baseline:</strong> {baseline}
+                </li>
+              )
+            )}
+          </ul>
         </p>
       </Fragment>
     );
@@ -152,9 +164,9 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        Performance Goals and Benchmarks
+        Objectives and Key Results
       </h3>
-      {activity.goals.map(goal => buildGoal(goal))}
+      {activity.objectives.map(buildObjective)}
 
       <h3 className="viewonly-activity-header">
         <small>
