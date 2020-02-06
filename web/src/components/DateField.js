@@ -1,7 +1,7 @@
 import { DateField as DSDateField } from '@cmsgov/design-system-core';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 
 // Dates are stored internally as YYYY-MM-DD. The design system date field
 // expects separate day, month, and year values. So split the incoming
@@ -29,16 +29,29 @@ const joinDate = ({ day, month, year }) => {
 };
 
 const DateField = ({ value, onChange, ...rest }) => {
+  const [errorInfo, setErrorInfo] = useState({
+    errorMessage: [],
+    dayInvalid: false,
+    monthInvalid: false,
+    yearInvalid: false
+  });
+
   const dateParts = splitDate(value);
 
-  const errorInfo = useMemo(() => {
+  const getErrorMsg = () => {
     const date = moment(value, 'YYYY-M-D', true);
     if (value === null || value === undefined || value.length === 0) {
-      return null;
+      return;
     }
 
     if (date.isValid()) {
-      return null;
+      setErrorInfo({
+        errorMessage: [],
+        dayInvalid: false,
+        monthInvalid: false,
+        yearInvalid: false
+      });
+      return;
     }
 
     const message = [];
@@ -75,13 +88,13 @@ const DateField = ({ value, onChange, ...rest }) => {
       );
     }
 
-    return {
+    setErrorInfo({
       errorMessage: message.join(' '),
       dayInvalid,
       monthInvalid,
       yearInvalid
-    };
-  }, [value]);
+    });
+  };
 
   return (
     <DSDateField
@@ -92,6 +105,7 @@ const DateField = ({ value, onChange, ...rest }) => {
       yearValue={dateParts.year}
       dateFormatter={joinDate}
       onChange={onChange}
+      onComponentBlur={getErrorMsg}
     />
   );
 };
