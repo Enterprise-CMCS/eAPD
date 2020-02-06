@@ -27,8 +27,8 @@ describe('the StatePersonForm component', () => {
         description: 'personnel desc',
         title: 'personnel title',
         years: {
-          7473: 2398235,
-          7474: 72323
+          7473: { amt: 2398235, perc: 3 },
+          7474: { amt: 72323, perc: 1 }
         }
       }}
       setCost={setCost}
