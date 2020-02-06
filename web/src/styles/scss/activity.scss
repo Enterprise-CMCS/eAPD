@@ -5,12 +5,8 @@
   &.activity--body__first {
     border-top: 4px solid $color-primary;
   }
-}
-
-.activity--body__collapsed > .ds-c-review {
-  border: 0 !important;
-}
-
-.activity--body__expanded {
-  padding-bottom: $spacer-3;
+  .ds-c-review.ds-u-border-bottom--2 {
+    // Review components add this automatically; override it
+    border: none !important;
+  }
 }

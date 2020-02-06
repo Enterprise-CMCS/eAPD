@@ -20,12 +20,17 @@ const All = ({ add, first, other }) => {
   return (
     <Waypoint id="activities-overview">
       <Section isNumbered id="activities" resource="activities">
+        <h3 className="subsection--title ds-h3">
+          {other.length + 1} program activities
+        </h3>
         {[first, ...other].map(({ key }, index) => (
           <Waypoint id={key} key={key}>
             <EntryDetails activityIndex={index} />
           </Waypoint>
         ))}
-        <Button onClick={onAdd}>Add another activity</Button>
+        <Button className="ds-u-margin-top--4" onClick={onAdd}>
+          Add another activity
+        </Button>
       </Section>
     </Waypoint>
   );
