@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { addActivity, removeActivity } from '../../actions/editActivity';
+import { addActivity } from '../../actions/editActivity';
 
 import {
   plain as Activities,
@@ -16,13 +16,11 @@ describe('the Activities component', () => {
     other: [
       { key: 'key2', second: 'activity' },
       { key: 'key3', third: 'activity' }
-    ],
-    remove: jest.fn()
+    ]
   };
 
   beforeEach(() => {
     props.add.mockClear();
-    props.remove.mockClear();
   });
 
   test('renders correctly', () => {
@@ -47,8 +45,7 @@ describe('the Activities component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      add: addActivity,
-      remove: removeActivity
+      add: addActivity
     });
   });
 });

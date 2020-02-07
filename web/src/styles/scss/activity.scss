@@ -9,4 +9,7 @@
     // Review components add this automatically; override it
     border: none !important;
   }
+  .ds-c-button.ds-c-button--transparent.danger {
+    color: $color-error-dark;
+  }
 }
