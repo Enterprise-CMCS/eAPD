@@ -1,22 +1,37 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as EntryDetails, mapStateToProps } from './EntryDetails';
+import { removeActivity } from '../../actions/editActivity';
+
+import {
+  plain as EntryDetails,
+  mapStateToProps,
+  mapDispatchToProps
+} from './EntryDetails';
 
 describe('the (Activity) EntryDetails component', () => {
   const props = {
     activityIndex: 2,
     activityKey: 'activity key',
     fundingSource: 'money pit',
-    name: 'activity name'
+    name: 'activity name',
+    remove: jest.fn()
   };
+
+  beforeEach(() => {
+    props.remove.mockClear();
+  });
 
   test('renders correctly with the modal closed', () => {
     const component = shallow(<EntryDetails {...props} />);
     expect(component).toMatchSnapshot();
 
     const review = component.find('Review').dive();
-    review.find('Button').simulate('click');
+    // First button is the delete button; second is the edit button
+    review
+      .find('Button')
+      .at(1)
+      .simulate('click');
 
     // Modal is now open
     expect(component).toMatchSnapshot();
@@ -61,6 +76,12 @@ describe('the (Activity) EntryDetails component', () => {
       activityKey: 'key3',
       fundingSource: 'appropriations',
       name: 'Congress Dollars'
+    });
+  });
+
+  test('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      remove: removeActivity
     });
   });
 });

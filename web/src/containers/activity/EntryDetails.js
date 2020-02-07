@@ -48,7 +48,7 @@ const EntryDetails = ({
 
   const editContent = (
     <div className="nowrap visibility--screen">
-      <Button size="small" variation="transparent" onClick={onRemove}>
+      <Button size="small" variation="transparent danger" onClick={onRemove}>
         Delete
       </Button>
       <Button

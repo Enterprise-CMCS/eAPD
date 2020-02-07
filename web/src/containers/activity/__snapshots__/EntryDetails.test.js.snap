@@ -14,6 +14,14 @@ exports[`the (Activity) EntryDetails component renders correctly with the modal 
           onClick={[Function]}
           size="small"
           type="button"
+          variation="transparent danger"
+        >
+          Delete
+        </Button>
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
           variation="transparent"
         >
           Edit
@@ -37,6 +45,14 @@ exports[`the (Activity) EntryDetails component renders correctly with the modal 
       <div
         className="nowrap visibility--screen"
       >
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent danger"
+        >
+          Delete
+        </Button>
         <Button
           onClick={[Function]}
           size="small"
@@ -69,6 +85,14 @@ exports[`the (Activity) EntryDetails component renders correctly with the modal 
       <div
         className="nowrap visibility--screen"
       >
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent danger"
+        >
+          Delete
+        </Button>
         <Button
           onClick={[Function]}
           size="small"
