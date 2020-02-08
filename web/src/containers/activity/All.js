@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import FormAndReviewList from '../../components/FormAndReviewList';
 import EntryDetails from './EntryDetails';
-import {
-  NameAndFundingSourceForm,
-  NameAndFundingSourceReview
-} from './NameAndFundingSource';
 import Waypoint from '../ConnectedWaypoint';
 import { addActivity } from '../../actions/editActivity';
-import { Section, Subsection } from '../../components/Section';
+import { Section } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
 
 const All = ({ add, first, other }) => {
