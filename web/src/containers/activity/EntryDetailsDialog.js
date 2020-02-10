@@ -46,7 +46,7 @@ const ActivityDialog = props => {
         </TabPanel>
         <TabPanel
           id={`activity-cost-categories-${activityIndex}-tab`}
-          tab="In-house cost categories"
+          tab="State cost categories"
         >
           <Costs activityIndex={activityIndex} />
         </TabPanel>
