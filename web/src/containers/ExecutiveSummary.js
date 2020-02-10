@@ -70,8 +70,9 @@ const ExecutiveSummary = props => {
                     >
                       <strong>FFY {ffy}:</strong>{' '}
                       <Dollars long>{ffyTotal}</Dollars> |{' '}
-                      <Dollars long>{medicaidShare}</Dollars> Medicaid share |{' '}
-                      <Dollars long>{federal}</Dollars> Federal share
+                      <strong>Medicaid Share:</strong>{' '}
+                      <Dollars long>{medicaidShare}</Dollars> (
+                      <Dollars long>{federal}</Dollars> Federal share)
                     </li>
                   )
                 )}

@@ -92,19 +92,22 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               23626
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               2883
             </Dollars>
-             Federal share
+             Federal share)
           </li>
           <li
             className=""
@@ -123,19 +126,22 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               2468252
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               826
             </Dollars>
-             Federal share
+             Federal share)
           </li>
         </ul>
       </StandardReview>
@@ -213,19 +219,22 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               989264
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               2356
             </Dollars>
-             Federal share
+             Federal share)
           </li>
           <li
             className=""
@@ -244,19 +253,22 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               73
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               643
             </Dollars>
-             Federal share
+             Federal share)
           </li>
         </ul>
       </StandardReview>
@@ -482,19 +494,22 @@ exports[`executive summary component renders correctly 2`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               23626
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               2883
             </Dollars>
-             Federal share
+             Federal share)
           </li>
           <li
             className=""
@@ -513,19 +528,22 @@ exports[`executive summary component renders correctly 2`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               2468252
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               826
             </Dollars>
-             Federal share
+             Federal share)
           </li>
         </ul>
       </StandardReview>
@@ -603,19 +621,22 @@ exports[`executive summary component renders correctly 2`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               989264
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               2356
             </Dollars>
-             Federal share
+             Federal share)
           </li>
           <li
             className=""
@@ -634,19 +655,22 @@ exports[`executive summary component renders correctly 2`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               73
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               643
             </Dollars>
-             Federal share
+             Federal share)
           </li>
         </ul>
       </StandardReview>
@@ -877,19 +901,22 @@ exports[`executive summary component renders correctly 3`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               23626
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               2883
             </Dollars>
-             Federal share
+             Federal share)
           </li>
           <li
             className=""
@@ -908,19 +935,22 @@ exports[`executive summary component renders correctly 3`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               2468252
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               826
             </Dollars>
-             Federal share
+             Federal share)
           </li>
         </ul>
       </StandardReview>
@@ -998,19 +1028,22 @@ exports[`executive summary component renders correctly 3`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               989264
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               2356
             </Dollars>
-             Federal share
+             Federal share)
           </li>
           <li
             className=""
@@ -1029,19 +1062,22 @@ exports[`executive summary component renders correctly 3`] = `
             </Dollars>
              |
              
+            <strong>
+              Medicaid Share:
+            </strong>
+             
             <Dollars
               long={true}
             >
               73
             </Dollars>
-             Medicaid share |
-             
+             (
             <Dollars
               long={true}
             >
               643
             </Dollars>
-             Federal share
+             Federal share)
           </li>
         </ul>
       </StandardReview>

@@ -42,8 +42,9 @@ class ExecutiveSummary extends PureComponent {
               ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
                 <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
                   <strong>FFY {ffy}:</strong> <Dollars long>{ffyTotal}</Dollars>{' '}
-                  | <Dollars long>{medicaid}</Dollars> Medicaid share |{' '}
-                  <Dollars long>{federal}</Dollars> Federal share
+                  | <strong>Medicaid share:</strong>{' '}
+                  <Dollars long>{medicaid}</Dollars> (
+                  <Dollars long>{federal}</Dollars> Federal share)
                 </li>
               )
             )}
@@ -77,8 +78,9 @@ class ExecutiveSummary extends PureComponent {
                   <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
                     <strong>FFY {ffy}:</strong>{' '}
                     <Dollars long>{ffyTotal}</Dollars> |{' '}
-                    <Dollars long>{medicaidShare}</Dollars> Medicaid share |{' '}
-                    <Dollars long>{federal}</Dollars> Federal share
+                    <strong>Medicaid share:</strong>{' '}
+                    <Dollars long>{medicaidShare}</Dollars> (
+                    <Dollars long>{federal}</Dollars> Federal share)
                   </li>
                 )
               )}
