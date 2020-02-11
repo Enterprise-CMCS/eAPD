@@ -4,6 +4,7 @@ Anticipated release: February 18, 2020
 
 #### 🚀 New features
 
+- The executive summary for activities now includes activity costs per federal fiscal year ([#1927])
 - Activity state personnel now show calculated total cost instead of just rate and FTEs. ([#2013])
 
 #### 🐛 Bugs fixed
@@ -18,6 +19,7 @@ Anticipated release: February 18, 2020
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
+[#1927]: https://github.com/18F/cms-hitech-apd/issues/1927
 [#2037]: https://github.com/18F/cms-hitech-apd/issues/2037
 [#1936]: https://github.com/18F/cms-hitech-apd/issues/1936
 [#2013]: https://github.com/18F/cms-hitech-apd/issues/2013
