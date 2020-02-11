@@ -9,16 +9,9 @@ import {
 import { ariaAnnounceFFPQuarterly } from '../../actions/aria';
 import Dollars from '../../components/Dollars';
 import PercentField from '../../components/PercentField';
-import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
-import { formatPerc } from '../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
-const EXPENSE_NAME_DISPLAY = {
-  state: t('activities.costAllocate.quarterly.expenseNames.state'),
-  contractors: t('activities.costAllocate.quarterly.expenseNames.contractor'),
-  combined: t('activities.costAllocate.quarterly.expenseNames.combined')
-};
 
 const CostAllocateFFPQuarterly = ({
   activityIndex,
@@ -53,24 +46,20 @@ const CostAllocateFFPQuarterly = ({
       <thead>
         <tr>
           <th>
-            <span aria-hidden="true">{t('ffy', { year })}</span>
+            <span aria-hidden="true">FFY {year}</span>
           </th>
           <th
             colSpan="2"
             scope="col"
             className="budget-table--subtotal ds-u-text-align--right"
           >
-            <span className="ds-u-visibility--screen-reader">
-              {t('ffy', { year })}
-            </span>
+            <span className="ds-u-visibility--screen-reader">FFY {year}</span>
             Total costs
           </th>
           {QUARTERS.map(q => (
             <th key={q} scope="col" className="ds-u-text-align--right">
-              <span className="ds-u-visibility--screen-reader">
-                {t('ffy', { year })}
-              </span>
-              {t('table.quarter', { q })}
+              <span className="ds-u-visibility--screen-reader">FFY {year}</span>
+              Q{q}
             </th>
           ))}
         </tr>
@@ -78,7 +67,7 @@ const CostAllocateFFPQuarterly = ({
       <tbody>
         <tr>
           <th rowSpan="2" scope="row">
-            {t('activities.costAllocate.quarterly.expenseNames.state')}
+            State Costs
           </th>
           <td className="budget-table--number budget-table--subtotal">
             <Dollars long>{quarterlyFFP[year].subtotal.state.dollars}</Dollars>
@@ -117,7 +106,7 @@ const CostAllocateFFPQuarterly = ({
 
         <tr>
           <th rowSpan="2" scope="row">
-            {t('activities.costAllocate.quarterly.expenseNames.contractor')}
+            Private Contractor Costs
           </th>
           <td className="budget-table--number budget-table--subtotal">
             <Dollars long>
@@ -160,7 +149,7 @@ const CostAllocateFFPQuarterly = ({
 
         <tr className="budget-table--row__highlight">
           <th scope="row" className="budget-table--total">
-            {EXPENSE_NAME_DISPLAY.combined}
+            Total Enhanced FFP
           </th>
           <td className="budget-table--number budget-table--subtotal">
             <Dollars long>

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import CostAllocateFFP from './CostAllocateFFP';
@@ -46,6 +46,20 @@ const CostAllocate = ({
   } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
   const syncOtherFunding = html => setOtherFunding(activityIndex, html);
+
+  const stateStaffExpanded = {};
+  const otherExpensesExpanded = {};
+  const contractorExpanded = {};
+  Object.keys(costSummary).forEach(ffy => {
+    const [staffValue, staffSet] = useState(false);
+    stateStaffExpanded[ffy] = { value: staffValue, set: staffSet };
+
+    const [otherValue, otherSet] = useState(false);
+    otherExpensesExpanded[ffy] = { value: otherValue, set: otherSet };
+
+    const [contractorValue, contractorSet] = useState(false);
+    contractorExpanded[ffy] = { value: contractorValue, set: contractorSet };
+  });
 
   return (
     <Subsection
@@ -134,14 +148,29 @@ const CostAllocate = ({
             <tbody>
               <tr>
                 <th colSpan="7" style={{ backgroundColor: '#d6d7d9' }}>
-                  State Personnel (In-House)
+                  State Staff
                 </th>
               </tr>
-              <CostSummaryRows items={costSummary[ffy].keyPersonnel} />
-              <CostSummaryRows items={costSummary[ffy].statePersonnel} />
+              {stateStaffExpanded[ffy].value && (
+                <Fragment>
+                  <CostSummaryRows items={costSummary[ffy].keyPersonnel} />
+                  <CostSummaryRows items={costSummary[ffy].statePersonnel} />
+                </Fragment>
+              )}
               <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td />
-                <td>State Personnel Subtotal</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      stateStaffExpanded[ffy].set(
+                        !stateStaffExpanded[ffy].value
+                      )
+                    }
+                  >
+                    {stateStaffExpanded[ffy].value ? '-' : '+'}
+                  </button>
+                </td>
+                <td>State Staff Subtotal</td>
                 <td colSpan="4" />
                 <td className="budget-table--number">
                   <Dollars long>5</Dollars>
@@ -149,13 +178,26 @@ const CostAllocate = ({
               </tr>
               <tr>
                 <th colSpan="7" style={{ backgroundColor: '#d6d7d9' }}>
-                  Non-Personnel (In-House)
+                  Other State Expenses
                 </th>
               </tr>
-              <CostSummaryRows items={costSummary[ffy].nonPersonnel} />
+              {otherExpensesExpanded[ffy].value && (
+                <CostSummaryRows items={costSummary[ffy].nonPersonnel} />
+              )}
               <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td />
-                <td>Non-Personnel Subtotal</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      otherExpensesExpanded[ffy].set(
+                        !otherExpensesExpanded[ffy].value
+                      )
+                    }
+                  >
+                    {otherExpensesExpanded[ffy].value ? '-' : '+'}
+                  </button>
+                </td>
+                <td>Other State Expenses Subtotal</td>
                 <td colSpan="4" />
                 <td className="budget-table--number">
                   <Dollars long>5</Dollars>
@@ -166,9 +208,22 @@ const CostAllocate = ({
                   Private Contractor
                 </th>
               </tr>
-              <CostSummaryRows items={costSummary[ffy].contractorResources} />
+              {contractorExpanded[ffy].value && (
+                <CostSummaryRows items={costSummary[ffy].contractorResources} />
+              )}
               <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td />
+                <td>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      contractorExpanded[ffy].set(
+                        !contractorExpanded[ffy].value
+                      )
+                    }
+                  >
+                    {contractorExpanded[ffy].value ? '-' : '+'}
+                  </button>
+                </td>
                 <td>Private Contractor Subtotal</td>
                 <td colSpan="4" />
                 <td className="budget-table--number">
