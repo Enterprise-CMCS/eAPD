@@ -98,7 +98,7 @@ const n = x => +x || 0;
 
 const buildBudget = incomingBigState => {
   // Clone the incoming state, so we don't accidentally change anything.
-  const bigState = JSON.parse(JSON.stringify(incomingBigState));
+  const bigState = JSON.parse(JSON.stringify({ apd: incomingBigState.apd }));
 
   // Get a shell of our new state object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
