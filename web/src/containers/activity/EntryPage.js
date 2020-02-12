@@ -17,25 +17,16 @@ const EntryPage = () => {
 
   return (
     <Tabs>
-      <TabPanel
-        id={`activity-overview-${activityIndex}-tab`}
-        tab="Activity overview"
-      >
+      <TabPanel id="activity-overview-tab" tab="Activity overview">
         <Overview activityIndex={activityIndex} />
         <StandardsAndConditions activityIndex={activityIndex} />
       </TabPanel>
-      <TabPanel
-        id={`activity-goals-${activityIndex}-tab`}
-        tab="Objectives and key results"
-      >
+      <TabPanel id={`activity-goals-tab`} tab="Objectives and key results">
         <Objectives activityIndex={activityIndex} />
         <Schedule activityIndex={activityIndex} />
         <Milestones activityIndex={activityIndex} />
       </TabPanel>
-      <TabPanel
-        id={`activity-cost-categories-${activityIndex}-tab`}
-        tab="State cost categories"
-      >
+      <TabPanel id={`activity-cost-categories-tab`} tab="State cost categories">
         <Costs activityIndex={activityIndex} />
       </TabPanel>
       <TabPanel
@@ -44,10 +35,7 @@ const EntryPage = () => {
       >
         <ContractorResources activityIndex={activityIndex} />
       </TabPanel>
-      <TabPanel
-        id={`activity-cost-allocation-${activityIndex}-tab`}
-        tab="Cost allocation"
-      >
+      <TabPanel id={`activity-cost-allocation-tab`} tab="Cost allocation">
         <CostAllocate activityIndex={activityIndex} />
       </TabPanel>
     </Tabs>

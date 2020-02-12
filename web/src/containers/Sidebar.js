@@ -25,7 +25,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
   const createActivityItems = () => {
     const activityItems = activities.map((a, i) => ({
       id: a.key,
-      url: ``,
+      url: `#`,
       label: t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
         number: i + 1,
         name: a.name
@@ -213,6 +213,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
         )}
         <h1>{place.name}</h1>
       </div>
+
       <VerticalNav
         selectedId={activeSection || 'apd-state-profile-overview'}
         items={links}
