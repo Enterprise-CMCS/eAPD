@@ -11,94 +11,211 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
     key="1066"
   >
     <h6
-      className="ds-h3"
+      className="ds-h3 ds-u-margin-bottom--2"
     >
-      FFY 
+      Cost Allocation for FFY 
       1066
       :
     </h6>
-    <p>
-      <Dollars
-        long={true}
-      >
-        300
-      </Dollars>
-    </p>
-    <DollarField
-      label="Other Funding Amount"
-      labelClassName="ds-h5"
-      name="cost-allocate-other-1066"
-      onBlur={null}
-      onChange={[Function]}
-      value={10}
-    />
-    <p
-      className="ds-h4 ds-u-display--block"
-    >
-      Medicaid Share
-    </p>
-    <p>
-      <Dollars
-        long={true}
-      >
-        290
-      </Dollars>
-    </p>
-    <Dropdown
-      label="Federal-State Split"
-      labelClassName="ds-h5"
-      name="ffp-1066"
-      onChange={[Function]}
-      options={
-        Array [
-          Object {
-            "label": "90-10",
-            "value": "90-10",
-          },
-          Object {
-            "label": "75-25",
-            "value": "75-25",
-          },
-          Object {
-            "label": "50-50",
-            "value": "50-50",
-          },
-        ]
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "p",
+        }
       }
-      value="90-10"
+      reverse={false}
+      source="activities.costAllocate.ffp.otherFundingInstruction"
     />
-    <div
-      className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2"
+    <table
+      className="budget-table"
+      style={
+        Object {
+          "minWidth": "350px",
+          "width": "fit-content",
+        }
+      }
     >
-      <p
-        className="ds-u-margin-bottom--0"
+      <caption
+        className="ds-u-visibility--screen-reader"
       >
-        <strong>
-          Federal
-        </strong>
-      </p>
-      <p>
-        <Dollars
-          long={true}
+        Review the total activity cost, enter any other funding amount, and review the Medicaid share.
+      </caption>
+      <thead>
+        <tr>
+          <th
+            colSpan="3"
+          >
+            Calculated Medicaid Share
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            Activity Cost
+          </th>
+          <td
+            className="budget-table--number"
+            colSpan="2"
+          >
+            <Dollars
+              long={true}
+            >
+              300
+            </Dollars>
+          </td>
+        </tr>
+        <tr>
+          <th
+            className="ds-u-valign--middle"
+          >
+            Other Funding
+          </th>
+          <td
+            className="budget-table--number ds-u-valign--middle ds-u-padding-right--1"
+          >
+            (-)
+          </td>
+          <td
+            className="budget-table--number ds-u-padding-left--0"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="Other Funding Amount"
+              labelClassName="sr-only"
+              name="cost-allocate-other-1066"
+              onBlur={null}
+              onChange={[Function]}
+              value={10}
+            />
+          </td>
+        </tr>
+        <tr
+          className="budget-table--row__highlight"
         >
-          261
-        </Dollars>
-      </p>
-      <p
-        className="ds-u-margin-bottom--0"
+          <th>
+            Medicaid Share
+          </th>
+          <td
+            className="budget-table--number budget-table--subtotal"
+            colSpan="2"
+          >
+            <Dollars
+              long={true}
+            >
+              290
+            </Dollars>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      style={
+        Object {
+          "minWidth": "350px",
+          "width": "fit-content",
+        }
+      }
+    >
+      <caption
+        className="ds-u-visibility--screen-reader"
       >
-        <strong>
-          State
-        </strong>
-      </p>
-      <p>
-        <Dollars
-          long={true}
+        Review the total activity cost, enter any other funding amount, and review the Medicaid share.
+      </caption>
+      <thead>
+        <tr>
+          <th
+            colSpan="2"
+          >
+            Calculated Medicaid Federal and State Share
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            Medicaid Share
+          </th>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars
+              long={true}
+            >
+              290
+            </Dollars>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Federal/State Split
+          </th>
+          <td>
+            <Dropdown
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="Federal-State Split"
+              labelClassName="sr-only"
+              name="ffp-1066"
+              onChange={[Function]}
+              options={
+                Array [
+                  Object {
+                    "label": "90-10",
+                    "value": "90-10",
+                  },
+                  Object {
+                    "label": "75-25",
+                    "value": "75-25",
+                  },
+                  Object {
+                    "label": "50-50",
+                    "value": "50-50",
+                  },
+                ]
+              }
+              value="90-10"
+            />
+          </td>
+        </tr>
+        <tr
+          className="budget-table--row__highlight"
         >
-          29
-        </Dollars>
-      </p>
-    </div>
+          <th>
+            Federal Share
+          </th>
+          <td
+            className="budget-table--number budget-table--subtotal"
+          >
+            <Dollars
+              long={true}
+            >
+              261
+            </Dollars>
+          </td>
+        </tr>
+        <tr
+          className="budget-table--row__highlight"
+        >
+          <th>
+            State Share
+          </th>
+          <td
+            className="budget-table--number budget-table--subtotal"
+          >
+            <Dollars
+              long={true}
+            >
+              29
+            </Dollars>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <Connect(CostAllocateFFPQuarterly)
       activityIndex={0}
       isViewOnly={false}
@@ -110,94 +227,211 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
     key="1067"
   >
     <h6
-      className="ds-h3"
+      className="ds-h3 ds-u-margin-bottom--2"
     >
-      FFY 
+      Cost Allocation for FFY 
       1067
       :
     </h6>
-    <p>
-      <Dollars
-        long={true}
-      >
-        3000
-      </Dollars>
-    </p>
-    <DollarField
-      label="Other Funding Amount"
-      labelClassName="ds-h5"
-      name="cost-allocate-other-1067"
-      onBlur={null}
-      onChange={[Function]}
-      value="0"
-    />
-    <p
-      className="ds-h4 ds-u-display--block"
-    >
-      Medicaid Share
-    </p>
-    <p>
-      <Dollars
-        long={true}
-      >
-        3000
-      </Dollars>
-    </p>
-    <Dropdown
-      label="Federal-State Split"
-      labelClassName="ds-h5"
-      name="ffp-1067"
-      onChange={[Function]}
-      options={
-        Array [
-          Object {
-            "label": "90-10",
-            "value": "90-10",
-          },
-          Object {
-            "label": "75-25",
-            "value": "75-25",
-          },
-          Object {
-            "label": "50-50",
-            "value": "50-50",
-          },
-        ]
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "p",
+        }
       }
-      value="10-90"
+      reverse={false}
+      source="activities.costAllocate.ffp.otherFundingInstruction"
     />
-    <div
-      className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2"
+    <table
+      className="budget-table"
+      style={
+        Object {
+          "minWidth": "350px",
+          "width": "fit-content",
+        }
+      }
     >
-      <p
-        className="ds-u-margin-bottom--0"
+      <caption
+        className="ds-u-visibility--screen-reader"
       >
-        <strong>
-          Federal
-        </strong>
-      </p>
-      <p>
-        <Dollars
-          long={true}
+        Review the total activity cost, enter any other funding amount, and review the Medicaid share.
+      </caption>
+      <thead>
+        <tr>
+          <th
+            colSpan="3"
+          >
+            Calculated Medicaid Share
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            Activity Cost
+          </th>
+          <td
+            className="budget-table--number"
+            colSpan="2"
+          >
+            <Dollars
+              long={true}
+            >
+              3000
+            </Dollars>
+          </td>
+        </tr>
+        <tr>
+          <th
+            className="ds-u-valign--middle"
+          >
+            Other Funding
+          </th>
+          <td
+            className="budget-table--number ds-u-valign--middle ds-u-padding-right--1"
+          >
+            (-)
+          </td>
+          <td
+            className="budget-table--number ds-u-padding-left--0"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="Other Funding Amount"
+              labelClassName="sr-only"
+              name="cost-allocate-other-1067"
+              onBlur={null}
+              onChange={[Function]}
+              value="0"
+            />
+          </td>
+        </tr>
+        <tr
+          className="budget-table--row__highlight"
         >
-          300
-        </Dollars>
-      </p>
-      <p
-        className="ds-u-margin-bottom--0"
+          <th>
+            Medicaid Share
+          </th>
+          <td
+            className="budget-table--number budget-table--subtotal"
+            colSpan="2"
+          >
+            <Dollars
+              long={true}
+            >
+              3000
+            </Dollars>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      style={
+        Object {
+          "minWidth": "350px",
+          "width": "fit-content",
+        }
+      }
+    >
+      <caption
+        className="ds-u-visibility--screen-reader"
       >
-        <strong>
-          State
-        </strong>
-      </p>
-      <p>
-        <Dollars
-          long={true}
+        Review the total activity cost, enter any other funding amount, and review the Medicaid share.
+      </caption>
+      <thead>
+        <tr>
+          <th
+            colSpan="2"
+          >
+            Calculated Medicaid Federal and State Share
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            Medicaid Share
+          </th>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars
+              long={true}
+            >
+              3000
+            </Dollars>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Federal/State Split
+          </th>
+          <td>
+            <Dropdown
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="Federal-State Split"
+              labelClassName="sr-only"
+              name="ffp-1067"
+              onChange={[Function]}
+              options={
+                Array [
+                  Object {
+                    "label": "90-10",
+                    "value": "90-10",
+                  },
+                  Object {
+                    "label": "75-25",
+                    "value": "75-25",
+                  },
+                  Object {
+                    "label": "50-50",
+                    "value": "50-50",
+                  },
+                ]
+              }
+              value="10-90"
+            />
+          </td>
+        </tr>
+        <tr
+          className="budget-table--row__highlight"
         >
-          2700
-        </Dollars>
-      </p>
-    </div>
+          <th>
+            Federal Share
+          </th>
+          <td
+            className="budget-table--number budget-table--subtotal"
+          >
+            <Dollars
+              long={true}
+            >
+              300
+            </Dollars>
+          </td>
+        </tr>
+        <tr
+          className="budget-table--row__highlight"
+        >
+          <th>
+            State Share
+          </th>
+          <td
+            className="budget-table--number budget-table--subtotal"
+          >
+            <Dollars
+              long={true}
+            >
+              2700
+            </Dollars>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <Connect(CostAllocateFFPQuarterly)
       activityIndex={0}
       isViewOnly={false}
