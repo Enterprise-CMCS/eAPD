@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useRouteMatch, useHistory } from 'react-router-dom';
 
 import stickybits from 'stickybits';
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
@@ -18,7 +18,13 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
 
   const history = useHistory();
 
+  const { pathname: locationPath } = useLocation();
+  const { path: routePath } = useRouteMatch();
+
   const handleSelectClick = id => {
+    if (locationPath !== routePath) {
+      history.push(routePath);
+    }
     jumpAction(id);
   };
 
@@ -32,6 +38,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       }),
       onClick: e => {
         e.stopPropagation();
+        jumpAction(a.key);
         history.push(`/apd/activity/${i}`);
       }
     }));
