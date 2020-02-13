@@ -37,7 +37,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
   const createActivityItems = () => {
     const activityItems = activities.map((a, i) => ({
       id: a.key,
-      url: `#`,
+      url: activityIndex !== i ? `#` : null,
       label: t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
         number: i + 1,
         name: a.name
@@ -48,9 +48,8 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
         history.push(`/apd/activity/${i}`);
       },
       items:
-        activityIndex !== i
-          ? null
-          : [
+        activityIndex === i
+          ? [
               {
                 id: `${a.key}-overview`,
                 url: '#',
@@ -102,6 +101,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
                 }
               }
             ]
+          : null
     }));
 
     activityItems.splice(
