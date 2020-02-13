@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route, useParams, useRouteMatch } from 'react-router-dom';
 
 import ContractorResources from './ContractorResources';
@@ -10,13 +11,16 @@ import Objectives from './Objectives';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
 
-const EntryPage = () => {
+const EntryPage = ({ activityNames }) => {
   const activityIndex = +useParams().activityIndex;
 
   const { path } = useRouteMatch();
 
   return (
     <div id="activity-entry-page">
+      <h2>
+        Activity {activityIndex + 1}: {activityNames[activityIndex]}
+      </h2>
       <Switch>
         <Route path={`${path}/overview`}>
           <Overview activityIndex={activityIndex} />
@@ -45,4 +49,10 @@ const EntryPage = () => {
   );
 };
 
-export default EntryPage;
+const mapStateToProps = ({
+  apd: {
+    data: { activities }
+  }
+}) => ({ activityNames: activities.map(({ name }) => name) });
+
+export default connect(mapStateToProps)(EntryPage);
