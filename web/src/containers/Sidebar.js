@@ -21,6 +21,12 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
   const { pathname: locationPath } = useLocation();
   const { path: routePath } = useRouteMatch();
 
+  let activityIndex = null;
+  const activityRouteMatch = /activity\/(\d+)/.exec(locationPath);
+  if (activityRouteMatch) {
+    activityIndex = +activityRouteMatch[1];
+  }
+
   const handleSelectClick = id => {
     if (locationPath !== routePath) {
       history.push(routePath);
@@ -40,7 +46,62 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
         e.stopPropagation();
         jumpAction(a.key);
         history.push(`/apd/activity/${i}`);
-      }
+      },
+      items:
+        activityIndex !== i
+          ? null
+          : [
+              {
+                id: `${a.key}-overview`,
+                url: '#',
+                label: 'Activity overview',
+                onClick: e => {
+                  e.stopPropagation();
+                  jumpAction(`${a.key}-overview`);
+                  history.push(`/apd/activity/${i}/overview`);
+                }
+              },
+              {
+                id: `${a.key}-okr`,
+                url: '#',
+                label: 'Objectives and key results',
+                onClick: e => {
+                  e.stopPropagation();
+                  jumpAction(`${a.key}-okr`);
+                  history.push(`/apd/activity/${i}/okrs`);
+                }
+              },
+              {
+                id: `${a.key}-state-costs`,
+                url: '#',
+                label: 'State cost categories',
+                onClick: e => {
+                  e.stopPropagation();
+                  jumpAction(`${a.key}-state-costs`);
+                  history.push(`/apd/activity/${i}/state-costs`);
+                }
+              },
+              {
+                id: `${a.key}-contractor-costs`,
+                url: '#',
+                label: 'Private contractor costs',
+                onClick: e => {
+                  e.stopPropagation();
+                  jumpAction(`${a.key}-contractor-costs`);
+                  history.push(`/apd/activity/${i}/contractor-costs`);
+                }
+              },
+              {
+                id: `${a.key}-cost-allocation`,
+                url: '#',
+                label: 'Cost allocation',
+                onClick: e => {
+                  e.stopPropagation();
+                  jumpAction(`${a.key}-cost-allocation`);
+                  history.push(`/apd/activity/${i}/cost-allocation`);
+                }
+              }
+            ]
     }));
 
     activityItems.splice(

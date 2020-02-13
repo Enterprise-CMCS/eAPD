@@ -1,7 +1,5 @@
-import { Tabs, TabPanel } from '@cmsgov/design-system-core';
-
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Switch, Route, useParams, useRouteMatch } from 'react-router-dom';
 
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
@@ -15,34 +13,34 @@ import StandardsAndConditions from './StandardsAndConditions';
 const EntryPage = () => {
   const activityIndex = +useParams().activityIndex;
 
+  const { path } = useRouteMatch();
+
   return (
     <div id="activity-entry-page">
-      <Tabs>
-        <TabPanel id="activity-overview-tab" tab="Activity overview">
+      <Switch>
+        <Route path={`${path}/overview`}>
           <Overview activityIndex={activityIndex} />
           <StandardsAndConditions activityIndex={activityIndex} />
-        </TabPanel>
-        <TabPanel id={`activity-goals-tab`} tab="Objectives and key results">
+        </Route>
+        <Route path={`${path}/okrs`}>
           <Objectives activityIndex={activityIndex} />
           <Schedule activityIndex={activityIndex} />
           <Milestones activityIndex={activityIndex} />
-        </TabPanel>
-        <TabPanel
-          id={`activity-cost-categories-tab`}
-          tab="State cost categories"
-        >
+        </Route>
+        <Route path={`${path}/state-costs`}>
           <Costs activityIndex={activityIndex} />
-        </TabPanel>
-        <TabPanel
-          id={`activity-contractor-costs-${activityIndex}-tab`}
-          tab="Private contractor costs"
-        >
+        </Route>
+        <Route path={`${path}/contractor-costs`}>
           <ContractorResources activityIndex={activityIndex} />
-        </TabPanel>
-        <TabPanel id={`activity-cost-allocation-tab`} tab="Cost allocation">
+        </Route>
+        <Route path={`${path}/cost-allocation`}>
           <CostAllocate activityIndex={activityIndex} />
-        </TabPanel>
-      </Tabs>
+        </Route>
+        <Route>
+          <Overview activityIndex={activityIndex} />
+          <StandardsAndConditions activityIndex={activityIndex} />
+        </Route>
+      </Switch>{' '}
     </div>
   );
 };

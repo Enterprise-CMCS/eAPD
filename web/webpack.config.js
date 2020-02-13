@@ -21,7 +21,8 @@ const config = {
     path: path.join(__dirname, 'dist'),
 
     // Bust the cache with a hash!
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    publicPath: '/'
   },
   optimization: {
     // By default, grabs everything in node_modules and puts it into a
