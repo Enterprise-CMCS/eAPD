@@ -16,29 +16,34 @@ const EntryPage = () => {
   const activityIndex = +useParams().activityIndex;
 
   return (
-    <Tabs>
-      <TabPanel id="activity-overview-tab" tab="Activity overview">
-        <Overview activityIndex={activityIndex} />
-        <StandardsAndConditions activityIndex={activityIndex} />
-      </TabPanel>
-      <TabPanel id={`activity-goals-tab`} tab="Objectives and key results">
-        <Objectives activityIndex={activityIndex} />
-        <Schedule activityIndex={activityIndex} />
-        <Milestones activityIndex={activityIndex} />
-      </TabPanel>
-      <TabPanel id={`activity-cost-categories-tab`} tab="State cost categories">
-        <Costs activityIndex={activityIndex} />
-      </TabPanel>
-      <TabPanel
-        id={`activity-contractor-costs-${activityIndex}-tab`}
-        tab="Private contractor costs"
-      >
-        <ContractorResources activityIndex={activityIndex} />
-      </TabPanel>
-      <TabPanel id={`activity-cost-allocation-tab`} tab="Cost allocation">
-        <CostAllocate activityIndex={activityIndex} />
-      </TabPanel>
-    </Tabs>
+    <div id="activity-entry-page">
+      <Tabs>
+        <TabPanel id="activity-overview-tab" tab="Activity overview">
+          <Overview activityIndex={activityIndex} />
+          <StandardsAndConditions activityIndex={activityIndex} />
+        </TabPanel>
+        <TabPanel id={`activity-goals-tab`} tab="Objectives and key results">
+          <Objectives activityIndex={activityIndex} />
+          <Schedule activityIndex={activityIndex} />
+          <Milestones activityIndex={activityIndex} />
+        </TabPanel>
+        <TabPanel
+          id={`activity-cost-categories-tab`}
+          tab="State cost categories"
+        >
+          <Costs activityIndex={activityIndex} />
+        </TabPanel>
+        <TabPanel
+          id={`activity-contractor-costs-${activityIndex}-tab`}
+          tab="Private contractor costs"
+        >
+          <ContractorResources activityIndex={activityIndex} />
+        </TabPanel>
+        <TabPanel id={`activity-cost-allocation-tab`} tab="Cost allocation">
+          <CostAllocate activityIndex={activityIndex} />
+        </TabPanel>
+      </Tabs>
+    </div>
   );
 };
 

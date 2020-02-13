@@ -50,7 +50,7 @@ const ApdApplication = ({
     <div className="site-body ds-l-container">
       <div className="ds-u-margin--0">
         <Sidebar place={place} />
-        <div className="site-main ds-u-padding-top--2">
+        <div id="start-main-content" className="site-main ds-u-padding-top--2">
           <Switch>
             <Route exact path={path}>
               <h1 id="start-main-content" className="ds-h1 apd--title">
