@@ -14,7 +14,7 @@ const makeTitle = ({ name, fundingSource }, i) => {
   if (name) {
     title += `: ${name}`;
   } else {
-    title += `: New Activity`;
+    title += `: Untitled`;
   }
   if (fundingSource) {
     title += ` (${fundingSource})`;
@@ -48,9 +48,11 @@ const EntryDetails = ({
 
   const editContent = (
     <div className="nowrap visibility--screen">
-      <Button size="small" variation="transparent danger" onClick={onRemove}>
-        Delete
-      </Button>
+      {activityIndex > 0 && (
+        <Button size="small" variation="transparent danger" onClick={onRemove}>
+          Delete
+        </Button>
+      )}
       <Button
         size="small"
         variation="transparent"
