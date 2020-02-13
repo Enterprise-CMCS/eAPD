@@ -2,9 +2,11 @@ import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { useMemo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import ActivityDialog from './EntryDetailsDialog';
+import { jumpTo } from '../../actions/app';
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
 import { t } from '../../i18n';
 
@@ -19,13 +21,25 @@ const makeTitle = ({ name, fundingSource }, i) => {
   return title;
 };
 
-const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
+const EntryDetails = ({
+  activityIndex,
+  fundingSource,
+  jumpTo: jumpAction,
+  activityKey,
+  name
+}) => {
   const container = useRef();
+  const history = useHistory();
 
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const goToActivity = () => {
+    jumpAction(activityKey);
+    history.push(`/apd/activity/${activityIndex}`);
   };
 
   const title = useMemo(
@@ -35,11 +49,7 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
 
   const editContent = (
     <div className="nowrap visibility--screen">
-      <Button
-        size="small"
-        variation="transparent"
-        onClick={() => setShowModal(true)}
-      >
+      <Button size="small" variation="transparent" onClick={goToActivity}>
         Edit
       </Button>
     </div>
@@ -87,6 +97,8 @@ const mapStateToProps = (state, { activityIndex }) => {
   return { activityKey: key, fundingSource, name };
 };
 
-export default connect(mapStateToProps)(EntryDetails);
+const mapDispatchToProps = { jumpTo };
+
+export default connect(mapStateToProps, mapDispatchToProps)(EntryDetails);
 
 export { EntryDetails as plain, mapStateToProps };
