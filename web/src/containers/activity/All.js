@@ -9,16 +9,16 @@ import { addActivity } from '../../actions/editActivity';
 import { Section } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
 
-const All = ({ add, first, other }) => {
+const All = ({ add, activities }) => {
   const onAdd = () => add();
 
   return (
     <Waypoint id="activities-overview">
       <Section isNumbered id="activities" resource="activities">
         <h3 className="subsection--title ds-h3">
-          {other.length + 1} program activities
+          {activities.length} program activities
         </h3>
-        {[first, ...other].map(({ key }, index) => (
+        {activities.map(({ key }, index) => (
           <Waypoint id={key} key={key}>
             <EntryDetails activityIndex={index} />
           </Waypoint>
@@ -33,17 +33,10 @@ const All = ({ add, first, other }) => {
 
 All.propTypes = {
   add: PropTypes.func.isRequired,
-  first: PropTypes.object.isRequired,
-  other: PropTypes.arrayOf(PropTypes.object).isRequired
+  activities: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-const mapStateToProps = state => {
-  const activities = selectAllActivities(state);
-  return {
-    first: activities[0],
-    other: activities.slice(1)
-  };
-};
+const mapStateToProps = state => ({ activities: selectAllActivities(state) });
 
 const mapDispatchToProps = {
   add: addActivity
