@@ -12,8 +12,8 @@ import {
 describe('the Activities component', () => {
   const props = {
     add: jest.fn(),
-    first: { first: 'activity', key: 'key1' },
-    other: [
+    activities: [
+      { key: 'key1', first: 'activity' },
       { key: 'key2', second: 'activity' },
       { key: 'key3', third: 'activity' }
     ]
@@ -38,8 +38,7 @@ describe('the Activities component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
-      first: { key: 'key1' },
-      other: [{ key: 'key2' }, { key: 'key3' }]
+      activities: [{ key: 'key1' }, { key: 'key2' }, { key: 'key3' }]
     });
   });
 

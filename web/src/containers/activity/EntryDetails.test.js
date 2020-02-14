@@ -22,6 +22,29 @@ describe('the (Activity) EntryDetails component', () => {
     props.remove.mockClear();
   });
 
+  test('does not render the delete button on the first element', () => {
+    const firstActivityProps = {
+      activityIndex: 0,
+      activityKey: 'activity 1 key',
+      fundingSource: 'money pit',
+      name: 'activity 1 name',
+      remove: jest.fn()
+    };
+    const component = shallow(<EntryDetails {...firstActivityProps} />);
+    expect(component).toMatchSnapshot();
+  });
+
+  test('deletes the element', () => {
+    const component = shallow(<EntryDetails {...props} />);
+    const review = component.find('Review').dive();
+    // First button is the delete button
+    review
+      .find('Button')
+      .at(0)
+      .simulate('click');
+    expect(props.remove).toHaveBeenCalled();
+  });
+
   test('renders correctly with the modal closed', () => {
     const component = shallow(<EntryDetails {...props} />);
     expect(component).toMatchSnapshot();
