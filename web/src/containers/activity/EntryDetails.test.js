@@ -37,10 +37,10 @@ describe('the (Activity) EntryDetails component', () => {
   test('deletes the element', () => {
     const component = shallow(<EntryDetails {...props} />);
     const review = component.find('Review').dive();
-    // First button is the delete button
+    // Second button is the delete button
     review
       .find('Button')
-      .at(0)
+      .at(1)
       .simulate('click');
     expect(props.remove).toHaveBeenCalled();
   });
@@ -50,10 +50,10 @@ describe('the (Activity) EntryDetails component', () => {
     expect(component).toMatchSnapshot();
 
     const review = component.find('Review').dive();
-    // First button is the delete button; second is the edit button
+    // First button is the edit button
     review
       .find('Button')
-      .at(1)
+      .at(0)
       .simulate('click');
 
     // Modal is now open
