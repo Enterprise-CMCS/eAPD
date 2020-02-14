@@ -58,8 +58,6 @@ const CostAllocate = ({
           editorClassName="rte-textarea-l"
         />
       </div>
-      <hr />
-      <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex} />
     </Subsection>
   );
 };
@@ -83,7 +81,4 @@ export const mapDispatchToProps = {
 };
 
 export { CostAllocate as CostAllocateRaw };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CostAllocate);
+export default connect(mapStateToProps, mapDispatchToProps)(CostAllocate);
