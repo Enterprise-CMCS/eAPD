@@ -1,6 +1,6 @@
 import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
@@ -48,11 +48,6 @@ const EntryDetails = ({
 
   const editContent = (
     <div className="nowrap visibility--screen">
-      {activityIndex > 0 && (
-        <Button size="small" variation="transparent danger" onClick={onRemove}>
-          Delete
-        </Button>
-      )}
       <Button
         size="small"
         variation="transparent"
@@ -60,6 +55,14 @@ const EntryDetails = ({
       >
         Edit
       </Button>
+      {activityIndex > 0 && (
+        <Fragment>
+          <span>|</span>
+          <Button size="small" variation="transparent" onClick={onRemove}>
+            Remove
+          </Button>
+        </Fragment>
+      )}
     </div>
   );
 
