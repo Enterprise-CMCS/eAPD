@@ -17,42 +17,60 @@ exports[`the StatePersonReview component renders correctly 1`] = `
     >
       <strong>
         2003
-         Costs:
+         
       </strong>
-       
+      <strong>
+        Costs: 
+      </strong>
       <Dollars
         long={false}
       >
         85938
       </Dollars>
-       |
-       
+       | 
       <strong>
-        FTEs:
+        FTEs: 
       </strong>
-       
       3
+       | 
+      <strong>
+        Total: 
+      </strong>
+      <Dollars
+        long={false}
+      >
+        257814
+      </Dollars>
     </div>
     <div
       key="2004"
     >
       <strong>
         2004
-         Costs:
+         
       </strong>
-       
+      <strong>
+        Costs: 
+      </strong>
       <Dollars
         long={false}
       >
         37523
       </Dollars>
-       |
-       
+       | 
       <strong>
-        FTEs:
+        FTEs: 
       </strong>
-       
       0.5
+       | 
+      <strong>
+        Total: 
+      </strong>
+      <Dollars
+        long={false}
+      >
+        18761.5
+      </Dollars>
     </div>
   </div>
 </StandardReview>
