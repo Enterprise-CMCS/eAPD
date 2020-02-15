@@ -39,7 +39,16 @@ methodology:
       this section.
 ffp:
   title: Federal Financial Participation (FFP) and Cost Allocation
-  medicaidShare: Medicaid Share
+  otherFundingInstruction:
+    heading: Other Funding Amount
+    detail: Enter the total amount that will be used from additional funding sources.
+    helpText: >-
+      Other funding consists of funds that are not directly tied to the CMS
+      grant and the matching state funds for this activity. This funding may
+      come from another federal source, another state agency, and/or
+      contributions or donations from a third party. Other funding will be
+      deducted from the total cost of the activity prior to calculating the
+      Medicaid share.
   labels:
     other: Other Funding Amount
     fedStateSplit: Federal-State Split

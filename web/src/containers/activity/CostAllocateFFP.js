@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 import CostAllocateFFPYearTotal from './CostAllocateFFPYearTotal';
 import {
@@ -46,7 +47,7 @@ class CostAllocateFFP extends Component {
               {isViewOnly ? (
                 <Fragment>
                   <p className="ds-h3 ds-u-margin-y--2">
-                    FFY {year}:{' '}
+                    Cost Allocation for FFY {year}:{' '}
                     <span className="ds-u-font-weight--normal">
                       <Dollars long>{total}</Dollars>
                     </span>
@@ -60,71 +61,161 @@ class CostAllocateFFP extends Component {
                 </Fragment>
               ) : (
                 <Fragment>
-                  <h6 className="ds-h3">FFY {year}:</h6>
-                  <p>
-                    <Dollars long>{total}</Dollars>
-                  </p>
-                  <DollarField
-                    label={t('activities.costAllocate.ffp.labels.other')}
-                    labelClassName="ds-h5"
-                    name={`cost-allocate-other-${year}`}
-                    value={costAllocation[year].other || '0'}
-                    onChange={this.setOther(year)}
+                  <h6 className="ds-h3 ds-u-margin-bottom--2">
+                    Cost Allocation for FFY {year}:
+                  </h6>
+
+                  <Instruction
+                    source="activities.costAllocate.ffp.otherFundingInstruction"
+                    headingDisplay={{
+                      level: 'p',
+                      className: 'ds-h4'
+                    }}
                   />
+
+                  <table
+                    className="budget-table"
+                    style={{ minWidth: '350px', width: 'fit-content' }}
+                  >
+                    <caption className="ds-u-visibility--screen-reader">
+                      Review the total activity cost, enter any other funding
+                      amount, and review the Medicaid share.
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th colSpan="3">Calculated Medicaid Share</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Activity Cost</th>
+                        <td colSpan="2" className="budget-table--number">
+                          <Dollars long>{total}</Dollars>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="ds-u-valign--middle">Other Funding</th>
+                        <td className="budget-table--number ds-u-valign--middle ds-u-padding-right--1">
+                          (-)
+                        </td>
+                        <td className="budget-table--number ds-u-padding-left--0">
+                          <DollarField
+                            className="budget-table--input-holder"
+                            fieldClassName="budget-table--input__number"
+                            label={t(
+                              'activities.costAllocate.ffp.labels.other'
+                            )}
+                            labelClassName="sr-only"
+                            name={`cost-allocate-other-${year}`}
+                            value={costAllocation[year].other || '0'}
+                            onChange={this.setOther(year)}
+                          />
+                        </td>
+                      </tr>
+                      <tr className="budget-table--row__highlight">
+                        <th>Medicaid Share</th>
+                        <td
+                          colSpan="2"
+                          className="budget-table--number budget-table--subtotal"
+                        >
+                          <Dollars long>{medicaidShare}</Dollars>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table
+                    className="budget-table"
+                    style={{ minWidth: '350px', width: 'fit-content' }}
+                  >
+                    <caption className="ds-u-visibility--screen-reader">
+                      Review the total activity cost, enter any other funding
+                      amount, and review the Medicaid share.
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th colSpan="2">
+                          Calculated Medicaid Federal and State Share
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Medicaid Share</th>
+                        <td className="budget-table--number">
+                          <Dollars long>{medicaidShare}</Dollars>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Federal/State Split</th>
+                        <td>
+                          <Dropdown
+                            className="budget-table--input-holder"
+                            fieldClassName="budget-table--input__number"
+                            name={`ffp-${year}`}
+                            label={t(
+                              'activities.costAllocate.ffp.labels.fedStateSplit'
+                            )}
+                            labelClassName="sr-only"
+                            options={[
+                              { label: '90-10', value: '90-10' },
+                              { label: '75-25', value: '75-25' },
+                              { label: '50-50', value: '50-50' }
+                            ]}
+                            value={ffpSelectVal}
+                            onChange={this.setFederalStateSplit(year)}
+                          />
+                        </td>
+                      </tr>
+                      <tr className="budget-table--row__highlight">
+                        <th>Federal Share</th>
+                        <td className="budget-table--number budget-table--subtotal">
+                          <Dollars long>{allocations.federal}</Dollars>
+                        </td>
+                      </tr>
+                      <tr className="budget-table--row__highlight">
+                        <th>State Share</th>
+                        <td className="budget-table--number budget-table--subtotal">
+                          <Dollars long>{allocations.state}</Dollars>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </Fragment>
               )}
 
-              {isViewOnly ? (
+              {isViewOnly && (
                 <p className="ds-h4 ds-u-margin-y--2">
                   {t('activities.costAllocate.ffp.medicaidShare')}:{' '}
                   <span className="ds-u-font-weight--normal">
                     <Dollars long>{medicaidShare}</Dollars>
                   </span>
                 </p>
-              ) : (
+              )}
+
+              {isViewOnly && (
                 <Fragment>
-                  <p className="ds-h4 ds-u-display--block">
-                    {t('activities.costAllocate.ffp.medicaidShare')}
-                  </p>
                   <p>
-                    <Dollars long>{medicaidShare}</Dollars>
+                    <strong>Federal-State Split: </strong>
+                    {ffpSelectVal}
                   </p>
+                  <div className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2">
+                    <p className="ds-u-margin-bottom--0">
+                      <strong>Federal</strong>
+                    </p>
+                    <p>
+                      <Dollars long>{allocations.federal}</Dollars>
+                    </p>
+                    <p className="ds-u-margin-bottom--0">
+                      <strong>State</strong>
+                    </p>
+                    <p>
+                      <Dollars long>{allocations.state}</Dollars>
+                    </p>
+                  </div>
                 </Fragment>
               )}
 
-              {isViewOnly ? (
-                <p>
-                  <strong>Federal-State Split: </strong>
-                  {ffpSelectVal}
-                </p>
-              ) : (
-                <Dropdown
-                  name={`ffp-${year}`}
-                  label={t('activities.costAllocate.ffp.labels.fedStateSplit')}
-                  labelClassName="ds-h5"
-                  options={[
-                    { label: '90-10', value: '90-10' },
-                    { label: '75-25', value: '75-25' },
-                    { label: '50-50', value: '50-50' }
-                  ]}
-                  value={ffpSelectVal}
-                  onChange={this.setFederalStateSplit(year)}
-                />
-              )}
-              <div className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2">
-                <p className="ds-u-margin-bottom--0">
-                  <strong>Federal</strong>
-                </p>
-                <p>
-                  <Dollars long>{allocations.federal}</Dollars>
-                </p>
-                <p className="ds-u-margin-bottom--0">
-                  <strong>State</strong>
-                </p>
-                <p>
-                  <Dollars long>{allocations.state}</Dollars>
-                </p>
-              </div>
               <CostAllocateFFPQuarterly
                 activityIndex={activityIndex}
                 aKey={aKey}

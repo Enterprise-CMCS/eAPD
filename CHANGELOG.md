@@ -1,34 +1,28 @@
 # Next release
 
-Anticipated release: February 3, 2020
+Anticipated release: February 18, 2020
 
 #### 🚀 New features
 
-- Changed activity goals to activity objectives and key results (OKRs) ([#2007])
-- Make autosave more screen-reader friendly [(#2020)]
-- Changed the APD name to `HITECH IAPD` ([#1821], [#1993])
-- Added loading state for rich text editor ([#2015])
+- Updates the cost allocation section to make it clearer how the various numbers are related to each other, and updates the help text describing "other funding." ([#1935], [#1992])
+- The executive summary for activities now includes activity costs per federal fiscal year ([#1927])
+- Activity state personnel now show calculated total cost instead of just rate and FTEs. ([#2013])
 
 #### 🐛 Bugs fixed
 
-- Fixed a bug where toggling the "show password" checkbox on passwords caused the text field to be changed to "Show password" [(#2023)]
-- Fixed a bug where adding a new list item to an activity (goal, milestone, expense, etc.) caused that new item to be expanded every time the activity was opened until the page was reloaded. [(#2026)]
-- Fixed a bug where images could upload every single time an APD loaded, forever and ever ([#2017])
+- Fixed a bug where APD Key Personnel weren't being counted as state personnel for the Program Administration activity for some budget calculations. - ([#2037])
+- Updated the text describing in-house cost categories to be more clear ([#1936])
+- Fixed a bug where autosave happened too often, causing performance issues, and potentially inconsistent saved data.
 
 #### ⚙️ Behind the scenes
-
-- Split up some code components to make them more reusable ([#2005])
 
 # Previous releases
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
-[#2007]: https://github.com/18F/cms-hitech-apd/issues/2007
-[#1821]: https://github.com/18F/cms-hitech-apd/issues/1821
-[#1993]: https://github.com/18F/cms-hitech-apd/issues/199
-[#2015]: https://github.com/18F/cms-hitech-apd/pull/2015
-[#2023]: https://github.com/18F/cms-hitech-apd/issues/2023
-[#2026]: https://github.com/18F/cms-hitech-apd/issues/2026
-[#2017]: https://github.com/18F/cms-hitech-apd/issues/2017
-[#2020]: https://github.com/18F/cms-hitech-apd/pull/2028
-[#2005]: https://github.com/18F/cms-hitech-apd/issues/2005
+[#1935]: https://github.com/18F/cms-hitech-apd/issues/1935
+[#1992]: https://github.com/18F/cms-hitech-apd/issues/1992
+[#1927]: https://github.com/18F/cms-hitech-apd/issues/1927
+[#2037]: https://github.com/18F/cms-hitech-apd/issues/2037
+[#1936]: https://github.com/18F/cms-hitech-apd/issues/1936
+[#2013]: https://github.com/18F/cms-hitech-apd/issues/2013

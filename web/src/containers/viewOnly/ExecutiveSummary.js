@@ -38,6 +38,16 @@ class ExecutiveSummary extends PureComponent {
               <strong>Total funding request:</strong>{' '}
               <Dollars long>{total.combined}</Dollars>
             </li>
+            {Object.entries(total.ffys).map(
+              ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
+                <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
+                  <strong>FFY {ffy}:</strong> <Dollars long>{ffyTotal}</Dollars>{' '}
+                  | <strong>Medicaid share:</strong>{' '}
+                  <Dollars long>{medicaid}</Dollars> (
+                  <Dollars long>{federal}</Dollars> Federal share)
+                </li>
+              )
+            )}
           </ul>
         </Review>
         {data.map((activity, i) => (
@@ -63,6 +73,17 @@ class ExecutiveSummary extends PureComponent {
                 <Dollars long>{activity.medicaid}</Dollars> (
                 <Dollars long>{activity.federal}</Dollars> Federal share)
               </li>
+              {Object.entries(activity.ffys).map(
+                ([ffy, { medicaidShare, federal, total: ffyTotal }], j) => (
+                  <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
+                    <strong>FFY {ffy}:</strong>{' '}
+                    <Dollars long>{ffyTotal}</Dollars> |{' '}
+                    <strong>Medicaid share:</strong>{' '}
+                    <Dollars long>{medicaidShare}</Dollars> (
+                    <Dollars long>{federal}</Dollars> Federal share)
+                  </li>
+                )
+              )}
             </ul>
           </Review>
         ))}
