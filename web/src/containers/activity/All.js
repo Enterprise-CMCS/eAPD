@@ -16,12 +16,8 @@ import { selectAllActivities } from '../../reducers/activities.selectors';
 const All = ({ add, first, other, remove }) => {
   const onAdd = () => add();
 
-  const onRemove = key => {
-    [first, ...other].forEach(({ key: activityKey }, i) => {
-      if (activityKey === key) {
-        remove(i);
-      }
-    });
+  const onRemove = index => {
+    remove(index);
   };
 
   return (
@@ -72,9 +68,6 @@ const mapDispatchToProps = {
   remove: removeActivity
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(All);
+export default connect(mapStateToProps, mapDispatchToProps)(All);
 
 export { All as plain, mapStateToProps, mapDispatchToProps };

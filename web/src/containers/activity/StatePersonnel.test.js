@@ -46,7 +46,7 @@ describe('activity state personnel costs subsection', () => {
     });
 
     it('handles deleting a state person', () => {
-      list.prop('onDeleteClick')('personnel key');
+      list.prop('onDeleteClick')(0);
       expect(props.remove).toHaveBeenCalledWith(72, 0);
     });
   });
