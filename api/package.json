@@ -51,8 +51,8 @@
   },
   "homepage": "https://github.com/18F/cms-hitech-apd#readme",
   "dependencies": {
-    "ajv": "^6.10.2",
-    "aws-sdk": "^2.596.0",
+    "ajv": "^6.11.0",
+    "aws-sdk": "^2.620.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.3",
     "cookies": "^0.8.0",
@@ -62,13 +62,13 @@
     "jsonpatch": "^3.0.1",
     "jsonpointer": "^4.0.1",
     "jsonwebtoken": "^8.5.0",
-    "knex": "^0.20.6",
+    "knex": "^0.20.10",
     "moment": "^2.24.0",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pg": "^7.17.0",
-    "uuid": "^3.3.3",
+    "pg": "^7.18.1",
+    "uuid": "^3.4.0",
     "winston": "^2.4.4",
     "zxcvbn": "^4.4.2"
   },
@@ -79,15 +79,15 @@
     "colors": "^1.4.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-plugin-import": "^2.19.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
     "jest": "^24.9.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
-    "request": "^2.88.0",
-    "sinon": "^8.0.2",
+    "request": "^2.88.2",
+    "sinon": "^8.1.1",
     "stream-mock": "^2.0.5",
-    "tap": "^14.10.5"
+    "tap": "^14.10.6"
   },
   "jest": {
     "testMatch": [
