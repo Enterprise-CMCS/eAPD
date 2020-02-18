@@ -13,6 +13,7 @@ Anticipated release: February 18, 2020
 - Fixed a bug where APD Key Personnel weren't being counted as state personnel for the Program Administration activity for some budget calculations. - ([#2037])
 - Updated the text describing in-house cost categories to be more clear ([#1936])
 - Fixed a bug where autosave happened too often, causing performance issues, and potentially inconsistent saved data.
+- Fixed a bug that prevented creating new activities.
 
 #### ⚙️ Behind the scenes
 
