@@ -1,169 +1,153 @@
-const { state: defaultStateModel } = require('../../db').models;
+const getNewApd = () => {
+  const thisFFY = (() => {
+    const year = new Date().getFullYear();
 
-const yearsToArray = (years, obj) =>
-  years.map(year => ({
-    ...obj,
-    year: `${year}`
-  }));
-
-const getActivityCostAllocations = years =>
-  yearsToArray(years, {
-    federalPercent: 0.9,
-    statePercent: 0.1,
-    otherAmount: 0
-  });
-
-const getContractor = years => ({
-  description: '',
-  hourlyData: yearsToArray(years, { hours: 0, rate: 0 }),
-  name: '',
-  useHourly: false,
-  years: yearsToArray(years, { cost: 0 })
-});
-
-const getGoal = () => ({
-  description: '',
-  objective: ''
-});
-
-const getExpense = years => ({
-  category: '',
-  description: '',
-  entries: yearsToArray(years, { amount: 0 })
-});
-
-const getIncentivePayments = years =>
-  yearsToArray(years, {
-    q1: { ehPayment: 0, epPayment: 0 },
-    q2: { ehPayment: 0, epPayment: 0 },
-    q3: { ehPayment: 0, epPayment: 0 },
-    q4: { ehPayment: 0, epPayment: 0 }
-  });
-
-const getPreviousActivityExpenses = years =>
-  yearsToArray(years, {
-    hie: {
-      federalActual: 0,
-      federalApproved: 0,
-      stateActual: 0,
-      stateApproved: 0
-    },
-    hit: {
-      federalActual: 0,
-      federalApproved: 0,
-      stateActual: 0,
-      stateApproved: 0
-    },
-    mmis: {
-      federal90Actual: 0,
-      federal90Approved: 0,
-      federal75Actual: 0,
-      federal75Approved: 0,
-      federal50Actual: 0,
-      federal50Approved: 0,
-      state10Actual: 0,
-      state10Approved: 0,
-      state25Actual: 0,
-      state25Approved: 0,
-      state50Actual: 0,
-      state50Approved: 0
+    // Federal fiscal year starts October 1,
+    // but Javascript months start with 0 for
+    // some reason, so October is month 9.
+    if (new Date().getMonth() > 8) {
+      return year + 1;
     }
-  });
+    return year;
+  })();
 
-const getScheduleMilestone = () => ({
-  milestone: ''
-});
-
-const getStatePersonnel = years => ({
-  description: '',
-  title: '',
-  years: yearsToArray(years, {
-    cost: 0,
-    fte: 0
-  })
-});
-
-const getStateProfile = () => ({
-  medicaidDirector: {
-    email: '',
-    name: '',
-    phone: ''
-  },
-  medicaidOffice: {
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    zip: ''
-  }
-});
-
-const repeat = (number, obj) => [...Array(number)].map(() => obj);
-
-const getNewApd = async (stateID, { StateModel = defaultStateModel } = {}) => {
-  // TODO: Fix these years.  Maybe copy over from how we
-  // compute them on the frontend. 🤷‍♂️
-  const yearOptions = ['2018', '2019', '2020'];
+  const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
   const years = yearOptions.slice(0, 2);
 
-  const stateProfile = getStateProfile();
-  const state = await StateModel.where({ id: stateID }).fetch();
-  if (state.get('medicaid_office')) {
-    const stored = state.get('medicaid_office');
-    stateProfile.medicaidDirector = stored.medicaidDirector;
-    stateProfile.medicaidOffice = stored.medicaidOffice;
-  }
-
-  const pointsOfContact = [];
-  if (state.get('state_pocs')) {
-    pointsOfContact.push(...state.get('state_pocs'));
-  }
+  const forAllYears = (obj, yearsToCover = years) =>
+    yearsToCover.reduce(
+      (acc, year) => ({
+        ...acc,
+        [year]: obj
+      }),
+      {}
+    );
 
   return {
     activities: [
       {
         alternatives: '',
-        contractorResources: repeat(1, getContractor(years)),
-        costAllocation: getActivityCostAllocations(years),
+        contractorResources: [
+          {
+            description: '',
+            end: '',
+            hourly: {
+              data: forAllYears({ hours: 0, rate: 0 }),
+              useHourly: false
+            },
+            name: '',
+            start: '',
+            totalCost: 0,
+            years: forAllYears(0)
+          }
+        ],
+        costAllocation: forAllYears({
+          ffp: { federal: 90, state: 10 },
+          other: 0
+        }),
         costAllocationNarrative: {
           methodology: '',
           otherSources: ''
         },
         description: '',
-        expenses: repeat(1, getExpense(years)),
+        expenses: [
+          {
+            category: '',
+            description: '',
+            years: forAllYears(0)
+          }
+        ],
         fundingSource: 'HIT',
-        goals: [getGoal()],
         name: 'Program Administration',
-        schedule: repeat(1, getScheduleMilestone()),
+        objectives: [
+          {
+            objective: '',
+            keyResults: [{ baseline: '', keyResult: '', target: '' }]
+          }
+        ],
+        plannedEndDate: '',
+        plannedStartDate: '',
+        schedule: [
+          {
+            endDate: '',
+            milestone: ''
+          }
+        ],
         standardsAndConditions: {
-          businessResults: '',
-          documentation: '',
-          industryStandards: '',
-          interoperability: '',
-          keyPersonnel: '',
-          leverage: '',
-          minimizeCost: '',
-          mitigationStrategy: '',
-          modularity: '',
-          mita: '',
-          reporting: ''
+          doesNotSupport: '',
+          supports: ''
         },
-        statePersonnel: repeat(1, getStatePersonnel(years)),
+        statePersonnel: [
+          {
+            description: '',
+            title: '',
+            years: forAllYears({
+              amt: 0,
+              perc: 0
+            })
+          }
+        ],
         summary: '',
-        quarterlyFFP: yearsToArray(years, { q1: 0, q2: 0, q3: 0, q4: 0 })
+        quarterlyFFP: forAllYears({
+          1: { contractors: 0, state: 0 },
+          2: { contractors: 0, state: 0 },
+          3: { contractors: 0, state: 0 },
+          4: { contractors: 0, state: 0 }
+        })
       }
     ],
-    incentivePayments: getIncentivePayments(years),
+    federalCitations: {},
+    incentivePayments: {
+      ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+      ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+      epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+      epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
+    },
+    keyPersonnel: [
+      {
+        email: '',
+        hasCosts: false,
+        costs: forAllYears(0),
+        isPrimary: true,
+        name: '',
+        percentTime: '',
+        position: ''
+      }
+    ],
+    name: 'HITECH IAPD',
     narrativeHIE: '',
     narrativeHIT: '',
     narrativeMMIS: '',
-    pointsOfContact,
-    previousActivityExpenses: getPreviousActivityExpenses(
+    previousActivityExpenses: forAllYears(
+      {
+        hithie: {
+          federalActual: 0,
+          totalApproved: 0
+        },
+        mmis: {
+          90: { federalActual: 0, totalApproved: 0 },
+          75: { federalActual: 0, totalApproved: 0 },
+          50: { federalActual: 0, totalApproved: 0 }
+        }
+      },
       [0, 1, 2].map(past => yearOptions[0] - past)
     ),
     previousActivitySummary: '',
     programOverview: '',
-    stateProfile,
+    stateProfile: {
+      medicaidDirector: {
+        email: '',
+        name: '',
+        phone: ''
+      },
+      medicaidOffice: {
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zip: ''
+      }
+    },
     years
   };
 };

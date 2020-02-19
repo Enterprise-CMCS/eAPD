@@ -1,15 +1,247 @@
-version: 2
+version: 2.1
+
+workflows:
+  version: 2
+
+  # Workflow to cleanup preview deploys from AWS.  Runs every two hours.
+  cleanup preview deploys:
+    triggers:
+      - schedule:
+          # Run every hour, every day. Specified this way because the more
+          # compact cron syntax wasn't working.
+          cron: '0 * * * *'
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cleanup preview deploys
+
+  # Workflow to scan dependencies for vulnerabilities every night
+  nightly dependency vulnerability scan:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *'
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - install dependencies
+      - dependency vulnerability scan:
+          name: backend dependency vulnerability scan
+          path: api
+          requires:
+            - install dependencies
+      - dependency vulnerability scan:
+          name: frontend dependency vulnerability scan
+          path: web
+          requires:
+            - install dependencies
+  
+  # Workflow to test, build, and deploy the backend and frontend
+  test, build, and deploy:
+    jobs:
+      # independent jobs
+      - install dependencies:
+          filters:
+            tags:
+              only: /.*/
+      - owasp zap scan:
+          filters:
+            tags:
+              only: /.*/
+      - validate openapi:
+          filters:
+            tags:
+              only: /.*/
+      - yaml test:
+          filters:
+            tags:
+              only: /.*/
+
+      # backend jobs
+      - backend api endpoint test:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - install dependencies
+      - dependency vulnerability scan:
+          filters:
+            tags:
+              only: /.*/
+          name: backend dependency vulnerability scan
+          path: api
+          requires:
+            - install dependencies
+      - backend lint:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - install dependencies
+      - backend unit test:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - install dependencies
+      - backend deploy:
+          name: backend deploy staging
+          env: STAGING
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - store artifacts staging
+            - backend api endpoint test
+            - backend dependency vulnerability scan
+            - backend lint
+            - backend unit test
+      - backend deploy:
+          name: backend deploy prod
+          env: PRODUCTION
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - store artifacts prod
+            - backend api endpoint test
+            - backend dependency vulnerability scan
+            - backend lint
+            - backend unit test
+
+      # frontend jobs
+      - dependency vulnerability scan:
+          filters:
+            tags:
+              only: /.*/
+          name: frontend dependency vulnerability scan
+          path: web
+          requires:
+            - install dependencies
+      - frontend lint:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - install dependencies
+      - frontend test:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - install dependencies
+            - yaml test
+      - frontend build:
+          name: frontend build preview
+          env: PRODUCTION
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
+            - frontend dependency vulnerability scan
+      - frontend build:
+          name: frontend build prod
+          env: PRODUCTION
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - frontend dependency vulnerability scan
+      - frontend build:
+          name: frontend build staging
+          env: STAGING
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - frontend dependency vulnerability scan
+      - frontend deploy:
+          name: frontend deploy staging
+          env: STAGING
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - frontend build staging
+            - frontend dependency vulnerability scan
+            - frontend lint
+            - frontend test
+            - yaml test
+      - frontend deploy:
+          name: frontend deploy production
+          env: PRODUCTION
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - frontend build prod
+            - frontend dependency vulnerability scan
+            - frontend lint
+            - frontend test
+            - yaml test
+
+      # joint jobs
+      - preview deploy:
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
+            - backend dependency vulnerability scan
+            - frontend build preview
+            - frontend dependency vulnerability scan
+            - yaml test
+
+      - store artifacts:
+          name: store artifacts staging
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - backend dependency vulnerability scan
+            - frontend build staging
+
+      - store artifacts:
+          name: store artifacts prod
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - backend dependency vulnerability scan
+            - frontend build prod
+
 jobs:
-  prepare dependencies cache:
+  # ===== Independent jobs =====
+  # These jobs don't rely on anything else having happened first, and cut
+  # across both backend and frontend.
+
+  # Installs npm dependencies for the frontend and backend pieces, then saves
+  # those in the workflow workspace. Save the npm cache to CircleCI cache to
+  # speed up subsequent builds, but don't save the dependencies to cache
+  # because "npm ci" deletes the node_modules folder anyway so it's pointless.
+  install dependencies:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
       - run:
           name: install web dependencies
           working_directory: ~/project/web
@@ -22,61 +254,17 @@ jobs:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
           paths:
             - /root/.npm
-      - save_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-          paths:
-            - web/node_modules
-      - save_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - persist_to_workspace:
+          root: ~/project
           paths:
             - api/node_modules
+            - web/node_modules
 
-  web dependency vulnerability scan:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - run:
-          name: vulnerability scan
-          working_directory: ~/project/web
-          command: |
-            npx snyk auth $SNYK_TOKEN
-            npx snyk test
-
-  web lint:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - run:
-          name: run linter
-          working_directory: ~/project/web
-          command: npm run lint
-
-  web test:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - run:
-          name: run tests
-          working_directory: ~/project/web
-          command: npm test
-      - run:
-          name: report coverage
-          when: always
-          working_directory: ~/project/web
-          command: bash <(curl -s https://codecov.io/bash)
-
+  # Runs an OpenAPI validator on the API spec generated by our code to ensure
+  # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10
     steps:
       - checkout
       - setup_remote_docker
@@ -90,39 +278,66 @@ jobs:
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
 
-  api dependency vulnerability scan:
+  # Validates YAML files. Doesn't look at content, just structure. Doesn't
+  # enforce a schema either - strictly checks that the files are valid YAML.
+  yaml test:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - run: npm install glob
+      - run: npm install js-yaml
+      - run: 
+          working_directory: ~/project/web
+          command: node yaml-tests.js
+
+  # ===== Backend jobs =====
+  # These all depend on "install dependencies" running first.
+
+  # Runs backend API integration/end-to-end tests.
+  backend api endpoint test:
+    machine:
+      image: circleci/classic:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
       - run:
-          name: vulnerability scan
+          name: build API image
+          working_directory: ~/project/api
+          command: docker build -t cms-eapd/api ./
+      - run:
+          name: run tests
           working_directory: ~/project/api
           command: |
-            npx snyk auth $SNYK_TOKEN
-            npx snyk test
+            # Switch to Node 10.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 10
+            nvm alias default v10
+            ./endpoint-tests/endpoint.sh
 
-  api lint:
+  # Lints the backend code.
+  backend lint:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - attach_workspace:
+          at: ~/project
       - run:
           name: run linter
           working_directory: ~/project/api
           command: npm run lint
 
-  api unit test:
+  # Runs backend unit tests and reports coverage to codecov.io.
+  backend unit test:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - attach_workspace:
+          at: ~/project
       - run:
           name: run tests
           working_directory: ~/project/api
@@ -133,202 +348,295 @@ jobs:
           working_directory: ~/project/api
           command: bash <(curl -s https://codecov.io/bash)
 
-  api endpoint test:
-    docker:
-      - image: node:8
-        environment:
-          - NODE_ENV=test
-          - STORE_TYPE=fs
-          - STORE_PATH=endpoint-tests/files
-      - image: postgres:latest
-        name: db
-        environment:
-          - POSTGRES_USER=postgres
-          - POSTGRES_PASSWORD=cms
-          - POSTGRES_DB=hitech_apd_test
+  # ===== Frontend jobs =====
+  # These all depend on "install dependencies" running first.
 
+  # Builds the static web app into the ~/project/web/dist directory and then
+  # saves that into the workflow workspace.
+  frontend build:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string
+    docker:
+      - image: node:10
     steps:
       - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - attach_workspace:
+          at: ~/project
       - run:
-          name: get wait-on
-          command: |
-            npm i -g wait-on
+          name: build the web app
+          working_directory: ~/project/web
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - web/dist
+
+  # Lints the frontend code.
+  frontend lint:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
       - run:
-          name: wait for database
-          command: wait-on tcp:db:5432 -t 300000
-      - run:
-          name: database migration
-          working_directory: ~/project/api
-          command: npm run migrate
-      - run:
-          name: database seed
-          working_directory: ~/project/api
-          command: npm run seed
-      - run:
-          name: start the API
-          working_directory: ~/project/api
-          command: npm start
-          background: true
-      - run:
-          name: wait for API
-          command: wait-on tcp:localhost:8000 -t 300000
+          name: run linter
+          working_directory: ~/project/web
+          command: npm run lint
+
+  # Runs frontend tests and reports coverage to codecov.io.
+  frontend test:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
       - run:
           name: run tests
+          working_directory: ~/project/web
+          command: npm test -- --runInBand
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/web
+          command: bash <(curl -s https://codecov.io/bash)
+
+  # ===== Shared jobs =====
+  # These all depend on "install dependencies" running first.
+
+  # Uses npm audit to scan the installed dependencies for known vulnerabilities.
+  dependency vulnerability scan:
+    parameters:
+      path:
+        description: The path to test
+        type: string
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: vulnerability scan
+          working_directory: ~/project/<< parameters.path >>
+          command: |
+            npx -p npm-audit-resolver check-audit
+
+  owasp zap scan:
+    machine:
+      image: circleci/classic:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: build API image
           working_directory: ~/project/api
-          command: npm run test-endpoints
+          command: docker build -t cms-eapd/api ./
+      - run:
+          name: start everything up
+          working_directory: ~/project/api
+          command: |
+            docker-compose -f docker-compose.endpoint-tests.yml up -d
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
+      - run:
+          name: pull owasp zap docker image
+          command: docker pull owasp/zap2docker-weekly
+      - run:
+          name: run owasp zap
+          command: |
+            docker run \
+              --network api_default \
+              -v "$(pwd)/owasp":/zap/wrk \
+              owasp/zap2docker-weekly \
+              zap-api-scan.py \
+              -c api-scan.conf \
+              -t http://api-for-testing:8000/open-api \
+              -f openapi
 
-  deploy staging:
+  # ===== Deployment jobs =====
+  # These may have varying prerequisites, but they're grouped here because
+  # they are all related to deployment.
+
+  # Backend production deployment.
+  backend deploy:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string
     docker:
-      - image: node:8
+      - image: python:3
     steps:
       - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+      - attach_workspace:
+          at: ~/project
       - run:
-          name: update npm
-          command: npm install -g npm@6
+          name: deploy to production
+          working_directory: ~/project/bin/prod-deploy
+          command: |
+            apt-get -qq update
+            apt-get -qq install jq -y
+            pip install --quiet awscli
+            ./aws.sh \
+              --API_AWS_ACCESS_KEY_ID "${<< parameters.env >>_API_AWS_ACCESS_KEY_ID}" \
+              --API_AWS_SECRET_ACCESS_KEY "${<< parameters.env >>_API_AWS_SECRET_ACCESS_KEY}" \
+              --API_DATABASE_URL "${<< parameters.env >>_API_DATABASE_URL}" \
+              --API_FILE_S3_BUCKET "${<< parameters.env >>_API_FILE_S3_BUCKET}" \
+              --API_PBKDF2_ITERATIONS "${<< parameters.env >>_API_PBKDF2_ITERATIONS}" \
+              --API_PORT "${<< parameters.env >>_API_PORT}" \
+              --API_SESSION_SECRET "${<< parameters.env >>_API_SESSION_SECRET}" \
+              --AWS_REGION "${<< parameters.env >>_API_AWS_REGION}" \
+              --AWS_SECURITY_GROUP "${<< parameters.env >>_API_AWS_SECURITY_GROUP}" \
+              --AWS_SUBNET "${<< parameters.env >>_API_AWS_SUBNET}" \
+              --AWS_TARGET_GROUP "${<< parameters.env >>_API_AWS_TARGET_GROUP}" \
+              --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \
+              --ENVIRONMENT "$(echo '<< parameters.env >>' | tr '[:upper:]' '[:lower:]')"
       - run:
-          name: deploy to prod
-          command: ./bin/deploy.sh
+          when: on_fail
+          name: notify on deployment failure
+          command: |
+            if [ -n "${SLACK_WEBHOOK_URL}" ]; then
+              curl -X "POST" "${SLACK_WEBHOOK_URL}" \
+                -H "Content-Type: application/json; charset=utf-8" \
+                -d $'{
+                  "attachments": [
+                    {
+                      "color": "#d83933",
+                      "fallback": "<< parameters.env >> backend deployment has failed",
+                      "text": "<< parameters.env >> backend deployment has failed"
+                    }
+                  ]
+                }'
+            fi
+            false
+
+  # Cleans up preview deploys that are no longer associated with open pull
+  # requests.
+  cleanup preview deploys:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: cleanup deploys with no open PR
+          working_directory: ~/project/bin/preview-deploy
+          command: |
+            apt-get -qq update
+            apt-get -qq install jq -y
+            pip install --quiet awscli
+            ./aws.cleanup.sh \
+              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+              --GH_BOT_PASSWORD "$GH_BOT_PASSWORD" \
+              --GH_BOT_USER "$GH_BOT_USER"
+
+  # Frontend production deployment.
+  frontend deploy:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: sync to s3
+          command: |
+            apt-get update
+            apt-get install awscli -y
+            aws s3 sync web/dist "${<< parameters.env >>_WEB_AWS_S3_BUCKET}" --region ${<< parameters.env >>_WEB_AWS_REGION} --delete
+            # Copy up index.html separately, so we can set metadata on it to
+            # disable client cacheing
+            aws s3 cp web/dist/index.html "${<< parameters.env >>_WEB_AWS_S3_BUCKET}/index.html" --cache-control no-cache --region ${<< parameters.env >>_WEB_AWS_REGION}
+      - run:
+          when: on_fail
+          name: notify on deployment failure
+          command: |
+            if [ -n "${SLACK_WEBHOOK_URL}" ]; then
+              curl -X "POST" "${SLACK_WEBHOOK_URL}" \
+                -H "Content-Type: application/json; charset=utf-8" \
+                -d $'{
+                  "attachments": [
+                    {
+                      "color": "#d83933",
+                      "fallback": "<< parameters.env >> frontend deployment has failed",
+                      "text": "<< parameters.env >> frontend deployment has failed"
+                    }
+                  ]
+                }'
+            fi
+            false
+
+  # Preview deployment, used to put up preview links in pull requests
+  preview deploy:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: deploy to preview
+          working_directory: ~/project/bin/preview-deploy
+          command: |
+            if [ -n "$CI_PULL_REQUESTS" ]; then
+              apt-get -qq update
+              apt-get -qq install jq -y
+              pip install --quiet awscli
+              PRNUM=$(basename $CI_PULL_REQUESTS)
+              URL=$(./aws.sh \
+                --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
+                --AWS_AMI "$PREVIEW_AWS_AMI" \
+                --AWS_REGION "$PREVIEW_AWS_REGION" \
+                --AWS_SECURITY_GROUP "$PREVIEW_AWS_SECURITY_GROUP" \
+                --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
+                --BRANCH "$CIRCLE_BRANCH" \
+                --PR_NUM "$PRNUM"
+              )
+              ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
+            else
+              echo "Not a pull request"
+            fi
+
+  # Zips up artifacts created in build steps and makes them available as
+  # CircleCI artifact downloads.
+  store artifacts:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: create backend build artifact zip
+          working_directory: ~/project
+          command: |
+            apt-get update
+            apt-get install zip -y
+            rm -rf api/seeds/development
+            rm -rf api/seeds/test
+            rm api/seeds/development.js
+            rm api/seeds/test.js
+            rm api/seeds/shared/delete-everything.js
+            cd api
+            npm ci --only=production
+            cd ..
+            zip -r /tmp/backend.zip api/*
+            zip -r /tmp/frontend.zip web/dist/*
+      - run:
+          name: persist build URL to workspace
+          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ./build-url.txt
       - store_artifacts:
-          path: /tmp/webapp.zip
-          destination: build
-
-  deploy pr:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
-      - run:
-          name: deploy for pull request
-          command: ./bin/deploy-pr.sh
-
-  deploy ux testing:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
-      - run:
-          name: deploy to UX testing
-          command: ./bin/deploy-ux-testing.sh
-
-  deploy storybook:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
-      - run:
-          name: deploy storybook
-          command: ./bin/deploy-storybook.sh
-
-  cleanup PR-specific deploys:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - run:
-          name: run nightly script
-          command: ./bin/cleanup-pr-deploys.sh
-
-workflows:
-  version: 2
-  cleanup:
-    triggers:
-      - schedule:
-          cron: "0 0,2,4,6,8,10,12,14,16,18,20,22 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - cleanup PR-specific deploys
-  web:
-    jobs:
-      - prepare dependencies cache
-      - web dependency vulnerability scan:
-          requires:
-            - prepare dependencies cache
-      - web lint:
-          requires:
-            - prepare dependencies cache
-      - web test:
-          requires:
-            - prepare dependencies cache
-      - validate openapi:
-          requires:
-            - prepare dependencies cache
-      - api dependency vulnerability scan:
-          requires:
-            - prepare dependencies cache
-      - api lint:
-          requires:
-             - prepare dependencies cache
-      - api unit test:
-          requires:
-             - prepare dependencies cache
-      - api endpoint test:
-          requires:
-             - prepare dependencies cache
-      - deploy pr:
-          filters:
-            branches:
-              ignore:
-                - master
-          requires:
-            - web test
-      - deploy staging:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - web test
-            - api unit test
-            - api endpoint test
-      - request deploy for UX testing:
-          type: approval
-          filters:
-            branches:
-              only:
-                - master
-      - deploy ux testing:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - request deploy for UX testing
-            - web test
-            - api unit test
-            - api endpoint test
-      - request deploy for storybook:
-          type: approval
-          filters:
-            branches:
-              only:
-                - master
-      - deploy storybook:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - request deploy for storybook
-            - web test
+          path: /tmp/backend.zip
+          destination: backend.zip
+      - store_artifacts:
+          path: /tmp/frontend.zip
+          destination: frontend.zip

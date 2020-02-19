@@ -1,0 +1,593 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`budget summary component data row group renders 1`] = `
+<Fragment>
+  <DataRow
+    category="combined"
+    data={Object {}}
+    entries={
+      Array [
+        10,
+        20,
+        30,
+      ]
+    }
+    key="combined"
+    title="Subtotal"
+    year="1448"
+  />
+  <DataRow
+    category="contractors"
+    data={Object {}}
+    entries={
+      Array [
+        10,
+        20,
+        30,
+      ]
+    }
+    key="contractors"
+    title="Contracted Resources"
+    year="1448"
+  />
+  <DataRow
+    category="expenses"
+    data={Object {}}
+    entries={
+      Array [
+        10,
+        20,
+        30,
+      ]
+    }
+    key="expenses"
+    title="Non-Personnel"
+    year="1448"
+  />
+  <DataRow
+    category="statePersonnel"
+    data={Object {}}
+    entries={
+      Array [
+        10,
+        20,
+        30,
+      ]
+    }
+    key="statePersonnel"
+    title="Project State Staff"
+    year="1448"
+  />
+</Fragment>
+`;
+
+exports[`budget summary component data row renders with data 1`] = `
+<tr
+  className=""
+>
+  <th
+    scope="row"
+  >
+    title text
+  </th>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars
+      long={false}
+    >
+      1000
+    </Dollars>
+  </td>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars
+      long={false}
+    >
+      1
+    </Dollars>
+  </td>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars
+      long={false}
+    >
+      2
+    </Dollars>
+  </td>
+</tr>
+`;
+
+exports[`budget summary component data row renders with no data 1`] = `
+<tr
+  className=""
+>
+  <th
+    scope="row"
+  >
+    title text
+  </th>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars
+      long={false}
+    >
+      0
+    </Dollars>
+  </td>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars
+      long={false}
+    >
+      0
+    </Dollars>
+  </td>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars
+      long={false}
+    >
+      0
+    </Dollars>
+  </td>
+</tr>
+`;
+
+exports[`budget summary component header row renders 1`] = `
+<tr>
+  <th
+    id="summary-budget-fy-1"
+    key="1"
+  >
+    FFY 1
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    Medicaid Total
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    Federal Total
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    State Total
+  </th>
+</tr>
+`;
+
+exports[`budget summary component header row renders 2`] = `
+<tr>
+  <th
+    id="summary-budget-fy-total"
+    key="total"
+  >
+    Total
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    Medicaid Total
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    Federal Total
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    State Total
+  </th>
+</tr>
+`;
+
+exports[`budget summary component renders correctly 1`] = `
+<Fragment>
+  <h4
+    aria-hidden="true"
+    className="ds-h4"
+  >
+    HIT Activities
+  </h4>
+  <table
+    className="budget-table"
+    key="1"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       HIT Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="1"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "hit data",
+          ]
+        }
+        isViewOnly={false}
+        year="1"
+      />
+    </tbody>
+  </table>
+  <table
+    className="budget-table"
+    key="2"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       HIT Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="2"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "hit data",
+          ]
+        }
+        isViewOnly={false}
+        year="2"
+      />
+    </tbody>
+  </table>
+  <table
+    className="budget-table"
+    key="total"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       HIT Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="total"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "hit data",
+          ]
+        }
+        isViewOnly={false}
+        year="total"
+      />
+    </tbody>
+  </table>
+  <h4
+    aria-hidden="true"
+    className="ds-h4"
+  >
+    HIE Activities
+  </h4>
+  <table
+    className="budget-table"
+    key="1"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       HIE Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="1"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "hie data",
+          ]
+        }
+        isViewOnly={false}
+        year="1"
+      />
+    </tbody>
+  </table>
+  <table
+    className="budget-table"
+    key="2"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       HIE Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="2"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "hie data",
+          ]
+        }
+        isViewOnly={false}
+        year="2"
+      />
+    </tbody>
+  </table>
+  <table
+    className="budget-table"
+    key="total"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       HIE Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="total"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "hie data",
+          ]
+        }
+        isViewOnly={false}
+        year="total"
+      />
+    </tbody>
+  </table>
+  <h4
+    aria-hidden="true"
+    className="ds-h4"
+  >
+    MMIS Activities
+  </h4>
+  <table
+    className="budget-table"
+    key="1"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       MMIS Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="1"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "mmis data",
+          ]
+        }
+        isViewOnly={false}
+        year="1"
+      />
+    </tbody>
+  </table>
+  <table
+    className="budget-table"
+    key="2"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       MMIS Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="2"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "mmis data",
+          ]
+        }
+        isViewOnly={false}
+        year="2"
+      />
+    </tbody>
+  </table>
+  <table
+    className="budget-table"
+    key="total"
+  >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       MMIS Activities
+    </caption>
+    <thead>
+      <HeaderRow
+        yr="total"
+      />
+    </thead>
+    <tbody>
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "mmis data",
+          ]
+        }
+        isViewOnly={false}
+        year="total"
+      />
+    </tbody>
+  </table>
+  <table
+    className="budget-table"
+  >
+    <caption
+      className="ds-h4"
+    >
+      Project Activities Totals
+    </caption>
+    <thead>
+      <tr>
+        <td
+          className="th"
+          id="summary-budget-null1"
+        />
+        <th
+          className="ds-u-text-align--right"
+          scope="col"
+        >
+          Medicaid Total
+        </th>
+        <th
+          className="ds-u-text-align--right"
+          scope="col"
+        >
+          Federal Total
+        </th>
+        <th
+          className="ds-u-text-align--right"
+          scope="col"
+        >
+          State Total
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className=""
+        key="1"
+      >
+        <th
+          scope="row"
+        >
+          FFY 1
+        </th>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars
+            long={false}
+          >
+            1000
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars
+            long={false}
+          >
+            1
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars
+            long={false}
+          >
+            2
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className=""
+        key="2"
+      >
+        <th
+          scope="row"
+        >
+          FFY 2
+        </th>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars
+            long={false}
+          >
+            2000
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars
+            long={false}
+          >
+            10
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars
+            long={false}
+          >
+            20
+          </Dollars>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</Fragment>
+`;

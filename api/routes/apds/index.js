@@ -1,28 +1,29 @@
 const logger = require('../../logger')('apds route index');
+const del = require('./delete');
 const get = require('./get');
+const patch = require('./patch');
 const post = require('./post');
-const put = require('./put');
-const activities = require('./activities');
-const versions = require('./versions/post');
+const files = require('./files');
 
 module.exports = (
   app,
-  getEndpoint = get,
-  postEndpoint = post,
-  putEndpoint = put,
-  activitiesEndpoints = activities,
-  versionsEndpoints = versions
+  {
+    deleteEndpoint = del,
+    filesEndpoints = files,
+    getEndpoint = get,
+    patchEndpoint = patch,
+    postEndpoint = post
+  } = {}
 ) => {
+  logger.silly('setting up DELETE endpoint');
+  deleteEndpoint(app);
   logger.silly('setting up GET endpoint');
   getEndpoint(app);
+  logger.silly('setting up PATCH endpoint');
+  patchEndpoint(app);
   logger.silly('setting up POST endpoint');
   postEndpoint(app);
-  logger.silly('setting up PUT endpoint');
-  putEndpoint(app);
 
-  logger.silly('setting up APD activities endpoints');
-  activitiesEndpoints(app);
-
-  logger.silly('setting up APD versions endpoints');
-  versionsEndpoints(app);
+  logger.silly('setting up APD image endpoints');
+  filesEndpoints(app);
 };

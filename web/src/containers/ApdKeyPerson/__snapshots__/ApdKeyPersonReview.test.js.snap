@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ApdKeyPersonReview component renders correctly 1`] = `
+<Fragment>
+  <div
+    className="visibility--screen"
+  >
+    <StandardReview
+      editHref={null}
+      heading="13. Bob the Builder"
+      headingLevel={4}
+      onDeleteClick={[MockFunction]}
+      onEditClick={[MockFunction]}
+    >
+      <ul
+        className="ds-c-list--bare"
+      >
+        <li>
+          The Builder
+        </li>
+        <li>
+          <strong>
+            Total cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            400
+          </Dollars>
+        </li>
+        <li
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            100
+          </Dollars>
+        </li>
+        <li
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            300
+          </Dollars>
+        </li>
+      </ul>
+    </StandardReview>
+  </div>
+  <div
+    className="visibility--print"
+  >
+    <StandardReview
+      editHref={null}
+      heading="13. Bob the Builder"
+      onDeleteClick={null}
+      onEditClick={null}
+    >
+      <ul
+        className="ds-c-list--bare"
+      >
+        <li>
+          The Builder
+        </li>
+        <li>
+          email address
+        </li>
+        <li>
+          <strong>
+            Time commitment to project:
+          </strong>
+           
+          32
+          %
+        </li>
+        <li>
+          <strong>
+            Total cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            400
+          </Dollars>
+        </li>
+        <li
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            100
+          </Dollars>
+        </li>
+        <li
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            300
+          </Dollars>
+        </li>
+      </ul>
+    </StandardReview>
+  </div>
+</Fragment>
+`;

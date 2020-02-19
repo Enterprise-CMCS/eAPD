@@ -43,29 +43,14 @@ describe('provides default years based on now', () => {
 
 describe('utility functions', () => {
   const {
-    addObjVals,
     applyToNumbers,
     arrToObj,
+    generateKey,
     getParams,
-    nextSequence,
-    replaceNulls,
-    stateLookup,
-    titleCase
+    stateDateToDisplay,
+    stateDateRangeToDisplay,
+    stateLookup
   } = load();
-
-  test('replace nulls with empty strings in an object', () => {
-    expect(replaceNulls({ foo: null, bar: 123 })).toEqual({
-      foo: '',
-      bar: 123
-    });
-
-    expect(replaceNulls({ foo: { bar: null, baz: 'abc' }, foo2: 123 })).toEqual(
-      {
-        foo: { bar: '', baz: 'abc' },
-        foo2: 123
-      }
-    );
-  });
 
   test('apply a function to numbers in an object, deeply', () => {
     expect(applyToNumbers({ a: 1, b: 2, c: { d: 7 } }, () => 'boop')).toEqual({
@@ -93,8 +78,35 @@ describe('utility functions', () => {
     );
   });
 
-  test('gets the next number in a sequence', () => {
-    expect(nextSequence([1, 2, 6, 38, 3, 19])).toEqual(39);
+  test('generates a key', () => {
+    // Letters are only 37.5% of hex digits, so running this test a lot makes
+    // it statistically very unlikely that we'd just happen to only generate
+    // keys that start with a letter
+    for (let i = 0; i < 50000; i += 1) {
+      const key = generateKey();
+      expect(key).toEqual(expect.stringMatching(/^[a-f0-9]{8}$/));
+      expect(key).toEqual(expect.stringMatching(/[a-f]/));
+    }
+  });
+
+  test('converts a state-formatted date string into a display string', () => {
+    expect(stateDateToDisplay('2014-04-03')).toEqual('4/3/2014');
+    expect(stateDateToDisplay(null)).toEqual('Date not specified');
+    expect(stateDateToDisplay()).toEqual('Date not specified');
+  });
+
+  test('converts two state-formatted date strings into a display date range', () => {
+    expect(stateDateRangeToDisplay('2014-04-03', '2015-04-19')).toEqual(
+      '4/3/2014 - 4/19/2015'
+    );
+    expect(stateDateRangeToDisplay(null, null)).toEqual('Dates not specified');
+    expect(stateDateRangeToDisplay('2014-04-03', null)).toEqual(
+      'Dates not specified'
+    );
+    expect(stateDateRangeToDisplay(null, '2015-04-09')).toEqual(
+      'Dates not specified'
+    );
+    expect(stateDateRangeToDisplay()).toEqual('Dates not specified');
   });
 
   test('converts an array into an object with array values as object keys', () => {
@@ -104,15 +116,5 @@ describe('utility functions', () => {
       b: 'boop',
       c: 'boop'
     });
-  });
-
-  test('sums up the object values for a given object', () => {
-    expect(addObjVals({ foo: 1, bar: 2 })).toEqual(3);
-    expect(addObjVals({ a: 1, b: 2, c: -3 })).toEqual(0);
-  });
-
-  test('title cases a given string', () => {
-    expect(titleCase('foo')).toEqual('Foo');
-    expect(titleCase('foo bar')).toEqual('Foo Bar');
   });
 });

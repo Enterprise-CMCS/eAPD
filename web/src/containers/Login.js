@@ -1,91 +1,117 @@
+import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import ConsentBanner from '../components/ConsentBanner';
 import { login } from '../actions/auth';
-import Btn from '../components/Btn';
-import Container from '../components/Container';
+import CardForm from '../components/CardForm';
+import Password from '../components/PasswordWithMeter';
 
-class Login extends Component {
-  state = { username: '', password: '' };
+const Login = ({
+  authenticated,
+  error,
+  fetching,
+  hasEverLoggedOn,
+  location,
+  login: action
+}) => {
+  const [showConsent, setShowConsent] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
+  const changeUsername = ({ target: { value } }) => setUsername(value);
+  const changePassword = ({ target: { value } }) => setPassword(value);
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const { username, password } = this.state;
-    this.props.login(username, password);
+    action(username, password);
   };
 
-  render() {
-    const { authenticated, error, fetching, location } = this.props;
-    const { from } = location.state || { from: { pathname: '/' } };
-    const { username, password } = this.state;
+  const hideConsent = () => {
+    setShowConsent(false);
+  };
 
-    if (authenticated) {
+  const { from } = location.state || { from: { pathname: '/' } };
+
+  if (authenticated) {
+    if (from.pathname !== '/logout') {
       return <Redirect to={from} />;
     }
+    return <Redirect to="/" />;
+  }
 
+  if (showConsent && !hasEverLoggedOn) {
     return (
-      <Container>
-        <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
-          <h1 className="mt0 h2">Please log in.</h1>
-          {error && (
-            <div className="mb2 p1 h6 alert alert-error">
-              <strong>Sorry!</strong> Something went wrong. Please try again.
-            </div>
-          )}
-          <form onSubmit={this.handleSubmit}>
-            <div className="mb2">
-              <label htmlFor="username">Email</label>
-              <input
-                id="username"
-                type="text"
-                name="username"
-                className="input"
-                value={username}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                className="input"
-                value={password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <Btn type="submit" disabled={fetching}>
-              {fetching ? 'Submitting' : 'Submit'}
-            </Btn>
-          </form>
-        </div>
-      </Container>
+      <Fragment>
+        <ConsentBanner onAgree={hideConsent} />
+      </Fragment>
     );
   }
-}
+
+  let errorMessage = false;
+  if (error === 'Unauthorized') {
+    errorMessage = 'The email or password you’ve entered is incorrect.';
+  } else if (error === 'Unauthorized') {
+    errorMessage = 'Sorry! Something went wrong. Please try again.';
+  }
+
+  return (
+    <Fragment>
+      <CardForm
+        title="Log in"
+        legend="Log in"
+        cancelable={false}
+        canSubmit={username.length && password.length}
+        error={errorMessage}
+        success={hasEverLoggedOn ? 'You have securely logged out.' : null}
+        working={fetching}
+        primaryButtonText={['Log in', 'Logging in']}
+        onSave={handleSubmit}
+        footer={
+          <p className="ds-u-padding-top--2">
+            Forgot your password? Contact{' '}
+            <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">
+              CMS-EAPD@cms.hhs.gov
+            </a>
+          </p>
+        }
+      >
+        <TextField
+          id="username"
+          label="Email"
+          name="username"
+          ariaLabel="Enter the email associated with this account."
+          value={username}
+          onChange={changeUsername}
+        />
+        <Password title="Password" value={password} onChange={changePassword} />
+      </CardForm>
+    </Fragment>
+  );
+};
 
 Login.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   fetching: PropTypes.bool.isRequired,
+  hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
+const mapStateToProps = ({
+  auth: { authenticated, error, fetching, hasEverLoggedOn }
+}) => ({
   authenticated,
   error,
-  fetching
+  fetching,
+  hasEverLoggedOn
 });
 
 const mapDispatchToProps = { login };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export { Login as plain, mapStateToProps, mapDispatchToProps };

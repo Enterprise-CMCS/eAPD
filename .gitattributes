@@ -1,0 +1,4 @@
+package-lock.json linguist-generated=true
+package-lock.json -diff -merge
+*.js.snap         linguist-generated=true
+*.js.snap         -diff -merge

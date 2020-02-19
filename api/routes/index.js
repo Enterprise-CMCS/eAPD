@@ -1,9 +1,7 @@
 const logger = require('../logger')('routes index');
 const auth = require('./auth');
 const apds = require('./apds');
-const files = require('./files/get');
-const me = require('./me/get');
-const states = require('./states');
+const me = require('./me');
 const users = require('./users');
 const openAPI = require('./openAPI');
 
@@ -11,9 +9,7 @@ module.exports = (
   app,
   apdsEndpoint = apds,
   authEndpoint = auth,
-  filesEndpoint = files,
   meEndpoint = me,
-  statesEndpoint = states,
   usersEndpoint = users,
   openAPIdoc = openAPI
 ) => {
@@ -21,12 +17,8 @@ module.exports = (
   apdsEndpoint(app);
   logger.silly('setting up routes for auth');
   authEndpoint(app);
-  logger.silly('settup up routes for files');
-  filesEndpoint(app);
   logger.silly('setting up routes for me');
   meEndpoint(app);
-  logger.silly('setting up routes for states');
-  statesEndpoint(app);
   logger.silly('setting up routes for users');
   usersEndpoint(app);
 

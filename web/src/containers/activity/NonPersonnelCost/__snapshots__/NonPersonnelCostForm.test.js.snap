@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the NonPersonnelCostForm component renders correctly 1`] = `
+<Fragment>
+  <h6
+    className="ds-h4"
+  >
+    Non-Personnel Cost 
+    84
+    :
+  </h6>
+  <FormLabel
+    component="label"
+    fieldId="eapd-form-label-12321"
+  >
+    Category
+  </FormLabel>
+  <Select
+    autoFocus={true}
+    id="eapd-form-label-12321"
+    name="category"
+    onChange={[Function]}
+    value="cost category"
+  >
+    <option
+      value="Hardware, software, and licensing"
+    >
+      Hardware, software, and licensing
+    </option>
+    <option
+      value="Equipment and supplies"
+    >
+      Equipment and supplies
+    </option>
+    <option
+      value="Training and outreach"
+    >
+      Training and outreach
+    </option>
+    <option
+      value="Travel"
+    >
+      Travel
+    </option>
+    <option
+      value="Administrative operations"
+    >
+      Administrative operations
+    </option>
+    <option
+      value="Miscellaneous expenses for the project"
+    >
+      Miscellaneous expenses for the project
+    </option>
+  </Select>
+  <TextArea
+    label="Description"
+    name="desc"
+    onChange={[Function]}
+    rows={5}
+    value="cost desc"
+  />
+  <DollarField
+    key="7473"
+    label="7473 Cost"
+    name="cost"
+    onBlur={null}
+    onChange={[Function]}
+    size="medium"
+    value={2398235}
+  />
+  <DollarField
+    key="7474"
+    label="7474 Cost"
+    name="cost"
+    onBlur={null}
+    onChange={[Function]}
+    size="medium"
+    value={72323}
+  />
+</Fragment>
+`;

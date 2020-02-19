@@ -1,146 +1,114 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
 import {
-  ContractorResourcesRaw as ContractorResources,
+  plain as ContractorResources,
   mapStateToProps,
   mapDispatchToProps
 } from './ContractorResources';
-import {
-  addActivityContractor,
-  removeActivityContractor,
-  toggleActivityContractorHourly,
-  updateActivity
-} from '../../actions/activities';
+import { addContractor, removeContractor } from '../../actions/editActivity';
 
 describe('the ContractorResources component', () => {
-  const sandbox = sinon.createSandbox();
   const props = {
-    activity: {
-      key: 'activity key',
-      contractorResources: [
-        {
-          id: 'contractor id',
-          key: 'contractor key',
-          name: 'contractor name',
-          desc: 'contractor description',
-          start: 'start date',
-          end: 'end date',
-          years: {
-            '1066': 100,
-            '1067': 200
-          },
-          hourly: {
-            useHourly: false,
-            data: {
-              '1066': { hours: '', rate: '' },
-              '1067': { hours: '', rate: '' }
+    activityIndex: 'activity index',
+    contractors: [
+      {
+        id: 'contractor 1',
+        key: 'key 1',
+        hourly: {
+          data: {
+            1997: {
+              hours: 100,
+              rate: 15
             }
           }
+        },
+        years: {
+          1997: 1500
         }
-      ]
-    },
-    years: ['1066', '1067'],
-    addContractor: sinon.stub(),
-    removeContractor: sinon.stub(),
-    toggleContractorHourly: sinon.stub(),
-    updateActivity: sinon.stub()
+      },
+      {
+        id: 'contractor 2',
+        key: 'key 2',
+        hourly: {
+          data: {
+            1998: {
+              hours: 200,
+              rate: 20
+            }
+          }
+        },
+        years: {
+          1998: 4000
+        }
+      },
+      {
+        id: 'contractor 3',
+        key: 'key 3',
+        hourly: {
+          data: {
+            1999: {
+              hours: 300,
+              rate: 25
+            }
+          }
+        },
+        years: {
+          1999: 7500
+        }
+      }
+    ],
+    addContractor: jest.fn(),
+    removeContractor: jest.fn()
   };
 
+  const component = shallow(<ContractorResources {...props} />);
+
   beforeEach(() => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
+    props.addContractor.mockClear();
+    props.removeContractor.mockClear();
   });
 
   test('renders correctly', () => {
-    const component = shallow(<ContractorResources {...props} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('adds a new contractor', () => {
-    const component = shallow(<ContractorResources {...props} />);
-    component.find('Btn[children="Add contractor"]').simulate('click');
-    expect(props.addContractor.calledWith('activity key')).toBeTruthy();
-  });
+  describe('events', () => {
+    const list = component.find('FormAndReviewList');
 
-  test('removes a contractor', () => {
-    const component = shallow(<ContractorResources {...props} />);
-    component.find('Btn[children="Remove resource"]').simulate('click');
-    expect(
-      props.removeContractor.calledWith('activity key', 'contractor key')
-    ).toBeTruthy();
-  });
+    it('handles adding a new contractor resource', () => {
+      list.prop('onAddClick')();
+      expect(props.addContractor).toHaveBeenCalledWith('activity index');
+    });
 
-  test('handles changing contractor info', () => {
-    const component = shallow(<ContractorResources {...props} />);
-
-    const nameInput = component
-      .find('InputHolder')
-      .filterWhere(n => n.props().value === 'contractor name');
-    nameInput.simulate('change', { target: { value: 'bloop' } });
-    expect(
-      props.updateActivity.calledWith('activity key', {
-        contractorResources: { '0': { name: 'bloop' } }
-      })
-    ).toBeTruthy();
-
-    const descInput = component
-      .find('InputHolder')
-      .filterWhere(n => n.props().value === 'contractor description');
-    descInput.simulate('change', { target: { value: 'florp' } });
-    expect(
-      props.updateActivity.calledWith('activity key', {
-        contractorResources: { '0': { desc: 'florp' } }
-      })
-    ).toBeTruthy();
-  });
-
-  test('handles changing contractor expense info', () => {
-    const component = shallow(<ContractorResources {...props} />);
-    const yearInput = component
-      .find('InputHolder')
-      .filterWhere(n => n.props().value === 100);
-
-    yearInput.simulate('change', { target: { value: '300' } });
-    expect(
-      props.updateActivity.calledWith(
-        'activity key',
-        { contractorResources: { '0': { years: { '1066': '300' } } } },
-        true
-      )
-    ).toBeTruthy();
+    it('handles deleting a contractor resource', () => {
+      list.prop('onDeleteClick')('key 2');
+      expect(props.removeContractor).toHaveBeenCalledWith('activity index', 1);
+    });
   });
 
   test('maps redux state to component props', () => {
     expect(
       mapStateToProps(
         {
-          activities: {
-            byKey: {
-              key: 'this is the activity'
-            }
-          },
           apd: {
             data: {
-              years: 'seven'
+              activities: [
+                { contractorResources: 'contractorx' },
+                { contractorResources: 'contractory' },
+                { contractorResources: 'contractorz' }
+              ]
             }
           }
         },
-        { aKey: 'key' }
+        { activityIndex: 2 }
       )
     ).toEqual({
-      activity: 'this is the activity',
-      years: 'seven'
+      contractors: 'contractorz'
     });
   });
 
   test('maps dispatch actions to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      addContractor: addActivityContractor,
-      removeContractor: removeActivityContractor,
-      toggleContractorHourly: toggleActivityContractorHourly,
-      updateActivity
-    });
+    expect(mapDispatchToProps).toEqual({ addContractor, removeContractor });
   });
 });

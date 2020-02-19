@@ -1,247 +1,121 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Routes component renders correctly 1`] = `
-ShallowWrapper {
-  "length": 1,
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Routes />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "class",
-    "props": Object {
-      "children": Array [
-        <Connect(PrivateRoute)
-          component={[Function]}
-          exact={true}
-          path="/"
-        />,
-        <Connect(PrivateRoute)
-          component={[Function]}
-          exact={true}
-          path="/apd"
-        />,
-        <Route
-          component={[Function]}
-          path="/login"
-        />,
-        <Route
-          component={[Function]}
-          path="/dash"
-        />,
-        <Route
-          component={[Function]}
-          path="/temp/misc"
-        />,
-        <Route
-          component={[Function]}
-        />,
-      ],
-    },
-    "ref": null,
-    "rendered": Array [
+<Switch>
+  <Connect(PrivateRoute)
+    component={
       Object {
-        "instance": null,
-        "key": "/",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "exact": true,
-          "path": "/",
-        },
-        "ref": null,
-        "rendered": null,
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(Dashboard)",
         "type": [Function],
-      },
+      }
+    }
+    exact={true}
+    key="/"
+    path="/"
+  />
+  <Connect(PrivateRoute)
+    component={
       Object {
-        "instance": null,
-        "key": "/apd",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "exact": true,
-          "path": "/apd",
-        },
-        "ref": null,
-        "rendered": null,
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(ApdApplication)",
         "type": [Function],
-      },
+      }
+    }
+    exact={true}
+    key="/apd"
+    path="/apd"
+  />
+  <Connect(PrivateRoute)
+    component={
       Object {
-        "instance": null,
-        "key": "/login",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "path": "/login",
-        },
-        "ref": null,
-        "rendered": null,
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(ApdViewOnly)",
         "type": [Function],
-      },
+      }
+    }
+    exact={true}
+    key="/print"
+    path="/print"
+  />
+  <Connect(AdminRoute)
+    component={
       Object {
-        "instance": null,
-        "key": "/dash",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "path": "/dash",
-        },
-        "ref": null,
-        "rendered": null,
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(CreateUser)",
         "type": [Function],
-      },
+      }
+    }
+    isCard={true}
+    key="/create-account"
+    path="/create-account"
+  />
+  <Connect(AdminRoute)
+    component={
       Object {
-        "instance": null,
-        "key": "/temp/misc",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "path": "/temp/misc",
-        },
-        "ref": null,
-        "rendered": null,
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(EditAccount)",
         "type": [Function],
-      },
+      }
+    }
+    isCard={true}
+    key="/edit-account"
+    path="/edit-account"
+  />
+  <Connect(PrivateRoute)
+    component={
       Object {
-        "instance": null,
-        "key": "no-match",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-        },
-        "ref": null,
-        "rendered": null,
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(MyAccount)",
         "type": [Function],
-      },
-    ],
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "children": Array [
-          <Connect(PrivateRoute)
-            component={[Function]}
-            exact={true}
-            path="/"
-          />,
-          <Connect(PrivateRoute)
-            component={[Function]}
-            exact={true}
-            path="/apd"
-          />,
-          <Route
-            component={[Function]}
-            path="/login"
-          />,
-          <Route
-            component={[Function]}
-            path="/dash"
-          />,
-          <Route
-            component={[Function]}
-            path="/temp/misc"
-          />,
-          <Route
-            component={[Function]}
-          />,
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": "/",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/apd",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/apd",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/login",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/login",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/dash",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/dash",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/temp/misc",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/temp/misc",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "no-match",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-      ],
-      "type": [Function],
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-      },
-    },
-  },
-}
+      }
+    }
+    isCard={true}
+    key="/me"
+    path="/me"
+  />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(Login)",
+        "type": [Function],
+      }
+    }
+    isCard={true}
+    key="/login"
+    path="/login"
+  />
+  <Connect(PrivateRoute)
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(Logout)",
+        "type": [Function],
+      }
+    }
+    key="/logout"
+    path="/logout"
+  />
+  <Route
+    component={[Function]}
+    key="no-match"
+  />
+</Switch>
 `;

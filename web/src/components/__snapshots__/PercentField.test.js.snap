@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PercentField component renders correctly 1`] = `
+<PercentField
+  className="stuff"
+  label="test label"
+  name="test name"
+  onChange={[MockFunction]}
+  size="medium"
+  value="123"
+>
+  <NumberField
+    className="stuff"
+    fieldRef={
+      Object {
+        "current": <input
+          class="ds-c-field ds-c-field--medium"
+          id="textfield_1"
+          name="test name"
+          type="text"
+          value="123"
+        />,
+      }
+    }
+    label="test label"
+    name="test name"
+    onChange={[MockFunction]}
+    size="medium"
+    value="123"
+  >
+    <TextField
+      className="stuff"
+      inputRef={[Function]}
+      label="test label"
+      name="test name"
+      onChange={[MockFunction]}
+      size="medium"
+      type="text"
+      value="123"
+    >
+      <div
+        className="ds-u-clearfix stuff"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_1"
+          id="textfield_label_2"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_1"
+            id="textfield_label_2"
+          >
+            <span
+              className=""
+            >
+              test label
+            </span>
+          </label>
+        </FormLabel>
+        <input
+          className="ds-c-field ds-c-field--medium"
+          id="textfield_1"
+          name="test name"
+          onChange={[MockFunction]}
+          type="text"
+          value="123"
+        />
+      </div>
+    </TextField>
+  </NumberField>
+</PercentField>
+`;

@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schedule summary component renders correctly 1`] = `
+<Connect(ConnectedWaypoint)
+  id="schedule-summary"
+>
+  <Section
+    id="schedule-summary"
+    isNumbered={true}
+    resource="scheduleSummary"
+  >
+    <Subsection
+      headerClassName={null}
+      id="schedule-summary-table"
+      nested={false}
+      resource="scheduleSummary.main"
+    >
+      <table
+        className="budget-table"
+        key="Number One"
+      >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          1
+          : 
+          Number One
+        </caption>
+        <thead>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
+            >
+              Activity 
+              1
+              : 
+              Number One
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+            >
+              date range 1
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            key="one-one-03/16/1996"
+          >
+            <td
+              className="ds-u-border-right--0"
+            >
+              one-one
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              03/16/1996
+            </td>
+          </tr>
+          <tr
+            key="one-two-05/23/1970"
+          >
+            <td
+              className="ds-u-border-right--0"
+            >
+              one-two
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              05/23/1970
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table
+        className="budget-table"
+        key="Number 💩"
+      >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          2
+          : 
+          Number 💩
+        </caption>
+        <thead>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
+            >
+              Activity 
+              2
+              : 
+              Number 💩
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+            >
+              date range 2
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            key="three-one-10/06/2016"
+          >
+            <td
+              className="ds-u-border-right--0"
+            >
+              three-one
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              10/06/2016
+            </td>
+          </tr>
+          <tr
+            key="two-two-06/25/2014"
+          >
+            <td
+              className="ds-u-border-right--0"
+            >
+              two-two
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              06/25/2014
+            </td>
+          </tr>
+          <tr
+            key="two-three-08/21/1965"
+          >
+            <td
+              className="ds-u-border-right--0"
+            >
+              two-three
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              08/21/1965
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table
+        className="budget-table"
+        key="Number Three"
+      >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          3
+          : 
+          Number Three
+        </caption>
+        <thead>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
+            >
+              Activity 
+              3
+              : 
+              Number Three
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+            >
+              date range 3
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            key="three-one-06/09/2018"
+          >
+            <td
+              className="ds-u-border-right--0"
+            >
+              three-one
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              06/09/2018
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </Subsection>
+  </Section>
+</Connect(ConnectedWaypoint)>
+`;
+
+exports[`schedule summary component renders correctly with no data 1`] = `
+<Connect(ConnectedWaypoint)
+  id="schedule-summary"
+>
+  <Section
+    id="schedule-summary"
+    isNumbered={true}
+    resource="scheduleSummary"
+  >
+    <Subsection
+      headerClassName={null}
+      id="schedule-summary-table"
+      nested={false}
+      resource="scheduleSummary.main"
+    >
+      <div
+        className="ds-c-alert ds-c-alert--warn"
+      >
+        There are no milestones scheduled.
+      </div>
+    </Subsection>
+  </Section>
+</Connect(ConnectedWaypoint)>
+`;

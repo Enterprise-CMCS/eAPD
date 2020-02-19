@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`users endpoint | GET /users when authenticated 1`] = `
+Array [
+  Object {
+    "activities": Array [
+      "view-users",
+      "add-users",
+      "view-roles",
+      "create-roles",
+      "edit-roles",
+      "submit-federal-response",
+      "submit-clearance",
+      "edit-comments",
+      "submit-document",
+      "submit-state-response",
+      "create-draft",
+      "edit-document",
+      "edit-response",
+      "delete-users",
+      "view-document",
+    ],
+    "id": 2000,
+    "name": "Wonder Woman",
+    "phone": null,
+    "position": "User that can do anything at all",
+    "role": "admin",
+    "state": Object {
+      "id": "mn",
+      "name": "Minnesota",
+    },
+    "username": "all-permissions-and-state",
+  },
+  Object {
+    "activities": Array [
+      "view-users",
+      "add-users",
+      "view-roles",
+      "create-roles",
+      "edit-roles",
+      "submit-federal-response",
+      "submit-clearance",
+      "edit-comments",
+      "submit-document",
+      "submit-state-response",
+      "create-draft",
+      "edit-document",
+      "edit-response",
+      "delete-users",
+      "view-document",
+    ],
+    "id": 2001,
+    "name": "Superman",
+    "phone": null,
+    "position": "User without a home",
+    "role": "admin",
+    "state": Object {},
+    "username": "all-permissions-no-state",
+  },
+  Object {
+    "activities": Array [],
+    "id": 2010,
+    "name": "Lucy Ricardo",
+    "phone": null,
+    "position": "User never allowed to do anything",
+    "role": null,
+    "state": Object {},
+    "username": "no-permissions",
+  },
+]
+`;
+
+exports[`users endpoint | GET /users/:userID when authenticated when requesting a non-existant user ID 1`] = `undefined`;
+
+exports[`users endpoint | GET /users/:userID when authenticated when requesting a valid user ID 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+    "add-users",
+    "view-roles",
+    "create-roles",
+    "edit-roles",
+    "submit-federal-response",
+    "submit-clearance",
+    "edit-comments",
+    "submit-document",
+    "submit-state-response",
+    "create-draft",
+    "edit-document",
+    "edit-response",
+    "delete-users",
+    "view-document",
+  ],
+  "id": 2000,
+  "name": "Wonder Woman",
+  "phone": null,
+  "position": "User that can do anything at all",
+  "role": "admin",
+  "state": Object {
+    "id": "mn",
+    "name": "Minnesota",
+  },
+  "username": "all-permissions-and-state",
+}
+`;

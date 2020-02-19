@@ -1,7 +1,11 @@
-import u from 'updeep';
-
-import { UPDATE_BUDGET, UPDATE_BUDGET_QUARTERLY_SHARE } from '../actions/apd';
+import { UPDATE_BUDGET } from '../actions/budget';
 import { arrToObj } from '../util';
+import roundedPercents from '../util/roundedPercents';
+
+const fixNum = (value, digits = 2) => {
+  const mult = 10 ** digits;
+  return Math.round(value * mult) / mult;
+};
 
 const getFundingSourcesByYear = years => ({
   ...years.reduce(
@@ -10,6 +14,7 @@ const getFundingSourcesByYear = years => ({
       [year]: {
         total: 0,
         federal: 0,
+        medicaid: 0,
         state: 0
       }
     }),
@@ -18,6 +23,7 @@ const getFundingSourcesByYear = years => ({
   total: {
     total: 0,
     federal: 0,
+    medicaid: 0,
     state: 0
   }
 });
@@ -37,12 +43,6 @@ const expenseTypes = (years, names = expenseTypeNames) =>
       ...o,
       [name]: getFundingSourcesByYear(years)
     }),
-    {}
-  );
-
-const initTotalsByExpenseType = years =>
-  expenseTypeNames.reduce(
-    (obj, name) => ({ ...obj, [name]: arrToObj(years) }),
     {}
   );
 
@@ -77,21 +77,6 @@ const defaultFederalShare = years =>
     }
   );
 
-const defaultQuarterlyShares = years => ({
-  ...years.reduce(
-    (o, year) => ({
-      ...o,
-      [year]: { 1: 25, 2: 25, 3: 25, 4: 25 }
-    }),
-    {}
-  )
-});
-
-const initQuarterly = years => ({
-  hitAndHie: defaultQuarterlyShares(years),
-  mmis: defaultQuarterlyShares(years)
-});
-
 const initialState = years => ({
   activities: {},
   combined: getFundingSourcesByYear(years),
@@ -104,322 +89,459 @@ const initialState = years => ({
   mmis: expenseTypes(years),
   hitAndHie: expenseTypes(years),
   mmisByFFP: expenseTypes(years, [...FFPOptions, 'combined']),
-  quarterly: initQuarterly(years),
   activityTotals: [],
   years
 });
 
-const budgetInput = (type, value = v => +v, target = null) => ({
-  type,
-  value,
-  target: target || type
-});
+// Convert things to numbers, or default to zero.
+const n = x => +x || 0;
 
-const budgetInputs = [
-  budgetInput('statePersonnel', year => +year.amt * +year.perc / 100),
-  budgetInput('contractorResources', undefined, 'contractors'),
-  budgetInput('expenses')
-];
+const buildBudget = incomingBigState => {
+  // Clone the incoming state, so we don't accidentally change anything.
+  const bigState = JSON.parse(JSON.stringify({ apd: incomingBigState.apd }));
 
-const activities = src => Object.values(src.activities.byKey);
+  // Get a shell of our new state object.  This essentially guarantees
+  // that all of the properties and stuff will exist, so we don't have
+  // to have a bunch of code checking for it.
+  const { keyPersonnel, years } = bigState.apd.data;
+  const newState = initialState(years);
 
-const fixNum = (value, digits = 2) => {
-  const mult = 10 ** digits;
-  return Math.round(value * mult) / mult;
-};
+  /**
+   * Adds a given cost to the budget running totals.
+   * @param {String} fundingSource The CMS funding source of the cost
+   * @param {String} year As a four-character year string (e.g., '2018')
+   * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
+   * @param {Number} cost The cost value.
+   */
+  const addCostToTotals = (fundingSource, year, prop, cost) => {
+    // Add this value to the running budget totals, as appropriate.
+    newState[fundingSource][prop][year].total += cost;
+    newState[fundingSource][prop].total.total += cost;
+    newState[fundingSource].combined[year].total += cost;
+    newState[fundingSource].combined.total.total += cost;
 
-// The default for from is to handle the case where an expense
-// block doesn't have any rows.  In that case, from is never
-// populated.  But that block doesn't conribute to the budget,
-// either, so easiest thing to do is just zero it out.
-const addBudgetBlocks = (into, from = { total: 0, federal: 0, state: 0 }) => {
-  const out = into;
-  out.total += from.total;
-  out.federal += from.federal;
-  out.state += from.state;
-};
+    // Because HIT and HIE sources have already added to the grand
+    // totals, don't also do it for the combined source.
+    if (fundingSource !== 'hitAndHie') {
+      newState.combined[year].total += cost;
+      newState.combined.total.total += cost;
+    }
 
-const collapseAllAmounts = activity => {
-  const totals = arrToObj(activity.years);
-
-  budgetInputs.forEach(({ type, value }) => {
-    activity[type].forEach(entry => {
-      Object.keys(entry.years).forEach(year => {
-        totals[year] += value(entry.years[year]);
-      });
-    });
-  });
-
-  return totals;
-};
-
-const getTotalsForActivity = activity => {
-  const fundingSource = activity.fundingSource.toLowerCase();
-  const allocate = activity.costAllocation;
-  const totalByYear = collapseAllAmounts(activity);
-
-  const netOtherPercent = year => {
-    const { other } = allocate[year];
-    const total = totalByYear[year];
-    return total ? 1 - other / total : 1;
+    // HIT and HIE are rolled up into a single combined source for
+    // some of the budget data, so for those, just run again.
+    if (fundingSource === 'hie' || fundingSource === 'hit') {
+      addCostToTotals('hitAndHie', year, prop, cost);
+    }
   };
 
-  return {
-    collapse: (type, value = v => +v) => {
-      const collapsed = {};
-      activity[type].forEach(expense => {
-        Object.keys(expense.years).forEach(year => {
-          if (!collapsed[year]) {
-            collapsed[year] = { total: 0, federal: 0, state: 0 };
-          }
+  // Since all of our expenses are tied up in activities, we'll start
+  // by looking at all of them and doing Magic Math™. (It's not magic.)
+  bigState.apd.data.activities.forEach(activity => {
+    // If this is the Program Administration activity, add the APD key
+    // personnel to it so they get included in downstream calculations.
+    // TODO: Don't rely on the activity name. Instead, this should always be
+    // activity index 0. However, that will require some tweaks to the tests.
+    if (activity.name === 'Program Administration') {
+      activity.statePersonnel.push(
+        ...keyPersonnel
+          .filter(kp => kp.hasCosts)
+          .map(({ costs }) => ({
+            years: Object.keys(costs).reduce(
+              (o, ffy) => ({ ...o, [ffy]: { amt: costs[ffy], perc: 1 } }),
+              {}
+            )
+          }))
+      );
+    }
 
-          const total = value(expense.years[year]);
-          const totalNetOther = total * netOtherPercent(year);
-          const { federal, state } = allocate[year].ffp;
+    // We need to know the funding source so we know where to apply
+    // this data in the big rollup budget.
+    const fundingSource = activity.fundingSource.toLowerCase();
 
-          addBudgetBlocks(collapsed[year], {
-            total,
-            federal: fixNum(totalNetOther * federal / 100),
-            state: fixNum(totalNetOther * state / 100)
-          });
-        });
-      });
+    // And of course we need to know how the costs are allocated between
+    // the state and federal shares.
+    const allocation = activity.costAllocation;
 
-      return {
-        raw: () => collapsed,
-        totals: () => {
-          const total = { total: 0, federal: 0, state: 0 };
-          Object.values(collapsed).forEach(year => {
-            addBudgetBlocks(total, year);
-          });
-
-          return {
-            data: { ...collapsed, total },
-            merge: (bigState, target = type) => {
-              const merged = bigState[fundingSource][target];
-
-              Object.keys(merged).forEach(year => {
-                if (year !== 'total') {
-                  addBudgetBlocks(merged[year], collapsed[year]);
-                }
-              });
-
-              addBudgetBlocks(merged.total, total);
-              return merged;
-            }
-          };
+    // We also compute quarterly FFP per activity, so we go ahead and
+    // create that object here.  We'll fill it in later.
+    newState.activities[activity.key] = {
+      costsByFFY: {
+        ...arrToObj(years, () => ({
+          federal: 0,
+          medicaidShare: 0,
+          state: 0,
+          total: 0
+        })),
+        total: {
+          federal: 0,
+          medicaidShare: 0,
+          state: 0,
+          total: 0
         }
-      };
-    }
-  };
-};
-
-const getTotalsForFundingSource = (bigState, fundingSource) => {
-  const fsUpdate = bigState[fundingSource].combined;
-  const grandTotals = bigState.combined;
-
-  Object.entries(bigState[fundingSource]).forEach(([type, values]) => {
-    if (type !== 'combined') {
-      Object.entries(values).forEach(([year, value]) => {
-        addBudgetBlocks(fsUpdate[year], value);
-        addBudgetBlocks(grandTotals[year], value);
-      });
-    }
-  });
-};
-
-const combineHitAndHie = bigState => {
-  const { hit, hie, hitAndHie } = bigState;
-  const entries = [...Object.entries(hit), ...Object.entries(hie)];
-
-  entries.forEach(([type, values]) => {
-    Object.entries(values).forEach(([year, value]) => {
-      addBudgetBlocks(hitAndHie[type][year], value);
-    });
-  });
-};
-
-const computeMmisByFFP = (bigState, activityEntries) => {
-  const { mmisByFFP } = bigState;
-  const grandTotals = mmisByFFP.combined;
-
-  activityEntries.filter(a => a.fundingSource === 'MMIS').forEach(activity => {
-    const allocate = activity.costAllocation;
-    const totalByYear = collapseAllAmounts(activity);
-
-    Object.keys(totalByYear).forEach(year => {
-      const { ffp, other } = allocate[year];
-      const ffpKey = `${ffp.federal}-${ffp.state}`;
-
-      if (FFPOptions.has(ffpKey)) {
-        const total = totalByYear[year];
-        const totalNetOther = total - other;
-        const federal = totalNetOther * ffp.federal / 100;
-        const state = totalNetOther * ffp.state / 100;
-        const result = { total, federal, state };
-
-        addBudgetBlocks(mmisByFFP[ffpKey][year], result);
-        addBudgetBlocks(mmisByFFP[ffpKey].total, result);
-        addBudgetBlocks(grandTotals[year], result);
-        addBudgetBlocks(grandTotals.total, result);
-      }
-    });
-  });
-};
-
-// state personnel, contractor, other expenses totals by year and activity
-const computeTotalsByActivity = (bigState, activityEntries) => {
-  const { activityTotals, years } = bigState;
-  const yearsWithTotal = [...years, 'total'];
-
-  activityEntries.forEach(activity => {
-    const { id, name, fundingSource } = activity;
-    const totaller = getTotalsForActivity(activity);
-
-    const data = initTotalsByExpenseType(yearsWithTotal);
-    const grandTotals = data.combined;
-
-    budgetInputs.forEach(({ type, value, target }) => {
-      const byType = totaller.collapse(type, value).totals().data;
-
-      Object.keys(byType).forEach(year => {
-        data[target][year] += byType[year].total;
-        grandTotals[year] += byType[year].total;
-      });
-    });
-
-    const entry = { id, name, fundingSource, data };
-    activityTotals.push(entry);
-  });
-};
-
-const buildBudget = wholeState => {
-  const newState = initialState(wholeState.apd.data.years);
-  const activityEntries = activities(wholeState);
-
-  activityEntries.forEach(activity => {
-    newState.activities[activity.key] = {};
-    const totaller = getTotalsForActivity(activity);
-
-    budgetInputs.forEach(({ type, value, target }) => {
-      totaller
-        .collapse(type, value)
-        .totals()
-        .merge(newState, target);
-    });
-
-    // Calculate total state expenses for this activity.  That is,
-    // state personnel * FTE% plus non-personnel expenses, per
-    // fiscal year.
-    const stateExpenses = totaller
-      .collapse('statePersonnel', year => +year.amt * +year.perc / 100)
-      .raw();
-    const expenses = totaller.collapse('expenses').raw();
-    Object.entries(stateExpenses).forEach(([year, values]) => {
-      Object.keys(values).forEach(key => {
-        stateExpenses[year][key] += expenses[year][key];
-      });
-    });
-
-    // Same with contractor expenses, but this one is straightforward.
-    const contractorExpenses = totaller.collapse('contractorResources').raw();
-
-    // This is the percent of the federal share per fiscal quarter,
-    // by expense type.  This is entered in the
-    // ActivityQuarterlyBudgetSummary table
-    const ffpPercents = activity.quarterlyFFP;
-
-    // The grand total of the federal share of this activity's
-    // state and contractor expenses, across all quarters
-    // and fiscal years
-    const total = { state: 0, contractors: 0, combined: 0 };
-
-    newState.activities[activity.key].quarterlyFFP = Object.keys(
-      stateExpenses
-    ).reduce(
-      (ffyCumulate, year) => ({
-        ...ffyCumulate,
-        [year]: [1, 2, 3, 4].reduce(
-          (quarterCumulatve, quarter) => {
-            // The federal percent for this FFY, per quarter
-            const ffyQuarterPct = ffpPercents[year][quarter];
-
-            // These are the federal shares of these expenses
-            // for the fiscal quarter.  The budget reducer
-            // stores percentages as 0-1, so we need to
-            // convert those here.
-
-            const statePct = ffyQuarterPct.state / 100;
-            const state = stateExpenses[year].federal * statePct;
-
-            const contractorsPct = ffyQuarterPct.contractors / 100;
-            const contractors =
-              contractorExpenses[year].federal * contractorsPct;
-
-            const combined = state + contractors;
-
-            // Capture this in the grand total...
-            total.state += state;
-            total.contractors += contractors;
-            total.combined += combined;
-
-            // ...and in the FFY subtotal
-            const { subtotal } = quarterCumulatve;
-            subtotal.state.dollars += state;
-            subtotal.state.percent += statePct;
-            subtotal.contractors.dollars += contractors;
-            subtotal.contractors.percent += contractorsPct;
-            subtotal.combined.dollars += combined;
-
-            return {
-              ...quarterCumulatve,
-              [quarter]: {
-                state: { dollars: state, percent: statePct },
-                contractors: { dollars: contractors, percent: contractorsPct },
-                combined: { dollars: combined, percent: 0 }
-              },
-              subtotal
-            };
-          },
-          {
-            subtotal: {
-              state: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              combined: { dollars: 0, percent: 0 }
-            }
+      },
+      quarterlyFFP: {
+        ...arrToObj(years, () => ({
+          ...arrToObj(['1', '2', '3', '4'], () => ({
+            combined: { dollars: 0, percent: 0 },
+            contractors: { dollars: 0, percent: 0 },
+            state: { dollars: 0, percent: 0 }
+          })),
+          subtotal: {
+            combined: { dollars: 0, percent: 0 },
+            contractors: { dollars: 0, percent: 0 },
+            state: { dollars: 0, percent: 0 }
           }
-        )
-      }),
-      {}
-    );
-    newState.activities[activity.key].quarterlyFFP.total = total;
-  });
+        })),
+        total: {
+          combined: 0,
+          contractors: 0,
+          state: 0
+        }
+      }
+    };
 
-  getTotalsForFundingSource(newState, 'hie');
-  getTotalsForFundingSource(newState, 'hit');
-  getTotalsForFundingSource(newState, 'mmis');
+    // We need to sum up the total cost of each cost category per
+    // fiscal year for the activity as well, so let's make an object
+    // for tracking that and go ahead and push it into the budget data.
+    const activityTotals = {
+      fundingSource: activity.fundingSource,
+      id: activity.id,
+      name: activity.name,
+      data: {
+        combined: { ...arrToObj(years, 0), total: 0 },
+        contractors: { ...arrToObj(years, 0), total: 0 },
+        expenses: { ...arrToObj(years, 0), total: 0 },
+        statePersonnel: { ...arrToObj(years, 0), total: 0 }
+      }
+    };
+    newState.activityTotals.push(activityTotals);
 
-  combineHitAndHie(newState);
-  computeMmisByFFP(newState, activityEntries);
-  computeTotalsByActivity(newState, activityEntries);
+    /**
+     * Get the state and federal share of costs for an amount for
+     * a given year of the current activity.
+     * @param {String} year As a four-character year string (e.g., '2018')
+     * @param {Number} amount The amount to allocate over state and federal shares
+     * @returns {{fedShare:Number, stateShare:Number other stuff}} The state and federal share
+     */
+    const getAllocation = (year, amount) => {
+      const [fedShare, stateShare] = roundedPercents(n(amount), [
+        activity.costAllocation[year].ffp.federal / 100,
+        activity.costAllocation[year].ffp.state / 100
+      ]);
+      return { fedShare, stateShare };
+    };
 
-  activityEntries.forEach(activity => {
-    const target =
-      newState.federalShareByFFYQuarter[
-        activity.fundingSource === 'MMIS' ? 'mmis' : 'hitAndHie'
+    // For each activity, we need to independently track the
+    // total cost for each category, per fiscal year.  This isn't
+    // stored in the budget anywhere, so we'll track it as a local
+    // variable.  This is super similar to the activityTotals above,
+    // but the object structure is different.  Rather than munge
+    // that object into this shape later, we'll just capture both
+    // at the same time.  That's more straightforward.
+    const activityTotalByCategory = arrToObj(years, () => ({
+      contractors: 0,
+      expenses: 0,
+      statePersonnel: 0
+    }));
+
+    // First compute the total of each cost category both within
+    // fiscal years and across them, for all cost categories.  We
+    // need these completed before we can compute what percentage
+    // each cost category contributes to the total cost, further down.
+    // While we're here, also compute the cost category totals
+    // per activity.  The data is structured differently than the
+    // "activityTotalByCategory" and it seems cleaner to just
+    // do them simultaneously than to munge one object into the
+    // other after the fact.
+    activity.contractorResources.forEach(contractor => {
+      Object.entries(contractor.years).forEach(([year, cost]) => {
+        addCostToTotals(fundingSource, year, 'contractors', cost);
+        activityTotalByCategory[year].contractors += cost;
+
+        activityTotals.data.contractors[year] += cost;
+        activityTotals.data.contractors.total += cost;
+        activityTotals.data.combined[year] += cost;
+        activityTotals.data.combined.total += cost;
+      });
+    });
+
+    activity.expenses.forEach(expense => {
+      Object.entries(expense.years).forEach(([year, cost]) => {
+        addCostToTotals(fundingSource, year, 'expenses', cost);
+        activityTotalByCategory[year].expenses += cost;
+
+        activityTotals.data.expenses[year] += cost;
+        activityTotals.data.expenses.total += cost;
+        activityTotals.data.combined[year] += cost;
+        activityTotals.data.combined.total += cost;
+      });
+    });
+
+    activity.statePersonnel.forEach(person => {
+      Object.entries(person.years).forEach(([year, { amt, perc }]) => {
+        const cost = n(amt) * n(perc);
+        addCostToTotals(fundingSource, year, 'statePersonnel', cost);
+        activityTotalByCategory[year].statePersonnel += cost;
+
+        activityTotals.data.statePersonnel[year] += cost;
+        activityTotals.data.statePersonnel.total += cost;
+        activityTotals.data.combined[year] += cost;
+        activityTotals.data.combined.total += cost;
+      });
+    });
+
+    // Converts an array where the values correspond to contractors,
+    // expenses, and state personnel values, respectively.
+    const costShareReducer = (acc, value, i) => ({
+      ...acc,
+      [['contractors', 'expenses', 'statePersonnel'][i]]: value
+    });
+
+    // Now loop back over the years and compute state and federal shares
+    // of all the costs.
+    years.forEach(year => {
+      const activityCostByFFY = newState.activities[activity.key].costsByFFY;
+      const totalCost = activityTotals.data.combined[year];
+      const totalMedicaidShare = totalCost - n(allocation[year].other);
+
+      // This is the Medicaid total share broken into state and federal shares
+      const costShares = getAllocation(year, totalMedicaidShare);
+
+      // This represents the percentage each cost category contributes to the
+      // total activity cost.  This is useful for distributing the total
+      // in a way that we get whole numbers and preserve sums.
+      const costCategoryPercentages = [
+        activityTotals.data.contractors[year] / totalCost || 0,
+        activityTotals.data.expenses[year] / totalCost || 0,
+        activityTotals.data.statePersonnel[year] / totalCost || 0
       ];
 
-    const { quarterlyFFP } = newState.activities[activity.key];
+      // Compute the state and federal share for each cost category, based on
+      // the federal and state shares and the percentages calculated above.
+      const fedShare = roundedPercents(
+        costShares.fedShare,
+        costCategoryPercentages
+      ).reduce(costShareReducer, {});
+      const stateShare = roundedPercents(
+        costShares.stateShare,
+        costCategoryPercentages
+      ).reduce(costShareReducer, {});
+      const medicaidShare = roundedPercents(
+        totalMedicaidShare,
+        costCategoryPercentages
+      ).reduce(costShareReducer, {});
 
-    Object.entries(quarterlyFFP).forEach(([yearKey, yearValue]) => {
-      Object.entries(yearValue).forEach(([quarterKey, quarterValue]) => {
-        Object.entries(quarterValue).forEach(([key, value]) => {
-          target[yearKey][quarterKey][key] += value.dollars;
-          target.total[key] += value.dollars;
+      /* ☝  What is that all about?
+         We need to display the "Medicaid share" of all of these costs, broken
+         down by state and federal share.  The Medicaid share is the total cost
+         minus any "other funding" that the user entered into the cost
+         allocation section.  The federal and state shares are dictated by which
+         allocation the user selected - 90/10, 75/25, or 50/50 (federal/state).
+
+         When the user is inputting data, the activity costs they enter combine
+         to create the absolute total cost.  Thus, the state personnel,
+         contractor, and non-personnel expense costs that we have available to
+         us each include some portion of the "other funding."  We can't just
+         use the values the user gave us.
+
+         Instead, we compute how much of the absolute total cost each of those
+         cost categories contribute.  Then we use those percentages to
+         distribute the Medicaid share across the cost categories.  Here's
+         an example:
+
+         User Input:
+            State personnel:  $400
+            Contractors:      $500
+            Non-personnel:    $100
+            Other funding:    $200
+            Cost allocation:  90/10
+          
+          Computed:
+            Absolute total:   $1000:  sum of all costs
+            Medicaid share:    $800:  Absolute total - other funding
+            Federal share:     $720:  90% of Medicaid share
+              State personnel: $288:  40% of federal share
+              Contractors:     $360:  50% of federal share
+              Non-personnel:    $72:  10% of federal share
+            State share:        $80:  10% of Medicaid share
+              State personnel:  $32:  40% of state share
+              Contractors:      $40:  50% of state share
+              Non-personnel:     $8:  10% of state share
+      */
+
+      // Record these costs for each FFY of the activity. These are used in
+      // the cost allocation display, so the user can see at an activity
+      // level their total costs and cost distributions.
+      activityCostByFFY[year].total = totalCost;
+      activityCostByFFY[year].federal = costShares.fedShare;
+      activityCostByFFY[year].state = costShares.stateShare;
+      activityCostByFFY[year].medicaidShare = totalMedicaidShare;
+
+      activityCostByFFY.total.total += totalCost;
+      activityCostByFFY.total.federal += costShares.fedShare;
+      activityCostByFFY.total.state += costShares.stateShare;
+      activityCostByFFY.total.medicaidShare += totalMedicaidShare;
+
+      /**
+       * Update the running totals for the various cost categories, subtotals,
+       * and totals for a given funding source (hie, hit, or hitAndHie).
+       * @param {String} fs The funding source to update
+       */
+      const updateCosts = fs => {
+        // Update the three cost categories...
+        ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
+          newState[fs][prop][year].federal += fedShare[prop];
+          newState[fs][prop].total.federal += fedShare[prop];
+
+          newState[fs][prop][year].state += stateShare[prop];
+          newState[fs][prop].total.state += stateShare[prop];
+
+          newState[fs][prop][year].medicaid += medicaidShare[prop];
+          newState[fs][prop].total.medicaid += medicaidShare[prop];
+        });
+
+        // Plus the subtotals for the cost categories (i.e., the
+        // Medicaid share)
+        newState[fs].combined[year].federal += costShares.fedShare;
+        newState[fs].combined.total.federal += costShares.fedShare;
+
+        newState[fs].combined[year].state += costShares.stateShare;
+        newState[fs].combined.total.state += costShares.stateShare;
+
+        newState[fs].combined[year].medicaid += totalMedicaidShare;
+        newState[fs].combined.total.medicaid += totalMedicaidShare;
+      };
+
+      updateCosts(fundingSource);
+
+      newState.combined[year].federal += costShares.fedShare;
+      newState.combined.total.federal += costShares.fedShare;
+      newState.combined[year].state += costShares.stateShare;
+      newState.combined.total.state += costShares.stateShare;
+      newState.combined[year].medicaid += totalMedicaidShare;
+      newState.combined.total.medicaid += totalMedicaidShare;
+
+      if (fundingSource === 'hie' || fundingSource === 'hit') {
+        // We need to track HIE and HIT combined, so we have a funding source
+        // called hitAndHie.  If this is HIE or HIT, roll it into that one too.
+        updateCosts('hitAndHie');
+      } else {
+        // For MMIS, we need to track costs by "FFP type", too - that is,
+        // the cost allocation.  So we need to know total costs for MMIS
+        // at the 90/10 level, at the 75/25 level, and at the 50/50 level.
+
+        // Compute a string that represents the MMIS level for this activity
+        const ffpLevel = `${allocation[year].ffp.federal}-${allocation[year].ffp.state}`;
+
+        // Then do basically the same as updateCosts() above, but we only
+        // need to track subtotals, not individual cost categories
+        [ffpLevel, 'combined'].forEach(prop => {
+          newState.mmisByFFP[prop][year].federal += costShares.fedShare;
+          newState.mmisByFFP[prop].total.federal += costShares.fedShare;
+
+          newState.mmisByFFP[prop][year].state += costShares.stateShare;
+          newState.mmisByFFP[prop].total.state += costShares.stateShare;
+
+          newState.mmisByFFP[prop][year].medicaid += totalMedicaidShare;
+          newState.mmisByFFP[prop].total.medicaid += totalMedicaidShare;
+
+          newState.mmisByFFP[prop][year].total += totalCost;
+          newState.mmisByFFP[prop].total.total += totalCost;
+        });
+      }
+
+      // Now we compute the federal share per fiscal quarter for
+      // this activity.
+      const ffp = activity.quarterlyFFP[year];
+      const ffpSource = fundingSource === 'mmis' ? 'mmis' : 'hitAndHie';
+      const activityFFP = newState.activities[activity.key].quarterlyFFP;
+      const quarterlyFFP = newState.federalShareByFFYQuarter[ffpSource];
+
+      ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
+        const propCostType = prop === 'contractors' ? 'contractors' : 'state';
+
+        // This is the percentage of the total federal share that the state
+        // is requesting, per quarter.  Go ahead and covert it to a 0-1
+        // value so we can precompute the federal dollar share per quarter
+        // using the nice rounding function.
+        const quarterlyInfo = {
+          federalPcts: [
+            ffp[1][propCostType] / 100,
+            ffp[2][propCostType] / 100,
+            ffp[3][propCostType] / 100,
+            ffp[4][propCostType] / 100
+          ],
+          qFFPs: []
+        };
+
+        // Compute the federal dollar payment across the quarters.
+        quarterlyInfo.qFFPs = roundedPercents(
+          fedShare[prop],
+          quarterlyInfo.federalPcts
+        );
+
+        // Shortcut to loop over quarters.  :)
+        [...Array(4)].forEach((_, q) => {
+          // Compute the federal share for this quarter.
+          const federalPct = quarterlyInfo.federalPcts[q];
+          const qFFP = quarterlyInfo.qFFPs[q];
+
+          // Total cost and percent for this type.  Note that we don't
+          // sum the percent here because there are two categories being
+          // merged into one - if we summed, the "state" percents would
+          // all be doubled.
+          activityFFP[year][q + 1][propCostType].dollars += qFFP;
+          activityFFP[year][q + 1][propCostType].percent = federalPct;
+
+          // Then the quarterly combined dollars.  We don't bother
+          // with percent for combined because it doesn't make sense.
+          activityFFP[year][q + 1].combined.dollars += qFFP;
+
+          // Fiscal year subtotal.  Because "expense" and "statePersonnel"
+          // are combined into the "state" property, we need to be careful
+          // about not adding the percent multiple times.  So, only
+          // add the percent if this is an "expense" type.
+          activityFFP[year].subtotal[propCostType].dollars += qFFP;
+          if (prop !== 'expenses') {
+            activityFFP[year].subtotal[propCostType].percent += federalPct;
+          }
+
+          // And finally, fiscal year combined subtotal and activity
+          // grand total.  Note that the grand total props are just
+          // numbers, not objects - we drop the percentage altogether.
+          activityFFP[year].subtotal.combined.dollars += qFFP;
+          activityFFP.total[propCostType] += qFFP;
+          activityFFP.total.combined += qFFP;
+
+          // For the expense type, add the federal share for the
+          // quarter and the fiscal year subtotal.
+          quarterlyFFP[year][q + 1][propCostType] += qFFP;
+          quarterlyFFP[year].subtotal[propCostType] += qFFP;
+
+          // Also add the federal share to the cross-expense
+          // quarterly subtotal and fiscal year subtotal
+          quarterlyFFP[year][q + 1].combined += qFFP;
+          quarterlyFFP[year].subtotal.combined += qFFP;
+
+          // And finally, add it to the expense type grand
+          // total and the federal share grand total
+          quarterlyFFP.total[propCostType] += qFFP;
+          quarterlyFFP.total.combined += qFFP;
         });
       });
     });
   });
+
+  const roundProps = o => {
+    Object.entries(o).forEach(([key, value]) => {
+      if (typeof value === 'number') {
+        o[key] = fixNum(value);
+      } else if (typeof value === 'object') {
+        roundProps(value);
+      }
+    });
+  };
+  roundProps(newState);
 
   return newState;
 };
@@ -428,8 +550,6 @@ const reducer = (state = initialState([]), action) => {
   switch (action.type) {
     case UPDATE_BUDGET:
       return buildBudget(action.state);
-    case UPDATE_BUDGET_QUARTERLY_SHARE:
-      return u({ quarterly: { ...action.updates } }, state);
     default:
       return state;
   }

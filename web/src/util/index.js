@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+import moment from 'moment';
 
 export const ACTIVITY_FUNDING_SOURCES = ['HIT', 'HIE', 'MMIS'];
 
@@ -154,23 +154,96 @@ export const getParams = str =>
     }, {});
 
 /**
- * Get a random 8-hex-digit string
+ * Get an app-unique random 8-hex-digit string. These are suitable for use as
+ * property names where you want to maintain insertion order.
  */
-export const generateKey = () =>
-  Math.floor(Math.random() * 4026531839 + 268435456).toString(16);
+export const generateKey = (() => {
+  const givenKeys = new Set();
 
-export const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
+  // Object properties returned by Object.keys() or Object.entries() are sorted
+  // two ways: first, any numeric keys are returned in numeric order; second,
+  // string keys are returned in assignment order.  We rely on that creation
+  // ordering in several places, so things get displayed in incorrect order if
+  // any keys generated here are completely numeric.  To prevent that, ensure
+  // that at least one character of the key is a letter.
 
-export const arrToObj = (array = [], initialValue = 0) =>
-  Object.assign({}, ...array.map(a => ({ [a]: initialValue })));
+  return () => {
+    let key = '';
+    do {
+      key = Math.floor(Math.random() * 4026531839 + 268435456).toString(16);
+      // Keep generating until we get a key that is not all digits, and isn't
+      // in our local set of generated keys (for uniqueness)
+    } while (/^\d{8}$/.test(key) || givenKeys.has(key));
+    givenKeys.add(key);
+    return key;
+  };
+})();
 
-export const addObjVals = (obj, getVal = a => a) =>
-  Object.values(obj).reduce((a, b) => a + getVal(b), 0);
+/**
+ * Convert a YYYY-MM-DD date string from state format into a
+ * consistent display format
+ *
+ * @param {String} date Date string from state.
+ * @returns {String} Display-formatted date string.
+ */
+export const stateDateToDisplay = date => {
+  const m = moment(date, 'YYYY-MM-DD');
+  if (m.isValid()) {
+    return m.format('M/D/YYYY');
+  }
+  return 'Date not specified';
+};
 
-export const titleCase = str => str.replace(/\b\S/g, t => t.toUpperCase());
+/**
+ * Convert a pair of YYYY-MM-DD date strings from state format into a
+ * consistent display format
+ *
+ * @param {String} start Start date string from state
+ * @param {String} end End date string from state
+ * @returns {String} Display-formatted date range string
+ */
+export const stateDateRangeToDisplay = (start, end) => {
+  const starty = moment(start, 'YYYY-MM-DD');
+  const endy = moment(end, 'YYYY-MM-DD');
+  if (starty.isValid() && endy.isValid()) {
+    return `${starty.format('M/D/YYYY')} - ${endy.format('M/D/YYYY')}`;
+  }
+  return 'Dates not specified';
+};
 
-export const isProgamAdmin = activity =>
-  activity.name === 'Program Administration' || activity.id === 1;
+/**
+ * Get a sequential form label ID, for uniqueness
+ */
+export const getLabelID = (() => {
+  let count = 0;
+  return () => {
+    count += 1;
+    if (process && process.env.NODE_ENV === 'test') {
+      // In test environments, always return the same thing, otherwise our
+      // snapshots are just like 🤷🏼‍♂️
+      count = 12321;
+    }
+    return `eapd-form-label-${count}`;
+  };
+})();
+
+/** Converts a single phrase to sentence case, not accounting for punctuation
+ */
+export const toSentenceCase = str =>
+  str
+    // Replace the first character after the start-of-line with its uppercase
+    .replace(/^(.)/, letter => letter.toUpperCase())
+    // Then replace every uppercase letter that is followed by a space or a
+    // lowercase letter with its lowercase. This way groups of capitalized
+    // letters (like acronyms) will stay capitalized, but other capitalized
+    // words will be lower-cased.
+    .replace(/ ([A-Z])([a-z]| )/g, start => start.toLowerCase());
+
+export const arrToObj = (array = [], initialValue = 0) => {
+  const init =
+    typeof initialValue === 'function' ? initialValue : () => initialValue;
+  return Object.assign({}, ...array.map(a => ({ [a]: init() })));
+};
 
 export const applyToNumbers = (obj, fn) => {
   const o = { ...obj };
@@ -179,18 +252,4 @@ export const applyToNumbers = (obj, fn) => {
     else if (typeof o[k] === 'object') o[k] = applyToNumbers(o[k], fn);
   });
   return o;
-};
-
-export const replaceNulls = (obj, newValue = '') => {
-  const replace = o => {
-    Object.keys(o).forEach(k => {
-      // eslint-disable-next-line no-param-reassign
-      if (o[k] === null) o[k] = newValue;
-      else if (typeof o[k] === 'object') replace(o[k]);
-    });
-  };
-
-  const objNew = JSON.parse(JSON.stringify(obj));
-  replace(objNew);
-  return objNew;
 };

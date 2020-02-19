@@ -1,67 +1,75 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { updateActivity as updateActivityAction } from '../../actions/activities';
-import HelpText from '../../components/HelpText';
-import { Textarea } from '../../components/Inputs';
-import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
-import { STANDARDS } from '../../util';
+import {
+  setActivityStandardAndConditionDoesNotSupportExplanation,
+  setActivityStandardAndConditionSupportExplanation
+} from '../../actions/editActivity';
 
-class StandardsAndConditions extends Component {
-  handleChange = field => e => {
-    const { value } = e.target;
-    const { activity, updateActivity } = this.props;
+import RichText from '../../components/RichText';
+import TextArea from '../../components/TextArea';
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-    const updates = { standardsAndConditions: { [field]: value } };
-    updateActivity(activity.key, updates);
-  };
+const StandardsAndConditions = ({
+  activity,
+  activityIndex,
+  setDoesNotSupport,
+  setSupport
+}) => (
+  <Fragment>
+    <h4 className="ds-h4">Standards and Conditions</h4>
+    <div className="ds-u-margin-bottom--6 ds-u-margin-top--3">
+      <p className="ds-u-margin-bottom--3">
+        Include a description about how this activity will support the Medicaid
+        standards and conditions{' '}
+        <a href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112">
+          42 CFR 433.112
+        </a>
+        .
+      </p>
 
-  render() {
-    const { activity } = this.props;
+      <RichText
+        content={activity.standardsAndConditions.supports}
+        onSync={html => setSupport(activityIndex, html)}
+        editorClassName="rte-textarea-1"
+      />
 
-    return (
-      <Subsection resource="activities.standardsAndConditions" nested>
-        {STANDARDS.map(std => (
-          <div key={std.id}>
-            <h3>
-              {t([`activities.standardsAndConditions`, std.id, 'header'])}
-            </h3>
-            <p className="preserve-line-breaks">
-              {t([`activities.standardsAndConditions`, std.id, 'subheader'])}
-            </p>
-            <HelpText
-              text={`activities.standardsAndConditions.${std.id}.helpText`}
-              reminder={`activities.standardsAndConditions.${std.id}.reminder`}
-            />
-            <Textarea
-              name={`activity-${activity.id}-condition-${std.id}`}
-              label={t([`activities.standardsAndConditions`, std.id, 'title'])}
-              rows="3"
-              value={activity.standardsAndConditions[std.id]}
-              onChange={this.handleChange(std.id)}
-            />
-          </div>
-        ))}
-      </Subsection>
-    );
-  }
-}
+      <div className="ds-c-choice__checkedChild ds-u-margin-top--3">
+        <TextArea
+          label="If this activity does not support the Medicaid standards and conditions, please explain."
+          name="activity-set-standards-and-conditions-non-support"
+          onChange={({ target: { value } }) =>
+            setDoesNotSupport(activityIndex, value)
+          }
+          rows={6}
+          style={{ maxWidth: 'initial' }}
+          value={activity.standardsAndConditions.doesNotSupport}
+        />
+      </div>
+    </div>
+  </Fragment>
+);
 
 StandardsAndConditions.propTypes = {
   activity: PropTypes.object.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  setSupport: PropTypes.func.isRequired,
+  setDoesNotSupport: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
-  activity: byKey[aKey]
+const mapStateToProps = (state, props) => ({
+  activity: selectActivityByIndex(state, props)
 });
 
 const mapDispatchToProps = {
-  updateActivity: updateActivityAction
+  setDoesNotSupport: setActivityStandardAndConditionDoesNotSupportExplanation,
+  setSupport: setActivityStandardAndConditionSupportExplanation
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  StandardsAndConditions
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StandardsAndConditions);
+
+export { StandardsAndConditions as plain, mapStateToProps, mapDispatchToProps };

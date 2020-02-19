@@ -1,72 +1,110 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
+import { removeActivity } from '../../actions/editActivity';
+
 import {
-  EntryDetailsRaw as EntryDetails,
+  plain as EntryDetails,
   mapStateToProps,
   mapDispatchToProps
 } from './EntryDetails';
-import {
-  removeActivity,
-  toggleActivitySection
-} from '../../actions/activities';
 
 describe('the (Activity) EntryDetails component', () => {
   const props = {
-    aKey: 'activity-key',
-    expanded: false,
-    num: 3,
-    removeActivity: sinon.stub(),
-    title: 'Activity title',
-    toggleSection: sinon.stub()
+    activityIndex: 2,
+    activityKey: 'activity key',
+    fundingSource: 'money pit',
+    name: 'activity name',
+    remove: jest.fn()
   };
 
   beforeEach(() => {
-    props.toggleSection.resetHistory();
+    props.remove.mockClear();
   });
 
-  test('renders correctly', () => {
-    const component = shallow(<EntryDetails {...props} />);
+  test('does not render the delete button on the first element', () => {
+    const firstActivityProps = {
+      activityIndex: 0,
+      activityKey: 'activity 1 key',
+      fundingSource: 'money pit',
+      name: 'activity 1 name',
+      remove: jest.fn()
+    };
+    const component = shallow(<EntryDetails {...firstActivityProps} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('toggles its collapse state', () => {
+  test('deletes the element', () => {
     const component = shallow(<EntryDetails {...props} />);
-    component
-      .dive()
-      .find('button')
+    const review = component.find('Review').dive();
+    // Second button is the delete button
+    review
+      .find('Button')
+      .at(1)
       .simulate('click');
-
-    expect(props.toggleSection.calledOnce).toBeTruthy();
+    expect(props.remove).toHaveBeenCalled();
   });
 
-  test('maps redux state to component props', () => {
-    expect(
-      mapStateToProps(
-        {
-          activities: {
-            byKey: {
-              key: {
-                fundingSource: 'FUNDING!',
-                meta: { expanded: 'bloop' },
-                name: 'activity name'
-              }
+  test('renders correctly with the modal closed', () => {
+    const component = shallow(<EntryDetails {...props} />);
+    expect(component).toMatchSnapshot();
+
+    const review = component.find('Review').dive();
+    // First button is the edit button
+    review
+      .find('Button')
+      .at(0)
+      .simulate('click');
+
+    // Modal is now open
+    expect(component).toMatchSnapshot();
+
+    component.find('ActivityDialog').prop('closeModal')();
+
+    // Modal is now closed again
+    expect(component).toMatchSnapshot();
+  });
+
+  test('maps state to props', () => {
+    const state = {
+      apd: {
+        data: {
+          activities: [
+            {
+              fundingSource: 'money pit',
+              key: 'key1',
+              name: 'that free money guy'
+            },
+            {
+              fundingSource: 'black market kidneys',
+              key: 'key2',
+              name: 'scary alley'
+            },
+            {
+              fundingSource: 'appropriations',
+              key: 'key3',
+              name: 'Congress Dollars'
+            },
+            {
+              fundingSource: 'blackjack',
+              key: 'key4',
+              name: 'Lucky Pete'
             }
-          }
-        },
-        { aKey: 'key', num: 3 }
-      )
-    ).toEqual({
-      expanded: 'bloop',
-      title: 'Program Activities › Activity 3: activity name (FUNDING!)'
+          ]
+        }
+      }
+    };
+
+    expect(mapStateToProps(state, { activityIndex: 2 })).toEqual({
+      activityKey: 'key3',
+      fundingSource: 'appropriations',
+      name: 'Congress Dollars'
     });
   });
 
-  test('maps dispatch actions to props', () => {
+  test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      removeActivity,
-      toggleSection: toggleActivitySection
+      remove: removeActivity
     });
   });
 });

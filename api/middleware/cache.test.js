@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const { cache, modelIndex } = require('./cache');
+const { cache } = require('./cache');
 
 tap.test('middleware cache', async cacheTests => {
   const key1 = ['something', 1, {}];
@@ -36,25 +36,5 @@ tap.test('middleware cache', async cacheTests => {
       middleware2,
       'returns the result of the second middleware getter'
     );
-  });
-});
-
-tap.test('model indexer', async modelIndexTest => {
-  const model1 = {};
-  const model2 = {};
-
-  modelIndexTest.test('returns a number for a model', async test => {
-    const index1 = modelIndex(model1);
-    const index2 = modelIndex(model2);
-    const index3 = modelIndex(model1);
-
-    test.type(index1, 'number', 'returns a number for the first object');
-    test.type(index2, 'number', 'returns a number for the second object');
-    test.notEqual(
-      index1,
-      index2,
-      'the numbers for the two different objects are not the same'
-    );
-    test.equal(index1, index3, 'gives the same number for the same object');
   });
 });

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the CostAllocateFFPYearTotal component renders correctly 1`] = `
+<Fragment>
+  <h6
+    className="ds-h3"
+  >
+    Total FFY year 1 - year 2
+  </h6>
+  <p
+    className="ds-h5"
+    key="state"
+  >
+    In-House Costs
+    :
+     
+    <span
+      className="ds-u-font-weight--normal"
+    >
+      <Dollars
+        long={true}
+      >
+        300
+      </Dollars>
+    </span>
+  </p>
+  <p
+    className="ds-h5"
+    key="contractors"
+  >
+    Private Contractor Costs
+    :
+     
+    <span
+      className="ds-u-font-weight--normal"
+    >
+      <Dollars
+        long={true}
+      >
+        200
+      </Dollars>
+    </span>
+  </p>
+  <p
+    className="ds-h5"
+  >
+    Total Enhanced FFP
+    :
+     
+    <span
+      className="ds-u-font-weight--normal"
+    >
+      <Dollars
+        long={true}
+      >
+        100
+      </Dollars>
+    </span>
+  </p>
+</Fragment>
+`;

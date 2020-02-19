@@ -1,0 +1,60 @@
+{
+  "id": 4001,
+  "name": "AZ-1865-12-06-HITECH-APD",
+  "activities": [
+    {
+      "id": 4110,
+      "alternatives": null,
+      "contractorResources": [
+        {
+          "description": null,
+          "end": null,
+          "hourlyData": [],
+          "id": 9900,
+          "name": null,
+          "start": null,
+          "totalCost": null,
+          "useHourly": false,
+          "years": []
+        }
+      ],
+      "costAllocation": [],
+      "costAllocationNarrative": { "methodology": null, "otherSources": null },
+      "description": null,
+      "expenses": [],
+      "fundingSource": null,
+      "name": null,
+      "objectives": [],
+      "plannedEndDate": null,
+      "plannedStartDate": null,
+      "schedule": [],
+      "standardsAndConditions": null,
+      "statePersonnel": [],
+      "summary": null,
+      "quarterlyFFP": []
+    }
+  ],
+  "federalCitations": null,
+  "incentivePayments": [],
+  "keyPersonnel": [],
+  "narrativeHIE": null,
+  "narrativeHIT": null,
+  "narrativeMMIS": null,
+  "previousActivityExpenses": [],
+  "previousActivitySummary": null,
+  "programOverview": null,
+  "state": "az",
+  "stateProfile": {
+    "medicaidDirector": { "name": null, "email": null, "phone": null },
+    "medicaidOffice": {
+      "address1": null,
+      "address2": null,
+      "city": null,
+      "state": null,
+      "zip": null
+    }
+  },
+  "status": "draft",
+  "updated": "1919-06-04T16:30:00.000Z",
+  "years": null
+}

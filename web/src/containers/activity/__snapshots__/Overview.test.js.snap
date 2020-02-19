@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity overview/summary section (in the activity body) renders correctly 1`] = `
+<Subsection
+  headerClassName="header-with-top-margin"
+  id="activity-overview-37"
+  nested={false}
+  resource="activities.overview"
+>
+  <Connect(NameAndFundingSourceForm)
+    index={37}
+    item={
+      Object {
+        "fundingSource": undefined,
+        "name": undefined,
+      }
+    }
+  />
+  <TextArea
+    className="data-entry-box"
+    hint="Details for the activity go in the following sections."
+    label="Provide a short overview of the activity."
+    max={280}
+    name="activity overview"
+    onChange={[Function]}
+    rows={6}
+    value=""
+  />
+  <div
+    className="data-entry-box"
+  >
+    <FormLabel
+      className="ds-c-label--full-width"
+      component="label"
+      hint=""
+    >
+      Include as much detail as is necessary to explain the activity.
+    </FormLabel>
+    <Connect(RichText)
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="data-entry-box"
+  >
+    <FormLabel
+      className="ds-c-label--full-width"
+      component="label"
+      hint="If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy."
+    >
+      Statement of alternative considerations and supporting justification
+    </FormLabel>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      reverse={false}
+      source="activities.overview.activityAlternativesInput"
+    />
+    <Connect(RichText)
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <hr />
+</Subsection>
+`;

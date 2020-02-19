@@ -1,7 +1,7 @@
 import I18n from 'i18n-js';
 
 // Import locale translations
-import en from './locales/en.yaml';
+import en from './locales/en';
 import fr from './locales/fr.json';
 
 // Initial locale settings

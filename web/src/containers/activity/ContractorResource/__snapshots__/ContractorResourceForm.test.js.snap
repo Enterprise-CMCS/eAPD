@@ -1,0 +1,339 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ContractorResourceForm component renders correctly 1`] = `
+<Fragment>
+  <TextField
+    autoFocus={true}
+    label="Contractor Name"
+    name="contractor-name"
+    onChange={[Function]}
+    type="text"
+    value="Honey Dipper Dan"
+  />
+  <TextArea
+    label="Description of Services"
+    name="contractor-description"
+    onChange={[Function]}
+    rows={5}
+    value="They cleaned up the latrines after the Battle of Hastings"
+  />
+  <FormLabel
+    component="label"
+  >
+    Contract Term
+  </FormLabel>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DateField
+      label="Start"
+      onChange={[Function]}
+      value="1066-10-14"
+    />
+    <DateField
+      hint=""
+      label="End"
+      onChange={[Function]}
+      value="1066-10-15"
+    />
+  </div>
+  <DollarField
+    label="Total Contract Cost"
+    name="contractor-total-cost"
+    onBlur={null}
+    onChange={[Function]}
+    size="medium"
+    value={12345}
+  />
+  <fieldset
+    className="ds-c-fieldset"
+  >
+    <legend
+      className="ds-c-label"
+    >
+      This is an hourly resource
+    </legend>
+    <ChoiceComponent
+      checked={true}
+      name="apd-activity-contractor-hourly-key 1-no"
+      onChange={[Function]}
+      type="radio"
+      value="no"
+    >
+      No
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={false}
+      checkedChildren={
+        <div
+          className="ds-c-choice__checkedChild"
+        >
+          <React.Fragment>
+            <FormLabel
+              component="label"
+            >
+              FFY 
+              1066
+            </FormLabel>
+            <div
+              className="ds-l-row ds-u-padding-left--2"
+            >
+              <NumberField
+                fieldRef={null}
+                label="Number of hours"
+                labelClassName="ds-u-margin-top--1"
+                name="contractor-num-hours-ffy-1066"
+                onChange={[Function]}
+                size="medium"
+                type="number"
+                value={10}
+              />
+              <DollarField
+                className="ds-u-margin-left--1"
+                label="Hourly rate"
+                labelClassName="ds-u-margin-top--1"
+                name="contractor-hourly-rate-ffy-1066"
+                onBlur={null}
+                onChange={[Function]}
+                size="medium"
+                value={100}
+              />
+            </div>
+          </React.Fragment>
+          <React.Fragment>
+            <FormLabel
+              component="label"
+            >
+              FFY 
+              1067
+            </FormLabel>
+            <div
+              className="ds-l-row ds-u-padding-left--2"
+            >
+              <NumberField
+                fieldRef={null}
+                label="Number of hours"
+                labelClassName="ds-u-margin-top--1"
+                name="contractor-num-hours-ffy-1067"
+                onChange={[Function]}
+                size="medium"
+                type="number"
+                value={20}
+              />
+              <DollarField
+                className="ds-u-margin-left--1"
+                label="Hourly rate"
+                labelClassName="ds-u-margin-top--1"
+                name="contractor-hourly-rate-ffy-1067"
+                onBlur={null}
+                onChange={[Function]}
+                size="medium"
+                value={200}
+              />
+            </div>
+          </React.Fragment>
+        </div>
+      }
+      name="apd-activity-contractor-hourly-key 1-yes"
+      onChange={[Function]}
+      type="radio"
+      value="yes"
+    >
+      Yes
+    </ChoiceComponent>
+  </fieldset>
+  <DollarField
+    disabled={false}
+    key="1066"
+    label="FFY 1066 Cost"
+    name="contractor-cost-ffy-1066"
+    onBlur={null}
+    onChange={[Function]}
+    size="medium"
+    value={300}
+  />
+  <DollarField
+    disabled={false}
+    key="1067"
+    label="FFY 1067 Cost"
+    name="contractor-cost-ffy-1067"
+    onBlur={null}
+    onChange={[Function]}
+    size="medium"
+    value={400}
+  />
+</Fragment>
+`;
+
+exports[`the ContractorResourceForm component renders if use hourly data is selected 1`] = `
+<Fragment>
+  <TextField
+    autoFocus={true}
+    label="Contractor Name"
+    name="contractor-name"
+    onChange={[Function]}
+    type="text"
+    value="Honey Dipper Dan"
+  />
+  <TextArea
+    label="Description of Services"
+    name="contractor-description"
+    onChange={[Function]}
+    rows={5}
+    value="They cleaned up the latrines after the Battle of Hastings"
+  />
+  <FormLabel
+    component="label"
+  >
+    Contract Term
+  </FormLabel>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DateField
+      label="Start"
+      onChange={[Function]}
+      value="1066-10-14"
+    />
+    <DateField
+      hint=""
+      label="End"
+      onChange={[Function]}
+      value="1066-10-15"
+    />
+  </div>
+  <DollarField
+    label="Total Contract Cost"
+    name="contractor-total-cost"
+    onBlur={null}
+    onChange={[Function]}
+    size="medium"
+    value={12345}
+  />
+  <fieldset
+    className="ds-c-fieldset"
+  >
+    <legend
+      className="ds-c-label"
+    >
+      This is an hourly resource
+    </legend>
+    <ChoiceComponent
+      checked={false}
+      name="apd-activity-contractor-hourly-key 1-no"
+      onChange={[Function]}
+      type="radio"
+      value="no"
+    >
+      No
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={true}
+      checkedChildren={
+        <div
+          className="ds-c-choice__checkedChild"
+        >
+          <React.Fragment>
+            <FormLabel
+              component="label"
+            >
+              FFY 
+              1066
+            </FormLabel>
+            <div
+              className="ds-l-row ds-u-padding-left--2"
+            >
+              <NumberField
+                fieldRef={null}
+                label="Number of hours"
+                labelClassName="ds-u-margin-top--1"
+                name="contractor-num-hours-ffy-1066"
+                onChange={[Function]}
+                size="medium"
+                type="number"
+                value={10}
+              />
+              <DollarField
+                className="ds-u-margin-left--1"
+                label="Hourly rate"
+                labelClassName="ds-u-margin-top--1"
+                name="contractor-hourly-rate-ffy-1066"
+                onBlur={null}
+                onChange={[Function]}
+                size="medium"
+                value={100}
+              />
+            </div>
+          </React.Fragment>
+          <React.Fragment>
+            <FormLabel
+              component="label"
+            >
+              FFY 
+              1067
+            </FormLabel>
+            <div
+              className="ds-l-row ds-u-padding-left--2"
+            >
+              <NumberField
+                fieldRef={null}
+                label="Number of hours"
+                labelClassName="ds-u-margin-top--1"
+                name="contractor-num-hours-ffy-1067"
+                onChange={[Function]}
+                size="medium"
+                type="number"
+                value={20}
+              />
+              <DollarField
+                className="ds-u-margin-left--1"
+                label="Hourly rate"
+                labelClassName="ds-u-margin-top--1"
+                name="contractor-hourly-rate-ffy-1067"
+                onBlur={null}
+                onChange={[Function]}
+                size="medium"
+                value={200}
+              />
+            </div>
+          </React.Fragment>
+        </div>
+      }
+      name="apd-activity-contractor-hourly-key 1-yes"
+      onChange={[Function]}
+      type="radio"
+      value="yes"
+    >
+      Yes
+    </ChoiceComponent>
+  </fieldset>
+  <p
+    className="ds-u-margin-bottom--0"
+  >
+    <FormLabel
+      component="label"
+    >
+      FFY 
+      1066
+       Cost
+    </FormLabel>
+    <Dollars
+      long={false}
+    >
+      300
+    </Dollars>
+    <FormLabel
+      component="label"
+    >
+      FFY 
+      1067
+       Cost
+    </FormLabel>
+    <Dollars
+      long={false}
+    >
+      400
+    </Dollars>
+  </p>
+</Fragment>
+`;

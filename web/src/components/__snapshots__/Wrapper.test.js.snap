@@ -1,105 +1,127 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Wrapper component renders correctly in dev mode 1`] = `
-ShallowWrapper {
-  "length": 1,
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Wrapper
-    isDev={true}
+exports[`Wrapper component renders correctly for a non-root path 1`] = `
+<div
+  className="site"
+>
+  <a
+    className="skip-nav"
+    href="#start-main-content"
   >
-    child content
-  </Wrapper>,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": "child content",
-      "className": "site",
-    },
-    "ref": null,
-    "rendered": "child content",
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": "child content",
-        "className": "site",
-      },
-      "ref": null,
-      "rendered": "child content",
-      "type": "div",
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-      },
-    },
-  },
-}
+    Skip to main content
+  </a>
+  <Connect(Header)
+    showSiteTitle={false}
+  />
+  child content
+  <Footer />
+</div>
+`;
+
+exports[`Wrapper component renders correctly in dev mode 1`] = `
+<div
+  className="site"
+>
+  <a
+    className="skip-nav"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
+  <Connect(Header)
+    showSiteTitle={true}
+  />
+  child content
+  <Footer />
+</div>
 `;
 
 exports[`Wrapper component renders correctly in non-dev mode 1`] = `
-ShallowWrapper {
-  "length": 1,
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Wrapper
-    isDev={false}
+<div
+  className="site"
+>
+  <a
+    className="skip-nav"
+    href="#start-main-content"
   >
-    child content
-  </Wrapper>,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": "child content",
-      "className": "site",
-    },
-    "ref": null,
-    "rendered": "child content",
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": "child content",
-        "className": "site",
-      },
-      "ref": null,
-      "rendered": "child content",
-      "type": "div",
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-      },
-    },
-  },
-}
+    Skip to main content
+  </a>
+  <Connect(Header)
+    showSiteTitle={true}
+  />
+  child content
+  <Footer />
+</div>
+`;
+
+exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" path renders correctly for the /create-account path 1`] = `
+<div
+  className="site site--gray"
+>
+  <a
+    className="skip-nav"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
+  <Connect(Header)
+    showSiteTitle={false}
+  />
+  child content
+  <Footer />
+</div>
+`;
+
+exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" path renders correctly for the /edit-account path 1`] = `
+<div
+  className="site site--gray"
+>
+  <a
+    className="skip-nav"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
+  <Connect(Header)
+    showSiteTitle={false}
+  />
+  child content
+  <Footer />
+</div>
+`;
+
+exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" path renders correctly for the /login path 1`] = `
+<div
+  className="site site--gray"
+>
+  <a
+    className="skip-nav"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
+  <Connect(Header)
+    showSiteTitle={false}
+  />
+  child content
+  <Footer />
+</div>
+`;
+
+exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" path renders correctly for the /me path 1`] = `
+<div
+  className="site site--gray"
+>
+  <a
+    className="skip-nav"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
+  <Connect(Header)
+    showSiteTitle={false}
+  />
+  child content
+  <Footer />
+</div>
 `;

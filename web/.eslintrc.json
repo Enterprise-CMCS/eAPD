@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "rules": {
     "jsx-a11y/anchor-is-valid": [
       2,
@@ -17,9 +17,14 @@
         }
       }
     ],
+    "jsx-a11y/label-has-associated-control": ["error", { "assert": "either" }],
+
+    "no-param-reassign": [2, { "props": false }],
 
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-filename-extension": 0,
+    "react/jsx-fragments": ["error", "element"],
+    "react/jsx-props-no-spreading": 0,
     "react/no-array-index-key": "warn"
   },
   "env": {

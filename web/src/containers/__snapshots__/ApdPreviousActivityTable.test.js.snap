@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd previous activity table, mmis component renders correctly 1`] = `
+<table
+  className="budget-table"
+>
+  <caption
+    className="ds-h4"
+  >
+    HIT + HIE
+  </caption>
+  <thead>
+    <tr>
+      <th
+        id="prev_act_hit_header_ffy"
+      >
+        <span
+          className="ds-u-visibility--screen-reader"
+        >
+          Year
+        </span>
+      </th>
+      <th
+        id="prev_act_hithie_total"
+      >
+        <span>
+          Total computable
+          <br />
+          (Federal + state)
+        </span>
+      </th>
+      <th
+        colSpan="2"
+        id="prev_act_hithie_federal"
+      >
+        <span>
+          Federal share 
+          <strong>
+            90
+            %
+          </strong>
+           FFP
+        </span>
+      </th>
+    </tr>
+    <tr>
+      <td
+        aria-hidden="true"
+        className="th"
+      />
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_total_approved"
+      >
+        Approved
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_federal_approved"
+      >
+        Approved
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_federal_actual"
+      >
+        Actual
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      key="1"
+    >
+      <th
+        headers="prev_act_hit_header_ffy"
+        id="prev_act_hithie_row_1"
+      >
+        FFY 1
+      </th>
+      <td
+        className=""
+        headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
+      >
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
+          label="total approved funding for HIT and HIE for FFY 1, state plus federal"
+          labelClassName="ds-u-visibility--screen-reader"
+          name="hithie-approved-total-1"
+          onBlur={null}
+          onChange={[Function]}
+          value={20}
+        />
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_approved"
+      >
+        <Dollars
+          long={false}
+        >
+          18
+        </Dollars>
+      </td>
+      <td
+        className=""
+        headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
+      >
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
+          label="actual federal share for HIT and HIE for FFY 1"
+          labelClassName="ds-u-visibility--screen-reader"
+          name="hithie-actual-federal-1"
+          onBlur={null}
+          onChange={[Function]}
+          value={10}
+        />
+      </td>
+    </tr>
+    <tr
+      key="2"
+    >
+      <th
+        headers="prev_act_hit_header_ffy"
+        id="prev_act_hithie_row_2"
+      >
+        FFY 2
+      </th>
+      <td
+        className=""
+        headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
+      >
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
+          label="total approved funding for HIT and HIE for FFY 2, state plus federal"
+          labelClassName="ds-u-visibility--screen-reader"
+          name="hithie-approved-total-2"
+          onBlur={null}
+          onChange={[Function]}
+          value={200}
+        />
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_approved"
+      >
+        <Dollars
+          long={false}
+        >
+          180
+        </Dollars>
+      </td>
+      <td
+        className=""
+        headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
+      >
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
+          label="actual federal share for HIT and HIE for FFY 2"
+          labelClassName="ds-u-visibility--screen-reader"
+          name="hithie-actual-federal-2"
+          onBlur={null}
+          onChange={[Function]}
+          value={100}
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

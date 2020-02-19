@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RichText component renders as expected 1`] = `
+<div
+  className="rte--wrapper"
+>
+  <Editor
+    cloudChannel="5"
+    id="test-id"
+    init={
+      Object {
+        "autoresize_bottom_margin": 0,
+        "browser_spellcheck": true,
+        "images_upload_handler": [Function],
+        "menubar": "",
+        "paste_data_images": true,
+        "plugins": Array [
+          "autoresize",
+          "paste",
+          "spellchecker",
+        ],
+        "setup": [Function],
+        "toolbar": "undo redo | style | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | eapdImageUpload",
+      }
+    }
+    onEditorChange={[Function]}
+    value="initial rich text value"
+  />
+</div>
+`;

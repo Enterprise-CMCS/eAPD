@@ -1,111 +1,155 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
-import { expandActivitySection } from '../actions/activities';
+import Waypoint from './ConnectedWaypoint';
+import Dollars from '../components/Dollars';
+import Review from '../components/Review';
 import { Section, Subsection } from '../components/Section';
-import { t } from '../i18n';
-import { aggregateByYear, getActivityTotals } from '../reducers/activities';
-import { addObjVals } from '../util';
-import { formatMoney } from '../util/formats';
 
-const ExecutiveSummary = ({ data, years, expandSection }) => (
-  <Section id="executive-summary" resource="executiveSummary">
-    <Subsection
-      id="executive-summary-overview"
-      resource="executiveSummary.summary"
-    >
-      {data.map((d, i) => (
-        <div
-          key={d.key}
-          className="mb2 md-flex items-center alert alert-success"
+import { selectApdYears } from '../reducers/apd.selectors';
+import {
+  selectBudgetExecutiveSummary,
+  selectBudgetGrandTotal
+} from '../reducers/budget.selectors';
+
+import ActivityDialog from './activity/EntryDetailsDialog';
+
+const ExecutiveSummary = props => {
+  const [showModal, setShowModal] = useState(false);
+  const [activityIndexForModal, setActivityIndexForModal] = useState(-1);
+  const { data, total, years } = props;
+  const openModal = index => {
+    setActivityIndexForModal(index);
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  return (
+    <Waypoint id="executive-summary-overview">
+      <Section isNumbered id="executive-summary" resource="executiveSummary">
+        <Waypoint id="executive-summary-summary" />
+        <Subsection
+          id="executive-summary-summary"
+          resource="executiveSummary.summary"
         >
-          <div className="p2 sm-m0 flex-auto">
-            {d.key !== 'all' ? (
-              <Fragment>
-                <div className="h5">
-                  {t('activities.namePrefixAndNum', { number: i + 1 })}
-                </div>
-                <a
-                  href={`#activity-${d.key}`}
-                  className="h3 bold black"
-                  onClick={() => expandSection(d.key)}
-                >
-                  {d.name || t('activities.noNameYet')}
-                </a>
-              </Fragment>
-            ) : (
-              <div className="h3 bold">{d.name}</div>
-            )}
-            {d.descShort && <div>{d.descShort}</div>}
-          </div>
-          <div className="md-flex md-col-7">
-            {years.map(year => (
-              <div key={year} className="px2 py3 flex-auto">
-                <div className="h5">{t('ffy', { year })}</div>
-                <div className="h3 mono bold">
-                  {formatMoney(d.totals[year])}
-                </div>
-              </div>
-            ))}
-            <div className="px2 py3 flex-auto">
-              <div className="h5">{t('executiveSummary.total')}</div>
-              <div className="h3 mono bold">{formatMoney(d.combined)}</div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </Subsection>
-    <Subsection
-      id="executive-summary-budget-table"
-      resource="executiveSummary.budgetTable"
-    >
-      <ExecutiveSummaryBudget />
-    </Subsection>
-  </Section>
-);
+          {data.map((activity, i) => (
+            <Review
+              key={activity.key}
+              heading={
+                <Fragment>
+                  Activity {i + 1}: {activity.name}
+                </Fragment>
+              }
+              headingLevel={4}
+              editHref=""
+              onEditClick={() => openModal(i)}
+              className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
+            >
+              {activity.summary && <p>{activity.summary}</p>}
+              <ul className="ds-c-list--bare">
+                <li>
+                  <strong>Date:</strong> {activity.dateRange}
+                </li>
+                <li>
+                  <strong>Total cost of activity:</strong>{' '}
+                  <Dollars long>{activity.combined}</Dollars>
+                </li>
+                <li>
+                  <strong>Medicaid share:</strong>{' '}
+                  <Dollars long>{activity.medicaid}</Dollars> (
+                  <Dollars long>{activity.federal}</Dollars> Federal share)
+                </li>
+                {Object.entries(activity.ffys).map(
+                  ([ffy, { medicaidShare, federal, total: ffyTotal }], j) => (
+                    <li
+                      key={ffy}
+                      className={j === 0 ? 'ds-u-margin-top--2' : ''}
+                    >
+                      <strong>FFY {ffy}:</strong>{' '}
+                      <Dollars long>{ffyTotal}</Dollars> |{' '}
+                      <strong>Medicaid Share:</strong>{' '}
+                      <Dollars long>{medicaidShare}</Dollars> (
+                      <Dollars long>{federal}</Dollars> Federal share)
+                    </li>
+                  )
+                )}
+              </ul>
+            </Review>
+          ))}
+          {showModal && (
+            <ActivityDialog
+              title={`Activity ${activityIndexForModal + 1}: ${
+                data[activityIndexForModal].name
+              }`}
+              activityIndex={activityIndexForModal}
+              closeModal={closeModal}
+            />
+          )}
+          <hr className="ds-u-border--dark ds-u-margin--0" />
+          <Review
+            heading="Total cost"
+            headingLevel={4}
+            className="ds-u-border--0"
+          >
+            <p>
+              Verify that this information is correct. Edit activities above to
+              make changes.
+            </p>
+            <ul className="ds-c-list--bare">
+              <li>
+                <strong>Federal Fiscal Years requested:</strong> FFY{' '}
+                {years.join(', ')}
+              </li>
+              <li>
+                <strong>Medicaid share:</strong>{' '}
+                <Dollars long>{total.medicaid}</Dollars> (
+                <Dollars long>{total.federal}</Dollars> Federal share)
+              </li>
+              <li>
+                <strong>Total funding request:</strong>{' '}
+                <Dollars long>{total.combined}</Dollars>
+              </li>
+              {Object.entries(total.ffys).map(
+                ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
+                  <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
+                    <strong>FFY {ffy}:</strong>{' '}
+                    <Dollars long>{ffyTotal}</Dollars> |{' '}
+                    <Dollars long>{medicaid}</Dollars> Medicaid share |{' '}
+                    <Dollars long>{federal}</Dollars> Federal share
+                  </li>
+                )
+              )}
+            </ul>
+          </Review>
+        </Subsection>
+
+        <Waypoint id="executive-summary-budget-table" />
+        <Subsection
+          id="executive-summary-budget-table"
+          resource="executiveSummary.budgetTable"
+        >
+          <ExecutiveSummaryBudget />
+        </Subsection>
+      </Section>
+    </Waypoint>
+  );
+};
 
 ExecutiveSummary.propTypes = {
   data: PropTypes.array.isRequired,
-  years: PropTypes.array.isRequired,
-  expandSection: PropTypes.func.isRequired
+  total: PropTypes.object.isRequired,
+  years: PropTypes.array.isRequired
 };
 
-const mapStateToProps = ({ activities, apd }) => {
-  const activitiesArray = Object.values(activities.byKey);
+const mapStateToProps = state => ({
+  data: selectBudgetExecutiveSummary(state),
+  total: selectBudgetGrandTotal(state),
+  years: selectApdYears(state)
+});
 
-  const data = activitiesArray.map(a => {
-    const { key, name, descShort } = a;
-    const totals = getActivityTotals(a);
+export default connect(mapStateToProps, null)(ExecutiveSummary);
 
-    return {
-      key,
-      name,
-      descShort,
-      totals,
-      combined: addObjVals(totals)
-    };
-  });
-
-  const allTotals = aggregateByYear(data.map(d => d.totals), apd.data.years);
-
-  data.push({
-    key: 'all',
-    name: 'Total Cost',
-    descShort: null,
-    totals: allTotals,
-    combined: addObjVals(allTotals)
-  });
-
-  return {
-    data,
-    years: apd.data.years
-  };
-};
-
-const mapDispatchToProps = {
-  expandSection: expandActivitySection
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExecutiveSummary);
+export { ExecutiveSummary as plain, mapStateToProps };

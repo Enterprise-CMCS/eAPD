@@ -1,0 +1,47 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+// needed for sticky footer
+.site {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+
+  &.site--gray {
+    background-color: $color-gray-lightest;
+  }
+}
+
+.site-sidebar {
+  width: 212px; // fix for IE
+  position: fixed;
+  max-height: 100vh;
+  overflow-y: auto;
+  float: left;
+  + .site-main {
+    margin-left: 244px; // sidebar width plus $spacer-4
+  }
+}
+
+.site-body {
+  position: relative;
+}
+
+footer {
+  margin-top: auto; // will push the footer as far down as it can
+}
+
+.skip-nav {
+  background: white;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0 0.5rem;
+  position: absolute;
+  top: -3rem;
+  transition: top 1s ease-out;
+
+  &:focus {
+    top: 0;
+    transition: top 200ms ease-out;
+  }
+}

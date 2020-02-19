@@ -1,48 +1,50 @@
+import { Button } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import EntryBasic from './EntryBasic';
 import EntryDetails from './EntryDetails';
-import { addActivity as addActivityAction } from '../../actions/activities';
-import Btn from '../../components/Btn';
-import { Section, Subsection } from '../../components/Section';
-import { t } from '../../i18n';
+import Waypoint from '../ConnectedWaypoint';
+import { addActivity } from '../../actions/editActivity';
+import { Section } from '../../components/Section';
+import { selectAllActivities } from '../../reducers/activities.selectors';
 
-const All = ({ activityKeys, addActivity }) => (
-  <Section id="activities" resource="activities">
-    <Subsection id="activities-list" resource="activities.list" open>
-      {activityKeys.length === 0 ? (
-        <div className="mb2 p1 h6 alert">
-          {t('activities.noActivityMessage')}
-        </div>
-      ) : (
-        <div className="mb3">
-          {activityKeys.map((key, idx) => (
-            <EntryBasic key={key} aKey={key} num={idx + 1} />
-          ))}
-        </div>
-      )}
-      <Btn onClick={addActivity}>{t('activities.addActivityButtonText')}</Btn>
-    </Subsection>
-    {activityKeys.map((key, idx) => (
-      <EntryDetails key={key} aKey={key} num={idx + 1} />
-    ))}
-  </Section>
-);
+const All = ({ add, activities }) => {
+  const onAdd = () => add();
+
+  return (
+    <Waypoint id="activities-overview">
+      <Section isNumbered id="activities" resource="activities">
+        <h3 className="subsection--title ds-h3">
+          {activities.length} program activities
+        </h3>
+        {activities.map(({ key }, index) => (
+          <Waypoint id={key} key={key}>
+            <EntryDetails activityIndex={index} />
+          </Waypoint>
+        ))}
+        <Button className="ds-u-margin-top--4" onClick={onAdd}>
+          Add another activity
+        </Button>
+      </Section>
+    </Waypoint>
+  );
+};
 
 All.propTypes = {
-  activityKeys: PropTypes.array.isRequired,
-  addActivity: PropTypes.func.isRequired
+  add: PropTypes.func.isRequired,
+  activities: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-export const mapStateToProps = ({ activities }) => ({
-  activityKeys: activities.allKeys
-});
+const mapStateToProps = state => ({ activities: selectAllActivities(state) });
 
-export const mapDispatchToProps = {
-  addActivity: addActivityAction
+const mapDispatchToProps = {
+  add: addActivity
 };
 
-export { All as AllRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(All);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(All);
+
+export { All as plain, mapStateToProps, mapDispatchToProps };

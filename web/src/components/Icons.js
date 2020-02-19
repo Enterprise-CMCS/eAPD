@@ -1,26 +1,65 @@
-import Icon from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // to optimize bundle, explicitly importing only the icons used
-import faHelp from '@fortawesome/fontawesome-free-regular/faQuestionCircle';
-import faBell from '@fortawesome/fontawesome-free-solid/faBell';
-import faChevronDown from '@fortawesome/fontawesome-free-solid/faChevronDown';
-import faChevronUp from '@fortawesome/fontawesome-free-solid/faChevronUp';
-import faCode from '@fortawesome/fontawesome-free-solid/faCode';
-import faCog from '@fortawesome/fontawesome-free-solid/faCog';
-import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner';
-import faHelpSolid from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
-import faSignOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
+import {
+  faArrowRight,
+  faCheckCircle,
+  faChevronDown,
+  faChevronLeft,
+  faChevronUp,
+  faEdit,
+  faExclamationTriangle,
+  faFileAlt,
+  faFileDownload,
+  faLock,
+  faPlusCircle,
+  faSignOutAlt,
+  faSpinner,
+  faUnlock,
+  faUserCog,
+  faUserPlus
+} from '@fortawesome/free-solid-svg-icons';
+
+import {
+  faCircle,
+  faClock,
+  faTimesCircle
+} from '@fortawesome/free-regular-svg-icons';
+
+const CheckCircle = ({ ...props }) => (
+  <FontAwesomeIcon icon={faCheckCircle} {...props} />
+);
+const File = ({ ...props }) => <FontAwesomeIcon icon={faFileAlt} {...props} />;
+const FileDownload = () => <FontAwesomeIcon icon={faFileDownload} />;
+const LockIcon = () => <FontAwesomeIcon icon={faLock} />;
+const TimesCircle = () => <FontAwesomeIcon icon={faTimesCircle} />;
+const UnlockIcon = () => <FontAwesomeIcon icon={faUnlock} />;
 
 export {
-  faHelp,
-  faHelpSolid,
-  faBell,
+  faArrowRight,
+  faCheckCircle,
   faChevronDown,
+  faChevronLeft,
   faChevronUp,
-  faCode,
-  faCog,
-  faSignOut,
-  faSpinner
+  faCircle,
+  faClock,
+  faEdit,
+  faExclamationTriangle,
+  faLock,
+  faPlusCircle,
+  faSignOutAlt,
+  faSpinner,
+  faTimesCircle,
+  faUnlock,
+  CheckCircle,
+  File,
+  FileDownload,
+  LockIcon,
+  TimesCircle,
+  UnlockIcon,
+  faUserCog,
+  faUserPlus
 };
 
-export default Icon;
+export default FontAwesomeIcon;

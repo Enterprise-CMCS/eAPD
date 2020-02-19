@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ApdKeyPersonForm component renders correctly 1`] = `
+<Fragment>
+  <h4
+    className="ds-h4"
+  >
+    Additional
+     APD Point of Contact
+  </h4>
+  <TextField
+    autoFocus={true}
+    label="Name"
+    name="apd-state-profile-pocname1"
+    onChange={[Function]}
+    type="text"
+    value="Bob the Builder"
+  />
+  <TextField
+    label="Email"
+    name="apd-state-profile-pocemail1"
+    onChange={[Function]}
+    type="text"
+    value="email address"
+  />
+  <TextField
+    label="Role"
+    name="apd-state-profile-pocposition1"
+    onChange={[Function]}
+    type="text"
+    value="The Builder"
+  />
+  <PercentField
+    label="Percent commitment to program"
+    name="apd-state-profile-pocpercentTime1"
+    onChange={[Function]}
+    size="small"
+    value="32"
+  />
+  <fieldset
+    className="ds-c-fieldset"
+  >
+    <legend
+      className="ds-c-label"
+    >
+      Does this person have costs directly attributable to this program?
+    </legend>
+    <ChoiceComponent
+      checked={false}
+      name="apd-state-profile-hascosts-no1"
+      onChange={[Function]}
+      type="radio"
+      value="no"
+    >
+      No
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={true}
+      checkedChildren={
+        <div
+          className="ds-c-choice__checkedChild ds-l-form-row"
+        >
+          <div
+            className="ds-l-col--auto"
+          >
+            <DollarField
+              label="FFY 1992"
+              name="apd-state-profile-costs1-fy1992"
+              onBlur={null}
+              onChange={[Function]}
+              size="small"
+              value={100}
+            />
+          </div>
+          <div
+            className="ds-l-col--auto"
+          >
+            <DollarField
+              label="FFY 1993"
+              name="apd-state-profile-costs1-fy1993"
+              onBlur={null}
+              onChange={[Function]}
+              size="small"
+              value={300}
+            />
+          </div>
+          <div
+            className="ds-l-col--auto"
+          >
+            <FormLabel
+              component="label"
+            >
+              Total
+            </FormLabel>
+            <div
+              className="form--computed-value__input-aligned"
+            >
+              <Dollars
+                long={false}
+              >
+                400
+              </Dollars>
+            </div>
+          </div>
+        </div>
+      }
+      name="apd-state-profile-hascosts-yes1"
+      onChange={[Function]}
+      type="radio"
+      value="yes"
+    >
+      Yes
+    </ChoiceComponent>
+  </fieldset>
+</Fragment>
+`;
+
+exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `
+<Fragment>
+  <h4
+    className="ds-h4"
+  >
+    Additional
+     APD Point of Contact
+  </h4>
+  <TextField
+    autoFocus={true}
+    label="Name"
+    name="apd-state-profile-pocname1"
+    onChange={[Function]}
+    type="text"
+    value="Bob the Builder"
+  />
+  <TextField
+    label="Email"
+    name="apd-state-profile-pocemail1"
+    onChange={[Function]}
+    type="text"
+    value="email address"
+  />
+  <TextField
+    label="Role"
+    name="apd-state-profile-pocposition1"
+    onChange={[Function]}
+    type="text"
+    value="The Builder"
+  />
+  <PercentField
+    label="Percent commitment to program"
+    name="apd-state-profile-pocpercentTime1"
+    onChange={[Function]}
+    size="small"
+    value="32"
+  />
+  <fieldset
+    className="ds-c-fieldset"
+  >
+    <legend
+      className="ds-c-label"
+    >
+      Does this person have costs directly attributable to this program?
+    </legend>
+    <ChoiceComponent
+      checked={true}
+      name="apd-state-profile-hascosts-no1"
+      onChange={[Function]}
+      type="radio"
+      value="no"
+    >
+      No
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={false}
+      checkedChildren={
+        <div
+          className="ds-c-choice__checkedChild ds-l-form-row"
+        >
+          <div
+            className="ds-l-col--auto"
+          >
+            <DollarField
+              label="FFY 1992"
+              name="apd-state-profile-costs1-fy1992"
+              onBlur={null}
+              onChange={[Function]}
+              size="small"
+              value={100}
+            />
+          </div>
+          <div
+            className="ds-l-col--auto"
+          >
+            <DollarField
+              label="FFY 1993"
+              name="apd-state-profile-costs1-fy1993"
+              onBlur={null}
+              onChange={[Function]}
+              size="small"
+              value={300}
+            />
+          </div>
+          <div
+            className="ds-l-col--auto"
+          >
+            <FormLabel
+              component="label"
+            >
+              Total
+            </FormLabel>
+            <div
+              className="form--computed-value__input-aligned"
+            >
+              <Dollars
+                long={false}
+              >
+                400
+              </Dollars>
+            </div>
+          </div>
+        </div>
+      }
+      name="apd-state-profile-hascosts-yes1"
+      onChange={[Function]}
+      type="radio"
+      value="yes"
+    >
+      Yes
+    </ChoiceComponent>
+  </fieldset>
+</Fragment>
+`;

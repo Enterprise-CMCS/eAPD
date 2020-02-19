@@ -1,34 +1,29 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
-import Collapsible from './Collapsible';
-import HelpText from './HelpText';
+import Instruction from './Instruction';
 import { t } from '../i18n';
 
-const SectionTitle = ({ children }) => (
-  <h2 className="mt1 mb2 h1 sm-h0 teal light">{children}</h2>
-);
+const SectionTitle = ({ children }) => <h2>{children}</h2>;
 
 SectionTitle.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const SectionDesc = ({ children }) => <p className="mb4 h3">{children}</p>;
+const SectionDesc = ({ children }) => <p className="mb4 text-l">{children}</p>;
 
 SectionDesc.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const Section = ({ children, id, resource }) => {
+const Section = ({ children, id, isNumbered, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
-  const subheader = t([resource, 'subheader'], { defaultValue: false });
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
-    <section id={id} className="py2 border-bottom border-grey border-width-3">
-      {title && <SectionTitle>{title}</SectionTitle>}
-      {subheader && <div>{subheader}</div>}
-      {helptext && <SectionDesc>{helptext}</SectionDesc>}
+    <section id={id} className={isNumbered ? 'numbered-section' : ''}>
+      <h2 className="ds-h2">{title}</h2>
+      <span className="ds-text--lead">{helptext}</span>
       {children}
     </section>
   );
@@ -37,62 +32,55 @@ const Section = ({ children, id, resource }) => {
 Section.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string,
-  resource: PropTypes.string
+  resource: PropTypes.string,
+  isNumbered: PropTypes.bool
 };
 
 Section.defaultProps = {
   id: null,
-  resource: null
+  resource: null,
+  isNumbered: false
 };
 
-const SubsectionChunk = ({ children, resource }) => {
-  const subheader = t([resource, 'subheader'], { defaultValue: false });
+const Subsection = ({ children, headerClassName, id, nested, resource }) => {
+  const title = t([resource, 'title'], { defaultValue: '' });
 
   return (
     <Fragment>
-      {subheader && <div className="mb-tiny bold">{subheader}</div>}
-      <HelpText
-        text={`${resource}.helpText`}
-        reminder={`${resource}.reminder`}
-      />
+      {!nested && (
+        <h3
+          id={id}
+          className={`${headerClassName || ''} subsection--title ds-h3`}
+        >
+          {title}
+        </h3>
+      )}
+      {nested && (
+        <h5 id={id} className={`${headerClassName || ''} ds-h4`}>
+          {title}
+        </h5>
+      )}
+      <Instruction source={`${resource}.instruction`} />
       {children}
     </Fragment>
   );
 };
 
-SubsectionChunk.propTypes = {
-  children: PropTypes.node.isRequired,
-  resource: PropTypes.string
-};
-
-SubsectionChunk.defaultProps = {
-  resource: null
-};
-
-const Subsection = ({ children, id, nested, open, resource }) => {
-  const title = t([resource, 'title'], { defaultValue: '' });
-
-  return (
-    <Collapsible id={id} title={title} open={open} nested={nested}>
-      <SubsectionChunk resource={resource}>{children}</SubsectionChunk>
-    </Collapsible>
-  );
-};
-
 Subsection.propTypes = {
   children: PropTypes.node.isRequired,
+  headerClassName: PropTypes.string,
   id: PropTypes.string,
   nested: PropTypes.bool,
-  open: PropTypes.bool,
   resource: PropTypes.string
 };
 
 Subsection.defaultProps = {
   resource: null,
+  headerClassName: null,
   id: null,
-  nested: false,
-  open: false
+  nested: false
 };
 
 export default Section;
-export { Section, SectionDesc, SectionTitle, Subsection, SubsectionChunk };
+
+export { Section, SectionDesc, SectionTitle, Subsection };

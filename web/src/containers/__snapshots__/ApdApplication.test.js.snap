@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd (application) component renders correctly 1`] = `
+<div
+  className="site-body ds-l-container"
+>
+  <div
+    className="ds-u-margin--0"
+  >
+    <Connect(Sidebar)
+      place={Object {}}
+    />
+    <div
+      className="site-main ds-u-padding-top--2"
+    >
+      <h1
+        className="ds-h1 apd--title"
+        id="start-main-content"
+      >
+        <span
+          className="ds-h6 ds-u-display--block"
+        >
+          <strong>
+            Created:
+          </strong>
+           
+          creation date
+        </span>
+        test name
+         | FFY 
+        the year
+      </h1>
+      <ApdStateProfile />
+      <Connect(ApdSummary) />
+      <Connect(PreviousActivities) />
+      <Connect(All) />
+      <Connect(ScheduleSummary) />
+      <ProposedBudget />
+      <Connect(AssurancesAndCompliance) />
+      <Connect(ExecutiveSummary) />
+      <Connect(ExportAndSubmit) />
+    </div>
+  </div>
+  <Connect(SaveButton) />
+</div>
+`;
+
+exports[`apd (application) component renders correctly 2`] = `
+<Redirect
+  to="/"
+/>
+`;
+
+exports[`apd (application) component renders correctly 3`] = `
+<Redirect
+  to="/"
+/>
+`;

@@ -5,57 +5,95 @@ import { Redirect } from 'react-router-dom';
 
 import Activities from './activity/All';
 import AssurancesAndCompliance from './AssurancesAndCompliance';
+import Export from './ApdExport';
 import ApdSummary from './ApdSummary';
-import CertifyAndSubmit from './CertifyAndSubmit';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
+import ProposedBudget from './ProposedBudget';
+import SaveButton from './SaveButton';
 import ScheduleSummary from './ScheduleSummary';
 import Sidebar from './Sidebar';
-import TopBtns from './TopBtns';
-import { selectApdOnLoad } from '../actions/apd';
+import { setApdToSelectOnLoad } from '../actions/app';
 import StateProfile from '../components/ApdStateProfile';
-import ProposedBudget from '../components/ProposedBudget';
+
+import {
+  getAPDCreation,
+  getAPDName,
+  getAPDYearRange,
+  getIsAnAPDSelected
+} from '../reducers/apd';
+
+import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
 const ApdApplication = ({
+  apdCreated,
+  apdName,
   apdSelected,
+  isAdmin,
   place,
-  selectApdOnLoad: dispatchSelectApdOnLoad
+  setApdToSelectOnLoad: dispatchSelectApdOnLoad,
+  year
 }) => {
+  if (isAdmin) {
+    return <Redirect to="/" />;
+  }
+
   if (!apdSelected) {
     dispatchSelectApdOnLoad('/apd');
     return <Redirect to="/" />;
   }
 
   return (
-    <div className="site-body">
-      <Sidebar place={place} />
-      <div className="site-main p2 sm-p4 md-px0">
-        <TopBtns />
-        <StateProfile />
-        <ApdSummary />
-        <PreviousActivities />
-        <Activities />
-        <ScheduleSummary />
-        <ProposedBudget />
-        <AssurancesAndCompliance />
-        <ExecutiveSummary />
-        <CertifyAndSubmit />
+    <div className="site-body ds-l-container">
+      <div className="ds-u-margin--0">
+        <Sidebar place={place} />
+        <div className="site-main ds-u-padding-top--2">
+          <h1 id="start-main-content" className="ds-h1 apd--title">
+            <span className="ds-h6 ds-u-display--block">
+              <strong>Created:</strong> {apdCreated}
+            </span>
+            {apdName} | FFY {year}
+          </h1>
+          <StateProfile />
+          <ApdSummary />
+          <PreviousActivities />
+          <Activities />
+          <ScheduleSummary />
+          <ProposedBudget />
+          <AssurancesAndCompliance />
+          <ExecutiveSummary />
+          <Export />
+        </div>
       </div>
+
+      <SaveButton />
     </div>
   );
 };
 
 ApdApplication.propTypes = {
+  apdCreated: PropTypes.string.isRequired,
+  apdName: PropTypes.string,
   apdSelected: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
-  selectApdOnLoad: PropTypes.func.isRequired
+  setApdToSelectOnLoad: PropTypes.func.isRequired,
+  year: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({ apd: { data }, user: { data: { state } } }) => ({
-  apdSelected: !!data.id,
-  place: state
+ApdApplication.defaultProps = { apdName: '' };
+
+const mapStateToProps = state => ({
+  apdCreated: getAPDCreation(state),
+  apdName: getAPDName(state),
+  apdSelected: getIsAnAPDSelected(state),
+  isAdmin: getIsAdmin(state),
+  place: getUserStateOrTerritory(state),
+  year: getAPDYearRange(state)
 });
 
-const mapDispatchToProps = { selectApdOnLoad };
+const mapDispatchToProps = { setApdToSelectOnLoad };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdApplication);
+
+export { ApdApplication as plain, mapStateToProps, mapDispatchToProps };

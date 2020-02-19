@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd summary component renders correctly 1`] = `
+<Connect(ConnectedWaypoint)
+  id="apd-summary"
+>
+  <Section
+    id="apd-summary"
+    isNumbered={true}
+    resource="apd"
+  >
+    <h3
+      className="ds-h3 subsection--title"
+    >
+      Program Overview
+    </h3>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      reverse={false}
+      source="apd.overview.instruction"
+    />
+    <ChoiceComponent
+      checked={true}
+      key="1"
+      name="apd year 1"
+      onChange={[Function]}
+      type="checkbox"
+      value="1"
+    >
+      1
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={true}
+      key="2"
+      name="apd year 2"
+      onChange={[Function]}
+      type="checkbox"
+      value="2"
+    >
+      2
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={false}
+      key="3"
+      name="apd year 3"
+      onChange={[Function]}
+      type="checkbox"
+      value="3"
+    >
+      3
+    </ChoiceComponent>
+    <div
+      className="ds-u-margin-y--3"
+    >
+      <Instruction
+        args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
+        reverse={false}
+        source="apd.introduction.instruction"
+      />
+      <Connect(RichText)
+        content="about the program"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div
+      className="ds-u-margin-bottom--3"
+    >
+      <Instruction
+        args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
+        reverse={false}
+        source="apd.hit.instruction"
+      />
+      <Connect(RichText)
+        content="about hit"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div
+      className="ds-u-margin-bottom--3"
+    >
+      <Instruction
+        args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
+        reverse={false}
+        source="apd.hie.instruction"
+      />
+      <Connect(RichText)
+        content="about hie"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div>
+      <Instruction
+        args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
+        reverse={false}
+        source="apd.mmis.instruction"
+      />
+      <Connect(RichText)
+        content="about mmis"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+  </Section>
+</Connect(ConnectedWaypoint)>
+`;

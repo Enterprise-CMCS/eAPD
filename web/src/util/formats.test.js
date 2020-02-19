@@ -1,4 +1,4 @@
-import { fmt, formatNum, formatDec, formatMoney, formatPerc } from './formats';
+import { fmt, formatNum, formatDec, formatPerc } from './formats';
 
 describe('formatting util', () => {
   test('supports generic number formatting', () => {
@@ -15,14 +15,6 @@ describe('formatting util', () => {
   test('formats decimal numbers', () => {
     expect(formatDec(3000.1234)).toEqual('3,000.12');
     expect(formatDec(3000.1234, 3)).toEqual('3,000.123');
-  });
-
-  test('formats money as US dollars', () => {
-    expect(formatMoney(3000.1234)).toEqual('$3,000');
-    expect(formatMoney(3000.1234, 2)).toEqual('$3,000.12');
-    expect(formatMoney(999999)).toEqual('$999,999');
-    expect(formatMoney(1234567)).toEqual('$1.23M');
-    expect(formatMoney(1200000)).toEqual('$1.2M');
   });
 
   test('formats percents', () => {

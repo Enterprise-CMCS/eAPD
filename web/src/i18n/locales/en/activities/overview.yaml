@@ -1,0 +1,25 @@
+title: Activity Overview
+
+activityOverviewInput:
+  label: Provide a short overview of the activity.
+  hint: Details for the activity go in the following sections.
+
+activityDescriptionInput:
+  standard:
+    label: Include as much detail as is necessary to explain the activity.
+  hie:
+    hint: >-
+      Detail linkage to meaningful use, including value proposition to providers,
+      and a sustainability plan describing how the activity will be sustained after
+      HIE DDI funding is exhausted.
+    helpText: >-
+      Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
+
+activityAlternativesInput:
+  label: Statement of alternative considerations and supporting justification
+  hint: >-
+    If substantive changes have been made, include statement describing alternative
+    considerations made before selecting implementation strategy.
+  helpText: >-
+    If substantive changes have not been made, include a statement of alternative considerations from
+    the previous version of the IAPD.

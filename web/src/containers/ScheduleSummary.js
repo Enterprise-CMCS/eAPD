@@ -1,73 +1,67 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import ReactTable from 'react-table';
 
 import { t } from '../i18n';
+import Waypoint from './ConnectedWaypoint';
 import { Section, Subsection } from '../components/Section';
+import { selectActivitySchedule } from '../reducers/activities.selectors';
 
-const ScheduleSummary = ({ tableData }) => (
-  <Section id="schedule-summary" resource="scheduleSummary">
-    <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
-      {tableData.data.length === 0 ? (
-        <div className="p1 h6 alert">{t('scheduleSummary.noDataMessage')}</div>
-      ) : (
-        <ReactTable
-          showPagination={false}
-          resizable={false}
-          minRows={0}
-          className="h6 -striped"
-          {...tableData}
-        />
-      )}
-    </Subsection>
-  </Section>
+const ScheduleSummary = ({ activities }) => (
+  <Waypoint id="schedule-summary">
+    <Section isNumbered id="schedule-summary" resource="scheduleSummary">
+      <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
+        {activities.length === 0 ? (
+          <div className="ds-c-alert ds-c-alert--warn">
+            {t('scheduleSummary.noDataMessage')}
+          </div>
+        ) : (
+          activities.map(({ name: activityName, dateRange, milestones }, i) => (
+            <table key={activityName} className="budget-table">
+              <caption className="ds-u-visibility--screen-reader">
+                Activity {i + 1}: {activityName}
+              </caption>
+              <thead>
+                <tr>
+                  <th
+                    className="ds-u-font-weight--bold ds-u-border-right--0"
+                    style={{ width: '70%' }}
+                  >
+                    Activity {i + 1}: {activityName}
+                  </th>
+                  <th className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
+                    {dateRange}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {milestones.map(
+                  ({ end: milestoneEnd, name: milestoneName }) => (
+                    <tr key={`${milestoneName}-${milestoneEnd}`}>
+                      <td className="ds-u-border-right--0">{milestoneName}</td>
+                      <td className="ds-u-border-left--0 ds-u-text-align--left">
+                        {milestoneEnd}
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
+          ))
+        )}
+      </Subsection>
+    </Section>
+  </Waypoint>
 );
 
 ScheduleSummary.propTypes = {
-  tableData: PropTypes.shape({
-    data: PropTypes.array,
-    columns: PropTypes.array,
-    defaultSorted: PropTypes.array
-  }).isRequired
+  activities: PropTypes.array.isRequired
 };
 
-const Cell = row => row.value || 'N/A';
-
-const mapStateToProps = ({ activities }) => {
-  const data = [];
-
-  Object.values(activities.byKey).forEach(activity => {
-    activity.schedule.forEach(milestone => {
-      data.push({ ...milestone, activityName: activity.name });
-    });
-  });
-
-  const columns = [
-    {
-      accessor: 'activityName',
-      Header: t('scheduleSummary.main.table.activity')
-    },
-    {
-      accessor: 'milestone',
-      Header: t('scheduleSummary.main.table.milestone'),
-      Cell
-    },
-    {
-      accessor: 'plannedStart',
-      Header: t('scheduleSummary.main.table.start'),
-      Cell
-    },
-    {
-      accessor: 'plannedEnd',
-      Header: t('scheduleSummary.main.table.end'),
-      Cell
-    }
-  ];
-
-  const defaultSorted = [{ id: 'plannedStart', desc: false }];
-
-  return { tableData: { data, columns, defaultSorted } };
-};
+const mapStateToProps = state => ({
+  activities: selectActivitySchedule(state)
+});
 
 export default connect(mapStateToProps)(ScheduleSummary);
+
+export { ScheduleSummary as plain, mapStateToProps };

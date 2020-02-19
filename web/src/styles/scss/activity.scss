@@ -1,0 +1,15 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.activity--body {
+  border-bottom: 4px solid $color-primary;
+  &.activity--body__first {
+    border-top: 4px solid $color-primary;
+  }
+  .ds-c-review.ds-u-border-bottom--2 {
+    // Review components add this automatically; override it
+    border: none !important;
+  }
+  .ds-c-button.ds-c-button--transparent.danger {
+    color: $color-error-dark;
+  }
+}

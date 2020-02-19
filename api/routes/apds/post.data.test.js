@@ -1,30 +1,22 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
+// The Mars Pathfinder mission landed on Mars on July 4, 1997.  The Sojourner
+// rover wandered around the surface for 83 solar days before communications
+// failed.  It was designed for a 7-day mission.  Our Martian robots have a
+// really good track record of exceeding their design lifes.  FFY 1997.  Set
+// this clock before we import anything, so that the stuff we import will use
+// our faked-out clock.
+const mockClock = sinon.useFakeTimers(new Date(1997, 6, 4).getTime());
+
 const getNewApd = require('./post.data');
 
 tap.test('APD data initializer', async test => {
-  const state = {
-    get: sinon.stub()
-  };
-  state.get.withArgs('medicaid_office').returns({
-    medicaidDirector: 'Director of Medicaid Operations',
-    medicaidOffice: 'Office Where the Director Sites'
+  tap.tearDown(() => {
+    mockClock.restore();
   });
-  state.get
-    .withArgs('state_pocs')
-    .returns(['State Person 1', 'State Person 2']);
 
-  const StateModel = {
-    where: sinon
-      .stub()
-      .withArgs('state id')
-      .returns({
-        fetch: sinon.stub().resolves(state)
-      })
-  };
-
-  const output = await getNewApd('state id', { StateModel });
+  const output = await getNewApd();
   // Do a "same" test.  This tests deep equality, which will catch
   // new properties being added to the getNewApd return.  If we use
   // a "match" test, new properties will fall through the cracks.
@@ -35,46 +27,24 @@ tap.test('APD data initializer', async test => {
         contractorResources: [
           {
             description: '',
+            end: '',
+            hourly: {
+              data: {
+                '1997': { hours: '', rate: '' },
+                '1998': { hours: '', rate: '' }
+              },
+              useHourly: false
+            },
             name: '',
-            hourlyData: [
-              {
-                hours: '',
-                rate: '',
-                year: '2018'
-              },
-              {
-                hours: '',
-                rate: '',
-                year: '2019'
-              }
-            ],
-            useHourly: false,
-            years: [
-              {
-                cost: 0,
-                year: '2018'
-              },
-              {
-                cost: 0,
-                year: '2019'
-              }
-            ]
+            start: '',
+            totalCost: 0,
+            years: { '1997': 0, '1998': 0 }
           }
         ],
-        costAllocation: [
-          {
-            federalPercent: 0.9,
-            statePercent: 0.1,
-            otherAmount: 0,
-            year: '2018'
-          },
-          {
-            federalPercent: 0.9,
-            statePercent: 0.1,
-            otherAmount: 0,
-            year: '2019'
-          }
-        ],
+        costAllocation: {
+          '1997': { ffp: { federal: 90, state: 10 }, other: 0 },
+          '1998': { ffp: { federal: 90, state: 10 }, other: 0 }
+        },
         costAllocationNarrative: {
           methodology: '',
           otherSources: ''
@@ -84,175 +54,136 @@ tap.test('APD data initializer', async test => {
           {
             category: '',
             description: '',
-            entries: [
-              {
-                amount: 0,
-                year: '2018'
-              },
-              {
-                amount: 0,
-                year: '2019'
-              }
-            ]
+            years: { '1997': 0, '1998': 0 }
           }
         ],
         fundingSource: 'HIT',
-        goals: [{ description: '', objective: '' }],
+        objectives: [
+          {
+            objective: '',
+            keyResults: [{ baseline: '', keyResult: '', target: '' }]
+          }
+        ],
         name: 'Program Administration',
-        schedule: [{ milestone: '' }],
+        plannedEndDate: '',
+        plannedStartDate: '',
+        schedule: [{ endDate: '', milestone: '' }],
         standardsAndConditions: {
-          businessResults: '',
-          documentation: '',
-          industryStandards: '',
-          interoperability: '',
-          keyPersonnel: '',
-          leverage: '',
-          minimizeCost: '',
-          mitigationStrategy: '',
-          modularity: '',
-          mita: '',
-          reporting: ''
+          doesNotSupport: '',
+          supports: ''
         },
         statePersonnel: [
           {
             description: '',
             title: '',
-            years: [
-              {
-                cost: 0,
-                fte: 0,
-                year: '2018'
-              },
-              {
-                cost: 0,
-                fte: 0,
-                year: '2019'
-              }
-            ]
+            years: {
+              '1997': { amt: 0, perc: 0 },
+              '1998': { amt: 0, perc: 0 }
+            }
           }
         ],
         summary: '',
-        quarterlyFFP: [
-          { q1: 0, q2: 0, q3: 0, q4: 0, year: '2018' },
-          { q1: 0, q2: 0, q3: 0, q4: 0, year: '2019' }
-        ]
+        quarterlyFFP: {
+          '1997': {
+            1: { contractors: 0, state: 0 },
+            2: { contractors: 0, state: 0 },
+            3: { contractors: 0, state: 0 },
+            4: { contractors: 0, state: 0 }
+          },
+          '1998': {
+            1: { contractors: 0, state: 0 },
+            2: { contractors: 0, state: 0 },
+            3: { contractors: 0, state: 0 },
+            4: { contractors: 0, state: 0 }
+          }
+        }
       }
     ],
-    incentivePayments: [
-      {
-        q1: { ehPayment: 0, epPayment: 0 },
-        q2: { ehPayment: 0, epPayment: 0 },
-        q3: { ehPayment: 0, epPayment: 0 },
-        q4: { ehPayment: 0, epPayment: 0 },
-        year: '2018'
+    federalCitations: {},
+    incentivePayments: {
+      ehAmt: {
+        '1997': { 1: 0, 2: 0, 3: 0, 4: 0 },
+        '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
       },
+      ehCt: {
+        '1997': { 1: 0, 2: 0, 3: 0, 4: 0 },
+        '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      epAmt: {
+        '1997': { 1: 0, 2: 0, 3: 0, 4: 0 },
+        '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      epCt: {
+        '1997': { 1: 0, 2: 0, 3: 0, 4: 0 },
+        '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
+      }
+    },
+    keyPersonnel: [
       {
-        q1: { ehPayment: 0, epPayment: 0 },
-        q2: { ehPayment: 0, epPayment: 0 },
-        q3: { ehPayment: 0, epPayment: 0 },
-        q4: { ehPayment: 0, epPayment: 0 },
-        year: '2019'
+        costs: { '1997': 0, '1998': 0 },
+        email: '',
+        hasCosts: false,
+        isPrimary: true,
+        name: '',
+        percentTime: '',
+        position: ''
       }
     ],
+    name: 'HITECH IAPD',
     narrativeHIE: '',
     narrativeHIT: '',
     narrativeMMIS: '',
-    pointsOfContact: ['State Person 1', 'State Person 2'],
-    previousActivityExpenses: [
-      {
-        hie: {
+    previousActivityExpenses: {
+      '1997': {
+        hithie: {
           federalActual: 0,
-          federalApproved: 0,
-          stateActual: 0,
-          stateApproved: 0
-        },
-        hit: {
-          federalActual: 0,
-          federalApproved: 0,
-          stateActual: 0,
-          stateApproved: 0
+          totalApproved: 0
         },
         mmis: {
-          federal90Actual: 0,
-          federal90Approved: 0,
-          federal75Actual: 0,
-          federal75Approved: 0,
-          federal50Actual: 0,
-          federal50Approved: 0,
-          state10Actual: 0,
-          state10Approved: 0,
-          state25Actual: 0,
-          state25Approved: 0,
-          state50Actual: 0,
-          state50Approved: 0
-        },
-        year: '2018'
+          90: { federalActual: 0, totalApproved: 0 },
+          75: { federalActual: 0, totalApproved: 0 },
+          50: { federalActual: 0, totalApproved: 0 }
+        }
       },
-      {
-        hie: {
+      '1996': {
+        hithie: {
           federalActual: 0,
-          federalApproved: 0,
-          stateActual: 0,
-          stateApproved: 0
-        },
-        hit: {
-          federalActual: 0,
-          federalApproved: 0,
-          stateActual: 0,
-          stateApproved: 0
+          totalApproved: 0
         },
         mmis: {
-          federal90Actual: 0,
-          federal90Approved: 0,
-          federal75Actual: 0,
-          federal75Approved: 0,
-          federal50Actual: 0,
-          federal50Approved: 0,
-          state10Actual: 0,
-          state10Approved: 0,
-          state25Actual: 0,
-          state25Approved: 0,
-          state50Actual: 0,
-          state50Approved: 0
-        },
-        year: '2017'
+          90: { federalActual: 0, totalApproved: 0 },
+          75: { federalActual: 0, totalApproved: 0 },
+          50: { federalActual: 0, totalApproved: 0 }
+        }
       },
-      {
-        hie: {
+      '1995': {
+        hithie: {
           federalActual: 0,
-          federalApproved: 0,
-          stateActual: 0,
-          stateApproved: 0
-        },
-        hit: {
-          federalActual: 0,
-          federalApproved: 0,
-          stateActual: 0,
-          stateApproved: 0
+          totalApproved: 0
         },
         mmis: {
-          federal90Actual: 0,
-          federal90Approved: 0,
-          federal75Actual: 0,
-          federal75Approved: 0,
-          federal50Actual: 0,
-          federal50Approved: 0,
-          state10Actual: 0,
-          state10Approved: 0,
-          state25Actual: 0,
-          state25Approved: 0,
-          state50Actual: 0,
-          state50Approved: 0
-        },
-        year: '2016'
+          90: { federalActual: 0, totalApproved: 0 },
+          75: { federalActual: 0, totalApproved: 0 },
+          50: { federalActual: 0, totalApproved: 0 }
+        }
       }
-    ],
+    },
     previousActivitySummary: '',
     programOverview: '',
     stateProfile: {
-      medicaidDirector: 'Director of Medicaid Operations',
-      medicaidOffice: 'Office Where the Director Sites'
+      medicaidDirector: {
+        email: '',
+        name: '',
+        phone: ''
+      },
+      medicaidOffice: {
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zip: ''
+      }
     },
-    years: ['2018', '2019']
+    years: ['1997', '1998']
   });
 });

@@ -1,92 +1,121 @@
+import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useMemo, useRef, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import ContractorResources from './ContractorResources';
-import CostAllocate from './CostAllocate';
-import Description from './Description';
-import Expenses from './Expenses';
-import Goals from './Goals';
-import Schedule from './Schedule';
-import StandardsAndConditions from './StandardsAndConditions';
-import StatePersonnel from './StatePersonnel';
-import {
-  removeActivity as removeActivityAction,
-  toggleActivitySection
-} from '../../actions/activities';
-import Collapsible from '../../components/Collapsible';
-import DeleteButton from '../../components/DeleteConfirm';
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import { removeActivity } from '../../actions/editActivity';
+import ActivityDialog from './EntryDetailsDialog';
+
 import { t } from '../../i18n';
 
-const makeTitle = (a, i) => {
+const makeTitle = ({ name, fundingSource }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
-  if (a.name) title += `: ${a.name}`;
-  if (a.fundingSource) title += ` (${a.fundingSource})`;
+  if (name) {
+    title += `: ${name}`;
+  } else {
+    title += `: Untitled`;
+  }
+  if (fundingSource) {
+    title += ` (${fundingSource})`;
+  }
   return title;
 };
 
-const components = [
-  Description,
-  Goals,
-  Schedule,
-  StatePersonnel,
-  ContractorResources,
-  Expenses,
-  CostAllocate,
-  StandardsAndConditions
-];
+const EntryDetails = ({
+  activityIndex,
+  fundingSource,
+  activityKey,
+  name,
+  remove
+}) => {
+  const container = useRef();
 
-class EntryDetails extends Component {
-  handleChange = key => () => {
-    this.props.toggleSection(key);
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
-  render() {
-    const { aKey, expanded, num, removeActivity, title } = this.props;
+  const onRemove = () => {
+    remove(activityIndex);
+  };
 
-    return (
-      <Collapsible
-        id={`activity-${aKey}`}
-        title={title}
-        bgColor="blue-light"
-        btnBgColor="blue-bright"
-        btnColor="white"
-        open={expanded}
-        onChange={this.handleChange(aKey)}
+  const title = useMemo(
+    () => makeTitle({ name, fundingSource }, activityIndex + 1),
+    [fundingSource, name, activityIndex]
+  );
+
+  const editContent = (
+    <div className="nowrap visibility--screen">
+      <Button
+        size="small"
+        variation="transparent"
+        onClick={() => setShowModal(true)}
       >
-        {components.map((Comp, i) => <Comp key={i} aKey={aKey} />)}
-        {num > 1 && (
-          <DeleteButton
-            remove={() => removeActivity(aKey)}
-            resource="activities.delete"
-          />
-        )}
-      </Collapsible>
-    );
-  }
-}
+        Edit
+      </Button>
+      {activityIndex > 0 && (
+        <Fragment>
+          <span>|</span>
+          <Button size="small" variation="transparent" onClick={onRemove}>
+            Remove
+          </Button>
+        </Fragment>
+      )}
+    </div>
+  );
+
+  return (
+    <div
+      id={`activity-${activityKey}`}
+      className={`activity--body activity--body__${
+        activityIndex === 0 ? 'first' : 'notfirst'
+      }`}
+      ref={container}
+    >
+      <Review heading={title} headingLevel={4} editContent={editContent}>
+        {[
+          /* children are required, so send an empty array to suppress errors */
+        ]}
+      </Review>
+      {showModal && (
+        <ActivityDialog
+          title={title}
+          activityIndex={activityIndex}
+          closeModal={closeModal}
+        />
+      )}
+    </div>
+  );
+};
 
 EntryDetails.propTypes = {
-  aKey: PropTypes.string.isRequired,
-  expanded: PropTypes.bool.isRequired,
-  num: PropTypes.number.isRequired,
-  removeActivity: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  toggleSection: PropTypes.func.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  activityKey: PropTypes.string.isRequired,
+  fundingSource: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  remove: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byKey } }, { aKey, num }) => {
-  const activity = byKey[aKey];
-  const { expanded } = activity.meta;
-  const title = `${t('activities.header')} › ${makeTitle(activity, num)}`;
-
-  return { expanded, title };
+EntryDetails.defaultProps = {
+  name: ''
 };
 
-export const mapDispatchToProps = {
-  removeActivity: removeActivityAction,
-  toggleSection: toggleActivitySection
+const mapStateToProps = (state, { activityIndex }) => {
+  const { fundingSource, key, name } = selectActivityByIndex(state, {
+    activityIndex
+  });
+  return { activityKey: key, fundingSource, name };
 };
 
-export { EntryDetails as EntryDetailsRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(EntryDetails);
+const mapDispatchToProps = {
+  remove: removeActivity
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EntryDetails);
+
+export { EntryDetails as plain, mapStateToProps, mapDispatchToProps };

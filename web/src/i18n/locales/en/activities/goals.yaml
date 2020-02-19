@@ -1,0 +1,42 @@
+title: Objectives and Key Results
+instruction:
+  detail: >-
+    Please describe how you will achieve the stated purpose of this activity,
+    as described above, in terms of Objectives and Key Results (OKRs). Describe
+    **what** you are trying to achieve (Objective) and **how** you will show
+    you have achieved the goal (Key Results). Where possible, Key Results
+    should be written as specific, measurable, achievable, relevant, and
+    time-bound (SMART).
+  helpText: >-
+    Example OKR:
+
+
+    Objective: "Increase availability of standards-compliant Admit, Discharge,
+    and Transfer messages within the state's counties."
+
+
+    Key Result: "Expand ADT connections to top 3 counties by the end of FFY
+    2020"
+
+
+    Target: "3 counties by end of 2020"
+
+
+    Baseline: "0 counties"
+
+noDataNotice: There are no objectives and key results for this activity.
+
+description:
+  input:
+    label: Goal name
+    hint: >- 
+      Examples of goals include: improved health outcomes for benficiaries, transformation of public health services,
+      enabling implementation of other initiatives, etc.
+    
+
+objective:
+  input:
+    label: Benchmarks
+    hint: >-
+     Explain how the state will make measurable progress towards the activity goal.
+

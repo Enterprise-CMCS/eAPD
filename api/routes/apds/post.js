@@ -1,34 +1,77 @@
+const Ajv = require('ajv');
+
 const logger = require('../../logger')('apds route post');
-const { apd: defaultApdModel } = require('../../db').models;
+const { createAPD: ga, getStateProfile: gs } = require('../../db');
 const { can } = require('../../middleware');
 
-const defaultGetNewApd = require('./post.data');
+const getNewApd = require('./post.data');
 
-module.exports = (
-  app,
-  { getNewApd = defaultGetNewApd, ApdModel = defaultApdModel } = {}
-) => {
+const apdSchema = require('../../schemas/apd.json');
+
+const ajv = new Ajv({
+  allErrors: true,
+  jsonPointers: true,
+  removeAdditional: true
+});
+
+const validatorFunction = ajv.compile({
+  ...apdSchema,
+  additionalProperties: false
+});
+
+module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res) => {
     logger.silly(req, 'handling POST /apds route');
 
     try {
-      const newApd = ApdModel.forge({
-        state_id: req.user.state,
-        status: 'draft'
-      });
-      await newApd.save();
+      const apd = getNewApd();
 
-      const apdContent = await getNewApd(req.user.state);
-      await newApd.synchronize(apdContent);
+      const stateProfile = await getStateProfile(req.user.state.id);
 
-      const apd = await ApdModel.where({ id: newApd.get('id') }).fetch({
-        withRelated: ApdModel.withRelated
+      if (stateProfile) {
+        // Merge the state profile from the states table into the default
+        // values so that if the states table info is missing any fields,
+        // we preserve the defaults
+
+        apd.stateProfile.medicaidDirector = {
+          ...apd.stateProfile.medicaidDirector,
+          ...stateProfile.medicaidDirector
+        };
+
+        apd.stateProfile.medicaidOffice = {
+          ...apd.stateProfile.medicaidOffice,
+          ...stateProfile.medicaidOffice
+        };
+        // An old version of the model had the director info contained inside the office field, so
+        // just in case we're still hitting a really old source, delete the director from the office
+        delete apd.stateProfile.medicaidOffice.director;
+      }
+
+      const valid = validatorFunction(apd);
+      if (!valid) {
+        // This is just here to protect us from the case where the APD schema changed but the
+        // APD creation function was not also updated
+        logger.error(req, 'Newly-created APD fails validation');
+        logger.error(req, validatorFunction.errors);
+        return res.status(500).end();
+      }
+
+      const id = await createAPD({
+        state_id: req.user.state.id,
+        status: 'draft',
+        document: apd
       });
-      res.send(apd);
+
+      return res.send({
+        ...apd,
+        id,
+        created: new Date().toISOString(),
+        updated: new Date().toISOString()
+      });
     } catch (e) {
       logger.error(req, e);
-      res.status(500).end();
+      return res.status(500).end();
     }
   });
 };

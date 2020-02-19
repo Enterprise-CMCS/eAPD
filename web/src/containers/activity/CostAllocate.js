@@ -3,76 +3,87 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CostAllocateFFP from './CostAllocateFFP';
-import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
-import { updateActivity as updateActivityAction } from '../../actions/activities';
-import HelpText from '../../components/HelpText';
-import { RichText } from '../../components/Inputs';
+import {
+  setCostAllocationMethodology,
+  setCostAllocationOtherFunding
+} from '../../actions/editActivity';
+import Instruction from '../../components/Instruction';
+import RichText from '../../components/RichText';
 import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-const CostAllocate = props => {
-  const { activity, updateActivity } = props;
-  const { costAllocationDesc, otherFundingDesc } = activity;
-
-  const sync = name => html => {
-    updateActivity(activity.key, { [name]: html });
-  };
+const CostAllocate = ({
+  activity,
+  activityIndex,
+  setMethodology,
+  setOtherFunding
+}) => {
+  const {
+    costAllocationNarrative: { methodology, otherSources }
+  } = activity;
+  const syncMethodology = html => setMethodology(activityIndex, html);
+  const syncOtherFunding = html => setOtherFunding(activityIndex, html);
 
   return (
-    <Subsection resource="activities.costAllocate" nested>
-      <div className="mb3">
-        <div className="mb-tiny bold">
-          {t('activities.costAllocate.methodology.title')}
-        </div>
-        <HelpText
-          text="activities.costAllocate.methodology.helpText"
-          reminder="activities.costAllocate.methodology.reminder"
+    <Subsection
+      resource="activities.costAllocate"
+      id={`activity-cost-allocation-${activityIndex}`}
+    >
+      <div className="data-entry-box">
+        <Instruction
+          source="activities.costAllocate.methodology.instruction"
+          headingDisplay={{
+            level: 'h6',
+            className: 'ds-h5'
+          }}
         />
         <RichText
-          content={costAllocationDesc}
-          onSync={sync('costAllocationDesc')}
+          content={methodology}
+          onSync={syncMethodology}
+          editorClassName="rte-textarea-l"
         />
       </div>
-      <CostAllocateFFP aKey={activity.key} />
-      <div className="mb3">
-        <div className="mb-tiny bold">
-          {t('activities.costAllocate.quarterly.title')}
-        </div>
-        <HelpText
-          text="activities.costAllocate.quarterly.helpText"
-          reminder="activities.costAllocate.quarterly.reminder"
-        />
-        <CostAllocateFFPQuarterly aKey={activity.key} />
-      </div>
-      <div className="mb3">
-        <div className="mb-tiny bold">
-          {t('activities.costAllocate.otherFunding.title')}
-        </div>
-        <HelpText
-          text="activities.costAllocate.otherFunding.helpText"
-          reminder="activities.costAllocate.otherFunding.reminder"
+
+      <div className="data-entry-box">
+        <Instruction
+          source="activities.costAllocate.otherFunding.instruction"
+          headingDisplay={{
+            level: 'h6',
+            className: 'ds-h5'
+          }}
         />
         <RichText
-          content={otherFundingDesc}
-          onSync={sync('otherFundingDesc')}
+          content={otherSources}
+          onSync={syncOtherFunding}
+          editorClassName="rte-textarea-l"
         />
       </div>
+      <hr />
+      <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex} />
     </Subsection>
   );
 };
 
 CostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  setMethodology: PropTypes.func.isRequired,
+  setOtherFunding: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
-  activity: byKey[aKey]
-});
+export const mapStateToProps = (state, { activityIndex }) => {
+  return {
+    activity: selectActivityByIndex(state, { activityIndex })
+  };
+};
 
 export const mapDispatchToProps = {
-  updateActivity: updateActivityAction
+  setMethodology: setCostAllocationMethodology,
+  setOtherFunding: setCostAllocationOtherFunding
 };
 
 export { CostAllocate as CostAllocateRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(CostAllocate);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CostAllocate);

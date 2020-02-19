@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:10
 
 RUN npm i -g npm@^6
 
@@ -8,6 +8,6 @@ WORKDIR /app
 ADD ./package.json .
 ADD ./package-lock.json .
 
-RUN npm install
+RUN npm ci
 
-CMD npm run start
+CMD npm run start -- --public=0.0.0.0:8080

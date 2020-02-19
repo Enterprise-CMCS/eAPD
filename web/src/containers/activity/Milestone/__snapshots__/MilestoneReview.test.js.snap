@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the MilestoneReview component renders correctly 1`] = `
+<StandardReview
+  editHref={null}
+  heading="1533. Milestone name"
+  headingLevel={4}
+  onDeleteClick={[MockFunction]}
+  onEditClick={[MockFunction]}
+>
+  <p
+    className="ds-u-margin-top--2"
+  >
+    <strong>
+      Planned end date:
+    </strong>
+     
+    10/31/1940
+  </p>
+</StandardReview>
+`;

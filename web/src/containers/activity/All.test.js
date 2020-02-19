@@ -1,29 +1,50 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
-import { AllRaw as Activities, mapStateToProps } from './All';
+import { addActivity } from '../../actions/editActivity';
+
+import {
+  plain as Activities,
+  mapStateToProps,
+  mapDispatchToProps
+} from './All';
 
 describe('the Activities component', () => {
   const props = {
-    activityKeys: ['1', '2', '3'],
-    addActivity: sinon.stub()
+    add: jest.fn(),
+    activities: [
+      { key: 'key1', first: 'activity' },
+      { key: 'key2', second: 'activity' },
+      { key: 'key3', third: 'activity' }
+    ]
   };
+
+  beforeEach(() => {
+    props.add.mockClear();
+  });
 
   test('renders correctly', () => {
     const component = shallow(<Activities {...props} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('adds a new activity', () => {
-    const component = shallow(<Activities {...props} />);
-    component.find('Btn').simulate('click');
-    expect(props.addActivity.callCount).toBe(1);
+  test('maps state to props', () => {
+    const state = {
+      apd: {
+        data: {
+          activities: [{ key: 'key1' }, { key: 'key2' }, { key: 'key3' }]
+        }
+      }
+    };
+
+    expect(mapStateToProps(state)).toEqual({
+      activities: [{ key: 'key1' }, { key: 'key2' }, { key: 'key3' }]
+    });
   });
 
-  test('maps redux state to component props', () => {
-    expect(
-      mapStateToProps({ activities: { allKeys: ['1', 'two', '3'] } })
-    ).toEqual({ activityKeys: ['1', 'two', '3'] });
+  test('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      add: addActivity
+    });
   });
 });

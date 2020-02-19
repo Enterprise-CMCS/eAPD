@@ -5,41 +5,38 @@ const apdsIndex = require('./index');
 
 tap.test('apds endpoint setup', async endpointTest => {
   const app = {};
+  const deleteEndpoint = sinon.spy();
+  const filesEndpoints = sinon.spy();
   const getEndpoint = sinon.spy();
+  const patchEndpoint = sinon.spy();
   const postEndpoint = sinon.spy();
-  const putEndpoint = sinon.spy();
-  const activitiesEndpoint = sinon.spy();
-  const versionsEndpoint = sinon.spy();
 
-  apdsIndex(
-    app,
+  apdsIndex(app, {
+    deleteEndpoint,
+    filesEndpoints,
     getEndpoint,
-    postEndpoint,
-    putEndpoint,
-    activitiesEndpoint,
-    versionsEndpoint
-  );
+    patchEndpoint,
+    postEndpoint
+  });
 
+  endpointTest.ok(
+    deleteEndpoint.calledWith(app),
+    'apds DELETE endpoint is setup with the app'
+  );
   endpointTest.ok(
     getEndpoint.calledWith(app),
     'apds GET endpoint is setup with the app'
+  );
+  endpointTest.ok(
+    patchEndpoint.calledWith(app),
+    'apds PATCH endpoint is setup with the app'
   );
   endpointTest.ok(
     postEndpoint.calledWith(app),
     'apds POST endpoint is setup with the app'
   );
   endpointTest.ok(
-    putEndpoint.calledWith(app),
-    'apds PUT endpoint is setup with the app'
-  );
-
-  endpointTest.ok(
-    activitiesEndpoint.calledWith(app),
-    'apds activities endpoints are setup with the app'
-  );
-
-  endpointTest.ok(
-    versionsEndpoint.calledWith(app),
-    'apds versions endpoints are setup with the app'
+    filesEndpoints.calledWith(app),
+    'apds files endpoints are setup with the app'
   );
 });

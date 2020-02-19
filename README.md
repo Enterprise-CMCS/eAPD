@@ -1,56 +1,88 @@
 [![Build status](https://img.shields.io/circleci/project/github/18F/cms-hitech-apd.svg)](https://circleci.com/gh/18F/workflows/cms-hitech-apd)
 [![Test coverage](https://img.shields.io/codecov/c/github/18F/cms-hitech-apd.svg)](https://codecov.io/gh/18F/cms-hitech-apd)
-[![Known Vulnerabilities](https://snyk.io/test/github/18f/cms-hitech-apd/badge.svg?targetFile=web%2Fpackage.json)](https://snyk.io/test/github/18f/cms-hitech-apd?targetFile=web%2Fpackage.json)
-[![Known Vulnerabilities](https://snyk.io/test/github/18f/cms-hitech-apd/badge.svg?targetFile=api%2Fpackage.json)](https://snyk.io/test/github/18f/cms-hitech-apd?targetFile=api%2Fpackage.json)
+![Node.js >= 10.14](https://img.shields.io/badge/node-%3E%3D%2010.14-brightgreen.svg)
 
-# CMS HITECH APD app
+# CMS eAPD app
 
-This project aims to create a user-friendly, modern product to allow states to
-submit their Medicaid HITECH APD information to CMS easily and help CMS analysts
-review requests more efficiently.
+This project aims to create a user-friendly, modern product to streamline the
+creation, submission, review, and approval of Medicaid APDs and their
+associated contract documents. It is currently limited to HITECH but may
+potentially be expanded to other Medicaid programs in the future.
+
+_Please note:_ Any content contained in screenshots from the application within
+the `cms-hitech-apd` repo should be considered test data being used for
+development purposes ONLY. Project, financial, and timeline information is NOT
+representative of any production data from actual users.
 
 ## Developing
 
-After you clone the repo, you can use [Docker](https://www.docker.com/) to get
-your local environment up and running quickly, or you can install the
-[Node.js](https://nodejs.org) dependencies directly.
+### Getting the code
 
-### docker
+First you'll need to get the code onto your computer. The easiest way is to
+clone it with git. If you're not familiar with git, a tool like
+[Github Desktop](https://desktop.github.com/) or
+[SourceTree](https://www.sourcetreeapp.com/) can help make the experience
+easier.
 
-Run `docker-compose up`, wait until it's done, and then open
-http://localhost:8080/ in your browser.
+Most people will use the HTTPS link, but if you're a project contributor and
+you have your SSH keys configured, you'll clone from the SSH link. You can
+find the link by clicking the green "Clone or download" button above the file
+listing on this page.
 
-### direct
+The HTTPS link is https://github.com/18F/cms-hitech-apd.git
 
-Run these commands from the repo root to get the web app going:
+If you're familiar with git and just want to work from the command line, you
+just need to run:
 
-```
-cd web
-npm install
-npm start
-```
-
-Then, open http://localhost:8001/ in your browser.
-
-To start the API server, make sure (a) your environment variables are
-[configured](docs/api-configuration.md), (b) Postgres is running (i.e., `brew services start postgresql`), and (c) the development database exists
-([db settings](api/knexfile.js)). Then, run these commands from the repo root:
-
-```
-cd api
-npm install
-npm run migrate
-npm start
+```shell
+git clone https://github.com/18F/cms-hitech-apd.git
 ```
 
-The server should now be running at http://localhost:8000/
+If you can't use git for some reason, you can also download the most recent
+code as [a ZIP file](https://github.com/18F/cms-hitech-apd/archive/master.zip).
 
-See the [testing documentation](docs/testing.md) for information about running tests.
+### Making it run
 
-### Documentation
+We recommend using [Docker](https://www.docker.com) to run the app locally. We
+provide a Docker configuration that will quickly install and build everything
+you need, so don't have to. It'll also take care of getting everything running
+and connected. For more details,
+[see our wiki](https://github.com/18F/cms-hitech-apd/wiki/Development-Environment#docker).
+If you don't have or can't use Docker, you can also run everything
+[manually](https://github.com/18F/cms-hitech-apd/wiki/Development-Environment#manually).
 
-Check out the [technical documentation](docs/index.md) for a deeper dive into
-how the app works.
+From your command line, switch to the directory where you put the code and
+then run `docker-compose up`. This step could take a few minutes. Once it's
+finished, you can populate the database. While the docker process is still
+running, open a new terminal window or tab and run:
+
+```shell
+docker-compose exec api npm run migrate
+docker-compose exec api npm run seed
+```
+
+You should now be able to open the app at
+[http://localhost:8080](http://localhost:8080). You can log in with username
+`em@il.com` and password `password` to view a state account, complete with
+a filled-in APD. There is also an admin account with username `admin` and
+password `password`.
+
+See the
+[testing documentation](https://github.com/18F/cms-hitech-apd/wiki/Development-accessibility%2C-testing%2C-and-linting#testing)
+for information about running tests.
+
+### More technical documentation
+
+Check out the
+[developer documentation](https://github.com/18F/cms-hitech-apd/wiki/Development-index)
+for a deeper dive into how the app works.
+
+## Contributing
+
+We would be happy to receive pull requests to fix bugs or make improvements,
+though we can't make any promises about having time to review or accept them.
+Pull requests should be made into the `master` branch. Be sure to check out
+our [contributing](CONTRIBUTING.md) guide for info about our policies.
 
 ## Public domain
 

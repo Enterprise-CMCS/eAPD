@@ -1,20 +1,35 @@
 const path = require('path');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isProd = process.env.NODE_ENV === 'production';
+if (!process.env.IDLE_LOGOUT_TIME_MINUTES) {
+  delete process.env.IDLE_LOGOUT_TIME_MINUTES;
+}
 
 const config = {
+  mode: 'production',
   entry: {
-    js: path.join(__dirname, 'src/app.js')
+    app: [
+      path.join(__dirname, 'src/app.js'),
+      path.join(__dirname, 'src/styles/index.scss')
+    ]
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'app.js'
+
+    // Bust the cache with a hash!
+    filename: '[name].[contenthash].js'
   },
-  // devtool: 'cheap-module-eval-source-map',
+  optimization: {
+    // By default, grabs everything in node_modules and puts it into a
+    // vendored chunk.
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   module: {
     rules: [
       {
@@ -23,11 +38,53 @@ const config = {
         use: { loader: 'babel-loader' }
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader']
-        })
+        test: /\.scss$/,
+
+        // Remember that these run in reverse, so start at the last item in the
+        // array and read up to understand what's going on.
+        use: [
+          {
+            // Extracts all that CSS into a file and plops it on the disk.
+            loader: 'file-loader',
+            options: { name: 'app.css' }
+          },
+
+          // Converts the local disk paths from css-loader into their final
+          // paths relative to the dist directory, then pulls everything
+          // together
+          MiniCssExtractPlugin.loader,
+
+          // Interprets any url() and @import statements and resolves them to
+          // their full path on the local disk.
+          'css-loader',
+
+          // Handles resolving and importing all the CSS files, so we end up
+          // with one nice, big file to deal with. Also adds vendor prefixes
+          // as necessary for CSS rules that aren't yet widely supported.
+          'postcss-loader',
+
+          {
+            // Parse the Sass into CSS.
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: [path.resolve(__dirname, 'node_modules')]
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff2?|ttf|otf|eot|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'static/fonts'
+            }
+          }
+        ]
       },
       {
         test: /\.yaml$/,
@@ -35,17 +92,30 @@ const config = {
       }
     ]
   },
+  // replaces "process.env.____" with the values defined in the actual
+  // environment at build time
   plugins: [
+    new MiniCssExtractPlugin(),
     new webpack.EnvironmentPlugin({
       API_URL: null,
-      LOG_FORM_INTERACTIONS: false
+      IDLE_LOGOUT_TIME_MINUTES: 15
     }),
-    new ExtractTextPlugin('app.css')
+
+    // uses module hashs as IDs instead of numeric indices, so adding a new
+    // file to the app doesn't cause vendored output hash to change
+    new webpack.HashedModuleIdsPlugin(),
+
+    // Inject our app scripts into our HTML kickstarter
+    new HtmlWebpackPlugin({
+      minify: { removeComments: true },
+      template: 'src/index.html'
+    }),
+    new HtmlWebpackTagsPlugin({
+      tags: ['app.css'],
+      append: true,
+      hash: true
+    })
   ]
 };
-
-if (isProd) {
-  config.plugins.push(new UglifyJSPlugin());
-}
 
 module.exports = config;
