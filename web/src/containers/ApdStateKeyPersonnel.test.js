@@ -55,7 +55,7 @@ describe('apd state profile, Medicaid office component', () => {
     });
 
     it('handles deleting a key person', () => {
-      list.prop('onDeleteClick')('person1');
+      list.prop('onDeleteClick')(0);
       expect(props.remove).toHaveBeenCalledWith(0);
     });
   });

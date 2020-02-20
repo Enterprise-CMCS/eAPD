@@ -42,9 +42,6 @@ const mapDispatchToProps = {
   add: addActivity
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(All);
+export default connect(mapStateToProps, mapDispatchToProps)(All);
 
 export { All as plain, mapStateToProps, mapDispatchToProps };

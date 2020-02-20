@@ -22,12 +22,8 @@ const NonPersonnelCosts = ({
   expenses,
   removeExpense
 }) => {
-  const handleDelete = useCallback(key => {
-    expenses.forEach(({ key: expenseKey }, i) => {
-      if (expenseKey === key) {
-        removeExpense(activityIndex, i);
-      }
-    });
+  const handleDelete = useCallback(index => {
+    removeExpense(activityIndex, index);
   });
 
   const handleAdd = useCallback(() => {
@@ -67,9 +63,6 @@ const mapDispatchToProps = {
   removeExpense: removeNonPersonnelCost
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NonPersonnelCosts);
+export default connect(mapStateToProps, mapDispatchToProps)(NonPersonnelCosts);
 
 export { NonPersonnelCosts as plain, mapStateToProps, mapDispatchToProps };
