@@ -1,7 +1,7 @@
-import { format } from 'd3-format';
-
 // eslint-disable-next-line no-restricted-globals
 export const isNumeric = n => !isNaN(parseFloat(n)) && isFinite(n);
+
+import { format } from 'd3-format';
 
 export const fmt = (val, spec = ',.2f') =>
   isNumeric(val) ? format(spec)(val) : '--';
