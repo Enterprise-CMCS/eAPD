@@ -1,9 +1,10 @@
 import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import { removeActivity } from '../../actions/editActivity';
 import ActivityDialog from './EntryDetailsDialog';
 
 import { t } from '../../i18n';
@@ -12,6 +13,8 @@ const makeTitle = ({ name, fundingSource }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
   if (name) {
     title += `: ${name}`;
+  } else {
+    title += `: Untitled`;
   }
   if (fundingSource) {
     title += ` (${fundingSource})`;
@@ -19,13 +22,23 @@ const makeTitle = ({ name, fundingSource }, i) => {
   return title;
 };
 
-const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
+const EntryDetails = ({
+  activityIndex,
+  fundingSource,
+  activityKey,
+  name,
+  remove
+}) => {
   const container = useRef();
 
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const onRemove = () => {
+    remove(activityIndex);
   };
 
   const title = useMemo(
@@ -42,6 +55,14 @@ const EntryDetails = ({ activityIndex, fundingSource, activityKey, name }) => {
       >
         Edit
       </Button>
+      {activityIndex > 0 && (
+        <Fragment>
+          <span>|</span>
+          <Button size="small" variation="transparent" onClick={onRemove}>
+            Remove
+          </Button>
+        </Fragment>
+      )}
     </div>
   );
 
@@ -73,7 +94,8 @@ EntryDetails.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   activityKey: PropTypes.string.isRequired,
   fundingSource: PropTypes.string.isRequired,
-  name: PropTypes.string
+  name: PropTypes.string,
+  remove: PropTypes.func.isRequired
 };
 
 EntryDetails.defaultProps = {
@@ -87,6 +109,13 @@ const mapStateToProps = (state, { activityIndex }) => {
   return { activityKey: key, fundingSource, name };
 };
 
-export default connect(mapStateToProps)(EntryDetails);
+const mapDispatchToProps = {
+  remove: removeActivity
+};
 
-export { EntryDetails as plain, mapStateToProps };
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EntryDetails);
+
+export { EntryDetails as plain, mapStateToProps, mapDispatchToProps };
