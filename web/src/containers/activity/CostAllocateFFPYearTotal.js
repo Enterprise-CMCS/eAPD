@@ -21,7 +21,7 @@ const CostAllocateFFPYearTotal = ({ quarterlyFFP, years }) => {
       <h6 className="ds-h3">{`Total FFY ${years[0]} - ${
         years[years.length - 1]
       }`}</h6>
-      {['state', 'contractors'].map(name => (
+      {['inHouse', 'contractors'].map(name => (
         <p className="ds-h5" key={name}>
           {EXPENSE_NAME_DISPLAY[name]}:{' '}
           <span className="ds-u-font-weight--normal">
