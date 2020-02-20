@@ -13,7 +13,10 @@ import {
 import DollarField from '../../components/DollarField';
 import Dollars from '../../components/Dollars';
 import { t } from '../../i18n';
-import { makeSelectCostAllocateFFP } from '../../reducers/activities.selectors';
+import {
+  makeSelectCostAllocateFFP,
+  selectActivityKeyByIndex
+} from '../../reducers/activities.selectors';
 
 class CostAllocateFFP extends Component {
   setOther = year => e => {
@@ -249,7 +252,15 @@ CostAllocateFFP.defaultProps = {
 
 export const makeMapStateToProps = () => {
   const selectCostAllocateFFP = makeSelectCostAllocateFFP();
-  const mapStateToProps = (state, props) => selectCostAllocateFFP(state, props);
+  const mapStateToProps = (state, { activityIndex }) => {
+    const activityKey = selectActivityKeyByIndex(state, { activityIndex });
+    const { byYearData, costAllocation } = selectCostAllocateFFP(state, {
+      activityIndex,
+      aKey: activityKey
+    });
+
+    return { aKey: activityKey, byYearData, costAllocation };
+  };
   return mapStateToProps;
 };
 
