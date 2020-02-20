@@ -108,7 +108,7 @@ const FormAndReviewList = ({
             item={item}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
-                ? () => onDeleteClick(item.key)
+                ? () => onDeleteClick(index)
                 : null
             }
             {...rest}

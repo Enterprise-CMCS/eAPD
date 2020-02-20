@@ -82,7 +82,7 @@ describe('the ContractorResources component', () => {
     });
 
     it('handles deleting a contractor resource', () => {
-      list.prop('onDeleteClick')('key 2');
+      list.prop('onDeleteClick')(1);
       expect(props.removeContractor).toHaveBeenCalledWith('activity index', 1);
     });
   });

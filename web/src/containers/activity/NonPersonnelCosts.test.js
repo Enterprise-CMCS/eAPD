@@ -49,7 +49,7 @@ describe('activity non-personnel costs subsection', () => {
     });
 
     it('handles deleting a cost', () => {
-      list.prop('onDeleteClick')('cost key');
+      list.prop('onDeleteClick')(0);
       expect(props.removeExpense).toHaveBeenCalledWith(58, 0);
     });
   });
