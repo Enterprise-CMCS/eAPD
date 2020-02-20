@@ -47,10 +47,5 @@ exports[`the CostAllocate component renders correctly 1`] = `
       onSync={[Function]}
     />
   </div>
-  <hr />
-  <Connect(CostAllocateFFP)
-    aKey="activity key"
-    activityIndex={1}
-  />
 </Subsection>
 `;

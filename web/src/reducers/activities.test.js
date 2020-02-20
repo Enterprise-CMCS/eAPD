@@ -144,17 +144,8 @@ describe('activities reducer helpers', () => {
       ],
       summary: '',
       standardsAndConditions: {
-        modularity: '',
-        mita: '',
-        industryStandards: '',
-        leverage: '',
-        businessResults: '',
-        reporting: '',
-        interoperability: '',
-        mitigationStrategy: '',
-        keyPersonnel: '',
-        documentation: '',
-        minimizeCost: ''
+        doesNotSupport: '',
+        supports: ''
       },
       quarterlyFFP: {
         '2020': {

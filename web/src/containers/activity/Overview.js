@@ -1,6 +1,6 @@
 import { FormLabel } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { useMemo, useCallback } from 'react';
+import React, { Fragment, useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
 
 import { t } from '../../i18n';
@@ -12,6 +12,7 @@ import {
 import RichText from '../../components/RichText';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
+import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
@@ -102,6 +103,17 @@ const ActivityOverview = ({
       resource="activities.overview"
       id={`activity-overview-${activityIndex}`}
     >
+      {activityIndex === 0 ? (
+        <Fragment>
+          <h4>Activity name: {activity.name}</h4>
+          <h4>Funding source: {activity.fundingSource}</h4>
+        </Fragment>
+      ) : (
+        <NameAndFundingSourceForm
+          index={activityIndex}
+          item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
+        />
+      )}
       <TextArea
         name="activity overview"
         label={overviewLabel}
