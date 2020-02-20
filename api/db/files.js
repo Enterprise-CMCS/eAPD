@@ -1,4 +1,4 @@
-const c = require('crypto');
+const nodeCrypto = require('crypto');
 const knex = require('./knex');
 
 const createNewFileForAPD = async (
@@ -6,7 +6,7 @@ const createNewFileForAPD = async (
   apdID,
   metadata = null,
   size = 0,
-  { db = knex, crypto = c } = {}
+  { db = knex, crypto = nodeCrypto } = {}
 ) => {
   const id = crypto
     .createHash('sha256')
