@@ -1,52 +1,31 @@
+import { Button } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import FormAndReviewList from '../../components/FormAndReviewList';
 import EntryDetails from './EntryDetails';
-import {
-  NameAndFundingSourceForm,
-  NameAndFundingSourceReview
-} from './NameAndFundingSource';
 import Waypoint from '../ConnectedWaypoint';
-import { addActivity, removeActivity } from '../../actions/editActivity';
-import { Section, Subsection } from '../../components/Section';
+import { addActivity } from '../../actions/editActivity';
+import { Section } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
 
-const All = ({ add, first, other, remove }) => {
+const All = ({ add, activities }) => {
   const onAdd = () => add();
-
-  const onRemove = key => {
-    [first, ...other].forEach(({ key: activityKey }, i) => {
-      if (activityKey === key) {
-        remove(i);
-      }
-    });
-  };
 
   return (
     <Waypoint id="activities-overview">
       <Section isNumbered id="activities" resource="activities">
-        <Waypoint id="activities-list" />
-        <Subsection id="activities-list" resource="activities.list" open>
-          <NameAndFundingSourceReview item={first} index={-1} disableExpand />
-          <FormAndReviewList
-            addButtonText="Add another activity"
-            allowDeleteAll
-            list={other}
-            className="ds-u-border-bottom--0"
-            collapsed={NameAndFundingSourceReview}
-            expanded={NameAndFundingSourceForm}
-            noDataMessage={false}
-            onAddClick={onAdd}
-            onDeleteClick={onRemove}
-          />
-        </Subsection>
-        {[first, ...other].map(({ key }, index) => (
+        <h3 className="subsection--title ds-h3">
+          {activities.length} program activities
+        </h3>
+        {activities.map(({ key }, index) => (
           <Waypoint id={key} key={key}>
             <EntryDetails activityIndex={index} />
           </Waypoint>
         ))}
+        <Button className="ds-u-margin-top--4" onClick={onAdd}>
+          Add another activity
+        </Button>
       </Section>
     </Waypoint>
   );
@@ -54,22 +33,13 @@ const All = ({ add, first, other, remove }) => {
 
 All.propTypes = {
   add: PropTypes.func.isRequired,
-  first: PropTypes.object.isRequired,
-  other: PropTypes.arrayOf(PropTypes.object).isRequired,
-  remove: PropTypes.func.isRequired
+  activities: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-const mapStateToProps = state => {
-  const activities = selectAllActivities(state);
-  return {
-    first: activities[0],
-    other: activities.slice(1)
-  };
-};
+const mapStateToProps = state => ({ activities: selectAllActivities(state) });
 
 const mapDispatchToProps = {
-  add: addActivity,
-  remove: removeActivity
+  add: addActivity
 };
 
 export default connect(

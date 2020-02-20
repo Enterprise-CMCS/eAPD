@@ -40,12 +40,7 @@ describe('the activity name and funding source component', () => {
       target: { value: 'new value' }
     });
 
-    // The index that we pass via props is 1, but the name-and-funding-source
-    // forms are built from a list of only the editable activities. Index 0
-    // in the editable list is index 1 in the list of all activities. To
-    // account for that, the form will increment the index by 1. Thus, when
-    // 1 gets passed in, we expect that to become 2 when an edit happens.
-    expect(props.setName).toHaveBeenCalledWith(2, 'new value');
+    expect(props.setName).toHaveBeenCalledWith(1, 'new value');
   });
 
   it('handles changing the funding source/program type', () => {
@@ -55,7 +50,7 @@ describe('the activity name and funding source component', () => {
       target: { value: 'new value' }
     });
 
-    expect(props.setFundingSource).toHaveBeenCalledWith(2, 'new value');
+    expect(props.setFundingSource).toHaveBeenCalledWith(1, 'new value');
   });
 
   it('maps dispatch to props', () => {

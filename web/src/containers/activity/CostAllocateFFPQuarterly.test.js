@@ -18,54 +18,54 @@ describe('the cost allocation quarterly FFP component', () => {
       '1': {
         combined: { dollars: 35769 },
         contractors: { dollars: 7392, percent: 0.85 },
-        state: { dollars: 9384, percent: 0.37 }
+        inHouse: { dollars: 9384, percent: 0.37 }
       },
       '2': {
         combined: { dollars: 5298 },
         contractors: { dollars: 4258, percent: 0.35 },
-        state: { dollars: 25, percent: 0.83 }
+        inHouse: { dollars: 25, percent: 0.83 }
       },
       '3': {
         combined: { dollars: 952863 },
         contractors: { dollars: 72533522, percent: 0.19 },
-        state: { dollars: 278, percent: 0.27 }
+        inHouse: { dollars: 278, percent: 0.27 }
       },
       '4': {
         combined: { dollars: 953638 },
         contractors: { dollars: 9275, percent: 0.99 },
-        state: { dollars: 2357, percent: 0.72 }
+        inHouse: { dollars: 2357, percent: 0.72 }
       },
       subtotal: {
         combined: { dollars: 3475 },
         contractors: { dollars: 972465, percent: 0.99 },
-        state: { dollars: 47939, percent: 0.72 }
+        inHouse: { dollars: 47939, percent: 0.72 }
       }
     },
     '14': {
       '1': {
         combined: { dollars: 846 },
         contractors: { dollars: 3457, percent: 0.85 },
-        state: { dollars: 2753, percent: 0.37 }
+        inHouse: { dollars: 2753, percent: 0.37 }
       },
       '2': {
         combined: { dollars: 4856 },
         contractors: { dollars: 2345, percent: 0.35 },
-        state: { dollars: 3754, percent: 0.83 }
+        inHouse: { dollars: 3754, percent: 0.83 }
       },
       '3': {
         combined: { dollars: 4976 },
         contractors: { dollars: 26, percent: 0.19 },
-        state: { dollars: 2754, percent: 0.27 }
+        inHouse: { dollars: 2754, percent: 0.27 }
       },
       '4': {
         combined: { dollars: 4976 },
         contractors: { dollars: 2458, percent: 0.99 },
-        state: { dollars: 3865, percent: 0.72 }
+        inHouse: { dollars: 3865, percent: 0.72 }
       },
       subtotal: {
         combined: { dollars: 27364 },
         contractors: { dollars: 457, percent: 0.99 },
-        state: { dollars: 987125, percent: 0.72 }
+        inHouse: { dollars: 987125, percent: 0.72 }
       }
     }
   };
@@ -136,7 +136,7 @@ describe('the cost allocation quarterly FFP component', () => {
       .simulate('change', { target: { value: 88 } });
 
     expect(setInHouseFFP).toHaveBeenCalledWith(3, '13', 3, 88);
-    expect(announce).toHaveBeenCalledWith('activity key', '13', 3, 'state');
+    expect(announce).toHaveBeenCalledWith('activity key', '13', 3, 'inHouse');
   });
 
   it('handles changes to in-house quarterly FFP', () => {
