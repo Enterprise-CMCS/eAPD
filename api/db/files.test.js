@@ -11,30 +11,46 @@ const {
 tap.test('database wrappers / files', async filesTests => {
   const db = dbMock('apd_files');
 
+  const sandbox = sinon.createSandbox();
+  const crypto = {
+    createHash: sandbox.stub(),
+    update: sandbox.stub(),
+    digest: sandbox.stub()
+  };
+  crypto.createHash.returns({ update: crypto.update });
+  crypto.update.returns({ digest: crypto.digest });
+  crypto.digest.returns('--- file hash ---');
+
   filesTests.beforeEach(async () => {
     dbMock.reset();
+    sandbox.resetHistory();
   });
 
   filesTests.test('creates a new file for an APD', async test => {
+    db.count.returnsThis();
+    db.where
+      .withArgs({ id: '--- file hash ---', apd_id: 'apd id' })
+      .resolves([{ count: 0 }]);
+
     db.insert
       .withArgs({
-        id: 'uuid',
+        id: '--- file hash ---',
         apd_id: 'apd id',
         metadata: 'some metadata',
         size: 'a size'
       })
       .resolves();
 
-    const uuid = sinon.stub().returns('uuid');
-
     const fileID = await createNewFileForAPD(
+      'file buffer',
       'apd id',
       'some metadata',
       'a size',
-      { db, uuid }
+      { db, crypto }
     );
 
-    test.equal(fileID, 'uuid');
+    test.ok(crypto.update.calledWith('file buffer'));
+    test.equal(fileID, '--- file hash ---');
   });
 
   filesTests.test('deletes a file', async test => {
