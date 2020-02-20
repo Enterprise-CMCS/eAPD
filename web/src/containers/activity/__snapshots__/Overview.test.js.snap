@@ -7,6 +7,15 @@ exports[`activity overview/summary section (in the activity body) renders correc
   nested={false}
   resource="activities.overview"
 >
+  <Connect(NameAndFundingSourceForm)
+    index={37}
+    item={
+      Object {
+        "fundingSource": undefined,
+        "name": undefined,
+      }
+    }
+  />
   <TextArea
     className="data-entry-box"
     hint="Details for the activity go in the following sections."

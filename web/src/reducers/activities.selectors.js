@@ -16,6 +16,11 @@ export const selectActivityByIndex = (
   return null;
 };
 
+export const selectActivityKeyByIndex = createSelector(
+  [selectActivityByIndex],
+  ({ key }) => key
+);
+
 export const selectAllActivities = ({
   apd: {
     data: { activities }
