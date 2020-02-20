@@ -101,17 +101,8 @@ export const newActivity = ({
   statePersonnel: [newStatePerson(years)],
   summary: '',
   standardsAndConditions: {
-    modularity: '',
-    mita: '',
-    industryStandards: '',
-    leverage: '',
-    businessResults: '',
-    reporting: '',
-    interoperability: '',
-    mitigationStrategy: '',
-    keyPersonnel: '',
-    documentation: '',
-    minimizeCost: ''
+    doesNotSupport: '',
+    supports: ''
   },
   quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
   years,
