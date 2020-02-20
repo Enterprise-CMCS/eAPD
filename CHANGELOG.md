@@ -17,6 +17,7 @@ Anticipated release: February 18, 2020
 
 #### ⚙️ Behind the scenes
 
+- Change how uploaded files get IDs ([#2018])
 - Cleaned up some inconsistencies in the way things were named internally ([#2044])
 
 # Previous releases
@@ -29,8 +30,6 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2037]: https://github.com/18F/cms-hitech-apd/issues/2037
 [#1936]: https://github.com/18F/cms-hitech-apd/issues/1936
 [#2013]: https://github.com/18F/cms-hitech-apd/issues/2013
-<<<<<<< HEAD
+[#2018]: https://github.com/18F/cms-hitech-apd/issues/2018
 [#2010]: https://github.com/18F/cms-hitech-apd/issues/2010
-=======
 [#2044]: https://github.com/18F/cms-hitech-apd/issues/2044
->>>>>>> master
