@@ -1,0 +1,23 @@
+name: lint
+
+on: [push]
+
+jobs:
+  frontend-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: mgwalker/gh-action-js-lint@1.0.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          path: web
+          files: "src/**/*.js"
+  backend-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: mgwalker/gh-action-js-lint@1.0.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          path: api
+          files: "**/*.js"
