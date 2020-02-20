@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: mgwalker/gh-action-js-lint@1.0.0
+      - uses: 18f/github-action-eslint@1.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           path: web
