@@ -49,7 +49,13 @@ module.exports = (
       try {
         const metadata = req.body.metadata || null;
         const size = req.file && req.file.size ? req.file.size : 0;
-        const fileID = await createNewFileForAPD(req.params.id, metadata, size);
+
+        const fileID = await createNewFileForAPD(
+          req.file.buffer,
+          req.params.id,
+          metadata,
+          size
+        );
 
         try {
           await putFile(fileID, req.file.buffer);

@@ -31,12 +31,8 @@ const Objectives = ({
     addKeyResult(activityIndex, okrIndex);
   };
 
-  const handleDelete = key => {
-    objectives.forEach(({ key: okrKey }, i) => {
-      if (okrKey === key) {
-        remove(activityIndex, i);
-      }
-    });
+  const handleDelete = index => {
+        remove(activityIndex, index);
   };
 
   return (
