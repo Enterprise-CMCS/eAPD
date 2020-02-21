@@ -52,25 +52,54 @@ const ApdApplication = ({
         <Sidebar place={place} />
         <div id="start-main-content" className="site-main ds-u-padding-top--2">
           <Switch>
-            <Route exact path={path}>
+            <Route path={`${path}/activity/:activityIndex`}>
+              <EntryPage />
+            </Route>
+
+            <Route path={path}>
               <h1 id="start-main-content" className="ds-h1 apd--title">
                 <span className="ds-h6 ds-u-display--block">
                   <strong>Created:</strong> {apdCreated}
                 </span>
                 {apdName} | FFY {year}
               </h1>
-              <StateProfile />
-              <ApdSummary />
-              <PreviousActivities />
-              <Activities />
-              <ScheduleSummary />
-              <ProposedBudget />
-              <AssurancesAndCompliance />
-              <ExecutiveSummary />
+
+              <Route exact path={path}>
+                <StateProfile />
+              </Route>
+
+              <Route path={`${path}/state-profile`}>
+                <StateProfile />
+              </Route>
+
+              <Route path={`${path}/program-summary`}>
+                <ApdSummary />
+              </Route>
+
+              <Route path={`${path}/previous-activities`}>
+                <PreviousActivities />
+              </Route>
+
+              <Route path={`${path}/activities`}>
+                <Activities />
+              </Route>
+
+              <Route path={`${path}/schedule-summary`}>
+                <ScheduleSummary />
+              </Route>
+
+              <Route path={`${path}/proposed-budget`}>
+                <ProposedBudget />
+              </Route>
+
+              <Route path={`${path}/assurances-and-compliance`}>
+                <AssurancesAndCompliance />
+              </Route>
+
+              <Route path={`${path}/executive-summary`}>
+                <ExecutiveSummary />
+              </Route>
               <Export />
-            </Route>
-            <Route path={`${path}/activity/:activityIndex`}>
-              <EntryPage />
             </Route>
           </Switch>
         </div>

@@ -107,17 +107,20 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
     activityItems.splice(
       0,
       0,
-      {
-        id: 'activities-overview',
-        url: '#activities',
-        label: 'Overview',
-        onClick: (evt, id) => handleSelectClick(id)
-      },
+      // {
+      //   id: 'activities-overview',
+      //   url: '#activities',
+      //   label: 'Overview',
+      //   onClick: (evt, id) => handleSelectClick(id)
+      // },
       {
         id: 'activities-list',
-        url: '#activities-list',
+        // url: '#activities-list',
         label: t('activities.list.title'),
-        onClick: (evt, id) => handleSelectClick(id)
+        onClick() {
+          history.push('/apd/activities');
+        }
+        // onClick: (evt, id) => handleSelectClick(id)
       }
     );
 
@@ -131,57 +134,65 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       id: 'apd-state-profile',
       label: t('apd.stateProfile.title'),
       defaultCollapsed: true,
-      items: [
-        {
-          id: 'apd-state-profile-overview',
-          url: '#apd-state-profile',
-          label: 'Overview',
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'apd-state-profile-office',
-          url: '#apd-state-profile-office',
-          label: t('apd.stateProfile.directorAndAddress.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'apd-state-profile-key-personnel',
-          url: '#apd-state-profile-key-personnel',
-          label: t('apd.stateProfile.keyPersonnel.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        }
-      ]
+      onClick() {
+        history.push('/apd/state-profile');
+      }
+      // items: [
+      //   {
+      //     id: 'apd-state-profile-overview',
+      //     url: '#apd-state-profile',
+      //     label: 'Overview',
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'apd-state-profile-office',
+      //     url: '#apd-state-profile-office',
+      //     label: t('apd.stateProfile.directorAndAddress.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'apd-state-profile-key-personnel',
+      //     url: '#apd-state-profile-key-personnel',
+      //     label: t('apd.stateProfile.keyPersonnel.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   }
+      // ]
     },
     {
       id: 'apd-summary',
-      url: '#apd-summary',
       label: t('apd.title'),
-      onClick: (evt, id) => handleSelectClick(id)
+      // onClick: (evt, id) => handleSelectClick(id)
+      onClick() {
+        history.push('/apd/program-summary');
+      }
     },
     {
       id: 'prev-activities',
       label: t('previousActivities.title'),
       defaultCollapsed: true,
-      items: [
-        {
-          id: 'prev-activities-overview',
-          url: '#prev-activities',
-          label: 'Overview',
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'prev-activities-outline',
-          url: '#prev-activities-outline',
-          label: t('previousActivities.outline.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'prev-activities-table',
-          url: '#prev-activities-table',
-          label: t('previousActivities.actualExpenses.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        }
-      ]
+      onClick() {
+        history.push('/apd/previous-activities');
+      }
+      // items: [
+      //   {
+      //     id: 'prev-activities-overview',
+      //     url: '#prev-activities',
+      //     label: 'Overview',
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'prev-activities-outline',
+      //     url: '#prev-activities-outline',
+      //     label: t('previousActivities.outline.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'prev-activities-table',
+      //     url: '#prev-activities-table',
+      //     label: t('previousActivities.actualExpenses.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   }
+      // ]
     },
     {
       id: 'activities',
@@ -191,71 +202,83 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
     },
     {
       id: 'schedule-summary',
-      url: '#schedule-summary',
+      // url: '#schedule-summary',
       label: t('scheduleSummary.title'),
-      onClick: (evt, id) => handleSelectClick(id)
+      // onClick: (evt, id) => handleSelectClick(id)
+      onClick() {
+        history.push('/apd/schedule-summary');
+      }
     },
     {
       id: 'budget',
       label: t('proposedBudget.title'),
       defaultCollapsed: true,
-      items: [
-        {
-          id: 'budget-overview',
-          url: '#budget',
-          label: 'Overview',
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'budget-summary-table',
-          url: '#budget-summary-table',
-          label: t('proposedBudget.summaryBudget.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'budget-federal-by-quarter',
-          url: '#budget-federal-by-quarter',
-          label: t('proposedBudget.quarterlyBudget.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'budget-incentive-by-quarter',
-          url: '#budget-incentive-by-quarter',
-          label: t('proposedBudget.paymentsByFFYQuarter.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        }
-      ]
+      onClick() {
+        history.push('/apd/proposed-budget');
+      }
+      // items: [
+      //   {
+      //     id: 'budget-overview',
+      //     url: '#budget',
+      //     label: 'Overview',
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'budget-summary-table',
+      //     url: '#budget-summary-table',
+      //     label: t('proposedBudget.summaryBudget.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'budget-federal-by-quarter',
+      //     url: '#budget-federal-by-quarter',
+      //     label: t('proposedBudget.quarterlyBudget.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'budget-incentive-by-quarter',
+      //     url: '#budget-incentive-by-quarter',
+      //     label: t('proposedBudget.paymentsByFFYQuarter.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   }
+      // ]
     },
     {
       id: 'assurances-compliance',
-      url: '#assurances-compliance',
+      // url: '#assurances-compliance',
       label: t('assurancesAndCompliance.title'),
-      onClick: (evt, id) => handleSelectClick(id)
+      // onClick: (evt, id) => handleSelectClick(id)
+      onClick() {
+        history.push('/apd/assurances-and-compliance');
+      }
     },
     {
       id: 'executive-summary',
       label: t('executiveSummary.title'),
       defaultCollapsed: true,
-      items: [
-        {
-          id: 'executive-summary-overview',
-          url: '#executive-summary',
-          label: 'Overview',
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'executive-summary-summary',
-          url: '#executive-summary-summary',
-          label: t('executiveSummary.summary.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        },
-        {
-          id: 'executive-summary-budget-table',
-          url: '#executive-summary-budget-table',
-          label: t('executiveSummary.budgetTable.title'),
-          onClick: (evt, id) => handleSelectClick(id)
-        }
-      ]
+      onClick() {
+        history.push('/apd/executive-summary');
+      }
+      // items: [
+      //   {
+      //     id: 'executive-summary-overview',
+      //     url: '#executive-summary',
+      //     label: 'Overview',
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'executive-summary-summary',
+      //     url: '#executive-summary-summary',
+      //     label: t('executiveSummary.summary.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   },
+      //   {
+      //     id: 'executive-summary-budget-table',
+      //     url: '#executive-summary-budget-table',
+      //     label: t('executiveSummary.budgetTable.title'),
+      //     onClick: (evt, id) => handleSelectClick(id)
+      //   }
+      // ]
     },
     {
       id: 'export-and-submit',
