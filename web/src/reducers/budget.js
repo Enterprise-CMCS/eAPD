@@ -481,6 +481,31 @@ const buildBudget = incomingBigState => {
           quarterlyInfo.federalPcts
         );
 
+        // Gather up the totals for the cost types and the combined total. Do
+        // this here so these values aren't affected by the percentages input
+        // by the state. These totals are based only on the federal share
+        // computed from the activity total costs.
+        activityFFP[year].subtotal[propCostType].dollars += fedShare[prop];
+        activityFFP[year].subtotal.combined.dollars += fedShare[prop];
+
+        // Note that the grand activity total props are just numbers, not
+        // objects - we drop the percentage altogether.
+        activityFFP.total[propCostType] += fedShare[prop];
+        activityFFP.total.combined += fedShare[prop];
+
+        // For the expense type, add the federal share for the
+        // quarter and the fiscal year subtotal.
+        quarterlyFFP[year].subtotal[propCostType] += fedShare[prop];
+
+        // Also add the federal share to the cross-expense
+        // quarterly subtotal and fiscal year subtotal
+        quarterlyFFP[year].subtotal.combined += fedShare[prop];
+
+        // And finally, add it to the expense type grand
+        // total and the federal share grand total
+        quarterlyFFP.total[propCostType] += fedShare[prop];
+        quarterlyFFP.total.combined += fedShare[prop];
+
         // Shortcut to loop over quarters.  :)
         [...Array(4)].forEach((_, q) => {
           // Compute the federal share for this quarter.
@@ -498,36 +523,19 @@ const buildBudget = incomingBigState => {
           // with percent for combined because it doesn't make sense.
           activityFFP[year][q + 1].combined.dollars += qFFP;
 
-          // Fiscal year subtotal.  Because "expense" and "statePersonnel"
-          // are combined into the "state" property, we need to be careful
+          // Fiscal year percentage. Because "expense" and "statePersonnel"
+          // are combined into the "inHouse" property, we need to be careful
           // about not adding the percent multiple times.  So, only
-          // add the percent if this is an "expense" type.
-          activityFFP[year].subtotal[propCostType].dollars += qFFP;
+          // add the percent if this is not an "expense" type.
           if (prop !== 'expenses') {
             activityFFP[year].subtotal[propCostType].percent += federalPct;
           }
 
-          // And finally, fiscal year combined subtotal and activity
-          // grand total.  Note that the grand total props are just
-          // numbers, not objects - we drop the percentage altogether.
-          activityFFP[year].subtotal.combined.dollars += qFFP;
-          activityFFP.total[propCostType] += qFFP;
-          activityFFP.total.combined += qFFP;
-
-          // For the expense type, add the federal share for the
-          // quarter and the fiscal year subtotal.
+          // For the expense type, add the federal share for the quarter.
           quarterlyFFP[year][q + 1][propCostType] += qFFP;
-          quarterlyFFP[year].subtotal[propCostType] += qFFP;
 
-          // Also add the federal share to the cross-expense
-          // quarterly subtotal and fiscal year subtotal
+          // Also add the federal share to the cross-expense quarterly subtotal
           quarterlyFFP[year][q + 1].combined += qFFP;
-          quarterlyFFP[year].subtotal.combined += qFFP;
-
-          // And finally, add it to the expense type grand
-          // total and the federal share grand total
-          quarterlyFFP.total[propCostType] += qFFP;
-          quarterlyFFP.total.combined += qFFP;
         });
       });
     });
