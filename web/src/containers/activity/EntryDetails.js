@@ -4,7 +4,6 @@ import React, { useMemo, useRef, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import { removeActivity } from '../../actions/editActivity';
 import ActivityDialog from './EntryDetailsDialog';
 import { jumpTo } from '../../actions/app';
