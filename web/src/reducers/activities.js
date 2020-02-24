@@ -69,7 +69,7 @@ export const quarterlyFFPEntry = () =>
     (acc, quarter) => ({
       ...acc,
       [quarter]: {
-        state: 25,
+        inHouse: 25,
         contractors: 25,
         combined: 25
       }

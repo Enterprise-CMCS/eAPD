@@ -23,60 +23,60 @@ describe('quarterly budget summary component', () => {
               1: {
                 combined: 1,
                 contractors: 2,
-                state: 3
+                inHouse: 3
               },
               2: {
                 combined: 4,
                 contractors: 5,
-                state: 6
+                inHouse: 6
               },
               3: {
                 combined: 7,
                 contractors: 8,
-                state: 9
+                inHouse: 9
               },
               4: {
                 combined: 10,
                 contractors: 11,
-                state: 12
+                stainHousete: 12
               },
               subtotal: {
                 combined: 13,
                 contractors: 14,
-                state: 15
+                inHouse: 15
               }
             },
             '2': {
               1: {
                 combined: 101,
                 contractors: 102,
-                state: 103
+                inHouse: 103
               },
               2: {
                 combined: 104,
                 contractors: 105,
-                state: 106
+                inHouse: 106
               },
               3: {
                 combined: 107,
                 contractors: 108,
-                state: 109
+                inHouse: 109
               },
               4: {
                 combined: 110,
                 contractors: 111,
-                state: 112
+                inHouse: 112
               },
               subtotal: {
                 combined: 113,
                 contractors: 114,
-                state: 115
+                inHouse: 115
               }
             },
             total: {
               combined: 3000,
               contractors: 3001,
-              state: 3002
+              inHouse: 3002
             }
           },
           mmis: {
@@ -84,60 +84,60 @@ describe('quarterly budget summary component', () => {
               1: {
                 combined: 201,
                 contractors: 202,
-                state: 203
+                inHouse: 203
               },
               2: {
                 combined: 204,
                 contractors: 205,
-                state: 206
+                inHouse: 206
               },
               3: {
                 combined: 207,
                 contractors: 208,
-                state: 209
+                inHouse: 209
               },
               4: {
                 combined: 210,
                 contractors: 211,
-                state: 212
+                inHouse: 212
               },
               subtotal: {
                 combined: 213,
                 contractors: 214,
-                state: 215
+                inHouse: 215
               }
             },
             '2': {
               1: {
                 combined: 1101,
                 contractors: 1102,
-                state: 1103
+                inHouse: 1103
               },
               2: {
                 combined: 1104,
                 contractors: 1105,
-                state: 1106
+                inHouse: 1106
               },
               3: {
                 combined: 1107,
                 contractors: 1108,
-                state: 1109
+                inHouse: 1109
               },
               4: {
                 combined: 1110,
                 contractors: 1111,
-                state: 1112
+                inHouse: 1112
               },
               subtotal: {
                 combined: 1113,
                 contractors: 1114,
-                state: 1115
+                inHouse: 1115
               }
             },
             total: {
               combined: 4000,
               contractors: 4001,
-              state: 4002
+              inHouse: 4002
             }
           }
         }}
