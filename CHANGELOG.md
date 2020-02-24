@@ -21,6 +21,7 @@ Anticipated release: February 18, 2020
 - Made the code for removing list items a bit simpler ([#2014])
 - Change how uploaded files get IDs ([#2018])
 - Cleaned up some inconsistencies in the way things were named internally ([#2044])
+- Got rid of some old code that no longer made sense ([#2021])
 
 # Previous releases
 
@@ -36,3 +37,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2018]: https://github.com/18F/cms-hitech-apd/issues/2018
 [#2010]: https://github.com/18F/cms-hitech-apd/issues/2010
 [#2044]: https://github.com/18F/cms-hitech-apd/issues/2044
+[#2021]: https://github.com/18F/cms-hitech-apd/issues/2021
