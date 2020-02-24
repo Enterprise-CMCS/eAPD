@@ -15,12 +15,8 @@ const Milestone = ({ activity, activityIndex, add, remove }) => {
     add(activityIndex);
   });
 
-  const handleDelete = useCallback(key => {
-    activity.schedule.forEach(({ key: milestoneKey }, i) => {
-      if (milestoneKey === key) {
-        remove(activityIndex, i);
-      }
-    });
+  const handleDelete = useCallback(index => {
+    remove(activityIndex, index);
   });
 
   return (

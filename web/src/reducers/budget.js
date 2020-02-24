@@ -54,14 +54,14 @@ const defaultFederalShare = years =>
         (q, quarter) => ({
           ...q,
           [quarter]: {
-            state: 0,
+            inHouse: 0,
             contractors: 0,
             combined: 0
           }
         }),
         {
           subtotal: {
-            state: 0,
+            inHouse: 0,
             contractors: 0,
             combined: 0
           }
@@ -70,7 +70,7 @@ const defaultFederalShare = years =>
     }),
     {
       total: {
-        state: 0,
+        inHouse: 0,
         contractors: 0,
         combined: 0
       }
@@ -184,18 +184,18 @@ const buildBudget = incomingBigState => {
           ...arrToObj(['1', '2', '3', '4'], () => ({
             combined: { dollars: 0, percent: 0 },
             contractors: { dollars: 0, percent: 0 },
-            state: { dollars: 0, percent: 0 }
+            inHouse: { dollars: 0, percent: 0 }
           })),
           subtotal: {
             combined: { dollars: 0, percent: 0 },
             contractors: { dollars: 0, percent: 0 },
-            state: { dollars: 0, percent: 0 }
+            inHouse: { dollars: 0, percent: 0 }
           }
         })),
         total: {
           combined: 0,
           contractors: 0,
-          state: 0
+          inHouse: 0
         }
       }
     };
@@ -458,7 +458,8 @@ const buildBudget = incomingBigState => {
       const quarterlyFFP = newState.federalShareByFFYQuarter[ffpSource];
 
       ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
-        const propCostType = prop === 'contractors' ? 'contractors' : 'state';
+        const ffpType = prop === 'contractors' ? 'contractors' : 'state';
+        const propCostType = prop === 'contractors' ? 'contractors' : 'inHouse';
 
         // This is the percentage of the total federal share that the state
         // is requesting, per quarter.  Go ahead and covert it to a 0-1
@@ -466,10 +467,10 @@ const buildBudget = incomingBigState => {
         // using the nice rounding function.
         const quarterlyInfo = {
           federalPcts: [
-            ffp[1][propCostType] / 100,
-            ffp[2][propCostType] / 100,
-            ffp[3][propCostType] / 100,
-            ffp[4][propCostType] / 100
+            ffp[1][ffpType] / 100,
+            ffp[2][ffpType] / 100,
+            ffp[3][ffpType] / 100,
+            ffp[4][ffpType] / 100
           ],
           qFFPs: []
         };

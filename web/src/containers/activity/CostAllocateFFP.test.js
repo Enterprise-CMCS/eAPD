@@ -17,6 +17,7 @@ describe('the CostAllocateFFP component', () => {
       data: {
         activities: [
           {
+            key: 'key',
             costAllocation: {
               '1066': {
                 other: 10,
@@ -61,6 +62,7 @@ describe('the CostAllocateFFP component', () => {
 
   const props = {
     activityIndex: 0,
+    aKey: 'key',
     byYearData: [
       {
         allocations: {
@@ -120,7 +122,8 @@ describe('the CostAllocateFFP component', () => {
 
   test('maps redux state to component props', () => {
     const mapStateToProps = makeMapStateToProps();
-    expect(mapStateToProps(state, { activityIndex: 0, aKey: 'key' })).toEqual({
+    expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
+      aKey: 'key',
       byYearData: [
         {
           allocations: {

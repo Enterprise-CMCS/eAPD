@@ -66,6 +66,15 @@ exports[`the Activity Dialog component renders correctly 1`] = `
         activityIndex={2}
       />
     </TabPanel>
+    <TabPanel
+      id="activity-ffp-2-tab"
+      selected={false}
+      tab="FFP and Budget"
+    >
+      <Connect(CostAllocateFFP)
+        activityIndex={2}
+      />
+    </TabPanel>
   </Tabs>
 </Dialog>
 `;

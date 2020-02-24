@@ -8,13 +8,6 @@ import FormAndReviewList from '../components/FormAndReviewList';
 import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 
 const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
-  const deletePerson = key => {
-    const index = poc.findIndex(p => p.key === key);
-    if (index >= 0) {
-      remove(index);
-    }
-  };
-
   return (
     <FormAndReviewList
       addButtonText="Add another person"
@@ -22,7 +15,7 @@ const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
       collapsed={ApdKeyPersonReview}
       expanded={ApdKeyPersonForm}
       onAddClick={() => add()}
-      onDeleteClick={deletePerson}
+      onDeleteClick={index => remove(index)}
       years={years}
     />
   );
