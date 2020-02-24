@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: 18f/github-action-eslint@1.0.0
+      - uses: 18f/github-action-eslint@1.0.1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           path: web
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: 18f/github-action-eslint@1.0.0
+      - uses: 18f/github-action-eslint@1.0.1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           path: api
