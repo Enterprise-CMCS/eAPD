@@ -7,10 +7,10 @@ describe('budget reducer', () => {
     combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
     federalShareByFFYQuarter: {
       hitAndHie: {
-        total: { contractors: 0, state: 0, combined: 0 }
+        total: { contractors: 0, inHouse: 0, combined: 0 }
       },
       mmis: {
-        total: { contractors: 0, state: 0, combined: 0 }
+        total: { contractors: 0, inHouse: 0, combined: 0 }
       }
     },
     hie: {
@@ -351,86 +351,86 @@ describe('budget reducer', () => {
           quarterlyFFP: {
             '1931': {
               '1': {
-                state: { dollars: 918, percent: 0.3 },
+                inHouse: { dollars: 918, percent: 0.3 },
                 contractors: { dollars: 720, percent: 0.4 },
                 combined: { dollars: 1638, percent: 0 }
               },
               '2': {
-                state: { dollars: 612, percent: 0.2 },
+                inHouse: { dollars: 612, percent: 0.2 },
                 contractors: { dollars: 360, percent: 0.2 },
                 combined: { dollars: 972, percent: 0 }
               },
               '3': {
-                state: { dollars: 1224, percent: 0.4 },
+                inHouse: { dollars: 1224, percent: 0.4 },
                 contractors: { dollars: 540, percent: 0.3 },
                 combined: { dollars: 1764, percent: 0 }
               },
               '4': {
-                state: { dollars: 306, percent: 0.1 },
+                inHouse: { dollars: 306, percent: 0.1 },
                 contractors: { dollars: 180, percent: 0.1 },
                 combined: { dollars: 486, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 3060, percent: 1 },
+                inHouse: { dollars: 3060, percent: 1 },
                 contractors: { dollars: 1800, percent: 1 },
                 combined: { dollars: 4860, percent: 0 }
               }
             },
             '1932': {
               '1': {
-                state: { dollars: 720, percent: 0.25 },
+                inHouse: { dollars: 720, percent: 0.25 },
                 contractors: { dollars: 900, percent: 0.5 },
                 combined: { dollars: 1620, percent: 0 }
               },
               '2': {
-                state: { dollars: 720, percent: 0.25 },
+                inHouse: { dollars: 720, percent: 0.25 },
                 contractors: { dollars: 360, percent: 0.2 },
                 combined: { dollars: 1080, percent: 0 }
               },
               '3': {
-                state: { dollars: 720, percent: 0.25 },
+                inHouse: { dollars: 720, percent: 0.25 },
                 contractors: { dollars: 360, percent: 0.2 },
                 combined: { dollars: 1080, percent: 0 }
               },
               '4': {
-                state: { dollars: 720, percent: 0.25 },
+                inHouse: { dollars: 720, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.1 },
                 combined: { dollars: 900, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 2880, percent: 1 },
+                inHouse: { dollars: 2880, percent: 1 },
                 contractors: { dollars: 1800, percent: 1 },
                 combined: { dollars: 4680, percent: 0 }
               }
             },
             '1933': {
               '1': {
-                state: { dollars: 243, percent: 0.1 },
+                inHouse: { dollars: 243, percent: 0.1 },
                 contractors: { dollars: 720, percent: 0.4 },
                 combined: { dollars: 963, percent: 0 }
               },
               '2': {
-                state: { dollars: 486, percent: 0.2 },
+                inHouse: { dollars: 486, percent: 0.2 },
                 contractors: { dollars: 540, percent: 0.3 },
                 combined: { dollars: 1026, percent: 0 }
               },
               '3': {
-                state: { dollars: 729, percent: 0.3 },
+                inHouse: { dollars: 729, percent: 0.3 },
                 contractors: { dollars: 360, percent: 0.2 },
                 combined: { dollars: 1089, percent: 0 }
               },
               '4': {
-                state: { dollars: 972, percent: 0.4 },
+                inHouse: { dollars: 972, percent: 0.4 },
                 contractors: { dollars: 180, percent: 0.1 },
                 combined: { dollars: 1152, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 2430, percent: 1 },
+                inHouse: { dollars: 2430, percent: 1 },
                 contractors: { dollars: 1800, percent: 1 },
                 combined: { dollars: 4230, percent: 0 }
               }
             },
-            total: { state: 8370, contractors: 5400, combined: 13770 }
+            total: { inHouse: 8370, contractors: 5400, combined: 13770 }
           }
         },
         '2': {
@@ -463,86 +463,86 @@ describe('budget reducer', () => {
           quarterlyFFP: {
             '1931': {
               '1': {
-                state: { dollars: 450, percent: 0.25 },
+                inHouse: { dollars: 450, percent: 0.25 },
                 contractors: { dollars: 450, percent: 0.5 },
                 combined: { dollars: 900, percent: 0 }
               },
               '2': {
-                state: { dollars: 450, percent: 0.25 },
+                inHouse: { dollars: 450, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 630, percent: 0 }
               },
               '3': {
-                state: { dollars: 450, percent: 0.25 },
+                inHouse: { dollars: 450, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 630, percent: 0 }
               },
               '4': {
-                state: { dollars: 450, percent: 0.25 },
+                inHouse: { dollars: 450, percent: 0.25 },
                 contractors: { dollars: 90, percent: 0.1 },
                 combined: { dollars: 540, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 1800, percent: 1 },
+                inHouse: { dollars: 1800, percent: 1 },
                 contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2700, percent: 0 }
               }
             },
             '1932': {
               '1': {
-                state: { dollars: 540, percent: 0.3 },
+                inHouse: { dollars: 540, percent: 0.3 },
                 contractors: { dollars: 360, percent: 0.4 },
                 combined: { dollars: 900, percent: 0 }
               },
               '2': {
-                state: { dollars: 360, percent: 0.2 },
+                inHouse: { dollars: 360, percent: 0.2 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 540, percent: 0 }
               },
               '3': {
-                state: { dollars: 720, percent: 0.4 },
+                inHouse: { dollars: 720, percent: 0.4 },
                 contractors: { dollars: 270, percent: 0.3 },
                 combined: { dollars: 990, percent: 0 }
               },
               '4': {
-                state: { dollars: 180, percent: 0.1 },
+                inHouse: { dollars: 180, percent: 0.1 },
                 contractors: { dollars: 90, percent: 0.1 },
                 combined: { dollars: 270, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 1800, percent: 1 },
+                inHouse: { dollars: 1800, percent: 1 },
                 contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2700, percent: 0 }
               }
             },
             '1933': {
               '1': {
-                state: { dollars: 180, percent: 0.1 },
+                inHouse: { dollars: 180, percent: 0.1 },
                 contractors: { dollars: 360, percent: 0.4 },
                 combined: { dollars: 540, percent: 0 }
               },
               '2': {
-                state: { dollars: 360, percent: 0.2 },
+                inHouse: { dollars: 360, percent: 0.2 },
                 contractors: { dollars: 270, percent: 0.3 },
                 combined: { dollars: 630, percent: 0 }
               },
               '3': {
-                state: { dollars: 540, percent: 0.3 },
+                inHouse: { dollars: 540, percent: 0.3 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 720, percent: 0 }
               },
               '4': {
-                state: { dollars: 720, percent: 0.4 },
+                inHouse: { dollars: 720, percent: 0.4 },
                 contractors: { dollars: 90, percent: 0.1 },
                 combined: { dollars: 810, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 1800, percent: 1 },
+                inHouse: { dollars: 1800, percent: 1 },
                 contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2700, percent: 0 }
               }
             },
-            total: { state: 5400, contractors: 2700, combined: 8100 }
+            total: { inHouse: 5400, contractors: 2700, combined: 8100 }
           }
         },
         '3': {
@@ -575,86 +575,86 @@ describe('budget reducer', () => {
           quarterlyFFP: {
             '1931': {
               '1': {
-                state: { dollars: 194, percent: 0.1 },
+                inHouse: { dollars: 194, percent: 0.1 },
                 contractors: { dollars: 360, percent: 0.4 },
                 combined: { dollars: 554, percent: 0 }
               },
               '2': {
-                state: { dollars: 387, percent: 0.2 },
+                inHouse: { dollars: 387, percent: 0.2 },
                 contractors: { dollars: 270, percent: 0.3 },
                 combined: { dollars: 657, percent: 0 }
               },
               '3': {
-                state: { dollars: 580, percent: 0.3 },
+                inHouse: { dollars: 580, percent: 0.3 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 760, percent: 0 }
               },
               '4': {
-                state: { dollars: 774, percent: 0.4 },
+                inHouse: { dollars: 774, percent: 0.4 },
                 contractors: { dollars: 90, percent: 0.1 },
                 combined: { dollars: 864, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 1935, percent: 1 },
+                inHouse: { dollars: 1935, percent: 1 },
                 contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2835, percent: 0 }
               }
             },
             '1932': {
               '1': {
-                state: { dollars: 788, percent: 0.25 },
+                inHouse: { dollars: 788, percent: 0.25 },
                 contractors: { dollars: 450, percent: 0.5 },
                 combined: { dollars: 1238, percent: 0 }
               },
               '2': {
-                state: { dollars: 788, percent: 0.25 },
+                inHouse: { dollars: 788, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 968, percent: 0 }
               },
               '3': {
-                state: { dollars: 787, percent: 0.25 },
+                inHouse: { dollars: 787, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 967, percent: 0 }
               },
               '4': {
-                state: { dollars: 787, percent: 0.25 },
+                inHouse: { dollars: 787, percent: 0.25 },
                 contractors: { dollars: 90, percent: 0.1 },
                 combined: { dollars: 877, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 3150, percent: 1 },
+                inHouse: { dollars: 3150, percent: 1 },
                 contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 4050, percent: 0 }
               }
             },
             '1933': {
               '1': {
-                state: { dollars: 4335, percent: 0.3 },
+                inHouse: { dollars: 4335, percent: 0.3 },
                 contractors: { dollars: 340, percent: 0.4 },
                 combined: { dollars: 4675, percent: 0 }
               },
               '2': {
-                state: { dollars: 2890, percent: 0.2 },
+                inHouse: { dollars: 2890, percent: 0.2 },
                 contractors: { dollars: 170, percent: 0.2 },
                 combined: { dollars: 3060, percent: 0 }
               },
               '3': {
-                state: { dollars: 5780, percent: 0.4 },
+                inHouse: { dollars: 5780, percent: 0.4 },
                 contractors: { dollars: 255, percent: 0.3 },
                 combined: { dollars: 6035, percent: 0 }
               },
               '4': {
-                state: { dollars: 1445, percent: 0.1 },
+                inHouse: { dollars: 1445, percent: 0.1 },
                 contractors: { dollars: 255, percent: 0.3 },
                 combined: { dollars: 1700, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 14450, percent: 1 },
+                inHouse: { dollars: 14450, percent: 1 },
                 contractors: { dollars: 1020, percent: 1.2 },
                 combined: { dollars: 15470, percent: 0 }
               }
             },
-            total: { state: 19535, contractors: 2820, combined: 22355 }
+            total: { inHouse: 19535, contractors: 2820, combined: 22355 }
           }
         },
         '4': {
@@ -687,86 +687,86 @@ describe('budget reducer', () => {
           quarterlyFFP: {
             '1931': {
               '1': {
-                state: { dollars: 45, percent: 0.1 },
+                inHouse: { dollars: 45, percent: 0.1 },
                 contractors: { dollars: 120, percent: 0.4 },
                 combined: { dollars: 165, percent: 0 }
               },
               '2': {
-                state: { dollars: 90, percent: 0.2 },
+                inHouse: { dollars: 90, percent: 0.2 },
                 contractors: { dollars: 90, percent: 0.3 },
                 combined: { dollars: 180, percent: 0 }
               },
               '3': {
-                state: { dollars: 135, percent: 0.3 },
+                inHouse: { dollars: 135, percent: 0.3 },
                 contractors: { dollars: 60, percent: 0.2 },
                 combined: { dollars: 195, percent: 0 }
               },
               '4': {
-                state: { dollars: 180, percent: 0.4 },
+                inHouse: { dollars: 180, percent: 0.4 },
                 contractors: { dollars: 30, percent: 0.1 },
                 combined: { dollars: 210, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 450, percent: 1 },
+                inHouse: { dollars: 450, percent: 1 },
                 contractors: { dollars: 300, percent: 1 },
                 combined: { dollars: 750, percent: 0 }
               }
             },
             '1932': {
               '1': {
-                state: { dollars: 300, percent: 0.3 },
+                inHouse: { dollars: 300, percent: 0.3 },
                 contractors: { dollars: 200, percent: 0.4 },
                 combined: { dollars: 500, percent: 0 }
               },
               '2': {
-                state: { dollars: 200, percent: 0.2 },
+                inHouse: { dollars: 200, percent: 0.2 },
                 contractors: { dollars: 100, percent: 0.2 },
                 combined: { dollars: 300, percent: 0 }
               },
               '3': {
-                state: { dollars: 400, percent: 0.4 },
+                inHouse: { dollars: 400, percent: 0.4 },
                 contractors: { dollars: 150, percent: 0.3 },
                 combined: { dollars: 550, percent: 0 }
               },
               '4': {
-                state: { dollars: 100, percent: 0.1 },
+                inHouse: { dollars: 100, percent: 0.1 },
                 contractors: { dollars: 150, percent: 0.3 },
                 combined: { dollars: 250, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 1000, percent: 1 },
+                inHouse: { dollars: 1000, percent: 1 },
                 contractors: { dollars: 600, percent: 1.2 },
                 combined: { dollars: 1600, percent: 0 }
               }
             },
             '1933': {
               '1': {
-                state: { dollars: 248, percent: 0.25 },
+                inHouse: { dollars: 248, percent: 0.25 },
                 contractors: { dollars: 450, percent: 0.5 },
                 combined: { dollars: 698, percent: 0 }
               },
               '2': {
-                state: { dollars: 248, percent: 0.25 },
+                inHouse: { dollars: 248, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 428, percent: 0 }
               },
               '3': {
-                state: { dollars: 247, percent: 0.25 },
+                inHouse: { dollars: 247, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
                 combined: { dollars: 427, percent: 0 }
               },
               '4': {
-                state: { dollars: 247, percent: 0.25 },
+                inHouse: { dollars: 247, percent: 0.25 },
                 contractors: { dollars: 90, percent: 0.1 },
                 combined: { dollars: 337, percent: 0 }
               },
               subtotal: {
-                state: { dollars: 990, percent: 1 },
+                inHouse: { dollars: 990, percent: 1 },
                 contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 1890, percent: 0 }
               }
             },
-            total: { state: 2440, contractors: 1800, combined: 4240 }
+            total: { inHouse: 2440, contractors: 1800, combined: 4240 }
           }
         },
         '5': {
@@ -781,87 +781,87 @@ describe('budget reducer', () => {
               '1': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '2': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '3': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '4': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               subtotal: {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               }
             },
             '1932': {
               '1': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '2': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '3': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '4': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               subtotal: {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               }
             },
             '1933': {
               '1': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '2': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '3': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               '4': {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               },
               subtotal: {
                 combined: { dollars: 0, percent: 0 },
                 contractors: { dollars: 0, percent: 0 },
-                state: { dollars: 0, percent: 0 }
+                inHouse: { dollars: 0, percent: 0 }
               }
             },
             total: {
               combined: 0,
               contractors: 0,
-              state: 0
+              inHouse: 0
             }
           }
         }
@@ -875,51 +875,51 @@ describe('budget reducer', () => {
       federalShareByFFYQuarter: {
         hitAndHie: {
           '1931': {
-            '1': { contractors: 1530, state: 1562, combined: 3092 },
-            '2': { contractors: 810, state: 1449, combined: 2259 },
-            '3': { contractors: 900, state: 2254, combined: 3154 },
-            '4': { contractors: 360, state: 1530, combined: 1890 },
-            subtotal: { contractors: 3600, state: 6795, combined: 10395 }
+            '1': { contractors: 1530, inHouse: 1562, combined: 3092 },
+            '2': { contractors: 810, inHouse: 1449, combined: 2259 },
+            '3': { contractors: 900, inHouse: 2254, combined: 3154 },
+            '4': { contractors: 360, inHouse: 1530, combined: 1890 },
+            subtotal: { contractors: 3600, inHouse: 6795, combined: 10395 }
           },
           '1932': {
-            '1': { contractors: 1710, state: 2048, combined: 3758 },
-            '2': { contractors: 720, state: 1868, combined: 2588 },
-            '3': { contractors: 810, state: 2227, combined: 3037 },
-            '4': { contractors: 360, state: 1687, combined: 2047 },
-            subtotal: { contractors: 3600, state: 7830, combined: 11430 }
+            '1': { contractors: 1710, inHouse: 2048, combined: 3758 },
+            '2': { contractors: 720, inHouse: 1868, combined: 2588 },
+            '3': { contractors: 810, inHouse: 2227, combined: 3037 },
+            '4': { contractors: 360, inHouse: 1687, combined: 2047 },
+            subtotal: { contractors: 3600, inHouse: 7830, combined: 11430 }
           },
           '1933': {
-            '1': { contractors: 1420, state: 4758, combined: 6178 },
-            '2': { contractors: 980, state: 3736, combined: 4716 },
-            '3': { contractors: 795, state: 7049, combined: 7844 },
-            '4': { contractors: 525, state: 3137, combined: 3662 },
-            subtotal: { contractors: 3720, state: 18680, combined: 22400 }
+            '1': { contractors: 1420, inHouse: 4758, combined: 6178 },
+            '2': { contractors: 980, inHouse: 3736, combined: 4716 },
+            '3': { contractors: 795, inHouse: 7049, combined: 7844 },
+            '4': { contractors: 525, inHouse: 3137, combined: 3662 },
+            subtotal: { contractors: 3720, inHouse: 18680, combined: 22400 }
           },
-          total: { contractors: 10920, state: 33305, combined: 44225 }
+          total: { contractors: 10920, inHouse: 33305, combined: 44225 }
         },
         mmis: {
           '1931': {
-            '1': { contractors: 120, state: 45, combined: 165 },
-            '2': { contractors: 90, state: 90, combined: 180 },
-            '3': { contractors: 60, state: 135, combined: 195 },
-            '4': { contractors: 30, state: 180, combined: 210 },
-            subtotal: { contractors: 300, state: 450, combined: 750 }
+            '1': { contractors: 120, inHouse: 45, combined: 165 },
+            '2': { contractors: 90, inHouse: 90, combined: 180 },
+            '3': { contractors: 60, inHouse: 135, combined: 195 },
+            '4': { contractors: 30, inHouse: 180, combined: 210 },
+            subtotal: { contractors: 300, inHouse: 450, combined: 750 }
           },
           '1932': {
-            '1': { contractors: 200, state: 300, combined: 500 },
-            '2': { contractors: 100, state: 200, combined: 300 },
-            '3': { contractors: 150, state: 400, combined: 550 },
-            '4': { contractors: 150, state: 100, combined: 250 },
-            subtotal: { contractors: 600, state: 1000, combined: 1600 }
+            '1': { contractors: 200, inHouse: 300, combined: 500 },
+            '2': { contractors: 100, inHouse: 200, combined: 300 },
+            '3': { contractors: 150, inHouse: 400, combined: 550 },
+            '4': { contractors: 150, inHouse: 100, combined: 250 },
+            subtotal: { contractors: 600, inHouse: 1000, combined: 1600 }
           },
           '1933': {
-            '1': { contractors: 450, state: 248, combined: 698 },
-            '2': { contractors: 180, state: 248, combined: 428 },
-            '3': { contractors: 180, state: 247, combined: 427 },
-            '4': { contractors: 90, state: 247, combined: 337 },
-            subtotal: { contractors: 900, state: 990, combined: 1890 }
+            '1': { contractors: 450, inHouse: 248, combined: 698 },
+            '2': { contractors: 180, inHouse: 248, combined: 428 },
+            '3': { contractors: 180, inHouse: 247, combined: 427 },
+            '4': { contractors: 90, inHouse: 247, combined: 337 },
+            subtotal: { contractors: 900, inHouse: 990, combined: 1890 }
           },
-          total: { contractors: 1800, state: 2440, combined: 4240 }
+          total: { contractors: 1800, inHouse: 2440, combined: 4240 }
         }
       },
       hie: {

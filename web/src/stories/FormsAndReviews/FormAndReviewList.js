@@ -41,8 +41,9 @@ const Story = () => {
       { initialCollapsed: false, key: `i${Math.round(Math.random() * 10000)}` }
     ]);
   };
-  const remove = key => {
-    setList(list.filter(item => item.key !== key));
+  const remove = index => {
+    list.splice(index, 1);
+    setList(list);
   };
 
   return (

@@ -12,12 +12,8 @@ import FormAndReviewList from '../../components/FormAndReviewList';
 import { StatePersonForm, StatePersonReview } from './StatePerson';
 
 const StatePersonnel = ({ activityIndex, add, personnel, remove }) => {
-  const handleDelete = useCallback(key => {
-    personnel.forEach(({ key: personnelKey }, i) => {
-      if (personnelKey === key) {
-        remove(activityIndex, i);
-      }
-    });
+  const handleDelete = useCallback(index => {
+    remove(activityIndex, index);
   });
 
   const handleAdd = useCallback(() => add(activityIndex));
@@ -55,9 +51,6 @@ const mapDispatchToProps = {
   remove: removePersonnel
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StatePersonnel);
+export default connect(mapStateToProps, mapDispatchToProps)(StatePersonnel);
 
 export { StatePersonnel as plain, mapStateToProps, mapDispatchToProps };
