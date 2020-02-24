@@ -75,12 +75,6 @@ workflows:
           path: api
           requires:
             - install dependencies
-      - backend lint:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - install dependencies
       - backend unit test:
           filters:
             tags:
@@ -98,7 +92,6 @@ workflows:
             - store artifacts staging
             - backend api endpoint test
             - backend dependency vulnerability scan
-            - backend lint
             - backend unit test
       - backend deploy:
           name: backend deploy prod
@@ -112,7 +105,6 @@ workflows:
             - store artifacts prod
             - backend api endpoint test
             - backend dependency vulnerability scan
-            - backend lint
             - backend unit test
 
       # frontend jobs
@@ -122,12 +114,6 @@ workflows:
               only: /.*/
           name: frontend dependency vulnerability scan
           path: web
-          requires:
-            - install dependencies
-      - frontend lint:
-          filters:
-            tags:
-              only: /.*/
           requires:
             - install dependencies
       - frontend test:
@@ -175,7 +161,6 @@ workflows:
           requires:
             - frontend build staging
             - frontend dependency vulnerability scan
-            - frontend lint
             - frontend test
             - yaml test
       - frontend deploy:
@@ -189,7 +174,6 @@ workflows:
           requires:
             - frontend build prod
             - frontend dependency vulnerability scan
-            - frontend lint
             - frontend test
             - yaml test
 
@@ -317,19 +301,6 @@ jobs:
             nvm alias default v10
             ./endpoint-tests/endpoint.sh
 
-  # Lints the backend code.
-  backend lint:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: run linter
-          working_directory: ~/project/api
-          command: npm run lint
-
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
     docker:
@@ -372,19 +343,6 @@ jobs:
           root: ~/project
           paths:
             - web/dist
-
-  # Lints the frontend code.
-  frontend lint:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: run linter
-          working_directory: ~/project/web
-          command: npm run lint
 
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
