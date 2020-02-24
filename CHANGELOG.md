@@ -14,6 +14,7 @@ Anticipated release: February 18, 2020
 - Fixed a bug where APD Key Personnel weren't being counted as state personnel for the Program Administration activity for some budget calculations. - ([#2037])
 - Updated the text describing in-house cost categories to be more clear ([#1936])
 - Fixed a bug where autosave happened too often, causing performance issues, and potentially inconsistent saved data.
+- Fixed a bug where the FFY subtotal for each cost category in the quarterly FFP table was based on the percent of funding requested, meaning it could be different from the actual activity total if the user requests more or less than 100%. ([#2056])
 - Fixed a bug that prevented creating new activities.
 
 #### ⚙️ Behind the scenes
@@ -37,4 +38,5 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2018]: https://github.com/18F/cms-hitech-apd/issues/2018
 [#2010]: https://github.com/18F/cms-hitech-apd/issues/2010
 [#2044]: https://github.com/18F/cms-hitech-apd/issues/2044
+[#2056]: https://github.com/18F/cms-hitech-apd/issues/2056
 [#2021]: https://github.com/18F/cms-hitech-apd/issues/2021

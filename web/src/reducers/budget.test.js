@@ -199,6 +199,7 @@ describe('budget reducer', () => {
                   '4': { state: 25, contractors: 10 }
                 },
                 '1933': {
+                  // Contractor percent is 120%
                   '1': { state: 30, contractors: 40 },
                   '2': { state: 20, contractors: 20 },
                   '3': { state: 40, contractors: 30 },
@@ -240,6 +241,7 @@ describe('budget reducer', () => {
                   '4': { state: 40, contractors: 10 }
                 },
                 '1932': {
+                  // Contractor percent is 120%
                   '1': { state: 30, contractors: 40 },
                   '2': { state: 20, contractors: 20 },
                   '3': { state: 40, contractors: 30 },
@@ -650,11 +652,17 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 inHouse: { dollars: 14450, percent: 1 },
-                contractors: { dollars: 1020, percent: 1.2 },
-                combined: { dollars: 15470, percent: 0 }
+                // The contractor percent for FFY 1933 for activity 3 is 120%,
+                // but the totals should NOT be affected by the percents. That
+                // is, these subtotals below should *NOT* sum from the values
+                // above.
+                contractors: { dollars: 850, percent: 1.2 },
+                combined: { dollars: 15300, percent: 0 }
               }
             },
-            total: { inHouse: 19535, contractors: 2820, combined: 22355 }
+            // Because of the 120% thing above, these totals also won't
+            // sum up from the previous values.
+            total: { inHouse: 19535, contractors: 2650, combined: 22185 }
           }
         },
         '4': {
@@ -735,8 +743,12 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 inHouse: { dollars: 1000, percent: 1 },
-                contractors: { dollars: 600, percent: 1.2 },
-                combined: { dollars: 1600, percent: 0 }
+                // The contractor percent for FFY 1932 for activity 4 is 120%,
+                // but the totals should NOT be affected by the percents. That
+                // is, these subtotals below should *NOT* sum from the values
+                // above.
+                contractors: { dollars: 500, percent: 1.2 },
+                combined: { dollars: 1500, percent: 0 }
               }
             },
             '1933': {
@@ -766,7 +778,9 @@ describe('budget reducer', () => {
                 combined: { dollars: 1890, percent: 0 }
               }
             },
-            total: { inHouse: 2440, contractors: 1800, combined: 4240 }
+            // Because of the 120% thing above, these totals also won't
+            // sum up from the previous values.
+            total: { inHouse: 2440, contractors: 1700, combined: 4140 }
           }
         },
         '5': {
@@ -893,9 +907,15 @@ describe('budget reducer', () => {
             '2': { contractors: 980, inHouse: 3736, combined: 4716 },
             '3': { contractors: 795, inHouse: 7049, combined: 7844 },
             '4': { contractors: 525, inHouse: 3137, combined: 3662 },
-            subtotal: { contractors: 3720, inHouse: 18680, combined: 22400 }
+            // The requested quarterly percents is 120%, so the above will not
+            // sum up to the below - the numbers below are from the activity
+            // totals, not simple sums of the quarterly FFP.
+            subtotal: { contractors: 3550, inHouse: 18680, combined: 22230 }
           },
-          total: { contractors: 10920, inHouse: 33305, combined: 44225 }
+          // And because one of the FFYs has quarterly percents that aren't
+          // exactly 100%, the total here also doesn't sum from the pieces
+          // of each quarter - but they do sum from the FFY subtotals.
+          total: { contractors: 10750, inHouse: 33305, combined: 44055 }
         },
         mmis: {
           '1931': {
@@ -910,7 +930,10 @@ describe('budget reducer', () => {
             '2': { contractors: 100, inHouse: 200, combined: 300 },
             '3': { contractors: 150, inHouse: 400, combined: 550 },
             '4': { contractors: 150, inHouse: 100, combined: 250 },
-            subtotal: { contractors: 600, inHouse: 1000, combined: 1600 }
+            // The requested quarterly percents is 120%, so the above will not
+            // sum up to the below - the numbers below are from the activity
+            // totals, not simple sums of the quarterly FFP.
+            subtotal: { contractors: 500, inHouse: 1000, combined: 1500 }
           },
           '1933': {
             '1': { contractors: 450, inHouse: 248, combined: 698 },
@@ -919,7 +942,10 @@ describe('budget reducer', () => {
             '4': { contractors: 90, inHouse: 247, combined: 337 },
             subtotal: { contractors: 900, inHouse: 990, combined: 1890 }
           },
-          total: { contractors: 1800, inHouse: 2440, combined: 4240 }
+          // And because one of the FFYs has quarterly percents that aren't
+          // exactly 100%, the total here also doesn't sum from the pieces
+          // of each quarter - but they do sum from the FFY subtotals.
+          total: { contractors: 1700, inHouse: 2440, combined: 4140 }
         }
       },
       hie: {
