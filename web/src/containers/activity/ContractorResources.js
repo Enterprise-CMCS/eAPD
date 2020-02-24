@@ -28,12 +28,8 @@ const ContractorResources = ({
     addContractor(activityIndex);
   };
 
-  const handleDelete = key => {
-    contractors.forEach(({ key: contractorKey }, i) => {
-      if (contractorKey === key) {
-        removeContractor(activityIndex, i);
-      }
-    });
+  const handleDelete = index => {
+    removeContractor(activityIndex, index);
   };
 
   return (

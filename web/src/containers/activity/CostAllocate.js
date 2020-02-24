@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CostAllocateFFP from './CostAllocateFFP';
 import {
   setCostAllocationMethodology,
   setCostAllocationOtherFunding
@@ -58,8 +57,6 @@ const CostAllocate = ({
           editorClassName="rte-textarea-l"
         />
       </div>
-      <hr />
-      <CostAllocateFFP aKey={activity.key} activityIndex={activityIndex} />
     </Subsection>
   );
 };
@@ -83,7 +80,4 @@ export const mapDispatchToProps = {
 };
 
 export { CostAllocate as CostAllocateRaw };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CostAllocate);
+export default connect(mapStateToProps, mapDispatchToProps)(CostAllocate);

@@ -279,6 +279,6 @@ describe('FormAndReviewList component', () => {
       .first()
       .prop('onDeleteClick')();
 
-    expect(onDeleteClick).toHaveBeenCalledWith('item key');
+    expect(onDeleteClick).toHaveBeenCalledWith(0);
   });
 });

@@ -15,16 +15,11 @@ const NameAndFundingSourceForm = ({
   setName
 }) => {
   const changeName = useCallback(({ target: { value } }) => {
-    // These forms are built from the list of editable activities, which is
-    // all activities except the first one. So the local list index starts at
-    // 0, but it corresponds to index 1 in the full list. To handle that, just
-    // increment the local index by one when updating the activity.
-    setName(index + 1, value);
+    setName(index, value);
   });
 
   const changeFundingSource = useCallback(({ target: { value } }) => {
-    // Same thing here.
-    setFundingSource(index + 1, value);
+    setFundingSource(index, value);
   });
 
   return (

@@ -31,22 +31,12 @@ class Sidebar extends Component {
       onClick: (evt, id) => this.handleSelectClick(id)
     }));
 
-    activityItems.splice(
-      0,
-      0,
-      {
-        id: 'activities-overview',
-        url: '#activities',
-        label: 'Overview',
-        onClick: (evt, id) => this.handleSelectClick(id)
-      },
-      {
-        id: 'activities-list',
-        url: '#activities-list',
-        label: t('activities.list.title'),
-        onClick: (evt, id) => this.handleSelectClick(id)
-      }
-    );
+    activityItems.splice(0, 0, {
+      id: 'activities-overview',
+      url: '#activities',
+      label: 'Overview',
+      onClick: (evt, id) => this.handleSelectClick(id)
+    });
 
     return activityItems;
   };

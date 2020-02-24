@@ -45,7 +45,7 @@ describe('the Milestones component', () => {
     });
 
     it('handles removing a milestone', () => {
-      list.prop('onDeleteClick')('milestone 1');
+      list.prop('onDeleteClick')(0);
 
       expect(props.remove).toHaveBeenCalledWith(7, 0);
     });
