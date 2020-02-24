@@ -7,6 +7,7 @@ Anticipated release: February 18, 2020
 - Updates the cost allocation section to make it clearer how the various numbers are related to each other, and updates the help text describing "other funding." ([#1935], [#1992])
 - The executive summary for activities now includes activity costs per federal fiscal year ([#1927])
 - Activity state personnel now show calculated total cost instead of just rate and FTEs. ([#2013])
+- Moves the activity FFP section into a separate tab ([#2010])
 
 #### 🐛 Bugs fixed
 
@@ -16,6 +17,10 @@ Anticipated release: February 18, 2020
 - Fixed a bug that prevented creating new activities.
 
 #### ⚙️ Behind the scenes
+
+- Made the code for removing list items a bit simpler ([#2014])
+- Change how uploaded files get IDs ([#2018])
+- Cleaned up some inconsistencies in the way things were named internally ([#2044])
 
 # Previous releases
 
@@ -27,3 +32,7 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2037]: https://github.com/18F/cms-hitech-apd/issues/2037
 [#1936]: https://github.com/18F/cms-hitech-apd/issues/1936
 [#2013]: https://github.com/18F/cms-hitech-apd/issues/2013
+[#2014]: https://github.com/18F/cms-hitech-apd/issues/2014
+[#2018]: https://github.com/18F/cms-hitech-apd/issues/2018
+[#2010]: https://github.com/18F/cms-hitech-apd/issues/2010
+[#2044]: https://github.com/18F/cms-hitech-apd/issues/2044

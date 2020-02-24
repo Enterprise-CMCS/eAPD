@@ -9,59 +9,12 @@ exports[`the Activities component renders correctly 1`] = `
     isNumbered={true}
     resource="activities"
   >
-    <Connect(ConnectedWaypoint)
-      id="activities-list"
-    />
-    <Subsection
-      headerClassName={null}
-      id="activities-list"
-      nested={false}
-      open={true}
-      resource="activities.list"
+    <h3
+      className="subsection--title ds-h3"
     >
-      <NameAndFundingSourceReview
-        disableExpand={true}
-        expand={[Function]}
-        index={-1}
-        item={
-          Object {
-            "first": "activity",
-            "key": "key1",
-          }
-        }
-      />
-      <FormAndReviewList
-        addButtonText="Add another activity"
-        allowDeleteAll={true}
-        className="ds-u-border-bottom--0"
-        collapsed={[Function]}
-        expanded={
-          Object {
-            "$$typeof": Symbol(react.memo),
-            "WrappedComponent": [Function],
-            "compare": null,
-            "displayName": "Connect(NameAndFundingSourceForm)",
-            "type": [Function],
-          }
-        }
-        extraItemButtons={Array []}
-        list={
-          Array [
-            Object {
-              "key": "key2",
-              "second": "activity",
-            },
-            Object {
-              "key": "key3",
-              "third": "activity",
-            },
-          ]
-        }
-        noDataMessage={false}
-        onAddClick={[Function]}
-        onDeleteClick={[Function]}
-      />
-    </Subsection>
+      3
+       program activities
+    </h3>
     <Connect(ConnectedWaypoint)
       id="key1"
       key="key1"
@@ -86,6 +39,13 @@ exports[`the Activities component renders correctly 1`] = `
         activityIndex={2}
       />
     </Connect(ConnectedWaypoint)>
+    <Button
+      className="ds-u-margin-top--4"
+      onClick={[Function]}
+      type="button"
+    >
+      Add another activity
+    </Button>
   </Section>
 </Connect(ConnectedWaypoint)>
 `;

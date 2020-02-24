@@ -82,12 +82,6 @@ exports[`Sidebar component leaves off the state image for states we don't have i
               "url": "#activities",
             },
             Object {
-              "id": "activities-list",
-              "label": "Activity List",
-              "onClick": [Function],
-              "url": "#activities-list",
-            },
-            Object {
               "id": "key 1",
               "label": "Activity 1",
               "onClick": [Function],
@@ -270,12 +264,6 @@ exports[`Sidebar component renders correctly 1`] = `
               "label": "Overview",
               "onClick": [Function],
               "url": "#activities",
-            },
-            Object {
-              "id": "activities-list",
-              "label": "Activity List",
-              "onClick": [Function],
-              "url": "#activities-list",
             },
             Object {
               "id": "key 1",
