@@ -93,22 +93,22 @@ describe('budget reducer', () => {
               ],
               quarterlyFFP: {
                 '1931': {
-                  '1': { state: 30, contractors: 40 },
-                  '2': { state: 20, contractors: 20 },
-                  '3': { state: 40, contractors: 30 },
-                  '4': { state: 10, contractors: 10 }
+                  '1': { inHouse: 30, contractors: 40 },
+                  '2': { inHouse: 20, contractors: 20 },
+                  '3': { inHouse: 40, contractors: 30 },
+                  '4': { inHouse: 10, contractors: 10 }
                 },
                 '1932': {
-                  '1': { state: 25, contractors: 50 },
-                  '2': { state: 25, contractors: 20 },
-                  '3': { state: 25, contractors: 20 },
-                  '4': { state: 25, contractors: 10 }
+                  '1': { inHouse: 25, contractors: 50 },
+                  '2': { inHouse: 25, contractors: 20 },
+                  '3': { inHouse: 25, contractors: 20 },
+                  '4': { inHouse: 25, contractors: 10 }
                 },
                 '1933': {
-                  '1': { state: 10, contractors: 40 },
-                  '2': { state: 20, contractors: 30 },
-                  '3': { state: 30, contractors: 20 },
-                  '4': { state: 40, contractors: 10 }
+                  '1': { inHouse: 10, contractors: 40 },
+                  '2': { inHouse: 20, contractors: 30 },
+                  '3': { inHouse: 30, contractors: 20 },
+                  '4': { inHouse: 40, contractors: 10 }
                 }
               }
             },
@@ -140,22 +140,22 @@ describe('budget reducer', () => {
               ],
               quarterlyFFP: {
                 '1931': {
-                  '1': { state: 25, contractors: 50 },
-                  '2': { state: 25, contractors: 20 },
-                  '3': { state: 25, contractors: 20 },
-                  '4': { state: 25, contractors: 10 }
+                  '1': { inHouse: 25, contractors: 50 },
+                  '2': { inHouse: 25, contractors: 20 },
+                  '3': { inHouse: 25, contractors: 20 },
+                  '4': { inHouse: 25, contractors: 10 }
                 },
                 '1932': {
-                  '1': { state: 30, contractors: 40 },
-                  '2': { state: 20, contractors: 20 },
-                  '3': { state: 40, contractors: 30 },
-                  '4': { state: 10, contractors: 10 }
+                  '1': { inHouse: 30, contractors: 40 },
+                  '2': { inHouse: 20, contractors: 20 },
+                  '3': { inHouse: 40, contractors: 30 },
+                  '4': { inHouse: 10, contractors: 10 }
                 },
                 '1933': {
-                  '1': { state: 10, contractors: 40 },
-                  '2': { state: 20, contractors: 30 },
-                  '3': { state: 30, contractors: 20 },
-                  '4': { state: 40, contractors: 10 }
+                  '1': { inHouse: 10, contractors: 40 },
+                  '2': { inHouse: 20, contractors: 30 },
+                  '3': { inHouse: 30, contractors: 20 },
+                  '4': { inHouse: 40, contractors: 10 }
                 }
               }
             },
@@ -187,23 +187,23 @@ describe('budget reducer', () => {
               ],
               quarterlyFFP: {
                 '1931': {
-                  '1': { state: 10, contractors: 40 },
-                  '2': { state: 20, contractors: 30 },
-                  '3': { state: 30, contractors: 20 },
-                  '4': { state: 40, contractors: 10 }
+                  '1': { inHouse: 10, contractors: 40 },
+                  '2': { inHouse: 20, contractors: 30 },
+                  '3': { inHouse: 30, contractors: 20 },
+                  '4': { inHouse: 40, contractors: 10 }
                 },
                 '1932': {
-                  '1': { state: 25, contractors: 50 },
-                  '2': { state: 25, contractors: 20 },
-                  '3': { state: 25, contractors: 20 },
-                  '4': { state: 25, contractors: 10 }
+                  '1': { inHouse: 25, contractors: 50 },
+                  '2': { inHouse: 25, contractors: 20 },
+                  '3': { inHouse: 25, contractors: 20 },
+                  '4': { inHouse: 25, contractors: 10 }
                 },
                 '1933': {
                   // Contractor percent is 120%
-                  '1': { state: 30, contractors: 40 },
-                  '2': { state: 20, contractors: 20 },
-                  '3': { state: 40, contractors: 30 },
-                  '4': { state: 10, contractors: 30 }
+                  '1': { inHouse: 30, contractors: 40 },
+                  '2': { inHouse: 20, contractors: 20 },
+                  '3': { inHouse: 40, contractors: 30 },
+                  '4': { inHouse: 10, contractors: 30 }
                 }
               }
             },
@@ -235,23 +235,23 @@ describe('budget reducer', () => {
               ],
               quarterlyFFP: {
                 '1931': {
-                  '1': { state: 10, contractors: 40 },
-                  '2': { state: 20, contractors: 30 },
-                  '3': { state: 30, contractors: 20 },
-                  '4': { state: 40, contractors: 10 }
+                  '1': { inHouse: 10, contractors: 40 },
+                  '2': { inHouse: 20, contractors: 30 },
+                  '3': { inHouse: 30, contractors: 20 },
+                  '4': { inHouse: 40, contractors: 10 }
                 },
                 '1932': {
                   // Contractor percent is 120%
-                  '1': { state: 30, contractors: 40 },
-                  '2': { state: 20, contractors: 20 },
-                  '3': { state: 40, contractors: 30 },
-                  '4': { state: 10, contractors: 30 }
+                  '1': { inHouse: 30, contractors: 40 },
+                  '2': { inHouse: 20, contractors: 20 },
+                  '3': { inHouse: 40, contractors: 30 },
+                  '4': { inHouse: 10, contractors: 30 }
                 },
                 '1933': {
-                  '1': { state: 25, contractors: 50 },
-                  '2': { state: 25, contractors: 20 },
-                  '3': { state: 25, contractors: 20 },
-                  '4': { state: 25, contractors: 10 }
+                  '1': { inHouse: 25, contractors: 50 },
+                  '2': { inHouse: 25, contractors: 20 },
+                  '3': { inHouse: 25, contractors: 20 },
+                  '4': { inHouse: 25, contractors: 10 }
                 }
               }
             },
@@ -284,22 +284,22 @@ describe('budget reducer', () => {
               ],
               quarterlyFFP: {
                 '1931': {
-                  '1': { state: 0, contractors: 0 },
-                  '2': { state: 0, contractors: 0 },
-                  '3': { state: 0, contractors: 0 },
-                  '4': { state: 0, contractors: 0 }
+                  '1': { inHouse: 0, contractors: 0 },
+                  '2': { inHouse: 0, contractors: 0 },
+                  '3': { inHouse: 0, contractors: 0 },
+                  '4': { inHouse: 0, contractors: 0 }
                 },
                 '1932': {
-                  '1': { state: 0, contractors: 0 },
-                  '2': { state: 0, contractors: 0 },
-                  '3': { state: 0, contractors: 0 },
-                  '4': { state: 0, contractors: 0 }
+                  '1': { inHouse: 0, contractors: 0 },
+                  '2': { inHouse: 0, contractors: 0 },
+                  '3': { inHouse: 0, contractors: 0 },
+                  '4': { inHouse: 0, contractors: 0 }
                 },
                 '1933': {
-                  '1': { state: 0, contractors: 0 },
-                  '2': { state: 0, contractors: 0 },
-                  '3': { state: 0, contractors: 0 },
-                  '4': { state: 0, contractors: 0 }
+                  '1': { inHouse: 0, contractors: 0 },
+                  '2': { inHouse: 0, contractors: 0 },
+                  '3': { inHouse: 0, contractors: 0 },
+                  '4': { inHouse: 0, contractors: 0 }
                 }
               }
             }

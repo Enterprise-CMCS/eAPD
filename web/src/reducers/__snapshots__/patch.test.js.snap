@@ -93,22 +93,22 @@ Array [
       "1": Object {
         "combined": 25,
         "contractors": 25,
-        "state": 25,
+        "inHouse": 25,
       },
       "2": Object {
         "combined": 25,
         "contractors": 25,
-        "state": 25,
+        "inHouse": 25,
       },
       "3": Object {
         "combined": 25,
         "contractors": 25,
-        "state": 25,
+        "inHouse": 25,
       },
       "4": Object {
         "combined": 25,
         "contractors": 25,
-        "state": 25,
+        "inHouse": 25,
       },
     },
   },

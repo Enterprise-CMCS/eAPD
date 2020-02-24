@@ -149,10 +149,10 @@ describe('activities reducer helpers', () => {
       },
       quarterlyFFP: {
         '2020': {
-          '1': { state: 25, contractors: 25, combined: 25 },
-          '2': { state: 25, contractors: 25, combined: 25 },
-          '3': { state: 25, contractors: 25, combined: 25 },
-          '4': { state: 25, contractors: 25, combined: 25 }
+          '1': { inHouse: 25, contractors: 25, combined: 25 },
+          '2': { inHouse: 25, contractors: 25, combined: 25 },
+          '3': { inHouse: 25, contractors: 25, combined: 25 },
+          '4': { inHouse: 25, contractors: 25, combined: 25 }
         }
       },
       years: ['2020'],
