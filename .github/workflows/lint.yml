@@ -6,6 +6,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+      - continue-on-error: true
       - uses: actions/checkout@v1
       - uses: 18f/github-action-eslint@1.0.0
         with:
