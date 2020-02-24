@@ -3,20 +3,16 @@ name: lint
 on: [push]
 
 jobs:
-  frontend-lint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: 18f/github-action-eslint@1.0.1
+      - uses: 18f/github-action-eslint@1.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           path: web
           files: "src/**/*.js"
-  backend-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: 18f/github-action-eslint@1.0.1
+      - uses:  18f/github-action-eslint@1.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           path: api
