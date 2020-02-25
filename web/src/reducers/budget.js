@@ -116,7 +116,7 @@ const buildBudget = incomingBigState => {
   const addCostToTotals = (fundingSource, year, prop, cost) => {
     // New activities don't have a funding program by default, so in that case,
     // we can't capture program-specific funding numbers.
-    if (fundingSource.length > 0) {
+    if (fundingSource) {
       // Add this value to the running budget totals, as appropriate.
       newState[fundingSource][prop][year].total += cost;
       newState[fundingSource][prop].total.total += cost;
@@ -419,7 +419,7 @@ const buildBudget = incomingBigState => {
 
       // New activities don't have a funding program by default, so don't
       // the program-specific totals for those activities.
-      if (fundingSource.length) {
+      if (fundingSource) {
         updateCosts(fundingSource);
       }
 
