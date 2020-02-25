@@ -116,8 +116,10 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       {
         id: 'activities-list',
         // url: '#activities-list',
+        url: '#',
         label: t('activities.list.title'),
-        onClick() {
+        onClick(e) {
+          e.stopPropagation();
           jumpAction('activities-list');
           history.push('/apd/activities');
         }
@@ -130,15 +132,19 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
 
   const activityItems = createActivityItems();
 
+  const linkClick = url => e => {
+    e.stopPropagation();
+    jumpAction(url);
+    history.push(`/apd/${url}`);
+  };
+
   const links = [
     {
-      id: 'apd-state-profile',
+      id: 'state-profile',
+      url: '#',
       label: t('apd.stateProfile.title'),
       defaultCollapsed: true,
-      onClick() {
-        jumpAction('apd-state-profile');
-        history.push('/apd/state-profile');
-      }
+      onClick: linkClick('state-profile')
       // items: [
       //   {
       //     id: 'apd-state-profile-overview',
@@ -161,22 +167,18 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       // ]
     },
     {
-      id: 'apd-summary',
+      id: 'program-summary',
       label: t('apd.title'),
+      url: '#',
       // onClick: (evt, id) => handleSelectClick(id)
-      onClick() {
-        jumpAction('apd-summary');
-        history.push('/apd/program-summary');
-      }
+      onClick: linkClick('program-summary')
     },
     {
-      id: 'prev-activities',
+      id: 'previous-activities',
       label: t('previousActivities.title'),
+      url: '#',
       defaultCollapsed: true,
-      onClick() {
-        jumpAction('prev-activities');
-        history.push('/apd/previous-activities');
-      }
+      onClick: linkClick('previous-activities')
       // items: [
       //   {
       //     id: 'prev-activities-overview',
@@ -207,21 +209,17 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
     {
       id: 'schedule-summary',
       // url: '#schedule-summary',
+      url: '#',
       label: t('scheduleSummary.title'),
       // onClick: (evt, id) => handleSelectClick(id)
-      onClick() {
-        jumpAction('schedule-summary');
-        history.push('/apd/schedule-summary');
-      }
+      onClick: linkClick('schedule-summary')
     },
     {
-      id: 'budget',
+      id: 'proposed-budget',
       label: t('proposedBudget.title'),
+      url: '#',
       defaultCollapsed: true,
-      onClick() {
-        jumpAction('budget');
-        history.push('/apd/proposed-budget');
-      }
+      onClick: linkClick('proposed-budget')
       // items: [
       //   {
       //     id: 'budget-overview',
@@ -250,23 +248,19 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       // ]
     },
     {
-      id: 'assurances-compliance',
+      id: 'assurances-and-compliance',
       // url: '#assurances-compliance',
+      url: '#',
       label: t('assurancesAndCompliance.title'),
       // onClick: (evt, id) => handleSelectClick(id)
-      onClick() {
-        jumpAction('assurances-compliance');
-        history.push('/apd/assurances-and-compliance');
-      }
+      onClick: linkClick('assurances-and-compliance')
     },
     {
       id: 'executive-summary',
       label: t('executiveSummary.title'),
+      url: '#',
       defaultCollapsed: true,
-      onClick() {
-        jumpAction('executive-summary');
-        history.push('/apd/executive-summary');
-      }
+      onClick: linkClick('executive-summary')
       // items: [
       //   {
       //     id: 'executive-summary-overview',
@@ -289,14 +283,12 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       // ]
     },
     {
-      id: 'export-and-submit',
+      id: 'export',
       // url: '#export-and-submit',
+      url: '#',
       label: t('exportAndSubmit.title'),
       // onClick: (evt, id) => handleSelectClick(id)
-      onClick() {
-        jumpAction('export-and-submit');
-        history.push('/apd/export');
-      }
+      onClick: linkClick('export')
     }
   ];
 
