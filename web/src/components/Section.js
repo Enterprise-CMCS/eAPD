@@ -20,8 +20,9 @@ const Section = ({ children, id, isNumbered, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
+  // <section id={id} className={isNumbered ? 'numbered-section' : ''}>
   return (
-    <section id={id} className={isNumbered ? 'numbered-section' : ''}>
+    <section id={id}>
       <h2 className="ds-h2">{title}</h2>
       <span className="ds-text--lead">{helptext}</span>
       {children}
