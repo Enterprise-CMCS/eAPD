@@ -99,6 +99,16 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
                   jumpAction(`${a.key}-cost-allocation`);
                   history.push(`/apd/activity/${i}/cost-allocation`);
                 }
+              },
+              {
+                id: `${a.key}-ffp`,
+                url: '#',
+                label: 'FFP and budget',
+                onClick: e => {
+                  e.stopPropagation();
+                  jumpAction(`${a.key}-ffp`);
+                  history.push(`/apd/activity/${i}/ffp`);
+                }
               }
             ]
           : null

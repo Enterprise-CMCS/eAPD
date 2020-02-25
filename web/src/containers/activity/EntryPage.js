@@ -4,6 +4,7 @@ import { Switch, Route, useParams, useRouteMatch } from 'react-router-dom';
 
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
+import FFP from './CostAllocateFFP';
 import Costs from './Costs';
 import Milestones from './Milestones';
 import Overview from './Overview';
@@ -39,6 +40,9 @@ const EntryPage = ({ activityNames }) => {
         </Route>
         <Route path={`${path}/cost-allocation`}>
           <CostAllocate activityIndex={activityIndex} />
+        </Route>
+        <Route path={`${path}/ffp`}>
+          <FFP activityIndex={activityIndex} />
         </Route>
         <Route>
           <Overview activityIndex={activityIndex} />
