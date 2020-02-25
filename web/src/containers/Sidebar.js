@@ -118,6 +118,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
         // url: '#activities-list',
         label: t('activities.list.title'),
         onClick() {
+          jumpAction('activities-list');
           history.push('/apd/activities');
         }
         // onClick: (evt, id) => handleSelectClick(id)
@@ -135,6 +136,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       label: t('apd.stateProfile.title'),
       defaultCollapsed: true,
       onClick() {
+        jumpAction('apd-state-profile');
         history.push('/apd/state-profile');
       }
       // items: [
@@ -163,6 +165,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       label: t('apd.title'),
       // onClick: (evt, id) => handleSelectClick(id)
       onClick() {
+        jumpAction('apd-summary');
         history.push('/apd/program-summary');
       }
     },
@@ -171,6 +174,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       label: t('previousActivities.title'),
       defaultCollapsed: true,
       onClick() {
+        jumpAction('prev-activities');
         history.push('/apd/previous-activities');
       }
       // items: [
@@ -206,6 +210,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       label: t('scheduleSummary.title'),
       // onClick: (evt, id) => handleSelectClick(id)
       onClick() {
+        jumpAction('schedule-summary');
         history.push('/apd/schedule-summary');
       }
     },
@@ -214,6 +219,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       label: t('proposedBudget.title'),
       defaultCollapsed: true,
       onClick() {
+        jumpAction('budget');
         history.push('/apd/proposed-budget');
       }
       // items: [
@@ -249,6 +255,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       label: t('assurancesAndCompliance.title'),
       // onClick: (evt, id) => handleSelectClick(id)
       onClick() {
+        jumpAction('assurances-compliance');
         history.push('/apd/assurances-and-compliance');
       }
     },
@@ -257,6 +264,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       label: t('executiveSummary.title'),
       defaultCollapsed: true,
       onClick() {
+        jumpAction('executive-summary');
         history.push('/apd/executive-summary');
       }
       // items: [
@@ -282,9 +290,13 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
     },
     {
       id: 'export-and-submit',
-      url: '#export-and-submit',
+      // url: '#export-and-submit',
       label: t('exportAndSubmit.title'),
-      onClick: (evt, id) => handleSelectClick(id)
+      // onClick: (evt, id) => handleSelectClick(id)
+      onClick() {
+        jumpAction('export-and-submit');
+        history.push('/apd/export');
+      }
     }
   ];
 

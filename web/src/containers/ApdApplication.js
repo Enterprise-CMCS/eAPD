@@ -99,7 +99,10 @@ const ApdApplication = ({
               <Route path={`${path}/executive-summary`}>
                 <ExecutiveSummary />
               </Route>
-              <Export />
+
+              <Route path={`${path}/export`}>
+                <Export />
+              </Route>
             </Route>
           </Switch>
         </div>
