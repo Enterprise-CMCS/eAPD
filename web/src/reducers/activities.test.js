@@ -113,7 +113,7 @@ describe('activities reducer helpers', () => {
           years: { '2020': 0 }
         }
       ],
-      fundingSource: 'HIT',
+      fundingSource: false,
       key: '--- key ---',
       name: '',
       plannedEndDate: '',
