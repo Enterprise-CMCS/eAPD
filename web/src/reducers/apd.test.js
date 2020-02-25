@@ -751,7 +751,7 @@ describe('APD reducer', () => {
                     }
                   }
                 ],
-                fundingSource: 'HIT',
+                fundingSource: false,
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
                 name: '',
