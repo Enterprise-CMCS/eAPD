@@ -44,6 +44,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
       }),
       onClick: e => {
         e.stopPropagation();
+        e.preventDefault();
         jumpAction(a.key);
         history.push(`/apd/activity/${i}`);
       },
@@ -56,6 +57,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
                 label: 'Activity overview',
                 onClick: e => {
                   e.stopPropagation();
+                  e.preventDefault();
                   jumpAction(`${a.key}-overview`);
                   history.push(`/apd/activity/${i}/overview`);
                 }
@@ -66,6 +68,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
                 label: 'Objectives and key results',
                 onClick: e => {
                   e.stopPropagation();
+                  e.preventDefault();
                   jumpAction(`${a.key}-okr`);
                   history.push(`/apd/activity/${i}/okrs`);
                 }
@@ -76,6 +79,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
                 label: 'State cost categories',
                 onClick: e => {
                   e.stopPropagation();
+                  e.preventDefault();
                   jumpAction(`${a.key}-state-costs`);
                   history.push(`/apd/activity/${i}/state-costs`);
                 }
@@ -86,6 +90,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
                 label: 'Private contractor costs',
                 onClick: e => {
                   e.stopPropagation();
+                  e.preventDefault();
                   jumpAction(`${a.key}-contractor-costs`);
                   history.push(`/apd/activity/${i}/contractor-costs`);
                 }
@@ -96,6 +101,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
                 label: 'Cost allocation',
                 onClick: e => {
                   e.stopPropagation();
+                  e.preventDefault();
                   jumpAction(`${a.key}-cost-allocation`);
                   history.push(`/apd/activity/${i}/cost-allocation`);
                 }
@@ -106,6 +112,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
                 label: 'FFP and budget',
                 onClick: e => {
                   e.stopPropagation();
+                  e.preventDefault();
                   jumpAction(`${a.key}-ffp`);
                   history.push(`/apd/activity/${i}/ffp`);
                 }
@@ -130,6 +137,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
         label: t('activities.list.title'),
         onClick(e) {
           e.stopPropagation();
+          e.preventDefault();
           jumpAction('activities-list');
           history.push('/apd/activities');
         }
@@ -144,6 +152,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
 
   const linkClick = url => e => {
     e.stopPropagation();
+    e.preventDefault();
     jumpAction(url);
     history.push(`/apd/${url}`);
   };
