@@ -2,8 +2,9 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  CostAllocateFFPRaw as CostAllocateFFP,
-  makeMapStateToProps,
+  plain as CostAllocateFFP,
+  CostSummaryRows,
+  mapStateToProps,
   mapDispatchToProps
 } from './CostAllocateFFP';
 import {
@@ -12,82 +13,128 @@ import {
 } from '../../actions/editActivity';
 
 describe('the CostAllocateFFP component', () => {
-  const state = {
-    apd: {
-      data: {
-        activities: [
-          {
-            key: 'key',
-            costAllocation: {
-              '1066': {
-                other: 10,
-                ffp: {
-                  federal: 90,
-                  state: 10
-                }
-              },
-              '1067': {
-                other: 0,
-                ffp: {
-                  federal: 10,
-                  state: 90
-                }
-              }
-            }
-          }
-        ]
-      }
-    },
-    budget: {
-      activities: {
-        key: {
-          costsByFFY: {
-            '1066': {
-              medicaidShare: 1550,
-              federal: 1430,
-              state: 120,
-              total: 1970
-            },
-            '1067': {
-              medicaidShare: 8870,
-              federal: 8770,
-              state: 100,
-              total: 9889
-            }
-          }
-        }
-      }
-    }
-  };
-
   const props = {
     activityIndex: 0,
     aKey: 'key',
-    byYearData: [
-      {
-        allocations: {
-          federal: 261,
-          state: 29
-        },
-        ffpSelectVal: '90-10',
-        total: 300,
-        medicaidShare: 290,
-        year: '1066'
+    activityName: 'activity name',
+    costAllocation: {
+      '1990': { ffp: { federal: '90', state: '10' }, other: 100 },
+      '1991': { ffp: { federal: '50', state: '50' }, other: 200 }
+    },
+    costSummary: {
+      total: {
+        federalShare: 100,
+        medicaidShare: 200,
+        otherFunding: 300,
+        stateShare: 400,
+        totalCost: 500
       },
-      {
-        allocations: {
-          federal: 300,
-          state: 2700
+      years: {
+        '1990': {
+          contractorResources: [
+            {
+              description: 'contractor 2.1',
+              totalCost: 2000,
+              unitCost: null,
+              units: null
+            },
+            {
+              description: 'contractor 2.2',
+              totalCost: 2001,
+              unitCost: 20,
+              units: '20 hours'
+            }
+          ],
+          contractorResourcesTotal: 1000,
+          federalPercent: 1001,
+          federalShare: 90,
+          keyPersonnel: [
+            {
+              description: 'key person (APD Key Personnel)',
+              totalCost: 1002,
+              unitCost: null,
+              units: '100% time'
+            }
+          ],
+          medicaidShare: 1003,
+          nonPersonnel: [
+            {
+              description: 'costly costs',
+              totalCost: 3000,
+              unitCost: null,
+              units: null
+            }
+          ],
+          nonPersonnelTotal: 1004,
+          otherFunding: 1005,
+          statePercent: 10,
+          statePersonnel: [
+            {
+              description: 'personnel role',
+              totalCost: 4000,
+              unitCost: 40,
+              units: '0.5 FTE'
+            }
+          ],
+          statePersonnelTotal: 1006,
+          stateShare: 1007,
+          totalCost: 1008
         },
-        ffpSelectVal: '10-90',
-        total: 3000,
-        medicaidShare: 3000,
-        year: '1067'
+        '1991': {
+          contractorResources: [
+            {
+              description: 'contractor 2.1',
+              totalCost: 6000,
+              unitCost: null,
+              units: null
+            },
+            {
+              description: 'contractor 2.2',
+              totalCost: 6001,
+              unitCost: 60,
+              units: '60 hours'
+            }
+          ],
+          contractorResourcesTotal: 7000,
+          federalPercent: 7001,
+          federalShare: 50,
+          keyPersonnel: [
+            {
+              description: 'key person (APD Key Personnel)',
+              totalCost: 8002,
+              unitCost: null,
+              units: '100% time'
+            }
+          ],
+          medicaidShare: 7003,
+          nonPersonnel: [
+            {
+              description: 'costly costs',
+              totalCost: 9000,
+              unitCost: null,
+              units: null
+            }
+          ],
+          nonPersonnelTotal: 7004,
+          otherFunding: 7005,
+          statePercent: 50,
+          statePersonnel: [
+            {
+              description: 'personnel role',
+              totalCost: 9000,
+              unitCost: 90,
+              units: '0.5 FTE'
+            }
+          ],
+          statePersonnelTotal: 7006,
+          stateShare: 7007,
+          totalCost: 7008
+        }
       }
-    ],
-    costAllocation: state.apd.data.activities[0].costAllocation,
+    },
     setFundingSplit: jest.fn(),
-    setOtherFunding: jest.fn()
+    setOtherFunding: jest.fn(),
+    stateName: 'test state'
   };
 
   beforeEach(() => {
@@ -95,62 +142,119 @@ describe('the CostAllocateFFP component', () => {
     props.setOtherFunding.mockClear();
   });
 
-  test('renders correctly', () => {
-    const component = shallow(<CostAllocateFFP {...props} />);
-    expect(component).toMatchSnapshot();
-  });
-
-  test('handles changes to other funding', () => {
-    const component = shallow(<CostAllocateFFP {...props} />);
-    component
-      .find('DollarField')
-      .filterWhere(n => n.props().value === 10)
-      .simulate('change', { target: { value: 150 } });
-
-    expect(props.setOtherFunding).toHaveBeenCalledWith(0, '1066', 150);
-  });
-
-  test('handles changes to cost allocation dropdown', () => {
-    const component = shallow(<CostAllocateFFP {...props} />);
-    component
-      .find('Dropdown')
-      .filterWhere(n => n.props().value === '90-10')
-      .simulate('change', { target: { value: '35-65' } });
-
-    expect(props.setFundingSplit).toHaveBeenCalledWith(0, '1066', 35, 65);
-  });
-
-  test('maps redux state to component props', () => {
-    const mapStateToProps = makeMapStateToProps();
-    expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
-      aKey: 'key',
-      byYearData: [
-        {
-          allocations: {
-            federal: 1430,
-            state: 120
-          },
-          ffpSelectVal: '90-10',
-          total: 1970,
-          medicaidShare: 1550,
-          year: '1066'
-        },
-        {
-          allocations: {
-            federal: 8770,
-            state: 100
-          },
-          ffpSelectVal: '10-90',
-          total: 9889,
-          medicaidShare: 8870,
-          year: '1067'
-        }
-      ],
-      costAllocation: state.apd.data.activities[0].costAllocation
+  describe('renders correctly', () => {
+    it('renders correctly in view-only mode', () => {
+      const component = shallow(<CostAllocateFFP {...props} isViewOnly />);
+      expect(component).toMatchSnapshot();
+    });
+    it('renders correctly in editable mode (standard)', () => {
+      const component = shallow(<CostAllocateFFP {...props} />);
+      expect(component).toMatchSnapshot();
     });
   });
 
-  test('maps dispatch actions to props', () => {
+  it('handles changes to other funding', () => {
+    const component = shallow(<CostAllocateFFP {...props} />);
+    component
+      .find('DollarField')
+      .at(0)
+      .simulate('change', { target: { value: 150 } });
+
+    expect(props.setOtherFunding).toHaveBeenCalledWith(0, '1990', 150);
+  });
+
+  it('handles changes to cost allocation dropdown', () => {
+    const component = shallow(<CostAllocateFFP {...props} />);
+    component
+      .find('Dropdown')
+      .at(1)
+      .simulate('change', { target: { value: '35-65' } });
+
+    expect(props.setFundingSplit).toHaveBeenCalledWith(0, '1991', 35, 65);
+  });
+
+  it('renders internal cost summary rows component', () => {
+    expect(
+      shallow(
+        <CostSummaryRows
+          items={[
+            {
+              // shows unit cost, units, and math symbols
+              description: 'item 1',
+              totalCost: 100,
+              unitCost: 10,
+              units: '10 items'
+            },
+            {
+              // shows none of those things
+              description: 'item 2',
+              totalCost: 200,
+              unitCost: null,
+              units: null
+            }
+          ]}
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('maps redux state to component props', () => {
+    const getActivity = jest.fn();
+    getActivity.mockReturnValue({ key: 'activity key', name: 'activity name' });
+
+    const getCostAllocation = jest.fn();
+    getCostAllocation.mockReturnValue('cost allocation');
+
+    const getCostSummary = jest.fn();
+    getCostSummary.mockReturnValue('cost summary');
+
+    const getState = jest.fn();
+    getState.mockReturnValue({ name: 'denial' });
+
+    expect(
+      mapStateToProps(
+        'my state object',
+        { activityIndex: 0 },
+        { getActivity, getCostAllocation, getCostSummary, getState }
+      )
+    ).toEqual({
+      aKey: 'activity key',
+      activityName: 'activity name',
+      costAllocation: 'cost allocation',
+      costSummary: 'cost summary',
+      stateName: 'denial'
+    });
+
+    expect(getActivity).toHaveBeenCalledWith('my state object', {
+      activityIndex: 0
+    });
+    expect(getCostAllocation).toHaveBeenCalledWith('my state object', {
+      activityIndex: 0
+    });
+    expect(getCostSummary).toHaveBeenCalledWith('my state object', {
+      activityIndex: 0
+    });
+    expect(getState).toHaveBeenCalledWith('my state object');
+
+    // Now test that it builds a default activity name if none is provided
+    getActivity.mockReturnValue({ key: 'activity key', name: '' });
+
+    expect(
+      mapStateToProps(
+        'my state object',
+        { activityIndex: 0 },
+        { getActivity, getCostAllocation, getCostSummary, getState }
+      )
+    ).toEqual({
+      aKey: 'activity key',
+      activityName: 'Activity 1',
+      costAllocation: 'cost allocation',
+      costSummary: 'cost summary',
+      stateName: 'denial'
+    });
+  });
+
+  it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
       setFundingSplit: setCostAllocationFFPFundingSplit,
       setOtherFunding: setCostAllocationFFPOtherFunding
