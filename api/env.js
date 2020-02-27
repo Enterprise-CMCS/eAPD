@@ -1,3 +1,5 @@
+// Checks the environment for necessary data, sets defaults as necessary
+
 const crypto = require('crypto');
 const dotenv = require('dotenv');
 
