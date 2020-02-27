@@ -49,6 +49,11 @@ ffp:
       contributions or donations from a third party. Other funding will be
       deducted from the total cost of the activity prior to calculating the
       Medicaid share.
+  federalStateSplitInstruction:
+    heading: Federal-State Split
+  quarterlyFFPInstruction:
+    heading: Quarterly FFP
+    detail: Specify how much of the federal share the state wants to receive for each fiscal quarter.
   labels:
     other: Other Funding Amount
     fedStateSplit: Federal-State Split
