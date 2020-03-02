@@ -6,13 +6,11 @@ summaryBudget:
   title: Summary Budget Table
   instruction:
     detail: >-
-      This table summarizes the calculations for state personnel,
-      non-personnel, and private contractor costs for this activity by FFY. The
-      table provides subtotals for each of these categories and the total
-      activity cost. The other funding amount identified in the cost allocation
-      portion of this activity is subtracted from the total activity cost to
-      calculate the total Medicaid share, the calculated Federal share by FFP
-      rate, and the remaining State share.
+      These tables summarize the calculated Medicaid Share (Total Activity Cost minus any Other Funding amounts)
+      for state personnel, non-personnel, and private contractor costs for all activities by FFY. 
+      The tables provide subtotals for each of these categories by program area with the calculated 
+      Federal share by FFP rate and the associated state share. The final table in this section
+      provides the total Medicaid cost for all activities in this APD by FFY.
 quarterlyBudget:
   title: Quarterly Federal Share
   instruction:
