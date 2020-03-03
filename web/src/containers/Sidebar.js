@@ -187,9 +187,9 @@ class Sidebar extends Component {
 
     const { activeSection } = this.props;
 
-    const hasImage = ['vi'].indexOf(place.id) < 0;
+    const hasImage = [].indexOf(place.id) < 0;
     const imgExt = ['png', 'svg'][
-      ['as', 'gu', 'mp'].indexOf(place.id) < 0 ? 1 : 0
+      ['as', 'gu', 'mp', 'vi'].indexOf(place.id) < 0 ? 1 : 0
     ];
 
     return (
