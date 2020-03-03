@@ -22,6 +22,7 @@ const {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } = require('../actions/editApd');
+const regulations = require('../util/regulations').default;
 
 describe('APD reducer', () => {
   afterAll(() => {
@@ -149,29 +150,143 @@ describe('APD reducer', () => {
     });
   });
 
-  it('should handle selecting an APD', () => {
-    expect(
-      apd(initialState, {
-        type: SELECT_APD,
-        apd: {
-          // A priest led an angry mob to the town council chambers and threw
-          // them out a window. The king literally died of shock. This was the
-          // First Defenestration of Prague.
-          created: '1419-07-30T00:00:00Z',
-          value: `hurr hurr i'm a burr`,
-          // Some nobles are tossed out a window in the Second Defenestration
-          // of Prague, kicking off the Thirty Years' War
-          updated: '1618-05-23T10:30:00Z'
-        }
-      })
-    ).toEqual({
-      ...initialState,
-      data: {
-        created: 'July 30, 1419',
+  describe('should handle selecting an APD', () => {
+    const action = {
+      type: SELECT_APD,
+      apd: {
+        activities: [
+          {
+            name: 'activity 1',
+            contractorResources: [{ name: 'contractor 1' }],
+            expenses: [{ name: 'expense 1' }],
+            objectives: [{ name: 'objective 1' }],
+            schedule: [{ name: 'schedule 1' }],
+            statePersonnel: [{ name: 'person 1' }]
+          }
+        ],
+        // A priest led an angry mob to the town council chambers and threw
+        // them out a window. The king literally died of shock. This was the
+        // First Defenestration of Prague.
+        created: '1419-07-30T00:00:00Z',
+        federalCitations: {},
+        keyPersonnel: [{ name: 'key person 1' }],
         value: `hurr hurr i'm a burr`,
-        updated: 'May 23, 1618, 10:30 AM GMT',
-        yearOptions: ['1990', '1991', '1992']
+        // Some nobles are tossed out a window in the Second Defenestration
+        // of Prague, kicking off the Thirty Years' War
+        updated: '1618-05-23T10:30:00Z'
       }
+    };
+
+    it('sets keys and creates default federal citations if none exist', () => {
+      expect(apd(initialState, action)).toEqual({
+        ...initialState,
+        data: {
+          activities: [
+            {
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              name: 'activity 1',
+              contractorResources: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'contractor 1'
+                }
+              ],
+              expenses: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'expense 1'
+                }
+              ],
+              objectives: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'objective 1'
+                }
+              ],
+              schedule: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'schedule 1'
+                }
+              ],
+              statePersonnel: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'person 1'
+                }
+              ]
+            }
+          ],
+          created: 'July 30, 1419',
+          federalCitations: regulations,
+          keyPersonnel: [
+            {
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              name: 'key person 1'
+            }
+          ],
+          value: `hurr hurr i'm a burr`,
+          updated: 'May 23, 1618, 10:30 AM GMT',
+          yearOptions: ['1990', '1991', '1992']
+        }
+      });
+    });
+
+    it('sets keys and preserves the federal citations if they are defined', () => {
+      action.apd.federalCitations = { key: 'value' };
+
+      expect(apd(initialState, action)).toEqual({
+        ...initialState,
+        data: {
+          activities: [
+            {
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              name: 'activity 1',
+              contractorResources: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'contractor 1'
+                }
+              ],
+              expenses: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'expense 1'
+                }
+              ],
+              objectives: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'objective 1'
+                }
+              ],
+              schedule: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'schedule 1'
+                }
+              ],
+              statePersonnel: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'person 1'
+                }
+              ]
+            }
+          ],
+          created: 'July 30, 1419',
+          federalCitations: { key: 'value' },
+          keyPersonnel: [
+            {
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              name: 'key person 1'
+            }
+          ],
+          value: `hurr hurr i'm a burr`,
+          updated: 'May 23, 1618, 10:30 AM GMT',
+          yearOptions: ['1990', '1991', '1992']
+        }
+      });
     });
   });
 
@@ -587,7 +702,161 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new activity objective and key result', () => {
+    it('should add a new activity', () => {
+      const state = {
+        data: {
+          activities: [],
+          years: ['1787']
+        }
+      };
+
+      expect(apd(state, { type: ADD_APD_ITEM, path: '/activities/-' })).toEqual(
+        {
+          data: {
+            activities: [
+              {
+                alternatives: '',
+                contractorResources: [
+                  {
+                    description: '',
+                    end: '',
+                    files: [],
+                    hourly: {
+                      data: {
+                        1787: { hours: '', rate: '' }
+                      },
+                      useHourly: false
+                    },
+                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                    name: '',
+                    start: '',
+                    totalCost: 0,
+                    years: {
+                      1787: 0
+                    }
+                  }
+                ],
+                costAllocation: {
+                  1787: { ffp: { federal: 90, state: 10 }, other: 0 }
+                },
+                costAllocationNarrative: { methodology: '', otherSources: '' },
+                description: '',
+                expenses: [
+                  {
+                    category: 'Hardware, software, and licensing',
+                    description: '',
+                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                    years: {
+                      1787: 0
+                    }
+                  }
+                ],
+                fundingSource: 'HIT',
+                key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                meta: { expanded: false },
+                name: '',
+                objectives: [
+                  {
+                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                    keyResults: [
+                      {
+                        key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                        keyResult: '',
+                        baseline: '',
+                        target: ''
+                      }
+                    ],
+                    objective: ''
+                  }
+                ],
+                plannedEndDate: '',
+                plannedStartDate: '',
+                quarterlyFFP: {
+                  1787: {
+                    1: { combined: 25, contractors: 25, state: 25 },
+                    2: { combined: 25, contractors: 25, state: 25 },
+                    3: { combined: 25, contractors: 25, state: 25 },
+                    4: { combined: 25, contractors: 25, state: 25 }
+                  }
+                },
+                schedule: [
+                  {
+                    endDate: '',
+                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                    milestone: ''
+                  }
+                ],
+                standardsAndConditions: {
+                  doesNotSupport: '',
+                  supports: ''
+                },
+                statePersonnel: [
+                  {
+                    description: '',
+                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                    title: '',
+                    years: {
+                      1787: { amt: '', perc: '' }
+                    }
+                  }
+                ],
+                summary: '',
+                years: ['1787']
+              }
+            ],
+            years: ['1787']
+          }
+        }
+      );
+    });
+
+    it('should add a new activity contractor resource', () => {
+      const state = {
+        data: {
+          activities: [{ contractorResources: [] }],
+          years: ['1403', '1404']
+        }
+      };
+
+      expect(
+        apd(state, {
+          type: ADD_APD_ITEM,
+          path: `/activities/0/contractorResources/-`
+        })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              contractorResources: [
+                {
+                  description: '',
+                  end: '',
+                  files: [],
+                  hourly: {
+                    data: {
+                      1403: { hours: '', rate: '' },
+                      1404: { hours: '', rate: '' }
+                    },
+                    useHourly: false
+                  },
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: '',
+                  start: '',
+                  totalCost: 0,
+                  years: {
+                    '1403': 0,
+                    '1404': 0
+                  }
+                }
+              ]
+            }
+          ],
+          years: ['1403', '1404']
+        }
+      });
+    });
+
+    it('should add a new activity OKR', () => {
       const state = {
         data: {
           activities: [{ objectives: [] }]
@@ -612,6 +881,41 @@ describe('APD reducer', () => {
                     }
                   ],
                   objective: ''
+                }
+              ]
+            }
+          ]
+        }
+      });
+    });
+
+    it('should add a new activity objective key result', () => {
+      const state = {
+        data: {
+          activities: [{ objectives: [{ objective: 'blah', keyResults: [] }] }]
+        }
+      };
+
+      expect(
+        apd(state, {
+          type: ADD_APD_ITEM,
+          path: '/activities/0/objectives/0/keyResults/-'
+        })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              objectives: [
+                {
+                  keyResults: [
+                    {
+                      key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                      keyResult: '',
+                      baseline: '',
+                      target: ''
+                    }
+                  ],
+                  objective: 'blah'
                 }
               ]
             }

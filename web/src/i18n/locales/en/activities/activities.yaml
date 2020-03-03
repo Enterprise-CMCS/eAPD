@@ -31,7 +31,7 @@ header: Program Activities
 namePrefix: Activity
 namePrefixAndNum: Activity {{number}}
 costs:
-  title: In-House Cost Categories
+  title: State Cost Categories
   subtitles:
-    personnel: Personnel
-    nonPersonnel: Non-Personnel
+    personnel: State staff
+    nonPersonnel: Other state expenses

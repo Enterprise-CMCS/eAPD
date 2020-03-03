@@ -54,14 +54,14 @@ const defaultFederalShare = years =>
         (q, quarter) => ({
           ...q,
           [quarter]: {
-            state: 0,
+            inHouse: 0,
             contractors: 0,
             combined: 0
           }
         }),
         {
           subtotal: {
-            state: 0,
+            inHouse: 0,
             contractors: 0,
             combined: 0
           }
@@ -70,7 +70,7 @@ const defaultFederalShare = years =>
     }),
     {
       total: {
-        state: 0,
+        inHouse: 0,
         contractors: 0,
         combined: 0
       }
@@ -96,7 +96,10 @@ const initialState = years => ({
 // Convert things to numbers, or default to zero.
 const n = x => +x || 0;
 
-const buildBudget = bigState => {
+const buildBudget = incomingBigState => {
+  // Clone the incoming state, so we don't accidentally change anything.
+  const bigState = JSON.parse(JSON.stringify({ apd: incomingBigState.apd }));
+
   // Get a shell of our new state object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
   // to have a bunch of code checking for it.
@@ -134,6 +137,23 @@ const buildBudget = bigState => {
   // Since all of our expenses are tied up in activities, we'll start
   // by looking at all of them and doing Magic Math™. (It's not magic.)
   bigState.apd.data.activities.forEach(activity => {
+    // If this is the Program Administration activity, add the APD key
+    // personnel to it so they get included in downstream calculations.
+    // TODO: Don't rely on the activity name. Instead, this should always be
+    // activity index 0. However, that will require some tweaks to the tests.
+    if (activity.name === 'Program Administration') {
+      activity.statePersonnel.push(
+        ...keyPersonnel
+          .filter(kp => kp.hasCosts)
+          .map(({ costs }) => ({
+            years: Object.keys(costs).reduce(
+              (o, ffy) => ({ ...o, [ffy]: { amt: costs[ffy], perc: 1 } }),
+              {}
+            )
+          }))
+      );
+    }
+
     // We need to know the funding source so we know where to apply
     // this data in the big rollup budget.
     const fundingSource = activity.fundingSource.toLowerCase();
@@ -164,18 +184,18 @@ const buildBudget = bigState => {
           ...arrToObj(['1', '2', '3', '4'], () => ({
             combined: { dollars: 0, percent: 0 },
             contractors: { dollars: 0, percent: 0 },
-            state: { dollars: 0, percent: 0 }
+            inHouse: { dollars: 0, percent: 0 }
           })),
           subtotal: {
             combined: { dollars: 0, percent: 0 },
             contractors: { dollars: 0, percent: 0 },
-            state: { dollars: 0, percent: 0 }
+            inHouse: { dollars: 0, percent: 0 }
           }
         })),
         total: {
           combined: 0,
           contractors: 0,
-          state: 0
+          inHouse: 0
         }
       }
     };
@@ -438,7 +458,8 @@ const buildBudget = bigState => {
       const quarterlyFFP = newState.federalShareByFFYQuarter[ffpSource];
 
       ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
-        const propCostType = prop === 'contractors' ? 'contractors' : 'state';
+        const ffpType = prop === 'contractors' ? 'contractors' : 'state';
+        const propCostType = prop === 'contractors' ? 'contractors' : 'inHouse';
 
         // This is the percentage of the total federal share that the state
         // is requesting, per quarter.  Go ahead and covert it to a 0-1
@@ -446,10 +467,10 @@ const buildBudget = bigState => {
         // using the nice rounding function.
         const quarterlyInfo = {
           federalPcts: [
-            ffp[1][propCostType] / 100,
-            ffp[2][propCostType] / 100,
-            ffp[3][propCostType] / 100,
-            ffp[4][propCostType] / 100
+            ffp[1][ffpType] / 100,
+            ffp[2][ffpType] / 100,
+            ffp[3][ffpType] / 100,
+            ffp[4][ffpType] / 100
           ],
           qFFPs: []
         };
@@ -459,6 +480,31 @@ const buildBudget = bigState => {
           fedShare[prop],
           quarterlyInfo.federalPcts
         );
+
+        // Gather up the totals for the cost types and the combined total. Do
+        // this here so these values aren't affected by the percentages input
+        // by the state. These totals are based only on the federal share
+        // computed from the activity total costs.
+        activityFFP[year].subtotal[propCostType].dollars += fedShare[prop];
+        activityFFP[year].subtotal.combined.dollars += fedShare[prop];
+
+        // Note that the grand activity total props are just numbers, not
+        // objects - we drop the percentage altogether.
+        activityFFP.total[propCostType] += fedShare[prop];
+        activityFFP.total.combined += fedShare[prop];
+
+        // For the expense type, add the federal share for the
+        // quarter and the fiscal year subtotal.
+        quarterlyFFP[year].subtotal[propCostType] += fedShare[prop];
+
+        // Also add the federal share to the cross-expense
+        // quarterly subtotal and fiscal year subtotal
+        quarterlyFFP[year].subtotal.combined += fedShare[prop];
+
+        // And finally, add it to the expense type grand
+        // total and the federal share grand total
+        quarterlyFFP.total[propCostType] += fedShare[prop];
+        quarterlyFFP.total.combined += fedShare[prop];
 
         // Shortcut to loop over quarters.  :)
         [...Array(4)].forEach((_, q) => {
@@ -477,125 +523,23 @@ const buildBudget = bigState => {
           // with percent for combined because it doesn't make sense.
           activityFFP[year][q + 1].combined.dollars += qFFP;
 
-          // Fiscal year subtotal.  Because "expense" and "statePersonnel"
-          // are combined into the "state" property, we need to be careful
+          // Fiscal year percentage. Because "expense" and "statePersonnel"
+          // are combined into the "inHouse" property, we need to be careful
           // about not adding the percent multiple times.  So, only
-          // add the percent if this is an "expense" type.
-          activityFFP[year].subtotal[propCostType].dollars += qFFP;
+          // add the percent if this is not an "expense" type.
           if (prop !== 'expenses') {
             activityFFP[year].subtotal[propCostType].percent += federalPct;
           }
 
-          // And finally, fiscal year combined subtotal and activity
-          // grand total.  Note that the grand total props are just
-          // numbers, not objects - we drop the percentage altogether.
-          activityFFP[year].subtotal.combined.dollars += qFFP;
-          activityFFP.total[propCostType] += qFFP;
-          activityFFP.total.combined += qFFP;
-
-          // For the expense type, add the federal share for the
-          // quarter and the fiscal year subtotal.
+          // For the expense type, add the federal share for the quarter.
           quarterlyFFP[year][q + 1][propCostType] += qFFP;
-          quarterlyFFP[year].subtotal[propCostType] += qFFP;
 
-          // Also add the federal share to the cross-expense
-          // quarterly subtotal and fiscal year subtotal
+          // Also add the federal share to the cross-expense quarterly subtotal
           quarterlyFFP[year][q + 1].combined += qFFP;
-          quarterlyFFP[year].subtotal.combined += qFFP;
-
-          // And finally, add it to the expense type grand
-          // total and the federal share grand total
-          quarterlyFFP.total[propCostType] += qFFP;
-          quarterlyFFP.total.combined += qFFP;
         });
       });
     });
   });
-
-  // Get the first activity called "Program Administration" and use it as the
-  // basis for computing quarterly federal share.  Then reudce that to an
-  // object whose keys are FFYs and whose values are an array of percentages
-  // for fiscal quarters.
-  const percentPerQuarter = Object.entries(
-    bigState.apd.data.activities.filter(
-      a => a.name === 'Program Administration'
-    )[0].quarterlyFFP
-  ).reduce(
-    (percentYear, [ffy, quarters]) => ({
-      ...percentYear,
-      [ffy]: Object.entries(quarters)
-        .sort(([q1], [q2]) => +q1 - +q2)
-        .map(([, q]) => q.state / 100)
-    }),
-    {}
-  );
-
-  /**
-   * Update a budget section with key personnel cost numbers
-   * @param {Object} section The section to be updated; should include
-   *                 top-level properties corresponding to fiscal years along
-   *                 with a total.  Those objects have federal, state, and
-   *                 total properties.
-   * @param {Number} year The federal fiscal year to update
-   * @param {Number} federal Federal share of the cost to add
-   * @param {Number} state State share of the cost to add
-   * @param {Number} total Total cost to add
-   */
-  const updateSectionWithKP = (section, year, federal, state, total) => {
-    section[year].federal += federal;
-    section[year].state += state;
-    section[year].medicaid += federal + state;
-    section[year].total += total;
-    section.total.federal += federal;
-    section.total.state += state;
-    section.total.medicaid += federal + state;
-    section.total.total += total;
-  };
-
-  // We also have to account for the cost attributable to key personnel.  This
-  // isn't added to any activity, but instead gets rolled up into the totals.
-  // It is always a 90% federal/10% state split.  We're just going to make sure
-  // we only look at key personnel for whom the "has costs" flag is set, just
-  // to be safe.
-  keyPersonnel
-    .filter(kp => kp.hasCosts)
-    .forEach(kp => {
-      Object.entries(kp.costs).forEach(([year, cost]) => {
-        // Get the state and federal share.  Always 90/10 (for now).
-        const [federalShare, stateShare] = roundedPercents(cost, [0.9, 0.1]);
-        const costInfo = [year, federalShare, stateShare, cost];
-
-        // Update the various budget sections that should include key personnel
-        // costs.  :all-the-things:
-        updateSectionWithKP(newState.combined, ...costInfo);
-        updateSectionWithKP(newState.hit.statePersonnel, ...costInfo);
-        updateSectionWithKP(newState.hit.combined, ...costInfo);
-        updateSectionWithKP(newState.hitAndHie.statePersonnel, ...costInfo);
-        updateSectionWithKP(newState.hitAndHie.combined, ...costInfo);
-
-        // Compute how much of the key personnel cost is attributable to each
-        // quarter of this FFY
-        const quarterlyCosts = roundedPercents(
-          federalShare,
-          percentPerQuarter[year]
-        );
-
-        const ffyQuarterly = newState.federalShareByFFYQuarter.hitAndHie[year];
-        const ffyTotal = newState.federalShareByFFYQuarter.hitAndHie.total;
-
-        // Then update the federal share by quarter accordingly
-        quarterlyCosts.forEach((quarterlyCost, i) => {
-          ffyQuarterly[i + 1].state += quarterlyCost;
-          ffyQuarterly[i + 1].combined += quarterlyCost;
-        });
-
-        // And also subtotals and totals and stuff.
-        ffyQuarterly.subtotal.state += federalShare;
-        ffyQuarterly.subtotal.combined += federalShare;
-        ffyTotal.state += federalShare;
-        ffyTotal.combined += federalShare;
-      });
-    });
 
   const roundProps = o => {
     Object.entries(o).forEach(([key, value]) => {

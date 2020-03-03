@@ -44,7 +44,7 @@ describe('activity Objectives and Key Results component', () => {
     });
 
     it('handles deleting an objective', () => {
-      list.prop('onDeleteClick')('objective 2');
+      list.prop('onDeleteClick')(1);
       expect(props.remove).toHaveBeenCalledWith('activity index', 1);
     });
   });

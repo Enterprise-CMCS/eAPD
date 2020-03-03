@@ -7,7 +7,7 @@ import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
 
 const EXPENSE_NAME_DISPLAY = {
-  state: t('activities.costAllocate.quarterly.expenseNames.state'),
+  inHouse: t('activities.costAllocate.quarterly.expenseNames.state'),
   contractors: t('activities.costAllocate.quarterly.expenseNames.contractor'),
   combined: t('activities.costAllocate.quarterly.expenseNames.combined')
 };
@@ -21,7 +21,7 @@ const CostAllocateFFPYearTotal = ({ quarterlyFFP, years }) => {
       <h6 className="ds-h3">{`Total FFY ${years[0]} - ${
         years[years.length - 1]
       }`}</h6>
-      {['state', 'contractors'].map(name => (
+      {['inHouse', 'contractors'].map(name => (
         <p className="ds-h5" key={name}>
           {EXPENSE_NAME_DISPLAY[name]}:{' '}
           <span className="ds-u-font-weight--normal">

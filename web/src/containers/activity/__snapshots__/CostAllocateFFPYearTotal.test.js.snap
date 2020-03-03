@@ -9,7 +9,7 @@ exports[`the CostAllocateFFPYearTotal component renders correctly 1`] = `
   </h6>
   <p
     className="ds-h5"
-    key="state"
+    key="inHouse"
   >
     In-House Costs
     :

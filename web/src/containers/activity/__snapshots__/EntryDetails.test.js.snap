@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`the (Activity) EntryDetails component does not render the delete button on the first element 1`] = `
+<div
+  className="activity--body activity--body__first"
+  id="activity-activity 1 key"
+>
+  <Review
+    editContent={
+      <div
+        className="nowrap visibility--screen"
+      >
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent"
+        >
+          Edit
+        </Button>
+      </div>
+    }
+    editText="Edit"
+    heading="Activity 1: activity 1 name (money pit)"
+    headingLevel={4}
+  />
+</div>
+`;
+
 exports[`the (Activity) EntryDetails component renders correctly with the modal closed 1`] = `
 <div
   className="activity--body activity--body__notfirst"
@@ -18,6 +45,19 @@ exports[`the (Activity) EntryDetails component renders correctly with the modal 
         >
           Edit
         </Button>
+        <React.Fragment>
+          <span>
+            |
+          </span>
+          <Button
+            onClick={[Function]}
+            size="small"
+            type="button"
+            variation="transparent"
+          >
+            Remove
+          </Button>
+        </React.Fragment>
       </div>
     }
     editText="Edit"
@@ -45,6 +85,19 @@ exports[`the (Activity) EntryDetails component renders correctly with the modal 
         >
           Edit
         </Button>
+        <React.Fragment>
+          <span>
+            |
+          </span>
+          <Button
+            onClick={[Function]}
+            size="small"
+            type="button"
+            variation="transparent"
+          >
+            Remove
+          </Button>
+        </React.Fragment>
       </div>
     }
     editText="Edit"
@@ -77,6 +130,19 @@ exports[`the (Activity) EntryDetails component renders correctly with the modal 
         >
           Edit
         </Button>
+        <React.Fragment>
+          <span>
+            |
+          </span>
+          <Button
+            onClick={[Function]}
+            size="small"
+            type="button"
+            variation="transparent"
+          >
+            Remove
+          </Button>
+        </React.Fragment>
       </div>
     }
     editText="Edit"

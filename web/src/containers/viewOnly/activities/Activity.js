@@ -6,15 +6,27 @@ import CostAllocateFFP from '../../activity/CostAllocateFFP';
 import { stateDateToDisplay } from '../../../util';
 
 const Activity = ({ activity, activityIndex }) => {
-  const buildGoal = goal => {
+  const buildObjective = objective => {
     return (
       <Fragment>
         <p>
-          <strong>Goal: </strong> {goal.description}
+          <strong>Objective: </strong> {objective.objective}
         </p>
         <p>
-          <strong>Benchmarks: </strong>
-          {goal.objective}
+          <strong>Key Results: </strong>
+          <ul>
+            {objective.keyResults.map(
+              ({ baseline, key, keyResult, target }) => (
+                <li key={key} className="ds-u-margin-top--2">
+                  <strong>{keyResult}</strong>
+                  <br />
+                  <strong>Target:</strong> {target}
+                  <br />
+                  <strong>Baseline:</strong> {baseline}
+                </li>
+              )
+            )}
+          </ul>
         </p>
       </Fragment>
     );
@@ -48,8 +60,9 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           {Object.entries(person.years).map(([year, { amt, perc }]) => (
             <li key={year}>
-              <strong>{year} Costs:</strong> <Dollars>{amt}</Dollars> |{' '}
-              <strong>FTEs:</strong> {perc}
+              <strong>{year} Costs:</strong> <Dollars long>{amt}</Dollars> |{' '}
+              <strong>FTEs:</strong> {perc} | <strong>Total:</strong>{' '}
+              <Dollars long>{perc * amt}</Dollars>
             </li>
           ))}
         </ul>
@@ -69,7 +82,7 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           {Object.entries(expense.years).map(([year, cost]) => (
             <li key={year}>
-              <strong>{year} Costs:</strong> <Dollars>{cost}</Dollars>
+              <strong>{year} Costs:</strong> <Dollars long>{cost}</Dollars>
             </li>
           ))}
         </ul>
@@ -103,13 +116,13 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           {Object.entries(contractor.years).map(([year, cost]) => (
             <li key={year}>
-              <strong>{year} Costs:</strong> <Dollars>{cost}</Dollars>
+              <strong>{year} Costs:</strong> <Dollars long>{cost}</Dollars>
               {contractor.hourly.useHourly === true && (
                 <Fragment>
                   <p>Number of hours: {contractor.hourly.data[year].hours}</p>
                   <p>
                     Hourly rate:{' '}
-                    <Dollars>{contractor.hourly.data[year].rate}</Dollars>
+                    <Dollars long>{contractor.hourly.data[year].rate}</Dollars>
                   </p>
                 </Fragment>
               )}
@@ -118,7 +131,7 @@ const Activity = ({ activity, activityIndex }) => {
         </ul>
         <p>
           <strong>Total cost: </strong>
-          <Dollars>{contractor.totalCost}</Dollars>
+          <Dollars long>{contractor.totalCost}</Dollars>
         </p>
       </Fragment>
     );
@@ -152,9 +165,9 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        Performance Goals and Benchmarks
+        Objectives and Key Results
       </h3>
-      {activity.goals.map(goal => buildGoal(goal))}
+      {activity.objectives.map(buildObjective)}
 
       <h3 className="viewonly-activity-header">
         <small>

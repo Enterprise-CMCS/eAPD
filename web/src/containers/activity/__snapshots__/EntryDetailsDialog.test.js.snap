@@ -42,7 +42,7 @@ exports[`the Activity Dialog component renders correctly 1`] = `
     <TabPanel
       id="activity-cost-categories-2-tab"
       selected={false}
-      tab="In-house cost categories"
+      tab="State cost categories"
     >
       <Costs
         activityIndex={2}
@@ -63,6 +63,15 @@ exports[`the Activity Dialog component renders correctly 1`] = `
       tab="Cost allocation"
     >
       <Connect(CostAllocate)
+        activityIndex={2}
+      />
+    </TabPanel>
+    <TabPanel
+      id="activity-ffp-2-tab"
+      selected={false}
+      tab="FFP and Budget"
+    >
+      <Connect(CostAllocateFFP)
         activityIndex={2}
       />
     </TabPanel>

@@ -15,7 +15,7 @@ describe('the CostAllocateFFPYearTotal component', () => {
           total: {
             combined: 100,
             contractors: 200,
-            state: 300
+            inHouse: 300
           }
         }}
         years={['year 1', 'year 2']}

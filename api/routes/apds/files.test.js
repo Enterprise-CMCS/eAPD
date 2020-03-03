@@ -135,7 +135,12 @@ tap.test('apds files endpoints', async endpointTest => {
         await handler(req, res);
 
         test.ok(
-          di.createNewFileForAPD.calledWith('apd id', 'some metadata', 1234),
+          di.createNewFileForAPD.calledWith(
+            'the file buffer',
+            'apd id',
+            'some metadata',
+            1234
+          ),
           'database record is created from the request data'
         );
         test.ok(res.status.calledWith(500), 'sends a 500 error');
@@ -152,7 +157,12 @@ tap.test('apds files endpoints', async endpointTest => {
         await handler(req, res);
 
         test.ok(
-          di.createNewFileForAPD.calledWith('apd id', 'some metadata', 1234),
+          di.createNewFileForAPD.calledWith(
+            'the file buffer',
+            'apd id',
+            'some metadata',
+            1234
+          ),
           'database record is created from the request data'
         );
         test.ok(
@@ -175,7 +185,12 @@ tap.test('apds files endpoints', async endpointTest => {
       await handler(req, res);
 
       test.ok(
-        di.createNewFileForAPD.calledWith('apd id', 'some metadata', 1234),
+        di.createNewFileForAPD.calledWith(
+          'the file buffer',
+          'apd id',
+          'some metadata',
+          1234
+        ),
         'database record is created from the request data'
       );
       test.ok(

@@ -28,7 +28,7 @@ import {
 import { getIsAdmin } from '../../reducers/user.selector';
 
 import axios from '../../util/api';
-import { fromAPI, initialAssurances } from '../../util/serialization/apd';
+import initialAssurances from '../../util/regulations';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
@@ -64,14 +64,12 @@ export const saveApd = () => (dispatch, getState) => {
 export const selectApd = (
   id,
   route,
-  { deserialize = fromAPI, global = window, pushRoute = push } = {}
+  { global = window, pushRoute = push } = {}
 ) => dispatch => {
   dispatch(ariaAnnounceApdLoading());
 
   return axios.get(`/apds/${id}`).then(req => {
-    const apd = deserialize(req.data);
-
-    dispatch({ type: SELECT_APD, apd });
+    dispatch({ type: SELECT_APD, apd: req.data });
 
     // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
     // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
@@ -101,17 +99,13 @@ export const setApdToSelectOnLoad = () => (dispatch, getState) => {
   }
 };
 
-export const createApd = ({
-  deserialize = fromAPI,
-  pushRoute = push
-} = {}) => dispatch => {
+export const createApd = ({ pushRoute = push } = {}) => dispatch => {
   dispatch({ type: CREATE_APD_REQUEST });
   return axios
     .post('/apds')
     .then(async req => {
-      const apd = deserialize(req.data);
-      dispatch({ type: CREATE_APD_SUCCESS, data: apd });
-      await dispatch(selectApd(apd.id, '/apd', { deserialize, pushRoute }));
+      dispatch({ type: CREATE_APD_SUCCESS, data: req.data });
+      await dispatch(selectApd(req.data.id, '/apd', { pushRoute }));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
