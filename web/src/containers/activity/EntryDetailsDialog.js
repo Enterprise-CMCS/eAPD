@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
+import FFP from './CostAllocateFFP';
 import Costs from './Costs';
 import Milestones from './Milestones';
 import Overview from './Overview';
@@ -46,7 +47,7 @@ const ActivityDialog = props => {
         </TabPanel>
         <TabPanel
           id={`activity-cost-categories-${activityIndex}-tab`}
-          tab="In-house cost categories"
+          tab="State cost categories"
         >
           <Costs activityIndex={activityIndex} />
         </TabPanel>
@@ -61,6 +62,9 @@ const ActivityDialog = props => {
           tab="Cost allocation"
         >
           <CostAllocate activityIndex={activityIndex} />
+        </TabPanel>
+        <TabPanel id={`activity-ffp-${activityIndex}-tab`} tab="FFP and Budget">
+          <FFP activityIndex={activityIndex} />
         </TabPanel>
       </Tabs>
     </Dialog>

@@ -32,7 +32,7 @@ const CostAllocateFFPQuarterly = ({
 }) => {
   const setInHouse = quarter => ({ target: { value } }) => {
     setInHouseFFP(activityIndex, year, quarter, value);
-    announce(aKey, year, quarter, 'state');
+    announce(aKey, year, quarter, 'inHouse');
   };
 
   const setContractor = quarter => ({ target: { value } }) => {
@@ -83,35 +83,37 @@ const CostAllocateFFPQuarterly = ({
           </th>
           {QUARTERS.map(q => (
             <td key={q}>
-              {isViewOnly ?
-                <p className="budget-table--number">{quarterlyFFP[year][q].state.percent * 100} %</p>
-              :
+              {isViewOnly ? (
+                <p className="budget-table--number">
+                  {quarterlyFFP[year][q].inHouse.percent * 100} %
+                </p>
+              ) : (
                 <PercentField
-                className="budget-table--input-holder"
-                fieldClassName="budget-table--input__number"
-                label={`federal share for ffy ${year}, quarter ${q}, state`}
-                labelClassName="sr-only"
-                name={`ffp-${activityIndex}-${year}-${q}-state`}
-                onChange={setInHouse(q)}
-                value={quarterlyFFP[year][q].state.percent * 100}
-                aria-controls={`ffp-${activityIndex}-${year}-${q}-state-dollar-equivalent`}
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  label={`federal share for ffy ${year}, quarter ${q}, state`}
+                  labelClassName="sr-only"
+                  name={`ffp-${activityIndex}-${year}-${q}-state`}
+                  onChange={setInHouse(q)}
+                  value={quarterlyFFP[year][q].inHouse.percent * 100}
+                  aria-controls={`ffp-${activityIndex}-${year}-${q}-state-dollar-equivalent`}
                 />
-              }
+              )}
             </td>
           ))}
           <td className="budget-table--number budget-table--subtotal">
-            {formatPerc(quarterlyFFP[year].subtotal.state.percent)}
+            {formatPerc(quarterlyFFP[year].subtotal.inHouse.percent)}
           </td>
         </tr>
         <tr>
           <Fragment key={year}>
             {QUARTERS.map(q => (
               <td className="budget-table--number" key={q}>
-                <Dollars>{quarterlyFFP[year][q].state.dollars}</Dollars>
+                <Dollars>{quarterlyFFP[year][q].inHouse.dollars}</Dollars>
               </td>
             ))}
             <td className="budget-table--number budget-table--subtotal">
-              <Dollars>{quarterlyFFP[year].subtotal.state.dollars}</Dollars>
+              <Dollars>{quarterlyFFP[year].subtotal.inHouse.dollars}</Dollars>
             </td>
           </Fragment>
         </tr>
@@ -122,9 +124,11 @@ const CostAllocateFFPQuarterly = ({
           </th>
           {QUARTERS.map(q => (
             <td key={q}>
-              {isViewOnly ?
-                <p className="budget-table--number">{quarterlyFFP[year][q].contractors.percent * 100} %</p>
-              :
+              {isViewOnly ? (
+                <p className="budget-table--number">
+                  {quarterlyFFP[year][q].contractors.percent * 100} %
+                </p>
+              ) : (
                 <PercentField
                   className="budget-table--input-holder"
                   fieldClassName="budget-table--input__number"
@@ -135,7 +139,7 @@ const CostAllocateFFPQuarterly = ({
                   value={quarterlyFFP[year][q].contractors.percent * 100}
                   aria-controls={`ffp-${activityIndex}-${year}-${q}-contractors-dollar-equivalent`}
                 />
-              }
+              )}
             </td>
           ))}
           <td className="budget-table--number budget-table--subtotal">

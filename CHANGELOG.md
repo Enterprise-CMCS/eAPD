@@ -1,34 +1,44 @@
 # Next release
 
-Anticipated release: February 3, 2020
+Anticipated release: February 18, 2020
 
 #### 🚀 New features
 
-- Changed activity goals to activity objectives and key results (OKRs) ([#2007])
-- Make autosave more screen-reader friendly [(#2020)]
-- Changed the APD name to `HITECH IAPD` ([#1821], [#1993])
-- Added loading state for rich text editor ([#2015])
+- Updates the cost allocation section to make it clearer how the various numbers are related to each other, and updates the help text describing "other funding." ([#1935], [#1992])
+- The executive summary for activities now includes activity costs per federal fiscal year ([#1927])
+- Activity state personnel now show calculated total cost instead of just rate and FTEs. ([#2013])
+- Moves the activity FFP section into a separate tab ([#2010])
 
 #### 🐛 Bugs fixed
 
-- Fixed a bug where toggling the "show password" checkbox on passwords caused the text field to be changed to "Show password" [(#2023)]
-- Fixed a bug where adding a new list item to an activity (goal, milestone, expense, etc.) caused that new item to be expanded every time the activity was opened until the page was reloaded. [(#2026)]
-- Fixed a bug where images could upload every single time an APD loaded, forever and ever ([#2017])
+- Fixed a bug where APD Key Personnel weren't being counted as state personnel for the Program Administration activity for some budget calculations. - ([#2037])
+- Updated the text describing in-house cost categories to be more clear ([#1936])
+- Fixed a bug where autosave happened too often, causing performance issues, and potentially inconsistent saved data.
+- Fixed a bug where the FFY subtotal for each cost category in the quarterly FFP table was based on the percent of funding requested, meaning it could be different from the actual activity total if the user requests more or less than 100%. ([#2056])
+- Fixed a bug that prevented creating new activities.
+- Updated the explanation for how the budget summary table is calculated ([#2058])
 
 #### ⚙️ Behind the scenes
 
-- Split up some code components to make them more reusable ([#2005])
+- Made the code for removing list items a bit simpler ([#2014])
+- Change how uploaded files get IDs ([#2018])
+- Cleaned up some inconsistencies in the way things were named internally ([#2044])
+- Got rid of some old code that no longer made sense ([#2021])
 
 # Previous releases
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
-[#2007]: https://github.com/18F/cms-hitech-apd/issues/2007
-[#1821]: https://github.com/18F/cms-hitech-apd/issues/1821
-[#1993]: https://github.com/18F/cms-hitech-apd/issues/199
-[#2015]: https://github.com/18F/cms-hitech-apd/pull/2015
-[#2023]: https://github.com/18F/cms-hitech-apd/issues/2023
-[#2026]: https://github.com/18F/cms-hitech-apd/issues/2026
-[#2017]: https://github.com/18F/cms-hitech-apd/issues/2017
-[#2020]: https://github.com/18F/cms-hitech-apd/pull/2028
-[#2005]: https://github.com/18F/cms-hitech-apd/issues/2005
+[#1935]: https://github.com/18F/cms-hitech-apd/issues/1935
+[#1992]: https://github.com/18F/cms-hitech-apd/issues/1992
+[#1927]: https://github.com/18F/cms-hitech-apd/issues/1927
+[#2037]: https://github.com/18F/cms-hitech-apd/issues/2037
+[#1936]: https://github.com/18F/cms-hitech-apd/issues/1936
+[#2013]: https://github.com/18F/cms-hitech-apd/issues/2013
+[#2014]: https://github.com/18F/cms-hitech-apd/issues/2014
+[#2018]: https://github.com/18F/cms-hitech-apd/issues/2018
+[#2010]: https://github.com/18F/cms-hitech-apd/issues/2010
+[#2044]: https://github.com/18F/cms-hitech-apd/issues/2044
+[#2056]: https://github.com/18F/cms-hitech-apd/issues/2056
+[#2021]: https://github.com/18F/cms-hitech-apd/issues/2021
+[#2058]: https://github.com/18F/cms-hitech-apd/issues/2058

@@ -29,6 +29,8 @@ import {
 import { ARIA_ANNOUNCE_CHANGE } from '../aria';
 import { UPDATE_BUDGET } from '../budget';
 import axios from '../../util/api';
+import regulations from '../../util/regulations';
+import { EDIT_APD } from '../editApd/symbols';
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios);
@@ -40,13 +42,17 @@ describe('application-level actions', () => {
 
   describe('create a new APD', () => {
     it('on success, adds the new APD to the store and switches to it', async () => {
-      const newapd = { id: 'bloop', federalCitations: { already: 'exist' } };
+      const newapd = { id: 'bloop' };
       fetchMock.onPost('/apds').reply(200, newapd);
 
-      const apd = { id: 'apd-id', federalCitations: { already: 'exist' } };
-      const deserialize = jest.fn().mockReturnValue(apd);
+      const apd = {
+        id: 'apd-id',
+        activities: [],
+        federalCitations: { already: 'exist' },
+        keyPersonnel: []
+      };
 
-      fetchMock.onGet('/apds/apd-id').reply(200, apd);
+      fetchMock.onGet('/apds/bloop').reply(200, apd);
 
       const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
       const state = {
@@ -60,7 +66,7 @@ describe('application-level actions', () => {
 
       const expectedActions = [
         { type: CREATE_APD_REQUEST },
-        { type: CREATE_APD_SUCCESS, data: apd },
+        { type: CREATE_APD_SUCCESS, data: newapd },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD, apd },
         { type: UPDATE_BUDGET, state },
@@ -72,7 +78,7 @@ describe('application-level actions', () => {
         }
       ];
 
-      await store.dispatch(createApd({ deserialize, pushRoute }));
+      await store.dispatch(createApd({ pushRoute }));
 
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -123,12 +129,10 @@ describe('application-level actions', () => {
     describe('creates GET_APD_SUCCESS after successful APD fetch', () => {
       it('does not select an APD by default', async () => {
         const store = mockStore({ apd: { selectAPDOnLoad: false } });
-        fetchMock
-          .onGet('/apds')
-          .reply(200, [
-            { foo: 'bar', status: 'draft' },
-            { foo: 'bar', status: 'archived' }
-          ]);
+        fetchMock.onGet('/apds').reply(200, [
+          { foo: 'bar', status: 'draft' },
+          { foo: 'bar', status: 'archived' }
+        ]);
 
         const expectedActions = [
           { type: FETCH_ALL_APDS_REQUEST },
@@ -293,50 +297,89 @@ describe('application-level actions', () => {
     });
   });
 
-  it('selecting an APD loads from the API, redirect to provided route, and saves the APD ID to local storage', async () => {
-    const apd = {
-      id: 'apd-id',
-      selected: 'apd goes here',
-      federalCitations: { already: 'exists' }
-    };
-    fetchMock.onGet('/apds/apd-id').reply(200, apd);
+  describe('select an existing API', () => {
+    it('redirects to provided route and saves the APD ID to local storage', async () => {
+      const apd = {
+        id: 'apd-id',
+        selected: 'apd goes here',
+        federalCitations: { already: 'exists' }
+      };
+      fetchMock.onGet('/apds/apd-id').reply(200, apd);
 
-    const deserialize = jest.fn();
-    deserialize.mockReturnValue('deserialized apd');
+      const state = { apd: { byId: { apdID: 'hello there' } } };
+      const store = mockStore(state);
+      const testRoute = '/test';
 
-    const state = { apd: { byId: { apdID: 'hello there' } } };
-    const store = mockStore(state);
-    const testRoute = '/test';
+      const global = { localStorage: { setItem: jest.fn() } };
+      const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
-    const global = { localStorage: { setItem: jest.fn() } };
-    const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+      const expectedActions = [
+        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
+        { type: SELECT_APD, apd },
+        { type: UPDATE_BUDGET, state },
+        { type: 'FAKE_PUSH', pushRoute: testRoute },
+        {
+          type: ARIA_ANNOUNCE_CHANGE,
+          message:
+            'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
+        }
+      ];
 
-    const expectedActions = [
-      { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
-      { type: SELECT_APD, apd: 'deserialized apd' },
-      { type: UPDATE_BUDGET, state },
-      { type: 'FAKE_PUSH', pushRoute: testRoute },
-      {
-        type: ARIA_ANNOUNCE_CHANGE,
-        message:
-          'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
-      }
-    ];
+      await store.dispatch(
+        selectApd('apd-id', '/test', {
+          global,
+          pushRoute
+        })
+      );
 
-    await store.dispatch(
-      selectApd('apd-id', '/test', {
-        deserialize,
-        global,
-        pushRoute
-      })
-    );
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(global.localStorage.setItem).toHaveBeenCalledWith(
+        'last-apd-id',
+        'apd-id'
+      );
+    });
 
-    expect(store.getActions()).toEqual(expectedActions);
-    expect(global.localStorage.setItem).toHaveBeenCalledWith(
-      'last-apd-id',
-      'apd-id'
-    );
-    expect(deserialize).toHaveBeenCalledWith(apd);
+    it('does the same, but queues a save if the federal citations is initially blank', async () => {
+      const apd = {
+        id: 'apd-id',
+        selected: 'apd goes here',
+        federalCitations: {}
+      };
+      fetchMock.onGet('/apds/apd-id').reply(200, apd);
+
+      const state = { apd: { byId: { apdID: 'hello there' } } };
+      const store = mockStore(state);
+      const testRoute = '/test';
+
+      const global = { localStorage: { setItem: jest.fn() } };
+      const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+
+      const expectedActions = [
+        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
+        { type: SELECT_APD, apd },
+        { type: EDIT_APD, path: '/federalCitations', value: regulations },
+        { type: UPDATE_BUDGET, state },
+        { type: 'FAKE_PUSH', pushRoute: testRoute },
+        {
+          type: ARIA_ANNOUNCE_CHANGE,
+          message:
+            'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
+        }
+      ];
+
+      await store.dispatch(
+        selectApd('apd-id', '/test', {
+          global,
+          pushRoute
+        })
+      );
+
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(global.localStorage.setItem).toHaveBeenCalledWith(
+        'last-apd-id',
+        'apd-id'
+      );
+    });
   });
 
   describe('enables selecting an APD on page load', () => {

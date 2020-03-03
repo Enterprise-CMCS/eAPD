@@ -33,6 +33,7 @@ import {
   SET_APD_TO_SELECT_ON_LOAD
 } from '../actions/app';
 import { defaultAPDYearOptions, generateKey } from '../util';
+import initialAssurances from '../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
@@ -214,7 +215,7 @@ export const getKeyPersonnel = (years = []) => ({
   percentTime: '0',
   name: '',
   position: '',
-  key: generateKey(),
+  key: generateKey()
 });
 
 export const getAPDCreation = ({
@@ -363,8 +364,10 @@ const reducer = (state = initialState, action) => {
         )
       };
     }
+
     case FETCH_ALL_APDS_FAILURE:
       return { ...state, fetching: false, error: action.error };
+
     case SAVE_APD_SUCCESS:
       return {
         ...state,
@@ -381,11 +384,53 @@ const reducer = (state = initialState, action) => {
           updated: getHumanTimestamp(action.data.updated)
         }
       };
+
     case SELECT_APD:
       return {
         ...state,
         data: {
           ...action.apd,
+          activities: action.apd.activities.map(
+            ({
+              contractorResources,
+              expenses,
+              objectives,
+              schedule,
+              statePersonnel,
+              ...activity
+            }) => ({
+              ...activity,
+              contractorResources: contractorResources.map(contractor => ({
+                ...contractor,
+                key: generateKey()
+              })),
+              expenses: expenses.map(expense => ({
+                ...expense,
+                key: generateKey()
+              })),
+              objectives: objectives.map(objective => ({
+                ...objective,
+                key: generateKey()
+              })),
+              schedule: schedule.map(milestone => ({
+                ...milestone,
+                key: generateKey()
+              })),
+              statePersonnel: statePersonnel.map(person => ({
+                ...person,
+                key: generateKey()
+              })),
+              key: generateKey()
+            })
+          ),
+          federalCitations:
+            Object.keys(action.apd.federalCitations).length > 0
+              ? action.apd.federalCitations
+              : initialAssurances,
+          keyPersonnel: action.apd.keyPersonnel.map(kp => ({
+            ...kp,
+            key: generateKey()
+          })),
           created: getHumanDatestamp(action.apd.created),
           updated: getHumanTimestamp(action.apd.updated),
           yearOptions: defaultAPDYearOptions
