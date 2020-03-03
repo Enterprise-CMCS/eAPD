@@ -16,6 +16,7 @@ Anticipated release: February 18, 2020
 - Fixed a bug where autosave happened too often, causing performance issues, and potentially inconsistent saved data.
 - Fixed a bug where the FFY subtotal for each cost category in the quarterly FFP table was based on the percent of funding requested, meaning it could be different from the actual activity total if the user requests more or less than 100%. ([#2056])
 - Fixed a bug that prevented creating new activities.
+- Fixed a typo in the cost allocation instructions
 - Updated the explanation for how the budget summary table is calculated ([#2058])
 
 #### ⚙️ Behind the scenes
@@ -41,4 +42,5 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2044]: https://github.com/18F/cms-hitech-apd/issues/2044
 [#2056]: https://github.com/18F/cms-hitech-apd/issues/2056
 [#2021]: https://github.com/18F/cms-hitech-apd/issues/2021
+[#2036]: https://github.com/18F/cms-hitech-apd/issues/2036
 [#2058]: https://github.com/18F/cms-hitech-apd/issues/2058
