@@ -6,7 +6,7 @@
   "scripts": {
     "storybook": "start-storybook --ci -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o .storybook-dist/public",
-    "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/gu.png src/static/img/states/gu.png",
+    "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
