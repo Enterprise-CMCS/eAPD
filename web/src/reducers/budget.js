@@ -1,3 +1,4 @@
+import { RESET } from '../actions/app';
 import { UPDATE_BUDGET } from '../actions/budget';
 import { arrToObj } from '../util';
 import roundedPercents from '../util/roundedPercents';
@@ -557,6 +558,8 @@ const buildBudget = incomingBigState => {
 
 const reducer = (state = initialState([]), action) => {
   switch (action.type) {
+    case RESET:
+      return {};
     case UPDATE_BUDGET:
       return buildBudget(action.state);
     default:

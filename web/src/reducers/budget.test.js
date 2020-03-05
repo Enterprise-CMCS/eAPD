@@ -1,4 +1,5 @@
 import budget from './budget';
+import { RESET } from '../actions/app';
 import { UPDATE_BUDGET } from '../actions/budget';
 
 describe('budget reducer', () => {
@@ -49,6 +50,12 @@ describe('budget reducer', () => {
 
   it('should handle initial state', () => {
     expect(budget(undefined, {})).toEqual(initialState);
+  });
+
+  it('should reset', () => {
+    expect(
+      budget({ this: 'is', the: 'old', budget: 'data' }, { type: RESET })
+    ).toEqual({});
   });
 
   it('computes new budget data from state', () => {

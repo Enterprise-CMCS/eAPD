@@ -1,4 +1,4 @@
-import { SAVE_APD_REQUEST, SAVE_APD_SUCCESS } from '../actions/app';
+import { RESET, SAVE_APD_REQUEST, SAVE_APD_SUCCESS } from '../actions/app';
 import {
   ADD_APD_ITEM,
   ADD_APD_YEAR,
@@ -12,6 +12,12 @@ import reducer from './patch';
 describe('JSON patch reducer', () => {
   it('provides an initial state', () => {
     expect(reducer(undefined, {})).toEqual([]);
+  });
+
+  it('can reset', () => {
+    expect(reducer(['old', 'patches', 'are', 'here'], { type: RESET })).toEqual(
+      []
+    );
   });
 
   it('removes the already-saved entries when an APD is successfully saved', () => {
