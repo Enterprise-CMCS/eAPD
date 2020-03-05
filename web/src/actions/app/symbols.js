@@ -14,6 +14,8 @@ export const NAVIGATION_SCROLL_TO_WAYPOINT = Symbol('scroll to waypoint');
 
 export const PRINT_APD = Symbol('print apd');
 
+export const RESET = Symbol('reset application state');
+
 export const SAVE_APD_FAILURE = Symbol('save apd failure');
 export const SAVE_APD_REQUEST = Symbol('save apd request');
 export const SAVE_APD_SUCCESS = Symbol('save apd success');
