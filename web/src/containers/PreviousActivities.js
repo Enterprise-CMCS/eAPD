@@ -17,7 +17,7 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
 
   return (
     <Waypoint id="prev-activities-overview">
-      <Section isNumbered id="prev-activities" resource="previousActivities">
+      <Section id="prev-activities" resource="previousActivities">
         <Waypoint id="prev-activities-outline" />
         <Subsection
           id="prev-activities-outline"
@@ -60,9 +60,6 @@ const mapDispatchToProps = {
   setSummary: setPreviousActivitySummary
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PreviousActivities);
+export default connect(mapStateToProps, mapDispatchToProps)(PreviousActivities);
 
 export { PreviousActivities as plain, mapStateToProps, mapDispatchToProps };

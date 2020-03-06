@@ -14,7 +14,7 @@ const All = ({ add, activities }) => {
 
   return (
     <Waypoint id="activities-overview">
-      <Section isNumbered id="activities" resource="activities">
+      <Section id="activities" resource="activities">
         <h3 className="subsection--title ds-h3">
           {activities.length} program activities
         </h3>

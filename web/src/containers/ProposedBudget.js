@@ -8,7 +8,7 @@ import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
   <Waypoint id="budget-overview">
-    <Section isNumbered id="budget" resource="proposedBudget">
+    <Section id="budget" resource="proposedBudget">
       <Waypoint id="budget-summary-table" />
       <Subsection
         id="budget-summary-table"
