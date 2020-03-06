@@ -29,7 +29,7 @@ const ExecutiveSummary = props => {
   };
   return (
     <Waypoint id="executive-summary-overview">
-      <Section isNumbered id="executive-summary" resource="executiveSummary">
+      <Section id="executive-summary" resource="executiveSummary">
         <Waypoint id="executive-summary-summary" />
         <Subsection
           id="executive-summary-summary"

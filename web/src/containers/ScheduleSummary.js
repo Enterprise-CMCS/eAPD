@@ -9,7 +9,7 @@ import { selectActivitySchedule } from '../reducers/activities.selectors';
 
 const ScheduleSummary = ({ activities }) => (
   <Waypoint id="schedule-summary">
-    <Section isNumbered id="schedule-summary" resource="scheduleSummary">
+    <Section id="schedule-summary" resource="scheduleSummary">
       <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
         {activities.length === 0 ? (
           <div className="ds-c-alert ds-c-alert--warn">

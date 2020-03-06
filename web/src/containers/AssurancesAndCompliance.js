@@ -87,11 +87,7 @@ const AssurancesAndCompliance = ({
 
   return (
     <Waypoint id="assurances-compliance">
-      <Section
-        isNumbered
-        id="assurances-compliance"
-        resource="assurancesAndCompliance"
-      >
+      <Section id="assurances-compliance" resource="assurancesAndCompliance">
         <Subsection
           id="assurances-compliance-fed-citations"
           resource="assurancesAndCompliance.citations"
