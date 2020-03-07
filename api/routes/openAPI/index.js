@@ -332,7 +332,7 @@ module.exports = {
                             description:
                               'Contractor costs for the given quarter of the given federal fiscal year'
                           },
-                          state: {
+                          inHouse: {
                             type: 'number',
                             description:
                               'In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year'

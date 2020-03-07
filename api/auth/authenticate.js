@@ -1,3 +1,7 @@
+// Local database authentication strategy. The default export is the strategy
+// that will be passed into Passport.js and actually handles authenticating a
+// request. Also exports a getNonce utility function.
+
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const defaultHash = require('./passwordHash');

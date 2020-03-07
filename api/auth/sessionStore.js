@@ -1,3 +1,5 @@
+// Session storage layer
+
 const crypto = require('crypto');
 const logger = require('../logger')('session management');
 const { raw: knex } = require('../db');

@@ -2,7 +2,8 @@ const crypto = require('crypto');
 
 // This is designed to produce a 60-character output string, so we don't need
 // to modify the database column. It was designed for bcrypt hashes, which are
-// always 60 characters.
+// always 60 characters. But we can't use bcrypt because it doesn't use an
+// approved hashing algorithm. Instead, we use pbkdf2 with SHA256.
 //
 // Here's how we get to 60 bytes in our implementation:
 //
