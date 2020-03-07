@@ -85,16 +85,16 @@ tap.test('APD data initializer', async test => {
         summary: '',
         quarterlyFFP: {
           '1997': {
-            1: { contractors: 0, state: 0 },
-            2: { contractors: 0, state: 0 },
-            3: { contractors: 0, state: 0 },
-            4: { contractors: 0, state: 0 }
+            1: { contractors: 0, inHouse: 0 },
+            2: { contractors: 0, inHouse: 0 },
+            3: { contractors: 0, inHouse: 0 },
+            4: { contractors: 0, inHouse: 0 }
           },
           '1998': {
-            1: { contractors: 0, state: 0 },
-            2: { contractors: 0, state: 0 },
-            3: { contractors: 0, state: 0 },
-            4: { contractors: 0, state: 0 }
+            1: { contractors: 0, inHouse: 0 },
+            2: { contractors: 0, inHouse: 0 },
+            3: { contractors: 0, inHouse: 0 },
+            4: { contractors: 0, inHouse: 0 }
           }
         }
       }
