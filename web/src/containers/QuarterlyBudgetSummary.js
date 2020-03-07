@@ -5,10 +5,13 @@ import { connect } from 'react-redux';
 import Dollars from '../components/Dollars';
 import { t } from '../i18n';
 
-const FUNDING_SOURCES = [['hitAndHie', 'HIT and HIE'], ['mmis', 'MMIS']];
+const FUNDING_SOURCES = [
+  ['hitAndHie', 'HIT and HIE'],
+  ['mmis', 'MMIS']
+];
 const QUARTERS = [1, 2, 3, 4];
 const EXPENSE_NAME_DISPLAY = {
-  state: t('proposedBudget.quarterlyBudget.expenseNames.state'),
+  inHouse: t('proposedBudget.quarterlyBudget.expenseNames.state'),
   contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractor'),
   combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
 };

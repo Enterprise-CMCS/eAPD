@@ -93,7 +93,7 @@ describe('APD activity edit actions for cost allocation section', () => {
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,
-        path: '/activities/1/quarterlyFFP/2020/2/state',
+        path: '/activities/1/quarterlyFFP/2020/2/inHouse',
         value: 400
       },
       { type: UPDATE_BUDGET, state: 'test state' }

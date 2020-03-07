@@ -7,7 +7,7 @@ import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
 
 const EXPENSE_NAME_DISPLAY = {
-  state: t('activities.costAllocate.quarterly.expenseNames.state'),
+  inHouse: t('activities.costAllocate.quarterly.expenseNames.state'),
   contractors: t('activities.costAllocate.quarterly.expenseNames.contractor'),
   combined: t('activities.costAllocate.quarterly.expenseNames.combined')
 };
