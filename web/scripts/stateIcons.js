@@ -26,7 +26,7 @@ Object.keys(data).forEach(id => {
   const state = data[id];
   const geo = feature(state, state.objects.icon);
 
-  const dest = path.join(__dirname, `../src/static/img/${id}.svg`);
+  const dest = path.join(__dirname, `../src/static/img/states/${id}.svg`);
   const svg = makeSvg(gPath(geo));
 
   fs.writeFileSync(dest, svg);
