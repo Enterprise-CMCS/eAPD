@@ -22,7 +22,7 @@ describe('Header component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('opens and closes the dropdown when clickedgit ', () => {
+  it('opens and closes the dropdown when clicked ', () => {
     const component = shallow(
       <Header
         authenticated
