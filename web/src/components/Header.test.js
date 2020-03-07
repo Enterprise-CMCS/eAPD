@@ -1,8 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { push } from 'connected-react-router';
 
-import { plain as Header, mapStateToProps, mapDispatchToProps } from './Header';
+import { plain as Header, mapStateToProps } from './Header';
 
 describe('Header component', () => {
   it('renders correctly when the dropdown is closed and the page is top level', () => {
@@ -23,7 +22,7 @@ describe('Header component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('opens and closes the dropdown when clicked', () => {
+  it('opens and closes the dropdown when clicked ', () => {
     const component = shallow(
       <Header
         authenticated
@@ -164,9 +163,5 @@ describe('Header component', () => {
       currentUser: { role: 'admin' },
       isAdmin: true
     });
-  });
-
-  it('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ pushRoute: push });
   });
 });

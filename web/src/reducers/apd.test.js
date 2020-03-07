@@ -1,5 +1,5 @@
 import sinon from 'sinon';
-import { SELECT_APD } from '../actions/app/symbols';
+import { RESET, SELECT_APD } from '../actions/app/symbols';
 
 // The Hubble Space Telescope was launched on the space shuttle Discovery on
 // April 24, 1990.  FFY 1990.  Set this clock before we import code under test,
@@ -40,6 +40,12 @@ describe('APD reducer', () => {
 
   it('should handle initial state', () => {
     expect(apd(undefined, {})).toEqual(initialState);
+  });
+
+  it('should reset', () => {
+    expect(
+      apd({ data: { has: 'contents' }, stuff: 'here' }, { type: RESET })
+    ).toEqual({ data: {}, stuff: 'here' });
   });
 
   it('should handle creating an APD', () => {

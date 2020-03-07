@@ -19,6 +19,7 @@ Anticipated release: February 18, 2020
 - Fixed a bug that prevented creating new activities.
 - Fixed a typo in the cost allocation instructions
 - Updated the explanation for how the budget summary table is calculated ([#2058])
+- Fixed a bug where save actions from on APD could be applied to a different APD ([#2084])
 - Adds outline images for American Samoa, the Commonwealth of the Northern Mariana Islands, Guam, and the US Virgin Islands ([1758])
 
 #### ⚙️ Behind the scenes
@@ -48,4 +49,5 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2066]: https://github.com/18F/cms-hitech-apd/issues/2066
 [#2036]: https://github.com/18F/cms-hitech-apd/issues/2036
 [#2058]: https://github.com/18F/cms-hitech-apd/issues/2058
+[#2084]: https://github.com/18F/cms-hitech-apd/issues/2084
 [#1758]: https://github.com/18F/cms-hitech-apd/issues/1758
