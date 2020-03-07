@@ -189,7 +189,7 @@ class CostAllocateFFP extends Component {
 
               {isViewOnly && (
                 <p className="ds-h4 ds-u-margin-y--2">
-                  {t('activities.costAllocate.ffp.medicaidShare')}:{' '}
+                  Medicaid Share:{' '}
                   <span className="ds-u-font-weight--normal">
                     <Dollars long>{medicaidShare}</Dollars>
                   </span>
