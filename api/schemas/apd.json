@@ -355,14 +355,14 @@
                   "^(1|2|3|4)$": {
                     "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter",
                     "type": "object",
-                    "required": ["contractors", "state"],
+                    "required": ["contractors", "inHouse"],
                     "properties": {
                       "contractors": {
                         "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/contractors",
                         "$ref": "#/definitions/optionalNumber"
                       },
-                      "state": {
-                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/state",
+                      "inHouse": {
+                        "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/inHouse",
                         "$ref": "#/definitions/optionalNumber"
                       }
                     }

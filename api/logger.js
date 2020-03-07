@@ -1,3 +1,6 @@
+// We're stuck on Winston 2.x because 3.x introduced some pretty major API
+// changes. This hasn't seemed like a very high priority to update.
+
 const winston = require('winston');
 
 const loggers = {};

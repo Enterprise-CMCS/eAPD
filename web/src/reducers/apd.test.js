@@ -415,22 +415,22 @@ describe('APD reducer', () => {
             quarterlyFFP: {
               '1741': {
                 1: {
-                  state: 25,
+                  inHouse: 25,
                   contractors: 25,
                   combined: 25
                 },
                 2: {
-                  state: 25,
+                  inHouse: 25,
                   contractors: 25,
                   combined: 25
                 },
                 3: {
-                  state: 25,
+                  inHouse: 25,
                   contractors: 25,
                   combined: 25
                 },
                 4: {
-                  state: 25,
+                  inHouse: 25,
                   contractors: 25,
                   combined: 25
                 }
@@ -757,7 +757,7 @@ describe('APD reducer', () => {
                     }
                   }
                 ],
-                fundingSource: 'HIT',
+                fundingSource: false,
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
                 name: '',
@@ -779,10 +779,10 @@ describe('APD reducer', () => {
                 plannedStartDate: '',
                 quarterlyFFP: {
                   1787: {
-                    1: { combined: 25, contractors: 25, state: 25 },
-                    2: { combined: 25, contractors: 25, state: 25 },
-                    3: { combined: 25, contractors: 25, state: 25 },
-                    4: { combined: 25, contractors: 25, state: 25 }
+                    1: { combined: 25, contractors: 25, inHouse: 25 },
+                    2: { combined: 25, contractors: 25, inHouse: 25 },
+                    3: { combined: 25, contractors: 25, inHouse: 25 },
+                    4: { combined: 25, contractors: 25, inHouse: 25 }
                   }
                 },
                 schedule: [
