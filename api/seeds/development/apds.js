@@ -243,16 +243,16 @@ exports.seed = async knex => {
                 'Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.',
               quarterlyFFP: {
                 '2020': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 },
                 '2021': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 }
               }
             },
@@ -446,16 +446,16 @@ exports.seed = async knex => {
                 'To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. ',
               quarterlyFFP: {
                 '2020': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 },
                 '2021': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 }
               }
             },
@@ -603,16 +603,16 @@ exports.seed = async knex => {
               summary: 'Statewide HIE enhancement and onboarding.',
               quarterlyFFP: {
                 '2020': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 },
                 '2021': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 }
               }
             },
@@ -728,16 +728,16 @@ exports.seed = async knex => {
                 'DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE.',
               quarterlyFFP: {
                 '2020': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 },
                 '2021': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 }
               }
             },
@@ -870,16 +870,16 @@ exports.seed = async knex => {
                 'The purpose of PH modernization is to provide Medicaid EPs and EHs with the tools to improve the coordination of care, transition of care and the availability of specialty registries; increasing the number of providers attesting for meaningful use.',
               quarterlyFFP: {
                 '2020': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 },
                 '2021': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 }
               }
             },
@@ -993,16 +993,16 @@ exports.seed = async knex => {
                 'DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.',
               quarterlyFFP: {
                 '2020': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 },
                 '2021': {
-                  '1': { combined: 25, contractors: 25, state: 25 },
-                  '2': { combined: 25, contractors: 25, state: 25 },
-                  '3': { combined: 25, contractors: 25, state: 25 },
-                  '4': { combined: 25, contractors: 25, state: 25 }
+                  '1': { combined: 25, contractors: 25, inHouse: 25 },
+                  '2': { combined: 25, contractors: 25, inHouse: 25 },
+                  '3': { combined: 25, contractors: 25, inHouse: 25 },
+                  '4': { combined: 25, contractors: 25, inHouse: 25 }
                 }
               }
             }

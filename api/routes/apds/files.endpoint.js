@@ -132,14 +132,10 @@ describe('APD files endpoints', () => {
         expect(response.statusCode).toEqual(200);
 
         expect(body.url).toEqual(
-          expect.stringMatching(
-            /apds\/4000\/files\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/
-          )
+          expect.stringMatching(/apds\/4000\/files\/[a-f0-9]{64}/)
         );
 
-        const filename = body.url.match(
-          /apds\/4000\/files\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/
-        )[1];
+        const filename = body.url.match(/apds\/4000\/files\/([a-f0-9]{64})/)[1];
         expect(fs.existsSync(`test-data/files/${filename}`)).toEqual(true);
       });
     });
