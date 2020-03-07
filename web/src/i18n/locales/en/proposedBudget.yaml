@@ -6,9 +6,11 @@ summaryBudget:
   title: Summary Budget Table
   instruction:
     detail: >-
-      This table itemizes the costs for each activity by federal fiscal year (FFY).
-      The table breaks out the Medicaid share, federal share, and state share. Amounts
-      are calculated automatically.
+      These tables summarize the calculated Medicaid Share (Total Activity Cost minus any Other Funding amounts)
+      for state personnel, non-personnel, and private contractor costs for all activities by FFY. 
+      The tables provide subtotals for each of these categories by program area with the calculated 
+      Federal share by FFP rate and the associated state share. The final table in this section
+      provides the total Medicaid cost for all activities in this APD by FFY.
 quarterlyBudget:
   title: Quarterly Federal Share
   instruction:
