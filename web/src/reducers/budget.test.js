@@ -333,22 +333,22 @@ describe('budget reducer', () => {
               ],
               quarterlyFFP: {
                 '1931': {
-                  '1': { state: 25, contractors: 25 },
-                  '2': { state: 25, contractors: 25 },
-                  '3': { state: 25, contractors: 25 },
-                  '4': { state: 25, contractors: 25 }
+                  '1': { inHouse: 25, contractors: 25 },
+                  '2': { inHouse: 25, contractors: 25 },
+                  '3': { inHouse: 25, contractors: 25 },
+                  '4': { inHouse: 25, contractors: 25 }
                 },
                 '1932': {
-                  '1': { state: 25, contractors: 25 },
-                  '2': { state: 25, contractors: 25 },
-                  '3': { state: 25, contractors: 25 },
-                  '4': { state: 25, contractors: 25 }
+                  '1': { inHouse: 25, contractors: 25 },
+                  '2': { inHouse: 25, contractors: 25 },
+                  '3': { inHouse: 25, contractors: 25 },
+                  '4': { inHouse: 25, contractors: 25 }
                 },
                 '1933': {
-                  '1': { state: 25, contractors: 25 },
-                  '2': { state: 25, contractors: 25 },
-                  '3': { state: 25, contractors: 25 },
-                  '4': { state: 25, contractors: 25 }
+                  '1': { inHouse: 25, contractors: 25 },
+                  '2': { inHouse: 25, contractors: 25 },
+                  '3': { inHouse: 25, contractors: 25 },
+                  '4': { inHouse: 25, contractors: 25 }
                 }
               }
             }
