@@ -89,10 +89,10 @@ const getNewApd = () => {
         ],
         summary: '',
         quarterlyFFP: forAllYears({
-          1: { contractors: 0, state: 0 },
-          2: { contractors: 0, state: 0 },
-          3: { contractors: 0, state: 0 },
-          4: { contractors: 0, state: 0 }
+          1: { contractors: 0, inHouse: 0 },
+          2: { contractors: 0, inHouse: 0 },
+          3: { contractors: 0, inHouse: 0 },
+          4: { contractors: 0, inHouse: 0 }
         })
       }
     ],
