@@ -458,7 +458,7 @@ const buildBudget = incomingBigState => {
       const quarterlyFFP = newState.federalShareByFFYQuarter[ffpSource];
 
       ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
-        const ffpType = prop === 'contractors' ? 'contractors' : 'state';
+        const ffpType = prop === 'contractors' ? 'contractors' : 'inHouse';
         const propCostType = prop === 'contractors' ? 'contractors' : 'inHouse';
 
         // This is the percentage of the total federal share that the state
