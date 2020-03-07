@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header component opens and closes the dropdown when clickedgit  1`] = `
+exports[`Header component opens and closes the dropdown when clicked  1`] = `
 <header>
   <div
     className="ds-l-container"
