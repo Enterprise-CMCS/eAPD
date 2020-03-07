@@ -79,7 +79,7 @@ export const quarterlyFFPEntry = () =>
 
 export const newActivity = ({
   name = '',
-  fundingSource = 'HIT',
+  fundingSource = false,
   years = []
 } = {}) => ({
   alternatives: '',

@@ -302,6 +302,55 @@ describe('budget reducer', () => {
                   '4': { inHouse: 0, contractors: 0 }
                 }
               }
+            },
+            {
+              // This activity is to represent the case where an activity
+              // does not have a funding program yet. New activities do not
+              // get a funding program by default.
+              // https://github.com/18F/cms-hitech-apd/issues/2059
+              id: 6,
+              key: '6',
+              name: 'no funding program',
+              fundingSource: false,
+              years: ['1931', '1932', '1933'],
+              costAllocation: {
+                '1931': { ffp: { federal: 50, state: 50 }, other: 0 },
+                '1932': { ffp: { federal: 75, state: 25 }, other: 0 },
+                '1933': { ffp: { federal: 90, state: 10 }, other: 0 }
+              },
+              contractorResources: [
+                { years: { '1931': 100, '1932': 100, '1933': 100 } }
+              ],
+              expenses: [{ years: { '1931': 100, '1932': 100, '1933': 100 } }],
+              statePersonnel: [
+                {
+                  years: {
+                    '1931': { amt: 100, perc: 1 },
+                    '1932': { amt: 100, perc: 1 },
+                    '1933': { amt: 100, perc: 1 }
+                  }
+                }
+              ],
+              quarterlyFFP: {
+                '1931': {
+                  '1': { inHouse: 25, contractors: 25 },
+                  '2': { inHouse: 25, contractors: 25 },
+                  '3': { inHouse: 25, contractors: 25 },
+                  '4': { inHouse: 25, contractors: 25 }
+                },
+                '1932': {
+                  '1': { inHouse: 25, contractors: 25 },
+                  '2': { inHouse: 25, contractors: 25 },
+                  '3': { inHouse: 25, contractors: 25 },
+                  '4': { inHouse: 25, contractors: 25 }
+                },
+                '1933': {
+                  '1': { inHouse: 25, contractors: 25 },
+                  '2': { inHouse: 25, contractors: 25 },
+                  '3': { inHouse: 25, contractors: 25 },
+                  '4': { inHouse: 25, contractors: 25 }
+                }
+              }
             }
           ],
           keyPersonnel: [
@@ -878,13 +927,159 @@ describe('budget reducer', () => {
               inHouse: 0
             }
           }
+        },
+        '6': {
+          costsByFFY: {
+            '1931': {
+              federal: 150,
+              state: 150,
+              medicaidShare: 300,
+              total: 300
+            },
+            '1932': {
+              federal: 225,
+              state: 75,
+              medicaidShare: 300,
+              total: 300
+            },
+            '1933': {
+              federal: 270,
+              state: 30,
+              medicaidShare: 300,
+              total: 300
+            },
+            total: {
+              federal: 645,
+              medicaidShare: 900,
+              state: 255,
+              total: 900
+            }
+          },
+          quarterlyFFP: {
+            '1931': {
+              // You might intuit that that the in-house cost per quarter
+              // should be $25 since the total cost for the year is $100 and
+              // each quarter wants 25%. That'd make sense, right? Well let
+              // me teach you about how these budgets are built up.
+              //
+              // We actually calculate the quarterly amount of both state
+              // personnel and non-personnel expenses separately and them add
+              // them together to get the in-house cost per quarter. "That will
+              // still add up to the same thing," you say.  Well, yes, and no!
+              //
+              // Quick summary of the activity so all the inputs are right here
+              // for reference:
+              //    State personnel cost for 1931: $100
+              //    Non-personnel cost for 1931:   $100
+              //    Federal/state split:           50/50
+              //    ------------------------------------
+              //    State personnel federal share: $50
+              //    Non-personnel federal share:   $50
+              //
+              // At 25% per quarter, that means we want $12.50 per quarter for
+              // each one. Well that sums to $25, right? Not quite!
+              //
+              // Yes, I promise I know how to math.
+              //
+              // We don't actually get $12.50 per quarter. Because the budget
+              // calculations always produce only whole dollars with rounded
+              // values distributed, what we actually get is $13 for the first
+              // two quarters and $12 for the second two quarters.
+              //
+              // Now add it together. We get $26 for in-house costs for the
+              // first two quarters and $24 for the second two quarters. And
+              // now you know why these numbers aren't what you might expect
+              // them to be. And this same thing happens throughout the
+              // quarterly FFP math for this activity
+              '1': {
+                inHouse: { dollars: 26, percent: 0.25 },
+                contractors: { dollars: 13, percent: 0.25 },
+                combined: { dollars: 39, percent: 0 }
+              },
+              '2': {
+                inHouse: { dollars: 26, percent: 0.25 },
+                contractors: { dollars: 13, percent: 0.25 },
+                combined: { dollars: 39, percent: 0 }
+              },
+              '3': {
+                inHouse: { dollars: 24, percent: 0.25 },
+                contractors: { dollars: 12, percent: 0.25 },
+                combined: { dollars: 36, percent: 0 }
+              },
+              '4': {
+                inHouse: { dollars: 24, percent: 0.25 },
+                contractors: { dollars: 12, percent: 0.25 },
+                combined: { dollars: 36, percent: 0 }
+              },
+              subtotal: {
+                inHouse: { dollars: 100, percent: 1 },
+                contractors: { dollars: 50, percent: 1 },
+                combined: { dollars: 150, percent: 0 }
+              }
+            },
+            '1932': {
+              '1': {
+                inHouse: { dollars: 38, percent: 0.25 },
+                contractors: { dollars: 19, percent: 0.25 },
+                combined: { dollars: 57, percent: 0 }
+              },
+              '2': {
+                inHouse: { dollars: 38, percent: 0.25 },
+                contractors: { dollars: 19, percent: 0.25 },
+                combined: { dollars: 57, percent: 0 }
+              },
+              '3': {
+                inHouse: { dollars: 38, percent: 0.25 },
+                contractors: { dollars: 19, percent: 0.25 },
+                combined: { dollars: 57, percent: 0 }
+              },
+              '4': {
+                inHouse: { dollars: 36, percent: 0.25 },
+                contractors: { dollars: 18, percent: 0.25 },
+                combined: { dollars: 54, percent: 0 }
+              },
+              subtotal: {
+                inHouse: { dollars: 150, percent: 1 },
+                contractors: { dollars: 75, percent: 1 },
+                combined: { dollars: 225, percent: 0 }
+              }
+            },
+            '1933': {
+              '1': {
+                inHouse: { dollars: 46, percent: 0.25 },
+                contractors: { dollars: 23, percent: 0.25 },
+                combined: { dollars: 69, percent: 0 }
+              },
+              '2': {
+                inHouse: { dollars: 46, percent: 0.25 },
+                contractors: { dollars: 23, percent: 0.25 },
+                combined: { dollars: 69, percent: 0 }
+              },
+              '3': {
+                inHouse: { dollars: 44, percent: 0.25 },
+                contractors: { dollars: 22, percent: 0.25 },
+                combined: { dollars: 66, percent: 0 }
+              },
+              '4': {
+                inHouse: { dollars: 44, percent: 0.25 },
+                contractors: { dollars: 22, percent: 0.25 },
+                combined: { dollars: 66, percent: 0 }
+              },
+              subtotal: {
+                inHouse: { dollars: 180, percent: 1 },
+                contractors: { dollars: 90, percent: 1 },
+                combined: { dollars: 270, percent: 0 }
+              }
+            },
+            total: { inHouse: 430, contractors: 215, combined: 645 }
+          }
         }
       },
       combined: {
-        '1931': { federal: 11145, state: 1905, medicaid: 13050, total: 14050 },
-        '1932': { federal: 12930, state: 1770, medicaid: 14700, total: 15700 },
-        '1933': { federal: 24120, state: 2680, medicaid: 26800, total: 27800 },
-        total: { federal: 48195, state: 6355, medicaid: 54550, total: 57550 }
+        '1931': { federal: 11295, state: 2055, medicaid: 13350, total: 14350 },
+        '1932': { federal: 13155, state: 1845, medicaid: 15000, total: 16000 },
+        '1933': { federal: 24390, state: 2710, medicaid: 27100, total: 28100 },
+        total: { federal: 48840, state: 6610, medicaid: 55450, total: 58450 }
       },
       federalShareByFFYQuarter: {
         hitAndHie: {
@@ -1217,6 +1412,27 @@ describe('budget reducer', () => {
             },
             expenses: { '1931': 0, '1932': 0, '1933': 0, total: 0 },
             combined: { '1931': 0, '1932': 0, '1933': 0, total: 0 }
+          }
+        },
+        {
+          id: 6,
+          name: 'no funding program',
+          fundingSource: false,
+          data: {
+            statePersonnel: {
+              '1931': 100,
+              '1932': 100,
+              '1933': 100,
+              total: 300
+            },
+            contractors: {
+              '1931': 100,
+              '1932': 100,
+              '1933': 100,
+              total: 300
+            },
+            expenses: { '1931': 100, '1932': 100, '1933': 100, total: 300 },
+            combined: { '1931': 300, '1932': 300, '1933': 300, total: 900 }
           }
         }
       ],
