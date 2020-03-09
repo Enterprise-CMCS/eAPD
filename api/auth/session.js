@@ -102,8 +102,8 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
             httpOnly: true,
             maxAge: sessionLifetimeMilliseconds,
             overwrite: true,
-            sameSite: 'none',
-            secure: process.env.NODE_ENV === 'production'
+            sameSite: process.env.DISABLE_SAME_SITE ? '' : 'none',
+            secure: !process.env.DISABLE_SAME_SITE
           }
         );
       } else {
@@ -112,8 +112,8 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
         cookies.set(COOKIE_NAME, '', {
           maxAge: 0,
           httpOnly: true,
-          sameSite: 'none',
-          secure: process.env.NODE_ENV === 'production'
+          sameSite: process.env.DISABLE_SAME_SITE ? '' : 'none',
+          secure: !process.env.DISABLE_SAME_SITE
         });
       }
 
