@@ -30,4 +30,4 @@ const mapStateToProps = ({
 
 export default connect(mapStateToProps)(EntryPage);
 
-export { EntryPage, mapStateToProps };
+export { EntryPage as plain, mapStateToProps };
