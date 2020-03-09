@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header component opens and closes the dropdown when clicked 1`] = `
+exports[`Header component opens and closes the dropdown when clicked  1`] = `
 <header>
   <div
     className="ds-l-container"
@@ -11,11 +11,9 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
       <div
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
-        <Link
-          to="/"
-        >
+        <Connect(DashboardButton)>
           CMS HITECH APD
-        </Link>
+        </Connect(DashboardButton)>
       </div>
       <div
         className="ds-l-col--12 ds-l-md-col--8"
@@ -184,11 +182,9 @@ exports[`Header component renders correctly when the dropdown is closed and the 
       <div
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
-        <Link
-          to="/"
-        >
+        <Connect(DashboardButton)>
           CMS HITECH APD
-        </Link>
+        </Connect(DashboardButton)>
       </div>
       <div
         className="ds-l-col--12 ds-l-md-col--8"
@@ -357,9 +353,7 @@ exports[`Header component renders the admin home title when an admin user is at 
       <div
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
-        <Link
-          to="/"
-        >
+        <Connect(DashboardButton)>
           <FontAwesomeIcon
             border={false}
             className=""
@@ -392,7 +386,7 @@ exports[`Header component renders the admin home title when an admin user is at 
             transform={null}
           />
           Admin Dashboard
-        </Link>
+        </Connect(DashboardButton)>
       </div>
       <div
         className="ds-l-col--12 ds-l-md-col--8"
@@ -561,9 +555,7 @@ exports[`Header component renders the state user home title when a state user is
       <div
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
-        <Link
-          to="/"
-        >
+        <Connect(DashboardButton)>
           <FontAwesomeIcon
             border={false}
             className=""
@@ -596,7 +588,7 @@ exports[`Header component renders the state user home title when a state user is
             transform={null}
           />
           WA APD Home
-        </Link>
+        </Connect(DashboardButton)>
       </div>
       <div
         className="ds-l-col--12 ds-l-md-col--8"

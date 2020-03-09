@@ -82,37 +82,37 @@ Object {
         "2020": Object {
           "1": Object {
             "contractors": 0,
-            "state": 0,
+            "inHouse": 0,
           },
           "2": Object {
             "contractors": 0,
-            "state": 0,
+            "inHouse": 0,
           },
           "3": Object {
             "contractors": 0,
-            "state": 0,
+            "inHouse": 0,
           },
           "4": Object {
             "contractors": 0,
-            "state": 0,
+            "inHouse": 0,
           },
         },
         "2021": Object {
           "1": Object {
             "contractors": 0,
-            "state": 0,
+            "inHouse": 0,
           },
           "2": Object {
             "contractors": 0,
-            "state": 0,
+            "inHouse": 0,
           },
           "3": Object {
             "contractors": 0,
-            "state": 0,
+            "inHouse": 0,
           },
           "4": Object {
             "contractors": 0,
-            "state": 0,
+            "inHouse": 0,
           },
         },
       },
