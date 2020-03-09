@@ -1,6 +1,6 @@
 import u from 'updeep';
 
-import { SAVE_APD_REQUEST, SAVE_APD_SUCCESS } from '../actions/app';
+import { RESET, SAVE_APD_REQUEST, SAVE_APD_SUCCESS } from '../actions/app';
 import {
   ADD_APD_ITEM,
   ADD_APD_YEAR,
@@ -34,6 +34,9 @@ let patchesPendingSave = 0;
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case RESET:
+      return initialState;
+
     case SAVE_APD_REQUEST:
       patchesPendingSave = state.length;
       return state;

@@ -1,3 +1,5 @@
+// Express session middleware.
+
 const defaultCookies = require('cookies');
 const jwt = require('jsonwebtoken');
 const logger = require('../logger')('auth session');

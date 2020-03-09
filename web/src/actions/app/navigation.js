@@ -1,6 +1,12 @@
-import { NAVIGATION_SCROLL_TO_WAYPOINT } from './symbols';
+import { push } from 'connected-react-router';
+import { NAVIGATION_SCROLL_TO_WAYPOINT, RESET } from './symbols';
 
 let jumping = false;
+
+export const goToDashboard = ({ pushRoute = push } = {}) => dispatch => {
+  dispatch({ type: RESET });
+  dispatch(pushRoute('/'));
+};
 
 export const jumpTo = waypoint => dispatch => {
   if (waypoint) {

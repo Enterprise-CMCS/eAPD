@@ -1,3 +1,7 @@
+// For auditing events. Create an auditor object, set its target, then use
+// set on each field that was changed. Finally call log when you're done to
+// persis the audit log. Uses the standard logger
+
 const logger = require('./logger')('AUDIT');
 
 const CREATE_ACCOUNT = Symbol('audit: create account');
@@ -14,6 +18,21 @@ const actionsToProps = {
   [REMOVE_ACCOUNT]: 'removeAccount'
 };
 
+/**
+ * @typedef {Object} Auditor
+ * @property {function} log Log the set of changes in the audit log
+ * @property {function} set Set a property on the audit target object. First arg is the property name, second argument is the new value
+ * @property {function} target Set the object that is the target of the audit.
+ */
+
+/**
+ * Create an auditor
+ *
+ * @param {Symbol} action The auditable action to capture.
+ * @param {Object} req The HTTP request object assocaited with the audit
+ * @return {Auditor} An auditor object for the action and request
+ *
+ * */
 module.exports = (action, req) => {
   try {
     if (!actionsToProps[action]) {

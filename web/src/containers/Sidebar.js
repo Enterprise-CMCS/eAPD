@@ -257,14 +257,17 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
     }
   });
 
-  const hasImage = ['as', 'gu', 'mp', 'vi'].indexOf(place.id) < 0;
+  const hasImage = [].indexOf(place.id) < 0;
+  const imgExt = ['png', 'svg'][
+    ['as', 'gu', 'mp', 'vi'].indexOf(place.id) < 0 ? 1 : 0
+  ];
 
   return (
     <aside className="site-sidebar">
       <div className="ds-u-display--flex ds-u-align-items--center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4">
         {hasImage && (
           <img
-            src={`/static/img/states/${place.id}.svg`}
+            src={`/static/img/states/${place.id}.${imgExt}`}
             alt={place.name}
             className="ds-u-margin-right--2"
             width="40"
