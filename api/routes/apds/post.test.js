@@ -141,16 +141,16 @@ tap.test('apds POST endpoint', async endpointTest => {
             summary: '',
             quarterlyFFP: {
               '2004': {
-                1: { contractors: 0, state: 0 },
-                2: { contractors: 0, state: 0 },
-                3: { contractors: 0, state: 0 },
-                4: { contractors: 0, state: 0 }
+                1: { contractors: 0, inHouse: 0 },
+                2: { contractors: 0, inHouse: 0 },
+                3: { contractors: 0, inHouse: 0 },
+                4: { contractors: 0, inHouse: 0 }
               },
               '2005': {
-                1: { contractors: 0, state: 0 },
-                2: { contractors: 0, state: 0 },
-                3: { contractors: 0, state: 0 },
-                4: { contractors: 0, state: 0 }
+                1: { contractors: 0, inHouse: 0 },
+                2: { contractors: 0, inHouse: 0 },
+                3: { contractors: 0, inHouse: 0 },
+                4: { contractors: 0, inHouse: 0 }
               }
             }
           }
@@ -254,14 +254,16 @@ tap.test('apds POST endpoint', async endpointTest => {
 
       await handler(req, res);
 
-      test.ok(
+      test.same(
+        createAPD.args[0][0],
         {
           state_id: 'st',
           status: 'draft',
-          document: createAPD.calledWith(expectedApd)
+          document: expectedApd
         },
         'expected APD is created'
       );
+
       test.same(
         res.send.args[0][0],
         {

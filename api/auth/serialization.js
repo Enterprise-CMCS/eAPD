@@ -1,3 +1,5 @@
+// Passport.js user serialization methods.
+
 const logger = require('../logger')('user serialization');
 const { getUserByID: gu } = require('../db');
 
