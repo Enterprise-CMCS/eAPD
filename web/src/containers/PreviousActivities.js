@@ -16,34 +16,32 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
   const onChange = value => setSummary(value);
 
   return (
-    <Waypoint id="prev-activities-overview">
-      <Section id="prev-activities" resource="previousActivities">
-        <Waypoint id="prev-activities-outline" />
-        <Subsection
-          id="prev-activities-outline"
-          resource="previousActivities.outline"
-        >
-          <h4 className="ds-c-label">
-            {t('previousActivities.outline.instruction.label')}
-          </h4>
-          <RichText
-            content={previousActivitySummary}
-            onSync={onChange}
-            editorClassName="rte-textarea-l"
-          />
-        </Subsection>
+    <Section id="prev-activities" resource="previousActivities">
+      <Waypoint id="prev-activities-outline" />
+      <Subsection
+        id="prev-activities-outline"
+        resource="previousActivities.outline"
+      >
+        <h4 className="ds-c-label">
+          {t('previousActivities.outline.instruction.label')}
+        </h4>
+        <RichText
+          content={previousActivitySummary}
+          onSync={onChange}
+          editorClassName="rte-textarea-l"
+        />
+      </Subsection>
 
-        <Waypoint id="prev-activities-table" />
-        <Subsection
-          id="prev-activities-table"
-          resource="previousActivities.actualExpenses"
-        >
-          <ApdPreviousActivityTableHI />
-          <ApdPreviousActivityTableMMIS />
-          <ApdPreviousActivityTableTotal />
-        </Subsection>
-      </Section>
-    </Waypoint>
+      <Waypoint id="prev-activities-table" />
+      <Subsection
+        id="prev-activities-table"
+        resource="previousActivities.actualExpenses"
+      >
+        <ApdPreviousActivityTableHI />
+        <ApdPreviousActivityTableMMIS />
+        <ApdPreviousActivityTableTotal />
+      </Subsection>
+    </Section>
   );
 };
 

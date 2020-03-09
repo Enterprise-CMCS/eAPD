@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import stickybits from 'stickybits';
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
@@ -15,171 +16,246 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
     stickybits('.site-sidebar');
   }, []);
 
-  const handleSelectClick = id => {
+  const history = useHistory();
+  const { path: routePath } = useRouteMatch();
+
+  const pageNav = (id, route) => e => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    jumpAction(id);
+    history.push(`${routePath}/${route}`);
+    window.scrollTo(0, 0);
+  };
+
+  const anchorNav = id => () => {
     jumpAction(id);
   };
-
-  const createActivityItems = () => {
-    const activityItems = activities.map((a, i) => ({
-      id: a.key,
-      url: `#${a.anchor}`,
-      label: t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
-        number: i + 1,
-        name: a.name
-      }),
-      onClick: (_, id) => handleSelectClick(id)
-    }));
-
-    activityItems.splice(0, 0, {
-      id: 'activities-overview',
-      url: '#activities',
-      label: 'Overview',
-      onClick: (_, id) => handleSelectClick(id)
-    });
-
-    return activityItems;
-  };
-
-  const activityItems = createActivityItems(activities);
 
   const links = [
     {
       id: 'apd-state-profile',
       label: t('apd.stateProfile.title'),
-      defaultCollapsed: true,
-      items: [
-        {
-          id: 'apd-state-profile-overview',
-          url: '#apd-state-profile',
-          label: 'Overview',
-          onClick: (_, id) => handleSelectClick(id)
-        },
+      onClick: pageNav('apd-state-profile-office', 'state-profile'),
+      children: [
         {
           id: 'apd-state-profile-office',
-          url: '#apd-state-profile-office',
-          label: t('apd.stateProfile.directorAndAddress.title'),
-          onClick: (_, id) => handleSelectClick(id)
+          label: t('apd.stateProfile.directorAndAddress.title')
         },
         {
           id: 'apd-state-profile-key-personnel',
-          url: '#apd-state-profile-key-personnel',
-          label: t('apd.stateProfile.keyPersonnel.title'),
-          onClick: (_, id) => handleSelectClick(id)
+          label: t('apd.stateProfile.keyPersonnel.title')
         }
       ]
     },
     {
       id: 'apd-summary',
-      url: '#apd-summary',
       label: t('apd.title'),
-      onClick: (_, id) => handleSelectClick(id)
+      onClick: pageNav('apd-summary', 'program-summary')
     },
     {
-      id: 'prev-activities',
+      id: 'previous-activities',
       label: t('previousActivities.title'),
-      defaultCollapsed: true,
-      items: [
-        {
-          id: 'prev-activities-overview',
-          url: '#prev-activities',
-          label: 'Overview',
-          onClick: (_, id) => handleSelectClick(id)
-        },
+      onClick: pageNav('prev-activities-outline', 'previous-activities'),
+      children: [
         {
           id: 'prev-activities-outline',
-          url: '#prev-activities-outline',
-          label: t('previousActivities.outline.title'),
-          onClick: (_, id) => handleSelectClick(id)
+          label: t('previousActivities.outline.title')
         },
         {
           id: 'prev-activities-table',
-          url: '#prev-activities-table',
-          label: t('previousActivities.actualExpenses.title'),
-          onClick: (_, id) => handleSelectClick(id)
+          label: t('previousActivities.actualExpenses.title')
         }
       ]
     },
     {
       id: 'activities',
       label: t('activities.title'),
-      defaultCollapsed: true,
-      items: activityItems
+      onClick: pageNav('activities-list', 'activities'),
+      children: [
+        {
+          id: 'activities-list',
+          label: t('activities.list.title'),
+          onClick: pageNav('activities-list', 'activities'),
+          url: `activities`
+        }
+      ]
     },
     {
       id: 'schedule-summary',
-      url: '#schedule-summary',
       label: t('scheduleSummary.title'),
-      onClick: (_, id) => handleSelectClick(id)
+      onClick: pageNav('schedule-summary', 'schedule-summary')
     },
     {
-      id: 'budget',
+      id: 'proposed-budget',
       label: t('proposedBudget.title'),
-      defaultCollapsed: true,
-      items: [
-        {
-          id: 'budget-overview',
-          url: '#budget',
-          label: 'Overview',
-          onClick: (_, id) => handleSelectClick(id)
-        },
+      onClick: pageNav('budget-summary-table', 'proposed-budget'),
+      children: [
         {
           id: 'budget-summary-table',
-          url: '#budget-summary-table',
-          label: t('proposedBudget.summaryBudget.title'),
-          onClick: (_, id) => handleSelectClick(id)
+          label: t('proposedBudget.summaryBudget.title')
         },
         {
           id: 'budget-federal-by-quarter',
-          url: '#budget-federal-by-quarter',
-          label: t('proposedBudget.quarterlyBudget.title'),
-          onClick: (_, id) => handleSelectClick(id)
-        },
-        {
-          id: 'budget-incentive-by-quarter',
-          url: '#budget-incentive-by-quarter',
-          label: t('proposedBudget.paymentsByFFYQuarter.title'),
-          onClick: (_, id) => handleSelectClick(id)
+          label: t('proposedBudget.paymentsByFFYQuarter.title')
         }
       ]
     },
     {
       id: 'assurances-compliance',
-      url: '#assurances-compliance',
       label: t('assurancesAndCompliance.title'),
-      onClick: (_, id) => handleSelectClick(id)
+      onClick: pageNav('assurances-compliance', 'assurances-and-compliance')
     },
     {
       id: 'executive-summary',
       label: t('executiveSummary.title'),
-      defaultCollapsed: true,
-      items: [
-        {
-          id: 'executive-summary-overview',
-          url: '#executive-summary',
-          label: 'Overview',
-          onClick: (_, id) => handleSelectClick(id)
-        },
+      onClick: pageNav('executive-summary-summary', 'executive-summary'),
+      children: [
         {
           id: 'executive-summary-summary',
-          url: '#executive-summary-summary',
-          label: t('executiveSummary.summary.title'),
-          onClick: (_, id) => handleSelectClick(id)
+          label: t('executiveSummary.summary.title')
         },
         {
           id: 'executive-summary-budget-table',
-          url: '#executive-summary-budget-table',
-          label: t('executiveSummary.budgetTable.title'),
-          onClick: (_, id) => handleSelectClick(id)
+          label: t('executiveSummary.budgetTable.title')
         }
       ]
     },
     {
-      id: 'export-and-submit',
-      url: '#export-and-submit',
+      id: 'export',
       label: t('exportAndSubmit.title'),
-      onClick: (_, id) => handleSelectClick(id)
+      onClick: pageNav('export', 'export')
     }
   ];
+
+  links.forEach(topLevel => {
+    // Gather up a list of all the nav item IDs that belong to this top-level
+    // item. We'll use that list to determine if this item should show as being
+    // selected, which would mean we need to show its child elements.
+    const ids = [topLevel.id];
+    if (topLevel.children) {
+      ids.push(...topLevel.children.map(child => child.id));
+
+      if (topLevel.id === 'activities') {
+        ids.push(...activities.map(({ key }) => `activity-${key}`));
+        activities.forEach(({ key }) =>
+          ids.push(
+            `activity-${key}-overview`,
+            `activity-${key}-okrs`,
+            `activity-${key}-state-costs`,
+            `activity-${key}-contractor-costs`,
+            `activity-${key}-cost-allocation`,
+            `activity-${key}-ffp`
+          )
+        );
+      }
+    }
+
+    const selected = ids.indexOf(activeSection) >= 0;
+
+    if (selected) {
+      // Selected nav items should not have a URL; otherwise, they get
+      // rendered twice - once in this nav item and once as the first child.
+      topLevel.url = undefined;
+
+      // If this item is defined as having children, turn those into
+      // sidebar items.
+      if (topLevel.children) {
+        topLevel.items = topLevel.children.map(child => ({
+          onClick: anchorNav(child.id),
+          url: `#${child.id}`,
+          ...child
+        }));
+
+        // If we're on the activities sidebar item, we should also push a list
+        // of activities into its items.
+        if (topLevel.id === 'activities') {
+          topLevel.items.push(
+            ...activities.map(({ key, name }, i) => {
+              // But what if the selected item is an activity? Or within one?!
+              // Well let's check for that too, okay?
+              const activitySelected =
+                activeSection.substr(0, 17) === `activity-${key}`;
+
+              return {
+                id: `activity-${key}`,
+                // Remove the url property if this activity is selected. Same
+                // reason as above: otherwise it'll show up twice.
+                url: activitySelected ? null : `activity/${i}`,
+                label: t(`sidebar.titles.activity-${name ? 'set' : 'unset'}`, {
+                  number: i + 1,
+                  name
+                }),
+                onClick: pageNav(`activity-${key}-overview`, `activity/${i}`),
+
+                // For the selected activity, also show the activity sections.
+                items: activitySelected
+                  ? [
+                      {
+                        id: `activity-${key}-overview`,
+                        label: 'Activity overview',
+                        url: `activity/${i}/overview`,
+                        onClick: pageNav(
+                          `activity-${key}-overview`,
+                          `activity/${i}/overview`
+                        )
+                      },
+                      {
+                        id: `activity-${key}-okrs`,
+                        label: 'Objectives and key results',
+                        url: `activity/${i}/okrs`,
+                        onClick: pageNav(
+                          `activity-${key}-okrs`,
+                          `activity/${i}/okrs`
+                        )
+                      },
+                      {
+                        id: `activity-${key}-state-costs`,
+                        label: 'State cost categories',
+                        url: `activity/${i}/state-costs`,
+                        onClick: pageNav(
+                          `activity-${key}-state-costs`,
+                          `activity/${i}/state-costs`
+                        )
+                      },
+                      {
+                        id: `activity-${key}-contractor-costs`,
+                        label: 'Private contractor costs',
+                        url: `activity/${i}/contractor-costs`,
+                        onClick: pageNav(
+                          `activity-${key}-contractor-costs`,
+                          `activity/${i}/contractor-costs`
+                        )
+                      },
+                      {
+                        id: `activity-${key}-cost-allocation`,
+                        label: 'Cost allocation',
+                        url: `activity/${i}/cost-allocation`,
+                        onClick: pageNav(
+                          `activity-${key}-cost-allocation`,
+                          `activity/${i}/cost-allocation`
+                        )
+                      },
+                      {
+                        id: `activity-${key}-ffp`,
+                        label: 'FFP and budget',
+                        url: `activity/${i}/ffp`,
+                        onClick: pageNav(
+                          `activity-${key}-ffp`,
+                          `activity/${i}/ffp`
+                        )
+                      }
+                    ]
+                  : null
+              };
+            })
+          );
+        }
+      }
+    } else {
+      topLevel.url = '#';
+    }
+  });
 
   const hasImage = ['as', 'gu', 'mp', 'vi'].indexOf(place.id) < 0;
 
