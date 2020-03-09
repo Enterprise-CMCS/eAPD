@@ -53,7 +53,7 @@ export const setFFPForInHouseCostsForFiscalQuarter = (
 ) => dispatch => {
   dispatch({
     type: EDIT_APD,
-    path: `/activities/${activityIndex}/quarterlyFFP/${year}/${quarter}/state`,
+    path: `/activities/${activityIndex}/quarterlyFFP/${year}/${quarter}/inHouse`,
     value: ffpPercent
   });
   dispatch(updateBudget());

@@ -1,12 +1,25 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { jumpTo, scrollTo } from './navigation';
-import { NAVIGATION_SCROLL_TO_WAYPOINT } from './symbols';
+import { goToDashboard, jumpTo, scrollTo } from './navigation';
+import { NAVIGATION_SCROLL_TO_WAYPOINT, RESET } from './symbols';
 
 const mockStore = configureStore([thunk]);
 
 describe('navigation actions', () => {
+  it('goToDashboard sends a reset action and a route action', () => {
+    const store = mockStore();
+    const pushRoute = jest.fn();
+    pushRoute.mockReturnValue({ type: 'push route' });
+
+    store.dispatch(goToDashboard({ pushRoute }));
+
+    expect(store.getActions()).toEqual([
+      { type: RESET },
+      { type: 'push route' }
+    ]);
+  });
+
   describe('jumpTo sends a waypoint update action', () => {
     it('...if there is a waypoint id', () => {
       const store = mockStore();
