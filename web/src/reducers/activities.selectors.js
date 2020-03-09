@@ -62,8 +62,8 @@ export const selectActivityCostSummary = createSelector(
     { activityIndex }
   ) =>
     years.reduce(
-      (o, ffy) => ({
-        ...o,
+      (activityKeyPersonnel, ffy) => ({
+        ...activityKeyPersonnel,
         [ffy]:
           activityIndex === 0
             ? keyPersonnel.map(kp => ({
@@ -74,7 +74,7 @@ export const selectActivityCostSummary = createSelector(
               }))
             : []
       }),
-      []
+      {}
     ),
   (years, activity, budget, keyPersonnel) => {
     const total = {
