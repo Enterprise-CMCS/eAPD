@@ -10,7 +10,7 @@ import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 
 const Loading = ({ children }) => (
-  <div className="ds-h2 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
+  <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
     <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
     {children}
   </div>
@@ -49,15 +49,19 @@ const StateDashboard = (
   };
 
   if (isLoading) {
-    return <Loading>Loading your APD</Loading>;
+    return (
+      <div id="start-main-content">
+        x<Loading>Loading your APD</Loading>
+      </div>
+    );
   }
 
   return (
     <div
       id="start-main-content"
-      className="ds-l-container ds-u-margin-top--7 ds-u-margin-bottom--5"
+      className="ds-l-container ds-u-margin-bottom--5"
     >
-      <div className="ds-l-row">
+      <div className="ds-l-row ds-u-margin-top--7">
         <div className="ds-l-col--8 ds-u-margin-x--auto ">
           <h1 className="ds-h1">
             {t('stateDashboard.title', { state: state.name })}
