@@ -103,7 +103,7 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
             maxAge: sessionLifetimeMilliseconds,
             overwrite: true,
             sameSite: process.env.DISABLE_SAME_SITE ? '' : 'none',
-            secure: !process.env.DISABLE_SAME_SITE
+            secure: !process.env.DISABLE_SECURE_COOKIE
           }
         );
       } else {
@@ -113,7 +113,7 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
           maxAge: 0,
           httpOnly: true,
           sameSite: process.env.DISABLE_SAME_SITE ? '' : 'none',
-          secure: !process.env.DISABLE_SAME_SITE
+          secure: !process.env.DISABLE_SECURE_COOKIE
         });
       }
 
