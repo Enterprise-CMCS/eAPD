@@ -128,7 +128,7 @@ tap.test('session functions', async tests => {
               maxAge: 0,
               httpOnly: true,
               sameSite: 'none',
-              secure: false
+              secure: true
             }),
             'cookie is empty and expired'
           );
@@ -160,7 +160,7 @@ tap.test('session functions', async tests => {
             maxAge: 60000,
             overwrite: true,
             sameSite: 'none',
-            secure: false
+            secure: true
           }),
           'sets the cookie'
         );
@@ -209,7 +209,7 @@ tap.test('session functions', async tests => {
               maxAge: 60000,
               overwrite: true,
               sameSite: 'none',
-              secure: false
+              secure: true
             }),
             'sets the cookie'
           );
@@ -251,7 +251,7 @@ tap.test('session functions', async tests => {
             maxAge: 0,
             httpOnly: true,
             sameSite: 'none',
-            secure: false
+            secure: true
           }),
           'cookie is empty and expired'
         );
@@ -277,7 +277,7 @@ tap.test('session functions', async tests => {
           maxAge: 0,
           httpOnly: true,
           sameSite: 'none',
-          secure: false
+          secure: true
         }),
         'cookie is empty and expired'
       );
