@@ -23,6 +23,7 @@ services:
       - ENDPOINT_COVERAGE_CAPTURE=yes
       - FILE_STORE=local
       - FILE_PATH=test-data/files
+      - DISABLE_SECURE_COOKIE=yes
     command: npm start
     expose:
       - 8000
