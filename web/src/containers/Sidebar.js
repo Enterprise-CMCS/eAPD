@@ -97,6 +97,10 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
         },
         {
           id: 'budget-federal-by-quarter',
+          label: t('proposedBudget.quarterlyBudget.title')
+        },
+        {
+          id: 'budget-incentive-by-quarter',
           label: t('proposedBudget.paymentsByFFYQuarter.title')
         }
       ]
