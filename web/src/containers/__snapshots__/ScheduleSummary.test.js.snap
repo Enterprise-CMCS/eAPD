@@ -6,7 +6,6 @@ exports[`schedule summary component renders correctly 1`] = `
 >
   <Section
     id="schedule-summary"
-    isNumbered={true}
     resource="scheduleSummary"
   >
     <Subsection
@@ -221,7 +220,6 @@ exports[`schedule summary component renders correctly with no data 1`] = `
 >
   <Section
     id="schedule-summary"
-    isNumbered={true}
     resource="scheduleSummary"
   >
     <Subsection
