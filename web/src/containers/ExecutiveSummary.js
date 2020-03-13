@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Waypoint from './ConnectedWaypoint';
@@ -8,25 +9,25 @@ import Dollars from '../components/Dollars';
 import Review from '../components/Review';
 import { Section, Subsection } from '../components/Section';
 
+import { jumpTo } from '../actions/app';
 import { selectApdYears } from '../reducers/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
 } from '../reducers/budget.selectors';
 
-import ActivityDialog from './activity/EntryDetailsDialog';
+const ExecutiveSummary = ({ data, jumpAction, total, years }) => {
+  const history = useHistory();
 
-const ExecutiveSummary = props => {
-  const [showModal, setShowModal] = useState(false);
-  const [activityIndexForModal, setActivityIndexForModal] = useState(-1);
-  const { data, total, years } = props;
-  const openModal = index => {
-    setActivityIndexForModal(index);
-    setShowModal(true);
+  const navigateToActivity = (key, index) => e => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    jumpAction(`activity-${key}-overview`);
+    history.push(`/apd/activity/${index}`);
+    window.scrollTo(0, 0);
   };
-  const closeModal = () => {
-    setShowModal(false);
-  };
+
   return (
     <Section id="executive-summary" resource="executiveSummary">
       <Waypoint id="executive-summary-summary" />
@@ -44,7 +45,7 @@ const ExecutiveSummary = props => {
             }
             headingLevel={4}
             editHref=""
-            onEditClick={() => openModal(i)}
+            onEditClick={navigateToActivity(activity.key, i)}
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >
             {activity.summary && <p>{activity.summary}</p>}
@@ -75,15 +76,7 @@ const ExecutiveSummary = props => {
             </ul>
           </Review>
         ))}
-        {showModal && (
-          <ActivityDialog
-            title={`Activity ${activityIndexForModal + 1}: ${
-              data[activityIndexForModal].name
-            }`}
-            activityIndex={activityIndexForModal}
-            closeModal={closeModal}
-          />
-        )}
+
         <hr className="ds-u-border--dark ds-u-margin--0" />
         <Review
           heading="Total cost"
@@ -134,6 +127,7 @@ const ExecutiveSummary = props => {
 
 ExecutiveSummary.propTypes = {
   data: PropTypes.array.isRequired,
+  jumpAction: PropTypes.func.isRequired,
   total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
@@ -144,6 +138,8 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
-export default connect(mapStateToProps, null)(ExecutiveSummary);
+const mapDispatchToProps = { jumpAction: jumpTo };
 
-export { ExecutiveSummary as plain, mapStateToProps };
+export default connect(mapStateToProps, mapDispatchToProps)(ExecutiveSummary);
+
+export { ExecutiveSummary as plain, mapStateToProps, mapDispatchToProps };

@@ -13,21 +13,19 @@ const All = ({ add, activities }) => {
   const onAdd = () => add();
 
   return (
-    <Waypoint id="activities-overview">
-      <Section id="activities" resource="activities">
-        <h3 className="subsection--title ds-h3">
-          {activities.length} program activities
-        </h3>
-        {activities.map(({ key }, index) => (
-          <Waypoint id={key} key={key}>
-            <EntryDetails activityIndex={index} />
-          </Waypoint>
-        ))}
-        <Button className="ds-u-margin-top--4" onClick={onAdd}>
-          Add another activity
-        </Button>
-      </Section>
-    </Waypoint>
+    <Section id="activities" resource="activities">
+      <h3 className="subsection--title ds-h3">
+        {activities.length} program activities
+      </h3>
+      {activities.map(({ key }, index) => (
+        <Waypoint id={key} key={key}>
+          <EntryDetails activityIndex={index} />
+        </Waypoint>
+      ))}
+      <Button className="ds-u-margin-top--4" onClick={onAdd}>
+        Add another activity
+      </Button>
+    </Section>
   );
 };
 

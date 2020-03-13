@@ -1,7 +1,24 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as ExecutiveSummary, mapStateToProps } from './ExecutiveSummary';
+import {
+  plain as ExecutiveSummary,
+  mapDispatchToProps,
+  mapStateToProps
+} from './ExecutiveSummary';
+import { jumpTo } from '../actions/app';
+
+let mockPush;
+
+jest.mock('react-router-dom', () => {
+  mockPush = jest.fn();
+  return {
+    useHistory: jest.fn().mockReturnValue({ push: mockPush }),
+    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' })
+  };
+});
+
+global.scrollTo = jest.fn();
 
 describe('executive summary component', () => {
   const props = {
@@ -47,6 +64,7 @@ describe('executive summary component', () => {
         }
       }
     ],
+    jumpAction: jest.fn(),
     total: {
       combined: 10,
       federal: 20,
@@ -67,9 +85,19 @@ describe('executive summary component', () => {
     years: ['1', '2']
   };
 
-  test('renders correctly', () => {
+  it('renders correctly', () => {
     const component = shallow(<ExecutiveSummary {...props} />);
     expect(component).toMatchSnapshot();
+  });
+
+  test('navigates to activities', () => {
+    const component = shallow(<ExecutiveSummary {...props} />);
+    expect(component).toMatchSnapshot();
+
+    const e = {
+      stopPropagation: jest.fn(),
+      preventDefault: jest.fn()
+    };
 
     const review = component
       .find('StandardReview')
@@ -78,18 +106,19 @@ describe('executive summary component', () => {
     review
       .dive()
       .find('Button')
-      .simulate('click');
+      .simulate('click', e);
 
-    // Modal is now open
-    expect(component).toMatchSnapshot();
+    // cancels the click
+    expect(e.stopPropagation).toHaveBeenCalled();
+    expect(e.preventDefault).toHaveBeenCalled();
 
-    component.find('ActivityDialog').prop('closeModal')();
-
-    // Modal is now closed again
-    expect(component).toMatchSnapshot();
+    // updates nav state, navigates, and scrolls up
+    expect(props.jumpAction).toHaveBeenCalledWith('activity-a1-overview');
+    expect(mockPush).toHaveBeenCalledWith('/apd/activity/0');
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
-  test('maps state to props', () => {
+  it('maps state to props', () => {
     const state = {
       apd: {
         data: {
@@ -177,5 +206,9 @@ describe('executive summary component', () => {
       },
       years: ['1', '2']
     });
+  });
+
+  it('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({ jumpAction: jumpTo });
   });
 });
