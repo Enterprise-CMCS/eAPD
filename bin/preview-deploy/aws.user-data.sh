@@ -162,9 +162,9 @@ echo "module.exports = {
       PBKDF2_ITERATIONS: '__PBKDF2_ITERATIONS__',
       PORT: '8000',
       DEV_DB_HOST: 'localhost',
+      SESSION_SECRET: '833daa028db9c8d05890206446f0e5e4156fa7ae34d526f7fab44f6b830c6c20',
       DISABLE_SAME_SITE: 'yes',
-      DISABLE_SECURE_COOKIE: 'yes',
-      SESSION_SECRET: '833daa028db9c8d05890206446f0e5e4156fa7ae34d526f7fab44f6b830c6c20'
+      DISABLE_SECURE_COOKIE: 'yes'
     },
   }]
 };" > ecosystem.config.js
