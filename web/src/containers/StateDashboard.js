@@ -51,7 +51,7 @@ const StateDashboard = (
   if (isLoading) {
     return (
       <div id="start-main-content">
-        x<Loading>Loading your APD</Loading>
+        <Loading>Loading your APD</Loading>
       </div>
     );
   }
