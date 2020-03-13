@@ -1,69 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`APD page router renders as expected 1`] = `
-<Switch>
-  <Route
-    path="/apd/activity/:activityIndex"
+<Component>
+  <Component
+    path="this is where the page is/activity/:activityIndex"
   >
     <Connect(EntryPage) />
-  </Route>
-  <Route
-    path="/apd"
+  </Component>
+  <Component
+    path="this is where the page is"
   >
     <ApdHeader
       apdName=""
     />
-    <Route
+    <Component
       exact={true}
-      path="/apd"
+      path="this is where the page is"
     >
       <ApdStateProfile />
-    </Route>
-    <Route
-      path="/apd/state-profile"
+    </Component>
+    <Component
+      path="this is where the page is/state-profile"
     >
       <ApdStateProfile />
-    </Route>
-    <Route
-      path="/apd/program-summary"
+    </Component>
+    <Component
+      path="this is where the page is/program-summary"
     >
       <Connect(ApdSummary) />
-    </Route>
-    <Route
-      path="/apd/previous-activities"
+    </Component>
+    <Component
+      path="this is where the page is/previous-activities"
     >
       <Connect(PreviousActivities) />
-    </Route>
-    <Route
-      path="/apd/activities"
+    </Component>
+    <Component
+      path="this is where the page is/activities"
     >
       <Connect(All) />
-    </Route>
-    <Route
-      path="/apd/schedule-summary"
+    </Component>
+    <Component
+      path="this is where the page is/schedule-summary"
     >
       <Connect(ScheduleSummary) />
-    </Route>
-    <Route
-      path="/apd/proposed-budget"
+    </Component>
+    <Component
+      path="this is where the page is/proposed-budget"
     >
       <ProposedBudget />
-    </Route>
-    <Route
-      path="/apd/assurances-and-compliance"
+    </Component>
+    <Component
+      path="this is where the page is/assurances-and-compliance"
     >
       <Connect(AssurancesAndCompliance) />
-    </Route>
-    <Route
-      path="/apd/executive-summary"
+    </Component>
+    <Component
+      path="this is where the page is/executive-summary"
     >
       <Connect(ExecutiveSummary) />
-    </Route>
-    <Route
-      path="/apd/export"
+    </Component>
+    <Component
+      path="this is where the page is/export"
     >
       <Connect(ExportAndSubmit) />
-    </Route>
-  </Route>
-</Switch>
+    </Component>
+  </Component>
+</Component>
 `;
