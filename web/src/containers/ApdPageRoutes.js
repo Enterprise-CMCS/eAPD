@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 import ApdHeader from './ApdHeader';
 import Activities from './activity/All';
@@ -14,52 +14,54 @@ import ScheduleSummary from './ScheduleSummary';
 import StateProfile from '../components/ApdStateProfile';
 
 const ApdPageRoutes = ({ ...props }) => {
+  const { path } = useRouteMatch();
+
   return (
     <Switch>
-      <Route path="/apd/activity/:activityIndex">
+      <Route path={`${path}/activity/:activityIndex`}>
         <EntryPage />
       </Route>
 
-      <Route path="/apd">
+      <Route path={path}>
         <ApdHeader {...props} />
 
-        <Route exact path="/apd">
+        <Route exact path={path}>
           <StateProfile />
         </Route>
 
-        <Route path="/apd/state-profile">
+        <Route path={`${path}/state-profile`}>
           <StateProfile />
         </Route>
 
-        <Route path="/apd/program-summary">
+        <Route path={`${path}/program-summary`}>
           <ApdSummary />
         </Route>
 
-        <Route path="/apd/previous-activities">
+        <Route path={`${path}/previous-activities`}>
           <PreviousActivities />
         </Route>
 
-        <Route path="/apd/activities">
+        <Route path={`${path}/activities`}>
           <Activities />
         </Route>
 
-        <Route path="/apd/schedule-summary">
+        <Route path={`${path}/schedule-summary`}>
           <ScheduleSummary />
         </Route>
 
-        <Route path="/apd/proposed-budget">
+        <Route path={`${path}/proposed-budget`}>
           <ProposedBudget />
         </Route>
 
-        <Route path="/apd/assurances-and-compliance">
+        <Route path={`${path}/assurances-and-compliance`}>
           <AssurancesAndCompliance />
         </Route>
 
-        <Route path="/apd/executive-summary">
+        <Route path={`${path}/executive-summary`}>
           <ExecutiveSummary />
         </Route>
 
-        <Route path="/apd/export">
+        <Route path={`${path}/export`}>
           <Export />
         </Route>
       </Route>

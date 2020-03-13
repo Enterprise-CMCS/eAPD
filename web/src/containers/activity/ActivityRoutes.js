@@ -13,7 +13,6 @@ import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
 
 const ActivityRoutes = ({ activityIndex }) => {
-  // const path = '/apd/activity/:activityIndex/';
   const { path } = useRouteMatch();
 
   return (
