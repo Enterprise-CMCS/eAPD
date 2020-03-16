@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { push } from 'connected-react-router';
 
 import { getIsAdmin } from '../reducers/user.selector';
 import { t } from '../i18n';
+
+import DashboardButton from './DashboardButton';
 
 import Icon, {
   faChevronDown,
@@ -54,14 +55,14 @@ class Header extends Component {
           <div className="ds-l-row">
             <div className="ds-l-col--12 ds-l-md-col--4 site-title">
               {showSiteTitle || !authenticated ? (
-                <Link to="/">{t('titleBasic')}</Link>
+                <DashboardButton>{t('titleBasic')}</DashboardButton>
               ) : (
-                <Link to="/">
+                <DashboardButton>
                   <Icon icon={faChevronLeft} size="sm" />
                   {isAdmin
                     ? 'Admin Dashboard'
                     : `${currentUser.state.id.toUpperCase()} APD Home`}
-                </Link>
+                </DashboardButton>
               )}
             </div>
             {authenticated && (
@@ -118,8 +119,6 @@ const mapStateToProps = state => ({
   isAdmin: getIsAdmin(state)
 });
 
-const mapDispatchToProps = { pushRoute: push };
-
 Header.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
@@ -133,9 +132,6 @@ Header.defaultProps = {
   currentUser: null
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default connect(mapStateToProps)(Header);
 
-export { Header as plain, mapStateToProps, mapDispatchToProps };
+export { Header as plain, mapStateToProps };

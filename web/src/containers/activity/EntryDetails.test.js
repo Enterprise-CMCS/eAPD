@@ -22,6 +22,22 @@ describe('the (Activity) EntryDetails component', () => {
     props.remove.mockClear();
   });
 
+  test('renders correctly with no activity name', () => {
+    expect(shallow(<EntryDetails {...props} name={null} />)).toMatchSnapshot();
+  });
+
+  test('renders correctly with no activity funding source/program', () => {
+    expect(
+      shallow(<EntryDetails {...props} fundingSource={false} />)
+    ).toMatchSnapshot();
+  });
+
+  test('renders correctly with no activity name or funding source/program', () => {
+    expect(
+      shallow(<EntryDetails {...props} fundingSource={false} name={null} />)
+    ).toMatchSnapshot();
+  });
+
   test('does not render the delete button on the first element', () => {
     const firstActivityProps = {
       activityIndex: 0,

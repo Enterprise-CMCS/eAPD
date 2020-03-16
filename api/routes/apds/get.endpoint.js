@@ -85,7 +85,8 @@ describe('APD endpoint', () => {
         const cookies = await login();
 
         const { response, body } = await request.get(url(4000), {
-          jar: cookies
+          jar: cookies,
+          json: true
         });
 
         expect(response.statusCode).toEqual(200);

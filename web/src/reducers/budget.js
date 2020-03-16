@@ -1,3 +1,4 @@
+import { RESET } from '../actions/app';
 import { UPDATE_BUDGET } from '../actions/budget';
 import { arrToObj } from '../util';
 import roundedPercents from '../util/roundedPercents';
@@ -108,17 +109,21 @@ const buildBudget = incomingBigState => {
 
   /**
    * Adds a given cost to the budget running totals.
-   * @param {String} fundingSource The CMS funding source of the cost
+   * @param {String} fundingSource The CMS funding program of the cost
    * @param {String} year As a four-character year string (e.g., '2018')
    * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
    * @param {Number} cost The cost value.
    */
   const addCostToTotals = (fundingSource, year, prop, cost) => {
-    // Add this value to the running budget totals, as appropriate.
-    newState[fundingSource][prop][year].total += cost;
-    newState[fundingSource][prop].total.total += cost;
-    newState[fundingSource].combined[year].total += cost;
-    newState[fundingSource].combined.total.total += cost;
+    // New activities don't have a funding program by default, so in that case,
+    // we can't capture program-specific funding numbers.
+    if (fundingSource) {
+      // Add this value to the running budget totals, as appropriate.
+      newState[fundingSource][prop][year].total += cost;
+      newState[fundingSource][prop].total.total += cost;
+      newState[fundingSource].combined[year].total += cost;
+      newState[fundingSource].combined.total.total += cost;
+    }
 
     // Because HIT and HIE sources have already added to the grand
     // totals, don't also do it for the combined source.
@@ -156,7 +161,8 @@ const buildBudget = incomingBigState => {
 
     // We need to know the funding source so we know where to apply
     // this data in the big rollup budget.
-    const fundingSource = activity.fundingSource.toLowerCase();
+    const fundingSource =
+      activity.fundingSource && activity.fundingSource.toLowerCase();
 
     // And of course we need to know how the costs are allocated between
     // the state and federal shares.
@@ -412,7 +418,11 @@ const buildBudget = incomingBigState => {
         newState[fs].combined.total.medicaid += totalMedicaidShare;
       };
 
-      updateCosts(fundingSource);
+      // New activities don't have a funding program by default, so don't
+      // the program-specific totals for those activities.
+      if (fundingSource) {
+        updateCosts(fundingSource);
+      }
 
       newState.combined[year].federal += costShares.fedShare;
       newState.combined.total.federal += costShares.fedShare;
@@ -425,7 +435,7 @@ const buildBudget = incomingBigState => {
         // We need to track HIE and HIT combined, so we have a funding source
         // called hitAndHie.  If this is HIE or HIT, roll it into that one too.
         updateCosts('hitAndHie');
-      } else {
+      } else if (fundingSource === 'mmis') {
         // For MMIS, we need to track costs by "FFP type", too - that is,
         // the cost allocation.  So we need to know total costs for MMIS
         // at the 90/10 level, at the 75/25 level, and at the 50/50 level.
@@ -458,7 +468,7 @@ const buildBudget = incomingBigState => {
       const quarterlyFFP = newState.federalShareByFFYQuarter[ffpSource];
 
       ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
-        const ffpType = prop === 'contractors' ? 'contractors' : 'state';
+        const ffpType = prop === 'contractors' ? 'contractors' : 'inHouse';
         const propCostType = prop === 'contractors' ? 'contractors' : 'inHouse';
 
         // This is the percentage of the total federal share that the state
@@ -493,18 +503,22 @@ const buildBudget = incomingBigState => {
         activityFFP.total[propCostType] += fedShare[prop];
         activityFFP.total.combined += fedShare[prop];
 
-        // For the expense type, add the federal share for the
-        // quarter and the fiscal year subtotal.
-        quarterlyFFP[year].subtotal[propCostType] += fedShare[prop];
+        // New activities don't have a funding program by default. In that
+        // case, don't add this activity's costs to the program-level totals.
+        if (fundingSource) {
+          // For the expense type, add the federal share for the
+          // quarter and the fiscal year subtotal.
+          quarterlyFFP[year].subtotal[propCostType] += fedShare[prop];
 
-        // Also add the federal share to the cross-expense
-        // quarterly subtotal and fiscal year subtotal
-        quarterlyFFP[year].subtotal.combined += fedShare[prop];
+          // Also add the federal share to the cross-expense
+          // quarterly subtotal and fiscal year subtotal
+          quarterlyFFP[year].subtotal.combined += fedShare[prop];
 
-        // And finally, add it to the expense type grand
-        // total and the federal share grand total
-        quarterlyFFP.total[propCostType] += fedShare[prop];
-        quarterlyFFP.total.combined += fedShare[prop];
+          // And finally, add it to the expense type grand
+          // total and the federal share grand total
+          quarterlyFFP.total[propCostType] += fedShare[prop];
+          quarterlyFFP.total.combined += fedShare[prop];
+        }
 
         // Shortcut to loop over quarters.  :)
         [...Array(4)].forEach((_, q) => {
@@ -531,11 +545,16 @@ const buildBudget = incomingBigState => {
             activityFFP[year].subtotal[propCostType].percent += federalPct;
           }
 
-          // For the expense type, add the federal share for the quarter.
-          quarterlyFFP[year][q + 1][propCostType] += qFFP;
+          // New activities don't have a funding program by default. In that
+          // case, don't add this activity's quarterly costs to the
+          // program-level roll-ups.
+          if (fundingSource) {
+            // For the expense type, add the federal share for the quarter.
+            quarterlyFFP[year][q + 1][propCostType] += qFFP;
 
-          // Also add the federal share to the cross-expense quarterly subtotal
-          quarterlyFFP[year][q + 1].combined += qFFP;
+            // Also add the federal share to the cross-expense quarterly subtotal
+            quarterlyFFP[year][q + 1].combined += qFFP;
+          }
         });
       });
     });
@@ -557,6 +576,8 @@ const buildBudget = incomingBigState => {
 
 const reducer = (state = initialState([]), action) => {
   switch (action.type) {
+    case RESET:
+      return {};
     case UPDATE_BUDGET:
       return buildBudget(action.state);
     default:

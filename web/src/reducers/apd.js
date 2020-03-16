@@ -28,6 +28,7 @@ import {
   FETCH_ALL_APDS_FAILURE,
   FETCH_ALL_APDS_REQUEST,
   FETCH_ALL_APDS_SUCCESS,
+  RESET,
   SAVE_APD_SUCCESS,
   SELECT_APD,
   SET_APD_TO_SELECT_ON_LOAD
@@ -384,6 +385,9 @@ const reducer = (state = initialState, action) => {
           updated: getHumanTimestamp(action.data.updated)
         }
       };
+
+    case RESET:
+      return { ...state, data: {} };
 
     case SELECT_APD:
       return {

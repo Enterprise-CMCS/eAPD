@@ -74,7 +74,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     <tbody>
       <tr
         className=""
-        key="state"
+        key="inHouse"
       >
         <th
           scope="row"
@@ -117,9 +117,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         >
           <Dollars
             long={false}
-          >
-            12
-          </Dollars>
+          />
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
@@ -318,7 +316,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     <tbody>
       <tr
         className=""
-        key="state"
+        key="inHouse"
       >
         <th
           scope="row"
@@ -517,7 +515,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     <tbody>
       <tr
         className=""
-        key="state"
+        key="inHouse"
       >
         <th
           scope="row"
@@ -646,7 +644,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     <tbody>
       <tr
         className=""
-        key="state"
+        key="inHouse"
       >
         <th
           scope="row"
@@ -890,7 +888,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     <tbody>
       <tr
         className=""
-        key="state"
+        key="inHouse"
       >
         <th
           scope="row"
@@ -1089,7 +1087,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     <tbody>
       <tr
         className=""
-        key="state"
+        key="inHouse"
       >
         <th
           scope="row"
