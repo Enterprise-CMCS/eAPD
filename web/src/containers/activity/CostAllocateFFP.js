@@ -27,8 +27,10 @@ const CostSummaryRows = ({ items }) =>
       <td className="budget-table--number">
         {unitCost !== null && <Dollars long>{unitCost}</Dollars>}
       </td>
-      <td className="budget-table--number">{unitCost !== null && '×'}</td>
-      <td className="budget-table--number">{units}</td>
+      <td className="budget-table--number ds-u-padding--0">
+        {unitCost !== null && '×'}
+      </td>
+      <td className="budget-table--number ds-u-text-align--left">{units}</td>
       <td className="budget-table--number">{unitCost !== null && '='}</td>
       <td className="budget-table--number">
         <Dollars long>{totalCost}</Dollars>
@@ -74,8 +76,8 @@ const CostAllocateFFP = ({
             <tbody>
               <tr className="budget-table--row__header">
                 <th colSpan="2">State Staff</th>
-                <th>Cost</th>
                 <td colSpan="4" />
+                <th>Total cost</th>
               </tr>
               <CostSummaryRows items={years[ffy].keyPersonnel} />
               <CostSummaryRows items={years[ffy].statePersonnel} />

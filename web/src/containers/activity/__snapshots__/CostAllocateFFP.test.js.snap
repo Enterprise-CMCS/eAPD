@@ -20,12 +20,12 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         >
           State Staff
         </th>
-        <th>
-          Cost
-        </th>
         <td
           colSpan="4"
         />
+        <th>
+          Total cost
+        </th>
       </tr>
       <CostSummaryRows
         items={
@@ -385,12 +385,12 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         >
           State Staff
         </th>
-        <th>
-          Cost
-        </th>
         <td
           colSpan="4"
         />
+        <th>
+          Total cost
+        </th>
       </tr>
       <CostSummaryRows
         items={
@@ -823,12 +823,12 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         >
           State Staff
         </th>
-        <th>
-          Cost
-        </th>
         <td
           colSpan="4"
         />
+        <th>
+          Total cost
+        </th>
       </tr>
       <CostSummaryRows
         items={
@@ -1080,12 +1080,12 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         >
           State Staff
         </th>
-        <th>
-          Cost
-        </th>
         <td
           colSpan="4"
         />
+        <th>
+          Total cost
+        </th>
       </tr>
       <CostSummaryRows
         items={
@@ -1409,12 +1409,12 @@ Array [
       </Dollars>
     </td>
     <td
-      className="budget-table--number"
+      className="budget-table--number ds-u-padding--0"
     >
       ×
     </td>
     <td
-      className="budget-table--number"
+      className="budget-table--number ds-u-text-align--left"
     >
       10 items
     </td>
@@ -1444,10 +1444,10 @@ Array [
       className="budget-table--number"
     />
     <td
-      className="budget-table--number"
+      className="budget-table--number ds-u-padding--0"
     />
     <td
-      className="budget-table--number"
+      className="budget-table--number ds-u-text-align--left"
     />
     <td
       className="budget-table--number"
