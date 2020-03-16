@@ -1,3 +1,5 @@
+// Express session middleware.
+
 const defaultCookies = require('cookies');
 const jwt = require('jsonwebtoken');
 const logger = require('../logger')('auth session');
@@ -100,8 +102,8 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
             httpOnly: true,
             maxAge: sessionLifetimeMilliseconds,
             overwrite: true,
-            sameSite: 'none',
-            secure: process.env.NODE_ENV === 'production'
+            sameSite: process.env.DISABLE_SAME_SITE ? '' : 'none',
+            secure: !process.env.DISABLE_SECURE_COOKIE
           }
         );
       } else {
@@ -110,8 +112,8 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
         cookies.set(COOKIE_NAME, '', {
           maxAge: 0,
           httpOnly: true,
-          sameSite: 'none',
-          secure: process.env.NODE_ENV === 'production'
+          sameSite: process.env.DISABLE_SAME_SITE ? '' : 'none',
+          secure: !process.env.DISABLE_SECURE_COOKIE
         });
       }
 
