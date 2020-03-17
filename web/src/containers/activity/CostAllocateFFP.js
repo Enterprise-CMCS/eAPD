@@ -22,8 +22,7 @@ import { getUserStateOrTerritory } from '../../reducers/user.selector';
 const CostSummaryRows = ({ items }) =>
   items.map(({ description, totalCost, unitCost, units }) => (
     <tr key={description}>
-      <td />
-      <td>{description}</td>
+      <td className="title">{description}</td>
       <td className="budget-table--number">
         {unitCost !== null && <Dollars long>{unitCost}</Dollars>}
       </td>
@@ -72,49 +71,58 @@ const CostAllocateFFP = ({
             Cost Allocation and Budget for FFY {ffy}
           </h3>
 
-          <table className="budget-table">
+          <table className="budget-table activity-budget-table">
             <tbody>
               <tr className="budget-table--row__header">
-                <th colSpan="2">State Staff</th>
-                <td colSpan="4" />
-                <th>Total cost</th>
+                <th scope="col">State Staff</th>
+                <th scope="col" colSpan="2">
+                  <span className="sr-only">unit cost</span>
+                </th>
+                <th scope="col" colSpan="2">
+                  <span className="sr-only">units</span>
+                </th>
+                <th scope="col">Total cost</th>
               </tr>
               <CostSummaryRows items={years[ffy].keyPersonnel} />
               <CostSummaryRows items={years[ffy].statePersonnel} />
               <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td />
-                <td>State Staff Subtotal</td>
-                <td colSpan="4" />
+                <td className="title" colSpan="5">
+                  State Staff Subtotal
+                </td>
                 <td className="budget-table--number">
                   <Dollars long>{years[ffy].statePersonnelTotal}</Dollars>
                 </td>
               </tr>
               <tr className="budget-table--row__header">
-                <th colSpan="7">Other State Expenses</th>
+                <th scope="col" colSpan="6">
+                  Other State Expenses
+                </th>
               </tr>
               <CostSummaryRows items={years[ffy].nonPersonnel} />
               <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td />
-                <td>Other State Expenses Subtotal</td>
-                <td colSpan="4" />
+                <td className="title" colSpan="5">
+                  Other State Expenses Subtotal
+                </td>
                 <td className="budget-table--number">
                   <Dollars long>{years[ffy].nonPersonnelTotal}</Dollars>
                 </td>
               </tr>
               <tr className="budget-table--row__header">
-                <th colSpan="7">Private Contractor</th>
+                <th scope="col" colSpan="6">
+                  Private Contractor
+                </th>
               </tr>
               <CostSummaryRows items={years[ffy].contractorResources} />
               <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td />
-                <td>Private Contractor Subtotal</td>
-                <td colSpan="4" />
+                <td className="title" colSpan="5">
+                  Private Contractor Subtotal
+                </td>
                 <td className="budget-table--number">
                   <Dollars long>{years[ffy].contractorResourcesTotal}</Dollars>
                 </td>
               </tr>
               <tr className="budget-table--subtotal">
-                <td colSpan="6">Activity Total Cost</td>
+                <td colSpan="5">Activity Total Cost</td>
                 <td className="budget-table--number">
                   <Dollars long>{years[ffy].totalCost}</Dollars>
                 </td>
@@ -125,7 +133,6 @@ const CostAllocateFFP = ({
               {isViewOnly && (
                 <Fragment>
                   <tr>
-                    <td />
                     <td>Other Funding</td>
                     <td colSpan="3" />
                     <td>-</td>
@@ -134,7 +141,6 @@ const CostAllocateFFP = ({
                     </td>
                   </tr>
                   <tr className="budget-table--subtotal budget-table--row__highlight">
-                    <td />
                     <td>Medicaid Share</td>
                     <td colSpan="4" />
                     <td className="budget-table--number">
@@ -180,28 +186,24 @@ const CostAllocateFFP = ({
                 />
               </div>
 
-              <table className="budget-table">
+              <table className="budget-table activity-budget-table">
                 <tbody>
                   <tr className="budget-table--subtotal budget-table--row__header">
-                    <th colSpan="6">Activity Total Cost</th>
+                    <th colSpan="2">Activity Total Cost</th>
                     <td className="budget-table--number">
                       <Dollars long>{years[ffy].totalCost}</Dollars>
                     </td>
                   </tr>
                   <tr>
-                    <td />
-                    <td>Other Funding</td>
-                    <td colSpan="3" />
+                    <td className="title">Other Funding</td>
                     <td>-</td>
                     <td className="budget-table--number">
                       <Dollars long>{years[ffy].otherFunding}</Dollars>
                     </td>
                   </tr>
                   <tr className="budget-table--subtotal budget-table--row__highlight">
-                    <td />
-                    <td>Medicaid Share</td>
-                    <td colSpan="4" />
-                    <td className="budget-table--number">
+                    <td className="title">Medicaid Share</td>
+                    <td colSpan="2" className="budget-table--number">
                       <Dollars long>{years[ffy].medicaidShare}</Dollars>
                     </td>
                   </tr>
@@ -230,10 +232,10 @@ const CostAllocateFFP = ({
                 />
               </div>
 
-              <table className="budget-table">
+              <table className="budget-table activity-budget-table">
                 <tbody>
                   <tr className="budget-table--subtotal budget-table--row__header">
-                    <th colSpan="6">Medicaid Share</th>
+                    <th colSpan="5">Medicaid Share</th>
                     <td className="budget-table--number">
                       <Dollars long>{years[ffy].medicaidShare}</Dollars>
                     </td>
@@ -244,13 +246,13 @@ const CostAllocateFFP = ({
                         description: 'Federal Share',
                         totalCost: years[ffy].federalShare,
                         unitCost: years[ffy].medicaidShare,
-                        units: '90%'
+                        units: `${costAllocation[ffy].ffp.federal}%`
                       },
                       {
                         description: 'State Share',
                         totalCost: years[ffy].stateShare,
                         unitCost: years[ffy].medicaidShare,
-                        units: '10%'
+                        units: `${costAllocation[ffy].ffp.state}%`
                       }
                     ]}
                   />

@@ -116,6 +116,18 @@ td {
   }
 }
 
+.budget-table.activity-budget-table {
+  td {
+    width: 1%;
+    white-space: nowrap;
+
+    &.title {
+      padding-left: 3em;
+      width: 100%;
+    }
+  }
+}
+
 .budget-table--cell__nowrap {
   white-space: nowrap;
 }
