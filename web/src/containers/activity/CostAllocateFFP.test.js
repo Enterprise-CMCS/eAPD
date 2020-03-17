@@ -3,6 +3,7 @@ import React from 'react';
 
 import {
   plain as CostAllocateFFP,
+  AllFFYsSummaryNarrative,
   CostSummaryRows,
   mapStateToProps,
   mapDispatchToProps
@@ -171,6 +172,38 @@ describe('the CostAllocateFFP component', () => {
       .simulate('change', { target: { value: '35-65' } });
 
     expect(props.setFundingSplit).toHaveBeenCalledWith(0, '1991', 35, 65);
+  });
+
+  it('renders the budget and cost allocation summary narrative', () => {
+    const costAllocation = {
+      '1': { ffp: { federal: 'f', state: 's' } },
+      '2': { ffp: { federal: 'f', state: 's' } },
+      '3': { ffp: { federal: 'f', state: 's' } }
+    };
+
+    const p = {
+      activityName: 'activity',
+      costAllocation,
+      costSummary: {
+        total: {
+          federalShare: 1,
+          medicaidShare: 2,
+          otherFunding: 3,
+          stateShare: 4,
+          totalCost: 5
+        }
+      },
+      stateName: 'the state'
+    };
+
+    expect(shallow(<AllFFYsSummaryNarrative {...p} />)).toMatchSnapshot();
+
+    costAllocation['2'].ffp.federal = 'ff';
+    expect(shallow(<AllFFYsSummaryNarrative {...p} />)).toMatchSnapshot();
+
+    costAllocation['2'].ffp.federal = 'f';
+    costAllocation['3'].ffp.federal = 'ff';
+    expect(shallow(<AllFFYsSummaryNarrative {...p} />)).toMatchSnapshot();
   });
 
   it('renders internal cost summary rows component', () => {
