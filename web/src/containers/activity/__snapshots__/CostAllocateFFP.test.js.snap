@@ -771,65 +771,141 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
     1991
      Totals
   </h3>
-  <p>
-    The total cost of the 
-    <strong>
-      activity name
-    </strong>
-     activity is
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        500
-      </Dollars>
-    </strong>
-    . Because of other funding of
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        300
-      </Dollars>
-    </strong>
-    , the total cost to Medicaid is
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        200
-      </Dollars>
-    </strong>
-    . This activity is using a 
-    <strong>
-      90/10
-    </strong>
-     funding split, resulting in a federal share of
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        100
-      </Dollars>
-    </strong>
-     
-    and a 
-    test state
-     share of
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        400
-      </Dollars>
-    </strong>
-    .
-  </p>
+  <AllFFYsSummaryNarrative
+    activityName="activity name"
+    costAllocation={
+      Object {
+        "1990": Object {
+          "ffp": Object {
+            "federal": "90",
+            "state": "10",
+          },
+          "other": 100,
+        },
+        "1991": Object {
+          "ffp": Object {
+            "federal": "50",
+            "state": "50",
+          },
+          "other": 200,
+        },
+      }
+    }
+    costSummary={
+      Object {
+        "total": Object {
+          "federalShare": 100,
+          "medicaidShare": 200,
+          "otherFunding": 300,
+          "stateShare": 400,
+          "totalCost": 500,
+        },
+        "years": Object {
+          "1990": Object {
+            "contractorResources": Array [
+              Object {
+                "description": "contractor 2.1",
+                "totalCost": 2000,
+                "unitCost": null,
+                "units": null,
+              },
+              Object {
+                "description": "contractor 2.2",
+                "totalCost": 2001,
+                "unitCost": 20,
+                "units": "20 hours",
+              },
+            ],
+            "contractorResourcesTotal": 1000,
+            "federalPercent": 1001,
+            "federalShare": 90,
+            "keyPersonnel": Array [
+              Object {
+                "description": "key person (APD Key Personnel)",
+                "totalCost": 1002,
+                "unitCost": null,
+                "units": "100% time",
+              },
+            ],
+            "medicaidShare": 1003,
+            "nonPersonnel": Array [
+              Object {
+                "description": "costly costs",
+                "totalCost": 3000,
+                "unitCost": null,
+                "units": null,
+              },
+            ],
+            "nonPersonnelTotal": 1004,
+            "otherFunding": 1005,
+            "statePercent": 10,
+            "statePersonnel": Array [
+              Object {
+                "description": "personnel role",
+                "totalCost": 4000,
+                "unitCost": 40,
+                "units": "0.5 FTE",
+              },
+            ],
+            "statePersonnelTotal": 1006,
+            "stateShare": 1007,
+            "totalCost": 1008,
+          },
+          "1991": Object {
+            "contractorResources": Array [
+              Object {
+                "description": "contractor 2.1",
+                "totalCost": 6000,
+                "unitCost": null,
+                "units": null,
+              },
+              Object {
+                "description": "contractor 2.2",
+                "totalCost": 6001,
+                "unitCost": 60,
+                "units": "60 hours",
+              },
+            ],
+            "contractorResourcesTotal": 7000,
+            "federalPercent": 7001,
+            "federalShare": 50,
+            "keyPersonnel": Array [
+              Object {
+                "description": "key person (APD Key Personnel)",
+                "totalCost": 8002,
+                "unitCost": null,
+                "units": "100% time",
+              },
+            ],
+            "medicaidShare": 7003,
+            "nonPersonnel": Array [
+              Object {
+                "description": "costly costs",
+                "totalCost": 9000,
+                "unitCost": null,
+                "units": null,
+              },
+            ],
+            "nonPersonnelTotal": 7004,
+            "otherFunding": 7005,
+            "statePercent": 50,
+            "statePersonnel": Array [
+              Object {
+                "description": "personnel role",
+                "totalCost": 9000,
+                "unitCost": 90,
+                "units": "0.5 FTE",
+              },
+            ],
+            "statePersonnelTotal": 7006,
+            "stateShare": 7007,
+            "totalCost": 7008,
+          },
+        },
+      }
+    }
+    stateName="test state"
+  />
 </Fragment>
 `;
 
@@ -1390,65 +1466,141 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
     1991
      Totals
   </h3>
-  <p>
-    The total cost of the 
-    <strong>
-      activity name
-    </strong>
-     activity is
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        500
-      </Dollars>
-    </strong>
-    . Because of other funding of
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        300
-      </Dollars>
-    </strong>
-    , the total cost to Medicaid is
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        200
-      </Dollars>
-    </strong>
-    . This activity is using a 
-    <strong>
-      90/10
-    </strong>
-     funding split, resulting in a federal share of
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        100
-      </Dollars>
-    </strong>
-     
-    and a 
-    test state
-     share of
-     
-    <strong>
-      <Dollars
-        long={true}
-      >
-        400
-      </Dollars>
-    </strong>
-    .
-  </p>
+  <AllFFYsSummaryNarrative
+    activityName="activity name"
+    costAllocation={
+      Object {
+        "1990": Object {
+          "ffp": Object {
+            "federal": "90",
+            "state": "10",
+          },
+          "other": 100,
+        },
+        "1991": Object {
+          "ffp": Object {
+            "federal": "50",
+            "state": "50",
+          },
+          "other": 200,
+        },
+      }
+    }
+    costSummary={
+      Object {
+        "total": Object {
+          "federalShare": 100,
+          "medicaidShare": 200,
+          "otherFunding": 300,
+          "stateShare": 400,
+          "totalCost": 500,
+        },
+        "years": Object {
+          "1990": Object {
+            "contractorResources": Array [
+              Object {
+                "description": "contractor 2.1",
+                "totalCost": 2000,
+                "unitCost": null,
+                "units": null,
+              },
+              Object {
+                "description": "contractor 2.2",
+                "totalCost": 2001,
+                "unitCost": 20,
+                "units": "20 hours",
+              },
+            ],
+            "contractorResourcesTotal": 1000,
+            "federalPercent": 1001,
+            "federalShare": 90,
+            "keyPersonnel": Array [
+              Object {
+                "description": "key person (APD Key Personnel)",
+                "totalCost": 1002,
+                "unitCost": null,
+                "units": "100% time",
+              },
+            ],
+            "medicaidShare": 1003,
+            "nonPersonnel": Array [
+              Object {
+                "description": "costly costs",
+                "totalCost": 3000,
+                "unitCost": null,
+                "units": null,
+              },
+            ],
+            "nonPersonnelTotal": 1004,
+            "otherFunding": 1005,
+            "statePercent": 10,
+            "statePersonnel": Array [
+              Object {
+                "description": "personnel role",
+                "totalCost": 4000,
+                "unitCost": 40,
+                "units": "0.5 FTE",
+              },
+            ],
+            "statePersonnelTotal": 1006,
+            "stateShare": 1007,
+            "totalCost": 1008,
+          },
+          "1991": Object {
+            "contractorResources": Array [
+              Object {
+                "description": "contractor 2.1",
+                "totalCost": 6000,
+                "unitCost": null,
+                "units": null,
+              },
+              Object {
+                "description": "contractor 2.2",
+                "totalCost": 6001,
+                "unitCost": 60,
+                "units": "60 hours",
+              },
+            ],
+            "contractorResourcesTotal": 7000,
+            "federalPercent": 7001,
+            "federalShare": 50,
+            "keyPersonnel": Array [
+              Object {
+                "description": "key person (APD Key Personnel)",
+                "totalCost": 8002,
+                "unitCost": null,
+                "units": "100% time",
+              },
+            ],
+            "medicaidShare": 7003,
+            "nonPersonnel": Array [
+              Object {
+                "description": "costly costs",
+                "totalCost": 9000,
+                "unitCost": null,
+                "units": null,
+              },
+            ],
+            "nonPersonnelTotal": 7004,
+            "otherFunding": 7005,
+            "statePercent": 50,
+            "statePersonnel": Array [
+              Object {
+                "description": "personnel role",
+                "totalCost": 9000,
+                "unitCost": 90,
+                "units": "0.5 FTE",
+              },
+            ],
+            "statePersonnelTotal": 7006,
+            "stateShare": 7007,
+            "totalCost": 7008,
+          },
+        },
+      }
+    }
+    stateName="test state"
+  />
 </Fragment>
 `;
 
@@ -1527,4 +1679,193 @@ Array [
     </td>
   </tr>,
 ]
+`;
+
+exports[`the CostAllocateFFP component renders the budget and cost allocation summary narrative 1`] = `
+<p>
+  The total cost of the 
+  <strong>
+    activity
+  </strong>
+   activity is
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      5
+    </Dollars>
+  </strong>
+  . Because of other funding of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      3
+    </Dollars>
+  </strong>
+  , the total cost to Medicaid is
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      2
+    </Dollars>
+  </strong>
+  . This activity is using a 
+  <strong>
+    f/s (FFY 1, FFY 2, and FFY 3)
+  </strong>
+   
+  funding split, resulting in a federal share of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      1
+    </Dollars>
+  </strong>
+   
+  and a 
+  the state
+   share of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      4
+    </Dollars>
+  </strong>
+  .
+</p>
+`;
+
+exports[`the CostAllocateFFP component renders the budget and cost allocation summary narrative 2`] = `
+<p>
+  The total cost of the 
+  <strong>
+    activity
+  </strong>
+   activity is
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      5
+    </Dollars>
+  </strong>
+  . Because of other funding of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      3
+    </Dollars>
+  </strong>
+  , the total cost to Medicaid is
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      2
+    </Dollars>
+  </strong>
+  . This activity is using a 
+  <strong>
+    f/s (FFY 1), ff/s (FFY 2), and f/s (FFY 3)
+  </strong>
+   
+  funding split, resulting in a federal share of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      1
+    </Dollars>
+  </strong>
+   
+  and a 
+  the state
+   share of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      4
+    </Dollars>
+  </strong>
+  .
+</p>
+`;
+
+exports[`the CostAllocateFFP component renders the budget and cost allocation summary narrative 3`] = `
+<p>
+  The total cost of the 
+  <strong>
+    activity
+  </strong>
+   activity is
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      5
+    </Dollars>
+  </strong>
+  . Because of other funding of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      3
+    </Dollars>
+  </strong>
+  , the total cost to Medicaid is
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      2
+    </Dollars>
+  </strong>
+  . This activity is using a 
+  <strong>
+    f/s (FFY 1 and FFY 2) and ff/s (FFY 3)
+  </strong>
+   
+  funding split, resulting in a federal share of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      1
+    </Dollars>
+  </strong>
+   
+  and a 
+  the state
+   share of
+   
+  <strong>
+    <Dollars
+      long={true}
+    >
+      4
+    </Dollars>
+  </strong>
+  .
+</p>
 `;

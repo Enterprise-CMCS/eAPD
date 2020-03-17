@@ -41,6 +41,81 @@ CostSummaryRows.propTypes = {
   items: PropTypes.array.isRequired
 };
 
+const AllFFYsSummaryNarrative = ({
+  activityName,
+  costAllocation,
+  costSummary: { total },
+  stateName
+}) => {
+  let lastSplit = '';
+  let fundingSplitBits = [];
+
+  Object.keys(costAllocation).forEach(ffy => {
+    const split = `${costAllocation[ffy].ffp.federal}/${costAllocation[ffy].ffp.state}`;
+
+    if (split !== lastSplit) {
+      fundingSplitBits.push({ split, ffys: [] });
+    }
+
+    fundingSplitBits[fundingSplitBits.length - 1].ffys.push(`FFY ${ffy}`);
+    lastSplit = split;
+  });
+
+  fundingSplitBits = fundingSplitBits.map(split => {
+    if (split.ffys.length > 2) {
+      split.ffys[split.ffys.length - 1] = `and ${
+        split.ffys[split.ffys.length - 1]
+      }`;
+      split.ffys = split.ffys.join(', ');
+    } else {
+      split.ffys = split.ffys.join(' and ');
+    }
+    return `${split.split} (${split.ffys})`;
+  });
+
+  let fundingSplitNarrative = fundingSplitBits.join(' and ');
+  if (fundingSplitBits.length > 2) {
+    fundingSplitBits[fundingSplitBits.length - 1] = `and ${
+      fundingSplitBits[fundingSplitBits.length - 1]
+    }`;
+    fundingSplitNarrative = fundingSplitBits.join(', ');
+  }
+
+  return (
+    <p>
+      The total cost of the <strong>{activityName}</strong> activity is{' '}
+      <strong>
+        <Dollars long>{total.totalCost}</Dollars>
+      </strong>
+      . Because of other funding of{' '}
+      <strong>
+        <Dollars long>{total.otherFunding}</Dollars>
+      </strong>
+      , the total cost to Medicaid is{' '}
+      <strong>
+        <Dollars long>{total.medicaidShare}</Dollars>
+      </strong>
+      . This activity is using a <strong>{fundingSplitNarrative}</strong>{' '}
+      funding split, resulting in a federal share of{' '}
+      <strong>
+        <Dollars long>{total.federalShare}</Dollars>
+      </strong>{' '}
+      and a {stateName} share of{' '}
+      <strong>
+        <Dollars long>{total.stateShare}</Dollars>
+      </strong>
+      .
+    </p>
+  );
+};
+
+AllFFYsSummaryNarrative.propTypes = {
+  activityName: PropTypes.string.isRequired,
+  costAllocation: PropTypes.object.isRequired,
+  costSummary: PropTypes.object.isRequired,
+  stateName: PropTypes.string.isRequired
+};
+
 const CostAllocateFFP = ({
   activityIndex,
   activityName,
@@ -61,7 +136,7 @@ const CostAllocateFFP = ({
     setFundingSplit(activityIndex, year, federal, state);
   };
 
-  const { total, years } = costSummary;
+  const { years } = costSummary;
 
   return (
     <Fragment>
@@ -283,30 +358,12 @@ const CostAllocateFFP = ({
       <h3 className="subsection--title ds-h3">
         FFY {Object.keys(years)[0]}-{Object.keys(years).pop()} Totals
       </h3>
-      <p>
-        The total cost of the <strong>{activityName}</strong> activity is{' '}
-        <strong>
-          <Dollars long>{total.totalCost}</Dollars>
-        </strong>
-        . Because of other funding of{' '}
-        <strong>
-          <Dollars long>{total.otherFunding}</Dollars>
-        </strong>
-        , the total cost to Medicaid is{' '}
-        <strong>
-          <Dollars long>{total.medicaidShare}</Dollars>
-        </strong>
-        . This activity is using a <strong>90/10</strong> funding split,
-        resulting in a federal share of{' '}
-        <strong>
-          <Dollars long>{total.federalShare}</Dollars>
-        </strong>{' '}
-        and a {stateName} share of{' '}
-        <strong>
-          <Dollars long>{total.stateShare}</Dollars>
-        </strong>
-        .
-      </p>
+      <AllFFYsSummaryNarrative
+        activityName={activityName}
+        costAllocation={costAllocation}
+        costSummary={costSummary}
+        stateName={stateName}
+      />
     </Fragment>
   );
 };
@@ -357,6 +414,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);
 
 export {
   CostAllocateFFP as plain,
+  AllFFYsSummaryNarrative,
   CostSummaryRows,
   mapStateToProps,
   mapDispatchToProps
