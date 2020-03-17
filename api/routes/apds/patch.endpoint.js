@@ -103,5 +103,22 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
       expect(body).toMatchSnapshot();
     });
+
+    it(`patch succeeds with an invalid date`, async () => {
+      const { response, body } = await request.patch(url(4000), {
+        jar: cookies,
+        json: [
+          {
+            op: 'replace',
+            path: `/activities/0/plannedStartDate`,
+            value: '9999-99-99'
+          }
+        ]
+      });
+
+      expect(response.statusCode).toEqual(200);
+      expect(body).toMatchSnapshot();
+    });
+
   });
 });
