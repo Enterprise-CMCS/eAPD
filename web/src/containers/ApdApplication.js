@@ -3,18 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import Activities from './activity/All';
-import AssurancesAndCompliance from './AssurancesAndCompliance';
-import Export from './ApdExport';
-import ApdSummary from './ApdSummary';
-import ExecutiveSummary from './ExecutiveSummary';
-import PreviousActivities from './PreviousActivities';
-import ProposedBudget from './ProposedBudget';
 import SaveButton from './SaveButton';
-import ScheduleSummary from './ScheduleSummary';
 import Sidebar from './Sidebar';
 import { setApdToSelectOnLoad } from '../actions/app';
-import StateProfile from '../components/ApdStateProfile';
+
+import ApdPageRoutes from './ApdPageRoutes';
 
 import {
   getAPDCreation,
@@ -47,22 +40,12 @@ const ApdApplication = ({
     <div className="site-body ds-l-container">
       <div className="ds-u-margin--0">
         <Sidebar place={place} />
-        <div className="site-main ds-u-padding-top--2">
-          <h1 id="start-main-content" className="ds-h1 apd--title">
-            <span className="ds-h6 ds-u-display--block">
-              <strong>Created:</strong> {apdCreated}
-            </span>
-            {apdName} | FFY {year}
-          </h1>
-          <StateProfile />
-          <ApdSummary />
-          <PreviousActivities />
-          <Activities />
-          <ScheduleSummary />
-          <ProposedBudget />
-          <AssurancesAndCompliance />
-          <ExecutiveSummary />
-          <Export />
+        <div id="start-main-content" className="site-main ds-u-padding-top--2">
+          <ApdPageRoutes
+            apdCreated={apdCreated}
+            apdName={apdName}
+            year={year}
+          />
         </div>
       </div>
 

@@ -63,6 +63,7 @@ const Login = ({
         title="Log in"
         legend="Log in"
         cancelable={false}
+        className="ds-u-margin-top--7"
         canSubmit={username.length && password.length}
         error={errorMessage}
         success={hasEverLoggedOn ? 'You have securely logged out.' : null}

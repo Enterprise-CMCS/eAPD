@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
+import { jumpTo } from '../../actions/app';
 import { removeActivity } from '../../actions/editActivity';
 
 import {
@@ -9,16 +10,34 @@ import {
   mapDispatchToProps
 } from './EntryDetails';
 
+let mockPush;
+
+jest.mock('react-router-dom', () => {
+  mockPush = jest.fn();
+  return {
+    useHistory: jest.fn().mockReturnValue({ push: mockPush }),
+    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' })
+  };
+});
+
+global.scrollTo = jest.fn();
+
 describe('the (Activity) EntryDetails component', () => {
   const props = {
     activityIndex: 2,
     activityKey: 'activity key',
     fundingSource: 'money pit',
+    jumpAction: jest.fn(),
     name: 'activity name',
     remove: jest.fn()
   };
 
   beforeEach(() => {
+    global.scrollTo.mockReset();
+    if (mockPush) {
+      mockPush.mockReset();
+    }
+    props.jumpAction.mockReset();
     props.remove.mockClear();
   });
 
@@ -61,24 +80,32 @@ describe('the (Activity) EntryDetails component', () => {
     expect(props.remove).toHaveBeenCalled();
   });
 
-  test('renders correctly with the modal closed', () => {
+  test('navigates to activities', () => {
     const component = shallow(<EntryDetails {...props} />);
     expect(component).toMatchSnapshot();
+
+    const e = {
+      stopPropagation: jest.fn(),
+      preventDefault: jest.fn()
+    };
 
     const review = component.find('Review').dive();
     // First button is the edit button
     review
       .find('Button')
       .at(0)
-      .simulate('click');
+      .simulate('click', e);
 
-    // Modal is now open
-    expect(component).toMatchSnapshot();
+    // cancels the click
+    expect(e.stopPropagation).toHaveBeenCalled();
+    expect(e.preventDefault).toHaveBeenCalled();
 
-    component.find('ActivityDialog').prop('closeModal')();
-
-    // Modal is now closed again
-    expect(component).toMatchSnapshot();
+    // updates nav state, navigates, and scrolls up
+    expect(props.jumpAction).toHaveBeenCalledWith(
+      'activity-activity key-overview'
+    );
+    expect(mockPush).toHaveBeenCalledWith('/apd/activity/2');
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
   test('maps state to props', () => {
@@ -120,6 +147,7 @@ describe('the (Activity) EntryDetails component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
+      jumpAction: jumpTo,
       remove: removeActivity
     });
   });
