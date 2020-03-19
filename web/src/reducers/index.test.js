@@ -12,6 +12,7 @@ describe('root reducer', () => {
       'errors',
       'navigation',
       'patch',
+      'saving',
       'user',
       'working',
       'router'

@@ -47,7 +47,7 @@ const ApdSummary = ({
 
   return (
     <Waypoint id="apd-summary">
-      <Section isNumbered id="apd-summary" resource="apd">
+      <Section id="apd-summary" resource="apd">
         <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
         <Instruction source="apd.overview.instruction" />
 

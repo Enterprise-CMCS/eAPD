@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { selectIsSaving, selectLastSaved } from '../reducers/saving';
 import { getIsAdmin } from '../reducers/user.selector';
 import { t } from '../i18n';
 
 import DashboardButton from './DashboardButton';
 
 import Icon, {
+  Check,
   faChevronDown,
   faChevronLeft,
   faEdit,
-  faSignOutAlt
+  faSignOutAlt,
+  Spinner
 } from './Icons';
 
 class Header extends Component {
@@ -47,13 +50,20 @@ class Header extends Component {
   };
 
   render() {
-    const { authenticated, currentUser, isAdmin, showSiteTitle } = this.props;
+    const {
+      authenticated,
+      currentUser,
+      isAdmin,
+      isSaving,
+      lastSaved,
+      showSiteTitle
+    } = this.props;
     const { ariaExpanded } = this.state;
     return (
       <header ref={this.node}>
         <div className="ds-l-container">
           <div className="ds-l-row">
-            <div className="ds-l-col--12 ds-l-md-col--4 site-title">
+            <div className="ds-l-col--12 ds-l-md-col--3 site-title">
               {showSiteTitle || !authenticated ? (
                 <DashboardButton>{t('titleBasic')}</DashboardButton>
               ) : (
@@ -66,45 +76,65 @@ class Header extends Component {
               )}
             </div>
             {authenticated && (
-              <div className="ds-l-col--12 ds-l-md-col--8">
-                <ul className="nav--dropdown">
-                  <li>
-                    <button
-                      type="button"
-                      className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
-                      onClick={this.toggleDropdown}
-                      aria-expanded={ariaExpanded ? 'true' : 'false'}
-                      aria-haspopup="true"
-                      aria-label={`Logged in as ${currentUser.username}. Click to manage your account.`}
-                    >
-                      {currentUser ? currentUser.username : 'Your account'}
-                      <Icon icon={faChevronDown} style={{ width: '8px' }} />
-                    </button>
-                    <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
-                      <li>
-                        <Link
-                          to="/me"
-                          onClick={this.toggleDropdown}
-                          className="nav--dropdown__action"
-                        >
-                          <Icon icon={faEdit} style={{ width: '14px' }} />
-                          Manage account
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/logout"
-                          onClick={this.toggleDropdown}
-                          className="nav--dropdown__action"
-                        >
-                          <Icon icon={faSignOutAlt} style={{ width: '14px' }} />
-                          {t('logout')}
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
+              <Fragment>
+                <div className="ds-l-col--12 ds-l-md-col--5">
+                  {!showSiteTitle && !isAdmin && (
+                    <span>
+                      {isSaving ? (
+                        <span>
+                          <Spinner spin /> Saving...
+                        </span>
+                      ) : (
+                        <span>
+                          <Check /> Saved {lastSaved}
+                        </span>
+                      )}
+                    </span>
+                  )}
+                </div>
+                <div className="ds-l-col--12 ds-l-md-col--4">
+                  <ul className="nav--dropdown">
+                    <li>
+                      <button
+                        type="button"
+                        className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
+                        onClick={this.toggleDropdown}
+                        aria-expanded={ariaExpanded ? 'true' : 'false'}
+                        aria-haspopup="true"
+                        aria-label={`Logged in as ${currentUser.username}. Click to manage your account.`}
+                      >
+                        {currentUser ? currentUser.username : 'Your account'}
+                        <Icon icon={faChevronDown} style={{ width: '8px' }} />
+                      </button>
+                      <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
+                        <li>
+                          <Link
+                            to="/me"
+                            onClick={this.toggleDropdown}
+                            className="nav--dropdown__action"
+                          >
+                            <Icon icon={faEdit} style={{ width: '14px' }} />
+                            Manage account
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/logout"
+                            onClick={this.toggleDropdown}
+                            className="nav--dropdown__action"
+                          >
+                            <Icon
+                              icon={faSignOutAlt}
+                              style={{ width: '14px' }}
+                            />
+                            {t('logout')}
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </Fragment>
             )}
           </div>
         </div>
@@ -113,17 +143,13 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  authenticated: state.auth.authenticated,
-  currentUser: state.auth.user,
-  isAdmin: getIsAdmin(state)
-});
-
 Header.propTypes = {
+  ariaExpanded: PropTypes.bool,
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
-  ariaExpanded: PropTypes.bool,
+  isSaving: PropTypes.bool.isRequired,
+  lastSaved: PropTypes.string.isRequired,
   showSiteTitle: PropTypes.bool.isRequired
 };
 
@@ -131,6 +157,14 @@ Header.defaultProps = {
   ariaExpanded: false,
   currentUser: null
 };
+
+const mapStateToProps = state => ({
+  authenticated: state.auth.authenticated,
+  currentUser: state.auth.user,
+  isAdmin: getIsAdmin(state),
+  isSaving: selectIsSaving(state),
+  lastSaved: selectLastSaved(state)
+});
 
 export default connect(mapStateToProps)(Header);
 

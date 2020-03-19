@@ -14,7 +14,9 @@
 
 .site-sidebar {
   width: 212px; // fix for IE
-  position: fixed;
+  position: sticky;
+  top: 60px;
+  bottom: 260px;
   max-height: 100vh;
   overflow-y: auto;
   float: left;
@@ -23,7 +25,9 @@
   }
 }
 
-.site-body {
+.site-body,
+#start-main-content {
+  margin-top: 60px !important;
   position: relative;
 }
 
