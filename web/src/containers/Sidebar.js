@@ -13,7 +13,7 @@ import { selectActiveSection } from '../reducers/navigation';
 
 const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
   useEffect(() => {
-    stickybits('.site-sidebar');
+    stickybits('.site-sidebar', { stickyBitStickyOffset: 60 });
   }, []);
 
   const history = useHistory();

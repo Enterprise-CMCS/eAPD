@@ -4,7 +4,7 @@ exports[`Consent banner component when there is a consent cookie calls onAgree p
 
 exports[`Consent banner component when there is no cookie renders the banner 1`] = `
 <div
-  className="card--container"
+  className="card--container ds-u-margin-top--7"
 >
   <div
     className="ds-l-container"
@@ -51,7 +51,7 @@ exports[`Consent banner component when there is no cookie renders the banner 1`]
 
 exports[`Consent banner component when there is no cookie toggles consent details on 1`] = `
 <div
-  className="card--container"
+  className="card--container ds-u-margin-top--7"
 >
   <div
     className="ds-l-container"
@@ -98,7 +98,7 @@ exports[`Consent banner component when there is no cookie toggles consent detail
 
 exports[`Consent banner component when there is no cookie toggles consent details on 2`] = `
 <div
-  className="card--container"
+  className="card--container ds-u-margin-top--7"
 >
   <div
     className="ds-l-container"

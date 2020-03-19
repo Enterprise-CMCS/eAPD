@@ -9,6 +9,7 @@ import budget from './budget';
 import errors from './errors';
 import navigation from './navigation';
 import patch from './patch';
+import saving from './saving';
 import user from './user';
 import working from './working';
 
@@ -22,6 +23,7 @@ const rootReducer = history =>
     errors,
     navigation,
     patch,
+    saving,
     user,
     working,
     router: connectRouter(history)

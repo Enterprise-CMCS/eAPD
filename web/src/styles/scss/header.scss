@@ -2,8 +2,14 @@
 
 header:not(.ds-c-dialog__header) {
   background-color: $color-primary-darkest;
+  color: $color-white;
   padding: $spacer-2 0;
   letter-spacing: 0.6px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 10;
 
   a,
   a:visited,
