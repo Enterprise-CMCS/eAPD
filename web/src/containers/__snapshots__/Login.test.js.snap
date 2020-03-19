@@ -25,6 +25,7 @@ exports[`login component renders correctly if logged in previously but not logge
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
+    className="ds-u-margin-top--7"
     error={false}
     footer={
       <p
@@ -87,6 +88,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
+    className="ds-u-margin-top--7"
     error={false}
     footer={
       <p
@@ -139,6 +141,7 @@ exports[`login component renders correctly if not logged in and there is an erro
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
+    className="ds-u-margin-top--7"
     error={false}
     footer={
       <p
@@ -191,6 +194,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
+    className="ds-u-margin-top--7"
     error={false}
     footer={
       <p
@@ -243,6 +247,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
+    className="ds-u-margin-top--7"
     error={false}
     footer={
       <p
@@ -295,6 +300,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   <withRouter(CardForm)
     canSubmit={6}
     cancelable={false}
+    className="ds-u-margin-top--7"
     error={false}
     footer={
       <p

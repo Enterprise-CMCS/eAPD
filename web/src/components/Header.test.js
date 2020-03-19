@@ -126,21 +126,45 @@ describe('Header component', () => {
   });
 
   it('renders the state user home title when a state user is at a secondary page', () => {
-    const component = shallow(
-      <Header
-        authenticated
-        currentUser={{
-          role: 'admin',
-          state: { id: 'wa', name: 'Washington' },
-          username: 'frasiercrane@kacl.com'
-        }}
-        isAdmin={false}
-        pushRoute={() => {}}
-        ariaExpanded={false}
-        showSiteTitle={false}
-      />
-    );
-    expect(component).toMatchSnapshot();
+    // Not saving
+    expect(
+      shallow(
+        <Header
+          ariaExpanded={false}
+          authenticated
+          currentUser={{
+            role: 'admin',
+            state: { id: 'wa', name: 'Washington' },
+            username: 'frasiercrane@kacl.com'
+          }}
+          isAdmin={false}
+          isSaving={false}
+          lastSaved="last save date"
+          pushRoute={() => {}}
+          showSiteTitle={false}
+        />
+      )
+    ).toMatchSnapshot();
+
+    // Saving
+    expect(
+      shallow(
+        <Header
+          ariaExpanded={false}
+          authenticated
+          currentUser={{
+            role: 'admin',
+            state: { id: 'wa', name: 'Washington' },
+            username: 'frasiercrane@kacl.com'
+          }}
+          isAdmin={false}
+          isSaving
+          lastSaved="last save date"
+          pushRoute={() => {}}
+          showSiteTitle={false}
+        />
+      )
+    ).toMatchSnapshot();
   });
 
   it('maps state to props', () => {
@@ -150,6 +174,10 @@ describe('Header component', () => {
         user: {
           role: 'admin'
         }
+      },
+      saving: {
+        lastSaved: 'blorp',
+        saving: 'bloop'
       },
       user: {
         data: {
@@ -161,7 +189,9 @@ describe('Header component', () => {
     expect(mapStateToProps(state)).toEqual({
       authenticated: 'some value',
       currentUser: { role: 'admin' },
-      isAdmin: true
+      isAdmin: true,
+      isSaving: 'bloop',
+      lastSaved: 'blorp'
     });
   });
 });
