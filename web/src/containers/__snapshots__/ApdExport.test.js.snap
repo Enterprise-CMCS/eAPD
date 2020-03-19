@@ -6,7 +6,6 @@ exports[`apd export component renders correctly 1`] = `
 >
   <Section
     id="export-and-submit"
-    isNumbered={true}
     resource="exportAndSubmit"
   >
     <h3
