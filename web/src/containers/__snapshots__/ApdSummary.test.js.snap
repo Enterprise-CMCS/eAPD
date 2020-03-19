@@ -6,7 +6,6 @@ exports[`apd summary component renders correctly 1`] = `
 >
   <Section
     id="apd-summary"
-    isNumbered={true}
     resource="apd"
   >
     <h3

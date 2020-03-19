@@ -1,47 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProposedBudget component renders correctly 1`] = `
-<Connect(ConnectedWaypoint)
-  id="budget-overview"
+<Section
+  id="budget"
+  resource="proposedBudget"
 >
-  <Section
-    id="budget"
-    isNumbered={true}
-    resource="proposedBudget"
+  <Connect(ConnectedWaypoint)
+    id="budget-summary-table"
+  />
+  <Subsection
+    headerClassName={null}
+    id="budget-summary-table"
+    nested={false}
+    resource="proposedBudget.summaryBudget"
   >
-    <Connect(ConnectedWaypoint)
-      id="budget-summary-table"
-    />
-    <Subsection
-      headerClassName={null}
-      id="budget-summary-table"
-      nested={false}
-      resource="proposedBudget.summaryBudget"
-    >
-      <Connect(BudgetSummary) />
-    </Subsection>
-    <Connect(ConnectedWaypoint)
-      id="budget-federal-by-quarter"
-    />
-    <Subsection
-      headerClassName={null}
-      id="budget-federal-by-quarter"
-      nested={false}
-      resource="proposedBudget.quarterlyBudget"
-    >
-      <Connect(QuarterlyBudgetSummary) />
-    </Subsection>
-    <Connect(ConnectedWaypoint)
-      id="budget-incentive-by-quarter"
-    />
-    <Subsection
-      headerClassName={null}
-      id="budget-incentive-by-quarter"
-      nested={false}
-      resource="proposedBudget.paymentsByFFYQuarter"
-    >
-      <Connect(IncentivePayments) />
-    </Subsection>
-  </Section>
-</Connect(ConnectedWaypoint)>
+    <Connect(BudgetSummary) />
+  </Subsection>
+  <Connect(ConnectedWaypoint)
+    id="budget-federal-by-quarter"
+  />
+  <Subsection
+    headerClassName={null}
+    id="budget-federal-by-quarter"
+    nested={false}
+    resource="proposedBudget.quarterlyBudget"
+  >
+    <Connect(QuarterlyBudgetSummary) />
+  </Subsection>
+  <Connect(ConnectedWaypoint)
+    id="budget-incentive-by-quarter"
+  />
+  <Subsection
+    headerClassName={null}
+    id="budget-incentive-by-quarter"
+    nested={false}
+    resource="proposedBudget.paymentsByFFYQuarter"
+  >
+    <Connect(IncentivePayments) />
+  </Subsection>
+</Section>
 `;
