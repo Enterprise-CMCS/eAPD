@@ -33,7 +33,7 @@ const ConsentBanner = ({ onAgree }) => {
   }
 
   return (
-    <div className="card--container">
+    <div className="card--container ds-u-margin-top--7">
       <div className="ds-l-container">
         <div className="ds-l-row card">
           <div className="ds-l-col--1 ds-u-margin-left--auto" />
