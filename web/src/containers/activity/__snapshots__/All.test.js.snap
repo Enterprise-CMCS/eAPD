@@ -1,51 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the Activities component renders correctly 1`] = `
-<Connect(ConnectedWaypoint)
-  id="activities-overview"
+<Section
+  id="activities"
+  resource="activities"
 >
-  <Section
-    id="activities"
-    isNumbered={true}
-    resource="activities"
+  <h3
+    className="subsection--title ds-h3"
   >
-    <h3
-      className="subsection--title ds-h3"
-    >
-      3
-       program activities
-    </h3>
-    <Connect(ConnectedWaypoint)
-      id="key1"
-      key="key1"
-    >
-      <Connect(EntryDetails)
-        activityIndex={0}
-      />
-    </Connect(ConnectedWaypoint)>
-    <Connect(ConnectedWaypoint)
-      id="key2"
-      key="key2"
-    >
-      <Connect(EntryDetails)
-        activityIndex={1}
-      />
-    </Connect(ConnectedWaypoint)>
-    <Connect(ConnectedWaypoint)
-      id="key3"
-      key="key3"
-    >
-      <Connect(EntryDetails)
-        activityIndex={2}
-      />
-    </Connect(ConnectedWaypoint)>
-    <Button
-      className="ds-u-margin-top--4"
-      onClick={[Function]}
-      type="button"
-    >
-      Add another activity
-    </Button>
-  </Section>
-</Connect(ConnectedWaypoint)>
+    3
+     program activities
+  </h3>
+  <Connect(ConnectedWaypoint)
+    id="key1"
+    key="key1"
+  >
+    <Connect(EntryDetails)
+      activityIndex={0}
+    />
+  </Connect(ConnectedWaypoint)>
+  <Connect(ConnectedWaypoint)
+    id="key2"
+    key="key2"
+  >
+    <Connect(EntryDetails)
+      activityIndex={1}
+    />
+  </Connect(ConnectedWaypoint)>
+  <Connect(ConnectedWaypoint)
+    id="key3"
+    key="key3"
+  >
+    <Connect(EntryDetails)
+      activityIndex={2}
+    />
+  </Connect(ConnectedWaypoint)>
+  <Button
+    className="ds-u-margin-top--4"
+    onClick={[Function]}
+    type="button"
+  >
+    Add another activity
+  </Button>
+</Section>
 `;

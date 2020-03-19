@@ -27,6 +27,46 @@ exports[`the (Activity) EntryDetails component does not render the delete button
 </div>
 `;
 
+exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
+<div
+  className="activity--body activity--body__notfirst"
+  id="activity-activity key"
+>
+  <Review
+    editContent={
+      <div
+        className="nowrap visibility--screen"
+      >
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent"
+        >
+          Edit
+        </Button>
+        <React.Fragment>
+          <span>
+            |
+          </span>
+          <Button
+            onClick={[Function]}
+            size="small"
+            type="button"
+            variation="transparent"
+          >
+            Remove
+          </Button>
+        </React.Fragment>
+      </div>
+    }
+    editText="Edit"
+    heading="Activity 3: activity name (money pit)"
+    headingLevel={4}
+  />
+</div>
+`;
+
 exports[`the (Activity) EntryDetails component renders correctly with no activity funding source/program 1`] = `
 <div
   className="activity--body activity--body__notfirst"
@@ -142,131 +182,6 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
     }
     editText="Edit"
     heading="Activity 3: Untitled"
-    headingLevel={4}
-  />
-</div>
-`;
-
-exports[`the (Activity) EntryDetails component renders correctly with the modal closed 1`] = `
-<div
-  className="activity--body activity--body__notfirst"
-  id="activity-activity key"
->
-  <Review
-    editContent={
-      <div
-        className="nowrap visibility--screen"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
-          type="button"
-          variation="transparent"
-        >
-          Edit
-        </Button>
-        <React.Fragment>
-          <span>
-            |
-          </span>
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            Remove
-          </Button>
-        </React.Fragment>
-      </div>
-    }
-    editText="Edit"
-    heading="Activity 3: activity name (money pit)"
-    headingLevel={4}
-  />
-</div>
-`;
-
-exports[`the (Activity) EntryDetails component renders correctly with the modal closed 2`] = `
-<div
-  className="activity--body activity--body__notfirst"
-  id="activity-activity key"
->
-  <Review
-    editContent={
-      <div
-        className="nowrap visibility--screen"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
-          type="button"
-          variation="transparent"
-        >
-          Edit
-        </Button>
-        <React.Fragment>
-          <span>
-            |
-          </span>
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            Remove
-          </Button>
-        </React.Fragment>
-      </div>
-    }
-    editText="Edit"
-    heading="Activity 3: activity name (money pit)"
-    headingLevel={4}
-  />
-  <ActivityDialog
-    activityIndex={2}
-    closeModal={[Function]}
-    title="Activity 3: activity name (money pit)"
-  />
-</div>
-`;
-
-exports[`the (Activity) EntryDetails component renders correctly with the modal closed 3`] = `
-<div
-  className="activity--body activity--body__notfirst"
-  id="activity-activity key"
->
-  <Review
-    editContent={
-      <div
-        className="nowrap visibility--screen"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
-          type="button"
-          variation="transparent"
-        >
-          Edit
-        </Button>
-        <React.Fragment>
-          <span>
-            |
-          </span>
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            Remove
-          </Button>
-        </React.Fragment>
-      </div>
-    }
-    editText="Edit"
-    heading="Activity 3: activity name (money pit)"
     headingLevel={4}
   />
 </div>

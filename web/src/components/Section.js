@@ -16,12 +16,12 @@ SectionDesc.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const Section = ({ children, id, isNumbered, resource }) => {
+const Section = ({ children, id, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
-    <section id={id} className={isNumbered ? 'numbered-section' : ''}>
+    <section id={id}>
       <h2 className="ds-h2">{title}</h2>
       <span className="ds-text--lead">{helptext}</span>
       {children}
@@ -32,14 +32,12 @@ const Section = ({ children, id, isNumbered, resource }) => {
 Section.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string,
-  resource: PropTypes.string,
-  isNumbered: PropTypes.bool
+  resource: PropTypes.string
 };
 
 Section.defaultProps = {
   id: null,
-  resource: null,
-  isNumbered: false
+  resource: null
 };
 
 const Subsection = ({ children, headerClassName, id, nested, resource }) => {

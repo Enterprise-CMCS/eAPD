@@ -1,42 +1,4 @@
 @import '@cmsgov/design-system-support/src/settings/index';
-body {
-  counter-reset: section;
-}
-
-.numbered-section {
-  $number-size: $h2-font-size * 1.5;
-  $number-padding-size: $number-size * 2;
-  $line-height: 1.5em;
-
-  > h2 {
-    line-height: $line-height;
-    margin-bottom: 0;
-    &::before {
-      counter-increment: section;
-      content: counter(section);
-      display: block;
-      float: left;
-      background-color: $color-primary;
-      color: $color-white;
-      width: $number-size;
-      height: $number-size;
-      margin-left: -($number-size + ($number-size / 2));
-      border-radius: 100px;
-      font-weight: 100;
-      line-height: $line-height;
-      text-align: center;
-    }
-  }
-
-  margin-top: $spacer-6;
-  padding-top: $spacer-2;
-  padding-left: $number-padding-size;
-  border-top: 1px solid $color-gray-dark;
-
-  &:first-of-type {
-    margin-top: $spacer-2;
-  }
-}
 
 .subsection--title {
   border-top: 1px solid $color-gray-dark;
