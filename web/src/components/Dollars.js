@@ -52,7 +52,7 @@ const Dollars = ({ children, long }) => {
     return <Fragment>$0</Fragment>;
   }
 
-  if (long) {
+  if (true || long) {
     return <span>{formatLong(num)}</span>;
   }
 
