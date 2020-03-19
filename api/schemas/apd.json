@@ -2,10 +2,7 @@
   "definitions": {
     "optionalFullDate": {
       "$id": "#/definitions/fullDate",
-      "anyOf": [
-        { "type": "string", "format": "date" },
-        { "type": "string", "enum": [""] }
-      ]
+      "type": "string"
     },
     "optionalNumber": {
       "$id": "#/definitions/optionalNumber",
