@@ -23,102 +23,409 @@ exports[`Sidebar component renders correctly 1`] = `
     items={
       Array [
         Object {
-          "defaultCollapsed": true,
-          "id": "apd-state-profile",
-          "items": Array [
-            Object {
-              "id": "apd-state-profile-overview",
-              "label": "Overview",
-              "onClick": [Function],
-              "url": "#apd-state-profile",
-            },
+          "children": Array [
             Object {
               "id": "apd-state-profile-office",
               "label": "State Director and Office Address",
-              "onClick": [Function],
-              "url": "#apd-state-profile-office",
             },
             Object {
               "id": "apd-state-profile-key-personnel",
               "label": "Key Personnel and Program Management",
-              "onClick": [Function],
-              "url": "#apd-state-profile-key-personnel",
             },
           ],
+          "id": "apd-state-profile",
           "label": "Key State Personnel",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
           "id": "apd-summary",
           "label": "Program Summary",
           "onClick": [Function],
-          "url": "#apd-summary",
+          "url": "#",
         },
         Object {
-          "defaultCollapsed": true,
-          "id": "prev-activities",
-          "items": Array [
-            Object {
-              "id": "prev-activities-overview",
-              "label": "Overview",
-              "onClick": [Function],
-              "url": "#prev-activities",
-            },
+          "children": Array [
             Object {
               "id": "prev-activities-outline",
               "label": "Prior Activities Overview",
-              "onClick": [Function],
-              "url": "#prev-activities-outline",
             },
             Object {
               "id": "prev-activities-table",
               "label": "Actual Costs",
-              "onClick": [Function],
-              "url": "#prev-activities-table",
             },
           ],
+          "id": "previous-activities",
           "label": "Results of Previous Activities",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
-          "defaultCollapsed": true,
-          "id": "activities",
-          "items": Array [
+          "children": Array [
             Object {
-              "id": "activities-overview",
-              "label": "Overview",
+              "id": "activities-list",
+              "label": "Activity List",
               "onClick": [Function],
-              "url": "#activities",
-            },
-            Object {
-              "id": "key 1",
-              "label": "Activity 1",
-              "onClick": [Function],
-              "url": "##key1",
-            },
-            Object {
-              "id": "key 2",
-              "label": "Activity 2",
-              "onClick": [Function],
-              "url": "##key2",
+              "url": "activities",
             },
           ],
+          "id": "activities",
           "label": "Program Activities",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
           "id": "schedule-summary",
           "label": "Activity Schedule Summary",
           "onClick": [Function],
-          "url": "#schedule-summary",
+          "url": "#",
         },
         Object {
-          "defaultCollapsed": true,
-          "id": "budget",
+          "children": Array [
+            Object {
+              "id": "budget-summary-table",
+              "label": "Summary Budget Table",
+            },
+            Object {
+              "id": "budget-federal-by-quarter",
+              "label": "Quarterly Federal Share",
+            },
+            Object {
+              "id": "budget-incentive-by-quarter",
+              "label": "Estimated Quarterly Incentive Payments",
+            },
+          ],
+          "id": "proposed-budget",
+          "label": "Proposed Budget",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "id": "assurances-compliance",
+          "label": "Assurances and Compliance",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "executive-summary-summary",
+              "label": "Activities Summary",
+            },
+            Object {
+              "id": "executive-summary-budget-table",
+              "label": "Program Budget Tables",
+            },
+          ],
+          "id": "executive-summary",
+          "label": "Executive Summary",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "id": "export",
+          "label": "Export and Submit",
+          "onClick": [Function],
+          "url": "#",
+        },
+      ]
+    }
+    selectedId="some section"
+  />
+</aside>
+`;
+
+exports[`Sidebar component renders the active section correctly if it is an activity section 1`] = `
+<aside
+  className="site-sidebar"
+>
+  <div
+    className="ds-u-display--flex ds-u-align-items--center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
+  >
+    <img
+      alt="place name"
+      className="ds-u-margin-right--2"
+      height="40"
+      src="/static/img/states/place id.svg"
+      width="40"
+    />
+    <h1>
+      place name
+    </h1>
+  </div>
+  <VerticalNav
+    collapsed={false}
+    items={
+      Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": "apd-state-profile-office",
+              "label": "State Director and Office Address",
+            },
+            Object {
+              "id": "apd-state-profile-key-personnel",
+              "label": "Key Personnel and Program Management",
+            },
+          ],
+          "id": "apd-state-profile",
+          "label": "Key State Personnel",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "id": "apd-summary",
+          "label": "Program Summary",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "prev-activities-outline",
+              "label": "Prior Activities Overview",
+            },
+            Object {
+              "id": "prev-activities-table",
+              "label": "Actual Costs",
+            },
+          ],
+          "id": "previous-activities",
+          "label": "Results of Previous Activities",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "activities-list",
+              "label": "Activity List",
+              "onClick": [Function],
+              "url": "activities",
+            },
+          ],
+          "id": "activities",
           "items": Array [
             Object {
-              "id": "budget-overview",
-              "label": "Overview",
+              "id": "activities-list",
+              "label": "Activity List",
               "onClick": [Function],
-              "url": "#budget",
+              "url": "activities",
             },
+            Object {
+              "id": "activity-key 1234",
+              "items": Array [
+                Object {
+                  "id": "activity-key 1234-overview",
+                  "label": "Activity overview",
+                  "onClick": [Function],
+                  "url": "activity/0/overview",
+                },
+                Object {
+                  "id": "activity-key 1234-okrs",
+                  "label": "Objectives and key results",
+                  "onClick": [Function],
+                  "url": "activity/0/okrs",
+                },
+                Object {
+                  "id": "activity-key 1234-state-costs",
+                  "label": "State cost categories",
+                  "onClick": [Function],
+                  "url": "activity/0/state-costs",
+                },
+                Object {
+                  "id": "activity-key 1234-contractor-costs",
+                  "label": "Private contractor costs",
+                  "onClick": [Function],
+                  "url": "activity/0/contractor-costs",
+                },
+                Object {
+                  "id": "activity-key 1234-cost-allocation",
+                  "label": "Cost allocation",
+                  "onClick": [Function],
+                  "url": "activity/0/cost-allocation",
+                },
+                Object {
+                  "id": "activity-key 1234-ffp",
+                  "label": "FFP and budget",
+                  "onClick": [Function],
+                  "url": "activity/0/ffp",
+                },
+              ],
+              "label": "Activity 1",
+              "onClick": [Function],
+              "url": null,
+            },
+            Object {
+              "id": "activity-key 4321",
+              "items": null,
+              "label": "Activity 2",
+              "onClick": [Function],
+              "url": "activity/1",
+            },
+          ],
+          "label": "Program Activities",
+          "onClick": [Function],
+          "url": undefined,
+        },
+        Object {
+          "id": "schedule-summary",
+          "label": "Activity Schedule Summary",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "budget-summary-table",
+              "label": "Summary Budget Table",
+            },
+            Object {
+              "id": "budget-federal-by-quarter",
+              "label": "Quarterly Federal Share",
+            },
+            Object {
+              "id": "budget-incentive-by-quarter",
+              "label": "Estimated Quarterly Incentive Payments",
+            },
+          ],
+          "id": "proposed-budget",
+          "label": "Proposed Budget",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "id": "assurances-compliance",
+          "label": "Assurances and Compliance",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "executive-summary-summary",
+              "label": "Activities Summary",
+            },
+            Object {
+              "id": "executive-summary-budget-table",
+              "label": "Program Budget Tables",
+            },
+          ],
+          "id": "executive-summary",
+          "label": "Executive Summary",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "id": "export",
+          "label": "Export and Submit",
+          "onClick": [Function],
+          "url": "#",
+        },
+      ]
+    }
+    selectedId="activity-key 1234-okrs"
+  />
+</aside>
+`;
+
+exports[`Sidebar component renders the active section with its children open 1`] = `
+<aside
+  className="site-sidebar"
+>
+  <div
+    className="ds-u-display--flex ds-u-align-items--center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
+  >
+    <img
+      alt="place name"
+      className="ds-u-margin-right--2"
+      height="40"
+      src="/static/img/states/place id.svg"
+      width="40"
+    />
+    <h1>
+      place name
+    </h1>
+  </div>
+  <VerticalNav
+    collapsed={false}
+    items={
+      Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": "apd-state-profile-office",
+              "label": "State Director and Office Address",
+            },
+            Object {
+              "id": "apd-state-profile-key-personnel",
+              "label": "Key Personnel and Program Management",
+            },
+          ],
+          "id": "apd-state-profile",
+          "label": "Key State Personnel",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "id": "apd-summary",
+          "label": "Program Summary",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "prev-activities-outline",
+              "label": "Prior Activities Overview",
+            },
+            Object {
+              "id": "prev-activities-table",
+              "label": "Actual Costs",
+            },
+          ],
+          "id": "previous-activities",
+          "label": "Results of Previous Activities",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "activities-list",
+              "label": "Activity List",
+              "onClick": [Function],
+              "url": "activities",
+            },
+          ],
+          "id": "activities",
+          "label": "Program Activities",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "id": "schedule-summary",
+          "label": "Activity Schedule Summary",
+          "onClick": [Function],
+          "url": "#",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "budget-summary-table",
+              "label": "Summary Budget Table",
+            },
+            Object {
+              "id": "budget-federal-by-quarter",
+              "label": "Quarterly Federal Share",
+            },
+            Object {
+              "id": "budget-incentive-by-quarter",
+              "label": "Estimated Quarterly Incentive Payments",
+            },
+          ],
+          "id": "proposed-budget",
+          "items": Array [
             Object {
               "id": "budget-summary-table",
               "label": "Summary Budget Table",
@@ -139,47 +446,40 @@ exports[`Sidebar component renders correctly 1`] = `
             },
           ],
           "label": "Proposed Budget",
+          "onClick": [Function],
+          "url": undefined,
         },
         Object {
           "id": "assurances-compliance",
           "label": "Assurances and Compliance",
           "onClick": [Function],
-          "url": "#assurances-compliance",
+          "url": "#",
         },
         Object {
-          "defaultCollapsed": true,
-          "id": "executive-summary",
-          "items": Array [
-            Object {
-              "id": "executive-summary-overview",
-              "label": "Overview",
-              "onClick": [Function],
-              "url": "#executive-summary",
-            },
+          "children": Array [
             Object {
               "id": "executive-summary-summary",
               "label": "Activities Summary",
-              "onClick": [Function],
-              "url": "#executive-summary-summary",
             },
             Object {
               "id": "executive-summary-budget-table",
               "label": "Program Budget Tables",
-              "onClick": [Function],
-              "url": "#executive-summary-budget-table",
             },
           ],
+          "id": "executive-summary",
           "label": "Executive Summary",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
-          "id": "export-and-submit",
+          "id": "export",
           "label": "Export and Submit",
           "onClick": [Function],
-          "url": "#export-and-submit",
+          "url": "#",
         },
       ]
     }
-    selectedId="some section"
+    selectedId="proposed-budget"
   />
 </aside>
 `;
@@ -207,159 +507,110 @@ exports[`Sidebar component uses the PNG file extension for territories (these ar
     items={
       Array [
         Object {
-          "defaultCollapsed": true,
-          "id": "apd-state-profile",
-          "items": Array [
-            Object {
-              "id": "apd-state-profile-overview",
-              "label": "Overview",
-              "onClick": [Function],
-              "url": "#apd-state-profile",
-            },
+          "children": Array [
             Object {
               "id": "apd-state-profile-office",
               "label": "State Director and Office Address",
-              "onClick": [Function],
-              "url": "#apd-state-profile-office",
             },
             Object {
               "id": "apd-state-profile-key-personnel",
               "label": "Key Personnel and Program Management",
-              "onClick": [Function],
-              "url": "#apd-state-profile-key-personnel",
             },
           ],
+          "id": "apd-state-profile",
           "label": "Key State Personnel",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
           "id": "apd-summary",
           "label": "Program Summary",
           "onClick": [Function],
-          "url": "#apd-summary",
+          "url": "#",
         },
         Object {
-          "defaultCollapsed": true,
-          "id": "prev-activities",
-          "items": Array [
-            Object {
-              "id": "prev-activities-overview",
-              "label": "Overview",
-              "onClick": [Function],
-              "url": "#prev-activities",
-            },
+          "children": Array [
             Object {
               "id": "prev-activities-outline",
               "label": "Prior Activities Overview",
-              "onClick": [Function],
-              "url": "#prev-activities-outline",
             },
             Object {
               "id": "prev-activities-table",
               "label": "Actual Costs",
-              "onClick": [Function],
-              "url": "#prev-activities-table",
             },
           ],
+          "id": "previous-activities",
           "label": "Results of Previous Activities",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
-          "defaultCollapsed": true,
-          "id": "activities",
-          "items": Array [
+          "children": Array [
             Object {
-              "id": "activities-overview",
-              "label": "Overview",
+              "id": "activities-list",
+              "label": "Activity List",
               "onClick": [Function],
-              "url": "#activities",
-            },
-            Object {
-              "id": "key 1",
-              "label": "Activity 1",
-              "onClick": [Function],
-              "url": "##key1",
-            },
-            Object {
-              "id": "key 2",
-              "label": "Activity 2",
-              "onClick": [Function],
-              "url": "##key2",
+              "url": "activities",
             },
           ],
+          "id": "activities",
           "label": "Program Activities",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
           "id": "schedule-summary",
           "label": "Activity Schedule Summary",
           "onClick": [Function],
-          "url": "#schedule-summary",
+          "url": "#",
         },
         Object {
-          "defaultCollapsed": true,
-          "id": "budget",
-          "items": Array [
-            Object {
-              "id": "budget-overview",
-              "label": "Overview",
-              "onClick": [Function],
-              "url": "#budget",
-            },
+          "children": Array [
             Object {
               "id": "budget-summary-table",
               "label": "Summary Budget Table",
-              "onClick": [Function],
-              "url": "#budget-summary-table",
             },
             Object {
               "id": "budget-federal-by-quarter",
               "label": "Quarterly Federal Share",
-              "onClick": [Function],
-              "url": "#budget-federal-by-quarter",
             },
             Object {
               "id": "budget-incentive-by-quarter",
               "label": "Estimated Quarterly Incentive Payments",
-              "onClick": [Function],
-              "url": "#budget-incentive-by-quarter",
             },
           ],
+          "id": "proposed-budget",
           "label": "Proposed Budget",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
           "id": "assurances-compliance",
           "label": "Assurances and Compliance",
           "onClick": [Function],
-          "url": "#assurances-compliance",
+          "url": "#",
         },
         Object {
-          "defaultCollapsed": true,
-          "id": "executive-summary",
-          "items": Array [
-            Object {
-              "id": "executive-summary-overview",
-              "label": "Overview",
-              "onClick": [Function],
-              "url": "#executive-summary",
-            },
+          "children": Array [
             Object {
               "id": "executive-summary-summary",
               "label": "Activities Summary",
-              "onClick": [Function],
-              "url": "#executive-summary-summary",
             },
             Object {
               "id": "executive-summary-budget-table",
               "label": "Program Budget Tables",
-              "onClick": [Function],
-              "url": "#executive-summary-budget-table",
             },
           ],
+          "id": "executive-summary",
           "label": "Executive Summary",
+          "onClick": [Function],
+          "url": "#",
         },
         Object {
-          "id": "export-and-submit",
+          "id": "export",
           "label": "Export and Submit",
           "onClick": [Function],
-          "url": "#export-and-submit",
+          "url": "#",
         },
       ]
     }

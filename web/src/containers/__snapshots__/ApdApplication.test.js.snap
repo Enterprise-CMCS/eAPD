@@ -12,33 +12,13 @@ exports[`apd (application) component renders correctly 1`] = `
     />
     <div
       className="site-main ds-u-padding-top--2"
+      id="start-main-content"
     >
-      <h1
-        className="ds-h1 apd--title"
-        id="start-main-content"
-      >
-        <span
-          className="ds-h6 ds-u-display--block"
-        >
-          <strong>
-            Created:
-          </strong>
-           
-          creation date
-        </span>
-        test name
-         | FFY 
-        the year
-      </h1>
-      <ApdStateProfile />
-      <Connect(ApdSummary) />
-      <Connect(PreviousActivities) />
-      <Connect(All) />
-      <Connect(ScheduleSummary) />
-      <ProposedBudget />
-      <Connect(AssurancesAndCompliance) />
-      <Connect(ExecutiveSummary) />
-      <Connect(ExportAndSubmit) />
+      <ApdPageRoutes
+        apdCreated="creation date"
+        apdName="test name"
+        year="the year"
+      />
     </div>
   </div>
   <Connect(SaveButton) />

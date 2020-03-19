@@ -26,7 +26,7 @@ exports[`Routes component renders correctly 1`] = `
         "type": [Function],
       }
     }
-    exact={true}
+    exact={false}
     key="/apd"
     path="/apd"
   />

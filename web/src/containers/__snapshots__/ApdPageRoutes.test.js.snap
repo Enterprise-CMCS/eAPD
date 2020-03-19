@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APD page router renders as expected 1`] = `
+<Component>
+  <Component
+    path="this is where the page is/activity/:activityIndex"
+  >
+    <Connect(EntryPage) />
+  </Component>
+  <Component
+    path="this is where the page is"
+  >
+    <ApdHeader
+      apdName=""
+    />
+    <Component
+      exact={true}
+      path="this is where the page is"
+    >
+      <ApdStateProfile />
+    </Component>
+    <Component
+      path="this is where the page is/state-profile"
+    >
+      <ApdStateProfile />
+    </Component>
+    <Component
+      path="this is where the page is/program-summary"
+    >
+      <Connect(ApdSummary) />
+    </Component>
+    <Component
+      path="this is where the page is/previous-activities"
+    >
+      <Connect(PreviousActivities) />
+    </Component>
+    <Component
+      path="this is where the page is/activities"
+    >
+      <Connect(All) />
+    </Component>
+    <Component
+      path="this is where the page is/schedule-summary"
+    >
+      <Connect(ScheduleSummary) />
+    </Component>
+    <Component
+      path="this is where the page is/proposed-budget"
+    >
+      <ProposedBudget />
+    </Component>
+    <Component
+      path="this is where the page is/assurances-and-compliance"
+    >
+      <Connect(AssurancesAndCompliance) />
+    </Component>
+    <Component
+      path="this is where the page is/executive-summary"
+    >
+      <Connect(ExecutiveSummary) />
+    </Component>
+    <Component
+      path="this is where the page is/export"
+    >
+      <Connect(ExportAndSubmit) />
+    </Component>
+  </Component>
+</Component>
+`;

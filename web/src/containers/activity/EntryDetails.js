@@ -1,11 +1,12 @@
 import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { useMemo, useRef, useState, Fragment } from 'react';
+import React, { useMemo, useRef, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import { jumpTo } from '../../actions/app';
 import { removeActivity } from '../../actions/editActivity';
-import ActivityDialog from './EntryDetailsDialog';
 
 import { t } from '../../i18n';
 
@@ -24,17 +25,23 @@ const makeTitle = ({ name, fundingSource }, i) => {
 
 const EntryDetails = ({
   activityIndex,
-  fundingSource,
   activityKey,
+  fundingSource,
+  jumpAction,
   name,
   remove
 }) => {
   const container = useRef();
 
-  const [showModal, setShowModal] = useState(false);
+  const history = useHistory();
 
-  const closeModal = () => {
-    setShowModal(false);
+  const navigateToActivity = e => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    jumpAction(`activity-${activityKey}-overview`);
+    history.push(`/apd/activity/${activityIndex}`);
+    window.scrollTo(0, 0);
   };
 
   const onRemove = () => {
@@ -48,11 +55,7 @@ const EntryDetails = ({
 
   const editContent = (
     <div className="nowrap visibility--screen">
-      <Button
-        size="small"
-        variation="transparent"
-        onClick={() => setShowModal(true)}
-      >
+      <Button size="small" variation="transparent" onClick={navigateToActivity}>
         Edit
       </Button>
       {activityIndex > 0 && (
@@ -79,13 +82,6 @@ const EntryDetails = ({
           /* children are required, so send an empty array to suppress errors */
         ]}
       </Review>
-      {showModal && (
-        <ActivityDialog
-          title={title}
-          activityIndex={activityIndex}
-          closeModal={closeModal}
-        />
-      )}
     </div>
   );
 };
@@ -94,6 +90,7 @@ EntryDetails.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   activityKey: PropTypes.string.isRequired,
   fundingSource: PropTypes.string.isRequired,
+  jumpAction: PropTypes.func.isRequired,
   name: PropTypes.string,
   remove: PropTypes.func.isRequired
 };
@@ -110,12 +107,10 @@ const mapStateToProps = (state, { activityIndex }) => {
 };
 
 const mapDispatchToProps = {
+  jumpAction: jumpTo,
   remove: removeActivity
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EntryDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(EntryDetails);
 
 export { EntryDetails as plain, mapStateToProps, mapDispatchToProps };
