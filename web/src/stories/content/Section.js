@@ -54,7 +54,10 @@ const SectionStory = () => (
       <tr>
         <td>isNumbered</td>
         <td>bool</td>
-        <td>defaults to false; adding a class of <code>numbered-section</code> will render a bubble with a CSS counter in it to the left.</td>
+        <td>
+          defaults to false; adding a class of <code>numbered-section</code>{' '}
+          will render a bubble with a CSS counter in it to the left.
+        </td>
       </tr>
       <tr>
         <td>resource</td>

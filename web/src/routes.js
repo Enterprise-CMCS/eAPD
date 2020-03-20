@@ -10,7 +10,7 @@ import Logout from './containers/Logout';
 
 const routes = [
   { path: '/', component: Dashboard, exact: true, isPublic: false },
-  { path: '/apd', component: ApdApplication, exact: true, isPublic: false },
+  { path: '/apd', component: ApdApplication, exact: false, isPublic: false },
   { path: '/print', component: ApdViewOnly, exact: true, isPublic: false },
 
   {

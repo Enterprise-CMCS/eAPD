@@ -8,3 +8,12 @@
 .ds-c-label.ds-h4 {
   font-size: $h4-font-size;
 }
+
+#activity-entry-page .ds-u-clearfix {
+  &::before,
+  &::after {
+    // override default clearfix
+    display: none;
+    content: normal;
+  }
+}

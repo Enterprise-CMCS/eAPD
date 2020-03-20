@@ -62,6 +62,13 @@ td {
     }
   }
 
+  tr.budget-table--row__header {
+    th,
+    td {
+      background-color: $color-gray-lighter;
+    }
+  }
+
   thead {
     tr + tr {
       border-top: 1px solid $color-gray-light;
@@ -105,6 +112,18 @@ td {
       th {
         background-color: $color-warn-lightest;
       }
+    }
+  }
+}
+
+.budget-table.activity-budget-table {
+  td {
+    width: 1%;
+    white-space: nowrap;
+
+    &.title {
+      padding-left: 3em;
+      width: 100%;
     }
   }
 }

@@ -124,9 +124,9 @@ describe('schedule summary component', () => {
           end: '10/14/1947',
           name: 'activity 1',
           milestones: [
-            { end: '1/31/2006', name: '1-one' },
+            { end: '11/28/1872', name: '1-three' },
             { end: '10/1/1991', name: '1-two' },
-            { end: '11/28/1872', name: '1-three' }
+            { end: '1/31/2006', name: '1-one' }
           ],
           start: '1/1/1901'
         },
