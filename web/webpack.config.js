@@ -2,7 +2,6 @@ const path = require('path');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 if (!process.env.IDLE_LOGOUT_TIME_MINUTES) {
@@ -19,6 +18,7 @@ const config = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
+    publicPath: '/',
 
     // Bust the cache with a hash!
     filename: '[name].[contenthash].js'
@@ -92,10 +92,11 @@ const config = {
       }
     ]
   },
-  // replaces "process.env.____" with the values defined in the actual
-  // environment at build time
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
+
+    // replaces "process.env.____" with the values defined in the actual
+    // environment at build time
     new webpack.EnvironmentPlugin({
       API_URL: null,
       IDLE_LOGOUT_TIME_MINUTES: 15
@@ -109,11 +110,6 @@ const config = {
     new HtmlWebpackPlugin({
       minify: { removeComments: true },
       template: 'src/index.html'
-    }),
-    new HtmlWebpackTagsPlugin({
-      tags: ['app.css'],
-      append: true,
-      hash: true
     })
   ]
 };
