@@ -1,276 +1,421 @@
 import { Dropdown } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
-import CostAllocateFFPYearTotal from './CostAllocateFFPYearTotal';
+
 import {
   setCostAllocationFFPFundingSplit,
   setCostAllocationFFPOtherFunding
 } from '../../actions/editActivity';
 import DollarField from '../../components/DollarField';
 import Dollars from '../../components/Dollars';
-import { t } from '../../i18n';
 import {
-  makeSelectCostAllocateFFP,
-  selectActivityKeyByIndex
+  selectCostAllocationForActivityByIndex,
+  selectActivityCostSummary,
+  selectActivityByIndex
 } from '../../reducers/activities.selectors';
+import { getUserStateOrTerritory } from '../../reducers/user.selector';
 
-class CostAllocateFFP extends Component {
-  setOther = year => e => {
-    const { activityIndex, setOtherFunding } = this.props;
+const CostSummaryRows = ({ items }) =>
+  items.map(({ description, totalCost, unitCost, units }) => (
+    <tr key={description}>
+      <td className="title">{description}</td>
+      <td className="budget-table--number">
+        {unitCost !== null && <Dollars long>{unitCost}</Dollars>}
+      </td>
+      <td className="budget-table--number ds-u-padding--0">
+        {unitCost !== null && '×'}
+      </td>
+      <td className="budget-table--number ds-u-text-align--left">{units}</td>
+      <td className="budget-table--number">{unitCost !== null && '='}</td>
+      <td className="budget-table--number">
+        <Dollars long>{totalCost}</Dollars>
+      </td>
+    </tr>
+  ));
+
+CostSummaryRows.propTypes = {
+  items: PropTypes.array.isRequired
+};
+
+const AllFFYsSummaryNarrative = ({
+  activityName,
+  costAllocation,
+  costSummary: { total },
+  stateName
+}) => {
+  let lastSplit = '';
+  let fundingSplitBits = [];
+
+  Object.keys(costAllocation).forEach(ffy => {
+    const split = `${costAllocation[ffy].ffp.federal}/${costAllocation[ffy].ffp.state}`;
+
+    if (split !== lastSplit) {
+      fundingSplitBits.push({ split, ffys: [] });
+    }
+
+    fundingSplitBits[fundingSplitBits.length - 1].ffys.push(`FFY ${ffy}`);
+    lastSplit = split;
+  });
+
+  fundingSplitBits = fundingSplitBits.map(split => {
+    if (split.ffys.length > 2) {
+      split.ffys[split.ffys.length - 1] = `and ${
+        split.ffys[split.ffys.length - 1]
+      }`;
+      split.ffys = split.ffys.join(', ');
+    } else {
+      split.ffys = split.ffys.join(' and ');
+    }
+    return `${split.split} (${split.ffys})`;
+  });
+
+  let fundingSplitNarrative = fundingSplitBits.join(' and ');
+  if (fundingSplitBits.length > 2) {
+    fundingSplitBits[fundingSplitBits.length - 1] = `and ${
+      fundingSplitBits[fundingSplitBits.length - 1]
+    }`;
+    fundingSplitNarrative = fundingSplitBits.join(', ');
+  }
+
+  return (
+    <p>
+      The total cost of the <strong>{activityName}</strong> activity is{' '}
+      <strong>
+        <Dollars long>{total.totalCost}</Dollars>
+      </strong>
+      . Because of other funding of{' '}
+      <strong>
+        <Dollars long>{total.otherFunding}</Dollars>
+      </strong>
+      , the total cost to Medicaid is{' '}
+      <strong>
+        <Dollars long>{total.medicaidShare}</Dollars>
+      </strong>
+      . This activity is using a <strong>{fundingSplitNarrative}</strong>{' '}
+      funding split, resulting in a federal share of{' '}
+      <strong>
+        <Dollars long>{total.federalShare}</Dollars>
+      </strong>{' '}
+      and a {stateName} share of{' '}
+      <strong>
+        <Dollars long>{total.stateShare}</Dollars>
+      </strong>
+      .
+    </p>
+  );
+};
+
+AllFFYsSummaryNarrative.propTypes = {
+  activityName: PropTypes.string.isRequired,
+  costAllocation: PropTypes.object.isRequired,
+  costSummary: PropTypes.object.isRequired,
+  stateName: PropTypes.string.isRequired
+};
+
+const CostAllocateFFP = ({
+  activityIndex,
+  activityName,
+  costAllocation,
+  costSummary,
+  aKey,
+  isViewOnly,
+  setFundingSplit,
+  setOtherFunding,
+  stateName
+}) => {
+  const setOther = year => e => {
     setOtherFunding(activityIndex, year, e.target.value);
   };
 
-  setFederalStateSplit = year => e => {
-    const { activityIndex, setFundingSplit } = this.props;
+  const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
   };
 
-  render() {
-    const {
-      activityIndex,
-      byYearData,
-      costAllocation,
-      aKey,
-      isViewOnly
-    } = this.props;
+  const { years } = costSummary;
 
-    return (
-      <Fragment>
-        {!isViewOnly && (
-          <h5 className="ds-h4">{t('activities.costAllocate.ffp.title')}</h5>
-        )}
-        {byYearData.map(
-          ({ year, total, medicaidShare, ffpSelectVal, allocations }) => (
-            <div key={year}>
-              {isViewOnly ? (
-                <Fragment>
-                  <p className="ds-h3 ds-u-margin-y--2">
-                    Cost Allocation for FFY {year}:{' '}
-                    <span className="ds-u-font-weight--normal">
-                      <Dollars long>{total}</Dollars>
-                    </span>
-                  </p>
-                  <p className="ds-h4 ds-u-margin-y--2">
-                    {t('activities.costAllocate.ffp.labels.other')}:{' '}
-                    <span className="ds-u-font-weight--normal">
-                      <Dollars long>{costAllocation[year].other}</Dollars>
-                    </span>
-                  </p>
-                </Fragment>
-              ) : (
-                <Fragment>
-                  <h6 className="ds-h3 ds-u-margin-bottom--2">
-                    Cost Allocation for FFY {year}:
-                  </h6>
+  return (
+    <Fragment>
+      {Object.keys(years).map(ffy => (
+        <Fragment key={ffy}>
+          <h3 className="subsection--title ds-h3">
+            Cost Allocation and Budget for FFY {ffy}
+          </h3>
 
-                  <Instruction
-                    source="activities.costAllocate.ffp.otherFundingInstruction"
-                    headingDisplay={{
-                      level: 'p',
-                      className: 'ds-h4'
-                    }}
+          <table className="budget-table activity-budget-table">
+            <tbody>
+              <tr className="budget-table--row__header">
+                <th scope="col">State Staff</th>
+                <th scope="col" colSpan="2">
+                  <span className="sr-only">unit cost</span>
+                </th>
+                <th scope="col" colSpan="2">
+                  <span className="sr-only">units</span>
+                </th>
+                <th scope="col">Total cost</th>
+              </tr>
+              <CostSummaryRows items={years[ffy].keyPersonnel} />
+              <CostSummaryRows items={years[ffy].statePersonnel} />
+              <tr className="budget-table--subtotal budget-table--row__highlight">
+                <td className="title" colSpan="5">
+                  State Staff Subtotal
+                </td>
+                <td className="budget-table--number">
+                  <Dollars long>{years[ffy].statePersonnelTotal}</Dollars>
+                </td>
+              </tr>
+              <tr className="budget-table--row__header">
+                <th scope="col" colSpan="6">
+                  Other State Expenses
+                </th>
+              </tr>
+              <CostSummaryRows items={years[ffy].nonPersonnel} />
+              <tr className="budget-table--subtotal budget-table--row__highlight">
+                <td className="title" colSpan="5">
+                  Other State Expenses Subtotal
+                </td>
+                <td className="budget-table--number">
+                  <Dollars long>{years[ffy].nonPersonnelTotal}</Dollars>
+                </td>
+              </tr>
+              <tr className="budget-table--row__header">
+                <th scope="col" colSpan="6">
+                  Private Contractor
+                </th>
+              </tr>
+              <CostSummaryRows items={years[ffy].contractorResources} />
+              <tr className="budget-table--subtotal budget-table--row__highlight">
+                <td className="title" colSpan="5">
+                  Private Contractor Subtotal
+                </td>
+                <td className="budget-table--number">
+                  <Dollars long>{years[ffy].contractorResourcesTotal}</Dollars>
+                </td>
+              </tr>
+              <tr className="budget-table--subtotal">
+                <td colSpan="5">Activity Total Cost</td>
+                <td className="budget-table--number">
+                  <Dollars long>{years[ffy].totalCost}</Dollars>
+                </td>
+              </tr>
+
+              {/* in viewonly mode, we'll pull everything into a single table
+                  table since there aren't form elements to fill in */}
+              {isViewOnly && (
+                <Fragment>
+                  <tr>
+                    <td>Other Funding</td>
+                    <td colSpan="3" />
+                    <td>-</td>
+                    <td className="budget-table--number">
+                      <Dollars long>{years[ffy].otherFunding}</Dollars>
+                    </td>
+                  </tr>
+                  <tr className="budget-table--subtotal budget-table--row__highlight">
+                    <td>Medicaid Share</td>
+                    <td colSpan="4" />
+                    <td className="budget-table--number">
+                      <Dollars long>{years[ffy].medicaidShare}</Dollars>
+                    </td>
+                  </tr>
+                  <CostSummaryRows
+                    items={[
+                      {
+                        description: 'Federal Share',
+                        totalCost: years[ffy].federalShare,
+                        unitCost: years[ffy].medicaidShare,
+                        units: '90%'
+                      },
+                      {
+                        description: 'State Share',
+                        totalCost: years[ffy].stateShare,
+                        unitCost: years[ffy].medicaidShare,
+                        units: '10%'
+                      }
+                    ]}
                   />
-
-                  <table
-                    className="budget-table"
-                    style={{ minWidth: '350px', width: 'fit-content' }}
-                  >
-                    <caption className="ds-u-visibility--screen-reader">
-                      Review the total activity cost, enter any other funding
-                      amount, and review the Medicaid share.
-                    </caption>
-                    <thead>
-                      <tr>
-                        <th colSpan="3">Calculated Medicaid Share</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>Activity Cost</th>
-                        <td colSpan="2" className="budget-table--number">
-                          <Dollars long>{total}</Dollars>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="ds-u-valign--middle">Other Funding</th>
-                        <td className="budget-table--number ds-u-valign--middle ds-u-padding-right--1">
-                          (-)
-                        </td>
-                        <td className="budget-table--number ds-u-padding-left--0">
-                          <DollarField
-                            className="budget-table--input-holder"
-                            fieldClassName="budget-table--input__number"
-                            label={t(
-                              'activities.costAllocate.ffp.labels.other'
-                            )}
-                            labelClassName="sr-only"
-                            name={`cost-allocate-other-${year}`}
-                            value={costAllocation[year].other || '0'}
-                            onChange={this.setOther(year)}
-                          />
-                        </td>
-                      </tr>
-                      <tr className="budget-table--row__highlight">
-                        <th>Medicaid Share</th>
-                        <td
-                          colSpan="2"
-                          className="budget-table--number budget-table--subtotal"
-                        >
-                          <Dollars long>{medicaidShare}</Dollars>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <table
-                    className="budget-table"
-                    style={{ minWidth: '350px', width: 'fit-content' }}
-                  >
-                    <caption className="ds-u-visibility--screen-reader">
-                      Review the total activity cost, enter any other funding
-                      amount, and review the Medicaid share.
-                    </caption>
-                    <thead>
-                      <tr>
-                        <th colSpan="2">
-                          Calculated Medicaid Federal and State Share
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>Medicaid Share</th>
-                        <td className="budget-table--number">
-                          <Dollars long>{medicaidShare}</Dollars>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>Federal/State Split</th>
-                        <td>
-                          <Dropdown
-                            className="budget-table--input-holder"
-                            fieldClassName="budget-table--input__number"
-                            name={`ffp-${year}`}
-                            label={t(
-                              'activities.costAllocate.ffp.labels.fedStateSplit'
-                            )}
-                            labelClassName="sr-only"
-                            options={[
-                              { label: '90-10', value: '90-10' },
-                              { label: '75-25', value: '75-25' },
-                              { label: '50-50', value: '50-50' }
-                            ]}
-                            value={ffpSelectVal}
-                            onChange={this.setFederalStateSplit(year)}
-                          />
-                        </td>
-                      </tr>
-                      <tr className="budget-table--row__highlight">
-                        <th>Federal Share</th>
-                        <td className="budget-table--number budget-table--subtotal">
-                          <Dollars long>{allocations.federal}</Dollars>
-                        </td>
-                      </tr>
-                      <tr className="budget-table--row__highlight">
-                        <th>State Share</th>
-                        <td className="budget-table--number budget-table--subtotal">
-                          <Dollars long>{allocations.state}</Dollars>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
                 </Fragment>
               )}
+            </tbody>
+          </table>
 
-              {isViewOnly && (
-                <p className="ds-h4 ds-u-margin-y--2">
-                  Medicaid Share:{' '}
-                  <span className="ds-u-font-weight--normal">
-                    <Dollars long>{medicaidShare}</Dollars>
-                  </span>
-                </p>
-              )}
+          {!isViewOnly && (
+            <Fragment>
+              <div className="data-entry-box ds-u-margin-bottom--5">
+                <Instruction
+                  source="activities.costAllocate.ffp.otherFundingInstruction"
+                  headingDisplay={{
+                    level: 'p',
+                    className: 'ds-h4'
+                  }}
+                />
+                <DollarField
+                  label={`FFY ${ffy}`}
+                  labelClassName="sr-only"
+                  value={costAllocation[ffy].other || '0'}
+                  onChange={setOther(ffy)}
+                />
+              </div>
 
-              {isViewOnly && (
-                <Fragment>
-                  <p>
-                    <strong>Federal-State Split: </strong>
-                    {ffpSelectVal}
-                  </p>
-                  <div className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2">
-                    <p className="ds-u-margin-bottom--0">
-                      <strong>Federal</strong>
-                    </p>
-                    <p>
-                      <Dollars long>{allocations.federal}</Dollars>
-                    </p>
-                    <p className="ds-u-margin-bottom--0">
-                      <strong>State</strong>
-                    </p>
-                    <p>
-                      <Dollars long>{allocations.state}</Dollars>
-                    </p>
-                  </div>
-                </Fragment>
-              )}
+              <table className="budget-table activity-budget-table">
+                <tbody>
+                  <tr className="budget-table--subtotal budget-table--row__header">
+                    <th colSpan="2">Activity Total Cost</th>
+                    <td className="budget-table--number">
+                      <Dollars long>{years[ffy].totalCost}</Dollars>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="title">Other Funding</td>
+                    <td>-</td>
+                    <td className="budget-table--number">
+                      <Dollars long>{years[ffy].otherFunding}</Dollars>
+                    </td>
+                  </tr>
+                  <tr className="budget-table--subtotal budget-table--row__highlight">
+                    <td className="title">Medicaid Share</td>
+                    <td colSpan="2" className="budget-table--number">
+                      <Dollars long>{years[ffy].medicaidShare}</Dollars>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-              <CostAllocateFFPQuarterly
-                activityIndex={activityIndex}
-                aKey={aKey}
-                year={year}
-                isViewOnly={isViewOnly}
-              />
-              <hr />
-            </div>
-          )
-        )}
-        <CostAllocateFFPYearTotal aKey={aKey} />
-        {!isViewOnly && <hr />}
-      </Fragment>
-    );
-  }
-}
+              <div className="data-entry-box ds-u-margin-bottom--5">
+                <Instruction
+                  source="activities.costAllocate.ffp.federalStateSplitInstruction"
+                  headingDisplay={{
+                    level: 'p',
+                    className: 'ds-h4'
+                  }}
+                />
+                <Dropdown
+                  name={`ffp-${ffy}`}
+                  label="federal-state split"
+                  labelClassName="sr-only"
+                  options={[
+                    { label: '90-10', value: '90-10' },
+                    { label: '75-25', value: '75-25' },
+                    { label: '50-50', value: '50-50' }
+                  ]}
+                  value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
+                  onChange={setFederalStateSplit(ffy)}
+                />
+              </div>
+
+              <table className="budget-table activity-budget-table">
+                <tbody>
+                  <tr className="budget-table--subtotal budget-table--row__header">
+                    <th colSpan="5">Medicaid Share</th>
+                    <td className="budget-table--number">
+                      <Dollars long>{years[ffy].medicaidShare}</Dollars>
+                    </td>
+                  </tr>
+                  <CostSummaryRows
+                    items={[
+                      {
+                        description: 'Federal Share',
+                        totalCost: years[ffy].federalShare,
+                        unitCost: years[ffy].medicaidShare,
+                        units: `${costAllocation[ffy].ffp.federal}%`
+                      },
+                      {
+                        description: 'State Share',
+                        totalCost: years[ffy].stateShare,
+                        unitCost: years[ffy].medicaidShare,
+                        units: `${costAllocation[ffy].ffp.state}%`
+                      }
+                    ]}
+                  />
+                </tbody>
+              </table>
+            </Fragment>
+          )}
+
+          <div className="data-entry-box ds-u-margin-bottom--5">
+            <Instruction
+              source="activities.costAllocate.ffp.quarterlyFFPInstruction"
+              headingDisplay={{
+                level: 'p',
+                className: 'ds-h4'
+              }}
+            />
+
+            <CostAllocateFFPQuarterly
+              activityIndex={activityIndex}
+              aKey={aKey}
+              isViewOnly={isViewOnly}
+              year={ffy}
+            />
+          </div>
+        </Fragment>
+      ))}
+
+      <h3 className="subsection--title ds-h3">
+        FFY {Object.keys(years)[0]}-{Object.keys(years).pop()} Totals
+      </h3>
+      <AllFFYsSummaryNarrative
+        activityName={activityName}
+        costAllocation={costAllocation}
+        costSummary={costSummary}
+        stateName={stateName}
+      />
+    </Fragment>
+  );
+};
 
 CostAllocateFFP.propTypes = {
   aKey: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
-  byYearData: PropTypes.array.isRequired,
+  activityName: PropTypes.string.isRequired,
   costAllocation: PropTypes.object.isRequired,
+  costSummary: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
-  setOtherFunding: PropTypes.func.isRequired
+  setOtherFunding: PropTypes.func.isRequired,
+  stateName: PropTypes.string.isRequired
 };
 
 CostAllocateFFP.defaultProps = {
   isViewOnly: false
 };
 
-export const makeMapStateToProps = () => {
-  const selectCostAllocateFFP = makeSelectCostAllocateFFP();
-  const mapStateToProps = (state, { activityIndex }) => {
-    const activityKey = selectActivityKeyByIndex(state, { activityIndex });
-    const { byYearData, costAllocation } = selectCostAllocateFFP(state, {
-      activityIndex,
-      aKey: activityKey
-    });
+const mapStateToProps = (
+  state,
+  { activityIndex },
+  {
+    getActivity = selectActivityByIndex,
+    getCostAllocation = selectCostAllocationForActivityByIndex,
+    getCostSummary = selectActivityCostSummary,
+    getState = getUserStateOrTerritory
+  } = {}
+) => {
+  const activity = getActivity(state, { activityIndex });
 
-    return { aKey: activityKey, byYearData, costAllocation };
+  return {
+    aKey: activity.key,
+    activityName: activity.name || `Activity ${activityIndex + 1}`,
+    costAllocation: getCostAllocation(state, { activityIndex }),
+    costSummary: getCostSummary(state, { activityIndex }),
+    stateName: getState(state).name
   };
-  return mapStateToProps;
 };
 
-export const mapDispatchToProps = {
+const mapDispatchToProps = {
   setFundingSplit: setCostAllocationFFPFundingSplit,
   setOtherFunding: setCostAllocationFFPOtherFunding
 };
 
-export { CostAllocateFFP as CostAllocateFFPRaw };
-export default connect(
-  makeMapStateToProps,
+export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);
+
+export {
+  CostAllocateFFP as plain,
+  AllFFYsSummaryNarrative,
+  CostSummaryRows,
+  mapStateToProps,
   mapDispatchToProps
-)(CostAllocateFFP);
+};
