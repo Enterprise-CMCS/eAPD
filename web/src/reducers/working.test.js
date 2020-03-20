@@ -1,8 +1,7 @@
 import working, {
   getAddAccountWorking,
   getEditAccountWorking,
-  getEditOwnAccountWorking,
-  getSaveApdWorking
+  getEditOwnAccountWorking
 } from './working';
 
 import {
@@ -120,10 +119,6 @@ describe('working state reducer', () => {
 
     it('can fetch "edit self" error state', () => {
       expect(getEditOwnAccountWorking(state)).toEqual('edit self');
-    });
-
-    it('can fetch "save apd" error state', () => {
-      expect(getSaveApdWorking(state)).toEqual('save apd');
     });
   });
 });

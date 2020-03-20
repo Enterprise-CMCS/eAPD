@@ -72,13 +72,11 @@ const reducer = (state = initialState, { type }) => {
 const getAddAccountWorking = state => state.working.addAccount;
 const getEditAccountWorking = state => state.working.editAccount;
 const getEditOwnAccountWorking = state => state.working.editOwnAccount;
-const getSaveApdWorking = state => state.working.saveApd;
 
 export default reducer;
 
 export {
   getAddAccountWorking,
   getEditAccountWorking,
-  getEditOwnAccountWorking,
-  getSaveApdWorking
+  getEditOwnAccountWorking
 };

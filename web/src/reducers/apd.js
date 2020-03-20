@@ -29,7 +29,6 @@ import {
   FETCH_ALL_APDS_REQUEST,
   FETCH_ALL_APDS_SUCCESS,
   RESET,
-  SAVE_APD_SUCCESS,
   SELECT_APD,
   SET_APD_TO_SELECT_ON_LOAD
 } from '../actions/app';
@@ -368,23 +367,6 @@ const reducer = (state = initialState, action) => {
 
     case FETCH_ALL_APDS_FAILURE:
       return { ...state, fetching: false, error: action.error };
-
-    case SAVE_APD_SUCCESS:
-      return {
-        ...state,
-        byId: {
-          ...state.byId,
-          [action.data.id]: {
-            ...state.byId[action.data.id],
-            updated: getHumanTimestamp(action.data.updated)
-          }
-        },
-        data: {
-          ...state.data,
-          created: getHumanDatestamp(action.data.created),
-          updated: getHumanTimestamp(action.data.updated)
-        }
-      };
 
     case RESET:
       return { ...state, data: {} };
