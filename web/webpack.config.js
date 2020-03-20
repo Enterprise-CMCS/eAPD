@@ -2,7 +2,6 @@ const path = require('path');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 if (!process.env.IDLE_LOGOUT_TIME_MINUTES) {
@@ -112,11 +111,6 @@ const config = {
       minify: { removeComments: true },
       template: 'src/index.html'
     })
-    // new HtmlWebpackTagsPlugin({
-    //   tags: ['app.css'],
-    //   append: true,
-    //   hash: true
-    // })
   ]
 };
 
