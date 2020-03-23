@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import SaveButton from './SaveButton';
 import Sidebar from './Sidebar';
 import { setApdToSelectOnLoad } from '../actions/app';
 
@@ -48,8 +47,6 @@ const ApdApplication = ({
           />
         </div>
       </div>
-
-      <SaveButton />
     </div>
   );
 };
