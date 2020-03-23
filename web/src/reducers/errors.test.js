@@ -2,8 +2,7 @@ import errors, {
   getAddAccountError,
   getEditAccountError,
   getEditOwnAccountError,
-  getError,
-  getSaveApdError
+  getError
 } from './errors';
 
 import {
@@ -17,18 +16,12 @@ import {
   ADMIN_EDIT_ME_REQUEST,
   ADMIN_EDIT_ME_SUCCESS
 } from '../actions/admin';
-import {
-  SAVE_APD_FAILURE,
-  SAVE_APD_REQUEST,
-  SAVE_APD_SUCCESS
-} from '../actions/app';
 
 describe('errors reducer', () => {
   const initialState = {
     addAccount: false,
     editAccount: false,
-    editOwnAccount: false,
-    saveApd: false
+    editOwnAccount: false
   };
 
   it('should handle initial state', () => {
@@ -39,14 +32,12 @@ describe('errors reducer', () => {
     const state = {
       addAccount: 'error message',
       editAccount: 'error message',
-      editOwnAccount: 'error message',
-      saveApd: 'error message'
+      editOwnAccount: 'error message'
     };
     [
       ['a user account is created', ADMIN_CREATE_USER_REQUEST, 'addAccount'],
       ['a user account is edited', ADMIN_EDIT_ACCOUNT_REQUEST, 'editAccount'],
-      ['a user saves their account', ADMIN_EDIT_ME_REQUEST, 'editOwnAccount'],
-      ['an APD is saved', SAVE_APD_REQUEST, 'saveApd']
+      ['a user saves their account', ADMIN_EDIT_ME_REQUEST, 'editOwnAccount']
     ].forEach(([test, type, prop]) => {
       it(test, () => {
         expect(errors(state, { type })).toEqual({
@@ -61,14 +52,12 @@ describe('errors reducer', () => {
     const state = {
       addAccount: 'error message',
       editAccount: 'error message',
-      editOwnAccount: 'error message',
-      saveApd: 'error message'
+      editOwnAccount: 'error message'
     };
     [
       ['a user account is created', ADMIN_CREATE_USER_SUCCESS, 'addAccount'],
       ['a user account is edited', ADMIN_EDIT_ACCOUNT_SUCCESS, 'editAccount'],
-      ['a user saves their account', ADMIN_EDIT_ME_SUCCESS, 'editOwnAccount'],
-      ['an APD is saved', SAVE_APD_SUCCESS, 'saveApd']
+      ['a user saves their account', ADMIN_EDIT_ME_SUCCESS, 'editOwnAccount']
     ].forEach(([test, type, prop]) => {
       it(test, () => {
         expect(errors(state, { type })).toEqual({
@@ -83,14 +72,12 @@ describe('errors reducer', () => {
     const state = {
       addAccount: false,
       editAccount: false,
-      editOwnAccount: false,
-      saveApd: false
+      editOwnAccount: false
     };
     [
       ['a user account is created', ADMIN_CREATE_USER_ERROR, 'addAccount'],
       ['a user account is edited', ADMIN_EDIT_ACCOUNT_ERROR, 'editAccount'],
-      ['a user saves their account', ADMIN_EDIT_ME_ERROR, 'editOwnAccount'],
-      ['an APD is saved', SAVE_APD_FAILURE, 'saveApd']
+      ['a user saves their account', ADMIN_EDIT_ME_ERROR, 'editOwnAccount']
     ].forEach(([test, type, prop]) => {
       it(test, () => {
         expect(errors(state, { type })).toMatchObject({
@@ -106,8 +93,7 @@ describe('errors reducer', () => {
       errors: {
         addAccount: 'add account',
         editAccount: 'edit account',
-        editOwnAccount: 'edit self',
-        saveApd: 'save apd'
+        editOwnAccount: 'edit self'
       }
     };
 
@@ -121,10 +107,6 @@ describe('errors reducer', () => {
 
     it('can fetch "edit self" error state', () => {
       expect(getEditOwnAccountError(state)).toEqual('edit self');
-    });
-
-    it('can fetch "save apd" error state', () => {
-      expect(getSaveApdError(state)).toEqual('save apd');
     });
   });
 

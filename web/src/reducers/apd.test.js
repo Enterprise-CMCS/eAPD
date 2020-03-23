@@ -12,7 +12,6 @@ const {
   FETCH_ALL_APDS_FAILURE,
   FETCH_ALL_APDS_REQUEST,
   FETCH_ALL_APDS_SUCCESS,
-  SAVE_APD_SUCCESS,
   SET_APD_TO_SELECT_ON_LOAD
 } = require('../actions/app');
 const {
