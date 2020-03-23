@@ -12,6 +12,7 @@ const {
   FETCH_ALL_APDS_FAILURE,
   FETCH_ALL_APDS_REQUEST,
   FETCH_ALL_APDS_SUCCESS,
+  SAVE_APD_SUCCESS,
   SET_APD_TO_SELECT_ON_LOAD
 } = require('../actions/app');
 const {
@@ -1047,6 +1048,54 @@ describe('APD reducer', () => {
         overview: 'bloop'
       }
     });
+  });
+
+  it('should handle APD save success', () => {
+    expect(
+      apd(
+        {
+          a: 'alpha',
+          b: 'beta',
+          byId: {
+            apdID: { name: 'Bobbert', updated: 'in the past' },
+            otherID: { name: 'Jimbob', updated: 'in the future' }
+          },
+          data: {
+            name: 'Timmothert',
+            updated: 'in the present'
+          }
+        },
+        {
+          type: SAVE_APD_SUCCESS,
+          data: {
+            id: 'apdID',
+            // Medicare and Medicaid are created, 546 years to the day after
+            // the First Defenestration of Prague.
+            created: '1965-07-30T00:00:00Z',
+            // US Department of Health and Human Services is created
+            updated: '1953-04-11T00:00:00Z'
+          }
+        }
+      )
+    ).toEqual(
+      {
+        a: 'alpha',
+        b: 'beta',
+        byId: {
+          apdID: {
+            name: 'Bobbert',
+            updated: 'April 11, 1953, 12:00 AM GMT'
+          },
+          otherID: { name: 'Jimbob', updated: 'in the future' }
+        },
+        data: {
+          created: 'July 30, 1965',
+          name: 'Timmothert',
+          updated: 'April 11, 1953, 12:00 AM GMT'
+        }
+      },
+      { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
+    );
   });
 });
 
