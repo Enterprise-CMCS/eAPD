@@ -9,11 +9,6 @@ import {
   ADMIN_EDIT_ACCOUNT_REQUEST,
   ADMIN_EDIT_ME_REQUEST
 } from '../actions/admin';
-import {
-  SAVE_APD_FAILURE,
-  SAVE_APD_REQUEST,
-  SAVE_APD_SUCCESS
-} from '../actions/app';
 
 import { t } from '../i18n';
 
@@ -41,8 +36,7 @@ const getError = (rawMessage, fallback) => {
 const initialState = {
   addAccount: false,
   editAccount: false,
-  editOwnAccount: false,
-  saveApd: false
+  editOwnAccount: false
 };
 
 // Maps action symbols to state properties.  When these actions happen, the
@@ -54,9 +48,7 @@ const successActions = {
   [ADMIN_EDIT_ACCOUNT_REQUEST]: 'editAccount',
   [ADMIN_EDIT_ACCOUNT_SUCCESS]: 'editAccount',
   [ADMIN_EDIT_ME_REQUEST]: 'editOwnAccount',
-  [ADMIN_EDIT_ME_SUCCESS]: 'editOwnAccount',
-  [SAVE_APD_REQUEST]: 'saveApd',
-  [SAVE_APD_SUCCESS]: 'saveApd'
+  [ADMIN_EDIT_ME_SUCCESS]: 'editOwnAccount'
 };
 
 // When these actions happen, the state properties will be set to appropiate
@@ -65,11 +57,7 @@ const successActions = {
 const errorActions = {
   [ADMIN_CREATE_USER_ERROR]: ['addAccount', 'Unknown error creating account'],
   [ADMIN_EDIT_ACCOUNT_ERROR]: ['editAccount', 'Unknown error editing account'],
-  [ADMIN_EDIT_ME_ERROR]: ['editOwnAccount', 'Unknown error editing account'],
-  [SAVE_APD_FAILURE]: [
-    'saveApd',
-    'Save failed. Check the section you were editing & try saving again.'
-  ]
+  [ADMIN_EDIT_ME_ERROR]: ['editOwnAccount', 'Unknown error editing account']
 };
 
 const reducer = (state = initialState, action) => {
@@ -80,14 +68,11 @@ const reducer = (state = initialState, action) => {
     case ADMIN_EDIT_ACCOUNT_SUCCESS:
     case ADMIN_EDIT_ME_REQUEST:
     case ADMIN_EDIT_ME_SUCCESS:
-    case SAVE_APD_REQUEST:
-    case SAVE_APD_SUCCESS:
       return { ...state, [successActions[action.type]]: false };
 
     case ADMIN_CREATE_USER_ERROR:
     case ADMIN_EDIT_ACCOUNT_ERROR:
-    case ADMIN_EDIT_ME_ERROR:
-    case SAVE_APD_FAILURE: {
+    case ADMIN_EDIT_ME_ERROR: {
       const [prop, fallback] = errorActions[action.type];
       return {
         ...state,
@@ -103,7 +88,6 @@ const reducer = (state = initialState, action) => {
 const getAddAccountError = state => state.errors.addAccount;
 const getEditAccountError = state => state.errors.editAccount;
 const getEditOwnAccountError = state => state.errors.editOwnAccount;
-const getSaveApdError = state => state.errors.saveApd;
 
 export default reducer;
 
@@ -111,6 +95,5 @@ export {
   getAddAccountError,
   getEditAccountError,
   getEditOwnAccountError,
-  getError,
-  getSaveApdError
+  getError
 };
