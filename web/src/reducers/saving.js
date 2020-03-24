@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
     case SAVE_APD_FAILURE:
       return { ...state, error: true, saving: false };
     case SAVE_APD_REQUEST:
-      return { ...state, error: false, saving: true };
+      return { ...state, saving: true };
     case SAVE_APD_SUCCESS:
       return {
         ...state,
@@ -37,11 +37,11 @@ export default (state = initialState, action) => {
 };
 
 /**
- * Selects the saving error message from the provided state.
+ * Selects whether there is an error.
  * @param {Object} state current redux state
- * @returns {String|boolean} The error message, or false if there is no error.
+ * @returns {boolean} Whether there is an error.
  */
-export const selectErrorMessage = ({ saving: { error } }) => error;
+export const selectHasError = ({ saving: { error } }) => !!error;
 
 /**
  * Selects whether or not the APD is currently being saved.
