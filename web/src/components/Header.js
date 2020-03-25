@@ -87,8 +87,7 @@ class Header extends Component {
                         </span>
                       ) : (
                         <span>
-                          <Check />
-                          <SaveMessage lastSaved={lastSaved} />
+                          <Check /> <SaveMessage lastSaved={lastSaved} />
                         </span>
                       )}
                     </span>
