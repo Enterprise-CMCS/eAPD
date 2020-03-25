@@ -4,7 +4,8 @@ import moment from "moment";
 import SaveMessage from "./SaveMessage";
 
 describe("<SaveMessage />", () => {
-  let lastSaved, subject;
+  let lastSaved;
+  let subject;
 
   describe('when saved less than 1 minute ago, it displays "Saved"', () => {
     [
@@ -24,7 +25,7 @@ describe("<SaveMessage />", () => {
   });
 
   describe("given current time is January 1, 2020 12:00 pm", () => {
-    let jan1AtNoon = new Date(2020, 0, 1, 12, 0);
+    const jan1AtNoon = new Date(2020, 0, 1, 12, 0);
     let mockDateNow;
 
     beforeEach(() => {

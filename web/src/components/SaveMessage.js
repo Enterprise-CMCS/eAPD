@@ -1,5 +1,6 @@
-import React from "react";
 import moment from "moment";
+import React from "react";
+import PropTypes from 'prop-types';
 
 // Configure moment to display '1 time-unit ago' instead of 'a time-unit ago'
 // https://github.com/moment/moment/issues/3764
@@ -53,14 +54,16 @@ class SaveMessage extends React.Component {
 
     if (duration.asMinutes() < 1) return "Saved";
 
-    if (1 <= duration.asMinutes() && duration.asDays() < 1) {
-      // https://momentjs.com/docs/#/displaying/format/
+    // eslint's "yoda": "Expected literal to be on the right side of <="
+    // Which is easier to visualize on a number line, Mr. Yoda?
+    // lowerBound <= object.value() && object.value() < upperBound  // or...
+    if (duration.asMinutes() <= 1 && duration.asDays() < 1) {
       result = `${result} ${lastSavedMoment.format("hh:mm a")}`;
     }
-    if (1 <= duration.asDays() && duration.asYears() < 1) {
+    if (duration.asDays() <= 1 && duration.asYears() < 1) {
       result = `${result} ${lastSavedMoment.format("MMMM D")}`;
     }
-    if (1 <= duration.asYears()) {
+    if (duration.asYears() <= 1) {
       result = `${result} ${lastSavedMoment.format("MMMM D, YYYY")}`;
     }
     result = `${result} (${lastSavedMoment.fromNow()})`;
@@ -68,5 +71,17 @@ class SaveMessage extends React.Component {
     return result;
   }
 }
+
+SaveMessage.propTypes = {
+  lastSaved: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.instanceOf(moment),
+    PropTypes.string
+  ].isRequred),
+};
+
+SaveMessage.defaultProps = {
+  lastSaved: moment(),
+};
 
 export default SaveMessage;
