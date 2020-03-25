@@ -47,23 +47,24 @@ class SaveMessage extends React.Component {
     const { currentMoment } = this.state;
 
     const lastSavedMoment = moment(lastSaved);
-    const minutesOld = currentMoment.diff(lastSavedMoment, "minutes");
-    const minutesPerDay = 60 * 24;
-    const minutesPerYear = minutesPerDay * 365.25;
+    const difference = currentMoment.diff(lastSavedMoment);
+    const duration = moment.duration(difference);
     let result = "Last saved";
 
-    if (minutesOld < 1) return "Saved";
-    if (1 <= minutesOld && minutesOld < minutesPerDay) {
+    if (duration.asMinutes() < 1) return "Saved";
+
+    if (1 <= duration.asMinutes() && duration.asDays() < 1) {
       // https://momentjs.com/docs/#/displaying/format/
       result = `${result} ${lastSavedMoment.format("hh:mm a")}`;
     }
-    if (minutesPerDay <= minutesOld && minutesOld < minutesPerYear) {
+    if (1 <= duration.asDays() && duration.asYears() < 1) {
       result = `${result} ${lastSavedMoment.format("MMMM D")}`;
     }
-    if (minutesPerYear <= minutesOld) {
+    if (1 <= duration.asYears()) {
       result = `${result} ${lastSavedMoment.format("MMMM D, YYYY")}`;
     }
     result = `${result} (${lastSavedMoment.fromNow()})`;
+
     return result;
   }
 }
