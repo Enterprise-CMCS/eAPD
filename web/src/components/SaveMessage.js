@@ -57,13 +57,13 @@ class SaveMessage extends React.Component {
     // eslint's "yoda": "Expected literal to be on the right side of <="
     // Which is easier to visualize on a number line, Mr. Yoda?
     // lowerBound <= object.value() && object.value() < upperBound  // or...
-    if (duration.asMinutes() <= 1 && duration.asDays() < 1) {
+    if (duration.asMinutes() >= 1 && duration.asDays() < 1) {
       result = `${result} ${lastSavedMoment.format("hh:mm a")}`;
     }
-    if (duration.asDays() <= 1 && duration.asYears() < 1) {
+    if (duration.asDays() >= 1 && duration.asYears() < 1) {
       result = `${result} ${lastSavedMoment.format("MMMM D")}`;
     }
-    if (duration.asYears() <= 1) {
+    if (duration.asYears() >= 1) {
       result = `${result} ${lastSavedMoment.format("MMMM D, YYYY")}`;
     }
     result = `${result} (${lastSavedMoment.fromNow()})`;
