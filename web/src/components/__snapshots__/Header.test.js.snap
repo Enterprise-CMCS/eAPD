@@ -605,8 +605,10 @@ exports[`Header component renders the state user home title when a state user is
         <span>
           <span>
             <Check />
-             Saved 
-            last save date
+             
+            <SaveMessage
+              lastSaved="2020-01-01T12:00:00.000Z"
+            />
           </span>
         </span>
       </div>
