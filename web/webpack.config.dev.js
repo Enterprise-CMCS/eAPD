@@ -2,7 +2,6 @@ const path = require('path');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 const config = {
   mode: 'development',
@@ -73,10 +72,6 @@ const config = {
     new HtmlWebpackPlugin({
       minify: { removeComments: true },
       template: 'src/index.html'
-    }),
-    new HtmlWebpackTagsPlugin({
-      tags: ['app.css'],
-      append: true
     })
   ],
   devtool: 'cheap-module-eval-source-map',

@@ -11,14 +11,19 @@ exports[`apd (application) component renders correctly 1`] = `
       place={Object {}}
     />
     <div
-      className="site-main ds-u-padding-top--2"
+      className="site-main"
       id="start-main-content"
     >
-      <ApdPageRoutes
-        apdCreated="creation date"
-        apdName="test name"
-        year="the year"
-      />
+      <Connect(UnexpectedError) />
+      <div
+        className="ds-u-padding-top--2"
+      >
+        <ApdPageRoutes
+          apdCreated="creation date"
+          apdName="test name"
+          year="the year"
+        />
+      </div>
     </div>
   </div>
   <Connect(SaveButton) />
