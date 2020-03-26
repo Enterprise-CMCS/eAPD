@@ -8,6 +8,7 @@ exports[`the unexpected error alert component renders as expected if there is an
 >
   <Alert
     heading="There's been an unexpected error."
+    headingLevel="3"
     role="alertdialog"
     variation="warn"
   >
@@ -16,6 +17,7 @@ exports[`the unexpected error alert component renders as expected if there is an
       className="ds-u-text-align--right ds-u-margin-bottom--0"
     >
       <Button
+        component="button"
         onClick={[MockFunction]}
         type="button"
         variation="primary"
@@ -35,6 +37,7 @@ exports[`the unexpected error alert component renders as expected if there is an
 >
   <Alert
     heading="There's been an unexpected error."
+    headingLevel="3"
     role="alertdialog"
     variation="warn"
   >
@@ -43,6 +46,7 @@ exports[`the unexpected error alert component renders as expected if there is an
       className="ds-u-text-align--right ds-u-margin-bottom--0"
     >
       <Button
+        component="button"
         onClick={[MockFunction]}
         type="button"
         variation="primary"
@@ -63,6 +67,7 @@ exports[`the unexpected error alert component renders as expected if there is no
 >
   <Alert
     heading="There's been an unexpected error."
+    headingLevel="3"
     role="alertdialog"
     variation="warn"
   >
@@ -71,6 +76,7 @@ exports[`the unexpected error alert component renders as expected if there is no
       className="ds-u-text-align--right ds-u-margin-bottom--0"
     >
       <Button
+        component="button"
         onClick={[MockFunction]}
         type="button"
         variation="primary"
