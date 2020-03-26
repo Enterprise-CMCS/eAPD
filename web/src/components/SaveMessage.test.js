@@ -42,7 +42,7 @@ describe("<SaveMessage />", () => {
       jest.clearAllTimers();
     });
 
-    it('auto-updates', () => {
+    it('auto-updates from "Saved" to (1 minute ago)', () => {
       subject = shallow(
         <SaveMessage isSaving={false} lastSaved={now} />
       );
@@ -66,79 +66,21 @@ describe("<SaveMessage />", () => {
       mockDateNow.mockRestore();
     });
 
-    describe("when saved 1 minute ago", () => {
-      it('displays "Last saved 11:59 am (1 minute ago)"', () => {
-        lastSaved = moment(jan1AtNoon).subtract(1, "minutes");
+    [
+      [1, "minute", "Last saved 11:59 am (1 minute ago)"],
+      [60 * 24 - 1, "minutes", "Last saved 12:01 pm (1 day ago)"],
+      [1, "day", "Last saved December 31 (1 day ago)"],
+      [30, "days", "Last saved December 2 (1 month ago)"],
+      [364, "days", "Last saved January 2 (1 year ago)"],
+      [3, "years", "Last saved January 1, 2017 (3 years ago)"],
+    ].forEach(([value, timeUnit, result]) => {
+      let testName = `when saved ${value} ${timeUnit} ago, it displays "${result}"`
+      test(testName, () => {
+        lastSaved = moment().subtract(value, timeUnit);
         subject = shallow(
           <SaveMessage lastSaved={lastSaved} />
         );
-        expect(subject.text()).toMatch(/^Last saved/);
-        expect(subject.text()).toMatch(/11:59 am/);
-        expect(subject.text()).toMatch(/\(1 minute ago\)$/);
-      });
-    });
-
-    describe("when saved 23 hours and 59 minutes ago", () => {
-      it('displays "Last saved 12:01 pm (1 day ago)"', () => {
-        lastSaved = moment(jan1AtNoon)
-          .subtract(23, "hours")
-          .subtract(59, "minutes");
-        subject = shallow(
-          <SaveMessage lastSaved={lastSaved} />
-        );
-        expect(subject.text()).toMatch(/^Last saved/);
-        expect(subject.text()).toMatch(/12:01 pm/);
-        expect(subject.text()).toMatch(/\(1 day ago\)$/);
-      });
-    });
-
-    describe("when saved 1 day ago", () => {
-      it('displays "Last saved December 30 (1 day ago)"', () => {
-        lastSaved = moment().subtract(1, "day");
-        subject = shallow(
-          <SaveMessage lastSaved={lastSaved} />
-        );
-        expect(subject.text()).toMatch(/^Last saved/);
-        expect(subject.text()).toMatch(/December 31/);
-        expect(subject.text()).toMatch(/\(1 day ago\)$/);
-      });
-    });
-
-    describe("when saved 30 days ago", () => {
-      it('displays "Last saved December 2 (1 month ago)"', () => {
-        lastSaved = moment().subtract(30, "day");
-        subject = shallow(
-          <SaveMessage lastSaved={lastSaved} />
-        );
-        expect(subject.text()).toMatch(/^Last saved/);
-        expect(subject.text()).toMatch(/December 2/);
-        expect(subject.text()).not.toMatch(/2019/);
-        expect(subject.text()).toMatch(/\(1 month ago\)$/);
-      });
-    });
-
-    describe("when saved 364 days ago", () => {
-      it('displays "Last saved January 2 (1 year ago)"', () => {
-        lastSaved = moment().subtract(364, "day");
-        subject = shallow(
-          <SaveMessage lastSaved={lastSaved} />
-        );
-        expect(subject.text()).toMatch(/^Last saved/);
-        expect(subject.text()).toMatch(/January 2/);
-        expect(subject.text()).not.toMatch(/2019/);
-        expect(subject.text()).toMatch(/\(1 year ago\)$/);
-      });
-    });
-
-    describe("when saved 3 years ago", () => {
-      it('displays "Last saved January 1, 2017 (3 years ago)"', () => {
-        lastSaved = moment().subtract(3, "years");
-        subject = shallow(
-          <SaveMessage lastSaved={lastSaved} />
-        );
-        expect(subject.text()).toMatch(/^Last saved/);
-        expect(subject.text()).toMatch(/January 1, 2017/);
-        expect(subject.text()).toMatch(/\(3 years ago\)$/);
+        expect(subject.text()).toEqual(result);
       });
     });
   });
