@@ -75,10 +75,11 @@ describe('auth roles endpoint | POST /auth/roles', () => {
 
       expect(role).toBeTruthy();
 
-      const activities = await db('auth_role_activity_mapping')
-        .where({ role_id: role.id })
-        .select('activity_id')
-        .map(activity => activity.activity_id);
+      const activities = (
+        await db('auth_role_activity_mapping')
+          .where({ role_id: role.id })
+          .select('activity_id')
+      ).map(activity => activity.activity_id);
       activities.sort();
 
       expect(activities).toMatchSnapshot();
