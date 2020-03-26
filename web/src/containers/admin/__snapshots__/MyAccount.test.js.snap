@@ -63,6 +63,7 @@ exports[`my account page handles submitting the form 1`] = `
           <Button
             aria-label="change password"
             className="ds-u-padding-y--0"
+            component="button"
             onClick={[Function]}
             purpose="change password"
             type="button"
@@ -141,6 +142,7 @@ exports[`my account page handles submitting the form 2`] = `
           <Button
             aria-label="change password"
             className="ds-u-padding-y--0"
+            component="button"
             onClick={[Function]}
             purpose="change password"
             type="button"
@@ -219,6 +221,7 @@ exports[`my account page renders 1`] = `
           <Button
             aria-label="change password"
             className="ds-u-padding-y--0"
+            component="button"
             onClick={[Function]}
             purpose="change password"
             type="button"
@@ -297,6 +300,7 @@ exports[`my account page renders 2`] = `
           <Button
             aria-label="change password"
             className="ds-u-padding-y--0"
+            component="button"
             onClick={[Function]}
             purpose="change password"
             type="button"
@@ -375,6 +379,7 @@ exports[`my account page renders 3`] = `
           <Button
             aria-label="keep previous password"
             className="ds-u-padding-y--0"
+            component="button"
             onClick={[Function]}
             purpose="change password"
             type="button"
@@ -461,6 +466,7 @@ exports[`my account page renders 4`] = `
           <Button
             aria-label="change password"
             className="ds-u-padding-y--0"
+            component="button"
             onClick={[Function]}
             purpose="change password"
             type="button"

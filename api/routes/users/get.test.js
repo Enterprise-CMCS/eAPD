@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const can = require('../..//middleware').can;
+const can = require('../../middleware').can;
 const getEndpoint = require('./get');
 
 tap.test('user GET endpoint', async endpointTest => {
