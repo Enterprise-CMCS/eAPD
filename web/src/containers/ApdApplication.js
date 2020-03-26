@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import SaveButton from './SaveButton';
 import Sidebar from './Sidebar';
 import UnexpectedError from './UnexpectedError';
 import { setApdToSelectOnLoad } from '../actions/app';
@@ -52,8 +51,6 @@ const ApdApplication = ({
           </div>
         </div>
       </div>
-
-      <SaveButton />
     </div>
   );
 };
