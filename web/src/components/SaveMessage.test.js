@@ -40,8 +40,8 @@ describe("<SaveMessage />", () => {
           done.fail(e);
         }
       }, 1000);
-    })
-  })
+    });
+  });
 
   describe("given current time is January 1, 2020 12:00 pm", () => {
     const jan1AtNoon = new Date(2020, 0, 1, 12, 0);
