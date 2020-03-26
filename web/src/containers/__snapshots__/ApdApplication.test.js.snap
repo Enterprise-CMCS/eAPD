@@ -26,7 +26,6 @@ exports[`apd (application) component renders correctly 1`] = `
       </div>
     </div>
   </div>
-  <Connect(SaveButton) />
 </div>
 `;
 

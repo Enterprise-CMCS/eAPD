@@ -11,6 +11,7 @@ exports[`the (Activity) EntryDetails component does not render the delete button
         className="nowrap visibility--screen"
       >
         <Button
+          component="button"
           onClick={[Function]}
           size="small"
           type="button"
@@ -38,6 +39,7 @@ exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
         className="nowrap visibility--screen"
       >
         <Button
+          component="button"
           onClick={[Function]}
           size="small"
           type="button"
@@ -50,6 +52,7 @@ exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
             |
           </span>
           <Button
+            component="button"
             onClick={[Function]}
             size="small"
             type="button"
@@ -78,6 +81,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         className="nowrap visibility--screen"
       >
         <Button
+          component="button"
           onClick={[Function]}
           size="small"
           type="button"
@@ -90,6 +94,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            component="button"
             onClick={[Function]}
             size="small"
             type="button"
@@ -118,6 +123,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         className="nowrap visibility--screen"
       >
         <Button
+          component="button"
           onClick={[Function]}
           size="small"
           type="button"
@@ -130,6 +136,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            component="button"
             onClick={[Function]}
             size="small"
             type="button"
@@ -158,6 +165,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         className="nowrap visibility--screen"
       >
         <Button
+          component="button"
           onClick={[Function]}
           size="small"
           type="button"
@@ -170,6 +178,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            component="button"
             onClick={[Function]}
             size="small"
             type="button"

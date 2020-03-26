@@ -9,6 +9,7 @@ exports[`Review wrapper component renders properly if a delete handler is provid
       <React.Fragment>
         |
         <Button
+          component="button"
           onClick={[MockFunction]}
           size="small"
           type="button"
@@ -20,6 +21,7 @@ exports[`Review wrapper component renders properly if a delete handler is provid
     </div>
   }
   editText="Edit"
+  headingLevel="3"
 >
   Hello
 </Review>
@@ -32,6 +34,7 @@ exports[`Review wrapper component renders properly if an edit handler is supplie
       className="nowrap visibility--screen"
     >
       <Button
+        component="button"
         onClick={[Function]}
         size="small"
         type="button"
@@ -42,6 +45,7 @@ exports[`Review wrapper component renders properly if an edit handler is supplie
     </div>
   }
   editText="Edit"
+  headingLevel="3"
 >
   Hello
 </Review>
@@ -55,6 +59,7 @@ exports[`Review wrapper component renders properly if only the required props ar
     />
   }
   editText="Edit"
+  headingLevel="3"
 >
   Hello
 </Review>
@@ -68,6 +73,7 @@ exports[`Review wrapper component renders properly if the edit link and edit han
     />
   }
   editText="Edit"
+  headingLevel="3"
 >
   Hello
 </Review>
@@ -80,6 +86,7 @@ exports[`Review wrapper component renders properly if the edit link is set 1`] =
       className="nowrap visibility--screen"
     >
       <Button
+        component="button"
         onClick={[Function]}
         size="small"
         type="button"
@@ -94,6 +101,7 @@ exports[`Review wrapper component renders properly if the edit link is set 1`] =
     </div>
   }
   editText="Edit"
+  headingLevel="3"
 >
   Hello
 </Review>
