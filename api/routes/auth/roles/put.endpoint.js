@@ -76,10 +76,11 @@ describe('auth roles endpoint | PUT /auth/roles/:roleID', () => {
       expect(response.statusCode).toEqual(200);
       expect(body).toMatchSnapshot();
 
-      const activities = await db('auth_role_activity_mapping')
-        .where({ role_id: 1102 })
-        .select('activity_id')
-        .map(activity => activity.activity_id);
+      const activities = (
+        await db('auth_role_activity_mapping')
+          .where({ role_id: 1102 })
+          .select('activity_id')
+      ).map(activity => activity.activity_id);
 
       expect(activities).toMatchSnapshot();
     });
