@@ -33,6 +33,7 @@ exports[`card form wrapper disables the save button if canSubmit is false 1`] = 
               className="ds-u-margin-top--5"
             >
               <Button
+                component="button"
                 disabled={true}
                 type="submit"
                 variation="primary"
@@ -40,6 +41,7 @@ exports[`card form wrapper disables the save button if canSubmit is false 1`] = 
                 Save changes
               </Button>
               <Button
+                component="button"
                 onClick={[Function]}
                 type="button"
                 variation="transparent"
@@ -134,6 +136,7 @@ exports[`card form wrapper renders a footer if provided 1`] = `
               className="ds-u-margin-top--5"
             >
               <Button
+                component="button"
                 onClick={[Function]}
                 type="button"
                 variation="transparent"
@@ -197,6 +200,7 @@ exports[`card form wrapper renders a legend if provided 1`] = `
               className="ds-u-margin-top--5"
             >
               <Button
+                component="button"
                 onClick={[Function]}
                 type="button"
                 variation="transparent"
@@ -248,6 +252,7 @@ exports[`card form wrapper renders a spinny-wheel on the save button and disable
               className="ds-u-margin-top--5"
             >
               <Button
+                component="button"
                 disabled={true}
                 type="submit"
                 variation="primary"
@@ -260,6 +265,7 @@ exports[`card form wrapper renders a spinny-wheel on the save button and disable
                 Working
               </Button>
               <Button
+                component="button"
                 onClick={[Function]}
                 type="button"
                 variation="transparent"
@@ -296,6 +302,7 @@ exports[`card form wrapper renders a success alert if message provided 1`] = `
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
         <Alert
+          headingLevel="3"
           role="alert"
           variation="success"
         >
@@ -317,6 +324,7 @@ exports[`card form wrapper renders a success alert if message provided 1`] = `
               className="ds-u-margin-top--5"
             >
               <Button
+                component="button"
                 onClick={[Function]}
                 type="button"
                 variation="transparent"
@@ -353,6 +361,7 @@ exports[`card form wrapper renders an error alert if message provided 1`] = `
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
         <Alert
+          headingLevel="3"
           role="alert"
           variation="error"
         >
@@ -374,6 +383,7 @@ exports[`card form wrapper renders an error alert if message provided 1`] = `
               className="ds-u-margin-top--5"
             >
               <Button
+                component="button"
                 onClick={[Function]}
                 type="button"
                 variation="transparent"
@@ -425,6 +435,7 @@ exports[`card form wrapper renders with a save button if onSave prop is provided
               className="ds-u-margin-top--5"
             >
               <Button
+                component="button"
                 disabled={false}
                 type="submit"
                 variation="primary"
@@ -432,6 +443,7 @@ exports[`card form wrapper renders with a save button if onSave prop is provided
                 Save changes
               </Button>
               <Button
+                component="button"
                 onClick={[Function]}
                 type="button"
                 variation="transparent"
@@ -483,6 +495,7 @@ exports[`card form wrapper renders without a save button if onSave prop is missi
               className="ds-u-margin-top--5"
             >
               <Button
+                component="button"
                 onClick={[Function]}
                 type="button"
                 variation="transparent"
