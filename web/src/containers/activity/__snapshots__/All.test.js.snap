@@ -37,6 +37,7 @@ exports[`the Activities component renders correctly 1`] = `
   </Connect(ConnectedWaypoint)>
   <Button
     className="ds-u-margin-top--4"
+    component="button"
     onClick={[Function]}
     type="button"
   >

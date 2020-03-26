@@ -71,29 +71,31 @@ exports[`DollarField component passes back numeric values on change, but still r
             </span>
           </label>
         </FormLabel>
-        <div
-          className="ds-c-field-mask ds-c-field-mask--currency"
+        <Mask
+          mask="currency"
         >
           <div
-            className="ds-c-field__before ds-c-field__before--currency"
+            className="ds-c-field-mask ds-c-field-mask--currency"
           >
-            $
-          </div>
-          <Mask
-            mask="currency"
-          >
+            <div
+              className="ds-c-field__before ds-c-field__before--currency"
+            >
+              $
+            </div>
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
               id="textfield_7"
+              inputMode="numeric"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
+              pattern="[0-9.-]*"
               type="text"
               value="123,456"
             />
-          </Mask>
-        </div>
+          </div>
+        </Mask>
       </div>
     </TextField>
   </NumberField>
@@ -153,29 +155,31 @@ exports[`DollarField component renders correctly for non-numeric initial values 
             </span>
           </label>
         </FormLabel>
-        <div
-          className="ds-c-field-mask ds-c-field-mask--currency"
+        <Mask
+          mask="currency"
         >
           <div
-            className="ds-c-field__before ds-c-field__before--currency"
+            className="ds-c-field-mask ds-c-field-mask--currency"
           >
-            $
-          </div>
-          <Mask
-            mask="currency"
-          >
+            <div
+              className="ds-c-field__before ds-c-field__before--currency"
+            >
+              $
+            </div>
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
               id="textfield_1"
+              inputMode="numeric"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
+              pattern="[0-9.-]*"
               type="text"
               value="abc"
             />
-          </Mask>
-        </div>
+          </div>
+        </Mask>
       </div>
     </TextField>
   </NumberField>
@@ -235,29 +239,31 @@ exports[`DollarField component renders correctly, adds commas to big numbers, pa
             </span>
           </label>
         </FormLabel>
-        <div
-          className="ds-c-field-mask ds-c-field-mask--currency"
+        <Mask
+          mask="currency"
         >
           <div
-            className="ds-c-field__before ds-c-field__before--currency"
+            className="ds-c-field-mask ds-c-field-mask--currency"
           >
-            $
-          </div>
-          <Mask
-            mask="currency"
-          >
+            <div
+              className="ds-c-field__before ds-c-field__before--currency"
+            >
+              $
+            </div>
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
               id="textfield_5"
+              inputMode="numeric"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
+              pattern="[0-9.-]*"
               type="text"
               value="123,321"
             />
-          </Mask>
-        </div>
+          </div>
+        </Mask>
       </div>
     </TextField>
   </NumberField>
@@ -317,29 +323,31 @@ exports[`DollarField component renders correctly, does not add commas to small n
             </span>
           </label>
         </FormLabel>
-        <div
-          className="ds-c-field-mask ds-c-field-mask--currency"
+        <Mask
+          mask="currency"
         >
           <div
-            className="ds-c-field__before ds-c-field__before--currency"
+            className="ds-c-field-mask ds-c-field-mask--currency"
           >
-            $
-          </div>
-          <Mask
-            mask="currency"
-          >
+            <div
+              className="ds-c-field__before ds-c-field__before--currency"
+            >
+              $
+            </div>
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
               id="textfield_3"
+              inputMode="numeric"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
+              pattern="[0-9.-]*"
               type="text"
               value="123"
             />
-          </Mask>
-        </div>
+          </div>
+        </Mask>
       </div>
     </TextField>
   </NumberField>
@@ -435,29 +443,31 @@ exports[`DollarField component rounds numbers when the component loses focus, bu
             </span>
           </label>
         </FormLabel>
-        <div
-          className="ds-c-field-mask ds-c-field-mask--currency"
+        <Mask
+          mask="currency"
         >
           <div
-            className="ds-c-field__before ds-c-field__before--currency"
+            className="ds-c-field-mask ds-c-field-mask--currency"
           >
-            $
-          </div>
-          <Mask
-            mask="currency"
-          >
+            <div
+              className="ds-c-field__before ds-c-field__before--currency"
+            >
+              $
+            </div>
             <input
               aria-label="test label. Enter amount in dollars."
               className="ds-c-field ds-c-field--currency ds-c-field--medium"
               id="textfield_9"
+              inputMode="numeric"
               name="test name"
               onBlur={[Function]}
               onChange={[Function]}
+              pattern="[0-9.-]*"
               type="text"
               value="12,332"
             />
-          </Mask>
-        </div>
+          </div>
+        </Mask>
       </div>
     </TextField>
   </NumberField>
