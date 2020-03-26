@@ -69,12 +69,13 @@ describe("<SaveMessage />", () => {
     [
       [1, "minute", "Last saved 11:59 am (1 minute ago)"],
       [60 * 24 - 1, "minutes", "Last saved 12:01 pm (1 day ago)"],
+      [3, "hours", "Last saved 9:00 am (3 hours ago)"],
       [1, "day", "Last saved December 31 (1 day ago)"],
       [30, "days", "Last saved December 2 (1 month ago)"],
       [364, "days", "Last saved January 2 (1 year ago)"],
       [3, "years", "Last saved January 1, 2017 (3 years ago)"],
     ].forEach(([value, timeUnit, result]) => {
-      let testName = `when saved ${value} ${timeUnit} ago, it displays "${result}"`
+      const testName = `when saved ${value} ${timeUnit} ago, it displays "${result}"`
       test(testName, () => {
         lastSaved = moment().subtract(value, timeUnit);
         subject = shallow(

@@ -58,7 +58,7 @@ class SaveMessage extends React.Component {
     // Which is easier to visualize on a number line, Mr. Yoda?
     // lowerBound <= object.value() && object.value() < upperBound  // or...
     if (duration.asMinutes() >= 1 && duration.asDays() < 1) {
-      result = `${result} ${lastSavedMoment.format("hh:mm a")}`;
+      result = `${result} ${lastSavedMoment.format("h:mm a")}`;
     }
     if (duration.asDays() >= 1 && duration.asYears() < 1) {
       result = `${result} ${lastSavedMoment.format("MMMM D")}`;
