@@ -24,22 +24,31 @@ describe("<SaveMessage />", () => {
     });
   });
 
-  describe("when observed saved time changes from 59.500s to 1m", () => {
-    it('auto-updates', (done) => {
-      lastSaved = moment().subtract(59500, "milliseconds");
+  describe("when observed saved time changes to 1 minute ago", () => {
+    const now = new Date(2020, 0, 1, 12, 0);
+    const oneMinuteFromNow = new Date(2020, 0, 1, 12, 1);
+    let mockDateNow;
+
+    beforeEach(() => {
+      jest.useFakeTimers();
+      mockDateNow = jest
+        .spyOn(Date, "now")
+        .mockReturnValueOnce(now)
+        .mockReturnValue(oneMinuteFromNow);
+    });
+
+    afterEach(() => {
+      mockDateNow.mockRestore();
+      jest.clearAllTimers();
+    });
+
+    it('auto-updates', () => {
       subject = shallow(
-        <SaveMessage isSaving={false} lastSaved={lastSaved} />
+        <SaveMessage isSaving={false} lastSaved={now} />
       );
       expect(subject.text()).toMatch("Saved");
-
-      setTimeout(() => {
-        try {
-          expect(subject.text()).toMatch(/\(1 minute ago\)$/);
-          done();
-        } catch (e) {
-          done.fail(e);
-        }
-      }, 1000);
+      jest.advanceTimersByTime(1000);
+      expect(subject.text()).toMatch(/\(1 minute ago\)$/);
     });
   });
 
