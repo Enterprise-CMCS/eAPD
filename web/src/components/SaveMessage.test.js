@@ -24,6 +24,25 @@ describe("<SaveMessage />", () => {
     });
   });
 
+  describe("when observed saved time changes from 59.500s to 1m", () => {
+    it('auto-updates', (done) => {
+      lastSaved = moment().subtract(59500, "milliseconds");
+      subject = shallow(
+        <SaveMessage isSaving={false} lastSaved={lastSaved} />
+      );
+      expect(subject.text()).toMatch("Saved");
+
+      setTimeout(() => {
+        try {
+          expect(subject.text()).toMatch(/\(1 minute ago\)$/);
+          done();
+        } catch (e) {
+          done.fail(e);
+        }
+      }, 1000);
+    })
+  })
+
   describe("given current time is January 1, 2020 12:00 pm", () => {
     const jan1AtNoon = new Date(2020, 0, 1, 12, 0);
     let mockDateNow;
