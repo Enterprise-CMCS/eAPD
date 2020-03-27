@@ -1,10 +1,11 @@
 import React from "react";
-import { act } from 'react-dom/test-utils';
-import { mount, shallow } from "enzyme";
+import { create, act } from "react-test-renderer";
 import moment from "moment";
 import SaveMessage from "./SaveMessage";
 
 describe("<SaveMessage />", () => {
+  let subject;
+
   describe('when saved less than 1 minute ago, it displays "Saved"', () => {
     [
       ["1 second ago", 1],
@@ -14,42 +15,42 @@ describe("<SaveMessage />", () => {
     ].forEach(([testName, seconds]) => {
       test(testName, () => {
         const lastSaved = moment().subtract(seconds, "seconds");
-        const subject = shallow(
-          <SaveMessage lastSaved={lastSaved} />
-        );
-        expect(subject.text()).toEqual("Saved");
+        // https://reactjs.org/docs/test-renderer.html#testrendereract
+        act(() => {
+          subject = create(<SaveMessage lastSaved={lastSaved} />);
+        })
+        expect(subject.toJSON()).toEqual("Saved");
       });
     });
   });
 
-  xdescribe("when observed saved time changes to 1 minute ago", () => {
-    // const now = new Date(2020, 0, 1, 12, 0);
-    // const oneMinuteFromNow = new Date(2020, 0, 1, 12, 1);
-    // let mockDateNow;
+  describe("when observed saved time changes to 1 minute ago", () => {
+    const now = new Date(2020, 0, 1, 12, 0);
+    const oneMinuteFromNow = new Date(2020, 0, 1, 12, 1);
+    let mockDateNow;
 
     beforeEach(() => {
       jest.useFakeTimers();
-      // mockDateNow = jest
-      //   .spyOn(Date, "now")
-      //   .mockReturnValueOnce(now)
-      //   .mockReturnValueOnce(now)
-      //   .mockReturnValue(oneMinuteFromNow);
+      mockDateNow = jest
+        .spyOn(Date, "now")
+        .mockReturnValueOnce(now)
+        .mockReturnValueOnce(now)
+        .mockReturnValueOnce(now)
+        .mockReturnValue(oneMinuteFromNow);
     });
 
     afterEach(() => {
-      // mockDateNow.mockRestore();
+      mockDateNow.mockRestore();
       jest.clearAllTimers();
     });
 
     it('auto-updates from "Saved" to (1 minute ago)', () => {
-      const subject = shallow(
-        <SaveMessage lastSaved={moment()} />
-      );
-      expect(subject.text()).toMatch("Saved");
-      jest.advanceTimersByTime(65*1000);
-      // subject.setProps();
-      act(() => {subject.setProps()});
-      expect(subject.text()).toMatch(/\(1 minute ago\)$/);
+      act(() => {
+        subject = create(<SaveMessage lastSaved={now} />);
+      })
+      expect(subject.toJSON()).toMatch("Saved");
+      act(() => jest.advanceTimersByTime(60 * 1000));
+      expect(subject.toJSON()).toMatch(/\(1 minute ago\)$/);
     });
   });
 
@@ -78,10 +79,10 @@ describe("<SaveMessage />", () => {
     ].forEach(([value, timeUnit, result]) => {
       test(`when saved ${value} ${timeUnit} ago, it displays "${result}"`, () => {
         const lastSaved = moment().subtract(value, timeUnit);
-        const subject = shallow(
-          <SaveMessage lastSaved={lastSaved} />
-        );
-        expect(subject.text()).toEqual(result);
+        act(() => {
+          subject = create(<SaveMessage lastSaved={lastSaved} />);
+        })
+        expect(subject.toJSON()).toEqual(result);
       });
     });
   });
