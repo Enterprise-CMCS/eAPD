@@ -1,5 +1,5 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
 // Configure moment to display '1 time-unit ago' instead of 'a time-unit ago'
@@ -20,52 +20,32 @@ moment.updateLocale("en", {
   },
 });
 
-class SaveMessage extends React.Component {
-  constructor(props) {
-    super(props);
+const SaveMessage = ({ lastSaved }) => {
+  const [currentMoment, setCurrentMoment] = useState(() => moment());
 
-    this.state = {
-      currentMoment: moment(),
-    };
+  useEffect(() => {
+    let timerID = setInterval(() => setCurrentMoment(moment()), 1000);
+    return () => clearInterval(timerID);
+  });
+
+  const lastSavedMoment = moment(lastSaved);
+  const difference = currentMoment.diff(lastSavedMoment);
+  const duration = moment.duration(difference);
+  let result = "Last saved ";
+
+  if (duration.asMinutes() < 1) return "Saved";
+
+  if (duration.asDays() < 1) {
+    result += lastSavedMoment.format("h:mm a");
+  } else if (duration.asYears() < 1) {
+    result += lastSavedMoment.format("MMMM D");
+  } else {
+    result += lastSavedMoment.format("MMMM D, YYYY");
   }
 
-  componentDidMount() {
-    this.timerID = setInterval(() => this.updateClock(), 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  updateClock() {
-    this.setState({
-      currentMoment: moment(),
-    });
-  }
-
-  render() {
-    const { lastSaved } = this.props;
-    const { currentMoment } = this.state;
-
-    const lastSavedMoment = moment(lastSaved);
-    const difference = currentMoment.diff(lastSavedMoment);
-    const duration = moment.duration(difference);
-    let result = "Last saved ";
-
-    if (duration.asMinutes() < 1) return "Saved";
-
-    if (duration.asDays() < 1) {
-      result += lastSavedMoment.format("h:mm a");
-    } else if (duration.asYears() < 1) {
-      result += lastSavedMoment.format("MMMM D");
-    } else {
-      result += lastSavedMoment.format("MMMM D, YYYY");
-    }
-
-    result += ` (${lastSavedMoment.fromNow()})`;
-    return result;
-  }
-}
+  result += ` (${lastSavedMoment.fromNow()})`;
+  return result;
+};
 
 SaveMessage.propTypes = {
   lastSaved: PropTypes.oneOfType([
@@ -74,9 +54,5 @@ SaveMessage.propTypes = {
     PropTypes.string
   ]).isRequired,
 };
-
-// SaveMessage.defaultProps = {
-//   lastSaved: moment(),
-// };
 
 export default SaveMessage;
