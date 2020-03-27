@@ -34,7 +34,6 @@ exports[`FormAndReviewList component add button calls add event 1`] = `
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
     type="button"
   >
@@ -94,7 +93,6 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
       <div />
     </Expanded>
     <Button
-      component="button"
       onClick={[Function]}
       type="button"
       variation="primary"
@@ -163,7 +161,6 @@ exports[`FormAndReviewList component handles extra buttons on list items passes 
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
     type="button"
   >
@@ -182,7 +179,6 @@ exports[`FormAndReviewList component handles extra buttons on list items renders
     initialCollapsed={false}
   />
   <Button
-    component="button"
     onClick={[Function]}
     type="button"
     variation="primary"
@@ -191,7 +187,6 @@ exports[`FormAndReviewList component handles extra buttons on list items renders
   </Button>
   <Button
     className="ds-u-margin-left--2"
-    component="button"
     key="button 1"
     onClick={[Function]}
     type="button"
@@ -200,7 +195,6 @@ exports[`FormAndReviewList component handles extra buttons on list items renders
   </Button>
   <Button
     className="ds-u-margin-left--2"
-    component="button"
     key="button 2"
     onClick={[Function]}
     type="button"
@@ -246,7 +240,6 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
     type="button"
   >
@@ -275,7 +268,6 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
     type="button"
   >
@@ -304,7 +296,6 @@ exports[`FormAndReviewList component renders properly with just one item and all
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
     type="button"
   >
@@ -349,7 +340,6 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
     type="button"
   >
@@ -363,7 +353,6 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
   className="form-and-review-list "
 >
   <Alert
-    headingLevel="3"
     role="region"
     variation="error"
   >
@@ -371,7 +360,6 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
   </Alert>
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
     type="button"
   >
@@ -386,7 +374,6 @@ exports[`FormAndReviewList component renders properly with no items and noDataMe
 >
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
     type="button"
   >
@@ -400,7 +387,6 @@ exports[`FormAndReviewList component renders properly without an add button if t
   className="form-and-review-list "
 >
   <Alert
-    headingLevel="3"
     role="region"
     variation="error"
   >

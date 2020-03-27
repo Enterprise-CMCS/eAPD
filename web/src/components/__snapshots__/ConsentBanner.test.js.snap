@@ -21,7 +21,6 @@ exports[`Consent banner component when there is no cookie renders the banner 1`]
         <p>
           This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no expectation of privacy. Misuse is subject to criminal and civil penalties.
           <Button
-            component="button"
             onClick={[Function]}
             size="small"
             type="button"
@@ -34,7 +33,6 @@ exports[`Consent banner component when there is no cookie renders the banner 1`]
           className="ds-u-text-align--center"
         >
           <Button
-            component="button"
             onClick={[Function]}
             type="button"
             variation="primary"
@@ -70,7 +68,6 @@ exports[`Consent banner component when there is no cookie toggles consent detail
         <p>
           This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no expectation of privacy. Misuse is subject to criminal and civil penalties.
           <Button
-            component="button"
             onClick={[Function]}
             size="small"
             type="button"
@@ -83,7 +80,6 @@ exports[`Consent banner component when there is no cookie toggles consent detail
           className="ds-u-text-align--center"
         >
           <Button
-            component="button"
             onClick={[Function]}
             type="button"
             variation="primary"
@@ -146,7 +142,6 @@ exports[`Consent banner component when there is no cookie toggles consent detail
           className="ds-u-text-align--center"
         >
           <Button
-            component="button"
             onClick={[Function]}
             type="button"
             variation="primary"

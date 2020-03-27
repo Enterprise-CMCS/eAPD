@@ -37,7 +37,6 @@ exports[`apd export component renders correctly 1`] = `
   </ol>
   <Button
     className="ds-u-margin-top--2"
-    component="button"
     onClick={[Function]}
     size="big"
     type="button"
