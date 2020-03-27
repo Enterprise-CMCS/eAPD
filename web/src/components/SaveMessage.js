@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
 // Configure moment to display '1 time-unit ago' instead of 'a time-unit ago'
@@ -24,7 +24,7 @@ const SaveMessage = ({ lastSaved }) => {
   const [currentMoment, setCurrentMoment] = useState(() => moment());
 
   useEffect(() => {
-    let timerID = setInterval(() => setCurrentMoment(moment()), 1000);
+    const timerID = setInterval(() => setCurrentMoment(moment()), 1000);
     return () => clearInterval(timerID);
   });
 
