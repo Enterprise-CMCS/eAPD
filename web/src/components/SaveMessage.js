@@ -50,24 +50,19 @@ class SaveMessage extends React.Component {
     const lastSavedMoment = moment(lastSaved);
     const difference = currentMoment.diff(lastSavedMoment);
     const duration = moment.duration(difference);
-    let result = "Last saved";
+    let result = "Last saved ";
 
     if (duration.asMinutes() < 1) return "Saved";
 
-    // eslint's "yoda": "Expected literal to be on the right side of <="
-    // Which is easier to visualize on a number line, Mr. Yoda?
-    // lowerBound <= object.value() && object.value() < upperBound  // or...
-    if (duration.asMinutes() >= 1 && duration.asDays() < 1) {
-      result = `${result} ${lastSavedMoment.format("h:mm a")}`;
+    if (duration.asDays() < 1) {
+      result += lastSavedMoment.format("h:mm a");
+    } else if (duration.asYears() < 1) {
+      result += lastSavedMoment.format("MMMM D");
+    } else {
+      result += lastSavedMoment.format("MMMM D, YYYY");
     }
-    if (duration.asDays() >= 1 && duration.asYears() < 1) {
-      result = `${result} ${lastSavedMoment.format("MMMM D")}`;
-    }
-    if (duration.asYears() >= 1) {
-      result = `${result} ${lastSavedMoment.format("MMMM D, YYYY")}`;
-    }
-    result = `${result} (${lastSavedMoment.fromNow()})`;
 
+    result += ` (${lastSavedMoment.fromNow()})`;
     return result;
   }
 }
@@ -77,11 +72,11 @@ SaveMessage.propTypes = {
     PropTypes.instanceOf(Date),
     PropTypes.instanceOf(moment),
     PropTypes.string
-  ].isRequred),
+  ]).isRequired,
 };
 
-SaveMessage.defaultProps = {
-  lastSaved: moment(),
-};
+// SaveMessage.defaultProps = {
+//   lastSaved: moment(),
+// };
 
 export default SaveMessage;

@@ -4,9 +4,6 @@ import moment from "moment";
 import SaveMessage from "./SaveMessage";
 
 describe("<SaveMessage />", () => {
-  let lastSaved;
-  let subject;
-
   describe('when saved less than 1 minute ago, it displays "Saved"', () => {
     [
       ["1 second ago", 1],
@@ -15,8 +12,8 @@ describe("<SaveMessage />", () => {
       ["59 seconds", 59],
     ].forEach(([testName, seconds]) => {
       test(testName, () => {
-        lastSaved = moment().subtract(seconds, "seconds");
-        subject = shallow(
+        const lastSaved = moment().subtract(seconds, "seconds");
+        const subject = shallow(
           <SaveMessage lastSaved={lastSaved} />
         );
         expect(subject.text()).toEqual("Saved");
@@ -43,7 +40,7 @@ describe("<SaveMessage />", () => {
     });
 
     it('auto-updates from "Saved" to (1 minute ago)', () => {
-      subject = shallow(
+      const subject = shallow(
         <SaveMessage isSaving={false} lastSaved={now} />
       );
       expect(subject.text()).toMatch("Saved");
@@ -75,10 +72,9 @@ describe("<SaveMessage />", () => {
       [364, "days", "Last saved January 2 (1 year ago)"],
       [3, "years", "Last saved January 1, 2017 (3 years ago)"],
     ].forEach(([value, timeUnit, result]) => {
-      const testName = `when saved ${value} ${timeUnit} ago, it displays "${result}"`
-      test(testName, () => {
-        lastSaved = moment().subtract(value, timeUnit);
-        subject = shallow(
+      test(`when saved ${value} ${timeUnit} ago, it displays "${result}"`, () => {
+        const lastSaved = moment().subtract(value, timeUnit);
+        const subject = shallow(
           <SaveMessage lastSaved={lastSaved} />
         );
         expect(subject.text()).toEqual(result);
