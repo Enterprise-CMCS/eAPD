@@ -80,23 +80,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         activities: [
           {
             alternatives: '',
-            contractorResources: [
-              {
-                description: '',
-                end: '',
-                hourly: {
-                  data: {
-                    '2004': { hours: '', rate: '' },
-                    '2005': { hours: '', rate: '' }
-                  },
-                  useHourly: false
-                },
-                name: '',
-                start: '',
-                totalCost: 0,
-                years: { '2004': 0, '2005': 0 }
-              }
-            ],
+            contractorResources: [],
             costAllocation: {
               '2004': { ffp: { federal: 90, state: 10 }, other: 0 },
               '2005': { ffp: { federal: 90, state: 10 }, other: 0 }
@@ -106,13 +90,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               otherSources: ''
             },
             description: '',
-            expenses: [
-              {
-                category: '',
-                description: '',
-                years: { '2004': 0, '2005': 0 }
-              }
-            ],
+            expenses: [],
             fundingSource: 'HIT',
             objectives: [
               {
@@ -128,16 +106,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               doesNotSupport: '',
               supports: ''
             },
-            statePersonnel: [
-              {
-                description: '',
-                title: '',
-                years: {
-                  '2004': { amt: 0, perc: 0 },
-                  '2005': { amt: 0, perc: 0 }
-                }
-              }
-            ],
+            statePersonnel: [],
             summary: '',
             quarterlyFFP: {
               '2004': {

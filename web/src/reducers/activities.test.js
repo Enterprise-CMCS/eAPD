@@ -81,38 +81,14 @@ describe('activities reducer helpers', () => {
   it('can create a new activity', () => {
     expect(newActivity({ years: ['2020'] })).toEqual({
       alternatives: '',
-      contractorResources: [
-        {
-          key: '--- key ---',
-          name: '',
-          description: '',
-          start: '',
-          end: '',
-          files: [],
-          totalCost: 0,
-          years: {
-            '2020': 0
-          },
-          hourly: {
-            useHourly: false,
-            data: { '2020': { hours: '', rate: '' } }
-          }
-        }
-      ],
+      contractorResources: [],
       costAllocation: { '2020': { other: 0, ffp: { federal: 90, state: 10 } } },
       costAllocationNarrative: {
         methodology: '',
         otherSources: ''
       },
       description: '',
-      expenses: [
-        {
-          key: '--- key ---',
-          category: 'Hardware, software, and licensing',
-          description: '',
-          years: { '2020': 0 }
-        }
-      ],
+      expenses: [],
       fundingSource: false,
       key: '--- key ---',
       name: '',
@@ -134,14 +110,7 @@ describe('activities reducer helpers', () => {
           endDate: ''
         }
       ],
-      statePersonnel: [
-        {
-          key: '--- key ---',
-          title: '',
-          description: '',
-          years: { '2020': { amt: '', perc: '' } }
-        }
-      ],
+      statePersonnel: [],
       summary: '',
       standardsAndConditions: {
         doesNotSupport: '',
