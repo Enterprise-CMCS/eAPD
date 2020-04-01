@@ -722,41 +722,13 @@ describe('APD reducer', () => {
             activities: [
               {
                 alternatives: '',
-                contractorResources: [
-                  {
-                    description: '',
-                    end: '',
-                    files: [],
-                    hourly: {
-                      data: {
-                        1787: { hours: '', rate: '' }
-                      },
-                      useHourly: false
-                    },
-                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                    name: '',
-                    start: '',
-                    totalCost: 0,
-                    years: {
-                      1787: 0
-                    }
-                  }
-                ],
+                contractorResources: [],
                 costAllocation: {
                   1787: { ffp: { federal: 90, state: 10 }, other: 0 }
                 },
                 costAllocationNarrative: { methodology: '', otherSources: '' },
                 description: '',
-                expenses: [
-                  {
-                    category: 'Hardware, software, and licensing',
-                    description: '',
-                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                    years: {
-                      1787: 0
-                    }
-                  }
-                ],
+                expenses: [],
                 fundingSource: false,
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
@@ -796,16 +768,7 @@ describe('APD reducer', () => {
                   doesNotSupport: '',
                   supports: ''
                 },
-                statePersonnel: [
-                  {
-                    description: '',
-                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                    title: '',
-                    years: {
-                      1787: { amt: '', perc: '' }
-                    }
-                  }
-                ],
+                statePersonnel: [],
                 summary: '',
                 years: ['1787']
               }

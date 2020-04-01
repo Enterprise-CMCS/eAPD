@@ -8,6 +8,9 @@ Anticipated release: April 6, 2020
 
 #### 🐛 Bugs fixed
 
+- Fixed an issue where new APDs and activities came prepopulated with cost information ([#2129]) which could cause incorrect behavior in the activity cost summary table ([#2130])
+- Fixed an issue where adding an activity could make it impossible to save the APD ([#2148])
+
 #### ⚙️ Behind the scenes
 
 - Updated 3rd-party libraries to the latest versions
@@ -17,3 +20,6 @@ Anticipated release: April 6, 2020
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
 [#2104]: https://github.com/18F/cms-hitech-apd/issues/2104
+[#2129]: https://github.com/18F/cms-hitech-apd/issues/2129
+[#2130]: https://github.com/18F/cms-hitech-apd/issues/2130
+[#2148]: https://github.com/18F/cms-hitech-apd/pulls/2148
