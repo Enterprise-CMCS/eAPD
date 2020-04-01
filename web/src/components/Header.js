@@ -8,6 +8,7 @@ import { getIsAdmin } from '../reducers/user.selector';
 import { t } from '../i18n';
 
 import DashboardButton from './DashboardButton';
+import SaveMessage from './SaveMessage';
 
 import Icon, {
   Check,
@@ -86,7 +87,7 @@ class Header extends Component {
                         </span>
                       ) : (
                         <span>
-                          <Check /> Saved {lastSaved}
+                          <Check /> <SaveMessage lastSaved={lastSaved} />
                         </span>
                       )}
                     </span>
