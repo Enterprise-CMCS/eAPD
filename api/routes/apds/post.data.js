@@ -27,20 +27,7 @@ const getNewApd = () => {
     activities: [
       {
         alternatives: '',
-        contractorResources: [
-          {
-            description: '',
-            end: '',
-            hourly: {
-              data: forAllYears({ hours: 0, rate: 0 }),
-              useHourly: false
-            },
-            name: '',
-            start: '',
-            totalCost: 0,
-            years: forAllYears(0)
-          }
-        ],
+        contractorResources: [],
         costAllocation: forAllYears({
           ffp: { federal: 90, state: 10 },
           other: 0
@@ -50,13 +37,7 @@ const getNewApd = () => {
           otherSources: ''
         },
         description: '',
-        expenses: [
-          {
-            category: '',
-            description: '',
-            years: forAllYears(0)
-          }
-        ],
+        expenses: [],
         fundingSource: 'HIT',
         name: 'Program Administration',
         objectives: [
@@ -77,16 +58,7 @@ const getNewApd = () => {
           doesNotSupport: '',
           supports: ''
         },
-        statePersonnel: [
-          {
-            description: '',
-            title: '',
-            years: forAllYears({
-              amt: 0,
-              perc: 0
-            })
-          }
-        ],
+        statePersonnel: [],
         summary: '',
         quarterlyFFP: forAllYears({
           1: { contractors: 0, inHouse: 0 },

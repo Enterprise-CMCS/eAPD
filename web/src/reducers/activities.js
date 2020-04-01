@@ -83,14 +83,14 @@ export const newActivity = ({
   years = []
 } = {}) => ({
   alternatives: '',
-  contractorResources: [newContractor(years)],
+  contractorResources: [],
   costAllocation: arrToObj(years, costAllocationEntry()),
   costAllocationNarrative: {
     methodology: '',
     otherSources: ''
   },
   description: '',
-  expenses: [newExpense(years)],
+  expenses: [],
   fundingSource,
   key: generateKey(),
   name,
@@ -98,7 +98,7 @@ export const newActivity = ({
   plannedStartDate: '',
   objectives: [newObjective()],
   schedule: [newMilestone()],
-  statePersonnel: [newStatePerson(years)],
+  statePersonnel: [],
   summary: '',
   standardsAndConditions: {
     doesNotSupport: '',
