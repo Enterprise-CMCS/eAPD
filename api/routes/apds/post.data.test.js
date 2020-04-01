@@ -24,23 +24,7 @@ tap.test('APD data initializer', async test => {
     activities: [
       {
         alternatives: '',
-        contractorResources: [
-          {
-            description: '',
-            end: '',
-            hourly: {
-              data: {
-                '1997': { hours: '', rate: '' },
-                '1998': { hours: '', rate: '' }
-              },
-              useHourly: false
-            },
-            name: '',
-            start: '',
-            totalCost: 0,
-            years: { '1997': 0, '1998': 0 }
-          }
-        ],
+        contractorResources: [],
         costAllocation: {
           '1997': { ffp: { federal: 90, state: 10 }, other: 0 },
           '1998': { ffp: { federal: 90, state: 10 }, other: 0 }
@@ -50,13 +34,7 @@ tap.test('APD data initializer', async test => {
           otherSources: ''
         },
         description: '',
-        expenses: [
-          {
-            category: '',
-            description: '',
-            years: { '1997': 0, '1998': 0 }
-          }
-        ],
+        expenses: [],
         fundingSource: 'HIT',
         objectives: [
           {
@@ -72,16 +50,7 @@ tap.test('APD data initializer', async test => {
           doesNotSupport: '',
           supports: ''
         },
-        statePersonnel: [
-          {
-            description: '',
-            title: '',
-            years: {
-              '1997': { amt: 0, perc: 0 },
-              '1998': { amt: 0, perc: 0 }
-            }
-          }
-        ],
+        statePersonnel: [],
         summary: '',
         quarterlyFFP: {
           '1997': {
