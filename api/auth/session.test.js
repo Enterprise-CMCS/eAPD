@@ -97,9 +97,9 @@ tap.test('session functions', async tests => {
       sessionLoadTests.test('with a valid token', async test => {
         const req = {};
         const token = jwt.sign(
-          { iss: 'CMS eAPD API', payload: { session: 'info' } },
+          { payload: { session: 'info' } },
           'secret',
-          { algorithm: 'HS256', expiresIn: '1m' }
+          { algorithm: 'HS256', expiresIn: '1m', issuer: 'CMS eAPD API' }
         );
         cookies.get.withArgs('token').returns(token);
 

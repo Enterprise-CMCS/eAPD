@@ -1,11 +1,10 @@
 // Express session middleware.
 
 const defaultCookies = require('cookies');
-const jwt = require('jsonwebtoken');
+const { signWebToken, verifyWebToken } = require('./jwtUtils');
 const logger = require('../logger')('auth session');
 
 const COOKIE_NAME = 'token';
-const TOKEN_ISSUER = 'CMS eAPD API';
 
 const sessionLifetimeMilliseconds =
   +process.env.SESSION_LIFETIME_MINUTES * 60 * 1000;
@@ -23,28 +22,13 @@ const loadSession = (req, cookie) => {
     return {};
   }
 
-  try {
-    logger.silly(req, 'verifying JWT auth token');
-    const valid = jwt.verify(cookie, process.env.SESSION_SECRET, {
-      // Explicitly set the algorithm we expect; otherwise, an attacker could
-      // rewrite the token and set the algorithm to 'none', bypassing our
-      // signature checks
-      algorithms: ['HS256']
-    });
+  logger.silly(req, 'verifying JWT auth token');
+  const valid = verifyWebToken(cookie);
 
-    // Make sure we issued the token.
-    if (valid.iss !== TOKEN_ISSUER) {
-      throw new Error(`jwt issuer [${valid.iss}] is invalid`);
-    }
-
-    // Return the session contents
+  if (valid) {
     return valid.payload;
-  } catch (err) {
-    // If the token is invalid, return an empty object rather than failing.
-    // An invalid token does not necessarily mean the request needs to be
-    // terminated (e.g., the token may have expired, so the user needs to
-    // be redirected to a login page).
-    logger.error(req, `invalid auth token: ${err.message}`);
+  } else {
+    logger.error(req, `invalid jwt: ${cookie}`);
     return {};
   }
 };
@@ -90,14 +74,7 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
         // an expiration date.
         cookies.set(
           COOKIE_NAME,
-          jwt.sign(
-            { iss: 'CMS eAPD API', payload: session.content },
-            process.env.SESSION_SECRET,
-            {
-              algorithm: 'HS256',
-              expiresIn: `${process.env.SESSION_LIFETIME_MINUTES}m`
-            }
-          ),
+          signWebToken({ payload: session.content }),
           {
             httpOnly: true,
             maxAge: sessionLifetimeMilliseconds,
