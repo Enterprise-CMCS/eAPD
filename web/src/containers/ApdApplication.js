@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 import Sidebar from './Sidebar';
 import { setApdToSelectOnLoad } from '../actions/app';
+import { LinksContextProvider } from '../contexts/LinksContextProvider';
 
 import ApdPageRoutes from './ApdPageRoutes';
 
@@ -36,6 +37,7 @@ const ApdApplication = ({
   }
 
   return (
+    <LinksContextProvider value={'not sure we will use the default'}>
     <div className="site-body ds-l-container">
       <div className="ds-u-margin--0">
         <Sidebar place={place} />
@@ -48,6 +50,7 @@ const ApdApplication = ({
         </div>
       </div>
     </div>
+    </LinksContextProvider>
   );
 };
 
