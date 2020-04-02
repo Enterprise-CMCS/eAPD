@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const logger = require('../logger')('jwtUtils');
 
 const TOKEN_ISSUER = 'CMS eAPD API';
 const HS256 = 'HS256';
@@ -33,6 +34,7 @@ const verifyWebToken = (token) => {
   try {
     payload = jwt.verify(token, process.env.SESSION_SECRET, options);
   } catch (err) {
+    logger.error(token, `invalid jwt: ${err.message}`);
     return false;
   }
 
