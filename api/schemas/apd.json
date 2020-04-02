@@ -216,7 +216,7 @@
           },
           "fundingSource": {
             "$id": "#/properties/activities/items/properties/fundingSource",
-            "enum": ["HIE", "HIT", "MMIS"]
+            "enum": ["HIE", "HIT", "MMIS", false]
           },
           "name": {
             "$id": "#/properties/activities/items/properties/name",

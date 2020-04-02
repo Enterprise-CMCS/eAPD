@@ -5,32 +5,7 @@ Object {
   "activities": Array [
     Object {
       "alternatives": "",
-      "contractorResources": Array [
-        Object {
-          "description": "",
-          "end": "",
-          "hourly": Object {
-            "data": Object {
-              "2020": Object {
-                "hours": 0,
-                "rate": 0,
-              },
-              "2021": Object {
-                "hours": 0,
-                "rate": 0,
-              },
-            },
-            "useHourly": false,
-          },
-          "name": "",
-          "start": "",
-          "totalCost": 0,
-          "years": Object {
-            "2020": 0,
-            "2021": 0,
-          },
-        },
-      ],
+      "contractorResources": Array [],
       "costAllocation": Object {
         "2020": Object {
           "ffp": Object {
@@ -52,16 +27,7 @@ Object {
         "otherSources": "",
       },
       "description": "",
-      "expenses": Array [
-        Object {
-          "category": "",
-          "description": "",
-          "years": Object {
-            "2020": 0,
-            "2021": 0,
-          },
-        },
-      ],
+      "expenses": Array [],
       "fundingSource": "HIT",
       "name": "Program Administration",
       "objectives": Array [
@@ -126,22 +92,7 @@ Object {
         "doesNotSupport": "",
         "supports": "",
       },
-      "statePersonnel": Array [
-        Object {
-          "description": "",
-          "title": "",
-          "years": Object {
-            "2020": Object {
-              "amt": 0,
-              "perc": 0,
-            },
-            "2021": Object {
-              "amt": 0,
-              "perc": 0,
-            },
-          },
-        },
-      ],
+      "statePersonnel": Array [],
       "summary": "",
     },
   ],

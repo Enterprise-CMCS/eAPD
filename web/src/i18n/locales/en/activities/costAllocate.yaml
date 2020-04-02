@@ -51,8 +51,20 @@ ffp:
   federalStateSplitInstruction:
     heading: Federal-State Split
   quarterlyFFPInstruction:
-    heading: Quarterly FFP
-    detail: Specify how much of the federal share the state wants to receive for each fiscal quarter.
+    heading: Estimated Quarterly Expenditure
+    detail: >-
+      For each quarter, enter the percentage of the total Medicaid FFP cost that
+      will be spent in each category. The auto-calculated dollar values for each
+      quarter should align with the state's quarterly FFP estimates for CMS. As
+      a reminder, In-house costs equals state staff + other state expenses.
+    helpText: >-
+      Input a higher percentage in quarters where there may be non-reoccurring
+      costs and adjust the other quarters downward to ensure the totals do not
+      exceed 100%. Examples of non-reoccurring costs may include a one-time
+      state equipment purchases (in-house costs) or payments on a contract
+      deliverable (private contractor costs). An example of a reoccurring cost
+      may include a salaried positions where the cost is equally divided into
+      each quarter.
   labels:
     other: Other Funding Amount
     fedStateSplit: Federal-State Split

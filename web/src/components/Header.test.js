@@ -139,7 +139,7 @@ describe('Header component', () => {
           }}
           isAdmin={false}
           isSaving={false}
-          lastSaved="last save date"
+          lastSaved="2020-01-01T12:00:00.000Z"
           pushRoute={() => {}}
           showSiteTitle={false}
         />
@@ -159,7 +159,7 @@ describe('Header component', () => {
           }}
           isAdmin={false}
           isSaving
-          lastSaved="last save date"
+          lastSaved="2020-01-01T17:00:00.000Z"
           pushRoute={() => {}}
           showSiteTitle={false}
         />
