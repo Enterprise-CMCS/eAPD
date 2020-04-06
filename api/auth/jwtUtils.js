@@ -11,6 +11,7 @@ const HS256 = 'HS256';
  * Returns a signed JWT with content as the payload. Inverse function for
  *   verifyWebToken(token).
  * @param {Object} payload - payload of information to be stored within the JWT
+ * @returns {string} signed JWT
  */
 const signWebToken = (payload) => {
   const options = {
@@ -25,7 +26,8 @@ const signWebToken = (payload) => {
 /**
  * Returns the payload from the signed JWT, or false. Inverse function for
  *   signWebToken(payload).
- * @param {String} token - signed JWT
+ * @param {string} token - signed JWT
+ * @returns {(Object|boolean)} JWT payload, or false
  */
 const verifyWebToken = (token) => {
   let payload;
@@ -44,6 +46,11 @@ const verifyWebToken = (token) => {
   return payload;
 }
 
+/**
+ * Configuration options for passport-jwt Strategy. Defined here since
+ *   TOKEN_ISSUER is defined here.
+ * @type {Object}
+ */
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: SESSION_SECRET,
