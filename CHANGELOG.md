@@ -22,7 +22,7 @@ Anticipated release: April 6, 2020
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
-[2112]: https://github.com/18F/cms-hitech-apd/issues/2112
+[#2112]: https://github.com/18F/cms-hitech-apd/issues/2112
 [#2110]: https://github.com/18F/cms-hitech-apd/issues/2110
 [#2104]: https://github.com/18F/cms-hitech-apd/issues/2104
 [#2129]: https://github.com/18F/cms-hitech-apd/issues/2129
