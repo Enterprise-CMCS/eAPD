@@ -1,13 +1,18 @@
 const Passport = require('passport');
 const LocalStrategy = require('passport-local');
+const JwtStrategy = require('passport-jwt').Strategy;
 
 const logger = require('../logger')('auth index');
 const authenticate = require('./authenticate');
 const serialization = require('./serialization');
 const sessionFunction = require('./session')();
 const { removeUserSession } = require('./sessionStore');
+const { signWebToken, jwtOptions } = require('./jwtUtils');
 
-const defaultStrategies = [new LocalStrategy(authenticate())];
+const defaultStrategies = [
+  new LocalStrategy(authenticate()),
+  // new JwtStrategy(jwtOptions, serialization.deserializeUser)
+];
 
 // This setup method configures passport and inserts it into
 // the express middleware. After a successful authentication,
@@ -70,6 +75,9 @@ module.exports.setup = function setup(
   // Add a local authentication endpoint
   logger.silly('setting up a local login handler');
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-    res.send(req.user);
+    // const sessionId = req.session.passport.user;
+    // const token = signWebToken({ payload: sessionId });
+    // res.send({ token: token, user: req.user });
+    res.send(req.user)
   });
 };

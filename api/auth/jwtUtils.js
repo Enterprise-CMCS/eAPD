@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const logger = require('../logger')('jwtUtils');
+
+const { SESSION_LIFETIME_MINUTES, SESSION_SECRET } = process.env
 
 const TOKEN_ISSUER = 'CMS eAPD API';
 const HS256 = 'HS256';
@@ -12,11 +15,11 @@ const HS256 = 'HS256';
 const signWebToken = (payload) => {
   const options = {
     algorithm: HS256,
-    expiresIn: `${process.env.SESSION_LIFETIME_MINUTES}m`,
+    expiresIn: `${SESSION_LIFETIME_MINUTES}m`,
     issuer: TOKEN_ISSUER
   };
 
-  return jwt.sign(payload, process.env.SESSION_SECRET, options);
+  return jwt.sign(payload, SESSION_SECRET, options);
 }
 
 /**
@@ -32,16 +35,23 @@ const verifyWebToken = (token) => {
   };
 
   try {
-    payload = jwt.verify(token, process.env.SESSION_SECRET, options);
+    payload = jwt.verify(token, SESSION_SECRET, options);
   } catch (err) {
-    logger.error(token, `invalid jwt: ${err.message}`);
+    logger.error(token, `invalid token: ${err.message}`);
     return false;
   }
 
   return payload;
 }
 
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: SESSION_SECRET,
+  issuer: TOKEN_ISSUER
+}
+
 module.exports = {
   signWebToken,
-  verifyWebToken
+  verifyWebToken,
+  jwtOptions
 }

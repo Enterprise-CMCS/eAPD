@@ -42,6 +42,7 @@ services:
       - SESSION_SECRET=dadccbf1e3bcb63a4d533c3f184eecfc79fd07e76d0584f808078125a83bc40b6413829e5c690d391dd3f6cbca44406cef07b8193cd4db2f03bab355eea9cb2e
       - DISABLE_SAME_SITE=yes
       - DISABLE_SECURE_COOKIE=yes
+      - LOG_LEVEL=silly
     volumes:
       - type: bind
         source: ./api
