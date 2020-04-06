@@ -50,9 +50,9 @@ export const login = (username, password) => dispatch => {
       })
     )
     .then(req => {
-      // localStorage.setItem('token', req.data.token);
-      dispatch(completeLogin(req.data));
-      dispatch(loadData(req.data.activities));
+      localStorage.setItem('token', req.data.token);
+      dispatch(completeLogin(req.data.user));
+      dispatch(loadData(req.data.user.activities));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
@@ -62,7 +62,7 @@ export const login = (username, password) => dispatch => {
 
 export const logout = () => dispatch =>
   axios.get('/auth/logout')
-    // .then(() => localStorage.removeItem('token'))
+    .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(completeLogout()));
 
 export const checkAuth = () => dispatch => {

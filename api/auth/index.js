@@ -11,7 +11,7 @@ const { signWebToken, jwtOptions } = require('./jwtUtils');
 
 const defaultStrategies = [
   new LocalStrategy(authenticate()),
-  // new JwtStrategy(jwtOptions, serialization.deserializeUser)
+  new JwtStrategy(jwtOptions, serialization.deserializeUser)
 ];
 
 // This setup method configures passport and inserts it into
@@ -75,9 +75,9 @@ module.exports.setup = function setup(
   // Add a local authentication endpoint
   logger.silly('setting up a local login handler');
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-    // const sessionId = req.session.passport.user;
-    // const token = signWebToken({ payload: sessionId });
-    // res.send({ token: token, user: req.user });
-    res.send(req.user)
+    const sessionId = req.session.passport.user;
+    const token = signWebToken({ payload: sessionId });
+    res.send({ token: token, user: req.user });
+    // res.send(req.user)
   });
 };
