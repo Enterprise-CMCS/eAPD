@@ -48,9 +48,11 @@ module.exports.setup = function setup(
   // Add our session function and passport to our app's
   // middleware
   logger.silly('adding session and Passport middleware');
-  app.use(session);
   app.use(passport.initialize());
   app.use(passport.session());
+
+  // Pull JWT from HTTP headers and deserialize.
+  app.use(passport.authenticate('jwt'));
 
   logger.silly('setting up a logout handler');
   app.get('/auth/logout', (req, res) => {

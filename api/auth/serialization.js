@@ -18,10 +18,9 @@ module.exports.serializeUser = async (
   done(null, sessionID);
 };
 
-// Deserialize a stringy from the user's session cookie
-// into a user object.
+// Deserialize a session from the user's JWT into a user object.
 module.exports.deserializeUser = async (
-  sessionID,
+  { payload: sessionID },
   done,
   {
     getUserByID = gu,
