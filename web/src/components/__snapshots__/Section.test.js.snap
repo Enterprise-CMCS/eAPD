@@ -11,6 +11,7 @@ exports[`Section component renders correctly with no resource 1`] = `
     className="ds-text--lead"
   />
   test child
+  <SecondaryNav />
 </section>
 `;
 
@@ -27,6 +28,7 @@ exports[`Section component renders correctly with resource containing title, sub
     className="ds-text--lead"
   />
   test child
+  <SecondaryNav />
 </section>
 `;
 

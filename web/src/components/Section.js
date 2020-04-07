@@ -26,7 +26,7 @@ const Section = ({ children, id, resource }) => {
       <h2 className="ds-h2">{title}</h2>
       <span className="ds-text--lead">{helptext}</span>
       {children}
-      <SecondaryNav/>
+      <SecondaryNav />
     </section>
   );
 };

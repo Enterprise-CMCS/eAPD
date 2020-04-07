@@ -11,36 +11,45 @@ import Overview from './Overview';
 import Objectives from './Objectives';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
+import Section from '../../components/Section';
 
 const ActivityRoutes = ({ activityIndex }) => {
   const { path } = useRouteMatch();
 
   return (
     <Switch>
-      <Route path={`${path}/overview`}>
-        <Overview activityIndex={activityIndex} />
-        <StandardsAndConditions activityIndex={activityIndex} />
-      </Route>
       <Route path={`${path}/okrs`}>
-        <Objectives activityIndex={activityIndex} />
-        <Schedule activityIndex={activityIndex} />
-        <Milestones activityIndex={activityIndex} />
+        <Section>
+          <Objectives activityIndex={activityIndex} />
+          <Schedule activityIndex={activityIndex} />
+          <Milestones activityIndex={activityIndex} />
+        </Section>
       </Route>
       <Route path={`${path}/state-costs`}>
-        <Costs activityIndex={activityIndex} />
+        <Section>
+          <Costs activityIndex={activityIndex} />
+        </Section>
       </Route>
       <Route path={`${path}/contractor-costs`}>
-        <ContractorResources activityIndex={activityIndex} />
+        <Section>
+          <ContractorResources activityIndex={activityIndex} />
+        </Section>
       </Route>
       <Route path={`${path}/cost-allocation`}>
-        <CostAllocate activityIndex={activityIndex} />
+        <Section>
+          <CostAllocate activityIndex={activityIndex} />
+        </Section>
       </Route>
       <Route path={`${path}/ffp`}>
-        <FFP activityIndex={activityIndex} />
+        <Section>
+          <FFP activityIndex={activityIndex} />
+        </Section>
       </Route>
       <Route>
-        <Overview activityIndex={activityIndex} />
-        <StandardsAndConditions activityIndex={activityIndex} />
+        <Section>
+          <Overview activityIndex={activityIndex} />
+          <StandardsAndConditions activityIndex={activityIndex} />
+        </Section>
       </Route>
     </Switch>
   );
