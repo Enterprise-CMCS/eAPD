@@ -37,7 +37,7 @@ const ApdApplication = ({
   }
 
   return (
-    <LinksContextProvider value={'not sure we will use the default'}>
+    <LinksContextProvider>
     <div className="site-body ds-l-container">
       <div className="ds-u-margin--0">
         <Sidebar place={place} />

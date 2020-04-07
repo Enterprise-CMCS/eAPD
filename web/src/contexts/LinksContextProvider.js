@@ -5,45 +5,130 @@ const { Provider, Consumer } = React.createContext();
 
 class LinksContextProvider extends Component {
 
-  getCurrentLinkIds = (links, activeId) => {
+  getPreviousNextLinks = (links, activeId) => {
     // first look for active link among the top level links
-    let activeIndex = links.findIndex(o => o.id === activeId);
-    let activeChildIndex = 0;
+    let currentIndex = links.findIndex(o => o.id === activeId);
+    let currentActivityIndex = -1;
+    let currentActivityItemIndex = -1;
 
     // if it's not a top level link, look in the children
-    if (activeIndex < 0) {
-      activeIndex = links.findIndex(o => o.hasOwnProperty('children') ? o.children.findIndex(c => c.id === activeId) >= 0 : false);
-      if (activeIndex >= 0){
-        activeChildIndex = links[activeIndex].children.findIndex(c => c.id === activeId);
+    if (currentIndex < 0) {
+      currentIndex = links.findIndex(o => o.hasOwnProperty('children') && o.children != null ? o.children.findIndex(c => c.id === activeId) >= 0 : false);
+    }
+
+    // if it's not in the children, check the activities
+    if (currentIndex < 0) {
+      currentIndex = links.findIndex(o => o.hasOwnProperty('items') & o.items != null ? o.items.findIndex(i => i.id === activeId) >= 0 : false);
+      if (currentIndex >= 0){
+        currentActivityIndex = links[currentIndex].items.findIndex(i => i.id === activeId);
+        currentActivityItemIndex = -1;
+        }
+    }
+
+    // if it's not in the activities, check the activity items
+    if (currentIndex < 0) {
+      [currentIndex, currentActivityIndex, currentActivityItemIndex] = this.getCurrentActivtyItem(links, activeId);
+    }
+    
+    // if we can't find an active link, use the first one
+    if (currentIndex < 0) {
+      currentIndex = 0;
+      currentActivityIndex = -1;
+      currentActivityItemIndex = -1;
+      }
+
+    const [previousLink, hidePreviousLink] = this.getPreviousLink(links, currentIndex, currentActivityIndex, currentActivityItemIndex);
+    const [nextLink,  hideNextLink] = this.getNextLink(links, currentIndex, currentActivityIndex, currentActivityItemIndex);
+
+    return [previousLink, hidePreviousLink, nextLink, hideNextLink];
+  }
+
+  getCurrentActivtyItem = (links, activeId) => {
+    const linkCount = links.length;
+    for(let i = 0 ; i < linkCount; i++) {
+      if (links[i].hasOwnProperty('items') && links[i].items != null) {
+        const activityCount = links[i].items.length;
+        for(let j = 0; j < activityCount; j++) {
+          if (links[i].items[j].hasOwnProperty('items') && links[i].items[j].items != null) {
+            const itemCount = links[i].items[j].items.length;
+            for(let k = 0; k < itemCount; k++) {
+              if (links[i].items[j].items[k].id == activeId) {
+                return [i, j, k];
+              }
+            }  
+          }
+        }
+      }
+    }
+    return [-1, -1, -1];
+  }
+
+  getPreviousLink = (links, currentIndex, currentActivityIndex, currentActivityItemIndex) => {
+    // previous activity item
+    if (currentActivityItemIndex > 0) {
+      return [links[currentIndex].items[currentActivityIndex].items[currentActivityItemIndex - 1], false];
+    }
+
+    // previous activity
+    if (currentActivityItemIndex === 0 && currentActivityIndex > 0) {
+      return [links[currentIndex].items[currentActivityIndex - 1], false];
+    }
+
+    // previous top level link
+    const previousIndex = currentIndex > 0 ? currentIndex - 1 : currentIndex;
+    return [links[previousIndex], currentIndex === previousIndex];
+  }
+
+  getNextLink = (links, currentIndex, currentActivityIndex, currentActivityItemIndex) => {
+    // next activity item
+    if (currentActivityItemIndex >= 0) {
+      const itemCount = links[currentIndex].items[currentActivityIndex].items.length;
+      if (currentActivityItemIndex < itemCount - 1) {
+        return [links[currentIndex].items[currentActivityIndex].items[currentActivityItemIndex + 1], false];
+      }
+      else {
+        const activityCount = links[currentIndex].items.length;
+        if (currentActivityIndex < activityCount - 1) {
+          return [links[currentIndex].items[currentActivityIndex + 1], false];
+        }
+        else {
+          const linkCount = links.length;
+          if (currentIndex < linkCount - 1) {
+            return [links[currentIndex + 1], false];
+          }
+          else {
+            return [links[linkCount - 1], true];
+          }
+        }
       }
     }
 
-    // if we can't find an active link, assume it's the first one
-    if (activeIndex < 0) {
-      activeIndex = 0;
-      activeChildIndex = 0;
+    // next activity
+    if (currentActivityIndex >= 0) {
+      const activityCount = links[currentIndex].items.length;
+      if (currentActivityIndex < activityCount - 1) {
+        return [links[currentIndex].items[currentActivityIndex + 1], false];
+      }
+      else {
+        const linkCount = links.length;
+        if (currentIndex < linkCount - 1) {
+          return [links[currentIndex + 1], false];
+        }
+        else {
+          return [links[linkCount - 1], true];
+        }
+      }
     }
-    return [activeIndex, activeChildIndex];    
-  }
 
-  getPreviousLink = (links, activeId) => {
-    const [activeIndex, activeChildIndex] = this.getCurrentLinkIds(links, activeId);
+    // special case - after activities-list, go down into activities sub-pages
+    console.log('next link current Index: ' + currentIndex);
+    if ((links[currentIndex].id === 'activities-list' || links[currentIndex].id === 'activities') && links[currentIndex].items != null && links[currentIndex].items[1] != null) {
+      return[links[currentIndex].items[1], false];
+    }
 
-    // calculate the previous indeces
-    const previousIndex = activeIndex > 0 ? activeIndex - 1 : activeIndex;
-    
-    // now get the previous link
-    return links[previousIndex];
-  }
-
-  getNextLink = (links, activeId) => {
-    const [activeIndex, activeChildIndex] = this.getCurrentLinkIds(links, activeId);
-
-    // calculate the next indeces
-    const nextIndex = activeIndex < links.length - 1 ? activeIndex + 1 : activeIndex;
-    
-    // now get the next link
-     return links[nextIndex];
+    // next top level link
+    const nextIndex = currentIndex < links.length - 1 ? currentIndex + 1 : currentIndex;
+    return [links[nextIndex], nextIndex === currentIndex];
   }
 
   getTheLinks = (pageNav, anchorNav, activeSection, activities) => {
@@ -280,7 +365,7 @@ class LinksContextProvider extends Component {
 
   render() {
       return <Provider
-          value={{ getLinks: this.getTheLinks, getPreviousLink: this.getPreviousLink, getNextLink: this.getNextLink }}
+          value={{ getLinks: this.getTheLinks, getPreviousNextLinks: this.getPreviousNextLinks }}
       >{this.props.children}</Provider>;
   }
 }

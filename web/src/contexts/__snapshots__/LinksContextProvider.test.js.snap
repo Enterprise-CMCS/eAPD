@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinksContextProvider the consumer renders correctly 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "getLinks": [Function],
+      "getPreviousNextLinks": [Function],
+    }
+  }
+>
+  <div>
+    <ContextConsumer>
+      <Component />
+    </ContextConsumer>
+  </div>
+</ContextProvider>
+`;
+
+exports[`LinksContextProvider the provider renders correctly 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "getLinks": [Function],
+      "getPreviousNextLinks": [Function],
+    }
+  }
+>
+  <div>
+    test
+  </div>
+</ContextProvider>
+`;
