@@ -7,6 +7,11 @@ const browsers = [
     link: 'https://www.google.com/chrome/'
   },
   {
+    id: 'edge',
+    name: 'Microsoft Edge',
+    link: 'https://www.microsoft.com/en-us/edge/'
+  },
+  {
     id: 'firefox',
     name: 'Mozilla Firefox',
     link: 'https://www.mozilla.org/en-US/firefox/new/'
