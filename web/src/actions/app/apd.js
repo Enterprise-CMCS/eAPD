@@ -52,7 +52,7 @@ export const saveApd = () => (dispatch, getState) => {
       return res.data;
     })
     .catch(error => {
-      if (error.response.status === 403) {
+      if (error.response && error.response.status === 403) {
         dispatch({ type: SAVE_APD_FAILURE, data: 'save-apd.not-logged-in' });
       } else {
         dispatch({ type: SAVE_APD_FAILURE });

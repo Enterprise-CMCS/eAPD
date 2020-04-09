@@ -6,14 +6,12 @@ exports[`apd (application) component renders correctly 1`] = `
     className="site-body ds-l-container"
   >
     <div
-      className="ds-u-margin--0"
+      className="site-main"
+      id="start-main-content"
     >
-      <Connect(Sidebar)
-        place={Object {}}
-      />
+      <Connect(UnexpectedError) />
       <div
-        className="site-main ds-u-padding-top--2"
-        id="start-main-content"
+        className="ds-u-padding-top--2"
       >
         <ApdPageRoutes
           apdCreated="creation date"

@@ -31,10 +31,16 @@ const saveMiddleware = (store, { saveAction = saveApd } = {}) => {
 
     // Now set the timer for actually doing the save. It'll run 300 ms after
     // the most recent call to save.
-    timer = setTimeout(() => {
+    timer = setTimeout(async () => {
       // We're saving now. Don't allow any more saves to start.
       isSaving = true;
-      store.dispatch(saveAction()).then(() => {
+
+      try {
+        await store.dispatch(saveAction());
+      } catch (e) {
+        // Eat the exception. There's nothing for us to do it with it except
+        // to acknolwedge that the previous save is done.
+      } finally {
         // When the save is finished, we can clear that flag.
         isSaving = false;
         // If any new saves came in while we were saving, clear the queue
@@ -43,7 +49,7 @@ const saveMiddleware = (store, { saveAction = saveApd } = {}) => {
           isQueued = false;
           doSave();
         }
-      });
+      }
     }, 300);
   };
 

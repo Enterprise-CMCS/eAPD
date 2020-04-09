@@ -73,7 +73,7 @@ describe('automatic save middleware', () => {
       expect(store.getActions()).toEqual([{ type: 'save apd' }]);
     });
 
-    it('queues an incoming save if a save is already in progress, then executes that save when ready', done => {
+    it('queues an incoming save if a save is already in progress, then executes that save when the previous save succeeds', done => {
       const saveResolvers = [];
 
       const saveAction = jest.fn().mockReturnValue(() =>
@@ -106,6 +106,65 @@ describe('automatic save middleware', () => {
 
       // Complete the initial save.
       saveResolvers[0]();
+
+      // Now advance the timer, and make sure the save has been triggered a
+      // second time. This is where we make sure the enqueued save actually
+      // happens. We need to advance the timer because the enqueued save will
+      // be debounced exactly like any other save.
+      //
+      // We have to wait to advance the timer until the next tick, due to a
+      // tail call recursion optimization in the JS engine. The recursive call
+      // to the internal doSave function gets scheduled for the next tick
+      // because it doesn't have any stack dependencies, so it's safe to move
+      // off of the stack thereby preventing any stack overflow issues. As a
+      // result, if we run the timer without waiting until the next tick, we
+      // will actually run the timers BEFORE the new save timer is created,
+      // and then nothing will happen. Async code, hooray!
+      //
+      // setImmediate works here because the tests are run in Node.js. It
+      // isn't part of the JS standard and may or may not work in browsers.
+      // It adds functions to the end of the next event loop, which is where
+      // we want it so that it happens after the new save timer is created.
+      setImmediate(() => {
+        jest.advanceTimersByTime(DEBOUNCE_TIME);
+        expect(saveAction.mock.calls.length).toBe(2);
+        done();
+      });
+    });
+
+    it('queues an incoming save if a save is already in progress, then executes that save when the previous save fails', done => {
+      const saveRejectors = [];
+
+      const saveAction = jest.fn().mockReturnValue(() =>
+        new Promise((_, reject) => {
+          saveRejectors.push(reject);
+        }).then(() => {
+          store.dispatch({ type: 'save apd' });
+        })
+      );
+
+      const middleware = saveMiddleware(store, { saveAction })(next);
+
+      middleware({ type: EDIT_APD });
+
+      // Move forward by the debounce time to trigger the first save.
+      jest.advanceTimersByTime(DEBOUNCE_TIME);
+      expect(saveAction.mock.calls.length).toBe(1);
+
+      // Call the middleware again, then advance the timer. The save should
+      // still have only been triggered once.
+      middleware({ type: EDIT_APD });
+      jest.advanceTimersByTime(DEBOUNCE_TIME);
+      expect(saveAction.mock.calls.length).toBe(1);
+
+      // For extra test safety, call the middleware one more time, then advance
+      // the timer. The save should still have only been triggered once.
+      middleware({ type: EDIT_APD });
+      jest.advanceTimersByTime(DEBOUNCE_TIME);
+      expect(saveAction.mock.calls.length).toBe(1);
+
+      // Fail the initial save.
+      saveRejectors[0]();
 
       // Now advance the timer, and make sure the save has been triggered a
       // second time. This is where we make sure the enqueued save actually
