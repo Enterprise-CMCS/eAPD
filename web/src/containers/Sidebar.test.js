@@ -21,32 +21,33 @@ jest.mock('react-router-dom', () => {
 global.scrollTo = jest.fn();
 
 jest.mock('../contexts/LinksContextProvider', () => { 
-  const contextObject = { getLinks: jest.fn(), getPreviousNextLinks: jest.fn() } 
-  const pageNav = jest.fn();
-  contextObject.getLinks.mockReturnValue([
-    {
-      id: 'apd-state-profile',
-      label: 'apd.stateProfile.title',
-      onClick: pageNav('apd-state-profile-office', 'state-profile'),
-      children: [
-        {
-          id: 'apd-state-profile-office',
-          label: 'apd.stateProfile.directorAndAddress.title'
-        },
-        {
-          id: 'apd-state-profile-key-personnel',
-          label: 'apd.stateProfile.keyPersonnel.title'
-        }
-      ]
-    },
-    true,
-    {
-      id: 'apd-summary',
-      label: 'apd.title',
-      onClick: pageNav('apd-summary', 'program-summary')
-    },
-    true
-  ]);
+  const contextObject = { 
+    getLinks: (pageNav, anchorNav) => ([
+      {
+        id: 'apd-state-profile',
+        label: 'apd.stateProfile.title',
+        onClick: pageNav('apd-state-profile-office', 'state-profile'),
+        children: [
+          {
+            id: 'apd-state-profile-office',
+            label: 'apd.stateProfile.directorAndAddress.title',
+            onClick: anchorNav('apd-state-profile-office'),
+          },
+          {
+            id: 'apd-state-profile-key-personnel',
+            label: 'apd.stateProfile.keyPersonnel.title',
+            onClick: anchorNav('apd-state-profile-key-personnel'),
+          }
+        ]
+      },
+      {
+        id: 'apd-summary',
+        label: 'apd.title',
+        onClick: pageNav('apd-summary', 'program-summary')
+      }
+    ]), 
+    getPreviousNextLinks: jest.fn() 
+  } 
   return {
     LinksContextConsumer: ({ children }) => { return children(contextObject); }
   }
@@ -108,7 +109,7 @@ describe('Sidebar component', () => {
       preventDefault: jest.fn(),
       stopPropagation: jest.fn()
     };
-/*
+
     item.onClick(e);
 
     // Click event is canceled so the browser doesn't do any navigation itself
@@ -124,7 +125,6 @@ describe('Sidebar component', () => {
 
     // We scroll to the top of the page
     expect(global.scrollTo).toHaveBeenCalledWith(0, 0);
-*/
   });
 
   it('navigates correctly to a subsection that is within the current page', () => {
@@ -137,13 +137,12 @@ describe('Sidebar component', () => {
     // This is just here so the test fails fast if we reorder the sidebar. This
     // test is dependent on the order of the items in the sidebar.
     expect(item.id).toEqual('apd-state-profile-office');
-/*
+
     item.onClick();
 
     // We update the navigation redux state with the ID of the section that
     // should be highlighted in the sidebar
     expect(props.jumpTo).toHaveBeenCalledWith('apd-state-profile-office');
-*/
   });
 
   it('maps state to props', () => {

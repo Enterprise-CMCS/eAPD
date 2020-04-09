@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import { t } from '../i18n';
 
@@ -13,12 +14,12 @@ class LinksContextProvider extends Component {
 
     // if it's not a top level link, look in the children
     if (currentIndex < 0) {
-      currentIndex = links.findIndex(o => o.hasOwnProperty('children') && o.children != null ? o.children.findIndex(c => c.id === activeId) >= 0 : false);
+      currentIndex = links.findIndex(o => Object.prototype.hasOwnProperty.call(o, 'children') && o.children != null ? o.children.findIndex(c => c.id === activeId) >= 0 : false);
     }
 
     // if it's not in the children, check the activities
     if (currentIndex < 0) {
-      currentIndex = links.findIndex(o => o.hasOwnProperty('items') & o.items != null ? o.items.findIndex(i => i.id === activeId) >= 0 : false);
+      currentIndex = links.findIndex(o => Object.prototype.hasOwnProperty.call(o, 'items') && o.items != null ? o.items.findIndex(i => i.id === activeId) >= 0 : false);
       if (currentIndex >= 0){
         currentActivityIndex = links[currentIndex].items.findIndex(i => i.id === activeId);
         currentActivityItemIndex = -1;
@@ -45,14 +46,14 @@ class LinksContextProvider extends Component {
 
   getCurrentActivtyItem = (links, activeId) => {
     const linkCount = links.length;
-    for(let i = 0 ; i < linkCount; i++) {
-      if (links[i].hasOwnProperty('items') && links[i].items != null) {
+    for(let i = 0 ; i < linkCount; i+=1) {
+      if (Object.prototype.hasOwnProperty.call(links[i], 'items') && links[i].items != null) {
         const activityCount = links[i].items.length;
-        for(let j = 0; j < activityCount; j++) {
-          if (links[i].items[j].hasOwnProperty('items') && links[i].items[j].items != null) {
+        for(let j = 0; j < activityCount; j+=1) {
+          if (Object.prototype.hasOwnProperty.call(links[i].items[j], 'items') && links[i].items[j].items != null) {
             const itemCount = links[i].items[j].items.length;
-            for(let k = 0; k < itemCount; k++) {
-              if (links[i].items[j].items[k].id == activeId) {
+            for(let k = 0; k < itemCount; k+=1) {
+              if (links[i].items[j].items[k].id === activeId) {
                 return [i, j, k];
               }
             }  
@@ -86,21 +87,15 @@ class LinksContextProvider extends Component {
       if (currentActivityItemIndex < itemCount - 1) {
         return [links[currentIndex].items[currentActivityIndex].items[currentActivityItemIndex + 1], false];
       }
-      else {
-        const activityCount = links[currentIndex].items.length;
-        if (currentActivityIndex < activityCount - 1) {
-          return [links[currentIndex].items[currentActivityIndex + 1], false];
-        }
-        else {
-          const linkCount = links.length;
-          if (currentIndex < linkCount - 1) {
-            return [links[currentIndex + 1], false];
-          }
-          else {
-            return [links[linkCount - 1], true];
-          }
-        }
+      const activityCount = links[currentIndex].items.length;
+      if (currentActivityIndex < activityCount - 1) {
+        return [links[currentIndex].items[currentActivityIndex + 1], false];
       }
+      const linkCount = links.length;
+      if (currentIndex < linkCount - 1) {
+        return [links[currentIndex + 1], false];
+      }
+      return [links[linkCount - 1], true];
     }
 
     // next activity
@@ -109,19 +104,14 @@ class LinksContextProvider extends Component {
       if (currentActivityIndex < activityCount - 1) {
         return [links[currentIndex].items[currentActivityIndex + 1], false];
       }
-      else {
-        const linkCount = links.length;
-        if (currentIndex < linkCount - 1) {
-          return [links[currentIndex + 1], false];
-        }
-        else {
-          return [links[linkCount - 1], true];
-        }
+      const linkCount = links.length;
+      if (currentIndex < linkCount - 1) {
+        return [links[currentIndex + 1], false];
       }
+      return [links[linkCount - 1], true];
     }
 
     // special case - after activities-list, go down into activities sub-pages
-    console.log('next link current Index: ' + currentIndex);
     if ((links[currentIndex].id === 'activities-list' || links[currentIndex].id === 'activities') && links[currentIndex].items != null && links[currentIndex].items[1] != null) {
       return[links[currentIndex].items[1], false];
     }
@@ -364,10 +354,15 @@ class LinksContextProvider extends Component {
   };
 
   render() {
-      return <Provider
-          value={{ getLinks: this.getTheLinks, getPreviousNextLinks: this.getPreviousNextLinks }}
-      >{this.props.children}</Provider>;
+    const {children} = this.props;
+    return <Provider
+        value={{ getLinks: this.getTheLinks, getPreviousNextLinks: this.getPreviousNextLinks }}
+    >{children}</Provider>;
   }
 }
+
+LinksContextProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export { LinksContextProvider, Consumer as LinksContextConsumer };
