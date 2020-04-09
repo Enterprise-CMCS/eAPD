@@ -11,7 +11,7 @@ import Overview from './Overview';
 import Objectives from './Objectives';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
-import Section from '../../components/Section';
+import { Section } from '../../components/Section';
 
 const ActivityRoutes = ({ activityIndex }) => {
   const { path } = useRouteMatch();

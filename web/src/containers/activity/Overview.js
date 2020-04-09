@@ -15,7 +15,6 @@ import { Subsection } from '../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
-import {SecondaryNav} from '../../components/SecondaryNav';
 
 const ActivityOverview = ({
   activity,
