@@ -19,7 +19,6 @@ exports[`NextPreviousButtons component renders correctly 1`] = `
   </div>
   <div
     className="next-prev-button-right hidden-button"
-    next-hidden={false}
   >
     <div
       className="next-button"

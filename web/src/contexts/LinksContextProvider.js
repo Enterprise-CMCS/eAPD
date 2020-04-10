@@ -39,7 +39,7 @@ class LinksContextProvider extends Component {
       }
 
     const [previousLink, hidePreviousLink] = this.getPreviousLink(links, currentIndex, currentActivityIndex, currentActivityItemIndex);
-    const [nextLink,  hideNextLink] = this.getNextLink(links, currentIndex, currentActivityIndex, currentActivityItemIndex);
+    const [nextLink, hideNextLink] = this.getNextLink(links, currentIndex, currentActivityIndex, currentActivityItemIndex);
 
     return [previousLink, hidePreviousLink, nextLink, hideNextLink];
   }
@@ -105,9 +105,6 @@ class LinksContextProvider extends Component {
         return [links[currentIndex].items[currentActivityIndex + 1], false];
       }
       const linkCount = links.length;
-      if (currentIndex < linkCount - 1) {
-        return [links[currentIndex + 1], false];
-      }
       return [links[linkCount - 1], true];
     }
 
