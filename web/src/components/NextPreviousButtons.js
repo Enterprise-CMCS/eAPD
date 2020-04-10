@@ -35,7 +35,7 @@ const NextPreviousButtons = ({ activeSection, activities, jumpTo: jumpAction, ..
         <Button onClick={previousLink.onClick}>&lt; Previous</Button>
         <div className="next-prev-section">{previousLink.label}</div>
       </div>
-      <div className={hideNextLink ? 'next-prev-button-right hidden-button' : 'next-prev-button-right'} next-hidden={activeSection === nextLink.id}>
+      <div className={hideNextLink ? 'next-prev-button-right hidden-button' : 'next-prev-button-right'}>
         <div className="next-button">
           <Button variation="primary" onClick={nextLink.onClick}>Continue &gt;</Button>
         </div>

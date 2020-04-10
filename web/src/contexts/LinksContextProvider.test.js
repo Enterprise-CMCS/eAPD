@@ -46,14 +46,24 @@ NextPreviousButtonsTest.propTypes = {
 describe('LinksContextProvider', () => {
   const props = {
     activities: [
-      { anchor: '#key1', key: 'key 1234' },
-      { anchor: '#key2', key: 'key 5678' },
-      { anchor: '#key3', key: 'key 9012' }
+      { anchor: '#key1', key: 'key-1234' },
+      { anchor: '#key2', key: 'key-5678' },
+      { anchor: '#key3', key: 'key-9012' }
     ],
     activeSection: 'some section',
     jumpTo: jest.fn(),
     place: { id: 'place id', name: 'place name' }
   };
+
+  const SecondaryNavTest = () => {
+    return (
+      <LinksContextConsumer>
+        {context => (
+          <NextPreviousButtonsTest {...props} context={context} />
+        )}
+      </LinksContextConsumer>
+      );
+    };
 
   beforeEach(() => {
     global.scrollTo.mockReset();
@@ -81,16 +91,6 @@ describe('LinksContextProvider', () => {
 
     // note: I tried doing the above with the SecondaryNav control but it complained about not having the redux store provider
     // so this barebones component uses the context with minimum setup
-
-    const SecondaryNavTest = () => {
-      return (
-        <LinksContextConsumer>
-          {context => (
-            <NextPreviousButtonsTest {...props} context={context} />
-          )}
-        </LinksContextConsumer>
-        );
-      };
     
     const container = mount(
       <LinksContextProvider>
@@ -105,18 +105,8 @@ describe('LinksContextProvider', () => {
     expect(nextDiv.text()).toEqual('apd-summary');
   });
 
-  it('creates SecondaryNav currectly when the selected link is an activity', () => {
+  it('creates SecondaryNav currectly when the selected link is the first activity', () => {
     props.activeSection = 'activities';
-
-    const SecondaryNavTest = () => {
-      return (
-        <LinksContextConsumer>
-          {context => (
-            <NextPreviousButtonsTest {...props} context={context} />
-          )}
-        </LinksContextConsumer>
-        );
-      };
     
     const container = mount(
       <LinksContextProvider>
@@ -128,21 +118,11 @@ describe('LinksContextProvider', () => {
     const prevDiv = container.find('.prev-id');
     expect(prevDiv.text()).toEqual('previous-activities');
     const nextDiv = container.find('.next-id');
-    expect(nextDiv.text()).toEqual('activity-key 1234');
+    expect(nextDiv.text()).toEqual('activity-key-1234');
   });
 
-  it('creates SecondaryNav currectly when the selected link is an activity', () => {
-    props.activeSection = 'activity-key 5678';
-
-    const SecondaryNavTest = () => {
-      return (
-        <LinksContextConsumer>
-          {context => (
-            <NextPreviousButtonsTest {...props} context={context} />
-          )}
-        </LinksContextConsumer>
-        );
-      };
+  it('creates SecondaryNav currectly when the selected link is a subsequent activity', () => {
+    props.activeSection = 'activity-key-5678';
     
     const container = mount(
       <LinksContextProvider>
@@ -150,11 +130,55 @@ describe('LinksContextProvider', () => {
       </LinksContextProvider>
     );
 
-    // if we got items for the SecondaryNavTest that proves we successfully executed the getPreviousNextLinks() function
     const prevDiv = container.find('.prev-id');
     expect(prevDiv.text()).toEqual('previous-activities');
     const nextDiv = container.find('.next-id');
-    expect(nextDiv.text()).toEqual('activity-key 9012');
+    expect(nextDiv.text()).toEqual('activity-key-9012');
+  });
+
+  it('creates SecondaryNav currectly when the selected link is an activity sub-section', () => {
+    props.activeSection = 'activity-key-5678-okrs';
+    
+    const container = mount(
+      <LinksContextProvider>
+        <SecondaryNavTest {...props} />
+      </LinksContextProvider>
+    );
+
+    const prevDiv = container.find('.prev-id');
+    expect(prevDiv.text()).toEqual('activity-key-5678-overview');
+    const nextDiv = container.find('.next-id');
+    expect(nextDiv.text()).toEqual('activity-key-5678-state-costs');
+  });
+
+  it('creates SecondaryNav currectly when the selected link is the last sub-item', () => {
+    props.activeSection = 'activity-key-5678-ffp';
+    
+    const container = mount(
+      <LinksContextProvider>
+        <SecondaryNavTest {...props} />
+      </LinksContextProvider>
+    );
+
+    const prevDiv = container.find('.prev-id');
+    expect(prevDiv.text()).toEqual('activity-key-5678-cost-allocation');
+    const nextDiv = container.find('.next-id');
+    expect(nextDiv.text()).toEqual('activity-key-9012');
+  });
+
+  it('creates SecondaryNav currectly when the selected link is the last sub-item of the last activity', () => {
+    props.activeSection = 'activity-key-9012-ffp';
+    
+    const container = mount(
+      <LinksContextProvider>
+        <SecondaryNavTest {...props} />
+      </LinksContextProvider>
+    );
+
+    const prevDiv = container.find('.prev-id');
+    expect(prevDiv.text()).toEqual('activity-key-9012-cost-allocation');
+    const nextDiv = container.find('.next-id');
+    expect(nextDiv.text()).toEqual('schedule-summary');
   });
   
 });
