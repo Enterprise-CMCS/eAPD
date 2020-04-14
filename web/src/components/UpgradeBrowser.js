@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserIsYellow } from '../util/browser';
 
 const browsers = [
   {
@@ -46,12 +47,12 @@ const html = `<div class="ds-c-alert__body">
 
 const UpgradeBrowser = () => {
   /* eslint-disable react/no-danger */
-  return (
+  return browserIsYellow ? (
     <div
       className="ds-c-alert ds-c-alert--warn"
       dangerouslySetInnerHTML={{ __html: html }}
     />
-  );
+  ) : null;
 };
 
 export default UpgradeBrowser;
