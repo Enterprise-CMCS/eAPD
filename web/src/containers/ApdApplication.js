@@ -39,21 +39,21 @@ const ApdApplication = ({
 
   return (
     <LinksContextProvider>
-    <div className="site-body ds-l-container">
-      <div className="ds-u-margin--0">
-        <Sidebar place={place} />
-        <div id="start-main-content" className="site-main">
-          <UnexpectedError />
-          <div className="ds-u-padding-top--2">
-            <ApdPageRoutes
-              apdCreated={apdCreated}
-              apdName={apdName}
-              year={year}
-            />
+      <div className="site-body ds-l-container">
+        <div className="ds-u-margin--0">
+          <Sidebar place={place} />
+          <div id="start-main-content" className="site-main">
+            <UnexpectedError />
+            <div className="ds-u-padding-top--2">
+              <ApdPageRoutes
+                apdCreated={apdCreated}
+                apdName={apdName}
+                year={year}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </LinksContextProvider>
   );
 };

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinksContextProvider renders correctly 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "getLinks": [Function],
+      "getPreviousNextLinks": [Function],
+    }
+  }
+/>
+`;

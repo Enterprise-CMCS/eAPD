@@ -1,124 +1,212 @@
 import PropTypes from 'prop-types';
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { t } from '../i18n';
 
 const { Provider, Consumer } = React.createContext();
 
 class LinksContextProvider extends Component {
-
   getPreviousNextLinks = (links, activeId) => {
     // first look for active link among the top level links
     let currentIndex = links.findIndex(o => o.id === activeId);
-    let currentActivityIndex = -1;
-    let currentActivityItemIndex = -1;
+    let currentItemIndex = -1;
+    let currentSubItemIndex = -1;
 
-    // if it's not a top level link, look in the children
+    // if we're not at a top-level index, see if we're at a first-tier item
+    // identify index and item index
     if (currentIndex < 0) {
-      currentIndex = links.findIndex(o => Object.prototype.hasOwnProperty.call(o, 'children') && o.children != null ? o.children.findIndex(c => c.id === activeId) >= 0 : false);
+      currentIndex = links.findIndex(
+        o => Array.isArray(o.items) && o.items.some(i => i.id === activeId)
+      );
+      if (currentIndex >= 0) {
+        currentItemIndex = links[currentIndex].items.findIndex(
+          i => i.id === activeId
+        );
+        currentSubItemIndex = -1;
+      }
     }
 
-    // if it's not in the children, check the activities
+    // if top level and second level don't match, check sub items
+    // identify index, item index, and sub item index
     if (currentIndex < 0) {
-      currentIndex = links.findIndex(o => Object.prototype.hasOwnProperty.call(o, 'items') && o.items != null ? o.items.findIndex(i => i.id === activeId) >= 0 : false);
-      if (currentIndex >= 0){
-        currentActivityIndex = links[currentIndex].items.findIndex(i => i.id === activeId);
-        currentActivityItemIndex = -1;
-        }
+      ({
+        currentIndex,
+        currentItemIndex,
+        currentSubItemIndex
+      } = this.getCurrentSubItemIndeces(links, activeId));
     }
 
-    // if it's not in the activities, check the activity items
-    if (currentIndex < 0) {
-      [currentIndex, currentActivityIndex, currentActivityItemIndex] = this.getCurrentActivtyItem(links, activeId);
-    }
-    
-    // if we can't find an active link, use the first one
+    // default case -- if we can't find an active link, use the first one
     if (currentIndex < 0) {
       currentIndex = 0;
-      currentActivityIndex = -1;
-      currentActivityItemIndex = -1;
-      }
+      currentItemIndex = -1;
+      currentSubItemIndex = -1;
+    }
 
-    const [previousLink, hidePreviousLink] = this.getPreviousLink(links, currentIndex, currentActivityIndex, currentActivityItemIndex);
-    const [nextLink, hideNextLink] = this.getNextLink(links, currentIndex, currentActivityIndex, currentActivityItemIndex);
+    // now get the next and previous links, along with booleans about whether to hide the link (for first and last page)
+    const {
+      link: previousLink,
+      hideLink: hidePreviousLink
+    } = this.getPreviousLink(
+      links,
+      currentIndex,
+      currentItemIndex,
+      currentSubItemIndex
+    );
+    const { link: nextLink, hideLink: hideNextLink } = this.getNextLink(
+      links,
+      currentIndex,
+      currentItemIndex,
+      currentSubItemIndex
+    );
 
-    return [previousLink, hidePreviousLink, nextLink, hideNextLink];
-  }
+    return {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    };
+  };
 
-  getCurrentActivtyItem = (links, activeId) => {
+  // deep dive to find a sub-item index that matches the active ID,
+  // bringing back the associated top-level and item - level indeces too
+  getCurrentSubItemIndeces = (links, activeId) => {
+    // go through every top-level link
     const linkCount = links.length;
-    for(let i = 0 ; i < linkCount; i+=1) {
-      if (Object.prototype.hasOwnProperty.call(links[i], 'items') && links[i].items != null) {
-        const activityCount = links[i].items.length;
-        for(let j = 0; j < activityCount; j+=1) {
-          if (Object.prototype.hasOwnProperty.call(links[i].items[j], 'items') && links[i].items[j].items != null) {
-            const itemCount = links[i].items[j].items.length;
-            for(let k = 0; k < itemCount; k+=1) {
-              if (links[i].items[j].items[k].id === activeId) {
-                return [i, j, k];
+    for (let topLevelIndex = 0; topLevelIndex < linkCount; topLevelIndex += 1) {
+      // check for items
+      if (
+        Array.isArray(links[topLevelIndex].items) &&
+        links[topLevelIndex].items != null
+      ) {
+        const itemCount = links[topLevelIndex].items.length;
+        // go through every item link
+        for (
+          let itemLevelIndex = 0;
+          itemLevelIndex < itemCount;
+          itemLevelIndex += 1
+        ) {
+          // check for sub-items
+          if (
+            Array.isArray(links[topLevelIndex].items[itemLevelIndex].items) &&
+            links[topLevelIndex].items[itemLevelIndex].items != null
+          ) {
+            const subItemCount =
+              links[topLevelIndex].items[itemLevelIndex].items.length;
+            // go through every sub-item
+            for (
+              let subItemIndex = 0;
+              subItemIndex < subItemCount;
+              subItemIndex += 1
+            ) {
+              // check for a match at the sub-item level
+              if (
+                links[topLevelIndex].items[itemLevelIndex].items[subItemIndex]
+                  .id === activeId
+              ) {
+                return {
+                  currentIndex: topLevelIndex,
+                  currentItemIndex: itemLevelIndex,
+                  currentSubItemIndex: subItemIndex
+                };
               }
-            }  
+            }
           }
         }
       }
     }
-    return [-1, -1, -1];
-  }
+    // if none of the sub-items match, return failure condition
+    return {
+      currentIndex: -1,
+      currentItemIndex: -1,
+      currentSubItemIndex: -1
+    };
+  };
 
-  getPreviousLink = (links, currentIndex, currentActivityIndex, currentActivityItemIndex) => {
-    // previous activity item
-    if (currentActivityItemIndex > 0) {
-      return [links[currentIndex].items[currentActivityIndex].items[currentActivityItemIndex - 1], false];
+  getPreviousLink = (
+    links,
+    currentIndex,
+    currentItemIndex,
+    currentSubItemIndex
+  ) => {
+    // check deepest level first -- go to previous sub item
+    if (currentSubItemIndex > 0) {
+      return {
+        link: this.prependActivityLabel(
+          links[currentIndex].items[currentItemIndex].items[
+            currentSubItemIndex - 1
+          ],
+          currentItemIndex
+        ),
+        hideLink: false
+      };
     }
 
-    // previous activity
-    if (currentActivityItemIndex === 0 && currentActivityIndex > 0) {
-      return [links[currentIndex].items[currentActivityIndex - 1], false];
+    // we're at the first sub item, go back up a level
+    if (currentSubItemIndex === 0 && currentItemIndex > 0) {
+      return {
+        link: links[currentIndex].items[currentItemIndex - 1],
+        hideLink: false
+      };
     }
 
-    // previous top level link
+    // previous top level link (do this whether we're at the item level or top-level link, since the items are on the same page)
     const previousIndex = currentIndex > 0 ? currentIndex - 1 : currentIndex;
-    return [links[previousIndex], currentIndex === previousIndex];
-  }
+    return {
+      link: links[previousIndex],
+      hideLink: currentIndex === previousIndex
+    };
+  };
 
-  getNextLink = (links, currentIndex, currentActivityIndex, currentActivityItemIndex) => {
-    // next activity item
-    if (currentActivityItemIndex >= 0) {
-      const itemCount = links[currentIndex].items[currentActivityIndex].items.length;
-      if (currentActivityItemIndex < itemCount - 1) {
-        return [links[currentIndex].items[currentActivityIndex].items[currentActivityItemIndex + 1], false];
+  getNextLink = (
+    links,
+    currentIndex,
+    currentItemIndex,
+    currentSubItemIndex
+  ) => {
+    // check deepest levels first -- next sub item
+    if (currentSubItemIndex >= 0) {
+      const subItemCount =
+        links[currentIndex].items[currentItemIndex].items.length;
+      if (currentSubItemIndex < subItemCount - 1) {
+        return {
+          link: this.prependActivityLabel(
+            links[currentIndex].items[currentItemIndex].items[
+              currentSubItemIndex + 1
+            ],
+            currentItemIndex
+          ),
+          hideLink: false
+        };
       }
-      const activityCount = links[currentIndex].items.length;
-      if (currentActivityIndex < activityCount - 1) {
-        return [links[currentIndex].items[currentActivityIndex + 1], false];
+      // we hit the last sub-item, so go up a level and get the next one
+      const itemCount = links[currentIndex].items.length;
+      if (currentItemIndex < itemCount - 1) {
+        return {
+          link: links[currentIndex].items[currentItemIndex + 1],
+          hideLink: false
+        };
       }
+      // we hit the last item, jump up a level and get the next top-level link
       const linkCount = links.length;
       if (currentIndex < linkCount - 1) {
-        return [links[currentIndex + 1], false];
+        return { link: links[currentIndex + 1], hideLink: false };
       }
-      return [links[linkCount - 1], true];
+      return { link: links[linkCount - 1], hideLink: true };
     }
 
-    // next activity
-    if (currentActivityIndex >= 0) {
-      const activityCount = links[currentIndex].items.length;
-      if (currentActivityIndex < activityCount - 1) {
-        return [links[currentIndex].items[currentActivityIndex + 1], false];
-      }
-      const linkCount = links.length;
-      return [links[linkCount - 1], true];
-    }
+    // next top level link (do this whether we're at the item level or top-level link, since the items are on the same page)
+    const nextIndex =
+      currentIndex < links.length - 1 ? currentIndex + 1 : currentIndex;
+    return { link: links[nextIndex], hideLink: nextIndex === currentIndex };
+  };
 
-    // special case - after activities-list, go down into activities sub-pages
-    if ((links[currentIndex].id === 'activities-list' || links[currentIndex].id === 'activities') && links[currentIndex].items != null && links[currentIndex].items[1] != null) {
-      return[links[currentIndex].items[1], false];
-    }
-
-    // next top level link
-    const nextIndex = currentIndex < links.length - 1 ? currentIndex + 1 : currentIndex;
-    return [links[nextIndex], nextIndex === currentIndex];
-  }
+  prependActivityLabel = (link, activity) => {
+    const newLabel = `Activity ${activity}: ${link.label}`;
+    return { id: link.id, label: newLabel, onClick: link.onClick };
+  };
 
   getTheLinks = (pageNav, anchorNav, activeSection, activities) => {
+    // Note: children is the list of potential child links of a top-level nav item; items is the list of child links to actually display
     const links = [
       {
         id: 'apd-state-profile',
@@ -218,7 +306,7 @@ class LinksContextProvider extends Component {
         onClick: pageNav('export', 'export')
       }
     ];
-  
+
     links.forEach(topLevel => {
       // Gather up a list of all the nav item IDs that belong to this top-level
       // item. We'll use that list to determine if this item should show as being
@@ -226,7 +314,7 @@ class LinksContextProvider extends Component {
       const ids = [topLevel.id];
       if (topLevel.children) {
         ids.push(...topLevel.children.map(child => child.id));
-  
+
         if (topLevel.id === 'activities') {
           ids.push(...activities.map(({ key }) => `activity-${key}`));
           activities.forEach(({ key }) =>
@@ -241,14 +329,14 @@ class LinksContextProvider extends Component {
           );
         }
       }
-  
+
       const selected = ids.indexOf(activeSection) >= 0;
-  
+
       if (selected) {
         // Selected nav items should not have a URL; otherwise, they get
         // rendered twice - once in this nav item and once as the first child.
         topLevel.url = undefined;
-  
+
         // If this item is defined as having children, turn those into
         // sidebar items.
         if (topLevel.children) {
@@ -257,7 +345,7 @@ class LinksContextProvider extends Component {
             url: `#${child.id}`,
             ...child
           }));
-  
+
           // If we're on the activities sidebar item, we should also push a list
           // of activities into its items.
           if (topLevel.id === 'activities') {
@@ -267,18 +355,21 @@ class LinksContextProvider extends Component {
                 // Well let's check for that too, okay?
                 const activitySelected =
                   activeSection.substr(0, 17) === `activity-${key}`;
-  
+
                 return {
                   id: `activity-${key}`,
                   // Remove the url property if this activity is selected. Same
                   // reason as above: otherwise it'll show up twice.
                   url: activitySelected ? null : `activity/${i}`,
-                  label: t(`sidebar.titles.activity-${name ? 'set' : 'unset'}`, {
-                    number: i + 1,
-                    name
-                  }),
+                  label: t(
+                    `sidebar.titles.activity-${name ? 'set' : 'unset'}`,
+                    {
+                      number: i + 1,
+                      name
+                    }
+                  ),
                   onClick: pageNav(`activity-${key}-overview`, `activity/${i}`),
-  
+
                   // For the selected activity, also show the activity sections.
                   items: activitySelected
                     ? [
@@ -351,10 +442,17 @@ class LinksContextProvider extends Component {
   };
 
   render() {
-    const {children} = this.props;
-    return <Provider
-        value={{ getLinks: this.getTheLinks, getPreviousNextLinks: this.getPreviousNextLinks }}
-    >{children}</Provider>;
+    const { children } = this.props;
+    return (
+      <Provider
+        value={{
+          getLinks: this.getTheLinks,
+          getPreviousNextLinks: this.getPreviousNextLinks
+        }}
+      >
+        {children}
+      </Provider>
+    );
   }
 }
 

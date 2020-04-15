@@ -23,8 +23,8 @@ const Section = ({ children, id, resource }) => {
 
   return (
     <section id={id}>
-      <h2 className="ds-h2">{title}</h2>
-      <span className="ds-text--lead">{helptext}</span>
+      {title && <h2 className="ds-h2">{title}</h2>}
+      {helptext && <span className="ds-text--lead">{helptext}</span>}
       {children}
       <SecondaryNav />
     </section>

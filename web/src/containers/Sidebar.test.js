@@ -1,4 +1,4 @@
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 
 import {
@@ -20,9 +20,9 @@ jest.mock('react-router-dom', () => {
 
 global.scrollTo = jest.fn();
 
-jest.mock('../contexts/LinksContextProvider', () => { 
-  const contextObject = { 
-    getLinks: (pageNav, anchorNav) => ([
+jest.mock('../contexts/LinksContextProvider', () => {
+  const contextObject = {
+    getLinks: (pageNav, anchorNav) => [
       {
         id: 'apd-state-profile',
         label: 'apd.stateProfile.title',
@@ -31,26 +31,18 @@ jest.mock('../contexts/LinksContextProvider', () => {
           {
             id: 'apd-state-profile-office',
             label: 'apd.stateProfile.directorAndAddress.title',
-            onClick: anchorNav('apd-state-profile-office'),
-          },
-          {
-            id: 'apd-state-profile-key-personnel',
-            label: 'apd.stateProfile.keyPersonnel.title',
-            onClick: anchorNav('apd-state-profile-key-personnel'),
+            onClick: anchorNav('apd-state-profile-office')
           }
         ]
-      },
-      {
-        id: 'apd-summary',
-        label: 'apd.title',
-        onClick: pageNav('apd-summary', 'program-summary')
       }
-    ]), 
-    getPreviousNextLinks: jest.fn() 
-  } 
+    ],
+    getPreviousNextLinks: jest.fn()
+  };
   return {
-    LinksContextConsumer: ({ children }) => { return children(contextObject); }
-  }
+    LinksContextConsumer: ({ children }) => {
+      return children(contextObject);
+    }
+  };
 });
 
 describe('Sidebar component', () => {
@@ -73,12 +65,12 @@ describe('Sidebar component', () => {
   });
 
   it('renders correctly', () => {
-    expect(shallow(<Sidebar {...props} />)).toMatchSnapshot();
+    expect(mount(<Sidebar {...props} />)).toMatchSnapshot();
   });
 
   it('uses the PNG file extension for territories (these are not SVGs)', () => {
     expect(
-      shallow(
+      mount(
         <Sidebar {...props} place={{ id: 'vi', name: 'U.S. Virgin Islands' }} />
       )
     ).toMatchSnapshot();
@@ -86,13 +78,13 @@ describe('Sidebar component', () => {
 
   it('renders the active section with its children open', () => {
     expect(
-      shallow(<Sidebar {...props} activeSection="proposed-budget" />)
+      mount(<Sidebar {...props} activeSection="proposed-budget" />)
     ).toMatchSnapshot();
   });
 
   it('renders the active section correctly if it is an activity section', () => {
     expect(
-      shallow(<Sidebar {...props} activeSection="activity-key 1234-okrs" />)
+      mount(<Sidebar {...props} activeSection="activity-key 1234-okrs" />)
     ).toMatchSnapshot();
   });
 
@@ -100,10 +92,6 @@ describe('Sidebar component', () => {
     const item = mount(<Sidebar {...props} />)
       .find('VerticalNav')
       .prop('items')[0];
-
-    // This is just here so the test fails fast if we reorder the sidebar. This
-    // test is dependent on the order of the items in the sidebar.
-    expect(item.id).toEqual('apd-state-profile');
 
     const e = {
       preventDefault: jest.fn(),
@@ -128,9 +116,7 @@ describe('Sidebar component', () => {
   });
 
   it('navigates correctly to a subsection that is within the current page', () => {
-    const item = mount(
-      <Sidebar {...props} activeSection="apd-state-profile" />
-    )
+    const item = mount(<Sidebar {...props} activeSection="apd-state-profile" />)
       .find('VerticalNav')
       .prop('items')[0].children[0];
 

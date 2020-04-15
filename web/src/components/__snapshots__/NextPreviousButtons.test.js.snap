@@ -7,6 +7,7 @@ exports[`NextPreviousButtons component renders correctly 1`] = `
   >
     <Button
       component="button"
+      onClick={[Function]}
       type="button"
     >
       &lt; Previous
@@ -25,6 +26,7 @@ exports[`NextPreviousButtons component renders correctly 1`] = `
     >
       <Button
         component="button"
+        onClick={[Function]}
         type="button"
         variation="primary"
       >

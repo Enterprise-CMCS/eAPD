@@ -4,6 +4,6 @@ import SecondaryNav from './SecondaryNav';
 
 describe('Secondary Nav component', () => {
   it('renders correctly', () => {
-    expect(shallow(<SecondaryNav />)).toMatchSnapshot();
+    expect(shallow(<SecondaryNav />).dive()).toMatchSnapshot();
   });
 });

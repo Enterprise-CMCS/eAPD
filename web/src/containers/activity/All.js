@@ -16,7 +16,7 @@ const All = ({ add, activities }) => {
       <h3 className="subsection--title ds-h3">
         {activities.length} program activities
       </h3>
-      {activities.map(({}, index) => (          // eslint-disable-line no-empty-pattern
+      {activities.map((_, index) => (
         <EntryDetails activityIndex={index} />
       ))}
       <Button className="ds-u-margin-top--4" onClick={onAdd}>
