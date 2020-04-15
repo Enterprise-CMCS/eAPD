@@ -31,7 +31,7 @@ header:not(.ds-c-dialog__header) {
 }
 
 .site-title {
-  padding-top: 4px; // offsets the padding on the button with the user's email
+  height: 28.4px; /* explicityly set height to match last saved and email in header */
   svg {
     margin-right: $spacer-1;
   }
