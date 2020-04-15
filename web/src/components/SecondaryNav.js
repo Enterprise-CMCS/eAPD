@@ -3,7 +3,6 @@ import { LinksContextConsumer } from '../contexts/LinksContextProvider';
 import NextPreviousButtons from './NextPreviousButtons';
 
 const SecondaryNav = () => {
-
   return (
     <LinksContextConsumer>
       {context => (
@@ -12,7 +11,7 @@ const SecondaryNav = () => {
         </div>
       )}
     </LinksContextConsumer>
-    );
-  };
+  );
+};
 
-  export default SecondaryNav;
+export default SecondaryNav;

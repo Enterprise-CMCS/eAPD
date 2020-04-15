@@ -1,184 +1,238 @@
-import PropTypes from 'prop-types';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
+import { LinksContextProvider } from './LinksContextProvider';
 
-import {plain as Sidebar} from '../containers/Sidebar';
-import { LinksContextProvider, LinksContextConsumer } from './LinksContextProvider';
+const contextProvider = new LinksContextProvider();
 
-let mockPush;
+const links = [
+  {
+    id: 'apd-state-profile',
+    label: 'Key State Personnel',
+    items: [
+      {
+        id: 'apd-state-profile-office',
+        label: 'State Director and Office Address'
+      },
+      {
+        id: 'apd-state-profile-key-personnel',
+        label: 'Key Personnel and Program Management'
+      }
+    ]
+  },
+  { id: 'apd-summary', label: 'Program Summary' },
+  {
+    id: 'activities',
+    label: 'Program Activities',
+    items: [
+      { id: 'activities-list', label: 'Activity List' },
+      {
+        id: 'activity-aed63d97',
+        label: 'Activity 1: HIE Enhancement and Onboarding',
+        items: [
+          {
+            id: 'activity-aed63d97-overview',
+            label: 'Activity overview'
+          },
+          {
+            id: 'activity-aed63d97-okrs',
+            label: 'Objectives and key results'
+          },
+          {
+            id: 'activity-aed63d97-ffp',
+            label: 'FFP and budget'
+          }
+        ]
+      },
+      {
+        id: 'activity-wz46yd39',
+        label: 'Activity 2: Public Health System Modernization',
+        items: [
+          {
+            id: 'activity-wz46yd39-overview',
+            label: 'Activity overview'
+          },
+          {
+            id: 'activity-wz46yd39-okrs',
+            label: 'Objectives and key results'
+          },
+          {
+            id: 'activity-wz46yd39-ffp',
+            label: 'FFP and budget'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'executive-summary',
+    label: 'Executive Summary',
+    items: [
+      { id: 'executive-summary-summary', label: 'Activities Summary' },
+      { id: 'executive-summary-budget-table', label: 'Program Budget Tables' }
+    ]
+  }
+];
 
-jest.mock('react-router-dom', () => {
-  mockPush = jest.fn();
-  return {
-    useHistory: jest.fn().mockReturnValue({ push: mockPush }),
-    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' })
-  };
-});
-
-global.scrollTo = jest.fn();
-
-const NextPreviousButtonsTest = (props) => {
-  const { activeSection, activities, context } = props;
-  const { getLinks, getPreviousNextLinks } = context;
-  const pageNav = jest.fn();
-  const anchorNav = jest.fn();      
-  const links = getLinks(pageNav, anchorNav, activeSection, activities);
-  const [previousLink, hidePreviousLink, nextLink, hideNextLink] = getPreviousNextLinks(links, activeSection);
-
-  return (
-    <div>
-      <div className={hidePreviousLink ? 'next-prev-button-left hidden-button' : 'next-prev-button-left'}> 
-        <div className="prev-id">{previousLink.id}</div>
-      </div>
-      <div className={hideNextLink ? 'next-prev-button-right hidden-button' : 'next-prev-button-right'}>
-        <div className="next-id">{nextLink.id}</div>
-      </div>
-    </div>
-  );
-}
-
-NextPreviousButtonsTest.propTypes = {
-  activeSection: PropTypes.string.isRequired,
-  activities: PropTypes.array.isRequired,
-  context: PropTypes.object.isRequired,
-};
+const pageNavMock = jest.fn();
+const anchorNavMock = jest.fn();
+const activities = [
+  {
+    anchor: '#key1',
+    key: 'key-1234'
+  },
+  {
+    anchor: '#key2',
+    key: 'key-5678'
+  },
+  {
+    anchor: '#key3',
+    key: 'key-9012'
+  }
+];
 
 describe('LinksContextProvider', () => {
-  const props = {
-    activities: [
-      { anchor: '#key1', key: 'key-1234' },
-      { anchor: '#key2', key: 'key-5678' },
-      { anchor: '#key3', key: 'key-9012' }
-    ],
-    activeSection: 'some section',
-    jumpTo: jest.fn(),
-    place: { id: 'place id', name: 'place name' }
-  };
-
-  const SecondaryNavTest = () => {
-    return (
-      <LinksContextConsumer>
-        {context => (
-          <NextPreviousButtonsTest {...props} context={context} />
-        )}
-      </LinksContextConsumer>
-      );
-    };
-
-  beforeEach(() => {
-    global.scrollTo.mockReset();
-    if (mockPush) {
-      mockPush.mockReset();
-    }
-    props.jumpTo.mockReset();
+  it('renders correctly', () => {
+    expect(shallow(<LinksContextProvider />)).toMatchSnapshot();
   });
 
-  it('creates sidebar correctly', () => {
-    const container = mount(
-      <LinksContextProvider>
-          <Sidebar {...props} />
-      </LinksContextProvider>
-      );
-
-    // if we got items for the Sidebar that proves we successfully executed the getLinks() function
-    const item = container
-      .find('VerticalNav')
-      .prop('items')[0];
-    expect(item.id).toEqual('apd-state-profile');
-  });
-
-  it('creates SecondaryNav currectly', () => {
-
-    // note: I tried doing the above with the SecondaryNav control but it complained about not having the redux store provider
-    // so this barebones component uses the context with minimum setup
-    
-    const container = mount(
-      <LinksContextProvider>
-        <SecondaryNavTest {...props} />
-      </LinksContextProvider>
+  it('returns a list of links', () => {
+    const activeSection = 'apd-state-profile';
+    const testLinks = contextProvider.getTheLinks(
+      pageNavMock,
+      anchorNavMock,
+      activeSection,
+      activities
     );
-
-    // if we got items for the SecondaryNavTest that proves we successfully executed the getPreviousNextLinks() function
-    const prevDiv = container.find('.prev-id');
-    expect(prevDiv.text()).toEqual('apd-state-profile');
-    const nextDiv = container.find('.next-id');
-    expect(nextDiv.text()).toEqual('apd-summary');
+    expect(testLinks.length).toBe(9);
   });
 
-  it('creates SecondaryNav currectly when the selected link is the first activity', () => {
-    props.activeSection = 'activities';
-    
-    const container = mount(
-      <LinksContextProvider>
-        <SecondaryNavTest {...props} />
-      </LinksContextProvider>
+  it('returns next and previous links currectly when the selected link is empty', () => {
+    const activeSection = '';
+    const {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    } = contextProvider.getPreviousNextLinks(links, activeSection);
+    expect(previousLink.id).toBe('apd-state-profile');
+    expect(previousLink.label).toBe('Key State Personnel');
+    expect(hidePreviousLink).toBe(true);
+    expect(nextLink.id).toBe('apd-summary');
+    expect(nextLink.label).toBe('Program Summary');
+    expect(hideNextLink).toBe(false);
+  });
+
+  it('returns next and previous links currectly when the selected link is the first nav link', () => {
+    const activeSection = 'apd-state-profile';
+    const {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    } = contextProvider.getPreviousNextLinks(links, activeSection);
+    expect(previousLink.id).toBe('apd-state-profile');
+    expect(previousLink.label).toBe('Key State Personnel');
+    expect(hidePreviousLink).toBe(true);
+    expect(nextLink.id).toBe('apd-summary');
+    expect(nextLink.label).toBe('Program Summary');
+    expect(hideNextLink).toBe(false);
+  });
+
+  it('returns next and previous links currectly when the selected link is the last nav link', () => {
+    const activeSection = 'executive-summary';
+    const {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    } = contextProvider.getPreviousNextLinks(links, activeSection);
+    expect(previousLink.id).toBe('activities');
+    expect(previousLink.label).toBe('Program Activities');
+    expect(hidePreviousLink).toBe(false);
+    expect(nextLink.id).toBe('executive-summary');
+    expect(nextLink.label).toBe('Executive Summary');
+    expect(hideNextLink).toBe(true);
+  });
+
+  it('returns next and previous links currectly when the selected link is a second-level item', () => {
+    const activeSection = 'apd-state-profile-key-personnel';
+    const {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    } = contextProvider.getPreviousNextLinks(links, activeSection);
+    expect(previousLink.id).toBe('apd-state-profile');
+    expect(previousLink.label).toBe('Key State Personnel');
+    expect(hidePreviousLink).toBe(true);
+    expect(nextLink.id).toBe('apd-summary');
+    expect(nextLink.label).toBe('Program Summary');
+    expect(hideNextLink).toBe(false);
+  });
+
+  it('returns next and previous links currectly when the selected link is the top-level activity section', () => {
+    const activeSection = 'activities';
+    const {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    } = contextProvider.getPreviousNextLinks(links, activeSection);
+    expect(previousLink.id).toBe('apd-summary');
+    expect(previousLink.label).toBe('Program Summary');
+    expect(hidePreviousLink).toBe(false);
+    expect(nextLink.id).toBe('executive-summary');
+    expect(nextLink.label).toBe('Executive Summary');
+    expect(hideNextLink).toBe(false);
+  });
+
+  it('returns next and previous links currectly when the selected link is the first activity sub-section', () => {
+    const activeSection = 'activity-aed63d97-overview';
+    const {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    } = contextProvider.getPreviousNextLinks(links, activeSection);
+    expect(previousLink.id).toBe('activities-list');
+    expect(previousLink.label).toBe('Activity List');
+    expect(hidePreviousLink).toBe(false);
+    expect(nextLink.id).toBe('activity-aed63d97-okrs');
+    expect(nextLink.label).toBe('Activity 1: Objectives and key results');
+    expect(hideNextLink).toBe(false);
+  });
+
+  it('returns next and previous links currectly when the selected link is the last activity sub-section in an activity', () => {
+    const activeSection = 'activity-aed63d97-ffp';
+    const {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    } = contextProvider.getPreviousNextLinks(links, activeSection);
+    expect(previousLink.id).toBe('activity-aed63d97-okrs');
+    expect(previousLink.label).toBe('Activity 1: Objectives and key results');
+    expect(hidePreviousLink).toBe(false);
+    expect(nextLink.id).toBe('activity-wz46yd39');
+    expect(nextLink.label).toBe(
+      'Activity 2: Public Health System Modernization'
     );
-
-    // if we got items for the SecondaryNavTest that proves we successfully executed the getPreviousNextLinks() function
-    const prevDiv = container.find('.prev-id');
-    expect(prevDiv.text()).toEqual('previous-activities');
-    const nextDiv = container.find('.next-id');
-    expect(nextDiv.text()).toEqual('activity-key-1234');
+    expect(hideNextLink).toBe(false);
   });
 
-  it('creates SecondaryNav currectly when the selected link is a subsequent activity', () => {
-    props.activeSection = 'activity-key-5678';
-    
-    const container = mount(
-      <LinksContextProvider>
-        <SecondaryNavTest {...props} />
-      </LinksContextProvider>
-    );
-
-    const prevDiv = container.find('.prev-id');
-    expect(prevDiv.text()).toEqual('previous-activities');
-    const nextDiv = container.find('.next-id');
-    expect(nextDiv.text()).toEqual('activity-key-9012');
+  it('returns next and previous links currectly when the selected link is the last activity sub-section', () => {
+    const activeSection = 'activity-wz46yd39-ffp';
+    const {
+      previousLink,
+      hidePreviousLink,
+      nextLink,
+      hideNextLink
+    } = contextProvider.getPreviousNextLinks(links, activeSection);
+    expect(previousLink.id).toBe('activity-wz46yd39-okrs');
+    expect(previousLink.label).toBe('Activity 2: Objectives and key results');
+    expect(hidePreviousLink).toBe(false);
+    expect(nextLink.id).toBe('executive-summary');
+    expect(nextLink.label).toBe('Executive Summary');
+    expect(hideNextLink).toBe(false);
   });
-
-  it('creates SecondaryNav currectly when the selected link is an activity sub-section', () => {
-    props.activeSection = 'activity-key-5678-okrs';
-    
-    const container = mount(
-      <LinksContextProvider>
-        <SecondaryNavTest {...props} />
-      </LinksContextProvider>
-    );
-
-    const prevDiv = container.find('.prev-id');
-    expect(prevDiv.text()).toEqual('activity-key-5678-overview');
-    const nextDiv = container.find('.next-id');
-    expect(nextDiv.text()).toEqual('activity-key-5678-state-costs');
-  });
-
-  it('creates SecondaryNav currectly when the selected link is the last sub-item', () => {
-    props.activeSection = 'activity-key-5678-ffp';
-    
-    const container = mount(
-      <LinksContextProvider>
-        <SecondaryNavTest {...props} />
-      </LinksContextProvider>
-    );
-
-    const prevDiv = container.find('.prev-id');
-    expect(prevDiv.text()).toEqual('activity-key-5678-cost-allocation');
-    const nextDiv = container.find('.next-id');
-    expect(nextDiv.text()).toEqual('activity-key-9012');
-  });
-
-  it('creates SecondaryNav currectly when the selected link is the last sub-item of the last activity', () => {
-    props.activeSection = 'activity-key-9012-ffp';
-    
-    const container = mount(
-      <LinksContextProvider>
-        <SecondaryNavTest {...props} />
-      </LinksContextProvider>
-    );
-
-    const prevDiv = container.find('.prev-id');
-    expect(prevDiv.text()).toEqual('activity-key-9012-cost-allocation');
-    const nextDiv = container.find('.next-id');
-    expect(nextDiv.text()).toEqual('schedule-summary');
-  });
-  
 });

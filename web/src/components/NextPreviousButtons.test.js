@@ -26,128 +26,82 @@ const e = {
 };
 
 global.scrollTo = jest.fn();
-const pageNav = jest.fn();
 
-const links = [
-  {
-    id: 'apd-state-profile',
-    label: t('apd.stateProfile.title'),
-    onClick: pageNav('apd-state-profile-office', 'state-profile'),
-  },
-  {
-    id: 'apd-summary',
-    label: t('apd.title'),
-    onClick: pageNav('apd-summary', 'program-summary')
-  },
-  {
-    id: 'previous-activities',
-    label: t('previousActivities.title'),
-    onClick: pageNav('prev-activities-outline', 'previous-activities'),
-  }
-];
-
-const testContext = { 
-  getLinks: jest.fn().mockReturnValue(links),
-  getPreviousNextLinks: jest.fn().mockReturnValue([
-    links[0],
-    true,
-    links[2],
-    true
-  ])
-};
-
-const deepTestContext = { 
-  getLinks: (pageNav) => ([   // eslint-disable-line no-shadow
+const context = {
+  getLinks: pageNavParam => [
     {
       id: 'apd-state-profile',
       label: t('apd.stateProfile.title'),
-      onClick: pageNav('apd-state-profile-office', 'state-profile'),
+      onClick: pageNavParam('apd-state-profile-office', 'state-profile')
     },
     {
       id: 'apd-summary',
       label: t('apd.title'),
-      onClick: pageNav('apd-summary', 'program-summary')
+      onClick: pageNavParam('apd-summary', 'program-summary')
     },
     {
       id: 'previous-activities',
       label: t('previousActivities.title'),
-      onClick: pageNav('prev-activities-outline', 'previous-activities'),
+      onClick: pageNavParam('prev-activities-outline', 'previous-activities')
     }
-  ]),
-  getPreviousNextLinks: (links) => ([   // eslint-disable-line no-shadow
-    links[0],
-    true,
-    links[2],
-    true
-  ])
+  ],
+  getPreviousNextLinks: linksParam => ({
+    previousLink: linksParam[0],
+    hidePreviousLink: true,
+    nextLink: linksParam[2],
+    hideNextLink: true
+  })
 };
 
-const deepTestProps = {
+const props = {
   activities: [
     { anchor: '#key1', key: 'key 1234' },
     { anchor: '#key2', key: 'key 4321' }
   ],
   activeSection: 'some section',
   jumpTo: jest.fn(),
-  context: deepTestContext
+  context
 };
 
 describe('NextPreviousButtons component', () => {
-
   test('renders correctly', () => {
-    const props = {
-      activities: [
-        { anchor: '#key1', key: 'key 1234' },
-        { anchor: '#key2', key: 'key 4321' }
-      ],
-      activeSection: 'some section',
-      jumpTo: jest.fn(),
-      place: { id: 'place id', name: 'place name' },
-      context: testContext
-    };
-  
     const component = shallow(<NextPreviousButtons {...props} />);
-
     expect(component).toMatchSnapshot();
-    expect(props.context.getLinks).toHaveBeenCalled();
-    expect(props.context.getPreviousNextLinks).toHaveBeenCalled();
   });
 
   it('handles previous button clicks', () => {
-    const component = mount(<NextPreviousButtons {...deepTestProps} />);
+    const component = mount(<NextPreviousButtons {...props} />);
 
-    component.find('Button')
+    component
+      .find('Button')
       .at(0)
-      .simulate("click", e);
-
-    expect(pageNav).toHaveBeenCalledWith('apd-state-profile-office', 'state-profile');
+      .simulate('click', e);
 
     expect(e.stopPropagation).toHaveBeenCalled();
     expect(e.preventDefault).toHaveBeenCalled();
 
     // updates nav state, navigates, and scrolls up
-    expect(deepTestProps.jumpTo).toHaveBeenCalledWith('apd-state-profile-office');
+    expect(props.jumpTo).toHaveBeenCalledWith('apd-state-profile-office');
     expect(mockPush).toHaveBeenCalledWith('/apd/state-profile');
     expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
   it('handles continue button clicks', () => {
-    const component = mount(<NextPreviousButtons {...deepTestProps} />);
+    const component = mount(<NextPreviousButtons {...props} />);
 
-    component.find('Button')
+    component
+      .find('Button')
       .at(1)
-      .simulate("click", e);
+      .simulate('click', e);
 
-      expect(pageNav).toHaveBeenCalledWith('apd-summary', 'program-summary');
+    expect(e.stopPropagation).toHaveBeenCalled();
+    expect(e.preventDefault).toHaveBeenCalled();
 
-      expect(e.stopPropagation).toHaveBeenCalled();
-      expect(e.preventDefault).toHaveBeenCalled();
-  
-      // updates nav state, navigates, and scrolls up
-      expect(deepTestProps.jumpTo).toHaveBeenCalledWith('apd-state-profile-office');
-      expect(mockPush).toHaveBeenCalledWith('/apd/state-profile');
-      expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
-    });
+    // updates nav state, navigates, and scrolls up
+    expect(props.jumpTo).toHaveBeenCalledWith('apd-state-profile-office');
+    expect(mockPush).toHaveBeenCalledWith('/apd/state-profile');
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+  });
 
   it('maps state to props', () => {
     const state = {
