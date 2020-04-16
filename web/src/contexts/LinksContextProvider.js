@@ -73,12 +73,10 @@ class LinksContextProvider extends Component {
     // go through every top-level link
     const linkCount = links.length;
     for (let topLevelIndex = 0; topLevelIndex < linkCount; topLevelIndex += 1) {
+      const topItem = links[topLevelIndex];
       // check for items
-      if (
-        Array.isArray(links[topLevelIndex].items) &&
-        links[topLevelIndex].items != null
-      ) {
-        const itemCount = links[topLevelIndex].items.length;
+      if (Array.isArray(topItem.items) && topItem.items != null) {
+        const itemCount = topItem.items.length;
         // go through every item link
         for (
           let itemLevelIndex = 0;
@@ -87,11 +85,10 @@ class LinksContextProvider extends Component {
         ) {
           // check for sub-items
           if (
-            Array.isArray(links[topLevelIndex].items[itemLevelIndex].items) &&
-            links[topLevelIndex].items[itemLevelIndex].items != null
+            Array.isArray(topItem.items[itemLevelIndex].items) &&
+            topItem.items[itemLevelIndex].items != null
           ) {
-            const subItemCount =
-              links[topLevelIndex].items[itemLevelIndex].items.length;
+            const subItemCount = topItem.items[itemLevelIndex].items.length;
             // go through every sub-item
             for (
               let subItemIndex = 0;
@@ -100,8 +97,8 @@ class LinksContextProvider extends Component {
             ) {
               // check for a match at the sub-item level
               if (
-                links[topLevelIndex].items[itemLevelIndex].items[subItemIndex]
-                  .id === activeId
+                topItem.items[itemLevelIndex].items[subItemIndex].id ===
+                activeId
               ) {
                 return {
                   currentIndex: topLevelIndex,
@@ -202,7 +199,7 @@ class LinksContextProvider extends Component {
 
   prependActivityLabel = (link, activity) => {
     const newLabel = `Activity ${activity}: ${link.label}`;
-    return { id: link.id, label: newLabel, onClick: link.onClick };
+    return { ...link, label: newLabel };
   };
 
   getTheLinks = (pageNav, anchorNav, activeSection, activities) => {
