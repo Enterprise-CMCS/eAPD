@@ -1,6 +1,5 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import { t } from '../i18n';
 
 import {
   plain as NextPreviousButtons,
@@ -27,29 +26,30 @@ const e = {
 
 global.scrollTo = jest.fn();
 
+// note: in order to test the NextPreviousButtons.PageNav funtion, it needs to be passed in to the context rather than being mocked
 const context = {
   getLinks: pageNavParam => [
     {
       id: 'apd-state-profile',
-      label: t('apd.stateProfile.title'),
+      label: 'apd.stateProfile.title',
       onClick: pageNavParam('apd-state-profile-office', 'state-profile')
     },
     {
       id: 'apd-summary',
-      label: t('apd.title'),
+      label: 'apd.title',
       onClick: pageNavParam('apd-summary', 'program-summary')
     },
     {
       id: 'previous-activities',
-      label: t('previousActivities.title'),
+      label: 'previousActivities.title',
       onClick: pageNavParam('prev-activities-outline', 'previous-activities')
     }
   ],
   getPreviousNextLinks: linksParam => ({
     previousLink: linksParam[0],
-    hidePreviousLink: true,
+    hidePreviousLink: false,
     nextLink: linksParam[2],
-    hideNextLink: true
+    hideNextLink: false
   })
 };
 
@@ -64,7 +64,40 @@ const props = {
 };
 
 describe('NextPreviousButtons component', () => {
-  test('renders correctly', () => {
+  test('renders correctly with both buttons showing', () => {
+    const component = shallow(<NextPreviousButtons {...props} />);
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly with previous button hidden', () => {
+    props.context.getPreviousNextLinks = linksParam => ({
+      previousLink: linksParam[0],
+      hidePreviousLink: true,
+      nextLink: linksParam[2],
+      hideNextLink: false
+    });
+    const component = shallow(<NextPreviousButtons {...props} />);
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly with next button hidden', () => {
+    props.context.getPreviousNextLinks = linksParam => ({
+      previousLink: linksParam[0],
+      hidePreviousLink: false,
+      nextLink: linksParam[2],
+      hideNextLink: true
+    });
+    const component = shallow(<NextPreviousButtons {...props} />);
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly with both buttons hidden', () => {
+    props.context.getPreviousNextLinks = linksParam => ({
+      previousLink: linksParam[0],
+      hidePreviousLink: true,
+      nextLink: linksParam[2],
+      hideNextLink: true
+    });
     const component = shallow(<NextPreviousButtons {...props} />);
     expect(component).toMatchSnapshot();
   });
