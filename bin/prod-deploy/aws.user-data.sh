@@ -37,7 +37,7 @@ npm i -g pm2
 
 # Get the built API code
 cd /app
-curl -o -L backend.zip __BUILDURL__
+curl -o backend.zip -L __BUILDURL__
 unzip backend.zip
 rm backend.zip
 cd api
