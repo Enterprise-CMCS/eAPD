@@ -97,13 +97,13 @@ describe('LinksContextProvider', () => {
 
   it('returns a list of links', () => {
     const activeSection = 'apd-state-profile';
-    const testLinks = contextProvider.getTheLinks(
+    const nextPrevLinks = contextProvider.getTheLinks(
       pageNavMock,
       anchorNavMock,
       activeSection,
       activities
     );
-    expect(testLinks.length).toMatchSnapshot();
+    expect(nextPrevLinks).toMatchSnapshot();
   });
 
   it('returns next and previous links currectly when the selected link is empty', () => {
