@@ -3,63 +3,83 @@
 exports[`activity router page renders correctly 1`] = `
 <Component>
   <Component
-    path="this is where the page is/overview"
-  >
-    <Connect(ActivityOverview)
-      activityIndex={3}
-    />
-    <Connect(StandardsAndConditions)
-      activityIndex={3}
-    />
-  </Component>
-  <Component
     path="this is where the page is/okrs"
   >
-    <Connect(Objectives)
-      activityIndex={3}
-    />
-    <Connect(Schedule)
-      activityIndex={3}
-    />
-    <Connect(Milestone)
-      activityIndex={3}
-    />
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(Objectives)
+        activityIndex={3}
+      />
+      <Connect(Schedule)
+        activityIndex={3}
+      />
+      <Connect(Milestone)
+        activityIndex={3}
+      />
+    </Section>
   </Component>
   <Component
     path="this is where the page is/state-costs"
   >
-    <Costs
-      activityIndex={3}
-    />
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Costs
+        activityIndex={3}
+      />
+    </Section>
   </Component>
   <Component
     path="this is where the page is/contractor-costs"
   >
-    <Connect(ContractorResources)
-      activityIndex={3}
-    />
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(ContractorResources)
+        activityIndex={3}
+      />
+    </Section>
   </Component>
   <Component
     path="this is where the page is/cost-allocation"
   >
-    <Connect(CostAllocate)
-      activityIndex={3}
-    />
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(CostAllocate)
+        activityIndex={3}
+      />
+    </Section>
   </Component>
   <Component
     path="this is where the page is/ffp"
   >
-    <Connect(CostAllocateFFP)
-      activityIndex={3}
-    />
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(CostAllocateFFP)
+        activityIndex={3}
+      />
+    </Section>
   </Component>
   <Component>
-    <Connect(ActivityOverview)
-      activityIndex={3}
-    />
-    <Connect(StandardsAndConditions)
-      activityIndex={3}
-    />
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(ActivityOverview)
+        activityIndex={3}
+      />
+      <Connect(StandardsAndConditions)
+        activityIndex={3}
+      />
+    </Section>
   </Component>
 </Component>
 `;

@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NextPreviousButtons component renders correctly with both buttons hidden 1`] = `
+<div>
+  <div
+    className="next-prev-button-left hidden-button"
+  >
+    <Button
+      component="button"
+      onClick={[Function]}
+      type="button"
+    >
+      &lt; Previous
+    </Button>
+    <div
+      className="next-prev-section"
+    >
+      apd.stateProfile.title
+    </div>
+  </div>
+  <div
+    className="next-prev-button-right hidden-button"
+  >
+    <div
+      className="next-button"
+    >
+      <Button
+        component="button"
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        Continue &gt;
+      </Button>
+    </div>
+    <div
+      className="next-section next-prev-section"
+    >
+      previousActivities.title
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NextPreviousButtons component renders correctly with both buttons showing 1`] = `
+<div>
+  <div
+    className="next-prev-button-left"
+  >
+    <Button
+      component="button"
+      onClick={[Function]}
+      type="button"
+    >
+      &lt; Previous
+    </Button>
+    <div
+      className="next-prev-section"
+    >
+      apd.stateProfile.title
+    </div>
+  </div>
+  <div
+    className="next-prev-button-right"
+  >
+    <div
+      className="next-button"
+    >
+      <Button
+        component="button"
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        Continue &gt;
+      </Button>
+    </div>
+    <div
+      className="next-section next-prev-section"
+    >
+      previousActivities.title
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NextPreviousButtons component renders correctly with next button hidden 1`] = `
+<div>
+  <div
+    className="next-prev-button-left"
+  >
+    <Button
+      component="button"
+      onClick={[Function]}
+      type="button"
+    >
+      &lt; Previous
+    </Button>
+    <div
+      className="next-prev-section"
+    >
+      apd.stateProfile.title
+    </div>
+  </div>
+  <div
+    className="next-prev-button-right hidden-button"
+  >
+    <div
+      className="next-button"
+    >
+      <Button
+        component="button"
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        Continue &gt;
+      </Button>
+    </div>
+    <div
+      className="next-section next-prev-section"
+    >
+      previousActivities.title
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NextPreviousButtons component renders correctly with previous button hidden 1`] = `
+<div>
+  <div
+    className="next-prev-button-left hidden-button"
+  >
+    <Button
+      component="button"
+      onClick={[Function]}
+      type="button"
+    >
+      &lt; Previous
+    </Button>
+    <div
+      className="next-prev-section"
+    >
+      apd.stateProfile.title
+    </div>
+  </div>
+  <div
+    className="next-prev-button-right"
+  >
+    <div
+      className="next-button"
+    >
+      <Button
+        component="button"
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        Continue &gt;
+      </Button>
+    </div>
+    <div
+      className="next-section next-prev-section"
+    >
+      previousActivities.title
+    </div>
+  </div>
+</div>
+`;
