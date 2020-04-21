@@ -4,7 +4,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import EntryDetails from './EntryDetails';
-import Waypoint from '../ConnectedWaypoint';
 import { addActivity } from '../../actions/editActivity';
 import { Section } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
@@ -17,10 +16,8 @@ const All = ({ add, activities }) => {
       <h3 className="subsection--title ds-h3">
         {activities.length} program activities
       </h3>
-      {activities.map(({ key }, index) => (
-        <Waypoint id={key} key={key}>
-          <EntryDetails activityIndex={index} />
-        </Waypoint>
+      {activities.map((_, index) => (
+        <EntryDetails activityIndex={index} />
       ))}
       <Button className="ds-u-margin-top--4" onClick={onAdd}>
         Add another activity
