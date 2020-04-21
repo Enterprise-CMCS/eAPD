@@ -62,9 +62,6 @@ div.form--with-reviews {
 // styles we should keep.
 
 .form-and-review-list {
-  border-bottom: 2px solid $border-color;
-  padding-bottom: nth($spacers, 3);
-
   > button {
     margin-top: nth($spacers, 3);
   }

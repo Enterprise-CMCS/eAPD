@@ -4,6 +4,8 @@ Anticipated release: April 20, 2020
 
 #### 🚀 New features
 
+- Implement secondary back/next navigation buttons ([#2103])
+
 #### 🐛 Bugs fixed
 
 - fixed Header Alignment Issue ([#2122])
@@ -19,3 +21,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2145]: https://github.com/18F/cms-hitech-apd/issues/2145
 [#2137]: https://github.com/18F/cms-hitech-apd/issues/2137
 [#2122]: https://github.com/18F/cms-hitech-apd/issues/2122
+[#2103]: https://github.com/18F/cms-hitech-apd/issues/2103
