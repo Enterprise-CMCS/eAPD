@@ -8,7 +8,7 @@ const AdminDashboard = () => {
     <Fragment>
       <div className="site-body ds-l-container">
         <div className="ds-l-row">
-          <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-y--6">
+          <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-y--6 admin-top-padding">
             <h1 className="ds-h1">Administrator actions</h1>
             <ul className="ds-c-list--bare ds-l-row">
               <li className="ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0">
