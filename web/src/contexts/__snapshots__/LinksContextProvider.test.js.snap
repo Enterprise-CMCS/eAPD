@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinksContextProvider renders correctly 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "getLinks": [Function],
+      "getPreviousNextLinks": [Function],
+    }
+  }
+/>
+`;
+
+exports[`LinksContextProvider returns a list of links 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "id": "apd-state-profile-office",
+        "label": "State Director and Office Address",
+      },
+      Object {
+        "id": "apd-state-profile-key-personnel",
+        "label": "Key Personnel and Program Management",
+      },
+    ],
+    "id": "apd-state-profile",
+    "items": Array [
+      Object {
+        "id": "apd-state-profile-office",
+        "label": "State Director and Office Address",
+        "onClick": undefined,
+        "url": "#apd-state-profile-office",
+      },
+      Object {
+        "id": "apd-state-profile-key-personnel",
+        "label": "Key Personnel and Program Management",
+        "onClick": undefined,
+        "url": "#apd-state-profile-key-personnel",
+      },
+    ],
+    "label": "Key State Personnel",
+    "onClick": undefined,
+    "url": undefined,
+  },
+  Object {
+    "id": "apd-summary",
+    "label": "Program Summary",
+    "onClick": undefined,
+    "url": "#",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "id": "prev-activities-outline",
+        "label": "Prior Activities Overview",
+      },
+      Object {
+        "id": "prev-activities-table",
+        "label": "Actual Costs",
+      },
+    ],
+    "id": "previous-activities",
+    "label": "Results of Previous Activities",
+    "onClick": undefined,
+    "url": "#",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "id": "activities-list",
+        "label": "Activity List",
+        "onClick": undefined,
+        "url": "activities",
+      },
+    ],
+    "id": "activities",
+    "label": "Program Activities",
+    "onClick": undefined,
+    "url": "#",
+  },
+  Object {
+    "id": "schedule-summary",
+    "label": "Activity Schedule Summary",
+    "onClick": undefined,
+    "url": "#",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "id": "budget-summary-table",
+        "label": "Summary Budget Table",
+      },
+      Object {
+        "id": "budget-federal-by-quarter",
+        "label": "Quarterly Federal Share",
+      },
+      Object {
+        "id": "budget-incentive-by-quarter",
+        "label": "Estimated Quarterly Incentive Payments",
+      },
+    ],
+    "id": "proposed-budget",
+    "label": "Proposed Budget",
+    "onClick": undefined,
+    "url": "#",
+  },
+  Object {
+    "id": "assurances-compliance",
+    "label": "Assurances and Compliance",
+    "onClick": undefined,
+    "url": "#",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "id": "executive-summary-summary",
+        "label": "Activities Summary",
+      },
+      Object {
+        "id": "executive-summary-budget-table",
+        "label": "Program Budget Tables",
+      },
+    ],
+    "id": "executive-summary",
+    "label": "Executive Summary",
+    "onClick": undefined,
+    "url": "#",
+  },
+  Object {
+    "id": "export",
+    "label": "Export and Submit",
+    "onClick": undefined,
+    "url": "#",
+  },
+]
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is a second-level item 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": true,
+  "nextLink": Object {
+    "id": "apd-summary",
+    "label": "Program Summary",
+  },
+  "previousLink": Object {
+    "id": "apd-state-profile",
+    "items": Array [
+      Object {
+        "id": "apd-state-profile-office",
+        "label": "State Director and Office Address",
+      },
+      Object {
+        "id": "apd-state-profile-key-personnel",
+        "label": "Key Personnel and Program Management",
+      },
+    ],
+    "label": "Key State Personnel",
+  },
+}
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is empty 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": true,
+  "nextLink": Object {
+    "id": "apd-summary",
+    "label": "Program Summary",
+  },
+  "previousLink": Object {
+    "id": "apd-state-profile",
+    "items": Array [
+      Object {
+        "id": "apd-state-profile-office",
+        "label": "State Director and Office Address",
+      },
+      Object {
+        "id": "apd-state-profile-key-personnel",
+        "label": "Key Personnel and Program Management",
+      },
+    ],
+    "label": "Key State Personnel",
+  },
+}
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is the first activity sub-section 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": false,
+  "nextLink": Object {
+    "id": "activity-aed63d97-okrs",
+    "label": "Activity 1: Objectives and key results",
+  },
+  "previousLink": Object {
+    "id": "activities-list",
+    "label": "Activity List",
+  },
+}
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is the first nav link 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": true,
+  "nextLink": Object {
+    "id": "apd-summary",
+    "label": "Program Summary",
+  },
+  "previousLink": Object {
+    "id": "apd-state-profile",
+    "items": Array [
+      Object {
+        "id": "apd-state-profile-office",
+        "label": "State Director and Office Address",
+      },
+      Object {
+        "id": "apd-state-profile-key-personnel",
+        "label": "Key Personnel and Program Management",
+      },
+    ],
+    "label": "Key State Personnel",
+  },
+}
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is the last activity sub-section 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": false,
+  "nextLink": Object {
+    "id": "executive-summary",
+    "items": Array [
+      Object {
+        "id": "executive-summary-summary",
+        "label": "Activities Summary",
+      },
+      Object {
+        "id": "executive-summary-budget-table",
+        "label": "Program Budget Tables",
+      },
+    ],
+    "label": "Executive Summary",
+  },
+  "previousLink": Object {
+    "id": "activity-wz46yd39-okrs",
+    "label": "Activity 2: Objectives and key results",
+  },
+}
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is the last activity sub-section in an activity 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": false,
+  "nextLink": Object {
+    "id": "activity-wz46yd39",
+    "items": Array [
+      Object {
+        "id": "activity-wz46yd39-overview",
+        "label": "Activity overview",
+      },
+      Object {
+        "id": "activity-wz46yd39-okrs",
+        "label": "Objectives and key results",
+      },
+      Object {
+        "id": "activity-wz46yd39-ffp",
+        "label": "FFP and budget",
+      },
+    ],
+    "label": "Activity 2: Public Health System Modernization",
+  },
+  "previousLink": Object {
+    "id": "activity-aed63d97-okrs",
+    "label": "Activity 1: Objectives and key results",
+  },
+}
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is the last nav link 1`] = `
+Object {
+  "hideNextLink": true,
+  "hidePreviousLink": false,
+  "nextLink": Object {
+    "id": "executive-summary",
+    "items": Array [
+      Object {
+        "id": "executive-summary-summary",
+        "label": "Activities Summary",
+      },
+      Object {
+        "id": "executive-summary-budget-table",
+        "label": "Program Budget Tables",
+      },
+    ],
+    "label": "Executive Summary",
+  },
+  "previousLink": Object {
+    "id": "activities",
+    "items": Array [
+      Object {
+        "id": "activities-list",
+        "label": "Activity List",
+      },
+      Object {
+        "id": "activity-aed63d97",
+        "items": Array [
+          Object {
+            "id": "activity-aed63d97-overview",
+            "label": "Activity overview",
+          },
+          Object {
+            "id": "activity-aed63d97-okrs",
+            "label": "Objectives and key results",
+          },
+          Object {
+            "id": "activity-aed63d97-ffp",
+            "label": "FFP and budget",
+          },
+        ],
+        "label": "Activity 1: HIE Enhancement and Onboarding",
+      },
+      Object {
+        "id": "activity-wz46yd39",
+        "items": Array [
+          Object {
+            "id": "activity-wz46yd39-overview",
+            "label": "Activity overview",
+          },
+          Object {
+            "id": "activity-wz46yd39-okrs",
+            "label": "Objectives and key results",
+          },
+          Object {
+            "id": "activity-wz46yd39-ffp",
+            "label": "FFP and budget",
+          },
+        ],
+        "label": "Activity 2: Public Health System Modernization",
+      },
+    ],
+    "label": "Program Activities",
+  },
+}
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is the top-level activity section 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": false,
+  "nextLink": Object {
+    "id": "executive-summary",
+    "items": Array [
+      Object {
+        "id": "executive-summary-summary",
+        "label": "Activities Summary",
+      },
+      Object {
+        "id": "executive-summary-budget-table",
+        "label": "Program Budget Tables",
+      },
+    ],
+    "label": "Executive Summary",
+  },
+  "previousLink": Object {
+    "id": "apd-summary",
+    "label": "Program Summary",
+  },
+}
+`;
