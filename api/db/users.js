@@ -33,7 +33,10 @@ const populateUser = async (user, { db = knex } = {}) => {
 
       const authActivityNames = await db('auth_activities')
         // eslint-disable-next-line camelcase
-        .whereIn('id', authActivityIDs.map(({ activity_id }) => activity_id))
+        .whereIn(
+          'id',
+          authActivityIDs.map(({ activity_id }) => activity_id)
+        )
         .select('name');
 
       populatedUser.activities = authActivityNames.map(({ name }) => name);

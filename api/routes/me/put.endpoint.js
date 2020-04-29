@@ -1,17 +1,15 @@
 const hash = require('../../auth/passwordHash');
 const {
+  api,
   getDB,
-  getFullPath,
   login,
-  request,
   unauthenticatedTest
-} = require('../../utils.endpoint');
+} = require('../../endpoint-tests/utils');
 
-const url = getFullPath('/me');
+const url = '/me';
 
 const put = async data => {
-  const cookies = await login();
-  return request.put(url, { jar: cookies, json: data });
+  return login().then(() => api.put(url, data));
 };
 
 describe('/me endpoint | PUT', () => {
@@ -37,18 +35,15 @@ describe('/me endpoint | PUT', () => {
           .where({ id: 2000 })
           .first();
 
-        const {
-          response: { statusCode },
-          body
-        } = await put(data);
+        const response = await put(data);
 
         const afterUser = await db('users')
           .where({ id: 2000 })
           .first();
 
         expect(afterUser).toMatchObject(beforeUser);
-        expect(statusCode).toEqual(400);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
       });
     });
 
@@ -58,10 +53,7 @@ describe('/me endpoint | PUT', () => {
         .where({ id: 2000 })
         .first();
 
-      const {
-        response: { statusCode },
-        body
-      } = await put({ position: 'cook' });
+      const response = await put({ position: 'cook' });
 
       const afterUser = await db('users')
         .where({ id: 2000 })
@@ -71,8 +63,8 @@ describe('/me endpoint | PUT', () => {
         ...beforeUser,
         position: 'cook'
       });
-      expect(statusCode).toEqual(200);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('does not update uneditable fields', async () => {
@@ -94,10 +86,7 @@ describe('/me endpoint | PUT', () => {
         auth_role: 'admin'
       };
 
-      const {
-        response: { statusCode },
-        body
-      } = await put(changes);
+      const response = await put(changes);
 
       const afterUser = await db('users')
         .where({ id: 2000 })
@@ -112,8 +101,8 @@ describe('/me endpoint | PUT', () => {
         phone: '5554567890'
       });
       expect(hash.compareSync(password, afterUser.password)).toBe(true);
-      expect(statusCode).toEqual(200);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
     });
   });
 });

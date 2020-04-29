@@ -1,13 +1,12 @@
 const {
+  api,
   getDB,
-  getFullPath,
   login,
-  request,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../utils.endpoint');
+} = require('../../endpoint-tests/utils');
 
-const url = userID => getFullPath(`/users/${userID}`);
+const url = userID => `/users/${userID}`;
 
 describe('users endpoint | DELETE /users/:userID', () => {
   const db = getDB();
@@ -18,42 +17,34 @@ describe('users endpoint | DELETE /users/:userID', () => {
   unauthorizedTest('delete', url(0));
 
   describe('when authenticated', () => {
-    let cookies;
-    beforeAll(async () => {
-      cookies = await login();
-    });
-    const del = id =>
-      request.delete(url(id), {
-        jar: cookies,
-        json: true
-      });
+    const del = async id => login().then(() => api.delete(url(id)));
 
     it('when sending a non-numeric ID', async () => {
-      const { response, body } = await del('abc');
+      const response = await del('abc');
 
-      expect(response.statusCode).toEqual(400);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(400);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('when deleting a non-existant user ID', async () => {
-      const { response, body } = await del(0);
+      const response = await del(0);
 
-      expect(response.statusCode).toEqual(404);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(404);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('when attempting to delete self', async () => {
-      const { response, body } = await del(2000);
+      const response = await del(2000);
 
-      expect(response.statusCode).toEqual(403);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(403);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('when deleting a valid user ID', async () => {
-      const { response, body } = await del(2001);
+      const response = await del(2001);
 
-      expect(response.statusCode).toEqual(204);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(204);
+      expect(response.data).toMatchSnapshot();
     });
   });
 });

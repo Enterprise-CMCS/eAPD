@@ -1,18 +1,17 @@
 const {
+  api,
   getDB,
-  request,
-  getFullPath,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../utils.endpoint');
+} = require('../../../endpoint-tests/utils');
 
 describe('auth roles endpoint | POST /auth/roles', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
 
-  const url = getFullPath('/auth/roles');
+  const url = '/auth/roles';
 
   unauthenticatedTest('post', url);
   unauthorizedTest('post', url);
@@ -44,30 +43,23 @@ describe('auth roles endpoint | POST /auth/roles', () => {
   ];
 
   describe('when authenticated', () => {
-    let cookies;
-    beforeAll(async () => {
-      cookies = await login();
-    });
-
     invalidCases.forEach(situation => {
       it(situation.name, async () => {
-        const { response, body } = await request.post(url, {
-          jar: cookies,
-          json: situation.body || true
-        });
-        expect(response.statusCode).toEqual(400);
-        expect(body).toMatchSnapshot();
+        const response = await login().then(() =>
+          api.post(url, situation.body)
+        );
+
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
       });
     });
 
     it('with a valid new role', async () => {
-      const { response, body } = await request.post(url, {
-        jar: cookies,
-        json: { name: 'new-role', activities: [1001, 1002] }
-      });
+      const data = { name: 'new-role', activities: [1001, 1002] };
+      const response = await login().then(() => api.post(url, data));
 
-      expect(response.statusCode).toEqual(201);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(201);
+      expect(response.data).toMatchSnapshot();
 
       const role = await db('auth_roles')
         .where({ name: 'new-role' })

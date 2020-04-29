@@ -64,7 +64,7 @@ module.exports.setup = function setup(
         nonce: auth.getNonce(req.body.username)
       });
     }
-    return res.status(400).end();
+    res.status(400).end();
   });
 
   // Add a local authentication endpoint

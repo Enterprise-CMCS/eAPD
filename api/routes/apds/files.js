@@ -1,4 +1,5 @@
 const logger = require('../../logger')('apds file routes');
+const multer = require('multer');
 const { can, userCanAccessAPD, userCanEditAPD } = require('../../middleware');
 const {
   createNewFileForAPD: cf,
@@ -41,10 +42,14 @@ module.exports = (
 
   logger.silly('setting up POST /apds/:id/files route');
 
+  // "Never add multer as a global middleware since a malicious user could
+  // upload files to a route that you didn't anticipate."
+  // -- https://github.com/expressjs/multer#any
   app.post(
     '/apds/:id/files',
     can('view-document'),
     userCanEditAPD(),
+    multer().single('file'),
     async (req, res) => {
       try {
         const metadata = req.body.metadata || null;

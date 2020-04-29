@@ -20,7 +20,7 @@ services:
       - NODE_ENV=test
       - API_PORT=8000
       - API_HOST=api-for-testing
-      - ENDPOINT_COVERAGE_CAPTURE=yes
+      # - ENDPOINT_COVERAGE_CAPTURE=yes # this is causing Network errors/socket hang ups
       - FILE_STORE=local
       - FILE_PATH=test-data/files
       - DISABLE_SECURE_COOKIE=yes
