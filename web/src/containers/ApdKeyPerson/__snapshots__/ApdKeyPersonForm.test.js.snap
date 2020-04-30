@@ -30,13 +30,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     type="text"
     value="The Builder"
   />
-  <PercentField
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercentTime1"
-    onChange={[Function]}
-    size="small"
-    value="32"
-  />
   <fieldset
     className="ds-c-fieldset"
   >
@@ -57,52 +50,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     <ChoiceComponent
       checked={true}
       checkedChildren={
-        <div
-          className="ds-c-choice__checkedChild ds-l-form-row"
-        >
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1992"
-              name="apd-state-profile-costs1-fy1992"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={100}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1993"
-              name="apd-state-profile-costs1-fy1993"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={300}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <FormLabel
-              component="label"
-            >
-              Total
-            </FormLabel>
-            <div
-              className="form--computed-value__input-aligned"
-            >
-              <Dollars
-                long={false}
-              >
-                400
-              </Dollars>
-            </div>
-          </div>
-        </div>
+        <PersonCostForm
+          setCost={[Function]}
+          setFTE={[Function]}
+          years={
+            Object {
+              "1992": Object {
+                "amt": 100,
+                "perc": 0.32,
+              },
+              "1993": Object {
+                "amt": 300,
+                "perc": 0.57,
+              },
+            }
+          }
+        />
       }
       name="apd-state-profile-hascosts-yes1"
       onChange={[Function]}
@@ -145,13 +108,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     type="text"
     value="The Builder"
   />
-  <PercentField
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercentTime1"
-    onChange={[Function]}
-    size="small"
-    value="32"
-  />
   <fieldset
     className="ds-c-fieldset"
   >
@@ -172,52 +128,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     <ChoiceComponent
       checked={false}
       checkedChildren={
-        <div
-          className="ds-c-choice__checkedChild ds-l-form-row"
-        >
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1992"
-              name="apd-state-profile-costs1-fy1992"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={100}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1993"
-              name="apd-state-profile-costs1-fy1993"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={300}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <FormLabel
-              component="label"
-            >
-              Total
-            </FormLabel>
-            <div
-              className="form--computed-value__input-aligned"
-            >
-              <Dollars
-                long={false}
-              >
-                400
-              </Dollars>
-            </div>
-          </div>
-        </div>
+        <PersonCostForm
+          setCost={[Function]}
+          setFTE={[Function]}
+          years={
+            Object {
+              "1992": Object {
+                "amt": 100,
+                "perc": 0.32,
+              },
+              "1993": Object {
+                "amt": 300,
+                "perc": 0.57,
+              },
+            }
+          }
+        />
       }
       name="apd-state-profile-hascosts-yes1"
       onChange={[Function]}

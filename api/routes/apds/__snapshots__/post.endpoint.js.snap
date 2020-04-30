@@ -166,7 +166,10 @@ Object {
       "hasCosts": false,
       "isPrimary": true,
       "name": "",
-      "percentTime": "",
+      "percentTime": Object {
+        "2020": 0,
+        "2021": 0,
+      },
       "position": "",
     },
   ],

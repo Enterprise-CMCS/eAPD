@@ -1695,7 +1695,10 @@ Object {
       "hasCosts": true,
       "isPrimary": true,
       "name": "James Holden",
-      "percentTime": "100",
+      "percentTime": Object {
+        "2019": 1,
+        "2020": 1,
+      },
       "position": "HIT Coordinator",
     },
     Object {
@@ -1704,7 +1707,10 @@ Object {
       "hasCosts": false,
       "isPrimary": false,
       "name": "Fred Johnson",
-      "percentTime": "30",
+      "percentTime": Object {
+        "2019": 0.3,
+        "2020": 0.3,
+      },
       "position": "State Medicaid Director",
     },
   ],

@@ -24,7 +24,10 @@ describe('the ApdKeyPersonForm component', () => {
       hasCosts: true,
       key: 'person key',
       name: 'Bob the Builder',
-      percentTime: '32',
+      percentTime: {
+        '1992': 0.32,
+        '1993': 0.57
+      },
       position: 'The Builder'
     },
 
@@ -65,8 +68,7 @@ describe('the ApdKeyPersonForm component', () => {
     [
       ['apd-state-profile-pocname1', 'name', props.setName],
       ['apd-state-profile-pocemail1', 'email', props.setEmail],
-      ['apd-state-profile-pocposition1', 'role', props.setRole],
-      ['apd-state-profile-pocpercentTime1', 'time', props.setTime]
+      ['apd-state-profile-pocposition1', 'role', props.setRole]
     ].forEach(([formName, property, action]) => {
       it(`handles changing the ${property}`, () => {
         component
@@ -97,6 +99,8 @@ describe('the ApdKeyPersonForm component', () => {
       expect(props.setHasCosts).toHaveBeenCalledWith(1, true);
     });
 
+    /*    
+// this test gets moved to the new PersonCostForm
     it('handles changing cost for FFY', () => {
       const hasCostsForm = shallow(
         component
@@ -113,6 +117,7 @@ describe('the ApdKeyPersonForm component', () => {
 
       expect(props.setCost(1, 1992, 9000));
     });
+*/
   });
 
   it('maps dispatch to props', () => {

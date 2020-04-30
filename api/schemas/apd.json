@@ -461,8 +461,13 @@
           },
           "percentTime": {
             "$id": "#/properties/keyPersonnel/items/properties/percentTime",
-            "type": "string",
-            "pattern": "^1?[0-9]{0,2}$"
+            "type": "object",
+            "patternProperties": {
+              "^[0-9]{0,2}": {
+                "$id": "#/properties/keyPersonnel/items/properties/percentTime/year",
+                "type": "number"
+              }
+            }
           },
           "hasCosts": {
             "$id": "#/properties/keyPersonnel/items/properties/hasCosts",

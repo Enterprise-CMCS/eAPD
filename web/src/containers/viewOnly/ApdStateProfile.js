@@ -5,12 +5,22 @@ import Dollars from '../../components/Dollars';
 
 const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
   const totalCost = person =>
-    Object.values(person.costs).reduce((sum, value) => sum + +value, 0);
+    Object.keys(person.costs).reduce(
+      (sum, year) => sum + person.costs[year] * person.percentTime[year],
+      0
+    );
+  const fteByYear = person =>
+    Object.keys(person.percentTime).map(year => (
+      <li key={year}>
+        <strong>FFY {year} FTE time allocated to project:</strong>{' '}
+        {person.percentTime[year]}
+      </li>
+    ));
   const costByYear = person =>
     Object.keys(person.costs).map(year => (
       <li key={year}>
         <strong>FFY {year} cost:</strong>{' '}
-        <Dollars>{person.costs[year]}</Dollars>
+        <Dollars>{person.costs[year] * person.percentTime[year]}</Dollars>
       </li>
     ));
   const buildPerson = (person, index) => {
@@ -28,10 +38,7 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
             <strong>Email: </strong>
             {person.email}
           </li>
-          <li>
-            <strong>Percent time allocated to project: </strong>
-            {person.percentTime}%
-          </li>
+          <li>{fteByYear(person)}</li>
           <li>
             <strong>Total costs: </strong>
             <Dollars>{person.hasCosts ? totalCost(person) : '0'}</Dollars>

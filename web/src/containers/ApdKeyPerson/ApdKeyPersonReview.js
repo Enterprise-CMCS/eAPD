@@ -12,8 +12,25 @@ const ApdStateKeyPerson = ({
   const primary = index === 0;
 
   const totalCost = useMemo(
-    () => Object.values(costs).reduce((sum, value) => sum + +value, 0),
-    [costs]
+    () =>
+      Object.keys(costs).reduce(
+        (sum, year) => sum + costs[year] * percentTime[year],
+        0
+      ),
+    [costs, percentTime]
+  );
+
+  const fteByYear = useMemo(
+    () =>
+      hasCosts
+        ? Object.keys(percentTime).map(year => (
+            <li key={year}>
+              <strong>FFY {year} FTE commitment to project:</strong>{' '}
+              {percentTime[year]}
+            </li>
+          ))
+        : null,
+    [percentTime]
   );
 
   const costByYear = useMemo(
@@ -21,11 +38,12 @@ const ApdStateKeyPerson = ({
       hasCosts
         ? Object.keys(costs).map(year => (
             <li key={year}>
-              <strong>FFY {year} cost:</strong> <Dollars>{costs[year]}</Dollars>
+              <strong>FFY {year} cost:</strong>{' '}
+              <Dollars>{costs[year] * percentTime[year]}</Dollars>
             </li>
           ))
         : null,
-    [costs]
+    [costs, percentTime]
   );
 
   return (
@@ -33,7 +51,7 @@ const ApdStateKeyPerson = ({
       <div className="visibility--screen">
         <Review
           heading={`${index + 1}. ${name}`}
-          headingLevel={4}
+          headingLevel="4"
           onDeleteClick={onDeleteClick}
           onEditClick={expand}
         >
@@ -44,6 +62,7 @@ const ApdStateKeyPerson = ({
               <strong>Total cost:</strong>{' '}
               <Dollars>{hasCosts ? totalCost : 0}</Dollars>
             </li>
+            {fteByYear}
             {costByYear}
           </ul>
         </Review>
@@ -55,12 +74,10 @@ const ApdStateKeyPerson = ({
             <li>{position}</li>
             <li>{email}</li>
             <li>
-              <strong>Time commitment to project:</strong> {percentTime}%
-            </li>
-            <li>
               <strong>Total cost:</strong>{' '}
               <Dollars>{hasCosts ? totalCost : 0}</Dollars>
             </li>
+            {fteByYear}
             {costByYear}
           </ul>
         </Review>
@@ -77,8 +94,7 @@ ApdStateKeyPerson.propTypes = {
     email: PropTypes.string.isRequired,
     hasCosts: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    percentTime: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-      .isRequired,
+    percentTime: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
   onDeleteClick: PropTypes.func

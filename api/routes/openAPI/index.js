@@ -396,10 +396,13 @@ module.exports = {
               },
               name: { type: 'string', description: `Person's name` },
               percentTime: {
-                type: 'number',
-                description: `Percent of this person's time dedicated to the project, between 0 and 100.`,
-                minimum: 0,
-                maximum: 100
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{0,2}': {
+                    type: 'number',
+                    description: `FTE equivalent of this person's time dedicated to the project`
+                  }
+                }
               },
               position: { type: 'string', description: `Person's position` }
             }
