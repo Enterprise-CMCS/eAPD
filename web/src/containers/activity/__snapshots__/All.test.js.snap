@@ -11,30 +11,15 @@ exports[`the Activities component renders correctly 1`] = `
     3
      program activities
   </h3>
-  <Connect(ConnectedWaypoint)
-    id="key1"
-    key="key1"
-  >
-    <Connect(EntryDetails)
-      activityIndex={0}
-    />
-  </Connect(ConnectedWaypoint)>
-  <Connect(ConnectedWaypoint)
-    id="key2"
-    key="key2"
-  >
-    <Connect(EntryDetails)
-      activityIndex={1}
-    />
-  </Connect(ConnectedWaypoint)>
-  <Connect(ConnectedWaypoint)
-    id="key3"
-    key="key3"
-  >
-    <Connect(EntryDetails)
-      activityIndex={2}
-    />
-  </Connect(ConnectedWaypoint)>
+  <Connect(EntryDetails)
+    activityIndex={0}
+  />
+  <Connect(EntryDetails)
+    activityIndex={1}
+  />
+  <Connect(EntryDetails)
+    activityIndex={2}
+  />
   <Button
     className="ds-u-margin-top--4"
     component="button"
