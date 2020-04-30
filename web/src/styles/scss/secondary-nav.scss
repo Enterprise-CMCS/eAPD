@@ -1,0 +1,36 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.next-prev-buttons {
+  margin: 32px 0px;
+  padding-top: 32px;
+  width: 100%;
+  overflow: hidden;
+  border-top: 2px solid #d6d7d9;
+}
+
+.next-prev-button-left {
+  float: left;
+  overflow: hidden;
+}
+
+.next-prev-button-right {
+  float: right;
+  overflow: hidden;
+}
+
+.next-button {
+  float: right;
+}
+
+.next-section {
+  clear: right;
+  float: right;
+}
+
+.next-prev-section {
+  margin-top: 8px;
+}
+
+.hidden-button {
+  display: none;
+}
