@@ -363,10 +363,12 @@ describe('budget reducer', () => {
           keyPersonnel: [
             {
               costs: { '1931': 150, '1932': 151, '1933': 152 },
+              percentTime: { '1931': 1, '1932': 1, '1933': 1 },
               hasCosts: false
             },
             {
               costs: { '1931': 150, '1932': 1500, '1933': 15000 },
+              percentTime: { '1931': 1, '1932': 1, '1933': 1 },
               hasCosts: true
             }
           ],

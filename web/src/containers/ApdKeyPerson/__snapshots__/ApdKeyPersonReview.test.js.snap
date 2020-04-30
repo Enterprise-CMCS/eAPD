@@ -8,7 +8,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
     <StandardReview
       editHref={null}
       heading="13. Bob the Builder"
-      headingLevel={4}
+      headingLevel="4"
       onDeleteClick={[MockFunction]}
       onEditClick={[MockFunction]}
     >
@@ -26,8 +26,30 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           <Dollars
             long={false}
           >
-            400
+            284
           </Dollars>
+        </li>
+        <li
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             FTE commitment to project:
+          </strong>
+           
+          0.32
+        </li>
+        <li
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             FTE commitment to project:
+          </strong>
+           
+          0.84
         </li>
         <li
           key="1992"
@@ -41,7 +63,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           <Dollars
             long={false}
           >
-            100
+            32
           </Dollars>
         </li>
         <li
@@ -56,7 +78,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           <Dollars
             long={false}
           >
-            300
+            252
           </Dollars>
         </li>
       </ul>
@@ -82,22 +104,36 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
         </li>
         <li>
           <strong>
-            Time commitment to project:
-          </strong>
-           
-          32
-          %
-        </li>
-        <li>
-          <strong>
             Total cost:
           </strong>
            
           <Dollars
             long={false}
           >
-            400
+            284
           </Dollars>
+        </li>
+        <li
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             FTE commitment to project:
+          </strong>
+           
+          0.32
+        </li>
+        <li
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             FTE commitment to project:
+          </strong>
+           
+          0.84
         </li>
         <li
           key="1992"
@@ -111,7 +147,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           <Dollars
             long={false}
           >
-            100
+            32
           </Dollars>
         </li>
         <li
@@ -126,7 +162,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           <Dollars
             long={false}
           >
-            300
+            252
           </Dollars>
         </li>
       </ul>

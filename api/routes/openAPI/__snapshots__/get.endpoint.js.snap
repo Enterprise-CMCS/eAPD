@@ -363,10 +363,13 @@ Object {
                   "type": "string",
                 },
                 "percentTime": Object {
-                  "description": "Percent of this person's time dedicated to the project, between 0 and 100.",
-                  "maximum": 100,
-                  "minimum": 0,
-                  "type": "number",
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{0,2}": Object {
+                      "description": "FTE equivalent of this person's time dedicated to the project",
+                      "type": "number",
+                    },
+                  },
                 },
                 "position": Object {
                   "description": "Person's position",

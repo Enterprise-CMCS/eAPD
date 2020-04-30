@@ -213,7 +213,7 @@ export const getKeyPersonnel = (years = []) => ({
   expanded: true,
   hasCosts: false,
   isPrimary: false,
-  percentTime: '0',
+  percentTime: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
   name: '',
   position: '',
   key: generateKey()

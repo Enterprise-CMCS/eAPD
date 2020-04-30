@@ -1429,7 +1429,10 @@
       "position": "HIT Coordinator",
       "email": "JimPushesButtons@tycho.com",
       "isPrimary": true,
-      "percentTime": "100",
+      "percentTime": {
+        "2019": 1.0,
+        "2020": 1.0
+      },
       "hasCosts": true,
       "costs": {
         "2019": 100000,
@@ -1441,7 +1444,10 @@
       "position": "State Medicaid Director",
       "email": "FJohnson@tycho.com",
       "isPrimary": false,
-      "percentTime": "30",
+      "percentTime": {
+        "2019": 0.3,
+        "2020": 0.3
+      },
       "hasCosts": false,
       "costs": {}
     }

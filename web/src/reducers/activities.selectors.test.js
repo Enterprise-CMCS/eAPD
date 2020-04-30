@@ -142,7 +142,7 @@ describe('activities state selectors', () => {
               costs: { '1990': 100, '1991': 200 },
               hasCosts: true,
               name: 'key person',
-              percentTime: '100'
+              percentTime: { '1990': 1.0, '1991': 1.0 }
             }
           ],
           years: ['1990', '1991']
@@ -206,8 +206,8 @@ describe('activities state selectors', () => {
             {
               description: 'key person (APD Key Personnel)',
               totalCost: 100,
-              unitCost: null,
-              units: '100% time'
+              unitCost: 100,
+              units: '1 FTE'
             }
           ],
           medicaidShare: 0,
@@ -229,8 +229,8 @@ describe('activities state selectors', () => {
             {
               description: 'key person (APD Key Personnel)',
               totalCost: 200,
-              unitCost: null,
-              units: '100% time'
+              unitCost: 200,
+              units: '1 FTE'
             }
           ],
           medicaidShare: 0,

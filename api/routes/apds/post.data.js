@@ -82,7 +82,7 @@ const getNewApd = () => {
         costs: forAllYears(0),
         isPrimary: true,
         name: '',
-        percentTime: '',
+        percentTime: forAllYears(0),
         position: ''
       }
     ],

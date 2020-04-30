@@ -27,7 +27,10 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
         "hasCosts": true,
         "key": "person1",
         "name": "person name",
-        "percentTime": 27,
+        "percentTime": Object {
+          "1": 0.27,
+          "2": 0.27,
+        },
         "position": "unobservable",
       },
       Object {
@@ -39,7 +42,10 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
         "hasCosts": false,
         "key": "person2",
         "name": "",
-        "percentTime": 72,
+        "percentTime": Object {
+          "1": 0.72,
+          "2": 0.72,
+        },
         "position": "",
       },
     ]

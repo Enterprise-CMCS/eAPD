@@ -83,11 +83,28 @@ describe('APD edit actions for APD key personnel', () => {
   });
 
   it('dispatches an action for setting a key person percent time', () => {
-    expect(setKeyPersonPercentTime(7, 'percent time')).toEqual({
+    /*
+    expect(setKeyPersonPercentTime(7, 1967, 3.25)).toEqual({
       type: EDIT_APD,
-      path: '/keyPersonnel/7/percentTime',
-      value: 'percent time'
+      path: '/keyPersonnel/7/percentTime/1967',
+      value: 3.25
     });
+*/
+
+    const store = mockStore('key person state');
+    store.dispatch(setKeyPersonPercentTime(7, 1967, 3.25));
+
+    expect(store.getActions()).toEqual([
+      {
+        type: EDIT_APD,
+        path: '/keyPersonnel/7/percentTime/1967',
+        value: 3.25
+      },
+      {
+        type: UPDATE_BUDGET,
+        state: 'key person state'
+      }
+    ]);
   });
 
   it('dispatches an action for setting whether a key person has costs', () => {
