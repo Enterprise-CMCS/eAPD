@@ -163,13 +163,13 @@ Object {
         "2021": 0,
       },
       "email": "",
-      "hasCosts": false,
-      "isPrimary": true,
-      "name": "",
-      "percentTime": Object {
+      "fte": Object {
         "2020": 0,
         "2021": 0,
       },
+      "hasCosts": false,
+      "isPrimary": true,
+      "name": "",
       "position": "",
     },
   ],

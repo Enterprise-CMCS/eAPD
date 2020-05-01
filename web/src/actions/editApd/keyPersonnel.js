@@ -68,13 +68,13 @@ export const setKeyPersonRole = (index, role) => ({
  * Set a key person's time committment
  * @param {Number} index Index of the key person to update
  * @param {String} year Year the percent applies to, four-digit
- * @param {Number} percent Percent of the key person's time to be dedicated to the APD
+ * @param {Number} fte fraction of the key person's time to be dedicated to the APD
  */
-export const setKeyPersonPercentTime = (index, year, percent) => dispatch => {
+export const setKeyPersonFTE = (index, year, fte) => dispatch => {
   dispatch({
     type: EDIT_APD,
-    path: `/keyPersonnel/${index}/percentTime/${year}`,
-    value: percent
+    path: `/keyPersonnel/${index}/fte/${year}`,
+    value: fte
   });
   dispatch(updateBudget());
 };

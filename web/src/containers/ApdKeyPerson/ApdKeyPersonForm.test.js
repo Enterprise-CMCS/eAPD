@@ -8,7 +8,7 @@ import {
   setKeyPersonEmail,
   setKeyPersonHasCosts,
   setKeyPersonName,
-  setKeyPersonPercentTime,
+  setKeyPersonFTE,
   setKeyPersonRole
 } from '../../actions/editApd';
 
@@ -24,7 +24,7 @@ describe('the ApdKeyPersonForm component', () => {
       hasCosts: true,
       key: 'person key',
       name: 'Bob the Builder',
-      percentTime: {
+      fte: {
         '1992': 0.32,
         '1993': 0.57
       },
@@ -100,7 +100,7 @@ describe('the ApdKeyPersonForm component', () => {
     });
 
     /*    
-// this test gets moved to the new PersonCostForm
+// this test gets moved to the new PersonCostForm  PP TODO
     it('handles changing cost for FFY', () => {
       const hasCostsForm = shallow(
         component
@@ -127,7 +127,7 @@ describe('the ApdKeyPersonForm component', () => {
       setHasCosts: setKeyPersonHasCosts,
       setName: setKeyPersonName,
       setRole: setKeyPersonRole,
-      setTime: setKeyPersonPercentTime
+      setTime: setKeyPersonFTE
     });
   });
 });

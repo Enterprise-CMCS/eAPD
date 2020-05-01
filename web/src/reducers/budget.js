@@ -150,11 +150,11 @@ const buildBudget = incomingBigState => {
       activity.statePersonnel.push(
         ...keyPersonnel
           .filter(kp => kp.hasCosts)
-          .map(({ costs, percentTime }) => ({
+          .map(({ costs, fte }) => ({
             years: Object.keys(costs).reduce(
               (o, ffy) => ({
                 ...o,
-                [ffy]: { amt: costs[ffy], perc: percentTime[ffy] }
+                [ffy]: { amt: costs[ffy], perc: fte[ffy] }
               }),
               {}
             )

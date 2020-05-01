@@ -438,7 +438,7 @@
           "position",
           "email",
           "isPrimary",
-          "percentTime",
+          "fte",
           "hasCosts",
           "costs"
         ],
@@ -459,12 +459,12 @@
             "$id": "#/properties/keyPersonnel/items/properties/isPrimary",
             "type": "boolean"
           },
-          "percentTime": {
-            "$id": "#/properties/keyPersonnel/items/properties/percentTime",
+          "fte": {
+            "$id": "#/properties/keyPersonnel/items/properties/fte",
             "type": "object",
             "patternProperties": {
               "^[0-9]{0,2}": {
-                "$id": "#/properties/keyPersonnel/items/properties/percentTime/year",
+                "$id": "#/properties/keyPersonnel/items/properties/fte/year",
                 "type": "number"
               }
             }
