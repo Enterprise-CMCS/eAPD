@@ -94,7 +94,7 @@ tap.test('APD data initializer', async test => {
         hasCosts: false,
         isPrimary: true,
         name: '',
-        percentTime: { '1997': 0, '1998': 0 },
+        fte: { '1997': 0, '1998': 0 },
         position: ''
       }
     ],

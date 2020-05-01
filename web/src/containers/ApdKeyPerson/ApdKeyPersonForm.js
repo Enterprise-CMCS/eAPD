@@ -12,7 +12,7 @@ import {
   setKeyPersonEmail,
   setKeyPersonHasCosts,
   setKeyPersonName,
-  setKeyPersonPercentTime,
+  setKeyPersonFTE,
   setKeyPersonRole
 } from '../../actions/editApd';
 
@@ -20,7 +20,7 @@ const tRoot = 'apd.stateProfile.keyPersonnel';
 
 const PersonForm = ({
   index,
-  item: { costs, email, hasCosts, name, percentTime, position },
+  item: { costs, email, hasCosts, name, fte, position },
   setCost,
   setEmail,
   setHasCosts,
@@ -94,7 +94,7 @@ const PersonForm = ({
               years={years.reduce((result, year) => {
                 result[year] = {
                   amt: costs[year],
-                  perc: percentTime[year]
+                  perc: fte[year]
                 };
                 return result;
               }, {})}
@@ -116,7 +116,7 @@ PersonForm.propTypes = {
     email: PropTypes.string.isRequired,
     hasCosts: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    percentTime: PropTypes.object.isRequired,
+    fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
   setCost: PropTypes.func.isRequired,
@@ -134,7 +134,7 @@ const mapDispatchToProps = {
   setHasCosts: setKeyPersonHasCosts,
   setName: setKeyPersonName,
   setRole: setKeyPersonRole,
-  setTime: setKeyPersonPercentTime
+  setTime: setKeyPersonFTE
 };
 
 export default connect(null, mapDispatchToProps)(PersonForm);

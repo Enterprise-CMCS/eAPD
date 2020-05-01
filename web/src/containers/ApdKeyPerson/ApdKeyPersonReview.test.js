@@ -16,7 +16,7 @@ describe('the ApdKeyPersonReview component', () => {
       hasCosts: true,
       key: 'person key',
       name: 'Bob the Builder',
-      percentTime: {
+      fte: {
         '1992': 0.32,
         '1993': 0.84
       },

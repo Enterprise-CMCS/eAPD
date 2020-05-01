@@ -1429,7 +1429,7 @@
       "position": "HIT Coordinator",
       "email": "JimPushesButtons@tycho.com",
       "isPrimary": true,
-      "percentTime": {
+      "fte": {
         "2019": 1.0,
         "2020": 1.0
       },
@@ -1444,7 +1444,7 @@
       "position": "State Medicaid Director",
       "email": "FJohnson@tycho.com",
       "isPrimary": false,
-      "percentTime": {
+      "fte": {
         "2019": 0.3,
         "2020": 0.3
       },

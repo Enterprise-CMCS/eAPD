@@ -395,7 +395,7 @@ module.exports = {
                   'Whether the person is the primary point of contact for the APD'
               },
               name: { type: 'string', description: `Person's name` },
-              percentTime: {
+              fte: {
                 type: 'object',
                 'x-patternProperties': {
                   '^[0-9]{0,2}': {

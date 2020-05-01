@@ -142,7 +142,7 @@ describe('activities state selectors', () => {
               costs: { '1990': 100, '1991': 200 },
               hasCosts: true,
               name: 'key person',
-              percentTime: { '1990': 1.0, '1991': 1.0 }
+              fte: { '1990': 1.0, '1991': 1.0 }
             }
           ],
           years: ['1990', '1991']

@@ -33,7 +33,7 @@ keyPersonnel:
       APD, or are directly involved with governance, coordination, stakeholder
       decision-making, oversight, and/or performance of the activities as they affect
       the state’s Medicaid program. 
-      
+
 
       Individuals whose responsibilities
       apply only to specific activities should be listed individually under Program
@@ -51,7 +51,7 @@ keyPersonnel:
     name: Name
     position: Role
     email: Email
-    percentTime: Percent commitment to program
+    fte: Percent commitment to program
     primary: 'This person is the primary APD point of contact:'
     hasCosts: Does this person have costs directly attributable to this program?
     addButton:

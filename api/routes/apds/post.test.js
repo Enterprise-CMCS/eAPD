@@ -150,7 +150,7 @@ tap.test('apds POST endpoint', async endpointTest => {
             hasCosts: false,
             isPrimary: true,
             name: '',
-            percentTime: { '2004': 0, '2005': 0 },
+            fte: { '2004': 0, '2005': 0 },
             position: ''
           }
         ],

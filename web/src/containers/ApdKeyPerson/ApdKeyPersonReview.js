@@ -6,7 +6,7 @@ import Review from '../../components/Review';
 const ApdStateKeyPerson = ({
   expand,
   index,
-  item: { costs, email, hasCosts, name, percentTime, position },
+  item: { costs, email, hasCosts, name, fte, position },
   onDeleteClick
 }) => {
   const primary = index === 0;
@@ -14,23 +14,22 @@ const ApdStateKeyPerson = ({
   const totalCost = useMemo(
     () =>
       Object.keys(costs).reduce(
-        (sum, year) => sum + costs[year] * percentTime[year],
+        (sum, year) => sum + costs[year] * fte[year],
         0
       ),
-    [costs, percentTime]
+    [costs, fte]
   );
 
   const fteByYear = useMemo(
     () =>
       hasCosts
-        ? Object.keys(percentTime).map(year => (
+        ? Object.keys(fte).map(year => (
             <li key={year}>
-              <strong>FFY {year} FTE commitment to project:</strong>{' '}
-              {percentTime[year]}
+              <strong>FFY {year} FTE commitment to project:</strong> {fte[year]}
             </li>
           ))
         : null,
-    [percentTime]
+    [fte]
   );
 
   const costByYear = useMemo(
@@ -39,11 +38,11 @@ const ApdStateKeyPerson = ({
         ? Object.keys(costs).map(year => (
             <li key={year}>
               <strong>FFY {year} cost:</strong>{' '}
-              <Dollars>{costs[year] * percentTime[year]}</Dollars>
+              <Dollars>{costs[year] * fte[year]}</Dollars>
             </li>
           ))
         : null,
-    [costs, percentTime]
+    [costs, fte]
   );
 
   return (
@@ -94,7 +93,7 @@ ApdStateKeyPerson.propTypes = {
     email: PropTypes.string.isRequired,
     hasCosts: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    percentTime: PropTypes.object.isRequired,
+    fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
   onDeleteClick: PropTypes.func
