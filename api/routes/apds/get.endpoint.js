@@ -1,5 +1,6 @@
 const {
   api,
+  authenticate,
   getDB,
   login,
   unauthenticatedTest,
@@ -57,8 +58,11 @@ describe('APD endpoint', () => {
     });
 
     describe('with authenticated as a user with a state', () => {
-      it('when requesting an APD that does not exist', async () => {
-        const response = await login().then(() => api.get(url(0)));
+      let api;
+      beforeAll(async () => api = await authenticate());
+
+      fit('when requesting an APD that does not exist', async () => {
+        const response = await api.get(url(0)).then(res => res);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();

@@ -1,5 +1,6 @@
 const {
   api,
+  authenticate,
   getDB,
   login,
   unauthenticatedTest,
@@ -19,32 +20,36 @@ describe('APD endpoint', () => {
 
     describe('when authenticated as a user with permission', () => {
       it('with a non-existant apd ID', async () => {
-        const response = await login().then(() => api.delete(url(9000)));
+        const response = await authenticate()
+          .then(api => api.delete(url(9000)))
+          .then(response => response);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const response = await login().then(() => api.delete(url(4001)));
+        const response = await authenticate()
+          .then(api => api.delete(url(4001)))
+          .then(response => response);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with an APD that is not in draft', async () => {
-        const response = await login().then(() => api.delete(url(4002)));
+        const response = await authenticate()
+          .then(api => api.delete(url(4002)))
+          .then(response => response);
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with a valid update', async () => {
-        const response = await login().then(() =>
-          api.delete(url(4000), {
-            programOverview: 'new overview'
-          })
-        );
+        const response = await authenticate()
+          .then(api => api.delete(url(4000), { programOverview: 'new overview' }))
+          .then(response => response);
 
         expect(response.status).toEqual(204);
         expect(response.data).toMatchSnapshot();

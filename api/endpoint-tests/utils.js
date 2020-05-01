@@ -33,8 +33,11 @@ const login = (
     });
 };
 
-const authenticate = () => {
-  return login()
+const authenticate = (
+  username = 'all-permissions-and-state',
+  password = 'password'
+) => {
+  return login(username, password)
     .then(res => {
       const options = {
         ...axiosDefaults,
@@ -43,7 +46,7 @@ const authenticate = () => {
         }
       }
       return axios.create(options);
-    })
+    });
 }
 
 const unauthenticatedTest = (method, url) =>
@@ -56,8 +59,8 @@ const unauthenticatedTest = (method, url) =>
 const unauthorizedTest = (method, url) => {
   it('when unauthorized', async () => {
     // this user has no permissions
-    const response = await login('no-permissions', 'password')
-      .then(() => api[method](url));
+    const response = await authenticate('no-permissions', 'password')
+      .then(api => api[method](url));
 
     expect(response.status).toEqual(401);
     expect(response.data).toBeFalsy();
