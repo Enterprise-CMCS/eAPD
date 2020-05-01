@@ -17,7 +17,8 @@
   position: sticky;
   top: 60px;
   bottom: 260px;
-  max-height: 100vh;
+  padding-right: 10px;
+  max-height: calc(100vh - 60px);
   overflow-y: auto;
   float: left;
   + .site-main {
