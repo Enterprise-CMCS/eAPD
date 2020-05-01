@@ -21,13 +21,16 @@ const jwtMiddleware = async (req, res, next) => {
     await deserializeUser(payload.sub, (err, user) => {
       if (err) {
         logger.error(err);
-        res.status(400).send(err).end();
+        res
+          .status(400)
+          .send(err)
+          .end();
       }
       if (user) req.user = user;
     });
   }
 
   next();
-}
+};
 
 module.exports = jwtMiddleware;

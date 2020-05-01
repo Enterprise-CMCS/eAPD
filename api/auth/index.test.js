@@ -10,9 +10,7 @@ tap.test('authentication setup', async authTest => {
   const app = {
     use: sandbox.spy(),
     get: sandbox.spy(),
-    post: sandbox.spy(),
-    put: sandbox.spy(),
-    del: sandbox.spy()
+    post: sandbox.spy()
   };
 
   const auth = {
@@ -20,18 +18,15 @@ tap.test('authentication setup', async authTest => {
   };
 
   const passport = {
-    use: sandbox.spy(),
-    serializeUser: sandbox.spy(),
     deserializeUser: sandbox.spy(),
     initialize: sandbox.stub().returns('passport-initialize'),
-    session: sandbox.stub().returns('passport-session'),
-    authenticate: sandbox.stub().returns('passport-authenticate')
+    use: sandbox.spy()
   };
 
+  const deserializeUser = sandbox.stub();
+  const serializeUser = sandbox.stub();
   const removeSession = sandbox.spy();
-
-  const session = sandbox.stub();
-  session.destroy = sandbox.stub();
+  const signToken = sandbox.stub();
 
   const strategies = ['strategy1', 'strategy2'];
 
@@ -49,31 +44,19 @@ tap.test('authentication setup', async authTest => {
   });
 
   authTest.test('setup calls everything we expect it to', async setupTest => {
-    authSetup(app, { passport, strategies, session });
+    authSetup(app, { passport, strategies });
 
-    setupTest.equal(
-      app.use.callCount,
-      3,
-      'three middleware functions added to app'
-    );
-    setupTest.ok(
-      app.use.calledWith(session),
-      'adds session function to middleware'
-    );
+    // middleware
     setupTest.ok(
       app.use.calledWith('passport-initialize'),
       'adds passport initialization to middleware'
     );
     setupTest.ok(
-      app.use.calledWith('passport-session'),
-      'adds passport session to middleware'
+      app.use.calledWith('passport-authenticate'),
+      'adds passport jwt to middleware'
     );
 
-    setupTest.equal(
-      passport.use.callCount,
-      2,
-      'two passport strategies are configured'
-    );
+    // auth strategies
     setupTest.ok(
       passport.use.calledWith('strategy1'),
       'first strategy is registered'
@@ -84,30 +67,12 @@ tap.test('authentication setup', async authTest => {
     );
 
     setupTest.ok(passport.initialize.calledOnce, 'passport is initialized');
-    setupTest.ok(passport.session.calledOnce, 'passport session is setup');
 
-    setupTest.ok(
-      passport.serializeUser.calledOnce,
-      'user serialization function is set once'
-    );
-    setupTest.ok(
-      passport.deserializeUser.calledOnce,
-      'user deserialization function is set once'
-    );
-
-    setupTest.ok(
-      passport.authenticate.calledOnce,
-      'passport authenticate method is inserted one time'
-    );
     setupTest.ok(
       passport.authenticate.calledWith('local'),
       'passport local authentication method is used'
     );
 
-    setupTest.ok(
-      app.get.calledOnce,
-      'a single GET endpoint is added to the app'
-    );
     setupTest.ok(
       app.get.calledWith,
       '/auth/logout',
@@ -116,89 +81,22 @@ tap.test('authentication setup', async authTest => {
     );
 
     setupTest.ok(
-      app.post.calledTwice,
-      'two POST endpoints are added to the app'
-    );
-    setupTest.ok(
       app.post.calledWith('/auth/login/nonce', sinon.match.func),
       'adds a function handler to POST /auth/login/nonce'
     );
-    setupTest.ok(
-      app.post.calledWith(
-        '/auth/login',
-        'passport-authenticate',
-        sinon.match.func
-      ),
-      'adds a function handler to POST /auth/login using the passport authenticate middleware'
-    );
-
-    setupTest.ok(app.put.notCalled, 'no PUT endpoints are added to the app');
-    setupTest.ok(app.del.notCalled, 'no DELETE endpoints are added to the app');
-  });
-
-  authTest.test('setup works with defaults, too', async setupTest => {
-    authSetup(app);
-
-    setupTest.equal(
-      app.use.callCount,
-      3,
-      'three middleware functions added to app'
-    );
-    setupTest.ok(
-      app.get.calledOnce,
-      'a single GET endpoint is added to the app'
-    );
-    setupTest.ok(
-      app.get.calledWith('/auth/logout', sinon.match.func),
-      'GET logout endpoint is setup'
-    );
-    setupTest.ok(
-      app.post.calledTwice,
-      'two POST endpoints are added to the app'
-    );
-    setupTest.ok(
-      app.post.calledWith('/auth/login/nonce', sinon.match.func),
-      'POST login endpoint is setup'
-    );
-    setupTest.ok(
-      app.post.calledWith('/auth/login', sinon.match.func, sinon.match.func),
-      'POST login endpoint is setup'
-    );
-
-    setupTest.ok(app.put.notCalled, 'no PUT endpoints are added to the app');
-    setupTest.ok(app.del.notCalled, 'no DELETE endpoints are added to the app');
-  });
-
-  authTest.test('GET logout endpoint behaves as expected', async getTest => {
-    authSetup(app, { removeSession, session });
-    const get = app.get.args[0][1];
-
-    const req = {
-      logout: sinon.spy(),
-      session: {
-        passport: {
-          user: 'session id'
-        }
-      }
-    };
-
-    get(req, res);
-
-    getTest.ok(req.logout.calledOnce, 'user is logged out');
-    getTest.ok(
-      removeSession.calledWith('session id'),
-      'session is removed from storage'
-    );
-    getTest.ok(session.destroy.calledOnce, 'session is destroyed');
-    getTest.ok(res.status.calledOnce, 'an HTTP status is set once');
-    getTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
-    getTest.ok(res.send.notCalled, 'HTTP body is not sent');
-    getTest.ok(res.end.calledOnce, 'response is ended one time');
+    // setupTest.ok(
+    //   app.post.calledWith(
+    //     '/auth/login',
+    //     'passport-authenticate',
+    //     sinon.match.func
+    //   ),
+    //   'adds a function handler to POST /auth/login using the passport authenticate middleware'
+    // );
   });
 
   authTest.test('POST nonce endpoint behaves as expected', async nonceTests => {
     nonceTests.test('sends a 400 error if there is no body', async test => {
-      authSetup(app, { auth, passport, session, strategies });
+      authSetup(app, { auth, deserializeUser, removeSession, serializeUser });
       const post = app.post.args.find(a => a[0] === '/auth/login/nonce')[1];
 
       post({}, res);
@@ -212,7 +110,7 @@ tap.test('authentication setup', async authTest => {
     nonceTests.test(
       'sends a 400 error if there is a body but no username',
       async test => {
-        authSetup(app, { auth, passport, session, strategies });
+        authSetup(app, { auth, deserializeUser, removeSession, serializeUser });
         const post = app.post.args.find(a => a[0] === '/auth/login/nonce')[1];
 
         post({ body: {} }, res);
@@ -225,7 +123,7 @@ tap.test('authentication setup', async authTest => {
     );
 
     nonceTests.test('returns a nonce if there is a body', async test => {
-      authSetup(app, { auth, passport, session, strategies });
+      authSetup(app, { auth, deserializeUser, removeSession, serializeUser });
       const post = app.post.args.find(a => a[0] === '/auth/login/nonce')[1];
 
       post({ body: { username: 'user name here' } }, res);
@@ -241,30 +139,56 @@ tap.test('authentication setup', async authTest => {
     });
   });
 
-  authTest.test('POST login endpoint behaves as expected', async test => {
-    authSetup(app);
-    const post = app.post.args.find(a => a[0] === '/auth/login')[2];
-
-    const req = {
-      session: {
-        passport: {
-          user: 'session-id'
-        }
-      },
-      user: {
+  authTest.test(
+    'POST login endpoint behaves as expected',
+    { skip: true },
+    async test => {
+      const user = {
         im: 'weasel',
         ir: 'baboon'
-      }
+      };
+      serializeUser.withArgs(user).returns('unique-session-id');
+      signToken.withArgs({ sub: 'unique-session-id' }).returns('xxx.yyy.zzz');
+      authSetup(app, { auth, serializeUser, signToken });
+      const post = app.post.args.find(a => a[0] === '/auth/login')[2];
+      const req = { user };
+
+      await post(req, res);
+
+      test.ok(
+        res.send.calledWith({ token: 'xxx.yyy.zzz', user }),
+        'HTTP body contains the jwt and user objects'
+      );
+    }
+  );
+
+  // logout without valid token
+  authTest.test('GET /auth/logout, unauthorized request', async t => {
+    authSetup(app, { auth });
+    const get = app.get.args[0][1];
+    const req = { payload: sinon.stub().returns(false) };
+
+    get(req, res);
+
+    t.ok(res.status.calledWith(400), 'sets a 400 HTTP status');
+  });
+
+  // logout with valid token
+  authTest.test('GET /auth/logout, authorized request', async t => {
+    authSetup(app, { auth, removeSession });
+    const get = app.get.args[0][1];
+    const req = {
+      payload: { sub: 'unique-session-id' },
+      logout: sandbox.spy()
     };
 
-    await post(req, res);
+    get(req, res);
 
-    test.ok(
-      res.send.calledWith({
-        im: 'weasel',
-        ir: 'baboon'
-      }),
-      'HTTP body is set to the user ID'
+    t.ok(
+      removeSession.calledWith('unique-session-id'),
+      'user session is removed'
     );
+    t.ok(req.logout.calledOnce, 'user is logged out');
+    t.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
   });
 });
