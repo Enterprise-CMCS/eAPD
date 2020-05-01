@@ -1,5 +1,6 @@
 const {
   api,
+  authenticate,
   getDB,
   login,
   unauthenticatedTest,
@@ -17,7 +18,9 @@ describe('APD endpoint | POST /apds', () => {
   unauthorizedTest('post', url);
 
   it('when authenticated as a user with permission', async () => {
-    const response = await login().then(() => api.post(url));
+    const response = await authenticate()
+      .then(api => api.post(url))
+      .then(response => response);
 
     expect(response.status).toEqual(200);
 

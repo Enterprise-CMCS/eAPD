@@ -3,16 +3,18 @@ const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
 
-const baseURL = () =>
-  `http://${process.env.API_HOST || 'localhost'}:${process.env.API_PORT ||
-    process.env.PORT ||
-    8000}`;
+const baseURL = () => `http://${
+    process.env.API_HOST || 'localhost'
+  }:${
+    process.env.API_PORT || process.env.PORT || 8000
+  }`;
 
-const api = axios.create({
+let axiosDefaults = {
   baseURL: baseURL(),
-  validateStatus: status => status < 500,
-  withCredentials: true
-});
+  validateStatus: status => status < 500
+};
+
+const api = axios.create(axiosDefaults);
 
 const login = (
   username = 'all-permissions-and-state',
@@ -31,6 +33,19 @@ const login = (
     });
 };
 
+const authenticate = () => {
+  return login()
+    .then(res => {
+      const options = {
+        ...axiosDefaults,
+        headers: {
+          'Authorization': `Bearer ${res.data.token}`
+        }
+      }
+      return axios.create(options);
+    })
+}
+
 const unauthenticatedTest = (method, url) =>
   it('when unauthenticated', async () => {
     const response = await api[method](url);
@@ -39,11 +54,10 @@ const unauthenticatedTest = (method, url) =>
   });
 
 const unauthorizedTest = (method, url) => {
-  it('with unauthorized', async () => {
+  it('when unauthorized', async () => {
     // this user has no permissions
-    const response = await login('no-permissions', 'password').then(() =>
-      api[method](url)
-    );
+    const response = await login('no-permissions', 'password')
+      .then(() => api[method](url));
 
     expect(response.status).toEqual(401);
     expect(response.data).toBeFalsy();
@@ -60,6 +74,7 @@ const buildForm = data => {
 
 module.exports = {
   api,
+  authenticate,
   buildForm,
   getDB,
   login,
