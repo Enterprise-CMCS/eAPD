@@ -5,7 +5,7 @@ import DollarField from './DollarField';
 import Dollars from './Dollars';
 import NumberField from './NumberField';
 
-const PersonCostForm = ({ years, setCost, setFTE }) => {
+const PersonCostForm = ({ items, setCost, setFTE }) => {
   const handleCostChange = year => ({ target: { value } }) => {
     setCost(year, value);
   };
@@ -14,7 +14,7 @@ const PersonCostForm = ({ years, setCost, setFTE }) => {
     setFTE(year, value);
   };
 
-  return Object.entries(years).map(([year, { amt, perc }]) => (
+  return Object.entries(items).map(([year, { amt, perc }]) => (
     <Fragment key={year}>
       <h5 className="ds-h5">{year} Costs</h5>
       <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
@@ -43,7 +43,7 @@ const PersonCostForm = ({ years, setCost, setFTE }) => {
 };
 
 PersonCostForm.propTypes = {
-  years: PropTypes.object.isRequired,
+  items: PropTypes.object.isRequired,
   setCost: PropTypes.func.isRequired,
   setFTE: PropTypes.func.isRequired
 };

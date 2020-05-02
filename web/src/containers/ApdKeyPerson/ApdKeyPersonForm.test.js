@@ -98,26 +98,6 @@ describe('the ApdKeyPersonForm component', () => {
 
       expect(props.setHasCosts).toHaveBeenCalledWith(1, true);
     });
-
-    /*    
-// this test gets moved to the new PersonCostForm  PP TODO
-    it('handles changing cost for FFY', () => {
-      const hasCostsForm = shallow(
-        component
-          .findWhere(
-            c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes'
-          )
-          .prop('checkedChildren')
-      );
-
-      hasCostsForm
-        .find('DollarField')
-        .first()
-        .simulate('change', { target: { value: 9000 } });
-
-      expect(props.setCost(1, 1992, 9000));
-    });
-*/
   });
 
   it('maps dispatch to props', () => {

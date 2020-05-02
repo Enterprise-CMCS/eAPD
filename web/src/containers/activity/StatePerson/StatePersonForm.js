@@ -64,7 +64,7 @@ const StatePersonForm = ({
         onChange={editDesc}
       />
       <PersonCostForm
-        years={years}
+        items={years}
         setCost={editCostForYear}
         setFTE={editFTEForYear}
       />

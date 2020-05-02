@@ -1,0 +1,319 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PersonCostForm component renders correctly 1`] = `
+<PersonCostForm
+  items={
+    Object {
+      "1972": Object {
+        "amt": 100000,
+        "perc": 1,
+      },
+      "1973": Object {
+        "amt": 120000,
+        "perc": 0.75,
+      },
+    }
+  }
+  setCost={[MockFunction]}
+  setFTE={[MockFunction]}
+>
+  <h5
+    className="ds-h5"
+  >
+    1972
+     Costs
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DollarField
+      label="Costs with benefits"
+      name="cost"
+      onBlur={null}
+      onChange={[Function]}
+      size="medium"
+      value={100000}
+    >
+      <NumberField
+        fieldRef={null}
+        label="Costs with benefits"
+        mask="currency"
+        name="cost"
+        onBlur={[Function]}
+        onChange={[Function]}
+        size="medium"
+        value="100,000"
+      >
+        <TextField
+          inputRef={[Function]}
+          label="Costs with benefits"
+          mask="currency"
+          name="cost"
+          onBlur={[Function]}
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value="100,000"
+        >
+          <div
+            className="ds-u-clearfix"
+          >
+            <FormLabel
+              component="label"
+              fieldId="textfield_1"
+              id="textfield_label_2"
+            >
+              <label
+                className="ds-c-label"
+                htmlFor="textfield_1"
+                id="textfield_label_2"
+              >
+                <span
+                  className=""
+                >
+                  Costs with benefits
+                </span>
+              </label>
+            </FormLabel>
+            <Mask
+              mask="currency"
+            >
+              <div
+                className="ds-c-field-mask ds-c-field-mask--currency"
+              >
+                <div
+                  className="ds-c-field__before ds-c-field__before--currency"
+                >
+                  $
+                </div>
+                <input
+                  aria-label="Costs with benefits. Enter amount in dollars."
+                  className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                  id="textfield_1"
+                  inputMode="numeric"
+                  name="cost"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  pattern="[0-9.-]*"
+                  type="text"
+                  value="100,000"
+                />
+              </div>
+            </Mask>
+          </div>
+        </TextField>
+      </NumberField>
+    </DollarField>
+    <NumberField
+      fieldRef={null}
+      label="Number of FTEs"
+      name="ftes"
+      onChange={[Function]}
+      size="medium"
+      type="number"
+      value={1}
+    >
+      <TextField
+        inputRef={[Function]}
+        label="Number of FTEs"
+        name="ftes"
+        onChange={[Function]}
+        size="medium"
+        type="number"
+        value={1}
+      >
+        <div
+          className="ds-u-clearfix"
+        >
+          <FormLabel
+            component="label"
+            fieldId="textfield_3"
+            id="textfield_label_4"
+          >
+            <label
+              className="ds-c-label"
+              htmlFor="textfield_3"
+              id="textfield_label_4"
+            >
+              <span
+                className=""
+              >
+                Number of FTEs
+              </span>
+            </label>
+          </FormLabel>
+          <input
+            className="ds-c-field ds-c-field--medium"
+            id="textfield_3"
+            name="ftes"
+            onChange={[Function]}
+            type="number"
+            value={1}
+          />
+        </div>
+      </TextField>
+    </NumberField>
+    <p>
+      <strong>
+        Total: 
+      </strong>
+      <Dollars
+        long={true}
+      >
+        <span>
+          $100,000
+        </span>
+      </Dollars>
+    </p>
+  </div>
+  <h5
+    className="ds-h5"
+  >
+    1973
+     Costs
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DollarField
+      label="Costs with benefits"
+      name="cost"
+      onBlur={null}
+      onChange={[Function]}
+      size="medium"
+      value={120000}
+    >
+      <NumberField
+        fieldRef={null}
+        label="Costs with benefits"
+        mask="currency"
+        name="cost"
+        onBlur={[Function]}
+        onChange={[Function]}
+        size="medium"
+        value="120,000"
+      >
+        <TextField
+          inputRef={[Function]}
+          label="Costs with benefits"
+          mask="currency"
+          name="cost"
+          onBlur={[Function]}
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value="120,000"
+        >
+          <div
+            className="ds-u-clearfix"
+          >
+            <FormLabel
+              component="label"
+              fieldId="textfield_5"
+              id="textfield_label_6"
+            >
+              <label
+                className="ds-c-label"
+                htmlFor="textfield_5"
+                id="textfield_label_6"
+              >
+                <span
+                  className=""
+                >
+                  Costs with benefits
+                </span>
+              </label>
+            </FormLabel>
+            <Mask
+              mask="currency"
+            >
+              <div
+                className="ds-c-field-mask ds-c-field-mask--currency"
+              >
+                <div
+                  className="ds-c-field__before ds-c-field__before--currency"
+                >
+                  $
+                </div>
+                <input
+                  aria-label="Costs with benefits. Enter amount in dollars."
+                  className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                  id="textfield_5"
+                  inputMode="numeric"
+                  name="cost"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  pattern="[0-9.-]*"
+                  type="text"
+                  value="120,000"
+                />
+              </div>
+            </Mask>
+          </div>
+        </TextField>
+      </NumberField>
+    </DollarField>
+    <NumberField
+      fieldRef={null}
+      label="Number of FTEs"
+      name="ftes"
+      onChange={[Function]}
+      size="medium"
+      type="number"
+      value={0.75}
+    >
+      <TextField
+        inputRef={[Function]}
+        label="Number of FTEs"
+        name="ftes"
+        onChange={[Function]}
+        size="medium"
+        type="number"
+        value={0.75}
+      >
+        <div
+          className="ds-u-clearfix"
+        >
+          <FormLabel
+            component="label"
+            fieldId="textfield_7"
+            id="textfield_label_8"
+          >
+            <label
+              className="ds-c-label"
+              htmlFor="textfield_7"
+              id="textfield_label_8"
+            >
+              <span
+                className=""
+              >
+                Number of FTEs
+              </span>
+            </label>
+          </FormLabel>
+          <input
+            className="ds-c-field ds-c-field--medium"
+            id="textfield_7"
+            name="ftes"
+            onChange={[Function]}
+            type="number"
+            value={0.75}
+          />
+        </div>
+      </TextField>
+    </NumberField>
+    <p>
+      <strong>
+        Total: 
+      </strong>
+      <Dollars
+        long={true}
+      >
+        <span>
+          $90,000
+        </span>
+      </Dollars>
+    </p>
+  </div>
+</PersonCostForm>
+`;
