@@ -1,15 +1,16 @@
 const hash = require('../../auth/passwordHash');
 const {
-  api,
+  authenticate,
   getDB,
-  login,
   unauthenticatedTest
 } = require('../../endpoint-tests/utils');
 
 const url = '/me';
 
-const put = async data => {
-  return login().then(() => api.put(url, data));
+const put = data => {
+  return authenticate()
+    .then(api => api.put(url, data))
+    .then(res => res);
 };
 
 describe('/me endpoint | PUT', () => {
