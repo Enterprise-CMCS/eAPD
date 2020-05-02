@@ -5,7 +5,7 @@ const logger = require('../logger')('auth index');
 const authenticate = require('./authenticate');
 const serialization = require('./serialization');
 const { removeUserSession } = require('./sessionStore');
-const { signWebToken, verifyWebtoken } = require('./jwtUtils');
+const { signWebToken } = require('./jwtUtils');
 const jwtMiddleware = require('./jwtMiddleware');
 
 const passportLocalStrategy = new LocalStrategy(authenticate());
@@ -25,7 +25,6 @@ const setup = (
   app,
   {
     auth = authenticate,
-    deserializeUser = serialization.deserializeUser,
     localStrategy = passportLocalStrategy,
     passport = Passport,
     removeSession = removeUserSession,
@@ -56,11 +55,13 @@ const setup = (
     passport.authenticate('local', { session: false }),
     (req, res) => {
       serializeUser(req.user, (err, sessionId) => {
-        if (err) res.status(400).send(err).end;
+        if (err) {
+          return res.status(400).send(err).end;
+        }
 
         const jwt = signToken({ sub: sessionId });
 
-        res.send({
+        return res.send({
           token: jwt,
           user: req.user
         });

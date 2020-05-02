@@ -16,9 +16,10 @@ describe('users endpoint | DELETE /users/:userID', () => {
   unauthorizedTest('delete', url(0));
 
   describe('when authenticated', () => {
-    const del = id => authenticate()
-      .then(api => api.delete(url(id)))
-      .then(res => res);
+    const del = id =>
+      authenticate()
+        .then(api => api.delete(url(id)))
+        .then(res => res);
 
     it('when sending a non-numeric ID', async () => {
       const response = await del('abc');

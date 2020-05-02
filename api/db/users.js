@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 const defaultZxcvbn = require('zxcvbn');
 const logger = require('../logger')('user db');
 const defaultHash = require('../auth/passwordHash');
@@ -32,7 +34,6 @@ const populateUser = async (user, { db = knex } = {}) => {
         : [];
 
       const authActivityNames = await db('auth_activities')
-        // eslint-disable-next-line camelcase
         .whereIn(
           'id',
           authActivityIDs.map(({ activity_id }) => activity_id)
@@ -109,11 +110,9 @@ const getUserByID = async (
 };
 
 const validateUser = async (
-  // eslint-disable-next-line camelcase
   { id, email, password, auth_role, phone, state_id },
   { db = knex, getUser = getUserByEmail, zxcvbn = defaultZxcvbn } = {}
 ) => {
-  /* eslint-disable camelcase */
   if (email) {
     logger.silly('checking email');
 

@@ -21,10 +21,14 @@ describe('APD files endpoints', () => {
 
     describe('when authenticated as a user with permission', () => {
       let api;
-      beforeAll(async () => api = await authenticate());
+
+      beforeAll(async () => {
+        api = await authenticate();
+      });
 
       it('with a non-existant apd ID', async () => {
-        const response = await api.get(url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
+        const response = await api
+          .get(url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
           .then(res => res);
 
         expect(response.status).toEqual(404);
@@ -32,7 +36,8 @@ describe('APD files endpoints', () => {
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const response = await api.get(url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
+        const response = await api
+          .get(url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
           .then(res => res);
 
         expect(response.status).toEqual(404);
@@ -40,7 +45,8 @@ describe('APD files endpoints', () => {
       });
 
       it('with an APD that is not associated with the file', async () => {
-        const response = await api.get(url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
+        const response = await api
+          .get(url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
           .then(res => res);
 
         expect(response.status).toEqual(404);
@@ -48,7 +54,8 @@ describe('APD files endpoints', () => {
       });
 
       it('with a valid request', async () => {
-        const response = await api.get(url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
+        const response = await api
+          .get(url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
           .then(res => res);
 
         expect(response.status).toEqual(200);
@@ -70,7 +77,9 @@ describe('APD files endpoints', () => {
 
     describe('when authenticated as a user with permission', () => {
       let api;
-      beforeAll(async () => api = await authenticate());
+      beforeAll(async () => {
+        api = await authenticate();
+      });
 
       it('with a non-existant apd ID', async () => {
         const response = await api.post(url(9000), form).then(res => res);
@@ -97,17 +106,17 @@ describe('APD files endpoints', () => {
         const filePath = `${process.cwd()}/test-data/files/upload.txt`;
         expect(fs.existsSync(filePath)).toBeTruthy();
 
-        const form = new FormData();
-        form.append('file', fs.readFileSync(filePath), 'upload.txt');
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(filePath), 'upload.txt');
         const options = {
           headers: {
-            ...form.getHeaders()
+            ...formData.getHeaders()
           }
         };
 
-        const response = await api.post(url(4000), form.getBuffer(), options)
-          .then(res => res)
-          .catch(e => console.log(e));
+        const response = await api
+          .post(url(4000), formData.getBuffer(), options)
+          .then(res => res);
 
         expect(response.status).toEqual(200);
 

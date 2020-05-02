@@ -11,7 +11,8 @@ describe('login nonce endpoint | /auth/login/nonce', () => {
   });
 
   it('with a username', async () => {
-    const response = await api.post(url, { username: 'test user' })
+    const response = await api
+      .post(url, { username: 'test user' })
       .then(res => res);
     expect(response.status).toEqual(200);
 
@@ -26,8 +27,7 @@ describe('login nonce endpoint | /auth/login/nonce', () => {
 describe('login endpoint | /auth/login', () => {
   const nonceUrl = '/auth/login/nonce';
   const nonceForUsername = async username => {
-    const response = await api.post(nonceUrl, { username })
-      .then(res => res);
+    const response = await api.post(nonceUrl, { username }).then(res => res);
     return response.data.nonce;
   };
 
@@ -73,8 +73,7 @@ describe('login endpoint | /auth/login', () => {
     });
 
     it(`JSON body: ${invalidCase.title}`, async () => {
-      const response = await api.post(url, invalidCase.data)
-        .then(res => res);
+      const response = await api.post(url, invalidCase.data).then(res => res);
       expect(response.status).toEqual(400);
     });
   });
@@ -127,8 +126,7 @@ describe('login endpoint | /auth/login', () => {
     }
   ];
 
-  let cases = [badCredentialsCases[0]];
-  cases.forEach(badCredentialsCase => {
+  badCredentialsCases.forEach(badCredentialsCase => {
     it(`Form body: ${badCredentialsCase.title}`, async () => {
       const data = await badCredentialsCase.data();
       const form = qs.stringify(data);

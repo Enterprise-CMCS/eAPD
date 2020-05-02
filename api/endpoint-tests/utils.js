@@ -3,13 +3,12 @@ const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
 
-const baseURL = () => `http://${
-    process.env.API_HOST || 'localhost'
-  }:${
-    process.env.API_PORT || process.env.PORT || 8000
-  }`;
+const baseURL = () =>
+  `http://${process.env.API_HOST || 'localhost'}:${process.env.API_PORT ||
+    process.env.PORT ||
+    8000}`;
 
-let axiosDefaults = {
+const axiosDefaults = {
   baseURL: baseURL(),
   validateStatus: status => status < 500
 };
@@ -28,26 +27,23 @@ const login = (
       if (res.status !== 200) return new Error('Failed to login', res);
       return res;
     })
-    .catch(error => {
-      console.error(error);
-    });
+    .catch(error => error);
 };
 
 const authenticate = (
   username = 'all-permissions-and-state',
   password = 'password'
 ) => {
-  return login(username, password)
-    .then(res => {
-      const options = {
-        ...axiosDefaults,
-        headers: {
-          'Authorization': `Bearer ${res.data.token}`
-        }
+  return login(username, password).then(res => {
+    const options = {
+      ...axiosDefaults,
+      headers: {
+        Authorization: `Bearer ${res.data.token}`
       }
-      return axios.create(options);
-    });
-}
+    };
+    return axios.create(options);
+  });
+};
 
 const unauthenticatedTest = (method, url) =>
   it('when unauthenticated', async () => {
@@ -59,8 +55,10 @@ const unauthenticatedTest = (method, url) =>
 const unauthorizedTest = (method, url) => {
   it('when unauthorized', async () => {
     // this user has no permissions
-    const response = await authenticate('no-permissions', 'password')
-      .then(api => api[method](url));
+    const response = await authenticate(
+      'no-permissions',
+      'password'
+    ).then(authenticatedClient => authenticatedClient[method](url));
 
     expect(response.status).toEqual(401);
     expect(response.data).toBeFalsy();

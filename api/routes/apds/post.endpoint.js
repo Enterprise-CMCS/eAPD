@@ -18,7 +18,7 @@ describe('APD endpoint | POST /apds', () => {
   it('when authenticated as a user with permission', async () => {
     const response = await authenticate()
       .then(api => api.post(url))
-      .then(response => response);
+      .then(res => res);  // eslint-disable no-return-assign
 
     expect(response.status).toEqual(200);
 

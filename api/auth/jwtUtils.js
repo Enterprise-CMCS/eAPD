@@ -10,7 +10,7 @@ const HS256 = 'HS256';
  * Returns a signed JWT with content as the payload. Inverse function for
  *   verifyWebToken(token).
  * @param {Object} payload - payload of information to be stored within the JWT
- * @returns {string} signed JWT
+ * @returns {String} signed JWT
  */
 const signWebToken = payload => {
   const options = {
@@ -25,19 +25,19 @@ const signWebToken = payload => {
 /**
  * Returns the payload from the signed JWT, or false. Inverse function for
  *   signWebToken(payload).
- * @param {string} token - signed JWT
- * @returns {(Object|boolean)} JWT payload, or false
+ * @param {String} token - signed JWT
+ * @returns {(Object|Boolean)} JWT payload, or false
  */
-const jsonWebTokenOptions = {
-  algorithms: [HS256],
-  issuer: TOKEN_ISSUER
-};
-
 const verifyWebToken = token => {
+  const options = {
+    algorithms: [HS256],
+    issuer: TOKEN_ISSUER
+  };
+
   let payload;
 
   try {
-    payload = jwt.verify(token, SESSION_SECRET, jsonWebTokenOptions);
+    payload = jwt.verify(token, SESSION_SECRET, options);
   } catch (err) {
     logger.error(token, `invalid token: ${err.message}`);
     return false;
@@ -49,13 +49,13 @@ const verifyWebToken = token => {
 /**
  * Extracts the JWT from the Request Authorization Header.
  * @param {Object} req - request
- * @returns {(string|null)} JWT string or null
+ * @returns {(String|null)} JWT string or null
  */
 const jwtExtractor = req => {
-  let jwt = req.get('Authorization');
-  if (!jwt) return null;
-  jwt = jwt.replace('Bearer ', '');
-  return jwt;
+  let token = req.get('Authorization');
+  if (!token) return null;
+  token = token.replace('Bearer ', '');
+  return token;
 };
 
 module.exports = {

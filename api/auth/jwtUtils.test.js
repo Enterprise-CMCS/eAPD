@@ -61,7 +61,11 @@ tap.test('jwtUtils', async t => {
 
   t.test('jwtExtractor()', async t => {
     const { jwtExtractor } = require('./jwtUtils');
-    let request = new Map();
+    let request;
+
+    t.beforeEach(async () => {
+      request = new Map()
+    });
 
     t.test('given a JWT in the request Authorization header', async t => {
       request.set('Authorization', 'Bearer xxx.yyy.zzz');

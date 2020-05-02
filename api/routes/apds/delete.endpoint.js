@@ -46,7 +46,9 @@ describe('APD endpoint', () => {
 
       it('with a valid update', async () => {
         const response = await authenticate()
-          .then(api => api.delete(url(4000), { programOverview: 'new overview' }))
+          .then(api =>
+            api.delete(url(4000), { programOverview: 'new overview' })
+          )
           .then(res => res);
 
         expect(response.status).toEqual(204);

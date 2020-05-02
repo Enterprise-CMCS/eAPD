@@ -63,7 +63,9 @@ describe('APD endpoint', () => {
 
     describe('with authenticated as a user with a state', () => {
       let api;
-      beforeAll(async () => api = await authenticate());
+      beforeAll(async () => {
+        api = await authenticate();
+      });
 
       it('when requesting an APD that does not exist', async () => {
         const response = await api.get(url(0)).then(res => res);

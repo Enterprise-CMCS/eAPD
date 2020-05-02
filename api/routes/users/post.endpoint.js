@@ -61,10 +61,12 @@ describe('users endpoint | POST /users', () => {
 
     it('with existing email address', async () => {
       const response = await authenticate()
-        .then(api => api.post(url, {
-          email: 'all-permissions-and-state',
-          password: 'anything'
-        }))
+        .then(api =>
+          api.post(url, {
+            email: 'all-permissions-and-state',
+            password: 'anything'
+          })
+        )
         .then(res => res);
 
       expect(response.status).toEqual(400);
@@ -75,10 +77,12 @@ describe('users endpoint | POST /users', () => {
 
     it('with existing email address but different capitalization', async () => {
       const response = await authenticate()
-        .then(api => api.post(url, {
-          email: 'All-Permissions-And-State',
-          password: 'anything'
-        }))
+        .then(api =>
+          api.post(url, {
+            email: 'All-Permissions-And-State',
+            password: 'anything'
+          })
+        )
         .then(res => res);
 
       expect(response.status).toEqual(400);
@@ -89,10 +93,12 @@ describe('users endpoint | POST /users', () => {
 
     it('with a weak password', async () => {
       const response = await authenticate()
-        .then(api => api.post(url, {
-          email: 'weakuser@email.com',
-          password: 'Newp@ssw0rd!'
-        }))
+        .then(api =>
+          api.post(url, {
+            email: 'weakuser@email.com',
+            password: 'Newp@ssw0rd!'
+          })
+        )
         .then(res => res);
 
       expect(response.status).toEqual(400);
@@ -103,10 +109,12 @@ describe('users endpoint | POST /users', () => {
 
     it('with a valid new user', async () => {
       const response = await authenticate()
-        .then(api => api.post(url, {
-          email: 'newuser@email.com',
-          password: 'Q%&jsruW$%Jaej'
-        }))
+        .then(api =>
+          api.post(url, {
+            email: 'newuser@email.com',
+            password: 'Q%&jsruW$%Jaej'
+          })
+        )
         .then(res => res);
 
       expect(response.status).toEqual(200);

@@ -7,9 +7,10 @@ const {
 
 const url = '/users';
 
-const get = (id = '') => authenticate()
-  .then(api => api.get(`${url}/${id}`))
-  .then(res => res);
+const get = (id = '') =>
+  authenticate()
+    .then(api => api.get(`${url}/${id}`))
+    .then(res => res);
 
 describe('users endpoint | GET /users', () => {
   const db = getDB();

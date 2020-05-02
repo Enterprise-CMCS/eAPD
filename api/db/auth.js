@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const knex = require('./knex');
 
 const createAuthRole = async (name, activityIDs, { db = knex } = {}) => {
