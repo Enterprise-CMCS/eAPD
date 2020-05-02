@@ -91,13 +91,16 @@ const PersonForm = ({
           onChange={setPersonHasCosts(true)}
           checkedChildren={
             <PersonCostForm
-              years={years.reduce((result, year) => {
-                result[year] = {
-                  amt: costs[year],
-                  perc: fte[year]
-                };
-                return result;
-              }, {})}
+              items={years.reduce(
+                (o, year) => ({
+                  ...o,
+                  [year]: {
+                    amt: costs[year],
+                    perc: fte[year]
+                  }
+                }),
+                {}
+              )}
               setCost={setCostForYear}
               setFTE={setFTEForYear}
             />

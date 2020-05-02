@@ -25,9 +25,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     value="personnel desc"
   />
   <PersonCostForm
-    setCost={[Function]}
-    setFTE={[Function]}
-    years={
+    items={
       Object {
         "7473": Object {
           "amt": 2398235,
@@ -39,6 +37,8 @@ exports[`the StatePersonForm component renders correctly 1`] = `
         },
       }
     }
+    setCost={[Function]}
+    setFTE={[Function]}
   />
 </Fragment>
 `;

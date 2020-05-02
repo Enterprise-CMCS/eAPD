@@ -363,7 +363,7 @@ describe('budget reducer', () => {
           keyPersonnel: [
             {
               costs: { '1931': 150, '1932': 151, '1933': 152 },
-              fte: { '1931': 1, '1932': 1, '1933': 1 },
+              fte: { '1931': 0, '1932': 1, '1933': 1 },
               hasCosts: false
             },
             {

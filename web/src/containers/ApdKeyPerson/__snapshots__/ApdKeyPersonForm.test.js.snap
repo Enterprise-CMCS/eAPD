@@ -51,9 +51,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       checked={true}
       checkedChildren={
         <PersonCostForm
-          setCost={[Function]}
-          setFTE={[Function]}
-          years={
+          items={
             Object {
               "1992": Object {
                 "amt": 100,
@@ -65,6 +63,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               },
             }
           }
+          setCost={[Function]}
+          setFTE={[Function]}
         />
       }
       name="apd-state-profile-hascosts-yes1"
@@ -129,9 +129,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
       checked={false}
       checkedChildren={
         <PersonCostForm
-          setCost={[Function]}
-          setFTE={[Function]}
-          years={
+          items={
             Object {
               "1992": Object {
                 "amt": 100,
@@ -143,6 +141,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               },
             }
           }
+          setCost={[Function]}
+          setFTE={[Function]}
         />
       }
       name="apd-state-profile-hascosts-yes1"
