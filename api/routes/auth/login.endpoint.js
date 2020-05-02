@@ -6,12 +6,13 @@ describe('login nonce endpoint | /auth/login/nonce', () => {
   const url = '/auth/login/nonce';
 
   it('with no username', async () => {
-    const response = await api.post(url);
+    const response = await api.post(url).then(res => res);
     expect(response.status).toEqual(400);
   });
 
   it('with a username', async () => {
-    const response = await api.post(url, { username: 'test user' });
+    const response = await api.post(url, { username: 'test user' })
+      .then(res => res);
     expect(response.status).toEqual(200);
 
     const token = jwt.decode(response.data.nonce);
@@ -25,21 +26,22 @@ describe('login nonce endpoint | /auth/login/nonce', () => {
 describe('login endpoint | /auth/login', () => {
   const nonceUrl = '/auth/login/nonce';
   const nonceForUsername = async username => {
-    const response = await api.post(nonceUrl, { username });
+    const response = await api.post(nonceUrl, { username })
+      .then(res => res);
     return response.data.nonce;
   };
 
   const url = '/auth/login';
 
   it('with no post body at all', async () => {
-    const response = await api.post(url);
+    const response = await api.post(url).then(res => res);
     expect(response.status).toEqual(400);
   });
 
   xit('proper response headers', async () => {
-    // these headers don't matter once we move to token auth
-    const response = await api.post(url);
-
+    // I'm unable to pick up these headers w/ axios
+    const response = await api.post(url).then(res => res);
+    // console.log(response.headers);  // -> { 'cache-control': 'private, no-cache' }
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary
     expect(response.headers.vary).toEqual('Origin');
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials
@@ -66,12 +68,13 @@ describe('login endpoint | /auth/login', () => {
   invalidCases.forEach(invalidCase => {
     it(`Form body: ${invalidCase.title}`, async () => {
       const form = buildForm(invalidCase.data);
-      const response = await api.post(url, form);
+      const response = await api.post(url, form).then(res => res);
       expect(response.status).toEqual(400);
     });
 
     it(`JSON body: ${invalidCase.title}`, async () => {
-      const response = await api.post(url, invalidCase.data);
+      const response = await api.post(url, invalidCase.data)
+        .then(res => res);
       expect(response.status).toEqual(400);
     });
   });
@@ -126,13 +129,13 @@ describe('login endpoint | /auth/login', () => {
 
   let cases = [badCredentialsCases[0]];
   cases.forEach(badCredentialsCase => {
-    fit(`Form body: ${badCredentialsCase.title}`, async () => {
+    it(`Form body: ${badCredentialsCase.title}`, async () => {
       const data = await badCredentialsCase.data();
       const form = qs.stringify(data);
       const config = {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       };
-      const response = await api.post(url, form, config);
+      const response = await api.post(url, form, config).then(res => res);
       expect(response.status).toEqual(401);
     });
 
@@ -142,64 +145,39 @@ describe('login endpoint | /auth/login', () => {
     });
   });
 
-  xit('Form body: with valid username and valid password', async () => {
-    // isolate cookies, so request doesn't reuse them
-    const cookies = api.jar();
-    const { response, body } = await api.post(url, {
-      jar: cookies,
-      form: {
-        username: await nonceForUsername('all-permissions-and-state'),
-        password: 'password'
-      },
-      json: true
-    });
+  it('Form body: with valid username and valid password', async () => {
+    const data = {
+      username: await nonceForUsername('all-permissions-and-state'),
+      password: 'password'
+    };
 
-    expect(response.statusCode).toEqual(200);
-    expect(
-      response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
-      )
-    ).toBeTruthy();
-    expect(body).toMatchSnapshot();
+    const response = await api.post(url, qs.stringify(data)).then(res => res);
+
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot({ token: expect.any(String) });
   });
 
-  xit('JSON body: with valid username and valid password', async () => {
-    // isolate cookies, so request doesn't reuse them
-    const cookies = api.jar();
-    const { response, body } = await api.post(url, {
-      jar: cookies,
-      json: {
-        username: await nonceForUsername('all-permissions-and-state'),
-        password: 'password'
-      }
-    });
+  it('JSON body: with valid username and valid password', async () => {
+    const data = {
+      username: await nonceForUsername('all-permissions-and-state'),
+      password: 'password'
+    };
 
-    expect(response.statusCode).toEqual(200);
-    expect(
-      response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
-      )
-    ).toBeTruthy();
-    expect(body).toMatchSnapshot();
+    const response = await api.post(url, data).then(res => res);
+
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot({ token: expect.any(String) });
   });
 
-  xit('JSON body: with valid (UPPERCASED) username and valid password', async () => {
-    // isolate cookies, so request doesn't reuse them
-    const cookies = api.jar();
-    const { response, body } = await api.post(url, {
-      jar: cookies,
-      json: {
-        username: await nonceForUsername('ALL-PERMISSIONS-AND-STATE'),
-        password: 'password'
-      }
-    });
+  it('JSON body: with valid (UPPERCASED) username and valid password', async () => {
+    const data = {
+      username: await nonceForUsername('ALL-PERMISSIONS-AND-STATE'),
+      password: 'password'
+    };
 
-    expect(response.statusCode).toEqual(200);
-    expect(
-      response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
-      )
-    ).toBeTruthy();
-    expect(body).toMatchSnapshot();
+    const response = await api.post(url, data).then(res => res);
+
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot({ token: expect.any(String) });
   });
 });

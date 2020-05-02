@@ -4,12 +4,11 @@ const LocalStrategy = require('passport-local');
 const logger = require('../logger')('auth index');
 const authenticate = require('./authenticate');
 const serialization = require('./serialization');
-const sessionFunction = require('./session')();
 const { removeUserSession } = require('./sessionStore');
 const { signWebToken, verifyWebtoken } = require('./jwtUtils');
 const jwtMiddleware = require('./jwtMiddleware');
 
-const defaultStrategies = [new LocalStrategy(authenticate())];
+const passportLocalStrategy = new LocalStrategy(authenticate());
 
 // This setup method configures passport and inserts it into the express
 // middleware. After a successful authentication via 'POST /auth/login',
@@ -27,20 +26,16 @@ const setup = (
   {
     auth = authenticate,
     deserializeUser = serialization.deserializeUser,
+    localStrategy = passportLocalStrategy,
     passport = Passport,
     removeSession = removeUserSession,
     serializeUser = serialization.serializeUser,
-    session = sessionFunction,
-    signToken = signWebToken,
-    strategies = defaultStrategies
+    signToken = signWebToken
   } = {}
 ) => {
-  // Handle all of the authentication strategies that we support
-  logger.silly('setting up strategies with Passport');
-  strategies.forEach(strategy => passport.use(strategy));
+  logger.silly('setting up Passport LocalStrategy');
+  passport.use(localStrategy);
 
-  // Add our session function and passport to our app's
-  // middleware
   logger.silly('adding Passport middleware');
   app.use(passport.initialize());
 

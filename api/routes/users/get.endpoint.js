@@ -1,12 +1,15 @@
 const {
-  api,
+  authenticate,
   getDB,
-  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
 
 const url = '/users';
+
+const get = (id = '') => authenticate()
+  .then(api => api.get(`${url}/${id}`))
+  .then(res => res);
 
 describe('users endpoint | GET /users', () => {
   const db = getDB();
@@ -17,7 +20,7 @@ describe('users endpoint | GET /users', () => {
   unauthorizedTest('get', url);
 
   it('when authenticated', async () => {
-    const response = await login().then(() => api.get(url));
+    const response = await get();
 
     expect(response.status).toEqual(200);
     expect(
@@ -36,14 +39,14 @@ describe('users endpoint | GET /users/:userID', () => {
 
   describe('when authenticated', () => {
     it('when requesting a non-existant user ID', async () => {
-      const response = await login().then(() => api.get(`${url}/0`));
+      const response = await get(0);
 
       expect(response.status).toEqual(404);
       expect(response.data).toMatchSnapshot();
     });
 
     it('when requesting a valid user ID', async () => {
-      const response = await login().then(() => api.get(`${url}/2000`));
+      const response = await get(2000);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();

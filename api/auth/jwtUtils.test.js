@@ -22,19 +22,19 @@ tap.test('jwtUtils', async t => {
     process.env = env;
   });
 
-  t.test('signWebToken()', t => {
+  t.test('signWebToken()', async t => {
     const { signWebToken } = require('./jwtUtils');
 
-    t.test('given a payload object', t => {
+    t.test('given a payload object', async t => {
       const jwt = signWebToken(payload);
       t.match(jwt, /^.+\..+\..+$/, "returns a jwt like: 'xxx.yyy.zzz'");
     });
   });
 
-  t.test('verifyWebToken()', t => {
+  t.test('verifyWebToken()', async t => {
     const { signWebToken, verifyWebToken } = require('./jwtUtils');
 
-    t.test('given a valid JWT', t => {
+    t.test('given a valid JWT', async t => {
       const jwt = signWebToken(payload);
       const result = verifyWebToken(jwt);
 
@@ -52,24 +52,24 @@ tap.test('jwtUtils', async t => {
       t.equal(result.iss, 'CMS eAPD API', "'iss' (issued) is CMS eAPD API");
     });
 
-    t.test('given an invalid JWT', t => {
+    t.test('given an invalid JWT', async t => {
       const jwt = 'garbage.garbage.garbage';
       const result = verifyWebToken(jwt);
       t.equal(result, false, 'returns false');
     });
   });
 
-  t.test('jwtExtractor()', t => {
+  t.test('jwtExtractor()', async t => {
     const { jwtExtractor } = require('./jwtUtils');
     let request = new Map();
 
-    t.test('given a JWT in the request Authorization header', t => {
+    t.test('given a JWT in the request Authorization header', async t => {
       request.set('Authorization', 'Bearer xxx.yyy.zzz');
       const result = jwtExtractor(request);
       t.equal(result, 'xxx.yyy.zzz', 'returns the JWT');
     });
 
-    t.test('given no JWT in the request Authorization header', t => {
+    t.test('given no JWT in the request Authorization header', async t => {
       const result = jwtExtractor(request);
       t.equal(result, null, 'returns null');
     });

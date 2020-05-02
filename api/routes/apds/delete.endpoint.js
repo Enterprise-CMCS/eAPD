@@ -1,8 +1,6 @@
 const {
-  api,
   authenticate,
   getDB,
-  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
@@ -22,7 +20,7 @@ describe('APD endpoint', () => {
       it('with a non-existant apd ID', async () => {
         const response = await authenticate()
           .then(api => api.delete(url(9000)))
-          .then(response => response);
+          .then(res => res);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
@@ -31,7 +29,7 @@ describe('APD endpoint', () => {
       it(`with an APD in a state other than the user's state`, async () => {
         const response = await authenticate()
           .then(api => api.delete(url(4001)))
-          .then(response => response);
+          .then(res => res);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
@@ -40,7 +38,7 @@ describe('APD endpoint', () => {
       it('with an APD that is not in draft', async () => {
         const response = await authenticate()
           .then(api => api.delete(url(4002)))
-          .then(response => response);
+          .then(res => res);
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
@@ -49,7 +47,7 @@ describe('APD endpoint', () => {
       it('with a valid update', async () => {
         const response = await authenticate()
           .then(api => api.delete(url(4000), { programOverview: 'new overview' }))
-          .then(response => response);
+          .then(res => res);
 
         expect(response.status).toEqual(204);
         expect(response.data).toMatchSnapshot();

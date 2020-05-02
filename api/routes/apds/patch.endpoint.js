@@ -1,7 +1,6 @@
 const {
-  api,
+  authenticate,
   getDB,
-  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
@@ -17,15 +16,18 @@ describe('APD endpoint | PATCH /apds/:id', () => {
   unauthorizedTest('patch', url(1));
 
   describe('when authenticated as a user with permission', () => {
+    let api;
+    beforeAll(async () => api = await authenticate());
+
     it('with a non-existant apd ID', async () => {
-      const response = await login().then(() => api.patch(url(9000)));
+      const response = await api.patch(url(9000)).then(res => res);
 
       expect(response.status).toEqual(404);
       expect(response.data).toMatchSnapshot();
     });
 
     it(`with an APD in a state other than the user's state`, async () => {
-      const response = await login().then(() => api.patch(url(4001)));
+      const response = await api.patch(url(4001)).then(res => res);
 
       expect(response.status).toEqual(404);
       expect(response.data).toMatchSnapshot();
@@ -39,7 +41,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await login().then(() => api.patch(url(4000), data));
+      const response = await api.patch(url(4000), data).then(res => res);
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -54,7 +56,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await login().then(() => api.patch(url(4000), data));
+      const response = await api.patch(url(4000), data).then(res => res);
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -75,7 +77,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await login().then(() => api.patch(url(4000), data));
+      const response = await api.patch(url(4000), data).then(res => res);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something
@@ -98,7 +100,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await login().then(() => api.patch(url(4000), data));
+      const response = await api.patch(url(4000), data).then(res => res);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something

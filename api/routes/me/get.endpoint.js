@@ -1,7 +1,6 @@
 const {
-  api,
+  authenticate,
   getDB,
-  login,
   unauthenticatedTest
 } = require('../../endpoint-tests/utils');
 
@@ -15,7 +14,9 @@ describe('/me endpoint | GET', () => {
   unauthenticatedTest('get', url);
 
   it('when authenticated', async () => {
-    const response = await login().then(() => api.get(url));
+    const response = await authenticate()
+      .then(api => api.get(url))
+      .then(res => res);
 
     expect(response.status).toEqual(200);
     expect(response.data).toMatchSnapshot();

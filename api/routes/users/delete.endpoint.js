@@ -1,7 +1,6 @@
 const {
-  api,
+  authenticate,
   getDB,
-  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
@@ -17,7 +16,9 @@ describe('users endpoint | DELETE /users/:userID', () => {
   unauthorizedTest('delete', url(0));
 
   describe('when authenticated', () => {
-    const del = async id => login().then(() => api.delete(url(id)));
+    const del = id => authenticate()
+      .then(api => api.delete(url(id)))
+      .then(res => res);
 
     it('when sending a non-numeric ID', async () => {
       const response = await del('abc');

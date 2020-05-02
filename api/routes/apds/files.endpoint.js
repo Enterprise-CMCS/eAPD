@@ -1,10 +1,9 @@
 const fs = require('fs');
 const FormData = require('form-data');
 const {
-  api,
+  authenticate,
   buildForm,
   getDB,
-  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
@@ -21,37 +20,36 @@ describe('APD files endpoints', () => {
     unauthorizedTest('get', url(0, 0));
 
     describe('when authenticated as a user with permission', () => {
+      let api;
+      beforeAll(async () => api = await authenticate());
+
       it('with a non-existant apd ID', async () => {
-        const response = await login().then(() =>
-          api.get(url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
-        );
+        const response = await api.get(url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
+          .then(res => res);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const response = await login().then(() =>
-          api.get(url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
-        );
+        const response = await api.get(url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
+          .then(res => res);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with an APD that is not associated with the file', async () => {
-        const response = await login().then(() =>
-          api.get(url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
-        );
+        const response = await api.get(url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
+          .then(res => res);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with a valid request', async () => {
-        const response = await login().then(() =>
-          api.get(url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
-        );
+        const response = await api.get(url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'))
+          .then(res => res);
 
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
@@ -71,22 +69,25 @@ describe('APD files endpoints', () => {
     unauthorizedTest('post', url(0));
 
     describe('when authenticated as a user with permission', () => {
+      let api;
+      beforeAll(async () => api = await authenticate());
+
       it('with a non-existant apd ID', async () => {
-        const response = await login().then(() => api.post(url(9000), form));
+        const response = await api.post(url(9000), form).then(res => res);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const response = await login().then(() => api.post(url(4001), form));
+        const response = await api.post(url(4001), form).then(res => res);
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with an APD that is not in draft', async () => {
-        const response = await login().then(() => api.post(url(4002), form));
+        const response = await api.post(url(4002), form).then(res => res);
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
@@ -104,8 +105,8 @@ describe('APD files endpoints', () => {
           }
         };
 
-        const response = await login()
-          .then(() => api.post(url(4000), form.getBuffer(), options))
+        const response = await api.post(url(4000), form.getBuffer(), options)
+          .then(res => res)
           .catch(e => console.log(e));
 
         expect(response.status).toEqual(200);
