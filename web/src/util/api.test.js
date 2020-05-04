@@ -22,7 +22,6 @@ describe('api wrapper', () => {
       const reset = set('api-url');
       const api = require('./api').default; // eslint-disable-line global-require
       expect(api.defaults.baseURL).toBe('api-url');
-      expect(api.defaults.withCredentials).toBe(true);
       reset();
     });
 
@@ -30,7 +29,6 @@ describe('api wrapper', () => {
       const reset = set();
       const api = require('./api').default; // eslint-disable-line global-require
       expect(api.defaults.baseURL).toBe('http://localhost:8000');
-      expect(api.defaults.withCredentials).toBe(true);
       reset();
     });
   })
