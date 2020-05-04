@@ -91,7 +91,7 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.1",
-    "jest": "^25.5.1",
+    "jest": "^25.2.1",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "sinon": "^8.1.1",

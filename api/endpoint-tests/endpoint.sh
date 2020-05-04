@@ -13,5 +13,5 @@ docker-compose -f docker-compose.endpoint-tests.yml down
 
 mv endpoint-data.json ./endpoint-tests
 
-# node endpoint-tests/endpoint-coverage.js
+node endpoint-tests/endpoint-coverage.js
 exit $EXIT_CODE

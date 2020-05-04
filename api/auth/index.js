@@ -56,15 +56,15 @@ const setup = (
     (req, res) => {
       serializeUser(req.user, (err, sessionId) => {
         if (err) {
-          return res.status(400).send(err).end;
+          res.status(400).send(err).end();
+        } else {
+          const jwt = signToken({ sub: sessionId });
+
+          res.send({
+            token: jwt,
+            user: req.user
+          });
         }
-
-        const jwt = signToken({ sub: sessionId });
-
-        return res.send({
-          token: jwt,
-          user: req.user
-        });
       });
     }
   );
