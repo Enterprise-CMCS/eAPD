@@ -4,7 +4,6 @@ export const apiUrl = process.env.API_URL || 'http://localhost:8000';
 
 const axios = axiosClient.create({
   baseURL: apiUrl,
-  withCredentials: true
 });
 
 // add Authorization header to axios request if jwt is present in localStorage

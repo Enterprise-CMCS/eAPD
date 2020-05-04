@@ -37,18 +37,6 @@ describe('login endpoint | /auth/login', () => {
     expect(response.status).toEqual(400);
   });
 
-  xit('proper response headers', async () => {
-    // I'm unable to pick up these headers w/ axios
-    const response = await api.post(url);
-    // console.log(response.headers);  // -> { 'cache-control': 'private, no-cache' }
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary
-    expect(response.headers.vary).toEqual('Origin');
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials
-    expect(response.headers['access-control-allow-credentials']).toEqual(
-      'true'
-    );
-  });
-
   const invalidCases = [
     {
       title: 'with a post body, but no username or password',
