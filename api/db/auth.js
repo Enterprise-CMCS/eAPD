@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const knex = require('./knex');
 
 const createAuthRole = async (name, activityIDs, { db = knex } = {}) => {
@@ -56,18 +55,14 @@ const getAuthRoles = async ({ db = knex } = {}) => {
   const roles = await db('auth_roles').select();
   await Promise.all(
     roles.map(async role => {
-      const activityIDs = (
-        await db('auth_role_activity_mapping')
-          .where('role_id', role.id)
-          // eslint-disable-next-line camelcase
-          .select('activity_id')
-      ).map(({ activity_id }) => activity_id);
+      const activityIDs = (await db('auth_role_activity_mapping')
+        .where('role_id', role.id)
+        // eslint-disable-next-line camelcase
+        .select('activity_id')).map(({ activity_id }) => activity_id);
 
-      const activities = (
-        await db('auth_activities')
-          .whereIn('id', activityIDs)
-          .select('name')
-      ).map(({ name }) => name);
+      const activities = (await db('auth_activities')
+        .whereIn('id', activityIDs)
+        .select('name')).map(({ name }) => name);
 
       // eslint-disable-next-line no-param-reassign
       role.activities = activities;
