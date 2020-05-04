@@ -1,16 +1,13 @@
 const {
-  authenticate,
   getDB,
+  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
 
 const url = '/users';
 
-const get = (id = '') =>
-  authenticate()
-    .then(api => api.get(`${url}/${id}`))
-    .then(res => res);
+const get = (id = '') => login().then(api => api.get(`${url}/${id}`));
 
 describe('users endpoint | GET /users', () => {
   const db = getDB();

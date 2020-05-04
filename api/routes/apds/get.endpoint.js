@@ -1,6 +1,6 @@
 const {
-  authenticate,
   getDB,
+  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
@@ -17,21 +17,19 @@ describe('APD endpoint', () => {
     unauthorizedTest('get', url);
 
     it('when authenticated as a user without a state', async () => {
-      const response = await authenticate(
+      const response = await login(
         'all-permissions-no-state',
         'password'
       )
-        .then(api => api.get(url))
-        .then(res => res);
+        .then(api => api.get(url));
 
       expect(response.status).toEqual(401);
       expect(response.data).toMatchSnapshot();
     });
 
     it('when authenticated as a user with a state', async () => {
-      const response = await authenticate()
-        .then(api => api.get(url))
-        .then(res => res);
+      const response = await login()
+        .then(api => api.get(url));
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();
@@ -50,12 +48,11 @@ describe('APD endpoint', () => {
     unauthorizedTest('get', url(0));
 
     it('when authenticated as a user without a state', async () => {
-      const response = await authenticate(
+      const response = await login(
         'all-permissions-no-state',
         'password'
       )
-        .then(api => api.get(url(0)))
-        .then(res => res);
+        .then(api => api.get(url(0)));
 
       expect(response.status).toEqual(401);
       expect(response.data).toMatchSnapshot();
@@ -64,25 +61,25 @@ describe('APD endpoint', () => {
     describe('with authenticated as a user with a state', () => {
       let api;
       beforeAll(async () => {
-        api = await authenticate();
+        api = await login();
       });
 
       it('when requesting an APD that does not exist', async () => {
-        const response = await api.get(url(0)).then(res => res);
+        const response = await api.get(url(0));
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it('when requesting an APD that belongs to another state', async () => {
-        const response = await api.get(url(4001)).then(res => res);
+        const response = await api.get(url(4001));
 
         expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it('when requesting an APD that belongs to their state', async () => {
-        const response = await api.get(url(4000)).then(res => res);
+        const response = await api.get(url(4000));
 
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();

@@ -1,6 +1,6 @@
 const {
-  authenticate,
   getDB,
+  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
@@ -33,18 +33,16 @@ describe('auth roles endpoint | PUT /auth/roles/:roleID', () => {
   describe('when authenticated', () => {
     it('when updating the role that the user belongs to', async () => {
       const data = { activities: [1001] };
-      const response = await authenticate()
+      const response = await login()
         .then(api => api.put(url(1101), data))
-        .then(res => res);
 
       expect(response.status).toEqual(403);
       expect(response.data).toMatchSnapshot();
     });
 
     it('with an invalid ID', async () => {
-      const response = await authenticate()
+      const response = await login()
         .then(api => api.put(url(9001), {}))
-        .then(res => res);
 
       expect(response.status).toEqual(404);
       expect(response.data).toMatchSnapshot();
@@ -52,9 +50,8 @@ describe('auth roles endpoint | PUT /auth/roles/:roleID', () => {
 
     invalidCases.forEach(situation => {
       it(situation.name, async () => {
-        const response = await authenticate()
+        const response = await login()
           .then(api => api.put(url(1102), situation.data))
-          .then(res => res);
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
@@ -63,9 +60,8 @@ describe('auth roles endpoint | PUT /auth/roles/:roleID', () => {
 
     it('with a valid updated role', async () => {
       const data = { name: 'new name', activities: [1001] };
-      const response = await authenticate()
+      const response = await login()
         .then(api => api.put(url(1102), data))
-        .then(res => res);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();

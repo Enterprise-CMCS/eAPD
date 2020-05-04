@@ -41,7 +41,6 @@ services:
       - NODE_ENV=development
       - DISABLE_SAME_SITE=yes
       - DISABLE_SECURE_COOKIE=yes
-      - LOG_LEVEL=silly
     volumes:
       - type: bind
         source: ./api

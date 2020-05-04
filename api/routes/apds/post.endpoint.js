@@ -1,6 +1,6 @@
 const {
-  authenticate,
   getDB,
+  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
@@ -16,9 +16,8 @@ describe('APD endpoint | POST /apds', () => {
   unauthorizedTest('post', url);
 
   it('when authenticated as a user with permission', async () => {
-    const response = await authenticate()
-      .then(api => api.post(url))
-      .then(res => res);  // eslint-disable no-return-assign
+    const response = await login()
+      .then(api => api.post(url));
 
     expect(response.status).toEqual(200);
 

@@ -6,14 +6,13 @@ describe('login nonce endpoint | /auth/login/nonce', () => {
   const url = '/auth/login/nonce';
 
   it('with no username', async () => {
-    const response = await api.post(url).then(res => res);
+    const response = await api.post(url);
     expect(response.status).toEqual(400);
   });
 
   it('with a username', async () => {
     const response = await api
-      .post(url, { username: 'test user' })
-      .then(res => res);
+      .post(url, { username: 'test user' });
     expect(response.status).toEqual(200);
 
     const token = jwt.decode(response.data.nonce);
@@ -27,20 +26,20 @@ describe('login nonce endpoint | /auth/login/nonce', () => {
 describe('login endpoint | /auth/login', () => {
   const nonceUrl = '/auth/login/nonce';
   const nonceForUsername = async username => {
-    const response = await api.post(nonceUrl, { username }).then(res => res);
+    const response = await api.post(nonceUrl, { username });
     return response.data.nonce;
   };
 
   const url = '/auth/login';
 
   it('with no post body at all', async () => {
-    const response = await api.post(url).then(res => res);
+    const response = await api.post(url);
     expect(response.status).toEqual(400);
   });
 
   xit('proper response headers', async () => {
     // I'm unable to pick up these headers w/ axios
-    const response = await api.post(url).then(res => res);
+    const response = await api.post(url);
     // console.log(response.headers);  // -> { 'cache-control': 'private, no-cache' }
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary
     expect(response.headers.vary).toEqual('Origin');
@@ -68,12 +67,12 @@ describe('login endpoint | /auth/login', () => {
   invalidCases.forEach(invalidCase => {
     it(`Form body: ${invalidCase.title}`, async () => {
       const form = buildForm(invalidCase.data);
-      const response = await api.post(url, form).then(res => res);
+      const response = await api.post(url, form);
       expect(response.status).toEqual(400);
     });
 
     it(`JSON body: ${invalidCase.title}`, async () => {
-      const response = await api.post(url, invalidCase.data).then(res => res);
+      const response = await api.post(url, invalidCase.data);
       expect(response.status).toEqual(400);
     });
   });
@@ -133,7 +132,7 @@ describe('login endpoint | /auth/login', () => {
       const config = {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       };
-      const response = await api.post(url, form, config).then(res => res);
+      const response = await api.post(url, form, config);
       expect(response.status).toEqual(401);
     });
 
@@ -149,7 +148,7 @@ describe('login endpoint | /auth/login', () => {
       password: 'password'
     };
 
-    const response = await api.post(url, qs.stringify(data)).then(res => res);
+    const response = await api.post(url, qs.stringify(data));
 
     expect(response.status).toEqual(200);
     expect(response.data).toMatchSnapshot({ token: expect.any(String) });
@@ -161,7 +160,7 @@ describe('login endpoint | /auth/login', () => {
       password: 'password'
     };
 
-    const response = await api.post(url, data).then(res => res);
+    const response = await api.post(url, data);
 
     expect(response.status).toEqual(200);
     expect(response.data).toMatchSnapshot({ token: expect.any(String) });
@@ -173,7 +172,7 @@ describe('login endpoint | /auth/login', () => {
       password: 'password'
     };
 
-    const response = await api.post(url, data).then(res => res);
+    const response = await api.post(url, data);
 
     expect(response.status).toEqual(200);
     expect(response.data).toMatchSnapshot({ token: expect.any(String) });

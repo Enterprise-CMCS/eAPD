@@ -1,6 +1,6 @@
 const {
-  authenticate,
   getDB,
+  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
@@ -17,9 +17,7 @@ describe('users endpoint | PUT /users/:userID', () => {
 
   describe('when authenticated', () => {
     const put = (id, data) =>
-      authenticate()
-        .then(api => api.put(url(id), data))
-        .then(res => res);
+      login().then(api => api.put(url(id), data))
 
     it('when sending a non-numeric ID', async () => {
       const response = await put('abc');

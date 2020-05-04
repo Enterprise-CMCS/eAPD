@@ -1,6 +1,6 @@
 const {
-  authenticate,
   getDB,
+  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
@@ -48,9 +48,8 @@ describe('users endpoint | POST /users', () => {
   describe('when authenticated', () => {
     invalidCases.forEach(situation => {
       it(situation.name, async () => {
-        const response = await authenticate()
+        const response = await login()
           .then(api => api.post(url, situation.data))
-          .then(res => res);
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
@@ -60,14 +59,13 @@ describe('users endpoint | POST /users', () => {
     });
 
     it('with existing email address', async () => {
-      const response = await authenticate()
+      const response = await login()
         .then(api =>
           api.post(url, {
             email: 'all-permissions-and-state',
             password: 'anything'
           })
-        )
-        .then(res => res);
+        );
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -76,14 +74,13 @@ describe('users endpoint | POST /users', () => {
     });
 
     it('with existing email address but different capitalization', async () => {
-      const response = await authenticate()
+      const response = await login()
         .then(api =>
           api.post(url, {
             email: 'All-Permissions-And-State',
             password: 'anything'
           })
-        )
-        .then(res => res);
+        );
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -92,14 +89,13 @@ describe('users endpoint | POST /users', () => {
     });
 
     it('with a weak password', async () => {
-      const response = await authenticate()
+      const response = await login()
         .then(api =>
           api.post(url, {
             email: 'weakuser@email.com',
             password: 'Newp@ssw0rd!'
           })
-        )
-        .then(res => res);
+        );
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -108,14 +104,13 @@ describe('users endpoint | POST /users', () => {
     });
 
     it('with a valid new user', async () => {
-      const response = await authenticate()
+      const response = await login()
         .then(api =>
           api.post(url, {
             email: 'newuser@email.com',
             password: 'Q%&jsruW$%Jaej'
           })
-        )
-        .then(res => res);
+        );
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();

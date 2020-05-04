@@ -1,6 +1,6 @@
 const {
-  authenticate,
   getDB,
+  login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
@@ -44,9 +44,8 @@ describe('auth roles endpoint | POST /auth/roles', () => {
   describe('when authenticated', () => {
     invalidCases.forEach(situation => {
       it(situation.name, async () => {
-        const response = await authenticate()
+        const response = await login()
           .then(api => api.post(url, situation.body))
-          .then(res => res);
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
@@ -55,9 +54,8 @@ describe('auth roles endpoint | POST /auth/roles', () => {
 
     it('with a valid new role', async () => {
       const data = { name: 'new-role', activities: [1001, 1002] };
-      const response = await authenticate()
+      const response = await login()
         .then(api => api.post(url, data))
-        .then(res => res);
 
       expect(response.status).toEqual(201);
       expect(response.data).toMatchSnapshot();

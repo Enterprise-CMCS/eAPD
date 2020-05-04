@@ -27,22 +27,16 @@ const login = (
       if (res.status !== 200) return new Error('Failed to login', res);
       return res;
     })
+    .then(res => {
+      const options = {
+        ...axiosDefaults,
+        headers: {
+          Authorization: `Bearer ${res.data.token}`
+        }
+      };
+      return axios.create(options);
+    })
     .catch(error => error);
-};
-
-const authenticate = (
-  username = 'all-permissions-and-state',
-  password = 'password'
-) => {
-  return login(username, password).then(res => {
-    const options = {
-      ...axiosDefaults,
-      headers: {
-        Authorization: `Bearer ${res.data.token}`
-      }
-    };
-    return axios.create(options);
-  });
 };
 
 const unauthenticatedTest = (method, url) =>
@@ -55,7 +49,7 @@ const unauthenticatedTest = (method, url) =>
 const unauthorizedTest = (method, url) => {
   it('when unauthorized', async () => {
     // this user has no permissions
-    const response = await authenticate(
+    const response = await login(
       'no-permissions',
       'password'
     ).then(authenticatedClient => authenticatedClient[method](url));
@@ -75,7 +69,6 @@ const buildForm = data => {
 
 module.exports = {
   api,
-  authenticate,
   buildForm,
   getDB,
   login,
