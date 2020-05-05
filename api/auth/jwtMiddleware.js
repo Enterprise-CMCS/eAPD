@@ -41,7 +41,7 @@ const jwtMiddleware = async (
     }
   });
 
-  next();
+  return next();
 };
 
 module.exports = jwtMiddleware;

@@ -2,7 +2,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 const jwtMiddleware = require('./jwtMiddleware');
-const { signWebToken } = require('./jwtUtils');
+
 const sandbox = sinon.createSandbox();
 
 tap.test('jwtMiddleware', async t => {
@@ -23,7 +23,7 @@ tap.test('jwtMiddleware', async t => {
   });
 
   t.test('given a valid authorization header', async t => {
-    let req = { headers: { 'Authorization': 'Bearer xxx.yyy.zzz' } };
+    const req = { headers: { 'Authorization': 'Bearer xxx.yyy.zzz' } };
     const extractor = () => true;
     const deserialize = (sub, done) => { done(null, user) };
     const verifyToken = () => payload;
@@ -34,7 +34,7 @@ tap.test('jwtMiddleware', async t => {
   });
 
   t.test('given an invalid authorization header', async t => {
-    let req = { headers: { 'Authorization': 'blah' } };
+    const req = { headers: { 'Authorization': 'blah' } };
     const extractor = () => true;
     const deserialize = (sub, done) => { done(null, user) };
     const verifyToken = () => false;
@@ -45,7 +45,7 @@ tap.test('jwtMiddleware', async t => {
   });
 
   t.test('cannot deserialize user', async t => {
-    let req = { headers: { 'Authorization': 'blah' } };
+    const req = { headers: { 'Authorization': 'blah' } };
     const extractor = () => true;
     const deserialize = (sub, done) => { done(err, null) };
     const verifyToken = () => payload;
