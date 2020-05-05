@@ -2,7 +2,17 @@ const {
   schema: { arrayOf, jsonResponse }
 } = require('./helpers');
 
-const userObj = jsonResponse({
+const token = {
+  type: 'object',
+  properties: {
+    token: {
+      type: 'string',
+      description: 'A JWT to be presented in the Authorization header of all subsequent requests.'
+    }
+  }
+}
+
+const user = {
   type: 'object',
   properties: {
     activities: arrayOf({
@@ -48,7 +58,7 @@ const userObj = jsonResponse({
       description: `User's unique username (email address)`
     }
   }
-});
+};
 
 module.exports = {
   '/auth/login/nonce': {
@@ -111,16 +121,10 @@ module.exports = {
       responses: {
         200: {
           description: 'Successful login',
-          content: userObj,
-          headers: {
-            'Set-Cookie': {
-              schema: {
-                type: 'string',
-                example:
-                  'token=auth-token-jwt; path=/; expires=Sat, 1 Jan 2035 12:00:00 GMT; httponly'
-              }
-            }
-          }
+          content: jsonResponse({
+            token,
+            user
+          })
         },
         400: {
           description: 'Missing username or password'
@@ -135,18 +139,13 @@ module.exports = {
     get: {
       tags: ['Authentication and authorization'],
       summary: 'Logs the current user out',
-      description: 'Logs the user out by invalidating the session cookie',
+      description: 'Logs the user out by deleting the user\'s session',
       responses: {
         200: {
-          description: 'Clears the session cookie',
-          headers: {
-            'Set-Cookie': {
-              schema: {
-                type: 'string',
-                example: 'session=; expires=; httponly'
-              }
-            }
-          }
+          description: 'Deletes the session'
+        },
+        400: {
+          description: 'Not logged in'
         }
       }
     }
