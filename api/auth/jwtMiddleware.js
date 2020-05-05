@@ -10,22 +10,36 @@ const logger = require('../logger')('jwt middleware');
  * @function
  * @param {Object} req
  * @param {Object} res
- * @param {Object} next
+ * @param {Function} next
  */
-const jwtMiddleware = async (req, res, next) => {
-  const jwt = jwtExtractor(req);
-  const payload = jwt ? verifyWebToken(jwt) : false;
+const jwtMiddleware = async (
+  req,
+  res,
+  next,
+  {
+    deserialize = deserializeUser,
+    extractor = jwtExtractor,
+    verifyToken = verifyWebToken
+  } = {}
+) => {
+  const jwt = extractor(req);
+  const payload = jwt ? verifyToken(jwt) : false;
 
-  if (payload) {
-    req.payload = payload;
-    await deserializeUser(payload.sub, (err, user) => {
-      if (err) {
-        logger.error(err);
-        res.status(400).send(err).end();
-      }
-      if (user) req.user = user;
-    });
-  }
+  if (!payload) return next();
+
+  await deserialize(payload.sub, (err, user) => {
+    if (err) {
+      logger.error(err);
+      res.status(400);
+      res.send(err);
+      res.end();
+    }
+
+    if (user) {
+      req.user = user;
+      req.payload = payload;
+    }
+  });
 
   next();
 };
