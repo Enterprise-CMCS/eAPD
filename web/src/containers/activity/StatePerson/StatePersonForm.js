@@ -32,14 +32,14 @@ const StatePersonForm = ({
     [index]
   );
 
-  const editCostForYear = useCallback(
+  const getEditCostForYear = useCallback(
     (year, value) => {
       setCost(activityIndex, index, year, value);
     },
     [index]
   );
 
-  const editFTEForYear = useCallback(
+  const getEditFTEForYear = useCallback(
     (year, value) => {
       setFTE(activityIndex, index, year, value);
     },
@@ -65,8 +65,8 @@ const StatePersonForm = ({
       />
       <PersonCostForm
         items={years}
-        setCost={editCostForYear}
-        setFTE={editFTEForYear}
+        setCost={getEditCostForYear}
+        setFTE={getEditFTEForYear}
       />
     </Fragment>
   );

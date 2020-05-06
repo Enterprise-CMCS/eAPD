@@ -11,37 +11,26 @@ const ApdStateKeyPerson = ({
 }) => {
   const primary = index === 0;
 
-  const totalCost = useMemo(
-    () =>
-      Object.keys(costs).reduce(
-        (sum, year) => sum + costs[year] * fte[year],
-        0
-      ),
-    [costs, fte]
-  );
-
-  const fteByYear = useMemo(
-    () =>
-      hasCosts
-        ? Object.keys(fte).map(year => (
-            <li key={year}>
-              <strong>FFY {year} FTE commitment to project:</strong> {fte[year]}
-            </li>
-          ))
-        : null,
-    [fte]
-  );
-
   const costByYear = useMemo(
-    () =>
-      hasCosts
-        ? Object.keys(costs).map(year => (
-            <li key={year}>
-              <strong>FFY {year} cost:</strong>{' '}
+    () => (
+      <div className="ds-u-margin-top--2">
+        {hasCosts ? (
+          Object.keys(costs).map(year => (
+            <div key={year}>
+              <strong>{year} </strong>
+              <strong>Costs: </strong>
+              <Dollars>{costs[year]}</Dollars> | <strong>FTEs: </strong>
+              {fte[year]} | <strong>Total: </strong>
               <Dollars>{costs[year] * fte[year]}</Dollars>
-            </li>
+            </div>
           ))
-        : null,
+        ) : (
+          <div>
+            <strong>Total cost:</strong> <Dollars>{0}</Dollars>
+          </div>
+        )}
+      </div>
+    ),
     [costs, fte]
   );
 
@@ -57,13 +46,8 @@ const ApdStateKeyPerson = ({
           <ul className="ds-c-list--bare">
             {primary ? <li>Primary APD Point of Contact</li> : null}
             <li>{position}</li>
-            <li>
-              <strong>Total cost:</strong>{' '}
-              <Dollars>{hasCosts ? totalCost : 0}</Dollars>
-            </li>
-            {fteByYear}
-            {costByYear}
           </ul>
+          {costByYear}
         </Review>
       </div>
       <div className="visibility--print">
@@ -72,13 +56,8 @@ const ApdStateKeyPerson = ({
             {primary ? <li>Primary APD Point of Contact</li> : null}
             <li>{position}</li>
             <li>{email}</li>
-            <li>
-              <strong>Total cost:</strong>{' '}
-              <Dollars>{hasCosts ? totalCost : 0}</Dollars>
-            </li>
-            {fteByYear}
-            {costByYear}
           </ul>
+          {costByYear}
         </Review>
       </div>
     </Fragment>

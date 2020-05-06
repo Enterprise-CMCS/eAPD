@@ -51,6 +51,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       checked={true}
       checkedChildren={
         <PersonCostForm
+          costLabel="Costs with benefits"
+          fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
           items={
             Object {
               "1992": Object {
@@ -129,6 +131,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
       checked={false}
       checkedChildren={
         <PersonCostForm
+          costLabel="Costs with benefits"
+          fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
           items={
             Object {
               "1992": Object {
@@ -146,6 +150,86 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
         />
       }
       name="apd-state-profile-hascosts-yes1"
+      onChange={[Function]}
+      type="radio"
+      value="yes"
+    >
+      Yes
+    </ChoiceComponent>
+  </fieldset>
+</Fragment>
+`;
+
+exports[`the ApdKeyPersonForm component renders correctly if the person is a primary contact 1`] = `
+<Fragment>
+  <h4
+    className="ds-h4"
+  >
+    Primary
+     APD Point of Contact
+  </h4>
+  <TextField
+    autoFocus={true}
+    label="Name"
+    name="apd-state-profile-pocname0"
+    onChange={[Function]}
+    type="text"
+    value="Bob the Builder"
+  />
+  <TextField
+    label="Email"
+    name="apd-state-profile-pocemail0"
+    onChange={[Function]}
+    type="text"
+    value="email address"
+  />
+  <TextField
+    label="Role"
+    name="apd-state-profile-pocposition0"
+    onChange={[Function]}
+    type="text"
+    value="The Builder"
+  />
+  <fieldset
+    className="ds-c-fieldset"
+  >
+    <legend
+      className="ds-c-label"
+    >
+      Does this person have costs directly attributable to this program?
+    </legend>
+    <ChoiceComponent
+      checked={false}
+      name="apd-state-profile-hascosts-no0"
+      onChange={[Function]}
+      type="radio"
+      value="no"
+    >
+      No
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={true}
+      checkedChildren={
+        <PersonCostForm
+          costLabel="Costs with benefits"
+          fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
+          items={
+            Object {
+              "1992": Object {
+                "amt": 100,
+                "perc": 0.32,
+              },
+              "1993": Object {
+                "amt": 300,
+                "perc": 0.57,
+              },
+            }
+          }
+          setCost={[Function]}
+          setFTE={[Function]}
+        />
+      }
+      name="apd-state-profile-hascosts-yes0"
       onChange={[Function]}
       type="radio"
       value="yes"
