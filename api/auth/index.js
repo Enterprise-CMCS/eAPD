@@ -6,7 +6,7 @@ const authenticate = require('./authenticate');
 const serialization = require('./serialization');
 const { removeUserSession } = require('./sessionStore');
 const { signWebToken } = require('./jwtUtils');
-const jwtMiddleware = require('./jwtMiddleware');
+const jsonWebTokenMiddleware = require('./jwtMiddleware');
 
 const passportLocalStrategy = new LocalStrategy(authenticate());
 
@@ -25,6 +25,7 @@ const setup = (
   app,
   {
     auth = authenticate,
+    jwtMiddleware = jsonWebTokenMiddleware,
     localStrategy = passportLocalStrategy,
     passport = Passport,
     removeSession = removeUserSession,
@@ -32,16 +33,16 @@ const setup = (
     signToken = signWebToken
   } = {}
 ) => {
-  logger.silly('setting up Passport LocalStrategy');
+  logger.silly('setting up Passport LocalStrategy middleware');
   passport.use(localStrategy);
 
-  logger.silly('adding Passport middleware');
+  logger.silly('init Passport');
   app.use(passport.initialize());
 
   logger.silly('setting up local login nonce-fetcher');
   app.post('/auth/login/nonce', (req, res) => {
     if (req.body && req.body.username) {
-      res.send({
+      return res.send({
         nonce: auth.getNonce(req.body.username)
       });
     }
@@ -69,14 +70,9 @@ const setup = (
     }
   );
 
-  // Pull JWT from HTTP headers and deserialize user for all routes, except for
-  // login routes.
-  const jwtExcludedRoutes = ['/auth/login/nonce', '/auth/login'];
-  app.use((req, res, next) =>
-    jwtExcludedRoutes.includes(req.originalUrl)
-      ? next()
-      : jwtMiddleware(req, res, next)
-  );
+  // Pull JWT from HTTP headers and deserialize user after local authentication
+  logger.silly('adding jwtMiddleware');
+  app.use(jwtMiddleware);
 
   // Add a logout endpoint
   logger.silly('setting up a logout handler');

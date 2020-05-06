@@ -18,6 +18,7 @@ tap.test('authentication setup', async authTest => {
   };
 
   const passport = {
+    authenticate: sandbox.stub().returns('passport-authenticate'),
     deserializeUser: sandbox.spy(),
     initialize: sandbox.stub().returns('passport-initialize'),
     use: sandbox.spy()
@@ -29,6 +30,7 @@ tap.test('authentication setup', async authTest => {
   const signToken = sandbox.stub();
 
   const localStrategy = 'localStrategy';
+  const jwtMiddleware = 'jwtMiddleware';
 
   const res = {
     send: sandbox.stub(),
@@ -45,28 +47,17 @@ tap.test('authentication setup', async authTest => {
 
   authTest.test(
     'setup calls everything we expect it to',
-    { skip: true },
     async setupTest => {
-      authSetup(app, { passport, localStrategy });
+      authSetup(app, { passport, localStrategy, jwtMiddleware });
 
-      // middleware
+      setupTest.ok(
+        passport.use.calledWith(localStrategy),
+        'localStrategy is registered'
+      );
+
       setupTest.ok(
         app.use.calledWith('passport-initialize'),
         'adds passport initialization to middleware'
-      );
-      setupTest.ok(
-        app.use.calledWith('passport-authenticate'),
-        'adds passport jwt to middleware'
-      );
-
-      // auth strategies
-      setupTest.ok(
-        passport.use.calledWith('strategy1'),
-        'first strategy is registered'
-      );
-      setupTest.ok(
-        passport.use.calledWith('strategy2'),
-        'second strategy is registered'
       );
 
       setupTest.ok(passport.initialize.calledOnce, 'passport is initialized');
@@ -77,17 +68,6 @@ tap.test('authentication setup', async authTest => {
       );
 
       setupTest.ok(
-        app.get.calledWith,
-        '/auth/logout',
-        sinon.match.func,
-        'adds a function handler to GET /auth/logout'
-      );
-
-      setupTest.ok(
-        app.post.calledWith('/auth/login/nonce', sinon.match.func),
-        'adds a function handler to POST /auth/login/nonce'
-      );
-      setupTest.ok(
         app.post.calledWith(
           '/auth/login',
           'passport-authenticate',
@@ -95,6 +75,21 @@ tap.test('authentication setup', async authTest => {
         ),
         'adds a function handler to POST /auth/login using the passport authenticate middleware'
       );
+
+      setupTest.ok(
+        app.post.calledWith('/auth/login/nonce', sinon.match.func),
+        'adds a function handler to POST /auth/login/nonce'
+      );
+
+      setupTest.ok(app.use.calledWith(jwtMiddleware), 'adds jwtMiddleware');
+
+      setupTest.ok(
+        app.get.calledWith,
+        '/auth/logout',
+        sinon.match.func,
+        'adds a function handler to GET /auth/logout'
+      );
+
     }
   );
 
