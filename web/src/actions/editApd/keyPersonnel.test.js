@@ -82,7 +82,7 @@ describe('APD edit actions for APD key personnel', () => {
     });
   });
 
-  it('dispatches an action for setting a key person percent time', () => {
+  it('dispatches an action for setting a key person FTE', () => {
     const store = mockStore('key person state');
     store.dispatch(setKeyPersonFTE(7, 1967, 3.25));
 

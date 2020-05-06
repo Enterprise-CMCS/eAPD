@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 
 import PersonCostForm from './PersonCostForm';
@@ -12,7 +12,7 @@ describe('PersonCostForm component', () => {
     setCost: jest.fn(),
     setFTE: jest.fn()
   };
-  const component = mount(<PersonCostForm {...props} />);
+  const component = shallow(<PersonCostForm {...props} />);
 
   beforeEach(() => {
     props.setCost.mockClear();
@@ -23,41 +23,27 @@ describe('PersonCostForm component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  // can't get this to work with DollarField whether using mount or shallow
-  // with mount I just get "Number of calls: 0"
-  // with shallow I get "ShallowWrapper::update() can only be called when wrapping one node"
-  // I'm pretty sure "simulate" calls "update" internally
-  /*
   it(`handles changing the first year cost field`, () => {
-    shallow(<PersonCostForm {...props} />)
+    component
       .find('DollarField[name="cost"]')
       .first()
       .simulate('change', { target: { value: '100001' } });
 
-    expect(props.setCost).toHaveBeenCalledWith('1972', 100001);
-  });
-*/
-  it(`handles changing the first year cost field`, () => {
-    component
-      .find('input[name="cost"]')
-      .first()
-      .simulate('change', { target: { value: '100001' } });
-
-    expect(props.setCost).toHaveBeenCalledWith('1972', 100001);
+    expect(props.setCost).toHaveBeenCalledWith('1972', '100001');
   });
 
   it(`handles changing the second year cost field`, () => {
     component
-      .find('input[name="cost"]')
+      .find('DollarField[name="cost"]')
       .last()
       .simulate('change', { target: { value: '120001' } });
 
-    expect(props.setCost).toHaveBeenCalledWith('1973', 120001);
+    expect(props.setCost).toHaveBeenCalledWith('1973', '120001');
   });
 
   it(`handles changing the first year fte field`, () => {
     component
-      .find('input[name="ftes"]')
+      .find('NumberField[name="ftes"]')
       .first()
       .simulate('change', { target: { value: '0.75' } });
 
@@ -66,7 +52,7 @@ describe('PersonCostForm component', () => {
 
   it(`handles changing the second year fte field`, () => {
     component
-      .find('input[name="ftes"]')
+      .find('NumberField[name="ftes"]')
       .last()
       .simulate('change', { target: { value: '2' } });
 

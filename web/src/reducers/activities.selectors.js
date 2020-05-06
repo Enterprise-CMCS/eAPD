@@ -70,7 +70,7 @@ export const selectActivityCostSummary = createSelector(
                 description: `${kp.name} (APD Key Personnel)`,
                 totalCost: kp.hasCosts ? kp.costs[ffy] * kp.fte[ffy] : 0,
                 unitCost: kp.hasCosts ? kp.costs[ffy] : null,
-                units: `${kp.fte[ffy]} FTE`
+                units: kp.hasCosts ? `${kp.fte[ffy]} FTE` : null
               }))
             : []
       }),

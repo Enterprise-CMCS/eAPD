@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 
 import { plain as KeyPersonForm, mapDispatchToProps } from './ApdKeyPersonForm';
@@ -56,6 +56,10 @@ describe('the ApdKeyPersonForm component', () => {
     expect(component).toMatchSnapshot();
   });
 
+  it('renders correctly if the person is a primary contact', () => {
+    expect(shallow(<KeyPersonForm {...props} index={0} />)).toMatchSnapshot();
+  });
+
   it('renders correctly if the person does not have costs', () => {
     expect(
       shallow(
@@ -97,6 +101,22 @@ describe('the ApdKeyPersonForm component', () => {
         .simulate('change');
 
       expect(props.setHasCosts).toHaveBeenCalledWith(1, true);
+    });
+
+    it('handles changing cost for FFY', () => {
+      mount(<KeyPersonForm {...props} />)
+        .find('input[name="cost"]')
+        .first()
+        .simulate('change', { target: { value: 9000 } });
+      expect(props.setCost(1, 1992, 9000));
+    });
+
+    it('handles changing fte for FFY', () => {
+      mount(<KeyPersonForm {...props} />)
+        .find('input[name="ftes"]')
+        .first()
+        .simulate('change', { target: { value: 0.4 } });
+      expect(props.setTime(1, 1992, 0.4));
     });
   });
 

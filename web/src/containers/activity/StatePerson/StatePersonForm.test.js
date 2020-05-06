@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 
 import {
@@ -63,23 +63,56 @@ describe('the StatePersonForm component', () => {
         .simulate('change', { target: { value: 'new desc' } });
       expect(setDescription).toHaveBeenCalledWith(6, 83, 'new desc');
     });
-    /*
+
     test('handles changing the personnel cost total for a year', () => {
-      component
-        .find('DollarField')
+      mount(
+        <StatePersonForm
+          activityIndex={6}
+          index={83}
+          item={{
+            description: 'personnel desc',
+            title: 'personnel title',
+            years: {
+              7473: { amt: 2398235, perc: 3 },
+              7474: { amt: 72323, perc: 1 }
+            }
+          }}
+          setCost={setCost}
+          setDescription={setDescription}
+          setFTE={setFTE}
+          setTitle={setTitle}
+        />
+      )
+        .find('input[name="cost"]')
         .first()
-        .simulate('change', { target: { value: 'new total' } });
-      expect(setCost).toHaveBeenCalledWith(6, 83, '7473', 'new total');
+        .simulate('change', { target: { value: '110000' } });
+      expect(setCost).toHaveBeenCalledWith(6, 83, '7473', 110000);
     });
 
     test('handles changing the personnel FTE for a year', () => {
-      component
-        .findWhere(c => c.name() === 'NumberField' && c.prop('name') === 'ftes')
+      mount(
+        <StatePersonForm
+          activityIndex={6}
+          index={83}
+          item={{
+            description: 'personnel desc',
+            title: 'personnel title',
+            years: {
+              7473: { amt: 2398235, perc: 3 },
+              7474: { amt: 72323, perc: 1 }
+            }
+          }}
+          setCost={setCost}
+          setDescription={setDescription}
+          setFTE={setFTE}
+          setTitle={setTitle}
+        />
+      )
+        .find('input[name="ftes"]')
         .first()
-        .simulate('change', { target: { value: 'new ftes' } });
-      expect(setFTE).toHaveBeenCalledWith(6, 83, '7473', 'new ftes');
+        .simulate('change', { target: { value: '0.5' } });
+      expect(setFTE).toHaveBeenCalledWith(6, 83, '7473', '0.5');
     });
-*/
   });
 
   it('maps dispatch actions to props', () => {

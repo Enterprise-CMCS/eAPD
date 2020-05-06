@@ -101,6 +101,7 @@ const PersonForm = ({
                 }),
                 {}
               )}
+              fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
               setCost={setCostForYear}
               setFTE={setFTEForYear}
             />
