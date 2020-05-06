@@ -122,8 +122,11 @@ module.exports = {
         200: {
           description: 'Successful login',
           content: jsonResponse({
-            token,
-            user
+            type: 'object',
+            properties: {
+              token,
+              user
+            }
           })
         },
         400: {

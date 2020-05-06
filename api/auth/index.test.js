@@ -165,7 +165,7 @@ tap.test('authentication setup', async authTest => {
 
     get(req, res);
 
-    t.ok(res.status.calledWith(400), 'sets a 400 HTTP status');
+    t.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
   });
 
   // logout with valid token
