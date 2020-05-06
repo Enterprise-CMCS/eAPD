@@ -1161,10 +1161,7 @@ Object {
         "description": "Logs the user out by deleting the user's session",
         "responses": Object {
           "200": Object {
-            "description": "Deletes the session",
-          },
-          "400": Object {
-            "description": "Not logged in",
+            "description": "Deletes the session if present",
           },
         },
         "summary": "Logs the current user out",
@@ -1498,10 +1495,15 @@ Object {
             },
             "description": "The current user",
           },
-          "403": Object {
-            "description": "Does not have permission to this activity",
+          "401": Object {
+            "description": "Not logged in",
           },
         },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
         "summary": "Gets the current user's information",
         "tags": Array [
           "Users",
@@ -1612,10 +1614,15 @@ Object {
             },
             "description": "Updated information is invalid",
           },
-          "403": Object {
-            "description": "Does not have permission to this activity",
+          "401": Object {
+            "description": "Not logged in",
           },
         },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
         "summary": "Updates the current user's information",
         "tags": Array [
           "Users",

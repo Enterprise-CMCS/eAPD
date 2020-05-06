@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const qs = require('querystring');
-const { api, buildForm } = require('../../endpoint-tests/utils');
+const { api, buildForm, getDB } = require('../../endpoint-tests/utils');
 
 describe('login nonce endpoint | /auth/login/nonce', () => {
   const url = '/auth/login/nonce';
@@ -24,6 +24,10 @@ describe('login nonce endpoint | /auth/login/nonce', () => {
 });
 
 describe('login endpoint | /auth/login', () => {
+  const db = getDB();
+  beforeAll(() => db.seed.run());
+  afterAll(() => db.destroy());
+
   const nonceUrl = '/auth/login/nonce';
   const nonceForUsername = async username => {
     const response = await api.post(nonceUrl, { username });
