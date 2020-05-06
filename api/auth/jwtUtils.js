@@ -53,11 +53,10 @@ const verifyWebToken = token => {
  * @returns {(String|null)} JWT string or null
  */
 const jwtExtractor = req => {
-  let temp;
-  let token = req.get('Authorization');
+  const token = req.get('Authorization');
   if (!token || !token.toLowerCase().match(/^bearer\s.+\..+\..+/)) return null;
-  [temp, token] = token.split(' ');
-  return token;
+  const [temp, result] = token.split(' ');
+  return result;
 };
 
 module.exports = {

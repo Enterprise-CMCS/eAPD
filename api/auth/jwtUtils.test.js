@@ -61,10 +61,10 @@ tap.test('jwtUtils', async t => {
     });
 
     t.test('given an expired JWT', async t => {
-      let options = { ...signWebTokenOptions };
+      const options = { ...signWebTokenOptions };
       options.expiresIn = '-1ms';
       const token = jwt.sign(payload, process.env.SESSION_SECRET, options);
-      const result = verifyWebToken(jwt);
+      const result = verifyWebToken(token);
       t.equal(result, false, 'returns false');
     });
   });

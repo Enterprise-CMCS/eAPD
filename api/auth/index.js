@@ -46,7 +46,7 @@ const setup = (
         nonce: auth.getNonce(req.body.username)
       });
     }
-    res.status(400).end();
+    return res.status(400).end();
   });
 
   // Add a local authentication endpoint
