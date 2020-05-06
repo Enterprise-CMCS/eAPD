@@ -1,4 +1,5 @@
 /* eslint-disable global-require, no-shadow */
+const jwt = require('jsonwebtoken');
 const tap = require('tap');
 
 tap.test('jwtUtils', async t => {
@@ -23,20 +24,21 @@ tap.test('jwtUtils', async t => {
   });
 
   t.test('signWebToken()', async t => {
-    const { signWebToken } = require('./jwtUtils');
+    const { signWebToken, verifyWebTokenOptions } = require('./jwtUtils');
 
-    t.test('given a payload object', async t => {
-      const jwt = signWebToken(payload);
-      t.match(jwt, /^.+\..+\..+$/, "returns a jwt like: 'xxx.yyy.zzz'");
+    t.test('given a signed JWT', async t => {
+      const token = signWebToken(payload);
+      const result = jwt.verify(token, process.env.SESSION_SECRET, verifyWebTokenOptions);
+      t.equal(result.sub, payload.sub, 'we can decode the payload subject');
     });
   });
 
   t.test('verifyWebToken()', async t => {
-    const { signWebToken, verifyWebToken } = require('./jwtUtils');
+    const { verifyWebToken, signWebTokenOptions } = require('./jwtUtils');
 
     t.test('given a valid JWT', async t => {
-      const jwt = signWebToken(payload);
-      const result = verifyWebToken(jwt);
+      const token = jwt.sign(payload, process.env.SESSION_SECRET, signWebTokenOptions);
+      const result = verifyWebToken(token);
 
       t.isA(result, 'object', 'returns a payload object');
       t.equal(result.sub, 'exampleSessionId', "'sub' is the session id");
@@ -52,8 +54,16 @@ tap.test('jwtUtils', async t => {
       t.equal(result.iss, 'CMS eAPD API', "'iss' (issued) is CMS eAPD API");
     });
 
-    t.test('given an invalid JWT', async t => {
-      const jwt = 'garbage.garbage.garbage';
+    t.test('given an invalid JWT string', async t => {
+      const token = 'garbage.garbage.garbage';
+      const result = verifyWebToken(token);
+      t.equal(result, false, 'returns false');
+    });
+
+    t.test('given an expired JWT', async t => {
+      let options = { ...signWebTokenOptions };
+      options.expiresIn = '-1ms';
+      const token = jwt.sign(payload, process.env.SESSION_SECRET, options);
       const result = verifyWebToken(jwt);
       t.equal(result, false, 'returns false');
     });
@@ -67,15 +77,22 @@ tap.test('jwtUtils', async t => {
       request = new Map()
     });
 
-    t.test('given a JWT in the request Authorization header', async t => {
-      request.set('Authorization', 'Bearer xxx.yyy.zzz');
-      const result = jwtExtractor(request);
-      t.equal(result, 'xxx.yyy.zzz', 'returns the JWT');
+    const scenarios = [
+      ['Bearer xxx.yyy.zzz', 'xxx.yyy.zzz', 'returns the JWT'],
+      ['bearer xxx.yyy.zzz', 'xxx.yyy.zzz', 'returns the JWT'],
+      ['bearer', null, 'returns null'],
+      ['bearer ', null, 'returns null'],
+      ['', null, 'returns null'],
+      ['Elephanter xxx.yyy.zzz', null, 'returns null']
+    ];
+
+    scenarios.forEach(([header, expected, message]) => {
+      t.test(`given Authorization header is '${header}'`, async t => {
+        request.set('Authorization', header);
+        const result = jwtExtractor(request);
+        t.equal(result, expected, message);
+      });
     });
 
-    t.test('given no JWT in the request Authorization header', async t => {
-      const result = jwtExtractor(request);
-      t.equal(result, null, 'returns null');
-    });
   });
 });
