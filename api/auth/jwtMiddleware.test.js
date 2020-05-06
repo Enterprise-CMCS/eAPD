@@ -52,9 +52,6 @@ tap.test('jwtMiddleware', async t => {
     await jwtMiddleware(req, res, next, { deserialize, extractor, verifyToken });
     t.notOk(req.payload, 'req.payload is not present');
     t.notOk(req.user, 'req.user is not present');
-    t.ok(res.status.calledWith(400), 'sets a 400 HTTP status');
-    t.ok(res.send.calledWith(err), 'sends the error that occured when deserializing the user');
-    t.ok(res.end.calledOnce, 'ends the response');
     t.ok(next.calledOnce, 'calls the next middleware function');
   });
 

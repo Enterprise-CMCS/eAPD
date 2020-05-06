@@ -3,10 +3,11 @@ const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
 
-const baseURL = () =>
-  `http://${process.env.API_HOST || 'localhost'}:${process.env.API_PORT ||
-    process.env.PORT ||
-    8000}`;
+const baseURL = () => `http://${
+    process.env.API_HOST || 'localhost'
+  }:${
+    process.env.API_PORT || process.env.PORT || 8000
+  }`;
 
 const axiosDefaults = {
   baseURL: baseURL(),
