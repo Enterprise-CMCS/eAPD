@@ -80,10 +80,8 @@ const setup = (
     if (req.payload) {
       removeSession(req.payload.sub);
       req.logout();
-      res.status(200).end();
-    } else {
-      res.status(400).end();
     }
+    res.status(200).end();
   });
 };
 

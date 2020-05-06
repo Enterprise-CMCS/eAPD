@@ -142,10 +142,7 @@ module.exports = {
       description: 'Logs the user out by deleting the user\'s session',
       responses: {
         200: {
-          description: 'Deletes the session'
-        },
-        400: {
-          description: 'Not logged in'
+          description: 'Deletes the session if present'
         }
       }
     }

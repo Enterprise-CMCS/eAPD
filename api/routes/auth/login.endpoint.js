@@ -137,7 +137,7 @@ describe('login endpoint | /auth/login', () => {
       password: 'password'
     };
 
-    const response = await api.post(url, qs.stringify(data), config);
+    const response = await api.post(url, qs.stringify(data));
 
     expect(response.status).toEqual(200);
     expect(response.data).toMatchSnapshot({ token: expect.any(String) });

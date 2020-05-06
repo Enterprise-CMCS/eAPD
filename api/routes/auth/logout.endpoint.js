@@ -4,10 +4,10 @@ describe('logout endpoint | /auth/logout', () => {
   const url = '/auth/logout';
 
   describe('when unauthenticated', () => {
-    it('returns 400 status', async () => {
+    it('returns 200 status', async () => {
       const response = await api.get(url);
 
-      expect(response.status).toEqual(400);
+      expect(response.status).toEqual(200);
     });
   });
 
