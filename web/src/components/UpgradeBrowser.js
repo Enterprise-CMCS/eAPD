@@ -1,10 +1,16 @@
 import React from 'react';
+import { browserIsYellow } from '../util/browser';
 
 const browsers = [
   {
     id: 'chrome',
     name: 'Google Chrome',
     link: 'https://www.google.com/chrome/'
+  },
+  {
+    id: 'edge',
+    name: 'Microsoft Edge',
+    link: 'https://www.microsoft.com/en-us/edge/'
   },
   {
     id: 'firefox',
@@ -41,12 +47,12 @@ const html = `<div class="ds-c-alert__body">
 
 const UpgradeBrowser = () => {
   /* eslint-disable react/no-danger */
-  return (
+  return browserIsYellow ? (
     <div
       className="ds-c-alert ds-c-alert--warn"
       dangerouslySetInnerHTML={{ __html: html }}
     />
-  );
+  ) : null;
 };
 
 export default UpgradeBrowser;

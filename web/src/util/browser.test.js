@@ -9,10 +9,10 @@ describe('browser support detection util', () => {
     jest.mock('detect-browser');
   });
 
-  test('indicates green support for Chrome versions at least 72', () => {
+  test('indicates green support for Chrome versions at least 80', () => {
     detect.mockReturnValue({
       name: 'chrome',
-      version: '72.32.71'
+      version: '80.32.71'
     });
 
     // eslint-disable-next-line global-require
@@ -35,10 +35,10 @@ describe('browser support detection util', () => {
     expect(browser.browserIsRed).toEqual(false);
   });
 
-  test('indicates green support for Edge versions at least 44', () => {
+  test('indicates green support for Edge versions at least 79', () => {
     detect.mockReturnValue({
       name: 'edge',
-      version: '44.29.93'
+      version: '79.29.93'
     });
 
     // eslint-disable-next-line global-require
@@ -69,10 +69,10 @@ describe('browser support detection util', () => {
   });
 
   describe('indicates red for everything else', () => {
-    test('indicates red support for Chrome versions prior to 72', () => {
+    test('indicates red support for Chrome versions prior to 80', () => {
       detect.mockReturnValue({
         name: 'chrome',
-        version: '71.32.71'
+        version: '79.32.71'
       });
 
       // eslint-disable-next-line global-require
@@ -95,10 +95,10 @@ describe('browser support detection util', () => {
       expect(browser.browserIsRed).toEqual(true);
     });
 
-    test('indicates red support for Edge versions prior to 44', () => {
+    test('indicates red support for Edge versions prior to 79', () => {
       detect.mockReturnValue({
         name: 'edge',
-        version: '43.95.28'
+        version: '78.95.28'
       });
 
       // eslint-disable-next-line global-require
