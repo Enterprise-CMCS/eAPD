@@ -462,10 +462,166 @@ exports[`card form wrapper renders with a save button if onSave prop is provided
 </div>
 `;
 
+exports[`card form wrapper renders with the default id on the container if id prop is not set 1`] = `
+<div
+  className="card--container"
+  id="start-main-content"
+>
+  <div
+    className="ds-l-container"
+  >
+    <div
+      className="ds-l-row card"
+    >
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+      >
+        <h1
+          className="ds-h1"
+        >
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
+          >
+            hello world
+            <div
+              className="ds-u-margin-top--5"
+            >
+              <Button
+                component="button"
+                onClick={[Function]}
+                type="button"
+                variation="transparent"
+              >
+                Cancel
+              </Button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`card form wrapper renders with the provided id on the container if id prop is set 1`] = `
+<div
+  className="card--container"
+  id="my custom id"
+>
+  <div
+    className="ds-l-container"
+  >
+    <div
+      className="ds-l-row card"
+    >
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+      >
+        <h1
+          className="ds-h1"
+        >
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
+          >
+            hello world
+            <div
+              className="ds-u-margin-top--5"
+            >
+              <Button
+                component="button"
+                onClick={[Function]}
+                type="button"
+                variation="transparent"
+              >
+                Cancel
+              </Button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`card form wrapper renders without a save button if onSave prop is missing 1`] = `
 <div
   className="card--container"
   id="start-main-content"
+>
+  <div
+    className="ds-l-container"
+  >
+    <div
+      className="ds-l-row card"
+    >
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+      >
+        <h1
+          className="ds-h1"
+        >
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
+          >
+            hello world
+            <div
+              className="ds-u-margin-top--5"
+            >
+              <Button
+                component="button"
+                onClick={[Function]}
+                type="button"
+                variation="transparent"
+              >
+                Cancel
+              </Button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`card form wrapper renders without an id on the container if id prop is false 1`] = `
+<div
+  className="card--container"
+  id={false}
 >
   <div
     className="ds-l-container"

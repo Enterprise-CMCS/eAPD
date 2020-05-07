@@ -21,7 +21,10 @@ exports[`login component renders correctly if logged in and previous location is
 `;
 
 exports[`login component renders correctly if logged in previously but not logged in now (shows logout notice) 1`] = `
-<Fragment>
+<div
+  id="start-main-content"
+>
+  <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
@@ -40,6 +43,7 @@ exports[`login component renders correctly if logged in previously but not logge
         </a>
       </p>
     }
+    id={false}
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -70,7 +74,7 @@ exports[`login component renders correctly if logged in previously but not logge
       value=""
     />
   </withRouter(CardForm)>
-</Fragment>
+</div>
 `;
 
 exports[`login component renders correctly if logged in, but no previous location 1`] = `
@@ -84,7 +88,10 @@ exports[`login component renders correctly if logged in, but no previous locatio
 `;
 
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
-<Fragment>
+<div
+  id="start-main-content"
+>
+  <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
@@ -103,6 +110,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
         </a>
       </p>
     }
+    id={false}
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -133,11 +141,14 @@ exports[`login component renders correctly if not logged in and fetching data 1`
       value=""
     />
   </withRouter(CardForm)>
-</Fragment>
+</div>
 `;
 
 exports[`login component renders correctly if not logged in and there is an error 1`] = `
-<Fragment>
+<div
+  id="start-main-content"
+>
+  <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
@@ -156,6 +167,7 @@ exports[`login component renders correctly if not logged in and there is an erro
         </a>
       </p>
     }
+    id={false}
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -186,11 +198,14 @@ exports[`login component renders correctly if not logged in and there is an erro
       value=""
     />
   </withRouter(CardForm)>
-</Fragment>
+</div>
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 1`] = `
-<Fragment>
+<div
+  id="start-main-content"
+>
+  <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
@@ -209,6 +224,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id={false}
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -239,11 +255,14 @@ exports[`login component renders correctly if not logged in, and never logged in
       value=""
     />
   </withRouter(CardForm)>
-</Fragment>
+</div>
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 2`] = `
-<Fragment>
+<div
+  id="start-main-content"
+>
+  <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
@@ -262,6 +281,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id={false}
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -292,11 +312,14 @@ exports[`login component renders correctly if not logged in, and never logged in
       value=""
     />
   </withRouter(CardForm)>
-</Fragment>
+</div>
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 3`] = `
-<Fragment>
+<div
+  id="start-main-content"
+>
+  <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={6}
     cancelable={false}
@@ -315,6 +338,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id={false}
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -345,5 +369,5 @@ exports[`login component renders correctly if not logged in, and never logged in
       value="secret"
     />
   </withRouter(CardForm)>
-</Fragment>
+</div>
 `;
