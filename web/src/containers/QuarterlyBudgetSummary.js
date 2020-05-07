@@ -71,15 +71,11 @@ const QuarterlyBudgetSummary = ({ budget, isViewOnly, years }) => {
                       <th scope="row">{EXPENSE_NAME_DISPLAY[name]}</th>
                       {QUARTERS.map(q => (
                         <td className="budget-table--number" key={q}>
-                          <Dollars long={isViewOnly}>
-                            {data[year][q][name]}
-                          </Dollars>
+                          <Dollars>{data[year][q][name]}</Dollars>
                         </td>
                       ))}
                       <td className="budget-table--number budget-table--subtotal">
-                        <Dollars long={isViewOnly}>
-                          {data[year].subtotal[name]}
-                        </Dollars>
+                        <Dollars>{data[year].subtotal[name]}</Dollars>
                       </td>
                     </tr>
                   ))}
@@ -108,7 +104,7 @@ const QuarterlyBudgetSummary = ({ budget, isViewOnly, years }) => {
                   >
                     <th scope="row">{EXPENSE_NAME_DISPLAY[name]}</th>
                     <td className="budget-table--total budget-table--number">
-                      <Dollars long={isViewOnly}>{data.total[name]}</Dollars>
+                      <Dollars>{data.total[name]}</Dollars>
                     </td>
                   </tr>
                 ))}

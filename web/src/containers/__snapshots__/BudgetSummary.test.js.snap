@@ -73,27 +73,21 @@ exports[`budget summary component data row renders with data 1`] = `
   <td
     className="budget-table--number"
   >
-    <Dollars
-      long={false}
-    >
+    <Dollars>
       1000
     </Dollars>
   </td>
   <td
     className="budget-table--number"
   >
-    <Dollars
-      long={false}
-    >
+    <Dollars>
       1
     </Dollars>
   </td>
   <td
     className="budget-table--number"
   >
-    <Dollars
-      long={false}
-    >
+    <Dollars>
       2
     </Dollars>
   </td>
@@ -112,27 +106,21 @@ exports[`budget summary component data row renders with no data 1`] = `
   <td
     className="budget-table--number"
   >
-    <Dollars
-      long={false}
-    >
+    <Dollars>
       0
     </Dollars>
   </td>
   <td
     className="budget-table--number"
   >
-    <Dollars
-      long={false}
-    >
+    <Dollars>
       0
     </Dollars>
   </td>
   <td
     className="budget-table--number"
   >
-    <Dollars
-      long={false}
-    >
+    <Dollars>
       0
     </Dollars>
   </td>
@@ -525,27 +513,21 @@ exports[`budget summary component renders correctly 1`] = `
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1000
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             2
           </Dollars>
         </td>
@@ -562,27 +544,21 @@ exports[`budget summary component renders correctly 1`] = `
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             2000
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             10
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             20
           </Dollars>
         </td>

@@ -23,13 +23,13 @@ function DataRow({ data, title, isViewOnly }) {
     >
       <th scope="row">{title}</th>
       <td className="budget-table--number">
-        <Dollars long={isViewOnly}>{data.medicaid}</Dollars>
+        <Dollars>{data.medicaid}</Dollars>
       </td>
       <td className="budget-table--number">
-        <Dollars long={isViewOnly}>{data.federal}</Dollars>
+        <Dollars>{data.federal}</Dollars>
       </td>
       <td className="budget-table--number">
-        <Dollars long={isViewOnly}>{data.state}</Dollars>
+        <Dollars>{data.state}</Dollars>
       </td>
     </tr>
   );
@@ -185,13 +185,13 @@ const BudgetSummary = ({ activities, data, isViewOnly, years }) => (
             >
               <th scope="row">{ffy === 'total' ? 'Total' : `FFY ${ffy}`}</th>
               <td className="budget-table--number">
-                <Dollars long={isViewOnly}>{combined.medicaid}</Dollars>
+                <Dollars>{combined.medicaid}</Dollars>
               </td>
               <td className="budget-table--number">
-                <Dollars long={isViewOnly}>{combined.federal}</Dollars>
+                <Dollars>{combined.federal}</Dollars>
               </td>
               <td className="budget-table--number">
-                <Dollars long={isViewOnly}>{combined.state}</Dollars>
+                <Dollars>{combined.state}</Dollars>
               </td>
             </tr>
           );

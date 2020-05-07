@@ -23,9 +23,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             Total cost:
           </strong>
            
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             400
           </Dollars>
         </li>
@@ -38,9 +36,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
              cost:
           </strong>
            
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             100
           </Dollars>
         </li>
@@ -53,9 +49,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
              cost:
           </strong>
            
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             300
           </Dollars>
         </li>
@@ -93,9 +87,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             Total cost:
           </strong>
            
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             400
           </Dollars>
         </li>
@@ -108,9 +100,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
              cost:
           </strong>
            
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             100
           </Dollars>
         </li>
@@ -123,9 +113,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
              cost:
           </strong>
            
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             300
           </Dollars>
         </li>

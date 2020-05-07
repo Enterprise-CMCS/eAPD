@@ -29,19 +29,7 @@ describe('Dollars formatting container', () => {
     });
   });
 
-  test('prints full numbers if long prop is set', () => {
+  test('prints dollar-formatted numbers', () => {
     expect(render(<Dollars long>2857298672</Dollars>)).toMatchSnapshot();
-  });
-
-  test('prints full numbers below $100,000', () => {
-    expect(render(<Dollars>50000</Dollars>)).toMatchSnapshot();
-  });
-
-  test('prints truncated numbers above $100,000', () => {
-    expect(render(<Dollars>500000</Dollars>)).toMatchSnapshot();
-  });
-
-  test('shows B for billions instead of G for giga', () => {
-    expect(render(<Dollars>50000000000</Dollars>)).toMatchSnapshot();
   });
 });

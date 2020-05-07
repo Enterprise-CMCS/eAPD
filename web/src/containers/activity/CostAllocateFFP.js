@@ -24,7 +24,7 @@ const CostSummaryRows = ({ items }) =>
     <tr key={description}>
       <td className="title">{description}</td>
       <td className="budget-table--number">
-        {unitCost !== null && <Dollars long>{unitCost}</Dollars>}
+        {unitCost !== null && <Dollars>{unitCost}</Dollars>}
       </td>
       <td className="budget-table--number ds-u-padding--0">
         {unitCost !== null && '×'}
@@ -32,7 +32,7 @@ const CostSummaryRows = ({ items }) =>
       <td className="budget-table--number ds-u-text-align--left">{units}</td>
       <td className="budget-table--number">{unitCost !== null && '='}</td>
       <td className="budget-table--number">
-        <Dollars long>{totalCost}</Dollars>
+        <Dollars>{totalCost}</Dollars>
       </td>
     </tr>
   ));
@@ -85,24 +85,24 @@ const AllFFYsSummaryNarrative = ({
     <p>
       The total cost of the <strong>{activityName}</strong> activity is{' '}
       <strong>
-        <Dollars long>{total.totalCost}</Dollars>
+        <Dollars>{total.totalCost}</Dollars>
       </strong>
       . Because of other funding of{' '}
       <strong>
-        <Dollars long>{total.otherFunding}</Dollars>
+        <Dollars>{total.otherFunding}</Dollars>
       </strong>
       , the total cost to Medicaid is{' '}
       <strong>
-        <Dollars long>{total.medicaidShare}</Dollars>
+        <Dollars>{total.medicaidShare}</Dollars>
       </strong>
       . This activity is using a <strong>{fundingSplitNarrative}</strong>{' '}
       funding split, resulting in a federal share of{' '}
       <strong>
-        <Dollars long>{total.federalShare}</Dollars>
+        <Dollars>{total.federalShare}</Dollars>
       </strong>{' '}
       and a {stateName} share of{' '}
       <strong>
-        <Dollars long>{total.stateShare}</Dollars>
+        <Dollars>{total.stateShare}</Dollars>
       </strong>
       .
     </p>
@@ -165,7 +165,7 @@ const CostAllocateFFP = ({
                   State Staff Subtotal
                 </td>
                 <td className="budget-table--number">
-                  <Dollars long>{years[ffy].statePersonnelTotal}</Dollars>
+                  <Dollars>{years[ffy].statePersonnelTotal}</Dollars>
                 </td>
               </tr>
               <tr className="budget-table--row__header">
@@ -179,7 +179,7 @@ const CostAllocateFFP = ({
                   Other State Expenses Subtotal
                 </td>
                 <td className="budget-table--number">
-                  <Dollars long>{years[ffy].nonPersonnelTotal}</Dollars>
+                  <Dollars>{years[ffy].nonPersonnelTotal}</Dollars>
                 </td>
               </tr>
               <tr className="budget-table--row__header">
@@ -193,13 +193,13 @@ const CostAllocateFFP = ({
                   Private Contractor Subtotal
                 </td>
                 <td className="budget-table--number">
-                  <Dollars long>{years[ffy].contractorResourcesTotal}</Dollars>
+                  <Dollars>{years[ffy].contractorResourcesTotal}</Dollars>
                 </td>
               </tr>
               <tr className="budget-table--subtotal">
                 <td colSpan="5">Activity Total Cost</td>
                 <td className="budget-table--number">
-                  <Dollars long>{years[ffy].totalCost}</Dollars>
+                  <Dollars>{years[ffy].totalCost}</Dollars>
                 </td>
               </tr>
 
@@ -212,14 +212,14 @@ const CostAllocateFFP = ({
                     <td colSpan="3" />
                     <td>-</td>
                     <td className="budget-table--number">
-                      <Dollars long>{years[ffy].otherFunding}</Dollars>
+                      <Dollars>{years[ffy].otherFunding}</Dollars>
                     </td>
                   </tr>
                   <tr className="budget-table--subtotal budget-table--row__highlight">
                     <td>Medicaid Share</td>
                     <td colSpan="4" />
                     <td className="budget-table--number">
-                      <Dollars long>{years[ffy].medicaidShare}</Dollars>
+                      <Dollars>{years[ffy].medicaidShare}</Dollars>
                     </td>
                   </tr>
                   <CostSummaryRows
@@ -266,20 +266,20 @@ const CostAllocateFFP = ({
                   <tr className="budget-table--subtotal budget-table--row__header">
                     <th colSpan="2">Activity Total Cost</th>
                     <td className="budget-table--number">
-                      <Dollars long>{years[ffy].totalCost}</Dollars>
+                      <Dollars>{years[ffy].totalCost}</Dollars>
                     </td>
                   </tr>
                   <tr>
                     <td className="title">Other Funding</td>
                     <td>-</td>
                     <td className="budget-table--number">
-                      <Dollars long>{years[ffy].otherFunding}</Dollars>
+                      <Dollars>{years[ffy].otherFunding}</Dollars>
                     </td>
                   </tr>
                   <tr className="budget-table--subtotal budget-table--row__highlight">
                     <td className="title">Medicaid Share</td>
                     <td colSpan="2" className="budget-table--number">
-                      <Dollars long>{years[ffy].medicaidShare}</Dollars>
+                      <Dollars>{years[ffy].medicaidShare}</Dollars>
                     </td>
                   </tr>
                 </tbody>
@@ -312,7 +312,7 @@ const CostAllocateFFP = ({
                   <tr className="budget-table--subtotal budget-table--row__header">
                     <th colSpan="5">Medicaid Share</th>
                     <td className="budget-table--number">
-                      <Dollars long>{years[ffy].medicaidShare}</Dollars>
+                      <Dollars>{years[ffy].medicaidShare}</Dollars>
                     </td>
                   </tr>
                   <CostSummaryRows

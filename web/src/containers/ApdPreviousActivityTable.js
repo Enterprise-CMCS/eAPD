@@ -81,49 +81,49 @@ const ApdPreviousActivityTable = ({
                 headers={`prev_act_hithie_row_${year} prev_act_hithie_total prev_act_hithie_total_approved`}
                 className={isViewOnly ? 'budget-table--number' : ''}
               >
-                {isViewOnly ?
-                  <Dollars long>
+                {isViewOnly ? (
+                  <Dollars>
                     {previousActivityExpenses[year].totalApproved}
                   </Dollars>
-                : 
+                ) : (
                   <DollarField
-                  className="budget-table--input-holder"
-                  fieldClassName="budget-table--input__number"
-                  label={`total approved funding for HIT and HIE for FFY ${year}, state plus federal`}
-                  labelClassName="ds-u-visibility--screen-reader"
-                  name={`hithie-approved-total-${year}`}
-                  value={previousActivityExpenses[year].totalApproved}
-                  onChange={getApprovedHandler(year)}
+                    className="budget-table--input-holder"
+                    fieldClassName="budget-table--input__number"
+                    label={`total approved funding for HIT and HIE for FFY ${year}, state plus federal`}
+                    labelClassName="ds-u-visibility--screen-reader"
+                    name={`hithie-approved-total-${year}`}
+                    value={previousActivityExpenses[year].totalApproved}
+                    onChange={getApprovedHandler(year)}
                   />
-                }
+                )}
               </td>
 
               <td
                 headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_approved`}
                 className="budget-table--number"
               >
-                <Dollars long={isViewOnly}>{federalApproved}</Dollars>
+                <Dollars>{federalApproved}</Dollars>
               </td>
 
               <td
                 headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_actual`}
                 className={isViewOnly ? 'budget-table--number' : ''}
               >
-                {isViewOnly ?
-                  <Dollars long>
+                {isViewOnly ? (
+                  <Dollars>
                     {previousActivityExpenses[year].federalActual}
                   </Dollars>
-                : 
+                ) : (
                   <DollarField
-                  className="budget-table--input-holder"
-                  fieldClassName="budget-table--input__number"
-                  label={`actual federal share for HIT and HIE for FFY ${year}`}
-                  labelClassName="ds-u-visibility--screen-reader"
-                  name={`hithie-actual-federal-${year}`}
-                  value={previousActivityExpenses[year].federalActual}
-                  onChange={getActualsHandler(year)}
+                    className="budget-table--input-holder"
+                    fieldClassName="budget-table--input__number"
+                    label={`actual federal share for HIT and HIE for FFY ${year}`}
+                    labelClassName="ds-u-visibility--screen-reader"
+                    name={`hithie-actual-federal-${year}`}
+                    value={previousActivityExpenses[year].federalActual}
+                    onChange={getActualsHandler(year)}
                   />
-                }
+                )}
               </td>
             </tr>
           );
