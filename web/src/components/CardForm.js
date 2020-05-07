@@ -12,6 +12,7 @@ const CardForm = ({
   error,
   footer,
   history,
+  id,
   legend,
   onSave,
   primaryButtonText: [primaryButtonNormal, primaryButtonWorking],
@@ -20,7 +21,7 @@ const CardForm = ({
   title,
   working
 }) => (
-  <div id="start-main-content" className="card--container">
+  <div id={id} className="card--container">
     <div className="ds-l-container">
       <div className="ds-l-row card">
         <div className="ds-l-col--1 ds-u-margin-left--auto" />
@@ -46,7 +47,11 @@ const CardForm = ({
           </h1>
           <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
-              {!!legend && <legend className="ds-u-visibility--screen-reader">{legend}</legend>}
+              {!!legend && (
+                <legend className="ds-u-visibility--screen-reader">
+                  {legend}
+                </legend>
+              )}
 
               {children}
 
@@ -89,6 +94,7 @@ CardForm.propTypes = {
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   history: PropTypes.object.isRequired,
+  id: PropTypes.string,
   legend: PropTypes.string,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   primaryButtonText: PropTypes.arrayOf(PropTypes.string),
@@ -103,6 +109,7 @@ CardForm.defaultProps = {
   canSubmit: true,
   error: false,
   footer: false,
+  id: 'start-main-content',
   legend: '',
   onSave: false,
   primaryButtonText: ['Save changes', 'Working'],

@@ -6,16 +6,15 @@ if (browser && browser.version) {
   browser.version = Number.parseInt(browser.version.split('.').shift(), 10);
 }
 
-// Green support is for browsers where we we intend all functionality to
-// work as well as all visual and style features to be correct.
+// Green support is for browsers where we we intend all functionality to work as
+// well as all visual and style features to be correct.
 const browserIsGreen =
-  // First Chrome version of 2019
-  (browser.name === 'chrome' && browser.version >= 72) ||
-  // Most recent Firefox extended support release as of October 2019.
+  // Current major version as of April 2020.
+  (browser.name === 'chrome' && browser.version >= 80) ||
+  // Most recent Firefox extended support release as of April 2020.
   (browser.name === 'firefox' && browser.version >= 68) ||
-  // Most recent major version of Edge. This may need to be updated sometime
-  // after the Chromium build of Edge is released.
-  (browser.name === 'edge' && browser.version >= 44);
+  // First Chromium build of Edge. No longer support pre-Chromium builds.
+  (browser.name === 'edge' && browser.version >= 79);
 
 // Yellow support is for browsers we think should support all the basic
 // functionality of the app, though more advanced features and some visual

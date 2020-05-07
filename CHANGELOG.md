@@ -10,8 +10,11 @@ Anticipated release: May 18, 2020
 
 #### ⚙️ Behind the scenes
 
+- Update minimum Chrome version; add download link to Microsoft Edge ([#2145])
+
 # Previous releases
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
 [#2187]: https://github.com/18F/cms-hitech-apd/issues/2187
+[#2145]: https://github.com/18F/cms-hitech-apd/issues/2145
