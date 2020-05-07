@@ -8,6 +8,7 @@ import ConsentBanner from '../components/ConsentBanner';
 import { login } from '../actions/auth';
 import CardForm from '../components/CardForm';
 import Password from '../components/PasswordWithMeter';
+import UpgradeBrowser from '../components/UpgradeBrowser';
 
 const Login = ({
   authenticated,
@@ -58,8 +59,10 @@ const Login = ({
   }
 
   return (
-    <Fragment>
+    <div id="start-main-content">
+      <UpgradeBrowser />
       <CardForm
+        id={false}
         title="Log in"
         legend="Log in"
         cancelable={false}
@@ -89,7 +92,7 @@ const Login = ({
         />
         <Password title="Password" value={password} onChange={changePassword} />
       </CardForm>
-    </Fragment>
+    </div>
   );
 };
 
