@@ -11,6 +11,36 @@ describe('card form wrapper', () => {
     history.goBack.resetHistory();
   });
 
+  test('renders without an id on the container if id prop is false', () => {
+    expect(
+      shallow(
+        <CardForm id={false} title="test" history={history}>
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
+  test('renders with the provided id on the container if id prop is set', () => {
+    expect(
+      shallow(
+        <CardForm id="my custom id" title="test" history={history}>
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
+  test('renders with the default id on the container if id prop is not set', () => {
+    expect(
+      shallow(
+        <CardForm title="test" history={history}>
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
   test('renders without a save button if onSave prop is missing', () => {
     expect(
       shallow(
