@@ -23,7 +23,7 @@ DollarCell.propTypes = {
 
 DollarCell.defaultProps = { headers: '' };
 
-const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
+const ExecutiveSummaryBudget = ({ budget }) => {
   const { hit, hie, hitAndHie, mmisByFFP, years } = budget;
 
   if (!years.length) return null;
@@ -259,11 +259,8 @@ const ExecutiveSummaryBudget = ({ budget, isViewOnly }) => {
 };
 
 ExecutiveSummaryBudget.propTypes = {
-  budget: PropTypes.object.isRequired,
-  isViewOnly: PropTypes.bool
+  budget: PropTypes.object.isRequired
 };
-
-ExecutiveSummaryBudget.defaultProps = { isViewOnly: false };
 
 const mapStateToProps = ({ budget }) => ({ budget });
 

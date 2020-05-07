@@ -88,7 +88,7 @@ class ExecutiveSummary extends PureComponent {
 
         <hr className="subsection-rule" />
         <h3>Program Budget Tables</h3>
-        <ExecutiveSummaryBudget isViewOnly />
+        <ExecutiveSummaryBudget />
       </div>
     );
   }
