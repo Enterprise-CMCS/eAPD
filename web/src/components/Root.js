@@ -4,13 +4,10 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 
 import App from './App';
-import UpgradeBrowser from './UpgradeBrowser';
-import { browserIsYellow } from '../util/browser';
 
 const Root = ({ history, store }) => {
   return (
     <Provider store={store}>
-      {browserIsYellow && <UpgradeBrowser />}
       <ConnectedRouter history={history}>
         <App />
       </ConnectedRouter>
