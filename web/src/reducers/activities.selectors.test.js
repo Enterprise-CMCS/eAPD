@@ -142,7 +142,7 @@ describe('activities state selectors', () => {
               costs: { '1990': 100, '1991': 200 },
               hasCosts: true,
               name: 'key person',
-              fte: { '1990': 1.0, '1991': 1.0 }
+              fte: { '1990': 1.0, '1991': 0.75 }
             }
           ],
           years: ['1990', '1991']
@@ -228,9 +228,9 @@ describe('activities state selectors', () => {
           keyPersonnel: [
             {
               description: 'key person (APD Key Personnel)',
-              totalCost: 200,
+              totalCost: 150,
               unitCost: 200,
-              units: '1 FTE'
+              units: '0.75 FTE'
             }
           ],
           medicaidShare: 0,
@@ -239,7 +239,7 @@ describe('activities state selectors', () => {
           otherFunding: 0,
           statePercent: 0,
           statePersonnel: [],
-          statePersonnelTotal: 200,
+          statePersonnelTotal: 150,
           stateShare: 0,
           totalCost: 0
         }
