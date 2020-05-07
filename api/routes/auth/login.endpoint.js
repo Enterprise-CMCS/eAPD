@@ -117,15 +117,11 @@ describe('login endpoint | /auth/login', () => {
     }
   ];
 
-  const config = {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  };
-
   badCredentialsCases.forEach(badCredentialsCase => {
     it(`Form body: ${badCredentialsCase.title}`, async () => {
       const data = await badCredentialsCase.data();
       const form = qs.stringify(data);
-      const response = await api.post(url, form, config);
+      const response = await api.post(url, form);
       expect(response.status).toEqual(401);
     });
 

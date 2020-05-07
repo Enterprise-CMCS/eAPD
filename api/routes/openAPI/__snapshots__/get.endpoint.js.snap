@@ -1034,65 +1034,68 @@ Object {
             "content": Object {
               "application/json": Object {
                 "schema": Object {
-                  "token": Object {
-                    "properties": Object {
-                      "token": Object {
-                        "description": "A JWT to be presented in the Authorization header of all subsequent requests.",
-                        "type": "string",
-                      },
-                    },
-                    "type": "object",
-                  },
-                  "user": Object {
-                    "properties": Object {
-                      "activities": Object {
-                        "items": Object {
-                          "description": "Names of system activities this user can perform",
+                  "properties": Object {
+                    "token": Object {
+                      "properties": Object {
+                        "token": Object {
+                          "description": "A JWT to be presented in the Authorization header of all subsequent requests.",
                           "type": "string",
                         },
-                        "type": "array",
                       },
-                      "id": Object {
-                        "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
-                        "type": "number",
-                      },
-                      "name": Object {
-                        "description": "The user's name, if defined",
-                        "type": "string",
-                      },
-                      "phone": Object {
-                        "description": "The user's phone number, if defined",
-                        "type": "string",
-                      },
-                      "position": Object {
-                        "description": "The user's position, if defined",
-                        "type": "string",
-                      },
-                      "role": Object {
-                        "description": "Names of system authorization role this user belongs to",
-                        "type": "string",
-                      },
-                      "state": Object {
-                        "description": "The state/territory/district that this user is assigned to",
-                        "properties": Object {
-                          "id": Object {
-                            "description": "Lowercase 2-letter code",
-                            "type": "string",
-                          },
-                          "name": Object {
-                            "description": "State/territory/district full name",
-                            "type": "string",
-                          },
-                        },
-                        "type": "object",
-                      },
-                      "username": Object {
-                        "description": "User's unique username (email address)",
-                        "type": "string",
-                      },
+                      "type": "object",
                     },
-                    "type": "object",
+                    "user": Object {
+                      "properties": Object {
+                        "activities": Object {
+                          "items": Object {
+                            "description": "Names of system activities this user can perform",
+                            "type": "string",
+                          },
+                          "type": "array",
+                        },
+                        "id": Object {
+                          "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
+                          "type": "number",
+                        },
+                        "name": Object {
+                          "description": "The user's name, if defined",
+                          "type": "string",
+                        },
+                        "phone": Object {
+                          "description": "The user's phone number, if defined",
+                          "type": "string",
+                        },
+                        "position": Object {
+                          "description": "The user's position, if defined",
+                          "type": "string",
+                        },
+                        "role": Object {
+                          "description": "Names of system authorization role this user belongs to",
+                          "type": "string",
+                        },
+                        "state": Object {
+                          "description": "The state/territory/district that this user is assigned to",
+                          "properties": Object {
+                            "id": Object {
+                              "description": "Lowercase 2-letter code",
+                              "type": "string",
+                            },
+                            "name": Object {
+                              "description": "State/territory/district full name",
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "username": Object {
+                          "description": "User's unique username (email address)",
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
                   },
+                  "type": "object",
                 },
               },
             },

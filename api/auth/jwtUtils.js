@@ -55,7 +55,7 @@ const verifyWebToken = token => {
 const jwtExtractor = req => {
   const token = req.get('Authorization');
   if (!token || !token.toLowerCase().match(/^bearer\s.+\..+\..+/)) return null;
-  const [temp, result] = token.split(' ');
+  const [temp, result] = token.split(' ');  // eslint-disable-line no-unused-vars
   return result;
 };
 
