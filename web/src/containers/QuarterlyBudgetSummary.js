@@ -16,7 +16,7 @@ const EXPENSE_NAME_DISPLAY = {
   combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
 };
 
-const QuarterlyBudgetSummary = ({ budget, isViewOnly, years }) => {
+const QuarterlyBudgetSummary = ({ budget, years }) => {
   // wait until budget is loaded
   if (!years.length) return null;
 
@@ -119,11 +119,8 @@ const QuarterlyBudgetSummary = ({ budget, isViewOnly, years }) => {
 
 QuarterlyBudgetSummary.propTypes = {
   budget: PropTypes.object.isRequired,
-  isViewOnly: PropTypes.bool,
   years: PropTypes.array.isRequired
 };
-
-QuarterlyBudgetSummary.defaultProps = { isViewOnly: false };
 
 const mapStateToProps = ({ budget, apd }) => ({
   budget: budget.federalShareByFFYQuarter,
