@@ -47,9 +47,7 @@ exports[`executive summary component navigates to activities 1`] = `
             Total cost of activity:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             950
           </Dollars>
         </li>
@@ -58,15 +56,11 @@ exports[`executive summary component navigates to activities 1`] = `
             Medicaid share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1150
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1050
           </Dollars>
            Federal share)
@@ -81,9 +75,7 @@ exports[`executive summary component navigates to activities 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             5232
           </Dollars>
            |
@@ -92,15 +84,11 @@ exports[`executive summary component navigates to activities 1`] = `
             Medicaid Share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             23626
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2883
           </Dollars>
            Federal share)
@@ -115,9 +103,7 @@ exports[`executive summary component navigates to activities 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             848622
           </Dollars>
            |
@@ -126,15 +112,11 @@ exports[`executive summary component navigates to activities 1`] = `
             Medicaid Share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2468252
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             826
           </Dollars>
            Federal share)
@@ -174,9 +156,7 @@ exports[`executive summary component navigates to activities 1`] = `
             Total cost of activity:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             310
           </Dollars>
         </li>
@@ -185,15 +165,11 @@ exports[`executive summary component navigates to activities 1`] = `
             Medicaid share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2150
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2050
           </Dollars>
            Federal share)
@@ -208,9 +184,7 @@ exports[`executive summary component navigates to activities 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             26926
           </Dollars>
            |
@@ -219,15 +193,11 @@ exports[`executive summary component navigates to activities 1`] = `
             Medicaid Share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             989264
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2356
           </Dollars>
            Federal share)
@@ -242,9 +212,7 @@ exports[`executive summary component navigates to activities 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             54634738
           </Dollars>
            |
@@ -253,15 +221,11 @@ exports[`executive summary component navigates to activities 1`] = `
             Medicaid Share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             73
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             643
           </Dollars>
            Federal share)
@@ -298,15 +262,11 @@ exports[`executive summary component navigates to activities 1`] = `
             Medicaid share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             30
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             20
           </Dollars>
            Federal share)
@@ -316,9 +276,7 @@ exports[`executive summary component navigates to activities 1`] = `
             Total funding request:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             10
           </Dollars>
         </li>
@@ -332,21 +290,15 @@ exports[`executive summary component navigates to activities 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             5232
           </Dollars>
+           |
            
-          | 
-          <Dollars
-            long={true}
-          />
+          <Dollars />
            Medicaid share |
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2883
           </Dollars>
            Federal share
@@ -361,21 +313,15 @@ exports[`executive summary component navigates to activities 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             848622
           </Dollars>
+           |
            
-          | 
-          <Dollars
-            long={true}
-          />
+          <Dollars />
            Medicaid share |
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             826
           </Dollars>
            Federal share
@@ -444,9 +390,7 @@ exports[`executive summary component renders correctly 1`] = `
             Total cost of activity:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             950
           </Dollars>
         </li>
@@ -455,15 +399,11 @@ exports[`executive summary component renders correctly 1`] = `
             Medicaid share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1150
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1050
           </Dollars>
            Federal share)
@@ -478,9 +418,7 @@ exports[`executive summary component renders correctly 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             5232
           </Dollars>
            |
@@ -489,15 +427,11 @@ exports[`executive summary component renders correctly 1`] = `
             Medicaid Share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             23626
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2883
           </Dollars>
            Federal share)
@@ -512,9 +446,7 @@ exports[`executive summary component renders correctly 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             848622
           </Dollars>
            |
@@ -523,15 +455,11 @@ exports[`executive summary component renders correctly 1`] = `
             Medicaid Share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2468252
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             826
           </Dollars>
            Federal share)
@@ -571,9 +499,7 @@ exports[`executive summary component renders correctly 1`] = `
             Total cost of activity:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             310
           </Dollars>
         </li>
@@ -582,15 +508,11 @@ exports[`executive summary component renders correctly 1`] = `
             Medicaid share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2150
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2050
           </Dollars>
            Federal share)
@@ -605,9 +527,7 @@ exports[`executive summary component renders correctly 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             26926
           </Dollars>
            |
@@ -616,15 +536,11 @@ exports[`executive summary component renders correctly 1`] = `
             Medicaid Share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             989264
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2356
           </Dollars>
            Federal share)
@@ -639,9 +555,7 @@ exports[`executive summary component renders correctly 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             54634738
           </Dollars>
            |
@@ -650,15 +564,11 @@ exports[`executive summary component renders correctly 1`] = `
             Medicaid Share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             73
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             643
           </Dollars>
            Federal share)
@@ -695,15 +605,11 @@ exports[`executive summary component renders correctly 1`] = `
             Medicaid share:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             30
           </Dollars>
            (
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             20
           </Dollars>
            Federal share)
@@ -713,9 +619,7 @@ exports[`executive summary component renders correctly 1`] = `
             Total funding request:
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             10
           </Dollars>
         </li>
@@ -729,21 +633,15 @@ exports[`executive summary component renders correctly 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             5232
           </Dollars>
+           |
            
-          | 
-          <Dollars
-            long={true}
-          />
+          <Dollars />
            Medicaid share |
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             2883
           </Dollars>
            Federal share
@@ -758,21 +656,15 @@ exports[`executive summary component renders correctly 1`] = `
             :
           </strong>
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             848622
           </Dollars>
+           |
            
-          | 
-          <Dollars
-            long={true}
-          />
+          <Dollars />
            Medicaid share |
            
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             826
           </Dollars>
            Federal share

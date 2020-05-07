@@ -82,7 +82,7 @@ const IncentivePayments = ({
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
                       {isViewOnly ? (
-                        <Dollars long>{data.ehAmt[year][q] || ''}</Dollars>
+                        <Dollars>{data.ehAmt[year][q] || ''}</Dollars>
                       ) : (
                         <DollarField
                           className="budget-table--input-holder"
@@ -134,7 +134,7 @@ const IncentivePayments = ({
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
                       {isViewOnly ? (
-                        <Dollars long>{data.epAmt[year][q] || ''}</Dollars>
+                        <Dollars>{data.epAmt[year][q] || ''}</Dollars>
                       ) : (
                         <DollarField
                           className="budget-table--input-holder"
@@ -213,9 +213,6 @@ const mapDispatchToProps = {
   setEPPayment: setIncentiveEPPayment
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(IncentivePayments);
+export default connect(mapStateToProps, mapDispatchToProps)(IncentivePayments);
 
 export { IncentivePayments as plain, mapStateToProps, mapDispatchToProps };

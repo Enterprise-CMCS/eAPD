@@ -47,9 +47,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
         className="budget-table--number"
         headers="prev_act_total_row_1 prev_act_total_approved"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           1878
         </Dollars>
       </td>
@@ -57,9 +55,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
         className="budget-table--number"
         headers="prev_act_total_row_1 prev_act_total_actual"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           1090
         </Dollars>
       </td>
@@ -76,9 +72,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
         className="budget-table--number"
         headers="prev_act_total_row_2 prev_act_total_approved"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           4380
         </Dollars>
       </td>
@@ -86,9 +80,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
         className="budget-table--number"
         headers="prev_act_total_row_2 prev_act_total_actual"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           3900
         </Dollars>
       </td>
