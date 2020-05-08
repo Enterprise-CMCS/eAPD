@@ -107,4 +107,4 @@ const openAPI = {
   }
 };
 
-module.exports = requiresAuth(openAPI, { has401: false });
+module.exports = requiresAuth(openAPI, { has403: false });

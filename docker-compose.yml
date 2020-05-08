@@ -40,7 +40,6 @@ services:
       - DATABASE_URL=postgres://postgres:cms@db/hitech_apd
       - NODE_ENV=development
       - DISABLE_SAME_SITE=yes
-      - DISABLE_SECURE_COOKIE=yes
     volumes:
       - type: bind
         source: ./api

@@ -1,53 +1,44 @@
 const jwt = require('jsonwebtoken');
-const { request, getFullPath } = require('../../utils.endpoint');
+const qs = require('querystring');
+const { api, buildForm, getDB } = require('../../endpoint-tests/utils');
 
 describe('login nonce endpoint | /auth/login/nonce', () => {
-  const url = getFullPath('/auth/login/nonce');
+  const url = '/auth/login/nonce';
 
   it('with no username', async () => {
-    const {
-      response: { statusCode }
-    } = await request.post(url);
-    expect(statusCode).toEqual(400);
+    const response = await api.post(url);
+    expect(response.status).toEqual(400);
   });
 
   it('with a username', async () => {
-    const {
-      response: { statusCode },
-      body
-    } = await request.post(url, { json: { username: 'test user' } });
-    expect(statusCode).toEqual(200);
+    const response = await api
+      .post(url, { username: 'test user' });
+    expect(response.status).toEqual(200);
 
-    const token = jwt.decode(body.nonce);
+    const token = jwt.decode(response.data.nonce);
 
-    expect(body.nonce).toMatch(/[^.]+\.[^.]+\.[^.]+/i);
+    expect(response.data.nonce).toMatch(/[^.]+\.[^.]+\.[^.]+/i);
     expect(token).toMatchObject({ username: 'test user' });
     expect(token.exp).toEqual(token.iat + 3);
   });
 });
 
 describe('login endpoint | /auth/login', () => {
-  const nonceUrl = getFullPath('/auth/login/nonce');
+  const db = getDB();
+  beforeAll(() => db.seed.run());
+  afterAll(() => db.destroy());
+
+  const nonceUrl = '/auth/login/nonce';
   const nonceForUsername = async username => {
-    const {
-      body: { nonce }
-    } = await request.post(nonceUrl, { json: { username } });
-    return nonce;
+    const response = await api.post(nonceUrl, { username });
+    return response.data.nonce;
   };
 
-  const url = getFullPath('/auth/login');
+  const url = '/auth/login';
 
   it('with no post body at all', async () => {
-    const { response } = await request.post(url);
-    expect(response.statusCode).toEqual(400);
-  });
-
-  it('proper response headers', async () => {
-    const { response } = await request.post(url);
-    const { headers } = response;
-
-    expect(headers.vary).toEqual('Origin');
-    expect(headers['access-control-allow-credentials']).toEqual('true');
+    const response = await api.post(url);
+    expect(response.status).toEqual(400);
   });
 
   const invalidCases = [
@@ -67,13 +58,14 @@ describe('login endpoint | /auth/login', () => {
 
   invalidCases.forEach(invalidCase => {
     it(`Form body: ${invalidCase.title}`, async () => {
-      const { response } = await request.post(url, { form: invalidCase.data });
-      expect(response.statusCode).toEqual(400);
+      const form = buildForm(invalidCase.data);
+      const response = await api.post(url, form);
+      expect(response.status).toEqual(400);
     });
 
     it(`JSON body: ${invalidCase.title}`, async () => {
-      const { response } = await request.post(url, { json: invalidCase.data });
-      expect(response.statusCode).toEqual(400);
+      const response = await api.post(url, invalidCase.data);
+      expect(response.status).toEqual(400);
     });
   });
 
@@ -127,78 +119,51 @@ describe('login endpoint | /auth/login', () => {
 
   badCredentialsCases.forEach(badCredentialsCase => {
     it(`Form body: ${badCredentialsCase.title}`, async () => {
-      const { response } = await request.post(url, {
-        form: await badCredentialsCase.data()
-      });
-      expect(response.statusCode).toEqual(401);
+      const data = await badCredentialsCase.data();
+      const form = qs.stringify(data);
+      const response = await api.post(url, form);
+      expect(response.status).toEqual(401);
     });
 
     it(`JSON body: ${badCredentialsCase.title}`, async () => {
-      const { response } = await request.post(url, {
-        json: await badCredentialsCase.data()
-      });
-      expect(response.statusCode).toEqual(401);
+      const response = await api.post(url, await badCredentialsCase.data());
+      expect(response.status).toEqual(401);
     });
   });
 
   it('Form body: with valid username and valid password', async () => {
-    // isolate cookies, so request doesn't reuse them
-    const cookies = request.jar();
-    const { response, body } = await request.post(url, {
-      jar: cookies,
-      form: {
-        username: await nonceForUsername('all-permissions-and-state'),
-        password: 'password'
-      },
-      json: true
-    });
+    const data = {
+      username: await nonceForUsername('all-permissions-and-state'),
+      password: 'password'
+    };
 
-    expect(response.statusCode).toEqual(200);
-    expect(
-      response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
-      )
-    ).toBeTruthy();
-    expect(body).toMatchSnapshot();
+    const response = await api.post(url, qs.stringify(data));
+
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot({ token: expect.any(String) });
   });
 
   it('JSON body: with valid username and valid password', async () => {
-    // isolate cookies, so request doesn't reuse them
-    const cookies = request.jar();
-    const { response, body } = await request.post(url, {
-      jar: cookies,
-      json: {
-        username: await nonceForUsername('all-permissions-and-state'),
-        password: 'password'
-      }
-    });
+    const data = {
+      username: await nonceForUsername('all-permissions-and-state'),
+      password: 'password'
+    };
 
-    expect(response.statusCode).toEqual(200);
-    expect(
-      response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
-      )
-    ).toBeTruthy();
-    expect(body).toMatchSnapshot();
+    const response = await api.post(url, data);
+
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot({ token: expect.any(String) });
   });
 
   it('JSON body: with valid (UPPERCASED) username and valid password', async () => {
-    // isolate cookies, so request doesn't reuse them
-    const cookies = request.jar();
-    const { response, body } = await request.post(url, {
-      jar: cookies,
-      json: {
-        username: await nonceForUsername('ALL-PERMISSIONS-AND-STATE'),
-        password: 'password'
-      }
-    });
+    const data = {
+      username: await nonceForUsername('ALL-PERMISSIONS-AND-STATE'),
+      password: 'password'
+    };
 
-    expect(response.statusCode).toEqual(200);
-    expect(
-      response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
-      )
-    ).toBeTruthy();
-    expect(body).toMatchSnapshot();
+    const response = await api.post(url, data);
+
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot({ token: expect.any(String) });
   });
 });

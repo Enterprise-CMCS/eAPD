@@ -533,10 +533,10 @@ Object {
       },
     },
     "securitySchemes": Object {
-      "sessionCookie": Object {
-        "in": "cookie",
-        "name": "token",
-        "type": "apiKey",
+      "bearerAuth": Object {
+        "bearerFormat": "Bearer xxx.yyy.zzz",
+        "scheme": "bearer",
+        "type": "http",
       },
     },
   },
@@ -591,15 +591,15 @@ Object {
             "description": "The list of a user’s apds",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Get all of the APDs available to the user",
@@ -621,15 +621,15 @@ Object {
             "description": "The new APD",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Create a new draft APD associated with the user's state",
@@ -660,10 +660,10 @@ Object {
             "description": "Invalid request, such as requesting to archive an APD that is not editable",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The apd ID does not match any known apds for the user",
@@ -671,7 +671,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Archive an APD",
@@ -704,10 +704,10 @@ Object {
             "description": "The APD",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The apd ID does not match any known apds for the user",
@@ -715,7 +715,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Get a single, complete APD",
@@ -809,10 +809,10 @@ Object {
             "description": "The update failed due to a problem with the input data",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The apd ID does not match any known apds for the user",
@@ -820,7 +820,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Update a specific APD",
@@ -884,10 +884,10 @@ Object {
             "description": "Invalid request, such as requesting to archive an APD that is not editable",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The apd ID does not match any known apds for the user",
@@ -895,7 +895,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Upload a file associated with an APD",
@@ -941,10 +941,10 @@ Object {
             "description": "The file",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The file does not belong to the APD or does not exist",
@@ -952,7 +952,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Get a file associated with an APD",
@@ -990,15 +990,15 @@ Object {
             "description": "The list of activities known to the system",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Gets the list of all activities",
@@ -1035,50 +1035,64 @@ Object {
               "application/json": Object {
                 "schema": Object {
                   "properties": Object {
-                    "activities": Object {
-                      "items": Object {
-                        "description": "Names of system activities this user can perform",
-                        "type": "string",
-                      },
-                      "type": "array",
-                    },
-                    "id": Object {
-                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
-                      "type": "number",
-                    },
-                    "name": Object {
-                      "description": "The user's name, if defined",
-                      "type": "string",
-                    },
-                    "phone": Object {
-                      "description": "The user's phone number, if defined",
-                      "type": "string",
-                    },
-                    "position": Object {
-                      "description": "The user's position, if defined",
-                      "type": "string",
-                    },
-                    "role": Object {
-                      "description": "Names of system authorization role this user belongs to",
-                      "type": "string",
-                    },
-                    "state": Object {
-                      "description": "The state/territory/district that this user is assigned to",
+                    "token": Object {
                       "properties": Object {
-                        "id": Object {
-                          "description": "Lowercase 2-letter code",
-                          "type": "string",
-                        },
-                        "name": Object {
-                          "description": "State/territory/district full name",
+                        "token": Object {
+                          "description": "A JWT to be presented in the Authorization header of all subsequent requests.",
                           "type": "string",
                         },
                       },
                       "type": "object",
                     },
-                    "username": Object {
-                      "description": "User's unique username (email address)",
-                      "type": "string",
+                    "user": Object {
+                      "properties": Object {
+                        "activities": Object {
+                          "items": Object {
+                            "description": "Names of system activities this user can perform",
+                            "type": "string",
+                          },
+                          "type": "array",
+                        },
+                        "id": Object {
+                          "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
+                          "type": "number",
+                        },
+                        "name": Object {
+                          "description": "The user's name, if defined",
+                          "type": "string",
+                        },
+                        "phone": Object {
+                          "description": "The user's phone number, if defined",
+                          "type": "string",
+                        },
+                        "position": Object {
+                          "description": "The user's position, if defined",
+                          "type": "string",
+                        },
+                        "role": Object {
+                          "description": "Names of system authorization role this user belongs to",
+                          "type": "string",
+                        },
+                        "state": Object {
+                          "description": "The state/territory/district that this user is assigned to",
+                          "properties": Object {
+                            "id": Object {
+                              "description": "Lowercase 2-letter code",
+                              "type": "string",
+                            },
+                            "name": Object {
+                              "description": "State/territory/district full name",
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "username": Object {
+                          "description": "User's unique username (email address)",
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
                     },
                   },
                   "type": "object",
@@ -1086,14 +1100,6 @@ Object {
               },
             },
             "description": "Successful login",
-            "headers": Object {
-              "Set-Cookie": Object {
-                "schema": Object {
-                  "example": "token=auth-token-jwt; path=/; expires=Sat, 1 Jan 2035 12:00:00 GMT; httponly",
-                  "type": "string",
-                },
-              },
-            },
           },
           "400": Object {
             "description": "Missing username or password",
@@ -1155,18 +1161,10 @@ Object {
     },
     "/auth/logout": Object {
       "get": Object {
-        "description": "Logs the user out by invalidating the session cookie",
+        "description": "Logs the user out by deleting the user's session",
         "responses": Object {
           "200": Object {
-            "description": "Clears the session cookie",
-            "headers": Object {
-              "Set-Cookie": Object {
-                "schema": Object {
-                  "example": "session=; expires=; httponly",
-                  "type": "string",
-                },
-              },
-            },
+            "description": "Deletes the session if present",
           },
         },
         "summary": "Logs the current user out",
@@ -1210,15 +1208,15 @@ Object {
             "description": "The list of roles known to the system",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Gets the list of all roles",
@@ -1298,15 +1296,15 @@ Object {
             "description": "The body of the request is invalid: there are no activities defined, some activities are not numeric, or some activities do not exist",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Creates a new role",
@@ -1334,10 +1332,10 @@ Object {
             "description": "The role was deleted successfully",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The role ID does not match any known roles",
@@ -1345,7 +1343,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Deletes a role",
@@ -1419,10 +1417,10 @@ Object {
             "description": "The body of the request is invalid: there are no activities defined, some activities are not numeric, or some activities do not exist",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The role ID does not match any known roles",
@@ -1430,7 +1428,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Sets the activities for a role",
@@ -1500,13 +1498,13 @@ Object {
             },
             "description": "The current user",
           },
-          "403": Object {
+          "401": Object {
             "description": "Not logged in",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Gets the current user's information",
@@ -1619,13 +1617,13 @@ Object {
             },
             "description": "Updated information is invalid",
           },
-          "403": Object {
+          "401": Object {
             "description": "Not logged in",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Updates the current user's information",
@@ -1697,15 +1695,15 @@ Object {
             "description": "The list of users known to the system",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Gets a list of all users",
@@ -1760,15 +1758,15 @@ Object {
             "description": "Invalid user submitted, such as email address already exists or password is weak",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Adds a new user",
@@ -1799,10 +1797,10 @@ Object {
             "description": "The provided user ID was invalid",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The user ID does not match any known users",
@@ -1810,7 +1808,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Removes a user",
@@ -1874,10 +1872,10 @@ Object {
             "description": "The matching user",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "content": Object {
@@ -1898,7 +1896,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Gets the information for a specific user",
@@ -1967,10 +1965,10 @@ Object {
             "description": "The request was invalid",
           },
           "401": Object {
-            "description": "Does not have permission to this activity",
+            "description": "Not logged in",
           },
           "403": Object {
-            "description": "Not logged in",
+            "description": "Does not have permission to this activity",
           },
           "404": Object {
             "description": "The user ID does not match any known users",
@@ -1978,7 +1976,7 @@ Object {
         },
         "security": Array [
           Object {
-            "sessionCookie": Array [],
+            "bearerAuth": Array [],
           },
         ],
         "summary": "Updates a user account",

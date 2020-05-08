@@ -1,51 +1,43 @@
 const {
   getDB,
-  request,
-  getFullPath,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../utils.endpoint');
+} = require('../../../endpoint-tests/utils');
 
 describe('auth roles endpoint | DELETE /auth/roles/:roleID', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
 
-  const url = roleID => getFullPath(`/auth/roles/${roleID}`);
+  const url = roleID => `/auth/roles/${roleID}`;
 
   unauthenticatedTest('delete', url(1001));
   unauthorizedTest('delete', url(1001));
 
   describe('when authenticated', () => {
-    let cookies;
-    beforeAll(async () => {
-      cookies = await login();
-    });
-
     it('with an invalid role ID', async () => {
-      const { response, body } = await request.delete(url(9001), {
-        jar: cookies
-      });
-      expect(response.statusCode).toEqual(404);
-      expect(body).toMatchSnapshot();
+      const response = await login()
+        .then(api => api.delete(url(9001)));
+
+      expect(response.status).toEqual(404);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('deleting the role that the user belongs to', async () => {
-      const { response, body } = await request.delete(url(1101), {
-        jar: cookies
-      });
-      expect(response.statusCode).toEqual(401);
-      expect(body).toMatchSnapshot();
+      const response = await login()
+        .then(api => api.delete(url(1101)));
+
+      expect(response.status).toEqual(401);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('deleting a role that the user does not belong to', async () => {
-      const { response, body } = await request.delete(url(1102), {
-        jar: cookies
-      });
+      const response = await login()
+        .then(api => api.delete(url(1102)));
 
-      expect(response.statusCode).toEqual(204);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(204);
+      expect(response.data).toMatchSnapshot();
 
       const role = await db('auth_roles')
         .where({ id: 1102 })

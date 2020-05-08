@@ -73,9 +73,9 @@ module.exports = (
 
       const roleID = await createAuthRole(req.body.name, req.body.activities);
 
-      const activities = (await getAuthActivitiesByIDs(
-        req.body.activities
-      )).map(({ name }) => name);
+      const activities = (
+        await getAuthActivitiesByIDs(req.body.activities)
+      ).map(({ name }) => name);
 
       const role = {
         id: roleID,
