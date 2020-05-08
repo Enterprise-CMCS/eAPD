@@ -4,7 +4,7 @@ exports[`users endpoint | PUT /users/:userID when authenticated when sending a n
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a non-existant user ID 1`] = `""`;
 
-exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...when updating self with all new content, role is ignored 1`] = `undefined`;
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...when updating self with all new content, role is ignored 1`] = `""`;
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with a simple password 1`] = `
 Object {
@@ -12,7 +12,7 @@ Object {
 }
 `;
 
-exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with all new content, plus some junk 1`] = `undefined`;
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with all new content, plus some junk 1`] = `""`;
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with an existing email address 1`] = `
 Object {
@@ -32,6 +32,6 @@ Object {
 }
 `;
 
-exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with new content but same email address 1`] = `undefined`;
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with new content but same email address 1`] = `""`;
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with no content 1`] = `""`;

@@ -1,30 +1,25 @@
 const {
   getDB,
-  getFullPath,
   login,
-  request,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../utils.endpoint');
+} = require('../../../endpoint-tests/utils');
 
 describe('auth roles endpoint | GET /auth/roles', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
 
-  const url = getFullPath('/auth/roles');
+  const url = '/auth/roles';
 
   unauthenticatedTest('get', url);
   unauthorizedTest('get', url);
 
   it('when authenticated', async () => {
-    const cookies = await login();
-    const { response, body } = await request.get(url, {
-      jar: cookies,
-      json: true
-    });
+    const response = await login()
+      .then(api => api.get(url));
 
-    expect(response.statusCode).toEqual(200);
-    expect(body).toMatchSnapshot();
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot();
   });
 });

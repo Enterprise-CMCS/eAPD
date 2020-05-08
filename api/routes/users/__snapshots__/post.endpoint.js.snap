@@ -6,7 +6,7 @@ Object {
 }
 `;
 
-exports[`users endpoint | POST /users when authenticated with a valid new user 1`] = `undefined`;
+exports[`users endpoint | POST /users when authenticated with a valid new user 1`] = `""`;
 
 exports[`users endpoint | POST /users when authenticated with a weak password 1`] = `
 Object {

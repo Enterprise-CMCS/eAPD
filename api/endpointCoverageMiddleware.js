@@ -61,9 +61,12 @@ const registerCoverageMiddleware = server => {
       const end = res.end.bind(res);
       res.end = (...args) => {
         const path = req.route ? req.route.path : req.path;
-        endpoints.find(e => e.openAPIPath === getOpenApiUrl(path)).methods[
-          req.method.toLowerCase()
-        ].statuses[res.statusCode] = { tested: true };
+
+        if (req.method.toLowerCase() !== 'options') { // ignore 'options' requests
+          endpoints.find(e => e.openAPIPath === getOpenApiUrl(path)).methods[
+            req.method.toLowerCase()
+          ].statuses[res.statusCode] = { tested: true };
+        }
 
         fs.writeFileSync('./endpoint-data.json', JSON.stringify(endpoints));
 
