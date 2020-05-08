@@ -43,15 +43,17 @@ export const login = (username, password) => dispatch => {
 
   return axios
     .post('/auth/login/nonce', { username })
-    .then(req =>
+    .then(res =>
       axios.post('/auth/login', {
-        username: req.data.nonce,
+        username: res.data.nonce,
         password
       })
     )
-    .then(req => {
-      dispatch(completeLogin(req.data));
-      dispatch(loadData(req.data.activities));
+    .then(res => {
+      const { token, user } = res.data;
+      localStorage.setItem('token', token);
+      dispatch(completeLogin(user));
+      dispatch(loadData(user.activities));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
@@ -60,7 +62,9 @@ export const login = (username, password) => dispatch => {
 };
 
 export const logout = () => dispatch =>
-  axios.get('/auth/logout').then(() => dispatch(completeLogout()));
+  axios.get('/auth/logout')
+    .then(() => localStorage.removeItem('token'))
+    .then(() => dispatch(completeLogout()));
 
 export const checkAuth = () => dispatch => {
   dispatch(requestAuthCheck());
