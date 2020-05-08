@@ -1,11 +1,9 @@
 const {
   getDB,
-  request,
-  getFullPath,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../utils.endpoint');
+} = require('../../endpoint-tests/utils');
 
 const newUsersInTheDatabase = async () => {
   // Get all users other than the originals.  User IDs 2000,
@@ -19,12 +17,12 @@ const newUsersInTheDatabase = async () => {
   return users.length ? users : false;
 };
 
+const url = '/users';
+
 describe('users endpoint | POST /users', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
-
-  const url = getFullPath('/users');
 
   unauthenticatedTest('post', url);
   unauthorizedTest('post', url);
@@ -35,79 +33,87 @@ describe('users endpoint | POST /users', () => {
     },
     {
       name: 'with an invalid body',
-      body: { hello: 'world' }
+      data: { hello: 'world' }
     },
     {
       name: 'with an email but no password',
-      body: { email: 'newuser@email.com' }
+      data: { email: 'newuser@email.com' }
     },
     {
       name: 'with a password but no email',
-      body: { password: 'newpassword' }
+      data: { password: 'newpassword' }
     }
   ];
 
   describe('when authenticated', () => {
-    let cookies;
-    beforeAll(async () => {
-      cookies = await login();
-    });
-
     invalidCases.forEach(situation => {
       it(situation.name, async () => {
-        const { response, body } = await request.post(url, {
-          jar: cookies,
-          json: situation.body || true
-        });
-        expect(response.statusCode).toEqual(400);
-        expect(body).toMatchSnapshot();
+        const response = await login()
+          .then(api => api.post(url, situation.data))
+
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
         const newUsers = await newUsersInTheDatabase();
         expect(newUsers).toBeFalsy();
       });
     });
 
     it('with existing email address', async () => {
-      const { response, body } = await request.post(url, {
-        jar: cookies,
-        json: { email: 'all-permissions-and-state', password: 'anything' }
-      });
-      expect(response.statusCode).toEqual(400);
-      expect(body).toMatchSnapshot();
+      const response = await login()
+        .then(api =>
+          api.post(url, {
+            email: 'all-permissions-and-state',
+            password: 'anything'
+          })
+        );
+
+      expect(response.status).toEqual(400);
+      expect(response.data).toMatchSnapshot();
       const newUsers = await newUsersInTheDatabase();
       expect(newUsers).toBeFalsy();
     });
 
     it('with existing email address but different capitalization', async () => {
-      const { response, body } = await request.post(url, {
-        jar: cookies,
-        json: { email: 'All-Permissions-And-State', password: 'anything' }
-      });
-      expect(response.statusCode).toEqual(400);
-      expect(body).toMatchSnapshot();
+      const response = await login()
+        .then(api =>
+          api.post(url, {
+            email: 'All-Permissions-And-State',
+            password: 'anything'
+          })
+        );
+
+      expect(response.status).toEqual(400);
+      expect(response.data).toMatchSnapshot();
       const newUsers = await newUsersInTheDatabase();
       expect(newUsers).toBeFalsy();
     });
 
     it('with a weak password', async () => {
-      const { response, body } = await request.post(url, {
-        jar: cookies,
-        json: { email: 'weakuser@email.com', password: 'Newp@ssw0rd!' }
-      });
+      const response = await login()
+        .then(api =>
+          api.post(url, {
+            email: 'weakuser@email.com',
+            password: 'Newp@ssw0rd!'
+          })
+        );
 
-      expect(response.statusCode).toEqual(400);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(400);
+      expect(response.data).toMatchSnapshot();
       const newUsers = await newUsersInTheDatabase();
       expect(newUsers).toBeFalsy();
     });
 
     it('with a valid new user', async () => {
-      const { response, body } = await request.post(url, {
-        jar: cookies,
-        json: { email: 'newuser@email.com', password: 'Q%&jsruW$%Jaej' }
-      });
+      const response = await login()
+        .then(api =>
+          api.post(url, {
+            email: 'newuser@email.com',
+            password: 'Q%&jsruW$%Jaej'
+          })
+        );
 
-      expect(response.statusCode).toEqual(200);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
       const newUsers = await newUsersInTheDatabase();
       expect(newUsers.length).toEqual(1);
     });

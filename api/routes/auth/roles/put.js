@@ -92,9 +92,9 @@ module.exports = (
 
       await updateAuthRole(roleID, req.body.name, req.body.activities);
 
-      const activities = (await getAuthActivitiesByIDs(
-        req.body.activities
-      )).map(({ name }) => name);
+      const activities = (
+        await getAuthActivitiesByIDs(req.body.activities)
+      ).map(({ name }) => name);
 
       const updatedRole = {
         id: roleID,
