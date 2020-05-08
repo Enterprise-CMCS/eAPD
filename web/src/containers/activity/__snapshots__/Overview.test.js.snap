@@ -47,8 +47,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
     <FormLabel
       className="ds-c-label--full-width"
       component="label"
-      hint="Example: Explain and justify the decision to build a custom software solution instead of using a COTS or SaaS option.
-Example: Explain and justify the decision to conduct a contract modification instead of doing a fully competitive procurement."
+      hint=""
     >
       Statement of alternative considerations and supporting justification
     </FormLabel>

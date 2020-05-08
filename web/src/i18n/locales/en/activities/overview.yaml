@@ -17,11 +17,12 @@ activityDescriptionInput:
 
 activityAlternativesInput:
   label: Statement of alternative considerations and supporting justification
-  hint: >-
+  helpText: >-
     Example: Explain and justify the decision to build a custom software solution instead of using a COTS or SaaS option.
 
+
     Example: Explain and justify the decision to conduct a contract modification instead of doing a fully competitive procurement.
-  helpText: >-
+  detail: >-
     Provide a brief description of each alternative considered for the implementation of this activity. 
     The description should include considerations for costs/benefits/risks for each option. Indicate 
     which option was finally selected and why the final selection was made. As applicable, 
