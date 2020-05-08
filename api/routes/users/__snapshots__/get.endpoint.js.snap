@@ -70,7 +70,7 @@ Array [
 ]
 `;
 
-exports[`users endpoint | GET /users/:userID when authenticated when requesting a non-existant user ID 1`] = `undefined`;
+exports[`users endpoint | GET /users/:userID when authenticated when requesting a non-existant user ID 1`] = `""`;
 
 exports[`users endpoint | GET /users/:userID when authenticated when requesting a valid user ID 1`] = `
 Object {

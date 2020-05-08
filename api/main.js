@@ -6,7 +6,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const multer = require('multer');
 const uuid = require('uuid/v1');
 const logger = require('./logger')('main');
 const auth = require('./auth');
@@ -82,7 +81,6 @@ server.use(compression());
 server.use(express.urlencoded({ extended: true }));
 server.use(cors({ credentials: true, origin: true }));
 server.use(bodyParser.json({ limit: '5mb' }));
-server.use(multer().single('file'));
 
 // Registers Passport, related handlers, and
 // login/logout endpoints

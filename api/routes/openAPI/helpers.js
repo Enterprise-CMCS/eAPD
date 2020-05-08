@@ -1,10 +1,10 @@
 module.exports.responses = {
   unauthed: {
     401: {
-      description: 'Does not have permission to this activity'
+      description: 'Not logged in'
     },
     403: {
-      description: 'Not logged in'
+      description: 'Does not have permission to this activity'
     }
   }
 };
@@ -43,8 +43,8 @@ module.exports.requiresAuth = (
   const authed = { ...openAPI };
   Object.keys(authed).forEach(route => {
     Object.keys(authed[route]).forEach(verb => {
-      if (has403) {
-        authed[route][verb].security = [{ sessionCookie: [] }];
+      if (has401) {
+        authed[route][verb].security = [{ bearerAuth: [] }];
       }
 
       const authResponses = { ...module.exports.responses.unauthed };
