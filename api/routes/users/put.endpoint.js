@@ -1,13 +1,11 @@
 const {
   getDB,
-  getFullPath,
   login,
-  request,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../utils.endpoint');
+} = require('../../endpoint-tests/utils');
 
-const url = userID => getFullPath(`/users/${userID}`);
+const url = userID => `/users/${userID}`;
 
 describe('users endpoint | PUT /users/:userID', () => {
   const db = getDB();
@@ -18,66 +16,57 @@ describe('users endpoint | PUT /users/:userID', () => {
   unauthorizedTest('put', url(0));
 
   describe('when authenticated', () => {
-    let cookies;
-    beforeAll(async () => {
-      cookies = await login();
-    });
-    const put = (id, body) =>
-      request.put(url(id), {
-        jar: cookies,
-        json: body
-      });
+    const put = (id, data) =>
+      login().then(api => api.put(url(id), data))
 
     it('when sending a non-numeric ID', async () => {
-      const { response, body } = await put('abc');
+      const response = await put('abc');
 
-      expect(response.statusCode).toEqual(400);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(400);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('when updating a non-existant user ID', async () => {
-      const { response, body } = await put(0);
+      const response = await put(0);
 
-      expect(response.statusCode).toEqual(404);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(404);
+      expect(response.data).toMatchSnapshot();
     });
 
     describe('when updating a valid user ID', () => {
       it('...with an invalid state ID', async () => {
-        const { response, body } = await put(2001, { state: 'xx' });
+        const response = await put(2001, { state: 'xx' });
 
-        expect(response.statusCode).toEqual(400);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('...with an invalid role name', async () => {
-        const { response, body } = await put(2001, { role: 'fakey-fakey' });
+        const response = await put(2001, { role: 'fakey-fakey' });
 
-        expect(response.statusCode).toEqual(400);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('...with an existing email address', async () => {
-        const { response, body } = await put(2001, {
-          username: 'no-permissions'
-        });
+        const response = await put(2001, { username: 'no-permissions' });
 
-        expect(response.statusCode).toEqual(400);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('...with a simple password', async () => {
-        const { response, body } = await put(2001, { password: 'simple' });
+        const response = await put(2001, { password: 'simple' });
 
-        expect(response.statusCode).toEqual(400);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('...with no content', async () => {
-        const { response, body } = await put(2001);
+        const response = await put(2001);
 
-        expect(response.statusCode).toEqual(204);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(204);
+        expect(response.data).toMatchSnapshot();
       });
 
       // This makes sure the duplicate-email check doesn't flag accounts that
@@ -88,10 +77,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           .where({ id: 2001 })
           .first();
 
-        const {
-          response: { statusCode },
-          body
-        } = await put(2001, {
+        const response = await put(2001, {
           username: 'all-permissions-no-state',
           name: 'test name',
           phone: '123',
@@ -101,8 +87,8 @@ describe('users endpoint | PUT /users/:userID', () => {
           useless: 'is discarded'
         });
 
-        expect(statusCode).toEqual(204);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(204);
+        expect(response.data).toMatchSnapshot();
 
         const user = await db('users')
           .where({ id: 2001 })
@@ -124,10 +110,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           .where({ id: 2001 })
           .first();
 
-        const {
-          response: { statusCode },
-          body
-        } = await put(2001, {
+        const response = await put(2001, {
           username: 'test email',
           junk: 'gets ignored',
           name: 'test name',
@@ -139,8 +122,8 @@ describe('users endpoint | PUT /users/:userID', () => {
           useless: 'is discarded'
         });
 
-        expect(statusCode).toEqual(204);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(204);
+        expect(response.data).toMatchSnapshot();
 
         const user = await db('users')
           .where({ id: 2001 })
@@ -163,10 +146,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           .where({ id: 2000 })
           .first();
 
-        const {
-          response: { statusCode },
-          body
-        } = await put(2000, {
+        const response = await put(2000, {
           username: 'own email',
           name: 'test name',
           phone: '123',
@@ -175,8 +155,8 @@ describe('users endpoint | PUT /users/:userID', () => {
           role: 'state SME'
         });
 
-        expect(statusCode).toEqual(204);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(204);
+        expect(response.data).toMatchSnapshot();
 
         const user = await db('users')
           .where({ id: 2000 })
