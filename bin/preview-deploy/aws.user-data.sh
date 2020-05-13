@@ -136,7 +136,7 @@ cd ~
 mv cms-hitech-apd/api/* /app/api
 cd /app/api
 
-npm ci --only=production 
+npm ci --only=production
 
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
@@ -162,8 +162,7 @@ echo "module.exports = {
       PBKDF2_ITERATIONS: '__PBKDF2_ITERATIONS__',
       PORT: '8000',
       DEV_DB_HOST: 'localhost',
-      DISABLE_SAME_SITE: 'yes',
-      DISABLE_SECURE_COOKIE: 'yes'
+      DISABLE_SAME_SITE: 'yes'
     },
   }]
 };" > ecosystem.config.js

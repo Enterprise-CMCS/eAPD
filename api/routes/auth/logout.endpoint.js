@@ -1,43 +1,22 @@
-const { request, getFullPath } = require('../../utils.endpoint');
+const { api, login } = require('../../endpoint-tests/utils');
 
 describe('logout endpoint | /auth/logout', () => {
-  const url = getFullPath('/auth/logout');
+  const url = '/auth/logout';
 
-  it('not already logged in', async () => {
-    const cookies = request.jar();
+  describe('when unauthenticated', () => {
+    it('returns 200 status', async () => {
+      const response = await api.get(url);
 
-    const { response } = await request.get(url, { jar: cookies });
-
-    expect(response.statusCode).toEqual(200);
-
-    // It might be valid for the API to set some header other than
-    // the session cookie
-    expect(
-      response.headers['set-cookie']
-        .filter(cookie => cookie.startsWith('token='))
-        .every(
-          cookie =>
-            cookie ===
-            'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=none; httponly'
-        )
-    ).toBeTruthy();
+      expect(response.status).toEqual(200);
+    });
   });
 
-  it('already logged in', async () => {
-    const cookies = request.jar();
-    cookies.setCookie('session=this-is-my-session', url);
+  describe('when authenticated', () => {
+    it('returns 200 status', async () => {
+      const response = await login()
+        .then(authenticatedClient => authenticatedClient.get(url));
 
-    const { response } = await request.get(url, { jar: cookies });
-
-    expect(response.statusCode).toEqual(200);
-    expect(
-      response.headers['set-cookie']
-        .filter(cookie => cookie.startsWith('token='))
-        .every(
-          cookie =>
-            cookie ===
-            'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=none; httponly'
-        )
-    ).toBeTruthy();
+      expect(response.status).toEqual(200);
+    });
   });
 });

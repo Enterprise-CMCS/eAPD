@@ -29,27 +29,34 @@ describe('auth actions', () => {
   });
 
   describe('login (async)', () => {
+    let localStorageSetItemSpy;
+
+    beforeEach(() => {
+      localStorageSetItemSpy = jest.spyOn(Storage.prototype, 'setItem');
+    });
+
     afterEach(() => {
+      localStorageSetItemSpy.mockRestore();
       fetchMock.reset();
     });
 
-    it('creates LOGIN_SUCCESS after successful auth', () => {
+    it('creates LOGIN_SUCCESS after successful auth', async () => {
       const store = mockStore({});
       fetchMock
         .onPost('/auth/login/nonce', { username: 'name' })
         .reply(200, { nonce: '123abc' });
       fetchMock
         .onPost('/auth/login', { username: '123abc', password: 'secret' })
-        .reply(200, { moop: 'moop', activities: [] });
+        .reply(200, { user: { moop: 'moop', activities: [] }, token: 'xxx.yyy.zzz' });
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.LOGIN_SUCCESS, data: { moop: 'moop', activities: [] } }
       ];
 
-      return store.dispatch(actions.login('name', 'secret')).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      await store.dispatch(actions.login('name', 'secret'));
+      expect(localStorageSetItemSpy).toHaveBeenCalledWith('token', 'xxx.yyy.zzz');
+      expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('creates LOGIN_FAILURE after unsuccessful auth', () => {
@@ -68,19 +75,25 @@ describe('auth actions', () => {
   });
 
   describe('logout (async)', () => {
+    let localStorageRemoveItemSpy;
+
+    beforeEach(() => {
+      localStorageRemoveItemSpy = jest.spyOn(Storage.prototype, 'removeItem');
+    });
+
     afterEach(() => {
       fetchMock.reset();
     });
 
-    it('creates LOGOUT_SUCCESS after successful request', () => {
+    it('creates LOGOUT_SUCCESS after successful request', async () => {
       const store = mockStore({});
       fetchMock.onGet().reply(200);
 
       const expectedActions = [{ type: actions.LOGOUT_SUCCESS }];
 
-      return store.dispatch(actions.logout()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      await store.dispatch(actions.logout());
+      expect(localStorageRemoveItemSpy).toHaveBeenCalledWith('token');
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 

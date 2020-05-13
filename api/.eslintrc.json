@@ -9,7 +9,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.js", "**/*.endpoint.js"],
+      "files": ["**/*.test.js", "**/*.endpoint.js", "endpoint-tests/utils.js"],
       "env": {
         "jest": true
       }

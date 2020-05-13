@@ -1,12 +1,12 @@
 const fs = require('fs');
+const FormData = require('form-data');
 const {
+  buildForm,
   getDB,
-  getFullPath,
   login,
-  request,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../utils.endpoint');
+} = require('../../endpoint-tests/utils');
 
 describe('APD files endpoints', () => {
   describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {
@@ -14,56 +14,48 @@ describe('APD files endpoints', () => {
     beforeAll(() => db.seed.run());
     afterAll(() => db.destroy());
 
-    const url = (apdID, fileID) =>
-      getFullPath(`/apds/${apdID}/files/${fileID}`);
+    const url = (apdID, fileID) => `/apds/${apdID}/files/${fileID}`;
 
     unauthenticatedTest('get', url(0, 0));
     unauthorizedTest('get', url(0, 0));
 
     describe('when authenticated as a user with permission', () => {
-      let cookies;
+      let api;
+
       beforeAll(async () => {
-        cookies = await login();
+        api = await login();
       });
 
       it('with a non-existant apd ID', async () => {
-        const { response, body } = await request.get(
-          url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'),
-          { jar: cookies }
-        );
+        const response = await api
+          .get(url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'));
 
-        expect(response.statusCode).toEqual(404);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(404);
+        expect(response.data).toMatchSnapshot();
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const { response, body } = await request.get(
-          url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f'),
-          { jar: cookies }
-        );
+        const response = await api
+          .get(url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f'));
 
-        expect(response.statusCode).toEqual(404);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(404);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('with an APD that is not associated with the file', async () => {
-        const { response, body } = await request.get(
-          url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f'),
-          { jar: cookies }
-        );
+        const response = await api
+          .get(url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f'));
 
-        expect(response.statusCode).toEqual(404);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(404);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('with a valid request', async () => {
-        const { response, body } = await request.get(
-          url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'),
-          { jar: cookies }
-        );
+        const response = await api
+          .get(url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f'));
 
-        expect(response.statusCode).toEqual(200);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(200);
+        expect(response.data).toMatchSnapshot();
       });
     });
   });
@@ -73,69 +65,63 @@ describe('APD files endpoints', () => {
     beforeAll(() => db.seed.run());
     afterAll(() => db.destroy());
 
-    const url = id => getFullPath(`/apds/${id}/files`);
+    const url = id => `/apds/${id}/files`;
+    const form = buildForm({ file: 'this is my new file' });
 
     unauthenticatedTest('post', url(0));
     unauthorizedTest('post', url(0));
 
     describe('when authenticated as a user with permission', () => {
-      let cookies;
+      let api;
       beforeAll(async () => {
-        cookies = await login();
+        api = await login();
       });
 
       it('with a non-existant apd ID', async () => {
-        const { response, body } = await request.post(url(9000), {
-          jar: cookies,
-          formData: { file: 'this is my new file' }
-        });
+        const response = await api.post(url(9000), form);
 
-        expect(response.statusCode).toEqual(404);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(404);
+        expect(response.data).toMatchSnapshot();
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const { response, body } = await request.post(url(4001), {
-          jar: cookies,
-          formData: { file: 'this is my new file' }
-        });
+        const response = await api.post(url(4001), form);
 
-        expect(response.statusCode).toEqual(404);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(404);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('with an APD that is not in draft', async () => {
-        const { response, body } = await request.post(url(4002), {
-          jar: cookies,
-          formData: { file: 'this is my new file' }
-        });
+        const response = await api.post(url(4002), form);
 
-        expect(response.statusCode).toEqual(400);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('with a valid request', async () => {
-        const { response, body } = await request.post(url(4000), {
-          jar: cookies,
-          json: true,
-          formData: {
-            file: {
-              value: Buffer.from('this is my new file'),
-              options: {
-                filename: 'upload.txt',
-                contentType: 'application/octet-stream'
-              }
-            }
+        const filePath = `${process.cwd()}/test-data/files/upload.txt`;
+        expect(fs.existsSync(filePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(filePath), 'upload.txt');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
           }
-        });
+        };
 
-        expect(response.statusCode).toEqual(200);
+        const response = await api
+          .post(url(4000), formData.getBuffer(), options);
 
-        expect(body.url).toEqual(
+        expect(response.status).toEqual(200);
+
+        expect(response.data.url).toEqual(
           expect.stringMatching(/apds\/4000\/files\/[a-f0-9]{64}/)
         );
 
-        const filename = body.url.match(/apds\/4000\/files\/([a-f0-9]{64})/)[1];
+        const filename = response.data.url.match(
+          /apds\/4000\/files\/([a-f0-9]{64})/
+        )[1];
         expect(fs.existsSync(`test-data/files/${filename}`)).toEqual(true);
       });
     });
