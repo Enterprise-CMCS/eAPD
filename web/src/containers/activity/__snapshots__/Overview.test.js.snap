@@ -47,7 +47,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
     <FormLabel
       className="ds-c-label--full-width"
       component="label"
-      hint="If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy."
+      hint=""
     >
       Statement of alternative considerations and supporting justification
     </FormLabel>
