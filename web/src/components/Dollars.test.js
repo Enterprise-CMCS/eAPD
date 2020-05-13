@@ -30,6 +30,6 @@ describe('Dollars formatting container', () => {
   });
 
   test('prints dollar-formatted numbers', () => {
-    expect(render(<Dollars long>2857298672</Dollars>)).toMatchSnapshot();
+    expect(render(<Dollars>2857298672</Dollars>)).toMatchSnapshot();
   });
 });
