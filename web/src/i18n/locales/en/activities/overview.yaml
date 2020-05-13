@@ -17,9 +17,18 @@ activityDescriptionInput:
 
 activityAlternativesInput:
   label: Statement of alternative considerations and supporting justification
-  hint: >-
-    If substantive changes have been made, include statement describing alternative
-    considerations made before selecting implementation strategy.
   helpText: >-
-    If substantive changes have not been made, include a statement of alternative considerations from
-    the previous version of the IAPD.
+    Example: Explain and justify the decision to build a custom software solution instead of using a COTS or SaaS option.
+
+
+    Example: Explain and justify the decision to conduct a contract modification instead of doing a fully competitive procurement.
+  detail: >-
+    Provide a brief description of each alternative considered for the implementation of this activity. 
+    The description should include considerations for costs/benefits/risks for each option. Indicate 
+    which option was finally selected and why the final selection was made. As applicable, 
+    include how the selected approach supports the economic and efficient management of the Medicaid program.
+
+
+    If this is a previously approved activity, only use this section to discuss alternative considerations made 
+    for substantive changes / decisions made during the implementation of the project. 
+    Do NOT include the alternative analysis conducted when justifying the original activity.
