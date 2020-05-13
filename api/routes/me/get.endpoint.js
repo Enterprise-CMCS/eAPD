@@ -1,12 +1,10 @@
 const {
   getDB,
-  getFullPath,
   login,
-  request,
   unauthenticatedTest
-} = require('../../utils.endpoint');
+} = require('../../endpoint-tests/utils');
 
-const url = getFullPath('/me');
+const url = '/me';
 
 describe('/me endpoint | GET', () => {
   const db = getDB();
@@ -16,13 +14,10 @@ describe('/me endpoint | GET', () => {
   unauthenticatedTest('get', url);
 
   it('when authenticated', async () => {
-    const cookies = await login();
-    const { response, body } = await request.get(url, {
-      jar: cookies,
-      json: true
-    });
+    const response = await login()
+      .then(api => api.get(url));
 
-    expect(response.statusCode).toEqual(200);
-    expect(body).toMatchSnapshot();
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot();
   });
 });

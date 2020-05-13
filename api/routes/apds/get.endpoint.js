@@ -1,11 +1,9 @@
 const {
   getDB,
-  getFullPath,
   login,
-  request,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../utils.endpoint');
+} = require('../../endpoint-tests/utils');
 
 describe('APD endpoint', () => {
   describe('List APDs endpoint | GET /apds', () => {
@@ -13,30 +11,28 @@ describe('APD endpoint', () => {
     beforeAll(() => db.seed.run());
     afterAll(() => db.destroy());
 
-    const url = getFullPath('/apds');
+    const url = '/apds';
 
     unauthenticatedTest('get', url);
     unauthorizedTest('get', url);
 
     it('when authenticated as a user without a state', async () => {
-      const cookies = await login('all-permissions-no-state', 'password');
+      const response = await login(
+        'all-permissions-no-state',
+        'password'
+      )
+        .then(api => api.get(url));
 
-      const { response, body } = await request.get(url, { jar: cookies });
-
-      expect(response.statusCode).toEqual(401);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(401);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('when authenticated as a user with a state', async () => {
-      const cookies = await login();
+      const response = await login()
+        .then(api => api.get(url));
 
-      const { response, body } = await request.get(url, {
-        jar: cookies,
-        json: true
-      });
-
-      expect(response.statusCode).toEqual(200);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
     });
   });
 
@@ -46,51 +42,47 @@ describe('APD endpoint', () => {
     beforeAll(() => db.seed.run());
     afterAll(() => db.destroy());
 
-    const url = id => getFullPath(`/apds/${id}`);
+    const url = id => `/apds/${id}`;
 
     unauthenticatedTest('get', url(0));
     unauthorizedTest('get', url(0));
 
     it('when authenticated as a user without a state', async () => {
-      const cookies = await login('all-permissions-no-state', 'password');
+      const response = await login(
+        'all-permissions-no-state',
+        'password'
+      )
+        .then(api => api.get(url(0)));
 
-      const { response, body } = await request.get(url(0), { jar: cookies });
-
-      expect(response.statusCode).toEqual(401);
-      expect(body).toMatchSnapshot();
+      expect(response.status).toEqual(401);
+      expect(response.data).toMatchSnapshot();
     });
 
     describe('with authenticated as a user with a state', () => {
+      let api;
+      beforeAll(async () => {
+        api = await login();
+      });
+
       it('when requesting an APD that does not exist', async () => {
-        const cookies = await login();
+        const response = await api.get(url(0));
 
-        const { response, body } = await request.get(url(0), { jar: cookies });
-
-        expect(response.statusCode).toEqual(404);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(404);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('when requesting an APD that belongs to another state', async () => {
-        const cookies = await login();
+        const response = await api.get(url(4001));
 
-        const { response, body } = await request.get(url(4001), {
-          jar: cookies
-        });
-
-        expect(response.statusCode).toEqual(404);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(404);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('when requesting an APD that belongs to their state', async () => {
-        const cookies = await login();
+        const response = await api.get(url(4000));
 
-        const { response, body } = await request.get(url(4000), {
-          jar: cookies,
-          json: true
-        });
-
-        expect(response.statusCode).toEqual(200);
-        expect(body).toMatchSnapshot();
+        expect(response.status).toEqual(200);
+        expect(response.data).toMatchSnapshot();
       });
     });
   });

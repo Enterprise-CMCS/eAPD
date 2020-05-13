@@ -11,8 +11,9 @@
     "start": "node main.js",
     "start-dev": "nodemon ./main.js -e js",
     "jest": "NODE_ENV=test jest",
+    "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout ${TESTS:-'{,!(node_modules)/**/}*.test.js'}",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --no-timeout --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
-    "test-endpoints": "jest --runInBand '.+\\.endpoint\\.js'",
+    "test-endpoints": "jest --detectOpenHandles --runInBand '.+\\.endpoint\\.js'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
     "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
@@ -60,12 +61,14 @@
   "dependencies": {
     "ajv": "^6.12.0",
     "aws-sdk": "^2.646.0",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "compression": "^1.7.3",
     "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "form-data": "^3.0.0",
     "jsonpatch": "^3.0.1",
     "jsonpointer": "^4.0.1",
     "jsonwebtoken": "^8.5.0",
@@ -91,7 +94,6 @@
     "jest": "^25.2.1",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
-    "request": "^2.88.2",
     "sinon": "^8.1.1",
     "stream-mock": "^2.0.5",
     "tap": "^14.10.6"
@@ -100,9 +102,6 @@
     "testMatch": [
       "**/__tests__/**/*.js?(x)",
       "**/?(*.)+(spec|test|endpoint).js?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "utils.endpoint.js"
     ]
   },
   "prettier": {
