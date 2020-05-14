@@ -20,9 +20,7 @@ exports[`the NonPersonnelCostReview component renders correctly 1`] = `
          Costs:
       </strong>
        
-      <Dollars
-        long={false}
-      >
+      <Dollars>
         347293
       </Dollars>
     </div>
@@ -34,9 +32,7 @@ exports[`the NonPersonnelCostReview component renders correctly 1`] = `
          Costs:
       </strong>
        
-      <Dollars
-        long={false}
-      >
+      <Dollars>
         234797
       </Dollars>
     </div>

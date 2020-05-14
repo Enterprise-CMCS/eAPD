@@ -83,7 +83,7 @@ const StatePersonForm = ({
             />
             <p>
               <strong>Total: </strong>
-              <Dollars long>{amt * perc}</Dollars>
+              <Dollars>{amt * perc}</Dollars>
             </p>
           </div>
         </Fragment>
