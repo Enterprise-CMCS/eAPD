@@ -78,7 +78,6 @@ const StatePersonForm = ({
               label="Number of FTEs"
               name="ftes"
               size="medium"
-              type="number"
               value={perc}
               onChange={getEditFTEForYear(year)}
             />

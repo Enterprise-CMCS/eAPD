@@ -103,7 +103,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis90-1"
-            onBlur={null}
             onChange={[Function]}
             value={20}
           />
@@ -128,7 +127,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="actual federal share for MMIS at the 90/10 level for FFY 1"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis90-1"
-            onBlur={null}
             onChange={[Function]}
             value={10}
           />
@@ -152,7 +150,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis90-2"
-            onBlur={null}
             onChange={[Function]}
             value={200}
           />
@@ -177,7 +174,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="actual federal share for MMIS at the 90/10 level for FFY 2"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis90-2"
-            onBlur={null}
             onChange={[Function]}
             value={100}
           />
@@ -280,7 +276,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis75-1"
-            onBlur={null}
             onChange={[Function]}
             value={40}
           />
@@ -305,7 +300,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="actual federal share for MMIS at the 75/25 level for FFY 1"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis75-1"
-            onBlur={null}
             onChange={[Function]}
             value={30}
           />
@@ -329,7 +323,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis75-2"
-            onBlur={null}
             onChange={[Function]}
             value={400}
           />
@@ -354,7 +347,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="actual federal share for MMIS at the 75/25 level for FFY 2"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis75-2"
-            onBlur={null}
             onChange={[Function]}
             value={300}
           />
@@ -457,7 +449,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis50-1"
-            onBlur={null}
             onChange={[Function]}
             value={60}
           />
@@ -482,7 +473,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="actual federal share for MMIS at the 50/50 level for FFY 1"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis50-1"
-            onBlur={null}
             onChange={[Function]}
             value={50}
           />
@@ -506,7 +496,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis50-2"
-            onBlur={null}
             onChange={[Function]}
             value={600}
           />
@@ -531,7 +520,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             label="actual federal share for MMIS at the 50/50 level for FFY 2"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis50-2"
-            onBlur={null}
             onChange={[Function]}
             value={500}
           />

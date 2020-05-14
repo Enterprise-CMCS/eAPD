@@ -214,7 +214,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
     <DollarField
       label="FFY 1990"
       labelClassName="sr-only"
-      onBlur={null}
       onChange={[Function]}
       value={100}
     />
@@ -594,7 +593,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
     <DollarField
       label="FFY 1991"
       labelClassName="sr-only"
-      onBlur={null}
       onChange={[Function]}
       value={200}
     />

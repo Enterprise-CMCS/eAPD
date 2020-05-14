@@ -23,8 +23,11 @@ exports[`PercentField component renders correctly 1`] = `
       }
     }
     label="test label"
+    mask={null}
     name="test name"
+    onBlur={null}
     onChange={[MockFunction]}
+    round={false}
     size="medium"
     value="123"
   >
@@ -32,8 +35,10 @@ exports[`PercentField component renders correctly 1`] = `
       className="stuff"
       inputRef={[Function]}
       label="test label"
+      mask={null}
       name="test name"
-      onChange={[MockFunction]}
+      onBlur={[Function]}
+      onChange={[Function]}
       size="medium"
       type="text"
       value="123"
@@ -62,7 +67,8 @@ exports[`PercentField component renders correctly 1`] = `
           className="ds-c-field ds-c-field--medium"
           id="textfield_1"
           name="test name"
-          onChange={[MockFunction]}
+          onBlur={[Function]}
+          onChange={[Function]}
           type="text"
           value="123"
         />

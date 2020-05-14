@@ -34,6 +34,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     label="Percent commitment to program"
     name="apd-state-profile-pocpercentTime1"
     onChange={[Function]}
+    round={true}
     size="small"
     value="32"
   />
@@ -66,7 +67,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             <DollarField
               label="FFY 1992"
               name="apd-state-profile-costs1-fy1992"
-              onBlur={null}
               onChange={[Function]}
               size="small"
               value={100}
@@ -78,7 +78,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             <DollarField
               label="FFY 1993"
               name="apd-state-profile-costs1-fy1993"
-              onBlur={null}
               onChange={[Function]}
               size="small"
               value={300}
@@ -149,6 +148,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     label="Percent commitment to program"
     name="apd-state-profile-pocpercentTime1"
     onChange={[Function]}
+    round={true}
     size="small"
     value="32"
   />
@@ -181,7 +181,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             <DollarField
               label="FFY 1992"
               name="apd-state-profile-costs1-fy1992"
-              onBlur={null}
               onChange={[Function]}
               size="small"
               value={100}
@@ -193,7 +192,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             <DollarField
               label="FFY 1993"
               name="apd-state-profile-costs1-fy1993"
-              onBlur={null}
               onChange={[Function]}
               size="small"
               value={300}

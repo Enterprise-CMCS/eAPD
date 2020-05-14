@@ -103,6 +103,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
           labelClassName="sr-only"
           name="ffp-3-13-1-state"
           onChange={[Function]}
+          round={true}
           value={37}
         />
       </td>
@@ -117,6 +118,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
           labelClassName="sr-only"
           name="ffp-3-13-2-state"
           onChange={[Function]}
+          round={true}
           value={83}
         />
       </td>
@@ -131,6 +133,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
           labelClassName="sr-only"
           name="ffp-3-13-3-state"
           onChange={[Function]}
+          round={true}
           value={27}
         />
       </td>
@@ -145,6 +148,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
           labelClassName="sr-only"
           name="ffp-3-13-4-state"
           onChange={[Function]}
+          round={true}
           value={72}
         />
       </td>
@@ -223,6 +227,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
           labelClassName="sr-only"
           name="ffp-3-13-1-contractors"
           onChange={[Function]}
+          round={true}
           value={85}
         />
       </td>
@@ -237,6 +242,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
           labelClassName="sr-only"
           name="ffp-3-13-2-contractors"
           onChange={[Function]}
+          round={true}
           value={35}
         />
       </td>
@@ -251,6 +257,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
           labelClassName="sr-only"
           name="ffp-3-13-3-contractors"
           onChange={[Function]}
+          round={true}
           value={19}
         />
       </td>
@@ -265,6 +272,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
           labelClassName="sr-only"
           name="ffp-3-13-4-contractors"
           onChange={[Function]}
+          round={true}
           value={99}
         />
       </td>
