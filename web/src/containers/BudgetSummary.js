@@ -12,7 +12,7 @@ const categoryLookup = {
   combined: 'Subtotal'
 };
 
-function DataRow({ data, title, isViewOnly }) {
+function DataRow({ data, title }) {
   return (
     <tr
       className={
@@ -23,13 +23,13 @@ function DataRow({ data, title, isViewOnly }) {
     >
       <th scope="row">{title}</th>
       <td className="budget-table--number">
-        <Dollars long={isViewOnly}>{data.medicaid}</Dollars>
+        <Dollars>{data.medicaid}</Dollars>
       </td>
       <td className="budget-table--number">
-        <Dollars long={isViewOnly}>{data.federal}</Dollars>
+        <Dollars>{data.federal}</Dollars>
       </td>
       <td className="budget-table--number">
-        <Dollars long={isViewOnly}>{data.state}</Dollars>
+        <Dollars>{data.state}</Dollars>
       </td>
     </tr>
   );
@@ -37,11 +37,10 @@ function DataRow({ data, title, isViewOnly }) {
 
 DataRow.propTypes = {
   data: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  isViewOnly: PropTypes.bool.isRequired
+  title: PropTypes.string.isRequired
 };
 
-const DataRowGroup = ({ data, entries, isViewOnly, year }) => (
+const DataRowGroup = ({ data, entries, year }) => (
   <Fragment>
     {Object.keys(data).map(key => (
       <DataRow
@@ -50,7 +49,6 @@ const DataRowGroup = ({ data, entries, isViewOnly, year }) => (
         data={data[key][year]}
         entries={entries}
         title={categoryLookup[key]}
-        isViewOnly={isViewOnly}
         year={year}
       />
     ))}
@@ -60,7 +58,6 @@ const DataRowGroup = ({ data, entries, isViewOnly, year }) => (
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
   entries: PropTypes.array.isRequired,
-  isViewOnly: PropTypes.bool.isRequired,
   year: PropTypes.string.isRequired
 };
 
@@ -87,7 +84,7 @@ HeaderRow.propTypes = {
   yr: PropTypes.string.isRequired
 };
 
-const BudgetSummary = ({ activities, data, isViewOnly, years }) => (
+const BudgetSummary = ({ activities, data, years }) => (
   <Fragment>
     <h4 className="ds-h4" aria-hidden="true">
       HIT Activities
@@ -101,12 +98,7 @@ const BudgetSummary = ({ activities, data, isViewOnly, years }) => (
           <HeaderRow yr={yr} />
         </thead>
         <tbody>
-          <DataRowGroup
-            data={data.hit}
-            entries={activities.hit}
-            isViewOnly={isViewOnly}
-            year={yr}
-          />
+          <DataRowGroup data={data.hit} entries={activities.hit} year={yr} />
         </tbody>
       </table>
     ))}
@@ -123,12 +115,7 @@ const BudgetSummary = ({ activities, data, isViewOnly, years }) => (
           <HeaderRow yr={yr} />
         </thead>
         <tbody>
-          <DataRowGroup
-            data={data.hie}
-            entries={activities.hie}
-            isViewOnly={isViewOnly}
-            year={yr}
-          />
+          <DataRowGroup data={data.hie} entries={activities.hie} year={yr} />
         </tbody>
       </table>
     ))}
@@ -145,12 +132,7 @@ const BudgetSummary = ({ activities, data, isViewOnly, years }) => (
           <HeaderRow yr={yr} />
         </thead>
         <tbody>
-          <DataRowGroup
-            data={data.mmis}
-            entries={activities.mmis}
-            isViewOnly={isViewOnly}
-            year={yr}
-          />
+          <DataRowGroup data={data.mmis} entries={activities.mmis} year={yr} />
         </tbody>
       </table>
     ))}
@@ -185,13 +167,13 @@ const BudgetSummary = ({ activities, data, isViewOnly, years }) => (
             >
               <th scope="row">{ffy === 'total' ? 'Total' : `FFY ${ffy}`}</th>
               <td className="budget-table--number">
-                <Dollars long={isViewOnly}>{combined.medicaid}</Dollars>
+                <Dollars>{combined.medicaid}</Dollars>
               </td>
               <td className="budget-table--number">
-                <Dollars long={isViewOnly}>{combined.federal}</Dollars>
+                <Dollars>{combined.federal}</Dollars>
               </td>
               <td className="budget-table--number">
-                <Dollars long={isViewOnly}>{combined.state}</Dollars>
+                <Dollars>{combined.state}</Dollars>
               </td>
             </tr>
           );
@@ -204,11 +186,8 @@ const BudgetSummary = ({ activities, data, isViewOnly, years }) => (
 BudgetSummary.propTypes = {
   activities: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
-  isViewOnly: PropTypes.bool,
   years: PropTypes.array.isRequired
 };
-
-BudgetSummary.defaultProps = { isViewOnly: false };
 
 const mapStateToProps = state => {
   return {

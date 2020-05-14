@@ -5,9 +5,7 @@ exports[`executive summary budget component DollarCell renders correctly 1`] = `
   className="budget-table--number"
   headers="one two three"
 >
-  <Dollars
-    long={false}
-  >
+  <Dollars>
     32.57
   </Dollars>
 </td>
@@ -18,9 +16,7 @@ exports[`executive summary budget component DollarCell renders correctly 2`] = `
   className="budget-table--number"
   headers="one two three"
 >
-  <Dollars
-    long={false}
-  >
+  <Dollars>
     75.23
   </Dollars>
 </td>
@@ -129,37 +125,30 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         </th>
         <DollarCell
           headers="program-budget-table-hit program-budget-table-hit-fed"
-          long={false}
           value={1}
         />
         <DollarCell
           headers="program-budget-table-hit program-budget-table-hit-state"
-          long={false}
           value={2}
         />
         <DollarCell
           headers="program-budget-table-hie program-budget-table-hie-fed"
-          long={false}
           value={10}
         />
         <DollarCell
           headers="program-budget-table-hie program-budget-table-hie-state"
-          long={false}
           value={20}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-fed"
-          long={false}
           value={100}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-state"
-          long={false}
           value={200}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-total"
-          long={false}
           value={300}
         />
       </tr>
@@ -175,37 +164,30 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         </th>
         <DollarCell
           headers="program-budget-table-hit program-budget-table-hit-fed"
-          long={false}
           value={3}
         />
         <DollarCell
           headers="program-budget-table-hit program-budget-table-hit-state"
-          long={false}
           value={4}
         />
         <DollarCell
           headers="program-budget-table-hie program-budget-table-hie-fed"
-          long={false}
           value={30}
         />
         <DollarCell
           headers="program-budget-table-hie program-budget-table-hie-state"
-          long={false}
           value={40}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-fed"
-          long={false}
           value={400}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-state"
-          long={false}
           value={500}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-total"
-          long={false}
           value={700}
         />
       </tr>
@@ -221,37 +203,30 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         </th>
         <DollarCell
           headers="program-budget-table-hit program-budget-table-hit-fed"
-          long={false}
           value={5}
         />
         <DollarCell
           headers="program-budget-table-hit program-budget-table-hit-state"
-          long={false}
           value={6}
         />
         <DollarCell
           headers="program-budget-table-hie program-budget-table-hie-fed"
-          long={false}
           value={50}
         />
         <DollarCell
           headers="program-budget-table-hie program-budget-table-hie-state"
-          long={false}
           value={60}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-fed"
-          long={false}
           value={700}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-state"
-          long={false}
           value={800}
         />
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-total"
-          long={false}
           value={1500}
         />
       </tr>
@@ -376,47 +351,38 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         </th>
         <DollarCell
           headers="program-budget-table-mmis90 program-budget-table-mmis90-fed"
-          long={false}
           value={1}
         />
         <DollarCell
           headers="program-budget-table-mmis90 program-budget-table-mmis90-state"
-          long={false}
           value={2}
         />
         <DollarCell
           headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
-          long={false}
           value={10}
         />
         <DollarCell
           headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
-          long={false}
           value={20}
         />
         <DollarCell
           headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
-          long={false}
           value={100}
         />
         <DollarCell
           headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
-          long={false}
           value={200}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
-          long={false}
           value={1000}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
-          long={false}
           value={2000}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-          long={false}
           value={3000}
         />
       </tr>
@@ -432,47 +398,38 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         </th>
         <DollarCell
           headers="program-budget-table-mmis90 program-budget-table-mmis90-fed"
-          long={false}
           value={3}
         />
         <DollarCell
           headers="program-budget-table-mmis90 program-budget-table-mmis90-state"
-          long={false}
           value={4}
         />
         <DollarCell
           headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
-          long={false}
           value={30}
         />
         <DollarCell
           headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
-          long={false}
           value={40}
         />
         <DollarCell
           headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
-          long={false}
           value={300}
         />
         <DollarCell
           headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
-          long={false}
           value={400}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
-          long={false}
           value={4000}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
-          long={false}
           value={5000}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-          long={false}
           value={9000}
         />
       </tr>
@@ -488,47 +445,38 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         </th>
         <DollarCell
           headers="program-budget-table-mmis90 program-budget-table-mmis90-fed"
-          long={false}
           value={5}
         />
         <DollarCell
           headers="program-budget-table-mmis90 program-budget-table-mmis90-state"
-          long={false}
           value={6}
         />
         <DollarCell
           headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
-          long={false}
           value={50}
         />
         <DollarCell
           headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
-          long={false}
           value={60}
         />
         <DollarCell
           headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
-          long={false}
           value={500}
         />
         <DollarCell
           headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
-          long={false}
           value={600}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
-          long={false}
           value={7000}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
-          long={false}
           value={8000}
         />
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-          long={false}
           value={15000}
         />
       </tr>

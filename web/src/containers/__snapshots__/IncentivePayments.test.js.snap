@@ -122,9 +122,7 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             10
           </Dollars>
         </td>
@@ -278,9 +276,7 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             74
           </Dollars>
         </td>
@@ -491,9 +487,7 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             26
           </Dollars>
         </td>
@@ -647,9 +641,7 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             90
           </Dollars>
         </td>

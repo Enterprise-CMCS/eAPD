@@ -82,9 +82,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1006
           </Dollars>
         </td>
@@ -123,9 +121,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1004
           </Dollars>
         </td>
@@ -170,9 +166,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1000
           </Dollars>
         </td>
@@ -188,9 +182,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1008
           </Dollars>
         </td>
@@ -233,9 +225,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1008
           </Dollars>
         </td>
@@ -252,9 +242,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1005
           </Dollars>
         </td>
@@ -271,9 +259,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
           className="budget-table--number"
           colSpan="2"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1003
           </Dollars>
         </td>
@@ -333,9 +319,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1003
           </Dollars>
         </td>
@@ -461,9 +445,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7006
           </Dollars>
         </td>
@@ -502,9 +484,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7004
           </Dollars>
         </td>
@@ -549,9 +529,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7000
           </Dollars>
         </td>
@@ -567,9 +545,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7008
           </Dollars>
         </td>
@@ -612,9 +588,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7008
           </Dollars>
         </td>
@@ -631,9 +605,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7005
           </Dollars>
         </td>
@@ -650,9 +622,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
           className="budget-table--number"
           colSpan="2"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7003
           </Dollars>
         </td>
@@ -712,9 +682,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7003
           </Dollars>
         </td>
@@ -989,9 +957,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1006
           </Dollars>
         </td>
@@ -1030,9 +996,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1004
           </Dollars>
         </td>
@@ -1077,9 +1041,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1000
           </Dollars>
         </td>
@@ -1095,9 +1057,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1008
           </Dollars>
         </td>
@@ -1115,9 +1075,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1005
           </Dollars>
         </td>
@@ -1134,9 +1092,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             1003
           </Dollars>
         </td>
@@ -1262,9 +1218,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7006
           </Dollars>
         </td>
@@ -1303,9 +1257,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7004
           </Dollars>
         </td>
@@ -1350,9 +1302,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7000
           </Dollars>
         </td>
@@ -1368,9 +1318,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7008
           </Dollars>
         </td>
@@ -1388,9 +1336,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7005
           </Dollars>
         </td>
@@ -1407,9 +1353,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         <td
           className="budget-table--number"
         >
-          <Dollars
-            long={true}
-          >
+          <Dollars>
             7003
           </Dollars>
         </td>
@@ -1615,9 +1559,7 @@ Array [
     <td
       className="budget-table--number"
     >
-      <Dollars
-        long={true}
-      >
+      <Dollars>
         10
       </Dollars>
     </td>
@@ -1639,9 +1581,7 @@ Array [
     <td
       className="budget-table--number"
     >
-      <Dollars
-        long={true}
-      >
+      <Dollars>
         100
       </Dollars>
     </td>
@@ -1669,9 +1609,7 @@ Array [
     <td
       className="budget-table--number"
     >
-      <Dollars
-        long={true}
-      >
+      <Dollars>
         200
       </Dollars>
     </td>
@@ -1688,27 +1626,21 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
    activity is
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       5
     </Dollars>
   </strong>
   . Because of other funding of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       3
     </Dollars>
   </strong>
   , the total cost to Medicaid is
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       2
     </Dollars>
   </strong>
@@ -1720,9 +1652,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
   funding split, resulting in a federal share of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       1
     </Dollars>
   </strong>
@@ -1732,9 +1662,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
    share of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       4
     </Dollars>
   </strong>
@@ -1751,27 +1679,21 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
    activity is
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       5
     </Dollars>
   </strong>
   . Because of other funding of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       3
     </Dollars>
   </strong>
   , the total cost to Medicaid is
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       2
     </Dollars>
   </strong>
@@ -1783,9 +1705,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
   funding split, resulting in a federal share of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       1
     </Dollars>
   </strong>
@@ -1795,9 +1715,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
    share of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       4
     </Dollars>
   </strong>
@@ -1814,27 +1732,21 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
    activity is
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       5
     </Dollars>
   </strong>
   . Because of other funding of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       3
     </Dollars>
   </strong>
   , the total cost to Medicaid is
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       2
     </Dollars>
   </strong>
@@ -1846,9 +1758,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
   funding split, resulting in a federal share of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       1
     </Dollars>
   </strong>
@@ -1858,9 +1768,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
    share of
    
   <strong>
-    <Dollars
-      long={true}
-    >
+    <Dollars>
       4
     </Dollars>
   </strong>

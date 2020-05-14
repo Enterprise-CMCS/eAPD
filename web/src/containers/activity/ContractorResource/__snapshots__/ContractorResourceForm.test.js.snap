@@ -317,9 +317,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
       1066
        Cost
     </FormLabel>
-    <Dollars
-      long={false}
-    >
+    <Dollars>
       300
     </Dollars>
     <FormLabel
@@ -329,9 +327,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
       1067
        Cost
     </FormLabel>
-    <Dollars
-      long={false}
-    >
+    <Dollars>
       400
     </Dollars>
   </p>

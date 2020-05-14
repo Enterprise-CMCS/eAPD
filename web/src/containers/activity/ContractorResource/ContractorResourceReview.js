@@ -32,12 +32,11 @@ const ContractorResourceReview = ({
           <strong>Contract term:</strong> {dateRangeForHumans}
         </li>
         <li>
-          <strong>Total cost:</strong> <Dollars long>{totalCost}</Dollars>
+          <strong>Total cost:</strong> <Dollars>{totalCost}</Dollars>
         </li>
         {apdFFYs.map(ffy => (
           <li key={ffy}>
-            <strong>FFY {ffy} cost:</strong>{' '}
-            <Dollars long>{years[ffy]}</Dollars>
+            <strong>FFY {ffy} cost:</strong> <Dollars>{years[ffy]}</Dollars>
           </li>
         ))}
       </ul>
