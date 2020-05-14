@@ -10,7 +10,7 @@ if (browser && browser.version) {
 // well as all visual and style features to be correct.
 const browserIsGreen =
   // Current major version as of April 2020.
-  (browser.name === 'chrome' && browser.version >= 80) ||
+  (browser.name === 'chrome' && browser.version >= 78) ||
   // Most recent Firefox extended support release as of April 2020.
   (browser.name === 'firefox' && browser.version >= 68) ||
   // First Chromium build of Edge. No longer support pre-Chromium builds.

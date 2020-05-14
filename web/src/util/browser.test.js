@@ -69,10 +69,10 @@ describe('browser support detection util', () => {
   });
 
   describe('indicates red for everything else', () => {
-    test('indicates red support for Chrome versions prior to 80', () => {
+    test('indicates red support for Chrome versions prior to 78', () => {
       detect.mockReturnValue({
         name: 'chrome',
-        version: '79.32.71'
+        version: '77.32.71'
       });
 
       // eslint-disable-next-line global-require
