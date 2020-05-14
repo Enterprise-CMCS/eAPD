@@ -159,9 +159,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number"
         key="1"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           9384
         </Dollars>
       </td>
@@ -169,9 +167,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number"
         key="2"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           25
         </Dollars>
       </td>
@@ -179,9 +175,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number"
         key="3"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           278
         </Dollars>
       </td>
@@ -189,18 +183,14 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number"
         key="4"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           2357
         </Dollars>
       </td>
       <td
         className="budget-table--number budget-table--subtotal"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           47939
         </Dollars>
       </td>
@@ -279,9 +269,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number"
         key="1"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           7392
         </Dollars>
       </td>
@@ -289,9 +277,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number"
         key="2"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           4258
         </Dollars>
       </td>
@@ -299,9 +285,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number"
         key="3"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           72533522
         </Dollars>
       </td>
@@ -309,18 +293,14 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number"
         key="4"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           9275
         </Dollars>
       </td>
       <td
         className="budget-table--number budget-table--subtotal"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           972465
         </Dollars>
       </td>
@@ -338,9 +318,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number budget-table--total"
         key="1"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           35769
         </Dollars>
       </td>
@@ -348,9 +326,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number budget-table--total"
         key="2"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           5298
         </Dollars>
       </td>
@@ -358,9 +334,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number budget-table--total"
         key="3"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           952863
         </Dollars>
       </td>
@@ -368,18 +342,14 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         className="budget-table--number budget-table--total"
         key="4"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           953638
         </Dollars>
       </td>
       <td
         className="budget-table--number budget-table--subtotal"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           3475
         </Dollars>
       </td>

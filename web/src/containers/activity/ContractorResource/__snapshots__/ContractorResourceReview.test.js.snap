@@ -28,9 +28,7 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
         Total cost:
       </strong>
        
-      <Dollars
-        long={true}
-      >
+      <Dollars>
         12345
       </Dollars>
     </li>
@@ -43,9 +41,7 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
          cost:
       </strong>
        
-      <Dollars
-        long={true}
-      >
+      <Dollars>
         300
       </Dollars>
     </li>
@@ -58,9 +54,7 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
          cost:
       </strong>
        
-      <Dollars
-        long={true}
-      >
+      <Dollars>
         400
       </Dollars>
     </li>

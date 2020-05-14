@@ -128,11 +128,9 @@ const ApdPreviousActivityTableMMIS = ({
                     headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_total prev_act_mmis${level}_total_approved`}
                     className={isViewOnly ? 'budget-table--number' : ''}
                   >
-                    {isViewOnly ?
-                      <Dollars long>
-                       {expenses.totalApproved} 
-                      </Dollars>  
-                    :
+                    {isViewOnly ? (
+                      <Dollars>{expenses.totalApproved}</Dollars>
+                    ) : (
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
@@ -143,37 +141,35 @@ const ApdPreviousActivityTableMMIS = ({
                         value={expenses.totalApproved}
                         onChange={getApprovedHandler(year, level)}
                       />
-                    }
+                    )}
                   </td>
 
                   <td
                     headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_approved`}
                     className="budget-table--number"
                   >
-                    <Dollars long={isViewOnly}>{federalApproved}</Dollars>
+                    <Dollars>{federalApproved}</Dollars>
                   </td>
 
                   <td
                     headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_actual`}
                     className={isViewOnly ? 'budget-table--number' : ''}
                   >
-                    {isViewOnly ?
-                      <Dollars long>
-                        {expenses.federalActual}
-                      </Dollars>
-                      :
+                    {isViewOnly ? (
+                      <Dollars>{expenses.federalActual}</Dollars>
+                    ) : (
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
                         label={`actual federal share for MMIS at the ${level}/${100 -
                           level} level for FFY ${year}`}
-                          labelClassName="ds-u-visibility--screen-reader"
-                          name={`actual-federal-mmis${level}-${year}`}
-                          value={expenses.federalActual}
-                          onChange={getActualsHandler(year, level)}
+                        labelClassName="ds-u-visibility--screen-reader"
+                        name={`actual-federal-mmis${level}-${year}`}
+                        value={expenses.federalActual}
+                        onChange={getActualsHandler(year, level)}
                       />
-                    }
-                      </td>
+                    )}
+                  </td>
                 </tr>
               );
             })}
@@ -197,7 +193,7 @@ ApdPreviousActivityTableMMIS.propTypes = {
 
 ApdPreviousActivityTableMMIS.defaultProps = {
   isViewOnly: false
-}
+};
 
 const mapStateToProps = state => ({
   previousActivityExpenses: selectPreviousMMISActivities(state)
