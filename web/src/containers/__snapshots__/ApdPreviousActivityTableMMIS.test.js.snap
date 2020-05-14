@@ -112,9 +112,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="budget-table--number"
           headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             18
           </Dollars>
         </td>
@@ -161,9 +159,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="budget-table--number"
           headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             180
           </Dollars>
         </td>
@@ -289,9 +285,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="budget-table--number"
           headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             30
           </Dollars>
         </td>
@@ -338,9 +332,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="budget-table--number"
           headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             300
           </Dollars>
         </td>
@@ -466,9 +458,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="budget-table--number"
           headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             30
           </Dollars>
         </td>
@@ -515,9 +505,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="budget-table--number"
           headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             300
           </Dollars>
         </td>

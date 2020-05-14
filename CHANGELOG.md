@@ -5,6 +5,7 @@ Anticipated release: May 18, 2020
 #### 🚀 New features
 
 - Adjust Key Personnel Calculations ([#2174])
+- update 'Statement of alternative considerations and supporting justification' help text ([#2185])
 
 #### 🐛 Bugs fixed
 
@@ -23,3 +24,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2187]: https://github.com/18F/cms-hitech-apd/issues/2187
 [#2145]: https://github.com/18F/cms-hitech-apd/issues/2145
 [#2174]: https://github.com/18F/cms-hitech-apd/issues/2174
+[#2185]: https://github.com/18F/cms-hitech-apd/issues/2185
