@@ -18,7 +18,7 @@ const PreviousActivities = ({ previousActivitySummary }) => {
       <h3>Actual Costs of Previous Activities</h3>
       <ApdPreviousActivityTableHI isViewOnly />
       <ApdPreviousActivityTableMMIS isViewOnly />
-      <ApdPreviousActivityTableTotal isViewOnly />
+      <ApdPreviousActivityTableTotal />
     </div>
   );
 };

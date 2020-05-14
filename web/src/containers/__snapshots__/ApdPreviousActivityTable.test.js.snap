@@ -97,9 +97,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         className="budget-table--number"
         headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_approved"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           18
         </Dollars>
       </td>
@@ -147,9 +145,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         className="budget-table--number"
         headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_approved"
       >
-        <Dollars
-          long={false}
-        >
+        <Dollars>
           180
         </Dollars>
       </td>

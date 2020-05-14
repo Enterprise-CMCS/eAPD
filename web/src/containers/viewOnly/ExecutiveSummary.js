@@ -31,20 +31,19 @@ class ExecutiveSummary extends PureComponent {
             </li>
             <li>
               <strong>Medicaid share:</strong>{' '}
-              <Dollars long>{total.medicaid}</Dollars> (
-              <Dollars long>{total.federal}</Dollars> Federal share)
+              <Dollars>{total.medicaid}</Dollars> (
+              <Dollars>{total.federal}</Dollars> Federal share)
             </li>
             <li>
               <strong>Total funding request:</strong>{' '}
-              <Dollars long>{total.combined}</Dollars>
+              <Dollars>{total.combined}</Dollars>
             </li>
             {Object.entries(total.ffys).map(
               ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
                 <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
-                  <strong>FFY {ffy}:</strong> <Dollars long>{ffyTotal}</Dollars>{' '}
-                  | <strong>Medicaid share:</strong>{' '}
-                  <Dollars long>{medicaid}</Dollars> (
-                  <Dollars long>{federal}</Dollars> Federal share)
+                  <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
+                  <strong>Medicaid share:</strong> <Dollars>{medicaid}</Dollars>{' '}
+                  (<Dollars>{federal}</Dollars> Federal share)
                 </li>
               )
             )}
@@ -66,21 +65,20 @@ class ExecutiveSummary extends PureComponent {
               </li>
               <li>
                 <strong>Total cost of activity:</strong>{' '}
-                <Dollars long>{activity.combined}</Dollars>
+                <Dollars>{activity.combined}</Dollars>
               </li>
               <li>
                 <strong>Medicaid share:</strong>{' '}
-                <Dollars long>{activity.medicaid}</Dollars> (
-                <Dollars long>{activity.federal}</Dollars> Federal share)
+                <Dollars>{activity.medicaid}</Dollars> (
+                <Dollars>{activity.federal}</Dollars> Federal share)
               </li>
               {Object.entries(activity.ffys).map(
                 ([ffy, { medicaidShare, federal, total: ffyTotal }], j) => (
                   <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
-                    <strong>FFY {ffy}:</strong>{' '}
-                    <Dollars long>{ffyTotal}</Dollars> |{' '}
+                    <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
                     <strong>Medicaid share:</strong>{' '}
-                    <Dollars long>{medicaidShare}</Dollars> (
-                    <Dollars long>{federal}</Dollars> Federal share)
+                    <Dollars>{medicaidShare}</Dollars> (
+                    <Dollars>{federal}</Dollars> Federal share)
                   </li>
                 )
               )}
@@ -90,7 +88,7 @@ class ExecutiveSummary extends PureComponent {
 
         <hr className="subsection-rule" />
         <h3>Program Budget Tables</h3>
-        <ExecutiveSummaryBudget isViewOnly />
+        <ExecutiveSummaryBudget />
       </div>
     );
   }

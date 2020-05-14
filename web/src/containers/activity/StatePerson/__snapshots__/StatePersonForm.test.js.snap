@@ -54,9 +54,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
       <strong>
         Total: 
       </strong>
-      <Dollars
-        long={true}
-      >
+      <Dollars>
         7194705
       </Dollars>
     </p>
@@ -91,9 +89,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
       <strong>
         Total: 
       </strong>
-      <Dollars
-        long={true}
-      >
+      <Dollars>
         72323
       </Dollars>
     </p>

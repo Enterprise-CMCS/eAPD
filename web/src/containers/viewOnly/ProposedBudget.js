@@ -9,10 +9,10 @@ const ProposedBudget = () => (
     <h2>Proposed Budget</h2>
 
     <h3>Summary Budget Table</h3>
-    <BudgetSummary isViewOnly />
+    <BudgetSummary />
 
     <h3>Quarterly Federal Share</h3>
-    <QuarterlyBudgetSummary isViewOnly />
+    <QuarterlyBudgetSummary />
 
     <h3>Incentive Payments</h3>
     <IncentivePayments isViewOnly />

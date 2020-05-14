@@ -85,9 +85,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             3
           </Dollars>
         </td>
@@ -95,9 +93,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             6
           </Dollars>
         </td>
@@ -105,9 +101,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             9
           </Dollars>
         </td>
@@ -115,16 +109,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          />
+          <Dollars />
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             15
           </Dollars>
         </td>
@@ -142,9 +132,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             2
           </Dollars>
         </td>
@@ -152,9 +140,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             5
           </Dollars>
         </td>
@@ -162,9 +148,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             8
           </Dollars>
         </td>
@@ -172,18 +156,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             11
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             14
           </Dollars>
         </td>
@@ -201,9 +181,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1
           </Dollars>
         </td>
@@ -211,9 +189,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             4
           </Dollars>
         </td>
@@ -221,9 +197,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             7
           </Dollars>
         </td>
@@ -231,18 +205,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             10
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             13
           </Dollars>
         </td>
@@ -327,9 +297,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             103
           </Dollars>
         </td>
@@ -337,9 +305,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             106
           </Dollars>
         </td>
@@ -347,9 +313,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             109
           </Dollars>
         </td>
@@ -357,18 +321,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             112
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             115
           </Dollars>
         </td>
@@ -386,9 +346,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             102
           </Dollars>
         </td>
@@ -396,9 +354,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             105
           </Dollars>
         </td>
@@ -406,9 +362,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             108
           </Dollars>
         </td>
@@ -416,18 +370,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             111
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             114
           </Dollars>
         </td>
@@ -445,9 +395,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             101
           </Dollars>
         </td>
@@ -455,9 +403,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             104
           </Dollars>
         </td>
@@ -465,9 +411,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             107
           </Dollars>
         </td>
@@ -475,18 +419,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             110
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             113
           </Dollars>
         </td>
@@ -525,9 +465,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         <td
           className="budget-table--total budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             3002
           </Dollars>
         </td>
@@ -544,9 +482,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         <td
           className="budget-table--total budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             3001
           </Dollars>
         </td>
@@ -563,9 +499,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         <td
           className="budget-table--total budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             3000
           </Dollars>
         </td>
@@ -655,9 +589,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             203
           </Dollars>
         </td>
@@ -665,9 +597,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             206
           </Dollars>
         </td>
@@ -675,9 +605,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             209
           </Dollars>
         </td>
@@ -685,18 +613,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             212
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             215
           </Dollars>
         </td>
@@ -714,9 +638,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             202
           </Dollars>
         </td>
@@ -724,9 +646,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             205
           </Dollars>
         </td>
@@ -734,9 +654,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             208
           </Dollars>
         </td>
@@ -744,18 +662,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             211
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             214
           </Dollars>
         </td>
@@ -773,9 +687,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             201
           </Dollars>
         </td>
@@ -783,9 +695,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             204
           </Dollars>
         </td>
@@ -793,9 +703,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             207
           </Dollars>
         </td>
@@ -803,18 +711,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             210
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             213
           </Dollars>
         </td>
@@ -899,9 +803,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1103
           </Dollars>
         </td>
@@ -909,9 +811,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1106
           </Dollars>
         </td>
@@ -919,9 +819,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1109
           </Dollars>
         </td>
@@ -929,18 +827,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1112
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1115
           </Dollars>
         </td>
@@ -958,9 +852,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1102
           </Dollars>
         </td>
@@ -968,9 +860,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1105
           </Dollars>
         </td>
@@ -978,9 +868,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1108
           </Dollars>
         </td>
@@ -988,18 +876,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1111
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1114
           </Dollars>
         </td>
@@ -1017,9 +901,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="1"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1101
           </Dollars>
         </td>
@@ -1027,9 +909,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="2"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1104
           </Dollars>
         </td>
@@ -1037,9 +917,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="3"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1107
           </Dollars>
         </td>
@@ -1047,18 +925,14 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="budget-table--number"
           key="4"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1110
           </Dollars>
         </td>
         <td
           className="budget-table--number budget-table--subtotal"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             1113
           </Dollars>
         </td>
@@ -1097,9 +971,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         <td
           className="budget-table--total budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             4002
           </Dollars>
         </td>
@@ -1116,9 +988,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         <td
           className="budget-table--total budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             4001
           </Dollars>
         </td>
@@ -1135,9 +1005,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         <td
           className="budget-table--total budget-table--number"
         >
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             4000
           </Dollars>
         </td>

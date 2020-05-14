@@ -95,9 +95,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             <div
               className="form--computed-value__input-aligned"
             >
-              <Dollars
-                long={false}
-              >
+              <Dollars>
                 400
               </Dollars>
             </div>
@@ -210,9 +208,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             <div
               className="form--computed-value__input-aligned"
             >
-              <Dollars
-                long={false}
-              >
+              <Dollars>
                 400
               </Dollars>
             </div>
