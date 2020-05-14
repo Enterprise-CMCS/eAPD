@@ -29,27 +29,17 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             1992
              
           </strong>
-          <strong>
-            Costs: 
-          </strong>
-          <Dollars
-            long={false}
-          >
-            100
+           
+          <Dollars>
+            400
           </Dollars>
            | 
           <strong>
             FTEs: 
           </strong>
-          0.32
-           | 
-          <strong>
-            Total: 
-          </strong>
-          <Dollars
-            long={false}
-          >
-            32
+           
+          <Dollars>
+            100
           </Dollars>
         </div>
         <div
@@ -59,12 +49,8 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             1993
              
           </strong>
-          <strong>
-            Costs: 
-          </strong>
-          <Dollars
-            long={false}
-          >
+           
+          <Dollars>
             300
           </Dollars>
            | 
@@ -117,24 +103,17 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           <strong>
             Costs: 
           </strong>
-          <Dollars
-            long={false}
-          >
-            100
+           
+          <Dollars>
+            400
           </Dollars>
            | 
           <strong>
             FTEs: 
           </strong>
-          0.32
-           | 
-          <strong>
-            Total: 
-          </strong>
-          <Dollars
-            long={false}
-          >
-            32
+           
+          <Dollars>
+            100
           </Dollars>
         </div>
         <div
@@ -144,12 +123,8 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             1993
              
           </strong>
-          <strong>
-            Costs: 
-          </strong>
-          <Dollars
-            long={false}
-          >
+           
+          <Dollars>
             300
           </Dollars>
            | 

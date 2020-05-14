@@ -24,23 +24,75 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     rows={5}
     value="personnel desc"
   />
-  <PersonCostForm
-    costLabel="Costs with benefits"
-    fteLabel="Number of FTEs"
-    items={
-      Object {
-        "7473": Object {
-          "amt": 2398235,
-          "perc": 3,
-        },
-        "7474": Object {
-          "amt": 72323,
-          "perc": 1,
-        },
-      }
-    }
-    setCost={[Function]}
-    setFTE={[Function]}
-  />
+  <h5
+    className="ds-h5"
+  >
+    7473
+     Costs
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DollarField
+      label="Costs with benefits"
+      name="cost"
+      onBlur={null}
+      onChange={[Function]}
+      size="medium"
+      value={2398235}
+    />
+    <NumberField
+      fieldRef={null}
+      label="Number of FTEs"
+      name="ftes"
+      onChange={[Function]}
+      size="medium"
+      type="number"
+      value={3}
+    />
+    <p>
+      <strong>
+        Total: 
+      </strong>
+      <Dollars>
+        7194705
+      </Dollars>
+    </p>
+  </div>
+  <h5
+    className="ds-h5"
+  >
+    7474
+     Costs
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DollarField
+      label="Costs with benefits"
+      name="cost"
+      onBlur={null}
+      onChange={[Function]}
+      size="medium"
+      value={72323}
+    />
+    <NumberField
+      fieldRef={null}
+      label="Number of FTEs"
+      name="ftes"
+      onChange={[Function]}
+      size="medium"
+      type="number"
+      value={1}
+    />
+    <p>
+      <strong>
+        Total: 
+      </strong>
+      <Dollars>
+        72323
+      </Dollars>
+    </p>
+  </div>
 </Fragment>
 `;
