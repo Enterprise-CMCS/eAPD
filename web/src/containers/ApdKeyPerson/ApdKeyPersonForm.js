@@ -35,6 +35,12 @@ const PersonForm = ({
     action(index, value);
   };
 
+  // this is a temporary fix because the percent field wants a string but now NumberField gives us a number
+  // but the percent will go away in #2174, so this will be removed by that task
+  const handlePercentChange = action => ({ target: { value } }) => {
+    action(index, value.toString());
+  };
+
   const setPersonHasCosts = newHasCosts => () => {
     setHasCosts(index, newHasCosts);
   };
@@ -79,7 +85,8 @@ const PersonForm = ({
         label={t(`${tRoot}.labels.percentTime`)}
         value={percentTime || 0}
         size="small"
-        onChange={handleChange(setTime)}
+        round
+        onChange={handlePercentChange(setTime)}
       />
 
       <fieldset className="ds-c-fieldset">
@@ -156,9 +163,6 @@ const mapDispatchToProps = {
   setTime: setKeyPersonPercentTime
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(PersonForm);
+export default connect(null, mapDispatchToProps)(PersonForm);
 
 export { PersonForm as plain, mapDispatchToProps };

@@ -92,7 +92,7 @@ describe('DollarField component', () => {
     );
 
     act(() => {
-      component.find('NumberField').prop('onBlur')({
+      component.find('TextField').prop('onBlur')({
         target: { value: '123,456.78' }
       });
     });

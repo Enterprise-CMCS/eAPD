@@ -5,7 +5,6 @@ exports[`DollarField component passes back numeric values on change, but still r
   className="stuff"
   label="test label"
   name="test name"
-  onBlur={null}
   onChange={
     [MockFunction] {
       "calls": Array [
@@ -34,10 +33,29 @@ exports[`DollarField component passes back numeric values on change, but still r
     label="test label"
     mask="currency"
     name="test name"
-    onBlur={[Function]}
-    onChange={[Function]}
+    onBlur={null}
+    onChange={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "target": Object {
+                "value": 123456,
+              },
+            },
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    round={true}
     size="medium"
-    value="123,456"
+    value="12332"
   >
     <TextField
       className="stuff"
@@ -107,7 +125,6 @@ exports[`DollarField component renders correctly for non-numeric initial values 
   className="stuff"
   label="test label"
   name="test name"
-  onBlur={null}
   onChange={[MockFunction]}
   size="medium"
   value="abc"
@@ -118,8 +135,9 @@ exports[`DollarField component renders correctly for non-numeric initial values 
     label="test label"
     mask="currency"
     name="test name"
-    onBlur={[Function]}
-    onChange={[Function]}
+    onBlur={null}
+    onChange={[MockFunction]}
+    round={true}
     size="medium"
     value="abc"
   >
@@ -191,7 +209,6 @@ exports[`DollarField component renders correctly, adds commas to big numbers, pa
   className="stuff"
   label="test label"
   name="test name"
-  onBlur={null}
   onChange={[MockFunction]}
   size="medium"
   value="123321"
@@ -202,10 +219,11 @@ exports[`DollarField component renders correctly, adds commas to big numbers, pa
     label="test label"
     mask="currency"
     name="test name"
-    onBlur={[Function]}
-    onChange={[Function]}
+    onBlur={null}
+    onChange={[MockFunction]}
+    round={true}
     size="medium"
-    value="123,321"
+    value="123321"
   >
     <TextField
       className="stuff"
@@ -275,7 +293,6 @@ exports[`DollarField component renders correctly, does not add commas to small n
   className="stuff"
   label="test label"
   name="test name"
-  onBlur={null}
   onChange={[MockFunction]}
   size="medium"
   value="123"
@@ -286,8 +303,9 @@ exports[`DollarField component renders correctly, does not add commas to small n
     label="test label"
     mask="currency"
     name="test name"
-    onBlur={[Function]}
-    onChange={[Function]}
+    onBlur={null}
+    onChange={[MockFunction]}
+    round={true}
     size="medium"
     value="123"
   >
@@ -365,7 +383,7 @@ exports[`DollarField component rounds numbers when the component loses focus, bu
         Array [
           Object {
             "target": Object {
-              "value": "123,456.78",
+              "value": 123457,
             },
           },
         ],
@@ -406,10 +424,47 @@ exports[`DollarField component rounds numbers when the component loses focus, bu
     label="test label"
     mask="currency"
     name="test name"
-    onBlur={[Function]}
-    onChange={[Function]}
+    onBlur={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "target": Object {
+                "value": 123457,
+              },
+            },
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    onChange={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "target": Object {
+                "value": 123457,
+              },
+            },
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    round={true}
     size="medium"
-    value="12,332"
+    value="12332"
   >
     <TextField
       className="stuff"
