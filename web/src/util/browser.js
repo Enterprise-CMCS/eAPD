@@ -9,8 +9,8 @@ if (browser && browser.version) {
 // Green support is for browsers where we we intend all functionality to work as
 // well as all visual and style features to be correct.
 const browserIsGreen =
-  // Current major version as of April 2020.
-  (browser.name === 'chrome' && browser.version >= 80) ||
+  // Current major version as of April 2020 is 80, but we need to support back to 78 because Jerome's work machine can't be updated.
+  (browser.name === 'chrome' && browser.version >= 78) ||
   // Most recent Firefox extended support release as of April 2020.
   (browser.name === 'firefox' && browser.version >= 68) ||
   // First Chromium build of Edge. No longer support pre-Chromium builds.
