@@ -111,7 +111,7 @@ describe('the StatePersonForm component', () => {
         .find('input[name="ftes"]')
         .first()
         .simulate('change', { target: { value: '0.5' } });
-      expect(setFTE).toHaveBeenCalledWith(6, 83, '7473', '0.5');
+      expect(setFTE).toHaveBeenCalledWith(6, 83, '7473', 0.5);
     });
   });
 
