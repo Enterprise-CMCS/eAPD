@@ -11,7 +11,7 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
           <div key={year}>
             <strong>{year} </strong>
             <strong>Costs: </strong>
-            <Dollars>{person.costs[year]}</Dollars> | <strong>FTEs: </strong>
+            <Dollars>{person.costs[year]}</Dollars> | <strong>FTE: </strong>
             {person.fte[year]} | <strong>Total: </strong>
             <Dollars>{person.costs[year] * person.fte[year]}</Dollars>
           </div>

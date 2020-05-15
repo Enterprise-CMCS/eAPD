@@ -19,7 +19,7 @@ const ApdStateKeyPerson = ({
             <div key={year}>
               <strong>{year} </strong>
               <strong>Costs: </strong>
-              <Dollars>{costs[year]}</Dollars> | <strong>FTEs: </strong>
+              <Dollars>{costs[year]}</Dollars> | <strong>FTE: </strong>
               {fte[year]} | <strong>Total: </strong>
               <Dollars>{costs[year] * fte[year]}</Dollars>
             </div>
