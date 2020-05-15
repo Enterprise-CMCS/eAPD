@@ -14,6 +14,7 @@ Anticipated release: May 18, 2020
 
 - Authenticate HTTP Clients via JWT presented in Authorization header ([#2100])
 - Update minimum Chrome version; add download link to Microsoft Edge ([#2145])
+- Set Minimum Green Browser Support for Chrome to Version 78 ([#2216])
 
 # Previous releases
 
@@ -23,3 +24,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2187]: https://github.com/18F/cms-hitech-apd/issues/2187
 [#2145]: https://github.com/18F/cms-hitech-apd/issues/2145
 [#2185]: https://github.com/18F/cms-hitech-apd/issues/2185
+[#2216]: https://github.com/18F/cms-hitech-apd/issues/2216
