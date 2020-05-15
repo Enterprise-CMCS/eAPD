@@ -29,17 +29,23 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             1992
              
           </strong>
-           
+          <strong>
+            Costs: 
+          </strong>
           <Dollars>
-            400
+            100
           </Dollars>
            | 
           <strong>
-            FTEs: 
+            FTE: 
           </strong>
-           
+          0.32
+           | 
+          <strong>
+            Total: 
+          </strong>
           <Dollars>
-            100
+            32
           </Dollars>
         </div>
         <div
@@ -49,22 +55,22 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             1993
              
           </strong>
-           
+          <strong>
+            Costs: 
+          </strong>
           <Dollars>
             300
           </Dollars>
            | 
           <strong>
-            FTEs: 
+            FTE: 
           </strong>
           0.84
            | 
           <strong>
             Total: 
           </strong>
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             252
           </Dollars>
         </div>
@@ -103,17 +109,20 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           <strong>
             Costs: 
           </strong>
-           
           <Dollars>
-            400
+            100
           </Dollars>
            | 
           <strong>
-            FTEs: 
+            FTE: 
           </strong>
-           
+          0.32
+           | 
+          <strong>
+            Total: 
+          </strong>
           <Dollars>
-            100
+            32
           </Dollars>
         </div>
         <div
@@ -123,22 +132,22 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             1993
              
           </strong>
-           
+          <strong>
+            Costs: 
+          </strong>
           <Dollars>
             300
           </Dollars>
            | 
           <strong>
-            FTEs: 
+            FTE: 
           </strong>
           0.84
            | 
           <strong>
             Total: 
           </strong>
-          <Dollars
-            long={false}
-          >
+          <Dollars>
             252
           </Dollars>
         </div>
