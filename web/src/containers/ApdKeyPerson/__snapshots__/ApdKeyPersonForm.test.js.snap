@@ -30,13 +30,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     type="text"
     value="The Builder"
   />
-  <PercentField
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercentTime1"
-    onChange={[Function]}
-    size="small"
-    value="32"
-  />
   <fieldset
     className="ds-c-fieldset"
   >
@@ -57,50 +50,24 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     <ChoiceComponent
       checked={true}
       checkedChildren={
-        <div
-          className="ds-c-choice__checkedChild ds-l-form-row"
-        >
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1992"
-              name="apd-state-profile-costs1-fy1992"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={100}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1993"
-              name="apd-state-profile-costs1-fy1993"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={300}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <FormLabel
-              component="label"
-            >
-              Total
-            </FormLabel>
-            <div
-              className="form--computed-value__input-aligned"
-            >
-              <Dollars>
-                400
-              </Dollars>
-            </div>
-          </div>
-        </div>
+        <PersonCostForm
+          costLabel="Costs with benefits"
+          fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
+          items={
+            Object {
+              "1992": Object {
+                "amt": 100,
+                "perc": 0.32,
+              },
+              "1993": Object {
+                "amt": 300,
+                "perc": 0.57,
+              },
+            }
+          }
+          setCost={[Function]}
+          setFTE={[Function]}
+        />
       }
       name="apd-state-profile-hascosts-yes1"
       onChange={[Function]}
@@ -143,13 +110,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     type="text"
     value="The Builder"
   />
-  <PercentField
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercentTime1"
-    onChange={[Function]}
-    size="small"
-    value="32"
-  />
   <fieldset
     className="ds-c-fieldset"
   >
@@ -170,52 +130,106 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     <ChoiceComponent
       checked={false}
       checkedChildren={
-        <div
-          className="ds-c-choice__checkedChild ds-l-form-row"
-        >
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1992"
-              name="apd-state-profile-costs1-fy1992"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={100}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1993"
-              name="apd-state-profile-costs1-fy1993"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={300}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <FormLabel
-              component="label"
-            >
-              Total
-            </FormLabel>
-            <div
-              className="form--computed-value__input-aligned"
-            >
-              <Dollars>
-                400
-              </Dollars>
-            </div>
-          </div>
-        </div>
+        <PersonCostForm
+          costLabel="Costs with benefits"
+          fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
+          items={
+            Object {
+              "1992": Object {
+                "amt": 100,
+                "perc": 0.32,
+              },
+              "1993": Object {
+                "amt": 300,
+                "perc": 0.57,
+              },
+            }
+          }
+          setCost={[Function]}
+          setFTE={[Function]}
+        />
       }
       name="apd-state-profile-hascosts-yes1"
+      onChange={[Function]}
+      type="radio"
+      value="yes"
+    >
+      Yes
+    </ChoiceComponent>
+  </fieldset>
+</Fragment>
+`;
+
+exports[`the ApdKeyPersonForm component renders correctly if the person is a primary contact 1`] = `
+<Fragment>
+  <h4
+    className="ds-h4"
+  >
+    Primary
+     APD Point of Contact
+  </h4>
+  <TextField
+    autoFocus={true}
+    label="Name"
+    name="apd-state-profile-pocname0"
+    onChange={[Function]}
+    type="text"
+    value="Bob the Builder"
+  />
+  <TextField
+    label="Email"
+    name="apd-state-profile-pocemail0"
+    onChange={[Function]}
+    type="text"
+    value="email address"
+  />
+  <TextField
+    label="Role"
+    name="apd-state-profile-pocposition0"
+    onChange={[Function]}
+    type="text"
+    value="The Builder"
+  />
+  <fieldset
+    className="ds-c-fieldset"
+  >
+    <legend
+      className="ds-c-label"
+    >
+      Does this person have costs directly attributable to this program?
+    </legend>
+    <ChoiceComponent
+      checked={false}
+      name="apd-state-profile-hascosts-no0"
+      onChange={[Function]}
+      type="radio"
+      value="no"
+    >
+      No
+    </ChoiceComponent>
+    <ChoiceComponent
+      checked={true}
+      checkedChildren={
+        <PersonCostForm
+          costLabel="Costs with benefits"
+          fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
+          items={
+            Object {
+              "1992": Object {
+                "amt": 100,
+                "perc": 0.32,
+              },
+              "1993": Object {
+                "amt": 300,
+                "perc": 0.57,
+              },
+            }
+          }
+          setCost={[Function]}
+          setFTE={[Function]}
+        />
+      }
+      name="apd-state-profile-hascosts-yes0"
       onChange={[Function]}
       type="radio"
       value="yes"

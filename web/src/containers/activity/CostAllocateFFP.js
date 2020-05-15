@@ -254,6 +254,7 @@ const CostAllocateFFP = ({
                   }}
                 />
                 <DollarField
+                  name={`ffy-${ffy}`}
                   label={`FFY ${ffy}`}
                   labelClassName="sr-only"
                   value={costAllocation[ffy].other || '0'}

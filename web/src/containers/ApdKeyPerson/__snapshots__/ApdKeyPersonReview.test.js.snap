@@ -8,7 +8,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
     <StandardReview
       editHref={null}
       heading="13. Bob the Builder"
-      headingLevel={4}
+      headingLevel="4"
       onDeleteClick={[MockFunction]}
       onEditClick={[MockFunction]}
     >
@@ -18,42 +18,63 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
         <li>
           The Builder
         </li>
-        <li>
-          <strong>
-            Total cost:
-          </strong>
-           
-          <Dollars>
-            400
-          </Dollars>
-        </li>
-        <li
+      </ul>
+      <div
+        className="ds-u-margin-top--2"
+      >
+        <div
           key="1992"
         >
           <strong>
-            FFY 
             1992
-             cost:
+             
           </strong>
-           
+          <strong>
+            Costs: 
+          </strong>
           <Dollars>
             100
           </Dollars>
-        </li>
-        <li
+           | 
+          <strong>
+            FTE: 
+          </strong>
+          0.32
+           | 
+          <strong>
+            Total: 
+          </strong>
+          <Dollars>
+            32
+          </Dollars>
+        </div>
+        <div
           key="1993"
         >
           <strong>
-            FFY 
             1993
-             cost:
+             
           </strong>
-           
+          <strong>
+            Costs: 
+          </strong>
           <Dollars>
             300
           </Dollars>
-        </li>
-      </ul>
+           | 
+          <strong>
+            FTE: 
+          </strong>
+          0.84
+           | 
+          <strong>
+            Total: 
+          </strong>
+          <Dollars>
+            252
+          </Dollars>
+        </div>
+      </div>
     </StandardReview>
   </div>
   <div
@@ -74,50 +95,63 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
         <li>
           email address
         </li>
-        <li>
-          <strong>
-            Time commitment to project:
-          </strong>
-           
-          32
-          %
-        </li>
-        <li>
-          <strong>
-            Total cost:
-          </strong>
-           
-          <Dollars>
-            400
-          </Dollars>
-        </li>
-        <li
+      </ul>
+      <div
+        className="ds-u-margin-top--2"
+      >
+        <div
           key="1992"
         >
           <strong>
-            FFY 
             1992
-             cost:
+             
           </strong>
-           
+          <strong>
+            Costs: 
+          </strong>
           <Dollars>
             100
           </Dollars>
-        </li>
-        <li
+           | 
+          <strong>
+            FTE: 
+          </strong>
+          0.32
+           | 
+          <strong>
+            Total: 
+          </strong>
+          <Dollars>
+            32
+          </Dollars>
+        </div>
+        <div
           key="1993"
         >
           <strong>
-            FFY 
             1993
-             cost:
+             
           </strong>
-           
+          <strong>
+            Costs: 
+          </strong>
           <Dollars>
             300
           </Dollars>
-        </li>
-      </ul>
+           | 
+          <strong>
+            FTE: 
+          </strong>
+          0.84
+           | 
+          <strong>
+            Total: 
+          </strong>
+          <Dollars>
+            252
+          </Dollars>
+        </div>
+      </div>
     </StandardReview>
   </div>
 </Fragment>
