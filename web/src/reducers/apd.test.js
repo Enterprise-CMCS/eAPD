@@ -697,7 +697,7 @@ describe('APD reducer', () => {
               expanded: true,
               hasCosts: false,
               isPrimary: false,
-              percentTime: '0',
+              fte: { '1': 0, '2': 0 },
               name: '',
               position: '',
               key: expect.stringMatching(/^[a-f0-9]{8}$/)
@@ -1086,7 +1086,7 @@ describe('APD reducer helper methods', () => {
             expanded: true,
             hasCosts: false,
             isPrimary: false,
-            percentTime: '0',
+            fte: { '1': 0, '2': 0 },
             name: '',
             position: '',
             key: expect.stringMatching(/^[a-f0-9]{8}$/)

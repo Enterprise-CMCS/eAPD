@@ -16,7 +16,10 @@ describe('the ApdKeyPersonReview component', () => {
       hasCosts: true,
       key: 'person key',
       name: 'Bob the Builder',
-      percentTime: '32',
+      fte: {
+        '1992': 0.32,
+        '1993': 0.84
+      },
       position: 'The Builder'
     },
     onDeleteClick: jest.fn(),

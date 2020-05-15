@@ -350,6 +350,15 @@ Object {
                   "description": "Person's email address",
                   "type": "string",
                 },
+                "fte": Object {
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{0,2}": Object {
+                      "description": "FTE equivalent of this person's time dedicated to the project",
+                      "type": "number",
+                    },
+                  },
+                },
                 "hasCosts": Object {
                   "description": "Whether the person has costs attributable to the project",
                   "type": "boolean",
@@ -361,12 +370,6 @@ Object {
                 "name": Object {
                   "description": "Person's name",
                   "type": "string",
-                },
-                "percentTime": Object {
-                  "description": "Percent of this person's time dedicated to the project, between 0 and 100.",
-                  "maximum": 100,
-                  "minimum": 0,
-                  "type": "number",
                 },
                 "position": Object {
                   "description": "Person's position",
