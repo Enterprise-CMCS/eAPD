@@ -105,6 +105,11 @@
       "decision": "ignore",
       "madeAt": 1588615312251,
       "expiresAt": 1589220067507
+    },
+    "1486|webpack-dev-server>http-proxy-middleware>http-proxy": {
+      "decision": "ignore",
+      "madeAt": 1589488195282,
+      "expiresAt": 1590092986555
     }
   },
   "rules": {},
