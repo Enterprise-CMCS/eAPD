@@ -1,20 +1,18 @@
-import { FormLabel, TextField } from '@cmsgov/design-system-core';
+import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { t } from '../../i18n';
 import Choice from '../../components/Choice';
-import DollarField from '../../components/DollarField';
-import PercentField from '../../components/PercentField';
-import Dollars from '../../components/Dollars';
+import PersonCostForm from '../../components/PersonCostForm';
 
 import {
   setKeyPersonCost,
   setKeyPersonEmail,
   setKeyPersonHasCosts,
   setKeyPersonName,
-  setKeyPersonPercentTime,
+  setKeyPersonFTE,
   setKeyPersonRole
 } from '../../actions/editApd';
 
@@ -22,7 +20,7 @@ const tRoot = 'apd.stateProfile.keyPersonnel';
 
 const PersonForm = ({
   index,
-  item: { costs, email, hasCosts, name, percentTime, position },
+  item: { costs, email, hasCosts, name, fte, position },
   setCost,
   setEmail,
   setHasCosts,
@@ -39,16 +37,15 @@ const PersonForm = ({
     setHasCosts(index, newHasCosts);
   };
 
-  const setCostForYear = year => ({ target: { value } }) => {
+  const setCostForYear = (year, value) => {
     setCost(index, year, value);
   };
 
-  const primary = index === 0;
+  const setFTEForYear = (year, value) => {
+    setTime(index, year, +value);
+  };
 
-  const totalCost = Object.values(costs).reduce(
-    (sum, value) => sum + +value,
-    0
-  );
+  const primary = index === 0;
 
   return (
     <Fragment>
@@ -74,13 +71,6 @@ const PersonForm = ({
         value={position}
         onChange={handleChange(setRole)}
       />
-      <PercentField
-        name={`apd-state-profile-pocpercentTime${index}`}
-        label={t(`${tRoot}.labels.percentTime`)}
-        value={percentTime || 0}
-        size="small"
-        onChange={handleChange(setTime)}
-      />
 
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
@@ -100,25 +90,21 @@ const PersonForm = ({
           checked={hasCosts}
           onChange={setPersonHasCosts(true)}
           checkedChildren={
-            <div className="ds-c-choice__checkedChild ds-l-form-row">
-              {years.map(ffy => (
-                <div key={ffy} className="ds-l-col--auto">
-                  <DollarField
-                    name={`apd-state-profile-costs${index}-fy${ffy}`}
-                    label={`FFY ${ffy}`}
-                    size="small"
-                    value={costs[ffy]}
-                    onChange={setCostForYear(ffy)}
-                  />
-                </div>
-              ))}
-              <div className="ds-l-col--auto">
-                <FormLabel>Total</FormLabel>
-                <div className="form--computed-value__input-aligned">
-                  <Dollars>{totalCost}</Dollars>
-                </div>
-              </div>
-            </div>
+            <PersonCostForm
+              items={years.reduce(
+                (o, year) => ({
+                  ...o,
+                  [year]: {
+                    amt: costs[year],
+                    perc: fte[year]
+                  }
+                }),
+                {}
+              )}
+              fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
+              setCost={setCostForYear}
+              setFTE={setFTEForYear}
+            />
           }
         >
           Yes
@@ -134,8 +120,7 @@ PersonForm.propTypes = {
     email: PropTypes.string.isRequired,
     hasCosts: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    percentTime: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-      .isRequired,
+    fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
   setCost: PropTypes.func.isRequired,
@@ -153,12 +138,9 @@ const mapDispatchToProps = {
   setHasCosts: setKeyPersonHasCosts,
   setName: setKeyPersonName,
   setRole: setKeyPersonRole,
-  setTime: setKeyPersonPercentTime
+  setTime: setKeyPersonFTE
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(PersonForm);
+export default connect(null, mapDispatchToProps)(PersonForm);
 
 export { PersonForm as plain, mapDispatchToProps };

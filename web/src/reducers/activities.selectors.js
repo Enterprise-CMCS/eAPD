@@ -68,9 +68,9 @@ export const selectActivityCostSummary = createSelector(
           activityIndex === 0
             ? keyPersonnel.map(kp => ({
                 description: `${kp.name} (APD Key Personnel)`,
-                totalCost: kp.hasCosts ? kp.costs[ffy] : 0,
-                unitCost: null,
-                units: `${kp.percentTime}% time`
+                totalCost: kp.hasCosts ? kp.costs[ffy] * kp.fte[ffy] : 0,
+                unitCost: kp.hasCosts ? kp.costs[ffy] : null,
+                units: kp.hasCosts ? `${kp.fte[ffy]} FTE` : null
               }))
             : []
       }),

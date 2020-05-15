@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PersonCostForm component renders correctly 1`] = `
+<div>
+  <h5
+    className="ds-h5"
+  >
+    1972
+     Costs
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DollarField
+      label="Costs with benefits"
+      name="cost"
+      onBlur={null}
+      onChange={[Function]}
+      size="medium"
+      value={100000}
+    />
+    <NumberField
+      fieldRef={null}
+      label="Number of FTEs"
+      name="ftes"
+      numeric={true}
+      onChange={[Function]}
+      size="medium"
+      value={1}
+    />
+    <p>
+      <strong>
+        Total: 
+      </strong>
+      <Dollars
+        long={true}
+      >
+        100000
+      </Dollars>
+    </p>
+  </div>
+  <h5
+    className="ds-h5"
+  >
+    1973
+     Costs
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DollarField
+      label="Costs with benefits"
+      name="cost"
+      onBlur={null}
+      onChange={[Function]}
+      size="medium"
+      value={120000}
+    />
+    <NumberField
+      fieldRef={null}
+      label="Number of FTEs"
+      name="ftes"
+      numeric={true}
+      onChange={[Function]}
+      size="medium"
+      value={0.75}
+    />
+    <p>
+      <strong>
+        Total: 
+      </strong>
+      <Dollars
+        long={true}
+      >
+        90000
+      </Dollars>
+    </p>
+  </div>
+</div>
+`;

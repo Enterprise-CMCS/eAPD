@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 
 import { plain as KeyPersonForm, mapDispatchToProps } from './ApdKeyPersonForm';
@@ -8,7 +8,7 @@ import {
   setKeyPersonEmail,
   setKeyPersonHasCosts,
   setKeyPersonName,
-  setKeyPersonPercentTime,
+  setKeyPersonFTE,
   setKeyPersonRole
 } from '../../actions/editApd';
 
@@ -24,7 +24,10 @@ describe('the ApdKeyPersonForm component', () => {
       hasCosts: true,
       key: 'person key',
       name: 'Bob the Builder',
-      percentTime: '32',
+      fte: {
+        '1992': 0.32,
+        '1993': 0.57
+      },
       position: 'The Builder'
     },
 
@@ -53,6 +56,10 @@ describe('the ApdKeyPersonForm component', () => {
     expect(component).toMatchSnapshot();
   });
 
+  it('renders correctly if the person is a primary contact', () => {
+    expect(shallow(<KeyPersonForm {...props} index={0} />)).toMatchSnapshot();
+  });
+
   it('renders correctly if the person does not have costs', () => {
     expect(
       shallow(
@@ -65,8 +72,7 @@ describe('the ApdKeyPersonForm component', () => {
     [
       ['apd-state-profile-pocname1', 'name', props.setName],
       ['apd-state-profile-pocemail1', 'email', props.setEmail],
-      ['apd-state-profile-pocposition1', 'role', props.setRole],
-      ['apd-state-profile-pocpercentTime1', 'time', props.setTime]
+      ['apd-state-profile-pocposition1', 'role', props.setRole]
     ].forEach(([formName, property, action]) => {
       it(`handles changing the ${property}`, () => {
         component
@@ -98,20 +104,19 @@ describe('the ApdKeyPersonForm component', () => {
     });
 
     it('handles changing cost for FFY', () => {
-      const hasCostsForm = shallow(
-        component
-          .findWhere(
-            c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes'
-          )
-          .prop('checkedChildren')
-      );
-
-      hasCostsForm
-        .find('DollarField')
+      mount(<KeyPersonForm {...props} />)
+        .find('input[name="cost"]')
         .first()
         .simulate('change', { target: { value: 9000 } });
-
       expect(props.setCost(1, 1992, 9000));
+    });
+
+    it('handles changing fte for FFY', () => {
+      mount(<KeyPersonForm {...props} />)
+        .find('input[name="ftes"]')
+        .first()
+        .simulate('change', { target: { value: 0.4 } });
+      expect(props.setTime(1, 1992, 0.4));
     });
   });
 
@@ -122,7 +127,7 @@ describe('the ApdKeyPersonForm component', () => {
       setHasCosts: setKeyPersonHasCosts,
       setName: setKeyPersonName,
       setRole: setKeyPersonRole,
-      setTime: setKeyPersonPercentTime
+      setTime: setKeyPersonFTE
     });
   });
 });

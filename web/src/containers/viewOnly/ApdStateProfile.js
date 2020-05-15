@@ -4,15 +4,25 @@ import React, { Fragment } from 'react';
 import Dollars from '../../components/Dollars';
 
 const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
-  const totalCost = person =>
-    Object.values(person.costs).reduce((sum, value) => sum + +value, 0);
   const costByYear = person =>
-    Object.keys(person.costs).map(year => (
-      <li key={year}>
-        <strong>FFY {year} cost:</strong>{' '}
-        <Dollars>{person.costs[year]}</Dollars>
-      </li>
-    ));
+    person.hasCosts ? (
+      <div>
+        {Object.keys(person.costs).map(year => (
+          <div key={year}>
+            <strong>{year} </strong>
+            <strong>Costs: </strong>
+            <Dollars>{person.costs[year]}</Dollars> | <strong>FTE: </strong>
+            {person.fte[year]} | <strong>Total: </strong>
+            <Dollars>{person.costs[year] * person.fte[year]}</Dollars>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div>
+        <strong>Total cost:</strong> <Dollars>{0}</Dollars>
+      </div>
+    );
+
   const buildPerson = (person, index) => {
     return (
       <Fragment>
@@ -28,15 +38,7 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
             <strong>Email: </strong>
             {person.email}
           </li>
-          <li>
-            <strong>Percent time allocated to project: </strong>
-            {person.percentTime}%
-          </li>
-          <li>
-            <strong>Total costs: </strong>
-            <Dollars>{person.hasCosts ? totalCost(person) : '0'}</Dollars>
-            {person.hasCosts ? costByYear(person) : null}
-          </li>
+          <li>{costByYear(person)}</li>
         </ul>
       </Fragment>
     );

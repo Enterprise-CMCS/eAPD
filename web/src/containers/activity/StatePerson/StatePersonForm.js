@@ -10,10 +10,8 @@ import {
   setPersonnelTitle
 } from '../../../actions/editActivity';
 
-import DollarField from '../../../components/DollarField';
-import Dollars from '../../../components/Dollars';
 import TextArea from '../../../components/TextArea';
-import NumberField from '../../../components/NumberField';
+import PersonCostForm from '../../../components/PersonCostForm';
 
 const StatePersonForm = ({
   activityIndex,
@@ -35,14 +33,16 @@ const StatePersonForm = ({
   );
 
   const getEditCostForYear = useCallback(
-    year => ({ target: { value } }) =>
-      setCost(activityIndex, index, year, value),
+    (year, value) => {
+      setCost(activityIndex, index, year, value);
+    },
     [index]
   );
 
   const getEditFTEForYear = useCallback(
-    year => ({ target: { value } }) =>
-      setFTE(activityIndex, index, year, value),
+    (year, value) => {
+      setFTE(activityIndex, index, year, value);
+    },
     [index]
   );
 
@@ -63,32 +63,11 @@ const StatePersonForm = ({
         value={description}
         onChange={editDesc}
       />
-      {Object.entries(years).map(([year, { amt, perc }]) => (
-        <Fragment key={year}>
-          <h5 className="ds-h5">{year} Costs</h5>
-          <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
-            <DollarField
-              label="Costs with benefits"
-              name="cost"
-              size="medium"
-              value={amt}
-              onChange={getEditCostForYear(year)}
-            />
-            <NumberField
-              label="Number of FTEs"
-              name="ftes"
-              size="medium"
-              type="number"
-              value={perc}
-              onChange={getEditFTEForYear(year)}
-            />
-            <p>
-              <strong>Total: </strong>
-              <Dollars>{amt * perc}</Dollars>
-            </p>
-          </div>
-        </Fragment>
-      ))}
+      <PersonCostForm
+        items={years}
+        setCost={getEditCostForYear}
+        setFTE={getEditFTEForYear}
+      />
     </Fragment>
   );
 };
