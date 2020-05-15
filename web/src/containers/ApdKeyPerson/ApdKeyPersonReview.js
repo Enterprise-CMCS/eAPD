@@ -6,26 +6,32 @@ import Review from '../../components/Review';
 const ApdStateKeyPerson = ({
   expand,
   index,
-  item: { costs, email, hasCosts, name, percentTime, position },
+  item: { costs, email, hasCosts, name, fte, position },
   onDeleteClick
 }) => {
   const primary = index === 0;
 
-  const totalCost = useMemo(
-    () => Object.values(costs).reduce((sum, value) => sum + +value, 0),
-    [costs]
-  );
-
   const costByYear = useMemo(
-    () =>
-      hasCosts
-        ? Object.keys(costs).map(year => (
-            <li key={year}>
-              <strong>FFY {year} cost:</strong> <Dollars>{costs[year]}</Dollars>
-            </li>
+    () => (
+      <div className="ds-u-margin-top--2">
+        {hasCosts ? (
+          Object.keys(costs).map(year => (
+            <div key={year}>
+              <strong>{year} </strong>
+              <strong>Costs: </strong>
+              <Dollars>{costs[year]}</Dollars> | <strong>FTE: </strong>
+              {fte[year]} | <strong>Total: </strong>
+              <Dollars>{costs[year] * fte[year]}</Dollars>
+            </div>
           ))
-        : null,
-    [costs]
+        ) : (
+          <div>
+            <strong>Total cost:</strong> <Dollars>{0}</Dollars>
+          </div>
+        )}
+      </div>
+    ),
+    [costs, fte]
   );
 
   return (
@@ -33,19 +39,15 @@ const ApdStateKeyPerson = ({
       <div className="visibility--screen">
         <Review
           heading={`${index + 1}. ${name}`}
-          headingLevel={4}
+          headingLevel="4"
           onDeleteClick={onDeleteClick}
           onEditClick={expand}
         >
           <ul className="ds-c-list--bare">
             {primary ? <li>Primary APD Point of Contact</li> : null}
             <li>{position}</li>
-            <li>
-              <strong>Total cost:</strong>{' '}
-              <Dollars>{hasCosts ? totalCost : 0}</Dollars>
-            </li>
-            {costByYear}
           </ul>
+          {costByYear}
         </Review>
       </div>
       <div className="visibility--print">
@@ -54,15 +56,8 @@ const ApdStateKeyPerson = ({
             {primary ? <li>Primary APD Point of Contact</li> : null}
             <li>{position}</li>
             <li>{email}</li>
-            <li>
-              <strong>Time commitment to project:</strong> {percentTime}%
-            </li>
-            <li>
-              <strong>Total cost:</strong>{' '}
-              <Dollars>{hasCosts ? totalCost : 0}</Dollars>
-            </li>
-            {costByYear}
           </ul>
+          {costByYear}
         </Review>
       </div>
     </Fragment>
@@ -77,8 +72,7 @@ ApdStateKeyPerson.propTypes = {
     email: PropTypes.string.isRequired,
     hasCosts: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    percentTime: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-      .isRequired,
+    fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
   onDeleteClick: PropTypes.func

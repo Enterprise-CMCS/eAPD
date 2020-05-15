@@ -24,10 +24,13 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
           "2": 200,
         },
         "email": "person1@theplace.gov",
+        "fte": Object {
+          "1": 0.27,
+          "2": 0.27,
+        },
         "hasCosts": true,
         "key": "person1",
         "name": "person name",
-        "percentTime": 27,
         "position": "unobservable",
       },
       Object {
@@ -36,10 +39,13 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
           "2": 0,
         },
         "email": "person2@theplace.gov",
+        "fte": Object {
+          "1": 0.72,
+          "2": 0.72,
+        },
         "hasCosts": false,
         "key": "person2",
         "name": "",
-        "percentTime": 72,
         "position": "",
       },
     ]

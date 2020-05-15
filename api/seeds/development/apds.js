@@ -1032,7 +1032,7 @@ exports.seed = async knex => {
               position: 'HIT Coordinator',
               email: 'JimPushesButtons@tycho.com',
               isPrimary: true,
-              percentTime: '100',
+              fte: { '2020': 1, '2021': 1 },
               hasCosts: true,
               costs: { '2020': 100000, '2021': 100000 }
             },
@@ -1041,7 +1041,7 @@ exports.seed = async knex => {
               position: 'State Medicaid Director',
               email: 'FJohnson@tycho.com',
               isPrimary: false,
-              percentTime: '30',
+              fte: { '2020': 0.3, '2021': 0.3 },
               hasCosts: false,
               costs: { '2020': 0, '2021': 0 }
             }
