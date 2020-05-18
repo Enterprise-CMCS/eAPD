@@ -20,6 +20,51 @@ describe('NumberField component', () => {
     ).toMatchSnapshot();
   });
 
+  it('renders correctly for non-numeric initial values', () => {
+    expect(
+      mount(
+        <NumberField
+          label="test label"
+          name="test name"
+          size="medium"
+          className="stuff"
+          value="abc"
+          onChange={jest.fn()}
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly, does not add commas to small numbers, passing props down', () => {
+    expect(
+      mount(
+        <NumberField
+          label="test label"
+          name="test name"
+          size="medium"
+          className="stuff"
+          value="123"
+          onChange={jest.fn()}
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly, adds commas to big numbers, passing props down', () => {
+    expect(
+      mount(
+        <NumberField
+          label="test label"
+          name="test name"
+          size="medium"
+          className="stuff"
+          value="123321"
+          onChange={jest.fn()}
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
   it('selects the text field content if the value is zero', () => {
     const ref = { current: null };
 
@@ -85,7 +130,7 @@ describe('NumberField component', () => {
     expect(ref.current).toEqual(null);
   });
 
-  it('passes back numeric values on change, but still renders with currency mask', () => {
+  it('passes back numeric values on change, but still renders with mask', () => {
     const onChange = jest.fn();
 
     const component = mount(
@@ -111,7 +156,7 @@ describe('NumberField component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('passes back numeric values on change, but still renders with zip code mask', () => {
+  it('passes back rounded numeric values on change, but still renders with mask', () => {
     const onChange = jest.fn();
 
     const component = mount(
@@ -120,72 +165,21 @@ describe('NumberField component', () => {
         name="test name"
         size="medium"
         className="stuff"
-        mask="zip"
-        value="54321"
+        round
+        mask="currency"
+        value="12332"
         onChange={onChange}
       />
     );
 
     act(() => {
       component.find('TextField').prop('onChange')({
-        target: { value: '12345-6789' }
+        target: { value: '123,456.78' }
       });
     });
     component.update();
 
-    expect(onChange).toHaveBeenCalledWith({ target: { value: 123456789 } });
-    expect(component).toMatchSnapshot();
-  });
-
-  it('passes back numeric values on change, but still renders with phone number mask', () => {
-    const onChange = jest.fn();
-
-    const component = mount(
-      <NumberField
-        label="test label"
-        name="test name"
-        size="medium"
-        className="stuff"
-        mask="phone"
-        value="410"
-        onChange={onChange}
-      />
-    );
-
-    act(() => {
-      component.find('TextField').prop('onChange')({
-        target: { value: '410-555-1212' }
-      });
-    });
-    component.update();
-
-    expect(onChange).toHaveBeenCalledWith({ target: { value: 4105551212 } });
-    expect(component).toMatchSnapshot();
-  });
-
-  it('passes back numeric values on change, but still renders with SSN mask', () => {
-    const onChange = jest.fn();
-
-    const component = mount(
-      <NumberField
-        label="test label"
-        name="test name"
-        size="medium"
-        className="stuff"
-        mask="ssn"
-        value="66677"
-        onChange={onChange}
-      />
-    );
-
-    act(() => {
-      component.find('TextField').prop('onChange')({
-        target: { value: '666-77-8888' }
-      });
-    });
-    component.update();
-
-    expect(onChange).toHaveBeenCalledWith({ target: { value: 666778888 } });
+    expect(onChange).toHaveBeenCalledWith({ target: { value: 123457 } });
     expect(component).toMatchSnapshot();
   });
 
@@ -241,6 +235,58 @@ describe('NumberField component', () => {
 
     expect(onBlur).toHaveBeenCalled();
     expect(onChange).toHaveBeenCalledWith({ target: { value: 456.78 } });
+    expect(component).toMatchSnapshot();
+  });
+
+  it('it limits numbers to 4 decimal places if the round setting is not set, calls onBlur handler', () => {
+    const onBlur = jest.fn();
+    const onChange = jest.fn();
+
+    const component = mount(
+      <NumberField
+        label="test label"
+        name="test name"
+        size="medium"
+        className="stuff"
+        value="12332"
+        onBlur={onBlur}
+        onChange={onChange}
+      />
+    );
+
+    act(() => {
+      component.find('TextField').prop('onBlur')({
+        target: { value: '456.783129' }
+      });
+    });
+
+    expect(onBlur).toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledWith({ target: { value: 456.7831 } });
+    expect(component).toMatchSnapshot();
+  });
+
+  it('passes back numeric values on change limited to 4 decimal places', () => {
+    const onChange = jest.fn();
+
+    const component = mount(
+      <NumberField
+        label="test label"
+        name="test name"
+        size="medium"
+        className="stuff"
+        value="12332"
+        onChange={onChange}
+      />
+    );
+
+    act(() => {
+      component.find('TextField').prop('onChange')({
+        target: { value: '456.783389' }
+      });
+    });
+    component.update();
+
+    expect(onChange).toHaveBeenCalledWith({ target: { value: 456.7834 } });
     expect(component).toMatchSnapshot();
   });
 

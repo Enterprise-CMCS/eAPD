@@ -9,14 +9,6 @@ const selectTextIfZero = ({ target }) => {
   }
 };
 
-const maskValue = value => {
-  const num = +value;
-  if (!Number.isNaN(num)) {
-    return num.toLocaleString();
-  }
-  return value;
-};
-
 const NumberField = ({
   fieldRef,
   onBlur,
@@ -27,7 +19,7 @@ const NumberField = ({
   ...props
 }) => {
   const textField = fieldRef || useRef(null);
-  const [local, setLocal] = useState(maskValue(value));
+  const [local, setLocal] = useState(`${value}`);
 
   useEffect(() => {
     textField.current.addEventListener('focus', selectTextIfZero);
@@ -43,17 +35,18 @@ const NumberField = ({
   const stringToNumber = stringValue => {
     // use ParseFloat rather than "+" because it won't throw an error and
     // will return partial number if non-numeric characters are present
-    let number = parseFloat(unmaskValue(stringValue, mask)) || 0;
+    const number = parseFloat(unmaskValue(stringValue, mask)) || 0;
     if (round) {
-      number = Math.round(number);
+      return Math.round(number);
     }
-    return number;
+    // if we're not rounding, limit the number to 4 decimal points
+    return Number(number.toFixed(4));
   };
 
   const blurHandler = useCallback(
     e => {
       const number = stringToNumber(e.target.value);
-      setLocal(maskValue(number));
+      setLocal(`${number}`);
 
       if (onChange) {
         onChange({
