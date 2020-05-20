@@ -47,7 +47,11 @@ exports[`apd export component renders correctly 1`] = `
     <span
       className="ds-u-margin-left--2"
     >
-      <FileDownload />
+      <img
+        alt="PDF"
+        src="../static/img/pdf_doc.svg"
+        width="16em"
+      />
     </span>
   </Button>
   <h3
@@ -65,5 +69,20 @@ exports[`apd export component renders correctly 1`] = `
     </a>
     .
   </p>
+  <Button
+    className="ds-u-margin-top--2"
+    component="button"
+    onClick={[Function]}
+    size="big"
+    type="button"
+    variation="primary"
+  >
+    Submit
+    <span
+      className="ds-u-margin-left--2"
+    >
+      <Envelope />
+    </span>
+  </Button>
 </div>
 `;
