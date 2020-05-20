@@ -34,6 +34,9 @@ const CheckCircle = ({ ...props }) => (
 );
 const File = ({ ...props }) => <FontAwesomeIcon icon={faFileAlt} {...props} />;
 const Envelope = () => <FontAwesomeIcon icon={faEnvelope} />;
+const FileDownload = () => (
+  <img src="../static/img/pdf_doc.svg" alt="PDF" width="16em" />
+);
 const LockIcon = () => <FontAwesomeIcon icon={faLock} />;
 const Spinner = ({ ...props }) => (
   <FontAwesomeIcon icon={faSpinner} {...props} />
@@ -61,6 +64,7 @@ export {
   CheckCircle,
   File,
   Envelope,
+  FileDownload,
   LockIcon,
   Spinner,
   TimesCircle,

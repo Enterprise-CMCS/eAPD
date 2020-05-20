@@ -47,11 +47,7 @@ exports[`apd export component renders correctly 1`] = `
     <span
       className="ds-u-margin-left--2"
     >
-      <img
-        alt="PDF"
-        src="../static/img/pdf_doc.svg"
-        width="16em"
-      />
+      <FileDownload />
     </span>
   </Button>
   <h3
