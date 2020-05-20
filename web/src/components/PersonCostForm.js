@@ -37,7 +37,7 @@ const PersonCostForm = ({ items, costLabel, fteLabel, setCost, setFTE }) => {
             />
             <p>
               <strong>Total: </strong>
-              <Dollars long>{amt * perc}</Dollars>
+              <Dollars>{amt * perc}</Dollars>
             </p>
           </div>
         </Fragment>

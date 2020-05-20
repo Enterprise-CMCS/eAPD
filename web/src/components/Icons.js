@@ -12,14 +12,14 @@ import {
   faEdit,
   faExclamationTriangle,
   faFileAlt,
-  faFileDownload,
   faLock,
   faPlusCircle,
   faSignOutAlt,
   faSpinner,
   faUnlock,
   faUserCog,
-  faUserPlus
+  faUserPlus,
+  faEnvelope
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -33,7 +33,7 @@ const CheckCircle = ({ ...props }) => (
   <FontAwesomeIcon icon={faCheckCircle} {...props} />
 );
 const File = ({ ...props }) => <FontAwesomeIcon icon={faFileAlt} {...props} />;
-const FileDownload = () => <FontAwesomeIcon icon={faFileDownload} />;
+const Envelope = () => <FontAwesomeIcon icon={faEnvelope} />;
 const LockIcon = () => <FontAwesomeIcon icon={faLock} />;
 const Spinner = ({ ...props }) => (
   <FontAwesomeIcon icon={faSpinner} {...props} />
@@ -60,7 +60,7 @@ export {
   Check,
   CheckCircle,
   File,
-  FileDownload,
+  Envelope,
   LockIcon,
   Spinner,
   TimesCircle,

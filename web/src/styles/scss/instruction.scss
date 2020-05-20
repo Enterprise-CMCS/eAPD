@@ -7,13 +7,18 @@
   font-size: $small-font-size;
 }
 
+.instruction-box p,
+.instruction-box ol {
+  font-size: 18px;
+}
+
 .instruction-box::before {
   width: 0;
   height: 0;
-  content: "";
+  content: '';
   display: block;
   border-bottom: 12px solid $color-primary-darkest;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
-  transform: translate(-2.43rem,-.32rem) rotate(-45deg);
+  transform: translate(-2.43rem, -0.32rem) rotate(-45deg);
 }

@@ -55,3 +55,4 @@ The icons in this project are from [Font Awesome Free](https://fontawesome.com/i
 - [unlock](https://fontawesome.com/icons/unlock?style=solid)
 - [user-plus](https://fontawesome.com/icons/user-plus?style=solid)
 - [user-cog](https://fontawesome.com/icons/user-cog?style=solid)
+- [envelope](https://fontawesome.com/icons/envelope?style=solid)
