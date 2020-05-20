@@ -20,51 +20,6 @@ describe('NumberField component', () => {
     ).toMatchSnapshot();
   });
 
-  it('renders correctly for non-numeric initial values', () => {
-    expect(
-      mount(
-        <NumberField
-          label="test label"
-          name="test name"
-          size="medium"
-          className="stuff"
-          value="abc"
-          onChange={jest.fn()}
-        />
-      )
-    ).toMatchSnapshot();
-  });
-
-  it('renders correctly, does not add commas to small numbers, passing props down', () => {
-    expect(
-      mount(
-        <NumberField
-          label="test label"
-          name="test name"
-          size="medium"
-          className="stuff"
-          value="123"
-          onChange={jest.fn()}
-        />
-      )
-    ).toMatchSnapshot();
-  });
-
-  it('renders correctly, adds commas to big numbers, passing props down', () => {
-    expect(
-      mount(
-        <NumberField
-          label="test label"
-          name="test name"
-          size="medium"
-          className="stuff"
-          value="123321"
-          onChange={jest.fn()}
-        />
-      )
-    ).toMatchSnapshot();
-  });
-
   it('selects the text field content if the value is zero', () => {
     const ref = { current: null };
 
