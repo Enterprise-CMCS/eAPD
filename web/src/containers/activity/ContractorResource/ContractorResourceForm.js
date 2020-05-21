@@ -131,7 +131,6 @@ const ContractorResourceForm = ({
                       label="Number of hours"
                       name={`contractor-num-hours-ffy-${ffy}`}
                       labelClassName="ds-u-margin-top--1"
-                      type="number"
                       size="medium"
                       value={hourly.data[ffy].hours}
                       onChange={getHandlerForYearlyHours(ffy)}
@@ -217,9 +216,6 @@ const mapDispatchToProps = {
   setHourlyRateForYear: setContractorHourlyRateForYear
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ContractorResourceForm);
+export default connect(null, mapDispatchToProps)(ContractorResourceForm);
 
 export { ContractorResourceForm as plain, mapDispatchToProps };
