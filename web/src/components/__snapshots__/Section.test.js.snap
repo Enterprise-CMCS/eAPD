@@ -9,7 +9,26 @@ exports[`Section component renders correctly with no resource 1`] = `
 </section>
 `;
 
-exports[`Section component renders correctly with resource containing title, subheader, and helptext 1`] = `
+exports[`Section component renders correctly with resource containing title and helptext 1`] = `
+<section
+  id={null}
+>
+  <h2
+    className="ds-h2"
+  >
+    Program Summary
+  </h2>
+  <span
+    className="ds-text--lead"
+  >
+    Provide an introduction to the state program. Include context for this funding request by providing information such as current size, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section.
+  </span>
+  apd test child
+  <SecondaryNav />
+</section>
+`;
+
+exports[`Section component renders correctly with resource containing title but no helptext 1`] = `
 <section
   id={null}
 >
@@ -18,7 +37,7 @@ exports[`Section component renders correctly with resource containing title, sub
   >
     Objectives and Key Results
   </h2>
-  test child
+  goals test child
   <SecondaryNav />
 </section>
 `;
