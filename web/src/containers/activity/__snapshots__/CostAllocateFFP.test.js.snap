@@ -207,7 +207,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       label="FFY 1990"
       labelClassName="sr-only"
       name="ffy-1990"
-      onBlur={null}
       onChange={[Function]}
       value={100}
     />
@@ -572,7 +571,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       label="FFY 1991"
       labelClassName="sr-only"
       name="ffy-1991"
-      onBlur={null}
       onChange={[Function]}
       value={200}
     />

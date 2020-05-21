@@ -14,7 +14,6 @@ exports[`PersonCostForm component renders correctly 1`] = `
     <DollarField
       label="Costs with benefits"
       name="cost"
-      onBlur={null}
       onChange={[Function]}
       size="medium"
       value={100000}
@@ -22,9 +21,12 @@ exports[`PersonCostForm component renders correctly 1`] = `
     <NumberField
       fieldRef={null}
       label="Number of FTEs"
+      mask={null}
       name="ftes"
       numeric={true}
+      onBlur={null}
       onChange={[Function]}
+      round={false}
       size="medium"
       value={1}
     />
@@ -51,7 +53,6 @@ exports[`PersonCostForm component renders correctly 1`] = `
     <DollarField
       label="Costs with benefits"
       name="cost"
-      onBlur={null}
       onChange={[Function]}
       size="medium"
       value={120000}
@@ -59,9 +60,12 @@ exports[`PersonCostForm component renders correctly 1`] = `
     <NumberField
       fieldRef={null}
       label="Number of FTEs"
+      mask={null}
       name="ftes"
       numeric={true}
+      onBlur={null}
       onChange={[Function]}
+      round={false}
       size="medium"
       value={0.75}
     />

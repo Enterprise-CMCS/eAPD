@@ -95,6 +95,7 @@ const CostAllocateFFPQuarterly = ({
                   labelClassName="sr-only"
                   name={`ffp-${activityIndex}-${year}-${q}-state`}
                   onChange={setInHouse(q)}
+                  round
                   value={quarterlyFFP[year][q].inHouse.percent * 100}
                   aria-controls={`ffp-${activityIndex}-${year}-${q}-state-dollar-equivalent`}
                 />
@@ -136,6 +137,7 @@ const CostAllocateFFPQuarterly = ({
                   labelClassName="sr-only"
                   name={`ffp-${activityIndex}-${year}-${q}-contractors`}
                   onChange={setContractor(q)}
+                  round
                   value={quarterlyFFP[year][q].contractors.percent * 100}
                   aria-controls={`ffp-${activityIndex}-${year}-${q}-contractors-dollar-equivalent`}
                 />

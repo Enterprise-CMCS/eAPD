@@ -88,7 +88,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           label="total approved funding for HIT and HIE for FFY 1, state plus federal"
           labelClassName="ds-u-visibility--screen-reader"
           name="hithie-approved-total-1"
-          onBlur={null}
           onChange={[Function]}
           value={20}
         />
@@ -111,7 +110,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           label="actual federal share for HIT and HIE for FFY 1"
           labelClassName="ds-u-visibility--screen-reader"
           name="hithie-actual-federal-1"
-          onBlur={null}
           onChange={[Function]}
           value={10}
         />
@@ -136,7 +134,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           label="total approved funding for HIT and HIE for FFY 2, state plus federal"
           labelClassName="ds-u-visibility--screen-reader"
           name="hithie-approved-total-2"
-          onBlur={null}
           onChange={[Function]}
           value={200}
         />
@@ -159,7 +156,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           label="actual federal share for HIT and HIE for FFY 2"
           labelClassName="ds-u-visibility--screen-reader"
           name="hithie-actual-federal-2"
-          onBlur={null}
           onChange={[Function]}
           value={100}
         />

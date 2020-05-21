@@ -40,7 +40,6 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
   <DollarField
     label="Total Contract Cost"
     name="contractor-total-cost"
-    onBlur={null}
     onChange={[Function]}
     size="medium"
     value={12345}
@@ -82,10 +81,12 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 fieldRef={null}
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
+                mask={null}
                 name="contractor-num-hours-ffy-1066"
+                onBlur={null}
                 onChange={[Function]}
+                round={false}
                 size="medium"
-                type="number"
                 value={10}
               />
               <DollarField
@@ -93,7 +94,6 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1066"
-                onBlur={null}
                 onChange={[Function]}
                 size="medium"
                 value={100}
@@ -114,10 +114,12 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 fieldRef={null}
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
+                mask={null}
                 name="contractor-num-hours-ffy-1067"
+                onBlur={null}
                 onChange={[Function]}
+                round={false}
                 size="medium"
-                type="number"
                 value={20}
               />
               <DollarField
@@ -125,7 +127,6 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1067"
-                onBlur={null}
                 onChange={[Function]}
                 size="medium"
                 value={200}
@@ -147,7 +148,6 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     key="1066"
     label="FFY 1066 Cost"
     name="contractor-cost-ffy-1066"
-    onBlur={null}
     onChange={[Function]}
     size="medium"
     value={300}
@@ -157,7 +157,6 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     key="1067"
     label="FFY 1067 Cost"
     name="contractor-cost-ffy-1067"
-    onBlur={null}
     onChange={[Function]}
     size="medium"
     value={400}
@@ -205,7 +204,6 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
   <DollarField
     label="Total Contract Cost"
     name="contractor-total-cost"
-    onBlur={null}
     onChange={[Function]}
     size="medium"
     value={12345}
@@ -247,10 +245,12 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 fieldRef={null}
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
+                mask={null}
                 name="contractor-num-hours-ffy-1066"
+                onBlur={null}
                 onChange={[Function]}
+                round={false}
                 size="medium"
-                type="number"
                 value={10}
               />
               <DollarField
@@ -258,7 +258,6 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1066"
-                onBlur={null}
                 onChange={[Function]}
                 size="medium"
                 value={100}
@@ -279,10 +278,12 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 fieldRef={null}
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
+                mask={null}
                 name="contractor-num-hours-ffy-1067"
+                onBlur={null}
                 onChange={[Function]}
+                round={false}
                 size="medium"
-                type="number"
                 value={20}
               />
               <DollarField
@@ -290,7 +291,6 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1067"
-                onBlur={null}
                 onChange={[Function]}
                 size="medium"
                 value={200}

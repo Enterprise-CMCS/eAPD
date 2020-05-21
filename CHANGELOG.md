@@ -10,6 +10,7 @@ Anticipated release: May 18, 2020
 #### 🐛 Bugs fixed
 
 - Left side navigation should not get stuck under the header ([#2187])
+- NumberFields should allow numbers with decimals to be entered ([#2214])
 
 #### ⚙️ Behind the scenes
 
@@ -27,3 +28,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2174]: https://github.com/18F/cms-hitech-apd/issues/2174
 [#2185]: https://github.com/18F/cms-hitech-apd/issues/2185
 [#2216]: https://github.com/18F/cms-hitech-apd/issues/2216
+[#2214]: https://github.com/18F/cms-hitech-apd/issues/2214
