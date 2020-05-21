@@ -151,6 +151,24 @@ describe('LinksContextProvider', () => {
     expect(nextPrevLinks).toMatchSnapshot();
   });
 
+  it('returns next and previous links currectly when the selected link is the activity list', () => {
+    const activeSection = 'activities-list';
+    const nextPrevLinks = contextProvider.getPreviousNextLinks(
+      links,
+      activeSection
+    );
+    expect(nextPrevLinks).toMatchSnapshot();
+  });
+
+  it('returns next and previous links currectly when the selected link is one of the activities', () => {
+    const activeSection = 'activity-wz46yd39';
+    const nextPrevLinks = contextProvider.getPreviousNextLinks(
+      links,
+      activeSection
+    );
+    expect(nextPrevLinks).toMatchSnapshot();
+  });
+
   it('returns next and previous links currectly when the selected link is the first activity sub-section', () => {
     const activeSection = 'activity-aed63d97-overview';
     const nextPrevLinks = contextProvider.getPreviousNextLinks(
