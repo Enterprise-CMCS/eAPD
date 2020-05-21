@@ -186,6 +186,56 @@ Object {
 }
 `;
 
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is one of the activities 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": false,
+  "nextLink": Object {
+    "id": "executive-summary",
+    "items": Array [
+      Object {
+        "id": "executive-summary-summary",
+        "label": "Activities Summary",
+      },
+      Object {
+        "id": "executive-summary-budget-table",
+        "label": "Program Budget Tables",
+      },
+    ],
+    "label": "Executive Summary",
+  },
+  "previousLink": Object {
+    "id": "apd-summary",
+    "label": "Program Summary",
+  },
+}
+`;
+
+exports[`LinksContextProvider returns next and previous links currectly when the selected link is the activity list 1`] = `
+Object {
+  "hideNextLink": false,
+  "hidePreviousLink": false,
+  "nextLink": Object {
+    "id": "executive-summary",
+    "items": Array [
+      Object {
+        "id": "executive-summary-summary",
+        "label": "Activities Summary",
+      },
+      Object {
+        "id": "executive-summary-budget-table",
+        "label": "Program Budget Tables",
+      },
+    ],
+    "label": "Executive Summary",
+  },
+  "previousLink": Object {
+    "id": "apd-summary",
+    "label": "Program Summary",
+  },
+}
+`;
+
 exports[`LinksContextProvider returns next and previous links currectly when the selected link is the first activity sub-section 1`] = `
 Object {
   "hideNextLink": false,
