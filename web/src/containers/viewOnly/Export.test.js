@@ -15,7 +15,10 @@ describe('apd export component', () => {
   test('triggers a print action', () => {
     const print = sinon.spy();
     const component = shallow(<ExportInstructions printApd={print} />);
-    component.find('Button').simulate('click');
+    component
+      .find('Button')
+      .first()
+      .simulate('click');
 
     expect(print.calledOnce).toEqual(true);
   });
