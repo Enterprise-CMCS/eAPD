@@ -9,9 +9,14 @@ describe('Section component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('renders correctly with resource containing title, subheader, and helptext', () => {
+  test('renders correctly with resource containing title and helptext', () => {
+    const component = shallow(<Section resource="apd">apd test child</Section>);
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly with resource containing title but no helptext', () => {
     const component = shallow(
-      <Section resource="activities.goals">test child</Section>
+      <Section resource="activities.goals">goals test child</Section>
     );
     expect(component).toMatchSnapshot();
   });

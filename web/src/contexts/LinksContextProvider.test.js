@@ -106,6 +106,17 @@ describe('LinksContextProvider', () => {
     expect(nextPrevLinks).toMatchSnapshot();
   });
 
+  it('returns a list of links where the activities section is selected', () => {
+    const activityLinks = contextProvider.getTheLinks(
+      pageNavMock,
+      anchorNavMock,
+      'activities',
+      activities
+    );
+
+    expect(activityLinks).toMatchSnapshot();
+  });
+
   it('returns next and previous links currectly when the selected link is empty', () => {
     const activeSection = '';
     const nextPrevLinks = contextProvider.getPreviousNextLinks(
@@ -144,6 +155,24 @@ describe('LinksContextProvider', () => {
 
   it('returns next and previous links currectly when the selected link is the top-level activity section', () => {
     const activeSection = 'activities';
+    const nextPrevLinks = contextProvider.getPreviousNextLinks(
+      links,
+      activeSection
+    );
+    expect(nextPrevLinks).toMatchSnapshot();
+  });
+
+  it('returns next and previous links currectly when the selected link is the activity list', () => {
+    const activeSection = 'activities-list';
+    const nextPrevLinks = contextProvider.getPreviousNextLinks(
+      links,
+      activeSection
+    );
+    expect(nextPrevLinks).toMatchSnapshot();
+  });
+
+  it('returns next and previous links currectly when the selected link is one of the activities', () => {
+    const activeSection = 'activity-wz46yd39';
     const nextPrevLinks = contextProvider.getPreviousNextLinks(
       links,
       activeSection
