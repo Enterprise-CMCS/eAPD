@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@cmsgov/design-system-core';
-import { Envelope, FileDownload } from '../../components/Icons';
+import { Envelope, PDFFile } from '../../components/Icons';
 import { printApd } from '../../actions/app';
 
 const ExportInstructions = ({ printApd: print }) => {
@@ -40,7 +40,7 @@ const ExportInstructions = ({ printApd: print }) => {
       >
         Export
         <span className="ds-u-margin-left--2">
-          <FileDownload />
+          <PDFFile />
         </span>
       </Button>
 
