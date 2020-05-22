@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button } from '@cmsgov/design-system-core';
 
 import { selectApd } from '../../actions/app';
 import { selectApdData } from '../../reducers/apd.selectors';
@@ -22,6 +23,13 @@ class ApdViewOnly extends Component {
 
   componentDidUpdate = () => window.scrollTo(0, 0);
 
+  open = id => e => {
+    e.preventDefault();
+    this.forceUpdate();
+    const { goToApd } = this.props;
+    goToApd(id, '/apd');
+  };
+
   render() {
     const { apd, budget, place, year } = this.props;
 
@@ -41,7 +49,18 @@ class ApdViewOnly extends Component {
     }
 
     return (
-      <div className="site-body ds-l-container">
+      <div
+        id="start-main-content"
+        className="site-body ds-l-container ds-u-padding--3"
+      >
+        <Button
+          className="visibility--screen"
+          variation="transparent"
+          onClick={this.open(apd.id)}
+        >
+          {'< Back to APD'}
+        </Button>
+        <ExportInstructions />
         <h1 id="start-main-content" className="ds-h1 ds-u-margin-top--2">
           <span className="ds-h6 ds-u-display--block">{apd.name}</span>
           {place.name} {year} APD
@@ -65,7 +84,13 @@ class ApdViewOnly extends Component {
         <ProposedBudget />
         <hr className="section-rule" />
         <AssuranceAndCompliance />
-        <ExportInstructions />
+        <Button
+          className="visibility--screen"
+          variation="transparent"
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          ^ Return to the top of the page
+        </Button>
       </div>
     );
   }
@@ -74,8 +99,10 @@ ApdViewOnly.propTypes = {
   apd: PropTypes.object.isRequired,
   budget: PropTypes.object.isRequired,
   place: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired
+  year: PropTypes.string.isRequired,
+  goToApd: PropTypes.func.isRequired
 };
+
 const mapStateToProps = state => ({
   apd: selectApdData(state),
   budget: selectBudget(state),
@@ -83,6 +110,8 @@ const mapStateToProps = state => ({
   year: getAPDYearRange(state)
 });
 
-const mapDispatchToProps = { selectApd };
+const mapDispatchToProps = {
+  goToApd: selectApd
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdViewOnly);

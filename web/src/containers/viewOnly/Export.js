@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@cmsgov/design-system-core';
-import { FileDownload } from '../../components/Icons';
+import { Envelope, PDFFile } from '../../components/Icons';
 import { printApd } from '../../actions/app';
 
 const ExportInstructions = ({ printApd: print }) => {
+  const sendMail = email => {
+    window.location.href = `mailto:${email}`;
+  };
+
   return (
     <div className="instruction-box ds-u-margin-top--4 ds-u-margin-bottom--4 visibility--screen">
       <h3 className="ds-h3">How to download this APD</h3>
@@ -36,7 +40,7 @@ const ExportInstructions = ({ printApd: print }) => {
       >
         Export
         <span className="ds-u-margin-left--2">
-          <FileDownload />
+          <PDFFile />
         </span>
       </Button>
 
@@ -49,6 +53,17 @@ const ExportInstructions = ({ printApd: print }) => {
         </a>
         .
       </p>
+      <Button
+        size="big"
+        variation="primary"
+        className="ds-u-margin-top--2"
+        onClick={() => sendMail('MedicaidHITECH@cms.hhs.gov')}
+      >
+        Submit
+        <span className="ds-u-margin-left--2">
+          <Envelope />
+        </span>
+      </Button>
     </div>
   );
 };
@@ -58,9 +73,6 @@ ExportInstructions.propTypes = {
 
 const mapDispatchToProps = { printApd };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ExportInstructions);
+export default connect(null, mapDispatchToProps)(ExportInstructions);
 
 export { ExportInstructions as plain, mapDispatchToProps };
