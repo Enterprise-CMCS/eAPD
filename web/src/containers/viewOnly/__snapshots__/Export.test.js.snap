@@ -47,7 +47,7 @@ exports[`apd export component renders correctly 1`] = `
     <span
       className="ds-u-margin-left--2"
     >
-      <FileDownload />
+      <PDFFile />
     </span>
   </Button>
   <h3
