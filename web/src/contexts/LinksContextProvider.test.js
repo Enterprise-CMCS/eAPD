@@ -106,6 +106,17 @@ describe('LinksContextProvider', () => {
     expect(nextPrevLinks).toMatchSnapshot();
   });
 
+  it('returns a list of links where the activities section is selected', () => {
+    const activityLinks = contextProvider.getTheLinks(
+      pageNavMock,
+      anchorNavMock,
+      'activities',
+      activities
+    );
+
+    expect(activityLinks).toMatchSnapshot();
+  });
+
   it('returns next and previous links currectly when the selected link is empty', () => {
     const activeSection = '';
     const nextPrevLinks = contextProvider.getPreviousNextLinks(
