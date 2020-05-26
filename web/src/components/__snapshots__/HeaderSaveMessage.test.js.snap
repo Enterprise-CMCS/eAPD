@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header save message component renders when actively saving 1`] = `
+<span>
+  <Spinner
+    spin={true}
+  />
+   Saving...
+</span>
+`;
+
+exports[`Header save message component renders when not currently saving 1`] = `
+<span>
+  <Check />
+   
+  <SaveMessage
+    lastSaved="2020-01-01T17:00:00.000Z"
+  />
+</span>
+`;
