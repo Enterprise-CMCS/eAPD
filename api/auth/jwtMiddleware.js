@@ -27,15 +27,15 @@ const jwtMiddleware = async (
 
   if (!payload) return next();
 
-  await deserialize(payload.sub, (err, user) => {
-    if (err) logger.error(err);
-
+  try {
+    const user = await deserialize(payload.sub);
     if (user) {
       req.user = user;
       req.payload = payload;
     }
-  });
-
+  } catch (err) {
+    logger.error(err);
+  }
   return next();
 };
 

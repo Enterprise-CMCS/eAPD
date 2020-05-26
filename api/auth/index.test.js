@@ -143,7 +143,7 @@ tap.test('authentication setup', async authTest => {
       im: 'weasel',
       ir: 'baboon'
     };
-    serializeUser.yields(null, 'unique-session-id');
+    serializeUser.resolves('unique-session-id');
     signToken.withArgs({ sub: 'unique-session-id' }).returns('xxx.yyy.zzz');
     authSetup(app, { auth, serializeUser, signToken });
     const post = app.post.args.find(a => a[0] === '/auth/login')[2];
