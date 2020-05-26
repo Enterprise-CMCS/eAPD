@@ -15,6 +15,7 @@ import { Subsection } from '../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import Schedule from './Schedule';
 
 const ActivityOverview = ({
   activity,
@@ -114,6 +115,7 @@ const ActivityOverview = ({
           item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
         />
       )}
+      <Schedule activityIndex={activityIndex} />
       <TextArea
         name="activity overview"
         label={overviewLabel}
@@ -175,9 +177,6 @@ const mapDispatchToProps = {
   setOverview: setActivityOverview
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ActivityOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityOverview);
 
 export { ActivityOverview as plain, mapStateToProps, mapDispatchToProps };
