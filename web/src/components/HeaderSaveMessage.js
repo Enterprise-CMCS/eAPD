@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { selectIsSaving, selectLastSaved } from '../reducers/saving';
@@ -9,7 +9,29 @@ import SaveMessage from './SaveMessage';
 import { Check, Spinner } from './Icons';
 
 const HeaderSaveMessage = ({ isSaving, lastSaved }) => {
-  return isSaving ? (
+  const [active, setActive] = useState(isSaving);
+  const [delayTimer, setDelayTimer] = useState();
+
+  if (isSaving !== active) {
+    if (isSaving) {
+      // If we have switched from not saving to saving, make the UI change
+      // immediately.
+      setActive(true);
+
+      // If there's already a save delay timer, clear it.
+      clearTimeout(delayTimer);
+
+      // Wait 750ms after the last save began before changing the UI back to
+      // "saved" from the spinner.
+      setDelayTimer(
+        setTimeout(() => {
+          setActive(false);
+        }, 750)
+      );
+    }
+  }
+
+  return active ? (
     <span>
       <Spinner spin /> Saving...
     </span>
