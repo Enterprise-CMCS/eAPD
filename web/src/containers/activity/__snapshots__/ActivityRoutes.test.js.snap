@@ -12,9 +12,6 @@ exports[`activity router page renders correctly 1`] = `
       <Connect(Objectives)
         activityIndex={3}
       />
-      <Connect(Schedule)
-        activityIndex={3}
-      />
       <Connect(Milestone)
         activityIndex={3}
       />
