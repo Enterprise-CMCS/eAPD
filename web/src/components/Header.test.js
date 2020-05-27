@@ -138,28 +138,6 @@ describe('Header component', () => {
             username: 'frasiercrane@kacl.com'
           }}
           isAdmin={false}
-          isSaving={false}
-          lastSaved="2020-01-01T12:00:00.000Z"
-          pushRoute={() => {}}
-          showSiteTitle={false}
-        />
-      )
-    ).toMatchSnapshot();
-
-    // Saving
-    expect(
-      shallow(
-        <Header
-          ariaExpanded={false}
-          authenticated
-          currentUser={{
-            role: 'admin',
-            state: { id: 'wa', name: 'Washington' },
-            username: 'frasiercrane@kacl.com'
-          }}
-          isAdmin={false}
-          isSaving
-          lastSaved="2020-01-01T17:00:00.000Z"
           pushRoute={() => {}}
           showSiteTitle={false}
         />
@@ -175,10 +153,6 @@ describe('Header component', () => {
           role: 'admin'
         }
       },
-      saving: {
-        lastSaved: 'blorp',
-        saving: 'bloop'
-      },
       user: {
         data: {
           role: 'admin'
@@ -189,9 +163,7 @@ describe('Header component', () => {
     expect(mapStateToProps(state)).toEqual({
       authenticated: 'some value',
       currentUser: { role: 'admin' },
-      isAdmin: true,
-      isSaving: 'bloop',
-      lastSaved: 'blorp'
+      isAdmin: true
     });
   });
 });
