@@ -144,6 +144,21 @@ const Activity = ({ activity, activityIndex }) => {
       <h2>
         Activity {activityIndex + 1} ({activity.name})
       </h2>
+      <h3 className="viewonly-activity-header">
+        <small>
+          Activity {activityIndex + 1} ({activity.name})
+        </small>
+        <br />
+        Schedule
+      </h3>
+      <p>
+        <strong>Planned start date: </strong>
+        {activity.plannedStartDate || 'None provided'}
+      </p>
+      <p>
+        <strong>Planned end date: </strong>
+        {activity.plannedEndDate || 'None provided'}
+      </p>
       <p>
         <strong>Activity Summary:</strong> {activity.summary}
       </p>
@@ -169,21 +184,6 @@ const Activity = ({ activity, activityIndex }) => {
       </h3>
       {activity.objectives.map(buildObjective)}
 
-      <h3 className="viewonly-activity-header">
-        <small>
-          Activity {activityIndex + 1} ({activity.name})
-        </small>
-        <br />
-        Schedule
-      </h3>
-      <p>
-        <strong>Planned start date: </strong>
-        {activity.plannedStartDate || 'None provided'}
-      </p>
-      <p>
-        <strong>Planned end date: </strong>
-        {activity.plannedEndDate || 'None provided'}
-      </p>
       <h3>Milestones</h3>
       {activity.schedule.map((milestone, index) =>
         buildMilestone(milestone, index)
