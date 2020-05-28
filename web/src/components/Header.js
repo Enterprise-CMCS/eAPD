@@ -3,20 +3,17 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { selectIsSaving, selectLastSaved } from '../reducers/saving';
 import { getIsAdmin } from '../reducers/user.selector';
 import { t } from '../i18n';
 
 import DashboardButton from './DashboardButton';
-import SaveMessage from './SaveMessage';
+import HeaderSaveMessage from './HeaderSaveMessage';
 
 import Icon, {
-  Check,
   faChevronDown,
   faChevronLeft,
   faEdit,
-  faSignOutAlt,
-  Spinner
+  faSignOutAlt
 } from './Icons';
 
 class Header extends Component {
@@ -51,14 +48,7 @@ class Header extends Component {
   };
 
   render() {
-    const {
-      authenticated,
-      currentUser,
-      isAdmin,
-      isSaving,
-      lastSaved,
-      showSiteTitle
-    } = this.props;
+    const { authenticated, currentUser, isAdmin, showSiteTitle } = this.props;
     const { ariaExpanded } = this.state;
     return (
       <header ref={this.node}>
@@ -79,19 +69,7 @@ class Header extends Component {
             {authenticated && (
               <Fragment>
                 <div className="ds-l-col--12 ds-l-md-col--5">
-                  {!showSiteTitle && !isAdmin && (
-                    <span>
-                      {isSaving ? (
-                        <span>
-                          <Spinner spin /> Saving...
-                        </span>
-                      ) : (
-                        <span>
-                          <Check /> <SaveMessage lastSaved={lastSaved} />
-                        </span>
-                      )}
-                    </span>
-                  )}
+                  {!showSiteTitle && !isAdmin && <HeaderSaveMessage />}
                 </div>
                 <div className="ds-l-col--12 ds-l-md-col--4">
                   <ul className="nav--dropdown">
@@ -149,8 +127,6 @@ Header.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
-  isSaving: PropTypes.bool.isRequired,
-  lastSaved: PropTypes.string.isRequired,
   showSiteTitle: PropTypes.bool.isRequired
 };
 
@@ -162,9 +138,7 @@ Header.defaultProps = {
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
   currentUser: state.auth.user,
-  isAdmin: getIsAdmin(state),
-  isSaving: selectIsSaving(state),
-  lastSaved: selectLastSaved(state)
+  isAdmin: getIsAdmin(state)
 });
 
 export default connect(mapStateToProps)(Header);
