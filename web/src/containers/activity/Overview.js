@@ -15,6 +15,7 @@ import { Subsection } from '../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import Schedule from './Schedule';
 
 const ActivityOverview = ({
   activity,
@@ -124,6 +125,7 @@ const ActivityOverview = ({
         value={summary}
         onChange={overviewOnChange}
       />
+      <Schedule activityIndex={activityIndex} />
 
       <div className="data-entry-box">
         <FormLabel className="ds-c-label--full-width" hint={descriptionHint}>
@@ -175,9 +177,6 @@ const mapDispatchToProps = {
   setOverview: setActivityOverview
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ActivityOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityOverview);
 
 export { ActivityOverview as plain, mapStateToProps, mapDispatchToProps };

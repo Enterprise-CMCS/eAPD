@@ -9,7 +9,6 @@ import Costs from './Costs';
 import Milestones from './Milestones';
 import Overview from './Overview';
 import Objectives from './Objectives';
-import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
 import { Section } from '../../components/Section';
 
@@ -21,7 +20,6 @@ const ActivityRoutes = ({ activityIndex }) => {
       <Route path={`${path}/okrs`}>
         <Section>
           <Objectives activityIndex={activityIndex} />
-          <Schedule activityIndex={activityIndex} />
           <Milestones activityIndex={activityIndex} />
         </Section>
       </Route>

@@ -6,6 +6,7 @@ Anticipated release: June 1, 2020
 
 - Update Print Preview Layout ([#2182])
 - Make the "Saving" message persist for 750ms ([#2207])
+- Move the activity schedule information to the top of the Activity Overview section ([#2210])
 
 #### 🐛 Bugs fixed
 
@@ -22,3 +23,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2179]: https://github.com/18F/cms-hitech-apd/issues/2179
 [#2182]: https://github.com/18F/cms-hitech-apd/issues/2182
 [#2207]: https://github.com/18F/cms-hitech-apd/issues/2207
+[#2210]: https://github.com/18F/cms-hitech-apd/issues/2210
