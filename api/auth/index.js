@@ -54,7 +54,7 @@ const setup = (
   app.post(
     '/auth/login',
     passport.authenticate('local', { session: false }),
-    (req, res) => {
+    (req, res) =>
       serializeUser(req.user)
         .then(sessionId => {
           const jwt = signToken({ sub: sessionId });
@@ -64,14 +64,12 @@ const setup = (
             user: req.user
           });
         })
-        .catch(err => {
-          console.log('sending status 400');
+        .catch(err =>
           res
             .status(400)
             .send(err)
-            .end();
-        });
-    }
+            .end()
+        )
   );
 
   // Pull JWT from HTTP headers and deserialize user after local authentication
