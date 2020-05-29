@@ -143,7 +143,7 @@ tap.test('authentication setup', async authTest => {
       im: 'weasel',
       ir: 'baboon'
     };
-    serializeUser.yields(null, 'unique-session-id');
+    serializeUser.resolves('unique-session-id');
     signToken.withArgs({ sub: 'unique-session-id' }).returns('xxx.yyy.zzz');
     authSetup(app, { auth, serializeUser, signToken });
     const post = app.post.args.find(a => a[0] === '/auth/login')[2];
@@ -155,6 +155,23 @@ tap.test('authentication setup', async authTest => {
       res.send.calledWith({ token: 'xxx.yyy.zzz', user }),
       'HTTP body contains the jwt and user objects'
     );
+  });
+
+  authTest.test('serializeUser rejects and post sends 400', async test => {
+    const user = {
+      im: 'weasel',
+      ir: 'baboon'
+    };
+    serializeUser.rejects(new Error('fake error'));
+    signToken.withArgs({ sub: 'unique-session-id' }).returns('xxx.yyy.zzz');
+    authSetup(app, { auth, serializeUser, signToken });
+    const post = app.post.args.find(a => a[0] === '/auth/login')[2];
+    const req = { user };
+
+    await post(req, res);
+
+    test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
+    test.ok(res.end.calledAfter(res.status), 'response is terminated');
   });
 
   // logout without valid token
