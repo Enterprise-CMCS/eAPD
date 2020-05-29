@@ -64,12 +64,13 @@ const setup = (
             user: req.user
           });
         })
-        .catch(err =>
+        .catch(err => {
+          console.log('sending status 400');
           res
             .status(400)
             .send(err)
-            .end()
-        );
+            .end();
+        });
     }
   );
 
