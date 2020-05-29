@@ -147,6 +147,14 @@ const Activity = ({ activity, activityIndex }) => {
       <p>
         <strong>Activity Summary:</strong> {activity.summary}
       </p>
+      <p>
+        <strong>Planned start date: </strong>
+        {activity.plannedStartDate || 'None provided'}
+      </p>
+      <p>
+        <strong>Planned end date: </strong>
+        {activity.plannedEndDate || 'None provided'}
+      </p>
       <hr className="subsection-rule" />
       <h3>Activity Overview</h3>
       <div dangerouslySetInnerHTML={{ __html: activity.description }} />
@@ -169,21 +177,6 @@ const Activity = ({ activity, activityIndex }) => {
       </h3>
       {activity.objectives.map(buildObjective)}
 
-      <h3 className="viewonly-activity-header">
-        <small>
-          Activity {activityIndex + 1} ({activity.name})
-        </small>
-        <br />
-        Schedule
-      </h3>
-      <p>
-        <strong>Planned start date: </strong>
-        {activity.plannedStartDate || 'None provided'}
-      </p>
-      <p>
-        <strong>Planned end date: </strong>
-        {activity.plannedEndDate || 'None provided'}
-      </p>
       <h3>Milestones</h3>
       {activity.schedule.map((milestone, index) =>
         buildMilestone(milestone, index)
