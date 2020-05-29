@@ -19,14 +19,12 @@ tap.test('passport serialization', async serializationTest => {
     done();
   });
 
-  serializationTest.test('serialize a user', serializeTest => {
+  serializationTest.test('serialize a user', async serializeTest => {
     const user = { id: 'the-user-id' };
     sessionStore.addSession.resolves('session-id');
 
-    serialization.serializeUser(user, { sessionStore }).then(sessionId => {
-      serializeTest.same(sessionId, 'session-id', 'serializes the user object');
-      serializeTest.end();
-    });
+    const sessionId = await serialization.serializeUser(user, { sessionStore });
+    serializeTest.same(sessionId, 'session-id', 'serializes the user object');
   });
 
   serializationTest.test('deserialize a user', async deserializeTest => {
@@ -55,15 +53,13 @@ tap.test('passport serialization', async serializationTest => {
       async invalidTest => {
         getUserByID.rejects();
 
-        const user = await serialization.deserializeUser(sessionID, {
-          getUserByID,
-          sessionStore
-        });
-
-        invalidTest.same(
-          user,
-          null,
-          'deserializes to a null user in the case of an error'
+        invalidTest.throws(
+          serialization.deserializeUser(sessionID, {
+            getUserByID,
+            sessionStore
+          }),
+          {},
+          'throws an error'
         );
       }
     );

@@ -6,7 +6,7 @@ const { getUserByID: gu } = require('../db');
 const { addUserSession, getUserIDFromSession } = require('./sessionStore');
 
 // Serialize a user into a stringy type that will get
-// pushed into their session cookie.
+// pushed into their jwt.
 module.exports.serializeUser = async (
   user,
   { sessionStore: { addSession = addUserSession } = {} } = {}
@@ -15,7 +15,7 @@ module.exports.serializeUser = async (
   return addSession(user.id);
 };
 
-// Deserialize a stringy from the user's session cookie
+// Deserialize a stringy from the user's jwt
 // into a user object.
 module.exports.deserializeUser = async (
   sessionID,
@@ -39,8 +39,8 @@ module.exports.deserializeUser = async (
       logger.warn(`${sessionID} does not map to a user ID`);
     }
   } catch (e) {
-    logger.error(null, e);
-    logger.silly('Could not deserialize user');
+    logger.error('Could not deserialize user', e);
+    throw e;
   }
   return user;
 };
