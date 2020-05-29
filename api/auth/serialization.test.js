@@ -8,8 +8,6 @@ const serialization = require('./serialization');
 tap.test('passport serialization', async serializationTest => {
   const getUserByID = sandbox.stub();
 
-  const doneCallback = sandbox.stub().returns('hi');
-
   const sessionStore = {
     addSession: sandbox.stub(),
     getUserID: sandbox.stub()
@@ -25,12 +23,8 @@ tap.test('passport serialization', async serializationTest => {
     const user = { id: 'the-user-id' };
     sessionStore.addSession.resolves('session-id');
 
-    await serialization.serializeUser(user, doneCallback, { sessionStore });
-
-    serializeTest.ok(
-      doneCallback.calledWith(null, 'session-id'),
-      'serializes the user object'
-    );
+    const sessionId = await serialization.serializeUser(user, { sessionStore });
+    serializeTest.same(sessionId, 'session-id', 'serializes the user object');
   });
 
   serializationTest.test('deserialize a user', async deserializeTest => {
@@ -45,15 +39,12 @@ tap.test('passport serialization', async serializationTest => {
       async invalidTest => {
         sessionStore.getUserID.resolves(null);
 
-        await serialization.deserializeUser(sessionID, doneCallback, {
+        const user = await serialization.deserializeUser(sessionID, {
           getUserByID,
           sessionStore
         });
 
-        invalidTest.ok(
-          doneCallback.calledWith(null, null),
-          'deserializes to a null user'
-        );
+        invalidTest.same(user, null, 'deserializes to a null user');
       }
     );
 
@@ -62,13 +53,13 @@ tap.test('passport serialization', async serializationTest => {
       async invalidTest => {
         getUserByID.rejects();
 
-        await serialization.deserializeUser(sessionID, doneCallback, {
-          getUserByID,
-          sessionStore
-        });
-        invalidTest.ok(
-          doneCallback.calledWith(sinon.match.string),
-          'calls back with an error'
+        invalidTest.throws(
+          serialization.deserializeUser(sessionID, {
+            getUserByID,
+            sessionStore
+          }),
+          {},
+          'throws an error'
         );
       }
     );
@@ -76,27 +67,25 @@ tap.test('passport serialization', async serializationTest => {
     deserializeTest.test('that is not in the database', async invalidTest => {
       getUserByID.resolves(null);
 
-      await serialization.deserializeUser(sessionID, doneCallback, {
+      const user = await serialization.deserializeUser(sessionID, {
         getUserByID,
         sessionStore
       });
-      invalidTest.ok(
-        doneCallback.calledWith(null, null),
-        'deserializes to a null user'
-      );
+      invalidTest.same(user, null, 'deserializes to a null user');
     });
 
     deserializeTest.test('that is in the database', async validTest => {
       validTest.test('with no role', async noRoleTest => {
         getUserByID.resolves('this is a user');
 
-        await serialization.deserializeUser(sessionID, doneCallback, {
+        const user = await serialization.deserializeUser(sessionID, {
           getUserByID,
           sessionStore
         });
 
-        noRoleTest.ok(
-          doneCallback.calledWith(null, 'this is a user'),
+        noRoleTest.same(
+          user,
+          'this is a user',
           'deserializes the user ID to an object'
         );
       });
