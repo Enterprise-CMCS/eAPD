@@ -26,6 +26,9 @@ exports[`activity overview/summary section (in the activity body) renders correc
     rows={6}
     value=""
   />
+  <Connect(Schedule)
+    activityIndex={37}
+  />
   <div
     className="data-entry-box"
   >
