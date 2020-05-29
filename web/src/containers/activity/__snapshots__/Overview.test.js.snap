@@ -16,9 +16,6 @@ exports[`activity overview/summary section (in the activity body) renders correc
       }
     }
   />
-  <Connect(Schedule)
-    activityIndex={37}
-  />
   <TextArea
     className="data-entry-box"
     hint="Details for the activity go in the following sections."
@@ -28,6 +25,9 @@ exports[`activity overview/summary section (in the activity body) renders correc
     onChange={[Function]}
     rows={6}
     value=""
+  />
+  <Connect(Schedule)
+    activityIndex={37}
   />
   <div
     className="data-entry-box"
