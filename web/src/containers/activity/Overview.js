@@ -115,7 +115,6 @@ const ActivityOverview = ({
           item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
         />
       )}
-      <Schedule activityIndex={activityIndex} />
       <TextArea
         name="activity overview"
         label={overviewLabel}
@@ -126,6 +125,7 @@ const ActivityOverview = ({
         value={summary}
         onChange={overviewOnChange}
       />
+      <Schedule activityIndex={activityIndex} />
 
       <div className="data-entry-box">
         <FormLabel className="ds-c-label--full-width" hint={descriptionHint}>
