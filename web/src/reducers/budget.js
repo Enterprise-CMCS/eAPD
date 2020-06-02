@@ -341,12 +341,11 @@ const buildBudget = incomingBigState => {
         totalOtherFunding,
         costCategoryPercentages
       );
-      activityTotals.data.otherFunding[year].contractors =
-        otherFunderPerCostCategory[0];
-      activityTotals.data.otherFunding[year].expenses =
-        otherFunderPerCostCategory[1];
-      activityTotals.data.otherFunding[year].statePersonnel =
-        otherFunderPerCostCategory[2];
+      [
+        activityTotals.data.otherFunding[year].contractors,
+        activityTotals.data.otherFunding[year].expenses,
+        activityTotals.data.otherFunding[year].statePersonnel
+      ] = otherFunderPerCostCategory;
 
       // Compute the state and federal share for each cost category, based on
       // the federal and state shares and the percentages calculated above.
