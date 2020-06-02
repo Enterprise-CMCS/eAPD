@@ -1428,8 +1428,8 @@ describe('budget reducer', () => {
               },
               '1933': {
                 contractors: 56,
-                expenses: 56,
-                statePersonnel: 888,
+                expenses: 55,
+                statePersonnel: 889,
                 total: 1000
               }
             },
@@ -1461,15 +1461,15 @@ describe('budget reducer', () => {
           data: {
             otherFunding: {
               '1931': {
-                contractors: 200,
+                contractors: 400,
                 expenses: 400,
-                statePersonnel: 400,
+                statePersonnel: 200,
                 total: 1000
               },
               '1932': {
-                contractors: 333,
+                contractors: 334,
                 expenses: 333,
-                statePersonnel: 334,
+                statePersonnel: 333,
                 total: 1000
               },
               '1933': {

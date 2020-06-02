@@ -220,6 +220,14 @@ const buildBudget = incomingBigState => {
         combined: { ...arrToObj(years, 0), total: 0 },
         contractors: { ...arrToObj(years, 0), total: 0 },
         expenses: { ...arrToObj(years, 0), total: 0 },
+        otherFunding: {
+          ...arrToObj(years, () => ({
+            contractors: 0,
+            expenses: 0,
+            statePersonnel: 0,
+            total: 0
+          }))
+        },
         statePersonnel: { ...arrToObj(years, 0), total: 0 }
       }
     };
@@ -309,9 +317,10 @@ const buildBudget = incomingBigState => {
     // Now loop back over the years and compute state and federal shares
     // of all the costs.
     years.forEach(year => {
+      const totalOtherFunding = n(allocation[year].other);
       const activityCostByFFY = newState.activities[activity.key].costsByFFY;
       const totalCost = activityTotals.data.combined[year];
-      const totalMedicaidShare = totalCost - n(allocation[year].other);
+      const totalMedicaidShare = totalCost - totalOtherFunding;
 
       // This is the Medicaid total share broken into state and federal shares
       const costShares = getAllocation(year, totalMedicaidShare);
@@ -324,6 +333,20 @@ const buildBudget = incomingBigState => {
         activityTotals.data.expenses[year] / totalCost || 0,
         activityTotals.data.statePersonnel[year] / totalCost || 0
       ];
+
+      // Calculate how much of the activity's other funding for the current
+      // federal fiscal year is applied to each cost category.
+      activityTotals.data.otherFunding[year].total = totalOtherFunding;
+      const otherFunderPerCostCategory = roundedPercents(
+        totalOtherFunding,
+        costCategoryPercentages
+      );
+      activityTotals.data.otherFunding[year].contractors =
+        otherFunderPerCostCategory[0];
+      activityTotals.data.otherFunding[year].expenses =
+        otherFunderPerCostCategory[1];
+      activityTotals.data.otherFunding[year].statePersonnel =
+        otherFunderPerCostCategory[2];
 
       // Compute the state and federal share for each cost category, based on
       // the federal and state shares and the percentages calculated above.
