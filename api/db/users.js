@@ -21,7 +21,10 @@ const populateUser = async (user, { db = knex } = {}) => {
 
     if (user.auth_role) {
       const authRole = await db('auth_roles')
-        .where('name', user.auth_role)
+        .where({
+          name: user.auth_role,
+          isActive: true
+        })
         .select('id')
         .first();
 
@@ -32,8 +35,11 @@ const populateUser = async (user, { db = knex } = {}) => {
         : [];
 
       const authActivityNames = await db('auth_activities')
-        // eslint-disable-next-line camelcase
-        .whereIn('id', authActivityIDs.map(({ activity_id }) => activity_id))
+        .whereIn(
+          'id',
+          // eslint-disable-next-line camelcase
+          authActivityIDs.map(({ activity_id }) => activity_id)
+        )
         .select('name');
 
       populatedUser.activities = authActivityNames.map(({ name }) => name);
@@ -163,10 +169,13 @@ const validateUser = async (
     logger.silly('checking auth role');
     if (
       !(await db('auth_roles')
-        .where('name', auth_role)
+        .where({
+          name: auth_role,
+          isActive: true
+        })
         .first())
     ) {
-      logger.verbose(`auth role is invalid [${auth_role}]`);
+      logger.verbose(`auth role is invalid or inactive [${auth_role}]`);
       throw new Error('invalid-role');
     }
     logger.silly('auth role is valid');
