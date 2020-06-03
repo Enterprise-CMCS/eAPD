@@ -41,20 +41,26 @@ module.exports = (
       try {
         logger.silly(req, 'validing the request', req.body);
 
-        if (
-          req.body.name &&
-          (typeof req.body.name !== 'string' || req.body.length < 1)
-        ) {
-          logger.verbose('name is not a string or is empty');
-          throw new Error('missing-name');
+        if (req.body.name && typeof req.body.name !== 'string') {
+          logger.verbose('name is not a string');
+          throw new Error('invalid-name');
         }
 
-        if (await getAuthRoleByName(req.body.name)) {
+        if (req.body.name && (await getAuthRoleByName(req.body.name))) {
           logger.verbose('another role already has this name');
           throw new Error('duplicate-name');
         }
 
         logger.silly('role name is valid and unique');
+
+        if (
+          typeof req.body.isActive !== 'undefined' &&
+          typeof req.body.isActive !== 'boolean'
+        ) {
+          logger.verbose('isActive is present but not a boolean');
+          throw new Error('invalid-isActive');
+        }
+        logger.silly('isActive is valid or not present');
 
         if (!Array.isArray(req.body.activities)) {
           logger.verbose('role activities is not an array');
@@ -90,7 +96,12 @@ module.exports = (
 
       logger.silly(req, 'request is valid');
 
-      await updateAuthRole(roleID, req.body.name, req.body.activities);
+      await updateAuthRole(
+        roleID,
+        req.body.name,
+        req.body.isActive,
+        req.body.activities
+      );
 
       const activities = (
         await getAuthActivitiesByIDs(req.body.activities)
@@ -99,6 +110,10 @@ module.exports = (
       const updatedRole = {
         id: roleID,
         name: req.body.name || role.name,
+        isActive:
+          typeof req.body.isActive !== 'undefined'
+            ? req.body.isActive
+            : role.isActive,
         activities
       };
 

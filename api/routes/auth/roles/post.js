@@ -37,6 +37,15 @@ module.exports = (
 
         logger.silly('role name is valid and unique');
 
+        if (
+          typeof req.body.isActive !== 'undefined' &&
+          typeof req.body.isActive !== 'boolean'
+        ) {
+          logger.verbose('isActive is present but not a boolean');
+          throw new Error('invalid-isActive');
+        }
+        logger.silly('isActive is valid or not present');
+
         if (!Array.isArray(req.body.activities)) {
           logger.verbose('role activities is not an array');
           throw new Error('invalid-activities');
@@ -71,7 +80,11 @@ module.exports = (
 
       logger.silly(req, 'request is valid, creating new role');
 
-      const roleID = await createAuthRole(req.body.name, req.body.activities);
+      const roleID = await createAuthRole(
+        req.body.name,
+        req.body.isActive,
+        req.body.activities
+      );
 
       const activities = (
         await getAuthActivitiesByIDs(req.body.activities)
@@ -80,6 +93,8 @@ module.exports = (
       const role = {
         id: roleID,
         name: req.body.name,
+        isActive:
+          typeof req.body.isActive !== 'undefined' ? req.body.isActive : true,
         activities
       };
 

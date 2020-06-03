@@ -185,7 +185,9 @@ tap.test('database wrappers / users', async usersTests => {
           const activities = dbMock('auth_activities');
           const states = dbMock('states');
 
-          roles.where.withArgs('name', 'user role').returnsThis();
+          roles.where
+            .withArgs({ name: 'user role', isActive: true })
+            .returnsThis();
           roles.select.withArgs('id').returnsThis();
           roles.first.resolves({ id: 'role id' });
 
@@ -423,7 +425,7 @@ tap.test('database wrappers / users', async usersTests => {
       zxcvbn.withArgs('password', []).returns({ score: 5 });
 
       const auth = dbMock('auth_roles');
-      auth.where.withArgs('name', 'role').returnsThis();
+      auth.where.withArgs({ name: 'role', isActive: true }).returnsThis();
       auth.first.resolves();
 
       try {
@@ -464,7 +466,7 @@ tap.test('database wrappers / users', async usersTests => {
       db.first.resolves({ email: 'mail mail', name: 'name name' });
 
       const auth = dbMock('auth_roles');
-      auth.where.withArgs('name', 'role').returnsThis();
+      auth.where.withArgs({ name: 'role', isActive: true }).returnsThis();
       auth.first.resolves({});
 
       const states = dbMock('states');
@@ -488,7 +490,7 @@ tap.test('database wrappers / users', async usersTests => {
         db.first.resolves({ email: 'mail mail', name: 'name name' });
 
         const auth = dbMock('auth_roles');
-        auth.where.withArgs('name', 'role').returnsThis();
+        auth.where.withArgs({ name: 'role', isActive: true }).returnsThis();
         auth.first.resolves({});
 
         const states = dbMock('states');
