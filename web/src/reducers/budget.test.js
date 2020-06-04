@@ -614,6 +614,8 @@ describe('budget reducer', () => {
           }
         },
         '3': {
+          // Activity 3 is the Program Administration activity, so its state
+          // personnel costs will include key personnel as well.
           costsByFFY: {
             '1931': {
               federal: 2700,
@@ -1409,6 +1411,8 @@ describe('budget reducer', () => {
           }
         },
         {
+          // Activity 3 is the Program Administration activity, so its state
+          // personnel costs will include key personnel as well.
           id: 3,
           name: 'Program Administration',
           fundingSource: 'HIT',
