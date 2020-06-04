@@ -18,25 +18,33 @@ describe('budget reducer', () => {
       combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
       contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
       expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      statePersonnel: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } }
+      statePersonnel: {
+        total: { total: 0, medicaid: 0, federal: 0, state: 0 }
+      }
     },
     hit: {
       combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
       contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
       expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      statePersonnel: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } }
+      statePersonnel: {
+        total: { total: 0, medicaid: 0, federal: 0, state: 0 }
+      }
     },
     mmis: {
       combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
       contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
       expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      statePersonnel: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } }
+      statePersonnel: {
+        total: { total: 0, medicaid: 0, federal: 0, state: 0 }
+      }
     },
     hitAndHie: {
       combined: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
       contractors: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
       expenses: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
-      statePersonnel: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } }
+      statePersonnel: {
+        total: { medicaid: 0, federal: 0, state: 0, total: 0 }
+      }
     },
     mmisByFFP: {
       '50-50': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
@@ -606,6 +614,8 @@ describe('budget reducer', () => {
           }
         },
         '3': {
+          // Activity 3 is the Program Administration activity, so its state
+          // personnel costs will include key personnel as well.
           costsByFFY: {
             '1931': {
               federal: 2700,
@@ -1318,6 +1328,26 @@ describe('budget reducer', () => {
           name: 'hieOne',
           fundingSource: 'HIE',
           data: {
+            otherFunding: {
+              '1931': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1932': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1933': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              }
+            },
             statePersonnel: {
               '1931': 1400,
               '1932': 1200,
@@ -1331,7 +1361,12 @@ describe('budget reducer', () => {
               total: 6000
             },
             expenses: { '1931': 2000, '1932': 2000, '1933': 2000, total: 6000 },
-            combined: { '1931': 5400, '1932': 5200, '1933': 4700, total: 15300 }
+            combined: {
+              '1931': 5400,
+              '1932': 5200,
+              '1933': 4700,
+              total: 15300
+            }
           }
         },
         {
@@ -1339,6 +1374,26 @@ describe('budget reducer', () => {
           name: 'hieTwo',
           fundingSource: 'HIE',
           data: {
+            otherFunding: {
+              '1931': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1932': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1933': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              }
+            },
             statePersonnel: {
               '1931': 1000,
               '1932': 1000,
@@ -1356,10 +1411,32 @@ describe('budget reducer', () => {
           }
         },
         {
+          // Activity 3 is the Program Administration activity, so its state
+          // personnel costs will include key personnel as well.
           id: 3,
           name: 'Program Administration',
           fundingSource: 'HIT',
           data: {
+            otherFunding: {
+              '1931': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1932': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1933': {
+                contractors: 56,
+                expenses: 55,
+                statePersonnel: 889,
+                total: 1000
+              }
+            },
             statePersonnel: {
               '1931': 1000,
               '1932': 1450,
@@ -1386,6 +1463,26 @@ describe('budget reducer', () => {
           name: 'mmisOne',
           fundingSource: 'MMIS',
           data: {
+            otherFunding: {
+              '1931': {
+                contractors: 400,
+                expenses: 400,
+                statePersonnel: 200,
+                total: 1000
+              },
+              '1932': {
+                contractors: 334,
+                expenses: 333,
+                statePersonnel: 333,
+                total: 1000
+              },
+              '1933': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              }
+            },
             statePersonnel: {
               '1931': 500,
               '1932': 1000,
@@ -1407,6 +1504,26 @@ describe('budget reducer', () => {
           name: 'zero total',
           fundingSource: 'MMIS',
           data: {
+            otherFunding: {
+              '1931': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1932': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1933': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              }
+            },
             statePersonnel: {
               '1931': 0,
               '1932': 0,
@@ -1428,6 +1545,26 @@ describe('budget reducer', () => {
           name: 'no funding program',
           fundingSource: false,
           data: {
+            otherFunding: {
+              '1931': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1932': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              },
+              '1933': {
+                contractors: 0,
+                expenses: 0,
+                statePersonnel: 0,
+                total: 0
+              }
+            },
             statePersonnel: {
               '1931': 100,
               '1932': 100,
