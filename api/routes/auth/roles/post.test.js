@@ -126,6 +126,31 @@ tap.test('auth roles POST endpoint', async endpointTest => {
         res.send.calledWith({
           id: 'role id',
           name: 'new role',
+          isActive: true,
+          activities: ['one', 'two']
+        })
+      );
+    });
+
+    handlerTest.test('returns happily if role is inactive', async test => {
+      getAuthRoleByName.resolves(null);
+      getAuthActivitiesByIDs.resolves([
+        { id: 1, name: 'one' },
+        { id: 2, name: 'two' }
+      ]);
+      createAuthRole.resolves('role id');
+
+      await handler(
+        { body: { name: 'new role', isActive: false, activities: [1, 2] } },
+        res
+      );
+
+      test.ok(res.status.calledWith(201));
+      test.ok(
+        res.send.calledWith({
+          id: 'role id',
+          name: 'new role',
+          isActive: false,
           activities: ['one', 'two']
         })
       );

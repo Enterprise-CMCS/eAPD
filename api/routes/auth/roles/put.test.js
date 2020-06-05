@@ -103,7 +103,7 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
           res
         );
 
-        returnsValidationFail(test, 'missing-name');
+        returnsValidationFail(test, 'invalid-name');
       }
     );
 
@@ -187,7 +187,7 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
 
       await handler(
         {
-          body: { name: 'new role', activities: [1, 2] },
+          body: { name: 'new role', isActive: true, activities: [1, 2] },
           user: { role: 'role' },
           params: { id: 1 }
         },
@@ -198,6 +198,36 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
         res.send.calledWith({
           id: 1,
           name: 'new role',
+          isActive: true,
+          activities: ['one', 'two']
+        })
+      );
+    });
+
+    handlerTest.test('returns happily if role is inactive', async test => {
+      getAuthRoleByID.resolves({ id: 'role id' });
+      getAuthRoleByName.withArgs('role').resolves({ id: 'other id' });
+      getAuthRoleByName.withArgs('new role').resolves(null);
+      getAuthActivitiesByIDs.resolves([
+        { id: 1, name: 'one' },
+        { id: 2, name: 'two' }
+      ]);
+      updateAuthRole.resolves();
+
+      await handler(
+        {
+          body: { name: 'new role', isActive: false, activities: [1, 2] },
+          user: { role: 'role' },
+          params: { id: 1 }
+        },
+        res
+      );
+
+      test.ok(
+        res.send.calledWith({
+          id: 1,
+          name: 'new role',
+          isActive: false,
           activities: ['one', 'two']
         })
       );

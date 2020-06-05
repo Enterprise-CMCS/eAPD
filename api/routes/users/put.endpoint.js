@@ -16,8 +16,7 @@ describe('users endpoint | PUT /users/:userID', () => {
   unauthorizedTest('put', url(0));
 
   describe('when authenticated', () => {
-    const put = (id, data) =>
-      login().then(api => api.put(url(id), data))
+    const put = (id, data) => login().then(api => api.put(url(id), data));
 
     it('when sending a non-numeric ID', async () => {
       const response = await put('abc');
@@ -83,7 +82,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           phone: '123',
           position: 'test position',
           state: 'hi',
-          role: 'state SME',
+          role: 'state coordinator',
           useless: 'is discarded'
         });
 
@@ -95,7 +94,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           .first();
 
         expect(user).toMatchObject({
-          auth_role: 'state SME',
+          auth_role: 'state coordinator',
           email: 'all-permissions-no-state',
           name: 'test name',
           password: oldPasswordHash,
@@ -118,7 +117,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           phone: '123',
           position: 'test position',
           state: 'hi',
-          role: 'state SME',
+          role: 'state coordinator',
           useless: 'is discarded'
         });
 
@@ -130,7 +129,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           .first();
 
         expect(user).toMatchObject({
-          auth_role: 'state SME',
+          auth_role: 'state coordinator',
           email: 'test email',
           name: 'test name',
           password: expect.stringMatching(/.+/),

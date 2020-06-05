@@ -8,7 +8,7 @@ const {
   getAuthActivitiesByIDs,
   getAuthRoleByID,
   getAuthRoleByName,
-  getAuthRoles,
+  getActiveAuthRoles,
   updateAuthRole
 } = require('./auth');
 
@@ -25,7 +25,7 @@ tap.test('database wrappers / auth', async authTests => {
   });
 
   authTests.test('create an auth role', async test => {
-    roles.insert.withArgs({ name: 'role name' }).returnsThis();
+    roles.insert.withArgs({ name: 'role name', isActive: true }).returnsThis();
     roles.returning.withArgs('id').resolves(['role 1']);
     mapping.insert.withArgs([
       { role_id: 'role 1', activity_id: 'activity 1' },
@@ -35,6 +35,7 @@ tap.test('database wrappers / auth', async authTests => {
 
     const roleID = await createAuthRole(
       'role name',
+      true,
       ['activity 1', 'activity 2', 'activity 3'],
       {
         db
@@ -90,6 +91,7 @@ tap.test('database wrappers / auth', async authTests => {
   });
 
   authTests.test('get all roles, with activities attached', async test => {
+    roles.where.withArgs('isActive', true).returnsThis();
     roles.select.resolves([{ id: 'role1' }, { id: 'role2' }]);
 
     mapping.where.withArgs('role_id', 'role1').returnsThis();
@@ -103,7 +105,7 @@ tap.test('database wrappers / auth', async authTests => {
       .withArgs('name')
       .resolves([{ name: 'activity 1' }, { name: 'activity 2' }]);
 
-    const authRoles = await getAuthRoles({ db });
+    const authRoles = await getActiveAuthRoles({ db });
 
     test.same(authRoles, [
       { id: 'role1', activities: ['activity 1', 'activity 2'] },
@@ -113,6 +115,9 @@ tap.test('database wrappers / auth', async authTests => {
 
   authTests.test('update an auth role', async updateAuthRoleTests => {
     updateAuthRoleTests.test('where the role name is unchanged', async test => {
+      roles.where.withArgs('id', 'role id').returnsThis();
+      roles.update.withArgs({ name: null }).resolves();
+
       mapping.where.withArgs('role_id', 'role id').returnsThis();
       mapping.delete.resolves();
       mapping.insert
@@ -126,6 +131,7 @@ tap.test('database wrappers / auth', async authTests => {
       test.resolves(
         updateAuthRole(
           'role id',
+          null,
           null,
           ['activity1', 'activity2', 'activity3'],
           {
@@ -153,6 +159,7 @@ tap.test('database wrappers / auth', async authTests => {
         updateAuthRole(
           'role id',
           'role name',
+          null,
           ['activity1', 'activity2', 'activity3'],
           {
             db
