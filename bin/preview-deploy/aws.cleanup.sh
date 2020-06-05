@@ -67,6 +67,12 @@ function terminateIfClosedPR() {
   INSTANCE_ID=$(echo ${BITS[0]} | tr -d '"')
   INSTANCE_PR=$(echo ${BITS[1]} | tr -d '"')
 
+  # If there's not an instance ID, bail out. This can happen if there aren't any
+  # active preview deployments.
+  if [ -z "$INSTANCE_ID" ]; then
+    return 0
+  fi
+
   echo "  ...instance $INSTANCE_ID is for PR $INSTANCE_PR";
 
   for PR in $2
