@@ -63,10 +63,13 @@ module.exports = async (
     logger.silly('checking auth role');
     if (
       !(await db('auth_roles')
-        .where('name', auth_role)
+        .where({
+          name: auth_role,
+          isActive: true
+        })
         .first())
     ) {
-      logger.verbose(`auth role is invalid [${auth_role}]`);
+      logger.verbose(`auth role is invalid or inactive [${auth_role}]`);
       throw new Error('invalid-role');
     }
     logger.silly('auth role is valid');

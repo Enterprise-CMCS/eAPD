@@ -1,13 +1,13 @@
 const logger = require('../../../logger')('auth roles route get');
-const { getAuthRoles: gr } = require('../../../db');
+const { getActiveAuthRoles: gr } = require('../../../db');
 const { can } = require('../../../middleware');
 
-module.exports = (app, { getAuthRoles = gr } = {}) => {
+module.exports = (app, { getActiveAuthRoles = gr } = {}) => {
   logger.silly('setting up GET /auth/roles route');
   app.get('/auth/roles', can('view-roles'), async (req, res) => {
     logger.silly(req, 'handling up GET /auth/roles route');
     try {
-      const roles = await getAuthRoles();
+      const roles = await getActiveAuthRoles();
 
       logger.silly(
         req,
