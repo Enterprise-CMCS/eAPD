@@ -21,34 +21,14 @@ Array [
       "view-document",
     ],
     "id": 1101,
+    "isActive": true,
     "name": "admin",
-  },
-  Object {
-    "activities": Array [
-      "edit-roles",
-    ],
-    "id": 1102,
-    "name": "federal analyst",
-  },
-  Object {
-    "activities": Array [],
-    "id": 1103,
-    "name": "federal leadership",
-  },
-  Object {
-    "activities": Array [],
-    "id": 1104,
-    "name": "federal SME",
   },
   Object {
     "activities": Array [],
     "id": 1105,
+    "isActive": true,
     "name": "state coordinator",
-  },
-  Object {
-    "activities": Array [],
-    "id": 1106,
-    "name": "state SME",
   },
 ]
 `;

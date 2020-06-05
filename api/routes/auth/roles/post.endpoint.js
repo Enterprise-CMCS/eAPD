@@ -44,8 +44,9 @@ describe('auth roles endpoint | POST /auth/roles', () => {
   describe('when authenticated', () => {
     invalidCases.forEach(situation => {
       it(situation.name, async () => {
-        const response = await login()
-          .then(api => api.post(url, situation.body))
+        const response = await login().then(api =>
+          api.post(url, situation.body)
+        );
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
@@ -54,14 +55,40 @@ describe('auth roles endpoint | POST /auth/roles', () => {
 
     it('with a valid new role', async () => {
       const data = { name: 'new-role', activities: [1001, 1002] };
-      const response = await login()
-        .then(api => api.post(url, data))
+      const response = await login().then(api => api.post(url, data));
 
       expect(response.status).toEqual(201);
       expect(response.data).toMatchSnapshot();
 
       const role = await db('auth_roles')
         .where({ name: 'new-role' })
+        .first();
+
+      expect(role).toBeTruthy();
+
+      const activities = (
+        await db('auth_role_activity_mapping')
+          .where({ role_id: role.id })
+          .select('activity_id')
+      ).map(activity => activity.activity_id);
+      activities.sort();
+
+      expect(activities).toMatchSnapshot();
+    });
+
+    it('with a valid inactive new role', async () => {
+      const data = {
+        name: 'inactive-role',
+        isActive: false,
+        activities: [1001, 1002]
+      };
+      const response = await login().then(api => api.post(url, data));
+
+      expect(response.status).toEqual(201);
+      expect(response.data).toMatchSnapshot();
+
+      const role = await db('auth_roles')
+        .where({ name: 'inactive-role', isActive: false })
         .first();
 
       expect(role).toBeTruthy();

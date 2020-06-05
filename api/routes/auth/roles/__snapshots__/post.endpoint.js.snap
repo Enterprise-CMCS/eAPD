@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`auth roles endpoint | POST /auth/roles when authenticated with a valid inactive new role 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+    "add-users",
+  ],
+  "id": 2,
+  "isActive": false,
+  "name": "inactive-role",
+}
+`;
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with a valid inactive new role 2`] = `
+Array [
+  1001,
+  1002,
+]
+`;
+
 exports[`auth roles endpoint | POST /auth/roles when authenticated with a valid new role 1`] = `
 Object {
   "activities": Array [
@@ -7,6 +26,7 @@ Object {
     "add-users",
   ],
   "id": 1,
+  "isActive": true,
   "name": "new-role",
 }
 `;

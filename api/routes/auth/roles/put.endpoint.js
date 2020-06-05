@@ -27,22 +27,28 @@ describe('auth roles endpoint | PUT /auth/roles/:roleID', () => {
     {
       name: 'with activities that are not valid',
       data: { name: 'new-role', activities: [1001, 1002, 9001] }
+    },
+    {
+      name: 'with name that is not a string',
+      data: { name: 256, activities: [1001] }
+    },
+    {
+      name: 'with isActive that is not a boolean',
+      data: { isActive: 'this-is-a-string', activities: [1001] }
     }
   ];
 
   describe('when authenticated', () => {
     it('when updating the role that the user belongs to', async () => {
       const data = { activities: [1001] };
-      const response = await login()
-        .then(api => api.put(url(1101), data))
+      const response = await login().then(api => api.put(url(1101), data));
 
       expect(response.status).toEqual(403);
       expect(response.data).toMatchSnapshot();
     });
 
     it('with an invalid ID', async () => {
-      const response = await login()
-        .then(api => api.put(url(9001), {}))
+      const response = await login().then(api => api.put(url(9001), {}));
 
       expect(response.status).toEqual(404);
       expect(response.data).toMatchSnapshot();
@@ -50,18 +56,34 @@ describe('auth roles endpoint | PUT /auth/roles/:roleID', () => {
 
     invalidCases.forEach(situation => {
       it(situation.name, async () => {
-        const response = await login()
-          .then(api => api.put(url(1102), situation.data))
+        const response = await login().then(api =>
+          api.put(url(1102), situation.data)
+        );
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
     });
 
-    it('with a valid updated role', async () => {
+    it('with a valid updated role name', async () => {
       const data = { name: 'new name', activities: [1001] };
-      const response = await login()
-        .then(api => api.put(url(1102), data))
+      const response = await login().then(api => api.put(url(1102), data));
+
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
+
+      const activities = (
+        await db('auth_role_activity_mapping')
+          .where({ role_id: 1102 })
+          .select('activity_id')
+      ).map(activity => activity.activity_id);
+
+      expect(activities).toMatchSnapshot();
+    });
+
+    it('with a valid updated role active flag', async () => {
+      const data = { isActive: false, activities: [1001] };
+      const response = await login().then(api => api.put(url(1102), data));
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();

@@ -10,7 +10,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
     get: sandbox.stub()
   };
 
-  const getAuthRoles = sandbox.stub();
+  const getActiveAuthRoles = sandbox.stub();
 
   const res = {
     status: sandbox.stub(),
@@ -39,7 +39,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
   endpointTest.test('get roles handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, { getAuthRoles });
+      getEndpoint(app, { getActiveAuthRoles });
       handler = app.get.args.find(args => args[0] === '/auth/roles')[2];
       done();
     });
@@ -47,7 +47,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        getAuthRoles.rejects();
+        getActiveAuthRoles.rejects();
 
         await handler({}, res);
 
@@ -60,7 +60,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
     handlerTest.test('sends back a list of roles', async validTest => {
       const roles = [{ name: 'one' }, { name: 'two' }, { name: 'three' }];
 
-      getAuthRoles.resolves(roles);
+      getActiveAuthRoles.resolves(roles);
 
       await handler({}, res);
 

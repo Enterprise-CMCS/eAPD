@@ -25,12 +25,32 @@ exports.seed = async knex => {
   await knex('auth_activities').insert({ id: 1014, name: 'delete-users' });
   await knex('auth_activities').insert({ id: 1015, name: 'view-document' });
 
-  await knex('auth_roles').insert({ id: 1101, name: 'admin' });
-  await knex('auth_roles').insert({ id: 1102, name: 'federal analyst' });
-  await knex('auth_roles').insert({ id: 1103, name: 'federal leadership' });
-  await knex('auth_roles').insert({ id: 1104, name: 'federal SME' });
-  await knex('auth_roles').insert({ id: 1105, name: 'state coordinator' });
-  await knex('auth_roles').insert({ id: 1106, name: 'state SME' });
+  await knex('auth_roles').insert({ id: 1101, name: 'admin', isActive: true });
+  await knex('auth_roles').insert({
+    id: 1102,
+    name: 'federal analyst',
+    isActive: false
+  });
+  await knex('auth_roles').insert({
+    id: 1103,
+    name: 'federal leadership',
+    isActive: false
+  });
+  await knex('auth_roles').insert({
+    id: 1104,
+    name: 'federal SME',
+    isActive: false
+  });
+  await knex('auth_roles').insert({
+    id: 1105,
+    name: 'state coordinator',
+    isActive: true
+  });
+  await knex('auth_roles').insert({
+    id: 1106,
+    name: 'state SME',
+    isActive: false
+  });
 
   // admin
   await knex('auth_role_activity_mapping').insert({
