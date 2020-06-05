@@ -127,4 +127,12 @@ exports.seed = async knex => {
     activityIDs,
     roleToActivityMappings
   );
+  await knex('auth_roles')
+    .whereIn('name', [
+      'federal analyst',
+      'federal leadership',
+      'federal SME',
+      'state SME'
+    ])
+    .update({ isActive: false });
 };
