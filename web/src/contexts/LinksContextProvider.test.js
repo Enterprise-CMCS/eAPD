@@ -117,6 +117,22 @@ describe('LinksContextProvider', () => {
     expect(activityLinks).toMatchSnapshot();
   });
 
+  it('sets "defaultCollapsed: false" for one top-level link', () => {
+    const activeSection = 'activities';
+    const result = contextProvider.getTheLinks(
+      pageNavMock,
+      anchorNavMock,
+      activeSection,
+      activities
+    );
+
+    const selected = result.find(item => item.id === activeSection);
+    expect(selected.defaultCollapsed).toEqual(false);
+
+    const unselected = result.filter(item => item.defaultCollapsed === true);
+    expect(unselected.length).toEqual(result.length - 1);
+  });
+
   it('returns next and previous links currectly when the selected link is empty', () => {
     const activeSection = '';
     const nextPrevLinks = contextProvider.getPreviousNextLinks(
