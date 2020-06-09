@@ -14,16 +14,7 @@ exports[`LinksContextProvider renders correctly 1`] = `
 exports[`LinksContextProvider returns a list of links 1`] = `
 Array [
   Object {
-    "children": Array [
-      Object {
-        "id": "apd-state-profile-office",
-        "label": "State Director and Office Address",
-      },
-      Object {
-        "id": "apd-state-profile-key-personnel",
-        "label": "Key Personnel and Program Management",
-      },
-    ],
+    "defaultCollapsed": false,
     "id": "apd-state-profile",
     "items": Array [
       Object {
@@ -44,13 +35,16 @@ Array [
     "url": undefined,
   },
   Object {
+    "defaultCollapsed": true,
     "id": "apd-summary",
     "label": "Program Summary",
     "onClick": undefined,
     "url": "#",
   },
   Object {
-    "children": Array [
+    "defaultCollapsed": true,
+    "id": "previous-activities",
+    "items": Array [
       Object {
         "id": "prev-activities-outline",
         "label": "Prior Activities Overview",
@@ -60,13 +54,14 @@ Array [
         "label": "Actual Costs",
       },
     ],
-    "id": "previous-activities",
     "label": "Results of Previous Activities",
     "onClick": undefined,
     "url": "#",
   },
   Object {
-    "children": Array [
+    "defaultCollapsed": true,
+    "id": "activities",
+    "items": Array [
       Object {
         "id": "activities-list",
         "label": "Activity List",
@@ -74,19 +69,21 @@ Array [
         "url": "activities",
       },
     ],
-    "id": "activities",
     "label": "Program Activities",
     "onClick": undefined,
     "url": "#",
   },
   Object {
+    "defaultCollapsed": true,
     "id": "schedule-summary",
     "label": "Activity Schedule Summary",
     "onClick": undefined,
     "url": "#",
   },
   Object {
-    "children": Array [
+    "defaultCollapsed": true,
+    "id": "proposed-budget",
+    "items": Array [
       Object {
         "id": "budget-summary-table",
         "label": "Summary Budget Table",
@@ -100,19 +97,21 @@ Array [
         "label": "Estimated Quarterly Incentive Payments",
       },
     ],
-    "id": "proposed-budget",
     "label": "Proposed Budget",
     "onClick": undefined,
     "url": "#",
   },
   Object {
+    "defaultCollapsed": true,
     "id": "assurances-compliance",
     "label": "Assurances and Compliance",
     "onClick": undefined,
     "url": "#",
   },
   Object {
-    "children": Array [
+    "defaultCollapsed": true,
+    "id": "executive-summary",
+    "items": Array [
       Object {
         "id": "executive-summary-summary",
         "label": "Activities Summary",
@@ -122,12 +121,12 @@ Array [
         "label": "Program Budget Tables",
       },
     ],
-    "id": "executive-summary",
     "label": "Executive Summary",
     "onClick": undefined,
     "url": "#",
   },
   Object {
+    "defaultCollapsed": true,
     "id": "export",
     "label": "Export and Submit",
     "onClick": undefined,
@@ -139,7 +138,9 @@ Array [
 exports[`LinksContextProvider returns a list of links where the activities section is selected 1`] = `
 Array [
   Object {
-    "children": Array [
+    "defaultCollapsed": true,
+    "id": "apd-state-profile",
+    "items": Array [
       Object {
         "id": "apd-state-profile-office",
         "label": "State Director and Office Address",
@@ -149,19 +150,21 @@ Array [
         "label": "Key Personnel and Program Management",
       },
     ],
-    "id": "apd-state-profile",
     "label": "Key State Personnel",
     "onClick": undefined,
     "url": "#",
   },
   Object {
+    "defaultCollapsed": true,
     "id": "apd-summary",
     "label": "Program Summary",
     "onClick": undefined,
     "url": "#",
   },
   Object {
-    "children": Array [
+    "defaultCollapsed": true,
+    "id": "previous-activities",
+    "items": Array [
       Object {
         "id": "prev-activities-outline",
         "label": "Prior Activities Overview",
@@ -171,20 +174,12 @@ Array [
         "label": "Actual Costs",
       },
     ],
-    "id": "previous-activities",
     "label": "Results of Previous Activities",
     "onClick": undefined,
     "url": "#",
   },
   Object {
-    "children": Array [
-      Object {
-        "id": "activities-list",
-        "label": "Activity List",
-        "onClick": undefined,
-        "url": "activities",
-      },
-    ],
+    "defaultCollapsed": false,
     "id": "activities",
     "items": Array [
       Object {
@@ -220,13 +215,16 @@ Array [
     "url": undefined,
   },
   Object {
+    "defaultCollapsed": true,
     "id": "schedule-summary",
     "label": "Activity Schedule Summary",
     "onClick": undefined,
     "url": "#",
   },
   Object {
-    "children": Array [
+    "defaultCollapsed": true,
+    "id": "proposed-budget",
+    "items": Array [
       Object {
         "id": "budget-summary-table",
         "label": "Summary Budget Table",
@@ -240,19 +238,21 @@ Array [
         "label": "Estimated Quarterly Incentive Payments",
       },
     ],
-    "id": "proposed-budget",
     "label": "Proposed Budget",
     "onClick": undefined,
     "url": "#",
   },
   Object {
+    "defaultCollapsed": true,
     "id": "assurances-compliance",
     "label": "Assurances and Compliance",
     "onClick": undefined,
     "url": "#",
   },
   Object {
-    "children": Array [
+    "defaultCollapsed": true,
+    "id": "executive-summary",
+    "items": Array [
       Object {
         "id": "executive-summary-summary",
         "label": "Activities Summary",
@@ -262,12 +262,12 @@ Array [
         "label": "Program Budget Tables",
       },
     ],
-    "id": "executive-summary",
     "label": "Executive Summary",
     "onClick": undefined,
     "url": "#",
   },
   Object {
+    "defaultCollapsed": true,
     "id": "export",
     "label": "Export and Submit",
     "onClick": undefined,

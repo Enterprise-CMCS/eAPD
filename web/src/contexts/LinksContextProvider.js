@@ -203,7 +203,6 @@ class LinksContextProvider extends Component {
   };
 
   getTheLinks = (pageNav, anchorNav, activeSection, activities) => {
-    // Note: children is the list of potential child links of a top-level nav item; items is the list of child links to actually display
     const links = [
       {
         id: 'apd-state-profile',
@@ -458,7 +457,7 @@ class LinksContextProvider extends Component {
 }
 
 LinksContextProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node
 };
 
 export { LinksContextProvider, Consumer as LinksContextConsumer };
