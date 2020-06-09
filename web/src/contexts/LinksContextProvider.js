@@ -460,4 +460,8 @@ LinksContextProvider.propTypes = {
   children: PropTypes.node
 };
 
+LinksContextProvider.defaultProps = {
+  children: []
+};
+
 export { LinksContextProvider, Consumer as LinksContextConsumer };
