@@ -32,7 +32,7 @@ class LinksContextProvider extends Component {
         currentIndex,
         currentItemIndex,
         currentSubItemIndex
-      } = this.getCurrentSubItemIndeces(links, activeId));
+      } = this.getCurrentSubItemIndices(links, activeId));
     }
 
     // default case -- if we can't find an active link, use the first one
@@ -68,8 +68,8 @@ class LinksContextProvider extends Component {
   };
 
   // deep dive to find a sub-item index that matches the active ID,
-  // bringing back the associated top-level and item - level indeces too
-  getCurrentSubItemIndeces = (links, activeId) => {
+  // bringing back the associated top-level and item - level indices too
+  getCurrentSubItemIndices = (links, activeId) => {
     // go through every top-level link
     const linkCount = links.length;
     for (let topLevelIndex = 0; topLevelIndex < linkCount; topLevelIndex += 1) {
@@ -209,7 +209,7 @@ class LinksContextProvider extends Component {
         id: 'apd-state-profile',
         label: t('apd.stateProfile.title'),
         onClick: pageNav('apd-state-profile-office', 'state-profile'),
-        children: [
+        items: [
           {
             id: 'apd-state-profile-office',
             label: t('apd.stateProfile.directorAndAddress.title')
@@ -229,7 +229,7 @@ class LinksContextProvider extends Component {
         id: 'previous-activities',
         label: t('previousActivities.title'),
         onClick: pageNav('prev-activities-outline', 'previous-activities'),
-        children: [
+        items: [
           {
             id: 'prev-activities-outline',
             label: t('previousActivities.outline.title')
@@ -244,7 +244,7 @@ class LinksContextProvider extends Component {
         id: 'activities',
         label: t('activities.title'),
         onClick: pageNav('activities-list', 'activities'),
-        children: [
+        items: [
           {
             id: 'activities-list',
             label: t('activities.list.title'),
@@ -262,7 +262,7 @@ class LinksContextProvider extends Component {
         id: 'proposed-budget',
         label: t('proposedBudget.title'),
         onClick: pageNav('budget-summary-table', 'proposed-budget'),
-        children: [
+        items: [
           {
             id: 'budget-summary-table',
             label: t('proposedBudget.summaryBudget.title')
@@ -286,7 +286,7 @@ class LinksContextProvider extends Component {
         id: 'executive-summary',
         label: t('executiveSummary.title'),
         onClick: pageNav('executive-summary-summary', 'executive-summary'),
-        children: [
+        items: [
           {
             id: 'executive-summary-summary',
             label: t('executiveSummary.summary.title')
@@ -309,8 +309,8 @@ class LinksContextProvider extends Component {
       // item. We'll use that list to determine if this item should show as being
       // selected, which would mean we need to show its child elements.
       const ids = [topLevel.id];
-      if (topLevel.children) {
-        ids.push(...topLevel.children.map(child => child.id));
+      if (topLevel.items) {
+        ids.push(...topLevel.items.map(child => child.id));
 
         if (topLevel.id === 'activities') {
           ids.push(...activities.map(({ key }) => `activity-${key}`));
@@ -328,19 +328,23 @@ class LinksContextProvider extends Component {
       }
 
       const selected = ids.indexOf(activeSection) >= 0;
+      topLevel.defaultCollapsed = true;
 
       if (selected) {
+        // expand selected section
+        topLevel.defaultCollapsed = false;
+
         // Selected nav items should not have a URL; otherwise, they get
         // rendered twice - once in this nav item and once as the first child.
         topLevel.url = undefined;
 
         // If this item is defined as having children, turn those into
         // sidebar items.
-        if (topLevel.children) {
-          topLevel.items = topLevel.children.map(child => ({
-            onClick: anchorNav(child.id),
-            url: `#${child.id}`,
-            ...child
+        if (topLevel.items) {
+          topLevel.items = topLevel.items.map(item => ({
+            onClick: anchorNav(item.id),
+            url: `#${item.id}`,
+            ...item
           }));
 
           // If we're on the activities sidebar item, we should also push a list
