@@ -338,7 +338,7 @@ class LinksContextProvider extends Component {
         // rendered twice - once in this nav item and once as the first child.
         topLevel.url = undefined;
 
-        // If this item is defined as having children, turn those into
+        // If this item is defined as having sub-items, turn those into
         // sidebar items.
         if (topLevel.items) {
           topLevel.items = topLevel.items.map(item => ({
