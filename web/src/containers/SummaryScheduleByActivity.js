@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import Instruction from '../components/Instruction';
-import { selectBudgetActivitiesByFundingSource } from '../reducers/budget.selectors';
 import SummaryActivityBreakdownTable from './SummaryActivityBreakdown';
 import Dollars from '../components/Dollars';
 
@@ -22,9 +21,9 @@ function DataRow({ data, title, groupTitle }) {
           : ''
       }
     >
-      <td scope="row" className="title">
+      <th scope="row" className="title indent-title">
         {title === categoryLookup.combined ? `${groupTitle} ${title}` : title}
-      </td>
+      </th>
       <td className="budget-table--number">
         <Dollars>{data.medicaid}</Dollars>
       </td>
@@ -59,97 +58,112 @@ DataRowGroup.propTypes = {
   groupTitle: PropTypes.string.isRequired
 };
 
-const TOTAL_MEDICAID_COST_DISPLAY =
-  'proposedBudget.summaryScheduleByActivity.totalMedicaidCost';
-const ACTIVITY_BREAKDOWN_DISPLAY =
-  'proposedBudget.summaryScheduleByActivity.activityBreakdown';
+const SummaryScheduleByActivityTotals = ({ data, ffy }) => {
+  return (
+    <table className="budget-table">
+      <caption className="ds-u-visibility--screen-reader">
+        Combined Activity Costs FFY {ffy} (total Computable Medicaid Cost)
+      </caption>
+      <thead>
+        <tr className="budget-table--row__primary-header">
+          <th scope="col">
+            Combined Activity Costs FFY {ffy} (total Computable Medicaid Cost)
+          </th>
+          <th scope="col" className="ds-u-text-align--right">
+            Total
+          </th>
+        </tr>
+      </thead>
+      <thead>
+        <tr className="budget-table--row__header">
+          <th scope="row" colSpan="2">
+            HIT
+          </th>
+        </tr>
+      </thead>
+      <DataRowGroup data={data.hit} year={ffy} groupTitle="HIT" />
+      <thead>
+        <tr className="budget-table--row__header">
+          <th scope="row" colSpan="2">
+            HIE
+          </th>
+        </tr>
+      </thead>
+      <DataRowGroup data={data.hie} year={ffy} groupTitle="HIE" />
+      <thead>
+        <tr className="budget-table--row__header">
+          <th scope="row" colSpan="2">
+            MMIS
+          </th>
+        </tr>
+      </thead>
+      <DataRowGroup data={data.mmis} year={ffy} groupTitle="MMIS" />
+      <thead>
+        <tr key={ffy} className="budget-table--row__header">
+          <th scope="row">FFY {ffy} total Computable Medicaid Cost</th>
+          <td className="budget-table--number">
+            <Dollars>{data.combined[ffy].medicaid}</Dollars>
+          </td>
+        </tr>
+      </thead>
+    </table>
+  );
+};
 
-const SummaryScheduleByActivity = ({ data, years, activities }) => {
-  return years.map(ffy => {
-    const combined = data.combined[ffy];
-    return (
-      <Fragment key={ffy}>
-        <h4 className="ds-h4" aria-hidden="true">
-          FFY {ffy}
-        </h4>
-        <Instruction source={TOTAL_MEDICAID_COST_DISPLAY} />
+SummaryScheduleByActivityTotals.propTypes = {
+  data: PropTypes.object.isRequired,
+  ffy: PropTypes.string.isRequired
+};
 
-        <table className="budget-table">
-          <thead>
-            <tr className="budget-table--row__primary-header">
-              <th scope="col">
-                Combined Activity Costs FFY {ffy} (total Computable Medicaid
-                Cost)
-              </th>
-              <th className="ds-u-text-align--right" scope="col">
-                Total
-              </th>
-            </tr>
-          </thead>
-          <thead>
-            <tr className="budget-table--row__header">
-              <th scope="col" colSpan="2">
-                HIT
-              </th>
-            </tr>
-          </thead>
-          <DataRowGroup data={data.hit} year={ffy} groupTitle="HIT" />
-          <thead>
-            <tr className="budget-table--row__header">
-              <th scope="col" colSpan="2">
-                HIE
-              </th>
-            </tr>
-          </thead>
-          <DataRowGroup data={data.hie} year={ffy} groupTitle="HIE" />
-          <thead>
-            <tr className="budget-table--row__header">
-              <th scope="col" colSpan="2">
-                MMIS
-              </th>
-            </tr>
-          </thead>
-          <DataRowGroup data={data.mmis} year={ffy} groupTitle="MMIS" />
-          <thead>
-            <tr key={ffy} className="budget-table--row__header">
-              <th scope="row">FFY {ffy} total Computable Medicaid Cost</th>
-              <td className="budget-table--number">
-                <Dollars>{combined.medicaid}</Dollars>
-              </td>
-            </tr>
-          </thead>
-        </table>
+const SummaryScheduleByActivityBreakdown = ({ data, ffy }) => {
+  return data.activityTotals.map((item, index) => (
+    <SummaryActivityBreakdownTable
+      ffy={ffy}
+      activityIndex={index}
+      otherFunding={item.data.otherFunding}
+    />
+  ));
+};
 
-        <h4 className="ds-h4" aria-hidden="true">
-          Activity Breakdown
-        </h4>
+SummaryScheduleByActivityBreakdown.propTypes = {
+  data: PropTypes.object.isRequired,
+  ffy: PropTypes.string.isRequired
+};
 
-        <Instruction source={ACTIVITY_BREAKDOWN_DISPLAY} />
-        {data.activityTotals.map((item, index) => {
-          return (
-            <Fragment key={index}>
-              <SummaryActivityBreakdownTable
-                ffy={ffy}
-                activityIndex={index}
-                otherFunding={item.data.otherFunding}
-              />
-            </Fragment>
-          );
-        })}
-      </Fragment>
-    );
-  });
+const SummaryScheduleByActivity = ({ data, years, exportView }) => {
+  return years.map(ffy => (
+    <Fragment key={ffy}>
+      <h4 className="ds-h4" aria-hidden="true">
+        FFY {ffy}
+      </h4>
+      {!exportView && (
+        <Instruction source="proposedBudget.summaryScheduleByActivity.totalMedicaidCost" />
+      )}
+      <SummaryScheduleByActivityTotals data={data} ffy={ffy} />
+
+      <h4 className="ds-h4" aria-hidden="true">
+        Activity Breakdown
+      </h4>
+      {!exportView && (
+        <Instruction source="proposedBudget.summaryScheduleByActivity.activityBreakdown" />
+      )}
+      <SummaryScheduleByActivityBreakdown data={data} ffy={ffy} />
+    </Fragment>
+  ));
 };
 
 SummaryScheduleByActivity.propTypes = {
-  activities: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
-  years: PropTypes.array.isRequired
+  years: PropTypes.array.isRequired,
+  exportView: PropTypes.bool
+};
+
+SummaryScheduleByActivity.defaultProps = {
+  exportView: false
 };
 
 const mapStateToProps = state => {
   return {
-    activities: selectBudgetActivitiesByFundingSource(state),
     data: state.budget,
     years: state.apd.data.years
   };

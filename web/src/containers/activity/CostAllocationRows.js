@@ -49,8 +49,9 @@ const CostAllocationRows = ({ years, ffy, otherFunding }) => (
     <CostSummaryRows items={years[ffy].statePersonnel} />
     {otherFunding && (
       <tr>
-        <td className="title">Other Funding Amount</td>
-        <td className="budget-table--number" colSpan="4"></td>
+        <td className="title" colSpan="5">
+          Other Funding Amount
+        </td>
         <td className="budget-table--number">
           <Dollars>{otherFunding[ffy].statePersonnel}</Dollars>
         </td>
@@ -76,8 +77,9 @@ const CostAllocationRows = ({ years, ffy, otherFunding }) => (
     <CostSummaryRows items={years[ffy].nonPersonnel} />
     {otherFunding && (
       <tr>
-        <td className="title">Other Funding Amount</td>
-        <td className="budget-table--number" colSpan="4"></td>
+        <td className="title" colSpan="5">
+          Other Funding Amount
+        </td>
         <td className="budget-table--number">
           <Dollars>{otherFunding[ffy].expenses}</Dollars>
         </td>
@@ -103,8 +105,9 @@ const CostAllocationRows = ({ years, ffy, otherFunding }) => (
     <CostSummaryRows items={years[ffy].contractorResources} />
     {otherFunding && (
       <tr>
-        <td className="title">Other Funding Amount</td>
-        <td className="budget-table--number" colSpan="4"></td>
+        <td className="title" colSpan="5">
+          Other Funding Amount
+        </td>
         <td className="budget-table--number">
           <Dollars>{otherFunding[ffy].contractors}</Dollars>
         </td>
@@ -132,13 +135,19 @@ const CostAllocationRows = ({ years, ffy, otherFunding }) => (
             : years[ffy].totalCost}
         </Dollars>
       </td>
-    </tr>{' '}
+    </tr>
   </Fragment>
 );
 
 CostAllocationRows.propTypes = {
   years: PropTypes.object.isRequired,
-  ffy: PropTypes.string.isRequired
+  ffy: PropTypes.string.isRequired,
+  otherFunding: PropTypes.shape({
+    statePersonnel: PropTypes.object,
+    expenses: PropTypes.object,
+    contractors: PropTypes.object,
+    total: PropTypes.number
+  }).isRequired
 };
 
 export default CostAllocationRows;

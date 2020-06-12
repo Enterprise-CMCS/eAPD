@@ -69,10 +69,6 @@ td {
     }
   }
 
-  td.title {
-    padding-left: 3em;
-  }
-
   thead {
     tr + tr {
       border-top: 1px solid $color-gray-light;
@@ -159,4 +155,8 @@ tr.budget-table--row__primary-header {
   th {
     border-right: none;
   }
+}
+
+.indent-title {
+  padding-left: 3em;
 }

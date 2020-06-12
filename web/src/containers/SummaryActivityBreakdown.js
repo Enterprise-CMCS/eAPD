@@ -5,7 +5,6 @@ import {
   selectActivityCostSummary,
   selectActivityByIndex
 } from '../reducers/activities.selectors';
-
 import CostAllocationRows from './activity/CostAllocationRows';
 
 const SummaryActivityBreakdownTable = ({
@@ -19,7 +18,10 @@ const SummaryActivityBreakdownTable = ({
 
   return (
     <table className="budget-table activity-budget-table">
-      <tbody>
+      <caption className="ds-u-visibility--screen-reader">
+        Activity Breakdown Table
+      </caption>
+      <thead>
         <tr className="budget-table--row__primary-header">
           <th scope="col">
             Activity {activityIndex + 1}{' '}
@@ -28,10 +30,12 @@ const SummaryActivityBreakdownTable = ({
           <th scope="col" colSpan="4">
             Personnel Cost x FTE
           </th>
-          <th className="ds-u-text-align--right" scope="col">
+          <th scope="col" className="ds-u-text-align--right">
             Total cost
           </th>
         </tr>
+      </thead>
+      <tbody>
         <CostAllocationRows
           years={years}
           ffy={ffy}

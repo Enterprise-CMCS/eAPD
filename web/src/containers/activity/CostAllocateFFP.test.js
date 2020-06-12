@@ -1,13 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-
 import {
   plain as CostAllocateFFP,
   AllFFYsSummaryNarrative,
-  CostSummaryRows,
   mapStateToProps,
   mapDispatchToProps
 } from './CostAllocateFFP';
+import { CostSummaryRows } from './CostAllocationRows';
 import {
   setCostAllocationFFPFundingSplit,
   setCostAllocationFFPOtherFunding
