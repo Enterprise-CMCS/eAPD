@@ -10,7 +10,7 @@ const ProposedBudget = () => (
     <h2>Proposed Budget</h2>
 
     <h3>Summary Schedule By Activity</h3>
-    <SummaryScheduleByActivity />
+    <SummaryScheduleByActivity exportView />
 
     <h3>Summary Budget Table</h3>
     <BudgetSummary />
