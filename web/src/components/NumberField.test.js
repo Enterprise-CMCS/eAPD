@@ -20,7 +20,6 @@ describe('NumberField component', () => {
     ).toMatchSnapshot();
   });
 
-  // should text be selected if 'min' is set, and value <= min ?
   it('selects the text field content if the value is zero', () => {
     const ref = { current: null };
 
