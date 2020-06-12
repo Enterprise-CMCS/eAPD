@@ -97,20 +97,22 @@ NumberField.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) })
   ]),
+  mask: PropTypes.string,
+  min: PropTypes.number,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  mask: PropTypes.string,
-  round: PropTypes.bool
+  round: PropTypes.bool,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
+
 NumberField.defaultProps = {
   fieldRef: null,
-  onBlur: null,
-  onChange: null,
-  value: '',
   mask: null,
   min: null,
-  round: false
+  onBlur: null,
+  onChange: null,
+  round: false,
+  value: ''
 };
 
 export default NumberField;
