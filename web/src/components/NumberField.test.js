@@ -20,6 +20,7 @@ describe('NumberField component', () => {
     ).toMatchSnapshot();
   });
 
+  // should text be selected if 'min' is set, and value <= min ?
   it('selects the text field content if the value is zero', () => {
     const ref = { current: null };
 
@@ -270,5 +271,26 @@ describe('NumberField component', () => {
     expect(onBlur).toHaveBeenCalled();
     expect(onChange).toHaveBeenCalledWith({ target: { value: 123 } });
     expect(component).toMatchSnapshot();
+  });
+
+  it('returns min value, if value entered is less than min', () => {
+    const onChange = jest.fn();
+
+    const component = mount(
+      <NumberField
+        label="test label"
+        name="test name"
+        min={-5}
+        onChange={onChange}
+      />
+    );
+
+    act(() => {
+      component.find('TextField').prop('onBlur')({
+        target: { value: '-10' }
+      });
+    });
+
+    expect(onChange).toHaveBeenCalledWith({ target: { value: -5 } });
   });
 });

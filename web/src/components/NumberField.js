@@ -38,7 +38,7 @@ const NumberField = ({
     // will return partial number if non-numeric characters are present
     const number = parseFloat(unmaskValue(stringValue, mask)) || 0;
     if (min !== null && number < min) {
-      return 0;
+      return min;
     }
     if (round) {
       return Math.round(number);
