@@ -261,8 +261,15 @@ class LinksContextProvider extends Component {
       {
         id: 'proposed-budget',
         label: t('proposedBudget.title'),
-        onClick: pageNav('budget-summary-table', 'proposed-budget'),
+        onClick: pageNav(
+          'summary-schedule-by-activity-table',
+          'proposed-budget'
+        ),
         children: [
+          {
+            id: 'summary-schedule-by-activity-table',
+            label: t('proposedBudget.summaryScheduleByActivity.title')
+          },
           {
             id: 'budget-summary-table',
             label: t('proposedBudget.summaryBudget.title')

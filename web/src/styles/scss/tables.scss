@@ -69,6 +69,10 @@ td {
     }
   }
 
+  td.title {
+    padding-left: 3em;
+  }
+
   thead {
     tr + tr {
       border-top: 1px solid $color-gray-light;
@@ -124,6 +128,7 @@ td {
     &.title {
       padding-left: 3em;
       width: 100%;
+      white-space: normal;
     }
   }
 }
@@ -139,4 +144,19 @@ td {
 /* use on tables in sections where some tables are small, but some aren't so we can standardize width */
 .budget-table--col-header__fixed-width {
   width: 175px;
+}
+
+tr.budget-table--row__primary-header {
+  th,
+  td {
+    color: $color-white;
+    background-color: $color-gray-dark;
+    white-space: nowrap;
+  }
+}
+
+tr.budget-table--row__primary-header {
+  th {
+    border-right: none;
+  }
 }
