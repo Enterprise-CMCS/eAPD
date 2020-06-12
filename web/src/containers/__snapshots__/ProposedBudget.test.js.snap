@@ -6,6 +6,17 @@ exports[`ProposedBudget component renders correctly 1`] = `
   resource="proposedBudget"
 >
   <Connect(ConnectedWaypoint)
+    id="summary-schedule-by-activity-table"
+  />
+  <Subsection
+    headerClassName={null}
+    id="summary-schedule-by-activity-table"
+    nested={false}
+    resource="proposedBudget.summaryScheduleByActivity"
+  >
+    <Connect(SummaryScheduleByActivity) />
+  </Subsection>
+  <Connect(ConnectedWaypoint)
     id="budget-summary-table"
   />
   <Subsection
