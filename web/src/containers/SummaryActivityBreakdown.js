@@ -71,3 +71,5 @@ const mapStateToProps = (
 };
 
 export default connect(mapStateToProps)(SummaryActivityBreakdownTable);
+
+export { SummaryActivityBreakdownTable as plain, mapStateToProps };

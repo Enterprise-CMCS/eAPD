@@ -2,14 +2,14 @@ title: Proposed Budget
 helpText: >-
   Review topline budget data associated with this APD. Totals are based on the information entered by
   the state. Capture incentive payments if applicable.
-summaryScheduleByActivity:
-  title: Summary Schedule By Activity
+summaryBudgetByActivity:
+  title: Summary Budget By Activity
   totalMedicaidCost:
     detail: >-
       The following tables summarize the **Total Computable Medicaid Cost** for all activities organized by their funding 
       source (**HIT**, **HIE**, and/or **MMIS**) and their cost category (**State Personnel**, **Other State Expenses**, and **Private 
       Contractor Costs**) by FFY. Other funding amounts described in the cost allocation section of the activities are 
-      not included in these tables, but can br reviewed in the individual activity summary tables on this page.
+      not included in these tables, but can be reviewed in the individual activity summary tables on this page.
   activityBreakdown:
     detail: >-
       These tables summarize **State Staff**, **Other State Expenses**, and **Private Contractors** for all activities in this APD, organized by FFY.  

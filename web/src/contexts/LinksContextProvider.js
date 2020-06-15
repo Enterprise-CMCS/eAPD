@@ -268,7 +268,7 @@ class LinksContextProvider extends Component {
         children: [
           {
             id: 'summary-schedule-by-activity-table',
-            label: t('proposedBudget.summaryScheduleByActivity.title')
+            label: t('proposedBudget.summaryBudgetByActivity.title')
           },
           {
             id: 'budget-summary-table',
