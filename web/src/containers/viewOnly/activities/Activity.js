@@ -41,7 +41,7 @@ const Activity = ({ activity, activityIndex }) => {
           </strong>
         </p>
         <p>
-          <em>Planned end date: </em>{' '}
+          <em>Target completion date: </em>{' '}
           {stateDateToDisplay(milestone.endDate) || 'None provided'}
         </p>
       </Fragment>
@@ -152,7 +152,7 @@ const Activity = ({ activity, activityIndex }) => {
         {activity.plannedStartDate || 'None provided'}
       </p>
       <p>
-        <strong>Planned end date: </strong>
+        <strong>Target completion date: </strong>
         {activity.plannedEndDate || 'None provided'}
       </p>
       <hr className="subsection-rule" />

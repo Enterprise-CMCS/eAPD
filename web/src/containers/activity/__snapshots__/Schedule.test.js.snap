@@ -16,7 +16,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       value="1944-10-02"
     />
     <DateField
-      label="Planned end date"
+      label="Target completion date"
       onChange={[Function]}
       value="1944-11-08"
     />
@@ -33,7 +33,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     </p>
     <p>
       <strong>
-        Planned end date:
+        Target completion date:
       </strong>
        
       11/8/1944
