@@ -58,16 +58,16 @@ DataRowGroup.propTypes = {
   groupTitle: PropTypes.string.isRequired
 };
 
-const SummaryScheduleByActivityTotals = ({ data, ffy }) => {
+const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
   return (
     <table className="budget-table">
       <caption className="ds-u-visibility--screen-reader">
-        Combined Activity Costs FFY {ffy} (total Computable Medicaid Cost)
+        Combined Activity Costs FFY {ffy} (Total Computable Medicaid Cost)
       </caption>
       <thead>
         <tr className="budget-table--row__primary-header">
           <th scope="col">
-            Combined Activity Costs FFY {ffy} (total Computable Medicaid Cost)
+            Combined Activity Costs FFY {ffy} (Total Computable Medicaid Cost)
           </th>
           <th scope="col" className="ds-u-text-align--right">
             Total
@@ -101,7 +101,7 @@ const SummaryScheduleByActivityTotals = ({ data, ffy }) => {
       <thead>
         <tr key={ffy} className="budget-table--row__header">
           <th scope="row">FFY {ffy} total Computable Medicaid Cost</th>
-          <td className="budget-table--number">
+          <td className="budget-table--number budget-table--total">
             <Dollars>{data.combined[ffy].medicaid}</Dollars>
           </td>
         </tr>
@@ -110,12 +110,12 @@ const SummaryScheduleByActivityTotals = ({ data, ffy }) => {
   );
 };
 
-SummaryScheduleByActivityTotals.propTypes = {
+SummaryBudgetByActivityTotals.propTypes = {
   data: PropTypes.object.isRequired,
   ffy: PropTypes.string.isRequired
 };
 
-const SummaryScheduleByActivityBreakdown = ({ data, ffy }) => {
+const SummaryBudgetByActivityBreakdown = ({ data, ffy }) => {
   return data.activityTotals.map((item, index) => (
     <SummaryActivityBreakdownTable
       ffy={ffy}
@@ -125,41 +125,41 @@ const SummaryScheduleByActivityBreakdown = ({ data, ffy }) => {
   ));
 };
 
-SummaryScheduleByActivityBreakdown.propTypes = {
+SummaryBudgetByActivityBreakdown.propTypes = {
   data: PropTypes.object.isRequired,
   ffy: PropTypes.string.isRequired
 };
 
-const SummaryScheduleByActivity = ({ data, years, exportView }) => {
+const SummaryBudgetByActivity = ({ data, years, isViewOnly }) => {
   return years.map(ffy => (
     <Fragment key={ffy}>
       <h4 className="ds-h4" aria-hidden="true">
         FFY {ffy}
       </h4>
-      {!exportView && (
-        <Instruction source="proposedBudget.summaryScheduleByActivity.totalMedicaidCost" />
+      {!isViewOnly && (
+        <Instruction source="proposedBudget.summaryBudgetByActivity.totalMedicaidCost" />
       )}
-      <SummaryScheduleByActivityTotals data={data} ffy={ffy} />
+      <SummaryBudgetByActivityTotals data={data} ffy={ffy} />
 
       <h4 className="ds-h4" aria-hidden="true">
         Activity Breakdown
       </h4>
-      {!exportView && (
-        <Instruction source="proposedBudget.summaryScheduleByActivity.activityBreakdown" />
+      {!isViewOnly && (
+        <Instruction source="proposedBudget.summaryBudgetByActivity.activityBreakdown" />
       )}
-      <SummaryScheduleByActivityBreakdown data={data} ffy={ffy} />
+      <SummaryBudgetByActivityBreakdown data={data} ffy={ffy} />
     </Fragment>
   ));
 };
 
-SummaryScheduleByActivity.propTypes = {
+SummaryBudgetByActivity.propTypes = {
   data: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
-  exportView: PropTypes.bool
+  isViewOnly: PropTypes.bool
 };
 
-SummaryScheduleByActivity.defaultProps = {
-  exportView: false
+SummaryBudgetByActivity.defaultProps = {
+  isViewOnly: false
 };
 
 const mapStateToProps = state => {
@@ -169,4 +169,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(SummaryScheduleByActivity);
+export default connect(mapStateToProps)(SummaryBudgetByActivity);
+
+export {
+  SummaryBudgetByActivity as plain,
+  mapStateToProps,
+  DataRow,
+  DataRowGroup,
+  SummaryBudgetByActivityTotals,
+  SummaryBudgetByActivityBreakdown
+};

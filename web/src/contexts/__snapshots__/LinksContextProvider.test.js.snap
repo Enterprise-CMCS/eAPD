@@ -89,7 +89,7 @@ Array [
     "children": Array [
       Object {
         "id": "summary-schedule-by-activity-table",
-        "label": "Summary Schedule By Activity",
+        "label": "Summary Budget By Activity",
       },
       Object {
         "id": "budget-summary-table",
@@ -233,7 +233,7 @@ Array [
     "children": Array [
       Object {
         "id": "summary-schedule-by-activity-table",
-        "label": "Summary Schedule By Activity",
+        "label": "Summary Budget By Activity",
       },
       Object {
         "id": "budget-summary-table",

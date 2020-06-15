@@ -1,0 +1,269 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly data row group renders 1`] = `
+<tbody>
+  <DataRow
+    category="combined"
+    groupTitle="MMIS"
+    key="combined"
+    title="Total"
+  />
+  <DataRow
+    category="contractors"
+    groupTitle="MMIS"
+    key="contractors"
+    title="Private Contractor Total"
+  />
+  <DataRow
+    category="expenses"
+    groupTitle="MMIS"
+    key="expenses"
+    title="Other State Expenses Total"
+  />
+  <DataRow
+    category="statePersonnel"
+    groupTitle="MMIS"
+    key="statePersonnel"
+    title="State Staff Total"
+  />
+</tbody>
+`;
+
+exports[`renders correctly data row renders with data 1`] = `
+<tr
+  className=""
+>
+  <th
+    className="title indent-title"
+    scope="row"
+  >
+    title text
+  </th>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars>
+      1000
+    </Dollars>
+  </td>
+</tr>
+`;
+
+exports[`renders correctly data row renders with no data 1`] = `
+<tr
+  className="budget-table--subtotal budget-table--row__highlight"
+>
+  <th
+    className="title indent-title"
+    scope="row"
+  >
+    HIT Total
+  </th>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars>
+      0
+    </Dollars>
+  </td>
+</tr>
+`;
+
+exports[`renders correctly renders correctly in standard mode 1`] = `
+Array [
+  <Fragment
+    key="1984"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1984
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      reverse={false}
+      source="proposedBudget.summaryBudgetByActivity.totalMedicaidCost"
+    />
+    <SummaryBudgetByActivityTotals
+      data={Object {}}
+      ffy="1984"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      Activity Breakdown
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      reverse={false}
+      source="proposedBudget.summaryBudgetByActivity.activityBreakdown"
+    />
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1984"
+    />
+  </Fragment>,
+  <Fragment
+    key="1985"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1985
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      reverse={false}
+      source="proposedBudget.summaryBudgetByActivity.totalMedicaidCost"
+    />
+    <SummaryBudgetByActivityTotals
+      data={Object {}}
+      ffy="1985"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      Activity Breakdown
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      reverse={false}
+      source="proposedBudget.summaryBudgetByActivity.activityBreakdown"
+    />
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1985"
+    />
+  </Fragment>,
+]
+`;
+
+exports[`renders correctly renders correctly in view-only mode 1`] = `
+Array [
+  <Fragment
+    key="1984"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1984
+    </h4>
+    <SummaryBudgetByActivityTotals
+      data={Object {}}
+      ffy="1984"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      Activity Breakdown
+    </h4>
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1984"
+    />
+  </Fragment>,
+  <Fragment
+    key="1985"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1985
+    </h4>
+    <SummaryBudgetByActivityTotals
+      data={Object {}}
+      ffy="1985"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      Activity Breakdown
+    </h4>
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1985"
+    />
+  </Fragment>,
+]
+`;
+
+exports[`renders correctly summary budget by activity breakdown renders 1`] = `
+Array [
+  <Connect(SummaryActivityBreakdownTable)
+    activityIndex={0}
+    ffy="1975"
+    otherFunding={
+      Object {
+        "1990": Object {
+          "contractors": 350,
+          "expenses": 200,
+          "statePersonnel": 100,
+          "total": 650,
+        },
+        "1991": Object {
+          "contractors": 150,
+          "expenses": 700,
+          "statePersonnel": 400,
+          "total": 1250,
+        },
+      }
+    }
+  />,
+  <Connect(SummaryActivityBreakdownTable)
+    activityIndex={1}
+    ffy="1975"
+    otherFunding={
+      Object {
+        "1990": Object {
+          "contractors": 150,
+          "expenses": 400,
+          "statePersonnel": 200,
+          "total": 750,
+        },
+        "1991": Object {
+          "contractors": 250,
+          "expenses": 1000,
+          "statePersonnel": 600,
+          "total": 1850,
+        },
+      }
+    }
+  />,
+]
+`;

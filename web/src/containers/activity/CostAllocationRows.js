@@ -126,7 +126,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding }) => (
         </Dollars>
       </td>
     </tr>
-    <tr className="budget-table--subtotal">
+    <tr className="budget-table--subtotal budget-table--row__header">
       <td colSpan="5">Activity Total Cost</td>
       <td className="budget-table--number">
         <Dollars>
