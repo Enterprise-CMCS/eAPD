@@ -31,6 +31,7 @@ const PersonCostForm = ({ items, costLabel, fteLabel, setCost, setFTE }) => {
               label={fteLabel}
               name="ftes"
               size="medium"
+              min={0}
               numeric
               value={perc}
               onChange={handleFTEChange(year)}

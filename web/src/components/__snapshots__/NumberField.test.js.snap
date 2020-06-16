@@ -6,6 +6,7 @@ exports[`NumberField component does not round numbers if the round setting is no
   fieldRef={null}
   label="test label"
   mask={null}
+  min={null}
   name="test name"
   onBlur={
     [MockFunction] {
@@ -101,6 +102,7 @@ exports[`NumberField component it limits numbers to 4 decimal places if the roun
   fieldRef={null}
   label="test label"
   mask={null}
+  min={null}
   name="test name"
   onBlur={
     [MockFunction] {
@@ -196,6 +198,7 @@ exports[`NumberField component passes back numeric values on change limited to 4
   fieldRef={null}
   label="test label"
   mask={null}
+  min={null}
   name="test name"
   onBlur={null}
   onChange={
@@ -273,6 +276,7 @@ exports[`NumberField component passes back numeric values on change, but still r
   fieldRef={null}
   label="test label"
   mask="currency"
+  min={null}
   name="test name"
   onBlur={null}
   onChange={
@@ -366,6 +370,7 @@ exports[`NumberField component passes back rounded numeric values on change, but
   fieldRef={null}
   label="test label"
   mask="currency"
+  min={null}
   name="test name"
   onBlur={null}
   onChange={
@@ -459,6 +464,7 @@ exports[`NumberField component renders correctly 1`] = `
   fieldRef={null}
   label="test label"
   mask={null}
+  min={null}
   name="test name"
   onBlur={null}
   onChange={[MockFunction]}
@@ -518,6 +524,7 @@ exports[`NumberField component returns partial number if non-numeric characters 
   fieldRef={null}
   label="test label"
   mask={null}
+  min={null}
   name="test name"
   onBlur={
     [MockFunction] {
@@ -613,6 +620,7 @@ exports[`NumberField component rounds numbers when the component loses focus, ca
   fieldRef={null}
   label="test label"
   mask={null}
+  min={null}
   name="test name"
   onBlur={
     [MockFunction] {
