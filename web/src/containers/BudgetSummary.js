@@ -6,30 +6,33 @@ import Dollars from '../components/Dollars';
 import { selectBudgetActivitiesByFundingSource } from '../reducers/budget.selectors';
 
 const categoryLookup = {
-  statePersonnel: 'Project State Staff',
-  expenses: 'Non-Personnel',
-  contractors: 'Contracted Resources',
-  combined: 'Subtotal'
+  statePersonnel: { title: 'State Staff', sortOrder: 0 },
+  expenses: { title: 'Other State Expenses', sortOrder: 1 },
+  contractors: { title: 'Private Contractor', sortOrder: 2 },
+  combined: { title: 'Subtotal', sortOrder: 3 }
 };
+
+const categorySort = (key1, key2) =>
+  categoryLookup[key1].sortOrder - categoryLookup[key2].sortOrder;
 
 function DataRow({ data, title }) {
   return (
     <tr
       className={
-        title === categoryLookup.combined
+        title === categoryLookup.combined.title
           ? 'budget-table--subtotal budget-table--row__highlight'
           : ''
       }
     >
       <th scope="row">{title}</th>
       <td className="budget-table--number">
-        <Dollars>{data.medicaid}</Dollars>
+        <Dollars>{data.state}</Dollars>
       </td>
       <td className="budget-table--number">
         <Dollars>{data.federal}</Dollars>
       </td>
       <td className="budget-table--number">
-        <Dollars>{data.state}</Dollars>
+        <Dollars>{data.medicaid}</Dollars>
       </td>
     </tr>
   );
@@ -42,16 +45,18 @@ DataRow.propTypes = {
 
 const DataRowGroup = ({ data, entries, year }) => (
   <Fragment>
-    {Object.keys(data).map(key => (
-      <DataRow
-        key={key}
-        category={key}
-        data={data[key][year]}
-        entries={entries}
-        title={categoryLookup[key]}
-        year={year}
-      />
-    ))}
+    {Object.keys(data)
+      .sort(categorySort)
+      .map(key => (
+        <DataRow
+          key={key}
+          category={key}
+          data={data[key][year]}
+          entries={entries}
+          title={categoryLookup[key].title}
+          year={year}
+        />
+      ))}
   </Fragment>
 );
 
@@ -68,13 +73,13 @@ const HeaderRow = ({ yr }) => {
         {yr === 'total' ? 'Total' : `FFY ${yr}`}
       </th>
       <th className="ds-u-text-align--right" scope="col">
-        Medicaid Total
+        State Total
       </th>
       <th className="ds-u-text-align--right" scope="col">
         Federal Total
       </th>
       <th className="ds-u-text-align--right" scope="col">
-        State Total
+        Medicaid Total Computable
       </th>
     </tr>
   );
@@ -138,18 +143,18 @@ const BudgetSummary = ({ activities, data, years }) => (
     ))}
 
     <table className="budget-table">
-      <caption className="ds-h4">Project Activities Totals</caption>
+      <caption className="ds-h4">Activities Totals</caption>
       <thead>
         <tr>
           <td className="th" id="summary-budget-null1" />
           <th scope="col" className="ds-u-text-align--right">
-            Medicaid Total
+            State Total
           </th>
           <th scope="col" className="ds-u-text-align--right">
             Federal Total
           </th>
           <th scope="col" className="ds-u-text-align--right">
-            State Total
+            Medicaid Total Computable
           </th>
         </tr>
       </thead>
@@ -167,13 +172,13 @@ const BudgetSummary = ({ activities, data, years }) => (
             >
               <th scope="row">{ffy === 'total' ? 'Total' : `FFY ${ffy}`}</th>
               <td className="budget-table--number">
-                <Dollars>{combined.medicaid}</Dollars>
+                <Dollars>{combined.state}</Dollars>
               </td>
               <td className="budget-table--number">
                 <Dollars>{combined.federal}</Dollars>
               </td>
               <td className="budget-table--number">
-                <Dollars>{combined.state}</Dollars>
+                <Dollars>{combined.medicaid}</Dollars>
               </td>
             </tr>
           );
