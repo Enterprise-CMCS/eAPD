@@ -24,6 +24,7 @@ exports[`PercentField component renders correctly 1`] = `
     }
     label="test label"
     mask={null}
+    min={null}
     name="test name"
     onBlur={null}
     onChange={[MockFunction]}
