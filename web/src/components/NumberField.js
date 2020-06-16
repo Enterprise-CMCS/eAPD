@@ -15,6 +15,7 @@ const NumberField = ({
   onChange,
   value,
   mask,
+  min,
   round,
   ...props
 }) => {
@@ -36,6 +37,9 @@ const NumberField = ({
     // use ParseFloat rather than "+" because it won't throw an error and
     // will return partial number if non-numeric characters are present
     const number = parseFloat(unmaskValue(stringValue, mask)) || 0;
+    if (min !== null && number < min) {
+      return min;
+    }
     if (round) {
       return Math.round(number);
     }
@@ -93,19 +97,22 @@ NumberField.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) })
   ]),
+  mask: PropTypes.string,
+  min: PropTypes.number,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  mask: PropTypes.string,
-  round: PropTypes.bool
+  round: PropTypes.bool,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
+
 NumberField.defaultProps = {
   fieldRef: null,
+  mask: null,
+  min: null,
   onBlur: null,
   onChange: null,
-  value: '',
-  mask: null,
-  round: false
+  round: false,
+  value: ''
 };
 
 export default NumberField;
