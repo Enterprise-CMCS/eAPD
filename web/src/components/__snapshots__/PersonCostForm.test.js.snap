@@ -5,14 +5,15 @@ exports[`PersonCostForm component renders correctly 1`] = `
   <h5
     className="ds-h5"
   >
+    FFY 
     1972
-     Costs
+     Cost
   </h5>
   <div
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
   >
     <DollarField
-      label="Costs with benefits"
+      label="Cost with benefits"
       name="cost"
       onChange={[Function]}
       size="medium"
@@ -43,14 +44,15 @@ exports[`PersonCostForm component renders correctly 1`] = `
   <h5
     className="ds-h5"
   >
+    FFY 
     1973
-     Costs
+     Cost
   </h5>
   <div
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
   >
     <DollarField
-      label="Costs with benefits"
+      label="Cost with benefits"
       name="cost"
       onChange={[Function]}
       size="medium"
