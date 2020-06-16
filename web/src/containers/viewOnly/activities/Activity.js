@@ -60,7 +60,7 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           {Object.entries(person.years).map(([year, { amt, perc }]) => (
             <li key={year}>
-              <strong>{year} Costs:</strong> <Dollars>{amt}</Dollars> |{' '}
+              <strong>FFY {year} Cost:</strong> <Dollars>{amt}</Dollars> |{' '}
               <strong>FTEs:</strong> {perc} | <strong>Total:</strong>{' '}
               <Dollars>{perc * amt}</Dollars>
             </li>
@@ -82,7 +82,7 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           {Object.entries(expense.years).map(([year, cost]) => (
             <li key={year}>
-              <strong>{year} Costs:</strong> <Dollars>{cost}</Dollars>
+              <strong>FFY {year} Costs:</strong> <Dollars>{cost}</Dollars>
             </li>
           ))}
         </ul>
