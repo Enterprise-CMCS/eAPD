@@ -271,4 +271,25 @@ describe('NumberField component', () => {
     expect(onChange).toHaveBeenCalledWith({ target: { value: 123 } });
     expect(component).toMatchSnapshot();
   });
+
+  it('returns min value, if value entered is less than min', () => {
+    const onChange = jest.fn();
+
+    const component = mount(
+      <NumberField
+        label="test label"
+        name="test name"
+        min={-5}
+        onChange={onChange}
+      />
+    );
+
+    act(() => {
+      component.find('TextField').prop('onBlur')({
+        target: { value: '-10' }
+      });
+    });
+
+    expect(onChange).toHaveBeenCalledWith({ target: { value: -5 } });
+  });
 });
