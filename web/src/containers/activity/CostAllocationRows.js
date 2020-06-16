@@ -24,7 +24,7 @@ CostSummaryRows.propTypes = {
   items: PropTypes.array.isRequired
 };
 
-const CostAllocationRows = ({ years, ffy, otherFunding }) => (
+const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
   <Fragment>
     {otherFunding && (
       <tr className="budget-table--row__header">
@@ -127,7 +127,9 @@ const CostAllocationRows = ({ years, ffy, otherFunding }) => (
       </td>
     </tr>
     <tr className="budget-table--subtotal budget-table--row__header">
-      <td colSpan="5">Activity Total Cost</td>
+      <td colSpan="5">
+        Activity {activityIndex >= 0 && activityIndex + 1} Total Cost
+      </td>
       <td className="budget-table--number">
         <Dollars>
           {otherFunding
@@ -147,7 +149,12 @@ CostAllocationRows.propTypes = {
     expenses: PropTypes.object,
     contractors: PropTypes.object,
     total: PropTypes.number
-  }).isRequired
+  }).isRequired,
+  activityIndex: PropTypes.number
+};
+
+CostAllocationRows.defaultProps = {
+  activityIndex: -1
 };
 
 export default CostAllocationRows;

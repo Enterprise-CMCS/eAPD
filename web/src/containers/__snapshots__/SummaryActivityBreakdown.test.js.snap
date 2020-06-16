@@ -45,6 +45,7 @@ exports[`Summary Activity Breakdown Table renders correctly renders correctly 1`
   </thead>
   <tbody>
     <CostAllocationRows
+      activityIndex={2}
       ffy={2016}
       otherFunding={
         Object {
