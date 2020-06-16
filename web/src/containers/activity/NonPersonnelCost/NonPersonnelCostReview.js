@@ -21,7 +21,7 @@ const NonPersonnelCostReview = ({
       <div className="ds-u-margin-top--2">
         {Object.entries(years).map(([year, cost]) => (
           <div key={year}>
-            <strong>{year} Costs:</strong> <Dollars>{cost}</Dollars>
+            <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
           </div>
         ))}
       </div>
