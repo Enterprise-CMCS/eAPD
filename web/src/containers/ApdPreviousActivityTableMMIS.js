@@ -86,8 +86,17 @@ const ApdPreviousActivityTableMMIS = ({
               <th id="prev_act_mmis_ffy">
                 <span className="ds-u-visibility--screen-reader">Year</span>
               </th>
-              <th id={`prev_act_mmis${level}_total`}>{TABLE_HEADERS.total}</th>
-              <th colSpan="2" id={`prev_act_mmis${level}_federal`}>
+              <th
+                id={`prev_act_mmis${level}_total`}
+                className="ds-u-text-align--right"
+              >
+                {TABLE_HEADERS.total}
+              </th>
+              <th
+                colSpan="2"
+                id={`prev_act_mmis${level}_federal`}
+                className="ds-u-text-align--right"
+              >
                 {TABLE_HEADERS.federal(level)}
               </th>
             </tr>
