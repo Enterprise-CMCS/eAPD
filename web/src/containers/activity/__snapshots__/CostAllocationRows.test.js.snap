@@ -2,6 +2,7 @@
 
 exports[`renders correctly renders correctly with otherFunding 1`] = `
 <CostAllocationRows
+  activityIndex={-1}
   ffy={1990}
   otherFunding={
     Object {
@@ -502,7 +503,8 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
     <td
       colSpan="5"
     >
-      Activity Total Cost
+      Activity 
+       Total Cost
     </td>
     <td
       className="budget-table--number"
@@ -519,6 +521,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
 
 exports[`renders correctly renders correctly without otherFunding 1`] = `
 <CostAllocationRows
+  activityIndex={-1}
   ffy={1990}
   years={
     Object {
@@ -976,7 +979,8 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
     <td
       colSpan="5"
     >
-      Activity Total Cost
+      Activity 
+       Total Cost
     </td>
     <td
       className="budget-table--number"

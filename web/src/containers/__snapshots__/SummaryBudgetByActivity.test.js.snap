@@ -3,16 +3,10 @@
 exports[`renders correctly data row group renders 1`] = `
 <tbody>
   <DataRow
-    category="combined"
+    category="statePersonnel"
     groupTitle="MMIS"
-    key="combined"
-    title="Total"
-  />
-  <DataRow
-    category="contractors"
-    groupTitle="MMIS"
-    key="contractors"
-    title="Private Contractor Total"
+    key="statePersonnel"
+    title="State Staff Total"
   />
   <DataRow
     category="expenses"
@@ -21,10 +15,16 @@ exports[`renders correctly data row group renders 1`] = `
     title="Other State Expenses Total"
   />
   <DataRow
-    category="statePersonnel"
+    category="contractors"
     groupTitle="MMIS"
-    key="statePersonnel"
-    title="State Staff Total"
+    key="contractors"
+    title="Private Contractor Total"
+  />
+  <DataRow
+    category="combined"
+    groupTitle="MMIS"
+    key="combined"
+    title="Total"
   />
 </tbody>
 `;

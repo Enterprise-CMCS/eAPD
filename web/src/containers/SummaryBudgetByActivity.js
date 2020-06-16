@@ -6,30 +6,33 @@ import SummaryActivityBreakdownTable from './SummaryActivityBreakdown';
 import Dollars from '../components/Dollars';
 
 const categoryLookup = {
-  statePersonnel: 'State Staff Total',
-  expenses: 'Other State Expenses Total',
-  contractors: 'Private Contractor Total',
-  combined: 'Total'
+  statePersonnel: { title: 'State Staff Total', sortOrder: 0 },
+  expenses: { title: 'Other State Expenses Total', sortOrder: 1 },
+  contractors: { title: 'Private Contractor Total', sortOrder: 2 },
+  combined: { title: 'Total', sortOrder: 3 }
 };
 
-function DataRow({ data, title, groupTitle }) {
-  return (
-    <tr
-      className={
-        title === categoryLookup.combined
-          ? 'budget-table--subtotal budget-table--row__highlight'
-          : ''
-      }
-    >
-      <th scope="row" className="title indent-title">
-        {title === categoryLookup.combined ? `${groupTitle} ${title}` : title}
-      </th>
-      <td className="budget-table--number">
-        <Dollars>{data.medicaid}</Dollars>
-      </td>
-    </tr>
-  );
-}
+const categorySort = (key1, key2) =>
+  categoryLookup[key1].sortOrder - categoryLookup[key2].sortOrder;
+
+const DataRow = ({ data, title, groupTitle }) => (
+  <tr
+    className={
+      title === categoryLookup.combined.title
+        ? 'budget-table--subtotal budget-table--row__highlight'
+        : ''
+    }
+  >
+    <th scope="row" className="title indent-title">
+      {title === categoryLookup.combined.title
+        ? `${groupTitle} ${title}`
+        : title}
+    </th>
+    <td className="budget-table--number">
+      <Dollars>{data.medicaid}</Dollars>
+    </td>
+  </tr>
+);
 
 DataRow.propTypes = {
   data: PropTypes.object.isRequired,
@@ -39,16 +42,18 @@ DataRow.propTypes = {
 
 const DataRowGroup = ({ data, year, groupTitle }) => (
   <tbody>
-    {Object.keys(data).map(key => (
-      <DataRow
-        key={key}
-        category={key}
-        data={data[key][year]}
-        title={categoryLookup[key]}
-        groupTitle={groupTitle}
-        year={year}
-      />
-    ))}
+    {Object.keys(data)
+      .sort(categorySort)
+      .map(key => (
+        <DataRow
+          key={key}
+          category={key}
+          data={data[key][year]}
+          title={categoryLookup[key].title}
+          groupTitle={groupTitle}
+          year={year}
+        />
+      ))}
   </tbody>
 );
 
@@ -100,7 +105,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
       <DataRowGroup data={data.mmis} year={ffy} groupTitle="MMIS" />
       <thead>
         <tr key={ffy} className="budget-table--row__header">
-          <th scope="row">FFY {ffy} total Computable Medicaid Cost</th>
+          <th scope="row">FFY {ffy} Total Computable Medicaid Cost</th>
           <td className="budget-table--number budget-table--total">
             <Dollars>{data.combined[ffy].medicaid}</Dollars>
           </td>
@@ -162,12 +167,10 @@ SummaryBudgetByActivity.defaultProps = {
   isViewOnly: false
 };
 
-const mapStateToProps = state => {
-  return {
-    data: state.budget,
-    years: state.apd.data.years
-  };
-};
+const mapStateToProps = state => ({
+  data: state.budget,
+  years: state.apd.data.years
+});
 
 export default connect(mapStateToProps)(SummaryBudgetByActivity);
 

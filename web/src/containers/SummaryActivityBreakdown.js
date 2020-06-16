@@ -40,6 +40,7 @@ const SummaryActivityBreakdownTable = ({
           years={years}
           ffy={ffy}
           otherFunding={otherFunding}
+          activityIndex={activityIndex}
         />
       </tbody>
     </table>
