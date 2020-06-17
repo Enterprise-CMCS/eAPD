@@ -5,28 +5,23 @@ import Instruction from '../components/Instruction';
 import SummaryActivityBreakdownTable from './SummaryActivityBreakdown';
 import Dollars from '../components/Dollars';
 
-const categoryLookup = {
-  statePersonnel: { title: 'State Staff Total', sortOrder: 0 },
-  expenses: { title: 'Other State Expenses Total', sortOrder: 1 },
-  contractors: { title: 'Private Contractor Total', sortOrder: 2 },
-  combined: { title: 'Total', sortOrder: 3 }
-};
+const categories = [
+  { category: 'statePersonnel', title: 'State Staff Total' },
+  { category: 'expenses', title: 'Other State Expenses Total' },
+  { category: 'contractors', title: 'Private Contractor Total' },
+  { category: 'combined', title: 'Total' }
+];
 
-const categorySort = (key1, key2) =>
-  categoryLookup[key1].sortOrder - categoryLookup[key2].sortOrder;
-
-const DataRow = ({ data, title, groupTitle }) => (
+const DataRow = ({ category, data, title, groupTitle }) => (
   <tr
     className={
-      title === categoryLookup.combined.title
+      category === 'combined'
         ? 'budget-table--subtotal budget-table--row__highlight'
         : ''
     }
   >
     <th scope="row" className="title indent-title">
-      {title === categoryLookup.combined.title
-        ? `${groupTitle} ${title}`
-        : title}
+      {category === 'combined' ? `${groupTitle} ${title}` : title}
     </th>
     <td className="budget-table--number">
       <Dollars>{data.medicaid}</Dollars>
@@ -35,6 +30,7 @@ const DataRow = ({ data, title, groupTitle }) => (
 );
 
 DataRow.propTypes = {
+  category: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   groupTitle: PropTypes.string.isRequired
@@ -42,18 +38,14 @@ DataRow.propTypes = {
 
 const DataRowGroup = ({ data, year, groupTitle }) => (
   <tbody>
-    {Object.keys(data)
-      .sort(categorySort)
-      .map(key => (
-        <DataRow
-          key={key}
-          category={key}
-          data={data[key][year]}
-          title={categoryLookup[key].title}
-          groupTitle={groupTitle}
-          year={year}
-        />
-      ))}
+    {categories.map(({ category, title }) => (
+      <DataRow
+        category={category}
+        data={data[category][year]}
+        title={title}
+        groupTitle={groupTitle}
+      />
+    ))}
   </tbody>
 );
 

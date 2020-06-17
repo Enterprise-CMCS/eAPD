@@ -523,6 +523,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
 <CostAllocationRows
   activityIndex={-1}
   ffy={1990}
+  otherFunding={null}
   years={
     Object {
       "1990": Object {

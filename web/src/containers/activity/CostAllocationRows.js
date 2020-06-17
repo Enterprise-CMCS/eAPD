@@ -149,11 +149,12 @@ CostAllocationRows.propTypes = {
     expenses: PropTypes.object,
     contractors: PropTypes.object,
     total: PropTypes.number
-  }).isRequired,
+  }),
   activityIndex: PropTypes.number
 };
 
 CostAllocationRows.defaultProps = {
+  otherFunding: null,
   activityIndex: -1
 };
 
