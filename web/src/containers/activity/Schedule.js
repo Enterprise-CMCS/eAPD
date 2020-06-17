@@ -30,7 +30,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
             onChange={handleActivityStartChange}
           />
           <DateField
-            label="Target completion date"
+            label="Planned end date"
             value={activity.plannedEndDate}
             onChange={handleActivityEndChange}
           />
@@ -41,7 +41,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
             {stateDateToDisplay(activity.plannedStartDate)}
           </p>
           <p>
-            <strong>Target completion date:</strong>{' '}
+            <strong>Planned end date:</strong>{' '}
             {stateDateToDisplay(activity.plannedEndDate)}
           </p>
           <hr />

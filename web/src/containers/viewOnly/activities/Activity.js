@@ -152,7 +152,7 @@ const Activity = ({ activity, activityIndex }) => {
         {activity.plannedStartDate || 'None provided'}
       </p>
       <p>
-        <strong>Target completion date: </strong>
+        <strong>Planned end date: </strong>
         {activity.plannedEndDate || 'None provided'}
       </p>
       <hr className="subsection-rule" />
