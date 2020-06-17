@@ -4,7 +4,7 @@ Anticipated release: June 29, 2020
 
 #### 🚀 New features
 
-- Build the "Summary Budget by Activity" table (#2170)
+- Build the "Summary Budget by Activity" table to see staffing across all activities and not just by activity ([#2170])
 
 #### 🐛 Bugs fixed
 

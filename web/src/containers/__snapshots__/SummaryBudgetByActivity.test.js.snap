@@ -1,35 +1,181 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders correctly Summary Budget By Activity Totals renders 1`] = `
+<table
+  className="budget-table"
+>
+  <caption
+    className="ds-u-visibility--screen-reader"
+  >
+    Combined Activity Costs FFY 
+    1975
+     (Total Computable Medicaid Cost)
+  </caption>
+  <thead>
+    <tr
+      className="budget-table--row__primary-header"
+    >
+      <th
+        scope="col"
+      >
+        Combined Activity Costs FFY 
+        1975
+         (Total Computable Medicaid Cost)
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        scope="col"
+      >
+        Total
+      </th>
+    </tr>
+  </thead>
+  <thead>
+    <tr
+      className="budget-table--row__header"
+    >
+      <th
+        colSpan="2"
+        scope="row"
+      >
+        HIT
+      </th>
+    </tr>
+  </thead>
+  <DataRowGroup
+    data={
+      Object {
+        "1975": Object {
+          "federal": 1,
+          "medicaid": 1000,
+          "state": 2,
+          "total": 3,
+        },
+        "1976": Object {
+          "federal": 10,
+          "medicaid": 2000,
+          "state": 20,
+          "total": 30,
+        },
+      }
+    }
+    groupTitle="HIT"
+    year="1975"
+  />
+  <thead>
+    <tr
+      className="budget-table--row__header"
+    >
+      <th
+        colSpan="2"
+        scope="row"
+      >
+        HIE
+      </th>
+    </tr>
+  </thead>
+  <DataRowGroup
+    data={
+      Object {
+        "1975": Object {
+          "federal": 2,
+          "medicaid": 2000,
+          "state": 3,
+          "total": 5,
+        },
+        "1976": Object {
+          "federal": 20,
+          "medicaid": 3000,
+          "state": 30,
+          "total": 50,
+        },
+      }
+    }
+    groupTitle="HIE"
+    year="1975"
+  />
+  <thead>
+    <tr
+      className="budget-table--row__header"
+    >
+      <th
+        colSpan="2"
+        scope="row"
+      >
+        MMIS
+      </th>
+    </tr>
+  </thead>
+  <DataRowGroup
+    data={
+      Object {
+        "1975": Object {
+          "federal": 3,
+          "medicaid": 3000,
+          "state": 4,
+          "total": 7,
+        },
+        "1976": Object {
+          "federal": 30,
+          "medicaid": 4000,
+          "state": 40,
+          "total": 70,
+        },
+      }
+    }
+    groupTitle="MMIS"
+    year="1975"
+  />
+  <thead>
+    <tr
+      className="budget-table--row__header"
+      key="1975"
+    >
+      <th
+        scope="row"
+      >
+        FFY 
+        1975
+         Total Computable Medicaid Cost
+      </th>
+      <td
+        className="budget-table--number budget-table--total"
+      >
+        <Dollars>
+          4000
+        </Dollars>
+      </td>
+    </tr>
+  </thead>
+</table>
+`;
+
 exports[`renders correctly data row group renders 1`] = `
 <tbody>
   <DataRow
     category="statePersonnel"
     groupTitle="MMIS"
-    key="statePersonnel"
     title="State Staff Total"
   />
   <DataRow
     category="expenses"
     groupTitle="MMIS"
-    key="expenses"
     title="Other State Expenses Total"
   />
   <DataRow
     category="contractors"
     groupTitle="MMIS"
-    key="contractors"
     title="Private Contractor Total"
   />
   <DataRow
     category="combined"
     groupTitle="MMIS"
-    key="combined"
     title="Total"
   />
 </tbody>
 `;
 
-exports[`renders correctly data row renders with data 1`] = `
+exports[`renders correctly data row renders 1`] = `
 <tr
   className=""
 >
@@ -44,26 +190,6 @@ exports[`renders correctly data row renders with data 1`] = `
   >
     <Dollars>
       1000
-    </Dollars>
-  </td>
-</tr>
-`;
-
-exports[`renders correctly data row renders with no data 1`] = `
-<tr
-  className="budget-table--subtotal budget-table--row__highlight"
->
-  <th
-    className="title indent-title"
-    scope="row"
-  >
-    HIT Total
-  </th>
-  <td
-    className="budget-table--number"
-  >
-    <Dollars>
-      0
     </Dollars>
   </td>
 </tr>

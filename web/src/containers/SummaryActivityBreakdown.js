@@ -12,7 +12,8 @@ const SummaryActivityBreakdownTable = ({
   activityIndex,
   costSummary,
   activityName,
-  otherFunding
+  otherFunding,
+  fundingSource
 }) => {
   const { years } = costSummary;
 
@@ -25,7 +26,9 @@ const SummaryActivityBreakdownTable = ({
         <tr className="budget-table--row__primary-header">
           <th scope="col">
             Activity {activityIndex + 1}{' '}
-            <span style={{ fontWeight: '100' }}>{activityName}</span>
+            <span style={{ fontWeight: '100' }}>
+              {activityName} ({fundingSource})
+            </span>
           </th>
           <th scope="col" colSpan="4">
             Personnel Cost x FTE
@@ -52,7 +55,8 @@ SummaryActivityBreakdownTable.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   activityName: PropTypes.string.isRequired,
   costSummary: PropTypes.object.isRequired,
-  otherFunding: PropTypes.object.isRequired
+  otherFunding: PropTypes.object.isRequired,
+  fundingSource: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (
@@ -67,6 +71,7 @@ const mapStateToProps = (
 
   return {
     activityName: activity.name || `Activity ${activityIndex + 1}`,
+    fundingSource: activity.fundingSource,
     costSummary: getCostSummary(state, { activityIndex })
   };
 };
