@@ -37,15 +37,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           </span>
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis90_total"
         >
           <span>
-            Total computable
-            <br />
-            (Federal + state)
+            Total computable (Federal + state)
           </span>
         </th>
         <th
+          className="ds-u-text-align--right"
           colSpan="2"
           id="prev_act_mmis90_federal"
         >
@@ -80,7 +80,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="ds-u-text-align--right"
           id="prev_act_mmis90_federal_actual"
         >
-          Actual
+          Actual Expenditures
         </th>
       </tr>
     </thead>
@@ -206,15 +206,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           </span>
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis75_total"
         >
           <span>
-            Total computable
-            <br />
-            (Federal + state)
+            Total computable (Federal + state)
           </span>
         </th>
         <th
+          className="ds-u-text-align--right"
           colSpan="2"
           id="prev_act_mmis75_federal"
         >
@@ -249,7 +249,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="ds-u-text-align--right"
           id="prev_act_mmis75_federal_actual"
         >
-          Actual
+          Actual Expenditures
         </th>
       </tr>
     </thead>
@@ -375,15 +375,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           </span>
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis50_total"
         >
           <span>
-            Total computable
-            <br />
-            (Federal + state)
+            Total computable (Federal + state)
           </span>
         </th>
         <th
+          className="ds-u-text-align--right"
           colSpan="2"
           id="prev_act_mmis50_federal"
         >
@@ -418,7 +418,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="ds-u-text-align--right"
           id="prev_act_mmis50_federal_actual"
         >
-          Actual
+          Actual Expenditures
         </th>
       </tr>
     </thead>

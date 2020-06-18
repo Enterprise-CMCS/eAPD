@@ -21,15 +21,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </span>
       </th>
       <th
+        className="ds-u-text-align--right"
         id="prev_act_hithie_total"
       >
         <span>
-          Total computable
-          <br />
-          (Federal + state)
+          Total computable (Federal + state)
         </span>
       </th>
       <th
+        className="ds-u-text-align--right"
         colSpan="2"
         id="prev_act_hithie_federal"
       >
@@ -64,7 +64,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         className="ds-u-text-align--right"
         id="prev_act_hithie_federal_actual"
       >
-        Actual
+        Actual Expenditures
       </th>
     </tr>
   </thead>
