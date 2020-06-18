@@ -75,6 +75,7 @@ Review.propTypes = {
 };
 
 Review.defaultProps = {
+  children: null,
   editHref: null,
   onDeleteClick: null,
   onEditClick: null
