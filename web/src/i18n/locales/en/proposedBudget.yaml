@@ -6,8 +6,8 @@ summaryBudget:
   title: Summary Budget Table
   instruction:
     detail: >-
-      These tables summarize the calculated Medicaid Share (Total Activity Cost minus any Other Funding amounts)
-      for state personnel, non-personnel, and private contractor costs for all activities by FFY. 
+      These tables summarize the calculated Medicaid Total Computable (Total Activity Cost minus any Other Funding amounts)
+      for state personnel, private contractor, and other state expenses for all activities by FFY. 
       The tables provide subtotals for each of these categories by program area with the calculated 
       Federal share by FFP rate and the associated state share. The final table in this section
       provides the total Medicaid cost for all activities in this APD by FFY.

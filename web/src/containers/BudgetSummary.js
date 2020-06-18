@@ -5,59 +5,52 @@ import { connect } from 'react-redux';
 import Dollars from '../components/Dollars';
 import { selectBudgetActivitiesByFundingSource } from '../reducers/budget.selectors';
 
-const categoryLookup = {
-  statePersonnel: 'Project State Staff',
-  expenses: 'Non-Personnel',
-  contractors: 'Contracted Resources',
-  combined: 'Subtotal'
-};
+const categories = [
+  { category: 'statePersonnel', title: 'State Staff' },
+  { category: 'expenses', title: 'Other State Expenses' },
+  { category: 'contractors', title: 'Private Contractor' },
+  { category: 'combined', title: 'Subtotal' }
+];
 
-function DataRow({ data, title }) {
+function DataRow({ category, data, title }) {
   return (
     <tr
       className={
-        title === categoryLookup.combined
+        category === 'combined'
           ? 'budget-table--subtotal budget-table--row__highlight'
           : ''
       }
     >
       <th scope="row">{title}</th>
       <td className="budget-table--number">
-        <Dollars>{data.medicaid}</Dollars>
+        <Dollars>{data.state}</Dollars>
       </td>
       <td className="budget-table--number">
         <Dollars>{data.federal}</Dollars>
       </td>
       <td className="budget-table--number">
-        <Dollars>{data.state}</Dollars>
+        <Dollars>{data.medicaid}</Dollars>
       </td>
     </tr>
   );
 }
 
 DataRow.propTypes = {
+  category: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired
 };
 
-const DataRowGroup = ({ data, entries, year }) => (
+const DataRowGroup = ({ data, year }) => (
   <Fragment>
-    {Object.keys(data).map(key => (
-      <DataRow
-        key={key}
-        category={key}
-        data={data[key][year]}
-        entries={entries}
-        title={categoryLookup[key]}
-        year={year}
-      />
+    {categories.map(({ category, title }) => (
+      <DataRow category={category} data={data[category][year]} title={title} />
     ))}
   </Fragment>
 );
 
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
-  entries: PropTypes.array.isRequired,
   year: PropTypes.string.isRequired
 };
 
@@ -68,13 +61,13 @@ const HeaderRow = ({ yr }) => {
         {yr === 'total' ? 'Total' : `FFY ${yr}`}
       </th>
       <th className="ds-u-text-align--right" scope="col">
-        Medicaid Total
+        State Total
       </th>
       <th className="ds-u-text-align--right" scope="col">
         Federal Total
       </th>
       <th className="ds-u-text-align--right" scope="col">
-        State Total
+        Medicaid Total Computable
       </th>
     </tr>
   );
@@ -138,18 +131,18 @@ const BudgetSummary = ({ activities, data, years }) => (
     ))}
 
     <table className="budget-table">
-      <caption className="ds-h4">Project Activities Totals</caption>
+      <caption className="ds-h4">Activities Totals</caption>
       <thead>
         <tr>
           <td className="th" id="summary-budget-null1" />
           <th scope="col" className="ds-u-text-align--right">
-            Medicaid Total
+            State Total
           </th>
           <th scope="col" className="ds-u-text-align--right">
             Federal Total
           </th>
           <th scope="col" className="ds-u-text-align--right">
-            State Total
+            Medicaid Total Computable
           </th>
         </tr>
       </thead>
@@ -167,13 +160,13 @@ const BudgetSummary = ({ activities, data, years }) => (
             >
               <th scope="row">{ffy === 'total' ? 'Total' : `FFY ${ffy}`}</th>
               <td className="budget-table--number">
-                <Dollars>{combined.medicaid}</Dollars>
+                <Dollars>{combined.state}</Dollars>
               </td>
               <td className="budget-table--number">
                 <Dollars>{combined.federal}</Dollars>
               </td>
               <td className="budget-table--number">
-                <Dollars>{combined.state}</Dollars>
+                <Dollars>{combined.medicaid}</Dollars>
               </td>
             </tr>
           );
