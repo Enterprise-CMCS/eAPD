@@ -128,7 +128,8 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
     </tr>
     <tr className="budget-table--subtotal budget-table--row__header">
       <td colSpan="5">
-        Activity {activityIndex >= 0 && activityIndex + 1} Total Cost
+        Activity {activityIndex >= 0 && activityIndex + 1} Total Computable
+        Medicaid Cost
       </td>
       <td className="budget-table--number">
         <Dollars>
