@@ -5,21 +5,18 @@ import { connect } from 'react-redux';
 import Dollars from '../components/Dollars';
 import { selectBudgetActivitiesByFundingSource } from '../reducers/budget.selectors';
 
-const categoryLookup = {
-  statePersonnel: { title: 'State Staff', sortOrder: 0 },
-  expenses: { title: 'Other State Expenses', sortOrder: 1 },
-  contractors: { title: 'Private Contractor', sortOrder: 2 },
-  combined: { title: 'Subtotal', sortOrder: 3 }
-};
+const categories = [
+  { category: 'statePersonnel', title: 'State Staff' },
+  { category: 'expenses', title: 'Other State Expenses' },
+  { category: 'contractors', title: 'Private Contractor' },
+  { category: 'combined', title: 'Subtotal' }
+];
 
-const categorySort = (key1, key2) =>
-  categoryLookup[key1].sortOrder - categoryLookup[key2].sortOrder;
-
-function DataRow({ data, title }) {
+function DataRow({ category, data, title }) {
   return (
     <tr
       className={
-        title === categoryLookup.combined.title
+        category === 'combined'
           ? 'budget-table--subtotal budget-table--row__highlight'
           : ''
       }
@@ -39,30 +36,21 @@ function DataRow({ data, title }) {
 }
 
 DataRow.propTypes = {
+  category: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired
 };
 
-const DataRowGroup = ({ data, entries, year }) => (
+const DataRowGroup = ({ data, year }) => (
   <Fragment>
-    {Object.keys(data)
-      .sort(categorySort)
-      .map(key => (
-        <DataRow
-          key={key}
-          category={key}
-          data={data[key][year]}
-          entries={entries}
-          title={categoryLookup[key].title}
-          year={year}
-        />
-      ))}
+    {categories.map(({ category, title }) => (
+      <DataRow category={category} data={data[category][year]} title={title} />
+    ))}
   </Fragment>
 );
 
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
-  entries: PropTypes.array.isRequired,
   year: PropTypes.string.isRequired
 };
 
