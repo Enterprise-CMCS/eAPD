@@ -5,58 +5,22 @@ exports[`budget summary component data row group renders 1`] = `
   <DataRow
     category="statePersonnel"
     data={Object {}}
-    entries={
-      Array [
-        10,
-        20,
-        30,
-      ]
-    }
-    key="statePersonnel"
     title="State Staff"
-    year="1448"
   />
   <DataRow
     category="expenses"
     data={Object {}}
-    entries={
-      Array [
-        10,
-        20,
-        30,
-      ]
-    }
-    key="expenses"
     title="Other State Expenses"
-    year="1448"
   />
   <DataRow
     category="contractors"
     data={Object {}}
-    entries={
-      Array [
-        10,
-        20,
-        30,
-      ]
-    }
-    key="contractors"
     title="Private Contractor"
-    year="1448"
   />
   <DataRow
     category="combined"
     data={Object {}}
-    entries={
-      Array [
-        10,
-        20,
-        30,
-      ]
-    }
-    key="combined"
     title="Subtotal"
-    year="1448"
   />
 </Fragment>
 `;
