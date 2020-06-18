@@ -504,7 +504,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
       colSpan="5"
     >
       Activity 
-       Total Cost
+       Total Computable Medicaid Cost
     </td>
     <td
       className="budget-table--number"
@@ -981,7 +981,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
       colSpan="5"
     >
       Activity 
-       Total Cost
+       Total Computable Medicaid Cost
     </td>
     <td
       className="budget-table--number"
