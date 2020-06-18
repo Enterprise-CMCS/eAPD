@@ -41,7 +41,7 @@ const Activity = ({ activity, activityIndex }) => {
           </strong>
         </p>
         <p>
-          <em>Planned end date: </em>{' '}
+          <em>Target completion date: </em>{' '}
           {stateDateToDisplay(milestone.endDate) || 'None provided'}
         </p>
       </Fragment>
