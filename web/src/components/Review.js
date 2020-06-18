@@ -68,7 +68,7 @@ const Review = ({
 };
 
 Review.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   editHref: PropTypes.string,
   onDeleteClick: PropTypes.func,
   onEditClick: PropTypes.func
