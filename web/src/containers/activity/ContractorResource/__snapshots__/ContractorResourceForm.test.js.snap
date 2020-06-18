@@ -26,13 +26,13 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
   >
     <DateField
-      label="Start"
+      label="Start date"
       onChange={[Function]}
       value="1066-10-14"
     />
     <DateField
       hint=""
-      label="End"
+      label="End date"
       onChange={[Function]}
       value="1066-10-15"
     />
@@ -192,13 +192,13 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
   >
     <DateField
-      label="Start"
+      label="Start date"
       onChange={[Function]}
       value="1066-10-14"
     />
     <DateField
       hint=""
-      label="End"
+      label="End date"
       onChange={[Function]}
       value="1066-10-15"
     />
