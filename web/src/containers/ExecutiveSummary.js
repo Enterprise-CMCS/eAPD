@@ -43,7 +43,7 @@ const ExecutiveSummary = ({ data, jumpAction, total, years }) => {
                 Activity {i + 1}: {activity.name}
               </Fragment>
             }
-            headingLevel={4}
+            headingLevel="4"
             editHref=""
             onEditClick={navigateToActivity(activity.key, i)}
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
@@ -79,7 +79,7 @@ const ExecutiveSummary = ({ data, jumpAction, total, years }) => {
         <hr className="ds-u-border--dark ds-u-margin--0" />
         <Review
           heading="Total cost"
-          headingLevel={4}
+          headingLevel="4"
           className="ds-u-border--0"
         >
           <p>

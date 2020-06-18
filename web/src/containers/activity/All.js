@@ -17,7 +17,7 @@ const All = ({ add, activities }) => {
         {activities.length} program activities
       </h3>
       {activities.map((_, index) => (
-        <EntryDetails activityIndex={index} />
+        <EntryDetails activityIndex={index} key={index} />
       ))}
       <Button className="ds-u-margin-top--4" onClick={onAdd}>
         Add another activity

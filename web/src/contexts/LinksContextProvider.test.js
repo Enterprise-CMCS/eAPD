@@ -92,7 +92,9 @@ const activities = [
 
 describe('LinksContextProvider', () => {
   it('renders correctly', () => {
-    expect(shallow(<LinksContextProvider />)).toMatchSnapshot();
+    // children are a required prop of LinksContextProvider
+    const subject = <LinksContextProvider><div /></LinksContextProvider>;
+    expect(shallow(subject)).toMatchSnapshot();
   });
 
   it('returns a list of links', () => {

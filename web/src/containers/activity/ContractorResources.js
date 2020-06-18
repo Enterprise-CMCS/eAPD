@@ -52,7 +52,7 @@ const ContractorResources = ({
 };
 
 ContractorResources.propTypes = {
-  activityIndex: PropTypes.number.isRequired,
+  activityIndex: PropTypes.string.isRequired,
   addContractor: PropTypes.func.isRequired,
   contractors: PropTypes.array.isRequired,
   removeContractor: PropTypes.func.isRequired

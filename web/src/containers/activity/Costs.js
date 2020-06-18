@@ -20,7 +20,7 @@ const Costs = ({ activityIndex }) => (
 );
 
 Costs.propTypes = {
-  activityIndex: PropTypes.number.isRequired
+  activityIndex: PropTypes.string.isRequired
 };
 
 export default Costs;
