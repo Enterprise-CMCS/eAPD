@@ -17,7 +17,9 @@ const All = ({ add, activities }) => {
         {activities.length} program activities
       </h3>
       {activities.map((_, index) => (
-        <EntryDetails activityIndex={index} key={index} />
+        <EntryDetails
+          activityIndex={index}
+          key={index} /> // eslint-disable-line react/no-array-index-key
       ))}
       <Button className="ds-u-margin-top--4" onClick={onAdd}>
         Add another activity

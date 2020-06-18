@@ -194,6 +194,10 @@ CostAllocateFFPQuarterly.propTypes = {
   year: PropTypes.string.isRequired
 };
 
+CostAllocateFFPQuarterly.defaultProps = {
+  quarterlyFFP: null
+};
+
 const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
   const mapStateToProps = (state, props) =>

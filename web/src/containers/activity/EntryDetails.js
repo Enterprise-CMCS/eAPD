@@ -96,6 +96,7 @@ EntryDetails.propTypes = {
 };
 
 EntryDetails.defaultProps = {
+  fundingSource: null,
   name: ''
 };
 

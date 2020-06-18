@@ -47,7 +47,7 @@ const DataRowGroup = ({ data, year }) => (
       <DataRow
         category={category}
         data={data[category][year]}
-        key={i}
+        key={i}  // eslint-disable-line react/no-array-index-key
         title={title} />
     ))}
   </Fragment>
