@@ -12,7 +12,7 @@ exports[`the MilestoneReview component renders correctly 1`] = `
     className="ds-u-margin-top--2"
   >
     <strong>
-      Planned end date:
+      Target completion date:
     </strong>
      
     10/31/1940
