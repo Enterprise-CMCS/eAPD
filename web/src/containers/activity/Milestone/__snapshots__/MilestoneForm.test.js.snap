@@ -19,7 +19,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
   />
   <DateField
     hint=""
-    label="Planned end date"
+    label="Target completion date"
     onChange={[Function]}
     value="1942-8-16"
   />
