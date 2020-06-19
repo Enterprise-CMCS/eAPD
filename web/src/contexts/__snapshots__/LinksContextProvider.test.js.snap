@@ -57,7 +57,7 @@ Array [
       },
       Object {
         "id": "prev-activities-table",
-        "label": "Actual Costs",
+        "label": "Actual Expenditures",
       },
     ],
     "id": "previous-activities",
@@ -168,7 +168,7 @@ Array [
       },
       Object {
         "id": "prev-activities-table",
-        "label": "Actual Costs",
+        "label": "Actual Expenditures",
       },
     ],
     "id": "previous-activities",
