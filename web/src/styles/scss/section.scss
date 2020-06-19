@@ -1,7 +1,12 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
+.section--help-text {
+  border-bottom: 1px solid $color-gray-light;
+  padding-bottom: $spacer-2;
+}
+
 .subsection--title {
-  border-top: 1px solid $color-gray-dark;
+  border-top: 1px solid $color-gray-light;
   padding-top: $spacer-2;
 }
 
