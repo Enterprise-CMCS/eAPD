@@ -6,6 +6,7 @@ exports[`the (Activity) EntryDetails component does not render the delete button
   id="activity-activity 1 key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
@@ -34,6 +35,7 @@ exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
   id="activity-activity key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
@@ -52,13 +54,14 @@ exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
             |
           </span>
           <Button
+            className="ds-u-color--error"
             component="button"
             onClick={[Function]}
             size="small"
             type="button"
             variation="transparent"
           >
-            Remove
+            Delete
           </Button>
         </React.Fragment>
       </div>
@@ -76,6 +79,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
   id="activity-activity key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
@@ -94,13 +98,14 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            className="ds-u-color--error"
             component="button"
             onClick={[Function]}
             size="small"
             type="button"
             variation="transparent"
           >
-            Remove
+            Delete
           </Button>
         </React.Fragment>
       </div>
@@ -118,6 +123,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
   id="activity-activity key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
@@ -136,13 +142,14 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            className="ds-u-color--error"
             component="button"
             onClick={[Function]}
             size="small"
             type="button"
             variation="transparent"
           >
-            Remove
+            Delete
           </Button>
         </React.Fragment>
       </div>
@@ -160,6 +167,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
   id="activity-activity key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
@@ -178,13 +186,14 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            className="ds-u-color--error"
             component="button"
             onClick={[Function]}
             size="small"
             type="button"
             variation="transparent"
           >
-            Remove
+            Delete
           </Button>
         </React.Fragment>
       </div>
