@@ -23,7 +23,7 @@ export const DASHBOARD_TASK_BUTTON_TEXT = {
 };
 
 export const TABLE_HEADERS = {
-  actual: 'Actual',
+  actual: 'Actual Expenditures',
   approved: 'Approved',
   federal: (p = 90) => (
     <span>
@@ -31,11 +31,5 @@ export const TABLE_HEADERS = {
     </span>
   ),
   ffy: y => `FFY ${y}`,
-  total: (
-    <span>
-      Total computable
-      <br />
-      (Federal + state)
-    </span>
-  )
+  total: <span>Total computable (Federal + state)</span>
 };

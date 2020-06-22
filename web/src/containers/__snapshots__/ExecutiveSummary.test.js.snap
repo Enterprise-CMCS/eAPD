@@ -38,7 +38,7 @@ exports[`executive summary component navigates to activities 1`] = `
       >
         <li>
           <strong>
-            Date:
+            Start date - End date:
           </strong>
            
         </li>
@@ -147,7 +147,7 @@ exports[`executive summary component navigates to activities 1`] = `
       >
         <li>
           <strong>
-            Date:
+            Start date - End date:
           </strong>
            
         </li>
@@ -381,7 +381,7 @@ exports[`executive summary component renders correctly 1`] = `
       >
         <li>
           <strong>
-            Date:
+            Start date - End date:
           </strong>
            
         </li>
@@ -490,7 +490,7 @@ exports[`executive summary component renders correctly 1`] = `
       >
         <li>
           <strong>
-            Date:
+            Start date - End date:
           </strong>
            
         </li>

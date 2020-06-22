@@ -11,5 +11,5 @@ main:
   table:
     activity: Activity
     milestone: Milestone
-    start: Planned start
-    end: Planned end
+    start: Start date
+    end: End date

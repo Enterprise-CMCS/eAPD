@@ -1,10 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-
 import {
   plain as CostAllocateFFP,
   AllFFYsSummaryNarrative,
-  CostSummaryRows,
   mapStateToProps,
   mapDispatchToProps
 } from './CostAllocateFFP';
@@ -239,31 +237,6 @@ describe('the CostAllocateFFP component', () => {
     costAllocation['2'].ffp.federal = 'f';
     costAllocation['3'].ffp.federal = 'ff';
     expect(shallow(<AllFFYsSummaryNarrative {...p} />)).toMatchSnapshot();
-  });
-
-  it('renders internal cost summary rows component', () => {
-    expect(
-      shallow(
-        <CostSummaryRows
-          items={[
-            {
-              // shows unit cost, units, and math symbols
-              description: 'item 1',
-              totalCost: 100,
-              unitCost: 10,
-              units: '10 items'
-            },
-            {
-              // shows none of those things
-              description: 'item 2',
-              totalCost: 200,
-              unitCost: null,
-              units: null
-            }
-          ]}
-        />
-      )
-    ).toMatchSnapshot();
   });
 
   it('maps redux state to component props', () => {

@@ -85,12 +85,12 @@ const ContractorResourceForm = ({
       <FormLabel>Contract Term</FormLabel>
       <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
         <DateField
-          label="Start"
+          label="Start date"
           value={start}
           onChange={getDateHandler(setStartDate)}
         />
         <DateField
-          label="End"
+          label="End date"
           hint=""
           value={end}
           onChange={getDateHandler(setEndDate)}
