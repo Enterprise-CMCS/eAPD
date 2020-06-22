@@ -1548,6 +1548,894 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
 </Fragment>
 `;
 
+exports[`the CostAllocateFFP component renders correctly renders correctly with add activity button 1`] = `
+<Fragment>
+  <h3
+    className="subsection--title ds-h3"
+  >
+    Cost Allocation and Budget for FFY 
+    1990
+  </h3>
+  <table
+    className="budget-table activity-budget-table"
+  >
+    <tbody>
+      <tr
+        className="budget-table--row__header"
+      >
+        <th
+          scope="col"
+        >
+          State Staff
+        </th>
+        <th
+          colSpan="2"
+          scope="col"
+        >
+          <span
+            className="sr-only"
+          >
+            unit cost
+          </span>
+        </th>
+        <th
+          colSpan="2"
+          scope="col"
+        >
+          <span
+            className="sr-only"
+          >
+            units
+          </span>
+        </th>
+        <th
+          scope="col"
+        >
+          Total cost
+        </th>
+      </tr>
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "key person (APD Key Personnel)",
+              "totalCost": 1002,
+              "unitCost": null,
+              "units": "100% time",
+            },
+          ]
+        }
+      />
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "personnel role",
+              "totalCost": 4000,
+              "unitCost": 40,
+              "units": "0.5 FTE",
+            },
+          ]
+        }
+      />
+      <tr
+        className="budget-table--subtotal budget-table--row__highlight"
+      >
+        <td
+          className="title"
+          colSpan="5"
+        >
+          State Staff Subtotal
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1006
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="budget-table--row__header"
+      >
+        <th
+          colSpan="6"
+          scope="col"
+        >
+          Other State Expenses
+        </th>
+      </tr>
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "costly costs",
+              "totalCost": 3000,
+              "unitCost": null,
+              "units": null,
+            },
+          ]
+        }
+      />
+      <tr
+        className="budget-table--subtotal budget-table--row__highlight"
+      >
+        <td
+          className="title"
+          colSpan="5"
+        >
+          Other State Expenses Subtotal
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1004
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="budget-table--row__header"
+      >
+        <th
+          colSpan="6"
+          scope="col"
+        >
+          Private Contractor
+        </th>
+      </tr>
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "contractor 2.1",
+              "totalCost": 2000,
+              "unitCost": null,
+              "units": null,
+            },
+            Object {
+              "description": "contractor 2.2",
+              "totalCost": 2001,
+              "unitCost": 20,
+              "units": "20 hours",
+            },
+          ]
+        }
+      />
+      <tr
+        className="budget-table--subtotal budget-table--row__highlight"
+      >
+        <td
+          className="title"
+          colSpan="5"
+        >
+          Private Contractor Subtotal
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1000
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="budget-table--subtotal"
+      >
+        <td
+          colSpan="5"
+        >
+          Activity Total Cost
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1008
+          </Dollars>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div
+    className="data-entry-box ds-u-margin-bottom--5"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "p",
+        }
+      }
+      reverse={false}
+      source="activities.costAllocate.ffp.otherFundingInstruction"
+    />
+    <DollarField
+      label="FFY 1990"
+      labelClassName="sr-only"
+      name="ffy-1990"
+      onChange={[Function]}
+      value={100}
+    />
+  </div>
+  <table
+    className="budget-table activity-budget-table"
+  >
+    <tbody>
+      <tr
+        className="budget-table--subtotal budget-table--row__header"
+      >
+        <th
+          colSpan="2"
+        >
+          Activity Total Cost
+        </th>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1008
+          </Dollars>
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="title"
+        >
+          Other Funding
+        </td>
+        <td>
+          -
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1005
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="budget-table--subtotal budget-table--row__highlight"
+      >
+        <td
+          className="title"
+        >
+          Medicaid Share
+        </td>
+        <td
+          className="budget-table--number"
+          colSpan="2"
+        >
+          <Dollars>
+            1003
+          </Dollars>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div
+    className="data-entry-box ds-u-margin-bottom--5"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "p",
+        }
+      }
+      reverse={false}
+      source="activities.costAllocate.ffp.federalStateSplitInstruction"
+    />
+    <Dropdown
+      label="federal-state split"
+      labelClassName="sr-only"
+      name="ffp-1990"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "90-10",
+            "value": "90-10",
+          },
+          Object {
+            "label": "75-25",
+            "value": "75-25",
+          },
+          Object {
+            "label": "50-50",
+            "value": "50-50",
+          },
+        ]
+      }
+      value="90-10"
+    />
+  </div>
+  <table
+    className="budget-table activity-budget-table"
+  >
+    <tbody>
+      <tr
+        className="budget-table--subtotal budget-table--row__header"
+      >
+        <th
+          colSpan="5"
+        >
+          Medicaid Share
+        </th>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1003
+          </Dollars>
+        </td>
+      </tr>
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "Federal Share",
+              "totalCost": 90,
+              "unitCost": 1003,
+              "units": "90%",
+            },
+            Object {
+              "description": "State Share",
+              "totalCost": 1007,
+              "unitCost": 1003,
+              "units": "10%",
+            },
+          ]
+        }
+      />
+    </tbody>
+  </table>
+  <div
+    className="data-entry-box ds-u-margin-bottom--5"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "p",
+        }
+      }
+      reverse={false}
+      source="activities.costAllocate.ffp.quarterlyFFPInstruction"
+    />
+    <Connect(CostAllocateFFPQuarterly)
+      aKey="key"
+      activityIndex={1}
+      isViewOnly={false}
+      year="1990"
+    />
+  </div>
+  <h3
+    className="subsection--title ds-h3"
+  >
+    Cost Allocation and Budget for FFY 
+    1991
+  </h3>
+  <table
+    className="budget-table activity-budget-table"
+  >
+    <tbody>
+      <tr
+        className="budget-table--row__header"
+      >
+        <th
+          scope="col"
+        >
+          State Staff
+        </th>
+        <th
+          colSpan="2"
+          scope="col"
+        >
+          <span
+            className="sr-only"
+          >
+            unit cost
+          </span>
+        </th>
+        <th
+          colSpan="2"
+          scope="col"
+        >
+          <span
+            className="sr-only"
+          >
+            units
+          </span>
+        </th>
+        <th
+          scope="col"
+        >
+          Total cost
+        </th>
+      </tr>
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "key person (APD Key Personnel)",
+              "totalCost": 8002,
+              "unitCost": null,
+              "units": "100% time",
+            },
+          ]
+        }
+      />
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "personnel role",
+              "totalCost": 9000,
+              "unitCost": 90,
+              "units": "0.5 FTE",
+            },
+          ]
+        }
+      />
+      <tr
+        className="budget-table--subtotal budget-table--row__highlight"
+      >
+        <td
+          className="title"
+          colSpan="5"
+        >
+          State Staff Subtotal
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            7006
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="budget-table--row__header"
+      >
+        <th
+          colSpan="6"
+          scope="col"
+        >
+          Other State Expenses
+        </th>
+      </tr>
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "costly costs",
+              "totalCost": 9000,
+              "unitCost": null,
+              "units": null,
+            },
+          ]
+        }
+      />
+      <tr
+        className="budget-table--subtotal budget-table--row__highlight"
+      >
+        <td
+          className="title"
+          colSpan="5"
+        >
+          Other State Expenses Subtotal
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            7004
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="budget-table--row__header"
+      >
+        <th
+          colSpan="6"
+          scope="col"
+        >
+          Private Contractor
+        </th>
+      </tr>
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "contractor 2.1",
+              "totalCost": 6000,
+              "unitCost": null,
+              "units": null,
+            },
+            Object {
+              "description": "contractor 2.2",
+              "totalCost": 6001,
+              "unitCost": 60,
+              "units": "60 hours",
+            },
+          ]
+        }
+      />
+      <tr
+        className="budget-table--subtotal budget-table--row__highlight"
+      >
+        <td
+          className="title"
+          colSpan="5"
+        >
+          Private Contractor Subtotal
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            7000
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="budget-table--subtotal"
+      >
+        <td
+          colSpan="5"
+        >
+          Activity Total Cost
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            7008
+          </Dollars>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div
+    className="data-entry-box ds-u-margin-bottom--5"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "p",
+        }
+      }
+      reverse={false}
+      source="activities.costAllocate.ffp.otherFundingInstruction"
+    />
+    <DollarField
+      label="FFY 1991"
+      labelClassName="sr-only"
+      name="ffy-1991"
+      onChange={[Function]}
+      value={200}
+    />
+  </div>
+  <table
+    className="budget-table activity-budget-table"
+  >
+    <tbody>
+      <tr
+        className="budget-table--subtotal budget-table--row__header"
+      >
+        <th
+          colSpan="2"
+        >
+          Activity Total Cost
+        </th>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            7008
+          </Dollars>
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="title"
+        >
+          Other Funding
+        </td>
+        <td>
+          -
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            7005
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="budget-table--subtotal budget-table--row__highlight"
+      >
+        <td
+          className="title"
+        >
+          Medicaid Share
+        </td>
+        <td
+          className="budget-table--number"
+          colSpan="2"
+        >
+          <Dollars>
+            7003
+          </Dollars>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div
+    className="data-entry-box ds-u-margin-bottom--5"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "p",
+        }
+      }
+      reverse={false}
+      source="activities.costAllocate.ffp.federalStateSplitInstruction"
+    />
+    <Dropdown
+      label="federal-state split"
+      labelClassName="sr-only"
+      name="ffp-1991"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "90-10",
+            "value": "90-10",
+          },
+          Object {
+            "label": "75-25",
+            "value": "75-25",
+          },
+          Object {
+            "label": "50-50",
+            "value": "50-50",
+          },
+        ]
+      }
+      value="50-50"
+    />
+  </div>
+  <table
+    className="budget-table activity-budget-table"
+  >
+    <tbody>
+      <tr
+        className="budget-table--subtotal budget-table--row__header"
+      >
+        <th
+          colSpan="5"
+        >
+          Medicaid Share
+        </th>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            7003
+          </Dollars>
+        </td>
+      </tr>
+      <CostSummaryRows
+        items={
+          Array [
+            Object {
+              "description": "Federal Share",
+              "totalCost": 50,
+              "unitCost": 7003,
+              "units": "50%",
+            },
+            Object {
+              "description": "State Share",
+              "totalCost": 7007,
+              "unitCost": 7003,
+              "units": "50%",
+            },
+          ]
+        }
+      />
+    </tbody>
+  </table>
+  <div
+    className="data-entry-box ds-u-margin-bottom--5"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "p",
+        }
+      }
+      reverse={false}
+      source="activities.costAllocate.ffp.quarterlyFFPInstruction"
+    />
+    <Connect(CostAllocateFFPQuarterly)
+      aKey="key"
+      activityIndex={1}
+      isViewOnly={false}
+      year="1991"
+    />
+  </div>
+  <h3
+    className="subsection--title ds-h3"
+  >
+    FFY 
+    1990
+    -
+    1991
+     Totals
+  </h3>
+  <AllFFYsSummaryNarrative
+    activityName="activity name"
+    costAllocation={
+      Object {
+        "1990": Object {
+          "ffp": Object {
+            "federal": "90",
+            "state": "10",
+          },
+          "other": 100,
+        },
+        "1991": Object {
+          "ffp": Object {
+            "federal": "50",
+            "state": "50",
+          },
+          "other": 200,
+        },
+      }
+    }
+    costSummary={
+      Object {
+        "total": Object {
+          "federalShare": 100,
+          "medicaidShare": 200,
+          "otherFunding": 300,
+          "stateShare": 400,
+          "totalCost": 500,
+        },
+        "years": Object {
+          "1990": Object {
+            "contractorResources": Array [
+              Object {
+                "description": "contractor 2.1",
+                "totalCost": 2000,
+                "unitCost": null,
+                "units": null,
+              },
+              Object {
+                "description": "contractor 2.2",
+                "totalCost": 2001,
+                "unitCost": 20,
+                "units": "20 hours",
+              },
+            ],
+            "contractorResourcesTotal": 1000,
+            "federalPercent": 1001,
+            "federalShare": 90,
+            "keyPersonnel": Array [
+              Object {
+                "description": "key person (APD Key Personnel)",
+                "totalCost": 1002,
+                "unitCost": null,
+                "units": "100% time",
+              },
+            ],
+            "medicaidShare": 1003,
+            "nonPersonnel": Array [
+              Object {
+                "description": "costly costs",
+                "totalCost": 3000,
+                "unitCost": null,
+                "units": null,
+              },
+            ],
+            "nonPersonnelTotal": 1004,
+            "otherFunding": 1005,
+            "statePercent": 10,
+            "statePersonnel": Array [
+              Object {
+                "description": "personnel role",
+                "totalCost": 4000,
+                "unitCost": 40,
+                "units": "0.5 FTE",
+              },
+            ],
+            "statePersonnelTotal": 1006,
+            "stateShare": 1007,
+            "totalCost": 1008,
+          },
+          "1991": Object {
+            "contractorResources": Array [
+              Object {
+                "description": "contractor 2.1",
+                "totalCost": 6000,
+                "unitCost": null,
+                "units": null,
+              },
+              Object {
+                "description": "contractor 2.2",
+                "totalCost": 6001,
+                "unitCost": 60,
+                "units": "60 hours",
+              },
+            ],
+            "contractorResourcesTotal": 7000,
+            "federalPercent": 7001,
+            "federalShare": 50,
+            "keyPersonnel": Array [
+              Object {
+                "description": "key person (APD Key Personnel)",
+                "totalCost": 8002,
+                "unitCost": null,
+                "units": "100% time",
+              },
+            ],
+            "medicaidShare": 7003,
+            "nonPersonnel": Array [
+              Object {
+                "description": "costly costs",
+                "totalCost": 9000,
+                "unitCost": null,
+                "units": null,
+              },
+            ],
+            "nonPersonnelTotal": 7004,
+            "otherFunding": 7005,
+            "statePercent": 50,
+            "statePersonnel": Array [
+              Object {
+                "description": "personnel role",
+                "totalCost": 9000,
+                "unitCost": 90,
+                "units": "0.5 FTE",
+              },
+            ],
+            "statePersonnelTotal": 7006,
+            "stateShare": 7007,
+            "totalCost": 7008,
+          },
+        },
+      }
+    }
+    stateName="test state"
+  />
+  <div
+    className="pre-button-section-break"
+  >
+    <Button
+      component="button"
+      onClick={[Function]}
+      type="button"
+    >
+      Add another activity
+    </Button>
+  </div>
+</Fragment>
+`;
+
 exports[`the CostAllocateFFP component renders internal cost summary rows component 1`] = `
 Array [
   <tr

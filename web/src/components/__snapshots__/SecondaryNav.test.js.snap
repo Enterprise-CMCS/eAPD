@@ -2,7 +2,7 @@
 
 exports[`Secondary Nav component renders correctly 1`] = `
 <div
-  className="next-prev-buttons"
+  className="pre-button-section-break"
 >
   <Connect(NextPreviousButtons) />
 </div>
