@@ -2,7 +2,7 @@
 
 exports[`apd previous activity table, grand total component renders correctly 1`] = `
 <table
-  className="budget-table budget-table--totals"
+  className="budget-table"
 >
   <caption
     className="ds-h4"
@@ -30,7 +30,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
         className="ds-u-text-align--right"
         id="prev_act_total_actual"
       >
-        FFP Actual
+        FFP Actual Expenditures
       </th>
     </tr>
   </thead>

@@ -36,8 +36,14 @@ const ApdPreviousActivityTable = ({
           <th id="prev_act_hit_header_ffy">
             <span className="ds-u-visibility--screen-reader">Year</span>
           </th>
-          <th id="prev_act_hithie_total">{TABLE_HEADERS.total}</th>
-          <th colSpan="2" id="prev_act_hithie_federal">
+          <th id="prev_act_hithie_total" className="ds-u-text-align--right">
+            {TABLE_HEADERS.total}
+          </th>
+          <th
+            colSpan="2"
+            id="prev_act_hithie_federal"
+            className="ds-u-text-align--right"
+          >
             {TABLE_HEADERS.federal()}
           </th>
         </tr>
