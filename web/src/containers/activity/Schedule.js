@@ -25,23 +25,23 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
       <Fragment>
         <div className="ds-u-padding-y--0 visibility--screen">
           <DateField
-            label="Planned start date"
+            label="Start date"
             value={activity.plannedStartDate}
             onChange={handleActivityStartChange}
           />
           <DateField
-            label="Planned end date"
+            label="End date"
             value={activity.plannedEndDate}
             onChange={handleActivityEndChange}
           />
         </div>
         <div className="visibility--print">
           <p>
-            <strong>Planned start date:</strong>{' '}
+            <strong>Start date:</strong>{' '}
             {stateDateToDisplay(activity.plannedStartDate)}
           </p>
           <p>
-            <strong>Planned end date:</strong>{' '}
+            <strong>End date:</strong>{' '}
             {stateDateToDisplay(activity.plannedEndDate)}
           </p>
           <hr />
