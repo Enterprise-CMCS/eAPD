@@ -1,11 +1,11 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
-.next-prev-buttons {
+.pre-button-section-break {
   margin: 32px 0px;
   padding-top: 32px;
   width: 100%;
   overflow: hidden;
-  border-top: 2px solid #d6d7d9;
+  border-top: 2px solid $color-gray-lighter;
 }
 
 .next-prev-button-left {

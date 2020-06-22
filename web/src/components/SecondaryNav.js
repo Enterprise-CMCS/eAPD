@@ -6,7 +6,7 @@ const SecondaryNav = () => {
   return (
     <LinksContextConsumer>
       {context => (
-        <div className="next-prev-buttons">
+        <div className="pre-button-section-break">
           <NextPreviousButtons context={context} />
         </div>
       )}

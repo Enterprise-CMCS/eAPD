@@ -10,8 +10,21 @@ import {
 } from './CostAllocateFFP';
 import {
   setCostAllocationFFPFundingSplit,
-  setCostAllocationFFPOtherFunding
+  setCostAllocationFFPOtherFunding,
+  addActivity
 } from '../../actions/editActivity';
+import { jumpTo } from '../../actions/app';
+
+let mockPush;
+
+jest.mock('react-router-dom', () => {
+  mockPush = jest.fn();
+  return {
+    useHistory: jest.fn().mockReturnValue({ push: mockPush })
+  };
+});
+
+global.scrollTo = jest.fn();
 
 describe('the CostAllocateFFP component', () => {
   const props = {
@@ -135,12 +148,16 @@ describe('the CostAllocateFFP component', () => {
     },
     setFundingSplit: jest.fn(),
     setOtherFunding: jest.fn(),
-    stateName: 'test state'
+    stateName: 'test state',
+    add: jest.fn(),
+    jumpTo: jest.fn()
   };
 
   beforeEach(() => {
     props.setFundingSplit.mockClear();
     props.setOtherFunding.mockClear();
+    props.add.mockClear();
+    props.jumpTo.mockClear();
   });
 
   describe('renders correctly', () => {
@@ -152,6 +169,24 @@ describe('the CostAllocateFFP component', () => {
       const component = shallow(<CostAllocateFFP {...props} />);
       expect(component).toMatchSnapshot();
     });
+    it('renders correctly with add activity button', () => {
+      const component = shallow(
+        <CostAllocateFFP {...props} activityIndex={1} activityCount={2} />
+      );
+      expect(component).toMatchSnapshot();
+    });
+  });
+
+  it('handles add activity button click', () => {
+    const component = shallow(
+      <CostAllocateFFP {...props} activityIndex={1} activityCount={2} />
+    );
+    component.find('Button').simulate('click');
+
+    expect(props.add).toHaveBeenCalled();
+    expect(props.jumpTo).toHaveBeenCalledWith('activities-list');
+    expect(mockPush).toHaveBeenCalledWith('/apd/activities');
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
   it('handles changes to other funding', () => {
@@ -244,18 +279,28 @@ describe('the CostAllocateFFP component', () => {
     const getState = jest.fn();
     getState.mockReturnValue({ name: 'denial' });
 
+    const getActivityCount = jest.fn();
+    getActivityCount.mockReturnValue(4);
+
     expect(
       mapStateToProps(
         'my state object',
         { activityIndex: 0 },
-        { getActivity, getCostAllocation, getCostSummary, getState }
+        {
+          getActivity,
+          getCostAllocation,
+          getCostSummary,
+          getState,
+          getActivityCount
+        }
       )
     ).toEqual({
       aKey: 'activity key',
       activityName: 'activity name',
       costAllocation: 'cost allocation',
       costSummary: 'cost summary',
-      stateName: 'denial'
+      stateName: 'denial',
+      activityCount: 4
     });
 
     expect(getActivity).toHaveBeenCalledWith('my state object', {
@@ -268,6 +313,7 @@ describe('the CostAllocateFFP component', () => {
       activityIndex: 0
     });
     expect(getState).toHaveBeenCalledWith('my state object');
+    expect(getActivityCount).toHaveBeenCalledWith('my state object');
 
     // Now test that it builds a default activity name if none is provided
     getActivity.mockReturnValue({ key: 'activity key', name: '' });
@@ -276,21 +322,30 @@ describe('the CostAllocateFFP component', () => {
       mapStateToProps(
         'my state object',
         { activityIndex: 0 },
-        { getActivity, getCostAllocation, getCostSummary, getState }
+        {
+          getActivity,
+          getCostAllocation,
+          getCostSummary,
+          getState,
+          getActivityCount
+        }
       )
     ).toEqual({
       aKey: 'activity key',
       activityName: 'Activity 1',
       costAllocation: 'cost allocation',
       costSummary: 'cost summary',
-      stateName: 'denial'
+      stateName: 'denial',
+      activityCount: 4
     });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
       setFundingSplit: setCostAllocationFFPFundingSplit,
-      setOtherFunding: setCostAllocationFFPOtherFunding
+      setOtherFunding: setCostAllocationFFPOtherFunding,
+      add: addActivity,
+      jumpTo
     });
   });
 });
