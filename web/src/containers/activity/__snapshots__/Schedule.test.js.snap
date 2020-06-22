@@ -26,14 +26,14 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
   >
     <p>
       <strong>
-        Planned start date:
+        Start date:
       </strong>
        
       10/2/1944
     </p>
     <p>
       <strong>
-        Planned end date:
+        End date:
       </strong>
        
       11/8/1944

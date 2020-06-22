@@ -37,11 +37,11 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
         </div>
         <div className="visibility--print">
           <p>
-            <strong>Planned start date:</strong>{' '}
+            <strong>Start date:</strong>{' '}
             {stateDateToDisplay(activity.plannedStartDate)}
           </p>
           <p>
-            <strong>Planned end date:</strong>{' '}
+            <strong>End date:</strong>{' '}
             {stateDateToDisplay(activity.plannedEndDate)}
           </p>
           <hr />
