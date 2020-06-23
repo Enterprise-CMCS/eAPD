@@ -15,7 +15,7 @@ import {
 describe('activity Objectives and Key Results component', () => {
   const activityIndex = 0;
   const props = {
-    activityIndex: activityIndex,
+    activityIndex,
     objectives: [
       { key: 'objective 1' },
       { key: 'objective 2' },

@@ -11,7 +11,7 @@ import { addContractor, removeContractor } from '../../actions/editActivity';
 describe('the ContractorResources component', () => {
   const activityIndex = 0;
   const props = {
-    activityIndex: activityIndex,
+    activityIndex,
     contractors: [
       {
         id: 'contractor 1',
