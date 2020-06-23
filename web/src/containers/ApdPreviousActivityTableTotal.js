@@ -10,7 +10,7 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
   const years = Object.keys(totals);
 
   return (
-    <table className="budget-table budget-table--totals">
+    <table className="budget-table">
       <caption className="ds-h4">Grand totals: Federal HIT, HIE, MMIS</caption>
       <thead>
         <tr>
@@ -20,9 +20,8 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
           <th id="prev_act_total_approved" className="ds-u-text-align--right">
             FFP Approved
           </th>
-
           <th id="prev_act_total_actual" className="ds-u-text-align--right">
-            FFP Actual
+            FFP Actual Expenditures
           </th>
         </tr>
       </thead>
