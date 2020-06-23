@@ -59,7 +59,7 @@ const Objectives = ({
 };
 
 Objectives.propTypes = {
-  activityIndex: PropTypes.string.isRequired,
+  activityIndex: PropTypes.number.isRequired,
   add: PropTypes.func.isRequired,
   addKeyResult: PropTypes.func.isRequired,
   objectives: PropTypes.array.isRequired,

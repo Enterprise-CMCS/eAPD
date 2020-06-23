@@ -9,8 +9,9 @@ import {
 import { addContractor, removeContractor } from '../../actions/editActivity';
 
 describe('the ContractorResources component', () => {
+  const activityIndex = 0;
   const props = {
-    activityIndex: 'activity index',
+    activityIndex: activityIndex,
     contractors: [
       {
         id: 'contractor 1',
@@ -78,12 +79,12 @@ describe('the ContractorResources component', () => {
 
     it('handles adding a new contractor resource', () => {
       list.prop('onAddClick')();
-      expect(props.addContractor).toHaveBeenCalledWith('activity index');
+      expect(props.addContractor).toHaveBeenCalledWith(activityIndex);
     });
 
     it('handles deleting a contractor resource', () => {
       list.prop('onDeleteClick')(1);
-      expect(props.removeContractor).toHaveBeenCalledWith('activity index', 1);
+      expect(props.removeContractor).toHaveBeenCalledWith(activityIndex, 1);
     });
   });
 

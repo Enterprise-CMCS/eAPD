@@ -13,8 +13,9 @@ import {
 } from '../../actions/editActivity';
 
 describe('activity Objectives and Key Results component', () => {
+  const activityIndex = 0;
   const props = {
-    activityIndex: 'activity index',
+    activityIndex: activityIndex,
     objectives: [
       { key: 'objective 1' },
       { key: 'objective 2' },
@@ -40,12 +41,12 @@ describe('activity Objectives and Key Results component', () => {
 
     it('handles adding a new objective', () => {
       list.prop('onAddClick')();
-      expect(props.add).toHaveBeenCalledWith('activity index');
+      expect(props.add).toHaveBeenCalledWith(activityIndex);
     });
 
     it('handles deleting an objective', () => {
       list.prop('onDeleteClick')(1);
-      expect(props.remove).toHaveBeenCalledWith('activity index', 1);
+      expect(props.remove).toHaveBeenCalledWith(activityIndex, 1);
     });
   });
 

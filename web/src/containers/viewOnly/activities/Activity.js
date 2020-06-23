@@ -293,7 +293,7 @@ const Activity = ({ activity, activityIndex }) => {
 
 Activity.propTypes = {
   activity: PropTypes.array.isRequired,
-  activityIndex: PropTypes.string.isRequired
+  activityIndex: PropTypes.number.isRequired
 };
 
 export default Activity;
