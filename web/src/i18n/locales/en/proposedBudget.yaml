@@ -2,12 +2,25 @@ title: Proposed Budget
 helpText: >-
   Review topline budget data associated with this APD. Totals are based on the information entered by
   the state. Capture incentive payments if applicable.
+summaryBudgetByActivity:
+  title: Summary Budget By Activity
+  totalMedicaidCost:
+    detail: >-
+      The following tables summarize the **Total Computable Medicaid Cost** for all activities organized by their funding 
+      source (**HIT**, **HIE**, and/or **MMIS**) and their cost category (**State Personnel**, **Other State Expenses**, and **Private 
+      Contractor Costs**) by FFY. Other funding amounts described in the cost allocation section of the activities are 
+      not included in these tables, but can be reviewed in the individual activity summary tables on this page.
+  activityBreakdown:
+    detail: >-
+      These tables summarize **State Staff**, **Other State Expenses**, and **Private Contractors** for all activities in this APD, organized by FFY.  
+      These tables provide subtotals for each FFY and calculate the **Total Computable Medicaid Cost** by subtracting other costs that 
+      were described in each activity. The other costs provided here are the sum of other costs from each activity.
 summaryBudget:
   title: Summary Budget Table
   instruction:
     detail: >-
-      These tables summarize the calculated Medicaid Share (Total Activity Cost minus any Other Funding amounts)
-      for state personnel, non-personnel, and private contractor costs for all activities by FFY. 
+      These tables summarize the calculated Medicaid Total Computable (Total Activity Cost minus any Other Funding amounts)
+      for state personnel, private contractor, and other state expenses for all activities by FFY. 
       The tables provide subtotals for each of these categories by program area with the calculated 
       Federal share by FFP rate and the associated state share. The final table in this section
       provides the total Medicaid cost for all activities in this APD by FFY.

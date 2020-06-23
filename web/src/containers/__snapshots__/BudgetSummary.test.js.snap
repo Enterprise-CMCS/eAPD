@@ -3,60 +3,24 @@
 exports[`budget summary component data row group renders 1`] = `
 <Fragment>
   <DataRow
-    category="combined"
+    category="statePersonnel"
     data={Object {}}
-    entries={
-      Array [
-        10,
-        20,
-        30,
-      ]
-    }
-    key="combined"
-    title="Subtotal"
-    year="1448"
-  />
-  <DataRow
-    category="contractors"
-    data={Object {}}
-    entries={
-      Array [
-        10,
-        20,
-        30,
-      ]
-    }
-    key="contractors"
-    title="Contracted Resources"
-    year="1448"
+    title="State Staff"
   />
   <DataRow
     category="expenses"
     data={Object {}}
-    entries={
-      Array [
-        10,
-        20,
-        30,
-      ]
-    }
-    key="expenses"
-    title="Non-Personnel"
-    year="1448"
+    title="Other State Expenses"
   />
   <DataRow
-    category="statePersonnel"
+    category="contractors"
     data={Object {}}
-    entries={
-      Array [
-        10,
-        20,
-        30,
-      ]
-    }
-    key="statePersonnel"
-    title="Project State Staff"
-    year="1448"
+    title="Private Contractor"
+  />
+  <DataRow
+    category="combined"
+    data={Object {}}
+    title="Subtotal"
   />
 </Fragment>
 `;
@@ -74,7 +38,7 @@ exports[`budget summary component data row renders with data 1`] = `
     className="budget-table--number"
   >
     <Dollars>
-      1000
+      2
     </Dollars>
   </td>
   <td
@@ -88,7 +52,7 @@ exports[`budget summary component data row renders with data 1`] = `
     className="budget-table--number"
   >
     <Dollars>
-      2
+      1000
     </Dollars>
   </td>
 </tr>
@@ -139,7 +103,7 @@ exports[`budget summary component header row renders 1`] = `
     className="ds-u-text-align--right"
     scope="col"
   >
-    Medicaid Total
+    State Total
   </th>
   <th
     className="ds-u-text-align--right"
@@ -151,7 +115,7 @@ exports[`budget summary component header row renders 1`] = `
     className="ds-u-text-align--right"
     scope="col"
   >
-    State Total
+    Medicaid Total Computable
   </th>
 </tr>
 `;
@@ -168,7 +132,7 @@ exports[`budget summary component header row renders 2`] = `
     className="ds-u-text-align--right"
     scope="col"
   >
-    Medicaid Total
+    State Total
   </th>
   <th
     className="ds-u-text-align--right"
@@ -180,7 +144,7 @@ exports[`budget summary component header row renders 2`] = `
     className="ds-u-text-align--right"
     scope="col"
   >
-    State Total
+    Medicaid Total Computable
   </th>
 </tr>
 `;
@@ -463,7 +427,7 @@ exports[`budget summary component renders correctly 1`] = `
     <caption
       className="ds-h4"
     >
-      Project Activities Totals
+      Activities Totals
     </caption>
     <thead>
       <tr>
@@ -475,7 +439,7 @@ exports[`budget summary component renders correctly 1`] = `
           className="ds-u-text-align--right"
           scope="col"
         >
-          Medicaid Total
+          State Total
         </th>
         <th
           className="ds-u-text-align--right"
@@ -487,7 +451,7 @@ exports[`budget summary component renders correctly 1`] = `
           className="ds-u-text-align--right"
           scope="col"
         >
-          State Total
+          Medicaid Total Computable
         </th>
       </tr>
     </thead>
@@ -505,7 +469,7 @@ exports[`budget summary component renders correctly 1`] = `
           className="budget-table--number"
         >
           <Dollars>
-            1000
+            2
           </Dollars>
         </td>
         <td
@@ -519,7 +483,7 @@ exports[`budget summary component renders correctly 1`] = `
           className="budget-table--number"
         >
           <Dollars>
-            2
+            1000
           </Dollars>
         </td>
       </tr>
@@ -536,7 +500,7 @@ exports[`budget summary component renders correctly 1`] = `
           className="budget-table--number"
         >
           <Dollars>
-            2000
+            20
           </Dollars>
         </td>
         <td
@@ -550,7 +514,7 @@ exports[`budget summary component renders correctly 1`] = `
           className="budget-table--number"
         >
           <Dollars>
-            20
+            2000
           </Dollars>
         </td>
       </tr>

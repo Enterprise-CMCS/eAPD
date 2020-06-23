@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Section, Subsection } from '../components/Section';
+import SummaryBudgetByActivity from './SummaryBudgetByActivity';
 import BudgetSummary from './BudgetSummary';
 import Waypoint from './ConnectedWaypoint';
 import IncentivePayments from './IncentivePayments';
@@ -8,6 +9,14 @@ import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
   <Section id="budget" resource="proposedBudget">
+    <Waypoint id="summary-schedule-by-activity-table" />
+    <Subsection
+      id="summary-schedule-by-activity-table"
+      resource="proposedBudget.summaryBudgetByActivity"
+    >
+      <SummaryBudgetByActivity />
+    </Subsection>
+
     <Waypoint id="budget-summary-table" />
     <Subsection
       id="budget-summary-table"

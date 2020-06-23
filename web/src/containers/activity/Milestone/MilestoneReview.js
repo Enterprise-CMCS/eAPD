@@ -19,7 +19,7 @@ const MilestoneReview = ({
       onEditClick={expand}
     >
       <p className="ds-u-margin-top--2">
-        <strong>Planned end date:</strong> {formattedDate}
+        <strong>Target completion date:</strong> {formattedDate}
       </p>
     </Review>
   );
