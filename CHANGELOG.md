@@ -26,9 +26,6 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2246]: https://github.com/18F/cms-hitech-apd/issues/2246
 [#2251]: https://github.com/18F/cms-hitech-apd/issues/2251
 [#2290]: https://github.com/18F/cms-hitech-apd/issues/2290
-<<<<<<< HEAD
 [#2309]: https://github.com/18F/cms-hitech-apd/issues/2309
-=======
 [#2291]: https://github.com/18F/cms-hitech-apd/issues/2291
 [#2170]: https://github.com/18F/cms-hitech-apd/issues/2170
->>>>>>> master
