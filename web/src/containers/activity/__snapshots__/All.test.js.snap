@@ -6,19 +6,22 @@ exports[`the Activities component renders correctly 1`] = `
   resource="activities"
 >
   <h3
-    className="subsection--title ds-h3"
+    className="ds-h3 ds-u-padding-bottom--1"
   >
     3
-     program activities
+     Program Activities
   </h3>
   <Connect(EntryDetails)
     activityIndex={0}
+    key="key1"
   />
   <Connect(EntryDetails)
     activityIndex={1}
+    key="key2"
   />
   <Connect(EntryDetails)
     activityIndex={2}
+    key="key3"
   />
   <Button
     className="ds-u-margin-top--4"

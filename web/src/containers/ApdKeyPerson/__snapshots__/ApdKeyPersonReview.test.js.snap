@@ -5,7 +5,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
   <div
     className="visibility--screen"
   >
-    <StandardReview
+    <Review
       editHref={null}
       heading="13. Bob the Builder"
       headingLevel="4"
@@ -75,12 +75,12 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </Dollars>
         </div>
       </div>
-    </StandardReview>
+    </Review>
   </div>
   <div
     className="visibility--print"
   >
-    <StandardReview
+    <Review
       editHref={null}
       heading="13. Bob the Builder"
       onDeleteClick={null}
@@ -152,7 +152,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </Dollars>
         </div>
       </div>
-    </StandardReview>
+    </Review>
   </div>
 </Fragment>
 `;

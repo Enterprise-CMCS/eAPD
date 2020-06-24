@@ -24,7 +24,7 @@ const Section = ({ children, id, resource }) => {
   return (
     <section id={id}>
       {title && <h2 className="ds-h2">{title}</h2>}
-      {helptext && <span className="ds-text--lead">{helptext}</span>}
+      {helptext && <div className="ds-text--lead section--help-text">{helptext}</div>}
       {children}
       <SecondaryNav />
     </section>

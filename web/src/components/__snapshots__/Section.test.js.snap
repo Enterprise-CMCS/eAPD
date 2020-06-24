@@ -18,11 +18,11 @@ exports[`Section component renders correctly with resource containing title and 
   >
     Program Summary
   </h2>
-  <span
-    className="ds-text--lead"
+  <div
+    className="ds-text--lead section--help-text"
   >
     Provide an introduction to the state program. Include context for this funding request by providing information such as current size, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section.
-  </span>
+  </div>
   apd test child
   <SecondaryNav />
 </section>
