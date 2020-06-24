@@ -16,8 +16,10 @@ const All = ({ add, activities }) => {
       <h3 className="subsection--title ds-h3">
         {activities.length} program activities
       </h3>
-      {activities.map((_, index) => (
-        <EntryDetails activityIndex={index} />
+      {activities.map((activity, index) => (
+        <EntryDetails
+          activityIndex={index}
+          key={activity.key} />
       ))}
       <Button className="ds-u-margin-top--4" onClick={onAdd}>
         Add another activity

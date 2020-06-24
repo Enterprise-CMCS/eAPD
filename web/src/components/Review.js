@@ -1,8 +1,8 @@
-import { Button, Review } from '@cmsgov/design-system-core';
+import { Button, Review as ReviewSummary } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useRef } from 'react';
 
-const StandardReview = ({
+const Review = ({
   children,
   editHref,
   onDeleteClick,
@@ -27,7 +27,7 @@ const StandardReview = ({
   );
 
   return (
-    <Review
+    <ReviewSummary
       editContent={
         <div className="nowrap visibility--screen">
           {onEditClick || editHref ? (
@@ -63,21 +63,22 @@ const StandardReview = ({
       {...rest}
     >
       {children}
-    </Review>
+    </ReviewSummary>
   );
 };
 
-StandardReview.propTypes = {
-  children: PropTypes.node.isRequired,
+Review.propTypes = {
+  children: PropTypes.node,
   editHref: PropTypes.string,
   onDeleteClick: PropTypes.func,
   onEditClick: PropTypes.func
 };
 
-StandardReview.defaultProps = {
+Review.defaultProps = {
+  children: null,
   editHref: null,
   onDeleteClick: null,
   onEditClick: null
 };
 
-export default StandardReview;
+export default Review;
