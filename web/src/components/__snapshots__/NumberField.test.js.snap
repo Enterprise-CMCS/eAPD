@@ -67,13 +67,13 @@ exports[`NumberField component does not round numbers if the round setting is no
     >
       <FormLabel
         component="label"
-        fieldId="textfield_15"
-        id="textfield_label_16"
+        fieldId="textfield_17"
+        id="textfield_label_18"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_15"
-          id="textfield_label_16"
+          htmlFor="textfield_17"
+          id="textfield_label_18"
         >
           <span
             className=""
@@ -84,7 +84,7 @@ exports[`NumberField component does not round numbers if the round setting is no
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_15"
+        id="textfield_17"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
@@ -163,13 +163,13 @@ exports[`NumberField component it limits numbers to 4 decimal places if the roun
     >
       <FormLabel
         component="label"
-        fieldId="textfield_17"
-        id="textfield_label_18"
+        fieldId="textfield_19"
+        id="textfield_label_20"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_17"
-          id="textfield_label_18"
+          htmlFor="textfield_19"
+          id="textfield_label_20"
         >
           <span
             className=""
@@ -180,7 +180,7 @@ exports[`NumberField component it limits numbers to 4 decimal places if the roun
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_17"
+        id="textfield_19"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
@@ -241,13 +241,13 @@ exports[`NumberField component passes back numeric values on change limited to 4
     >
       <FormLabel
         component="label"
-        fieldId="textfield_19"
-        id="textfield_label_20"
+        fieldId="textfield_21"
+        id="textfield_label_22"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_19"
-          id="textfield_label_20"
+          htmlFor="textfield_21"
+          id="textfield_label_22"
         >
           <span
             className=""
@@ -258,7 +258,7 @@ exports[`NumberField component passes back numeric values on change limited to 4
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_19"
+        id="textfield_21"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
@@ -319,13 +319,13 @@ exports[`NumberField component passes back numeric values on change, but still r
     >
       <FormLabel
         component="label"
-        fieldId="textfield_9"
-        id="textfield_label_10"
+        fieldId="textfield_11"
+        id="textfield_label_12"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_9"
-          id="textfield_label_10"
+          htmlFor="textfield_11"
+          id="textfield_label_12"
         >
           <span
             className=""
@@ -348,7 +348,7 @@ exports[`NumberField component passes back numeric values on change, but still r
           <input
             aria-label="test label. Enter amount in dollars."
             className="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_9"
+            id="textfield_11"
             inputMode="numeric"
             name="test name"
             onBlur={[Function]}
@@ -413,13 +413,13 @@ exports[`NumberField component passes back rounded numeric values on change, but
     >
       <FormLabel
         component="label"
-        fieldId="textfield_11"
-        id="textfield_label_12"
+        fieldId="textfield_13"
+        id="textfield_label_14"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_11"
-          id="textfield_label_12"
+          htmlFor="textfield_13"
+          id="textfield_label_14"
         >
           <span
             className=""
@@ -442,7 +442,7 @@ exports[`NumberField component passes back rounded numeric values on change, but
           <input
             aria-label="test label. Enter amount in dollars."
             className="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_11"
+            id="textfield_13"
             inputMode="numeric"
             name="test name"
             onBlur={[Function]}
@@ -585,13 +585,13 @@ exports[`NumberField component returns partial number if non-numeric characters 
     >
       <FormLabel
         component="label"
-        fieldId="textfield_21"
-        id="textfield_label_22"
+        fieldId="textfield_23"
+        id="textfield_label_24"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_21"
-          id="textfield_label_22"
+          htmlFor="textfield_23"
+          id="textfield_label_24"
         >
           <span
             className=""
@@ -602,7 +602,7 @@ exports[`NumberField component returns partial number if non-numeric characters 
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_21"
+        id="textfield_23"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
@@ -681,13 +681,13 @@ exports[`NumberField component rounds numbers when the component loses focus, ca
     >
       <FormLabel
         component="label"
-        fieldId="textfield_13"
-        id="textfield_label_14"
+        fieldId="textfield_15"
+        id="textfield_label_16"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_13"
-          id="textfield_label_14"
+          htmlFor="textfield_15"
+          id="textfield_label_16"
         >
           <span
             className=""
@@ -698,7 +698,7 @@ exports[`NumberField component rounds numbers when the component loses focus, ca
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_13"
+        id="textfield_15"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
