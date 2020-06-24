@@ -7,6 +7,7 @@ Anticipated release: June 29, 2020
 - Update Summary Budget Table ([#2290])
 - Update Actual Costs page to use "Actual Expenditures" ([#2291])
 - Build the "Summary Budget by Activity" table to see staffing across all activities and not just by activity ([#2170])
+- Update styling to the Program Activities page ([#2288])
 
 #### 🐛 Bugs fixed
 
@@ -29,3 +30,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2309]: https://github.com/18F/cms-hitech-apd/issues/2309
 [#2291]: https://github.com/18F/cms-hitech-apd/issues/2291
 [#2170]: https://github.com/18F/cms-hitech-apd/issues/2170
+[#2288]: https://github.com/18F/cms-hitech-apd/issues/2288
