@@ -2,10 +2,16 @@ import { TextField, unmaskValue } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useCallback, useState } from 'react';
 
-const selectTextIfZero = ({ target }) => {
+const setBlankIfZero = ({ target }) => {
   const value = +target.value.replace(/[^0-9]/g);
   if (value === 0) {
-    target.select();
+    target.value = '';
+  }
+};
+
+const setZeroIfBlank = ({ target }) => {
+  if (target.value === '') {
+    target.value = '0';
   }
 };
 
@@ -23,9 +29,11 @@ const NumberField = ({
   const [local, setLocal] = useState(`${value}`);
 
   useEffect(() => {
-    textField.current.addEventListener('focus', selectTextIfZero);
+    textField.current.addEventListener('focus', setBlankIfZero);
+    textField.current.addEventListener('blur', setZeroIfBlank);
     return () => {
-      textField.current.removeEventListener('focus', selectTextIfZero);
+      textField.current.removeEventListener('focus', setBlankIfZero);
+      textField.current.removeEventListener('blur', setZeroIfBlank);
     };
   }, []);
 
