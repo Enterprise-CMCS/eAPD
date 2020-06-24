@@ -47,13 +47,13 @@ describe('the (Activity) EntryDetails component', () => {
 
   test('renders correctly with no activity funding source/program', () => {
     expect(
-      shallow(<EntryDetails {...props} fundingSource={false} />)
+      shallow(<EntryDetails {...props} fundingSource={null} />)
     ).toMatchSnapshot();
   });
 
   test('renders correctly with no activity name or funding source/program', () => {
     expect(
-      shallow(<EntryDetails {...props} fundingSource={false} name={null} />)
+      shallow(<EntryDetails {...props} fundingSource={null} name={null} />)
     ).toMatchSnapshot();
   });
 
@@ -62,6 +62,7 @@ describe('the (Activity) EntryDetails component', () => {
       activityIndex: 0,
       activityKey: 'activity 1 key',
       fundingSource: 'money pit',
+      jumpAction: jest.fn(),
       name: 'activity 1 name',
       remove: jest.fn()
     };

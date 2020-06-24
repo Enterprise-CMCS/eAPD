@@ -32,14 +32,14 @@ describe('the ApdKeyPersonReview component', () => {
 
     expect(
       component
-        .find('StandardReview')
+        .find('Review')
         .first()
         .prop('onEditClick')
     ).toEqual(props.expand);
 
     expect(
       component
-        .find('StandardReview')
+        .find('Review')
         .first()
         .prop('onDeleteClick')
     ).toEqual(props.onDeleteClick);
