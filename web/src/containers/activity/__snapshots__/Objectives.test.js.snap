@@ -3,12 +3,12 @@
 exports[`activity Objectives and Key Results component renders properly 1`] = `
 <Subsection
   headerClassName={null}
-  id="activity-goals-activity index"
+  id="activity-goals-0"
   nested={false}
   resource="activities.goals"
 >
   <FormAndReviewList
-    activityIndex="activity index"
+    activityIndex={0}
     addButtonText="Add another objective"
     allowDeleteAll={false}
     className={null}

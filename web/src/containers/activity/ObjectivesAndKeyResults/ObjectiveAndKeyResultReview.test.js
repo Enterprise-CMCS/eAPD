@@ -32,10 +32,10 @@ describe('the ObjectiveAndKeyResultReview component', () => {
     const component = shallow(<ObjectiveAndKeyResultReview {...props} />);
     expect(component).toMatchSnapshot();
 
-    expect(component.find('StandardReview').prop('onEditClick')).toEqual(
+    expect(component.find('Review').prop('onEditClick')).toEqual(
       props.expand
     );
-    expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
+    expect(component.find('Review').prop('onDeleteClick')).toEqual(
       props.onDeleteClick
     );
   });

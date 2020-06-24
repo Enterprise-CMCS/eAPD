@@ -17,6 +17,7 @@ Anticipated release: June 29, 2020
 #### ⚙️ Behind the scenes
 
 - Prevent negative FTE values from being entered in State Cost forms ([#2229])
+- Cleanup propType errors, other test errors/warnings ([#2309])
 
 # Previous releases
 
@@ -26,6 +27,7 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2246]: https://github.com/18F/cms-hitech-apd/issues/2246
 [#2251]: https://github.com/18F/cms-hitech-apd/issues/2251
 [#2290]: https://github.com/18F/cms-hitech-apd/issues/2290
+[#2309]: https://github.com/18F/cms-hitech-apd/issues/2309
 [#2291]: https://github.com/18F/cms-hitech-apd/issues/2291
 [#2170]: https://github.com/18F/cms-hitech-apd/issues/2170
 [#2282]: https://github.com/18F/cms-hitech-apd/issues/2282

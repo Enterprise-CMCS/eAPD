@@ -618,10 +618,10 @@ exports[`card form wrapper renders without a save button if onSave prop is missi
 </div>
 `;
 
-exports[`card form wrapper renders without an id on the container if id prop is false 1`] = `
+exports[`card form wrapper renders without an id on the container if id prop is null 1`] = `
 <div
   className="card--container"
-  id={false}
+  id={null}
 >
   <div
     className="ds-l-container"

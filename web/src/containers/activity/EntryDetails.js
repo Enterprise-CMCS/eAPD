@@ -77,7 +77,7 @@ const EntryDetails = ({
       }`}
       ref={container}
     >
-      <Review heading={title} headingLevel={4} editContent={editContent}>
+      <Review heading={title} headingLevel="4" editContent={editContent}>
         {[
           /* children are required, so send an empty array to suppress errors */
         ]}
@@ -89,13 +89,14 @@ const EntryDetails = ({
 EntryDetails.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   activityKey: PropTypes.string.isRequired,
-  fundingSource: PropTypes.string.isRequired,
+  fundingSource: PropTypes.string,
   jumpAction: PropTypes.func.isRequired,
   name: PropTypes.string,
   remove: PropTypes.func.isRequired
 };
 
 EntryDetails.defaultProps = {
+  fundingSource: null,
   name: ''
 };
 
