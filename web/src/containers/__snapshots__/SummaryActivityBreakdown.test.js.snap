@@ -48,7 +48,7 @@ exports[`Summary Activity Breakdown Table renders correctly renders correctly 1`
   <tbody>
     <CostAllocationRows
       activityIndex={2}
-      ffy={2016}
+      ffy="2016"
       otherFunding={
         Object {
           "2016": Object {
