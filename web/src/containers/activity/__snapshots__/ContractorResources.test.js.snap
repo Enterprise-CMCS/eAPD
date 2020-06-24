@@ -3,12 +3,12 @@
 exports[`the ContractorResources component renders correctly 1`] = `
 <Subsection
   headerClassName={null}
-  id="activity-contractor-costs-activity index"
+  id="activity-contractor-costs-0"
   nested={false}
   resource="activities.contractorResources"
 >
   <FormAndReviewList
-    activityIndex="activity index"
+    activityIndex={0}
     addButtonText="Add another contractor"
     allowDeleteAll={false}
     className={null}
