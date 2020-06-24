@@ -6,11 +6,13 @@ exports[`the (Activity) EntryDetails component does not render the delete button
   id="activity-activity 1 key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
       >
         <Button
+          aria-label="Edit: Activity 1: activity 1 name (money pit)"
           component="button"
           onClick={[Function]}
           size="small"
@@ -23,7 +25,7 @@ exports[`the (Activity) EntryDetails component does not render the delete button
     }
     editText="Edit"
     heading="Activity 1: activity 1 name (money pit)"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;
@@ -34,11 +36,13 @@ exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
   id="activity-activity key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
       >
         <Button
+          aria-label="Edit: Activity 3: activity name (money pit)"
           component="button"
           onClick={[Function]}
           size="small"
@@ -52,20 +56,22 @@ exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
             |
           </span>
           <Button
+            aria-label="Delete: Activity 3: activity name (money pit)"
+            className="ds-u-color--error"
             component="button"
             onClick={[Function]}
             size="small"
             type="button"
             variation="transparent"
           >
-            Remove
+            Delete
           </Button>
         </React.Fragment>
       </div>
     }
     editText="Edit"
     heading="Activity 3: activity name (money pit)"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;
@@ -76,11 +82,13 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
   id="activity-activity key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
       >
         <Button
+          aria-label="Edit: Activity 3: activity name"
           component="button"
           onClick={[Function]}
           size="small"
@@ -94,20 +102,22 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            aria-label="Delete: Activity 3: activity name"
+            className="ds-u-color--error"
             component="button"
             onClick={[Function]}
             size="small"
             type="button"
             variation="transparent"
           >
-            Remove
+            Delete
           </Button>
         </React.Fragment>
       </div>
     }
     editText="Edit"
     heading="Activity 3: activity name"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;
@@ -118,11 +128,13 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
   id="activity-activity key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
       >
         <Button
+          aria-label="Edit: Activity 3: Untitled (money pit)"
           component="button"
           onClick={[Function]}
           size="small"
@@ -136,20 +148,22 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            aria-label="Delete: Activity 3: Untitled (money pit)"
+            className="ds-u-color--error"
             component="button"
             onClick={[Function]}
             size="small"
             type="button"
             variation="transparent"
           >
-            Remove
+            Delete
           </Button>
         </React.Fragment>
       </div>
     }
     editText="Edit"
     heading="Activity 3: Untitled (money pit)"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;
@@ -160,11 +174,13 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
   id="activity-activity key"
 >
   <Review
+    className="entry-details--review"
     editContent={
       <div
         className="nowrap visibility--screen"
       >
         <Button
+          aria-label="Edit: Activity 3: Untitled"
           component="button"
           onClick={[Function]}
           size="small"
@@ -178,20 +194,22 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
+            aria-label="Delete: Activity 3: Untitled"
+            className="ds-u-color--error"
             component="button"
             onClick={[Function]}
             size="small"
             type="button"
             variation="transparent"
           >
-            Remove
+            Delete
           </Button>
         </React.Fragment>
       </div>
     }
     editText="Edit"
     heading="Activity 3: Untitled"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;

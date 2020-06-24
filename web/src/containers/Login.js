@@ -62,12 +62,11 @@ const Login = ({
     <div id="start-main-content">
       <UpgradeBrowser />
       <CardForm
-        id={false}
         title="Log in"
         legend="Log in"
         cancelable={false}
         className="ds-u-margin-top--7"
-        canSubmit={username.length && password.length}
+        canSubmit={!!username && !!password}
         error={errorMessage}
         success={hasEverLoggedOn ? 'You have securely logged out.' : null}
         working={fetching}

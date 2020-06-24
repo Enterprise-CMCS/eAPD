@@ -10,7 +10,7 @@
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --config webpack.config.dev.js",
     "test": "TZ=utc jest --collectCoverage",
-    "test-watch": "jest --watch",
+    "test-watch": "TZ=utc jest --watch",
     "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
   },
   "repository": {

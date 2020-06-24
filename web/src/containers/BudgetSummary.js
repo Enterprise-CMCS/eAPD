@@ -43,8 +43,12 @@ DataRow.propTypes = {
 
 const DataRowGroup = ({ data, year }) => (
   <Fragment>
-    {categories.map(({ category, title }) => (
-      <DataRow category={category} data={data[category][year]} title={title} />
+    {categories.map(({ category, title }, i) => (
+      <DataRow
+        category={category}
+        data={data[category][year]}
+        key={i} // eslint-disable-line react/no-array-index-key
+        title={title} />
     ))}
   </Fragment>
 );

@@ -8,7 +8,9 @@ exports[`LinksContextProvider renders correctly 1`] = `
       "getPreviousNextLinks": [Function],
     }
   }
-/>
+>
+  <div />
+</ContextProvider>
 `;
 
 exports[`LinksContextProvider returns a list of links 1`] = `

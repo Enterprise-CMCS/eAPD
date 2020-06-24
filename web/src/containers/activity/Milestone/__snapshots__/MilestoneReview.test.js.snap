@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the MilestoneReview component renders correctly 1`] = `
-<StandardReview
+<Review
   editHref={null}
   heading="1533. Milestone name"
   headingLevel={4}
@@ -17,5 +17,5 @@ exports[`the MilestoneReview component renders correctly 1`] = `
      
     10/31/1940
   </p>
-</StandardReview>
+</Review>
 `;
