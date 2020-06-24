@@ -20,7 +20,7 @@ describe('NumberField component', () => {
     ).toMatchSnapshot();
   });
 
-  it('selects the text field content if the value is zero', () => {
+  it('blanks the text field content when selected if the value is zero', () => {
     const ref = { current: null };
 
     mount(
@@ -35,13 +35,33 @@ describe('NumberField component', () => {
       />
     );
 
-    ref.current.select = jest.fn();
     ref.current.focus();
 
-    expect(ref.current.select).toHaveBeenCalled();
+    expect(ref.current.value).toEqual('');
   });
 
-  it('does not select the text field content if the value is not zero', () => {
+  it('sets the text field content to zero on blur if the value is blank', () => {
+    const ref = { current: null };
+
+    mount(
+      <NumberField
+        fieldRef={ref}
+        label="test label"
+        name="test name"
+        size="medium"
+        className="stuff"
+        value=""
+        onChange={jest.fn()}
+      />
+    );
+
+    ref.current.focus();
+    ref.current.blur();
+
+    expect(ref.current.value).toEqual('0');
+  });
+
+  it('does not blank the text field content on blur if the value is not zero', () => {
     const ref = { current: null };
 
     mount(
@@ -56,13 +76,13 @@ describe('NumberField component', () => {
       />
     );
 
-    ref.current.select = jest.fn();
     ref.current.focus();
+    ref.current.blur();
 
-    expect(ref.current.select).not.toHaveBeenCalled();
+    expect(ref.current.value).toEqual('123');
   });
 
-  it('removes the inputc field event listeners when the NumberField component is unmounted', () => {
+  it('removes the input field event listeners when the NumberField component is unmounted', () => {
     const ref = { current: null };
 
     const component = mount(
