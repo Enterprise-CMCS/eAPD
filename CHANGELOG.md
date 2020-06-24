@@ -7,7 +7,7 @@ Anticipated release: June 29, 2020
 - Update Summary Budget Table ([#2290])
 - Update Actual Costs page to use "Actual Expenditures" ([#2291])
 - Build the "Summary Budget by Activity" table to see staffing across all activities and not just by activity ([#2170])
-- Update styling to the Program Activities page ([#2288])
+- Update styling on the Program Activities page ([#2288])
 
 #### 🐛 Bugs fixed
 
