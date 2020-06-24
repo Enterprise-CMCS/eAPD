@@ -59,7 +59,7 @@ Array [
       },
       Object {
         "id": "prev-activities-table",
-        "label": "Actual Costs",
+        "label": "Actual Expenditures",
       },
     ],
     "id": "previous-activities",
@@ -89,6 +89,10 @@ Array [
   },
   Object {
     "children": Array [
+      Object {
+        "id": "summary-schedule-by-activity-table",
+        "label": "Summary Budget By Activity",
+      },
       Object {
         "id": "budget-summary-table",
         "label": "Summary Budget Table",
@@ -170,7 +174,7 @@ Array [
       },
       Object {
         "id": "prev-activities-table",
-        "label": "Actual Costs",
+        "label": "Actual Expenditures",
       },
     ],
     "id": "previous-activities",
@@ -229,6 +233,10 @@ Array [
   },
   Object {
     "children": Array [
+      Object {
+        "id": "summary-schedule-by-activity-table",
+        "label": "Summary Budget By Activity",
+      },
       Object {
         "id": "budget-summary-table",
         "label": "Summary Budget Table",

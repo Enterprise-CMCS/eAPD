@@ -51,7 +51,7 @@ const ExecutiveSummary = ({ data, jumpAction, total, years }) => {
             {activity.summary && <p>{activity.summary}</p>}
             <ul className="ds-c-list--bare">
               <li>
-                <strong>Date:</strong> {activity.dateRange}
+                <strong>Start date - End date:</strong> {activity.dateRange}
               </li>
               <li>
                 <strong>Total cost of activity:</strong>{' '}
