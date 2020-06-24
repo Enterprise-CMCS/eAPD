@@ -6,7 +6,7 @@ import {
 } from './SummaryActivityBreakdown';
 
 const props = {
-  ffy: 2016,
+  ffy: "2016",
   activityIndex: 2,
   activityName: 'activity name',
   costSummary: {

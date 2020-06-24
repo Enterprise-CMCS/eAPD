@@ -55,14 +55,23 @@ const EntryDetails = ({
 
   const editContent = (
     <div className="nowrap visibility--screen">
-      <Button size="small" variation="transparent" onClick={navigateToActivity}>
+      <Button
+        aria-label={`Edit: ${title}`}
+        size="small"
+        variation="transparent"
+        onClick={navigateToActivity}>
         Edit
       </Button>
       {activityIndex > 0 && (
         <Fragment>
           <span>|</span>
-          <Button size="small" variation="transparent" onClick={onRemove}>
-            Remove
+          <Button
+            aria-label={`Delete: ${title}`}
+            className="ds-u-color--error"
+            size="small"
+            variation="transparent"
+            onClick={onRemove}>
+              Delete
           </Button>
         </Fragment>
       )}
@@ -77,7 +86,11 @@ const EntryDetails = ({
       }`}
       ref={container}
     >
-      <Review heading={title} headingLevel="4" editContent={editContent}>
+      <Review
+        className="entry-details--review"
+        heading={title}
+        headingLevel="4"
+        editContent={editContent}>
         {[
           /* children are required, so send an empty array to suppress errors */
         ]}
