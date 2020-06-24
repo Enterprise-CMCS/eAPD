@@ -11,10 +11,10 @@ describe('card form wrapper', () => {
     history.goBack.resetHistory();
   });
 
-  test('renders without an id on the container if id prop is false', () => {
+  test('renders without an id on the container if id prop is null', () => {
     expect(
       shallow(
-        <CardForm id={false} title="test" history={history}>
+        <CardForm id={null} title="test" history={history}>
           hello world
         </CardForm>
       )

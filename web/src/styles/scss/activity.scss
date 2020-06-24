@@ -1,10 +1,7 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
 .activity--body {
-  border-bottom: 4px solid $color-primary;
-  &.activity--body__first {
-    border-top: 4px solid $color-primary;
-  }
+  border-bottom: 1px solid $color-gray-light;
   .ds-c-review.ds-u-border-bottom--2 {
     // Review components add this automatically; override it
     border: none !important;
@@ -12,4 +9,9 @@
   .ds-c-button.ds-c-button--transparent.danger {
     color: $color-error-dark;
   }
+}
+
+// Override font weight for heading within cms.gov Review Component
+.entry-details--review div h4.ds-u-font-weight--bold {
+  font-weight: 600 !important;
 }

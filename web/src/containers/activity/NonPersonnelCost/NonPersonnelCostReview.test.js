@@ -28,12 +28,12 @@ describe('the NonPersonnelCostReview component', () => {
   });
 
   test('triggers the delete event', () => {
-    component.find('StandardReview').prop('onDeleteClick')();
+    component.find('Review').prop('onDeleteClick')();
     expect(handleDelete).toHaveBeenCalled();
   });
 
   test('hooks up the expand event', () => {
-    expect(component.find('StandardReview').prop('onEditClick')).toEqual(
+    expect(component.find('Review').prop('onEditClick')).toEqual(
       expand
     );
   });
