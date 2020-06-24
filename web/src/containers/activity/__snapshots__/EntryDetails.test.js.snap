@@ -25,7 +25,7 @@ exports[`the (Activity) EntryDetails component does not render the delete button
     }
     editText="Edit"
     heading="Activity 1: activity 1 name (money pit)"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;
@@ -71,7 +71,7 @@ exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
     }
     editText="Edit"
     heading="Activity 3: activity name (money pit)"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;
@@ -117,7 +117,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
     }
     editText="Edit"
     heading="Activity 3: activity name"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;
@@ -163,7 +163,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
     }
     editText="Edit"
     heading="Activity 3: Untitled (money pit)"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;
@@ -209,7 +209,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
     }
     editText="Edit"
     heading="Activity 3: Untitled"
-    headingLevel={4}
+    headingLevel="4"
   />
 </div>
 `;

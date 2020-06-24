@@ -18,28 +18,7 @@ import {
   selectActivityByIndex
 } from '../../reducers/activities.selectors';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
-
-const CostSummaryRows = ({ items }) =>
-  items.map(({ description, totalCost, unitCost, units }) => (
-    <tr key={description}>
-      <td className="title">{description}</td>
-      <td className="budget-table--number">
-        {unitCost !== null && <Dollars>{unitCost}</Dollars>}
-      </td>
-      <td className="budget-table--number ds-u-padding--0">
-        {unitCost !== null && '×'}
-      </td>
-      <td className="budget-table--number ds-u-text-align--left">{units}</td>
-      <td className="budget-table--number">{unitCost !== null && '='}</td>
-      <td className="budget-table--number">
-        <Dollars>{totalCost}</Dollars>
-      </td>
-    </tr>
-  ));
-
-CostSummaryRows.propTypes = {
-  items: PropTypes.array.isRequired
-};
+import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -148,60 +127,7 @@ const CostAllocateFFP = ({
 
           <table className="budget-table activity-budget-table">
             <tbody>
-              <tr className="budget-table--row__header">
-                <th scope="col">State Staff</th>
-                <th scope="col" colSpan="2">
-                  <span className="sr-only">unit cost</span>
-                </th>
-                <th scope="col" colSpan="2">
-                  <span className="sr-only">units</span>
-                </th>
-                <th scope="col">Total cost</th>
-              </tr>
-              <CostSummaryRows items={years[ffy].keyPersonnel} />
-              <CostSummaryRows items={years[ffy].statePersonnel} />
-              <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td className="title" colSpan="5">
-                  State Staff Subtotal
-                </td>
-                <td className="budget-table--number">
-                  <Dollars>{years[ffy].statePersonnelTotal}</Dollars>
-                </td>
-              </tr>
-              <tr className="budget-table--row__header">
-                <th scope="col" colSpan="6">
-                  Other State Expenses
-                </th>
-              </tr>
-              <CostSummaryRows items={years[ffy].nonPersonnel} />
-              <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td className="title" colSpan="5">
-                  Other State Expenses Subtotal
-                </td>
-                <td className="budget-table--number">
-                  <Dollars>{years[ffy].nonPersonnelTotal}</Dollars>
-                </td>
-              </tr>
-              <tr className="budget-table--row__header">
-                <th scope="col" colSpan="6">
-                  Private Contractor
-                </th>
-              </tr>
-              <CostSummaryRows items={years[ffy].contractorResources} />
-              <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td className="title" colSpan="5">
-                  Private Contractor Subtotal
-                </td>
-                <td className="budget-table--number">
-                  <Dollars>{years[ffy].contractorResourcesTotal}</Dollars>
-                </td>
-              </tr>
-              <tr className="budget-table--subtotal">
-                <td colSpan="5">Activity Total Cost</td>
-                <td className="budget-table--number">
-                  <Dollars>{years[ffy].totalCost}</Dollars>
-                </td>
-              </tr>
+              <CostAllocationRows years={years} ffy={ffy} />
 
               {/* in viewonly mode, we'll pull everything into a single table
                   table since there aren't form elements to fill in */}
@@ -416,7 +342,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);
 export {
   CostAllocateFFP as plain,
   AllFFYsSummaryNarrative,
-  CostSummaryRows,
   mapStateToProps,
   mapDispatchToProps
 };

@@ -14,25 +14,31 @@ describe('the NameAndFundingSourceReview component', () => {
   };
 
   it('renders correctly when expanding is enabled', () => {
-    const component = shallow(<NamdAndFundingSourceReview {...props} />);
+    const component = shallow(
+      <NamdAndFundingSourceReview {...props}>
+        <div />
+      </NamdAndFundingSourceReview>
+    );
     expect(component).toMatchSnapshot();
 
-    expect(component.find('StandardReview').prop('onEditClick')).toEqual(
+    expect(component.find('Review').prop('onEditClick')).toEqual(
       props.expand
     );
-    expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
+    expect(component.find('Review').prop('onDeleteClick')).toEqual(
       null
     );
   });
 
   it('renders correctly when expanding is disabled', () => {
     const component = shallow(
-      <NamdAndFundingSourceReview {...props} disableExpand />
+      <NamdAndFundingSourceReview {...props} disableExpand>
+        <div />
+      </NamdAndFundingSourceReview>
     );
     expect(component).toMatchSnapshot();
 
-    expect(component.find('StandardReview').prop('onEditClick')).toEqual(null);
-    expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
+    expect(component.find('Review').prop('onEditClick')).toEqual(null);
+    expect(component.find('Review').prop('onDeleteClick')).toEqual(
       null
     );
   });

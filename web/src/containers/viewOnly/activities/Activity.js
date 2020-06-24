@@ -148,11 +148,11 @@ const Activity = ({ activity, activityIndex }) => {
         <strong>Activity Summary:</strong> {activity.summary}
       </p>
       <p>
-        <strong>Planned start date: </strong>
+        <strong>Start date: </strong>
         {activity.plannedStartDate || 'None provided'}
       </p>
       <p>
-        <strong>Planned end date: </strong>
+        <strong>End date: </strong>
         {activity.plannedEndDate || 'None provided'}
       </p>
       <hr className="subsection-rule" />
@@ -293,7 +293,7 @@ const Activity = ({ activity, activityIndex }) => {
 
 Activity.propTypes = {
   activity: PropTypes.array.isRequired,
-  activityIndex: PropTypes.string.isRequired
+  activityIndex: PropTypes.number.isRequired
 };
 
 export default Activity;

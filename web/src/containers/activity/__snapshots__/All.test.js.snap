@@ -13,12 +13,15 @@ exports[`the Activities component renders correctly 1`] = `
   </h3>
   <Connect(EntryDetails)
     activityIndex={0}
+    key="key1"
   />
   <Connect(EntryDetails)
     activityIndex={1}
+    key="key2"
   />
   <Connect(EntryDetails)
     activityIndex={2}
+    key="key3"
   />
   <Button
     className="ds-u-margin-top--4"

@@ -14,7 +14,7 @@ exports[`executive summary component navigates to activities 1`] = `
     nested={false}
     resource="executiveSummary.summary"
   >
-    <StandardReview
+    <Review
       className=""
       editHref=""
       heading={
@@ -25,7 +25,7 @@ exports[`executive summary component navigates to activities 1`] = `
           activity 1
         </React.Fragment>
       }
-      headingLevel={4}
+      headingLevel="4"
       key="a1"
       onDeleteClick={null}
       onEditClick={[Function]}
@@ -38,7 +38,7 @@ exports[`executive summary component navigates to activities 1`] = `
       >
         <li>
           <strong>
-            Date:
+            Start date - End date:
           </strong>
            
         </li>
@@ -122,8 +122,8 @@ exports[`executive summary component navigates to activities 1`] = `
            Federal share)
         </li>
       </ul>
-    </StandardReview>
-    <StandardReview
+    </Review>
+    <Review
       className="ds-u-border-bottom--0"
       editHref=""
       heading={
@@ -134,7 +134,7 @@ exports[`executive summary component navigates to activities 1`] = `
           activity 2
         </React.Fragment>
       }
-      headingLevel={4}
+      headingLevel="4"
       key="a2"
       onDeleteClick={null}
       onEditClick={[Function]}
@@ -147,7 +147,7 @@ exports[`executive summary component navigates to activities 1`] = `
       >
         <li>
           <strong>
-            Date:
+            Start date - End date:
           </strong>
            
         </li>
@@ -231,15 +231,15 @@ exports[`executive summary component navigates to activities 1`] = `
            Federal share)
         </li>
       </ul>
-    </StandardReview>
+    </Review>
     <hr
       className="ds-u-border--dark ds-u-margin--0"
     />
-    <StandardReview
+    <Review
       className="ds-u-border--0"
       editHref={null}
       heading="Total cost"
-      headingLevel={4}
+      headingLevel="4"
       onDeleteClick={null}
       onEditClick={null}
     >
@@ -327,7 +327,7 @@ exports[`executive summary component navigates to activities 1`] = `
            Federal share
         </li>
       </ul>
-    </StandardReview>
+    </Review>
   </Subsection>
   <Connect(ConnectedWaypoint)
     id="executive-summary-budget-table"
@@ -357,7 +357,7 @@ exports[`executive summary component renders correctly 1`] = `
     nested={false}
     resource="executiveSummary.summary"
   >
-    <StandardReview
+    <Review
       className=""
       editHref=""
       heading={
@@ -368,7 +368,7 @@ exports[`executive summary component renders correctly 1`] = `
           activity 1
         </React.Fragment>
       }
-      headingLevel={4}
+      headingLevel="4"
       key="a1"
       onDeleteClick={null}
       onEditClick={[Function]}
@@ -381,7 +381,7 @@ exports[`executive summary component renders correctly 1`] = `
       >
         <li>
           <strong>
-            Date:
+            Start date - End date:
           </strong>
            
         </li>
@@ -465,8 +465,8 @@ exports[`executive summary component renders correctly 1`] = `
            Federal share)
         </li>
       </ul>
-    </StandardReview>
-    <StandardReview
+    </Review>
+    <Review
       className="ds-u-border-bottom--0"
       editHref=""
       heading={
@@ -477,7 +477,7 @@ exports[`executive summary component renders correctly 1`] = `
           activity 2
         </React.Fragment>
       }
-      headingLevel={4}
+      headingLevel="4"
       key="a2"
       onDeleteClick={null}
       onEditClick={[Function]}
@@ -490,7 +490,7 @@ exports[`executive summary component renders correctly 1`] = `
       >
         <li>
           <strong>
-            Date:
+            Start date - End date:
           </strong>
            
         </li>
@@ -574,15 +574,15 @@ exports[`executive summary component renders correctly 1`] = `
            Federal share)
         </li>
       </ul>
-    </StandardReview>
+    </Review>
     <hr
       className="ds-u-border--dark ds-u-margin--0"
     />
-    <StandardReview
+    <Review
       className="ds-u-border--0"
       editHref={null}
       heading="Total cost"
-      headingLevel={4}
+      headingLevel="4"
       onDeleteClick={null}
       onEditClick={null}
     >
@@ -670,7 +670,7 @@ exports[`executive summary component renders correctly 1`] = `
            Federal share
         </li>
       </ul>
-    </StandardReview>
+    </Review>
   </Subsection>
   <Connect(ConnectedWaypoint)
     id="executive-summary-budget-table"

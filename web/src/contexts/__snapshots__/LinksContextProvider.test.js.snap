@@ -8,7 +8,9 @@ exports[`LinksContextProvider renders correctly 1`] = `
       "getPreviousNextLinks": [Function],
     }
   }
-/>
+>
+  <div />
+</ContextProvider>
 `;
 
 exports[`LinksContextProvider returns a list of links 1`] = `
@@ -87,6 +89,10 @@ Array [
   },
   Object {
     "children": Array [
+      Object {
+        "id": "summary-schedule-by-activity-table",
+        "label": "Summary Budget By Activity",
+      },
       Object {
         "id": "budget-summary-table",
         "label": "Summary Budget Table",
@@ -227,6 +233,10 @@ Array [
   },
   Object {
     "children": Array [
+      Object {
+        "id": "summary-schedule-by-activity-table",
+        "label": "Summary Budget By Activity",
+      },
       Object {
         "id": "budget-summary-table",
         "label": "Summary Budget Table",
