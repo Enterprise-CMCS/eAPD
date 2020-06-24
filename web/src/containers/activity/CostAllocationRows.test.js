@@ -3,7 +3,7 @@ import React from 'react';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
 
 const props = {
-  ffy: 1990,
+  ffy: "1990",
   years: {
     '1990': {
       contractorResources: [
