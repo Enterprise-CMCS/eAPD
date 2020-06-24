@@ -100,7 +100,7 @@ describe('executive summary component', () => {
     };
 
     const review = component
-      .find('StandardReview')
+      .find('Review')
       .first()
       .dive();
     review

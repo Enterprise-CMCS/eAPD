@@ -92,7 +92,12 @@ const activities = [
 
 describe('LinksContextProvider', () => {
   it('renders correctly', () => {
-    expect(shallow(<LinksContextProvider />)).toMatchSnapshot();
+    const component = shallow(
+      <LinksContextProvider>
+        <div />
+      </LinksContextProvider>
+    );
+    expect(component).toMatchSnapshot();
   });
 
   it('returns a list of links', () => {
