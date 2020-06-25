@@ -18,7 +18,7 @@ Anticipated release: June 29, 2020
 #### ⚙️ Behind the scenes
 
 - Prevent negative FTE values from being entered in State Cost forms ([#2229])
-- Cleanup propType errors, other test errors/warnings ([#2309])
+- [Tech Debt] Cleanup propType errors, other test errors/warnings ([#2309])
 
 # Previous releases
 
