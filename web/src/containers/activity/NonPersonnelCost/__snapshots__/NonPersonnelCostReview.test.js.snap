@@ -16,8 +16,9 @@ exports[`the NonPersonnelCostReview component renders correctly 1`] = `
       key="1487"
     >
       <strong>
+        FFY 
         1487
-         Costs:
+         Cost:
       </strong>
        
       <Dollars>
@@ -28,8 +29,9 @@ exports[`the NonPersonnelCostReview component renders correctly 1`] = `
       key="1488"
     >
       <strong>
+        FFY 
         1488
-         Costs:
+         Cost:
       </strong>
        
       <Dollars>
