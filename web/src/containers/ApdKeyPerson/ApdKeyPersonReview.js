@@ -17,8 +17,7 @@ const ApdStateKeyPerson = ({
         {hasCosts ? (
           Object.keys(costs).map(year => (
             <div key={year}>
-              <strong>{year} </strong>
-              <strong>Costs: </strong>
+              <strong>FFY {year} Cost: </strong>
               <Dollars>{costs[year]}</Dollars> | <strong>FTE: </strong>
               {fte[year]} | <strong>Total: </strong>
               <Dollars>{costs[year] * fte[year]}</Dollars>

@@ -21,8 +21,7 @@ const StatePersonReview = ({
       <div className="ds-u-margin-top--2">
         {Object.entries(years).map(([year, { amt, perc }]) => (
           <div key={year}>
-            <strong>{year} </strong>
-            <strong>Costs: </strong>
+            <strong>FFY {year} Cost: </strong>
             <Dollars>{amt}</Dollars> | <strong>FTEs: </strong>
             {perc} | <strong>Total: </strong>
             <Dollars>{amt * perc}</Dollars>

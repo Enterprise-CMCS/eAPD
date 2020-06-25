@@ -26,11 +26,9 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           key="1992"
         >
           <strong>
+            FFY 
             1992
-             
-          </strong>
-          <strong>
-            Costs: 
+             Cost: 
           </strong>
           <Dollars>
             100
@@ -52,11 +50,9 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           key="1993"
         >
           <strong>
+            FFY 
             1993
-             
-          </strong>
-          <strong>
-            Costs: 
+             Cost: 
           </strong>
           <Dollars>
             300
@@ -103,11 +99,9 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           key="1992"
         >
           <strong>
+            FFY 
             1992
-             
-          </strong>
-          <strong>
-            Costs: 
+             Cost: 
           </strong>
           <Dollars>
             100
@@ -129,11 +123,9 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           key="1993"
         >
           <strong>
+            FFY 
             1993
-             
-          </strong>
-          <strong>
-            Costs: 
+             Cost: 
           </strong>
           <Dollars>
             300
