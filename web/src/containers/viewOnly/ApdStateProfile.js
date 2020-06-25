@@ -9,8 +9,7 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
       <div>
         {Object.keys(person.costs).map(year => (
           <div key={year}>
-            <strong>{year} </strong>
-            <strong>Costs: </strong>
+            <strong>FFY {year} Cost: </strong>
             <Dollars>{person.costs[year]}</Dollars> | <strong>FTE: </strong>
             {person.fte[year]} | <strong>Total: </strong>
             <Dollars>{person.costs[year] * person.fte[year]}</Dollars>
