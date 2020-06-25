@@ -51,7 +51,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       checked={true}
       checkedChildren={
         <PersonCostForm
-          costLabel="Costs with benefits"
+          costLabel="Cost with benefits"
           fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
           items={
             Object {
@@ -131,7 +131,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
       checked={false}
       checkedChildren={
         <PersonCostForm
-          costLabel="Costs with benefits"
+          costLabel="Cost with benefits"
           fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
           items={
             Object {
@@ -211,7 +211,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
       checked={true}
       checkedChildren={
         <PersonCostForm
-          costLabel="Costs with benefits"
+          costLabel="Cost with benefits"
           fteLabel="FTE Allocation (1 = 1 FTE or 100% time)"
           items={
             Object {
