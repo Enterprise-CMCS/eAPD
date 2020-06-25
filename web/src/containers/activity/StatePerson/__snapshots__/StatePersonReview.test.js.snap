@@ -16,11 +16,9 @@ exports[`the StatePersonReview component renders correctly 1`] = `
       key="2003"
     >
       <strong>
+        FFY 
         2003
-         
-      </strong>
-      <strong>
-        Costs: 
+         Cost: 
       </strong>
       <Dollars>
         85938
@@ -42,11 +40,9 @@ exports[`the StatePersonReview component renders correctly 1`] = `
       key="2004"
     >
       <strong>
+        FFY 
         2004
-         
-      </strong>
-      <strong>
-        Costs: 
+         Cost: 
       </strong>
       <Dollars>
         37523
