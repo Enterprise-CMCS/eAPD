@@ -2029,13 +2029,13 @@ exports[`the CostAllocateFFP component renders correctly renders correctly with 
   <div
     className="pre-button-section-break"
   >
-    <Button
-      component="button"
+    <Link
+      className="ds-c-button"
       onClick={[Function]}
-      type="button"
+      to="/apd/activities"
     >
       Add another activity
-    </Button>
+    </Link>
   </div>
 </Fragment>
 `;

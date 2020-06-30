@@ -13,15 +13,6 @@ import {
 } from '../../actions/editActivity';
 import { jumpTo } from '../../actions/app';
 
-let mockPush;
-
-jest.mock('react-router-dom', () => {
-  mockPush = jest.fn();
-  return {
-    useHistory: jest.fn().mockReturnValue({ push: mockPush })
-  };
-});
-
 global.scrollTo = jest.fn();
 
 describe('the CostAllocateFFP component', () => {
@@ -179,11 +170,13 @@ describe('the CostAllocateFFP component', () => {
     const component = shallow(
       <CostAllocateFFP {...props} activityIndex={1} activityCount={2} />
     );
-    component.find('Button').simulate('click');
+    const link = component.find('.ds-c-button');
+    expect(link.props().to).toBe('/apd/activities');
+
+    component.find('.ds-c-button').simulate('click');
 
     expect(props.add).toHaveBeenCalled();
     expect(props.jumpTo).toHaveBeenCalledWith('activities-list');
-    expect(mockPush).toHaveBeenCalledWith('/apd/activities');
     expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
