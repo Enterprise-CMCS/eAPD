@@ -1,5 +1,206 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`NumberField component blanks the text field content when selected if the value is zero 1`] = `
+<NumberField
+  className="stuff"
+  fieldRef={null}
+  label="test label"
+  mask={null}
+  min={null}
+  name="test name"
+  onBlur={null}
+  onChange={[MockFunction]}
+  round={false}
+  size="medium"
+  value="0"
+>
+  <TextField
+    className="stuff"
+    label="test label"
+    mask={null}
+    name="test name"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    size="medium"
+    type="text"
+    value=""
+  >
+    <div
+      className="ds-u-clearfix stuff"
+    >
+      <FormLabel
+        component="label"
+        fieldId="textfield_3"
+        id="textfield_label_4"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="textfield_3"
+          id="textfield_label_4"
+        >
+          <span
+            className=""
+          >
+            test label
+          </span>
+        </label>
+      </FormLabel>
+      <input
+        className="ds-c-field ds-c-field--medium"
+        id="textfield_3"
+        name="test name"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+  </TextField>
+</NumberField>
+`;
+
+exports[`NumberField component does not blank the text field content when selected if the value is not zero 1`] = `
+<NumberField
+  className="stuff"
+  fieldRef={null}
+  label="test label"
+  mask={null}
+  min={null}
+  name="test name"
+  onBlur={null}
+  onChange={[MockFunction]}
+  round={false}
+  size="medium"
+  value="678"
+>
+  <TextField
+    className="stuff"
+    label="test label"
+    mask={null}
+    name="test name"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    size="medium"
+    type="text"
+    value="678"
+  >
+    <div
+      className="ds-u-clearfix stuff"
+    >
+      <FormLabel
+        component="label"
+        fieldId="textfield_5"
+        id="textfield_label_6"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="textfield_5"
+          id="textfield_label_6"
+        >
+          <span
+            className=""
+          >
+            test label
+          </span>
+        </label>
+      </FormLabel>
+      <input
+        className="ds-c-field ds-c-field--medium"
+        id="textfield_5"
+        name="test name"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        type="text"
+        value="678"
+      />
+    </div>
+  </TextField>
+</NumberField>
+`;
+
+exports[`NumberField component does not change the text field content on blur if the value is not zero 1`] = `
+<NumberField
+  className="stuff"
+  fieldRef={null}
+  label="test label"
+  mask={null}
+  min={null}
+  name="test name"
+  onBlur={null}
+  onChange={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "target": Object {
+              "value": 123,
+            },
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  round={false}
+  size="medium"
+  value="123"
+>
+  <TextField
+    className="stuff"
+    label="test label"
+    mask={null}
+    name="test name"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    size="medium"
+    type="text"
+    value="123"
+  >
+    <div
+      className="ds-u-clearfix stuff"
+    >
+      <FormLabel
+        component="label"
+        fieldId="textfield_9"
+        id="textfield_label_10"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="textfield_9"
+          id="textfield_label_10"
+        >
+          <span
+            className=""
+          >
+            test label
+          </span>
+        </label>
+      </FormLabel>
+      <input
+        className="ds-c-field ds-c-field--medium"
+        id="textfield_9"
+        name="test name"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        type="text"
+        value="123"
+      />
+    </div>
+  </TextField>
+</NumberField>
+`;
+
 exports[`NumberField component does not round numbers if the round setting is not set, calls onBlur handler 1`] = `
 <NumberField
   className="stuff"
@@ -52,12 +253,12 @@ exports[`NumberField component does not round numbers if the round setting is no
 >
   <TextField
     className="stuff"
-    inputRef={[Function]}
     label="test label"
     mask={null}
     name="test name"
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     size="medium"
     type="text"
     value="12332"
@@ -67,13 +268,13 @@ exports[`NumberField component does not round numbers if the round setting is no
     >
       <FormLabel
         component="label"
-        fieldId="textfield_15"
-        id="textfield_label_16"
+        fieldId="textfield_17"
+        id="textfield_label_18"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_15"
-          id="textfield_label_16"
+          htmlFor="textfield_17"
+          id="textfield_label_18"
         >
           <span
             className=""
@@ -84,10 +285,11 @@ exports[`NumberField component does not round numbers if the round setting is no
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_15"
+        id="textfield_17"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
+        onFocus={[Function]}
         type="text"
         value="12332"
       />
@@ -148,12 +350,12 @@ exports[`NumberField component it limits numbers to 4 decimal places if the roun
 >
   <TextField
     className="stuff"
-    inputRef={[Function]}
     label="test label"
     mask={null}
     name="test name"
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     size="medium"
     type="text"
     value="12332"
@@ -163,13 +365,13 @@ exports[`NumberField component it limits numbers to 4 decimal places if the roun
     >
       <FormLabel
         component="label"
-        fieldId="textfield_17"
-        id="textfield_label_18"
+        fieldId="textfield_19"
+        id="textfield_label_20"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_17"
-          id="textfield_label_18"
+          htmlFor="textfield_19"
+          id="textfield_label_20"
         >
           <span
             className=""
@@ -180,10 +382,11 @@ exports[`NumberField component it limits numbers to 4 decimal places if the roun
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_17"
+        id="textfield_19"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
+        onFocus={[Function]}
         type="text"
         value="12332"
       />
@@ -226,12 +429,12 @@ exports[`NumberField component passes back numeric values on change limited to 4
 >
   <TextField
     className="stuff"
-    inputRef={[Function]}
     label="test label"
     mask={null}
     name="test name"
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     size="medium"
     type="text"
     value="456.783389"
@@ -241,13 +444,13 @@ exports[`NumberField component passes back numeric values on change limited to 4
     >
       <FormLabel
         component="label"
-        fieldId="textfield_19"
-        id="textfield_label_20"
+        fieldId="textfield_21"
+        id="textfield_label_22"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_19"
-          id="textfield_label_20"
+          htmlFor="textfield_21"
+          id="textfield_label_22"
         >
           <span
             className=""
@@ -258,10 +461,11 @@ exports[`NumberField component passes back numeric values on change limited to 4
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_19"
+        id="textfield_21"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
+        onFocus={[Function]}
         type="text"
         value="456.783389"
       />
@@ -304,12 +508,12 @@ exports[`NumberField component passes back numeric values on change, but still r
 >
   <TextField
     className="stuff"
-    inputRef={[Function]}
     label="test label"
     mask="currency"
     name="test name"
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     size="medium"
     type="text"
     value="123,456"
@@ -319,13 +523,13 @@ exports[`NumberField component passes back numeric values on change, but still r
     >
       <FormLabel
         component="label"
-        fieldId="textfield_9"
-        id="textfield_label_10"
+        fieldId="textfield_11"
+        id="textfield_label_12"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_9"
-          id="textfield_label_10"
+          htmlFor="textfield_11"
+          id="textfield_label_12"
         >
           <span
             className=""
@@ -348,11 +552,12 @@ exports[`NumberField component passes back numeric values on change, but still r
           <input
             aria-label="test label. Enter amount in dollars."
             className="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_9"
+            id="textfield_11"
             inputMode="numeric"
             name="test name"
             onBlur={[Function]}
             onChange={[Function]}
+            onFocus={[Function]}
             pattern="[0-9.-]*"
             type="text"
             value="123,456"
@@ -398,12 +603,12 @@ exports[`NumberField component passes back rounded numeric values on change, but
 >
   <TextField
     className="stuff"
-    inputRef={[Function]}
     label="test label"
     mask="currency"
     name="test name"
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     size="medium"
     type="text"
     value="123,456.78"
@@ -413,13 +618,13 @@ exports[`NumberField component passes back rounded numeric values on change, but
     >
       <FormLabel
         component="label"
-        fieldId="textfield_11"
-        id="textfield_label_12"
+        fieldId="textfield_13"
+        id="textfield_label_14"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_11"
-          id="textfield_label_12"
+          htmlFor="textfield_13"
+          id="textfield_label_14"
         >
           <span
             className=""
@@ -442,11 +647,12 @@ exports[`NumberField component passes back rounded numeric values on change, but
           <input
             aria-label="test label. Enter amount in dollars."
             className="ds-c-field ds-c-field--currency ds-c-field--medium"
-            id="textfield_11"
+            id="textfield_13"
             inputMode="numeric"
             name="test name"
             onBlur={[Function]}
             onChange={[Function]}
+            onFocus={[Function]}
             pattern="[0-9.-]*"
             type="text"
             value="123,456.78"
@@ -474,12 +680,12 @@ exports[`NumberField component renders correctly 1`] = `
 >
   <TextField
     className="stuff"
-    inputRef={[Function]}
     label="test label"
     mask={null}
     name="test name"
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     size="medium"
     type="text"
     value="123"
@@ -510,6 +716,7 @@ exports[`NumberField component renders correctly 1`] = `
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
+        onFocus={[Function]}
         type="text"
         value="123"
       />
@@ -570,12 +777,12 @@ exports[`NumberField component returns partial number if non-numeric characters 
 >
   <TextField
     className="stuff"
-    inputRef={[Function]}
     label="test label"
     mask={null}
     name="test name"
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     size="medium"
     type="text"
     value="7"
@@ -585,13 +792,13 @@ exports[`NumberField component returns partial number if non-numeric characters 
     >
       <FormLabel
         component="label"
-        fieldId="textfield_21"
-        id="textfield_label_22"
+        fieldId="textfield_23"
+        id="textfield_label_24"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_21"
-          id="textfield_label_22"
+          htmlFor="textfield_23"
+          id="textfield_label_24"
         >
           <span
             className=""
@@ -602,10 +809,11 @@ exports[`NumberField component returns partial number if non-numeric characters 
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_21"
+        id="textfield_23"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
+        onFocus={[Function]}
         type="text"
         value="7"
       />
@@ -666,12 +874,12 @@ exports[`NumberField component rounds numbers when the component loses focus, ca
 >
   <TextField
     className="stuff"
-    inputRef={[Function]}
     label="test label"
     mask={null}
     name="test name"
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     size="medium"
     type="text"
     value="12332"
@@ -681,13 +889,13 @@ exports[`NumberField component rounds numbers when the component loses focus, ca
     >
       <FormLabel
         component="label"
-        fieldId="textfield_13"
-        id="textfield_label_14"
+        fieldId="textfield_15"
+        id="textfield_label_16"
       >
         <label
           className="ds-c-label"
-          htmlFor="textfield_13"
-          id="textfield_label_14"
+          htmlFor="textfield_15"
+          id="textfield_label_16"
         >
           <span
             className=""
@@ -698,12 +906,92 @@ exports[`NumberField component rounds numbers when the component loses focus, ca
       </FormLabel>
       <input
         className="ds-c-field ds-c-field--medium"
-        id="textfield_13"
+        id="textfield_15"
         name="test name"
         onBlur={[Function]}
         onChange={[Function]}
+        onFocus={[Function]}
         type="text"
         value="12332"
+      />
+    </div>
+  </TextField>
+</NumberField>
+`;
+
+exports[`NumberField component sets the text field content to zero on blur if the value is blank 1`] = `
+<NumberField
+  className="stuff"
+  fieldRef={null}
+  label="test label"
+  mask={null}
+  min={null}
+  name="test name"
+  onBlur={null}
+  onChange={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "target": Object {
+              "value": 0,
+            },
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  round={false}
+  size="medium"
+  value=""
+>
+  <TextField
+    className="stuff"
+    label="test label"
+    mask={null}
+    name="test name"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    size="medium"
+    type="text"
+    value="0"
+  >
+    <div
+      className="ds-u-clearfix stuff"
+    >
+      <FormLabel
+        component="label"
+        fieldId="textfield_7"
+        id="textfield_label_8"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="textfield_7"
+          id="textfield_label_8"
+        >
+          <span
+            className=""
+          >
+            test label
+          </span>
+        </label>
+      </FormLabel>
+      <input
+        className="ds-c-field ds-c-field--medium"
+        id="textfield_7"
+        name="test name"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        type="text"
+        value="0"
       />
     </div>
   </TextField>
