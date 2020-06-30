@@ -1,8 +1,8 @@
-import { Dropdown, Button } from '@cmsgov/design-system-core';
+import { Dropdown } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
@@ -113,8 +113,6 @@ const CostAllocateFFP = ({
   add,
   jumpTo: jumpAction
 }) => {
-  const history = useHistory();
-
   const setOther = year => e => {
     setOtherFunding(activityIndex, year, e.target.value);
   };
@@ -127,7 +125,6 @@ const CostAllocateFFP = ({
   const onAdd = () => {
     add();
     jumpAction(`activities-list`);
-    history.push(`/apd/activities`);
     window.scrollTo(0, 0);
   };
 
@@ -309,7 +306,9 @@ const CostAllocateFFP = ({
       />
       {activityIndex + 1 === activityCount && (
         <div className="pre-button-section-break">
-          <Button onClick={onAdd}>Add another activity</Button>
+          <Link to="/apd/activities" onClick={onAdd} className="ds-c-button">
+            Add another activity
+          </Link>
         </div>
       )}
     </Fragment>
