@@ -13,13 +13,7 @@ exports[`PercentField component renders correctly 1`] = `
     className="stuff"
     fieldRef={
       Object {
-        "current": <input
-          class="ds-c-field ds-c-field--medium"
-          id="textfield_1"
-          name="test name"
-          type="text"
-          value="123"
-        />,
+        "current": null,
       }
     }
     label="test label"
@@ -34,12 +28,12 @@ exports[`PercentField component renders correctly 1`] = `
   >
     <TextField
       className="stuff"
-      inputRef={[Function]}
       label="test label"
       mask={null}
       name="test name"
       onBlur={[Function]}
       onChange={[Function]}
+      onFocus={[Function]}
       size="medium"
       type="text"
       value="123"
@@ -70,6 +64,7 @@ exports[`PercentField component renders correctly 1`] = `
           name="test name"
           onBlur={[Function]}
           onChange={[Function]}
+          onFocus={[Function]}
           type="text"
           value="123"
         />
