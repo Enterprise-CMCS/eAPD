@@ -1,13 +1,6 @@
 import { TextField, unmaskValue } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useCallback, useState } from 'react';
-
-const selectTextIfZero = ({ target }) => {
-  const value = +target.value.replace(/[^0-9]/g);
-  if (value === 0) {
-    target.select();
-  }
-};
+import React, { useCallback, useState } from 'react';
 
 const NumberField = ({
   fieldRef,
@@ -19,19 +12,7 @@ const NumberField = ({
   round,
   ...props
 }) => {
-  const textField = fieldRef || useRef(null);
   const [local, setLocal] = useState(`${value}`);
-
-  useEffect(() => {
-    textField.current.addEventListener('focus', selectTextIfZero);
-    return () => {
-      textField.current.removeEventListener('focus', selectTextIfZero);
-    };
-  }, []);
-
-  const setRef = ref => {
-    textField.current = ref;
-  };
 
   const stringToNumber = stringValue => {
     // use ParseFloat rather than "+" because it won't throw an error and
@@ -80,14 +61,20 @@ const NumberField = ({
     [onChange]
   );
 
+  const focusHandler = e => {
+    if (e.target.value === '0') {
+      setLocal('');
+    }
+  };
+
   return (
     <TextField
       {...props}
       mask={mask}
       value={local}
-      inputRef={setRef}
       onBlur={blurHandler}
       onChange={changeHandler}
+      onFocus={focusHandler}
     />
   );
 };
