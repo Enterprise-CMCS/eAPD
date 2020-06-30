@@ -21,11 +21,8 @@ describe('NumberField component', () => {
   });
 
   it('blanks the text field content when selected if the value is zero', () => {
-    const ref = { current: null };
-
-    mount(
+    const component = mount(
       <NumberField
-        fieldRef={ref}
         label="test label"
         name="test name"
         size="medium"
@@ -35,17 +32,39 @@ describe('NumberField component', () => {
       />
     );
 
-    ref.current.focus();
+    act(() => {
+      component.find('TextField').prop('onFocus')({
+        target: { value: '0' }
+      });
+    });
+    component.update();
+    expect(component).toMatchSnapshot();
+  });
 
-    expect(ref.current.value).toEqual('');
+  it('does not blank the text field content when selected if the value is not zero', () => {
+    const component = mount(
+      <NumberField
+        label="test label"
+        name="test name"
+        size="medium"
+        className="stuff"
+        value="678"
+        onChange={jest.fn()}
+      />
+    );
+
+    act(() => {
+      component.find('TextField').prop('onFocus')({
+        target: { value: '678' }
+      });
+    });
+    component.update();
+    expect(component).toMatchSnapshot();
   });
 
   it('sets the text field content to zero on blur if the value is blank', () => {
-    const ref = { current: null };
-
-    mount(
+    const component = mount(
       <NumberField
-        fieldRef={ref}
         label="test label"
         name="test name"
         size="medium"
@@ -55,39 +74,18 @@ describe('NumberField component', () => {
       />
     );
 
-    ref.current.focus();
-    ref.current.blur();
-
-    expect(ref.current.value).toEqual('0');
+    act(() => {
+      component.find('TextField').prop('onBlur')({
+        target: { value: '' }
+      });
+    });
+    component.update();
+    expect(component).toMatchSnapshot();
   });
 
-  it('does not blank the text field content on blur if the value is not zero', () => {
-    const ref = { current: null };
-
-    mount(
-      <NumberField
-        fieldRef={ref}
-        label="test label"
-        name="test name"
-        size="medium"
-        className="stuff"
-        value="123"
-        onChange={jest.fn()}
-      />
-    );
-
-    ref.current.focus();
-    ref.current.blur();
-
-    expect(ref.current.value).toEqual('123');
-  });
-
-  it('removes the input field event listeners when the NumberField component is unmounted', () => {
-    const ref = { current: null };
-
+  it('does not change the text field content on blur if the value is not zero', () => {
     const component = mount(
       <NumberField
-        fieldRef={ref}
         label="test label"
         name="test name"
         size="medium"
@@ -97,12 +95,13 @@ describe('NumberField component', () => {
       />
     );
 
-    const removeEventListener = jest.fn();
-    ref.current.removeEventListener = removeEventListener;
-    component.unmount();
-
-    expect(removeEventListener).toHaveBeenCalled();
-    expect(ref.current).toEqual(null);
+    act(() => {
+      component.find('TextField').prop('onBlur')({
+        target: { value: '123' }
+      });
+    });
+    component.update();
+    expect(component).toMatchSnapshot();
   });
 
   it('passes back numeric values on change, but still renders with mask', () => {
