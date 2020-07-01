@@ -9,7 +9,7 @@ const ObjectiveAndKeyResultReview = ({
 }) => (
   <Review
     heading="Objective:"
-    headingLevel={6}
+    headingLevel="5"
     onDeleteClick={onDeleteClick}
     onEditClick={expand}
   >
