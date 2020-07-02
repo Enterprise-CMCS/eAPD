@@ -25,6 +25,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     <Connect(RichText)
       content="support"
       editorClassName="rte-textarea-1"
+      key="7"
       onSync={[Function]}
     />
     <div

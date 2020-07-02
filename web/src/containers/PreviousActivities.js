@@ -11,6 +11,13 @@ import RichText from '../components/RichText';
 import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
 import { selectPreviousActivitySummary } from '../reducers/apd.selectors';
+import { generateKey as defaultGenerateKey } from '../util';
+
+// Make this thing injectible for testing.
+let generateKey = defaultGenerateKey;
+export const setKeyGenerator = fn => {
+  generateKey = fn;
+};
 
 const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
   const onChange = value => setSummary(value);
@@ -26,6 +33,7 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
           {t('previousActivities.outline.instruction.label')}
         </h4>
         <RichText
+          key={generateKey()}
           content={previousActivitySummary}
           onSync={onChange}
           editorClassName="rte-textarea-l"

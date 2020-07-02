@@ -24,6 +24,7 @@ exports[`the CostAllocate component renders correctly 1`] = `
     <Connect(RichText)
       content="cost allocation"
       editorClassName="rte-textarea-l"
+      key="1"
       onSync={[Function]}
     />
   </div>
@@ -44,6 +45,7 @@ exports[`the CostAllocate component renders correctly 1`] = `
     <Connect(RichText)
       content="other funding"
       editorClassName="rte-textarea-l"
+      key="1"
       onSync={[Function]}
     />
   </div>

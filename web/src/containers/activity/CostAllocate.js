@@ -37,6 +37,7 @@ const CostAllocate = ({
           }}
         />
         <RichText
+          key={activityIndex}
           content={methodology}
           onSync={syncMethodology}
           editorClassName="rte-textarea-l"
@@ -52,6 +53,7 @@ const CostAllocate = ({
           }}
         />
         <RichText
+          key={activityIndex}
           content={otherSources}
           onSync={syncOtherFunding}
           editorClassName="rte-textarea-l"
