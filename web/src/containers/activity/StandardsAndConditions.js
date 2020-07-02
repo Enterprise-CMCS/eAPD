@@ -30,6 +30,7 @@ const StandardsAndConditions = ({
       </p>
 
       <RichText
+        key={activityIndex}
         content={activity.standardsAndConditions.supports}
         onSync={html => setSupport(activityIndex, html)}
         editorClassName="rte-textarea-1"
