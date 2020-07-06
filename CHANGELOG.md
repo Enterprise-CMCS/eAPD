@@ -11,6 +11,8 @@ Anticipated release: July 13, 2020
 
 #### ⚙️ Behind the scenes
 
+- [TechDebt] Fix calls to cmsgov `<Review/>` component with `props.headingLevel` as number, string is required
+
 # Previous releases
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
