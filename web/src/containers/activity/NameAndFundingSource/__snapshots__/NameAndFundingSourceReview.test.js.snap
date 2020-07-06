@@ -17,7 +17,7 @@ exports[`the NameAndFundingSourceReview component renders correctly when expandi
         Rich Uncle Pennybags
       </React.Fragment>
     }
-    headingLevel={4}
+    headingLevel="4"
     onDeleteClick={null}
     onEditClick={null}
   />
@@ -41,7 +41,7 @@ exports[`the NameAndFundingSourceReview component renders correctly when expandi
         Rich Uncle Pennybags
       </React.Fragment>
     }
-    headingLevel={4}
+    headingLevel="4"
     onDeleteClick={null}
     onEditClick={[MockFunction]}
   />
