@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Section, SectionDesc, SectionTitle, Subsection } from './Section';
+import { Section, Subsection } from './Section';
 
 describe('Section component', () => {
   test('renders correctly with no resource', () => {
@@ -17,24 +17,6 @@ describe('Section component', () => {
   test('renders correctly with resource containing title but no helptext', () => {
     const component = shallow(
       <Section resource="activities.goals">goals test child</Section>
-    );
-    expect(component).toMatchSnapshot();
-  });
-});
-
-describe('SectionDesc component', () => {
-  test('renders correctly', () => {
-    const component = shallow(<SectionDesc>test child</SectionDesc>);
-    expect(component).toMatchSnapshot();
-  });
-});
-
-describe('SectionTitle component', () => {
-  test('renders correctly', () => {
-    const component = shallow(
-      <SectionTitle>
-        <div className="test child" />
-      </SectionTitle>
     );
     expect(component).toMatchSnapshot();
   });
