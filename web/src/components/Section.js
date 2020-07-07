@@ -5,26 +5,14 @@ import Instruction from './Instruction';
 import { t } from '../i18n';
 import SecondaryNav from './SecondaryNav';
 
-const SectionTitle = ({ children }) => <h2>{children}</h2>;
-
-SectionTitle.propTypes = {
-  children: PropTypes.node.isRequired
-};
-
-const SectionDesc = ({ children }) => <p className="mb4 text-l">{children}</p>;
-
-SectionDesc.propTypes = {
-  children: PropTypes.node.isRequired
-};
-
 const Section = ({ children, id, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
-  const helptext = t([resource, 'helpText'], { defaultValue: false });
+  const helpText = t([resource, 'helpText'], { defaultValue: false });
 
   return (
     <section id={id}>
       {title && <h2 className="ds-h2">{title}</h2>}
-      {helptext && <div className="ds-text--lead section--help-text">{helptext}</div>}
+      {helpText && <div className="ds-text--lead section--help-text">{helpText}</div>}
       {children}
       <SecondaryNav />
     </section>
@@ -83,4 +71,4 @@ Subsection.defaultProps = {
 
 export default Section;
 
-export { Section, SectionDesc, SectionTitle, Subsection };
+export { Section, Subsection };

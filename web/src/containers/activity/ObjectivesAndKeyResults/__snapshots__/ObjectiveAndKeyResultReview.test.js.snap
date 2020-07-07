@@ -4,7 +4,7 @@ exports[`the ObjectiveAndKeyResultReview component renders correctly 1`] = `
 <Review
   editHref={null}
   heading="Objective:"
-  headingLevel={6}
+  headingLevel="5"
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
 >
