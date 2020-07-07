@@ -20,7 +20,7 @@ const ContractorResourceReview = ({
   return (
     <Review
       heading={`${index + 1}. ${name || 'Contractor Name not specified'}`}
-      headingLevel={6}
+      headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >

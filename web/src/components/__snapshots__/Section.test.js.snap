@@ -42,22 +42,6 @@ exports[`Section component renders correctly with resource containing title but 
 </section>
 `;
 
-exports[`SectionDesc component renders correctly 1`] = `
-<p
-  className="mb4 text-l"
->
-  test child
-</p>
-`;
-
-exports[`SectionTitle component renders correctly 1`] = `
-<h2>
-  <div
-    className="test child"
-  />
-</h2>
-`;
-
 exports[`Subsection component renders correctly 1`] = `
 <Fragment>
   <h3
