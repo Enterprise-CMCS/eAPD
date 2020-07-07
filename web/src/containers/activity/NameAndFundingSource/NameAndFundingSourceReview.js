@@ -25,7 +25,7 @@ const NameAndFundingSourceReview = ({
             | {fundingSource}
           </Fragment>
         }
-        headingLevel={4}
+        headingLevel="4"
         onEditClick={disableExpand ? null : expand}
       />
     </div>

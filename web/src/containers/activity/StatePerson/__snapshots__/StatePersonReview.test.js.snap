@@ -4,7 +4,7 @@ exports[`the StatePersonReview component renders correctly 1`] = `
 <Review
   editHref={null}
   heading="54. test desc"
-  headingLevel={6}
+  headingLevel="5"
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
 >

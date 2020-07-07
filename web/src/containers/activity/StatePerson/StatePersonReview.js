@@ -13,7 +13,7 @@ const StatePersonReview = ({
   return (
     <Review
       heading={`${index + 1}. ${title}`}
-      headingLevel={6}
+      headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >

@@ -21,7 +21,7 @@ class ExecutiveSummary extends PureComponent {
         <h2>Executive Summary</h2>
         <Review
           heading="Total cost of all activities"
-          headingLevel={3}
+          headingLevel="3"
           className="ds-u-border--0"
         >
           <ul className="ds-c-list--bare">
@@ -54,7 +54,7 @@ class ExecutiveSummary extends PureComponent {
             key={activity.key}
             heading={`Activity ${i + 1}: ${activity.name ||
               t('activities.noNameYet')}`}
-            headingLevel={3}
+            headingLevel="3"
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >
             {activity.summary && <p>{activity.summary}</p>}
