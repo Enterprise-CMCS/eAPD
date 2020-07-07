@@ -14,7 +14,7 @@ const MilestoneReview = ({
   return (
     <Review
       heading={`${index + 1}. ${milestone}`}
-      headingLevel={4}
+      headingLevel="4"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >

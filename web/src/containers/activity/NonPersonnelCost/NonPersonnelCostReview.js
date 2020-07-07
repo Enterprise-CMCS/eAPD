@@ -13,7 +13,7 @@ const NonPersonnelCostReview = ({
   return (
     <Review
       heading={`${index + 1}. ${category}`}
-      headingLevel={6}
+      headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >

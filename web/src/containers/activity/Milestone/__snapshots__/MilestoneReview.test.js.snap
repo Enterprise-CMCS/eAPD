@@ -4,7 +4,7 @@ exports[`the MilestoneReview component renders correctly 1`] = `
 <Review
   editHref={null}
   heading="1533. Milestone name"
-  headingLevel={4}
+  headingLevel="4"
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
 >
