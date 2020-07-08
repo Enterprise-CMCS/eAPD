@@ -113,6 +113,13 @@ td {
         background-color: $color-warn-lightest;
       }
     }
+    /* used on a tr to highlight a whole row */
+    .summaery-table--gray_row__highlight {
+      td,
+      th {
+        background-color: $color-gray-lightest;
+      }
+    }
   }
 }
 
