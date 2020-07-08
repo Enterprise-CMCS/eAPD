@@ -5,7 +5,7 @@ exports[`Section component renders correctly with no resource 1`] = `
   id={null}
 >
   test child
-  <SecondaryNav />
+  <Connect(SecondaryNav) />
 </section>
 `;
 
@@ -24,7 +24,7 @@ exports[`Section component renders correctly with resource containing title and 
     Provide an introduction to the state program. Include context for this funding request by providing information such as current size, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section.
   </div>
   apd test child
-  <SecondaryNav />
+  <Connect(SecondaryNav) />
 </section>
 `;
 
@@ -38,7 +38,7 @@ exports[`Section component renders correctly with resource containing title but 
     Objectives and Key Results
   </h2>
   goals test child
-  <SecondaryNav />
+  <Connect(SecondaryNav) />
 </section>
 `;
 
