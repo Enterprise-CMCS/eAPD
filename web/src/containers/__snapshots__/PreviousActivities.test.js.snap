@@ -22,7 +22,6 @@ exports[`previous activities component renders correctly 1`] = `
     <Connect(RichText)
       content="bob"
       editorClassName="rte-textarea-l"
-      key="--- key ---"
       onSync={[Function]}
     />
   </Subsection>

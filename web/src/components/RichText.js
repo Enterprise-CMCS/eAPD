@@ -72,32 +72,26 @@ const uploadImage = (upload, domID, onSync) => (blob, success, failure) =>
     });
 
 class RichText extends Component {
-  // note: the constructor does not fire if you switch activities but stay on the same page
-  // (eg. Overview) so require a key to force React to create a new RichText instance rather than reuse the existing one
-  // ref: https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
   constructor(props) {
     super(props);
 
     this.state = {
-      content: props.content,
       id: props.id || `rte-${generateKey()}`
     };
   }
 
   onEditorChange = newContent => {
     const { onSync } = this.props;
-    this.setState({ content: newContent });
     onSync(newContent);
   };
 
   render() {
-    const { onSync, uploadFile: upload, key } = this.props;
-    const { content, id } = this.state;
+    const { onSync, uploadFile: upload, content } = this.props;
+    const { id } = this.state;
 
     return (
       <div className="rte--wrapper">
         <Editor
-          key={key}
           id={id}
           init={{
             autoresize_bottom_margin: 0,
@@ -120,7 +114,6 @@ class RichText extends Component {
 
 RichText.propTypes = {
   content: PropTypes.string,
-  key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   id: PropTypes.string,
   onSync: PropTypes.func,
   uploadFile: PropTypes.func.isRequired

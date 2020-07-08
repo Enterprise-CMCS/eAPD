@@ -3,7 +3,6 @@ import React from 'react';
 
 import {
   plain as ApdSummary,
-  setKeyGenerator,
   mapStateToProps,
   mapDispatchToProps
 } from './ApdSummary';
@@ -32,9 +31,6 @@ describe('apd summary component', () => {
     yearOptions: ['1', '2', '3'],
     years: ['1', '2']
   };
-
-  const generateKey = () => '--- key ---';
-  setKeyGenerator(generateKey);
 
   beforeEach(() => {
     props.addApdYear.mockClear();
