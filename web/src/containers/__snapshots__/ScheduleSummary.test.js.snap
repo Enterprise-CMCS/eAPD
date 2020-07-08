@@ -16,19 +16,35 @@ exports[`schedule summary component renders correctly 1`] = `
     >
       <table
         className="budget-table"
-        key="Number One"
       >
         <caption
           className="ds-u-visibility--screen-reader"
         >
-          Activity 
-          1
-          : 
-          Number One
+          Activity List Overivew
         </caption>
         <thead>
-          <tr>
+          <tr
+            className="budget-table--row__primary-header"
+          >
             <th
+              scope="col"
+            >
+              Activity List Overview
+            </th>
+            <th
+              className="ds-u-text-align--left"
+              scope="col"
+            >
+              Activity Date Range
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            className="summaery-table--gray_row__highlight"
+            key="Number One"
+          >
+            <td
               className="ds-u-font-weight--bold ds-u-border-right--0"
               style={
                 Object {
@@ -40,11 +56,114 @@ exports[`schedule summary component renders correctly 1`] = `
               1
               : 
               Number One
-            </th>
-            <th
+               Milestones
+            </td>
+            <td
               className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
             >
               date range 1
+            </td>
+          </tr>
+          <tr
+            className="summaery-table--gray_row__highlight"
+            key="Number 💩"
+          >
+            <td
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
+            >
+              Activity 
+              2
+              : 
+              Number 💩
+               Milestones
+            </td>
+            <td
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+            >
+              date range 2
+            </td>
+          </tr>
+          <tr
+            className="summaery-table--gray_row__highlight"
+            key="Number Three"
+          >
+            <td
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
+            >
+              Activity 
+              3
+              : 
+              Number Three
+               Milestones
+            </td>
+            <td
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+            >
+              date range 3
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </Subsection>
+    <Subsection
+      headerClassName={null}
+      id="schedule-summary-table"
+      nested={false}
+      resource="scheduleSummary.milestone"
+    >
+      <table
+        className="budget-table"
+        key="Number One"
+      >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          1
+          : 
+          Number One
+        </caption>
+        <thead>
+          <tr
+            className="budget-table--row__primary-header"
+          >
+            <th
+              scope="col"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
+            >
+              Activity Milestones
+            </th>
+            <th
+              className="ds-u-text-align--left"
+              scope="col"
+            >
+              Target Completion Date
+            </th>
+          </tr>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              colSpan={2}
+            >
+              Activity 
+              1
+              : 
+              Number One
+               Milestones
             </th>
           </tr>
         </thead>
@@ -92,24 +211,36 @@ exports[`schedule summary component renders correctly 1`] = `
           Number 💩
         </caption>
         <thead>
-          <tr>
+          <tr
+            className="budget-table--row__primary-header"
+          >
             <th
-              className="ds-u-font-weight--bold ds-u-border-right--0"
+              scope="col"
               style={
                 Object {
                   "width": "70%",
                 }
               }
             >
+              Activity Milestones
+            </th>
+            <th
+              className="ds-u-text-align--left"
+              scope="col"
+            >
+              Target Completion Date
+            </th>
+          </tr>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              colSpan={2}
+            >
               Activity 
               2
               : 
               Number 💩
-            </th>
-            <th
-              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
-            >
-              date range 2
+               Milestones
             </th>
           </tr>
         </thead>
@@ -171,24 +302,36 @@ exports[`schedule summary component renders correctly 1`] = `
           Number Three
         </caption>
         <thead>
-          <tr>
+          <tr
+            className="budget-table--row__primary-header"
+          >
             <th
-              className="ds-u-font-weight--bold ds-u-border-right--0"
+              scope="col"
               style={
                 Object {
                   "width": "70%",
                 }
               }
             >
+              Activity Milestones
+            </th>
+            <th
+              className="ds-u-text-align--left"
+              scope="col"
+            >
+              Target Completion Date
+            </th>
+          </tr>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              colSpan={2}
+            >
               Activity 
               3
               : 
               Number Three
-            </th>
-            <th
-              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
-            >
-              date range 3
+               Milestones
             </th>
           </tr>
         </thead>
@@ -227,6 +370,18 @@ exports[`schedule summary component renders correctly with no data 1`] = `
       id="schedule-summary-table"
       nested={false}
       resource="scheduleSummary.main"
+    >
+      <div
+        className="ds-c-alert ds-c-alert--warn"
+      >
+        There are no milestones scheduled.
+      </div>
+    </Subsection>
+    <Subsection
+      headerClassName={null}
+      id="schedule-summary-table"
+      nested={false}
+      resource="scheduleSummary.milestone"
     >
       <div
         className="ds-c-alert ds-c-alert--warn"
