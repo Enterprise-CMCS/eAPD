@@ -41,7 +41,6 @@ exports[`activity overview/summary section (in the activity body) renders correc
     </FormLabel>
     <Connect(RichText)
       editorClassName="rte-textarea-l"
-      key="37"
       onSync={[Function]}
     />
   </div>
@@ -68,7 +67,6 @@ exports[`activity overview/summary section (in the activity body) renders correc
     />
     <Connect(RichText)
       editorClassName="rte-textarea-l"
-      key="37"
       onSync={[Function]}
     />
   </div>

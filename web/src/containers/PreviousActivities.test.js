@@ -3,7 +3,6 @@ import React from 'react';
 
 import {
   plain as PreviousActivities,
-  setKeyGenerator,
   mapStateToProps,
   mapDispatchToProps
 } from './PreviousActivities';
@@ -11,9 +10,6 @@ import {
 import { setPreviousActivitySummary } from '../actions/editApd';
 
 describe('previous activities component', () => {
-  const generateKey = () => '--- key ---';
-  setKeyGenerator(generateKey);
-
   const props = {
     previousActivitySummary: 'bob',
     setSummary: jest.fn()

@@ -135,7 +135,6 @@ const ActivityOverview = ({
           <Instruction source="activities.overview.activityDescriptionInput.hie" />
         )}
         <RichText
-          key={activityIndex}
           content={description}
           onSync={syncDescription}
           editorClassName="rte-textarea-l"
@@ -148,7 +147,6 @@ const ActivityOverview = ({
         </FormLabel>
         <Instruction source="activities.overview.activityAlternativesInput" />
         <RichText
-          key={activityIndex}
           content={alternatives}
           onSync={syncAlternatives}
           editorClassName="rte-textarea-l"

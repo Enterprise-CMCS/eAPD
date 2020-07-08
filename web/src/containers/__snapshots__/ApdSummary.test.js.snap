@@ -71,7 +71,6 @@ exports[`apd summary component renders correctly 1`] = `
       <Connect(RichText)
         content="about the program"
         editorClassName="rte-textarea-l"
-        key="--- key ---"
         onSync={[Function]}
       />
     </div>
@@ -92,7 +91,6 @@ exports[`apd summary component renders correctly 1`] = `
       <Connect(RichText)
         content="about hit"
         editorClassName="rte-textarea-l"
-        key="--- key ---"
         onSync={[Function]}
       />
     </div>
@@ -113,7 +111,6 @@ exports[`apd summary component renders correctly 1`] = `
       <Connect(RichText)
         content="about hie"
         editorClassName="rte-textarea-l"
-        key="--- key ---"
         onSync={[Function]}
       />
     </div>
@@ -132,7 +129,6 @@ exports[`apd summary component renders correctly 1`] = `
       <Connect(RichText)
         content="about mmis"
         editorClassName="rte-textarea-l"
-        key="--- key ---"
         onSync={[Function]}
       />
     </div>

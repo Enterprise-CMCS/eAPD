@@ -17,13 +17,6 @@ import Instruction from '../components/Instruction';
 import { Section } from '../components/Section';
 import { t } from '../i18n';
 import { selectSummary } from '../reducers/apd.selectors';
-import { generateKey as defaultGenerateKey } from '../util';
-
-// Make this thing injectible for testing.
-let generateKey = defaultGenerateKey;
-export const setKeyGenerator = fn => {
-  generateKey = fn;
-};
 
 const ApdSummary = ({
   addApdYear,
@@ -74,7 +67,6 @@ const ApdSummary = ({
         <div className="ds-u-margin-y--3">
           <Instruction source="apd.introduction.instruction" />
           <RichText
-            key={generateKey()}
             content={programOverview}
             onSync={syncRichText(setOverview)}
             editorClassName="rte-textarea-l"
@@ -83,7 +75,6 @@ const ApdSummary = ({
         <div className="ds-u-margin-bottom--3">
           <Instruction source="apd.hit.instruction" />
           <RichText
-            key={generateKey()}
             content={narrativeHIT}
             onSync={syncRichText(setHIT)}
             editorClassName="rte-textarea-l"
@@ -92,7 +83,6 @@ const ApdSummary = ({
         <div className="ds-u-margin-bottom--3">
           <Instruction source="apd.hie.instruction" />
           <RichText
-            key={generateKey()}
             content={narrativeHIE}
             onSync={syncRichText(setHIE)}
             editorClassName="rte-textarea-l"
@@ -101,7 +91,6 @@ const ApdSummary = ({
         <div>
           <Instruction source="apd.mmis.instruction" />
           <RichText
-            key={generateKey()}
             content={narrativeMMIS}
             onSync={syncRichText(setMMIS)}
             editorClassName="rte-textarea-l"
@@ -138,6 +127,9 @@ const mapDispatchToProps = {
   setOverview: setProgramOverview
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApdSummary);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdSummary);
 
 export { ApdSummary as plain, mapStateToProps, mapDispatchToProps };
