@@ -8,12 +8,8 @@ import {
 } from './CostAllocateFFP';
 import {
   setCostAllocationFFPFundingSplit,
-  setCostAllocationFFPOtherFunding,
-  addActivity
+  setCostAllocationFFPOtherFunding
 } from '../../actions/editActivity';
-import { jumpTo } from '../../actions/app';
-
-global.scrollTo = jest.fn();
 
 describe('the CostAllocateFFP component', () => {
   const props = {
@@ -137,16 +133,12 @@ describe('the CostAllocateFFP component', () => {
     },
     setFundingSplit: jest.fn(),
     setOtherFunding: jest.fn(),
-    stateName: 'test state',
-    add: jest.fn(),
-    jumpTo: jest.fn()
+    stateName: 'test state'
   };
 
   beforeEach(() => {
     props.setFundingSplit.mockClear();
     props.setOtherFunding.mockClear();
-    props.add.mockClear();
-    props.jumpTo.mockClear();
   });
 
   describe('renders correctly', () => {
@@ -158,26 +150,6 @@ describe('the CostAllocateFFP component', () => {
       const component = shallow(<CostAllocateFFP {...props} />);
       expect(component).toMatchSnapshot();
     });
-    it('renders correctly with add activity button', () => {
-      const component = shallow(
-        <CostAllocateFFP {...props} activityIndex={1} activityCount={2} />
-      );
-      expect(component).toMatchSnapshot();
-    });
-  });
-
-  it('handles add activity button click', () => {
-    const component = shallow(
-      <CostAllocateFFP {...props} activityIndex={1} activityCount={2} />
-    );
-    const link = component.find('.ds-c-button');
-    expect(link.props().to).toBe('/apd/activities');
-
-    component.find('.ds-c-button').simulate('click');
-
-    expect(props.add).toHaveBeenCalled();
-    expect(props.jumpTo).toHaveBeenCalledWith('activities-list');
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
   it('handles changes to other funding', () => {
@@ -245,28 +217,18 @@ describe('the CostAllocateFFP component', () => {
     const getState = jest.fn();
     getState.mockReturnValue({ name: 'denial' });
 
-    const getActivityCount = jest.fn();
-    getActivityCount.mockReturnValue(4);
-
     expect(
       mapStateToProps(
         'my state object',
         { activityIndex: 0 },
-        {
-          getActivity,
-          getCostAllocation,
-          getCostSummary,
-          getState,
-          getActivityCount
-        }
+        { getActivity, getCostAllocation, getCostSummary, getState }
       )
     ).toEqual({
       aKey: 'activity key',
       activityName: 'activity name',
       costAllocation: 'cost allocation',
       costSummary: 'cost summary',
-      stateName: 'denial',
-      activityCount: 4
+      stateName: 'denial'
     });
 
     expect(getActivity).toHaveBeenCalledWith('my state object', {
@@ -279,7 +241,6 @@ describe('the CostAllocateFFP component', () => {
       activityIndex: 0
     });
     expect(getState).toHaveBeenCalledWith('my state object');
-    expect(getActivityCount).toHaveBeenCalledWith('my state object');
 
     // Now test that it builds a default activity name if none is provided
     getActivity.mockReturnValue({ key: 'activity key', name: '' });
@@ -288,30 +249,21 @@ describe('the CostAllocateFFP component', () => {
       mapStateToProps(
         'my state object',
         { activityIndex: 0 },
-        {
-          getActivity,
-          getCostAllocation,
-          getCostSummary,
-          getState,
-          getActivityCount
-        }
+        { getActivity, getCostAllocation, getCostSummary, getState }
       )
     ).toEqual({
       aKey: 'activity key',
       activityName: 'Activity 1',
       costAllocation: 'cost allocation',
       costSummary: 'cost summary',
-      stateName: 'denial',
-      activityCount: 4
+      stateName: 'denial'
     });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
       setFundingSplit: setCostAllocationFFPFundingSplit,
-      setOtherFunding: setCostAllocationFFPOtherFunding,
-      add: addActivity,
-      jumpTo
+      setOtherFunding: setCostAllocationFFPOtherFunding
     });
   });
 });

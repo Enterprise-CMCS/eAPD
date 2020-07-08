@@ -2,24 +2,20 @@ import { Dropdown } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
 import {
   setCostAllocationFFPFundingSplit,
-  setCostAllocationFFPOtherFunding,
-  addActivity
+  setCostAllocationFFPOtherFunding
 } from '../../actions/editActivity';
-import { jumpTo } from '../../actions/app';
 import DollarField from '../../components/DollarField';
 import Dollars from '../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
   selectActivityCostSummary,
-  selectActivityByIndex,
-  selectActivityCount
+  selectActivityByIndex
 } from '../../reducers/activities.selectors';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
@@ -108,10 +104,7 @@ const CostAllocateFFP = ({
   isViewOnly,
   setFundingSplit,
   setOtherFunding,
-  stateName,
-  activityCount,
-  add,
-  jumpTo: jumpAction
+  stateName
 }) => {
   const setOther = year => e => {
     setOtherFunding(activityIndex, year, e.target.value);
@@ -120,12 +113,6 @@ const CostAllocateFFP = ({
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
-  };
-
-  const onAdd = () => {
-    add();
-    jumpAction(`activities-list`);
-    window.scrollTo(0, 0);
   };
 
   const { years } = costSummary;
@@ -304,13 +291,6 @@ const CostAllocateFFP = ({
         costSummary={costSummary}
         stateName={stateName}
       />
-      {activityIndex + 1 === activityCount && (
-        <div className="pre-button-section-break">
-          <Link to="/apd/activities" onClick={onAdd} className="ds-c-button">
-            Add another activity
-          </Link>
-        </div>
-      )}
     </Fragment>
   );
 };
@@ -324,10 +304,7 @@ CostAllocateFFP.propTypes = {
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
   setOtherFunding: PropTypes.func.isRequired,
-  stateName: PropTypes.string.isRequired,
-  activityCount: PropTypes.number.isRequired,
-  add: PropTypes.func.isRequired,
-  jumpTo: PropTypes.func.isRequired
+  stateName: PropTypes.string.isRequired
 };
 
 CostAllocateFFP.defaultProps = {
@@ -341,8 +318,7 @@ const mapStateToProps = (
     getActivity = selectActivityByIndex,
     getCostAllocation = selectCostAllocationForActivityByIndex,
     getCostSummary = selectActivityCostSummary,
-    getState = getUserStateOrTerritory,
-    getActivityCount = selectActivityCount
+    getState = getUserStateOrTerritory
   } = {}
 ) => {
   const activity = getActivity(state, { activityIndex });
@@ -352,16 +328,13 @@ const mapStateToProps = (
     activityName: activity.name || `Activity ${activityIndex + 1}`,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
-    stateName: getState(state).name,
-    activityCount: getActivityCount(state)
+    stateName: getState(state).name
   };
 };
 
 const mapDispatchToProps = {
   setFundingSplit: setCostAllocationFFPFundingSplit,
-  setOtherFunding: setCostAllocationFFPOtherFunding,
-  add: addActivity,
-  jumpTo
+  setOtherFunding: setCostAllocationFFPOtherFunding
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);
