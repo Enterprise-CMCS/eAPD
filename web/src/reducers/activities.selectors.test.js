@@ -11,10 +11,19 @@ import {
   selectActivitiesSidebar,
   selectOKRsByActivityIndex,
   selectGoalsByActivityIndex,
-  makeSelectCostAllocateFFPBudget
+  makeSelectCostAllocateFFPBudget,
+  selectActivityCount
 } from './activities.selectors';
 
 describe('activities state selectors', () => {
+  it('selects the activity count', () => {
+    expect(
+      selectActivityCount({
+        apd: { data: { activities: ['one', { key: 'two' }, 'three'] } }
+      })
+    ).toEqual(3);
+  });
+
   describe('selecting a single activity from its index', () => {
     it('returns the activity if it exists', () => {
       const state = { apd: { data: { activities: ['one', 'two', 'three'] } } };
