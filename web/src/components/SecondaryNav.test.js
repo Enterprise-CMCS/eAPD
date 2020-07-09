@@ -23,13 +23,21 @@ describe('Secondary Nav component', () => {
     props.jumpTo.mockClear();
   });
 
-  it('renders correctly without add activity button', () => {
+  it('renders without add activity button when not on the last activity', () => {
     expect(
       shallow(<SecondaryNav {...props} activeSection="activity-1-ffp" />).dive()
     ).toMatchSnapshot();
   });
 
-  it('renders correctly with add activity button', () => {
+  it('renders without add activity button when on the last activity but not on the FFP section', () => {
+    expect(
+      shallow(
+        <SecondaryNav {...props} activeSection="activity-2-something-else" />
+      ).dive()
+    ).toMatchSnapshot();
+  });
+
+  it('renders with add activity button when on the last activity on the FFP section', () => {
     expect(
       shallow(<SecondaryNav {...props} activeSection="activity-2-ffp" />).dive()
     ).toMatchSnapshot();
@@ -54,8 +62,8 @@ describe('Secondary Nav component', () => {
       apd: {
         data: {
           activities: [
-            { anchor: 'activity-1', name: 'activity', key: '1' },
-            { anchor: 'activity-2', name: 'activity', key: '2' }
+            { name: 'activity', key: '1' },
+            { name: 'activity', key: '2' }
           ]
         }
       },
