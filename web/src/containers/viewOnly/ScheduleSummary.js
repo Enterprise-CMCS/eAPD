@@ -30,7 +30,7 @@ const ScheduleSummary = ({ activities }) => (
           {activities.map(({ name: activityName, dateRange }, i) => (
             <tr
               key={activityName}
-              className="summaery-table--gray_row__highlight"
+              className="summary-table--gray_row__highlight"
             >
               <td
                 className="ds-u-font-weight--bold ds-u-border-right--0"

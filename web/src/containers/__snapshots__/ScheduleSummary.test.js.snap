@@ -41,7 +41,7 @@ exports[`schedule summary component renders correctly 1`] = `
         </thead>
         <tbody>
           <tr
-            className="summaery-table--gray_row__highlight"
+            className="summary-table--gray_row__highlight"
             key="Number One"
           >
             <td
@@ -65,7 +65,7 @@ exports[`schedule summary component renders correctly 1`] = `
             </td>
           </tr>
           <tr
-            className="summaery-table--gray_row__highlight"
+            className="summary-table--gray_row__highlight"
             key="Number 💩"
           >
             <td
@@ -89,7 +89,7 @@ exports[`schedule summary component renders correctly 1`] = `
             </td>
           </tr>
           <tr
-            className="summaery-table--gray_row__highlight"
+            className="summary-table--gray_row__highlight"
             key="Number Three"
           >
             <td
