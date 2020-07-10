@@ -1,9 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Secondary Nav component renders correctly 1`] = `
-<div
-  className="next-prev-buttons"
->
-  <Connect(NextPreviousButtons) />
-</div>
+exports[`Secondary Nav component renders with add activity button when on the last activity on the FFP section 1`] = `
+<Fragment>
+  <div
+    className="pre-button-section-break"
+  >
+    <Link
+      className="ds-c-button"
+      onClick={[Function]}
+      to="/apd/activities"
+    >
+      Add another activity
+    </Link>
+  </div>
+  <div
+    className="pre-button-section-break"
+  >
+    <Connect(NextPreviousButtons) />
+  </div>
+</Fragment>
+`;
+
+exports[`Secondary Nav component renders without add activity button when not on the last activity 1`] = `
+<Fragment>
+  <div
+    className="pre-button-section-break"
+  >
+    <Connect(NextPreviousButtons) />
+  </div>
+</Fragment>
+`;
+
+exports[`Secondary Nav component renders without add activity button when on the last activity but not on the FFP section 1`] = `
+<Fragment>
+  <div
+    className="pre-button-section-break"
+  >
+    <Connect(NextPreviousButtons) />
+  </div>
+</Fragment>
 `;

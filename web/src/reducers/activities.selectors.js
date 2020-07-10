@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 import { selectApdData, selectApdYears } from './apd.selectors';
 import { stateDateRangeToDisplay, stateDateToDisplay } from '../util';
 
+export const selectActivityCount = state => state.apd.data.activities.length;
+
 export const selectActivityByIndex = (
   {
     apd: {
