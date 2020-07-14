@@ -19,10 +19,18 @@ function postOrUpdateComment() {
     ID=$(echo "$COMMENTS" | jq -c -r .id)
     # Use $ before the body to use ANSI encoding, which preserves the newlines.
     # Add the commit SHA so we know it deployed and when.
-    curl -s -H "Authorization: token $GH_BOT_PASSWORD" -d $'{"body":"See this pull request in action: '"$PREVIEW_URL"'\n\n'"$GIT_SHA"'"}' -H "Content-Type: application/json" -X PATCH "https://api.github.com/repos/18f/cms-hitech-apd/issues/comments/$ID"
+    curl -s \
+      -H "Authorization: token $GH_BOT_PASSWORD" \
+      -H "Content-Type: application/json" \
+      -d $'{"body":"See this pull request in action: '"$PREVIEW_URL"'\n\n'"$GIT_SHA"'"}' \
+      -X PATCH "https://api.github.com/repos/18f/cms-hitech-apd/issues/comments/$ID"
   else
     # Post a new message if one doesn't already exist.
-    curl -s -H "Authorization: token $GH_BOT_PASSWORD" -d '{"body":"See this pull request in action: '"$PREVIEW_URL"'"}' -H "Content-Type: application/json" -X POST "https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments"
+    curl -s \
+      -H "Authorization: token $GH_BOT_PASSWORD" \
+      -H "Content-Type: application/json" \
+      -d '{"body":"See this pull request in action: '"$PREVIEW_URL"'"}' \
+      -X POST "https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments"
   fi
 }
 
