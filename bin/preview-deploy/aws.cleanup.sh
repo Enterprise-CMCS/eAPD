@@ -97,10 +97,10 @@ function terminateIfClosedPR() {
 #
 # $1 - pull request number
 function updateGithubComment() {
-  COMMENTS=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$1/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
+  COMMENTS=$(curl -s -H "Authorization: token $GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$1/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
   if [ "$COMMENTS" ]; then
     ID=$(echo "$COMMENTS" | jq -c -r .id)
-    curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" -d '{"body":"This deploy was cleaned up."}' -H "Content-Type: application/json" -X PATCH "https://api.github.com/repos/18f/cms-hitech-apd/issues/comments/$ID"
+    curl -s -H "Authorization: token $GH_BOT_PASSWORD" -d '{"body":"This deploy was cleaned up."}' -H "Content-Type: application/json" -X PATCH "https://api.github.com/repos/18f/cms-hitech-apd/issues/comments/$ID"
   fi
 }
 
