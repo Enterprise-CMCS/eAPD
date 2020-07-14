@@ -50,6 +50,10 @@ ffp:
       Medicaid share.
   federalStateSplitInstruction:
     heading: Federal-State Split
+    detail: >-
+      Select the match rate for Federal Financial Participation applicable
+      to this activity. Calculations for the Federal and State share will be updated
+      in the table below.
   quarterlyFFPInstruction:
     heading: Estimated Quarterly Expenditure
     detail: >-
