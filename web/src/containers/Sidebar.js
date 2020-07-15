@@ -30,6 +30,10 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
   const history = useHistory();
   const { path: routePath } = useRouteMatch();
 
+  const handleLinkClick = (event, id, url) => {
+    console.log('got here')
+  }
+
   const pageNav = (id, route) => e => {
     if (route) {
       e.stopPropagation();
@@ -68,6 +72,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
         <h1>{place.name}</h1>
       </div>
       <VerticalNav
+        onLinkClick={handleLinkClick}
         component={Link}
         selectedId={activeSection}
         items={buildLinks(activities)}

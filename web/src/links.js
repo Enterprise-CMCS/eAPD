@@ -157,7 +157,6 @@ const buildActivitySection = (key, i) => ([
 const buildActivityItems = activities => {
   const activityItems = activities.map((a, i) => ({
     id: a.key,
-    url: `#${a.anchor}`,
     label: t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
       number: i + 1,
       name: a.name
@@ -170,13 +169,8 @@ const buildActivityItems = activities => {
     0,
     0,
     {
-      id: 'activities-overview',
-      url: '#activities',
-      label: 'Overview'
-    },
-    {
       id: 'activities-list',
-      url: '#activities-list',
+      url: '/apd/activities#activities-list',
       label: t('activities.list.title')
     }
   );
