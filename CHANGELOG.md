@@ -1,27 +1,17 @@
 # Next release
 
-Anticipated release: July 13, 2020
+Anticipated release: July 20, 2020
 
 #### 🚀 New features
 
-- The \$0 placeholder in dollar fields doesn't always disappear ([#2230])
-- Update help text for Activities > Activity Overview > Activity Schedule ([#2313])
-- Add an “Add another activity” button to the last page of the last activity ([#2282])
-- Update Activity Schedule Summary page ([#2318])
-- Update help text for the FFP/Federal-state split selection ([#2311])
-
 #### 🐛 Bugs fixed
 
-#### ⚙️ Behind the scenes
+- Text Boxes for TinyMCE don't update when navigating between "Activity Overview" sections between Activities ([#2316])
 
-- [TechDebt] Fix calls to cmsgov `<Review/>` component with `props.headingLevel` as number, string is required
+#### ⚙️ Behind the scenes
 
 # Previous releases
 
 See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
-[#2230]: https://github.com/18F/cms-hitech-apd/issues/2230
-[#2313]: https://github.com/18F/cms-hitech-apd/issues/2313
-[#2282]: https://github.com/18F/cms-hitech-apd/issues/2282
-[#2318]: https://github.com/18F/cms-hitech-apd/issues/2318
-[#2311]: https://github.com/18F/cms-hitech-apd/issues/2311
+[#2316]: https://github.com/18F/cms-hitech-apd/issues/2316
