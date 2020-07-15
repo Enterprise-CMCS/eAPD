@@ -3,15 +3,15 @@ import axios from '../util/api';
 import { fetchAllApds } from './app';
 import { getRoles, getUsers } from './admin';
 
-export const AUTH_CHECK_FAILURE = Symbol('auth check failure');
-export const AUTH_CHECK_REQUEST = Symbol('auth check request');
-export const AUTH_CHECK_SUCCESS = Symbol('auth check success');
+export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
+export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
+export const AUTH_CHECK_SUCCESS = 'AUTH_CHECK_SUCCESS';
 
-export const LOGIN_FAILURE = Symbol('login failure');
-export const LOGIN_REQUEST = Symbol('login request');
-export const LOGIN_SUCCESS = Symbol('login success');
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
-export const LOGOUT_SUCCESS = Symbol('logout success');
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const requestAuthCheck = () => ({ type: AUTH_CHECK_REQUEST });
 export const completeAuthCheck = user => ({
