@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { LinksContextConsumer } from '../contexts/LinksContextProvider';
 import NextPreviousButtons from './NextPreviousButtons';
 import { jumpTo } from '../actions/app';
 import {

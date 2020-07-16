@@ -3,11 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@cmsgov/design-system-core';
-import { jumpTo } from '../actions/app';
 import { selectActivitiesSidebar } from '../reducers/activities.selectors';
-import { selectActiveSection } from '../reducers/navigation';
-import { Link as ReactRouterLink } from 'react-router-dom'
-
+import Link from './Link'
 import { buildLinks } from '../links'
 
 const flattenLinks = (obj) => {
@@ -21,12 +18,6 @@ const flattenLinks = (obj) => {
     return acc;
   }, []);
 }
-
-const Link = ({ children, href, ...rest }) => (
-  <ReactRouterLink to={href} {...rest}>
-    {children}
-  </ReactRouterLink>
-)
 
 const NextPreviousButtons = ({ activities }) => {
   const history = useHistory();
@@ -46,7 +37,6 @@ const NextPreviousButtons = ({ activities }) => {
   const previousLinkComponent = !previousLink ? null : (
     <div className='next-prev-button-left'>
       <Button href={previousLink.url} component={Link}>&lt; Previous</Button>
-      {/* <Link to={previousLink.url}>&lt; Previous</Link> */}
       <div className="next-prev-section">{previousLink.label}</div>
     </div>
   )
@@ -54,7 +44,6 @@ const NextPreviousButtons = ({ activities }) => {
   const nextLinkComponent = !nextLink ? null : (
     <div className='next-prev-button-right'>
       <Button variation="primary" href={nextLink.url} component={Link}>Continue &gt;</Button>
-      {/* <Link to={nextLink.url}>Continue &gt;</Link> */}
       <div className="next-section next-prev-section">{nextLink.label}</div>
     </div>
   )

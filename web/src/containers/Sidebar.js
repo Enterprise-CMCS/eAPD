@@ -4,23 +4,17 @@ import { connect } from 'react-redux';
 import {
   useRouteMatch,
   useHistory,
-  Link as ReactRouterLink
 } from 'react-router-dom';
 
 import stickybits from 'stickybits';
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
+import Link from '../components/Link'
 
 import { jumpTo } from '../actions/app';
 import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
 
 import { buildLinks } from '../links'
-
-const Link = ({ children, href, ...rest }) => (
-  <ReactRouterLink to={href} {...rest}>
-    {children}
-  </ReactRouterLink>
-)
 
 const scrollToPageSection = ({ hash }) => {
     window.scrollTo(0, 0)
