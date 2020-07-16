@@ -530,7 +530,7 @@ jobs:
             pip install --quiet awscli
             ./aws.cleanup.sh \
               --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
-              --GH_BOT_PASSWORD "$GH_BOT_PASSWORD" \
+              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
               --GH_BOT_USER "$GH_BOT_USER"
 
   # Frontend production deployment.
