@@ -4,11 +4,11 @@
 
 const logger = require('./logger')('AUDIT');
 
-const CREATE_ACCOUNT = Symbol('audit: create account');
-const DISABLE_ACCOUNT = Symbol('audit: disable account');
-const ENABLE_ACCOUNT = Symbol('audit: enable account');
-const MODIFY_ACCOUNT = Symbol('audit: modify account');
-const REMOVE_ACCOUNT = Symbol('audit: remove account');
+const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
+const DISABLE_ACCOUNT = 'DISABLE_ACCOUNT';
+const ENABLE_ACCOUNT = 'ENABLE_ACCOUNT';
+const MODIFY_ACCOUNT = 'MODIFY_ACCOUNT';
+const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
 
 const actionsToProps = {
   [CREATE_ACCOUNT]: 'createAccount',

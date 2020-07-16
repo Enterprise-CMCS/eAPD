@@ -53,9 +53,21 @@ const setupTinyMCE = upload => editor => {
   });
 };
 
-const uploadImage = (upload, domID, onSync) => (blob, success, failure) =>
-  upload(blob.blob())
-    .then(url => {
+class RichText extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      id: props.id || `rte-${generateKey()}`
+    };
+  }
+
+  uploadImage = () => async (blob, success, failure) => {
+    const { uploadFile: upload, onSync } = this.props;
+    const { id } = this.state;
+
+    try {
+      const url = await upload(blob.blob());
       success(url);
       /* global tinyMCE */
       // ☝️ lets eslint know that tinyMCE is defined. Once we've told Tiny the
@@ -64,32 +76,21 @@ const uploadImage = (upload, domID, onSync) => (blob, success, failure) =>
       // aren't saved as IMG tags unless the user makes additional changes to
       // the textbox content. To get around that, we can get a reference to
       // the editor, pull the content, and manually trigger the event.
-      const editor = tinyMCE.get(domID);
+      const editor = tinyMCE.get(id);
       onSync(editor.getContent());
-    })
-    .catch(() => {
+    } catch (e) {
       failure();
-    });
-
-class RichText extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      content: props.content,
-      id: props.id || `rte-${generateKey()}`
-    };
-  }
+    }
+  };
 
   onEditorChange = newContent => {
     const { onSync } = this.props;
-    this.setState({ content: newContent });
     onSync(newContent);
   };
 
   render() {
-    const { onSync, uploadFile: upload } = this.props;
-    const { content, id } = this.state;
+    const { uploadFile: upload, content } = this.props;
+    const { id } = this.state;
 
     return (
       <div className="rte--wrapper">
@@ -98,7 +99,7 @@ class RichText extends Component {
           init={{
             autoresize_bottom_margin: 0,
             browser_spellcheck: true,
-            images_upload_handler: uploadImage(upload, id, onSync),
+            images_upload_handler: this.uploadImage(),
             menubar: '',
             paste_data_images: true,
             plugins: ['autoresize', 'paste', 'spellchecker'],
@@ -135,6 +136,5 @@ export {
   RichText as plain,
   fileButtonOnClick,
   mapDispatchToProps,
-  setupTinyMCE,
-  uploadImage
+  setupTinyMCE
 };

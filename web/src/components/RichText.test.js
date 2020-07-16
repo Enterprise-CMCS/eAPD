@@ -5,8 +5,7 @@ import {
   plain as RichText,
   fileButtonOnClick,
   mapDispatchToProps,
-  setupTinyMCE,
-  uploadImage
+  setupTinyMCE
 } from './RichText';
 import { uploadFile } from '../actions/editApd';
 
@@ -158,7 +157,12 @@ describe('RichText component', () => {
     it('returns a url if the upload is successful', async () => {
       upload.mockResolvedValue('this is a url');
       getContent.mockReturnValue('this is content');
-      await uploadImage(upload, 'dom id', onSync)(blob, success, failure);
+      const richText = new RichText({
+        uploadFile: upload,
+        id: 'dom id',
+        onSync
+      });
+      await richText.uploadImage()(blob, success, failure);
 
       expect(success).toHaveBeenCalledWith('this is a url');
       expect(failure).not.toHaveBeenCalled();
@@ -167,7 +171,12 @@ describe('RichText component', () => {
 
     it('calls the failure callback if the upload is not successful', async () => {
       upload.mockReturnValue(Promise.reject());
-      await uploadImage(upload, 'dom id', onSync)(blob, success, failure);
+      const richText = new RichText({
+        uploadFile: upload,
+        id: 'dom id',
+        onSync
+      });
+      await richText.uploadImage()(blob, success, failure);
 
       expect(success).not.toHaveBeenCalled();
       expect(failure).toHaveBeenCalled();
