@@ -1,8 +1,8 @@
-export const ADD_APD_ITEM = Symbol('add apd item');
-export const ADD_APD_YEAR = Symbol('add apd year');
-export const EDIT_APD = Symbol('edit apd');
-export const REMOVE_APD_ITEM = Symbol('remove apd item');
-export const REMOVE_APD_YEAR = Symbol('remove apd year');
-export const UPLOAD_FILE_FAILURE = Symbol('upload apd file failure');
-export const UPLOAD_FILE_REQUEST = Symbol('upload apd file request');
-export const UPLOAD_FILE_SUCCESS = Symbol('upload apd file success');
+export const ADD_APD_ITEM = 'ADD_APD_ITEM';
+export const ADD_APD_YEAR = 'ADD_APD_YEAR';
+export const EDIT_APD = 'EDIT_APD';
+export const REMOVE_APD_ITEM = 'REMOVE_APD_ITEM';
+export const REMOVE_APD_YEAR = 'REMOVE_APD_YEAR';
+export const UPLOAD_FILE_FAILURE = 'UPLOAD_FILE_FAILURE';
+export const UPLOAD_FILE_REQUEST = 'UPLOAD_FILE_REQUEST';
+export const UPLOAD_FILE_SUCCESS = 'UPLOAD_FILE_SUCCESS';

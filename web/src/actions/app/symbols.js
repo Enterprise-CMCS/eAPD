@@ -1,25 +1,25 @@
-export const CREATE_APD_FAILURE = Symbol('create apd failure');
-export const CREATE_APD_REQUEST = Symbol('create apd request');
-export const CREATE_APD_SUCCESS = Symbol('create apd success');
+export const CREATE_APD_FAILURE = 'CREATE_APD_FAILURE';
+export const CREATE_APD_REQUEST = 'CREATE_APD_REQUEST';
+export const CREATE_APD_SUCCESS = 'CREATE_APD_SUCCESS';
 
-export const DELETE_APD_FAILURE = Symbol('delete apd failure');
-export const DELETE_APD_REQUEST = Symbol('delete apd request');
-export const DELETE_APD_SUCCESS = Symbol('delete apd success');
+export const DELETE_APD_FAILURE = 'DELETE_APD_FAILURE';
+export const DELETE_APD_REQUEST = 'DELETE_APD_REQUEST';
+export const DELETE_APD_SUCCESS = 'DELETE_APD_SUCCESS';
 
-export const FETCH_ALL_APDS_FAILURE = Symbol('fetch all apds failure');
-export const FETCH_ALL_APDS_REQUEST = Symbol('fetch all apds request');
-export const FETCH_ALL_APDS_SUCCESS = Symbol('fetch all apds success');
+export const FETCH_ALL_APDS_FAILURE = 'FETCH_ALL_APDS_FAILURE';
+export const FETCH_ALL_APDS_REQUEST = 'FETCH_ALL_APDS_REQUEST';
+export const FETCH_ALL_APDS_SUCCESS = 'FETCH_ALL_APDS_SUCCESS';
 
-export const NAVIGATION_SCROLL_TO_WAYPOINT = Symbol('scroll to waypoint');
+export const NAVIGATION_SCROLL_TO_WAYPOINT = 'NAVIGATION_SCROLL_TO_WAYPOINT';
 
-export const PRINT_APD = Symbol('print apd');
+export const PRINT_APD = 'PRINT_APD';
 
-export const RESET = Symbol('reset application state');
+export const RESET = 'RESET';
 
-export const SAVE_APD_FAILURE = Symbol('save apd failure');
-export const SAVE_APD_REQUEST = Symbol('save apd request');
-export const SAVE_APD_SUCCESS = Symbol('save apd success');
+export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
+export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
+export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 
-export const SELECT_APD = Symbol('select apd');
+export const SELECT_APD = 'SELECT_APD';
 
-export const SET_APD_TO_SELECT_ON_LOAD = Symbol('set apd to select on load');
+export const SET_APD_TO_SELECT_ON_LOAD = 'SET_APD_TO_SELECT_ON_LOAD';
