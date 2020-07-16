@@ -22,35 +22,25 @@ const Link = ({ children, href, ...rest }) => (
   </ReactRouterLink>
 )
 
-const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
+const scrollToPageSection = ({ hash }) => {
+    window.scrollTo(0, 0)
+    if (!hash) return
+    const id = hash.replace('#', '')
+    const element = document.getElementById(id)
+    if (!element) return
+    const elementPosition = element.getBoundingClientRect().top
+    const headerOffset = document.getElementsByTagName('header')[0].offsetHeight
+    window.scrollTo({ top: elementPosition - headerOffset })
+}
+
+const Sidebar = ({ activeSection, activities, place }) => {
+  const history = useHistory();
+
   useEffect(() => {
     stickybits('.site-sidebar', { stickyBitStickyOffset: 60 });
   }, []);
 
-  const history = useHistory();
-  const { path: routePath } = useRouteMatch();
-
-  const handleLinkClick = (event, id, url) => {
-    console.log('got here')
-  }
-
-  const pageNav = (id, route) => e => {
-    if (route) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-
-    jumpAction(id);
-
-    if (route) {
-      history.push(`${routePath}/${route}`);
-      window.scrollTo(0, 0);
-    }
-  };
-
-  const anchorNav = id => () => {
-    jumpAction(id);
-  };
+  useEffect(() => scrollToPageSection(history.location), [history.location])
 
   const hasImage = [].indexOf(place.id) < 0;
   const imgExt = ['png', 'svg'][
@@ -72,7 +62,6 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
         <h1>{place.name}</h1>
       </div>
       <VerticalNav
-        onLinkClick={handleLinkClick}
         component={Link}
         selectedId={activeSection}
         items={buildLinks(activities)}

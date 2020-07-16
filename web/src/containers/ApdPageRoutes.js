@@ -12,6 +12,7 @@ import PreviousActivities from './PreviousActivities';
 import ProposedBudget from './ProposedBudget';
 import ScheduleSummary from './ScheduleSummary';
 import StateProfile from '../components/ApdStateProfile';
+import { Redirect } from 'react-router-dom';
 
 const ApdPageRoutes = ({ ...props }) => {
   const { path } = useRouteMatch();
@@ -26,7 +27,7 @@ const ApdPageRoutes = ({ ...props }) => {
         <ApdHeader {...props} />
 
         <Route exact path={path}>
-          <StateProfile />
+          <Redirect to={`${path}/state-profile`} />
         </Route>
 
         <Route path={`${path}/state-profile`}>

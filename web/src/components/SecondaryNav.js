@@ -30,28 +30,23 @@ const SecondaryNav = ({
   );
 
   return (
-    <div/>
-    // <LinksContextConsumer>
-    //   {context => (
-    //     <Fragment>
-    //       {activityIndex + 1 === activityCount &&
-    //         activeSection.includes('ffp') && (
-    //           <div className="pre-button-section-break">
-    //             <Link
-    //               to="/apd/activities"
-    //               onClick={onAdd}
-    //               className="ds-c-button"
-    //             >
-    //               Add another activity
-    //             </Link>
-    //           </div>
-    //         )}
-    //       <div className="pre-button-section-break">
-    //         <NextPreviousButtons context={context} />
-    //       </div>
-    //     </Fragment>
-    //   )}
-    // </LinksContextConsumer>
+    <Fragment>
+      {activityIndex + 1 === activityCount &&
+        activeSection.includes('ffp') && (
+          <div className="pre-button-section-break">
+            <Link
+              to="/apd/activities"
+              onClick={onAdd}
+              className="ds-c-button"
+            >
+              Add another activity
+            </Link>
+          </div>
+        )}
+      <div className="pre-button-section-break">
+        <NextPreviousButtons />
+      </div>
+    </Fragment>
   );
 };
 
