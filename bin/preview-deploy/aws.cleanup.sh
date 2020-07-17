@@ -4,8 +4,8 @@
 #    --AWS_REGION <AWS region name>   | The AWS region the instance should be
 #                                     | created in
 #                                     |----------------------------------------
-#    --GH_BOT_PASSWORD <password>     | Password of the Github user to update
-#                                     | comments as
+#    --GH_BOT_TOKEN <token>           | Personal access token for the Github
+#                                     | user to update comments as
 #                                     |----------------------------------------
 #    --GH_BOT_USER <username>         | Username of the Github user to update
 #                                     | comments as. These are the comments
@@ -97,10 +97,14 @@ function terminateIfClosedPR() {
 #
 # $1 - pull request number
 function updateGithubComment() {
-  COMMENTS=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$1/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
+  COMMENTS=$(curl -s -H "Authorization: token $GH_BOT_TOKEN" https://api.github.com/repos/18f/cms-hitech-apd/issues/$1/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
   if [ "$COMMENTS" ]; then
     ID=$(echo "$COMMENTS" | jq -c -r .id)
-    curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" -d '{"body":"This deploy was cleaned up."}' -H "Content-Type: application/json" -X PATCH "https://api.github.com/repos/18f/cms-hitech-apd/issues/comments/$ID"
+    curl -s \
+      -H "Authorization: token $GH_BOT_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"body":"This deploy was cleaned up."}' \
+      -X PATCH "https://api.github.com/repos/18f/cms-hitech-apd/issues/comments/$ID"
   fi
 }
 
