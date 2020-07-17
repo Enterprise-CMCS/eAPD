@@ -1,8 +1,8 @@
 import axios from '../util/api';
 
-export const ADMIN_GET_USERS_REQUEST = Symbol('admin : get users : request');
-export const ADMIN_GET_USERS_SUCCESS = Symbol('admin : get users : success');
-export const ADMIN_GET_USERS_ERROR = Symbol('admin : get users : error');
+export const ADMIN_GET_USERS_REQUEST = 'ADMIN_GET_USERS_REQUEST';
+export const ADMIN_GET_USERS_SUCCESS = 'ADMIN_GET_USERS_SUCCESS';
+export const ADMIN_GET_USERS_ERROR = 'ADMIN_GET_USERS_ERROR';
 
 export const getUsers = () => dispatch => {
   dispatch({ type: ADMIN_GET_USERS_REQUEST });
@@ -17,19 +17,13 @@ export const getUsers = () => dispatch => {
     });
 };
 
-export const ADMIN_GET_ACTIVITIES_REQUEST = Symbol(
-  'admin : get activities : request'
-);
-export const ADMIN_GET_ACTIVITIES_SUCCESS = Symbol(
-  'admin : get activities : success'
-);
-export const ADMIN_GET_ACTIVITIES_ERROR = Symbol(
-  'admin : get activities : error'
-);
+export const ADMIN_GET_ACTIVITIES_REQUEST = 'ADMIN_GET_ACTIVITIES_REQUEST';
+export const ADMIN_GET_ACTIVITIES_SUCCESS = 'ADMIN_GET_ACTIVITIES_SUCCESS';
+export const ADMIN_GET_ACTIVITIES_ERROR = 'ADMIN_GET_ACTIVITIES_ERROR';
 
-export const ADMIN_GET_ROLES_REQUEST = Symbol('admin : get roles : request');
-export const ADMIN_GET_ROLES_SUCCESS = Symbol('admin : get roles : success');
-export const ADMIN_GET_ROLES_ERROR = Symbol('admin : get roles : error');
+export const ADMIN_GET_ROLES_REQUEST = 'ADMIN_GET_ROLES_REQUEST';
+export const ADMIN_GET_ROLES_SUCCESS = 'ADMIN_GET_ROLES_SUCCESS';
+export const ADMIN_GET_ROLES_ERROR = 'ADMIN_GET_ROLES_ERROR';
 
 export const getRoles = () => dispatch => {
   dispatch({ type: ADMIN_GET_ROLES_REQUEST });
@@ -56,13 +50,9 @@ export const getRoles = () => dispatch => {
   return Promise.all([rolesPromise, activitiesPromise]);
 };
 
-export const ADMIN_CREATE_USER_REQUEST = Symbol(
-  'admin : create user : request'
-);
-export const ADMIN_CREATE_USER_SUCCESS = Symbol(
-  'admin : create user : success'
-);
-export const ADMIN_CREATE_USER_ERROR = Symbol('admin : create user : error');
+export const ADMIN_CREATE_USER_REQUEST = 'ADMIN_CREATE_USER_REQUEST';
+export const ADMIN_CREATE_USER_SUCCESS = 'ADMIN_CREATE_USER_SUCCESS';
+export const ADMIN_CREATE_USER_ERROR = 'ADMIN_CREATE_USER_ERROR';
 
 export const createUser = (
   { email, name, password, role, state },
@@ -86,13 +76,9 @@ export const createUser = (
     });
 };
 
-export const ADMIN_EDIT_ACCOUNT_REQUEST = Symbol(
-  'admin : edit account : request'
-);
-export const ADMIN_EDIT_ACCOUNT_SUCCESS = Symbol(
-  'admin : edit account : success'
-);
-export const ADMIN_EDIT_ACCOUNT_ERROR = Symbol('admin : edit account : error');
+export const ADMIN_EDIT_ACCOUNT_REQUEST = 'ADMIN_EDIT_ACCOUNT_REQUEST';
+export const ADMIN_EDIT_ACCOUNT_SUCCESS = 'ADMIN_EDIT_ACCOUNT_SUCCESS';
+export const ADMIN_EDIT_ACCOUNT_ERROR = 'ADMIN_EDIT_ACCOUNT_ERROR';
 
 export const editAccount = (user, changingPassword) => dispatch => {
   dispatch({ type: ADMIN_EDIT_ACCOUNT_REQUEST });
@@ -136,9 +122,9 @@ export const editAccount = (user, changingPassword) => dispatch => {
     });
 };
 
-export const ADMIN_EDIT_ME_REQUEST = Symbol('admin : edit self : request');
-export const ADMIN_EDIT_ME_SUCCESS = Symbol('admin : edit self : success');
-export const ADMIN_EDIT_ME_ERROR = Symbol('admin : edit self : error');
+export const ADMIN_EDIT_ME_REQUEST = 'ADMIN_EDIT_ME_REQUEST';
+export const ADMIN_EDIT_ME_SUCCESS = 'ADMIN_EDIT_ME_SUCCESS';
+export const ADMIN_EDIT_ME_ERROR = 'ADMIN_EDIT_ME_ERROR';
 
 export const editSelf = (user, changingPassword) => dispatch => {
   dispatch({ type: ADMIN_EDIT_ME_REQUEST });
