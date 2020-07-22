@@ -1,6 +1,6 @@
 # Next release
 
-Anticipated release: July 20, 2020
+Anticipated release: July 27, 2020
 
 #### 🚀 New features
 
@@ -11,6 +11,7 @@ Anticipated release: July 20, 2020
 #### ⚙️ Behind the scenes
 
 - Change Redux Action Types from symbols to string constants ([2349])
+- Update postman script for recent migrations ([#2340])
 
 # Previous releases
 
@@ -18,3 +19,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
 [#2316]: https://github.com/18F/cms-hitech-apd/issues/2316
 [#2349]: https://github.com/18F/cms-hitech-apd/issues/2349
+[#2340]: https://github.com/18F/cms-hitech-apd/issues/2340
