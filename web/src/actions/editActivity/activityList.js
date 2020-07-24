@@ -1,4 +1,9 @@
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import {
+  ADD_APD_ITEM,
+  APD_ACTIVITIES_CHANGE,
+  EDIT_APD,
+  REMOVE_APD_ITEM
+} from '../editApd/symbols';
 import { updateBudget } from '../budget';
 
 /**
@@ -10,6 +15,10 @@ export const addActivity = () => (dispatch, getState) => {
     path: '/activities/-',
     state: getState()
   });
+  dispatch({
+    type: APD_ACTIVITIES_CHANGE,
+    activities: getState().apd.data.activities
+  });
   dispatch(updateBudget());
 };
 
@@ -19,9 +28,13 @@ export const addActivity = () => (dispatch, getState) => {
  * @param {Object} di Dependency injection object
  * @param {Object} di.global The window object, which provides window.confirm
  */
-export const removeActivity = (index, { global = window } = {}) => dispatch => {
+export const removeActivity = (index, { global = window } = {}) => (dispatch, getState) => {
   if (global.confirm('Do you really want to delete this activity?')) {
     dispatch({ type: REMOVE_APD_ITEM, path: `/activities/${index}` });
+    dispatch({
+      type: APD_ACTIVITIES_CHANGE,
+      activities: getState().apd.data.activities
+    });
     dispatch(updateBudget());
   }
 };

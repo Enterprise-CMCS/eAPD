@@ -17,7 +17,7 @@ import {
   SET_APD_TO_SELECT_ON_LOAD
 } from './symbols';
 import { updateBudget } from '../budget';
-import { EDIT_APD } from '../editApd/symbols';
+import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import { ariaAnnounceApdLoaded, ariaAnnounceApdLoading } from '../aria';
 
 import { selectApdData } from '../../reducers/apd.selectors';
@@ -70,6 +70,7 @@ export const selectApd = (
 
   return axios.get(`/apds/${id}`).then(req => {
     dispatch({ type: SELECT_APD, apd: req.data });
+    dispatch({ type: APD_ACTIVITIES_CHANGE, activities: req.data.activities })
 
     // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
     // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial

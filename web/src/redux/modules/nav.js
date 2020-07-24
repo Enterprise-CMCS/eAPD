@@ -1,9 +1,6 @@
 import { t } from '../../i18n';
 
-import {
-  SAVE_APD_SUCCESS,
-  SELECT_APD
-} from '../../actions/app/symbols'
+import { APD_ACTIVITIES_CHANGE } from '../../actions/editApd/symbols'
 
 const links = [
   {
@@ -104,7 +101,7 @@ const links = [
   },
   {
     label: t('exportAndSubmit.title'),
-    url: '/export'
+    url: '/print'
   }
 ]
 
@@ -165,11 +162,13 @@ const initialState =  {
 }
 
 const reducer = (state = initialState, action = {}) => {
-  switch (action.type) {
-    case SELECT_APD:
+  const { type, activities } = action;
+
+  switch (type) {
+    case APD_ACTIVITIES_CHANGE:
       const updatedLinks = links.map(link => {
         if (link.label !== t('activities.title')) return link;
-        return { ...link, items: buildActivityItems(action.apd.activities) }
+        return { ...link, items: buildActivityItems(activities) }
       })
       return {
         ...state,

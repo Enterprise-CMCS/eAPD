@@ -1,5 +1,7 @@
 export const ADD_APD_ITEM = 'ADD_APD_ITEM';
 export const ADD_APD_YEAR = 'ADD_APD_YEAR';
+export const ADD_ACTIVITY = 'ADD_ACTIVITY';
+export const APD_ACTIVITIES_CHANGE = 'APD_ACTIVITIES_CHANGE';
 export const EDIT_APD = 'EDIT_APD';
 export const REMOVE_APD_ITEM = 'REMOVE_APD_ITEM';
 export const REMOVE_APD_YEAR = 'REMOVE_APD_YEAR';
