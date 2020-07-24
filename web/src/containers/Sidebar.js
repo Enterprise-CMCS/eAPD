@@ -11,6 +11,8 @@ import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
 import { LinksContextConsumer } from '../contexts/LinksContextProvider';
 
+import Nav from './Nav'
+
 const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
   useEffect(() => {
     stickybits('.site-sidebar', { stickyBitStickyOffset: 60 });
@@ -36,7 +38,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
   const imgExt = ['png', 'svg'][
     ['as', 'gu', 'mp', 'vi'].indexOf(place.id) < 0 ? 1 : 0
   ];
-  
+
   return (
     <LinksContextConsumer>
       {context => (
@@ -53,10 +55,11 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
           )}
           <h1>{place.name}</h1>
         </div>
-        <VerticalNav
+        <Nav />
+        {/* <VerticalNav
           selectedId={activeSection || 'apd-state-profile-overview'}
           items={context.getLinks(pageNav, anchorNav, activeSection, activities)}
-        />
+        /> */}
       </aside>
       )}
     </LinksContextConsumer>
