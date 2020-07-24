@@ -12,7 +12,7 @@ const Activity = ({ activity, activityIndex }) => {
         <p>
           <strong>Objective: </strong> {objective.objective}
         </p>
-        <p>
+        <div>
           <strong>Key Results: </strong>
           <ul>
             {objective.keyResults.map(
@@ -27,7 +27,7 @@ const Activity = ({ activity, activityIndex }) => {
               )
             )}
           </ul>
-        </p>
+        </div>
       </Fragment>
     );
   };
