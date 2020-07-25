@@ -3,20 +3,25 @@ import { VerticalNav } from '@cmsgov/design-system-core'
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const Link = ({ href, children, ...rest }) => (
+const NavLink = ({ href, children, ...rest }) => (
   <ReactRouterLink to={href} {...rest}>
     {children}
   </ReactRouterLink>
 )
 
-const Nav = ({ links }) => (
-  <VerticalNav component={Link} items={links} />
+const Nav = ({ links, selectedId }) => (
+  <VerticalNav
+    component={NavLink}
+    items={links}
+    selectedId={selectedId}
+  />
 )
 
-const mapStateToProps = (state) => ({
-  links: state.nav.links
+const mapStateToProps = ({ nav }) => ({
+  links: nav.links,
+  selectedId: nav.selectedId
 })
 
 export default connect(mapStateToProps)(Nav)
 
-export { Nav as plain, mapStateToProps }
+export { Nav as plain, NavLink, mapStateToProps }
