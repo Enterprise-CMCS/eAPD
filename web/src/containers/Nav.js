@@ -3,7 +3,6 @@ import { VerticalNav } from '@cmsgov/design-system-core'
 import { connect } from 'react-redux'
 import NavLink from '../components/NavLink'
 
-
 const Nav = ({ links, selectedId }) => (
   <VerticalNav
     component={NavLink}

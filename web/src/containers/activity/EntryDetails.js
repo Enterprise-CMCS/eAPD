@@ -41,7 +41,6 @@ const EntryDetails = ({
 
     jumpAction(`activity-${activityKey}-overview`);
     history.push(`/apd/activity/${activityIndex}`);
-    window.scrollTo(0, 0);
   };
 
   const onRemove = () => {

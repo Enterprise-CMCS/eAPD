@@ -25,7 +25,6 @@ const ExecutiveSummary = ({ data, jumpAction, total, years }) => {
 
     jumpAction(`activity-${key}-overview`);
     history.push(`/apd/activity/${index}`);
-    window.scrollTo(0, 0);
   };
 
   return (

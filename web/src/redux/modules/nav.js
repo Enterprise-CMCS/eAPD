@@ -7,6 +7,7 @@ import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../../actions/app/symbols';
 const links = [
   {
     label: t('apd.stateProfile.title'),
+    defaultCollapsed: true,
     items: [
       {
         id: 'apd-state-profile-nav',
