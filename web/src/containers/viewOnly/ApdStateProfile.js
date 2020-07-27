@@ -60,14 +60,14 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
       </ul>
 
       <h3>Medicaid office address</h3>
-      <addr>
+      <address>
         {stateProfile.medicaidOffice.address1}
         <br />
         {stateProfile.medicaidOffice.address2 &&
           stateProfile.medicaidOffice.address2}
         {stateProfile.medicaidOffice.city}, {stateProfile.medicaidOffice.state}{' '}
         {stateProfile.medicaidOffice.zip}
-      </addr>
+      </address>
       <hr className="section-rule" />
       <h2>Key Personnel and Program Management</h2>
       <ol className="ds-u-padding-left--0">
