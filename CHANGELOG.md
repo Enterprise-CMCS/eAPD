@@ -8,6 +8,7 @@ Anticipated release: July 27, 2020
 
 - Text Boxes for TinyMCE don't update when navigating between "Activity Overview" sections between Activities ([#2316])
 - The hourly resource and FFY costs are not overwriting as expected ([#2236])
+- Start/End Dates in Export View should be in MM/DD/YYYY format ([#2314])
 
 #### ⚙️ Behind the scenes
 
@@ -22,3 +23,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2349]: https://github.com/18F/cms-hitech-apd/issues/2349
 [#2340]: https://github.com/18F/cms-hitech-apd/issues/2340
 [#2236]: https://github.com/18F/cms-hitech-apd/issues/2236
+[#2314]: https://github.com/18F/cms-hitech-apd/issues/2314
