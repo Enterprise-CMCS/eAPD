@@ -12,7 +12,7 @@ const Activity = ({ activity, activityIndex }) => {
         <p>
           <strong>Objective: </strong> {objective.objective}
         </p>
-        <p>
+        <div>
           <strong>Key Results: </strong>
           <ul>
             {objective.keyResults.map(
@@ -27,7 +27,7 @@ const Activity = ({ activity, activityIndex }) => {
               )
             )}
           </ul>
-        </p>
+        </div>
       </Fragment>
     );
   };
@@ -149,11 +149,11 @@ const Activity = ({ activity, activityIndex }) => {
       </p>
       <p>
         <strong>Start date: </strong>
-        {activity.plannedStartDate || 'None provided'}
+        {stateDateToDisplay(activity.plannedStartDate) || 'None provided'}
       </p>
       <p>
         <strong>End date: </strong>
-        {activity.plannedEndDate || 'None provided'}
+        {stateDateToDisplay(activity.plannedEndDate) || 'None provided'}
       </p>
       <hr className="subsection-rule" />
       <h3>Activity Overview</h3>
