@@ -1,13 +1,8 @@
 import React from 'react'
 import { VerticalNav } from '@cmsgov/design-system-core'
-import { Link as ReactRouterLink } from 'react-router-dom'
 import { connect } from 'react-redux'
+import NavLink from '../components/NavLink'
 
-const NavLink = ({ href, children, ...rest }) => (
-  <ReactRouterLink to={href} {...rest}>
-    {children}
-  </ReactRouterLink>
-)
 
 const Nav = ({ links, selectedId }) => (
   <VerticalNav

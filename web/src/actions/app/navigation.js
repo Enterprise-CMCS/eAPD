@@ -14,7 +14,7 @@ export const jumpTo = waypoint => dispatch => {
     setTimeout(() => {
       jumping = false;
     }, 100);
-    dispatch({ type: NAVIGATION_SCROLL_TO_WAYPOINT, data: waypoint });
+    dispatch({ type: NAVIGATION_SCROLL_TO_WAYPOINT, waypoint });
   }
 };
 
@@ -22,7 +22,7 @@ export const scrollTo = waypoint => dispatch => {
   if (!jumping && waypoint) {
     dispatch({
       type: NAVIGATION_SCROLL_TO_WAYPOINT,
-      data: waypoint
+      waypoint
     });
   }
 };
