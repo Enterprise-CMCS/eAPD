@@ -1,6 +1,6 @@
 import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Choice from '../../../components/Choice';
@@ -37,6 +37,12 @@ const ContractorResourceForm = ({
   setHourlyRateForYear
 }) => {
   const apdFFYs = useMemo(() => Object.keys(years), [years]);
+  const [nonHourlyCost, setNonHourlyCost] = useState(
+    apdFFYs.reduce(
+      (o, ffy) => ({ ...o, [ffy]: !hourly.useHourly ? years[ffy] : '' }),
+      {}
+    )
+  );
 
   const getHandler = action => ({ target: { value } }) => {
     action(activityIndex, index, value);
@@ -48,10 +54,34 @@ const ContractorResourceForm = ({
 
   const setHourlyOff = () => {
     setIsHourly(activityIndex, index, false);
+
+    // set cost to non-hourly cost saved from last time the radio button was switched (if any)
+    apdFFYs.forEach(ffy => {
+      if (nonHourlyCost[ffy]) {
+        setCostForYear(activityIndex, index, ffy, nonHourlyCost[ffy]);
+      }
+    });
   };
 
   const setHourlyOn = () => {
+    // save non-hourly cost in case the radio button is switched back to non-hourly
+    setNonHourlyCost(
+      apdFFYs.reduce((o, ffy) => ({ ...o, [ffy]: years[ffy] }), {})
+    );
+
     setIsHourly(activityIndex, index, true);
+
+    // set cost to hours x rate
+    apdFFYs.forEach(ffy => {
+      if (hourly.data[ffy].hours && hourly.data[ffy].rate) {
+        setCostForYear(
+          activityIndex,
+          index,
+          ffy,
+          hourly.data[ffy].hours * hourly.data[ffy].rate
+        );
+      }
+    });
   };
 
   const getHandlerForYearlyCost = year => ({ target: { value } }) => {
