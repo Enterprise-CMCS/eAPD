@@ -4,22 +4,15 @@ import { connect } from 'react-redux'
 const ScrollToElement = ({ location }) => {
   const { hash } = location;
 
-  window.scrollTo(0, 0)
-  if (!hash) return null;
-
-  setTimeout(() => {
-    const id = hash.replace('#', '')
-    const element = document.getElementById(id)
-    if (!element) return null;
-
-    const elementPosition = element.getBoundingClientRect().top
-    const headerOffset = document.getElementsByTagName('header')[0].offsetHeight
-
-    window.scrollTo({
-      top: elementPosition - headerOffset,
-      behavior: 'smooth'
-    })
-  }, 0)
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!hash) return;
+    const element = document.querySelector(hash);
+    if (element) {
+      element.scrollIntoView();
+      window.scrollBy(0, -50);  // compensate for header
+    }
+  }, [hash])
 
   return null;
 }
@@ -29,3 +22,5 @@ const mapStateToProps = ({ router }) => ({
 })
 
 export default connect(mapStateToProps)(ScrollToElement)
+
+export { ScrollToElement as plain, mapStateToProps }

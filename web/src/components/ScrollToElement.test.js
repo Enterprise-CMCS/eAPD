@@ -1,27 +1,57 @@
-import { mount } from 'enzyme';
-import configureMockStore from 'redux-mock-store';
+import { mount, shallow } from 'enzyme';
 import React from 'react';
 
-import Root from './Root';
-import ScrollToElement from '../components/ScrollToElement'
-
-const mockStore = configureMockStore([]);
+import { plain as ScrollToElement} from '../components/ScrollToElement'
 
 const props = {
   location: {
-    pathname: '/apd/state-profile',
-    hash: '#apd-state-profile-key-personnel'
+    pathname: '/path',
+    hash: '#element-id'
   }
 }
 
 describe('<ScrollToElement /> component', () => {
-  it('scrolls to the top of the screen', () => {
+  // https://blog.carbonfive.com/shallow-testing-hooks-with-enzyme/
+  let component;
+  let useEffect;
+  let scrollIntoView;
+
+  const mockUseEffect = () => {
+    useEffect.mockImplementationOnce(f => f());
+  };
+
+  beforeEach(() => {
+    useEffect = jest.spyOn(React, "useEffect");
+    scrollIntoView = jest.fn()
+    document.querySelector = jest.fn(() => ({ scrollIntoView }))
     window.scrollTo = jest.fn()
-    const component = mount(
-      <Root history={{}} store={mockStore}>
-        <ScrollToElement {...props} />
-      </Root>
-    )
+    window.scrollBy = jest.fn()
+
+    mockUseEffect();
+    mockUseEffect();
+    component = shallow(<ScrollToElement {...props} />)
+  })
+
+  afterEach(() => {
+    useEffect.mockClear()
+    document.querySelector.mockClear()
+    window.scrollTo.mockClear()
+    window.scrollBy.mockClear()
+  })
+
+  it('scrolls to the top of the screen', () => {
     expect(window.scrollTo).toBeCalledWith(0, 0)
+  })
+
+  it('finds the element within the page', () => {
+    expect(document.querySelector).toBeCalledWith('#element-id')
+  })
+
+  it('scrolls to the element', () => {
+    expect(scrollIntoView).toHaveBeenCalled()
+  })
+
+  it('compensates for the header', () => {
+    expect(window.scrollBy).toBeCalledWith(0, -50)
   })
 })
