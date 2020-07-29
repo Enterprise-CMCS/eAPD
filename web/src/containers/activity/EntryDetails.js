@@ -2,11 +2,10 @@ import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { useMemo, useRef, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
-import { jumpTo } from '../../actions/app';
 import { removeActivity } from '../../actions/editActivity';
+import NavLink from '../../components/NavLink'
 
 import { t } from '../../i18n';
 
@@ -27,21 +26,10 @@ const EntryDetails = ({
   activityIndex,
   activityKey,
   fundingSource,
-  jumpAction,
   name,
   remove
 }) => {
   const container = useRef();
-
-  const history = useHistory();
-
-  const navigateToActivity = e => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    jumpAction(`activity-${activityKey}-overview`);
-    history.push(`/apd/activity/${activityIndex}`);
-  };
 
   const onRemove = () => {
     remove(activityIndex);
@@ -58,7 +46,8 @@ const EntryDetails = ({
         aria-label={`Edit: ${title}`}
         size="small"
         variation="transparent"
-        onClick={navigateToActivity}>
+        component={NavLink}
+        href={`/apd/activity/${activityIndex}/overview`}>
         Edit
       </Button>
       {activityIndex > 0 && (
@@ -102,7 +91,6 @@ EntryDetails.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   activityKey: PropTypes.string.isRequired,
   fundingSource: PropTypes.string,
-  jumpAction: PropTypes.func.isRequired,
   name: PropTypes.string,
   remove: PropTypes.func.isRequired
 };
@@ -120,7 +108,6 @@ const mapStateToProps = (state, { activityIndex }) => {
 };
 
 const mapDispatchToProps = {
-  jumpAction: jumpTo,
   remove: removeActivity
 };
 

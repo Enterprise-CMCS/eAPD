@@ -1,5 +1,9 @@
 import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  useRouteMatch as actualUseRouteMatch
+} from 'react-router-dom';
 
 import ApdHeader from './ApdHeader';
 import Activities from './activity/All';
@@ -14,7 +18,9 @@ import ScheduleSummary from './ScheduleSummary';
 import StateProfile from '../components/ApdStateProfile';
 import { Redirect } from 'react-router-dom';
 
-const ApdPageRoutes = ({ ...props }) => {
+const ApdPageRoutes = ({
+  useRouteMatch = actualUseRouteMatch
+}) => {
   const { path } = useRouteMatch();
 
   return (
@@ -24,7 +30,7 @@ const ApdPageRoutes = ({ ...props }) => {
       </Route>
 
       <Route path={path}>
-        <ApdHeader {...props} />
+        <ApdHeader />
 
         <Route exact path={path}>
           <Redirect to={`${path}/state-profile`} />

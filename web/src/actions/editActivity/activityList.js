@@ -6,6 +6,11 @@ import {
 } from '../editApd/symbols';
 import { updateBudget } from '../budget';
 
+// extract activites from state, safely
+const getActivites = (getState) => (
+  (((getState() || {}).apd || {}).data || {}).activities || []
+)
+
 /**
  * Add a new activity to the current APD
  */
@@ -17,7 +22,7 @@ export const addActivity = () => (dispatch, getState) => {
   });
   dispatch({
     type: APD_ACTIVITIES_CHANGE,
-    activities: getState().apd.data.activities
+    activities: getActivites(getState)
   });
   dispatch(updateBudget());
 };
@@ -33,7 +38,7 @@ export const removeActivity = (index, { global = window } = {}) => (dispatch, ge
     dispatch({ type: REMOVE_APD_ITEM, path: `/activities/${index}` });
     dispatch({
       type: APD_ACTIVITIES_CHANGE,
-      activities: getState().apd.data.activities
+      activities: getActivites(getState)
     });
     dispatch(updateBudget());
   }

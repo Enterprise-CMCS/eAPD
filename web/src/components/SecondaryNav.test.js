@@ -50,8 +50,8 @@ describe('Secondary Nav component', () => {
 
   it('renders <ContinuePreviousButtons />', () => {
     const component = setup()
-    console.log(component.debug())
-    expect(component.find('Connect(ContinuePreviousButtons)').exists()).toBeTruthy()
+    const result = component.find('Connect(ContinuePreviousButtons)').exists()
+    expect(result).toBeTruthy()
   })
 
   it('maps state to props', () => {

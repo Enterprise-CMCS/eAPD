@@ -1,6 +1,6 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
-
+import { BrowserRouter as Router } from 'react-router-dom'
 import Review from './Review';
 
 describe('Review wrapper component', () => {
@@ -40,7 +40,11 @@ describe('Review wrapper component', () => {
   });
 
   it('clicks the link if an edit link is set, when the button is clicked', () => {
-    const component = mount(<Review editHref="something">Hello</Review>);
+    const component = mount(
+      <Router>
+        <Review editHref="something">Hello</Review>
+      </Router>
+    );
 
     const handler = jest.fn();
     component

@@ -1,5 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+
+import {
+  getAPDCreation,
+  getAPDName,
+  getAPDYearRange,
+} from '../reducers/apd';
 
 const ApdHeader = ({ apdCreated, apdName, year }) => (
   <h1 className="ds-h1 apd--title">
@@ -18,4 +25,12 @@ ApdHeader.propTypes = {
 
 ApdHeader.defaultProps = { apdName: '' };
 
-export default ApdHeader;
+const mapStateToProps = state => ({
+  apdCreated: getAPDCreation(state),
+  apdName: getAPDName(state),
+  year: getAPDYearRange(state)
+});
+
+export default connect(mapStateToProps)(ApdHeader);
+
+export { ApdHeader as plain, mapStateToProps };

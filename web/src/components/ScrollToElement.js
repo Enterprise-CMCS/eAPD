@@ -12,7 +12,7 @@ const ScrollToElement = ({ location }) => {
       element.scrollIntoView();
       window.scrollBy(0, -50);  // compensate for header
     }
-  }, [hash])
+  }, [location]) // execute when location changes
 
   return null;
 }

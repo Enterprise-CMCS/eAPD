@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Waypoint from './ConnectedWaypoint';
@@ -9,24 +8,13 @@ import Dollars from '../components/Dollars';
 import Review from '../components/Review';
 import { Section, Subsection } from '../components/Section';
 
-import { jumpTo } from '../actions/app';
 import { selectApdYears } from '../reducers/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
 } from '../reducers/budget.selectors';
 
-const ExecutiveSummary = ({ data, jumpAction, total, years }) => {
-  const history = useHistory();
-
-  const navigateToActivity = (key, index) => e => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    jumpAction(`activity-${key}-overview`);
-    history.push(`/apd/activity/${index}`);
-  };
-
+const ExecutiveSummary = ({ data, total, years }) => {
   return (
     <Section id="executive-summary" resource="executiveSummary">
       <Waypoint id="executive-summary-summary" />
@@ -43,8 +31,7 @@ const ExecutiveSummary = ({ data, jumpAction, total, years }) => {
               </Fragment>
             }
             headingLevel="4"
-            editHref=""
-            onEditClick={navigateToActivity(activity.key, i)}
+            editHref={`/apd/activity/${i}/overview`}
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >
             {activity.summary && <p>{activity.summary}</p>}
@@ -125,7 +112,6 @@ const ExecutiveSummary = ({ data, jumpAction, total, years }) => {
 
 ExecutiveSummary.propTypes = {
   data: PropTypes.array.isRequired,
-  jumpAction: PropTypes.func.isRequired,
   total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
@@ -136,8 +122,6 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
-const mapDispatchToProps = { jumpAction: jumpTo };
+export default connect(mapStateToProps)(ExecutiveSummary);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExecutiveSummary);
-
-export { ExecutiveSummary as plain, mapStateToProps, mapDispatchToProps };
+export { ExecutiveSummary as plain, mapStateToProps };

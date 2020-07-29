@@ -3,14 +3,17 @@ import React from 'react';
 
 import ApdPageRoutes from './ApdPageRoutes';
 
-jest.mock('react-router-dom', () => ({
-  useRouteMatch: jest
-    .fn()
-    .mockReturnValue({ path: 'this is where the page is' })
-}));
+const defaultProps = {
+  useRouteMatch: jest.fn().mockReturnValue({ path: '/your/current/path' })
+};
 
-describe('APD page router', () => {
+const setup = (props = {}) => {
+  return shallow(<ApdPageRoutes {...defaultProps} {...props} />)
+}
+
+describe('<ApdPageRoutes /> component', () => {
   it('renders as expected', () => {
-    expect(shallow(<ApdPageRoutes />)).toMatchSnapshot();
+    const component = setup()
+    expect(component).toMatchSnapshot();
   });
 });

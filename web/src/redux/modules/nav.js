@@ -7,7 +7,6 @@ import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../../actions/app/symbols';
 const links = [
   {
     label: t('apd.stateProfile.title'),
-    defaultCollapsed: true,
     items: [
       {
         id: 'apd-state-profile-nav',
@@ -231,10 +230,10 @@ const reducer = (state = initialState, action = {}) => {
       }
 
     case NAVIGATION_SCROLL_TO_WAYPOINT:
-      const { waypoint } = action
+      const { waypointId } = action
       return {
         ...state,
-        selectedId: `${waypoint}-nav`
+        selectedId: `${waypointId}-nav`
       }
 
     default:

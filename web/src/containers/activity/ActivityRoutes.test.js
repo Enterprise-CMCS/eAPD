@@ -3,14 +3,18 @@ import React from 'react';
 
 import ActivityRoutes from './ActivityRoutes';
 
-jest.mock('react-router-dom', () => ({
-  useRouteMatch: jest
-    .fn()
-    .mockReturnValue({ path: 'this is where the page is' })
-}));
+const defaultProps = {
+  activityIndex: 3,
+  useRouteMatch: jest.fn().mockReturnValue({ path: '/your/current/path' })
+};
 
-describe('activity router page', () => {
-  it('renders correctly', () => {
-    expect(shallow(<ActivityRoutes activityIndex={3} />)).toMatchSnapshot();
+const setup = (props = {}) => {
+  return shallow(<ActivityRoutes {...defaultProps} {...props} />)
+}
+
+describe('<ActivityRoutes /> component', () => {
+  it('renders as expected', () => {
+    const component = setup()
+    expect(component).toMatchSnapshot();
   });
 });
