@@ -6,56 +6,53 @@ import {
   mapDispatchToProps
 } from './SecondaryNav';
 import { addActivity } from '../actions/editActivity';
-import { jumpTo } from '../actions/app';
 
-global.scrollTo = jest.fn();
+const defaultProps = {
+  activityCount: 2,
+  addActivity: jest.fn(),
+  location: { pathname: '/apd/activity/1/ffp' },
+  useParams: () => ({ activityIndex: 1 })
+};
+
+const setup = (props = {}) => {
+  return shallow(<SecondaryNav {...defaultProps} {...props} />)
+}
 
 describe('Secondary Nav component', () => {
-  const props = {
-    activities: [{ anchor: 'activity-1' }, { anchor: 'activity-2' }],
-    activityCount: 2,
-    add: jest.fn(),
-    jumpTo: jest.fn()
-  };
-
-  beforeEach(() => {
-    props.add.mockClear();
-    props.jumpTo.mockClear();
+  it('renders with add activity button when on the last activity on the FFP section', () => {
+    const component = setup()
+    expect(component.find('Link').exists()).toBeTruthy()
   });
 
   it('renders without add activity button when not on the last activity', () => {
-    expect(
-      shallow(<SecondaryNav {...props} activeSection="activity-1-ffp" />).dive()
-    ).toMatchSnapshot();
+    const component = setup({
+      useParams: () => ({ activityIndex: 0 })
+    })
+    expect(component.find('Link').exists()).toBeFalsy()
   });
 
   it('renders without add activity button when on the last activity but not on the FFP section', () => {
-    expect(
-      shallow(
-        <SecondaryNav {...props} activeSection="activity-2-something-else" />
-      ).dive()
-    ).toMatchSnapshot();
-  });
-
-  it('renders with add activity button when on the last activity on the FFP section', () => {
-    expect(
-      shallow(<SecondaryNav {...props} activeSection="activity-2-ffp" />).dive()
-    ).toMatchSnapshot();
+    const component = setup({
+      location: { pathname: '/apd/activity/1/overview' }
+    })
+    expect(component.find('Link').exists()).toBeFalsy()
   });
 
   it('handles add activity button click', () => {
-    const component = shallow(
-      <SecondaryNav {...props} activeSection="activity-2-ffp" />
-    ).dive();
+    const component = setup()
     const link = component.find('.ds-c-button');
     expect(link.props().to).toBe('/apd/activities');
 
     link.simulate('click');
 
-    expect(props.add).toHaveBeenCalled();
-    expect(props.jumpTo).toHaveBeenCalledWith('activities-list');
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(defaultProps.addActivity).toHaveBeenCalled();
   });
+
+  it('renders <ContinuePreviousButtons />', () => {
+    const component = setup()
+    console.log(component.debug())
+    expect(component.find('Connect(ContinuePreviousButtons)').exists()).toBeTruthy()
+  })
 
   it('maps state to props', () => {
     const state = {
@@ -67,7 +64,9 @@ describe('Secondary Nav component', () => {
           ]
         }
       },
-      navigation: { activeSection: 'activity-2-ffp' }
+      router: {
+        location: { pathname: '/apd/activity/1/ffp' }
+      }
     };
 
     expect(mapStateToProps(state)).toEqual({
@@ -75,15 +74,14 @@ describe('Secondary Nav component', () => {
         { anchor: 'activity-1', name: 'activity', key: '1' },
         { anchor: 'activity-2', name: 'activity', key: '2' }
       ],
-      activeSection: 'activity-2-ffp',
-      activityCount: 2
+      activityCount: 2,
+      location: { pathname: '/apd/activity/1/ffp' }
     });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      add: addActivity,
-      jumpTo
+      addActivity
     });
   });
 });
