@@ -1,7 +1,7 @@
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { t } from '../../i18n';
 
-import { APD_ACTIVITIES_CHANGE } from '../../actions/editApd/symbols'
-import { LOCATION_CHANGE } from 'connected-react-router'
+import { APD_ACTIVITIES_CHANGE } from '../../actions/editApd/symbols';
 import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../../actions/app/symbols';
 
 const links = [
@@ -197,7 +197,7 @@ const initialState =  {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case APD_ACTIVITIES_CHANGE:
+    case APD_ACTIVITIES_CHANGE: {
       const updatedLinks = links.map(link => {
         if (link.label !== t('activities.title')) return link;
         return { ...link, items: buildActivityItems(action.activities) }
@@ -206,8 +206,9 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         links: updatedLinks
       }
+    }
 
-    case LOCATION_CHANGE:
+    case LOCATION_CHANGE: {
       const { pathname, hash } = action.payload.location
       const selectedId = hash ?
         `${hash.replace('#', '')}-nav` :
@@ -228,17 +229,19 @@ const reducer = (state = initialState, action = {}) => {
         previousLink,
         selectedId
       }
+    }
 
-    case NAVIGATION_SCROLL_TO_WAYPOINT:
+    case NAVIGATION_SCROLL_TO_WAYPOINT: {
       const { waypointId } = action
       return {
         ...state,
         selectedId: `${waypointId}-nav`
       }
+    }
 
     default:
       return state
   }
 }
 
-export default reducer
+export default reducer;

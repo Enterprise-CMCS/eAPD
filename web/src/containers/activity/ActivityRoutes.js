@@ -18,7 +18,7 @@ import { Section } from '../../components/Section';
 
 const ActivityRoutes = ({
   activityIndex,
-  useRouteMatch = actualUseRouteMatch
+  useRouteMatch
 }) => {
   const { path } = useRouteMatch();
 
@@ -60,8 +60,13 @@ const ActivityRoutes = ({
   );
 };
 
+ActivityRoutes.defaultProps = {
+  useRouteMatch: actualUseRouteMatch
+}
+
 ActivityRoutes.propTypes = {
-  activityIndex: PropTypes.number.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  useRouteMatch: PropTypes.func
 };
 
 export default ActivityRoutes;

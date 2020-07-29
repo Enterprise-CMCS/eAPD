@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { jumpTo } from '../../actions/app';
 import { removeActivity } from '../../actions/editActivity';
 
 import {

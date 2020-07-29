@@ -52,8 +52,6 @@ ApdApplication.propTypes = {
   setApdToSelectOnLoad: PropTypes.func.isRequired,
 };
 
-ApdApplication.defaultProps = { apdName: '' };
-
 const mapStateToProps = state => ({
   apdSelected: getIsAnAPDSelected(state),
   isAdmin: getIsAdmin(state),

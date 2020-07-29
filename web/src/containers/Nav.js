@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { VerticalNav } from '@cmsgov/design-system-core'
 import { connect } from 'react-redux'
 import NavLink from '../components/NavLink'
@@ -10,6 +11,11 @@ const Nav = ({ links, selectedId }) => (
     selectedId={selectedId}
   />
 )
+
+Nav.propTypes = {
+  links: PropTypes.array.isRequired,
+  selectedId: PropTypes.string.isRequired
+}
 
 const mapStateToProps = ({ nav }) => ({
   links: nav.links,

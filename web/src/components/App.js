@@ -5,7 +5,7 @@ import Wrapper from './Wrapper';
 import Broadcast from './Broadcast';
 import AriaAnnounce from '../containers/AriaAnnounce';
 import AuthChecker from '../containers/AuthChecker';
-import ScrollToElement from '../components/ScrollToElement'
+import ScrollToElement from "./ScrollToElement"
 
 const App = () => (
   <Wrapper>

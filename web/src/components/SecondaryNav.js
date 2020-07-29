@@ -7,13 +7,13 @@ import {
   selectActivitiesSidebar,
   selectActivityCount
 } from '../reducers/activities.selectors';
-import { addActivity } from '../actions/editActivity';
+import { addActivity as actualAddActivity } from '../actions/editActivity';
 
 const SecondaryNav = ({
   activityCount,
   addActivity,
   location,
-  useParams = actualUseParams
+  useParams
 }) => {
   const { activityIndex } = useParams();
   const showAddActivityLink = activityIndex + 1 === activityCount &&
@@ -39,10 +39,15 @@ const SecondaryNav = ({
   );
 };
 
+SecondaryNav.defaultProps = {
+  useParams: actualUseParams
+}
+
 SecondaryNav.propTypes = {
   activityCount: PropTypes.number.isRequired,
   addActivity: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  useParams: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -52,7 +57,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  addActivity
+  addActivity: actualAddActivity
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SecondaryNav);

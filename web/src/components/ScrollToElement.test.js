@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as ScrollToElement} from '../components/ScrollToElement'
+import { plain as ScrollToElement} from "./ScrollToElement"
 
 const props = {
   location: {
@@ -12,7 +12,6 @@ const props = {
 
 describe('<ScrollToElement /> component', () => {
   // https://blog.carbonfive.com/shallow-testing-hooks-with-enzyme/
-  let component;
   let useEffect;
   let scrollIntoView;
 
@@ -29,7 +28,7 @@ describe('<ScrollToElement /> component', () => {
 
     mockUseEffect();
     mockUseEffect();
-    component = shallow(<ScrollToElement {...props} />)
+    shallow(<ScrollToElement {...props} />)
   })
 
   afterEach(() => {

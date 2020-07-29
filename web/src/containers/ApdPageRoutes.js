@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Switch,
   Route,
-  useRouteMatch as actualUseRouteMatch
+  useRouteMatch as actualUseRouteMatch,
+  Redirect
 } from 'react-router-dom';
 
 import ApdHeader from './ApdHeader';
@@ -16,11 +18,8 @@ import PreviousActivities from './PreviousActivities';
 import ProposedBudget from './ProposedBudget';
 import ScheduleSummary from './ScheduleSummary';
 import StateProfile from '../components/ApdStateProfile';
-import { Redirect } from 'react-router-dom';
 
-const ApdPageRoutes = ({
-  useRouteMatch = actualUseRouteMatch
-}) => {
+const ApdPageRoutes = ({ useRouteMatch }) => {
   const { path } = useRouteMatch();
 
   return (
@@ -75,5 +74,13 @@ const ApdPageRoutes = ({
     </Switch>
   );
 };
+
+ApdPageRoutes.defaultProps = {
+  useRouteMatch: actualUseRouteMatch
+}
+
+ApdPageRoutes.propTypes = {
+  useRouteMatch: PropTypes.func
+}
 
 export default ApdPageRoutes;

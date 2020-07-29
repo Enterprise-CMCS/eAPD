@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@cmsgov/design-system-core'
 import NavLink from './NavLink'
 
 const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
-  const continueComponent = !continueLink ?
-    null :
+  const continueComponent = !continueLink ? null :
     <Button
       aria-labelledby="continue-button-label"
       className="ds-u-float--right"
@@ -16,8 +16,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
       Continue &gt;
     </Button>
 
-  const continueLabel = !continueLink ?
-    null :
+  const continueLabel = !continueLink ? null :
     <p
       className="ds-u-text-align--right"
       id="continue-button-label"
@@ -25,8 +24,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
       {continueLink.label}
     </p>
 
-  const previousComponent = !previousLink ?
-    null :
+  const previousComponent = !previousLink ? null :
     <Button
       aria-labelledby="previous-button-label"
       component={NavLink}
@@ -35,14 +33,13 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
       &lt; Previous
     </Button>
 
-  const previousLabel = !previousLink ?
-    null :
+  const previousLabel = !previousLink ? null :
     <p id="previous-button-label">
       {previousLink.label}
     </p>
 
   return (
-    <>
+    <React.Fragment>
       <div className="ds-l-row ds-u-justify-content--between">
         <div className="ds-l-col--6">
           {previousComponent}
@@ -60,9 +57,14 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
           {continueLabel}
         </div>
       </div>
-    </>
+    </React.Fragment>
   )
 };
+
+ContinuePreviousButtons.propTypes = {
+  continueLink: PropTypes.oneOfType([null, PropTypes.object]).isRequired,
+  previousLink: PropTypes.oneOfType([null, PropTypes.object]).isRequired
+}
 
 const mapStateToProps = ({ nav }) => ({
   continueLink: nav.continueLink,
