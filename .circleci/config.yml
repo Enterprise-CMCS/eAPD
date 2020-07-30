@@ -38,7 +38,7 @@ workflows:
           path: web
           requires:
             - install dependencies
-  
+
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
     jobs:
@@ -287,7 +287,7 @@ jobs:
       - checkout
       - run: npm install glob
       - run: npm install js-yaml
-      - run: 
+      - run:
           working_directory: ~/project/web
           command: node yaml-tests.js
 
@@ -407,7 +407,7 @@ jobs:
   # ===== Shared jobs =====
   # These all depend on "install dependencies" running first.
 
-  # Uses npm audit to scan the installed dependencies for known vulnerabilities.
+  # Uses audit-ci to scan the installed dependencies for known vulnerabilities.
   dependency vulnerability scan:
     parameters:
       path:
@@ -423,7 +423,7 @@ jobs:
           name: vulnerability scan
           working_directory: ~/project/<< parameters.path >>
           command: |
-            npx -p npm-audit-resolver check-audit
+            npx audit-ci --config ./audit-ci.json
 
   owasp zap scan:
     machine:
