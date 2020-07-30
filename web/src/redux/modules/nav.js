@@ -4,6 +4,10 @@ import { t } from '../../i18n';
 import { APD_ACTIVITIES_CHANGE } from '../../actions/editApd/symbols';
 import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../../actions/app/symbols';
 
+
+// todo: write a test to assert the first item does not have a #hash-id
+// this fowls up how the Continue/Previous buttons work
+
 const links = [
   {
     label: t('apd.stateProfile.title'),
@@ -36,7 +40,7 @@ const links = [
       {
         id: 'prev-activities-nav',
         label: t('previousActivities.title'),
-        url: '/apd/previous-activities#prev-activities'
+        url: '/apd/previous-activities'
       },
       {
         id: 'prev-activities-outline-nav',
@@ -67,7 +71,7 @@ const links = [
       {
         id: 'proposed-budget-nav',
         label: t('proposedBudget.title'),
-        url: '/apd/proposed-budget#proposed-budget'
+        url: '/apd/proposed-budget'
       },
       {
         id: 'summary-schedule-by-activity-table-nav',
@@ -103,7 +107,7 @@ const links = [
       {
         id: 'executive-summary-nav',
         label: t('executiveSummary.title'),
-        url: '/apd/executive-summary#executive-summary'
+        url: '/apd/executive-summary'
       },
       {
         id: 'executive-summary-summary-nav',

@@ -5,6 +5,14 @@ import { Button } from '@cmsgov/design-system-core';
 import NavLink from './NavLink';
 
 const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
+  const buildLabel = (link) => {
+    if (link.url.startsWith('/apd/activity/')) {
+      const activityIndex = link.url.split('/')[3];
+      return `Activity ${+activityIndex + 1}: ${link.label}`;
+    }
+    return link.label;
+  };
+
   const continueComponent = !continueLink ? null : (
     <Button
       aria-labelledby="continue-button-label"
@@ -19,7 +27,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
 
   const continueLabel = !continueLink ? null : (
     <p className="ds-u-text-align--right" id="continue-button-label">
-      {continueLink.label}
+      {buildLabel(continueLink)}
     </p>
   );
 
@@ -34,7 +42,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   );
 
   const previousLabel = !previousLink ? null : (
-    <p id="previous-button-label">{previousLink.label}</p>
+    <p id="previous-button-label">{buildLabel(previousLink)}</p>
   );
 
   return (
@@ -52,6 +60,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   );
 };
 
+// allow 'object' or 'null' property types
 // https://github.com/facebook/prop-types/pull/90#issuecomment-551213524
 const validProptypes = [
   PropTypes.object.isRequired,

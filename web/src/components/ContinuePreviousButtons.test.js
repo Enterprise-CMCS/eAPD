@@ -8,7 +8,7 @@ import {
   mapStateToProps
 } from './ContinuePreviousButtons';
 
-const props = {
+const defaultProps = {
   continueLink: {
     id: 'apd-previous-activitites-nav',
     label: 'Results of Previous Activities',
@@ -21,42 +21,63 @@ const props = {
   }
 };
 
+const setup = (props = {}) => {
+  return mount(
+    <Router>
+      <ContinuePreviousButtons {...defaultProps} {...props} />
+    </Router>
+  );
+}
+
 describe('<ContinuePreviousButtons /> component', () => {
-  let component;
-
-  beforeAll(() => {
-    component = mount(
-      <Router>
-        <ContinuePreviousButtons {...props} />
-      </Router>
-    );
-  });
-
   it('renders links', () => {
+    const component = setup();
     const links = component.find(Link);
-    expect(links.first().prop('to')).toBe('/apd/state-profile');
     expect(links.last().prop('to')).toBe('/apd/previous-activities');
+    expect(links.first().prop('to')).toBe('/apd/state-profile');
   });
 
-  it('provides labels', () => {
-    const previousLabelId = 'previous-button-label';
+  it('provides accessible labels', () => {
+    const component = setup();
     const continueLabelId = 'continue-button-label';
+    const previousLabelId = 'previous-button-label';
 
     const buttons = component.find(Button);
-    expect(buttons.first().prop('aria-labelledby')).toBe(previousLabelId);
     expect(buttons.last().prop('aria-labelledby')).toBe(continueLabelId);
+    expect(buttons.first().prop('aria-labelledby')).toBe(previousLabelId);
 
-    const previousLabel = component.find(`#${previousLabelId}`);
     const continueLabel = component.find(`#${continueLabelId}`);
-    expect(previousLabel.text()).toBe('Key State Personnel');
+    const previousLabel = component.find(`#${previousLabelId}`);
     expect(continueLabel.text()).toBe('Results of Previous Activities');
+    expect(previousLabel.text()).toBe('Key State Personnel');
+  });
+
+  it('is labeled with the activity number, when within an activity', () => {
+    const props = {
+      continueLink: {
+        id: 'apd-activity-1-okrs-nav',
+        label: 'Objective and key results',
+        url: '/apd/activity/1/okrs'
+      },
+      previousLink: {
+        id: 'apd-activity-0-ffp-nav',
+        label: 'FFP and budget',
+        url: '/apd/activity/0/ffp'
+      },
+    };
+    const component = setup(props);
+
+    const continueLabel = component.find('#continue-button-label');
+    const previousLabel = component.find('#previous-button-label');
+    expect(continueLabel.text()).toBe('Activity 2: Objective and key results');
+    expect(previousLabel.text()).toBe('Activity 1: FFP and budget');
   });
 
   it('maps redux state to component props', () => {
     const state = {
-      nav: props
+      nav: defaultProps
     };
-    expect(mapStateToProps(state).continueLink).toEqual(props.continueLink);
-    expect(mapStateToProps(state).previousLink).toEqual(props.previousLink);
+    expect(mapStateToProps(state).continueLink).toEqual(defaultProps.continueLink);
+    expect(mapStateToProps(state).previousLink).toEqual(defaultProps.previousLink);
   });
 });
