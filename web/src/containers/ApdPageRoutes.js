@@ -77,10 +77,10 @@ const ApdPageRoutes = ({ useRouteMatch }) => {
 
 ApdPageRoutes.defaultProps = {
   useRouteMatch: actualUseRouteMatch
-}
+};
 
 ApdPageRoutes.propTypes = {
   useRouteMatch: PropTypes.func
-}
+};
 
 export default ApdPageRoutes;

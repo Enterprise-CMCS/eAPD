@@ -6,14 +6,16 @@ import NavLink from './NavLink';
 describe('<NavLink /> (for use within @cms-gov/ds components)', () => {
   it('renders props and children', () => {
     const props = {
-      id: "executive-summary-summary-nav",
-      href: "/apd/executive-summary#executive-summary-summary",
+      id: 'executive-summary-summary-nav',
+      href: '/apd/executive-summary#executive-summary-summary',
       otherThing: true
-    }
-    const component = shallow(<NavLink {...props}>Activities Summary</NavLink>)
-    expect(component.prop('id')).toEqual('executive-summary-summary-nav')
-    expect(component.prop('to')).toEqual('/apd/executive-summary#executive-summary-summary')
-    expect(component.prop('otherThing')).toEqual(true)
-    expect(component.text()).toEqual('Activities Summary')
+    };
+    const component = shallow(<NavLink {...props}>Activities Summary</NavLink>);
+    expect(component.prop('id')).toEqual('executive-summary-summary-nav');
+    expect(component.prop('to')).toEqual(
+      '/apd/executive-summary#executive-summary-summary'
+    );
+    expect(component.prop('otherThing')).toEqual(true);
+    expect(component.text()).toEqual('Activities Summary');
   });
 });

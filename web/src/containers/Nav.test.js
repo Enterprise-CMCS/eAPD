@@ -1,11 +1,8 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import {
-  plain as Nav,
-  mapStateToProps
-} from './Nav';
+import { plain as Nav, mapStateToProps } from './Nav';
 
 describe('<Nav /> component', () => {
   it('renders correctly', () => {
@@ -19,18 +16,18 @@ describe('<Nav /> component', () => {
           label: 'Settings',
           items: [
             { id: 'profile-nav', label: 'Profile', url: '/me' },
-            { id: 'logout-nav', label: 'Log out', url: '/logout' },
+            { id: 'logout-nav', label: 'Log out', url: '/logout' }
           ]
         }
       ],
       selectedId: 'profile-nav'
-    }
+    };
     const component = mount(
       <Router>
         <Nav {...props} />
       </Router>
-    )
-    expect(component).toMatchSnapshot()
+    );
+    expect(component).toMatchSnapshot();
   });
 
   it('maps state to props', () => {

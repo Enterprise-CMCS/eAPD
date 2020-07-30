@@ -1,6 +1,6 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
 import Review from './Review';
 
 describe('Review wrapper component', () => {
@@ -54,10 +54,7 @@ describe('Review wrapper component', () => {
       .getDOMNode()
       .addEventListener('click', handler);
 
-    component
-      .find('Review')
-      .find('Button')
-      .simulate('click');
+    component.find('Review').find('Button').simulate('click');
 
     expect(handler).toHaveBeenCalled();
   });

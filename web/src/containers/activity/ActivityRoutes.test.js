@@ -9,12 +9,12 @@ const defaultProps = {
 };
 
 const setup = (props = {}) => {
-  return shallow(<ActivityRoutes {...defaultProps} {...props} />)
-}
+  return shallow(<ActivityRoutes {...defaultProps} {...props} />);
+};
 
 describe('<ActivityRoutes /> component', () => {
   it('renders as expected', () => {
-    const component = setup()
+    const component = setup();
     expect(component).toMatchSnapshot();
   });
 });

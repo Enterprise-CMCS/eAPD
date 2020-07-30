@@ -1,5 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
 const ScrollToElement = ({ location }) => {
   const { hash } = location;
@@ -10,17 +10,17 @@ const ScrollToElement = ({ location }) => {
     const element = document.querySelector(hash);
     if (element) {
       element.scrollIntoView();
-      window.scrollBy(0, -50);  // compensate for header
+      window.scrollBy(0, -50); // compensate for header
     }
-  }, [location]) // execute when location changes
+  }, [location]); // execute when location changes
 
   return null;
-}
+};
 
 const mapStateToProps = ({ router }) => ({
   location: router.location
-})
+});
 
-export default connect(mapStateToProps)(ScrollToElement)
+export default connect(mapStateToProps)(ScrollToElement);
 
-export { ScrollToElement as plain, mapStateToProps }
+export { ScrollToElement as plain, mapStateToProps };

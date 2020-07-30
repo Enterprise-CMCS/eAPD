@@ -8,12 +8,12 @@ const defaultProps = {
 };
 
 const setup = (props = {}) => {
-  return shallow(<ApdPageRoutes {...defaultProps} {...props} />)
-}
+  return shallow(<ApdPageRoutes {...defaultProps} {...props} />);
+};
 
 describe('<ApdPageRoutes /> component', () => {
   it('renders as expected', () => {
-    const component = setup()
+    const component = setup();
     expect(component).toMatchSnapshot();
   });
 });

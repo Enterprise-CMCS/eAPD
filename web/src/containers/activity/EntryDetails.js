@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import { removeActivity } from '../../actions/editActivity';
-import NavLink from '../../components/NavLink'
+import NavLink from '../../components/NavLink';
 
 import { t } from '../../i18n';
 

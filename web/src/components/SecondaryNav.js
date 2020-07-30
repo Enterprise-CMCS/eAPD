@@ -9,15 +9,10 @@ import {
 } from '../reducers/activities.selectors';
 import { addActivity as actualAddActivity } from '../actions/editActivity';
 
-const SecondaryNav = ({
-  activityCount,
-  addActivity,
-  location,
-  useParams
-}) => {
+const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
   const { activityIndex } = useParams();
-  const showAddActivityLink = activityIndex + 1 === activityCount &&
-    location.pathname.endsWith('ffp');
+  const showAddActivityLink =
+    activityIndex + 1 === activityCount && location.pathname.endsWith('ffp');
 
   return (
     <Fragment>
@@ -41,7 +36,7 @@ const SecondaryNav = ({
 
 SecondaryNav.defaultProps = {
   useParams: actualUseParams
-}
+};
 
 SecondaryNav.propTypes = {
   activityCount: PropTypes.number.isRequired,
@@ -50,7 +45,7 @@ SecondaryNav.propTypes = {
   useParams: PropTypes.func
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activities: selectActivitiesSidebar(state),
   activityCount: selectActivityCount(state),
   location: state.router.location
@@ -58,7 +53,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   addActivity: actualAddActivity
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SecondaryNav);
 

@@ -16,10 +16,7 @@ import Objectives from './Objectives';
 import StandardsAndConditions from './StandardsAndConditions';
 import { Section } from '../../components/Section';
 
-const ActivityRoutes = ({
-  activityIndex,
-  useRouteMatch
-}) => {
+const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
   const { path } = useRouteMatch();
 
   return (
@@ -62,7 +59,7 @@ const ActivityRoutes = ({
 
 ActivityRoutes.defaultProps = {
   useRouteMatch: actualUseRouteMatch
-}
+};
 
 ActivityRoutes.propTypes = {
   activityIndex: PropTypes.number.isRequired,

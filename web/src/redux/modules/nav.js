@@ -22,7 +22,7 @@ const links = [
         id: 'apd-state-profile-key-personnel-nav',
         label: t('apd.stateProfile.keyPersonnel.title'),
         url: '/apd/state-profile#apd-state-profile-key-personnel'
-      },
+      }
     ]
   },
   {
@@ -104,18 +104,18 @@ const links = [
       {
         id: 'apd-executive-summary-nav',
         label: t('executiveSummary.title'),
-        url: '/apd/executive-summary',
+        url: '/apd/executive-summary'
       },
       {
         id: 'executive-summary-summary-nav',
         label: t('executiveSummary.summary.title'),
-        url: '/apd/executive-summary#executive-summary-summary',
+        url: '/apd/executive-summary#executive-summary-summary'
       },
       {
         id: 'executive-summary-budget-table-nav',
         label: t('executiveSummary.budgetTable.title'),
-        url: '/apd/executive-summary#executive-summary-budget-table',
-      },
+        url: '/apd/executive-summary#executive-summary-budget-table'
+      }
     ]
   },
   {
@@ -123,40 +123,40 @@ const links = [
     label: t('exportAndSubmit.title'),
     url: '/print'
   }
-]
+];
 
-const buildActivitySection = i => ([
+const buildActivitySection = i => [
   {
     id: `apd-activity-${i}-overview-nav`,
     label: 'Activity overview',
-    url: `/apd/activity/${i}/overview`,
+    url: `/apd/activity/${i}/overview`
   },
   {
     id: `apd-activity-${i}-okrs-nav`,
     label: 'Objectives and key results',
-    url: `/apd/activity/${i}/okrs`,
+    url: `/apd/activity/${i}/okrs`
   },
   {
     id: `apd-activity-${i}-state-costs-nav`,
     label: 'State cost categories',
-    url: `/apd/activity/${i}/state-costs`,
+    url: `/apd/activity/${i}/state-costs`
   },
   {
     id: `apd-activity-${i}-contractor-costs-nav`,
     label: 'Private contractor costs',
-    url: `/apd/activity/${i}/contractor-costs`,
+    url: `/apd/activity/${i}/contractor-costs`
   },
   {
     id: `apd-activity-${i}-cost-allocation-nav`,
     label: 'Cost allocation',
-    url: `/apd/activity/${i}/cost-allocation`,
+    url: `/apd/activity/${i}/cost-allocation`
   },
   {
     id: `apd-activity-${i}-ffp-nav`,
     label: 'FFP and budget',
-    url: `/apd/activity/${i}/ffp`,
+    url: `/apd/activity/${i}/ffp`
   }
-])
+];
 
 const buildActivityItems = activities => {
   const activityItems = activities.map((activity, i) => ({
@@ -168,80 +168,78 @@ const buildActivityItems = activities => {
     items: buildActivitySection(i)
   }));
 
-  activityItems.splice(
-    0,
-    0,
-    {
-      id: 'activities-list-nav',
-      url: '/apd/activities#activities-list',
-      label: t('activities.list.title')
-    }
-  );
+  activityItems.splice(0, 0, {
+    id: 'activities-list-nav',
+    url: '/apd/activities#activities-list',
+    label: t('activities.list.title')
+  });
 
   return activityItems;
 };
 
 const flatten = (result, node) => {
-  if (node === null) return result
-  if (Array.isArray(node)) return node.reduce(flatten, result)
-  result.push(node)
-  return flatten(result, node && node.items ? node.items : null)
-}
+  if (node === null) return result;
+  if (Array.isArray(node)) return node.reduce(flatten, result);
+  result.push(node);
+  return flatten(result, node && node.items ? node.items : null);
+};
 
-const initialState =  {
+const initialState = {
   links,
   continueLink: null,
   previousLink: null,
   selectedId: 'apd-state-profile-nav'
-}
+};
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case APD_ACTIVITIES_CHANGE: {
       const updatedLinks = links.map(link => {
         if (link.label !== t('activities.title')) return link;
-        return { ...link, items: buildActivityItems(action.activities) }
-      })
+        return { ...link, items: buildActivityItems(action.activities) };
+      });
       return {
         ...state,
         links: updatedLinks
-      }
+      };
     }
 
     case LOCATION_CHANGE: {
-      const { pathname, hash } = action.payload.location
-      const selectedId = hash ?
-        `${hash.replace('#', '')}-nav` :
-        `${pathname.substring(1).replace(/\//g, '-')}-nav`
+      const { pathname, hash } = action.payload.location;
+      const selectedId = hash
+        ? `${hash.replace('#', '')}-nav`
+        : `${pathname.substring(1).replace(/\//g, '-')}-nav`;
 
-      const flatLinks = flatten([], state.links).filter(link => link.url && !link.url.includes('#'))
-      const currentIndex = flatLinks.findIndex(link => link.url === pathname)
-      const continueLink = currentIndex + 1 < flatLinks.length ?
-        flatLinks[currentIndex + 1] :
-        null
-      const previousLink = currentIndex - 1 >= 0 ?
-        flatLinks[currentIndex - 1] :
-        null
+      const flatLinks = flatten([], state.links).filter(
+        link => link.url && !link.url.includes('#')
+      );
+      const currentIndex = flatLinks.findIndex(link => link.url === pathname);
+      const continueLink =
+        currentIndex + 1 < flatLinks.length
+          ? flatLinks[currentIndex + 1]
+          : null;
+      const previousLink =
+        currentIndex - 1 >= 0 ? flatLinks[currentIndex - 1] : null;
 
       return {
         ...state,
         continueLink,
         previousLink,
         selectedId
-      }
+      };
     }
 
     case NAVIGATION_SCROLL_TO_WAYPOINT: {
-      const { waypointId } = action
+      const { waypointId } = action;
       return {
         ...state,
         selectedId: `${waypointId}-nav`
-      }
+      };
     }
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default reducer;

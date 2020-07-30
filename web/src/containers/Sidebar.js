@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import stickybits from 'stickybits';
-import Nav from './Nav'
+import Nav from './Nav';
 
 const Sidebar = ({ place }) => {
   useEffect(() => {
