@@ -1,0 +1,9 @@
+{
+  "low": true,
+  "package-manager": "auto",
+  "allowlist": [
+    "1547|webpack>node-libs-browser>crypto-browserify>browserify-sign>elliptic",
+    "1547|webpack>node-libs-browser>crypto-browserify>create-ecdh>elliptic"
+  ],
+  "registry": "https://registry.npmjs.org"
+}
