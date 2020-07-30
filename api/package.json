@@ -4,6 +4,7 @@
   "description": "APD api for CMS HITECH program",
   "main": "main.js",
   "scripts": {
+    "audit": "npx audit-ci --config ./audit-ci.json",
     "lint": "eslint '**/*.js'",
     "make-migrate": "knex migrate:make",
     "migrate": "knex migrate:latest",
