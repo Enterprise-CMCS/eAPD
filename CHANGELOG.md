@@ -14,6 +14,7 @@ Anticipated release: July 27, 2020
 
 - Change Redux Action Types from symbols to string constants ([2349])
 - Update postman script for recent migrations ([#2340])
+- Use audit-ci for auditing node packages within our pipeline ([#2335])
 
 # Previous releases
 
@@ -24,3 +25,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2340]: https://github.com/18F/cms-hitech-apd/issues/2340
 [#2236]: https://github.com/18F/cms-hitech-apd/issues/2236
 [#2314]: https://github.com/18F/cms-hitech-apd/issues/2314
+[#2335]: https://github.com/18F/cms-hitech-apd/issues/2335
