@@ -18,7 +18,9 @@ exports[`apd (application) component renders correctly 1`] = `
       <div
         className="ds-u-padding-top--2"
       >
-        <ApdPageRoutes />
+        <ApdPageRoutes
+          useRouteMatch={[Function]}
+        />
       </div>
     </div>
   </div>

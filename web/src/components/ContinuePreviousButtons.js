@@ -61,9 +61,15 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   )
 };
 
+// https://github.com/facebook/prop-types/pull/90#issuecomment-551213524
+const validProptypes = [
+  PropTypes.object.isRequired,
+  PropTypes.oneOf([null]).isRequired,
+]
+
 ContinuePreviousButtons.propTypes = {
-  continueLink: PropTypes.oneOfType([null, PropTypes.object]).isRequired,
-  previousLink: PropTypes.oneOfType([null, PropTypes.object]).isRequired
+  continueLink: PropTypes.oneOfType(validProptypes).isRequired,
+  previousLink: PropTypes.oneOfType(validProptypes).isRequired
 }
 
 const mapStateToProps = ({ nav }) => ({

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as ScrollToElement} from "./ScrollToElement"
+import { plain as ScrollToElement } from "./ScrollToElement"
 
 const props = {
   location: {

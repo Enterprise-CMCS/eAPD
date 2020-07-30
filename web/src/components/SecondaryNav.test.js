@@ -21,21 +21,21 @@ const setup = (props = {}) => {
 describe('Secondary Nav component', () => {
   it('renders with add activity button when on the last activity on the FFP section', () => {
     const component = setup()
-    expect(component.find('Link').exists()).toBeTruthy()
+    expect(component.find('Link').exists()).toBe(true)
   });
 
   it('renders without add activity button when not on the last activity', () => {
     const component = setup({
       useParams: () => ({ activityIndex: 0 })
     })
-    expect(component.find('Link').exists()).toBeFalsy()
+    expect(component.find('Link').exists()).toBe(false)
   });
 
   it('renders without add activity button when on the last activity but not on the FFP section', () => {
     const component = setup({
       location: { pathname: '/apd/activity/1/overview' }
     })
-    expect(component.find('Link').exists()).toBeFalsy()
+    expect(component.find('Link').exists()).toBe(false)
   });
 
   it('handles add activity button click', () => {
@@ -51,7 +51,7 @@ describe('Secondary Nav component', () => {
   it('renders <ContinuePreviousButtons />', () => {
     const component = setup()
     const result = component.find('Connect(ContinuePreviousButtons)').exists()
-    expect(result).toBeTruthy()
+    expect(result).toBe(true)
   })
 
   it('maps state to props', () => {
