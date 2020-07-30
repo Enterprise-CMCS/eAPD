@@ -97,7 +97,7 @@
     "prettier": "^1.19.1",
     "sinon": "^8.1.1",
     "stream-mock": "^2.0.5",
-    "tap": "^14.10.6"
+    "tap": "^14.10.8"
   },
   "jest": {
     "testMatch": [
