@@ -26,7 +26,6 @@ const links = [
     ]
   },
   {
-    id: 'apd-program-summary-nav',
     label: t('apd.title'),
     url: '/apd/program-summary'
   },
@@ -35,9 +34,9 @@ const links = [
     defaultCollapsed: true,
     items: [
       {
-        id: 'apd-previous-activities-nav',
+        id: 'prev-activities-nav',
         label: t('previousActivities.title'),
-        url: '/apd/previous-activities'
+        url: '/apd/previous-activities#prev-activities'
       },
       {
         id: 'prev-activities-outline-nav',
@@ -66,9 +65,9 @@ const links = [
     defaultCollapsed: true,
     items: [
       {
-        id: 'apd-proposed-budget-nav',
+        id: 'proposed-budget-nav',
         label: t('proposedBudget.title'),
-        url: '/apd/proposed-budget'
+        url: '/apd/proposed-budget#proposed-budget'
       },
       {
         id: 'summary-schedule-by-activity-table-nav',
@@ -102,9 +101,9 @@ const links = [
     defaultCollapsed: true,
     items: [
       {
-        id: 'apd-executive-summary-nav',
+        id: 'executive-summary-nav',
         label: t('executiveSummary.title'),
-        url: '/apd/executive-summary'
+        url: '/apd/executive-summary#executive-summary'
       },
       {
         id: 'executive-summary-summary-nav',

@@ -86,64 +86,62 @@ const AssurancesAndCompliance = ({
   };
 
   return (
-    <Waypoint id="assurances-compliance">
-      <Section id="assurances-compliance" resource="assurancesAndCompliance">
-        <Subsection
-          id="assurances-compliance-fed-citations"
-          resource="assurancesAndCompliance.citations"
-        >
-          {Object.entries(regLinks).map(([name, regulations]) => (
-            <div key={name} className="ds-u-margin-bottom--3">
-              <h4 className="ds-h4">
-                {t(`assurancesAndCompliance.headings.${name}`)}
-              </h4>
-              {citations[name].map(({ title, checked, explanation }, index) => (
-                <fieldset key={title} className="ds-u-margin-top--2">
-                  <legend className="ds-c-label">
-                    Are you complying with{' '}
-                    <strong>
-                      <LinkOrText link={regulations[title]} title={title} />
-                    </strong>
-                    ?
-                  </legend>
-                  <Choice
-                    type="radio"
-                    value="yes"
-                    name={`apd-assurances-yes-${namify(name, title)}`}
-                    size="small"
-                    checked={checked === true}
-                    onChange={handleCheckChange(name, index, true)}
-                  >
-                    Yes
-                  </Choice>
-                  <Choice
-                    type="radio"
-                    value="no"
-                    name={`apd-assurances-no-${namify(name, title)}`}
-                    size="small"
-                    checked={checked === false}
-                    onChange={handleCheckChange(name, index, false)}
-                    checkedChildren={
-                      <div className="ds-c-choice__checkedChild">
-                        <TextArea
-                          label="Please explain"
-                          name={namify(name, title)}
-                          value={explanation}
-                          onChange={handleExplanationChange(name, index)}
-                          rows={5}
-                        />
-                      </div>
-                    }
-                  >
-                    No
-                  </Choice>
-                </fieldset>
-              ))}
-            </div>
-          ))}
-        </Subsection>
-      </Section>
-    </Waypoint>
+    <Section id="assurances-compliance" resource="assurancesAndCompliance">
+      <Subsection
+        id="assurances-compliance-fed-citations"
+        resource="assurancesAndCompliance.citations"
+      >
+        {Object.entries(regLinks).map(([name, regulations]) => (
+          <div key={name} className="ds-u-margin-bottom--3">
+            <h4 className="ds-h4">
+              {t(`assurancesAndCompliance.headings.${name}`)}
+            </h4>
+            {citations[name].map(({ title, checked, explanation }, index) => (
+              <fieldset key={title} className="ds-u-margin-top--2">
+                <legend className="ds-c-label">
+                  Are you complying with{' '}
+                  <strong>
+                    <LinkOrText link={regulations[title]} title={title} />
+                  </strong>
+                  ?
+                </legend>
+                <Choice
+                  type="radio"
+                  value="yes"
+                  name={`apd-assurances-yes-${namify(name, title)}`}
+                  size="small"
+                  checked={checked === true}
+                  onChange={handleCheckChange(name, index, true)}
+                >
+                  Yes
+                </Choice>
+                <Choice
+                  type="radio"
+                  value="no"
+                  name={`apd-assurances-no-${namify(name, title)}`}
+                  size="small"
+                  checked={checked === false}
+                  onChange={handleCheckChange(name, index, false)}
+                  checkedChildren={
+                    <div className="ds-c-choice__checkedChild">
+                      <TextArea
+                        label="Please explain"
+                        name={namify(name, title)}
+                        value={explanation}
+                        onChange={handleExplanationChange(name, index)}
+                        rows={5}
+                      />
+                    </div>
+                  }
+                >
+                  No
+                </Choice>
+              </fieldset>
+            ))}
+          </div>
+        ))}
+      </Subsection>
+    </Section>
   );
 };
 
