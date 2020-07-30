@@ -116,6 +116,7 @@ const CostAllocateFFP = ({
   };
 
   const { years } = costSummary;
+  console.log({ activityName, costAllocation });
 
   return (
     <Fragment>
@@ -125,7 +126,10 @@ const CostAllocateFFP = ({
             Cost Allocation and Budget for FFY {ffy}
           </h3>
 
-          <table className="budget-table activity-budget-table">
+          <table
+            className="budget-table activity-budget-table"
+            id={`activity${activityIndex}-ffy${ffy}`}
+          >
             <tbody>
               <CostAllocationRows years={years} ffy={ffy} />
 
@@ -154,13 +158,13 @@ const CostAllocateFFP = ({
                         description: 'Federal Share',
                         totalCost: years[ffy].federalShare,
                         unitCost: years[ffy].medicaidShare,
-                        units: '90%'
+                        units: `${costAllocation[ffy].ffp.federal}%`
                       },
                       {
                         description: 'State Share',
                         totalCost: years[ffy].stateShare,
                         unitCost: years[ffy].medicaidShare,
-                        units: '10%'
+                        units: `${costAllocation[ffy].ffp.state}%`
                       }
                     ]}
                   />
