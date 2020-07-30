@@ -16,10 +16,9 @@ const fetchMock = new MockAdapter(axios);
 
 describe('APD edit actions for uploading files', () => {
   const reader = {
-    addEventListener: jest.fn(),
-    readAsArrayBuffer: jest.fn()
+    addEventListener: jest.spyOn(FileReader.prototype, 'addEventListener'),
+    readAsArrayBuffer: jest.spyOn(FileReader.prototype, 'readAsArrayBuffer')
   };
-  global.FileReader = () => reader;
 
   const store = mockStore({
     apd: {
@@ -49,7 +48,7 @@ describe('APD edit actions for uploading files', () => {
         { type: UPLOAD_FILE_SUCCESS, url: '/this-is-the-new-url' }
       ]);
 
-      expect(url).toEqual('http://localhost:8000/this-is-the-new-url');
+      expect(url).toMatch('/this-is-the-new-url');
     });
 
     await reader.addEventListener.mock.calls[0][1]();

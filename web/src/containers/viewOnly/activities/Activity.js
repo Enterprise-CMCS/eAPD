@@ -242,7 +242,7 @@ const Activity = ({ activity, activityIndex }) => {
       </h3>
       <CostAllocateFFP
         aKey={activity.key}
-        activityIndex={0}
+        activityIndex={activityIndex}
         costAllocation={activity.costAllocation}
         isViewOnly
       />

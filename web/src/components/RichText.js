@@ -14,12 +14,7 @@ import 'tinymce/plugins/spellchecker';
 
 import { uploadFile } from '../actions/editApd';
 import { generateKey } from '../util';
-
-require.context(
-  'file-loader?name=[path][name].[ext]&context=node_modules/tinymce!tinymce/skins',
-  true,
-  /.*/
-);
+import '../file-loader';
 
 const fileButtonOnClick = (button, editor, upload) => () => {
   const selectedFile = button.files[0];
