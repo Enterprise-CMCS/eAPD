@@ -1,344 +1,349 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`executive summary component renders correctly 1`] = `
-<Section
-  id="executive-summary"
-  resource="executiveSummary"
->
+<Fragment>
   <Connect(ConnectedWaypoint)
-    id="executive-summary-summary"
+    id="executive-summary"
   />
-  <Subsection
-    headerClassName={null}
-    id="executive-summary-summary"
-    nested={false}
-    resource="executiveSummary.summary"
+  <Section
+    id="executive-summary"
+    resource="executiveSummary"
   >
-    <Review
-      className=""
-      editHref="/apd/activity/0/overview"
-      heading={
-        <React.Fragment>
-          Activity 
-          1
-          : 
-          activity 1
-        </React.Fragment>
-      }
-      headingLevel="4"
-      key="a1"
-      onDeleteClick={null}
-      onEditClick={null}
-    >
-      <p>
-        first activity
-      </p>
-      <ul
-        className="ds-c-list--bare"
-      >
-        <li>
-          <strong>
-            Start date - End date:
-          </strong>
-           
-        </li>
-        <li>
-          <strong>
-            Total cost of activity:
-          </strong>
-           
-          <Dollars>
-            950
-          </Dollars>
-        </li>
-        <li>
-          <strong>
-            Medicaid share:
-          </strong>
-           
-          <Dollars>
-            1150
-          </Dollars>
-           (
-          <Dollars>
-            1050
-          </Dollars>
-           Federal share)
-        </li>
-        <li
-          className="ds-u-margin-top--2"
-          key="1"
-        >
-          <strong>
-            FFY 
-            1
-            :
-          </strong>
-           
-          <Dollars>
-            5232
-          </Dollars>
-           |
-           
-          <strong>
-            Medicaid Share:
-          </strong>
-           
-          <Dollars>
-            23626
-          </Dollars>
-           (
-          <Dollars>
-            2883
-          </Dollars>
-           Federal share)
-        </li>
-        <li
-          className=""
-          key="2"
-        >
-          <strong>
-            FFY 
-            2
-            :
-          </strong>
-           
-          <Dollars>
-            848622
-          </Dollars>
-           |
-           
-          <strong>
-            Medicaid Share:
-          </strong>
-           
-          <Dollars>
-            2468252
-          </Dollars>
-           (
-          <Dollars>
-            826
-          </Dollars>
-           Federal share)
-        </li>
-      </ul>
-    </Review>
-    <Review
-      className="ds-u-border-bottom--0"
-      editHref="/apd/activity/1/overview"
-      heading={
-        <React.Fragment>
-          Activity 
-          2
-          : 
-          activity 2
-        </React.Fragment>
-      }
-      headingLevel="4"
-      key="a2"
-      onDeleteClick={null}
-      onEditClick={null}
-    >
-      <p>
-        second activity
-      </p>
-      <ul
-        className="ds-c-list--bare"
-      >
-        <li>
-          <strong>
-            Start date - End date:
-          </strong>
-           
-        </li>
-        <li>
-          <strong>
-            Total cost of activity:
-          </strong>
-           
-          <Dollars>
-            310
-          </Dollars>
-        </li>
-        <li>
-          <strong>
-            Medicaid share:
-          </strong>
-           
-          <Dollars>
-            2150
-          </Dollars>
-           (
-          <Dollars>
-            2050
-          </Dollars>
-           Federal share)
-        </li>
-        <li
-          className="ds-u-margin-top--2"
-          key="1"
-        >
-          <strong>
-            FFY 
-            1
-            :
-          </strong>
-           
-          <Dollars>
-            26926
-          </Dollars>
-           |
-           
-          <strong>
-            Medicaid Share:
-          </strong>
-           
-          <Dollars>
-            989264
-          </Dollars>
-           (
-          <Dollars>
-            2356
-          </Dollars>
-           Federal share)
-        </li>
-        <li
-          className=""
-          key="2"
-        >
-          <strong>
-            FFY 
-            2
-            :
-          </strong>
-           
-          <Dollars>
-            54634738
-          </Dollars>
-           |
-           
-          <strong>
-            Medicaid Share:
-          </strong>
-           
-          <Dollars>
-            73
-          </Dollars>
-           (
-          <Dollars>
-            643
-          </Dollars>
-           Federal share)
-        </li>
-      </ul>
-    </Review>
-    <hr
-      className="ds-u-border--dark ds-u-margin--0"
+    <Connect(ConnectedWaypoint)
+      id="executive-summary-summary"
     />
-    <Review
-      className="ds-u-border--0"
-      editHref={null}
-      heading="Total cost"
-      headingLevel="4"
-      onDeleteClick={null}
-      onEditClick={null}
+    <Subsection
+      headerClassName={null}
+      id="executive-summary-summary"
+      nested={false}
+      resource="executiveSummary.summary"
     >
-      <p>
-        Verify that this information is correct. Edit activities above to make changes.
-      </p>
-      <ul
-        className="ds-c-list--bare"
-      >
-        <li>
-          <strong>
-            Federal Fiscal Years requested:
-          </strong>
-           FFY
-           
-          1, 2
-        </li>
-        <li>
-          <strong>
-            Medicaid share:
-          </strong>
-           
-          <Dollars>
-            30
-          </Dollars>
-           (
-          <Dollars>
-            20
-          </Dollars>
-           Federal share)
-        </li>
-        <li>
-          <strong>
-            Total funding request:
-          </strong>
-           
-          <Dollars>
-            10
-          </Dollars>
-        </li>
-        <li
-          className="ds-u-margin-top--2"
-          key="1"
-        >
-          <strong>
-            FFY 
+      <Review
+        className=""
+        editHref="/apd/activity/0/overview"
+        heading={
+          <React.Fragment>
+            Activity 
             1
-            :
-          </strong>
-           
-          <Dollars>
-            5232
-          </Dollars>
-           |
-           
-          <Dollars />
-           Medicaid share |
-           
-          <Dollars>
-            2883
-          </Dollars>
-           Federal share
-        </li>
-        <li
-          className=""
-          key="2"
+            : 
+            activity 1
+          </React.Fragment>
+        }
+        headingLevel="4"
+        key="a1"
+        onDeleteClick={null}
+        onEditClick={null}
+      >
+        <p>
+          first activity
+        </p>
+        <ul
+          className="ds-c-list--bare"
         >
-          <strong>
-            FFY 
+          <li>
+            <strong>
+              Start date - End date:
+            </strong>
+             
+          </li>
+          <li>
+            <strong>
+              Total cost of activity:
+            </strong>
+             
+            <Dollars>
+              950
+            </Dollars>
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars>
+              1150
+            </Dollars>
+             (
+            <Dollars>
+              1050
+            </Dollars>
+             Federal share)
+          </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars>
+              5232
+            </Dollars>
+             |
+             
+            <strong>
+              Medicaid Share:
+            </strong>
+             
+            <Dollars>
+              23626
+            </Dollars>
+             (
+            <Dollars>
+              2883
+            </Dollars>
+             Federal share)
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars>
+              848622
+            </Dollars>
+             |
+             
+            <strong>
+              Medicaid Share:
+            </strong>
+             
+            <Dollars>
+              2468252
+            </Dollars>
+             (
+            <Dollars>
+              826
+            </Dollars>
+             Federal share)
+          </li>
+        </ul>
+      </Review>
+      <Review
+        className="ds-u-border-bottom--0"
+        editHref="/apd/activity/1/overview"
+        heading={
+          <React.Fragment>
+            Activity 
             2
-            :
-          </strong>
-           
-          <Dollars>
-            848622
-          </Dollars>
-           |
-           
-          <Dollars />
-           Medicaid share |
-           
-          <Dollars>
-            826
-          </Dollars>
-           Federal share
-        </li>
-      </ul>
-    </Review>
-  </Subsection>
-  <Connect(ConnectedWaypoint)
-    id="executive-summary-budget-table"
-  />
-  <Subsection
-    headerClassName={null}
-    id="executive-summary-budget-table"
-    nested={false}
-    resource="executiveSummary.budgetTable"
-  >
-    <Connect(ExecutiveSummaryBudget) />
-  </Subsection>
-</Section>
+            : 
+            activity 2
+          </React.Fragment>
+        }
+        headingLevel="4"
+        key="a2"
+        onDeleteClick={null}
+        onEditClick={null}
+      >
+        <p>
+          second activity
+        </p>
+        <ul
+          className="ds-c-list--bare"
+        >
+          <li>
+            <strong>
+              Start date - End date:
+            </strong>
+             
+          </li>
+          <li>
+            <strong>
+              Total cost of activity:
+            </strong>
+             
+            <Dollars>
+              310
+            </Dollars>
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars>
+              2150
+            </Dollars>
+             (
+            <Dollars>
+              2050
+            </Dollars>
+             Federal share)
+          </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars>
+              26926
+            </Dollars>
+             |
+             
+            <strong>
+              Medicaid Share:
+            </strong>
+             
+            <Dollars>
+              989264
+            </Dollars>
+             (
+            <Dollars>
+              2356
+            </Dollars>
+             Federal share)
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars>
+              54634738
+            </Dollars>
+             |
+             
+            <strong>
+              Medicaid Share:
+            </strong>
+             
+            <Dollars>
+              73
+            </Dollars>
+             (
+            <Dollars>
+              643
+            </Dollars>
+             Federal share)
+          </li>
+        </ul>
+      </Review>
+      <hr
+        className="ds-u-border--dark ds-u-margin--0"
+      />
+      <Review
+        className="ds-u-border--0"
+        editHref={null}
+        heading="Total cost"
+        headingLevel="4"
+        onDeleteClick={null}
+        onEditClick={null}
+      >
+        <p>
+          Verify that this information is correct. Edit activities above to make changes.
+        </p>
+        <ul
+          className="ds-c-list--bare"
+        >
+          <li>
+            <strong>
+              Federal Fiscal Years requested:
+            </strong>
+             FFY
+             
+            1, 2
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars>
+              30
+            </Dollars>
+             (
+            <Dollars>
+              20
+            </Dollars>
+             Federal share)
+          </li>
+          <li>
+            <strong>
+              Total funding request:
+            </strong>
+             
+            <Dollars>
+              10
+            </Dollars>
+          </li>
+          <li
+            className="ds-u-margin-top--2"
+            key="1"
+          >
+            <strong>
+              FFY 
+              1
+              :
+            </strong>
+             
+            <Dollars>
+              5232
+            </Dollars>
+             |
+             
+            <Dollars />
+             Medicaid share |
+             
+            <Dollars>
+              2883
+            </Dollars>
+             Federal share
+          </li>
+          <li
+            className=""
+            key="2"
+          >
+            <strong>
+              FFY 
+              2
+              :
+            </strong>
+             
+            <Dollars>
+              848622
+            </Dollars>
+             |
+             
+            <Dollars />
+             Medicaid share |
+             
+            <Dollars>
+              826
+            </Dollars>
+             Federal share
+          </li>
+        </ul>
+      </Review>
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="executive-summary-budget-table"
+    />
+    <Subsection
+      headerClassName={null}
+      id="executive-summary-budget-table"
+      nested={false}
+      resource="executiveSummary.budgetTable"
+    >
+      <Connect(ExecutiveSummaryBudget) />
+    </Subsection>
+  </Section>
+</Fragment>
 `;

@@ -1,42 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`previous activities component renders correctly 1`] = `
-<Section
-  id="prev-activities"
-  resource="previousActivities"
->
+<Fragment>
   <Connect(ConnectedWaypoint)
-    id="prev-activities-outline"
+    id="prev-activities"
   />
-  <Subsection
-    headerClassName={null}
-    id="prev-activities-outline"
-    nested={false}
-    resource="previousActivities.outline"
+  <Section
+    id="prev-activities"
+    resource="previousActivities"
   >
-    <h4
-      className="ds-c-label"
-    >
-      Previous Activities Summary
-    </h4>
-    <Connect(RichText)
-      content="bob"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
+    <Connect(ConnectedWaypoint)
+      id="prev-activities-outline"
     />
-  </Subsection>
-  <Connect(ConnectedWaypoint)
-    id="prev-activities-table"
-  />
-  <Subsection
-    headerClassName={null}
-    id="prev-activities-table"
-    nested={false}
-    resource="previousActivities.actualExpenses"
-  >
-    <Connect(ApdPreviousActivityTable) />
-    <Connect(ApdPreviousActivityTableMMIS) />
-    <Connect(ApdPreviousActivityTableMMIS) />
-  </Subsection>
-</Section>
+    <Subsection
+      headerClassName={null}
+      id="prev-activities-outline"
+      nested={false}
+      resource="previousActivities.outline"
+    >
+      <h4
+        className="ds-c-label"
+      >
+        Previous Activities Summary
+      </h4>
+      <Connect(RichText)
+        content="bob"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="prev-activities-table"
+    />
+    <Subsection
+      headerClassName={null}
+      id="prev-activities-table"
+      nested={false}
+      resource="previousActivities.actualExpenses"
+    >
+      <Connect(ApdPreviousActivityTable) />
+      <Connect(ApdPreviousActivityTableMMIS) />
+      <Connect(ApdPreviousActivityTableMMIS) />
+    </Subsection>
+  </Section>
+</Fragment>
 `;
