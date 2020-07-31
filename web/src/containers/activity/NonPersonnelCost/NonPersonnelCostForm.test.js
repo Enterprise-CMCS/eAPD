@@ -41,10 +41,6 @@ describe('the NonPersonnelCostForm component', () => {
     setDescription.mockClear();
   });
 
-  test('renders correctly', () => {
-    expect(component).toMatchSnapshot();
-  });
-
   describe('events', () => {
     test('handles changing the cost total for a year', () => {
       component

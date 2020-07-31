@@ -4,6 +4,7 @@
   "description": "APD api for CMS HITECH program",
   "main": "main.js",
   "scripts": {
+    "audit": "npx audit-ci --config ./audit-ci.json",
     "lint": "eslint '**/*.js'",
     "make-migrate": "knex migrate:make",
     "migrate": "knex migrate:latest",
@@ -93,11 +94,11 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.1",
     "jest": "^25.2.1",
-    "nodemon": "^2.0.2",
+    "nodemon": "^2.0.4",
     "prettier": "^1.19.1",
     "sinon": "^8.1.1",
     "stream-mock": "^2.0.5",
-    "tap": "^14.10.6"
+    "tap": "^14.10.8"
   },
   "jest": {
     "testMatch": [

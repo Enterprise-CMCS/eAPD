@@ -10,6 +10,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   </h3>
   <table
     className="budget-table activity-budget-table"
+    id="activity0-ffy1990"
   >
     <tbody>
       <CostAllocationRows
@@ -308,6 +309,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   </h3>
   <table
     className="budget-table activity-budget-table"
+    id="activity0-ffy1991"
   >
     <tbody>
       <CostAllocationRows
@@ -755,6 +757,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   </h3>
   <table
     className="budget-table activity-budget-table"
+    id="activity0-ffy1990"
   >
     <tbody>
       <CostAllocationRows
@@ -950,6 +953,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   </h3>
   <table
     className="budget-table activity-budget-table"
+    id="activity0-ffy1991"
   >
     <tbody>
       <CostAllocationRows
@@ -1103,13 +1107,13 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
               "description": "Federal Share",
               "totalCost": 50,
               "unitCost": 7003,
-              "units": "90%",
+              "units": "50%",
             },
             Object {
               "description": "State Share",
               "totalCost": 7007,
               "unitCost": 7003,
-              "units": "10%",
+              "units": "50%",
             },
           ]
         }
