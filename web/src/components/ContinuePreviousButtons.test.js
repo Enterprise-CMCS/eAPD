@@ -4,6 +4,8 @@ import { Link, BrowserRouter as Router } from 'react-router-dom';
 import { Button } from '@cmsgov/design-system-core';
 
 import {
+  continueLabelId,
+  previousLabelId,
   plain as ContinuePreviousButtons,
   mapStateToProps
 } from './ContinuePreviousButtons';
@@ -30,17 +32,24 @@ const setup = (props = {}) => {
 }
 
 describe('<ContinuePreviousButtons /> component', () => {
-  it('renders links', () => {
+  it('renders links, when provided', () => {
     const component = setup();
     const links = component.find(Link);
     expect(links.last().prop('to')).toBe('/apd/previous-activities');
     expect(links.first().prop('to')).toBe('/apd/state-profile');
   });
 
+  it('does not render links, with null inputs', () => {
+    const props = {
+      continueLink: null,
+      previousLink: null,
+    };
+    const component = setup(props);
+    expect(component.find(Link).exists()).toBe(false);
+  });
+
   it('provides accessible labels', () => {
     const component = setup();
-    const continueLabelId = 'continue-button-label';
-    const previousLabelId = 'previous-button-label';
 
     const buttons = component.find(Button);
     expect(buttons.last().prop('aria-labelledby')).toBe(continueLabelId);
@@ -67,8 +76,8 @@ describe('<ContinuePreviousButtons /> component', () => {
     };
     const component = setup(props);
 
-    const continueLabel = component.find('#continue-button-label');
-    const previousLabel = component.find('#previous-button-label');
+    const continueLabel = component.find(`#${continueLabelId}`);
+    const previousLabel = component.find(`#${previousLabelId}`);
     expect(continueLabel.text()).toBe('Activity 2: Objective and key results');
     expect(previousLabel.text()).toBe('Activity 1: FFP and budget');
   });

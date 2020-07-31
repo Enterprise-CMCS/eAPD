@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import { Button } from '@cmsgov/design-system-core';
 import NavLink from './NavLink';
 
+const continueLabelId = 'continue-button-label';
+const previousLabelId = 'previous-button-label';
+
 const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
+
   const buildLabel = (link) => {
     if (link.url.startsWith('/apd/activity/')) {
       const activityIndex = link.url.split('/')[3];
@@ -15,7 +19,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
 
   const continueComponent = !continueLink ? null : (
     <Button
-      aria-labelledby="continue-button-label"
+      aria-labelledby={continueLabelId}
       className="ds-u-float--right"
       component={NavLink}
       href={continueLink.url}
@@ -26,14 +30,14 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   );
 
   const continueLabel = !continueLink ? null : (
-    <p className="ds-u-text-align--right" id="continue-button-label">
+    <p className="ds-u-text-align--right" id={continueLabelId}>
       {buildLabel(continueLink)}
     </p>
   );
 
   const previousComponent = !previousLink ? null : (
     <Button
-      aria-labelledby="previous-button-label"
+      aria-labelledby={previousLabelId}
       component={NavLink}
       href={previousLink.url}
     >
@@ -42,7 +46,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   );
 
   const previousLabel = !previousLink ? null : (
-    <p id="previous-button-label">{buildLabel(previousLink)}</p>
+    <p id={previousLabelId}>{buildLabel(previousLink)}</p>
   );
 
   return (
@@ -60,16 +64,9 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   );
 };
 
-// allow 'object' or 'null' property types
-// https://github.com/facebook/prop-types/pull/90#issuecomment-551213524
-const validProptypes = [
-  PropTypes.object.isRequired,
-  PropTypes.oneOf([null]).isRequired
-];
-
 ContinuePreviousButtons.propTypes = {
-  continueLink: PropTypes.oneOfType(validProptypes).isRequired,
-  previousLink: PropTypes.oneOfType(validProptypes).isRequired
+  continueLink: PropTypes.object,
+  previousLink: PropTypes.object
 };
 
 const mapStateToProps = ({ nav }) => ({
@@ -79,4 +76,9 @@ const mapStateToProps = ({ nav }) => ({
 
 export default connect(mapStateToProps)(ContinuePreviousButtons);
 
-export { ContinuePreviousButtons as plain, mapStateToProps };
+export {
+  continueLabelId,
+  previousLabelId,
+  ContinuePreviousButtons as plain,
+  mapStateToProps
+};

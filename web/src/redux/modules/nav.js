@@ -173,7 +173,7 @@ const buildActivityItems = activities => {
 
   activityItems.splice(0, 0, {
     id: 'activities-list-nav',
-    url: '/apd/activities#activities-list',
+    url: '/apd/activities',
     label: t('activities.list.title')
   });
 
