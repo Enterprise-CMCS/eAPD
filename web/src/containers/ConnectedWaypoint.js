@@ -15,7 +15,10 @@ class ConnectedWaypoint extends Component {
     const { children, id } = this.props;
     return (
       <Fragment>
-        <Waypoint onEnter={this.hitWaypoint(id)} bottomOffset="90%" />
+        <Waypoint
+          bottomOffset="90%"
+          fireOnRapidScroll={false}
+          onEnter={this.hitWaypoint(id)} />
         {children}
       </Fragment>
     );
