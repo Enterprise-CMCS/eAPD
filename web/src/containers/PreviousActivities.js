@@ -17,8 +17,8 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
 
   return (
     <React.Fragment>
-      <Waypoint id="prev-activities" />
-      <Section id="prev-activities" resource="previousActivities">
+      <Waypoint id="apd-previous-activities" />
+      <Section id="apd-previous-activities" resource="previousActivities">
         <Waypoint id="prev-activities-outline" />
         <Subsection
           id="prev-activities-outline"

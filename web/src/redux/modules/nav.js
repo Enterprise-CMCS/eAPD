@@ -30,6 +30,7 @@ const links = [
     ]
   },
   {
+    id: 'apd-program-summary-nav',
     label: t('apd.title'),
     url: '/apd/program-summary'
   },
@@ -38,7 +39,7 @@ const links = [
     defaultCollapsed: true,
     items: [
       {
-        id: 'prev-activities-nav',
+        id: 'apd-previous-activities-nav',
         label: t('previousActivities.title'),
         url: '/apd/previous-activities'
       },
@@ -69,7 +70,7 @@ const links = [
     defaultCollapsed: true,
     items: [
       {
-        id: 'proposed-budget-nav',
+        id: 'apd-proposed-budget-nav',
         label: t('proposedBudget.title'),
         url: '/apd/proposed-budget'
       },
@@ -105,7 +106,7 @@ const links = [
     defaultCollapsed: true,
     items: [
       {
-        id: 'executive-summary-nav',
+        id: 'apd-executive-summary-nav',
         label: t('executiveSummary.title'),
         url: '/apd/executive-summary'
       },
@@ -122,7 +123,7 @@ const links = [
     ]
   },
   {
-    id: 'print-nav',
+    id: 'apd-export-nav',
     label: t('exportAndSubmit.title'),
     url: '/apd/export'
   }
@@ -172,7 +173,7 @@ const buildActivityItems = activities => {
   }));
 
   activityItems.splice(0, 0, {
-    id: 'activities-list-nav',
+    id: 'apd-activities-nav',
     url: '/apd/activities',
     label: t('activities.list.title')
   });
@@ -194,6 +195,21 @@ const initialState = {
   selectedId: 'apd-state-profile-nav'
 };
 
+const getContinuePreviousLinks = (links, pathname) => {
+  const flatLinks = flatten([], links).filter(
+    link => link.url && !link.url.includes('#')
+  );
+  const currentIndex = flatLinks.findIndex(link => link.url === pathname);
+  const continueLink =
+    currentIndex + 1 < flatLinks.length
+      ? flatLinks[currentIndex + 1]
+      : null;
+  const previousLink =
+    currentIndex - 1 >= 0 ? flatLinks[currentIndex - 1] : null;
+
+  return { continueLink, previousLink };
+}
+
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case APD_ACTIVITIES_CHANGE: {
@@ -213,16 +229,10 @@ const reducer = (state = initialState, action = {}) => {
         ? `${hash.replace('#', '')}-nav`
         : `${pathname.substring(1).replace(/\//g, '-')}-nav`;
 
-      const flatLinks = flatten([], state.links).filter(
-        link => link.url && !link.url.includes('#')
-      );
-      const currentIndex = flatLinks.findIndex(link => link.url === pathname);
-      const continueLink =
-        currentIndex + 1 < flatLinks.length
-          ? flatLinks[currentIndex + 1]
-          : null;
-      const previousLink =
-        currentIndex - 1 >= 0 ? flatLinks[currentIndex - 1] : null;
+      const {
+        continueLink,
+        previousLink
+      } = getContinuePreviousLinks(state.links, pathname);
 
       return {
         ...state,

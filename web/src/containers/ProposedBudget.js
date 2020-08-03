@@ -9,8 +9,8 @@ import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
   <React.Fragment>
-    <Waypoint id="proposed-budget" />
-    <Section id="proposed-budget" resource="proposedBudget">
+    <Waypoint id="apd-proposed-budget" />
+    <Section id="apd-proposed-budget" resource="proposedBudget">
       <Waypoint id="summary-schedule-by-activity-table" />
       <Subsection
         id="summary-schedule-by-activity-table"

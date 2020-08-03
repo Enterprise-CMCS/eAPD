@@ -17,8 +17,8 @@ import {
 const ExecutiveSummary = ({ data, total, years }) => {
   return (
     <React.Fragment>
-      <Waypoint id="executive-summary" />
-      <Section id="executive-summary" resource="executiveSummary">
+      <Waypoint id="apd-executive-summary" />
+      <Section id="apd-executive-summary" resource="executiveSummary">
         <Waypoint id="executive-summary-summary" />
         <Subsection
           id="executive-summary-summary"
