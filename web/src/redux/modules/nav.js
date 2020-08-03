@@ -195,8 +195,8 @@ const initialState = {
   selectedId: 'apd-state-profile-nav'
 };
 
-const getContinuePreviousLinks = (links, pathname) => {
-  const flatLinks = flatten([], links).filter(
+const getContinuePreviousLinks = (navLinks, pathname) => {
+  const flatLinks = flatten([], navLinks).filter(
     link => link.url && !link.url.includes('#')
   );
   const currentIndex = flatLinks.findIndex(link => link.url === pathname);
