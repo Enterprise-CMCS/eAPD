@@ -124,7 +124,7 @@ const links = [
   {
     id: 'print-nav',
     label: t('exportAndSubmit.title'),
-    url: '/print'
+    url: '/apd/export'
   }
 ];
 
