@@ -3,10 +3,10 @@
 exports[`previous activities component renders correctly 1`] = `
 <Fragment>
   <Connect(ConnectedWaypoint)
-    id="prev-activities"
+    id="apd-previous-activities"
   />
   <Section
-    id="prev-activities"
+    id="apd-previous-activities"
     resource="previousActivities"
   >
     <Connect(ConnectedWaypoint)

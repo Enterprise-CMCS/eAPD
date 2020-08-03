@@ -3,10 +3,10 @@
 exports[`ProposedBudget component renders correctly 1`] = `
 <Fragment>
   <Connect(ConnectedWaypoint)
-    id="proposed-budget"
+    id="apd-proposed-budget"
   />
   <Section
-    id="proposed-budget"
+    id="apd-proposed-budget"
     resource="proposedBudget"
   >
     <Connect(ConnectedWaypoint)
