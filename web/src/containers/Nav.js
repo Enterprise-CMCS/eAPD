@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import NavLink from '../components/NavLink';
 
 const Nav = ({ links, selectedId }) => (
-  <VerticalNav component={NavLink} items={links} selectedId={selectedId} />
+  <VerticalNav
+    component={NavLink}
+    items={links}
+    selectedId={selectedId} />
 );
 
 Nav.propTypes = {

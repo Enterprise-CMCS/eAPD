@@ -5,7 +5,7 @@ exports[`connected waypoint higher-order component renders correctly with childr
   <Waypoint
     bottomOffset="90%"
     debug={false}
-    fireOnRapidScroll={true}
+    fireOnRapidScroll={false}
     horizontal={false}
     onEnter={[Function]}
     onLeave={[Function]}
@@ -23,7 +23,7 @@ exports[`connected waypoint higher-order component renders correctly without chi
   <Waypoint
     bottomOffset="90%"
     debug={false}
-    fireOnRapidScroll={true}
+    fireOnRapidScroll={false}
     horizontal={false}
     onEnter={[Function]}
     onLeave={[Function]}

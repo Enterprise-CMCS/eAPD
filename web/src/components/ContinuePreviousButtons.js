@@ -64,6 +64,11 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   );
 };
 
+ContinuePreviousButtons.defaultProps = {
+  continueLink: null,
+  previousLink: null
+};
+
 ContinuePreviousButtons.propTypes = {
   continueLink: PropTypes.object,
   previousLink: PropTypes.object
