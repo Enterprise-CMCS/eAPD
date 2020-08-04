@@ -70,7 +70,7 @@ describe('users endpoint | PUT /users/:userID', () => {
 
       // This makes sure the duplicate-email check doesn't flag accounts that
       // are keeping their email address the same.
-      // https://github.com/18F/cms-hitech-apd/issues/1973
+      // https://github.com/CMSgov/eAPD/issues/1973
       it('...with new content but same email address', async () => {
         const { password: oldPasswordHash } = await db('users')
           .where({ id: 2001 })
