@@ -299,8 +299,13 @@ describe('application-level actions', () => {
   });
 
   describe('select an existing API', () => {
-    xit('redirects to provided route and saves the APD ID to local storage', async () => {
+    it('redirects to provided route and saves the APD ID to local storage', async () => {
+      const activities = [
+        { name: 'Objectives and key results' },
+        { name: 'FFP and budget' }
+      ];
       const apd = {
+        activities,
         id: 'apd-id',
         selected: 'apd goes here',
         federalCitations: { already: 'exists' }
@@ -309,10 +314,7 @@ describe('application-level actions', () => {
 
       const state = {
         apd: {
-          byId: { apdID: 'hello there' },
-          data: {
-            activities: []
-          }
+          byId: { apdID: 'hello there' }
         }
       };
       const store = mockStore(state);
@@ -324,8 +326,8 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD, apd },
+        { type: APD_ACTIVITIES_CHANGE, activities },
         { type: UPDATE_BUDGET, state },
-        { type: APD_ACTIVITIES_CHANGE, activities: [] },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
           type: ARIA_ANNOUNCE_CHANGE,
@@ -348,8 +350,13 @@ describe('application-level actions', () => {
       );
     });
 
-    xit('does the same, but queues a save if the federal citations is initially blank', async () => {
+    it('does the same, but queues a save if the federal citations is initially blank', async () => {
+      const activities = [
+        { name: 'Objectives and key results' },
+        { name: 'FFP and budget' }
+      ];
       const apd = {
+        activities,
         id: 'apd-id',
         selected: 'apd goes here',
         federalCitations: {}
@@ -358,10 +365,7 @@ describe('application-level actions', () => {
 
       const state = {
         apd: {
-          byId: { apdID: 'hello there' },
-          data: {
-            activites: []
-          }
+          byId: { apdID: 'hello there' }
         }
       };
       const store = mockStore(state);
@@ -373,7 +377,7 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD, apd },
-        { type: APD_ACTIVITIES_CHANGE, activites: [] },
+        { type: APD_ACTIVITIES_CHANGE, activities },
         { type: EDIT_APD, path: '/federalCitations', value: regulations },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
