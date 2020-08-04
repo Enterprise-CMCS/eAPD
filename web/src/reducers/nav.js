@@ -1,14 +1,10 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
-import { t } from '../../i18n';
 
-import { APD_ACTIVITIES_CHANGE } from '../../actions/editApd/symbols';
-import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../../actions/app/symbols';
+import { APD_ACTIVITIES_CHANGE } from '../actions/editApd/symbols';
+import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/app/symbols';
+import { t } from '../i18n';
 
-
-// todo: write a test to assert the first item does not have a #hash-id
-// this fowls up how the Continue/Previous buttons work
-
-const links = [
+export const links = [
   {
     label: t('apd.stateProfile.title'),
     items: [
@@ -188,16 +184,9 @@ const flatten = (result, node) => {
   return flatten(result, node && node.items ? node.items : null);
 };
 
-const initialState = {
-  links,
-  continueLink: null,
-  previousLink: null,
-  selectedId: 'apd-state-profile-nav'
-};
-
-const getContinuePreviousLinks = (navLinks, pathname) => {
+export const getContinuePreviousLinks = (navLinks, pathname) => {
   const flatLinks = flatten([], navLinks).filter(
-    link => link.url && !link.url.includes('#')
+    link => link && link.url && !link.url.includes('#')
   );
   const currentIndex = flatLinks.findIndex(link => link.url === pathname);
   const continueLink =
@@ -210,6 +199,22 @@ const getContinuePreviousLinks = (navLinks, pathname) => {
   return { continueLink, previousLink };
 }
 
+export const getSelectedId = (location) => {
+  const { hash, pathname } = location;
+  const result = hash ?
+    `${hash.replace('#', '')}-nav` :
+    `${pathname.substring(1).replace(/\//g, '-')}-nav`;
+  return result;
+}
+
+const initialState = {
+  activities: [],
+  links,
+  continueLink: null,
+  previousLink: null,
+  selectedId: 'apd-state-profile-nav'
+};
+
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case APD_ACTIVITIES_CHANGE: {
@@ -219,20 +224,19 @@ const reducer = (state = initialState, action = {}) => {
       });
       return {
         ...state,
+        activities: action.activities,
         links: updatedLinks
       };
     }
 
     case LOCATION_CHANGE: {
-      const { pathname, hash } = action.payload.location;
-      const selectedId = hash
-        ? `${hash.replace('#', '')}-nav`
-        : `${pathname.substring(1).replace(/\//g, '-')}-nav`;
+      const { location } = action.payload;
+      const selectedId = getSelectedId(location);
 
       const {
         continueLink,
         previousLink
-      } = getContinuePreviousLinks(state.links, pathname);
+      } = getContinuePreviousLinks(state.links, location.pathname);
 
       return {
         ...state,

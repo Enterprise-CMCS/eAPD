@@ -11,7 +11,6 @@ describe('root reducer', () => {
       'budget',
       'errors',
       'nav',
-      'navigation',
       'patch',
       'saving',
       'user',

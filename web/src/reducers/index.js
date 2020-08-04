@@ -7,8 +7,7 @@ import apd from './apd';
 import auth from './auth';
 import budget from './budget';
 import errors from './errors';
-import nav from '../redux/modules/nav';
-import navigation from './navigation';
+import nav from './nav';
 import patch from './patch';
 import saving from './saving';
 import user from './user';
@@ -23,7 +22,6 @@ const rootReducer = history =>
     budget,
     errors,
     nav,
-    navigation,
     patch,
     saving,
     user,
