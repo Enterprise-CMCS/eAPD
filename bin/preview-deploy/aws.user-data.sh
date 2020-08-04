@@ -126,7 +126,6 @@ npm i -g pm2
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 
 # Build the web app and move it into place
-#cd cms-hitech-apd/web
 cd eAPD/web
 npm ci
 API_URL=/api/ npm run build
@@ -134,7 +133,6 @@ mv dist/* /app/web
 cd ~
 
 # Move the API code into place, then go set it up
-#mv cms-hitech-apd/api/* /app/api
 mv eAPD/api/* /app/api
 cd /app/api
 
