@@ -1,24 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const AutoScrollToElement = ({ location }) => {
-  const { hash } = location;
+const AutoScrollToElement = ({ hash, pathname }) => {
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-
     const element = hash ? document.querySelector(hash) : null;
     if (element) {
       element.scrollIntoView();
       window.scrollBy(0, -50); // compensate for header
     }
-  }, [location]); // execute when location changes
+  }, [pathname]); // execute when pathname changes
 
   return null;
 };
 
-const mapStateToProps = ({ router }) => ({
-  location: router.location
+const mapStateToProps = ({ router: { location } }) => ({
+  hash: location.hash,
+  pathname: location.pathname
 });
 
 export default connect(mapStateToProps)(AutoScrollToElement);

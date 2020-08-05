@@ -4,10 +4,8 @@ import React from 'react';
 import { plain as AutoScrollToElement } from './AutoScrollToElement';
 
 const props = {
-  location: {
-    pathname: '/path',
-    hash: '#element-id'
-  }
+  hash: '#element-id',
+  pathname: '/path'
 };
 
 describe('<AutoScrollToElement /> component', () => {
