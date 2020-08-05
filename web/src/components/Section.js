@@ -10,7 +10,7 @@ const Section = ({ children, id, resource }) => {
   const helpText = t([resource, 'helpText'], { defaultValue: false });
 
   return (
-    <section id={id}>
+    <section className="section" id={id}>
       {title && <h2 className="ds-h2">{title}</h2>}
       {helpText && <div className="ds-text--lead section--help-text">{helpText}</div>}
       {children}
