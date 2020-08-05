@@ -51,7 +51,11 @@ describe('<ConnectedWaypoint /> component', () => {
         }
       }
     };
-    expect(mapStateToProps(state).location).toEqual(state.router.location);
+    const { location } = mapStateToProps(state)
+    expect(location).toEqual({
+      pathname: '/you/are/here',
+      hash: '#at-this-element'
+    });
   });
 
   it('maps dispatch to props', () => {

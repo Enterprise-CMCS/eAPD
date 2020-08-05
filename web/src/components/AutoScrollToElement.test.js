@@ -4,8 +4,10 @@ import React from 'react';
 import { plain as AutoScrollToElement } from './AutoScrollToElement';
 
 const props = {
-  hash: '#element-id',
-  pathname: '/path'
+  location: {
+    hash: '#element-id'
+  },
+  action: 'PUSH'
 };
 
 describe('<AutoScrollToElement /> component', () => {

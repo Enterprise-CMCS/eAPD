@@ -2,7 +2,7 @@ import { LOCATION_CHANGE } from 'connected-react-router';
 import { APD_ACTIVITIES_CHANGE } from '../actions/editApd/symbols';
 import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/app/symbols';
 
-import reducer, { links, getSelectedId } from './nav';
+import reducer, { flatten, links, getSelectedId } from './nav';
 
 describe('links', () => {
   it('defines the resources within the app', () => {
@@ -33,14 +33,20 @@ describe('links', () => {
 });
 
 describe('getSelectedId()', () => {
-  it('uses location.hash to determine the selected nav id', () => {
-    const result = getSelectedId({ hash: '#element-id', pathname: 'whatever' });
-    expect(result).toEqual('element-id-nav');
+  const flatLinks = flatten([], links);
+  it('uses location.{pathname,hash} to determine the selected nav id', () => {
+    const location = {
+      hash: '#prev-activities-table',
+      pathname: '/apd/previous-activities'
+    };
+    const result = getSelectedId(location, flatLinks);
+    expect(result).toEqual('prev-activities-table-nav');
   });
 
   it('uses location.pathname if hash is not present', () => {
-    const result = getSelectedId({ pathname: '/you/are/here' });
-    expect(result).toEqual('you-are-here-nav');
+    const location = { pathname: '/apd/previous-activities' };
+    const result = getSelectedId(location, flatLinks);
+    expect(result).toEqual('apd-previous-activities-nav');
   });
 });
 
@@ -78,32 +84,32 @@ describe('nav reducer', () => {
   });
 
   describe(`action.type: ${LOCATION_CHANGE}`, () => {
-    it('updates nav.selectedId using the URL fragment/hash/#', () => {
+    it('updates nav.selectedId using the URL pathname and hash', () => {
       const payload = {
         payload: {
           location: {
-            pathname: '/path/to/resource',
-            hash: '#element-id'
+            pathname: '/apd/proposed-budget',
+            hash: '#budget-summary-table'
           }
         }
       };
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
       expect(nextState.selectedId)
-        .toEqual('element-id-nav');  // id of link, used by <Nav /> component
+        .toEqual('budget-summary-table-nav');  // id of link, used by <Nav /> component
     });
 
     it('updates nav.selectedId using the URL path', () => {
       const payload = {
         payload: {
           location: {
-            pathname: '/path/to/resource',
+            pathname: '/apd/proposed-budget',
             hash: null
           }
         }
       };
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
       expect(nextState.selectedId)
-        .toEqual('path-to-resource-nav');  // id of link, used by <Nav /> component
+        .toEqual('apd-proposed-budget-nav');  // id of link, used by <Nav /> component
     });
 
     it('updates nav.{continueLink,previousLink}', () => {

@@ -2,11 +2,9 @@
 
 exports[`executive summary component renders correctly 1`] = `
 <Fragment>
-  <Connect(ConnectedWaypoint)
-    id="apd-executive-summary"
-  />
+  <Connect(ConnectedWaypoint) />
   <Section
-    id="apd-executive-summary"
+    id={null}
     resource="executiveSummary"
   >
     <Connect(ConnectedWaypoint)

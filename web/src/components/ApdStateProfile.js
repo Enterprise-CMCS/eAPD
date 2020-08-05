@@ -7,8 +7,8 @@ import Waypoint from '../containers/ConnectedWaypoint';
 
 const ApdStateProfile = () => (
   <React.Fragment>
-    <Waypoint id="apd-state-profile" />
-    <Section id="apd-state-profile" resource="apd.stateProfile">
+    <Waypoint />
+    <Section resource="apd.stateProfile">
       <Waypoint id="apd-state-profile-office" />
       <Subsection
         id="apd-state-profile-office"

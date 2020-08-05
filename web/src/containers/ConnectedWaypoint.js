@@ -16,13 +16,14 @@ const ConnectedWaypoint = ({ children, id, location, replace }) => (
 
 ConnectedWaypoint.propTypes = {
   children: PropTypes.node,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   location: PropTypes.object.isRequired,
   replace: PropTypes.func.isRequired
 };
 
 ConnectedWaypoint.defaultProps = {
-  children: null
+  children: null,
+  id: null
 };
 
 const mapStateToProps = ({ router }) => ({

@@ -2,11 +2,10 @@
 
 exports[`previous activities component renders correctly 1`] = `
 <Fragment>
-  <Connect(ConnectedWaypoint)
-    id="apd-previous-activities"
-  />
+  <Connect(ConnectedWaypoint) />
+   
   <Section
-    id="apd-previous-activities"
+    id={null}
     resource="previousActivities"
   >
     <Connect(ConnectedWaypoint)

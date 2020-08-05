@@ -177,34 +177,33 @@ const buildActivityItems = activities => {
   return activityItems;
 };
 
-const flatten = (result, node) => {
+export const flatten = (result, node) => {
   if (node === null) return result;
   if (Array.isArray(node)) return node.reduce(flatten, result);
   result.push(node);
   return flatten(result, node && node.items ? node.items : null);
 };
 
-export const getContinuePreviousLinks = (navLinks, pathname) => {
-  const flatLinks = flatten([], navLinks).filter(
+export const getContinuePreviousLinks = (pathname, flatLinks) => {
+  const pageLinks = flatLinks.filter(
     link => link && link.url && !link.url.includes('#')
   );
-  const currentIndex = flatLinks.findIndex(link => link.url === pathname);
+  const currentIndex = pageLinks.findIndex(link => link.url === pathname);
   const continueLink =
-    currentIndex + 1 < flatLinks.length
-      ? flatLinks[currentIndex + 1]
+    currentIndex + 1 < pageLinks.length
+      ? pageLinks[currentIndex + 1]
       : null;
   const previousLink =
-    currentIndex - 1 >= 0 ? flatLinks[currentIndex - 1] : null;
+    currentIndex - 1 >= 0 ? pageLinks[currentIndex - 1] : null;
 
   return { continueLink, previousLink };
 }
 
-export const getSelectedId = (location) => {
-  const { hash, pathname } = location;
-  const result = hash ?
-    `${hash.replace('#', '')}-nav` :
-    `${pathname.substring(1).replace(/\//g, '-')}-nav`;
-  return result;
+export const getSelectedId = (location, flatLinks) => {
+  const { pathname, hash } = location;
+  const fullPath = [pathname, hash].join('');
+  const selectedLink = flatLinks.find(link => link.url === fullPath);
+  return selectedLink ? selectedLink.id : null;
 }
 
 const initialState = {
@@ -231,12 +230,12 @@ const reducer = (state = initialState, action = {}) => {
 
     case LOCATION_CHANGE: {
       const { location } = action.payload;
-      const selectedId = getSelectedId(location);
-
+      const flatLinks = flatten([], state.links);
+      const selectedId = getSelectedId(location, flatLinks);
       const {
         continueLink,
         previousLink
-      } = getContinuePreviousLinks(state.links, location.pathname);
+      } = getContinuePreviousLinks(location.pathname, flatLinks);
 
       return {
         ...state,
