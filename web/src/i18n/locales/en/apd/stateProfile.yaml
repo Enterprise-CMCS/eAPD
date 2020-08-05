@@ -24,9 +24,7 @@ keyPersonnel:
     short: >-
       Identify key state staff who will be involved in all activities listed in
       this APD.
-    detail: >-
-      Personnel listed in this section must be assigned to APD by name, role,
-      time commitment, and cost, where applicable.
+    detail: ''
     list:
       - Key personnel are individuals involved with all activities within this
         APD, or are directly involved with governance, coordination, stakeholder
@@ -44,6 +42,11 @@ keyPersonnel:
       each associated activity or activities.
   contact: 'Contact #{{number}}'
   labels:
+    titlePrimary: Primary APD Point of Contact
+    titleSecondary: Additional APD Point of Contact
+    note: >-
+      Personnel listed in this section must be assigned to APD by name, role,
+      time commitment, and cost, where applicable.
     name: Name
     position: Role
     email: Email

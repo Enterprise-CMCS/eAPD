@@ -22,8 +22,10 @@ const Instruction = ({ args, reverse, source, headingDisplay }) => {
             {short && <p className="ds-u-font-weight--bold">{short}</p>}
             {!reverse && detail && <Md content={detail} wrapper="p" />}
             {list && (
-              // eslint-disable-next-line react/no-array-index-key
-              <ol>{list.map((item, i) => <li key={i}>{item}</li>)}</ol>
+              <ol className="ds-u-margin-bottom--4 ds-u-padding-left--2">
+                {/* eslint-disable-next-line react/no-array-index-key */}
+                {list.map((item, i) => <li className="ds-u-margin-bottom--2" key={i}>{item}</li>)}
+              </ol>
             )}
             {helpText && (
               <Md content={helpText} wrapper="p" className="instruction-box" />

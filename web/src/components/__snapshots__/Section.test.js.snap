@@ -2,7 +2,6 @@
 
 exports[`Section component renders correctly with no resource 1`] = `
 <section
-  className="section"
   id={null}
 >
   test child
@@ -12,7 +11,6 @@ exports[`Section component renders correctly with no resource 1`] = `
 
 exports[`Section component renders correctly with resource containing title and helptext 1`] = `
 <section
-  className="section"
   id={null}
 >
   <h2
@@ -32,7 +30,6 @@ exports[`Section component renders correctly with resource containing title and 
 
 exports[`Section component renders correctly with resource containing title but no helptext 1`] = `
 <section
-  className="section"
   id={null}
 >
   <h2
