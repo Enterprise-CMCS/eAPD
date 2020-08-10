@@ -4,21 +4,20 @@ import { VerticalNav } from '@cmsgov/design-system-core';
 import { connect } from 'react-redux';
 import NavLink from '../components/NavLink';
 
-const Nav = ({ links, selectedId }) => (
+const Nav = ({ items, key }) => (
   <VerticalNav
     component={NavLink}
-    items={links}
-    selectedId={selectedId} />
+    items={items}
+    key={key} />
 );
 
 Nav.propTypes = {
   links: PropTypes.array.isRequired,
-  selectedId: PropTypes.string.isRequired
 };
 
 const mapStateToProps = ({ nav }) => ({
-  links: nav.links,
-  selectedId: nav.selectedId
+  items: nav.items,
+  key: nav.key
 });
 
 export default connect(mapStateToProps)(Nav);
