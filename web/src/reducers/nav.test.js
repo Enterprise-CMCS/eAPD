@@ -1,8 +1,8 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { APD_ACTIVITIES_CHANGE } from '../actions/editApd/symbols';
 
-import staticItems from './nav.items';
-import reducer from './nav';
+import staticItems, { getItems } from './nav.items';
+import reducer, { getContinuePreviousLinks } from './nav';
 
 describe('staticItems', () => {
   it('defines the apd resources within the app', () => {
@@ -20,7 +20,7 @@ describe('staticItems', () => {
     ]);
   });
 
-  it('defines a path without a fragment for eacht items[0].url', () => {
+  it('defines a path without a fragment for each items[0].url', () => {
     // getContinuePreviousLinks() uses this feature of the data to ignore links
     // with #fragments in their URL. A URL #fragment indicates a particular
     // section of a resource.
@@ -29,6 +29,50 @@ describe('staticItems', () => {
       const hash = item.items[0].url.split('#')[2];
       expect(hash).toBeFalsy();
     });
+  });
+});
+
+describe('getContinuePreviousLinks()', () => {
+  test('first apd page', () => {
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks('/apd/state-profile', staticItems);
+    expect(continueLink.url).toEqual('/apd/program-summary');
+    expect(previousLink).toBeFalsy();
+  });
+
+  test('activities list page', () => {
+    const url = '/apd/activities';
+    const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
+    const items = getItems({ activities, url });
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks(url, items);
+    expect(continueLink.url).toEqual('/apd/schedule-summary');
+    expect(previousLink.url).toEqual('/apd/previous-activities');
+  });
+
+  test('activity page', () => {
+    const url = '/apd/activity/0/ffp';
+    const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
+    const items = getItems({ activities, url });
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks(url, items);
+    expect(continueLink.url).toEqual('/apd/activity/1/overview');
+    expect(previousLink.url).toEqual('/apd/activity/0/cost-allocation');
+  });
+
+  test('last apd page', () => {
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks('/apd/export', staticItems);
+    expect(continueLink).toBeFalsy();
+    expect(previousLink.url).toEqual('/apd/executive-summary');
   });
 });
 

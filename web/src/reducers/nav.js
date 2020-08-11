@@ -11,14 +11,14 @@ const flatten = (result, node) => {
 
 export const getContinuePreviousLinks = (pathname, links) => {
   const flatLinks = flatten([], links);
-  const pageLinks = flatLinks.filter(
-    link => link && link.url && !link.url.includes('#')
-  );
+  const pageLinks = flatLinks.filter(link => link && link.url && !link.url.includes('#'));
   const currentIndex = pageLinks.findIndex(link => link.url === pathname);
-  const continueLink =
-    currentIndex + 1 < pageLinks.length ? pageLinks[currentIndex + 1] : null;
-  const previousLink =
-    currentIndex - 1 >= 0 ? pageLinks[currentIndex - 1] : null;
+  let continueLink = currentIndex + 1 < pageLinks.length ? pageLinks[currentIndex + 1] : null;
+  // don't navigate into individual activities
+  if (pathname === '/apd/activities') {
+    continueLink = pageLinks.find(link => link.url === '/apd/schedule-summary')
+  }
+  const previousLink = currentIndex - 1 >= 0 ? pageLinks[currentIndex - 1] : null;
   return { continueLink, previousLink };
 };
 
