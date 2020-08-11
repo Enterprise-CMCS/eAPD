@@ -25,7 +25,8 @@ exports[`<Nav /> component renders correctly 1`] = `
     }
   >
     <Nav
-      links={
+      generateKey={[Function]}
+      items={
         Array [
           Object {
             "id": "home-nav",
@@ -35,6 +36,7 @@ exports[`<Nav /> component renders correctly 1`] = `
           Object {
             "id": "apd-nav",
             "label": "View APD",
+            "selected": true,
             "url": "/apd",
           },
           Object {
@@ -60,7 +62,11 @@ exports[`<Nav /> component renders correctly 1`] = `
           },
         ]
       }
-      selectedId="profile-nav"
+      location={
+        Object {
+          "pathname": "/apd",
+        }
+      }
     >
       <VerticalNav
         collapsed={false}
@@ -75,6 +81,7 @@ exports[`<Nav /> component renders correctly 1`] = `
             Object {
               "id": "apd-nav",
               "label": "View APD",
+              "selected": true,
               "url": "/apd",
             },
             Object {
@@ -100,13 +107,12 @@ exports[`<Nav /> component renders correctly 1`] = `
             },
           ]
         }
-        selectedId="profile-nav"
+        key="asdf1234"
       >
         <ul
           className="ds-c-vertical-nav"
         >
           <VerticalNavItem
-            _selectedId="profile-nav"
             ariaCollapsedStateButtonLabel="Expand sub-navigation"
             ariaExpandedStateButtonLabel="Collapse sub-navigation"
             component={[Function]}
@@ -114,7 +120,6 @@ exports[`<Nav /> component renders correctly 1`] = `
             id="home-nav"
             key="home-nav/Home"
             label="Home"
-            selected={false}
             url="/"
           >
             <li
@@ -162,7 +167,6 @@ exports[`<Nav /> component renders correctly 1`] = `
             </li>
           </VerticalNavItem>
           <VerticalNavItem
-            _selectedId="profile-nav"
             ariaCollapsedStateButtonLabel="Expand sub-navigation"
             ariaExpandedStateButtonLabel="Collapse sub-navigation"
             component={[Function]}
@@ -170,7 +174,7 @@ exports[`<Nav /> component renders correctly 1`] = `
             id="apd-nav"
             key="apd-nav/apdView APD"
             label="View APD"
-            selected={false}
+            selected={true}
             url="/apd"
           >
             <li
@@ -184,28 +188,28 @@ exports[`<Nav /> component renders correctly 1`] = `
                 hasSubnav={false}
                 label="View APD"
                 onClick={[Function]}
-                selected={false}
+                selected={true}
                 subnavId="apd-nav__subnav"
                 url="/apd"
               >
                 <NavLink
-                  className="ds-c-vertical-nav__label"
+                  className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                   href="/apd"
                   onClick={[Function]}
                 >
                   <Link
-                    className="ds-c-vertical-nav__label"
+                    className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                     onClick={[Function]}
                     to="/apd"
                   >
                     <LinkAnchor
-                      className="ds-c-vertical-nav__label"
+                      className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                       href="/apd"
                       navigate={[Function]}
                       onClick={[Function]}
                     >
                       <a
-                        className="ds-c-vertical-nav__label"
+                        className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                         href="/apd"
                         onClick={[Function]}
                       >
@@ -218,7 +222,6 @@ exports[`<Nav /> component renders correctly 1`] = `
             </li>
           </VerticalNavItem>
           <VerticalNavItem
-            _selectedId="profile-nav"
             ariaCollapsedStateButtonLabel="Expand sub-navigation"
             ariaExpandedStateButtonLabel="Collapse sub-navigation"
             component={[Function]}
@@ -226,7 +229,6 @@ exports[`<Nav /> component renders correctly 1`] = `
             id="search-nav"
             key="search-nav/searchSearch"
             label="Search"
-            selected={false}
             url="/search"
           >
             <li
@@ -274,7 +276,6 @@ exports[`<Nav /> component renders correctly 1`] = `
             </li>
           </VerticalNavItem>
           <VerticalNavItem
-            _selectedId="profile-nav"
             ariaCollapsedStateButtonLabel="Expand sub-navigation"
             ariaExpandedStateButtonLabel="Collapse sub-navigation"
             component={[Function]}
@@ -296,7 +297,6 @@ exports[`<Nav /> component renders correctly 1`] = `
             }
             key="settings-navundefinedSettings"
             label="Settings"
-            selected={false}
           >
             <li
               className="ds-c-vertical-nav__item"
@@ -309,13 +309,13 @@ exports[`<Nav /> component renders correctly 1`] = `
                 hasSubnav={true}
                 label="Settings"
                 onClick={[Function]}
-                selected={true}
+                selected={false}
                 subnavId="settings-nav__subnav"
               >
                 <button
                   aria-controls="settings-nav__subnav"
                   aria-expanded={true}
-                  className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current ds-c-vertical-nav__label--parent"
+                  className="ds-c-vertical-nav__label ds-c-vertical-nav__label--parent"
                   onClick={[Function]}
                   title="Collapse sub-navigation"
                 >
@@ -341,14 +341,12 @@ exports[`<Nav /> component renders correctly 1`] = `
                   ]
                 }
                 nested={true}
-                selectedId="profile-nav"
               >
                 <ul
                   className="ds-c-vertical-nav__subnav"
                   id="settings-nav__subnav"
                 >
                   <VerticalNavItem
-                    _selectedId="profile-nav"
                     ariaCollapsedStateButtonLabel="Expand sub-navigation"
                     ariaExpandedStateButtonLabel="Collapse sub-navigation"
                     component={[Function]}
@@ -356,7 +354,6 @@ exports[`<Nav /> component renders correctly 1`] = `
                     id="profile-nav"
                     key="profile-nav/meProfile"
                     label="Profile"
-                    selected={true}
                     url="/me"
                   >
                     <li
@@ -370,28 +367,28 @@ exports[`<Nav /> component renders correctly 1`] = `
                         hasSubnav={false}
                         label="Profile"
                         onClick={[Function]}
-                        selected={true}
+                        selected={false}
                         subnavId="profile-nav__subnav"
                         url="/me"
                       >
                         <NavLink
-                          className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
+                          className="ds-c-vertical-nav__label"
                           href="/me"
                           onClick={[Function]}
                         >
                           <Link
-                            className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
+                            className="ds-c-vertical-nav__label"
                             onClick={[Function]}
                             to="/me"
                           >
                             <LinkAnchor
-                              className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
+                              className="ds-c-vertical-nav__label"
                               href="/me"
                               navigate={[Function]}
                               onClick={[Function]}
                             >
                               <a
-                                className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
+                                className="ds-c-vertical-nav__label"
                                 href="/me"
                                 onClick={[Function]}
                               >
@@ -404,7 +401,6 @@ exports[`<Nav /> component renders correctly 1`] = `
                     </li>
                   </VerticalNavItem>
                   <VerticalNavItem
-                    _selectedId="profile-nav"
                     ariaCollapsedStateButtonLabel="Expand sub-navigation"
                     ariaExpandedStateButtonLabel="Collapse sub-navigation"
                     component={[Function]}
@@ -412,7 +408,6 @@ exports[`<Nav /> component renders correctly 1`] = `
                     id="logout-nav"
                     key="logout-nav/logoutLog out"
                     label="Log out"
-                    selected={false}
                     url="/logout"
                   >
                     <li

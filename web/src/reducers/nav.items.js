@@ -131,17 +131,11 @@ const buildActivitySection = i => [
   }
 ];
 
-const setDefaultCollapsedTrue = item => {
-  if (item.items && item.items.length) {
-    item.defaultCollapsed = true
-    item.items.forEach(item => setDefaultCollapsedTrue(item))
-  }
-}
-
-const setSelectedFalse = item => {
+const setDefaults = item => {
   item.selected = false
   if (item.items && item.items.length) {
-    item.items.forEach(item => setSelectedFalse(item))
+    item.defaultCollapsed = true
+    item.items.forEach(item => setDefaults(item))
   }
 }
 
@@ -149,7 +143,6 @@ const setSelected = (items, value, parents = []) => {
   items.forEach(item => {
     if (item.url === value) {
       item.selected = true;
-
       if (parents.length) {
         parents.forEach(parent => {
           parent.defaultCollapsed = false
@@ -157,7 +150,6 @@ const setSelected = (items, value, parents = []) => {
         })
       }
     }
-
     if (item.items && item.items.length) {
       setSelected(item.items, value, [...parents, item])
     }
@@ -169,7 +161,6 @@ const getItems = ({
   items = staticItems,
   url = ''
 } = {}) => {
-
   if (activities.length) {
     const item = items.find(item => item.label === 'Program Activities')
     item.items = [
@@ -183,11 +174,8 @@ const getItems = ({
       }))
     ]
   }
-
-  items.forEach(item => setDefaultCollapsedTrue(item)) // collapse all, by default
-  items.forEach(item => setSelectedFalse(item)) // unselect all
+  items.forEach(item => setDefaults(item)) // collapse all & unselect all, by default
   setSelected(items, url)
-
   return items
 }
 

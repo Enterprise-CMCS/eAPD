@@ -1,9 +1,5 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
-
 import { APD_ACTIVITIES_CHANGE } from '../actions/editApd/symbols';
-import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/app/symbols';
-
-import { generateKey } from '../util'
 import staticItems, { getItems } from './nav.items'
 
 const flatten = (result, node) => {
@@ -25,7 +21,6 @@ export const getContinuePreviousLinks = (pathname, links) => {
       : null;
   const previousLink =
     currentIndex - 1 >= 0 ? pageLinks[currentIndex - 1] : null;
-
   return { continueLink, previousLink };
 }
 
@@ -33,7 +28,6 @@ const initialState = {
   activities: [],
   continueLink: null,
   items: staticItems,
-  key: null,
   previousLink: null,
 };
 
@@ -65,16 +59,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         continueLink,
         items,
-        key: generateKey(),
         previousLink
-      };
-    }
-
-    case NAVIGATION_SCROLL_TO_WAYPOINT: {
-      const { waypointId } = action;
-      return {
-        ...state,
-        selectedId: `${waypointId}-nav`
       };
     }
 
