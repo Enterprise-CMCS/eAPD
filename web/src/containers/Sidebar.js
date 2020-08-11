@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import stickybits from 'stickybits';
-import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
+import { VerticalNav } from '@cmsgov/design-system';
 
 import { jumpTo } from '../actions/app';
 import { selectActivitiesSidebar } from '../reducers/activities.selectors';
@@ -36,7 +36,7 @@ const Sidebar = ({ activeSection, activities, jumpTo: jumpAction, place }) => {
   const imgExt = ['png', 'svg'][
     ['as', 'gu', 'mp', 'vi'].indexOf(place.id) < 0 ? 1 : 0
   ];
-  
+
   return (
     <LinksContextConsumer>
       {context => (

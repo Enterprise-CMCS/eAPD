@@ -1,4 +1,4 @@
-import { Button, Review as ReviewSummary } from '@cmsgov/design-system-core';
+import { Button, Review as ReviewSummary } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useRef } from 'react';
 

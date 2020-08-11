@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@cmsgov/design-system-core';
+import { Button } from '@cmsgov/design-system';
 
 import { selectApd } from '../../actions/app';
 import { selectApdData } from '../../reducers/apd.selectors';

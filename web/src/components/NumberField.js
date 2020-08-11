@@ -1,4 +1,4 @@
-import { TextField, unmaskValue } from '@cmsgov/design-system-core';
+import { TextField, unmaskValue } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 

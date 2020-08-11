@@ -1,4 +1,4 @@
-import { ChoiceList, TextField } from '@cmsgov/design-system-core';
+import { ChoiceList, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';

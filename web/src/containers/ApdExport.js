@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button } from '@cmsgov/design-system-core';
+import { Button } from '@cmsgov/design-system';
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';

@@ -1,4 +1,4 @@
-import { Choice } from '@cmsgov/design-system-core';
+import { Choice } from '@cmsgov/design-system';
 import React, { useEffect, useRef } from 'react';
 
 const ChoiceComponent = props => {
