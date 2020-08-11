@@ -110,7 +110,7 @@ const buildActivitySection = i => [
     url: `/apd/activity/${i}/overview`
   },
   {
-    label: 'Objectives and key results',
+    label: 'Objectives and milestones',
     url: `/apd/activity/${i}/okrs`
   },
   {
