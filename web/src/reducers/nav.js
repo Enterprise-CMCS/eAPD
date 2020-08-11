@@ -1,6 +1,6 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { APD_ACTIVITIES_CHANGE } from '../actions/editApd/symbols';
-import staticItems, { getItems } from './nav.items'
+import staticItems, { getItems } from './nav.items';
 
 const flatten = (result, node) => {
   if (node === null) return result;
@@ -16,19 +16,17 @@ export const getContinuePreviousLinks = (pathname, links) => {
   );
   const currentIndex = pageLinks.findIndex(link => link.url === pathname);
   const continueLink =
-    currentIndex + 1 < pageLinks.length
-      ? pageLinks[currentIndex + 1]
-      : null;
+    currentIndex + 1 < pageLinks.length ? pageLinks[currentIndex + 1] : null;
   const previousLink =
     currentIndex - 1 >= 0 ? pageLinks[currentIndex - 1] : null;
   return { continueLink, previousLink };
-}
+};
 
 const initialState = {
   activities: [],
   continueLink: null,
   items: staticItems,
-  previousLink: null,
+  previousLink: null
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -36,7 +34,7 @@ const reducer = (state = initialState, action = {}) => {
     case APD_ACTIVITIES_CHANGE: {
       return {
         ...state,
-        activities: action.activities,
+        activities: action.activities
       };
     }
 
@@ -48,12 +46,12 @@ const reducer = (state = initialState, action = {}) => {
         activities: state.activities,
         items: state.items,
         url
-      })
+      });
 
-      const {
-        continueLink,
-        previousLink
-      } = getContinuePreviousLinks(pathname, items);
+      const { continueLink, previousLink } = getContinuePreviousLinks(
+        pathname,
+        items
+      );
 
       return {
         ...state,

@@ -131,13 +131,15 @@ const buildActivitySection = i => [
   }
 ];
 
+const copy = data => JSON.parse(JSON.stringify(data));
+
 const setDefaults = item => {
-  item.selected = false
+  item.selected = false;
   if (item.items && item.items.length) {
-    item.defaultCollapsed = true
-    item.items.forEach(i => setDefaults(i))
+    item.defaultCollapsed = true;
+    item.items.forEach(i => setDefaults(i));
   }
-}
+};
 
 const setSelected = (items, value, parents = []) => {
   items.forEach(item => {
@@ -145,24 +147,21 @@ const setSelected = (items, value, parents = []) => {
       item.selected = true;
       if (parents.length) {
         parents.forEach(parent => {
-          parent.defaultCollapsed = false
-          parent.selected = true
-        })
+          parent.defaultCollapsed = false;
+          parent.selected = true;
+        });
       }
     }
     if (item.items && item.items.length) {
-      setSelected(item.items, value, [...parents, item])
+      setSelected(item.items, value, [...parents, item]);
     }
-  })
-}
+  });
+};
 
-const getItems = ({
-  activities = [],
-  items = staticItems,
-  url = ''
-} = {}) => {
+const getItems = ({ activities = [], items = staticItems, url = '' } = {}) => {
+  items = copy(items);  // copy items state so we don't modify original state
   if (activities.length) {
-    const item = items.find(i => i.label === 'Program Activities')
+    const item = items.find(i => i.label === 'Program Activities');
     item.items = [
       item.items[0],
       ...activities.map((activity, i) => ({
@@ -172,13 +171,13 @@ const getItems = ({
         }),
         items: buildActivitySection(i)
       }))
-    ]
+    ];
   }
-  items.forEach(item => setDefaults(item)) // collapse all & unselect all, by default
-  setSelected(items, url)
-  return items
-}
+  items.forEach(item => setDefaults(item)); // collapse all & unselect all, by default
+  setSelected(items, url);
+  return items;
+};
 
 export default staticItems;
 
-export { getItems }
+export { getItems };
