@@ -23,8 +23,9 @@ Nav.defaultProps = {
 }
 
 Nav.propTypes = {
+  generateKey: PropTypes.func,
   items: PropTypes.array.isRequired,
-  generateKey: PropTypes.func.isRequired
+  location: PropTypes.object.isRequired
 };
 
 const mapStateToProps = ({ nav, router }) => ({

@@ -1,9 +1,8 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { APD_ACTIVITIES_CHANGE } from '../actions/editApd/symbols';
-import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/app/symbols';
 
 import staticItems from './nav.items';
-import reducer, { flatten } from './nav';
+import reducer from './nav';
 
 describe('staticItems', () => {
   it('defines the apd resources within the app', () => {

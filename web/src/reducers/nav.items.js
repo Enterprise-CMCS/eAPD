@@ -135,7 +135,7 @@ const setDefaults = item => {
   item.selected = false
   if (item.items && item.items.length) {
     item.defaultCollapsed = true
-    item.items.forEach(item => setDefaults(item))
+    item.items.forEach(i => setDefaults(i))
   }
 }
 
@@ -162,7 +162,7 @@ const getItems = ({
   url = ''
 } = {}) => {
   if (activities.length) {
-    const item = items.find(item => item.label === 'Program Activities')
+    const item = items.find(i => i.label === 'Program Activities')
     item.items = [
       item.items[0],
       ...activities.map((activity, i) => ({
