@@ -4,6 +4,8 @@ Anticipated release: August 10, 2020
 
 #### 🚀 New features
 
+- Change "Objectives and key results" Nav Bar title to match contents of page ([#2368])
+
 #### 🐛 Bugs fixed
 
 - Arrows in the side nav should be consistent ([#2188])
@@ -26,3 +28,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2410]: https://github.com/CMSgov/eAPD/issues/2410
 [#2359]: https://github.com/CMSgov/eAPD/issues/2359
 [#2415]: https://github.com/CMSgov/eAPD/issues/2415
+[#2368]: https://github.com/CMSgov/eAPD/issues/2368
