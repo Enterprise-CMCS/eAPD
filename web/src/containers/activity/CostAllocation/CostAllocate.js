@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import {
   setCostAllocationMethodology,
   setCostAllocationOtherFunding
-} from '../../actions/editActivity';
-import Instruction from '../../components/Instruction';
-import RichText from '../../components/RichText';
-import { Subsection } from '../../components/Section';
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
+} from 'actions/editActivity';
+import Instruction from 'components/Instruction';
+import RichText from 'components/RichText';
+import { selectActivityByIndex } from 'reducers/activities.selectors';
+import { Subsection } from 'components/Section';
 
 const CostAllocate = ({
   activity,
@@ -39,21 +39,6 @@ const CostAllocate = ({
         <RichText
           content={methodology}
           onSync={syncMethodology}
-          editorClassName="rte-textarea-l"
-        />
-      </div>
-
-      <div className="data-entry-box">
-        <Instruction
-          source="activities.costAllocate.otherFunding.instruction"
-          headingDisplay={{
-            level: 'h6',
-            className: 'ds-h5'
-          }}
-        />
-        <RichText
-          content={otherSources}
-          onSync={syncOtherFunding}
           editorClassName="rte-textarea-l"
         />
       </div>

@@ -17,18 +17,17 @@ instruction:
     sources including division of resources and activities across relevant
     payers, and relative benefit to the state Medicaid program.
 
-    Ensure cost allocations are current. Cost allocations should be current and
-    ensure financial participation of all parties so Medicaid funds are neither
-    the sole contributor at the onset, nor the primary source of funding. Other
-    payers who may benefit must contribute their share from the outset. The
-    absence of ancillary payers is not sufficient cause for Medicaid to be the
-    primary payer.
+    Cost allocations should be current and ensure financial participation of all
+    parties so Medicaid funds are neither the sole contributor at the onset, nor
+    the primary source of funding. Other payers who may benefit must contribute
+    their share from the outset. The absence of ancillary payers is not
+    sufficient cause for Medicaid to be the primary payer.
     [/ol]
   helpText: >-
     Include any participating non-Medicaid FTEs.
 methodology:
   instruction:
-    heading: Description of cost allocation methodology
+    heading: Description of Cost Allocation Methodology
     detail: >-
       Do not assume absence of other payers is sufficient cause for
       Medicaid to be primary payer. Limit ambiguity about other
@@ -82,11 +81,3 @@ quarterly:
     state: In-House Costs
     contractor: Private Contractor Costs
     combined: Total Enhanced FFP
-otherFunding:
-  instruction:
-    heading: Other funding description
-    detail: >-
-      Write a high level description of funding used to support this activity.
-      (Review Letter 10‐016 for examples of grants for inclusion.)
-    helpText: >-
-      Ensure new grants are included, and remove expired grants.

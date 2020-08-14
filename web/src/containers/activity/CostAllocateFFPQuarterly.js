@@ -11,7 +11,7 @@ import Dollars from '../../components/Dollars';
 import PercentField from '../../components/PercentField';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
-import { formatPerc } from '../../util/formats';
+import { formatPerc } from 'util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 const EXPENSE_NAME_DISPLAY = {
