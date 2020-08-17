@@ -2,6 +2,7 @@
   "low": true,
   "package-manager": "auto",
   "allowlist": [
+    "1548|webpack>terser-webpack-plugin>serialize-javascript"
   ],
   "registry": "https://registry.npmjs.org"
 }
