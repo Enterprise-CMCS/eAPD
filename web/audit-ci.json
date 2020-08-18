@@ -2,8 +2,9 @@
   "low": true,
   "package-manager": "auto",
   "allowlist": [
-    "1547|webpack>node-libs-browser>crypto-browserify>browserify-sign>elliptic",
-    "1547|webpack>node-libs-browser>crypto-browserify>create-ecdh>elliptic"
+    "1548|webpack>terser-webpack-plugin>serialize-javascript",
+    "1550|postcss-custom-properties>postcss-values-parser>is-url-superb>url-regex",
+    "1550|postcss-custom-properties>postcss-values-parser>url-regex"
   ],
   "registry": "https://registry.npmjs.org"
 }
