@@ -13,8 +13,8 @@ exports[`the (Activity) EntryDetails component does not render the delete button
       >
         <Button
           aria-label="Edit: Activity 1: activity 1 name (money pit)"
-          component="button"
-          onClick={[Function]}
+          component={[Function]}
+          href="/apd/activity/0/overview"
           size="small"
           type="button"
           variation="transparent"
@@ -25,52 +25,6 @@ exports[`the (Activity) EntryDetails component does not render the delete button
     }
     editText="Edit"
     heading="Activity 1: activity 1 name (money pit)"
-    headingLevel="4"
-  />
-</div>
-`;
-
-exports[`the (Activity) EntryDetails component navigates to activities 1`] = `
-<div
-  className="activity--body activity--body__notfirst"
-  id="activity-activity key"
->
-  <Review
-    className="entry-details--review"
-    editContent={
-      <div
-        className="nowrap visibility--screen"
-      >
-        <Button
-          aria-label="Edit: Activity 3: activity name (money pit)"
-          component="button"
-          onClick={[Function]}
-          size="small"
-          type="button"
-          variation="transparent"
-        >
-          Edit
-        </Button>
-        <React.Fragment>
-          <span>
-            |
-          </span>
-          <Button
-            aria-label="Delete: Activity 3: activity name (money pit)"
-            className="ds-u-color--error"
-            component="button"
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            Delete
-          </Button>
-        </React.Fragment>
-      </div>
-    }
-    editText="Edit"
-    heading="Activity 3: activity name (money pit)"
     headingLevel="4"
   />
 </div>
@@ -89,8 +43,8 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
       >
         <Button
           aria-label="Edit: Activity 3: activity name"
-          component="button"
-          onClick={[Function]}
+          component={[Function]}
+          href="/apd/activity/2/overview"
           size="small"
           type="button"
           variation="transparent"
@@ -135,8 +89,8 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
       >
         <Button
           aria-label="Edit: Activity 3: Untitled (money pit)"
-          component="button"
-          onClick={[Function]}
+          component={[Function]}
+          href="/apd/activity/2/overview"
           size="small"
           type="button"
           variation="transparent"
@@ -181,8 +135,8 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
       >
         <Button
           aria-label="Edit: Activity 3: Untitled"
-          component="button"
-          onClick={[Function]}
+          component={[Function]}
+          href="/apd/activity/2/overview"
           size="small"
           type="button"
           variation="transparent"
