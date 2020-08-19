@@ -116,7 +116,6 @@ const CostAllocateFFP = ({
   };
 
   const { years } = costSummary;
-  console.log({ activityName, costAllocation });
 
   return (
     <Fragment>
