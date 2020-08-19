@@ -1,76 +1,58 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { LinksContextConsumer } from '../contexts/LinksContextProvider';
-import NextPreviousButtons from './NextPreviousButtons';
-import { jumpTo } from '../actions/app';
+import { Link, useParams as actualUseParams } from 'react-router-dom';
+import ContinuePreviousButtons from './ContinuePreviousButtons';
 import {
   selectActivitiesSidebar,
   selectActivityCount
 } from '../reducers/activities.selectors';
-import { addActivity } from '../actions/editActivity';
-import { selectActiveSection } from '../reducers/navigation';
+import { addActivity as actualAddActivity } from '../actions/editActivity';
 
-const SecondaryNav = ({
-  activeSection,
-  activities,
-  activityCount,
-  jumpTo: jumpAction,
-  add
-}) => {
-  const onAdd = () => {
-    add();
-    jumpAction(`activities-list`);
-    window.scrollTo(0, 0);
-  };
-
-  const activityIndex = activities.findIndex(a =>
-    activeSection.includes(a.anchor)
-  );
+const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
+  const { activityIndex } = useParams();
+  const showAddActivityLink =
+    activityIndex + 1 === activityCount && location.pathname.endsWith('ffp');
 
   return (
-    <LinksContextConsumer>
-      {context => (
-        <Fragment>
-          {activityIndex + 1 === activityCount &&
-            activeSection.includes('ffp') && (
-              <div className="pre-button-section-break">
-                <Link
-                  to="/apd/activities"
-                  onClick={onAdd}
-                  className="ds-c-button"
-                >
-                  Add another activity
-                </Link>
-              </div>
-            )}
-          <div className="pre-button-section-break">
-            <NextPreviousButtons context={context} />
-          </div>
-        </Fragment>
+    <Fragment>
+      {showAddActivityLink && (
+        <div className="pre-button-section-break">
+          <Link
+            to="/apd/activities"
+            onClick={addActivity}
+            className="ds-c-button"
+          >
+            Add another activity
+          </Link>
+        </div>
       )}
-    </LinksContextConsumer>
+      <div className="pre-button-section-break">
+        <ContinuePreviousButtons />
+      </div>
+    </Fragment>
   );
+};
+
+SecondaryNav.defaultProps = {
+  useParams: actualUseParams
 };
 
 SecondaryNav.propTypes = {
-  activities: PropTypes.array.isRequired,
-  activeSection: PropTypes.string.isRequired,
   activityCount: PropTypes.number.isRequired,
-  jumpTo: PropTypes.func.isRequired,
-  add: PropTypes.func.isRequired
+  addActivity: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
+  useParams: PropTypes.func
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activities: selectActivitiesSidebar(state),
-  activeSection: selectActiveSection(state),
-  activityCount: selectActivityCount(state)
+  activityCount: selectActivityCount(state),
+  location: state.router.location
 });
 
 const mapDispatchToProps = {
-  jumpTo,
-  add: addActivity
+  addActivity: actualAddActivity
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SecondaryNav);
