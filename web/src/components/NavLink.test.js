@@ -17,5 +17,7 @@ describe('<NavLink /> (for use within @cms-gov/ds components)', () => {
     );
     expect(component.prop('otherThing')).toEqual(true);
     expect(component.text()).toEqual('Activities Summary');
+    // tell screen reader to treat a NavLink wrapped by a Button as a link
+    expect(component.prop('role')).toEqual('link');
   });
 });
