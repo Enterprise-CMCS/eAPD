@@ -7,9 +7,10 @@ import { plain as Nav, mapStateToProps } from './Nav';
 describe('<Nav /> component', () => {
   it('renders correctly', () => {
     const props = {
-      links: [
+      generateKey: () => 'asdf1234',
+      items: [
         { id: 'home-nav', label: 'Home', url: '/' },
-        { id: 'apd-nav', label: 'View APD', url: '/apd' },
+        { id: 'apd-nav', label: 'View APD', url: '/apd', selected: true},
         { id: 'search-nav', label: 'Search', url: '/search' },
         {
           id: 'settings-nav',
@@ -20,7 +21,9 @@ describe('<Nav /> component', () => {
           ]
         }
       ],
-      selectedId: 'profile-nav'
+      location: {
+        pathname: '/apd'
+      }
     };
     const component = mount(
       <Router>
@@ -33,14 +36,18 @@ describe('<Nav /> component', () => {
   it('maps state to props', () => {
     const state = {
       nav: {
-        links: ['home-nav', 'search-nav', 'settings-nav'],
-        selectedId: 'home-nav'
+        items: ['home-nav', 'search-nav', 'settings-nav'],
+      },
+      router: {
+        location: {
+          pathname: '/apd'
+        }
       }
     };
 
     expect(mapStateToProps(state)).toEqual({
-      links: ['home-nav', 'search-nav', 'settings-nav'],
-      selectedId: 'home-nav'
+      items: ['home-nav', 'search-nav', 'settings-nav'],
+      pathname: '/apd'
     });
   });
 });

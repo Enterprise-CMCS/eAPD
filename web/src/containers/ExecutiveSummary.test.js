@@ -16,8 +16,6 @@ jest.mock('react-router-dom', () => {
   };
 });
 
-global.scrollTo = jest.fn();
-
 describe('executive summary component', () => {
   const props = {
     data: [
