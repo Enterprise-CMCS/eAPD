@@ -1,34 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`apd (application) component renders correctly 1`] = `
-<LinksContextProvider>
+<div
+  className="site-body ds-l-container"
+>
   <div
-    className="site-body ds-l-container"
+    className="ds-u-margin--0"
   >
+    <Sidebar
+      place={Object {}}
+    />
     <div
-      className="ds-u-margin--0"
+      className="site-main"
+      id="start-main-content"
     >
-      <Connect(Sidebar)
-        place={Object {}}
-      />
+      <Connect(UnexpectedError) />
       <div
-        className="site-main"
-        id="start-main-content"
+        className="ds-u-padding-top--2"
       >
-        <Connect(UnexpectedError) />
-        <div
-          className="ds-u-padding-top--2"
-        >
-          <ApdPageRoutes
-            apdCreated="creation date"
-            apdName="test name"
-            year="the year"
-          />
-        </div>
+        <ApdPageRoutes
+          useRouteMatch={[Function]}
+        />
       </div>
     </div>
   </div>
-</LinksContextProvider>
+</div>
 `;
 
 exports[`apd (application) component renders correctly 2`] = `

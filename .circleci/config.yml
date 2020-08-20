@@ -9,7 +9,7 @@ workflows:
       - schedule:
           # Run every hour, every day. Specified this way because the more
           # compact cron syntax wasn't working.
-          cron: '0 * * * *'
+          cron: '0 0 * * *'
           filters:
             branches:
               only:

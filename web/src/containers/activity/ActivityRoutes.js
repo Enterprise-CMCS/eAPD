@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  useRouteMatch as actualUseRouteMatch
+} from 'react-router-dom';
 
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
@@ -12,7 +16,7 @@ import Objectives from './Objectives';
 import StandardsAndConditions from './StandardsAndConditions';
 import { Section } from '../../components/Section';
 
-const ActivityRoutes = ({ activityIndex }) => {
+const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
   const { path } = useRouteMatch();
 
   return (
@@ -53,8 +57,13 @@ const ActivityRoutes = ({ activityIndex }) => {
   );
 };
 
+ActivityRoutes.defaultProps = {
+  useRouteMatch: actualUseRouteMatch
+};
+
 ActivityRoutes.propTypes = {
-  activityIndex: PropTypes.number.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  useRouteMatch: PropTypes.func
 };
 
 export default ActivityRoutes;

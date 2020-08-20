@@ -5,11 +5,13 @@ import Wrapper from './Wrapper';
 import Broadcast from './Broadcast';
 import AriaAnnounce from '../containers/AriaAnnounce';
 import AuthChecker from '../containers/AuthChecker';
+import AutoScrollToElement from './AutoScrollToElement';
 
 const App = () => (
   <Wrapper>
     <AriaAnnounce />
     <Broadcast />
+    <AutoScrollToElement />
     <AuthChecker>
       <Routes />
     </AuthChecker>
