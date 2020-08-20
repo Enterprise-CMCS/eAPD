@@ -7,7 +7,7 @@ import apd from './apd';
 import auth from './auth';
 import budget from './budget';
 import errors from './errors';
-import navigation from './navigation';
+import nav from './nav';
 import patch from './patch';
 import saving from './saving';
 import user from './user';
@@ -21,7 +21,7 @@ const rootReducer = history =>
     auth,
     budget,
     errors,
-    navigation,
+    nav,
     patch,
     saving,
     user,
