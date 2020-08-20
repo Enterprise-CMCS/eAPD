@@ -3,7 +3,12 @@ import thunk from 'redux-thunk';
 
 import { UPDATE_BUDGET } from '../budget';
 
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import {
+  ADD_APD_ITEM,
+  APD_ACTIVITIES_CHANGE,
+  EDIT_APD,
+  REMOVE_APD_ITEM
+} from '../editApd/symbols';
 
 import {
   addActivity,
@@ -15,7 +20,14 @@ import {
 const mockStore = configureStore([thunk]);
 
 describe('APD activity edit actions for overview section', () => {
-  const store = mockStore('test state');
+  const state = {
+    apd: {
+      data: {
+        activities: []
+      }
+    }
+  }
+  const store = mockStore(state);
 
   beforeEach(() => {
     store.clearActions();
@@ -28,9 +40,10 @@ describe('APD activity edit actions for overview section', () => {
       {
         type: ADD_APD_ITEM,
         path: '/activities/-',
-        state: 'test state'
+        state
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: APD_ACTIVITIES_CHANGE, activities: [] },
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -41,7 +54,8 @@ describe('APD activity edit actions for overview section', () => {
 
     expect(store.getActions()).toEqual([
       { type: REMOVE_APD_ITEM, path: '/activities/3' },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: APD_ACTIVITIES_CHANGE, activities: [] },
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -70,7 +84,7 @@ describe('APD activity edit actions for overview section', () => {
         path: '/activities/13/fundingSource',
         value: 'funding source'
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 });

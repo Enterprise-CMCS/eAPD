@@ -8,21 +8,21 @@ export const goToDashboard = ({ pushRoute = push } = {}) => dispatch => {
   dispatch(pushRoute('/'));
 };
 
-export const jumpTo = waypoint => dispatch => {
-  if (waypoint) {
+export const jumpTo = waypointId => dispatch => {
+  if (waypointId) {
     jumping = true;
     setTimeout(() => {
       jumping = false;
     }, 100);
-    dispatch({ type: NAVIGATION_SCROLL_TO_WAYPOINT, data: waypoint });
+    dispatch({ type: NAVIGATION_SCROLL_TO_WAYPOINT, waypointId });
   }
 };
 
-export const scrollTo = waypoint => dispatch => {
-  if (!jumping && waypoint) {
+export const scrollTo = waypointId => dispatch => {
+  if (!jumping && waypointId) {
     dispatch({
       type: NAVIGATION_SCROLL_TO_WAYPOINT,
-      data: waypoint
+      waypointId
     });
   }
 };
