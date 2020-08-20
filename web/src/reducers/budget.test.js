@@ -273,7 +273,7 @@ describe('budget reducer', () => {
             {
               // This activity is to represent the case where an activity's
               // total costs are zero, because that was causing budget math
-              // errors. https://github.com/18F/cms-hitech-apd/issues/1740
+              // errors. https://github.com/CMSgov/eAPD/issues/1740
               id: 5,
               key: '5',
               name: 'zero total',
@@ -322,7 +322,7 @@ describe('budget reducer', () => {
               // This activity is to represent the case where an activity
               // does not have a funding program yet. New activities do not
               // get a funding program by default.
-              // https://github.com/18F/cms-hitech-apd/issues/2059
+              // https://github.com/CMSgov/eAPD/issues/2059
               id: 6,
               key: '6',
               name: 'no funding program',

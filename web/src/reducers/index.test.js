@@ -10,7 +10,7 @@ describe('root reducer', () => {
       'auth',
       'budget',
       'errors',
-      'navigation',
+      'nav',
       'patch',
       'saving',
       'user',

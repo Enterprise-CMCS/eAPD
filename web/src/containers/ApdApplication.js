@@ -6,27 +6,20 @@ import { Redirect } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import UnexpectedError from './UnexpectedError';
 import { setApdToSelectOnLoad } from '../actions/app';
-import { LinksContextProvider } from '../contexts/LinksContextProvider';
 
 import ApdPageRoutes from './ApdPageRoutes';
 
 import {
-  getAPDCreation,
-  getAPDName,
-  getAPDYearRange,
   getIsAnAPDSelected
 } from '../reducers/apd';
 
 import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
 const ApdApplication = ({
-  apdCreated,
-  apdName,
   apdSelected,
   isAdmin,
   place,
   setApdToSelectOnLoad: dispatchSelectApdOnLoad,
-  year
 }) => {
   if (isAdmin) {
     return <Redirect to="/" />;
@@ -38,45 +31,31 @@ const ApdApplication = ({
   }
 
   return (
-    <LinksContextProvider>
-      <div className="site-body ds-l-container">
-        <div className="ds-u-margin--0">
-          <Sidebar place={place} />
-          <div id="start-main-content" className="site-main">
-            <UnexpectedError />
-            <div className="ds-u-padding-top--2">
-              <ApdPageRoutes
-                apdCreated={apdCreated}
-                apdName={apdName}
-                year={year}
-              />
-            </div>
+    <div className="site-body ds-l-container">
+      <div className="ds-u-margin--0">
+        <Sidebar place={place} />
+        <div id="start-main-content" className="site-main">
+          <UnexpectedError />
+          <div className="ds-u-padding-top--2">
+            <ApdPageRoutes />
           </div>
         </div>
       </div>
-    </LinksContextProvider>
+    </div>
   );
 };
 
 ApdApplication.propTypes = {
-  apdCreated: PropTypes.string.isRequired,
-  apdName: PropTypes.string,
   apdSelected: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
   setApdToSelectOnLoad: PropTypes.func.isRequired,
-  year: PropTypes.string.isRequired
 };
 
-ApdApplication.defaultProps = { apdName: '' };
-
 const mapStateToProps = state => ({
-  apdCreated: getAPDCreation(state),
-  apdName: getAPDName(state),
   apdSelected: getIsAnAPDSelected(state),
   isAdmin: getIsAdmin(state),
   place: getUserStateOrTerritory(state),
-  year: getAPDYearRange(state)
 });
 
 const mapDispatchToProps = { setApdToSelectOnLoad };
