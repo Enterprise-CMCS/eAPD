@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { Button } from '@cmsgov/design-system-core';
-import NavLink from './NavLink';
-import { Link, useParams as actualUseParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const continueLabelId = 'continue-button-label';
 const previousLabelId = 'previous-button-label';
