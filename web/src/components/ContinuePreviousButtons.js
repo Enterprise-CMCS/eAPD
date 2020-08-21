@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Icon, { faChevronLeft, faChevronRight } from './Icons';
 
 const continueLabelId = 'continue-button-label';
 const previousLabelId = 'previous-button-label';
@@ -22,7 +23,8 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
       className="ds-c-button ds-c-button--primary ds-u-float--right"
       to={continueLink.url}
     >
-      Continue &gt;
+      Continue
+      <Icon className="ds-u-margin-left--1" icon={faChevronRight} size="sm" />
     </Link>
   );
 
@@ -38,7 +40,8 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
       className="ds-c-button"
       to={previousLink.url}
     >
-      &lt; Previous
+      <Icon className="ds-u-margin-right--1" icon={faChevronLeft} size="sm" />
+      Previous
     </Link>
   );
 
