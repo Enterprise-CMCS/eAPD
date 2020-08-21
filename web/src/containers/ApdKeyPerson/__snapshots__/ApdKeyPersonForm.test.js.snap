@@ -5,9 +5,13 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
   <h4
     className="ds-h4"
   >
-    Additional
-     APD Point of Contact
+    Additional APD Point of Contact
   </h4>
+  <p
+    className="ds-u-margin-bottom--0"
+  >
+    Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
+  </p>
   <TextField
     autoFocus={true}
     label="Name"
@@ -85,9 +89,13 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
   <h4
     className="ds-h4"
   >
-    Additional
-     APD Point of Contact
+    Additional APD Point of Contact
   </h4>
+  <p
+    className="ds-u-margin-bottom--0"
+  >
+    Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
+  </p>
   <TextField
     autoFocus={true}
     label="Name"
@@ -165,9 +173,13 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
   <h4
     className="ds-h4"
   >
-    Primary
-     APD Point of Contact
+    Primary APD Point of Contact
   </h4>
+  <p
+    className="ds-u-margin-bottom--0"
+  >
+    Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
+  </p>
   <TextField
     autoFocus={true}
     label="Name"
