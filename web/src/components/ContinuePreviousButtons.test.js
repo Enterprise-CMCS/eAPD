@@ -51,9 +51,9 @@ describe('<ContinuePreviousButtons /> component', () => {
   it('provides accessible labels', () => {
     const component = setup();
 
-    const buttons = component.find(Button);
-    expect(buttons.last().prop('aria-labelledby')).toBe(continueLabelId);
-    expect(buttons.first().prop('aria-labelledby')).toBe(previousLabelId);
+    const links = component.find(Link);
+    expect(links.last().prop('aria-labelledby')).toBe(continueLabelId);
+    expect(links.first().prop('aria-labelledby')).toBe(previousLabelId);
 
     const continueLabel = component.find(`#${continueLabelId}`);
     const previousLabel = component.find(`#${previousLabelId}`);

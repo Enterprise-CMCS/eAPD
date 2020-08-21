@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button } from '@cmsgov/design-system-core';
+// import { Button } from '@cmsgov/design-system-core';
 import NavLink from './NavLink';
+import { Link, useParams as actualUseParams } from 'react-router-dom';
 
 const continueLabelId = 'continue-button-label';
 const previousLabelId = 'previous-button-label';
@@ -18,15 +19,13 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   };
 
   const continueComponent = !continueLink ? null : (
-    <Button
+    <Link
       aria-labelledby={continueLabelId}
-      className="ds-u-float--right"
-      component={NavLink}
-      href={continueLink.url}
-      variation="primary"
+      className="ds-c-button ds-c-button--primary ds-u-float--right"
+      to={continueLink.url}
     >
       Continue &gt;
-    </Button>
+    </Link>
   );
 
   const continueLabel = !continueLink ? null : (
@@ -36,13 +35,13 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   );
 
   const previousComponent = !previousLink ? null : (
-    <Button
+    <Link
       aria-labelledby={previousLabelId}
-      component={NavLink}
-      href={previousLink.url}
+      className="ds-c-button"
+      to={previousLink.url}
     >
       &lt; Previous
-    </Button>
+    </Link>
   );
 
   const previousLabel = !previousLink ? null : (
