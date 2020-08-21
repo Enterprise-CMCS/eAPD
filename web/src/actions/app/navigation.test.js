@@ -29,7 +29,7 @@ describe('navigation actions', () => {
       expect(store.getActions()).toEqual([
         {
           type: NAVIGATION_SCROLL_TO_WAYPOINT,
-          data: 'foo'
+          waypointId: 'foo'
         }
       ]);
     });
@@ -58,7 +58,7 @@ describe('navigation actions', () => {
       expect(store.getActions()).toEqual([
         {
           type: NAVIGATION_SCROLL_TO_WAYPOINT,
-          data: 'bar'
+          waypointId: 'bar'
         }
       ]);
     });
@@ -78,7 +78,7 @@ describe('navigation actions', () => {
       store.dispatch(scrollTo('two'));
 
       expect(store.getActions()).toEqual([
-        { type: NAVIGATION_SCROLL_TO_WAYPOINT, data: 'one' }
+        { type: NAVIGATION_SCROLL_TO_WAYPOINT, waypointId: 'one' }
       ]);
 
       return new Promise(resolve => {
@@ -86,8 +86,8 @@ describe('navigation actions', () => {
           store.dispatch(scrollTo('three'));
 
           expect(store.getActions()).toEqual([
-            { type: NAVIGATION_SCROLL_TO_WAYPOINT, data: 'one' },
-            { type: NAVIGATION_SCROLL_TO_WAYPOINT, data: 'three' }
+            { type: NAVIGATION_SCROLL_TO_WAYPOINT, waypointId: 'one' },
+            { type: NAVIGATION_SCROLL_TO_WAYPOINT, waypointId: 'three' }
           ]);
 
           resolve();

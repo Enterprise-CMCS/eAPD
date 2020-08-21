@@ -92,11 +92,11 @@ exports[`Review wrapper component renders properly if the edit link is set 1`] =
         type="button"
         variation="transparent"
       >
-        <a
-          href="something"
+        <Link
+          to="something"
         >
           Edit
-        </a>
+        </Link>
       </Button>
     </div>
   }

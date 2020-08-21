@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { jumpTo } from '../../actions/app';
 import { removeActivity } from '../../actions/editActivity';
 
 import {
@@ -81,34 +80,6 @@ describe('the (Activity) EntryDetails component', () => {
     expect(props.remove).toHaveBeenCalled();
   });
 
-  test('navigates to activities', () => {
-    const component = shallow(<EntryDetails {...props} />);
-    expect(component).toMatchSnapshot();
-
-    const e = {
-      stopPropagation: jest.fn(),
-      preventDefault: jest.fn()
-    };
-
-    const review = component.find('Review').dive();
-    // First button is the edit button
-    review
-      .find('Button')
-      .at(0)
-      .simulate('click', e);
-
-    // cancels the click
-    expect(e.stopPropagation).toHaveBeenCalled();
-    expect(e.preventDefault).toHaveBeenCalled();
-
-    // updates nav state, navigates, and scrolls up
-    expect(props.jumpAction).toHaveBeenCalledWith(
-      'activity-activity key-overview'
-    );
-    expect(mockPush).toHaveBeenCalledWith('/apd/activity/2');
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
-  });
-
   test('maps state to props', () => {
     const state = {
       apd: {
@@ -148,7 +119,6 @@ describe('the (Activity) EntryDetails component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      jumpAction: jumpTo,
       remove: removeActivity
     });
   });
