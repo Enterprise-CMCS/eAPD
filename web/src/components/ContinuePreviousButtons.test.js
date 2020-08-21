@@ -1,7 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import { Link, BrowserRouter as Router } from 'react-router-dom';
-import { Button } from '@cmsgov/design-system-core';
 
 import {
   continueLabelId,
