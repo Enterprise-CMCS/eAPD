@@ -145,7 +145,6 @@ exports[`<Nav /> component renders correctly 1`] = `
                   <Link
                     className="ds-c-vertical-nav__label"
                     onClick={[Function]}
-                    role="link"
                     to="/"
                   >
                     <LinkAnchor
@@ -153,13 +152,11 @@ exports[`<Nav /> component renders correctly 1`] = `
                       href="/"
                       navigate={[Function]}
                       onClick={[Function]}
-                      role="link"
                     >
                       <a
                         className="ds-c-vertical-nav__label"
                         href="/"
                         onClick={[Function]}
-                        role="link"
                       >
                         Home
                       </a>
@@ -203,7 +200,6 @@ exports[`<Nav /> component renders correctly 1`] = `
                   <Link
                     className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                     onClick={[Function]}
-                    role="link"
                     to="/apd"
                   >
                     <LinkAnchor
@@ -211,13 +207,11 @@ exports[`<Nav /> component renders correctly 1`] = `
                       href="/apd"
                       navigate={[Function]}
                       onClick={[Function]}
-                      role="link"
                     >
                       <a
                         className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                         href="/apd"
                         onClick={[Function]}
-                        role="link"
                       >
                         View APD
                       </a>
@@ -260,7 +254,6 @@ exports[`<Nav /> component renders correctly 1`] = `
                   <Link
                     className="ds-c-vertical-nav__label"
                     onClick={[Function]}
-                    role="link"
                     to="/search"
                   >
                     <LinkAnchor
@@ -268,13 +261,11 @@ exports[`<Nav /> component renders correctly 1`] = `
                       href="/search"
                       navigate={[Function]}
                       onClick={[Function]}
-                      role="link"
                     >
                       <a
                         className="ds-c-vertical-nav__label"
                         href="/search"
                         onClick={[Function]}
-                        role="link"
                       >
                         Search
                       </a>
@@ -388,7 +379,6 @@ exports[`<Nav /> component renders correctly 1`] = `
                           <Link
                             className="ds-c-vertical-nav__label"
                             onClick={[Function]}
-                            role="link"
                             to="/me"
                           >
                             <LinkAnchor
@@ -396,13 +386,11 @@ exports[`<Nav /> component renders correctly 1`] = `
                               href="/me"
                               navigate={[Function]}
                               onClick={[Function]}
-                              role="link"
                             >
                               <a
                                 className="ds-c-vertical-nav__label"
                                 href="/me"
                                 onClick={[Function]}
-                                role="link"
                               >
                                 Profile
                               </a>
@@ -445,7 +433,6 @@ exports[`<Nav /> component renders correctly 1`] = `
                           <Link
                             className="ds-c-vertical-nav__label"
                             onClick={[Function]}
-                            role="link"
                             to="/logout"
                           >
                             <LinkAnchor
@@ -453,13 +440,11 @@ exports[`<Nav /> component renders correctly 1`] = `
                               href="/logout"
                               navigate={[Function]}
                               onClick={[Function]}
-                              role="link"
                             >
                               <a
                                 className="ds-c-vertical-nav__label"
                                 href="/logout"
                                 onClick={[Function]}
-                                role="link"
                               >
                                 Log out
                               </a>

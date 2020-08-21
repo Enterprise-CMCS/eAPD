@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link as ReactRouterLink } from 'react-router-dom';
 
 const NavLink = ({ href, children, ...rest }) => (
-  <ReactRouterLink to={href} {...rest} role="link">
+  <ReactRouterLink to={href} {...rest}>
     {children}
   </ReactRouterLink>
 );

@@ -10,7 +10,7 @@ describe('<Nav /> component', () => {
       generateKey: () => 'asdf1234',
       items: [
         { id: 'home-nav', label: 'Home', url: '/' },
-        { id: 'apd-nav', label: 'View APD', url: '/apd', selected: true},
+        { id: 'apd-nav', label: 'View APD', url: '/apd', selected: true },
         { id: 'search-nav', label: 'Search', url: '/search' },
         {
           id: 'settings-nav',
