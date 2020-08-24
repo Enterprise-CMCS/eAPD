@@ -1,12 +1,12 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { APD_ACTIVITIES_CHANGE } from '../actions/editApd/symbols';
-import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/app/symbols';
 
-import reducer, { flatten, links, getSelectedId } from './nav';
+import staticItems, { getItems } from './nav.items';
+import reducer, { getContinuePreviousLinks } from './nav';
 
-describe('links', () => {
-  it('defines the resources within the app', () => {
-    const labels = links.map(link => link.label);
+describe('staticItems', () => {
+  it('defines the apd resources within the app', () => {
+    const labels = staticItems.map(item => item.label);
     expect(labels).toEqual([
       "Key State Personnel",
       "Program Summary",
@@ -20,33 +20,71 @@ describe('links', () => {
     ]);
   });
 
-  it('defines a path without a fragment for eacht items[0].url', () => {
+  it('defines a path without a fragment for each items[0].url', () => {
     // getContinuePreviousLinks() uses this feature of the data to ignore links
     // with #fragments in their URL. A URL #fragment indicates a particular
     // section of a resource.
-    links.forEach(link => {
-      if (!link.items || !link.items.length) return;
-      const hash = link.items[0].url.split('#')[2];
+    staticItems.forEach(item => {
+      if (!item.items || !item.items.length) return;
+      const hash = item.items[0].url.split('#')[2];
       expect(hash).toBeFalsy();
     });
   });
 });
 
-describe('getSelectedId()', () => {
-  const flatLinks = flatten([], links);
-  it('uses location.{pathname,hash} to determine the selected nav id', () => {
-    const location = {
-      hash: '#prev-activities-table',
-      pathname: '/apd/previous-activities'
-    };
-    const result = getSelectedId(location, flatLinks);
-    expect(result).toEqual('prev-activities-table-nav');
+describe('getContinuePreviousLinks()', () => {
+  test('first apd page', () => {
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks('/apd/state-profile', staticItems);
+    expect(continueLink.url).toEqual('/apd/program-summary');
+    expect(previousLink).toBeFalsy();
   });
 
-  it('uses location.pathname if hash is not present', () => {
-    const location = { pathname: '/apd/previous-activities' };
-    const result = getSelectedId(location, flatLinks);
-    expect(result).toEqual('apd-previous-activities-nav');
+  test('activities list page', () => {
+    const url = '/apd/activities';
+    const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
+    const items = getItems({ activities, url });
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks(url, items);
+    expect(continueLink.url).toEqual('/apd/schedule-summary');
+    expect(previousLink.url).toEqual('/apd/previous-activities');
+  });
+
+  test('activity page', () => {
+    const url = '/apd/activity/0/ffp';
+    const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
+    const items = getItems({ activities, url });
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks(url, items);
+    expect(continueLink.url).toEqual('/apd/activity/1/overview');
+    expect(previousLink.url).toEqual('/apd/activity/0/cost-allocation');
+  });
+
+  test('schedule summary page', () => {
+    const url = '/apd/schedule-summary';
+    const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
+    const items = getItems({ activities, url });
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks(url, items);
+    expect(continueLink.url).toEqual('/apd/proposed-budget');
+    expect(previousLink.url).toEqual('/apd/activities');
+  });
+
+  test('last apd page', () => {
+    const {
+      continueLink,
+      previousLink
+    } = getContinuePreviousLinks('/apd/export', staticItems);
+    expect(continueLink).toBeFalsy();
+    expect(previousLink.url).toEqual('/apd/executive-summary');
   });
 });
 
@@ -58,14 +96,15 @@ describe('nav reducer', () => {
   });
 
   it('has an initial state', () => {
-    expect(state.links.length).toEqual(9);
+    expect(state.activities).toEqual([]);
     expect(state.continueLink).toBeFalsy();
+    expect(state.items.length).toEqual(9);
+    expect(state.key).toBeFalsy();
     expect(state.previousLink).toBeFalsy();
-    expect(state.selectedId).toBe('apd-state-profile-nav');
   });
 
   describe(`action.type: ${APD_ACTIVITIES_CHANGE}`, () => {
-    it('updates nav.links using the list of activities', () => {
+    it('updates nav.activities', () => {
       const action = {
         type: APD_ACTIVITIES_CHANGE,
         activities: [
@@ -76,15 +115,12 @@ describe('nav reducer', () => {
       };
 
       const nextState = reducer(state, action);
-      expect(nextState.links.length > 0).toBeTruthy();
-
-      const activities = nextState.links.find(link => link.label === "Program Activities").items
-      expect(activities.length > 0).toBeTruthy();
+      expect(nextState.activities.length > 0).toBe(true);
     });
   });
 
   describe(`action.type: ${LOCATION_CHANGE}`, () => {
-    it('updates nav.selectedId using the URL pathname and hash', () => {
+    it('updates nav.items', () => {
       const payload = {
         payload: {
           location: {
@@ -94,22 +130,9 @@ describe('nav reducer', () => {
         }
       };
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
-      expect(nextState.selectedId)
-        .toEqual('budget-summary-table-nav');  // id of link, used by <Nav /> component
-    });
-
-    it('updates nav.selectedId using the URL path', () => {
-      const payload = {
-        payload: {
-          location: {
-            pathname: '/apd/proposed-budget',
-            hash: null
-          }
-        }
-      };
-      const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
-      expect(nextState.selectedId)
-        .toEqual('apd-proposed-budget-nav');  // id of link, used by <Nav /> component
+      expect(nextState.items[5].items[2].selected).toBe(true);
+      expect(nextState.items[5].selected).toBe(true);
+      expect(nextState.items[5].defaultCollapsed).toBe(false);
     });
 
     it('updates nav.{continueLink,previousLink}', () => {
@@ -123,15 +146,6 @@ describe('nav reducer', () => {
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
       expect(nextState.continueLink.url).toEqual('/apd/previous-activities');
       expect(nextState.previousLink.url).toEqual('/apd/state-profile');
-    });
-  });
-
-  describe(`action.type: ${NAVIGATION_SCROLL_TO_WAYPOINT}, dispatched by <Waypoint />`, () => {
-    it('updates nav.selectedId', () => {
-      const payload = { waypointId: 'prev-activities-outline' };
-      const action = { type: NAVIGATION_SCROLL_TO_WAYPOINT, ...payload };
-      const nextState = reducer(state, action);
-      expect(nextState.selectedId).toEqual('prev-activities-outline-nav');
     });
   });
 });
