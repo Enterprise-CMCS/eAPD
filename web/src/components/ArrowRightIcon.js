@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // svg from https://design.cms.gov/style/icons/
 
@@ -14,5 +15,13 @@ const ArrowRightIcon = ({ transform, ...props }) => (
     />
   </svg>
 );
+
+ArrowRightIcon.defaultProps = {
+  transform: null
+};
+
+ArrowRightIcon.propTypes = {
+  transform: PropTypes.string
+};
 
 export default ArrowRightIcon;
