@@ -19,8 +19,7 @@ const Nav = ({ generateKey, items, pathname }) => {
 };
 
 Nav.defaultProps = {
-  generateKey: actualGenerateKey,
-  pathname: '/'
+  generateKey: actualGenerateKey
 }
 
 Nav.propTypes = {
