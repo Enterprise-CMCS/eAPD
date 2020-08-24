@@ -62,12 +62,7 @@ exports[`<Nav /> component renders correctly 1`] = `
           },
         ]
       }
-      location={
-        Object {
-          "pathname": "/apd",
-        }
-      }
-      pathname="/"
+      pathname="/apd"
     >
       <VerticalNav
         collapsed={false}
