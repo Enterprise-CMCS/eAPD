@@ -34,6 +34,7 @@ const NameAndFundingSourceForm = ({
       <ChoiceList
         label="Program type"
         name="program-type"
+        type="checkbox"
         choices={[
           { checked: fundingSource === 'HIT', label: 'HIT', value: 'HIT' },
           { checked: fundingSource === 'HIE', label: 'HIE', value: 'HIE' },

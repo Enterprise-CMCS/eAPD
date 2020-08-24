@@ -123,7 +123,9 @@ const EditAccount = ({
           </FormLabel>
           <Dropdown
             id="modify_account_state"
+            label=""
             name="state"
+            options={[]}
             size="medium"
             value={state}
             onChange={changeUserState}
@@ -141,7 +143,9 @@ const EditAccount = ({
           </FormLabel>
           <Dropdown
             id="modify_account_role"
+            label=""
             name="role"
+            options={[]}
             size="medium"
             value={role || ''}
             onChange={changeUserRole}
@@ -215,7 +219,9 @@ const EditAccount = ({
         </FormLabel>
         <Dropdown
           id="modify_account_user"
+          label=""
           name="userID"
+          options={[]}
           value={`${userID}`}
           onChange={handlePickAccount}
         >

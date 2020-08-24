@@ -85,7 +85,9 @@ const CreateUser = ({ createUser, error, roles, working }) => {
         </FormLabel>
         <Dropdown
           id="create_account_state"
+          label=""
           name="state"
+          options={[]}
           size="medium"
           value={state}
           onChange={changeState}
@@ -104,6 +106,7 @@ const CreateUser = ({ createUser, error, roles, working }) => {
         <Dropdown
           id="create_account_role"
           name="role"
+          options={[]}
           size="medium"
           value={role || ''}
           onChange={changeRole}

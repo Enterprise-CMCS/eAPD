@@ -67,6 +67,7 @@ exports[`<Nav /> component renders correctly 1`] = `
           "pathname": "/apd",
         }
       }
+      pathname="/"
     >
       <VerticalNav
         collapsed={false}

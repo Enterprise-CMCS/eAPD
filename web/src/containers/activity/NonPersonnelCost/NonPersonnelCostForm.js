@@ -45,7 +45,9 @@ const NonPersonnelCostForm = ({
       <Dropdown
         autoFocus
         id={selectID}
+        label=""
         name="category"
+        options={[]}
         value={category}
         onChange={editCategory}
       >
