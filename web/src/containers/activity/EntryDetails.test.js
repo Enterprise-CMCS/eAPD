@@ -19,8 +19,6 @@ jest.mock('react-router-dom', () => {
   };
 });
 
-global.scrollTo = jest.fn();
-
 describe('the (Activity) EntryDetails component', () => {
   const props = {
     activityIndex: 2,
@@ -32,7 +30,6 @@ describe('the (Activity) EntryDetails component', () => {
   };
 
   beforeEach(() => {
-    global.scrollTo.mockReset();
     if (mockPush) {
       mockPush.mockReset();
     }

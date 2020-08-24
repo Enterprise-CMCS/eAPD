@@ -1,24 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { VerticalNav } from '@cmsgov/design-system-core';
 import { connect } from 'react-redux';
 import NavLink from '../components/NavLink';
+import { generateKey as actualGenerateKey } from '../util'
 
-const Nav = ({ links, selectedId }) => (
-  <VerticalNav
-    component={NavLink}
-    items={links}
-    selectedId={selectedId} />
-);
-
-Nav.propTypes = {
-  links: PropTypes.array.isRequired,
-  selectedId: PropTypes.string.isRequired
+const Nav = ({ generateKey, items, pathname }) => {
+  // force component update when pathname changes
+  const [key, setKey] = useState('');
+  useEffect(() => setKey(generateKey()), [pathname]);
+  return (
+    <VerticalNav
+      component={NavLink}
+      items={items}
+      key={key}
+    />
+  )
 };
 
-const mapStateToProps = ({ nav }) => ({
-  links: nav.links,
-  selectedId: nav.selectedId
+Nav.defaultProps = {
+  generateKey: actualGenerateKey
+}
+
+Nav.propTypes = {
+  generateKey: PropTypes.func,
+  items: PropTypes.array.isRequired,
+  pathname: PropTypes.string.isRequired
+};
+
+const mapStateToProps = ({ nav, router }) => ({
+  items: nav.items,
+  pathname: router.location.pathname
 });
 
 export default connect(mapStateToProps)(Nav);
