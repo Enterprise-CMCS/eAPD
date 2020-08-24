@@ -145,7 +145,7 @@ const Activity = ({ activity, activityIndex }) => {
         Activity {activityIndex + 1} ({activity.name})
       </h2>
       <p>
-        <strong>Activity Summary:</strong> {activity.summary}
+        <strong>Provide a short overview of the activity:</strong> {activity.summary}
       </p>
       <p>
         <strong>Start date: </strong>
