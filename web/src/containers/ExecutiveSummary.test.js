@@ -3,10 +3,8 @@ import React from 'react';
 
 import {
   plain as ExecutiveSummary,
-  mapDispatchToProps,
   mapStateToProps
 } from './ExecutiveSummary';
-import { jumpTo } from '../actions/app';
 
 let mockPush;
 
@@ -17,8 +15,6 @@ jest.mock('react-router-dom', () => {
     useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' })
   };
 });
-
-global.scrollTo = jest.fn();
 
 describe('executive summary component', () => {
   const props = {
@@ -88,34 +84,6 @@ describe('executive summary component', () => {
   it('renders correctly', () => {
     const component = shallow(<ExecutiveSummary {...props} />);
     expect(component).toMatchSnapshot();
-  });
-
-  test('navigates to activities', () => {
-    const component = shallow(<ExecutiveSummary {...props} />);
-    expect(component).toMatchSnapshot();
-
-    const e = {
-      stopPropagation: jest.fn(),
-      preventDefault: jest.fn()
-    };
-
-    const review = component
-      .find('Review')
-      .first()
-      .dive();
-    review
-      .dive()
-      .find('Button')
-      .simulate('click', e);
-
-    // cancels the click
-    expect(e.stopPropagation).toHaveBeenCalled();
-    expect(e.preventDefault).toHaveBeenCalled();
-
-    // updates nav state, navigates, and scrolls up
-    expect(props.jumpAction).toHaveBeenCalledWith('activity-a1-overview');
-    expect(mockPush).toHaveBeenCalledWith('/apd/activity/0');
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
   it('maps state to props', () => {
@@ -206,9 +174,5 @@ describe('executive summary component', () => {
       },
       years: ['1', '2']
     });
-  });
-
-  it('maps dispatch actions to props', () => {
-    expect(mapDispatchToProps).toEqual({ jumpAction: jumpTo });
   });
 });

@@ -1,6 +1,7 @@
 import { Button, Review as ReviewSummary } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Review = ({
   children,
@@ -36,9 +37,9 @@ const Review = ({
               // behave as intended on the outside.  Otherwise, the button
               // content can just be text.
               editHref ? (
-                <a href={editHref} ref={anchor}>
+                <Link to={editHref} ref={anchor}>
                   Edit
-                </a>
+                </Link>
               ) : (
                 'Edit'
               )}

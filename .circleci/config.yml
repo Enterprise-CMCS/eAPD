@@ -9,7 +9,7 @@ workflows:
       - schedule:
           # Run every hour, every day. Specified this way because the more
           # compact cron syntax wasn't working.
-          cron: '0 * * * *'
+          cron: '0 0 * * *'
           filters:
             branches:
               only:
@@ -550,10 +550,10 @@ jobs:
           command: |
             apt-get update
             apt-get install awscli -y
-            aws s3 sync web/dist "${<< parameters.env >>_WEB_AWS_S3_BUCKET}" --region ${<< parameters.env >>_WEB_AWS_REGION} --delete
+            aws s3 sync web/dist s3://"${<< parameters.env >>_WEB_AWS_S3_BUCKET}" --region ${<< parameters.env >>_WEB_AWS_REGION} --delete
             # Copy up index.html separately, so we can set metadata on it to
             # disable client cacheing
-            aws s3 cp web/dist/index.html "${<< parameters.env >>_WEB_AWS_S3_BUCKET}/index.html" --cache-control no-cache --region ${<< parameters.env >>_WEB_AWS_REGION}
+            aws s3 cp web/dist/index.html s3://"${<< parameters.env >>_WEB_AWS_S3_BUCKET}/index.html" --cache-control no-cache --region ${<< parameters.env >>_WEB_AWS_REGION}
       - run:
           when: on_fail
           name: notify on deployment failure

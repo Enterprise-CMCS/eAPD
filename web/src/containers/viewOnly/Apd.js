@@ -19,10 +19,6 @@ import ExecutiveSummary from './ExecutiveSummary';
 import ExportInstructions from './Export';
 
 class ApdViewOnly extends Component {
-  componentDidMount = () => window.scrollTo(0, 0);
-
-  componentDidUpdate = () => window.scrollTo(0, 0);
-
   open = id => e => {
     e.preventDefault();
     this.forceUpdate();
@@ -87,7 +83,6 @@ class ApdViewOnly extends Component {
         <Button
           className="visibility--screen"
           variation="transparent"
-          onClick={() => window.scrollTo(0, 0)}
         >
           ^ Return to the top of the page
         </Button>

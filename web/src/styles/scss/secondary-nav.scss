@@ -5,30 +5,3 @@
   overflow: hidden;
   border-top: 2px solid $color-gray-lighter;
 }
-
-.next-prev-button-left {
-  float: left;
-  overflow: hidden;
-}
-
-.next-prev-button-right {
-  float: right;
-  overflow: hidden;
-}
-
-.next-button {
-  float: right;
-}
-
-.next-section {
-  clear: right;
-  float: right;
-}
-
-.next-prev-section {
-  margin-top: $spacer-1;
-}
-
-.hidden-button {
-  display: none;
-}
