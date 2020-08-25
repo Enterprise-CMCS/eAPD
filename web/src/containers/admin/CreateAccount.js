@@ -1,4 +1,4 @@
-import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
+import { FormLabel, Dropdown, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
@@ -83,9 +83,11 @@ const CreateUser = ({ createUser, error, roles, working }) => {
         <FormLabel component="label" fieldId="create_account_state">
           State
         </FormLabel>
-        <Select
+        <Dropdown
           id="create_account_state"
+          label=""
           name="state"
+          options={[]}
           size="medium"
           value={state}
           onChange={changeState}
@@ -96,14 +98,15 @@ const CreateUser = ({ createUser, error, roles, working }) => {
               {s.name}
             </option>
           ))}
-        </Select>
+        </Dropdown>
 
         <FormLabel component="label" fieldId="create_account_role">
           Authorization role
         </FormLabel>
-        <Select
+        <Dropdown
           id="create_account_role"
           name="role"
+          options={[]}
           size="medium"
           value={role || ''}
           onChange={changeRole}
@@ -114,7 +117,7 @@ const CreateUser = ({ createUser, error, roles, working }) => {
               {toSentenceCase(r.name)}
             </option>
           ))}
-        </Select>
+        </Dropdown>
 
         <Password
           value={password}

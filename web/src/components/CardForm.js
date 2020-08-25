@@ -1,4 +1,4 @@
-import { Alert, Button, Spinner } from '@cmsgov/design-system-core';
+import { Alert, Button, Spinner } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router';

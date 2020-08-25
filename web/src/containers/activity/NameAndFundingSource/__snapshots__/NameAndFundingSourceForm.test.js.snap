@@ -33,6 +33,7 @@ exports[`the activity name and funding source component renders correctly 1`] = 
     label="Program type"
     name="program-type"
     onChange={[Function]}
+    type="checkbox"
   />
 </Fragment>
 `;

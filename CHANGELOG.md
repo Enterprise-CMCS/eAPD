@@ -4,6 +4,7 @@ Anticipated release: August 10, 2020
 
 #### 🚀 New features
 
+- Upgrade to @cmsgov/design-system v2.0.0, remove focus styles ([#2412])
 - Update button text to match verbiage on page ([#2367])
 - Update Key Personnel and Program Management page instructions and help text ([#2325])
 
@@ -22,15 +23,13 @@ Anticipated release: August 10, 2020
 
 # Previous releases
 
-See our [release history](https://github.com/CMSgov/eAPD/releases)
+See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 
-
+[#2412]: https://github.com/CMSgov/eAPD/issues/2412
 [#2335]: https://github.com/CMSgov/eAPD/issues/2335
 [#2367]: https://github.com/CMSgov/eAPD/issues/2367
-[#2335]: https://github.com/CMSgov/eAPD/issues/2335
 [#2325]: https://github.com/CMSgov/eAPD/issues/2325
 [#2401]: https://github.com/CMSgov/eAPD/issues/2401
-[#2335]: https://github.com/CMSgov/eAPD/issues/2335
 [#2188]: https://github.com/CMSgov/eAPD/issues/2188
 [#2223]: https://github.com/CMSgov/eAPD/issues/2223
 [#2410]: https://github.com/CMSgov/eAPD/issues/2410

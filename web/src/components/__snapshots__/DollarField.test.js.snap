@@ -74,7 +74,7 @@ exports[`DollarField component renders correctly 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
-              pattern="[0-9.-]*"
+              pattern="[0-9.,-]*"
               type="text"
               value="123"
             />

@@ -1,4 +1,4 @@
-import { DateField as DSDateField } from '@cmsgov/design-system-core';
+import { DateField as DSDateField } from '@cmsgov/design-system';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState, useMemo } from 'react';
