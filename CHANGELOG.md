@@ -4,6 +4,7 @@ Anticipated release: August 10, 2020
 
 #### 🚀 New features
 
+- Update button text to match verbiage on page ([#2367])
 - Update Key Personnel and Program Management page instructions and help text ([#2325])
 
 #### 🐛 Bugs fixed
@@ -23,6 +24,9 @@ Anticipated release: August 10, 2020
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+
+[#2335]: https://github.com/CMSgov/eAPD/issues/2335
+[#2367]: https://github.com/CMSgov/eAPD/issues/2367
 [#2335]: https://github.com/CMSgov/eAPD/issues/2335
 [#2325]: https://github.com/CMSgov/eAPD/issues/2325
 [#2401]: https://github.com/CMSgov/eAPD/issues/2401

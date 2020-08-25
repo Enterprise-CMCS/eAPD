@@ -15,7 +15,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
   />
   <FormAndReviewList
     activityIndex={58}
-    addButtonText="Add another non-personnel cost"
+    addButtonText="Add another state expense"
     allowDeleteAll={false}
     className={null}
     collapsed={[Function]}
