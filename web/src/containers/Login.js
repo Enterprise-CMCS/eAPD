@@ -1,4 +1,4 @@
-import { TextField } from '@cmsgov/design-system-core';
+import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';

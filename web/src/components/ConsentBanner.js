@@ -1,4 +1,4 @@
-import { Button } from '@cmsgov/design-system-core';
+import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
 

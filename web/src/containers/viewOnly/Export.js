@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button } from '@cmsgov/design-system-core';
+import { Button } from '@cmsgov/design-system';
 import { Envelope, PDFFile } from '../../components/Icons';
 import { printApd } from '../../actions/app';
 

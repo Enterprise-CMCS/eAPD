@@ -52,7 +52,7 @@ describe('the NonPersonnelCostForm component', () => {
 
     test('handles changing the cost category', () => {
       component
-        .find('Select')
+        .find('Dropdown')
         .simulate('change', { target: { value: 'new category' } });
       expect(setCategory).toHaveBeenCalledWith(44, 83, 'new category');
     });

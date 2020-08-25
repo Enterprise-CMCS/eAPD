@@ -1,4 +1,4 @@
-import { Dropdown } from '@cmsgov/design-system-core';
+import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
