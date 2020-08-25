@@ -111,6 +111,12 @@ export const getPatchesToAddYear = (state, year) => {
       path: `/keyPersonnel/${i}/costs/${year}`,
       value: 0
     });
+
+    patches.push({
+      op: 'add',
+      path: `/keyPersonnel/${i}/fte/${year}`,
+      value: 0
+    });
   });
 
   return patches;
@@ -180,6 +186,11 @@ export const getPatchesToRemoveYear = (state, year) => {
     patches.push({
       op: 'remove',
       path: `/keyPersonnel/${i}/costs/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/keyPersonnel/${i}/fte/${year}`
     });
   });
 

@@ -1,31 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`apd export component renders correctly 1`] = `
-<Connect(ConnectedWaypoint)
-  id="export-and-submit"
+<Section
+  id={null}
+  resource="exportAndSubmit"
 >
-  <Section
-    id="export-and-submit"
-    resource="exportAndSubmit"
+  <h3
+    className="ds-h3"
   >
-    <h3
-      className="ds-h3"
-    >
-      Review and Download
-    </h3>
-    <p>
-      On the next page, you will be able to review and download a copy of your APD as the first step in submitting a completed APD to CMS.
-    </p>
-    <Button
-      className="ds-u-margin-top--2"
-      component="button"
-      onClick={[Function]}
-      size="big"
-      type="button"
-      variation="primary"
-    >
-      Continue to Review
-    </Button>
-  </Section>
-</Connect(ConnectedWaypoint)>
+    Review and Download
+  </h3>
+  <p>
+    On the next page, you will be able to review and download a copy of your APD as the first step in submitting a completed APD to CMS.
+  </p>
+  <Button
+    className="ds-u-margin-top--2"
+    component="button"
+    onClick={[Function]}
+    size="big"
+    type="button"
+    variation="primary"
+  >
+    Continue to Review
+  </Button>
+</Section>
 `;

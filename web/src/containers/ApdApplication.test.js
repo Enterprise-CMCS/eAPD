@@ -80,24 +80,18 @@ describe('apd (application) component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
-      apdCreated: 'creation date',
-      apdName: 'florp',
       apdSelected: true,
       isAdmin: false,
       place: 'place',
-      year: 'dinkus-durkus'
     });
 
     state.apd.data.id = false;
     delete state.apd.data.years;
 
     expect(mapStateToProps(state)).toEqual({
-      apdCreated: 'creation date',
-      apdName: 'florp',
       apdSelected: false,
       isAdmin: false,
       place: 'place',
-      year: ''
     });
   });
 

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import ApdHeader from './ApdHeader';
+import { plain as ApdHeader } from './ApdHeader';
 
 describe('APD header', () => {
   it('renders correctly', () => {

@@ -6,7 +6,7 @@ instruction:
     only when their costs and roles are the same. Do not include contract
     personnel in this section; account for them under Private Contractor Costs.
   helpText: >-
-    For example: If two people work as Analyst Class 1 on this activity 75 
+    For example: If two people work as Analyst Class 1 on this activity 75
     percent of the time, record one entry of 1.5 FTE. If they are in different roles,
     record two separate entries of 0.75 FTE.
 noDataNotice: There are no personnel resources for this activity.
@@ -19,4 +19,4 @@ labels:
   costAmt: Cost with Benefits
   costPerc: Number of FTEs
 removeLabel: Remove personnel
-addButtonText: Add another personnel
+addButtonText: Add another state staff

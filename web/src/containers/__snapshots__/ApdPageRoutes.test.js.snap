@@ -1,69 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`APD page router renders as expected 1`] = `
-<Component>
-  <Component
-    path="this is where the page is/activity/:activityIndex"
+exports[`<ApdPageRoutes /> component renders as expected 1`] = `
+<Switch>
+  <Route
+    path="/your/current/path/activity/:activityIndex"
   >
     <Connect(EntryPage) />
-  </Component>
-  <Component
-    path="this is where the page is"
+  </Route>
+  <Route
+    path="/your/current/path"
   >
-    <ApdHeader
-      apdName=""
-    />
-    <Component
+    <Connect(ApdHeader) />
+    <Route
       exact={true}
-      path="this is where the page is"
+      path="/your/current/path"
+    >
+      <Redirect
+        to="/your/current/path/state-profile"
+      />
+    </Route>
+    <Route
+      path="/your/current/path/state-profile"
     >
       <ApdStateProfile />
-    </Component>
-    <Component
-      path="this is where the page is/state-profile"
-    >
-      <ApdStateProfile />
-    </Component>
-    <Component
-      path="this is where the page is/program-summary"
+    </Route>
+    <Route
+      path="/your/current/path/program-summary"
     >
       <Connect(ApdSummary) />
-    </Component>
-    <Component
-      path="this is where the page is/previous-activities"
+    </Route>
+    <Route
+      path="/your/current/path/previous-activities"
     >
       <Connect(PreviousActivities) />
-    </Component>
-    <Component
-      path="this is where the page is/activities"
+    </Route>
+    <Route
+      path="/your/current/path/activities"
     >
       <Connect(All) />
-    </Component>
-    <Component
-      path="this is where the page is/schedule-summary"
+    </Route>
+    <Route
+      path="/your/current/path/schedule-summary"
     >
       <Connect(ScheduleSummary) />
-    </Component>
-    <Component
-      path="this is where the page is/proposed-budget"
+    </Route>
+    <Route
+      path="/your/current/path/proposed-budget"
     >
       <ProposedBudget />
-    </Component>
-    <Component
-      path="this is where the page is/assurances-and-compliance"
+    </Route>
+    <Route
+      path="/your/current/path/assurances-and-compliance"
     >
       <Connect(AssurancesAndCompliance) />
-    </Component>
-    <Component
-      path="this is where the page is/executive-summary"
+    </Route>
+    <Route
+      path="/your/current/path/executive-summary"
     >
       <Connect(ExecutiveSummary) />
-    </Component>
-    <Component
-      path="this is where the page is/export"
+    </Route>
+    <Route
+      path="/your/current/path/export"
     >
       <Connect(ExportAndSubmit) />
-    </Component>
-  </Component>
-</Component>
+    </Route>
+  </Route>
+</Switch>
 `;

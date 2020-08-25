@@ -4,6 +4,7 @@ exports[`App component renders correctly 1`] = `
 <withRouter(Wrapper)>
   <Connect(AriaAnnounce) />
   <Broadcast />
+  <Connect(AutoScrollToElement) />
   <Connect(AuthChecker)>
     <Routes />
   </Connect(AuthChecker)>

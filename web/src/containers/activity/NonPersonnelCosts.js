@@ -35,7 +35,7 @@ const NonPersonnelCosts = ({
       <Instruction source="activities.expenses.instruction" />
       <FormAndReviewList
         activityIndex={activityIndex}
-        addButtonText="Add another non-personnel cost"
+        addButtonText={t('activities.expenses.addButtonText')}
         list={expenses}
         collapsed={NonPersonnelCostReview}
         expanded={NonPersonnelCostForm}

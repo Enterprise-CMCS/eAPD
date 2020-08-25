@@ -30,7 +30,7 @@ import { ARIA_ANNOUNCE_CHANGE } from '../aria';
 import { UPDATE_BUDGET } from '../budget';
 import axios from '../../util/api';
 import regulations from '../../util/regulations';
-import { EDIT_APD } from '../editApd/symbols';
+import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios);
@@ -69,6 +69,7 @@ describe('application-level actions', () => {
         { type: CREATE_APD_SUCCESS, data: newapd },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD, apd },
+        { type: APD_ACTIVITIES_CHANGE, activities: [] },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: '/apd' },
         {
@@ -299,14 +300,23 @@ describe('application-level actions', () => {
 
   describe('select an existing API', () => {
     it('redirects to provided route and saves the APD ID to local storage', async () => {
+      const activities = [
+        { name: 'Objectives and key results' },
+        { name: 'FFP and budget' }
+      ];
       const apd = {
+        activities,
         id: 'apd-id',
         selected: 'apd goes here',
         federalCitations: { already: 'exists' }
       };
       fetchMock.onGet('/apds/apd-id').reply(200, apd);
 
-      const state = { apd: { byId: { apdID: 'hello there' } } };
+      const state = {
+        apd: {
+          byId: { apdID: 'hello there' }
+        }
+      };
       const store = mockStore(state);
       const testRoute = '/test';
 
@@ -316,6 +326,7 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD, apd },
+        { type: APD_ACTIVITIES_CHANGE, activities },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
@@ -340,14 +351,23 @@ describe('application-level actions', () => {
     });
 
     it('does the same, but queues a save if the federal citations is initially blank', async () => {
+      const activities = [
+        { name: 'Objectives and key results' },
+        { name: 'FFP and budget' }
+      ];
       const apd = {
+        activities,
         id: 'apd-id',
         selected: 'apd goes here',
         federalCitations: {}
       };
       fetchMock.onGet('/apds/apd-id').reply(200, apd);
 
-      const state = { apd: { byId: { apdID: 'hello there' } } };
+      const state = {
+        apd: {
+          byId: { apdID: 'hello there' }
+        }
+      };
       const store = mockStore(state);
       const testRoute = '/test';
 
@@ -357,6 +377,7 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD, apd },
+        { type: APD_ACTIVITIES_CHANGE, activities },
         { type: EDIT_APD, path: '/federalCitations', value: regulations },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: testRoute },

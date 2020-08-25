@@ -15,7 +15,7 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
   />
   <FormAndReviewList
     activityIndex={72}
-    addButtonText="Add another personnel"
+    addButtonText="Add another state staff"
     allowDeleteAll={false}
     className={null}
     collapsed={[Function]}

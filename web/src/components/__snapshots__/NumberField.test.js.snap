@@ -558,7 +558,7 @@ exports[`NumberField component passes back numeric values on change, but still r
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
-            pattern="[0-9.-]*"
+            pattern="[0-9.,-]*"
             type="text"
             value="123,456"
           />
@@ -653,7 +653,7 @@ exports[`NumberField component passes back rounded numeric values on change, but
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
-            pattern="[0-9.-]*"
+            pattern="[0-9.,-]*"
             type="text"
             value="123,456.78"
           />

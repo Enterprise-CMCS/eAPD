@@ -87,7 +87,7 @@ describe('JSON patch reducer', () => {
                 }
               ],
               incentivePayments: {},
-              keyPersonnel: [{ costs: {} }],
+              keyPersonnel: [{ costs: {}, fte: {} }],
               years: []
             }
           },
@@ -135,7 +135,12 @@ describe('JSON patch reducer', () => {
                 }
               ],
               incentivePayments: { '2019': 'this gets deleted' },
-              keyPersonnel: [{ costs: { '2019': 'this gets deleted' } }],
+              keyPersonnel: [
+                {
+                  costs: { '2019': 'this gets deleted' },
+                  fte: { '2019': 'this gets deleted' }
+                }
+              ],
               years: ['2019']
             }
           },

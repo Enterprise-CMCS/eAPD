@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Waypoint from './ConnectedWaypoint';
 import {
   addYear,
   removeYear,
@@ -46,58 +45,56 @@ const ApdSummary = ({
   };
 
   return (
-    <Waypoint id="apd-summary">
-      <Section id="apd-summary" resource="apd">
-        <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
-        <Instruction source="apd.overview.instruction" />
+    <Section resource="apd">
+      <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
+      <Instruction source="apd.overview.instruction" />
 
-        {yearOptions.map(option => (
-          <Choice
-            key={option}
-            checked={years.includes(option)}
-            name={`apd year ${option}`}
-            onChange={handleYears}
-            type="checkbox"
-            value={option}
-          >
-            {option}
-          </Choice>
-        ))}
+      {yearOptions.map(option => (
+        <Choice
+          key={option}
+          checked={years.includes(option)}
+          name={`apd year ${option}`}
+          onChange={handleYears}
+          type="checkbox"
+          value={option}
+        >
+          {option}
+        </Choice>
+      ))}
 
-        <div className="ds-u-margin-y--3">
-          <Instruction source="apd.introduction.instruction" />
-          <RichText
-            content={programOverview}
-            onSync={syncRichText(setOverview)}
-            editorClassName="rte-textarea-l"
-          />
-        </div>
-        <div className="ds-u-margin-bottom--3">
-          <Instruction source="apd.hit.instruction" />
-          <RichText
-            content={narrativeHIT}
-            onSync={syncRichText(setHIT)}
-            editorClassName="rte-textarea-l"
-          />
-        </div>
-        <div className="ds-u-margin-bottom--3">
-          <Instruction source="apd.hie.instruction" />
-          <RichText
-            content={narrativeHIE}
-            onSync={syncRichText(setHIE)}
-            editorClassName="rte-textarea-l"
-          />
-        </div>
-        <div>
-          <Instruction source="apd.mmis.instruction" />
-          <RichText
-            content={narrativeMMIS}
-            onSync={syncRichText(setMMIS)}
-            editorClassName="rte-textarea-l"
-          />
-        </div>
-      </Section>
-    </Waypoint>
+      <div className="ds-u-margin-y--3">
+        <Instruction source="apd.introduction.instruction" />
+        <RichText
+          content={programOverview}
+          onSync={syncRichText(setOverview)}
+          editorClassName="rte-textarea-l"
+        />
+      </div>
+      <div className="ds-u-margin-bottom--3">
+        <Instruction source="apd.hit.instruction" />
+        <RichText
+          content={narrativeHIT}
+          onSync={syncRichText(setHIT)}
+          editorClassName="rte-textarea-l"
+        />
+      </div>
+      <div className="ds-u-margin-bottom--3">
+        <Instruction source="apd.hie.instruction" />
+        <RichText
+          content={narrativeHIE}
+          onSync={syncRichText(setHIE)}
+          editorClassName="rte-textarea-l"
+        />
+      </div>
+      <div>
+        <Instruction source="apd.mmis.instruction" />
+        <RichText
+          content={narrativeMMIS}
+          onSync={syncRichText(setMMIS)}
+          editorClassName="rte-textarea-l"
+        />
+      </div>
+    </Section>
   );
 };
 

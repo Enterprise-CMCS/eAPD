@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`activity router page renders correctly 1`] = `
-<Component>
-  <Component
-    path="this is where the page is/okrs"
+exports[`<ActivityRoutes /> component renders as expected 1`] = `
+<Switch>
+  <Route
+    path="/your/current/path/okrs"
   >
     <Section
       id={null}
@@ -16,9 +16,9 @@ exports[`activity router page renders correctly 1`] = `
         activityIndex={3}
       />
     </Section>
-  </Component>
-  <Component
-    path="this is where the page is/state-costs"
+  </Route>
+  <Route
+    path="/your/current/path/state-costs"
   >
     <Section
       id={null}
@@ -28,9 +28,9 @@ exports[`activity router page renders correctly 1`] = `
         activityIndex={3}
       />
     </Section>
-  </Component>
-  <Component
-    path="this is where the page is/contractor-costs"
+  </Route>
+  <Route
+    path="/your/current/path/contractor-costs"
   >
     <Section
       id={null}
@@ -40,9 +40,9 @@ exports[`activity router page renders correctly 1`] = `
         activityIndex={3}
       />
     </Section>
-  </Component>
-  <Component
-    path="this is where the page is/cost-allocation"
+  </Route>
+  <Route
+    path="/your/current/path/cost-allocation"
   >
     <Section
       id={null}
@@ -52,9 +52,9 @@ exports[`activity router page renders correctly 1`] = `
         activityIndex={3}
       />
     </Section>
-  </Component>
-  <Component
-    path="this is where the page is/ffp"
+  </Route>
+  <Route
+    path="/your/current/path/ffp"
   >
     <Section
       id={null}
@@ -64,8 +64,8 @@ exports[`activity router page renders correctly 1`] = `
         activityIndex={3}
       />
     </Section>
-  </Component>
-  <Component>
+  </Route>
+  <Route>
     <Section
       id={null}
       resource={null}
@@ -77,6 +77,6 @@ exports[`activity router page renders correctly 1`] = `
         activityIndex={3}
       />
     </Section>
-  </Component>
-</Component>
+  </Route>
+</Switch>
 `;

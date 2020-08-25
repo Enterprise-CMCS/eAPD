@@ -117,6 +117,11 @@ Array [
     "path": "/keyPersonnel/0/costs/2019",
     "value": 0,
   },
+  Object {
+    "op": "add",
+    "path": "/keyPersonnel/0/fte/2019",
+    "value": 0,
+  },
 ]
 `;
 
@@ -169,6 +174,10 @@ Array [
   Object {
     "op": "remove",
     "path": "/keyPersonnel/0/costs/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/keyPersonnel/0/fte/2019",
   },
 ]
 `;
