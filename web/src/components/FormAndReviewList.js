@@ -1,4 +1,4 @@
-import { Alert, Button } from '@cmsgov/design-system-core';
+import { Alert, Button } from '@cmsgov/design-system';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 

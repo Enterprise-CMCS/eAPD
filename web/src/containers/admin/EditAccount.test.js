@@ -85,8 +85,7 @@ describe('admin page > edit account', () => {
         editAccount={sinon.spy()}
       />
     );
-
-    component.find('Select').simulate('change', { target: { value: 1 } });
+    component.find('Dropdown').simulate('change', { target: { value: 1 } });
 
     const getPropsFor = fieldName =>
       component.findWhere(c => c.prop('name') === fieldName).props();
@@ -134,7 +133,7 @@ describe('admin page > edit account', () => {
       />
     );
 
-    component.find('Select').simulate('change', { target: { value: 2 } });
+    component.find('Dropdown').simulate('change', { target: { value: 2 } });
 
     const getPropsFor = fieldName =>
       component.findWhere(c => c.prop('name') === fieldName).props();
@@ -181,7 +180,7 @@ describe('admin page > edit account', () => {
       />
     );
 
-    component.find('Select').simulate('change', { target: { value: 2 } });
+    component.find('Dropdown').simulate('change', { target: { value: 2 } });
 
     const change = (name, value) =>
       component
