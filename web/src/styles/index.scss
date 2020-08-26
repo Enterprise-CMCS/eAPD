@@ -1,10 +1,6 @@
-@import '@cmsgov/design-system-layout/dist/index.css';
-@import '@cmsgov/design-system-core/dist/index.css';
-
-@import '/scss/overrides';
 @import '/scss/variables';
-@import '@cmsgov/design-system-support/src/settings/index';
-
+@import '@cmsgov/design-system/dist/scss/index';
+@import '/scss/overrides';
 @import '/scss/activity';
 @import '/scss/admin';
 @import '/scss/card';

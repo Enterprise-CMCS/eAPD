@@ -1,9 +1,9 @@
 import {
   Button,
   FormLabel,
-  Select,
+  Dropdown,
   TextField
-} from '@cmsgov/design-system-core';
+} from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState, useMemo } from 'react';
 import { connect } from 'react-redux';
@@ -121,9 +121,11 @@ const EditAccount = ({
           <FormLabel component="label" fieldId="modify_account_state">
             State
           </FormLabel>
-          <Select
+          <Dropdown
             id="modify_account_state"
+            label=""
             name="state"
+            options={[]}
             size="medium"
             value={state}
             onChange={changeUserState}
@@ -134,14 +136,16 @@ const EditAccount = ({
                 {s.name}
               </option>
             ))}
-          </Select>
+          </Dropdown>
 
           <FormLabel component="label" fieldId="modify_account_role">
             Authorization role
           </FormLabel>
-          <Select
+          <Dropdown
             id="modify_account_role"
+            label=""
             name="role"
+            options={[]}
             size="medium"
             value={role || ''}
             onChange={changeUserRole}
@@ -153,7 +157,7 @@ const EditAccount = ({
                 {toSentenceCase(r.name)}
               </option>
             ))}
-          </Select>
+          </Dropdown>
 
           <div className="ds-l-row ds-u-padding-x--2">
             <TextField
@@ -213,9 +217,11 @@ const EditAccount = ({
         <FormLabel component="label" fieldId="modify_account_user">
           Account to edit
         </FormLabel>
-        <Select
+        <Dropdown
           id="modify_account_user"
+          label=""
           name="userID"
+          options={[]}
           value={`${userID}`}
           onChange={handlePickAccount}
         >
@@ -225,7 +231,7 @@ const EditAccount = ({
               {`${u.name ? `${u.name} - ` : ''}${u.username}`}
             </option>
           ))}
-        </Select>
+        </Dropdown>
 
         {getForm()}
       </CardForm>

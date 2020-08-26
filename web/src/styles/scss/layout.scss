@@ -1,5 +1,3 @@
-@import '@cmsgov/design-system-support/src/settings/index';
-
 // needed for sticky footer
 .site {
   display: flex;
@@ -25,7 +23,7 @@
     margin-left: 244px; // sidebar width plus $spacer-4
     /*
     The state icon above the menu will push up under the header if the right side of the page is too short.
-    So we need a min-height for site-main to be at least the height of the menu (plus a little). 
+    So we need a min-height for site-main to be at least the height of the menu (plus a little).
     Note: "Private Contractor costs" is a particularly short page where the effect can be seen.
     Since there isn't an easy way to do relative heights of "unrelated" elements in CSS, just use a constant.
     Remember to adjust it when adding new menu items that change the menu size.

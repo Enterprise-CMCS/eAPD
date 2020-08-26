@@ -1,4 +1,4 @@
-import { TextField } from '@cmsgov/design-system-core';
+import { TextField } from '@cmsgov/design-system';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 

@@ -1,4 +1,4 @@
-import { FormLabel, TextField } from '@cmsgov/design-system-core';
+import { FormLabel, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';

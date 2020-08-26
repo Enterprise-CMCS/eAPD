@@ -1,4 +1,4 @@
-import { Button } from '@cmsgov/design-system-core';
+import { Button } from '@cmsgov/design-system';
 import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
