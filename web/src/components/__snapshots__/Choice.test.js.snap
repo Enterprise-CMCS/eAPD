@@ -13,7 +13,6 @@ exports[`Choice wrapper component renders correctly with checkedChildren when ch
         </p>
       </div>
     }
-    inputPlacement="left"
     name="radio-with-children"
     size="small"
     type="radio"
@@ -36,7 +35,6 @@ exports[`Choice wrapper component renders correctly with checkedChildren when un
         </p>
       </div>
     }
-    inputPlacement="left"
     name="radio-with-children"
     size="small"
     type="radio"
@@ -50,7 +48,6 @@ exports[`Choice wrapper component renders correctly with checkedChildren when un
 exports[`Choice wrapper component renders correctly without checkedChildren 1`] = `
 <div>
   <Choice
-    inputPlacement="left"
     name="radio-no-children"
     size="small"
     type="radio"

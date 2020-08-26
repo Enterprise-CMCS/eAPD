@@ -1,4 +1,4 @@
-import { ChoiceList, TextField } from '@cmsgov/design-system-core';
+import { ChoiceList, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
@@ -34,6 +34,7 @@ const NameAndFundingSourceForm = ({
       <ChoiceList
         label="Program type"
         name="program-type"
+        type="checkbox"
         choices={[
           { checked: fundingSource === 'HIT', label: 'HIT', value: 'HIT' },
           { checked: fundingSource === 'HIE', label: 'HIE', value: 'HIE' },

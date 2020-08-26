@@ -1,4 +1,4 @@
-import { Button, Review } from '@cmsgov/design-system-core';
+import { Button, Review } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { useMemo, useRef, Fragment } from 'react';
 import { connect } from 'react-redux';

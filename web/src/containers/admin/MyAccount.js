@@ -1,4 +1,4 @@
-import { Button, TextField } from '@cmsgov/design-system-core';
+import { Button, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';

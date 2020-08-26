@@ -21,9 +21,7 @@ describe('<Nav /> component', () => {
           ]
         }
       ],
-      location: {
-        pathname: '/apd'
-      }
+      pathname: '/apd'
     };
     const component = mount(
       <Router>

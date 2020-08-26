@@ -1,4 +1,4 @@
-import { FormLabel, Select } from '@cmsgov/design-system-core';
+import { FormLabel, Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
@@ -42,10 +42,12 @@ const NonPersonnelCostForm = ({
     <Fragment>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
       <FormLabel fieldId={selectID}>Category</FormLabel>
-      <Select
+      <Dropdown
         autoFocus
         id={selectID}
+        label=""
         name="category"
+        options={[]}
         value={category}
         onChange={editCategory}
       >
@@ -61,7 +63,7 @@ const NonPersonnelCostForm = ({
         <option value="Miscellaneous expenses for the project">
           Miscellaneous expenses for the project
         </option>
-      </Select>
+      </Dropdown>
       <TextArea
         label="Description"
         rows={5}
