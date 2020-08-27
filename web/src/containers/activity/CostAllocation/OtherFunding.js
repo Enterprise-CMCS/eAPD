@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 
 import Instruction from 'components/Instruction';
 
-import { setCostAllocationFFPOtherFunding } from 'actions/editActivity';
+import {
+  setCostAllocationFFPOtherFunding,
+  setCostAllocationOtherFunding
+} from 'actions/editActivity';
+
 import DollarField from 'components/DollarField';
 import Dollars from 'components/Dollars';
 import {
@@ -30,7 +34,7 @@ const OtherFunding = ({
   const setOther = year => e => {
     setOtherFunding(activityIndex, year, e.target.value);
   };
-  const syncOtherFunding = html => setOtherFunding(activityIndex, html);
+  const syncOtherFunding = year => html => setOtherFunding(activityIndex, year, html);
 
   const { years } = costSummary;
 
@@ -48,8 +52,9 @@ const OtherFunding = ({
               }}
             />
             <RichText
+              // content={activity.costAllocationNarrative[ffy].otherSources}
               content={otherSources}
-              onSync={syncOtherFunding}
+              onSync={syncOtherFunding(ffy)}
               editorClassName="rte-textarea-l"
             />
           </div>
@@ -125,7 +130,8 @@ const mapStateToProps = (
 };
 
 const mapDispatchToProps = {
-  setOtherFunding: setCostAllocationFFPOtherFunding
+  setOtherFunding: setCostAllocationFFPOtherFunding,
+  syncOtherFunding: setCostAllocationOtherFunding
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OtherFunding);
