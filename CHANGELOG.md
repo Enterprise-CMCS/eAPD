@@ -7,9 +7,11 @@ Anticipated release: August 10, 2020
 - Upgrade to @cmsgov/design-system v2.0.0, remove focus styles ([#2412])
 - Update button text to match verbiage on page ([#2367])
 - Update Key Personnel and Program Management page instructions and help text ([#2325])
+- Activity section Previous & Continue buttons/arrow iconography ([#2213])
 
 #### 🐛 Bugs fixed
 
+- Content in the export view needs to match the builder ([#2387])
 - Key personnel FTE not being saved for 2022 ([#2401])
 - Arrows in the side nav should be consistent ([#2188])
 - Nav bar does not indicate correct location with launch of different APD ([#2223])
@@ -23,8 +25,9 @@ Anticipated release: August 10, 2020
 
 # Previous releases
 
-See our [release history](https://github.com/18F/cms-hitech-apd/releases)
+See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2387]: https://github.com/CMSgov/eAPD/issues/2387
 [#2412]: https://github.com/CMSgov/eAPD/issues/2412
 [#2335]: https://github.com/CMSgov/eAPD/issues/2335
 [#2367]: https://github.com/CMSgov/eAPD/issues/2367
@@ -35,3 +38,4 @@ See our [release history](https://github.com/18F/cms-hitech-apd/releases)
 [#2410]: https://github.com/CMSgov/eAPD/issues/2410
 [#2359]: https://github.com/CMSgov/eAPD/issues/2359
 [#2415]: https://github.com/CMSgov/eAPD/issues/2415
+[#2213]: https://github.com/cmsgov/eapd/issues/2213
