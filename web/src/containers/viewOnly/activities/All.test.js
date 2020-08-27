@@ -21,7 +21,7 @@ describe('viewOnly <Activities />', () => {
 
   test('should show the activity list', () => {
     const { getByText } = renderUtils;
-    const listHeader = getByText(/Planned Activities/i);
+    const listHeader = getByText(/Program Activities/i);
     const { getByText: getByTextWithin } = within(listHeader.nextSibling);
 
     activities.forEach((activity, index) => {
