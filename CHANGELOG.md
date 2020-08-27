@@ -25,15 +25,10 @@ Anticipated release: August 10, 2020
 
 # Previous releases
 
-<<<<<<< HEAD
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#2387]: https://github.com/CMSgov/eAPD/issues/2387
-=======
-See our [release history](https://github.com/18F/cms-hitech-apd/releases)
-
 [#2412]: https://github.com/CMSgov/eAPD/issues/2412
->>>>>>> master
 [#2335]: https://github.com/CMSgov/eAPD/issues/2335
 [#2367]: https://github.com/CMSgov/eAPD/issues/2367
 [#2325]: https://github.com/CMSgov/eAPD/issues/2325
