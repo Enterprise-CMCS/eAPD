@@ -18,7 +18,7 @@ const ProposedBudget = () => (
     <h3>Quarterly Federal Share</h3>
     <QuarterlyBudgetSummary />
 
-    <h3>Incentive Payments</h3>
+    <h3>Estimated Quarterly Incentive Payments</h3>
     <IncentivePayments isViewOnly />
   </div>
 );
