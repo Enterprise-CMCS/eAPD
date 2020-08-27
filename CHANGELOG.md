@@ -11,6 +11,7 @@ Anticipated release: August 10, 2020
 
 #### 🐛 Bugs fixed
 
+- Content in the export view needs to match the builder ([#2387])
 - Key personnel FTE not being saved for 2022 ([#2401])
 - Arrows in the side nav should be consistent ([#2188])
 - Nav bar does not indicate correct location with launch of different APD ([#2223])
@@ -24,8 +25,9 @@ Anticipated release: August 10, 2020
 
 # Previous releases
 
-See our [release history](https://github.com/18F/cms-hitech-apd/releases)
+See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2387]: https://github.com/CMSgov/eAPD/issues/2387
 [#2412]: https://github.com/CMSgov/eAPD/issues/2412
 [#2335]: https://github.com/CMSgov/eAPD/issues/2335
 [#2367]: https://github.com/CMSgov/eAPD/issues/2367

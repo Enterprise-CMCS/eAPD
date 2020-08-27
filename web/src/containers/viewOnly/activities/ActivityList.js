@@ -14,7 +14,7 @@ const ActivityList = ({ activities }) => {
 
   return (
     <Fragment>
-      <h2>List of Planned Activities</h2>
+      <h2>{activities.length} Program Activities</h2>
       <ul className="ds-c-list--bare">
         {activities.map((activity, index) =>
           buildActivityListItem(activity, index)
