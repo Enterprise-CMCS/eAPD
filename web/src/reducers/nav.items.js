@@ -122,11 +122,11 @@ const buildActivitySection = i => [
     url: `/apd/activity/${i}/contractor-costs`
   },
   {
-    label: 'Cost allocation',
+    label: 'Cost allocation and other funding',
     url: `/apd/activity/${i}/cost-allocation`
   },
   {
-    label: 'FFP and budget',
+    label: 'Budget and FFP',
     url: `/apd/activity/${i}/ffp`
   }
 ];

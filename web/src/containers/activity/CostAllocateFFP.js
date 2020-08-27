@@ -122,7 +122,7 @@ const CostAllocateFFP = ({
       {Object.keys(years).map(ffy => (
         <Fragment key={ffy}>
           <h3 className="subsection--title ds-h3">
-            Cost Allocation and Budget for FFY {ffy}
+            Budget for FFY {ffy}
           </h3>
 
           <table
@@ -174,23 +174,6 @@ const CostAllocateFFP = ({
 
           {!isViewOnly && (
             <Fragment>
-              <div className="data-entry-box ds-u-margin-bottom--5">
-                <Instruction
-                  source="activities.costAllocate.ffp.otherFundingInstruction"
-                  headingDisplay={{
-                    level: 'p',
-                    className: 'ds-h4'
-                  }}
-                />
-                <DollarField
-                  name={`ffy-${ffy}`}
-                  label={`FFY ${ffy}`}
-                  labelClassName="sr-only"
-                  value={costAllocation[ffy].other || '0'}
-                  onChange={setOther(ffy)}
-                />
-              </div>
-
               <table className="budget-table activity-budget-table">
                 <tbody>
                   <tr className="budget-table--subtotal budget-table--row__header">
