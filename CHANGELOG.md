@@ -7,6 +7,8 @@ Anticipated release: August 10, 2020
 - Upgrade to @cmsgov/design-system v2.0.0, remove focus styles ([#2412])
 - Update button text to match verbiage on page ([#2367])
 - Update Key Personnel and Program Management page instructions and help text ([#2325])
+- Change "Objectives and key results" Nav Bar title to match contents of page ([#2368])
+- Activity section Previous & Continue buttons/arrow iconography ([#2213])
 
 #### 🐛 Bugs fixed
 
@@ -37,3 +39,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2410]: https://github.com/CMSgov/eAPD/issues/2410
 [#2359]: https://github.com/CMSgov/eAPD/issues/2359
 [#2415]: https://github.com/CMSgov/eAPD/issues/2415
+[#2368]: https://github.com/CMSgov/eAPD/issues/2368
+[#2213]: https://github.com/cmsgov/eapd/issues/2213
