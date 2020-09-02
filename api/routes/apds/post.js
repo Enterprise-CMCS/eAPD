@@ -3,21 +3,9 @@ const Ajv = require('ajv');
 const logger = require('../../logger')('apds route post');
 const { createAPD: ga, getStateProfile: gs } = require('../../db');
 const { can } = require('../../middleware');
+const { validateApd } = require('../../schemas');
 
 const getNewApd = require('./post.data');
-
-const apdSchema = require('../../schemas/apd.json');
-
-const ajv = new Ajv({
-  allErrors: true,
-  jsonPointers: true,
-  removeAdditional: true
-});
-
-const validatorFunction = ajv.compile({
-  ...apdSchema,
-  additionalProperties: false
-});
 
 module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
   logger.silly('setting up POST /apds/ route');
@@ -48,12 +36,12 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         delete apd.stateProfile.medicaidOffice.director;
       }
 
-      const valid = validatorFunction(apd);
+      const valid = validateApd(apd);
       if (!valid) {
         // This is just here to protect us from the case where the APD schema changed but the
         // APD creation function was not also updated
         logger.error(req, 'Newly-created APD fails validation');
-        logger.error(req, validatorFunction.errors);
+        logger.error(req, validateApd.errors);
         return res.status(500).end();
       }
 
