@@ -1,5 +1,3 @@
-const Ajv = require('ajv');
-
 const logger = require('../../logger')('apds route post');
 const { createAPD: ga, getStateProfile: gs } = require('../../db');
 const { can } = require('../../middleware');

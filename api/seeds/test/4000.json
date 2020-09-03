@@ -1519,7 +1519,6 @@
   },
   "previousActivitySummary": "",
   "programOverview": "",
-  "state": "mn",
   "stateProfile": {
     "medicaidDirector": {
       "name": "",
@@ -1534,7 +1533,5 @@
       "zip": ""
     }
   },
-  "status": "draft",
-  "updated": "1910-06-18T09:00:00.000Z",
   "years": []
 }
