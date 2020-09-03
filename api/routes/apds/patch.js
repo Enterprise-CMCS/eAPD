@@ -1,4 +1,3 @@
-const Ajv = require('ajv');
 const { apply_patch: applyPatch } = require('jsonpatch');
 const jsonpointer = require('jsonpointer');
 
@@ -17,7 +16,7 @@ module.exports = (
     getAPDByID = ga,
     patchObject = applyPatch,
     updateAPDDocument = ua,
-    validateApdFn = validateApd
+    validate = validateApd
   } = {}
 ) => {
   logger.silly('setting up PATCH /apds/:id route');
@@ -62,13 +61,13 @@ module.exports = (
           return res.status(400).end();
         }
 
-        const valid = validateApdFn(updatedDocument);
+        const valid = validate(updatedDocument);
         if (!valid) {
           logger.error(
             req,
             // Rather than send back the full error from the validator, pull out just the relevant bits
             // and fetch the value that's causing the error.
-            validateApdFn.errors.map(({ dataPath, message }) => ({
+            validate.errors.map(({ dataPath, message }) => ({
               dataPath,
               message,
               value: jsonpointer.get(updatedDocument, dataPath)
@@ -76,7 +75,7 @@ module.exports = (
           );
           return res
             .status(400)
-            .send(validateApdFn.errors.map(v => ({ path: v.dataPath })))
+            .send(validate.errors.map(v => ({ path: v.dataPath })))
             .end();
         }
 
