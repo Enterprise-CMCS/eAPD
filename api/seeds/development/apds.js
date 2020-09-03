@@ -1,5 +1,5 @@
 const logger = require('../../logger')('seeds');
-const { validApd } = require('../../schemas');
+const { validateApd } = require('../../schemas');
 
 const apd = {
   status: 'draft',
@@ -1100,9 +1100,9 @@ const apd = {
 const seed = async knex => {
   const { state_id } = await knex('users').first('state_id'); // eslint-disable-line camelcase
 
-  if (!validApd(apd.document)) {
+  if (!validateApd(apd.document)) {
     logger.warn('apd document is not valid');
-    logger.warn(validApd.errors);
+    logger.warn(validateApd.errors);
   }
 
   await knex('apds').insert({
