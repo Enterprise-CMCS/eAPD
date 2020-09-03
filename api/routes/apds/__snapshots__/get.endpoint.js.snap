@@ -1808,20 +1808,20 @@ exports[`APD endpoint Get specific APD | GET /apds/:id with authenticated as a u
 exports[`APD endpoint List APDs endpoint | GET /apds when authenticated as a user with a state 1`] = `
 Array [
   Object {
+    "created": "1936-08-03T00:00:00.000Z",
+    "id": 4002,
+    "name": "MN-1936-08-03-HITECH-APD",
+    "status": "not draft",
+    "updated": "1947-04-10T00:00:00.000Z",
+    "years": Array [],
+  },
+  Object {
     "created": "1921-07-11T07:00:00.000Z",
     "id": 4000,
     "name": "MN-1921-07-11-HITECH-APD",
     "status": "draft",
     "updated": "1910-06-18T09:00:00.000Z",
     "years": Array [],
-  },
-  Object {
-    "created": "1936-08-03T00:00:00.000Z",
-    "id": 4002,
-    "name": "MN-1936-08-03-HITECH-APD",
-    "status": "not draft",
-    "updated": "1947-04-10T00:00:00.000Z",
-    "years": null,
   },
 ]
 `;
