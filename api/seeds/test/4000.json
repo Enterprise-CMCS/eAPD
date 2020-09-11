@@ -71,7 +71,22 @@
       },
       "costAllocationNarrative": {
         "methodology": "<p>No cost allocation is necessary for this activity.</p>\n",
-        "otherSources": "<p>No other funding is provided for this activity.</p>\n"
+        "otherSources": [
+          {
+            "year": "2019",
+            "content": "<p>No other funding is provided for this activity for FFY 2019.</p>\n"
+          },
+          {
+            "year": "2020",
+            "content": "<p>No other funding is provided for this activity for FFY 2020.</p>\n"
+          }
+        ],
+        "2019": {
+          "otherSources": "<p>No other funding is provided for this activity for FFY 2019.</p>\n"
+        },
+        "2020": {
+          "otherSources": "<p>No other funding is provided for this activity for FFY 2020.</p>\n"
+        }
       },
       "description": "<p><strong><ins>III.A.1: Modifications to the State Level Repository</ins></strong></p>\n<p>Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program. The modifications of the SLR for CMS program rule changes and guidance changes (Stage 3, IPPS, and OPPS) will require extensive development and implementation efforts and is essential to the effective administration of the Medicaid EHR Incentive Program. Modifications to the SLR are done in phases depending on how CMS rule changes occur. The implementation of the design elements will require provider onboarding activities to be initiated and completed including outreach and training for all program participants. The SLR will increase the efficiency with which Tycho Medicaid administers the program; allow for increased oversight and assure that the program is operated in accordance with the complex and evolving program rules and requirements.</p>\n<p></p>\n<p>Additionally, Tycho Medicaid is seeking funding to complete a security risk assessment for the State Level Repository to ensure the SLR meets the required system security standards for HIPAA, MARSe, NIST and other state and federal security requirements for information technology.</p>\n<p></p>\n<p><strong><ins>III.B.1 Administrative and Technical Support Consulting</ins></strong></p>\n<p>The DHSS is requesting funding to support activities under the Medicaid EHR Incentive Payment Program to provide technical assistance for statewide activities and implementations. Activities of this initiative will include support of the activities included in this IAPDU, SMPHU development, eCQM implementation, project management services, and assistance with the public health expansion modernization initiative.</p>\n",
       "expenses": [

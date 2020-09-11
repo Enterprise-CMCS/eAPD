@@ -1,13 +1,20 @@
 {
   "$id": "costAllocationNarrative.json",
   "type": "object",
-  "required": ["methodology", "otherSources"],
+  "required": ["methodology"],
   "properties": {
     "methodology": {
       "type": "string"
-    },
-    "otherSources": {
-      "type": "string"
     }
-  }
+  },
+  "patternProperties": {
+    "^[0-9]{4}$": {
+      "required": ["otherSources"],
+      "type": "object",
+      "properties": {
+        "otherSources": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
 }

@@ -4,14 +4,14 @@ const { validateApd } = require('../../schemas');
 
 const apdFiles = [
   '4000.json',
-  '4001.json',
-  '4002.json'
-]
+  // '4001.json',
+  // '4002.json'
+];
 
 tap.test('test APD seed documents', async t => {
   apdFiles.forEach(filename => {
     const document = require(`./${filename}`);
-    t.test(`document '${document.name}' in '${filename}'`, async t => {
+    t.test(`document '${document.name}' within '${filename}'`, async t => {
       t.true(validateApd(document), 'is valid, according to apd.json schema');
       t.false(validateApd.errors, 'has no reported errors');
 
