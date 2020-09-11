@@ -24,6 +24,7 @@ const defaults = {
 };
 
 dotenv.config();
+process.env = { ...defaults, ...process.env };
 
 // Don't require this until process.env is finished setting up, since that
 // defines how the logger works.
