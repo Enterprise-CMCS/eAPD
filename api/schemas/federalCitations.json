@@ -1,0 +1,27 @@
+{
+  "$id": "federalCitations.json",
+  "type": "object",
+  "required": [],
+  "patternProperties": {
+    "^.+$": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "checked", "explanation"],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "checked": {
+            "type": ["boolean", "string"],
+            "pattern": "^$"
+          },
+          "explanation": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,13 @@
+{
+  "$id": "costAllocationNarrative.json",
+  "type": "object",
+  "required": ["methodology", "otherSources"],
+  "properties": {
+    "methodology": {
+      "type": "string"
+    },
+    "otherSources": {
+      "type": "string"
+    }
+  }
+}
