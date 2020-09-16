@@ -17,6 +17,17 @@ hr.subsection-rule {
   }
 }
 
+.viewonly-activities {
+  .ds-c-review {
+    border-bottom: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .ds-c-review:last-of-type {
+    padding-bottom: 0 !important;
+  }
+}
+
 @media print {
   body {
     background-color: white;

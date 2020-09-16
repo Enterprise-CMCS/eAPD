@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import Dollars from '../../../components/Dollars';
 
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
+import ContractorResourceReview from '../../activity/ContractorResource/ContractorResourceReview';
 import { stateDateToDisplay } from '../../../util';
 
 const Activity = ({ activity, activityIndex }) => {
@@ -209,9 +210,15 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Private Contractor Costs
       </h3>
-      {activity.contractorResources.map((contractor, index) =>
-        buildContractor(contractor, index)
-      )}
+
+      <div className="viewonly-activities">
+        {activity.contractorResources.map((item, index) => (
+            <ContractorResourceReview
+              index={index}
+              item={item}
+            />
+        ))}
+      </div>
 
       <h3 className="viewonly-activity-header">
         <small>
