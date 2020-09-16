@@ -211,7 +211,7 @@ const Activity = ({ activity, activityIndex }) => {
         Private Contractor Costs
       </h3>
 
-      <div className="viewonly-activities">
+      <div className="viewonly-contractor-resources">
         {activity.contractorResources.map((item, index) => (
             <ContractorResourceReview
               index={index}
