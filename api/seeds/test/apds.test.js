@@ -4,8 +4,8 @@ const { validateApd } = require('../../schemas');
 
 const apdFiles = [
   '4000.json',
-  // '4001.json',
-  // '4002.json'
+  '4001.json',
+  '4002.json'
 ];
 
 tap.test('test APD seed documents', async t => {

@@ -33,7 +33,15 @@
         }
       ],
       "costAllocation": {},
-      "costAllocationNarrative": { "methodology": "", "otherSources": "asdf" },
+      "costAllocationNarrative": {
+        "methodology": "",
+        "2019": {
+          "otherSources": "none"
+        },
+        "2020": {
+          "otherSources": "none"
+        }
+      },
       "description": "",
       "expenses": [],
       "fundingSource": false,
