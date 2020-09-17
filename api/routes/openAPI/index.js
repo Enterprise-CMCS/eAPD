@@ -1,6 +1,5 @@
 const pkg = require('../../package.json');
 
-const auth = require('./auth');
 const apds = require('../apds/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
@@ -17,7 +16,6 @@ module.exports = {
   },
   paths: {
     ...apds,
-    ...auth,
     ...authActivities,
     ...authRoles,
     ...me,

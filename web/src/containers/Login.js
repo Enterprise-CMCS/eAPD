@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
-import { login } from '../actions/auth';
+import { login, loginOtp } from '../actions/auth';
 import CardForm from '../components/CardForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
+import LoginMFA from './LoginMFA';
 
 const Login = ({
   authenticated,
@@ -16,7 +17,9 @@ const Login = ({
   fetching,
   hasEverLoggedOn,
   location,
-  login: action
+  otpStage,
+  login: action,
+  loginOtp: otpAction
 }) => {
   const [showConsent, setShowConsent] = useState(true);
   const [username, setUsername] = useState('');
@@ -52,10 +55,25 @@ const Login = ({
   }
 
   let errorMessage = false;
-  if (error === 'Unauthorized') {
+  if (otpStage && error === 'Authentication failed') {
+    errorMessage = 'The one-time password you’ve entered is incorrect.';
+  } else if (
+    error === 'Authentication failed' ||
+    error === 'Request failed with status code 401'
+  ) {
     errorMessage = 'The email or password you’ve entered is incorrect.';
-  } else if (error === 'Unauthorized') {
+  } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
+  }
+
+  if (otpStage) {
+    return (
+      <LoginMFA
+        action={otpAction}
+        errorMessage={errorMessage}
+        fetching={fetching}
+      />
+    );
   }
 
   return (
@@ -101,19 +119,22 @@ Login.propTypes = {
   fetching: PropTypes.bool.isRequired,
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
-  login: PropTypes.func.isRequired
+  otpStage: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
+  loginOtp: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage }
 }) => ({
   authenticated,
   error,
   fetching,
-  hasEverLoggedOn
+  hasEverLoggedOn,
+  otpStage
 });
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { login, loginOtp };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

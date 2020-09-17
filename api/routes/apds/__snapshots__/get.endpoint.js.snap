@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`APD endpoint Get specific APD | GET /apds/:id when authenticated as a user without a state 1`] = `""`;
+exports[`APD endpoint Get specific APD | GET /apds/:id when authenticated as a user with a state when requesting an APD that belongs to another state 1`] = `""`;
 
-exports[`APD endpoint Get specific APD | GET /apds/:id with authenticated as a user with a state when requesting an APD that belongs to another state 1`] = `""`;
-
-exports[`APD endpoint Get specific APD | GET /apds/:id with authenticated as a user with a state when requesting an APD that belongs to their state 1`] = `
+exports[`APD endpoint Get specific APD | GET /apds/:id when authenticated as a user with a state when requesting an APD that belongs to their state 1`] = `
 Object {
   "activities": Array [
     Object {
@@ -1803,7 +1801,9 @@ Object {
 }
 `;
 
-exports[`APD endpoint Get specific APD | GET /apds/:id with authenticated as a user with a state when requesting an APD that does not exist 1`] = `""`;
+exports[`APD endpoint Get specific APD | GET /apds/:id when authenticated as a user with a state when requesting an APD that does not exist 1`] = `""`;
+
+exports[`APD endpoint Get specific APD | GET /apds/:id when authenticated as a user without a state 1`] = `""`;
 
 exports[`APD endpoint List APDs endpoint | GET /apds when authenticated as a user with a state 1`] = `
 Array [
