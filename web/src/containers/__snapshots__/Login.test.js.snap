@@ -86,6 +86,12 @@ exports[`login component renders correctly if logged in, but no previous locatio
 />
 `;
 
+exports[`login component renders correctly if logged in, but previous was on logout 1`] = `
+<Redirect
+  to="/"
+/>
+`;
+
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
 <div
   id="start-main-content"
@@ -151,7 +157,7 @@ exports[`login component renders correctly if not logged in and there is an erro
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error="Sorry! Something went wrong. Please try again."
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -364,4 +370,68 @@ exports[`login component renders correctly if not logged in, and never logged in
     />
   </withRouter(CardForm)>
 </div>
+`;
+
+exports[`login component renders correctly if there is an authentication error 1`] = `
+<div
+  id="start-main-content"
+>
+  <UpgradeBrowser />
+  <withRouter(CardForm)
+    canSubmit={false}
+    cancelable={false}
+    className="ds-u-margin-top--7"
+    error="The email or password you’ve entered is incorrect."
+    footer={
+      <p
+        className="ds-u-padding-top--2"
+      >
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
+    legend="Log in"
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    success={null}
+    title="Log in"
+    working={false}
+  >
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <Password
+      className=""
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </withRouter(CardForm)>
+</div>
+`;
+
+exports[`login component renders correctly if there is an otp authentication error 1`] = `
+<Fragment>
+  <ConsentBanner
+    onAgree={[Function]}
+  />
+</Fragment>
 `;
