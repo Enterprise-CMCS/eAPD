@@ -102,18 +102,22 @@ const Activity = ({ activity, activityIndex }) => {
 
     return (
       <Fragment>
-        <p>
+        <p className="ds-u-margin-bottom--0">
           <strong>
             {index + 1}. {contractor.name}
           </strong>
           {contractor.hourly.useHourly === true && ' (hourly resource)'}
         </p>
-        <p>{contractor.description}</p>
-        <p>
-          <strong>Contract term: </strong>
-          {contractTerm()}
-        </p>
+        <p className="ds-u-margin-top--0">{contractor.description}</p>
         <ul className="ds-c-list--bare">
+          <li>
+            <strong>Contract term: </strong>
+            {contractTerm()}
+          </li>
+          <li>
+            <strong>Total Cost: </strong>
+            <Dollars>{contractor.totalCost}</Dollars>
+          </li>
           {Object.entries(contractor.years).map(([year, cost]) => (
             <li key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
@@ -129,10 +133,6 @@ const Activity = ({ activity, activityIndex }) => {
             </li>
           ))}
         </ul>
-        <p>
-          <strong>Total Cost: </strong>
-          <Dollars>{contractor.totalCost}</Dollars>
-        </p>
       </Fragment>
     );
   };
