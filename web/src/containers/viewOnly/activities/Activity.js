@@ -172,6 +172,47 @@ const Activity = ({ activity, activityIndex }) => {
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
+        <br /> Standards and Conditions
+      </h3>
+
+      <p>
+        <strong>
+          This activity supports the Medicaid standards and conditions from 42
+          CFR 433.112.
+        </strong>
+      </p>
+      {activity.standardsAndConditions.supports ? (
+        <p
+          dangerouslySetInnerHTML={{
+            __html: activity.standardsAndConditions.supports
+          }}
+        />
+      ) : (
+        <p>
+          No response was provided for how this activity will support the
+          Medicaid standards and conditions.
+        </p>
+      )}
+
+      <p>
+        <strong>
+          This activity does not support the Medicaid standards and conditions
+          from 42 CFR 433.112.
+        </strong>
+      </p>
+      {activity.standardsAndConditions.doesNotSupport ? (
+        <p>{activity.standardsAndConditions.doesNotSupport}</p>
+      ) : (
+        <p>
+          No response was provided for how this activity will support the
+          Medicaid standards and conditions.
+        </p>
+      )}
+
+      <h3 className="viewonly-activity-header">
+        <small>
+          Activity {activityIndex + 1} ({activity.name})
+        </small>
         <br />
         Objectives and Key Results
       </h3>
@@ -246,47 +287,6 @@ const Activity = ({ activity, activityIndex }) => {
         costAllocation={activity.costAllocation}
         isViewOnly
       />
-
-      <h3 className="viewonly-activity-header">
-        <small>
-          Activity {activityIndex + 1} ({activity.name})
-        </small>
-        <br /> Standards and Conditions
-      </h3>
-
-      <p>
-        <strong>
-          This activity supports the Medicaid standards and conditions from 42
-          CFR 433.112.
-        </strong>
-      </p>
-      {activity.standardsAndConditions.supports ? (
-        <p
-          dangerouslySetInnerHTML={{
-            __html: activity.standardsAndConditions.supports
-          }}
-        />
-      ) : (
-        <p>
-          No response was provided for how this activity will support the
-          Medicaid standards and conditions.
-        </p>
-      )}
-
-      <p>
-        <strong>
-          This activity does not support the Medicaid standards and conditions
-          from 42 CFR 433.112.
-        </strong>
-      </p>
-      {activity.standardsAndConditions.doesNotSupport ? (
-        <p>{activity.standardsAndConditions.doesNotSupport}</p>
-      ) : (
-        <p>
-          No response was provided for how this activity will support the
-          Medicaid standards and conditions.
-        </p>
-      )}
     </Fragment>
   );
 };
