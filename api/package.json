@@ -8,6 +8,7 @@
     "lint": "eslint '**/*.js'",
     "make-migrate": "knex migrate:make",
     "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
     "start": "node main.js",
     "start-dev": "nodemon ./main.js -e js",

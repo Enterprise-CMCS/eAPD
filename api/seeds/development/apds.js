@@ -75,11 +75,11 @@ const apd = {
         },
         costAllocationNarrative: {
           methodology: '<p>No cost allocation is necessary for this activity.</p>\n',
-          '2019': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2019.</p>\n'
-          },
           '2020': {
             otherSources: '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
+          },
+          '2021': {
+            otherSources: '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
           }
         },
         description:

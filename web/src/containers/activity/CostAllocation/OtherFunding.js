@@ -28,16 +28,13 @@ const OtherFunding = ({
   setOtherFunding,
   syncOtherFunding
 }) => {
-  const {
-    costAllocationNarrative: { otherSources }
-  } = activity;
+  const { costAllocationNarrative } = activity;
+  const { years } = costSummary;
 
   const setOther = year => e => {
     setOtherFunding(activityIndex, year, e.target.value);
   };
   const syncOther = year => html => syncOtherFunding(activityIndex, year, html);
-
-  const { years } = costSummary;
 
   return (
     <Fragment>
@@ -53,8 +50,7 @@ const OtherFunding = ({
               }}
             />
             <RichText
-              // content={activity.costAllocationNarrative[ffy].otherSources}
-              content={otherSources}
+              content={costAllocationNarrative[ffy].otherSources}
               onSync={syncOther(ffy)}
               editorClassName="rte-textarea-l"
             />
