@@ -226,12 +226,29 @@ const Activity = ({ activity, activityIndex }) => {
           __html: activity.costAllocationNarrative.methodology
         }}
       />
-      <h4>Description of Other Funding</h4>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: activity.costAllocationNarrative.otherSources
-        }}
-      />
+
+      <hr className="subsection-rule" />
+      <h3>Other Funding</h3>
+
+      {Object.entries(activity.costAllocationNarrative).filter(([year, narrative]) => !isNaN(year)).map(([year, narrative]) => (
+        <>
+          <h3>FFY {year}</h3>
+          <h4>Other Funding Description</h4>
+          {console.log(activity.costAllocation)}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: narrative.otherSources
+            }}
+          />
+          <div>
+            <strong>Other Funding Amount: </strong>
+            <Dollars>
+              {(activity.costAllocation[year.toString()] || { other: 0 }).other}
+            </Dollars>
+          </div>
+          <hr className="subsection-rule" />
+        </>
+      ))}
 
       <h3 className="viewonly-activity-header">
         <small>
