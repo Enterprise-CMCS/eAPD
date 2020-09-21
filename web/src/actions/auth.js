@@ -5,6 +5,9 @@ import { fetchAllApds } from './app';
 import { getRoles, getUsers } from './admin';
 import oktaAuth from '../util/oktaAuth';
 
+console.log({ oktaAuth });
+console.log('Origin', window.location.origin);
+
 export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
 export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const AUTH_CHECK_SUCCESS = 'AUTH_CHECK_SUCCESS';
@@ -98,9 +101,12 @@ const setTokens = sessionToken => {
 };
 
 export const login = (username, password) => dispatch => {
+  console.log('entered login');
   dispatch(requestLogin());
+  console.log('authenticing user');
   authenticateUser(username, password)
     .then(async res => {
+      console.log({ res });
       if (res.status === 'MFA_REQUIRED') {
         return retrieveMFA(res).then(() => {
           dispatch(completeFirstStage());
