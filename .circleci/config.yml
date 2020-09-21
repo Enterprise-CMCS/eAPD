@@ -367,7 +367,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: set API_URL="${<< parameters.env >>_WEB_API_URL}" && set OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" && npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
