@@ -365,14 +365,9 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: Setup Environment Variables
-          command: |
-            echo "export API_URL=${<< parameters.env >>_WEB_API_URL}" >> $BASH_ENV
-            echo "export OKTA_DOMAIN=${<< parameters.env >>_OKTA_DOMAIN}" >> $BASH_ENV
-      - run:
           name: build the web app
           working_directory: ~/project/web
-          command: npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${OKTA_DOMAIN}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
