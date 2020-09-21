@@ -6,6 +6,15 @@ const OKTA_CLIENT_ID = process.env.OKTA_CLIENT_ID; // eslint-disable-line prefer
 const OKTA_ISSUER = `${OKTA_DOMAIN}/oauth2/${OKTA_SERVER_ID}`;
 const OKTA_REDIRECT_URI = `${window.location.origin}/implicit/callback`;
 
+console.log('in frontend');
+console.log({
+  OKTA_DOMAIN,
+  OKTA_SERVER_ID,
+  OKTA_CLIENT_ID,
+  OKTA_ISSUER,
+  OKTA_REDIRECT_URI
+});
+
 const oktaAuth =
   OKTA_DOMAIN && OKTA_SERVER_ID && OKTA_CLIENT_ID
     ? new OktaAuth({
