@@ -9,7 +9,7 @@ workflows:
       - schedule:
           # Run every hour, every day. Specified this way because the more
           # compact cron syntax wasn't working.
-          cron: '0 0 * * *'
+          cron: "0 0 * * *"
           filters:
             branches:
               only:
@@ -21,7 +21,7 @@ workflows:
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
-          cron: '0 0 * * *'
+          cron: "0 0 * * *"
           filters:
             branches:
               only:
@@ -367,7 +367,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
