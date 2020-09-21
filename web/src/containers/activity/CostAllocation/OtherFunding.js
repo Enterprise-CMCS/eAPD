@@ -38,9 +38,12 @@ const OtherFunding = ({
 
   return (
     <Fragment>
-      <h2>{t('activities.otherFunding.title')}</h2>
+      <h2 className="ds-u-margin-bottom--0">{t('activities.otherFunding.title')}</h2>
       {Object.keys(years).map(ffy => (
         <Fragment key={ffy}>
+          <h3 className="heading-ffy ds-u-padding-top--4">
+            <span>FFY {ffy}</span>
+          </h3>
           <div className="data-entry-box">
             <Instruction
               source="activities.otherFunding.description.instruction"
