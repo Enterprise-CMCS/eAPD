@@ -2,14 +2,11 @@ const tap = require('tap');
 const dbMock = require('./dbMock.test');
 
 const {
-  createAuthRole,
-  deleteAuthRole,
   getAuthActivities,
   getAuthActivitiesByIDs,
   getAuthRoleByID,
   getAuthRoleByName,
-  getActiveAuthRoles,
-  updateAuthRole
+  getActiveAuthRoles
 } = require('./auth');
 
 tap.test('database wrappers / auth', async authTests => {
@@ -22,37 +19,6 @@ tap.test('database wrappers / auth', async authTests => {
     dbMock.reset();
     mapping.delete.rejects();
     roles.delete.rejects();
-  });
-
-  authTests.test('create an auth role', async test => {
-    roles.insert.withArgs({ name: 'role name', isActive: true }).returnsThis();
-    roles.returning.withArgs('id').resolves(['role 1']);
-    mapping.insert.withArgs([
-      { role_id: 'role 1', activity_id: 'activity 1' },
-      { role_id: 'role 1', activity_id: 'activity 2' },
-      { role_id: 'role 1', activity_id: 'activity 3' }
-    ]);
-
-    const roleID = await createAuthRole(
-      'role name',
-      true,
-      ['activity 1', 'activity 2', 'activity 3'],
-      {
-        db
-      }
-    );
-
-    test.equal(roleID, 'role 1');
-  });
-
-  authTests.test('delete an auth role', async test => {
-    mapping.where.withArgs('role_id', 'role id').returnsThis();
-    mapping.delete.resolves();
-
-    roles.where.withArgs('id', 'role id').returnsThis();
-    roles.delete.resolves();
-
-    test.resolves(deleteAuthRole('role id', { db }));
   });
 
   authTests.test('get all auth activities', async test => {
@@ -111,61 +77,5 @@ tap.test('database wrappers / auth', async authTests => {
       { id: 'role1', activities: ['activity 1', 'activity 2'] },
       { id: 'role2', activities: ['activity 1', 'activity 2'] }
     ]);
-  });
-
-  authTests.test('update an auth role', async updateAuthRoleTests => {
-    updateAuthRoleTests.test('where the role name is unchanged', async test => {
-      roles.where.withArgs('id', 'role id').returnsThis();
-      roles.update.withArgs({ name: null }).resolves();
-
-      mapping.where.withArgs('role_id', 'role id').returnsThis();
-      mapping.delete.resolves();
-      mapping.insert
-        .withArgs([
-          { activity_id: 'activity1', role_id: 'role id' },
-          { activity_id: 'activity2', role_id: 'role id' },
-          { activity_id: 'activity3', role_id: 'role id' }
-        ])
-        .resolves();
-
-      test.resolves(
-        updateAuthRole(
-          'role id',
-          null,
-          null,
-          ['activity1', 'activity2', 'activity3'],
-          {
-            db
-          }
-        )
-      );
-    });
-
-    updateAuthRoleTests.test('where the role name is unchanged', async test => {
-      roles.where.withArgs('id', 'role id').returnsThis();
-      roles.update.withArgs({ name: 'role name' }).resolves();
-
-      mapping.where.withArgs('role_id', 'role id').returnsThis();
-      mapping.delete.resolves();
-      mapping.insert
-        .withArgs([
-          { activity_id: 'activity1', role_id: 'role id' },
-          { activity_id: 'activity2', role_id: 'role id' },
-          { activity_id: 'activity3', role_id: 'role id' }
-        ])
-        .resolves();
-
-      test.resolves(
-        updateAuthRole(
-          'role id',
-          'role name',
-          null,
-          ['activity1', 'activity2', 'activity3'],
-          {
-            db
-          }
-        )
-      );
-    });
   });
 });

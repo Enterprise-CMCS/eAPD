@@ -4,10 +4,7 @@ exports[`/me endpoint | GET when authenticated 1`] = `
 Object {
   "activities": Array [
     "view-users",
-    "add-users",
     "view-roles",
-    "create-roles",
-    "edit-roles",
     "submit-federal-response",
     "submit-clearance",
     "edit-comments",
@@ -16,18 +13,18 @@ Object {
     "create-draft",
     "edit-document",
     "edit-response",
-    "delete-users",
     "view-document",
   ],
-  "id": 2000,
-  "name": "Wonder Woman",
-  "phone": null,
-  "position": "User that can do anything at all",
-  "role": "admin",
+  "hasLoggedIn": true,
+  "id": "all-permissions-and-state",
+  "name": "All Permissions And State",
+  "roles": Array [
+    "eAPD Admin",
+    "eAPD State Coordinator",
+  ],
   "state": Object {
     "id": "mn",
     "name": "Minnesota",
   },
-  "username": "all-permissions-and-state",
 }
 `;

@@ -16,8 +16,8 @@ describe('APD endpoint | POST /apds', () => {
   unauthorizedTest('post', url);
 
   it('when authenticated as a user with permission', async () => {
-    const response = await login()
-      .then(api => api.post(url));
+    const api = login();
+    const response = await api.post(url);
 
     expect(response.status).toEqual(200);
 

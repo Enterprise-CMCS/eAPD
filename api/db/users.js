@@ -1,63 +1,175 @@
-const defaultZxcvbn = require('zxcvbn');
 const logger = require('../logger')('user db');
-const defaultHash = require('../auth/passwordHash');
-
+const {
+  userApplicationProfileUrl,
+  oktaClient,
+  callOktaEndpoint
+} = require('../auth/oktaAuth');
 const knex = require('./knex');
 
 const sanitizeUser = user => ({
   activities: user.activities,
   id: user.id,
-  name: user.name,
-  phone: user.phone,
-  position: user.position,
-  role: user.auth_role,
+  name: user.displayName,
+  phone: user.primaryPhone,
+  roles: user.auth_roles,
+  username: user.login,
   state: user.state,
-  username: user.email
+  hasLoggedIn: user.hasLoggedIn
 });
 
-const populateUser = async (user, { db = knex } = {}) => {
+const updateUserApplicationProfile = async (
+  id,
+  updateValues,
+  { client = oktaClient } = {}
+) => {
+  return client
+    .getUser(id)
+    .then(oktaUser => {
+      let error;
+      if (updateValues.affiliations) {
+        error = 'Do not use this method to update affiliations';
+        // eslint-disable-next-line no-param-reassign
+        delete updateValues.affiliations;
+      }
+      // eslint-disable-next-line no-param-reassign
+      oktaUser.userprofile = {
+        ...oktaUser.userprofile,
+        ...updateValues
+      };
+      return oktaUser
+        .update()
+        .then(() => {
+          return { user: oktaUser, error };
+        })
+        .catch(() => {
+          return { error: `User ${oktaUser.displayName} could not be updated` };
+        });
+    })
+    .catch(err => {
+      logger.error(err);
+      return { error: `Could not find ${id}` };
+    });
+};
+
+const userGroups = async (id, { client = callOktaEndpoint } = {}) => {
+  return client(`/api/v1/users/${id}/groups`)
+    .then(groups => groups)
+    .catch(err => {
+      logger.error(err);
+      return [];
+    });
+};
+
+const addUserToGroup = async (
+  userId,
+  groupId,
+  { client = oktaClient, getGroups = userGroups } = {}
+) => {
+  return client
+    .getUser(userId)
+    .then(oktaUser => {
+      return oktaUser
+        .addToGroup(groupId)
+        .then(async () => {
+          const groups = await getGroups(userId);
+          return {
+            groups
+          };
+        })
+        .catch(() => {
+          return {
+            error: `User ${oktaUser.displayName} could not be added to group`
+          };
+        });
+    })
+    .catch(err => {
+      logger.error(err);
+      return { error: `Could not find ${userId}` };
+    });
+};
+
+const userApplicationProfile = async (
+  id,
+  { client = callOktaEndpoint, applicationUrl = userApplicationProfileUrl } = {}
+) => {
+  return client(applicationUrl(id))
+    .then(response => response)
+    .catch(err => {
+      logger.error(err);
+      return {};
+    });
+};
+
+const populateUser = async (
+  user,
+  {
+    db = knex,
+    getGroups = userGroups,
+    getApplicationProfile = userApplicationProfile
+  } = {}
+) => {
   if (user) {
     const populatedUser = user;
 
-    if (user.auth_role) {
-      const authRole = await db('auth_roles')
-        .where({
-          name: user.auth_role,
-          isActive: true
-        })
-        .select('id')
-        .first();
+    // If there isn't a user.groups value try to retrive them
+    const groups = user.groups || (await getGroups(user.id));
 
-      const authActivityIDs = authRole
-        ? await db('auth_role_activity_mapping')
-            .where('role_id', authRole.id)
-            .select('activity_id')
-        : [];
+    if (groups && groups.length) {
+      const authRole = await db('auth_roles').whereIn(
+        ['name', 'isActive'],
+        groups.map(group => [group, true])
+      );
 
-      const authActivityNames = await db('auth_activities')
-        .whereIn(
-          'id',
-          // eslint-disable-next-line camelcase
-          authActivityIDs.map(({ activity_id }) => activity_id)
-        )
-        .select('name');
+      if (authRole && authRole.length) {
+        populatedUser.auth_roles = authRole.map(role => role.name);
 
-      populatedUser.activities = authActivityNames.map(({ name }) => name);
+        const roleIds = authRole.map(role => role.id);
+        const authActivityIDs = authRole
+          ? await db('auth_role_activity_mapping')
+              .whereIn('role_id', roleIds)
+              .select('activity_id')
+          : [];
+
+        const authActivityNames = await db('auth_activities')
+          .whereIn(
+            'id',
+            // eslint-disable-next-line camelcase
+            authActivityIDs.map(({ activity_id }) => activity_id)
+          )
+          .select('name');
+
+        populatedUser.activities = authActivityNames.map(({ name }) => name);
+      } else {
+        populatedUser.auth_roles = [];
+        populatedUser.activities = [];
+      }
+      delete populatedUser.groups;
     } else {
+      populatedUser.auth_roles = [];
       populatedUser.activities = [];
     }
 
-    if (user.state_id) {
-      const state = await db('states')
-        .where('id', user.state_id)
-        .select('id', 'name')
-        .first();
-      populatedUser.state = state;
+    if (!user.affiliations || !user.hasLoggedIn) {
+      const { affiliations, hasLoggedIn } = await getApplicationProfile(
+        user.id
+      );
+      populatedUser.affiliations = affiliations;
+      populatedUser.hasLoggedIn = hasLoggedIn;
+    }
+    if (populatedUser.affiliations && populatedUser.affiliations.length) {
+      const normalized = populatedUser.affiliations.map(affiliation =>
+        affiliation.toLowerCase()
+      );
+      if (normalized.length) {
+        populatedUser.state = await db('states')
+          .whereIn('id', normalized)
+          .select('id', 'name')
+          .first(); // TODO: Handle having multiple affiliations
+      }
     } else {
       populatedUser.state = {};
     }
-
-    delete populatedUser.state_id;
+    delete populatedUser.affiliations;
 
     return populatedUser;
   }
@@ -65,19 +177,14 @@ const populateUser = async (user, { db = knex } = {}) => {
   return user;
 };
 
-const deleteUserByID = async (id, { db = knex } = {}) =>
-  db('users')
-    .where('id', id)
-    .delete();
-
 const getAllUsers = async ({
   clean = true,
-  db = knex,
+  client = oktaClient,
   populate = populateUser
 } = {}) => {
-  const users = await db('users').select();
+  const users = await client.listUsers();
 
-  const full = await Promise.all(users.map(populate));
+  const full = await Promise.all(users.map(user => populate(user)));
 
   if (clean) {
     return full.map(sanitizeUser);
@@ -85,169 +192,32 @@ const getAllUsers = async ({
   return full;
 };
 
-const getUserByEmail = async (
-  email,
-  { clean = true, db = knex, populate = populateUser } = {}
-) => {
-  const user = await populate(
-    await db('users')
-      .whereRaw('LOWER(email) = ?', [email.toLowerCase()])
-      .first()
-  );
-
-  return user && clean ? sanitizeUser(user) : user;
-};
-
 const getUserByID = async (
   id,
-  { clean = true, db = knex, populate = populateUser } = {}
+  {
+    clean = true,
+    client = oktaClient,
+    populate = populateUser,
+    additionalValues
+  } = {}
 ) => {
-  const user = await populate(
-    await db('users')
-      .where('id', id)
-      .first()
-  );
+  const oktaUser = await client.getUser(id);
 
-  return user && clean ? sanitizeUser(user) : user;
-};
-
-const validateUser = async (
-  // eslint-disable-next-line camelcase
-  { id, email, password, auth_role, phone, state_id },
-  { db = knex, getUser = getUserByEmail, zxcvbn = defaultZxcvbn } = {}
-) => {
-  /* eslint-disable camelcase */
-  if (email) {
-    logger.silly('checking email');
-
-    const usersWithEmail = await getUser(email);
-
-    if (usersWithEmail && usersWithEmail.id !== id) {
-      logger.verbose(`user with email already exists [${email}]`);
-      throw new Error('email-exists');
-    }
-
-    logger.silly('email is unique');
+  if (oktaUser && oktaUser.status === 'ACTIVE') {
+    const { profile } = oktaUser;
+    const user = await populate({ id, ...profile, ...additionalValues });
+    return user && clean ? sanitizeUser(user) : user;
   }
-
-  if (password) {
-    logger.silly('checking password complexity/strength');
-
-    const compare = [];
-    if (id) {
-      const user = await db('users')
-        .where('id', id)
-        .select('email', 'name')
-        .first();
-
-      compare.push(email || user.email);
-      compare.push(user.name);
-    }
-
-    const passwordScore = zxcvbn(password, compare);
-    if (passwordScore.score < 3) {
-      logger.verbose(`password is too weak: score ${passwordScore.score}`);
-      throw new Error('weak-password');
-    }
-
-    logger.silly('password is sufficiently complex');
-  }
-
-  if (phone) {
-    logger.silly('checking phone is just 10 digits');
-
-    const numericPhone = phone.replace(/[^\d]/g, '');
-    if (numericPhone.length > 10) {
-      logger.verbose(`phone number is invalid [${phone}]`);
-      throw new Error('invalid-phone');
-    }
-
-    logger.silly('phone is valid');
-  }
-
-  if (auth_role) {
-    logger.silly('checking auth role');
-    if (
-      !(await db('auth_roles')
-        .where({
-          name: auth_role,
-          isActive: true
-        })
-        .first())
-    ) {
-      logger.verbose(`auth role is invalid or inactive [${auth_role}]`);
-      throw new Error('invalid-role');
-    }
-    logger.silly('auth role is valid');
-  }
-
-  if (state_id) {
-    logger.silly('checking state ID');
-    if (
-      !(await db('states')
-        .where('id', state_id)
-        .first())
-    ) {
-      logger.verbose(`state ID is invalid [${state_id}]`);
-      throw new Error('invalid-state');
-    }
-    logger.silly('state ID is valid');
-  }
-};
-
-const createUser = async (
-  user,
-  { db = knex, hash = defaultHash, validate = validateUser } = {}
-) => {
-  await validate(user);
-
-  const save = { ...user };
-  if (user.password) {
-    save.password = await hash.hash(user.password);
-  }
-  if (user.phone) {
-    save.phone = user.phone.replace(/[^\d]/g, '');
-  }
-
-  const ids = await db('users')
-    .insert(save)
-    .returning('id');
-
-  return ids[0];
-};
-
-const updateUser = async (
-  userID,
-  user,
-  { db = knex, hash = defaultHash, validate = validateUser } = {}
-) => {
-  await validate({ ...user, id: userID });
-
-  if (!Object.keys(user).length) {
-    return;
-  }
-
-  const save = { ...user };
-  if (user.password) {
-    save.password = await hash.hash(user.password);
-  }
-  if (user.phone) {
-    save.phone = user.phone.replace(/[^\d]/g, '');
-  }
-
-  await db('users')
-    .where('id', userID)
-    .update(save);
+  return null;
 };
 
 module.exports = {
-  createUser,
-  deleteUserByID,
   getAllUsers,
-  getUserByEmail,
   getUserByID,
+  updateUserApplicationProfile,
+  addUserToGroup,
+  userGroups,
+  userApplicationProfile,
   populateUser,
-  sanitizeUser,
-  updateUser,
-  validateUser
+  sanitizeUser
 };
