@@ -2,7 +2,6 @@
   "low": true,
   "package-manager": "auto",
   "allowlist": [
-    "1548|webpack>terser-webpack-plugin>serialize-javascript",
     "1550|postcss-custom-properties>postcss-values-parser>is-url-superb>url-regex",
     "1550|postcss-custom-properties>postcss-values-parser>url-regex"
   ],
