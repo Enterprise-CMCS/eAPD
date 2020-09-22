@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 exports.up = async knex => {
   const apdRecords = await knex('apds').select('document', 'id');
 
