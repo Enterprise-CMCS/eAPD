@@ -16,15 +16,6 @@ const config = {
     filename: 'app.js',
     publicPath: '/'
   },
-  resolve: {
-    extensions: [
-      '.js'
-    ],
-    modules: [
-      path.join(__dirname, 'src'),
-      'node_modules'
-    ]
-  },
   module: {
     rules: [
       {

@@ -7,9 +7,8 @@ import {
   mapDispatchToProps
 } from './CostAllocate';
 import {
-  setCostAllocationMethodology,
-  setCostAllocationOtherFunding
-} from '../../actions/editActivity/costAllocate';
+  setCostAllocationMethodology
+} from '../../../actions/editActivity/costAllocate';
 
 describe('the CostAllocate component', () => {
   const props = {
@@ -73,8 +72,7 @@ describe('the CostAllocate component', () => {
 
   test('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setMethodology: setCostAllocationMethodology,
-      setOtherFunding: setCostAllocationOtherFunding
+      setMethodology: setCostAllocationMethodology
     });
   });
 });

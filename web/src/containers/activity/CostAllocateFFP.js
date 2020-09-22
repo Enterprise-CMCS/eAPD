@@ -6,11 +6,7 @@ import { connect } from 'react-redux';
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
-import {
-  setCostAllocationFFPFundingSplit,
-  setCostAllocationFFPOtherFunding
-} from '../../actions/editActivity';
-import DollarField from '../../components/DollarField';
+import { setCostAllocationFFPFundingSplit } from '../../actions/editActivity';
 import Dollars from '../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
@@ -103,13 +99,8 @@ const CostAllocateFFP = ({
   aKey,
   isViewOnly,
   setFundingSplit,
-  setOtherFunding,
   stateName
 }) => {
-  const setOther = year => e => {
-    setOtherFunding(activityIndex, year, e.target.value);
-  };
-
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
@@ -289,7 +280,6 @@ CostAllocateFFP.propTypes = {
   costSummary: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
-  setOtherFunding: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired
 };
 
@@ -319,8 +309,7 @@ const mapStateToProps = (
 };
 
 const mapDispatchToProps = {
-  setFundingSplit: setCostAllocationFFPFundingSplit,
-  setOtherFunding: setCostAllocationFFPOtherFunding
+  setFundingSplit: setCostAllocationFFPFundingSplit
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);

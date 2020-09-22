@@ -230,24 +230,25 @@ const Activity = ({ activity, activityIndex }) => {
       <hr className="subsection-rule" />
       <h3>Other Funding</h3>
 
-      {Object.entries(activity.costAllocationNarrative).filter(([year, narrative]) => !isNaN(year)).map(([year, narrative]) => (
-        <>
-          <h3>FFY {year}</h3>
-          <h4>Other Funding Description</h4>
-          {console.log(activity.costAllocation)}
-          <div
-            dangerouslySetInnerHTML={{
-              __html: narrative.otherSources
-            }}
-          />
-          <div>
-            <strong>Other Funding Amount: </strong>
-            <Dollars>
-              {(activity.costAllocation[year.toString()] || { other: 0 }).other}
-            </Dollars>
-          </div>
-          <hr className="subsection-rule" />
-        </>
+      {Object.entries(activity.costAllocationNarrative)
+        .filter(([year, _]) => !Number.isNaN(year))  // eslint-disable-line no-unused-vars
+        .map(([year, narrative]) => (
+          <Fragment>
+            <h3>FFY {year}</h3>
+            <h4>Other Funding Description</h4>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: narrative.otherSources
+              }}
+            />
+            <div>
+              <strong>Other Funding Amount: </strong>
+              <Dollars>
+                {(activity.costAllocation[year.toString()] || { other: 0 }).other}
+              </Dollars>
+            </div>
+            <hr className="subsection-rule" />
+          </Fragment>
       ))}
 
       <h3 className="viewonly-activity-header">
