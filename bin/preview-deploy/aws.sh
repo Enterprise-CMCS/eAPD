@@ -88,11 +88,7 @@ function configureUserData() {
 
   sed -i'.backup' -e "s/__PBKDF2_ITERATIONS__/`echo $API_PBKDF2_ITERATIONS`/g" aws.user-data.sh
 
-<<<<<<< HEAD
-  sed -i'.backup' -e "s/__OKTA_DOMAIN__/`echo $OKTA_DOMAIN`/g" aws.user-data.sh
-=======
   sed -i'.backup' -e "s/__OKTA_DOMAIN__/`echo $OKTA_DOMAIN`/g" aws.user-data.sh`
->>>>>>> fe290d1af067ea5f01887823796e6fbbff1c1a63
 
   rm aws.user-data.sh.backup
 }
