@@ -54,7 +54,7 @@ const Login = ({
     );
   }
 
-  let errorMessage = false;
+  let errorMessage = null;
   if (otpStage && error === 'Authentication failed') {
     errorMessage = 'The one-time password you’ve entered is incorrect.';
   } else if (

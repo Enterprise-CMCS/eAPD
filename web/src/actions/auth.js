@@ -54,9 +54,9 @@ const authenticateUser = (username, password) => {
 };
 
 const retrieveMFA = transaction => {
-  const mfaFactor = transaction.factors.find(factor => {
-    return factor.provider === 'OKTA' && factor.factorType === 'email';
-  });
+  const mfaFactor = transaction.factors.find(
+    factor => factor.provider === 'OKTA'
+  );
 
   if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
 

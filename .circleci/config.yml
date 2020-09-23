@@ -9,7 +9,7 @@ workflows:
       - schedule:
           # Run every hour, every day. Specified this way because the more
           # compact cron syntax wasn't working.
-          cron: '0 0 * * *'
+          cron: "0 0 * * *"
           filters:
             branches:
               only:
@@ -21,7 +21,7 @@ workflows:
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
-          cron: '0 0 * * *'
+          cron: "0 0 * * *"
           filters:
             branches:
               only:
@@ -595,7 +595,8 @@ jobs:
                 --AWS_SECURITY_GROUP "$PREVIEW_AWS_SECURITY_GROUP" \
                 --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
                 --BRANCH "$CIRCLE_BRANCH" \
-                --PR_NUM "$PRNUM"
+                --PR_NUM "$PRNUM" \
+                --OKTA_DOMAIN "$PREVIEW_OKTA_DOMAIN"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
