@@ -595,7 +595,11 @@ jobs:
                 --AWS_SECURITY_GROUP "$PREVIEW_AWS_SECURITY_GROUP" \
                 --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
                 --BRANCH "$CIRCLE_BRANCH" \
-                --PR_NUM "$PRNUM"
+                --PR_NUM "$PRNUM" \
+                --OKTA_DOMAIN "$OKTA_DOMAIN" \
+                --OKTA_SERVER_ID "$OKTA_SERVER_ID" \
+                --OKTA_CLIENT_ID "$OKTA_CLIENT_ID" \
+                --OKTA_API_KEY "$OKTA_API_KEY"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
