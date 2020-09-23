@@ -29,7 +29,7 @@ exports[`login component renders correctly if logged in previously but not logge
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -101,7 +101,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -213,7 +213,7 @@ exports[`login component renders correctly if not logged in, and never logged in
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -269,7 +269,7 @@ exports[`login component renders correctly if not logged in, and never logged in
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -325,7 +325,7 @@ exports[`login component renders correctly if not logged in, and never logged in
     canSubmit={true}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
