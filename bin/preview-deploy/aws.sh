@@ -23,6 +23,8 @@
 #    --PR_NUM <number>                | The PR number for this preview. This is
 #                                     | used to tag the instance as well as to
 #                                     | find previous instances for this PR.
+#                                     |----------------------------------------
+#    --OKTA_DOMAIN <string>           |
 
 # Exit when any command fails
 set -e
@@ -85,6 +87,8 @@ function configureUserData() {
   sed -i'.backup' -e "s|__GIT_BRANCH__|\"`echo $BRANCH`\"|g" aws.user-data.sh
 
   sed -i'.backup' -e "s/__PBKDF2_ITERATIONS__/`echo $API_PBKDF2_ITERATIONS`/g" aws.user-data.sh
+
+  sed -i'.backup' -e "s/__OKTA_DOMAIN__/`echo $OKTA_DOMAIN`/g" aws.user-data.sh
 
   rm aws.user-data.sh.backup
 }

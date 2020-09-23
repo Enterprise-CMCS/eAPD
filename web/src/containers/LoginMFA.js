@@ -42,9 +42,13 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
 };
 
 LoginMFA.propTypes = {
-  errorMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
   fetching: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired
+};
+
+LoginMFA.defaultProps = {
+  errorMessage: null
 };
 
 export default LoginMFA;
