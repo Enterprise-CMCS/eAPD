@@ -3,7 +3,6 @@ import React from 'react';
 
 import {
   plain as OtherFunding,
-  mapStateToProps,
   mapDispatchToProps
 } from './OtherFunding';
 import {

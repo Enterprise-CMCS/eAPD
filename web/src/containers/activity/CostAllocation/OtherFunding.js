@@ -28,7 +28,6 @@ const OtherFunding = ({
   setOtherFunding,
   syncOtherFunding
 }) => {
-  console.log(costAllocation)
   const { costAllocationNarrative } = activity;
   const { years } = costSummary;
 

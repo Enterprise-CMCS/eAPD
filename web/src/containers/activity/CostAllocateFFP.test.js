@@ -7,8 +7,7 @@ import {
   mapDispatchToProps
 } from './CostAllocateFFP';
 import {
-  setCostAllocationFFPFundingSplit,
-  setCostAllocationFFPOtherFunding
+  setCostAllocationFFPFundingSplit
 } from '../../actions/editActivity';
 
 describe('the CostAllocateFFP component', () => {
