@@ -152,16 +152,6 @@ describe('the CostAllocateFFP component', () => {
     });
   });
 
-  it('handles changes to other funding', () => {
-    const component = shallow(<CostAllocateFFP {...props} />);
-    component
-      .find('DollarField')
-      .at(0)
-      .simulate('change', { target: { value: 150 } });
-
-    expect(props.setOtherFunding).toHaveBeenCalledWith(0, '1990', 150);
-  });
-
   it('handles changes to cost allocation dropdown', () => {
     const component = shallow(<CostAllocateFFP {...props} />);
     component
@@ -262,8 +252,7 @@ describe('the CostAllocateFFP component', () => {
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setFundingSplit: setCostAllocationFFPFundingSplit,
-      setOtherFunding: setCostAllocationFFPOtherFunding
+      setFundingSplit: setCostAllocationFFPFundingSplit
     });
   });
 });

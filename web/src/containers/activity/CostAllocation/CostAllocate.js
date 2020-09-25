@@ -57,5 +57,5 @@ export const mapDispatchToProps = {
   setMethodology: setCostAllocationMethodology
 };
 
-export { CostAllocate as CostAllocateRaw };
+export { CostAllocate as plain };
 export default connect(mapStateToProps, mapDispatchToProps)(CostAllocate);

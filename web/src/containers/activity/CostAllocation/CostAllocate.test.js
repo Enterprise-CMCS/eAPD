@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  CostAllocateRaw as CostAllocate,
+  plain as CostAllocate,
   mapStateToProps,
   mapDispatchToProps
 } from './CostAllocate';
@@ -10,7 +10,7 @@ import {
   setCostAllocationMethodology
 } from '../../../actions/editActivity/costAllocate';
 
-describe('the CostAllocate component', () => {
+describe('<CostAllocate />', () => {
   const props = {
     activityIndex: 1,
     activity: {
@@ -20,14 +20,11 @@ describe('the CostAllocate component', () => {
         otherSources: 'other funding'
       }
     },
-    years: ['1066', '1067'],
-    setMethodology: jest.fn(),
-    setOtherFunding: jest.fn()
+    setMethodology: jest.fn()
   };
 
   beforeEach(() => {
     props.setMethodology.mockClear();
-    props.setOtherFunding.mockClear();
   });
 
   test('renders correctly', () => {
@@ -43,12 +40,6 @@ describe('the CostAllocate component', () => {
       .filterWhere(n => n.props().content === 'cost allocation')
       .prop('onSync')('bloop');
     expect(props.setMethodology).toHaveBeenCalledWith(1, 'bloop');
-
-    component
-      .find('Connect(RichText)')
-      .filterWhere(n => n.props().content === 'other funding')
-      .prop('onSync')('florp');
-    expect(props.setOtherFunding).toHaveBeenCalledWith(1, 'florp');
   });
 
   test('maps redux state to component props', () => {

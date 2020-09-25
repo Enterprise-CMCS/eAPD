@@ -5,7 +5,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   <h3
     className="subsection--title ds-h3"
   >
-    Cost Allocation and Budget for FFY 
+    Budget for FFY 
     1990
   </h3>
   <table
@@ -124,28 +124,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       />
     </tbody>
   </table>
-  <div
-    className="data-entry-box ds-u-margin-bottom--5"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h4",
-          "level": "p",
-        }
-      }
-      reverse={false}
-      source="activities.costAllocate.ffp.otherFundingInstruction"
-    />
-    <DollarField
-      label="FFY 1990"
-      labelClassName="sr-only"
-      name="ffy-1990"
-      onChange={[Function]}
-      value={100}
-    />
-  </div>
   <table
     className="budget-table activity-budget-table"
   >
@@ -304,7 +282,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   <h3
     className="subsection--title ds-h3"
   >
-    Cost Allocation and Budget for FFY 
+    Budget for FFY 
     1991
   </h3>
   <table
@@ -423,28 +401,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       />
     </tbody>
   </table>
-  <div
-    className="data-entry-box ds-u-margin-bottom--5"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h4",
-          "level": "p",
-        }
-      }
-      reverse={false}
-      source="activities.costAllocate.ffp.otherFundingInstruction"
-    />
-    <DollarField
-      label="FFY 1991"
-      labelClassName="sr-only"
-      name="ffy-1991"
-      onChange={[Function]}
-      value={200}
-    />
-  </div>
   <table
     className="budget-table activity-budget-table"
   >
@@ -752,7 +708,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   <h3
     className="subsection--title ds-h3"
   >
-    Cost Allocation and Budget for FFY 
+    Budget for FFY 
     1990
   </h3>
   <table
@@ -948,7 +904,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   <h3
     className="subsection--title ds-h3"
   >
-    Cost Allocation and Budget for FFY 
+    Budget for FFY 
     1991
   </h3>
   <table
