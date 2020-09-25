@@ -17,7 +17,6 @@ mkdir /app/tls
 amazon-linux-extras install nginx1.12
 #ec2-associate-address -K /root/pk.pem -C /root/cert.pem -i $(curl -s http://169.254.169.254/latest/meta-data/instance-id) $(ec2-describe-addresses | grep -v "i-" | head -n1 | cut -f2) 
 yum -y install git postgresql-server
-ec2-associate-address -i $(curl -s http://169.254.169.254/latest/meta-data/instance-id) $(ec2-describe-addresses | grep -v "i-" | head -n1 | cut -f2) 
 
 # Setup postgres
 service postgresql initdb
