@@ -31,7 +31,8 @@ tap.test('APD data initializer', async test => {
         },
         costAllocationNarrative: {
           methodology: '',
-          otherSources: ''
+          '1997': { otherSources: '' },
+          '1998': { otherSources: '' }
         },
         description: '',
         expenses: [],

@@ -15,6 +15,5 @@
         "otherSources": { "type": "string" }
       }
     }
-  },
-  "additionalProperties": false
+  }
 }

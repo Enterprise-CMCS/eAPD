@@ -48,7 +48,7 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
       id={null}
       resource={null}
     >
-      <Connect(CostAllocate)
+      <CostAllocation
         activityIndex={3}
       />
     </Section>
