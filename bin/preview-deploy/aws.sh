@@ -135,7 +135,7 @@ function findExistingInstances() {
 function associateElasticIP() {
   aws ec2 associate-address \
     --instance-id $1 \
-    --allocation-id eipalloc-0936e6a0acea6b9b4
+    --allocation-id eipalloc-075f29488635f74c1
 }
 
 # Get the public DNS name for an instance.
