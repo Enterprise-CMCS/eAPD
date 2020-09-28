@@ -57,7 +57,7 @@ function deployPreviewtoEC2() {
   waitForInstanceToBeReady $INSTANCE_ID
 
   print "• Getting public DNS name of new instance"
-  associateElasticIP
+  $(associateElasticIP $INSTANCE_ID)
   PUBLIC_DNS=$(getPublicDNS $INSTANCE_ID)
   print "• Public address: $PUBLIC_DNS"
 
