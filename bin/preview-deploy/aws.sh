@@ -47,6 +47,7 @@ function deployPreviewtoEC2() {
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
+  associateElasticIP
   INSTANCE_ID=$(createNewInstance)
   print "• Created instance $INSTANCE_ID"
 
@@ -126,6 +127,15 @@ function findExistingInstances() {
     --filter Name=tag:github-pr,Values=$PR_NUM \
     --query "Reservations[*].Instances[*].InstanceId" \
     | jq -c -r '.[] | join("")'
+}
+
+# Associate Elastic IP Address to preview instance
+#
+# $1 - ID of the EC2 instanec to assign Elastic IP Address to
+function associateElasticIP() {
+  aws ec2 associate-address \
+    --instance-id $1 \
+    --allocation-id eipalloc-0936e6a0acea6b9b4
 }
 
 # Get the public DNS name for an instance.
