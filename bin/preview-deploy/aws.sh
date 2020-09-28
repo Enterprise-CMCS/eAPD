@@ -47,7 +47,6 @@ function deployPreviewtoEC2() {
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
-  associateElasticIP
   INSTANCE_ID=$(createNewInstance)
   print "• Created instance $INSTANCE_ID"
 
@@ -58,6 +57,7 @@ function deployPreviewtoEC2() {
   waitForInstanceToBeReady $INSTANCE_ID
 
   print "• Getting public DNS name of new instance"
+  associateElasticIP
   PUBLIC_DNS=$(getPublicDNS $INSTANCE_ID)
   print "• Public address: $PUBLIC_DNS"
 
