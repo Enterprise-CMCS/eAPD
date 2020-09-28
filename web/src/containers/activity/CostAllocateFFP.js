@@ -110,10 +110,11 @@ const CostAllocateFFP = ({
 
   return (
     <Fragment>
+      <h2 className="subsection--title ds-h2">Budget and FFP</h2>
       {Object.keys(years).map(ffy => (
         <Fragment key={ffy}>
-          <h3 className="subsection--title ds-h3">
-            Budget for FFY {ffy}
+          <h3 className="ds-h3">
+            Activity {activityIndex + 1} Budget for FFY {ffy}
           </h3>
 
           <table
