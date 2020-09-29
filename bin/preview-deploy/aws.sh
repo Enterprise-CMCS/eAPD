@@ -57,6 +57,7 @@ function deployPreviewtoEC2() {
   waitForInstanceToBeReady $INSTANCE_ID
 
   print "• Getting public DNS name of new instance"
+  associateElasticIP $INSTANCE_ID
   PUBLIC_DNS=$(getPublicDNS $INSTANCE_ID)
   print "• Public address: $PUBLIC_DNS"
 
@@ -114,6 +115,7 @@ function createNewInstance() {
     --subnet-id $AWS_SUBNET \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
+    --key-name eapd_bbrooks \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
@@ -126,6 +128,15 @@ function findExistingInstances() {
     --filter Name=tag:github-pr,Values=$PR_NUM \
     --query "Reservations[*].Instances[*].InstanceId" \
     | jq -c -r '.[] | join("")'
+}
+
+# Associate Elastic IP Address to preview instance
+#
+# $1 - ID of the EC2 instanec to assign Elastic IP Address to
+function associateElasticIP() {
+  aws ec2 associate-address \
+    --instance-id $1 \
+    --allocation-id $(aws ec2 describe-addresses --query 'Addresses[?AssociationId==null]' |jq -r '.[0] | .AllocationId')
 }
 
 # Get the public DNS name for an instance.
