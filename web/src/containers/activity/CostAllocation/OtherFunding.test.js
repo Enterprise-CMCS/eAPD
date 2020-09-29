@@ -1,10 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import {
-  plain as OtherFunding,
-  mapDispatchToProps
-} from './OtherFunding';
+import { plain as OtherFunding, mapDispatchToProps } from './OtherFunding';
 import {
   setCostAllocationFFPOtherFunding,
   setCostAllocationOtherFunding
@@ -43,35 +40,30 @@ describe('<OtherFunding />', () => {
         }
       }
     },
-    setOtherFunding: jest.fn()
+    setOtherFunding: jest.fn(),
+    syncOtherFunding: jest.fn()
   };
 
   beforeEach(() => {
     props.setOtherFunding.mockClear();
   });
 
-  test('renders correctly', () => {
+  it('renders correctly', () => {
     const component = shallow(<OtherFunding {...props} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('updates activity when text is changed', () => {
+  it('updates activity when text is changed', () => {
     const component = shallow(<OtherFunding {...props} />);
 
     component
       .find('Connect(RichText)')
-      .filterWhere(n => n.props().content === 'cost allocation')
-      .prop('onSync')('bloop');
-    expect(props.setMethodology).toHaveBeenCalledWith(1, 'bloop');
-
-    component
-      .find('Connect(RichText)')
-      .filterWhere(n => n.props().content === 'other funding')
+      .filterWhere(n => n.props().content === 'other funding for FFY 1066')
       .prop('onSync')('florp');
-    expect(props.setOtherFunding).toHaveBeenCalledWith(1, 'florp');
+    expect(props.syncOtherFunding).toHaveBeenCalledWith(1, '1066', 'florp');
   });
 
-  test('maps dispatch actions to props', () => {
+  it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
       setOtherFunding: setCostAllocationFFPOtherFunding,
       syncOtherFunding: setCostAllocationOtherFunding
