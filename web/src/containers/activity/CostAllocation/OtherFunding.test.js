@@ -50,7 +50,7 @@ describe('<OtherFunding />', () => {
     props.setOtherFunding.mockClear();
   });
 
-  fit('renders correctly', () => {
+  test('renders correctly', () => {
     const component = shallow(<OtherFunding {...props} />);
     expect(component).toMatchSnapshot();
   });
