@@ -1,5 +1,5 @@
 exports.seed = async knex => {
-  const { state_id } = await knex('users').first('state_id'); // eslint-disable-line camelcase
+  const state_id = 'mo'; // eslint-disable-line camelcase
 
   await knex('apds') // eslint-disable-line camelcase
     .insert([
