@@ -102,18 +102,22 @@ const Activity = ({ activity, activityIndex }) => {
 
     return (
       <Fragment>
-        <p>
+        <p className="ds-u-margin-bottom--0">
           <strong>
             {index + 1}. {contractor.name}
           </strong>
           {contractor.hourly.useHourly === true && ' (hourly resource)'}
         </p>
-        <p>{contractor.description}</p>
-        <p>
-          <strong>Contract term: </strong>
-          {contractTerm()}
-        </p>
+        <p className="ds-u-margin-top--0">{contractor.description}</p>
         <ul className="ds-c-list--bare">
+          <li>
+            <strong>Contract term: </strong>
+            {contractTerm()}
+          </li>
+          <li>
+            <strong>Total Cost: </strong>
+            <Dollars>{contractor.totalCost}</Dollars>
+          </li>
           {Object.entries(contractor.years).map(([year, cost]) => (
             <li key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
@@ -129,10 +133,6 @@ const Activity = ({ activity, activityIndex }) => {
             </li>
           ))}
         </ul>
-        <p>
-          <strong>Total Cost: </strong>
-          <Dollars>{contractor.totalCost}</Dollars>
-        </p>
       </Fragment>
     );
   };
@@ -167,6 +167,47 @@ const Activity = ({ activity, activityIndex }) => {
         Statement of Alternative Considerations and Supporting Justification
       </h3>
       <div dangerouslySetInnerHTML={{ __html: activity.alternatives }} />
+
+      <h3 className="viewonly-activity-header">
+        <small>
+          Activity {activityIndex + 1} ({activity.name})
+        </small>
+        <br /> Standards and Conditions
+      </h3>
+
+      <p>
+        <strong>
+          This activity supports the Medicaid standards and conditions from 42
+          CFR 433.112.
+        </strong>
+      </p>
+      {activity.standardsAndConditions.supports ? (
+        <p
+          dangerouslySetInnerHTML={{
+            __html: activity.standardsAndConditions.supports
+          }}
+        />
+      ) : (
+        <p>
+          No response was provided for how this activity will support the
+          Medicaid standards and conditions.
+        </p>
+      )}
+
+      <p>
+        <strong>
+          This activity does not support the Medicaid standards and conditions
+          from 42 CFR 433.112.
+        </strong>
+      </p>
+      {activity.standardsAndConditions.doesNotSupport ? (
+        <p>{activity.standardsAndConditions.doesNotSupport}</p>
+      ) : (
+        <p>
+          No response was provided for how this activity will support the
+          Medicaid standards and conditions.
+        </p>
+      )}
 
       <h3 className="viewonly-activity-header">
         <small>
@@ -246,47 +287,6 @@ const Activity = ({ activity, activityIndex }) => {
         costAllocation={activity.costAllocation}
         isViewOnly
       />
-
-      <h3 className="viewonly-activity-header">
-        <small>
-          Activity {activityIndex + 1} ({activity.name})
-        </small>
-        <br /> Standards and Conditions
-      </h3>
-
-      <p>
-        <strong>
-          This activity supports the Medicaid standards and conditions from 42
-          CFR 433.112.
-        </strong>
-      </p>
-      {activity.standardsAndConditions.supports ? (
-        <p
-          dangerouslySetInnerHTML={{
-            __html: activity.standardsAndConditions.supports
-          }}
-        />
-      ) : (
-        <p>
-          No response was provided for how this activity will support the
-          Medicaid standards and conditions.
-        </p>
-      )}
-
-      <p>
-        <strong>
-          This activity does not support the Medicaid standards and conditions
-          from 42 CFR 433.112.
-        </strong>
-      </p>
-      {activity.standardsAndConditions.doesNotSupport ? (
-        <p>{activity.standardsAndConditions.doesNotSupport}</p>
-      ) : (
-        <p>
-          No response was provided for how this activity will support the
-          Medicaid standards and conditions.
-        </p>
-      )}
     </Fragment>
   );
 };
