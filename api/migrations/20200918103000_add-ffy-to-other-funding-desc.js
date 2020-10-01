@@ -2,7 +2,7 @@
 exports.up = async knex => {
   const apdRecords = await knex('apds').select('document', 'id', 'years');
 
-  apdRecords.forEach(({ document, id, ...row }) => {
+  apdRecords.forEach(({ document, id }) => {
     const years = document.years;
 
     document.activities.forEach(activity => {
