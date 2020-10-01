@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 exports.up = async knex => {
-  const apdRecords = await knex('apds').select('document', 'id');
+  const apdRecords = await knex('apds').select('document', 'id', 'years');
 
-  apdRecords.forEach(({ document, id }) => {
+  apdRecords.forEach(({ document, id, ...row }) => {
     const years = document.years;
 
     document.activities.forEach(activity => {
-      const otherSources = activity.costAllocationNarrative.otherSources
+      const otherSources = activity.costAllocationNarrative.otherSources || ""
       years.forEach(year => {
         activity.costAllocationNarrative[year] = {
           otherSources
