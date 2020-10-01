@@ -4,6 +4,7 @@
   "allowlist": [
     "1550|postcss-custom-properties>postcss-values-parser>is-url-superb>url-regex",
     "1550|postcss-custom-properties>postcss-values-parser>url-regex"
+    "1561|webpack-dev-server>selfsigned>node-forge"
   ],
   "registry": "https://registry.npmjs.org"
 }
