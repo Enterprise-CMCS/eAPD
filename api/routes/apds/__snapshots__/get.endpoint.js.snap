@@ -1832,7 +1832,10 @@ Object {
   },
   "status": "draft",
   "updated": "1910-06-18T09:00:00.000Z",
-  "years": Array [],
+  "years": Array [
+    "2019",
+    "2020",
+  ],
 }
 `;
 
@@ -1846,7 +1849,10 @@ Array [
     "name": "MN-1921-07-11-HITECH-APD",
     "status": "draft",
     "updated": "1910-06-18T09:00:00.000Z",
-    "years": Array [],
+    "years": Array [
+      "2019",
+      "2020",
+    ],
   },
   Object {
     "created": "1936-08-03T00:00:00.000Z",

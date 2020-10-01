@@ -7,14 +7,14 @@ Object {
       "alternatives": "",
       "contractorResources": Array [],
       "costAllocation": Object {
-        "2020": Object {
+        "2021": Object {
           "ffp": Object {
             "federal": 90,
             "state": 10,
           },
           "other": 0,
         },
-        "2021": Object {
+        "2022": Object {
           "ffp": Object {
             "federal": 90,
             "state": 10,
@@ -23,10 +23,10 @@ Object {
         },
       },
       "costAllocationNarrative": Object {
-        "2020": Object {
+        "2021": Object {
           "otherSources": "",
         },
-        "2021": Object {
+        "2022": Object {
           "otherSources": "",
         },
         "methodology": "",
@@ -50,7 +50,7 @@ Object {
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
-        "2020": Object {
+        "2021": Object {
           "1": Object {
             "contractors": 0,
             "inHouse": 0,
@@ -68,7 +68,7 @@ Object {
             "inHouse": 0,
           },
         },
-        "2021": Object {
+        "2022": Object {
           "1": Object {
             "contractors": 0,
             "inHouse": 0,
@@ -105,13 +105,13 @@ Object {
   "id": 1,
   "incentivePayments": Object {
     "ehAmt": Object {
-      "2020": Object {
+      "2021": Object {
         "1": 0,
         "2": 0,
         "3": 0,
         "4": 0,
       },
-      "2021": Object {
+      "2022": Object {
         "1": 0,
         "2": 0,
         "3": 0,
@@ -119,13 +119,13 @@ Object {
       },
     },
     "ehCt": Object {
-      "2020": Object {
+      "2021": Object {
         "1": 0,
         "2": 0,
         "3": 0,
         "4": 0,
       },
-      "2021": Object {
+      "2022": Object {
         "1": 0,
         "2": 0,
         "3": 0,
@@ -133,13 +133,13 @@ Object {
       },
     },
     "epAmt": Object {
-      "2020": Object {
+      "2021": Object {
         "1": 0,
         "2": 0,
         "3": 0,
         "4": 0,
       },
-      "2021": Object {
+      "2022": Object {
         "1": 0,
         "2": 0,
         "3": 0,
@@ -147,13 +147,13 @@ Object {
       },
     },
     "epCt": Object {
-      "2020": Object {
+      "2021": Object {
         "1": 0,
         "2": 0,
         "3": 0,
         "4": 0,
       },
-      "2021": Object {
+      "2022": Object {
         "1": 0,
         "2": 0,
         "3": 0,
@@ -164,13 +164,13 @@ Object {
   "keyPersonnel": Array [
     Object {
       "costs": Object {
-        "2020": 0,
         "2021": 0,
+        "2022": 0,
       },
       "email": "",
       "fte": Object {
-        "2020": 0,
         "2021": 0,
+        "2022": 0,
       },
       "hasCosts": false,
       "isPrimary": true,
@@ -183,26 +183,6 @@ Object {
   "narrativeHIT": "",
   "narrativeMMIS": "",
   "previousActivityExpenses": Object {
-    "2018": Object {
-      "hithie": Object {
-        "federalActual": 0,
-        "totalApproved": 0,
-      },
-      "mmis": Object {
-        "50": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-        "75": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-        "90": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-      },
-    },
     "2019": Object {
       "hithie": Object {
         "federalActual": 0,
@@ -243,6 +223,26 @@ Object {
         },
       },
     },
+    "2021": Object {
+      "hithie": Object {
+        "federalActual": 0,
+        "totalApproved": 0,
+      },
+      "mmis": Object {
+        "50": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "75": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "90": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+      },
+    },
   },
   "previousActivitySummary": "",
   "programOverview": "",
@@ -261,8 +261,8 @@ Object {
     },
   },
   "years": Array [
-    "2020",
     "2021",
+    "2022",
   ],
 }
 `;

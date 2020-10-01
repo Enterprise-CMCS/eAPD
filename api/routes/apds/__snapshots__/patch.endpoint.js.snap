@@ -1827,7 +1827,10 @@ Object {
     },
   },
   "status": "draft",
-  "years": Array [],
+  "years": Array [
+    "2019",
+    "2020",
+  ],
 }
 `;
 
@@ -3670,7 +3673,10 @@ Object {
     },
   },
   "status": "draft",
-  "years": Array [],
+  "years": Array [
+    "2019",
+    "2020",
+  ],
 }
 `;
 
