@@ -104,6 +104,7 @@ su ec2-user <<E_USER
 
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
+export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
@@ -166,7 +167,12 @@ echo "module.exports = {
       PBKDF2_ITERATIONS: '__PBKDF2_ITERATIONS__',
       PORT: '8000',
       DEV_DB_HOST: 'localhost',
-      DISABLE_SAME_SITE: 'yes'
+      DISABLE_SAME_SITE: 'yes',
+      OKTA_DOMAIN: '__OKTA_DOMAIN__',
+      OKTA_SERVER_ID: '__OKTA_SERVER_ID__',
+      OKTA_CLIENT_ID: '__OKTA_CLIENT_ID__',
+      OKTA_API_KEY: '__OKTA_API_KEY__'
+
     },
   }]
 };" > ecosystem.config.js
