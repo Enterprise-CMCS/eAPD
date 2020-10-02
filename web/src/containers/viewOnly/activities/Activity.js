@@ -5,6 +5,8 @@ import Dollars from '../../../components/Dollars';
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
 import { stateDateToDisplay } from '../../../util';
 
+const isYear = (value) => !!value.match(/^[0-9]{4}$/);
+
 const Activity = ({ activity, activityIndex }) => {
   const buildObjective = objective => {
     return (
@@ -272,7 +274,7 @@ const Activity = ({ activity, activityIndex }) => {
       <h3>Other Funding</h3>
 
       {Object.entries(activity.costAllocationNarrative)
-        .filter(([year, _]) => !Number.isNaN(year))  // eslint-disable-line no-unused-vars
+        .filter(([year, _]) => isYear(year)) // eslint-disable-line no-unused-vars
         .map(([year, narrative]) => (
           <Fragment>
             <h3>FFY {year}</h3>
