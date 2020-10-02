@@ -10,11 +10,13 @@ const Nav = ({ generateKey, items, pathname }) => {
   const [key, setKey] = useState('');
   useEffect(() => setKey(generateKey()), [pathname]);
   return (
-    <VerticalNav
-      component={NavLink}
-      items={items}
-      key={key}
-    />
+    <nav aria-label="Main Navigation">
+      <VerticalNav
+        component={NavLink}
+        items={items}
+        key={key}
+      />
+    </nav>
   )
 };
 
