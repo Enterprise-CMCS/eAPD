@@ -15,15 +15,6 @@ const {
 } = process.env;
 const OKTA_ISSUER = `${OKTA_DOMAIN}/oauth2/${OKTA_SERVER_ID}`;
 
-console.log('in backend');
-console.log({
-  OKTA_DOMAIN,
-  OKTA_SERVER_ID,
-  OKTA_CLIENT_ID,
-  OKTA_ISSUER,
-  OKTA_API_KEY
-});
-
 /**
  * Returns the User Application Profile URL
  * @param {string} id the user's id
