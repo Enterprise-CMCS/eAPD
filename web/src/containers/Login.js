@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
-import { login, loginOtp } from '../actions/auth';
+import { login } from '../actions/auth';
 import CardForm from '../components/CardForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
-import LoginMFA from './LoginMFA';
 
 const Login = ({
   authenticated,
@@ -17,9 +16,7 @@ const Login = ({
   fetching,
   hasEverLoggedOn,
   location,
-  otpStage,
-  login: action,
-  loginOtp: otpAction
+  login: action
 }) => {
   const [showConsent, setShowConsent] = useState(true);
   const [username, setUsername] = useState('');
@@ -54,30 +51,15 @@ const Login = ({
     );
   }
 
-  let errorMessage = null;
-  if (otpStage && error === 'Authentication failed') {
-    errorMessage = 'The one-time password you’ve entered is incorrect.';
-  } else if (
-    error === 'Authentication failed' ||
-    error === 'Request failed with status code 401'
-  ) {
+  let errorMessage = false;
+  if (error === 'Unauthorized') {
     errorMessage = 'The email or password you’ve entered is incorrect.';
-  } else if (error) {
+  } else if (error === 'Unauthorized') {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
 
-  if (otpStage) {
-    return (
-      <LoginMFA
-        action={otpAction}
-        errorMessage={errorMessage}
-        fetching={fetching}
-      />
-    );
-  }
-
   return (
-    <div id="start-main-content">
+    <main id="start-main-content">
       <UpgradeBrowser />
       <CardForm
         title="Log in"
@@ -109,7 +91,7 @@ const Login = ({
         />
         <Password title="Password" value={password} onChange={changePassword} />
       </CardForm>
-    </div>
+    </main>
   );
 };
 
@@ -119,22 +101,19 @@ Login.propTypes = {
   fetching: PropTypes.bool.isRequired,
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
-  otpStage: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
-  loginOtp: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage }
+  auth: { authenticated, error, fetching, hasEverLoggedOn }
 }) => ({
   authenticated,
   error,
   fetching,
-  hasEverLoggedOn,
-  otpStage
+  hasEverLoggedOn
 });
 
-const mapDispatchToProps = { login, loginOtp };
+const mapDispatchToProps = { login };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
