@@ -299,7 +299,7 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        Federal Financial Participation (FFP) and Cost Allocation
+        Budget and Federal Financial Participation (FFP)
       </h3>
       <CostAllocateFFP
         aKey={activity.key}
