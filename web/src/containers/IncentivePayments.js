@@ -62,7 +62,7 @@ const IncentivePayments = ({
                 </th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <th key={q} className="ds-u-text-align--right" scope="col">
+                    <th id={'q' + q} key={q} className="ds-u-text-align--right" scope="col">
                       {t('table.quarter', { q })}
                     </th>
                   ))}
@@ -77,7 +77,7 @@ const IncentivePayments = ({
             </thead>
             <tbody>
               <tr>
-                <th scope="row">EH Payments</th>
+                <th id="eh-payments" scope="row">EH Payments</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
@@ -87,6 +87,7 @@ const IncentivePayments = ({
                         <DollarField
                           className="budget-table--input-holder"
                           fieldClassName="budget-table--input__number"
+                          aria-LabelledBy={'q' + q + ' ' + 'eh-payments'}
                           label={`ehAmt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`ehAmt-payments-${year}-q${q}`}
@@ -103,7 +104,7 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th scope="row">EH Count (optional)</th>
+                <th id="eh-count" scope="row">EH Count (optional)</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
@@ -113,6 +114,7 @@ const IncentivePayments = ({
                         <NumberField
                           className="budget-table--input-holder"
                           fieldClassName="budget-table--input__number"
+                          aria-LabelledBy={'q' + q + ' ' + 'eh-count'}
                           label={`ehCt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`ehCt-payments-${year}-q${q}`}
@@ -129,7 +131,7 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th scope="row">EP Payments</th>
+                <th id="ep-payments" scope="row">EP Payments</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
@@ -139,6 +141,7 @@ const IncentivePayments = ({
                         <DollarField
                           className="budget-table--input-holder"
                           fieldClassName="budget-table--input__number"
+                          aria-LabelledBy={'q' + q + ' ' + 'ep-payments'}
                           label={`epAmt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`epAmt-payments-${year}-q${q}`}
@@ -155,7 +158,7 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th scope="row">EP Count (optional)</th>
+                <th id="ep-count" scope="row">EP Count (optional)</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
@@ -165,6 +168,7 @@ const IncentivePayments = ({
                         <NumberField
                           className="budget-table--input-holder"
                           fieldClassName="budget-table--input__number"
+                          aria-LabelledBy={'q' + q + ' ' + 'ep-count'}
                           label={`epCt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`epCt-payments-${year}-q${q}`}
