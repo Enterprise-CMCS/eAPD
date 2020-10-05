@@ -87,6 +87,17 @@ class RichText extends Component {
     const { uploadFile: upload, content } = this.props;
     const { id } = this.state;
 
+    const toolbar = [
+      "undo redo",
+      "style",
+      "bold italic",
+      "alignleft aligncenter alignright alignjustify",
+      "outdent indent",
+      "formatselect",
+      "removeformat",
+      "eapdImageUpload"
+    ].join(" | ");
+
     return (
       <div className="rte--wrapper">
         <Editor
@@ -99,8 +110,7 @@ class RichText extends Component {
             paste_data_images: true,
             plugins: ['autoresize', 'paste', 'spellchecker'],
             setup: setupTinyMCE(upload),
-            toolbar:
-              'undo redo | style | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | eapdImageUpload'
+            toolbar
           }}
           value={content}
           onEditorChange={this.onEditorChange}
