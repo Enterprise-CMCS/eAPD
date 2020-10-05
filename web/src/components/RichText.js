@@ -87,6 +87,7 @@ class RichText extends Component {
     const { uploadFile: upload, content } = this.props;
     const { id } = this.state;
 
+    // https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/
     const toolbar = [
       "undo redo",
       "style",
