@@ -4,6 +4,7 @@ import costAllocate from './costAllocate.yaml';
 import expenses from './expenses.yaml';
 import goals from './goals.yaml';
 import milestones from './milestones.yaml';
+import otherFunding from './otherFunding.yaml';
 import overview from './overview.yaml';
 import schedule from './schedule.yaml';
 import standardsAndConditions from './standardsAndConditions.yaml';
@@ -16,6 +17,7 @@ export default {
   expenses,
   goals,
   milestones,
+  otherFunding,
   overview,
   schedule,
   standardsAndConditions,

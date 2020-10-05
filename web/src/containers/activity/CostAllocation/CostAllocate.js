@@ -2,26 +2,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-  setCostAllocationMethodology,
-  setCostAllocationOtherFunding
-} from '../../actions/editActivity';
-import Instruction from '../../components/Instruction';
-import RichText from '../../components/RichText';
-import { Subsection } from '../../components/Section';
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import { setCostAllocationMethodology } from '../../../actions/editActivity';
+import Instruction from '../../../components/Instruction';
+import RichText from '../../../components/RichText';
+import { selectActivityByIndex } from '../../../reducers/activities.selectors';
+import { Subsection } from '../../../components/Section';
 
 const CostAllocate = ({
   activity,
   activityIndex,
   setMethodology,
-  setOtherFunding
 }) => {
   const {
-    costAllocationNarrative: { methodology, otherSources }
+    costAllocationNarrative: { methodology }
   } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
-  const syncOtherFunding = html => setOtherFunding(activityIndex, html);
 
   return (
     <Subsection
@@ -42,21 +37,6 @@ const CostAllocate = ({
           editorClassName="rte-textarea-l"
         />
       </div>
-
-      <div className="data-entry-box">
-        <Instruction
-          source="activities.costAllocate.otherFunding.instruction"
-          headingDisplay={{
-            level: 'h6',
-            className: 'ds-h5'
-          }}
-        />
-        <RichText
-          content={otherSources}
-          onSync={syncOtherFunding}
-          editorClassName="rte-textarea-l"
-        />
-      </div>
     </Subsection>
   );
 };
@@ -64,8 +44,7 @@ const CostAllocate = ({
 CostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
-  setMethodology: PropTypes.func.isRequired,
-  setOtherFunding: PropTypes.func.isRequired
+  setMethodology: PropTypes.func.isRequired
 };
 
 export const mapStateToProps = (state, { activityIndex }) => {
@@ -75,9 +54,8 @@ export const mapStateToProps = (state, { activityIndex }) => {
 };
 
 export const mapDispatchToProps = {
-  setMethodology: setCostAllocationMethodology,
-  setOtherFunding: setCostAllocationOtherFunding
+  setMethodology: setCostAllocationMethodology
 };
 
-export { CostAllocate as CostAllocateRaw };
+export { CostAllocate as plain };
 export default connect(mapStateToProps, mapDispatchToProps)(CostAllocate);
