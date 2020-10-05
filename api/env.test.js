@@ -37,28 +37,6 @@ tap.test('environment setup', async envTest => {
   );
 
   envTest.test(
-    'reads environment variables from CF user-provided services',
-    async test => {
-      process.env.VCAP_SERVICES = JSON.stringify({
-        'user-provided': [
-          {
-            credentials: {
-              VCAP_VAR1: 'var1',
-              VCAP_VAR2: 'var2'
-            }
-          }
-        ]
-      });
-      require('./env'); // eslint-disable-line global-require
-      test.match(
-        process.env,
-        { VCAP_VAR1: 'var1', VCAP_VAR2: 'var2' },
-        'sets variables from CF user-provided service'
-      );
-    }
-  );
-
-  envTest.test(
     'does not override environment variables that have been set externally',
     async test => {
       knownEnvironmentVariables.forEach(envVar => {

@@ -10,3 +10,5 @@ npm-debug.log*
 pgdata
 __files
 api/test-data/files
+notes.md
+schema.sql

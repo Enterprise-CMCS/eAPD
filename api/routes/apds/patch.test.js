@@ -15,7 +15,7 @@ tap.test('apds PATCH endpoint', async tests => {
   const getAPDByID = sandbox.stub();
   const patchObject = sandbox.stub();
   const updateAPDDocument = sandbox.stub();
-  const validateApd = sandbox.stub();
+  const validate = sandbox.stub();
 
   const res = {
     end: sandbox.spy(),
@@ -30,13 +30,13 @@ tap.test('apds PATCH endpoint', async tests => {
     res.send.returns(res);
     res.status.returns(res);
 
-    validateApd.errors = [];
+    validate.errors = [];
 
     patchEndpoint(app, {
       getAPDByID,
       patchObject,
       updateAPDDocument,
-      validateApd
+      validate
     });
     handler = app.patch.args[0][app.patch.args[0].length - 1];
   });
@@ -106,8 +106,8 @@ tap.test('apds PATCH endpoint', async tests => {
 
     getAPDByID.resolves({ document: 'old document' });
     patchObject.returns(patchedDocument);
-    validateApd.returns(false);
-    validateApd.errors = [
+    validate.returns(false);
+    validate.errors = [
       { dataPath: '/key1/key2/key3', message: 'validation error' }
     ];
 
@@ -117,7 +117,7 @@ tap.test('apds PATCH endpoint', async tests => {
 
     test.ok(patchObject.calledWith('old document', patches), 'applies patches');
     test.ok(
-      validateApd.calledWith(patchedDocument),
+      validate.calledWith(patchedDocument),
       'validates the new document'
     );
     test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
@@ -141,7 +141,7 @@ tap.test('apds PATCH endpoint', async tests => {
     });
     const patchedDocument = { key1: 'value 1' };
     patchObject.returns(patchedDocument);
-    validateApd.returns(true);
+    validate.returns(true);
     updateAPDDocument.resolves('update time');
 
     const patches = [{ path: 'path 1' }, { path: 'path 2' }];
