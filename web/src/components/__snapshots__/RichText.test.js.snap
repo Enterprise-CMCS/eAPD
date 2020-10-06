@@ -15,6 +15,7 @@ exports[`RichText component renders as expected 1`] = `
         "menubar": "",
         "paste_data_images": true,
         "plugins": Array [
+          "advlist",
           "autoresize",
           "lists",
           "paste",

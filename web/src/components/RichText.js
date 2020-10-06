@@ -8,7 +8,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import 'tinymce/themes/silver';
 
 // Any plugins you want to use have to be imported
+import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/autoresize';
+import 'tinymce/plugins/lists';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/spellchecker';
 
@@ -89,6 +91,7 @@ class RichText extends Component {
 
     // https://www.tiny.cloud/docs/plugins/
     const plugins = [
+      'advlist',
       'autoresize',
       'lists',
       'paste',
