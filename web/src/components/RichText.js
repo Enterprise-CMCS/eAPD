@@ -91,7 +91,7 @@ class RichText extends Component {
     const toolbar = [
       "undo redo",
       "style",
-      "bold italic",
+      "bold italic strikethrough forecolor",
       "alignleft aligncenter alignright alignjustify",
       "outdent indent",
       "formatselect",
