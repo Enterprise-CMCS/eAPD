@@ -87,6 +87,14 @@ class RichText extends Component {
     const { uploadFile: upload, content } = this.props;
     const { id } = this.state;
 
+    // https://www.tiny.cloud/docs/plugins/
+    const plugins = [
+      'autoresize',
+      'lists',
+      'paste',
+      'spellchecker'
+    ];
+
     // https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/
     const toolbar = [
       "undo redo",
@@ -94,6 +102,7 @@ class RichText extends Component {
       "bold italic strikethrough forecolor",
       "alignleft aligncenter alignright alignjustify",
       "outdent indent",
+      "numlist bullist",
       "formatselect",
       "removeformat",
       "eapdImageUpload"
@@ -109,7 +118,7 @@ class RichText extends Component {
             images_upload_handler: this.uploadImage(),
             menubar: '',
             paste_data_images: true,
-            plugins: ['autoresize', 'paste', 'spellchecker'],
+            plugins,
             setup: setupTinyMCE(upload),
             toolbar
           }}
