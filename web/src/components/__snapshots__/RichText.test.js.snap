@@ -22,7 +22,7 @@ exports[`RichText component renders as expected 1`] = `
           "spellchecker",
         ],
         "setup": [Function],
-        "toolbar": "undo redo | style | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatselect | removeformat | eapdImageUpload",
+        "toolbar": "undo redo | style | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatselect | eapdImageUpload",
       }
     }
     onEditorChange={[Function]}

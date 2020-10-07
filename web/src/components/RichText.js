@@ -107,7 +107,6 @@ class RichText extends Component {
       "outdent indent",
       "numlist bullist",
       "formatselect",
-      "removeformat",
       "eapdImageUpload"
     ].join(" | ");
 
