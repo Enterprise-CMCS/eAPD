@@ -17,22 +17,13 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
   <thead>
     <tr>
       <th>
-        <span
-          aria-hidden="true"
-        >
-          FFY 13
-        </span>
+        FFY 13
       </th>
       <th
         className="ds-u-text-align--right"
         key="1"
         scope="col"
       >
-        <span
-          className="ds-u-visibility--screen-reader"
-        >
-          FFY 13
-        </span>
         Q1
       </th>
       <th
@@ -40,11 +31,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="2"
         scope="col"
       >
-        <span
-          className="ds-u-visibility--screen-reader"
-        >
-          FFY 13
-        </span>
         Q2
       </th>
       <th
@@ -52,11 +38,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="3"
         scope="col"
       >
-        <span
-          className="ds-u-visibility--screen-reader"
-        >
-          FFY 13
-        </span>
         Q3
       </th>
       <th
@@ -64,22 +45,12 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="4"
         scope="col"
       >
-        <span
-          className="ds-u-visibility--screen-reader"
-        >
-          FFY 13
-        </span>
         Q4
       </th>
       <th
         className="budget-table--subtotal ds-u-text-align--right"
         scope="col"
       >
-        <span
-          className="ds-u-visibility--screen-reader"
-        >
-          FFY 13
-        </span>
         Subtotal
       </th>
     </tr>
@@ -96,7 +67,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="1"
       >
         <PercentField
-          aria-controls="ffp-3-13-1-state-dollar-equivalent"
           className="budget-table--input-holder"
           fieldClassName="budget-table--input__number"
           label="federal share for ffy 13, quarter 1, state"
@@ -111,7 +81,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="2"
       >
         <PercentField
-          aria-controls="ffp-3-13-2-state-dollar-equivalent"
           className="budget-table--input-holder"
           fieldClassName="budget-table--input__number"
           label="federal share for ffy 13, quarter 2, state"
@@ -126,7 +95,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="3"
       >
         <PercentField
-          aria-controls="ffp-3-13-3-state-dollar-equivalent"
           className="budget-table--input-holder"
           fieldClassName="budget-table--input__number"
           label="federal share for ffy 13, quarter 3, state"
@@ -141,7 +109,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="4"
       >
         <PercentField
-          aria-controls="ffp-3-13-4-state-dollar-equivalent"
           className="budget-table--input-holder"
           fieldClassName="budget-table--input__number"
           label="federal share for ffy 13, quarter 4, state"
@@ -210,7 +177,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="1"
       >
         <PercentField
-          aria-controls="ffp-3-13-1-contractors-dollar-equivalent"
           className="budget-table--input-holder"
           fieldClassName="budget-table--input__number"
           label="federal share for ffy 13, quarter 1, contractors"
@@ -225,7 +191,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="2"
       >
         <PercentField
-          aria-controls="ffp-3-13-2-contractors-dollar-equivalent"
           className="budget-table--input-holder"
           fieldClassName="budget-table--input__number"
           label="federal share for ffy 13, quarter 2, contractors"
@@ -240,7 +205,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="3"
       >
         <PercentField
-          aria-controls="ffp-3-13-3-contractors-dollar-equivalent"
           className="budget-table--input-holder"
           fieldClassName="budget-table--input__number"
           label="federal share for ffy 13, quarter 3, contractors"
@@ -255,7 +219,6 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         key="4"
       >
         <PercentField
-          aria-controls="ffp-3-13-4-contractors-dollar-equivalent"
           className="budget-table--input-holder"
           fieldClassName="budget-table--input__number"
           label="federal share for ffy 13, quarter 4, contractors"
