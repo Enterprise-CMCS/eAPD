@@ -31,7 +31,7 @@ const SummaryActivityBreakdownTable = ({
             </span>
           </th>
           <th scope="col" colSpan="4">
-            Personnel Cost x FTE
+            Personnel Cost × FTE
           </th>
           <th scope="col" className="ds-u-text-align--right">
             Total cost
