@@ -18,12 +18,14 @@ exports[`<CostAllocate /> renders correctly 1`] = `
           "level": "h6",
         }
       }
+      labelFor="cost-allocation-methodology-field"
       reverse={false}
       source="activities.costAllocate.methodology.instruction"
     />
     <Connect(RichText)
       content="cost allocation"
       editorClassName="rte-textarea-l"
+      id="cost-allocation-methodology-field"
       onSync={[Function]}
     />
   </div>

@@ -76,9 +76,11 @@ const ApdSummary = ({
       </div>
       <div className="ds-u-margin-bottom--3">
         <Instruction
+          labelFor="hit-overview-field"
           source="apd.hit.instruction"
         />
         <RichText
+          id="hit-overview-field"
           content={narrativeHIT}
           onSync={syncRichText(setHIT)}
           editorClassName="rte-textarea-l"
@@ -86,9 +88,11 @@ const ApdSummary = ({
       </div>
       <div className="ds-u-margin-bottom--3">
         <Instruction
+          labelFor="hie-overview-field"
           source="apd.hie.instruction"
         />
         <RichText
+          id="hie-overview-field"
           content={narrativeHIE}
           onSync={syncRichText(setHIE)}
           editorClassName="rte-textarea-l"
@@ -96,9 +100,11 @@ const ApdSummary = ({
       </div>
       <div>
         <Instruction
+          labelFor="mmis-overview-field"
           source="apd.mmis.instruction"
         />
         <RichText
+          id="mmis-overview-field"
           content={narrativeMMIS}
           onSync={syncRichText(setMMIS)}
           editorClassName="rte-textarea-l"

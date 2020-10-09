@@ -35,12 +35,14 @@ exports[`activity overview/summary section (in the activity body) renders correc
     <FormLabel
       className="ds-c-label--full-width"
       component="label"
+      fieldId="activity-description-field"
       hint=""
     >
       Include as much detail as is necessary to explain the activity.
     </FormLabel>
     <Connect(RichText)
       editorClassName="rte-textarea-l"
+      id="activity-description-field"
       onSync={[Function]}
     />
   </div>
@@ -50,6 +52,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
     <FormLabel
       className="ds-c-label--full-width"
       component="label"
+      fieldId="activity-alternatives-field"
       hint=""
     >
       Statement of alternative considerations and supporting justification
@@ -67,6 +70,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
     />
     <Connect(RichText)
       editorClassName="rte-textarea-l"
+      id="activity-alternatives-field"
       onSync={[Function]}
     />
   </div>

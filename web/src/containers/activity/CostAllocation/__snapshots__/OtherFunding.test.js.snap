@@ -26,12 +26,14 @@ exports[`<OtherFunding /> renders correctly 1`] = `
           "level": "h6",
         }
       }
+      labelFor="cost-allocation-narrative-1066-other-sources-field"
       reverse={false}
       source="activities.otherFunding.description.instruction"
     />
     <Connect(RichText)
       content="other funding for FFY 1066"
       editorClassName="rte-textarea-l"
+      id="cost-allocation-narrative-1066-other-sources-field"
       onSync={[Function]}
     />
   </div>
@@ -132,12 +134,14 @@ exports[`<OtherFunding /> renders correctly 1`] = `
           "level": "h6",
         }
       }
+      labelFor="cost-allocation-narrative-1067-other-sources-field"
       reverse={false}
       source="activities.otherFunding.description.instruction"
     />
     <Connect(RichText)
       content="other funding for FFY 1067"
       editorClassName="rte-textarea-l"
+      id="cost-allocation-narrative-1067-other-sources-field"
       onSync={[Function]}
     />
   </div>
