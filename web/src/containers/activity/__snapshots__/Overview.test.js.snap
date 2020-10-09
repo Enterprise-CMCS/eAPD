@@ -65,6 +65,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
           "level": "h3",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.overview.activityAlternativesInput"
     />

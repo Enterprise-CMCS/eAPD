@@ -48,6 +48,7 @@ exports[`<OtherFunding /> renders correctly 1`] = `
           "level": "h6",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.otherFunding.amount.instruction"
     />
@@ -156,6 +157,7 @@ exports[`<OtherFunding /> renders correctly 1`] = `
           "level": "h6",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.otherFunding.amount.instruction"
     />

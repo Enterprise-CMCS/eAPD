@@ -18,6 +18,7 @@ exports[`apd summary component renders correctly 1`] = `
         "level": "h3",
       }
     }
+    labelFor={null}
     reverse={false}
     source="apd.overview.instruction"
   />
