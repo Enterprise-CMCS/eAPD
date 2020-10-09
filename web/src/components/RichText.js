@@ -52,7 +52,6 @@ class RichText extends Component {
   constructor(props) {
     super(props);
 
-    console.log("on construction, props.id: " + props.id)
     this.state = {
       id: props.id || `rte-${generateKey()}`
     };
@@ -88,8 +87,6 @@ class RichText extends Component {
     const { uploadFile: upload, content } = this.props;
     const { id } = this.state;
 
-    console.log("on render, state.id: " + id)
-
     return (
       <div className="rte--wrapper">
         <Editor
@@ -116,7 +113,6 @@ class RichText extends Component {
 RichText.propTypes = {
   content: PropTypes.string,
   id: PropTypes.string,
-  labelFor: PropTypes.string,
   onSync: PropTypes.func,
   uploadFile: PropTypes.func.isRequired
 };
