@@ -25,395 +25,268 @@ exports[`<CreateAccount /> renders correctly 1`] = `
       type="text"
       value=""
     />
-    <FormLabel
-      component="label"
-      fieldId="create_account_state"
-    >
-      State
-    </FormLabel>
     <Dropdown
-      id="create_account_state"
-      label=""
+      label="State"
       name="state"
       onChange={[Function]}
-      options={Array []}
+      options={
+        Array [
+          Object {
+            "label": "None",
+            "value": "",
+          },
+          Object {
+            "label": "Alabama",
+            "value": "al",
+          },
+          Object {
+            "label": "Alaska",
+            "value": "ak",
+          },
+          Object {
+            "label": "Arizona",
+            "value": "az",
+          },
+          Object {
+            "label": "Arkansas",
+            "value": "ar",
+          },
+          Object {
+            "label": "California",
+            "value": "ca",
+          },
+          Object {
+            "label": "Colorado",
+            "value": "co",
+          },
+          Object {
+            "label": "Connecticut",
+            "value": "ct",
+          },
+          Object {
+            "label": "Delaware",
+            "value": "de",
+          },
+          Object {
+            "label": "Florida",
+            "value": "fl",
+          },
+          Object {
+            "label": "Georgia",
+            "value": "ga",
+          },
+          Object {
+            "label": "Hawaii",
+            "value": "hi",
+          },
+          Object {
+            "label": "Idaho",
+            "value": "id",
+          },
+          Object {
+            "label": "Iowa",
+            "value": "ia",
+          },
+          Object {
+            "label": "Illinois",
+            "value": "il",
+          },
+          Object {
+            "label": "Indiana",
+            "value": "in",
+          },
+          Object {
+            "label": "Kansas",
+            "value": "ks",
+          },
+          Object {
+            "label": "Kentucky",
+            "value": "ky",
+          },
+          Object {
+            "label": "Louisiana",
+            "value": "la",
+          },
+          Object {
+            "label": "Maine",
+            "value": "me",
+          },
+          Object {
+            "label": "Maryland",
+            "value": "md",
+          },
+          Object {
+            "label": "Massachusetts",
+            "value": "ma",
+          },
+          Object {
+            "label": "Michigan",
+            "value": "mi",
+          },
+          Object {
+            "label": "Minnesota",
+            "value": "mn",
+          },
+          Object {
+            "label": "Mississippi",
+            "value": "ms",
+          },
+          Object {
+            "label": "Missouri",
+            "value": "mo",
+          },
+          Object {
+            "label": "Montana",
+            "value": "mt",
+          },
+          Object {
+            "label": "Nebraska",
+            "value": "ne",
+          },
+          Object {
+            "label": "North Carolina",
+            "value": "nc",
+          },
+          Object {
+            "label": "North Dakota",
+            "value": "nd",
+          },
+          Object {
+            "label": "New Hampshire",
+            "value": "nh",
+          },
+          Object {
+            "label": "New Jersey",
+            "value": "nj",
+          },
+          Object {
+            "label": "New Mexico",
+            "value": "nm",
+          },
+          Object {
+            "label": "Nevada",
+            "value": "nv",
+          },
+          Object {
+            "label": "New York",
+            "value": "ny",
+          },
+          Object {
+            "label": "Ohio",
+            "value": "oh",
+          },
+          Object {
+            "label": "Oklahoma",
+            "value": "ok",
+          },
+          Object {
+            "label": "Oregon",
+            "value": "or",
+          },
+          Object {
+            "label": "Pennsylvania",
+            "value": "pa",
+          },
+          Object {
+            "label": "Rhode Island",
+            "value": "ri",
+          },
+          Object {
+            "label": "South Carolina",
+            "value": "sc",
+          },
+          Object {
+            "label": "South Dakota",
+            "value": "sd",
+          },
+          Object {
+            "label": "Tennessee",
+            "value": "tn",
+          },
+          Object {
+            "label": "Texas",
+            "value": "tx",
+          },
+          Object {
+            "label": "Utah",
+            "value": "ut",
+          },
+          Object {
+            "label": "Vermont",
+            "value": "vt",
+          },
+          Object {
+            "label": "Virginia",
+            "value": "va",
+          },
+          Object {
+            "label": "Washington",
+            "value": "wa",
+          },
+          Object {
+            "label": "West Virginia",
+            "value": "wv",
+          },
+          Object {
+            "label": "Wisconsin",
+            "value": "wi",
+          },
+          Object {
+            "label": "Wyoming",
+            "value": "wy",
+          },
+          Object {
+            "label": "District of Columbia",
+            "value": "dc",
+          },
+          Object {
+            "label": "American Samoa",
+            "value": "as",
+          },
+          Object {
+            "label": "Guam",
+            "value": "gu",
+          },
+          Object {
+            "label": "Northern Mariana Islands",
+            "value": "mp",
+          },
+          Object {
+            "label": "Puerto Rico",
+            "value": "pr",
+          },
+          Object {
+            "label": "U.S. Virgin Islands",
+            "value": "vi",
+          },
+        ]
+      }
       size="medium"
       value=""
-    >
-      <option
-        value=""
-      >
-        None
-      </option>
-      <option
-        key="al"
-        value="al"
-      >
-        Alabama
-      </option>
-      <option
-        key="ak"
-        value="ak"
-      >
-        Alaska
-      </option>
-      <option
-        key="az"
-        value="az"
-      >
-        Arizona
-      </option>
-      <option
-        key="ar"
-        value="ar"
-      >
-        Arkansas
-      </option>
-      <option
-        key="ca"
-        value="ca"
-      >
-        California
-      </option>
-      <option
-        key="co"
-        value="co"
-      >
-        Colorado
-      </option>
-      <option
-        key="ct"
-        value="ct"
-      >
-        Connecticut
-      </option>
-      <option
-        key="de"
-        value="de"
-      >
-        Delaware
-      </option>
-      <option
-        key="fl"
-        value="fl"
-      >
-        Florida
-      </option>
-      <option
-        key="ga"
-        value="ga"
-      >
-        Georgia
-      </option>
-      <option
-        key="hi"
-        value="hi"
-      >
-        Hawaii
-      </option>
-      <option
-        key="id"
-        value="id"
-      >
-        Idaho
-      </option>
-      <option
-        key="ia"
-        value="ia"
-      >
-        Iowa
-      </option>
-      <option
-        key="il"
-        value="il"
-      >
-        Illinois
-      </option>
-      <option
-        key="in"
-        value="in"
-      >
-        Indiana
-      </option>
-      <option
-        key="ks"
-        value="ks"
-      >
-        Kansas
-      </option>
-      <option
-        key="ky"
-        value="ky"
-      >
-        Kentucky
-      </option>
-      <option
-        key="la"
-        value="la"
-      >
-        Louisiana
-      </option>
-      <option
-        key="me"
-        value="me"
-      >
-        Maine
-      </option>
-      <option
-        key="md"
-        value="md"
-      >
-        Maryland
-      </option>
-      <option
-        key="ma"
-        value="ma"
-      >
-        Massachusetts
-      </option>
-      <option
-        key="mi"
-        value="mi"
-      >
-        Michigan
-      </option>
-      <option
-        key="mn"
-        value="mn"
-      >
-        Minnesota
-      </option>
-      <option
-        key="ms"
-        value="ms"
-      >
-        Mississippi
-      </option>
-      <option
-        key="mo"
-        value="mo"
-      >
-        Missouri
-      </option>
-      <option
-        key="mt"
-        value="mt"
-      >
-        Montana
-      </option>
-      <option
-        key="ne"
-        value="ne"
-      >
-        Nebraska
-      </option>
-      <option
-        key="nc"
-        value="nc"
-      >
-        North Carolina
-      </option>
-      <option
-        key="nd"
-        value="nd"
-      >
-        North Dakota
-      </option>
-      <option
-        key="nh"
-        value="nh"
-      >
-        New Hampshire
-      </option>
-      <option
-        key="nj"
-        value="nj"
-      >
-        New Jersey
-      </option>
-      <option
-        key="nm"
-        value="nm"
-      >
-        New Mexico
-      </option>
-      <option
-        key="nv"
-        value="nv"
-      >
-        Nevada
-      </option>
-      <option
-        key="ny"
-        value="ny"
-      >
-        New York
-      </option>
-      <option
-        key="oh"
-        value="oh"
-      >
-        Ohio
-      </option>
-      <option
-        key="ok"
-        value="ok"
-      >
-        Oklahoma
-      </option>
-      <option
-        key="or"
-        value="or"
-      >
-        Oregon
-      </option>
-      <option
-        key="pa"
-        value="pa"
-      >
-        Pennsylvania
-      </option>
-      <option
-        key="ri"
-        value="ri"
-      >
-        Rhode Island
-      </option>
-      <option
-        key="sc"
-        value="sc"
-      >
-        South Carolina
-      </option>
-      <option
-        key="sd"
-        value="sd"
-      >
-        South Dakota
-      </option>
-      <option
-        key="tn"
-        value="tn"
-      >
-        Tennessee
-      </option>
-      <option
-        key="tx"
-        value="tx"
-      >
-        Texas
-      </option>
-      <option
-        key="ut"
-        value="ut"
-      >
-        Utah
-      </option>
-      <option
-        key="vt"
-        value="vt"
-      >
-        Vermont
-      </option>
-      <option
-        key="va"
-        value="va"
-      >
-        Virginia
-      </option>
-      <option
-        key="wa"
-        value="wa"
-      >
-        Washington
-      </option>
-      <option
-        key="wv"
-        value="wv"
-      >
-        West Virginia
-      </option>
-      <option
-        key="wi"
-        value="wi"
-      >
-        Wisconsin
-      </option>
-      <option
-        key="wy"
-        value="wy"
-      >
-        Wyoming
-      </option>
-      <option
-        key="dc"
-        value="dc"
-      >
-        District of Columbia
-      </option>
-      <option
-        key="as"
-        value="as"
-      >
-        American Samoa
-      </option>
-      <option
-        key="gu"
-        value="gu"
-      >
-        Guam
-      </option>
-      <option
-        key="mp"
-        value="mp"
-      >
-        Northern Mariana Islands
-      </option>
-      <option
-        key="pr"
-        value="pr"
-      >
-        Puerto Rico
-      </option>
-      <option
-        key="vi"
-        value="vi"
-      >
-        U.S. Virgin Islands
-      </option>
-    </Dropdown>
-    <FormLabel
-      component="label"
-      fieldId="create_account_role"
-    >
-      Authorization role
-    </FormLabel>
+    />
     <Dropdown
-      id="create_account_role"
+      label="Authorization role"
       name="role"
       onChange={[Function]}
-      options={Array []}
+      options={
+        Array [
+          Object {
+            "label": "None",
+            "value": "",
+          },
+          Object {
+            "label": "Admin",
+            "value": "admin",
+          },
+          Object {
+            "label": "State coordinator",
+            "value": "state coordinator",
+          },
+        ]
+      }
       size="medium"
       value=""
-    >
-      <option
-        value=""
-      >
-        None
-      </option>
-      <option
-        key="admin"
-        value="admin"
-      >
-        Admin
-      </option>
-      <option
-        key="state coordinator"
-        value="state coordinator"
-      >
-        State coordinator
-      </option>
-    </Dropdown>
+    />
     <Password
       className="mb2"
       compareTo={

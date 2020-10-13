@@ -15,7 +15,9 @@ import { LockIcon, UnlockIcon } from '../../components/Icons';
 import { selectUsersSorted } from '../../reducers/admin';
 import { getEditAccountError } from '../../reducers/errors';
 import { getEditAccountWorking } from '../../reducers/working';
-import { STATES, toSentenceCase } from '../../util';
+import { toSentenceCase } from '../../util';
+
+import { usStatesDropdownOptions } from '../../util/states';
 
 const EditAccount = ({
   currentUser,
@@ -79,6 +81,9 @@ const EditAccount = ({
     setChangePassword(!changePassword);
   };
 
+  let formRoles = roles.map(r => ({ label: toSentenceCase(r.name), value: r.name }));
+  formRoles.unshift({ label: "None", value: "" });
+
   const getForm = () => {
     if (user) {
       const { name, password, phone, position, state, username, role } = user;
@@ -118,46 +123,24 @@ const EditAccount = ({
             onChange={changeUserPosition}
           />
 
-          <FormLabel component="label" fieldId="modify_account_state">
-            State
-          </FormLabel>
           <Dropdown
-            id="modify_account_state"
-            label=""
+            label="State"
             name="state"
-            options={[]}
+            options={usStatesDropdownOptions}
             size="medium"
             value={state}
             onChange={changeUserState}
-          >
-            <option value="">None</option>
-            {STATES.map(s => (
-              <option key={s.id} value={s.id}>
-                {s.name}
-              </option>
-            ))}
-          </Dropdown>
+          />
 
-          <FormLabel component="label" fieldId="modify_account_role">
-            Authorization role
-          </FormLabel>
           <Dropdown
-            id="modify_account_role"
-            label=""
+            label="Authorization role"
             name="role"
-            options={[]}
+            options={formRoles}
             size="medium"
             value={role || ''}
             onChange={changeUserRole}
             disabled={currentUser.id === user.id}
-          >
-            <option value="">None</option>
-            {roles.map(r => (
-              <option key={r.name} value={r.name}>
-                {toSentenceCase(r.name)}
-              </option>
-            ))}
-          </Dropdown>
+          />
 
           <div className="ds-l-row ds-u-padding-x--2">
             <TextField
@@ -204,6 +187,12 @@ const EditAccount = ({
 
   const onSave = !!userID && saveAccount;
 
+  let usersDropdownOptions = users.map(u => ({
+    label: `${u.name ? `${u.name} - ` : ''}${u.username}`,
+    value: u.id
+  }));
+  usersDropdownOptions.unshift({ label: "Select...", value: "" });
+
   return (
     <Fragment>
       <CardForm
@@ -214,25 +203,13 @@ const EditAccount = ({
         working={working}
         onSave={onSave}
       >
-        <FormLabel component="label" fieldId="modify_account_user">
-          Account to edit
-        </FormLabel>
         <Dropdown
-          id="modify_account_user"
-          label=""
+          label="Account to edit"
           name="userID"
-          options={[]}
+          options={usersDropdownOptions}
           value={`${userID}`}
           onChange={handlePickAccount}
-        >
-          <option value="">Select...</option>
-          {users.map(u => (
-            <option key={u.id} value={`${u.id}`}>
-              {`${u.name ? `${u.name} - ` : ''}${u.username}`}
-            </option>
-          ))}
-        </Dropdown>
-
+        />
         {getForm()}
       </CardForm>
     </Fragment>

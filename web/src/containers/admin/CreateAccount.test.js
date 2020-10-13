@@ -1,11 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import {
-  plain as CreateAccount,
-  mapStateToProps,
-  mapDispatchToProps
-} from './CreateAccount';
+import { plain as CreateAccount } from './CreateAccount';
 
 const testProps = {
   createUser: () => {},
