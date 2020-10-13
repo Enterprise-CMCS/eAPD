@@ -9,7 +9,7 @@ import { createUser as createUserDispatch } from '../../actions/admin';
 import { getAddAccountError } from '../../reducers/errors';
 import { getAddAccountWorking } from '../../reducers/working';
 
-const CreateUser = ({ createUser, error, roles, working }) => {
+const CreateAccount = ({ createUser, error, roles, working }) => {
   const [email, setEmail] = useState('');
   const [hasFetched, setHasFetched] = useState(false);
   const [name, setName] = useState('');
@@ -131,7 +131,7 @@ const CreateUser = ({ createUser, error, roles, working }) => {
   );
 };
 
-CreateUser.propTypes = {
+CreateAccount.propTypes = {
   createUser: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
   roles: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -148,6 +148,6 @@ const mapDispatchToProps = {
   createUser: createUserDispatch
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAccount);
 
-export { CreateUser as plain };
+export { CreateAccount as plain };
