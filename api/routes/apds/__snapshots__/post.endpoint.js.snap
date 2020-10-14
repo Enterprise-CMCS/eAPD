@@ -23,13 +23,8 @@ Object {
         },
       },
       "costAllocationNarrative": Object {
-        "2021": Object {
-          "otherSources": "",
-        },
-        "2022": Object {
-          "otherSources": "",
-        },
         "methodology": "",
+        "otherSources": "",
       },
       "description": "",
       "expenses": Array [],

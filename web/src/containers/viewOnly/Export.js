@@ -36,6 +36,7 @@ const ExportInstructions = ({ printApd: print }) => {
         size="big"
         variation="primary"
         className="ds-u-margin-top--2"
+        id="export-to-print-or-pdf"
         onClick={print}
       >
         Export
