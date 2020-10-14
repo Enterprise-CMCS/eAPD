@@ -85,7 +85,7 @@ const OtherFunding = ({
               </tr>
               <tr>
                 <td className="title">Other Funding</td>
-                <td>−</td>
+                <td>-</td>
                 <td className="budget-table--number">
                   <Dollars>{years[ffy].otherFunding}</Dollars>
                 </td>

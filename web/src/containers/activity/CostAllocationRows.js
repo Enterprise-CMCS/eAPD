@@ -52,7 +52,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         <td className="title" colSpan="4">
           Other Funding Amount
         </td>
-        <td>−</td>
+        <td>-</td>
         <td className="budget-table--number">
           <Dollars>{otherFunding[ffy].statePersonnel}</Dollars>
         </td>
@@ -81,7 +81,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         <td className="title" colSpan="4">
           Other Funding Amount
         </td>
-        <td>−</td>
+        <td>-</td>
         <td className="budget-table--number">
           <Dollars>{otherFunding[ffy].expenses}</Dollars>
         </td>
@@ -110,7 +110,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         <td className="title" colSpan="4">
           Other Funding Amount
         </td>
-        <td>−</td>
+        <td>-</td>
         <td className="budget-table--number">
           <Dollars>{otherFunding[ffy].contractors}</Dollars>
         </td>
