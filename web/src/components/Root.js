@@ -2,10 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
+import TagManager from 'react-gtm-module';
 
 import App from './App';
 
+// Set up Google Tag Manager
+const tagManagerArgs = {
+  gtmId: 'GTM-M56ZTV4'
+};
+TagManager.initialize(tagManagerArgs);
+
 const Root = ({ history, store }) => {
+  window.dataLayer.push({
+    event: 'pageview'
+  });
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
