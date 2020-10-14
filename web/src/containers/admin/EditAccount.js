@@ -1,6 +1,5 @@
 import {
   Button,
-  FormLabel,
   Dropdown,
   TextField
 } from '@cmsgov/design-system';
@@ -81,7 +80,7 @@ const EditAccount = ({
     setChangePassword(!changePassword);
   };
 
-  let formRoles = roles.map(r => ({ label: toSentenceCase(r.name), value: r.name }));
+  const formRoles = roles.map(r => ({ label: toSentenceCase(r.name), value: r.name }));
   formRoles.unshift({ label: "None", value: "" });
 
   const getForm = () => {
@@ -187,7 +186,7 @@ const EditAccount = ({
 
   const onSave = !!userID && saveAccount;
 
-  let usersDropdownOptions = users.map(u => ({
+  const usersDropdownOptions = users.map(u => ({
     label: `${u.name ? `${u.name} - ` : ''}${u.username}`,
     value: u.id
   }));

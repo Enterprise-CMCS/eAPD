@@ -42,7 +42,7 @@ const NonPersonnelCostForm = ({
     "Travel",
     "Administrative operations",
     "Miscellaneous expenses for the project"
-  ].map(category => ({ label: category, value: category }));
+  ].map(item => ({ label: item, value: item }));
 
   return (
     <Fragment>

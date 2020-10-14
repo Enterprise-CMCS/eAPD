@@ -61,7 +61,7 @@ const STATES = [
   { id: 'vi', name: 'U.S. Virgin Islands' }
 ];
 
-let usStatesDropdownOptions = STATES.map(s => ({ label: s.name, value: s.id }));
+const usStatesDropdownOptions = STATES.map(s => ({ label: s.name, value: s.id }));
 usStatesDropdownOptions.unshift({ label: "None", value: "" });
 
 export {
