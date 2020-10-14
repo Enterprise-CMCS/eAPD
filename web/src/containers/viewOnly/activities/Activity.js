@@ -5,6 +5,8 @@ import Dollars from '../../../components/Dollars';
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
 import { stateDateToDisplay } from '../../../util';
 
+const isYear = (value) => !!value.match(/^[0-9]{4}$/);
+
 const Activity = ({ activity, activityIndex }) => {
   const buildObjective = objective => {
     return (
@@ -267,19 +269,37 @@ const Activity = ({ activity, activityIndex }) => {
           __html: activity.costAllocationNarrative.methodology
         }}
       />
-      <h4>Description of Other Funding</h4>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: activity.costAllocationNarrative.otherSources
-        }}
-      />
+
+      <hr className="subsection-rule" />
+      <h3>Other Funding</h3>
+
+      {Object.entries(activity.costAllocationNarrative)
+        .filter(([year, _]) => isYear(year)) // eslint-disable-line no-unused-vars
+        .map(([year, narrative]) => (
+          <Fragment>
+            <h3>FFY {year}</h3>
+            <h4>Other Funding Description</h4>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: narrative.otherSources
+              }}
+            />
+            <div>
+              <strong>Other Funding Amount: </strong>
+              <Dollars>
+                {(activity.costAllocation[year.toString()] || { other: 0 }).other}
+              </Dollars>
+            </div>
+            <hr className="subsection-rule" />
+          </Fragment>
+      ))}
 
       <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        Federal Financial Participation (FFP) and Cost Allocation
+        Budget and Federal Financial Participation (FFP)
       </h3>
       <CostAllocateFFP
         aKey={activity.key}

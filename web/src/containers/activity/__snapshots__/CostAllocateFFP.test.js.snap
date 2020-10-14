@@ -2,10 +2,17 @@
 
 exports[`the CostAllocateFFP component renders correctly renders correctly in editable mode (standard) 1`] = `
 <Fragment>
-  <h3
-    className="subsection--title ds-h3"
+  <h2
+    className="subsection--title ds-h2"
   >
-    Cost Allocation and Budget for FFY 
+    Budget and FFP
+  </h2>
+  <h3
+    className="ds-h3"
+  >
+    Activity 
+    1
+     Budget for FFY 
     1990
   </h3>
   <table
@@ -124,28 +131,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       />
     </tbody>
   </table>
-  <div
-    className="data-entry-box ds-u-margin-bottom--5"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h4",
-          "level": "p",
-        }
-      }
-      reverse={false}
-      source="activities.costAllocate.ffp.otherFundingInstruction"
-    />
-    <DollarField
-      label="FFY 1990"
-      labelClassName="sr-only"
-      name="ffy-1990"
-      onChange={[Function]}
-      value={100}
-    />
-  </div>
   <table
     className="budget-table activity-budget-table"
   >
@@ -302,9 +287,11 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
     />
   </div>
   <h3
-    className="subsection--title ds-h3"
+    className="ds-h3"
   >
-    Cost Allocation and Budget for FFY 
+    Activity 
+    1
+     Budget for FFY 
     1991
   </h3>
   <table
@@ -423,28 +410,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       />
     </tbody>
   </table>
-  <div
-    className="data-entry-box ds-u-margin-bottom--5"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h4",
-          "level": "p",
-        }
-      }
-      reverse={false}
-      source="activities.costAllocate.ffp.otherFundingInstruction"
-    />
-    <DollarField
-      label="FFY 1991"
-      labelClassName="sr-only"
-      name="ffy-1991"
-      onChange={[Function]}
-      value={200}
-    />
-  </div>
   <table
     className="budget-table activity-budget-table"
   >
@@ -749,10 +714,17 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
 
 exports[`the CostAllocateFFP component renders correctly renders correctly in view-only mode 1`] = `
 <Fragment>
-  <h3
-    className="subsection--title ds-h3"
+  <h2
+    className="subsection--title ds-h2"
   >
-    Cost Allocation and Budget for FFY 
+    Budget and FFP
+  </h2>
+  <h3
+    className="ds-h3"
+  >
+    Activity 
+    1
+     Budget for FFY 
     1990
   </h3>
   <table
@@ -946,9 +918,11 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
     />
   </div>
   <h3
-    className="subsection--title ds-h3"
+    className="ds-h3"
   >
-    Cost Allocation and Budget for FFY 
+    Activity 
+    1
+     Budget for FFY 
     1991
   </h3>
   <table
