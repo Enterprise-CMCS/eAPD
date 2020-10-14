@@ -84,7 +84,7 @@ exports[`<OtherFunding /> renders correctly 1`] = `
           Other Funding
         </td>
         <td>
-          -
+          −
         </td>
         <td
           className="budget-table--number"
@@ -190,7 +190,7 @@ exports[`<OtherFunding /> renders correctly 1`] = `
           Other Funding
         </td>
         <td>
-          -
+          −
         </td>
         <td
           className="budget-table--number"
