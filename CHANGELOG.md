@@ -8,9 +8,9 @@ Anticipated release: September 21st, 2020
 
 #### 🐛 Bugs fixed
 
-- Refactor use of Dropdown component ([#2471])
-
 #### ⚙️ Behind the scenes
+
+- Refactor use of Dropdown component ([#2471])
 
 # Previous releases
 
