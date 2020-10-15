@@ -238,9 +238,12 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
   <tr>
     <td
       className="title"
-      colSpan="5"
+      colSpan="4"
     >
       Other Funding Amount
+    </td>
+    <td>
+      -
     </td>
     <td
       className="budget-table--number"
@@ -327,9 +330,12 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
   <tr>
     <td
       className="title"
-      colSpan="5"
+      colSpan="4"
     >
       Other Funding Amount
+    </td>
+    <td>
+      -
     </td>
     <td
       className="budget-table--number"
@@ -464,9 +470,12 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
   <tr>
     <td
       className="title"
-      colSpan="5"
+      colSpan="4"
     >
       Other Funding Amount
+    </td>
+    <td>
+      -
     </td>
     <td
       className="budget-table--number"
