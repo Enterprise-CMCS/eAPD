@@ -44,6 +44,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     </legend>
     <ChoiceComponent
       checked={false}
+      label="No"
       name="apd-state-profile-hascosts-no1"
       onChange={[Function]}
       type="radio"
@@ -73,6 +74,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
           setFTE={[Function]}
         />
       }
+      label="Yes"
       name="apd-state-profile-hascosts-yes1"
       onChange={[Function]}
       type="radio"
@@ -128,6 +130,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     </legend>
     <ChoiceComponent
       checked={true}
+      label="No"
       name="apd-state-profile-hascosts-no1"
       onChange={[Function]}
       type="radio"
@@ -157,6 +160,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           setFTE={[Function]}
         />
       }
+      label="Yes"
       name="apd-state-profile-hascosts-yes1"
       onChange={[Function]}
       type="radio"
@@ -212,6 +216,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     </legend>
     <ChoiceComponent
       checked={false}
+      label="No"
       name="apd-state-profile-hascosts-no0"
       onChange={[Function]}
       type="radio"
@@ -241,6 +246,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           setFTE={[Function]}
         />
       }
+      label="Yes"
       name="apd-state-profile-hascosts-yes0"
       onChange={[Function]}
       type="radio"
