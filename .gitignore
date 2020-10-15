@@ -5,8 +5,11 @@ node_modules
 .DS_Store
 .env
 .vscode
+.nova
 
 npm-debug.log*
 pgdata
 __files
 api/test-data/files
+notes.md
+schema.sql

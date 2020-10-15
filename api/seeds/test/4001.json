@@ -1,60 +1,87 @@
 {
-  "id": 4001,
   "name": "AZ-1865-12-06-HITECH-APD",
   "activities": [
     {
       "id": 4110,
-      "alternatives": null,
+      "alternatives": "",
       "contractorResources": [
         {
-          "description": null,
-          "end": null,
+          "description": "",
+          "end": "",
+          "hourly": {
+            "data": {
+              "2019": {
+                "hours": "",
+                "rate": ""
+              },
+              "2020": {
+                "hours": "",
+                "rate": ""
+              }
+            },
+            "useHourly": false
+          },
           "hourlyData": [],
           "id": 9900,
-          "name": null,
-          "start": null,
-          "totalCost": null,
-          "useHourly": false,
-          "years": []
+          "name": "",
+          "start": "",
+          "totalCost": 0,
+          "years": {
+            "1865": 0,
+            "1866": 0
+          }
         }
       ],
-      "costAllocation": [],
-      "costAllocationNarrative": { "methodology": null, "otherSources": null },
-      "description": null,
+      "costAllocation": {},
+      "costAllocationNarrative": {
+        "methodology": "",
+        "2019": {
+          "otherSources": "none"
+        },
+        "2020": {
+          "otherSources": "none"
+        }
+      },
+      "description": "",
       "expenses": [],
-      "fundingSource": null,
-      "name": null,
+      "fundingSource": false,
+      "name": "",
       "objectives": [],
-      "plannedEndDate": null,
-      "plannedStartDate": null,
+      "plannedEndDate": "",
+      "plannedStartDate": "",
       "schedule": [],
-      "standardsAndConditions": null,
+      "standardsAndConditions": {
+        "doesNotSupport": "",
+        "supports": ""
+      },
       "statePersonnel": [],
-      "summary": null,
-      "quarterlyFFP": []
+      "summary": "",
+      "quarterlyFFP": {}
     }
   ],
-  "federalCitations": null,
-  "incentivePayments": [],
+  "federalCitations": {},
+  "incentivePayments": {
+    "ehAmt": {},
+    "ehCt": {},
+    "epAmt": {},
+    "epCt": {}
+  },
   "keyPersonnel": [],
-  "narrativeHIE": null,
-  "narrativeHIT": null,
-  "narrativeMMIS": null,
-  "previousActivityExpenses": [],
-  "previousActivitySummary": null,
-  "programOverview": null,
-  "state": "az",
+  "narrativeHIE": "",
+  "narrativeHIT": "",
+  "narrativeMMIS": "",
+  "previousActivityExpenses": {},
+  "previousActivitySummary": "",
+  "programOverview": "",
   "stateProfile": {
-    "medicaidDirector": { "name": null, "email": null, "phone": null },
+    "medicaidDirector": { "name": "", "email": "", "phone": "" },
     "medicaidOffice": {
-      "address1": null,
-      "address2": null,
-      "city": null,
-      "state": null,
-      "zip": null
+      "address1": "",
+      "address2": "",
+      "city": "",
+      "state": "",
+      "zip": ""
     }
   },
-  "status": "draft",
-  "updated": "1919-06-04T16:30:00.000Z",
-  "years": null
+  "years": ["2019", "2020"]
 }

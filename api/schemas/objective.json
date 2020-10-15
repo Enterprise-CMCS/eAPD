@@ -1,0 +1,34 @@
+{
+  "$id": "objective.json",
+  "type": "object",
+  "required": ["keyResults", "objective"],
+  "properties": {
+    "keyResults": {
+      "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults",
+      "type": "array",
+      "items": {
+        "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults/items",
+        "type": "object",
+        "required": ["baseline", "keyResult", "target"],
+        "properties": {
+          "baseline": {
+            "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults/items/properties/baseline",
+            "type": "string"
+          },
+          "keyResult": {
+            "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults/items/properties/keyResult",
+            "type": "string"
+          },
+          "target": {
+            "$id": "#/properties/activities/items/properties/objectives/items/properties/keyResults/items/properties/target",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "objective": {
+      "$id": "#/properties/activities/items/properties/goals/items/properties/objective",
+      "type": "string"
+    }
+  }
+}
