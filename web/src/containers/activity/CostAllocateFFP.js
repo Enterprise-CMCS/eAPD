@@ -6,11 +6,7 @@ import { connect } from 'react-redux';
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
-import {
-  setCostAllocationFFPFundingSplit,
-  setCostAllocationFFPOtherFunding
-} from '../../actions/editActivity';
-import DollarField from '../../components/DollarField';
+import { setCostAllocationFFPFundingSplit } from '../../actions/editActivity';
 import Dollars from '../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
@@ -103,13 +99,8 @@ const CostAllocateFFP = ({
   aKey,
   isViewOnly,
   setFundingSplit,
-  setOtherFunding,
   stateName
 }) => {
-  const setOther = year => e => {
-    setOtherFunding(activityIndex, year, e.target.value);
-  };
-
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
@@ -119,10 +110,11 @@ const CostAllocateFFP = ({
 
   return (
     <Fragment>
+      <h2 className="subsection--title ds-h2">Budget and FFP</h2>
       {Object.keys(years).map(ffy => (
         <Fragment key={ffy}>
-          <h3 className="subsection--title ds-h3">
-            Cost Allocation and Budget for FFY {ffy}
+          <h3 className="ds-h3">
+            Activity {activityIndex + 1} Budget for FFY {ffy}
           </h3>
 
           <table
@@ -174,23 +166,6 @@ const CostAllocateFFP = ({
 
           {!isViewOnly && (
             <Fragment>
-              <div className="data-entry-box ds-u-margin-bottom--5">
-                <Instruction
-                  source="activities.costAllocate.ffp.otherFundingInstruction"
-                  headingDisplay={{
-                    level: 'p',
-                    className: 'ds-h4'
-                  }}
-                />
-                <DollarField
-                  name={`ffy-${ffy}`}
-                  label={`FFY ${ffy}`}
-                  labelClassName="sr-only"
-                  value={costAllocation[ffy].other || '0'}
-                  onChange={setOther(ffy)}
-                />
-              </div>
-
               <table className="budget-table activity-budget-table">
                 <tbody>
                   <tr className="budget-table--subtotal budget-table--row__header">
@@ -306,7 +281,6 @@ CostAllocateFFP.propTypes = {
   costSummary: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
-  setOtherFunding: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired
 };
 
@@ -336,8 +310,7 @@ const mapStateToProps = (
 };
 
 const mapDispatchToProps = {
-  setFundingSplit: setCostAllocationFFPFundingSplit,
-  setOtherFunding: setCostAllocationFFPOtherFunding
+  setFundingSplit: setCostAllocationFFPFundingSplit
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);
