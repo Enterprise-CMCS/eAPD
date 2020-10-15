@@ -21,7 +21,7 @@ exports[`login component renders correctly if logged in and previous location is
 `;
 
 exports[`login component renders correctly if logged in previously but not logged in now (shows logout notice) 1`] = `
-<div
+<main
   id="start-main-content"
 >
   <UpgradeBrowser />
@@ -73,7 +73,7 @@ exports[`login component renders correctly if logged in previously but not logge
       value=""
     />
   </withRouter(CardForm)>
-</div>
+</main>
 `;
 
 exports[`login component renders correctly if logged in, but no previous location 1`] = `
@@ -87,7 +87,7 @@ exports[`login component renders correctly if logged in, but no previous locatio
 `;
 
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
-<div
+<main
   id="start-main-content"
 >
   <UpgradeBrowser />
@@ -139,11 +139,11 @@ exports[`login component renders correctly if not logged in and fetching data 1`
       value=""
     />
   </withRouter(CardForm)>
-</div>
+</main>
 `;
 
 exports[`login component renders correctly if not logged in and there is an error 1`] = `
-<div
+<main
   id="start-main-content"
 >
   <UpgradeBrowser />
@@ -195,11 +195,11 @@ exports[`login component renders correctly if not logged in and there is an erro
       value=""
     />
   </withRouter(CardForm)>
-</div>
+</main>
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 1`] = `
-<div
+<main
   id="start-main-content"
 >
   <UpgradeBrowser />
@@ -251,11 +251,11 @@ exports[`login component renders correctly if not logged in, and never logged in
       value=""
     />
   </withRouter(CardForm)>
-</div>
+</main>
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 2`] = `
-<div
+<main
   id="start-main-content"
 >
   <UpgradeBrowser />
@@ -307,11 +307,11 @@ exports[`login component renders correctly if not logged in, and never logged in
       value=""
     />
   </withRouter(CardForm)>
-</div>
+</main>
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 3`] = `
-<div
+<main
   id="start-main-content"
 >
   <UpgradeBrowser />
@@ -363,5 +363,5 @@ exports[`login component renders correctly if not logged in, and never logged in
       value="secret"
     />
   </withRouter(CardForm)>
-</div>
+</main>
 `;
