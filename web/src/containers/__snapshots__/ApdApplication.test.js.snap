@@ -10,7 +10,7 @@ exports[`apd (application) component renders correctly 1`] = `
     <Sidebar
       place={Object {}}
     />
-    <div
+    <main
       className="site-main"
       id="start-main-content"
     >
@@ -22,7 +22,7 @@ exports[`apd (application) component renders correctly 1`] = `
           useRouteMatch={[Function]}
         />
       </div>
-    </div>
+    </main>
   </div>
 </div>
 `;
