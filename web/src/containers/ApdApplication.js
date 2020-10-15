@@ -34,12 +34,12 @@ const ApdApplication = ({
     <div className="site-body ds-l-container">
       <div className="ds-u-margin--0">
         <Sidebar place={place} />
-        <div id="start-main-content" className="site-main">
+        <main id="start-main-content" className="site-main">
           <UnexpectedError />
           <div className="ds-u-padding-top--2">
             <ApdPageRoutes />
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );
