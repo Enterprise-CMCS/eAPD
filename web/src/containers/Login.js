@@ -59,7 +59,7 @@ const Login = ({
   }
 
   return (
-    <div id="start-main-content">
+    <main id="start-main-content">
       <UpgradeBrowser />
       <CardForm
         title="Log in"
@@ -91,7 +91,7 @@ const Login = ({
         />
         <Password title="Password" value={password} onChange={changePassword} />
       </CardForm>
-    </div>
+    </main>
   );
 };
 
