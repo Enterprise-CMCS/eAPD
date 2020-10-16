@@ -22,6 +22,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </th>
         <th
           className="ds-u-text-align--right"
+          id="q1"
           key="1"
           scope="col"
         >
@@ -29,6 +30,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </th>
         <th
           className="ds-u-text-align--right"
+          id="q2"
           key="2"
           scope="col"
         >
@@ -36,6 +38,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </th>
         <th
           className="ds-u-text-align--right"
+          id="q3"
           key="3"
           scope="col"
         >
@@ -43,6 +46,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </th>
         <th
           className="ds-u-text-align--right"
+          id="q4"
           key="4"
           scope="col"
         >
@@ -59,6 +63,7 @@ exports[`incentive payments component renders correctly 1`] = `
     <tbody>
       <tr>
         <th
+          id="eh-payments"
           scope="row"
         >
           EH Payments
@@ -68,6 +73,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <DollarField
+            aria-LabelledBy="q1 eh-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehAmt payments for 1, quarter 1"
@@ -82,6 +88,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="2"
         >
           <DollarField
+            aria-LabelledBy="q2 eh-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehAmt payments for 1, quarter 2"
@@ -96,6 +103,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="3"
         >
           <DollarField
+            aria-LabelledBy="q3 eh-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehAmt payments for 1, quarter 3"
@@ -110,6 +118,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="4"
         >
           <DollarField
+            aria-LabelledBy="q4 eh-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehAmt payments for 1, quarter 4"
@@ -129,6 +138,7 @@ exports[`incentive payments component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          id="eh-count"
           scope="row"
         >
           EH Count (optional)
@@ -138,6 +148,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <NumberField
+            aria-LabelledBy="q1 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -157,6 +168,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="2"
         >
           <NumberField
+            aria-LabelledBy="q2 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -176,6 +188,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="3"
         >
           <NumberField
+            aria-LabelledBy="q3 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -195,6 +208,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="4"
         >
           <NumberField
+            aria-LabelledBy="q4 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -217,6 +231,7 @@ exports[`incentive payments component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          id="ep-payments"
           scope="row"
         >
           EP Payments
@@ -226,6 +241,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <DollarField
+            aria-LabelledBy="q1 ep-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epAmt payments for 1, quarter 1"
@@ -240,6 +256,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="2"
         >
           <DollarField
+            aria-LabelledBy="q2 ep-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epAmt payments for 1, quarter 2"
@@ -254,6 +271,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="3"
         >
           <DollarField
+            aria-LabelledBy="q3 ep-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epAmt payments for 1, quarter 3"
@@ -268,6 +286,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="4"
         >
           <DollarField
+            aria-LabelledBy="q4 ep-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epAmt payments for 1, quarter 4"
@@ -287,6 +306,7 @@ exports[`incentive payments component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          id="ep-count"
           scope="row"
         >
           EP Count (optional)
@@ -296,6 +316,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <NumberField
+            aria-LabelledBy="q1 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -315,6 +336,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="2"
         >
           <NumberField
+            aria-LabelledBy="q2 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -334,6 +356,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="3"
         >
           <NumberField
+            aria-LabelledBy="q3 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -353,6 +376,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="4"
         >
           <NumberField
+            aria-LabelledBy="q4 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -395,6 +419,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </th>
         <th
           className="ds-u-text-align--right"
+          id="q1"
           key="1"
           scope="col"
         >
@@ -402,6 +427,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </th>
         <th
           className="ds-u-text-align--right"
+          id="q2"
           key="2"
           scope="col"
         >
@@ -409,6 +435,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </th>
         <th
           className="ds-u-text-align--right"
+          id="q3"
           key="3"
           scope="col"
         >
@@ -416,6 +443,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </th>
         <th
           className="ds-u-text-align--right"
+          id="q4"
           key="4"
           scope="col"
         >
@@ -432,6 +460,7 @@ exports[`incentive payments component renders correctly 1`] = `
     <tbody>
       <tr>
         <th
+          id="eh-payments"
           scope="row"
         >
           EH Payments
@@ -441,6 +470,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <DollarField
+            aria-LabelledBy="q1 eh-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehAmt payments for 2, quarter 1"
@@ -455,6 +485,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="2"
         >
           <DollarField
+            aria-LabelledBy="q2 eh-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehAmt payments for 2, quarter 2"
@@ -469,6 +500,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="3"
         >
           <DollarField
+            aria-LabelledBy="q3 eh-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehAmt payments for 2, quarter 3"
@@ -483,6 +515,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="4"
         >
           <DollarField
+            aria-LabelledBy="q4 eh-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehAmt payments for 2, quarter 4"
@@ -502,6 +535,7 @@ exports[`incentive payments component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          id="eh-count"
           scope="row"
         >
           EH Count (optional)
@@ -511,6 +545,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <NumberField
+            aria-LabelledBy="q1 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -530,6 +565,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="2"
         >
           <NumberField
+            aria-LabelledBy="q2 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -549,6 +585,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="3"
         >
           <NumberField
+            aria-LabelledBy="q3 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -568,6 +605,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="4"
         >
           <NumberField
+            aria-LabelledBy="q4 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -590,6 +628,7 @@ exports[`incentive payments component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          id="ep-payments"
           scope="row"
         >
           EP Payments
@@ -599,6 +638,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <DollarField
+            aria-LabelledBy="q1 ep-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epAmt payments for 2, quarter 1"
@@ -613,6 +653,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="2"
         >
           <DollarField
+            aria-LabelledBy="q2 ep-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epAmt payments for 2, quarter 2"
@@ -627,6 +668,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="3"
         >
           <DollarField
+            aria-LabelledBy="q3 ep-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epAmt payments for 2, quarter 3"
@@ -641,6 +683,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="4"
         >
           <DollarField
+            aria-LabelledBy="q4 ep-payments"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epAmt payments for 2, quarter 4"
@@ -660,6 +703,7 @@ exports[`incentive payments component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          id="ep-count"
           scope="row"
         >
           EP Count (optional)
@@ -669,6 +713,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <NumberField
+            aria-LabelledBy="q1 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -688,6 +733,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="2"
         >
           <NumberField
+            aria-LabelledBy="q2 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -707,6 +753,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="3"
         >
           <NumberField
+            aria-LabelledBy="q3 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
@@ -726,6 +773,7 @@ exports[`incentive payments component renders correctly 1`] = `
           key="4"
         >
           <NumberField
+            aria-LabelledBy="q4 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             fieldRef={null}
