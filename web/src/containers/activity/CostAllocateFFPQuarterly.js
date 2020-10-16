@@ -52,15 +52,10 @@ const CostAllocateFFPQuarterly = ({
       </caption>
       <thead>
         <tr>
-          <th>
-            <span aria-hidden="true">{t('ffy', { year })}</span>
-          </th>
+          <th>{t('ffy', { year })}</th>
           <Fragment key={year}>
             {QUARTERS.map(q => (
               <th key={q} scope="col" className="ds-u-text-align--right">
-                <span className="ds-u-visibility--screen-reader">
-                  {t('ffy', { year })}
-                </span>
                 {t('table.quarter', { q })}
               </th>
             ))}
@@ -68,9 +63,6 @@ const CostAllocateFFPQuarterly = ({
               scope="col"
               className="budget-table--subtotal ds-u-text-align--right"
             >
-              <span className="ds-u-visibility--screen-reader">
-                {t('ffy', { year })}
-              </span>
               {t('table.subtotal')}
             </th>
           </Fragment>
@@ -97,7 +89,6 @@ const CostAllocateFFPQuarterly = ({
                   onChange={setInHouse(q)}
                   round
                   value={quarterlyFFP[year][q].inHouse.percent * 100}
-                  aria-controls={`ffp-${activityIndex}-${year}-${q}-state-dollar-equivalent`}
                 />
               )}
             </td>
@@ -139,7 +130,6 @@ const CostAllocateFFPQuarterly = ({
                   onChange={setContractor(q)}
                   round
                   value={quarterlyFFP[year][q].contractors.percent * 100}
-                  aria-controls={`ffp-${activityIndex}-${year}-${q}-contractors-dollar-equivalent`}
                 />
               )}
             </td>
