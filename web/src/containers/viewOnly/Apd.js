@@ -45,7 +45,7 @@ class ApdViewOnly extends Component {
     }
 
     return (
-      <div
+      <main
         id="start-main-content"
         className="site-body ds-l-container ds-u-padding--3"
       >
@@ -86,7 +86,7 @@ class ApdViewOnly extends Component {
         >
           ^ Return to the top of the page
         </Button>
-      </div>
+      </main>
     );
   }
 }
