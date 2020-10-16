@@ -832,6 +832,78 @@ Object {
         ],
       },
     },
+    "/apds/{id}/events": Object {
+      "post": Object {
+        "description": "Posts an event, associates it with a given APD, and stores any provided metadata.",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd the event is associated with",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "eventType": Object {
+                    "description": "the type of the event performed",
+                    "type": "string",
+                  },
+                  "metadata": Object {
+                    "description": "anny additional metadata to add to the log",
+                    "type": "object",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "success": Object {
+                      "description": "whether the event was successfully logged",
+                      "type": "boolean",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The status of the event being logged",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Log an event performed on an APD",
+        "tags": Array [
+          "APDs",
+          "events",
+        ],
+      },
+    },
     "/apds/{id}/files": Object {
       "post": Object {
         "description": "Uploads a file, associates it with a given APD, and stores any provided metadata.",
