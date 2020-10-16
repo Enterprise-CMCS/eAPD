@@ -49,9 +49,8 @@ class Password extends Component {
           <Choice
             className="password-input--show-password ds-u-float--right"
             checked={showPassword}
-            label="Show password"
-            name="show password"
-            value="Show password"
+            name="show-password"
+            value="on"
             onChange={this.toggleShowPassword}
             size="small"
             type="checkbox"

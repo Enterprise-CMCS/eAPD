@@ -138,7 +138,6 @@ const ContractorResourceForm = ({
         <legend className="ds-c-label">This is an hourly resource</legend>
         <Choice
           type="radio"
-          label="No"
           name={`apd-activity-contractor-hourly-${key}-no`}
           value="no"
           checked={!hourly.useHourly}
@@ -148,7 +147,6 @@ const ContractorResourceForm = ({
         </Choice>
         <Choice
           type="radio"
-          label="Yes"
           name={`apd-activity-contractor-hourly-${key}-yes`}
           value="yes"
           checked={hourly.useHourly}

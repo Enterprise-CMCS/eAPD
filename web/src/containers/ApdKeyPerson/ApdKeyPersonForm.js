@@ -79,7 +79,6 @@ const PersonForm = ({
           type="radio"
           name={`apd-state-profile-hascosts-no${index}`}
           value="no"
-          label="No"
           checked={!hasCosts}
           onChange={setPersonHasCosts(false)}
         >
@@ -89,7 +88,6 @@ const PersonForm = ({
           type="radio"
           name={`apd-state-profile-hascosts-yes${index}`}
           value="yes"
-          label="Yes"
           checked={hasCosts}
           onChange={setPersonHasCosts(true)}
           checkedChildren={

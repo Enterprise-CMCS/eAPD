@@ -107,7 +107,6 @@ const AssurancesAndCompliance = ({
                 <Choice
                   type="radio"
                   value="yes"
-                  label="Yes"
                   name={`apd-assurances-yes-${namify(name, title)}`}
                   size="small"
                   checked={checked === true}
@@ -118,7 +117,6 @@ const AssurancesAndCompliance = ({
                 <Choice
                   type="radio"
                   value="no"
-                  label="No"
                   name={`apd-assurances-no-${namify(name, title)}`}
                   size="small"
                   checked={checked === false}

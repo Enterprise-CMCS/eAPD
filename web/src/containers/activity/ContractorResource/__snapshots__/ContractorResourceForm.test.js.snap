@@ -54,7 +54,6 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     </legend>
     <ChoiceComponent
       checked={true}
-      label="No"
       name="apd-activity-contractor-hourly-key 1-no"
       onChange={[Function]}
       type="radio"
@@ -138,7 +137,6 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
           </React.Fragment>
         </div>
       }
-      label="Yes"
       name="apd-activity-contractor-hourly-key 1-yes"
       onChange={[Function]}
       type="radio"
@@ -222,7 +220,6 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     </legend>
     <ChoiceComponent
       checked={false}
-      label="No"
       name="apd-activity-contractor-hourly-key 1-no"
       onChange={[Function]}
       type="radio"
@@ -306,7 +303,6 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
           </React.Fragment>
         </div>
       }
-      label="Yes"
       name="apd-activity-contractor-hourly-key 1-yes"
       onChange={[Function]}
       type="radio"
