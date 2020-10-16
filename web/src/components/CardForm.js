@@ -36,15 +36,17 @@ const CardForm = ({
               {error}
             </Alert>
           )}
-
-          <h1 className="ds-h1">
-            {sectionName.length > 0 && (
-              <span className="ds-h6 ds-u-display--block">
-                {sectionName.toUpperCase()}
-              </span>
-            )}
-            {title}
-          </h1>
+          <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center">
+            <img src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg" alt="eAPD Logo" />
+            <h1 className="ds-h1 ds-u-margin-top--2">
+              {sectionName.length > 0 && (
+                <span className="ds-h6 ds-u-display--block">
+                  {sectionName.toUpperCase()}
+                </span>
+              )}
+              {title}
+            </h1>
+          </div>
           <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
               {!!legend && (
