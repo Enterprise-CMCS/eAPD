@@ -18,7 +18,6 @@ Anticipated release: October 19th, 2020
 #### ⚙️ Behind the scenes
 
 - Update @cmsgov/design-system to v2.1.1 [[releases](https://github.com/CMSgov/design-system/releases)]
-- Update caniuse-lite/browserslist database to v1.0.30001148
 
 # Previous releases
 
