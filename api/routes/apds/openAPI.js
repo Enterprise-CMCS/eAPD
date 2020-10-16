@@ -79,7 +79,10 @@ const openAPI = {
           description: 'The APD',
           content: jsonResponse({ $ref: '#/components/schemas/apd' })
         },
-        404: {
+        400: {
+          description: 'The apd ID does not match any known apds'
+        },
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
@@ -158,7 +161,7 @@ const openAPI = {
             ]
           })
         },
-        404: {
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
@@ -186,7 +189,7 @@ const openAPI = {
           description:
             'Invalid request, such as requesting to archive an APD that is not editable'
         },
-        404: {
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
@@ -249,7 +252,7 @@ const openAPI = {
           description:
             'Invalid request, such as requesting to archive an APD that is not editable'
         },
-        404: {
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
@@ -287,7 +290,7 @@ const openAPI = {
           description: 'The file',
           content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
         },
-        404: {
+        400: {
           description: 'The file does not belong to the APD or does not exist'
         }
       }
@@ -343,7 +346,10 @@ const openAPI = {
             }
           })
         },
-        404: {
+        400: {
+          description: 'The apd ID does not match any knownn apds'
+        },
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }

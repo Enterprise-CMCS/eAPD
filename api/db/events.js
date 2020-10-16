@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+const uuid = require('uuid/v1');
 const logger = require('../logger')('event management');
 const knex = require('./knex');
 
@@ -6,7 +6,7 @@ const createEventForAPD = async (
   { userID, apdID, eventType, metadata = null },
   { db = knex } = {}
 ) => {
-  const eventID = crypto.randomBytes(48).toString('base64');
+  const eventID = uuid();
   logger.verbose(
     `adding ${eventType} event for apd ${apdID}, event ID = ${eventID}`
   );
@@ -23,7 +23,7 @@ const createEventForAPD = async (
     await db('apd_events').insert({
       event_id: eventID,
       user_id: userID,
-      apd_id: apdID,
+      apd_id: intApdID,
       event_type: eventType,
       event_at: new Date().toISOString(),
       metadata

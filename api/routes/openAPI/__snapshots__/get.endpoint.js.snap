@@ -663,13 +663,10 @@ Object {
             "description": "Invalid request, such as requesting to archive an APD that is not editable",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The apd ID does not match any known apds for the user",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
-          },
-          "404": Object {
-            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
@@ -706,14 +703,14 @@ Object {
             },
             "description": "The APD",
           },
+          "400": Object {
+            "description": "The apd ID does not match any known apds",
+          },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The apd ID does not match any known apds for the user",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
-          },
-          "404": Object {
-            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
@@ -812,13 +809,10 @@ Object {
             "description": "The update failed due to a problem with the input data",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The apd ID does not match any known apds for the user",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
-          },
-          "404": Object {
-            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
@@ -882,14 +876,14 @@ Object {
             },
             "description": "The status of the event being logged",
           },
+          "400": Object {
+            "description": "The apd ID does not match any knownn apds",
+          },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The apd ID does not match any known apds for the user",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
-          },
-          "404": Object {
-            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
@@ -959,13 +953,10 @@ Object {
             "description": "Invalid request, such as requesting to archive an APD that is not editable",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The apd ID does not match any known apds for the user",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
-          },
-          "404": Object {
-            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
@@ -1015,14 +1006,14 @@ Object {
             },
             "description": "The file",
           },
+          "400": Object {
+            "description": "The file does not belong to the APD or does not exist",
+          },
           "401": Object {
             "description": "Not logged in",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
-          },
-          "404": Object {
-            "description": "The file does not belong to the APD or does not exist",
           },
         },
         "security": Array [
