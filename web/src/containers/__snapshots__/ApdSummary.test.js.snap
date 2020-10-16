@@ -31,6 +31,7 @@ exports[`apd summary component renders correctly 1`] = `
       ]
     }
     label="Choose the federal fiscal year(s) this APD covers."
+    labelClassName="ds-u-margin-bottom--1"
     name="apd-years"
     onChange={[Function]}
     type="checkbox"

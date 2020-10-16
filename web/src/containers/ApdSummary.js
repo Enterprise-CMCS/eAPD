@@ -53,15 +53,14 @@ const ApdSummary = ({
   return (
     <Section resource="apd">
       <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
-
       <ChoiceList
         choices={yearChoices}
         label={t('apd.overview.instruction.short')}
+        labelClassName="ds-u-margin-bottom--1"
         name="apd-years"
         onChange={handleYears}
         type="checkbox"
       />
-
       <div className="ds-u-margin-y--3">
         <Instruction source="apd.introduction.instruction" />
         <RichText

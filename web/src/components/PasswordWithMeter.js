@@ -47,16 +47,15 @@ class Password extends Component {
       <div className={className || undefined}>
         <div className="password-input">
           <Choice
-            className="password-input--show-password ds-u-float--right"
             checked={showPassword}
+            className="password-input--show-password ds-u-float--right"
+            label="Show password"
             name="show-password"
-            value="on"
             onChange={this.toggleShowPassword}
             size="small"
             type="checkbox"
-          >
-            Show password
-          </Choice>
+            value="on"
+          />
 
           <TextField
             hint={

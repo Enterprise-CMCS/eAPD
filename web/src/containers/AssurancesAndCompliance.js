@@ -105,22 +105,22 @@ const AssurancesAndCompliance = ({
                   ?
                 </legend>
                 <Choice
+                  checked={checked === true}
+                  label="Yes"
+                  name={`apd-assurances-yes-${namify(name, title)}`}
+                  onChange={handleCheckChange(name, index, true)}
+                  size="small"
                   type="radio"
                   value="yes"
-                  name={`apd-assurances-yes-${namify(name, title)}`}
-                  size="small"
-                  checked={checked === true}
-                  onChange={handleCheckChange(name, index, true)}
-                >
-                  Yes
-                </Choice>
+                />
                 <Choice
+                  checked={checked === false}
+                  label="No"
+                  name={`apd-assurances-no-${namify(name, title)}`}
+                  onChange={handleCheckChange(name, index, false)}
+                  size="small"
                   type="radio"
                   value="no"
-                  name={`apd-assurances-no-${namify(name, title)}`}
-                  size="small"
-                  checked={checked === false}
-                  onChange={handleCheckChange(name, index, false)}
                   checkedChildren={
                     <div className="ds-c-choice__checkedChild">
                       <TextArea
@@ -132,9 +132,7 @@ const AssurancesAndCompliance = ({
                       />
                     </div>
                   }
-                >
-                  No
-                </Choice>
+                />
               </fieldset>
             ))}
           </div>
