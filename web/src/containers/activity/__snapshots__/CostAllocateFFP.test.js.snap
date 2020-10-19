@@ -21,7 +21,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   >
     <tbody>
       <CostAllocationRows
-        activityIndex={-1}
+        activityIndex={0}
         ffy="1990"
         otherFunding={null}
         years={
@@ -300,7 +300,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   >
     <tbody>
       <CostAllocationRows
-        activityIndex={-1}
+        activityIndex={0}
         ffy="1991"
         otherFunding={null}
         years={
@@ -733,7 +733,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   >
     <tbody>
       <CostAllocationRows
-        activityIndex={-1}
+        activityIndex={0}
         ffy="1990"
         otherFunding={null}
         years={
@@ -931,7 +931,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   >
     <tbody>
       <CostAllocationRows
-        activityIndex={-1}
+        activityIndex={0}
         ffy="1991"
         otherFunding={null}
         years={
