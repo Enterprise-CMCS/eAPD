@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 
 const formSubmitNoop = e => e.preventDefault();
 
-const CardForm = ({
+const LoginForm = ({
   cancelable,
   canSubmit,
   children,
@@ -26,17 +26,6 @@ const CardForm = ({
       <div className="ds-l-row card">
         <div className="ds-l-col--1 ds-u-margin-left--auto" />
         <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-          {!!success && (
-            <Alert variation="success" role="alert">
-              {success}
-            </Alert>
-          )}
-          {!!error && (
-            <Alert variation="error" role="alert">
-              {error}
-            </Alert>
-          )}
-
           <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center">
             <img src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg" alt="eAPD Logo" />
             <h1 className="ds-h1 ds-u-margin-top--2">
@@ -48,6 +37,16 @@ const CardForm = ({
               {title}
             </h1>
           </div>
+            {!!success && (
+              <div className="ds-u-margin-top--3">
+                {success}
+              </div>
+            )}
+            {!!error && (
+              <div className="ds-u-margin-top--3">
+                {error}
+              </div>
+            )}
           <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
               {!!legend && (
@@ -90,7 +89,7 @@ const CardForm = ({
   </div>
 );
 
-CardForm.propTypes = {
+LoginForm.propTypes = {
   cancelable: PropTypes.bool,
   canSubmit: PropTypes.bool,
   children: PropTypes.node.isRequired,
@@ -107,7 +106,7 @@ CardForm.propTypes = {
   working: PropTypes.bool
 };
 
-CardForm.defaultProps = {
+LoginForm.defaultProps = {
   cancelable: true,
   canSubmit: true,
   error: false,
@@ -121,6 +120,6 @@ CardForm.defaultProps = {
   working: false
 };
 
-export default withRouter(CardForm);
+export default withRouter(LoginForm);
 
-export { CardForm as plain };
+export { LoginForm as plain };

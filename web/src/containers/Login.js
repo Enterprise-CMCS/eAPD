@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
 import { login, loginOtp } from '../actions/auth';
-import CardForm from '../components/CardForm';
+import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
@@ -61,7 +61,7 @@ const Login = ({
     error === 'Authentication failed' ||
     error === 'Request failed with status code 401'
   ) {
-    errorMessage = 'The email or password you’ve entered is incorrect.';
+    errorMessage = 'Please contact your State Administrator for steps to register an account.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
@@ -79,7 +79,7 @@ const Login = ({
   return (
     <main id="start-main-content">
       <UpgradeBrowser />
-      <CardForm
+      <LoginForm
         title="Log in"
         legend="Log in"
         cancelable={false}
@@ -103,12 +103,19 @@ const Login = ({
           id="username"
           label="Email"
           name="username"
+          errorMessage={errorMessage == false ? null : ""}
           ariaLabel="Enter the email associated with this account."
           value={username}
           onChange={changeUsername}
         />
-        <Password title="Password" value={password} onChange={changePassword} />
-      </CardForm>
+        <Password 
+          title="Password" 
+          value={password} 
+          onChange={changePassword} 
+          errorMessage={errorMessage == false ? null : ""}
+          customErrorMessage={errorMessage == false ? null : "Invalid Entry"}
+        />
+      </LoginForm>
     </main>
   );
 };

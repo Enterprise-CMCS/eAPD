@@ -31,7 +31,7 @@ class Password extends Component {
   };
 
   render() {
-    const { className, title, value, showMeter } = this.props;
+    const { className, title, value, showMeter, errorMessage, customErrorMessage } = this.props;
     const { showPassword, strength } = this.state;
 
     let passwordQuality = 'Password strength: Weak';
@@ -42,7 +42,7 @@ class Password extends Component {
     } else if (strength > 3) {
       passwordQuality = 'Password strength: Great';
     }
-
+    
     return (
       <div className={className || undefined}>
         <div className="password-input">
@@ -68,7 +68,11 @@ class Password extends Component {
             type={showPassword ? 'text' : 'password'}
             value={value}
             onChange={this.changePassword}
+            errorMessage={errorMessage == null ? null : ""}
           />
+          {customErrorMessage && (
+            <div className="ds-u-color--error"><strong>{customErrorMessage}</strong></div>
+          )}
           {showMeter && (
             <Fragment>
               <div className="strength-meter">
