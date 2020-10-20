@@ -74,12 +74,15 @@ const apd = {
           }
         },
         costAllocationNarrative: {
-          methodology: '<p>No cost allocation is necessary for this activity.</p>\n',
+          methodology:
+            '<p>No cost allocation is necessary for this activity.</p>\n',
           '2020': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
           },
           '2021': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
           }
         },
         description:
@@ -102,41 +105,31 @@ const apd = {
           }
         ],
         fundingSource: 'HIT',
-        objectives: [
+        outcomes: [
           {
-            objective:
+            outcome:
               'Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.',
-            keyResults: [
+            metrics: [
               {
-                baseline: '13% complete',
-                keyResult: 'Complete SLR modifications by 11/1/18',
-                target: '100% complete'
+                metric: 'Complete SLR modifications by 11/1/18'
               },
               {
-                baseline: 'not accepting attestations',
-                keyResult: 'Accept attestations through 4/30/19.',
-                target: 'all attestations accepted'
+                metric: 'Accept attestations through 4/30/19.'
               }
             ]
           },
           {
-            objective:
+            outcome:
               'Provide support to EPs and EHs through attestation process.',
-            keyResults: [
+            metrics: [
               {
-                baseline: 'not available',
-                keyResult: "Guidance available on Tycho's websites",
-                target: 'available'
+                metric: "Guidance available on Tycho's websites"
               },
               {
-                baseline: 'not available',
-                keyResult: 'Office hours availble for EPs and EHs',
-                target: 'available'
+                metric: 'Office hours availble for EPs and EHs'
               },
               {
-                baseline: 'unvisited sites',
-                keyResult: 'Site visits, as needed, for EPs and EHs',
-                target: 'sites visited'
+                metric: 'Site visits, as needed, for EPs and EHs'
               }
             ]
           }
@@ -321,12 +314,15 @@ const apd = {
           }
         },
         costAllocationNarrative: {
-          methodology:  '<p>No cost allocation is necessary for this activity.</p>\n',
+          methodology:
+            '<p>No cost allocation is necessary for this activity.</p>\n',
           '2020': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
           },
           '2021': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
           }
         },
         description:
@@ -339,21 +335,17 @@ const apd = {
           }
         ],
         fundingSource: 'MMIS',
-        objectives: [
+        outcomes: [
           {
-            objective:
+            outcome:
               'Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.',
-            keyResults: [
+            metrics: [
               {
-                baseline: 'no contractor',
-                keyResult:
-                  'Hire contracted support to build an open API for the DW that the HIE and PHR can consume.',
-                target: 'yes contractor'
+                metric:
+                  'Hire contracted support to build an open API for the DW that the HIE and PHR can consume.'
               },
               {
-                baseline: 'no support',
-                keyResult: 'Provide support for using open API for DW',
-                target: 'yes support'
+                metric: 'Provide support for using open API for DW'
               }
             ]
           }
@@ -519,24 +511,20 @@ const apd = {
           }
         ],
         fundingSource: 'HIE',
-        objectives: [
+        outcomes: [
           {
-            objective: 'Plan to do a thing.',
-            keyResults: [
+            outcome: 'Plan to do a thing.',
+            metrics: [
               {
-                baseline: '',
-                keyResult: 'Do a thing.',
-                target: ''
+                metric: 'Do a thing.'
               }
             ]
           },
           {
-            objective: 'Onboard 100 providers.',
-            keyResults: [
+            outcome: 'Onboard 100 providers.',
+            metrics: [
               {
-                baseline: '7 providers onboarded',
-                keyResult: '100 providers onboarded.',
-                target: '100 providers onboarded'
+                metric: '100 providers onboarded.'
               }
             ]
           }
@@ -695,14 +683,12 @@ const apd = {
           }
         ],
         fundingSource: 'HIE',
-        objectives: [
+        outcomes: [
           {
-            objective: 'Build blue button.',
-            keyResults: [
+            outcome: 'Build blue button.',
+            metrics: [
               {
-                baseline: '0 providers',
-                keyResult: 'Test blue button with 10 providers.',
-                target: '10 providers'
+                metric: 'Test blue button with 10 providers.'
               }
             ]
           }
@@ -831,25 +817,20 @@ const apd = {
           }
         ],
         fundingSource: 'HIE',
-        objectives: [
+        outcomes: [
           {
-            objective: 'Identifiy PH needs',
-            keyResults: [
+            outcome: 'Identifiy PH needs',
+            metrics: [
               {
-                baseline: 'incomplete',
-                keyResult:
-                  'Complete a build/implementation plan by Summery 2020',
-                target: 'complete'
+                metric: 'Complete a build/implementation plan by Summery 2020'
               }
             ]
           },
           {
-            objective: 'Connect PH systems to HIE',
-            keyResults: [
+            outcome: 'Connect PH systems to HIE',
+            metrics: [
               {
-                baseline: '0 systems connected',
-                keyResult: 'Connect all 3 PH systems to HIE by Fall 2020',
-                target: '3 systems connected'
+                metric: 'Connect all 3 PH systems to HIE by Fall 2020'
               }
             ]
           }
@@ -907,8 +888,7 @@ const apd = {
           '<p>Must do MITA 3.0 because MITA is awesome and gives Tycho a standardized view of their Medicaid IT maturity.&nbsp;</p>\n',
         contractorResources: [
           {
-            description:
-              'Research for and RFP development for MITA 3.0 SSA',
+            description: 'Research for and RFP development for MITA 3.0 SSA',
             end: '',
             hourly: {
               data: {
@@ -973,15 +953,12 @@ const apd = {
           }
         ],
         fundingSource: 'HIT',
-        objectives: [
+        outcomes: [
           {
-            objective: 'Complete MITA 3.0 HITECH portion.',
-            keyResults: [
+            outcome: 'Complete MITA 3.0 HITECH portion.',
+            metrics: [
               {
-                baseline: '',
-                keyResult:
-                  'Complete MITA 3.0 HITECH portion by July 2020',
-                target: ''
+                metric: 'Complete MITA 3.0 HITECH portion by July 2020'
               }
             ]
           }
@@ -1141,4 +1118,4 @@ const seed = async knex => {
 module.exports = {
   apd,
   seed
-}
+};

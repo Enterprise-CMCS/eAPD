@@ -5,17 +5,17 @@ import Dollars from '../../../components/Dollars';
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
 import { stateDateToDisplay } from '../../../util';
 
-const isYear = (value) => !!value.match(/^[0-9]{4}$/);
+const isYear = value => !!value.match(/^[0-9]{4}$/);
 
 const Activity = ({ activity, activityIndex }) => {
-  const buildObjective = objective => {
+  const buildOutcome = objective => {
     return (
       <Fragment>
         <p>
-          <strong>Objective: </strong> {objective.objective}
+          <strong>Outcome: </strong> {objective.objective}
         </p>
         <div>
-          <strong>Key Results: </strong>
+          <strong>Metrics: </strong>
           <ul>
             {objective.keyResults.map(
               ({ baseline, key, keyResult, target }) => (
@@ -147,7 +147,8 @@ const Activity = ({ activity, activityIndex }) => {
         Activity {activityIndex + 1} ({activity.name})
       </h2>
       <p>
-        <strong>Provide a short overview of the activity:</strong> {activity.summary}
+        <strong>Provide a short overview of the activity:</strong>{' '}
+        {activity.summary}
       </p>
       <p>
         <strong>Start date: </strong>
@@ -216,9 +217,9 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        Objectives and Key Results
+        Outcomes and Metrics
       </h3>
-      {activity.objectives.map(buildObjective)}
+      {activity.objectives.map(buildOutcome)}
 
       <h3>Milestones</h3>
       {activity.schedule.map((milestone, index) =>
@@ -287,12 +288,15 @@ const Activity = ({ activity, activityIndex }) => {
             <div>
               <strong>Other Funding Amount: </strong>
               <Dollars>
-                {(activity.costAllocation[year.toString()] || { other: 0 }).other}
+                {
+                  (activity.costAllocation[year.toString()] || { other: 0 })
+                    .other
+                }
               </Dollars>
             </div>
             <hr className="subsection-rule" />
           </Fragment>
-      ))}
+        ))}
 
       <h3 className="viewonly-activity-header">
         <small>
