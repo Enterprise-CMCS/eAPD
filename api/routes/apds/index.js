@@ -4,12 +4,14 @@ const get = require('./get');
 const patch = require('./patch');
 const post = require('./post');
 const files = require('./files');
+const events = require('./events');
 
 module.exports = (
   app,
   {
     deleteEndpoint = del,
     filesEndpoints = files,
+    eventsEndpoints = events,
     getEndpoint = get,
     patchEndpoint = patch,
     postEndpoint = post
@@ -26,4 +28,7 @@ module.exports = (
 
   logger.silly('setting up APD image endpoints');
   filesEndpoints(app);
+
+  logger.silly('setting up APD events endpoints');
+  eventsEndpoints(app);
 };

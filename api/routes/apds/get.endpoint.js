@@ -20,16 +20,14 @@ describe('APD endpoint', () => {
       const response = await login(
         'all-permissions-no-state',
         'password'
-      )
-        .then(api => api.get(url));
+      ).then(api => api.get(url));
 
       expect(response.status).toEqual(401);
       expect(response.data).toMatchSnapshot();
     });
 
     it('when authenticated as a user with a state', async () => {
-      const response = await login()
-        .then(api => api.get(url));
+      const response = await login().then(api => api.get(url));
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();
@@ -51,8 +49,7 @@ describe('APD endpoint', () => {
       const response = await login(
         'all-permissions-no-state',
         'password'
-      )
-        .then(api => api.get(url(0)));
+      ).then(api => api.get(url(0)));
 
       expect(response.status).toEqual(401);
       expect(response.data).toMatchSnapshot();
@@ -67,14 +64,14 @@ describe('APD endpoint', () => {
       it('when requesting an APD that does not exist', async () => {
         const response = await api.get(url(0));
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
       it('when requesting an APD that belongs to another state', async () => {
         const response = await api.get(url(4001));
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
