@@ -288,29 +288,23 @@
           }
         }
       },
-      "objectives": [
+      "outcomes": [
         {
-          "objective": "Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.",
-          "keyResults": [
+          "outcome": "Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.",
+          "metrics": [
             {
-              "keyResult": "Complete SLR modifications by 11/1/18",
-              "target": "",
-              "baseline": ""
+              "metric": "Complete SLR modifications by 11/1/18"
             },
             {
-              "keyResult": "Accept attestations through 4/30/19.",
-              "target": "",
-              "baseline": ""
+              "metric": "Accept attestations through 4/30/19."
             }
           ]
         },
         {
-          "objective": "<p>Provide support to EPs and EHs through attestation process.</p>\n",
-          "keyResults": [
+          "outcome": "<p>Provide support to EPs and EHs through attestation process.</p>\n",
+          "metrics": [
             {
-              "keyResult": "<ol>\n<li>Guidance available on Tycho's websites</li>\n<li>Office hours availble for EPs and EHs</li>\n<li>Site visits, as needed, for EPs and EHs</li>\n</ol>\n",
-              "target": "",
-              "baseline": ""
+              "metric": "<ol>\n<li>Guidance available on Tycho's websites</li>\n<li>Office hours availble for EPs and EHs</li>\n<li>Site visits, as needed, for EPs and EHs</li>\n</ol>\n"
             }
           ]
         }
@@ -583,19 +577,15 @@
           }
         }
       },
-      "objectives": [
+      "outcomes": [
         {
-          "objective": "Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
-          "keyResults": [
+          "outcome": "Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
+          "metrics": [
             {
-              "keyResult": "Hire contracted support to build an open API for the DW that the HIE and PHR can consume.",
-              "target": "",
-              "baseline": ""
+              "metric": "Hire contracted support to build an open API for the DW that the HIE and PHR can consume."
             },
             {
-              "keyResult": "Provide support for using open API for DW",
-              "target": "",
-              "baseline": ""
+              "metric": "Provide support for using open API for DW"
             }
           ]
         }
@@ -782,24 +772,20 @@
           }
         }
       },
-      "objectives": [
+      "outcomes": [
         {
-          "objective": "Plan to do a thing.",
-          "keyResults": [
+          "outcome": "Plan to do a thing.",
+          "metrics": [
             {
-              "keyResult": "Do a thing.",
-              "target": "",
-              "baseline": ""
+              "metric": "Do a thing."
             }
           ]
         },
         {
-          "objective": "Onboard 100 providers.",
-          "keyResults": [
+          "outcome": "Onboard 100 providers.",
+          "metrics": [
             {
-              "keyResult": "100 providers onboarded.",
-              "target": "100",
-              "baseline": "7"
+              "metric": "100 providers onboarded."
             }
           ]
         }
@@ -978,14 +964,12 @@
           }
         }
       },
-      "objectives": [
+      "outcomes": [
         {
-          "objective": "Build blue button.",
-          "keyResults": [
+          "outcome": "Build blue button.",
+          "metrics": [
             {
-              "keyResult": "Test blue button with 10 providers.",
-              "target": "10 providers",
-              "baseline": "3 providers"
+              "metric": "Test blue button with 10 providers."
             }
           ]
         }
@@ -1164,24 +1148,20 @@
           }
         }
       },
-      "objectives": [
+      "outcomes": [
         {
-          "objective": "Identifiy PH needs",
-          "keyResults": [
+          "outcome": "Identifiy PH needs",
+          "metrics": [
             {
-              "keyResult": "Complete a build/implementation plan by Summery 2019",
-              "target": "",
-              "baseline": ""
+              "metric": "Complete a build/implementation plan by Summery 2019"
             }
           ]
         },
         {
-          "objective": "Connect PH systems to HIE",
-          "keyResults": [
+          "outcome": "Connect PH systems to HIE",
+          "metrics": [
             {
-              "keyResult": "Connect all 3 PH systems to HIE by Fall 2019",
-              "target": "",
-              "baseline": ""
+              "metric": "Connect all 3 PH systems to HIE by Fall 2019"
             }
           ]
         }
@@ -1356,14 +1336,12 @@
           }
         }
       },
-      "objectives": [
+      "outcomes": [
         {
-          "objective": "Complete MITA 3.0 HITECH portion.",
-          "keyResults": [
+          "outcome": "Complete MITA 3.0 HITECH portion.",
+          "metrics": [
             {
-              "keyResult": "Complete MITA 3.0 HITECH portion by July 2019",
-              "target": "",
-              "baseline": ""
+              "metric": "Complete MITA 3.0 HITECH portion by July 2019"
             }
           ]
         }
