@@ -230,6 +230,20 @@ export const getKeyPersonnel = (years = []) => ({
   key: generateKey()
 });
 
+export const getAPDIdHash = ({
+  apd: {
+    data: { id }
+  }
+}) => {
+  if (!id) return null;
+  return id
+    .toString()
+    .split('')
+    .map(v => v.charCodeAt(0))
+    .reduce((a, v) => (a + ((a << 7) + (a << 3))) ^ v) // eslint-disable-line no-bitwise
+    .toString(16);
+};
+
 export const getAPDCreation = ({
   apd: {
     data: { created }

@@ -78,7 +78,7 @@ module.exports = (
       }
 
       logger.verbose('apd does not exist');
-      return res.status(404).end();
+      return res.status(400).end();
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();

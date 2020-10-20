@@ -67,7 +67,7 @@ describe('apd (application) component', () => {
       apd: {
         data: {
           created: 'creation date',
-          id: 'bloop',
+          id: '123456789',
           name: 'florp',
           years: ['dinkus', 'dorkus', 'durkus']
         }
@@ -80,18 +80,20 @@ describe('apd (application) component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
+      apdIdHash: '6a382771',
       apdSelected: true,
       isAdmin: false,
-      place: 'place',
+      place: 'place'
     });
 
     state.apd.data.id = false;
     delete state.apd.data.years;
 
     expect(mapStateToProps(state)).toEqual({
+      apdIdHash: null,
       apdSelected: false,
       isAdmin: false,
-      place: 'place',
+      place: 'place'
     });
   });
 
