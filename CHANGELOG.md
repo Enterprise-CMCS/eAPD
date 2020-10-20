@@ -12,6 +12,7 @@ Anticipated release: October 19th, 2020
 - Updates tables to increase accessibility ([#2501])
 - Updates markup to use semantic `<nav>` and `<main>` where appropriate ([#2502])
 - Updated inputs in the Estimated Quarterly Incentive Payments table to use aria-labelledby for better UX/a11y ([#2503])
+- Give users the ability to choose FFYs before entering their Key Personnel ([#2509])
 - Add bulleted lists, numbered lists, formatting dropdown to the RichText editor ([#2521])
 
 #### 🐛 Bugs fixed
@@ -30,4 +31,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2501]: https://github.com/CMSgov/eAPD/issues/2501
 [#2502]: https://github.com/CMSgov/eAPD/issues/2502
 [#2503]: https://github.com/CMSgov/eAPD/issues/2503
+[#2509]: https://github.com/CMSgov/eAPD/issues/2509
 [#2521]: https://github.com/CMSgov/eAPD/issues/2521

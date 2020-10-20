@@ -64,12 +64,12 @@ class ApdViewOnly extends Component {
         <hr className="section-rule" />
         <ExecutiveSummary />
         <hr className="section-rule" />
+        <ApdSummary />
+        <hr className="section-rule" />
         <ApdStateProfile
           stateProfile={apd.stateProfile}
           keyPersonnel={apd.keyPersonnel}
         />
-        <hr className="section-rule" />
-        <ApdSummary />
         <hr className="section-rule" />
         <PreviousActivities />
         <hr className="section-rule" />
