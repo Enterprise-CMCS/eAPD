@@ -79,7 +79,10 @@ const openAPI = {
           description: 'The APD',
           content: jsonResponse({ $ref: '#/components/schemas/apd' })
         },
-        404: {
+        400: {
+          description: 'The apd ID does not match any known apds'
+        },
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
@@ -158,7 +161,7 @@ const openAPI = {
             ]
           })
         },
-        404: {
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
@@ -186,7 +189,7 @@ const openAPI = {
           description:
             'Invalid request, such as requesting to archive an APD that is not editable'
         },
-        404: {
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
@@ -249,7 +252,7 @@ const openAPI = {
           description:
             'Invalid request, such as requesting to archive an APD that is not editable'
         },
-        404: {
+        401: {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
@@ -287,8 +290,67 @@ const openAPI = {
           description: 'The file',
           content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
         },
-        404: {
+        400: {
           description: 'The file does not belong to the APD or does not exist'
+        }
+      }
+    }
+  },
+
+  '/apds/{id}/events': {
+    post: {
+      tags: ['APDs', 'events'],
+      summary: 'Log an event performed on an APD',
+      description:
+        'Posts an event, associates it with a given APD, and stores any provided metadata.',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the apd the event is associated with',
+          required: true,
+          schema: {
+            type: 'number'
+          }
+        }
+      ],
+      requestBody: {
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                eventType: {
+                  type: 'string',
+                  description: 'the type of the event performed'
+                },
+                metadata: {
+                  type: 'object',
+                  description: 'anny additional metadata to add to the log'
+                }
+              }
+            }
+          }
+        }
+      },
+      responses: {
+        200: {
+          description: 'The status of the event being logged',
+          content: jsonResponse({
+            type: 'object',
+            properties: {
+              success: {
+                type: 'boolean',
+                description: 'whether the event was successfully logged'
+              }
+            }
+          })
+        },
+        400: {
+          description: 'The apd ID does not match any knownn apds'
+        },
+        401: {
+          description: 'The apd ID does not match any known apds for the user'
         }
       }
     }
