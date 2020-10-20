@@ -2,7 +2,7 @@ exports.seed = async knex => {
   // 40xx IDs refer to apds
   // 41xx IDs refer to activities
   // 42xx IDs refer to goals
-  // 43xx IDs refer to objectives
+  // 43xx IDs refer to outcomes
 
   await knex('apd_files').insert([
     {
