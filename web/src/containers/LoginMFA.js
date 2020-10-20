@@ -16,8 +16,8 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
   return (
     <div id="start-main-content">
       <VerifyMFAForm
-        title="Verify your identity"
-        legend="Verify your identity"
+        title="Verify Your Identity"
+        legend="Verify Your Identity"
         cancelable={true}
         className="ds-u-margin-top--7"
         canSubmit={!!otp}

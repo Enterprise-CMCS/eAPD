@@ -7,6 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_MFA_FAILURE,
+  LOCKED_OUT,
   LOGOUT_SUCCESS
 } from '../actions/auth';
 
@@ -79,7 +80,17 @@ const auth = (state = initialState, action) => {
         error: action.error
       };
     case LOGIN_MFA_FAILURE:
-      return { ...state, fetching: false, error: action.error };
+      return { 
+        ...state, 
+        fetching: false, 
+        error: action.error 
+      };
+    case LOCKED_OUT:
+      return {
+        ...state,
+        fetching: false,
+        error: action.error
+      };      
     case LOGOUT_SUCCESS:
       return {
         ...initialState,
