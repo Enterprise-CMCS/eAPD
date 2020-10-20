@@ -15,6 +15,7 @@ export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOCKED_OUT = 'LOCKED_OUT';
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
@@ -138,6 +139,7 @@ export const loginOtp = otp => async dispatch => {
         });
       })
       .catch(error => {
+        console.log("hwheiw");
         const reason = error ? error.message : 'N/A';
         dispatch(failLoginMFA(reason));
       });
