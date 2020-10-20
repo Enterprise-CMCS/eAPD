@@ -19,7 +19,7 @@
       }
     },
     "outcome": {
-      "$id": "#/properties/activities/items/properties/goals/items/properties/outcome",
+      "$id": "#/properties/activities/items/properties/outcomes/items/properties/outcome",
       "type": "string"
     }
   }
