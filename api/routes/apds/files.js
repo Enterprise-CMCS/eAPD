@@ -30,12 +30,12 @@ module.exports = (
           const file = await getFile(req.params.fileID);
           res.send(file).end();
         } else {
-          res.status(404).end();
+          res.status(400).end();
         }
       } catch (e) {
         logger.error(req, 'error fetching file');
         logger.error(req, e);
-        res.status(404).end();
+        res.status(400).end();
       }
     }
   );

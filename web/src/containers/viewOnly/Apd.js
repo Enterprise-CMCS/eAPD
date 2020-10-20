@@ -45,7 +45,7 @@ class ApdViewOnly extends Component {
     }
 
     return (
-      <div
+      <main
         id="start-main-content"
         className="site-body ds-l-container ds-u-padding--3"
       >
@@ -64,12 +64,12 @@ class ApdViewOnly extends Component {
         <hr className="section-rule" />
         <ExecutiveSummary />
         <hr className="section-rule" />
+        <ApdSummary />
+        <hr className="section-rule" />
         <ApdStateProfile
           stateProfile={apd.stateProfile}
           keyPersonnel={apd.keyPersonnel}
         />
-        <hr className="section-rule" />
-        <ApdSummary />
         <hr className="section-rule" />
         <PreviousActivities />
         <hr className="section-rule" />
@@ -86,7 +86,7 @@ class ApdViewOnly extends Component {
         >
           ^ Return to the top of the page
         </Button>
-      </div>
+      </main>
     );
   }
 }
