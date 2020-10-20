@@ -16,7 +16,7 @@ exports[`<ApdPageRoutes /> component renders as expected 1`] = `
       path="/your/current/path"
     >
       <Redirect
-        to="/your/current/path/state-profile"
+        to="/your/current/path/program-summary"
       />
     </Route>
     <Route
