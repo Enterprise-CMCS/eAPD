@@ -64,7 +64,7 @@ const StateDashboard = (
   }
 
   return (
-    <div
+    <main
       id="start-main-content"
       className="ds-l-container ds-u-margin-bottom--5"
     >
@@ -142,7 +142,7 @@ const StateDashboard = (
           </div>
         </div>
       ))}
-    </div>
+    </main>
   );
 };
 

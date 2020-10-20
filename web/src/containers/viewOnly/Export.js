@@ -3,11 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@cmsgov/design-system';
 import { Envelope, PDFFile } from '../../components/Icons';
-import { printApd } from '../../actions/app';
+import { printApd, saveApdEvent } from '../../actions/app';
+import { APD_EVENTS } from '../../constants';
 
-const ExportInstructions = ({ printApd: print }) => {
+const ExportInstructions = ({ printApd: print, saveApdEvent: log }) => {
   const sendMail = email => {
     window.location.href = `mailto:${email}`;
+  };
+
+  const printAndLog = () => {
+    log(APD_EVENTS.EXPORT);
+    print();
   };
 
   return (
@@ -37,7 +43,7 @@ const ExportInstructions = ({ printApd: print }) => {
         variation="primary"
         className="ds-u-margin-top--2"
         id="export-to-print-or-pdf"
-        onClick={print}
+        onClick={printAndLog}
       >
         Export
         <span className="ds-u-margin-left--2">
@@ -69,10 +75,11 @@ const ExportInstructions = ({ printApd: print }) => {
   );
 };
 ExportInstructions.propTypes = {
-  printApd: PropTypes.func.isRequired
+  printApd: PropTypes.func.isRequired,
+  saveApdEvent: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = { printApd };
+const mapDispatchToProps = { printApd, saveApdEvent };
 
 export default connect(null, mapDispatchToProps)(ExportInstructions);
 
