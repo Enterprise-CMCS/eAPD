@@ -76,6 +76,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-gtm-module": "^2.0.11",
     "react-redux": "^7.2.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
@@ -86,6 +87,7 @@
     "stickybits": "^3.7.4",
     "tinymce": "^5.2.2",
     "updeep": "^1.2.0",
+    "uuid": "^8.3.1",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

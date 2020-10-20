@@ -42,6 +42,7 @@ const ExportInstructions = ({ printApd: print, saveApdEvent: log }) => {
         size="big"
         variation="primary"
         className="ds-u-margin-top--2"
+        id="export-to-print-or-pdf"
         onClick={printAndLog}
       >
         Export
