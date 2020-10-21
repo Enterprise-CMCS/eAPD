@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity Outcomes and Metrics component renders properly 1`] = `
+<Subsection
+  headerClassName={null}
+  id="activity-outcomes-0"
+  nested={false}
+  resource="activities.outcomes"
+>
+  <FormAndReviewList
+    activityIndex={0}
+    addButtonText="Add another outcome"
+    allowDeleteAll={false}
+    className={null}
+    collapsed={[Function]}
+    expanded={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(OutcomeAndMetricForm)",
+        "type": [Function],
+      }
+    }
+    extraItemButtons={
+      Array [
+        Object {
+          "onClick": [Function],
+          "text": "Add another metric",
+        },
+      ]
+    }
+    handleChange={[Function]}
+    list={
+      Array [
+        Object {
+          "key": "outcome 1",
+        },
+        Object {
+          "key": "outcome 2",
+        },
+        Object {
+          "key": "outcome 3",
+        },
+      ]
+    }
+    noDataMessage="Additional costs for this activity are missing."
+    onAddClick={[Function]}
+    onDeleteClick={[Function]}
+  />
+</Subsection>
+`;
