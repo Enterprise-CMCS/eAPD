@@ -30,7 +30,7 @@ exports[`renders correctly Summary Budget By Activity Totals renders 1`] = `
       </th>
     </tr>
   </thead>
-  <thead>
+  <tbody>
     <tr
       className="budget-table--row__header"
     >
@@ -41,28 +41,26 @@ exports[`renders correctly Summary Budget By Activity Totals renders 1`] = `
         HIT
       </th>
     </tr>
-  </thead>
-  <DataRowGroup
-    data={
-      Object {
-        "1975": Object {
-          "federal": 1,
-          "medicaid": 1000,
-          "state": 2,
-          "total": 3,
-        },
-        "1976": Object {
-          "federal": 10,
-          "medicaid": 2000,
-          "state": 20,
-          "total": 30,
-        },
+    <DataRowGroup
+      data={
+        Object {
+          "1975": Object {
+            "federal": 1,
+            "medicaid": 1000,
+            "state": 2,
+            "total": 3,
+          },
+          "1976": Object {
+            "federal": 10,
+            "medicaid": 2000,
+            "state": 20,
+            "total": 30,
+          },
+        }
       }
-    }
-    groupTitle="HIT"
-    year="1975"
-  />
-  <thead>
+      groupTitle="HIT"
+      year="1975"
+    />
     <tr
       className="budget-table--row__header"
     >
@@ -73,28 +71,26 @@ exports[`renders correctly Summary Budget By Activity Totals renders 1`] = `
         HIE
       </th>
     </tr>
-  </thead>
-  <DataRowGroup
-    data={
-      Object {
-        "1975": Object {
-          "federal": 2,
-          "medicaid": 2000,
-          "state": 3,
-          "total": 5,
-        },
-        "1976": Object {
-          "federal": 20,
-          "medicaid": 3000,
-          "state": 30,
-          "total": 50,
-        },
+    <DataRowGroup
+      data={
+        Object {
+          "1975": Object {
+            "federal": 2,
+            "medicaid": 2000,
+            "state": 3,
+            "total": 5,
+          },
+          "1976": Object {
+            "federal": 20,
+            "medicaid": 3000,
+            "state": 30,
+            "total": 50,
+          },
+        }
       }
-    }
-    groupTitle="HIE"
-    year="1975"
-  />
-  <thead>
+      groupTitle="HIE"
+      year="1975"
+    />
     <tr
       className="budget-table--row__header"
     >
@@ -105,28 +101,26 @@ exports[`renders correctly Summary Budget By Activity Totals renders 1`] = `
         MMIS
       </th>
     </tr>
-  </thead>
-  <DataRowGroup
-    data={
-      Object {
-        "1975": Object {
-          "federal": 3,
-          "medicaid": 3000,
-          "state": 4,
-          "total": 7,
-        },
-        "1976": Object {
-          "federal": 30,
-          "medicaid": 4000,
-          "state": 40,
-          "total": 70,
-        },
+    <DataRowGroup
+      data={
+        Object {
+          "1975": Object {
+            "federal": 3,
+            "medicaid": 3000,
+            "state": 4,
+            "total": 7,
+          },
+          "1976": Object {
+            "federal": 30,
+            "medicaid": 4000,
+            "state": 40,
+            "total": 70,
+          },
+        }
       }
-    }
-    groupTitle="MMIS"
-    year="1975"
-  />
-  <thead>
+      groupTitle="MMIS"
+      year="1975"
+    />
     <tr
       className="budget-table--row__header"
       key="1975"
@@ -146,12 +140,12 @@ exports[`renders correctly Summary Budget By Activity Totals renders 1`] = `
         </Dollars>
       </td>
     </tr>
-  </thead>
+  </tbody>
 </table>
 `;
 
 exports[`renders correctly data row group renders 1`] = `
-<tbody>
+<Fragment>
   <DataRow
     category="statePersonnel"
     groupTitle="MMIS"
@@ -172,7 +166,7 @@ exports[`renders correctly data row group renders 1`] = `
     groupTitle="MMIS"
     title="Total"
   />
-</tbody>
+</Fragment>
 `;
 
 exports[`renders correctly data row renders 1`] = `
