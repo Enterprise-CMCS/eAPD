@@ -11,6 +11,10 @@ export const APD_STATUS = {
   WITHDRAWN: Symbol('withdrawn')
 };
 
+export const APD_EVENTS = {
+  EXPORT: 'EXPORT'
+};
+
 export const DASHBOARD_TASK_BUTTON_TEXT = {
   [APD_STATUS.DRAFT]: 'Open',
   [APD_STATUS.SUBMITTED]: 'View',
