@@ -14,9 +14,6 @@ Logout.propTypes = {
 
 const mapDispatchToProps = { logout: dispatchLogout };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);
 
 export { Logout as plain, mapDispatchToProps };

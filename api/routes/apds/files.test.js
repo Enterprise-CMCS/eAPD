@@ -71,7 +71,7 @@ tap.test('apds files endpoints', async endpointTest => {
 
         await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
 
-        test.ok(res.status.calledWith(404), 'sends a 404 error');
+        test.ok(res.status.calledWith(400), 'sends a 400 error');
         test.ok(res.end.calledAfter(res.status), 'response is terminated');
       }
     );
@@ -81,7 +81,7 @@ tap.test('apds files endpoints', async endpointTest => {
 
       await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
 
-      test.ok(res.status.calledWith(404), 'sends a 404 error');
+      test.ok(res.status.calledWith(400), 'sends a 400 error');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
     });
 
@@ -91,7 +91,7 @@ tap.test('apds files endpoints', async endpointTest => {
 
       await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
 
-      test.ok(res.status.calledWith(404), 'sends a 404 error');
+      test.ok(res.status.calledWith(400), 'sends a 400 error');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
     });
 
