@@ -3,18 +3,23 @@ import React from 'react';
 import sinon from 'sinon';
 
 import { plain as ExportInstructions, mapDispatchToProps } from './Export';
-import { printApd } from '../../actions/app';
+import { printApd, saveApdEvent } from '../../actions/app';
 
 describe('apd export component', () => {
   test('renders correctly', () => {
     expect(
-      shallow(<ExportInstructions printApd={() => {}} />)
+      shallow(
+        <ExportInstructions printApd={() => {}} saveApdEvent={() => {}} />
+      )
     ).toMatchSnapshot();
   });
 
   test('triggers a print action', () => {
     const print = sinon.spy();
-    const component = shallow(<ExportInstructions printApd={print} />);
+    const log = sinon.spy();
+    const component = shallow(
+      <ExportInstructions printApd={print} saveApdEvent={log} />
+    );
     component
       .find('Button')
       .first()
@@ -24,6 +29,6 @@ describe('apd export component', () => {
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ printApd });
+    expect(mapDispatchToProps).toEqual({ printApd, saveApdEvent });
   });
 });

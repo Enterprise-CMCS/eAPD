@@ -62,32 +62,48 @@ const ApdSummary = ({
         type="checkbox"
       />
       <div className="ds-u-margin-y--3">
-        <Instruction source="apd.introduction.instruction" />
+        <Instruction
+          labelFor="program-introduction-field"
+          source="apd.introduction.instruction"
+        />
         <RichText
+          id="program-introduction-field"
           content={programOverview}
           onSync={syncRichText(setOverview)}
           editorClassName="rte-textarea-l"
         />
       </div>
       <div className="ds-u-margin-bottom--3">
-        <Instruction source="apd.hit.instruction" />
+        <Instruction
+          labelFor="hit-overview-field"
+          source="apd.hit.instruction"
+        />
         <RichText
+          id="hit-overview-field"
           content={narrativeHIT}
           onSync={syncRichText(setHIT)}
           editorClassName="rte-textarea-l"
         />
       </div>
       <div className="ds-u-margin-bottom--3">
-        <Instruction source="apd.hie.instruction" />
+        <Instruction
+          labelFor="hie-overview-field"
+          source="apd.hie.instruction"
+        />
         <RichText
+          id="hie-overview-field"
           content={narrativeHIE}
           onSync={syncRichText(setHIE)}
           editorClassName="rte-textarea-l"
         />
       </div>
       <div>
-        <Instruction source="apd.mmis.instruction" />
+        <Instruction
+          labelFor="mmis-overview-field"
+          source="apd.mmis.instruction"
+        />
         <RichText
+          id="mmis-overview-field"
           content={narrativeMMIS}
           onSync={syncRichText(setMMIS)}
           editorClassName="rte-textarea-l"

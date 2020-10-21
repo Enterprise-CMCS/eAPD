@@ -47,12 +47,14 @@ exports[`apd summary component renders correctly 1`] = `
           "level": "h3",
         }
       }
+      labelFor="program-introduction-field"
       reverse={false}
       source="apd.introduction.instruction"
     />
     <Connect(RichText)
       content="about the program"
       editorClassName="rte-textarea-l"
+      id="program-introduction-field"
       onSync={[Function]}
     />
   </div>
@@ -67,12 +69,14 @@ exports[`apd summary component renders correctly 1`] = `
           "level": "h3",
         }
       }
+      labelFor="hit-overview-field"
       reverse={false}
       source="apd.hit.instruction"
     />
     <Connect(RichText)
       content="about hit"
       editorClassName="rte-textarea-l"
+      id="hit-overview-field"
       onSync={[Function]}
     />
   </div>
@@ -87,12 +91,14 @@ exports[`apd summary component renders correctly 1`] = `
           "level": "h3",
         }
       }
+      labelFor="hie-overview-field"
       reverse={false}
       source="apd.hie.instruction"
     />
     <Connect(RichText)
       content="about hie"
       editorClassName="rte-textarea-l"
+      id="hie-overview-field"
       onSync={[Function]}
     />
   </div>
@@ -105,12 +111,14 @@ exports[`apd summary component renders correctly 1`] = `
           "level": "h3",
         }
       }
+      labelFor="mmis-overview-field"
       reverse={false}
       source="apd.mmis.instruction"
     />
     <Connect(RichText)
       content="about mmis"
       editorClassName="rte-textarea-l"
+      id="mmis-overview-field"
       onSync={[Function]}
     />
   </div>
