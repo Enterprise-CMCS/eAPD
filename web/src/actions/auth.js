@@ -32,6 +32,7 @@ export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
 export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
+export const failLoginLocked = error => ({ type: LOCKED_OUT })
 
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
@@ -86,7 +87,7 @@ const setTokens = sessionToken => {
       sessionToken,
       state: stateToken
       // prompt: 'none'
-    })
+    })  
     .then(async res => {
       const { state: responseToken, tokens } = res;
       if (stateToken === responseToken) {
@@ -102,24 +103,30 @@ export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
   authenticateUser(username, password)
     .then(async res => {
-      if (res.status === 'MFA_REQUIRED') {
+      if (res.status === 'LOCKED_OUT') {
+        console.log('hit LOCKED_OUT in actions/auth')
+        dispatch(failLoginLocked());
+      } else if (res.status === 'MFA_REQUIRED') {
+        console.log("also hit MFA_REQUIRED");
         return retrieveMFA(res).then(() => {
           dispatch(completeFirstStage());
-        });
+        });          
+      } else { // Ty Note: Should this check for a specific success case?
+        await setTokens(res.sessionToken);
+        return axios
+          .get('/me')
+          .then(userRes => {
+            dispatch(completeLogin(userRes.data));
+            dispatch(loadData(userRes.data.activities));
+          })
+          .catch(error => {
+            const reason = error ? error.message : 'N/A';
+            dispatch(failLogin(reason));
+          });        
       }
-      await setTokens(res.sessionToken);
-      return axios
-        .get('/me')
-        .then(userRes => {
-          dispatch(completeLogin(userRes.data));
-          dispatch(loadData(userRes.data.activities));
-        })
-        .catch(error => {
-          const reason = error ? error.message : 'N/A';
-          dispatch(failLogin(reason));
-        });
     })
     .catch(error => {
+      console.log("error.message:", error.message)
       const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
     });
@@ -138,10 +145,14 @@ export const loginOtp = otp => async dispatch => {
           dispatch(loadData(userRes.data.activities));
         });
       })
-      .catch(error => {
-        console.log("hwheiw");
+      .catch(error => {        
         const reason = error ? error.message : 'N/A';
-        dispatch(failLoginMFA(reason));
+        if (reason == 'Invalid Passcode/Answer') {
+          dispatch(failLoginMFA(reason));          
+        } else if (reason == 'User Locked') {
+            console.log("hit user locked");
+            dispatch(failLoginLocked(reason));
+        }
       });
   } else {
     dispatch(failLoginMFA('Authentication failed'));

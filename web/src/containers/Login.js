@@ -10,6 +10,7 @@ import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
+import LoginLocked from './LoginLocked';
 
 const Login = ({
   authenticated,
@@ -18,6 +19,7 @@ const Login = ({
   hasEverLoggedOn,
   location,
   otpStage,
+  isLocked,
   login: action,
   loginOtp: otpAction
 }) => {
@@ -54,8 +56,11 @@ const Login = ({
     );
   }
 
+// Ty Note: I sort of tacked this on here thinking isLocked would take precedent over the otpStage. Open to ideas for improving this. 
   let errorMessage = false;
-  if (otpStage && error === 'Authentication failed') {
+  if (isLocked) {
+    errorMessage = 'You are locked out'
+  } else if (otpStage && error === 'Authentication failed') {
     errorMessage = 'The one-time password you’ve entered is incorrect.';
   } else if (
     error === 'Authentication failed' ||
@@ -65,8 +70,13 @@ const Login = ({
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
-
-  if (otpStage) {
+  
+  if (isLocked) {
+    return (
+      <LoginLocked />
+    );
+  } else if (otpStage) {
+    console.log('otpStage == true')
     return (
       <LoginMFA
         action={otpAction}
@@ -127,18 +137,20 @@ Login.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
+  isLocked: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, isLocked }
 }) => ({
   authenticated,
   error,
   fetching,
   hasEverLoggedOn,
-  otpStage
+  otpStage,
+  isLocked
 });
 
 const mapDispatchToProps = { login, loginOtp };
