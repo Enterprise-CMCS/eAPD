@@ -6,9 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './CostAllocateFFP';
-import {
-  setCostAllocationFFPFundingSplit
-} from '../../actions/editActivity';
+import { setCostAllocationFFPFundingSplit } from '../../actions/editActivity';
 
 describe('the CostAllocateFFP component', () => {
   const props = {
@@ -206,17 +204,37 @@ describe('the CostAllocateFFP component', () => {
     const getState = jest.fn();
     getState.mockReturnValue({ name: 'denial' });
 
+    const getActivityTotal = jest.fn();
+    getActivityTotal.mockReturnValue({
+      data: {
+        otherFunding: {
+          2020: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 },
+          2021: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 }
+        }
+      }
+    });
+
     expect(
       mapStateToProps(
         'my state object',
         { activityIndex: 0 },
-        { getActivity, getCostAllocation, getCostSummary, getState }
+        {
+          getActivity,
+          getCostAllocation,
+          getCostSummary,
+          getState,
+          getActivityTotal
+        }
       )
     ).toEqual({
       aKey: 'activity key',
       activityName: 'activity name',
       costAllocation: 'cost allocation',
       costSummary: 'cost summary',
+      otherFunding: {
+        2020: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 },
+        2021: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 }
+      },
       stateName: 'denial'
     });
 
@@ -238,13 +256,23 @@ describe('the CostAllocateFFP component', () => {
       mapStateToProps(
         'my state object',
         { activityIndex: 0 },
-        { getActivity, getCostAllocation, getCostSummary, getState }
+        {
+          getActivity,
+          getCostAllocation,
+          getCostSummary,
+          getState,
+          getActivityTotal
+        }
       )
     ).toEqual({
       aKey: 'activity key',
       activityName: 'Activity 1',
       costAllocation: 'cost allocation',
       costSummary: 'cost summary',
+      otherFunding: {
+        2020: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 },
+        2021: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 }
+      },
       stateName: 'denial'
     });
   });

@@ -222,7 +222,7 @@ tap.test('apds/:id GET endpoint', async tests => {
           res
         );
 
-        test.ok(res.status.calledWith(404), 'HTTP status set to 404');
+        test.ok(res.status.calledWith(400), 'HTTP status set to 400');
         test.ok(res.send.notCalled, 'no body is sent');
         test.ok(res.end.called, 'response is terminated');
       }

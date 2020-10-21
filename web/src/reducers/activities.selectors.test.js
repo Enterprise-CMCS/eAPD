@@ -11,6 +11,7 @@ import {
   selectActivitiesSidebar,
   selectOKRsByActivityIndex,
   selectGoalsByActivityIndex,
+  selectActivityTotalForBudgetByActivityIndex,
   makeSelectCostAllocateFFPBudget,
   selectActivityCount
 } from './activities.selectors';
@@ -566,6 +567,42 @@ describe('activities state selectors', () => {
               data: {
                 activities: []
               }
+            }
+          },
+          { activityIndex: 1 }
+        )
+      ).toEqual(null);
+    });
+  });
+
+  describe('selects activity total by index', () => {
+    it('returns goals if the activity exists', () => {
+      expect(
+        selectActivityTotalForBudgetByActivityIndex(
+          {
+            budget: {
+              activityTotals: [
+                {
+                  data: {
+                    otherFunding: { 2020: { total: 0 }, 2021: { total: 0 } }
+                  }
+                }
+              ]
+            }
+          },
+          { activityIndex: 0 }
+        )
+      ).toEqual({
+        data: { otherFunding: { 2020: { total: 0 }, 2021: { total: 0 } } }
+      });
+    });
+
+    it('returns null if the activity does not exist', () => {
+      expect(
+        selectActivityTotalForBudgetByActivityIndex(
+          {
+            budget: {
+              activityTotals: []
             }
           },
           { activityIndex: 1 }

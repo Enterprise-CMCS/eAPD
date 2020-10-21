@@ -28,14 +28,6 @@ if (browserIsRed) {
   // otherwise, set to DEFAULT_LOCALE ("en")
   initI18n();
 
-  // Setup Google Tag for Analytics
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = (...args) => {
-    window.dataLayer.push(args);
-  };
-  window.gtag('js', new Date());
-  window.gtag('config', 'UA-120133131-1');
-
   const history = createBrowserHistory();
 
   const middleware = [thunk, routerMiddleware(history), saveMiddleware];
