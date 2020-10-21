@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { ChoiceList } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 
 import {
@@ -10,7 +11,6 @@ import {
   setNarrativeForMMIS,
   setProgramOverview
 } from '../actions/editApd';
-import Choice from '../components/Choice';
 import RichText from '../components/RichText';
 import Instruction from '../components/Instruction';
 import { Section } from '../components/Section';
@@ -44,24 +44,23 @@ const ApdSummary = ({
     action(html);
   };
 
+  const yearChoices = yearOptions.map(year => ({
+    defaultChecked: years.includes(year),
+    label: year,
+    value: year
+  }))
+
   return (
     <Section resource="apd">
       <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
-      <Instruction source="apd.overview.instruction" />
-
-      {yearOptions.map(option => (
-        <Choice
-          key={option}
-          checked={years.includes(option)}
-          name={`apd year ${option}`}
-          onChange={handleYears}
-          type="checkbox"
-          value={option}
-        >
-          {option}
-        </Choice>
-      ))}
-
+      <ChoiceList
+        choices={yearChoices}
+        label={t('apd.overview.instruction.short')}
+        labelClassName="ds-u-margin-bottom--1"
+        name="apd-years"
+        onChange={handleYears}
+        type="checkbox"
+      />
       <div className="ds-u-margin-y--3">
         <Instruction
           labelFor="program-introduction-field"

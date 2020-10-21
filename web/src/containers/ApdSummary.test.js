@@ -57,7 +57,7 @@ describe('apd summary component', () => {
 
   test('dispatches when adding a year', () => {
     shallow(<ApdSummary {...props} />)
-      .find('ChoiceComponent[value="3"]')
+      .find('ChoiceList')
       .simulate('change', { target: { value: '3' } });
 
     expect(props.addApdYear).toHaveBeenCalledWith('3');
@@ -65,7 +65,7 @@ describe('apd summary component', () => {
 
   test('dispatches when removing a year', () => {
     shallow(<ApdSummary {...props} />)
-      .find('ChoiceComponent[value="2"]')
+      .find('ChoiceList')
       .simulate('change', { target: { value: '2' } });
 
     expect(props.removeApdYear).toHaveBeenCalledWith('2');
