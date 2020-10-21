@@ -79,7 +79,8 @@ server.use((req, res, next) => {
 logger.silly('setting global middleware');
 server.use(compression());
 server.use(express.urlencoded({ extended: true }));
-server.use(cors({ credentials: true, origin: true }));
+// server.use(cors({ credentials: true, origin: true }));
+server.use(cors());
 server.use(bodyParser.json({ limit: '5mb' }));
 
 // Registers Passport, related handlers, and

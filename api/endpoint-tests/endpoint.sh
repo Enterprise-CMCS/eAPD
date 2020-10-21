@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-rm ./endpoint-tests/endpoint-data.json
+# rm ./endpoint-tests/endpoint-data.json
 
 echo "[]" > endpoint-data.json
 
@@ -13,5 +13,5 @@ docker-compose -f docker-compose.endpoint-tests.yml down
 
 mv endpoint-data.json ./endpoint-tests
 
-node endpoint-tests/endpoint-coverage.js
+# node endpoint-tests/endpoint-coverage.js
 exit $EXIT_CODE
