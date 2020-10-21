@@ -8,26 +8,20 @@ import { stateDateToDisplay } from '../../../util';
 const isYear = value => !!value.match(/^[0-9]{4}$/);
 
 const Activity = ({ activity, activityIndex }) => {
-  const buildOutcome = objective => {
+  const buildOutcome = outcome => {
     return (
       <Fragment>
         <p>
-          <strong>Outcome: </strong> {objective.objective}
+          <strong>Outcome: </strong> {outcome.outcome}
         </p>
         <div>
           <strong>Metrics: </strong>
           <ul>
-            {objective.keyResults.map(
-              ({ baseline, key, keyResult, target }) => (
-                <li key={key} className="ds-u-margin-top--2">
-                  <strong>{keyResult}</strong>
-                  <br />
-                  <strong>Target:</strong> {target}
-                  <br />
-                  <strong>Baseline:</strong> {baseline}
-                </li>
-              )
-            )}
+            {outcome.metrics.map(({ key, metric }) => (
+              <li key={key} className="ds-u-margin-top--2">
+                <strong>{metric}</strong>
+              </li>
+            ))}
           </ul>
         </div>
       </Fragment>
@@ -219,7 +213,7 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Outcomes and Metrics
       </h3>
-      {activity.objectives.map(buildOutcome)}
+      {activity.outcomes.map(buildOutcome)}
 
       <h3>Milestones</h3>
       {activity.schedule.map((milestone, index) =>

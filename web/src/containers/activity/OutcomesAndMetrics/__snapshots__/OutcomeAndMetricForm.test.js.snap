@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
+<Fragment>
+  <TextField
+    autoFocus={true}
+    className="data-entry-box"
+    hint="Describe what you are trying to achieve"
+    label="Outcome"
+    name="outcome"
+    onChange={[Function]}
+    type="text"
+    value="outcome description"
+  />
+  <div
+    className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+    key="om key 1"
+  >
+    <TextField
+      hint="Describe how you will measure progress towards achieving your outcome."
+      label="metric"
+      name="metric"
+      onChange={[Function]}
+      type="text"
+      value="metric 1"
+    />
+  </div>
+  <div
+    className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+    key="om key 2"
+  >
+    <TextField
+      hint="Describe how you will measure progress towards achieving your outcome."
+      label="metric"
+      name="metric"
+      onChange={[Function]}
+      type="text"
+      value="metric 2"
+    />
+  </div>
+</Fragment>
+`;

@@ -28,7 +28,7 @@ const setup = (props = {}) => {
       <ContinuePreviousButtons {...defaultProps} {...props} />
     </Router>
   );
-}
+};
 
 describe('<ContinuePreviousButtons /> component', () => {
   it('renders links, when provided', () => {
@@ -41,7 +41,7 @@ describe('<ContinuePreviousButtons /> component', () => {
   it('does not render links, with null inputs', () => {
     const props = {
       continueLink: null,
-      previousLink: null,
+      previousLink: null
     };
     const component = setup(props);
     expect(component.find(Link).exists()).toBe(false);
@@ -63,21 +63,21 @@ describe('<ContinuePreviousButtons /> component', () => {
   it('is labeled with the activity number, when within an activity', () => {
     const props = {
       continueLink: {
-        id: 'apd-activity-1-okrs-nav',
-        label: 'Objective and key results',
-        url: '/apd/activity/1/okrs'
+        id: 'apd-activity-1-oms-nav',
+        label: 'Outcome and metrics',
+        url: '/apd/activity/1/oms'
       },
       previousLink: {
         id: 'apd-activity-0-ffp-nav',
         label: 'FFP and budget',
         url: '/apd/activity/0/ffp'
-      },
+      }
     };
     const component = setup(props);
 
     const continueLabel = component.find(`#${continueLabelId}`);
     const previousLabel = component.find(`#${previousLabelId}`);
-    expect(continueLabel.text()).toBe('Activity 2: Objective and key results');
+    expect(continueLabel.text()).toBe('Activity 2: Outcome and metrics');
     expect(previousLabel.text()).toBe('Activity 1: FFP and budget');
   });
 
@@ -85,7 +85,11 @@ describe('<ContinuePreviousButtons /> component', () => {
     const state = {
       nav: defaultProps
     };
-    expect(mapStateToProps(state).continueLink).toEqual(defaultProps.continueLink);
-    expect(mapStateToProps(state).previousLink).toEqual(defaultProps.previousLink);
+    expect(mapStateToProps(state).continueLink).toEqual(
+      defaultProps.continueLink
+    );
+    expect(mapStateToProps(state).previousLink).toEqual(
+      defaultProps.previousLink
+    );
   });
 });

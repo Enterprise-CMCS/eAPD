@@ -35,9 +35,9 @@ exports[`Section component renders correctly with resource containing title but 
   <h2
     className="ds-h2"
   >
-    Objectives and Key Results
+    Outcomes and Metrics
   </h2>
-  goals test child
+  outcomes test child
   <Connect(SecondaryNav) />
 </section>
 `;
@@ -48,7 +48,7 @@ exports[`Subsection component renders correctly 1`] = `
     className=" subsection--title ds-h3"
     id={null}
   >
-    Objectives and Key Results
+    Outcomes and Metrics
   </h3>
   <Instruction
     args={null}
@@ -59,7 +59,7 @@ exports[`Subsection component renders correctly 1`] = `
       }
     }
     reverse={false}
-    source="activities.goals.instruction"
+    source="activities.outcomes.instruction"
   />
   test child
 </Fragment>
@@ -71,7 +71,7 @@ exports[`Subsection component uses the passed-in heading class 1`] = `
     className="bobs-burgers subsection--title ds-h3"
     id={null}
   >
-    Objectives and Key Results
+    Outcomes and Metrics
   </h3>
   <Instruction
     args={null}
@@ -82,7 +82,7 @@ exports[`Subsection component uses the passed-in heading class 1`] = `
       }
     }
     reverse={false}
-    source="activities.goals.instruction"
+    source="activities.outcomes.instruction"
   />
   test child
 </Fragment>

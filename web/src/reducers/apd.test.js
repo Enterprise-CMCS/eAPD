@@ -165,7 +165,7 @@ describe('APD reducer', () => {
             name: 'activity 1',
             contractorResources: [{ name: 'contractor 1' }],
             expenses: [{ name: 'expense 1' }],
-            objectives: [{ name: 'objective 1' }],
+            outcomes: [{ name: 'outcome 1' }],
             schedule: [{ name: 'schedule 1' }],
             statePersonnel: [{ name: 'person 1' }]
           }
@@ -203,10 +203,10 @@ describe('APD reducer', () => {
                   name: 'expense 1'
                 }
               ],
-              objectives: [
+              outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'objective 1'
+                  name: 'outcome 1'
                 }
               ],
               schedule: [
@@ -260,10 +260,10 @@ describe('APD reducer', () => {
                   name: 'expense 1'
                 }
               ],
-              objectives: [
+              outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'objective 1'
+                  name: 'outcome 1'
                 }
               ],
               schedule: [
@@ -751,18 +751,16 @@ describe('APD reducer', () => {
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
                 name: '',
-                objectives: [
+                outcomes: [
                   {
                     key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                    keyResults: [
+                    metrics: [
                       {
                         key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                        keyResult: '',
-                        baseline: '',
-                        target: ''
+                        metric: ''
                       }
                     ],
-                    objective: ''
+                    outcome: ''
                   }
                 ],
                 plannedEndDate: '',
@@ -846,28 +844,26 @@ describe('APD reducer', () => {
     it('should add a new activity OKR', () => {
       const state = {
         data: {
-          activities: [{ objectives: [] }]
+          activities: [{ outcomes: [] }]
         }
       };
 
       expect(
-        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/objectives/-` })
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/outcomes/-` })
       ).toEqual({
         data: {
           activities: [
             {
-              objectives: [
+              outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  keyResults: [
+                  metrics: [
                     {
                       key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                      keyResult: '',
-                      baseline: '',
-                      target: ''
+                      metric: ''
                     }
                   ],
-                  objective: ''
+                  outcome: ''
                 }
               ]
             }
@@ -876,33 +872,31 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new activity objective key result', () => {
+    it('should add a new activity outcome metric', () => {
       const state = {
         data: {
-          activities: [{ objectives: [{ objective: 'blah', keyResults: [] }] }]
+          activities: [{ outcomes: [{ outcome: 'blah', metrics: [] }] }]
         }
       };
 
       expect(
         apd(state, {
           type: ADD_APD_ITEM,
-          path: '/activities/0/objectives/0/keyResults/-'
+          path: '/activities/0/outcomes/0/metrics/-'
         })
       ).toEqual({
         data: {
           activities: [
             {
-              objectives: [
+              outcomes: [
                 {
-                  keyResults: [
+                  metrics: [
                     {
                       key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                      keyResult: '',
-                      baseline: '',
-                      target: ''
+                      metric: ''
                     }
                   ],
-                  objective: 'blah'
+                  outcome: 'blah'
                 }
               ]
             }

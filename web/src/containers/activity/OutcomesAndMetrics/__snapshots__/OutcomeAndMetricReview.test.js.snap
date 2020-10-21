@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
+<Review
+  editHref={null}
+  onDeleteClick={[MockFunction]}
+  onEditClick={[MockFunction]}
+>
+  <p
+    className="ds-u-margin-top--2"
+  >
+    <strong>
+      Outcome:
+    </strong>
+     
+    outcome description
+  </p>
+  <p
+    className="ds-u-margin-top--2"
+  >
+    <strong>
+      Metrics:
+    </strong>
+    <p
+      key="om 1"
+    >
+      1
+      . 
+      first metric
+    </p>
+    <p
+      key="om 2"
+    >
+      2
+      . 
+      second metric
+    </p>
+  </p>
+</Review>
+`;
