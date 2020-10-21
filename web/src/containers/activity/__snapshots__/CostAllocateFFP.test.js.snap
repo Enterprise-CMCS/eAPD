@@ -21,7 +21,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   >
     <tbody>
       <CostAllocationRows
-        activityIndex={-1}
+        activityIndex={0}
         ffy="1990"
         otherFunding={null}
         years={
@@ -198,6 +198,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
           "level": "p",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.costAllocate.ffp.federalStateSplitInstruction"
     />
@@ -276,6 +277,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
           "level": "p",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.costAllocate.ffp.quarterlyFFPInstruction"
     />
@@ -300,7 +302,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   >
     <tbody>
       <CostAllocationRows
-        activityIndex={-1}
+        activityIndex={0}
         ffy="1991"
         otherFunding={null}
         years={
@@ -477,6 +479,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
           "level": "p",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.costAllocate.ffp.federalStateSplitInstruction"
     />
@@ -555,6 +558,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
           "level": "p",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.costAllocate.ffp.quarterlyFFPInstruction"
     />
@@ -733,7 +737,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   >
     <tbody>
       <CostAllocationRows
-        activityIndex={-1}
+        activityIndex={0}
         ffy="1990"
         otherFunding={null}
         years={
@@ -907,6 +911,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
           "level": "p",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.costAllocate.ffp.quarterlyFFPInstruction"
     />
@@ -931,7 +936,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   >
     <tbody>
       <CostAllocationRows
-        activityIndex={-1}
+        activityIndex={0}
         ffy="1991"
         otherFunding={null}
         years={
@@ -1105,6 +1110,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
           "level": "p",
         }
       }
+      labelFor={null}
       reverse={false}
       source="activities.costAllocate.ffp.quarterlyFFPInstruction"
     />

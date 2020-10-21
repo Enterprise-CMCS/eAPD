@@ -8,8 +8,8 @@ describe('staticItems', () => {
   it('defines the apd resources within the app', () => {
     const labels = staticItems.map(item => item.label);
     expect(labels).toEqual([
-      "Key State Personnel",
       "Program Summary",
+      "Key State Personnel",
       "Results of Previous Activities",
       "Program Activities",
       "Activity Schedule Summary",
@@ -37,8 +37,8 @@ describe('getContinuePreviousLinks()', () => {
     const {
       continueLink,
       previousLink
-    } = getContinuePreviousLinks('/apd/state-profile', staticItems);
-    expect(continueLink.url).toEqual('/apd/program-summary');
+    } = getContinuePreviousLinks('/apd/program-summary', staticItems);
+    expect(continueLink.url).toEqual('/apd/state-profile');
     expect(previousLink).toBeFalsy();
   });
 
@@ -144,8 +144,7 @@ describe('nav reducer', () => {
         }
       };
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
-      expect(nextState.continueLink.url).toEqual('/apd/previous-activities');
-      expect(nextState.previousLink.url).toEqual('/apd/state-profile');
+      expect(nextState.continueLink.url).toEqual('/apd/state-profile');
     });
   });
 });

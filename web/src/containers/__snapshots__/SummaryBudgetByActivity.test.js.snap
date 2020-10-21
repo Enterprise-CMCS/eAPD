@@ -209,6 +209,7 @@ Array [
           "level": "h3",
         }
       }
+      labelFor={null}
       reverse={false}
       source="proposedBudget.summaryBudgetByActivity.totalMedicaidCost"
     />
@@ -230,6 +231,7 @@ Array [
           "level": "h3",
         }
       }
+      labelFor={null}
       reverse={false}
       source="proposedBudget.summaryBudgetByActivity.activityBreakdown"
     />
@@ -256,6 +258,7 @@ Array [
           "level": "h3",
         }
       }
+      labelFor={null}
       reverse={false}
       source="proposedBudget.summaryBudgetByActivity.totalMedicaidCost"
     />
@@ -277,6 +280,7 @@ Array [
           "level": "h3",
         }
       }
+      labelFor={null}
       reverse={false}
       source="proposedBudget.summaryBudgetByActivity.activityBreakdown"
     />

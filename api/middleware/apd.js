@@ -26,7 +26,7 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
           next();
         } else {
           logger.verbose(req, 'requested object does not exist');
-          res.status(404).end();
+          res.status(400).end();
         }
       } catch (e) {
         logger.error(req, e);
@@ -61,7 +61,7 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
           next();
         } else {
           logger.verbose(req, 'user does not have access to the APD');
-          res.status(404).end();
+          res.status(401).end();
         }
       });
     };

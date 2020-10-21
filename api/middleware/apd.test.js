@@ -45,7 +45,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       const req = { meta: {}, params: { 'apd-id': 9 } };
       await loadApd({ getAPDByID })(req, res, next);
 
-      invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 404');
+      invalidTest.ok(res.status.calledWith(400), 'HTTP status is set to 400');
       invalidTest.ok(res.end.calledOnce, 'response is closed');
       invalidTest.ok(next.notCalled, 'next is not called');
     });
@@ -90,7 +90,7 @@ tap.test('APD-related middleware', async middlewareTests => {
     });
 
     accessApdTests.test(
-      'sends a 404 if the user does not have access to the APD',
+      'sends a 401 if the user does not have access to the APD',
       async invalidTest => {
         const req = {
           user: { state: 'not florp' },
@@ -98,7 +98,7 @@ tap.test('APD-related middleware', async middlewareTests => {
         };
         await userCanAccessAPD({ loadApd: loadApdFake })(req, res, next);
 
-        invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 404');
+        invalidTest.ok(res.status.calledWith(401), 'HTTP status is set to 401');
         invalidTest.ok(res.end.calledOnce, 'response is closed');
         invalidTest.ok(next.notCalled, 'next is not called');
       }

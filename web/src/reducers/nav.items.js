@@ -2,6 +2,10 @@ import { t } from '../i18n';
 
 const staticItems = [
   {
+    label: t('apd.title'),
+    url: '/apd/program-summary'
+  },
+  {
     label: t('apd.stateProfile.title'),
     items: [
       {
@@ -17,10 +21,6 @@ const staticItems = [
         url: '/apd/state-profile#apd-state-profile-key-personnel'
       }
     ]
-  },
-  {
-    label: t('apd.title'),
-    url: '/apd/program-summary'
   },
   {
     label: t('previousActivities.title'),
