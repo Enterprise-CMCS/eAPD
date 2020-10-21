@@ -46,6 +46,7 @@ const OtherFunding = ({
           </h3>
           <div className="data-entry-box">
             <Instruction
+              labelFor={`cost-allocation-narrative-${ffy}-other-sources-field`}
               source="activities.otherFunding.description.instruction"
               headingDisplay={{
                 level: 'h6',
@@ -53,6 +54,7 @@ const OtherFunding = ({
               }}
             />
             <RichText
+              id={`cost-allocation-narrative-${ffy}-other-sources-field`}
               content={costAllocationNarrative[ffy].otherSources}
               onSync={syncOther(ffy)}
               editorClassName="rte-textarea-l"
