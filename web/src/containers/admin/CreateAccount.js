@@ -1,15 +1,16 @@
-import { FormLabel, Dropdown, TextField } from '@cmsgov/design-system';
+import { Dropdown, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import CardForm from '../../components/CardForm';
 import Password from '../../components/PasswordWithMeter';
-import { STATES, toSentenceCase } from '../../util';
+import { usStatesDropdownOptions } from '../../util/states';
+import { toSentenceCase } from '../../util';
 import { createUser as createUserDispatch } from '../../actions/admin';
 import { getAddAccountError } from '../../reducers/errors';
 import { getAddAccountWorking } from '../../reducers/working';
 
-const CreateUser = ({ createUser, error, roles, working }) => {
+const CreateAccount = ({ createUser, error, roles, working }) => {
   const [email, setEmail] = useState('');
   const [hasFetched, setHasFetched] = useState(false);
   const [name, setName] = useState('');
@@ -55,6 +56,9 @@ const CreateUser = ({ createUser, error, roles, working }) => {
     createUser({ email, name, password, role, state });
   };
 
+  const formRoles = roles.map(r => ({ label: toSentenceCase(r.name), value: r.name }));
+  formRoles.unshift({ label: "None", value: "" });
+
   return (
     <Fragment>
       <CardForm
@@ -80,44 +84,23 @@ const CreateUser = ({ createUser, error, roles, working }) => {
           onChange={changeEmail}
         />
 
-        <FormLabel component="label" fieldId="create_account_state">
-          State
-        </FormLabel>
         <Dropdown
-          id="create_account_state"
-          label=""
+          label="State"
           name="state"
-          options={[]}
+          options={usStatesDropdownOptions}
           size="medium"
           value={state}
           onChange={changeState}
-        >
-          <option value="">None</option>
-          {STATES.map(s => (
-            <option key={s.id} value={s.id}>
-              {s.name}
-            </option>
-          ))}
-        </Dropdown>
+        />
 
-        <FormLabel component="label" fieldId="create_account_role">
-          Authorization role
-        </FormLabel>
         <Dropdown
-          id="create_account_role"
+          label="Authorization role"
           name="role"
-          options={[]}
+          options={formRoles}
           size="medium"
           value={role || ''}
           onChange={changeRole}
-        >
-          <option value="">None</option>
-          {roles.map(r => (
-            <option key={r.name} value={r.name}>
-              {toSentenceCase(r.name)}
-            </option>
-          ))}
-        </Dropdown>
+        />
 
         <Password
           value={password}
@@ -131,7 +114,7 @@ const CreateUser = ({ createUser, error, roles, working }) => {
   );
 };
 
-CreateUser.propTypes = {
+CreateAccount.propTypes = {
   createUser: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
   roles: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -148,6 +131,6 @@ const mapDispatchToProps = {
   createUser: createUserDispatch
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAccount);
 
-export { CreateUser as plain };
+export { CreateAccount as plain };

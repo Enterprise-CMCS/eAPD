@@ -17,14 +17,19 @@ exports[`previous activities component renders correctly 1`] = `
       nested={false}
       resource="previousActivities.outline"
     >
-      <h4
-        className="ds-c-label"
+      <label
+        htmlFor="previous-activity-summary-field"
       >
-        Previous Activities Summary
-      </h4>
+        <h4
+          className="ds-c-label"
+        >
+          Previous Activities Summary
+        </h4>
+      </label>
       <Connect(RichText)
         content="bob"
         editorClassName="rte-textarea-l"
+        id="previous-activity-summary-field"
         onSync={[Function]}
       />
     </Subsection>

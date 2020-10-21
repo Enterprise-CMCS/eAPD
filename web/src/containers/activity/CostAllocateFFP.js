@@ -11,7 +11,8 @@ import Dollars from '../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
   selectActivityCostSummary,
-  selectActivityByIndex
+  selectActivityByIndex,
+  selectActivityTotalForBudgetByActivityIndex
 } from '../../reducers/activities.selectors';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
@@ -96,6 +97,7 @@ const CostAllocateFFP = ({
   activityName,
   costAllocation,
   costSummary,
+  otherFunding,
   aKey,
   isViewOnly,
   setFundingSplit,
@@ -122,7 +124,12 @@ const CostAllocateFFP = ({
             id={`activity${activityIndex}-ffy${ffy}`}
           >
             <tbody>
-              <CostAllocationRows years={years} ffy={ffy} />
+              <CostAllocationRows
+                years={years}
+                ffy={ffy}
+                activityIndex={activityIndex}
+                otherFunding={otherFunding}
+              />
 
               {/* in viewonly mode, we'll pull everything into a single table
                   table since there aren't form elements to fill in */}
@@ -279,6 +286,7 @@ CostAllocateFFP.propTypes = {
   activityName: PropTypes.string.isRequired,
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
+  otherFunding: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired
@@ -295,17 +303,20 @@ const mapStateToProps = (
     getActivity = selectActivityByIndex,
     getCostAllocation = selectCostAllocationForActivityByIndex,
     getCostSummary = selectActivityCostSummary,
-    getState = getUserStateOrTerritory
+    getState = getUserStateOrTerritory,
+    getActivityTotal = selectActivityTotalForBudgetByActivityIndex
   } = {}
 ) => {
   const activity = getActivity(state, { activityIndex });
+  const activityTotal = getActivityTotal(state, { activityIndex });
 
   return {
     aKey: activity.key,
     activityName: activity.name || `Activity ${activityIndex + 1}`,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
-    stateName: getState(state).name
+    stateName: getState(state).name,
+    otherFunding: activityTotal.data.otherFunding
   };
 };
 
