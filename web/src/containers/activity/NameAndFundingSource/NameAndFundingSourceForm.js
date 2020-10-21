@@ -22,6 +22,16 @@ const NameAndFundingSourceForm = ({
     setFundingSource(index, value);
   });
 
+  const choices = [
+    "HIT",
+    "HIE",
+    "MMIS"
+  ].map(choice => ({
+    checked: fundingSource === choice,
+    label: choice,
+    value: choice
+  }));
+
   return (
     <Fragment>
       <TextField
@@ -32,15 +42,12 @@ const NameAndFundingSourceForm = ({
         onChange={changeName}
       />
       <ChoiceList
+        choices={choices}
         label="Program type"
+        labelClassName="ds-u-margin-bottom--1"
         name="program-type"
-        type="checkbox"
-        choices={[
-          { checked: fundingSource === 'HIT', label: 'HIT', value: 'HIT' },
-          { checked: fundingSource === 'HIE', label: 'HIE', value: 'HIE' },
-          { checked: fundingSource === 'MMIS', label: 'MMIS', value: 'MMIS' }
-        ]}
         onChange={changeFundingSource}
+        type="checkbox"
       />
     </Fragment>
   );

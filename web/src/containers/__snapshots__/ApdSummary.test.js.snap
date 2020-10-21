@@ -10,48 +10,32 @@ exports[`apd summary component renders correctly 1`] = `
   >
     Program Overview
   </h3>
-  <Instruction
-    args={null}
-    headingDisplay={
-      Object {
-        "className": "ds-h3",
-        "level": "h3",
-      }
+  <ChoiceList
+    choices={
+      Array [
+        Object {
+          "defaultChecked": true,
+          "label": "1",
+          "value": "1",
+        },
+        Object {
+          "defaultChecked": true,
+          "label": "2",
+          "value": "2",
+        },
+        Object {
+          "defaultChecked": false,
+          "label": "3",
+          "value": "3",
+        },
+      ]
     }
-    labelFor={null}
-    reverse={false}
-    source="apd.overview.instruction"
+    label="Choose the federal fiscal year(s) this APD covers."
+    labelClassName="ds-u-margin-bottom--1"
+    name="apd-years"
+    onChange={[Function]}
+    type="checkbox"
   />
-  <ChoiceComponent
-    checked={true}
-    key="1"
-    name="apd year 1"
-    onChange={[Function]}
-    type="checkbox"
-    value="1"
-  >
-    1
-  </ChoiceComponent>
-  <ChoiceComponent
-    checked={true}
-    key="2"
-    name="apd year 2"
-    onChange={[Function]}
-    type="checkbox"
-    value="2"
-  >
-    2
-  </ChoiceComponent>
-  <ChoiceComponent
-    checked={false}
-    key="3"
-    name="apd year 3"
-    onChange={[Function]}
-    type="checkbox"
-    value="3"
-  >
-    3
-  </ChoiceComponent>
   <div
     className="ds-u-margin-y--3"
   >
