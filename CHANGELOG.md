@@ -4,6 +4,7 @@ Anticipated release: October 26th, 2020
 
 #### 🚀 New features
 
+- Add a label to the rich text editor `<textarea>` element ([#2546])
 - Metrics: Research using Google Analytics for Operational Metrics ([#2139])
 - Metrics: Create APD event database table ([#2140])
 - Metrics: API endpoint for Export events ([#2141])
@@ -18,12 +19,15 @@ Anticipated release: October 26th, 2020
 
 #### 🐛 Bugs fixed
 
+
 #### ⚙️ Behind the scenes
 
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2322]: https://github.com/CMSgov/eAPD/issues/2322
+[#2546]: https://github.com/CMSgov/eAPD/issues/2546
 [#2139]: https://github.com/CMSgov/eAPD/issues/2139
 [#2140]: https://github.com/CMSgov/eAPD/issues/2140
 [#2141]: https://github.com/CMSgov/eAPD/issues/2141

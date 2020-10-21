@@ -10,6 +10,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
         "level": "h3",
       }
     }
+    labelFor={null}
     reverse={false}
     source="activities.expenses.instruction"
   />
