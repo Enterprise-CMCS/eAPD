@@ -18,6 +18,7 @@ const initialState = {
   fetching: false,
   hasEverLoggedOn: false,
   initialCheck: false,
+  isLocked: false,
   user: null
 };
 
@@ -88,8 +89,9 @@ const auth = (state = initialState, action) => {
     case LOCKED_OUT:
       return {
         ...state,
+        isLocked: true,
         fetching: false,
-        error: action.error
+        error: ''
       };      
     case LOGOUT_SUCCESS:
       return {
