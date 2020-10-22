@@ -1,0 +1,12 @@
+{
+  "$id": "definitions.json",
+  "optionalFullDate": {
+    "type": "string"
+  },
+  "optionalNumber": {
+    "anyOf": [
+      { "type": "number" },
+      { "type": "string", "pattern": "\\d*" }
+    ]
+  }
+}

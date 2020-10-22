@@ -6,16 +6,13 @@ import { connect } from 'react-redux';
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
-import {
-  setCostAllocationFFPFundingSplit,
-  setCostAllocationFFPOtherFunding
-} from '../../actions/editActivity';
-import DollarField from '../../components/DollarField';
+import { setCostAllocationFFPFundingSplit } from '../../actions/editActivity';
 import Dollars from '../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
   selectActivityCostSummary,
-  selectActivityByIndex
+  selectActivityByIndex,
+  selectActivityTotalForBudgetByActivityIndex
 } from '../../reducers/activities.selectors';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
@@ -100,16 +97,12 @@ const CostAllocateFFP = ({
   activityName,
   costAllocation,
   costSummary,
+  otherFunding,
   aKey,
   isViewOnly,
   setFundingSplit,
-  setOtherFunding,
   stateName
 }) => {
-  const setOther = year => e => {
-    setOtherFunding(activityIndex, year, e.target.value);
-  };
-
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
@@ -119,10 +112,11 @@ const CostAllocateFFP = ({
 
   return (
     <Fragment>
+      <h2 className="subsection--title ds-h2">Budget and FFP</h2>
       {Object.keys(years).map(ffy => (
         <Fragment key={ffy}>
-          <h3 className="subsection--title ds-h3">
-            Cost Allocation and Budget for FFY {ffy}
+          <h3 className="ds-h3">
+            Activity {activityIndex + 1} Budget for FFY {ffy}
           </h3>
 
           <table
@@ -130,7 +124,12 @@ const CostAllocateFFP = ({
             id={`activity${activityIndex}-ffy${ffy}`}
           >
             <tbody>
-              <CostAllocationRows years={years} ffy={ffy} />
+              <CostAllocationRows
+                years={years}
+                ffy={ffy}
+                activityIndex={activityIndex}
+                otherFunding={otherFunding}
+              />
 
               {/* in viewonly mode, we'll pull everything into a single table
                   table since there aren't form elements to fill in */}
@@ -174,23 +173,6 @@ const CostAllocateFFP = ({
 
           {!isViewOnly && (
             <Fragment>
-              <div className="data-entry-box ds-u-margin-bottom--5">
-                <Instruction
-                  source="activities.costAllocate.ffp.otherFundingInstruction"
-                  headingDisplay={{
-                    level: 'p',
-                    className: 'ds-h4'
-                  }}
-                />
-                <DollarField
-                  name={`ffy-${ffy}`}
-                  label={`FFY ${ffy}`}
-                  labelClassName="sr-only"
-                  value={costAllocation[ffy].other || '0'}
-                  onChange={setOther(ffy)}
-                />
-              </div>
-
               <table className="budget-table activity-budget-table">
                 <tbody>
                   <tr className="budget-table--subtotal budget-table--row__header">
@@ -304,9 +286,9 @@ CostAllocateFFP.propTypes = {
   activityName: PropTypes.string.isRequired,
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
+  otherFunding: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
-  setOtherFunding: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired
 };
 
@@ -321,23 +303,25 @@ const mapStateToProps = (
     getActivity = selectActivityByIndex,
     getCostAllocation = selectCostAllocationForActivityByIndex,
     getCostSummary = selectActivityCostSummary,
-    getState = getUserStateOrTerritory
+    getState = getUserStateOrTerritory,
+    getActivityTotal = selectActivityTotalForBudgetByActivityIndex
   } = {}
 ) => {
   const activity = getActivity(state, { activityIndex });
+  const activityTotal = getActivityTotal(state, { activityIndex });
 
   return {
     aKey: activity.key,
     activityName: activity.name || `Activity ${activityIndex + 1}`,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
-    stateName: getState(state).name
+    stateName: getState(state).name,
+    otherFunding: activityTotal.data.otherFunding
   };
 };
 
 const mapDispatchToProps = {
-  setFundingSplit: setCostAllocationFFPFundingSplit,
-  setOtherFunding: setCostAllocationFFPOtherFunding
+  setFundingSplit: setCostAllocationFFPFundingSplit
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);

@@ -36,12 +36,12 @@ describe('APD activity edit actions for cost allocation section', () => {
   });
 
   it('dispatches an action for setting the cost allocation other funding', () => {
-    store.dispatch(setCostAllocationOtherFunding(1, 'rich Uncle Pennybags'));
+    store.dispatch(setCostAllocationOtherFunding(1, 2020, 'rich Uncle Pennybags'));
 
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,
-        path: '/activities/1/costAllocationNarrative/otherSources',
+        path: '/activities/1/costAllocationNarrative/2020/otherSources',
         value: 'rich Uncle Pennybags'
       }
     ]);

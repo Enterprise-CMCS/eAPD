@@ -8,7 +8,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import 'tinymce/themes/silver';
 
 // Any plugins you want to use have to be imported
+import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/autoresize';
+import 'tinymce/plugins/lists';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/spellchecker';
 
@@ -87,6 +89,27 @@ class RichText extends Component {
     const { uploadFile: upload, content } = this.props;
     const { id } = this.state;
 
+    // https://www.tiny.cloud/docs/plugins/
+    const plugins = [
+      'advlist',
+      'autoresize',
+      'lists',
+      'paste',
+      'spellchecker'
+    ];
+
+    // https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/
+    const toolbar = [
+      "undo redo",
+      "style",
+      "bold italic strikethrough forecolor",
+      "alignleft aligncenter alignright alignjustify",
+      "outdent indent",
+      "numlist bullist",
+      "formatselect",
+      "eapdImageUpload"
+    ].join(" | ");
+
     return (
       <div className="rte--wrapper">
         <Editor
@@ -97,10 +120,9 @@ class RichText extends Component {
             images_upload_handler: this.uploadImage(),
             menubar: '',
             paste_data_images: true,
-            plugins: ['autoresize', 'paste', 'spellchecker'],
+            plugins,
             setup: setupTinyMCE(upload),
-            toolbar:
-              'undo redo | style | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | eapdImageUpload'
+            toolbar
           }}
           value={content}
           onEditorChange={this.onEditorChange}

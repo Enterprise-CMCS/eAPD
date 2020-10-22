@@ -1,23 +1,10 @@
-const Ajv = require('ajv');
 const { apply_patch: applyPatch } = require('jsonpatch');
 const jsonpointer = require('jsonpointer');
 
 const logger = require('../../logger')('apds route put');
 const { getAPDByID: ga, updateAPDDocument: ua } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
-const apdSchema = require('../../schemas/apd.json');
-
-const ajv = new Ajv({
-  allErrors: true,
-  jsonPointers: true,
-  // The validator will remove any fields that aren't in the schema
-  removeAdditional: 'all'
-});
-
-const validatorFunction = ajv.compile({
-  ...apdSchema,
-  additionalProperties: false
-});
+const { validateApd } = require('../../schemas');
 
 // This is a list of property paths that cannot be changed with this endpoint.
 // Any patches pointing at these paths will be ignored.
@@ -29,7 +16,7 @@ module.exports = (
     getAPDByID = ga,
     patchObject = applyPatch,
     updateAPDDocument = ua,
-    validateApd = validatorFunction
+    validate = validateApd
   } = {}
 ) => {
   logger.silly('setting up PATCH /apds/:id route');
@@ -74,13 +61,13 @@ module.exports = (
           return res.status(400).end();
         }
 
-        const valid = validateApd(updatedDocument);
+        const valid = validate(updatedDocument);
         if (!valid) {
           logger.error(
             req,
             // Rather than send back the full error from the validator, pull out just the relevant bits
             // and fetch the value that's causing the error.
-            validateApd.errors.map(({ dataPath, message }) => ({
+            validate.errors.map(({ dataPath, message }) => ({
               dataPath,
               message,
               value: jsonpointer.get(updatedDocument, dataPath)
@@ -88,7 +75,7 @@ module.exports = (
           );
           return res
             .status(400)
-            .send(validateApd.errors.map(v => ({ path: v.dataPath })))
+            .send(validate.errors.map(v => ({ path: v.dataPath })))
             .end();
         }
 
