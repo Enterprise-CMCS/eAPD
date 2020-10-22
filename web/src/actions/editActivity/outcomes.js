@@ -32,6 +32,20 @@ export const removeOutcome = (
   }
 };
 
+export const removeOutcomeMetric = (
+  activityIndex,
+  omIndex,
+  metricIndex,
+  { global = window } = {}
+) => dispatch => {
+  if (global.confirm('Do you really want to delete this metric?')) {
+    dispatch({
+      type: REMOVE_APD_ITEM,
+      path: `/activities/${activityIndex}/outcomes/${omIndex}/metrics/${metricIndex}`
+    });
+  }
+};
+
 export const setOutcome = (activityIndex, omIndex, outcome) => ({
   type: EDIT_APD,
   path: `/activities/${activityIndex}/outcomes/${omIndex}/outcome`,

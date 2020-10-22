@@ -9,7 +9,8 @@ import {
 import {
   addOutcome,
   addOutcomeMetric,
-  removeOutcome
+  removeOutcome,
+  removeOutcomeMetric
 } from '../../actions/editActivity';
 
 describe('activity Outcomes and Metrics component', () => {
@@ -23,7 +24,8 @@ describe('activity Outcomes and Metrics component', () => {
     ],
     add: jest.fn(),
     addMetric: jest.fn(),
-    remove: jest.fn()
+    remove: jest.fn(),
+    removeMetric: jest.fn()
   };
   const component = shallow(<OutcomesAndMetrics {...props} />);
 
@@ -54,7 +56,8 @@ describe('activity Outcomes and Metrics component', () => {
     expect(mapDispatchToProps).toEqual({
       add: addOutcome,
       addMetric: addOutcomeMetric,
-      remove: removeOutcome
+      remove: removeOutcome,
+      removeMetric: removeOutcomeMetric
     });
   });
 
