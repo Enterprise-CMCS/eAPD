@@ -56,7 +56,6 @@ const Login = ({
     );
   }
 
-// Ty Note: I sort of tacked this on here thinking isLocked would take precedent over the otpStage. Open to ideas for improving this. 
   let errorMessage = false;
   if (isLocked) {
     errorMessage = 'You are locked out'

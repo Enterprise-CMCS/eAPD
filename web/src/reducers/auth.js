@@ -8,6 +8,7 @@ import {
   LOGIN_FAILURE,
   LOGIN_MFA_FAILURE,
   LOCKED_OUT,
+  RESET_LOCKED_OUT,
   LOGOUT_SUCCESS
 } from '../actions/auth';
 
@@ -93,7 +94,13 @@ const auth = (state = initialState, action) => {
         fetching: false,
         error: ''
       };     
-    // add RESET FOR LOCKED  
+    case RESET_LOCKED_OUT:
+      return {
+        ...state,
+        isLocked: false,
+        fetching: false,
+        error: ''
+      };
     case LOGOUT_SUCCESS:
       return {
         ...initialState,
