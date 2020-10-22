@@ -2,6 +2,7 @@ import { Button } from '@cmsgov/design-system';
 import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import TagManager from 'react-gtm-module';
 
 import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
 import Instruction from '../components/Instruction';
@@ -31,6 +32,11 @@ const StateDashboard = (
   { global = window } = {}
 ) => {
   const [isLoading, setIsLoading] = useState(false);
+  TagManager.dataLayer({
+    dataLayer: {
+      stateId: state.id
+    }
+  });
 
   const createNew = () => {
     setIsLoading(true);

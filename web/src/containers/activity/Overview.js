@@ -128,13 +128,18 @@ const ActivityOverview = ({
       <Schedule activityIndex={activityIndex} />
 
       <div className="data-entry-box">
-        <FormLabel className="ds-c-label--full-width" hint={descriptionHint}>
+        <FormLabel
+          className="ds-c-label--full-width"
+          hint={descriptionHint}
+          fieldId="activity-description-field"
+        >
           {descriptionLabel}
         </FormLabel>
         {activity.fundingSource === 'HIE' && (
           <Instruction source="activities.overview.activityDescriptionInput.hie" />
         )}
         <RichText
+          id="activity-description-field"
           content={description}
           onSync={syncDescription}
           editorClassName="rte-textarea-l"
@@ -142,11 +147,16 @@ const ActivityOverview = ({
       </div>
 
       <div className="data-entry-box">
-        <FormLabel className="ds-c-label--full-width" hint={alternativesHint}>
+        <FormLabel
+          className="ds-c-label--full-width"
+          hint={alternativesHint}
+          fieldId="activity-alternatives-field"
+        >
           {alternativesLabel}
         </FormLabel>
         <Instruction source="activities.overview.activityAlternativesInput" />
         <RichText
+          id="activity-alternatives-field"
           content={alternatives}
           onSync={syncAlternatives}
           editorClassName="rte-textarea-l"

@@ -1,0 +1,22 @@
+{
+  "$id": "person.json",
+  "type": "object",
+  "required": ["title", "description", "years"],
+  "properties": {
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "years": {
+      "type": "object",
+      "patternProperties": {
+        "^[0-9]{4}$": {
+          "type": "object",
+          "required": ["amt", "perc"],
+          "properties": {
+            "amt": { "$ref": "definitions.json#/optionalNumber" },
+            "perc": { "$ref": "definitions.json#/optionalNumber" }
+          }
+        }
+      }
+    }
+  }
+}

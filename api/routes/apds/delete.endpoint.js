@@ -16,12 +16,12 @@ describe('APD endpoint', () => {
     unauthenticatedTest('delete', url(0));
     unauthorizedTest('delete', url(0));
 
-    describe('when authenticated as a user with permission', () => {
+    describe('when authenticated as a user', () => {
       it('with a non-existant apd ID', async () => {
         const api = login();
         const response = await api.delete(url(9000));
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -29,7 +29,7 @@ describe('APD endpoint', () => {
         const api = login();
         const response = await api.delete(url(4001));
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(401);
         expect(response.data).toMatchSnapshot();
       });
 
