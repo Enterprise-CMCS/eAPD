@@ -10,7 +10,7 @@ import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
-import LoginLocked from './LoginLocked';
+import LoginLocked from '../components/LoginLocked';
 
 const Login = ({
   authenticated,
@@ -75,8 +75,9 @@ const Login = ({
     return (
       <LoginLocked />
     );
-  } else if (otpStage) {
-    console.log('otpStage == true')
+  } 
+  
+  if (otpStage) {
     return (
       <LoginMFA
         action={otpAction}
@@ -113,7 +114,7 @@ const Login = ({
           id="username"
           label="Email"
           name="username"
-          errorMessage={errorMessage == false ? null : ""}
+          errorMessage={errorMessage === false ? null : ""}
           ariaLabel="Enter the email associated with this account."
           value={username}
           onChange={changeUsername}
@@ -122,8 +123,8 @@ const Login = ({
           title="Password" 
           value={password} 
           onChange={changePassword} 
-          errorMessage={errorMessage == false ? null : ""}
-          customErrorMessage={errorMessage == false ? null : "Invalid Entry"}
+          errorMessage={errorMessage === false ? null : ""}
+          customErrorMessage={errorMessage === false ? null : "Invalid Entry"}
         />
       </LoginForm>
     </main>

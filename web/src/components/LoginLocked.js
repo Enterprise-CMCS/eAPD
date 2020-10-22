@@ -1,6 +1,7 @@
 import React from 'react';
 
 const LoginLocked = () => {
+
 	return (
 		<div id="start-main-content">
 			<div className="ds-l-container">

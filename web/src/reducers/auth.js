@@ -92,7 +92,8 @@ const auth = (state = initialState, action) => {
         isLocked: true,
         fetching: false,
         error: ''
-      };      
+      };     
+    // add RESET FOR LOCKED  
     case LOGOUT_SUCCESS:
       return {
         ...initialState,

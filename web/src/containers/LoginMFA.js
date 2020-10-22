@@ -18,7 +18,7 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
       <VerifyMFAForm
         title="Verify Your Identity"
         legend="Verify Your Identity"
-        cancelable={true}
+        cancelable
         className="ds-u-margin-top--7"
         canSubmit={!!otp}
         error={errorMessage}
@@ -29,7 +29,7 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
       >        
         <Fragment>
           <div className="ds-u-margin-bottom--4">
-            <label className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal" for="otp" id="otp">
+            <label className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal" htmlFor="otp" id="otp">
               Please enter the 6 digit code generated in your SMS text.
             </label>
             <input 
@@ -50,13 +50,13 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
 };
 
 LoginMFA.propTypes = {
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.bool,
   fetching: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired
 };
 
 LoginMFA.defaultProps = {
-  errorMessage: null
+  errorMessage: false
 };
 
 export default LoginMFA;

@@ -102,7 +102,9 @@ Password.propTypes = {
   onChange: PropTypes.func,
   title: PropTypes.string,
   value: PropTypes.string,
-  showMeter: PropTypes.bool
+  showMeter: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  customErrorMessage: PropTypes.string
 };
 
 Password.defaultProps = {
@@ -111,7 +113,9 @@ Password.defaultProps = {
   onChange: () => {},
   title: 'Password',
   value: '',
-  showMeter: false
+  showMeter: false,
+  errorMessage: '',
+  customErrorMessage: ''
 };
 
 export default Password;
