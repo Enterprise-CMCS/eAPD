@@ -98,6 +98,7 @@ describe('auth actions', () => {
       fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
+        { type: actions.RESET_LOCKED_OUT },
         { type: actions.LOGIN_SUCCESS, data: { name: 'moop', activities: [] } }
       ];
 
@@ -172,6 +173,27 @@ describe('auth actions', () => {
       await store.dispatch(actions.login('name', 'secret'));
       expect(signInSpy).toHaveBeenCalledTimes(1);
       await expect(verifySpy).not.toHaveBeenCalled();
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    
+    it('creates LOCKED_OUT if account is locked out', async () => {
+      const signInSpy = jest
+        .spyOn(mockOktaAuth, 'signIn')
+        .mockImplementation(() =>
+          Promise.resolve({
+            status: 'LOCKED_OUT',
+          })
+        );
+        
+      const store = mockStore({});
+      const expectedActions = [
+        { type: actions.LOGIN_REQUEST },
+        { type: actions.LOCKED_OUT }
+      ];
+
+      await store.dispatch(actions.login('name', 'secret'));
+      expect(signInSpy).toHaveBeenCalledTimes(1);
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });

@@ -10,8 +10,8 @@ const LoginLocked = () => {
 						<span>Verify Your Identity</span>
 					</h1>
 					<h2 className="ds-h4 ds-u-margin-y--3">Account Locked</h2>
-					<p>Please contact the <a href="help">System Administrator</a> for account reset.</p>
-					<p>Reset will occur in <span className="ds-u-color--error">60 minutes 00 seconds.</span></p>		
+					<p>Your account will be locked for one hour.</p>
+					<p>If you need access sooner, please try to contact the System Administrator for a reset.</span></p>		
 					<div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
 						<a href="/" className="ds-c-button ds-c-button--transparent">Cancel</a>
 					</div>	

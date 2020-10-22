@@ -29,12 +29,12 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
       >        
         <Fragment>
           <div className="ds-u-margin-bottom--4">
-            <label className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal" htmlFor="otp" id="otp">
+            <label htmlFor="otp" id="otp" className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal">
               Please enter the 6 digit code generated in your SMS text.
             </label>
             <input 
               width="200px"
-              aria-label="Enter the verification code you received in your email" 
+              aria-labelledby="otp"
               className="ds-c-field ds-c-field--medium" 
               id="otp" 
               type="text" 
