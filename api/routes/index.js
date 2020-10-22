@@ -1,5 +1,5 @@
 const logger = require('../logger')('routes index');
-const affiliationRequests = require('./affiliationRequests');
+const affiliations = require('./affiliations');
 const apds = require('./apds');
 const auth = require('./auth');
 const me = require('./me');
@@ -9,7 +9,7 @@ const openAPI = require('./openAPI');
 
 module.exports = (
   app,
-  affiliationRequestsEndpoint = affiliationRequests,
+  affiliationsEndpoint = affiliations,
   apdsEndpoint = apds,
   authEndpoint = auth,
   meEndpoint = me,
@@ -17,8 +17,8 @@ module.exports = (
   usersEndpoint = users,
   openAPIdoc = openAPI
 ) => {
-  logger.silly('setting up routes for affilitionRequests');
-  affiliationRequestsEndpoint(app);
+  logger.silly('setting up routes for affilitions');
+  affiliationsEndpoint(app);
   logger.silly('setting up routes for apds');
   apdsEndpoint(app);
   logger.silly('setting up routes for auth');
