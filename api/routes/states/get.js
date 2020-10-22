@@ -1,5 +1,5 @@
 const { raw: knex } = require('../../db');
-const { can } = require('../../middleware');
+const { loggedIn } = require('../../middleware/auth');
 
 module.exports = (app) => {
   app.get('/states', async (request, response) => {
@@ -7,7 +7,7 @@ module.exports = (app) => {
       .then(rows => response.json(rows));
   });
 
-  app.get('/states/:id', can('view-document'), async (request, response) => {
+  app.get('/states/:id', loggedIn, async (request, response) => {
     const { id } = request.params;
     await knex('states').where({ id })
       .then(rows => response.json(rows[0]))
