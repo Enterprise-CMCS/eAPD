@@ -5,38 +5,50 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
   <TextField
     autoFocus={true}
     className="data-entry-box"
-    hint="Describe what you are trying to achieve"
+    hint="Describe a discrete and measurable improvement for this system."
     label="Outcome"
     name="outcome"
     onChange={[Function]}
     type="text"
     value="outcome description"
   />
-  <div
-    className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-    key="om key 1"
+  <Review
+    editHref={null}
+    onDeleteClick={[Function]}
+    onEditClick={null}
   >
-    <TextField
-      hint="Describe how you will measure progress towards achieving your outcome."
-      label="metric"
-      name="metric"
-      onChange={[Function]}
-      type="text"
-      value="metric 1"
-    />
-  </div>
-  <div
-    className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-    key="om key 2"
+    <div
+      className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+      key="om key 1"
+    >
+      <TextField
+        hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+        label="Metric"
+        name="metric"
+        onChange={[Function]}
+        type="text"
+        value="metric 1"
+      />
+    </div>
+  </Review>
+  <Review
+    editHref={null}
+    onDeleteClick={[Function]}
+    onEditClick={null}
   >
-    <TextField
-      hint="Describe how you will measure progress towards achieving your outcome."
-      label="metric"
-      name="metric"
-      onChange={[Function]}
-      type="text"
-      value="metric 2"
-    />
-  </div>
+    <div
+      className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+      key="om key 2"
+    >
+      <TextField
+        hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+        label="Metric"
+        name="metric"
+        onChange={[Function]}
+        type="text"
+        value="metric 2"
+      />
+    </div>
+  </Review>
 </Fragment>
 `;

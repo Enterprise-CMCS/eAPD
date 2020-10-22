@@ -18,23 +18,29 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
   <p
     className="ds-u-margin-top--2"
   >
-    <strong>
-      Metrics:
-    </strong>
-    <p
-      key="om 1"
+    <ul
+      className="ds-c-list--bare"
     >
-      1
-      . 
-      first metric
-    </p>
-    <p
-      key="om 2"
-    >
-      2
-      . 
-      second metric
-    </p>
+      <strong>
+        Metrics:
+      </strong>
+      <li
+        className="ds-u-margin-bottom--2"
+        key="om 1"
+      >
+        1
+        . 
+        first metric
+      </li>
+      <li
+        className="ds-u-margin-bottom--2"
+        key="om 2"
+      >
+        2
+        . 
+        second metric
+      </li>
+    </ul>
   </p>
 </Review>
 `;

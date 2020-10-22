@@ -27,7 +27,8 @@ describe('the OutcomeAndMetricForm component', () => {
       ]
     },
     setMetric: jest.fn(),
-    setOutcome: jest.fn()
+    setOutcome: jest.fn(),
+    removeMetric: jest.fn()
   };
 
   beforeEach(() => {
@@ -57,6 +58,20 @@ describe('the OutcomeAndMetricForm component', () => {
       .simulate('change', { target: { value: 'new om' } });
 
     expect(props.setMetric).toHaveBeenCalledWith(93, 1, 0, 'new om');
+  });
+
+  it('handles removing a metric', () => {
+    const component = shallow(<OutcomeAndMetricForm {...props} />);
+
+    component
+      .find('Review')
+      .at(0)
+      .dive()
+      .dive()
+      .find('Button[children="Delete"]')
+      .simulate('click');
+
+    expect(props.removeMetric).toHaveBeenCalled();
   });
 
   it('maps dispatch actions to props', () => {

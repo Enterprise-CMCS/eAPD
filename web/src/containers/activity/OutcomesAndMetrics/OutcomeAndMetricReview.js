@@ -12,12 +12,14 @@ const OutcomeAndMetricReview = ({
       <strong>Outcome:</strong> {outcome}
     </p>
     <p className="ds-u-margin-top--2">
-      <strong>Metrics:</strong>
-      {metrics.map(({ key, metric }, index) => (
-        <p key={key}>
-          {index + 1}. {metric}
-        </p>
-      ))}
+      <ul className="ds-c-list--bare">
+        <strong>Metrics:</strong>
+        {metrics.map(({ key, metric }, index) => (
+          <li key={key} className="ds-u-margin-bottom--2">
+            {index + 1}. {metric}
+          </li>
+        ))}
+      </ul>
     </p>
   </Review>
 );

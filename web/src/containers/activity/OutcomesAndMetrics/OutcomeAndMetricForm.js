@@ -7,13 +7,15 @@ import {
   setOutcome as setOutcomeAction,
   setOutcomeMetric
 } from '../../../actions/editActivity';
+import Review from '../../../components/Review';
 
 const OutcomeAndMetricForm = ({
   activityIndex,
   item: { metrics, outcome },
   index,
   setMetric,
-  setOutcome
+  setOutcome,
+  removeMetric
 }) => {
   const changeOutcome = useMemo(
     () => ({ target: { value } }) => {
@@ -33,24 +35,32 @@ const OutcomeAndMetricForm = ({
         name="outcome"
         className="data-entry-box"
         label="Outcome"
-        hint="Describe what you are trying to achieve"
+        hint="Describe a discrete and measurable improvement for this system."
         value={outcome}
         onChange={changeOutcome}
       />
 
       {metrics.map(({ key, metric }, i) => (
-        <div
-          key={key}
-          className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+        <Review
+          onDeleteClick={
+            metrics.length === 1 && metric === ''
+              ? null
+              : () => removeMetric(index, i)
+          }
         >
-          <TextField
-            name="metric"
-            label="metric"
-            hint="Describe how you will measure progress towards achieving your outcome."
-            value={metric}
-            onChange={changeMetric(i)}
-          />
-        </div>
+          <div
+            key={key}
+            className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+          >
+            <TextField
+              name="metric"
+              label="Metric"
+              hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+              value={metric}
+              onChange={changeMetric(i)}
+            />
+          </div>
+        </Review>
       ))}
     </Fragment>
   );
@@ -64,7 +74,8 @@ OutcomeAndMetricForm.propTypes = {
     outcome: PropTypes.string
   }).isRequired,
   setOutcome: PropTypes.func.isRequired,
-  setMetric: PropTypes.func.isRequired
+  setMetric: PropTypes.func.isRequired,
+  removeMetric: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {

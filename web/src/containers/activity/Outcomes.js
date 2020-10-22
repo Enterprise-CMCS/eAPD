@@ -10,13 +10,21 @@ import FormAndReviewList from '../../components/FormAndReviewList';
 import {
   addOutcome,
   addOutcomeMetric,
-  removeOutcome
+  removeOutcome,
+  removeOutcomeMetric
 } from '../../actions/editActivity';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { selectOMsByActivityIndex } from '../../reducers/activities.selectors';
 
-const Outcomes = ({ activityIndex, add, addMetric, outcomes, remove }) => {
+const Outcomes = ({
+  activityIndex,
+  add,
+  addMetric,
+  outcomes,
+  remove,
+  removeMetric
+}) => {
   const handleAdd = () => {
     add(activityIndex);
   };
@@ -29,11 +37,16 @@ const Outcomes = ({ activityIndex, add, addMetric, outcomes, remove }) => {
     remove(activityIndex, index);
   };
 
+  const handleDeleteMetric = (omIndex, metricIndex) => {
+    removeMetric(activityIndex, omIndex, metricIndex);
+  };
+
   return (
     <Subsection
       resource="activities.outcomes"
       id={`activity-outcomes-${activityIndex}`}
     >
+      <hr className="subsection-rule" />
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText="Add another outcome"
@@ -43,6 +56,7 @@ const Outcomes = ({ activityIndex, add, addMetric, outcomes, remove }) => {
         extraItemButtons={[
           { onClick: handleAddMetric, text: 'Add another metric' }
         ]}
+        removeMetric={handleDeleteMetric}
         noDataMessage={t('activities.expenses.noDataNotice')}
         onAddClick={handleAdd}
         onDeleteClick={handleDelete}
@@ -57,7 +71,8 @@ Outcomes.propTypes = {
   add: PropTypes.func.isRequired,
   addMetric: PropTypes.func.isRequired,
   outcomes: PropTypes.array.isRequired,
-  remove: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired,
+  removeMetric: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
@@ -67,7 +82,8 @@ const mapStateToProps = (state, { activityIndex }) => ({
 const mapDispatchToProps = {
   add: addOutcome,
   addMetric: addOutcomeMetric,
-  remove: removeOutcome
+  remove: removeOutcome,
+  removeMetric: removeOutcomeMetric
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Outcomes);
