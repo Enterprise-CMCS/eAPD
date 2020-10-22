@@ -80,6 +80,6 @@ const getState = {
 };
 
 module.exports = {
-  getStates,
-  requiresAuth(getState)
+  ...getStates,
+  ...requiresAuth(getState)
 };
