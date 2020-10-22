@@ -1,4 +1,4 @@
-import { FormLabel, Dropdown } from '@cmsgov/design-system';
+import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
@@ -10,7 +10,6 @@ import {
 } from '../../../actions/editActivity';
 import DollarField from '../../../components/DollarField';
 import TextArea from '../../../components/TextArea';
-import { getLabelID } from '../../../util';
 
 const NonPersonnelCostForm = ({
   activityIndex,
@@ -36,34 +35,27 @@ const NonPersonnelCostForm = ({
     [index]
   );
 
-  const selectID = getLabelID();
+  const categories = [
+    "Hardware, software, and licensing",
+    "Equipment and supplies",
+    "Training and outreach",
+    "Travel",
+    "Administrative operations",
+    "Miscellaneous expenses for the project"
+  ].map(item => ({ label: item, value: item }));
 
   return (
     <Fragment>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
-      <FormLabel fieldId={selectID}>Category</FormLabel>
       <Dropdown
         autoFocus
-        id={selectID}
-        label=""
+        label="Category"
         name="category"
-        options={[]}
+        options={categories}
         value={category}
         onChange={editCategory}
-      >
-        <option value="Hardware, software, and licensing">
-          Hardware, software, and licensing
-        </option>
-        <option value="Equipment and supplies">Equipment and supplies</option>
-        <option value="Training and outreach">Training and outreach</option>
-        <option value="Travel">Travel</option>
-        <option value="Administrative operations">
-          Administrative operations
-        </option>
-        <option value="Miscellaneous expenses for the project">
-          Miscellaneous expenses for the project
-        </option>
-      </Dropdown>
+      />
+
       <TextArea
         label="Description"
         rows={5}
@@ -71,6 +63,7 @@ const NonPersonnelCostForm = ({
         value={description}
         onChange={editDesc}
       />
+
       {Object.entries(years).map(([year, cost]) => (
         <DollarField
           key={year}

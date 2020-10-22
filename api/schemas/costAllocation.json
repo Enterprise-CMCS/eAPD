@@ -1,0 +1,32 @@
+{
+  "$id": "costAllocation.json",
+  "type": "object",
+  "patternProperties": {
+    "^[0-9]{4}$": {
+      "$id": "#/properties/activities/items/properties/costAllocation/year",
+      "type": "object",
+      "required": ["ffp", "other"],
+      "properties": {
+        "ffp": {
+          "$id": "#/properties/activities/items/properties/costAllocation/year/ffp",
+          "type": "object",
+          "required": ["federal", "state"],
+          "properties": {
+            "federal": {
+              "$id": "#/properties/activities/items/properties/costAllocation/year/ffp/federal",
+              "type": "number"
+            },
+            "state": {
+              "$id": "#/properties/activities/items/properties/costAllocation/year/ffp/state",
+              "type": "number"
+            }
+          }
+        },
+        "other": {
+          "$id": "#/properties/activities/items/properties/costAllocation/year/other",
+          "type": "number"
+        }
+      }
+    }
+  }
+}

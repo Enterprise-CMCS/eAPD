@@ -64,6 +64,8 @@ tap.test('apds POST endpoint', async endpointTest => {
       test.ok(res.end.calledOnce, 'response is terminated');
     });
 
+    // Why is a 500 status being returned when the frontend sends malformed data?
+    // Should this not be a 4xx status? What the heck?
     tests.test(
       'sends a 500 if the newly-generated APD fails schema validation',
       async test => {
@@ -87,7 +89,8 @@ tap.test('apds POST endpoint', async endpointTest => {
             },
             costAllocationNarrative: {
               methodology: '',
-              otherSources: ''
+              '2004': { otherSources: '' },
+              '2005': { otherSources: '' }
             },
             description: '',
             expenses: [],

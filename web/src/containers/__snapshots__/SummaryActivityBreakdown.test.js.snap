@@ -35,7 +35,7 @@ exports[`Summary Activity Breakdown Table renders correctly renders correctly 1`
         colSpan="4"
         scope="col"
       >
-        Personnel Cost x FTE
+        Personnel Cost × FTE
       </th>
       <th
         className="ds-u-text-align--right"

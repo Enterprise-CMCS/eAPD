@@ -15,6 +15,7 @@ exports.seed = async knex =>
         // now that those are empty, these can be
         // emptied as well.
         knex('auth_activities').del(),
+        knex('apd_events').del(),
         knex('apd_files').del(),
         knex('users').del()
       ])

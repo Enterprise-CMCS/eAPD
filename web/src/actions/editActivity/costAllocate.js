@@ -7,9 +7,9 @@ export const setCostAllocationMethodology = (index, methodology) => ({
   value: methodology
 });
 
-export const setCostAllocationOtherFunding = (index, otherFunding) => ({
+export const setCostAllocationOtherFunding = (index, year, otherFunding) => ({
   type: EDIT_APD,
-  path: `/activities/${index}/costAllocationNarrative/otherSources`,
+  path: `/activities/${index}/costAllocationNarrative/${year}/otherSources`,
   value: otherFunding
 });
 

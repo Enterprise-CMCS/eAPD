@@ -2,6 +2,10 @@ import { t } from '../i18n';
 
 const staticItems = [
   {
+    label: t('apd.title'),
+    url: '/apd/program-summary'
+  },
+  {
     label: t('apd.stateProfile.title'),
     items: [
       {
@@ -17,10 +21,6 @@ const staticItems = [
         url: '/apd/state-profile#apd-state-profile-key-personnel'
       }
     ]
-  },
-  {
-    label: t('apd.title'),
-    url: '/apd/program-summary'
   },
   {
     label: t('previousActivities.title'),
@@ -122,11 +122,11 @@ const buildActivitySection = i => [
     url: `/apd/activity/${i}/contractor-costs`
   },
   {
-    label: 'Cost allocation',
+    label: 'Cost allocation and other funding',
     url: `/apd/activity/${i}/cost-allocation`
   },
   {
-    label: 'FFP and budget',
+    label: 'Budget and FFP',
     url: `/apd/activity/${i}/ffp`
   }
 ];

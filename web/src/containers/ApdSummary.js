@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { ChoiceList } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 
 import {
@@ -10,7 +11,6 @@ import {
   setNarrativeForMMIS,
   setProgramOverview
 } from '../actions/editApd';
-import Choice from '../components/Choice';
 import RichText from '../components/RichText';
 import Instruction from '../components/Instruction';
 import { Section } from '../components/Section';
@@ -44,51 +44,66 @@ const ApdSummary = ({
     action(html);
   };
 
+  const yearChoices = yearOptions.map(year => ({
+    defaultChecked: years.includes(year),
+    label: year,
+    value: year
+  }))
+
   return (
     <Section resource="apd">
       <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
-      <Instruction source="apd.overview.instruction" />
-
-      {yearOptions.map(option => (
-        <Choice
-          key={option}
-          checked={years.includes(option)}
-          name={`apd year ${option}`}
-          onChange={handleYears}
-          type="checkbox"
-          value={option}
-        >
-          {option}
-        </Choice>
-      ))}
-
+      <ChoiceList
+        choices={yearChoices}
+        label={t('apd.overview.instruction.short')}
+        labelClassName="ds-u-margin-bottom--1"
+        name="apd-years"
+        onChange={handleYears}
+        type="checkbox"
+      />
       <div className="ds-u-margin-y--3">
-        <Instruction source="apd.introduction.instruction" />
+        <Instruction
+          labelFor="program-introduction-field"
+          source="apd.introduction.instruction"
+        />
         <RichText
+          id="program-introduction-field"
           content={programOverview}
           onSync={syncRichText(setOverview)}
           editorClassName="rte-textarea-l"
         />
       </div>
       <div className="ds-u-margin-bottom--3">
-        <Instruction source="apd.hit.instruction" />
+        <Instruction
+          labelFor="hit-overview-field"
+          source="apd.hit.instruction"
+        />
         <RichText
+          id="hit-overview-field"
           content={narrativeHIT}
           onSync={syncRichText(setHIT)}
           editorClassName="rte-textarea-l"
         />
       </div>
       <div className="ds-u-margin-bottom--3">
-        <Instruction source="apd.hie.instruction" />
+        <Instruction
+          labelFor="hie-overview-field"
+          source="apd.hie.instruction"
+        />
         <RichText
+          id="hie-overview-field"
           content={narrativeHIE}
           onSync={syncRichText(setHIE)}
           editorClassName="rte-textarea-l"
         />
       </div>
       <div>
-        <Instruction source="apd.mmis.instruction" />
+        <Instruction
+          labelFor="mmis-overview-field"
+          source="apd.mmis.instruction"
+        />
         <RichText
+          id="mmis-overview-field"
           content={narrativeMMIS}
           onSync={syncRichText(setMMIS)}
           editorClassName="rte-textarea-l"

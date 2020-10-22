@@ -261,3 +261,8 @@ export const selectGoalsByActivityIndex = (state, { activityIndex }) => {
   }
   return null;
 };
+
+export const selectActivityTotalForBudgetByActivityIndex = (
+  { budget },
+  { activityIndex }
+) => budget.activityTotals[activityIndex] || null;

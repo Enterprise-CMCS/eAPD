@@ -76,20 +76,20 @@ const PersonForm = ({
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
         <Choice
-          type="radio"
-          name={`apd-state-profile-hascosts-no${index}`}
-          value="no"
           checked={!hasCosts}
+          label="No"
+          name={`apd-state-profile-hascosts-no${index}`}
           onChange={setPersonHasCosts(false)}
-        >
-          No
-        </Choice>
-        <Choice
           type="radio"
-          name={`apd-state-profile-hascosts-yes${index}`}
-          value="yes"
+          value="no"
+        />
+        <Choice
           checked={hasCosts}
+          label="Yes"
+          name={`apd-state-profile-hascosts-yes${index}`}
           onChange={setPersonHasCosts(true)}
+          type="radio"
+          value="yes"
           checkedChildren={
             <PersonCostForm
               items={years.reduce(
@@ -107,9 +107,7 @@ const PersonForm = ({
               setFTE={setFTEForYear}
             />
           }
-        >
-          Yes
-        </Choice>
+        />
       </fieldset>
     </Fragment>
   );

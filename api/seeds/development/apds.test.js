@@ -1,0 +1,13 @@
+const tap = require('tap');
+const { apd } = require('./apds');
+
+const { validateApd } = require('../../schemas');
+
+tap.test('development APD seed document', async t => {
+  t.true(validateApd(apd.document), 'is valid, according to apd.json schema');
+  t.false(validateApd.errors, 'has no reported errors');
+
+  if (validateApd.errors) {
+    t.equal([], validateApd.errors, 'has empty array of errors');
+  }
+});
