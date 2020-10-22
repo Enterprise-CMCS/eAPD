@@ -24,7 +24,6 @@ exports.seed = async knex =>
       Promise.all([
         // And so on and so on
         knex('auth_roles').del(),
-        knex('affiliations').del(),
         knex('affiliations').del()
       ])
     )
