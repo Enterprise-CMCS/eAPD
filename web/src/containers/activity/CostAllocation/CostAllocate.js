@@ -25,6 +25,7 @@ const CostAllocate = ({
     >
       <div className="data-entry-box">
         <Instruction
+          labelFor="cost-allocation-methodology-field"
           source="activities.costAllocate.methodology.instruction"
           headingDisplay={{
             level: 'h6',
@@ -32,6 +33,7 @@ const CostAllocate = ({
           }}
         />
         <RichText
+          id="cost-allocation-methodology-field"
           content={methodology}
           onSync={syncMethodology}
           editorClassName="rte-textarea-l"

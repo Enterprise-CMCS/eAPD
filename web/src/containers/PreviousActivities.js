@@ -24,10 +24,13 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
           id="prev-activities-outline"
           resource="previousActivities.outline"
         >
-          <h4 className="ds-c-label">
-            {t('previousActivities.outline.instruction.label')}
-          </h4>
+          <label htmlFor="previous-activity-summary-field">
+            <h4 className="ds-c-label">
+              {t('previousActivities.outline.instruction.label')}
+            </h4>
+          </label>
           <RichText
+            id="previous-activity-summary-field"
             content={previousActivitySummary}
             onSync={onChange}
             editorClassName="rte-textarea-l"

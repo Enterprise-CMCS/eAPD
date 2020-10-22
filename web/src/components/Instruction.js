@@ -4,18 +4,48 @@ import React from 'react';
 import Md from './Md';
 import { t } from '../i18n';
 
-const Instruction = ({ args, reverse, source, headingDisplay }) => {
+const Heading = ({ children, className, labelFor, level }) => {
+  const Tag = level;
+  const component = (
+    <Tag className={className}>
+      {children}
+    </Tag>
+  );
+
+  if (!labelFor) {
+    return component;
+  }
+  return <label htmlFor={labelFor}>{component}</label>;
+};
+
+Heading.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  labelFor: PropTypes.string,
+  level: PropTypes.string
+};
+
+Heading.defaultProps = {
+  className: "ds-h3",
+  labelFor: null,
+  level: "h3"
+}
+
+const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
   const heading = t([source, 'heading'], { defaultValue: false, ...args });
   const short = t([source, 'short'], { defaultValue: false, ...args });
   const detail = t([source, 'detail'], { defaultValue: false, ...args });
   const list = t([source, 'list'], { defaultValue: false, ...args });
   const helpText = t([source, 'helpText'], { defaultValue: false, ...args });
-  const Tag = headingDisplay.level;
 
   if (heading || short || detail || helpText) {
     return (
       <div>
-        {heading && <Tag className={headingDisplay.className}>{heading}</Tag>}
+        {heading && (
+          <Heading {...headingDisplay} labelFor={labelFor}>
+            {heading}
+          </Heading>
+        )}
         {(short || detail || list || helpText) && (
           <div className="visibility--screen">
             {reverse && detail && <Md content={detail} wrapper="p" />}
@@ -42,7 +72,8 @@ Instruction.propTypes = {
   args: PropTypes.object,
   reverse: PropTypes.bool,
   source: PropTypes.string.isRequired,
-  headingDisplay: PropTypes.object
+  headingDisplay: PropTypes.object,
+  labelFor: PropTypes.string
 };
 
 Instruction.defaultProps = {
@@ -51,7 +82,8 @@ Instruction.defaultProps = {
   headingDisplay: {
     level: 'h3',
     className: 'ds-h3'
-  }
+  },
+  labelFor: null
 };
 
 export default Instruction;

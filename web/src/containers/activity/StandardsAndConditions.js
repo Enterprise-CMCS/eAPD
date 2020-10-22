@@ -18,7 +18,10 @@ const StandardsAndConditions = ({
   setSupport
 }) => (
   <Fragment>
-    <h4 className="ds-h4">Standards and Conditions</h4>
+    <label htmlFor="standards-and-conditions-supports-field">
+      <h4 className="ds-h4">Standards and Conditions</h4>
+    </label>
+
     <div className="ds-u-margin-bottom--6 ds-u-margin-top--3">
       <p className="ds-u-margin-bottom--3">
         Include a description about how this activity will support the Medicaid
@@ -30,6 +33,7 @@ const StandardsAndConditions = ({
       </p>
 
       <RichText
+        id="standards-and-conditions-supports-field"
         content={activity.standardsAndConditions.supports}
         onSync={html => setSupport(activityIndex, html)}
         editorClassName="rte-textarea-1"
