@@ -137,20 +137,20 @@ const ContractorResourceForm = ({
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">This is an hourly resource</legend>
         <Choice
-          type="radio"
-          name={`apd-activity-contractor-hourly-${key}-no`}
-          value="no"
           checked={!hourly.useHourly}
+          label="No"
+          name={`apd-activity-contractor-hourly-${key}-no`}
           onChange={setHourlyOff}
-        >
-          No
-        </Choice>
-        <Choice
           type="radio"
-          name={`apd-activity-contractor-hourly-${key}-yes`}
-          value="yes"
+          value="no"
+        />
+        <Choice
           checked={hourly.useHourly}
+          label="Yes"
+          name={`apd-activity-contractor-hourly-${key}-yes`}
           onChange={setHourlyOn}
+          type="radio"
+          value="yes"
           checkedChildren={
             <div className="ds-c-choice__checkedChild">
               {apdFFYs.map(ffy => (
@@ -179,9 +179,7 @@ const ContractorResourceForm = ({
               ))}
             </div>
           }
-        >
-          Yes
-        </Choice>
+        />
       </fieldset>
 
       {hourly.useHourly ? (

@@ -58,6 +58,7 @@ exports[`Subsection component renders correctly 1`] = `
         "level": "h3",
       }
     }
+    labelFor={null}
     reverse={false}
     source="activities.outcomes.instruction"
   />
@@ -81,6 +82,7 @@ exports[`Subsection component uses the passed-in heading class 1`] = `
         "level": "h3",
       }
     }
+    labelFor={null}
     reverse={false}
     source="activities.outcomes.instruction"
   />

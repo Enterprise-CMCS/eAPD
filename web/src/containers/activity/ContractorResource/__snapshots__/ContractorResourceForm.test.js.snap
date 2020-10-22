@@ -54,13 +54,12 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     </legend>
     <ChoiceComponent
       checked={true}
+      label="No"
       name="apd-activity-contractor-hourly-key 1-no"
       onChange={[Function]}
       type="radio"
       value="no"
-    >
-      No
-    </ChoiceComponent>
+    />
     <ChoiceComponent
       checked={false}
       checkedChildren={
@@ -137,13 +136,12 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
           </React.Fragment>
         </div>
       }
+      label="Yes"
       name="apd-activity-contractor-hourly-key 1-yes"
       onChange={[Function]}
       type="radio"
       value="yes"
-    >
-      Yes
-    </ChoiceComponent>
+    />
   </fieldset>
   <DollarField
     disabled={false}
@@ -220,13 +218,12 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     </legend>
     <ChoiceComponent
       checked={false}
+      label="No"
       name="apd-activity-contractor-hourly-key 1-no"
       onChange={[Function]}
       type="radio"
       value="no"
-    >
-      No
-    </ChoiceComponent>
+    />
     <ChoiceComponent
       checked={true}
       checkedChildren={
@@ -303,13 +300,12 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
           </React.Fragment>
         </div>
       }
+      label="Yes"
       name="apd-activity-contractor-hourly-key 1-yes"
       onChange={[Function]}
       type="radio"
       value="yes"
-    >
-      Yes
-    </ChoiceComponent>
+    />
   </fieldset>
   <p
     className="ds-u-margin-bottom--0"
