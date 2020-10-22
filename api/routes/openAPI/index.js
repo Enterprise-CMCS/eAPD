@@ -1,5 +1,6 @@
 const pkg = require('../../package.json');
 
+const affiliations = require('../affiliations/openAPI');
 const auth = require('./auth');
 const apds = require('../apds/openAPI');
 const authActivities = require('../auth/activities/openAPI');
@@ -17,6 +18,7 @@ module.exports = {
     version: pkg.version
   },
   paths: {
+    ...affiliations,
     ...apds,
     ...auth,
     ...authActivities,

@@ -30,7 +30,7 @@ exports.up = async knex => {
     table.timestamps(true, true);
     table
       .string('updated_by')
-      .comment('id of user who updated the record');
+      .comment('id of user who last updated the record');
     table.unique(['user_id', 'state_id']);
   });
 };
