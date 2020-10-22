@@ -1,5 +1,5 @@
 exports.seed = async knex => {
-  await knex('affiliation_requests').insert([
+  await knex('affiliations').insert([
     {
       id: 4000,
       user_id: 2010,

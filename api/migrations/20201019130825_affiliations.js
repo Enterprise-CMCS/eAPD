@@ -11,20 +11,27 @@ exports.up = async knex => {
       .notNullable()
       .comment('two-letter abbreviation of US state');
     table
+      .foreign('state_id')
+      .references('id')
+      .inTable('states');
+    table
       .integer('role_id')
       .unsigned()
-      .notNullable()
       .comment('role of user');
     table
       .foreign('role_id')
       .references('id')
       .inTable('auth_roles');
     table
-      .string('created_by')
+      .enum('status', ['requested', 'approved', 'denied', 'revoked'])
+      .defaultTo('requested')
       .notNullable()
-      .comment('id of user who created the record');
-    table.timestamp('created_at').defaultTo(knex.fn.now());
-    table.unique(['user_id', 'state_id'])
+      .comment('status of the affiliation');
+    table.timestamps(true, true);
+    table
+      .string('updated_by')
+      .comment('id of user who updated the record');
+    table.unique(['user_id', 'state_id']);
   });
 };
 
