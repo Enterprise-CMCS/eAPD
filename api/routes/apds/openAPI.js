@@ -347,7 +347,7 @@ const openAPI = {
           })
         },
         400: {
-          description: 'The apd ID does not match any knownn apds'
+          description: 'The apd ID does not match any known apds'
         },
         401: {
           description: 'The apd ID does not match any known apds for the user'
