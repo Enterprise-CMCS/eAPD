@@ -16,6 +16,7 @@ export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOCKED_OUT = 'LOCKED_OUT';
+export const RESET_LOCKED_OUT = 'RESET_LOCKED_OUT';
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
@@ -33,6 +34,7 @@ export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
 export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
 export const failLoginLocked = () => ({ type: LOCKED_OUT })
+export const resetLocked = () => ({ type: RESET_LOCKED_OUT })
 
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
@@ -103,12 +105,8 @@ export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
   authenticateUser(username, password)
     .then(async res => {
-      // Ty note: Add check here when user/pass is entered and still locked out
-      console.log(res);
       if (res.status === 'LOCKED_OUT') {
         return dispatch(failLoginLocked());
-      } else {
-        // Either here or below after completeLogin, reset the LOCKED_OUT state
       }
       
       if (res.status === 'MFA_REQUIRED') {
@@ -116,12 +114,13 @@ export const login = (username, password) => dispatch => {
           dispatch(completeFirstStage());
         });          
       } 
-      // Ty Note: Should this check for a specific success case?
+      
       if (res.status === 'SUCCESS')  {
         await setTokens(res.sessionToken);
         return axios
           .get('/me')
           .then(userRes => {          
+            dispatch(resetLocked());
             dispatch(completeLogin(userRes.data));
             dispatch(loadData(userRes.data.activities));
           })
