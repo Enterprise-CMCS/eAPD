@@ -38,6 +38,7 @@ exports[`apd export component renders correctly 1`] = `
   <Button
     className="ds-u-margin-top--2"
     component="button"
+    id="export-to-print-or-pdf"
     onClick={[Function]}
     size="big"
     type="button"

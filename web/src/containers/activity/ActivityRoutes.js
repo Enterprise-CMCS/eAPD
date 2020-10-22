@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import ContractorResources from './ContractorResources';
-import CostAllocate from './CostAllocate';
+import CostAllocation from './CostAllocation';
 import FFP from './CostAllocateFFP';
 import Costs from './Costs';
 import Milestones from './Milestones';
@@ -39,7 +39,7 @@ const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
       </Route>
       <Route path={`${path}/cost-allocation`}>
         <Section>
-          <CostAllocate activityIndex={activityIndex} />
+          <CostAllocation activityIndex={activityIndex} />
         </Section>
       </Route>
       <Route path={`${path}/ffp`}>

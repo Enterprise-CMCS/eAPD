@@ -31,7 +31,7 @@ describe('APD files endpoints', () => {
           url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -40,7 +40,7 @@ describe('APD files endpoints', () => {
           url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(401);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -49,7 +49,7 @@ describe('APD files endpoints', () => {
           url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -84,14 +84,14 @@ describe('APD files endpoints', () => {
       it('with a non-existant apd ID', async () => {
         const response = await api.post(url(9000), form);
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
         const response = await api.post(url(4001), form);
 
-        expect(response.status).toEqual(404);
+        expect(response.status).toEqual(401);
         expect(response.data).toMatchSnapshot();
       });
 

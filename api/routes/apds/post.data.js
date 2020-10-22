@@ -34,7 +34,7 @@ const getNewApd = () => {
         }),
         costAllocationNarrative: {
           methodology: '',
-          otherSources: ''
+          ...forAllYears({ otherSources: '' })
         },
         description: '',
         expenses: [],

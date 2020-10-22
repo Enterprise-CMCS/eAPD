@@ -37,7 +37,7 @@ DataRow.propTypes = {
 };
 
 const DataRowGroup = ({ data, year, groupTitle }) => (
-  <tbody>
+  <Fragment>
     {categories.map(({ category, title }) => (
       <DataRow
         category={category}
@@ -46,7 +46,7 @@ const DataRowGroup = ({ data, year, groupTitle }) => (
         groupTitle={groupTitle}
       />
     ))}
-  </tbody>
+  </Fragment>
 );
 
 DataRowGroup.propTypes = {
@@ -71,38 +71,32 @@ const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
           </th>
         </tr>
       </thead>
-      <thead>
+      <tbody>
         <tr className="budget-table--row__header">
           <th scope="row" colSpan="2">
             HIT
           </th>
         </tr>
-      </thead>
-      <DataRowGroup data={data.hit} year={ffy} groupTitle="HIT" />
-      <thead>
+        <DataRowGroup data={data.hit} year={ffy} groupTitle="HIT" />
         <tr className="budget-table--row__header">
           <th scope="row" colSpan="2">
             HIE
           </th>
         </tr>
-      </thead>
-      <DataRowGroup data={data.hie} year={ffy} groupTitle="HIE" />
-      <thead>
+        <DataRowGroup data={data.hie} year={ffy} groupTitle="HIE" />
         <tr className="budget-table--row__header">
           <th scope="row" colSpan="2">
             MMIS
           </th>
         </tr>
-      </thead>
-      <DataRowGroup data={data.mmis} year={ffy} groupTitle="MMIS" />
-      <thead>
+        <DataRowGroup data={data.mmis} year={ffy} groupTitle="MMIS" />
         <tr key={ffy} className="budget-table--row__header">
           <th scope="row">FFY {ffy} Total Computable Medicaid Cost</th>
           <td className="budget-table--number budget-table--total">
             <Dollars>{data.combined[ffy].medicaid}</Dollars>
           </td>
         </tr>
-      </thead>
+      </tbody>
     </table>
   );
 };

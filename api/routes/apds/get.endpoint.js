@@ -64,14 +64,14 @@ describe('APD endpoint', () => {
         it('when requesting an APD that does not exist', async () => {
           const response = await api.get(url(0));
 
-          expect(response.status).toEqual(404);
+          expect(response.status).toEqual(400);
           expect(response.data).toMatchSnapshot();
         });
 
         it('when requesting an APD that belongs to another state', async () => {
           const response = await api.get(url(4001));
 
-          expect(response.status).toEqual(404);
+          expect(response.status).toEqual(400);
           expect(response.data).toMatchSnapshot();
         });
 
