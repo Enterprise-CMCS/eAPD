@@ -16,9 +16,9 @@ describe('<LoginMFA />', () => {
 
   test('user enters otp', () => {
     const { getByLabelText, getByRole } = renderUtils;
-    expect(getByLabelText('Verification Code')).toBeTruthy();
+    expect(getByLabelText('Please enter the 6 digit code generated in your SMS text.')).toBeTruthy();
     expect(getByRole('button', { name: 'Verify' }));
-    fireEvent.change(getByLabelText('Verification Code'), {
+    fireEvent.change(getByLabelText('Please enter the 6 digit code generated in your SMS text.'), {
       target: { value: 'testotp' }
     });
     fireEvent.click(getByRole('button', { name: 'Verify' }));

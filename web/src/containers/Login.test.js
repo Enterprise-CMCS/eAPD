@@ -231,7 +231,7 @@ describe('login component', () => {
     component
       .find('Password')
       .simulate('change', { target: { name: 'password', value: 'secret' } });
-    component.find('withRouter(CardForm)').prop('onSave')(event);
+    component.find('withRouter(LoginForm)').prop('onSave')(event);
 
     expect(loginProp.calledWith('bob', 'secret')).toBeTruthy();
     expect(event.preventDefault.called).toBeTruthy();

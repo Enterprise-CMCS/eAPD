@@ -129,6 +129,8 @@ export const login = (username, password) => dispatch => {
             dispatch(failLogin(reason));
         });                
       }
+      // Ty Note: Linter wanted this to return something here. Is there a better pattern for this function to avoid this?
+      return null;
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
@@ -151,11 +153,11 @@ export const loginOtp = otp => async dispatch => {
       })
       .catch(error => {        
         const reason = error ? error.message : 'N/A';
-        if (reason === 'Invalid Passcode/Answer') {
+        if (reason === 'User Locked') {
+          dispatch(failLoginLocked(reason));
+        } else {
           dispatch(failLoginMFA(reason));          
-        } else if (reason === 'User Locked') {
-            dispatch(failLoginLocked(reason));
-        }
+        } 
       });
   } else {
     dispatch(failLoginMFA('Authentication failed'));

@@ -8,13 +8,16 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_MFA_FAILURE,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  LOCKED_OUT,
+  RESET_LOCKED_OUT
 } from '../actions/auth';
 
 describe('auth reducer', () => {
   const initialState = {
     otpStage: false,
     authenticated: false,
+    isLocked: false,
     error: '',
     fetching: false,
     hasEverLoggedOn: false,
@@ -109,6 +112,24 @@ describe('auth reducer', () => {
       error: 'foo'
     });
   });
+  
+  it('should handle LOCKED_OUT', () => {
+    expect(
+      auth(initialState, { type: LOCKED_OUT })
+    ).toEqual({
+      ...initialState,
+      isLocked: true
+    });
+  });
+  
+  it('should handle RESET_LOCKED_OUT', () => {
+    expect(
+      auth(initialState, { type: RESET_LOCKED_OUT })
+    ).toEqual({
+     ...initialState,
+     isLocked: false 
+    });
+  });
 
   it('should handle LOGOUT_SUCCESS', () => {
     expect(auth(initialState, { type: LOGOUT_SUCCESS })).toEqual({
@@ -134,6 +155,7 @@ describe('auth reducer', () => {
         hasEverLoggedOn: true,
         initialCheck: true,
         otpStage: false,
+        isLocked: false,
         user: null
       });
     });
