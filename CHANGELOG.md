@@ -4,7 +4,7 @@ Anticipated release: October 26th, 2020
 
 #### 🚀 New features
 
-- Upsate areas in the app where "total computable" should be used ([#2324])
+- Update areas in the app where "total computable" should be used ([#2324])
 
 #### 🐛 Bugs fixed
 
