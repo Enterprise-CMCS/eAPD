@@ -144,7 +144,7 @@ const CostAllocateFFP = ({
                     </td>
                   </tr>
                   <tr className="budget-table--subtotal budget-table--row__highlight">
-                    <td>Medicaid Share</td>
+                    <td>Total Computable Medicaid Cost</td>
                     <td colSpan="4" />
                     <td className="budget-table--number">
                       <Dollars>{years[ffy].medicaidShare}</Dollars>
