@@ -5,7 +5,7 @@ import Dollars from '../../../components/Dollars';
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
 import { stateDateToDisplay } from '../../../util';
 
-const isYear = (value) => !!value.match(/^[0-9]{4}$/);
+const isYear = value => !!value.match(/^[0-9]{4}$/);
 
 const Activity = ({ activity, activityIndex }) => {
   const buildObjective = objective => {
@@ -147,7 +147,8 @@ const Activity = ({ activity, activityIndex }) => {
         Activity {activityIndex + 1} ({activity.name})
       </h2>
       <p>
-        <strong>Provide a short overview of the activity:</strong> {activity.summary}
+        <strong>Provide a short overview of the activity:</strong>{' '}
+        {activity.summary}
       </p>
       <p>
         <strong>Start date: </strong>
@@ -230,7 +231,7 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        In-House Cost Categories: State Personnel
+        State staff
       </h3>
       {activity.statePersonnel.map((person, index) =>
         buildPerson(person, index)
@@ -241,7 +242,7 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        In-House Cost Categories: Non-Personnel
+        Other state expenses
       </h3>
       {activity.expenses.map((expense, index) => buildExpense(expense, index))}
 
@@ -287,12 +288,15 @@ const Activity = ({ activity, activityIndex }) => {
             <div>
               <strong>Other Funding Amount: </strong>
               <Dollars>
-                {(activity.costAllocation[year.toString()] || { other: 0 }).other}
+                {
+                  (activity.costAllocation[year.toString()] || { other: 0 })
+                    .other
+                }
               </Dollars>
             </div>
             <hr className="subsection-rule" />
           </Fragment>
-      ))}
+        ))}
 
       <h3 className="viewonly-activity-header">
         <small>
