@@ -1,7 +1,8 @@
 const {
   getDB,
   login,
-  unauthenticatedTest
+  unauthenticatedTest,
+  unauthorizedTest
 } = require('../../endpoint-tests/utils');
 
 describe('Affiliations endpoint | PATCH /state/:stateId/affiliations/:id', () => {
@@ -10,6 +11,7 @@ describe('Affiliations endpoint | PATCH /state/:stateId/affiliations/:id', () =>
   afterAll(() => db.destroy());
 
   unauthenticatedTest('patch', '/states/fl/affiliations/4000');
+  unauthorizedTest('patch', '/states/fl/affiliations/4000');
 
   ['approved', 'denied', 'revoked'].forEach(status => {
     it(`returns 200, when an affiliation is ${status}`, async () => {

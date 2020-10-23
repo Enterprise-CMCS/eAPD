@@ -35,47 +35,47 @@ if (fs.existsSync('./endpoint-data.json')) {
 }
 
 const registerCoverageMiddleware = server => {
-  if (process.env.ENDPOINT_COVERAGE_CAPTURE) {
-    server.use((req, res, next) => {
-      if (!endpoints.length) {
-        server._router.stack // eslint-disable-line no-underscore-dangle
-          .filter(a => !!a.route)
-          .forEach(({ route: { path, methods } }) => {
-            const openAPIPath = getOpenApiUrl(path);
-            if (endpoints.some(e => e.openAPIPath === openAPIPath)) {
-              endpoints.find(e => e.openAPIPath === openAPIPath).methods[
-                Object.keys(methods)[0]
-              ] = { registered: true, statuses: {} };
-            } else {
-              endpoints.push({
-                path,
-                openAPIPath,
-                methods: {
-                  [Object.keys(methods)[0]]: { registered: true, statuses: {} }
-                }
-              });
-            }
-          });
+  if (process.env.ENDPOINT_COVERAGE_CAPTURE.toLowerCase() !== 'true') return;
+
+  server.use((req, res, next) => {
+    if (!endpoints.length) {
+      server._router.stack // eslint-disable-line no-underscore-dangle
+        .filter(a => !!a.route)
+        .forEach(({ route: { path, methods } }) => {
+          const openAPIPath = getOpenApiUrl(path);
+          if (endpoints.some(e => e.openAPIPath === openAPIPath)) {
+            endpoints.find(e => e.openAPIPath === openAPIPath).methods[
+              Object.keys(methods)[0]
+            ] = { registered: true, statuses: {} };
+          } else {
+            endpoints.push({
+              path,
+              openAPIPath,
+              methods: {
+                [Object.keys(methods)[0]]: { registered: true, statuses: {} }
+              }
+            });
+          }
+        });
+    }
+
+    const end = res.end.bind(res);
+    res.end = (...args) => {
+      const path = req.route ? req.route.path : req.path;
+
+      if (req.method.toLowerCase() !== 'options') { // ignore 'options' requests
+        endpoints.find(e => e.openAPIPath === getOpenApiUrl(path)).methods[
+          req.method.toLowerCase()
+        ].statuses[res.statusCode] = { tested: true };
       }
 
-      const end = res.end.bind(res);
-      res.end = (...args) => {
-        const path = req.route ? req.route.path : req.path;
+      fs.writeFileSync('./endpoint-data.json', JSON.stringify(endpoints));
 
-        if (req.method.toLowerCase() !== 'options') { // ignore 'options' requests
-          endpoints.find(e => e.openAPIPath === getOpenApiUrl(path)).methods[
-            req.method.toLowerCase()
-          ].statuses[res.statusCode] = { tested: true };
-        }
+      return end(...args);
+    };
 
-        fs.writeFileSync('./endpoint-data.json', JSON.stringify(endpoints));
-
-        return end(...args);
-      };
-
-      next();
-    });
-  }
+    next();
+  });
 };
 
 module.exports = {

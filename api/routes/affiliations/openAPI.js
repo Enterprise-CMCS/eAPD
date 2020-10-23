@@ -84,19 +84,31 @@ const affiliationSchema = {
 
 const tags = ['Affiliations'];
 
-const getAffiliationsRoute = {
-  '/states/{stateId}/affiliations': {
-    get: {
-      tags,
-      description: 'Get a list of all user affiliations for a US State',
-      responses: {
-        200: {
-          description: 'List of all user affiliations for a US State',
-          content: jsonResponse(arrayOf(affiliationSchema))
-        },
-        404: {
-          description: 'The stateId does not correspond to a known record'
-        }
+const getAffiliations = {
+  get: {
+    tags,
+    description: 'Get a list of all user affiliations for a US State',
+    responses: {
+      200: {
+        description: 'List of all user affiliations for a US State',
+        content: jsonResponse(arrayOf(affiliationSchema))
+      }
+    }
+  }
+};
+
+const postAffiliations = {
+  post: {
+    tags,
+    description: 'Create a request for the currently logged in user to be affiliated with a US State',
+    parameters: [stateIdParameter],
+    responses: {
+      201: {
+        description: 'Record was created',
+        content: jsonResponse(id)
+      },
+      404: {
+        description: 'Record exists, or US State ID is invalid'
       }
     }
   }
@@ -118,22 +130,6 @@ const getAffiliation = {
   }
 };
 
-const postAffiliation = {
-  post: {
-    tags,
-    description: 'Create a request for the currently logged in user to be affiliated with a US State',
-    parameters: [stateIdParameter],
-    responses: {
-      200: {
-        description: 'Record was created',
-        content: jsonResponse(id)
-      },
-      404: {
-        description: 'Record exists, or US State ID is invalid'
-      }
-    }
-  }
-}
 
 const patchAffiliation = {
   patch: {
@@ -160,17 +156,19 @@ const patchAffiliation = {
       }
     }
   }
-}
+};
 
 const affiliationRoutes = {
+  '/states/{stateId}/affiliations': {
+    ...getAffiliations,
+    ...postAffiliations
+  },
   '/states/{stateId}/affiliations/{id}': {
     ...getAffiliation,
-    ...postAffiliation,
     ...patchAffiliation
-  }
-}
+  },
+};
 
 module.exports = {
-  ...requiresAuth(getAffiliationsRoute),
   ...requiresAuth(affiliationRoutes)
-}
+};
