@@ -31,7 +31,7 @@ header: Program Activities
 namePrefix: Activity
 namePrefixAndNum: Activity {{number}}
 costs:
-  title: State Staff and Expenses
+  title: State Cost Categories
   subtitles:
     personnel: State staff
     nonPersonnel: Other state expenses

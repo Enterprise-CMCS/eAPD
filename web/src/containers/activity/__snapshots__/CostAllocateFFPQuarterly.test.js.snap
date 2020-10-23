@@ -61,7 +61,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
         rowSpan="2"
         scope="row"
       >
-        State Staff and Expenses (In-House Costs)
+        In-House Costs
       </th>
       <td
         key="1"

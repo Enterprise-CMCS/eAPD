@@ -114,7 +114,7 @@ const buildActivitySection = i => [
     url: `/apd/activity/${i}/okrs`
   },
   {
-    label: 'State staff and expenses',
+    label: 'State cost categories',
     url: `/apd/activity/${i}/state-costs`
   },
   {
