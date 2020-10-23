@@ -35,7 +35,7 @@ if (fs.existsSync('./endpoint-data.json')) {
 }
 
 const registerCoverageMiddleware = server => {
-  if (process.env.ENDPOINT_COVERAGE_CAPTURE.toLowerCase() !== 'true') return;
+  if (process.env.ENDPOINT_COVERAGE_CAPTURE.toLowerCase !== 'true') return;
 
   server.use((req, res, next) => {
     if (!endpoints.length) {
@@ -63,10 +63,14 @@ const registerCoverageMiddleware = server => {
     res.end = (...args) => {
       const path = req.route ? req.route.path : req.path;
 
-      if (req.method.toLowerCase() !== 'options') { // ignore 'options' requests
-        endpoints.find(e => e.openAPIPath === getOpenApiUrl(path)).methods[
-          req.method.toLowerCase()
-        ].statuses[res.statusCode] = { tested: true };
+      try {
+        if (req.method.toLowerCase() !== 'options') { // ignore 'options' requests
+          endpoints.find(e => e.openAPIPath === getOpenApiUrl(path)).methods[
+            req.method.toLowerCase()
+          ].statuses[res.statusCode] = { tested: true };
+        }
+      } catch (e) {
+        console.log(e)
       }
 
       fs.writeFileSync('./endpoint-data.json', JSON.stringify(endpoints));

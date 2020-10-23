@@ -24,16 +24,16 @@ describe('US States endpoint', () => {
     unauthenticatedTest('get', '/states/fl');
 
     it('returns 200', async () => {
-      const response = await login()
-        .then(api => api.get('/states/fl'));
+      const authedClient = login();
+      const response = await authedClient.get('/states/fl');
       expect(response.status).toEqual(200);
       const keys = Object.keys(response.data)
       expect(keys).toEqual(['id', 'name', 'medicaid_office']);
     });
 
     it('returns 404', async () => {
-      const response = await login()
-        .then(api => api.get('/states/zz'));
+      const authedClient = login();
+      const response = await authedClient.get('/states/zz');
       expect(response.status).toEqual(404);
     });
   });
