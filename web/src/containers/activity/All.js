@@ -13,13 +13,8 @@ const All = ({ add, activities }) => {
 
   return (
     <Section id="activities" resource="activities">
-      <h3 className="ds-h3 ds-u-padding-bottom--1">
-        {activities.length} Program Activities
-      </h3>
       {activities.map((activity, index) => (
-        <EntryDetails
-          activityIndex={index}
-          key={activity.key} />
+        <EntryDetails activityIndex={index} key={activity.key} />
       ))}
       <Button className="ds-u-margin-top--4" onClick={onAdd}>
         Add another activity
