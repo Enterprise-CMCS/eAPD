@@ -867,7 +867,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         className="budget-table--subtotal budget-table--row__highlight"
       >
         <td>
-          Medicaid Share
+          Total Computable Medicaid Cost
         </td>
         <td
           colSpan="4"
@@ -1066,7 +1066,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         className="budget-table--subtotal budget-table--row__highlight"
       >
         <td>
-          Medicaid Share
+          Total Computable Medicaid Cost
         </td>
         <td
           colSpan="4"
