@@ -68,6 +68,6 @@ quarterly:
       Indicate allocations of state personnel & contract resources in current FFY
       by quarter.
   expenseNames:
-    state: In-House Costs
+    state: State Staff and Expenses (In-House Costs)
     contractor: Private Contractor Costs
     combined: Total Enhanced FFP
