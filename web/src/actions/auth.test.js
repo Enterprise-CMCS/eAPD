@@ -399,6 +399,27 @@ describe('auth actions', () => {
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
+    
+    it('creates LOCKED_OUT after too many failed MFA attempts', async () => {
+      jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
+      jest.spyOn(mockOktaAuth.tx, 'resume').mockImplementation(() =>
+        Promise.resolve({
+          verify: jest.fn(() =>
+            Promise.reject(new Error('User Locked'))
+          )
+        })
+      );
+    
+      const store = mockStore({});
+      const expectedActions = [
+        { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOCKED_OUT }
+      ];
+    
+      await store.dispatch(actions.loginOtp('otp'));
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
 
     it('creates LOGIN_FAILURE after failure to get user on backend', async () => {
       const signInSpy = jest

@@ -63,6 +63,7 @@ class Password extends Component {
               'A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address.'
             }
             label={title || 'Password'}
+            id="password"
             name="password"
             className="no-clearfix"
             type={showPassword ? 'text' : 'password'}
@@ -71,7 +72,7 @@ class Password extends Component {
             errorMessage={errorMessage == null ? null : ""}
           />
           {customErrorMessage && (
-            <div className="ds-u-color--error"><strong>{customErrorMessage}</strong></div>
+            <label htmlFor="password" className="ds-u-color--error"><strong>{customErrorMessage}</strong></label>
           )}
           {showMeter && (
             <Fragment>
