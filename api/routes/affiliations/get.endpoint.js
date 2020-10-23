@@ -14,7 +14,7 @@ describe('Affiliations endpoint | GET', () => {
     unauthenticatedTest('get', '/states/fl/affiliations');
     unauthorizedTest('get', '/states/fl/affiliations');
 
-    it('returns 201', async () => {
+    it('returns 200', async () => {
       const response = await login()
         .then(api => api.get('/states/fl/affiliations'));
       expect(response.status).toEqual(200);

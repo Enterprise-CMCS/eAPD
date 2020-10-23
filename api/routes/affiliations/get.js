@@ -7,7 +7,7 @@ module.exports = (app) => {
     await knex('affiliations')
       .where({ state_id: stateId })
       .then(rows => response.status(200).json(rows))
-      .catch(() => response.status(404).end());
+      .catch((err) => response.status(404).send(err).end());
   });
 
   app.get('/states/:stateId/affiliations/:id', can('view-users'), async (request, response) => {

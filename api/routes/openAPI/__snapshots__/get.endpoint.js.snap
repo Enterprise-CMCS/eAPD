@@ -877,7 +877,7 @@ Object {
             "description": "The status of the event being logged",
           },
           "400": Object {
-            "description": "The apd ID does not match any knownn apds",
+            "description": "The apd ID does not match any known apds",
           },
           "401": Object {
             "description": "The apd ID does not match any known apds for the user",
@@ -1709,6 +1709,373 @@ Object {
         "summary": "Gets this document",
         "tags": Array [
           "Metadata",
+        ],
+      },
+    },
+    "/states": Object {
+      "get": Object {
+        "description": "Get a list of all US States and Territories",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "id": Object {
+                        "description": "2-letter US State or Territory abbreviation, lowercase",
+                        "type": "string",
+                      },
+                      "name": Object {
+                        "description": "Full name of US State or Territory",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "List of US States and Territories",
+          },
+        },
+        "tags": Array [
+          "States",
+        ],
+      },
+    },
+    "/states/{id}": Object {
+      "get": Object {
+        "description": "Get a single US State or Territiory",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "id": Object {
+                      "description": "2-letter US State or Territory abbreviation, lowercase",
+                      "type": "string",
+                    },
+                    "medicaid_office": Object {
+                      "description": "Contact information for this US State/Territory Medicaid office",
+                      "type": "object",
+                    },
+                    "name": Object {
+                      "description": "Full name of US State or Territory",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "US State or Territory",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "404": Object {
+            "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "States",
+        ],
+      },
+    },
+    "/states/{stateId}/affiliations": Object {
+      "get": Object {
+        "description": "Get a list of all user affiliations for a US State",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "propertyName": Object {
+                        "created_at": Object {
+                          "description": "Timestamp of record creation",
+                          "format": "date-time",
+                          "type": "string",
+                        },
+                        "id": Object {
+                          "description": "ID of record",
+                          "type": "integer",
+                        },
+                        "role_id": Object {
+                          "description": "ID of the role applied to this user for this US State",
+                          "type": "integer",
+                        },
+                        "state_id": Object {
+                          "description": "2-letter US State or Territory abbreviation, lowercase",
+                          "type": "string",
+                        },
+                        "status": Object {
+                          "description": "The status of the user role for this US State",
+                          "enum": Array [
+                            "requested",
+                            "approved",
+                            "denied",
+                            "revoked",
+                          ],
+                          "type": "string",
+                        },
+                        "updated_at": Object {
+                          "description": "Timestamp of last update",
+                          "format": "date-time",
+                          "type": "string",
+                        },
+                        "updated_by": Object {
+                          "description": "ID of the user who last updated this record",
+                          "type": "string",
+                        },
+                        "user_id": Object {
+                          "description": "ID of user",
+                          "type": "string",
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "List of all user affiliations for a US State",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "404": Object {
+            "description": "The stateId does not correspond to a known record",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+    },
+    "/states/{stateId}/affiliations/{id}": Object {
+      "get": Object {
+        "description": "Get a single user affiliation with a US State",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "propertyName": Object {
+                      "created_at": Object {
+                        "description": "Timestamp of record creation",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "id": Object {
+                        "description": "ID of record",
+                        "type": "integer",
+                      },
+                      "role_id": Object {
+                        "description": "ID of the role applied to this user for this US State",
+                        "type": "integer",
+                      },
+                      "state_id": Object {
+                        "description": "2-letter US State or Territory abbreviation, lowercase",
+                        "type": "string",
+                      },
+                      "status": Object {
+                        "description": "The status of the user role for this US State",
+                        "enum": Array [
+                          "requested",
+                          "approved",
+                          "denied",
+                          "revoked",
+                        ],
+                        "type": "string",
+                      },
+                      "updated_at": Object {
+                        "description": "Timestamp of last update",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "updated_by": Object {
+                        "description": "ID of the user who last updated this record",
+                        "type": "string",
+                      },
+                      "user_id": Object {
+                        "description": "ID of user",
+                        "type": "string",
+                      },
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "A single user affiliation with a US State",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "404": Object {
+            "description": "The stateId and affiliation ID do not correspond to a known record",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+      "patch": Object {
+        "description": "Update a user affiliation with a US State",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+          Object {
+            "description": "ID of record",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "integer",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "roleId": Object {
+                    "description": "ID of the role applied to this user for this US State",
+                    "type": "integer",
+                  },
+                  "status": Object {
+                    "description": "The status of the user role for this US State",
+                    "enum": Array [
+                      "requested",
+                      "approved",
+                      "denied",
+                      "revoked",
+                    ],
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "description": "",
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "Record was updated",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "404": Object {
+            "description": "US State ID and affiliation ID are invalid, role_id is invalid, or status is invalid",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+      "post": Object {
+        "description": "Create a request for the currently logged in user to be affiliated with a US State",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "description": "ID of record",
+                  "type": "integer",
+                },
+              },
+            },
+            "description": "Record was created",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "404": Object {
+            "description": "Record exists, or US State ID is invalid",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
         ],
       },
     },
