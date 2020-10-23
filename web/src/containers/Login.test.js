@@ -175,6 +175,7 @@ describe('login component', () => {
       <Login
         authenticated={false}
         error="Authentication failed"
+        customErrorMessage="Invalid Entry"
         fetching={false}
         hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}

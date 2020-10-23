@@ -11,7 +11,7 @@ const LoginLocked = () => {
 					</h1>
 					<h2 className="ds-h4 ds-u-margin-y--3">Account Locked</h2>
 					<p>Your account will be locked for one hour.</p>
-					<p>If you need access sooner, please try to contact the System Administrator for a reset.</span></p>		
+					<p>If you need access sooner, please try to contact the System Administrator for a reset.</p>		
 					<div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
 						<a href="/" className="ds-c-button ds-c-button--transparent">Cancel</a>
 					</div>	

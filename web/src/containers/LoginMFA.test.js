@@ -24,4 +24,9 @@ describe('<LoginMFA />', () => {
     fireEvent.click(getByRole('button', { name: 'Verify' }));
     expect(props.action).toHaveBeenCalledWith('testotp');
   });
+  
+  test('cancel button renders', () => {
+    const { getByText } = renderUtils;
+    expect(getByText(/Cancel/i)).toBeTruthy();
+  })
 });
