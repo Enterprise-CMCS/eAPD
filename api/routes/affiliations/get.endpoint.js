@@ -6,6 +6,7 @@ const {
 } = require('../../endpoint-tests/utils');
 
 describe('Affiliations endpoint | GET', () => {
+  const api = login();
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -15,8 +16,7 @@ describe('Affiliations endpoint | GET', () => {
     unauthorizedTest('get', '/states/fl/affiliations');
 
     it('returns 200', async () => {
-      const response = await login()
-        .then(api => api.get('/states/fl/affiliations'));
+      const response = await api.get('/states/fl/affiliations');
       expect(response.status).toEqual(200);
     });
   });
@@ -26,14 +26,12 @@ describe('Affiliations endpoint | GET', () => {
     unauthorizedTest('get', '/states/fl/affiliations/4000');
 
     it('returns 200', async () => {
-      const response = await login()
-        .then(api => api.get('/states/fl/affiliations/4000'));
+      const response = await api.get('/states/fl/affiliations/4000');
       expect(response.status).toEqual(200);
     });
 
     it('returns 404', async () => {
-      const response = await login()
-        .then(api => api.get('/states/fl/affiliations/NaN'));
+      const response = await api.get('/states/fl/affiliations/NaN');
       expect(response.status).toEqual(404);
     });
   })
