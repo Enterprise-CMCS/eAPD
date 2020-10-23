@@ -89,7 +89,7 @@ const setTokens = sessionToken => {
       sessionToken,
       state: stateToken
       // prompt: 'none'
-    })  
+    })
     .then(async res => {
       const { state: responseToken, tokens } = res;
       if (stateToken === responseToken) {
@@ -129,7 +129,6 @@ export const login = (username, password) => dispatch => {
             dispatch(failLogin(reason));
         });                
       }
-      // Ty Note: Linter wanted this to return something here. Is there a better pattern for this function to avoid this?
       return null;
     })
     .catch(error => {
