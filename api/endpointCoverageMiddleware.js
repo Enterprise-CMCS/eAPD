@@ -35,7 +35,7 @@ if (fs.existsSync('./endpoint-data.json')) {
 }
 
 const registerCoverageMiddleware = server => {
-  if (process.env.ENDPOINT_COVERAGE_CAPTURE.toLowerCase !== 'true') return;
+  if (process.env.ENDPOINT_COVERAGE_CAPTURE.toLowerCase() !== 'true') return;
 
   server.use((req, res, next) => {
     if (!endpoints.length) {
