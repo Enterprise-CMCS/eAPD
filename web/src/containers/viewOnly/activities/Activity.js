@@ -230,7 +230,7 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        State staff
+        In-House Cost Categories: State Personnel
       </h3>
       {activity.statePersonnel.map((person, index) =>
         buildPerson(person, index)
@@ -241,7 +241,7 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        Other state expenses
+        In-House Cost Categories: Non-Personnel
       </h3>
       {activity.expenses.map((expense, index) => buildExpense(expense, index))}
 
