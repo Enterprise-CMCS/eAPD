@@ -1,9 +1,6 @@
 const activities = {
   'view-users': false,
-  'add-users': false,
   'view-roles': false,
-  'create-roles': false,
-  'edit-roles': false,
   'submit-federal-response': false,
   'submit-clearance': false,
   'edit-comments': false,
@@ -12,42 +9,31 @@ const activities = {
   'create-draft': false,
   'edit-document': false,
   'edit-response': false,
-  'delete-users': false,
   'view-document': true
 };
 
 const roles = {
-  admin: false,
-  'federal analyst': false,
-  'federal leadership': false,
-  'federal SME': false,
-  'state coordinator': false,
-  'state SME': false
+  'eAPD Admin': false,
+  'eAPD Federal Analyst': false,
+  'eAPD Federal Leadership': false,
+  'eAPD Federal SME': false,
+  'eAPD State Coordinator': false,
+  'eAPD State SME': false
 };
 
 const roleToActivityMappings = {
-  admin: [
+  'eAPD Admin': ['view-users', 'view-roles'],
+  'eAPD Federal Analyst': [
     'view-users',
-    'add-users',
     'view-roles',
-    'create-roles',
-    'edit-roles',
-    'delete-users'
-  ],
-  'federal analyst': [
-    'view-users',
-    'add-users',
-    'view-roles',
-    'create-roles',
-    'edit-roles',
     'view-document',
     'submit-federal-response',
     'submit-clearance',
     'edit-comments'
   ],
-  'federal leadership': ['view-users', 'view-document'],
-  'federal SME': ['edit-comments'],
-  'state coordinator': [
+  'eAPD Federal Leadership': ['view-users', 'view-document'],
+  'eAPD Federal SME': ['edit-comments'],
+  'eAPD State Coordinator': [
     'view-document',
     'submit-document',
     'submit-state-response',
@@ -55,7 +41,7 @@ const roleToActivityMappings = {
     'edit-document',
     'edit-response'
   ],
-  'state SME': ['view-document', 'edit-document', 'edit-response']
+  'eAPD State SME': ['view-document', 'edit-document', 'edit-response']
 };
 
 // Take the knex object and the table name as arguments, instead of just
@@ -129,10 +115,10 @@ exports.seed = async knex => {
   );
   await knex('auth_roles')
     .whereIn('name', [
-      'federal analyst',
-      'federal leadership',
-      'federal SME',
-      'state SME'
+      'eAPD Federal Analyst',
+      'eAPD Federal Leadership',
+      'eAPD Federal SME',
+      'eAPD State SME'
     ])
     .update({ isActive: false });
 };

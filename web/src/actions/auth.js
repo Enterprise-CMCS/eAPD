@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
 import axios from '../util/api';
 
 import { fetchAllApds } from './app';
 import { getRoles, getUsers } from './admin';
+import oktaAuth from '../util/oktaAuth';
 
 export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
 export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
@@ -9,6 +11,9 @@ export const AUTH_CHECK_SUCCESS = 'AUTH_CHECK_SUCCESS';
 
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
+export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
+export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
@@ -21,8 +26,11 @@ export const completeAuthCheck = user => ({
 export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
+export const completeFirstStage = () => ({ type: LOGIN_OTP_STAGE });
+export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
+export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
 
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
@@ -38,33 +46,112 @@ const loadData = activities => dispatch => {
   }
 };
 
+const authenticateUser = (username, password) => {
+  return oktaAuth.signIn({ username, password });
+};
+
+const retrieveMFA = transaction => {
+  const mfaFactor = transaction.factors.find(
+    factor => factor.provider === 'OKTA'
+  );
+
+  if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
+
+  return mfaFactor.verify();
+};
+
+const retrieveExistingTransaction = async () => {
+  const exists = oktaAuth.tx.exists();
+  if (exists) {
+    const transaction = await oktaAuth.tx.resume();
+    return transaction || null;
+  }
+  return null;
+};
+
+const verifyMFA = ({ transaction, otp }) => {
+  return transaction.verify({
+    passCode: otp,
+    autoPush: true
+  });
+};
+
+const setTokens = sessionToken => {
+  const stateToken = uuidv4();
+  return oktaAuth.token
+    .getWithoutPrompt({
+      responseType: ['id_token', 'token'],
+      scopes: ['openid', 'profile'],
+      sessionToken,
+      state: stateToken
+      // prompt: 'none'
+    })
+    .then(async res => {
+      const { state: responseToken, tokens } = res;
+      if (stateToken === responseToken) {
+        await oktaAuth.tokenManager.add('idToken', tokens.idToken);
+        await oktaAuth.tokenManager.add('accessToken', tokens.accessToken);
+      } else {
+        throw new Error('Authentication failed');
+      }
+    });
+};
+
 export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
-
-  return axios
-    .post('/auth/login/nonce', { username })
-    .then(res =>
-      axios.post('/auth/login', {
-        username: res.data.nonce,
-        password
-      })
-    )
-    .then(res => {
-      const { token, user } = res.data;
-      localStorage.setItem('token', token);
-      dispatch(completeLogin(user));
-      dispatch(loadData(user.activities));
+  authenticateUser(username, password)
+    .then(async res => {
+      if (res.status === 'MFA_REQUIRED') {
+        return retrieveMFA(res).then(() => {
+          dispatch(completeFirstStage());
+        });
+      }
+      await setTokens(res.sessionToken);
+      return axios
+        .get('/me')
+        .then(userRes => {
+          dispatch(completeLogin(userRes.data));
+          dispatch(loadData(userRes.data.activities));
+        })
+        .catch(error => {
+          const reason = error ? error.message : 'N/A';
+          dispatch(failLogin(reason));
+        });
     })
     .catch(error => {
-      const reason = error.response ? error.response.data : 'N/A';
+      const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
     });
 };
 
+export const loginOtp = otp => async dispatch => {
+  dispatch(startSecondStage());
+  const transaction = await retrieveExistingTransaction();
+  if (transaction) {
+    verifyMFA({ transaction, otp })
+      .then(async res => {
+        const { sessionToken } = res;
+        await setTokens(sessionToken);
+        return axios.get('/me').then(userRes => {
+          dispatch(completeLogin(userRes.data));
+          dispatch(loadData(userRes.data.activities));
+        });
+      })
+      .catch(error => {
+        const reason = error ? error.message : 'N/A';
+        dispatch(failLoginMFA(reason));
+      });
+  } else {
+    dispatch(failLoginMFA('Authentication failed'));
+  }
+};
+
 export const logout = () => dispatch =>
-  axios.get('/auth/logout')
-    .then(() => localStorage.removeItem('token'))
-    .then(() => dispatch(completeLogout()));
+  oktaAuth.signOut().then(async () => {
+    await oktaAuth.tokenManager.remove('idToken');
+    await oktaAuth.tokenManager.remove('accessToken');
+    dispatch(completeLogout());
+  });
 
 export const checkAuth = () => dispatch => {
   dispatch(requestAuthCheck());

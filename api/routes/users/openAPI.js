@@ -51,68 +51,9 @@ const openAPI = {
           content: jsonResponse(arrayOf(userObjectSchema))
         }
       }
-    },
-    post: {
-      tags: ['Users'],
-      summary: 'Adds a new user',
-      description: 'Add a new user to the system',
-      requestBody: {
-        content: jsonResponse({
-          type: 'object',
-          properties: {
-            email: {
-              type: 'string',
-              format: 'email',
-              description: `The new user's email address`
-            },
-            password: {
-              type: 'string',
-              description: `The new user's password`
-            }
-          },
-          required: ['email', 'password']
-        })
-      },
-      responses: {
-        200: {
-          description: 'The user was successfully added'
-        },
-        400: {
-          description:
-            'Invalid user submitted, such as email address already exists or password is weak',
-          content: errorToken
-        }
-      }
     }
   },
   '/users/{id}': {
-    delete: {
-      tags: ['Users'],
-      summary: 'Removes a user',
-      description: 'Delete a user from the system',
-      parameters: [
-        {
-          name: 'id',
-          in: 'path',
-          description: 'The ID of the user to delete',
-          required: true,
-          schema: {
-            type: 'integer'
-          }
-        }
-      ],
-      responses: {
-        204: {
-          description: 'The user was successfully deleted'
-        },
-        400: {
-          description: 'The provided user ID was invalid'
-        },
-        404: {
-          description: 'The user ID does not match any known users'
-        }
-      }
-    },
     get: {
       tags: ['Users'],
       summary: 'Gets the information for a specific user',
@@ -136,69 +77,6 @@ const openAPI = {
         404: {
           description: 'The user ID does not match any known users',
           content: errorToken
-        }
-      }
-    },
-    put: {
-      tags: ['Users'],
-      summary: 'Updates a user account',
-      description: 'Update a user in the system.',
-      parameters: [
-        {
-          name: 'id',
-          in: 'path',
-          description: 'The ID of the user to update',
-          required: true,
-          schema: {
-            type: 'integer'
-          }
-        }
-      ],
-      requestBody: {
-        content: jsonResponse({
-          type: 'object',
-          properties: {
-            email: {
-              type: 'string',
-              format: 'email',
-              description: `The user's new email address`
-            },
-            name: {
-              type: 'string',
-              description: `The user's new name`
-            },
-            password: {
-              type: 'string',
-              description: `The user's new password`
-            },
-            phone: {
-              type: 'string',
-              description: `The user's new phone number`
-            },
-            position: {
-              type: 'string',
-              description: `The user's new position`
-            },
-            role: {
-              type: 'string',
-              description: `The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely. Ignored if the user is updating their own account.`
-            },
-            state: {
-              type: 'string',
-              description: `The user's new state. Must match the two-letter ID of a state known to the system.`
-            }
-          }
-        })
-      },
-      responses: {
-        204: {
-          description: 'The user was successfully updated'
-        },
-        400: {
-          description: 'The request was invalid'
-        },
-        404: {
-          description: 'The user ID does not match any known users'
         }
       }
     }

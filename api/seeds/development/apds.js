@@ -74,12 +74,15 @@ const apd = {
           }
         },
         costAllocationNarrative: {
-          methodology: '<p>No cost allocation is necessary for this activity.</p>\n',
+          methodology:
+            '<p>No cost allocation is necessary for this activity.</p>\n',
           '2020': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
           },
           '2021': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
           }
         },
         description:
@@ -321,12 +324,15 @@ const apd = {
           }
         },
         costAllocationNarrative: {
-          methodology:  '<p>No cost allocation is necessary for this activity.</p>\n',
+          methodology:
+            '<p>No cost allocation is necessary for this activity.</p>\n',
           '2020': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2020.</p>\n'
           },
           '2021': {
-            otherSources: '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2021.</p>\n'
           }
         },
         description:
@@ -907,8 +913,7 @@ const apd = {
           '<p>Must do MITA 3.0 because MITA is awesome and gives Tycho a standardized view of their Medicaid IT maturity.&nbsp;</p>\n',
         contractorResources: [
           {
-            description:
-              'Research for and RFP development for MITA 3.0 SSA',
+            description: 'Research for and RFP development for MITA 3.0 SSA',
             end: '',
             hourly: {
               data: {
@@ -979,8 +984,7 @@ const apd = {
             keyResults: [
               {
                 baseline: '',
-                keyResult:
-                  'Complete MITA 3.0 HITECH portion by July 2020',
+                keyResult: 'Complete MITA 3.0 HITECH portion by July 2020',
                 target: ''
               }
             ]
@@ -1141,4 +1145,4 @@ const seed = async knex => {
 module.exports = {
   apd,
   seed
-}
+};

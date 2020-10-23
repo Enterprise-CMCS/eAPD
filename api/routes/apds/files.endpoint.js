@@ -23,7 +23,7 @@ describe('APD files endpoints', () => {
       let api;
 
       beforeAll(async () => {
-        api = await login();
+        api = login();
       });
 
       it('with a non-existant apd ID', async () => {
@@ -78,7 +78,7 @@ describe('APD files endpoints', () => {
     describe('when authenticated as a user with permission', () => {
       let api;
       beforeAll(async () => {
-        api = await login();
+        api = login();
       });
 
       it('with a non-existant apd ID', async () => {
@@ -121,7 +121,6 @@ describe('APD files endpoints', () => {
         );
 
         expect(response.status).toEqual(200);
-
         expect(response.data.url).toEqual(
           expect.stringMatching(/apds\/4000\/files\/[a-f0-9]{64}/)
         );

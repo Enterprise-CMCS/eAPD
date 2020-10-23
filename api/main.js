@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const uuid = require('uuid/v1');
 const logger = require('./logger')('main');
-const auth = require('./auth');
+const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./endpointCoverageMiddleware');
 
@@ -85,7 +85,7 @@ server.use(bodyParser.json({ limit: '5mb' }));
 // Registers Passport, related handlers, and
 // login/logout endpoints
 logger.silly('setting up authentication');
-auth.setup(server);
+server.use(jsonWebTokenMiddleware);
 
 logger.silly('setting up routes');
 routes(server);
