@@ -5,7 +5,7 @@ import Dollars from '../../../components/Dollars';
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
 import { stateDateToDisplay } from '../../../util';
 
-const isYear = (value) => !!value.match(/^[0-9]{4}$/);
+const isYear = value => !!value.match(/^[0-9]{4}$/);
 
 const Activity = ({ activity, activityIndex }) => {
   const buildObjective = objective => {
@@ -117,7 +117,7 @@ const Activity = ({ activity, activityIndex }) => {
             {contractTerm()}
           </li>
           <li>
-            <strong>Total Cost: </strong>
+            <strong>Total Contract Cost: </strong>
             <Dollars>{contractor.totalCost}</Dollars>
           </li>
           {Object.entries(contractor.years).map(([year, cost]) => (
@@ -147,7 +147,8 @@ const Activity = ({ activity, activityIndex }) => {
         Activity {activityIndex + 1} ({activity.name})
       </h2>
       <p>
-        <strong>Provide a short overview of the activity:</strong> {activity.summary}
+        <strong>Provide a short overview of the activity:</strong>{' '}
+        {activity.summary}
       </p>
       <p>
         <strong>Start date: </strong>
@@ -287,12 +288,15 @@ const Activity = ({ activity, activityIndex }) => {
             <div>
               <strong>Other Funding Amount: </strong>
               <Dollars>
-                {(activity.costAllocation[year.toString()] || { other: 0 }).other}
+                {
+                  (activity.costAllocation[year.toString()] || { other: 0 })
+                    .other
+                }
               </Dollars>
             </div>
             <hr className="subsection-rule" />
           </Fragment>
-      ))}
+        ))}
 
       <h3 className="viewonly-activity-header">
         <small>
