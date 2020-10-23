@@ -18,7 +18,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
   describe('when authenticated as a user with permission', () => {
     let api;
     beforeAll(async () => {
-      api = await login();
+      api = login();
     });
 
     it('with a non-existant apd ID', async () => {

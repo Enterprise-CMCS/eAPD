@@ -14,8 +14,8 @@ describe('/me endpoint | GET', () => {
   unauthenticatedTest('get', url);
 
   it('when authenticated', async () => {
-    const response = await login()
-      .then(api => api.get(url));
+    const api = login();
+    const response = await api.get(url);
 
     expect(response.status).toEqual(200);
     expect(response.data).toMatchSnapshot();

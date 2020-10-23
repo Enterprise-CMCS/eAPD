@@ -5,10 +5,7 @@ Array [
   Object {
     "activities": Array [
       "view-users",
-      "add-users",
       "view-roles",
-      "create-roles",
-      "edit-roles",
       "submit-federal-response",
       "submit-clearance",
       "edit-comments",
@@ -17,18 +14,17 @@ Array [
       "create-draft",
       "edit-document",
       "edit-response",
-      "delete-users",
       "view-document",
     ],
     "id": 1101,
     "isActive": true,
-    "name": "admin",
+    "name": "eAPD Admin",
   },
   Object {
     "activities": Array [],
     "id": 1105,
     "isActive": true,
-    "name": "state coordinator",
+    "name": "eAPD State Coordinator",
   },
 ]
 `;

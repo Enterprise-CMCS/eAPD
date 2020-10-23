@@ -1,10 +1,7 @@
 const logger = require('../../logger')('me route index');
 const get = require('./get');
-const put = require('./put');
 
-module.exports = (app, { getEndpoint = get, putEndpoint = put } = {}) => {
+module.exports = (app, { getEndpoint = get } = {}) => {
   logger.silly('setting up GET endpoint');
   getEndpoint(app);
-  logger.silly('setting up PUT endpoint');
-  putEndpoint(app);
 };

@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   db:
     image: postgres:10
@@ -23,6 +23,10 @@ services:
       - ENDPOINT_COVERAGE_CAPTURE=true
       - FILE_STORE=local
       - FILE_PATH=test-data/files
+      - OKTA_DOMAIN=${OKTA_DOMAIN}
+      - OKTA_SERVER_ID=${OKTA_SERVER_ID}
+      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
+      - OKTA_API_KEY=${OKTA_API_KEY}
     command: npm start
     expose:
       - 8000
