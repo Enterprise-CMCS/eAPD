@@ -5,12 +5,6 @@ exports[`the Activities component renders correctly 1`] = `
   id="activities"
   resource="activities"
 >
-  <h3
-    className="ds-h3 ds-u-padding-bottom--1"
-  >
-    3
-     Program Activities
-  </h3>
   <Connect(EntryDetails)
     activityIndex={0}
     key="key1"
