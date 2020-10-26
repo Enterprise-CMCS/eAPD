@@ -1310,6 +1310,17 @@ Object {
     "/states/{stateId}/affiliations": Object {
       "get": Object {
         "description": "Get a list of all user affiliations for a US State",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
         "responses": Object {
           "200": Object {
             "content": Object {
@@ -1317,47 +1328,45 @@ Object {
                 "schema": Object {
                   "items": Object {
                     "properties": Object {
-                      "propertyName": Object {
-                        "created_at": Object {
-                          "description": "Timestamp of record creation",
-                          "format": "date-time",
-                          "type": "string",
-                        },
-                        "id": Object {
-                          "description": "ID of record",
-                          "type": "integer",
-                        },
-                        "role_id": Object {
-                          "description": "ID of the role applied to this user for this US State",
-                          "type": "integer",
-                        },
-                        "state_id": Object {
-                          "description": "2-letter US State or Territory abbreviation, lowercase",
-                          "type": "string",
-                        },
-                        "status": Object {
-                          "description": "The status of the user role for this US State",
-                          "enum": Array [
-                            "requested",
-                            "approved",
-                            "denied",
-                            "revoked",
-                          ],
-                          "type": "string",
-                        },
-                        "updated_at": Object {
-                          "description": "Timestamp of last update",
-                          "format": "date-time",
-                          "type": "string",
-                        },
-                        "updated_by": Object {
-                          "description": "ID of the user who last updated this record",
-                          "type": "string",
-                        },
-                        "user_id": Object {
-                          "description": "ID of user",
-                          "type": "string",
-                        },
+                      "created_at": Object {
+                        "description": "Timestamp of record creation",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "id": Object {
+                        "description": "ID of record",
+                        "type": "integer",
+                      },
+                      "role_id": Object {
+                        "description": "ID of the role applied to this user for this US State",
+                        "type": "integer",
+                      },
+                      "state_id": Object {
+                        "description": "2-letter US State or Territory abbreviation, lowercase",
+                        "type": "string",
+                      },
+                      "status": Object {
+                        "description": "The status of the user role for this US State",
+                        "enum": Array [
+                          "requested",
+                          "approved",
+                          "denied",
+                          "revoked",
+                        ],
+                        "type": "string",
+                      },
+                      "updated_at": Object {
+                        "description": "Timestamp of last update",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "updated_by": Object {
+                        "description": "ID of the user who last updated this record",
+                        "type": "string",
+                      },
+                      "user_id": Object {
+                        "description": "ID of user",
+                        "type": "string",
                       },
                     },
                     "type": "object",
@@ -1429,53 +1438,71 @@ Object {
     "/states/{stateId}/affiliations/{id}": Object {
       "get": Object {
         "description": "Get a single user affiliation with a US State",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+          Object {
+            "description": "ID of record",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "integer",
+            },
+          },
+        ],
         "responses": Object {
           "200": Object {
             "content": Object {
               "application/json": Object {
                 "schema": Object {
                   "properties": Object {
-                    "propertyName": Object {
-                      "created_at": Object {
-                        "description": "Timestamp of record creation",
-                        "format": "date-time",
-                        "type": "string",
-                      },
-                      "id": Object {
-                        "description": "ID of record",
-                        "type": "integer",
-                      },
-                      "role_id": Object {
-                        "description": "ID of the role applied to this user for this US State",
-                        "type": "integer",
-                      },
-                      "state_id": Object {
-                        "description": "2-letter US State or Territory abbreviation, lowercase",
-                        "type": "string",
-                      },
-                      "status": Object {
-                        "description": "The status of the user role for this US State",
-                        "enum": Array [
-                          "requested",
-                          "approved",
-                          "denied",
-                          "revoked",
-                        ],
-                        "type": "string",
-                      },
-                      "updated_at": Object {
-                        "description": "Timestamp of last update",
-                        "format": "date-time",
-                        "type": "string",
-                      },
-                      "updated_by": Object {
-                        "description": "ID of the user who last updated this record",
-                        "type": "string",
-                      },
-                      "user_id": Object {
-                        "description": "ID of user",
-                        "type": "string",
-                      },
+                    "created_at": Object {
+                      "description": "Timestamp of record creation",
+                      "format": "date-time",
+                      "type": "string",
+                    },
+                    "id": Object {
+                      "description": "ID of record",
+                      "type": "integer",
+                    },
+                    "role_id": Object {
+                      "description": "ID of the role applied to this user for this US State",
+                      "type": "integer",
+                    },
+                    "state_id": Object {
+                      "description": "2-letter US State or Territory abbreviation, lowercase",
+                      "type": "string",
+                    },
+                    "status": Object {
+                      "description": "The status of the user role for this US State",
+                      "enum": Array [
+                        "requested",
+                        "approved",
+                        "denied",
+                        "revoked",
+                      ],
+                      "type": "string",
+                    },
+                    "updated_at": Object {
+                      "description": "Timestamp of last update",
+                      "format": "date-time",
+                      "type": "string",
+                    },
+                    "updated_by": Object {
+                      "description": "ID of the user who last updated this record",
+                      "type": "string",
+                    },
+                    "user_id": Object {
+                      "description": "ID of user",
+                      "type": "string",
                     },
                   },
                   "type": "object",
