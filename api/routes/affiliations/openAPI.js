@@ -1,6 +1,8 @@
+/* eslint-disable camelcase */
+
 const {
-  requiresAuth,
-  schema: { arrayOf, jsonResponse, errorToken }
+  schema: { arrayOf, jsonResponse },
+  responses
 } = require('../openAPI/helpers');
 
 const id = {
@@ -92,8 +94,10 @@ const getAffiliations = {
       200: {
         description: 'List of all user affiliations for a US State',
         content: jsonResponse(arrayOf(affiliationSchema))
-      }
-    }
+      },
+      ...responses.unauthed
+    },
+    security: [{ bearerAuth: [] }]
   }
 };
 
@@ -109,8 +113,10 @@ const postAffiliations = {
       },
       404: {
         description: 'Record exists, or US State ID is invalid'
-      }
-    }
+      },
+      401: responses.unauthed[401]
+    },
+    security: [{ bearerAuth: [] }]
   }
 };
 
@@ -125,8 +131,10 @@ const getAffiliation = {
       },
       404: {
         description: 'The stateId and affiliation ID do not correspond to a known record'
-      }
-    }
+      },
+      ...responses.unauthed
+    },
+    security: [{ bearerAuth: [] }]
   }
 };
 
@@ -152,9 +160,11 @@ const patchAffiliation = {
         description: 'Record was updated',
       },
       404: {
-        description: 'US State ID and affiliation ID are invalid, role_id is invalid, or status is invalid',
-      }
-    }
+        description: 'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid',
+      },
+      ...responses.unauthed
+    },
+    security: [{ bearerAuth: [] }]
   }
 };
 
@@ -169,6 +179,4 @@ const affiliationRoutes = {
   },
 };
 
-module.exports = {
-  ...requiresAuth(affiliationRoutes)
-};
+module.exports = affiliationRoutes;

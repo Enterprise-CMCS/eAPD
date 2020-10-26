@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse, errorToken }
+  schema: { arrayOf, jsonResponse }
 } = require('../openAPI/helpers');
 
 const id = {
@@ -13,7 +13,7 @@ const name = {
   description: 'Full name of US State or Territory'
 };
 
-const medicaid_office = {
+const medicaid_office = { // eslint-disable-line camelcase
   type: 'object',
   description: 'Contact information for this US State/Territory Medicaid office'
 };

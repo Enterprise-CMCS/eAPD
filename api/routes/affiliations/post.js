@@ -6,7 +6,7 @@ module.exports = (app) => {
     const userId = request.user.id;
     const { stateId } = request.params;
 
-    await knex('affiliations')
+    await knex('auth_affiliations')
       .returning(['id'])
       .insert({
         user_id: userId,

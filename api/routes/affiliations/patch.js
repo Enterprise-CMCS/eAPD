@@ -24,13 +24,13 @@ const statusToAction = (status) => {
 }
 
 module.exports = (app) => {
-  app.patch('/states/:stateId/affiliations/:id', can('edit-roles'), async (request, response) => {
+  app.patch('/states/:stateId/affiliations/:id', can('edit-affiliations'), async (request, response) => {
     const userId = request.user.id;
     const { stateId, id } = request.params;
     const { status, roleId } = request.body;
     const audit = auditor(statusToAction(status), request);
 
-    await knex('affiliations')
+    await knex('auth_affiliations')
       .where({ state_id: stateId, id })
       .returning('*')
       .update({

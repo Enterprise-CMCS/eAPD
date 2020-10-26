@@ -1,5 +1,5 @@
 exports.up = async knex => {
-  await knex.schema.createTable('affiliations', table => {
+  await knex.schema.createTable('auth_affiliations', table => {
     table.comment('stores a user role for a particular US state');
     table.increments('id');
     table
@@ -36,5 +36,5 @@ exports.up = async knex => {
 };
 
 exports.down = async knex => {
-  await knex.schema.dropTable('affiliations');
+  await knex.schema.dropTable('auth_affiliations');
 };
