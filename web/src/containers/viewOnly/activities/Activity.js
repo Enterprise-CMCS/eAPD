@@ -8,28 +8,23 @@ import { stateDateToDisplay } from '../../../util';
 const isYear = value => !!value.match(/^[0-9]{4}$/);
 
 const Activity = ({ activity, activityIndex }) => {
-  const buildObjective = objective => {
+  const buildOutcome = outcome => {
     return (
       <Fragment>
-        <p>
-          <strong>Objective: </strong> {objective.objective}
+        <p className="ds-u-margin-top--2">
+          <strong>Outcome: </strong> {outcome.outcome}
         </p>
-        <div>
-          <strong>Key Results: </strong>
-          <ul>
-            {objective.keyResults.map(
-              ({ baseline, key, keyResult, target }) => (
-                <li key={key} className="ds-u-margin-top--2">
-                  <strong>{keyResult}</strong>
-                  <br />
-                  <strong>Target:</strong> {target}
-                  <br />
-                  <strong>Baseline:</strong> {baseline}
-                </li>
-              )
-            )}
+        <p className="ds-u-margin-top--2">
+          <ul className="ds-c-list--bare">
+            <strong>Metrics: </strong>
+            {outcome.metrics.map(({ key, metric }, index) => (
+              <li key={key} className="ds-u-margin-bottom--2">
+                {index + 1}. {metric}
+              </li>
+            ))}
           </ul>
-        </div>
+        </p>
+        <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       </Fragment>
     );
   };
@@ -217,9 +212,10 @@ const Activity = ({ activity, activityIndex }) => {
           Activity {activityIndex + 1} ({activity.name})
         </small>
         <br />
-        Objectives and Key Results
+        Outcomes and Metrics
       </h3>
-      {activity.objectives.map(buildObjective)}
+      <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
+      {activity.outcomes.map(buildOutcome)}
 
       <h3>Milestones</h3>
       {activity.schedule.map((milestone, index) =>

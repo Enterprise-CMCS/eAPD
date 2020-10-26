@@ -110,8 +110,8 @@ const buildActivitySection = i => [
     url: `/apd/activity/${i}/overview`
   },
   {
-    label: 'Objectives and milestones',
-    url: `/apd/activity/${i}/okrs`
+    label: 'Outcomes and milestones',
+    url: `/apd/activity/${i}/oms`
   },
   {
     label: 'State staff and expenses',
@@ -162,7 +162,7 @@ const getItems = ({ activities = [], items = staticItems, url = '' } = {}) => {
   // eslint-disable-next-line no-param-reassign
   items = copy(items); // copy items state so we don't modify original state
   if (activities.length) {
-    const item = items.find(i => i.label === 'Program Activities');
+    const item = items.find(i => i.label === 'Activities');
     item.items = [
       item.items[0],
       ...activities.map((activity, i) => ({

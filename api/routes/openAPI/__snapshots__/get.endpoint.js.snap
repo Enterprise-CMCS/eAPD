@@ -159,23 +159,15 @@ Object {
                   "description": "Activity name, unique within an APD",
                   "type": "string",
                 },
-                "objectives": Object {
+                "outcomes": Object {
                   "items": Object {
-                    "description": "Activity objective",
+                    "description": "Activity outcome",
                     "properties": Object {
-                      "keyResults": Object {
+                      "metrics": Object {
                         "items": Object {
                           "properties": Object {
-                            "baseline": Object {
-                              "description": "Key result baseline",
-                              "type": "string",
-                            },
-                            "keyResult": Object {
-                              "description": "Key result",
-                              "type": "string",
-                            },
-                            "target": Object {
-                              "description": "Key result target",
+                            "metric": Object {
+                              "description": "metric",
                               "type": "string",
                             },
                           },
@@ -183,8 +175,8 @@ Object {
                         },
                         "type": "array",
                       },
-                      "objective": Object {
-                        "description": "Objective description",
+                      "outcome": Object {
+                        "description": "Outcome description",
                         "type": "string",
                       },
                     },
