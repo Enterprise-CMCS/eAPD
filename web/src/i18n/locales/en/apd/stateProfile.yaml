@@ -38,7 +38,7 @@ keyPersonnel:
     helpText: >-
       Example: Program Managers and Directors who provide oversight to all
       projects would be included here. Personnel who support individual
-      activities should be included in the State Cost Categories section for
+      activities should be included in the State Staff and Expenses section for
       each associated activity or activities.
   contact: 'Contact #{{number}}'
   labels:
