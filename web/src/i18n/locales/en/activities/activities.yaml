@@ -30,7 +30,7 @@ header: Activities
 namePrefix: Activity
 namePrefixAndNum: Activity {{number}}
 costs:
-  title: State Cost Categories
+  title: State Staff and Expenses
   subtitles:
     personnel: State staff
     nonPersonnel: Other state expenses
