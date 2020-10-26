@@ -3,8 +3,8 @@ import {
   newContractor,
   newExpense,
   newMilestone,
-  newObjective,
-  newObjectiveKeyResult,
+  newOutcome,
+  newOutcomeMetric,
   newStatePerson,
   setKeyGenerator
 } from './activities';
@@ -50,22 +50,18 @@ describe('activities reducer helpers', () => {
     });
   });
 
-  it('can create a new activity objective', () => {
-    expect(newObjective()).toEqual({
+  it('can create a new activity outcome', () => {
+    expect(newOutcome()).toEqual({
       key: '--- key ---',
-      objective: '',
-      keyResults: [
-        { key: '--- key ---', baseline: '', keyResult: '', target: '' }
-      ]
+      outcome: '',
+      metrics: [{ key: '--- key ---', metric: '' }]
     });
   });
 
-  it('can create a new activity key result', () => {
-    expect(newObjectiveKeyResult()).toEqual({
+  it('can create a new activity metric', () => {
+    expect(newOutcomeMetric()).toEqual({
       key: '--- key ---',
-      baseline: '',
-      keyResult: '',
-      target: ''
+      metric: ''
     });
   });
 
@@ -94,13 +90,11 @@ describe('activities reducer helpers', () => {
       name: '',
       plannedEndDate: '',
       plannedStartDate: '',
-      objectives: [
+      outcomes: [
         {
           key: '--- key ---',
-          objective: '',
-          keyResults: [
-            { key: '--- key ---', baseline: '', keyResult: '', target: '' }
-          ]
+          outcome: '',
+          metrics: [{ key: '--- key ---', metric: '' }]
         }
       ],
       schedule: [
