@@ -5,7 +5,7 @@ const {
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
 
-describe('Affiliations endpoint | PATCH /state/:stateId/affiliations/:id', () => {
+describe('Affiliations endpoint | PATCH', () => {
   const api = login();
   const db = getDB();
   beforeAll(() => db.seed.run());
@@ -17,28 +17,28 @@ describe('Affiliations endpoint | PATCH /state/:stateId/affiliations/:id', () =>
   ['approved', 'denied', 'revoked'].forEach(status => {
     it(`returns 200, when an affiliation is ${status}`, async () => {
       const response = await api.patch('/states/fl/affiliations/4000', {
-          status,
-          roleId: 1106
-        });
+        status,
+        roleId: 1106
+      });
       expect(response.status).toEqual(200);
     });
   })
 
   it('returns 404 when US state is invalid', async () => {
-    const response = await api.post('/states/zz/affiliations/4000');
+    const response = await api.patch('/states/zz/affiliations/4000');
     expect(response.status).toEqual(404);
   });
 
   it('returns 404 when affiliation id is invalid', async () => {
-    const response = await api.post('/states/zz/affiliations/NaN');
+    const response = await api.patch('/states/zz/affiliations/NaN');
     expect(response.status).toEqual(404);
   });
 
   it('returns 404 when status is invalid', async () => {
-    const response = await api.post('/states/fl/affiliations/4000', {
-        status: 'blarg',
-        roleId: 1106
-      });
+    const response = await api.patch('/states/fl/affiliations/4000', {
+      status: 'blarg',
+      roleId: 1106
+    });
     expect(response.status).toEqual(404);
   });
 });

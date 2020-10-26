@@ -1,6 +1,8 @@
 const fs = require('fs');
 const logger = require('./logger')('endpoint coverage middleware');
 
+const { ENDPOINT_COVERAGE_CAPTURE } = process.env;
+
 const getOpenApiUrl = url => {
   // Express paths can have regexs in them to make matches more
   // precise - they appear in parentheses immediately following
@@ -36,7 +38,7 @@ if (fs.existsSync('./endpoint-data.json')) {
 }
 
 const registerCoverageMiddleware = server => {
-  if (process.env.ENDPOINT_COVERAGE_CAPTURE.toLowerCase() !== 'true') return;
+  if (ENDPOINT_COVERAGE_CAPTURE.toLowerCase() !== 'true') return;
 
   server.use((req, res, next) => {
     if (!endpoints.length) {

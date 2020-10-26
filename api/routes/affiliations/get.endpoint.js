@@ -11,7 +11,7 @@ describe('Affiliations endpoint | GET', () => {
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
 
-  describe('GET /state/:stateId/affiliations', () => {
+  describe('GET /states/:stateId/affiliations', () => {
     unauthenticatedTest('get', '/states/fl/affiliations');
     unauthorizedTest('get', '/states/fl/affiliations');
 
@@ -21,7 +21,7 @@ describe('Affiliations endpoint | GET', () => {
     });
   });
 
-  describe('GET /state/:stateId/affiliations/:id', () => {
+  describe('GET /states/:stateId/affiliations/:id', () => {
     unauthenticatedTest('get', '/states/fl/affiliations/4000');
     unauthorizedTest('get', '/states/fl/affiliations/4000');
 

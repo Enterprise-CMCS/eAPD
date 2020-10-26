@@ -9,7 +9,9 @@ const activities = {
   'create-draft': false,
   'edit-document': false,
   'edit-response': false,
-  'view-document': true
+  'view-document': true,
+  'view-affiliations': true,
+  'edit-affiliations': true,
 };
 
 const roles = {

@@ -1412,9 +1412,6 @@ Object {
           "401": Object {
             "description": "Not logged in",
           },
-          "403": Object {
-            "description": "Does not have permission to this activity",
-          },
           "404": Object {
             "description": "Record exists, or US State ID is invalid",
           },
@@ -1566,7 +1563,7 @@ Object {
             "description": "Does not have permission to this activity",
           },
           "404": Object {
-            "description": "US State ID and affiliation ID are invalid, role_id is invalid, or status is invalid",
+            "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid",
           },
         },
         "security": Array [

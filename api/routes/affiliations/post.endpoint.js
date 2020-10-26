@@ -4,7 +4,7 @@ const {
   unauthenticatedTest
 } = require('../../endpoint-tests/utils');
 
-describe('Affiliations endpoint | POST /state/:stateId/affiliations', () => {
+describe('Affiliations endpoint | POST', () => {
   const api = login();
   const db = getDB();
   beforeAll(() => db.seed.run());
