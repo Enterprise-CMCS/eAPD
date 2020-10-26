@@ -11,7 +11,7 @@ describe('staticItems', () => {
       'Program Summary',
       'Key State Personnel',
       'Results of Previous Activities',
-      'Program Activities',
+      'Activities',
       'Activity Schedule Summary',
       'Proposed Budget',
       'Assurances and Compliance',
