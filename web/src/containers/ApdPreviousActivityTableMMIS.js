@@ -73,12 +73,9 @@ const ApdPreviousActivityTableMMIS = ({
 
   return (
     <Fragment>
-      <h4 className="ds-h4" aria-hidden="true">
-        MMIS
-      </h4>
       {[90, 75, 50].map(level => (
         <table key={level} className="budget-table">
-          <caption className="ds-h4 ds-u-visibility--screen-reader">
+          <caption className="ds-h4">
             MMIS {TABLE_HEADERS.federal(level)}
           </caption>
           <thead>
