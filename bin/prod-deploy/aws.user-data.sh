@@ -9,7 +9,7 @@ chown -R :eapd /app
 chmod g+w /app
 
 # Oddly, EC2 images don't have git installed. Shruggy person.
-yum -y install git
+yum -y install git amazon-cloudwatch-agent
 
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.

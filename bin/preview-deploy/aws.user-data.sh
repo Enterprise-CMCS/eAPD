@@ -15,7 +15,7 @@ mkdir /app/tls
 
 # Install nginx and postgres
 amazon-linux-extras install nginx1.12
-yum -y install git postgresql-server
+yum -y install git postgresql-server amazon-cloudwatch-agent
 
 # Setup postgres
 service postgresql initdb
