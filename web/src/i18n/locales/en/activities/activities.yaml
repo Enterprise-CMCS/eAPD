@@ -1,10 +1,9 @@
-title: Program Activities
+title: Activities
 helpText: >-
-  Explain the goals, timelines, and costs associated with each activity. Activities
-  are narrowly scoped bodies of work that comprise the APD as described within
-  the Program Overview section.
+  Activities are narrowly scoped bodies of work that comprise the APD. This section will help you 
+  explain the goals, timelines, and cost of each activity.
 list:
-  title: Activity List
+  title: Add Activity
   instruction:
     short: >-
       List as many activities as necessary to cover all scope related to this APD.
@@ -27,11 +26,11 @@ delete:
     body: Remove this activity?
     _yes: 'Yes'
     _no: 'No'
-header: Program Activities
+header: Activities
 namePrefix: Activity
 namePrefixAndNum: Activity {{number}}
 costs:
-  title: State Cost Categories
+  title: State Staff and Expenses
   subtitles:
     personnel: State staff
     nonPersonnel: Other state expenses
