@@ -100,7 +100,7 @@ describe('nav reducer', () => {
         type: APD_ACTIVITIES_CHANGE,
         activities: [
           { name: 'Activity overview' },
-          { name: 'Objectives and key results' },
+          { name: 'Outcomes and metrics' },
           { name: 'FFP and budget' }
         ]
       };
