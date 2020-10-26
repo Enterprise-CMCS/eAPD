@@ -841,7 +841,7 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new activity OKR', () => {
+    it('should add a new activity outcome', () => {
       const state = {
         data: {
           activities: [{ outcomes: [] }]
