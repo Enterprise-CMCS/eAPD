@@ -71,16 +71,14 @@ const idParameter = {
 const affiliationSchema = {
   type: 'object',
   properties: {
-    propertyName: {
-      id,
-      user_id,
-      state_id,
-      role_id,
-      status,
-      created_at,
-      updated_at,
-      updated_by
-    },
+    id,
+    user_id,
+    state_id,
+    role_id,
+    status,
+    created_at,
+    updated_at,
+    updated_by
   }
 };
 
@@ -90,6 +88,7 @@ const getAffiliations = {
   get: {
     tags,
     description: 'Get a list of all user affiliations for a US State',
+    parameters: [stateIdParameter],
     responses: {
       200: {
         description: 'List of all user affiliations for a US State',
@@ -124,6 +123,7 @@ const getAffiliation = {
   get: {
     tags,
     description: 'Get a single user affiliation with a US State',
+    parameters: [stateIdParameter, idParameter],
     responses: {
       200: {
         description: 'A single user affiliation with a US State',
