@@ -1,4 +1,5 @@
 const fs = require('fs');
+const logger = require('./logger')('endpoint coverage middleware');
 
 const getOpenApiUrl = url => {
   // Express paths can have regexs in them to make matches more
@@ -70,7 +71,7 @@ const registerCoverageMiddleware = server => {
           ].statuses[res.statusCode] = { tested: true };
         }
       } catch (e) {
-        console.log(e)
+        logger.error(e, path);
       }
 
       fs.writeFileSync('./endpoint-data.json', JSON.stringify(endpoints));
