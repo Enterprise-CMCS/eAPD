@@ -103,7 +103,7 @@ exports[`<OtherFunding /> renders correctly 1`] = `
         <td
           className="title"
         >
-          Medicaid Share
+          Total Computable Medicaid Cost
         </td>
         <td
           className="budget-table--number"
@@ -212,7 +212,7 @@ exports[`<OtherFunding /> renders correctly 1`] = `
         <td
           className="title"
         >
-          Medicaid Share
+          Total Computable Medicaid Cost
         </td>
         <td
           className="budget-table--number"
