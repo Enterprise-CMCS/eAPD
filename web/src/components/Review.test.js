@@ -54,7 +54,10 @@ describe('Review wrapper component', () => {
       .getDOMNode()
       .addEventListener('click', handler);
 
-    component.find('Review').find('Button').simulate('click');
+    component
+      .find('Review')
+      .find('Button')
+      .simulate('click');
 
     expect(handler).toHaveBeenCalled();
   });
@@ -73,7 +76,7 @@ describe('Review wrapper component', () => {
     component
       .find('Review')
       .dive()
-      .find('Button[children="Remove"]')
+      .find('Button[children="Delete"]')
       .simulate('click');
 
     expect(handler).toHaveBeenCalled();
