@@ -9,8 +9,7 @@ const continueLabelId = 'continue-button-label';
 const previousLabelId = 'previous-button-label';
 
 const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
-
-  const buildLabel = (link) => {
+  const buildLabel = link => {
     if (link.url.startsWith('/apd/activity/')) {
       const activityIndex = link.url.split('/')[3];
       return `Activity ${+activityIndex + 1}: ${link.label}`;
@@ -18,9 +17,12 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
     return link.label;
   };
 
+  const continueText = !continueLink ? null : buildLabel(continueLink);
+  const previousText = !previousLink ? null : buildLabel(previousLink);
+
   const continueComponent = !continueLink ? null : (
     <Link
-      aria-labelledby={continueLabelId}
+      aria-label={`Continue to ${continueText}`}
       className="ds-c-button ds-c-button--primary ds-u-float--right"
       to={continueLink.url}
     >
@@ -29,15 +31,13 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
     </Link>
   );
 
-  const continueLabel = !continueLink ? null : (
-    <p className="ds-u-text-align--right" id={continueLabelId}>
-      {buildLabel(continueLink)}
-    </p>
+  const continueLabel = !continueText ? null : (
+    <p className="ds-u-text-align--right">{continueText}</p>
   );
 
   const previousComponent = !previousLink ? null : (
     <Link
-      aria-labelledby={previousLabelId}
+      aria-label={`Previous to ${previousText}`}
       className="ds-c-button"
       to={previousLink.url}
     >
@@ -46,9 +46,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
     </Link>
   );
 
-  const previousLabel = !previousLink ? null : (
-    <p id={previousLabelId}>{buildLabel(previousLink)}</p>
-  );
+  const previousLabel = !previousText ? null : <p>{previousText}</p>;
 
   return (
     <React.Fragment>
