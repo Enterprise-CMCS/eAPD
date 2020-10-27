@@ -10,12 +10,15 @@ import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
   return (
     <FormAndReviewList
-      addButtonText="Add another person"
+      addButtonText={
+        poc.length === 0 ? 'Add Primary Contact' : 'Add Key Personnel'
+      }
       list={poc}
       collapsed={ApdKeyPersonReview}
       expanded={ApdKeyPersonForm}
       onAddClick={() => add()}
       onDeleteClick={index => remove(index)}
+      noDataMessage={false}
       years={years}
     />
   );

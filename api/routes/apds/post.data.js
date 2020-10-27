@@ -75,17 +75,7 @@ const getNewApd = () => {
       epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
       epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
     },
-    keyPersonnel: [
-      {
-        email: '',
-        hasCosts: false,
-        costs: forAllYears(0),
-        isPrimary: true,
-        name: '',
-        fte: forAllYears(0),
-        position: ''
-      }
-    ],
+    keyPersonnel: [],
     name: 'HITECH IAPD',
     narrativeHIE: '',
     narrativeHIT: '',
