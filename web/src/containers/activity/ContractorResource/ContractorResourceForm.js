@@ -114,7 +114,7 @@ const ContractorResourceForm = ({
       />
       <FormLabel>Contract Term</FormLabel>
       <span className="ds-c-field__hint">
-        Contract term my extend beyond the FFY(s) included in this APD.
+        Contract term may extend beyond the FFY(s) included in this APD.
       </span>
       <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
         <DateField
