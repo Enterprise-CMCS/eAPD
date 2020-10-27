@@ -16,7 +16,7 @@ describe('Section component', () => {
 
   test('renders correctly with resource containing title but no helptext', () => {
     const component = shallow(
-      <Section resource="activities.goals">goals test child</Section>
+      <Section resource="activities.outcomes">outcomes test child</Section>
     );
     expect(component).toMatchSnapshot();
   });
@@ -25,14 +25,14 @@ describe('Section component', () => {
 describe('Subsection component', () => {
   test('renders correctly', () => {
     const component = shallow(
-      <Subsection resource="activities.goals">test child</Subsection>
+      <Subsection resource="activities.outcomes">test child</Subsection>
     );
     expect(component).toMatchSnapshot();
   });
 
   test('uses the passed-in heading class', () => {
     const component = shallow(
-      <Subsection headerClassName="bobs-burgers" resource="activities.goals">
+      <Subsection headerClassName="bobs-burgers" resource="activities.outcomes">
         test child
       </Subsection>
     );
