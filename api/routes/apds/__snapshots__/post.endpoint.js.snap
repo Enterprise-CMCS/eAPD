@@ -35,16 +35,14 @@ Object {
       "expenses": Array [],
       "fundingSource": "HIT",
       "name": "Program Administration",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "",
-              "target": "",
+              "metric": "",
             },
           ],
-          "objective": "",
+          "outcome": "",
         },
       ],
       "plannedEndDate": "",

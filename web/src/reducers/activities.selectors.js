@@ -246,18 +246,10 @@ export const selectContractorsByActivityIndex = (state, { activityIndex }) => {
   return null;
 };
 
-export const selectOKRsByActivityIndex = (state, { activityIndex }) => {
+export const selectOMsByActivityIndex = (state, { activityIndex }) => {
   const activity = selectActivityByIndex(state, { activityIndex });
   if (activity) {
-    return activity.objectives;
-  }
-  return null;
-};
-
-export const selectGoalsByActivityIndex = (state, { activityIndex }) => {
-  const activity = selectActivityByIndex(state, { activityIndex });
-  if (activity) {
-    return activity.goals;
+    return activity.outcomes;
   }
   return null;
 };

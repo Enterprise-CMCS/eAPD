@@ -3,11 +3,6 @@ const document4001 = require('./4001.json');
 const document4002 = require('./4002.json');
 
 exports.seed = async knex => {
-  // 40xx IDs refer to apds
-  // 41xx IDs refer to activities
-  // 42xx IDs refer to goals
-  // 43xx IDs refer to contractors
-
   await knex('apds').insert([
     {
       id: 4000,
