@@ -25,7 +25,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
   <span
     className="ds-c-field__hint"
   >
-    Contract term my extend beyond the FFY(s) included in this APD.
+    Contract term may extend beyond the FFY(s) included in this APD.
   </span>
   <div
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
@@ -195,7 +195,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
   <span
     className="ds-c-field__hint"
   >
-    Contract term my extend beyond the FFY(s) included in this APD.
+    Contract term may extend beyond the FFY(s) included in this APD.
   </span>
   <div
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
