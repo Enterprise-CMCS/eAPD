@@ -51,7 +51,9 @@ footer {
   transition: top 1s ease-out;
 
   &:focus {
-    top: 0;
+    top: 4rem;
+    background-color: white;
+    z-index: 100;
     transition: top 200ms ease-out;
   }
 }
