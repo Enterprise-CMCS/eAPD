@@ -280,7 +280,7 @@ export const getPatchesForAddingItem = (state, path) => {
           path,
           value: getKeyPersonnel(
             state.data.years,
-            state.data.keyPersonnel.length === 0
+            (!state.data.keyPersonnel || state.data.keyPersonnel.length === 0)
           )
         }
       ];
