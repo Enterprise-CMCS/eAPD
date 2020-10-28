@@ -55,7 +55,7 @@ exports[`executive summary component renders correctly 1`] = `
           </li>
           <li>
             <strong>
-              Medicaid share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -80,10 +80,10 @@ exports[`executive summary component renders correctly 1`] = `
             <Dollars>
               5232
             </Dollars>
-             |
              
+            | 
             <strong>
-              Medicaid Share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -108,10 +108,10 @@ exports[`executive summary component renders correctly 1`] = `
             <Dollars>
               848622
             </Dollars>
-             |
              
+            | 
             <strong>
-              Medicaid Share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -164,7 +164,7 @@ exports[`executive summary component renders correctly 1`] = `
           </li>
           <li>
             <strong>
-              Medicaid share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -189,10 +189,10 @@ exports[`executive summary component renders correctly 1`] = `
             <Dollars>
               26926
             </Dollars>
-             |
              
+            | 
             <strong>
-              Medicaid Share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -217,10 +217,10 @@ exports[`executive summary component renders correctly 1`] = `
             <Dollars>
               54634738
             </Dollars>
-             |
              
+            | 
             <strong>
-              Medicaid Share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -261,7 +261,7 @@ exports[`executive summary component renders correctly 1`] = `
           </li>
           <li>
             <strong>
-              Medicaid share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -298,8 +298,7 @@ exports[`executive summary component renders correctly 1`] = `
              |
              
             <Dollars />
-             Medicaid share |
-             
+             Total Computable Medicaid Cost | 
             <Dollars>
               2883
             </Dollars>
@@ -321,8 +320,7 @@ exports[`executive summary component renders correctly 1`] = `
              |
              
             <Dollars />
-             Medicaid share |
-             
+             Total Computable Medicaid Cost | 
             <Dollars>
               826
             </Dollars>

@@ -13,6 +13,7 @@ import 'tinymce/plugins/autoresize';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/spellchecker';
+import 'tinymce/plugins/help';
 
 import { uploadFile } from '../actions/editApd';
 import { generateKey } from '../util';
@@ -95,7 +96,8 @@ class RichText extends Component {
       'autoresize',
       'lists',
       'paste',
-      'spellchecker'
+      'spellchecker',
+      'help'
     ];
 
     // https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/
@@ -107,7 +109,8 @@ class RichText extends Component {
       "outdent indent",
       "numlist bullist",
       "formatselect",
-      "eapdImageUpload"
+      "eapdImageUpload",
+      "help"
     ].join(" | ");
 
     return (
