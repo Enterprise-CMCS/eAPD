@@ -1290,11 +1290,11 @@ Object {
             },
             "description": "US State or Territory",
           },
+          "400": Object {
+            "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
+          },
           "401": Object {
             "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
           },
         },
         "security": Array [
@@ -1418,11 +1418,11 @@ Object {
             },
             "description": "Record was created",
           },
+          "400": Object {
+            "description": "Record exists, or US State ID is invalid",
+          },
           "401": Object {
             "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "Record exists, or US State ID is invalid",
           },
         },
         "security": Array [
@@ -1511,14 +1511,14 @@ Object {
             },
             "description": "A single user affiliation with a US State",
           },
+          "400": Object {
+            "description": "The stateId and affiliation ID do not correspond to a known record",
+          },
           "401": Object {
             "description": "Not logged in",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
-          },
-          "404": Object {
-            "description": "The stateId and affiliation ID do not correspond to a known record",
           },
         },
         "security": Array [
@@ -1583,14 +1583,14 @@ Object {
           "200": Object {
             "description": "Record was updated",
           },
+          "400": Object {
+            "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid",
+          },
           "401": Object {
             "description": "Not logged in",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
-          },
-          "404": Object {
-            "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid",
           },
         },
         "security": Array [

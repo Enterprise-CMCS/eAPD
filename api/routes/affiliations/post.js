@@ -14,6 +14,6 @@ module.exports = (app) => {
         // status: 'requested' // default status enum value
       })
       .then(row => response.status(201).json(row[0]))
-      .catch(() => response.status(404).end());
+      .catch(() => response.status(400).end());
   });
 }

@@ -30,9 +30,9 @@ describe('Affiliations endpoint | GET', () => {
       expect(response.status).toEqual(200);
     });
 
-    it('returns 404', async () => {
+    it('returns 400', async () => {
       const response = await api.get('/states/fl/affiliations/NaN');
-      expect(response.status).toEqual(404);
+      expect(response.status).toEqual(400);
     });
   })
 });

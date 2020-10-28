@@ -19,6 +19,6 @@ module.exports = (app) => {
           throw new Error('Not Found');
         }
       })
-      .catch((err) => response.status(404).send(err).end());
+      .catch(() => response.status(400).end());
   });
 }

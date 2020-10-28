@@ -49,7 +49,7 @@ module.exports = (app) => {
       .then(() => response.status(200).end())
       .catch(err => {
         logger.error(request, err);
-        response.status(404).end();
+        response.status(400).end();
       });
   });
 };
