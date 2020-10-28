@@ -6,7 +6,7 @@ Object {
     "view-users",
     "add-users",
   ],
-  "id": 4,
+  "id": 2,
   "isActive": false,
   "name": "inactive-role",
 }
@@ -25,7 +25,7 @@ Object {
     "view-users",
     "add-users",
   ],
-  "id": 3,
+  "id": 1,
   "isActive": true,
   "name": "new-role",
 }
