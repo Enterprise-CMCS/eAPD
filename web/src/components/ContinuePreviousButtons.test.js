@@ -3,8 +3,6 @@ import React from 'react';
 import { Link, BrowserRouter as Router } from 'react-router-dom';
 
 import {
-  continueLabelId,
-  previousLabelId,
   plain as ContinuePreviousButtons,
   mapStateToProps
 } from './ContinuePreviousButtons';
