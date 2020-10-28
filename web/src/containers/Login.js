@@ -59,9 +59,10 @@ const Login = ({
   }
 
   return (
-    <main id="start-main-content">
+    <main>
       <UpgradeBrowser />
       <CardForm
+        id="start-main-content"
         title="Log in"
         legend="Log in"
         cancelable={false}

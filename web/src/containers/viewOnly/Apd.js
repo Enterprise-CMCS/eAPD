@@ -46,7 +46,6 @@ class ApdViewOnly extends Component {
 
     return (
       <main
-        id="start-main-content"
         className="site-body ds-l-container ds-u-padding--3"
       >
         <Button
@@ -80,12 +79,11 @@ class ApdViewOnly extends Component {
         <ProposedBudget />
         <hr className="section-rule" />
         <AssuranceAndCompliance />
-        <Button
+        <a href="#start-main-content"
           className="visibility--screen"
-          variation="transparent"
         >
           ^ Return to the top of the page
-        </Button>
+        </a>
       </main>
     );
   }
