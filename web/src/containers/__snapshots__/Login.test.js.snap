@@ -21,9 +21,7 @@ exports[`login component renders correctly if logged in and previous location is
 `;
 
 exports[`login component renders correctly if logged in previously but not logged in now (shows logout notice) 1`] = `
-<main
-  id="start-main-content"
->
+<main>
   <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={false}
@@ -43,6 +41,7 @@ exports[`login component renders correctly if logged in previously but not logge
         </a>
       </p>
     }
+    id="start-main-content"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -87,9 +86,7 @@ exports[`login component renders correctly if logged in, but no previous locatio
 `;
 
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
-<main
-  id="start-main-content"
->
+<main>
   <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={false}
@@ -109,6 +106,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
         </a>
       </p>
     }
+    id="start-main-content"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -143,9 +141,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
 `;
 
 exports[`login component renders correctly if not logged in and there is an error 1`] = `
-<main
-  id="start-main-content"
->
+<main>
   <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={false}
@@ -165,6 +161,7 @@ exports[`login component renders correctly if not logged in and there is an erro
         </a>
       </p>
     }
+    id="start-main-content"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -199,9 +196,7 @@ exports[`login component renders correctly if not logged in and there is an erro
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 1`] = `
-<main
-  id="start-main-content"
->
+<main>
   <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={false}
@@ -221,6 +216,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id="start-main-content"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -255,9 +251,7 @@ exports[`login component renders correctly if not logged in, and never logged in
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 2`] = `
-<main
-  id="start-main-content"
->
+<main>
   <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={false}
@@ -277,6 +271,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id="start-main-content"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -311,9 +306,7 @@ exports[`login component renders correctly if not logged in, and never logged in
 `;
 
 exports[`login component renders correctly if not logged in, and never logged in 3`] = `
-<main
-  id="start-main-content"
->
+<main>
   <UpgradeBrowser />
   <withRouter(CardForm)
     canSubmit={true}
@@ -333,6 +326,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id="start-main-content"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
