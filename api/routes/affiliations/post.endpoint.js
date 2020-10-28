@@ -19,8 +19,8 @@ describe('Affiliations endpoint | POST', () => {
     expect(keys).toEqual(['id']);
   });
 
-  it('returns 404 when US state is invalid', async () => {
+  it('returns 400 when US state is invalid', async () => {
     const response = await api.post('/states/zz/affiliations');
-    expect(response.status).toEqual(404);
+    expect(response.status).toEqual(400);
   });
 });

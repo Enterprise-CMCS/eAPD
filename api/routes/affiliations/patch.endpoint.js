@@ -24,21 +24,21 @@ describe('Affiliations endpoint | PATCH', () => {
     });
   })
 
-  it('returns 404 when US state is invalid', async () => {
+  it('returns 400 when US state is invalid', async () => {
     const response = await api.patch('/states/zz/affiliations/4000');
-    expect(response.status).toEqual(404);
+    expect(response.status).toEqual(400);
   });
 
-  it('returns 404 when affiliation id is invalid', async () => {
+  it('returns 400 when affiliation id is invalid', async () => {
     const response = await api.patch('/states/zz/affiliations/NaN');
-    expect(response.status).toEqual(404);
+    expect(response.status).toEqual(400);
   });
 
-  it('returns 404 when status is invalid', async () => {
+  it('returns 400 when status is invalid', async () => {
     const response = await api.patch('/states/fl/affiliations/4000', {
       status: 'blarg',
       roleId: 1106
     });
-    expect(response.status).toEqual(404);
+    expect(response.status).toEqual(400);
   });
 });

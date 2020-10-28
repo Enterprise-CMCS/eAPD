@@ -110,7 +110,7 @@ const postAffiliations = {
         description: 'Record was created',
         content: jsonResponse(id)
       },
-      404: {
+      400: {
         description: 'Record exists, or US State ID is invalid'
       },
       401: responses.unauthed[401]
@@ -129,7 +129,7 @@ const getAffiliation = {
         description: 'A single user affiliation with a US State',
         content: jsonResponse(affiliationSchema)
       },
-      404: {
+      400: {
         description: 'The stateId and affiliation ID do not correspond to a known record'
       },
       ...responses.unauthed
@@ -159,7 +159,7 @@ const patchAffiliation = {
       200: {
         description: 'Record was updated',
       },
-      404: {
+      400: {
         description: 'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid',
       },
       ...responses.unauthed
