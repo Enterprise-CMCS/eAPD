@@ -88,17 +88,7 @@ tap.test('APD data initializer', async test => {
         '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
       }
     },
-    keyPersonnel: [
-      {
-        costs: { '1997': 0, '1998': 0 },
-        email: '',
-        hasCosts: false,
-        isPrimary: true,
-        name: '',
-        fte: { '1997': 0, '1998': 0 },
-        position: ''
-      }
-    ],
+    keyPersonnel: [],
     name: 'HITECH IAPD',
     narrativeHIE: '',
     narrativeHIT: '',
