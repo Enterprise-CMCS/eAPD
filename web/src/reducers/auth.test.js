@@ -22,7 +22,8 @@ describe('auth reducer', () => {
     fetching: false,
     hasEverLoggedOn: false,
     initialCheck: false,
-    user: null
+    user: null,
+    mfaType: ''
   };
 
   it('should handle initial state', () => {
@@ -62,12 +63,13 @@ describe('auth reducer', () => {
   });
 
   it('should handle LOGIN_OTP_STAGE', () => {
-    expect(auth(initialState, { type: LOGIN_OTP_STAGE })).toEqual({
+    expect(auth(initialState, { type: LOGIN_OTP_STAGE, data: 'email' })).toEqual({
       ...initialState,
       fetching: false,
       otpStage: true,
       authenticated: false,
-      error: ''
+      error: '',
+      mfaType: 'email'
     });
   });
 
@@ -155,6 +157,7 @@ describe('auth reducer', () => {
         hasEverLoggedOn: true,
         initialCheck: true,
         otpStage: false,
+        mfaType: '',
         isLocked: false,
         user: null
       });

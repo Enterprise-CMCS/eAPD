@@ -28,7 +28,7 @@ export const completeAuthCheck = user => ({
 export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
-export const completeFirstStage = () => ({ type: LOGIN_OTP_STAGE });
+export const completeFirstStage = mfaType => ({ type: LOGIN_OTP_STAGE, data: mfaType });
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
@@ -52,16 +52,6 @@ const loadData = activities => dispatch => {
 
 const authenticateUser = (username, password) => {
   return oktaAuth.signIn({ username, password });
-};
-
-const retrieveMFA = transaction => {
-  const mfaFactor = transaction.factors.find(
-    factor => factor.provider === 'OKTA'
-  );
-
-  if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
-
-  return mfaFactor.verify();
 };
 
 const retrieveExistingTransaction = async () => {
@@ -110,8 +100,16 @@ export const login = (username, password) => dispatch => {
       }
       
       if (res.status === 'MFA_REQUIRED') {
-        return retrieveMFA(res).then(() => {
-          dispatch(completeFirstStage());
+        const mfaFactor = res.factors.find(
+          factor => factor.provider === 'OKTA'
+        );
+        // Currently we are only supporting one additional factor
+        const mfaType = res.factors[0].factorType;
+        
+        if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
+        
+        return mfaFactor.verify(res).then(() => {
+          dispatch(completeFirstStage(mfaType));
         });          
       } 
       
@@ -119,7 +117,7 @@ export const login = (username, password) => dispatch => {
         await setTokens(res.sessionToken);
         return axios
           .get('/me')
-          .then(userRes => {          
+          .then(userRes => {       
             dispatch(resetLocked());
             dispatch(completeLogin(userRes.data));
             dispatch(loadData(userRes.data.activities));

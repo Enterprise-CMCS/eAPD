@@ -19,6 +19,7 @@ const initialState = {
   fetching: false,
   hasEverLoggedOn: false,
   initialCheck: false,
+  mfaType: '',
   isLocked: false,
   user: null
 };
@@ -55,7 +56,8 @@ const auth = (state = initialState, action) => {
         fetching: false,
         otpStage: true,
         authenticated: false,
-        error: ''
+        error: '',
+        mfaType: action.data
       };
     case LOGIN_MFA_REQUEST:
       return {
