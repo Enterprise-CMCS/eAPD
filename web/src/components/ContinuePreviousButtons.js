@@ -33,22 +33,26 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
   );
 
   const continueLabel = !continueText ? null : (
-    <p className="ds-u-text-align--right" id="continue-text">{continueText}</p>
+    <p className="ds-u-text-align--right" id="continue-text">
+      {continueText}
+    </p>
   );
 
   const previousComponent = !previousLink ? null : (
     <Link
-      aria-label={`Previous to ${previousText}`}
+      aria-label={`Back to ${previousText}`}
       id="previous-button"
       className="ds-c-button"
       to={previousLink.url}
     >
       <ArrowLeftIcon className="ds-u-margin-right--1" />
-      Previous
+      Back
     </Link>
   );
 
-  const previousLabel = !previousText ? null : <p id="previous-text">{previousText}</p>;
+  const previousLabel = !previousText ? null : (
+    <p id="previous-text">{previousText}</p>
+  );
 
   return (
     <React.Fragment>
