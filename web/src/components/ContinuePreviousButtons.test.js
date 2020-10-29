@@ -26,7 +26,7 @@ const setup = (props = {}) => {
       <ContinuePreviousButtons {...defaultProps} {...props} />
     </Router>
   );
-}
+};
 
 describe('<ContinuePreviousButtons /> component', () => {
   it('renders links, when provided', () => {
@@ -39,7 +39,7 @@ describe('<ContinuePreviousButtons /> component', () => {
   it('does not render links, with null inputs', () => {
     const props = {
       continueLink: null,
-      previousLink: null,
+      previousLink: null
     };
     const component = setup(props);
     expect(component.find(Link).exists()).toBe(false);
@@ -49,8 +49,12 @@ describe('<ContinuePreviousButtons /> component', () => {
     const component = setup();
 
     const links = component.find(Link);
-    expect(links.last().prop('aria-label')).toBe(`Continue to ${defaultProps.continueLink.label}`);
-    expect(links.first().prop('aria-label')).toBe(`Previous to ${defaultProps.previousLink.label}`);
+    expect(links.last().prop('aria-label')).toBe(
+      `Continue to ${defaultProps.continueLink.label}`
+    );
+    expect(links.first().prop('aria-label')).toBe(
+      `Back to ${defaultProps.previousLink.label}`
+    );
 
     const continueLabel = component.find('#continue-text');
     const previousLabel = component.find('#previous-text');
@@ -69,7 +73,7 @@ describe('<ContinuePreviousButtons /> component', () => {
         id: 'apd-activity-0-ffp-nav',
         label: 'FFP and budget',
         url: '/apd/activity/0/ffp'
-      },
+      }
     };
     const component = setup(props);
 
@@ -83,7 +87,11 @@ describe('<ContinuePreviousButtons /> component', () => {
     const state = {
       nav: defaultProps
     };
-    expect(mapStateToProps(state).continueLink).toEqual(defaultProps.continueLink);
-    expect(mapStateToProps(state).previousLink).toEqual(defaultProps.previousLink);
+    expect(mapStateToProps(state).continueLink).toEqual(
+      defaultProps.continueLink
+    );
+    expect(mapStateToProps(state).previousLink).toEqual(
+      defaultProps.previousLink
+    );
   });
 });
