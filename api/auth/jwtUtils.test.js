@@ -28,7 +28,11 @@ tap.test('jwtUtils', async t => {
 
     t.test('given a signed JWT', async t => {
       const token = signWebToken(payload);
-      const result = jwt.verify(token, process.env.SESSION_SECRET, verifyWebTokenOptions);
+      const result = jwt.verify(
+        token,
+        process.env.SESSION_SECRET,
+        verifyWebTokenOptions
+      );
       t.equal(result.sub, payload.sub, 'we can decode the payload subject');
     });
   });
@@ -37,7 +41,11 @@ tap.test('jwtUtils', async t => {
     const { verifyWebToken, signWebTokenOptions } = require('./jwtUtils');
 
     t.test('given a valid JWT', async t => {
-      const token = jwt.sign(payload, process.env.SESSION_SECRET, signWebTokenOptions);
+      const token = jwt.sign(
+        payload,
+        process.env.SESSION_SECRET,
+        signWebTokenOptions
+      );
       const result = verifyWebToken(token);
 
       t.isA(result, 'object', 'returns a payload object');
@@ -74,7 +82,7 @@ tap.test('jwtUtils', async t => {
     let request;
 
     t.beforeEach(async () => {
-      request = new Map()
+      request = new Map();
     });
 
     const scenarios = [
@@ -93,6 +101,5 @@ tap.test('jwtUtils', async t => {
         t.equal(result, expected, message);
       });
     });
-
   });
 });

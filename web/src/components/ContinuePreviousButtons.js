@@ -9,8 +9,7 @@ const continueLabelId = 'continue-button-label';
 const previousLabelId = 'previous-button-label';
 
 const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
-
-  const buildLabel = (link) => {
+  const buildLabel = link => {
     if (link.url.startsWith('/apd/activity/')) {
       const activityIndex = link.url.split('/')[3];
       return `Activity ${+activityIndex + 1}: ${link.label}`;

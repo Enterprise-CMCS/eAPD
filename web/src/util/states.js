@@ -61,10 +61,10 @@ const STATES = [
   { id: 'vi', name: 'U.S. Virgin Islands' }
 ];
 
-const usStatesDropdownOptions = STATES.map(s => ({ label: s.name, value: s.id }));
-usStatesDropdownOptions.unshift({ label: "None", value: "" });
+const usStatesDropdownOptions = STATES.map(s => ({
+  label: s.name,
+  value: s.id
+}));
+usStatesDropdownOptions.unshift({ label: 'None', value: '' });
 
-export {
-  STATES,
-  usStatesDropdownOptions
-};
+export { STATES, usStatesDropdownOptions };
