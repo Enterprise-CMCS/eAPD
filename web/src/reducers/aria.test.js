@@ -2,8 +2,8 @@ import { ARIA_ANNOUNCE_CHANGE } from '../actions/aria';
 import aria, { getAriaAnnouncement } from './aria';
 
 const initialState = {
-    ariaRegionMessage: ''
-}
+  ariaRegionMessage: ''
+};
 
 describe('ARIA reducer', () => {
   it('handles initial empty state', () => {
@@ -24,7 +24,7 @@ describe('ARIA reducer', () => {
       aria: {
         ariaRegionMessage: 'good morning Vietnam'
       }
-    }
+    };
     expect(getAriaAnnouncement(state)).toEqual(state.aria.ariaRegionMessage);
   });
-})
+});

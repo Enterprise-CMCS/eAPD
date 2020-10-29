@@ -8,8 +8,7 @@ const {
 const url = '/me';
 
 const put = data => {
-  return login()
-    .then(api => api.put(url, data))
+  return login().then(api => api.put(url, data));
 };
 
 describe('/me endpoint | PUT', () => {

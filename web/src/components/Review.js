@@ -31,7 +31,7 @@ const Review = ({
   return (
     <ReviewSummary
       editContent={
-        <div className="nowrap visibility--screen">
+        <div className="nowrap visibility--screen ds-u-margin-top--2">
           {onEditClick || editHref ? (
             <Button
               size="small"
@@ -55,14 +55,15 @@ const Review = ({
             // If there's a delete click handler, add a remove button to the
             // header area and wire it up
             <Fragment>
-              |
+              {onEditClick && <strong>|</strong>}
               <Button
                 size="small"
                 variation="transparent"
                 onClick={onDeleteClick}
                 aria-label={`Delete${ariaLabel ? ` ${ariaLabel}` : ''}`}
+                className="ds-u-color--error"
               >
-                Remove
+                Delete
               </Button>
             </Fragment>
           )}

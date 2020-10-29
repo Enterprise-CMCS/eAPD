@@ -16,7 +16,7 @@ describe('<AutoScrollToElement /> component', () => {
   let scrollIntoView;
 
   const mockUseEffect = () => {
-    useEffect.mockImplementationOnce((f) => f());
+    useEffect.mockImplementationOnce(f => f());
   };
 
   beforeEach(() => {

@@ -116,10 +116,7 @@ tap.test('apds PATCH endpoint', async tests => {
     await handler({ body: patches, params: { id: 'apd id' } }, res);
 
     test.ok(patchObject.calledWith('old document', patches), 'applies patches');
-    test.ok(
-      validate.calledWith(patchedDocument),
-      'validates the new document'
-    );
+    test.ok(validate.calledWith(patchedDocument), 'validates the new document');
     test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
     test.ok(
       res.send.calledWith([{ path: '/key1/key2/key3' }]),

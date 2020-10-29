@@ -39,14 +39,12 @@ describe('the ContractorResourceReview component', () => {
   it('renders correctly', () => {
     const component = shallow(
       <ContractorReview {...props}>
-        <div/>
+        <div />
       </ContractorReview>
     );
     expect(component).toMatchSnapshot();
 
-    expect(component.find('Review').prop('onEditClick')).toEqual(
-      props.expand
-    );
+    expect(component.find('Review').prop('onEditClick')).toEqual(props.expand);
     expect(component.find('Review').prop('onDeleteClick')).toEqual(
       props.onDeleteClick
     );

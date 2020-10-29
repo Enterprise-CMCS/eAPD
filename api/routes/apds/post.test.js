@@ -95,10 +95,10 @@ tap.test('apds POST endpoint', async endpointTest => {
             description: '',
             expenses: [],
             fundingSource: 'HIT',
-            objectives: [
+            outcomes: [
               {
-                objective: '',
-                keyResults: [{ baseline: '', keyResult: '', target: '' }]
+                outcome: '',
+                metrics: [{ metric: '' }]
               }
             ],
             name: 'Program Administration',

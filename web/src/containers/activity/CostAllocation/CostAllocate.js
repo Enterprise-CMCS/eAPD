@@ -8,11 +8,7 @@ import RichText from '../../../components/RichText';
 import { selectActivityByIndex } from '../../../reducers/activities.selectors';
 import { Subsection } from '../../../components/Section';
 
-const CostAllocate = ({
-  activity,
-  activityIndex,
-  setMethodology,
-}) => {
+const CostAllocate = ({ activity, activityIndex, setMethodology }) => {
   const {
     costAllocationNarrative: { methodology }
   } = activity;

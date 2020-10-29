@@ -26,7 +26,7 @@ describe('APD activity edit actions for overview section', () => {
         activities: []
       }
     }
-  }
+  };
   const store = mockStore(state);
 
   beforeEach(() => {
