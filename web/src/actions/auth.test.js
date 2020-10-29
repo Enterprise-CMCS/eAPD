@@ -135,7 +135,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_OTP_STAGE }
+        { type: actions.LOGIN_OTP_STAGE, data: 'email' }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));

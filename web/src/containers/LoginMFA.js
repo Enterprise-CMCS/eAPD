@@ -3,7 +3,7 @@ import React, { useState, Fragment } from 'react';
 
 import VerifyMFAForm from '../components/VerifyMFAForm';
 
-const LoginMFA = ({ action, errorMessage, fetching }) => {
+const LoginMFA = ({ action, errorMessage, fetching, mfaType }) => {
   const [otp, setOtp] = useState('');
 
   const changeOtp = ({ target: { value } }) => setOtp(value);
@@ -29,8 +29,8 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
       >        
         <Fragment>
           <div className="ds-u-margin-bottom--4">
-            <label htmlFor="otp" id="otp" className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal">
-              Please enter the 6 digit code generated in your SMS text.
+            <label htmlFor="otp" id="otp" className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal">            
+              Please enter the 6 digit code sent to you via {mfaType}.
             </label>
             <input 
               width="200px"
@@ -52,11 +52,13 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
 LoginMFA.propTypes = {
   errorMessage: PropTypes.bool,
   fetching: PropTypes.bool.isRequired,
-  action: PropTypes.func.isRequired
+  action: PropTypes.func.isRequired,
+  mfaType: PropTypes.string.isRequired
 };
 
 LoginMFA.defaultProps = {
-  errorMessage: false
+  errorMessage: false,
+  mfaType: ''
 };
 
 export default LoginMFA;

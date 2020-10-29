@@ -1,10 +1,23 @@
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import sinon from 'sinon';
 
 import { plain as VerifyMFAForm } from './VerifyMFAForm';
 
 const history = { goBack: sinon.spy() };
+
+const defaultProps = {
+  title: "test",
+  history: history,
+  children: ""
+};
+
+const setup = (props = {}) => {
+  return mount(
+    <VerifyMFAForm {...defaultProps} {...props} />
+  );
+};
 
 describe('card form wrapper', () => {
   beforeEach(() => {
@@ -77,13 +90,13 @@ describe('card form wrapper', () => {
   });
 
   test('renders a legend if provided', () => {
-    expect(
-      shallow(
-        <VerifyMFAForm title="test" history={history} legend="of zelda">
-          hello world
-        </VerifyMFAForm>
-      )
-    ).toMatchSnapshot();
+    const props = {
+      legend: "hidden temple"
+    };
+    
+    const component = setup(props);
+    
+    expect(component.find('legend').exists()).toBe(true);
   });
 
   test('renders an error alert if message provided', () => {

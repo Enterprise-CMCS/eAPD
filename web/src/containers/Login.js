@@ -19,6 +19,7 @@ const Login = ({
   hasEverLoggedOn,
   location,
   otpStage,
+  mfaType,
   isLocked,
   login: action,
   loginOtp: otpAction
@@ -82,6 +83,7 @@ const Login = ({
         action={otpAction}
         errorMessage={errorMessage}
         fetching={fetching}
+        mfaType={mfaType}
       />
     );
   }
@@ -137,19 +139,21 @@ Login.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
+  mfaType: PropTypes.string.isRequired,
   isLocked: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, isLocked }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, mfaType, isLocked }
 }) => ({
   authenticated,
   error,
   fetching,
   hasEverLoggedOn,
   otpStage,
+  mfaType,
   isLocked
 });
 
