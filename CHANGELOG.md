@@ -17,6 +17,8 @@ Anticipated release: October 29th, 2020
 
 #### ⚙️ Behind the scenes
 
+- sending eAPD Id to Google Analytics
+
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
