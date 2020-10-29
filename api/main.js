@@ -90,6 +90,11 @@ server.use(jsonWebTokenMiddleware);
 logger.silly('setting up routes');
 routes(server);
 
+// Requests for undefined resources result in a 404 status
+server.all('*', (_, res) => {
+  res.status(404).end();
+});
+
 logger.silly('starting the server');
 server.listen(process.env.PORT, () => {
   logger.verbose(`server listening on :${process.env.PORT}`);
