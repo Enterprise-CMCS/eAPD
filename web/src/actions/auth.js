@@ -150,7 +150,7 @@ export const loginOtp = otp => async dispatch => {
           dispatch(loadData(userRes.data.activities));
         });
       })
-      .catch(error => {        
+      .catch(error => {
         const reason = error ? error.message : 'N/A';
         if (reason === 'User Locked') {
           dispatch(failLoginLocked(reason));

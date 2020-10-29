@@ -122,8 +122,8 @@ const Login = ({
           title="Password" 
           value={password} 
           onChange={changePassword} 
-          errorMessage={errorMessage === false ? null : ""}
-          customErrorMessage={errorMessage === false ? null : "Invalid Entry"}
+          errorMessage={errorMessage ? "" : null}
+          customErrorMessage={errorMessage ? "Invalid Entry" : null}
         />
       </LoginForm>
     </main>
