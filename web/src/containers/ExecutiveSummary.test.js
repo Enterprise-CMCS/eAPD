@@ -1,10 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import {
-  plain as ExecutiveSummary,
-  mapStateToProps
-} from './ExecutiveSummary';
+import { plain as ExecutiveSummary, mapStateToProps } from './ExecutiveSummary';
 
 let mockPush;
 

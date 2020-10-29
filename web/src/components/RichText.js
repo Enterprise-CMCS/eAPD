@@ -102,16 +102,16 @@ class RichText extends Component {
 
     // https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/
     const toolbar = [
-      "undo redo",
-      "style",
-      "bold italic strikethrough forecolor",
-      "alignleft aligncenter alignright alignjustify",
-      "outdent indent",
-      "numlist bullist",
-      "formatselect",
-      "eapdImageUpload",
-      "help"
-    ].join(" | ");
+      'undo redo',
+      'style',
+      'bold italic strikethrough forecolor',
+      'alignleft aligncenter alignright alignjustify',
+      'outdent indent',
+      'numlist bullist',
+      'formatselect',
+      'eapdImageUpload',
+      'help'
+    ].join(' | ');
 
     return (
       <div className="rte--wrapper">
