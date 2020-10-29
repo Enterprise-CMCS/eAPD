@@ -27,9 +27,6 @@ AuthChecker.propTypes = {
 const mapStateToProps = ({ auth }) => ({ authInit: auth.initialCheck });
 const mapDispatchToProps = { checkAuth };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthChecker);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthChecker);
 
 export { AuthChecker as plain, mapStateToProps, mapDispatchToProps };

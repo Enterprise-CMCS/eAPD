@@ -12,17 +12,15 @@ export const newMilestone = (milestone = '', endDate = '') => ({
   endDate
 });
 
-export const newObjectiveKeyResult = () => ({
+export const newOutcomeMetric = () => ({
   key: generateKey(),
-  baseline: '',
-  keyResult: '',
-  target: ''
+  metric: ''
 });
 
-export const newObjective = () => ({
+export const newOutcome = () => ({
   key: generateKey(),
-  objective: '',
-  keyResults: [newObjectiveKeyResult()]
+  outcome: '',
+  metrics: [newOutcomeMetric()]
 });
 
 export const statePersonDefaultYear = () => ({ amt: '', perc: '' });
@@ -96,7 +94,7 @@ export const newActivity = ({
   name,
   plannedEndDate: '',
   plannedStartDate: '',
-  objectives: [newObjective()],
+  outcomes: [newOutcome()],
   schedule: [newMilestone()],
   statePersonnel: [],
   summary: '',

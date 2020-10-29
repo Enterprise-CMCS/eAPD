@@ -10,8 +10,8 @@ import {
   newContractor,
   newExpense,
   newMilestone,
-  newObjective,
-  newObjectiveKeyResult,
+  newOutcome,
+  newOutcomeMetric,
   newStatePerson,
   quarterlyFFPEntry,
   statePersonDefaultYear
@@ -295,11 +295,11 @@ export const getPatchesForAddingItem = (state, path) => {
       if (/^\/activities\/\d+\/expenses\/-$/.test(path)) {
         return [{ op: 'add', path, value: newExpense(state.data.years) }];
       }
-      if (/^\/activities\/\d+\/objectives\/-$/.test(path)) {
-        return [{ op: 'add', path, value: newObjective() }];
+      if (/^\/activities\/\d+\/outcomes\/-$/.test(path)) {
+        return [{ op: 'add', path, value: newOutcome() }];
       }
-      if (/^\/activities\/\d+\/objectives\/\d+\/keyResults\/-$/.test(path)) {
-        return [{ op: 'add', path, value: newObjectiveKeyResult() }];
+      if (/^\/activities\/\d+\/outcomes\/\d+\/metrics\/-$/.test(path)) {
+        return [{ op: 'add', path, value: newOutcomeMetric() }];
       }
       if (/^\/activities\/\d+\/schedule\/-$/.test(path)) {
         return [{ op: 'add', path, value: newMilestone() }];
@@ -432,7 +432,7 @@ const reducer = (state = initialState, action) => {
             ({
               contractorResources,
               expenses,
-              objectives,
+              outcomes,
               schedule,
               statePersonnel,
               ...activity
@@ -446,8 +446,8 @@ const reducer = (state = initialState, action) => {
                 ...expense,
                 key: generateKey()
               })),
-              objectives: objectives.map(objective => ({
-                ...objective,
+              outcomes: outcomes.map(outcome => ({
+                ...outcome,
                 key: generateKey()
               })),
               schedule: schedule.map(milestone => ({

@@ -65,9 +65,9 @@ describe('<ContinuePreviousButtons /> component', () => {
   it('is labeled with the activity number, when within an activity', () => {
     const props = {
       continueLink: {
-        id: 'apd-activity-1-okrs-nav',
-        label: 'Objective and key results',
-        url: '/apd/activity/1/okrs'
+        id: 'apd-activity-1-oms-nav',
+        label: 'Outcome and metrics',
+        url: '/apd/activity/1/oms'
       },
       previousLink: {
         id: 'apd-activity-0-ffp-nav',
@@ -79,7 +79,7 @@ describe('<ContinuePreviousButtons /> component', () => {
 
     const continueLabel = component.find('#continue-text');
     const previousLabel = component.find('#previous-text');
-    expect(continueLabel.text()).toBe('Activity 2: Objective and key results');
+    expect(continueLabel.text()).toBe('Activity 2: Outcome and metrics');
     expect(previousLabel.text()).toBe('Activity 1: FFP and budget');
   });
 
