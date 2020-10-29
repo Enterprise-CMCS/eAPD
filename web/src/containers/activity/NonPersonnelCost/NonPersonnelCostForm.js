@@ -36,12 +36,12 @@ const NonPersonnelCostForm = ({
   );
 
   const categories = [
-    "Hardware, software, and licensing",
-    "Equipment and supplies",
-    "Training and outreach",
-    "Travel",
-    "Administrative operations",
-    "Miscellaneous expenses for the project"
+    'Hardware, software, and licensing',
+    'Equipment and supplies',
+    'Training and outreach',
+    'Travel',
+    'Administrative operations',
+    'Miscellaneous expenses for the project'
   ].map(item => ({ label: item, value: item }));
 
   return (
@@ -97,9 +97,6 @@ const mapDispatchToProps = {
   setCost: setNonPersonnelCostForYear
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(NonPersonnelCostForm);
+export default connect(null, mapDispatchToProps)(NonPersonnelCostForm);
 
 export { NonPersonnelCostForm as plain, mapDispatchToProps };

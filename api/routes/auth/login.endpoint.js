@@ -11,8 +11,7 @@ describe('login nonce endpoint | /auth/login/nonce', () => {
   });
 
   it('with a username', async () => {
-    const response = await api
-      .post(url, { username: 'test user' });
+    const response = await api.post(url, { username: 'test user' });
     expect(response.status).toEqual(200);
 
     const token = jwt.decode(response.data.nonce);

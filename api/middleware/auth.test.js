@@ -28,7 +28,10 @@ tap.test('logged in middleware', async loggedInMiddlewareTest => {
     async invalidTest => {
       loggedIn({}, res, next);
 
-      invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401 Unauthorized');
+      invalidTest.ok(
+        res.status.calledWith(401),
+        'HTTP status set to 401 Unauthorized'
+      );
       invalidTest.ok(res.end.called, 'response is terminated');
       invalidTest.ok(
         next.notCalled,
@@ -58,7 +61,10 @@ tap.test('"can" middleware', async canMiddlewareTest => {
     async invalidTest => {
       can('activity')({}, res, next);
 
-      invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401 Unauthorized');
+      invalidTest.ok(
+        res.status.calledWith(401),
+        'HTTP status set to 401 Unauthorized'
+      );
       invalidTest.ok(res.end.called, 'response is terminated');
       invalidTest.ok(
         next.notCalled,
@@ -72,7 +78,10 @@ tap.test('"can" middleware', async canMiddlewareTest => {
     async invalidTest => {
       can('activity')({ user: { activities: [] } }, res, next);
 
-      invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403 Forbidden');
+      invalidTest.ok(
+        res.status.calledWith(403),
+        'HTTP status set to 403 Forbidden'
+      );
       invalidTest.ok(res.end.called, 'response is terminated');
       invalidTest.ok(
         next.notCalled,
