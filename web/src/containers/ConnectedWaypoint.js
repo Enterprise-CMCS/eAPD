@@ -9,10 +9,11 @@ const ConnectedWaypoint = ({ children, id, location, replace }) => (
     <Waypoint
       bottomOffset="90%"
       fireOnRapidScroll={false}
-      onEnter={() => replace({ ...location, hash: id })} />
+      onEnter={() => replace({ ...location, hash: id })}
+    />
     {children}
   </Fragment>
-)
+);
 
 ConnectedWaypoint.propTypes = {
   children: PropTypes.node,
@@ -28,19 +29,12 @@ ConnectedWaypoint.defaultProps = {
 
 const mapStateToProps = ({ router }) => ({
   location: router.location
-})
+});
 
 const mapDispatchToProps = {
   replace: actualReplace
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ConnectedWaypoint);
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedWaypoint);
 
-export {
-  ConnectedWaypoint as plain,
-  mapStateToProps,
-  mapDispatchToProps
-};
+export { ConnectedWaypoint as plain, mapStateToProps, mapDispatchToProps };

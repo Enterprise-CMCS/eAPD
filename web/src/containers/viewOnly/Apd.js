@@ -80,10 +80,7 @@ class ApdViewOnly extends Component {
         <ProposedBudget />
         <hr className="section-rule" />
         <AssuranceAndCompliance />
-        <Button
-          className="visibility--screen"
-          variation="transparent"
-        >
+        <Button className="visibility--screen" variation="transparent">
           ^ Return to the top of the page
         </Button>
       </main>

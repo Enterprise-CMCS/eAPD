@@ -27,14 +27,10 @@ describe('the MilestoneReview component', () => {
   });
 
   test('triggers the delete event', () => {
-    expect(component.find('Review').prop('onDeleteClick')).toEqual(
-      onDelete
-    );
+    expect(component.find('Review').prop('onDeleteClick')).toEqual(onDelete);
   });
 
   test('hooks up the expand event', () => {
-    expect(component.find('Review').prop('onEditClick')).toEqual(
-      expand
-    );
+    expect(component.find('Review').prop('onEditClick')).toEqual(expand);
   });
 });

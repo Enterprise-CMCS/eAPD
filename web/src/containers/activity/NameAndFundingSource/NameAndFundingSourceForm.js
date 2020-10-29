@@ -22,11 +22,7 @@ const NameAndFundingSourceForm = ({
     setFundingSource(index, value);
   });
 
-  const choices = [
-    "HIT",
-    "HIE",
-    "MMIS"
-  ].map(choice => ({
+  const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
     checked: fundingSource === choice,
     label: choice,
     value: choice
@@ -68,9 +64,6 @@ const mapDispatchToProps = {
   setName: setActivityName
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(NameAndFundingSourceForm);
+export default connect(null, mapDispatchToProps)(NameAndFundingSourceForm);
 
 export { NameAndFundingSourceForm as plain, mapDispatchToProps };
