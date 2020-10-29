@@ -13,9 +13,6 @@ const Wrapper = ({ children, location: { pathname } }) => {
 
   return (
     <div className={`site${isGray ? ' site--gray' : ''}`}>
-      <a href="#start-main-content" className="skip-nav">
-        Skip to main content
-      </a>
       <Header showSiteTitle={showSiteTitle} />
       {children}
       <Footer />

@@ -1,6 +1,6 @@
 # Next release
 
-Anticipated release: October 28th, 2020
+Anticipated release: October 29th, 2020
 
 #### 🚀 New features
 
@@ -10,6 +10,7 @@ Anticipated release: October 28th, 2020
 - Match "total cost" in export to "Total Contract Cost" field label in builder ([#2459])
 - Update Program Activities headers, labels, and help text ([#2528])
 - Rename Objectives and Key Results to Outcomes and Metrics ([#2584])
+- Updates to improve accessibility ([#2607])
 - Enable the TinyMCE Help guide ([#2611])
 
 #### 🐛 Bugs fixed
@@ -26,4 +27,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2459]: https://github.com/CMSgov/eAPD/issues/2459
 [#2528]: https://github.com/CMSgov/eAPD/issues/2528
 [#2584]: https://github.com/CMSgov/eAPD/issues/2584
+[#2607]: https://github.com/CMSgov/eAPD/issues/2607
 [#2611]: https://github.com/CMSgov/eAPD/issues/2611

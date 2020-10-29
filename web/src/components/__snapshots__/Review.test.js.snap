@@ -8,6 +8,7 @@ exports[`Review wrapper component renders properly if a delete handler is provid
     >
       <React.Fragment>
         <Button
+          aria-label="Delete"
           className="ds-u-color--error"
           component="button"
           onClick={[MockFunction]}
@@ -34,6 +35,7 @@ exports[`Review wrapper component renders properly if an edit handler is supplie
       className="nowrap visibility--screen ds-u-margin-top--2"
     >
       <Button
+        aria-label="Edit"
         component="button"
         onClick={[Function]}
         size="small"
@@ -86,6 +88,7 @@ exports[`Review wrapper component renders properly if the edit link is set 1`] =
       className="nowrap visibility--screen ds-u-margin-top--2"
     >
       <Button
+        aria-label="Edit"
         component="button"
         onClick={[Function]}
         size="small"

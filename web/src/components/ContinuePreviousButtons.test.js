@@ -3,8 +3,6 @@ import React from 'react';
 import { Link, BrowserRouter as Router } from 'react-router-dom';
 
 import {
-  continueLabelId,
-  previousLabelId,
   plain as ContinuePreviousButtons,
   mapStateToProps
 } from './ContinuePreviousButtons';
@@ -51,11 +49,15 @@ describe('<ContinuePreviousButtons /> component', () => {
     const component = setup();
 
     const links = component.find(Link);
-    expect(links.last().prop('aria-labelledby')).toBe(continueLabelId);
-    expect(links.first().prop('aria-labelledby')).toBe(previousLabelId);
+    expect(links.last().prop('aria-label')).toBe(
+      `Continue to ${defaultProps.continueLink.label}`
+    );
+    expect(links.first().prop('aria-label')).toBe(
+      `Back to ${defaultProps.previousLink.label}`
+    );
 
-    const continueLabel = component.find(`#${continueLabelId}`);
-    const previousLabel = component.find(`#${previousLabelId}`);
+    const continueLabel = component.find('#continue-text');
+    const previousLabel = component.find('#previous-text');
     expect(continueLabel.text()).toBe('Results of Previous Activities');
     expect(previousLabel.text()).toBe('Key State Personnel');
   });
@@ -75,8 +77,8 @@ describe('<ContinuePreviousButtons /> component', () => {
     };
     const component = setup(props);
 
-    const continueLabel = component.find(`#${continueLabelId}`);
-    const previousLabel = component.find(`#${previousLabelId}`);
+    const continueLabel = component.find('#continue-text');
+    const previousLabel = component.find('#previous-text');
     expect(continueLabel.text()).toBe('Activity 2: Outcome and metrics');
     expect(previousLabel.text()).toBe('Activity 1: FFP and budget');
   });

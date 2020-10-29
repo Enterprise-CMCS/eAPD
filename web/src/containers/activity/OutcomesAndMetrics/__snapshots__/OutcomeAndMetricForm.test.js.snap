@@ -13,6 +13,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     value="outcome description"
   />
   <Review
+    ariaLabel={null}
     editHref={null}
     onDeleteClick={[Function]}
     onEditClick={null}
@@ -32,6 +33,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     </div>
   </Review>
   <Review
+    ariaLabel={null}
     editHref={null}
     onDeleteClick={[Function]}
     onEditClick={null}
