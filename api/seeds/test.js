@@ -5,6 +5,7 @@ const apds = require('./test/apds');
 const files = require('./test/files');
 const roles = require('./test/roles');
 const testStates = require('./test/states');
+const affiliations = require('./test/affiliations');
 
 exports.seed = async knex => {
   // Don't seed this data if we're not in a test environment.
@@ -19,4 +20,5 @@ exports.seed = async knex => {
   await apds.seed(knex);
   await files.seed(knex);
   await testStates.seed(knex);
+  await affiliations.seed(knex);
 };

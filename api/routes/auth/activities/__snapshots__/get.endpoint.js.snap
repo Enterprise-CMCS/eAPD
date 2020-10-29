@@ -46,5 +46,13 @@ Array [
     "id": 1011,
     "name": "view-document",
   },
+  Object {
+    "id": 1012,
+    "name": "view-affiliations",
+  },
+  Object {
+    "id": 1013,
+    "name": "edit-affiliations",
+  },
 ]
 `;
