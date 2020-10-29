@@ -2,6 +2,7 @@
 
 exports[`the ObjectiveAndKeyResultReview component renders correctly 1`] = `
 <Review
+  ariaLabel={null}
   editHref={null}
   heading="Objective:"
   headingLevel="5"

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Review = ({
   children,
+  ariaLabel,
   editHref,
   onDeleteClick,
   onEditClick,
@@ -32,7 +33,12 @@ const Review = ({
       editContent={
         <div className="nowrap visibility--screen">
           {onEditClick || editHref ? (
-            <Button size="small" variation="transparent" onClick={editHandler}>
+            <Button
+              size="small"
+              variation="transparent"
+              onClick={editHandler}
+              aria-label={`Edit${ariaLabel ? ` ${ariaLabel}` : ''}`}
+            >
               {// If the editHref is set, create a link element here so it'll
               // behave as intended on the outside.  Otherwise, the button
               // content can just be text.
@@ -54,6 +60,7 @@ const Review = ({
                 size="small"
                 variation="transparent"
                 onClick={onDeleteClick}
+                aria-label={`Delete${ariaLabel ? ` ${ariaLabel}` : ''}`}
               >
                 Remove
               </Button>
@@ -70,6 +77,7 @@ const Review = ({
 
 Review.propTypes = {
   children: PropTypes.node,
+  ariaLabel: PropTypes.string,
   editHref: PropTypes.string,
   onDeleteClick: PropTypes.func,
   onEditClick: PropTypes.func
@@ -77,6 +85,7 @@ Review.propTypes = {
 
 Review.defaultProps = {
   children: null,
+  ariaLabel: null,
   editHref: null,
   onDeleteClick: null,
   onEditClick: null

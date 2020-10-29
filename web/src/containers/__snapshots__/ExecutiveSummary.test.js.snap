@@ -17,6 +17,7 @@ exports[`executive summary component renders correctly 1`] = `
       resource="executiveSummary.summary"
     >
       <Review
+        ariaLabel={null}
         className=""
         editHref="/apd/activity/0/overview"
         heading={
@@ -126,6 +127,7 @@ exports[`executive summary component renders correctly 1`] = `
         </ul>
       </Review>
       <Review
+        ariaLabel={null}
         className="ds-u-border-bottom--0"
         editHref="/apd/activity/1/overview"
         heading={
@@ -238,6 +240,7 @@ exports[`executive summary component renders correctly 1`] = `
         className="ds-u-border--dark ds-u-margin--0"
       />
       <Review
+        ariaLabel={null}
         className="ds-u-border--0"
         editHref={null}
         heading="Total cost"

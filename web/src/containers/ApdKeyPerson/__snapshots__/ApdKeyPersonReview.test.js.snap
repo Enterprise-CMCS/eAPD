@@ -6,6 +6,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
     className="visibility--screen"
   >
     <Review
+      ariaLabel="Bob the Builder"
       editHref={null}
       heading="13. Bob the Builder"
       headingLevel="4"
@@ -77,6 +78,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
     className="visibility--print"
   >
     <Review
+      ariaLabel={null}
       editHref={null}
       heading="13. Bob the Builder"
       onDeleteClick={null}
