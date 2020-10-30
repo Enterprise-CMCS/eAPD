@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { VerticalNav } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import NavLink from '../components/NavLink';
-import { generateKey as actualGenerateKey } from '../util'
+import { generateKey as actualGenerateKey } from '../util';
 
 const Nav = ({ generateKey, items, pathname }) => {
   // force component update when pathname changes
@@ -11,18 +11,14 @@ const Nav = ({ generateKey, items, pathname }) => {
   useEffect(() => setKey(generateKey()), [pathname]);
   return (
     <nav aria-label="Main Navigation">
-      <VerticalNav
-        component={NavLink}
-        items={items}
-        key={key}
-      />
+      <VerticalNav component={NavLink} items={items} key={key} />
     </nav>
-  )
+  );
 };
 
 Nav.defaultProps = {
   generateKey: actualGenerateKey
-}
+};
 
 Nav.propTypes = {
   generateKey: PropTypes.func,
