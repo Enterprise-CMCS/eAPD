@@ -2,7 +2,7 @@
 
 exports[`the NonPersonnelCostReview component renders correctly 1`] = `
 <Review
-  ariaLabel={null}
+  ariaLabel="54. test category"
   editHref={null}
   heading="54. test category"
   headingLevel="5"

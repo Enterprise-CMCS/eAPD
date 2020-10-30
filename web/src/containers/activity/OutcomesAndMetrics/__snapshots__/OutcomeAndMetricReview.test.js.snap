@@ -2,7 +2,7 @@
 
 exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
 <Review
-  ariaLabel={null}
+  ariaLabel="outcome description"
   editHref={null}
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
