@@ -4,7 +4,7 @@ import React from 'react';
 import Choice from './Choice';
 
 describe('Choice wrapper component', () => {
-  it('renders correctly without checkedChildren', () =>{
+  it('renders correctly without checkedChildren', () => {
     const component = shallow(
       <Choice
         type="radio"
@@ -75,7 +75,7 @@ describe('Choice wrapper component', () => {
         I have checkedChildren
       </Choice>
     );
-   
+
     const child = component.find('.ds-c-choice__checkedChild').render();
     expect(child[0].attribs['aria-live']).toBeFalsy();
   });

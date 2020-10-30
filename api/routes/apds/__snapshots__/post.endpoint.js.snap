@@ -159,23 +159,7 @@ Object {
       },
     },
   },
-  "keyPersonnel": Array [
-    Object {
-      "costs": Object {
-        "2021": 0,
-        "2022": 0,
-      },
-      "email": "",
-      "fte": Object {
-        "2021": 0,
-        "2022": 0,
-      },
-      "hasCosts": false,
-      "isPrimary": true,
-      "name": "",
-      "position": "",
-    },
-  ],
+  "keyPersonnel": Array [],
   "name": "HITECH IAPD",
   "narrativeHIE": "",
   "narrativeHIT": "",

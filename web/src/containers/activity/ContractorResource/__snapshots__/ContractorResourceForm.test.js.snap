@@ -22,6 +22,11 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
   >
     Contract Term
   </FormLabel>
+  <span
+    className="ds-c-field__hint"
+  >
+    Contract term may extend beyond the FFY(s) included in this APD.
+  </span>
   <div
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
   >
@@ -38,6 +43,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     />
   </div>
   <DollarField
+    hint="Provide total cost of the contract, not the total amount you are requesting for the FFYs. Total contract cost will not be added to your FFY request."
     label="Total Contract Cost"
     name="contractor-total-cost"
     onChange={[Function]}
@@ -186,6 +192,11 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
   >
     Contract Term
   </FormLabel>
+  <span
+    className="ds-c-field__hint"
+  >
+    Contract term may extend beyond the FFY(s) included in this APD.
+  </span>
   <div
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
   >
@@ -202,6 +213,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     />
   </div>
   <DollarField
+    hint="Provide total cost of the contract, not the total amount you are requesting for the FFYs. Total contract cost will not be added to your FFY request."
     label="Total Contract Cost"
     name="contractor-total-cost"
     onChange={[Function]}

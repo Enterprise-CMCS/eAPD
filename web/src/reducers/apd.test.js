@@ -697,7 +697,7 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new state key personnel', () => {
+    it('should add a new primary key personnel', () => {
       const state = {
         data: {
           keyPersonnel: [],
@@ -709,6 +709,56 @@ describe('APD reducer', () => {
       ).toEqual({
         data: {
           keyPersonnel: [
+            {
+              costs: { '1': 0, '2': 0 },
+              email: '',
+              expanded: true,
+              hasCosts: false,
+              isPrimary: true,
+              fte: { '1': 0, '2': 0 },
+              name: '',
+              position: '',
+              key: expect.stringMatching(/^[a-f0-9]{8}$/)
+            }
+          ],
+          years: ['1', '2']
+        }
+      });
+    });
+
+    it('should add a new state key personnel', () => {
+      const state = {
+        data: {
+          keyPersonnel: [{
+            costs: { '1': 0, '2': 0 },
+              email: '',
+              expanded: true,
+              hasCosts: false,
+              isPrimary: true,
+              fte: { '1': 0, '2': 0 },
+              name: '',
+              position: '',
+              key: 'primary'
+          }],
+          years: ['1', '2']
+        }
+      };
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: '/keyPersonnel/-' })
+      ).toEqual({
+        data: {
+          keyPersonnel: [
+            {
+              costs: { '1': 0, '2': 0 },
+              email: '',
+              expanded: true,
+              hasCosts: false,
+              isPrimary: true,
+              fte: { '1': 0, '2': 0 },
+              name: '',
+              position: '',
+              key: 'primary'
+            },
             {
               costs: { '1': 0, '2': 0 },
               email: '',
@@ -1082,10 +1132,35 @@ describe('APD reducer helper methods', () => {
       ]);
     });
 
-    it('gets patches for adding a key personnel', () => {
+    it('gets patches for adding a primary key personnel', () => {
       expect(
         getPatchesForAddingItem(
           { data: { years: ['1', '2'] } },
+          '/keyPersonnel/-'
+        )
+      ).toEqual([
+        {
+          op: 'add',
+          path: '/keyPersonnel/-',
+          value: {
+            costs: { '1': 0, '2': 0 },
+            email: '',
+            expanded: true,
+            hasCosts: false,
+            isPrimary: true,
+            fte: { '1': 0, '2': 0 },
+            name: '',
+            position: '',
+            key: expect.stringMatching(/^[a-f0-9]{8}$/)
+          }
+        }
+      ]);
+    });
+
+    it('gets patches for adding a key personnel', () => {
+      expect(
+        getPatchesForAddingItem(
+          { data: { years: ['1', '2'], keyPersonnel: [{ isPrimary: true }] } },
           '/keyPersonnel/-'
         )
       ).toEqual([

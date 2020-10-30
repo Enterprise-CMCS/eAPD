@@ -61,9 +61,6 @@ const mapDispatchToProps = {
   setName: setMilestoneName
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(MilestoneForm);
+export default connect(null, mapDispatchToProps)(MilestoneForm);
 
 export { MilestoneForm as plain, mapDispatchToProps };

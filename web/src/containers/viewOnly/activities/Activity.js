@@ -112,7 +112,7 @@ const Activity = ({ activity, activityIndex }) => {
             {contractTerm()}
           </li>
           <li>
-            <strong>Total Cost: </strong>
+            <strong>Total Contract Cost: </strong>
             <Dollars>{contractor.totalCost}</Dollars>
           </li>
           {Object.entries(contractor.years).map(([year, cost]) => (

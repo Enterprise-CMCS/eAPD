@@ -16,8 +16,7 @@ describe('auth roles endpoint | GET /auth/roles', () => {
   unauthorizedTest('get', url);
 
   it('when authenticated', async () => {
-    const response = await login()
-      .then(api => api.get(url));
+    const response = await login().then(api => api.get(url));
 
     expect(response.status).toEqual(200);
     expect(response.data).toMatchSnapshot();

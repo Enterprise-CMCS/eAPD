@@ -218,12 +218,12 @@ const getHumanTimestamp = iso8601 => {
   })}`;
 };
 
-export const getKeyPersonnel = (years = []) => ({
+export const getKeyPersonnel = (years = [], isPrimary = false) => ({
   costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
   email: '',
   expanded: true,
   hasCosts: false,
-  isPrimary: false,
+  isPrimary,
   fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
   name: '',
   position: '',
@@ -274,7 +274,16 @@ export const getIsAnAPDSelected = ({
 export const getPatchesForAddingItem = (state, path) => {
   switch (path) {
     case '/keyPersonnel/-':
-      return [{ op: 'add', path, value: getKeyPersonnel(state.data.years) }];
+      return [
+        {
+          op: 'add',
+          path,
+          value: getKeyPersonnel(
+            state.data.years,
+            (!state.data.keyPersonnel || state.data.keyPersonnel.length === 0)
+          )
+        }
+      ];
     case '/activities/-':
       return [
         { op: 'add', path, value: newActivity({ years: state.data.years }) }

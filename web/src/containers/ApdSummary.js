@@ -48,7 +48,7 @@ const ApdSummary = ({
     defaultChecked: years.includes(year),
     label: year,
     value: year
-  }))
+  }));
 
   return (
     <Section resource="apd">
@@ -139,9 +139,6 @@ const mapDispatchToProps = {
   setOverview: setProgramOverview
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ApdSummary);
+export default connect(mapStateToProps, mapDispatchToProps)(ApdSummary);
 
 export { ApdSummary as plain, mapStateToProps, mapDispatchToProps };
