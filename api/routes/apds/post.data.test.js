@@ -37,16 +37,11 @@ tap.test('APD data initializer', async test => {
         description: '',
         expenses: [],
         fundingSource: 'HIT',
-        outcomes: [
-          {
-            outcome: '',
-            metrics: [{ metric: '' }]
-          }
-        ],
+        outcomes: [],
         name: 'Program Administration',
         plannedEndDate: '',
         plannedStartDate: '',
-        schedule: [{ endDate: '', milestone: '' }],
+        schedule: [],
         standardsAndConditions: {
           doesNotSupport: '',
           supports: ''

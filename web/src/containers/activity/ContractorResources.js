@@ -46,6 +46,7 @@ const ContractorResources = ({
         noDataMessage={t('activities.contractorResources.noDataNotice')}
         onAddClick={handleAdd}
         onDeleteClick={handleDelete}
+        allowDeleteAll
       />
     </Subsection>
   );
