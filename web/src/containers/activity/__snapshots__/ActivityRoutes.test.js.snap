@@ -3,13 +3,13 @@
 exports[`<ActivityRoutes /> component renders as expected 1`] = `
 <Switch>
   <Route
-    path="/your/current/path/okrs"
+    path="/your/current/path/oms"
   >
     <Section
       id={null}
       resource={null}
     >
-      <Connect(Objectives)
+      <Connect(Outcomes)
         activityIndex={3}
       />
       <Connect(Milestone)

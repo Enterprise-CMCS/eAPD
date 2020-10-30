@@ -18,7 +18,7 @@ import {
 } from '../../../reducers/activities.selectors';
 
 import { t } from '../../../i18n';
-import RichText from '../../../components/RichText'
+import RichText from '../../../components/RichText';
 
 const OtherFunding = ({
   activityIndex,
@@ -38,7 +38,9 @@ const OtherFunding = ({
 
   return (
     <Fragment>
-      <h2 className="ds-u-margin-bottom--0">{t('activities.otherFunding.title')}</h2>
+      <h2 className="ds-u-margin-bottom--0">
+        {t('activities.otherFunding.title')}
+      </h2>
       {Object.keys(years).map(ffy => (
         <Fragment key={ffy}>
           <h3 className="heading-ffy ds-u-padding-top--4">
@@ -62,7 +64,8 @@ const OtherFunding = ({
           </div>
 
           <div className="data-entry-box ds-u-margin-bottom--5">
-            <Instruction source="activities.otherFunding.amount.instruction"
+            <Instruction
+              source="activities.otherFunding.amount.instruction"
               headingDisplay={{
                 level: 'h6',
                 className: 'ds-h5'
@@ -93,7 +96,7 @@ const OtherFunding = ({
                 </td>
               </tr>
               <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td className="title">Medicaid Share</td>
+                <td className="title">Total Computable Medicaid Cost</td>
                 <td colSpan="2" className="budget-table--number">
                   <Dollars>{years[ffy].medicaidShare}</Dollars>
                 </td>
@@ -121,14 +124,14 @@ const mapStateToProps = (
   {
     getActivity = selectActivityByIndex,
     getCostAllocation = selectCostAllocationForActivityByIndex,
-    getCostSummary = selectActivityCostSummary,
+    getCostSummary = selectActivityCostSummary
   } = {}
 ) => {
   const activity = getActivity(state, { activityIndex });
   return {
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
-    costSummary: getCostSummary(state, { activityIndex }),
+    costSummary: getCostSummary(state, { activityIndex })
   };
 };
 
@@ -139,8 +142,4 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(OtherFunding);
 
-export {
-  OtherFunding as plain,
-  mapStateToProps,
-  mapDispatchToProps
-};
+export { OtherFunding as plain, mapStateToProps, mapDispatchToProps };

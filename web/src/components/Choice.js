@@ -12,13 +12,13 @@ const ChoiceComponent = props => {
       ariaRegion.removeAttribute('aria-relevant');
       ariaRegion.removeAttribute('aria-atomic');
     }
-  }, [])
+  }, []);
 
   return (
     <div ref={ref}>
       <Choice {...props} />
     </div>
-    )
- };
+  );
+};
 
- export default ChoiceComponent;
+export default ChoiceComponent;

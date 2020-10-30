@@ -29,25 +29,19 @@ export default user;
 
 export const selectUsers = ({ admin: { users } }) => users;
 
-export const selectUsersSorted = createSelector(
-  [selectUsers],
-  users => {
-    return [...users].sort(
-      (
-        { name: nameA, username: emailA },
-        { name: nameB, username: emailB }
-      ) => {
-        const sortA = (nameA || emailA).toLowerCase();
-        const sortB = (nameB || emailB).toLowerCase();
+export const selectUsersSorted = createSelector([selectUsers], users => {
+  return [...users].sort(
+    ({ name: nameA, username: emailA }, { name: nameB, username: emailB }) => {
+      const sortA = (nameA || emailA).toLowerCase();
+      const sortB = (nameB || emailB).toLowerCase();
 
-        if (sortA < sortB) {
-          return -1;
-        }
-        if (sortA > sortB) {
-          return 1;
-        }
-        return 0;
+      if (sortA < sortB) {
+        return -1;
       }
-    );
-  }
-);
+      if (sortA > sortB) {
+        return 1;
+      }
+      return 0;
+    }
+  );
+});
