@@ -13,8 +13,9 @@ describe('logout endpoint | /auth/logout', () => {
 
   describe('when authenticated', () => {
     it('returns 200 status', async () => {
-      const response = await login()
-        .then(authenticatedClient => authenticatedClient.get(url));
+      const response = await login().then(authenticatedClient =>
+        authenticatedClient.get(url)
+      );
 
       expect(response.status).toEqual(200);
     });

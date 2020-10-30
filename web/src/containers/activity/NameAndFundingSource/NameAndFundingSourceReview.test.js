@@ -21,12 +21,8 @@ describe('the NameAndFundingSourceReview component', () => {
     );
     expect(component).toMatchSnapshot();
 
-    expect(component.find('Review').prop('onEditClick')).toEqual(
-      props.expand
-    );
-    expect(component.find('Review').prop('onDeleteClick')).toEqual(
-      null
-    );
+    expect(component.find('Review').prop('onEditClick')).toEqual(props.expand);
+    expect(component.find('Review').prop('onDeleteClick')).toEqual(null);
   });
 
   it('renders correctly when expanding is disabled', () => {
@@ -38,8 +34,6 @@ describe('the NameAndFundingSourceReview component', () => {
     expect(component).toMatchSnapshot();
 
     expect(component.find('Review').prop('onEditClick')).toEqual(null);
-    expect(component.find('Review').prop('onDeleteClick')).toEqual(
-      null
-    );
+    expect(component.find('Review').prop('onDeleteClick')).toEqual(null);
   });
 });
