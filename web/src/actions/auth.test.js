@@ -47,7 +47,10 @@ describe('auth actions', () => {
         .reply(200, { nonce: '123abc' });
       fetchMock
         .onPost('/auth/login', { username: '123abc', password: 'secret' })
-        .reply(200, { user: { moop: 'moop', activities: [] }, token: 'xxx.yyy.zzz' });
+        .reply(200, {
+          user: { moop: 'moop', activities: [] },
+          token: 'xxx.yyy.zzz'
+        });
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
@@ -55,7 +58,10 @@ describe('auth actions', () => {
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
-      expect(localStorageSetItemSpy).toHaveBeenCalledWith('token', 'xxx.yyy.zzz');
+      expect(localStorageSetItemSpy).toHaveBeenCalledWith(
+        'token',
+        'xxx.yyy.zzz'
+      );
       expect(store.getActions()).toEqual(expectedActions);
     });
 

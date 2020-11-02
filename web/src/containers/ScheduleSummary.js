@@ -74,16 +74,14 @@ const ScheduleSummary = ({ activities }) => (
               </tr>
             </thead>
             <tbody>
-              {milestones.map(
-                ({ end: milestoneEnd, name: milestoneName }) => (
-                  <tr key={`${milestoneName}-${milestoneEnd}`}>
-                    <td className="ds-u-border-right--0">{milestoneName}</td>
-                    <td className="ds-u-border-left--0 ds-u-text-align--left">
-                      {milestoneEnd}
-                    </td>
-                  </tr>
-                )
-              )}
+              {milestones.map(({ end: milestoneEnd, name: milestoneName }) => (
+                <tr key={`${milestoneName}-${milestoneEnd}`}>
+                  <td className="ds-u-border-right--0">{milestoneName}</td>
+                  <td className="ds-u-border-left--0 ds-u-text-align--left">
+                    {milestoneEnd}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         ))

@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { STATES } from "./states";
+import { STATES } from './states';
 
 export { STATES };
 

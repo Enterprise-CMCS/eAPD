@@ -56,8 +56,11 @@ const CreateAccount = ({ createUser, error, roles, working }) => {
     createUser({ email, name, password, role, state });
   };
 
-  const formRoles = roles.map(r => ({ label: toSentenceCase(r.name), value: r.name }));
-  formRoles.unshift({ label: "None", value: "" });
+  const formRoles = roles.map(r => ({
+    label: toSentenceCase(r.name),
+    value: r.name
+  }));
+  formRoles.unshift({ label: 'None', value: '' });
 
   return (
     <Fragment>

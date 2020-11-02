@@ -1,8 +1,4 @@
-import {
-  Button,
-  Dropdown,
-  TextField
-} from '@cmsgov/design-system';
+import { Button, Dropdown, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState, useMemo } from 'react';
 import { connect } from 'react-redux';
@@ -80,8 +76,11 @@ const EditAccount = ({
     setChangePassword(!changePassword);
   };
 
-  const formRoles = roles.map(r => ({ label: toSentenceCase(r.name), value: r.name }));
-  formRoles.unshift({ label: "None", value: "" });
+  const formRoles = roles.map(r => ({
+    label: toSentenceCase(r.name),
+    value: r.name
+  }));
+  formRoles.unshift({ label: 'None', value: '' });
 
   const getForm = () => {
     if (user) {
@@ -190,7 +189,7 @@ const EditAccount = ({
     label: `${u.name ? `${u.name} - ` : ''}${u.username}`,
     value: u.id
   }));
-  usersDropdownOptions.unshift({ label: "Select...", value: "" });
+  usersDropdownOptions.unshift({ label: 'Select...', value: '' });
 
   return (
     <Fragment>

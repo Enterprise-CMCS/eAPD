@@ -96,7 +96,7 @@ const activity = {
       years: {
         '2020': 450000,
         '2021': 150000
-      },
+      }
     },
     {
       description: 'MITA 3.0 implementation.',
@@ -120,7 +120,7 @@ const activity = {
       years: {
         '2020': 200000,
         '2021': 500000
-      },
+      }
     }
   ],
   expenses: [
@@ -130,29 +130,27 @@ const activity = {
       years: {
         '2020': 25000,
         '2021': 25000
-      },
+      }
     }
   ],
-  objectives: [
+  outcomes: [
     {
-      objective: 'Complete MITA 3.0 HITECH portion.',
-      keyResults: [
+      outcome: 'Complete MITA 3.0 HITECH portion.',
+      metrics: [
         {
-          baseline: '',
-          keyResult: 'Complete MITA 3.0 HITECH portion by July 2020',
-          target: ''
+          metric: 'Complete MITA 3.0 HITECH portion by July 2020'
         }
-      ],
+      ]
     }
   ],
   schedule: [
     {
       endDate: '2020-02-28',
-      milestone: 'MITA 3.0 SS-A Project',
+      milestone: 'MITA 3.0 SS-A Project'
     },
     {
       endDate: '2020-12-31',
-      milestone: 'HITECH SS-A Assessment',
+      milestone: 'HITECH SS-A Assessment'
     }
   ],
   statePersonnel: [
@@ -168,15 +166,15 @@ const activity = {
           amt: 100000,
           perc: 1
         }
-      },
+      }
     }
-  ],
-}
+  ]
+};
 
 describe('<Activity /> component', () => {
   test('renders dates correctly', () => {
-    const component = shallow(<Activity activity={activity} />)
-    expect(component.text()).toMatch(/Start date: 8\/3\/2020/)
-    expect(component.text()).toMatch(/End date: 8\/4\/2021/)
+    const component = shallow(<Activity activity={activity} />);
+    expect(component.text()).toMatch(/Start date: 8\/3\/2020/);
+    expect(component.text()).toMatch(/End date: 8\/4\/2021/);
   });
 });

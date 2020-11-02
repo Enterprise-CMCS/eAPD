@@ -48,7 +48,8 @@ const DataRowGroup = ({ data, year }) => (
         category={category}
         data={data[category][year]}
         key={i} // eslint-disable-line react/no-array-index-key
-        title={title} />
+        title={title}
+      />
     ))}
   </Fragment>
 );

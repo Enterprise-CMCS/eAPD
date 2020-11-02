@@ -20,9 +20,10 @@ exports[`RichText component renders as expected 1`] = `
           "lists",
           "paste",
           "spellchecker",
+          "help",
         ],
         "setup": [Function],
-        "toolbar": "undo redo | style | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatselect | eapdImageUpload",
+        "toolbar": "undo redo | style | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatselect | eapdImageUpload | help",
       }
     }
     onEditorChange={[Function]}

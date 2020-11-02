@@ -48,8 +48,9 @@ describe('users endpoint | POST /users', () => {
   describe('when authenticated', () => {
     invalidCases.forEach(situation => {
       it(situation.name, async () => {
-        const response = await login()
-          .then(api => api.post(url, situation.data))
+        const response = await login().then(api =>
+          api.post(url, situation.data)
+        );
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
@@ -59,13 +60,12 @@ describe('users endpoint | POST /users', () => {
     });
 
     it('with existing email address', async () => {
-      const response = await login()
-        .then(api =>
-          api.post(url, {
-            email: 'all-permissions-and-state',
-            password: 'anything'
-          })
-        );
+      const response = await login().then(api =>
+        api.post(url, {
+          email: 'all-permissions-and-state',
+          password: 'anything'
+        })
+      );
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -74,13 +74,12 @@ describe('users endpoint | POST /users', () => {
     });
 
     it('with existing email address but different capitalization', async () => {
-      const response = await login()
-        .then(api =>
-          api.post(url, {
-            email: 'All-Permissions-And-State',
-            password: 'anything'
-          })
-        );
+      const response = await login().then(api =>
+        api.post(url, {
+          email: 'All-Permissions-And-State',
+          password: 'anything'
+        })
+      );
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -89,13 +88,12 @@ describe('users endpoint | POST /users', () => {
     });
 
     it('with a weak password', async () => {
-      const response = await login()
-        .then(api =>
-          api.post(url, {
-            email: 'weakuser@email.com',
-            password: 'Newp@ssw0rd!'
-          })
-        );
+      const response = await login().then(api =>
+        api.post(url, {
+          email: 'weakuser@email.com',
+          password: 'Newp@ssw0rd!'
+        })
+      );
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -104,13 +102,12 @@ describe('users endpoint | POST /users', () => {
     });
 
     it('with a valid new user', async () => {
-      const response = await login()
-        .then(api =>
-          api.post(url, {
-            email: 'newuser@email.com',
-            password: 'Q%&jsruW$%Jaej'
-          })
-        );
+      const response = await login().then(api =>
+        api.post(url, {
+          email: 'newuser@email.com',
+          password: 'Q%&jsruW$%Jaej'
+        })
+      );
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();
