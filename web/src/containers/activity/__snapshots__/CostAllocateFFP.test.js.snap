@@ -7,18 +7,18 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   >
     Budget and FFP
   </h2>
-  <h3
-    className="ds-h3"
-  >
-    Activity 
-    1
-     Budget for FFY 
-    1990
-  </h3>
   <table
     className="budget-table activity-budget-table"
     id="activity0-ffy1990"
   >
+    <caption
+      className="ds-h3"
+    >
+      Activity 
+      1
+       Budget for FFY 
+      1990
+    </caption>
     <tbody>
       <CostAllocationRows
         activityIndex={0}
@@ -288,18 +288,18 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       year="1990"
     />
   </div>
-  <h3
-    className="ds-h3"
-  >
-    Activity 
-    1
-     Budget for FFY 
-    1991
-  </h3>
   <table
     className="budget-table activity-budget-table"
     id="activity0-ffy1991"
   >
+    <caption
+      className="ds-h3"
+    >
+      Activity 
+      1
+       Budget for FFY 
+      1991
+    </caption>
     <tbody>
       <CostAllocationRows
         activityIndex={0}
@@ -723,18 +723,18 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   >
     Budget and FFP
   </h2>
-  <h3
-    className="ds-h3"
-  >
-    Activity 
-    1
-     Budget for FFY 
-    1990
-  </h3>
   <table
     className="budget-table activity-budget-table"
     id="activity0-ffy1990"
   >
+    <caption
+      className="ds-h3"
+    >
+      Activity 
+      1
+       Budget for FFY 
+      1990
+    </caption>
     <tbody>
       <CostAllocationRows
         activityIndex={0}
@@ -922,18 +922,18 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
       year="1990"
     />
   </div>
-  <h3
-    className="ds-h3"
-  >
-    Activity 
-    1
-     Budget for FFY 
-    1991
-  </h3>
   <table
     className="budget-table activity-budget-table"
     id="activity0-ffy1991"
   >
+    <caption
+      className="ds-h3"
+    >
+      Activity 
+      1
+       Budget for FFY 
+      1991
+    </caption>
     <tbody>
       <CostAllocationRows
         activityIndex={0}
