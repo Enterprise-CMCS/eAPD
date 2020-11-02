@@ -45,53 +45,49 @@ tap.test('authentication setup', async authTest => {
     done();
   });
 
-  authTest.test(
-    'setup calls everything we expect it to',
-    async setupTest => {
-      authSetup(app, { passport, localStrategy, jwtMiddleware });
+  authTest.test('setup calls everything we expect it to', async setupTest => {
+    authSetup(app, { passport, localStrategy, jwtMiddleware });
 
-      setupTest.ok(
-        passport.use.calledWith(localStrategy),
-        'localStrategy is registered'
-      );
+    setupTest.ok(
+      passport.use.calledWith(localStrategy),
+      'localStrategy is registered'
+    );
 
-      setupTest.ok(
-        app.use.calledWith('passport-initialize'),
-        'adds passport initialization to middleware'
-      );
+    setupTest.ok(
+      app.use.calledWith('passport-initialize'),
+      'adds passport initialization to middleware'
+    );
 
-      setupTest.ok(passport.initialize.calledOnce, 'passport is initialized');
+    setupTest.ok(passport.initialize.calledOnce, 'passport is initialized');
 
-      setupTest.ok(
-        passport.authenticate.calledWith('local'),
-        'passport local authentication method is used'
-      );
+    setupTest.ok(
+      passport.authenticate.calledWith('local'),
+      'passport local authentication method is used'
+    );
 
-      setupTest.ok(
-        app.post.calledWith(
-          '/auth/login',
-          'passport-authenticate',
-          sinon.match.func
-        ),
-        'adds a function handler to POST /auth/login using the passport authenticate middleware'
-      );
+    setupTest.ok(
+      app.post.calledWith(
+        '/auth/login',
+        'passport-authenticate',
+        sinon.match.func
+      ),
+      'adds a function handler to POST /auth/login using the passport authenticate middleware'
+    );
 
-      setupTest.ok(
-        app.post.calledWith('/auth/login/nonce', sinon.match.func),
-        'adds a function handler to POST /auth/login/nonce'
-      );
+    setupTest.ok(
+      app.post.calledWith('/auth/login/nonce', sinon.match.func),
+      'adds a function handler to POST /auth/login/nonce'
+    );
 
-      setupTest.ok(app.use.calledWith(jwtMiddleware), 'adds jwtMiddleware');
+    setupTest.ok(app.use.calledWith(jwtMiddleware), 'adds jwtMiddleware');
 
-      setupTest.ok(
-        app.get.calledWith,
-        '/auth/logout',
-        sinon.match.func,
-        'adds a function handler to GET /auth/logout'
-      );
-
-    }
-  );
+    setupTest.ok(
+      app.get.calledWith,
+      '/auth/logout',
+      sinon.match.func,
+      'adds a function handler to GET /auth/logout'
+    );
+  });
 
   authTest.test('POST nonce endpoint behaves as expected', async nonceTests => {
     nonceTests.test('sends a 400 error if there is no body', async test => {

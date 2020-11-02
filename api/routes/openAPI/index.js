@@ -228,27 +228,19 @@ module.exports = {
                   }
                 }
               }),
-              objectives: arrayOf({
+              outcomes: arrayOf({
                 type: 'object',
-                description: 'Activity objective',
+                description: 'Activity outcome',
                 properties: {
-                  keyResults: arrayOf({
+                  metrics: arrayOf({
                     type: 'object',
                     properties: {
-                      baseline: {
-                        type: 'string',
-                        description: 'Key result baseline'
-                      },
-                      keyResult: { type: 'string', description: 'Key result' },
-                      target: {
-                        type: 'string',
-                        description: 'Key result target'
-                      }
+                      metric: { type: 'string', description: 'metric' }
                     }
                   }),
-                  objective: {
+                  outcome: {
                     type: 'string',
-                    description: 'Objective description'
+                    description: 'Outcome description'
                   }
                 }
               }),

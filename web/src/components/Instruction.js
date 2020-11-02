@@ -6,11 +6,7 @@ import { t } from '../i18n';
 
 const Heading = ({ children, className, labelFor, level }) => {
   const Tag = level;
-  const component = (
-    <Tag className={className}>
-      {children}
-    </Tag>
-  );
+  const component = <Tag className={className}>{children}</Tag>;
 
   if (!labelFor) {
     return component;
@@ -26,10 +22,10 @@ Heading.propTypes = {
 };
 
 Heading.defaultProps = {
-  className: "ds-h3",
+  className: 'ds-h3',
   labelFor: null,
-  level: "h3"
-}
+  level: 'h3'
+};
 
 const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
   const heading = t([source, 'heading'], { defaultValue: false, ...args });
@@ -54,7 +50,11 @@ const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
             {list && (
               <ol className="ds-u-margin-bottom--4 ds-u-padding-left--2">
                 {/* eslint-disable-next-line react/no-array-index-key */}
-                {list.map((item, i) => <li className="ds-u-margin-bottom--2" key={i}>{item}</li>)}
+                {list.map((item, i) => (
+                  <li className="ds-u-margin-bottom--2" key={i}>
+                    {item}
+                  </li>
+                ))}
               </ol>
             )}
             {helpText && (

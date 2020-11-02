@@ -47,7 +47,8 @@ const EntryDetails = ({
         size="small"
         variation="transparent"
         component={NavLink}
-        href={`/apd/activity/${activityIndex}/overview`}>
+        href={`/apd/activity/${activityIndex}/overview`}
+      >
         Edit
       </Button>
       {activityIndex > 0 && (
@@ -58,8 +59,9 @@ const EntryDetails = ({
             className="ds-u-color--error"
             size="small"
             variation="transparent"
-            onClick={onRemove}>
-              Delete
+            onClick={onRemove}
+          >
+            Delete
           </Button>
         </Fragment>
       )}
@@ -78,7 +80,8 @@ const EntryDetails = ({
         className="entry-details--review"
         heading={title}
         headingLevel="4"
-        editContent={editContent}>
+        editContent={editContent}
+      >
         {[
           /* children are required, so send an empty array to suppress errors */
         ]}

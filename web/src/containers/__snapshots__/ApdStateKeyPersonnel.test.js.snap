@@ -2,7 +2,7 @@
 
 exports[`apd state profile, Medicaid office component renders correctly 1`] = `
 <FormAndReviewList
-  addButtonText="Add another person"
+  addButtonText="Add Key Personnel"
   allowDeleteAll={false}
   className={null}
   collapsed={[Function]}
@@ -50,7 +50,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       },
     ]
   }
-  noDataMessage={null}
+  noDataMessage={false}
   onAddClick={[Function]}
   onDeleteClick={[Function]}
   years={

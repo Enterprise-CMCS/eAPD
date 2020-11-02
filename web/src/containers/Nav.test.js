@@ -34,7 +34,7 @@ describe('<Nav /> component', () => {
   it('maps state to props', () => {
     const state = {
       nav: {
-        items: ['home-nav', 'search-nav', 'settings-nav'],
+        items: ['home-nav', 'search-nav', 'settings-nav']
       },
       router: {
         location: {

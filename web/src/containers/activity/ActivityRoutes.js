@@ -12,7 +12,7 @@ import FFP from './CostAllocateFFP';
 import Costs from './Costs';
 import Milestones from './Milestones';
 import Overview from './Overview';
-import Objectives from './Objectives';
+import Outcomes from './Outcomes';
 import StandardsAndConditions from './StandardsAndConditions';
 import { Section } from '../../components/Section';
 
@@ -21,9 +21,9 @@ const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
 
   return (
     <Switch>
-      <Route path={`${path}/okrs`}>
+      <Route path={`${path}/oms`}>
         <Section>
-          <Objectives activityIndex={activityIndex} />
+          <Outcomes activityIndex={activityIndex} />
           <Milestones activityIndex={activityIndex} />
         </Section>
       </Route>

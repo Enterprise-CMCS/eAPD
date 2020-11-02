@@ -14,7 +14,6 @@ const set = url => {
 };
 
 describe('api wrapper', () => {
-
   describe('url', () => {
     beforeEach(() => jest.resetModules());
 
@@ -31,7 +30,7 @@ describe('api wrapper', () => {
       expect(api.defaults.baseURL).toBe('http://localhost:8000');
       reset();
     });
-  })
+  });
 
   describe('token auth', () => {
     test('auth header is populated when jwt is present in localStorage', async () => {
@@ -40,7 +39,9 @@ describe('api wrapper', () => {
       const apiMock = new MockAdapter(api);
       apiMock.onGet('/').reply(200);
       await api.get('/');
-      expect(apiMock.history.get[0].headers.Authorization).toEqual('Bearer xxx.yyy.zzz');
+      expect(apiMock.history.get[0].headers.Authorization).toEqual(
+        'Bearer xxx.yyy.zzz'
+      );
       localStorage.removeItem('token');
     });
 
@@ -51,5 +52,5 @@ describe('api wrapper', () => {
       await api.get('/');
       expect(apiMock.history.get[0].headers.Authorization).toBeUndefined();
     });
-  })
+  });
 });

@@ -67,7 +67,7 @@ const AllFFYsSummaryNarrative = ({
       <strong>
         <Dollars>{total.otherFunding}</Dollars>
       </strong>
-      , the total cost to Medicaid is{' '}
+      , the total computable Medicaid cost is{' '}
       <strong>
         <Dollars>{total.medicaidShare}</Dollars>
       </strong>
@@ -140,7 +140,7 @@ const CostAllocateFFP = ({
                     </td>
                   </tr>
                   <tr className="budget-table--subtotal budget-table--row__highlight">
-                    <td>Medicaid Share</td>
+                    <td>Total Computable Medicaid Cost</td>
                     <td colSpan="4" />
                     <td className="budget-table--number">
                       <Dollars>{years[ffy].medicaidShare}</Dollars>
@@ -185,7 +185,9 @@ const CostAllocateFFP = ({
                     </td>
                   </tr>
                   <tr className="budget-table--subtotal budget-table--row__highlight">
-                    <td className="title">Medicaid Share</td>
+                    <td className="title">
+                      Activity Total Computable Medicaid Cost
+                    </td>
                     <td colSpan="2" className="budget-table--number">
                       <Dollars>{years[ffy].medicaidShare}</Dollars>
                     </td>
@@ -218,7 +220,7 @@ const CostAllocateFFP = ({
               <table className="budget-table activity-budget-table">
                 <tbody>
                   <tr className="budget-table--subtotal budget-table--row__header">
-                    <th colSpan="5">Medicaid Share</th>
+                    <th colSpan="5">Total Computable Medicaid Cost</th>
                     <td className="budget-table--number">
                       <Dollars>{years[ffy].medicaidShare}</Dollars>
                     </td>
