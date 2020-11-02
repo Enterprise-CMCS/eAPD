@@ -57,8 +57,7 @@ LoginMFA.propTypes = {
 };
 
 LoginMFA.defaultProps = {
-  errorMessage: false,
-  mfaType: ''
+  errorMessage: false
 };
 
 export default LoginMFA;
