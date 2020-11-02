@@ -1,6 +1,5 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import sinon from 'sinon';
 
 import { plain as VerifyMFAForm } from './VerifyMFAForm';
@@ -9,7 +8,7 @@ const history = { goBack: sinon.spy() };
 
 const defaultProps = {
   title: "test",
-  history: history,
+  history,
   children: ""
 };
 
