@@ -7,7 +7,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
   <caption
     className="ds-h4"
   >
-    HIT + HIE
+    HIT + HIE Federal share 90% FFP
   </caption>
   <thead>
     <tr>
