@@ -35,9 +35,9 @@
       "enum": ["HIE", "HIT", "MMIS", false]
     },
     "name": { "type": "string" },
-    "objectives": {
+    "outcomes": {
       "type": "array",
-      "items": { "$ref": "objective.json" }
+      "items": { "$ref": "outcome.json" }
     },
     "plannedEndDate": { "$ref": "definitions.json#/optionalFullDate" },
     "plannedStartDate": { "$ref": "definitions.json#/optionalFullDate" },
@@ -93,11 +93,11 @@
               "properties": {
                 "contractors": {
                   "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/contractors",
-                  "$ref":  "definitions.json#/optionalNumber"
+                  "$ref": "definitions.json#/optionalNumber"
                 },
                 "inHouse": {
                   "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/inHouse",
-                  "$ref":  "definitions.json#/optionalNumber"
+                  "$ref": "definitions.json#/optionalNumber"
                 }
               }
             }

@@ -58,7 +58,7 @@ export const setActivityName = (index, name) => ({
  * @param {Number} index The index of the activity to change
  * @param {String} source The funding source to switch to - 'HIE', 'HIT', or 'MMIS'
  */
-export const setActivityFundingSource = (index, source) => (dispatch) => {
+export const setActivityFundingSource = (index, source) => dispatch => {
   dispatch({
     type: EDIT_APD,
     path: `/activities/${index}/fundingSource`,

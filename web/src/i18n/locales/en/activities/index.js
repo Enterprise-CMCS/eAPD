@@ -2,7 +2,7 @@ import base from './activities.yaml';
 import contractorResources from './contractorResources.yaml';
 import costAllocate from './costAllocate.yaml';
 import expenses from './expenses.yaml';
-import goals from './goals.yaml';
+import outcomes from './outcomes.yaml';
 import milestones from './milestones.yaml';
 import otherFunding from './otherFunding.yaml';
 import overview from './overview.yaml';
@@ -15,7 +15,7 @@ export default {
   contractorResources,
   costAllocate,
   expenses,
-  goals,
+  outcomes,
   milestones,
   otherFunding,
   overview,

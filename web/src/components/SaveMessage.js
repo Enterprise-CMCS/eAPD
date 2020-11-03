@@ -1,23 +1,23 @@
-import moment from "moment";
-import { useEffect, useState } from "react";
+import moment from 'moment';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Configure moment to display '1 time-unit ago' instead of 'a time-unit ago'
 // https://github.com/moment/moment/issues/3764
-moment.updateLocale("en", {
+moment.updateLocale('en', {
   relativeTime: {
-    s: "seconds",
-    m: "1 minute",
-    mm: "%d minutes",
-    h: "1 hour",
-    hh: "%d hours",
-    d: "1 day",
-    dd: "%d days",
-    M: "1 month",
-    MM: "%d months",
-    y: "1 year",
-    yy: "%d years",
-  },
+    s: 'seconds',
+    m: '1 minute',
+    mm: '%d minutes',
+    h: '1 hour',
+    hh: '%d hours',
+    d: '1 day',
+    dd: '%d days',
+    M: '1 month',
+    MM: '%d months',
+    y: '1 year',
+    yy: '%d years'
+  }
 });
 
 const SaveMessage = ({ lastSaved }) => {
@@ -31,16 +31,16 @@ const SaveMessage = ({ lastSaved }) => {
   const lastSavedMoment = moment(lastSaved);
   const difference = currentMoment.diff(lastSavedMoment);
   const duration = moment.duration(difference);
-  let result = "Last saved ";
+  let result = 'Last saved ';
 
-  if (duration.asMinutes() < 1) return "Saved";
+  if (duration.asMinutes() < 1) return 'Saved';
 
   if (duration.asDays() < 1) {
-    result += lastSavedMoment.format("h:mm a");
+    result += lastSavedMoment.format('h:mm a');
   } else if (duration.asYears() < 1) {
-    result += lastSavedMoment.format("MMMM D");
+    result += lastSavedMoment.format('MMMM D');
   } else {
-    result += lastSavedMoment.format("MMMM D, YYYY");
+    result += lastSavedMoment.format('MMMM D, YYYY');
   }
 
   result += ` (${lastSavedMoment.fromNow()})`;
@@ -52,7 +52,7 @@ SaveMessage.propTypes = {
     PropTypes.instanceOf(Date),
     PropTypes.instanceOf(moment),
     PropTypes.string
-  ]).isRequired,
+  ]).isRequired
 };
 
 export default SaveMessage;

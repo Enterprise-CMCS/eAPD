@@ -2,6 +2,12 @@
 
 exports[`Header component opens and closes the dropdown when clicked  1`] = `
 <header>
+  <a
+    className="skip-nav ds-c-dialog__header"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
   <div
     className="ds-l-container"
   >
@@ -176,6 +182,12 @@ exports[`Header component opens and closes the dropdown when clicked  1`] = `
 
 exports[`Header component renders correctly when the dropdown is closed and the page is top level 1`] = `
 <header>
+  <a
+    className="skip-nav ds-c-dialog__header"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
   <div
     className="ds-l-container"
   >
@@ -350,6 +362,12 @@ exports[`Header component renders correctly when the dropdown is closed and the 
 
 exports[`Header component renders the admin home title when an admin user is at a secondary page 1`] = `
 <header>
+  <a
+    className="skip-nav ds-c-dialog__header"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
   <div
     className="ds-l-container"
   >
@@ -555,6 +573,12 @@ exports[`Header component renders the admin home title when an admin user is at 
 
 exports[`Header component renders the state user home title when a state user is at a secondary page 1`] = `
 <header>
+  <a
+    className="skip-nav ds-c-dialog__header"
+    href="#start-main-content"
+  >
+    Skip to main content
+  </a>
   <div
     className="ds-l-container"
   >

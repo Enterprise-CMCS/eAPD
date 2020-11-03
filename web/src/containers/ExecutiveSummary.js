@@ -46,15 +46,18 @@ const ExecutiveSummary = ({ data, total, years }) => {
                   <Dollars>{activity.combined}</Dollars>
                 </li>
                 <li>
-                  <strong>Medicaid share:</strong>{' '}
+                  <strong>Total Computable Medicaid Cost:</strong>{' '}
                   <Dollars>{activity.medicaid}</Dollars> (
                   <Dollars>{activity.federal}</Dollars> Federal share)
                 </li>
                 {Object.entries(activity.ffys).map(
                   ([ffy, { medicaidShare, federal, total: ffyTotal }], j) => (
-                    <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
-                      <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                      <strong>Medicaid Share:</strong>{' '}
+                    <li
+                      key={ffy}
+                      className={j === 0 ? 'ds-u-margin-top--2' : ''}
+                    >
+                      <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars>{' '}
+                      | <strong>Total Computable Medicaid Cost:</strong>{' '}
                       <Dollars>{medicaidShare}</Dollars> (
                       <Dollars>{federal}</Dollars> Federal share)
                     </li>
@@ -80,7 +83,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
                 {years.join(', ')}
               </li>
               <li>
-                <strong>Medicaid share:</strong>{' '}
+                <strong>Total Computable Medicaid Cost:</strong>{' '}
                 <Dollars>{total.medicaid}</Dollars> (
                 <Dollars>{total.federal}</Dollars> Federal share)
               </li>
@@ -92,8 +95,8 @@ const ExecutiveSummary = ({ data, total, years }) => {
                 ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
                   <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
                     <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                    <Dollars>{medicaid}</Dollars> Medicaid share |{' '}
-                    <Dollars>{federal}</Dollars> Federal share
+                    <Dollars>{medicaid}</Dollars> Total Computable Medicaid Cost
+                    | <Dollars>{federal}</Dollars> Federal share
                   </li>
                 )
               )}
