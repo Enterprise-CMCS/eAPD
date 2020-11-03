@@ -59,8 +59,8 @@ const getRoles = async ({ db = knex } = {}) => db
     activities: db.raw('array_agg(activities.name)')
   })
   .from({ rolesActivities: 'auth_role_activity_mapping' })
-  .join({ activities: 'auth_activities'}, 'activities.id', 'rolesActivities.activity_id')
-  .join({ roles: 'auth_roles'}, 'roles.id', 'rolesActivities.role_id')
+  .join({ activities: 'auth_activities' }, 'activities.id', 'rolesActivities.activity_id')
+  .join({ roles: 'auth_roles' }, 'roles.id', 'rolesActivities.role_id')
   .where('roles.isActive', true)
   .groupBy('roles.id');
 
@@ -96,7 +96,7 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
       const activities = roleId ? roles.find(role => role.id === roleId).activities : [];
       return { ...result, [state]: activities }
     }, {}));
-}
+};
 
 module.exports = {
   getAuthActivities,
