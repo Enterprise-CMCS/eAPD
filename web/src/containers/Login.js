@@ -113,10 +113,10 @@ const Login = ({
       >
         <TextField
           id="username"
-          label="Email"
+          label="EUA ID"
           name="username"
           errorMessage={errorMessage === false ? null : ""}
-          ariaLabel="Enter the email associated with this account."
+          ariaLabel="Enter your EUA ID."
           value={username}
           onChange={changeUsername}
         />
