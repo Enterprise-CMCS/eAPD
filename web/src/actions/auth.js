@@ -99,14 +99,14 @@ export const login = (username, password) => dispatch => {
         return dispatch(failLoginLocked());
       }
       
-      if (res.status === 'MFA_REQUIRED') {
+      if (res.status === 'MFA_REQUIRED') {        
         const mfaFactor = res.factors.find(
           factor => factor.provider === 'OKTA'
-        );
-        // Currently we are only supporting one additional factor
-        const mfaType = res.factors[0].factorType;
+        );        
         
         if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
+        
+        const { factorType: mfaType } = mfaFactor;
         
         return mfaFactor.verify(res).then(() => {
           dispatch(completeFirstStage(mfaType));
