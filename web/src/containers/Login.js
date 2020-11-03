@@ -6,10 +6,11 @@ import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
 import { login, loginOtp } from '../actions/auth';
-import CardForm from '../components/CardForm';
+import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
+import LoginLocked from '../components/LoginLocked';
 
 const Login = ({
   authenticated,
@@ -18,6 +19,8 @@ const Login = ({
   hasEverLoggedOn,
   location,
   otpStage,
+  mfaType,
+  isLocked,
   login: action,
   loginOtp: otpAction
 }) => {
@@ -55,23 +58,32 @@ const Login = ({
   }
 
   let errorMessage = false;
-  if (otpStage && error === 'Authentication failed') {
+  if (isLocked) {
+    errorMessage = 'You are locked out'
+  } else if (otpStage && error === 'Authentication failed') {
     errorMessage = 'The one-time password you’ve entered is incorrect.';
   } else if (
     error === 'Authentication failed' ||
     error === 'Request failed with status code 401'
   ) {
-    errorMessage = 'The email or password you’ve entered is incorrect.';
+    errorMessage = 'Please contact your State Administrator for steps to register an account.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
-
+  
+  if (isLocked) {
+    return (
+      <LoginLocked />
+    );
+  } 
+  
   if (otpStage) {
     return (
       <LoginMFA
         action={otpAction}
         errorMessage={errorMessage}
         fetching={fetching}
+        mfaType={mfaType}
       />
     );
   }
@@ -79,7 +91,7 @@ const Login = ({
   return (
     <main id="start-main-content">
       <UpgradeBrowser />
-      <CardForm
+      <LoginForm
         title="Log in"
         legend="Log in"
         cancelable={false}
@@ -103,12 +115,19 @@ const Login = ({
           id="username"
           label="Email"
           name="username"
+          errorMessage={errorMessage === false ? null : ""}
           ariaLabel="Enter the email associated with this account."
           value={username}
           onChange={changeUsername}
         />
-        <Password title="Password" value={password} onChange={changePassword} />
-      </CardForm>
+        <Password 
+          title="Password" 
+          value={password} 
+          onChange={changePassword} 
+          errorMessage={errorMessage ? "" : null}
+          customErrorMessage={errorMessage ? "Invalid Entry" : null}
+        />
+      </LoginForm>
     </main>
   );
 };
@@ -120,18 +139,22 @@ Login.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
+  mfaType: PropTypes.string.isRequired,
+  isLocked: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, mfaType, isLocked }
 }) => ({
   authenticated,
   error,
   fetching,
   hasEverLoggedOn,
-  otpStage
+  otpStage,
+  mfaType,
+  isLocked
 });
 
 const mapDispatchToProps = { login, loginOtp };
