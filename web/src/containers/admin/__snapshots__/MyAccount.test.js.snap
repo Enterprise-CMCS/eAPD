@@ -394,6 +394,8 @@ exports[`my account page renders 3`] = `
     <Password
       className=""
       compareTo={Array []}
+      customErrorMessage=""
+      errorMessage=""
       onChange={[Function]}
       showMeter={true}
       title="New password"
