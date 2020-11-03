@@ -301,7 +301,7 @@ describe('application-level actions', () => {
   describe('select an existing API', () => {
     it('redirects to provided route and saves the APD ID to local storage', async () => {
       const activities = [
-        { name: 'Objectives and key results' },
+        { name: 'Outcomes and metrics' },
         { name: 'FFP and budget' }
       ];
       const apd = {
@@ -352,7 +352,7 @@ describe('application-level actions', () => {
 
     it('does the same, but queues a save if the federal citations is initially blank', async () => {
       const activities = [
-        { name: 'Objectives and key results' },
+        { name: 'Outcomes and metrics' },
         { name: 'FFP and budget' }
       ];
       const apd = {

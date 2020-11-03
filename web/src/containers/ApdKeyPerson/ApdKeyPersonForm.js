@@ -50,7 +50,9 @@ const PersonForm = ({
   return (
     <Fragment>
       <h4 className="ds-h4">
-        {primary ? t(`${tRoot}.labels.titlePrimary`) : t(`${tRoot}.labels.titleSecondary`)}
+        {primary
+          ? t(`${tRoot}.labels.titlePrimary`)
+          : t(`${tRoot}.labels.titleSecondary`)}
       </h4>
       <p className="ds-u-margin-bottom--0">{t(`${tRoot}.labels.note`)}</p>
       <TextField

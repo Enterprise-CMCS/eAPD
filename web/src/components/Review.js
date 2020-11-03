@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Review = ({
   children,
+  ariaLabel,
   editHref,
   onDeleteClick,
   onEditClick,
@@ -30,9 +31,14 @@ const Review = ({
   return (
     <ReviewSummary
       editContent={
-        <div className="nowrap visibility--screen">
+        <div className="nowrap visibility--screen ds-u-margin-top--2">
           {onEditClick || editHref ? (
-            <Button size="small" variation="transparent" onClick={editHandler}>
+            <Button
+              size="small"
+              variation="transparent"
+              onClick={editHandler}
+              aria-label={`Edit${ariaLabel ? ` ${ariaLabel}` : ''}`}
+            >
               {// If the editHref is set, create a link element here so it'll
               // behave as intended on the outside.  Otherwise, the button
               // content can just be text.
@@ -49,13 +55,15 @@ const Review = ({
             // If there's a delete click handler, add a remove button to the
             // header area and wire it up
             <Fragment>
-              |
+              {onEditClick && <strong>|</strong>}
               <Button
                 size="small"
                 variation="transparent"
                 onClick={onDeleteClick}
+                aria-label={`Delete${ariaLabel ? ` ${ariaLabel}` : ''}`}
+                className="ds-u-color--error"
               >
-                Remove
+                Delete
               </Button>
             </Fragment>
           )}
@@ -70,6 +78,7 @@ const Review = ({
 
 Review.propTypes = {
   children: PropTypes.node,
+  ariaLabel: PropTypes.string,
   editHref: PropTypes.string,
   onDeleteClick: PropTypes.func,
   onEditClick: PropTypes.func
@@ -77,6 +86,7 @@ Review.propTypes = {
 
 Review.defaultProps = {
   children: null,
+  ariaLabel: null,
   editHref: null,
   onDeleteClick: null,
   onEditClick: null

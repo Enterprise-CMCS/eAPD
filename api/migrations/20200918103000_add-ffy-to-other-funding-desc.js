@@ -6,11 +6,11 @@ exports.up = async knex => {
     const years = document.years;
 
     document.activities.forEach(activity => {
-      const otherSources = activity.costAllocationNarrative.otherSources || ""
+      const otherSources = activity.costAllocationNarrative.otherSources || '';
       years.forEach(year => {
         activity.costAllocationNarrative[year] = {
           otherSources
-        }
+        };
       });
       delete activity.costAllocationNarrative.otherSources;
     });

@@ -21,7 +21,7 @@ ApdHeader.propTypes = {
 
 ApdHeader.defaultProps = { apdName: '' };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   apdCreated: getAPDCreation(state),
   apdName: getAPDName(state),
   year: getAPDYearRange(state)

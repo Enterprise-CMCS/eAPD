@@ -174,7 +174,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="title"
         >
-          Medicaid Share
+          Activity Total Computable Medicaid Cost
         </td>
         <td
           className="budget-table--number"
@@ -236,7 +236,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <th
           colSpan="5"
         >
-          Medicaid Share
+          Total Computable Medicaid Cost
         </th>
         <td
           className="budget-table--number"
@@ -455,7 +455,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <td
           className="title"
         >
-          Medicaid Share
+          Activity Total Computable Medicaid Cost
         </td>
         <td
           className="budget-table--number"
@@ -517,7 +517,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         <th
           colSpan="5"
         >
-          Medicaid Share
+          Total Computable Medicaid Cost
         </th>
         <td
           className="budget-table--number"
@@ -867,7 +867,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         className="budget-table--subtotal budget-table--row__highlight"
       >
         <td>
-          Medicaid Share
+          Total Computable Medicaid Cost
         </td>
         <td
           colSpan="4"
@@ -1066,7 +1066,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
         className="budget-table--subtotal budget-table--row__highlight"
       >
         <td>
-          Medicaid Share
+          Total Computable Medicaid Cost
         </td>
         <td
           colSpan="4"
@@ -1288,7 +1288,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
       3
     </Dollars>
   </strong>
-  , the total cost to Medicaid is
+  , the total computable Medicaid cost is
    
   <strong>
     <Dollars>
@@ -1341,7 +1341,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
       3
     </Dollars>
   </strong>
-  , the total cost to Medicaid is
+  , the total computable Medicaid cost is
    
   <strong>
     <Dollars>
@@ -1394,7 +1394,7 @@ exports[`the CostAllocateFFP component renders the budget and cost allocation su
       3
     </Dollars>
   </strong>
-  , the total cost to Medicaid is
+  , the total computable Medicaid cost is
    
   <strong>
     <Dollars>
