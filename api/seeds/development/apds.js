@@ -1102,15 +1102,13 @@ const apd = {
 };
 
 const seed = async knex => {
-  const { state_id } = await knex('users').first('state_id'); // eslint-disable-line camelcase
-
   if (!validateApd(apd.document)) {
     logger.warn('apd document is not valid');
     logger.warn(validateApd.errors);
   }
 
   await knex('apds').insert({
-    state_id, // eslint-disable-line camelcase
+    state_id: 'mo', // eslint-disable-line camelcase
     ...apd
   });
 };
