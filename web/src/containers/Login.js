@@ -11,6 +11,7 @@ import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
 import LoginLocked from '../components/LoginLocked';
+import LoginMFAEnroll from '../components/LoginMFAEnroll';
 
 const Login = ({
   authenticated,
@@ -20,6 +21,7 @@ const Login = ({
   location,
   otpStage,
   mfaType,
+  mfaEnrolled,
   isLocked,
   login: action,
   loginOtp: otpAction
@@ -69,6 +71,12 @@ const Login = ({
     errorMessage = 'Please contact your State Administrator for steps to register an account.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
+  }
+  
+  if (mfaEnrolled == false) {
+    return (
+      <LoginMFAEnroll />
+    );
   }
   
   if (isLocked) {
@@ -140,13 +148,14 @@ Login.propTypes = {
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
   mfaType: PropTypes.string.isRequired,
+  mfaEnrolled: PropTypes.bool.isRequired,
   isLocked: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, mfaType, isLocked }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, mfaType, mfaEnrolled, isLocked }
 }) => ({
   authenticated,
   error,
@@ -154,6 +163,7 @@ const mapStateToProps = ({
   hasEverLoggedOn,
   otpStage,
   mfaType,
+  mfaEnrolled,
   isLocked
 });
 

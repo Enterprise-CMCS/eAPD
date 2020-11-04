@@ -5,16 +5,18 @@ import { fetchAllApds } from './app';
 import { getRoles, getUsers } from './admin';
 import oktaAuth from '../util/oktaAuth';
 
-export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
-export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const AUTH_CHECK_SUCCESS = 'AUTH_CHECK_SUCCESS';
+export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
+// Ty Note: This doesn't appear to be used in the reducers. Should we remove it? Is it redundant with LOGIN_REQUEST now?
+export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
+export const LOGIN_MFA_ENROLL = 'LOGIN_MFA_ENROLL';
+export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOCKED_OUT = 'LOCKED_OUT';
 export const RESET_LOCKED_OUT = 'RESET_LOCKED_OUT';
 
@@ -99,6 +101,7 @@ export const login = (username, password) => dispatch => {
         return dispatch(failLoginLocked());
       }
       
+      // 
       if (res.status === 'MFA_REQUIRED') {        
         const mfaFactor = res.factors.find(
           factor => factor.provider === 'OKTA'
