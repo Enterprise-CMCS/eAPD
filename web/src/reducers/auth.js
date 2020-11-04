@@ -4,9 +4,10 @@ import {
   LOGIN_REQUEST,
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
+  LOGIN_MFA_ENROLL,
+  LOGIN_MFA_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN_MFA_FAILURE,
   LOCKED_OUT,
   RESET_LOCKED_OUT,
   LOGOUT_SUCCESS
@@ -19,6 +20,7 @@ const initialState = {
   fetching: false,
   hasEverLoggedOn: false,
   initialCheck: false,
+  mfaEnrolled: false,
   mfaType: '',
   isLocked: false,
   user: null
