@@ -2,6 +2,7 @@
 
 exports[`the MilestoneReview component renders correctly 1`] = `
 <Review
+  ariaLabel={null}
   editHref={null}
   heading="1533. Milestone name"
   headingLevel="4"

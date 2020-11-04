@@ -67,7 +67,8 @@ const registerCoverageMiddleware = server => {
       const path = req.route ? req.route.path : req.path;
 
       try {
-        if (req.method.toLowerCase() !== 'options') { // ignore 'options' requests
+        if (req.method.toLowerCase() !== 'options') {
+          // ignore 'options' requests
           endpoints.find(e => e.openAPIPath === getOpenApiUrl(path)).methods[
             req.method.toLowerCase()
           ].statuses[res.statusCode] = { tested: true };

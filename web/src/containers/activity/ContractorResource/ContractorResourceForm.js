@@ -113,6 +113,9 @@ const ContractorResourceForm = ({
         onChange={getHandler(setDescription)}
       />
       <FormLabel>Contract Term</FormLabel>
+      <span className="ds-c-field__hint">
+        Contract term may extend beyond the FFY(s) included in this APD.
+      </span>
       <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
         <DateField
           label="Start date"
@@ -130,10 +133,10 @@ const ContractorResourceForm = ({
         label="Total Contract Cost"
         name="contractor-total-cost"
         size="medium"
+        hint="Provide total cost of the contract, not the total amount you are requesting for the FFYs. Total contract cost will not be added to your FFY request."
         value={totalCost}
         onChange={getHandler(setTotalCost)}
       />
-
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">This is an hourly resource</legend>
         <Choice
@@ -181,7 +184,6 @@ const ContractorResourceForm = ({
           }
         />
       </fieldset>
-
       {hourly.useHourly ? (
         <p className="ds-u-margin-bottom--0">
           {apdFFYs.map(ffy => (

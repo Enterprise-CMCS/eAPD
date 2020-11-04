@@ -17,6 +17,7 @@ exports[`executive summary component renders correctly 1`] = `
       resource="executiveSummary.summary"
     >
       <Review
+        ariaLabel={null}
         className=""
         editHref="/apd/activity/0/overview"
         heading={
@@ -55,7 +56,7 @@ exports[`executive summary component renders correctly 1`] = `
           </li>
           <li>
             <strong>
-              Medicaid share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -80,10 +81,10 @@ exports[`executive summary component renders correctly 1`] = `
             <Dollars>
               5232
             </Dollars>
-             |
              
+            | 
             <strong>
-              Medicaid Share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -108,10 +109,10 @@ exports[`executive summary component renders correctly 1`] = `
             <Dollars>
               848622
             </Dollars>
-             |
              
+            | 
             <strong>
-              Medicaid Share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -126,6 +127,7 @@ exports[`executive summary component renders correctly 1`] = `
         </ul>
       </Review>
       <Review
+        ariaLabel={null}
         className="ds-u-border-bottom--0"
         editHref="/apd/activity/1/overview"
         heading={
@@ -164,7 +166,7 @@ exports[`executive summary component renders correctly 1`] = `
           </li>
           <li>
             <strong>
-              Medicaid share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -189,10 +191,10 @@ exports[`executive summary component renders correctly 1`] = `
             <Dollars>
               26926
             </Dollars>
-             |
              
+            | 
             <strong>
-              Medicaid Share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -217,10 +219,10 @@ exports[`executive summary component renders correctly 1`] = `
             <Dollars>
               54634738
             </Dollars>
-             |
              
+            | 
             <strong>
-              Medicaid Share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -238,6 +240,7 @@ exports[`executive summary component renders correctly 1`] = `
         className="ds-u-border--dark ds-u-margin--0"
       />
       <Review
+        ariaLabel={null}
         className="ds-u-border--0"
         editHref={null}
         heading="Total cost"
@@ -261,7 +264,7 @@ exports[`executive summary component renders correctly 1`] = `
           </li>
           <li>
             <strong>
-              Medicaid share:
+              Total Computable Medicaid Cost:
             </strong>
              
             <Dollars>
@@ -298,8 +301,7 @@ exports[`executive summary component renders correctly 1`] = `
              |
              
             <Dollars />
-             Medicaid share |
-             
+             Total Computable Medicaid Cost | 
             <Dollars>
               2883
             </Dollars>
@@ -321,8 +323,7 @@ exports[`executive summary component renders correctly 1`] = `
              |
              
             <Dollars />
-             Medicaid share |
-             
+             Total Computable Medicaid Cost | 
             <Dollars>
               826
             </Dollars>

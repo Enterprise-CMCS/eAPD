@@ -33,8 +33,6 @@ describe('the StatePersonReview component', () => {
   });
 
   test('hooks up the expand event', () => {
-    expect(component.find('Review').prop('onEditClick')).toEqual(
-      expand
-    );
+    expect(component.find('Review').prop('onEditClick')).toEqual(expand);
   });
 });
