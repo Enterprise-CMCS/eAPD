@@ -69,6 +69,22 @@ const auth = (state = initialState, action) => {
         authenticated: false,
         error: ''
       };
+    case LOGIN_MFA_ENROLL:
+      return {
+        ...state,
+        fetching: false,
+        otpStage: true,
+        authenticated: false,
+        mfaEnrolled: false,
+        mfaTypeSelected: '',
+        error: ''
+      };
+    case LOGIN_MFA_FAILURE:
+      return { 
+        ...state, 
+        fetching: false, 
+        error: action.error 
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -84,12 +100,6 @@ const auth = (state = initialState, action) => {
         otpStage: false,
         fetching: false,
         error: action.error
-      };
-    case LOGIN_MFA_FAILURE:
-      return { 
-        ...state, 
-        fetching: false, 
-        error: action.error 
       };
     case LOCKED_OUT:
       return {

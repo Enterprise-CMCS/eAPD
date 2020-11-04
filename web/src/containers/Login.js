@@ -37,7 +37,11 @@ const Login = ({
     e.preventDefault();
     action(username, password);
   };
-
+  
+  const handleFactorSelection = (selected) => {
+    console.log("mfa submit", selected);
+  };
+  
   const hideConsent = () => {
     setShowConsent(false);
   };
@@ -72,20 +76,18 @@ const Login = ({
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
-  
-  if (mfaEnrolled == false) {
-    return (
-      <LoginMFAEnroll />
-    );
-  }
-  
+    
   if (isLocked) {
     return (
       <LoginLocked />
     );
   } 
   
-  if (otpStage) {
+  if (otpStage && mfaEnrolled === false) {
+    return (
+      <LoginMFAEnroll handleSelection={handleFactorSelection} />
+    );
+  } else if(otpStage) {
     return (
       <LoginMFA
         action={otpAction}
@@ -93,7 +95,7 @@ const Login = ({
         fetching={fetching}
         mfaType={mfaType}
       />
-    );
+    );    
   }
 
   return (
