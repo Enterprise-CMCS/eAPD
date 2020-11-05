@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
-import { login, loginOtp } from '../actions/auth';
+import { login, loginOtp, mfaConfig } from '../actions/auth';
 import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
@@ -21,12 +21,15 @@ const Login = ({
   hasEverLoggedOn,
   location,
   otpStage,
-  mfaType,
-  mfaEnrolled,
+  factorsList,
+  mfaEnrollStage,
   mfaTypeSelected,
+  mfaActivateStage,
+  verifyData,
   isLocked,
   login: action,
-  loginOtp: otpAction
+  loginOtp: otpAction,
+  mfaConfig: mfaAction
 }) => {
   const [showConsent, setShowConsent] = useState(true);
   const [username, setUsername] = useState('');
@@ -41,10 +44,13 @@ const Login = ({
   };
   
   const handleFactorSelection = (selected) => {
-    // Ty note: can I call a reducer/action from here to update the state with data?
-    mfaTypeSelected = selected;
-    console.log("mfa submit", selected);
+    // Ty note: call an action from here to update the state with selected mfa method
+    mfaAction(selected);
   };
+  
+  const handleVerificationCode = (code) => {
+    console.log("here is the entered code:", code);
+  }
   
   const hideConsent = () => {
     setShowConsent(false);
@@ -87,24 +93,25 @@ const Login = ({
     );
   } 
   
-  if (otpStage && mfaEnrolled === false) {
-    if(mfaTypeSelected === '') {
-      return (
-        <LoginMFAVerifyAuthApp />
-        // <LoginMFAEnroll handleSelection={handleFactorSelection} />
-      );      
-    } else if(mfaTypeSelected === 'auth-app') {
-      return (
-        <LoginMFAVerifyAuthApp />
-      );
-    };
-  } else if(otpStage) {
+  if (mfaEnrollStage) {
+    return (
+      <LoginMFAEnroll factors={factorsList} handleSelection={handleFactorSelection} />
+    );
+  }
+  
+  if (mfaActivateStage) {
+    return (
+      <LoginMFAVerifyAuthApp verificationData={verifyData} handleVerificationCode={handleVerificationCode} />
+    );
+  }
+  
+  if (otpStage) {
     return (
       <LoginMFA
         action={otpAction}
         errorMessage={errorMessage}
         fetching={fetching}
-        mfaType={mfaType}
+        mfaType={mfaTypeSelected}
       />
     );    
   }
@@ -160,29 +167,32 @@ Login.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
-  mfaType: PropTypes.string.isRequired,
   mfaTypeSelected: PropTypes.string.isRequired,
-  mfaEnrolled: PropTypes.bool.isRequired,
+  mfaEnrollStage: PropTypes.bool.isRequired,
+  mfaActivateStage: PropTypes.bool.isRequired,
+  verifyData: PropTypes.object,
   isLocked: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, mfaType, mfaTypeSelected, mfaEnrolled, isLocked }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, factorsList, mfaTypeSelected, mfaEnrollStage, mfaActivateStage, verifyData, isLocked }
 }) => ({
   authenticated,
   error,
   fetching,
   hasEverLoggedOn,
   otpStage,
-  mfaType,
+  factorsList,
   mfaTypeSelected,
-  mfaEnrolled,
+  mfaEnrollStage,
+  mfaActivateStage,
+  verifyData,
   isLocked
 });
 
-const mapDispatchToProps = { login, loginOtp };
+const mapDispatchToProps = { login, loginOtp, mfaConfig };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

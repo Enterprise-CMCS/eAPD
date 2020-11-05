@@ -13,7 +13,10 @@ export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
-export const LOGIN_MFA_ENROLL = 'LOGIN_MFA_ENROLL';
+export const LOGIN_MFA_ENROLL_START = 'LOGIN_MFA_ENROLL_START';
+// This can go away now. Only need ACTIVATE
+export const LOGIN_MFA_ENROLL_CONFIG = 'LOGIN_MFA_ENROLL_CONFIG';
+export const LOGIN_MFA_ENROLL_ACTIVATE = 'LOGIN_MFA_ENROLL_ACTIVATE';
 export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -31,7 +34,8 @@ export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeFirstStage = mfaType => ({ type: LOGIN_OTP_STAGE, data: mfaType });
-export const mfaEnroll = mfaType => ({ type: LOGIN_MFA_ENROLL, data: mfaType });
+export const mfaEnrollStart = factors => ({ type: LOGIN_MFA_ENROLL_START, data: factors });
+export const mfaEnrollActivate = (mfaTypeSelected, verifyData) => ({ type: LOGIN_MFA_ENROLL_ACTIVATE, mfaTypeSelected: mfaTypeSelected, verifyData: verifyData });
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
@@ -94,6 +98,25 @@ const setTokens = sessionToken => {
     });
 };
 
+// Ty note: mfaSelected is what the user picked for their MFA option.
+// here we need to take that option and send it back to OKTA. Okta will
+// then return with the activation code. (QR)
+export const mfaConfig = mfaSelected => async dispatch => {
+  console.log("mfa selected by user:", mfaSelected);
+  
+  const transaction = await retrieveExistingTransaction();
+  
+  var factor = transaction.factors.find(function(factor) {
+    return factor.provider === 'GOOGLE' && factor.factorType === 'token:software:totp';
+  });  
+
+  const enrollTransaction = await factor.enroll();
+  
+  if(enrollTransaction.status === 'MFA_ENROLL_ACTIVATE') {
+    return dispatch(mfaEnrollActivate(mfaSelected, enrollTransaction.factor.activation))
+  }
+}
+
 export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
   authenticateUser(username, password)
@@ -102,11 +125,13 @@ export const login = (username, password) => dispatch => {
         return dispatch(failLoginLocked());
       }
       
-      // add logic here to check for MFA_ENROLLMENT status and requirements
       if (res.status === 'MFA_ENROLL') {
-        console.log("hit MFA_ENROLL");
-        dispatch(mfaEnroll());
+        return dispatch(mfaEnrollStart(res.factors));
       }
+      
+      // if (res.status === 'MFA_ACTIVATE') {
+      //   return dispatch(mfaEnrollActivate(res.factor))
+      // }
       
       if (res.status === 'MFA_REQUIRED') {        
         const mfaFactor = res.factors.find(

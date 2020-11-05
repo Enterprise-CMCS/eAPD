@@ -4,7 +4,9 @@ import {
   LOGIN_REQUEST,
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
-  LOGIN_MFA_ENROLL,
+  LOGIN_MFA_ENROLL_START,
+  LOGIN_MFA_ENROLL_CONFIG,
+  LOGIN_MFA_ENROLL_ACTIVATE,
   LOGIN_MFA_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -14,15 +16,18 @@ import {
 } from '../actions/auth';
 
 const initialState = {
-  otpStage: false,
   authenticated: false,
   error: '',
   fetching: false,
   hasEverLoggedOn: false,
+  otpStage: false,
   initialCheck: false,
-  mfaEnrolled: false,
+  factorsList: '',
+  mfaEnrollStage: false,
+  mfaActivateStage: false,
   mfaTypeSelected: '',
   mfaType: '',
+  verifyData: null,
   isLocked: false,
   user: null
 };
@@ -70,13 +75,26 @@ const auth = (state = initialState, action) => {
         authenticated: false,
         error: ''
       };
-    case LOGIN_MFA_ENROLL:
+    case LOGIN_MFA_ENROLL_START:
       return {
         ...state,
         fetching: false,
         authenticated: false,
-        mfaEnrolled: false,
-        mfaTypeSelected: '',
+        otpStage: false,
+        mfaEnrollStage: true,
+        factorsList: action.data,
+        error: ''
+      };
+    case LOGIN_MFA_ENROLL_ACTIVATE:
+      return {
+        ...state,
+        fetching: false,
+        authenticated: false,
+        otpStage: false,
+        mfaEnrollStage: false,
+        mfaActivateStage: true,
+        mfaTypeSelected: action.mfaTypeSelected,
+        verifyData: action.verifyData,
         error: ''
       };
     case LOGIN_MFA_FAILURE:
