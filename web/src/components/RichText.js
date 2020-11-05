@@ -13,6 +13,7 @@ import 'tinymce/plugins/autoresize';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/spellchecker';
+import 'tinymce/plugins/help';
 
 import { uploadFile } from '../actions/editApd';
 import { generateKey } from '../util';
@@ -95,20 +96,22 @@ class RichText extends Component {
       'autoresize',
       'lists',
       'paste',
-      'spellchecker'
+      'spellchecker',
+      'help'
     ];
 
     // https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/
     const toolbar = [
-      "undo redo",
-      "style",
-      "bold italic strikethrough forecolor",
-      "alignleft aligncenter alignright alignjustify",
-      "outdent indent",
-      "numlist bullist",
-      "formatselect",
-      "eapdImageUpload"
-    ].join(" | ");
+      'undo redo',
+      'style',
+      'bold italic strikethrough forecolor',
+      'alignleft aligncenter alignright alignjustify',
+      'outdent indent',
+      'numlist bullist',
+      'formatselect',
+      'eapdImageUpload',
+      'help'
+    ].join(' | ');
 
     return (
       <div className="rte--wrapper">

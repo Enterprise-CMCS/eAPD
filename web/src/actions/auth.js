@@ -62,7 +62,8 @@ export const login = (username, password) => dispatch => {
 };
 
 export const logout = () => dispatch =>
-  axios.get('/auth/logout')
+  axios
+    .get('/auth/logout')
     .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(completeLogout()));
 

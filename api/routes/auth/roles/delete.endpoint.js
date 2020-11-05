@@ -17,24 +17,21 @@ describe('auth roles endpoint | DELETE /auth/roles/:roleID', () => {
 
   describe('when authenticated', () => {
     it('with an invalid role ID', async () => {
-      const response = await login()
-        .then(api => api.delete(url(9001)));
+      const response = await login().then(api => api.delete(url(9001)));
 
       expect(response.status).toEqual(404);
       expect(response.data).toMatchSnapshot();
     });
 
     it('deleting the role that the user belongs to', async () => {
-      const response = await login()
-        .then(api => api.delete(url(1101)));
+      const response = await login().then(api => api.delete(url(1101)));
 
       expect(response.status).toEqual(401);
       expect(response.data).toMatchSnapshot();
     });
 
     it('deleting a role that the user does not belong to', async () => {
-      const response = await login()
-        .then(api => api.delete(url(1102)));
+      const response = await login().then(api => api.delete(url(1102)));
 
       expect(response.status).toEqual(204);
       expect(response.data).toMatchSnapshot();
