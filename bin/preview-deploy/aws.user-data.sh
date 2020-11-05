@@ -100,7 +100,19 @@ service nginx restart
 
 # Configure CloudWatch Agent
 # Nginx is preview only
-cat <<CLOUDWATCHCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
+cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
+"agent": {  "metrics_collection_interval": 60,
+  "region": "$AWS_REGION",
+  "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
+  "debug": false,
+  "run_as_user": "cwagent"
+}
+
+CWAGENTCONFIG
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
+
+cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
 {
   "logs": {
     "logs_collected": {
@@ -128,9 +140,9 @@ cat <<CLOUDWATCHCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
   }
 }
 
-CLOUDWATCHCONFIG
+CWVARLOGCONFIG
 
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var_logs.json -c file:/opt/aws/amazon-cloudwatch-agent/doc/amazon-cloudwatch-agent-schema.json
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
 
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
