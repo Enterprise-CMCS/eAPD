@@ -22,11 +22,7 @@ class LoginMFAEnroll extends Component {
   }
   
   render() {    
-    const factorTypes = [
-      { text: 'SMS Text', value: 'sms' },
-      { text: 'Authenticator App', value: 'auth-app' },
-      { text: 'Email', value: 'email' }
-    ];
+    const factorTypes = this.props.factors;
     
     return(
       <div id="start-main-content">
@@ -42,14 +38,14 @@ class LoginMFAEnroll extends Component {
                     <Fragment key={index}>
                       <input
                         className="ds-c-choice"
-                        id={choice.value}
-                        checked={this.state.selectedOption === choice.value}
+                        id={choice.factorType + choice.vendorName}
+                        checked={this.state.selectedOption === choice.factorType + choice.vendorName}
                         type="radio"
                         name="mfa-choices"
-                        value={choice.value}
+                        value={choice.factorType + choice.vendorName}
                         onChange={this.handleOnChange} 
                       />
-                      <label htmlFor={choice.value}><span>{choice.text}</span></label>
+                      <label htmlFor={choice.factorType + choice.vendorName}><span>{choice.factorType + choice.vendorName}</span></label>
                     </Fragment>
                   ))}
               </fieldset>
