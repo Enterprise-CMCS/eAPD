@@ -56,10 +56,10 @@ exports[`login component renders correctly if logged in previously but not logge
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
       errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -131,10 +131,10 @@ exports[`login component renders correctly if not logged in and fetching data 1`
     working={true}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
       errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -190,10 +190,10 @@ exports[`login component renders correctly if not logged in and there is an erro
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
       errorMessage=""
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -249,10 +249,10 @@ exports[`login component renders correctly if not logged in, and never logged in
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
       errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -308,10 +308,10 @@ exports[`login component renders correctly if not logged in, and never logged in
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
       errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -367,10 +367,10 @@ exports[`login component renders correctly if not logged in, and never logged in
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
       errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -426,10 +426,10 @@ exports[`login component renders correctly if there is an authentication error 1
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
       errorMessage=""
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
