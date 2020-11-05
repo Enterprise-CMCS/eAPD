@@ -13,7 +13,7 @@ const activities = {
   'view-document': true,
   'view-affiliations': true,
   'edit-affiliations': true,
-  'approve-state-access': true,
+  'approve-state-access': true
 };
 
 const roles = {
@@ -27,7 +27,7 @@ const roles = {
 };
 
 const roleToActivityMappings = {
-  'eAPD Admin': ['view-users', 'view-roles'],
+  'eAPD Admin': ['view-users', 'view-roles', 'approve-state-access'],
   'eAPD Federal Analyst': [
     'view-users',
     'view-roles',

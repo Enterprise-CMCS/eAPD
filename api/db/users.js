@@ -1,27 +1,24 @@
 const logger = require('../logger')('user db');
-const {
-  userApplicationProfileUrl,
-  oktaClient,
-  callOktaEndpoint
-} = require('../auth/oktaAuth');
-const knex = require('./knex');
+const { oktaClient } = require('../auth/oktaAuth');
 const {
   getUserAffiliatedStates,
   getUserPermissionsForStates
 } = require('./auth');
 
 const sanitizeUser = user => ({
-  activities: user.activities,
+  activities: null,
   id: user.id,
   name: user.displayName,
   phone: user.primaryPhone,
   roles: user.auth_roles,
   username: user.login,
-  state: user.state,
-  hasLoggedIn: user.hasLoggedIn
+  state: null,
+  hasLoggedIn: null,
+  permissions: {},
+  states: []
 });
 
-const populateUser = async (user) => {
+const populateUser = async user => {
   if (user) {
     const populatedUser = user;
     populatedUser.permissions = await getUserPermissionsForStates(user.id);
