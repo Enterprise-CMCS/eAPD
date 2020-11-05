@@ -100,7 +100,7 @@ service nginx restart
 
 # Configure CloudWatch Agent
 # Nginx is preview only
-cat <<CLOUDWATCHCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var_logs.json
+cat <<CLOUDWATCHCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
 {
   "logs": {
     "logs_collected": {
@@ -108,19 +108,19 @@ cat <<CLOUDWATCHCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var_logs.json
         "collect_list": [
           {
             "file_path": "/var/log/messages*",
-            "log_group_name": "/var_logs/messages"
+            "log_group_name": "var-logs/messages"
           },
           {
             "file_path": "/var/log/secure*",
-            "log_group_name": "/var_logs/secure"
+            "log_group_name": "var-logs/secure"
           },
           {
             "file_path": "/var/log/nginx/access_log*",
-            "log_group_name": "/var_logs/nginx/access_log"
+            "log_group_name": "var-logs/nginx/access_log"
           },
           {
             "file_path": "/var/log/nginx/error_log*",
-            "log_group_name": "/var_logs/nginx/error_log"
+            "log_group_name": "var-logs/nginx/error_log"
           }
         ]
       }
