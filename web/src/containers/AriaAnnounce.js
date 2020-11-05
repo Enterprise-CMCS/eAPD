@@ -4,33 +4,31 @@ import { connect } from 'react-redux';
 
 import { getAriaAnnouncement } from '../reducers/aria';
 
-const AriaAnnounce = (props) =>{
-    const {ariaMessage} = props;
-    return (
-        <div
-            className="ds-u-visibility--screen-reader"
-            role="region"
-            aria-live="polite"
-        >
-            {ariaMessage}
-        </div>
-    )
+const AriaAnnounce = props => {
+  const { ariaMessage } = props;
+  return (
+    <div
+      className="ds-u-visibility--screen-reader"
+      role="region"
+      aria-live="polite"
+    >
+      {ariaMessage}
+    </div>
+  );
 };
 
 AriaAnnounce.propTypes = {
-    ariaMessage: PropTypes.string,
-}
+  ariaMessage: PropTypes.string
+};
 
 AriaAnnounce.defaultProps = {
-    ariaMessage: '',
-}
+  ariaMessage: ''
+};
 
 const mapStateToProps = state => ({
-    ariaMessage: getAriaAnnouncement(state)
+  ariaMessage: getAriaAnnouncement(state)
 });
 
-export default connect(
-    mapStateToProps
-)(AriaAnnounce);
+export default connect(mapStateToProps)(AriaAnnounce);
 
 export { AriaAnnounce as plain };

@@ -7,10 +7,11 @@ const token = {
   properties: {
     token: {
       type: 'string',
-      description: 'A JWT to be presented in the Authorization header of all subsequent requests.'
+      description:
+        'A JWT to be presented in the Authorization header of all subsequent requests.'
     }
   }
-}
+};
 
 const user = {
   type: 'object',
@@ -142,7 +143,7 @@ module.exports = {
     get: {
       tags: ['Authentication and authorization'],
       summary: 'Logs the current user out',
-      description: 'Logs the user out by deleting the user\'s session',
+      description: "Logs the user out by deleting the user's session",
       responses: {
         200: {
           description: 'Deletes the session if present'

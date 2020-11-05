@@ -95,10 +95,10 @@ tap.test('apds POST endpoint', async endpointTest => {
             description: '',
             expenses: [],
             fundingSource: 'HIT',
-            objectives: [
+            outcomes: [
               {
-                objective: '',
-                keyResults: [{ baseline: '', keyResult: '', target: '' }]
+                outcome: '',
+                metrics: [{ metric: '' }]
               }
             ],
             name: 'Program Administration',
@@ -146,17 +146,7 @@ tap.test('apds POST endpoint', async endpointTest => {
             '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
           }
         },
-        keyPersonnel: [
-          {
-            costs: { '2004': 0, '2005': 0 },
-            email: '',
-            hasCosts: false,
-            isPrimary: true,
-            name: '',
-            fte: { '2004': 0, '2005': 0 },
-            position: ''
-          }
-        ],
+        keyPersonnel: [],
         name: 'HITECH IAPD',
         narrativeHIE: '',
         narrativeHIT: '',

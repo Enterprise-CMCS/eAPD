@@ -17,7 +17,7 @@ const defaultProps = {
 
 const setup = (props = {}) => {
   return shallow(<Waypoint {...defaultProps} {...props} />);
-}
+};
 
 describe('<ConnectedWaypoint /> component', () => {
   afterEach(() => {
@@ -35,7 +35,8 @@ describe('<ConnectedWaypoint /> component', () => {
 
   it('dispatches on entering waypoint', () => {
     const component = setup();
-    component.find('Waypoint')
+    component
+      .find('Waypoint')
       .at(0)
       .prop('onEnter')('this is some html');
 
@@ -51,7 +52,7 @@ describe('<ConnectedWaypoint /> component', () => {
         }
       }
     };
-    const { location } = mapStateToProps(state)
+    const { location } = mapStateToProps(state);
     expect(location).toEqual({
       pathname: '/you/are/here',
       hash: '#at-this-element'
