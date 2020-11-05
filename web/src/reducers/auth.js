@@ -21,6 +21,7 @@ const initialState = {
   hasEverLoggedOn: false,
   initialCheck: false,
   mfaEnrolled: false,
+  mfaTypeSelected: '',
   mfaType: '',
   isLocked: false,
   user: null
@@ -73,7 +74,6 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         fetching: false,
-        otpStage: true,
         authenticated: false,
         mfaEnrolled: false,
         mfaTypeSelected: '',

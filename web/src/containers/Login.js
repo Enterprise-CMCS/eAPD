@@ -12,6 +12,7 @@ import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
 import LoginLocked from '../components/LoginLocked';
 import LoginMFAEnroll from '../components/LoginMFAEnroll';
+import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
 
 const Login = ({
   authenticated,
@@ -22,6 +23,7 @@ const Login = ({
   otpStage,
   mfaType,
   mfaEnrolled,
+  mfaTypeSelected,
   isLocked,
   login: action,
   loginOtp: otpAction
@@ -39,6 +41,8 @@ const Login = ({
   };
   
   const handleFactorSelection = (selected) => {
+    // Ty note: can I call a reducer/action from here to update the state with data?
+    mfaTypeSelected = selected;
     console.log("mfa submit", selected);
   };
   
@@ -84,9 +88,16 @@ const Login = ({
   } 
   
   if (otpStage && mfaEnrolled === false) {
-    return (
-      <LoginMFAEnroll handleSelection={handleFactorSelection} />
-    );
+    if(mfaTypeSelected === '') {
+      return (
+        <LoginMFAVerifyAuthApp />
+        // <LoginMFAEnroll handleSelection={handleFactorSelection} />
+      );      
+    } else if(mfaTypeSelected === 'auth-app') {
+      return (
+        <LoginMFAVerifyAuthApp />
+      );
+    };
   } else if(otpStage) {
     return (
       <LoginMFA
@@ -150,6 +161,7 @@ Login.propTypes = {
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
   mfaType: PropTypes.string.isRequired,
+  mfaTypeSelected: PropTypes.string.isRequired,
   mfaEnrolled: PropTypes.bool.isRequired,
   isLocked: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
@@ -157,7 +169,7 @@ Login.propTypes = {
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, mfaType, mfaEnrolled, isLocked }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, mfaType, mfaTypeSelected, mfaEnrolled, isLocked }
 }) => ({
   authenticated,
   error,
@@ -165,6 +177,7 @@ const mapStateToProps = ({
   hasEverLoggedOn,
   otpStage,
   mfaType,
+  mfaTypeSelected,
   mfaEnrolled,
   isLocked
 });
