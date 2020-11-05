@@ -31,6 +31,7 @@ export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeFirstStage = mfaType => ({ type: LOGIN_OTP_STAGE, data: mfaType });
+export const mfaEnroll = mfaType => ({ type: LOGIN_MFA_ENROLL, data: mfaType });
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
@@ -101,7 +102,12 @@ export const login = (username, password) => dispatch => {
         return dispatch(failLoginLocked());
       }
       
-      // 
+      // add logic here to check for MFA_ENROLLMENT status and requirements
+      if (res.status === 'MFA_ENROLL') {
+        console.log("hit MFA_ENROLL");
+        dispatch(mfaEnroll());
+      }
+      
       if (res.status === 'MFA_REQUIRED') {        
         const mfaFactor = res.factors.find(
           factor => factor.provider === 'OKTA'
