@@ -12,14 +12,15 @@ const Activity = ({ activity, activityIndex }) => {
     return (
       <Fragment>
         <p className="ds-u-margin-top--2">
-          <strong>Outcome: </strong> {outcome.outcome}
+          <strong>Outcome: </strong>{' '}
+          {outcome.outcome || 'Outcome not specified'}
         </p>
         <p className="ds-u-margin-top--2">
           <ul className="ds-c-list--bare">
             <strong>Metrics: </strong>
             {outcome.metrics.map(({ key, metric }, index) => (
               <li key={key} className="ds-u-margin-bottom--2">
-                {index + 1}. {metric}
+                {index + 1}. {metric || 'Metric not specified'}
               </li>
             ))}
           </ul>
@@ -34,7 +35,7 @@ const Activity = ({ activity, activityIndex }) => {
       <Fragment>
         <p>
           <strong>
-            {index + 1}. {milestone.milestone}
+            {index + 1}. {milestone.milestone || 'Milestone not specified'}
           </strong>
         </p>
         <p>
@@ -50,7 +51,7 @@ const Activity = ({ activity, activityIndex }) => {
       <Fragment>
         <p>
           <strong>
-            {index + 1}. {person.title}
+            {index + 1}. {person.title || 'Personnel title not specified'}
           </strong>
         </p>
         <p>{person.description}</p>
@@ -101,7 +102,7 @@ const Activity = ({ activity, activityIndex }) => {
       <Fragment>
         <p className="ds-u-margin-bottom--0">
           <strong>
-            {index + 1}. {contractor.name}
+            {index + 1}. {contractor.name || 'Contractor name not specified'}
           </strong>
           {contractor.hourly.useHourly === true && ' (hourly resource)'}
         </p>
