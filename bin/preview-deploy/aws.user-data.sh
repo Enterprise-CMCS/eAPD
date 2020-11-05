@@ -98,6 +98,40 @@ http {
 NGINXCONFIG
 service nginx restart
 
+# Configure CloudWatch Agent
+# Nginx is preview only
+cat <<CLOUDWATCHCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var_logs.json
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/messages*",
+            "log_group_name": "/var_logs/messages"
+          },
+          {
+            "file_path": "/var/log/secure*",
+            "log_group_name": "/var_logs/secure"
+          },
+          {
+            "file_path": "/var/log/nginx/access_log*",
+            "log_group_name": "/var_logs/nginx/access_log"
+          },
+          {
+            "file_path": "/var/log/nginx/error_log*",
+            "log_group_name": "/var_logs/nginx/error_log"
+          }
+        ]
+      }
+    }
+  }
+}
+
+CLOUDWATCHCONFIG
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var_logs.json -c file:/opt/aws/amazon-cloudwatch-agent/doc/amazon-cloudwatch-agent-schema.json
+
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
 su ec2-user <<E_USER
@@ -169,41 +203,6 @@ echo "module.exports = {
 
 # Start it up
 pm2 start ecosystem.config.js
-
-# Configure CloudWatch Agent
-# Nginx is preview only
-cd /opt/aws/amazon-cloudwatch-agent/doc
-
-cat <<CLOUDWATCHCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var_logs.json
-{
-  "logs": {
-    "logs_collected": {
-      "files": {
-        "collect_list": [
-          {
-            "file_path": "/var/log/messages*",
-            "log_group_name": "/var_logs/messages"
-          },
-          {
-            "file_path": "/var/log/secure*",
-            "log_group_name": "/var_logs/secure"
-          },
-          {
-            "file_path": "/var/log/nginx/access_log*",
-            "log_group_name": "/var_logs/nginx/access_log"
-          },
-          {
-            "file_path": "/var/log/nginx/error_log*",
-            "log_group_name": "/var_logs/nginx/error_log"
-          }
-        ]
-      }
-    }
-  }
-}
-CLOUDWATCHCONFIG
-
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var_logs.json -c file:/opt/aws/amazon-cloudwatch-agent/doc/amazon-cloudwatch-agent-schema.json
 
 E_USER
 
