@@ -45,7 +45,7 @@ SecondaryNav.propTypes = {
   useParams: PropTypes.func
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   activities: selectActivitiesSidebar(state),
   activityCount: selectActivityCount(state),
   location: state.router.location

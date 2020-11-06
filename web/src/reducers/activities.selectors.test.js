@@ -9,8 +9,7 @@ import {
   selectContractorsByActivityIndex,
   selectActivityStatePersonnel,
   selectActivitiesSidebar,
-  selectOKRsByActivityIndex,
-  selectGoalsByActivityIndex,
+  selectOMsByActivityIndex,
   selectActivityTotalForBudgetByActivityIndex,
   makeSelectCostAllocateFFPBudget,
   selectActivityCount
@@ -510,13 +509,13 @@ describe('activities state selectors', () => {
   describe('selects activity OKRs by index', () => {
     it('returns OKRs if the activity exists', () => {
       expect(
-        selectOKRsByActivityIndex(
+        selectOMsByActivityIndex(
           {
             apd: {
               data: {
                 activities: [
                   'one',
-                  { objectives: 'objectives and key results' },
+                  { outcomes: 'outcomes and metrics' },
                   'three'
                 ]
               }
@@ -524,44 +523,12 @@ describe('activities state selectors', () => {
           },
           { activityIndex: 1 }
         )
-      ).toEqual('objectives and key results');
+      ).toEqual('outcomes and metrics');
     });
 
     it('returns null if the activity does not exist', () => {
       expect(
-        selectOKRsByActivityIndex(
-          {
-            apd: {
-              data: {
-                activities: []
-              }
-            }
-          },
-          { activityIndex: 1 }
-        )
-      ).toEqual(null);
-    });
-  });
-
-  describe('selects activity goals by index', () => {
-    it('returns goals if the activity exists', () => {
-      expect(
-        selectGoalsByActivityIndex(
-          {
-            apd: {
-              data: {
-                activities: ['one', { goals: 'goals' }, 'three']
-              }
-            }
-          },
-          { activityIndex: 1 }
-        )
-      ).toEqual('goals');
-    });
-
-    it('returns null if the activity does not exist', () => {
-      expect(
-        selectGoalsByActivityIndex(
+        selectOMsByActivityIndex(
           {
             apd: {
               data: {
@@ -576,7 +543,7 @@ describe('activities state selectors', () => {
   });
 
   describe('selects activity total by index', () => {
-    it('returns goals if the activity exists', () => {
+    it('returns outcomes if the activity exists', () => {
       expect(
         selectActivityTotalForBudgetByActivityIndex(
           {

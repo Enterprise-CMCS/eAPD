@@ -19,17 +19,17 @@ const AssurancesAndCompliance = ({ citations }) => {
           <ul className="ds-c-list--bare">
             {citations[name].map(({ title, checked, explanation }) => (
               <li key={title}>
-                {checked === true &&
-                  <span style={{ 'fontSize': '20px', 'paddingRight': '8px' }}>
+                {checked === true && (
+                  <span style={{ fontSize: '20px', paddingRight: '8px' }}>
                     <CheckCircle />
                   </span>
-                }
-                {checked === false &&
-                  <span style={{ 'fontSize': '20px', 'paddingRight': '8px' }}>
+                )}
+                {checked === false && (
+                  <span style={{ fontSize: '20px', paddingRight: '8px' }}>
                     <TimesCircle />
                   </span>
-                }
-                {checked === '' && <div className='fake-radio-button' />}
+                )}
+                {checked === '' && <div className="fake-radio-button" />}
                 {title}
                 {checked === false && (
                   <Fragment>
@@ -53,8 +53,5 @@ AssurancesAndCompliance.propTypes = {
 
 const mapStateToProps = state => ({ citations: selectFederalCitations(state) });
 
-export default connect(
-  mapStateToProps,
-  null
-)(AssurancesAndCompliance);
+export default connect(mapStateToProps, null)(AssurancesAndCompliance);
 export { AssurancesAndCompliance as plain, mapStateToProps };

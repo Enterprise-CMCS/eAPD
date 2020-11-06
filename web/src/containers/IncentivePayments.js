@@ -62,7 +62,12 @@ const IncentivePayments = ({
                 </th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <th id={`q${q}`} key={q} className="ds-u-text-align--right" scope="col">
+                    <th
+                      id={`q${q}`}
+                      key={q}
+                      className="ds-u-text-align--right"
+                      scope="col"
+                    >
                       {t('table.quarter', { q })}
                     </th>
                   ))}
@@ -77,7 +82,9 @@ const IncentivePayments = ({
             </thead>
             <tbody>
               <tr>
-                <th id="eh-payments" scope="row">EH Payments</th>
+                <th id="eh-payments" scope="row">
+                  EH Payments
+                </th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
@@ -104,7 +111,9 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th id="eh-count" scope="row">EH Count (optional)</th>
+                <th id="eh-count" scope="row">
+                  EH Count (optional)
+                </th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
@@ -131,7 +140,9 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th id="ep-payments" scope="row">EP Payments</th>
+                <th id="ep-payments" scope="row">
+                  EP Payments
+                </th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
@@ -158,7 +169,9 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th id="ep-count" scope="row">EP Count (optional)</th>
+                <th id="ep-count" scope="row">
+                  EP Count (optional)
+                </th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">

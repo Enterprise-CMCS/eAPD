@@ -19,7 +19,7 @@ amount:
       grant (i.e. any cost allocated funding from all parties) and the amount
       from other funding that will will not be used for the State share of the
       HITECH Medicaid grant. This amount will be deducted from the total cost of
-      the activity to calculate the total computable Medicaid share for this
+      the activity to calculate the total computable Medicaid cost for this
       activity.
     helpText: >-
       Example: For a $1,000,000 project that is 80% cost allocated to Medicaid
