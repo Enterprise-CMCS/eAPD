@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
-import { login, loginOtp, mfaConfig } from '../actions/auth';
+import { login, loginOtp, mfaConfig, mfaActivate } from '../actions/auth';
 import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
@@ -29,7 +29,8 @@ const Login = ({
   isLocked,
   login: action,
   loginOtp: otpAction,
-  mfaConfig: mfaAction
+  mfaConfig: mfaAction,
+  mfaActivate: mfaActivation // Ty note: what's the thinking behind the naming of these methods?
 }) => {
   const [showConsent, setShowConsent] = useState(true);
   const [username, setUsername] = useState('');
@@ -49,7 +50,9 @@ const Login = ({
   };
   
   const handleVerificationCode = (code) => {
+    // Get the verification code, send it back to OKTA for verification + enrollment status
     console.log("here is the entered code:", code);
+    mfaActivation(code);
   }
   
   const hideConsent = () => {
@@ -192,7 +195,7 @@ const mapStateToProps = ({
   isLocked
 });
 
-const mapDispatchToProps = { login, loginOtp, mfaConfig };
+const mapDispatchToProps = { login, loginOtp, mfaConfig, mfaActivate };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

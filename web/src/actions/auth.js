@@ -14,8 +14,6 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
 export const LOGIN_MFA_ENROLL_START = 'LOGIN_MFA_ENROLL_START';
-// This can go away now. Only need ACTIVATE
-export const LOGIN_MFA_ENROLL_CONFIG = 'LOGIN_MFA_ENROLL_CONFIG';
 export const LOGIN_MFA_ENROLL_ACTIVATE = 'LOGIN_MFA_ENROLL_ACTIVATE';
 export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -98,9 +96,22 @@ const setTokens = sessionToken => {
     });
 };
 
-// Ty note: mfaSelected is what the user picked for their MFA option.
+// Ty notes: mfaSelected is what the user picked for their MFA option.
 // here we need to take that option and send it back to OKTA. Okta will
-// then return with the activation code. (QR)
+// then return with the activation code. (QR). 
+// ToDo:
+//  1. Currently this is hard-coded to just be the Google Authenticator 
+// method. We will need to handle the case where we need to get the users 
+// phone number if that is selected.
+//  2. Do we want to provide a way for a user to trigger a re-sending of
+// the authentication code?
+//  3. General error handling?
+// Concerns: 
+//  1. is this multi-arrow function an example of currying? It's
+// tough for me to follow exactly what's happening and how the data is
+// flowing. 
+//  2. I have to get the transaction twice basically, any ideas on
+// how that could be reduced/improved?
 export const mfaConfig = mfaSelected => async dispatch => {
   console.log("mfa selected by user:", mfaSelected);
   
@@ -113,8 +124,23 @@ export const mfaConfig = mfaSelected => async dispatch => {
   const enrollTransaction = await factor.enroll();
   
   if(enrollTransaction.status === 'MFA_ENROLL_ACTIVATE') {
+    // Any concerns with passing multiple params to a reducer?
     return dispatch(mfaEnrollActivate(mfaSelected, enrollTransaction.factor.activation))
   }
+}
+
+// Ty notes: get code, activate with OKTA.
+export const mfaActivate = code => async dispatch => {
+  console.log("code to be processed:", code);
+  
+  const transaction = await retrieveExistingTransaction(); 
+  
+  const activateTransaciton = transaction.activate({
+    passCode: code
+  });
+  
+  console.log("activateTransaction response:", activateTransaciton);
+  // if(activateTransaciton.status === 'LOGIN_SUCCESS')
 }
 
 export const login = (username, password) => dispatch => {
@@ -125,13 +151,12 @@ export const login = (username, password) => dispatch => {
         return dispatch(failLoginLocked());
       }
       
+      // MFA Enrollment starts here ---
+      // If user is required to enroll in MFA, get the available options
+      // and show them to the user for selecting
       if (res.status === 'MFA_ENROLL') {
         return dispatch(mfaEnrollStart(res.factors));
       }
-      
-      // if (res.status === 'MFA_ACTIVATE') {
-      //   return dispatch(mfaEnrollActivate(res.factor))
-      // }
       
       if (res.status === 'MFA_REQUIRED') {        
         const mfaFactor = res.factors.find(
