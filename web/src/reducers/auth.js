@@ -7,6 +7,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_MFA_FAILURE,
+  LOCKED_OUT,
+  RESET_LOCKED_OUT,
   LOGOUT_SUCCESS
 } from '../actions/auth';
 
@@ -17,6 +19,8 @@ const initialState = {
   fetching: false,
   hasEverLoggedOn: false,
   initialCheck: false,
+  mfaType: '',
+  isLocked: false,
   user: null
 };
 
@@ -52,7 +56,8 @@ const auth = (state = initialState, action) => {
         fetching: false,
         otpStage: true,
         authenticated: false,
-        error: ''
+        error: '',
+        mfaType: action.data
       };
     case LOGIN_MFA_REQUEST:
       return {
@@ -79,7 +84,25 @@ const auth = (state = initialState, action) => {
         error: action.error
       };
     case LOGIN_MFA_FAILURE:
-      return { ...state, fetching: false, error: action.error };
+      return { 
+        ...state, 
+        fetching: false, 
+        error: action.error 
+      };
+    case LOCKED_OUT:
+      return {
+        ...state,
+        isLocked: true,
+        fetching: false,
+        error: ''
+      };     
+    case RESET_LOCKED_OUT:
+      return {
+        ...state,
+        isLocked: false,
+        fetching: false,
+        error: ''
+      };
     case LOGOUT_SUCCESS:
       return {
         ...initialState,
