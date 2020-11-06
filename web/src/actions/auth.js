@@ -15,6 +15,8 @@ export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOCKED_OUT = 'LOCKED_OUT';
+export const RESET_LOCKED_OUT = 'RESET_LOCKED_OUT';
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
@@ -26,11 +28,13 @@ export const completeAuthCheck = user => ({
 export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
-export const completeFirstStage = () => ({ type: LOGIN_OTP_STAGE });
+export const completeFirstStage = mfaType => ({ type: LOGIN_OTP_STAGE, data: mfaType });
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
 export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
+export const failLoginLocked = () => ({ type: LOCKED_OUT })
+export const resetLocked = () => ({ type: RESET_LOCKED_OUT })
 
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
@@ -48,16 +52,6 @@ const loadData = activities => dispatch => {
 
 const authenticateUser = (username, password) => {
   return oktaAuth.signIn({ username, password });
-};
-
-const retrieveMFA = transaction => {
-  const mfaFactor = transaction.factors.find(
-    factor => factor.provider === 'OKTA'
-  );
-
-  if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
-
-  return mfaFactor.verify();
 };
 
 const retrieveExistingTransaction = async () => {
@@ -101,22 +95,39 @@ export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
   authenticateUser(username, password)
     .then(async res => {
-      if (res.status === 'MFA_REQUIRED') {
-        return retrieveMFA(res).then(() => {
-          dispatch(completeFirstStage());
-        });
+      if (res.status === 'LOCKED_OUT') {
+        return dispatch(failLoginLocked());
       }
-      await setTokens(res.sessionToken);
-      return axios
-        .get('/me')
-        .then(userRes => {
-          dispatch(completeLogin(userRes.data));
-          dispatch(loadData(userRes.data.activities));
-        })
-        .catch(error => {
-          const reason = error ? error.message : 'N/A';
-          dispatch(failLogin(reason));
-        });
+      
+      if (res.status === 'MFA_REQUIRED') {        
+        const mfaFactor = res.factors.find(
+          factor => factor.provider === 'OKTA'
+        );        
+        
+        if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
+        
+        const { factorType: mfaType } = mfaFactor;
+        
+        return mfaFactor.verify(res).then(() => {
+          dispatch(completeFirstStage(mfaType));
+        });          
+      } 
+      
+      if (res.status === 'SUCCESS')  {
+        await setTokens(res.sessionToken);
+        return axios
+          .get('/me')
+          .then(userRes => {       
+            dispatch(resetLocked());
+            dispatch(completeLogin(userRes.data));
+            dispatch(loadData(userRes.data.activities));
+          })
+          .catch(error => {
+            const reason = error ? error.message : 'N/A';
+            dispatch(failLogin(reason));
+        });                
+      }
+      return null;
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
@@ -139,7 +150,11 @@ export const loginOtp = otp => async dispatch => {
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';
-        dispatch(failLoginMFA(reason));
+        if (reason === 'User Locked') {
+          dispatch(failLoginLocked(reason));
+        } else {
+          dispatch(failLoginMFA(reason));          
+        } 
       });
   } else {
     dispatch(failLoginMFA('Authentication failed'));
