@@ -135,12 +135,27 @@ export const mfaActivate = code => async dispatch => {
   
   const transaction = await retrieveExistingTransaction(); 
   
-  const activateTransaciton = transaction.activate({
+  const activateTransaciton = await transaction.activate({
     passCode: code
   });
   
   console.log("activateTransaction response:", activateTransaciton);
-  // if(activateTransaciton.status === 'LOGIN_SUCCESS')
+  // I copied + pasted this from the login method. I assume we should
+  // abstract it into its own re-usable method? any guidance on that?
+  if (activateTransaciton.status === 'SUCCESS')  {
+    await setTokens(activateTransaciton.sessionToken);
+    return axios
+      .get('/me')
+      .then(userRes => {       
+        dispatch(resetLocked());
+        dispatch(completeLogin(userRes.data));
+        dispatch(loadData(userRes.data.activities));
+      })
+      .catch(error => {
+        const reason = error ? error.message : 'N/A';
+        dispatch(failLogin(reason));
+    });                
+  }
 }
 
 export const login = (username, password) => dispatch => {
@@ -158,9 +173,11 @@ export const login = (username, password) => dispatch => {
         return dispatch(mfaEnrollStart(res.factors));
       }
       
-      if (res.status === 'MFA_REQUIRED') {        
+      if (res.status === 'MFA_REQUIRED') {     
+        // rather then not checking, I just included GOOGLE since it's the
+        // only non-okta method
         const mfaFactor = res.factors.find(
-          factor => factor.provider === 'OKTA'
+          factor => factor.provider === 'OKTA' || 'GOOGLE'
         );        
         
         if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
