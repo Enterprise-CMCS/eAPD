@@ -4,11 +4,6 @@ exports[`Summary Activity Breakdown Table renders correctly renders correctly 1`
 <table
   className="budget-table activity-budget-table"
 >
-  <caption
-    className="ds-u-visibility--screen-reader"
-  >
-    Activity Breakdown Table
-  </caption>
   <thead>
     <tr
       className="budget-table--row__primary-header"

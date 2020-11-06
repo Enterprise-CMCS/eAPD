@@ -58,9 +58,6 @@ DataRowGroup.propTypes = {
 const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
   return (
     <table className="budget-table">
-      <caption className="ds-u-visibility--screen-reader">
-        Combined Activity Costs FFY {ffy} (Total Computable Medicaid Cost)
-      </caption>
       <thead>
         <tr className="budget-table--row__primary-header">
           <th scope="col">

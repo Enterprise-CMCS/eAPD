@@ -80,17 +80,17 @@ describe('apd (application) component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
-      apdIdHash: '6a382771',
+      apdId: '123456789',
       apdSelected: true,
       isAdmin: false,
       place: 'place'
     });
 
-    state.apd.data.id = false;
+    state.apd.data.id = null;
     delete state.apd.data.years;
 
     expect(mapStateToProps(state)).toEqual({
-      apdIdHash: null,
+      apdId: null,
       apdSelected: false,
       isAdmin: false,
       place: 'place'

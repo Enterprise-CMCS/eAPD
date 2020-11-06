@@ -15,9 +15,6 @@ const ScheduleSummary = ({ activities }) => (
         </div>
       ) : (
         <table className="budget-table">
-          <caption className="ds-u-visibility--screen-reader">
-            Activity List Overivew
-          </caption>
           <thead>
             <tr className="budget-table--row__primary-header">
               <th scope="col">Activity List Overview</th>
@@ -58,9 +55,6 @@ const ScheduleSummary = ({ activities }) => (
       ) : (
         activities.map(({ name: activityName, milestones }, i) => (
           <table key={activityName} className="budget-table">
-            <caption className="ds-u-visibility--screen-reader">
-              Activity {i + 1}: {activityName}
-            </caption>
             <thead>
               <tr className="budget-table--row__primary-header">
                 <th scope="col" style={{ width: '70%' }}>

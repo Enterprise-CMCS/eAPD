@@ -30,7 +30,7 @@ const ApdPreviousActivityTable = ({
 
   return (
     <table className="budget-table">
-      <caption className="ds-h4">HIT + HIE</caption>
+      <caption className="ds-h4">HIT + HIE Federal share 90% FFP</caption>
       <thead>
         <tr>
           <th id="prev_act_hit_header_ffy">
