@@ -12,13 +12,15 @@ const {
 
 const sanitizeUser = user => ({
   activities: user.activities,
+  hasLoggedIn: user.hasLoggedIn,
   id: user.id,
   name: user.displayName,
+  permissions: user.permissions,
   phone: user.primaryPhone,
   roles: user.auth_roles,
-  username: user.login,
   state: user.state,
-  hasLoggedIn: user.hasLoggedIn
+  states: user.states,
+  username: user.login,
 });
 
 const populateUser = async (user) => {

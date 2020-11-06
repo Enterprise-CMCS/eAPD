@@ -18,6 +18,7 @@ const activities = [
   { id: 1013, name: 'edit-affiliations' },
   { id: 1014, name: 'approve-state-access' },
 ];
+exports.activities = activities;
 
 const roles = [
   { id: 1101, isActive: true, name: 'eAPD Admin' },
@@ -28,6 +29,7 @@ const roles = [
   { id: 1106, isActive: false, name: 'eAPD State SME' },
   { id: 1107, isActive: true, name: 'eAPD State Admin' },
 ];
+exports.roles = roles;
 
 // grant 'eAPD Admin' role all activities
 const adminRole = roles.find(role => role.name === 'eAPD Admin');

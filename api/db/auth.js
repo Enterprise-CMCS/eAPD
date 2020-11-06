@@ -86,15 +86,15 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
   const roles = await getRoles();
   return db
     .select({
-      state: 'state_id',
+      stateId: 'state_id',
       roleId: 'role_id'
     })
     .from('auth_affiliations')
     .where('user_id', userId)
     .then(rows => rows.reduce((result, row) => {
-      const { state, roleId } = row;
+      const { stateId, roleId } = row;
       const activities = roleId ? roles.find(role => role.id === roleId).activities : [];
-      return { ...result, [state]: activities }
+      return { ...result, [stateId]: activities }
     }, {}));
 };
 

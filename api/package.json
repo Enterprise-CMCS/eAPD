@@ -18,7 +18,7 @@
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout --reporter=spec ${TESTS:-'{,!(node_modules)/**/}*.test.js'}",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --no-timeout --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
-    "test-endpoints": "jest --detectOpenHandles --runInBand ./routes/me/get.endpoint.js",
+    "test-endpoints": "jest --detectOpenHandles --runInBand '.+/affiliations/get\\.endpoint\\.js'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
     "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
@@ -82,6 +82,7 @@
     "jsonwebtoken": "^8.5.0",
     "knex": "^0.20.13",
     "moment": "^2.24.0",
+    "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

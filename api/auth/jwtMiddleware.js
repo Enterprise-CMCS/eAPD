@@ -23,9 +23,10 @@ const jwtMiddleware = async (
   } = {}
 ) => {
   const jwt = extractor(req);
+  console.log(jwt)
   try {
     const claims = jwt ? await verifyToken(jwt) : false;
-
+    console.log(claims)
     if (!claims) return next();
 
     // some values like group and application profile variables
