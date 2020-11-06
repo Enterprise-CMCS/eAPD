@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const uuid = require('uuid/v1');
 const logger = require('./logger')('main');
+const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./endpointCoverageMiddleware');
@@ -77,6 +78,7 @@ server.use((req, res, next) => {
 });
 
 logger.silly('setting global middleware');
+server.use(requestLoggerMiddleware);
 server.use(compression());
 server.use(express.urlencoded({ extended: true }));
 server.use(cors({ credentials: true, origin: true }));
