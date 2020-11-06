@@ -2,30 +2,32 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  plain as ObjectivesAndKeyResults,
+  plain as OutcomesAndMetrics,
   mapStateToProps,
   mapDispatchToProps
-} from './Objectives';
+} from './Outcomes';
 import {
-  addObjective,
-  addObjectiveKeyResult,
-  removeObjective
+  addOutcome,
+  addOutcomeMetric,
+  removeOutcome,
+  removeOutcomeMetric
 } from '../../actions/editActivity';
 
-describe('activity Objectives and Key Results component', () => {
+describe('activity Outcomes and Metrics component', () => {
   const activityIndex = 0;
   const props = {
     activityIndex,
-    objectives: [
-      { key: 'objective 1' },
-      { key: 'objective 2' },
-      { key: 'objective 3' }
+    outcomes: [
+      { key: 'outcome 1' },
+      { key: 'outcome 2' },
+      { key: 'outcome 3' }
     ],
     add: jest.fn(),
-    addKeyResult: jest.fn(),
-    remove: jest.fn()
+    addMetric: jest.fn(),
+    remove: jest.fn(),
+    removeMetric: jest.fn()
   };
-  const component = shallow(<ObjectivesAndKeyResults {...props} />);
+  const component = shallow(<OutcomesAndMetrics {...props} />);
 
   beforeEach(() => {
     props.add.mockClear();
@@ -39,12 +41,12 @@ describe('activity Objectives and Key Results component', () => {
   describe('events', () => {
     const list = component.find('FormAndReviewList');
 
-    it('handles adding a new objective', () => {
+    it('handles adding a new outcome', () => {
       list.prop('onAddClick')();
       expect(props.add).toHaveBeenCalledWith(activityIndex);
     });
 
-    it('handles deleting an objective', () => {
+    it('handles deleting an outcome', () => {
       list.prop('onDeleteClick')(1);
       expect(props.remove).toHaveBeenCalledWith(activityIndex, 1);
     });
@@ -52,9 +54,10 @@ describe('activity Objectives and Key Results component', () => {
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      add: addObjective,
-      addKeyResult: addObjectiveKeyResult,
-      remove: removeObjective
+      add: addOutcome,
+      addMetric: addOutcomeMetric,
+      remove: removeOutcome,
+      removeMetric: removeOutcomeMetric
     });
   });
 
@@ -65,7 +68,7 @@ describe('activity Objectives and Key Results component', () => {
           activities: [
             'activity 1',
             'activity 2',
-            { objectives: 'these are OKRs from state' }
+            { outcomes: 'these are OMs from state' }
           ]
         }
       }
@@ -74,7 +77,7 @@ describe('activity Objectives and Key Results component', () => {
     const ownProps = { activityIndex: 2 };
 
     expect(mapStateToProps(state, ownProps)).toEqual({
-      objectives: 'these are OKRs from state'
+      outcomes: 'these are OMs from state'
     });
   });
 });

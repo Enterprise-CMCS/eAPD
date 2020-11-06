@@ -30,7 +30,7 @@ class ExecutiveSummary extends PureComponent {
               {years.join(', ')}
             </li>
             <li>
-              <strong>Medicaid share:</strong>{' '}
+              <strong>Total Computable Medicaid Cost:</strong>{' '}
               <Dollars>{total.medicaid}</Dollars> (
               <Dollars>{total.federal}</Dollars> Federal share)
             </li>
@@ -42,8 +42,9 @@ class ExecutiveSummary extends PureComponent {
               ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
                 <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
                   <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                  <strong>Medicaid share:</strong> <Dollars>{medicaid}</Dollars>{' '}
-                  (<Dollars>{federal}</Dollars> Federal share)
+                  <strong>Total Computable Medicaid Cost:</strong>{' '}
+                  <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars>{' '}
+                  Federal share)
                 </li>
               )
             )}
@@ -68,7 +69,7 @@ class ExecutiveSummary extends PureComponent {
                 <Dollars>{activity.combined}</Dollars>
               </li>
               <li>
-                <strong>Medicaid share:</strong>{' '}
+                <strong>Total Computable Medicaid Cost:</strong>{' '}
                 <Dollars>{activity.medicaid}</Dollars> (
                 <Dollars>{activity.federal}</Dollars> Federal share)
               </li>
@@ -76,7 +77,7 @@ class ExecutiveSummary extends PureComponent {
                 ([ffy, { medicaidShare, federal, total: ffyTotal }], j) => (
                   <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
                     <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                    <strong>Medicaid share:</strong>{' '}
+                    <strong>Total Computable Medicaid Cost:</strong>{' '}
                     <Dollars>{medicaidShare}</Dollars> (
                     <Dollars>{federal}</Dollars> Federal share)
                   </li>

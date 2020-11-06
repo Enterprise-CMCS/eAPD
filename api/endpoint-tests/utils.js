@@ -3,11 +3,7 @@ const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
 
-const {
-  API_HOST,
-  API_PORT,
-  PORT
-} = process.env
+const { API_HOST, API_PORT, PORT } = process.env;
 
 const host = API_HOST || 'localhost';
 const port = API_PORT || PORT || 8000;

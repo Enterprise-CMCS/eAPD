@@ -135,36 +135,30 @@ Object {
       ],
       "fundingSource": "HIT",
       "name": "Program Administration",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Complete SLR modifications by 11/1/18",
-              "target": "",
+              "metric": "Complete SLR modifications by 11/1/18",
             },
             Object {
-              "baseline": "",
-              "keyResult": "Accept attestations through 4/30/19.",
-              "target": "",
+              "metric": "Accept attestations through 4/30/19.",
             },
           ],
-          "objective": "Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.",
+          "outcome": "Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.",
         },
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "<ol>
+              "metric": "<ol>
 <li>Guidance available on Tycho's websites</li>
 <li>Office hours availble for EPs and EHs</li>
 <li>Site visits, as needed, for EPs and EHs</li>
 </ol>
 ",
-              "target": "",
             },
           ],
-          "objective": "<p>Provide support to EPs and EHs through attestation process.</p>
+          "outcome": "<p>Provide support to EPs and EHs through attestation process.</p>
 ",
         },
       ],
@@ -470,21 +464,17 @@ Object {
       ],
       "fundingSource": "MMIS",
       "name": "HIE Claims Data Analytics",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Hire contracted support to build an open API for the DW that the HIE and PHR can consume.",
-              "target": "",
+              "metric": "Hire contracted support to build an open API for the DW that the HIE and PHR can consume.",
             },
             Object {
-              "baseline": "",
-              "keyResult": "Provide support for using open API for DW",
-              "target": "",
+              "metric": "Provide support for using open API for DW",
             },
           ],
-          "objective": "Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
+          "outcome": "Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
         },
       ],
       "plannedEndDate": "",
@@ -803,7 +793,7 @@ Object {
 <li>All initiatives described below are funded at 90/10 funds and do not require cost allocation. All projects below support the onboarding and connection for Medicaid providers, EPs, EHs, and additional providers supported by SMD #16-003. Section VII. Cost Allocation Plan and Appendix D of this IAPD further describes the cost allocation methodology.</li>
 </ul>
 <p><strong><ins>III.D.1 Behavioral Health Onboarding &amp; Care Coordination</ins></strong></p>
-<p>The Department recognizes the need to increase Behavioral Health (BH) data capacity and sharing to achieve its goals and objectives related to care coordination. This includes promoting effective communication to coordinate care and enhancing the ability for providers to share and gain access to Protected Class Patient Data where appropriate. To support the capacity of data sharing and improving coordination of care, funding is requested to support Behavioral Health provider connectivity through the onboarding program by the development and implementation of a Behavioral Health-centric Unified Landing Page Application. The Behavioral Health Unified Landing Page Application will improve the quality and completeness of behavioral health data and thus, support the ability for providers to achieve MU.</p>
+<p>The Department recognizes the need to increase Behavioral Health (BH) data capacity and sharing to achieve its goals and outcomes related to care coordination. This includes promoting effective communication to coordinate care and enhancing the ability for providers to share and gain access to Protected Class Patient Data where appropriate. To support the capacity of data sharing and improving coordination of care, funding is requested to support Behavioral Health provider connectivity through the onboarding program by the development and implementation of a Behavioral Health-centric Unified Landing Page Application. The Behavioral Health Unified Landing Page Application will improve the quality and completeness of behavioral health data and thus, support the ability for providers to achieve MU.</p>
 <p></p>
 <p>In addition to the Unified Landing Page, funding is requested to support behavioral health provider onboarding to the HIE. The HIE onboarding program will provide funds to offset expenses required for behavioral health providers to adequately participate in statewide health information exchange. The onboarding program will support Tycho's HIE vision of increasing onboarding Medicaid providers and care coordination to help Tycho providers demonstrate MU. This program relates to the guidance provided by CMS in the SMD 16-003 letter dated February 2016 and will assist with covering costs associated with connectivity including but not limited to the following activities:</p>
 <ul>
@@ -830,7 +820,7 @@ Object {
 <p></p>
 <p><strong><ins>III.D.4 Staff Augmentation for Adoption and Utilization</ins></strong></p>
 <p>DHSS seeks to support onboarding efforts to connect Medicaid Meaningful Use eligible providers and providers supporting eligible providers to the HIE. The provider onboarding program will fund staffing outreach/educational support and technical services to Medicaid EPs that have adopted EHRs but not made HIE use part of day to day operations, not made use of new HIE capabilities, not yet connected, or were unable to take advantage of the ONC Regional Extension Center (REC) services because they were not eligible.</p>
-<p>Onboarding will include efforts to provide outreach/educational support and technical services. The Provider Onboarding Program includes the following objectives:</p>
+<p>Onboarding will include efforts to provide outreach/educational support and technical services. The Provider Onboarding Program includes the following outcomes:</p>
 <ul>
 <li>Provide staff for outreach, education, training, and organization change management to targeted provider groups to assist with interfacing and connecting to the HIE to support ongoing utilization of the HIE services</li>
 <li>Meet milestones established by the HIE and the Department for provider connectivity to the HIE</li>
@@ -850,7 +840,7 @@ Object {
 <p></p>
 <p><strong><ins>III.D.7 AURORA-HIE Integration</ins></strong></p>
 <p>AURORA is a Public Health online patient care reporting system for EMS developed by Image Trend. The Department is requesting funds to support the connection of the AURORA system to the HIE. This activity would activate the HIE integration with the Image Trend solution to allow for Medicaid providers to send patient information to the AURORA system through the HIE. Upon delivery of the patient to the hospital the patient’s health data from EMS would be transmitted via the HIE to the hospital’s EHR system, and when the patient is discharge the ADT feed from the hospital would be transmitted back to EMS to the AURORA system.</p>
-<p>DHSS is seeking funds to integrate the AURORA Public Health online patient care reporting system for EMS to the HIE to help support Medicaid providers ability to achieve Meaningful Use by meeting objectives and measures pertaining to Health Information Exchange, Coordination of Care, and Public Health Reporting. Funds will be used to develop interfaces between the HIE and 10 hospitals and provider training and technical onboarding assistance to providers to connect to the HIE and AURORA system.</p>
+<p>DHSS is seeking funds to integrate the AURORA Public Health online patient care reporting system for EMS to the HIE to help support Medicaid providers ability to achieve Meaningful Use by meeting outcomes and measures pertaining to Health Information Exchange, Coordination of Care, and Public Health Reporting. Funds will be used to develop interfaces between the HIE and 10 hospitals and provider training and technical onboarding assistance to providers to connect to the HIE and AURORA system.</p>
 ",
       "expenses": Array [
         Object {
@@ -864,26 +854,22 @@ Object {
       ],
       "fundingSource": "HIE",
       "name": "HIE Enhancement and Onboarding",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Do a thing.",
-              "target": "",
+              "metric": "Do a thing.",
             },
           ],
-          "objective": "Plan to do a thing.",
+          "outcome": "Plan to do a thing.",
         },
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "7",
-              "keyResult": "100 providers onboarded.",
-              "target": "100",
+              "metric": "100 providers onboarded.",
             },
           ],
-          "objective": "Onboard 100 providers.",
+          "outcome": "Onboard 100 providers.",
         },
       ],
       "plannedEndDate": "",
@@ -1108,16 +1094,14 @@ Object {
       ],
       "fundingSource": "HIE",
       "name": "Medicaid Blue Button",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "3 providers",
-              "keyResult": "Test blue button with 10 providers.",
-              "target": "10 providers",
+              "metric": "Test blue button with 10 providers.",
             },
           ],
-          "objective": "Build blue button.",
+          "outcome": "Build blue button.",
         },
       ],
       "plannedEndDate": "",
@@ -1337,26 +1321,22 @@ Object {
       ],
       "fundingSource": "HIE",
       "name": "Public Health System Modernization",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Complete a build/implementation plan by Summery 2019",
-              "target": "",
+              "metric": "Complete a build/implementation plan by Summery 2019",
             },
           ],
-          "objective": "Identifiy PH needs",
+          "outcome": "Identifiy PH needs",
         },
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Connect all 3 PH systems to HIE by Fall 2019",
-              "target": "",
+              "metric": "Connect all 3 PH systems to HIE by Fall 2019",
             },
           ],
-          "objective": "Connect PH systems to HIE",
+          "outcome": "Connect PH systems to HIE",
         },
       ],
       "plannedEndDate": "",
@@ -1536,16 +1516,14 @@ Object {
       ],
       "fundingSource": "HIT",
       "name": "MITA 3.0 Assessment",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Complete MITA 3.0 HITECH portion by July 2019",
-              "target": "",
+              "metric": "Complete MITA 3.0 HITECH portion by July 2019",
             },
           ],
-          "objective": "Complete MITA 3.0 HITECH portion.",
+          "outcome": "Complete MITA 3.0 HITECH portion.",
         },
       ],
       "plannedEndDate": "",
@@ -1981,36 +1959,30 @@ Object {
       ],
       "fundingSource": "HIT",
       "name": "Program Administration",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Complete SLR modifications by 11/1/18",
-              "target": "",
+              "metric": "Complete SLR modifications by 11/1/18",
             },
             Object {
-              "baseline": "",
-              "keyResult": "Accept attestations through 4/30/19.",
-              "target": "",
+              "metric": "Accept attestations through 4/30/19.",
             },
           ],
-          "objective": "Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.",
+          "outcome": "Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.",
         },
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "<ol>
+              "metric": "<ol>
 <li>Guidance available on Tycho's websites</li>
 <li>Office hours availble for EPs and EHs</li>
 <li>Site visits, as needed, for EPs and EHs</li>
 </ol>
 ",
-              "target": "",
             },
           ],
-          "objective": "<p>Provide support to EPs and EHs through attestation process.</p>
+          "outcome": "<p>Provide support to EPs and EHs through attestation process.</p>
 ",
         },
       ],
@@ -2316,21 +2288,17 @@ Object {
       ],
       "fundingSource": "MMIS",
       "name": "HIE Claims Data Analytics",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Hire contracted support to build an open API for the DW that the HIE and PHR can consume.",
-              "target": "",
+              "metric": "Hire contracted support to build an open API for the DW that the HIE and PHR can consume.",
             },
             Object {
-              "baseline": "",
-              "keyResult": "Provide support for using open API for DW",
-              "target": "",
+              "metric": "Provide support for using open API for DW",
             },
           ],
-          "objective": "Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
+          "outcome": "Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
         },
       ],
       "plannedEndDate": "",
@@ -2649,7 +2617,7 @@ Object {
 <li>All initiatives described below are funded at 90/10 funds and do not require cost allocation. All projects below support the onboarding and connection for Medicaid providers, EPs, EHs, and additional providers supported by SMD #16-003. Section VII. Cost Allocation Plan and Appendix D of this IAPD further describes the cost allocation methodology.</li>
 </ul>
 <p><strong><ins>III.D.1 Behavioral Health Onboarding &amp; Care Coordination</ins></strong></p>
-<p>The Department recognizes the need to increase Behavioral Health (BH) data capacity and sharing to achieve its goals and objectives related to care coordination. This includes promoting effective communication to coordinate care and enhancing the ability for providers to share and gain access to Protected Class Patient Data where appropriate. To support the capacity of data sharing and improving coordination of care, funding is requested to support Behavioral Health provider connectivity through the onboarding program by the development and implementation of a Behavioral Health-centric Unified Landing Page Application. The Behavioral Health Unified Landing Page Application will improve the quality and completeness of behavioral health data and thus, support the ability for providers to achieve MU.</p>
+<p>The Department recognizes the need to increase Behavioral Health (BH) data capacity and sharing to achieve its goals and outcomes related to care coordination. This includes promoting effective communication to coordinate care and enhancing the ability for providers to share and gain access to Protected Class Patient Data where appropriate. To support the capacity of data sharing and improving coordination of care, funding is requested to support Behavioral Health provider connectivity through the onboarding program by the development and implementation of a Behavioral Health-centric Unified Landing Page Application. The Behavioral Health Unified Landing Page Application will improve the quality and completeness of behavioral health data and thus, support the ability for providers to achieve MU.</p>
 <p></p>
 <p>In addition to the Unified Landing Page, funding is requested to support behavioral health provider onboarding to the HIE. The HIE onboarding program will provide funds to offset expenses required for behavioral health providers to adequately participate in statewide health information exchange. The onboarding program will support Tycho's HIE vision of increasing onboarding Medicaid providers and care coordination to help Tycho providers demonstrate MU. This program relates to the guidance provided by CMS in the SMD 16-003 letter dated February 2016 and will assist with covering costs associated with connectivity including but not limited to the following activities:</p>
 <ul>
@@ -2676,7 +2644,7 @@ Object {
 <p></p>
 <p><strong><ins>III.D.4 Staff Augmentation for Adoption and Utilization</ins></strong></p>
 <p>DHSS seeks to support onboarding efforts to connect Medicaid Meaningful Use eligible providers and providers supporting eligible providers to the HIE. The provider onboarding program will fund staffing outreach/educational support and technical services to Medicaid EPs that have adopted EHRs but not made HIE use part of day to day operations, not made use of new HIE capabilities, not yet connected, or were unable to take advantage of the ONC Regional Extension Center (REC) services because they were not eligible.</p>
-<p>Onboarding will include efforts to provide outreach/educational support and technical services. The Provider Onboarding Program includes the following objectives:</p>
+<p>Onboarding will include efforts to provide outreach/educational support and technical services. The Provider Onboarding Program includes the following outcomes:</p>
 <ul>
 <li>Provide staff for outreach, education, training, and organization change management to targeted provider groups to assist with interfacing and connecting to the HIE to support ongoing utilization of the HIE services</li>
 <li>Meet milestones established by the HIE and the Department for provider connectivity to the HIE</li>
@@ -2696,7 +2664,7 @@ Object {
 <p></p>
 <p><strong><ins>III.D.7 AURORA-HIE Integration</ins></strong></p>
 <p>AURORA is a Public Health online patient care reporting system for EMS developed by Image Trend. The Department is requesting funds to support the connection of the AURORA system to the HIE. This activity would activate the HIE integration with the Image Trend solution to allow for Medicaid providers to send patient information to the AURORA system through the HIE. Upon delivery of the patient to the hospital the patient’s health data from EMS would be transmitted via the HIE to the hospital’s EHR system, and when the patient is discharge the ADT feed from the hospital would be transmitted back to EMS to the AURORA system.</p>
-<p>DHSS is seeking funds to integrate the AURORA Public Health online patient care reporting system for EMS to the HIE to help support Medicaid providers ability to achieve Meaningful Use by meeting objectives and measures pertaining to Health Information Exchange, Coordination of Care, and Public Health Reporting. Funds will be used to develop interfaces between the HIE and 10 hospitals and provider training and technical onboarding assistance to providers to connect to the HIE and AURORA system.</p>
+<p>DHSS is seeking funds to integrate the AURORA Public Health online patient care reporting system for EMS to the HIE to help support Medicaid providers ability to achieve Meaningful Use by meeting outcomes and measures pertaining to Health Information Exchange, Coordination of Care, and Public Health Reporting. Funds will be used to develop interfaces between the HIE and 10 hospitals and provider training and technical onboarding assistance to providers to connect to the HIE and AURORA system.</p>
 ",
       "expenses": Array [
         Object {
@@ -2710,26 +2678,22 @@ Object {
       ],
       "fundingSource": "HIE",
       "name": "HIE Enhancement and Onboarding",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Do a thing.",
-              "target": "",
+              "metric": "Do a thing.",
             },
           ],
-          "objective": "Plan to do a thing.",
+          "outcome": "Plan to do a thing.",
         },
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "7",
-              "keyResult": "100 providers onboarded.",
-              "target": "100",
+              "metric": "100 providers onboarded.",
             },
           ],
-          "objective": "Onboard 100 providers.",
+          "outcome": "Onboard 100 providers.",
         },
       ],
       "plannedEndDate": "",
@@ -2954,16 +2918,14 @@ Object {
       ],
       "fundingSource": "HIE",
       "name": "Medicaid Blue Button",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "3 providers",
-              "keyResult": "Test blue button with 10 providers.",
-              "target": "10 providers",
+              "metric": "Test blue button with 10 providers.",
             },
           ],
-          "objective": "Build blue button.",
+          "outcome": "Build blue button.",
         },
       ],
       "plannedEndDate": "",
@@ -3183,26 +3145,22 @@ Object {
       ],
       "fundingSource": "HIE",
       "name": "Public Health System Modernization",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Complete a build/implementation plan by Summery 2019",
-              "target": "",
+              "metric": "Complete a build/implementation plan by Summery 2019",
             },
           ],
-          "objective": "Identifiy PH needs",
+          "outcome": "Identifiy PH needs",
         },
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Connect all 3 PH systems to HIE by Fall 2019",
-              "target": "",
+              "metric": "Connect all 3 PH systems to HIE by Fall 2019",
             },
           ],
-          "objective": "Connect PH systems to HIE",
+          "outcome": "Connect PH systems to HIE",
         },
       ],
       "plannedEndDate": "",
@@ -3382,16 +3340,14 @@ Object {
       ],
       "fundingSource": "HIT",
       "name": "MITA 3.0 Assessment",
-      "objectives": Array [
+      "outcomes": Array [
         Object {
-          "keyResults": Array [
+          "metrics": Array [
             Object {
-              "baseline": "",
-              "keyResult": "Complete MITA 3.0 HITECH portion by July 2019",
-              "target": "",
+              "metric": "Complete MITA 3.0 HITECH portion by July 2019",
             },
           ],
-          "objective": "Complete MITA 3.0 HITECH portion.",
+          "outcome": "Complete MITA 3.0 HITECH portion.",
         },
       ],
       "plannedEndDate": "",

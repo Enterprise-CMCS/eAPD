@@ -52,6 +52,9 @@ class Header extends Component {
     const { ariaExpanded } = this.state;
     return (
       <header ref={this.node}>
+        <a href="#start-main-content" className="skip-nav ds-c-dialog__header">
+          Skip to main content
+        </a>
         <div className="ds-l-container">
           <div className="ds-l-row">
             <div className="ds-l-col--12 ds-l-md-col--3 site-title">

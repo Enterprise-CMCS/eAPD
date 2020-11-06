@@ -4,12 +4,6 @@ exports[`Wrapper component renders correctly for a non-root path 1`] = `
 <div
   className="site"
 >
-  <a
-    className="skip-nav"
-    href="#start-main-content"
-  >
-    Skip to main content
-  </a>
   <Connect(Header)
     showSiteTitle={false}
   />
@@ -22,12 +16,6 @@ exports[`Wrapper component renders correctly in dev mode 1`] = `
 <div
   className="site"
 >
-  <a
-    className="skip-nav"
-    href="#start-main-content"
-  >
-    Skip to main content
-  </a>
   <Connect(Header)
     showSiteTitle={true}
   />
@@ -40,12 +28,6 @@ exports[`Wrapper component renders correctly in non-dev mode 1`] = `
 <div
   className="site"
 >
-  <a
-    className="skip-nav"
-    href="#start-main-content"
-  >
-    Skip to main content
-  </a>
   <Connect(Header)
     showSiteTitle={true}
   />
@@ -58,12 +40,6 @@ exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" 
 <div
   className="site site--gray"
 >
-  <a
-    className="skip-nav"
-    href="#start-main-content"
-  >
-    Skip to main content
-  </a>
   <Connect(Header)
     showSiteTitle={false}
   />
@@ -76,12 +52,6 @@ exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" 
 <div
   className="site site--gray"
 >
-  <a
-    className="skip-nav"
-    href="#start-main-content"
-  >
-    Skip to main content
-  </a>
   <Connect(Header)
     showSiteTitle={false}
   />
@@ -94,12 +64,6 @@ exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" 
 <div
   className="site site--gray"
 >
-  <a
-    className="skip-nav"
-    href="#start-main-content"
-  >
-    Skip to main content
-  </a>
   <Connect(Header)
     showSiteTitle={false}
   />
@@ -112,12 +76,6 @@ exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" 
 <div
   className="site site--gray"
 >
-  <a
-    className="skip-nav"
-    href="#start-main-content"
-  >
-    Skip to main content
-  </a>
   <Connect(Header)
     showSiteTitle={false}
   />

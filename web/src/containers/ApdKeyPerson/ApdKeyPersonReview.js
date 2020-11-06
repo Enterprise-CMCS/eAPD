@@ -10,6 +10,12 @@ const ApdStateKeyPerson = ({
   onDeleteClick
 }) => {
   const primary = index === 0;
+  let displayName = name;
+  if (name === '') {
+    displayName = primary
+      ? 'Unnamed Primary Point of Contact'
+      : 'Unnamed Key Personnel';
+  }
 
   const costByYear = useMemo(
     () => (
@@ -37,10 +43,11 @@ const ApdStateKeyPerson = ({
     <Fragment>
       <div className="visibility--screen">
         <Review
-          heading={`${index + 1}. ${name}`}
+          heading={`${index + 1}. ${displayName}`}
           headingLevel="4"
-          onDeleteClick={onDeleteClick}
+          onDeleteClick={primary ? null : onDeleteClick}
           onEditClick={expand}
+          ariaLabel={displayName}
         >
           <ul className="ds-c-list--bare">
             {primary ? <li>Primary APD Point of Contact</li> : null}
@@ -50,7 +57,7 @@ const ApdStateKeyPerson = ({
         </Review>
       </div>
       <div className="visibility--print">
-        <Review heading={`${index + 1}. ${name}`}>
+        <Review heading={`${index + 1}. ${displayName}`}>
           <ul className="ds-c-list--bare">
             {primary ? <li>Primary APD Point of Contact</li> : null}
             <li>{position}</li>

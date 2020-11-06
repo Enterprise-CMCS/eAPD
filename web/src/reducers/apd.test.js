@@ -165,7 +165,7 @@ describe('APD reducer', () => {
             name: 'activity 1',
             contractorResources: [{ name: 'contractor 1' }],
             expenses: [{ name: 'expense 1' }],
-            objectives: [{ name: 'objective 1' }],
+            outcomes: [{ name: 'outcome 1' }],
             schedule: [{ name: 'schedule 1' }],
             statePersonnel: [{ name: 'person 1' }]
           }
@@ -203,10 +203,10 @@ describe('APD reducer', () => {
                   name: 'expense 1'
                 }
               ],
-              objectives: [
+              outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'objective 1'
+                  name: 'outcome 1'
                 }
               ],
               schedule: [
@@ -260,10 +260,10 @@ describe('APD reducer', () => {
                   name: 'expense 1'
                 }
               ],
-              objectives: [
+              outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'objective 1'
+                  name: 'outcome 1'
                 }
               ],
               schedule: [
@@ -697,7 +697,7 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new state key personnel', () => {
+    it('should add a new primary key personnel', () => {
       const state = {
         data: {
           keyPersonnel: [],
@@ -709,6 +709,56 @@ describe('APD reducer', () => {
       ).toEqual({
         data: {
           keyPersonnel: [
+            {
+              costs: { '1': 0, '2': 0 },
+              email: '',
+              expanded: true,
+              hasCosts: false,
+              isPrimary: true,
+              fte: { '1': 0, '2': 0 },
+              name: '',
+              position: '',
+              key: expect.stringMatching(/^[a-f0-9]{8}$/)
+            }
+          ],
+          years: ['1', '2']
+        }
+      });
+    });
+
+    it('should add a new state key personnel', () => {
+      const state = {
+        data: {
+          keyPersonnel: [{
+            costs: { '1': 0, '2': 0 },
+              email: '',
+              expanded: true,
+              hasCosts: false,
+              isPrimary: true,
+              fte: { '1': 0, '2': 0 },
+              name: '',
+              position: '',
+              key: 'primary'
+          }],
+          years: ['1', '2']
+        }
+      };
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: '/keyPersonnel/-' })
+      ).toEqual({
+        data: {
+          keyPersonnel: [
+            {
+              costs: { '1': 0, '2': 0 },
+              email: '',
+              expanded: true,
+              hasCosts: false,
+              isPrimary: true,
+              fte: { '1': 0, '2': 0 },
+              name: '',
+              position: '',
+              key: 'primary'
+            },
             {
               costs: { '1': 0, '2': 0 },
               email: '',
@@ -751,18 +801,16 @@ describe('APD reducer', () => {
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
                 name: '',
-                objectives: [
+                outcomes: [
                   {
                     key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                    keyResults: [
+                    metrics: [
                       {
                         key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                        keyResult: '',
-                        baseline: '',
-                        target: ''
+                        metric: ''
                       }
                     ],
-                    objective: ''
+                    outcome: ''
                   }
                 ],
                 plannedEndDate: '',
@@ -843,31 +891,29 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new activity OKR', () => {
+    it('should add a new activity outcome', () => {
       const state = {
         data: {
-          activities: [{ objectives: [] }]
+          activities: [{ outcomes: [] }]
         }
       };
 
       expect(
-        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/objectives/-` })
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/outcomes/-` })
       ).toEqual({
         data: {
           activities: [
             {
-              objectives: [
+              outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  keyResults: [
+                  metrics: [
                     {
                       key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                      keyResult: '',
-                      baseline: '',
-                      target: ''
+                      metric: ''
                     }
                   ],
-                  objective: ''
+                  outcome: ''
                 }
               ]
             }
@@ -876,33 +922,31 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new activity objective key result', () => {
+    it('should add a new activity outcome metric', () => {
       const state = {
         data: {
-          activities: [{ objectives: [{ objective: 'blah', keyResults: [] }] }]
+          activities: [{ outcomes: [{ outcome: 'blah', metrics: [] }] }]
         }
       };
 
       expect(
         apd(state, {
           type: ADD_APD_ITEM,
-          path: '/activities/0/objectives/0/keyResults/-'
+          path: '/activities/0/outcomes/0/metrics/-'
         })
       ).toEqual({
         data: {
           activities: [
             {
-              objectives: [
+              outcomes: [
                 {
-                  keyResults: [
+                  metrics: [
                     {
                       key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                      keyResult: '',
-                      baseline: '',
-                      target: ''
+                      metric: ''
                     }
                   ],
-                  objective: 'blah'
+                  outcome: 'blah'
                 }
               ]
             }
@@ -1088,10 +1132,35 @@ describe('APD reducer helper methods', () => {
       ]);
     });
 
-    it('gets patches for adding a key personnel', () => {
+    it('gets patches for adding a primary key personnel', () => {
       expect(
         getPatchesForAddingItem(
           { data: { years: ['1', '2'] } },
+          '/keyPersonnel/-'
+        )
+      ).toEqual([
+        {
+          op: 'add',
+          path: '/keyPersonnel/-',
+          value: {
+            costs: { '1': 0, '2': 0 },
+            email: '',
+            expanded: true,
+            hasCosts: false,
+            isPrimary: true,
+            fte: { '1': 0, '2': 0 },
+            name: '',
+            position: '',
+            key: expect.stringMatching(/^[a-f0-9]{8}$/)
+          }
+        }
+      ]);
+    });
+
+    it('gets patches for adding a key personnel', () => {
+      expect(
+        getPatchesForAddingItem(
+          { data: { years: ['1', '2'], keyPersonnel: [{ isPrimary: true }] } },
           '/keyPersonnel/-'
         )
       ).toEqual([
