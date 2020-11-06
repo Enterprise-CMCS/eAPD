@@ -4,13 +4,6 @@ exports[`renders correctly Summary Budget By Activity Totals renders 1`] = `
 <table
   className="budget-table"
 >
-  <caption
-    className="ds-u-visibility--screen-reader"
-  >
-    Combined Activity Costs FFY 
-    1975
-     (Total Computable Medicaid Cost)
-  </caption>
   <thead>
     <tr
       className="budget-table--row__primary-header"
