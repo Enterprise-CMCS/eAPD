@@ -2,7 +2,7 @@
 
 exports[`the StatePersonReview component renders correctly 1`] = `
 <Review
-  ariaLabel={null}
+  ariaLabel="54. test desc"
   editHref={null}
   heading="54. test desc"
   headingLevel="5"

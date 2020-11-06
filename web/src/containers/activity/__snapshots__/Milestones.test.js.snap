@@ -14,7 +14,7 @@ exports[`the Milestones component renders correctly 1`] = `
     <FormAndReviewList
       activityIndex={7}
       addButtonText="Add another milestone"
-      allowDeleteAll={false}
+      allowDeleteAll={true}
       className={null}
       collapsed={[Function]}
       expanded={
@@ -36,7 +36,7 @@ exports[`the Milestones component renders correctly 1`] = `
           },
         ]
       }
-      noDataMessage="Add milestones for this activity."
+      noDataMessage="Milestones have not been added for this activity."
       onAddClick={[Function]}
       onDeleteClick={[Function]}
     />

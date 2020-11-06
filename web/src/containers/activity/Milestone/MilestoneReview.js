@@ -13,10 +13,11 @@ const MilestoneReview = ({
 
   return (
     <Review
-      heading={`${index + 1}. ${milestone}`}
+      heading={`${index + 1}. ${milestone || 'Milestone not specified'}`}
       headingLevel="4"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
+      ariaLabel={`${index + 1}. ${milestone || 'Milestone not specified'}`}
     >
       <p className="ds-u-margin-top--2">
         <strong>Target completion date:</strong> {formattedDate}

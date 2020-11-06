@@ -2,7 +2,7 @@
 
 exports[`the ContractorResourceReview component renders correctly 1`] = `
 <Review
-  ariaLabel={null}
+  ariaLabel="2. Honey Dipper Dan"
   editHref={null}
   heading="2. Honey Dipper Dan"
   headingLevel="5"
