@@ -17,7 +17,7 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
   <FormAndReviewList
     activityIndex={72}
     addButtonText="Add another state staff"
-    allowDeleteAll={false}
+    allowDeleteAll={true}
     className={null}
     collapsed={[Function]}
     expanded={
@@ -43,7 +43,7 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
         },
       ]
     }
-    noDataMessage="There are no personnel resources for this activity."
+    noDataMessage="State staff have not been added for this activity."
     onAddClick={[Function]}
     onDeleteClick={[Function]}
   />

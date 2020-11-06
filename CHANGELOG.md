@@ -4,6 +4,7 @@ Anticipated release: November 5th, 2020
 
 #### 🚀 New features
 
+- Allow users to delete the last activity cost entry ([#2152])
 - Updates table labeling methods to be more accessibly and consistent ([#2562])
 
 #### 🐛 Bugs fixed
@@ -16,4 +17,5 @@ Anticipated release: November 5th, 2020
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2152]: https://github.com/CMSgov/eAPD/issues/2152
 [#2324]: https://github.com/CMSgov/eAPD/issues/2562

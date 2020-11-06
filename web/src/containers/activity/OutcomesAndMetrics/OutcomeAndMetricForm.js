@@ -47,6 +47,7 @@ const OutcomeAndMetricForm = ({
               ? null
               : () => removeMetric(index, i)
           }
+          ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
         >
           <div
             key={key}

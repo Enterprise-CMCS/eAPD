@@ -34,6 +34,7 @@ const Milestone = ({ activity, activityIndex, add, remove }) => {
             noDataMessage={t('activities.milestones.noMilestonesNotice')}
             onAddClick={handleAdd}
             onDeleteClick={handleDelete}
+            allowDeleteAll
           />
         </div>
       </Fragment>
