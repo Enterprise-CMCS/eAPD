@@ -10,7 +10,7 @@ import { setApdToSelectOnLoad } from '../actions/app';
 
 import ApdPageRoutes from './ApdPageRoutes';
 
-import { getIsAnAPDSelected, getAPDIdHash } from '../reducers/apd';
+import { getIsAnAPDSelected, getAPDId } from '../reducers/apd';
 
 import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
@@ -18,7 +18,7 @@ const ApdApplication = ({
   apdSelected,
   isAdmin,
   place,
-  apdIdHash,
+  apdId,
   setApdToSelectOnLoad: dispatchSelectApdOnLoad
 }) => {
   if (isAdmin) {
@@ -33,7 +33,7 @@ const ApdApplication = ({
   TagManager.dataLayer({
     dataLayer: {
       stateId: place.id,
-      eAPDIdHash: apdIdHash
+      eAPDIdHash: apdId
     }
   });
 
@@ -56,19 +56,19 @@ ApdApplication.propTypes = {
   apdSelected: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
-  apdIdHash: PropTypes.string,
+  apdId: PropTypes.string,
   setApdToSelectOnLoad: PropTypes.func.isRequired
 };
 
 ApdApplication.defaultProps = {
-  apdIdHash: null
+  apdId: null
 };
 
 const mapStateToProps = state => ({
   apdSelected: getIsAnAPDSelected(state),
   isAdmin: getIsAdmin(state),
   place: getUserStateOrTerritory(state),
-  apdIdHash: getAPDIdHash(state)
+  apdId: getAPDId(state)
 });
 
 const mapDispatchToProps = { setApdToSelectOnLoad };
