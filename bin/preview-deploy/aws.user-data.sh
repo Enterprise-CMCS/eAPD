@@ -144,6 +144,31 @@ CWVARLOGCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
 
+cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
+
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-error-0.log*",
+            "log_group_name": "app-logs/pm2/eAPD-API-error-0.log"
+          },
+          {
+            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-out-0.log*",
+            "log_group_name": "app-logs/pm2/eAPD-API-out-0.log"
+          },          
+        ]
+      }
+    }
+  }
+}
+
+CWAPPLOGCONFIG
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
+
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
 su ec2-user <<E_USER
