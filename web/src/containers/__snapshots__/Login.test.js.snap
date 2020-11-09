@@ -25,7 +25,7 @@ exports[`login component renders correctly if logged in previously but not logge
   id="start-main-content"
 >
   <UpgradeBrowser />
-  <withRouter(CardForm)
+  <withRouter(LoginForm)
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
@@ -56,9 +56,10 @@ exports[`login component renders correctly if logged in previously but not logge
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
+      errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -67,12 +68,14 @@ exports[`login component renders correctly if logged in previously but not logge
     <Password
       className=""
       compareTo={Array []}
+      customErrorMessage={null}
+      errorMessage={null}
       onChange={[Function]}
       showMeter={false}
       title="Password"
       value=""
     />
-  </withRouter(CardForm)>
+  </withRouter(LoginForm)>
 </main>
 `;
 
@@ -97,7 +100,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
   id="start-main-content"
 >
   <UpgradeBrowser />
-  <withRouter(CardForm)
+  <withRouter(LoginForm)
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
@@ -128,9 +131,10 @@ exports[`login component renders correctly if not logged in and fetching data 1`
     working={true}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
+      errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -139,12 +143,14 @@ exports[`login component renders correctly if not logged in and fetching data 1`
     <Password
       className=""
       compareTo={Array []}
+      customErrorMessage={null}
+      errorMessage={null}
       onChange={[Function]}
       showMeter={false}
       title="Password"
       value=""
     />
-  </withRouter(CardForm)>
+  </withRouter(LoginForm)>
 </main>
 `;
 
@@ -153,7 +159,7 @@ exports[`login component renders correctly if not logged in and there is an erro
   id="start-main-content"
 >
   <UpgradeBrowser />
-  <withRouter(CardForm)
+  <withRouter(LoginForm)
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
@@ -184,9 +190,10 @@ exports[`login component renders correctly if not logged in and there is an erro
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
+      errorMessage=""
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -195,12 +202,14 @@ exports[`login component renders correctly if not logged in and there is an erro
     <Password
       className=""
       compareTo={Array []}
+      customErrorMessage="Invalid Entry"
+      errorMessage=""
       onChange={[Function]}
       showMeter={false}
       title="Password"
       value=""
     />
-  </withRouter(CardForm)>
+  </withRouter(LoginForm)>
 </main>
 `;
 
@@ -209,7 +218,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   id="start-main-content"
 >
   <UpgradeBrowser />
-  <withRouter(CardForm)
+  <withRouter(LoginForm)
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
@@ -240,9 +249,10 @@ exports[`login component renders correctly if not logged in, and never logged in
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
+      errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -251,12 +261,14 @@ exports[`login component renders correctly if not logged in, and never logged in
     <Password
       className=""
       compareTo={Array []}
+      customErrorMessage={null}
+      errorMessage={null}
       onChange={[Function]}
       showMeter={false}
       title="Password"
       value=""
     />
-  </withRouter(CardForm)>
+  </withRouter(LoginForm)>
 </main>
 `;
 
@@ -265,7 +277,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   id="start-main-content"
 >
   <UpgradeBrowser />
-  <withRouter(CardForm)
+  <withRouter(LoginForm)
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
@@ -296,9 +308,10 @@ exports[`login component renders correctly if not logged in, and never logged in
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
+      errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -307,12 +320,14 @@ exports[`login component renders correctly if not logged in, and never logged in
     <Password
       className=""
       compareTo={Array []}
+      customErrorMessage={null}
+      errorMessage={null}
       onChange={[Function]}
       showMeter={false}
       title="Password"
       value=""
     />
-  </withRouter(CardForm)>
+  </withRouter(LoginForm)>
 </main>
 `;
 
@@ -321,7 +336,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   id="start-main-content"
 >
   <UpgradeBrowser />
-  <withRouter(CardForm)
+  <withRouter(LoginForm)
     canSubmit={true}
     cancelable={false}
     className="ds-u-margin-top--7"
@@ -352,9 +367,10 @@ exports[`login component renders correctly if not logged in, and never logged in
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
+      errorMessage={null}
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -363,12 +379,14 @@ exports[`login component renders correctly if not logged in, and never logged in
     <Password
       className=""
       compareTo={Array []}
+      customErrorMessage={null}
+      errorMessage={null}
       onChange={[Function]}
       showMeter={false}
       title="Password"
       value="secret"
     />
-  </withRouter(CardForm)>
+  </withRouter(LoginForm)>
 </main>
 `;
 
@@ -377,11 +395,11 @@ exports[`login component renders correctly if there is an authentication error 1
   id="start-main-content"
 >
   <UpgradeBrowser />
-  <withRouter(CardForm)
+  <withRouter(LoginForm)
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error="The email or password you’ve entered is incorrect."
+    error="Please contact your State Administrator for steps to register an account."
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -408,9 +426,10 @@ exports[`login component renders correctly if there is an authentication error 1
     working={false}
   >
     <TextField
-      ariaLabel="Enter the email associated with this account."
+      ariaLabel="Enter your EUA ID."
+      errorMessage=""
       id="username"
-      label="Email"
+      label="EUA ID"
       name="username"
       onChange={[Function]}
       type="text"
@@ -419,12 +438,14 @@ exports[`login component renders correctly if there is an authentication error 1
     <Password
       className=""
       compareTo={Array []}
+      customErrorMessage="Invalid Entry"
+      errorMessage=""
       onChange={[Function]}
       showMeter={false}
       title="Password"
       value=""
     />
-  </withRouter(CardForm)>
+  </withRouter(LoginForm)>
 </main>
 `;
 

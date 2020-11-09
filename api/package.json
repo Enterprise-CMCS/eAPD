@@ -88,7 +88,7 @@
     "passport-local": "^1.0.0",
     "pg": "^7.18.2",
     "uuid": "^3.4.0",
-    "winston": "^2.4.4",
+    "winston": "^3.3.3",
     "zxcvbn": "^4.4.2"
   },
   "engines": {

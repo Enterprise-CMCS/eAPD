@@ -5,7 +5,7 @@ const { can } = require('../../../middleware');
 module.exports = (app, { getAuthActivities = ga } = {}) => {
   logger.silly('setting up GET /auth/activities route');
   app.get('/auth/activities', can('view-roles'), async (req, res) => {
-    logger.silly(req, 'handling GET /auth/activities');
+    logger.silly({ id: req.id, message: 'handling GET /auth/activities' });
     try {
       const activities = await getAuthActivities();
       logger.silly(
@@ -16,7 +16,7 @@ module.exports = (app, { getAuthActivities = ga } = {}) => {
       );
       res.send(activities);
     } catch (e) {
-      logger.error(req, e);
+      logger.error({ id: req.id, message: e });
       res.status(500).end();
     }
   });
