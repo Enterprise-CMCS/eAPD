@@ -5,7 +5,7 @@ import {
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
   LOGIN_MFA_ENROLL_START,
-  LOGIN_MFA_ENROLL_CONFIG,
+  LOGIN_MFA_ENROLL_ADD_PHONE,
   LOGIN_MFA_ENROLL_ACTIVATE,
   LOGIN_MFA_FAILURE,
   LOGIN_SUCCESS,
@@ -24,9 +24,10 @@ const initialState = {
   initialCheck: false,
   factorsList: '',
   mfaEnrollStage: false,
+  mfaAddPhoneStage: false,
   mfaActivateStage: false,
-  mfaTypeSelected: '',
-  mfaType: '',
+  mfaPhoneNumber: '',
+  mfaEnrollType: '',
   verifyData: null,
   isLocked: false,
   user: null
@@ -64,8 +65,7 @@ const auth = (state = initialState, action) => {
         fetching: false,
         otpStage: true,
         authenticated: false,
-        error: '',
-        mfaType: action.data
+        error: ''
       };
     case LOGIN_MFA_REQUEST:
       return {
@@ -82,7 +82,20 @@ const auth = (state = initialState, action) => {
         authenticated: false,
         otpStage: false,
         mfaEnrollStage: true,
-        factorsList: action.data,
+        mfaAddPhoneStage: false,
+        mfaPhoneNumber: action.data.phoneNumber,
+        factorsList: action.data.factors,
+        error: ''
+      };
+    case LOGIN_MFA_ENROLL_ADD_PHONE:
+      return {
+        ...state,
+        fetching: false,
+        authenticated: false,
+        otpStage: false,
+        mfaEnrollStage: false,
+        mfaEnrollType: action.data,
+        mfaAddPhoneStage: true,
         error: ''
       };
     case LOGIN_MFA_ENROLL_ACTIVATE:
@@ -93,7 +106,8 @@ const auth = (state = initialState, action) => {
         otpStage: false,
         mfaEnrollStage: false,
         mfaActivateStage: true,
-        mfaTypeSelected: action.data.mfaTypeSelected,
+        mfaAddPhoneStage: false,
+        mfaEnrollType: action.data.mfaEnrollType,
         verifyData: action.data.activationData,
         error: ''
       };

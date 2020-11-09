@@ -20,6 +20,23 @@ class LoginMFAEnroll extends Component {
     e.preventDefault();
     this.props.handleSelection(this.state.selectedOption);
   }
+
+  choiceItem = (choice, index) => {
+    return(
+      <Fragment key={index}>        
+        <input
+          className="ds-c-choice"
+          id={choice.displayName}
+          checked={this.state.selectedOption === choice.displayName}
+          type="radio"
+          name="mfa-choices"
+          value={choice.displayName}
+          onChange={this.handleOnChange} 
+        />
+        <label htmlFor={choice.displayName}><span>{choice.displayName}</span></label>
+      </Fragment>
+    );
+  }
   
   render() {    
     const factorTypes = this.props.factors;
@@ -33,20 +50,10 @@ class LoginMFAEnroll extends Component {
             </h1>
             <form onSubmit={this.handleFactorSelection || formSubmitNoop}>
               <fieldset className="ds-c-fieldset ds-u-margin-top--1">
-                <legend>Please choose Multi-Factor Authentication route.</legend>            
+                <legend className="ds-u-margin-y--1">Please choose Multi-Factor Authentication route.</legend>            
                   {factorTypes.map((choice, index) => (
-                    <Fragment key={index}>
-                      <input
-                        className="ds-c-choice"
-                        id={choice.factorType + choice.vendorName}
-                        checked={this.state.selectedOption === choice.factorType + choice.vendorName}
-                        type="radio"
-                        name="mfa-choices"
-                        value={choice.factorType + choice.vendorName}
-                        onChange={this.handleOnChange} 
-                      />
-                      <label htmlFor={choice.factorType + choice.vendorName}><span>{choice.displayName}</span></label>
-                    </Fragment>
+                    // Ty note: this hides the choices but we may want to simply remove non-active MFA types from the returned array
+                    choice.active? this.choiceItem(choice,index) : null
                   ))}
               </fieldset>
               <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
