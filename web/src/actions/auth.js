@@ -33,7 +33,10 @@ export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeFirstStage = mfaType => ({ type: LOGIN_OTP_STAGE, data: mfaType });
 export const mfaEnrollStart = factors => ({ type: LOGIN_MFA_ENROLL_START, data: factors });
-export const mfaEnrollActivate = (mfaTypeSelected, verifyData) => ({ type: LOGIN_MFA_ENROLL_ACTIVATE, mfaTypeSelected: mfaTypeSelected, verifyData: verifyData });
+export const mfaEnrollActivate = (mfaTypeSelected, activationData) => ({ 
+  type: LOGIN_MFA_ENROLL_ACTIVATE, 
+  data: { mfaTypeSelected, activationData: activationData }
+});
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
@@ -125,7 +128,11 @@ export const mfaConfig = mfaSelected => async dispatch => {
   
   if(enrollTransaction.status === 'MFA_ENROLL_ACTIVATE') {
     // Any concerns with passing multiple params to a reducer?
-    return dispatch(mfaEnrollActivate(mfaSelected, enrollTransaction.factor.activation))
+    return dispatch(mfaEnrollActivate( 
+      mfaSelected, 
+      enrollTransaction.factor.activation
+      )
+    );
   }
 }
 
@@ -170,7 +177,41 @@ export const login = (username, password) => dispatch => {
       // If user is required to enroll in MFA, get the available options
       // and show them to the user for selecting
       if (res.status === 'MFA_ENROLL') {
-        return dispatch(mfaEnrollStart(res.factors));
+        // Build a new enum/object with the factor types
+
+        const factors = res.factors.map(item => {
+          const modifiedFactor = {
+            factorType: item.factorType,
+            provider: item.provider,
+            vendorName: item.vendorName,
+            status: item.status,
+            enrollment: item.enrollment
+          };
+          
+          // Ty note: more efficient way to do this?
+          if(item.factorType === 'call') {
+            modifiedFactor.displayName = "Call";
+            modifiedFactor.active = true;
+          } else if (item.factorType === 'email') {
+            modifiedFactor.displayName = "Email";
+            modifiedFactor.active = true;
+          } else if (item.factorType === 'sms') {
+            modifiedFactor.displayName = "SMS Text";
+            modifiedFactor.active = true;
+          } else if (item.factorType === 'token:software:totp' && item.vendorName === 'GOOGLE') {
+            modifiedFactor.displayName = "Google Authenticator";
+            modifiedFactor.active = true;
+          } else if (item.factorType === 'push') {
+            modifiedFactor.displayName = "Okta Push";
+            modifiedFactor.active = true;
+          } else if (item.factorType === 'token:software:totp' && item.vendorName === 'OKTA') {
+            modifiedFactor.displayName = "Okta Authenticator";
+            modifiedFactor.active = true;
+          }
+          
+          return modifiedFactor;
+        });
+        return dispatch(mfaEnrollStart(factors));
       }
       
       if (res.status === 'MFA_REQUIRED') {     
