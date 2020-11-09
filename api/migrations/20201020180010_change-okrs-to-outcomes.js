@@ -13,7 +13,7 @@ exports.up = async knex => {
                   // Destructure objectives separately so it's not part of the
                   // activity variable. Then when we spread the activity
                   // in the mapped result, objectives won't be there. Yay!
-                  ({ objectives, ...activity }) => ({
+                  ({ objectives = [], ...activity }) => ({
                     ...activity,
                     outcomes: objectives.map(objective => ({
                       outcome: objective.objective,

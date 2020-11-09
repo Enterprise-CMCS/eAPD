@@ -23,16 +23,22 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
     );
 
   const buildPerson = (person, index) => {
+    let displayName = person.name;
+    if (person.name === '') {
+      displayName = person.isPrimary
+        ? 'Primary Point of Contact name not specified'
+        : 'Key Personnel name not specified';
+    }
     return (
       <Fragment>
         <ul className="ds-c-list--bare">
           <li>
             <h3>
-              {index + 1}. {person.name}
+              {index + 1}. {displayName}
             </h3>
           </li>
           {person.isPrimary ? <li>Primary APD Point of Contact</li> : null}
-          <li>{person.position}</li>
+          <li>{person.position || 'Role not specified'}</li>
           <li>
             <strong>Email: </strong>
             {person.email}

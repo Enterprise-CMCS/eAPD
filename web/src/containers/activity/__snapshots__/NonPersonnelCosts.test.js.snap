@@ -17,7 +17,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
   <FormAndReviewList
     activityIndex={58}
     addButtonText="Add another state expense"
-    allowDeleteAll={false}
+    allowDeleteAll={true}
     className={null}
     collapsed={[Function]}
     expanded={
@@ -43,7 +43,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
         },
       ]
     }
-    noDataMessage="Additional costs for this activity are missing."
+    noDataMessage="Other state expenses have not been added for this activity."
     onAddClick={[Function]}
     onDeleteClick={[Function]}
   />

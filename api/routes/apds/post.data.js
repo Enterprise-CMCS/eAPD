@@ -40,20 +40,10 @@ const getNewApd = () => {
         expenses: [],
         fundingSource: 'HIT',
         name: 'Program Administration',
-        outcomes: [
-          {
-            outcome: '',
-            metrics: [{ metric: '' }]
-          }
-        ],
+        outcomes: [],
         plannedEndDate: '',
         plannedStartDate: '',
-        schedule: [
-          {
-            endDate: '',
-            milestone: ''
-          }
-        ],
+        schedule: [],
         standardsAndConditions: {
           doesNotSupport: '',
           supports: ''

@@ -42,6 +42,7 @@ const NonPersonnelCosts = ({
         noDataMessage={t('activities.expenses.noDataNotice')}
         onAddClick={handleAdd}
         onDeleteClick={handleDelete}
+        allowDeleteAll
       />
     </Fragment>
   );

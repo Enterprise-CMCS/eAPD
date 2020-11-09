@@ -35,16 +35,7 @@ Object {
       "expenses": Array [],
       "fundingSource": "HIT",
       "name": "Program Administration",
-      "outcomes": Array [
-        Object {
-          "metrics": Array [
-            Object {
-              "metric": "",
-            },
-          ],
-          "outcome": "",
-        },
-      ],
+      "outcomes": Array [],
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
@@ -85,12 +76,7 @@ Object {
           },
         },
       },
-      "schedule": Array [
-        Object {
-          "endDate": "",
-          "milestone": "",
-        },
-      ],
+      "schedule": Array [],
       "standardsAndConditions": Object {
         "doesNotSupport": "",
         "supports": "",
