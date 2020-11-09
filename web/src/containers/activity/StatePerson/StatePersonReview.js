@@ -12,10 +12,11 @@ const StatePersonReview = ({
 }) => {
   return (
     <Review
-      heading={`${index + 1}. ${title}`}
+      heading={`${index + 1}. ${title || 'Personnel title not specified'}`}
       headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
+      ariaLabel={`${index + 1}. ${title || 'Personnel title not specified'}`}
     >
       {description}
       <div className="ds-u-margin-top--2">

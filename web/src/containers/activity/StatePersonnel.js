@@ -30,6 +30,7 @@ const StatePersonnel = ({ activityIndex, add, personnel, remove }) => {
         noDataMessage={t('activities.statePersonnel.noDataNotice')}
         onAddClick={handleAdd}
         onDeleteClick={handleDelete}
+        allowDeleteAll
       />
     </Fragment>
   );

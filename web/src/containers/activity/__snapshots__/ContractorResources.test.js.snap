@@ -10,7 +10,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
   <FormAndReviewList
     activityIndex={0}
     addButtonText="Add another contractor"
-    allowDeleteAll={false}
+    allowDeleteAll={true}
     className={null}
     collapsed={[Function]}
     expanded={
@@ -72,7 +72,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
         },
       ]
     }
-    noDataMessage="There are no contracts assigned to this activity."
+    noDataMessage="Private contractors have not been added for this activity."
     onAddClick={[Function]}
     onDeleteClick={[Function]}
   />

@@ -5,7 +5,7 @@ instruction:
   helpText: >-
     Itemize federal fiscal year (FFY) costs per contract. If the vendor or contractor
     name is unknown, generalize by resource name. (For example, computer resources/TBD)
-noDataNotice: There are no contracts assigned to this activity.
+noDataNotice: Private contractors have not been added for this activity.
 delete:
   text: ✗
   confirm:
