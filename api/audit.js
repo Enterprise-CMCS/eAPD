@@ -45,7 +45,7 @@ module.exports = (action, req) => {
     return {
       log: () => {
         try {
-          logger.audit(`AUDIT ACTION: ${action.toString()}`, {
+          logger.info(`AUDIT ACTION: ${action.toString()}`, {
             actor: {
               id: req.user.id,
               email: req.user.email,
