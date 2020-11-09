@@ -31,7 +31,7 @@ const logger = winston.createLogger({
   transports
 })
 
-// write morgan http request data as json to winston logs
+// ingest morgan http request data as json, write data to winston logs
 logger.stream = {
   write: (json) => {
     const request = JSON.parse(json);

@@ -6,6 +6,7 @@ morgan.token('id', req => req.id)
 morgan.token('ip', req => req.ip)
 morgan.token('uid', req => req.user && req.user.id)
 
+// output morgan http request data as json
 // https://www.loggly.com/ultimate-guide/node-logging-basics/#:~:text=Logging%20in%20JSON%20Format
 const tokenString = [
   'id',
