@@ -1,7 +1,7 @@
 const fs = require('fs')
 const winston = require('winston')
-
 const { name: packageName } = require('../package')
+
 const {
   LOG_CONSOLE,
   LOG_FILE,
