@@ -5,14 +5,16 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
-import { login, loginOtp, mfaConfig, mfaActivate } from '../actions/auth';
+import { login, loginOtp, mfaConfig, mfaActivate, mfaAddPhone } from '../actions/auth';
 import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
 import LoginLocked from '../components/LoginLocked';
 import LoginMFAEnroll from '../components/LoginMFAEnroll';
+import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
 import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
+import LoginMFAVerifyCode from '../components/LoginMFAVerifyCode';
 
 const Login = ({
   authenticated,
@@ -23,13 +25,15 @@ const Login = ({
   otpStage,
   factorsList,
   mfaEnrollStage,
-  mfaTypeSelected,
+  mfaAddPhoneStage,
+  mfaEnrollType,
   mfaActivateStage,
   verifyData,
   isLocked,
   login: action,
   loginOtp: otpAction,
   mfaConfig: mfaAction,
+  mfaAddPhone: mfaActionAddPhone,
   mfaActivate: mfaActivation // Ty note: what's the thinking behind the naming of these methods?
 }) => {
   const [showConsent, setShowConsent] = useState(true);
@@ -44,15 +48,28 @@ const Login = ({
     action(username, password);
   };
   
-  const handleFactorSelection = (selected) => {
+  const handleFactorSelection = selected => {
     // Ty note: call an action from here to update the state with selected mfa method
-    mfaAction(selected);
+    if(selected === 'SMS Text' || selected === 'Call') {
+      mfaActionAddPhone(selected);
+    } else {
+      mfaAction(selected);
+    }
   };
   
-  const handleVerificationCode = (code) => {
+  const handleVerificationCode = code => {
     // Get the verification code, send it back to OKTA for verification + enrollment status
     console.log("here is the entered code:", code);
     mfaActivation(code);
+  }
+
+  const handlePhoneSubmit = userPhoneNumber => {
+    mfaAction(mfaEnrollType, userPhoneNumber);
+  }
+
+  const handleReturnToSelection = () => {
+    // Trigger return to mfa selection
+    // Ty note: Is the only way to do this is to create a new action / reducer?
   }
   
   const hideConsent = () => {
@@ -88,25 +105,48 @@ const Login = ({
     errorMessage = 'Please contact your State Administrator for steps to register an account.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
-  }
+  };
     
   if (isLocked) {
     return (
       <LoginLocked />
     );
-  } 
+  };
   
   if (mfaEnrollStage) {
     return (
-      <LoginMFAEnroll factors={factorsList} handleSelection={handleFactorSelection} />
+      <LoginMFAEnroll 
+        factors={factorsList} 
+        handleSelection={handleFactorSelection} 
+      />
     );
-  }
+  };
+
+  if(mfaAddPhoneStage) {
+    return (
+      <LoginMFAEnrollPhoneNumber handlePhoneSubmit={handlePhoneSubmit} />
+    );
+  };
   
   if (mfaActivateStage) {
+    if(mfaEnrollType === 'Google Authenticator' || mfaEnrollType === 'Okta Push' || mfaEnrollType === 'Okta Authenticator') {
+      return (
+        <LoginMFAVerifyAuthApp 
+          verificationData={verifyData}
+          handleVerificationCode={handleVerificationCode}
+          handleReturnToSelection={handleReturnToSelection} 
+        />
+      );
+    }
+
     return (
-      <LoginMFAVerifyAuthApp verificationData={verifyData} handleVerificationCode={handleVerificationCode} />
-    );
-  }
+      <LoginMFAVerifyCode 
+        verificationData={verifyData}
+        handleVerificationCode={handleVerificationCode}
+        handleReturnToSelection={handleReturnToSelection} 
+      />
+    )
+  };
   
   if (otpStage) {
     return (
@@ -114,7 +154,6 @@ const Login = ({
         action={otpAction}
         errorMessage={errorMessage}
         fetching={fetching}
-        mfaType={mfaTypeSelected}
       />
     );    
   }
@@ -170,17 +209,18 @@ Login.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
-  mfaTypeSelected: PropTypes.string.isRequired,
+  mfaEnrollType: PropTypes.string.isRequired,
   mfaEnrollStage: PropTypes.bool.isRequired,
+  mfaAddPhoneStage: PropTypes.bool.isRequired,
   mfaActivateStage: PropTypes.bool.isRequired,
-  verifyData: PropTypes.object,
+  verifyData: PropTypes.object.isRequired,
   isLocked: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, factorsList, mfaTypeSelected, mfaEnrollStage, mfaActivateStage, verifyData, isLocked }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, factorsList, mfaEnrollType, mfaEnrollStage, mfaAddPhoneStage, mfaActivateStage, verifyData, isLocked }
 }) => ({
   authenticated,
   error,
@@ -188,14 +228,15 @@ const mapStateToProps = ({
   hasEverLoggedOn,
   otpStage,
   factorsList,
-  mfaTypeSelected,
+  mfaEnrollType,
   mfaEnrollStage,
+  mfaAddPhoneStage,
   mfaActivateStage,
   verifyData,
   isLocked
 });
 
-const mapDispatchToProps = { login, loginOtp, mfaConfig, mfaActivate };
+const mapDispatchToProps = { login, loginOtp, mfaConfig, mfaActivate, mfaAddPhone };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

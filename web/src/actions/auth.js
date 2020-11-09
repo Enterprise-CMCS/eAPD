@@ -14,6 +14,7 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
 export const LOGIN_MFA_ENROLL_START = 'LOGIN_MFA_ENROLL_START';
+export const LOGIN_MFA_ENROLL_ADD_PHONE = 'LOGIN_MFA_ENROLL_ADD_PHONE';
 export const LOGIN_MFA_ENROLL_ACTIVATE = 'LOGIN_MFA_ENROLL_ACTIVATE';
 export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -31,11 +32,12 @@ export const completeAuthCheck = user => ({
 export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
-export const completeFirstStage = mfaType => ({ type: LOGIN_OTP_STAGE, data: mfaType });
-export const mfaEnrollStart = factors => ({ type: LOGIN_MFA_ENROLL_START, data: factors });
-export const mfaEnrollActivate = (mfaTypeSelected, activationData) => ({ 
+export const completeFirstStage = () => ({ type: LOGIN_OTP_STAGE });
+export const mfaEnrollStart = (factors, phoneNumber) => ({ type: LOGIN_MFA_ENROLL_START, data: { factors, phoneNumber } });
+export const mfaEnrollAddPhone = mfaEnrollType => ({ type: LOGIN_MFA_ENROLL_ADD_PHONE, data: mfaEnrollType });
+export const mfaEnrollActivate = (mfaEnrollType, activationData) => ({ 
   type: LOGIN_MFA_ENROLL_ACTIVATE, 
-  data: { mfaTypeSelected, activationData: activationData }
+  data: { mfaEnrollType, activationData: activationData }
 });
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
@@ -115,14 +117,52 @@ const setTokens = sessionToken => {
 // flowing. 
 //  2. I have to get the transaction twice basically, any ideas on
 // how that could be reduced/improved?
-export const mfaConfig = mfaSelected => async dispatch => {
-  console.log("mfa selected by user:", mfaSelected);
-  
+export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
   const transaction = await retrieveExistingTransaction();
+  console.log("users phone number", phoneNumber);
+  console.log("users selected type", mfaSelected);
   
-  var factor = transaction.factors.find(function(factor) {
-    return factor.provider === 'GOOGLE' && factor.factorType === 'token:software:totp';
-  });  
+  const factor = transaction.factors.find(function(factor) {
+    if(mfaSelected === 'SMS Text') {
+      return factor.provider === 'OKTA' && factor.factorType === 'sms';
+    } 
+    if(mfaSelected === 'Call') {
+      return factor.provider === 'OKTA' && factor.factorType === 'call';
+    }
+    if(mfaSelected === 'Email') {
+      return factor.provider === 'OKTA' && factor.factorType === 'email';
+    }
+    if(mfaSelected === 'Okta Authenticator') {
+      return factor.provider === 'OKTA' && factor.factorType === 'token:software:totp';
+    }
+    if(mfaSelected === 'Google Authenticator') {
+      return factor.provider === 'GOOGLE' && factor.factorType === 'token:software:totp';
+    }
+    if(mfaSelected === 'Okta Push') {
+      return factor.provider === 'OKTA' && factor.factorType === 'push';
+    }
+    return;
+  });
+  
+  console.log("factor!!!", factor);
+
+  if(mfaSelected === 'SMS Text' || mfaSelected === 'Call') {
+    const enrollTransaction = await factor.enroll({
+      profile: {
+        phoneNumber: phoneNumber,
+        updatePhone: true
+      }
+    });
+  
+    if(enrollTransaction.status === 'MFA_ENROLL_ACTIVATE') {
+      // Any concerns with passing multiple params to a reducer?
+      return dispatch(mfaEnrollActivate( 
+        mfaSelected, 
+        enrollTransaction.factor.activation
+        )
+      );
+    };
+  };
 
   const enrollTransaction = await factor.enroll();
   
@@ -133,7 +173,11 @@ export const mfaConfig = mfaSelected => async dispatch => {
       enrollTransaction.factor.activation
       )
     );
-  }
+  };
+}
+
+export const mfaAddPhone = (mfaSelected) => async dispatch => {
+  dispatch(mfaEnrollAddPhone(mfaSelected));
 }
 
 // Ty notes: get code, activate with OKTA.
@@ -178,7 +222,7 @@ export const login = (username, password) => dispatch => {
       // and show them to the user for selecting
       if (res.status === 'MFA_ENROLL') {
         // Build a new enum/object with the factor types
-
+        console.log("res from initial", res);
         const factors = res.factors.map(item => {
           const modifiedFactor = {
             factorType: item.factorType,
@@ -203,7 +247,7 @@ export const login = (username, password) => dispatch => {
             modifiedFactor.active = true;
           } else if (item.factorType === 'push') {
             modifiedFactor.displayName = "Okta Push";
-            modifiedFactor.active = true;
+            modifiedFactor.active = false;
           } else if (item.factorType === 'token:software:totp' && item.vendorName === 'OKTA') {
             modifiedFactor.displayName = "Okta Authenticator";
             modifiedFactor.active = true;
@@ -215,18 +259,14 @@ export const login = (username, password) => dispatch => {
       }
       
       if (res.status === 'MFA_REQUIRED') {     
-        // rather then not checking, I just included GOOGLE since it's the
-        // only non-okta method
         const mfaFactor = res.factors.find(
           factor => factor.provider === 'OKTA' || 'GOOGLE'
         );        
         
         if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
         
-        const { factorType: mfaType } = mfaFactor;
-        
         return mfaFactor.verify(res).then(() => {
-          dispatch(completeFirstStage(mfaType));
+          dispatch(completeFirstStage());
         });          
       } 
       
