@@ -93,8 +93,8 @@ const auth = (state = initialState, action) => {
         otpStage: false,
         mfaEnrollStage: false,
         mfaActivateStage: true,
-        mfaTypeSelected: action.mfaTypeSelected,
-        verifyData: action.verifyData,
+        mfaTypeSelected: action.data.mfaTypeSelected,
+        verifyData: action.data.activationData,
         error: ''
       };
     case LOGIN_MFA_FAILURE:

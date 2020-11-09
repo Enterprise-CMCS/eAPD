@@ -45,7 +45,7 @@ class LoginMFAEnroll extends Component {
                         value={choice.factorType + choice.vendorName}
                         onChange={this.handleOnChange} 
                       />
-                      <label htmlFor={choice.factorType + choice.vendorName}><span>{choice.factorType + choice.vendorName}</span></label>
+                      <label htmlFor={choice.factorType + choice.vendorName}><span>{choice.displayName}</span></label>
                     </Fragment>
                   ))}
               </fieldset>
