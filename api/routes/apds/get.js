@@ -9,7 +9,7 @@ module.exports = (
   logger.silly('setting up GET /apds route');
 
   app.get('/apds', can('view-document'), async (req, res) => {
-    logger.silly(req, 'handling GET /apds');
+    logger.silly({ id: req.id, message: 'handling GET /apds' });
 
     try {
       const stateId = req.user.state.id;
@@ -38,20 +38,16 @@ module.exports = (
         })
       );
 
-      logger.silly(req, `got apds:`);
-      logger.silly(
-        req,
-        apds.map(({ id, name }) => ({ id, name }))
-      );
+      logger.silly({ id: req.id, message: `got apds: ${apds.map(({ id, name }) => ({ id, name }))}` });
       return res.send(apds);
     } catch (e) {
-      logger.error(req, e);
+      logger.error({ id: req.id, message: e });
       return res.status(500).end();
     }
   });
 
   app.get('/apds/:id(\\d+)', can('view-document'), async (req, res) => {
-    logger.silly(req, 'handling GET /apds/:id');
+    logger.silly({ id: req.id, message: 'handling GET /apds/:id' });
 
     try {
       const stateId = req.user.state.id;
@@ -73,14 +69,14 @@ module.exports = (
           updated: apdFromDB.updated_at
         };
 
-        logger.silly(req, `got single apd, id=${apd.id}, name="${apd.name}"`);
+        logger.silly({ id: req.id, message: `got single apd, id=${apd.id}, name="${apd.name}"` });
         return res.send(apd);
       }
 
-      logger.verbose('apd does not exist');
+      logger.verbose({ id: req.id, message: 'apd does not exist' });
       return res.status(400).end();
     } catch (e) {
-      logger.error(req, e);
+      logger.error({ id: req.id, message: e });
       return res.status(500).end();
     }
   });

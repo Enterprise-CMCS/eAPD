@@ -5,17 +5,17 @@ const { can } = require('../../../middleware');
 module.exports = (app, { getActiveAuthRoles = gr } = {}) => {
   logger.silly('setting up GET /auth/roles route');
   app.get('/auth/roles', can('view-roles'), async (req, res) => {
-    logger.silly(req, 'handling up GET /auth/roles route');
+    logger.silly({ id: req.id, message: 'handling up GET /auth/roles route' });
     try {
       const roles = await getActiveAuthRoles();
 
-      logger.silly(
-        req,
-        `got all the roles: ${roles.map(({ name }) => name).join(', ')}`
-      );
+      logger.silly({
+        id: req.id,
+        message: `got all the roles: ${roles.map(({ name }) => name).join(', ')}`
+      });
       res.send(roles);
     } catch (e) {
-      logger.error(req, e);
+      logger.error({ id: req.id, message: e });
       res.status(500).end();
     }
   });

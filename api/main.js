@@ -73,7 +73,7 @@ server.use((_, res, next) => {
 server.use((req, res, next) => {
   req.id = uuid();
   req.meta = {};
-  logger.verbose(req, `got ${req.method} request to ${req.path}`);
+  logger.verbose({ id: req.id, message: `got ${req.method} request to ${req.path}` });
   return next();
 });
 

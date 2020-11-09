@@ -32,7 +32,7 @@ module.exports = (
 
   logger.silly('setting up route for OpenAPI');
   app.get('/open-api', (req, res) => {
-    logger.verbose(req, 'sending OpenAPI documentation');
+    logger.verbose({ id: req.id, message: 'sending OpenAPI documentation' });
     res.send(openAPIdoc);
   });
 };

@@ -33,19 +33,12 @@ const logger = winston.createLogger({
 
 // write morgan http request data as json to winston logs
 logger.stream = {
-  write: (...messages) => {
-    const request = JSON.parse(messages);
-
-    let result;
-    if (typeof request === 'object') {
-      result = {
-        message: `${request.method} ${request.url} ${request.status}`,
-        ...request
-      }
-    } else {
-      result = messages;
+  write: (json) => {
+    const request = JSON.parse(json);
+    result = {
+      message: `${request.method} ${request.url} ${request.status}`,
+      ...request
     }
-
     logger.log('info', result)
   }
 }
