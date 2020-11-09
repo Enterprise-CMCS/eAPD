@@ -63,16 +63,14 @@ module.exports = (
 
         const valid = validate(updatedDocument);
         if (!valid) {
-          logger.error(
-            req,
-            // Rather than send back the full error from the validator, pull out just the relevant bits
-            // and fetch the value that's causing the error.
-            validate.errors.map(({ dataPath, message }) => ({
-              dataPath,
-              message,
-              value: jsonpointer.get(updatedDocument, dataPath)
-            }))
-          );
+          // Rather than send back the full error from the validator, pull out just the relevant bits
+          // and fetch the value that's causing the error.
+          const errors = validate.errors.map(({ dataPath, message }) => ({
+            dataPath,
+            message,
+            value: jsonpointer.get(updatedDocument, dataPath)
+          }));
+          logger.error({ id: req.id, message: errors });
           return res
             .status(400)
             .send(validate.errors.map(v => ({ path: v.dataPath })))
