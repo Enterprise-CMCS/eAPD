@@ -35,7 +35,7 @@ const logger = winston.createLogger({
 logger.stream = {
   write: (json) => {
     const request = JSON.parse(json);
-    result = {
+    const result = {
       message: `${request.method} ${request.url} ${request.status}`,
       ...request
     }

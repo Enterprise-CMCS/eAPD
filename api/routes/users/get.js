@@ -23,7 +23,7 @@ module.exports = (app, { getAllUsers = ga, getUserByID = gu } = {}) => {
       const user = await getUserByID(req.params.id);
 
       if (user) {
-        logger.silly({ id: req.id, message: 'sending user', user: user });
+        logger.silly({ id: req.id, message: 'sending user', user });
         res.send(user);
       } else {
         logger.verbose({ id: req.id, message: `no user found [${req.params.id}]`});
