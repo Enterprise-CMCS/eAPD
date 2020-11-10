@@ -9,7 +9,10 @@ import {
   LOGIN_MFA_FAILURE,
   LOCKED_OUT,
   RESET_LOCKED_OUT,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  STATE_ACCESS_REQUEST,
+  STATE_ACCESS_SUCCESS,
+  STATE_ACCESS_COMPLETE
 } from '../actions/auth';
 
 const initialState = {
@@ -20,6 +23,9 @@ const initialState = {
   hasEverLoggedOn: false,
   initialCheck: false,
   mfaType: '',
+  requestAccess: false,
+  requestAccessSuccess: false,
+  selectState: false,
   isLocked: false,
   user: null
 };
@@ -84,10 +90,10 @@ const auth = (state = initialState, action) => {
         error: action.error
       };
     case LOGIN_MFA_FAILURE:
-      return { 
-        ...state, 
-        fetching: false, 
-        error: action.error 
+      return {
+        ...state,
+        fetching: false,
+        error: action.error
       };
     case LOCKED_OUT:
       return {
@@ -95,7 +101,7 @@ const auth = (state = initialState, action) => {
         isLocked: true,
         fetching: false,
         error: ''
-      };     
+      };
     case RESET_LOCKED_OUT:
       return {
         ...state,
@@ -109,6 +115,27 @@ const auth = (state = initialState, action) => {
         otpStage: false,
         hasEverLoggedOn: state.hasEverLoggedOn,
         initialCheck: state.initialCheck
+      };
+    case STATE_ACCESS_REQUEST:
+      return {
+        ...state,
+        requestAccess: true,
+        requestAccessSuccess: false,
+        error: ''
+      };
+    case STATE_ACCESS_SUCCESS:
+      return {
+        ...state,
+        requestAccess: false,
+        requestAccessSuccess: true,
+        error: ''
+      };
+    case STATE_ACCESS_COMPLETE:
+      return {
+        ...state,
+        requestAccess: false,
+        requestAccessSuccess: false,
+        error: ''
       };
     default:
       return state;
