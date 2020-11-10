@@ -23,9 +23,9 @@ const initialState = {
   otpStage: false,
   initialCheck: false,
   factorsList: '',
-  mfaEnrollStage: false,
-  mfaAddPhoneStage: false,
-  mfaActivateStage: false,
+  mfaEnrollStartStage: false,
+  mfaEnrollAddPhoneStage: false,
+  mfaEnrollActivateStage: false,
   mfaPhoneNumber: '',
   mfaEnrollType: '',
   verifyData: null,
@@ -78,11 +78,7 @@ const auth = (state = initialState, action) => {
     case LOGIN_MFA_ENROLL_START:
       return {
         ...state,
-        fetching: false,
-        authenticated: false,
-        otpStage: false,
-        mfaEnrollStage: true,
-        mfaAddPhoneStage: false,
+        mfaEnrollStartStage: true,
         mfaPhoneNumber: action.data.phoneNumber,
         factorsList: action.data.factors,
         error: ''
@@ -90,23 +86,17 @@ const auth = (state = initialState, action) => {
     case LOGIN_MFA_ENROLL_ADD_PHONE:
       return {
         ...state,
-        fetching: false,
-        authenticated: false,
-        otpStage: false,
-        mfaEnrollStage: false,
+        mfaEnrollStartStage: false,
+        mfaEnrollAddPhoneStage: true,
         mfaEnrollType: action.data,
-        mfaAddPhoneStage: true,
         error: ''
       };
     case LOGIN_MFA_ENROLL_ACTIVATE:
       return {
         ...state,
-        fetching: false,
-        authenticated: false,
-        otpStage: false,
-        mfaEnrollStage: false,
-        mfaActivateStage: true,
-        mfaAddPhoneStage: false,
+        mfaEnrollStartStage: false,
+        mfaEnrollAddPhoneStage: false,
+        mfaEnrollActivateStage: true,
         mfaEnrollType: action.data.mfaEnrollType,
         verifyData: action.data.activationData,
         error: ''

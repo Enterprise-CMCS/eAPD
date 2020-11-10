@@ -103,96 +103,71 @@ const setTokens = sessionToken => {
 
 // Ty notes: mfaSelected is what the user picked for their MFA option.
 // here we need to take that option and send it back to OKTA. Okta will
-// then return with the activation code. (QR). 
+// then return with the activation code.
 // ToDo:
-//  1. Currently this is hard-coded to just be the Google Authenticator 
-// method. We will need to handle the case where we need to get the users 
-// phone number if that is selected.
-//  2. Do we want to provide a way for a user to trigger a re-sending of
-// the authentication code?
-//  3. General error handling?
-// Concerns: 
-//  1. is this multi-arrow function an example of currying? It's
-// tough for me to follow exactly what's happening and how the data is
-// flowing. 
-//  2. I have to get the transaction twice basically, any ideas on
-// how that could be reduced/improved?
+//  1. General error handling (phone?)
+//  2. Is there a way to do this without having to do 2 transactions?
+
 export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
   const transaction = await retrieveExistingTransaction();
-  console.log("users phone number", phoneNumber);
-  console.log("users selected type", mfaSelected);
-  
+
   const factor = transaction.factors.find(function(factor) {
-    if(mfaSelected === 'SMS Text') {
-      return factor.provider === 'OKTA' && factor.factorType === 'sms';
-    } 
-    if(mfaSelected === 'Call') {
-      return factor.provider === 'OKTA' && factor.factorType === 'call';
+    switch(mfaSelected) {
+      case 'SMS Text':
+        return factor.provider === 'OKTA' && factor.factorType === 'sms';
+      case 'Call':
+        return factor.provider === 'OKTA' && factor.factorType === 'call';
+      case 'Email':
+        return factor.provider === 'OKTA' && factor.factorType === 'email';
+      case 'Okta Authenticator':
+        return factor.provider === 'OKTA' && factor.factorType === 'token:software:totp';
+      case 'Google Authenticator':
+        return factor.provider === 'GOOGLE' && factor.factorType === 'token:software:totp';
+      default:
+        console.log("No valid mfa selection provided");
+        break;
     }
-    if(mfaSelected === 'Email') {
-      return factor.provider === 'OKTA' && factor.factorType === 'email';
-    }
-    if(mfaSelected === 'Okta Authenticator') {
-      return factor.provider === 'OKTA' && factor.factorType === 'token:software:totp';
-    }
-    if(mfaSelected === 'Google Authenticator') {
-      return factor.provider === 'GOOGLE' && factor.factorType === 'token:software:totp';
-    }
-    if(mfaSelected === 'Okta Push') {
-      return factor.provider === 'OKTA' && factor.factorType === 'push';
-    }
-    return;
   });
-  
-  console.log("factor!!!", factor);
 
   if(mfaSelected === 'SMS Text' || mfaSelected === 'Call') {
     const enrollTransaction = await factor.enroll({
-      profile: {
-        phoneNumber: phoneNumber,
-        updatePhone: true
-      }
+      profile: { phoneNumber, updatePhone: true }
     });
   
     if(enrollTransaction.status === 'MFA_ENROLL_ACTIVATE') {
-      // Any concerns with passing multiple params to a reducer?
       return dispatch(mfaEnrollActivate( 
         mfaSelected, 
         enrollTransaction.factor.activation
         )
       );
     };
-  };
+  }
 
   const enrollTransaction = await factor.enroll();
   
   if(enrollTransaction.status === 'MFA_ENROLL_ACTIVATE') {
-    // Any concerns with passing multiple params to a reducer?
     return dispatch(mfaEnrollActivate( 
       mfaSelected, 
       enrollTransaction.factor.activation
       )
     );
-  };
+  }
 }
 
 export const mfaAddPhone = (mfaSelected) => async dispatch => {
   dispatch(mfaEnrollAddPhone(mfaSelected));
 }
 
-// Ty notes: get code, activate with OKTA.
+// Ty note: this is very similar to the loginOtp method, with one
+// exception: it uses transaction.activate instead of transaction.verify
 export const mfaActivate = code => async dispatch => {
-  console.log("code to be processed:", code);
-  
   const transaction = await retrieveExistingTransaction(); 
   
   const activateTransaciton = await transaction.activate({
     passCode: code
   });
-  
-  console.log("activateTransaction response:", activateTransaciton);
-  // I copied + pasted this from the login method. I assume we should
-  // abstract it into its own re-usable method? any guidance on that?
+
+  // Ty note: This is redundant code that should be abstracted into a method
   if (activateTransaciton.status === 'SUCCESS')  {
     await setTokens(activateTransaciton.sessionToken);
     return axios
@@ -216,13 +191,9 @@ export const login = (username, password) => dispatch => {
       if (res.status === 'LOCKED_OUT') {
         return dispatch(failLoginLocked());
       }
-      
-      // MFA Enrollment starts here ---
-      // If user is required to enroll in MFA, get the available options
-      // and show them to the user for selecting
+      // MFA enrollment starts here. If MFA is required as part
+      // of a users policy, get the list of available options
       if (res.status === 'MFA_ENROLL') {
-        // Build a new enum/object with the factor types
-        console.log("res from initial", res);
         const factors = res.factors.map(item => {
           const modifiedFactor = {
             factorType: item.factorType,
@@ -232,27 +203,21 @@ export const login = (username, password) => dispatch => {
             enrollment: item.enrollment
           };
           
-          // Ty note: more efficient way to do this?
-          if(item.factorType === 'call') {
-            modifiedFactor.displayName = "Call";
-            modifiedFactor.active = true;
-          } else if (item.factorType === 'email') {
-            modifiedFactor.displayName = "Email";
-            modifiedFactor.active = true;
-          } else if (item.factorType === 'sms') {
-            modifiedFactor.displayName = "SMS Text";
-            modifiedFactor.active = true;
-          } else if (item.factorType === 'token:software:totp' && item.vendorName === 'GOOGLE') {
-            modifiedFactor.displayName = "Google Authenticator";
-            modifiedFactor.active = true;
-          } else if (item.factorType === 'push') {
-            modifiedFactor.displayName = "Okta Push";
-            modifiedFactor.active = false;
-          } else if (item.factorType === 'token:software:totp' && item.vendorName === 'OKTA') {
-            modifiedFactor.displayName = "Okta Authenticator";
-            modifiedFactor.active = true;
-          }
-          
+          switch(item.factorType) {
+            case 'call':
+              return { ...modifiedFactor, displayName: "Call", active: true }
+            case 'email':
+              return { ...modifiedFactor, displayName: "Email", active: true }
+            case 'sms':
+              return { ...modifiedFactor, displayName: 'SMS Text', active: true }
+            case 'push':
+              return { ...modifiedFactor, displayName: 'Okta Push', active: false }
+            case 'token:software:totp': 
+              return (item.vendorName === 'GOOGLE') ? { ...modifiedFactor, displayName: 'Google Authenticator', active: true } : { ...modifiedFactor, displayName: 'Okta Authenticator', active: true }
+            default:
+              console.log('unrecognized factor type provided by OKTA');
+              break;
+          }          
           return modifiedFactor;
         });
         return dispatch(mfaEnrollStart(factors));

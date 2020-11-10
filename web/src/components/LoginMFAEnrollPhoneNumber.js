@@ -33,9 +33,7 @@ class LoginMFAEnrollPhoneNumber extends Component {
               <span>Verify Your Identity</span>
             </h1>
             <form onSubmit={this.handlePhoneFormSubmit || formSubmitNoop}>
-              <label htmlFor="mfaPhoneNumber" id="mfaPhoneNumber" className="ds-u-font-weight--normal">            
-                Please enter your phone number to receive temporary verification passcodes.
-              </label>
+              <p className="ds-u-margin-top--2 ds-u-margin-bottom--0">Please enter your phone number to receive temporary verification codes.</p>
               <TextField
                 id="mfaPhoneNumber"
                 label="Phone number"

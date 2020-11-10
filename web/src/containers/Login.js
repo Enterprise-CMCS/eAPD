@@ -14,7 +14,6 @@ import LoginLocked from '../components/LoginLocked';
 import LoginMFAEnroll from '../components/LoginMFAEnroll';
 import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
 import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
-import LoginMFAVerifyCode from '../components/LoginMFAVerifyCode';
 
 const Login = ({
   authenticated,
@@ -24,10 +23,10 @@ const Login = ({
   location,
   otpStage,
   factorsList,
-  mfaEnrollStage,
-  mfaAddPhoneStage,
+  mfaEnrollStartStage,
+  mfaEnrollAddPhoneStage,
+  mfaEnrollActivateStage,
   mfaEnrollType,
-  mfaActivateStage,
   verifyData,
   isLocked,
   login: action,
@@ -49,7 +48,6 @@ const Login = ({
   };
   
   const handleFactorSelection = selected => {
-    // Ty note: call an action from here to update the state with selected mfa method
     if(selected === 'SMS Text' || selected === 'Call') {
       mfaActionAddPhone(selected);
     } else {
@@ -58,18 +56,11 @@ const Login = ({
   };
   
   const handleVerificationCode = code => {
-    // Get the verification code, send it back to OKTA for verification + enrollment status
-    console.log("here is the entered code:", code);
     mfaActivation(code);
   }
 
   const handlePhoneSubmit = userPhoneNumber => {
     mfaAction(mfaEnrollType, userPhoneNumber);
-  }
-
-  const handleReturnToSelection = () => {
-    // Trigger return to mfa selection
-    // Ty note: Is the only way to do this is to create a new action / reducer?
   }
   
   const hideConsent = () => {
@@ -113,7 +104,7 @@ const Login = ({
     );
   };
   
-  if (mfaEnrollStage) {
+  if (mfaEnrollStartStage) {
     return (
       <LoginMFAEnroll 
         factors={factorsList} 
@@ -122,28 +113,28 @@ const Login = ({
     );
   };
 
-  if(mfaAddPhoneStage) {
+  if(mfaEnrollAddPhoneStage) {
     return (
       <LoginMFAEnrollPhoneNumber handlePhoneSubmit={handlePhoneSubmit} />
     );
   };
   
-  if (mfaActivateStage) {
-    if(mfaEnrollType === 'Google Authenticator' || mfaEnrollType === 'Okta Push' || mfaEnrollType === 'Okta Authenticator') {
+  if (mfaEnrollActivateStage) {
+    if(mfaEnrollType === 'Google Authenticator' || mfaEnrollType === 'Okta Authenticator') {
       return (
         <LoginMFAVerifyAuthApp 
           verificationData={verifyData}
           handleVerificationCode={handleVerificationCode}
-          handleReturnToSelection={handleReturnToSelection} 
         />
       );
     }
 
     return (
-      <LoginMFAVerifyCode 
-        verificationData={verifyData}
-        handleVerificationCode={handleVerificationCode}
-        handleReturnToSelection={handleReturnToSelection} 
+      <LoginMFA
+        action={handleVerificationCode} 
+        hasEverLoggedOn={false}
+        errorMessage={errorMessage}
+        fetching={fetching}
       />
     )
   };
@@ -152,6 +143,7 @@ const Login = ({
     return (
       <LoginMFA
         action={otpAction}
+        hasEverLoggedOn
         errorMessage={errorMessage}
         fetching={fetching}
       />
@@ -209,18 +201,22 @@ Login.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
+  factorsList: PropTypes.object.isRequired,
   mfaEnrollType: PropTypes.string.isRequired,
-  mfaEnrollStage: PropTypes.bool.isRequired,
-  mfaAddPhoneStage: PropTypes.bool.isRequired,
-  mfaActivateStage: PropTypes.bool.isRequired,
+  mfaEnrollStartStage: PropTypes.bool.isRequired,
+  mfaEnrollAddPhoneStage: PropTypes.bool.isRequired,
+  mfaEnrollActivateStage: PropTypes.bool.isRequired,
   verifyData: PropTypes.object.isRequired,
   isLocked: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
-  loginOtp: PropTypes.func.isRequired
+  loginOtp: PropTypes.func.isRequired,
+  mfaConfig: PropTypes.func.isRequired,
+  mfaAddPhone: PropTypes.func.isRequired,
+  mfaActivate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, factorsList, mfaEnrollType, mfaEnrollStage, mfaAddPhoneStage, mfaActivateStage, verifyData, isLocked }
+  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, factorsList, mfaEnrollType, mfaEnrollStartStage, mfaEnrollAddPhoneStage, mfaEnrollActivateStage, verifyData, isLocked }
 }) => ({
   authenticated,
   error,
@@ -229,9 +225,9 @@ const mapStateToProps = ({
   otpStage,
   factorsList,
   mfaEnrollType,
-  mfaEnrollStage,
-  mfaAddPhoneStage,
-  mfaActivateStage,
+  mfaEnrollStartStage,
+  mfaEnrollAddPhoneStage,
+  mfaEnrollActivateStage,
   verifyData,
   isLocked
 });

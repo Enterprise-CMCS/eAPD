@@ -3,7 +3,7 @@ import React, { useState, Fragment } from 'react';
 
 import VerifyMFAForm from '../components/VerifyMFAForm';
 
-const LoginMFA = ({ action, errorMessage, fetching }) => {
+const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
   const [otp, setOtp] = useState('');
 
   const changeOtp = ({ target: { value } }) => setOtp(value);
@@ -21,6 +21,7 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
         cancelable
         className="ds-u-margin-top--7"
         canSubmit={!!otp}
+        hasEverLoggedOn={hasEverLoggedOn}
         error={errorMessage}
         success={null}
         working={fetching}
@@ -30,7 +31,7 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
         <Fragment>
           <div className="ds-u-margin-bottom--4">
             <label htmlFor="otp" id="otp" className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal">            
-              Please enter the verification code provided to you via text, email, voice call, or your chosen authenticator app.
+              Enter the verification code provided to you via call, text, email, or your chosen authenticator app.
             </label>
             <input 
               width="200px"
@@ -52,7 +53,8 @@ const LoginMFA = ({ action, errorMessage, fetching }) => {
 LoginMFA.propTypes = {
   errorMessage: PropTypes.bool,
   fetching: PropTypes.bool.isRequired,
-  action: PropTypes.func.isRequired
+  action: PropTypes.func.isRequired,
+  hasEverLoggedOn: PropTypes.bool.isRequired
 };
 
 LoginMFA.defaultProps = {
