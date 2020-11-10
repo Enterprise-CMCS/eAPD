@@ -23,10 +23,8 @@ const jwtMiddleware = async (
   } = {}
 ) => {
   const jwt = extractor(req);
-  console.log(jwt)
   try {
     const claims = jwt ? await verifyToken(jwt) : false;
-    console.log(claims)
     if (!claims) return next();
 
     // some values like group and application profile variables
@@ -35,6 +33,7 @@ const jwtMiddleware = async (
     // be passed in as additional values when possible.
     const { uid, ...additionalValues } = claims;
     const user = await getUserByID(uid, { additionalValues });
+
     // const user = claims;
     if (user) {
       req.user = user;

@@ -6,34 +6,37 @@ const {
 } = require('../../endpoint-tests/utils');
 
 describe('APD endpoint', () => {
-  describe('List APDs endpoint | GET /apds', () => {
-    const db = getDB();
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+  // should the index method for apds be nested under /states/:stateId?
+  // signs point to 'yes'
 
-    const url = '/apds';
+  // describe('List APDs endpoint | GET /apds', () => {
+  //   const db = getDB();
+  //   beforeAll(() => db.seed.run());
+  //   afterAll(() => db.destroy());
 
-    unauthenticatedTest('get', url);
-    unauthorizedTest('get', url);
+  //   const url = '/apds';
 
-    describe('when authenticated', () => {
-      it('as a user without a state', async () => {
-        const api = login('all-permissions-no-state');
-        const response = await api.get(url);
+  //   unauthenticatedTest('get', url);
+  //   unauthorizedTest('get', url);
 
-        expect(response.status).toEqual(401);
-        expect(response.data).toMatchSnapshot();
-      });
+  //   describe('when authenticated', () => {
+  //     it('as a user with view-document permissions', async () => {
+  //       const api = login('no-permissions');
+  //       const response = await api.get(url);
 
-      it('as a user with a state', async () => {
-        const api = login();
-        const response = await api.get(url);
+  //       expect(response.status).toEqual(401);
+  //       expect(response.data).toMatchSnapshot();
+  //     });
 
-        expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
-      });
-    });
-  });
+  //     it('as a user with all permissions', async () => {
+  //       const api = login('all-permissions');
+  //       const response = await api.get(url);
+
+  //       expect(response.status).toEqual(200);
+  //       expect(response.data).toMatchSnapshot();
+  //     });
+  //   });
+  // });
 
   describe('Get specific APD | GET /apds/:id', () => {
     const db = getDB();
