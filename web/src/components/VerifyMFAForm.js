@@ -40,7 +40,7 @@ const VerifyMFAForm = ({
           {hasEverLoggedOn ? (
 		  	<p className="ds-u-color--gray ds-u-margin-bottom--0">Welcome Back</p>
 		  ) : ""}
-          <h1 className="ds-h1 ds-u-margin--0">
+          <h1 className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold">
             {sectionName.length > 0 && (
               <span className="ds-h6 ds-u-display--block">
                 {sectionName.toUpperCase()}

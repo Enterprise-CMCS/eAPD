@@ -78,6 +78,7 @@ const auth = (state = initialState, action) => {
     case LOGIN_MFA_ENROLL_START:
       return {
         ...state,
+        fetching: false,
         mfaEnrollStartStage: true,
         mfaPhoneNumber: action.data.phoneNumber,
         factorsList: action.data.factors,
@@ -86,6 +87,7 @@ const auth = (state = initialState, action) => {
     case LOGIN_MFA_ENROLL_ADD_PHONE:
       return {
         ...state,
+        fetching: false,
         mfaEnrollStartStage: false,
         mfaEnrollAddPhoneStage: true,
         mfaEnrollType: action.data,
@@ -94,6 +96,7 @@ const auth = (state = initialState, action) => {
     case LOGIN_MFA_ENROLL_ACTIVATE:
       return {
         ...state,
+        fetching: false,
         mfaEnrollStartStage: false,
         mfaEnrollAddPhoneStage: false,
         mfaEnrollActivateStage: true,
