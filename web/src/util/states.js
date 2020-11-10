@@ -65,6 +65,9 @@ const usStatesDropdownOptions = STATES.map(s => ({
   label: s.name,
   value: s.id
 }));
-usStatesDropdownOptions.unshift({ label: 'None', value: '' });
 
-export { STATES, usStatesDropdownOptions };
+const usStatesAllDropdownOptions = [{ label: 'None', value: '' }].concat(
+  usStatesDropdownOptions
+);
+
+export { STATES, usStatesDropdownOptions, usStatesAllDropdownOptions };

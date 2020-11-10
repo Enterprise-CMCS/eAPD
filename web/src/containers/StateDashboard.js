@@ -34,7 +34,7 @@ const StateDashboard = (
   const [isLoading, setIsLoading] = useState(false);
   TagManager.dataLayer({
     dataLayer: {
-      stateId: state.id
+      stateId: state ? state.id : null
     }
   });
 
@@ -50,7 +50,7 @@ const StateDashboard = (
   };
 
   const delApd = apd => () => {
-    if (global.confirm(`Delete ${apd.name}?`)) {
+    if (apd && global.confirm(`Delete ${apd.name}?`)) {
       del(apd.id);
     }
   };
@@ -72,12 +72,12 @@ const StateDashboard = (
       <div className="ds-l-row ds-u-margin-top--7">
         <div className="ds-l-col--8 ds-u-margin-x--auto ">
           <h1 className="ds-h1">
-            {t('stateDashboard.title', { state: state.name })}
+            {t('stateDashboard.title', { state: state ? state.name : '' })}
           </h1>
           <Instruction source="stateDashboard.instruction" />
           <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
             <h2 className="ds-h2 ds-u-display--inline-block">
-              {state.name} APDs
+              {state ? state.name : ''} APDs
             </h2>
             <Button
               variation="primary"
@@ -150,20 +150,21 @@ StateDashboard.propTypes = {
   apds: PropType.array.isRequired,
   fetching: PropType.bool.isRequired,
   route: PropType.string,
-  state: PropType.object.isRequired,
+  state: PropType.object,
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired
 };
 
 StateDashboard.defaultProps = {
-  route: '/apd'
+  route: '/apd',
+  state: null
 };
 
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching,
-  state: state.user.data.state
+  state: state.user.data.state || null
 });
 
 const mapDispatchToProps = {
