@@ -50,7 +50,7 @@ class LoginMFAEnroll extends Component {
             </h1>
             <form onSubmit={this.handleFactorSelection || formSubmitNoop}>
               <fieldset className="ds-c-fieldset ds-u-margin-top--1">
-                <legend className="ds-u-margin-y--1">Please choose Multi-Factor Authentication route.</legend>            
+                <legend className="ds-u-margin-y--1">Choose a Multi-Factor Authentication route.</legend>            
                   {factorTypes.map((choice, index) => (
                     // Ty note: this hides the choices but we may want to simply remove non-active MFA types from the returned array
                     choice.active? this.choiceItem(choice,index) : null
