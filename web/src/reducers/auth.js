@@ -105,10 +105,10 @@ const auth = (state = initialState, action) => {
         error: ''
       };
     case LOGIN_MFA_FAILURE:
-      return { 
-        ...state, 
-        fetching: false, 
-        error: action.error 
+      return {
+        ...state,
+        fetching: false,
+        error: action.error
       };
     case LOGIN_SUCCESS:
       return {
@@ -132,7 +132,7 @@ const auth = (state = initialState, action) => {
         isLocked: true,
         fetching: false,
         error: ''
-      };     
+      };
     case RESET_LOCKED_OUT:
       return {
         ...state,
