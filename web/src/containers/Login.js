@@ -5,7 +5,13 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
-import { login, loginOtp, mfaConfig, mfaActivate, mfaAddPhone } from '../actions/auth';
+import {
+  login,
+  loginOtp,
+  mfaConfig,
+  mfaActivate,
+  mfaAddPhone
+} from '../actions/auth';
 import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
@@ -46,23 +52,23 @@ const Login = ({
     e.preventDefault();
     action(username, password);
   };
-  
+
   const handleFactorSelection = selected => {
-    if(selected === 'SMS Text' || selected === 'Call') {
+    if (selected === 'sms-OKTA' || selected === 'call-OKTA') {
       mfaActionAddPhone(selected);
     } else {
       mfaAction(selected);
     }
   };
-  
+
   const handleVerificationCode = code => {
     mfaActivation(code);
-  }
+  };
 
   const handlePhoneSubmit = userPhoneNumber => {
     mfaAction(mfaEnrollType, userPhoneNumber);
-  }
-  
+  };
+
   const hideConsent = () => {
     setShowConsent(false);
   };
@@ -86,43 +92,43 @@ const Login = ({
 
   let errorMessage = false;
   if (isLocked) {
-    errorMessage = 'You are locked out'
+    errorMessage = 'You are locked out';
   } else if (otpStage && error === 'Authentication failed') {
     errorMessage = 'The one-time password you’ve entered is incorrect.';
   } else if (
     error === 'Authentication failed' ||
     error === 'Request failed with status code 401'
   ) {
-    errorMessage = 'Please contact your State Administrator for steps to register an account.';
+    errorMessage =
+      'Please contact your State Administrator for steps to register an account.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
-  };
-    
+  }
+
   if (isLocked) {
-    return (
-      <LoginLocked />
-    );
-  };
-  
+    return <LoginLocked />;
+  }
+
   if (mfaEnrollStartStage) {
     return (
-      <LoginMFAEnroll 
-        factors={factorsList} 
-        handleSelection={handleFactorSelection} 
+      <LoginMFAEnroll
+        factors={factorsList}
+        handleSelection={handleFactorSelection}
       />
     );
-  };
+  }
 
-  if(mfaEnrollAddPhoneStage) {
-    return (
-      <LoginMFAEnrollPhoneNumber handlePhoneSubmit={handlePhoneSubmit} />
-    );
-  };
-  
+  if (mfaEnrollAddPhoneStage) {
+    return <LoginMFAEnrollPhoneNumber handlePhoneSubmit={handlePhoneSubmit} />;
+  }
+
   if (mfaEnrollActivateStage) {
-    if(mfaEnrollType === 'Google Authenticator' || mfaEnrollType === 'Okta Authenticator') {
+    if (
+      mfaEnrollType === 'token:software:totp-GOOGLE' ||
+      mfaEnrollType === 'token:software:totp-OKTA'
+    ) {
       return (
-        <LoginMFAVerifyAuthApp 
+        <LoginMFAVerifyAuthApp
           verificationData={verifyData}
           handleVerificationCode={handleVerificationCode}
         />
@@ -131,14 +137,14 @@ const Login = ({
 
     return (
       <LoginMFA
-        action={handleVerificationCode} 
+        action={handleVerificationCode}
         hasEverLoggedOn={false}
         errorMessage={errorMessage}
         fetching={fetching}
       />
-    )
-  };
-  
+    );
+  }
+
   if (otpStage) {
     return (
       <LoginMFA
@@ -147,7 +153,7 @@ const Login = ({
         errorMessage={errorMessage}
         fetching={fetching}
       />
-    );    
+    );
   }
 
   return (
@@ -177,17 +183,17 @@ const Login = ({
           id="username"
           label="EUA ID"
           name="username"
-          errorMessage={errorMessage === false ? null : ""}
+          errorMessage={errorMessage === false ? null : ''}
           ariaLabel="Enter your EUA ID."
           value={username}
           onChange={changeUsername}
         />
-        <Password 
-          title="Password" 
-          value={password} 
-          onChange={changePassword} 
-          errorMessage={errorMessage ? "" : null}
-          customErrorMessage={errorMessage ? "Invalid Entry" : null}
+        <Password
+          title="Password"
+          value={password}
+          onChange={changePassword}
+          errorMessage={errorMessage ? '' : null}
+          customErrorMessage={errorMessage ? 'Invalid Entry' : null}
         />
       </LoginForm>
     </main>
@@ -201,7 +207,7 @@ Login.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   otpStage: PropTypes.bool.isRequired,
-  factorsList: PropTypes.object.isRequired,
+  factorsList: PropTypes.arrayOf(PropTypes.object).isRequired,
   mfaEnrollType: PropTypes.string.isRequired,
   mfaEnrollStartStage: PropTypes.bool.isRequired,
   mfaEnrollAddPhoneStage: PropTypes.bool.isRequired,
@@ -212,11 +218,24 @@ Login.propTypes = {
   loginOtp: PropTypes.func.isRequired,
   mfaConfig: PropTypes.func.isRequired,
   mfaAddPhone: PropTypes.func.isRequired,
-  mfaActivate: PropTypes.func.isRequired,
+  mfaActivate: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn, otpStage, factorsList, mfaEnrollType, mfaEnrollStartStage, mfaEnrollAddPhoneStage, mfaEnrollActivateStage, verifyData, isLocked }
+  auth: {
+    authenticated,
+    error,
+    fetching,
+    hasEverLoggedOn,
+    otpStage,
+    factorsList,
+    mfaEnrollType,
+    mfaEnrollStartStage,
+    mfaEnrollAddPhoneStage,
+    mfaEnrollActivateStage,
+    verifyData,
+    isLocked
+  }
 }) => ({
   authenticated,
   error,
@@ -232,7 +251,13 @@ const mapStateToProps = ({
   isLocked
 });
 
-const mapDispatchToProps = { login, loginOtp, mfaConfig, mfaActivate, mfaAddPhone };
+const mapDispatchToProps = {
+  login,
+  loginOtp,
+  mfaConfig,
+  mfaActivate,
+  mfaAddPhone
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
