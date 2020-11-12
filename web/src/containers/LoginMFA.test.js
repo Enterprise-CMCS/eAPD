@@ -17,17 +17,26 @@ describe('<LoginMFA />', () => {
 
   test('user enters otp', () => {
     const { getByLabelText, getByRole } = renderUtils;
-    expect(getByLabelText('Please enter the 6 digit code sent to you via email.')).toBeTruthy();
+    expect(
+      getByLabelText(
+        'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
+      )
+    ).toBeTruthy();
     expect(getByRole('button', { name: 'Verify' }));
-    fireEvent.change(getByLabelText('Please enter the 6 digit code sent to you via email.'), {
-      target: { value: 'testotp' }
-    });
+    fireEvent.change(
+      getByLabelText(
+        'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
+      ),
+      {
+        target: { value: 'testotp' }
+      }
+    );
     fireEvent.click(getByRole('button', { name: 'Verify' }));
     expect(props.action).toHaveBeenCalledWith('testotp');
   });
-  
+
   test('cancel button renders', () => {
     const { getByText } = renderUtils;
     expect(getByText(/Cancel/i)).toBeTruthy();
-  })
+  });
 });

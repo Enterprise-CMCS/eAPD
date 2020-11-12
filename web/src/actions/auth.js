@@ -11,6 +11,7 @@ import {
   getFactor,
   logoutAndClearTokens
 } from '../util/auth';
+import { MFA_FACTOR_TYPES } from '../constants';
 
 export const AUTH_CHECK_SUCCESS = 'AUTH_CHECK_SUCCESS';
 export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
@@ -92,7 +93,8 @@ export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
 
   if (factor) {
     const enrollTransaction =
-      mfaSelected === 'sms-OKTA' || mfaSelected === 'call-OKTA'
+      mfaSelected === MFA_FACTOR_TYPES.SMS ||
+      mfaSelected === MFA_FACTOR_TYPES.CALL
         ? await factor.enroll({
             profile: { phoneNumber, updatePhone: true }
           })

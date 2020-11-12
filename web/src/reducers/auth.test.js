@@ -15,15 +15,21 @@ import {
 
 describe('auth reducer', () => {
   const initialState = {
-    otpStage: false,
     authenticated: false,
     isLocked: false,
     error: '',
+    factorsList: '',
     fetching: false,
     hasEverLoggedOn: false,
     initialCheck: false,
+    mfaEnrollActivateStage: false,
+    mfaEnrollAddPhoneStage: false,
+    mfaEnrollStartStage: false,
+    mfaEnrollType: '',
+    mfaPhoneNumber: '',
+    otpStage: false,
     user: null,
-    mfaType: ''
+    verifyData: null
   };
 
   it('should handle initial state', () => {
@@ -63,13 +69,12 @@ describe('auth reducer', () => {
   });
 
   it('should handle LOGIN_OTP_STAGE', () => {
-    expect(auth(initialState, { type: LOGIN_OTP_STAGE, data: 'email' })).toEqual({
+    expect(auth(initialState, { type: LOGIN_OTP_STAGE })).toEqual({
       ...initialState,
       fetching: false,
       otpStage: true,
       authenticated: false,
-      error: '',
-      mfaType: 'email'
+      error: ''
     });
   });
 
@@ -114,22 +119,18 @@ describe('auth reducer', () => {
       error: 'foo'
     });
   });
-  
+
   it('should handle LOCKED_OUT', () => {
-    expect(
-      auth(initialState, { type: LOCKED_OUT })
-    ).toEqual({
+    expect(auth(initialState, { type: LOCKED_OUT })).toEqual({
       ...initialState,
       isLocked: true
     });
   });
-  
+
   it('should handle RESET_LOCKED_OUT', () => {
-    expect(
-      auth(initialState, { type: RESET_LOCKED_OUT })
-    ).toEqual({
-     ...initialState,
-     isLocked: false 
+    expect(auth(initialState, { type: RESET_LOCKED_OUT })).toEqual({
+      ...initialState,
+      isLocked: false
     });
   });
 

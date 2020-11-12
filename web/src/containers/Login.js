@@ -12,6 +12,7 @@ import {
   mfaActivate,
   mfaAddPhone
 } from '../actions/auth';
+import { MFA_FACTOR_TYPES } from '../constants';
 import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
@@ -54,7 +55,10 @@ const Login = ({
   };
 
   const handleFactorSelection = selected => {
-    if (selected === 'sms-OKTA' || selected === 'call-OKTA') {
+    if (
+      selected === MFA_FACTOR_TYPES.SMS ||
+      selected === MFA_FACTOR_TYPES.CALL
+    ) {
       mfaActionAddPhone(selected);
     } else {
       mfaAction(selected);
@@ -124,8 +128,8 @@ const Login = ({
 
   if (mfaEnrollActivateStage) {
     if (
-      mfaEnrollType === 'token:software:totp-GOOGLE' ||
-      mfaEnrollType === 'token:software:totp-OKTA'
+      mfaEnrollType === MFA_FACTOR_TYPES.GOOGLE ||
+      mfaEnrollType === MFA_FACTOR_TYPES.OKTA
     ) {
       return (
         <LoginMFAVerifyAuthApp

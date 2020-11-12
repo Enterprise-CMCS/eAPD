@@ -17,13 +17,8 @@ exports[`card form wrapper disables the save button if canSubmit is false 1`] = 
       <div
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
@@ -83,13 +78,8 @@ exports[`card form wrapper does not render a cancel button if form is not cancel
       <div
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
@@ -141,13 +131,8 @@ exports[`card form wrapper renders a success alert if message provided 1`] = `
         >
           oh yeah!
         </Alert>
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
@@ -206,13 +191,8 @@ exports[`card form wrapper renders an error alert if message provided 1`] = `
         >
           oh noes!
         </Alert>
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
@@ -264,13 +244,8 @@ exports[`card form wrapper renders with a save button if onSave prop is provided
       <div
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
@@ -330,13 +305,8 @@ exports[`card form wrapper renders with the default id on the container if id pr
       <div
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
@@ -388,13 +358,8 @@ exports[`card form wrapper renders with the provided id on the container if id p
       <div
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
@@ -446,13 +411,8 @@ exports[`card form wrapper renders without a save button if onSave prop is missi
       <div
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
@@ -504,13 +464,8 @@ exports[`card form wrapper renders without an id on the container if id prop is 
       <div
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        <p
-          className="ds-u-color--gray ds-u-margin-bottom--0"
-        >
-          Welcome Back
-        </p>
         <h1
-          className="ds-h1 ds-u-margin--0"
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
           test
         </h1>
