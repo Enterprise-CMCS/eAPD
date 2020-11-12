@@ -99,7 +99,7 @@ NGINXCONFIG
 service nginx restart
 
 # Configure CloudWatch Agent
-# Nginx is preview only
+
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 "agent": {  "metrics_collection_interval": 60,
   "region": "$AWS_REGION",
@@ -112,6 +112,7 @@ CWAGENTCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
+# Nginx is preview only
 cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 {
   "logs": {
