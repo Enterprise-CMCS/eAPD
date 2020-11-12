@@ -33,7 +33,6 @@ const jwtMiddleware = async (
     // be passed in as additional values when possible.
     const { uid, ...additionalValues } = claims;
     const user = await getUserByID(uid, { additionalValues });
-
     // const user = claims;
     if (user) {
       req.user = user;

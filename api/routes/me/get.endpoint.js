@@ -22,15 +22,33 @@ describe('/me endpoint | GET', () => {
     expect(response.data.states).toEqual([]);
   });
 
-  it('when authenticated, with all permissions', async () => {
-    const api = login('all-permissions');
-    const response = await api.get(url);
+  describe('user is authenticated, with all permissions', () => {
+    let api, response, user;
 
-    expect(response.status).toEqual(200);
-    const permissionStatesCount = Object.keys(response.data.permissions).length;
-    expect(permissionStatesCount).toEqual(56);
-    const permissionsCount = response.data.permissions.fl.length
-    expect(permissionsCount).toEqual(14);
-    expect(response.data.states.length).toEqual(56);
+    beforeEach(async() => {
+      api = login('all-permissions');
+      response = await api.get(url);
+      user = response.data;
+    })
+
+    it('returns a 200 status', () => {
+      expect(response.status).toEqual(200);
+    });
+
+    it('returns permissions for all US states and territories', () => {
+      const permissionStatesCount = Object.keys(user.permissions).length;
+      expect(permissionStatesCount).toEqual(56);
+    });
+
+    it('lists the permissions for individual states', () => {
+      const permissionsCount = user.permissions.fl.length
+      expect(permissionsCount).toEqual(14);
+    });
+
+    it('includes state, role, and activities details for the user', () => {
+      expect(user.state).toBeTruthy();
+      expect(user.role).toBeTruthy();
+      expect(user.activities).toBeTruthy();
+    });
   });
 });

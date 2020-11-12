@@ -6,6 +6,7 @@ const {
 } = require('../auth/oktaAuth');
 const knex = require('./knex');
 const {
+  getRoles,
   getUserAffiliatedStates,
   getUserPermissionsForStates
 } = require('./auth');
@@ -17,6 +18,7 @@ const sanitizeUser = user => ({
   name: user.displayName,
   permissions: user.permissions,
   phone: user.primaryPhone,
+  role: user.role,
   roles: user.auth_roles,
   state: user.state,
   states: user.states,
@@ -28,6 +30,28 @@ const populateUser = async (user) => {
     const populatedUser = user;
     populatedUser.permissions = await getUserPermissionsForStates(user.id);
     populatedUser.states = await getUserAffiliatedStates(user.id);
+
+    // maintain state, role, and activites fields for the user
+    const affiliation = await knex
+      .select({
+        state: 'state_id',
+        roleId: 'role_id',
+        userId: 'user_id'
+      })
+      .from('auth_affiliations')
+      .where({
+        user_id: user.id,
+        status: 'approved'
+      })
+      .first();
+
+    const roles = await getRoles();
+    const role = affiliation && roles.find(role => role.id === affiliation.roleId);
+
+    populatedUser.state = affiliation && affiliation.state;
+    populatedUser.role = role && role.name;
+    populatedUser.activities = role && role.activities;
+
     return populatedUser;
   }
   return user;

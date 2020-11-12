@@ -50,12 +50,12 @@ const getActiveAuthRoles = async ({ db = knex } = {}) => {
  * Retrieves active roles and associated activity names
  * @async
  * @function
- * @returns {Object} { id, role, activities: [] }
+ * @returns {Object} { id, name, activities: [] }
  */
 const getRoles = async ({ db = knex } = {}) => db
   .select({
     id: 'roles.id',
-    role: 'roles.name',
+    name: 'roles.name',
     activities: db.raw('array_agg(activities.name)')
   })
   .from({ rolesActivities: 'auth_role_activity_mapping' })
