@@ -19,6 +19,16 @@ const Loading = ({ children }) => (
 );
 Loading.propTypes = { children: PropType.node.isRequired };
 
+const PendingApproval = () => (
+  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
+    <img alt="Puzzle Piece Icon" src="../static/icons/puzzle.svg" width="57" />
+    <h3 className="ds-u-margin-bottom--1">Approval Pending From State Administrator</h3>
+    <p className="ds-u-margin--0">Please contact State Administrator for more information.</p>
+  </div>
+);
+// Temporary flag to show pending approval
+const isPending = true;
+
 const StateDashboard = (
   {
     apds,
@@ -92,6 +102,7 @@ const StateDashboard = (
           </div>
         </div>
       </div>
+      {isPending? <PendingApproval /> : null}
       {fetching ? <Loading>Loading APDs</Loading> : null}
       {!fetching && apds.length === 0 ? (
         <div className="ds-l-row">
