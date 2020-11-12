@@ -27,17 +27,14 @@ module.exports.loggedIn = loggedIn;
  * @param {string} activity The activity permission to check for
  * @returns {function} The middleware function
  */
-module.exports.can = (activity) =>
+const can = activity =>
   cache(['can', activity], () => {
     const can = (req, res, next) => {
       logger.silly({ id: req.id, message: `got a can middleware request for [${activity}]` });
-      loggedIn(req, res, () => {
-        logger.info({ id: req.id, params: req.params })
-        const stateId = req.params.stateId || (req.meta.apd && req.meta.apd.state);
-        const { user } = req;
-        const permissions = user.permissions[stateId] || [];
-        logger.info({ id: req.id, message: `${stateId}: ${permissions}` })
-        if (permissions.includes(activity)) {
+      // First check if they're logged in
+      module.exports.loggedIn(req, res, () => {
+        // Then check if they have the activity
+        if (req.user.activities.includes(activity)) {
           logger.verbose({ id: req.id, message: `user has the [${activity}] activity` });
           next();
         } else {
@@ -48,3 +45,5 @@ module.exports.can = (activity) =>
     };
     return can;
   });
+
+module.exports.can = can;

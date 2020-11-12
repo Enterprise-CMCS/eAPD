@@ -6,37 +6,24 @@ const {
 } = require('../../endpoint-tests/utils');
 
 describe('APD endpoint', () => {
-  // should the index method for apds be nested under /states/:stateId?
-  // signs point to 'yes'
+  describe('List APDs endpoint | GET /apds', () => {
+    const db = getDB();
+    beforeAll(() => db.seed.run());
+    afterAll(() => db.destroy());
 
-  // describe('List APDs endpoint | GET /apds', () => {
-  //   const db = getDB();
-  //   beforeAll(() => db.seed.run());
-  //   afterAll(() => db.destroy());
+    const url = '/apds';
 
-  //   const url = '/apds';
+    unauthenticatedTest('get', url);
+    unauthorizedTest('get', url);
 
-  //   unauthenticatedTest('get', url);
-  //   unauthorizedTest('get', url);
-
-  //   describe('when authenticated', () => {
-  //     it('as a user with view-document permissions', async () => {
-  //       const api = login('no-permissions');
-  //       const response = await api.get(url);
-
-  //       expect(response.status).toEqual(401);
-  //       expect(response.data).toMatchSnapshot();
-  //     });
-
-  //     it('as a user with all permissions', async () => {
-  //       const api = login('all-permissions');
-  //       const response = await api.get(url);
-
-  //       expect(response.status).toEqual(200);
-  //       expect(response.data).toMatchSnapshot();
-  //     });
-  //   });
-  // });
+    describe('when authenticated', () => {
+      it('as a user with all permissions', async () => {
+        const api = login('all-permissions');
+        const response = await api.get(url);
+        expect(response.status).toEqual(200);
+      });
+    });
+  });
 
   describe('Get specific APD | GET /apds/:id', () => {
     const db = getDB();
@@ -46,16 +33,14 @@ describe('APD endpoint', () => {
 
     const url = id => `/apds/${id}`;
 
-    unauthenticatedTest('get', url(0));
-    unauthorizedTest('get', url(0));
+    unauthenticatedTest('get', url(4000));
+    unauthorizedTest('get', url(4000));
 
     describe('when authenticated', () => {
       it('as a user without a state', async () => {
         const api = login('all-permissions-no-state');
-        const response = await api.get(url(0));
-
+        const response = await api.get(url(4000));
         expect(response.status).toEqual(401);
-        expect(response.data).toMatchSnapshot();
       });
 
       describe('as a user with a state', () => {
@@ -65,24 +50,18 @@ describe('APD endpoint', () => {
         });
 
         it('when requesting an APD that does not exist', async () => {
-          const response = await api.get(url(0));
-
+          const response = await api.get(url(9999));
           expect(response.status).toEqual(400);
-          expect(response.data).toMatchSnapshot();
         });
 
         it('when requesting an APD that belongs to another state', async () => {
-          const response = await api.get(url(4001));
-
+          const response = await api.get(url(4000));
           expect(response.status).toEqual(400);
-          expect(response.data).toMatchSnapshot();
         });
 
         it('when requesting an APD that belongs to their state', async () => {
-          const response = await api.get(url(4000));
-
+          const response = await api.get(url(4001));
           expect(response.status).toEqual(200);
-          expect(response.data).toMatchSnapshot();
         });
       });
     });
