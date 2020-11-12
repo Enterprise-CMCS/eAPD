@@ -30,6 +30,7 @@ const populateUser = async (user) => {
     const populatedUser = user;
     populatedUser.permissions = await getUserPermissionsForStates(user.id);
     populatedUser.states = await getUserAffiliatedStates(user.id);
+    populatedUser.affiliations = await knex.select('*').from('auth_affiliations').where({ user_id: user.id });
 
     // maintain state, role, and activities fields for the user
     const affiliation = await knex
