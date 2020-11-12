@@ -112,7 +112,7 @@ CWAGENTCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
-cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
+cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 {
   "logs": {
     "logs_collected": {
@@ -120,51 +120,51 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
         "collect_list": [
           {
             "file_path": "/var/log/aide/aide.log*",
-            "log_group_name": "preview/var-logs/aide/aide.log"
+            "log_group_name": "preview/var/log/aide/aide.log"
           },
           {
             "file_path": "/var/log/audit/audit.log*",
-            "log_group_name": "preview/var-logs/audit/audit.log"
+            "log_group_name": "preview/var/log/audit/audit.log"
           },
           {
             "file_path": "/var/log/awslogs.log*",
-            "log_group_name": "preview/var-logs/awslogs.log"
+            "log_group_name": "preview/var/log/awslogs.log"
           },
           {
             "file_path": "/var/log/cloud-init.log*",
-            "log_group_name": "preview/var-logs/cloud-init.log"
+            "log_group_name": "preview/var/log/cloud-init.log"
           },
           {
             "file_path": "/var/log/cloud-init-output.log*",
-            "log_group_name": "preview/var-logs/cloud-init-output.log"
+            "log_group_name": "preview/var/log/cloud-init-output.log"
           },
           {
             "file_path": "/var/log/cron*",
-            "log_group_name": "preview/var-logs/cron"
+            "log_group_name": "preview/var/log/cron"
           },
           {
             "file_path": "/var/log/dmesg*",
-            "log_group_name": "preview/var-logs/dmesg"
+            "log_group_name": "preview/var/log/dmesg"
           },
           {
             "file_path": "/var/log/maillog*",
-            "log_group_name": "preview/var-logs/maillog"
+            "log_group_name": "preview/var/log/maillog"
           },
           {
             "file_path": "/var/log/messages*",
-            "log_group_name": "preview/var-logs/messages"
+            "log_group_name": "preview/var/log/messages"
           },
           {
             "file_path": "/var/log/nginx/access_log*",
-            "log_group_name": "preview/var-logs/nginx/access_log"
+            "log_group_name": "preview/var/log/nginx/access_log"
           },
           {
             "file_path": "/var/log/nginx/error_log*",
-            "log_group_name": "preview/var-logs/nginx/error_log"
+            "log_group_name": "preview/var/log/nginx/error_log"
           },
           {
             "file_path": "/var/log/secure*",
-            "log_group_name": "preview/var-logs/secure"
+            "log_group_name": "preview/var/log/secure"
           }
         ]
       }
@@ -174,7 +174,9 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
 
 CWVARLOGCONFIG
 
-cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-log.json
+
+cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 {
   "logs": {
     "logs_collected": {
@@ -182,24 +184,25 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
         "collect_list": [
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent.log*",
-            "log_group_name": "preview/var-opt/ds_agent/diag/ds_agent.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent-err.log*",
-            "log_group_name": "preview/var-opt/ds_agent/diag/ds_agent-err.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent-err.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_am.log*",
-            "log_group_name": "preview/var-opt/ds_agent/diag/ds_am.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_am.log"
           }
         ]
       }
     }
   }
 }
+
 CWVAROPTCONFIG
 
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 
 cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 
@@ -224,7 +227,7 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 
 CWAPPLOGCONFIG
 
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-logs.json
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
