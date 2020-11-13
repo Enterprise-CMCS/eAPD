@@ -1,15 +1,11 @@
-const logger = require('../logger')('user db');
-const {
-  userApplicationProfileUrl,
-  oktaClient,
-  callOktaEndpoint
-} = require('../auth/oktaAuth');
+const { oktaClient } = require('../auth/oktaAuth');
 const knex = require('./knex');
 const {
-  getRoles,
-  getUserAffiliatedStates,
-  getUserPermissionsForStates
+  getRoles: actualGetRoles,
+  getUserAffiliatedStates: actualGetUserAffiliatedStates,
+  getUserPermissionsForStates: actualGetUserPermissionsForStates
 } = require('./auth');
+const { getStateById: actualGetStateById } = require('./states');
 
 const sanitizeUser = user => ({
   activities: user.activities,
@@ -25,31 +21,32 @@ const sanitizeUser = user => ({
   username: user.login,
 });
 
-const populateUser = async (user) => {
+const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
+  return db
+    .select('*')
+    .from('auth_affiliations')
+    .where({ user_id: id });
+}
+
+const populateUser = async (user, {
+  getUserPermissionsForStates = actualGetUserPermissionsForStates,
+  getUserAffiliatedStates = actualGetUserAffiliatedStates,
+  getAffiliationsByUserId = actualGetAffiliationsByUserId,
+  getStateById = actualGetStateById,
+  getRoles = actualGetRoles
+} = {}) => {
   if (user) {
     const populatedUser = user;
     populatedUser.permissions = await getUserPermissionsForStates(user.id);
     populatedUser.states = await getUserAffiliatedStates(user.id);
-    populatedUser.affiliations = await knex.select('*').from('auth_affiliations').where({ user_id: user.id });
+    populatedUser.affiliations = await getAffiliationsByUserId(user.id);
 
     // maintain state, role, and activities fields for the user
-    const affiliation = await knex
-      .select({
-        stateId: 'state_id',
-        roleId: 'role_id',
-        userId: 'user_id'
-      })
-      .from('auth_affiliations')
-      .where({
-        user_id: user.id,
-        status: 'approved'
-      })
-      .first();
-
+    const affiliation = populatedUser.affiliations.find(Boolean);
     const roles = await getRoles();
     const role = affiliation && roles.find(role => role.id === affiliation.roleId);
 
-    populatedUser.state = affiliation && affiliation.stateId && await knex.select('*').from('states').where({ id: affiliation.stateId }).first();
+    populatedUser.state = affiliation && affiliation.stateId && await getStateById(affiliation.stateId);
     populatedUser.role = role && role.name;
     populatedUser.activities = (role && role.activities) || [];
 
