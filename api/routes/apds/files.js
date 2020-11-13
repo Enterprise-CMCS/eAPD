@@ -33,8 +33,8 @@ module.exports = (
           res.status(400).end();
         }
       } catch (e) {
-        logger.error(req, 'error fetching file');
-        logger.error(req, e);
+        logger.error({ id: req.id, message: 'error fetching file' });
+        logger.error({ id: req.id, message: e });
         res.status(400).end();
       }
     }
@@ -71,7 +71,7 @@ module.exports = (
 
         res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
       } catch (e) {
-        logger.error(req, e);
+        logger.error({ id: req.id, message: e });
         res.status(500).end();
       }
     }

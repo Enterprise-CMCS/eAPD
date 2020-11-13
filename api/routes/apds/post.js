@@ -8,7 +8,7 @@ const getNewApd = require('./post.data');
 module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res) => {
-    logger.silly(req, 'handling POST /apds route');
+    logger.silly({ id: req.id, message: 'handling POST /apds route' });
 
     try {
       const apd = getNewApd();
@@ -38,8 +38,8 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       if (!valid) {
         // This is just here to protect us from the case where the APD schema changed but the
         // APD creation function was not also updated
-        logger.error(req, 'Newly-created APD fails validation');
-        logger.error(req, validateApd.errors);
+        logger.error({ id: req.id, message: 'Newly-created APD fails validation' });
+        logger.error({ id: req.id, message: validateApd.errors });
         return res.status(500).end();
       }
 
@@ -56,7 +56,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         updated: new Date().toISOString()
       });
     } catch (e) {
-      logger.error(req, e);
+      logger.error({ id: req.id, message: e });
       return res.status(500).end();
     }
   });

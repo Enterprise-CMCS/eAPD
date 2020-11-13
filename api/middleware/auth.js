@@ -7,12 +7,12 @@ const { cache } = require('./cache');
  * is not authenticated.
  */
 const loggedIn = (req, res, next) => {
-  logger.silly(req, 'got a loggedIn middleware request');
+  logger.silly({ id: req.id, message: 'got a loggedIn middleware request' });
   if (req.user) {
-    logger.verbose(req, `user is logged in`);
+    logger.verbose({ id: req.id, message: `user is logged in` });
     next();
   } else {
-    logger.info(req, 'user is not logged in');
+    logger.info({ id: req.id, message: 'user is not logged in' });
     res.status(401).end();
   }
 };
@@ -30,15 +30,15 @@ module.exports.loggedIn = loggedIn;
 module.exports.can = activity =>
   cache(['can', activity], () => {
     const can = (req, res, next) => {
-      logger.silly(req, `got a can middleware request for [${activity}]`);
+      logger.silly({ id: req.id, message: `got a can middleware request for [${activity}]` });
       // First check if they're logged in
       module.exports.loggedIn(req, res, () => {
         // Then check if they have the activity
         if (req.user.activities.includes(activity)) {
-          logger.verbose(req, `user has the [${activity}] activity`);
+          logger.verbose({ id: req.id, message: `user has the [${activity}] activity` });
           next();
         } else {
-          logger.info(req, `user does not have the [${activity}] activity`);
+          logger.info({ id: req.id, message: `user does not have the [${activity}] activity` });
           res.status(403).end();
         }
       });

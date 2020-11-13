@@ -57,17 +57,18 @@ class LoginMFAVerifyAuthApp extends Component {
               <strong>Authenticator</strong> app.
             </p>
             {/*  Ty note: For accessibility a label is required for all inputs. 
-              <label class="ds-c-label ds-u-margin-top--0" for="input-singleline">
+              <label class="ds-c-label ds-u-margin-top--0" for="input-otp-code">
             <span>Single line field</span>
             </label> */}
             <form onSubmit={this.handleVerificationCodeSubmit}>
               <input
                 className="ds-c-field ds-c-field--medium"
-                id="input-singleline"
+                id="input-otp-code"
                 name="singleline"
                 value={verificationCode}
                 type="text"
                 onChange={this.handleOnChange}
+                data-testid="input-otp-code"
               />
               <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
                 <button

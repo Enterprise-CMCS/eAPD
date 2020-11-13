@@ -25,17 +25,17 @@ module.exports = (
     can('edit-document'),
     userCanEditAPD(),
     async (req, res) => {
-      logger.silly(req, 'handling PATCH /apds/:id route');
+      logger.silly({ id: req.id, message: 'handling PATCH /apds/:id route' });
       if (!req.params.id) {
-        logger.error(req, 'no ID given');
+        logger.error({ id: req.id, message: 'no ID given' });
         return res.status(400).end();
       }
       if (!Array.isArray(req.body)) {
-        logger.error(req, 'request body must be an array');
+        logger.error({ id: req.id, message: 'request body must be an array' });
         return res.status(400).end();
       }
 
-      logger.silly(req, `attempting to update APD [${req.params.id}]`);
+      logger.silly({ id: req.id, message: `attempting to update APD [${req.params.id}]` });
 
       try {
         // Filter out any patches that target unchangeable properties
@@ -56,23 +56,21 @@ module.exports = (
         } catch (e) {
           // This can happen for a variety of reasons. E.g., a patch tries to
           // operate on a property that doesn't currently exist.
-          logger.error(req, 'error patching the document');
-          logger.error(null, e);
+          logger.error({ id: req.id, message: 'error patching the document' });
+          logger.error({ id: req.id, message: e });
           return res.status(400).end();
         }
 
         const valid = validate(updatedDocument);
         if (!valid) {
-          logger.error(
-            req,
-            // Rather than send back the full error from the validator, pull out just the relevant bits
-            // and fetch the value that's causing the error.
-            validate.errors.map(({ dataPath, message }) => ({
-              dataPath,
-              message,
-              value: jsonpointer.get(updatedDocument, dataPath)
-            }))
-          );
+          // Rather than send back the full error from the validator, pull out just the relevant bits
+          // and fetch the value that's causing the error.
+          const errors = validate.errors.map(({ dataPath, message }) => ({
+            dataPath,
+            message,
+            value: jsonpointer.get(updatedDocument, dataPath)
+          }));
+          logger.error({ id: req.id, message: errors });
           return res
             .status(400)
             .send(validate.errors.map(v => ({ path: v.dataPath })))
@@ -94,7 +92,7 @@ module.exports = (
           updated: updateTime
         });
       } catch (e) {
-        logger.error(req, e);
+        logger.error({ id: req.id, message: e });
         return res.status(500).end();
       }
     }
