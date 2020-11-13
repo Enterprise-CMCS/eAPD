@@ -87,6 +87,9 @@ const getCurrentUser = () => dispatch =>
       if (userRes.data.states.length === 0) {
         dispatch(requestAccessToState());
       }
+      if (userRes.data.activities) {
+        dispatch(loadData(userRes.data.activities));
+      }
       dispatch(completeLogin(userRes.data));
       dispatch(resetLocked());
 
@@ -160,10 +163,7 @@ export const loginOtp = otp => async dispatch => {
       .then(async res => {
         const { sessionToken } = res;
         await setTokens(sessionToken);
-        return getCurrentUser().then(userRes => {
-          dispatch(completeLogin(userRes.data));
-          dispatch(loadData(userRes.data.activities));
-        });
+        return dispatch(getCurrentUser());
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';

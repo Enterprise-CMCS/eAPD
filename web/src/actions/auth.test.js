@@ -95,11 +95,16 @@ describe('auth actions', () => {
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.RESET_LOCKED_OUT },
-        { type: actions.LOGIN_SUCCESS, data: { name: 'moop', activities: [] } }
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: { name: 'moop', activities: [], states: ['MO'] }
+        },
+        { type: actions.RESET_LOCKED_OUT }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
@@ -176,16 +181,16 @@ describe('auth actions', () => {
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
-    
+
     it('creates LOCKED_OUT if account is locked out', async () => {
       const signInSpy = jest
         .spyOn(mockOktaAuth, 'signIn')
         .mockImplementation(() =>
           Promise.resolve({
-            status: 'LOCKED_OUT',
+            status: 'LOCKED_OUT'
           })
         );
-        
+
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
@@ -228,10 +233,16 @@ describe('auth actions', () => {
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_SUCCESS, data: { name: 'moop', activities: [] } }
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: { name: 'moop', activities: [], states: ['MO'] }
+        },
+        { type: actions.RESET_LOCKED_OUT }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -399,23 +410,21 @@ describe('auth actions', () => {
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
-    
+
     it('creates LOCKED_OUT after too many failed MFA attempts', async () => {
       jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
       jest.spyOn(mockOktaAuth.tx, 'resume').mockImplementation(() =>
         Promise.resolve({
-          verify: jest.fn(() =>
-            Promise.reject(new Error('User Locked'))
-          )
+          verify: jest.fn(() => Promise.reject(new Error('User Locked')))
         })
       );
-    
+
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         { type: actions.LOCKED_OUT }
       ];
-    
+
       await store.dispatch(actions.loginOtp('otp'));
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
@@ -599,9 +608,11 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock
-        .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-document'] });
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        states: ['MO'],
+        activities: ['view-document']
+      });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));
@@ -613,7 +624,11 @@ describe('auth actions', () => {
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
       fetchMock
         .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-users'] });
+        .reply(200, {
+          name: 'moop',
+          activities: ['view-users'],
+          states: ['MO']
+        });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));
@@ -625,7 +640,11 @@ describe('auth actions', () => {
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
       fetchMock
         .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-roles'] });
+        .reply(200, {
+          name: 'moop',
+          activities: ['view-roles'],
+          states: ['MO']
+        });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));

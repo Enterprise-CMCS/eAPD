@@ -23,7 +23,10 @@ describe('auth reducer', () => {
     hasEverLoggedOn: false,
     initialCheck: false,
     user: null,
-    mfaType: ''
+    mfaType: '',
+    requestAccess: false,
+    requestAccessSuccess: false,
+    selectState: false
   };
 
   it('should handle initial state', () => {
@@ -63,7 +66,9 @@ describe('auth reducer', () => {
   });
 
   it('should handle LOGIN_OTP_STAGE', () => {
-    expect(auth(initialState, { type: LOGIN_OTP_STAGE, data: 'email' })).toEqual({
+    expect(
+      auth(initialState, { type: LOGIN_OTP_STAGE, data: 'email' })
+    ).toEqual({
       ...initialState,
       fetching: false,
       otpStage: true,
@@ -114,22 +119,18 @@ describe('auth reducer', () => {
       error: 'foo'
     });
   });
-  
+
   it('should handle LOCKED_OUT', () => {
-    expect(
-      auth(initialState, { type: LOCKED_OUT })
-    ).toEqual({
+    expect(auth(initialState, { type: LOCKED_OUT })).toEqual({
       ...initialState,
       isLocked: true
     });
   });
-  
+
   it('should handle RESET_LOCKED_OUT', () => {
-    expect(
-      auth(initialState, { type: RESET_LOCKED_OUT })
-    ).toEqual({
-     ...initialState,
-     isLocked: false 
+    expect(auth(initialState, { type: RESET_LOCKED_OUT })).toEqual({
+      ...initialState,
+      isLocked: false
     });
   });
 
@@ -159,7 +160,10 @@ describe('auth reducer', () => {
         otpStage: false,
         mfaType: '',
         isLocked: false,
-        user: null
+        user: null,
+        requestAccess: false,
+        requestAccessSuccess: false,
+        selectState: false
       });
     });
   });

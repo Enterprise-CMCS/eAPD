@@ -3,7 +3,12 @@ import React from 'react';
 import sinon from 'sinon';
 
 import { plain as Login, mapStateToProps, mapDispatchToProps } from './Login';
-import { login, loginOtp } from '../actions/auth';
+import {
+  login,
+  loginOtp,
+  completeAccessToState,
+  createAccessRequest
+} from '../actions/auth';
 
 describe('login component', () => {
   test('renders correctly if logged in', () => {
@@ -255,6 +260,11 @@ describe('login component', () => {
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ login, loginOtp });
+    expect(mapDispatchToProps).toEqual({
+      login,
+      loginOtp,
+      completeAccessToState,
+      createAccessRequest
+    });
   });
 });
