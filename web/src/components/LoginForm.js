@@ -27,7 +27,10 @@ const LoginForm = ({
         <div className="ds-l-col--1 ds-u-margin-left--auto" />
         <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
           <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center">
-            <img src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg" alt="eAPD Logo" />
+            <img
+              src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
+              alt="eAPD Logo"
+            />
             <h1 className="ds-h1 ds-u-margin-top--2">
               {sectionName.length > 0 && (
                 <span className="ds-h6 ds-u-display--block">
@@ -37,16 +40,8 @@ const LoginForm = ({
               {title}
             </h1>
           </div>
-            {!!success && (
-              <div className="ds-u-margin-top--3">
-                {success}
-              </div>
-            )}
-            {!!error && (
-              <div className="ds-u-margin-top--3">
-                {error}
-              </div>
-            )}
+          {!!success && <div className="ds-u-margin-top--3">{success}</div>}
+          {!!error && <div className="ds-u-margin-top--3">{error}</div>}
           <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
               {!!legend && (

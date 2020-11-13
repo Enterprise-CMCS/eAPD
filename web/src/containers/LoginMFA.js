@@ -27,23 +27,28 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
         working={fetching}
         primaryButtonText={['Verify', 'Verifying']}
         onSave={handleSubmit}
-      >        
+      >
         <Fragment>
           <div className="ds-u-margin-bottom--4">
-            <label htmlFor="otp" id="otp" className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal">            
-              Enter the verification code provided to you via call, text, email, or your chosen authenticator app.
+            <label
+              htmlFor="otp"
+              id="otp"
+              className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
+            >
+              Enter the verification code provided to you via call, text, email,
+              or your chosen authenticator app.
             </label>
-            <input 
+            <input
               width="200px"
               aria-labelledby="otp"
-              className="ds-c-field ds-c-field--medium" 
-              id="otp" 
-              type="text" 
-              name="otp" 
+              className="ds-c-field ds-c-field--medium"
+              id="otp"
+              type="text"
+              name="otp"
               value={otp}
               onChange={changeOtp}
             />
-          </div>        
+          </div>
         </Fragment>
       </VerifyMFAForm>
     </div>
