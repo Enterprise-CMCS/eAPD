@@ -8,9 +8,11 @@ let renderUtils;
 describe('<LoginMFAEnrollPhoneNumber />', () => {
   beforeEach(() => {
     props = {
-      handlePhoneSubmit: jest.fn(),
+      handlePhoneSubmit: jest.fn()
     };
-    renderUtils = renderWithConnection(<LoginMFAEnrollPhoneNumber {...props} />);
+    renderUtils = renderWithConnection(
+      <LoginMFAEnrollPhoneNumber {...props} />
+    );
   });
 
   test('title renders', () => {
@@ -21,18 +23,13 @@ describe('<LoginMFAEnrollPhoneNumber />', () => {
   test('phone field renders', () => {
     const { getByTestId } = renderUtils;
     expect(getByTestId('mfaPhoneNumber')).toBeTruthy();
-  })
+  });
 
   test('user enters phone number', () => {
     const { getByTestId, getByRole } = renderUtils;
-    fireEvent.change(
-      getByTestId(
-        'mfaPhoneNumber'
-      ),
-      {
-        target: { value: '4105555555' }
-      }
-    );
+    fireEvent.change(getByTestId('mfaPhoneNumber'), {
+      target: { value: '4105555555' }
+    });
     fireEvent.click(getByRole('button', { name: 'Submit' }));
     expect(props.handlePhoneSubmit).toHaveBeenCalledWith('4105555555');
   });
