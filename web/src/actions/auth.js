@@ -65,7 +65,10 @@ export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
-export const successAccessToState = () => ({ type: STATE_ACCESS_SUCCESS });
+export const successAccessToState = stateId => ({
+  type: STATE_ACCESS_SUCCESS,
+  data: stateId
+});
 export const completeAccessToState = () => ({ type: STATE_ACCESS_COMPLETE });
 
 const loadData = activities => dispatch => {
@@ -92,8 +95,6 @@ const getCurrentUser = () => dispatch =>
       }
       dispatch(completeLogin(userRes.data));
       dispatch(resetLocked());
-
-      // dispatch(loadData(userRes.data.activities));
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
@@ -134,12 +135,7 @@ export const mfaActivate = code => async dispatch => {
 
   if (activateTransaciton.status === 'SUCCESS') {
     await setTokens(activateTransaciton.sessionToken);
-    dispatch(
-      getCurrentUser().catch(error => {
-        const reason = error ? error.message : 'N/A';
-        dispatch(failLogin(reason));
-      })
-    );
+    dispatch(getCurrentUser());
   }
 };
 
@@ -207,7 +203,7 @@ export const createAccessRequest = states => dispatch => {
     axios
       .post(`/states/${stateId}/affiliations`)
       .then(() => {
-        dispatch(successAccessToState());
+        dispatch(successAccessToState(stateId));
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';
