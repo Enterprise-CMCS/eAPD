@@ -16,6 +16,7 @@ const activities = [
   { id: 1011, name: 'view-document' },
   { id: 1012, name: 'view-affiliations' },
   { id: 1013, name: 'edit-affiliations' },
+  { id: 1014, name: 'approve-state-access' },
 ];
 
 const roles = [
@@ -25,17 +26,34 @@ const roles = [
   { id: 1104, isActive: false, name: 'eAPD Federal SME' },
   { id: 1105, isActive: true, name: 'eAPD State Coordinator' },
   { id: 1106, isActive: false, name: 'eAPD State SME' },
+  { id: 1107, isActive: true, name: 'eAPD State Admin' },
 ];
 
 // grant 'eAPD Admin' role all activities
-const adminRole = roles[0];
+const adminRole = roles.find(role => role.name === 'eAPD Admin');
 const adminActivities = activities.map(activity => ({
   role_id: adminRole.id,
   activity_id: activity.id
+}));
+
+// 'eAPD State Coordinator'
+const stateAdminRole = roles.find(role => role.name === 'eAPD State Admin');
+const stateAdminActivities = [
+  'view-document',
+  'submit-document',
+  'submit-state-response',
+  'create-draft',
+  'edit-document',
+  'edit-response',
+  'approve-state-access'
+].map(activityName => ({
+  role_id: stateAdminRole.id,
+  activity_id: activities.find(activity => activity.name === activityName).id
 }));
 
 exports.seed = async knex => {
   await knex('auth_activities').insert(activities);
   await knex('auth_roles').insert(roles);
   await knex('auth_role_activity_mapping').insert(adminActivities);
+  await knex('auth_role_activity_mapping').insert(stateAdminActivities);
 };

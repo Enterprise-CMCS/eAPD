@@ -65,7 +65,11 @@ class Header extends Component {
                   <Icon icon={faChevronLeft} size="sm" />
                   {isAdmin
                     ? 'Admin Dashboard'
-                    : `${currentUser.state.id.toUpperCase()} APD Home`}
+                    : `${
+                        currentUser.state && currentUser.state.id
+                          ? `${currentUser.state.id.toUpperCase()} `
+                          : ''
+                      }APD Home`}
                 </DashboardButton>
               )}
             </div>

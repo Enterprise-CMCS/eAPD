@@ -29,7 +29,10 @@ describe('auth reducer', () => {
     mfaPhoneNumber: '',
     otpStage: false,
     user: null,
-    verifyData: null
+    verifyData: null,
+    requestAccess: false,
+    requestAccessSuccess: false,
+    selectState: false
   };
 
   it('should handle initial state', () => {
@@ -158,9 +161,18 @@ describe('auth reducer', () => {
         hasEverLoggedOn: true,
         initialCheck: true,
         otpStage: false,
-        mfaType: '',
         isLocked: false,
-        user: null
+        user: null,
+        requestAccess: false,
+        requestAccessSuccess: false,
+        selectState: false,
+        factorsList: '',
+        mfaEnrollActivateStage: false,
+        mfaEnrollAddPhoneStage: false,
+        mfaEnrollStartStage: false,
+        mfaEnrollType: '',
+        mfaPhoneNumber: '',
+        verifyData: null
       });
     });
   });

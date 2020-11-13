@@ -8,7 +8,9 @@ import {
   loginOtp,
   mfaActivate,
   mfaAddPhone,
-  mfaConfig
+  mfaConfig,
+  completeAccessToState,
+  createAccessRequest
 } from '../actions/auth';
 
 describe('login component', () => {
@@ -266,7 +268,9 @@ describe('login component', () => {
       loginOtp,
       mfaActivate,
       mfaAddPhone,
-      mfaConfig
+      mfaConfig,
+      completeAccessToState,
+      createAccessRequest
     });
   });
 });

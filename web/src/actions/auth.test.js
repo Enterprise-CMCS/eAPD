@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 
 import * as actions from './auth';
 import axios from '../util/api';
-import mockAuth from '../util/auth';
+import * as mockAuth from '../util/auth';
 import mockApp from './app';
 import mockAdmin from './admin';
 
@@ -17,17 +17,6 @@ jest.mock('./admin', () => {
   return {
     getUsers: jest.fn(),
     getRoles: jest.fn()
-  };
-});
-jest.mock('../util/auth', () => {
-  return {
-    authenticateUser: jest.fn(),
-    retrieveExistingTransaction: jest.fn(),
-    verifyMFA: jest.fn(),
-    setTokens: jest.fn(),
-    getAvailableFactors: jest.fn(),
-    getFactor: jest.fn(),
-    logoutAndClearTokens: jest.fn()
   };
 });
 
@@ -95,11 +84,16 @@ describe('auth actions', () => {
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.RESET_LOCKED_OUT },
-        { type: actions.LOGIN_SUCCESS, data: { name: 'moop', activities: [] } }
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: { name: 'moop', activities: [], states: ['MO'] }
+        },
+        { type: actions.RESET_LOCKED_OUT }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
@@ -129,7 +123,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_OTP_STAGE, data: 'email' }
+        { type: actions.LOGIN_OTP_STAGE }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
@@ -208,10 +202,17 @@ describe('auth actions', () => {
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_SUCCESS, data: { name: 'moop', activities: [] } }
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: { name: 'moop', activities: [], states: ['MO'] }
+        },
+        { type: actions.RESET_LOCKED_OUT }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -242,7 +243,11 @@ describe('auth actions', () => {
       jest
         .spyOn(mockAuth, 'retrieveExistingTransaction')
         .mockImplementation(() =>
-          Promise.reject(new Error('Failed to resume'))
+          Promise.resolve({
+            verify: jest.fn(() =>
+              Promise.reject(new Error('Authentication failed'))
+            )
+          })
         );
 
       const store = mockStore({});
@@ -269,6 +274,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -297,6 +303,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -328,7 +335,11 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
+        {
+          type: actions.LOGIN_FAILURE,
+          error: 'Request failed with status code 404'
+        }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -348,15 +359,17 @@ describe('auth actions', () => {
         );
       jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementationOnce(() => Promise.resolve({ status: 'success' }))
-        .mockImplementationOnce(() =>
+        .mockImplementation(() =>
           Promise.reject(new Error('Authentication failed'))
         );
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -377,6 +390,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOCKED_OUT }
       ];
 
@@ -394,7 +408,7 @@ describe('auth actions', () => {
             status: 'SUCCESS'
           })
         );
-      const addTokenSpy = jest
+      const setTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
@@ -410,13 +424,7 @@ describe('auth actions', () => {
 
       await store.dispatch(actions.login('name', 'secret'));
       expect(signInSpy).toHaveBeenCalledTimes(1);
-      await expect(addTokenSpy).toHaveBeenCalledWith('idToken', {
-        idToken: 'xxx.yyy.zzz'
-      });
-      await expect(addTokenSpy).toHaveBeenCalledWith('accessToken', {
-        accessToken: 'aaa.bbb.ccc'
-      });
-      expect(addTokenSpy).toHaveBeenCalledTimes(2);
+      expect(setTokenSpy).toHaveBeenCalledTimes(1);
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -535,9 +543,11 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock
-        .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-document'] });
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        states: ['MO'],
+        activities: ['view-document']
+      });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));
@@ -547,9 +557,11 @@ describe('auth actions', () => {
       expect(getRolesSpy).not.toHaveBeenCalled();
     });
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock
-        .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-users'] });
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        activities: ['view-users'],
+        states: ['MO']
+      });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));
@@ -559,9 +571,11 @@ describe('auth actions', () => {
       expect(getRolesSpy).not.toHaveBeenCalled();
     });
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock
-        .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-roles'] });
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        activities: ['view-roles'],
+        states: ['MO']
+      });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));

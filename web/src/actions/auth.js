@@ -29,8 +29,11 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOCKED_OUT = 'LOCKED_OUT';
 export const RESET_LOCKED_OUT = 'RESET_LOCKED_OUT';
-
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+
+export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
+export const STATE_ACCESS_SUCCESS = 'STATE_ACCESS_SUCCESS';
+export const STATE_ACCESS_COMPLETE = 'STATE_ACCESS_COMPLETE';
 
 export const requestAuthCheck = () => ({ type: AUTH_CHECK_REQUEST });
 export const completeAuthCheck = user => ({
@@ -62,6 +65,10 @@ export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
 
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
+export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
+export const successAccessToState = () => ({ type: STATE_ACCESS_SUCCESS });
+export const completeAccessToState = () => ({ type: STATE_ACCESS_COMPLETE });
+
 const loadData = activities => dispatch => {
   if (activities.includes('view-document')) {
     dispatch(fetchAllApds());
@@ -75,11 +82,24 @@ const loadData = activities => dispatch => {
 };
 
 const getCurrentUser = () => dispatch =>
-  axios.get('/me').then(userRes => {
-    dispatch(resetLocked());
-    dispatch(completeLogin(userRes.data));
-    dispatch(loadData(userRes.data.activities));
-  });
+  axios
+    .get('/me')
+    .then(userRes => {
+      if (userRes.data.states.length === 0) {
+        dispatch(requestAccessToState());
+      }
+      if (userRes.data.activities) {
+        dispatch(loadData(userRes.data.activities));
+      }
+      dispatch(completeLogin(userRes.data));
+      dispatch(resetLocked());
+
+      // dispatch(loadData(userRes.data.activities));
+    })
+    .catch(error => {
+      const reason = error ? error.message : 'N/A';
+      dispatch(failLogin(reason));
+    });
 
 // Ty notes: mfaSelected is what the user picked for their MFA option.
 // here we need to take that option and send it back to OKTA. Okta will
@@ -150,7 +170,7 @@ export const login = (username, password) => dispatch => {
 
       if (res.status === 'MFA_REQUIRED') {
         const mfaFactor = res.factors.find(
-          factor => factor.provider === 'OKTA' || 'GOOGLE'
+          factor => factor.provider === 'OKTA' || factor.provider === 'GOOGLE'
         );
 
         if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
@@ -162,12 +182,7 @@ export const login = (username, password) => dispatch => {
 
       if (res.status === 'SUCCESS') {
         await setTokens(res.sessionToken);
-        return dispatch(
-          getCurrentUser().catch(error => {
-            const reason = error ? error.message : 'N/A';
-            dispatch(failLogin(reason));
-          })
-        );
+        return dispatch(getCurrentUser());
       }
       return null;
     })
@@ -181,23 +196,35 @@ export const loginOtp = otp => async dispatch => {
   dispatch(startSecondStage());
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
-    verifyMFA({ transaction, otp }).then(async res => {
-      const { sessionToken } = res;
-      await setTokens(sessionToken);
-      return dispatch(
-        getCurrentUser().catch(error => {
-          const reason = error ? error.message : 'N/A';
-          if (reason === 'User Locked') {
-            dispatch(failLoginLocked(reason));
-          } else {
-            dispatch(failLoginMFA(reason));
-          }
-        })
-      );
-    });
-  } else {
-    dispatch(failLoginMFA('Authentication failed'));
+    verifyMFA({ transaction, otp })
+      .then(async ({ sessionToken }) => {
+        await setTokens(sessionToken);
+        return dispatch(getCurrentUser());
+      })
+      .catch(error => {
+        const reason = error ? error.message : 'N/A';
+        if (reason === 'User Locked') {
+          dispatch(failLoginLocked(reason));
+        } else {
+          dispatch(failLoginMFA(reason));
+        }
+      });
   }
+  return dispatch(failLoginMFA('Authentication failed'));
+};
+
+export const createAccessRequest = states => dispatch => {
+  states.forEach(stateId => {
+    axios
+      .post(`/states/${stateId}/affiliations`)
+      .then(() => {
+        dispatch(successAccessToState());
+      })
+      .catch(error => {
+        const reason = error ? error.message : 'N/A';
+        dispatch(failLogin(reason));
+      });
+  });
 };
 
 export const logout = () => dispatch => {
