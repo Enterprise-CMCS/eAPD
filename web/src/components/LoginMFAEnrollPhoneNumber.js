@@ -34,8 +34,7 @@ class LoginMFAEnrollPhoneNumber extends Component {
             </h1>
             <form onSubmit={this.handlePhoneFormSubmit || formSubmitNoop}>
               <p className="ds-u-margin-top--2 ds-u-margin-bottom--0">
-                Please enter your phone number to receive temporary verification
-                codes.
+                Please enter your phone number to receive temporary verification codes.
               </p>
               <TextField
                 id="mfaPhoneNumber"
@@ -46,6 +45,7 @@ class LoginMFAEnrollPhoneNumber extends Component {
                 mask="phone"
                 value={this.state.phone || ''}
                 onChange={this.changeUserPhone}
+                data-testid="mfaPhoneNumber"
               />
               <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
                 <button
@@ -63,7 +63,9 @@ class LoginMFAEnrollPhoneNumber extends Component {
   }
 }
 
-LoginMFAEnrollPhoneNumber.propTypes = {};
+LoginMFAEnrollPhoneNumber.propTypes = {
+  phone: PropTypes.string
+};
 
 LoginMFAEnrollPhoneNumber.defaultProps = {};
 

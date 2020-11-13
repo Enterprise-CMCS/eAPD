@@ -9,32 +9,49 @@ describe('<LoginMFAEnroll />', () => {
   beforeEach(() => {
     props = {
       selectedOption: '',
+      handleSelection: jest.fn(),
+      factors: [
+        {
+          factorType: "call", 
+          provider: "OKTA", 
+          vendorName: "OKTA", 
+          status: "NOT_SETUP", 
+          enrollment: "OPTIONAL",
+          displayName: 'Call',
+          active: true
+        }
+      ]
     };
     renderUtils = renderWithConnection(<LoginMFAEnroll {...props} />);
   });
 
-  test('user enters otp', () => {
+  test('title renders', () => {
+    const { getByText } = renderUtils;
+    expect(getByText(/Verify Your Identity/)).toBeTruthy();
+  });
+
+  test('legend renders', () => {
+    const { getByText } = renderUtils;
+    expect(getByText('Choose a Multi-Factor Authentication route.')).toBeTruthy();
+  })
+
+  test('factor checkbox renders', () => {
     const { getByLabelText, getByRole } = renderUtils;
     expect(
       getByLabelText(
-        'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
+        'Call'
       )
     ).toBeTruthy();
-    expect(getByRole('button', { name: 'Verify' }));
-    fireEvent.change(
-      getByLabelText(
-        'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
-      ),
-      {
-        target: { value: 'testotp' }
-      }
-    );
-    fireEvent.click(getByRole('button', { name: 'Verify' }));
-    expect(props.action).toHaveBeenCalledWith('testotp');
-  });
+    
+    expect(getByRole('radio')).not.toHaveAttribute('checked');
+    fireEvent.click(getByLabelText('Call'));
+  })
 
-  test('cancel button renders', () => {
-    const { getByText } = renderUtils;
-    expect(getByText(/Cancel/i)).toBeTruthy();
-  });
+  test('user selects a mfa option', () => {
+    const { getByLabelText, getByRole } = renderUtils;
+    fireEvent.click(getByLabelText('Call'));
+
+    fireEvent.click(getByRole('button', { name: 'Submit' }));
+    expect(props.handleSelection).toHaveBeenCalled();
+  })
 });
