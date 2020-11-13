@@ -66,9 +66,13 @@ describe('Auth Util', () => {
           verify
         })
       );
-
+    
     await retrieveExistingTransaction();
     await expect(txExistsSpy).toHaveBeenCalledTimes(1);
     await expect(txResumeSpy).toHaveBeenCalledTimes(1);
   });
+
+  it('verifyMFA', async () => {
+    console.log("mocked OKTA", mockOktaAuth);
+  })
 });
