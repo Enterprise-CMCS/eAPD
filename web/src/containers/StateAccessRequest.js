@@ -11,7 +11,6 @@ const StateAccessRequest = ({ action, errorMessage, fetching }) => {
   ]);
 
   const changeStates = ({ target: { value } }) => {
-    console.log({ value });
     setStates([value]);
   };
 
@@ -43,6 +42,7 @@ const StateAccessRequest = ({ action, errorMessage, fetching }) => {
           </label>
           <Dropdown
             label=""
+            ariaLabel="Select your State Affiliation"
             id="states"
             name="states"
             options={usStatesDropdownOptions}
