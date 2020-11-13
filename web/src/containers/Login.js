@@ -40,7 +40,7 @@ const Login = ({
   loginOtp: otpAction,
   mfaConfig: mfaAction,
   mfaAddPhone: mfaActionAddPhone,
-  mfaActivate: mfaActivation // Ty note: what's the thinking behind the naming of these methods?
+  mfaActivate: mfaActivation
 }) => {
   const [showConsent, setShowConsent] = useState(true);
   const [username, setUsername] = useState('');

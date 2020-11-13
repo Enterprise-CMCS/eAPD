@@ -9,7 +9,10 @@ describe('<LoginMFAVerifyAuthApp />', () => {
   beforeEach(() => {
     props = {
       handleVerificationCode: jest.fn(),
-      verificationData: {qrcode: { href: 'http://placeholder.com/image.png' }, sharedSecret: 'A1234' }
+      verificationData: {
+        qrcode: { href: 'http://placeholder.com/image.png' },
+        sharedSecret: 'A1234'
+      }
     };
     renderUtils = renderWithConnection(<LoginMFAVerifyAuthApp {...props} />);
   });
@@ -30,16 +33,11 @@ describe('<LoginMFAVerifyAuthApp />', () => {
   });
 
   test('user enters otp', () => {
-    const { getByText, getByRole, getByTestId } = renderUtils;
+    const { getByRole, getByTestId } = renderUtils;
     expect(getByRole('button', { name: 'Submit' }));
-    fireEvent.change(
-      getByTestId(
-        'input-otp-code'
-      ),
-      {
-        target: { value: 'testotp' }
-      }
-    );
+    fireEvent.change(getByTestId('input-otp-code'), {
+      target: { value: 'testotp' }
+    });
     fireEvent.click(getByRole('button', { name: 'Submit' }));
     expect(props.handleVerificationCode).toHaveBeenCalledWith('testotp');
   });
