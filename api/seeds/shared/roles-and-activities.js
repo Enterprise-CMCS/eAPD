@@ -1,3 +1,4 @@
+// AFAICT, the boolean values here are not used for anything, yet.
 const activities = {
   'view-users': false,
   'view-roles': false,
@@ -12,6 +13,7 @@ const activities = {
   'view-document': true,
   'view-affiliations': true,
   'edit-affiliations': true,
+  'approve-state-access': true
 };
 
 const roles = {
@@ -20,11 +22,12 @@ const roles = {
   'eAPD Federal Leadership': false,
   'eAPD Federal SME': false,
   'eAPD State Coordinator': false,
-  'eAPD State SME': false
+  'eAPD State SME': false,
+  'eAPD State Admin': true
 };
 
 const roleToActivityMappings = {
-  'eAPD Admin': ['view-users', 'view-roles'],
+  'eAPD Admin': ['view-users', 'view-roles', 'approve-state-access'],
   'eAPD Federal Analyst': [
     'view-users',
     'view-roles',
@@ -43,7 +46,16 @@ const roleToActivityMappings = {
     'edit-document',
     'edit-response'
   ],
-  'eAPD State SME': ['view-document', 'edit-document', 'edit-response']
+  'eAPD State SME': ['view-document', 'edit-document', 'edit-response'],
+  'eAPD State Admin': [
+    'view-document',
+    'submit-document',
+    'submit-state-response',
+    'create-draft',
+    'edit-document',
+    'edit-response',
+    'approve-state-access'
+  ]
 };
 
 // Take the knex object and the table name as arguments, instead of just

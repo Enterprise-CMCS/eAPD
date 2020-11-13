@@ -10,7 +10,9 @@ import {
   loginOtp,
   mfaConfig,
   mfaActivate,
-  mfaAddPhone
+  mfaAddPhone,
+  createAccessRequest,
+  completeAccessToState
 } from '../actions/auth';
 import { MFA_FACTOR_TYPES } from '../constants';
 import LoginForm from '../components/LoginForm';
@@ -21,6 +23,8 @@ import LoginLocked from '../components/LoginLocked';
 import LoginMFAEnroll from '../components/LoginMFAEnroll';
 import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
 import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
+import StateAccessRequest from './StateAccessRequest';
+import StateAccessRequestConfirmation from './StateAccessRequestConfirmation';
 
 const Login = ({
   authenticated,
@@ -36,11 +40,15 @@ const Login = ({
   mfaEnrollType,
   verifyData,
   isLocked,
+  requestAccess,
+  requestAccessSuccess,
   login: action,
   loginOtp: otpAction,
   mfaConfig: mfaAction,
   mfaAddPhone: mfaActionAddPhone,
-  mfaActivate: mfaActivation // Ty note: what's the thinking behind the naming of these methods?
+  mfaActivate: mfaActivation,
+  createAccessRequest: createAccessRequestAction,
+  completeAccessToState: completeAccessToStateAction
 }) => {
   const [showConsent, setShowConsent] = useState(true);
   const [username, setUsername] = useState('');
@@ -79,6 +87,41 @@ const Login = ({
 
   const { from } = location.state || { from: { pathname: '/' } };
 
+  let errorMessage = false;
+  if (isLocked) {
+    errorMessage = 'You are locked out';
+  } else if (otpStage && error === 'Authentication failed') {
+    errorMessage = 'The one-time password you’ve entered is incorrect.';
+  } else if (
+    error === 'Authentication failed' ||
+    error === 'Request failed with status code 401'
+  ) {
+    errorMessage =
+      'Please contact your State Administrator for steps to register an account.';
+  } else if (error) {
+    errorMessage = 'Sorry! Something went wrong. Please try again.';
+  }
+
+  if (requestAccess) {
+    return (
+      <StateAccessRequest
+        action={createAccessRequestAction}
+        errorMessage={errorMessage}
+        fetching={fetching}
+      />
+    );
+  }
+
+  if (requestAccessSuccess) {
+    return (
+      <StateAccessRequestConfirmation
+        action={completeAccessToStateAction}
+        errorMessage={errorMessage}
+        fetching={fetching}
+      />
+    );
+  }
+
   if (authenticated) {
     if (from.pathname !== '/logout') {
       return <Redirect to={from} />;
@@ -94,7 +137,6 @@ const Login = ({
     );
   }
 
-  let errorMessage = false;
   if (isLocked) {
     errorMessage = 'You are locked out';
   } else if (otpStage && error === 'Authentication failed') {
@@ -218,11 +260,15 @@ Login.propTypes = {
   mfaEnrollActivateStage: PropTypes.bool.isRequired,
   verifyData: PropTypes.object.isRequired,
   isLocked: PropTypes.bool.isRequired,
+  requestAccess: PropTypes.bool.isRequired,
+  requestAccessSuccess: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired,
   mfaConfig: PropTypes.func.isRequired,
   mfaAddPhone: PropTypes.func.isRequired,
-  mfaActivate: PropTypes.func.isRequired
+  mfaActivate: PropTypes.func.isRequired,
+  createAccessRequest: PropTypes.func.isRequired,
+  completeAccessToState: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
@@ -238,7 +284,10 @@ const mapStateToProps = ({
     mfaEnrollAddPhoneStage,
     mfaEnrollActivateStage,
     verifyData,
-    isLocked
+    isLocked,
+    mfaType,
+    requestAccess,
+    requestAccessSuccess
   }
 }) => ({
   authenticated,
@@ -252,7 +301,10 @@ const mapStateToProps = ({
   mfaEnrollAddPhoneStage,
   mfaEnrollActivateStage,
   verifyData,
-  isLocked
+  isLocked,
+  mfaType,
+  requestAccess,
+  requestAccessSuccess
 });
 
 const mapDispatchToProps = {
@@ -260,7 +312,9 @@ const mapDispatchToProps = {
   loginOtp,
   mfaConfig,
   mfaActivate,
-  mfaAddPhone
+  mfaAddPhone,
+  createAccessRequest,
+  completeAccessToState
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

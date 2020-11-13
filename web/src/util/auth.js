@@ -6,16 +6,12 @@ export const authenticateUser = (username, password) => {
   return oktaAuth.signIn({ username, password });
 };
 
-export const retrieveExistingTransaction = async () => {
+export const retrieveExistingTransaction = () => {
   const exists = oktaAuth.tx.exists();
-  if (exists) {
-    const transaction = await oktaAuth.tx.resume();
-    return transaction || null;
-  }
-  return null;
+  return exists ? oktaAuth.tx.resume() : null;
 };
 
-export const verifyMFA = ({ transaction, otp }) => {
+export const verifyMFA = async ({ transaction, otp }) => {
   return transaction.verify({
     passCode: otp,
     autoPush: true

@@ -5,12 +5,11 @@ import { withRouter } from 'react-router';
 
 const formSubmitNoop = e => e.preventDefault();
 
-const VerifyMFAForm = ({
+const AuthenticationForm = ({
   cancelable,
   canSubmit,
   children,
   error,
-  hasEverLoggedOn,
   footer,
   id,
   legend,
@@ -19,7 +18,8 @@ const VerifyMFAForm = ({
   sectionName,
   success,
   title,
-  working
+  working,
+  displayWelcome
 }) => (
   <div id={id} className="card--container">
     <div className="ds-l-container">
@@ -37,10 +37,12 @@ const VerifyMFAForm = ({
             </Alert>
           )}
 
-          {hasEverLoggedOn ? (
-		  	<p className="ds-u-color--gray ds-u-margin-bottom--0">Welcome Back</p>
-		  ) : ""}
-          <h1 className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold">
+          {displayWelcome && (
+            <p className="ds-u-color--gray ds-u-margin-bottom--0">
+              Welcome Back
+            </p>
+          )}
+          <h1 className="ds-h1 ds-u-margin--0">
             {sectionName.length > 0 && (
               <span className="ds-h6 ds-u-display--block">
                 {sectionName.toUpperCase()}
@@ -91,12 +93,11 @@ const VerifyMFAForm = ({
   </div>
 );
 
-VerifyMFAForm.propTypes = {
+AuthenticationForm.propTypes = {
   cancelable: PropTypes.bool,
   canSubmit: PropTypes.bool,
   children: PropTypes.node.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  hasEverLoggedOn: PropTypes.bool,
   footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   id: PropTypes.string,
   legend: PropTypes.string,
@@ -105,24 +106,25 @@ VerifyMFAForm.propTypes = {
   sectionName: PropTypes.string,
   success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   title: PropTypes.string.isRequired,
-  working: PropTypes.bool
+  working: PropTypes.bool,
+  displayWelcome: PropTypes.bool
 };
 
-VerifyMFAForm.defaultProps = {
+AuthenticationForm.defaultProps = {
   cancelable: true,
   canSubmit: true,
   error: false,
   footer: false,
-  hasEverLoggedOn: false,
   id: 'start-main-content',
   legend: '',
   onSave: false,
   primaryButtonText: ['Save changes', 'Working'],
   sectionName: '',
   success: false,
-  working: false
+  working: false,
+  displayWelcome: false
 };
 
-export default withRouter(VerifyMFAForm);
+export default withRouter(AuthenticationForm);
 
-export { VerifyMFAForm as plain };
+export { AuthenticationForm as plain };

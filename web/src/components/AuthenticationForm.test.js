@@ -2,20 +2,18 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
-import { plain as VerifyMFAForm } from './VerifyMFAForm';
+import { plain as AuthenticationForm } from './AuthenticationForm';
 
 const history = { goBack: sinon.spy() };
 
 const defaultProps = {
-  title: "test",
+  title: 'test',
   history,
-  children: ""
+  children: ''
 };
 
 const setup = (props = {}) => {
-  return mount(
-    <VerifyMFAForm {...defaultProps} {...props} />
-  );
+  return mount(<AuthenticationForm {...defaultProps} {...props} />);
 };
 
 describe('card form wrapper', () => {
@@ -26,9 +24,9 @@ describe('card form wrapper', () => {
   test('renders without an id on the container if id prop is null', () => {
     expect(
       shallow(
-        <VerifyMFAForm id={null} title="test" history={history}>
+        <AuthenticationForm id={null} title="test" history={history}>
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
@@ -36,9 +34,9 @@ describe('card form wrapper', () => {
   test('renders with the provided id on the container if id prop is set', () => {
     expect(
       shallow(
-        <VerifyMFAForm id="my custom id" title="test" history={history}>
+        <AuthenticationForm id="my custom id" title="test" history={history}>
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
@@ -46,9 +44,9 @@ describe('card form wrapper', () => {
   test('renders with the default id on the container if id prop is not set', () => {
     expect(
       shallow(
-        <VerifyMFAForm title="test" history={history}>
+        <AuthenticationForm title="test" history={history}>
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
@@ -56,9 +54,9 @@ describe('card form wrapper', () => {
   test('renders without a save button if onSave prop is missing', () => {
     expect(
       shallow(
-        <VerifyMFAForm title="test" history={history}>
+        <AuthenticationForm title="test" history={history}>
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
@@ -66,9 +64,9 @@ describe('card form wrapper', () => {
   test('renders with a save button if onSave prop is provided', () => {
     expect(
       shallow(
-        <VerifyMFAForm title="test" history={history} onSave={sinon.spy()}>
+        <AuthenticationForm title="test" history={history} onSave={sinon.spy()}>
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
@@ -76,34 +74,34 @@ describe('card form wrapper', () => {
   test('disables the save button if canSubmit is false', () => {
     expect(
       shallow(
-        <VerifyMFAForm
+        <AuthenticationForm
           title="test"
           history={history}
           onSave={sinon.spy()}
           canSubmit={false}
         >
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
 
   test('renders a legend if provided', () => {
     const props = {
-      legend: "hidden temple"
+      legend: 'hidden temple'
     };
-    
+
     const component = setup(props);
-    
+
     expect(component.find('legend').exists()).toBe(true);
   });
 
   test('renders an error alert if message provided', () => {
     expect(
       shallow(
-        <VerifyMFAForm title="test" history={history} error="oh noes!">
+        <AuthenticationForm title="test" history={history} error="oh noes!">
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
@@ -111,9 +109,9 @@ describe('card form wrapper', () => {
   test('renders a success alert if message provided', () => {
     expect(
       shallow(
-        <VerifyMFAForm title="test" history={history} success="oh yeah!">
+        <AuthenticationForm title="test" history={history} success="oh yeah!">
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
@@ -121,11 +119,10 @@ describe('card form wrapper', () => {
   test('does not render a cancel button if form is not cancelable', () => {
     expect(
       shallow(
-        <VerifyMFAForm title="test" history={history} cancelable={false}>
+        <AuthenticationForm title="test" history={history} cancelable={false}>
           hello world
-        </VerifyMFAForm>
+        </AuthenticationForm>
       )
     ).toMatchSnapshot();
   });
-
 });
