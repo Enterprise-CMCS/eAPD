@@ -35,7 +35,7 @@ const CardForm = ({
             <Alert variation="error" role="alert">
               {error}
             </Alert>
-          )} 
+          )}
 
           <h1 className="ds-h1">
             {sectionName.length > 0 && (

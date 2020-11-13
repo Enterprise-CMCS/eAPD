@@ -37,7 +37,7 @@ describe('browser support detection util', () => {
 
   test('indicates green support for Edge versions at least 79', () => {
     detect.mockReturnValue({
-      name: 'edge',
+      name: 'edge-chromium',
       version: '79.29.93'
     });
 

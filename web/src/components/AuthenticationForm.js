@@ -19,7 +19,7 @@ const AuthenticationForm = ({
   success,
   title,
   working,
-  displayWelcome
+  hasEverLoggedOn
 }) => (
   <div id={id} className="card--container">
     <div className="ds-l-container">
@@ -37,12 +37,12 @@ const AuthenticationForm = ({
             </Alert>
           )}
 
-          {displayWelcome && (
+          {hasEverLoggedOn && (
             <p className="ds-u-color--gray ds-u-margin-bottom--0">
               Welcome Back
             </p>
           )}
-          <h1 className="ds-h1 ds-u-margin--0">
+          <h1 className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold">
             {sectionName.length > 0 && (
               <span className="ds-h6 ds-u-display--block">
                 {sectionName.toUpperCase()}
@@ -107,7 +107,7 @@ AuthenticationForm.propTypes = {
   success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   title: PropTypes.string.isRequired,
   working: PropTypes.bool,
-  displayWelcome: PropTypes.bool
+  hasEverLoggedOn: PropTypes.bool
 };
 
 AuthenticationForm.defaultProps = {
@@ -122,7 +122,7 @@ AuthenticationForm.defaultProps = {
   sectionName: '',
   success: false,
   working: false,
-  displayWelcome: false
+  hasEverLoggedOn: false
 };
 
 export default withRouter(AuthenticationForm);

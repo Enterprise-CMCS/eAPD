@@ -13,27 +13,29 @@ class LoginMFAEnrollPhoneNumber extends Component {
     this.state = {
       phone: ''
     };
-  };
+  }
 
   changeUserPhone = e => {
-    this.setState({ phone: e.target.value});
-  }
+    this.setState({ phone: e.target.value });
+  };
 
   handlePhoneFormSubmit = e => {
     e.preventDefault();
     this.props.handlePhoneSubmit(this.state.phone);
-  }
+  };
 
   render() {
     return (
       <div id="start-main-content">
         <div className="ds-l-container">
-          <div className="login-card">					
+          <div className="login-card">
             <h1 className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center ds-u-margin--0">
               <span>Verify Your Identity</span>
             </h1>
             <form onSubmit={this.handlePhoneFormSubmit || formSubmitNoop}>
-              <p className="ds-u-margin-top--2 ds-u-margin-bottom--0">Please enter your phone number to receive temporary verification codes.</p>
+              <p className="ds-u-margin-top--2 ds-u-margin-bottom--0">
+                Please enter your phone number to receive temporary verification codes.
+              </p>
               <TextField
                 id="mfaPhoneNumber"
                 label="Phone number"
@@ -43,25 +45,29 @@ class LoginMFAEnrollPhoneNumber extends Component {
                 mask="phone"
                 value={this.state.phone || ''}
                 onChange={this.changeUserPhone}
+                data-testid="mfaPhoneNumber"
               />
               <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
-                <button type="submit" className="ds-c-button ds-c-button--primary">Submit</button> 
+                <button
+                  type="submit"
+                  className="ds-c-button ds-c-button--primary"
+                >
+                  Submit
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
-    );    
-  };
-};
+    );
+  }
+}
 
 LoginMFAEnrollPhoneNumber.propTypes = {
-
+  phone: PropTypes.string
 };
- 
-LoginMFAEnrollPhoneNumber.defaultProps = {
 
-}; 
+LoginMFAEnrollPhoneNumber.defaultProps = {};
 
 export default withRouter(LoginMFAEnrollPhoneNumber);
 
