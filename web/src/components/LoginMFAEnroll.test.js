@@ -12,11 +12,11 @@ describe('<LoginMFAEnroll />', () => {
       handleSelection: jest.fn(),
       factors: [
         {
-          factorType: "call", 
-          provider: "OKTA", 
-          vendorName: "OKTA", 
-          status: "NOT_SETUP", 
-          enrollment: "OPTIONAL",
+          factorType: 'call',
+          provider: 'OKTA',
+          vendorName: 'OKTA',
+          status: 'NOT_SETUP',
+          enrollment: 'OPTIONAL',
           displayName: 'Call',
           active: true
         }
@@ -32,20 +32,18 @@ describe('<LoginMFAEnroll />', () => {
 
   test('legend renders', () => {
     const { getByText } = renderUtils;
-    expect(getByText('Choose a Multi-Factor Authentication route.')).toBeTruthy();
-  })
+    expect(
+      getByText('Choose a Multi-Factor Authentication route.')
+    ).toBeTruthy();
+  });
 
   test('factor checkbox renders', () => {
     const { getByLabelText, getByRole } = renderUtils;
-    expect(
-      getByLabelText(
-        'Call'
-      )
-    ).toBeTruthy();
-    
+    expect(getByLabelText('Call')).toBeTruthy();
+
     expect(getByRole('radio')).not.toHaveAttribute('checked');
     fireEvent.click(getByLabelText('Call'));
-  })
+  });
 
   test('user selects a mfa option', () => {
     const { getByLabelText, getByRole } = renderUtils;
@@ -53,5 +51,5 @@ describe('<LoginMFAEnroll />', () => {
 
     fireEvent.click(getByRole('button', { name: 'Submit' }));
     expect(props.handleSelection).toHaveBeenCalled();
-  })
+  });
 });
