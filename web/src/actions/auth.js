@@ -15,9 +15,8 @@ import { MFA_FACTOR_TYPES } from '../constants';
 
 export const AUTH_CHECK_SUCCESS = 'AUTH_CHECK_SUCCESS';
 export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
-// Ty Note: This doesn't appear to be used in the reducers. Should we remove it? Is it redundant with LOGIN_REQUEST now?
-export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 
+export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
@@ -126,8 +125,6 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
   dispatch(mfaEnrollAddPhone(mfaSelected));
 };
 
-// Ty note: this is very similar to the loginOtp method, with one
-// exception: it uses transaction.activate instead of transaction.verify
 export const mfaActivate = code => async dispatch => {
   const transaction = await retrieveExistingTransaction();
 
@@ -135,7 +132,6 @@ export const mfaActivate = code => async dispatch => {
     passCode: code
   });
 
-  // Ty note: This is redundant code that should be abstracted into a method
   if (activateTransaciton.status === 'SUCCESS') {
     await setTokens(activateTransaciton.sessionToken);
     dispatch(

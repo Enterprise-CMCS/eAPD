@@ -9,7 +9,7 @@ const formSubmitNoop = e => e.preventDefault();
 class LoginMFAEnrollPhoneNumber extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       phone: ''
     };
@@ -21,10 +21,15 @@ class LoginMFAEnrollPhoneNumber extends Component {
 
   handlePhoneFormSubmit = e => {
     e.preventDefault();
-    this.props.handlePhoneSubmit(this.state.phone);
+
+    const { handlePhoneSubmit } = this.props;
+    const { phone } = this.state;
+    
+    handlePhoneSubmit(phone);
   };
 
   render() {
+    const { phone } = this.state;
     return (
       <div id="start-main-content">
         <div className="ds-l-container">
@@ -34,7 +39,8 @@ class LoginMFAEnrollPhoneNumber extends Component {
             </h1>
             <form onSubmit={this.handlePhoneFormSubmit || formSubmitNoop}>
               <p className="ds-u-margin-top--2 ds-u-margin-bottom--0">
-                Please enter your phone number to receive temporary verification codes.
+                Please enter your phone number to receive temporary verification
+                codes.
               </p>
               <TextField
                 id="mfaPhoneNumber"
@@ -43,7 +49,7 @@ class LoginMFAEnrollPhoneNumber extends Component {
                 name="mfaPhoneNumber"
                 size="medium"
                 mask="phone"
-                value={this.state.phone || ''}
+                value={phone || ''}
                 onChange={this.changeUserPhone}
                 data-testid="mfaPhoneNumber"
               />
@@ -64,10 +70,12 @@ class LoginMFAEnrollPhoneNumber extends Component {
 }
 
 LoginMFAEnrollPhoneNumber.propTypes = {
-  phone: PropTypes.string
+  handlePhoneSubmit: PropTypes.func.isRequired
 };
 
-LoginMFAEnrollPhoneNumber.defaultProps = {};
+LoginMFAEnrollPhoneNumber.defaultProps = {
+
+};
 
 export default withRouter(LoginMFAEnrollPhoneNumber);
 

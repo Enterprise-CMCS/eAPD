@@ -23,7 +23,9 @@ describe('<LoginLocked />', () => {
 
   test('contact message renders', () => {
     const { getByText } = renderUtils;
-    expect(getByText(/Contact the System Administrator for account reset./)).toBeTruthy();
+    expect(
+      getByText(/Contact the System Administrator for account reset./)
+    ).toBeTruthy();
   });
 
   test('cancel button renders', () => {

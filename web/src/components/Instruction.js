@@ -49,12 +49,13 @@ const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
             {!reverse && detail && <Md content={detail} wrapper="p" />}
             {list && (
               <ol className="ds-u-margin-bottom--4 ds-u-padding-left--2">
-                {/* eslint-disable-next-line react/no-array-index-key */}
+                {/* eslint-disable react/no-array-index-key */}
                 {list.map((item, i) => (
                   <li className="ds-u-margin-bottom--2" key={i}>
                     {item}
                   </li>
                 ))}
+                {/* eslint-enable react/no-array-index-key */}
               </ol>
             )}
             {helpText && (
