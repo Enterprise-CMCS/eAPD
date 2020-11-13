@@ -1607,9 +1607,9 @@ Object {
       "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
     },
   ],
-  "created": "1921-07-11T07:00:00.000Z",
+  "created": "1865-12-06T00:00:00.000Z",
   "federalCitations": Object {},
-  "id": "4000",
+  "id": "4001",
   "incentivePayments": Object {
     "ehAmt": Object {
       "2018": Object {
@@ -1721,7 +1721,7 @@ Object {
       "position": "State Medicaid Director",
     },
   ],
-  "name": "MN-1921-07-11-HITECH-APD",
+  "name": "AZ-1921-07-11-HITECH-APD",
   "narrativeHIE": "",
   "narrativeHIT": "",
   "narrativeMMIS": "",
@@ -1789,7 +1789,7 @@ Object {
   },
   "previousActivitySummary": "",
   "programOverview": "",
-  "state": "mn",
+  "state": "ak",
   "stateProfile": Object {
     "medicaidDirector": Object {
       "email": "",
@@ -3431,9 +3431,9 @@ Object {
       "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
     },
   ],
-  "created": "1921-07-11T07:00:00.000Z",
+  "created": "1865-12-06T00:00:00.000Z",
   "federalCitations": Object {},
-  "id": "4000",
+  "id": "4001",
   "incentivePayments": Object {
     "ehAmt": Object {
       "2018": Object {
@@ -3545,7 +3545,7 @@ Object {
       "position": "State Medicaid Director",
     },
   ],
-  "name": "MN-1921-07-11-HITECH-APD",
+  "name": "AZ-1921-07-11-HITECH-APD",
   "narrativeHIE": "",
   "narrativeHIT": "",
   "narrativeMMIS": "",
@@ -3613,7 +3613,7 @@ Object {
   },
   "previousActivitySummary": "",
   "programOverview": "",
-  "state": "mn",
+  "state": "ak",
   "stateProfile": Object {
     "medicaidDirector": Object {
       "email": "",

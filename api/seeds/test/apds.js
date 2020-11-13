@@ -33,7 +33,7 @@ exports.seed = async knex => {
       // Jesse Owens wins his first gold medal of the Berlin Olympics
       created_at: '1936-08-03T00:00:00Z',
       document: document4002,
-      state_id: 'mn',
+      state_id: 'ak',
       status: 'not draft',
       // Jackie Robinson joins the Brooklyn Dodgers
       updated_at: '1947-04-10T00:00:00Z'

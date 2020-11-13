@@ -24,9 +24,9 @@ describe('Affiliations endpoint | PATCH', () => {
     });
   })
 
-  it('returns 403 when US state is invalid', async () => {
+  it('returns 400 when US state is invalid', async () => {
     const response = await api.patch('/states/zz/affiliations/4000');
-    expect(response.status).toEqual(403);
+    expect(response.status).toEqual(400);
   });
 
   it('returns 400 when affiliation id is invalid', async () => {
