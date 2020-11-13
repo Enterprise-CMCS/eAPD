@@ -60,7 +60,6 @@ class LoginMFAEnroll extends Component {
                   Choose a Multi-Factor Authentication route.
                 </legend>
                 {factors.map((choice, index) =>
-                  // Ty note: this hides the choices but we may want to simply remove non-active MFA types from the returned array
                   choice.active ? this.choiceItem(choice, index) : null
                 )}
               </fieldset>

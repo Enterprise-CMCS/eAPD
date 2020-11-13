@@ -729,8 +729,9 @@ describe('APD reducer', () => {
     it('should add a new state key personnel', () => {
       const state = {
         data: {
-          keyPersonnel: [{
-            costs: { '1': 0, '2': 0 },
+          keyPersonnel: [
+            {
+              costs: { '1': 0, '2': 0 },
               email: '',
               expanded: true,
               hasCosts: false,
@@ -739,7 +740,8 @@ describe('APD reducer', () => {
               name: '',
               position: '',
               key: 'primary'
-          }],
+            }
+          ],
           years: ['1', '2']
         }
       };

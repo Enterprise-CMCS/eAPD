@@ -150,7 +150,7 @@ describe('card form wrapper', () => {
       .find('Button')
       .findWhere(b => b.prop('variation') === 'transparent')
       .simulate('click');
-      
+
     expect(history.goBack.calledOnce).toEqual(true);
   });
 });

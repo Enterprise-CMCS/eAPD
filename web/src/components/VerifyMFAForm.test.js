@@ -7,15 +7,13 @@ import { plain as VerifyMFAForm } from './VerifyMFAForm';
 const history = { goBack: sinon.spy() };
 
 const defaultProps = {
-  title: "test",
+  title: 'test',
   history,
-  children: ""
+  children: ''
 };
 
 const setup = (props = {}) => {
-  return mount(
-    <VerifyMFAForm {...defaultProps} {...props} />
-  );
+  return mount(<VerifyMFAForm {...defaultProps} {...props} />);
 };
 
 describe('card form wrapper', () => {
@@ -90,11 +88,11 @@ describe('card form wrapper', () => {
 
   test('renders a legend if provided', () => {
     const props = {
-      legend: "hidden temple"
+      legend: 'hidden temple'
     };
-    
+
     const component = setup(props);
-    
+
     expect(component.find('legend').exists()).toBe(true);
   });
 
@@ -127,5 +125,4 @@ describe('card form wrapper', () => {
       )
     ).toMatchSnapshot();
   });
-
 });

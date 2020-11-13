@@ -126,7 +126,10 @@ describe('auth reducer', () => {
 
   it('should handle LOGIN_MFA_ENROLL_START', () => {
     expect(
-      auth(initialState, { type: LOGIN_MFA_ENROLL_START, data: {phoneNumber: '4108675309', factors: [{}] } })
+      auth(initialState, {
+        type: LOGIN_MFA_ENROLL_START,
+        data: { phoneNumber: '4108675309', factors: [{}] }
+      })
     ).toEqual({
       ...initialState,
       fetching: false,
@@ -150,7 +153,10 @@ describe('auth reducer', () => {
 
   it('should handle LOGIN_MFA_ENROLL_ACTIVATE', () => {
     expect(
-      auth(initialState, { type: LOGIN_MFA_ENROLL_ACTIVATE, data: {mfaEnrollType: 'Call', activationData: ""} })      
+      auth(initialState, {
+        type: LOGIN_MFA_ENROLL_ACTIVATE,
+        data: { mfaEnrollType: 'Call', activationData: '' }
+      })
     ).toEqual({
       ...initialState,
       fetching: false,
@@ -158,9 +164,9 @@ describe('auth reducer', () => {
       mfaEnrollAddPhoneStage: false,
       mfaEnrollActivateStage: true,
       mfaEnrollType: 'Call',
-      verifyData: ""
-    })
-  })
+      verifyData: ''
+    });
+  });
 
   it('should handle LOCKED_OUT', () => {
     expect(auth(initialState, { type: LOCKED_OUT })).toEqual({
