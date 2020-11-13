@@ -219,7 +219,7 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
           {
             "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-out-0.log*",
             "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-out-0.log"
-          },          
+          }    
         ]
       }
     }
