@@ -81,13 +81,6 @@ const getCurrentUser = () => dispatch =>
     dispatch(loadData(userRes.data.activities));
   });
 
-// Ty notes: mfaSelected is what the user picked for their MFA option.
-// here we need to take that option and send it back to OKTA. Okta will
-// then return with the activation code.
-// ToDo:
-//  1. General error handling (phone?)
-//  2. Is there a way to do this without having to do 2 transactions?
-
 export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
   const factor = await getFactor(mfaSelected);
 
