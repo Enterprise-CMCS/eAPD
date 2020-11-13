@@ -99,12 +99,11 @@ NGINXCONFIG
 service nginx restart
 
 # Configure CloudWatch Agent
-set -x
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 "agent": {  "metrics_collection_interval": 60,
-  "region": "$AWS_REGION",
+  "region": $AWS_REGION,
   "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
-  "debug": false,
+  "debug": true,
   "run_as_user": "cwagent"
 }
 
