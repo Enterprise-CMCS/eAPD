@@ -99,7 +99,7 @@ NGINXCONFIG
 service nginx restart
 
 # Configure CloudWatch Agent
-
+set -x
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 "agent": {  "metrics_collection_interval": 60,
   "region": "$AWS_REGION",
@@ -238,6 +238,7 @@ CWAPPLOGCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 
+set +x
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
 su ec2-user <<E_USER
