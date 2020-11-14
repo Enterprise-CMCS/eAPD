@@ -29,7 +29,7 @@ module.exports.loggedIn = loggedIn;
  */
 const can = activity =>
   cache(['can', activity], () => {
-    const can = (req, res, next) => {
+    return (req, res, next) => {
       logger.silly({ id: req.id, message: `got a can middleware request for [${activity}]` });
       // First check if they're logged in
       module.exports.loggedIn(req, res, () => {
@@ -43,7 +43,6 @@ const can = activity =>
         }
       });
     };
-    return can;
   });
 
 module.exports.can = can;

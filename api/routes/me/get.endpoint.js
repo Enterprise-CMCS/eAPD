@@ -23,7 +23,9 @@ describe('/me endpoint | GET', () => {
   });
 
   describe('user is authenticated, with all permissions', () => {
-    let api, response, user;
+    let api;
+    let response;
+    let user;
 
     beforeEach(async() => {
       api = login('all-permissions');

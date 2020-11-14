@@ -46,7 +46,7 @@ const populateUser = async (user, {
     // grab the first affiliation
     const affiliation = populatedUser.affiliations.find(Boolean);
     const roles = await getRoles();
-    const role = affiliation && roles.find(role => role.id === affiliation.role_id);
+    const role = affiliation && roles.find(r => r.id === affiliation.role_id);
 
     populatedUser.state = affiliation && affiliation.state_id && await getStateById(affiliation.state_id);
     populatedUser.role = role && role.name;

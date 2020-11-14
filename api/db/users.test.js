@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 const tap = require('tap');
 
-const dbMock = require('./dbMock.test');
+// const dbMock = require('./dbMock.test');
 const oktaAuthMock = require('../auth/oktaAuthMock.test');
 
 const {
@@ -13,7 +13,7 @@ const {
 
 tap.test('database wrappers / users', async usersTests => {
   const sandbox = sinon.createSandbox();
-  const db = dbMock('users');
+  // const db = dbMock('users');
   const { oktaClient: client } = oktaAuthMock;
 
   const populate = sinon.stub();
@@ -49,11 +49,11 @@ tap.test('database wrappers / users', async usersTests => {
     states: []
   };
 
-  let getUserPermissionsForStates;
-  let getUserAffiliatedStates;
-  let getAffiliationsByUserId;
-  let getStateById;
-  let getRoles;
+  // let getUserPermissionsForStates;
+  // let getUserAffiliatedStates;
+  // let getAffiliationsByUserId;
+  // let getStateById;
+  // let getRoles;
 
   usersTests.beforeEach(async () => {
     sandbox.resetBehavior();
@@ -79,11 +79,11 @@ tap.test('database wrappers / users', async usersTests => {
       states: []
     });
 
-    getUserPermissionsForStates = sandbox.stub().resolves('permissions');
-    getUserAffiliatedStates = sandbox.stub().resolves([]);
-    getAffiliationsByUserId = sandbox.stub().resolves([]);
-    getStateById = sandbox.stub().resolves({});
-    getRoles = sandbox.stub().resolves([]);
+    // getUserPermissionsForStates = sandbox.stub().resolves('permissions');
+    // getUserAffiliatedStates = sandbox.stub().resolves([]);
+    // getAffiliationsByUserId = sandbox.stub().resolves([]);
+    // getStateById = sandbox.stub().resolves({});
+    // getRoles = sandbox.stub().resolves([]);
   });
 
   usersTests.test('getting all users', async getAllUsersTests => {
@@ -193,224 +193,224 @@ tap.test('database wrappers / users', async usersTests => {
         test.equal(await populateUser(), undefined);
       });
 
-      populateUserTests.test(
-        'with a user with activities and a state',
-        async populateUserTestsWithValues => {
-          const roles = dbMock('auth_roles');
-          const mapping = dbMock('auth_role_activity_mapping');
-          const activities = dbMock('auth_activities');
-          const states = dbMock('states');
+      // populateUserTests.test(
+      //   'with a user with activities and a state',
+      //   async populateUserTestsWithValues => {
+      //     const roles = dbMock('auth_roles');
+      //     const mapping = dbMock('auth_role_activity_mapping');
+      //     const activities = dbMock('auth_activities');
+      //     const states = dbMock('states');
 
-          roles.whereIn.resolves([{ id: 'role id', name: 'user role' }]);
+      //     roles.whereIn.resolves([{ id: 'role id', name: 'user role' }]);
 
-          mapping.whereIn.withArgs('role_id', ['role id']).returnsThis();
-          mapping.select
-            .withArgs('activity_id')
-            .resolves([
-              { activity_id: 'activity id 1' },
-              { activity_id: 'activity id 2' },
-              { activity_id: 'activity id 3' }
-            ]);
+      //     mapping.whereIn.withArgs('role_id', ['role id']).returnsThis();
+      //     mapping.select
+      //       .withArgs('activity_id')
+      //       .resolves([
+      //         { activity_id: 'activity id 1' },
+      //         { activity_id: 'activity id 2' },
+      //         { activity_id: 'activity id 3' }
+      //       ]);
 
-          activities.whereIn
-            .withArgs('id', ['activity id 1', 'activity id 2', 'activity id 3'])
-            .returnsThis();
-          activities.select
-            .withArgs('name')
-            .resolves([{ name: 'activity 1' }, { name: 'activity 2' }]);
+      //     activities.whereIn
+      //       .withArgs('id', ['activity id 1', 'activity id 2', 'activity id 3'])
+      //       .returnsThis();
+      //     activities.select
+      //       .withArgs('name')
+      //       .resolves([{ name: 'activity 1' }, { name: 'activity 2' }]);
 
-          states.whereIn.withArgs('id', ['state id']).returnsThis();
-          states.select.withArgs('id', 'name').returnsThis();
-          states.first.resolves({ id: 'state id', name: 'this is a state!' });
+      //     states.whereIn.withArgs('id', ['state id']).returnsThis();
+      //     states.select.withArgs('id', 'name').returnsThis();
+      //     states.first.resolves({ id: 'state id', name: 'this is a state!' });
 
-          // populateUserTestsWithValues.test(
-          //   'pass in roles and state',
-          //   async test => {
-          //     const user = await populateUser(
-          //       {
-          //         groups: ['user role'],
-          //         displayName: 'this just goes through',
-          //         affiliations: ['state id'],
-          //         hasLoggedIn: true
-          //       },
-          //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
-          //     );
+      //     populateUserTestsWithValues.test(
+      //       'pass in roles and state',
+      //       async test => {
+      //         const user = await populateUser(
+      //           {
+      //             groups: ['user role'],
+      //             displayName: 'this just goes through',
+      //             affiliations: ['state id'],
+      //             hasLoggedIn: true
+      //           },
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //         );
 
-          //     test.same(user, {
-          //       activities: ['activity 1', 'activity 2'],
-          //       auth_roles: ['user role'],
-          //       displayName: 'this just goes through',
-          //       state: { id: 'state id', name: 'this is a state!' },
-          //       hasLoggedIn: true
-          //     });
-          //   }
-          // );
+      //         test.same(user, {
+      //           activities: ['activity 1', 'activity 2'],
+      //           auth_roles: ['user role'],
+      //           displayName: 'this just goes through',
+      //           state: { id: 'state id', name: 'this is a state!' },
+      //           hasLoggedIn: true
+      //         });
+      //       }
+      //     );
 
-          // populateUserTestsWithValues.test(
-          //   'pass in state and get roles',
-          //   async test => {
-          //     getGroups.withArgs('user id').resolves(['user role']);
-          //     const user = await populateUser(
-          //       {
-          //         id: 'user id',
-          //         activities: 'these are overwritten',
-          //         displayName: 'this just goes through',
-          //         affiliations: ['state id'],
-          //         hasLoggedIn: true
-          //       },
-          //       { db, getGroups, getApplicationProfile }
-          //     );
+      //     populateUserTestsWithValues.test(
+      //       'pass in state and get roles',
+      //       async test => {
+      //         getGroups.withArgs('user id').resolves(['user role']);
+      //         const user = await populateUser(
+      //           {
+      //             id: 'user id',
+      //             activities: 'these are overwritten',
+      //             displayName: 'this just goes through',
+      //             affiliations: ['state id'],
+      //             hasLoggedIn: true
+      //           },
+      //           { db, getGroups, getApplicationProfile }
+      //         );
 
-          //     test.same(user, {
-          //       id: 'user id',
-          //       activities: ['activity 1', 'activity 2'],
-          //       auth_roles: ['user role'],
-          //       displayName: 'this just goes through',
-          //       state: { id: 'state id', name: 'this is a state!' },
-          //       hasLoggedIn: true
-          //     });
-          //   }
-          // );
+      //         test.same(user, {
+      //           id: 'user id',
+      //           activities: ['activity 1', 'activity 2'],
+      //           auth_roles: ['user role'],
+      //           displayName: 'this just goes through',
+      //           state: { id: 'state id', name: 'this is a state!' },
+      //           hasLoggedIn: true
+      //         });
+      //       }
+      //     );
 
-          // populateUserTestsWithValues.test(
-          //   'pass in state and get empty roles',
-          //   async test => {
-          //     getGroups.withArgs('user id').resolves([]);
-          //     const user = await populateUser(
-          //       {
-          //         id: 'user id',
-          //         activities: 'these are overwritten',
-          //         displayName: 'this just goes through',
-          //         affiliations: ['state id'],
-          //         hasLoggedIn: true
-          //       },
-          //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
-          //     );
+      //     populateUserTestsWithValues.test(
+      //       'pass in state and get empty roles',
+      //       async test => {
+      //         getGroups.withArgs('user id').resolves([]);
+      //         const user = await populateUser(
+      //           {
+      //             id: 'user id',
+      //             activities: 'these are overwritten',
+      //             displayName: 'this just goes through',
+      //             affiliations: ['state id'],
+      //             hasLoggedIn: true
+      //           },
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //         );
 
-          //     test.same(user, {
-          //       id: 'user id',
-          //       activities: [],
-          //       auth_roles: [],
-          //       displayName: 'this just goes through',
-          //       state: { id: 'state id', name: 'this is a state!' },
-          //       hasLoggedIn: true
-          //     });
-          //   }
-          // );
+      //         test.same(user, {
+      //           id: 'user id',
+      //           activities: [],
+      //           auth_roles: [],
+      //           displayName: 'this just goes through',
+      //           state: { id: 'state id', name: 'this is a state!' },
+      //           hasLoggedIn: true
+      //         });
+      //       }
+      //     );
 
-          // populateUserTestsWithValues.test(
-          //   'pass in roles and get state',
-          //   async test => {
-          //     getApplicationProfile
-          //       .withArgs('user id')
-          //       .resolves({ affiliations: ['state id'], hasLoggedIn: true });
-          //     const user = await populateUser(
-          //       {
-          //         id: 'user id',
-          //         activities: 'these are overwritten',
-          //         groups: ['user role'],
-          //         displayName: 'this just goes through'
-          //       },
-          //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
-          //     );
+      //     populateUserTestsWithValues.test(
+      //       'pass in roles and get state',
+      //       async test => {
+      //         getApplicationProfile
+      //           .withArgs('user id')
+      //           .resolves({ affiliations: ['state id'], hasLoggedIn: true });
+      //         const user = await populateUser(
+      //           {
+      //             id: 'user id',
+      //             activities: 'these are overwritten',
+      //             groups: ['user role'],
+      //             displayName: 'this just goes through'
+      //           },
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //         );
 
-          //     test.same(user, {
-          //       id: 'user id',
-          //       activities: ['activity 1', 'activity 2'],
-          //       auth_roles: ['user role'],
-          //       displayName: 'this just goes through',
-          //       state: { id: 'state id', name: 'this is a state!' },
-          //       hasLoggedIn: true
-          //     });
-          //   }
-          // );
+      //         test.same(user, {
+      //           id: 'user id',
+      //           activities: ['activity 1', 'activity 2'],
+      //           auth_roles: ['user role'],
+      //           displayName: 'this just goes through',
+      //           state: { id: 'state id', name: 'this is a state!' },
+      //           hasLoggedIn: true
+      //         });
+      //       }
+      //     );
 
-          // populateUserTestsWithValues.test(
-          //   'pass in roles and get empty state',
-          //   async test => {
-          //     getApplicationProfile
-          //       .withArgs('user id')
-          //       .resolves({ affiliations: [], hasLoggedIn: true });
-          //     const user = await populateUser(
-          //       {
-          //         id: 'user id',
-          //         activities: 'these are overwritten',
-          //         groups: ['user role'],
-          //         displayName: 'this just goes through',
-          //         hasLoggedIn: true
-          //       },
-          //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
-          //     );
+      //     populateUserTestsWithValues.test(
+      //       'pass in roles and get empty state',
+      //       async test => {
+      //         getApplicationProfile
+      //           .withArgs('user id')
+      //           .resolves({ affiliations: [], hasLoggedIn: true });
+      //         const user = await populateUser(
+      //           {
+      //             id: 'user id',
+      //             activities: 'these are overwritten',
+      //             groups: ['user role'],
+      //             displayName: 'this just goes through',
+      //             hasLoggedIn: true
+      //           },
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //         );
 
-          //     test.same(user, {
-          //       id: 'user id',
-          //       activities: ['activity 1', 'activity 2'],
-          //       auth_roles: ['user role'],
-          //       displayName: 'this just goes through',
-          //       state: {},
-          //       hasLoggedIn: true
-          //     });
-          //   }
-          // );
+      //         test.same(user, {
+      //           id: 'user id',
+      //           activities: ['activity 1', 'activity 2'],
+      //           auth_roles: ['user role'],
+      //           displayName: 'this just goes through',
+      //           state: {},
+      //           hasLoggedIn: true
+      //         });
+      //       }
+      //     );
 
-          // populateUserTestsWithValues.test(
-          //   'pass in role and get state and get hasLoggedIn',
-          //   async test => {
-          //     getApplicationProfile
-          //       .withArgs('user id')
-          //       .resolves({ affiliations: [], hasLoggedIn: true });
-          //     const user = await populateUser(
-          //       {
-          //         id: 'user id',
-          //         activities: 'these are overwritten',
-          //         groups: ['user role'],
-          //         displayName: 'this just goes through'
-          //       },
-          //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
-          //     );
+      //     populateUserTestsWithValues.test(
+      //       'pass in role and get state and get hasLoggedIn',
+      //       async test => {
+      //         getApplicationProfile
+      //           .withArgs('user id')
+      //           .resolves({ affiliations: [], hasLoggedIn: true });
+      //         const user = await populateUser(
+      //           {
+      //             id: 'user id',
+      //             activities: 'these are overwritten',
+      //             groups: ['user role'],
+      //             displayName: 'this just goes through'
+      //           },
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //         );
 
-          //     test.same(user, {
-          //       id: 'user id',
-          //       activities: ['activity 1', 'activity 2'],
-          //       auth_roles: ['user role'],
-          //       displayName: 'this just goes through',
-          //       state: {},
-          //       hasLoggedIn: true
-          //     });
-          //   }
-          // );
+      //         test.same(user, {
+      //           id: 'user id',
+      //           activities: ['activity 1', 'activity 2'],
+      //           auth_roles: ['user role'],
+      //           displayName: 'this just goes through',
+      //           state: {},
+      //           hasLoggedIn: true
+      //         });
+      //       }
+      //     );
 
-          // populateUserTestsWithValues.test(
-          //   'role id is not found in database',
-          //   async test => {
-          //     // Also check what happens if there role ID doesn't actually map
-          //     // to a real role, which shouldn't happen but eh?
+      //     populateUserTestsWithValues.test(
+      //       'role id is not found in database',
+      //       async test => {
+      //         // Also check what happens if there role ID doesn't actually map
+      //         // to a real role, which shouldn't happen but eh?
 
-          //     roles.whereIn.resolves(null);
-          //     activities.whereIn.withArgs('id', []).returnsThis();
-          //     activities.select.withArgs('name').resolves([]);
+      //         roles.whereIn.resolves(null);
+      //         activities.whereIn.withArgs('id', []).returnsThis();
+      //         activities.select.withArgs('name').resolves([]);
 
-          //     const user = await populateUser(
-          //       {
-          //         activities: 'these are overwritten',
-          //         groups: ['user role'],
-          //         displayName: 'this just goes through',
-          //         affiliations: ['state id'],
-          //         hasLoggedIn: true
-          //       },
-          //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
-          //     );
+      //         const user = await populateUser(
+      //           {
+      //             activities: 'these are overwritten',
+      //             groups: ['user role'],
+      //             displayName: 'this just goes through',
+      //             affiliations: ['state id'],
+      //             hasLoggedIn: true
+      //           },
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //         );
 
-          //     test.same(user, {
-          //       activities: [],
-          //       displayName: 'this just goes through',
-          //       state: { id: 'state id', name: 'this is a state!' },
-          //       hasLoggedIn: true
-          //     });
-          //   }
-          // );
-        }
-      );
+      //         test.same(user, {
+      //           activities: [],
+      //           displayName: 'this just goes through',
+      //           state: { id: 'state id', name: 'this is a state!' },
+      //           hasLoggedIn: true
+      //         });
+      //       }
+      //     );
+      //   }
+      // );
 
       // populateUserTests.test(
       //   'with a user without activities or a state',
