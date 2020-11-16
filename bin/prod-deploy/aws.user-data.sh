@@ -91,43 +91,43 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
         "collect_list": [
           {
             "file_path": "/var/log/aide/aide.log*",
-            "log_group_name": "preview/var/log/aide/aide.log"
+            "log_group_name": "__ENVIRONMENT__/var/log/aide/aide.log"
           },
           {
             "file_path": "/var/log/audit/audit.log*",
-            "log_group_name": "preview/var/log/audit/audit.log"
+            "log_group_name": "__ENVIRONMENT__/var/log/audit/audit.log"
           },
           {
             "file_path": "/var/log/awslogs.log*",
-            "log_group_name": "preview/var/log/awslogs.log"
+            "log_group_name": "__ENVIRONMENT__/var/log/awslogs.log"
           },
           {
             "file_path": "/var/log/cloud-init.log*",
-            "log_group_name": "preview/var/log/cloud-init.log"
+            "log_group_name": "__ENVIRONMENT__/var/log/cloud-init.log"
           },
           {
             "file_path": "/var/log/cloud-init-output.log*",
-            "log_group_name": "preview/var/log/cloud-init-output.log"
+            "log_group_name": "__ENVIRONMENT__/var/log/cloud-init-output.log"
           },
           {
             "file_path": "/var/log/cron*",
-            "log_group_name": "preview/var/log/cron"
+            "log_group_name": "__ENVIRONMENT__/var/log/cron"
           },
           {
             "file_path": "/var/log/dmesg*",
-            "log_group_name": "preview/var/log/dmesg"
+            "log_group_name": "__ENVIRONMENT__/var/log/dmesg"
           },
           {
             "file_path": "/var/log/maillog*",
-            "log_group_name": "preview/var/log/maillog"
+            "log_group_name": "__ENVIRONMENT__/var/log/maillog"
           },
           {
             "file_path": "/var/log/messages*",
-            "log_group_name": "preview/var/log/messages"
+            "log_group_name": "__ENVIRONMENT__/var/log/messages"
           },
           {
             "file_path": "/var/log/secure*",
-            "log_group_name": "preview/var/log/secure"
+            "log_group_name": "__ENVIRONMENT__/var/log/secure"
           }
         ]
       }
@@ -145,15 +145,15 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
         "collect_list": [
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent.log*",
-            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent.log"
+            "log_group_name": "__ENVIRONMENT__/var/opt/ds_agent/diag/ds_agent.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent-err.log*",
-            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent-err.log"
+            "log_group_name": "__ENVIRONMENT__/var/opt/ds_agent/diag/ds_agent-err.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_am.log*",
-            "log_group_name": "preview/var/opt/ds_agent/diag/ds_am.log"
+            "log_group_name": "__ENVIRONMENT__/var/opt/ds_agent/diag/ds_am.log"
           }
         ]
       }
@@ -172,11 +172,11 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
         "collect_list": [
           {
             "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-error-0.log*",
-            "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-error-0.log"
+            "log_group_name": "__ENVIRONMENT__/home/ec2-user/.pm2/logs/eAPD-API-error-0.log"
           },
           {
             "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-out-0.log*",
-            "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-out-0.log"
+            "log_group_name": "__ENVIRONMENT__/home/ec2-user/.pm2/logs/eAPD-API-out-0.log"
           }    
         ]
       }

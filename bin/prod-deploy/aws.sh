@@ -152,7 +152,9 @@ function addEcosystemToUserData() {
     }]
   };" | base64 -w 0`
 
-  sed -i'.backup' -e "s/__ECOSYSTEM__/`echo $ECOSYSTEM`/g" aws.user-data.sh
+  sed -i'.backup' -e "s|__ECOSYSTEM__|`echo $ECOSYSTEM`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__ENVIRONMENT__|`echo $ENVIRONMENT`|g" aws.user-data.sh
 
   rm aws.user-data.sh.backup
 }
