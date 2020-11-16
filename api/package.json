@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
-    "knex-console": "NODE_ENV=development node --experimental-repl-await knexrepl.js",
+    "knex-console": "node --experimental-repl-await knexrepl.js",
     "lint": "eslint '**/*.js'",
     "make-migrate": "knex migrate:make",
     "migrate": "knex migrate:latest",

@@ -19,4 +19,16 @@ const updateStateProfile = async (
     .update({ medicaid_office: profile });
 };
 
-module.exports = { getStateProfile, updateStateProfile };
+const getStateById = (id, { db = knex } = {}) => {
+  return db
+    .select('*')
+    .from('states')
+    .where({ id })
+    .first();
+}
+
+module.exports = {
+  getStateById,
+  getStateProfile,
+  updateStateProfile
+};

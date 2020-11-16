@@ -3,26 +3,40 @@ const noPermissions = {
   id: 'no-permissions',
   profile: { displayName: 'No Permissions Test User' }
 };
+
+const allPermissions = {
+  status: 'ACTIVE',
+  id: 'all-permissions',
+  profile: { displayName: 'All Permissions'}
+};
+
 const allPermissionsNoState = {
   status: 'ACTIVE',
   id: 'all-permissions-no-state',
   profile: { displayName: 'All Permissions No State Test User' }
 };
+
 const allPermissionsAndState = {
   status: 'ACTIVE',
   id: 'all-permissions-and-state',
   profile: { displayName: 'All Permissions And State' }
 };
+
 const mockOktaClient = {
   listUsers: () => {
     return new Promise(resolve => {
-      resolve([noPermissions, allPermissionsNoState, allPermissionsAndState]);
+      resolve([noPermissions, allPermissions, allPermissionsNoState, allPermissionsAndState]);
     });
   },
   getUser: id => {
     if (id === 'no-permissions') {
       return new Promise(resolve => {
         resolve(noPermissions);
+      });
+    }
+    if (id === 'all-permissions') {
+      return new Promise(resolve => {
+        resolve(allPermissions);
       });
     }
     if (id === 'all-permissions-no-state') {
@@ -86,6 +100,24 @@ const mockCallOktaEndpoint = async endpoint => {
 };
 
 const mockVerifyJWT = token => {
+  if (token === 'no-permissions') {
+    return new Promise(resolve => {
+      resolve({
+        sub: 'no-permissions@email.com',
+        uid: 'no-permissions',
+        hasLoggedIn: true,
+      });
+    });
+  }
+  if (token === 'all-permissions') {
+    return new Promise(resolve => {
+      resolve({
+        sub: 'all-permissions@email.com',
+        uid: 'all-permissions',
+        hasLoggedIn: true,
+      });
+    });
+  }
   if (token === 'no.permissions.nostate') {
     const uid = 'no-permissions-no-state';
     return new Promise(resolve => {
@@ -93,8 +125,6 @@ const mockVerifyJWT = token => {
         sub: 'npno@email.com',
         uid,
         hasLoggedIn: true,
-        groups: getGroups(uid),
-        affiliations: getAffiliations(uid)
       });
     });
   }
@@ -105,8 +135,6 @@ const mockVerifyJWT = token => {
         sub: 'apno@email.com',
         uid,
         hasLoggedIn: true,
-        groups: getGroups(uid),
-        affiliations: getAffiliations(uid)
       });
     });
   }
@@ -117,8 +145,6 @@ const mockVerifyJWT = token => {
         sub: 'apas@email.com',
         uid,
         hasLoggedIn: true,
-        groups: getGroups(uid),
-        affiliations: getAffiliations(uid)
       });
     });
   }

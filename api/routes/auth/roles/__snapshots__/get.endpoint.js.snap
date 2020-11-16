@@ -17,6 +17,7 @@ Array [
       "view-document",
       "view-affiliations",
       "edit-affiliations",
+      "approve-state-access",
     ],
     "id": 1101,
     "isActive": true,
@@ -27,6 +28,20 @@ Array [
     "id": 1105,
     "isActive": true,
     "name": "eAPD State Coordinator",
+  },
+  Object {
+    "activities": Array [
+      "submit-document",
+      "submit-state-response",
+      "create-draft",
+      "edit-document",
+      "edit-response",
+      "view-document",
+      "approve-state-access",
+    ],
+    "id": 1107,
+    "isActive": true,
+    "name": "eAPD State Admin",
   },
 ]
 `;
