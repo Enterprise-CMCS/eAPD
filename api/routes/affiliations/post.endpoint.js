@@ -5,7 +5,7 @@ const {
 } = require('../../endpoint-tests/utils');
 
 describe('Affiliations endpoint | POST', () => {
-  const api = login();
+  const api = login('no-permissions');
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
