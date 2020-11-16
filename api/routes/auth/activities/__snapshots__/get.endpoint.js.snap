@@ -54,5 +54,9 @@ Array [
     "id": 1013,
     "name": "edit-affiliations",
   },
+  Object {
+    "id": 1014,
+    "name": "approve-state-access",
+  },
 ]
 `;

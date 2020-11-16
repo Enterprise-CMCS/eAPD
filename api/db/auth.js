@@ -46,10 +46,65 @@ const getActiveAuthRoles = async ({ db = knex } = {}) => {
   return roles;
 };
 
+/**
+ * Retrieves active roles and associated activity names
+ * @async
+ * @function
+ * @returns {Object} { id, name, activities: [] }
+ */
+const getRoles = async ({ db = knex } = {}) => db
+  .select({
+    id: 'roles.id',
+    name: 'roles.name',
+    activities: db.raw('array_agg(activities.name)')
+  })
+  .from({ rolesActivities: 'auth_role_activity_mapping' })
+  .join({ activities: 'auth_activities' }, 'activities.id', 'rolesActivities.activity_id')
+  .join({ roles: 'auth_roles' }, 'roles.id', 'rolesActivities.role_id')
+  .where('roles.isActive', true)
+  .groupBy('roles.id');
+
+/**
+ * Retrieves a user's affiliated states
+ * @async
+ * @function
+ * @returns {Array} state ids
+ */
+const getUserAffiliatedStates = async (userId, { db = knex } = {}) => db
+  .select('state_id')
+  .from('auth_affiliations')
+  .where('user_id', userId)
+  .then(rows => rows.map(row => row.state_id));
+
+/**
+ * Retrieves a user's permissions per state
+ * @async
+ * @function
+ * @returns {Object} { stateId: activities }
+ */
+const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
+  const roles = await getRoles();
+  return db
+    .select({
+      stateId: 'state_id',
+      roleId: 'role_id'
+    })
+    .from('auth_affiliations')
+    .where('user_id', userId)
+    .then(rows => rows.reduce((result, row) => {
+      const { stateId, roleId } = row;
+      const activities = roleId ? roles.find(role => role.id === roleId).activities : [];
+      return { ...result, [stateId]: activities }
+    }, {}));
+};
+
 module.exports = {
   getAuthActivities,
   getAuthActivitiesByIDs,
   getAuthRoleByID,
   getAuthRoleByName,
-  getActiveAuthRoles
+  getActiveAuthRoles,
+  getRoles,
+  getUserAffiliatedStates,
+  getUserPermissionsForStates
 };

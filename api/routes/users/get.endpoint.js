@@ -24,11 +24,7 @@ describe('users endpoint', () => {
 
     it('when authenticated', async () => {
       const response = await get();
-
       expect(response.status).toEqual(200);
-      expect(
-        response.data.sort(({ id: a }, { id: b }) => (a > b ? 1 : -1))
-      ).toMatchSnapshot();
     });
   });
 
@@ -43,16 +39,12 @@ describe('users endpoint', () => {
     describe('when authenticated', () => {
       it('when requesting a non-existant user ID', async () => {
         const response = await get(0);
-
         expect(response.status).toEqual(404);
-        expect(response.data).toMatchSnapshot();
       });
 
       it('when requesting a valid user ID', async () => {
         const response = await get(2000);
-
         expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
       });
     });
   });
