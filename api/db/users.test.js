@@ -20,6 +20,7 @@ tap.test('database wrappers / users', async usersTests => {
 
   const sanitizedUser = {
     activities: 'auth activities',
+    affiliations: 'user affiliations',
     id: 'user id',
     name: 'real name',
     phone: 'phone number',
@@ -34,6 +35,7 @@ tap.test('database wrappers / users', async usersTests => {
 
   const unsanitizedUser = {
     activities: 'auth activities',
+    affiliations: 'user affiliations',
     id: 'user id',
     displayName: 'real name',
     primaryPhone: 'phone number',
@@ -64,6 +66,7 @@ tap.test('database wrappers / users', async usersTests => {
 
     populate.resolves({
       activities: 'auth activities',
+      affiliations: 'user affiliations',
       id: 'user id',
       displayName: 'real name',
       primaryPhone: 'phone number',
@@ -435,6 +438,7 @@ tap.test('database wrappers / users', async usersTests => {
     test.same(
       sanitizeUser({
         activities: 'some activities',
+        affiliations: 'user affiliations',
         id: 'my user id',
         displayName: 'this is my name',
         primaryPhone: 'call me maybe',
@@ -453,6 +457,7 @@ tap.test('database wrappers / users', async usersTests => {
       }),
       {
         activities: 'some activities',
+        affiliations: 'user affiliations',
         id: 'my user id',
         name: 'this is my name',
         phone: 'call me maybe',

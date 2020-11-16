@@ -9,6 +9,7 @@ const { getStateById: actualGetStateById } = require('./states');
 
 const sanitizeUser = user => ({
   activities: user.activities,
+  affiliations: user.affiliations,
   hasLoggedIn: user.hasLoggedIn,
   id: user.id,
   name: user.displayName,
