@@ -13,7 +13,7 @@ const activities = {
   'view-document': true,
   'view-affiliations': true,
   'edit-affiliations': true,
-  'approve-state-access': true,
+  'approve-state-access': true
 };
 
 const roles = {
