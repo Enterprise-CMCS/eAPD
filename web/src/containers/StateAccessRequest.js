@@ -11,7 +11,6 @@ const StateAccessRequest = ({ action, errorMessage, fetching }) => {
   ]);
 
   const changeStates = ({ target: { value } }) => {
-    console.log({ value });
     setStates([value]);
   };
 

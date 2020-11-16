@@ -5,7 +5,7 @@ import {
   verifyMFA,
   setTokens,
   getAvailableFactors,
-  getFactor,
+  // getFactor,
   logoutAndClearTokens
 } from './auth';
 
@@ -75,7 +75,7 @@ describe('Auth Util', () => {
   it('verifyMFA', async () => {
     const transaction = {
       verify: jest.fn()
-    }
+    };
     const otp = '21234';
 
     const transactionSpy = jest
@@ -84,19 +84,22 @@ describe('Auth Util', () => {
 
     await verifyMFA({ transaction, otp });
     await expect(transactionSpy).toHaveBeenCalledTimes(1);
-    await expect(transactionSpy).toHaveBeenCalledWith({"autoPush": true, "passCode": "21234"});
+    await expect(transactionSpy).toHaveBeenCalledWith({
+      autoPush: true,
+      passCode: '21234'
+    });
   });
 
   it('getAvailableFactors', async () => {
-    const factor = [{factorType: 'call', provider: 'OKTA'}];
-    expect(getAvailableFactors(factor)).toStrictEqual(
-      [{
-        "active": true, 
-        "displayName": "Call", 
-        "factorType": "call", 
-        "provider": "OKTA"
-      }]
-    )
+    const factor = [{ factorType: 'call', provider: 'OKTA' }];
+    expect(getAvailableFactors(factor)).toStrictEqual([
+      {
+        active: true,
+        displayName: 'Call',
+        factorType: 'call',
+        provider: 'OKTA'
+      }
+    ]);
   });
 
   it('logoutAndClearTokens', async () => {
@@ -109,12 +112,13 @@ describe('Auth Util', () => {
       );
     const removeToken = jest
       .spyOn(mockOktaAuth.tokenManager, 'remove')
-      .mockImplementation(() => 
-        Promise.resolve({ 
-          status: 'success' 
-        }));
+      .mockImplementation(() =>
+        Promise.resolve({
+          status: 'success'
+        })
+      );
     await logoutAndClearTokens();
     await expect(signOutSpy).toHaveBeenCalledTimes(1);
     await expect(removeToken).toHaveBeenCalledTimes(2);
-  })
+  });
 });
