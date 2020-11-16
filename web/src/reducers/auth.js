@@ -168,8 +168,8 @@ const auth = (state = initialState, action) => {
         error: '',
         user: {
           ...state.user,
-          states: action.data,
-          state: action.data[0]
+          states: [action.data],
+          state: action.data
         }
       };
     case STATE_ACCESS_COMPLETE:
