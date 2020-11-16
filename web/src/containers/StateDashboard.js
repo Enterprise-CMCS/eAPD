@@ -22,12 +22,14 @@ Loading.propTypes = { children: PropType.node.isRequired };
 const PendingApproval = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
     <img alt="Puzzle Piece Icon" src="../static/icons/puzzle.svg" width="57" />
-    <h3 className="ds-u-margin-bottom--1">Approval Pending From State Administrator</h3>
-    <p className="ds-u-margin--0">Please contact State Administrator for more information.</p>
+    <h3 className="ds-u-margin-bottom--1">
+      Approval Pending From State Administrator
+    </h3>
+    <p className="ds-u-margin--0">
+      Please contact State Administrator for more information.
+    </p>
   </div>
 );
-// Temporary flag to show pending approval
-const isPending = true;
 
 const StateDashboard = (
   {
@@ -37,7 +39,8 @@ const StateDashboard = (
     fetching,
     route,
     selectApd: select,
-    state
+    state,
+    pending
   },
   { global = window } = {}
 ) => {
@@ -84,27 +87,30 @@ const StateDashboard = (
           <h1 className="ds-h1">
             {t('stateDashboard.title', { state: state ? state.name : '' })}
           </h1>
-          <Instruction source="stateDashboard.instruction" />
+          <Instruction source="stateDashboard.introduction" />
+          {!pending && <Instruction source="stateDashboard.instruction" />}
           <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
             <h2 className="ds-h2 ds-u-display--inline-block">
               {state ? state.name : ''} APDs
             </h2>
-            <Button
-              variation="primary"
-              className="ds-u-float--right"
-              onClick={createNew}
-            >
-              Create new{' '}
-              <span className="ds-u-visibility--screen-reader">APD</span>
-              &nbsp;&nbsp;
-              <Icon icon={faPlusCircle} />
-            </Button>
+            {!pending && (
+              <Button
+                variation="primary"
+                className="ds-u-float--right"
+                onClick={createNew}
+              >
+                Create new{' '}
+                <span className="ds-u-visibility--screen-reader">APD</span>
+                &nbsp;&nbsp;
+                <Icon icon={faPlusCircle} />
+              </Button>
+            )}
           </div>
         </div>
       </div>
-      {isPending? <PendingApproval /> : null}
+      {pending ? <PendingApproval /> : null}
       {fetching ? <Loading>Loading APDs</Loading> : null}
-      {!fetching && apds.length === 0 ? (
+      {!fetching && !pending && apds.length === 0 ? (
         <div className="ds-l-row">
           <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2 ds-u-padding-bottom--5 ds-u-color--muted">
             {t('stateDashboard.none')}
@@ -164,12 +170,14 @@ StateDashboard.propTypes = {
   state: PropType.object,
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
-  selectApd: PropType.func.isRequired
+  selectApd: PropType.func.isRequired,
+  pending: PropType.bool
 };
 
 StateDashboard.defaultProps = {
   route: '/apd',
-  state: null
+  state: null,
+  pending: true
 };
 
 const mapStateToProps = state => ({
