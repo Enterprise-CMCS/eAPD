@@ -22,7 +22,7 @@ exports.seed = async knex => {
       // formally outlawing slavery
       created_at: '1865-12-6T00:00:00Z',
       document: document4001,
-      state_id: 'az',
+      state_id: 'ak',
       status: 'draft',
       // The 19th Amendment to the US Constitution is officially ratified,
       // extending the right to vote to women
@@ -33,7 +33,7 @@ exports.seed = async knex => {
       // Jesse Owens wins his first gold medal of the Berlin Olympics
       created_at: '1936-08-03T00:00:00Z',
       document: document4002,
-      state_id: 'mn',
+      state_id: 'ak',
       status: 'not draft',
       // Jackie Robinson joins the Brooklyn Dodgers
       updated_at: '1947-04-10T00:00:00Z'

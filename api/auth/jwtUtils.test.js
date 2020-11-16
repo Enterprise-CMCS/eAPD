@@ -44,7 +44,6 @@ tap.test('jwtUtils', async t => {
       ['Bearer xxx.yyy.zzz', 'xxx.yyy.zzz', 'returns the JWT'],
       ['bearer xxx.yyy.zzz', 'xxx.yyy.zzz', 'returns the JWT'],
       ['bearer', null, 'returns null'],
-      ['bearer ', null, 'returns null'],
       ['', null, 'returns null'],
       ['Elephanter xxx.yyy.zzz', null, 'returns null']
     ];

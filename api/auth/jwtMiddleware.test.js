@@ -17,9 +17,7 @@ tap.test('jwtMiddleware', async t => {
   const user = { name: 'dude' };
   const payload = {
     uid: '1234',
-    // groups: ['eAPD State Coordinator'],
-    // affiliations: ['MO'],
-    // hasLoggedIn: true
+    hasLoggedIn: true
   };
 
   t.afterEach(async () => {

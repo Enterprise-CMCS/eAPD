@@ -9,13 +9,12 @@
 
 require('dotenv').config();
 const repl = require('repl');
-
-const knex = require('./db/knex');
-const db = require('./db');
+const knex = require('./db/knex')
+const db = require('./db')
 
 const r = repl.start('knex> ');
 const run = async () => {
-  r.context.knex = knex;
-  r.context.db = db;
+   r.context.knex = knex;
+   r.context.db = db;
 };
 run();

@@ -27,7 +27,7 @@ describe('APD endpoint', () => {
 
       it(`with an APD in a state other than the user's state`, async () => {
         const api = login();
-        const response = await api.delete(url(4001));
+        const response = await api.delete(url(4000));
 
         expect(response.status).toEqual(401);
         expect(response.data).toMatchSnapshot();
@@ -43,7 +43,7 @@ describe('APD endpoint', () => {
 
       it('with a valid update', async () => {
         const api = login();
-        const response = await api.delete(url(4000), {
+        const response = await api.delete(url(4001), {
           programOverview: 'new overview'
         });
 
