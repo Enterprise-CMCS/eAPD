@@ -7,7 +7,6 @@ const {
   getAuthRoleByID,
   getAuthRoleByName,
   getActiveAuthRoles,
-  getRoles
 } = require('./auth');
 
 tap.test('database wrappers / auth', async authTests => {

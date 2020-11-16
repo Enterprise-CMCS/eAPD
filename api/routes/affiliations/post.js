@@ -13,7 +13,7 @@ module.exports = (app) => {
         state_id: stateId,
         // status: 'requested' // default status enum value
       })
-      .then(row => response.status(201).json(row[0]))
+      .then(rows => response.status(201).json(rows[0]))
       .catch(() => response.status(400).end());
   });
 }

@@ -17,19 +17,12 @@ const axiosDefaults = {
 
 const api = axios.create(axiosDefaults);
 
-const login = userType => {
-  let token = 'all.permissions.andstate';
-  if (userType === 'all-permissions-no-state') {
-    token = 'all.permissions.nostate';
-  }
-  if (userType === 'no-permissions') {
-    token = 'no.permissions.nostate';
-  }
-
+const login = token => {
+  const jwt = token || 'all-permissions'
   const options = {
     ...axiosDefaults,
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${jwt}`
     }
   };
   return axios.create(options);
@@ -38,7 +31,6 @@ const login = userType => {
 const unauthenticatedTest = (method, url) => {
   it('when unauthenticated', async () => {
     const response = await api[method](url);
-
     expect(response.status).toEqual(401);
     expect(response.data).toBeFalsy();
   });
@@ -46,10 +38,8 @@ const unauthenticatedTest = (method, url) => {
 
 const unauthorizedTest = (method, url) => {
   it('when unauthorized', async () => {
-    // this user has no permissions
     const authenticatedClient = login('no-permissions');
     const response = await authenticatedClient[method](url);
-
     expect(response.status).toEqual(403);
     expect(response.data).toBeFalsy();
   });

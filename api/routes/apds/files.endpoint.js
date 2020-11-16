@@ -37,7 +37,7 @@ describe('APD files endpoints', () => {
 
       it(`with an APD in a state other than the user's state`, async () => {
         const response = await api.get(
-          url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
+          url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
         expect(response.status).toEqual(401);
@@ -55,7 +55,7 @@ describe('APD files endpoints', () => {
 
       it('with a valid request', async () => {
         const response = await api.get(
-          url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
+          url(4001, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
         expect(response.status).toEqual(200);
@@ -89,7 +89,7 @@ describe('APD files endpoints', () => {
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const response = await api.post(url(4001), form);
+        const response = await api.post(url(4000), form);
 
         expect(response.status).toEqual(401);
         expect(response.data).toMatchSnapshot();
@@ -115,18 +115,18 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(4000),
+          url(4001),
           formData.getBuffer(),
           options
         );
 
         expect(response.status).toEqual(200);
         expect(response.data.url).toEqual(
-          expect.stringMatching(/apds\/4000\/files\/[a-f0-9]{64}/)
+          expect.stringMatching(/apds\/4001\/files\/[a-f0-9]{64}/)
         );
 
         const filename = response.data.url.match(
-          /apds\/4000\/files\/([a-f0-9]{64})/
+          /apds\/4001\/files\/([a-f0-9]{64})/
         )[1];
         expect(fs.existsSync(`test-data/files/${filename}`)).toEqual(true);
       });

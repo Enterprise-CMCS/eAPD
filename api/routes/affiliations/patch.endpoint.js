@@ -6,7 +6,7 @@ const {
 } = require('../../endpoint-tests/utils');
 
 describe('Affiliations endpoint | PATCH', () => {
-  const api = login();
+  const api = login('all-permissions');
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -30,7 +30,7 @@ describe('Affiliations endpoint | PATCH', () => {
   });
 
   it('returns 400 when affiliation id is invalid', async () => {
-    const response = await api.patch('/states/zz/affiliations/NaN');
+    const response = await api.patch('/states/fl/affiliations/NaN');
     expect(response.status).toEqual(400);
   });
 
