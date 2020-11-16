@@ -29,7 +29,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
     });
 
     it(`with an APD in a state other than the user's state`, async () => {
-      const response = await api.patch(url(4001));
+      const response = await api.patch(url(4000));
 
       expect(response.status).toEqual(401);
       expect(response.data).toMatchSnapshot();
@@ -43,7 +43,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(4000), data);
+      const response = await api.patch(url(4001), data);
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -58,7 +58,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(4000), data);
+      const response = await api.patch(url(4001), data);
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -79,7 +79,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(4000), data);
+      const response = await api.patch(url(4001), data);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something
@@ -102,7 +102,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(4000), data);
+      const response = await api.patch(url(4001), data);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something

@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`APD events endpoints Record an event associated with an APD | POST /apds/:id/events when authenticated as a user with permissions with a non-existant apd ID 1`] = `""`;
