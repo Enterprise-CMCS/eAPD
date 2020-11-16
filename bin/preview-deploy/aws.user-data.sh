@@ -103,7 +103,7 @@ cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 "agent": {  "metrics_collection_interval": 60,
   "region": "__AWS_REGION__",
   "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
-  "debug": true,
+  "debug": false,
   "run_as_user": "cwagent"
 }
 
