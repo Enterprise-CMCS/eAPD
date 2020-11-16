@@ -86,8 +86,6 @@ function configureUserData() {
 
   sed -i'.backup' -e "s/__PBKDF2_ITERATIONS__/`echo $API_PBKDF2_ITERATIONS`/g" aws.user-data.sh
 
-  sed -i'.backup' -e "s|__AWS_REGION__|`echo $AWS_REGION`|g" aws.user-data.sh
-
   rm aws.user-data.sh.backup
 }
 
