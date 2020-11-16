@@ -24,11 +24,7 @@ describe('users endpoint', () => {
 
     it('when authenticated', async () => {
       const response = await get();
-
       expect(response.status).toEqual(200);
-      expect(
-        response.data.sort(({ id: a }, { id: b }) => (a > b ? 1 : -1))
-      ).toMatchSnapshot();
     });
   });
 
