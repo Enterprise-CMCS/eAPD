@@ -13,11 +13,7 @@ const activities = {
   'view-document': true,
   'view-affiliations': true,
   'edit-affiliations': true,
-<<<<<<< HEAD
-  'approve-state-access': true
-=======
   'approve-state-access': true,
->>>>>>> tforkner/2345-okta-integration
 };
 
 const roles = {
