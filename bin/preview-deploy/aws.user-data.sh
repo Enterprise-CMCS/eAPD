@@ -99,12 +99,80 @@ NGINXCONFIG
 service nginx restart
 
 # Configure CloudWatch Agent
+#cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
+#"agent": {  "metrics_collection_interval": 60,
+#  "region": "__AWS_REGION__",
+#  "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
+#  "debug": false,
+#  "run_as_user": "cwagent"
+#}
+
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
-"agent": {  "metrics_collection_interval": 60,
-  "region": "__AWS_REGION__",
-  "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
-  "debug": false,
-  "run_as_user": "cwagent"
+
+{
+        "agent": {
+                "metrics_collection_interval": 60,
+                "run_as_user": "cwagent"
+        },
+        "metrics": {
+                "append_dimensions": {
+                        "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
+                        "ImageId": "${aws:ImageId}",
+                        "InstanceId": "${aws:InstanceId}",
+                        "InstanceType": "${aws:InstanceType}"
+                },
+                "metrics_collected": {
+                        "collectd": {
+                                "metrics_aggregation_interval": 30
+                        },
+                        "cpu": {
+                                "measurement": [
+                                        "cpu_usage_idle",
+                                        "cpu_usage_iowait",
+                                        "cpu_usage_user",
+                                        "cpu_usage_system"
+                                ],
+                                "metrics_collection_interval": 60,
+                                "totalcpu": false
+                        },
+                        "disk": {
+                                "measurement": [
+                                        "used_percent",
+                                        "inodes_free"
+                                ],
+                                "metrics_collection_interval": 60,
+                                "resources": [
+                                        "*"
+                                ]
+                        },
+                        "diskio": {
+                                "measurement": [
+                                        "io_time"
+                                ],
+                                "metrics_collection_interval": 60,
+                                "resources": [
+                                        "*"
+                                ]
+                        },
+                        "mem": {
+                                "measurement": [
+                                        "mem_used_percent"
+                                ],
+                                "metrics_collection_interval": 60
+                        },
+                        "statsd": {
+                                "metrics_aggregation_interval": 30,
+                                "metrics_collection_interval": 60,
+                                "service_address": ":8125"
+                        },
+                        "swap": {
+                                "measurement": [
+                                        "swap_used_percent"
+                                ],
+                                "metrics_collection_interval": 60
+                        }
+                }
+        }
 }
 
 CWAGENTCONFIG
