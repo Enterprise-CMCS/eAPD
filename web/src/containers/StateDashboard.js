@@ -77,6 +77,7 @@ const StateDashboard = (
     route,
     selectApd: select,
     state,
+    role,
     stateStatus
   },
   { global = window } = {}
@@ -84,7 +85,8 @@ const StateDashboard = (
   const [isLoading, setIsLoading] = useState(false);
   TagManager.dataLayer({
     dataLayer: {
-      stateId: state ? state.id : null
+      stateId: state ? state.id : null,
+      role
     }
   });
 
@@ -217,7 +219,8 @@ StateDashboard.propTypes = {
   apds: PropType.array.isRequired,
   fetching: PropType.bool.isRequired,
   route: PropType.string,
-  state: PropType.object,
+  state: PropType.object.isRequired,
+  role: PropType.string.isRequired,
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
@@ -225,14 +228,14 @@ StateDashboard.propTypes = {
 };
 
 StateDashboard.defaultProps = {
-  route: '/apd',
-  state: null
+  route: '/apd'
 };
 
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching,
   state: state.user.data.state || null,
+  role: state.user.data.role || 'Pending Role',
   stateStatus:
     getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
 });
