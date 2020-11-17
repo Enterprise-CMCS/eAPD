@@ -37,3 +37,66 @@ export const TABLE_HEADERS = {
   ffy: y => `FFY ${y}`,
   total: <span>Total computable (Federal + state)</span>
 };
+
+export const STATE_AFFILIATION_STATUSES = {
+  REQUESTED: 'requested',
+  APPROVED: 'approved',
+  DENIED: 'denied',
+  REVOKED: 'revoked'
+};
+
+export const MFA_FACTOR_TYPES = {
+  CALL: 'call-OKTA',
+  EMAIL: 'email-OKTA',
+  SMS: 'sms-OKTA',
+  PUSH: 'push-OKTA',
+  OKTA: 'token:software:totp-OKTA',
+  GOOGLE: 'token:software:totp-GOOGLE'
+};
+
+export const MFA_FACTORS = {
+  [MFA_FACTOR_TYPES.CALL]: {
+    displayName: 'Call',
+    factorType: 'call',
+    provider: 'OKTA',
+    active: true,
+    findType: f => f.provider === 'OKTA' && f.factorType === 'call'
+  },
+  [MFA_FACTOR_TYPES.EMAIL]: {
+    displayName: 'Email',
+    factorType: 'email',
+    provider: 'OKTA',
+    active: true,
+    findType: f => f.provider === 'OKTA' && f.factorType === 'email'
+  },
+  [MFA_FACTOR_TYPES.SMS]: {
+    displayName: 'SMS Text',
+    factorType: 'sms',
+    provider: 'OKTA',
+    active: true,
+    findType: f => f.provider === 'OKTA' && f.factorType === 'sms'
+  },
+  [MFA_FACTOR_TYPES.PUSH]: {
+    displayName: 'Okta Push',
+    factorType: 'push',
+    provider: 'OKTA',
+    active: false,
+    findType: f => f.provider === 'OKTA' && f.factorType === 'push'
+  },
+  [MFA_FACTOR_TYPES.OKTA]: {
+    displayName: 'Okta Authenticator',
+    factorType: 'token:software:totp',
+    provider: 'OKTA',
+    active: true,
+    findType: f =>
+      f.provider === 'OKTA' && f.factorType === 'token:software:totp'
+  },
+  [MFA_FACTOR_TYPES.GOOGLE]: {
+    displayName: 'Google Authenticator',
+    factorType: 'token:software:totp',
+    provider: 'GOOGLE',
+    active: true,
+    findType: f =>
+      f.provider === 'GOOGLE' && f.factorType === 'token:software:totp'
+  }
+};

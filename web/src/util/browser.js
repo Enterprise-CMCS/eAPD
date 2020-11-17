@@ -14,7 +14,7 @@ const browserIsGreen =
   // Most recent Firefox extended support release as of April 2020.
   (browser.name === 'firefox' && browser.version >= 68) ||
   // First Chromium build of Edge. No longer support pre-Chromium builds.
-  (browser.name === 'edge' && browser.version >= 79);
+  browser.name === 'edge-chromium';
 
 // Yellow support is for browsers we think should support all the basic
 // functionality of the app, though more advanced features and some visual

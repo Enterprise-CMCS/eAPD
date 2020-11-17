@@ -31,7 +31,14 @@ class Password extends Component {
   };
 
   render() {
-    const { className, title, value, showMeter } = this.props;
+    const {
+      className,
+      title,
+      value,
+      showMeter,
+      errorMessage,
+      customErrorMessage
+    } = this.props;
     const { showPassword, strength } = this.state;
 
     let passwordQuality = 'Password strength: Weak';
@@ -63,12 +70,19 @@ class Password extends Component {
               'A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address.'
             }
             label={title || 'Password'}
+            id="password"
             name="password"
             className="no-clearfix"
             type={showPassword ? 'text' : 'password'}
             value={value}
             onChange={this.changePassword}
+            errorMessage={errorMessage == null ? null : ''}
           />
+          {customErrorMessage && (
+            <label htmlFor="password" className="ds-u-color--error">
+              <strong>{customErrorMessage}</strong>
+            </label>
+          )}
           {showMeter && (
             <Fragment>
               <div className="strength-meter">
@@ -98,7 +112,9 @@ Password.propTypes = {
   onChange: PropTypes.func,
   title: PropTypes.string,
   value: PropTypes.string,
-  showMeter: PropTypes.bool
+  showMeter: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  customErrorMessage: PropTypes.string
 };
 
 Password.defaultProps = {
@@ -107,7 +123,9 @@ Password.defaultProps = {
   onChange: () => {},
   title: 'Password',
   value: '',
-  showMeter: false
+  showMeter: false,
+  errorMessage: '',
+  customErrorMessage: ''
 };
 
 export default Password;

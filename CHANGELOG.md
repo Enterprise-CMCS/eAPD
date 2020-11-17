@@ -1,11 +1,20 @@
 # Next release
 
-Anticipated release: November 5th, 2020
+Anticipated release: November 30, 2020
 
 #### 🚀 New features
 
 - Allow users to delete the last activity cost entry ([#2152])
-- Updates table labeling methods to be more accessibly and consistent ([#2562])
+- Integrates Okta for authentication ([#2345])
+- Updates to the login screens ([#2565])
+- Add ability for user to choose an MFA type if not selected already ([#2566])
+- Add ability for user to request access to a state ([#2567])
+- Create user status screens ([#2568])
+- Create a table to hold affiliations ([#2569])
+- Update roles and access for approving access requests ([#2572])
+- Create endpoints for requesting/approving access ([#2574])
+- Show the Activity Total Cost in the Proposed Budget Summary and Budget and FFP page ([#2597])
+- Update authorization to use new affiliations table ([#2617])
 
 #### 🐛 Bugs fixed
 
@@ -17,5 +26,14 @@ Anticipated release: November 5th, 2020
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
-[#2152]: https://github.com/CMSgov/eAPD/issues/2152
-[#2324]: https://github.com/CMSgov/eAPD/issues/2562
+[#2152]: https://github.com/cmsgov/eapd/issues/2152
+[#2345]: https://github.com/cmsgov/eapd/issues/2345
+[#2565]: https://github.com/cmsgov/eapd/issues/2565
+[#2566]: https://github.com/cmsgov/eapd/issues/2566
+[#2567]: https://github.com/cmsgov/eapd/issues/2567
+[#2568]: https://github.com/cmsgov/eapd/issues/2568
+[#2569]: https://github.com/cmsgov/eapd/issues/2569
+[#2572]: https://github.com/cmsgov/eapd/issues/2572
+[#2574]: https://github.com/cmsgov/eapd/issues/2574
+[#2597]: https://github.com/cmsgov/eapd/issues/2597
+[#2617]: https://github.com/cmsgov/eapd/issues/2617

@@ -21,6 +21,9 @@ services:
     image: cms-eapd/web
     environment:
       - API_URL=http://localhost:8081
+      - OKTA_DOMAIN=${OKTA_DOMAIN}
+      - OKTA_SERVER_ID=${OKTA_SERVER_ID}
+      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
     volumes:
       - type: bind
         source: ./web
@@ -40,6 +43,10 @@ services:
       - DATABASE_URL=postgres://postgres:cms@db/hitech_apd
       - NODE_ENV=development
       - DISABLE_SAME_SITE=yes
+      - OKTA_DOMAIN=${OKTA_DOMAIN}
+      - OKTA_SERVER_ID=${OKTA_SERVER_ID}
+      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
+      - OKTA_API_KEY=${OKTA_API_KEY}
     volumes:
       - type: bind
         source: ./api

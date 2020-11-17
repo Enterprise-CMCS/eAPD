@@ -8,59 +8,55 @@ Array [
   },
   Object {
     "id": 1002,
-    "name": "add-users",
-  },
-  Object {
-    "id": 1003,
     "name": "view-roles",
   },
   Object {
-    "id": 1004,
-    "name": "create-roles",
-  },
-  Object {
-    "id": 1005,
-    "name": "edit-roles",
-  },
-  Object {
-    "id": 1006,
+    "id": 1003,
     "name": "submit-federal-response",
   },
   Object {
-    "id": 1007,
+    "id": 1004,
     "name": "submit-clearance",
   },
   Object {
-    "id": 1008,
+    "id": 1005,
     "name": "edit-comments",
   },
   Object {
-    "id": 1009,
+    "id": 1006,
     "name": "submit-document",
   },
   Object {
-    "id": 1010,
+    "id": 1007,
     "name": "submit-state-response",
   },
   Object {
-    "id": 1011,
+    "id": 1008,
     "name": "create-draft",
   },
   Object {
-    "id": 1012,
+    "id": 1009,
     "name": "edit-document",
   },
   Object {
-    "id": 1013,
+    "id": 1010,
     "name": "edit-response",
   },
   Object {
-    "id": 1014,
-    "name": "delete-users",
+    "id": 1011,
+    "name": "view-document",
   },
   Object {
-    "id": 1015,
-    "name": "view-document",
+    "id": 1012,
+    "name": "view-affiliations",
+  },
+  Object {
+    "id": 1013,
+    "name": "edit-affiliations",
+  },
+  Object {
+    "id": 1014,
+    "name": "approve-state-access",
   },
 ]
 `;
