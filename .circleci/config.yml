@@ -495,10 +495,10 @@ jobs:
               --AWS_TARGET_GROUP "${<< parameters.env >>_API_AWS_TARGET_GROUP}" \
               --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \
               --ENVIRONMENT "$(echo '<< parameters.env >>' | tr '[:upper:]' '[:lower:]')" \
-              --OKTA_DOMAIN "$OKTA_DOMAIN" \
-              --OKTA_SERVER_ID "$OKTA_SERVER_ID" \
-              --OKTA_CLIENT_ID "$OKTA_CLIENT_ID" \
-              --OKTA_API_KEY "$OKTA_API_KEY"
+              --OKTA_DOMAIN "${<< parameters.env >>_OKTA_DOMAIN}" \
+              --OKTA_SERVER_ID "${<< parameters.env >>_OKTA_SERVER_ID}" \
+              --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
+              --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}"
 
       - run:
           when: on_fail
