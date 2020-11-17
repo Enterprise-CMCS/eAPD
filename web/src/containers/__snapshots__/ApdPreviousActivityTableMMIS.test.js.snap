@@ -2,18 +2,12 @@
 
 exports[`apd previous activity table, mmis component renders correctly 1`] = `
 <Fragment>
-  <h4
-    aria-hidden="true"
-    className="ds-h4"
-  >
-    MMIS
-  </h4>
   <table
     className="budget-table"
     key="90"
   >
     <caption
-      className="ds-h4 ds-u-visibility--screen-reader"
+      className="ds-h4"
     >
       MMIS 
       <span>
@@ -182,7 +176,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     key="75"
   >
     <caption
-      className="ds-h4 ds-u-visibility--screen-reader"
+      className="ds-h4"
     >
       MMIS 
       <span>
@@ -351,7 +345,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     key="50"
   >
     <caption
-      className="ds-h4 ds-u-visibility--screen-reader"
+      className="ds-h4"
     >
       MMIS 
       <span>

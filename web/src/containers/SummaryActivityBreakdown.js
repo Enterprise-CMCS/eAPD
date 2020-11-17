@@ -19,9 +19,6 @@ const SummaryActivityBreakdownTable = ({
 
   return (
     <table className="budget-table activity-budget-table">
-      <caption className="ds-u-visibility--screen-reader">
-        Activity Breakdown Table
-      </caption>
       <thead>
         <tr className="budget-table--row__primary-header">
           <th scope="col">

@@ -50,7 +50,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       },
     ]
   }
-  noDataMessage={false}
+  noDataMessage="Primary Point of Contact has not been added for this activity."
   onAddClick={[Function]}
   onDeleteClick={[Function]}
   years={

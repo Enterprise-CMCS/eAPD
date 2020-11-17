@@ -19,13 +19,14 @@ const ContractorResourceReview = ({
 
   return (
     <Review
-      heading={`${index + 1}. ${name || 'Contractor Name not specified'}`}
+      heading={`${index + 1}. ${name || 'Contractor name not specified'}`}
       headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
+      ariaLabel={`${index + 1}. ${name || 'Contractor name not specified'}`}
     >
       <p className="ds-u-margin-top--0">
-        {description || 'Description of Services not specified'}
+        {description || 'Description of services not specified'}
       </p>
       <ul className="ds-c-list--bare">
         <li>

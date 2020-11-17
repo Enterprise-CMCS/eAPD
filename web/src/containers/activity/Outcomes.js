@@ -57,10 +57,11 @@ const Outcomes = ({
           { onClick: handleAddMetric, text: 'Add another metric' }
         ]}
         removeMetric={handleDeleteMetric}
-        noDataMessage={t('activities.expenses.noDataNotice')}
+        noDataMessage={t('activities.outcomes.noDataNotice')}
         onAddClick={handleAdd}
         onDeleteClick={handleDelete}
         handleChange={() => {}}
+        allowDeleteAll
       />
     </Subsection>
   );

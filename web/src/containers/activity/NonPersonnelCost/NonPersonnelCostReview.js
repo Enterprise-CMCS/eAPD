@@ -16,6 +16,7 @@ const NonPersonnelCostReview = ({
       headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
+      ariaLabel={`${index + 1}. ${category}`}
     >
       {description}
       <div className="ds-u-margin-top--2">

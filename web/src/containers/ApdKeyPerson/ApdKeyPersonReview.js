@@ -13,8 +13,8 @@ const ApdStateKeyPerson = ({
   let displayName = name;
   if (name === '') {
     displayName = primary
-      ? 'Unnamed Primary Point of Contact'
-      : 'Unnamed Key Personnel';
+      ? 'Primary Point of Contact name not specified'
+      : 'Key Personnel name not specified';
   }
 
   const costByYear = useMemo(
@@ -51,7 +51,7 @@ const ApdStateKeyPerson = ({
         >
           <ul className="ds-c-list--bare">
             {primary ? <li>Primary APD Point of Contact</li> : null}
-            <li>{position}</li>
+            <li>{position || 'Role not specified'}</li>
           </ul>
           {costByYear}
         </Review>
@@ -60,7 +60,7 @@ const ApdStateKeyPerson = ({
         <Review heading={`${index + 1}. ${displayName}`}>
           <ul className="ds-c-list--bare">
             {primary ? <li>Primary APD Point of Contact</li> : null}
-            <li>{position}</li>
+            <li>{position || 'Role not specified'}</li>
             <li>{email}</li>
           </ul>
           {costByYear}
