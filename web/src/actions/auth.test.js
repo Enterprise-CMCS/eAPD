@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 
 import * as actions from './auth';
 import axios from '../util/api';
-import mockOktaAuth from '../util/oktaAuth';
+import * as mockAuth from '../util/auth';
 import mockApp from './app';
 import mockAdmin from './admin';
 
@@ -72,7 +72,7 @@ describe('auth actions', () => {
 
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
       const signInSpy = jest
-        .spyOn(mockOktaAuth, 'signIn')
+        .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
           Promise.resolve({
             sessionToken: 'testSessionToken',
@@ -80,38 +80,26 @@ describe('auth actions', () => {
           })
         );
       const getTokenSpy = jest
-        .spyOn(mockOktaAuth.token, 'getWithoutPrompt')
-        .mockImplementation(({ state }) =>
-          Promise.resolve({
-            tokens: {
-              accessToken: { accessToken: 'aaa.bbb.ccc' },
-              idToken: { idToken: 'xxx.yyy.zzz' }
-            },
-            state
-          })
-        );
-      const addTokenSpy = jest
-        .spyOn(mockOktaAuth.tokenManager, 'add')
+        .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.RESET_LOCKED_OUT },
-        { type: actions.LOGIN_SUCCESS, data: { name: 'moop', activities: [] } }
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: { name: 'moop', activities: [], states: ['MO'] }
+        },
+        { type: actions.RESET_LOCKED_OUT }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
       expect(signInSpy).toHaveBeenCalledTimes(1);
       await expect(getTokenSpy).toHaveBeenCalledTimes(1);
-      await expect(addTokenSpy).toHaveBeenCalledWith('idToken', {
-        idToken: 'xxx.yyy.zzz'
-      });
-      await expect(addTokenSpy).toHaveBeenCalledWith('accessToken', {
-        accessToken: 'aaa.bbb.ccc'
-      });
-      expect(addTokenSpy).toHaveBeenCalledTimes(2);
+
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -119,7 +107,7 @@ describe('auth actions', () => {
     it('creates LOGIN_OTP_STAGE after successful first stage of multi-factor auth', async () => {
       const verifySpy = jest.fn(() => Promise.resolve());
       const signInSpy = jest
-        .spyOn(mockOktaAuth, 'signIn')
+        .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
           Promise.resolve({
             status: 'MFA_REQUIRED',
@@ -135,7 +123,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_OTP_STAGE, data: 'email' }
+        { type: actions.LOGIN_OTP_STAGE }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
@@ -148,7 +136,7 @@ describe('auth actions', () => {
     it('creates LOGIN_FAILURE if no valid factor is found', async () => {
       const verifySpy = jest.fn(() => Promise.resolve());
       const signInSpy = jest
-        .spyOn(mockOktaAuth, 'signIn')
+        .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
           Promise.resolve({
             status: 'MFA_REQUIRED',
@@ -176,16 +164,16 @@ describe('auth actions', () => {
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
-    
+
     it('creates LOCKED_OUT if account is locked out', async () => {
       const signInSpy = jest
-        .spyOn(mockOktaAuth, 'signIn')
+        .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
           Promise.resolve({
-            status: 'LOCKED_OUT',
+            status: 'LOCKED_OUT'
           })
         );
-        
+
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
@@ -199,59 +187,47 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_SUCCESS after successful second stage of multi-factor auth', async () => {
-      const txExistsSpy = jest
-        .spyOn(mockOktaAuth.tx, 'exists')
-        .mockImplementation(() => true);
       const verify = jest.fn(() =>
         Promise.resolve({ sessionToken: 'testSessionToken' })
       );
       const txResumeSpy = jest
-        .spyOn(mockOktaAuth.tx, 'resume')
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
         .mockImplementation(() =>
           Promise.resolve({
             verify
           })
         );
       const getTokenSpy = jest
-        .spyOn(mockOktaAuth.token, 'getWithoutPrompt')
-        .mockImplementation(({ state }) =>
-          Promise.resolve({
-            tokens: {
-              accessToken: { accessToken: 'aaa.bbb.ccc' },
-              idToken: { idToken: 'xxx.yyy.zzz' }
-            },
-            state
-          })
-        );
-      const addTokenSpy = jest
-        .spyOn(mockOktaAuth.tokenManager, 'add')
+        .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_SUCCESS, data: { name: 'moop', activities: [] } }
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: { name: 'moop', activities: [], states: ['MO'] }
+        },
+        { type: actions.RESET_LOCKED_OUT }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
-      await expect(txExistsSpy).toHaveBeenCalledTimes(1);
+
       await expect(txResumeSpy).toHaveBeenCalledTimes(1);
       await expect(verify).toHaveBeenCalledTimes(1);
       await expect(getTokenSpy).toHaveBeenCalledTimes(1);
-      await expect(addTokenSpy).toHaveBeenCalledWith('idToken', {
-        idToken: 'xxx.yyy.zzz'
-      });
-      await expect(addTokenSpy).toHaveBeenCalledWith('accessToken', {
-        accessToken: 'aaa.bbb.ccc'
-      });
-      expect(addTokenSpy).toHaveBeenCalledTimes(2);
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('creates LOGIN_MFA_FAILURE when no transaction exists', async () => {
-      jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => false);
+      jest
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() => false);
 
       const store = mockStore({});
       const expectedActions = [
@@ -264,11 +240,14 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_MFA_FAILURE when it fails to resume transaction', async () => {
-      jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => false);
       jest
-        .spyOn(mockOktaAuth.tx, 'resume')
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
         .mockImplementation(() =>
-          Promise.reject(new Error('Failed to resume'))
+          Promise.resolve({
+            verify: jest.fn(() =>
+              Promise.reject(new Error('Authentication failed'))
+            )
+          })
         );
 
       const store = mockStore({});
@@ -282,18 +261,20 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_MFA_FAILURE when verifing the otp fails', async () => {
-      jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
-      jest.spyOn(mockOktaAuth.tx, 'resume').mockImplementation(() =>
-        Promise.resolve({
-          verify: jest.fn(() =>
-            Promise.reject(new Error('Authentication failed'))
-          )
-        })
-      );
+      jest
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
+          Promise.resolve({
+            verify: jest.fn(() =>
+              Promise.reject(new Error('Authentication failed'))
+            )
+          })
+        );
 
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -303,17 +284,18 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_MFA_FAILURE when the token is not returned', async () => {
-      jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
       const verify = jest.fn(() =>
         Promise.resolve({ sessionToken: 'testSessionToken' })
       );
-      jest.spyOn(mockOktaAuth.tx, 'resume').mockImplementation(() =>
-        Promise.resolve({
-          verify
-        })
-      );
       jest
-        .spyOn(mockOktaAuth.token, 'getWithoutPrompt')
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
+          Promise.resolve({
+            verify
+          })
+        );
+      jest
+        .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() =>
           Promise.reject(new Error('Authentication failed'))
         );
@@ -321,6 +303,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -330,30 +313,33 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_MFA_FAILURE when returned session token does not match the one sent in', async () => {
-      jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
-      jest.spyOn(mockOktaAuth.tx, 'resume').mockImplementation(() =>
-        Promise.resolve({
-          verify: jest.fn(() =>
-            Promise.resolve({ sessionToken: 'testSessionToken' })
-          )
-        })
-      );
       jest
-        .spyOn(mockOktaAuth.token, 'getWithoutPrompt')
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
         .mockImplementation(() =>
           Promise.resolve({
-            tokens: {
-              accessToken: { accessToken: 'aaa.bbb.ccc' },
-              idToken: { idToken: 'xxx.yyy.zzz' }
-            },
-            state: 'badstate'
+            verify: jest.fn(() =>
+              Promise.resolve({ sessionToken: 'testSessionToken' })
+            )
           })
         );
+      jest.spyOn(mockAuth, 'setTokens').mockImplementation(() =>
+        Promise.resolve({
+          tokens: {
+            accessToken: { accessToken: 'aaa.bbb.ccc' },
+            idToken: { idToken: 'xxx.yyy.zzz' }
+          },
+          state: 'badstate'
+        })
+      );
 
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
+        {
+          type: actions.LOGIN_FAILURE,
+          error: 'Request failed with status code 404'
+        }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -362,36 +348,28 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_MFA_FAILURE after fails to add access token', async () => {
-      jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
-      jest.spyOn(mockOktaAuth.tx, 'resume').mockImplementation(() =>
-        Promise.resolve({
-          verify: jest.fn(() =>
-            Promise.resolve({ sessionToken: 'testSessionToken' })
-          )
-        })
-      );
       jest
-        .spyOn(mockOktaAuth.token, 'getWithoutPrompt')
-        .mockImplementation(({ state }) =>
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
           Promise.resolve({
-            tokens: {
-              accessToken: { accessToken: 'aaa.bbb.ccc' },
-              idToken: { idToken: 'xxx.yyy.zzz' }
-            },
-            state
+            verify: jest.fn(() =>
+              Promise.resolve({ sessionToken: 'testSessionToken' })
+            )
           })
         );
       jest
-        .spyOn(mockOktaAuth.tokenManager, 'add')
-        .mockImplementationOnce(() => Promise.resolve({ status: 'success' }))
-        .mockImplementationOnce(() =>
+        .spyOn(mockAuth, 'setTokens')
+        .mockImplementation(() =>
           Promise.reject(new Error('Authentication failed'))
         );
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -399,23 +377,23 @@ describe('auth actions', () => {
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
-    
+
     it('creates LOCKED_OUT after too many failed MFA attempts', async () => {
-      jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
-      jest.spyOn(mockOktaAuth.tx, 'resume').mockImplementation(() =>
-        Promise.resolve({
-          verify: jest.fn(() =>
-            Promise.reject(new Error('User Locked'))
-          )
-        })
-      );
-    
+      jest
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
+          Promise.resolve({
+            verify: jest.fn(() => Promise.reject(new Error('User Locked')))
+          })
+        );
+
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOCKED_OUT }
       ];
-    
+
       await store.dispatch(actions.loginOtp('otp'));
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
@@ -423,26 +401,15 @@ describe('auth actions', () => {
 
     it('creates LOGIN_FAILURE after failure to get user on backend', async () => {
       const signInSpy = jest
-        .spyOn(mockOktaAuth, 'signIn')
+        .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
           Promise.resolve({
             sessionToken: 'testSessionToken',
             status: 'SUCCESS'
           })
         );
-      const getTokenSpy = jest
-        .spyOn(mockOktaAuth.token, 'getWithoutPrompt')
-        .mockImplementation(({ state }) =>
-          Promise.resolve({
-            tokens: {
-              accessToken: { accessToken: 'aaa.bbb.ccc' },
-              idToken: { idToken: 'xxx.yyy.zzz' }
-            },
-            state
-          })
-        );
-      const addTokenSpy = jest
-        .spyOn(mockOktaAuth.tokenManager, 'add')
+      const setTokenSpy = jest
+        .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
       const store = mockStore({});
@@ -457,21 +424,14 @@ describe('auth actions', () => {
 
       await store.dispatch(actions.login('name', 'secret'));
       expect(signInSpy).toHaveBeenCalledTimes(1);
-      await expect(getTokenSpy).toHaveBeenCalledTimes(1);
-      await expect(addTokenSpy).toHaveBeenCalledWith('idToken', {
-        idToken: 'xxx.yyy.zzz'
-      });
-      await expect(addTokenSpy).toHaveBeenCalledWith('accessToken', {
-        accessToken: 'aaa.bbb.ccc'
-      });
-      expect(addTokenSpy).toHaveBeenCalledTimes(2);
+      expect(setTokenSpy).toHaveBeenCalledTimes(1);
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
       jest
-        .spyOn(mockOktaAuth, 'signIn')
+        .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
           Promise.reject(new Error('Authentication failure'))
         );
@@ -493,12 +453,10 @@ describe('auth actions', () => {
 
   describe('logout (async)', () => {
     let logoutSpy;
-    let managerSpy;
 
     beforeEach(() => {
-      managerSpy = jest.spyOn(mockOktaAuth.tokenManager, 'remove');
       logoutSpy = jest
-        .spyOn(mockOktaAuth, 'signOut')
+        .spyOn(mockAuth, 'logoutAndClearTokens')
         .mockImplementation(() => Promise.resolve({}));
     });
 
@@ -514,9 +472,6 @@ describe('auth actions', () => {
 
       await store.dispatch(actions.logout());
       expect(logoutSpy).toHaveBeenCalledTimes(1);
-      await expect(managerSpy).toHaveBeenCalledWith('idToken');
-      await expect(managerSpy).toHaveBeenCalledWith('accessToken');
-      expect(managerSpy).toHaveBeenCalledTimes(2);
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -567,25 +522,14 @@ describe('auth actions', () => {
     beforeEach(() => {
       jest.clearAllMocks();
 
-      jest.spyOn(mockOktaAuth, 'signIn').mockImplementation(() =>
+      jest.spyOn(mockAuth, 'authenticateUser').mockImplementation(() =>
         Promise.resolve({
           sessionToken: 'testSessionToken',
           status: 'SUCCESS'
         })
       );
       jest
-        .spyOn(mockOktaAuth.token, 'getWithoutPrompt')
-        .mockImplementation(({ state }) =>
-          Promise.resolve({
-            tokens: {
-              accessToken: { accessToken: 'aaa.bbb.ccc' },
-              idToken: { idToken: 'xxx.yyy.zzz' }
-            },
-            state
-          })
-        );
-      jest
-        .spyOn(mockOktaAuth.tokenManager, 'add')
+        .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
       fetchAllApdsSpy = jest
         .spyOn(mockApp, 'fetchAllApds')
@@ -599,9 +543,11 @@ describe('auth actions', () => {
     });
 
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock
-        .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-document'] });
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        states: ['MO'],
+        activities: ['view-document']
+      });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));
@@ -611,9 +557,11 @@ describe('auth actions', () => {
       expect(getRolesSpy).not.toHaveBeenCalled();
     });
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock
-        .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-users'] });
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        activities: ['view-users'],
+        states: ['MO']
+      });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));
@@ -623,9 +571,11 @@ describe('auth actions', () => {
       expect(getRolesSpy).not.toHaveBeenCalled();
     });
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock
-        .onGet('/me')
-        .reply(200, { name: 'moop', activities: ['view-roles'] });
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        activities: ['view-roles'],
+        states: ['MO']
+      });
 
       const store = mockStore({});
       await store.dispatch(actions.login('name', 'secret'));

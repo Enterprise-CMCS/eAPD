@@ -1,10 +1,14 @@
 import auth, { selectIsLoggedIn } from './auth';
+
 import {
   AUTH_CHECK_SUCCESS,
   AUTH_CHECK_FAILURE,
   LOGIN_REQUEST,
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
+  LOGIN_MFA_ENROLL_START,
+  LOGIN_MFA_ENROLL_ADD_PHONE,
+  LOGIN_MFA_ENROLL_ACTIVATE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_MFA_FAILURE,
@@ -15,15 +19,24 @@ import {
 
 describe('auth reducer', () => {
   const initialState = {
-    otpStage: false,
     authenticated: false,
-    isLocked: false,
     error: '',
     fetching: false,
     hasEverLoggedOn: false,
+    otpStage: false,
     initialCheck: false,
+    factorsList: '',
+    mfaEnrollStartStage: false,
+    mfaEnrollAddPhoneStage: false,
+    mfaEnrollActivateStage: false,
+    mfaPhoneNumber: '',
     user: null,
-    mfaType: ''
+    verifyData: null,
+    requestAccess: false,
+    requestAccessSuccess: false,
+    selectState: false,
+    mfaEnrollType: '',
+    isLocked: false
   };
 
   it('should handle initial state', () => {
@@ -63,13 +76,12 @@ describe('auth reducer', () => {
   });
 
   it('should handle LOGIN_OTP_STAGE', () => {
-    expect(auth(initialState, { type: LOGIN_OTP_STAGE, data: 'email' })).toEqual({
+    expect(auth(initialState, { type: LOGIN_OTP_STAGE })).toEqual({
       ...initialState,
       fetching: false,
       otpStage: true,
       authenticated: false,
-      error: '',
-      mfaType: 'email'
+      error: ''
     });
   });
 
@@ -114,22 +126,62 @@ describe('auth reducer', () => {
       error: 'foo'
     });
   });
-  
-  it('should handle LOCKED_OUT', () => {
+
+  it('should handle LOGIN_MFA_ENROLL_START', () => {
     expect(
-      auth(initialState, { type: LOCKED_OUT })
+      auth(initialState, {
+        type: LOGIN_MFA_ENROLL_START,
+        data: { phoneNumber: '4108675309', factors: [{}] }
+      })
     ).toEqual({
+      ...initialState,
+      fetching: false,
+      mfaEnrollStartStage: true,
+      factorsList: [{}],
+      mfaPhoneNumber: '4108675309'
+    });
+  });
+
+  it('should handle LOGIN_MFA_ENROLL_ADD_PHONE', () => {
+    expect(
+      auth(initialState, { type: LOGIN_MFA_ENROLL_ADD_PHONE, data: 'Call' })
+    ).toEqual({
+      ...initialState,
+      fetching: false,
+      mfaEnrollStartStage: false,
+      mfaEnrollAddPhoneStage: true,
+      mfaEnrollType: 'Call'
+    });
+  });
+
+  it('should handle LOGIN_MFA_ENROLL_ACTIVATE', () => {
+    expect(
+      auth(initialState, {
+        type: LOGIN_MFA_ENROLL_ACTIVATE,
+        data: { mfaEnrollType: 'Call', activationData: '' }
+      })
+    ).toEqual({
+      ...initialState,
+      fetching: false,
+      mfaEnrollStartStage: false,
+      mfaEnrollAddPhoneStage: false,
+      mfaEnrollActivateStage: true,
+      mfaEnrollType: 'Call',
+      verifyData: ''
+    });
+  });
+
+  it('should handle LOCKED_OUT', () => {
+    expect(auth(initialState, { type: LOCKED_OUT })).toEqual({
       ...initialState,
       isLocked: true
     });
   });
-  
+
   it('should handle RESET_LOCKED_OUT', () => {
-    expect(
-      auth(initialState, { type: RESET_LOCKED_OUT })
-    ).toEqual({
-     ...initialState,
-     isLocked: false 
+    expect(auth(initialState, { type: RESET_LOCKED_OUT })).toEqual({
+      ...initialState,
+      isLocked: false
     });
   });
 
@@ -151,15 +203,25 @@ describe('auth reducer', () => {
       };
 
       expect(auth(state, { type: LOGOUT_SUCCESS })).toEqual({
+        ...initialState,
         authenticated: false,
         error: '',
         fetching: false,
         hasEverLoggedOn: true,
         initialCheck: true,
         otpStage: false,
-        mfaType: '',
         isLocked: false,
-        user: null
+        user: null,
+        requestAccess: false,
+        requestAccessSuccess: false,
+        selectState: false,
+        factorsList: '',
+        mfaEnrollActivateStage: false,
+        mfaEnrollAddPhoneStage: false,
+        mfaEnrollStartStage: false,
+        mfaEnrollType: '',
+        mfaPhoneNumber: '',
+        verifyData: null
       });
     });
   });
