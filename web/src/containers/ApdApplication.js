@@ -19,7 +19,8 @@ const ApdApplication = ({
   isAdmin,
   place,
   apdId,
-  setApdToSelectOnLoad: dispatchSelectApdOnLoad
+  setApdToSelectOnLoad: dispatchSelectApdOnLoad,
+  role
 }) => {
   if (isAdmin) {
     return <Redirect to="/" />;
@@ -33,7 +34,8 @@ const ApdApplication = ({
   TagManager.dataLayer({
     dataLayer: {
       stateId: place.id,
-      eAPDIdHash: apdId
+      eAPDIdHash: apdId,
+      userRole: role
     }
   });
 
@@ -57,7 +59,8 @@ ApdApplication.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
   apdId: PropTypes.string,
-  setApdToSelectOnLoad: PropTypes.func.isRequired
+  setApdToSelectOnLoad: PropTypes.func.isRequired,
+  role: PropTypes.string.isRequired
 };
 
 ApdApplication.defaultProps = {
@@ -68,7 +71,8 @@ const mapStateToProps = state => ({
   apdSelected: getIsAnAPDSelected(state),
   isAdmin: getIsAdmin(state),
   place: getUserStateOrTerritory(state),
-  apdId: getAPDId(state)
+  apdId: getAPDId(state),
+  role: state.user.data.role || 'Pending Role'
 });
 
 const mapDispatchToProps = { setApdToSelectOnLoad };
