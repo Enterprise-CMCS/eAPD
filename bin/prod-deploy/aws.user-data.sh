@@ -9,7 +9,12 @@ chown -R :eapd /app
 chmod g+w /app
 
 # Oddly, EC2 images don't have git installed. Shruggy person.
-yum -y install git amazon-cloudwatch-agent
+yum -y install git
+
+#Install CloudWatch Agent
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/arm64/latest/amazon-cloudwatch-agent.rpm
+
+rpm -U ./amazon-cloudwatch-agent.rpm
 
 # Configure CloudWatch Agent
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
