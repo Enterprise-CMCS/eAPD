@@ -9,6 +9,8 @@ import Instruction from '../components/Instruction';
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
+import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
+import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 
 const Loading = ({ children }) => (
@@ -22,12 +24,49 @@ Loading.propTypes = { children: PropType.node.isRequired };
 const PendingApproval = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
     <img alt="Puzzle Piece Icon" src="../static/icons/puzzle.svg" width="57" />
-    <h3 className="ds-u-margin-bottom--1">Approval Pending From State Administrator</h3>
-    <p className="ds-u-margin--0">Please contact State Administrator for more information.</p>
+    <h3 className="ds-u-margin-bottom--1">
+      Approval Pending From State Administrator
+    </h3>
+    <p className="ds-u-margin--0">
+      Please contact State Administrator for more information.
+    </p>
   </div>
 );
-// Temporary flag to show pending approval
-const isPending = true;
+
+const ApprovalDenied = () => (
+  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
+    <img alt="Puzzle Piece Icon" src="../static/icons/alert.svg" height="51" />
+    <h3 className="ds-u-margin-bottom--1">Approval Has Been Denied</h3>
+    <p className="ds-u-margin--0">
+      Please contact State Administrator for more information.
+    </p>
+  </div>
+);
+
+const ApprovalRevoked = () => (
+  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
+    <img alt="Puzzle Piece Icon" src="../static/icons/alert.svg" height="51" />
+    <h3 className="ds-u-margin-bottom--1">Approval Permissions Revoked</h3>
+    <p className="ds-u-margin--0">
+      Please contact State Administrator for more information.
+    </p>
+  </div>
+);
+
+// TODO: We'll have to figure out a way to only show this the first time they go into an approved state?
+// const Approved = () => (
+//   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
+//     <img
+//       alt="Puzzle Piece Icon"
+//       src="../static/icons/thumbs-up.svg"
+//       width="57"
+//     />
+//     <h3 className="ds-u-margin-bottom--1">Approved</h3>
+//     <p className="ds-u-margin--0">
+//       Congratulations! You may now create an APD.
+//     </p>
+//   </div>
+// );
 
 const StateDashboard = (
   {
@@ -37,7 +76,8 @@ const StateDashboard = (
     fetching,
     route,
     selectApd: select,
-    state
+    state,
+    stateStatus
   },
   { global = window } = {}
 ) => {
@@ -84,75 +124,91 @@ const StateDashboard = (
           <h1 className="ds-h1">
             {t('stateDashboard.title', { state: state ? state.name : '' })}
           </h1>
-          <Instruction source="stateDashboard.instruction" />
+          <Instruction source="stateDashboard.introduction" />
+          {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
+            <Instruction source="stateDashboard.instruction" />
+          )}
           <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
             <h2 className="ds-h2 ds-u-display--inline-block">
               {state ? state.name : ''} APDs
             </h2>
-            <Button
-              variation="primary"
-              className="ds-u-float--right"
-              onClick={createNew}
-            >
-              Create new{' '}
-              <span className="ds-u-visibility--screen-reader">APD</span>
-              &nbsp;&nbsp;
-              <Icon icon={faPlusCircle} />
-            </Button>
+            {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
+              <Button
+                variation="primary"
+                className="ds-u-float--right"
+                onClick={createNew}
+              >
+                Create new{' '}
+                <span className="ds-u-visibility--screen-reader">APD</span>
+                &nbsp;&nbsp;
+                <Icon icon={faPlusCircle} />
+              </Button>
+            )}
           </div>
         </div>
       </div>
-      {isPending? <PendingApproval /> : null}
+      {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
+        <PendingApproval />
+      ) : null}
+      {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
+        <ApprovalDenied />
+      ) : null}
+      {stateStatus === STATE_AFFILIATION_STATUSES.REVOKED ? (
+        <ApprovalRevoked />
+      ) : null}
       {fetching ? <Loading>Loading APDs</Loading> : null}
-      {!fetching && apds.length === 0 ? (
+      {!fetching &&
+      stateStatus === STATE_AFFILIATION_STATUSES.APPROVED &&
+      apds.length === 0 ? (
         <div className="ds-l-row">
           <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2 ds-u-padding-bottom--5 ds-u-color--muted">
             {t('stateDashboard.none')}
           </div>
         </div>
       ) : null}
-      {apds.map(apd => (
-        <div key={apd.id} className="ds-l-row">
-          <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
-            <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
-              <div className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2">
-                <File size="lg" color="#046b99" />
-              </div>
-              <div className="ds-u-display--inline-block">
-                <h3 className="ds-u-margin-y--0">
-                  <a href="#!" onClick={open(apd.id)}>
+      {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED &&
+        apds.map(apd => (
+          <div key={apd.id} className="ds-l-row">
+            <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
+              <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
+                <div className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2">
+                  <File size="lg" color="#046b99" />
+                </div>
+                <div className="ds-u-display--inline-block">
+                  <h3 className="ds-u-margin-y--0">
+                    <a href="#!" onClick={open(apd.id)}>
+                      <span className="ds-u-visibility--screen-reader">
+                        Edit APD:{' '}
+                      </span>
+                      {apd.name}
+                    </a>
+                  </h3>
+                  <ul className="ds-c-list--bare">
+                    <li>
+                      <strong>Last edited:</strong> {apd.updated}
+                    </li>
+                    <li>
+                      <strong>Created:</strong> {apd.created}
+                    </li>
+                  </ul>
+                </div>
+                <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
+                  <Button
+                    variation="transparent"
+                    size="small"
+                    onClick={delApd(apd)}
+                  >
+                    Delete{' '}
                     <span className="ds-u-visibility--screen-reader">
-                      Edit APD:{' '}
+                      {' '}
+                      this APD
                     </span>
-                    {apd.name}
-                  </a>
-                </h3>
-                <ul className="ds-c-list--bare">
-                  <li>
-                    <strong>Last edited:</strong> {apd.updated}
-                  </li>
-                  <li>
-                    <strong>Created:</strong> {apd.created}
-                  </li>
-                </ul>
-              </div>
-              <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
-                <Button
-                  variation="transparent"
-                  size="small"
-                  onClick={delApd(apd)}
-                >
-                  Delete{' '}
-                  <span className="ds-u-visibility--screen-reader">
-                    {' '}
-                    this APD
-                  </span>
-                </Button>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </main>
   );
 };
@@ -164,7 +220,8 @@ StateDashboard.propTypes = {
   state: PropType.object,
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
-  selectApd: PropType.func.isRequired
+  selectApd: PropType.func.isRequired,
+  stateStatus: PropType.string.isRequired
 };
 
 StateDashboard.defaultProps = {
@@ -175,7 +232,9 @@ StateDashboard.defaultProps = {
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching,
-  state: state.user.data.state || null
+  state: state.user.data.state || null,
+  stateStatus:
+    getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
 });
 
 const mapDispatchToProps = {

@@ -207,7 +207,6 @@ describe('auth actions', () => {
         .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         {
           type: actions.LOGIN_SUCCESS,
           data: { name: 'moop', activities: [], states: ['MO'] }
@@ -274,7 +273,6 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -303,7 +301,6 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -335,7 +332,6 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         {
           type: actions.LOGIN_FAILURE,
           error: 'Request failed with status code 404'
@@ -369,7 +365,6 @@ describe('auth actions', () => {
         .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
       ];
 
@@ -390,7 +385,6 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' },
         { type: actions.LOCKED_OUT }
       ];
 

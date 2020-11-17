@@ -92,8 +92,6 @@ const getCurrentUser = () => dispatch =>
       }
       dispatch(completeLogin(userRes.data));
       dispatch(resetLocked());
-
-      // dispatch(loadData(userRes.data.activities));
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
@@ -134,12 +132,7 @@ export const mfaActivate = code => async dispatch => {
 
   if (activateTransaciton.status === 'SUCCESS') {
     await setTokens(activateTransaciton.sessionToken);
-    dispatch(
-      getCurrentUser().catch(error => {
-        const reason = error ? error.message : 'N/A';
-        dispatch(failLogin(reason));
-      })
-    );
+    dispatch(getCurrentUser());
   }
 };
 
@@ -185,7 +178,7 @@ export const loginOtp = otp => async dispatch => {
   dispatch(startSecondStage());
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
-    verifyMFA({ transaction, otp })
+    return verifyMFA({ transaction, otp })
       .then(async ({ sessionToken }) => {
         await setTokens(sessionToken);
         return dispatch(getCurrentUser());
@@ -208,6 +201,7 @@ export const createAccessRequest = states => dispatch => {
       .post(`/states/${stateId}/affiliations`)
       .then(() => {
         dispatch(successAccessToState());
+        dispatch(getCurrentUser());
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';

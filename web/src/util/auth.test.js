@@ -5,9 +5,10 @@ import {
   verifyMFA,
   setTokens,
   getAvailableFactors,
-  // getFactor,
+  getFactor,
   logoutAndClearTokens
 } from './auth';
+import { MFA_FACTOR_TYPES } from '../constants';
 
 describe('Auth Util', () => {
   it('authenticateUser', async () => {
@@ -56,15 +57,10 @@ describe('Auth Util', () => {
     const txExistsSpy = jest
       .spyOn(mockOktaAuth.tx, 'exists')
       .mockImplementation(() => true);
-    const verify = jest.fn(() =>
-      Promise.resolve({ sessionToken: 'testSessionToken' })
-    );
     const txResumeSpy = jest
       .spyOn(mockOktaAuth.tx, 'resume')
       .mockImplementation(() =>
-        Promise.resolve({
-          verify
-        })
+        Promise.resolve({ sessionToken: 'testSessionToken' })
       );
 
     await retrieveExistingTransaction();
@@ -100,6 +96,29 @@ describe('Auth Util', () => {
         provider: 'OKTA'
       }
     ]);
+  });
+
+  it('getFactor', async () => {
+    const factors = [
+      {
+        active: true,
+        displayName: 'Email',
+        factorType: 'email',
+        provider: 'OKTA'
+      },
+      {
+        active: true,
+        displayName: 'Call',
+        factorType: 'call',
+        provider: 'OKTA'
+      }
+    ];
+    jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
+    jest
+      .spyOn(mockOktaAuth.tx, 'resume')
+      .mockImplementation(() => Promise.resolve({ factors }));
+    const factor = await getFactor(MFA_FACTOR_TYPES.CALL);
+    expect(factors[1]).toEqual(factor);
   });
 
   it('logoutAndClearTokens', async () => {

@@ -52,17 +52,22 @@ const getActiveAuthRoles = async ({ db = knex } = {}) => {
  * @function
  * @returns {Object} { id, name, activities: [] }
  */
-const getRoles = async ({ db = knex } = {}) => db
-  .select({
-    id: 'roles.id',
-    name: 'roles.name',
-    activities: db.raw('array_agg(activities.name)')
-  })
-  .from({ rolesActivities: 'auth_role_activity_mapping' })
-  .join({ activities: 'auth_activities' }, 'activities.id', 'rolesActivities.activity_id')
-  .join({ roles: 'auth_roles' }, 'roles.id', 'rolesActivities.role_id')
-  .where('roles.isActive', true)
-  .groupBy('roles.id');
+const getRoles = async ({ db = knex } = {}) =>
+  db
+    .select({
+      id: 'roles.id',
+      name: 'roles.name',
+      activities: db.raw('array_agg(activities.name)')
+    })
+    .from({ rolesActivities: 'auth_role_activity_mapping' })
+    .join(
+      { activities: 'auth_activities' },
+      'activities.id',
+      'rolesActivities.activity_id'
+    )
+    .join({ roles: 'auth_roles' }, 'roles.id', 'rolesActivities.role_id')
+    .where('roles.isActive', true)
+    .groupBy('roles.id');
 
 /**
  * Retrieves a user's affiliated states
@@ -70,11 +75,12 @@ const getRoles = async ({ db = knex } = {}) => db
  * @function
  * @returns {Array} state ids
  */
-const getUserAffiliatedStates = async (userId, { db = knex } = {}) => db
-  .select('state_id')
-  .from('auth_affiliations')
-  .where('user_id', userId)
-  .then(rows => rows.map(row => row.state_id));
+const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
+  db
+    .select('state_id')
+    .from('auth_affiliations')
+    .where('user_id', userId)
+    .then(rows => rows.map(row => row.state_id));
 
 /**
  * Retrieves a user's permissions per state
@@ -91,11 +97,15 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
     })
     .from('auth_affiliations')
     .where('user_id', userId)
-    .then(rows => rows.reduce((result, row) => {
-      const { stateId, roleId } = row;
-      const activities = roleId ? roles.find(role => role.id === roleId).activities : [];
-      return { ...result, [stateId]: activities }
-    }, {}));
+    .then(rows =>
+      rows.reduce((result, row) => {
+        const { stateId, roleId } = row;
+        const activities = roleId
+          ? roles.find(role => role.id === roleId).activities
+          : [];
+        return { ...result, [stateId]: activities };
+      }, {})
+    );
 };
 
 module.exports = {
