@@ -498,7 +498,7 @@ jobs:
               --OKTA_DOMAIN "${<< parameters.env >>_OKTA_DOMAIN}" \
               --OKTA_SERVER_ID "${<< parameters.env >>_OKTA_SERVER_ID}" \
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
-              --OKTA_API_KEY "{<< parameters.env >>_$OKTA_API_KEY}"
+              --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}"
 
       - run:
           when: on_fail
