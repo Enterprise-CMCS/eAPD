@@ -21,73 +21,65 @@ const AuthenticationForm = ({
   working,
   hasEverLoggedOn
 }) => (
-  <div id={id} className="card--container">
-    <div className="ds-l-container">
-      <div className="ds-l-row card">
-        <div className="ds-l-col--1 ds-u-margin-left--auto" />
-        <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-          {!!success && (
-            <Alert variation="success" role="alert">
-              {success}
-            </Alert>
-          )}
-          {!!error && (
-            <Alert variation="error" role="alert">
-              {error}
-            </Alert>
-          )}
+  <div id={id}>
+    <div className="ds-l-container" id="start-main-content">
+      <div className="login-card">
+        {!!success && (
+          <Alert variation="success" role="alert">
+            {success}
+          </Alert>
+        )}
+        {!!error && (
+          <Alert variation="error" role="alert">
+            {error}
+          </Alert>
+        )}
 
-          {hasEverLoggedOn && (
-            <p className="ds-u-color--gray ds-u-margin-bottom--0">
-              Welcome Back
-            </p>
+        {hasEverLoggedOn && (
+          <p className="ds-u-color--gray ds-u-margin-bottom--0">Welcome Back</p>
+        )}
+        <h1 className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold">
+          {sectionName.length > 0 && (
+            <span className="ds-h6 ds-u-display--block">
+              {sectionName.toUpperCase()}
+            </span>
           )}
-          <h1 className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold">
-            {sectionName.length > 0 && (
-              <span className="ds-h6 ds-u-display--block">
-                {sectionName.toUpperCase()}
-              </span>
+          {title}
+        </h1>
+        <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
+          <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide">
+            {!!legend && (
+              <legend className="ds-u-visibility--screen-reader">
+                {legend}
+              </legend>
             )}
-            {title}
-          </h1>
-          <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
-            <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
-              {!!legend && (
-                <legend className="ds-u-visibility--screen-reader">
-                  {legend}
-                </legend>
+            {children}
+            <hr className="ds-u-color--gray-lighter" />
+            <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3">
+              {onSave && (
+                <Button
+                  variation="primary"
+                  type="submit"
+                  disabled={!canSubmit || working}
+                >
+                  {working ? (
+                    <Fragment>
+                      <Spinner /> {primaryButtonWorking}
+                    </Fragment>
+                  ) : (
+                    primaryButtonNormal
+                  )}
+                </Button>
               )}
-
-              {children}
-
-              <hr className="ds-u-color--gray-lighter" />
-              <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3">
-                {onSave && (
-                  <Button
-                    variation="primary"
-                    type="submit"
-                    disabled={!canSubmit || working}
-                  >
-                    {working ? (
-                      <Fragment>
-                        <Spinner /> {primaryButtonWorking}
-                      </Fragment>
-                    ) : (
-                      primaryButtonNormal
-                    )}
-                  </Button>
-                )}
-                {cancelable && (
-                  <a href="/" className="ds-c-button ds-c-button--transparent">
-                    Cancel
-                  </a>
-                )}
-              </div>
-            </fieldset>
-          </form>
-          {footer && <div className="card--foter">{footer}</div>}
-        </div>
-        <div className="ds-l-col--1 ds-u-margin-right--auto" />
+              {cancelable && (
+                <a href="/" className="ds-c-button ds-c-button--transparent">
+                  Cancel
+                </a>
+              )}
+            </div>
+          </fieldset>
+        </form>
+        {footer && <div className="card--foter">{footer}</div>}
       </div>
     </div>
   </div>
