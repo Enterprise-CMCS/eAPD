@@ -86,7 +86,7 @@ const StateDashboard = (
   TagManager.dataLayer({
     dataLayer: {
       stateId: state ? state.id : null,
-      role
+      userRole: role
     }
   });
 
