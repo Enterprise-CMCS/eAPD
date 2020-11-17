@@ -1,17 +1,16 @@
-import { Button, Spinner } from '@cmsgov/design-system';
+import { Alert, Button, Spinner } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router';
 
 const formSubmitNoop = e => e.preventDefault();
 
-const LoginForm = ({
+const AuthenticationForm = ({
   cancelable,
   canSubmit,
   children,
   error,
   footer,
-  history,
   id,
   legend,
   onSave,
@@ -19,29 +18,38 @@ const LoginForm = ({
   sectionName,
   success,
   title,
-  working
+  working,
+  hasEverLoggedOn
 }) => (
   <div id={id} className="card--container">
     <div className="ds-l-container">
       <div className="ds-l-row card">
         <div className="ds-l-col--1 ds-u-margin-left--auto" />
         <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-          <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center">
-            <img
-              src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
-              alt="eAPD Logo"
-            />
-            <h1 className="ds-h1 ds-u-margin-top--2">
-              {sectionName.length > 0 && (
-                <span className="ds-h6 ds-u-display--block">
-                  {sectionName.toUpperCase()}
-                </span>
-              )}
-              {title}
-            </h1>
-          </div>
-          {!!success && <div className="ds-u-margin-top--3">{success}</div>}
-          {!!error && <div className="ds-u-margin-top--3">{error}</div>}
+          {!!success && (
+            <Alert variation="success" role="alert">
+              {success}
+            </Alert>
+          )}
+          {!!error && (
+            <Alert variation="error" role="alert">
+              {error}
+            </Alert>
+          )}
+
+          {hasEverLoggedOn && (
+            <p className="ds-u-color--gray ds-u-margin-bottom--0">
+              Welcome Back
+            </p>
+          )}
+          <h1 className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold">
+            {sectionName.length > 0 && (
+              <span className="ds-h6 ds-u-display--block">
+                {sectionName.toUpperCase()}
+              </span>
+            )}
+            {title}
+          </h1>
           <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
               {!!legend && (
@@ -52,7 +60,8 @@ const LoginForm = ({
 
               {children}
 
-              <div className="ds-u-margin-top--5">
+              <hr className="ds-u-color--gray-lighter" />
+              <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3">
                 {onSave && (
                   <Button
                     variation="primary"
@@ -69,9 +78,9 @@ const LoginForm = ({
                   </Button>
                 )}
                 {cancelable && (
-                  <Button variation="transparent" onClick={history.goBack}>
+                  <a href="/" className="ds-c-button ds-c-button--transparent">
                     Cancel
-                  </Button>
+                  </a>
                 )}
               </div>
             </fieldset>
@@ -84,13 +93,12 @@ const LoginForm = ({
   </div>
 );
 
-LoginForm.propTypes = {
+AuthenticationForm.propTypes = {
   cancelable: PropTypes.bool,
   canSubmit: PropTypes.bool,
   children: PropTypes.node.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-  history: PropTypes.object.isRequired,
   id: PropTypes.string,
   legend: PropTypes.string,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
@@ -98,10 +106,11 @@ LoginForm.propTypes = {
   sectionName: PropTypes.string,
   success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   title: PropTypes.string.isRequired,
-  working: PropTypes.bool
+  working: PropTypes.bool,
+  hasEverLoggedOn: PropTypes.bool
 };
 
-LoginForm.defaultProps = {
+AuthenticationForm.defaultProps = {
   cancelable: true,
   canSubmit: true,
   error: false,
@@ -112,9 +121,10 @@ LoginForm.defaultProps = {
   primaryButtonText: ['Save changes', 'Working'],
   sectionName: '',
   success: false,
-  working: false
+  working: false,
+  hasEverLoggedOn: false
 };
 
-export default withRouter(LoginForm);
+export default withRouter(AuthenticationForm);
 
-export { LoginForm as plain };
+export { AuthenticationForm as plain };

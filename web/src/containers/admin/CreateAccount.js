@@ -4,7 +4,7 @@ import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import CardForm from '../../components/CardForm';
 import Password from '../../components/PasswordWithMeter';
-import { usStatesDropdownOptions } from '../../util/states';
+import { usStatesAllDropdownOptions } from '../../util/states';
 import { toSentenceCase } from '../../util';
 import { createUser as createUserDispatch } from '../../actions/admin';
 import { getAddAccountError } from '../../reducers/errors';
@@ -90,7 +90,7 @@ const CreateAccount = ({ createUser, error, roles, working }) => {
         <Dropdown
           label="State"
           name="state"
-          options={usStatesDropdownOptions}
+          options={usStatesAllDropdownOptions}
           size="medium"
           value={state}
           onChange={changeState}
