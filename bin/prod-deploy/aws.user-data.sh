@@ -12,7 +12,7 @@ chmod g+w /app
 yum -y install git
 
 #Install CloudWatch Agent
-wget https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/arm64/latest/amazon-cloudwatch-agent.rpm
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 
 rpm -U ./amazon-cloudwatch-agent.rpm
 
