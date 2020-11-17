@@ -14,11 +14,6 @@ exports[`schedule summary component renders correctly 1`] = `
     <table
       className="budget-table"
     >
-      <caption
-        className="ds-u-visibility--screen-reader"
-      >
-        Activity List Overivew
-      </caption>
       <thead>
         <tr
           className="budget-table--row__primary-header"
@@ -122,14 +117,6 @@ exports[`schedule summary component renders correctly 1`] = `
       className="budget-table"
       key="Number One"
     >
-      <caption
-        className="ds-u-visibility--screen-reader"
-      >
-        Activity 
-        1
-        : 
-        Number One
-      </caption>
       <thead>
         <tr
           className="budget-table--row__primary-header"
@@ -199,14 +186,6 @@ exports[`schedule summary component renders correctly 1`] = `
       className="budget-table"
       key="Number 💩"
     >
-      <caption
-        className="ds-u-visibility--screen-reader"
-      >
-        Activity 
-        2
-        : 
-        Number 💩
-      </caption>
       <thead>
         <tr
           className="budget-table--row__primary-header"
@@ -290,14 +269,6 @@ exports[`schedule summary component renders correctly 1`] = `
       className="budget-table"
       key="Number Three"
     >
-      <caption
-        className="ds-u-visibility--screen-reader"
-      >
-        Activity 
-        3
-        : 
-        Number Three
-      </caption>
       <thead>
         <tr
           className="budget-table--row__primary-header"

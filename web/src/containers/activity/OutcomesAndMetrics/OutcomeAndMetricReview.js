@@ -7,16 +7,20 @@ const OutcomeAndMetricReview = ({
   expand,
   onDeleteClick
 }) => (
-  <Review onDeleteClick={onDeleteClick} onEditClick={expand}>
+  <Review
+    onDeleteClick={onDeleteClick}
+    onEditClick={expand}
+    ariaLabel={outcome || 'Outcome not specified'}
+  >
     <p className="ds-u-margin-top--2">
-      <strong>Outcome:</strong> {outcome}
+      <strong>Outcome:</strong> {outcome || 'Outcome not specified'}
     </p>
     <p className="ds-u-margin-top--2">
       <ul className="ds-c-list--bare">
         <strong>Metrics:</strong>
         {metrics.map(({ key, metric }, index) => (
           <li key={key} className="ds-u-margin-bottom--2">
-            {index + 1}. {metric}
+            {index + 1}. {metric || 'Metric not specified'}
           </li>
         ))}
       </ul>

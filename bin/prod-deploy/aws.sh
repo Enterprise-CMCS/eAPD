@@ -156,7 +156,9 @@ function addEcosystemToUserData() {
     }]
   };" | base64 -w 0`
 
-  sed -i'.backup' -e "s/__ECOSYSTEM__/`echo $ECOSYSTEM`/g" aws.user-data.sh
+  sed -i'.backup' -e "s|__ECOSYSTEM__|`echo $ECOSYSTEM`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__ENVIRONMENT__|`echo $ENVIRONMENT`|g" aws.user-data.sh
 
   rm aws.user-data.sh.backup
 }
@@ -199,6 +201,7 @@ function createNewInstance() {
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT}]" \
+    --key-name eapd_bbrooks \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
 }
