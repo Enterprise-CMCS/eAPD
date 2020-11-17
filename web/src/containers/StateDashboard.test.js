@@ -29,7 +29,7 @@ describe('<StateDashboard />', () => {
     props = {
       apds: [],
       fetching: false,
-      createApd: jest.fn(() => console.log('createAPD')),
+      createApd: jest.fn(),
       deleteApd: jest.fn(),
       selectApd: jest.fn(),
       route: '/apd'
@@ -37,7 +37,16 @@ describe('<StateDashboard />', () => {
   });
   describe('pending state', () => {
     beforeEach(() => {
-      renderUtils = renderWithConnection(<StateDashboard {...props} pending />);
+      renderUtils = renderWithConnection(<StateDashboard {...props} />, {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              affiliations: [{ state_id: 'mo', status: 'requested' }]
+            }
+          }
+        }
+      });
     });
 
     it('should display introduction, but not instruction', () => {
@@ -78,7 +87,8 @@ describe('<StateDashboard />', () => {
           initialState: {
             user: {
               data: {
-                state: 'MO'
+                state: { id: 'mo' },
+                affiliations: [{ state_id: 'mo', status: 'approved' }]
               }
             }
           }
@@ -127,7 +137,8 @@ describe('<StateDashboard />', () => {
           initialState: {
             user: {
               data: {
-                state: 'MO'
+                state: { id: 'mo' },
+                affiliations: [{ state_id: 'mo', status: 'approved' }]
               }
             },
             apd: {
