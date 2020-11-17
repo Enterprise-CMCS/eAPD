@@ -65,10 +65,7 @@ export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
-export const successAccessToState = stateId => ({
-  type: STATE_ACCESS_SUCCESS,
-  data: stateId
-});
+export const successAccessToState = () => ({ type: STATE_ACCESS_SUCCESS });
 export const completeAccessToState = () => ({ type: STATE_ACCESS_COMPLETE });
 
 const loadData = activities => dispatch => {
@@ -203,7 +200,8 @@ export const createAccessRequest = states => dispatch => {
     axios
       .post(`/states/${stateId}/affiliations`)
       .then(() => {
-        dispatch(successAccessToState(stateId));
+        dispatch(successAccessToState());
+        dispatch(getCurrentUser());
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';

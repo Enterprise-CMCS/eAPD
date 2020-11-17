@@ -9,6 +9,8 @@ import Instruction from '../components/Instruction';
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
+import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
+import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 
 const Loading = ({ children }) => (
@@ -40,7 +42,7 @@ const StateDashboard = (
     route,
     selectApd: select,
     state,
-    pending
+    stateStatus
   },
   { global = window } = {}
 ) => {
@@ -88,12 +90,14 @@ const StateDashboard = (
             {t('stateDashboard.title', { state: state ? state.name : '' })}
           </h1>
           <Instruction source="stateDashboard.introduction" />
-          {!pending && <Instruction source="stateDashboard.instruction" />}
+          {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
+            <Instruction source="stateDashboard.instruction" />
+          )}
           <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
             <h2 className="ds-h2 ds-u-display--inline-block">
               {state ? state.name : ''} APDs
             </h2>
-            {!pending && (
+            {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
               <Button
                 variation="primary"
                 className="ds-u-float--right"
@@ -108,57 +112,62 @@ const StateDashboard = (
           </div>
         </div>
       </div>
-      {pending ? <PendingApproval /> : null}
+      {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
+        <PendingApproval />
+      ) : null}
       {fetching ? <Loading>Loading APDs</Loading> : null}
-      {!fetching && !pending && apds.length === 0 ? (
+      {!fetching &&
+      stateStatus === STATE_AFFILIATION_STATUSES.APPROVED &&
+      apds.length === 0 ? (
         <div className="ds-l-row">
           <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2 ds-u-padding-bottom--5 ds-u-color--muted">
             {t('stateDashboard.none')}
           </div>
         </div>
       ) : null}
-      {apds.map(apd => (
-        <div key={apd.id} className="ds-l-row">
-          <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
-            <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
-              <div className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2">
-                <File size="lg" color="#046b99" />
-              </div>
-              <div className="ds-u-display--inline-block">
-                <h3 className="ds-u-margin-y--0">
-                  <a href="#!" onClick={open(apd.id)}>
+      {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED &&
+        apds.map(apd => (
+          <div key={apd.id} className="ds-l-row">
+            <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
+              <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
+                <div className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2">
+                  <File size="lg" color="#046b99" />
+                </div>
+                <div className="ds-u-display--inline-block">
+                  <h3 className="ds-u-margin-y--0">
+                    <a href="#!" onClick={open(apd.id)}>
+                      <span className="ds-u-visibility--screen-reader">
+                        Edit APD:{' '}
+                      </span>
+                      {apd.name}
+                    </a>
+                  </h3>
+                  <ul className="ds-c-list--bare">
+                    <li>
+                      <strong>Last edited:</strong> {apd.updated}
+                    </li>
+                    <li>
+                      <strong>Created:</strong> {apd.created}
+                    </li>
+                  </ul>
+                </div>
+                <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
+                  <Button
+                    variation="transparent"
+                    size="small"
+                    onClick={delApd(apd)}
+                  >
+                    Delete{' '}
                     <span className="ds-u-visibility--screen-reader">
-                      Edit APD:{' '}
+                      {' '}
+                      this APD
                     </span>
-                    {apd.name}
-                  </a>
-                </h3>
-                <ul className="ds-c-list--bare">
-                  <li>
-                    <strong>Last edited:</strong> {apd.updated}
-                  </li>
-                  <li>
-                    <strong>Created:</strong> {apd.created}
-                  </li>
-                </ul>
-              </div>
-              <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
-                <Button
-                  variation="transparent"
-                  size="small"
-                  onClick={delApd(apd)}
-                >
-                  Delete{' '}
-                  <span className="ds-u-visibility--screen-reader">
-                    {' '}
-                    this APD
-                  </span>
-                </Button>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </main>
   );
 };
@@ -171,19 +180,20 @@ StateDashboard.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  pending: PropType.bool
+  stateStatus: PropType.string.isRequired
 };
 
 StateDashboard.defaultProps = {
   route: '/apd',
-  state: null,
-  pending: true
+  state: null
 };
 
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching,
-  state: state.user.data.state || null
+  state: state.user.data.state || null,
+  stateStatus:
+    getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
 });
 
 const mapDispatchToProps = {

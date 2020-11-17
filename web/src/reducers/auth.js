@@ -165,12 +165,7 @@ const auth = (state = initialState, action) => {
         ...state,
         requestAccess: false,
         requestAccessSuccess: true,
-        error: '',
-        user: {
-          ...state.user,
-          states: [action.data],
-          state: action.data
-        }
+        error: ''
       };
     case STATE_ACCESS_COMPLETE:
       return {
