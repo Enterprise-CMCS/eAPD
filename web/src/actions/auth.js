@@ -178,7 +178,7 @@ export const loginOtp = otp => async dispatch => {
   dispatch(startSecondStage());
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
-    verifyMFA({ transaction, otp })
+    return verifyMFA({ transaction, otp })
       .then(async ({ sessionToken }) => {
         await setTokens(sessionToken);
         return dispatch(getCurrentUser());
