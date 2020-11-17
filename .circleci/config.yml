@@ -367,7 +367,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${OKTA_DOMAIN}" npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -601,10 +601,10 @@ jobs:
                 --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
                 --BRANCH "$CIRCLE_BRANCH" \
                 --PR_NUM "$PRNUM" \
-                --OKTA_DOMAIN "$OKTA_DOMAIN" \
-                --OKTA_SERVER_ID "$OKTA_SERVER_ID" \
-                --OKTA_CLIENT_ID "$OKTA_CLIENT_ID" \
-                --OKTA_API_KEY "$OKTA_API_KEY"
+                --OKTA_DOMAIN "$PREVIEW_OKTA_DOMAIN" \
+                --OKTA_SERVER_ID "$PREVIEW_OKTA_SERVER_ID" \
+                --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
+                --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
