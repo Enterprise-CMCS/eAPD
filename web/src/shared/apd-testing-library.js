@@ -15,7 +15,6 @@ import reducer from '../reducers';
  *   initialState - the initial state of the redux store, defaults to empty
  *   enhancer - any middleware to apply to the redux store, defaults to promiseMiddleware and thunk
  *   store - the redux store, defaults to a store with empty state and promiseMiddleware and thunk
- *   initialEntries - the initial entries in the router history, defaults to root
  *   history - the route history, defaults to a history with only a root entry
  *   options - other options to pass onto the render function
  * }
@@ -53,7 +52,33 @@ const renderWithConnection = (ui, renderOptions = {}) => {
   };
 };
 
+/**
+ * Use this render method instead of the plain render if you are testing a component that uses a router.
+ * @param ui - the UI component to render
+ * @param renderOptions - {
+ *   history - the route history, defaults to a history with only a root entry
+ *   options - other options to pass onto the render function
+ * }
+ * @returns an option with the rendered container, the history, and related react-testing-library functions
+ */
+const renderWithRouter = (ui, renderOptions = {}) => {
+  const { history = createBrowserHistory(), ...options } = renderOptions;
+  const wrappedNode = rtlRender(
+    <ConnectedRouter history={history}>{ui}</ConnectedRouter>,
+    options
+  );
+  return {
+    ...wrappedNode,
+    rerender: (updatedUi, updatedOptions) =>
+      rtlRender(
+        <ConnectedRouter history={history}>{updatedUi}</ConnectedRouter>,
+        { container: wrappedNode.container, ...updatedOptions }
+      ),
+    history
+  };
+};
+
 // Re-export all of the react-testing-library functions,
 // so that you don't have to import both libraries
 export * from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
-export { renderWithConnection };
+export { renderWithConnection, renderWithRouter };

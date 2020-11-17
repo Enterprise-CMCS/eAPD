@@ -9,7 +9,7 @@ const formSubmitNoop = e => e.preventDefault();
 class LoginMFAEnrollPhoneNumber extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       phone: ''
     };
@@ -24,7 +24,7 @@ class LoginMFAEnrollPhoneNumber extends Component {
 
     const { handlePhoneSubmit } = this.props;
     const { phone } = this.state;
-    
+
     handlePhoneSubmit(phone);
   };
 
@@ -73,9 +73,7 @@ LoginMFAEnrollPhoneNumber.propTypes = {
   handlePhoneSubmit: PropTypes.func.isRequired
 };
 
-LoginMFAEnrollPhoneNumber.defaultProps = {
-
-};
+LoginMFAEnrollPhoneNumber.defaultProps = {};
 
 export default withRouter(LoginMFAEnrollPhoneNumber);
 

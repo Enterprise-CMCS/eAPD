@@ -16,8 +16,7 @@ tap.test('jwtMiddleware', async t => {
 
   const user = { name: 'dude' };
   const payload = {
-    uid: '1234',
-    hasLoggedIn: true
+    uid: '1234'
   };
 
   t.afterEach(async () => {

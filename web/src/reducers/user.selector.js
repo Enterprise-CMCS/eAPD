@@ -11,3 +11,17 @@ export const getUserStateOrTerritory = ({
     data: { state }
   }
 }) => state;
+
+export const getUserStateOrTerritoryStatus = ({
+  user: {
+    data: {
+      state: { id },
+      affiliations
+    }
+  }
+}) => {
+  const { status } = affiliations.find(
+    affiliation => affiliation.state_id === id
+  );
+  return status;
+};

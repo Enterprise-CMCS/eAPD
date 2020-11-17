@@ -10,7 +10,6 @@ const { getStateById: actualGetStateById } = require('./states');
 const sanitizeUser = user => ({
   activities: user.activities,
   affiliations: user.affiliations,
-  hasLoggedIn: user.hasLoggedIn,
   id: user.id,
   name: user.displayName,
   permissions: user.permissions,
@@ -19,7 +18,7 @@ const sanitizeUser = user => ({
   roles: user.auth_roles,
   state: user.state,
   states: user.states,
-  username: user.login,
+  username: user.login
 });
 
 const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
@@ -27,15 +26,18 @@ const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
     .select('*')
     .from('auth_affiliations')
     .where({ user_id: id });
-}
+};
 
-const populateUser = async (user, {
-  getUserPermissionsForStates = actualGetUserPermissionsForStates,
-  getUserAffiliatedStates = actualGetUserAffiliatedStates,
-  getAffiliationsByUserId = actualGetAffiliationsByUserId,
-  getStateById = actualGetStateById,
-  getRoles = actualGetRoles
-} = {}) => {
+const populateUser = async (
+  user,
+  {
+    getUserPermissionsForStates = actualGetUserPermissionsForStates,
+    getUserAffiliatedStates = actualGetUserAffiliatedStates,
+    getAffiliationsByUserId = actualGetAffiliationsByUserId,
+    getStateById = actualGetStateById,
+    getRoles = actualGetRoles
+  } = {}
+) => {
   if (user) {
     const populatedUser = user;
     populatedUser.permissions = await getUserPermissionsForStates(user.id);
@@ -49,7 +51,10 @@ const populateUser = async (user, {
     const roles = await getRoles();
     const role = affiliation && roles.find(r => r.id === affiliation.role_id);
 
-    populatedUser.state = affiliation && affiliation.state_id && await getStateById(affiliation.state_id);
+    populatedUser.state =
+      affiliation &&
+      affiliation.state_id &&
+      (await getStateById(affiliation.state_id));
     populatedUser.role = role && role.name;
     populatedUser.activities = (role && role.activities) || [];
 
