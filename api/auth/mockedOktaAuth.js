@@ -7,7 +7,7 @@ const noPermissions = {
 const allPermissions = {
   status: 'ACTIVE',
   id: 'all-permissions',
-  profile: { displayName: 'All Permissions'}
+  profile: { displayName: 'All Permissions' }
 };
 
 const allPermissionsNoState = {
@@ -25,7 +25,12 @@ const allPermissionsAndState = {
 const mockOktaClient = {
   listUsers: () => {
     return new Promise(resolve => {
-      resolve([noPermissions, allPermissions, allPermissionsNoState, allPermissionsAndState]);
+      resolve([
+        noPermissions,
+        allPermissions,
+        allPermissionsNoState,
+        allPermissionsAndState
+      ]);
     });
   },
   getUser: id => {
@@ -88,8 +93,7 @@ const mockCallOktaEndpoint = async endpoint => {
       const affiliations = getAffiliations(userId);
       return new Promise(resolve => {
         resolve({
-          affiliations,
-          hasLoggedIn: true
+          affiliations
         });
       });
     }
@@ -104,8 +108,7 @@ const mockVerifyJWT = token => {
     return new Promise(resolve => {
       resolve({
         sub: 'no-permissions@email.com',
-        uid: 'no-permissions',
-        hasLoggedIn: true,
+        uid: 'no-permissions'
       });
     });
   }
@@ -113,8 +116,7 @@ const mockVerifyJWT = token => {
     return new Promise(resolve => {
       resolve({
         sub: 'all-permissions@email.com',
-        uid: 'all-permissions',
-        hasLoggedIn: true,
+        uid: 'all-permissions'
       });
     });
   }
@@ -123,8 +125,7 @@ const mockVerifyJWT = token => {
     return new Promise(resolve => {
       resolve({
         sub: 'npno@email.com',
-        uid,
-        hasLoggedIn: true,
+        uid
       });
     });
   }
@@ -133,8 +134,7 @@ const mockVerifyJWT = token => {
     return new Promise(resolve => {
       resolve({
         sub: 'apno@email.com',
-        uid,
-        hasLoggedIn: true,
+        uid
       });
     });
   }
@@ -143,8 +143,7 @@ const mockVerifyJWT = token => {
     return new Promise(resolve => {
       resolve({
         sub: 'apas@email.com',
-        uid,
-        hasLoggedIn: true,
+        uid
       });
     });
   }

@@ -8,7 +8,7 @@ const {
   getAllUsers,
   getUserByID,
   populateUser,
-  sanitizeUser,
+  sanitizeUser
 } = require('./users');
 
 tap.test('database wrappers / users', async usersTests => {
@@ -27,7 +27,6 @@ tap.test('database wrappers / users', async usersTests => {
     roles: 'user auth role',
     username: 'email address',
     state: 'user state',
-    hasLoggedIn: 'has logged in',
     permissions: 'permissions',
     role: 'role',
     states: []
@@ -45,7 +44,6 @@ tap.test('database wrappers / users', async usersTests => {
     password: 'oh no password',
     position: 'user position',
     state: 'user state',
-    hasLoggedIn: 'has logged in',
     permissions: 'permissions',
     role: 'role',
     states: []
@@ -76,7 +74,6 @@ tap.test('database wrappers / users', async usersTests => {
       password: 'oh no password',
       position: 'user position',
       state: 'user state',
-      hasLoggedIn: 'has logged in',
       permissions: 'permissions',
       role: 'role',
       states: []
@@ -133,12 +130,10 @@ tap.test('database wrappers / users', async usersTests => {
       const user = await getUserByID('user id', {
         client,
         populate,
-        additionalValues: { hasLoggedIn: true }
+        additionalValues: {}
       });
 
-      test.ok(
-        populate.calledWith({ id: 'user id', some: 'user', hasLoggedIn: true })
-      );
+      test.ok(populate.calledWith({ id: 'user id', some: 'user' }));
       test.same(user, sanitizedUser);
     });
 
@@ -169,7 +164,6 @@ tap.test('database wrappers / users', async usersTests => {
       // test.notOk(populate.calledWith({ id: 'user id', some: 'user' }));
       test.equal(populate.callCount, 0);
       test.same(user, null);
-
     });
 
     getUsersByIDTests.test('with inactive user', async test => {
@@ -234,7 +228,6 @@ tap.test('database wrappers / users', async usersTests => {
       //             groups: ['user role'],
       //             displayName: 'this just goes through',
       //             affiliations: ['state id'],
-      //             hasLoggedIn: true
       //           },
       //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
       //         );
@@ -244,7 +237,6 @@ tap.test('database wrappers / users', async usersTests => {
       //           auth_roles: ['user role'],
       //           displayName: 'this just goes through',
       //           state: { id: 'state id', name: 'this is a state!' },
-      //           hasLoggedIn: true
       //         });
       //       }
       //     );
@@ -259,7 +251,6 @@ tap.test('database wrappers / users', async usersTests => {
       //             activities: 'these are overwritten',
       //             displayName: 'this just goes through',
       //             affiliations: ['state id'],
-      //             hasLoggedIn: true
       //           },
       //           { db, getGroups, getApplicationProfile }
       //         );
@@ -270,7 +261,6 @@ tap.test('database wrappers / users', async usersTests => {
       //           auth_roles: ['user role'],
       //           displayName: 'this just goes through',
       //           state: { id: 'state id', name: 'this is a state!' },
-      //           hasLoggedIn: true
       //         });
       //       }
       //     );
@@ -285,7 +275,6 @@ tap.test('database wrappers / users', async usersTests => {
       //             activities: 'these are overwritten',
       //             displayName: 'this just goes through',
       //             affiliations: ['state id'],
-      //             hasLoggedIn: true
       //           },
       //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
       //         );
@@ -296,7 +285,6 @@ tap.test('database wrappers / users', async usersTests => {
       //           auth_roles: [],
       //           displayName: 'this just goes through',
       //           state: { id: 'state id', name: 'this is a state!' },
-      //           hasLoggedIn: true
       //         });
       //       }
       //     );
@@ -306,7 +294,7 @@ tap.test('database wrappers / users', async usersTests => {
       //       async test => {
       //         getApplicationProfile
       //           .withArgs('user id')
-      //           .resolves({ affiliations: ['state id'], hasLoggedIn: true });
+      //           .resolves({ affiliations: ['state id'] });
       //         const user = await populateUser(
       //           {
       //             id: 'user id',
@@ -322,8 +310,7 @@ tap.test('database wrappers / users', async usersTests => {
       //           activities: ['activity 1', 'activity 2'],
       //           auth_roles: ['user role'],
       //           displayName: 'this just goes through',
-      //           state: { id: 'state id', name: 'this is a state!' },
-      //           hasLoggedIn: true
+      //           state: { id: 'state id', name: 'this is a state!' }
       //         });
       //       }
       //     );
@@ -333,35 +320,7 @@ tap.test('database wrappers / users', async usersTests => {
       //       async test => {
       //         getApplicationProfile
       //           .withArgs('user id')
-      //           .resolves({ affiliations: [], hasLoggedIn: true });
-      //         const user = await populateUser(
-      //           {
-      //             id: 'user id',
-      //             activities: 'these are overwritten',
-      //             groups: ['user role'],
-      //             displayName: 'this just goes through',
-      //             hasLoggedIn: true
-      //           },
-      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
-      //         );
-
-      //         test.same(user, {
-      //           id: 'user id',
-      //           activities: ['activity 1', 'activity 2'],
-      //           auth_roles: ['user role'],
-      //           displayName: 'this just goes through',
-      //           state: {},
-      //           hasLoggedIn: true
-      //         });
-      //       }
-      //     );
-
-      //     populateUserTestsWithValues.test(
-      //       'pass in role and get state and get hasLoggedIn',
-      //       async test => {
-      //         getApplicationProfile
-      //           .withArgs('user id')
-      //           .resolves({ affiliations: [], hasLoggedIn: true });
+      //           .resolves({ affiliations: [] });
       //         const user = await populateUser(
       //           {
       //             id: 'user id',
@@ -377,8 +336,33 @@ tap.test('database wrappers / users', async usersTests => {
       //           activities: ['activity 1', 'activity 2'],
       //           auth_roles: ['user role'],
       //           displayName: 'this just goes through',
-      //           state: {},
-      //           hasLoggedIn: true
+      //           state: {}
+      //         });
+      //       }
+      //     );
+
+      //     populateUserTestsWithValues.test(
+      //       'pass in role and get state',
+      //       async test => {
+      //         getApplicationProfile
+      //           .withArgs('user id')
+      //           .resolves({ affiliations: [] });
+      //         const user = await populateUser(
+      //           {
+      //             id: 'user id',
+      //             activities: 'these are overwritten',
+      //             groups: ['user role'],
+      //             displayName: 'this just goes through'
+      //           },
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //         );
+
+      //         test.same(user, {
+      //           id: 'user id',
+      //           activities: ['activity 1', 'activity 2'],
+      //           auth_roles: ['user role'],
+      //           displayName: 'this just goes through',
+      //           state: {}
       //         });
       //       }
       //     );
@@ -398,8 +382,7 @@ tap.test('database wrappers / users', async usersTests => {
       //             activities: 'these are overwritten',
       //             groups: ['user role'],
       //             displayName: 'this just goes through',
-      //             affiliations: ['state id'],
-      //             hasLoggedIn: true
+      //             affiliations: ['state id']
       //           },
       //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
       //         );
@@ -407,8 +390,7 @@ tap.test('database wrappers / users', async usersTests => {
       //         test.same(user, {
       //           activities: [],
       //           displayName: 'this just goes through',
-      //           state: { id: 'state id', name: 'this is a state!' },
-      //           hasLoggedIn: true
+      //           state: { id: 'state id', name: 'this is a state!' }
       //         });
       //       }
       //     );
@@ -427,7 +409,6 @@ tap.test('database wrappers / users', async usersTests => {
       //       activities: [],
       //       email: 'email',
       //       state: {},
-      //       hasLoggedIn: true
       //     }, user);
       //   }
       // );
@@ -449,7 +430,6 @@ tap.test('database wrappers / users', async usersTests => {
         position: 'center square',
         groups: 'the zany one',
         state: 'this is where I live',
-        hasLoggedIn: 'has logged in',
         username: 'this does not survive the transition either',
         permissions: 'permissions',
         role: 'role',
@@ -463,7 +443,6 @@ tap.test('database wrappers / users', async usersTests => {
         phone: 'call me maybe',
         roles: 'my permissions',
         state: 'this is where I live',
-        hasLoggedIn: 'has logged in',
         username: 'purple_unicorn@compuserve.net',
         permissions: 'permissions',
         role: 'role',
