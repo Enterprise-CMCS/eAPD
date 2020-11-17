@@ -2,6 +2,7 @@ import React from 'react';
 import StateDashboard from './StateDashboard';
 import { renderWithConnection } from '../shared/apd-testing-library';
 import mockAxios from '../util/api';
+import { STATE_AFFILIATION_STATUSES } from '../constants';
 
 jest.mock('../util/api', () => ({
   get: jest.fn(),
@@ -42,7 +43,9 @@ describe('<StateDashboard />', () => {
           user: {
             data: {
               state: { id: 'mo' },
-              affiliations: [{ state_id: 'mo', status: 'requested' }]
+              affiliations: [
+                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.REQUESTED }
+              ]
             }
           }
         }
@@ -78,6 +81,52 @@ describe('<StateDashboard />', () => {
     });
   });
 
+  describe('denied state', () => {
+    beforeEach(() => {
+      renderUtils = renderWithConnection(<StateDashboard {...props} />, {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              affiliations: [
+                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.DENIED }
+              ]
+            }
+          }
+        }
+      });
+    });
+
+    it('should display the denied message', () => {
+      const { getByAltText, getByText } = renderUtils;
+      expect(getByAltText(/Puzzle Piece Icon/i)).toBeTruthy();
+      expect(getByText(/Approval Has Been Denied/i)).toBeTruthy();
+    });
+  });
+
+  describe('revoked state', () => {
+    beforeEach(() => {
+      renderUtils = renderWithConnection(<StateDashboard {...props} />, {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              affiliations: [
+                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.REVOKED }
+              ]
+            }
+          }
+        }
+      });
+    });
+
+    it('should display the revoked message', () => {
+      const { getByAltText, getByText } = renderUtils;
+      expect(getByAltText(/Puzzle Piece Icon/i)).toBeTruthy();
+      expect(getByText(/Approval Permissions Revoked/i)).toBeTruthy();
+    });
+  });
+
   describe('default state, no apds', () => {
     beforeEach(() => {
       mockAxios.get.mockImplementation(() => Promise.resolve({ data: [] }));
@@ -88,7 +137,12 @@ describe('<StateDashboard />', () => {
             user: {
               data: {
                 state: { id: 'mo' },
-                affiliations: [{ state_id: 'mo', status: 'approved' }]
+                affiliations: [
+                  {
+                    state_id: 'mo',
+                    status: STATE_AFFILIATION_STATUSES.APPROVED
+                  }
+                ]
               }
             }
           }
@@ -138,7 +192,12 @@ describe('<StateDashboard />', () => {
             user: {
               data: {
                 state: { id: 'mo' },
-                affiliations: [{ state_id: 'mo', status: 'approved' }]
+                affiliations: [
+                  {
+                    state_id: 'mo',
+                    status: STATE_AFFILIATION_STATUSES.APPROVED
+                  }
+                ]
               }
             },
             apd: {
