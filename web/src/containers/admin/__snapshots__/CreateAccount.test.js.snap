@@ -295,6 +295,8 @@ exports[`<CreateAccount /> renders correctly 1`] = `
           "",
         ]
       }
+      customErrorMessage=""
+      errorMessage=""
       onChange={[Function]}
       showMeter={true}
       title="Password"

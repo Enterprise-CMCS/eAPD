@@ -1,10 +1,11 @@
 const pkg = require('../../package.json');
 
-const auth = require('./auth');
+const affiliations = require('../affiliations/openAPI');
 const apds = require('../apds/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
 const me = require('../me/openAPI');
+const states = require('../states/openAPI');
 const users = require('../users/openAPI');
 const { arrayOf } = require('./helpers').schema;
 
@@ -16,11 +17,12 @@ module.exports = {
     version: pkg.version
   },
   paths: {
+    ...affiliations,
     ...apds,
-    ...auth,
     ...authActivities,
     ...authRoles,
     ...me,
+    ...states,
     ...users,
     '/open-api': {
       get: {

@@ -14,7 +14,7 @@ module.exports = (app, { deleteAPDByID = da } = {}) => {
         await deleteAPDByID(req.meta.apd.id);
         res.status(204).end();
       } catch (e) {
-        logger.error(req, e);
+        logger.error({ id: req.id, message: e });
         res.status(500).end();
       }
     }

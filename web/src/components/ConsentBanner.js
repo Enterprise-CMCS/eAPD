@@ -40,9 +40,9 @@ const ConsentBanner = ({ onAgree }) => {
             <div className="ds-l-col--1 ds-u-margin-left--auto" />
             <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
               <p>
-                This is a U.S. government service. Your use indicates your consent
-                to monitoring, recording, and no expectation of privacy. Misuse is
-                subject to criminal and civil penalties.
+                This is a U.S. government service. Your use indicates your
+                consent to monitoring, recording, and no expectation of privacy.
+                Misuse is subject to criminal and civil penalties.
                 {showDetails ? null : (
                   <Button
                     size="small"
@@ -57,9 +57,9 @@ const ConsentBanner = ({ onAgree }) => {
                 <Fragment>
                   <p>
                     This warning banner provides privacy and security notices
-                    consistent with applicable federal laws, directives, and other
-                    federal guidance for accessing this Government system, which
-                    includes (1) this computer network, (2) all computers
+                    consistent with applicable federal laws, directives, and
+                    other federal guidance for accessing this Government system,
+                    which includes (1) this computer network, (2) all computers
                     connected to this network, and (3) all devices and storage
                     media attached to this network or to a computer on this
                     network.
@@ -68,9 +68,9 @@ const ConsentBanner = ({ onAgree }) => {
                     This system is provided for Government authorized use only.
                   </p>
                   <p>
-                    Unauthorized or improper use of this system is prohibited and
-                    may result in disciplinary action and/or civil and criminal
-                    penalties.
+                    Unauthorized or improper use of this system is prohibited
+                    and may result in disciplinary action and/or civil and
+                    criminal penalties.
                   </p>
                   <p>
                     Personal use of social media and networking sites on this
@@ -84,20 +84,21 @@ const ConsentBanner = ({ onAgree }) => {
                   <ul>
                     <li>
                       The Government may monitor, record, and audit your system
-                      usage, including usage of personal devices and email systems
-                      for official duties or to conduct HHS business. Therefore,
-                      you have no reasonable expectation of privacy regarding any
-                      communication or data transiting or stored on this system.
-                      At any time, and for any lawful Government purpose, the
-                      government may monitor, intercept, and search and seize any
-                      communication or data transiting or stored on this system.
+                      usage, including usage of personal devices and email
+                      systems for official duties or to conduct HHS business.
+                      Therefore, you have no reasonable expectation of privacy
+                      regarding any communication or data transiting or stored
+                      on this system. At any time, and for any lawful Government
+                      purpose, the government may monitor, intercept, and search
+                      and seize any communication or data transiting or stored
+                      on this system.
                     </li>
                     <li>
                       Any communication or data transiting or stored on this
                       system may be disclosed or used for any lawful Government
                       purpose. To continue, you must accept the terms and
-                      conditions. If you decline, your login will automatically be
-                      cancelled.
+                      conditions. If you decline, your login will automatically
+                      be cancelled.
                     </li>
                   </ul>
                 </Fragment>
