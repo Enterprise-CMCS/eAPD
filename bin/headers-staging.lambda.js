@@ -1,11 +1,12 @@
-const api = "https://staging-eapd-api.cms.gov";
+const api = 'https://staging-eapd-api.cms.gov';
+const okta = 'https://impl.idp.idm.cms.gov';
 
 const securityHeaders = {
-  "Content-Security-Policy": `default-src 'self' 'unsafe-inline'; connect-src ${api}; frame-ancestors none; img-src 'self' data: ${api} https://www.google-analytics.com; object-src none; script-src 'self' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com;`,
-  "Strict-Transport-Security": "max-age=63072000",
-  "X-Frame-Options": "deny",
-  "X-XSS-Protection": "1; mode=block",
-  "X-Content-Type-Options": "nosniff"
+  'Content-Security-Policy': `default-src 'self' 'unsafe-inline'; connect-src ${api} ${okta}; frame-ancestors none; img-src 'self' data: ${api} https://www.google-analytics.com; object-src none; script-src 'self' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com;`,
+  'Strict-Transport-Security': 'max-age=63072000',
+  'X-Frame-Options': 'deny',
+  'X-XSS-Protection': '1; mode=block',
+  'X-Content-Type-Options': 'nosniff',
 };
 
 exports.handler = async (event, context, callback) => {
