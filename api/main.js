@@ -36,7 +36,7 @@ if (process.env.PROXY_TRUST !== 'false') {
 // This endpoint doesn't do anything, but lets us verify that the server is
 // online without triggering any other processing - e.g., no authentication,
 // no cookie/token processing, etc.
-logger.silly('setting up heartbeat endpoint');
+logger.debug('setting up heartbeat endpoint');
 server.get('/heartbeat', (_, res) => {
   res.status(204).end();
 });
@@ -77,7 +77,7 @@ server.use((req, res, next) => {
   return next();
 });
 
-logger.silly('setting global middleware');
+logger.debug('setting global middleware');
 server.use(requestLoggerMiddleware);
 server.use(compression());
 server.use(express.urlencoded({ extended: true }));
@@ -86,10 +86,10 @@ server.use(bodyParser.json({ limit: '5mb' }));
 
 // Registers Passport, related handlers, and
 // login/logout endpoints
-logger.silly('setting up authentication');
+logger.debug('setting up authentication');
 server.use(jsonWebTokenMiddleware);
 
-logger.silly('setting up routes');
+logger.debug('setting up routes');
 routes(server);
 
 // Requests for undefined resources result in a 404 status
@@ -97,7 +97,15 @@ server.all('*', (_, res) => {
   res.status(404).end();
 });
 
-logger.silly('starting the server');
+// Handle errors
+// https://stackoverflow.com/a/33526438/2675670
+server.use((err, req, res, next) => () => {
+  logger.error({ id: req.id, message: err });
+  if (res.headersSent) return next(err);
+  res.status(err.status || 500).end();
+});
+
+logger.debug('starting the server');
 server.listen(process.env.PORT, () => {
   logger.verbose(`server listening on :${process.env.PORT}`);
 });

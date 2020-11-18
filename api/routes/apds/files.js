@@ -18,7 +18,7 @@ module.exports = (
     putFile = put
   } = {}
 ) => {
-  logger.silly('setting up GET /apds/:id/files/:fileID route');
+  logger.debug('setting up GET /apds/:id/files/:fileID route');
 
   app.get(
     '/apds/:id/files/:fileID',
@@ -40,7 +40,7 @@ module.exports = (
     }
   );
 
-  logger.silly('setting up POST /apds/:id/files route');
+  logger.debug('setting up POST /apds/:id/files route');
 
   // "Never add multer as a global middleware since a malicious user could
   // upload files to a route that you didn't anticipate."
@@ -51,29 +51,24 @@ module.exports = (
     userCanEditAPD(),
     multer().single('file'),
     async (req, res) => {
+      const metadata = req.body.metadata || null;
+      const size = req.file && req.file.size ? req.file.size : 0;
+
+      const fileID = await createNewFileForAPD(
+        req.file.buffer,
+        req.params.id,
+        metadata,
+        size
+      );
+
       try {
-        const metadata = req.body.metadata || null;
-        const size = req.file && req.file.size ? req.file.size : 0;
-
-        const fileID = await createNewFileForAPD(
-          req.file.buffer,
-          req.params.id,
-          metadata,
-          size
-        );
-
-        try {
-          await putFile(fileID, req.file.buffer);
-        } catch (e) {
-          await deleteFileByID(fileID);
-          throw e;
-        }
-
-        res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
+        await putFile(fileID, req.file.buffer);
       } catch (e) {
-        logger.error({ id: req.id, message: e });
-        res.status(500).end();
+        await deleteFileByID(fileID);
+        throw e;
       }
+
+      res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
     }
   );
 };
