@@ -452,7 +452,7 @@ jobs:
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
-              owasp/zap2docker-weekly \
+              owasp/zap2docker-stable \
               zap-api-scan.py \
               -c api-scan.conf \
               -t http://api-for-testing:8000/open-api \
