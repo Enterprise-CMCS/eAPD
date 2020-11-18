@@ -102,7 +102,7 @@ server.all('*', (_, res) => {
 server.use((err, req, res, next) => () => {
   logger.error({ id: req.id, message: err });
   if (res.headersSent) return next(err);
-  res.status(err.status || 500).end();
+  return res.status(err.status || 500).end();
 });
 
 logger.debug('starting the server');
