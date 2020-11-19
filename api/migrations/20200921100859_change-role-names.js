@@ -1,4 +1,8 @@
 exports.up = async knex => {
+  await knex.schema.table('users', table => {
+    table.dropForeign('auth_role');
+  });
+
   await knex('auth_roles')
     .where({ name: 'admin' })
     .update({ name: 'eAPD Admin', isActive: true });
@@ -48,4 +52,8 @@ exports.down = async knex => {
   await knex('auth_roles')
     .where({ name: 'eAPD State' })
     .update({ name: 'state' });
+
+  await knex.schema.table('users', table => {
+    table.foreign('auth_role').references('auth_roles.name');
+  });
 };
