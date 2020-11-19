@@ -12,6 +12,17 @@ export const getUserStateOrTerritory = ({
   }
 }) => state;
 
+export const getUserAffiliationForCurrentState = ({
+  data: {
+    state: { id },
+    affiliations
+  }
+}) => {
+  return affiliations.find(
+    affiliation => affiliation.state_id === id
+  );
+};
+
 export const getUserStateOrTerritoryStatus = ({
   user: {
     data: {
