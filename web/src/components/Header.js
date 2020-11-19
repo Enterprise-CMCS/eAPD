@@ -20,7 +20,9 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ariaExpanded: props.ariaExpanded
+      ariaExpanded: props.ariaExpanded,
+      // Todo: Wire this up to user model
+      isStateAdmin: true
     };
     this.node = React.createRef();
   }
@@ -101,6 +103,15 @@ class Header extends Component {
                           >
                             <Icon icon={faEdit} style={{ width: '14px' }} />
                             Manage account
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/state-admin"
+                            onClick={this.toggleDropdown}
+                            className="nav--dropdown__action"
+                          >
+                            State Admin Panel
                           </Link>
                         </li>
                         <li>
