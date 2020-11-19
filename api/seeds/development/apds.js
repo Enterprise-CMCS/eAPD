@@ -1093,7 +1093,7 @@ const apd = {
         address1: '100 Round Sq',
         address2: '',
         city: 'Cityville',
-        state: 'MO',
+        state: 'AK',
         zip: '12345'
       }
     },
@@ -1102,15 +1102,13 @@ const apd = {
 };
 
 const seed = async knex => {
-  const { state_id } = await knex('users').first('state_id'); // eslint-disable-line camelcase
-
   if (!validateApd(apd.document)) {
     logger.warn('apd document is not valid');
     logger.warn(validateApd.errors);
   }
 
   await knex('apds').insert({
-    state_id, // eslint-disable-line camelcase
+    state_id: 'ak', // eslint-disable-line camelcase
     ...apd
   });
 };

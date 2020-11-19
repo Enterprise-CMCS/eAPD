@@ -5,10 +5,26 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import ConsentBanner from '../components/ConsentBanner';
-import { login } from '../actions/auth';
-import CardForm from '../components/CardForm';
+import {
+  login,
+  loginOtp,
+  mfaConfig,
+  mfaActivate,
+  mfaAddPhone,
+  createAccessRequest,
+  completeAccessToState
+} from '../actions/auth';
+import { MFA_FACTOR_TYPES } from '../constants';
+import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
+import LoginMFA from './LoginMFA';
+import LoginLocked from '../components/LoginLocked';
+import LoginMFAEnroll from '../components/LoginMFAEnroll';
+import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
+import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
+import StateAccessRequest from './StateAccessRequest';
+import StateAccessRequestConfirmation from './StateAccessRequestConfirmation';
 
 const Login = ({
   authenticated,
@@ -16,7 +32,23 @@ const Login = ({
   fetching,
   hasEverLoggedOn,
   location,
-  login: action
+  otpStage,
+  factorsList,
+  mfaEnrollStartStage,
+  mfaEnrollAddPhoneStage,
+  mfaEnrollActivateStage,
+  mfaEnrollType,
+  verifyData,
+  isLocked,
+  requestAccess,
+  requestAccessSuccess,
+  login: action,
+  loginOtp: otpAction,
+  mfaConfig: mfaAction,
+  mfaAddPhone: mfaActionAddPhone,
+  mfaActivate: mfaActivation,
+  createAccessRequest: createAccessRequestAction,
+  completeAccessToState: completeAccessToStateAction
 }) => {
   const [showConsent, setShowConsent] = useState(true);
   const [username, setUsername] = useState('');
@@ -30,11 +62,65 @@ const Login = ({
     action(username, password);
   };
 
+  const handleFactorSelection = selected => {
+    if (
+      selected === MFA_FACTOR_TYPES.SMS ||
+      selected === MFA_FACTOR_TYPES.CALL
+    ) {
+      mfaActionAddPhone(selected);
+    } else {
+      mfaAction(selected);
+    }
+  };
+
+  const handleVerificationCode = code => {
+    mfaActivation(code);
+  };
+
+  const handlePhoneSubmit = userPhoneNumber => {
+    mfaAction(mfaEnrollType, userPhoneNumber);
+  };
+
   const hideConsent = () => {
     setShowConsent(false);
   };
 
   const { from } = location.state || { from: { pathname: '/' } };
+
+  let errorMessage = false;
+  if (isLocked) {
+    errorMessage = 'You are locked out';
+  } else if (otpStage && error === 'Authentication failed') {
+    errorMessage = 'The one-time password you’ve entered is incorrect.';
+  } else if (
+    error === 'Authentication failed' ||
+    error === 'Request failed with status code 401'
+  ) {
+    errorMessage =
+      'Please contact your State Administrator for steps to register an account.';
+  } else if (error) {
+    errorMessage = 'Sorry! Something went wrong. Please try again.';
+  }
+
+  if (requestAccess) {
+    return (
+      <StateAccessRequest
+        action={createAccessRequestAction}
+        errorMessage={errorMessage}
+        fetching={fetching}
+      />
+    );
+  }
+
+  if (requestAccessSuccess) {
+    return (
+      <StateAccessRequestConfirmation
+        action={completeAccessToStateAction}
+        errorMessage={errorMessage}
+        fetching={fetching}
+      />
+    );
+  }
 
   if (authenticated) {
     if (from.pathname !== '/logout') {
@@ -51,17 +137,75 @@ const Login = ({
     );
   }
 
-  let errorMessage = false;
-  if (error === 'Unauthorized') {
-    errorMessage = 'The email or password you’ve entered is incorrect.';
-  } else if (error === 'Unauthorized') {
+  if (isLocked) {
+    errorMessage = 'You are locked out';
+  } else if (otpStage && error === 'Authentication failed') {
+    errorMessage = 'The one-time password you’ve entered is incorrect.';
+  } else if (
+    error === 'Authentication failed' ||
+    error === 'Request failed with status code 401'
+  ) {
+    errorMessage =
+      'Please contact your State Administrator for steps to register an account.';
+  } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
+  }
+
+  if (isLocked) {
+    return <LoginLocked />;
+  }
+
+  if (mfaEnrollStartStage) {
+    return (
+      <LoginMFAEnroll
+        factors={factorsList}
+        handleSelection={handleFactorSelection}
+      />
+    );
+  }
+
+  if (mfaEnrollAddPhoneStage) {
+    return <LoginMFAEnrollPhoneNumber handlePhoneSubmit={handlePhoneSubmit} />;
+  }
+
+  if (mfaEnrollActivateStage) {
+    if (
+      mfaEnrollType === MFA_FACTOR_TYPES.GOOGLE ||
+      mfaEnrollType === MFA_FACTOR_TYPES.OKTA
+    ) {
+      return (
+        <LoginMFAVerifyAuthApp
+          verificationData={verifyData}
+          handleVerificationCode={handleVerificationCode}
+        />
+      );
+    }
+
+    return (
+      <LoginMFA
+        action={handleVerificationCode}
+        hasEverLoggedOn={false}
+        errorMessage={errorMessage}
+        fetching={fetching}
+      />
+    );
+  }
+
+  if (otpStage) {
+    return (
+      <LoginMFA
+        action={otpAction}
+        hasEverLoggedOn
+        errorMessage={errorMessage}
+        fetching={fetching}
+      />
+    );
   }
 
   return (
     <main id="start-main-content">
       <UpgradeBrowser />
-      <CardForm
+      <LoginForm
         title="Log in"
         legend="Log in"
         cancelable={false}
@@ -83,14 +227,21 @@ const Login = ({
       >
         <TextField
           id="username"
-          label="Email"
+          label="EUA ID"
           name="username"
-          ariaLabel="Enter the email associated with this account."
+          errorMessage={errorMessage === false ? null : ''}
+          ariaLabel="Enter your EUA ID."
           value={username}
           onChange={changeUsername}
         />
-        <Password title="Password" value={password} onChange={changePassword} />
-      </CardForm>
+        <Password
+          title="Password"
+          value={password}
+          onChange={changePassword}
+          errorMessage={errorMessage ? '' : null}
+          customErrorMessage={errorMessage ? 'Invalid Entry' : null}
+        />
+      </LoginForm>
     </main>
   );
 };
@@ -101,19 +252,70 @@ Login.propTypes = {
   fetching: PropTypes.bool.isRequired,
   hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
-  login: PropTypes.func.isRequired
+  otpStage: PropTypes.bool.isRequired,
+  factorsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  mfaEnrollType: PropTypes.string.isRequired,
+  mfaEnrollStartStage: PropTypes.bool.isRequired,
+  mfaEnrollAddPhoneStage: PropTypes.bool.isRequired,
+  mfaEnrollActivateStage: PropTypes.bool.isRequired,
+  verifyData: PropTypes.object.isRequired,
+  isLocked: PropTypes.bool.isRequired,
+  requestAccess: PropTypes.bool.isRequired,
+  requestAccessSuccess: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
+  loginOtp: PropTypes.func.isRequired,
+  mfaConfig: PropTypes.func.isRequired,
+  mfaAddPhone: PropTypes.func.isRequired,
+  mfaActivate: PropTypes.func.isRequired,
+  createAccessRequest: PropTypes.func.isRequired,
+  completeAccessToState: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { authenticated, error, fetching, hasEverLoggedOn }
+  auth: {
+    authenticated,
+    error,
+    fetching,
+    hasEverLoggedOn,
+    otpStage,
+    factorsList,
+    mfaEnrollType,
+    mfaEnrollStartStage,
+    mfaEnrollAddPhoneStage,
+    mfaEnrollActivateStage,
+    verifyData,
+    isLocked,
+    mfaType,
+    requestAccess,
+    requestAccessSuccess
+  }
 }) => ({
   authenticated,
   error,
   fetching,
-  hasEverLoggedOn
+  hasEverLoggedOn,
+  otpStage,
+  factorsList,
+  mfaEnrollType,
+  mfaEnrollStartStage,
+  mfaEnrollAddPhoneStage,
+  mfaEnrollActivateStage,
+  verifyData,
+  isLocked,
+  mfaType,
+  requestAccess,
+  requestAccessSuccess
 });
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = {
+  login,
+  loginOtp,
+  mfaConfig,
+  mfaActivate,
+  mfaAddPhone,
+  createAccessRequest,
+  completeAccessToState
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

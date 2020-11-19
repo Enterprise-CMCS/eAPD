@@ -74,7 +74,8 @@ describe('apd (application) component', () => {
       },
       user: {
         data: {
-          state: 'place'
+          state: 'place',
+          role: 'test role'
         }
       }
     };
@@ -83,7 +84,8 @@ describe('apd (application) component', () => {
       apdId: '123456789',
       apdSelected: true,
       isAdmin: false,
-      place: 'place'
+      place: 'place',
+      role: 'test role'
     });
 
     state.apd.data.id = null;
@@ -93,7 +95,8 @@ describe('apd (application) component', () => {
       apdId: null,
       apdSelected: false,
       isAdmin: false,
-      place: 'place'
+      place: 'place',
+      role: 'test role'
     });
   });
 

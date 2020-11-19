@@ -138,7 +138,11 @@ function addEcosystemToUserData() {
         PORT: '$API_PORT',
         DATABASE_URL: '$API_DATABASE_URL',
         SESSION_SECRET: '$API_SESSION_SECRET',
-        PROXY_TRUST: 'true'
+        PROXY_TRUST: 'true',
+        OKTA_DOMAIN: '$OKTA_DOMAIN',
+        OKTA_SERVER_ID: '$OKTA_SERVER_ID',
+        OKTA_CLIENT_ID: '$OKTA_CLIENT_ID',
+        OKTA_API_KEY: '$OKTA_API_KEY'
       },
     },{
       name: 'Database migration',

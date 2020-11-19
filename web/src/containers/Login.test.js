@@ -3,7 +3,15 @@ import React from 'react';
 import sinon from 'sinon';
 
 import { plain as Login, mapStateToProps, mapDispatchToProps } from './Login';
-import { login } from '../actions/auth';
+import {
+  login,
+  loginOtp,
+  mfaActivate,
+  mfaAddPhone,
+  mfaConfig,
+  completeAccessToState,
+  createAccessRequest
+} from '../actions/auth';
 
 describe('login component', () => {
   test('renders correctly if logged in', () => {
@@ -15,6 +23,8 @@ describe('login component', () => {
         hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
     expect(component).toMatchSnapshot();
@@ -29,6 +39,8 @@ describe('login component', () => {
         hasEverLoggedOn={false}
         location={{ state: { from: '/logout' } }}
         login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
     expect(component).toMatchSnapshot();
@@ -43,6 +55,24 @@ describe('login component', () => {
         hasEverLoggedOn={false}
         location={{}}
         login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly if logged in, but previous was on logout', () => {
+    const component = shallow(
+      <Login
+        authenticated
+        error=""
+        fetching
+        hasEverLoggedOn
+        location={{ state: { from: { pathname: '/logout' } } }}
+        login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
     expect(component).toMatchSnapshot();
@@ -57,6 +87,8 @@ describe('login component', () => {
         hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
     expect(component).toMatchSnapshot();
@@ -71,6 +103,8 @@ describe('login component', () => {
         hasEverLoggedOn
         location={{ state: { from: 'origin' } }}
         login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
 
@@ -87,6 +121,8 @@ describe('login component', () => {
         hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
     // clicky the consent banner to get through to the login screen
@@ -113,10 +149,49 @@ describe('login component', () => {
         hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
     // clicky the consent banner to get through to the login screen
     component.find('ConsentBanner').prop('onAgree')();
+
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly if there is an authentication error', () => {
+    const component = shallow(
+      <Login
+        authenticated={false}
+        error="Authentication failed"
+        fetching={false}
+        hasEverLoggedOn={false}
+        location={{ state: { from: 'origin' } }}
+        login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
+      />
+    );
+    // clicky the consent banner to get through to the login screen
+    component.find('ConsentBanner').prop('onAgree')();
+
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly if there is an otp authentication error', () => {
+    const component = shallow(
+      <Login
+        authenticated={false}
+        error="Authentication failed"
+        customErrorMessage="Invalid Entry"
+        fetching={false}
+        hasEverLoggedOn={false}
+        location={{ state: { from: 'origin' } }}
+        login={() => {}}
+        loginOtp={() => {}}
+        otpStage
+      />
+    );
 
     expect(component).toMatchSnapshot();
   });
@@ -130,6 +205,8 @@ describe('login component', () => {
         hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
     // clicky the consent banner to get through to the login screen
@@ -150,6 +227,8 @@ describe('login component', () => {
         hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={loginProp}
+        loginOtp={() => {}}
+        otpStage={false}
       />
     );
     // clicky the consent banner to get through to the login screen
@@ -161,7 +240,7 @@ describe('login component', () => {
     component
       .find('Password')
       .simulate('change', { target: { name: 'password', value: 'secret' } });
-    component.find('withRouter(CardForm)').prop('onSave')(event);
+    component.find('withRouter(LoginForm)').prop('onSave')(event);
 
     expect(loginProp.calledWith('bob', 'secret')).toBeTruthy();
     expect(event.preventDefault.called).toBeTruthy();
@@ -184,6 +263,14 @@ describe('login component', () => {
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ login });
+    expect(mapDispatchToProps).toEqual({
+      login,
+      loginOtp,
+      mfaActivate,
+      mfaAddPhone,
+      mfaConfig,
+      completeAccessToState,
+      createAccessRequest
+    });
   });
 });

@@ -34,23 +34,33 @@ describe('api wrapper', () => {
 
   describe('token auth', () => {
     test('auth header is populated when jwt is present in localStorage', async () => {
-      localStorage.setItem('token', 'xxx.yyy.zzz');
       const api = require('./api').default; // eslint-disable-line global-require
       const apiMock = new MockAdapter(api);
+      const mockOktaAuth = require('./oktaAuth'); // eslint-disable-line global-require
+      const managerSpy = jest
+        .spyOn(mockOktaAuth.tokenManager, 'get')
+        .mockImplementation(() =>
+          Promise.resolve({ accessToken: 'aaa.bbb.ccc' })
+        );
       apiMock.onGet('/').reply(200);
       await api.get('/');
       expect(apiMock.history.get[0].headers.Authorization).toEqual(
-        'Bearer xxx.yyy.zzz'
+        'Bearer aaa.bbb.ccc'
       );
-      localStorage.removeItem('token');
+      managerSpy.mockRestore();
     });
 
     test('auth header is empty', async () => {
       const api = require('./api').default; // eslint-disable-line global-require
       const apiMock = new MockAdapter(api);
+      const mockOktaAuth = require('./oktaAuth'); // eslint-disable-line global-require
+      const managerSpy = jest
+        .spyOn(mockOktaAuth.tokenManager, 'get')
+        .mockImplementation(() => Promise.resolve({}));
       apiMock.onGet('/').reply(200);
       await api.get('/');
       expect(apiMock.history.get[0].headers.Authorization).toBeUndefined();
+      managerSpy.mockRestore();
     });
   });
 });

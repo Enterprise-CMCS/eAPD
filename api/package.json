@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
-    "knex-console": "NODE_ENV=development node --experimental-repl-await knexrepl.js",
+    "knex-console": "node --experimental-repl-await knexrepl.js",
     "lint": "eslint '**/*.js'",
     "make-migrate": "knex migrate:make",
     "migrate": "knex migrate:latest",
@@ -65,6 +65,8 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "dependencies": {
+    "@okta/jwt-verifier": "^1.0.0",
+    "@okta/okta-sdk-nodejs": "^4.1.0",
     "ajv": "^6.12.0",
     "aws-sdk": "^2.646.0",
     "axios": "^0.19.2",
@@ -80,12 +82,13 @@
     "jsonwebtoken": "^8.5.0",
     "knex": "^0.20.13",
     "moment": "^2.24.0",
+    "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pg": "^7.18.2",
     "uuid": "^3.4.0",
-    "winston": "^2.4.4",
+    "winston": "^3.3.3",
     "zxcvbn": "^4.4.2"
   },
   "engines": {

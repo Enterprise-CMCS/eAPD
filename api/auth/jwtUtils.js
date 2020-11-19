@@ -1,49 +1,24 @@
-const jwt = require('jsonwebtoken');
 const logger = require('../logger')('jwtUtils');
-
-const { SESSION_LIFETIME_MINUTES, SESSION_SECRET } = process.env;
-
-const TOKEN_ISSUER = 'CMS eAPD API';
-const HS256 = 'HS256';
+const { verifyJWT } = require('./oktaAuth');
 
 /**
- * Returns a signed JWT with content as the payload. Inverse function for
- *   verifyWebToken(token).
- * @name signWebToken
- * @param {Object} payload - payload of information to be stored within the JWT
- * @returns {String} signed JWT
- */
-const signWebTokenOptions = {
-  algorithm: HS256,
-  expiresIn: `${SESSION_LIFETIME_MINUTES || 5}m`,
-  issuer: TOKEN_ISSUER
-};
-
-const signWebToken = payload => {
-  return jwt.sign(payload, SESSION_SECRET, signWebTokenOptions);
-};
-
-/**
- * Returns the payload from the signed JWT, or false. Inverse function for
- *   signWebToken(payload).
+ * Returns the payload from the signed JWT, or false.
+ * Uses Okta to verify and decode the token.
  * @name verifyWebToken
  * @param {String} token - signed JWT
  * @returns {(Object|Boolean)} JWT payload, or false
  */
-const verifyWebTokenOptions = {
-  algorithms: [HS256],
-  issuer: TOKEN_ISSUER
-};
-
-const verifyWebToken = token => {
-  let payload;
-  try {
-    payload = jwt.verify(token, SESSION_SECRET, verifyWebTokenOptions);
-  } catch (err) {
-    logger.error(token, `invalid token: ${err.message}`);
-    return false;
-  }
-  return payload;
+const verifyWebToken = async (token, { verifier = verifyJWT } = {}) => {
+  return verifier(token)
+    .then(claims => {
+      // the token is valid (per Okta)
+      return claims;
+    })
+    .catch(err => {
+      // a validation failed, inspect the error
+      logger.error(token, `invalid token: ${err.message}`);
+      return false;
+    });
 };
 
 /**
@@ -54,15 +29,12 @@ const verifyWebToken = token => {
  */
 const jwtExtractor = req => {
   const token = req.get('Authorization');
-  if (!token || !token.toLowerCase().match(/^bearer\s.+\..+\..+/)) return null;
+  if (!token || !token.toLowerCase().match(/^bearer\s/)) return null;
   const [temp, result] = token.split(' '); // eslint-disable-line no-unused-vars
   return result;
 };
 
 module.exports = {
-  jwtExtractor,
-  signWebToken,
-  signWebTokenOptions,
   verifyWebToken,
-  verifyWebTokenOptions
+  jwtExtractor
 };

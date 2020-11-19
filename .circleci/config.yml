@@ -9,7 +9,7 @@ workflows:
       - schedule:
           # Run every hour, every day. Specified this way because the more
           # compact cron syntax wasn't working.
-          cron: '0 0 * * *'
+          cron: "0 0 * * *"
           filters:
             branches:
               only:
@@ -21,7 +21,7 @@ workflows:
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
-          cron: '0 0 * * *'
+          cron: "0 0 * * *"
           filters:
             branches:
               only:
@@ -367,7 +367,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -445,7 +445,7 @@ jobs:
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
-          command: docker pull owasp/zap2docker-weekly
+          command: docker pull owasp/zap2docker-stable
       - run:
           name: run owasp zap
           command: |
@@ -494,7 +494,12 @@ jobs:
               --AWS_SUBNET "${<< parameters.env >>_API_AWS_SUBNET}" \
               --AWS_TARGET_GROUP "${<< parameters.env >>_API_AWS_TARGET_GROUP}" \
               --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \
-              --ENVIRONMENT "$(echo '<< parameters.env >>' | tr '[:upper:]' '[:lower:]')"
+              --ENVIRONMENT "$(echo '<< parameters.env >>' | tr '[:upper:]' '[:lower:]')" \
+              --OKTA_DOMAIN "${<< parameters.env >>_OKTA_DOMAIN}" \
+              --OKTA_SERVER_ID "${<< parameters.env >>_OKTA_SERVER_ID}" \
+              --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
+              --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}"
+
       - run:
           when: on_fail
           name: notify on deployment failure
@@ -595,7 +600,11 @@ jobs:
                 --AWS_SECURITY_GROUP "$PREVIEW_AWS_SECURITY_GROUP" \
                 --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
                 --BRANCH "$CIRCLE_BRANCH" \
-                --PR_NUM "$PRNUM"
+                --PR_NUM "$PRNUM" \
+                --OKTA_DOMAIN "$PREVIEW_OKTA_DOMAIN" \
+                --OKTA_SERVER_ID "$PREVIEW_OKTA_SERVER_ID" \
+                --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
+                --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else

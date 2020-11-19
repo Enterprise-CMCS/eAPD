@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse, errorToken }
+  schema: { arrayOf, jsonResponse }
 } = require('../openAPI/helpers');
 
 const userObj = jsonResponse({
@@ -26,9 +26,12 @@ const userObj = jsonResponse({
       type: 'string',
       description: `The user's position, if defined`
     },
-    role: {
-      type: 'string',
-      description: 'Names of system authorization role this user belongs to'
+    roles: {
+      type: 'array',
+      description: 'Names of system authorization role this user belongs to',
+      items: {
+        type: 'string'
+      }
     },
     state: {
       type: 'object',
@@ -46,7 +49,7 @@ const userObj = jsonResponse({
     },
     username: {
       type: 'string',
-      description: `User's unique username (email address)`
+      description: `User's unique username`
     }
   }
 });
@@ -61,46 +64,6 @@ const openAPI = {
         200: {
           description: 'The current user',
           content: userObj
-        }
-      }
-    },
-    put: {
-      tags: ['Users'],
-      summary: `Updates the current user's information`,
-      description: `Update information about the current user.  Only the name, password, phone, and position fields can be updated.`,
-      requestBody: {
-        description: 'The new values for the apd.  All fields are optional.',
-        required: true,
-        content: jsonResponse({
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string',
-              description: `The user's updated name. Omit to leave unchanged.`
-            },
-            password: {
-              type: 'string',
-              description: `The user's updated password. Omit to leave unchanged.`
-            },
-            phone: {
-              type: 'string',
-              description: `The user's updated phone number. Omit to leave unchanged.`
-            },
-            position: {
-              type: 'string',
-              description: `The user's updated position. Omit to leave unchanged.`
-            }
-          }
-        })
-      },
-      responses: {
-        200: {
-          description: 'The current user',
-          content: userObj
-        },
-        400: {
-          description: 'Updated information is invalid',
-          content: errorToken
         }
       }
     }
