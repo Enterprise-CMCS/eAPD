@@ -12,7 +12,7 @@ import { getEditAccountError } from '../../reducers/errors';
 import { getEditAccountWorking } from '../../reducers/working';
 import { toSentenceCase } from '../../util';
 
-import { usStatesDropdownOptions } from '../../util/states';
+import { usStatesAllDropdownOptions } from '../../util/states';
 
 const EditAccount = ({
   currentUser,
@@ -124,7 +124,7 @@ const EditAccount = ({
           <Dropdown
             label="State"
             name="state"
-            options={usStatesDropdownOptions}
+            options={usStatesAllDropdownOptions}
             size="medium"
             value={state}
             onChange={changeUserState}

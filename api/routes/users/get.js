@@ -5,32 +5,32 @@ const can = require('../../middleware').can;
 module.exports = (app, { getAllUsers = ga, getUserByID = gu } = {}) => {
   logger.silly('setting up GET /users route');
   app.get('/users', can('view-users'), async (req, res) => {
-    logger.silly(req, 'handling GET /users route');
+    logger.silly({ id: req.id, message: 'handling GET /users route' });
     try {
       const users = await getAllUsers();
-      logger.silly(req, 'sending users');
+      logger.silly({ id: req.id, message: 'sending users' });
       res.send(users);
     } catch (e) {
-      logger.error(req, e);
+      logger.error({ id: req.id, message: e });
       res.status(500).end();
     }
   });
   logger.silly('setting up GET /users/:id route');
   app.get('/users/:id', can('view-users'), async (req, res) => {
-    logger.silly(req, 'handling GET /users/:id route');
-    logger.silly(req, 'got a request for a single user', req.params.id);
+    logger.silly({ id: req.id, message: 'handling GET /users/:id route' });
+    logger.silly({ id: req.id, message: 'got a request for a single user', userId: req.params.id });
     try {
       const user = await getUserByID(req.params.id);
 
       if (user) {
-        logger.silly(req, 'sending user', user);
+        logger.silly({ id: req.id, message: 'sending user', user });
         res.send(user);
       } else {
-        logger.verbose(req, `no user found [${req.params.id}]`);
+        logger.verbose({ id: req.id, message: `no user found [${req.params.id}]`});
         res.status(404).end();
       }
     } catch (e) {
-      logger.error(req, e);
+      logger.error({ id: req.id, message: e });
       res.status(500).end();
     }
   });

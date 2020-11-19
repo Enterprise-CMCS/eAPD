@@ -4,10 +4,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-if (!process.env.IDLE_LOGOUT_TIME_MINUTES) {
-  delete process.env.IDLE_LOGOUT_TIME_MINUTES;
-}
-
 const config = {
   mode: 'production',
   entry: {
@@ -99,7 +95,9 @@ const config = {
     // environment at build time
     new webpack.EnvironmentPlugin({
       API_URL: null,
-      IDLE_LOGOUT_TIME_MINUTES: 15
+      OKTA_DOMAIN: '',
+      OKTA_SERVER_ID: '',
+      OKTA_CLIENT_ID: ''
     }),
 
     // uses module hashs as IDs instead of numeric indices, so adding a new

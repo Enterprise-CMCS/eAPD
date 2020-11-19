@@ -63,6 +63,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
+    "@okta/okta-auth-js": "^3.2.6",
     "@tinymce/tinymce-react": "^3.5.0",
     "axios": "^0.19.2",
     "connected-react-router": "^6.8.0",
