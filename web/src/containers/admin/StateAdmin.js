@@ -123,7 +123,7 @@ class ActiveList extends Component {
             <TableCell>Michael Scott</TableCell>
             <TableCell>michael@dunder.com</TableCell>
             <TableCell>555-867-5309</TableCell>
-            <TableCell></TableCell>
+            <TableCell>State Contractor</TableCell>
             <TableCell>
               <div className="ds-u-display--flex ds-u-align-items--center">
                 <Button size='small' className="ds-u-margin-right--2" onClick={this.props.handleEdit}>Edit Access</Button>
