@@ -53,7 +53,7 @@ exports.down = async knex => {
     .where({ name: 'eAPD State' })
     .update({ name: 'state' });
 
-  await knex.schema.able('users', table => {
+  await knex.schema.table('users', table => {
     table.foreign('auth_role').references('auth_roles.name');
   });
 };
