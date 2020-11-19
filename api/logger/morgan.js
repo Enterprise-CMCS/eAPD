@@ -4,6 +4,7 @@ const { logger } = require('./winston')
 // https://www.npmjs.com/package/morgan#tokens
 morgan.token('id', req => req.id)
 morgan.token('ip', req => req.ip)
+morgan.token('response-content-type', (req, res) => res.get('Content-Type'))
 morgan.token('uid', req => req.user && req.user.id)
 
 // output morgan http request data as json
@@ -12,6 +13,7 @@ const tokenString = [
   'id',
   'ip',
   'method',
+  'response-content-type',
   'status',
   'total-time',
   'uid',
@@ -21,8 +23,8 @@ const tokenString = [
 ].map(token => `"${token}": ":${token}"`)
 .join(', ');
 
-const format = `{${tokenString}, "content-length": ":res[content-length]"}`
+const formatAsJSON = `{${tokenString}, "content-length": ":res[content-length]"}`
 
-const requestLoggerMiddleware = morgan(format, { stream: logger.stream });
+const requestLoggerMiddleware = morgan(formatAsJSON, { stream: logger.stream });
 
 module.exports = { requestLoggerMiddleware }
