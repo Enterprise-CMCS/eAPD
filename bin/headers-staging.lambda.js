@@ -2,10 +2,11 @@ const api = 'https://staging-eapd-api.cms.gov';
 const okta = 'https://impl.idp.idm.cms.gov';
 const ga = 'https://www.google-analytics.com';
 const gtm = 'https://www.googletagmanager.com';
-const gf = 'https://fonts.googleapis.com';
+const fgapi = 'https://fonts.googleapis.com';
+const fgsta = 'https://fonts.gstatic.com';
 
 const securityHeaders = {
-  'Content-Security-Policy': `default-src 'self' 'unsafe-inline'; connect-src ${api} ${okta}; child-src ${okta}; frame-ancestors ${okta}; img-src 'self' ${api} ${okta} ${ga}; object-src 'none'; script-src 'self' ${gtm} ${ga} ${okta}; style-src 'self' 'unsafe-inline' ${gf}`,
+  'Content-Security-Policy': `default-src 'self' 'unsafe-inline'; connect-src ${api} ${okta} ${ga}; child-src ${okta}; frame-ancestors ${okta}; img-src 'self' ${api} ${okta} ${ga}; object-src 'none'; script-src 'self' 'unsafe-inline' ${gtm} ${ga} ${okta}; style-src 'self' 'unsafe-inline' ${fgapi}; font-src 'self' ${fgsta};`,
   'Strict-Transport-Security': 'max-age=63072000',
   'X-Frame-Options': 'deny',
   'X-XSS-Protection': '1; mode=block',
