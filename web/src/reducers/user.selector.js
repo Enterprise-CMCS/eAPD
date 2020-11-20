@@ -13,23 +13,34 @@ export const getUserStateOrTerritory = ({
 }) => state;
 
 export const getUserAffiliationForCurrentState = ({
-  data: {
-    state: { id },
-    affiliations
-  }
+  user: {
+    data: {
+      state: { id = null } = {},
+      affiliations
+    } = {}
+  } = {}
 }) => {
-  return affiliations.find(
-    affiliation => affiliation.state_id === id
-  );
+  return affiliations ? affiliations.find(affiliation => affiliation.state_id === id) : null;
+};
+
+export const getIsStateAccessApprover = ({
+  user: {
+    data: { 
+      permissions = {}
+    } = {}
+  } = {}
+}) => {
+  console.log("what is this", permissions);
+  return permissions ? permissions.find(permission => permission === "approve-state-access") : null;
 };
 
 export const getUserStateOrTerritoryStatus = ({
   user: {
     data: {
-      state: { id },
-      affiliations
-    }
-  }
+      state: { id = null } = {},
+      affiliations = null
+    } = {}
+  } = {}
 }) => {
   const { status } = affiliations.find(
     affiliation => affiliation.state_id === id
