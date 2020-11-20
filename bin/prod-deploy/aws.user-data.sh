@@ -176,12 +176,12 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
       "files": {
         "collect_list": [
           {
-            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-error-0.log*",
-            "log_group_name": "__ENVIRONMENT__/home/ec2-user/.pm2/logs/eAPD-API-error-0.log"
+            "file_path": "/home/ec2-user/.pm2/logs/*",
+            "log_group_name": "__ENVIRONMENT__/home/ec2-user/.pm2/logs"
           },
           {
-            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-out-0.log*",
-            "log_group_name": "__ENVIRONMENT__/home/ec2-user/.pm2/logs/eAPD-API-out-0.log"
+            "file_path": "/home/ec2-user/.npm/_logs/*",
+            "log_group_name": "__ENVIRONMENT__/home/ec2-user/.npm/_logs"              
           }    
         ]
       }
