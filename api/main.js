@@ -49,10 +49,7 @@ server.use((_, res, next) => {
 
   // Instruct the browser to use HTTPS for this domain and its subdomains for
   // the next year.
-  res.header(
-    'Strict-Transport-Security',
-    'max-age=31536000; includeSubDomains'
-  );
+  res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
 
   // Instruct browsers to use the content-type indicated by the server rather
   // than ignore that and try to guess the content-type from the response body
@@ -101,7 +98,16 @@ server.all('*', (_, res) => {
 // Respond to server errors, accordingly. Must be loaded last.
 server.use(errorHandler);
 
-logger.debug('starting the server');
-server.listen(process.env.PORT, () => {
-  logger.verbose(`server listening on :${process.env.PORT}`);
-});
+const {
+  NODE_ENV,
+  PORT
+} = process.env;
+
+if (NODE_ENV === 'test') {
+  module.exports = server;
+} else {
+  logger.debug('starting the server');
+  server.listen(PORT, () => {
+    logger.verbose(`server listening on :${PORT}`);
+  });
+}

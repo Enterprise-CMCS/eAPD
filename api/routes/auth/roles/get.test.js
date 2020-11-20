@@ -4,27 +4,21 @@ const sinon = require('sinon');
 const can = require('../../../middleware').can;
 const getEndpoint = require('./get');
 
+const mockExpress = require('../../../util/mockExpress');
+const mockResponse = require('../../../util/mockResponse');
+
+let app;
+let res;
+let next;
+let getActiveAuthRoles;
+
 tap.test('auth roles GET endpoint', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-  const app = {
-    get: sandbox.stub()
-  };
-
-  const getActiveAuthRoles = sandbox.stub();
-
-  const res = {
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
 
   endpointTest.beforeEach(async () => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
+    app = mockExpress();
+    res = mockResponse();
+    next = sinon.stub();
+    getActiveAuthRoles = sinon.stub();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -34,7 +28,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
       app.get.calledWith('/auth/roles', can('view-roles'), sinon.match.func),
       'roles GET endpoint is registered'
     );
-  });
+  });''
 
   endpointTest.test('get roles handler', async handlerTest => {
     let handler;
@@ -44,18 +38,15 @@ tap.test('auth roles GET endpoint', async endpointTest => {
       done();
     });
 
-    handlerTest.test(
-      'sends a server error code if there is a database error',
-      async invalidTest => {
-        getActiveAuthRoles.rejects();
+    handlerTest.test('database error', async invalidTest => {
+      let err = { error: 'err0r' };
+      getActiveAuthRoles.rejects(err);
 
-        await handler({}, res);
+      await handler({}, res, next);
 
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
+      invalidTest.ok(next.called, 'next is called');
+      invalidTest.ok(next.calledWith(err), 'pass error to middleware');
+    });
 
     handlerTest.test('sends back a list of roles', async validTest => {
       const roles = [{ name: 'one' }, { name: 'two' }, { name: 'three' }];

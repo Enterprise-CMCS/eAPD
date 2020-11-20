@@ -11,21 +11,25 @@ const { getAPDByID: ga } = require('../db');
 module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
   cache(['loadApd'], () => {
     const loadApd = async (req, res, next) => {
-      logger.debug({ id: req.id, message: 'loading APD for request' });
-      const apdFromDB = await getAPDByID(+req.params.id);
+      logger.silly({ id: req.id, message: 'loading APD for request' });
+      try {
+        const apdFromDB = await getAPDByID(+req.params.id);
 
-      if (apdFromDB) {
-        req.meta.apd = {
-          ...apdFromDB.document,
-          id: apdFromDB.id,
-          state: apdFromDB.state_id,
-          status: apdFromDB.status,
-          updated: apdFromDB.updated_at
-        };
-        next();
-      } else {
-        logger.verbose({ id: req.id, message: 'requested object does not exist' });
-        res.status(400).end();
+        if (apdFromDB) {
+          req.meta.apd = {
+            ...apdFromDB.document,
+            id: apdFromDB.id,
+            state: apdFromDB.state_id,
+            status: apdFromDB.status,
+            updated: apdFromDB.updated_at
+          };
+          next();
+        } else {
+          logger.verbose({ id: req.id, message: 'requested object does not exist' });
+          res.status(400).end();
+        }
+      } catch (e) {
+        next(e)
       }
     };
     return loadApd;
@@ -42,7 +46,7 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
 module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
   cache(['userCanAccessAPD'], () => {
     const userCanAccessAPD = async (req, res, next) => {
-      logger.debug({ id: req.id, message: 'verifying the user can access this APD' });
+      logger.silly({ id: req.id, message: 'verifying the user can access this APD' });
 
       // Load the APD first...  Technically we don't have to await this
       // since we rely on the next() callback from loadApd.  However,
@@ -76,7 +80,7 @@ module.exports.userCanEditAPD = ({
 } = {}) =>
   cache(['userCanEditAPD'], () => {
     const userCanEditAPD = async (req, res, next) => {
-      logger.debug({ id: req.id, message: 'verifying the user can edit this APD' });
+      logger.silly({ id: req.id, message: 'verifying the user can edit this APD' });
 
       // First make sure they can access the APD.  Same story here
       // as above with respect to await.

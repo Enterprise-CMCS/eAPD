@@ -1,5 +1,7 @@
 const sinon = require('sinon');
 
+// https://codewithhugo.com/express-request-response-mocking/#mockingstubbing-res-a-simple-express-response-with-sinon
+
 const mockResponse = () => {
   const res = {};
 

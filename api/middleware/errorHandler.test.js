@@ -5,11 +5,12 @@ const tap = require('tap');
 const errorHandler = require('./errorHandler');
 const mockResponse = require('../util/mockResponse');
 
+let err;
+let req;
+let res;
+let next;
+
 tap.test('errorHandler middleware', async t => {
-  let err;
-  let req;
-  let res;
-  let next;
 
   t.beforeEach(async () => {
     err = 'error';
