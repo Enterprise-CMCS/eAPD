@@ -63,6 +63,8 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
+    "@material-ui/core": "^5.0.0-alpha.16",
+    "@material-ui/icons": "^5.0.0-alpha.15",
     "@okta/okta-auth-js": "^3.2.6",
     "@tinymce/tinymce-react": "^3.5.0",
     "axios": "^0.19.2",

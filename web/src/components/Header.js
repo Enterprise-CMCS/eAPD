@@ -3,11 +3,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getIsAdmin } from '../reducers/user.selector';
+import { getIsAdmin, getUserStateOrTerritory, getUserAffiliationForCurrentState, getIsStateAccessApprover } from '../reducers/user.selector';
 import { t } from '../i18n';
 
 import DashboardButton from './DashboardButton';
 import HeaderSaveMessage from './HeaderSaveMessage';
+
+import { AdminPanelSettings } from '@material-ui/icons';
 
 import Icon, {
   faChevronDown,
@@ -20,9 +22,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ariaExpanded: props.ariaExpanded,
-      // Todo: Wire this up to user model
-      isStateAdmin: true
+      ariaExpanded: props.ariaExpanded
     };
     this.node = React.createRef();
   }
@@ -50,8 +50,9 @@ class Header extends Component {
   };
 
   render() {
-    const { authenticated, currentUser, isAdmin, showSiteTitle } = this.props;
+    const { authenticated, currentUser, isAdmin, currentState, isStateAccessApprover, currentStateAffiliation, showSiteTitle } = this.props;
     const { ariaExpanded } = this.state;
+
     return (
       <header ref={this.node}>
         <a href="#start-main-content" className="skip-nav ds-c-dialog__header">
@@ -105,15 +106,19 @@ class Header extends Component {
                             Manage account
                           </Link>
                         </li>
-                        <li>
-                          <Link
-                            to="/state-admin"
-                            onClick={this.toggleDropdown}
-                            className="nav--dropdown__action"
-                          >
-                            State Admin Panel
-                          </Link>
-                        </li>
+                        {currentStateAffiliation && currentStateAffiliation.status === 'approved' && isStateAccessApprover ? 
+                          <li>
+                            <Link
+                              to="/state-admin"
+                              onClick={this.toggleDropdown}
+                              className="nav--dropdown__action"
+                            >
+                              <AdminPanelSettings />
+                              {`${currentStateAffiliation.state_id.toUpperCase()} State Admin Panel`}
+                            </Link>
+                          </li>
+                          : null
+                        }
                         <li>
                           <Link
                             to="/logout"
@@ -156,7 +161,10 @@ Header.defaultProps = {
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
   currentUser: state.auth.user,
-  isAdmin: getIsAdmin(state)
+  isAdmin: getIsAdmin(state),
+  currentState: getUserStateOrTerritory(state),
+  currentStateAffiliation: getUserAffiliationForCurrentState(state),
+  isStateAccessApprover: getIsStateAccessApprover(state)
 });
 
 export default connect(mapStateToProps)(Header);
