@@ -3,6 +3,8 @@ const sinon = require('sinon');
 
 const can = require('../../middleware').can;
 const getEndpoint = require('./get');
+
+const mockExpress = require('../../util/mockExpress');
 const mockResponse = require('../../util/mockResponse');
 
 let err;
@@ -11,6 +13,7 @@ let next;
 let app;
 let getAllUsers;
 let getUserByID;
+let handler;
 
 tap.test('user GET endpoint', async endpointTest => {
 
@@ -18,9 +21,7 @@ tap.test('user GET endpoint', async endpointTest => {
     err = { error: 'err0r' };
     res = mockResponse();
     next = sinon.stub();
-    app = {
-      get: sinon.stub()
-    }
+    app = mockExpress();
     getAllUsers = sinon.stub();
     getUserByID = sinon.stub();
     done();
@@ -40,7 +41,6 @@ tap.test('user GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get all users handler', async handlerTest => {
-    let handler;
     handlerTest.beforeEach(done => {
       getEndpoint(app, { getAllUsers });
       handler = app.get.args.find(args => args[0] === '/users')[2];
@@ -68,7 +68,6 @@ tap.test('user GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get single user handler', async handlerTest => {
-    let handler;
     handlerTest.beforeEach(done => {
       getEndpoint(app, { getUserByID });
       handler = app.get.args.find(args => args[0] === '/users/:id')[2];
