@@ -73,28 +73,14 @@ const roleToActivityMappings = {
 // the knex table object and then try to do an insert, under the hood it
 // attempts the insert again, which is bad of course, but it also causes
 // a key constraint error.
-const insertAndGetIDs = async (
-  knex,
-  tableName,
-  values,
-  deleteFirst = false
-) => {
+const insertAndGetIDs = async (knex, tableName, values) => {
   // Get a list of existing names
-  let alreadyExisting = [];
-  if (deleteFirst) {
-    // drop current rows
-    await knex(tableName).del();
+  const alreadyExisting = (await knex(tableName).select('name')).map(e => {
     logger.info(
-      `deleted all of the rows from the ${chalk.cyan(tableName)} table`
+      `${chalk.cyan(e.name)} already in the ${chalk.cyan(tableName)}`
     );
-  } else {
-    alreadyExisting = (await knex(tableName).select('name')).map(e => {
-      logger.info(
-        `${chalk.cyan(e.name)} already in the ${chalk.cyan(tableName)}`
-      );
-      return e.name;
-    });
-  }
+    return e.name;
+  });
 
   // Map the list of names into objects to be inserted,
   // but filter out names that already exist.
@@ -127,12 +113,6 @@ const setupMappings = async (
 ) => {
   const table = knex(tableName);
 
-  // drop current mappings
-  await table.del();
-  logger.info(
-    `deleted all of the rows from the ${chalk.cyan(tableName)} table`
-  );
-
   // create mappings
   const inserts = [];
   Object.keys(mappings).forEach(role => {
@@ -155,12 +135,26 @@ const setupMappings = async (
 
 exports.seed = async knex => {
   logger.info('Beginning to seed the roles, activities, and mapping tables');
-  const roleIDs = await insertAndGetIDs(knex, 'auth_roles', roles, false);
+
+  // drop current mappings for mapping table, must be done before auth_activities because of foreign key constraints
+  await knex('auth_role_activity_mapping').del();
+  logger.info(
+    `deleted all of the rows from the ${chalk.cyan(
+      'auth_role_activity_mapping'
+    )} table`
+  );
+
+  // drop current mappings for auth_activities
+  await knex('auth_activities').del();
+  logger.info(
+    `deleted all of the rows from the ${chalk.cyan('auth_activities')} table`
+  );
+
+  const roleIDs = await insertAndGetIDs(knex, 'auth_roles', roles);
   const activityIDs = await insertAndGetIDs(
     knex,
     'auth_activities',
-    activities,
-    true
+    activities
   );
   await setupMappings(
     knex,
