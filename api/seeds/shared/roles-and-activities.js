@@ -1,3 +1,6 @@
+const chalk = require('chalk');
+const logger = require('../../logger')('roles seeder');
+
 // AFAICT, the boolean values here are not used for anything, yet.
 const activities = {
   'view-users': false,
@@ -13,7 +16,7 @@ const activities = {
   'view-document': true,
   'view-affiliations': true,
   'edit-affiliations': true,
-  'approve-state-access': true
+  'approve-state-admin': true
 };
 
 const roles = {
@@ -27,7 +30,13 @@ const roles = {
 };
 
 const roleToActivityMappings = {
-  'eAPD Admin': ['view-users', 'view-roles', 'approve-state-access'],
+  'eAPD Admin': [
+    'view-users',
+    'view-roles',
+    'approve-state-admin',
+    'view-affiliations',
+    'edit-affiliations'
+  ],
   'eAPD Federal Analyst': [
     'view-users',
     'view-roles',
@@ -54,7 +63,8 @@ const roleToActivityMappings = {
     'create-draft',
     'edit-document',
     'edit-response',
-    'approve-state-access'
+    'view-affiliations',
+    'edit-affiliations'
   ]
 };
 
@@ -63,19 +73,42 @@ const roleToActivityMappings = {
 // the knex table object and then try to do an insert, under the hood it
 // attempts the insert again, which is bad of course, but it also causes
 // a key constraint error.
-const insertAndGetIDs = async (knex, tableName, values) => {
+const insertAndGetIDs = async (
+  knex,
+  tableName,
+  values,
+  deleteFirst = false
+) => {
   // Get a list of existing names
-  const alreadyExisting = (await knex(tableName).select('name')).map(
-    e => e.name
-  );
+  let alreadyExisting = [];
+  if (deleteFirst) {
+    // drop current rows
+    await knex(tableName).del();
+    logger.info(
+      `deleted all of the rows from the ${chalk.cyan(tableName)} table`
+    );
+  } else {
+    alreadyExisting = (await knex(tableName).select('name')).map(e => {
+      logger.info(
+        `${chalk.cyan(e.name)} already in the ${chalk.cyan(tableName)}`
+      );
+      return e.name;
+    });
+  }
 
   // Map the list of names into objects to be inserted,
   // but filter out names that already exist.
   const insert = Object.keys(values)
     .filter(name => !alreadyExisting.includes(name))
-    .map(name => ({ name }));
+    .map(name => {
+      logger.info(
+        `adding ${chalk.cyan(name)} into the ${chalk.cyan(tableName)} table`
+      );
+      return { name };
+    });
 
   await knex(tableName).insert(insert);
+  logger.info(`Completed seeding the ${chalk.cyan(tableName)} table`);
   const asInserted = await knex(tableName).select('*');
 
   const idMapping = {};
@@ -94,32 +127,41 @@ const setupMappings = async (
 ) => {
   const table = knex(tableName);
 
-  // Get a list of existing mappings
-  const alreadyExisting = await table.select('*');
-  const match = (roleID, activityID) => role =>
-    role.role_id === roleID && role.activity_id === activityID;
+  // drop current mappings
+  await table.del();
+  logger.info(
+    `deleted all of the rows from the ${chalk.cyan(tableName)} table`
+  );
 
+  // create mappings
   const inserts = [];
   Object.keys(mappings).forEach(role => {
     const roleID = roleIDs[role];
     mappings[role].forEach(activity => {
       const activityID = activityIDs[activity];
-      if (!alreadyExisting.some(match(roleID, activityID))) {
-        inserts.push({ role_id: roleID, activity_id: activityID });
-      }
+      inserts.push({ role_id: roleID, activity_id: activityID });
+      logger.info(
+        `adding ${chalk.cyan(role)} <--> ${chalk.cyan(
+          activity
+        )} mapping into the ${chalk.cyan(tableName)} table`
+      );
     });
   });
 
+  // insert mappings
   await table.insert(inserts);
+  logger.info(`Completed seeding ${chalk.cyan(tableName)} table`);
 };
 
 exports.seed = async knex => {
+  logger.info('Beginning to seed the roles, activities, and mapping tables');
+  const roleIDs = await insertAndGetIDs(knex, 'auth_roles', roles, false);
   const activityIDs = await insertAndGetIDs(
     knex,
     'auth_activities',
-    activities
+    activities,
+    true
   );
-  const roleIDs = await insertAndGetIDs(knex, 'auth_roles', roles);
   await setupMappings(
     knex,
     'auth_role_activity_mapping',
@@ -135,4 +177,5 @@ exports.seed = async knex => {
       'eAPD State SME'
     ])
     .update({ isActive: false });
+  logger.info('Updated active status for roles');
 };
