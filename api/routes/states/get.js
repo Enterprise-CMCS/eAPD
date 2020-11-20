@@ -8,7 +8,7 @@ module.exports = (app) => {
       .catch(next);
   });
 
-  app.get('/states/:id', loggedIn, async (request, response) => {
+  app.get('/states/:id', loggedIn, async (request, response, next) => {
     const { id } = request.params;
     await knex('states')
       .where({ id })
@@ -17,9 +17,9 @@ module.exports = (app) => {
         if (row) {
           response.status(200).json(row);
         } else {
-          throw new Error('Not Found');
+          response.status(400).end();
         }
       })
-      .catch(() => response.status(400).end());
+      .catch(next);
   });
 }

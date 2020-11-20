@@ -7,7 +7,6 @@ const getEndpoint = require('./get');
 const mockExpress = require('../../util/mockExpress');
 const mockResponse = require('../../util/mockResponse');
 
-let err;
 let res;
 let next;
 let app;
@@ -18,7 +17,6 @@ let handler;
 tap.test('user GET endpoint', async endpointTest => {
 
   endpointTest.beforeEach(done => {
-    err = { error: 'err0r' };
     res = mockResponse();
     next = sinon.stub();
     app = mockExpress();
@@ -48,6 +46,7 @@ tap.test('user GET endpoint', async endpointTest => {
     });
 
     handlerTest.test('database error', async invalidTest => {
+      let err = { error: 'err0r' };
       getAllUsers.rejects(err);
       await handler({}, res, next);
       invalidTest.ok(next.called, 'next is called');
@@ -75,12 +74,12 @@ tap.test('user GET endpoint', async endpointTest => {
     });
 
     handlerTest.test('database error', async invalidTest => {
-        getUserByID.rejects(err);
-        await handler({ params: { id: 1 } }, res, next);
-        invalidTest.ok(next.called, 'next is called');
-        invalidTest.ok(next.calledWith(err), 'pass error to middleware');
-      }
-    );
+      let err = { error: 'err0r' };
+      getUserByID.rejects(err);
+      await handler({ params: { id: 1 } }, res, next);
+      invalidTest.ok(next.called, 'next is called');
+      invalidTest.ok(next.calledWith(err), 'pass error to middleware');
+    });
 
     handlerTest.test(
       'sends a not-found error if the requested user does not exist',
