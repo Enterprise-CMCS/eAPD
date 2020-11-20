@@ -20,7 +20,8 @@ Anticipated release: November 30, 2020
 
 #### ⚙️ Behind the scenes
 
-- sending eAPD Id to Google Analytics
+- sending user role to Google Analytics
+- changed the way some tables are being seeded
 
 # Previous releases
 
