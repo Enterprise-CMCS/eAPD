@@ -99,11 +99,11 @@ server.all('*', (_, res) => {
 server.use(errorHandler);
 
 const {
-  NODE_ENV,
+  EXPORT_SERVER,
   PORT
 } = process.env;
 
-if (NODE_ENV === 'test') {
+if (EXPORT_SERVER === 'true') {
   module.exports = server;
 } else {
   logger.debug('starting the server');

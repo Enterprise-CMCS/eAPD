@@ -6,6 +6,7 @@ const defaults = {
   // Default to locking accounts for 30 minutes if there are five
   // failed logon attempts within a 1-minute period.
   ENDPOINT_COVERAGE_CAPTURE: 'false',
+  EXPORT_SERVER: 'false',
   FILE_PATH: '__files',
   FILE_STORE: 'local',
   LOG_LEVEL: 'info',
