@@ -41,7 +41,7 @@ module.exports = (
       logger.silly({ id: req.id, message: `got apds: ${apds.map(({ id, name }) => ({ id, name }))}` });
       return res.send(apds);
     } catch (e) {
-      next(e);
+      return next(e);
     }
   });
 
@@ -75,7 +75,7 @@ module.exports = (
       logger.verbose({ id: req.id, message: 'apd does not exist' });
       return res.status(400).end();
     } catch (e) {
-      next(e);
+      return next(e);
     }
   });
 };

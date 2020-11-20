@@ -43,7 +43,7 @@ tap.test('auth activities GET endpoint', async endpointTest => {
     });
 
     handlerTest.test('database error', async invalidTest => {
-        let err = { error: 'err0r' };
+        const err = { error: 'err0r' };
         getAuthActivities.rejects(err);
         await handler({}, res, next);
         invalidTest.ok(next.called, 'next is called');

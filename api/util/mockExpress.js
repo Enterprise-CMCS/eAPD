@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const sinon = require('sinon');
 
 const mockExpress = () => ({

@@ -1,4 +1,3 @@
-const logger = require('../../../logger')('auth roles route get');
 const { getActiveAuthRoles: gr } = require('../../../db');
 const { can } = require('../../../middleware');
 

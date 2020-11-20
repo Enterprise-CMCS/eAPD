@@ -1,4 +1,3 @@
-const logger = require('../../../logger')('auth activities route index');
 const { getAuthActivities: ga } = require('../../../db');
 const { can } = require('../../../middleware');
 

@@ -11,6 +11,7 @@ let app;
 let req;
 let res;
 let next;
+let deleteAPDByID;
 
 tap.test('apds/:id DELETE endpoint', async endpointTest => {
   req = {

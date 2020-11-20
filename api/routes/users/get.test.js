@@ -46,7 +46,7 @@ tap.test('user GET endpoint', async endpointTest => {
     });
 
     handlerTest.test('database error', async invalidTest => {
-      let err = { error: 'err0r' };
+      const err = { error: 'err0r' };
       getAllUsers.rejects(err);
       await handler({}, res, next);
       invalidTest.ok(next.called, 'next is called');
@@ -74,7 +74,7 @@ tap.test('user GET endpoint', async endpointTest => {
     });
 
     handlerTest.test('database error', async invalidTest => {
-      let err = { error: 'err0r' };
+      const err = { error: 'err0r' };
       getUserByID.rejects(err);
       await handler({ params: { id: 1 } }, res, next);
       invalidTest.ok(next.called, 'next is called');
