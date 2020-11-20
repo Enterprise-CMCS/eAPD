@@ -16,16 +16,16 @@ exports.up = async knex => {
     .update({ name: 'eAPD Federal Leadership', isActive: false });
 
   await knex('auth_roles')
-    .where({ name: 'federal' })
-    .update({ name: 'eAPD Federal', isActive: false });
+    .where({ name: 'federal SME' })
+    .update({ name: 'eAPD Federal SME', isActive: false });
 
   await knex('auth_roles')
     .where({ name: 'state coordinator' })
     .update({ name: 'eAPD State Coordinator', isActive: false });
 
   await knex('auth_roles')
-    .where({ name: 'state' })
-    .update({ name: 'eAPD State', isActive: false });
+    .where({ name: 'state SME' })
+    .update({ name: 'eAPD State SME', isActive: false });
 };
 
 exports.down = async knex => {
