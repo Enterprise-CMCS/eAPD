@@ -153,6 +153,15 @@ function addEcosystemToUserData() {
         NODE_ENV: 'production',
         DATABASE_URL: '$API_DATABASE_URL'
       }
+    },{
+      name: 'Database seeding',
+      script: 'npm',
+      args: 'run seed',
+      autorestart: false,
+      env: {
+        NODE_ENV: 'production',
+        DATABASE_URL: '$API_DATABASE_URL'
+      }
     }]
   };" | base64 -w 0`
 
