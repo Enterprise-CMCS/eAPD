@@ -26,12 +26,12 @@ export const getUserAffiliationForCurrentState = ({
 export const getIsStateAccessApprover = ({
   user: {
     data: { 
-      permissions = {}
+      state: { id = null } = {},
+      permissions
     } = {}
   } = {}
 }) => {
-  console.log("what is this", permissions);
-  return permissions ? permissions.find(permission => permission === "approve-state-access") : null;
+  return permissions ? permissions[id].find(permission => permission === 'approve-state-access') : null;
 };
 
 export const getUserStateOrTerritoryStatus = ({
