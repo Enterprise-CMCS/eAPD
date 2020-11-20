@@ -12,6 +12,7 @@ const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./endpointCoverageMiddleware');
+const errorHandler = require('./middleware/errorHandler');
 
 const server = express();
 
@@ -97,13 +98,8 @@ server.all('*', (_, res) => {
   res.status(404).end();
 });
 
-// Handle errors
-// https://stackoverflow.com/a/33526438/2675670
-server.use((err, req, res, next) => () => {
-  logger.error({ id: req.id, message: err });
-  if (res.headersSent) return next(err);
-  return res.status(err.status || 500).end();
-});
+// Respond to server errors, accordingly. Must be loaded last.
+server.use(errorHandler);
 
 logger.debug('starting the server');
 server.listen(process.env.PORT, () => {
