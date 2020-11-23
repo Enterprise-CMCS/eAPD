@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 const tap = require('tap');
 const sinon = require('sinon');
 
@@ -5,11 +6,11 @@ const can = require('../../middleware').can;
 const patchEndpoint = require('./patch');
 
 const mockExpress = require('../../util/mockExpress');
-const mockResponse = require('../../util/mockResponse');
+// const mockResponse = require('../../util/mockResponse');
 const mockDb = require('../../db/dbMock.test');
 
 let app;
-let res;
+// let res;
 let db;
 
 const route = '/states/:stateId/affiliations/:id';
@@ -19,7 +20,7 @@ tap.test('PATCH affiliations endpoint', async t => {
 
   t.beforeEach(async () => {
     app = mockExpress();
-    res = mockResponse();
+    // res = mockResponse();
     db = mockDb();
   });
 
