@@ -9,13 +9,8 @@ let testDbHost;
 tap.test('express api', async t => {
 
   t.beforeEach(async () => {
-    process.env.EXPORT_SERVER = 'true';
-    api = require('./main');
+    api = require('./api');
   });
-
-  t.afterEach(async () => {
-    process.env.EXPORT_SERVER = 'false';
-  })
 
   t.test('GET /heartbeat', async t => {
     response = await request(api).get('/heartbeat');
@@ -37,7 +32,7 @@ tap.test('express api', async t => {
     t.beforeEach(async () => {
       testDbHost = process.env.TEST_DB_HOST;
       process.env.TEST_DB_HOST = 'undefined';
-      api = require("./main");
+      api = require("./api");
     });
 
     // reattach database
