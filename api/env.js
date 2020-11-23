@@ -3,12 +3,10 @@
 const dotenv = require('dotenv');
 
 const defaults = {
-  // Default to locking accounts for 30 minutes if there are five
-  // failed logon attempts within a 1-minute period.
   ENDPOINT_COVERAGE_CAPTURE: 'false',
   FILE_PATH: '__files',
   FILE_STORE: 'local',
-  LOG_LEVEL: 'info',
+  LOG_LEVEL: 'debug',
   LOG_FILE: 'false',
   LOG_CONSOLE: 'true',
   NODE_ENV: 'development',
