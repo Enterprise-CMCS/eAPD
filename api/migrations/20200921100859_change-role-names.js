@@ -1,4 +1,8 @@
 exports.up = async knex => {
+  await knex.schema.table('users', table => {
+    table.dropForeign('auth_role');
+  });
+
   await knex('auth_roles')
     .where({ name: 'admin' })
     .update({ name: 'eAPD Admin', isActive: true });
@@ -12,16 +16,16 @@ exports.up = async knex => {
     .update({ name: 'eAPD Federal Leadership', isActive: false });
 
   await knex('auth_roles')
-    .where({ name: 'federal' })
-    .update({ name: 'eAPD Federal', isActive: false });
+    .where({ name: 'federal SME' })
+    .update({ name: 'eAPD Federal SME', isActive: false });
 
   await knex('auth_roles')
     .where({ name: 'state coordinator' })
     .update({ name: 'eAPD State Coordinator', isActive: false });
 
   await knex('auth_roles')
-    .where({ name: 'state' })
-    .update({ name: 'eAPD State', isActive: false });
+    .where({ name: 'state SME' })
+    .update({ name: 'eAPD State SME', isActive: false });
 };
 
 exports.down = async knex => {
@@ -48,4 +52,8 @@ exports.down = async knex => {
   await knex('auth_roles')
     .where({ name: 'eAPD State' })
     .update({ name: 'state' });
+
+  await knex.schema.table('users', table => {
+    table.foreign('auth_role').references('auth_roles.name');
+  });
 };
