@@ -11,7 +11,7 @@ const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
-const endpointCoverage = require('./endpointCoverageMiddleware');
+const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
 
 const api = express();
