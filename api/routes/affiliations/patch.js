@@ -28,13 +28,13 @@ module.exports = (app, { db = knex } = {}) => {
     const userId = request.user.id;
     const { stateId, id } = request.params;
 
-    const { status, roleId } = request.body;
     if (!request.body || !request.body.status || !request.body.roleId) {
       logger.error({ id: request.id, message: 'affiliation status or roleId not provided' });
       response.status(400).end();
       return;
     }
 
+    const { status, roleId } = request.body;
     const audit = auditor(statusToAction(status), request);
 
     db('auth_affiliations')
