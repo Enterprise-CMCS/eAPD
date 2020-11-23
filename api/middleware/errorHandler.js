@@ -9,7 +9,7 @@ const logger = require('../logger')('errorHandler middleware')
  *
  * Note: express routes must do one of the following:
  *   - `try {...} catch(e) { next(e) }`
- *   - `fnReturnsPromise.then().catch(next)`
+ *   - `promise.then().catch(next)`
  *
  * References:
  *   https://stackoverflow.com/a/33526438/2675670
