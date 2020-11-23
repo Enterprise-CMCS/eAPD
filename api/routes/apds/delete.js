@@ -9,8 +9,8 @@ module.exports = (app, { deleteAPDByID = da } = {}) => {
     '/apds/:id',
     can('view-document'),
     userCanEditAPD(),
-    async (req, res, next) => {
-      await deleteAPDByID(req.meta.apd.id)
+    (req, res, next) => {
+      deleteAPDByID(req.meta.apd.id)
         .then(() => res.status(204).end())
         .catch(next);
     }

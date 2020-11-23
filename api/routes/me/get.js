@@ -3,7 +3,7 @@ const loggedIn = require('../../middleware').loggedIn;
 
 module.exports = app => {
   logger.debug('setting up GET endpoint');
-  app.get('/me', loggedIn, async (req, res) => {
+  app.get('/me', loggedIn, (req, res) => {
     res.send(req.user);
   });
 };
