@@ -4,10 +4,10 @@ const logger = require('../logger')('errorHandler middleware')
  * Error-handler Middleware
  *   - logs the error
  *   - passes error to express via `next`, if error occurs while streaming
- *   - sends 500 HTTP status
+ *   - sends error.status or 500 HTTP status code
  *   - closes connection
  *
- * Note: express routes must do one of the following:
+ * Note: express routes are expected do one of the following:
  *   - `try {...} catch(e) { next(e) }`
  *   - `promise.then().catch(next)`
  *
