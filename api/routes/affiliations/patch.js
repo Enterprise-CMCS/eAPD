@@ -23,14 +23,21 @@ const statusToAction = (status) => {
   }
 }
 
-module.exports = (app) => {
+module.exports = (app, { db = knex } = {}) => {
   app.patch('/states/:stateId/affiliations/:id', can('edit-affiliations'), (request, response) => {
     const userId = request.user.id;
     const { stateId, id } = request.params;
+
     const { status, roleId } = request.body;
+    if (!request.body || !request.body.status || !request.body.roleId) {
+      logger.error({ id: request.id, message: 'affiliation status or roleId not provided' });
+      response.status(400).end();
+      return;
+    }
+
     const audit = auditor(statusToAction(status), request);
 
-    knex('auth_affiliations')
+    db('auth_affiliations')
       .where({ state_id: stateId, id })
       .returning('*')
       .update({
