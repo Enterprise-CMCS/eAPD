@@ -54,9 +54,6 @@ module.exports = (app, { db = knex } = {}) => {
       }))
       .then(() => audit.log())
       .then(() => response.status(200).end())
-      .catch(err => {
-        logger.error({ id: request.id, message: err });
-        response.status(400).end();
-      });
+      .catch(() => response.status(400).end());
   });
 };
