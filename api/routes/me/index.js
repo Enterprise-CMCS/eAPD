@@ -1,7 +1,7 @@
-const logger = require('../../logger')('me route index');
 const get = require('./get');
+const patch = require('./patch');
 
-module.exports = (app, { getEndpoint = get } = {}) => {
-  logger.debug('setting up GET endpoint');
+module.exports = (app, { getEndpoint = get, patchEndpoint = patch } = {}) => {
   getEndpoint(app);
+  patchEndpoint(app);
 };

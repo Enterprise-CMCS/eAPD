@@ -1195,6 +1195,44 @@ Object {
           "Users",
         ],
       },
+      "patch": Object {
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "stateId": Object {
+                    "descripton": "2-letter US State or Territory abbreviation, lowercase",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "Record was updated",
+          },
+          "400": Object {
+            "description": "stateId is invalid",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Update user",
+        "tags": Array [
+          "Users",
+        ],
+      },
     },
     "/open-api": Object {
       "get": Object {

@@ -1,8 +1,9 @@
+const { raw: knex } = require('../../db');
 const logger = require('../../logger')('me patch route')
 const loggedIn = require('../../middleware').loggedIn;
 
 module.exports = app => {
-  app.put('/me', loggedIn, (req, res) => {
+  app.patch('/me', loggedIn, (req, res, next) => {
     const { stateId } = req.params;
     logger.info({ id: req.id, message: stateId });
     knex('users')

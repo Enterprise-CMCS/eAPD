@@ -54,6 +54,11 @@ const userObj = jsonResponse({
   }
 });
 
+const stateId = {
+  type: 'string',
+  descripton: '2-letter US State or Territory abbreviation, lowercase'
+}
+
 const openAPI = {
   '/me': {
     get: {
@@ -64,6 +69,27 @@ const openAPI = {
         200: {
           description: 'The current user',
           content: userObj
+        }
+      }
+    },
+    patch: {
+      tags: ['Users'],
+      summary: 'Update user',
+      requestBody: {
+        required: true,
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            stateId
+          }
+        })
+      },
+      responses: {
+        200: {
+          description: 'Record was updated'
+        },
+        400: {
+          description: 'stateId is invalid'
         }
       }
     }
