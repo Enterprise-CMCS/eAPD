@@ -57,7 +57,7 @@ const userObj = jsonResponse({
 const stateId = {
   type: 'string',
   descripton: '2-letter US State or Territory abbreviation, lowercase'
-}
+};
 
 const openAPI = {
   '/me': {
@@ -76,6 +76,7 @@ const openAPI = {
       tags: ['Users'],
       summary: 'Update user',
       requestBody: {
+        description: '',
         required: true,
         content: jsonResponse({
           type: 'object',
