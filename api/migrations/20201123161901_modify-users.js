@@ -37,7 +37,6 @@ exports.down = async knex => {
     table.text('email');
     table.string('password', 60).comment('hashed password');
     table.string('auth_role', 64).comment('the name of the role this user has');
-    table.foreign('auth_role').references('auth_roles.name');
     table.text('name').comment('the users name');
     table.text('position');
     table.string('phone', 10);

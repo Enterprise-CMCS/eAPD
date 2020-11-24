@@ -1,19 +1,29 @@
 const { raw: knex } = require('../../db');
+const { getStateById } = require('../../db/states');
 const logger = require('../../logger')('me patch route')
 const loggedIn = require('../../middleware').loggedIn;
 
 module.exports = app => {
-  app.patch('/me', loggedIn, (req, res, next) => {
-    const { stateId } = req.params;
-    logger.info({ id: req.id, message: stateId });
-    knex('users')
+  app.patch('/me', loggedIn, async (req, res, next) => {
+    const { stateId } = req.body;
+    logger.info({ id: req.id, message: { stateId } });
+
+    await getStateById(stateId)
+      .then(state => {
+        if (state) {
+          return state;
+        } else {
+          throw new Error('Not found');
+        }
+      })
+      .then(state => knex('users')
       .insert({
         uid: req.user.id,
-        state_id: stateId
+        state_id: state.id
       })
       .onConflict('uid')
       .merge()
-      .then(() => res.status(200).end())
-      .catch(next);
+      .then(() => res.status(200).end()))
+      .catch(() => res.status(400).end())
   });
 };
