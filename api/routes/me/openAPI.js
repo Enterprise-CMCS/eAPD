@@ -74,7 +74,7 @@ const openAPI = {
     },
     patch: {
       tags: ['Users'],
-      summary: 'Update user',
+      description: 'Update user',
       requestBody: {
         description: '',
         required: true,
