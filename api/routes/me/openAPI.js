@@ -59,6 +59,16 @@ const stateId = {
   descripton: '2-letter US State or Territory abbreviation, lowercase'
 };
 
+const stateIdParameter = {
+  name: 'stateId',
+  in: 'body',
+  description: stateId.description,
+  required: true,
+  schema: {
+    type: stateId.type
+  }
+};
+
 const openAPI = {
   '/me': {
     get: {
@@ -75,6 +85,7 @@ const openAPI = {
     patch: {
       tags: ['Users'],
       description: 'Update user',
+      parameters: [stateIdParameter],
       requestBody: {
         description: '',
         required: true,
