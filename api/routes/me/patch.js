@@ -4,17 +4,14 @@ const logger = require('../../logger')('me patch route')
 const loggedIn = require('../../middleware').loggedIn;
 
 module.exports = app => {
-  app.patch('/me', loggedIn, async (req, res, next) => {
+  app.patch('/me', loggedIn, async (req, res) => {
     const { stateId } = req.body;
     logger.info({ id: req.id, message: { stateId } });
 
     await getStateById(stateId)
       .then(state => {
-        if (state) {
-          return state;
-        } else {
-          throw new Error('Not found');
-        }
+        if (state) { return state; }
+        throw new Error('Not found');
       })
       .then(state => knex('users')
       .insert({
