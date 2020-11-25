@@ -56,12 +56,12 @@ const userObj = jsonResponse({
 
 const stateId = {
   type: 'string',
-  descripton: '2-letter US State or Territory abbreviation, lowercase'
+  description: '2-letter US State or Territory abbreviation, lowercase'
 };
 
 const stateIdParameter = {
   name: 'stateId',
-  in: 'body',
+  in: 'query',
   description: stateId.description,
   required: true,
   schema: {
@@ -87,7 +87,6 @@ const openAPI = {
       description: 'Update user',
       parameters: [stateIdParameter],
       requestBody: {
-        description: '',
         required: true,
         content: jsonResponse({
           type: 'object',
