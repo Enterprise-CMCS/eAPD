@@ -29,8 +29,7 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
           res.status(400).end();
         }
       } catch (e) {
-        logger.error({ id: req.id, message: e });
-        res.status(500).end();
+        next(e)
       }
     };
     return loadApd;

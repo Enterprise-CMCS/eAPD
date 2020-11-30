@@ -4,26 +4,21 @@ const sinon = require('sinon');
 const can = require('../../middleware').can;
 const getEndpoint = require('./get');
 
-tap.test('apds GET endpoint', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-  const app = { get: sandbox.stub() };
+const mockExpress = require('../../util/mockExpress');
+const mockResponse = require('../../util/mockResponse');
 
-  const getAllAPDsByState = sandbox.stub();
+let app;
+let res;
+let next;
+let getAllAPDsByState;
 
-  const res = {
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
+tap.test('GET /apds', async endpointTest => {
 
   endpointTest.beforeEach(done => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
-
+    app = mockExpress();
+    res = mockResponse();
+    next = sinon.stub();
+    getAllAPDsByState = sinon.stub();
     done();
   });
 
@@ -44,18 +39,15 @@ tap.test('apds GET endpoint', async endpointTest => {
       done();
     });
 
-    handlerTest.test(
-      'sends a server error code if there is a database error',
-      async invalidTest => {
-        getAllAPDsByState.rejects();
+    handlerTest.test('database error', async invalidTest => {
+      const err = { error: 'err0r' };
+      getAllAPDsByState.rejects(err);
 
-        await handler({ params: {}, user: { state: { id: 'va' } } }, res);
+      await handler({ params: {}, user: { state: { id: 'va' } } }, res, next);
 
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
+      invalidTest.ok(next.called, 'next is called');
+      invalidTest.ok(next.calledWith(err), 'pass error to middleware');
+    });
 
     handlerTest.test(
       'sends an unauthorized error code if the user does not have an associated state',
@@ -142,25 +134,13 @@ tap.test('apds GET endpoint', async endpointTest => {
 });
 
 tap.test('apds/:id GET endpoint', async tests => {
-  const sandbox = sinon.createSandbox();
-  const app = { get: sandbox.stub() };
-
-  const getAPDByIDAndState = sandbox.stub();
-
-  const res = {
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
+  let getAPDByIDAndState;
 
   tests.beforeEach(done => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
-
+    app = mockExpress();
+    res = mockResponse();
+    next = sinon.stub();
+    getAPDByIDAndState = sinon.stub();
     done();
   });
 
@@ -185,21 +165,19 @@ tap.test('apds/:id GET endpoint', async tests => {
       done();
     });
 
-    handlerTest.test(
-      'sends a server error code if there is a database error',
-      async test => {
-        getAPDByIDAndState.rejects();
+    handlerTest.test('database error', async t => {
+      const err = { error: 'err0r' };
+      getAPDByIDAndState.rejects(err);
 
-        await handler(
-          { params: { id: '1' }, user: { state: { id: 'va' } } },
-          res
-        );
+      await handler(
+        { params: { id: '1' }, user: { state: { id: 'va' } } },
+        res,
+        next
+      );
 
-        test.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        test.ok(res.send.notCalled, 'no body is sent');
-        test.ok(res.end.called, 'response is terminated');
-      }
-    );
+      t.ok(next.called, 'next is called');
+      t.ok(next.calledWith(err), 'pass error to middleware');
+    });
 
     handlerTest.test(
       'sends an unauthorized error code if the user does not have an associated state',
@@ -215,11 +193,12 @@ tap.test('apds/:id GET endpoint', async tests => {
     handlerTest.test(
       'sends a not found error if there are no valid APds',
       async test => {
-        getAPDByIDAndState.returns(null);
+        getAPDByIDAndState.returns(undefined);
 
         await handler(
           { params: { id: '1' }, user: { state: { id: 'va' } } },
-          res
+          res,
+          next
         );
 
         test.ok(res.status.calledWith(400), 'HTTP status set to 400');

@@ -4,27 +4,21 @@ const sinon = require('sinon');
 const can = require('../../../middleware').can;
 const getEndpoint = require('./index');
 
+const mockExpress = require('../../../util/mockExpress');
+const mockResponse = require('../../../util/mockResponse');
+
+let app;
+let res;
+let next;
+let getAuthActivities;
+
 tap.test('auth activities GET endpoint', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-  const app = {
-    get: sandbox.stub()
-  };
-
-  const getAuthActivities = sandbox.stub();
-
-  const res = {
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
 
   endpointTest.beforeEach(async () => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
+    app = mockExpress();
+    res = mockResponse();
+    next = sinon.stub();
+    getAuthActivities = sinon.stub();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -48,16 +42,12 @@ tap.test('auth activities GET endpoint', async endpointTest => {
       done();
     });
 
-    handlerTest.test(
-      'sends a server error code if there is a database error',
-      async invalidTest => {
-        getAuthActivities.rejects();
-
-        await handler({}, res);
-
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
+    handlerTest.test('database error', async invalidTest => {
+        const err = { error: 'err0r' };
+        getAuthActivities.rejects(err);
+        await handler({}, res, next);
+        invalidTest.ok(next.called, 'next is called');
+        invalidTest.ok(next.calledWith(err), 'pass error to middleware');
       }
     );
 
