@@ -2,35 +2,12 @@ import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
 
-const cookie = name => {
-  const cookieMap = (document.cookie || '').split(';').reduce((c, s) => {
-    const bits = s.trim().split('=');
-    if (bits.length === 2) {
-      return { ...c, [bits[0].trim()]: bits[1].trim() };
-    }
-    return c;
-  }, {});
-
-  return cookieMap[name];
-};
-
 const ConsentBanner = ({ onAgree }) => {
   const [showDetails, setShowDetails] = useState(false);
-
-  const agreeAndContinue = () => {
-    document.cookie = 'gov.cms.eapd.hasConsented=true;max-age=259200'; // 3 days
-    onAgree();
-  };
 
   const expandDetails = () => {
     setShowDetails(true);
   };
-
-  const hasConsented = cookie('gov.cms.eapd.hasConsented');
-  if (hasConsented) {
-    agreeAndContinue();
-    return null;
-  }
 
   return (
     <main id="start-main-content">
@@ -104,7 +81,7 @@ const ConsentBanner = ({ onAgree }) => {
                 </Fragment>
               ) : null}
               <div className="ds-u-text-align--center">
-                <Button variation="primary" onClick={agreeAndContinue}>
+                <Button variation="primary" onClick={onAgree}>
                   Agree and continue
                 </Button>
               </div>

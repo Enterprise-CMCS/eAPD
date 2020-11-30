@@ -12,28 +12,19 @@ import {
   LOGIN_FAILURE,
   LOCKED_OUT,
   RESET_LOCKED_OUT,
-  LOGOUT_SUCCESS,
-  STATE_ACCESS_REQUEST,
-  STATE_ACCESS_SUCCESS,
-  STATE_ACCESS_COMPLETE
+  LOGOUT_SUCCESS
 } from '../actions/auth';
 
 const initialState = {
   authenticated: false,
-  error: '',
+  error: null,
   fetching: false,
-  hasEverLoggedOn: false,
-  otpStage: false,
   initialCheck: false,
-  factorsList: '',
-  mfaEnrollStartStage: false,
-  mfaEnrollAddPhoneStage: false,
-  mfaEnrollActivateStage: false,
+  hasEverLoggedOn: false,
+  factorsList: [],
   mfaPhoneNumber: '',
   mfaEnrollType: '',
   verifyData: null,
-  requestAccess: false,
-  requestAccessSuccess: false,
   selectState: false,
   isLocked: false,
   user: null
@@ -44,7 +35,6 @@ const auth = (state = initialState, action) => {
     case AUTH_CHECK_SUCCESS:
       return {
         ...state,
-        otpStage: false,
         authenticated: true,
         hasEverLoggedOn: true,
         initialCheck: true,
@@ -54,61 +44,51 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         initialCheck: true,
-        otpStage: false,
         authenticated: false
       };
     case LOGIN_REQUEST:
       return {
         ...state,
         fetching: true,
-        otpStage: false,
         authenticated: false,
-        error: ''
+        error: null
       };
     case LOGIN_OTP_STAGE:
       return {
         ...state,
         fetching: false,
-        otpStage: true,
         authenticated: false,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_REQUEST:
       return {
         ...state,
         fetching: true,
-        otpStage: true,
         authenticated: false,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_ENROLL_START:
       return {
         ...state,
         fetching: false,
-        mfaEnrollStartStage: true,
         mfaPhoneNumber: action.data.phoneNumber,
         factorsList: action.data.factors,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_ENROLL_ADD_PHONE:
       return {
         ...state,
         fetching: false,
-        mfaEnrollStartStage: false,
-        mfaEnrollAddPhoneStage: true,
         mfaEnrollType: action.data,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_ENROLL_ACTIVATE:
       return {
         ...state,
         fetching: false,
-        mfaEnrollStartStage: false,
-        mfaEnrollAddPhoneStage: false,
-        mfaEnrollActivateStage: true,
         mfaEnrollType: action.data.mfaEnrollType,
         verifyData: action.data.activationData,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_FAILURE:
       return {
@@ -119,7 +99,6 @@ const auth = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        otpStage: false,
         authenticated: true,
         fetching: false,
         hasEverLoggedOn: true,
@@ -128,7 +107,6 @@ const auth = (state = initialState, action) => {
     case LOGIN_FAILURE:
       return {
         ...state,
-        otpStage: false,
         fetching: false,
         error: action.error
       };
@@ -137,42 +115,20 @@ const auth = (state = initialState, action) => {
         ...state,
         isLocked: true,
         fetching: false,
-        error: ''
+        error: null
       };
     case RESET_LOCKED_OUT:
       return {
         ...state,
         isLocked: false,
         fetching: false,
-        error: ''
+        error: null
       };
     case LOGOUT_SUCCESS:
       return {
         ...initialState,
-        otpStage: false,
-        hasEverLoggedOn: state.hasEverLoggedOn,
-        initialCheck: state.initialCheck
-      };
-    case STATE_ACCESS_REQUEST:
-      return {
-        ...state,
-        requestAccess: true,
-        requestAccessSuccess: false,
-        error: ''
-      };
-    case STATE_ACCESS_SUCCESS:
-      return {
-        ...state,
-        requestAccess: false,
-        requestAccessSuccess: true,
-        error: ''
-      };
-    case STATE_ACCESS_COMPLETE:
-      return {
-        ...state,
-        requestAccess: false,
-        requestAccessSuccess: false,
-        error: ''
+        authenticated: false,
+        error: null
       };
     default:
       return state;

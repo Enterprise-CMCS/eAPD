@@ -54,14 +54,14 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
 };
 
 LoginMFA.propTypes = {
-  errorMessage: PropTypes.bool,
+  errorMessage: PropTypes.string,
   fetching: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired,
   hasEverLoggedOn: PropTypes.bool.isRequired
 };
 
 LoginMFA.defaultProps = {
-  errorMessage: false
+  errorMessage: null
 };
 
 export default LoginMFA;
