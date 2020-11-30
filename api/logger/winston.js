@@ -1,3 +1,4 @@
+require('../env');
 const fs = require('fs');
 const winston = require('winston');
 const { name: packageName } = require('../package');
@@ -11,12 +12,11 @@ const formats = [
 ];
 
 // https://github.com/winstonjs/winston/blob/master/docs/transports.md
-// stream to /dev/null so winston doesn't complain that no transports present
 const transports = [
-  new winston.transports.Stream({ stream: fs.createWriteStream('/dev/null') }),
   LOG_CONSOLE === 'true' && new winston.transports.Console(),
   LOG_FILE === 'true' &&
-    new winston.transports.File({ filename: `${packageName}.log` })
+    new winston.transports.File({ filename: `${packageName}.log` }),
+  new winston.transports.Stream({ stream: fs.createWriteStream('/dev/null') }),
   // new AwsCloudWatch(options);
 ].filter(Boolean);
 

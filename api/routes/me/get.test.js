@@ -4,24 +4,17 @@ const sinon = require('sinon');
 const loggedIn = require('../../middleware').loggedIn;
 const getEndpoint = require('./get');
 
+const mockExpress = require('../../util/mockExpress');
+const mockResponse = require('../../util/mockResponse');
+
+let app;
+let res;
+
 tap.test('me GET endpoint', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-  const app = {
-    get: sandbox.stub()
-  };
-  const res = {
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
 
   endpointTest.beforeEach(async () => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
+    app = mockExpress();
+    res = mockResponse();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -44,4 +37,5 @@ tap.test('me GET endpoint', async endpointTest => {
       'sends back the user object'
     );
   });
+
 });

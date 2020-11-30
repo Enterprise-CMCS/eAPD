@@ -8,7 +8,7 @@ module.exports = (
 ) => {
   logger.silly('setting up GET /apds route');
 
-  app.get('/apds', can('view-document'), async (req, res) => {
+  app.get('/apds', can('view-document'), async (req, res, next) => {
     logger.silly({ id: req.id, message: 'handling GET /apds' });
 
     try {
@@ -41,12 +41,11 @@ module.exports = (
       logger.silly({ id: req.id, message: `got apds: ${apds.map(({ id, name }) => ({ id, name }))}` });
       return res.send(apds);
     } catch (e) {
-      logger.error({ id: req.id, message: e });
-      return res.status(500).end();
+      return next(e);
     }
   });
 
-  app.get('/apds/:id(\\d+)', can('view-document'), async (req, res) => {
+  app.get('/apds/:id(\\d+)', can('view-document'), async (req, res, next) => {
     logger.silly({ id: req.id, message: 'handling GET /apds/:id' });
 
     try {
@@ -76,8 +75,7 @@ module.exports = (
       logger.verbose({ id: req.id, message: 'apd does not exist' });
       return res.status(400).end();
     } catch (e) {
-      logger.error({ id: req.id, message: e });
-      return res.status(500).end();
+      return next(e);
     }
   });
 };
