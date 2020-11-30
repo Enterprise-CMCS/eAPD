@@ -24,7 +24,7 @@ const getAPDByID = async (id, { db = knex } = {}) =>
     .where('id', id)
     .first('created_at', 'document', 'id', 'state_id', 'status', 'updated_at');
 
-const getAPDByIDAndState = async (id, stateID, { db = knex } = {}) =>
+const getAPDByIDAndState = (id, stateID, { db = knex } = {}) =>
   db('apds')
     .where('id', id)
     .andWhere('state_id', stateID)

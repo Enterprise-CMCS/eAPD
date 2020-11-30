@@ -13,3 +13,4 @@ __files
 api/test-data/files
 notes.md
 schema.sql
+Makefile
