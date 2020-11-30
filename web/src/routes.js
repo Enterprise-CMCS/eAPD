@@ -26,7 +26,6 @@ const routes = [
     isCard: true
   },
 
-  { path: '/me', component: MyAccount, isPublic: false, isCard: true },
   { path: '/login', component: Login, isPublic: true, isCard: true },
   { path: '/logout', component: Logout, isPublic: false },
   { component: NoMatch, isPublic: true }
