@@ -1,3 +1,4 @@
+const logger = require('../logger')('db/users');
 const { oktaClient } = require('../auth/oktaAuth');
 const knex = require('./knex');
 const {
@@ -28,14 +29,24 @@ const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
     .where({ user_id: id });
 };
 
+const actualGetSelectedStateIdByUserId = (id, { db = knex } = {}) => {
+  return db
+    .select('state_id')
+    .from('users')
+    .where({ uid: id })
+    .first()
+    .then(result => result ? result.state_id : undefined);
+};
+
 const populateUser = async (
   user,
   {
     getUserPermissionsForStates = actualGetUserPermissionsForStates,
     getUserAffiliatedStates = actualGetUserAffiliatedStates,
-    getAffiliationsByUserId = actualGetAffiliationsByUserId,
     getStateById = actualGetStateById,
-    getRoles = actualGetRoles
+    getRoles = actualGetRoles,
+    getSelectedStateIdByUserId = actualGetSelectedStateIdByUserId,
+    getAffiliationsByUserId = actualGetAffiliationsByUserId
   } = {}
 ) => {
   if (user) {
@@ -44,10 +55,19 @@ const populateUser = async (
     populatedUser.states = await getUserAffiliatedStates(user.id);
     populatedUser.affiliations = await getAffiliationsByUserId(user.id);
 
-    // maintain state, role, and activities fields for the user
+    // grab the selected affiliation
+    const selectedStateId = await getSelectedStateIdByUserId(user.id);
+    logger.info({ selectedStateId });
+    const affiliations = await getAffiliationsByUserId(user.id);
 
-    // grab the first affiliation
-    const affiliation = populatedUser.affiliations.find(Boolean);
+    let affiliation;
+    if (selectedStateId) {
+      affiliation = affiliations.find(a => a.state_id === selectedStateId);
+    } else {
+      // grab the first affiliation if none selected
+      affiliation = affiliations.find(Boolean);
+    }
+
     const roles = await getRoles();
     const role = affiliation && roles.find(r => r.id === affiliation.role_id);
 

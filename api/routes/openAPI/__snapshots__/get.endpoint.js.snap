@@ -1196,13 +1196,25 @@ Object {
         ],
       },
       "patch": Object {
+        "description": "Update user",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "query",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
         "requestBody": Object {
           "content": Object {
             "application/json": Object {
               "schema": Object {
                 "properties": Object {
                   "stateId": Object {
-                    "descripton": "2-letter US State or Territory abbreviation, lowercase",
+                    "description": "2-letter US State or Territory abbreviation, lowercase",
                     "type": "string",
                   },
                 },
@@ -1228,7 +1240,6 @@ Object {
             "bearerAuth": Array [],
           },
         ],
-        "summary": "Update user",
         "tags": Array [
           "Users",
         ],
@@ -1606,7 +1617,6 @@ Object {
               },
             },
           },
-          "description": "",
           "required": true,
         },
         "responses": Object {
