@@ -9,12 +9,7 @@ import { t } from '../i18n';
 import DashboardButton from './DashboardButton';
 import HeaderSaveMessage from './HeaderSaveMessage';
 
-import Icon, {
-  faChevronDown,
-  faChevronLeft,
-  faEdit,
-  faSignOutAlt
-} from './Icons';
+import Icon, { faChevronDown, faChevronLeft, faSignOutAlt } from './Icons';
 
 class Header extends Component {
   constructor(props) {
@@ -93,16 +88,6 @@ class Header extends Component {
                         <Icon icon={faChevronDown} style={{ width: '8px' }} />
                       </button>
                       <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
-                        <li>
-                          <Link
-                            to="/me"
-                            onClick={this.toggleDropdown}
-                            className="nav--dropdown__action"
-                          >
-                            <Icon icon={faEdit} style={{ width: '14px' }} />
-                            Manage account
-                          </Link>
-                        </li>
                         <li>
                           <Link
                             to="/logout"
