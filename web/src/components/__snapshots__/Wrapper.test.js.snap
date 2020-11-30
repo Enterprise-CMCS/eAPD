@@ -74,7 +74,7 @@ exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" 
 
 exports[`Wrapper component sets the appropriate CSS class if we are on a "gray" path renders correctly for the /me path 1`] = `
 <div
-  className="site"
+  className="site site--gray"
 >
   <Connect(Header)
     showSiteTitle={false}
