@@ -145,7 +145,6 @@ const patchAffiliation = {
     description: 'Update a user affiliation with a US State',
     parameters: [stateIdParameter, idParameter],
     requestBody: {
-      description: '',
       required: true,
       content: jsonResponse({
         type: 'object',
