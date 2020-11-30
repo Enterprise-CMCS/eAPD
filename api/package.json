@@ -81,7 +81,7 @@
     "jsonpatch": "^3.0.1",
     "jsonpointer": "^4.0.1",
     "jsonwebtoken": "^8.5.0",
-    "knex": "^0.20.13",
+    "knex": "^0.21.12",
     "moment": "^2.24.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
