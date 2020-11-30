@@ -22,6 +22,7 @@ Anticipated release: November 30, 2020
 
 - sending user role to Google Analytics
 - changed the way some tables are being seeded
+- removed the user profile page
 
 # Previous releases
 
