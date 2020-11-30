@@ -4,13 +4,17 @@ const sinon = require('sinon');
 const { can, userCanEditAPD } = require('../../middleware');
 const endpoint = require('./delete');
 
+const mockExpress = require('../../util/mockExpress');
+const mockResponse = require('../../util/mockResponse');
+
+let app;
+let req;
+let res;
+let next;
+let deleteAPDByID;
+
 tap.test('apds/:id DELETE endpoint', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-
-  const app = { delete: sandbox.stub() };
-  const deleteAPDByID = sandbox.stub();
-
-  const req = {
+  req = {
     meta: {
       apd: {
         id: 'apd id'
@@ -18,19 +22,11 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
     }
   };
 
-  const res = {
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
-
   endpointTest.beforeEach(async () => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
+    app = mockExpress();
+    res = mockResponse();
+    next = sinon.stub();
+    deleteAPDByID = sinon.stub();
   });
 
   endpointTest.test('setup', async test => {
@@ -47,17 +43,16 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
     );
   });
 
-  endpointTest.test('handles unexpected errors', async test => {
+  endpointTest.test('handles unexpected errors', async t => {
     endpoint(app, { deleteAPDByID });
     const handler = app.delete.args.find(args => args[0] === '/apds/:id').pop();
+    const err = { error: 'err0r' };
+    deleteAPDByID.rejects(err);
 
-    deleteAPDByID.rejects(new Error('random thing gone wrong'));
+    await handler(req, res, next);
 
-    await handler(req, res);
-
-    test.ok(res.status.calledWith(500), 'HTTP status set to 500');
-    test.ok(res.send.notCalled, 'no body is sent');
-    test.ok(res.end.called, 'response is terminated');
+    t.ok(next.called, 'next is called');
+    t.ok(next.calledWith(err), 'pass error to middleware');
   });
 
   endpointTest.test('updates the status and saves', async test => {

@@ -2,23 +2,24 @@ const { raw: knex } = require('../../db');
 const { loggedIn } = require('../../middleware/auth');
 
 module.exports = (app) => {
-  app.get('/states', async (request, response) => {
-    await knex('states').select('id', 'name')
-      .then(rows => response.status(200).json(rows));
+  app.get('/states', (request, response, next) => {
+    knex('states').select('id', 'name')
+      .then(rows => response.status(200).json(rows))
+      .catch(next);
   });
 
-  app.get('/states/:id', loggedIn, async (request, response) => {
+  app.get('/states/:id', loggedIn, (request, response, next) => {
     const { id } = request.params;
-    await knex('states')
+    knex('states')
       .where({ id })
       .first()
       .then(row => {
         if (row) {
           response.status(200).json(row);
         } else {
-          throw new Error('Not Found');
+          response.status(400).end();
         }
       })
-      .catch(() => response.status(400).end());
+      .catch(next);
   });
 }
