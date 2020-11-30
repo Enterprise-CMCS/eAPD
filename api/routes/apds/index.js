@@ -17,18 +17,18 @@ module.exports = (
     postEndpoint = post
   } = {}
 ) => {
-  logger.silly('setting up DELETE endpoint');
+  logger.debug('setting up DELETE endpoint');
   deleteEndpoint(app);
-  logger.silly('setting up GET endpoint');
+  logger.debug('setting up GET endpoint');
   getEndpoint(app);
-  logger.silly('setting up PATCH endpoint');
+  logger.debug('setting up PATCH endpoint');
   patchEndpoint(app);
-  logger.silly('setting up POST endpoint');
+  logger.debug('setting up POST endpoint');
   postEndpoint(app);
 
-  logger.silly('setting up APD image endpoints');
+  logger.debug('setting up APD image endpoints');
   filesEndpoints(app);
 
-  logger.silly('setting up APD events endpoints');
+  logger.debug('setting up APD events endpoints');
   eventsEndpoints(app);
 };
