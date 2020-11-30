@@ -22,6 +22,7 @@ Anticipated release: November 30, 2020
 
 - sending user role to Google Analytics
 - changed the way some tables are being seeded
+- Add API endpoint for user to select a state ([#2679])
 
 # Previous releases
 
@@ -38,3 +39,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2574]: https://github.com/cmsgov/eapd/issues/2574
 [#2597]: https://github.com/cmsgov/eapd/issues/2597
 [#2617]: https://github.com/cmsgov/eapd/issues/2617
+[#2679]: https://github.com/CMSgov/eAPD/issues/2679
