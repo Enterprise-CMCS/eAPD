@@ -115,9 +115,11 @@ const LoginApplication = ({
   console.log({ from, location });
   if (authenticated) {
     if (from.pathname !== '/logout') {
-      return <Redirect to={from} />;
+      console.log(`go to ${JSON.stringify(from)}`);
+      return <Redirect to={from} push />;
     }
-    return <Redirect to="/login" />;
+    console.log('redirect to /login');
+    return <Redirect to="/login" push />;
   }
 
   if (showConsent) {

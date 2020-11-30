@@ -41,7 +41,7 @@ describe('Login Application', () => {
   });
 
   it('should redirect to where it came from if authenticated', () => {
-    // window.history.replaceState({ from: '/dashboard' }, 'pushState example');
+    // window.history.pushState({ from: '/dashboard' }, 'pushState example');
     const testProps = {
       ...props,
       authenticated: true
@@ -62,6 +62,8 @@ describe('Login Application', () => {
       }
     );
     console.log({ history });
+    const back = history.go(-2);
+    console.log({ history, back });
     expect(history.location.pathname).toEqual('/dashboard');
   });
 });
