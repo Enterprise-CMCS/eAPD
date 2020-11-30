@@ -57,7 +57,7 @@ const populateUser = async (
 
     // grab the selected affiliation
     const selectedStateId = await getSelectedStateIdByUserId(user.id);
-    logger.info({ selectedStateId });
+    logger.info({ selectedStateId, uid: user.id });
     const affiliations = await getAffiliationsByUserId(user.id);
 
     let affiliation;
