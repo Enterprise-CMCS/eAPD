@@ -12,7 +12,7 @@ export const getUserStateOrTerritory = ({
   }
 }) => state;
 
-export const getUserStateOrTerritoryStatus = ({
+export const getUserAffiliationForCurrentState = ({
   user: {
     data: {
       state: { id },
@@ -20,8 +20,15 @@ export const getUserStateOrTerritoryStatus = ({
     }
   }
 }) => {
-  const { status } = affiliations.find(
-    affiliation => affiliation.state_id === id
-  );
+  return affiliations.find(affiliation => affiliation.state_id === id);
+};
+
+export const getUserStateOrTerritoryStatus = state => {
+  const { status = null } = getUserAffiliationForCurrentState(state);
   return status;
+};
+
+export const getUserStateOrTerritoryRole = state => {
+  const { role = null } = getUserAffiliationForCurrentState(state);
+  return role;
 };

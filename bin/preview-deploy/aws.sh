@@ -87,7 +87,7 @@ function configureUserData() {
   # names can contain slashes
   sed -i'.backup' -e "s|__GIT_BRANCH__|\"`echo $BRANCH`\"|g" aws.user-data.sh
 
-  sed -i'.backup' -e "s/__PBKDF2_ITERATIONS__/`echo $API_PBKDF2_ITERATIONS`/g" aws.user-data.sh
+  sed -i'.backup' -e "s|__PBKDF2_ITERATIONS__|`echo $API_PBKDF2_ITERATIONS`|g" aws.user-data.sh
 
   sed -i'.backup' -e "s|__OKTA_DOMAIN__|`echo $OKTA_DOMAIN`|g" aws.user-data.sh
 
