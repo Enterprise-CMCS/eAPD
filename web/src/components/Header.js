@@ -95,16 +95,6 @@ class Header extends Component {
                       <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
                         <li>
                           <Link
-                            to="/me"
-                            onClick={this.toggleDropdown}
-                            className="nav--dropdown__action"
-                          >
-                            <Icon icon={faEdit} style={{ width: '14px' }} />
-                            Manage account
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
                             to="/logout"
                             onClick={this.toggleDropdown}
                             className="nav--dropdown__action"
