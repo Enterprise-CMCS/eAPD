@@ -3,7 +3,7 @@ exports.up = async knex => {
   await knex.schema.dropTable('apd_versions');
 
   // remove fields from users table
-  await knex.schema.table('users', (table) => {
+  await knex.schema.table('users', table => {
     table.dropColumn('id');
     table.dropColumn('email');
     table.dropColumn('password');
@@ -20,6 +20,7 @@ exports.up = async knex => {
     table
       .string('uid')
       .notNullable()
+      .defaultTo('not set')
       .comment('id of user from authentication service');
     table.unique('uid');
   });
@@ -32,7 +33,7 @@ exports.down = async knex => {
   });
 
   // add fields to users table
-  await knex.schema.table('users', (table) => {
+  await knex.schema.table('users', table => {
     table.increments();
     table.text('email');
     table.string('password', 60).comment('hashed password');
