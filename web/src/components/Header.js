@@ -9,12 +9,7 @@ import { t } from '../i18n';
 import DashboardButton from './DashboardButton';
 import HeaderSaveMessage from './HeaderSaveMessage';
 
-import Icon, {
-  faChevronDown,
-  faChevronLeft,
-  faEdit,
-  faSignOutAlt
-} from './Icons';
+import Icon, { faChevronDown, faChevronLeft, faSignOutAlt } from './Icons';
 
 class Header extends Component {
   constructor(props) {
