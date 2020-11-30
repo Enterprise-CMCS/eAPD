@@ -64,10 +64,6 @@ export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
 
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
-export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
-export const successAccessToState = () => ({ type: STATE_ACCESS_SUCCESS });
-export const completeAccessToState = () => ({ type: STATE_ACCESS_COMPLETE });
-
 const loadData = activities => dispatch => {
   if (activities.includes('view-document')) {
     dispatch(fetchAllApds());
@@ -85,22 +81,25 @@ const getCurrentUser = () => dispatch =>
     .get('/me')
     .then(userRes => {
       if (userRes.data.states.length === 0) {
-        dispatch(requestAccessToState());
+        return '/login/affiliations/request';
       }
       if (userRes.data.activities) {
         dispatch(loadData(userRes.data.activities));
       }
       dispatch(completeLogin(userRes.data));
       dispatch(resetLocked());
+      return null;
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
+      return null;
     });
 
 export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
   const factor = await getFactor(mfaSelected);
 
+  console.log({ mfaSelected });
   if (factor) {
     const enrollTransaction =
       mfaSelected === MFA_FACTOR_TYPES.SMS ||
@@ -111,12 +110,19 @@ export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
         : await factor.enroll();
 
     if (enrollTransaction.status === 'MFA_ENROLL_ACTIVATE') {
-      return dispatch(
+      dispatch(
         mfaEnrollActivate(mfaSelected, enrollTransaction.factor.activation)
       );
+      if (
+        mfaSelected === MFA_FACTOR_TYPES.GOOGLE ||
+        mfaSelected === MFA_FACTOR_TYPES.OKTA
+      ) {
+        return '/login/mfa/configure-app';
+      }
+      return '/login/mfa/activate';
     }
   }
-  return false;
+  return null;
 };
 
 export const mfaAddPhone = mfaSelected => async dispatch => {
@@ -132,22 +138,25 @@ export const mfaActivate = code => async dispatch => {
 
   if (activateTransaciton.status === 'SUCCESS') {
     await setTokens(activateTransaciton.sessionToken);
-    dispatch(getCurrentUser());
+    return dispatch(getCurrentUser());
   }
+  return null;
 };
 
 export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
-  authenticateUser(username, password)
+  return authenticateUser(username, password)
     .then(async res => {
       if (res.status === 'LOCKED_OUT') {
-        return dispatch(failLoginLocked());
+        dispatch(failLoginLocked());
+        return '/login/locked-out';
       }
       // MFA enrollment starts here. If MFA is required as part
       // of a users policy, get the list of available options
       if (res.status === 'MFA_ENROLL') {
         const factors = getAvailableFactors(res.factors);
-        return dispatch(mfaEnrollStart(factors));
+        dispatch(mfaEnrollStart(factors));
+        return '/login/mfa/enroll';
       }
 
       if (res.status === 'MFA_REQUIRED') {
@@ -159,18 +168,21 @@ export const login = (username, password) => dispatch => {
 
         return mfaFactor.verify(res).then(() => {
           dispatch(completeFirstStage());
+          return '/login/mfa/verify';
         });
       }
 
       if (res.status === 'SUCCESS') {
         await setTokens(res.sessionToken);
-        return dispatch(getCurrentUser());
+        dispatch(getCurrentUser());
+        return null;
       }
       return null;
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
+      return null;
     });
 };
 
@@ -181,34 +193,40 @@ export const loginOtp = otp => async dispatch => {
     return verifyMFA({ transaction, otp })
       .then(async ({ sessionToken }) => {
         await setTokens(sessionToken);
-        return dispatch(getCurrentUser());
+        dispatch(getCurrentUser());
+        return null;
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';
         if (reason === 'User Locked') {
           dispatch(failLoginLocked(reason));
-        } else {
-          dispatch(failLoginMFA(reason));
+          return '/login/locked-out';
         }
+        dispatch(failLoginMFA(reason));
+        return null;
       });
   }
-  return dispatch(failLoginMFA('Authentication failed'));
+  dispatch(failLoginMFA('Authentication failed'));
+  return null;
 };
 
-export const createAccessRequest = states => dispatch => {
+export const createAccessRequest = states => dispatch =>
   states.forEach(stateId => {
     axios
       .post(`/states/${stateId}/affiliations`)
       .then(() => {
-        dispatch(successAccessToState());
         dispatch(getCurrentUser());
+        return '/login/affiliations/thank-you';
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';
         dispatch(failLogin(reason));
+        return null;
       });
   });
-};
+
+export const completeAccessToState = () => dispatch =>
+  dispatch(getCurrentUser());
 
 export const logout = () => dispatch => {
   logoutAndClearTokens();
@@ -224,5 +242,5 @@ export const checkAuth = () => dispatch => {
       dispatch(completeAuthCheck(req.data));
       dispatch(loadData(req.data.activities));
     })
-    .catch(() => dispatch(failAuthCheck()));
+    .catch(err => dispatch(failAuthCheck(err)));
 };

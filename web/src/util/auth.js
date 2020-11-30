@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import oktaAuth from './oktaAuth';
 import { MFA_FACTORS } from '../constants';
 
+// OKTA Auth Wrappers
 export const authenticateUser = (username, password) => {
   return oktaAuth.signIn({ username, password });
 };
@@ -40,15 +41,17 @@ export const setTokens = sessionToken => {
 };
 
 export const getAvailableFactors = factors =>
-  factors.map(item => {
-    const { factorType, provider } = item;
-    const { displayName, active } = MFA_FACTORS[`${factorType}-${provider}`];
-    return {
-      ...item,
-      displayName,
-      active
-    };
-  });
+  factors
+    .filter(item => item.provider === 'OKTA')
+    .map(item => {
+      const { factorType, provider } = item;
+      const { displayName, active } = MFA_FACTORS[`${factorType}-${provider}`];
+      return {
+        ...item,
+        displayName,
+        active
+      };
+    });
 
 export const getFactor = async mfaSelectedType => {
   const transaction = await retrieveExistingTransaction();
@@ -63,4 +66,26 @@ export const logoutAndClearTokens = async () => {
   await oktaAuth.signOut();
   await oktaAuth.tokenManager.remove('idToken');
   await oktaAuth.tokenManager.remove('accessToken');
+};
+
+// Cookie
+
+const cookieName = 'gov.cms.eapd.hasConsented';
+
+export const cookie = name => {
+  const cookieMap = (document.cookie || '').split(';').reduce((c, s) => {
+    const bits = s.trim().split('=');
+    if (bits.length === 2) {
+      return { ...c, [bits[0].trim()]: bits[1].trim() };
+    }
+    return c;
+  }, {});
+
+  return cookieMap[name];
+};
+
+export const hasConsented = () => cookie(cookieName) || false;
+
+export const setConsented = () => {
+  document.cookie = `${cookieName}=true;max-age=259200;path=/`; // 3 days
 };

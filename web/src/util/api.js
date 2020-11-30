@@ -10,7 +10,8 @@ const axios = axiosClient.create({
 // add Authorization header to axios request if jwt is present in localStorage
 const presentTokenViaAuthorizationHeader = async config => {
   // retrieve access token from local storage
-  const { accessToken } = await oktaAuth.tokenManager.get('accessToken');
+  const { accessToken = null } =
+    (await oktaAuth.tokenManager.get('accessToken')) || {};
   if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 };

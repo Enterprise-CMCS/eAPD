@@ -22,6 +22,7 @@ import reducer from '../reducers';
  */
 const renderWithConnection = (ui, renderOptions = {}) => {
   const {
+    initialHistory = null,
     history = createBrowserHistory(),
     initialState = undefined,
     middleware = [thunk, routerMiddleware(history)],
@@ -32,6 +33,10 @@ const renderWithConnection = (ui, renderOptions = {}) => {
     ),
     ...options
   } = renderOptions;
+  if (initialHistory) {
+    const { to, state } = initialHistory;
+    history.replace(to, state);
+  }
   const wrappedNode = rtlRender(
     <Provider store={store}>
       <ConnectedRouter history={history}>{ui}</ConnectedRouter>
