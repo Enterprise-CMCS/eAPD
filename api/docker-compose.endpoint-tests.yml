@@ -15,12 +15,11 @@ services:
     depends_on:
       - db
     environment:
-      - LOG_LEVEL=info
       - PORT=8000
       - NODE_ENV=test
       - API_PORT=8000
       - API_HOST=api-for-testing
-      - ENDPOINT_COVERAGE_CAPTURE=true
+      - ENDPOINT_COVERAGE_CAPTURE=${ENDPOINT_COVERAGE_CAPTURE}
       - FILE_STORE=local
       - FILE_PATH=test-data/files
       - OKTA_DOMAIN=${OKTA_DOMAIN}

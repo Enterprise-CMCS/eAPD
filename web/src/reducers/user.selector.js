@@ -42,8 +42,10 @@ export const getUserStateOrTerritoryStatus = ({
     } = {}
   } = {}
 }) => {
-  const { status } = affiliations.find(
-    affiliation => affiliation.state_id === id
-  );
-  return status;
+  return affiliations.find(affiliation => affiliation.state_id === id);
+};
+
+export const getUserStateOrTerritoryRole = state => {
+  const { role = null } = getUserAffiliationForCurrentState(state);
+  return role;
 };

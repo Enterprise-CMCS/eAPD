@@ -72,20 +72,6 @@ exports[`Routes component renders correctly 1`] = `
     key="/edit-account"
     path="/edit-account"
   />
-  <Connect(PrivateRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(MyAccount)",
-        "type": [Function],
-      }
-    }
-    isCard={true}
-    key="/me"
-    path="/me"
-  />
   <Route
     component={
       Object {

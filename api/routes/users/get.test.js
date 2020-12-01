@@ -4,29 +4,24 @@ const sinon = require('sinon');
 const can = require('../../middleware').can;
 const getEndpoint = require('./get');
 
+const mockExpress = require('../../util/mockExpress');
+const mockResponse = require('../../util/mockResponse');
+
+let res;
+let next;
+let app;
+let getAllUsers;
+let getUserByID;
+let handler;
+
 tap.test('user GET endpoint', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-  const app = {
-    get: sandbox.stub()
-  };
-
-  const getAllUsers = sandbox.stub();
-  const getUserByID = sandbox.stub();
-
-  const res = {
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
 
   endpointTest.beforeEach(done => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
-
+    res = mockResponse();
+    next = sinon.stub();
+    app = mockExpress();
+    getAllUsers = sinon.stub();
+    getUserByID = sinon.stub();
     done();
   });
 
@@ -44,25 +39,19 @@ tap.test('user GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get all users handler', async handlerTest => {
-    let handler;
     handlerTest.beforeEach(done => {
       getEndpoint(app, { getAllUsers });
       handler = app.get.args.find(args => args[0] === '/users')[2];
       done();
     });
 
-    handlerTest.test(
-      'sends a server error code if there is a database error',
-      async invalidTest => {
-        getAllUsers.rejects();
-
-        await handler({}, res);
-
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
+    handlerTest.test('database error', async invalidTest => {
+      const err = { error: 'err0r' };
+      getAllUsers.rejects(err);
+      await handler({}, res, next);
+      invalidTest.ok(next.called, 'next is called');
+      invalidTest.ok(next.calledWith(err), 'pass error to middleware');
+    });
 
     handlerTest.test('sends back a list of users', async validTest => {
       getAllUsers.resolves('these are all the users');
@@ -78,25 +67,19 @@ tap.test('user GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get single user handler', async handlerTest => {
-    let handler;
     handlerTest.beforeEach(done => {
       getEndpoint(app, { getUserByID });
       handler = app.get.args.find(args => args[0] === '/users/:id')[2];
       done();
     });
 
-    handlerTest.test(
-      'sends a server error code if there is a database error',
-      async invalidTest => {
-        getUserByID.rejects();
-
-        await handler({ params: { id: 1 } }, res);
-
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
+    handlerTest.test('database error', async invalidTest => {
+      const err = { error: 'err0r' };
+      getUserByID.rejects(err);
+      await handler({ params: { id: 1 } }, res, next);
+      invalidTest.ok(next.called, 'next is called');
+      invalidTest.ok(next.calledWith(err), 'pass error to middleware');
+    });
 
     handlerTest.test(
       'sends a not-found error if the requested user does not exist',
