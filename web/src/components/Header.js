@@ -113,7 +113,7 @@ class Header extends Component {
                               onClick={this.toggleDropdown}
                               className="nav--dropdown__action"
                             >
-                              <AdminPanelSettings fontSize="small"/>
+                              <AdminPanelSettings style={{ fontSize: 16 }}/>
                               {`${currentStateAffiliation.state_id.toUpperCase()} State Admin Panel`}
                             </Link>
                           </li>

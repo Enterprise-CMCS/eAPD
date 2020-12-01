@@ -157,3 +157,22 @@ export const editSelf = (user, changingPassword) => dispatch => {
       dispatch({ type: ADMIN_EDIT_ME_ERROR, data: error });
     });
 };
+
+export const ADMIN_GET_STATE_AFFILIATIONS_SUCCESS = 'ADMIN_GET_STATE_AFFILIATIONS_SUCCESS';
+export const ADMIN_GET_STATE_AFFILIATIONS_ERROR = 'ADMIN_GET_STATE_AFFILIATIONS_ERROR';
+
+export const getStateAffiliations = (stateId) => dispatch => {
+  console.log("hit get state", stateId)
+  return axios
+    .get('/states/md/affiliations')
+    .then(res => {
+      dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_SUCCESS, data: res.data });
+    })
+    .catch(e => {
+      let error = null;
+      if (e.response.data) {
+        ({ error } = e.response.data);
+      }
+      dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_ERROR });
+    });
+};

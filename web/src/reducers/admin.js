@@ -3,13 +3,15 @@ import { createSelector } from 'reselect';
 import {
   ADMIN_GET_ACTIVITIES_SUCCESS,
   ADMIN_GET_ROLES_SUCCESS,
-  ADMIN_GET_USERS_SUCCESS
+  ADMIN_GET_USERS_SUCCESS,
+  ADMIN_GET_STATE_AFFILIATIONS_SUCCESS,
 } from '../actions/admin';
 
 const initialState = {
   activities: [],
   roles: [],
-  users: []
+  users: [],
+  affiliations: []
 };
 
 const user = (state = initialState, action) => {
@@ -22,6 +24,13 @@ const user = (state = initialState, action) => {
       return { ...state, users: [...action.data] };
     default:
       return state;
+  }
+};
+
+const affiliations = (state = initialState, action) => {
+  switch (action.type) {
+    case ADMIN_GET_STATE_AFFILIATIONS_SUCCESS:
+      return { ...state, affiliations: [...action.data] };
   }
 };
 
