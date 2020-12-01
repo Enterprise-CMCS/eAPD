@@ -1,41 +1,35 @@
 const tap = require('tap');
-const sandbox = require('sinon').createSandbox();
+const sinon = require('sinon');
 
 const { loadApd, userCanAccessAPD, userCanEditAPD } = require('./apd');
+const mockResponse = require('../util/mockResponse');
 
-const res = {
-  status: sandbox.stub(),
-  send: sandbox.stub(),
-  end: sandbox.stub()
-};
-const next = sandbox.spy();
+let err;
+let res;
+let next;
 
 tap.test('APD-related middleware', async middlewareTests => {
+
   middlewareTests.beforeEach(done => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
-
+    err = { error: 'err0r' };
+    res = mockResponse();
+    next = sinon.stub();
     done();
   });
 
   middlewareTests.test('load apd', async loadApdTests => {
-    const getAPDByID = sandbox.stub();
+    const getAPDByID = sinon.stub();
 
     loadApdTests.test(
       'when there is an error loading the APD',
       async invalidTest => {
-        getAPDByID.rejects();
+        getAPDByID.rejects(err);
 
         const req = { meta: {}, params: { 'apd-id': 9 } };
         await loadApd({ getAPDByID })(req, res, next);
 
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status is set to 500');
-        invalidTest.ok(res.end.calledOnce, 'response is closed');
-        invalidTest.ok(next.notCalled, 'next is not called');
+        invalidTest.ok(next.called, 'next is called');
+        invalidTest.ok(next.calledWith(err), 'pass error to middleware');
       }
     );
 
@@ -82,7 +76,7 @@ tap.test('APD-related middleware', async middlewareTests => {
   });
 
   middlewareTests.test('user can access apd', async accessApdTests => {
-    const loadApdMock = sandbox.stub();
+    const loadApdMock = sinon.stub();
     const loadApdFake = () => loadApdMock;
 
     accessApdTests.beforeEach(async () => {
@@ -121,7 +115,7 @@ tap.test('APD-related middleware', async middlewareTests => {
   });
 
   middlewareTests.test('user can edit apd', async tests => {
-    const userCanAccessAPDMock = sandbox.stub();
+    const userCanAccessAPDMock = sinon.stub();
     const userCanAccessAPDFake = () => userCanAccessAPDMock;
 
     tests.beforeEach(async () => {

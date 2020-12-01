@@ -2,11 +2,11 @@ const { raw: knex } = require('../../db');
 const { loggedIn } = require('../../middleware/auth');
 
 module.exports = (app) => {
-  app.post('/states/:stateId/affiliations', loggedIn, async (request, response) => {
+  app.post('/states/:stateId/affiliations', loggedIn, (request, response) => {
     const userId = request.user.id;
     const { stateId } = request.params;
 
-    await knex('auth_affiliations')
+    knex('auth_affiliations')
       .returning(['id'])
       .insert({
         user_id: userId,

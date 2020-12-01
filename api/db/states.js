@@ -20,9 +20,8 @@ const updateStateProfile = async (
 };
 
 const getStateById = (id, { db = knex } = {}) => {
-  return db
+  return db('states')
     .select('*')
-    .from('states')
     .where({ id })
     .first();
 }

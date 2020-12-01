@@ -11,12 +11,7 @@ import HeaderSaveMessage from './HeaderSaveMessage';
 
 import { AdminPanelSettings } from '@material-ui/icons';
 
-import Icon, {
-  faChevronDown,
-  faChevronLeft,
-  faEdit,
-  faSignOutAlt
-} from './Icons';
+import Icon, { faChevronDown, faChevronLeft, faSignOutAlt } from './Icons';
 
 class Header extends Component {
   constructor(props) {
