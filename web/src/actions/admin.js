@@ -161,11 +161,10 @@ export const editSelf = (user, changingPassword) => dispatch => {
 export const ADMIN_GET_STATE_AFFILIATIONS_SUCCESS = 'ADMIN_GET_STATE_AFFILIATIONS_SUCCESS';
 export const ADMIN_GET_STATE_AFFILIATIONS_ERROR = 'ADMIN_GET_STATE_AFFILIATIONS_ERROR';
 
-export const getStateAffiliations = (stateId) => dispatch => {
+export const getStateAffiliations = stateId => dispatch => {
   return axios
     .get(`/states/${stateId}/affiliations`)
     .then(res => {
-      console.log("response from affiliations hit", res)
       dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_SUCCESS, data: res.data });
     })
     .catch(e => {
