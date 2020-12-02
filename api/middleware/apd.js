@@ -54,8 +54,9 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
       // and that causes problems in testing.  So we await.  :)
       await loadApd()(req, res, async () => {
         const { path, meta, user } = req;
-        // Allow requests for attached files to pass-through.
-        if (path && path.startsWith('/apds/') && path.includes('/files/')) {
+        // Allow requests for attached files to pass-through. Client would not
+        // request file URLs without access to the APD.
+        if (path && path.includes('/apds/') && path.includes('/files/')) {
           next();
         // Does the APD state match the user's selected state?
         } else if (meta.apd.state === user.state.id) {
