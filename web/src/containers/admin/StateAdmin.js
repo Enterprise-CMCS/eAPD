@@ -295,7 +295,7 @@ const StateAdmin = ({
 }) => {  
   console.log("state affiliations:", stateAffiliations("md"));
   return (
-    <main id="start-main-content" class="ds-l-container ds-u-margin-bottom--5">
+    <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
       <h1>Maryland eAPD State Administrator Portal</h1>
       <Tabs>
         <TabPanel id="requests" tab="Requests">

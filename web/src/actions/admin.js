@@ -162,10 +162,10 @@ export const ADMIN_GET_STATE_AFFILIATIONS_SUCCESS = 'ADMIN_GET_STATE_AFFILIATION
 export const ADMIN_GET_STATE_AFFILIATIONS_ERROR = 'ADMIN_GET_STATE_AFFILIATIONS_ERROR';
 
 export const getStateAffiliations = (stateId) => dispatch => {
-  console.log("hit get state", stateId)
   return axios
-    .get('/states/md/affiliations')
+    .get(`/states/${stateId}/affiliations`)
     .then(res => {
+      console.log("response from affiliations hit", res)
       dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_SUCCESS, data: res.data });
     })
     .catch(e => {

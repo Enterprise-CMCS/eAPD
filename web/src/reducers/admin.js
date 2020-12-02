@@ -14,7 +14,7 @@ const initialState = {
   affiliations: []
 };
 
-const user = (state = initialState, action) => {
+const admin = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN_GET_ACTIVITIES_SUCCESS:
       return { ...state, activities: [...action.data] };
@@ -22,19 +22,14 @@ const user = (state = initialState, action) => {
       return { ...state, roles: [...action.data] };
     case ADMIN_GET_USERS_SUCCESS:
       return { ...state, users: [...action.data] };
+    case ADMIN_GET_STATE_AFFILIATIONS_SUCCESS:
+      return { ...state, affiliations: action.data };
     default:
       return state;
   }
 };
 
-const affiliations = (state = initialState, action) => {
-  switch (action.type) {
-    case ADMIN_GET_STATE_AFFILIATIONS_SUCCESS:
-      return { ...state, affiliations: [...action.data] };
-  }
-};
-
-export default user;
+export default admin;
 
 export const selectUsers = ({ admin: { users } }) => users;
 
