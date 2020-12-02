@@ -112,6 +112,20 @@ tap.test('APD-related middleware', async middlewareTests => {
         validTest.ok(next.calledOnce, 'next is called');
       }
     );
+
+    accessApdTests.test('passes if requesting an APD file', async validTest => {
+        const req = {
+          user: { state: { id: 'not florp' } },
+          meta: { apd: { state: 'florp' } },
+          path: '/apds/apdId/files/fileId'
+        };
+        await userCanAccessAPD({ loadApd: loadApdFake })(req, res, next);
+
+        validTest.ok(res.status.notCalled, 'HTTP status is not set');
+        validTest.ok(res.end.notCalled, 'response is not closed');
+        validTest.ok(next.calledOnce, 'next is called');
+      }
+    );
   });
 
   middlewareTests.test('user can edit apd', async tests => {
