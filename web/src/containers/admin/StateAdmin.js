@@ -1,5 +1,4 @@
-import React, { Component, Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -18,15 +17,6 @@ import {
   TableCell, 
   TableBody 
 } from '@cmsgov/design-system';
-
-import Icon, {
-  faCheckCircle,
-} from '../../components/Icons';
-
-{/* Tif notes
-use the admin action/reducer, call the /states/:stateId/affiliations endpoint to get all affiliations and add to redux
-once added to redux, connect to the view  
- */}
  
 const ManageRoleDialog = (props) => {
   const dropdownOptions = [
@@ -36,11 +26,11 @@ const ManageRoleDialog = (props) => {
   
   return (
     <Dialog
-      onExit={props.hideModal}
+      onExit={props.hideManageModal}
       heading="Bob Crachet"
       actions={[
-        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={props.hideModal}>Save</Button>,
-        <Button variation="danger" onClick={props.hideModal}>Cancel</Button>
+        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={props.hideManageModal}>Save</Button>,
+        <Button variation="danger" onClick={props.hideManageModal}>Cancel</Button>
       ]}
     >
       <p><strong>Phone Number</strong> 4108765123</p>
@@ -62,27 +52,36 @@ const ManageRoleDialog = (props) => {
 const ConfirmationDialog = (props) => {
   return (
     <Dialog
-      onExit={props.hideModal}
-      heading="Bob Crachet"
+      onExit={props.hideConfirmationModal}
+      heading="Confirm Rejection"
       actions={[
-        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={props.hideModal}>Save</Button>,
-        <Button variation="danger" onClick={props.hideModal}>Cancel</Button>
+        <Button className="ds-c-button ds-c-button--danger" onClick={props.hideConfirmationModal}>Confirm</Button>,
+        <Button className="ds-c-button ds-c-button--transparent" onClick={props.hideConfirmationModal}>Cancel</Button>
       ]}
     >
-      <p>Are you sure?</p>
+      <p>Are you sure you want to?</p>
     </Dialog>
   )
 }
 
 const RequestList = (props) => {
-  const [modalDisplay, setModalDisplay] = useState(false);
+  const [manageModalDisplay, setManageModalDisplay] = useState(false);
+  const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
   
-  const showModal = () => {
-    setModalDisplay(true);
+  const showManageModal = () => {
+    setManageModalDisplay(true);
   }
   
-  const hideModal = () => {
-    setModalDisplay(false);  
+  const hideManageModal = () => {
+    setManageModalDisplay(false);  
+  }
+
+  const showConfirmationModal = () => {
+    setConfirmationModalDisplay(true);
+  }
+  
+  const hideConfirmationModal = () => {
+    setConfirmationModalDisplay(false);  
   }
   
   return (
@@ -103,77 +102,43 @@ const RequestList = (props) => {
             <TableCell>555-867-5309</TableCell>
             <TableCell>
               <div>
-                <Button onClick={showModal} size='small' className="ds-u-margin-right--2">Approve</Button>
-                <Button size='small' variation='danger'>Deny</Button>
-              </div>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Bob Cratchet</TableCell>
-            <TableCell>bob@humbug.com</TableCell>
-            <TableCell>555-867-5309</TableCell>
-            <TableCell>
-              <div>
-                <Button onClick={showModal} size='small' className="ds-u-margin-right--2">Approve</Button>
-                <Button size='small' variation='danger'>Deny</Button>
-              </div>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Bob Cratchet</TableCell>
-            <TableCell>bob@humbug.com</TableCell>
-            <TableCell>555-867-5309</TableCell>
-            <TableCell>
-              <div>
-                <Button onClick={showModal} size='small' className="ds-u-margin-right--2">Approve</Button>
-                <Button size='small' variation='danger'>Deny</Button>
-              </div>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Bob Cratchet</TableCell>
-            <TableCell>bob@humbug.com</TableCell>
-            <TableCell>555-867-5309</TableCell>
-            <TableCell>
-              <div>
-                <Button onClick={showModal} size='small' className="ds-u-margin-right--2">Approve</Button>
-                <Button size='small' variation='danger'>Deny</Button>
-              </div>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Bob Cratchet</TableCell>
-            <TableCell>bob@humbug.com</TableCell>
-            <TableCell>
-              <p className="ds-u-margin--0"><strong>Cell</strong> 555-867-5309</p>
-              <p className="ds-u-margin--0"><strong>Office</strong> 555-877-9090</p>
-            </TableCell>
-            <TableCell>
-              <div>
-                <Button onClick={showModal} size='small' className="ds-u-margin-right--2">Approve</Button>
-                <Button size='small' variation='danger'>Deny</Button>
+                <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Approve</Button>
+                <Button onClick={showConfirmationModal} size='small' variation='danger'>Reject</Button>
               </div>
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
+
+      {confirmationModalDisplay && (
+        <ConfirmationDialog hideConfirmationModal={hideConfirmationModal} onClick={hideConfirmationModal} showConfirmationModal={showConfirmationModal} />
+      )}
       
-      {modalDisplay && (
-        <ManageRoleDialog hideModal={hideModal} onClick={hideModal} showModal={showModal}/>
+      {manageModalDisplay && (
+        <ManageRoleDialog hideManageModal={hideManageModal} onClick={hideManageModal} showManageModal={showManageModal}/>
       )}
     </Fragment>
   )
 }
 
 const ActiveList = (props) => {
-  const [modalDisplay, setModalDisplay] = useState(false);
+  const [manageModalDisplay, setModalDisplay] = useState(false);
+  const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
   
-  const showModal = () => {
+  const showManageModal = () => {
     setModalDisplay(true);
   }
   
-  const hideModal = () => {
+  const hideManageModal = () => {
     setModalDisplay(false);  
+  }
+
+  const showConfirmationModal = () => {
+    setConfirmationModalDisplay(true);
+  }
+  
+  const hideConfirmationModal = () => {
+    setConfirmationModalDisplay(false);  
   }
   
   return (
@@ -196,53 +161,33 @@ const ActiveList = (props) => {
             <TableCell>State Coordinator</TableCell>
             <TableCell>
               <div className="ds-u-display--flex ds-u-align-items--center">
-                <Button size='small' className="ds-u-margin-right--2" onClick={showModal}>Edit Access</Button>
-                <Button size='small' variation="danger" className="ds-u-margin-right--2" onClick={showModal}>Revoke Access</Button>
-              </div>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Michael Scott</TableCell>
-            <TableCell>michael@dunder.com</TableCell>
-            <TableCell>555-867-5309</TableCell>
-            <TableCell>State Contractor</TableCell>
-            <TableCell>
-              <div className="ds-u-display--flex ds-u-align-items--center">
-                <Button size='small' className="ds-u-margin-right--2" onClick={showModal}>Edit Access</Button>
-                <Button size='small' variation="danger" className="ds-u-margin-right--2" onClick={showModal}>Revoke Access</Button>
-              </div>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Taylor Baylor</TableCell>
-            <TableCell>bob@humbug.com</TableCell>
-            <TableCell>555-867-5309</TableCell>
-            <TableCell>State Contractor</TableCell>
-            <TableCell>
-              <div className="ds-u-display--flex ds-u-align-items--center">
-                <Button size='small' className="ds-u-margin-right--2" onClick={showModal}>Edit Access</Button>
-                <Button size='small' variation="danger" className="ds-u-margin-right--2" onClick={showModal}>Revoke Access</Button>
+                <Button size='small' className="ds-u-margin-right--2" onClick={showManageModal}>Edit Access</Button>
+                <Button size='small' variation="danger" className="ds-u-margin-right--2" onClick={showConfirmationModal}>Revoke Access</Button>
               </div>
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
-      
-      {modalDisplay && (
-        <ManageRoleDialog hideModal={hideModal} onClick={hideModal} showModal={showModal}/>
+
+      {confirmationModalDisplay && (
+        <ConfirmationDialog hideConfirmationModal={hideConfirmationModal} onClick={hideConfirmationModal} showConfirmationModal={showConfirmationModal} />
+      )}
+
+      {manageModalDisplay && (
+        <ManageRoleDialog hideManageModal={hideManageModal} onClick={hideManageModal} showManageModal={showManageModal}/>
       )}
     </Fragment>
   )
 }
 
 const InactiveList = (props) => {
-  const [modalDisplay, setModalDisplay] = useState(false);
+  const [manageModalDisplay, setModalDisplay] = useState(false);
   
-  const showModal = () => {
+  const showManageModal = () => {
     setModalDisplay(true);
   }
   
-  const hideModal = () => {
+  const hideManageModal = () => {
     setModalDisplay(false);  
   }
   
@@ -266,34 +211,29 @@ const InactiveList = (props) => {
             <TableCell>Revoked</TableCell>
             <TableCell>
               <div>
-                <Button size='small' className="ds-u-margin-right--2" onClick={showModal}>Add Access</Button>
-              </div>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Bob Cratchet</TableCell>
-            <TableCell>bob@humbug.com</TableCell>
-            <TableCell>555-867-5309</TableCell>
-            <TableCell>Denied</TableCell>
-            <TableCell>
-              <div>
-                <Button size='small' className="ds-u-margin-right--2" onClick={showModal}>Add Access</Button>
+                <Button size='small' className="ds-u-margin-right--2" onClick={showManageModal}>Add Access</Button>
               </div>
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
-      {modalDisplay && (
-        <ManageRoleDialog hideModal={hideModal} onClick={hideModal} showModal={showModal}/>
+      {manageModalDisplay && (
+        <ManageRoleDialog hideManageModal={hideManageModal} onClick={hideManageModal} showManageModal={showManageModal}/>
       )}
     </Fragment>
   )
 }
 
 const StateAdmin = ({ 
-  getStateAffiliations: stateAffiliations   
+  getStateAffiliations: stateAffiliations,
+  affiliations
 }) => {  
-  console.log("state affiliations:", stateAffiliations("md"));
+
+  useEffect(() => {
+    // fetch state affiliations based on current users state
+    stateAffiliations("md");
+    console.log("affiliations", affiliations)
+  }, []);
   return (
     <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
       <h1>Maryland eAPD State Administrator Portal</h1>
@@ -317,11 +257,13 @@ StateAdmin.propTypes = {
 }
 
 const mapDispatchToProps = { 
-  getStateAffiliations 
+  getStateAffiliations
 };
 
 const mapStateToProps = state => ({
-  
+  affiliations: state.admin.affiliations,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StateAdmin);
+
+export { StateAdmin as plain, mapStateToProps, mapDispatchToProps };
