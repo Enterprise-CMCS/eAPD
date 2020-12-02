@@ -53,10 +53,12 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
       // if we don't await this, the function will return immediately
       // and that causes problems in testing.  So we await.  :)
       await loadApd()(req, res, async () => {
-        // ...then get a list of APDs this user is associated with
-
-        // Make sure there's overlap
-        if (req.meta.apd.state === req.user.state.id) {
+        const { path, meta, user } = req;
+        // Allow requests for attached files to pass-through.
+        if (path && path.startsWith('/apds/') && path.includes('/files/')) {
+          next();
+        // Does the APD state match the user's selected state?
+        } else if (meta.apd.state === user.state.id) {
           next();
         } else {
           logger.verbose({ id: req.id, message: 'user does not have access to the APD' });
