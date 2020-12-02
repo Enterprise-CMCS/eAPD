@@ -15,34 +15,17 @@ export const getUserStateOrTerritory = ({
 export const getUserAffiliationForCurrentState = ({
   user: {
     data: {
-      state: { id = null } = {},
+      state: { id },
       affiliations
-    } = {}
-  } = {}
+    }
+  }
 }) => {
   return affiliations ? affiliations.find(affiliation => affiliation.state_id === id) : null;
 };
 
-export const getIsStateAccessApprover = ({
-  user: {
-    data: { 
-      state: { id = null } = {},
-      permissions
-    } = {}
-  } = {}
-}) => {
-  return permissions ? permissions[id].find(permission => permission === 'approve-state-access') : null;
-};
-
-export const getUserStateOrTerritoryStatus = ({
-  user: {
-    data: {
-      state: { id = null } = {},
-      affiliations = null
-    } = {}
-  } = {}
-}) => {
-  return affiliations.find(affiliation => affiliation.state_id === id);
+export const getUserStateOrTerritoryStatus = state => {
+  const { status = null } = getUserAffiliationForCurrentState(state);
+  return status;
 };
 
 export const getUserStateOrTerritoryRole = state => {
