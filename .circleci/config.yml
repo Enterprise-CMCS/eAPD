@@ -606,7 +606,6 @@ jobs:
                 --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
                 --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY"
               )
-              echo "URL: $URL"
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
               echo "Not a pull request"
