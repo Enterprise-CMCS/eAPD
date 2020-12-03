@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import { getStateAffiliations } from '../../actions/admin';
 
+import { getUserStateOrTerritory } from '../../reducers/user.selector';
+
 import { 
   Button, 
   Dialog,
@@ -11,41 +13,45 @@ import {
   Tabs, 
   TabPanel, 
   Table, 
-  TableCaption, 
   TableHead, 
   TableRow, 
   TableCell, 
   TableBody 
 } from '@cmsgov/design-system';
  
-const ManageRoleDialog = (props) => {
+const ManageRoleDialog = ({
+  selectedAffiliation,
+  hideManageModal,
+  saveSelectedAffiliation
+ }) => {
+
   const dropdownOptions = [
     { label: 'State Coordinator', value: 'State Coordinator' },
     { label: 'State Contractor', value: 'State Contractor' }
   ];
-  
-  console.log("props in dialog", props.selectedUser);
+
   return (
     <Dialog
-      onExit={props.hideManageModal}
-      heading="Bob Crachet"
+      onExit={hideManageModal}
+      heading="Edit Permissions"
       actions={[
-        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={props.hideManageModal}>Save</Button>,
-        <Button variation="danger" onClick={props.hideManageModal}>Cancel</Button>
+        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={saveSelectedAffiliation}>Save</Button>,
+        <Button variation="danger" onClick={hideManageModal}>Cancel</Button>
       ]}
     >
-      <p><strong>Phone Number</strong> 4108765123</p>
-      <p><strong>Email</strong> bob@crachet.com</p>
+      <p><strong>Name</strong> {selectedAffiliation.id}</p>
+      <p><strong>Phone Number</strong> {selectedAffiliation.state_id}</p>
+      <p><strong>Email</strong> {selectedAffiliation.status}</p>
+      
       <Dropdown
         options={dropdownOptions}
         className=""
         defaultValue="State Contractor"
+        hint="A State Coordinator is someone who works for a state. A State Contractor is someone who works for a vendor on behalf of the state."
         size="medium"
         label="Role"
         name="medium_dropdown_field"
       />
-      <p>A <strong>State Coordinator</strong> is someone who works for a state.</p>
-      <p>A <strong>State Contractor</strong> is someone who works for a vendor on behalf of the state.</p>
     </Dialog>
   )
 }
@@ -70,15 +76,23 @@ const RequestList = ({
 }) => {
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
   const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
-  const [selectedUser, setSelectedUser] = useState("blah");
+  const [selectedAffiliation, setselectedAffiliation] = useState();
   
-  const showManageModal = e => {
-    console.log("event", e.target);
+  const showManageModal = event => {
+    const currentAffiliation = affiliations.find(element => {
+      return element.id == event.target.getAttribute("data-id")
+    });
+    setselectedAffiliation(currentAffiliation);
     setManageModalDisplay(true);
   }
   
   const hideManageModal = () => {
     setManageModalDisplay(false);  
+  }
+
+  const saveSelectedAffiliation = () => {
+    // Connect this to a new action to post/patch to the API and update the affiliations list
+    setManageModalDisplay(false); 
   }
 
   const showConfirmationModal = () => {
@@ -104,11 +118,11 @@ const RequestList = ({
           {affiliations.map((affiliation, index) => (
             <TableRow key={index}>
               <TableCell>{affiliation.user_id}</TableCell>
-              <TableCell>bob@humbug.com</TableCell>
+              <TableCell>{affiliation.state_id}</TableCell>
               <TableCell>555-867-5309</TableCell>
               <TableCell>
                 <div>
-                  <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Approve</Button>
+                  <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" data-id={affiliation.id}>Approve</Button>
                   <Button onClick={showConfirmationModal} size='small' variation='danger'>Reject</Button>
                 </div>
               </TableCell>
@@ -118,11 +132,21 @@ const RequestList = ({
       </Table>
 
       {confirmationModalDisplay && (
-        <ConfirmationDialog hideConfirmationModal={hideConfirmationModal} onClick={hideConfirmationModal} showConfirmationModal={showConfirmationModal} />
+        <ConfirmationDialog 
+          hideConfirmationModal={hideConfirmationModal} 
+          onClick={hideConfirmationModal} 
+          showConfirmationModal={showConfirmationModal}
+        />
       )}
       
       {manageModalDisplay && (
-        <ManageRoleDialog hideManageModal={hideManageModal} onClick={hideManageModal} showManageModal={showManageModal} selectedUser={selectedUser}/>
+        <ManageRoleDialog 
+          hideManageModal={hideManageModal} 
+          onClick={hideManageModal} 
+          showManageModal={showManageModal} 
+          saveSelectedAffiliation={saveSelectedAffiliation}
+          selectedAffiliation={selectedAffiliation}
+        />
       )}
     </Fragment>
   )
@@ -218,7 +242,7 @@ const InactiveList = (props) => {
             <TableCell>Revoked</TableCell>
             <TableCell>
               <div>
-                <Button size='small' className="ds-u-margin-right--2" onClick={showManageModal}>Add Access</Button>
+                <Button size='small' className="ds-u-margin-right--2" onClick={showManageModal}>Restore Access</Button>
               </div>
             </TableCell>
           </TableRow>
@@ -232,16 +256,18 @@ const InactiveList = (props) => {
 }
 
 const StateAdmin = ({ 
+  currentState,
+  affiliations,
   getStateAffiliations: stateAffiliations,
-  affiliations
 }) => {  
 
   useEffect(() => {
-    stateAffiliations("md");
+    stateAffiliations(currentState.id);
   }, []);
+  
   return (
     <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
-      <h1>Maryland eAPD State Administrator Portal</h1>
+      <h1>{`${currentState.name} eAPD State Administrator Portal`}</h1>
       <Tabs>
         <TabPanel id="requests" tab="Requests">
           <RequestList affiliations={affiliations} />
@@ -267,6 +293,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   affiliations: state.admin.affiliations,
+  currentState: getUserStateOrTerritory(state)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StateAdmin);

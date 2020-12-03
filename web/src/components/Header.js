@@ -101,7 +101,7 @@ class Header extends Component {
                             Manage account
                           </Link>
                         </li>
-                        { console.log("add check for permissions") }
+                        {/* ToDo: Add check for permissions */}
                         <li>
                           <Link
                             to="/state-admin"
@@ -109,7 +109,7 @@ class Header extends Component {
                             className="nav--dropdown__action"
                           >
                             <AdminPanelSettings style={{ fontSize: 16 }}/>
-                            {`MD State Admin Panel`}
+                            {`${currentState.id.toUpperCase()} State Admin Panel`}
                           </Link>
                         </li>
                         <li>

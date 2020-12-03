@@ -162,6 +162,7 @@ export const ADMIN_GET_STATE_AFFILIATIONS_SUCCESS = 'ADMIN_GET_STATE_AFFILIATION
 export const ADMIN_GET_STATE_AFFILIATIONS_ERROR = 'ADMIN_GET_STATE_AFFILIATIONS_ERROR';
 
 export const getStateAffiliations = stateId => dispatch => {
+  console.log('im not a funcion')
   return axios
     .get(`/states/${stateId}/affiliations`)
     .then(res => {
