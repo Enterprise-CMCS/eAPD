@@ -195,4 +195,37 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-echo "$(deployPreviewtoEC2)"
+# echo "$(deployPreviewtoEC2)" # don't call the function, for now
+
+# Configure AWS CLI with defaults
+configureAWS
+
+# Inject configuration information from the environment into the user data
+configureUserData
+
+# Find any existing preview deploys
+print "• Finding existing preview instances"
+EXISTING_INSTANCES=$(findExistingInstances)
+
+# Create new EC2 instance
+print "• Creating EC2 instance"
+INSTANCE_ID=$(createNewInstance)
+print "• Created instance $INSTANCE_ID"
+
+# Wait for the instance to become ready.  This will happen once the VM is
+# networkically available, which isn't strictly useful to us, but it's as
+# good an indication as we'll get that the machine is ready to do stuff.
+print "• Waiting for instance to be ready"
+waitForInstanceToBeReady "$INSTANCE_ID"
+
+print "• Getting public DNS name of new instance"
+associateElasticIP "$INSTANCE_ID"
+PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
+print "• Public address: $PUBLIC_DNS"
+
+print "• Cleaning up previous instances"
+while read -r INSTANCE_ID; do
+  terminateInstance "$INSTANCE_ID"
+done <<< "$EXISTING_INSTANCES"
+
+echo "$PUBLIC_DNS"
