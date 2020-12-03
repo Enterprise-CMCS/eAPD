@@ -588,11 +588,11 @@ jobs:
           name: deploy to preview
           working_directory: ~/project/bin/preview-deploy
           command: |
-            if [ -n "$CI_PULL_REQUESTS" ]; then
+            if [ -n "$CIRCLE_PULL_REQUEST" ]; then
               apt-get -qq update
               apt-get -qq install jq -y
               pip install --quiet awscli
-              PRNUM=$(basename $CI_PULL_REQUESTS)
+              PRNUM=$(basename $CIRCLE_PULL_REQUEST)
               URL=$(./aws.sh \
                 --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
                 --AWS_AMI "$PREVIEW_AWS_AMI" \
