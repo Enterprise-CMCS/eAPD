@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -v
+set -x
 
 # Posts a comment with the preview deploy URL to the Github pull request, or
 # updates the comment if one already exists.
