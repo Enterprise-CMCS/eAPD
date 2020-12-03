@@ -24,6 +24,7 @@ const ManageRoleDialog = (props) => {
     { label: 'State Contractor', value: 'State Contractor' }
   ];
   
+  console.log("props in dialog", props.selectedUser);
   return (
     <Dialog
       onExit={props.hideManageModal}
@@ -64,11 +65,15 @@ const ConfirmationDialog = (props) => {
   )
 }
 
-const RequestList = (props) => {
+const RequestList = ({
+  affiliations
+}) => {
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
   const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
+  const [selectedUser, setSelectedUser] = useState("blah");
   
-  const showManageModal = () => {
+  const showManageModal = e => {
+    console.log("event", e.target);
     setManageModalDisplay(true);
   }
   
@@ -83,7 +88,7 @@ const RequestList = (props) => {
   const hideConfirmationModal = () => {
     setConfirmationModalDisplay(false);  
   }
-  
+
   return (
     <Fragment>
       <Table borderless>
@@ -96,17 +101,19 @@ const RequestList = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell>Bob Cratchet</TableCell>
-            <TableCell>bob@humbug.com</TableCell>
-            <TableCell>555-867-5309</TableCell>
-            <TableCell>
-              <div>
-                <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Approve</Button>
-                <Button onClick={showConfirmationModal} size='small' variation='danger'>Reject</Button>
-              </div>
-            </TableCell>
-          </TableRow>
+          {affiliations.map((affiliation, index) => (
+            <TableRow key={index}>
+              <TableCell>{affiliation.user_id}</TableCell>
+              <TableCell>bob@humbug.com</TableCell>
+              <TableCell>555-867-5309</TableCell>
+              <TableCell>
+                <div>
+                  <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Approve</Button>
+                  <Button onClick={showConfirmationModal} size='small' variation='danger'>Reject</Button>
+                </div>
+              </TableCell>
+            </TableRow>  
+          ))}
         </TableBody>
       </Table>
 
@@ -115,7 +122,7 @@ const RequestList = (props) => {
       )}
       
       {manageModalDisplay && (
-        <ManageRoleDialog hideManageModal={hideManageModal} onClick={hideManageModal} showManageModal={showManageModal}/>
+        <ManageRoleDialog hideManageModal={hideManageModal} onClick={hideManageModal} showManageModal={showManageModal} selectedUser={selectedUser}/>
       )}
     </Fragment>
   )
@@ -230,16 +237,14 @@ const StateAdmin = ({
 }) => {  
 
   useEffect(() => {
-    // fetch state affiliations based on current users state
     stateAffiliations("md");
-    console.log("affiliations", affiliations)
   }, []);
   return (
     <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
       <h1>Maryland eAPD State Administrator Portal</h1>
       <Tabs>
         <TabPanel id="requests" tab="Requests">
-          <RequestList />
+          <RequestList affiliations={affiliations} />
         </TabPanel>
         <TabPanel id="active" tab="Active">
           <ActiveList />
