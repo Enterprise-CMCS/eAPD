@@ -592,7 +592,6 @@ jobs:
               apt-get -qq update
               apt-get -qq install jq -y
               pip install --quiet awscli
-              echo "$CIRCLE_PULL_REQUEST"
               PRNUM=$(basename $CIRCLE_PULL_REQUEST)
               URL=$(./aws.sh \
                 --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
