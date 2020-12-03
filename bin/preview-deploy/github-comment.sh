@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -v
+
 # Posts a comment with the preview deploy URL to the Github pull request, or
 # updates the comment if one already exists.
 #
