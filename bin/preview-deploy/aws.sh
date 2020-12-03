@@ -54,11 +54,11 @@ function deployPreviewtoEC2() {
   # networkically available, which isn't strictly useful to us, but it's as
   # good an indication as we'll get that the machine is ready to do stuff.
   print "• Waiting for instance to be ready"
-  waitForInstanceToBeReady $INSTANCE_ID
+  waitForInstanceToBeReady "$INSTANCE_ID"
 
   print "• Getting public DNS name of new instance"
-  associateElasticIP $INSTANCE_ID
-  PUBLIC_DNS=$(getPublicDNS $INSTANCE_ID)
+  associateElasticIP "$INSTANCE_ID"
+  PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
   print "• Public address: $PUBLIC_DNS"
 
   print "• Cleaning up previous instances"
@@ -74,7 +74,7 @@ function deployPreviewtoEC2() {
 # Expects global environment variables:
 #   AWS_REGION - The AWS region to use
 function configureAWS() {
-  aws configure set default.region $AWS_REGION
+  aws configure set default.region "$AWS_REGION"
 }
 
 # Updates the EC2 user data script with values from the environment.
@@ -110,12 +110,12 @@ function configureUserData() {
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type t2.medium \
-    --image-id $AWS_AMI \
-    --security-group-ids $AWS_SECURITY_GROUP \
-    --subnet-id $AWS_SUBNET \
+    --image-id "$AWS_AMI" \
+    --security-group-ids "$AWS_SECURITY_GROUP" \
+    --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
-    --key-name eapd_bbrooks \
+    --key-name radavis \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
@@ -125,7 +125,7 @@ function createNewInstance() {
 #   PR_NUM - Github pull request number associated with this instance
 function findExistingInstances() {
   aws ec2 describe-instances \
-    --filter Name=tag:github-pr,Values=$PR_NUM \
+    --filter Name=tag:github-pr,Values="$PR_NUM" \
     --query "Reservations[*].Instances[*].InstanceId" \
     | jq -c -r '.[] | join("")'
 }
@@ -134,9 +134,11 @@ function findExistingInstances() {
 #
 # $1 - ID of the EC2 instanec to assign Elastic IP Address to
 function associateElasticIP() {
+  ALLOCATION_ID="$(aws ec2 describe-addresses --query 'Addresses[?AssociationId==null]' | jq -r '.[0] | .AllocationId')"
   aws ec2 associate-address \
-    --instance-id $1 \
-    --allocation-id $(aws ec2 describe-addresses --query 'Addresses[?AssociationId==null]' |jq -r '.[0] | .AllocationId')
+    --instance-id "$1" \
+    --allocation-id "$ALLOCATION_ID" \
+    > /dev/null
 }
 
 # Get the public DNS name for an instance.
@@ -144,7 +146,7 @@ function associateElasticIP() {
 # $1 - ID of the EC2 instance to get the public DNS name for
 function getPublicDNS() {
   aws ec2 describe-instances \
-    --instance-ids $1 \
+    --instance-ids "$1" \
     | jq -r -c '.Reservations[0].Instances[0].PublicDnsName'
 }
 
@@ -168,15 +170,15 @@ function terminateInstance() {
 function waitForInstanceToBeReady() {
   sleep 10s
   INSTANCE_CHECK_COUNT=1
-  INSTANCE_STATUS=$(aws ec2 describe-instance-status --instance-ids $1)
-  INSTANCE_CHECK1=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].SystemStatus.Details[0].Status')
-  INSTANCE_CHECK2=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].InstanceStatus.Details[0].Status')
-  while [[ "$INSTANCE_CHECK1" != "passed" || "$INSTANCE_CHECK2" -ne "passed" ]]; do
+  INSTANCE_STATUS=$(aws ec2 describe-instance-status --instance-ids "$1")
+  INSTANCE_CHECK1=$(echo "$INSTANCE_STATUS" | jq -r -c '.InstanceStatuses[0].SystemStatus.Details[0].Status')
+  INSTANCE_CHECK2=$(echo "$INSTANCE_STATUS" | jq -r -c '.InstanceStatuses[0].InstanceStatus.Details[0].Status')
+  while [[ "$INSTANCE_CHECK1" != "passed" || "$INSTANCE_CHECK2" != "passed" ]]; do
     print "  ...status check #$INSTANCE_CHECK_COUNT: not ready"
     sleep 30s
-    INSTANCE_STATUS=$(aws ec2 describe-instance-status --instance-ids $1)
-    INSTANCE_CHECK1=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].SystemStatus.Details[0].Status')
-    INSTANCE_CHECK2=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].InstanceStatus.Details[0].Status')
+    INSTANCE_STATUS=$(aws ec2 describe-instance-status --instance-ids "$1")
+    INSTANCE_CHECK1=$(echo "$INSTANCE_STATUS" | jq -r -c '.InstanceStatuses[0].SystemStatus.Details[0].Status')
+    INSTANCE_CHECK2=$(echo "$INSTANCE_STATUS" | jq -r -c '.InstanceStatuses[0].InstanceStatus.Details[0].Status')
     INSTANCE_CHECK_COUNT=$((INSTANCE_CHECK_COUNT+1))
   done
   print "  ...status check #$INSTANCE_CHECK_COUNT: READY"
@@ -195,4 +197,4 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-echo $(deployPreviewtoEC2)
+echo "$(deployPreviewtoEC2)"
