@@ -223,9 +223,9 @@ associateElasticIP "$INSTANCE_ID"
 PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
 print "• Public address: $PUBLIC_DNS"
 
+echo "$PUBLIC_DNS"
+
 print "• Cleaning up previous instances"
 while read -r INSTANCE_ID; do
   terminateInstance "$INSTANCE_ID"
 done <<< "$EXISTING_INSTANCES"
-
-echo "$PUBLIC_DNS"
