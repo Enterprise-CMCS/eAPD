@@ -176,3 +176,21 @@ export const getStateAffiliations = (stateId, status) => dispatch => {
       dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_ERROR });
     });
 };
+
+export const ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS = 'ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS';
+export const ADMIN_UPDATE_STATE_AFFILIATION_ERROR = 'ADMIN_UPDATE_STATE_AFFILIATION_ERROR';
+
+export const updateStateAffiliation = (stateId, affiliationId, role_id, status) => dispatch => {
+  return axios
+    .patch(`/states/${stateId}/affiliations/${affiliationId}`, {roleId: role_id, status} )
+    .then(res => {
+      dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS });
+    })
+    .catch(e => {
+      let error = null;
+      if (e.response.data) {
+        ({ error }  = e.response.data);
+      }
+      dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_ERROR });
+    })
+};

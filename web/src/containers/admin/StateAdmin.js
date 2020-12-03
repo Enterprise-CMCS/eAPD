@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getStateAffiliations } from '../../actions/admin';
+import { getStateAffiliations, updateStateAffiliation } from '../../actions/admin';
 
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 
@@ -22,7 +22,7 @@ import {
 const ManageRoleDialog = ({
   selectedAffiliation,
   hideManageModal,
-  saveSelectedAffiliation
+  handleAffiliationUpdate
  }) => {
 
   const dropdownOptions = [
@@ -35,7 +35,7 @@ const ManageRoleDialog = ({
       onExit={hideManageModal}
       heading="Edit Permissions"
       actions={[
-        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={saveSelectedAffiliation}>Save</Button>,
+        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={handleAffiliationUpdate}>Save</Button>,
         <Button variation="danger" onClick={hideManageModal}>Cancel</Button>
       ]}
     >
@@ -72,7 +72,8 @@ const ConfirmationDialog = (props) => {
 }
 
 const RequestList = ({
-  affiliations
+  affiliations,
+  updateAffiliation
 }) => {
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
   const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
@@ -86,13 +87,16 @@ const RequestList = ({
     setManageModalDisplay(true);
   }
   
-  const hideManageModal = () => {
-    setManageModalDisplay(false);  
+  const handleAffiliationUpdate = (selectedAffiliation) => {
+    // Connect this to a new action to post/patch to the API and update the affiliations list
+    // How should I get these params?
+    updateAffiliation("md", selectedAffiliation, 19, "approved");
+    // How can I not trigger this until the above was run successfully or unsuccessfully?    
+    setManageModalDisplay(false); 
   }
 
-  const saveSelectedAffiliation = () => {
-    // Connect this to a new action to post/patch to the API and update the affiliations list
-    setManageModalDisplay(false); 
+  const hideManageModal = () => {
+    setManageModalDisplay(false);  
   }
 
   const showConfirmationModal = () => {
@@ -117,9 +121,9 @@ const RequestList = ({
         <TableBody>
           {affiliations.map((affiliation, index) => (
             <TableRow key={index}>
-              <TableCell>{affiliation.user_id}</TableCell>
+              <TableCell>{affiliation.id}</TableCell>
               <TableCell>{affiliation.state_id}</TableCell>
-              <TableCell>555-867-5309</TableCell>
+              <TableCell>{affiliation.user_id}</TableCell>
               <TableCell>
                 <div>
                   <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" data-id={affiliation.id}>Approve</Button>
@@ -144,7 +148,7 @@ const RequestList = ({
           hideManageModal={hideManageModal} 
           onClick={hideManageModal} 
           showManageModal={showManageModal} 
-          saveSelectedAffiliation={saveSelectedAffiliation}
+          handleAffiliationUpdate={handleAffiliationUpdate}
           selectedAffiliation={selectedAffiliation}
         />
       )}
@@ -259,6 +263,7 @@ const StateAdmin = ({
   currentState,
   affiliations,
   getStateAffiliations: stateAffiliations,
+  updateStateAffiliation: updateAffiliation
 }) => {  
 
   const [activeTab, setActiveTab] = useState("pending");
@@ -277,7 +282,7 @@ const StateAdmin = ({
       <h1>{`${currentState.name} eAPD State Administrator Portal`}</h1>
       <Tabs onChange={currentTab}>
         <TabPanel id="pending" tab="Requests" >
-          <RequestList affiliations={affiliations} />
+          <RequestList affiliations={affiliations} updateAffiliation={updateAffiliation} />
         </TabPanel>
         <TabPanel id="active" tab="Active">
           <ActiveList affiliations={affiliations} />
@@ -291,11 +296,13 @@ const StateAdmin = ({
 }
 
 StateAdmin.propTypes = {
-  getStateAffiliations: PropTypes.func.isRequired
+  getStateAffiliations: PropTypes.func.isRequired,
+  updateStateAffiliation: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = { 
-  getStateAffiliations
+  getStateAffiliations,
+  updateStateAffiliation
 };
 
 const mapStateToProps = state => ({
