@@ -32,3 +32,14 @@ export const getUserStateOrTerritoryRole = state => {
   const { role = null } = getUserAffiliationForCurrentState(state);
   return role;
 };
+
+// export const getIsStateAccessApprover = ({
+//   user: {
+//     data: { 
+//       state: { id = null } = {},
+//       permissions
+//     } = {}
+//   } = {}
+// }) => {
+//   return permissions ? permissions[id].find(permission => permission === 'approve-state-access') : null;
+// };
