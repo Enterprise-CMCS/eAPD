@@ -261,22 +261,29 @@ const StateAdmin = ({
   getStateAffiliations: stateAffiliations,
 }) => {  
 
+  const [activeTab, setActiveTab] = useState("pending");
+
   useEffect(() => {
-    stateAffiliations(currentState.id);
-  }, []);
+    stateAffiliations(currentState.id, activeTab);
+  }, [activeTab]);
   
+  const currentTab = (id, previousId) => {
+    setActiveTab(id)
+  }
+
   return (
+    // Update the tabs to pass the affiliations by status once the backend is updated
     <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
       <h1>{`${currentState.name} eAPD State Administrator Portal`}</h1>
-      <Tabs>
-        <TabPanel id="requests" tab="Requests">
+      <Tabs onChange={currentTab}>
+        <TabPanel id="pending" tab="Requests" >
           <RequestList affiliations={affiliations} />
         </TabPanel>
         <TabPanel id="active" tab="Active">
-          <ActiveList />
+          <ActiveList affiliations={affiliations} />
         </TabPanel>
-        <TabPanel id="inactive" tab="Inactive" >
-          <InactiveList />
+        <TabPanel id="inactive" tab="Inactive">
+          <InactiveList affiliations={affiliations} />
         </TabPanel>
       </Tabs>
     </main>
