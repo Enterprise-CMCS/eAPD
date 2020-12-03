@@ -27,7 +27,7 @@
 #    --OKTA_DOMAIN <string>           |
 
 # Exit when any command fails
-set -e
+set -ex
 
 function print() {
   echo "$1" >&2
@@ -219,6 +219,7 @@ print "• Waiting for instance to be ready"
 waitForInstanceToBeReady "$INSTANCE_ID"
 
 print "• Getting public DNS name of new instance"
+print "INSTANCE_ID: $INSTANCE_ID"
 associateElasticIP "$INSTANCE_ID"
 PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
 print "• Public address: $PUBLIC_DNS"
