@@ -134,9 +134,11 @@ function findExistingInstances() {
 #
 # $1 - ID of the EC2 instanec to assign Elastic IP Address to
 function associateElasticIP() {
+  ALLOCATION_ID="$(aws ec2 describe-addresses --query 'Addresses[?AssociationId==null]' | jq -r '.[0] | .AllocationId')"
   aws ec2 associate-address \
     --instance-id "$1" \
-    --allocation-id "$(aws ec2 describe-addresses --query 'Addresses[?AssociationId==null]' | jq -r '.[0] | .AllocationId')"
+    --allocation-id "$ALLOCATION_ID" \
+    > /dev/null
 }
 
 # Get the public DNS name for an instance.
