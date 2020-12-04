@@ -71,26 +71,89 @@ const ConfirmationDialog = (props) => {
   )
 }
 
-const RequestList = ({
+const ManageUserTable = ({
+  type,
   affiliations,
-  updateAffiliation,
-  isFetching
+  isFetching,
+  actions
 }) => {
+  return (
+    <Fragment>
+      {isFetching && (
+        <p>Loading...</p>
+      )}
+      {!isFetching && (
+      <Table borderless>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Phone Number(s)</TableCell>
+            {type === 'active' ? <TableCell>Role</TableCell> : null}
+            {type === 'inactive' ? <TableCell>Status</TableCell> : null}
+            <TableCell>Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {affiliations.map((affiliation, index) => (
+            <TableRow key={index}>
+              <TableCell>{affiliation.displayName}</TableCell>
+              <TableCell>{affiliation.email}</TableCell>
+              <TableCell>{affiliation.primaryPhone}</TableCell>
+              {type === 'active' ? <TableCell>{affiliation.role}</TableCell> : null}
+              {type === 'inactive' ? <TableCell>{affiliation.status.charAt(0).toUpperCase() + affiliation.status.slice(1)}</TableCell> : null}
+              <TableCell>
+                <div data-id={affiliation.id}>
+                  {actions && (
+                    actions
+                  )}
+                </div>
+              </TableCell>
+            </TableRow>  
+          ))}
+        </TableBody>
+      </Table>
+      )}
+    </Fragment>
+  )
+}
+
+const StateAdmin = ({ 
+  currentState,
+  affiliations,
+  getStateAffiliations: stateAffiliations,
+  updateStateAffiliation: updateAffiliation
+}) => {  
+
+  const [activeTab, setActiveTab] = useState("pending");
+  const [isFetching, setIsFetching] = useState(true);
+
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
   const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
-  const [selectedAffiliation, setselectedAffiliation] = useState();
+  const [selectedAffiliation, setSelectedAffiliation] = useState();
+
+  // ask Tif about this method...
+  useEffect(() => {
+    setIsFetching(true);
+    async function fetchAffiliations() {
+      await stateAffiliations(currentState.id, activeTab);
+    }
+    fetchAffiliations().then(() => setIsFetching(false))
+  }, [activeTab]);
   
+  const currentTab = (id, previousId) => {
+    setActiveTab(id)
+  }
+
   const showManageModal = event => {
-    const currentAffiliation = affiliations.find(element => {
-      return element.id == event.target.getAttribute("data-id")
-    });
-    setselectedAffiliation(currentAffiliation);
+    setSelectedAffiliation("21");
     setManageModalDisplay(true);
   }
-  
-  const handleAffiliationUpdate = (selectedAffiliation) => {
+
+  const handleAffiliationUpdate = selectedAffiliation => {
     // Connect this to a new action to post/patch to the API and update the affiliations list
     // How should I get these params?
+    console.log("selected aff", selectedAffiliation)
     updateAffiliation("md", selectedAffiliation, 19, "approved");
     // How can I not trigger this until the above was run successfully or unsuccessfully?    
     setManageModalDisplay(false); 
@@ -109,38 +172,47 @@ const RequestList = ({
   }
 
   return (
-    <Fragment>
-      {isFetching && (
-        <p>Loading...</p>
-      )}
-      {!isFetching && (
-      <Table borderless>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Phone Number(s)</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {affiliations.map((affiliation, index) => (
-            <TableRow key={index}>
-              <TableCell>{affiliation.displayName}</TableCell>
-              <TableCell>{affiliation.email}</TableCell>
-              <TableCell>{affiliation.primaryPhone}</TableCell>
-              <TableCell>
-                <div>
-                  <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" data-id={affiliation.id}>Approve</Button>
-                  <Button onClick={showConfirmationModal} size='small' variation='danger'>Reject</Button>
-                </div>
-              </TableCell>
-            </TableRow>  
-          ))}
-        </TableBody>
-      </Table>
-      )}
-
+    // Update the tabs to pass the affiliations by status once the backend is updated
+    <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
+      <h1>{`${currentState.name} eAPD State Administrator Portal`}</h1>
+      <Tabs onChange={currentTab}>
+        <TabPanel id="pending" tab="Requests" >
+          <ManageUserTable 
+            type={"pending"}
+            affiliations={affiliations} 
+            updateAffiliation={updateAffiliation} 
+            isFetching={isFetching} 
+            actions={[
+              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Approve</Button>,
+              <Button onClick={showConfirmationModal} size='small' variation='danger'>Reject</Button>
+            ]}
+          />
+        </TabPanel>
+        <TabPanel id="active" tab="Active">
+          <ManageUserTable 
+            type={"active"}
+            affiliations={affiliations} 
+            updateAffiliation={updateAffiliation} 
+            isFetching={isFetching} 
+            actions={[
+              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Edit Access</Button>,
+              <Button onClick={showConfirmationModal} size='small' variation="danger" className="ds-u-margin-right--2" onClick={showConfirmationModal}>Revoke Access</Button>
+            ]}
+          />
+        </TabPanel>
+        <TabPanel id="inactive" tab="Inactive">
+          <ManageUserTable 
+            type={"inactive"}
+            affiliations={affiliations} 
+            updateAffiliation={updateAffiliation} 
+            isFetching={isFetching} 
+            actions={[
+              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Restore Access</Button>
+            ]}
+          />
+        </TabPanel>
+      </Tabs>
+      
       {confirmationModalDisplay && (
         <ConfirmationDialog 
           hideConfirmationModal={hideConfirmationModal} 
@@ -158,174 +230,6 @@ const RequestList = ({
           selectedAffiliation={selectedAffiliation}
         />
       )}
-    </Fragment>
-  )
-}
-
-const ActiveList = ({
-  affiliations,
-  updateAffiliation,
-  isFetching
-}) => {
-  const [manageModalDisplay, setModalDisplay] = useState(false);
-  const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
-  
-  const showManageModal = () => {
-    setModalDisplay(true);
-  }
-  
-  const hideManageModal = () => {
-    setModalDisplay(false);  
-  }
-
-  const showConfirmationModal = () => {
-    setConfirmationModalDisplay(true);
-  }
-  
-  const hideConfirmationModal = () => {
-    setConfirmationModalDisplay(false);  
-  }
-  
-  return (
-    <Fragment>
-      {isFetching && (
-        <p>Loading...</p>
-      )}
-      {!isFetching && (
-      <Table borderless>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Phone Number</TableCell>
-            <TableCell>Role</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {affiliations.map((affiliation, index) => (
-            <TableRow key={index}>
-              <TableCell>{affiliation.displayName}</TableCell>
-              <TableCell>{affiliation.email}</TableCell>
-              <TableCell>{affiliation.primaryPhone}</TableCell>
-              <TableCell>{affiliation.role}</TableCell>
-              <TableCell>
-                <div>
-                  <Button size='small' className="ds-u-margin-right--2" onClick={updateAffiliation}>Edit Access</Button>
-                  <Button size='small' variation="danger" className="ds-u-margin-right--2" onClick={showConfirmationModal}>Revoke Access</Button>
-                </div>
-              </TableCell>
-            </TableRow>  
-          ))}
-        </TableBody>
-      </Table>
-      )}
-
-      {confirmationModalDisplay && (
-        <ConfirmationDialog hideConfirmationModal={hideConfirmationModal} onClick={hideConfirmationModal} showConfirmationModal={showConfirmationModal} />
-      )}
-
-      {manageModalDisplay && (
-        <ManageRoleDialog hideManageModal={hideManageModal} onClick={hideManageModal} showManageModal={showManageModal}/>
-      )}
-    </Fragment>
-  )
-}
-
-const InactiveList = ({
-  affiliations,
-  updateAffiliation,
-  isFetching
-}) => {
-  const [manageModalDisplay, setModalDisplay] = useState(false);
-  
-  const showManageModal = () => {
-    setModalDisplay(true);
-  }
-  
-  const hideManageModal = () => {
-    setModalDisplay(false);  
-  }
-  
-  return (
-    <Fragment>
-      {isFetching && (
-        <p>Loading...</p>
-      )}
-      {!isFetching && (
-      <Table borderless>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Phone Number(s)</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>          
-          {affiliations.map((affiliation, index) => (
-            <TableRow key={index}>
-              <TableCell>{affiliation.displayName}</TableCell>
-              <TableCell>{affiliation.email}</TableCell>
-              <TableCell>{affiliation.primaryPhone}</TableCell>
-              {/* May want to consider doing this capitalization in CSS */}
-              <TableCell>{affiliation.status.charAt(0).toUpperCase() + affiliation.status.slice(1)}</TableCell>
-              <TableCell>
-                <div>
-                  <Button size='small' className="ds-u-margin-right--2" onClick={showManageModal}>Restore Access</Button>
-                </div>
-              </TableCell>
-            </TableRow>  
-          ))}
-        </TableBody>
-      </Table>
-      )}
-    {manageModalDisplay && (
-      <ManageRoleDialog hideManageModal={hideManageModal} onClick={hideManageModal} showManageModal={showManageModal}/>
-    )}
-    </Fragment>
-  )
-}
-
-const StateAdmin = ({ 
-  currentState,
-  affiliations,
-  getStateAffiliations: stateAffiliations,
-  updateStateAffiliation: updateAffiliation
-}) => {  
-
-  const [activeTab, setActiveTab] = useState("pending");
-  const [isFetching, setIsFetching] = useState(true);
-
-  // ask Tif about this method...
-  useEffect(() => {
-    setIsFetching(true);
-    async function fetchAffiliations() {
-      await stateAffiliations(currentState.id, activeTab);
-    }
-    fetchAffiliations().then(() => setIsFetching(false))
-  }, [activeTab]);
-  
-  const currentTab = (id, previousId) => {
-    setActiveTab(id)
-  }
-
-  return (
-    // Update the tabs to pass the affiliations by status once the backend is updated
-    <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
-      <h1>{`${currentState.name} eAPD State Administrator Portal`}</h1>
-      <Tabs onChange={currentTab}>
-        <TabPanel id="pending" tab="Requests" >
-          <RequestList affiliations={affiliations} updateAffiliation={updateAffiliation} isFetching={isFetching} />
-        </TabPanel>
-        <TabPanel id="active" tab="Active">
-          <ActiveList affiliations={affiliations} updateAffiliation={updateAffiliation} isFetching={isFetching} />
-        </TabPanel>
-        <TabPanel id="inactive" tab="Inactive">
-          <InactiveList affiliations={affiliations} updateAffiliation={updateAffiliation} isFetching={isFetching} />
-        </TabPanel>
-      </Tabs>
     </main>
   )
 }
