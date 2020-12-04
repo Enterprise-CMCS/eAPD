@@ -161,7 +161,6 @@ export const editSelf = (user, changingPassword) => dispatch => {
 export const ADMIN_GET_STATE_AFFILIATIONS_SUCCESS = 'ADMIN_GET_STATE_AFFILIATIONS_SUCCESS';
 export const ADMIN_GET_STATE_AFFILIATIONS_ERROR = 'ADMIN_GET_STATE_AFFILIATIONS_ERROR';
 
-// When Tif updates the backend, update this to grab all affiliations and load them into a new object by status.
 export const getStateAffiliations = (stateId, status) => dispatch => {
   return axios
     .get(`/states/${stateId}/affiliations?status=${status}`)
