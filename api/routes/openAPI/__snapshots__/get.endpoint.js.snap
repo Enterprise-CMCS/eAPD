@@ -1361,6 +1361,16 @@ Object {
               "type": "string",
             },
           },
+          Object {
+            "description": "The filter status of the affiliations for this US State",
+            "enum": Array [
+              "pending",
+              "active",
+              "inactive",
+            ],
+            "in": "query",
+            "name": "status",
+          },
         ],
         "responses": Object {
           "200": Object {
