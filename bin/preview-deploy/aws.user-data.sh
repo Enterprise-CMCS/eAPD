@@ -78,7 +78,7 @@ http {
         ssl_certificate     /app/tls/server.crt;
         ssl_certificate_key /app/tls/server.key;
 
-        location /api {
+        location /api/ {
           proxy_pass http://localhost:8000/;
         }
 
