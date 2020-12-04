@@ -57,12 +57,14 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
         // Allow requests for attached files to pass-through. Client would not
         // request file URLs without access to the APD.
         if (path && path.includes('/apds/') && path.includes('/files/')) {
+          logger.info('file pass-through')
           next();
         // Does the APD state match the user's selected state?
         } else if (meta.apd.state === user.state.id) {
+          logger.info('user selected state matches apd')
           next();
         } else {
-          logger.verbose({ id: req.id, message: 'user does not have access to the APD' });
+          logger.info({ id: req.id, message: 'user does not have access to the APD' });
           res.status(401).end();
         }
       });
