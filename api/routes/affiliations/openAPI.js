@@ -35,17 +35,17 @@ const created_at = {
   type: 'string',
   format: 'date-time',
   description: 'Timestamp of record creation'
-}
+};
 
 const updated_at = {
   type: 'string',
   format: 'date-time',
   description: 'Timestamp of last update'
-}
+};
 
 const updated_by = {
   type: 'string',
-  description: 'ID of the user who last updated this record',
+  description: 'ID of the user who last updated this record'
 };
 
 const stateIdParameter = {
@@ -56,6 +56,13 @@ const stateIdParameter = {
   schema: {
     type: state_id.type
   }
+};
+
+const filterStatusParameter = {
+  name: 'status',
+  in: 'query',
+  description: 'The filter status of the affiliations for this US State',
+  enum: ['pending', 'active', 'inactive']
 };
 
 const idParameter = {
@@ -88,7 +95,7 @@ const getAffiliations = {
   get: {
     tags,
     description: 'Get a list of all user affiliations for a US State',
-    parameters: [stateIdParameter],
+    parameters: [stateIdParameter, filterStatusParameter],
     responses: {
       200: {
         description: 'List of all user affiliations for a US State',
@@ -103,7 +110,8 @@ const getAffiliations = {
 const postAffiliations = {
   post: {
     tags,
-    description: 'Create a request for the currently logged in user to be affiliated with a US State',
+    description:
+      'Create a request for the currently logged in user to be affiliated with a US State',
     parameters: [stateIdParameter],
     responses: {
       201: {
@@ -130,14 +138,14 @@ const getAffiliation = {
         content: jsonResponse(affiliationSchema)
       },
       400: {
-        description: 'The stateId and affiliation ID do not correspond to a known record'
+        description:
+          'The stateId and affiliation ID do not correspond to a known record'
       },
       ...responses.unauthed
     },
     security: [{ bearerAuth: [] }]
   }
 };
-
 
 const patchAffiliation = {
   patch: {
@@ -156,10 +164,11 @@ const patchAffiliation = {
     },
     responses: {
       200: {
-        description: 'Record was updated',
+        description: 'Record was updated'
       },
       400: {
-        description: 'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid',
+        description:
+          'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid'
       },
       ...responses.unauthed
     },
@@ -175,7 +184,7 @@ const affiliationRoutes = {
   '/states/{stateId}/affiliations/{id}': {
     ...getAffiliation,
     ...patchAffiliation
-  },
+  }
 };
 
 module.exports = affiliationRoutes;

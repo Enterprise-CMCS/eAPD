@@ -50,7 +50,6 @@ module.exports = (
         message: `handling GET /states/${request.params.stateId}/affiliations/${request.params.id}`
       });
       const { stateId, id } = request.params;
-      console.log('user state', request.user.state.id);
       try {
         if (stateId !== request.user.state.id) {
           logger.verbose('user does not have access to state');
