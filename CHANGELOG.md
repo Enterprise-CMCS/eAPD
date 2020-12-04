@@ -15,6 +15,7 @@ Anticipated release: November 30, 2020
 - Create endpoints for requesting/approving access ([#2574])
 - Show the Activity Total Cost in the Proposed Budget Summary and Budget and FFP page ([#2597])
 - Update authorization to use new affiliations table ([#2617])
+- Update endpoint for affiliations to filter by status ([#2682])
 
 #### 🐛 Bugs fixed
 
@@ -43,3 +44,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2617]: https://github.com/cmsgov/eapd/issues/2617
 [#2679]: https://github.com/CMSgov/eAPD/issues/2679
 [#2655]: https://github.com/CMSgov/eAPD/issues/2655
+[#2682]: https://github.com/CMSgov/eAPD/issues/2682
