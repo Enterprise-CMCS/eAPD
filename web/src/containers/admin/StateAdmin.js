@@ -56,23 +56,26 @@ const ManageRoleDialog = ({
   )
 }
 
-const ConfirmationDialog = (props) => {
+const ConfirmationDialog = ({
+  selectedAffiliation,
+  hideConfirmationModal,
+  handleAffiliationRejectOrRevoke
+}) => {
   return (
     <Dialog
-      onExit={props.hideConfirmationModal}
+      onExit={hideConfirmationModal}
       heading="Confirm Rejection"
       actions={[
-        <Button className="ds-c-button ds-c-button--danger" onClick={props.hideConfirmationModal}>Confirm</Button>,
-        <Button className="ds-c-button ds-c-button--transparent" onClick={props.hideConfirmationModal}>Cancel</Button>
+        <Button className="ds-c-button ds-c-button--danger" onClick={handleAffiliationRejectOrRevoke}>Confirm</Button>,
+        <Button className="ds-c-button ds-c-button--transparent" onClick={hideConfirmationModal}>Cancel</Button>
       ]}
     >
-      <p>Are you sure you want to?</p>
+      <p>Are you sure you want to? {selectedAffiliation.displayName}</p>
     </Dialog>
   )
 }
 
 // Todo: Need to handle empty state when there is no requests/active/inactive
-
 const ManageUserTable = ({
   type,
   affiliations,
@@ -148,16 +151,19 @@ const StateAdmin = ({
   }
 
   const showManageModal = event => {
-    setSelectedAffiliation(event.target.parentNode.getAttribute("data-id"));
-    console.log("selected aff", selectedAffiliation)
+    const currentAffiliation = affiliations.find(element => {
+      return element.id == event.target.parentNode.getAttribute("data-id")
+    });
+    setSelectedAffiliation(currentAffiliation);
     setManageModalDisplay(true);
   }
 
   const handleAffiliationUpdate = () => {
     // Connect this to a new action to post/patch to the API and update the affiliations list
     // How should I get these params?
+
     async function saveAffiliation() {
-      await updateAffiliation(currentState.id, selectedAffiliation, 19, "approved");
+      await updateAffiliation(currentState.id, selectedAffiliation.id, 19, "approved");
     }
     saveAffiliation().then(() => {
       // Todo: im forcing a re-fetch of the affiliations, is this OK?
@@ -174,7 +180,29 @@ const StateAdmin = ({
   }
 
   const showConfirmationModal = () => {
+    const currentAffiliation = affiliations.find(element => {
+      return element.id == event.target.parentNode.getAttribute("data-id")
+    });
+    setSelectedAffiliation(currentAffiliation);
     setConfirmationModalDisplay(true);
+  }
+
+  // refactor this so its not redundant with handleAffiliationUpdate
+  const handleAffiliationRejectOrRevoke = () => {
+    // Connect this to a new action to post/patch to the API and update the affiliations list
+    // How should I get these params?
+
+    async function saveAffiliation() {
+      await updateAffiliation(currentState.id, selectedAffiliation.id, 19, "denied");
+    }
+    saveAffiliation().then(() => {
+      // Todo: im forcing a re-fetch of the affiliations, is this OK?
+      stateAffiliations(currentState.id, activeTab);
+      setConfirmationModalDisplay(false); 
+    }).catch(error => {
+      // Todo: update this logging to be better
+      console.log("error", error);
+    })
   }
   
   const hideConfirmationModal = () => {
@@ -226,16 +254,18 @@ const StateAdmin = ({
       {confirmationModalDisplay && (
         <ConfirmationDialog 
           hideConfirmationModal={hideConfirmationModal} 
-          onClick={hideConfirmationModal} 
           showConfirmationModal={showConfirmationModal}
+          onClick={hideConfirmationModal} 
+          handleAffiliationRejectOrRevoke={handleAffiliationRejectOrRevoke}
+          selectedAffiliation={selectedAffiliation}
         />
       )}
       
       {manageModalDisplay && (
         <ManageRoleDialog 
           hideManageModal={hideManageModal} 
-          onClick={hideManageModal} 
           showManageModal={showManageModal} 
+          onClick={hideManageModal} 
           handleAffiliationUpdate={handleAffiliationUpdate}
           selectedAffiliation={selectedAffiliation}
         />
