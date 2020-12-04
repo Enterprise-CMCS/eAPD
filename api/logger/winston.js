@@ -8,7 +8,8 @@ const { LOG_CONSOLE, LOG_FILE, LOG_LEVEL, NODE_ENV } = process.env;
 const formats = [
   winston.format.timestamp(),
   winston.format.errors({ stack: true }),
-  NODE_ENV === 'development' ? winston.format.simple() : winston.format.json()
+  // NODE_ENV === 'development' ? winston.format.simple() : winston.format.json()
+  winston.format.json()
 ];
 
 // https://github.com/winstonjs/winston/blob/master/docs/transports.md
