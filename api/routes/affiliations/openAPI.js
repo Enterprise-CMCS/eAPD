@@ -48,6 +48,12 @@ const updated_by = {
   description: 'ID of the user who last updated this record'
 };
 
+const filter_status = {
+  type: 'string',
+  description: 'The filter status of the affiliations for this US State',
+  enum: ['pending', 'active', 'inactive']
+};
+
 const stateIdParameter = {
   name: 'stateId',
   in: 'path',
@@ -59,10 +65,14 @@ const stateIdParameter = {
 };
 
 const filterStatusParameter = {
-  name: 'status',
   in: 'query',
-  description: 'The filter status of the affiliations for this US State',
-  enum: ['pending', 'active', 'inactive']
+  name: 'status',
+  description: filter_status.description,
+  required: false,
+  schema: {
+    type: filter_status.type,
+    enum: filter_status.enum
+  }
 };
 
 const idParameter = {
@@ -96,6 +106,15 @@ const getAffiliations = {
     tags,
     description: 'Get a list of all user affiliations for a US State',
     parameters: [stateIdParameter, filterStatusParameter],
+    requestBody: {
+      required: false,
+      content: jsonResponse({
+        type: 'object',
+        properties: {
+          filter_status
+        }
+      })
+    },
     responses: {
       200: {
         description: 'List of all user affiliations for a US State',
