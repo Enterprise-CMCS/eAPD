@@ -71,6 +71,8 @@ const ConfirmationDialog = (props) => {
   )
 }
 
+// Todo: Need to handle empty state when there is no requests/active/inactive
+
 const ManageUserTable = ({
   type,
   affiliations,
@@ -82,13 +84,13 @@ const ManageUserTable = ({
       {isFetching && (
         <p>Loading...</p>
       )}
-      {!isFetching && (
+      {!isFetching && affiliations.length > 0 && (
       <Table borderless>
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Email</TableCell>
-            <TableCell>Phone Number(s)</TableCell>
+            <TableCell>Phone Number</TableCell>
             {type === 'active' ? <TableCell>Role</TableCell> : null}
             {type === 'inactive' ? <TableCell>Status</TableCell> : null}
             <TableCell>Actions</TableCell>
@@ -103,7 +105,7 @@ const ManageUserTable = ({
               {type === 'active' ? <TableCell>{affiliation.role}</TableCell> : null}
               {type === 'inactive' ? <TableCell>{affiliation.status.charAt(0).toUpperCase() + affiliation.status.slice(1)}</TableCell> : null}
               <TableCell>
-                <div data-id={affiliation.id}>
+                <div className="ds-u-display--flex" data-id={affiliation.id}>
                   {actions && (
                     actions
                   )}
@@ -146,17 +148,25 @@ const StateAdmin = ({
   }
 
   const showManageModal = event => {
-    setSelectedAffiliation("21");
+    setSelectedAffiliation(event.target.parentNode.getAttribute("data-id"));
+    console.log("selected aff", selectedAffiliation)
     setManageModalDisplay(true);
   }
 
-  const handleAffiliationUpdate = selectedAffiliation => {
+  const handleAffiliationUpdate = () => {
     // Connect this to a new action to post/patch to the API and update the affiliations list
     // How should I get these params?
-    console.log("selected aff", selectedAffiliation)
-    updateAffiliation("md", selectedAffiliation, 19, "approved");
-    // How can I not trigger this until the above was run successfully or unsuccessfully?    
-    setManageModalDisplay(false); 
+    async function saveAffiliation() {
+      await updateAffiliation(currentState.id, selectedAffiliation, 19, "approved");
+    }
+    saveAffiliation().then(() => {
+      // Todo: im forcing a re-fetch of the affiliations, is this OK?
+      stateAffiliations(currentState.id, activeTab);
+      setManageModalDisplay(false); 
+    }).catch(error => {
+      // Todo: update this logging to be better
+      console.log("error", error);
+    })
   }
 
   const hideManageModal = () => {
@@ -183,8 +193,8 @@ const StateAdmin = ({
             updateAffiliation={updateAffiliation} 
             isFetching={isFetching} 
             actions={[
-              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Approve</Button>,
-              <Button onClick={showConfirmationModal} size='small' variation='danger'>Reject</Button>
+              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" key="action1">Approve</Button>,
+              <Button onClick={showConfirmationModal} size='small' variation='danger' key="action2">Reject</Button>
             ]}
           />
         </TabPanel>
@@ -195,8 +205,8 @@ const StateAdmin = ({
             updateAffiliation={updateAffiliation} 
             isFetching={isFetching} 
             actions={[
-              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Edit Access</Button>,
-              <Button onClick={showConfirmationModal} size='small' variation="danger" className="ds-u-margin-right--2" onClick={showConfirmationModal}>Revoke Access</Button>
+              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" key="action1">Edit Access</Button>,
+              <Button onClick={showConfirmationModal} size='small' variation="danger" className="ds-u-margin-right--2" onClick={showConfirmationModal} key="action2">Revoke Access</Button>
             ]}
           />
         </TabPanel>
@@ -207,7 +217,7 @@ const StateAdmin = ({
             updateAffiliation={updateAffiliation} 
             isFetching={isFetching} 
             actions={[
-              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2">Restore Access</Button>
+              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" key="action1">Restore Access</Button>
             ]}
           />
         </TabPanel>
