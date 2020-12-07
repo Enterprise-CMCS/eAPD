@@ -3,20 +3,16 @@ const { can, userCanEditAPD } = require('../../middleware');
 const { deleteAPDByID: da } = require('../../db');
 
 module.exports = (app, { deleteAPDByID = da } = {}) => {
-  logger.silly('setting up DELETE /apds/:id route');
+  logger.debug('setting up DELETE /apds/:id route');
 
   app.delete(
     '/apds/:id',
     can('view-document'),
     userCanEditAPD(),
-    async (req, res) => {
-      try {
-        await deleteAPDByID(req.meta.apd.id);
-        res.status(204).end();
-      } catch (e) {
-        logger.error({ id: req.id, message: e });
-        res.status(500).end();
-      }
+    async (req, res, next) => {
+      await deleteAPDByID(req.meta.apd.id)
+        .then(() => res.status(204).end())
+        .catch(next);
     }
   );
 };
