@@ -23,7 +23,8 @@ describe('auth reducer', () => {
     error: null,
     fetching: false,
     hasEverLoggedOn: false,
-    factorsList: '',
+    initialCheck: false,
+    factorsList: [],
     mfaPhoneNumber: '',
     mfaEnrollType: '',
     verifyData: null,
@@ -43,17 +44,17 @@ describe('auth reducer', () => {
       ...initialState,
       authenticated: true,
       hasEverLoggedOn: true,
+      initialCheck: true,
       user: 'user info'
     });
   });
 
   it('should handle AUTH_CHECK_FAILURE', () => {
-    expect(
-      auth(initialState, { type: AUTH_CHECK_FAILURE, error: 'blah' })
-    ).toEqual({
+    expect(auth(initialState, { type: AUTH_CHECK_FAILURE })).toEqual({
       ...initialState,
       authenticated: false,
-      error: 'blah'
+      initialCheck: true,
+      error: null
     });
   });
 
@@ -62,7 +63,7 @@ describe('auth reducer', () => {
       ...initialState,
       fetching: true,
       authenticated: false,
-      hasEverLoggedOn: true,
+      hasEverLoggedOn: false,
       error: null
     });
   });
@@ -168,6 +169,7 @@ describe('auth reducer', () => {
   it('should handle RESET_LOCKED_OUT', () => {
     expect(auth(initialState, { type: RESET_LOCKED_OUT })).toEqual({
       ...initialState,
+      hasEverLoggedOn: false,
       isLocked: false,
       fetching: false,
       error: null
@@ -177,7 +179,7 @@ describe('auth reducer', () => {
   it('should handle LOGOUT_SUCCESS', () => {
     expect(auth(initialState, { type: LOGOUT_SUCCESS })).toEqual({
       ...initialState,
-      hasEverLoggedOn: true,
+      hasEverLoggedOn: false,
       authenticated: false
     });
   });
@@ -192,7 +194,7 @@ describe('auth reducer', () => {
       expect(auth(state, { type: LOGOUT_SUCCESS })).toEqual({
         ...initialState,
         authenticated: false,
-        hasEverLoggedOn: true
+        hasEverLoggedOn: false
       });
     });
   });

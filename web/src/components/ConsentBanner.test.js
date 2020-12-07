@@ -39,17 +39,4 @@ describe('Consent banner component', () => {
       expect(onAgree.calledOnce).toEqual(true);
     });
   });
-
-  describe('when there is a consent cookie', () => {
-    beforeEach(() => {
-      document.cookie = 'gov.cms.eapd.hasConsented=true';
-    });
-
-    test('calls onAgree prop and does not render anything', () => {
-      const component = shallow(<ConsentBanner onAgree={onAgree} />);
-
-      expect(component).toMatchSnapshot();
-      expect(onAgree.calledOnce).toEqual(true);
-    });
-  });
 });
