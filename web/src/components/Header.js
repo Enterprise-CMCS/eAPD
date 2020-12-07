@@ -109,7 +109,7 @@ class Header extends Component {
                             className="nav--dropdown__action"
                           >
                             <AdminPanelSettings style={{ fontSize: 16 }}/>
-                            {`${currentState.id.toUpperCase()} State Admin Panel`}
+                            {currentState && `${currentState.id.toUpperCase()} State Admin Panel`}
                           </Link>
                         </li>
                         <li>

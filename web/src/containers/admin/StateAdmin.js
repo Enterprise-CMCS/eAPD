@@ -57,20 +57,20 @@ const ManageRoleDialog = ({
 }
 
 const ConfirmationDialog = ({
-  selectedAffiliation,
+  denyOrRevoke,
   hideConfirmationModal,
-  handleAffiliationRejectOrRevoke
+  handleDenyOrRevoke
 }) => {
   return (
     <Dialog
       onExit={hideConfirmationModal}
-      heading="Confirm Rejection"
+      heading={`Confirm ${denyOrRevoke.charAt(0).toUpperCase() + denyOrRevoke.slice(1)}`}
       actions={[
-        <Button className="ds-c-button ds-c-button--danger" onClick={handleAffiliationRejectOrRevoke}>Confirm</Button>,
+        <Button className="ds-c-button ds-c-button--danger" onClick={handleDenyOrRevoke}>Confirm</Button>,
         <Button className="ds-c-button ds-c-button--transparent" onClick={hideConfirmationModal}>Cancel</Button>
       ]}
     >
-      <p>Are you sure you want to? {selectedAffiliation.displayName}</p>
+      <p>Are you sure you want to {`${denyOrRevoke}`} access? You will be able to restore access later from the inactive tab.</p>
     </Dialog>
   )
 }
@@ -135,6 +135,9 @@ const StateAdmin = ({
 
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
   const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
+
+  const [denyOrRevoke, setDenyOrRevoke] = useState("");
+
   const [selectedAffiliation, setSelectedAffiliation] = useState();
 
   // ask Tif about this method...
@@ -160,9 +163,8 @@ const StateAdmin = ({
 
   const handleAffiliationUpdate = () => {
     // Connect this to a new action to post/patch to the API and update the affiliations list
-    // How should I get these params?
-
     async function saveAffiliation() {
+      // How should I get these params?
       await updateAffiliation(currentState.id, selectedAffiliation.id, 19, "approved");
     }
     saveAffiliation().then(() => {
@@ -179,7 +181,10 @@ const StateAdmin = ({
     setManageModalDisplay(false);  
   }
 
-  const showConfirmationModal = () => {
+  const showConfirmationModal = (event) => {
+    const denyOrRevoke = event.target.getAttribute("data-deny-or-revoke");
+    setDenyOrRevoke(denyOrRevoke);
+
     const currentAffiliation = affiliations.find(element => {
       return element.id == event.target.parentNode.getAttribute("data-id")
     });
@@ -188,12 +193,15 @@ const StateAdmin = ({
   }
 
   // refactor this so its not redundant with handleAffiliationUpdate
-  const handleAffiliationRejectOrRevoke = () => {
+  const handleDenyOrRevoke = () => {
     // Connect this to a new action to post/patch to the API and update the affiliations list
-    // How should I get these params?
 
+    // Todo: rethink how to set this deny or revoke
+    const permissionChangeType = denyOrRevoke == "deny" ? "denied" : "revoked";
+    
+    // How should I get these params?
     async function saveAffiliation() {
-      await updateAffiliation(currentState.id, selectedAffiliation.id, 19, "denied");
+      await updateAffiliation(currentState.id, selectedAffiliation.id, 19, permissionChangeType);
     }
     saveAffiliation().then(() => {
       // Todo: im forcing a re-fetch of the affiliations, is this OK?
@@ -210,7 +218,6 @@ const StateAdmin = ({
   }
 
   return (
-    // Update the tabs to pass the affiliations by status once the backend is updated
     <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
       <h1>{`${currentState.name} eAPD State Administrator Portal`}</h1>
       <Tabs onChange={currentTab}>
@@ -222,7 +229,7 @@ const StateAdmin = ({
             isFetching={isFetching} 
             actions={[
               <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" key="action1">Approve</Button>,
-              <Button onClick={showConfirmationModal} size='small' variation='danger' key="action2">Reject</Button>
+              <Button onClick={showConfirmationModal} size='small' variation='danger' data-deny-or-revoke="deny" key="action2">Deny</Button>
             ]}
           />
         </TabPanel>
@@ -234,7 +241,7 @@ const StateAdmin = ({
             isFetching={isFetching} 
             actions={[
               <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" key="action1">Edit Access</Button>,
-              <Button onClick={showConfirmationModal} size='small' variation="danger" className="ds-u-margin-right--2" onClick={showConfirmationModal} key="action2">Revoke Access</Button>
+              <Button onClick={showConfirmationModal} size='small' variation="danger" className="ds-u-margin-right--2" data-deny-or-revoke="revoke" key="action2">Revoke</Button>
             ]}
           />
         </TabPanel>
@@ -255,8 +262,8 @@ const StateAdmin = ({
         <ConfirmationDialog 
           hideConfirmationModal={hideConfirmationModal} 
           showConfirmationModal={showConfirmationModal}
-          onClick={hideConfirmationModal} 
-          handleAffiliationRejectOrRevoke={handleAffiliationRejectOrRevoke}
+          denyOrRevoke={denyOrRevoke}
+          handleDenyOrRevoke={handleDenyOrRevoke}
           selectedAffiliation={selectedAffiliation}
         />
       )}
@@ -265,7 +272,6 @@ const StateAdmin = ({
         <ManageRoleDialog 
           hideManageModal={hideManageModal} 
           showManageModal={showManageModal} 
-          onClick={hideManageModal} 
           handleAffiliationUpdate={handleAffiliationUpdate}
           selectedAffiliation={selectedAffiliation}
         />
