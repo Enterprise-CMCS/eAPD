@@ -41,4 +41,12 @@ describe('Affiliations endpoint | PATCH', () => {
     });
     expect(response.status).toEqual(400);
   });
+
+  it('returns 400 when body is invalid', async () => {
+    const response = await api.patch('/states/fl/affiliations/4000', {
+      status: undefined,
+      roleId: undefined
+    });
+    expect(response.status).toEqual(400);
+  });
 });

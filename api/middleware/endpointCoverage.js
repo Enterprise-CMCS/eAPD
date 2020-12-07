@@ -1,5 +1,5 @@
 const fs = require('fs');
-const logger = require('./logger')('endpoint coverage middleware');
+const logger = require('../logger')('endpoint coverage middleware');
 
 const { ENDPOINT_COVERAGE_CAPTURE } = process.env;
 

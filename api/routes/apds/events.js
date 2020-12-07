@@ -3,7 +3,7 @@ const { can, userCanAccessAPD } = require('../../middleware');
 const { createEventForAPD: ce } = require('../../db');
 
 module.exports = (app, { createEventForAPD = ce } = {}) => {
-  logger.silly('setting up POST /apds/:id/events route');
+  logger.debug('setting up POST /apds/:id/events route');
 
   app.post(
     '/apds/:id/events',
