@@ -26,7 +26,7 @@ const routes = [
     isCard: true
   },
   
-  { path: '/state-admin', component: StateAdmin },
+  { path: '/state-admin', component: StateAdmin, isPublic: false },
   { path: '/login', component: Login, isPublic: true, isCard: true },
   { path: '/logout', component: Logout, isPublic: false },
   { component: NoMatch, isPublic: true }
