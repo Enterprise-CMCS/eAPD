@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
+import oktaAuth from './oktaAuth';
 
 // A theme is required
 import 'tinymce/themes/silver';
@@ -50,6 +51,19 @@ const setupTinyMCE = upload => editor => {
     tooltip: 'Insert an image'
   });
 };
+
+const urlConverterCallback = (urlString) => {
+  console.log(urlString);
+  // add authentication token as a query parameter to file urls
+  if (urlString.includes('/files/')) {
+    const url = new URL(urlString);
+    const { accessToken } = await oktaAuth.tokenManager.get('accessToken');
+    url.searchParams.set('accessToken', accessToken);
+    console.log(url.toString());
+    return url.toString();
+  }
+  return urlString;
+}
 
 class RichText extends Component {
   constructor(props) {
@@ -125,7 +139,8 @@ class RichText extends Component {
             paste_data_images: true,
             plugins,
             setup: setupTinyMCE(upload),
-            toolbar
+            toolbar,
+            urlconverter_callback: urlConverterCallback
           }}
           value={content}
           onEditorChange={this.onEditorChange}
