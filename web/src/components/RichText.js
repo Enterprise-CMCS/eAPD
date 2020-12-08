@@ -135,7 +135,6 @@ class RichText extends Component {
           init={{
             autoresize_bottom_margin: 0,
             browser_spellcheck: true,
-            document_base_url: apiUrl,
             images_upload_handler: this.uploadImage(),
             menubar: '',
             paste_data_images: true,
