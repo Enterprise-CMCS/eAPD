@@ -23,8 +23,9 @@ const ManageRoleDialog = ({
   selectedAffiliation,
   hideManageModal,
   handleAffiliationUpdate
- }) => {
-
+  }) => {
+ 
+   // Should these come from the API? 
   const dropdownOptions = [
     { label: 'State Coordinator', value: 'State Coordinator' },
     { label: 'State Contractor', value: 'State Contractor' }
@@ -140,7 +141,7 @@ const StateAdmin = ({
 
   const [selectedAffiliation, setSelectedAffiliation] = useState();
 
-  // ask Tif about this method...
+  // Todo: mess around with making the useEffect function async
   useEffect(() => {
     setIsFetching(true);
     async function fetchAffiliations() {
@@ -165,7 +166,7 @@ const StateAdmin = ({
     // Connect this to a new action to post/patch to the API and update the affiliations list
     async function saveAffiliation() {
       // How should I get these params?
-      await updateAffiliation(currentState.id, selectedAffiliation.id, 19, "approved");
+      await updateAffiliation(currentState.id, selectedAffiliation.id, 56, "approved");
     }
     saveAffiliation().then(() => {
       // Todo: im forcing a re-fetch of the affiliations, is this OK?
@@ -197,11 +198,12 @@ const StateAdmin = ({
     // Connect this to a new action to post/patch to the API and update the affiliations list
 
     // Todo: rethink how to set this deny or revoke
-    const permissionChangeType = denyOrRevoke == "deny" ? "denied" : "revoked";
+    // Tif: better to use a bool for isDenied
+    const permissionChangeType = denyOrRevoke === "deny" ? "denied" : "revoked";
     
     // How should I get these params?
     async function saveAffiliation() {
-      await updateAffiliation(currentState.id, selectedAffiliation.id, 19, permissionChangeType);
+      await updateAffiliation(currentState.id, selectedAffiliation.id, 56, permissionChangeType);
     }
     saveAffiliation().then(() => {
       // Todo: im forcing a re-fetch of the affiliations, is this OK?
