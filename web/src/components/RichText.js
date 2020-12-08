@@ -52,7 +52,7 @@ const setupTinyMCE = upload => editor => {
   });
 };
 
-const urlConverterCallback = (urlString) => {
+const urlConverterCallback = async (urlString) => {
   console.log(urlString);
   // add authentication token as a query parameter to file urls
   if (urlString.includes('/files/')) {
