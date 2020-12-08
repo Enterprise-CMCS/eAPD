@@ -1,0 +1,27 @@
+sequenceDiagram
+  participant W as Web App
+  participant O as Okta
+  W->>O: Authenticate
+  Note over W,O: oktaClient.signIn({ username, password })
+  O-->>W: Return Transaction
+  Note over W,O: response with authentication status
+  alt status == MFA_ENROLL
+    W->>O: Request list of second factor options
+    O-->>W: List of second factor options
+      Note left of W: User selects second factor option
+      alt Factor Type == Call or SMS
+        Note left of W: User enters phone number
+        W->>O: Enroll MFA with Phone number
+      else
+        W->>O: Enroll MFA
+      end
+    O-->>W: Return one-time password (OTP)
+    Note left of W: User enters OTP
+    W->>O: Verify MFA
+    O-->>W: response with authentication status SUCCESS
+    Note over O,W: Continue to status == MFA_SUCCESS
+  else status == MFA_REQUIRED
+      Note left of W: User enters OTP
+      W->>O: Verify MFA
+  end
+
