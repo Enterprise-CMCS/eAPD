@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
-import oktaAuth from './oktaAuth';
+import oktaAuth from '../util/oktaAuth';
+import { apiUrl } from '../util/api';
 
 // A theme is required
 import 'tinymce/themes/silver';
@@ -134,6 +135,7 @@ class RichText extends Component {
           init={{
             autoresize_bottom_margin: 0,
             browser_spellcheck: true,
+            document_base_url: apiUrl,
             images_upload_handler: this.uploadImage(),
             menubar: '',
             paste_data_images: true,
