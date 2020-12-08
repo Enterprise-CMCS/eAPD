@@ -1,5 +1,5 @@
 const api = 'https://eapd-api.cms.gov';
-const okta = 'https://idp.idm.cms.gov'; // Needs to be changed to production url for okta
+const okta = 'https://idm.cms.gov';
 const ga = 'https://www.google-analytics.com';
 const gtm = 'https://www.googletagmanager.com';
 const fgapi = 'https://fonts.googleapis.com';
