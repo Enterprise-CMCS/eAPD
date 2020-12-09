@@ -64,7 +64,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@okta/okta-auth-js": "^3.2.6",
-    "@tinymce/tinymce-react": "^3.5.0",
+    "@tinymce/tinymce-react": "^3.6.1",
     "axios": "^0.19.2",
     "connected-react-router": "^6.8.0",
     "d3-format": "^1.4.3",
@@ -86,7 +86,6 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "stickybits": "^3.7.4",
-    "tinymce": "^5.2.2",
     "updeep": "^1.2.0",
     "uuid": "^8.3.1",
     "zxcvbn": "^4.4.2"
