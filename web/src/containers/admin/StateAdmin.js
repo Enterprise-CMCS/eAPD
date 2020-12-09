@@ -106,7 +106,7 @@ const StateAdmin = ({
       <Tabs onChange={currentTab}>
         <TabPanel id="pending" tab="Requests" >
           <ManageUserTable 
-            type={"pending"}
+            tab={"pending"}
             affiliations={affiliations} 
             updateAffiliation={updateAffiliation} 
             isFetching={isFetching} 
@@ -118,7 +118,7 @@ const StateAdmin = ({
         </TabPanel>
         <TabPanel id="active" tab="Active">
           <ManageUserTable 
-            type={"active"}
+            tab={"active"}
             affiliations={affiliations} 
             updateAffiliation={updateAffiliation} 
             isFetching={isFetching} 
@@ -130,7 +130,7 @@ const StateAdmin = ({
         </TabPanel>
         <TabPanel id="inactive" tab="Inactive">
           <ManageUserTable 
-            type={"inactive"}
+            tab={"inactive"}
             affiliations={affiliations} 
             updateAffiliation={updateAffiliation} 
             isFetching={isFetching} 
