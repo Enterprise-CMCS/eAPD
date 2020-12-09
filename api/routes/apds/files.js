@@ -1,6 +1,6 @@
 const multer = require('multer');
 const logger = require('../../logger')('apds file routes');
-const { can, userCanAccessAPD, userCanEditAPD } = require('../../middleware');
+const { can, userCanEditAPD } = require('../../middleware');
 const {
   createNewFileForAPD: cf,
   deleteFileByID: df,
