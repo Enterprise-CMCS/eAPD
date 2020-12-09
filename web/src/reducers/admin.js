@@ -5,6 +5,7 @@ import {
   ADMIN_GET_ROLES_SUCCESS,
   ADMIN_GET_USERS_SUCCESS,
   ADMIN_GET_STATE_AFFILIATIONS_SUCCESS,
+  ADMIN_GET_ROLE_TYPES_SUCCESS,
 } from '../actions/admin';
 
 const initialState = {
@@ -24,6 +25,8 @@ const admin = (state = initialState, action) => {
       return { ...state, users: [...action.data] };
     case ADMIN_GET_STATE_AFFILIATIONS_SUCCESS:
       return { ...state, affiliations: action.data };
+    case ADMIN_GET_ROLE_TYPES_SUCCESS:
+      return { ...state, roleTypes: action.data};
     default:
       return state;
   }

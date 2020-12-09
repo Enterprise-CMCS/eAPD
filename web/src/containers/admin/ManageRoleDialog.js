@@ -3,16 +3,21 @@ import React from 'react';
 import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
 
 const ManageRoleDialog = ({
+  roleTypes,
   selectedAffiliation,
   hideManageModal,
   handleAffiliationUpdate
   }) => {
  
    // Should these come from the API? 
-  const dropdownOptions = [
-    { label: 'State Coordinator', value: 'State Coordinator' },
-    { label: 'State Contractor', value: 'State Contractor' }
-  ];
+  const dropdownOptions = roleTypes.map(role => {
+    const updatedRole = {
+      ...role
+    };
+    updatedRole["value"] = role.name;
+    updatedRole["label"] = role.name;
+    return updatedRole;
+  });
 
   return (
     <Dialog

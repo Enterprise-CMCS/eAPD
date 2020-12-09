@@ -165,7 +165,6 @@ export const getStateAffiliations = (stateId, status) => dispatch => {
   return axios
     .get(`/states/${stateId}/affiliations?status=${status}`)
     .then(res => {
-      console.log({res});
       dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_SUCCESS, data: res.data });
     })
     .catch(e => {
@@ -192,5 +191,23 @@ export const updateStateAffiliation = (stateId, affiliationId, role_id, status) 
         ({ error }  = e.response.data);
       }
       dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_ERROR });
+    })
+}
+;
+export const ADMIN_GET_ROLE_TYPES_SUCCESS = 'ADMIN_GET_ROLE_TYPES_SUCCESS';
+export const ADMIN_GET_ROLE_TYPES_ERROR = 'ADMIN_GET_ROLE_TYPES_ERROR';
+
+export const getRoleTypes = () => dispatch => {
+  return axios
+    .get(`/roles`)
+    .then(res => {
+      dispatch({ type: ADMIN_GET_ROLE_TYPES_SUCCESS, data: res.data });
+    })
+    .catch(e => {
+      let error = null;
+      if (e.response.data) {
+        ({ error }  = e.response.data);
+      }
+      dispatch({ type: ADMIN_GET_ROLE_TYPES_ERROR });
     })
 };

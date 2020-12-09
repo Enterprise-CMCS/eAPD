@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getStateAffiliations, updateStateAffiliation } from '../../actions/admin';
+import { getStateAffiliations, updateStateAffiliation, getRoleTypes } from '../../actions/admin';
 
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 
@@ -20,6 +20,8 @@ import {
 const StateAdmin = ({ 
   currentState,
   affiliations,
+  roleTypes,
+  getRoleTypes: fetchTypes,
   getStateAffiliations: stateAffiliations,
   updateStateAffiliation: updateAffiliation
 }) => {  
@@ -35,6 +37,7 @@ const StateAdmin = ({
   useEffect(() => {
     setIsFetching(true);
     async function fetchAffiliations() {
+      await fetchTypes();
       await stateAffiliations(currentState.id, activeTab);
     }
     fetchAffiliations().then(() => setIsFetching(false))
@@ -153,6 +156,7 @@ const StateAdmin = ({
       
       {manageModalDisplay && (
         <ManageRoleDialog 
+          roleTypes={roleTypes}
           hideManageModal={hideManageModal} 
           showManageModal={showManageModal} 
           handleAffiliationUpdate={handleAffiliationUpdate}
@@ -165,16 +169,19 @@ const StateAdmin = ({
 
 StateAdmin.propTypes = {
   getStateAffiliations: PropTypes.func.isRequired,
-  updateStateAffiliation: PropTypes.func.isRequired
+  updateStateAffiliation: PropTypes.func.isRequired,
+  getRoleTypes: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = { 
   getStateAffiliations,
-  updateStateAffiliation
+  updateStateAffiliation,
+  getRoleTypes
 };
 
 const mapStateToProps = state => ({
   affiliations: state.admin.affiliations,
+  roleTypes: state.admin.roleTypes,
   currentState: getUserStateOrTerritory(state)
 });
 
