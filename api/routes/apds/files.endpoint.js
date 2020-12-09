@@ -16,9 +16,6 @@ describe('APD files endpoints', () => {
 
     const url = (apdID, fileID) => `/apds/${apdID}/files/${fileID}`;
 
-    unauthenticatedTest('get', url(0, 0));
-    unauthorizedTest('get', url(0, 0));
-
     describe('when authenticated as a user with permission', () => {
       let api;
 
