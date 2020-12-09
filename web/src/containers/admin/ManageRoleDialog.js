@@ -19,8 +19,8 @@ const ManageRoleDialog = ({
       onExit={hideManageModal}
       heading="Edit Permissions"
       actions={[
-        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={handleAffiliationUpdate}>Save</Button>,
-        <Button variation="danger" onClick={hideManageModal}>Cancel</Button>
+        <Button className="ds-u-margin-right--3 ds-u-margin-top--2" onClick={handleAffiliationUpdate} key="action1">Save</Button>,
+        <Button variation="danger" onClick={hideManageModal} key="action2">Cancel</Button>
       ]}
     >
       <p><strong>Name</strong> {selectedAffiliation.displayName}</p>
