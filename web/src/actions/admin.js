@@ -165,6 +165,7 @@ export const getStateAffiliations = (stateId, status) => dispatch => {
   return axios
     .get(`/states/${stateId}/affiliations?status=${status}`)
     .then(res => {
+      console.log({res});
       dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_SUCCESS, data: res.data });
     })
     .catch(e => {
