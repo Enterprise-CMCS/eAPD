@@ -23,7 +23,7 @@ exports.seed = async knex => {
     user_id: '00u4nbo8e9BoctLWI297',
     state_id: 'ak',
     role_id: await knex('auth_roles')
-      .where({ name: 'eAPD State Admin' })
+      .where({ name: 'eAPD Federal Admin' })
       .first()
       .then(role => role.id),
     status: 'approved',
