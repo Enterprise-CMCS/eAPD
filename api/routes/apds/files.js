@@ -22,8 +22,6 @@ module.exports = (
 
   app.get(
     '/apds/:id/files/:fileID',
-    can('view-document'),
-    userCanAccessAPD(),
     async (req, res) => {
       try {
         if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
