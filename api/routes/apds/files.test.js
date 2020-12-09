@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const { can, userCanAccessAPD, userCanEditAPD } = require('../../middleware');
+const { can, userCanEditAPD } = require('../../middleware');
 const endpoints = require('./files');
 
 tap.test('apds files endpoints', async endpointTest => {
