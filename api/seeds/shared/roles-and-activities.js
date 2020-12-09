@@ -8,6 +8,7 @@ const activities = {
   'submit-federal-response': false,
   'submit-clearance': false,
   'edit-comments': false,
+  'export-document': false,
   'submit-document': false,
   'submit-state-response': false,
   'create-draft': false,
@@ -16,55 +17,50 @@ const activities = {
   'view-document': true,
   'view-affiliations': true,
   'edit-affiliations': true,
-  'approve-state-admin': true
+  'view-state-admins': true,
+  'edit-state-admins': true
 };
 
 const roles = {
   'eAPD Admin': false,
-  'eAPD Federal Analyst': false,
+  'eAPD Federal Admin': true,
   'eAPD Federal Leadership': false,
+  'eAPD Federal Analyst': false,
   'eAPD Federal SME': false,
-  'eAPD State Coordinator': false,
-  'eAPD State SME': false,
-  'eAPD State Admin': true
+  'eAPD State Admin': true,
+  'eAPD State Staff': true,
+  'eAPD State Contractor': true,
+  'eAPD State SME': false
 };
 
 const roleToActivityMappings = {
-  'eAPD Admin': [
-    'view-users',
+  'eAPD Federal Admin': [
     'view-roles',
-    'approve-state-admin',
+    'view-state-admins',
+    'edit-state-admins',
     'view-affiliations',
     'edit-affiliations'
   ],
-  'eAPD Federal Analyst': [
-    'view-users',
-    'view-roles',
-    'view-document',
-    'submit-federal-response',
-    'submit-clearance',
-    'edit-comments'
-  ],
-  'eAPD Federal Leadership': ['view-users', 'view-document'],
-  'eAPD Federal SME': ['edit-comments'],
-  'eAPD State Coordinator': [
-    'view-document',
-    'submit-document',
-    'submit-state-response',
-    'create-draft',
-    'edit-document',
-    'edit-response'
-  ],
-  'eAPD State SME': ['view-document', 'edit-document', 'edit-response'],
   'eAPD State Admin': [
-    'view-document',
-    'submit-document',
-    'submit-state-response',
-    'create-draft',
-    'edit-document',
-    'edit-response',
+    'view-roles',
     'view-affiliations',
-    'edit-affiliations'
+    'edit-affiliations',
+    'create-draft',
+    'view-document',
+    'edit-document',
+    'export-document'
+  ],
+  'eAPD State Staff': [
+    'create-draft',
+    'view-document',
+    'edit-document',
+    'export-document'
+  ],
+  'eAPD State Contactor': [
+    'create-draft',
+    'view-document',
+    'edit-document',
+    'export-document'
   ]
 };
 
@@ -133,6 +129,14 @@ const setupMappings = async (
   logger.info(`Completed seeding ${chalk.cyan(tableName)} table`);
 };
 
+const ACTIVE_ROLES = [
+  'eAPD Federal Admin',
+  'eAPD State Admin',
+  'eAPD State Staff',
+  'eAPD State Contractor'
+];
+exports.ACTIVE_ROLES = ACTIVE_ROLES;
+
 exports.seed = async knex => {
   logger.info('Beginning to seed the roles, activities, and mapping tables');
 
@@ -163,13 +167,9 @@ exports.seed = async knex => {
     activityIDs,
     roleToActivityMappings
   );
+  await knex('auth_roles').update({ isActive: false });
   await knex('auth_roles')
-    .whereIn('name', [
-      'eAPD Federal Analyst',
-      'eAPD Federal Leadership',
-      'eAPD Federal SME',
-      'eAPD State SME'
-    ])
-    .update({ isActive: false });
+    .whereIn('name', ACTIVE_ROLES)
+    .update({ isActive: true });
   logger.info('Updated active status for roles');
 };
