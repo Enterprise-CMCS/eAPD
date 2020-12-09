@@ -9,6 +9,7 @@ import { t } from '../i18n';
 import DashboardButton from './DashboardButton';
 import HeaderSaveMessage from './HeaderSaveMessage';
 
+// Todo: remove this and replace with font awesome user-shield icon (FA 5), remove the @material-ui packages
 import { AdminPanelSettings } from '@material-ui/icons';
 
 import Icon, { faChevronDown, faChevronLeft, faSignOutAlt, faEdit } from './Icons';
