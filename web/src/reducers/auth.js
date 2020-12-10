@@ -15,7 +15,11 @@ import {
   LOGOUT_SUCCESS,
   STATE_ACCESS_REQUEST,
   STATE_ACCESS_SUCCESS,
-  STATE_ACCESS_COMPLETE
+  STATE_ACCESS_COMPLETE,
+  LATEST_ACTIVITY,
+  SESSION_ENDING_ALERT,
+  REQUEST_SESSION_RENEWAL,
+  SESSION_RENEWED
 } from '../actions/auth';
 
 const initialState = {
@@ -36,6 +40,9 @@ const initialState = {
   requestAccessSuccess: false,
   selectState: false,
   isLocked: false,
+  latestActivity: new Date().getTime(),
+  isSessionEnding: false,
+  isExtendingSession: false,
   user: null
 };
 
@@ -173,6 +180,28 @@ const auth = (state = initialState, action) => {
         requestAccess: false,
         requestAccessSuccess: false,
         error: ''
+      };
+    case LATEST_ACTIVITY:
+      return {
+        ...state,
+        latestActivity: new Date().getTime()
+      };
+    case SESSION_ENDING_ALERT:
+      return {
+        ...state,
+        isSessionEnding: true
+      };
+    case REQUEST_SESSION_RENEWAL:
+      return {
+        ...state,
+        isExtendingSession: true
+      };
+    case SESSION_RENEWED:
+      return {
+        ...state,
+        isSessionEnding: false,
+        isExtendingSession: false,
+        latestActivity: new Date().getTime()
       };
     default:
       return state;

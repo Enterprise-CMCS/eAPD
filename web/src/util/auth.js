@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import oktaAuth from './oktaAuth';
 import { MFA_FACTORS } from '../constants';
 
+// Log in methods
 export const authenticateUser = (username, password) => {
   return oktaAuth.signIn({ username, password });
 };
@@ -59,8 +60,33 @@ export const getFactor = async mfaSelectedType => {
   return null;
 };
 
+// Token Manager methods
+
+export const setTokenListener = (event, callback) => {
+  oktaAuth.tokenManager.on(event, callback);
+};
+
+export const isTokenManagerExpired = async () => {
+  const { accessToken, idToken } = await oktaAuth.tokenManager.getTokens();
+  return (
+    oktaAuth.tokenManager.hasExpired(accessToken) ||
+    oktaAuth.tokenManager.hasExpired(idToken)
+  );
+};
+
+export const renewToken = () => oktaAuth.tokenManager.renew('accessToken');
+
+export const removeTokenListeners = () => {
+  oktaAuth.tokenManager.off('expired');
+  oktaAuth.tokenManager.off('renewed');
+  oktaAuth.tokenManager.off('error');
+  oktaAuth.tokenManager.off('removed');
+};
+
+// Log out methods
 export const logoutAndClearTokens = async () => {
   await oktaAuth.signOut();
-  await oktaAuth.tokenManager.remove('idToken');
-  await oktaAuth.tokenManager.remove('accessToken');
+  await oktaAuth.tokenManager.clear();
+  removeTokenListeners();
+  // await oktaAuth.tokenManager.remove('accessToken');
 };
