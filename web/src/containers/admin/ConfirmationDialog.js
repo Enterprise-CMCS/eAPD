@@ -3,16 +3,18 @@ import React from 'react';
 import { Dialog, Button } from '@cmsgov/design-system';
 
 const ConfirmationDialog = ({
-  denyOrRevoke,
+  isDenied,
   hideConfirmationModal,
   handleDenyOrRevoke
 }) => {
+  console.log("isDenied", isDenied);
+  const denyOrRevoke = isDenied ? "deny" : "revoke";
   return (
     <Dialog      
       onExit={hideConfirmationModal}
-      heading={`Confirm ${denyOrRevoke.charAt(0).toUpperCase() + denyOrRevoke.slice(1)}`}
+      heading={isDenied ? "Deny" : "Revoke"}
       actions={[
-        <Button className="ds-c-button ds-c-button--danger" onClick={handleDenyOrRevoke} key="action1">Confirm</Button>,
+        <Button className="ds-c-button ds-c-button--danger" onClick={handleDenyOrRevoke} key="action1" data-deny-or-revoke={denyOrRevoke}>Confirm</Button>,
         <Button className="ds-c-button ds-c-button--transparent" onClick={hideConfirmationModal} key="action2">Cancel</Button>
       ]}
     >
