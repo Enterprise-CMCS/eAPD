@@ -1,6 +1,6 @@
 const { raw: knex } = require('../../db');
 const { getStateById } = require('../../db/states');
-const logger = require('../../logger')('me patch route')
+const logger = require('../../logger')('me patch route');
 const loggedIn = require('../../middleware').loggedIn;
 
 module.exports = app => {
@@ -10,17 +10,21 @@ module.exports = app => {
 
     await getStateById(stateId)
       .then(state => {
-        if (state) { return state; }
+        if (state) {
+          return state;
+        }
         throw new Error('Not found');
       })
-      .then(state => knex('users')
-      .insert({
-        uid: req.user.id,
-        state_id: state.id
-      })
-      .onConflict('uid')
-      .merge()
-      .then(() => res.status(200).end()))
-      .catch(() => res.status(400).end())
+      .then(state =>
+        knex('users')
+          .insert({
+            uid: req.user.id,
+            state_id: state.id
+          })
+          .onConflict('uid')
+          .merge()
+          .then(() => res.status(200).end())
+      )
+      .catch(() => res.status(400).end());
   });
 };
