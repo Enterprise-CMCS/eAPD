@@ -6,7 +6,6 @@ import { getStateAffiliations, updateStateAffiliation, getRoleTypes } from '../.
 
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 
-// Todo: Test these components
 import ManageRoleDialog from './ManageRoleDialog';
 import ConfirmationDialog from './ConfirmationDialog';
 import ManageUserTable from './ManageUserTable';
@@ -36,12 +35,15 @@ const StateAdmin = ({
 
   useEffect(() => {
     setIsFetching(true);
-    async function fetchAffiliations() {
-      await fetchTypes();
+    async function fetchAffiliations() {      
       await stateAffiliations(currentState.id, activeTab);
     }
     fetchAffiliations().then(() => setIsFetching(false))
   }, [activeTab]);
+
+  useEffect(() => {
+    fetchTypes();
+  }, []);
   
   const currentTab = (id, previousId) => {
     setActiveTab(id)
@@ -49,7 +51,7 @@ const StateAdmin = ({
 
   const showManageModal = event => {
     const currentAffiliation = affiliations.find(element => {
-      return element.id == event.target.parentNode.getAttribute("data-id")
+      return element.id == event.target.parentNode.getAttribute("data-id");
     });
     setSelectedAffiliation(currentAffiliation);
     setManageModalDisplay(true);
@@ -59,10 +61,10 @@ const StateAdmin = ({
     setManageModalDisplay(false);  
   }
 
-  const handleAffiliationUpdate = () => {
+  const handleAffiliationUpdate = roleId => {
     async function saveAffiliation() {
       // Todo: Update this to get the appropriate role_id
-      await updateAffiliation(currentState.id, selectedAffiliation.id, 56, "approved");
+      await updateAffiliation(currentState.id, selectedAffiliation.id, roleId, "approved");
     }
     saveAffiliation().then(() => {
       stateAffiliations(currentState.id, activeTab);
@@ -73,7 +75,8 @@ const StateAdmin = ({
   }
 
   const showConfirmationModal = (event) => {
-    const denyOrRevoke = event.target.getAttribute("data-deny-or-revoke");
+    // console.log("isDenied in state admin", isDenied);
+    const denyOrRevoke = event.target.getAttribute("data-deny-or-revoke") === 'deny' ? true : false;
     setIsDenied(denyOrRevoke);
 
     const currentAffiliation = affiliations.find(element => {
@@ -93,7 +96,7 @@ const StateAdmin = ({
     
     // Todo: Figure out how what role_id should be set to when revoking
     async function saveAffiliation() {
-      await updateAffiliation(currentState.id, selectedAffiliation.id, 56, permissionChangeType);
+      await updateAffiliation(currentState.id, selectedAffiliation.id, -1, permissionChangeType);
     }
     saveAffiliation().then(() => {
       stateAffiliations(currentState.id, activeTab);
@@ -126,7 +129,7 @@ const StateAdmin = ({
             updateAffiliation={updateAffiliation} 
             isFetching={isFetching} 
             actions={[
-              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" key="action1">Edit Access</Button>,
+              <Button onClick={showManageModal} size='small' className="ds-u-margin-right--2" key="action1">Edit Role</Button>,
               <Button onClick={showConfirmationModal} size='small' variation="danger" className="ds-u-margin-right--2" data-deny-or-revoke="revoke" key="action2">Revoke</Button>
             ]}
           />
@@ -148,7 +151,7 @@ const StateAdmin = ({
         <ConfirmationDialog 
           hideConfirmationModal={hideConfirmationModal} 
           showConfirmationModal={showConfirmationModal}
-          denyOrRevoke={denyOrRevoke}
+          isDenied={isDenied}
           handleDenyOrRevoke={handleDenyOrRevoke}
           selectedAffiliation={selectedAffiliation}
         />
