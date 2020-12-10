@@ -60,49 +60,6 @@ const mockOktaClient = {
   }
 };
 
-const getGroups = userId => {
-  if (
-    userId === 'all-permissions-no-state' ||
-    userId === 'all-permissions-and-state'
-  ) {
-    return ['eAPD Admin', 'eAPD State Coordinator'];
-  }
-  return [];
-};
-
-const getAffiliations = userId => {
-  if (userId === 'all-permissions-and-state') {
-    return ['MN'];
-  }
-  return [];
-};
-
-const mockCallOktaEndpoint = async endpoint => {
-  if (endpoint) {
-    if (endpoint.test(/\/api\/v1\/users\/[a-zA-Z0-9]+\/groups/)) {
-      const urlPaths = endpoint.split('/');
-      const userId = urlPaths[3];
-      const groups = getGroups(userId);
-      return new Promise(resolve => {
-        resolve(groups);
-      });
-    }
-    if (endpoint.test(/\/api\/v1\/apps\/[a-zA-Z0-9]+\/users\/[a-zA-Z0-9]+/)) {
-      const urlPaths = endpoint.split('/');
-      const userId = urlPaths[5];
-      const affiliations = getAffiliations(userId);
-      return new Promise(resolve => {
-        resolve({
-          affiliations
-        });
-      });
-    }
-  }
-  return new Promise(resolve => {
-    resolve();
-  });
-};
-
 const mockVerifyJWT = token => {
   if (token === 'no-permissions') {
     return new Promise(resolve => {
@@ -153,7 +110,6 @@ const mockVerifyJWT = token => {
 };
 
 module.exports = {
-  mockCallOktaEndpoint,
   mockOktaClient,
   mockVerifyJWT
 };
