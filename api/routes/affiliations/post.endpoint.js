@@ -10,12 +10,12 @@ describe('Affiliations endpoint | POST', () => {
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
 
-  unauthenticatedTest('post', '/states/fl/affiliations');
+  unauthenticatedTest('post', '/states/ak/affiliations');
 
   it('returns 201', async () => {
-    const response = await api.post('/states/fl/affiliations');
+    const response = await api.post('/states/ak/affiliations');
     expect(response.status).toEqual(201);
-    const keys = Object.keys(response.data)
+    const keys = Object.keys(response.data);
     expect(keys).toEqual(['id']);
   });
 
