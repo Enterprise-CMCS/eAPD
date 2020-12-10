@@ -12,7 +12,12 @@ const oktaAuth =
         issuer: OKTA_ISSUER,
         url: OKTA_DOMAIN,
         clientId: OKTA_CLIENT_ID,
-        redirectUri: OKTA_REDIRECT_URI
+        redirectUri: OKTA_REDIRECT_URI,
+        tokenManager: {
+          storage: 'cookie', // defaults to secure cookie
+          expireEarlySeconds: 300, // alerts the user 5 minutes before session ends
+          autoRenew: false // renewing based on user interactions
+        }
       })
     : null;
 
