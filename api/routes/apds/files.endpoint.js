@@ -37,7 +37,7 @@ describe('APD files endpoints', () => {
           url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
