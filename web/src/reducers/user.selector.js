@@ -33,13 +33,12 @@ export const getUserStateOrTerritoryRole = state => {
   return role;
 };
 
-// export const getIsStateAccessApprover = ({
-//   user: {
-//     data: { 
-//       state: { id = null } = {},
-//       permissions
-//     } = {}
-//   } = {}
-// }) => {
-//   return permissions ? permissions[id].find(permission => permission === 'approve-state-access') : null;
-// };
+export const getCanUserViewStateAdmin = ({
+  user: {
+    data: { activities }
+  }
+}) => {  
+  if(activities) {
+    return activities.find(activity => activity == 'view-affiliations' || activity == 'edit-affiliations') ? true : false
+  }
+}

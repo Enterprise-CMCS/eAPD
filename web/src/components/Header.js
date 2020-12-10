@@ -3,16 +3,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
+import { getIsAdmin, getUserStateOrTerritory, getCanUserViewStateAdmin } from '../reducers/user.selector';
 import { t } from '../i18n';
 
 import DashboardButton from './DashboardButton';
 import HeaderSaveMessage from './HeaderSaveMessage';
 
-// Todo: remove this and replace with font awesome user-shield icon (FA 5), remove the @material-ui packages
-import { AdminPanelSettings } from '@material-ui/icons';
-
-import Icon, { faChevronDown, faChevronLeft, faSignOutAlt, faEdit } from './Icons';
+import Icon, { faChevronDown, faChevronLeft, faSignOutAlt, faEdit, faUserShield } from './Icons';
 
 class Header extends Component {
   constructor(props) {
@@ -46,7 +43,7 @@ class Header extends Component {
   };
 
   render() {
-    const { authenticated, currentUser, isAdmin, currentState, showSiteTitle } = this.props;
+    const { authenticated, currentUser, isAdmin, currentState, canViewStateAdmin, showSiteTitle } = this.props;
     const { ariaExpanded } = this.state;
 
     return (
@@ -102,17 +99,18 @@ class Header extends Component {
                             Manage account
                           </Link>
                         </li>
-                        {/* ToDo: Add check for permissions */}
-                        <li>
-                          <Link
-                            to="/state-admin"
-                            onClick={this.toggleDropdown}
-                            className="nav--dropdown__action"
-                          >
-                            <AdminPanelSettings style={{ fontSize: 16 }}/>
-                            {currentState && `${currentState.id.toUpperCase()} State Admin Panel`}
-                          </Link>
-                        </li>
+                        {canViewStateAdmin && (
+                          <li>
+                            <Link
+                              to="/state-admin"
+                              onClick={this.toggleDropdown}
+                              className="nav--dropdown__action"
+                            >
+                              <Icon icon={faUserShield} style={{ width: '14px' }} />
+                              {currentState && `${currentState.id.toUpperCase()} State admin`}
+                            </Link>
+                          </li>
+                        )}
                         <li>
                           <Link
                             to="/logout"
@@ -156,7 +154,8 @@ const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
   currentUser: state.auth.user,
   isAdmin: getIsAdmin(state),
-  currentState: getUserStateOrTerritory(state)
+  currentState: getUserStateOrTerritory(state),
+  canViewStateAdmin: getCanUserViewStateAdmin(state)
 });
 
 export default connect(mapStateToProps)(Header);

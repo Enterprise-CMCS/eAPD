@@ -172,7 +172,7 @@ export const getStateAffiliations = (stateId, status) => dispatch => {
       if (e.response.data) {
         ({ error } = e.response.data);
       }
-      dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_ERROR });
+      dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_ERROR, data: error });
     });
 };
 
@@ -190,7 +190,7 @@ export const updateStateAffiliation = (stateId, affiliationId, role_id, status) 
       if (e.response.data) {
         ({ error }  = e.response.data);
       }
-      dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_ERROR });
+      dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_ERROR, data: error });
     })
 }
 ;
@@ -208,6 +208,6 @@ export const getRoleTypes = () => dispatch => {
       if (e.response.data) {
         ({ error }  = e.response.data);
       }
-      dispatch({ type: ADMIN_GET_ROLE_TYPES_ERROR });
+      dispatch({ type: ADMIN_GET_ROLE_TYPES_ERROR, data: error });
     })
 };

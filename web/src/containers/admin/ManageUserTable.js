@@ -20,6 +20,9 @@ const ManageUserTable = ({
       {isFetching && (
         <p>Loading...</p>
       )}
+      {!isFetching && affiliations.length === 0 && (
+        <p>No results</p>
+      )}
       {!isFetching && affiliations.length > 0 && (
       <Table borderless>
         <TableHead>
