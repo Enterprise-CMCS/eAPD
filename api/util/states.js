@@ -1,6 +1,6 @@
 module.exports.states = [
-  { id: 'al', name: 'Alabama' },
   { id: 'ak', name: 'Alaska' },
+  { id: 'al', name: 'Alabama' },
   { id: 'az', name: 'Arizona' },
   { id: 'ar', name: 'Arkansas' },
   { id: 'ca', name: 'California' },
