@@ -158,8 +158,10 @@ export const editSelf = (user, changingPassword) => dispatch => {
     });
 };
 
-export const ADMIN_GET_STATE_AFFILIATIONS_SUCCESS = 'ADMIN_GET_STATE_AFFILIATIONS_SUCCESS';
-export const ADMIN_GET_STATE_AFFILIATIONS_ERROR = 'ADMIN_GET_STATE_AFFILIATIONS_ERROR';
+export const ADMIN_GET_STATE_AFFILIATIONS_SUCCESS =
+  'ADMIN_GET_STATE_AFFILIATIONS_SUCCESS';
+export const ADMIN_GET_STATE_AFFILIATIONS_ERROR =
+  'ADMIN_GET_STATE_AFFILIATIONS_ERROR';
 
 export const getStateAffiliations = (stateId, status) => dispatch => {
   return axios
@@ -176,24 +178,33 @@ export const getStateAffiliations = (stateId, status) => dispatch => {
     });
 };
 
-export const ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS = 'ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS';
-export const ADMIN_UPDATE_STATE_AFFILIATION_ERROR = 'ADMIN_UPDATE_STATE_AFFILIATION_ERROR';
+export const ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS =
+  'ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS';
+export const ADMIN_UPDATE_STATE_AFFILIATION_ERROR =
+  'ADMIN_UPDATE_STATE_AFFILIATION_ERROR';
 
-export const updateStateAffiliation = (stateId, affiliationId, role_id, status) => dispatch => {
+export const updateStateAffiliation = (
+  stateId,
+  affiliationId,
+  role_id,
+  status
+) => dispatch => {
   return axios
-    .patch(`/states/${stateId}/affiliations/${affiliationId}`, {roleId: role_id, status} )
+    .patch(`/states/${stateId}/affiliations/${affiliationId}`, {
+      roleId: role_id,
+      status
+    })
     .then(res => {
       dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS });
     })
     .catch(e => {
       let error = null;
       if (e.response.data) {
-        ({ error }  = e.response.data);
+        ({ error } = e.response.data);
       }
       dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_ERROR, data: error });
-    })
-}
-;
+    });
+};
 export const ADMIN_GET_ROLE_TYPES_SUCCESS = 'ADMIN_GET_ROLE_TYPES_SUCCESS';
 export const ADMIN_GET_ROLE_TYPES_ERROR = 'ADMIN_GET_ROLE_TYPES_ERROR';
 
@@ -206,8 +217,8 @@ export const getRoleTypes = () => dispatch => {
     .catch(e => {
       let error = null;
       if (e.response.data) {
-        ({ error }  = e.response.data);
+        ({ error } = e.response.data);
       }
       dispatch({ type: ADMIN_GET_ROLE_TYPES_ERROR, data: error });
-    })
+    });
 };

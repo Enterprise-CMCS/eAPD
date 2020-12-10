@@ -3,13 +3,23 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getIsAdmin, getUserStateOrTerritory, getCanUserViewStateAdmin } from '../reducers/user.selector';
+import {
+  getIsAdmin,
+  getUserStateOrTerritory,
+  getCanUserViewStateAdmin
+} from '../reducers/user.selector';
 import { t } from '../i18n';
 
 import DashboardButton from './DashboardButton';
 import HeaderSaveMessage from './HeaderSaveMessage';
 
-import Icon, { faChevronDown, faChevronLeft, faSignOutAlt, faEdit, faUserShield } from './Icons';
+import Icon, {
+  faChevronDown,
+  faChevronLeft,
+  faSignOutAlt,
+  faEdit,
+  faUserShield
+} from './Icons';
 
 class Header extends Component {
   constructor(props) {
@@ -43,7 +53,14 @@ class Header extends Component {
   };
 
   render() {
-    const { authenticated, currentUser, isAdmin, currentState, canViewStateAdmin, showSiteTitle } = this.props;
+    const {
+      authenticated,
+      currentUser,
+      isAdmin,
+      currentState,
+      canViewStateAdmin,
+      showSiteTitle
+    } = this.props;
     const { ariaExpanded } = this.state;
 
     return (
@@ -106,8 +123,12 @@ class Header extends Component {
                               onClick={this.toggleDropdown}
                               className="nav--dropdown__action"
                             >
-                              <Icon icon={faUserShield} style={{ width: '14px' }} />
-                              {currentState && `${currentState.id.toUpperCase()} State admin`}
+                              <Icon
+                                icon={faUserShield}
+                                style={{ width: '14px' }}
+                              />
+                              {currentState &&
+                                `${currentState.id.toUpperCase()} State admin`}
                             </Link>
                           </li>
                         )}

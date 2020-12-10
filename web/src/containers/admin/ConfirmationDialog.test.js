@@ -6,17 +6,16 @@ let props;
 let renderUtils;
 
 describe('<ConfirmationDialog />', () => {
-
   test('shows dialog box title', () => {
     props = {
-      denyOrRevoke: "deny"
+      denyOrRevoke: 'deny'
     };
     renderUtils = renderWithConnection(<ConfirmationDialog {...props} />);
 
     const { getByText } = renderUtils;
     expect(getByText('Confirm Deny')).toBeTruthy();
   });
-  
+
   // Todo: add more tests here
   // 1. test that cancel triggers the hideConfirmationModal fn
   // 2. test that confirm triggers handleDenyOrRevoke fn
