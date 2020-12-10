@@ -7,20 +7,36 @@ const ConfirmationDialog = ({
   hideConfirmationModal,
   handleDenyOrRevoke
 }) => {
-  console.log("isDenied", isDenied);
-  const denyOrRevoke = isDenied ? "deny" : "revoke";
+  console.log('isDenied', isDenied);
+  const denyOrRevoke = isDenied ? 'deny' : 'revoke';
   return (
-    <Dialog      
+    <Dialog
       onExit={hideConfirmationModal}
-      heading={isDenied ? "Deny" : "Revoke"}
+      heading={isDenied ? 'Deny' : 'Revoke'}
       actions={[
-        <Button className="ds-c-button ds-c-button--danger" onClick={handleDenyOrRevoke} key="action1" data-deny-or-revoke={denyOrRevoke}>Confirm</Button>,
-        <Button className="ds-c-button ds-c-button--transparent" onClick={hideConfirmationModal} key="action2">Cancel</Button>
+        <Button
+          className="ds-c-button ds-c-button--danger"
+          onClick={handleDenyOrRevoke}
+          key="action1"
+          data-deny-or-revoke={denyOrRevoke}
+        >
+          Confirm
+        </Button>,
+        <Button
+          className="ds-c-button ds-c-button--transparent"
+          onClick={hideConfirmationModal}
+          key="action2"
+        >
+          Cancel
+        </Button>
       ]}
     >
-      <p>Are you sure you want to {`${denyOrRevoke}`} access? You will be able to restore access later from the inactive tab.</p>
+      <p>
+        Are you sure you want to {`${denyOrRevoke}`} access? You will be able to
+        restore access later from the inactive tab.
+      </p>
     </Dialog>
-  )
-}
+  );
+};
 
 export default ConfirmationDialog;

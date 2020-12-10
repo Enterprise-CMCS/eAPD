@@ -20,7 +20,9 @@ export const getUserAffiliationForCurrentState = ({
     }
   }
 }) => {
-  return affiliations ? affiliations.find(affiliation => affiliation.state_id === id) : null;
+  return affiliations
+    ? affiliations.find(affiliation => affiliation.state_id === id)
+    : null;
 };
 
 export const getUserStateOrTerritoryStatus = state => {
@@ -37,8 +39,15 @@ export const getCanUserViewStateAdmin = ({
   user: {
     data: { activities }
   }
-}) => {  
-  if(activities) {
-    return activities.find(activity => activity == 'view-affiliations' || activity == 'edit-affiliations') ? true : false
+}) => {
+  if (activities) {
+    return activities.find(
+      activity =>
+        activity == 'view-affiliations'
+    )
+      ? true
+      : false;
+  } else {
+    return false;
   }
-}
+};

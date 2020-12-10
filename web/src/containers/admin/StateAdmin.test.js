@@ -6,17 +6,12 @@ let props;
 let renderUtils;
 describe('<StateAdmin />', () => {
   beforeEach(() => {
-    props = {
-    };
+    props = {};
     renderUtils = renderWithConnection(<StateAdmin {...props} />);
   });
 
   test('header renders', () => {
     const { getByText } = renderUtils;
-    expect(
-      getByText(
-        'undefined eAPD State Administrator Portal'
-      )
-    ).toBeTruthy();
+    expect(getByText('undefined eAPD State Administrator Portal')).toBeTruthy();
   });
 });
