@@ -18,6 +18,7 @@ exports[`RichText component renders as expected 1`] = `
           "advlist",
           "autoresize",
           "lists",
+          "media",
           "paste",
           "spellchecker",
           "help",
