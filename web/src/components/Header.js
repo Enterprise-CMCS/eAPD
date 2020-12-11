@@ -170,7 +170,9 @@ Header.propTypes = {
 
 Header.defaultProps = {
   ariaExpanded: false,
-  currentUser: null
+  currentUser: null,
+  currentState: null,
+  canViewStateAdmin: false
 };
 
 const mapStateToProps = state => ({

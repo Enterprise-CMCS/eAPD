@@ -24,9 +24,9 @@ const admin = (state = initialState, action) => {
     case ADMIN_GET_USERS_SUCCESS:
       return { ...state, users: [...action.data] };
     case ADMIN_GET_STATE_AFFILIATIONS_SUCCESS:
-      return { ...state, affiliations: action.data };
+      return { ...state, affiliations: [...action.data] };
     case ADMIN_GET_ROLE_TYPES_SUCCESS:
-      return { ...state, roleTypes: action.data };
+      return { ...state, roleTypes: [...action.data] };
     default:
       return state;
   }

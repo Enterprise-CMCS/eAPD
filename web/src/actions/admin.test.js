@@ -333,4 +333,134 @@ describe('admin actions', () => {
       });
     });
   });
+
+  describe('get state affiliations', () => {
+    it('handles an error', async () => {
+      const store = mockStore();
+
+      fetchMock
+        .onGet('/states/md/affiliations?status=pending')
+        .reply(400, { error: 'this-is-the-error' });
+
+      await store.dispatch(actions.getStateAffiliations('md', 'pending'));
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          {
+            type: actions.ADMIN_GET_STATE_AFFILIATIONS_ERROR,
+            data: 'this-is-the-error'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(1);
+    });
+
+    it('handles receiving affiliations', async () => {
+      const store = mockStore();
+
+      const affiliations = {};
+
+      fetchMock
+        .onGet('/states/md/affiliations?status=pending')
+        .reply(200, affiliations);
+
+      await store.dispatch(actions.getStateAffiliations('md', 'pending'));
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          {
+            type: actions.ADMIN_GET_STATE_AFFILIATIONS_SUCCESS,
+            data: affiliations
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(1);
+    });
+  });
+
+  describe('update a state affiliation', () => {
+    const stateId = 'md';
+    const affiliationId = 1;
+
+    it('handles an error', async () => {
+      const store = mockStore();
+
+      fetchMock
+        .onPatch(`/states/${stateId}/affiliations/${affiliationId}`)
+        .reply(400, { error: 'this-is-the-error' });
+
+      await store.dispatch(
+        actions.updateStateAffiliation(stateId, affiliationId, 21, 'approved')
+      );
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          {
+            type: actions.ADMIN_UPDATE_STATE_AFFILIATION_ERROR,
+            data: 'this-is-the-error'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(1);
+    });
+
+    it('handles success', async () => {
+      const store = mockStore();
+
+      fetchMock
+        .onPatch(`/states/${stateId}/affiliations/${affiliationId}`)
+        .reply(200);
+
+      await store.dispatch(
+        actions.updateStateAffiliation(stateId, affiliationId, 21, 'approved')
+      );
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS }
+        ])
+      );
+      expect(store.getActions().length).toEqual(1);
+    });
+  });
+
+  describe('get role types', () => {
+    it('handles an error', async () => {
+      const store = mockStore();
+
+      fetchMock.onGet('/roles').reply(400, { error: 'this-is-the-error' });
+
+      await store.dispatch(actions.getRoleTypes());
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          {
+            type: actions.ADMIN_GET_ROLE_TYPES_ERROR,
+            data: 'this-is-the-error'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(1);
+    });
+
+    it('handles setting the role types', async () => {
+      const store = mockStore();
+
+      const roleTypes = {};
+
+      fetchMock.onGet('/roles').reply(200, roleTypes);
+
+      await store.dispatch(actions.getRoleTypes());
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          {
+            type: actions.ADMIN_GET_ROLE_TYPES_SUCCESS,
+            data: roleTypes
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(1);
+    });
+  });
 });
