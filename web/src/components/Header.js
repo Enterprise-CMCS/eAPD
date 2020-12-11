@@ -162,7 +162,9 @@ Header.propTypes = {
   ariaExpanded: PropTypes.bool,
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
+  currentState: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
+  canViewStateAdmin: PropTypes.bool,
   showSiteTitle: PropTypes.bool.isRequired
 };
 

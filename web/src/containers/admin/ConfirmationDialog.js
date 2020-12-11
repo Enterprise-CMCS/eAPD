@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Dialog, Button } from '@cmsgov/design-system';
@@ -7,7 +8,6 @@ const ConfirmationDialog = ({
   hideConfirmationModal,
   handleDenyOrRevoke
 }) => {
-  console.log('isDenied', isDenied);
   const denyOrRevoke = isDenied ? 'deny' : 'revoke';
   return (
     <Dialog
@@ -37,6 +37,12 @@ const ConfirmationDialog = ({
       </p>
     </Dialog>
   );
+};
+
+ConfirmationDialog.propTypes = {
+  isDenied: PropTypes.bool.isRequired,
+  hideConfirmationModal: PropTypes.func.isRequired,
+  handleDenyOrRevoke: PropTypes.func.isRequired
 };
 
 export default ConfirmationDialog;

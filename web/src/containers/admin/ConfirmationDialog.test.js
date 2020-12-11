@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, fireEvent } from 'apd-testing-library';
+import { renderWithConnection } from 'apd-testing-library';
 import ConfirmationDialog from './ConfirmationDialog';
 
 let props;
@@ -8,12 +8,12 @@ let renderUtils;
 describe('<ConfirmationDialog />', () => {
   test('shows dialog box title', () => {
     props = {
-      denyOrRevoke: 'deny'
+      isDenied: true
     };
     renderUtils = renderWithConnection(<ConfirmationDialog {...props} />);
 
     const { getByText } = renderUtils;
-    expect(getByText('Confirm Deny')).toBeTruthy();
+    expect(getByText('Deny')).toBeTruthy();
   });
 
   // Todo: add more tests here

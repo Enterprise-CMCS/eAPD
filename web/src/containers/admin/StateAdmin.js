@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+
+import { Button, Tabs, TabPanel } from '@cmsgov/design-system';
 
 import {
   getStateAffiliations,
@@ -13,8 +15,6 @@ import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import ManageRoleDialog from './ManageRoleDialog';
 import ConfirmationDialog from './ConfirmationDialog';
 import ManageUserTable from './ManageUserTable';
-
-import { Button, Tabs, TabPanel } from '@cmsgov/design-system';
 
 const StateAdmin = ({
   currentState,
@@ -47,13 +47,15 @@ const StateAdmin = ({
     fetchTypes();
   }, []);
 
-  const currentTab = (id, previousId) => {
+  const currentTab = id => {
     setActiveTab(id);
   };
 
   const showManageModal = event => {
     const currentAffiliation = affiliations.find(element => {
-      return element.id == event.target.parentNode.getAttribute('data-id');
+      return (
+        element.id === Number(event.target.parentNode.getAttribute('data-id'))
+      );
     });
     setSelectedAffiliation(currentAffiliation);
     setManageModalDisplay(true);
@@ -73,26 +75,21 @@ const StateAdmin = ({
         'approved'
       );
     }
-    saveAffiliation()
-      .then(() => {
-        stateAffiliations(currentState.id, activeTab);
-        setManageModalDisplay(false);
-      })
-      .catch(error => {
-        console.log('Error saving the affiliation:', error);
-      });
+    saveAffiliation().then(() => {
+      stateAffiliations(currentState.id, activeTab);
+      setManageModalDisplay(false);
+    });
   };
 
   const showConfirmationModal = event => {
-    // console.log("isDenied in state admin", isDenied);
-    const denyOrRevoke =
-      event.target.getAttribute('data-deny-or-revoke') === 'deny'
-        ? true
-        : false;
-    setIsDenied(denyOrRevoke);
+    const checkIsDenied =
+      event.target.getAttribute('data-deny-or-revoke') === 'deny';
+    setIsDenied(checkIsDenied);
 
     const currentAffiliation = affiliations.find(element => {
-      return element.id == event.target.parentNode.getAttribute('data-id');
+      return (
+        element.id === Number(event.target.parentNode.getAttribute('data-id'))
+      );
     });
     setSelectedAffiliation(currentAffiliation);
     setConfirmationModalDisplay(true);
@@ -115,14 +112,10 @@ const StateAdmin = ({
         permissionChangeType
       );
     }
-    saveAffiliation()
-      .then(() => {
-        stateAffiliations(currentState.id, activeTab);
-        setConfirmationModalDisplay(false);
-      })
-      .catch(error => {
-        console.log('Error saving the affiliation: ', error);
-      });
+    saveAffiliation().then(() => {
+      stateAffiliations(currentState.id, activeTab);
+      setConfirmationModalDisplay(false);
+    });
   };
 
   return (
@@ -134,7 +127,7 @@ const StateAdmin = ({
       <Tabs onChange={currentTab}>
         <TabPanel id="pending" tab="Requests">
           <ManageUserTable
-            tab={'pending'}
+            tab="pending"
             affiliations={affiliations}
             updateAffiliation={updateAffiliation}
             isFetching={isFetching}
@@ -161,7 +154,7 @@ const StateAdmin = ({
         </TabPanel>
         <TabPanel id="active" tab="Active">
           <ManageUserTable
-            tab={'active'}
+            tab="active"
             affiliations={affiliations}
             updateAffiliation={updateAffiliation}
             isFetching={isFetching}
@@ -189,7 +182,7 @@ const StateAdmin = ({
         </TabPanel>
         <TabPanel id="inactive" tab="Inactive">
           <ManageUserTable
-            tab={'inactive'}
+            tab="inactive"
             affiliations={affiliations}
             updateAffiliation={updateAffiliation}
             isFetching={isFetching}
@@ -233,7 +226,14 @@ const StateAdmin = ({
 StateAdmin.propTypes = {
   getStateAffiliations: PropTypes.func.isRequired,
   updateStateAffiliation: PropTypes.func.isRequired,
-  getRoleTypes: PropTypes.func.isRequired
+  getRoleTypes: PropTypes.func.isRequired,
+  currentState: PropTypes.object,
+  affiliations: PropTypes.array.isRequired,
+  roleTypes: PropTypes.array.isRequired
+};
+
+StateAdmin.defaultProps = {
+  currentState: null
 };
 
 const mapDispatchToProps = {
