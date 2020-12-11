@@ -25,7 +25,7 @@ const SessionEndingAlert = ({
         role="alertdialog"
         variation="warn"
       >
-        Your session will end in X minutes. If you’d like to keep working,
+        Your session will end in 5 minutes. If you’d like to keep working,
         choose continue.
         <p className="ds-u-text-align--right ds-u-margin-bottom--0">
           <Button variation="primary" onClick={extend}>

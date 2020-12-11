@@ -104,6 +104,41 @@ describe('auth actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    it('creates LOGIN_SUCCESS after successful single factor auth, sends user to state request', async () => {
+      const signInSpy = jest
+        .spyOn(mockAuth, 'authenticateUser')
+        .mockImplementation(() =>
+          Promise.resolve({
+            sessionToken: 'testSessionToken',
+            status: 'SUCCESS'
+          })
+        );
+      const getTokenSpy = jest
+        .spyOn(mockAuth, 'setTokens')
+        .mockImplementation(() => Promise.resolve({ status: 'success' }));
+
+      const store = mockStore({});
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: [] });
+      const expectedActions = [
+        { type: actions.LOGIN_REQUEST },
+        { type: actions.STATE_ACCESS_REQUEST },
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: { name: 'moop', activities: [], states: [] }
+        },
+        { type: actions.RESET_LOCKED_OUT }
+      ];
+
+      await store.dispatch(actions.login('name', 'secret'));
+      expect(signInSpy).toHaveBeenCalledTimes(1);
+      await expect(getTokenSpy).toHaveBeenCalledTimes(1);
+
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
     it('creates LOGIN_OTP_STAGE after successful first stage of multi-factor auth', async () => {
       const verifySpy = jest.fn(() => Promise.resolve());
       const signInSpy = jest
@@ -525,6 +560,9 @@ describe('auth actions', () => {
       jest
         .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
+      jest
+        .spyOn(mockAuth, 'renewToken')
+        .mockImplementation(() => new Promise(() => {}));
       fetchAllApdsSpy = jest
         .spyOn(mockApp, 'fetchAllApds')
         .mockImplementation(() => {});
@@ -577,6 +615,20 @@ describe('auth actions', () => {
       expect(getRolesSpy).toHaveBeenCalled();
       expect(fetchAllApdsSpy).not.toHaveBeenCalled();
       expect(getUsersSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('handling sessions', () => {
+    it('extendSession', async () => {
+      const expectedActions = [
+        { type: actions.REQUEST_SESSION_RENEWAL },
+        { type: actions.SESSION_RENEWED }
+      ];
+
+      const store = mockStore({});
+      await store.dispatch(actions.extendSession());
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });

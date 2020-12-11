@@ -40,7 +40,7 @@ const saveMiddleware = (
       isSaving = true;
 
       try {
-        await store.dispatch(activityAction());
+        store.dispatch(activityAction());
         await store.dispatch(saveAction());
       } catch (e) {
         // Eat the exception. There's nothing for us to do it with it except

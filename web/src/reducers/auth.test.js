@@ -14,7 +14,11 @@ import {
   LOGIN_MFA_FAILURE,
   LOGOUT_SUCCESS,
   LOCKED_OUT,
-  RESET_LOCKED_OUT
+  RESET_LOCKED_OUT,
+  LATEST_ACTIVITY,
+  SESSION_ENDING_ALERT,
+  REQUEST_SESSION_RENEWAL,
+  SESSION_RENEWED
 } from '../actions/auth';
 
 describe('auth reducer', () => {
@@ -36,11 +40,16 @@ describe('auth reducer', () => {
     requestAccessSuccess: false,
     selectState: false,
     mfaEnrollType: '',
-    isLocked: false
+    isLocked: false,
+    latestActivity: null,
+    isSessionEnding: false,
+    isExtendingSession: false
   };
 
   it('should handle initial state', () => {
-    expect(auth(undefined, {})).toEqual(initialState);
+    const result = auth(undefined, {});
+    result.latestActivity = null;
+    expect(result).toEqual(initialState);
   });
 
   it('should handle AUTH_CHECK_SUCCESS', () => {
@@ -221,7 +230,10 @@ describe('auth reducer', () => {
         mfaEnrollStartStage: false,
         mfaEnrollType: '',
         mfaPhoneNumber: '',
-        verifyData: null
+        verifyData: null,
+        latestActivity: null,
+        isSessionEnding: false,
+        isExtendingSession: false
       });
     });
   });
@@ -232,5 +244,60 @@ describe('auth reducer', () => {
         auth: { authenticated: 'this is the authenticated state value' }
       })
     ).toEqual('this is the authenticated state value');
+  });
+
+  describe('manages the users session token', () => {
+    const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    it('should update latestActivity on LATEST_ACTIVITY', async () => {
+      const now = new Date().getTime();
+      await timeout(10);
+      const result = auth(
+        {
+          ...initialState,
+          latestActivity: now
+        },
+        { type: SESSION_RENEWED }
+      );
+      expect(result.latestActivity).toBeGreaterThan(now);
+    });
+
+    it('should update isSessionEnding on SESSION_ENDING_ALERT', () => {
+      expect(auth(initialState, { type: SESSION_ENDING_ALERT })).toEqual({
+        ...initialState,
+        isSessionEnding: true
+      });
+    });
+
+    it('should update isExtendingSession on REQUEST_SESSION_RENEWAL', () => {
+      expect(auth(initialState, { type: REQUEST_SESSION_RENEWAL })).toEqual({
+        ...initialState,
+        isExtendingSession: true
+      });
+    });
+
+    it('should update all session values on SESSION_RENEWED', async () => {
+      const now = new Date().getTime();
+      await timeout(10);
+      const result = auth(
+        {
+          ...initialState,
+          latestActivity: now,
+          isSessionEnding: true,
+          isExtendingSession: true
+        },
+        { type: SESSION_RENEWED }
+      );
+      expect(result.latestActivity).toBeGreaterThan(now);
+      expect({
+        ...result,
+        latestActivity: null
+      }).toEqual({
+        ...initialState,
+        latestActivity: null,
+        isSessionEnding: false,
+        isExtendingSession: false
+      });
+    });
   });
 });

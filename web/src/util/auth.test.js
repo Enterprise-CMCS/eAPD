@@ -6,7 +6,10 @@ import {
   setTokens,
   getAvailableFactors,
   getFactor,
-  logoutAndClearTokens
+  setTokenListener,
+  renewToken,
+  logoutAndClearTokens,
+  removeTokenListeners
 } from './auth';
 import { MFA_FACTOR_TYPES } from '../constants';
 
@@ -23,6 +26,7 @@ describe('Auth Util', () => {
     const res = await authenticateUser('username', 'password');
     expect(signInSpy).toHaveBeenCalled();
     expect(res.status).toEqual('SUCCESS');
+    signInSpy.mockReset();
   });
 
   it('setTokens', async () => {
@@ -51,6 +55,9 @@ describe('Auth Util', () => {
       accessToken: 'aaa.bbb.ccc'
     });
     expect(addTokenSpy).toHaveBeenCalledTimes(2);
+
+    getTokenSpy.mockReset();
+    addTokenSpy.mockReset();
   });
 
   it('retrieveExistingTransaction', async () => {
@@ -66,6 +73,9 @@ describe('Auth Util', () => {
     await retrieveExistingTransaction();
     await expect(txExistsSpy).toHaveBeenCalledTimes(1);
     await expect(txResumeSpy).toHaveBeenCalledTimes(1);
+
+    txExistsSpy.mockReset();
+    txResumeSpy.mockReset();
   });
 
   it('verifyMFA', async () => {
@@ -84,6 +94,7 @@ describe('Auth Util', () => {
       autoPush: true,
       passCode: '21234'
     });
+    transactionSpy.mockReset();
   });
 
   it('getAvailableFactors', async () => {
@@ -113,12 +124,43 @@ describe('Auth Util', () => {
         provider: 'OKTA'
       }
     ];
-    jest.spyOn(mockOktaAuth.tx, 'exists').mockImplementation(() => true);
-    jest
+    const existsSpy = jest
+      .spyOn(mockOktaAuth.tx, 'exists')
+      .mockImplementation(() => true);
+    const resumeSpy = jest
       .spyOn(mockOktaAuth.tx, 'resume')
       .mockImplementation(() => Promise.resolve({ factors }));
     const factor = await getFactor(MFA_FACTOR_TYPES.CALL);
     expect(factors[1]).toEqual(factor);
+
+    existsSpy.mockReset();
+    resumeSpy.mockReset();
+  });
+
+  it('setTokenListener', async () => {
+    const eventListener = jest
+      .spyOn(mockOktaAuth.tokenManager, 'on')
+      .mockImplementation(() => Promise.resolve());
+    await setTokenListener('some event');
+    expect(eventListener).toHaveBeenCalledWith('some event', undefined);
+
+    eventListener.mockReset();
+  });
+
+  it('renewToken', () => {
+    const renew = jest.spyOn(mockOktaAuth.tokenManager, 'renew');
+    renewToken();
+    expect(renew).toHaveBeenCalledTimes(2);
+
+    renew.mockReset();
+  });
+
+  it('removeTokenListeners', () => {
+    const listenerOff = jest.spyOn(mockOktaAuth.tokenManager, 'off');
+    removeTokenListeners();
+    expect(listenerOff).toHaveBeenCalledTimes(4);
+
+    listenerOff.mockReset();
   });
 
   it('logoutAndClearTokens', async () => {
@@ -136,8 +178,20 @@ describe('Auth Util', () => {
           status: 'success'
         })
       );
+    const listenerOff = jest
+      .spyOn(mockOktaAuth.tokenManager, 'off')
+      .mockImplementation(() =>
+        Promise.resolve({
+          status: 'success'
+        })
+      );
     await logoutAndClearTokens();
     await expect(signOutSpy).toHaveBeenCalledTimes(1);
     await expect(removeToken).toHaveBeenCalledTimes(2);
+    await expect(listenerOff).toHaveBeenCalledTimes(4);
+
+    signOutSpy.mockReset();
+    removeToken.mockReset();
+    listenerOff.mockReset();
   });
 });
