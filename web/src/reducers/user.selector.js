@@ -41,13 +41,9 @@ export const getCanUserViewStateAdmin = ({
   }
 }) => {
   if (activities) {
-    return activities.find(
-      activity =>
-        activity == 'view-affiliations'
-    )
+    return activities.find(activity => activity === 'view-affiliations')
       ? true
-      : false;
-  } else {
-    return false;
+      : null;
   }
+  return null;
 };

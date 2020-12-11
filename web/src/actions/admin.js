@@ -186,15 +186,15 @@ export const ADMIN_UPDATE_STATE_AFFILIATION_ERROR =
 export const updateStateAffiliation = (
   stateId,
   affiliationId,
-  role_id,
+  roleId,
   status
 ) => dispatch => {
   return axios
     .patch(`/states/${stateId}/affiliations/${affiliationId}`, {
-      roleId: role_id,
+      roleId,
       status
     })
-    .then(res => {
+    .then(() => {
       dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS });
     })
     .catch(e => {

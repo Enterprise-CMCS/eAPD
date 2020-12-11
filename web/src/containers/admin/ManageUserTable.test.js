@@ -152,7 +152,11 @@ describe('<ManageUserTable />', () => {
       tab: 'active',
       affiliations: [approvedAffiliation],
       isFetching: false,
-      actions: [<button key="action1">Take Action</button>]
+      actions: [
+        <button type="button" key="action1">
+          Take Action
+        </button>
+      ]
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 

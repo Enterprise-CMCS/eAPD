@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
 import {
@@ -27,8 +28,8 @@ const ManageUserTable = ({ tab, affiliations, isFetching, actions }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {affiliations.map((affiliation, index) => (
-              <TableRow key={index}>
+            {affiliations.map(affiliation => (
+              <TableRow key={affiliation.id}>
                 <TableCell>{affiliation.displayName}</TableCell>
                 <TableCell>{affiliation.email}</TableCell>
                 <TableCell>{affiliation.primaryPhone}</TableCell>
@@ -53,6 +54,17 @@ const ManageUserTable = ({ tab, affiliations, isFetching, actions }) => {
       )}
     </Fragment>
   );
+};
+
+ManageUserTable.propTypes = {
+  tab: PropTypes.string.isRequired,
+  affiliations: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  actions: PropTypes.array
+};
+
+ManageUserTable.defaultProps = {
+  actions: ''
 };
 
 export default ManageUserTable;

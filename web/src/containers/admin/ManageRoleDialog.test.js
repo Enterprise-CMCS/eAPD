@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, fireEvent } from 'apd-testing-library';
+import { renderWithConnection } from 'apd-testing-library';
 import ManageRoleDialog from './ManageRoleDialog';
 
 let props;
@@ -21,7 +21,8 @@ const selectedAffiliation = {
 describe('<ManageRoleDialog />', () => {
   test('shows dialog box title', () => {
     props = {
-      selectedAffiliation
+      selectedAffiliation,
+      roleTypes: ['State Admin', 'State Contractor']
     };
     renderUtils = renderWithConnection(<ManageRoleDialog {...props} />);
 

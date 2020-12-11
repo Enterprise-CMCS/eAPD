@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
@@ -29,9 +30,9 @@ const ManageRoleDialog = ({
     const updatedRole = {
       ...role
     };
-    updatedRole['key'] = role.name;
-    updatedRole['value'] = role.name;
-    updatedRole['label'] = role.name;
+    updatedRole.key = role.name;
+    updatedRole.value = role.name;
+    updatedRole.label = role.name;
     return updatedRole;
   });
 
@@ -72,6 +73,13 @@ const ManageRoleDialog = ({
       />
     </Dialog>
   );
+};
+
+ManageRoleDialog.propTypes = {
+  roleTypes: PropTypes.array.isRequired,
+  selectedAffiliation: PropTypes.object.isRequired,
+  hideManageModal: PropTypes.func.isRequired,
+  handleAffiliationUpdate: PropTypes.func.isRequired
 };
 
 export default ManageRoleDialog;

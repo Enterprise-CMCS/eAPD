@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, fireEvent } from 'apd-testing-library';
+import { renderWithConnection } from 'apd-testing-library';
 import StateAdmin from './StateAdmin';
 
 let props;
