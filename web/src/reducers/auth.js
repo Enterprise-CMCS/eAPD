@@ -158,7 +158,10 @@ const auth = (state = initialState, action) => {
         ...initialState,
         otpStage: false,
         hasEverLoggedOn: state.hasEverLoggedOn,
-        initialCheck: state.initialCheck
+        initialCheck: state.initialCheck,
+        latestActivity: null,
+        isSessionEnding: false,
+        isExtendingSession: false
       };
     case STATE_ACCESS_REQUEST:
       return {

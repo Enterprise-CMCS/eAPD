@@ -19,7 +19,10 @@ jest.mock('./src/util/oktaAuth', () => {
     tokenManager: {
       add: jest.fn(),
       remove: jest.fn(),
-      get: jest.fn(() => Promise.resolve({ accessToken: 'aaa.bbb.ccc' }))
+      get: jest.fn(() => Promise.resolve({ accessToken: 'aaa.bbb.ccc' })),
+      on: jest.fn(),
+      off: jest.fn(),
+      renew: jest.fn(() => Promise.resolve())
     },
     tx: {
       exists: jest.fn(),

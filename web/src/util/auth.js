@@ -66,15 +66,10 @@ export const setTokenListener = (event, callback) => {
   oktaAuth.tokenManager.on(event, callback);
 };
 
-export const isTokenManagerExpired = async () => {
-  const { accessToken, idToken } = await oktaAuth.tokenManager.getTokens();
-  return (
-    oktaAuth.tokenManager.hasExpired(accessToken) ||
-    oktaAuth.tokenManager.hasExpired(idToken)
-  );
+export const renewToken = () => {
+  oktaAuth.tokenManager.renew('accessToken');
+  oktaAuth.tokenManager.renew('idToken');
 };
-
-export const renewToken = () => oktaAuth.tokenManager.renew('accessToken');
 
 export const removeTokenListeners = () => {
   oktaAuth.tokenManager.off('expired');
@@ -86,7 +81,7 @@ export const removeTokenListeners = () => {
 // Log out methods
 export const logoutAndClearTokens = async () => {
   await oktaAuth.signOut();
-  await oktaAuth.tokenManager.clear();
+  await oktaAuth.tokenManager.remove('accessToken');
+  await oktaAuth.tokenManager.remove('idToken');
   removeTokenListeners();
-  // await oktaAuth.tokenManager.remove('accessToken');
 };
