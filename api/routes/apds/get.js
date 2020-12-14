@@ -38,7 +38,10 @@ module.exports = (
         })
       );
 
-      logger.silly({ id: req.id, message: `got apds: ${apds.map(({ id, name }) => ({ id, name }))}` });
+      logger.silly({
+        id: req.id,
+        message: `got apds: ${apds.map(({ id, name }) => ({ id, name }))}`
+      });
       return res.send(apds);
     } catch (e) {
       return next(e);
@@ -68,7 +71,10 @@ module.exports = (
           updated: apdFromDB.updated_at
         };
 
-        logger.silly({ id: req.id, message: `got single apd, id=${apd.id}, name="${apd.name}"` });
+        logger.silly({
+          id: req.id,
+          message: `got single apd, id=${apd.id}, name="${apd.name}"`
+        });
         return res.send(apd);
       }
 

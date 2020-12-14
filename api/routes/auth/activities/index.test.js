@@ -13,7 +13,6 @@ let next;
 let getAuthActivities;
 
 tap.test('auth activities GET endpoint', async endpointTest => {
-
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
@@ -43,13 +42,12 @@ tap.test('auth activities GET endpoint', async endpointTest => {
     });
 
     handlerTest.test('database error', async invalidTest => {
-        const err = { error: 'err0r' };
-        getAuthActivities.rejects(err);
-        await handler({}, res, next);
-        invalidTest.ok(next.called, 'next is called');
-        invalidTest.ok(next.calledWith(err), 'pass error to middleware');
-      }
-    );
+      const err = { error: 'err0r' };
+      getAuthActivities.rejects(err);
+      await handler({}, res, next);
+      invalidTest.ok(next.called, 'next is called');
+      invalidTest.ok(next.calledWith(err), 'pass error to middleware');
+    });
 
     handlerTest.test('sends back a list of activities', async validTest => {
       const activities = [{ name: 'one' }, { name: 'two' }, { name: 'three' }];

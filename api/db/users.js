@@ -35,7 +35,7 @@ const actualGetSelectedStateIdByUserId = (id, { db = knex } = {}) => {
     .from('users')
     .where({ uid: id })
     .first()
-    .then(result => result ? result.state_id : undefined);
+    .then(result => (result ? result.state_id : undefined));
 };
 
 const populateUser = async (
