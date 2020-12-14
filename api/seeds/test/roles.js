@@ -16,7 +16,7 @@ const activities = [
   { id: 1011, name: 'view-document' },
   { id: 1012, name: 'view-affiliations' },
   { id: 1013, name: 'edit-affiliations' },
-  { id: 1014, name: 'approve-state-access' },
+  { id: 1014, name: 'approve-state-access' }
 ];
 exports.activities = activities;
 
@@ -27,7 +27,7 @@ const roles = [
   { id: 1104, isActive: false, name: 'eAPD Federal SME' },
   { id: 1105, isActive: true, name: 'eAPD State Coordinator' },
   { id: 1106, isActive: false, name: 'eAPD State SME' },
-  { id: 1107, isActive: true, name: 'eAPD State Admin' },
+  { id: 1107, isActive: true, name: 'eAPD State Admin' }
 ];
 exports.roles = roles;
 

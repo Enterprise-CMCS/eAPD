@@ -1,9 +1,7 @@
 exports.up = async knex => {
   // add uid to users
   await knex.schema.table('users', table => {
-    table
-      .string('uid')
-      .comment('id of user from authentication service');
+    table.string('uid').comment('id of user from authentication service');
   });
 };
 
