@@ -84,7 +84,11 @@ export const newActivity = ({
   fundingSource = false,
   years = []
 } = {}) => {
-  const costAllocationNarrativeYears = arrToObj(years, costAllocationNarrative());
+  const costAllocationNarrativeYears = arrToObj(
+    years,
+    costAllocationNarrative()
+  );
+
   const obj = {
     alternatives: '',
     contractorResources: [],
@@ -113,6 +117,6 @@ export const newActivity = ({
     meta: {
       expanded: name === 'Program Administration'
     }
-  }
-  return obj
+  };
+  return obj;
 };
