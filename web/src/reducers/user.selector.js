@@ -7,17 +7,12 @@ export const getIsAdmin = ({
 };
 
 export const getUserStateOrTerritory = ({
-  user: {
-    data: { state }
-  }
+  user: { data: { state = null } = {} }
 }) => state;
 
 export const getUserAffiliationForCurrentState = ({
   user: {
-    data: {
-      state: { id },
-      affiliations
-    }
+    data: { state: { id = null } = {}, affiliations }
   }
 }) => {
   return affiliations
