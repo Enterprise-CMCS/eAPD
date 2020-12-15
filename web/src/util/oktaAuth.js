@@ -1,4 +1,4 @@
-import OktaAuth from '@okta/okta-auth-js';
+import { OktaAuth } from '@okta/okta-auth-js';
 
 const OKTA_DOMAIN = process.env.OKTA_DOMAIN; // eslint-disable-line prefer-destructuring
 const OKTA_SERVER_ID = process.env.OKTA_SERVER_ID; // eslint-disable-line prefer-destructuring
@@ -15,10 +15,16 @@ const oktaAuth =
         redirectUri: OKTA_REDIRECT_URI,
         tokenManager: {
           storage: 'cookie', // defaults to secure cookie
-          expireEarlySeconds: 300, // alerts the user 5 minutes before session ends
-          autoRenew: false // renewing based on user interactions
+          expireEarlySeconds: 300 // alerts the user 5 minutes before session ends
+          // autoRenew: false, // renewing based on user interactions
+          // devMode: true
         }
       })
     : null;
+
+oktaAuth.authStateManager.subscribe(authState => {
+  console.log({ authState });
+});
+oktaAuth.authStateManager.updateAuthState();
 
 export default oktaAuth;

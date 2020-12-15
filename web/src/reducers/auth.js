@@ -19,7 +19,8 @@ import {
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
-  SESSION_RENEWED
+  SESSION_RENEWED,
+  UPDATE_EXPIRATION
 } from '../actions/auth';
 
 const initialState = {
@@ -43,7 +44,8 @@ const initialState = {
   latestActivity: new Date().getTime(),
   isSessionEnding: false,
   isExtendingSession: false,
-  user: null
+  user: null,
+  expireAt: new Date().getTime() + 300000
 };
 
 const auth = (state = initialState, action) => {
@@ -205,6 +207,11 @@ const auth = (state = initialState, action) => {
         isSessionEnding: false,
         isExtendingSession: false,
         latestActivity: new Date().getTime()
+      };
+    case UPDATE_EXPIRATION:
+      return {
+        ...state,
+        expireAt: action.data * 1000 // convert to milliseconds
       };
     default:
       return state;
