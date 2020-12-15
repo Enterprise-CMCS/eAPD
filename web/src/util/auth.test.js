@@ -9,7 +9,8 @@ import {
   setTokenListener,
   renewToken,
   logoutAndClearTokens,
-  removeTokenListeners
+  removeTokenListeners,
+  isUserActive
 } from './auth';
 import { MFA_FACTOR_TYPES } from '../constants';
 
@@ -145,6 +146,16 @@ describe('Auth Util', () => {
     expect(eventListener).toHaveBeenCalledWith('some event', undefined);
 
     eventListener.mockReset();
+  });
+
+  it('isUserActive, true', () => {
+    const latestActivity = new Date().getTime() - 400;
+    expect(isUserActive(latestActivity)).toBe(true);
+  });
+
+  it('isUserActive, no', () => {
+    const latestActivity = new Date().getTime() - 400000;
+    expect(isUserActive(latestActivity)).toBe(false);
   });
 
   it('renewToken', () => {
