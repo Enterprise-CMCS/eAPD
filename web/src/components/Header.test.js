@@ -144,6 +144,26 @@ describe('Header component', () => {
       )
     ).toMatchSnapshot();
   });
+  
+  it('renders the state admin link when user has required permissions', () => {
+    expect(
+      shallow(
+        <Header
+          ariaExpanded={false}
+          authenticated
+          currentUser={{
+            role: 'eAPD State Admin',
+            state: { id: 'wa', name: 'Washington' },
+            username: 'frasiercrane@kacl.com'
+          }}
+          isAdmin
+          canViewStateAdmin
+          pushRoute={() => {}}
+          showSiteTitle={false}
+        />
+      )
+    ).toMatchSnapshot();
+  });
 
   it('maps state to props', () => {
     const state = {
