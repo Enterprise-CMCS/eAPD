@@ -9,7 +9,6 @@ import {
   TableBody
 } from '@cmsgov/design-system';
 
-// Todo: Need to handle empty state when there is no requests/active/inactive
 const ManageUserTable = ({ tab, affiliations, isFetching, actions }) => {
   return (
     <Fragment>
@@ -58,7 +57,7 @@ const ManageUserTable = ({ tab, affiliations, isFetching, actions }) => {
 
 ManageUserTable.propTypes = {
   tab: PropTypes.string.isRequired,
-  affiliations: PropTypes.object.isRequired,
+  affiliations: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   actions: PropTypes.array
 };

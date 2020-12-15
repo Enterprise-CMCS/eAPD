@@ -24,6 +24,8 @@ const StateAdmin = ({
   getStateAffiliations: stateAffiliations,
   updateStateAffiliation: updateAffiliation
 }) => {
+
+  console.log("current state...", currentState);
   const [activeTab, setActiveTab] = useState('pending');
   const [isFetching, setIsFetching] = useState(true);
   const [isDenied, setIsDenied] = useState(true);
@@ -67,7 +69,6 @@ const StateAdmin = ({
 
   const handleAffiliationUpdate = roleId => {
     async function saveAffiliation() {
-      // Todo: Update this to get the appropriate role_id
       await updateAffiliation(
         currentState.id,
         selectedAffiliation.id,
@@ -99,11 +100,9 @@ const StateAdmin = ({
     setConfirmationModalDisplay(false);
   };
 
-  // Todo: consider refactoring this to reduce redundancy between handleAffiliationUpdate
   const handleDenyOrRevoke = () => {
     const permissionChangeType = isDenied ? 'denied' : 'revoked';
 
-    // Todo: Figure out how what role_id should be set to when revoking
     async function saveAffiliation() {
       await updateAffiliation(
         currentState.id,
@@ -227,13 +226,13 @@ StateAdmin.propTypes = {
   getStateAffiliations: PropTypes.func.isRequired,
   updateStateAffiliation: PropTypes.func.isRequired,
   getRoleTypes: PropTypes.func.isRequired,
-  currentState: PropTypes.object,
+  currentState: PropTypes.object.isRequired,
   affiliations: PropTypes.array.isRequired,
   roleTypes: PropTypes.array.isRequired
 };
 
 StateAdmin.defaultProps = {
-  currentState: null
+
 };
 
 const mapDispatchToProps = {
