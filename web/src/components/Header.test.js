@@ -144,7 +144,7 @@ describe('Header component', () => {
       )
     ).toMatchSnapshot();
   });
-  
+
   it('renders the state admin link when user has required permissions', () => {
     expect(
       shallow(

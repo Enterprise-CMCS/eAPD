@@ -128,6 +128,7 @@ class Header extends Component {
                                 style={{ width: '14px' }}
                               />
                               {currentState &&
+                                currentState.id &&
                                 `${currentState.id.toUpperCase()} State admin`}
                             </Link>
                           </li>
@@ -183,6 +184,11 @@ const mapStateToProps = state => ({
   canViewStateAdmin: getCanUserViewStateAdmin(state)
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = {
+  getUserStateOrTerritory,
+  getCanUserViewStateAdmin
+};
 
-export { Header as plain, mapStateToProps };
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export { Header as plain, mapStateToProps, mapDispatchToProps };

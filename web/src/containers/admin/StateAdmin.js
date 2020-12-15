@@ -24,8 +24,6 @@ const StateAdmin = ({
   getStateAffiliations: stateAffiliations,
   updateStateAffiliation: updateAffiliation
 }) => {
-
-  console.log("current state...", currentState);
   const [activeTab, setActiveTab] = useState('pending');
   const [isFetching, setIsFetching] = useState(true);
   const [isDenied, setIsDenied] = useState(true);
@@ -229,10 +227,6 @@ StateAdmin.propTypes = {
   currentState: PropTypes.object.isRequired,
   affiliations: PropTypes.array.isRequired,
   roleTypes: PropTypes.array.isRequired
-};
-
-StateAdmin.defaultProps = {
-
 };
 
 const mapDispatchToProps = {
