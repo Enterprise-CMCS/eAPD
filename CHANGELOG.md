@@ -5,7 +5,7 @@ Anticipated release: December 21, 2020
 #### 🚀 New features
 
 - Update endpoint for affiliations to filter by status ([#2682])
-- Update session management to warn users that there session is about to expire ([#2702])
+- Update session management to warn users that their session is about to expire ([#2702])
 
 #### 🐛 Bugs fixed
 
