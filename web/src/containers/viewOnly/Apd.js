@@ -8,6 +8,7 @@ import { selectApdData } from '../../reducers/apd.selectors';
 import { selectBudget } from '../../reducers/budget.selectors';
 import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
+import SessionEndingAlert from '../SessionEndingAlert';
 import ApdStateProfile from './ApdStateProfile';
 import ApdSummary from './ApdSummary';
 import PreviousActivities from './PreviousActivities';
@@ -46,6 +47,7 @@ class ApdViewOnly extends Component {
 
     return (
       <main className="site-body ds-l-container ds-u-padding--3">
+        <SessionEndingAlert />
         <Button
           className="visibility--screen"
           variation="transparent"
