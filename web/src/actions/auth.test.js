@@ -79,9 +79,10 @@ describe('auth actions', () => {
             status: 'SUCCESS'
           })
         );
+      const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve({ status: 'success' }));
+        .mockImplementation(() => Promise.resolve(expiresAt));
 
       const store = mockStore({});
       fetchMock
@@ -89,6 +90,7 @@ describe('auth actions', () => {
         .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         {
           type: actions.LOGIN_SUCCESS,
           data: { name: 'moop', activities: [], states: ['MO'] }
@@ -113,9 +115,10 @@ describe('auth actions', () => {
             status: 'SUCCESS'
           })
         );
+      const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve({ status: 'success' }));
+        .mockImplementation(() => Promise.resolve(expiresAt));
 
       const store = mockStore({});
       fetchMock
@@ -123,6 +126,7 @@ describe('auth actions', () => {
         .reply(200, { name: 'moop', activities: [], states: [] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         { type: actions.STATE_ACCESS_REQUEST },
         {
           type: actions.LOGIN_SUCCESS,
@@ -232,9 +236,10 @@ describe('auth actions', () => {
             verify
           })
         );
+      const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve({ status: 'success' }));
+        .mockImplementation(() => Promise.resolve(expiresAt));
 
       const store = mockStore({});
       fetchMock
@@ -242,6 +247,7 @@ describe('auth actions', () => {
         .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         {
           type: actions.LOGIN_SUCCESS,
           data: { name: 'moop', activities: [], states: ['MO'] }
@@ -354,19 +360,15 @@ describe('auth actions', () => {
             )
           })
         );
-      jest.spyOn(mockAuth, 'setTokens').mockImplementation(() =>
-        Promise.resolve({
-          tokens: {
-            accessToken: { accessToken: 'aaa.bbb.ccc' },
-            idToken: { idToken: 'xxx.yyy.zzz' }
-          },
-          state: 'badstate'
-        })
-      );
+      const expiresAt = new Date().getTime() + 5000;
+      jest
+        .spyOn(mockAuth, 'setTokens')
+        .mockImplementation(() => Promise.resolve(expiresAt));
 
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         {
           type: actions.LOGIN_FAILURE,
           error: 'Request failed with status code 404'
@@ -437,14 +439,16 @@ describe('auth actions', () => {
             status: 'SUCCESS'
           })
         );
+      const expiresAt = new Date().getTime() + 5000;
       const setTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve({ status: 'success' }));
+        .mockImplementation(() => Promise.resolve(expiresAt));
 
       const store = mockStore({});
       fetchMock.onGet('/me').reply(401, { error: 'Unauthorized' });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         {
           type: actions.LOGIN_FAILURE,
           error: 'Request failed with status code 401'
@@ -511,29 +515,37 @@ describe('auth actions', () => {
       jest.clearAllMocks();
     });
 
-    it('creates AUTH_CHEK_SUCCESS after successful auth', () => {
+    it('creates AUTH_CHECK_SUCCESS after successful auth', async () => {
       const store = mockStore({});
       fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      const expiresAt = new Date().getTime() + 5000;
+      jest
+        .spyOn(mockAuth, 'renewTokens')
+        .mockImplementation(() => Promise.resolve(expiresAt));
 
       const expectedActions = [
         { type: actions.AUTH_CHECK_REQUEST },
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         {
           type: actions.AUTH_CHECK_SUCCESS,
           data: { name: 'moop', activities: [] }
         }
       ];
 
-      return store.dispatch(actions.checkAuth()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      await store.dispatch(actions.checkAuth());
+      expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('creates AUTH_CHECK_FAILURE after unsuccessful auth and does not load APDs', () => {
       const store = mockStore({});
       fetchMock.onGet().reply(403);
+      jest
+        .spyOn(mockAuth, 'renewTokens')
+        .mockImplementation(() => Promise.resolve(null));
 
       const expectedActions = [
         { type: actions.AUTH_CHECK_REQUEST },
+        { type: actions.UPDATE_EXPIRATION, data: null },
         { type: actions.AUTH_CHECK_FAILURE }
       ];
 
@@ -561,7 +573,7 @@ describe('auth actions', () => {
         .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() => Promise.resolve({ status: 'success' }));
       jest
-        .spyOn(mockAuth, 'renewToken')
+        .spyOn(mockAuth, 'renewTokens')
         .mockImplementation(() => new Promise(() => {}));
       fetchAllApdsSpy = jest
         .spyOn(mockApp, 'fetchAllApds')
@@ -620,8 +632,15 @@ describe('auth actions', () => {
 
   describe('handling sessions', () => {
     it('extendSession', async () => {
+      const expiresAt = new Date().getTime() + 5000;
+      jest
+        .spyOn(mockAuth, 'renewTokens')
+        .mockImplementation(() => Promise.resolve(expiresAt));
+
       const expectedActions = [
         { type: actions.REQUEST_SESSION_RENEWAL },
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.LATEST_ACTIVITY },
         { type: actions.SESSION_RENEWED }
       ];
 

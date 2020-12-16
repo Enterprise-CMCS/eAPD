@@ -18,7 +18,8 @@ import {
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
-  SESSION_RENEWED
+  SESSION_RENEWED,
+  UPDATE_EXPIRATION
 } from '../actions/auth';
 
 describe('auth reducer', () => {
@@ -43,7 +44,8 @@ describe('auth reducer', () => {
     isLocked: false,
     latestActivity: null,
     isSessionEnding: false,
-    isExtendingSession: false
+    isExtendingSession: false,
+    expiresAt: null
   };
 
   it('should handle initial state', () => {
@@ -257,7 +259,7 @@ describe('auth reducer', () => {
           ...initialState,
           latestActivity: now
         },
-        { type: SESSION_RENEWED }
+        { type: LATEST_ACTIVITY }
       );
       expect(result.latestActivity).toBeGreaterThan(now);
     });
@@ -298,6 +300,14 @@ describe('auth reducer', () => {
         isSessionEnding: false,
         isExtendingSession: false
       });
+    });
+    it('should update the expiresAt value on UPDATE_EXPIRATION', () => {
+      const expiresAt = new Date().getTime() + 60000;
+      const result = auth(initialState, {
+        type: UPDATE_EXPIRATION,
+        data: expiresAt / 1000
+      });
+      expect(result).toEqual({ ...initialState, expiresAt });
     });
   });
 });

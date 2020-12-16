@@ -12,7 +12,7 @@ import { extendSession, logout } from '../actions/auth';
 const SessionEndingAlert = ({
   isSessionEnding,
   isExtendingSession,
-  expireAt,
+  expiresAt,
   extend,
   logoutAction
 }) => {
@@ -58,7 +58,7 @@ const SessionEndingAlert = ({
     >
       {isSessionEnding && (
         <Countdown
-          date={expireAt - 5000}
+          date={expiresAt - 5000}
           key={uuidv4()}
           renderer={createTimer}
           onComplete={logoutAction}
@@ -71,17 +71,17 @@ const SessionEndingAlert = ({
 SessionEndingAlert.propTypes = {
   isSessionEnding: PropTypes.bool.isRequired,
   isExtendingSession: PropTypes.bool.isRequired,
-  expireAt: PropTypes.number.isRequired,
+  expiresAt: PropTypes.number.isRequired,
   extend: PropTypes.func.isRequired,
   logoutAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { isSessionEnding, isExtendingSession, expireAt }
+  auth: { isSessionEnding, isExtendingSession, expiresAt }
 }) => ({
   isSessionEnding,
   isExtendingSession,
-  expireAt
+  expiresAt
 });
 
 const mapDispatchToProps = { extend: extendSession, logoutAction: logout };

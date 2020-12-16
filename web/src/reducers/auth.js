@@ -45,7 +45,7 @@ const initialState = {
   isSessionEnding: false,
   isExtendingSession: false,
   user: null,
-  expireAt: new Date().getTime() + 300000
+  expiresAt: null
 };
 
 const auth = (state = initialState, action) => {
@@ -162,6 +162,7 @@ const auth = (state = initialState, action) => {
         hasEverLoggedOn: state.hasEverLoggedOn,
         initialCheck: state.initialCheck,
         latestActivity: null,
+        expiresAt: null,
         isSessionEnding: false,
         isExtendingSession: false
       };
@@ -211,7 +212,7 @@ const auth = (state = initialState, action) => {
     case UPDATE_EXPIRATION:
       return {
         ...state,
-        expireAt: action.data * 1000 // convert to milliseconds
+        expiresAt: action.data * 1000 // convert to milliseconds
       };
     default:
       return state;

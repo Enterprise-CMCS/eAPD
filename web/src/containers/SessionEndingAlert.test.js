@@ -1,11 +1,11 @@
-import { renderWithConnection, fireEvent, waitFor } from 'apd-testing-library';
+import { renderWithConnection } from 'apd-testing-library';
 import React from 'react';
 
 import SessionEndingAlert, {
   mapStateToProps,
   mapDispatchToProps
 } from './SessionEndingAlert';
-import { extendSession } from '../actions/auth';
+import { extendSession, logout } from '../actions/auth';
 
 const props = {
   extend: jest.fn()
@@ -19,7 +19,8 @@ describe('the session ending alert component', () => {
         initialState: {
           auth: {
             isSessionEnding: false,
-            isExtendingSession: false
+            isExtendingSession: false,
+            expiresAt: new Date().getTime() + 60000
           }
         }
       }
@@ -34,7 +35,8 @@ describe('the session ending alert component', () => {
         initialState: {
           auth: {
             isSessionEnding: true,
-            isExtendingSession: false
+            isExtendingSession: false,
+            expiresAt: new Date().getTime() + 60000
           }
         }
       }
@@ -50,7 +52,8 @@ describe('the session ending alert component', () => {
         initialState: {
           auth: {
             isSessionEnding: true,
-            isExtendingSession: true
+            isExtendingSession: true,
+            expiresAt: new Date().getTime() + 60000
           }
         }
       }
@@ -74,6 +77,9 @@ describe('the session ending alert component', () => {
   });
 
   it('maps redux actions to component props', () => {
-    expect(mapDispatchToProps).toEqual({ extend: extendSession });
+    expect(mapDispatchToProps).toEqual({
+      extend: extendSession,
+      logoutAction: logout
+    });
   });
 });

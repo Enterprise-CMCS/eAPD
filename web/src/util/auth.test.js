@@ -6,8 +6,8 @@ import {
   setTokens,
   getAvailableFactors,
   getFactor,
-  setTokenListener,
-  renewToken,
+  setTokenListeners,
+  renewTokens,
   logoutAndClearTokens,
   removeTokenListeners,
   isUserActive
@@ -17,7 +17,7 @@ import { MFA_FACTOR_TYPES } from '../constants';
 describe('Auth Util', () => {
   it('authenticateUser', async () => {
     const signInSpy = jest
-      .spyOn(mockOktaAuth, 'signIn')
+      .spyOn(mockOktaAuth, 'signInWithCredentials')
       .mockImplementation(() =>
         Promise.resolve({
           sessionToken: 'testSessionToken',
@@ -44,18 +44,15 @@ describe('Auth Util', () => {
       );
 
     const addTokenSpy = jest
-      .spyOn(mockOktaAuth.tokenManager, 'add')
+      .spyOn(mockOktaAuth.tokenManager, 'setTokens')
       .mockImplementation(() => Promise.resolve({ status: 'success' }));
 
     await setTokens('123456789');
     await expect(getTokenSpy).toHaveBeenCalledTimes(1);
-    await expect(addTokenSpy).toHaveBeenCalledWith('idToken', {
-      idToken: 'xxx.yyy.zzz'
+    await expect(addTokenSpy).toHaveBeenCalledWith({
+      accessToken: { accessToken: 'aaa.bbb.ccc' },
+      idToken: { idToken: 'xxx.yyy.zzz' }
     });
-    await expect(addTokenSpy).toHaveBeenCalledWith('accessToken', {
-      accessToken: 'aaa.bbb.ccc'
-    });
-    expect(addTokenSpy).toHaveBeenCalledTimes(2);
 
     getTokenSpy.mockReset();
     addTokenSpy.mockReset();
@@ -142,8 +139,9 @@ describe('Auth Util', () => {
     const eventListener = jest
       .spyOn(mockOktaAuth.tokenManager, 'on')
       .mockImplementation(() => Promise.resolve());
-    await setTokenListener('some event');
-    expect(eventListener).toHaveBeenCalledWith('some event', undefined);
+    const mockExpiredCallback = jest.fn();
+    await setTokenListeners({ expiredCallback: mockExpiredCallback });
+    expect(eventListener).toHaveBeenCalledWith('expired', mockExpiredCallback);
 
     eventListener.mockReset();
   });
@@ -158,12 +156,50 @@ describe('Auth Util', () => {
     expect(isUserActive(latestActivity)).toBe(false);
   });
 
-  it('renewToken', () => {
+  it('renewToken renewed', async () => {
+    const getToken = jest
+      .spyOn(mockOktaAuth.tokenManager, 'get')
+      .mockImplementation(() =>
+        Promise.resolve({
+          accessToken: 'aaa.bbb.ccc',
+          expiresAt: new Date().getTime() + 5000
+        })
+      );
+    const hasExpired = jest
+      .spyOn(mockOktaAuth.tokenManager, 'hasExpired')
+      .mockImplementation(() => false);
     const renew = jest.spyOn(mockOktaAuth.tokenManager, 'renew');
-    renewToken();
+    await renewTokens();
+    expect(getToken).toHaveBeenCalledTimes(4);
+    expect(hasExpired).toHaveBeenCalledTimes(2);
     expect(renew).toHaveBeenCalledTimes(2);
 
+    getToken.mockReset();
+    hasExpired.mockReset();
     renew.mockReset();
+  });
+
+  it('renewToken removed', async () => {
+    const getToken = jest
+      .spyOn(mockOktaAuth.tokenManager, 'get')
+      .mockImplementation(() =>
+        Promise.resolve({
+          accessToken: 'aaa.bbb.ccc',
+          expiresAt: new Date().getTime() + 5000
+        })
+      );
+    const hasExpired = jest
+      .spyOn(mockOktaAuth.tokenManager, 'hasExpired')
+      .mockImplementation(() => true);
+    const remove = jest.spyOn(mockOktaAuth.tokenManager, 'remove');
+    await renewTokens();
+    expect(getToken).toHaveBeenCalledTimes(3);
+    expect(hasExpired).toHaveBeenCalledTimes(2);
+    expect(remove).toHaveBeenCalledTimes(2);
+
+    getToken.mockReset();
+    hasExpired.mockReset();
+    remove.mockReset();
   });
 
   it('removeTokenListeners', () => {
@@ -176,33 +212,16 @@ describe('Auth Util', () => {
 
   it('logoutAndClearTokens', async () => {
     const signOutSpy = jest
-      .spyOn(mockOktaAuth, 'signOut')
+      .spyOn(mockOktaAuth, 'closeSession')
       .mockImplementation(() =>
         Promise.resolve({
           status: 'SUCCESS'
         })
       );
-    const removeToken = jest
-      .spyOn(mockOktaAuth.tokenManager, 'remove')
-      .mockImplementation(() =>
-        Promise.resolve({
-          status: 'success'
-        })
-      );
-    const listenerOff = jest
-      .spyOn(mockOktaAuth.tokenManager, 'off')
-      .mockImplementation(() =>
-        Promise.resolve({
-          status: 'success'
-        })
-      );
+
     await logoutAndClearTokens();
     await expect(signOutSpy).toHaveBeenCalledTimes(1);
-    await expect(removeToken).toHaveBeenCalledTimes(2);
-    await expect(listenerOff).toHaveBeenCalledTimes(4);
 
     signOutSpy.mockReset();
-    removeToken.mockReset();
-    listenerOff.mockReset();
   });
 });
