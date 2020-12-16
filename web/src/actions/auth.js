@@ -140,16 +140,7 @@ const setupTokenManager = () => (dispatch, getState) => {
         // and ask them if they want to continue
         dispatch(setSessionEnding());
       }
-    },
-    renewedCallback: (key, newToken, oldToken) => {
-      console.log('Token with key', key, 'has been renewed');
-      console.log('Old token:', oldToken);
-      console.log('New token:', newToken);
-    },
-    errorCallback: err => {
-      console.log('TokenManager error:', err);
-    },
-    removedCallback: () => console.log('removed')
+    }
   });
 };
 
