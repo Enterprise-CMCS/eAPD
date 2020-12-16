@@ -16,7 +16,9 @@ const SessionEndingAlert = ({
   extend,
   logoutAction
 }) => {
-  const className = isSessionEnding ? 'alert--session-expiring__active' : '';
+  const className = isSessionEnding
+    ? 'alert--session-expiring__active'
+    : 'alert--session-expiring__inactive';
 
   // Renderer callback with condition
   // eslint-disable-next-line react/prop-types

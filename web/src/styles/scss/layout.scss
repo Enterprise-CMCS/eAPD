@@ -78,6 +78,10 @@ footer {
   transition: top 400ms, margin-top 400ms;
   z-index: 9;
 
+  &.alert--session-expiring__inactive {
+    display: none;
+  }
+
   &.alert--session-expiring__active {
     top: 60px;
     margin-top: 0;
