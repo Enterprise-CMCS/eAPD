@@ -17,17 +17,29 @@ const selectedAffiliation = {
   userId: '00u5mfj967KsdvBBB297'
 };
 
+
 describe('<ManageRoleDialog />', () => {
-  test('shows dialog box title', () => {
-    props = {
-      roleTypes: ['State Admin', 'State Contractor'],
-      selectedAffiliation,
-      hideManageModal: jest.fn(),
-      handleAffiliationUpdate: jest.fn()
-    };
+  const props = {
+    roleTypes: ['State Admin', 'State Contractor'],
+    selectedAffiliation,
+    hideManageModal: jest.fn(),
+    handleAffiliationUpdate: jest.fn()
+  };
+  test('renders dialog box title', () => {
     const component = shallow(<ManageRoleDialog {...props} />);
     expect(component.find('Edit Permissions')).toBeTruthy();
   });
 
-  // Todo: add more tests here
+  test('renders affiliation information', () => {
+    const component = shallow(<ManageRoleDialog {...props} />);
+    expect(component.find('p').at(0).text()).toEqual(`Name ${selectedAffiliation.displayName}`);
+    expect(component.find('p').at(1).text()).toEqual(`Phone Number ${selectedAffiliation.primaryPhone}`);
+    expect(component.find('p').at(2).text()).toEqual(`Email ${selectedAffiliation.email}`);
+  });
+
+  test('renders save and cancel buttons', () => {
+    const component = shallow(<ManageRoleDialog {...props} />);
+    expect(component.find('Save')).toBeTruthy();
+    expect(component.find('Cancel')).toBeTruthy();
+  });
 });

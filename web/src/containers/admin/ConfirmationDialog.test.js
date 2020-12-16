@@ -5,17 +5,27 @@ import ConfirmationDialog from './ConfirmationDialog';
 let props;
 
 describe('<ConfirmationDialog />', () => {
-  test('shows dialog box title', async () => {
+  test('renders dialog box title', async () => {
     props = {
-      isDenied: true
+      isDenied: true,
     };
 
     const component = shallow(<ConfirmationDialog {...props} />);
     expect(component.find('Deny')).toBeTruthy();
   });
 
-  // Todo: add more tests here
-  // 1. test that cancel triggers the hideConfirmationModal fn
-  // 2. test that confirm triggers handleDenyOrRevoke fn
-  // 3. test p is rendered with correct denyOrRevoke (use revoke)
+  test('renders dialog box title with revoked', async () => {
+    props = {
+      isDenied: false,
+    };
+
+    const component = shallow(<ConfirmationDialog {...props} />);
+    expect(component.find('Revoke')).toBeTruthy();
+  });
+
+  test('renders confirm and cancel buttons', () => {
+    const component = shallow(<ConfirmationDialog />);
+    expect(component.find('Confirm')).toBeTruthy();
+    expect(component.find('Cancel')).toBeTruthy();
+  });
 });
