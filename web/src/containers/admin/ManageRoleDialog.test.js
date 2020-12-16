@@ -1,9 +1,8 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+import { shallow } from 'enzyme';
 import ManageRoleDialog from './ManageRoleDialog';
 
 let props;
-let renderUtils;
 
 const selectedAffiliation = {
   displayName: 'Liz Lemon',
@@ -21,13 +20,13 @@ const selectedAffiliation = {
 describe('<ManageRoleDialog />', () => {
   test('shows dialog box title', () => {
     props = {
+      roleTypes: ['State Admin', 'State Contractor'],
       selectedAffiliation,
-      roleTypes: ['State Admin', 'State Contractor']
+      hideManageModal: jest.fn(),
+      handleAffiliationUpdate: jest.fn()
     };
-    renderUtils = renderWithConnection(<ManageRoleDialog {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText('Edit Permissions')).toBeTruthy();
+    const component = shallow(<ManageRoleDialog {...props} />);
+    expect(component.find('Edit Permissions')).toBeTruthy();
   });
 
   // Todo: add more tests here

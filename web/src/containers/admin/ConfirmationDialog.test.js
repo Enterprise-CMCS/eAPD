@@ -1,19 +1,17 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+import { shallow } from 'enzyme';
 import ConfirmationDialog from './ConfirmationDialog';
 
 let props;
-let renderUtils;
 
 describe('<ConfirmationDialog />', () => {
-  test('shows dialog box title', () => {
+  test('shows dialog box title', async () => {
     props = {
       isDenied: true
     };
-    renderUtils = renderWithConnection(<ConfirmationDialog {...props} />);
 
-    const { getByText } = renderUtils;
-    expect(getByText('Deny')).toBeTruthy();
+    const component = shallow(<ConfirmationDialog {...props} />);
+    expect(component.find('Deny')).toBeTruthy();
   });
 
   // Todo: add more tests here
