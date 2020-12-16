@@ -23,8 +23,6 @@ export const verifyMFA = async ({ transaction, otp }) => {
 };
 
 export const getSessionExpiration = async () => {
-  const accessToken = await oktaAuth.tokenManager.get('accessToken');
-  console.log({ accessToken });
   const { expiresAt = null } =
     (await oktaAuth.tokenManager.get('accessToken')) || {};
   return expiresAt;
@@ -44,8 +42,8 @@ export const setTokens = sessionToken => {
       const { state: responseToken, tokens } = res;
       if (stateToken === responseToken) {
         await oktaAuth.tokenManager.setTokens(tokens);
-        const expireAt = await getSessionExpiration();
-        return expireAt;
+        const expiresAt = await getSessionExpiration();
+        return expiresAt;
       }
       throw new Error('Authentication failed');
     });
@@ -89,7 +87,6 @@ export const getAccessToken = () => oktaAuth.getAccessToken();
 
 const renewToken = async key => {
   const token = await oktaAuth.tokenManager.get(key);
-  console.log({ key, token });
   if (token) {
     if (oktaAuth.tokenManager.hasExpired(token)) {
       oktaAuth.tokenManager.remove(key);
@@ -116,7 +113,6 @@ export const removeTokenListeners = () => {
 // Log out methods
 export const logoutAndClearTokens = async () => {
   await oktaAuth.closeSession();
-  // removeTokenListeners();
 };
 
 export const isUserActive = latestActivity => {

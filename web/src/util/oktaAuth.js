@@ -15,8 +15,8 @@ const oktaAuth =
         redirectUri: OKTA_REDIRECT_URI,
         tokenManager: {
           storage: 'cookie', // defaults to secure cookie
-          expireEarlySeconds: 300 // alerts the user 5 minutes before session ends
-          // autoRenew: false, // renewing based on user interactions
+          expireEarlySeconds: 300, // alerts the user 5 minutes before session ends
+          autoRenew: false // renewing based on user interactions
           // devMode: true
         }
       })
@@ -25,6 +25,9 @@ const oktaAuth =
 oktaAuth.authStateManager.subscribe(authState => {
   console.log({ authState });
 });
-oktaAuth.authStateManager.updateAuthState();
+if (!oktaAuth.isLoginRedirect()) {
+  // Trigger an initial authState change event when the app startup
+  oktaAuth.authStateManager.updateAuthState();
+}
 
 export default oktaAuth;
