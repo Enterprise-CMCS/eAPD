@@ -47,7 +47,6 @@ class ApdViewOnly extends Component {
 
     return (
       <main className="site-body ds-l-container ds-u-padding--3">
-        <SessionEndingAlert />
         <Button
           className="visibility--screen"
           variation="transparent"
