@@ -18,6 +18,7 @@ import ManageUserTable from './ManageUserTable';
 
 const StateAdmin = ({
   currentState,
+  currentUser,
   affiliations,
   roleTypes,
   getRoleTypes: fetchTypes,
@@ -153,6 +154,7 @@ const StateAdmin = ({
           <ManageUserTable
             tab="active"
             affiliations={affiliations}
+            currentUser={currentUser}
             updateAffiliation={updateAffiliation}
             isFetching={isFetching}
             actions={[
@@ -181,6 +183,7 @@ const StateAdmin = ({
           <ManageUserTable
             tab="inactive"
             affiliations={affiliations}
+            currentUser={currentUser}
             updateAffiliation={updateAffiliation}
             isFetching={isFetching}
             actions={[
@@ -225,8 +228,13 @@ StateAdmin.propTypes = {
   updateStateAffiliation: PropTypes.func.isRequired,
   getRoleTypes: PropTypes.func.isRequired,
   currentState: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
   affiliations: PropTypes.array.isRequired,
   roleTypes: PropTypes.array.isRequired
+};
+
+StateAdmin.defaultProps = {
+  currentUser: null
 };
 
 const mapDispatchToProps = {
@@ -238,7 +246,8 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   affiliations: state.admin.affiliations,
   roleTypes: state.admin.roleTypes,
-  currentState: getUserStateOrTerritory(state)
+  currentState: getUserStateOrTerritory(state),
+  currentUser: state.auth.user
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StateAdmin);
