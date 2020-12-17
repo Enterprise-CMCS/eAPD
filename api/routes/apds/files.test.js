@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const { can, userCanAccessAPD, userCanEditAPD } = require('../../middleware');
+const { can, userCanEditAPD } = require('../../middleware');
 const endpoints = require('./files');
 
 tap.test('apds files endpoints', async endpointTest => {
@@ -39,8 +39,6 @@ tap.test('apds files endpoints', async endpointTest => {
     setupTest.ok(
       app.get.calledWith(
         '/apds/:id/files/:fileID',
-        can('view-document'),
-        userCanAccessAPD(),
         sinon.match.func
       ),
       'endpoint for fetching APD files is setup'

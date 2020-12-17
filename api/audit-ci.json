@@ -1,6 +1,6 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": ["1556|@okta/okta-sdk-nodejs>isomorphic-fetch>node-fetch"],
+  "allowlist": [],
   "registry": "https://registry.npmjs.org"
 }
