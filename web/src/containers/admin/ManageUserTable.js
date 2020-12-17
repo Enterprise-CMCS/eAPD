@@ -21,7 +21,7 @@ const ManageUserTable = ({
   return (
     <Fragment>
       {isFetching && <p>Loading...</p>}
-      {!isFetching && affiliations.length === 0 && <p>No users in this tab</p>}
+      {!isFetching && affiliations.length === 0 && <p>No users on this tab at this time</p>}
       {!isFetching && affiliations.length > 0 && (
         <Table borderless>
           <TableHead>
