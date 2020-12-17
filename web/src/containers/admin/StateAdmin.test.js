@@ -74,7 +74,7 @@ describe('<StateAdmin />', () => {
 
     test('renders no results message', () => {
       const { getAllByText } = renderUtils;
-      expect(getAllByText('No users in this tab')).toHaveLength(3);
+      expect(getAllByText('No users on this tab at this time')).toHaveLength(3);
     });
 
     test('renders header', () => {
