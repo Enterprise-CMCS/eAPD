@@ -87,6 +87,20 @@ describe('<ManageUserTable />', () => {
     expect(getByText('Actions')).toBeTruthy();
   });
 
+  test('does now show actions for current users affiliation', () => {
+    props = {
+      tab: 'active',
+      affiliations: [approvedAffiliation],
+      isFetching: false,
+      currentUser: { id: '00u5mfj967KsdvCCC297' },
+      actions: [<button>Edit Role</button>, <button>Revoke</button>]
+    };
+    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
+    const { queryByRole } = renderUtils;
+    expect(queryByRole('button', {name: 'Edit Role'})).toBeNull();
+    expect(queryByRole('button', {name: 'Revoke'})).toBeNull();
+  })
+
   test('shows correct table headers in inactive tab', () => {
     props = {
       tab: 'inactive',

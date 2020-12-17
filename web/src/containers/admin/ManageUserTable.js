@@ -9,7 +9,10 @@ import {
   TableBody
 } from '@cmsgov/design-system';
 
-const ManageUserTable = ({ tab, affiliations, isFetching, actions }) => {
+const ManageUserTable = ({ tab, affiliations, isFetching, actions, currentUser }) => {
+
+  const currentUserId = currentUser && currentUser.id;
+
   return (
     <Fragment>
       {isFetching && <p>Loading...</p>}
@@ -43,7 +46,9 @@ const ManageUserTable = ({ tab, affiliations, isFetching, actions }) => {
                 ) : null}
                 <TableCell>
                   <div className="ds-u-display--flex" data-id={affiliation.id}>
-                    {actions && actions}
+                    {currentUserId !== affiliation.userId && (
+                      actions && actions
+                    )}
                   </div>
                 </TableCell>
               </TableRow>
@@ -65,5 +70,7 @@ ManageUserTable.propTypes = {
 ManageUserTable.defaultProps = {
   actions: ''
 };
+
+
 
 export default ManageUserTable;
