@@ -7,7 +7,7 @@ let props;
 describe('<ConfirmationDialog />', () => {
   test('renders dialog box title', async () => {
     props = {
-      isDenied: true,
+      isDenied: true
     };
 
     const component = shallow(<ConfirmationDialog {...props} />);
@@ -16,7 +16,7 @@ describe('<ConfirmationDialog />', () => {
 
   test('renders dialog box title with revoked', async () => {
     props = {
-      isDenied: false,
+      isDenied: false
     };
 
     const component = shallow(<ConfirmationDialog {...props} />);

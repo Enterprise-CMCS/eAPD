@@ -9,14 +9,19 @@ import {
   TableBody
 } from '@cmsgov/design-system';
 
-const ManageUserTable = ({ tab, affiliations, isFetching, actions, currentUser }) => {
-
+const ManageUserTable = ({
+  tab,
+  affiliations,
+  isFetching,
+  actions,
+  currentUser
+}) => {
   const currentUserId = currentUser && currentUser.id;
 
   return (
     <Fragment>
       {isFetching && <p>Loading...</p>}
-      {!isFetching && affiliations.length === 0 && <p>No results</p>}
+      {!isFetching && affiliations.length === 0 && <p>No users in this tab</p>}
       {!isFetching && affiliations.length > 0 && (
         <Table borderless>
           <TableHead>
@@ -46,9 +51,7 @@ const ManageUserTable = ({ tab, affiliations, isFetching, actions, currentUser }
                 ) : null}
                 <TableCell>
                   <div className="ds-u-display--flex" data-id={affiliation.id}>
-                    {currentUserId !== affiliation.userId && (
-                      actions && actions
-                    )}
+                    {currentUserId !== affiliation.userId && actions && actions}
                   </div>
                 </TableCell>
               </TableRow>
@@ -64,13 +67,12 @@ ManageUserTable.propTypes = {
   tab: PropTypes.string.isRequired,
   affiliations: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  actions: PropTypes.array
+  actions: PropTypes.array,
+  currentUser: PropTypes.object.isRequired
 };
 
 ManageUserTable.defaultProps = {
   actions: ''
 };
-
-
 
 export default ManageUserTable;
