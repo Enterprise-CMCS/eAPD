@@ -19,7 +19,7 @@ describe('Roles endpoint', () => {
       const authedClient = login();
       const response = await authedClient.get('/roles');
       expect(response.status).toEqual(200);
-      expect(response.data.length).toEqual(ACTIVE_ROLES.length);
+      expect(response.data.length).toEqual(ACTIVE_ROLES.length + 1); // have to account for non-active eAPD Admin role
     });
 
     it('returns 403', async () => {

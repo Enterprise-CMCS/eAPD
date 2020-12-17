@@ -27,11 +27,11 @@ describe('/me endpoint | GET', () => {
     let response;
     let user;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
       api = login('all-permissions');
       response = await api.get(url);
       user = response.data;
-    })
+    });
 
     it('returns a 200 status', () => {
       expect(response.status).toEqual(200);
@@ -43,8 +43,8 @@ describe('/me endpoint | GET', () => {
     });
 
     it('lists the permissions for individual states', () => {
-      const permissionsCount = user.permissions.fl.length
-      expect(permissionsCount).toEqual(14);
+      const permissionsCount = user.permissions.fl.length;
+      expect(permissionsCount).toEqual(16);
     });
 
     it('includes state, role, and activities details for the user', () => {

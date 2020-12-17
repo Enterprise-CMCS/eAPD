@@ -8,26 +8,30 @@ const activities = [
   { id: 1003, name: 'submit-federal-response' },
   { id: 1004, name: 'submit-clearance' },
   { id: 1005, name: 'edit-comments' },
-  { id: 1006, name: 'submit-document' },
-  { id: 1007, name: 'submit-state-response' },
-  { id: 1008, name: 'create-draft' },
-  { id: 1009, name: 'edit-document' },
-  { id: 1010, name: 'edit-response' },
-  { id: 1011, name: 'view-document' },
-  { id: 1012, name: 'view-affiliations' },
-  { id: 1013, name: 'edit-affiliations' },
-  { id: 1014, name: 'approve-state-access' },
+  { id: 1006, name: 'export-document' },
+  { id: 1007, name: 'submit-document' },
+  { id: 1008, name: 'submit-state-response' },
+  { id: 1009, name: 'create-draft' },
+  { id: 1010, name: 'edit-document' },
+  { id: 1011, name: 'edit-response' },
+  { id: 1012, name: 'view-document' },
+  { id: 1013, name: 'view-affiliations' },
+  { id: 1014, name: 'edit-affiliations' },
+  { id: 1015, name: 'view-state-admins' },
+  { id: 1016, name: 'edit-state-admins' }
 ];
 exports.activities = activities;
 
 const roles = [
   { id: 1101, isActive: true, name: 'eAPD Admin' },
-  { id: 1102, isActive: false, name: 'eAPD Federal Analyst' },
+  { id: 1102, isActive: true, name: 'eAPD Federal Admin' },
   { id: 1103, isActive: false, name: 'eAPD Federal Leadership' },
-  { id: 1104, isActive: false, name: 'eAPD Federal SME' },
-  { id: 1105, isActive: true, name: 'eAPD State Coordinator' },
-  { id: 1106, isActive: false, name: 'eAPD State SME' },
-  { id: 1107, isActive: true, name: 'eAPD State Admin' },
+  { id: 1104, isActive: false, name: 'eAPD Federal Analyst' },
+  { id: 1105, isActive: false, name: 'eAPD Federal SME' },
+  { id: 1106, isActive: true, name: 'eAPD State Admin' },
+  { id: 1107, isActive: true, name: 'eAPD State Staff' },
+  { id: 1108, isActive: true, name: 'eAPD State Contractor' },
+  { id: 1109, isActive: false, name: 'eAPD State SME' }
 ];
 exports.roles = roles;
 
@@ -38,16 +42,29 @@ const adminActivities = activities.map(activity => ({
   activity_id: activity.id
 }));
 
-// 'eAPD State Coordinator'
+// 'eAPD Federal Admin'
+const federalAdminRole = roles.find(role => role.name === 'eAPD Federal Admin');
+const federalAdminActivities = [
+  'view-roles',
+  'view-state-admins',
+  'edit-state-admins',
+  'view-affiliations',
+  'edit-affiliations'
+].map(activityName => ({
+  role_id: federalAdminRole.id,
+  activity_id: activities.find(activity => activity.name === activityName).id
+}));
+
+// 'eAPD State Admin'
 const stateAdminRole = roles.find(role => role.name === 'eAPD State Admin');
 const stateAdminActivities = [
-  'view-document',
-  'submit-document',
-  'submit-state-response',
+  'view-roles',
+  'view-affiliations',
+  'edit-affiliations',
   'create-draft',
+  'view-document',
   'edit-document',
-  'edit-response',
-  'approve-state-access'
+  'export-document'
 ].map(activityName => ({
   role_id: stateAdminRole.id,
   activity_id: activities.find(activity => activity.name === activityName).id
@@ -57,5 +74,6 @@ exports.seed = async knex => {
   await knex('auth_activities').insert(activities);
   await knex('auth_roles').insert(roles);
   await knex('auth_role_activity_mapping').insert(adminActivities);
+  await knex('auth_role_activity_mapping').insert(federalAdminActivities);
   await knex('auth_role_activity_mapping').insert(stateAdminActivities);
 };
