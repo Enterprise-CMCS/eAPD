@@ -48,7 +48,6 @@ tap.test('GET /roles', async endpointTest => {
         res,
         next
       );
-      console.log('next', JSON.stringify(next));
 
       invalidTest.ok(next.called, 'next is called');
       invalidTest.ok(next.calledWith(err), 'pass error to middleware');
