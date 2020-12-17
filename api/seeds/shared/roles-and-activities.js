@@ -1,68 +1,11 @@
 const chalk = require('chalk');
 const logger = require('../../logger')('roles seeder');
-
-// AFAICT, the boolean values here are not used for anything, yet.
-const activities = {
-  'view-users': false,
-  'view-roles': false,
-  'submit-federal-response': false,
-  'submit-clearance': false,
-  'edit-comments': false,
-  'export-document': false,
-  'submit-document': false,
-  'submit-state-response': false,
-  'create-draft': false,
-  'edit-document': false,
-  'edit-response': false,
-  'view-document': true,
-  'view-affiliations': true,
-  'edit-affiliations': true,
-  'view-state-admins': true,
-  'edit-state-admins': true
-};
-
-const roles = {
-  'eAPD Admin': false,
-  'eAPD Federal Admin': true,
-  'eAPD Federal Leadership': false,
-  'eAPD Federal Analyst': false,
-  'eAPD Federal SME': false,
-  'eAPD State Admin': true,
-  'eAPD State Staff': true,
-  'eAPD State Contractor': true,
-  'eAPD State SME': false
-};
-
-const roleToActivityMappings = {
-  'eAPD Federal Admin': [
-    'view-roles',
-    'view-state-admins',
-    'edit-state-admins',
-    'view-affiliations',
-    'edit-affiliations'
-  ],
-  'eAPD State Admin': [
-    'view-roles',
-    'view-affiliations',
-    'edit-affiliations',
-    'create-draft',
-    'view-document',
-    'edit-document',
-    'export-document'
-  ],
-  'eAPD State Staff': [
-    'create-draft',
-    'view-document',
-    'edit-document',
-    'export-document'
-  ],
-  'eAPD State Contactor': [
-    'create-draft',
-    'view-document',
-    'edit-document',
-    'export-document'
-  ]
-};
+const {
+  activities,
+  roles,
+  roleToActivityMappings,
+  activeRoles
+} = require('../../util/roles');
 
 // Take the knex object and the table name as arguments, instead of just
 // the knex table object.  The reason is that if you have an insert on
@@ -129,14 +72,6 @@ const setupMappings = async (
   logger.info(`Completed seeding ${chalk.cyan(tableName)} table`);
 };
 
-const ACTIVE_ROLES = [
-  'eAPD Federal Admin',
-  'eAPD State Admin',
-  'eAPD State Staff',
-  'eAPD State Contractor'
-];
-exports.ACTIVE_ROLES = ACTIVE_ROLES;
-
 exports.seed = async knex => {
   logger.info('Beginning to seed the roles, activities, and mapping tables');
 
@@ -169,7 +104,7 @@ exports.seed = async knex => {
   );
   await knex('auth_roles').update({ isActive: false });
   await knex('auth_roles')
-    .whereIn('name', ACTIVE_ROLES)
+    .whereIn('name', activeRoles)
     .update({ isActive: true });
   logger.info('Updated active status for roles');
 };
