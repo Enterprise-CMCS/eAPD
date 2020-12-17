@@ -1259,6 +1259,47 @@ Object {
         ],
       },
     },
+    "/roles": Object {
+      "get": Object {
+        "description": "Get a list of all of the active roles",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "id": Object {
+                        "description": "Integer ID for a role",
+                        "type": "integer",
+                      },
+                      "name": Object {
+                        "description": "Full name of the Role",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "List of Active Roles",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Roles",
+        ],
+      },
+    },
     "/states": Object {
       "get": Object {
         "description": "Get a list of all US States and Territories",

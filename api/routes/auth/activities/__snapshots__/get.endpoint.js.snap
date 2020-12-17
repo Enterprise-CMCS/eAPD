@@ -24,39 +24,47 @@ Array [
   },
   Object {
     "id": 1006,
-    "name": "submit-document",
+    "name": "export-document",
   },
   Object {
     "id": 1007,
-    "name": "submit-state-response",
+    "name": "submit-document",
   },
   Object {
     "id": 1008,
-    "name": "create-draft",
+    "name": "submit-state-response",
   },
   Object {
     "id": 1009,
-    "name": "edit-document",
+    "name": "create-draft",
   },
   Object {
     "id": 1010,
-    "name": "edit-response",
+    "name": "edit-document",
   },
   Object {
     "id": 1011,
-    "name": "view-document",
+    "name": "edit-response",
   },
   Object {
     "id": 1012,
-    "name": "view-affiliations",
+    "name": "view-document",
   },
   Object {
     "id": 1013,
-    "name": "edit-affiliations",
+    "name": "view-affiliations",
   },
   Object {
     "id": 1014,
-    "name": "approve-state-access",
+    "name": "edit-affiliations",
+  },
+  Object {
+    "id": 1015,
+    "name": "view-state-admins",
+  },
+  Object {
+    "id": 1016,
+    "name": "edit-state-admins",
   },
 ]
 `;
