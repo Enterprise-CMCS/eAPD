@@ -272,7 +272,7 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
           {
             "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-out-0.log*",
             "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-out-0.log"
-          }    
+          }
         ]
       }
     }
@@ -324,7 +324,7 @@ git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
 npm ci
-API_URL=/api/ OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
+API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
 mv dist/* /app/web
 cd ~
 
