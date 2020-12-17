@@ -6,6 +6,7 @@ const getEndpoint = require('./get');
 
 const mockExpress = require('../../util/mockExpress');
 const mockResponse = require('../../util/mockResponse');
+const { activeRoles } = require('../../util/roles');
 
 let app;
 let res;
@@ -42,49 +43,55 @@ tap.test('GET /roles', async endpointTest => {
       const err = { error: 'err0r' };
       getAllActiveRoles.rejects(err);
 
-      await handler({ user: { activities: ['view-roles'] } }, res, next);
+      await handler(
+        { params: {}, user: { activities: ['view-roles'], roles: [] } },
+        res,
+        next
+      );
       console.log('next', JSON.stringify(next));
 
       invalidTest.ok(next.called, 'next is called');
       invalidTest.ok(next.calledWith(err), 'pass error to middleware');
     });
 
-    // handlerTest.test(
-    //   'send an unauthorized error code if the user does not have permission to view roles',
-    //   async invalidTest => {
-    //     await handler({ user: { activities: [] } }, res, next);
+    handlerTest.test(
+      'sends active roles for a Federal Admin',
+      async validTest => {
+        const roles = activeRoles.filter(
+          role => role.name !== 'eAPD Federal Admin'
+        );
+        getAllActiveRoles.resolves(roles);
 
-    //     invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
-    //     invalidTest.ok(res.send.notCalled, 'no body is sent');
-    //     invalidTest.ok(res.end.called, 'response is terminated');
-    //   }
-    // );
+        await handler(
+          { user: { activities: ['view-roles'], role: 'eAPD Federal Admin' } },
+          res,
+          next
+        );
 
-    // handlerTest.test('sends roles', async validTest => {
-    //   const roles = [
-    //     {
-    //       id: 272,
-    //       name: 'eAPD Federal Admin'
-    //     },
-    //     {
-    //       id: 276,
-    //       name: 'eAPD State Admin'
-    //     },
-    //     {
-    //       id: 277,
-    //       name: 'eAPD State Staff'
-    //     },
-    //     {
-    //       id: 278,
-    //       name: 'eAPD State Contractor'
-    //     }
-    //   ];
-    //   getAllActiveRoles.resolves(roles);
+        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
+        validTest.ok(res.send.calledWith(roles), 'Roles info sent back');
+      }
+    );
 
-    //   await handler({ user: { activities: ['view-roles'] } }, res, next);
+    handlerTest.test(
+      'sends active roles for a State Admin',
+      async validTest => {
+        const roles = activeRoles.filter(
+          role =>
+            role.name !== 'eAPD State Admin' &&
+            role.name !== 'eAPD Federal Admin'
+        );
+        getAllActiveRoles.resolves(roles);
 
-    //   validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
-    //   validTest.ok(res.send.calledWith(roles), 'Roles info sent back');
-    // });
+        await handler(
+          { user: { activities: ['view-roles'], role: 'eAPD State Admin' } },
+          res,
+          next
+        );
+
+        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
+        validTest.ok(res.send.calledWith(roles), 'Roles info sent back');
+      }
+    );
   });
 });
