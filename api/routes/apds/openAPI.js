@@ -259,44 +259,6 @@ const openAPI = {
     }
   },
 
-  '/apds/{id}/files/{fileID}': {
-    get: {
-      tags: ['APDs', 'files'],
-      summary: 'Get a file associated with an APD',
-      description:
-        'Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.',
-      parameters: [
-        {
-          name: 'id',
-          in: 'path',
-          description: 'The ID of the apd the file is associated with',
-          required: true,
-          schema: {
-            type: 'number'
-          }
-        },
-        {
-          name: 'fileID',
-          in: 'path',
-          description: 'The ID of the file to get',
-          required: true,
-          schema: {
-            type: 'number'
-          }
-        }
-      ],
-      responses: {
-        200: {
-          description: 'The file',
-          content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
-        },
-        400: {
-          description: 'The file does not belong to the APD or does not exist'
-        }
-      }
-    }
-  },
-
   '/apds/{id}/events': {
     post: {
       tags: ['APDs', 'events'],
@@ -357,4 +319,47 @@ const openAPI = {
   }
 };
 
-module.exports = requiresAuth(openAPI);
+const getApdFile = {
+  '/apds/{id}/files/{fileID}': {
+    get: {
+      tags: ['APDs', 'files'],
+      summary: 'Get a file associated with an APD',
+      description:
+        'Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the apd the file is associated with',
+          required: true,
+          schema: {
+            type: 'number'
+          }
+        },
+        {
+          name: 'fileID',
+          in: 'path',
+          description: 'The ID of the file to get',
+          required: true,
+          schema: {
+            type: 'number'
+          }
+        }
+      ],
+      responses: {
+        200: {
+          description: 'The file',
+          content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
+        },
+        400: {
+          description: 'The file does not belong to the APD or does not exist'
+        }
+      }
+    }
+  }
+}
+
+module.exports = {
+  ...requiresAuth(openAPI),
+  ...getApdFile
+};
