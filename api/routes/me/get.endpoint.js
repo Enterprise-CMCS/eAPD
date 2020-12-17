@@ -3,6 +3,8 @@ const {
   login,
   unauthenticatedTest
 } = require('../../endpoint-tests/utils');
+const { states } = require('../../util/states');
+const { activities } = require('../../util/roles');
 
 const url = '/me';
 
@@ -39,12 +41,12 @@ describe('/me endpoint | GET', () => {
 
     it('returns permissions for all US states and territories', () => {
       const permissionStatesCount = Object.keys(user.permissions).length;
-      expect(permissionStatesCount).toEqual(56);
+      expect(permissionStatesCount).toEqual(states.length);
     });
 
     it('lists the permissions for individual states', () => {
       const permissionsCount = user.permissions.fl.length;
-      expect(permissionsCount).toEqual(16);
+      expect(permissionsCount).toEqual(Object.keys(activities).length);
     });
 
     it('includes state, role, and activities details for the user', () => {

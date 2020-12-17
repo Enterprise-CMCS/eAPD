@@ -1,3 +1,5 @@
+const { roleToActivityMappings } = require('../../util/roles');
+
 // 10xx IDs refer to activities
 // 11xx IDs refer to roles
 
@@ -44,28 +46,14 @@ const adminActivities = activities.map(activity => ({
 
 // 'eAPD Federal Admin'
 const federalAdminRole = roles.find(role => role.name === 'eAPD Federal Admin');
-const federalAdminActivities = [
-  'view-roles',
-  'view-state-admins',
-  'edit-state-admins',
-  'view-affiliations',
-  'edit-affiliations'
-].map(activityName => ({
+const federalAdminActivities = roleToActivityMappings['eAPD Federal Admin'].map(activityName => ({
   role_id: federalAdminRole.id,
   activity_id: activities.find(activity => activity.name === activityName).id
 }));
 
 // 'eAPD State Admin'
 const stateAdminRole = roles.find(role => role.name === 'eAPD State Admin');
-const stateAdminActivities = [
-  'view-roles',
-  'view-affiliations',
-  'edit-affiliations',
-  'create-draft',
-  'view-document',
-  'edit-document',
-  'export-document'
-].map(activityName => ({
+const stateAdminActivities = roleToActivityMappings['eAPD State Admin'].map(activityName => ({
   role_id: stateAdminRole.id,
   activity_id: activities.find(activity => activity.name === activityName).id
 }));

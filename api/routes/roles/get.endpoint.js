@@ -4,7 +4,7 @@ const {
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
-const { ACTIVE_ROLES } = require('../../seeds/shared/roles-and-activities');
+const { activeRoles } = require('../../util/roles');
 
 describe('Roles endpoint', () => {
   const db = getDB();
@@ -19,7 +19,7 @@ describe('Roles endpoint', () => {
       const authedClient = login();
       const response = await authedClient.get('/roles');
       expect(response.status).toEqual(200);
-      expect(response.data.length).toEqual(ACTIVE_ROLES.length + 1); // have to account for non-active eAPD Admin role
+      expect(response.data.length).toEqual(activeRoles.length + 1); // have to account for non-active eAPD Admin role
     });
 
     it('returns 403', async () => {
