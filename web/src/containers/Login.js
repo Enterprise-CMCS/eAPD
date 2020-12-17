@@ -148,7 +148,7 @@ const Login = ({
     errorMessage =
       'Please contact your State Administrator for steps to register an account.';
   } else if (error) {
-    errorMessage = 'Sorry! Something went wrong. Please try again.';
+    errorMessage = error || 'Sorry! Something went wrong. Please try again.';
   }
 
   if (isLocked) {

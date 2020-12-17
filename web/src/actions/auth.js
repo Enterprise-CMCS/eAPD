@@ -140,6 +140,15 @@ export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
   authenticateUser(username, password)
     .then(async res => {
+      res.status = 'PASSWORD_EXPIRED'
+      // Handle 3 error states here.
+      // 1. 401 Unauthorized with error code E0000004 = credentials wrong or isnt in OKTA
+      // 2. 403 with error code E0000006 = user in okta but not our group
+      // 3. when password is expired
+      if (res.status === 'PASSWORD_EXPIRED') {
+        return dispatch(failLogin("Password has expired, please update password in Okta before attempting to login again."))
+      }
+
       if (res.status === 'LOCKED_OUT') {
         return dispatch(failLoginLocked());
       }
