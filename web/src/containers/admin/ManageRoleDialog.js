@@ -15,13 +15,28 @@ const ManageRoleDialog = ({
     });
   };
 
+  const getRole = selectedRoleName => {
+    if (selectedRoleName) {
+      return findRoleByName(selectedRoleName) || roleTypes[0];
+    }
+    return roleTypes[0];
+  };
+
+  const getRoleName = selectedRoleName => {
+    const role = getRole(selectedRoleName);
+    return role ? role.name : null;
+  };
+
+  const getRoleId = selectedRoleName => {
+    const role = getRole(selectedRoleName);
+    return role ? role.id : null;
+  };
+
   const [roleSelectedName, setRoleSelectedName] = useState(
-    selectedAffiliation.role ? selectedAffiliation.role : roleTypes[0].value
+    getRoleName(selectedAffiliation.role)
   );
   const [roleSelectedId, setRoleSelectedId] = useState(
-    selectedAffiliation.role
-      ? findRoleByName(selectedAffiliation.role).id
-      : roleTypes[0].id
+    getRoleId(selectedAffiliation.role)
   );
 
   const handleDropdownUpdate = event => {
@@ -76,6 +91,7 @@ const ManageRoleDialog = ({
         size="medium"
         label="Role"
         name="selectedPermission"
+        defaultValue={roleSelectedName}
         value={roleSelectedName}
         onChange={handleDropdownUpdate}
       />
