@@ -35,7 +35,10 @@ module.exports = (
         return res.status(400).end();
       }
 
-      logger.silly({ id: req.id, message: `attempting to update APD [${req.params.id}]` });
+      logger.silly({
+        id: req.id,
+        message: `attempting to update APD [${req.params.id}]`
+      });
 
       try {
         // Filter out any patches that target unchangeable properties

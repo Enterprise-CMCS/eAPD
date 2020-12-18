@@ -11,15 +11,21 @@ jest.mock('./src/file-loader', () => ({
 /* This mock is needed to prevent tests from calling out to Okta */
 jest.mock('./src/util/oktaAuth', () => {
   return {
-    signIn: jest.fn(),
-    signOut: jest.fn(),
+    signInWithCredentials: jest.fn(),
+    closeSession: jest.fn(),
     token: {
       getWithoutPrompt: jest.fn()
     },
+    getAccessToken: jest.fn(),
     tokenManager: {
       add: jest.fn(),
       remove: jest.fn(),
-      get: jest.fn(() => Promise.resolve({ accessToken: 'aaa.bbb.ccc' }))
+      setTokens: jest.fn(),
+      get: jest.fn(() => Promise.resolve({ accessToken: 'aaa.bbb.ccc' })),
+      on: jest.fn(),
+      off: jest.fn(),
+      renew: jest.fn(() => Promise.resolve()),
+      hasExpired: jest.fn()
     },
     tx: {
       exists: jest.fn(),
