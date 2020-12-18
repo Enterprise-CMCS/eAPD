@@ -36,6 +36,4 @@ const getRoles = {
   }
 };
 
-module.exports = {
-  ...requiresAuth(getRoles, { has403: false })
-};
+module.exports = requiresAuth(getRoles);
