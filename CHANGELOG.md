@@ -5,7 +5,8 @@ Anticipated release: December 21, 2020
 #### 🚀 New features
 
 - Update endpoint for affiliations to filter by status ([#2682])
-- Update endpoint for affiliations to filter by status ([#2692])
+- Adds State Admin panel ([#2583])
+- Updated roles and add roles endpoint ([#2692])
 - Update session management to warn users that their session is about to expire ([#2702])
 
 #### 🐛 Bugs fixed
@@ -25,6 +26,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#2348]: https://github.com/CMSgov/eAPD/issues/2348
 [#2682]: https://github.com/CMSgov/eAPD/issues/2682
+[#2583]: https://github.com/CMSgov/eAPD/issues/2583
 [#2692]: https://github.com/CMSgov/eAPD/issues/2692
 [#2702]: https://github.com/CMSgov/eAPD/issues/2702
 [ghsa-vrv8-v4w8-f95h]: https://github.com/advisories/GHSA-vrv8-v4w8-f95h
