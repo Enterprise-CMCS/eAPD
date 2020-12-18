@@ -9,16 +9,24 @@ const ManageRoleDialog = ({
   hideManageModal,
   handleAffiliationUpdate
 }) => {
+  const findRoleByName = name => {
+    return roleTypes.find(element => {
+      return element.name === name;
+    });
+  };
+
   const [roleSelectedName, setRoleSelectedName] = useState(
-    selectedAffiliation.role ? selectedAffiliation.role : ''
+    selectedAffiliation.role ? selectedAffiliation.role : roleTypes[0].value
   );
-  const [roleSelectedId, setRoleSelectedId] = useState(0);
+  const [roleSelectedId, setRoleSelectedId] = useState(
+    selectedAffiliation.role
+      ? findRoleByName(selectedAffiliation.role).id
+      : roleTypes[0].id
+  );
 
   const handleDropdownUpdate = event => {
     setRoleSelectedName(event.target.value);
-    const role = roleTypes.find(element => {
-      return element.name === event.target.value;
-    });
+    const role = findRoleByName(event.target.value);
     setRoleSelectedId(role.id);
   };
 
