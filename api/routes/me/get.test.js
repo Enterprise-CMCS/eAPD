@@ -11,7 +11,6 @@ let app;
 let res;
 
 tap.test('me GET endpoint', async endpointTest => {
-
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
@@ -37,5 +36,4 @@ tap.test('me GET endpoint', async endpointTest => {
       'sends back the user object'
     );
   });
-
 });
