@@ -6,7 +6,7 @@ Anticipated release: December 21, 2020
 
 - Update endpoint for affiliations to filter by status ([#2682])
 - Adds State Admin panel ([#2583])
-- Update endpoint for affiliations to filter by status ([#2692])
+- Updated roles and add roles endpoint ([#2692])
 
 #### 🐛 Bugs fixed
 
