@@ -16,7 +16,7 @@ const transports = [
   LOG_CONSOLE === 'true' && new winston.transports.Console(),
   LOG_FILE === 'true' &&
     new winston.transports.File({ filename: `${packageName}.log` }),
-  new winston.transports.Stream({ stream: fs.createWriteStream('/dev/null') }),
+  new winston.transports.Stream({ stream: fs.createWriteStream('/dev/null') })
   // new AwsCloudWatch(options);
 ].filter(Boolean);
 

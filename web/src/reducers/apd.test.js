@@ -796,7 +796,10 @@ describe('APD reducer', () => {
                 costAllocation: {
                   1787: { ffp: { federal: 90, state: 10 }, other: 0 }
                 },
-                costAllocationNarrative: { methodology: '', otherSources: '' },
+                costAllocationNarrative: {
+                  1787: { otherSources: '' },
+                  methodology: ''
+                },
                 description: '',
                 expenses: [],
                 fundingSource: false,
