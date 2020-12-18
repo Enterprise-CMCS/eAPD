@@ -5,7 +5,7 @@ exports.seed = async knex =>
   Promise.all([
     // These tables don't reference any other tables, so
     // they can be cleared out right off the bat.
-    knex('auth_role_activity_mapping').del(),
+    knex('auth_role_activity_mapping').del()
   ])
     .then(() =>
       Promise.all([
@@ -18,11 +18,7 @@ exports.seed = async knex =>
         knex('users').del()
       ])
     )
-    .then(() => Promise.all([
-      knex('auth_affiliations').del(),
-      ])
-    ).then(() => Promise.all([
-      knex('auth_roles').del(),
-    ]))
+    .then(() => Promise.all([knex('auth_affiliations').del()]))
+    .then(() => Promise.all([knex('auth_roles').del()]))
     .then(() => knex('apds').del())
     .then(() => knex('states').del());

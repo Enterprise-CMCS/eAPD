@@ -3,13 +3,23 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getIsAdmin } from '../reducers/user.selector';
+import {
+  getIsAdmin,
+  getUserStateOrTerritory,
+  getCanUserViewStateAdmin
+} from '../reducers/user.selector';
 import { t } from '../i18n';
 
 import DashboardButton from './DashboardButton';
 import HeaderSaveMessage from './HeaderSaveMessage';
 
-import Icon, { faChevronDown, faChevronLeft, faSignOutAlt } from './Icons';
+import Icon, {
+  faChevronDown,
+  faChevronLeft,
+  faSignOutAlt,
+  faEdit,
+  faUserShield
+} from './Icons';
 
 class Header extends Component {
   constructor(props) {
@@ -43,8 +53,16 @@ class Header extends Component {
   };
 
   render() {
-    const { authenticated, currentUser, isAdmin, showSiteTitle } = this.props;
+    const {
+      authenticated,
+      currentUser,
+      isAdmin,
+      currentState,
+      canViewStateAdmin,
+      showSiteTitle
+    } = this.props;
     const { ariaExpanded } = this.state;
+
     return (
       <header ref={this.node}>
         <a href="#start-main-content" className="skip-nav ds-c-dialog__header">
@@ -90,6 +108,33 @@ class Header extends Component {
                       <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
                         <li>
                           <Link
+                            to="/me"
+                            onClick={this.toggleDropdown}
+                            className="nav--dropdown__action"
+                          >
+                            <Icon icon={faEdit} style={{ width: '14px' }} />
+                            Manage account
+                          </Link>
+                        </li>
+                        {canViewStateAdmin && (
+                          <li>
+                            <Link
+                              to="/state-admin"
+                              onClick={this.toggleDropdown}
+                              className="nav--dropdown__action"
+                            >
+                              <Icon
+                                icon={faUserShield}
+                                style={{ width: '14px' }}
+                              />
+                              {currentState &&
+                                currentState.id &&
+                                `${currentState.id.toUpperCase()} State admin`}
+                            </Link>
+                          </li>
+                        )}
+                        <li>
+                          <Link
                             to="/logout"
                             onClick={this.toggleDropdown}
                             className="nav--dropdown__action"
@@ -118,21 +163,32 @@ Header.propTypes = {
   ariaExpanded: PropTypes.bool,
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
+  currentState: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
+  canViewStateAdmin: PropTypes.bool,
   showSiteTitle: PropTypes.bool.isRequired
 };
 
 Header.defaultProps = {
   ariaExpanded: false,
-  currentUser: null
+  currentUser: null,
+  currentState: null,
+  canViewStateAdmin: false
 };
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
   currentUser: state.auth.user,
-  isAdmin: getIsAdmin(state)
+  isAdmin: getIsAdmin(state),
+  currentState: getUserStateOrTerritory(state),
+  canViewStateAdmin: getCanUserViewStateAdmin(state)
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = {
+  getUserStateOrTerritory,
+  getCanUserViewStateAdmin
+};
 
-export { Header as plain, mapStateToProps };
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export { Header as plain, mapStateToProps, mapDispatchToProps };
