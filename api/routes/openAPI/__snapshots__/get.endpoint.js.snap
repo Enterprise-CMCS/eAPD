@@ -1184,55 +1184,6 @@ Object {
           "Users",
         ],
       },
-      "patch": Object {
-        "description": "Update user",
-        "parameters": Array [
-          Object {
-            "description": "2-letter US State or Territory abbreviation, lowercase",
-            "in": "query",
-            "name": "stateId",
-            "required": true,
-            "schema": Object {
-              "type": "string",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "properties": Object {
-                  "stateId": Object {
-                    "description": "2-letter US State or Territory abbreviation, lowercase",
-                    "type": "string",
-                  },
-                },
-                "type": "object",
-              },
-            },
-          },
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "description": "Record was updated",
-          },
-          "400": Object {
-            "description": "stateId is invalid",
-          },
-          "401": Object {
-            "description": "Not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "bearerAuth": Array [],
-          },
-        ],
-        "tags": Array [
-          "Users",
-        ],
-      },
     },
     "/open-api": Object {
       "get": Object {
@@ -1277,6 +1228,9 @@ Object {
           },
           "401": Object {
             "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
