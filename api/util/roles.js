@@ -53,7 +53,7 @@ const roleToActivityMappings = {
     'edit-document',
     'export-document'
   ],
-  'eAPD State Contactor': [
+  'eAPD State Contractor': [
     'create-draft',
     'view-document',
     'edit-document',
