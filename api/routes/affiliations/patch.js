@@ -23,7 +23,7 @@ module.exports = (app, { db = knex } = {}) => {
   app.patch(
     '/states/:stateId/affiliations/:id',
     can('edit-affiliations'),
-    (request, response) => {
+    async (request, response) => {
       const userId = request.user.id;
       const { stateId, id } = request.params;
 
@@ -33,6 +33,20 @@ module.exports = (app, { db = knex } = {}) => {
           message: 'affiliation status or roleId not provided'
         });
         response.status(400).end();
+        return;
+      }
+
+      const { user_id: affiliationUserId } = await db('auth_affiliations')
+        .select('user_id')
+        .where({ state_id: stateId, id })
+        .first();
+
+      if (userId === affiliationUserId) {
+        logger.error({
+          id: request.id,
+          message: `user ${request.user.id} is attempting to edit their own role`
+        });
+        response.status(401).end();
         return;
       }
 
