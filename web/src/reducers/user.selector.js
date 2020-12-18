@@ -7,20 +7,17 @@ export const getIsAdmin = ({
 };
 
 export const getUserStateOrTerritory = ({
-  user: {
-    data: { state }
-  }
+  user: { data: { state = null } = {} }
 }) => state;
 
 export const getUserAffiliationForCurrentState = ({
   user: {
-    data: {
-      state: { id },
-      affiliations
-    }
+    data: { state: { id = null } = {}, affiliations }
   }
 }) => {
-  return affiliations.find(affiliation => affiliation.state_id === id);
+  return affiliations
+    ? affiliations.find(affiliation => affiliation.state_id === id)
+    : null;
 };
 
 export const getUserStateOrTerritoryStatus = state => {
@@ -31,4 +28,17 @@ export const getUserStateOrTerritoryStatus = state => {
 export const getUserStateOrTerritoryRole = state => {
   const { role = null } = getUserAffiliationForCurrentState(state);
   return role;
+};
+
+export const getCanUserViewStateAdmin = ({
+  user: {
+    data: { activities }
+  }
+}) => {
+  if (activities) {
+    return activities.find(activity => activity === 'view-affiliations')
+      ? true
+      : null;
+  }
+  return null;
 };
