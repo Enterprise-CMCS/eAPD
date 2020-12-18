@@ -13,7 +13,6 @@ let next;
 let getActiveAuthRoles;
 
 tap.test('auth roles GET endpoint', async endpointTest => {
-
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();

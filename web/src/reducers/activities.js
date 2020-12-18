@@ -62,6 +62,10 @@ export const costAllocationEntry = (other = 0, federal = 90, state = 10) => ({
   ffp: { federal, state }
 });
 
+export const costAllocationNarrative = () => ({
+  otherSources: ''
+});
+
 export const quarterlyFFPEntry = () =>
   [1, 2, 3, 4].reduce(
     (acc, quarter) => ({
@@ -79,32 +83,40 @@ export const newActivity = ({
   name = '',
   fundingSource = false,
   years = []
-} = {}) => ({
-  alternatives: '',
-  contractorResources: [],
-  costAllocation: arrToObj(years, costAllocationEntry()),
-  costAllocationNarrative: {
-    methodology: '',
-    otherSources: ''
-  },
-  description: '',
-  expenses: [],
-  fundingSource,
-  key: generateKey(),
-  name,
-  plannedEndDate: '',
-  plannedStartDate: '',
-  outcomes: [newOutcome()],
-  schedule: [newMilestone()],
-  statePersonnel: [],
-  summary: '',
-  standardsAndConditions: {
-    doesNotSupport: '',
-    supports: ''
-  },
-  quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
-  years,
-  meta: {
-    expanded: name === 'Program Administration'
-  }
-});
+} = {}) => {
+  const costAllocationNarrativeYears = arrToObj(
+    years,
+    costAllocationNarrative()
+  );
+
+  const obj = {
+    alternatives: '',
+    contractorResources: [],
+    costAllocation: arrToObj(years, costAllocationEntry()),
+    costAllocationNarrative: {
+      methodology: '',
+      ...costAllocationNarrativeYears
+    },
+    description: '',
+    expenses: [],
+    fundingSource,
+    key: generateKey(),
+    name,
+    plannedEndDate: '',
+    plannedStartDate: '',
+    outcomes: [newOutcome()],
+    schedule: [newMilestone()],
+    statePersonnel: [],
+    summary: '',
+    standardsAndConditions: {
+      doesNotSupport: '',
+      supports: ''
+    },
+    quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
+    years,
+    meta: {
+      expanded: name === 'Program Administration'
+    }
+  };
+  return obj;
+};

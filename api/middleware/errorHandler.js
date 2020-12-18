@@ -1,4 +1,4 @@
-const logger = require('../logger')('errorHandler middleware')
+const logger = require('../logger')('errorHandler middleware');
 
 /**
  * Error-handler Middleware
@@ -23,7 +23,9 @@ const logger = require('../logger')('errorHandler middleware')
  */
 const errorHandler = (err, req, res, next) => {
   logger.error({ id: req.id, message: err });
-  if (res.headersSent) { return next(err); }
+  if (res.headersSent) {
+    return next(err);
+  }
   return res.status(err.status || 500).end();
 };
 
