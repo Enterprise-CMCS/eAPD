@@ -1,7 +1,5 @@
 const get = require('./get');
-const patch = require('./patch');
 
-module.exports = (app, { getEndpoint = get, patchEndpoint = patch } = {}) => {
+module.exports = (app, { getEndpoint = get } = {}) => {
   getEndpoint(app);
-  patchEndpoint(app);
 };

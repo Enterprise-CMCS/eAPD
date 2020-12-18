@@ -11,6 +11,7 @@ import 'tinymce/themes/silver';
 import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/autoresize';
 import 'tinymce/plugins/lists';
+import 'tinymce/plugins/media'; // https://github.com/advisories/GHSA-vrv8-v4w8-f95h
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/spellchecker';
 import 'tinymce/plugins/help';
@@ -95,6 +96,7 @@ class RichText extends Component {
       'advlist',
       'autoresize',
       'lists',
+      'media',
       'paste',
       'spellchecker',
       'help'
@@ -124,6 +126,7 @@ class RichText extends Component {
             menubar: '',
             paste_data_images: true,
             plugins,
+            relative_urls : false,
             setup: setupTinyMCE(upload),
             toolbar
           }}

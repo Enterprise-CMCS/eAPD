@@ -4,7 +4,6 @@ const {
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
-const { ACTIVE_ROLES } = require('../../seeds/shared/roles-and-activities');
 
 describe('Roles endpoint', () => {
   const db = getDB();
@@ -19,7 +18,7 @@ describe('Roles endpoint', () => {
       const authedClient = login();
       const response = await authedClient.get('/roles');
       expect(response.status).toEqual(200);
-      expect(response.data.length).toEqual(ACTIVE_ROLES.length);
+      expect(response.data.length).toEqual(3);
     });
 
     it('returns 403', async () => {
