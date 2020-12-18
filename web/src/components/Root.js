@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import TagManager from 'react-gtm-module';
+import { setLatestActivity } from '../actions/auth';
 
 import App from './App';
 
@@ -16,6 +17,12 @@ const Root = ({ history, store }) => {
   window.dataLayer.push({
     event: 'pageview'
   });
+
+  // Create listener for location changing to track activity
+  history.listen(() => {
+    store.dispatch(setLatestActivity());
+  });
+
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>

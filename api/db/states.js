@@ -24,7 +24,7 @@ const getStateById = (id, { db = knex } = {}) => {
     .select('*')
     .where({ id })
     .first();
-}
+};
 
 module.exports = {
   getStateById,

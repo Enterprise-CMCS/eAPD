@@ -14,7 +14,23 @@ exports[`the Root component renders correctly 1`] = `
   }
 >
   <Connect(ConnectedRouterWithContext)
-    history={Object {}}
+    history={
+      Object {
+        "listen": [MockFunction] {
+          "calls": Array [
+            Array [
+              [Function],
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+      }
+    }
   >
     <App />
   </Connect(ConnectedRouterWithContext)>

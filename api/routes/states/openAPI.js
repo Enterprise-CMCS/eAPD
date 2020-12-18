@@ -72,7 +72,8 @@ const getState = {
           content: jsonResponse(fullStateSchema)
         },
         400: {
-          description: 'The 2-letter, lowercase US State or Territory ID does not match any records'
+          description:
+            'The 2-letter, lowercase US State or Territory ID does not match any records'
         }
       }
     }
