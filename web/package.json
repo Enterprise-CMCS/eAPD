@@ -63,8 +63,8 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "@okta/okta-auth-js": "^3.2.6",
-    "@tinymce/tinymce-react": "3.5.0",
+    "@okta/okta-auth-js": "^4.4.0",
+    "@tinymce/tinymce-react": "^3.5.0",
     "axios": "^0.19.2",
     "connected-react-router": "^6.8.0",
     "d3-format": "^1.4.3",
@@ -76,6 +76,7 @@
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react": "^16.13.1",
+    "react-countdown": "^2.3.1",
     "react-dom": "^16.13.1",
     "react-gtm-module": "^2.0.11",
     "react-redux": "^7.2.0",
@@ -92,7 +93,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
+    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
