@@ -2,7 +2,7 @@ const logger = require('../logger')('db/users');
 const { oktaClient } = require('../auth/oktaAuth');
 const knex = require('./knex');
 const {
-  getRoles: actualGetRoles,
+  getRolesAndActivities: actualGetRolesAndActivities,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
   getUserPermissionsForStates: actualGetUserPermissionsForStates
 } = require('./auth');
@@ -44,7 +44,7 @@ const populateUser = async (
     getUserPermissionsForStates = actualGetUserPermissionsForStates,
     getUserAffiliatedStates = actualGetUserAffiliatedStates,
     getStateById = actualGetStateById,
-    getRoles = actualGetRoles,
+    getRolesAndActivities = actualGetRolesAndActivities,
     getSelectedStateIdByUserId = actualGetSelectedStateIdByUserId,
     getAffiliationsByUserId = actualGetAffiliationsByUserId
   } = {}
@@ -68,7 +68,7 @@ const populateUser = async (
       affiliation = affiliations.find(Boolean);
     }
 
-    const roles = await getRoles();
+    const roles = await getRolesAndActivities();
     const role = affiliation && roles.find(r => r.id === affiliation.role_id);
 
     populatedUser.state =
