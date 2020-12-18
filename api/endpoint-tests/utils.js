@@ -18,7 +18,7 @@ const axiosDefaults = {
 const api = axios.create(axiosDefaults);
 
 const login = token => {
-  const jwt = token || 'all-permissions'
+  const jwt = token || 'all-permissions';
   const options = {
     ...axiosDefaults,
     headers: {

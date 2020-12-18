@@ -6,8 +6,12 @@ import {
   REMOVE_APD_YEAR
 } from './actions/editApd';
 import { saveApd } from './actions/app';
+import { setLatestActivity } from './actions/auth';
 
-const saveMiddleware = (store, { saveAction = saveApd } = {}) => {
+const saveMiddleware = (
+  store,
+  { saveAction = saveApd, activityAction = setLatestActivity } = {}
+) => {
   let isSaving = false;
   let isQueued = false;
   let timer = null;
@@ -36,6 +40,7 @@ const saveMiddleware = (store, { saveAction = saveApd } = {}) => {
       isSaving = true;
 
       try {
+        store.dispatch(activityAction());
         await store.dispatch(saveAction());
       } catch (e) {
         // Eat the exception. There's nothing for us to do it with it except

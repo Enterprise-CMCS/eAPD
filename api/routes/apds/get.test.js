@@ -13,7 +13,6 @@ let next;
 let getAllAPDsByState;
 
 tap.test('GET /apds', async endpointTest => {
-
   endpointTest.beforeEach(done => {
     app = mockExpress();
     res = mockResponse();
