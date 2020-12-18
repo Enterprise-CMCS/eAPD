@@ -52,7 +52,7 @@ const getActiveAuthRoles = async ({ db = knex } = {}) => {
  * @function
  * @returns {Object} { id, name, activities: [] }
  */
-const getRoles = async ({ db = knex } = {}) =>
+const getRolesAndActivities = async ({ db = knex } = {}) =>
   db
     .select({
       id: 'roles.id',
@@ -89,7 +89,7 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
  * @returns {Object} { stateId: activities }
  */
 const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
-  const roles = await getRoles();
+  const roles = await getRolesAndActivities();
   return db
     .select({
       stateId: 'state_id',
@@ -114,7 +114,7 @@ module.exports = {
   getAuthRoleByID,
   getAuthRoleByName,
   getActiveAuthRoles,
-  getRoles,
+  getRolesAndActivities,
   getUserAffiliatedStates,
   getUserPermissionsForStates
 };
