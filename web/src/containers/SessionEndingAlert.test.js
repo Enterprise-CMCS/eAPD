@@ -5,7 +5,7 @@ import SessionEndingAlert, {
   mapStateToProps,
   mapDispatchToProps
 } from './SessionEndingAlert';
-import { extendSession, logout } from '../actions/auth';
+import { setLatestActivity, extendSession, logout } from '../actions/auth';
 
 const props = {
   extend: jest.fn()
@@ -107,7 +107,8 @@ describe('the session ending alert component', () => {
   it('maps redux actions to component props', () => {
     expect(mapDispatchToProps).toEqual({
       extend: extendSession,
-      logoutAction: logout
+      logoutAction: logout,
+      latestActivityAction: setLatestActivity
     });
   });
 });

@@ -1,27 +1,41 @@
 import { Alert, Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import Countdown, { zeroPad } from 'react-countdown';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Spinner } from '../components/Icons';
 
-import { extendSession, logout } from '../actions/auth';
+import { setLatestActivity, extendSession, logout } from '../actions/auth';
 import { isUserActive } from '../util/auth';
 
-const SessionEndingAlert = ({
-  isSessionEnding,
+const Timer = ({
   isExtendingSession,
   latestActivity,
   expiresAt,
   extend,
-  logoutAction
+  logoutAction,
+  latestActivityAction
 }) => {
-  const className = isSessionEnding
-    ? 'alert--session-expiring__active'
-    : 'alert--session-expiring__inactive';
-  const isActive = isUserActive(latestActivity);
+  const ref = useRef(null);
+  const clickListener = useCallback(
+    e => {
+      if (ref && ref.current && !ref.current.contains(e.target)) {
+        latestActivityAction();
+      }
+    },
+    [ref.current]
+  );
+
+  useEffect(() => {
+    // Attach the listeners on component mount.
+    document.addEventListener('click', clickListener);
+    // Detach the listeners on component unmount.
+    return () => {
+      document.addEventListener('click', clickListener);
+    };
+  }, []);
 
   // Renderer callback with condition
   // eslint-disable-next-line react/prop-types
@@ -36,7 +50,7 @@ const SessionEndingAlert = ({
         />
       );
     }
-    if (isActive) {
+    if (isUserActive(latestActivity)) {
       api.stop(); // eslint-disable-line react/prop-types
       return <span />;
     }
@@ -60,20 +74,39 @@ const SessionEndingAlert = ({
   };
 
   return (
+    <div ref={ref}>
+      <Countdown
+        date={expiresAt - 5000}
+        key={uuidv4()}
+        renderer={createTimer}
+        onComplete={logoutAction}
+        onStop={extend}
+      />
+    </div>
+  );
+};
+
+Timer.propTypes = {
+  isExtendingSession: PropTypes.bool.isRequired,
+  latestActivity: PropTypes.number.isRequired,
+  expiresAt: PropTypes.number.isRequired,
+  extend: PropTypes.func.isRequired,
+  logoutAction: PropTypes.func.isRequired,
+  latestActivityAction: PropTypes.func.isRequired
+};
+
+const SessionEndingAlert = ({ isSessionEnding, ...props }) => {
+  const className = isSessionEnding
+    ? 'alert--session-expiring__active'
+    : 'alert--session-expiring__inactive';
+
+  return (
     <div
       aria-hidden={!isSessionEnding}
       aria-live="polite"
       className={`alert--session-expiring ${className}`}
     >
-      {isSessionEnding && (
-        <Countdown
-          date={expiresAt - 5000}
-          key={uuidv4()}
-          renderer={createTimer}
-          onComplete={logoutAction}
-          onStop={extend}
-        />
-      )}
+      {isSessionEnding && <Timer {...props} />}
     </div>
   );
 };
@@ -81,10 +114,11 @@ const SessionEndingAlert = ({
 SessionEndingAlert.propTypes = {
   isSessionEnding: PropTypes.bool.isRequired,
   isExtendingSession: PropTypes.bool.isRequired,
-  latestActivity: PropTypes.bool.isRequired,
+  latestActivity: PropTypes.number.isRequired,
   expiresAt: PropTypes.number.isRequired,
   extend: PropTypes.func.isRequired,
-  logoutAction: PropTypes.func.isRequired
+  logoutAction: PropTypes.func.isRequired,
+  latestActivityAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
@@ -96,7 +130,11 @@ const mapStateToProps = ({
   expiresAt
 });
 
-const mapDispatchToProps = { extend: extendSession, logoutAction: logout };
+const mapDispatchToProps = {
+  extend: extendSession,
+  logoutAction: logout,
+  latestActivityAction: setLatestActivity
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionEndingAlert);
 
