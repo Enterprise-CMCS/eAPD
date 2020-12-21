@@ -58,7 +58,9 @@ const populateAffiliation = async affiliation => {
       profile: { displayName, email, secondEmail, primaryPhone, mobilePhone }
     } = await oktaClient.getUser(userId);
     const { profile: { displayName: updatedByName = null } = {} } = updatedById
-      ? await oktaClient.getUser(updatedById)
+      ? await oktaClient.getUser(updatedById).catch(() => {
+          return { profile: { displayName: updatedById } };
+        })
       : {};
     return {
       ...affiliation,

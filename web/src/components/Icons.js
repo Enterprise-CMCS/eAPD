@@ -20,6 +20,7 @@ import {
   faUnlock,
   faUserCog,
   faUserPlus,
+  faUserShield,
   faEnvelope
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -72,6 +73,7 @@ export {
   TimesCircle,
   UnlockIcon,
   faUserCog,
+  faUserShield,
   faUserPlus
 };
 
