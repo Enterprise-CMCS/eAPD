@@ -1,4 +1,4 @@
-import { renderWithConnection } from 'apd-testing-library';
+import { renderWithConnection, waitFor } from 'apd-testing-library';
 import React from 'react';
 
 import SessionEndingAlert, {
@@ -20,6 +20,7 @@ describe('the session ending alert component', () => {
           auth: {
             isSessionEnding: false,
             isExtendingSession: false,
+            latestActivity: new Date().getTime(),
             expiresAt: new Date().getTime() + 60000
           }
         }
@@ -36,6 +37,7 @@ describe('the session ending alert component', () => {
           auth: {
             isSessionEnding: true,
             isExtendingSession: false,
+            latestActivity: new Date().getTime() - 300000,
             expiresAt: new Date().getTime() + 60000
           }
         }
@@ -43,6 +45,25 @@ describe('the session ending alert component', () => {
     );
     expect(container.firstChild).toHaveAttribute('aria-hidden', 'false');
     expect(getByRole('button', { name: 'Continue' })).toBeTruthy();
+  });
+
+  it('renders as expected if session is ending and session is not being extended, but new activity', async () => {
+    const { container } = renderWithConnection(
+      <SessionEndingAlert {...props} />,
+      {
+        initialState: {
+          auth: {
+            isSessionEnding: true,
+            isExtendingSession: false,
+            latestActivity: new Date().getTime(),
+            expiresAt: new Date().getTime() + 60000
+          }
+        }
+      }
+    );
+    await waitFor(() =>
+      expect(container.firstChild).toHaveAttribute('aria-hidden', 'true')
+    );
   });
 
   it('renders as expected if there is and error and is saving', () => {
@@ -53,6 +74,7 @@ describe('the session ending alert component', () => {
           auth: {
             isSessionEnding: true,
             isExtendingSession: true,
+            latestActivity: new Date().getTime() - 300000,
             expiresAt: new Date().getTime() + 60000
           }
         }
@@ -63,16 +85,22 @@ describe('the session ending alert component', () => {
   });
 
   it('maps redux state to component props', () => {
+    const latestActivity = new Date().getTime();
+    const expiresAt = new Date().getTime + 60000;
     expect(
       mapStateToProps({
         auth: {
           isSessionEnding: false,
-          isExtendingSession: false
+          isExtendingSession: false,
+          latestActivity,
+          expiresAt
         }
       })
     ).toEqual({
       isSessionEnding: false,
-      isExtendingSession: false
+      isExtendingSession: false,
+      latestActivity,
+      expiresAt
     });
   });
 

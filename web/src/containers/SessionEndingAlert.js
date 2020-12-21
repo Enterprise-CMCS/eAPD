@@ -8,10 +8,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { Spinner } from '../components/Icons';
 
 import { extendSession, logout } from '../actions/auth';
+import { isUserActive } from '../util/auth';
 
 const SessionEndingAlert = ({
   isSessionEnding,
   isExtendingSession,
+  latestActivity,
   expiresAt,
   extend,
   logoutAction
@@ -19,10 +21,11 @@ const SessionEndingAlert = ({
   const className = isSessionEnding
     ? 'alert--session-expiring__active'
     : 'alert--session-expiring__inactive';
+  const isActive = isUserActive(latestActivity);
 
   // Renderer callback with condition
   // eslint-disable-next-line react/prop-types
-  const createTimer = ({ minutes, seconds, completed }) => {
+  const createTimer = ({ minutes, seconds, completed, api }) => {
     if (completed) {
       // Render a completed state
       return (
@@ -32,6 +35,10 @@ const SessionEndingAlert = ({
           variation="error"
         />
       );
+    }
+    if (isActive) {
+      api.stop(); // eslint-disable-line react/prop-types
+      return <span />;
     }
     // Render a countdown
     return (
@@ -64,6 +71,7 @@ const SessionEndingAlert = ({
           key={uuidv4()}
           renderer={createTimer}
           onComplete={logoutAction}
+          onStop={extend}
         />
       )}
     </div>
@@ -73,16 +81,18 @@ const SessionEndingAlert = ({
 SessionEndingAlert.propTypes = {
   isSessionEnding: PropTypes.bool.isRequired,
   isExtendingSession: PropTypes.bool.isRequired,
+  latestActivity: PropTypes.bool.isRequired,
   expiresAt: PropTypes.number.isRequired,
   extend: PropTypes.func.isRequired,
   logoutAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { isSessionEnding, isExtendingSession, expiresAt }
+  auth: { isSessionEnding, isExtendingSession, latestActivity, expiresAt }
 }) => ({
   isSessionEnding,
   isExtendingSession,
+  latestActivity,
   expiresAt
 });
 
