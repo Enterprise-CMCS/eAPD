@@ -114,7 +114,6 @@ describe('the session ending alert component', () => {
   });
 
   it('maps redux state to component props', () => {
-    const latestActivity = new Date().getTime();
     const expiresAt = new Date().getTime + 60000;
     expect(
       mapStateToProps({
