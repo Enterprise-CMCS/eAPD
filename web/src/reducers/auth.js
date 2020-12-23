@@ -12,7 +12,15 @@ import {
   LOGIN_FAILURE,
   LOCKED_OUT,
   RESET_LOCKED_OUT,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  STATE_ACCESS_REQUEST,
+  STATE_ACCESS_SUCCESS,
+  STATE_ACCESS_COMPLETE,
+  LATEST_ACTIVITY,
+  SESSION_ENDING_ALERT,
+  REQUEST_SESSION_RENEWAL,
+  SESSION_RENEWED,
+  UPDATE_EXPIRATION
 } from '../actions/auth';
 
 const initialState = {
@@ -27,7 +35,11 @@ const initialState = {
   verifyData: null,
   selectState: false,
   isLocked: false,
-  user: null
+  latestActivity: new Date().getTime(),
+  isSessionEnding: false,
+  isExtendingSession: false,
+  user: null,
+  expiresAt: null
 };
 
 const auth = (state = initialState, action) => {
@@ -128,7 +140,62 @@ const auth = (state = initialState, action) => {
       return {
         ...initialState,
         authenticated: false,
-        error: null
+        error: null,
+        otpStage: false,
+        hasEverLoggedOn: state.hasEverLoggedOn,
+        initialCheck: state.initialCheck,
+        latestActivity: null,
+        expiresAt: null,
+        isSessionEnding: false,
+        isExtendingSession: false
+      };
+    case STATE_ACCESS_REQUEST:
+      return {
+        ...state,
+        requestAccess: true,
+        requestAccessSuccess: false,
+        error: ''
+      };
+    case STATE_ACCESS_SUCCESS:
+      return {
+        ...state,
+        requestAccess: false,
+        requestAccessSuccess: true,
+        error: ''
+      };
+    case STATE_ACCESS_COMPLETE:
+      return {
+        ...state,
+        requestAccess: false,
+        requestAccessSuccess: false,
+        error: ''
+      };
+    case LATEST_ACTIVITY:
+      return {
+        ...state,
+        latestActivity: new Date().getTime()
+      };
+    case SESSION_ENDING_ALERT:
+      return {
+        ...state,
+        isSessionEnding: true
+      };
+    case REQUEST_SESSION_RENEWAL:
+      return {
+        ...state,
+        isExtendingSession: true
+      };
+    case SESSION_RENEWED:
+      return {
+        ...state,
+        isSessionEnding: false,
+        isExtendingSession: false,
+        latestActivity: new Date().getTime()
+      };
+    case UPDATE_EXPIRATION:
+      return {
+        ...state,
+        expiresAt: action.data * 1000 // convert to milliseconds
       };
     default:
       return state;

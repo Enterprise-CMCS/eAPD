@@ -7,9 +7,7 @@ export const getIsAdmin = ({
 };
 
 export const getUserStateOrTerritory = ({
-  user: {
-    data: { state }
-  }
+  user: { data: { state = null } = {} }
 }) => state;
 
 export const getUserAffiliationForCurrentState = ({
@@ -28,4 +26,17 @@ export const getUserStateOrTerritoryStatus = state => {
 export const getUserStateOrTerritoryRole = state => {
   const { role = null } = getUserAffiliationForCurrentState(state) || {};
   return role;
+};
+
+export const getCanUserViewStateAdmin = ({
+  user: {
+    data: { activities }
+  }
+}) => {
+  if (activities) {
+    return activities.find(activity => activity === 'view-affiliations')
+      ? true
+      : null;
+  }
+  return null;
 };
