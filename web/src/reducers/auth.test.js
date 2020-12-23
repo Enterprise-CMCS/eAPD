@@ -12,6 +12,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_MFA_FAILURE,
+  LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOCKED_OUT,
   RESET_LOCKED_OUT,
@@ -42,6 +43,7 @@ describe('auth reducer', () => {
     selectState: false,
     mfaEnrollType: '',
     isLocked: false,
+    isLoggingOut: false,
     latestActivity: null,
     isSessionEnding: false,
     isExtendingSession: false,
@@ -196,12 +198,25 @@ describe('auth reducer', () => {
     });
   });
 
+  it('should handle LOGOUT_REQUEST', () => {
+    expect(auth(initialState, { type: LOGOUT_REQUEST })).toEqual({
+      ...initialState,
+      isLoggingOut: true
+    });
+  });
+
   it('should handle LOGOUT_SUCCESS', () => {
     expect(auth(initialState, { type: LOGOUT_SUCCESS })).toEqual({
       ...initialState,
       otpStage: false,
       hasEverLoggedOn: false,
-      initialCheck: false
+      initialCheck: false,
+      authenticated: false,
+      latestActivity: null,
+      expiresAt: null,
+      isSessionEnding: false,
+      isExtendingSession: false,
+      isLoggingOut: false
     });
   });
 
@@ -222,6 +237,7 @@ describe('auth reducer', () => {
         initialCheck: true,
         otpStage: false,
         isLocked: false,
+        isLoggingOut: false,
         user: null,
         requestAccess: false,
         requestAccessSuccess: false,

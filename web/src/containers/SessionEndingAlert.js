@@ -1,104 +1,84 @@
-import { Alert, Button } from '@cmsgov/design-system';
+import { Dialog, Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Countdown, { zeroPad } from 'react-countdown';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Spinner } from '../components/Icons';
 
-import { setLatestActivity, extendSession, logout } from '../actions/auth';
+import { extendSession, logout } from '../actions/auth';
 import { isUserActive } from '../util/auth';
 
-const Timer = ({
+const SessionEndingAlert = ({
+  isSessionEnding,
   isExtendingSession,
-  latestActivity,
+  isLoggingOut,
   expiresAt,
+  latestActivity,
   extend,
-  logoutAction,
-  latestActivityAction
+  logoutAction
 }) => {
-  const ref = useRef(null);
-  const clickListener = useCallback(
-    e => {
-      if (ref && ref.current && !ref.current.contains(e.target)) {
-        latestActivityAction();
-      }
-    },
-    [ref.current]
-  );
+  const className = isSessionEnding
+    ? 'alert--session-expiring__active'
+    : 'alert--session-expiring__inactive';
 
-  useEffect(() => {
-    // Attach the listeners on component mount.
-    document.addEventListener('click', clickListener);
-    // Detach the listeners on component unmount.
-    return () => {
-      document.addEventListener('click', clickListener);
-    };
-  }, []);
-
-  // Renderer callback with condition
-  // eslint-disable-next-line react/prop-types
+  /* eslint-disable react/prop-types */
   const createTimer = ({ minutes, seconds, completed, api }) => {
     if (completed) {
       // Render a completed state
       return (
-        <Alert
+        <Dialog
+          key={uuidv4()}
           heading="Your session has ended."
-          role="alertdialog"
-          variation="error"
-        />
+          alert
+          getApplicationNode={() =>
+            document.getElementById('session-ending-modal')
+          }
+          underlayClickExits={false}
+          escapeExitDisabled
+          size="wide"
+        >
+          Please log back in if you want to continue.
+        </Dialog>
       );
     }
     if (isUserActive(latestActivity)) {
-      api.stop(); // eslint-disable-line react/prop-types
+      api.stop();
       return <span />;
     }
     // Render a countdown
     return (
-      <Alert
+      <Dialog
+        key={uuidv4()}
         heading="Your session is expiring."
-        role="alertdialog"
-        variation="warn"
+        alert
+        getApplicationNode={() =>
+          document.getElementById('session-ending-modal')
+        }
+        actionsClassName="ds-u-text-align--right ds-u-margin-bottom--0"
+        actions={[
+          <Button variation="primary" onClick={extend} key={uuidv4()}>
+            {isExtendingSession && <Spinner />}
+            {isExtendingSession ? ' Continuing' : 'Continue'}
+          </Button>,
+          <Button variation="transparent" onClick={logoutAction} key={uuidv4()}>
+            {isLoggingOut && <Spinner />}
+            {isLoggingOut ? ' Signing out' : 'Sign out'}
+          </Button>
+        ]}
+        ariaCloseLabel="Close and continue"
+        closeText="Close"
+        onExit={extend}
+        underlayClickExits={false}
+        escapeExitDisabled
+        size="wide"
       >
         Your session will end in {zeroPad(minutes)}:{zeroPad(seconds)} minutes.
         If you’d like to keep working, choose continue.
-        <p className="ds-u-text-align--right ds-u-margin-bottom--0">
-          <Button variation="primary" onClick={extend}>
-            {isExtendingSession && <Spinner />}
-            {isExtendingSession ? ' Continuing' : 'Continue'}
-          </Button>
-        </p>
-      </Alert>
+      </Dialog>
     );
   };
-
-  return (
-    <div ref={ref}>
-      <Countdown
-        date={expiresAt - 5000}
-        key={uuidv4()}
-        renderer={createTimer}
-        onComplete={logoutAction}
-        onStop={extend}
-      />
-    </div>
-  );
-};
-
-Timer.propTypes = {
-  isExtendingSession: PropTypes.bool.isRequired,
-  latestActivity: PropTypes.number.isRequired,
-  expiresAt: PropTypes.number.isRequired,
-  extend: PropTypes.func.isRequired,
-  logoutAction: PropTypes.func.isRequired,
-  latestActivityAction: PropTypes.func.isRequired
-};
-
-const SessionEndingAlert = ({ isSessionEnding, ...props }) => {
-  const className = isSessionEnding
-    ? 'alert--session-expiring__active'
-    : 'alert--session-expiring__inactive';
 
   return (
     <div
@@ -106,7 +86,16 @@ const SessionEndingAlert = ({ isSessionEnding, ...props }) => {
       aria-live="polite"
       className={`alert--session-expiring ${className}`}
     >
-      {isSessionEnding && <Timer {...props} />}
+      <div id="session-ending-modal" />
+      {isSessionEnding && (
+        <Countdown
+          date={expiresAt - 5000}
+          key={uuidv4()}
+          renderer={createTimer}
+          onComplete={logoutAction}
+          onStop={extend}
+        />
+      )}
     </div>
   );
 };
@@ -114,26 +103,32 @@ const SessionEndingAlert = ({ isSessionEnding, ...props }) => {
 SessionEndingAlert.propTypes = {
   isSessionEnding: PropTypes.bool.isRequired,
   isExtendingSession: PropTypes.bool.isRequired,
+  isLoggingOut: PropTypes.bool.isRequired,
   latestActivity: PropTypes.number.isRequired,
   expiresAt: PropTypes.number.isRequired,
   extend: PropTypes.func.isRequired,
-  logoutAction: PropTypes.func.isRequired,
-  latestActivityAction: PropTypes.func.isRequired
+  logoutAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({
-  auth: { isSessionEnding, isExtendingSession, latestActivity, expiresAt }
+  auth: {
+    isSessionEnding,
+    isExtendingSession,
+    isLoggingOut,
+    latestActivity,
+    expiresAt
+  }
 }) => ({
   isSessionEnding,
   isExtendingSession,
+  isLoggingOut,
   latestActivity,
   expiresAt
 });
 
 const mapDispatchToProps = {
   extend: extendSession,
-  logoutAction: logout,
-  latestActivityAction: setLatestActivity
+  logoutAction: logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionEndingAlert);
