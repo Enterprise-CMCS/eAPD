@@ -10,9 +10,10 @@ sequenceDiagram
     O-->>W: List of second factor options
       Note left of W: User selects second factor option
       alt Factor Type == Call or SMS
-        Note left of W: User enters phone number
+        Note left of W: User selects Call or SMS
         W->>O: Enroll MFA with Phone number
       else
+        Note left of W: User selects other factor
         W->>O: Enroll MFA
       end
     O-->>W: Return one-time password (OTP)
