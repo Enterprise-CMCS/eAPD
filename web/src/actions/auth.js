@@ -156,8 +156,6 @@ export const extendSession = () => async dispatch => {
 
 export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
   const factor = await getFactor(mfaSelected);
-
-  console.log({ mfaSelected });
   if (factor) {
     const enrollTransaction =
       mfaSelected === MFA_FACTOR_TYPES.SMS ||

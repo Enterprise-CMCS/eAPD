@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
-import { plain as Login, mapStateToProps, mapDispatchToProps } from './Login';
+import Login from './Login';
 import {
   login,
   loginOtp,
