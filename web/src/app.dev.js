@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import '@okta/okta-auth-js/polyfill';
 
 import { createBrowserHistory } from 'history';
 import React from 'react';

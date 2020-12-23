@@ -2,12 +2,14 @@ import admin, { selectUsers, selectUsersSorted } from './admin';
 import {
   ADMIN_GET_ACTIVITIES_SUCCESS,
   ADMIN_GET_ROLES_SUCCESS,
+  ADMIN_GET_STATE_AFFILIATIONS_SUCCESS,
   ADMIN_GET_USERS_SUCCESS
 } from '../actions/admin';
 
 describe('admin reducer', () => {
   const initialState = {
     activities: [],
+    affiliations: [],
     roles: [],
     users: []
   };
@@ -24,6 +26,7 @@ describe('admin reducer', () => {
       })
     ).toEqual({
       activities: ['activity 1', 'activity 2'],
+      affiliations: [],
       roles: [],
       users: []
     });
@@ -37,6 +40,7 @@ describe('admin reducer', () => {
       })
     ).toEqual({
       activities: [],
+      affiliations: [],
       roles: ['role 1', 'role 2'],
       users: []
     });
@@ -50,8 +54,53 @@ describe('admin reducer', () => {
       })
     ).toEqual({
       activities: [],
+      affiliations: [],
       roles: [],
       users: ['user 1', 'user 2']
+    });
+  });
+
+  it('should handle successfully getting affiliations', () => {
+    expect(
+      admin(initialState, {
+        type: ADMIN_GET_STATE_AFFILIATIONS_SUCCESS,
+        data: [
+          {
+            id: 1,
+            userId: '00u4bbbp8sl6vtG3y297',
+            stateId: 'md',
+            status: 'approved',
+            role_id: 21
+          },
+          {
+            id: 2,
+            userId: '00u4cccp8sl6vtG3y297',
+            stateId: 'ar',
+            status: 'pending',
+            role_id: 21
+          }
+        ]
+      })
+    ).toEqual({
+      activities: [],
+      affiliations: [
+        {
+          id: 1,
+          userId: '00u4bbbp8sl6vtG3y297',
+          stateId: 'md',
+          status: 'approved',
+          role_id: 21
+        },
+        {
+          id: 2,
+          userId: '00u4cccp8sl6vtG3y297',
+          stateId: 'ar',
+          status: 'pending',
+          role_id: 21
+        }
+      ],
+      roles: [],
+      users: []
     });
   });
 

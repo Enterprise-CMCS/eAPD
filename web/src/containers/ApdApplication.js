@@ -6,6 +6,7 @@ import TagManager from 'react-gtm-module';
 
 import Sidebar from './Sidebar';
 import UnexpectedError from './UnexpectedError';
+import SessionEndingAlert from './SessionEndingAlert';
 import { setApdToSelectOnLoad } from '../actions/app';
 
 import ApdPageRoutes from './ApdPageRoutes';
@@ -45,6 +46,7 @@ const ApdApplication = ({
         <Sidebar place={place} />
         <main id="start-main-content" className="site-main">
           <UnexpectedError />
+          <SessionEndingAlert />
           <div className="ds-u-padding-top--2">
             <ApdPageRoutes />
           </div>

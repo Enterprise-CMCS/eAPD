@@ -15,7 +15,6 @@ let getUserByID;
 let handler;
 
 tap.test('user GET endpoint', async endpointTest => {
-
   endpointTest.beforeEach(done => {
     res = mockResponse();
     next = sinon.stub();

@@ -1001,18 +1001,7 @@ Object {
           "400": Object {
             "description": "The file does not belong to the APD or does not exist",
           },
-          "401": Object {
-            "description": "Not logged in",
-          },
-          "403": Object {
-            "description": "Does not have permission to this activity",
-          },
         },
-        "security": Array [
-          Object {
-            "bearerAuth": Array [],
-          },
-        ],
         "summary": "Get a file associated with an APD",
         "tags": Array [
           "APDs",
@@ -1195,55 +1184,6 @@ Object {
           "Users",
         ],
       },
-      "patch": Object {
-        "description": "Update user",
-        "parameters": Array [
-          Object {
-            "description": "2-letter US State or Territory abbreviation, lowercase",
-            "in": "query",
-            "name": "stateId",
-            "required": true,
-            "schema": Object {
-              "type": "string",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "properties": Object {
-                  "stateId": Object {
-                    "description": "2-letter US State or Territory abbreviation, lowercase",
-                    "type": "string",
-                  },
-                },
-                "type": "object",
-              },
-            },
-          },
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "description": "Record was updated",
-          },
-          "400": Object {
-            "description": "stateId is invalid",
-          },
-          "401": Object {
-            "description": "Not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "bearerAuth": Array [],
-          },
-        ],
-        "tags": Array [
-          "Users",
-        ],
-      },
     },
     "/open-api": Object {
       "get": Object {
@@ -1256,6 +1196,50 @@ Object {
         "summary": "Gets this document",
         "tags": Array [
           "Metadata",
+        ],
+      },
+    },
+    "/roles": Object {
+      "get": Object {
+        "description": "Get a list of all of the active roles",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "id": Object {
+                        "description": "Integer ID for a role",
+                        "type": "integer",
+                      },
+                      "name": Object {
+                        "description": "Full name of the Role",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "List of Active Roles",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Roles",
         ],
       },
     },
@@ -1361,7 +1345,42 @@ Object {
               "type": "string",
             },
           },
+          Object {
+            "description": "The filter status of the affiliations for this US State",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": Object {
+              "enum": Array [
+                "pending",
+                "active",
+                "inactive",
+              ],
+              "type": "string",
+            },
+          },
         ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "filter_status": Object {
+                    "description": "The filter status of the affiliations for this US State",
+                    "enum": Array [
+                      "pending",
+                      "active",
+                      "inactive",
+                    ],
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": false,
+        },
         "responses": Object {
           "200": Object {
             "content": Object {

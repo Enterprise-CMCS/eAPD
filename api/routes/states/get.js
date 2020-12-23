@@ -1,9 +1,10 @@
 const { raw: knex } = require('../../db');
 const { loggedIn } = require('../../middleware/auth');
 
-module.exports = (app) => {
+module.exports = app => {
   app.get('/states', (request, response, next) => {
-    knex('states').select('id', 'name')
+    knex('states')
+      .select('id', 'name')
       .then(rows => response.status(200).json(rows))
       .catch(next);
   });
@@ -22,4 +23,4 @@ module.exports = (app) => {
       })
       .catch(next);
   });
-}
+};
