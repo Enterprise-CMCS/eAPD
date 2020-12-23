@@ -14,7 +14,6 @@ describe('the session ending alert component', () => {
       isSessionEnding: false,
       isExtendingSession: false,
       isLoggingOut: false,
-      latestActivity: new Date().getTime(),
       expiresAt: new Date().getTime() + 60000,
       extend: jest.fn(),
       logoutAction: jest.fn()
@@ -29,7 +28,6 @@ describe('the session ending alert component', () => {
       isSessionEnding: true,
       isExtendingSession: false,
       isLoggingOut: false,
-      latestActivity: new Date().getTime() - 300000,
       expiresAt: new Date().getTime() + 60000,
       extend: jest.fn(),
       logoutAction: jest.fn()
@@ -55,32 +53,11 @@ describe('the session ending alert component', () => {
     ).toEqual('Sign out');
   });
 
-  it('renders as expected if session is ending and session is not being extended, but new activity', async () => {
-    const props = {
-      isSessionEnding: true,
-      isExtendingSession: false,
-      isLoggingOut: false,
-      latestActivity: new Date().getTime(),
-      expiresAt: new Date().getTime() + 60000,
-      extend: jest.fn(),
-      logoutAction: jest.fn()
-    };
-
-    const component = shallow(<SessionEndingAlert {...props} />);
-    expect(
-      component
-        .childAt(1)
-        .dive()
-        .equals(<span />)
-    ).toBeTruthy();
-  });
-
   it('renders as expected if there is and error and is saving', () => {
     const props = {
       isSessionEnding: true,
       isExtendingSession: true,
       isLoggingOut: false,
-      latestActivity: new Date().getTime() - 300000,
       expiresAt: new Date().getTime() + 60000,
       extend: jest.fn(),
       logoutAction: jest.fn()
@@ -111,7 +88,6 @@ describe('the session ending alert component', () => {
       isSessionEnding: true,
       isExtendingSession: false,
       isLoggingOut: true,
-      latestActivity: new Date().getTime() - 300000,
       expiresAt: new Date().getTime() + 60000,
       extend: jest.fn(),
       logoutAction: jest.fn()
@@ -146,7 +122,6 @@ describe('the session ending alert component', () => {
           isSessionEnding: false,
           isExtendingSession: false,
           isLoggingOut: false,
-          latestActivity,
           expiresAt
         }
       })
@@ -154,7 +129,6 @@ describe('the session ending alert component', () => {
       isSessionEnding: false,
       isExtendingSession: false,
       isLoggingOut: false,
-      latestActivity,
       expiresAt
     });
   });
