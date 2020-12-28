@@ -12,6 +12,7 @@ import {
   LOGIN_FAILURE,
   LOCKED_OUT,
   RESET_LOCKED_OUT,
+  LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   STATE_ACCESS_REQUEST,
   STATE_ACCESS_SUCCESS,
@@ -42,6 +43,7 @@ const initialState = {
   selectState: false,
   isLocked: false,
   latestActivity: new Date().getTime(),
+  isLoggingOut: false,
   isSessionEnding: false,
   isExtendingSession: false,
   user: null,
@@ -155,6 +157,11 @@ const auth = (state = initialState, action) => {
         fetching: false,
         error: ''
       };
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        isLoggingOut: true
+      };
     case LOGOUT_SUCCESS:
       return {
         ...initialState,
@@ -164,7 +171,8 @@ const auth = (state = initialState, action) => {
         latestActivity: null,
         expiresAt: null,
         isSessionEnding: false,
-        isExtendingSession: false
+        isExtendingSession: false,
+        isLoggingOut: false
       };
     case STATE_ACCESS_REQUEST:
       return {
