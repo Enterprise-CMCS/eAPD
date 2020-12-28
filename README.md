@@ -57,6 +57,7 @@ finished, you can populate the database. While the docker process is still
 running, open a new terminal window or tab and run:
 
 ```shell
+mkdir pgdata
 docker-compose exec api npm run migrate
 docker-compose exec api npm run seed
 ```
