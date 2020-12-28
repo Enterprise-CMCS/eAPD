@@ -60,6 +60,12 @@ describe('auth actions', () => {
     });
   });
 
+  it('requestLogout should create LOGOUT_REQUEST action', () => {
+    expect(actions.requestLogout()).toEqual({
+      type: actions.LOGOUT_REQUEST
+    });
+  });
+
   it('completeLogout should create LOGOUT_SUCCESS action', () => {
     expect(actions.completeLogout()).toEqual({ type: actions.LOGOUT_SUCCESS });
   });
@@ -501,7 +507,10 @@ describe('auth actions', () => {
     it('creates LOGOUT_SUCCESS after successful request', async () => {
       const store = mockStore({});
 
-      const expectedActions = [{ type: actions.LOGOUT_SUCCESS }];
+      const expectedActions = [
+        { type: actions.LOGOUT_REQUEST },
+        { type: actions.LOGOUT_SUCCESS }
+      ];
 
       await store.dispatch(actions.logout());
       expect(logoutSpy).toHaveBeenCalledTimes(1);

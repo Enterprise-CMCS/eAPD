@@ -24,15 +24,29 @@ exports.seed = async knex => {
 
   // user: em@il.com from okta
   // uid: 00u4nbo8e9BoctLWI297
-  const emailAffiliation = {
-    user_id: '00u4nbo8e9BoctLWI297',
-    state_id: 'fl',
-    role_id: await knex('auth_roles')
-      .where({ name: 'eAPD State Admin' })
-      .first()
-      .then(role => role.id),
-    status: 'approved',
-    updated_by: 'seeds'
-  };
-  await knex('auth_affiliations').insert(emailAffiliation);
+  // user: reviewer from okta
+  // uid: 00u66qbf9z9TRxjmR297
+  const emailAffiliations = [
+    {
+      user_id: '00u4nbo8e9BoctLWI297',
+      state_id: 'fl',
+      role_id: await knex('auth_roles')
+        .where({ name: 'eAPD State Admin' })
+        .first()
+        .then(role => role.id),
+      status: 'approved',
+      updated_by: 'seeds'
+    },
+    {
+      user_id: '00u66qbf9z9TRxjmR297',
+      state_id: 'ak',
+      role_id: await knex('auth_roles')
+        .where({ name: 'eAPD State Admin' })
+        .first()
+        .then(role => role.id),
+      status: 'approved',
+      updated_by: 'seeds'
+    }
+  ];
+  await knex('auth_affiliations').insert(emailAffiliations);
 };
