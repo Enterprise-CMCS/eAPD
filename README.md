@@ -51,13 +51,12 @@ and connected. For more details,
 If you don't have or can't use Docker, you can also run everything
 [manually](https://github.com/CMSgov/eAPD/wiki/Development-Environment#manually).
 
-From your command line, switch to the directory where you put the code and
-then run `docker-compose up`. This step could take a few minutes. Once it's
-finished, you can populate the database. While the docker process is still
-running, open a new terminal window or tab and run:
+From your command line, switch to the directory where you put the code. Create
+the `pgdata` folder and then run `docker-compose up`. This step could take a few
+minutes. Once it's finished, you can populate the database. While the docker
+process is still running, open a new terminal window or tab and run:
 
 ```shell
-mkdir pgdata
 docker-compose exec api npm run migrate
 docker-compose exec api npm run seed
 ```
