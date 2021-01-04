@@ -53,7 +53,7 @@ tap.test('database wrappers / users', async usersTests => {
   // let getUserAffiliatedStates;
   // let getAffiliationsByUserId;
   // let getStateById;
-  // let getRoles;
+  // let getRolesAndActivities;
 
   usersTests.beforeEach(async () => {
     sandbox.resetBehavior();
@@ -83,7 +83,7 @@ tap.test('database wrappers / users', async usersTests => {
     // getUserAffiliatedStates = sandbox.stub().resolves([]);
     // getAffiliationsByUserId = sandbox.stub().resolves([]);
     // getStateById = sandbox.stub().resolves({});
-    // getRoles = sandbox.stub().resolves([]);
+    // getRolesAndActivities = sandbox.stub().resolves([]);
   });
 
   usersTests.test('getting all users', async getAllUsersTests => {
@@ -229,7 +229,7 @@ tap.test('database wrappers / users', async usersTests => {
       //             displayName: 'this just goes through',
       //             affiliations: ['state id'],
       //           },
-      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRolesAndActivities }
       //         );
 
       //         test.same(user, {
@@ -276,7 +276,7 @@ tap.test('database wrappers / users', async usersTests => {
       //             displayName: 'this just goes through',
       //             affiliations: ['state id'],
       //           },
-      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRolesAndActivities }
       //         );
 
       //         test.same(user, {
@@ -302,7 +302,7 @@ tap.test('database wrappers / users', async usersTests => {
       //             groups: ['user role'],
       //             displayName: 'this just goes through'
       //           },
-      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRolesAndActivities }
       //         );
 
       //         test.same(user, {
@@ -328,7 +328,7 @@ tap.test('database wrappers / users', async usersTests => {
       //             groups: ['user role'],
       //             displayName: 'this just goes through'
       //           },
-      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRolesAndActivities }
       //         );
 
       //         test.same(user, {
@@ -354,7 +354,7 @@ tap.test('database wrappers / users', async usersTests => {
       //             groups: ['user role'],
       //             displayName: 'this just goes through'
       //           },
-      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRolesAndActivities }
       //         );
 
       //         test.same(user, {
@@ -384,7 +384,7 @@ tap.test('database wrappers / users', async usersTests => {
       //             displayName: 'this just goes through',
       //             affiliations: ['state id']
       //           },
-      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //           { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRolesAndActivities }
       //         );
 
       //         test.same(user, {
@@ -402,7 +402,7 @@ tap.test('database wrappers / users', async usersTests => {
       //   async test => {
       //     const user = await populateUser(
       //       { email: 'email' },
-      //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRoles }
+      //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRolesAndActivities }
       //     );
 
       //     test.same({

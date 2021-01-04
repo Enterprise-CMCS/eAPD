@@ -145,6 +145,26 @@ describe('Header component', () => {
     ).toMatchSnapshot();
   });
 
+  it('renders the state admin link when user has required permissions', () => {
+    expect(
+      shallow(
+        <Header
+          ariaExpanded={false}
+          authenticated
+          currentUser={{
+            role: 'eAPD State Admin',
+            state: { id: 'wa', name: 'Washington' },
+            username: 'frasiercrane@kacl.com'
+          }}
+          isAdmin
+          canViewStateAdmin
+          pushRoute={() => {}}
+          showSiteTitle={false}
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
   it('maps state to props', () => {
     const state = {
       auth: {
@@ -155,7 +175,8 @@ describe('Header component', () => {
       },
       user: {
         data: {
-          role: 'admin'
+          role: 'admin',
+          state: { id: 'md', name: 'Maryland' }
         }
       }
     };
@@ -163,7 +184,9 @@ describe('Header component', () => {
     expect(mapStateToProps(state)).toEqual({
       authenticated: 'some value',
       currentUser: { role: 'admin' },
-      isAdmin: true
+      isAdmin: true,
+      currentState: { id: 'md', name: 'Maryland' },
+      canViewStateAdmin: null
     });
   });
 });

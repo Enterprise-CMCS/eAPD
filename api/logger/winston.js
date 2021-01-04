@@ -3,12 +3,12 @@ const fs = require('fs');
 const winston = require('winston');
 const { name: packageName } = require('../package');
 
-const { LOG_CONSOLE, LOG_FILE, LOG_LEVEL, NODE_ENV } = process.env;
+const { LOG_CONSOLE, LOG_FILE, LOG_LEVEL } = process.env;
 
 const formats = [
   winston.format.timestamp(),
   winston.format.errors({ stack: true }),
-  NODE_ENV === 'development' ? winston.format.simple() : winston.format.json()
+  winston.format.json()
 ];
 
 // https://github.com/winstonjs/winston/blob/master/docs/transports.md
@@ -16,7 +16,7 @@ const transports = [
   LOG_CONSOLE === 'true' && new winston.transports.Console(),
   LOG_FILE === 'true' &&
     new winston.transports.File({ filename: `${packageName}.log` }),
-  new winston.transports.Stream({ stream: fs.createWriteStream('/dev/null') }),
+  new winston.transports.Stream({ stream: fs.createWriteStream('/dev/null') })
   // new AwsCloudWatch(options);
 ].filter(Boolean);
 

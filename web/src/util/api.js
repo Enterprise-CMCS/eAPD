@@ -1,5 +1,5 @@
 import axiosClient from 'axios';
-import oktaAuth from './oktaAuth';
+import { getAccessToken } from './auth';
 
 export const apiUrl = process.env.API_URL || 'http://localhost:8000';
 
@@ -10,7 +10,7 @@ const axios = axiosClient.create({
 // add Authorization header to axios request if jwt is present in localStorage
 const presentTokenViaAuthorizationHeader = async config => {
   // retrieve access token from local storage
-  const { accessToken } = await oktaAuth.tokenManager.get('accessToken');
+  const accessToken = (await getAccessToken()) || null;
   if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 };

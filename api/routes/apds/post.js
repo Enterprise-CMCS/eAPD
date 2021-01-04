@@ -38,7 +38,10 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       if (!valid) {
         // This is just here to protect us from the case where the APD schema changed but the
         // APD creation function was not also updated
-        logger.error({ id: req.id, message: 'Newly-created APD fails validation' });
+        logger.error({
+          id: req.id,
+          message: 'Newly-created APD fails validation'
+        });
         logger.error({ id: req.id, message: validateApd.errors });
         return res.status(500).end();
       }

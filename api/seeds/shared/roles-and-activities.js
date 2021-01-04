@@ -1,72 +1,11 @@
 const chalk = require('chalk');
 const logger = require('../../logger')('roles seeder');
-
-// AFAICT, the boolean values here are not used for anything, yet.
-const activities = {
-  'view-users': false,
-  'view-roles': false,
-  'submit-federal-response': false,
-  'submit-clearance': false,
-  'edit-comments': false,
-  'submit-document': false,
-  'submit-state-response': false,
-  'create-draft': false,
-  'edit-document': false,
-  'edit-response': false,
-  'view-document': true,
-  'view-affiliations': true,
-  'edit-affiliations': true,
-  'approve-state-admin': true
-};
-
-const roles = {
-  'eAPD Admin': false,
-  'eAPD Federal Analyst': false,
-  'eAPD Federal Leadership': false,
-  'eAPD Federal SME': false,
-  'eAPD State Coordinator': false,
-  'eAPD State SME': false,
-  'eAPD State Admin': true
-};
-
-const roleToActivityMappings = {
-  'eAPD Admin': [
-    'view-users',
-    'view-roles',
-    'approve-state-admin',
-    'view-affiliations',
-    'edit-affiliations'
-  ],
-  'eAPD Federal Analyst': [
-    'view-users',
-    'view-roles',
-    'view-document',
-    'submit-federal-response',
-    'submit-clearance',
-    'edit-comments'
-  ],
-  'eAPD Federal Leadership': ['view-users', 'view-document'],
-  'eAPD Federal SME': ['edit-comments'],
-  'eAPD State Coordinator': [
-    'view-document',
-    'submit-document',
-    'submit-state-response',
-    'create-draft',
-    'edit-document',
-    'edit-response'
-  ],
-  'eAPD State SME': ['view-document', 'edit-document', 'edit-response'],
-  'eAPD State Admin': [
-    'view-document',
-    'submit-document',
-    'submit-state-response',
-    'create-draft',
-    'edit-document',
-    'edit-response',
-    'view-affiliations',
-    'edit-affiliations'
-  ]
-};
+const {
+  activities,
+  roles,
+  roleToActivityMappings,
+  activeRoles
+} = require('../../util/roles');
 
 // Take the knex object and the table name as arguments, instead of just
 // the knex table object.  The reason is that if you have an insert on
@@ -163,13 +102,9 @@ exports.seed = async knex => {
     activityIDs,
     roleToActivityMappings
   );
+  await knex('auth_roles').update({ isActive: false });
   await knex('auth_roles')
-    .whereIn('name', [
-      'eAPD Federal Analyst',
-      'eAPD Federal Leadership',
-      'eAPD Federal SME',
-      'eAPD State SME'
-    ])
-    .update({ isActive: false });
+    .whereIn('name', activeRoles)
+    .update({ isActive: true });
   logger.info('Updated active status for roles');
 };

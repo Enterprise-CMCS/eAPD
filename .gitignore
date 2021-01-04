@@ -14,3 +14,7 @@ api/test-data/files
 notes.md
 schema.sql
 Makefile
+
+# use npm to manage packages, not yarn
+api/yarn.lock
+web/yarn.lock
