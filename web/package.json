@@ -65,7 +65,7 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@okta/okta-auth-js": "^4.4.0",
     "@tinymce/tinymce-react": "^3.5.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "connected-react-router": "^6.8.0",
     "d3-format": "^1.4.3",
     "detect-browser": "^5.2.0",
