@@ -22,14 +22,14 @@ function postOrUpdateComment() {
     curl -s \
       -H "Authorization: token $GH_BOT_TOKEN" \
       -H "Content-Type: application/json" \
-      -d $'{"body":"See this pull request in action: [go]('"$PREVIEW_URL"'){:target="_blank" rel="noopener"\n\n'"$GIT_SHA"'"}' \
+      -d $'{"body":"See this pull request in action: [go]('"$PREVIEW_URL"'){:target="_blank" rel="noopener"\n\n'"$GIT_SHA"'}"' \
       -X PATCH "https://api.github.com/repos/CMSgov/eAPD/issues/comments/$ID"
   else
     # Post a new message if one doesn't already exist.
     curl -s \
       -H "Authorization: token $GH_BOT_TOKEN" \
       -H "Content-Type: application/json" \
-      -d $'{"body":"See this pull request in action: [go]('"$PREVIEW_URL"'){:target="_blank" rel="noopener"}' \
+      -d '{"body":"See this pull request in action: [go]('"$PREVIEW_URL"'){:target="_blank" rel="noopener"}"' \
       -X POST "https://api.github.com/repos/CMSgov/eAPD/issues/$PRNUM/comments"
   fi
 }
