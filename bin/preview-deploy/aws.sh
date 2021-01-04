@@ -131,7 +131,7 @@ function findExistingInstances() {
 
 # Associate Elastic IP Address to preview instance
 #
-# $1 - ID of the EC2 instanec to assign Elastic IP Address to
+# $1 - ID of the EC2 instance to assign Elastic IP Address to
 function associateElasticIP() {
   ALLOCATION_ID="$(aws ec2 describe-addresses --query 'Addresses[?AssociationId==null]' | jq -r '.[0] | .AllocationId')"
   aws ec2 associate-address \
