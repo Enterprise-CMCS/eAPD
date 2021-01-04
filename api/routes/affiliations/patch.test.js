@@ -17,7 +17,6 @@ const route = '/states/:stateId/affiliations/:id';
 const canMiddleware = can('edit-affiliations');
 
 tap.test('PATCH affiliations endpoint', async t => {
-
   t.beforeEach(async () => {
     app = mockExpress();
     // res = mockResponse();
@@ -31,5 +30,4 @@ tap.test('PATCH affiliations endpoint', async t => {
       `express route to 'PATCH ${route}' is configured`
     );
   });
-
 });

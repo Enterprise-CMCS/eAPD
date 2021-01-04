@@ -49,4 +49,12 @@ describe('Affiliations endpoint | PATCH', () => {
     });
     expect(response.status).toEqual(400);
   });
+
+  it(`returns 401, when user tries to change their status`, async () => {
+    const response = await api.patch('/states/ak/affiliations/4002', {
+      status: 'approved',
+      roleId: 1106
+    });
+    expect(response.status).toEqual(401);
+  });
 });

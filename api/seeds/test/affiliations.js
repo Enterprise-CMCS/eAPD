@@ -3,12 +3,14 @@ const { states } = require('../../util/states');
 
 // affiliate 'all-permissions' user with all states
 const adminRole = roles.find(role => role.name === 'eAPD Admin');
-const adminAffiliations = states.map(state => ({
-  user_id: 'all-permissions',
-  state_id: state.id,
-  role_id: adminRole.id,
-  status: 'approved'
-}));
+const adminAffiliations = states
+  .filter(state => state.id !== 'ak')
+  .map(state => ({
+    user_id: 'all-permissions',
+    state_id: state.id,
+    role_id: adminRole.id,
+    status: 'approved'
+  }));
 
 exports.seed = async knex => {
   await knex('auth_affiliations').insert(adminAffiliations);
@@ -24,6 +26,13 @@ exports.seed = async knex => {
       user_id: 2020,
       state_id: 'md',
       role_id: '1107',
+      status: 'approved'
+    },
+    {
+      id: 4002,
+      user_id: 'all-permissions',
+      state_id: 'ak',
+      role_id: adminRole.id,
       status: 'approved'
     }
   ]);

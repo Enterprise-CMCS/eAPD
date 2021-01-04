@@ -25,11 +25,14 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
           };
           next();
         } else {
-          logger.verbose({ id: req.id, message: 'requested object does not exist' });
+          logger.verbose({
+            id: req.id,
+            message: 'requested object does not exist'
+          });
           res.status(400).end();
         }
       } catch (e) {
-        next(e)
+        next(e);
       }
     };
     return loadApd;
@@ -46,7 +49,10 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
 module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
   cache(['userCanAccessAPD'], () => {
     const userCanAccessAPD = async (req, res, next) => {
-      logger.silly({ id: req.id, message: 'verifying the user can access this APD' });
+      logger.silly({
+        id: req.id,
+        message: 'verifying the user can access this APD'
+      });
 
       // Load the APD first...  Technically we don't have to await this
       // since we rely on the next() callback from loadApd.  However,
@@ -59,7 +65,10 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
         if (req.meta.apd.state === req.user.state.id) {
           next();
         } else {
-          logger.verbose({ id: req.id, message: 'user does not have access to the APD' });
+          logger.verbose({
+            id: req.id,
+            message: 'user does not have access to the APD'
+          });
           res.status(401).end();
         }
       });
@@ -80,7 +89,10 @@ module.exports.userCanEditAPD = ({
 } = {}) =>
   cache(['userCanEditAPD'], () => {
     const userCanEditAPD = async (req, res, next) => {
-      logger.silly({ id: req.id, message: 'verifying the user can edit this APD' });
+      logger.silly({
+        id: req.id,
+        message: 'verifying the user can edit this APD'
+      });
 
       // First make sure they can access the APD.  Same story here
       // as above with respect to await.

@@ -49,7 +49,10 @@ api.use((_, res, next) => {
 
   // Instruct the browser to use HTTPS for this domain and its subdomains for
   // the next year.
-  res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  res.header(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains'
+  );
 
   // Instruct browsers to use the content-type indicated by the api rather
   // than ignore that and try to guess the content-type from the response body
@@ -71,7 +74,10 @@ api.use((_, res, next) => {
 api.use((req, res, next) => {
   req.id = uuid();
   req.meta = {};
-  logger.verbose({ id: req.id, message: `got ${req.method} request to ${req.path}` });
+  logger.verbose({
+    id: req.id,
+    message: `got ${req.method} request to ${req.path}`
+  });
   return next();
 });
 

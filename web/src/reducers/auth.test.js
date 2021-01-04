@@ -12,9 +12,15 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_MFA_FAILURE,
+  LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOCKED_OUT,
-  RESET_LOCKED_OUT
+  RESET_LOCKED_OUT,
+  LATEST_ACTIVITY,
+  SESSION_ENDING_ALERT,
+  REQUEST_SESSION_RENEWAL,
+  SESSION_RENEWED,
+  UPDATE_EXPIRATION
 } from '../actions/auth';
 
 describe('auth reducer', () => {
@@ -36,11 +42,18 @@ describe('auth reducer', () => {
     requestAccessSuccess: false,
     selectState: false,
     mfaEnrollType: '',
-    isLocked: false
+    isLocked: false,
+    isLoggingOut: false,
+    latestActivity: null,
+    isSessionEnding: false,
+    isExtendingSession: false,
+    expiresAt: null
   };
 
   it('should handle initial state', () => {
-    expect(auth(undefined, {})).toEqual(initialState);
+    const result = auth(undefined, {});
+    result.latestActivity = null;
+    expect(result).toEqual(initialState);
   });
 
   it('should handle AUTH_CHECK_SUCCESS', () => {
@@ -185,12 +198,25 @@ describe('auth reducer', () => {
     });
   });
 
+  it('should handle LOGOUT_REQUEST', () => {
+    expect(auth(initialState, { type: LOGOUT_REQUEST })).toEqual({
+      ...initialState,
+      isLoggingOut: true
+    });
+  });
+
   it('should handle LOGOUT_SUCCESS', () => {
     expect(auth(initialState, { type: LOGOUT_SUCCESS })).toEqual({
       ...initialState,
       otpStage: false,
       hasEverLoggedOn: false,
-      initialCheck: false
+      initialCheck: false,
+      authenticated: false,
+      latestActivity: null,
+      expiresAt: null,
+      isSessionEnding: false,
+      isExtendingSession: false,
+      isLoggingOut: false
     });
   });
 
@@ -211,6 +237,7 @@ describe('auth reducer', () => {
         initialCheck: true,
         otpStage: false,
         isLocked: false,
+        isLoggingOut: false,
         user: null,
         requestAccess: false,
         requestAccessSuccess: false,
@@ -221,7 +248,10 @@ describe('auth reducer', () => {
         mfaEnrollStartStage: false,
         mfaEnrollType: '',
         mfaPhoneNumber: '',
-        verifyData: null
+        verifyData: null,
+        latestActivity: null,
+        isSessionEnding: false,
+        isExtendingSession: false
       });
     });
   });
@@ -232,5 +262,68 @@ describe('auth reducer', () => {
         auth: { authenticated: 'this is the authenticated state value' }
       })
     ).toEqual('this is the authenticated state value');
+  });
+
+  describe('manages the users session token', () => {
+    const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    it('should update latestActivity on LATEST_ACTIVITY', async () => {
+      const now = new Date().getTime();
+      await timeout(10);
+      const result = auth(
+        {
+          ...initialState,
+          latestActivity: now
+        },
+        { type: LATEST_ACTIVITY }
+      );
+      expect(result.latestActivity).toBeGreaterThan(now);
+    });
+
+    it('should update isSessionEnding on SESSION_ENDING_ALERT', () => {
+      expect(auth(initialState, { type: SESSION_ENDING_ALERT })).toEqual({
+        ...initialState,
+        isSessionEnding: true
+      });
+    });
+
+    it('should update isExtendingSession on REQUEST_SESSION_RENEWAL', () => {
+      expect(auth(initialState, { type: REQUEST_SESSION_RENEWAL })).toEqual({
+        ...initialState,
+        isExtendingSession: true
+      });
+    });
+
+    it('should update all session values on SESSION_RENEWED', async () => {
+      const now = new Date().getTime();
+      await timeout(10);
+      const result = auth(
+        {
+          ...initialState,
+          latestActivity: now,
+          isSessionEnding: true,
+          isExtendingSession: true
+        },
+        { type: SESSION_RENEWED }
+      );
+      expect(result.latestActivity).toBeGreaterThan(now);
+      expect({
+        ...result,
+        latestActivity: null
+      }).toEqual({
+        ...initialState,
+        latestActivity: null,
+        isSessionEnding: false,
+        isExtendingSession: false
+      });
+    });
+    it('should update the expiresAt value on UPDATE_EXPIRATION', () => {
+      const expiresAt = new Date().getTime() + 60000;
+      const result = auth(initialState, {
+        type: UPDATE_EXPIRATION,
+        data: expiresAt / 1000
+      });
+      expect(result).toEqual({ ...initialState, expiresAt });
+    });
   });
 });
