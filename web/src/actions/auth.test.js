@@ -231,6 +231,28 @@ describe('auth actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    it('creates PASSWORD_EXPIRED if password has expired', async () => {
+      const signInSpy = jest
+        .spyOn(mockAuth, 'authenticateUser')
+        .mockImplementation(() =>
+          Promise.resolve({
+            status: 'PASSWORD_EXPIRED'
+          })
+        );
+
+      const store = mockStore({});
+      const expectedActions = [
+        { type: actions.LOGIN_REQUEST },
+        { type: actions.LOGIN_FAILURE, error: "Password has expired, please update password in Okta before attempting to login again." }
+
+      ];
+
+      await store.dispatch(actions.login('name', 'secret'));
+      expect(signInSpy).toHaveBeenCalledTimes(1);
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
     it('creates LOGIN_SUCCESS after successful second stage of multi-factor auth', async () => {
       const verify = jest.fn(() =>
         Promise.resolve({ sessionToken: 'testSessionToken' })

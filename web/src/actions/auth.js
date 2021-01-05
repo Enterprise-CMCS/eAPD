@@ -199,11 +199,11 @@ export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
   authenticateUser(username, password)
     .then(async res => {
-      res.status = 'PASSWORD_EXPIRED'
       // Handle 3 error states here.
       // 1. 401 Unauthorized with error code E0000004 = credentials wrong or isnt in OKTA
       // 2. 403 with error code E0000006 = user in okta but not our group
       // 3. when password is expired
+      // res.status = 'PASSWORD_EXPIRED'
       if (res.status === 'PASSWORD_EXPIRED') {
         return dispatch(failLogin("Password has expired, please update password in Okta before attempting to login again."))
       }
@@ -238,7 +238,7 @@ export const login = (username, password) => dispatch => {
       }
       return null;
     })
-    .catch(error => {
+    .catch(error => {      
       const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
     });
@@ -247,6 +247,7 @@ export const login = (username, password) => dispatch => {
 export const loginOtp = otp => async dispatch => {
   dispatch(startSecondStage());
   const transaction = await retrieveExistingTransaction();
+  console.log("transaction...", transaction);
   if (transaction) {
     return verifyMFA({ transaction, otp })
       .then(async ({ sessionToken }) => {
@@ -256,6 +257,7 @@ export const loginOtp = otp => async dispatch => {
         return dispatch(getCurrentUser());
       })
       .catch(error => {
+        console.log("error is...", error)
         const reason = error ? error.message : 'N/A';
         if (reason === 'User Locked') {
           dispatch(failLoginLocked(reason));
