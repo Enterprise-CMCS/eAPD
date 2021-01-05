@@ -31,6 +31,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOCKED_OUT = 'LOCKED_OUT';
 export const RESET_LOCKED_OUT = 'RESET_LOCKED_OUT';
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
@@ -71,6 +72,7 @@ export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
 export const failLoginLocked = () => ({ type: LOCKED_OUT });
 export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
 
+export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
@@ -119,6 +121,7 @@ const getCurrentUser = () => dispatch =>
     });
 
 export const logout = () => dispatch => {
+  dispatch(requestLogout());
   logoutAndClearTokens();
   dispatch(completeLogout());
 };
@@ -196,7 +199,7 @@ export const mfaActivate = code => async dispatch => {
     const expiresAt = await setTokens(activateTransaciton.sessionToken);
     dispatch(setupTokenManager());
     dispatch(updateSessionExpiration(expiresAt));
-    dispatch(getCurrentUser());
+    return dispatch(getCurrentUser());
   }
   return null;
 };

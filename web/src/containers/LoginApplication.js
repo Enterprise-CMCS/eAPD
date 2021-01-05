@@ -111,19 +111,16 @@ const LoginApplication = ({
     history.push('/login');
   };
 
-  const { from = { pathname: '/' } } = location.state || {};
-  console.log({ from, location });
-  if (authenticated) {
-    if (from.pathname !== '/logout') {
-      console.log(`go to ${JSON.stringify(from)}`);
-      return <Redirect to={from} push />;
-    }
-    console.log('redirect to /login');
-    return <Redirect to="/login" push />;
-  }
-
   if (showConsent) {
     return <ConsentBanner onAgree={hideConsent} />;
+  }
+
+  if (authenticated) {
+    const { from = { pathname: '/' } } = location.state || {};
+    if (from.pathname !== '/logout') {
+      return <Redirect to={from} push />;
+    }
+    return <Redirect to="/" push />;
   }
 
   return (
@@ -168,7 +165,7 @@ LoginApplication.propTypes = {
 
 LoginApplication.defaultProps = {
   error: null,
-  verifyData: null
+  verifyData: {}
 };
 
 const mapStateToProps = (
@@ -208,3 +205,5 @@ const mapDispatchToProps = {
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(LoginApplication)
 );
+
+export { LoginApplication as plain };

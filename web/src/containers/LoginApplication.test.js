@@ -1,16 +1,12 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
-import LoginApplication from './LoginApplication';
+import sinon from 'sinon';
+import { shallow } from 'enzyme';
+import { plain as LoginApplication } from './LoginApplication';
+import ConsentBanner from '../components/ConsentBanner';
+import LoginPageRoutes from './LoginPageRoutes';
+import { setConsented } from '../util/auth';
 
-const redux = {
-  hasEverLoggedOn: false,
-  authenticated: false,
-  error: null,
-  fetching: false,
-  factorsList: [],
-  verifyData: null,
-  mfaEnrollType: null
-};
+const history = { goBack: sinon.spy(), push: sinon.spy() };
 
 const props = {
   mfaConfig: jest.fn(),
@@ -21,49 +17,62 @@ const props = {
   login: jest.fn(),
   loginOtp: jest.fn(),
   location: {},
-  history: {}
+  hasEverLoggedOn: false,
+  authenticated: false,
+  error: null,
+  fetching: false,
+  factorsList: [],
+  mfaEnrollType: '',
+  verifyData: {}
 };
 
 describe('Login Application', () => {
-  xit('should redirect to root if authenticated', () => {
-    const { history } = renderWithConnection(
-      <LoginApplication {...props} authenticated />,
-      {
-        initialState: {
-          auth: {
-            ...redux,
-            authenticated: true
-          }
-        }
-      }
+  beforeEach(() => {
+    history.goBack.resetHistory();
+    history.push.resetHistory();
+  });
+
+  afterEach(() => {
+    document.cookie = null;
+  });
+
+  it('should show the consent banner if the user does not have a cookie', () => {
+    const component = shallow(
+      <LoginApplication {...props} history={history} />
     );
-    expect(history.location.pathname).toEqual('/');
+    expect(component.type()).toEqual(ConsentBanner);
+  });
+
+  it('should redirect to root if authenticated', () => {
+    setConsented();
+    const component = shallow(
+      <LoginApplication {...props} authenticated history={history} />
+    );
+    expect(component.props().to.pathname).toEqual('/');
   });
 
   it('should redirect to where it came from if authenticated', () => {
-    // window.history.pushState({ from: '/dashboard' }, 'pushState example');
-    const testProps = {
-      ...props,
-      authenticated: true
+    setConsented();
+    const location = {
+      to: '/',
+      state: { from: { pathname: '/dashboard' } }
     };
-    const { history } = renderWithConnection(
-      <LoginApplication {...testProps} />,
-      {
-        initialHistory: {
-          to: '/',
-          state: { from: { pathname: '/dashboard' } }
-        },
-        initialState: {
-          auth: {
-            ...redux,
-            authenticated: true
-          }
-        }
-      }
+    const component = shallow(
+      <LoginApplication
+        {...props}
+        authenticated
+        history={history}
+        location={location}
+      />
     );
-    console.log({ history });
-    const back = history.go(-2);
-    console.log({ history, back });
-    expect(history.location.pathname).toEqual('/dashboard');
+    expect(component.props().to.pathname).toEqual('/dashboard');
+  });
+
+  it('should show the LoginPageRoutes if user is not logged in but has consented', () => {
+    setConsented();
+    const component = shallow(
+      <LoginApplication {...props} history={history} />
+    );
+    expect(component.type()).toEqual(LoginPageRoutes);
   });
 });

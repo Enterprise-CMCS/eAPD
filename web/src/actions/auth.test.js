@@ -60,6 +60,12 @@ describe('auth actions', () => {
     });
   });
 
+  it('requestLogout should create LOGOUT_REQUEST action', () => {
+    expect(actions.requestLogout()).toEqual({
+      type: actions.LOGOUT_REQUEST
+    });
+  });
+
   it('completeLogout should create LOGOUT_SUCCESS action', () => {
     expect(actions.completeLogout()).toEqual({ type: actions.LOGOUT_SUCCESS });
   });
@@ -126,20 +132,14 @@ describe('auth actions', () => {
         .reply(200, { name: 'moop', activities: [], states: [] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
-        { type: actions.STATE_ACCESS_REQUEST },
-        {
-          type: actions.LOGIN_SUCCESS,
-          data: { name: 'moop', activities: [], states: [] }
-        },
-        { type: actions.RESET_LOCKED_OUT }
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
       expect(signInSpy).toHaveBeenCalledTimes(1);
       await expect(getTokenSpy).toHaveBeenCalledTimes(1);
 
-      await timeout(25);
+      await timeout(500);
       expect(store.getActions()).toEqual(expectedActions);
     });
 
@@ -501,7 +501,10 @@ describe('auth actions', () => {
     it('creates LOGOUT_SUCCESS after successful request', async () => {
       const store = mockStore({});
 
-      const expectedActions = [{ type: actions.LOGOUT_SUCCESS }];
+      const expectedActions = [
+        { type: actions.LOGOUT_REQUEST },
+        { type: actions.LOGOUT_SUCCESS }
+      ];
 
       await store.dispatch(actions.logout());
       expect(logoutSpy).toHaveBeenCalledTimes(1);
