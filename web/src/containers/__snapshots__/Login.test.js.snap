@@ -163,7 +163,7 @@ exports[`login component renders correctly if not logged in and there is an erro
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error="Sorry! Something went wrong. Please try again."
+    error="something here"
     footer={
       <p
         className="ds-u-padding-top--2"
