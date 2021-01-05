@@ -20,6 +20,7 @@ import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
 import LoginLocked from '../components/LoginLocked';
+import LoginGroupError from '../components/LoginGroupError';
 import LoginMFAEnroll from '../components/LoginMFAEnroll';
 import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
 import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
@@ -40,6 +41,7 @@ const Login = ({
   mfaEnrollType,
   verifyData,
   isLocked,
+  isNotInGroup,
   requestAccess,
   requestAccessSuccess,
   login: action,
@@ -149,6 +151,10 @@ const Login = ({
       'Please contact your State Administrator for steps to register an account.';
   } else if (error) {
     errorMessage = error || 'Sorry! Something went wrong. Please try again.';
+  }
+
+  if (isNotInGroup) {
+    return <LoginGroupError />;
   }
 
   if (isLocked) {
@@ -285,6 +291,7 @@ const mapStateToProps = ({
     mfaEnrollActivateStage,
     verifyData,
     isLocked,
+    isNotInGroup,
     mfaType,
     requestAccess,
     requestAccessSuccess
@@ -302,6 +309,7 @@ const mapStateToProps = ({
   mfaEnrollActivateStage,
   verifyData,
   isLocked,
+  isNotInGroup,
   mfaType,
   requestAccess,
   requestAccessSuccess
