@@ -12,9 +12,10 @@ import {
   LOGIN_MFA_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
   LOCKED_OUT,
   RESET_LOCKED_OUT,
-  LOGOUT_SUCCESS,
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
@@ -32,10 +33,11 @@ describe('auth reducer', () => {
     factorsList: [],
     mfaPhoneNumber: '',
     mfaEnrollType: '',
-    verifyData: null,
+    verifyData: {},
     selectState: false,
     isLocked: false,
     user: null,
+    isLoggingOut: false,
     latestActivity: null,
     isSessionEnding: false,
     isExtendingSession: false,
@@ -187,11 +189,24 @@ describe('auth reducer', () => {
     });
   });
 
+  it('should handle LOGOUT_REQUEST', () => {
+    expect(auth(initialState, { type: LOGOUT_REQUEST })).toEqual({
+      ...initialState,
+      isLoggingOut: true
+    });
+  });
+
   it('should handle LOGOUT_SUCCESS', () => {
     expect(auth(initialState, { type: LOGOUT_SUCCESS })).toEqual({
       ...initialState,
-      hasEverLoggedOn: false,
-      authenticated: false
+      hasEverLoggedOn: true,
+      authenticated: false,
+      initialCheck: false,
+      latestActivity: null,
+      expiresAt: null,
+      isSessionEnding: false,
+      isExtendingSession: false,
+      isLoggingOut: false
     });
   });
 
@@ -205,23 +220,18 @@ describe('auth reducer', () => {
       expect(auth(state, { type: LOGOUT_SUCCESS })).toEqual({
         ...initialState,
         authenticated: false,
-        hasEverLoggedOn: false,
-        error: '',
+        hasEverLoggedOn: true,
+        error: null,
         fetching: false,
-        initialCheck: true,
-        otpStage: false,
+        initialCheck: false,
         isLocked: false,
+        isLoggingOut: false,
         user: null,
-        requestAccess: false,
-        requestAccessSuccess: false,
         selectState: false,
-        factorsList: '',
-        mfaEnrollActivateStage: false,
-        mfaEnrollAddPhoneStage: false,
-        mfaEnrollStartStage: false,
+        factorsList: [],
         mfaEnrollType: '',
         mfaPhoneNumber: '',
-        verifyData: null,
+        verifyData: {},
         latestActivity: null,
         isSessionEnding: false,
         isExtendingSession: false
