@@ -29,6 +29,7 @@ export const LOGIN_MFA_ENROLL_ACTIVATE = 'LOGIN_MFA_ENROLL_ACTIVATE';
 export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGIN_FAILURE_NOT_IN_GROUP = 'LOGIN_FAILURE_NOT_IN_GROUP';
 export const LOCKED_OUT = 'LOCKED_OUT';
 export const RESET_LOCKED_OUT = 'RESET_LOCKED_OUT';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
@@ -68,6 +69,7 @@ export const mfaEnrollActivate = (mfaEnrollType, activationData) => ({
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
+export const failLoginNotInGroup = error => ({ type: LOGIN_FAILURE_NOT_IN_GROUP, error });
 export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
 export const failLoginLocked = () => ({ type: LOCKED_OUT });
 export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
@@ -199,11 +201,6 @@ export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
   authenticateUser(username, password)
     .then(async res => {
-      // Handle 3 error states here.
-      // 1. 401 Unauthorized with error code E0000004 = credentials wrong or isnt in OKTA
-      // 2. 403 with error code E0000006 = user in okta but not our group
-      // 3. when password is expired
-      // res.status = 'PASSWORD_EXPIRED'
       if (res.status === 'PASSWORD_EXPIRED') {
         return dispatch(failLogin("Password has expired, please update password in Okta before attempting to login again."))
       }
@@ -257,9 +254,10 @@ export const loginOtp = otp => async dispatch => {
         return dispatch(getCurrentUser());
       })
       .catch(error => {
-        console.log("error is...", error)
         const reason = error ? error.message : 'N/A';
-        if (reason === 'User Locked') {
+        if (reason === 'User is not assigned to the client application.' ) {
+          dispatch(failLoginNotInGroup(reason));
+        } else if (reason === 'User Locked') {
           dispatch(failLoginLocked(reason));
         } else {
           dispatch(failLoginMFA(reason));
