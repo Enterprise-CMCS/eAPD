@@ -6,11 +6,11 @@ services:
       - POSTGRES_DB=hitech_apd
       - POSTGRES_PASSWORD=cms
       - PGDATA=/pgdata
-    volumes:
-      - type: bind
-        source: ./pgdata
-        target: /pgdata
-        consistency: delegated
+#    volumes:
+#      - type: bind
+#        source: ./pgdata
+#        target: /pgdata
+#        consistency: delegated
     expose:
       - 5432
     ports:

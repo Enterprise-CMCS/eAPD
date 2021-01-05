@@ -1,6 +1,8 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [],
+  "allowlist": [
+    "1561|webpack-dev-server>selfsigned>node-forge"
+  ],
   "registry": "https://registry.npmjs.org"
 }
