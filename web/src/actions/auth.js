@@ -202,7 +202,7 @@ export const login = (username, password) => dispatch => {
   authenticateUser(username, password)
     .then(async res => {
       if (res.status === 'PASSWORD_EXPIRED') {
-        return dispatch(failLogin("Password has expired, please update password in Okta before attempting to login again."))
+        return dispatch(failLogin("Your password has expired. Update your password in Okta."))
       }
 
       if (res.status === 'LOCKED_OUT') {
@@ -244,7 +244,6 @@ export const login = (username, password) => dispatch => {
 export const loginOtp = otp => async dispatch => {
   dispatch(startSecondStage());
   const transaction = await retrieveExistingTransaction();
-  console.log("transaction...", transaction);
   if (transaction) {
     return verifyMFA({ transaction, otp })
       .then(async ({ sessionToken }) => {

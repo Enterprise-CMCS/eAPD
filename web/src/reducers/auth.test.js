@@ -11,6 +11,7 @@ import {
   LOGIN_MFA_ENROLL_ACTIVATE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGIN_FAILURE_NOT_IN_GROUP,
   LOGIN_MFA_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
@@ -44,6 +45,7 @@ describe('auth reducer', () => {
     mfaEnrollType: '',
     isLocked: false,
     isLoggingOut: false,
+    isNotInGroup: false,
     latestActivity: null,
     isSessionEnding: false,
     isExtendingSession: false,
@@ -127,6 +129,16 @@ describe('auth reducer', () => {
       otpStage: false,
       fetching: false,
       error: 'foo'
+    });
+  });
+
+  it('should handle LOGIN_FAILURE_NOT_IN_GROUP', () => {
+    expect(auth(initialState, { type: LOGIN_FAILURE_NOT_IN_GROUP, error: 'not in group' })).toEqual({
+      ...initialState,
+      otpStage: false,
+      fetching: false,
+      isNotInGroup: true,
+      error: 'not in group'
     });
   });
 

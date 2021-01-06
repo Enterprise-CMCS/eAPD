@@ -243,7 +243,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_FAILURE, error: "Password has expired, please update password in Okta before attempting to login again." }
+        { type: actions.LOGIN_FAILURE, error: "Your password has expired. Update your password in Okta." }
 
       ];
 
@@ -451,6 +451,26 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         { type: actions.LOCKED_OUT }
+      ];
+
+      await store.dispatch(actions.loginOtp('otp'));
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('creates LOGIN_FAILURE_NOT_IN_GROUP when not in required Okta group', async () => {
+      jest
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
+          Promise.resolve({
+            verify: jest.fn(() => Promise.reject(new Error('User is not assigned to the client application.')))
+          })
+        );
+
+      const store = mockStore({});
+      const expectedActions = [
+        { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_FAILURE_NOT_IN_GROUP, error: "User is not assigned to the client application." }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
