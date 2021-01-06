@@ -47,11 +47,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - ignore owasp zap scan:
-          type: approval
-          filters:
-            tags:
-              only: /ignore-owasp/
       - owasp zap scan:
           filters:
             tags:
