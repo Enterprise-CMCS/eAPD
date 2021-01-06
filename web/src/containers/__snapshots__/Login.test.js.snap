@@ -456,3 +456,11 @@ exports[`login component renders correctly if there is an otp authentication err
   />
 </Fragment>
 `;
+
+exports[`login component renders correctly if user is not in correct Okta group 1`] = `
+<Fragment>
+  <ConsentBanner
+    onAgree={[Function]}
+  />
+</Fragment>
+`;
