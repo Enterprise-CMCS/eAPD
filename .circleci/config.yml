@@ -51,7 +51,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-              unless: /ignore-owasp/
+              ignore: /ignore-owasp/
       - validate openapi:
           filters:
             tags:
