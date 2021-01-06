@@ -133,7 +133,12 @@ describe('auth reducer', () => {
   });
 
   it('should handle LOGIN_FAILURE_NOT_IN_GROUP', () => {
-    expect(auth(initialState, { type: LOGIN_FAILURE_NOT_IN_GROUP, error: 'not in group' })).toEqual({
+    expect(
+      auth(initialState, {
+        type: LOGIN_FAILURE_NOT_IN_GROUP,
+        error: 'not in group'
+      })
+    ).toEqual({
       ...initialState,
       otpStage: false,
       fetching: false,

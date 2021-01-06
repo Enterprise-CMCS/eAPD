@@ -266,6 +266,7 @@ Login.propTypes = {
   mfaEnrollActivateStage: PropTypes.bool.isRequired,
   verifyData: PropTypes.object.isRequired,
   isLocked: PropTypes.bool.isRequired,
+  isNotInGroup: PropTypes.bool.isRequired,
   requestAccess: PropTypes.bool.isRequired,
   requestAccessSuccess: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,

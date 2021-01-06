@@ -19,7 +19,9 @@ describe('<LoginGroupError />', () => {
   test('contact message renders', () => {
     const { getByText } = renderUtils;
     expect(
-      getByText(/You don’t have the correct job code to access the eAPD system./)
+      getByText(
+        /You don’t have the correct job code to access the eAPD system./
+      )
     ).toBeTruthy();
   });
 
