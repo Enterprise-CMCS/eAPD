@@ -50,7 +50,6 @@ workflows:
       - owasp zap scan:
           filters:
             tags:
-#              only: /.*/
               ignore: ignore-owasp
       - validate openapi:
           filters:
