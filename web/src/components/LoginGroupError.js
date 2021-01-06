@@ -9,7 +9,11 @@ const LoginLocked = () => {
             <img src="/static/icons/error.svg" alt="Error Icon" height="40" />
             <span>Job Code Missing</span>
           </h1>
-          <p>You don’t have the correct job code to access the eAPD system. The <a href="#">[help doc link]</a> will help you with instructions on getting the correct job code in your EUA account.</p>
+          <p>
+            You don’t have the correct job code to access the eAPD system. The{' '}
+            <a href="#">[help doc link]</a> will help you with instructions on
+            getting the correct job code in your EUA account.
+          </p>
           <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
             <a href="/" className="ds-c-button ds-c-button--transparent">
               Cancel

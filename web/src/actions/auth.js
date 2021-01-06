@@ -69,7 +69,10 @@ export const mfaEnrollActivate = (mfaEnrollType, activationData) => ({
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
-export const failLoginNotInGroup = error => ({ type: LOGIN_FAILURE_NOT_IN_GROUP, error });
+export const failLoginNotInGroup = error => ({
+  type: LOGIN_FAILURE_NOT_IN_GROUP,
+  error
+});
 export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
 export const failLoginLocked = () => ({ type: LOCKED_OUT });
 export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
@@ -202,7 +205,9 @@ export const login = (username, password) => dispatch => {
   authenticateUser(username, password)
     .then(async res => {
       if (res.status === 'PASSWORD_EXPIRED') {
-        return dispatch(failLogin("Your password has expired. Update your password in Okta."))
+        return dispatch(
+          failLogin('Your password has expired. Update your password in Okta.')
+        );
       }
 
       if (res.status === 'LOCKED_OUT') {
@@ -235,7 +240,7 @@ export const login = (username, password) => dispatch => {
       }
       return null;
     })
-    .catch(error => {      
+    .catch(error => {
       const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
     });
@@ -254,7 +259,7 @@ export const loginOtp = otp => async dispatch => {
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';
-        if (reason === 'User is not assigned to the client application.' ) {
+        if (reason === 'User is not assigned to the client application.') {
           dispatch(failLoginNotInGroup(reason));
         } else if (reason === 'User Locked') {
           dispatch(failLoginLocked(reason));
