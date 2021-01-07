@@ -53,6 +53,7 @@ const LoginApplication = ({
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
 
+  // TODO: test
   const handleFactorSelection = async selected => {
     if (
       selected === MFA_FACTOR_TYPES.SMS ||
@@ -68,6 +69,7 @@ const LoginApplication = ({
     }
   };
 
+  // TODO: test
   const handleVerificationCode = async code => {
     const route = await mfaActivation(code);
     if (route) {
@@ -75,11 +77,13 @@ const LoginApplication = ({
     }
   };
 
+  // TODO: test
   const handlePhoneSubmit = userPhoneNumber => {
     mfaAction(mfaEnrollType, userPhoneNumber);
     history.push('/login/mfa/activate');
   };
 
+  // TODO: test
   const handleCreateAccessRequest = async states => {
     const route = await createAccessRequestAction(states);
     if (route) {
@@ -87,10 +91,12 @@ const LoginApplication = ({
     }
   };
 
+  // TODO: test
   const handleCompleteAccessRequest = async () => {
     await completeAccessToStateAction();
   };
 
+  // TODO: test
   const handleLogin = async (username, password) => {
     const route = await loginAction(username, password);
     if (route) {
@@ -98,6 +104,7 @@ const LoginApplication = ({
     }
   };
 
+  // TODO: test
   const handleLoginOtp = async otp => {
     const route = await otpAction(otp);
     if (route) {
@@ -105,6 +112,7 @@ const LoginApplication = ({
     }
   };
 
+  // TODO: test
   const hideConsent = () => {
     setConsented();
     setShowConsent(false);
@@ -120,6 +128,7 @@ const LoginApplication = ({
     if (from.pathname !== '/logout') {
       return <Redirect to={from} push />;
     }
+    // TODO: test
     return <Redirect to="/" push />;
   }
 
@@ -168,6 +177,7 @@ LoginApplication.defaultProps = {
   verifyData: {}
 };
 
+// TODO: test
 const mapStateToProps = (
   {
     auth: {

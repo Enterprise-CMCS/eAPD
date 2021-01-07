@@ -1,6 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
+import { renderWithConnection } from 'apd-testing-library';
 import { plain as LoginApplication } from './LoginApplication';
 import ConsentBanner from '../components/ConsentBanner';
 import LoginPageRoutes from './LoginPageRoutes';
@@ -30,9 +31,6 @@ describe('Login Application', () => {
   beforeEach(() => {
     history.goBack.resetHistory();
     history.push.resetHistory();
-  });
-
-  afterEach(() => {
     document.cookie = null;
   });
 
@@ -41,6 +39,28 @@ describe('Login Application', () => {
       <LoginApplication {...props} history={history} />
     );
     expect(component.type()).toEqual(ConsentBanner);
+  });
+
+  it('displays authentication error message', () => {
+    setConsented();
+    const { getAllByText } = renderWithConnection(
+      <LoginApplication
+        {...props}
+        error="Authentication failed"
+        history={history}
+      />
+    );
+    expect(
+      getAllByText(/Please contact your State Administrator/i).length
+    ).toBeGreaterThan(0);
+  });
+
+  it('displays generic error message', () => {
+    setConsented();
+    const { getAllByText } = renderWithConnection(
+      <LoginApplication {...props} error="generic error" history={history} />
+    );
+    expect(getAllByText(/Something went wrong/i).length).toBeGreaterThan(0);
   });
 
   it('should redirect to root if authenticated', () => {
@@ -68,7 +88,7 @@ describe('Login Application', () => {
     expect(component.props().to.pathname).toEqual('/dashboard');
   });
 
-  it('should show the LoginPageRoutes if user is not logged in but has consented', () => {
+  it('should show the LoginApplication if user is not logged in but has consented', () => {
     setConsented();
     const component = shallow(
       <LoginApplication {...props} history={history} />

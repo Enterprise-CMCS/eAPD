@@ -191,13 +191,13 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
 export const mfaActivate = code => async dispatch => {
   const transaction = await retrieveExistingTransaction();
 
-  const activateTransaciton = await transaction.activate({
+  const activateTransaction = await transaction.activate({
     passCode: code
   });
 
-  if (activateTransaciton.status === 'SUCCESS') {
-    const expiresAt = await setTokens(activateTransaciton.sessionToken);
-    dispatch(setupTokenManager());
+  if (activateTransaction.status === 'SUCCESS') {
+    const expiresAt = await setTokens(activateTransaction.sessionToken);
+    // dispatch(setupTokenManager());
     dispatch(updateSessionExpiration(expiresAt));
     return dispatch(getCurrentUser());
   }
@@ -235,7 +235,7 @@ export const login = (username, password) => dispatch => {
 
       if (res.status === 'SUCCESS') {
         const expiresAt = await setTokens(res.sessionToken);
-        dispatch(setupTokenManager());
+        // dispatch(setupTokenManager());
         dispatch(updateSessionExpiration(expiresAt));
         return dispatch(getCurrentUser());
       }
@@ -255,7 +255,7 @@ export const loginOtp = otp => async dispatch => {
     return verifyMFA({ transaction, otp })
       .then(async ({ sessionToken }) => {
         const expiresAt = await setTokens(sessionToken);
-        dispatch(setupTokenManager());
+        // dispatch(setupTokenManager());
         dispatch(updateSessionExpiration(expiresAt));
         return dispatch(getCurrentUser());
       })
@@ -273,25 +273,31 @@ export const loginOtp = otp => async dispatch => {
   return null;
 };
 
-export const createAccessRequest = states => dispatch =>
-  states.forEach(stateId => {
-    axios
-      .post(`/states/${stateId}/affiliations`)
-      .then(() => {
-        dispatch(getCurrentUser());
-        return '/login/affiliations/thank-you';
-      })
-      .catch(error => {
-        const reason = error ? error.message : 'N/A';
-        dispatch(failLogin(reason));
-        return null;
-      });
-  });
+export const createAccessRequest = states => async dispatch => {
+  let failureReason = null;
+  await Promise.all(
+    states.map(async stateId => {
+      await axios
+        .post(`/states/${stateId}/affiliations`)
+        .then(() => {})
+        .catch(error => {
+          failureReason = error ? error.message : 'N/A';
+        });
+    })
+  );
+
+  if (failureReason) {
+    dispatch(failLogin(failureReason));
+    return null;
+  }
+  dispatch(getCurrentUser());
+  return '/login/affiliations/thank-you';
+};
 
 export const checkAuth = () => async dispatch => {
+  dispatch(setupTokenManager());
   dispatch(requestAuthCheck());
 
-  dispatch(setupTokenManager());
   const expiresAt = await renewTokens();
   dispatch(updateSessionExpiration(expiresAt));
 

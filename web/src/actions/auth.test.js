@@ -7,6 +7,7 @@ import axios from '../util/api';
 import * as mockAuth from '../util/auth';
 import mockApp from './app';
 import mockAdmin from './admin';
+import { MFA_FACTOR_TYPES } from '../constants';
 
 jest.mock('./app', () => {
   return {
@@ -225,6 +226,43 @@ describe('auth actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    it('redirects the user to enroll in MFA if MFA_ENROLL', async () => {
+      const signInSpy = jest
+        .spyOn(mockAuth, 'authenticateUser')
+        .mockImplementation(() =>
+          Promise.resolve({
+            sessionToken: 'testSessionToken',
+            status: 'MFA_ENROLL'
+          })
+        );
+
+      const factorSpy = jest
+        .spyOn(mockAuth, 'getAvailableFactors')
+        .mockImplementation(() => ['factors']);
+
+      const store = mockStore({});
+      const expectedActions = [
+        {
+          type: actions.LOGIN_REQUEST
+        },
+        {
+          type: actions.LOGIN_MFA_ENROLL_START,
+          data: {
+            factors: ['factors'],
+            phoneNumber: undefined
+          }
+        }
+      ];
+
+      const redirect = await store.dispatch(actions.login('name', 'secret'));
+      expect(signInSpy).toHaveBeenCalledTimes(1);
+      await expect(factorSpy).toHaveBeenCalledTimes(1);
+
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(redirect).toEqual('/login/mfa/enroll');
+    });
+
     it('creates LOGIN_SUCCESS after successful second stage of multi-factor auth', async () => {
       const verify = jest.fn(() =>
         Promise.resolve({ sessionToken: 'testSessionToken' })
@@ -262,6 +300,27 @@ describe('auth actions', () => {
       await expect(getTokenSpy).toHaveBeenCalledTimes(1);
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('returns null if status is invalid', async () => {
+      const signInSpy = jest
+        .spyOn(mockAuth, 'authenticateUser')
+        .mockImplementation(() =>
+          Promise.resolve({
+            sessionToken: 'testSessionToken',
+            status: 'BAD_STATUS'
+          })
+        );
+
+      const store = mockStore({});
+      const expectedActions = [{ type: actions.LOGIN_REQUEST }];
+
+      const redirect = await store.dispatch(actions.login('name', 'secret'));
+      expect(signInSpy).toHaveBeenCalledTimes(1);
+
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(redirect).toBeNull();
     });
 
     it('creates LOGIN_MFA_FAILURE when no transaction exists', async () => {
@@ -574,7 +633,7 @@ describe('auth actions', () => {
       );
       jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve({ status: 'success' }));
+        .mockImplementation(() => Promise.resolve(new Date().getTime() + 5000));
       jest
         .spyOn(mockAuth, 'renewTokens')
         .mockImplementation(() => new Promise(() => {}));
@@ -651,6 +710,353 @@ describe('auth actions', () => {
       await store.dispatch(actions.extendSession());
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('mfaConfig', () => {
+    let getFactorSpy;
+
+    afterEach(() => {
+      fetchMock.reset();
+      jest.clearAllMocks();
+    });
+
+    it('should handle no factor', async () => {
+      getFactorSpy = jest
+        .spyOn(mockAuth, 'getFactor')
+        .mockImplementation(() => Promise.resolve(null));
+
+      const store = mockStore({});
+
+      const expectedActions = [];
+
+      const result = await store.dispatch(
+        actions.mfaConfig(MFA_FACTOR_TYPES.SMS, '555-555-5555')
+      );
+      expect(result).toBeNull();
+      expect(getFactorSpy).toHaveBeenCalledTimes(1);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should handle bad status', async () => {
+      getFactorSpy = jest.spyOn(mockAuth, 'getFactor').mockImplementation(() =>
+        Promise.resolve({
+          enroll: jest.fn(() =>
+            Promise.resolve({
+              status: 'MFA_FAILED',
+              factor: {
+                activation: 'activation'
+              }
+            })
+          )
+        })
+      );
+
+      const store = mockStore({});
+
+      const expectedActions = [];
+
+      const result = await store.dispatch(
+        actions.mfaConfig(MFA_FACTOR_TYPES.SMS, '555-555-5555')
+      );
+      expect(result).toBeNull();
+      expect(getFactorSpy).toHaveBeenCalledTimes(1);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('valid factor', () => {
+    let getFactorSpy;
+    beforeEach(() => {
+      getFactorSpy = jest.spyOn(mockAuth, 'getFactor').mockImplementation(() =>
+        Promise.resolve({
+          enroll: jest.fn(() =>
+            Promise.resolve({
+              status: 'MFA_ENROLL_ACTIVATE',
+              factor: {
+                activation: 'activation'
+              }
+            })
+          )
+        })
+      );
+    });
+
+    afterEach(() => {
+      fetchMock.reset();
+      jest.clearAllMocks();
+    });
+
+    it('should redirect the user to activate SMS factor', async () => {
+      const store = mockStore({});
+
+      const expectedActions = [
+        {
+          type: actions.LOGIN_MFA_ENROLL_ACTIVATE,
+          data: {
+            activationData: 'activation',
+            mfaEnrollType: MFA_FACTOR_TYPES.SMS
+          }
+        }
+      ];
+
+      await store.dispatch(
+        actions.mfaConfig(MFA_FACTOR_TYPES.SMS, '555-555-5555')
+      );
+      expect(getFactorSpy).toHaveBeenCalledTimes(1);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should redirect the user to activate CALL factor', async () => {
+      const store = mockStore({});
+
+      const expectedActions = [
+        {
+          type: actions.LOGIN_MFA_ENROLL_ACTIVATE,
+          data: {
+            activationData: 'activation',
+            mfaEnrollType: MFA_FACTOR_TYPES.CALL
+          }
+        }
+      ];
+
+      await store.dispatch(
+        actions.mfaConfig(MFA_FACTOR_TYPES.CALL, '555-555-5555')
+      );
+      expect(getFactorSpy).toHaveBeenCalledTimes(1);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should redirect the user to activate EMAIL factor', async () => {
+      const store = mockStore({});
+
+      const expectedActions = [
+        {
+          type: actions.LOGIN_MFA_ENROLL_ACTIVATE,
+          data: {
+            activationData: 'activation',
+            mfaEnrollType: MFA_FACTOR_TYPES.EMAIL
+          }
+        }
+      ];
+
+      await store.dispatch(actions.mfaConfig(MFA_FACTOR_TYPES.EMAIL));
+      expect(getFactorSpy).toHaveBeenCalledTimes(1);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should redirect the user to activate OKTA factor', async () => {
+      const store = mockStore({});
+
+      const expectedActions = [
+        {
+          type: actions.LOGIN_MFA_ENROLL_ACTIVATE,
+          data: {
+            activationData: 'activation',
+            mfaEnrollType: MFA_FACTOR_TYPES.OKTA
+          }
+        }
+      ];
+
+      await store.dispatch(actions.mfaConfig(MFA_FACTOR_TYPES.OKTA));
+      expect(getFactorSpy).toHaveBeenCalledTimes(1);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should redirect the user to activate PUSH factor', async () => {
+      const store = mockStore({});
+
+      const expectedActions = [
+        {
+          type: actions.LOGIN_MFA_ENROLL_ACTIVATE,
+          data: {
+            activationData: 'activation',
+            mfaEnrollType: MFA_FACTOR_TYPES.PUSH
+          }
+        }
+      ];
+
+      await store.dispatch(actions.mfaConfig(MFA_FACTOR_TYPES.PUSH));
+      expect(getFactorSpy).toHaveBeenCalledTimes(1);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('mfaAddPhone', () => {
+    it('handles adding a phone for SMS', async () => {
+      const store = mockStore({});
+
+      const expectedActions = [
+        {
+          type: actions.LOGIN_MFA_ENROLL_ADD_PHONE,
+          data: MFA_FACTOR_TYPES.SMS
+        }
+      ];
+
+      await store.dispatch(actions.mfaAddPhone(MFA_FACTOR_TYPES.SMS));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('handles adding a phone for SMS', async () => {
+      const store = mockStore({});
+
+      const expectedActions = [
+        {
+          type: actions.LOGIN_MFA_ENROLL_ADD_PHONE,
+          data: MFA_FACTOR_TYPES.CALL
+        }
+      ];
+
+      await store.dispatch(actions.mfaAddPhone(MFA_FACTOR_TYPES.CALL));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('mfaActivate', () => {
+    let transactionSpy;
+    beforeEach(() => {
+      fetchMock.reset();
+      jest.clearAllMocks();
+    });
+
+    it('should activate a code', async () => {
+      transactionSpy = jest
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
+          Promise.resolve({
+            activate: jest.fn(() =>
+              Promise.resolve({
+                status: 'SUCCESS'
+              })
+            )
+          })
+        );
+
+      const expiresAt = new Date().getTime() + 5000;
+      jest
+        .spyOn(mockAuth, 'setTokens')
+        .mockImplementation(() => Promise.resolve(expiresAt));
+
+      const store = mockStore({});
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: ['MO'] });
+
+      const expectedActions = [
+        {
+          type: actions.UPDATE_EXPIRATION,
+          data: expiresAt
+        },
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: {
+            name: 'moop',
+            activities: [],
+            states: ['MO']
+          }
+        },
+        {
+          type: actions.RESET_LOCKED_OUT
+        }
+      ];
+
+      await store.dispatch(actions.mfaActivate('1234'));
+      expect(transactionSpy).toHaveBeenCalledTimes(1);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should not activate a code if the status is not SUCCESS', async () => {
+      transactionSpy = jest
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
+          Promise.resolve({
+            activate: jest.fn(() =>
+              Promise.resolve({
+                status: 'BAD_STATUS'
+              })
+            )
+          })
+        );
+
+      const store = mockStore({});
+      const results = await store.dispatch(actions.mfaActivate('1234'));
+      expect(transactionSpy).toHaveBeenCalledTimes(1);
+      expect(results).toBeNull();
+    });
+  });
+
+  describe('createAccessRequest', () => {
+    beforeEach(() => {
+      fetchMock.reset();
+      jest.clearAllMocks();
+
+      fetchMock
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: [] });
+    });
+    xit('should handle creating a state affiliation', async () => {
+      fetchMock.onPost('/states/fl/affiliations').reply(200);
+
+      const store = mockStore({});
+      const expectedActions = [];
+      const response = await store.dispatch(
+        actions.createAccessRequest(['fl'])
+      );
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(response).toEqual('/login/affiliations/thank-you');
+    });
+
+    xit('should handle creating multiple state affiliations', async () => {
+      fetchMock.onPost('/states/fl/affiliations').reply(200);
+      fetchMock.onPost('/states/md/affiliations').reply(200);
+      fetchMock.onPost('/states/az/affiliations').reply(200);
+
+      const store = mockStore({});
+      const expectedActions = [];
+      const response = await store.dispatch(
+        actions.createAccessRequest(['fl', 'md', 'az'])
+      );
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(response).toEqual('/login/affiliations/thank-you');
+    });
+
+    it('should handle an error when creating a state affiliation', async () => {
+      fetchMock
+        .onPost('/states/fl/affiliations')
+        .reply(401, { error: 'Unauthorized' });
+      const store = mockStore({});
+      const expectedActions = [
+        {
+          type: actions.LOGIN_FAILURE,
+          error: 'Request failed with status code 401'
+        }
+      ];
+      const response = await store.dispatch(
+        actions.createAccessRequest(['fl'])
+      );
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(response).toBeNull();
+    });
+
+    it('should handle an error when creating multiple state affiliations', async () => {
+      fetchMock.onPost('/states/fl/affiliations').reply(200);
+      fetchMock
+        .onPost('/states/md/affiliations')
+        .reply(401, { error: 'Unauthorized' });
+      fetchMock.onPost('/states/az/affiliations').reply(200);
+
+      const store = mockStore({});
+      const expectedActions = [
+        {
+          type: actions.LOGIN_FAILURE,
+          error: 'Request failed with status code 401'
+        }
+      ];
+      const response = await store.dispatch(
+        actions.createAccessRequest(['fl', 'md', 'az'])
+      );
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(response).toBeNull();
     });
   });
 });
