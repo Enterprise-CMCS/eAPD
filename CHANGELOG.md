@@ -1,6 +1,6 @@
 # Next release
 
-Anticipated release: December 21, 2020
+Anticipated release: January 8, 2021
 
 #### 🚀 New features
 
@@ -8,6 +8,7 @@ Anticipated release: December 21, 2020
 - Adds State Admin panel ([#2583])
 - Updated roles and add roles endpoint ([#2692])
 - Update session management to warn users that their session is about to expire ([#2702])
+- Adds confirmation dialog before unchecking FFY year([#2445])
 
 #### 🐛 Bugs fixed
 
@@ -30,5 +31,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2692]: https://github.com/CMSgov/eAPD/issues/2692
 [#2702]: https://github.com/CMSgov/eAPD/issues/2702
 [#2720]: https://github.com/CMSgov/eAPD/issues/2720
+[#2445]: https://github.com/CMSgov/eAPD/issues/2445
 [ghsa-vrv8-v4w8-f95h]: https://github.com/advisories/GHSA-vrv8-v4w8-f95h
 [ghsa-w7rc-rwvf-8q5r]: https://github.com/advisories/GHSA-w7rc-rwvf-8q5r
