@@ -64,7 +64,7 @@ describe('apd summary component', () => {
   });
 
   test('dispatches when removing a year', () => {
-    window.confirm = jest.fn(() => true) 
+    window.confirm = jest.fn(() => true);
 
     shallow(<ApdSummary {...props} />)
       .find('ChoiceList')
