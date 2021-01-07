@@ -200,9 +200,9 @@ workflows:
               ignore:
                 - master
           requires:
-#            - backend dependency vulnerability scan
+            - backend dependency vulnerability scan
             - frontend build preview
-#            - frontend dependency vulnerability scan
+            - frontend dependency vulnerability scan
             - yaml test
 
       - store artifacts:
