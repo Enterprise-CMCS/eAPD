@@ -32,12 +32,20 @@ const ApdSummary = ({
   yearOptions
 }) => {
   const handleYears = e => {
-    const { value } = e.target;
-    if (years.includes(value)) {
-      removeApdYear(value);
+    const year = e.target.value;
+
+    if(e.target.checked == false) {
+      let confirmation = window.confirm(`Unchecking Federal Fiscal Year ${year} will permanently delete any FFY ${year} specific data in the current APD.`);
+      if(confirmation == true) {
+        removeApdYear(year);
+      } else {
+        e.target.checked = true;
+      }
     } else {
-      addApdYear(value);
+      addApdYear(year);
+      e.target.checked = true;
     }
+
   };
 
   const syncRichText = action => html => {
