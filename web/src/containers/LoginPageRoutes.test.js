@@ -1,7 +1,6 @@
 import React from 'react';
 import { renderWithConnection } from 'apd-testing-library';
 import LoginPageRoutes from './LoginPageRoutes';
-import { expectation } from 'sinon';
 
 const props = {
   hasEverLoggedOn: false,
