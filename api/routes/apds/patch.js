@@ -1,6 +1,7 @@
 const { apply_patch: applyPatch } = require('jsonpatch');
 const jsonpointer = require('jsonpointer');
 
+const sanitize = require('../../util/sanitize');
 const logger = require('../../logger')('apds route put');
 const { getAPDByID: ga, updateAPDDocument: ua } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
@@ -55,7 +56,11 @@ module.exports = (
 
         let updatedDocument;
         try {
-          updatedDocument = patchObject(currentDocument, patch);
+          const sanitizedPatch = patch.map(({ value, ...rest }) => ({
+            ...rest,
+            value: sanitize(value)
+          }));
+          updatedDocument = patchObject(currentDocument, sanitizedPatch);
         } catch (e) {
           // This can happen for a variety of reasons. E.g., a patch tries to
           // operate on a property that doesn't currently exist.
