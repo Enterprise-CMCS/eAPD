@@ -126,7 +126,7 @@ class RichText extends Component {
             menubar: '',
             paste_data_images: true,
             plugins,
-            relative_urls : false,
+            relative_urls: false,
             setup: setupTinyMCE(upload),
             toolbar
           }}
