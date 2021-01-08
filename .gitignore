@@ -18,6 +18,3 @@ Makefile
 # use npm to manage packages, not yarn
 api/yarn.lock
 web/yarn.lock
-
-# Terraform ignores
-*.terraform
