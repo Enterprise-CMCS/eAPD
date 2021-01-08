@@ -114,6 +114,7 @@ export const removeTokenListeners = () => {
 
 // Log out methods
 export const logoutAndClearTokens = async () => {
+  await oktaAuth.revokeAccessToken();
   await oktaAuth.closeSession();
 };
 
