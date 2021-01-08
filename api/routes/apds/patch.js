@@ -56,7 +56,7 @@ module.exports = (
 
         let updatedDocument;
         try {
-          const sanitizedPatch = patch.map(({ value, ...rest }) => ({
+          const sanitizedPatch = patch.map(({ value = '', ...rest }) => ({
             ...rest,
             value: sanitize(value)
           }));
