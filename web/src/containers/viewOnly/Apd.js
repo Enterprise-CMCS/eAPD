@@ -54,7 +54,7 @@ class ApdViewOnly extends Component {
           {'< Back to APD'}
         </Button>
         <ExportInstructions />
-        <h1 id="start-main-content" className="ds-h1 ds-u-margin-top--2">
+        <h1 className="ds-h1 ds-u-margin-top--2">
           <span className="ds-h6 ds-u-display--block">{apd.name}</span>
           {place.name} {year} APD
         </h1>
