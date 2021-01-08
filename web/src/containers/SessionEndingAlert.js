@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Countdown, { zeroPad } from 'react-countdown';
 import { v4 as uuidv4 } from 'uuid';
+import { useHistory } from 'react-router-dom';
 
 import { Spinner } from '../components/Icons';
 
@@ -17,6 +18,7 @@ const SessionEndingAlert = ({
   extend,
   logoutAction
 }) => {
+  const history = useHistory();
   const className = isSessionEnding
     ? 'alert--session-expiring__active'
     : 'alert--session-expiring__inactive';
@@ -29,6 +31,11 @@ const SessionEndingAlert = ({
         If you’d like to keep working, choose continue.
       </span>
     );
+  };
+
+  const logoutAndRedirect = async () => {
+    await logoutAction();
+    history.push('/login');
   };
 
   return (
@@ -54,7 +61,7 @@ const SessionEndingAlert = ({
             </Button>,
             <Button
               variation="transparent"
-              onClick={logoutAction}
+              onClick={logoutAndRedirect}
               key={uuidv4()}
             >
               {isLoggingOut && <Spinner />}
@@ -72,7 +79,7 @@ const SessionEndingAlert = ({
             date={expiresAt - 5000}
             key={uuidv4()}
             renderer={createTimer}
-            onComplete={logoutAction}
+            onComplete={logoutAndRedirect}
             onStop={extend}
           />
         </Dialog>

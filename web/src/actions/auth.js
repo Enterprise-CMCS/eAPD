@@ -120,10 +120,11 @@ const getCurrentUser = () => dispatch =>
       return null;
     });
 
-export const logout = () => dispatch => {
+export const logout = () => async dispatch => {
   dispatch(requestLogout());
-  logoutAndClearTokens();
+  await logoutAndClearTokens();
   dispatch(completeLogout());
+  return '/login';
 };
 
 const setupTokenManager = () => (dispatch, getState) => {

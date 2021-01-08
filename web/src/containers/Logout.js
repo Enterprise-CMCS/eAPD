@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import { logout as dispatchLogout } from '../actions/auth';
 
-const Logout = ({ logout }) => {
-  logout();
+const Logout = async ({ logout }) => {
+  await logout();
   return null;
 };
 
