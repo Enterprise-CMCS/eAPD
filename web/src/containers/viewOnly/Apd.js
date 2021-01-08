@@ -45,7 +45,7 @@ class ApdViewOnly extends Component {
     }
 
     return (
-      <main className="site-body ds-l-container ds-u-padding--3">
+      <main id="start-main-content" className="ds-l-container ds-u-padding--3">
         <Button
           className="visibility--screen"
           variation="transparent"
