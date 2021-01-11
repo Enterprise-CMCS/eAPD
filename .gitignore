@@ -19,5 +19,5 @@ Makefile
 api/yarn.lock
 web/yarn.lock
 
-# Terraform
+# Terraform ignores
 *.terraform
