@@ -8,7 +8,7 @@ node_modules
 .nova
 
 npm-debug.log*
-pgdata
+pgdata/*
 __files
 api/test-data/files
 notes.md
