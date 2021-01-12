@@ -46,14 +46,15 @@ class ApdViewOnly extends Component {
 
     return (
       <main id="start-main-content" className="ds-l-container ds-u-padding--3">
-        <div class="anchor" id="top-anchor"></div>
+        <div className="anchor" id="top-anchor">
           <Button
             className="visibility--screen"
             variation="transparent"
             onClick={this.open(apd.id)}            
           >
-          {'< Back to APD'}
-        </Button>
+            {'< Back to APD'}
+          </Button>
+        </div>
         <ExportInstructions />
         <h1 className="ds-h1 ds-u-margin-top--2">
           <span className="ds-h6 ds-u-display--block">{apd.name}</span>
