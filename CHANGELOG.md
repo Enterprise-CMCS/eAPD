@@ -8,11 +8,8 @@ Anticipated release: January 8, 2021
 - Adds State Admin panel ([#2583])
 - Updated roles and add roles endpoint ([#2692])
 - Update session management to warn users that their session is about to expire ([#2702])
-<<<<<<< HEAD
 - Updates logos in footer ([#2716])
-=======
 - Increases outcomes and metrics field size to be multiline (4) ([#2724])
->>>>>>> master
 
 #### 🐛 Bugs fixed
 
