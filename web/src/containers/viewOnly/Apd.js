@@ -46,11 +46,12 @@ class ApdViewOnly extends Component {
 
     return (
       <main id="start-main-content" className="ds-l-container ds-u-padding--3">
-        <Button
-          className="visibility--screen"
-          variation="transparent"
-          onClick={this.open(apd.id)}
-        >
+        <div class="anchor" id="top-anchor"></div>
+          <Button
+            className="visibility--screen"
+            variation="transparent"
+            onClick={this.open(apd.id)}            
+          >
           {'< Back to APD'}
         </Button>
         <ExportInstructions />
@@ -77,7 +78,7 @@ class ApdViewOnly extends Component {
         <ProposedBudget />
         <hr className="section-rule" />
         <AssuranceAndCompliance />
-        <a href="#start-main-content" className="visibility--screen">
+        <a href="#top-anchor" className="visibility--screen">
           ^ Return to the top of the page
         </a>
       </main>
