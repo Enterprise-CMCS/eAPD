@@ -37,7 +37,7 @@ const Footer = () => {
         <div className="ds-l-container">
           <div className="ds-l-row">
             <p className="ds-l-md-col--6">
-              Email <a href="mailto:CMS-EAPD@cms.gov">CMS-EAPD@cms.gov</a> for
+              Email <a href="mailto:CMS-EAPD@cms.hhs.gov">CMS-EAPD@cms.hhs.gov</a> for
               help or feedback.
             </p>
             <p className="ds-l-md-col--6 ds-u-text-align--right">
