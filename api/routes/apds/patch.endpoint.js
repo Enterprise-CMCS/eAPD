@@ -44,6 +44,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       ];
 
       const response = await api.patch(url(4001), data);
+      delete response.data.updated;
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -59,6 +60,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       ];
 
       const response = await api.patch(url(4001), data);
+      delete response.data.updated;
 
       expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
@@ -113,6 +115,25 @@ describe('APD endpoint | PATCH /apds/:id', () => {
 
       expect(response.status).toEqual(200);
       expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+      expect(response.data).toMatchSnapshot();
+    });
+
+    it('prevents a dangerous value from being stored', async () => {
+      const data = [
+        {
+          op: 'replace',
+          path: `/programOverview`,
+          value:
+            '<svg><a xlink:href="javascript:alert(document.domain)"><text x="20" y="20">XSS</text></a>'
+        }
+      ];
+
+      const response = await api.patch(url(4001), data);
+      const { programOverview } = response.data;
+      delete response.data.updated;
+
+      expect(response.status).toEqual(200);
+      expect(programOverview).toEqual('<a>XSS</a>');
       expect(response.data).toMatchSnapshot();
     });
   });
