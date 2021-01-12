@@ -89,6 +89,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pg": "^7.18.2",
+    "sanitize-html": "^2.3.0",
     "uuid": "^3.4.0",
     "winston": "^3.3.3",
     "zxcvbn": "^4.4.2"
