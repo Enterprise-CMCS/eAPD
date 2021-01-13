@@ -20,23 +20,20 @@ module.exports = (
 ) => {
   logger.silly('setting up GET /apds/:id/files/:fileID route');
 
-  app.get(
-    '/apds/:id/files/:fileID',
-    async (req, res) => {
-      try {
-        if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
-          const file = await getFile(req.params.fileID);
-          res.send(file).end();
-        } else {
-          res.status(400).end();
-        }
-      } catch (e) {
-        logger.error({ id: req.id, message: 'error fetching file' });
-        logger.error({ id: req.id, message: e });
+  app.get('/apds/:id/files/:fileID', async (req, res) => {
+    try {
+      if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
+        const file = await getFile(req.params.fileID);
+        res.send(file).end();
+      } else {
         res.status(400).end();
       }
+    } catch (e) {
+      logger.error({ id: req.id, message: 'error fetching file' });
+      logger.error({ id: req.id, message: e });
+      res.status(400).end();
     }
-  );
+  });
 
   logger.silly('setting up POST /apds/:id/files route');
 
@@ -51,6 +48,7 @@ module.exports = (
     async (req, res) => {
       try {
         const metadata = req.body.metadata || null;
+        console.log({ metadata, req });
         const size = req.file && req.file.size ? req.file.size : 0;
 
         const fileID = await createNewFileForAPD(

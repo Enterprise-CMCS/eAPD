@@ -6,15 +6,17 @@ import { Editor } from '@tinymce/tinymce-react';
 
 // A theme is required
 import 'tinymce/themes/silver';
+import 'tinymce/icons/default';
 
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/autoresize';
 import 'tinymce/plugins/lists';
-import 'tinymce/plugins/media'; // https://github.com/advisories/GHSA-vrv8-v4w8-f95h
+import 'tinymce/plugins/image';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/spellchecker';
 import 'tinymce/plugins/help';
+import 'tinymce/plugins/link';
 
 import { uploadFile } from '../actions/editApd';
 import { generateKey } from '../util';
@@ -96,10 +98,11 @@ class RichText extends Component {
       'advlist',
       'autoresize',
       'lists',
-      'media',
       'paste',
       'spellchecker',
-      'help'
+      'help',
+      'link',
+      'image'
     ];
 
     // https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/
@@ -111,6 +114,7 @@ class RichText extends Component {
       'outdent indent',
       'numlist bullist',
       'formatselect',
+      'link',
       'eapdImageUpload',
       'help'
     ].join(' | ');
@@ -122,13 +126,24 @@ class RichText extends Component {
           init={{
             autoresize_bottom_margin: 0,
             browser_spellcheck: true,
+            file_picker_types: 'image',
             images_upload_handler: this.uploadImage(),
+            images_upload_credentials: true,
+            images_file_types: 'jpeg,jpg,png',
+            a11y_advanced_options: true,
             menubar: '',
             paste_data_images: true,
             plugins,
-            relative_urls : false,
+            relative_urls: false,
             setup: setupTinyMCE(upload),
-            toolbar
+            toolbar,
+            encoding: 'xml',
+            forced_root_block: 'p',
+            invalid_elements: 'script',
+            remove_trailing_brs: true,
+            link_assume_external_targets: true,
+            default_link_target: '_blank',
+            toolbar_mode: 'wrap'
           }}
           value={content}
           onEditorChange={this.onEditorChange}
