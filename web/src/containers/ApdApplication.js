@@ -66,7 +66,8 @@ ApdApplication.propTypes = {
 };
 
 ApdApplication.defaultProps = {
-  apdId: null
+  apdId: null,
+  role: 'Pending role'
 };
 
 const mapStateToProps = state => ({
