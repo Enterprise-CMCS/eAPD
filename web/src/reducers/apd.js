@@ -178,6 +178,11 @@ export const getPatchesToRemoveYear = (state, year) => {
 
     patches.push({
       op: 'remove',
+      path: `/activities/${activityIndex}/costAllocationNarrative/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
       path: `/activities/${activityIndex}/quarterlyFFP/${year}`
     });
   });
