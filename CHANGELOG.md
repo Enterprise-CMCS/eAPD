@@ -18,6 +18,7 @@ Anticipated release: January 8, 2021
 - displays images within the tinymce editor ([#2348])
 - updates footer email address to correct one ([#2353])
 - fixed session expiring warning bug ([#2720])
+- fixes issue where removing a FFY from program summary wouldn't remove it from the read-only view ([#2715])
 
 #### ⚙️ Behind the scenes
 
@@ -38,5 +39,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2724]: https://github.com/CMSgov/eAPD/issues/2724
 [#2741]: https://github.com/CMSgov/eAPD/issues/2741
 [#2353]: https://github.com/CMSgov/eAPD/issues/2353
+[#2715]: https://github.com/CMSgov/eAPD/issues/2715
 [ghsa-vrv8-v4w8-f95h]: https://github.com/advisories/GHSA-vrv8-v4w8-f95h
 [ghsa-w7rc-rwvf-8q5r]: https://github.com/advisories/GHSA-w7rc-rwvf-8q5r

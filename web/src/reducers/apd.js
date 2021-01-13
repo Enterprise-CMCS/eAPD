@@ -5,6 +5,7 @@ import {
   contractorDefaultHourly,
   contractorDefaultYear,
   costAllocationEntry,
+  costAllocationNarrative,
   expenseDefaultYear,
   newActivity,
   newContractor,
@@ -96,6 +97,12 @@ export const getPatchesToAddYear = (state, year) => {
       op: 'add',
       path: `/activities/${activityIndex}/costAllocation/${year}`,
       value: costAllocationEntry()
+    });
+
+    patches.push({
+      op: 'add',
+      path: `/activities/${activityIndex}/costAllocationNarrative/${year}`,
+      value: costAllocationNarrative()
     });
 
     patches.push({
