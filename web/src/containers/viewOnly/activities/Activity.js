@@ -270,8 +270,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <hr className="subsection-rule" />
       <h3>Other Funding</h3>
-
-      {Object.entries(activity.costAllocationNarrative)
+      {Object.entries(activity.costAllocation)
         .filter(([year, _]) => isYear(year)) // eslint-disable-line no-unused-vars
         .map(([year, narrative]) => (
           <Fragment>
