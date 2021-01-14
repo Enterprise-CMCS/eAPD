@@ -33,33 +33,18 @@ const ApdPreviousActivityTable = ({
       <caption className="ds-h4">HIT + HIE Federal share 90% FFP</caption>
       <thead>
         <tr>
-          <th id="prev_act_hit_header_ffy">
-            <span className="ds-u-visibility--screen-reader">Year</span>
-          </th>
-          <th id="prev_act_hithie_total" className="ds-u-text-align--right">
-            {TABLE_HEADERS.total}
-          </th>
-          <th
-            colSpan="2"
-            id="prev_act_hithie_federal"
-            className="ds-u-text-align--right"
-          >
-            {TABLE_HEADERS.federal()}
-          </th>
-        </tr>
-        <tr>
           <td className="th" aria-hidden="true" />
           <th
             id="prev_act_hithie_total_approved"
             className="ds-u-text-align--right"
           >
-            {TABLE_HEADERS.approved}
+            {TABLE_HEADERS.approvedTotal}
           </th>
           <th
             id="prev_act_hithie_federal_approved"
             className="ds-u-text-align--right"
           >
-            {TABLE_HEADERS.approved}
+            {TABLE_HEADERS.approved()}
           </th>
           <th
             id="prev_act_hithie_federal_actual"
