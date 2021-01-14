@@ -50,7 +50,7 @@ class ApdViewOnly extends Component {
           <Button
             className="visibility--screen"
             variation="transparent"
-            onClick={this.open(apd.id)}            
+            onClick={this.open(apd.id)}
           >
             {'< Back to APD'}
           </Button>
