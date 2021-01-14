@@ -27,8 +27,11 @@ export const DASHBOARD_TASK_BUTTON_TEXT = {
 };
 
 export const TABLE_HEADERS = {
-  actual: 'Actual Expenditures',
-  approved: 'Approved',
+  actual: 'Actual FFP Expenditures',
+  approvedTotal: 'Approved Total Computable Medicaid',
+  approved: (p = 90) => (
+    <span>Approved {p}% FFP</span> 
+  ),
   federal: (p = 90) => (
     <span>
       Federal share <strong>{p}%</strong> FFP
