@@ -29,9 +29,10 @@ export const uploadFile = file => async (dispatch, getState) => {
           dispatch({ type: UPLOAD_FILE_SUCCESS, url: req.data.url });
           resolve(`${apiUrl}${req.data.url}`);
         })
-        .catch(() => {
-          dispatch({ type: UPLOAD_FILE_FAILURE });
-          reject();
+        .catch(err => {
+          const message = err ? err.message : 'N/A';
+          dispatch({ type: UPLOAD_FILE_FAILURE, error: message });
+          reject(new Error('Unable to upload file'));
         });
     });
 
@@ -40,15 +41,14 @@ export const uploadFile = file => async (dispatch, getState) => {
 };
 
 // TODO
-export const downloadFile = img => async (dispatch, getState) => {
+export const downloadFile = fileID => async (dispatch, getState) => {
   dispatch({ type: DOWNLOAD_FILE_REQUEST });
-  console.log({ img });
 
   const state = getState();
   const { id: apdID } = selectApdData(state);
 
   return axios
-    .get(`/apds/${apdID}/files/filesID`)
+    .get(`/apds/${apdID}/files/${fileID}`)
     .then(req => {
       dispatch({ type: DOWNLOAD_FILE_SUCCESS });
       return req.data;
@@ -59,5 +59,3 @@ export const downloadFile = img => async (dispatch, getState) => {
       return message;
     });
 };
-
-export default uploadFile;
