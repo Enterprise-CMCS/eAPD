@@ -11,39 +11,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
   </caption>
   <thead>
     <tr>
-      <th
-        id="prev_act_hit_header_ffy"
-      >
-        <span
-          className="ds-u-visibility--screen-reader"
-        >
-          Year
-        </span>
-      </th>
-      <th
-        className="ds-u-text-align--right"
-        id="prev_act_hithie_total"
-      >
-        <span>
-          Total computable (Federal + state)
-        </span>
-      </th>
-      <th
-        className="ds-u-text-align--right"
-        colSpan="2"
-        id="prev_act_hithie_federal"
-      >
-        <span>
-          Federal share 
-          <strong>
-            90
-            %
-          </strong>
-           FFP
-        </span>
-      </th>
-    </tr>
-    <tr>
       <td
         aria-hidden="true"
         className="th"
@@ -52,19 +19,23 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         className="ds-u-text-align--right"
         id="prev_act_hithie_total_approved"
       >
-        Approved
+        Approved Total Computable Medicaid
       </th>
       <th
         className="ds-u-text-align--right"
         id="prev_act_hithie_federal_approved"
       >
-        Approved
+        <span>
+          Approved 
+          90
+          % FFP
+        </span>
       </th>
       <th
         className="ds-u-text-align--right"
         id="prev_act_hithie_federal_actual"
       >
-        Actual Expenditures
+        Actual FFP Expenditures
       </th>
     </tr>
   </thead>
