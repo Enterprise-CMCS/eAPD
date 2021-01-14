@@ -18,6 +18,7 @@ Anticipated release: January XX, 2021
 - fixed security headers
 - displays images within the tinymce editor ([#2348])
 - fixed session expiring warning bug ([#2720])
+- fixed Estimated Quarterly Expenditure table is overwriting across Activities ([#2421])
 - fixed issue with Back to APD link not displaying ([#2712])
 - updates footer email address to correct one ([#2353])
 - fixed session expiring warning bug ([#2720])
@@ -38,6 +39,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2692]: https://github.com/CMSgov/eAPD/issues/2692
 [#2702]: https://github.com/CMSgov/eAPD/issues/2702
 [#2720]: https://github.com/CMSgov/eAPD/issues/2720
+[#2421]: https://github.com/CMSgov/eAPD/issues/2720
 [#2712]: https://github.com/CMSgov/eAPD/issues/2712
 [#2724]: https://github.com/CMSgov/eAPD/issues/2724
 [#2741]: https://github.com/CMSgov/eAPD/issues/2741
