@@ -1,4 +1,5 @@
 const multer = require('multer');
+const FileType = require('file-type');
 const logger = require('../../logger')('apds file routes');
 const { can, userCanEditAPD } = require('../../middleware');
 const {
@@ -47,19 +48,30 @@ module.exports = (
     multer().single('file'),
     async (req, res) => {
       try {
-        const metadata = req.body.metadata || null;
-        console.log({ metadata, req });
-        const size = req.file && req.file.size ? req.file.size : 0;
+        const { metadata = null } = req.body;
+        const { size = 0, buffer = null } = req.file;
+        const { mime = null } = (await FileType.fromBuffer(buffer)) || {};
+        if (!mime) {
+          throw new Error(`User is trying to upload a text-based file`);
+        }
+        if (
+          mime !== 'image/jpeg' &&
+          mime !== 'image/png' &&
+          mime !== 'image/gif' &&
+          mime !== 'image/tiff'
+        ) {
+          throw new Error(`User is trying to upload a file type of ${mime}`);
+        }
 
         const fileID = await createNewFileForAPD(
-          req.file.buffer,
+          buffer,
           req.params.id,
           metadata,
           size
         );
 
         try {
-          await putFile(fileID, req.file.buffer);
+          await putFile(fileID, buffer);
         } catch (e) {
           await deleteFileByID(fileID);
           throw e;
@@ -68,7 +80,7 @@ module.exports = (
         res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
       } catch (e) {
         logger.error({ id: req.id, message: e });
-        res.status(500).end();
+        res.status(500).send({ message: 'Unable to upload file' });
       }
     }
   );

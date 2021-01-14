@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import 'tinymce/tinymce';
+import tinymce from 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
+import { getAccessToken } from '../util/auth';
 
 // A theme is required
 import 'tinymce/themes/silver';
@@ -124,26 +125,31 @@ class RichText extends Component {
         <Editor
           id={id}
           init={{
+            toolbar,
+            plugins,
+            setup: setupTinyMCE(upload),
             autoresize_bottom_margin: 0,
             browser_spellcheck: true,
             file_picker_types: 'image',
             images_upload_handler: this.uploadImage(),
             images_upload_credentials: true,
-            images_file_types: 'jpeg,jpg,png',
+            images_file_types: 'jpeg,jpg,png,gif,tiff',
+            paste_data_images: true,
             a11y_advanced_options: true,
             menubar: '',
-            paste_data_images: true,
-            plugins,
             relative_urls: false,
-            setup: setupTinyMCE(upload),
-            toolbar,
             encoding: 'xml',
             forced_root_block: 'p',
             invalid_elements: 'script',
             remove_trailing_brs: true,
             link_assume_external_targets: true,
             default_link_target: '_blank',
-            toolbar_mode: 'wrap'
+            toolbar_mode: 'wrap',
+            //image_prepend_url: 'https://www.example.com/images/'
+            urlconverter_callback: function(url, node, on_save, name) {
+              console.log({ url, node, on_save, name });
+              return url;
+            }
           }}
           value={content}
           onEditorChange={this.onEditorChange}
