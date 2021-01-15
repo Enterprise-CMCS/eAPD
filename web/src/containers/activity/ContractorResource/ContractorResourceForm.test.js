@@ -97,7 +97,7 @@ describe('the ContractorResourceForm component', () => {
   test('handles changing the contractor start date', () => {
     const component = shallow(<ContractorForm {...props} />);
     component
-      .findWhere(c => c.prop('label') === 'Start date')
+      .findWhere(c => c.prop('label') === 'Contract start date')
       .simulate('change', 'ignored stuff', 'new start date');
 
     expect(props.setStartDate).toHaveBeenCalledWith(43, 1, 'new start date');
@@ -106,7 +106,7 @@ describe('the ContractorResourceForm component', () => {
   test('handles changing the contractor end date', () => {
     const component = shallow(<ContractorForm {...props} />);
     component
-      .findWhere(c => c.prop('label') === 'End date')
+      .findWhere(c => c.prop('label') === 'Contract end date')
       .simulate('change', 'ignored stuff', 'new end date');
 
     expect(props.setEndDate).toHaveBeenCalledWith(43, 1, 'new end date');
