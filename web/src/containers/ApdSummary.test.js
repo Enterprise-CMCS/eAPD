@@ -16,7 +16,7 @@ import {
   setProgramOverview
 } from '../actions/editApd';
 
-describe('apd summary component', () => {
+describe('APD overview component', () => {
   const props = {
     narrativeHIE: 'about hie',
     narrativeHIT: 'about hit',
