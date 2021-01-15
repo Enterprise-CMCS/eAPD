@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import EntryDetails from './EntryDetails';
-import { addActivity } from '../../actions/editActivity';
+import { addActivity as actualAddActivity } from '../../actions/editActivity';
 import { Section } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
 
@@ -29,7 +29,7 @@ All.propTypes = {
 const mapStateToProps = state => ({ activities: selectAllActivities(state) });
 
 const mapDispatchToProps = {
-  addActivity
+  addActivity: actualAddActivity
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(All);
