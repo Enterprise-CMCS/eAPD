@@ -806,18 +806,7 @@ describe('APD reducer', () => {
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
                 name: '',
-                outcomes: [
-                  {
-                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                    metrics: [
-                      {
-                        key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                        metric: ''
-                      }
-                    ],
-                    outcome: ''
-                  }
-                ],
+                outcomes: [],
                 plannedEndDate: '',
                 plannedStartDate: '',
                 quarterlyFFP: {
@@ -828,13 +817,7 @@ describe('APD reducer', () => {
                     4: { combined: 25, contractors: 25, inHouse: 25 }
                   }
                 },
-                schedule: [
-                  {
-                    endDate: '',
-                    key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                    milestone: ''
-                  }
-                ],
+                schedule: [],
                 standardsAndConditions: {
                   doesNotSupport: '',
                   supports: ''
