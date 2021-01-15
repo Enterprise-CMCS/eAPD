@@ -9,26 +9,32 @@ import {
   mapDispatchToProps
 } from './All';
 
+const initialProps = {
+  addActivity: () => {},
+  activities: [
+    { key: 'key1', first: 'activity' },
+    { key: 'key2', second: 'activity' },
+    { key: 'key3', third: 'activity' }
+  ]
+};
+
+const setup = (props) => shallow(<Activities {...initialProps} {...props} />);
+
 describe('the Activities component', () => {
-  const props = {
-    add: jest.fn(),
-    activities: [
-      { key: 'key1', first: 'activity' },
-      { key: 'key2', second: 'activity' },
-      { key: 'key3', third: 'activity' }
-    ]
-  };
-
-  beforeEach(() => {
-    props.add.mockClear();
-  });
-
-  test('renders correctly', () => {
-    const component = shallow(<Activities {...props} />);
+  it('renders correctly', () => {
+    const component = setup();
     expect(component).toMatchSnapshot();
   });
 
-  test('maps state to props', () => {
+  it('calls addActivity when the button component is clicked', () => {
+    const mockAddActivity = jest.fn();
+    const component = setup({ addActivity: mockAddActivity });
+    expect(mockAddActivity).not.toHaveBeenCalled();
+    component.find('Button').simulate('click');
+    expect(mockAddActivity).toHaveBeenCalled();
+  });
+
+  it('maps state to props', () => {
     const state = {
       apd: {
         data: {
@@ -42,9 +48,9 @@ describe('the Activities component', () => {
     });
   });
 
-  test('maps dispatch to props', () => {
+  it('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      add: addActivity
+      addActivity
     });
   });
 });
