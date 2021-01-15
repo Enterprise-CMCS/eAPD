@@ -1,10 +1,7 @@
 import {
   UPLOAD_FILE_FAILURE,
   UPLOAD_FILE_REQUEST,
-  UPLOAD_FILE_SUCCESS,
-  DOWNLOAD_FILE_FAILURE,
-  DOWNLOAD_FILE_REQUEST,
-  DOWNLOAD_FILE_SUCCESS
+  UPLOAD_FILE_SUCCESS
 } from './symbols';
 
 import { selectApdData } from '../../reducers/apd.selectors';
@@ -29,10 +26,9 @@ export const uploadFile = file => async (dispatch, getState) => {
           dispatch({ type: UPLOAD_FILE_SUCCESS, url: req.data.url });
           resolve(`${apiUrl}${req.data.url}`);
         })
-        .catch(err => {
-          const message = err ? err.message : 'N/A';
-          dispatch({ type: UPLOAD_FILE_FAILURE, error: message });
-          reject(new Error('Unable to upload file'));
+        .catch(() => {
+          dispatch({ type: UPLOAD_FILE_FAILURE });
+          reject();
         });
     });
 
@@ -40,22 +36,4 @@ export const uploadFile = file => async (dispatch, getState) => {
   });
 };
 
-// TODO
-export const downloadFile = fileID => async (dispatch, getState) => {
-  dispatch({ type: DOWNLOAD_FILE_REQUEST });
-
-  const state = getState();
-  const { id: apdID } = selectApdData(state);
-
-  return axios
-    .get(`/apds/${apdID}/files/${fileID}`)
-    .then(req => {
-      dispatch({ type: DOWNLOAD_FILE_SUCCESS });
-      return req.data;
-    })
-    .catch(err => {
-      const message = err ? err.message : 'N/A';
-      dispatch({ type: DOWNLOAD_FILE_FAILURE, error: message });
-      return message;
-    });
-};
+export default uploadFile;

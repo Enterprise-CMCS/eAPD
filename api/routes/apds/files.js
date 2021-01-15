@@ -21,7 +21,7 @@ module.exports = (
 ) => {
   logger.silly('setting up GET /apds/:id/files/:fileID route');
 
-  app.get('/apds/:id/files/:fileID', async (req, res) => {
+  app.get('/apds/:id/files/:fileID', can('view-document'), async (req, res) => {
     try {
       if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
         const file = await getFile(req.params.fileID);

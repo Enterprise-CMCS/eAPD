@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import tinymce from 'tinymce/tinymce';
+import 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
-import { getAccessToken } from '../util/auth';
 
 // A theme is required
 import 'tinymce/themes/silver';
@@ -134,7 +133,7 @@ class RichText extends Component {
             images_upload_handler: this.uploadImage(),
             images_upload_credentials: true,
             images_file_types: 'jpeg,jpg,png,gif,tiff',
-            paste_data_images: true,
+            paste_data_images: false,
             a11y_advanced_options: true,
             menubar: '',
             relative_urls: false,
@@ -144,12 +143,7 @@ class RichText extends Component {
             remove_trailing_brs: true,
             link_assume_external_targets: true,
             default_link_target: '_blank',
-            toolbar_mode: 'wrap',
-            //image_prepend_url: 'https://www.example.com/images/'
-            urlconverter_callback: function(url, node, on_save, name) {
-              console.log({ url, node, on_save, name });
-              return url;
-            }
+            toolbar_mode: 'wrap'
           }}
           value={content}
           onEditorChange={this.onEditorChange}
