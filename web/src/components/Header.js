@@ -17,7 +17,6 @@ import Icon, {
   faChevronDown,
   faChevronLeft,
   faSignOutAlt,
-  faEdit,
   faUserShield
 } from './Icons';
 
