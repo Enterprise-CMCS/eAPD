@@ -12,6 +12,7 @@ Anticipated release: January XX, 2021
 - Updates logos in footer ([#2716])
 - Increases outcomes and metrics field size to be multiline (4) ([#2724])
 - Resolve TinyMCE XSS vulnerabilities ([#2741])
+- Updates FTE Allocation Help text ([#2743])
 
 #### 🐛 Bugs fixed
 
@@ -46,5 +47,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2353]: https://github.com/CMSgov/eAPD/issues/2353
 [#2742]: https://github.com/CMSgov/eAPD/issues/2742
 [#2716]: https://github.com/CMSgov/eAPD/issues/2716
+[#2743]: https://github.com/CMSgov/eAPD/issues/2743
 [ghsa-vrv8-v4w8-f95h]: https://github.com/advisories/GHSA-vrv8-v4w8-f95h
 [ghsa-w7rc-rwvf-8q5r]: https://github.com/advisories/GHSA-w7rc-rwvf-8q5r

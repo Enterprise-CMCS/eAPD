@@ -5,7 +5,7 @@ import DollarField from './DollarField';
 import Dollars from './Dollars';
 import NumberField from './NumberField';
 
-const PersonCostForm = ({ items, costLabel, fteLabel, setCost, setFTE }) => {
+const PersonCostForm = ({ items, costLabel, fteLabel, setCost, setFTE, hint }) => {
   const handleCostChange = year => ({ target: { value } }) => {
     setCost(year, value);
   };
@@ -33,6 +33,7 @@ const PersonCostForm = ({ items, costLabel, fteLabel, setCost, setFTE }) => {
               size="medium"
               min={0}
               numeric
+              hint={hint}
               value={perc}
               onChange={handleFTEChange(year)}
             />
@@ -52,12 +53,14 @@ PersonCostForm.propTypes = {
   costLabel: PropTypes.string,
   fteLabel: PropTypes.string,
   setCost: PropTypes.func.isRequired,
-  setFTE: PropTypes.func.isRequired
+  setFTE: PropTypes.func.isRequired,
+  hint: PropTypes.string
 };
 
 PersonCostForm.defaultProps = {
   costLabel: 'Cost with benefits',
-  fteLabel: 'Number of FTEs'
+  fteLabel: 'Number of FTEs',
+  hint: ''
 };
 
 export default PersonCostForm;
