@@ -50,7 +50,7 @@ workflows:
       - owasp zap scan:
           filters:
             tags:
-              only: /.*/
+              ignore: ignore-owasp
       - validate openapi:
           filters:
             tags:
@@ -200,9 +200,7 @@ workflows:
               ignore:
                 - master
           requires:
-            - backend dependency vulnerability scan
             - frontend build preview
-            - frontend dependency vulnerability scan
             - yaml test
 
       - store artifacts:

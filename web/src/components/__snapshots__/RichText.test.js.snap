@@ -11,7 +11,12 @@ exports[`RichText component renders as expected 1`] = `
       Object {
         "autoresize_bottom_margin": 0,
         "browser_spellcheck": true,
+        "default_link_target": "_blank",
+        "encoding": "xml",
+        "forced_root_block": "p",
         "images_upload_handler": [Function],
+        "invalid_elements": "script",
+        "link_assume_external_targets": true,
         "menubar": "",
         "paste_data_images": true,
         "plugins": Array [
@@ -22,10 +27,13 @@ exports[`RichText component renders as expected 1`] = `
           "paste",
           "spellchecker",
           "help",
+          "link",
         ],
         "relative_urls": false,
+        "remove_trailing_brs": true,
         "setup": [Function],
-        "toolbar": "undo redo | style | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatselect | eapdImageUpload | help",
+        "toolbar": "undo redo | style | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatselect | link | eapdImageUpload | help",
+        "toolbar_mode": "wrap",
       }
     }
     onEditorChange={[Function]}
