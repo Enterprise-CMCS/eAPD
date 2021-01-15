@@ -5,7 +5,14 @@ import DollarField from './DollarField';
 import Dollars from './Dollars';
 import NumberField from './NumberField';
 
-const PersonCostForm = ({ items, costLabel, fteLabel, setCost, setFTE, hint }) => {
+const PersonCostForm = ({
+  items,
+  costLabel,
+  fteLabel,
+  setCost,
+  setFTE,
+  hint
+}) => {
   const handleCostChange = year => ({ target: { value } }) => {
     setCost(year, value);
   };
