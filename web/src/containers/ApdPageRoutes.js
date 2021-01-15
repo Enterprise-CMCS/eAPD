@@ -32,14 +32,14 @@ const ApdPageRoutes = ({ useRouteMatch }) => {
         <ApdHeader />
 
         <Route exact path={path}>
-          <Redirect to={`${path}/program-summary`} />
+          <Redirect to={`${path}/apd-overview`} />
         </Route>
 
         <Route path={`${path}/state-profile`}>
           <StateProfile />
         </Route>
 
-        <Route path={`${path}/program-summary`}>
+        <Route path={`${path}/apd-overview`}>
           <ApdSummary />
         </Route>
 
