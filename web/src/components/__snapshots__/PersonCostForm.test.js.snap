@@ -21,6 +21,7 @@ exports[`PersonCostForm component renders correctly 1`] = `
     />
     <NumberField
       fieldRef={null}
+      hint=""
       label="Number of FTEs"
       mask={null}
       min={0}
@@ -60,6 +61,7 @@ exports[`PersonCostForm component renders correctly 1`] = `
     />
     <NumberField
       fieldRef={null}
+      hint=""
       label="Number of FTEs"
       mask={null}
       min={0}
