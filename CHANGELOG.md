@@ -12,7 +12,6 @@ Anticipated release: January XX, 2021
 - Increases outcomes and metrics field size to be multiline (4) ([#2724])
 - Resolve TinyMCE XSS vulnerabilities ([#2741])
 
-
 #### 🐛 Bugs fixed
 
 - fixed security headers
@@ -21,6 +20,7 @@ Anticipated release: January XX, 2021
 - fixed issue with Back to APD link not displaying ([#2712])
 - updates footer email address to correct one ([#2353])
 - fixed session expiring warning bug ([#2720])
+- activity creation does not add outcomes or milestones ([2725])
 
 #### ⚙️ Behind the scenes
 
@@ -43,5 +43,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2741]: https://github.com/CMSgov/eAPD/issues/2741
 [#2353]: https://github.com/CMSgov/eAPD/issues/2353
 [#2716]: https://github.com/CMSgov/eAPD/issues/2716
+[#2725]: https://github.com/CMSgov/eAPD/issues/2725
 [ghsa-vrv8-v4w8-f95h]: https://github.com/advisories/GHSA-vrv8-v4w8-f95h
 [ghsa-w7rc-rwvf-8q5r]: https://github.com/advisories/GHSA-w7rc-rwvf-8q5r
