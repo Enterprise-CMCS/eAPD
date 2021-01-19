@@ -13,6 +13,8 @@ Anticipated release: January 25, 2021
 - Updates logos in footer ([#2716])
 - Increases outcomes and metrics field size to be multiline (4) ([#2724])
 - Resolve TinyMCE XSS vulnerabilities ([#2741])
+- Updates to program summary page ([#2736])
+- Uses "CMS eAPD" for page title and header title ([#2780])
 
 #### 🐛 Bugs fixed
 
@@ -48,6 +50,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2353]: https://github.com/CMSgov/eAPD/issues/2353
 [#2715]: https://github.com/CMSgov/eAPD/issues/2715
 [#2742]: https://github.com/CMSgov/eAPD/issues/2742
-[#2716]: https://github.com/CMSgov/eAPD/issues/2716
+[#2736]: https://github.com/CMSgov/eAPD/issues/2736
+[#2780]: https://github.com/CMSgov/eAPD/issues/2780
 [ghsa-vrv8-v4w8-f95h]: https://github.com/advisories/GHSA-vrv8-v4w8-f95h
 [ghsa-w7rc-rwvf-8q5r]: https://github.com/advisories/GHSA-w7rc-rwvf-8q5r
