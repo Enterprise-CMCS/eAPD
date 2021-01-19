@@ -1,11 +1,12 @@
 # Next release
 
-Anticipated release: January 25, 2021
+Anticipated release: January 20, 2021
 
 #### 🚀 New features
 
-- Adds State Admin panel ([#2583])
+- Adds confirmation dialog before unchecking FFY year([#2445])
 - Update endpoint for affiliations to filter by status ([#2682])
+- Adds State Admin panel ([#2583])
 - Updated roles and add roles endpoint ([#2692])
 - Update session management to warn users that their session is about to expire ([#2702])
 - Updates logos in footer ([#2716])
@@ -21,6 +22,7 @@ Anticipated release: January 25, 2021
 - updates footer email address to correct one ([#2353])
 - fixed Estimated Quarterly Expenditure table is overwriting across Activities ([#2421])
 - fixed issue with Back to APD link not displaying ([#2712])
+- fixes issue where removing a FFY from program summary wouldn't remove it from the read-only view ([#2715])
 - fixed session expiring warning bug ([#2720])
 
 #### ⚙️ Behind the scenes
@@ -35,11 +37,13 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2348]: https://github.com/CMSgov/eAPD/issues/2348
 [#2353]: https://github.com/CMSgov/eAPD/issues/2353
 [#2421]: https://github.com/CMSgov/eAPD/issues/2421
+[#2445]: https://github.com/CMSgov/eAPD/issues/2445
 [#2583]: https://github.com/CMSgov/eAPD/issues/2583
 [#2682]: https://github.com/CMSgov/eAPD/issues/2682
 [#2692]: https://github.com/CMSgov/eAPD/issues/2692
 [#2702]: https://github.com/CMSgov/eAPD/issues/2702
 [#2712]: https://github.com/CMSgov/eAPD/issues/2712
+[#2715]: https://github.com/CMSgov/eAPD/issues/2715
 [#2716]: https://github.com/CMSgov/eAPD/issues/2716
 [#2720]: https://github.com/CMSgov/eAPD/issues/2720
 [#2724]: https://github.com/CMSgov/eAPD/issues/2724
