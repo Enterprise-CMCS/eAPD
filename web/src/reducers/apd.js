@@ -5,6 +5,7 @@ import {
   contractorDefaultHourly,
   contractorDefaultYear,
   costAllocationEntry,
+  costAllocationNarrative,
   expenseDefaultYear,
   newActivity,
   newContractor,
@@ -100,6 +101,12 @@ export const getPatchesToAddYear = (state, year) => {
 
     patches.push({
       op: 'add',
+      path: `/activities/${activityIndex}/costAllocationNarrative/${year}`,
+      value: costAllocationNarrative()
+    });
+
+    patches.push({
+      op: 'add',
       path: `/activities/${activityIndex}/quarterlyFFP/${year}`,
       value: quarterlyFFPEntry()
     });
@@ -174,6 +181,11 @@ export const getPatchesToRemoveYear = (state, year) => {
     patches.push({
       op: 'remove',
       path: `/activities/${activityIndex}/costAllocation/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/activities/${activityIndex}/costAllocationNarrative/${year}`
     });
 
     patches.push({

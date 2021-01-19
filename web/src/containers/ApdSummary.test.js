@@ -58,17 +58,20 @@ describe('APD overview component', () => {
   test('dispatches when adding a year', () => {
     shallow(<ApdSummary {...props} />)
       .find('ChoiceList')
-      .simulate('change', { target: { value: '3' } });
+      .simulate('change', { target: { value: '2021' } });
 
-    expect(props.addApdYear).toHaveBeenCalledWith('3');
+    expect(props.addApdYear).toHaveBeenCalledWith('2021');
   });
 
   test('dispatches when removing a year', () => {
+    window.confirm = jest.fn(() => true);
+
     shallow(<ApdSummary {...props} />)
       .find('ChoiceList')
-      .simulate('change', { target: { value: '2' } });
+      .simulate('change', { target: { value: '2021', checked: false } });
 
-    expect(props.removeApdYear).toHaveBeenCalledWith('2');
+    expect(window.confirm).toBeCalled();
+    expect(props.removeApdYear).toHaveBeenCalledWith('2021');
   });
 
   test('maps state to props', () => {
