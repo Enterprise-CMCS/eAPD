@@ -38,6 +38,7 @@ tap.test('jwtUtils', async t => {
 
     t.beforeEach(async () => {
       request = new Map();
+      request.set('url', '/apds');
     });
 
     const scenarios = [
