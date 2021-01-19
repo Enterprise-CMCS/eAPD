@@ -18,7 +18,7 @@ const ConsentBanner = ({ onAgree }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const agreeAndContinue = () => {
-    document.cookie = 'gov.cms.eapd.hasConsented=true;max-age=259200'; // 3 days
+    document.cookie = 'gov.cms.eapd.hasConsented=true; max-age=259200; secure'; // 3 days
     onAgree();
   };
 
