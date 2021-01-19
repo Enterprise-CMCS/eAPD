@@ -32,7 +32,7 @@ tap.test('jwtUtils', async t => {
     });
   });
 
-  t.test('jwtExtractor()', async t => {
+  t.test('jwtExtractor() Authorization test', async t => {
     const { jwtExtractor } = require('./jwtUtils');
     let request;
 
