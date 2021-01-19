@@ -80,7 +80,7 @@ const ApdPreviousActivityTable = ({
                   <DollarField
                     className="budget-table--input-holder"
                     fieldClassName="budget-table--input__number"
-                    label={`total approved funding for HIT and HIE for FFY ${year}, state plus federal`}
+                    label={`approved total computable Medicaid funding for HIT and HIE for FFY ${year}`}
                     labelClassName="ds-u-visibility--screen-reader"
                     name={`hithie-approved-total-${year}`}
                     value={previousActivityExpenses[year].totalApproved}
@@ -108,7 +108,7 @@ const ApdPreviousActivityTable = ({
                   <DollarField
                     className="budget-table--input-holder"
                     fieldClassName="budget-table--input__number"
-                    label={`actual federal share for HIT and HIE for FFY ${year}`}
+                    label={`actual ffp expenditures for HIT and HIE for FFY  ${year}`}
                     labelClassName="ds-u-visibility--screen-reader"
                     name={`hithie-actual-federal-${year}`}
                     value={previousActivityExpenses[year].federalActual}
