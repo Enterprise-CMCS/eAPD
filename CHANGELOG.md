@@ -8,6 +8,7 @@ Anticipated release: January 25, 2021
 - Update endpoint for affiliations to filter by status ([#2682])
 - Updated roles and add roles endpoint ([#2692])
 - Update session management to warn users that their session is about to expire ([#2702])
+- Adds confirmation dialog before unchecking FFY year([#2445])
 - Update form field labels for the Activity Private Contractor Costs form ([#2742])
 - Updates logos in footer ([#2716])
 - Increases outcomes and metrics field size to be multiline (4) ([#2724])
@@ -39,7 +40,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2692]: https://github.com/CMSgov/eAPD/issues/2692
 [#2702]: https://github.com/CMSgov/eAPD/issues/2702
 [#2720]: https://github.com/CMSgov/eAPD/issues/2720
-[#2421]: https://github.com/CMSgov/eAPD/issues/2720
+[#2445]: https://github.com/CMSgov/eAPD/issues/2445
 [#2712]: https://github.com/CMSgov/eAPD/issues/2712
 [#2724]: https://github.com/CMSgov/eAPD/issues/2724
 [#2741]: https://github.com/CMSgov/eAPD/issues/2741
