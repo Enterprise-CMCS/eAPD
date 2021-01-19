@@ -105,7 +105,7 @@ const PersonForm = ({
                 {}
               )}
               fteLabel="FTE Allocation"
-              hint="For example 0.5 = 0.5 FTE = 50% time"
+              hint="For example: 0.5 = 0.5 FTE = 50% time"
               setCost={setCostForYear}
               setFTE={setFTEForYear}
             />
