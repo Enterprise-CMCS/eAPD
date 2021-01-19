@@ -84,7 +84,7 @@ tap.test('apds PATCH endpoint', async tests => {
       getAPDByID.resolves({ document: 'old document' });
       patchObject.throws(new Error('fake error'));
 
-      const patches = ['patch 1', 'patch 2'];
+      const patches = [{ value: 'patch 1' }, { value: 'patch 2' }];
 
       await handler({ body: patches, params: { id: 'apd id' } }, res);
 
@@ -111,7 +111,7 @@ tap.test('apds PATCH endpoint', async tests => {
       { dataPath: '/key1/key2/key3', message: 'validation error' }
     ];
 
-    const patches = ['patch 1', 'patch 2'];
+    const patches = [{ value: 'patch 1' }, { value: 'patch 2' }];
 
     await handler({ body: patches, params: { id: 'apd id' } }, res);
 
