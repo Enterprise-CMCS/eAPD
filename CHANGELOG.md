@@ -23,6 +23,7 @@ Anticipated release: January 25, 2021
 - fixed issue with Back to APD link not displaying ([#2712])
 - updates footer email address to correct one ([#2353])
 - fixed session expiring warning bug ([#2720])
+- fixes issue where removing a FFY from program summary wouldn't remove it from the read-only view ([#2715])
 
 #### ⚙️ Behind the scenes
 
@@ -45,6 +46,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2724]: https://github.com/CMSgov/eAPD/issues/2724
 [#2741]: https://github.com/CMSgov/eAPD/issues/2741
 [#2353]: https://github.com/CMSgov/eAPD/issues/2353
+[#2715]: https://github.com/CMSgov/eAPD/issues/2715
 [#2742]: https://github.com/CMSgov/eAPD/issues/2742
 [#2716]: https://github.com/CMSgov/eAPD/issues/2716
 [ghsa-vrv8-v4w8-f95h]: https://github.com/advisories/GHSA-vrv8-v4w8-f95h
