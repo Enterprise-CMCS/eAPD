@@ -1,16 +1,16 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react';
 import NumberField from './NumberField';
 
 let onBlur;
 let onChange;
 
 const defaultProps = {
-  label: "test-label",
-  name: "test name",
-  size: "medium",
-  className: "stuff",
-  value: "123",
+  label: 'test-label',
+  name: 'test name',
+  size: 'medium',
+  className: 'stuff',
+  value: '123'
 };
 
 // https://testing-library.com/docs/example-input-event/
@@ -20,7 +20,7 @@ const setup = (props = {}) => {
   return {
     input,
     ...utils
-  }
+  };
 };
 
 describe('NumberField component', () => {
@@ -35,41 +35,41 @@ describe('NumberField component', () => {
   });
 
   it('blanks the input value when selected if value is zero', () => {
-    const { input } = setup({ value: "0" });
+    const { input } = setup({ value: '0' });
     fireEvent.focus(input);
-    expect(input.value).toBe("");
+    expect(input.value).toBe('');
   });
 
   it('does not blank the input value when selected if value is not zero', () => {
     const { input } = setup();
     fireEvent.focus(input);
-    expect(input.value).toBe("123");
+    expect(input.value).toBe('123');
   });
 
   it('sets the input value to zero on blur if the value is blank', () => {
-    const { input } = setup({ value: "" });
+    const { input } = setup({ value: '' });
     fireEvent.blur(input);
-    expect(input.value).toBe("0");
+    expect(input.value).toBe('0');
   });
 
   it('does not change the input value on blur if the value is not zero', () => {
     const { input } = setup();
     fireEvent.blur(input);
-    expect(input.value).toBe("123")
+    expect(input.value).toBe('123');
   });
 
   it('passes back numeric values on change', () => {
     const { input } = setup({ onChange });
     fireEvent.blur(input, { target: { value: '456,123' } });
     expect(onChange).toHaveBeenCalledWith({ target: { value: 456 } });
-    expect(input.value).toBe("456");
+    expect(input.value).toBe('456');
   });
 
   xit('passes back rounded numeric values on change, but still renders with mask', () => {
     const { input } = setup({ onChange, mask: 'currency' });
     fireEvent.change(input, { target: { value: '123456.78999' } });
     expect(onChange).toHaveBeenCalledWith({ target: { value: 123456.79 } });
-    expect(input.value).toBe(123457)
+    expect(input.value).toBe(123457);
   });
 
   it('rounds numbers when the component loses focus, calls onBlur handler', () => {
@@ -95,7 +95,7 @@ describe('NumberField component', () => {
 
   it('calls onChange with rounded value when { round: true }', () => {
     const { input } = setup({ onChange, round: true });
-    fireEvent.change(input, { target: { value: '456.783389' }});
+    fireEvent.change(input, { target: { value: '456.783389' } });
     expect(onChange).toHaveBeenCalledWith({ target: { value: 457 } });
   });
 
@@ -108,7 +108,7 @@ describe('NumberField component', () => {
 
   it('calls onChange with the min value, if value is less than min', () => {
     const { input } = setup({ min: -5, onChange });
-    fireEvent.change(input, { target: { value: '-10' }});
+    fireEvent.change(input, { target: { value: '-10' } });
     expect(onChange).toHaveBeenCalledWith({ target: { value: -5 } });
   });
 });
