@@ -21,39 +21,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </caption>
     <thead>
       <tr>
-        <th
-          id="prev_act_mmis_ffy"
-        >
-          <span
-            className="ds-u-visibility--screen-reader"
-          >
-            Year
-          </span>
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis90_total"
-        >
-          <span>
-            Total computable (Federal + state)
-          </span>
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          colSpan="2"
-          id="prev_act_mmis90_federal"
-        >
-          <span>
-            Federal share 
-            <strong>
-              90
-              %
-            </strong>
-             FFP
-          </span>
-        </th>
-      </tr>
-      <tr>
         <td
           aria-hidden="true"
           className="th"
@@ -62,19 +29,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="ds-u-text-align--right"
           id="prev_act_mmis90_total_approved"
         >
-          Approved
+          Approved Total Computable Medicaid
         </th>
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis90_federal_approved"
         >
-          Approved
+          Approved 90% FFP
         </th>
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis90_federal_actual"
         >
-          Actual Expenditures
+          Actual FFP Expenditures
         </th>
       </tr>
     </thead>
@@ -94,7 +61,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 90/10 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis90-1"
             onChange={[Function]}
@@ -116,7 +83,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 90/10 level for FFY 1"
+            label="actual ffp expenditures for MMIS at the 90/10 level for FFY 1"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis90-1"
             onChange={[Function]}
@@ -139,7 +106,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 90/10 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis90-2"
             onChange={[Function]}
@@ -161,7 +128,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 90/10 level for FFY 2"
+            label="actual ffp expenditures for MMIS at the 90/10 level for FFY 2"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis90-2"
             onChange={[Function]}
@@ -190,39 +157,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </caption>
     <thead>
       <tr>
-        <th
-          id="prev_act_mmis_ffy"
-        >
-          <span
-            className="ds-u-visibility--screen-reader"
-          >
-            Year
-          </span>
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis75_total"
-        >
-          <span>
-            Total computable (Federal + state)
-          </span>
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          colSpan="2"
-          id="prev_act_mmis75_federal"
-        >
-          <span>
-            Federal share 
-            <strong>
-              75
-              %
-            </strong>
-             FFP
-          </span>
-        </th>
-      </tr>
-      <tr>
         <td
           aria-hidden="true"
           className="th"
@@ -231,19 +165,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="ds-u-text-align--right"
           id="prev_act_mmis75_total_approved"
         >
-          Approved
+          Approved Total Computable Medicaid
         </th>
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis75_federal_approved"
         >
-          Approved
+          Approved 75% FFP
         </th>
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis75_federal_actual"
         >
-          Actual Expenditures
+          Actual FFP Expenditures
         </th>
       </tr>
     </thead>
@@ -263,7 +197,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis75-1"
             onChange={[Function]}
@@ -285,7 +219,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 75/25 level for FFY 1"
+            label="actual ffp expenditures for MMIS at the 75/25 level for FFY 1"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis75-1"
             onChange={[Function]}
@@ -308,7 +242,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis75-2"
             onChange={[Function]}
@@ -330,7 +264,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 75/25 level for FFY 2"
+            label="actual ffp expenditures for MMIS at the 75/25 level for FFY 2"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis75-2"
             onChange={[Function]}
@@ -359,39 +293,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </caption>
     <thead>
       <tr>
-        <th
-          id="prev_act_mmis_ffy"
-        >
-          <span
-            className="ds-u-visibility--screen-reader"
-          >
-            Year
-          </span>
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis50_total"
-        >
-          <span>
-            Total computable (Federal + state)
-          </span>
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          colSpan="2"
-          id="prev_act_mmis50_federal"
-        >
-          <span>
-            Federal share 
-            <strong>
-              50
-              %
-            </strong>
-             FFP
-          </span>
-        </th>
-      </tr>
-      <tr>
         <td
           aria-hidden="true"
           className="th"
@@ -400,19 +301,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           className="ds-u-text-align--right"
           id="prev_act_mmis50_total_approved"
         >
-          Approved
+          Approved Total Computable Medicaid
         </th>
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis50_federal_approved"
         >
-          Approved
+          Approved 50% FFP
         </th>
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis50_federal_actual"
         >
-          Actual Expenditures
+          Actual FFP Expenditures
         </th>
       </tr>
     </thead>
@@ -432,7 +333,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis50-1"
             onChange={[Function]}
@@ -454,7 +355,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 50/50 level for FFY 1"
+            label="actual ffp expenditures for MMIS at the 50/50 level for FFY 1"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis50-1"
             onChange={[Function]}
@@ -477,7 +378,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mmis50-2"
             onChange={[Function]}
@@ -499,7 +400,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 50/50 level for FFY 2"
+            label="actual ffp expenditures for MMIS at the 50/50 level for FFY 2"
             labelClassName="ds-u-visibility--screen-reader"
             name="actual-federal-mmis50-2"
             onChange={[Function]}
