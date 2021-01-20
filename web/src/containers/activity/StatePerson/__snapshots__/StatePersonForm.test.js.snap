@@ -27,6 +27,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
   <PersonCostForm
     costLabel="Cost with benefits"
     fteLabel="Number of FTEs"
+    hint=""
     items={
       Object {
         "7473": Object {

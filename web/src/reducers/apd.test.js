@@ -312,6 +312,11 @@ describe('APD reducer', () => {
               '1742': 'yes',
               '1743': 'no'
             },
+            costAllocationNarrative: {
+              '1741': { otherSources: '' },
+              '1742': { otherSources: '' },
+              'methodology': ''
+            },
             contractorResources: [
               {
                 hourly: {
@@ -390,6 +395,11 @@ describe('APD reducer', () => {
               '1741': { other: 0, ffp: { federal: 90, state: 10 } },
               '1742': 'yes',
               '1743': 'no'
+            },
+            costAllocationNarrative: {
+              '1741': { otherSources: '' },
+              '1742': { otherSources: '' },
+              'methodology': ''
             },
             contractorResources: [
               {
@@ -504,6 +514,11 @@ describe('APD reducer', () => {
               '1742': 'yes',
               '1743': 'no'
             },
+            costAllocationNarrative: {
+              '1741': { otherSources: '' },
+              '1742': { otherSources: '' },
+              'methodology': ''
+            },
             contractorResources: [
               {
                 hourly: {
@@ -613,6 +628,10 @@ describe('APD reducer', () => {
             costAllocation: {
               '1742': 'yes',
               '1743': 'no'
+            },
+            costAllocationNarrative: {
+              '1742': { otherSources: '' },
+              'methodology': ''
             },
             contractorResources: [
               {
