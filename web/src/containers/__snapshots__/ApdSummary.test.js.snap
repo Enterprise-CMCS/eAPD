@@ -1,15 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`apd summary component renders correctly 1`] = `
+exports[`APD overview component renders correctly 1`] = `
 <Section
   id={null}
   resource="apd"
 >
-  <h3
-    className="ds-h3 subsection--title"
-  >
-    Program Overview
-  </h3>
   <ChoiceList
     choices={
       Array [

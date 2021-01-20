@@ -3,7 +3,7 @@ import { t } from '../i18n';
 const staticItems = [
   {
     label: t('apd.title'),
-    url: '/apd/program-summary'
+    url: '/apd/apd-overview'
   },
   {
     label: t('apd.stateProfile.title'),
