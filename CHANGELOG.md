@@ -12,6 +12,7 @@ Anticipated release: January 21, 2021
 - Updates logos in footer ([#2716])
 - Increases outcomes and metrics field size to be multiline (4) ([#2724])
 - Resolve TinyMCE XSS vulnerabilities ([#2741])
+- Updates Previous Activities tables to use clearer headings ([#2744])
 - Updates to program summary page ([#2736])
 - Uses "CMS eAPD" for page title and header title ([#2780])
 - Update form field labels for the Activity Private Contractor Costs form ([#2742])
@@ -54,6 +55,8 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2725]: https://github.com/CMSgov/eAPD/issues/2725
 [#2741]: https://github.com/CMSgov/eAPD/issues/2741
 [#2742]: https://github.com/CMSgov/eAPD/issues/2742
+[#2716]: https://github.com/CMSgov/eAPD/issues/2716
+[#2744]: https://github.com/CMSgov/eAPD/issues/2744
 [#2736]: https://github.com/CMSgov/eAPD/issues/2736
 [#2780]: https://github.com/CMSgov/eAPD/issues/2780
 [#2743]: https://github.com/CMSgov/eAPD/issues/2743
