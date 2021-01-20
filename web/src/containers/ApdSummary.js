@@ -59,7 +59,6 @@ const ApdSummary = ({
 
   return (
     <Section resource="apd">
-      <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
       <ChoiceList
         choices={yearChoices}
         label={t('apd.overview.instruction.short')}

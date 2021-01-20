@@ -18,7 +18,7 @@ exports[`Header component opens and closes the dropdown when clicked  1`] = `
         className="ds-l-col--12 ds-l-md-col--3 site-title"
       >
         <Connect(DashboardButton)>
-          CMS HITECH APD
+          CMS eAPD
         </Connect(DashboardButton)>
       </div>
       <div
@@ -153,7 +153,7 @@ exports[`Header component renders correctly when the dropdown is closed and the 
         className="ds-l-col--12 ds-l-md-col--3 site-title"
       >
         <Connect(DashboardButton)>
-          CMS HITECH APD
+          CMS eAPD
         </Connect(DashboardButton)>
       </div>
       <div
