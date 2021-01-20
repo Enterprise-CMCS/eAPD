@@ -4,19 +4,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import EntryDetails from './EntryDetails';
-import { addActivity } from '../../actions/editActivity';
+import { addActivity as actualAddActivity } from '../../actions/editActivity';
 import { Section } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
 
-const All = ({ add, activities }) => {
-  const onAdd = () => add();
-
+const All = ({ addActivity, activities }) => {
   return (
     <Section id="activities" resource="activities">
       {activities.map((activity, index) => (
         <EntryDetails activityIndex={index} key={activity.key} />
       ))}
-      <Button className="ds-u-margin-top--4" onClick={onAdd}>
+      <Button className="ds-u-margin-top--4" onClick={addActivity}>
         Add another activity
       </Button>
     </Section>
@@ -24,14 +22,14 @@ const All = ({ add, activities }) => {
 };
 
 All.propTypes = {
-  add: PropTypes.func.isRequired,
+  addActivity: PropTypes.func.isRequired,
   activities: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 const mapStateToProps = state => ({ activities: selectAllActivities(state) });
 
 const mapDispatchToProps = {
-  add: addActivity
+  addActivity: actualAddActivity
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(All);
