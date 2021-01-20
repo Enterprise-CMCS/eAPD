@@ -88,6 +88,13 @@ Array [
   },
   Object {
     "op": "add",
+    "path": "/activities/0/costAllocationNarrative/2019",
+    "value": Object {
+      "otherSources": "",
+    },
+  },
+  Object {
+    "op": "add",
     "path": "/activities/0/quarterlyFFP/2019",
     "value": Object {
       "1": Object {
@@ -166,6 +173,10 @@ Array [
   Object {
     "op": "remove",
     "path": "/activities/0/costAllocation/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/activities/0/costAllocationNarrative/2019",
   },
   Object {
     "op": "remove",
