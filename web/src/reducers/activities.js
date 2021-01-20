@@ -104,8 +104,8 @@ export const newActivity = ({
     name,
     plannedEndDate: '',
     plannedStartDate: '',
-    outcomes: [newOutcome()],
-    schedule: [newMilestone()],
+    outcomes: [],
+    schedule: [],
     statePersonnel: [],
     summary: '',
     standardsAndConditions: {
