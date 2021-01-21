@@ -1,14 +1,18 @@
 const tap = require('tap');
 const sinon = require('sinon');
-
 const { can, userCanEditAPD } = require('../../middleware');
 const endpoints = require('./files');
+// const gifBuffer = require('../../test-data/files/gif_buffer.json');
+// const jpegBuffer = require('../../test-data/files/jpeg_buffer');
+// const pngBuffer = require('../../test-data/files/png_buffer');
+// const pdfBuffer = require('../../test-data/files/pdf_buffer');
 
-tap.test('apds files endpoints', async endpointTest => {
+tap.only('apds files endpoints', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = { get: sandbox.stub(), post: sandbox.stub() };
 
   const di = {
+    validateFile: sandbox.stub(),
     createNewFileForAPD: sandbox.stub(),
     deleteFileByID: sandbox.stub(),
     fileBelongsToAPD: sandbox.stub(),
@@ -39,6 +43,7 @@ tap.test('apds files endpoints', async endpointTest => {
     setupTest.ok(
       app.get.calledWith(
         '/apds/:id/files/:fileID',
+        can('view-document'),
         sinon.match.func
       ),
       'endpoint for fetching APD files is setup'
@@ -113,11 +118,7 @@ tap.test('apds files endpoints', async endpointTest => {
 
     const req = {
       body: { metadata: 'some metadata' },
-      params: { id: 'apd id' },
-      file: {
-        buffer: 'the file buffer',
-        size: 1234
-      }
+      params: { id: 'apd id' }
     };
 
     tests.beforeEach(async () => {
@@ -125,16 +126,56 @@ tap.test('apds files endpoints', async endpointTest => {
       handler = app.post.args[0].pop();
     });
 
+    tests.test('the file is a text file', async test => {
+      di.validateFile.resolves({
+        error: 'User is trying to upload a text-based file'
+      });
+      req.file = {
+        buffer: 'text file buffer',
+        size: 1234
+      };
+      try {
+        await handler(req, res);
+      } catch (err) {
+        test.equal(err.message, 'User is trying to upload a text-based file');
+        test.ok(res.status.calledWith(500), 'sends a 500 error');
+        test.ok(res.send.calledWith({ message: 'Unable to upload file' }));
+        test.ok(res.send.calledAfter(res.status), 'response is terminated');
+      }
+    });
+
+    tests.test('the file is not an image', async test => {
+      di.validateFile.resolves({ error: 'User is trying to upload a file type of application/pdf' })
+      req.file = {
+        buffer: 'pdf file buffer',
+        size: 1234
+      };
+      try {
+        await handler(req, res);
+      } catch (err) {
+        test.equal(err.message, 'User is trying to upload a file type of application/pdf');
+        test.ok(res.status.calledWith(500), 'sends a 500 error');
+        test.ok(res.send.calledWith({ message: 'Unable to upload file' }));
+        test.ok(res.send.calledAfter(res.status), 'response is terminated');
+      }
+    });
+
     tests.test(
       'there is an unexpected error creating the file in the database',
       async test => {
+        req.file = {
+          buffer: 'image file buffer',
+          size: 1234
+        };
+
+        di.validateFile.resolves({ success: true });
         di.createNewFileForAPD.rejects(new Error('some error'));
 
         await handler(req, res);
 
         test.ok(
           di.createNewFileForAPD.calledWith(
-            'the file buffer',
+            'image file buffer',
             'apd id',
             'some metadata',
             1234
@@ -142,13 +183,22 @@ tap.test('apds files endpoints', async endpointTest => {
           'database record is created from the request data'
         );
         test.ok(res.status.calledWith(500), 'sends a 500 error');
-        test.ok(res.end.calledAfter(res.status), 'response is terminated');
+        test.ok(res.send.calledAfter(res.status), 'response is terminated');
+        test.ok(
+          res.send.calledWith({ message: 'Unable to upload file' }),
+          'sends error message'
+        );
       }
     );
 
     tests.test(
       'there is an unexpected error putting the file in storage',
       async test => {
+        di.validateFile.resolves({ success: true });
+        req.file = {
+          buffer: 'image file buffer',
+          size: 1234
+        };
         di.createNewFileForAPD.resolves('new file ID');
         di.putFile.rejects(new Error('some other error'));
 
@@ -156,7 +206,7 @@ tap.test('apds files endpoints', async endpointTest => {
 
         test.ok(
           di.createNewFileForAPD.calledWith(
-            'the file buffer',
+            'image file buffer',
             'apd id',
             'some metadata',
             1234
@@ -164,7 +214,7 @@ tap.test('apds files endpoints', async endpointTest => {
           'database record is created from the request data'
         );
         test.ok(
-          di.putFile.calledWith('new file ID', 'the file buffer'),
+          di.putFile.calledWith('new file ID', 'image file buffer'),
           'the file is put into storage from the request data and the database ID'
         );
         test.ok(
@@ -172,11 +222,20 @@ tap.test('apds files endpoints', async endpointTest => {
           'file is removed from the database'
         );
         test.ok(res.status.calledWith(500), 'sends a 500 error');
-        test.ok(res.end.calledAfter(res.status), 'response is terminated');
+        test.ok(res.send.calledAfter(res.status), 'response is terminated');
+        test.ok(
+          res.send.calledWith({ message: 'Unable to upload file' }),
+          'sends error message'
+        );
       }
     );
 
     tests.test('the file is created and stored correctly', async test => {
+      di.validateFile.resolves({ success: true });
+      req.file = {
+        buffer: 'image file buffer',
+        size: 1234
+      };
       di.createNewFileForAPD.resolves('new file ID');
       di.putFile.resolves();
 
@@ -184,7 +243,7 @@ tap.test('apds files endpoints', async endpointTest => {
 
       test.ok(
         di.createNewFileForAPD.calledWith(
-          'the file buffer',
+          'image file buffer',
           'apd id',
           'some metadata',
           1234
@@ -192,7 +251,7 @@ tap.test('apds files endpoints', async endpointTest => {
         'database record is created from the request data'
       );
       test.ok(
-        di.putFile.calledWith('new file ID', 'the file buffer'),
+        di.putFile.calledWith('new file ID', 'image file buffer'),
         'the file is put into storage from the request data and the database ID'
       );
       test.ok(

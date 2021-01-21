@@ -29,7 +29,6 @@ const verifyWebToken = async (token, { verifier = verifyJWT } = {}) => {
  */
 const jwtExtractor = req => {
   const token = req.get('Authorization');
-  console.log({ token });
 
   if (token && token !== '') {
     if (token.match(/^bearer\s/i)) {
@@ -38,17 +37,17 @@ const jwtExtractor = req => {
     }
   }
 
-  const url = req.get('url');
+  const { url } = req;
   const cookieStr = req.get('Cookie');
-  console.log({ url, cookieStr });
-  if (url && url.match(/^\/apds\/(\d+)\/files/) && cookieStr) {
+  if (url && url.match(/^\/apds\/(\d+)\/files/i) && cookieStr) {
     // because our image files within the RTE are just img tags
     // we cannot append our authorization header, but because
     // we are storing our access token in a cookie, we can read
     // the access token from there in this instance
-    const cookies = cookieStr.split('; '); // split the cookie string into individual cookies
+    const re = /;\s*/;
+    const cookies = cookieStr.split(re); // split the cookie string into individual cookies
     const accessTokenObj = cookies.find(cookie =>
-      cookie.match(/^okta-token-storage_accessToken/)
+      cookie.match(/^okta-token-storage_accessToken/i)
     ); // find the cookie that stores the access token
     if (accessTokenObj) {
       // eslint-disable-next-line no-unused-vars

@@ -1,7 +1,7 @@
 const multer = require('multer');
-const FileType = require('file-type');
 const logger = require('../../logger')('apds file routes');
 const { can, userCanEditAPD } = require('../../middleware');
+const { validateFile: vf } = require('../../util/fileValidation');
 const {
   createNewFileForAPD: cf,
   deleteFileByID: df,
@@ -12,6 +12,7 @@ const { getFile: get, putFile: put } = require('../../files');
 module.exports = (
   app,
   {
+    validateFile = vf,
     createNewFileForAPD = cf,
     deleteFileByID = df,
     fileBelongsToAPD = fb,
@@ -50,18 +51,9 @@ module.exports = (
       try {
         const { metadata = null } = req.body;
         const { size = 0, buffer = null } = req.file;
-        const { mime = null } = (await FileType.fromBuffer(buffer)) || {};
-        if (!mime) {
-          throw new Error(`User is trying to upload a text-based file`);
-        }
-        if (
-          mime !== 'image/jpeg' &&
-          mime !== 'image/png' &&
-          mime !== 'image/gif' &&
-          mime !== 'image/tiff'
-        ) {
-          throw new Error(`User is trying to upload a file type of ${mime}`);
-        }
+
+        const { error } = await validateFile(buffer);
+        if (error) throw new Error(error);
 
         const fileID = await createNewFileForAPD(
           buffer,

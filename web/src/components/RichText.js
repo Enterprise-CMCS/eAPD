@@ -132,7 +132,7 @@ class RichText extends Component {
             file_picker_types: 'image',
             images_upload_handler: this.uploadImage(),
             images_upload_credentials: true,
-            images_file_types: 'jpeg,jpg,png,gif,tiff',
+            images_file_types: 'jpeg,jpg,jfif,pjeg,pjp,png,gif,webp',
             paste_data_images: false,
             a11y_advanced_options: true,
             menubar: '',
