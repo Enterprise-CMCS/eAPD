@@ -17,6 +17,7 @@ Anticipated release: January 21, 2021
 - Uses "CMS eAPD" for page title and header title ([#2780])
 - Update form field labels for the Activity Private Contractor Costs form ([#2742])
 - Updates FTE Allocation Help text ([#2743])
+- Swaps My State Dashboard title with eAPD logo ([#2776])
 
 
 #### 🐛 Bugs fixed
@@ -60,6 +61,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2736]: https://github.com/CMSgov/eAPD/issues/2736
 [#2780]: https://github.com/CMSgov/eAPD/issues/2780
 [#2743]: https://github.com/CMSgov/eAPD/issues/2743
+[#2776]: https://github.com/CMSgov/eAPD/issues/2776
 
 [ghsa-vrv8-v4w8-f95h]: https://github.com/advisories/GHSA-vrv8-v4w8-f95h
 [ghsa-w7rc-rwvf-8q5r]: https://github.com/advisories/GHSA-w7rc-rwvf-8q5r
