@@ -52,6 +52,11 @@ describe('<StateDashboard />', () => {
       });
     });
 
+    it('should display the eAPD Logo', () => {
+      const { getByTestId } = renderUtils;
+      expect(getByTestId('eAPDlogo')).toBeTruthy();
+    });
+
     it('should display introduction, but not instruction', () => {
       const { queryByText } = renderUtils;
       expect(
