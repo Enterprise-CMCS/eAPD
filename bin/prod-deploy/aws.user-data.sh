@@ -201,7 +201,7 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
           },                                        
           {
             "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
-            "log_group_name": "__ENVIRONMENT__/app/api/logs/cms-hitech-apd-api.logs"              
+            "log_group_name": "__ENVIRONMENT__/api/logs/cms-hitech-apd-api.logs"              
           }    
         ]
       }
