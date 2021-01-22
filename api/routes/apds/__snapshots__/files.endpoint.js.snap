@@ -8,7 +8,65 @@ exports[`APD files endpoints Get a file associated with an APD | GET /apds/:id/f
 
 exports[`APD files endpoints Get a file associated with an APD | GET /apds/:id/files/:fileID when authenticated as a user with permission with an APD that is not associated with the file 1`] = `""`;
 
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission when using a valid file with a non-existant apd ID 1`] = `""`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission when using a valid file with a valid request 1`] = `
+Object {
+  "message": "Unable to upload file",
+}
+`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission when using a valid file with a valid request 2`] = `
+Object {
+  "message": "Unable to upload file",
+}
+`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission when using a valid file with an APD in a state other than the user's state 1`] = `""`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission when using a valid file with an APD that is not in draft 1`] = `
+Object {
+  "error": "apd-not-editable",
+}
+`;
+
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (gif) 1`] = `
+Object {
+  "url": "/apds/4001/files/55f14e2f280fac9a99a68f7a557b46771754edcdcfa87000c3c7d2a0db0eba9c",
+}
+`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (jpg) 1`] = `
+Object {
+  "url": "/apds/4001/files/bf6243373249ead68d1dfbe9ec3b87de76bf0d544ef801238af1158c5a315a16",
+}
+`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (jpg) 2`] = `
+Object {
+  "url": "/apds/4001/files/bbcec58e6d9bcf00448b1a8941c231bdb11ed8b5d41d0bf7d8d052605af87e5e",
+}
+`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (png) 1`] = `
+Object {
+  "message": "Unable to upload file",
+}
+`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (png) 2`] = `
+Object {
+  "message": "Unable to upload file",
+}
+`;
+
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (png) 3`] = `
+Object {
+  "message": "Unable to upload file",
+}
+`;
 
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with an APD in a state other than the user's state 1`] = `""`;
 

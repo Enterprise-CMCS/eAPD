@@ -2,10 +2,6 @@ const tap = require('tap');
 const sinon = require('sinon');
 const { can, userCanEditAPD } = require('../../middleware');
 const endpoints = require('./files');
-// const gifBuffer = require('../../test-data/files/gif_buffer.json');
-// const jpegBuffer = require('../../test-data/files/jpeg_buffer');
-// const pngBuffer = require('../../test-data/files/png_buffer');
-// const pdfBuffer = require('../../test-data/files/pdf_buffer');
 
 tap.only('apds files endpoints', async endpointTest => {
   const sandbox = sinon.createSandbox();
@@ -145,7 +141,9 @@ tap.only('apds files endpoints', async endpointTest => {
     });
 
     tests.test('the file is not an image', async test => {
-      di.validateFile.resolves({ error: 'User is trying to upload a file type of application/pdf' })
+      di.validateFile.resolves({
+        error: 'User is trying to upload a file type of application/pdf'
+      });
       req.file = {
         buffer: 'pdf file buffer',
         size: 1234
@@ -153,7 +151,10 @@ tap.only('apds files endpoints', async endpointTest => {
       try {
         await handler(req, res);
       } catch (err) {
-        test.equal(err.message, 'User is trying to upload a file type of application/pdf');
+        test.equal(
+          err.message,
+          'User is trying to upload a file type of application/pdf'
+        );
         test.ok(res.status.calledWith(500), 'sends a 500 error');
         test.ok(res.send.calledWith({ message: 'Unable to upload file' }));
         test.ok(res.send.calledAfter(res.status), 'response is terminated');

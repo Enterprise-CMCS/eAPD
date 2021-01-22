@@ -1,8 +1,10 @@
 const FileType = require('file-type');
 
 const validateImage = async buffer => {
-  const { mime = null } = (await FileType.fromBuffer(buffer)) || {};
-  if (!mime) {
+  let mime = null;
+  try {
+    ({ mime } = (await FileType.fromBuffer(buffer)) || {};
+  } catch (e) {
     return { error: 'User is trying to upload a text-based file' };
   }
   if (
@@ -16,6 +18,6 @@ const validateImage = async buffer => {
   return { success: true };
 };
 
-exports.module = {
+module.exports = {
   validateFile: validateImage
 };
