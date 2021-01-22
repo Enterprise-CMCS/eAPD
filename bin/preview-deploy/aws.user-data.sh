@@ -7,6 +7,7 @@ gpasswd -a ec2-user eapd
 mkdir /app
 mkdir /app/api
 mkdir /app/web
+mkdir -p /app/api/logs
 
 chown -R :eapd /app
 chmod -R g+w /app
