@@ -14,7 +14,7 @@ const ApdSummary = ({
 
   return (
     <div>
-      <h2>Program summary</h2>
+      <h2>APD Overview</h2>
       <h3>Program introduction</h3>
       <p dangerouslySetInnerHTML={{ __html: programOverview }} />
 

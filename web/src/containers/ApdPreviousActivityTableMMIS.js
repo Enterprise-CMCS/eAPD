@@ -80,37 +80,19 @@ const ApdPreviousActivityTableMMIS = ({
           </caption>
           <thead>
             <tr>
-              <th id="prev_act_mmis_ffy">
-                <span className="ds-u-visibility--screen-reader">Year</span>
-              </th>
-              <th
-                id={`prev_act_mmis${level}_total`}
-                className="ds-u-text-align--right"
-              >
-                {TABLE_HEADERS.total}
-              </th>
-              <th
-                colSpan="2"
-                id={`prev_act_mmis${level}_federal`}
-                className="ds-u-text-align--right"
-              >
-                {TABLE_HEADERS.federal(level)}
-              </th>
-            </tr>
-            <tr>
               <td className="th" aria-hidden="true" />
               <th
                 id={`prev_act_mmis${level}_total_approved`}
                 className="ds-u-text-align--right"
               >
-                {TABLE_HEADERS.approved}
+                {TABLE_HEADERS.approvedTotal}
               </th>
 
               <th
                 id={`prev_act_mmis${level}_federal_approved`}
                 className="ds-u-text-align--right"
               >
-                {TABLE_HEADERS.approved}
+                {TABLE_HEADERS.approved(level)}
               </th>
               <th
                 id={`prev_act_mmis${level}_federal_actual`}
@@ -140,7 +122,7 @@ const ApdPreviousActivityTableMMIS = ({
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
-                        label={`total approved funding for MMIS at the ${level}/${100 -
+                        label={`approved total computable Medicaid funding for MMIS at the ${level}/${100 -
                           level} level for FFY ${year}, state plus federal`}
                         labelClassName="ds-u-visibility--screen-reader"
                         name={`approved-total-mmis${level}-${year}`}
@@ -167,7 +149,7 @@ const ApdPreviousActivityTableMMIS = ({
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
-                        label={`actual federal share for MMIS at the ${level}/${100 -
+                        label={`actual ffp expenditures for MMIS at the ${level}/${100 -
                           level} level for FFY ${year}`}
                         labelClassName="ds-u-visibility--screen-reader"
                         name={`actual-federal-mmis${level}-${year}`}
