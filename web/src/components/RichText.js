@@ -22,20 +22,63 @@ import { uploadFile } from '../actions/editApd';
 import { generateKey } from '../util';
 import '../file-loader';
 
+const VALID_FILE_TYPES = [
+  'jpeg',
+  'jpg',
+  'jfif',
+  'pjeg',
+  'pjp',
+  'png',
+  'gif',
+  'webp'
+];
+
+// this function is used when the user presses the image button
 const fileButtonOnClick = (button, editor, upload) => () => {
   const selectedFile = button.files[0];
-  if (selectedFile) {
+  if (selectedFile && selectedFile.type) {
+    // check file type to see if it's valid before trying to upload
+    const { type } = selectedFile;
+    // eslint-disable-next-line no-unused-vars
+    const [fileKind, fileType] = type.split('/');
+    if (!VALID_FILE_TYPES.includes(fileType)) {
+      // if the file type is not allowed notify the user and close the request
+      editor.notificationManager.open({
+        text: `${fileType.toUpperCase()} file type not supported`,
+        type: 'error'
+      });
+      return Promise.resolve();
+    }
+
+    // add a placeholder to the editor
     const placeholderKey = `[uploading image {${generateKey()}}]`;
     editor.insertContent(placeholderKey);
-    return upload(selectedFile).then(url => {
-      const content = editor.getContent();
-      const newContent = content.replace(placeholderKey, `<img src="${url}">`);
-      editor.setContent(newContent);
-    });
+    return upload(selectedFile)
+      .then(url => {
+        // replaces the placehold with a link to the image
+        const content = editor.getContent();
+        const newContent = content.replace(
+          placeholderKey,
+          `<img src="${url}">`
+        );
+        editor.setContent(newContent);
+      })
+      .catch(() => {
+        // if there is an error notify the user, remove the placeholder, and close the request
+        editor.notificationManager.open({
+          text: 'Unable to upload file',
+          type: 'error'
+        });
+        const content = editor.getContent();
+        const newContent = content.replace(placeholderKey, '');
+        editor.setContent(newContent);
+        return Promise.resolve();
+      });
   }
   return Promise.resolve();
 };
 
+// sets up the image button
 const setupTinyMCE = upload => editor => {
   editor.ui.registry.addButton('eapdImageUpload', {
     icon: 'image',
@@ -63,6 +106,8 @@ class RichText extends Component {
     };
   }
 
+  // this is called when a user drags and drops an image into the editor
+  // the editor will warn the user if the file type is not allowed before trying to upload
   uploadImage = () => async (blob, success, failure) => {
     const { uploadFile: upload, onSync } = this.props;
     const { id } = this.state;
@@ -80,7 +125,7 @@ class RichText extends Component {
       const editor = tinyMCE.get(id);
       onSync(editor.getContent());
     } catch (e) {
-      failure();
+      failure('Unable to upload file');
     }
   };
 
@@ -131,9 +176,8 @@ class RichText extends Component {
             browser_spellcheck: true,
             file_picker_types: 'image',
             images_upload_handler: this.uploadImage(),
-            images_upload_credentials: true,
-            images_file_types: 'jpeg,jpg,jfif,pjeg,pjp,png,gif,webp',
-            paste_data_images: false,
+            images_file_types: VALID_FILE_TYPES.join(','),
+            paste_data_images: true, // true adds drag and drop support
             a11y_advanced_options: true,
             menubar: '',
             relative_urls: false,

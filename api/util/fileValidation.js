@@ -3,7 +3,7 @@ const FileType = require('file-type');
 const validateImage = async buffer => {
   let mime = null;
   try {
-    ({ mime } = (await FileType.fromBuffer(buffer)) || {};
+    ({ mime } = (await FileType.fromBuffer(buffer)) || {});
   } catch (e) {
     return { error: 'User is trying to upload a text-based file' };
   }

@@ -47,7 +47,7 @@ module.exports = (
     can('view-document'),
     userCanEditAPD(),
     multer().single('file'),
-    async (req, res) => {
+    async (req, res, next) => {
       try {
         const { metadata = null } = req.body;
         const { size = 0, buffer = null } = req.file;
@@ -71,8 +71,7 @@ module.exports = (
 
         res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
       } catch (e) {
-        logger.error({ id: req.id, message: e });
-        res.status(500).send({ message: 'Unable to upload file' });
+        next(e);
       }
     }
   );
