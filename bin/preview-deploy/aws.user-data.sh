@@ -17,6 +17,9 @@ mkdir /app/tls
 amazon-linux-extras install nginx1.12
 yum -y install git postgresql-server amazon-cloudwatch-agent
 
+# Add the Splunk user to the ec2-user group so that it can read logs in /home/ec2-user
+usermod -a -G ec2-user splunk
+
 # Setup postgres
 service postgresql initdb
 echo "
