@@ -17,9 +17,6 @@ mkdir /app/tls
 amazon-linux-extras install nginx1.12
 yum -y install git postgresql-server amazon-cloudwatch-agent
 
-# Add the Splunk user to the ec2-user group so that it can read logs in /home/ec2-user
-usermod -a -G ec2-user splunk
-
 # Setup postgres
 service postgresql initdb
 echo "
@@ -269,13 +266,33 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
       "files": {
         "collect_list": [
           {
-            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-error-0.log*",
-            "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-error-0.log"
+            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/eAPD-API-error-0.log"
           },
           {
-            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-out-0.log*",
-            "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-out-0.log"
-          }
+            "file_path": "/app/api/logs/eAPD-API-out-0.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/eAPD-API-out-0.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-migration-error.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-migration-error.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-migration-out.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-migration-out.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-seeding-error.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-seeding-error.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-seeding-out.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-seeding-out.log"
+          },                                        
+          {
+            "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/cms-hitech-apd-api.logs"              
+          }    
         ]
       }
     }
@@ -351,6 +368,8 @@ echo "module.exports = {
     script: 'main.js',
     instances: 1,
     autorestart: true,
+    error_file: "/app/api/logs/eAPD-API-error-0.log",
+    out_file: "/app/api/logs/eAPD-API-out-0.log",
     env: {
       AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 15,
       AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,

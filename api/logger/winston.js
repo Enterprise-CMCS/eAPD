@@ -1,3 +1,5 @@
+var path =
+
 require('../env');
 const fs = require('fs');
 const winston = require('winston');
@@ -15,7 +17,7 @@ const formats = [
 const transports = [
   LOG_CONSOLE === 'true' && new winston.transports.Console(),
   LOG_FILE === 'true' &&
-    new winston.transports.File({ filename: `${packageName}.log` }),
+    new winston.transports.File({ filename: `/app/api/logs/${packageName}.log` }),
   new winston.transports.Stream({ stream: fs.createWriteStream('/dev/null') })
   // new AwsCloudWatch(options);
 ].filter(Boolean);
