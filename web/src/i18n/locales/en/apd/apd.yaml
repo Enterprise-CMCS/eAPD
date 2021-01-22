@@ -1,21 +1,14 @@
-title: Program Summary
-helpText: >-
-  Provide an introduction to the state program. Include context for this
-  funding request by providing information such as current size,
-  future vision, and how the program is positioned within the state. This
-  information is similar to the content from the IAPD executive summary
-  template section.
+title: APD Overview
 overview:
-  title: Program Overview
   instruction:
     short: >-
       Choose the federal fiscal year(s) this APD covers.
 
 introduction:
   instruction:
-    heading: Program Introduction
+    heading: Introduction
     detail: >-
-      Provide a high-level introduction to the state program. Include the history and context of the program and the state’s future vision for it.
+      Provide a brief introduction to the state program. Include context for this funding request by providing information such as current size of the program and how the program is positioned within the state. You might also include a high-level look at the history and context of the program and the state’s future vision for it.
 
 hit:
   instruction:

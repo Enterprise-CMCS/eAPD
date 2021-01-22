@@ -53,7 +53,7 @@ describe('APD edit actions for adding or removing APD years', () => {
   });
 });
 
-describe('APD edit actions for APD summary and HIE/HIT/MMIS narratives', () => {
+describe('APD edit actions for APD overview and HIE/HIT/MMIS narratives', () => {
   it('dispatches an action for setting the program overview', () => {
     expect(setProgramOverview('overview')).toEqual({
       type: EDIT_APD,
