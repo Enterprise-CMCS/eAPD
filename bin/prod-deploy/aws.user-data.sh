@@ -4,7 +4,7 @@
 # directory, then give the directory group write permission
 groupadd eapd
 gpasswd -a ec2-user eapd
-mkdir /app
+mkdir -p /app/api/logs
 chown -R :eapd /app
 chmod g+w /app
 
