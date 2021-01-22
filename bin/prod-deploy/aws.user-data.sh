@@ -11,6 +11,9 @@ chmod g+w /app
 # Oddly, EC2 images don't have git installed. Shruggy person.
 yum -y install git
 
+# Add the Splunk user to the ec2-user group so that it can read logs in /home/ec2-user
+usermod -a -G ec2-user splunk
+
 #Install CloudWatch Agent
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 
