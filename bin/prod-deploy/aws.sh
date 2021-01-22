@@ -125,6 +125,8 @@ function addEcosystemToUserData() {
       script: 'main.js',
       instances: 1,
       autorestart: true,
+      error_file: "/app/api/logs/eAPD-API-error-0.log",
+      out_file: "/app/api/logs/eAPD-API-out-0.log",
       env: {
         AWS_ACCESS_KEY_ID: '$API_AWS_ACCESS_KEY_ID',
         AWS_SECRET_ACCESS_KEY: '$API_AWS_SECRET_ACCESS_KEY',
@@ -149,6 +151,8 @@ function addEcosystemToUserData() {
       script: 'npm',
       args: 'run migrate',
       autorestart: false,
+      error_file: "/app/api/logs/Database-migration-error.log",
+      out_file: "/app/api/logs/Database-migration-out.log",
       env: {
         NODE_ENV: 'production',
         DATABASE_URL: '$API_DATABASE_URL'
@@ -158,6 +162,8 @@ function addEcosystemToUserData() {
       script: 'npm',
       args: 'run seed',
       autorestart: false,
+      error_file: "/app/api/logs/Database-seeding-error.log",
+      out_file: "/app/api/logs/Database-seeding-out.log",
       env: {
         NODE_ENV: 'production',
         DATABASE_URL: '$API_DATABASE_URL'
