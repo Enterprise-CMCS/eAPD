@@ -17,7 +17,6 @@ import Icon, {
   faChevronDown,
   faChevronLeft,
   faSignOutAlt,
-  faEdit,
   faUserShield
 } from './Icons';
 
@@ -106,16 +105,6 @@ class Header extends Component {
                         <Icon icon={faChevronDown} style={{ width: '8px' }} />
                       </button>
                       <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
-                        <li>
-                          <Link
-                            to="/me"
-                            onClick={this.toggleDropdown}
-                            className="nav--dropdown__action"
-                          >
-                            <Icon icon={faEdit} style={{ width: '14px' }} />
-                            Manage account
-                          </Link>
-                        </li>
                         {canViewStateAdmin && (
                           <li>
                             <Link
