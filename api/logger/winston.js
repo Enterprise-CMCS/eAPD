@@ -1,5 +1,3 @@
-var path =
-
 require('../env');
 const fs = require('fs');
 const winston = require('winston');
