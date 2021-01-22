@@ -16,7 +16,7 @@ export const uploadFile = file => async (dispatch, getState) => {
   const reader = new FileReader();
 
   return new Promise((resolve, reject) => {
-    reader.addEventListener('load', async () => {
+    reader.addEventListener('load', () => {
       const form = new FormData();
       form.append('file', new Blob([reader.result]));
 
