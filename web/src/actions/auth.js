@@ -188,12 +188,12 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
 export const mfaActivate = code => async dispatch => {
   const transaction = await retrieveExistingTransaction();
 
-  const activateTransaciton = await transaction.activate({
+  const activateTransaction = await transaction.activate({
     passCode: code
   });
 
-  if (activateTransaciton.status === 'SUCCESS') {
-    const expiresAt = await setTokens(activateTransaciton.sessionToken);
+  if (activateTransaction.status === 'SUCCESS') {
+    const expiresAt = await setTokens(activateTransaction.sessionToken);
     dispatch(setupTokenManager());
     dispatch(updateSessionExpiration(expiresAt));
     dispatch(getCurrentUser());

@@ -90,20 +90,8 @@ describe('activities reducer helpers', () => {
       name: '',
       plannedEndDate: '',
       plannedStartDate: '',
-      outcomes: [
-        {
-          key: '--- key ---',
-          outcome: '',
-          metrics: [{ key: '--- key ---', metric: '' }]
-        }
-      ],
-      schedule: [
-        {
-          key: '--- key ---',
-          milestone: '',
-          endDate: ''
-        }
-      ],
+      outcomes: [],
+      schedule: [],
       statePersonnel: [],
       summary: '',
       standardsAndConditions: {

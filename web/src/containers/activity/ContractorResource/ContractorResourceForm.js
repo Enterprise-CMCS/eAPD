@@ -112,18 +112,19 @@ const ContractorResourceForm = ({
         value={description}
         onChange={getHandler(setDescription)}
       />
-      <FormLabel>Contract Term</FormLabel>
+      <FormLabel>Full Contract Term</FormLabel>
       <span className="ds-c-field__hint">
+        Provide the total length of the contract, including any option years.
         Contract term may extend beyond the FFY(s) included in this APD.
       </span>
       <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
         <DateField
-          label="Start date"
+          label="Contract start date"
           value={start}
           onChange={getDateHandler(setStartDate)}
         />
         <DateField
-          label="End date"
+          label="Contract end date"
           hint=""
           value={end}
           onChange={getDateHandler(setEndDate)}
@@ -133,7 +134,7 @@ const ContractorResourceForm = ({
         label="Total Contract Cost"
         name="contractor-total-cost"
         size="medium"
-        hint="Provide total cost of the contract, not the total amount you are requesting for the FFYs. Total contract cost will not be added to your FFY request."
+        hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."
         value={totalCost}
         onChange={getHandler(setTotalCost)}
       />

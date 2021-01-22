@@ -8,7 +8,7 @@ describe('staticItems', () => {
   it('defines the apd resources within the app', () => {
     const labels = staticItems.map(item => item.label);
     expect(labels).toEqual([
-      'Program Summary',
+      'APD Overview',
       'Key State Personnel',
       'Results of Previous Activities',
       'Activities',
@@ -35,7 +35,7 @@ describe('staticItems', () => {
 describe('getContinuePreviousLinks()', () => {
   test('first apd page', () => {
     const { continueLink, previousLink } = getContinuePreviousLinks(
-      '/apd/program-summary',
+      '/apd/apd-overview',
       staticItems
     );
     expect(continueLink.url).toEqual('/apd/state-profile');
@@ -130,7 +130,7 @@ describe('nav reducer', () => {
       const payload = {
         payload: {
           location: {
-            pathname: '/apd/program-summary'
+            pathname: '/apd/apd-overview'
           }
         }
       };
