@@ -376,8 +376,8 @@ echo "module.exports = {
     script: 'main.js',
     instances: 1,
     autorestart: true,
-    error_file: "/app/api/logs/eAPD-API-error-0.log",
-    out_file: "/app/api/logs/eAPD-API-out-0.log",
+    error_file: '/app/api/logs/eAPD-API-error-0.log',
+    out_file: '/app/api/logs/eAPD-API-out-0.log',
     env: {
       AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 15,
       AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
