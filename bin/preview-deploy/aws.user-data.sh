@@ -268,31 +268,31 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
         "collect_list": [
           {
             "file_path": "/app/api/logs/eAPD-API-error-0.log*",
-            "log_group_name": "__ENVIRONMENT__/app/api/logs/eAPD-API-error-0.log"
+            "log_group_name": "preview/app/api/logs/eAPD-API-error-0.log"
           },
           {
             "file_path": "/app/api/logs/eAPD-API-out-0.log*",
-            "log_group_name": "__ENVIRONMENT__/app/api/logs/eAPD-API-out-0.log"
+            "log_group_name": "preview/app/api/logs/eAPD-API-out-0.log"
           },
           {
             "file_path": "/app/api/logs/Database-migration-error.log*",
-            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-migration-error.log"
+            "log_group_name": "preview/app/api/logs/Database-migration-error.log"
           },
           {
             "file_path": "/app/api/logs/Database-migration-out.log*",
-            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-migration-out.log"
+            "log_group_name": "preview/app/api/logs/Database-migration-out.log"
           },
           {
             "file_path": "/app/api/logs/Database-seeding-error.log*",
-            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-seeding-error.log"
+            "log_group_name": "preview/app/api/logs/Database-seeding-error.log"
           },
           {
             "file_path": "/app/api/logs/Database-seeding-out.log*",
-            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-seeding-out.log"
+            "log_group_name": "preview/app/api/logs/Database-seeding-out.log"
           },                                        
           {
             "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
-            "log_group_name": "__ENVIRONMENT__/app/api/logs/cms-hitech-apd-api.logs"              
+            "log_group_name": "preview/app/api/logs/cms-hitech-apd-api.logs"              
           }    
         ]
       }
