@@ -1,8 +1,8 @@
 const getHelpDoc = {
-  '/docs/help': {
+  '/docs/account-registration': {
     get: {
       tags: ['Docs'],
-      description: 'Get the help documentation',
+      description: 'Get the account registration documentation',
       responses: {
         200: {
           description: 'The file',

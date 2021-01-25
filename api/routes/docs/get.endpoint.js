@@ -1,8 +1,8 @@
 const { login, api } = require('../../endpoint-tests/utils');
 
 describe('Document endpoints', () => {
-  describe('Get help doc | GET /docs/help', () => {
-    const url = '/docs/help';
+  describe('Get help doc | GET /docs/account-registration', () => {
+    const url = '/docs/account-registration';
 
     it('when authenticated', async () => {
       const authApi = login();

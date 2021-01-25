@@ -32,7 +32,7 @@ tap.test('docs endpoints', async endpointTest => {
     endpoints(app);
 
     setupTest.ok(
-      app.get.calledWith('/docs/help', sinon.match.func),
+      app.get.calledWith('/docs/account-registration', sinon.match.func),
       'endpoint for fetching help doc is setup'
     );
   });
