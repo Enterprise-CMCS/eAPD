@@ -1106,6 +1106,27 @@ Object {
         ],
       },
     },
+    "/docs/help": Object {
+      "get": Object {
+        "description": "Get the help documentation",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/pdf": Object {
+                "schema": Object {
+                  "format": "binary",
+                  "type": "string",
+                },
+              },
+            },
+            "description": "The file",
+          },
+        },
+        "tags": Array [
+          "Docs",
+        ],
+      },
+    },
     "/me": Object {
       "get": Object {
         "description": "Get information about the current user",
