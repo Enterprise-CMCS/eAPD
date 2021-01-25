@@ -4,14 +4,6 @@
 # directory, then give the directory group write permission
 groupadd eapd
 gpasswd -a ec2-user eapd
-mkdir -p /app/api/logs
-touch /app/api/logs/eAPD-API-error-0.log
-touch /app/api/logs/eAPD-API-out-0.log
-touch /app/api/logs/Database-migration-error.log
-touch /app/api/logs/Database-migration-out.log
-touch /app/api/logs/Database-seeding-error.log
-touch /app/api/logs/Database-seeding-out.log
-touch /app/api/logs/cms-hitech-apd-api.logs
 chown -R :eapd /app
 chmod g+w /app
 
@@ -233,6 +225,15 @@ su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
+
+mkdir -p /app/api/logs
+touch /app/api/logs/eAPD-API-error-0.log
+touch /app/api/logs/eAPD-API-out-0.log
+touch /app/api/logs/Database-migration-error.log
+touch /app/api/logs/Database-migration-out.log
+touch /app/api/logs/Database-seeding-error.log
+touch /app/api/logs/Database-seeding-out.log
+touch /app/api/logs/cms-hitech-apd-api.logs
 
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
