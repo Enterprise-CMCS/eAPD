@@ -45,7 +45,10 @@ const fileButtonOnClick = (button, editor, upload) => () => {
       // if the file type is not allowed notify the user and close the request
       editor.notificationManager.open({
         text: `${fileType.toUpperCase()} file type not supported`,
-        type: 'error'
+        type: 'error',
+        icon: 'warning',
+        closeButton: true,
+        timeout: 5000
       });
       return Promise.resolve();
     }
@@ -67,7 +70,10 @@ const fileButtonOnClick = (button, editor, upload) => () => {
         // if there is an error notify the user, remove the placeholder, and close the request
         editor.notificationManager.open({
           text: 'Unable to upload file',
-          type: 'error'
+          type: 'error',
+          icon: 'warning',
+          closeButton: true,
+          timeout: 5000
         });
         const content = editor.getContent();
         const newContent = content.replace(placeholderKey, '');
