@@ -5,6 +5,13 @@
 groupadd eapd
 gpasswd -a ec2-user eapd
 mkdir -p /app/api/logs
+touch /app/api/logs/eAPD-API-error-0.log
+touch /app/api/logs/eAPD-API-out-0.log
+touch /app/api/logs/Database-migration-error.log
+touch /app/api/logs/Database-migration-out.log
+touch /app/api/logs/Database-seeding-error.log
+touch /app/api/logs/Database-seeding-out.log
+touch /app/api/logs/cms-hitech-apd-api.logs
 chown -R :eapd /app
 chmod g+w /app
 
