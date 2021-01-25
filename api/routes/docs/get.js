@@ -9,7 +9,7 @@ module.exports = (app, { getFile = get } = {}) => {
   app.get('/docs/account-registration', async (req, res) => {
     try {
       const file = await getFile(HELP_DOC);
-      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Type', 'application/octet-stream');
       res.setHeader('Content-Disposition', `attachment; filename=${HELP_DOC}`);
       res.send(file).end();
     } catch (e) {
