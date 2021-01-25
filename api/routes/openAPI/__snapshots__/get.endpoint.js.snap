@@ -1106,9 +1106,9 @@ Object {
         ],
       },
     },
-    "/docs/help": Object {
+    "/docs/account-registration": Object {
       "get": Object {
-        "description": "Get the help documentation",
+        "description": "Get the account registration documentation",
         "responses": Object {
           "200": Object {
             "content": Object {
