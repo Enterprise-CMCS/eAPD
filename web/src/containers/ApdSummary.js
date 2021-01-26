@@ -35,7 +35,9 @@ const ApdSummary = ({
     const year = e.target.value;
 
     if (e.target.checked === false) {
-      const confirmation = window.confirm(`Unchecking Federal Fiscal Year ${year} will permanently delete any FFY ${year} specific data in the current APD.`); // eslint-disable-line no-alert
+      const confirmation = window.confirm(
+        `Unchecking Federal Fiscal Year ${year} will permanently delete any FFY ${year} specific data in the current APD.`
+      ); // eslint-disable-line no-alert
       if (confirmation === true) {
         removeApdYear(year);
       } else {
