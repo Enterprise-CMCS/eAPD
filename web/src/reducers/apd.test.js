@@ -315,7 +315,7 @@ describe('APD reducer', () => {
             costAllocationNarrative: {
               '1741': { otherSources: '' },
               '1742': { otherSources: '' },
-              'methodology': ''
+              methodology: ''
             },
             contractorResources: [
               {
@@ -399,7 +399,7 @@ describe('APD reducer', () => {
             costAllocationNarrative: {
               '1741': { otherSources: '' },
               '1742': { otherSources: '' },
-              'methodology': ''
+              methodology: ''
             },
             contractorResources: [
               {
@@ -517,7 +517,7 @@ describe('APD reducer', () => {
             costAllocationNarrative: {
               '1741': { otherSources: '' },
               '1742': { otherSources: '' },
-              'methodology': ''
+              methodology: ''
             },
             contractorResources: [
               {
@@ -631,7 +631,7 @@ describe('APD reducer', () => {
             },
             costAllocationNarrative: {
               '1742': { otherSources: '' },
-              'methodology': ''
+              methodology: ''
             },
             contractorResources: [
               {
