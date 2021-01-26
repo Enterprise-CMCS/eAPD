@@ -18,6 +18,8 @@ tap.test('docs endpoints', async endpointTest => {
     end: sandbox.stub()
   };
 
+  const next = sandbox.stub();
+
   endpointTest.beforeEach(done => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
@@ -53,10 +55,16 @@ tap.test('docs endpoints', async endpointTest => {
         async test => {
           di.getFile.rejects(new Error('some other error'));
 
-          await handler({ params: {} }, res);
+          await handler({ params: {} }, res, next);
 
-          test.ok(res.status.calledWith(400), 'sends a 400 error');
-          test.ok(res.end.calledAfter(res.status), 'response is terminated');
+          test.ok(
+            next.calledWith(sinon.match.instanceOf(Error)),
+            'sends error to next'
+          );
+          test.ok(
+            next.calledWith(sinon.match({ message: 'some other error' })),
+            'sends some other error message to next'
+          );
         }
       );
 
@@ -66,7 +74,7 @@ tap.test('docs endpoints', async endpointTest => {
           const file = {};
           di.getFile.resolves(file);
 
-          await handler({ params: {} }, res);
+          await handler({ params: {} }, res, next);
 
           test.ok(res.send.calledWith(file), 'sends the file');
           test.ok(res.end.calledAfter(res.send), 'response is terminated');
