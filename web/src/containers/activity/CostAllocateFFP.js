@@ -16,6 +16,7 @@ import {
 } from '../../reducers/activities.selectors';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
+import { t } from '../../i18n';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -250,13 +251,21 @@ const CostAllocateFFP = ({
           )}
 
           <div className="data-entry-box ds-u-margin-bottom--5">
-            <Instruction
-              source="activities.costAllocate.ffp.quarterlyFFPInstruction"
-              headingDisplay={{
-                level: 'p',
-                className: 'ds-h4'
-              }}
-            />
+            {!isViewOnly && (
+              <Instruction
+                source="activities.costAllocate.ffp.quarterlyFFPInstruction"
+                headingDisplay={{
+                  level: 'p',
+                  className: 'ds-h4'
+                }}
+              />
+            )}
+
+            {isViewOnly && (
+              <h4>
+                {t("activities.costAllocate.ffp.quarterlyFFPInstruction.heading")}
+              </h4>
+            )}
 
             <CostAllocateFFPQuarterly
               activityIndex={activityIndex}
