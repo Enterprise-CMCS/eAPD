@@ -266,13 +266,45 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
       "files": {
         "collect_list": [
           {
-            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-error-0.log*",
-            "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-error-0.log"
+            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
+            "log_group_name": "preview/app/api/logs/eAPD-API-error-0.log"
           },
           {
-            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-out-0.log*",
-            "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-out-0.log"
-          }
+            "file_path": "/app/api/logs/eAPD-API-out-0.log*",
+            "log_group_name": "preview/app/api/logs/eAPD-API-out-0.log"
+          },
+          {
+            "file_path": "/app/api/logs/eAPD-API-*",
+            "log_group_name": "preview/app/api/logs/eAPD-API-combined-0.log"
+          },          
+          {
+            "file_path": "/app/api/logs/Database-migration-error.log*",
+            "log_group_name": "preview/app/api/logs/Database-migration-error.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-migration-out.log*",
+            "log_group_name": "preview/app/api/logs/Database-migration-out.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-migration-*",
+            "log_group_name": "preview/app/api/logs/Database-migration-combined.log"
+          },          
+          {
+            "file_path": "/app/api/logs/Database-seeding-error.log*",
+            "log_group_name": "preview/app/api/logs/Database-seeding-error.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-seeding-out.log*",
+            "log_group_name": "preview/app/api/logs/Database-seeding-out.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-seeding-*",
+            "log_group_name": "preview/app/api/logs/Database-seeding-combined.log"
+          },                                           
+          {
+            "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
+            "log_group_name": "preview/app/api/logs/cms-hitech-apd-api.logs"              
+          }    
         ]
       }
     }
@@ -301,6 +333,15 @@ export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
 
 cd ~
+
+mkdir -p /app/api/logs
+touch /app/api/logs/eAPD-API-error-0.log
+touch /app/api/logs/eAPD-API-out-0.log
+touch /app/api/logs/Database-migration-error.log
+touch /app/api/logs/Database-migration-out.log
+touch /app/api/logs/Database-seeding-error.log
+touch /app/api/logs/Database-seeding-out.log
+touch /app/api/logs/cms-hitech-apd-api.logs
 
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
@@ -348,6 +389,8 @@ echo "module.exports = {
     script: 'main.js',
     instances: 1,
     autorestart: true,
+    error_file: '/app/api/logs/eAPD-API-error-0.log',
+    out_file: '/app/api/logs/eAPD-API-out-0.log',
     env: {
       AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 15,
       AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
