@@ -8,6 +8,7 @@ Anticipated release: January 25, 2021
 
 
 #### 🐛 Bugs fixed
+- Fixes issue where "Add another activity" button was not appearing as it should ([#2525])
 
 
 #### ⚙️ Behind the scenes
@@ -17,4 +18,5 @@ Anticipated release: January 25, 2021
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2525]: https://github.com/CMSgov/eAPD/issues/2525
 [#2776]: https://github.com/CMSgov/eAPD/issues/2776
