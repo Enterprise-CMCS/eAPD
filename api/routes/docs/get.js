@@ -16,9 +16,6 @@ module.exports = (app, { getFile = get } = {}) => {
         );
         res.send(file).end();
       })
-      .catch(error => {
-        console.log({ error });
-        next(error);
-      });
+      .catch(next);
   });
 };
