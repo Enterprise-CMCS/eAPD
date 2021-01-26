@@ -4,6 +4,7 @@ const affiliations = require('../affiliations/openAPI');
 const apds = require('../apds/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
+const docs = require('../docs/openAPI');
 const me = require('../me/openAPI');
 const roles = require('../roles/openAPI');
 const states = require('../states/openAPI');
@@ -22,6 +23,7 @@ module.exports = {
     ...apds,
     ...authActivities,
     ...authRoles,
+    ...docs,
     ...me,
     ...roles,
     ...states,
