@@ -11,9 +11,6 @@ chmod g+w /app
 # Oddly, EC2 images don't have git installed. Shruggy person.
 yum -y install git
 
-# Add the Splunk user to the ec2-user group so that it can read logs in /home/ec2-user
-usermod -a -G ec2-user splunk
-
 #Install CloudWatch Agent
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 
@@ -179,12 +176,44 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
       "files": {
         "collect_list": [
           {
-            "file_path": "/home/ec2-user/.pm2/logs/*",
-            "log_group_name": "__ENVIRONMENT__/home/ec2-user/.pm2/logs"
+            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/eAPD-API-error-0.log"
           },
           {
-            "file_path": "/home/ec2-user/.npm/_logs/*",
-            "log_group_name": "__ENVIRONMENT__/home/ec2-user/.npm/_logs"              
+            "file_path": "/app/api/logs/eAPD-API-out-0.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/eAPD-API-out-0.log"
+          },
+         {
+            "file_path": "/app/api/logs/eAPD-API-*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/eAPD-API-combined-0.log"
+          },          
+          {
+            "file_path": "/app/api/logs/Database-migration-error.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-migration-error.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-migration-out.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-migration-out.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-migration-*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-migration-combined.log"
+          },          
+          {
+            "file_path": "/app/api/logs/Database-seeding-error.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-seeding-error.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-seeding-out.log*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-seeding-out.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-seeding-*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/Database-seeding-combined.log"
+          },                                            
+          {
+            "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
+            "log_group_name": "__ENVIRONMENT__/app/api/logs/cms-hitech-apd-api.logs"              
           }    
         ]
       }
@@ -209,6 +238,15 @@ su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
+
+mkdir -p /app/api/logs
+touch /app/api/logs/eAPD-API-error-0.log
+touch /app/api/logs/eAPD-API-out-0.log
+touch /app/api/logs/Database-migration-error.log
+touch /app/api/logs/Database-migration-out.log
+touch /app/api/logs/Database-seeding-error.log
+touch /app/api/logs/Database-seeding-out.log
+touch /app/api/logs/cms-hitech-apd-api.logs
 
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
