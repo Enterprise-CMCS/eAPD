@@ -11,7 +11,7 @@ const defaultProps = {
   activityCount: 2,
   addActivity: jest.fn(),
   location: { pathname: '/apd/activity/1/ffp' },
-  useParams: () => ({ activityIndex: 1 })
+  useParams: () => ({ activityIndex: '1' })
 };
 
 const setup = (props = {}) => {
@@ -26,7 +26,7 @@ describe('Secondary Nav component', () => {
 
   it('renders without add activity button when not on the last activity', () => {
     const component = setup({
-      useParams: () => ({ activityIndex: 0 })
+      useParams: () => ({ activityIndex: '0' })
     });
     expect(component.find('Link').exists()).toBe(false);
   });
