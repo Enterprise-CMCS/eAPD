@@ -40,10 +40,10 @@ openssl x509 -req -sha256 -days 365 -in /app/tls/server.csr -signkey /app/tls/se
 rm -f /app/tls/server.csr
 
 # Set SELinux context so Nginx can read the cert files
-semanage fcontext -a -t httpd_sys_content_t /app/tls/server.crt
-restorecon -v /app/tls/server.crt
-semanage fcontext -a -t httpd_sys_content_t /app/tls/server.key
-restorecon -v /app/tls/server.key
+semanage fcontext -a -t httpd_sys_content_t /app/tls(/.*)?
+restorecon -Rv /app/tls
+semanage fcontext -a -t httpd_sys_content_t /app/web(/.*)?
+restorecon -Rv /app/web
 
 # Create nginx config
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
@@ -76,12 +76,11 @@ http {
     default_type        application/octet-stream;
 
     server {
-        listen       443 default_server;
-        listen       [::]:443 default_server;
+        listen       443 default_server ssl;
+        listen       [::]:443 default_server ssl;
         server_name  _;
         root         /app/web;
 
-        ssl                 on;
         ssl_certificate     /app/tls/server.crt;
         ssl_certificate_key /app/tls/server.key;
 
