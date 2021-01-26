@@ -2,6 +2,7 @@ const logger = require('../logger')('routes index');
 const affiliations = require('./affiliations');
 const apds = require('./apds');
 const auth = require('./auth');
+const docs = require('./docs');
 const me = require('./me');
 const roles = require('./roles');
 const states = require('./states');
@@ -13,6 +14,7 @@ module.exports = (
   affiliationsEndpoint = affiliations,
   apdsEndpoint = apds,
   authEndpoint = auth,
+  docsEndpoint = docs,
   meEndpoint = me,
   rolesEndpoint = roles,
   statesEndpoint = states,
@@ -25,6 +27,8 @@ module.exports = (
   apdsEndpoint(app);
   logger.debug('setting up routes for auth');
   authEndpoint(app);
+  logger.debug('setting up routes for docs');
+  docsEndpoint(app);
   logger.debug('setting up routes for me');
   meEndpoint(app);
   logger.debug('setting up routes for roles');

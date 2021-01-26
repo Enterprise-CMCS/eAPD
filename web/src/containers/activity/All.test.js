@@ -18,7 +18,7 @@ const initialProps = {
   ]
 };
 
-const setup = (props) => shallow(<Activities {...initialProps} {...props} />);
+const setup = props => shallow(<Activities {...initialProps} {...props} />);
 
 describe('the Activities component', () => {
   it('renders correctly', () => {

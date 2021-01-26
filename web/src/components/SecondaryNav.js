@@ -12,7 +12,8 @@ import { addActivity as actualAddActivity } from '../actions/editActivity';
 const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
   const { activityIndex } = useParams();
   const showAddActivityLink =
-    activityIndex + 1 === activityCount && location.pathname.endsWith('ffp');
+    Number(activityIndex) + 1 === activityCount &&
+    location.pathname.endsWith('ffp');
 
   return (
     <Fragment>
