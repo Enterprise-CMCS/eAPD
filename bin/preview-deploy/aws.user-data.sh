@@ -39,6 +39,12 @@ openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(
 openssl x509 -req -sha256 -days 365 -in /app/tls/server.csr -signkey /app/tls/server.key -out /app/tls/server.crt
 rm -f /app/tls/server.csr
 
+# Set SELinux context so Nginx can read the cert files
+semanage fcontext -a -t httpd_sys_content_t server.crt
+restorecon -v server.crt
+semanage fcontext -a -t httpd_sys_content_t server.key
+restorecon -v server.key
+
 # Create nginx config
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
 user nginx;
