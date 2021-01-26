@@ -1,3 +1,4 @@
+const { oktaClient } = require('../auth/oktaAuth');
 const truncate = require('./shared/delete-everything');
 const states = require('./shared/states');
 
@@ -22,13 +23,17 @@ exports.seed = async knex => {
   await testStates.seed(knex);
   await affiliations.seed(knex);
 
-  // user: em@il.com from okta
-  // uid: 00u4nbo8e9BoctLWI297
-  // user: reviewer from okta
-  // uid: 00u66qbf9z9TRxjmR297
-  const emailAffiliations = [
-    {
-      user_id: '00u4nbo8e9BoctLWI297',
+  const { id: regularUserId } = (await oktaClient.getUser('em@il.com')) || {};
+  const { id: reviewerId } = (await oktaClient.getUser('reviewer')) || {};
+  const { id: fedAdminId } = (await oktaClient.getUser('fedadmin')) || {};
+  const { id: stateAdminId } = (await oktaClient.getUser('stateadmin')) || {};
+  const { id: stateStaffId } = (await oktaClient.getUser('statestaff')) || {};
+  const { id: stateContractorId } =
+    (await oktaClient.getUser('statecontractor')) || {};
+
+  if (regularUserId) {
+    const regularUserAffiliation = {
+      user_id: regularUserId,
       state_id: 'fl',
       role_id: await knex('auth_roles')
         .where({ name: 'eAPD State Admin' })
@@ -36,9 +41,12 @@ exports.seed = async knex => {
         .then(role => role.id),
       status: 'approved',
       updated_by: 'seeds'
-    },
-    {
-      user_id: '00u66qbf9z9TRxjmR297',
+    };
+    await knex('auth_affiliations').insert(regularUserAffiliation);
+  }
+  if (reviewerId) {
+    const reviewUserAffiliation = {
+      user_id: reviewerId,
       state_id: 'ak',
       role_id: await knex('auth_roles')
         .where({ name: 'eAPD State Admin' })
@@ -46,7 +54,59 @@ exports.seed = async knex => {
         .then(role => role.id),
       status: 'approved',
       updated_by: 'seeds'
-    }
-  ];
-  await knex('auth_affiliations').insert(emailAffiliations);
+    };
+    await knex('auth_affiliations').insert(reviewUserAffiliation);
+  }
+  if (fedAdminId) {
+    const fedAdminAffiliation = {
+      user_id: fedAdminId,
+      state_id: 'ak',
+      role_id: await knex('auth_roles')
+        .where({ name: 'eAPD Federal Admin' })
+        .first()
+        .then(role => role.id),
+      status: 'approved',
+      updated_by: 'seeds'
+    };
+    await knex('auth_affiliations').insert(fedAdminAffiliation);
+  }
+  if (stateAdminId) {
+    const stateAdminAffiliation = {
+      user_id: stateAdminId,
+      state_id: 'ak',
+      role_id: await knex('auth_roles')
+        .where({ name: 'eAPD State Admin' })
+        .first()
+        .then(role => role.id),
+      status: 'approved',
+      updated_by: 'seeds'
+    };
+    await knex('auth_affiliations').insert(stateAdminAffiliation);
+  }
+  if (stateStaffId) {
+    const stateStaffAffiliation = {
+      user_id: stateStaffId,
+      state_id: 'ak',
+      role_id: await knex('auth_roles')
+        .where({ name: 'eAPD State Staff' })
+        .first()
+        .then(role => role.id),
+      status: 'approved',
+      updated_by: 'seeds'
+    };
+    await knex('auth_affiliations').insert(stateStaffAffiliation);
+  }
+  if (stateContractorId) {
+    const stateContractorAffiliation = {
+      user_id: stateContractorId,
+      state_id: 'ak',
+      role_id: await knex('auth_roles')
+        .where({ name: 'eAPD State Contractor' })
+        .first()
+        .then(role => role.id),
+      status: 'approved',
+      updated_by: 'seeds'
+    };
+    await knex('auth_affiliations').insert(stateContractorAffiliation);
+  }
 };

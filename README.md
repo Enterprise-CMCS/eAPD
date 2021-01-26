@@ -41,6 +41,43 @@ git clone https://github.com/CMSgov/eAPD.git
 If you can't use git for some reason, you can also download the most recent
 code as [a ZIP file](https://github.com/CMSgov/eAPD/archive/master.zip).
 
+### Setting up environment variables
+
+The app uses Okta for authentication. If you do not have an Okta application already
+set up, you can create an Okta account and Okta application following these
+[instructions](https://developer.okta.com/docs/guides/sign-into-spa/react/before-you-begin/).
+Set the following environment variables:
+
+```shell
+OKTA_DOMAIN
+OKTA_SERVER_ID
+OKTA_CLIENT_ID
+OKTA_API_KEY
+```
+
+Your Okta admin can give you these values. If you created your Okta application yourself,
+you can find the values for OKTA_DOMAIN and OKTA_CLIENT_ID in Okta by clicking on
+Applications -> (your application) -> General. You can find OKTA_SERVER_ID by clicking
+on API -> Authorization Server, and then getting the value under Name. It is probably
+called `default`. You can create an OKTA_API_KEY by clicking API -> Tokens -> Create Token. Record the Token Value created.
+
+### Create Okta accounts
+
+Create accounts in your Okta application with the following User Names (these accounts will
+be used for testing, so they cannot require MFA):
+
+```shell
+  em@il.com
+  reviewer
+  fedadmin
+  stateadmin
+  statestaff
+  statecontractor
+```
+
+Make sure you record the passwords that you set them to. You can use fake emails or if you
+have a gmail account, you can add `+reviwer` to your email username (e.g. me+reviewer@gmail.com) to have them all email to your email.
+
 ### Making it run
 
 We recommend using [Docker](https://www.docker.com) to run the app locally. We
@@ -62,10 +99,10 @@ docker-compose exec api npm run seed
 ```
 
 You should now be able to open the app at
-[http://localhost:8080](http://localhost:8080). You can log in with username
-`em@il.com` and password `password` to view a state account, complete with
-a filled-in APD. There is also an admin account with username `admin` and
-password `password`.
+[http://localhost:8080](http://localhost:8080). You can login with any of
+the accounts that you made above. em@il.com and reviewer have the role of state admin.
+The rest have roles that match their username. This is handled in the seed
+and does not need to be set in Okta.
 
 See the
 [testing documentation](https://github.com/CMSgov/eAPD/wiki/Development-accessibility%2C-testing%2C-and-linting#testing)
