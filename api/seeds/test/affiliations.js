@@ -2,13 +2,13 @@ const { roles } = require('./roles');
 const { states } = require('../../util/states');
 
 // affiliate 'all-permissions' user with all states
-const adminRole = roles.find(role => role.name === 'eAPD Admin');
+const { id: adminRoleId } = roles.find(role => role.name === 'eAPD Admin');
 const adminAffiliations = states
   .filter(state => state.id !== 'ak')
   .map(state => ({
     user_id: 'all-permissions',
     state_id: state.id,
-    role_id: adminRole.id,
+    role_id: adminRoleId,
     status: 'approved'
   }));
 
@@ -32,7 +32,7 @@ exports.seed = async knex => {
       id: 4002,
       user_id: 'all-permissions',
       state_id: 'ak',
-      role_id: adminRole.id,
+      role_id: adminRoleId,
       status: 'approved'
     }
   ]);
