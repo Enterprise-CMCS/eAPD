@@ -77,20 +77,32 @@ describe('RichText component', () => {
 
   describe('handles uploading an image with the file button', () => {
     const button = {
-      files: ['this is the file']
+      files: [
+        {
+          name: 'this is the file',
+          type: 'image/gif'
+        }
+      ]
     };
     const editor = {
       getContent: jest.fn(),
       insertContent: jest.fn(),
-      setContent: jest.fn()
+      setContent: jest.fn(),
+      notificationManager: {
+        open: jest.fn()
+      }
     };
     const upload = jest.fn();
 
     beforeEach(() => {
-      button.files[0] = 'this is the file';
+      button.files[0] = {
+        name: 'this is the file',
+        type: 'image/gif'
+      };
       editor.getContent.mockReset();
       editor.insertContent.mockReset();
       editor.setContent.mockReset();
+      editor.notificationManager.open.mockReset();
       upload.mockReset();
     });
 
@@ -119,7 +131,10 @@ describe('RichText component', () => {
         expect(editor.setContent).toHaveBeenCalledWith(
           'text text text <img src="image url"> text text text'
         );
-        expect(upload).toHaveBeenCalledWith('this is the file');
+        expect(upload).toHaveBeenCalledWith({
+          name: 'this is the file',
+          type: 'image/gif'
+        });
       });
 
       const inserted = editor.insertContent.mock.calls[0][0];
