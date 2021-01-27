@@ -421,8 +421,10 @@ pm2 start ecosystem.config.js
 E_USER
 
 # SELinux context so Nginx can READ the files in /app/web
+chown -R nginx /app/web
 semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
+setsebool -P httpd_can_network_connect 1
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
