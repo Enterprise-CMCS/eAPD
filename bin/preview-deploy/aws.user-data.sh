@@ -100,7 +100,7 @@ http {
     }
 }
 NGINXCONFIG
-service nginx restart
+#service nginx restart
 
 # Configure CloudWatch Agent
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
@@ -425,6 +425,7 @@ chown -R nginx /app/web
 semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
+systemctl restart nginx
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
