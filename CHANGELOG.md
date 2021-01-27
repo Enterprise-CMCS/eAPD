@@ -12,7 +12,7 @@ Anticipated release: February 8, 2021
 #### 🐛 Bugs fixed
 
 - Fixes issue where "Add another activity" button was not appearing as it should ([#2525])
-
+- Update Babel/Webpack settings so that application loads in IE11 browsers ([#2601])
 
 #### ⚙️ Behind the scenes
 
@@ -23,3 +23,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2525]: https://github.com/CMSgov/eAPD/issues/2525
 [#2776]: https://github.com/CMSgov/eAPD/issues/2776
 [#2793]: https://github.com/CMSgov/eAPD/issues/2793
+[#2601]: https://github.com/CMSgov/eAPD/issues/2601
