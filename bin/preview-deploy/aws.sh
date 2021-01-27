@@ -102,6 +102,8 @@ function configureUserData() {
 
 # Create a new EC2 instance. Echos the new instance ID.
 #
+# $1 - Image ID of the AMI to use for this instance
+#
 # Expects global environment variables:
 #   AWS_AMI - Image ID of the AMI to use for this instance
 #   AWS_SECURITY_GROUP - ID of the security group for this instance
@@ -110,13 +112,21 @@ function configureUserData() {
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type t2.medium \
-    --image-id "$AWS_AMI" \
+    --image-id "$1" \
     --security-group-ids "$AWS_SECURITY_GROUP" \
     --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
     --key-name eapd_bbrooks \
     | jq -r -c '.Instances[0].InstanceId'
+}
+
+function findAMI() {
+  aws ec2 describe-images \
+    --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
+    --filter 'Name=is-public,Values=false' \
+    --filter 'Name=name,Values=EAST-RH 7-*Gold*(HVM)*' \
+    | jq -r -c 'sort_by(.date)|last|.id'
 }
 
 # Finds any existing instances for previewing this PR
