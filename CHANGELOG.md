@@ -12,7 +12,7 @@ Anticipated release: February 8, 2021
 #### 🐛 Bugs fixed
 
 - Fixes issue where "Add another activity" button was not appearing as it should ([#2525])
-
+- Removes help text and examples from Estimated Quarterly Expenditure section of APD export view ([#2538])
 
 #### ⚙️ Behind the scenes
 
@@ -23,3 +23,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2525]: https://github.com/CMSgov/eAPD/issues/2525
 [#2776]: https://github.com/CMSgov/eAPD/issues/2776
 [#2793]: https://github.com/CMSgov/eAPD/issues/2793
+[#2538]: https://github.com/CMSgov/eAPD/issues/2538
