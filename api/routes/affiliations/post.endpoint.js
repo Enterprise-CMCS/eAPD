@@ -1,5 +1,7 @@
 const {
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest
 } = require('../../endpoint-tests/utils');
@@ -7,8 +9,8 @@ const {
 describe('Affiliations endpoint | POST', () => {
   const api = login('no-permissions');
   const db = getDB();
-  beforeAll(() => db.seed.run());
-  afterAll(() => db.destroy());
+  beforeAll(() => setupDB(db));
+  afterAll(() => teardownDB(db));
 
   unauthenticatedTest('post', '/states/ak/affiliations');
 
