@@ -62,7 +62,7 @@ function deployAPItoEC2() {
   # Configure AWS CLI with defaults
   configureAWS
 
-  # Get the instance IDs of the current API EC2 production instances, so we can 
+  # Get the instance IDs of the current API EC2 production instances, so we can
   # delete them later
   PREV_INSTANCE_INFOS=$(findExistingInstances)
   echo "• Found previous instances: $PREV_INSTANCE_INFOS"
@@ -216,7 +216,7 @@ function createNewInstance() {
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT}]" \
-    --key-name eapd_bbrooks \
+    --key-name radavis \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
 }
