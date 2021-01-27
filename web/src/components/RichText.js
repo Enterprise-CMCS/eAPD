@@ -48,7 +48,7 @@ const fileButtonOnClick = (button, editor, upload) => () => {
         type: 'error',
         icon: 'warning',
         closeButton: true,
-        timeout: 5000
+        timeout: 10000
       });
       return Promise.resolve();
     }
@@ -73,7 +73,7 @@ const fileButtonOnClick = (button, editor, upload) => () => {
           type: 'error',
           icon: 'warning',
           closeButton: true,
-          timeout: 5000
+          timeout: 10000
         });
         const content = editor.getContent();
         const newContent = content.replace(placeholderKey, '');
