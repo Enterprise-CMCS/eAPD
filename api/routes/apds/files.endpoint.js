@@ -3,6 +3,8 @@ const FormData = require('form-data');
 const {
   buildForm,
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -11,8 +13,8 @@ const {
 describe('APD files endpoints', () => {
   describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {
     const db = getDB();
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     const url = (apdID, fileID) => `/apds/${apdID}/files/${fileID}`;
 
@@ -63,8 +65,8 @@ describe('APD files endpoints', () => {
 
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {
     const db = getDB();
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     const url = id => `/apds/${id}/files`;
     const form = buildForm({ file: 'this is my new file' });
