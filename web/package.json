@@ -162,9 +162,7 @@
       [
         "@babel/preset-env",
         {
-          "targets": {
-            "esmodules": true
-          }
+          "targets": "defaults, ie >= 11"
         }
       ],
       "@babel/preset-react"
