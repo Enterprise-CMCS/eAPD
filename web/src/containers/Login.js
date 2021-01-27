@@ -99,7 +99,7 @@ const Login = ({
     error === 'Request failed with status code 401'
   ) {
     errorMessage =
-      'Please contact your State Administrator for steps to register an account.';
+      'Please contact your State Administrator for instructions on how to create an account.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
@@ -137,20 +137,6 @@ const Login = ({
         <ConsentBanner onAgree={hideConsent} />
       </Fragment>
     );
-  }
-
-  if (isLocked) {
-    errorMessage = 'You are locked out';
-  } else if (otpStage && error === 'Authentication failed') {
-    errorMessage = 'The one-time password you’ve entered is incorrect.';
-  } else if (
-    error === 'Authentication failed' ||
-    error === 'Request failed with status code 401'
-  ) {
-    errorMessage =
-      'Please contact your State Administrator for steps to register an account.';
-  } else if (error) {
-    errorMessage = error || 'Sorry! Something went wrong. Please try again.';
   }
 
   if (isNotInGroup) {
