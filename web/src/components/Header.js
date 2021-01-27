@@ -158,7 +158,8 @@ Header.propTypes = {
   currentState: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
   canViewStateAdmin: PropTypes.bool,
-  showSiteTitle: PropTypes.bool.isRequired
+  showSiteTitle: PropTypes.bool.isRequired,
+  pathname: PropTypes.string
 };
 
 Header.defaultProps = {
