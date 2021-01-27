@@ -903,18 +903,9 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   <div
     className="data-entry-box ds-u-margin-bottom--5"
   >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h4",
-          "level": "p",
-        }
-      }
-      labelFor={null}
-      reverse={false}
-      source="activities.costAllocate.ffp.quarterlyFFPInstruction"
-    />
+    <h4>
+      Estimated Quarterly Expenditure
+    </h4>
     <Connect(CostAllocateFFPQuarterly)
       aKey="key"
       activityIndex={0}
@@ -1102,18 +1093,9 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   <div
     className="data-entry-box ds-u-margin-bottom--5"
   >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h4",
-          "level": "p",
-        }
-      }
-      labelFor={null}
-      reverse={false}
-      source="activities.costAllocate.ffp.quarterlyFFPInstruction"
-    />
+    <h4>
+      Estimated Quarterly Expenditure
+    </h4>
     <Connect(CostAllocateFFPQuarterly)
       aKey="key"
       activityIndex={0}
