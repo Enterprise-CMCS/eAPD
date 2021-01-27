@@ -42,8 +42,6 @@ rm -f /app/tls/server.csr
 # Set SELinux context so Nginx can read the cert files
 semanage fcontext -a -t httpd_sys_content_t "/app/tls(/.*)?"
 restorecon -Rv /app/tls
-semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
-restorecon -Rv /app/web
 
 # Create nginx config
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
@@ -417,12 +415,15 @@ echo "module.exports = {
   }]
 };" > ecosystem.config.js
 
-# Start it up
-pm2 start ecosystem.config.js
-
 E_USER
 
+# SELinux context so Nginx can READ the files in /app/web
+semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
+restorecon -Rv /app/web
+
+# Start up pm2
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
+su - ec2-user -c 'pm2 start ecosystem.config.js'
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
