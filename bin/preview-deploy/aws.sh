@@ -4,9 +4,6 @@
 #    --API_PBKDF2_ITERATIONS <number> | Number of PBKDF2 iterations the server
 #                                     | should use for hashing user passwords.
 #                                     |----------------------------------------
-#    --AWS_AMI <AMI ID>               | Image ID of the AMI to use for the new
-#                                     | instance
-#                                     |----------------------------------------
 #    --AWS_REGION <AWS region name>   | The AWS region the instance should be
 #                                     | created in
 #                                     |----------------------------------------
@@ -44,6 +41,9 @@ function deployPreviewtoEC2() {
   # Find any existing preview deploys
   print "• Finding existing preview instances"
   EXISTING_INSTANCES=$(findExistingInstances)
+
+  AMI_ID=$(findAMI)
+  echo "• Using most recent EAST-RH AMI: $AMI_ID"
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
@@ -105,14 +105,13 @@ function configureUserData() {
 # $1 - Image ID of the AMI to use for this instance
 #
 # Expects global environment variables:
-#   AWS_AMI - Image ID of the AMI to use for this instance
 #   AWS_SECURITY_GROUP - ID of the security group for this instance
 #   AWS_SUBNET - ID of the subnet this instance should be attached to
 #   PR_NUM - Github pull request number associated with this instance
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type t2.medium \
-    --image-id "$1" \
+    --image-id $1 \
     --security-group-ids "$AWS_SECURITY_GROUP" \
     --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
@@ -121,6 +120,7 @@ function createNewInstance() {
     | jq -r -c '.Instances[0].InstanceId'
 }
 
+# Finds the most recent EAST-RH gold AMI and returns the ID
 function findAMI() {
   aws ec2 describe-images \
     --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
