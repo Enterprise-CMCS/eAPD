@@ -163,7 +163,7 @@ exports[`login component renders correctly if not logged in and there is an erro
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error="something here"
+    error="Sorry! Something went wrong. Please try again."
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -399,7 +399,7 @@ exports[`login component renders correctly if there is an authentication error 1
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error="Please contact your State Administrator for steps to register an account."
+    error="Please contact your State Administrator for instructions on how to create an account."
     footer={
       <p
         className="ds-u-padding-top--2"

@@ -206,7 +206,7 @@ export const login = (username, password) => dispatch => {
     .then(async res => {
       if (res.status === 'PASSWORD_EXPIRED') {
         return dispatch(
-          failLogin('Your password has expired. Update your password in Okta.')
+          failLogin('Password Expired')
         );
       }
 

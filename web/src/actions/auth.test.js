@@ -245,7 +245,7 @@ describe('auth actions', () => {
         { type: actions.LOGIN_REQUEST },
         {
           type: actions.LOGIN_FAILURE,
-          error: 'Your password has expired. Update your password in Okta.'
+          error: 'Password Expired'
         }
       ];
 
