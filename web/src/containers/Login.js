@@ -94,6 +94,8 @@ const Login = ({
     errorMessage = 'You are locked out';
   } else if (otpStage && error === 'Authentication failed') {
     errorMessage = 'The one-time password you’ve entered is incorrect.';
+  } else if ( error === 'Password Expired' ) {
+    errorMessage = <Fragment>Your password has expired. Update your password in <a href="https://cms.okta.com/">Okta</a>.</Fragment>
   } else if (
     error === 'Authentication failed' ||
     error === 'Request failed with status code 401'
