@@ -32,12 +32,13 @@ tap.test('jwtUtils', async t => {
     });
   });
 
-  t.test('jwtExtractor()', async t => {
+  t.test('jwtExtractor() Authorization test', async t => {
     const { jwtExtractor } = require('./jwtUtils');
     let request;
 
     t.beforeEach(async () => {
       request = new Map();
+      request.url = '/apds';
     });
 
     const scenarios = [
@@ -51,6 +52,47 @@ tap.test('jwtUtils', async t => {
     scenarios.forEach(([header, expected, message]) => {
       t.test(`given Authorization header is '${header}'`, async t => {
         request.set('Authorization', header);
+        const result = jwtExtractor(request);
+        t.equal(result, expected, message);
+      });
+    });
+  });
+
+  t.test('jwtExtractor() Cookie test', async t => {
+    const { jwtExtractor } = require('./jwtUtils');
+    let request;
+
+    t.beforeEach(async () => {
+      request = new Map();
+    });
+
+    const scenarios = [
+      [
+        '/apds/1/files/12345',
+        'okta-token-storage_accessToken={%22value%22%3A%22example.cookie.value%22%2C%22accessToken%22%3A%22example.cookie.value%22%2C%22expiresAt%22%3A1611094321}',
+        'example.cookie.value',
+        'returns the JWT'
+      ],
+      [
+        '/apds/1/files/12345',
+        'okta-token-storage_ACCESSTOKEN={%22value%22%3A%22example.cookie.value%22%2C%22accessToken%22%3A%22example.cookie.value%22%2C%22expiresAt%22%3A1611094321}',
+        'example.cookie.value',
+        'returns the JWT'
+      ],
+      [
+        '/apds/1/files/12345',
+        'gov.cms.eapd.hasConsented=true;',
+        null,
+        'returns null'
+      ],
+      ['/apds/1/files/12345', '', null, 'returns null'],
+      ['/apds/1/files/12345', 'Elephanter xxx.yyy.zzz', null, 'returns null']
+    ];
+
+    scenarios.forEach(([url, cookie, expected, message]) => {
+      t.test(`given Authorization cookie is '${cookie}'`, async t => {
+        request.url = url;
+        request.set('Cookie', cookie);
         const result = jwtExtractor(request);
         t.equal(result, expected, message);
       });
