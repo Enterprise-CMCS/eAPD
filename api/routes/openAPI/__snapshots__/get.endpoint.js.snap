@@ -950,6 +950,9 @@ Object {
           "403": Object {
             "description": "Does not have permission to this activity",
           },
+          "500": Object {
+            "description": "The file is not a valid format",
+          },
         },
         "security": Array [
           Object {
