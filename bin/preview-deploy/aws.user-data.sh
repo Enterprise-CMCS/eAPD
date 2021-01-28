@@ -16,6 +16,8 @@ mkdir /app/tls
 # Install nginx and postgres
 amazon-linux-extras install nginx1.12
 yum -y install git postgresql-server amazon-cloudwatch-agent
+# Make sure sudo is up to date to address CVE-2021-3156
+yum -y update sudo
 
 # Setup postgres
 service postgresql initdb
