@@ -26,7 +26,7 @@ local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
 " > /var/lib/pgsql/data/pg_hba.conf
-systemctl start postgres
+systemctl status postgresql
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
