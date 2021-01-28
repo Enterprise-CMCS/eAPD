@@ -18,10 +18,15 @@ Anticipated release: February 8, 2021
 
 #### ⚙️ Behind the scenes
 
+- Updated the services management mechanism to systemd ([#2817])
+- Updated the AMI used for Preview builds to the CMS Golden Image ([#2805])
+
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2817]: https://github.com/CMSgov/eAPD/issues/2817
+[#2805]: https://github.com/CMSgov/eAPD/issues/2805
 [#2525]: https://github.com/CMSgov/eAPD/issues/2525
 [#2740]: https://github.com/CMSgov/eAPD/issues/2740
 [#2776]: https://github.com/CMSgov/eAPD/issues/2776
