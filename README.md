@@ -49,17 +49,11 @@ set up, you can create an Okta account and Okta application following these
 Set the following environment variables:
 
 ```shell
-OKTA_DOMAIN
-OKTA_SERVER_ID
-OKTA_CLIENT_ID
-OKTA_API_KEY
+export OKTA_DOMAIN= #from admin, or Applications -> (your application) -> General
+export OKTA_SERVER_ID= #from admin, or Applications -> (your application) -> General
+export OKTA_CLIENT_ID= #from admin, API -> Authorization Server, and the value under Name
+export OKTA_API_KEY= #from admin, API -> Tokens -> Create Token, and the Token Value
 ```
-
-Your Okta admin can give you these values. If you created your Okta application yourself,
-you can find the values for OKTA_DOMAIN and OKTA_CLIENT_ID in Okta by clicking on
-Applications -> (your application) -> General. You can find OKTA_SERVER_ID by clicking
-on API -> Authorization Server, and then getting the value under Name. It is probably
-called `default`. You can create an OKTA_API_KEY by clicking API -> Tokens -> Create Token. Record the Token Value created.
 
 ### Create Okta accounts
 
@@ -100,8 +94,8 @@ docker-compose exec api npm run seed
 
 You should now be able to open the app at
 [http://localhost:8080](http://localhost:8080). You can login with any of
-the accounts that you made above. em@il.com and reviewer have the role of state admin.
-The rest have roles that match their username. This is handled in the seed
+the accounts that you made above. The `em@il.com` account has the role of state admin.
+The rest have roles that match their usernames. This is handled in the seed
 and does not need to be set in Okta.
 
 See the
