@@ -47,7 +47,7 @@ function deployPreviewtoEC2() {
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
-  INSTANCE_ID=$(createNewInstance)
+  INSTANCE_ID=$(createNewInstance $AMI_ID)
   print "• Created instance $INSTANCE_ID"
 
   # Wait for the instance to become ready.  This will happen once the VM is
