@@ -58,9 +58,12 @@ class Header extends Component {
       isAdmin,
       currentState,
       canViewStateAdmin,
+      pathname,
       showSiteTitle
     } = this.props;
     const { ariaExpanded } = this.state;
+
+    const withinApd = pathname.startsWith('/apd');
 
     return (
       <header ref={this.node}>
@@ -88,7 +91,7 @@ class Header extends Component {
             {authenticated && (
               <Fragment>
                 <div className="ds-l-col--12 ds-l-md-col--5">
-                  {!showSiteTitle && !isAdmin && <HeaderSaveMessage />}
+                  {!showSiteTitle && withinApd && <HeaderSaveMessage />}
                 </div>
                 <div className="ds-l-col--12 ds-l-md-col--4">
                   <ul className="nav--dropdown">
@@ -155,14 +158,16 @@ Header.propTypes = {
   currentState: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
   canViewStateAdmin: PropTypes.bool,
-  showSiteTitle: PropTypes.bool.isRequired
+  showSiteTitle: PropTypes.bool.isRequired,
+  pathname: PropTypes.string
 };
 
 Header.defaultProps = {
   ariaExpanded: false,
   currentUser: null,
   currentState: null,
-  canViewStateAdmin: false
+  canViewStateAdmin: false,
+  pathname: ""
 };
 
 const mapStateToProps = state => ({
@@ -170,7 +175,8 @@ const mapStateToProps = state => ({
   currentUser: state.auth.user,
   isAdmin: getIsAdmin(state),
   currentState: getUserStateOrTerritory(state),
-  canViewStateAdmin: getCanUserViewStateAdmin(state)
+  canViewStateAdmin: getCanUserViewStateAdmin(state),
+  pathname: state.router.location.pathname
 });
 
 const mapDispatchToProps = {
