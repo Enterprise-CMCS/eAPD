@@ -3,40 +3,28 @@ import React from 'react';
 
 import { plain as Header, mapStateToProps } from './Header';
 
+const initialProps = {
+  ariaExpanded: false,
+  authenticated: true,
+  currentUser: {
+    role: 'admin',
+    state: { id: 'wa', name: 'Washington' },
+    username: 'frasiercrane@kacl.com'
+  },
+  isAdmin: true,
+  showSiteTitle: true
+};
+
+const setup = props => shallow(<Header {...initialProps} {...props} />);
+
 describe('Header component', () => {
   it('renders correctly when the dropdown is closed and the page is top level', () => {
-    const component = shallow(
-      <Header
-        authenticated
-        currentUser={{
-          role: 'admin',
-          state: { id: 'wa', name: 'Washington' },
-          username: 'frasiercrane@kacl.com'
-        }}
-        isAdmin
-        pushRoute={() => {}}
-        ariaExpanded={false}
-        showSiteTitle
-      />
-    );
+    const component = setup();
     expect(component).toMatchSnapshot();
   });
 
   it('opens and closes the dropdown when clicked ', () => {
-    const component = shallow(
-      <Header
-        authenticated
-        currentUser={{
-          role: 'admin',
-          state: { id: 'wa', name: 'Washington' },
-          username: 'frasiercrane@kacl.com'
-        }}
-        isAdmin
-        pushRoute={() => {}}
-        ariaExpanded={false}
-        showSiteTitle
-      />
-    );
+    const component = setup();
 
     jest.spyOn(document, 'addEventListener');
     jest.spyOn(document, 'removeEventListener');
@@ -67,8 +55,6 @@ describe('Header component', () => {
         state: { id: 'wa', name: 'Washington' },
         username: 'frasiercrane@kacl.com'
       },
-      isAdmin: true,
-      pushRoute: () => {},
       ariaExpanded: false,
       showSiteTitle: true
     });
@@ -108,61 +94,22 @@ describe('Header component', () => {
   });
 
   it('renders the admin home title when an admin user is at a secondary page', () => {
-    const component = shallow(
-      <Header
-        authenticated
-        currentUser={{
-          role: 'admin',
-          state: { id: 'wa', name: 'Washington' },
-          username: 'frasiercrane@kacl.com'
-        }}
-        isAdmin
-        pushRoute={() => {}}
-        ariaExpanded={false}
-        showSiteTitle={false}
-      />
-    );
+    const component = setup({ showSiteTitle: false });
     expect(component).toMatchSnapshot();
   });
 
-  it('renders the state user home title when a state user is at a secondary page', () => {
-    // Not saving
-    expect(
-      shallow(
-        <Header
-          ariaExpanded={false}
-          authenticated
-          currentUser={{
-            role: 'admin',
-            state: { id: 'wa', name: 'Washington' },
-            username: 'frasiercrane@kacl.com'
-          }}
-          isAdmin={false}
-          pushRoute={() => {}}
-          showSiteTitle={false}
-        />
-      )
-    ).toMatchSnapshot();
-  });
-
   it('renders the state admin link when user has required permissions', () => {
-    expect(
-      shallow(
-        <Header
-          ariaExpanded={false}
-          authenticated
-          currentUser={{
-            role: 'eAPD State Admin',
-            state: { id: 'wa', name: 'Washington' },
-            username: 'frasiercrane@kacl.com'
-          }}
-          isAdmin
-          canViewStateAdmin
-          pushRoute={() => {}}
-          showSiteTitle={false}
-        />
-      )
-    ).toMatchSnapshot();
+    const currentUser = {
+      role: 'eAPD State Admin',
+      state: { id: 'wa', name: 'Washington' },
+      username: 'frasiercrane@kacl.com'
+    }
+    const component = setup({
+      currentUser,
+      canViewStateAdmin: true,
+      showSiteTitle: false
+    });
+    expect(component).toMatchSnapshot();
   });
 
   it('maps state to props', () => {
@@ -178,6 +125,11 @@ describe('Header component', () => {
           role: 'admin',
           state: { id: 'md', name: 'Maryland' }
         }
+      },
+      router: {
+        location: {
+          pathname: 'pathname'
+        }
       }
     };
 
@@ -186,7 +138,8 @@ describe('Header component', () => {
       currentUser: { role: 'admin' },
       isAdmin: true,
       currentState: { id: 'md', name: 'Maryland' },
-      canViewStateAdmin: null
+      canViewStateAdmin: null,
+      pathname: 'pathname'
     });
   });
 });
