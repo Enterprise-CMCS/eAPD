@@ -50,8 +50,8 @@ Set the following environment variables:
 
 ```shell
 export OKTA_DOMAIN= #from admin, or Applications -> (your application) -> General
-export OKTA_SERVER_ID= #from admin, or Applications -> (your application) -> General
-export OKTA_CLIENT_ID= #from admin, API -> Authorization Server, and the value under Name
+export OKTA_SERVER_ID= #from admin, API -> Authorization Server, and the value under Name
+export OKTA_CLIENT_ID= #from admin, or Applications -> (your application) -> General
 export OKTA_API_KEY= #from admin, API -> Tokens -> Create Token, and the Token Value
 ```
 
