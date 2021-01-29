@@ -14,7 +14,6 @@ chmod -R g+w /app
 mkdir /app/tls
 
 # Install nginx and postgres
-#amazon-linux-extras install nginx1.12
 yum -y install git postgresql-server amazon-cloudwatch-agent nginx-1.16.1-3.el7
 # nginx1.12 is not available by default on the Golden Image
 
@@ -100,7 +99,6 @@ http {
     }
 }
 NGINXCONFIG
-#service nginx restart
 
 # Configure CloudWatch Agent
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
