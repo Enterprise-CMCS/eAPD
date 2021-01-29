@@ -399,7 +399,7 @@ exports[`login component renders correctly if there is an authentication error 1
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error="Please contact your State Administrator for instructions on how to create an account."
+    error="Your username and/or password is incorrect."
     footer={
       <p
         className="ds-u-padding-top--2"
