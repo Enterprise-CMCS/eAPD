@@ -22,7 +22,18 @@ import { uploadFile } from '../actions/editApd';
 import { generateKey } from '../util';
 import '../file-loader';
 
-const VALID_FILE_TYPES = ['jpeg', 'jpg', 'jfif', 'pjeg', 'pjp', 'png', 'gif'];
+const VALID_FILE_TYPES = [
+  'jpeg',
+  'jpg',
+  'jfif',
+  'pjeg',
+  'pjp',
+  'png',
+  'gif',
+  'webp',
+  'tif',
+  'tiff'
+];
 
 // this function is used when the user presses the image button
 const fileButtonOnClick = (button, editor, upload) => () => {
