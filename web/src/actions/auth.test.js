@@ -245,7 +245,7 @@ describe('auth actions', () => {
         { type: actions.LOGIN_REQUEST },
         {
           type: actions.LOGIN_FAILURE,
-          error: 'Password Expired'
+          error: 'Password expired'
         }
       ];
 

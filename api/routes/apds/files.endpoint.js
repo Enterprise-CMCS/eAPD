@@ -99,12 +99,66 @@ describe('APD files endpoints', () => {
         expect(response.data).toMatchSnapshot();
       });
 
-      it('with a valid request', async () => {
-        const filePath = `${process.cwd()}/test-data/files/upload.txt`;
-        expect(fs.existsSync(filePath)).toBeTruthy();
+      it('with a text-based file', async () => {
+        const textPath = `${process.cwd()}/test-data/files/upload.txt`;
+        expect(fs.existsSync(textPath)).toBeTruthy();
 
         const formData = new FormData();
-        formData.append('file', fs.readFileSync(filePath), 'upload.txt');
+        formData.append('file', fs.readFileSync(textPath), 'upload.txt');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        api.post(url(4001), formData.getBuffer(), options).catch(e => {
+          expect(e.response.status).toEqual(500);
+          expect(e.response.data).toMatchSnapshot();
+        });
+      });
+
+      it('with a non-image binary file', async () => {
+        const pdfPath = `${process.cwd()}/test-data/files/eAPD_logo.pdf`;
+        expect(fs.existsSync(pdfPath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(pdfPath), 'eAPD_logo.pdf');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        api.post(url(4001), formData.getBuffer(), options).catch(e => {
+          expect(e.response.status).toEqual(500);
+          expect(e.response.data).toMatchSnapshot();
+        });
+      });
+
+      it('with a unsupported image binary file', async () => {
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.tiff`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.tiff');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        api.post(url(4001), formData.getBuffer(), options).catch(e => {
+          expect(e.response.status).toEqual(500);
+          expect(e.response.data).toMatchSnapshot();
+        });
+      });
+
+      it('with a valid request (png)', async () => {
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.png`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.png');
         const options = {
           headers: {
             ...formData.getHeaders()
@@ -126,6 +180,72 @@ describe('APD files endpoints', () => {
           /apds\/4001\/files\/([a-f0-9]{64})/
         )[1];
         expect(fs.existsSync(`test-data/files/${filename}`)).toEqual(true);
+      });
+
+      it('with a valid request (jpg)', async () => {
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.jpg`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.jpg');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        const response = await api.post(
+          url(4001),
+          formData.getBuffer(),
+          options
+        );
+
+        expect(response.status).toEqual(200);
+        expect(response.data).toMatchSnapshot();
+      });
+
+      it('with a valid request (gif)', async () => {
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.gif`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.gif');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        const response = await api.post(
+          url(4001),
+          formData.getBuffer(),
+          options
+        );
+
+        expect(response.status).toEqual(200);
+        expect(response.data).toMatchSnapshot();
+      });
+
+      it('with a valid request (jpg)', async () => {
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.webp`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.webp');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        const response = await api.post(
+          url(4001),
+          formData.getBuffer(),
+          options
+        );
+
+        expect(response.status).toEqual(200);
+        expect(response.data).toMatchSnapshot();
       });
     });
   });

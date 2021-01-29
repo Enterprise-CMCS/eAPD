@@ -206,7 +206,7 @@ export const login = (username, password) => dispatch => {
     .then(async res => {
       if (res.status === 'PASSWORD_EXPIRED') {
         return dispatch(
-          failLogin('Password Expired')
+          failLogin('Password expired')
         );
       }
 

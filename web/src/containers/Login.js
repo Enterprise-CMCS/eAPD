@@ -90,18 +90,12 @@ const Login = ({
   const { from } = location.state || { from: { pathname: '/' } };
 
   let errorMessage = false;
-  if (isLocked) {
-    errorMessage = 'You are locked out';
-  } else if (otpStage && error === 'Authentication failed') {
+  if (otpStage && error === 'Authentication failed') {
     errorMessage = 'The one-time password you’ve entered is incorrect.';
-  } else if ( error === 'Password Expired' ) {
+  } else if ( error === 'Password expired' ) {
     errorMessage = <Fragment>Your password has expired. Update your password in <a href="https://cms.okta.com/">Okta</a>.</Fragment>
-  } else if (
-    error === 'Authentication failed' ||
-    error === 'Request failed with status code 401'
-  ) {
-    errorMessage =
-      'Please contact your State Administrator for instructions on how to create an account.';
+  } else if ( error === 'Authentication failed' ) {
+    errorMessage = 'Your username and/or password is incorrect.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }

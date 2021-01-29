@@ -254,6 +254,9 @@ const openAPI = {
         },
         401: {
           description: 'The apd ID does not match any known apds for the user'
+        },
+        500: {
+          description: 'The file is not a valid format'
         }
       }
     }
@@ -357,7 +360,7 @@ const getApdFile = {
       }
     }
   }
-}
+};
 
 module.exports = {
   ...requiresAuth(openAPI),
