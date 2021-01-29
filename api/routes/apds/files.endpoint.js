@@ -227,28 +227,6 @@ describe('APD files endpoints', () => {
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
       });
-
-      it('with a valid request (jpg)', async () => {
-        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.webp`;
-        expect(fs.existsSync(imagePath)).toBeTruthy();
-
-        const formData = new FormData();
-        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.webp');
-        const options = {
-          headers: {
-            ...formData.getHeaders()
-          }
-        };
-
-        const response = await api.post(
-          url(4001),
-          formData.getBuffer(),
-          options
-        );
-
-        expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
-      });
     });
   });
 });
