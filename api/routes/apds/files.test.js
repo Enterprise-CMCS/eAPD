@@ -169,7 +169,7 @@ tap.only('apds files endpoints', async endpointTest => {
           size: 1234
         };
 
-        di.validateFile.resolves({ success: true });
+        di.validateFile.resolves({ image: 'image file buffer' });
         di.createNewFileForAPD.rejects(new Error('some error'));
 
         await handler(req, res);
@@ -195,7 +195,7 @@ tap.only('apds files endpoints', async endpointTest => {
     tests.test(
       'there is an unexpected error putting the file in storage',
       async test => {
-        di.validateFile.resolves({ success: true });
+        di.validateFile.resolves({ image: 'image file buffer' });
         req.file = {
           buffer: 'image file buffer',
           size: 1234
@@ -232,7 +232,7 @@ tap.only('apds files endpoints', async endpointTest => {
     );
 
     tests.test('the file is created and stored correctly', async test => {
-      di.validateFile.resolves({ success: true });
+      di.validateFile.resolves({ image: 'image file buffer' });
       req.file = {
         buffer: 'image file buffer',
         size: 1234
