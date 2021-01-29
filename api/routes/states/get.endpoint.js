@@ -1,14 +1,16 @@
 const {
   api,
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest
 } = require('../../endpoint-tests/utils');
 
 describe('US States endpoint', () => {
   const db = getDB();
-  beforeAll(() => db.seed.run());
-  afterAll(() => db.destroy());
+  beforeAll(() => setupDB(db));
+  afterAll(() => teardownDB(db));
 
   describe('GET /states', () => {
     it('returns 200', async () => {
