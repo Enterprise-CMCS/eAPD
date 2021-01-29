@@ -6,7 +6,8 @@ module.exports = {
       database: 'hitech_apd',
       user: process.env.DEV_DB_USER || 'postgres',
       password: process.env.DEV_DB_PASSWORD || 'cms'
-    }
+    },
+    seeds: { directory: './seeds/development' }
   },
 
   test: {
@@ -16,11 +17,13 @@ module.exports = {
       database: 'hitech_apd_test',
       user: 'postgres',
       password: 'cms'
-    }
+    },
+    seeds: { directory: './seeds/test' }
   },
 
   production: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL
+    connection: process.env.DATABASE_URL,
+    seeds: { directory: './seeds/production' }
   }
 };

@@ -8,10 +8,10 @@ const { API_HOST, API_PORT, PORT } = process.env;
 const host = API_HOST || 'localhost';
 const port = API_PORT || PORT || 8000;
 
-const baseURL = () => `http://${host}:${port}`;
+const baseURL = `http://${host}:${port}`;
 
 const axiosDefaults = {
-  baseURL: baseURL(),
+  baseURL,
   validateStatus: status => status < 500
 };
 
@@ -46,6 +46,8 @@ const unauthorizedTest = (method, url) => {
 };
 
 const getDB = () => knex(knexConfig[process.env.NODE_ENV]);
+const setupDB = db => db.seed.run({ specific: 'main.js' });
+const teardownDB = db => db.destroy();
 
 const buildForm = data => {
   const form = new FormData();
@@ -57,6 +59,8 @@ module.exports = {
   api,
   buildForm,
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest

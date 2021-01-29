@@ -1,5 +1,7 @@
 const {
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -11,8 +13,8 @@ const {
 describe('Affiliations endpoint | GET', () => {
   const api = login('all-permissions');
   const db = getDB();
-  beforeAll(() => db.seed.run());
-  afterAll(() => db.destroy());
+  beforeAll(() => setupDB(db));
+  afterAll(() => teardownDB(db));
 
   describe('GET /states/:stateId/affiliations', () => {
     unauthenticatedTest('get', '/states/ak/affiliations');
