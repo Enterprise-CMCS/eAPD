@@ -15,6 +15,7 @@ Anticipated release: February 8, 2021
 - Removes help text and examples from Estimated Quarterly Expenditure section of APD export view ([#2538])
 - Update Babel/Webpack settings so that application loads in IE11 browsers ([#2601])
 - Restrict file uploads ([#2740])
+- Fixes issue where the session ending timeout was not showing on certain pages ([#2770])
 
 #### ⚙️ Behind the scenes
 
@@ -29,3 +30,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2186]: https://github.com/CMSgov/eAPD/issues/2186
 [#2538]: https://github.com/CMSgov/eAPD/issues/2538
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
+[#2770]: https://github.com/CMSgov/eAPD/issues/2770
