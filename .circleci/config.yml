@@ -595,8 +595,8 @@ jobs:
                 --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
                 --AWS_AMI "$PREVIEW_AWS_AMI" \
                 --AWS_REGION "$PREVIEW_AWS_REGION" \
-                --AWS_SECURITY_GROUP sg-04e87d687a13a3729 \
-                --AWS_SUBNET subnet-017357978c1a9c6ec \
+                --AWS_SECURITY_GROUP "sg-04e87d687a13a3729" \
+                --AWS_SUBNET "subnet-017357978c1a9c6ec" \
                 --BRANCH "$CIRCLE_BRANCH" \
                 --PR_NUM "$PRNUM" \
                 --OKTA_DOMAIN "$PREVIEW_OKTA_DOMAIN" \
@@ -621,19 +621,18 @@ jobs:
       - run:
           name: create backend build artifact zip
           working_directory: ~/project
-          command: |
-            apt-get update
-            apt-get install zip -y
-            rm -rf api/seeds/development
-            rm -rf api/seeds/test
-            rm api/seeds/development.js
-            rm api/seeds/test.js
-            rm api/seeds/shared/delete-everything.js
-            cd api
-            npm ci --only=production
-            cd ..
-            zip -r /tmp/backend.zip api/*
-            zip -r /tmp/frontend.zip web/dist/*
+            command: |
+              apt-get update
+              apt-get install zip -y
+              rm -rf api/seeds/development
+              rm -rf api/seeds/test
+              rm -rf api/seeds/production
+              rm -rf api/seeds/shared
+              cd api
+              npm ci --only=production
+              cd ..
+              zip -r /tmp/backend.zip api/*
+              zip -r /tmp/frontend.zip web/dist/*
       - run:
           name: persist build URL to workspace
           command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
