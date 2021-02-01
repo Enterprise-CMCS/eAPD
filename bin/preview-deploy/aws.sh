@@ -111,8 +111,8 @@ function createNewInstance() {
   aws ec2 run-instances \
     --instance-type c4.large \
     --image-id "$AWS_AMI" \
-    --security-group-ids "$AWS_SECURITY_GROUP" \
-    --subnet-id "$AWS_SUBNET" \
+    --security-group-ids "sg-04e87d687a13a3729" \
+    --subnet-id "subnet-017357978c1a9c6ec" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
     --key-name eapd_bbrooks \
