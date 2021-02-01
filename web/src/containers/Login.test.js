@@ -3,7 +3,6 @@ import React from 'react';
 import sinon from 'sinon';
 
 import Login from './Login';
-import { login } from '../actions/auth';
 
 describe('login component', () => {
   test('renders correctly if logged in previously but not logged in now (shows logout notice)', () => {

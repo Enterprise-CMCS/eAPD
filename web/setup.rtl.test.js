@@ -17,6 +17,7 @@ jest.mock('./src/util/oktaAuth', () => {
       getWithoutPrompt: jest.fn()
     },
     getAccessToken: jest.fn(),
+    revokeAccessToken: jest.fn(),
     tokenManager: {
       add: jest.fn(),
       remove: jest.fn(),
