@@ -216,7 +216,6 @@ function createNewInstance() {
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT}]" \
-    --key-name eapd_bbrooks \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
 }
