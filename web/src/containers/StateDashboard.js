@@ -12,7 +12,6 @@ import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from '../components/UpgradeBrowser';
-import SessionEndingAlert from './SessionEndingAlert';
 
 const Loading = ({ children }) => (
   <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
@@ -120,7 +119,6 @@ const StateDashboard = (
     <div className="site-body ds-l-container">
       <div className="ds-u-margin--0">
         <main id="start-main-content">
-          <SessionEndingAlert />
           <div className="ds-u-padding-top--2">
             <UpgradeBrowser />
             <div className="ds-l-row ds-u-margin-top--7">
