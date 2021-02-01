@@ -3,7 +3,7 @@ const logger = require('../../logger')('state seeder');
 const { states } = require('../../util/states');
 
 exports.seed = async knex => {
-  logger.info(`Begging to seed the ${chalk.cyan('states')} table`);
+  logger.info(`Beginning to seed the ${chalk.cyan('states')} table`);
   const total = await knex('states')
     .count('id')
     .first();

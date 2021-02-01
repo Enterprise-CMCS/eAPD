@@ -5,6 +5,11 @@ import React, { Fragment, useState } from 'react';
 const ConsentBanner = ({ onAgree }) => {
   const [showDetails, setShowDetails] = useState(false);
 
+  const agreeAndContinue = () => {
+    document.cookie = 'gov.cms.eapd.hasConsented=true; max-age=259200; secure'; // 3 days
+    onAgree();
+  };
+
   const expandDetails = () => {
     setShowDetails(true);
   };
@@ -81,7 +86,7 @@ const ConsentBanner = ({ onAgree }) => {
                 </Fragment>
               ) : null}
               <div className="ds-u-text-align--center">
-                <Button variation="primary" onClick={onAgree}>
+                <Button variation="primary" onClick={agreeAndContinue}>
                   Agree and continue
                 </Button>
               </div>

@@ -10,6 +10,7 @@ import {
   LOGIN_MFA_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGIN_FAILURE_NOT_IN_GROUP,
   LOCKED_OUT,
   RESET_LOCKED_OUT,
   LOGOUT_REQUEST,
@@ -36,6 +37,7 @@ const initialState = {
   verifyData: {},
   selectState: false,
   isLocked: false,
+  isNotInGroup: false,
   latestActivity: new Date().getTime(),
   isLoggingOut: false,
   isSessionEnding: false,
@@ -122,6 +124,14 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         fetching: false,
+        error: action.error
+      };
+    case LOGIN_FAILURE_NOT_IN_GROUP:
+      return {
+        ...state,
+        otpStage: false,
+        fetching: false,
+        isNotInGroup: true,
         error: action.error
       };
     case LOCKED_OUT:

@@ -50,7 +50,7 @@ workflows:
       - owasp zap scan:
           filters:
             tags:
-              only: /.*/
+              ignore: ignore-owasp
       - validate openapi:
           filters:
             tags:
@@ -200,9 +200,7 @@ workflows:
               ignore:
                 - master
           requires:
-            - backend dependency vulnerability scan
             - frontend build preview
-            - frontend dependency vulnerability scan
             - yaml test
 
       - store artifacts:
@@ -595,7 +593,6 @@ jobs:
               PRNUM=$(basename $CIRCLE_PULL_REQUEST)
               URL=$(./aws.sh \
                 --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
-                --AWS_AMI "$PREVIEW_AWS_AMI" \
                 --AWS_REGION "$PREVIEW_AWS_REGION" \
                 --AWS_SECURITY_GROUP "$PREVIEW_AWS_SECURITY_GROUP" \
                 --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \

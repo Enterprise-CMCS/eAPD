@@ -37,6 +37,8 @@ const OutcomeAndMetricForm = ({
         label="Outcome"
         hint="Describe a discrete and measurable improvement for this system."
         value={outcome}
+        multiline
+        rows="4"
         onChange={changeOutcome}
       />
 
@@ -58,6 +60,8 @@ const OutcomeAndMetricForm = ({
               label="Metric"
               hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
               value={metric}
+              multiline
+              rows="4"
               onChange={changeMetric(i)}
             />
           </div>

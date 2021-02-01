@@ -39,13 +39,13 @@ export const setTokens = sessionToken => {
       // prompt: 'none'
     })
     .then(async res => {
-      const { state: responseToken, tokens } = res;
-      if (stateToken === responseToken) {
-        await oktaAuth.tokenManager.setTokens(tokens);
-        const expiresAt = await getSessionExpiration();
-        return expiresAt;
-      }
-      throw new Error('Authentication failed');
+      const { tokens } = res;
+      // if (stateToken === responseToken) { // state not currently being returned
+      await oktaAuth.tokenManager.setTokens(tokens);
+      const expiresAt = await getSessionExpiration();
+      return expiresAt;
+      // }
+      // throw new Error('Authentication failed');
     });
 };
 

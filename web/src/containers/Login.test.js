@@ -55,6 +55,25 @@ describe('login component', () => {
     expect(component).toMatchSnapshot();
   });
 
+  test('renders correctly if user is not in correct Okta group', () => {
+    const component = shallow(
+      <Login
+        authenticated={false}
+        error="Authentication failed"
+        customErrorMessage="Invalid Entry"
+        fetching={false}
+        hasEverLoggedOn={false}
+        location={{ state: { from: 'origin' } }}
+        login={() => {}}
+        loginOtp={() => {}}
+        isNotInGroup
+        otpStage
+      />
+    );
+
+    expect(component).toMatchSnapshot();
+  });
+
   test('renders correctly if not logged in and fetching data', () => {
     const component = shallow(
       <Login

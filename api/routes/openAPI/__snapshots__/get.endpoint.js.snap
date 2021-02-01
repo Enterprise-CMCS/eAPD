@@ -950,6 +950,9 @@ Object {
           "403": Object {
             "description": "Does not have permission to this activity",
           },
+          "500": Object {
+            "description": "The file is not a valid format",
+          },
         },
         "security": Array [
           Object {
@@ -1103,6 +1106,27 @@ Object {
         "summary": "Gets the list of all roles",
         "tags": Array [
           "Authentication and authorization",
+        ],
+      },
+    },
+    "/docs/account-registration": Object {
+      "get": Object {
+        "description": "Get the account registration documentation",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/pdf": Object {
+                "schema": Object {
+                  "format": "binary",
+                  "type": "string",
+                },
+              },
+            },
+            "description": "The file",
+          },
+        },
+        "tags": Array [
+          "Docs",
         ],
       },
     },

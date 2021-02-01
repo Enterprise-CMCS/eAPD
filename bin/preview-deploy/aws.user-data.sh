@@ -14,18 +14,19 @@ chmod -R g+w /app
 mkdir /app/tls
 
 # Install nginx and postgres
-amazon-linux-extras install nginx1.12
-yum -y install git postgresql-server amazon-cloudwatch-agent
+#amazon-linux-extras install nginx1.12
+yum -y install git postgresql-server amazon-cloudwatch-agent nginx-1.16.1-3.el7
+# nginx1.12 is not available by default on the Golden Image
 
 # Setup postgres
-service postgresql initdb
+postgresql-setup initdb
 echo "
 # TYPE    DATABASE    USER    ADDRESS         METHODS
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
 " > /var/lib/pgsql/data/pg_hba.conf
-service postgresql start
+systemctl status postgresql
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
@@ -37,6 +38,10 @@ rm -f /app/tls/server.pass.key
 openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
 openssl x509 -req -sha256 -days 365 -in /app/tls/server.csr -signkey /app/tls/server.key -out /app/tls/server.crt
 rm -f /app/tls/server.csr
+
+# Set SELinux context so Nginx can read the cert files
+semanage fcontext -a -t httpd_sys_content_t "/app/tls(/.*)?"
+restorecon -Rv /app/tls
 
 # Create nginx config
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
@@ -69,12 +74,11 @@ http {
     default_type        application/octet-stream;
 
     server {
-        listen       443 default_server;
-        listen       [::]:443 default_server;
+        listen       443 default_server ssl;
+        listen       [::]:443 default_server ssl;
         server_name  _;
         root         /app/web;
 
-        ssl                 on;
         ssl_certificate     /app/tls/server.crt;
         ssl_certificate_key /app/tls/server.key;
 
@@ -96,7 +100,6 @@ http {
     }
 }
 NGINXCONFIG
-service nginx restart
 
 # Configure CloudWatch Agent
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
@@ -266,13 +269,45 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
       "files": {
         "collect_list": [
           {
-            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-error-0.log*",
-            "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-error-0.log"
+            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
+            "log_group_name": "preview/app/api/logs/eAPD-API-error-0.log"
           },
           {
-            "file_path": "/home/ec2-user/.pm2/logs/eAPD-API-out-0.log*",
-            "log_group_name": "preview/home/ec2-user/.pm2/logs/eAPD-API-out-0.log"
-          }
+            "file_path": "/app/api/logs/eAPD-API-out-0.log*",
+            "log_group_name": "preview/app/api/logs/eAPD-API-out-0.log"
+          },
+          {
+            "file_path": "/app/api/logs/eAPD-API-*",
+            "log_group_name": "preview/app/api/logs/eAPD-API-combined-0.log"
+          },          
+          {
+            "file_path": "/app/api/logs/Database-migration-error.log*",
+            "log_group_name": "preview/app/api/logs/Database-migration-error.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-migration-out.log*",
+            "log_group_name": "preview/app/api/logs/Database-migration-out.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-migration-*",
+            "log_group_name": "preview/app/api/logs/Database-migration-combined.log"
+          },          
+          {
+            "file_path": "/app/api/logs/Database-seeding-error.log*",
+            "log_group_name": "preview/app/api/logs/Database-seeding-error.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-seeding-out.log*",
+            "log_group_name": "preview/app/api/logs/Database-seeding-out.log"
+          },
+          {
+            "file_path": "/app/api/logs/Database-seeding-*",
+            "log_group_name": "preview/app/api/logs/Database-seeding-combined.log"
+          },                                           
+          {
+            "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
+            "log_group_name": "preview/app/api/logs/cms-hitech-apd-api.logs"              
+          }    
         ]
       }
     }
@@ -301,6 +336,15 @@ export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
 
 cd ~
+
+mkdir -p /app/api/logs
+touch /app/api/logs/eAPD-API-error-0.log
+touch /app/api/logs/eAPD-API-out-0.log
+touch /app/api/logs/Database-migration-error.log
+touch /app/api/logs/Database-migration-out.log
+touch /app/api/logs/Database-seeding-error.log
+touch /app/api/logs/Database-seeding-out.log
+touch /app/api/logs/cms-hitech-apd-api.logs
 
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
@@ -348,6 +392,8 @@ echo "module.exports = {
     script: 'main.js',
     instances: 1,
     autorestart: true,
+    error_file: '/app/api/logs/eAPD-API-error-0.log',
+    out_file: '/app/api/logs/eAPD-API-out-0.log',
     env: {
       AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 15,
       AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
@@ -373,7 +419,15 @@ pm2 start ecosystem.config.js
 
 E_USER
 
+# SELinux context so Nginx can READ the files in /app/web
+chown -R nginx /app/web
+semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
+restorecon -Rv /app/web
+setsebool -P httpd_can_network_connect 1
+systemctl restart nginx
+
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
+su - ec2-user -c 'pm2 restart'
