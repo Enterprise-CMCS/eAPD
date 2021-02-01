@@ -273,7 +273,9 @@ export const loginOtp = otp => async dispatch => {
         const reason = error ? error.message : 'N/A';
         if (reason === 'User is not assigned to the client application.') {
           dispatch(failLoginNotInGroup(reason));
-        } else if (reason === 'User Locked') {
+          return '/login/not-in-group';
+        }
+        if (reason === 'User Locked') {
           dispatch(failLoginLocked(reason));
           return '/login/locked-out';
         }
