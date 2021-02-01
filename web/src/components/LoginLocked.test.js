@@ -24,7 +24,11 @@ describe('<LoginLocked />', () => {
   test('contact message renders', () => {
     const { getByText } = renderUtils;
     expect(
-      getByText(/Contact the System Administrator for account reset./)
+      getByText((content, node) => {
+        const hasText = () => node.textContent === 'Contact CMS-EAPD@cms.hhs.gov for an account reset.';
+        const nodeHasText = hasText(node);
+        return nodeHasText;
+      })
     ).toBeTruthy();
   });
 
