@@ -353,3 +353,62 @@ exports[`login component renders correctly if not logged in, and never logged in
   </withRouter(LoginForm)>
 </main>
 `;
+
+exports[`login component renders correctly if user is not in correct Okta group 1`] = `
+<main
+  id="start-main-content"
+>
+  <UpgradeBrowser />
+  <withRouter(LoginForm)
+    canSubmit={false}
+    cancelable={false}
+    className="ds-u-margin-top--7"
+    error={null}
+    footer={
+      <p
+        className="ds-u-padding-top--2"
+      >
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
+    legend="Log in"
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    success={null}
+    title="Log in"
+    working={false}
+  >
+    <TextField
+      ariaLabel="Enter your EUA ID."
+      errorMessage={null}
+      id="username"
+      label="EUA ID"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <Password
+      className=""
+      compareTo={Array []}
+      customErrorMessage={null}
+      errorMessage={null}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </withRouter(LoginForm)>
+</main>
+`;

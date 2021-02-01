@@ -85,6 +85,7 @@
     "react-waypoint": "^9.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.13.7",
     "reselect": "^4.0.0",
     "stickybits": "^3.7.4",
     "tinymce": "^5.6.2",
