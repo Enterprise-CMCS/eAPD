@@ -18,14 +18,21 @@ const UnexpectedError = ({ hasError, isSaving, save }) => {
       className={`alert--unexpected-error ${className}`}
     >
       <Alert
-        heading="There's been an unexpected error."
+        heading="Unable to save changes!"
         role="alertdialog"
         variation="warn"
       >
-        We weren&lsquo;t able to save your latest changes. Try saving in a few
-        minutes. If you continue to see this message, refresh your browser.
-        Before this issue is resolved, new changes may be lost if you continue
-        to make edits or if you refresh your browser.
+        <p>
+          Your changes aren't being saved. Try saving your changes again in a
+          few minutes by clicking on the save button.
+        </p>
+        <p>
+          If that doesn't clear this message, back up the changes you made on
+          this page (for instance, if you just wrote a long narrative, save it
+          into a text file or word doc) and refresh your browser. If you refresh
+          your browser without saving backing up your changes, changes made
+          after this message appeared will be lost.
+        </p>
         <p className="ds-u-text-align--right ds-u-margin-bottom--0">
           <Button variation="primary" onClick={save}>
             {isSaving && <Spinner />}
