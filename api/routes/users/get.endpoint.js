@@ -1,5 +1,7 @@
 const {
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -15,9 +17,8 @@ const get = (id = '') => {
 describe('users endpoint', () => {
   describe('users endpoint | GET /users', () => {
     const db = getDB();
-    beforeAll(() => db.seed.run());
-
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     unauthenticatedTest('get', url);
     unauthorizedTest('get', url);
@@ -30,8 +31,8 @@ describe('users endpoint', () => {
 
   describe('users endpoint | GET /users/:userID', () => {
     const db = getDB();
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     unauthenticatedTest('get', `${url}/some-id`);
     unauthorizedTest('get', `${url}/some-id`);
