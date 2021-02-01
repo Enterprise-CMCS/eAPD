@@ -109,7 +109,7 @@ function configureUserData() {
 #   PR_NUM - Github pull request number associated with this instance
 function createNewInstance() {
   aws ec2 run-instances \
-    --instance-type t2.medium \
+    --instance-type c4.large \
     --image-id "$AWS_AMI" \
     --security-group-ids "$AWS_SECURITY_GROUP" \
     --subnet-id "$AWS_SUBNET" \
