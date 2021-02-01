@@ -621,18 +621,18 @@ jobs:
       - run:
           name: create backend build artifact zip
           working_directory: ~/project
-            command: |
-              apt-get update
-              apt-get install zip -y
-              rm -rf api/seeds/development
-              rm -rf api/seeds/test
-              rm -rf api/seeds/production
-              rm -rf api/seeds/shared
-              cd api
-              npm ci --only=production
-              cd ..
-              zip -r /tmp/backend.zip api/*
-              zip -r /tmp/frontend.zip web/dist/*
+          command: |
+            apt-get update
+            apt-get install zip -y
+            rm -rf api/seeds/development
+            rm -rf api/seeds/test
+            rm -rf api/seeds/production
+            rm -rf api/seeds/shared
+            cd api
+            npm ci --only=production
+            cd ..
+            zip -r /tmp/backend.zip api/*
+            zip -r /tmp/frontend.zip web/dist/*
       - run:
           name: persist build URL to workspace
           command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
