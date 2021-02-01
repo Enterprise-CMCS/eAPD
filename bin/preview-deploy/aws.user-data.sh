@@ -14,18 +14,19 @@ chmod -R g+w /app
 mkdir /app/tls
 
 # Install nginx and postgres
-amazon-linux-extras install nginx1.12
-yum -y install git postgresql-server amazon-cloudwatch-agent
+#amazon-linux-extras install nginx1.12
+yum -y install git postgresql-server amazon-cloudwatch-agent nginx-1.16.1-3.el7
+# nginx1.12 is not available by default on the Golden Image
 
 # Setup postgres
-service postgresql initdb
+postgresql-setup initdb
 echo "
 # TYPE    DATABASE    USER    ADDRESS         METHODS
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
 " > /var/lib/pgsql/data/pg_hba.conf
-service postgresql start
+systemctl status postgresql
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
@@ -37,6 +38,10 @@ rm -f /app/tls/server.pass.key
 openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
 openssl x509 -req -sha256 -days 365 -in /app/tls/server.csr -signkey /app/tls/server.key -out /app/tls/server.crt
 rm -f /app/tls/server.csr
+
+# Set SELinux context so Nginx can read the cert files
+semanage fcontext -a -t httpd_sys_content_t "/app/tls(/.*)?"
+restorecon -Rv /app/tls
 
 # Create nginx config
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
@@ -69,12 +74,11 @@ http {
     default_type        application/octet-stream;
 
     server {
-        listen       443 default_server;
-        listen       [::]:443 default_server;
+        listen       443 default_server ssl;
+        listen       [::]:443 default_server ssl;
         server_name  _;
         root         /app/web;
 
-        ssl                 on;
         ssl_certificate     /app/tls/server.crt;
         ssl_certificate_key /app/tls/server.key;
 
@@ -96,7 +100,6 @@ http {
     }
 }
 NGINXCONFIG
-service nginx restart
 
 # Configure CloudWatch Agent
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
@@ -416,7 +419,15 @@ pm2 start ecosystem.config.js
 
 E_USER
 
+# SELinux context so Nginx can READ the files in /app/web
+chown -R nginx /app/web
+semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
+restorecon -Rv /app/web
+setsebool -P httpd_can_network_connect 1
+systemctl restart nginx
+
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
+su - ec2-user -c 'pm2 restart'
