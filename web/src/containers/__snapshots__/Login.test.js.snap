@@ -399,7 +399,7 @@ exports[`login component renders correctly if there is an authentication error 1
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error="Please contact your State Administrator for steps to register an account."
+    error="Your username and/or password is incorrect."
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -450,6 +450,14 @@ exports[`login component renders correctly if there is an authentication error 1
 `;
 
 exports[`login component renders correctly if there is an otp authentication error 1`] = `
+<Fragment>
+  <ConsentBanner
+    onAgree={[Function]}
+  />
+</Fragment>
+`;
+
+exports[`login component renders correctly if user is not in correct Okta group 1`] = `
 <Fragment>
   <ConsentBanner
     onAgree={[Function]}
