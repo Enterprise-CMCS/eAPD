@@ -32,11 +32,21 @@ const ApdSummary = ({
   yearOptions
 }) => {
   const handleYears = e => {
-    const { value } = e.target;
-    if (years.includes(value)) {
-      removeApdYear(value);
+    const year = e.target.value;
+
+    if (e.target.checked === false) {
+      // eslint-disable-next-line no-alert
+      const confirmation = window.confirm(
+        `Unchecking Federal Fiscal Year ${year} will permanently delete any FFY ${year} specific data in the current APD.`
+      );
+      if (confirmation === true) {
+        removeApdYear(year);
+      } else {
+        e.target.checked = true;
+      }
     } else {
-      addApdYear(value);
+      addApdYear(year);
+      e.target.checked = true;
     }
   };
 
@@ -52,7 +62,6 @@ const ApdSummary = ({
 
   return (
     <Section resource="apd">
-      <h3 className="ds-h3 subsection--title">{t('apd.overview.title')}</h3>
       <ChoiceList
         choices={yearChoices}
         label={t('apd.overview.instruction.short')}

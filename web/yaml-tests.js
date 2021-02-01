@@ -7,7 +7,7 @@ glob('**/*.yaml', { ignore: ['node_modules/**'] }, (_, files) => {
   files.forEach(f => {
     try {
       process.stdout.write(`   ${f}`);
-      jsYaml.safeLoad(fs.readFileSync(f, { encoding: 'utf-8' }));
+      jsYaml.load(fs.readFileSync(f, { encoding: 'utf-8' }));
       process.stdout.cursorTo(0);
       process.stdout.write(' ✔\n');
     } catch (e) {

@@ -1,5 +1,7 @@
 const {
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -7,8 +9,8 @@ const {
 
 describe('auth roles endpoint | GET /auth/roles', () => {
   const db = getDB();
-  beforeAll(() => db.seed.run());
-  afterAll(() => db.destroy());
+  beforeAll(() => setupDB(db));
+  afterAll(() => teardownDB(db));
 
   const url = '/auth/roles';
 

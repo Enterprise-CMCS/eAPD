@@ -10,7 +10,7 @@ const LoginLocked = () => {
             <span>Verify Your Identity</span>
           </h1>
           <h2 className="ds-h4 ds-u-margin-y--3">Account Locked</h2>
-          <p>Contact the System Administrator for account reset.</p>
+          <p>Contact <a href="mailto:CMS-EAPD@cms.hhs.gov">CMS-EAPD@cms.hhs.gov</a> for an account reset.</p>
           <p>
             Reset will occur in{' '}
             <span className="ds-u-color--error">60 minutes 00 seconds.</span>

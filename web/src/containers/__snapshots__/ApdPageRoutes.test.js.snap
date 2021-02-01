@@ -16,7 +16,7 @@ exports[`<ApdPageRoutes /> component renders as expected 1`] = `
       path="/your/current/path"
     >
       <Redirect
-        to="/your/current/path/program-summary"
+        to="/your/current/path/apd-overview"
       />
     </Route>
     <Route
@@ -25,7 +25,7 @@ exports[`<ApdPageRoutes /> component renders as expected 1`] = `
       <ApdStateProfile />
     </Route>
     <Route
-      path="/your/current/path/program-summary"
+      path="/your/current/path/apd-overview"
     >
       <Connect(ApdSummary) />
     </Route>

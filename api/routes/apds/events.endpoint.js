@@ -1,5 +1,7 @@
 const {
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -8,8 +10,8 @@ const {
 describe('APD events endpoints', () => {
   describe('Record an event associated with an APD | POST /apds/:id/events', () => {
     const db = getDB();
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     const url = id => `/apds/${id}/events`;
 

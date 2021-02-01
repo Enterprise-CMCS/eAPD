@@ -263,6 +263,30 @@ describe('auth actions', () => {
       expect(redirect).toEqual('/login/mfa/enroll');
     });
 
+    it('creates PASSWORD_EXPIRED if password has expired', async () => {
+      const signInSpy = jest
+        .spyOn(mockAuth, 'authenticateUser')
+        .mockImplementation(() =>
+          Promise.resolve({
+            status: 'PASSWORD_EXPIRED'
+          })
+        );
+
+      const store = mockStore({});
+      const expectedActions = [
+        { type: actions.LOGIN_REQUEST },
+        {
+          type: actions.LOGIN_FAILURE,
+          error: 'Password expired'
+        }
+      ];
+
+      await store.dispatch(actions.login('name', 'secret'));
+      expect(signInSpy).toHaveBeenCalledTimes(1);
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
     it('creates LOGIN_SUCCESS after successful second stage of multi-factor auth', async () => {
       const verify = jest.fn(() =>
         Promise.resolve({ sessionToken: 'testSessionToken' })
@@ -482,6 +506,33 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         { type: actions.LOCKED_OUT }
+      ];
+
+      await store.dispatch(actions.loginOtp('otp'));
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('creates LOGIN_FAILURE_NOT_IN_GROUP when not in required Okta group', async () => {
+      jest
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
+          Promise.resolve({
+            verify: jest.fn(() =>
+              Promise.reject(
+                new Error('User is not assigned to the client application.')
+              )
+            )
+          })
+        );
+
+      const store = mockStore({});
+      const expectedActions = [
+        { type: actions.LOGIN_MFA_REQUEST },
+        {
+          type: actions.LOGIN_FAILURE_NOT_IN_GROUP,
+          error: 'User is not assigned to the client application.'
+        }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));

@@ -41,7 +41,10 @@ const LoginForm = ({
             </h1>
           </div>
           {!!success && <div className="ds-u-margin-top--3">{success}</div>}
-          {error && <div className="ds-u-margin-top--3">{error}</div>}
+
+          {!!error && (
+            <div className="ds-u-margin-top--3 ds-u-color--error">{error}</div>
+          )}
           <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
               {!!legend && (
@@ -88,7 +91,11 @@ LoginForm.propTypes = {
   cancelable: PropTypes.bool,
   canSubmit: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.element
+  ]),
   footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   history: PropTypes.object.isRequired,
   id: PropTypes.string,

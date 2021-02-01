@@ -124,12 +124,16 @@ const StateDashboard = (
           <div className="ds-u-padding-top--2">
             <UpgradeBrowser />
             <div className="ds-l-row ds-u-margin-top--7">
-              <div className="ds-l-col--8 ds-u-margin-x--auto ">
-                <h1 className="ds-h1">
-                  {t('stateDashboard.title', {
-                    state: state ? state.name : ''
-                  })}
-                </h1>
+              <div className="ds-l-col--8 ds-u-margin-x--auto">
+                <div
+                  className="ds-u-display--flex ds-u-justify-content--center"
+                  data-testid="eAPDlogo"
+                >
+                  <img
+                    src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
+                    alt="eAPD Logo"
+                  />
+                </div>
                 <Instruction source="stateDashboard.introduction" />
                 {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
                   <Instruction source="stateDashboard.instruction" />

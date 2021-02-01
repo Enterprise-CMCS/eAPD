@@ -7,8 +7,10 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     className="data-entry-box"
     hint="Describe a discrete and measurable improvement for this system."
     label="Outcome"
+    multiline={true}
     name="outcome"
     onChange={[Function]}
+    rows="4"
     type="text"
     value="outcome description"
   />
@@ -25,8 +27,10 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       <TextField
         hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
         label="Metric"
+        multiline={true}
         name="metric"
         onChange={[Function]}
+        rows="4"
         type="text"
         value="metric 1"
       />
@@ -45,8 +49,10 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       <TextField
         hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
         label="Metric"
+        multiline={true}
         name="metric"
         onChange={[Function]}
+        rows="4"
         type="text"
         value="metric 2"
       />
