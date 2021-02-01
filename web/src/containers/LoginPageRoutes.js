@@ -8,6 +8,7 @@ import {
 
 import Login from './Login';
 import LoginLocked from '../components/LoginLocked';
+import LoginGroupError from '../components/LoginGroupError';
 import LoginMFAEnroll from '../components/LoginMFAEnroll';
 import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
 import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
@@ -46,6 +47,10 @@ const LoginPageRoutes = ({
 
         <Route path={`${path}/locked-out`}>
           <LoginLocked />
+        </Route>
+
+        <Route path={`${path}/not-in-group`}>
+          <LoginGroupError />
         </Route>
 
         <Route path={`${path}/mfa/enroll`}>

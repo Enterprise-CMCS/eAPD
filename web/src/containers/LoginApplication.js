@@ -52,6 +52,16 @@ const LoginApplication = ({
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
+  // let errorMessage = false;
+  // if (otpStage && error === 'Authentication failed') {
+  //   errorMessage = 'The one-time password you’ve entered is incorrect.';
+  // } else if ( error === 'Password expired' ) {
+  //   errorMessage = <Fragment>Your password has expired. Update your password in <a href="https://cms.okta.com/">Okta</a>.</Fragment>
+  // } else if ( error === 'Authentication failed' ) {
+  //   errorMessage = 'Your username and/or password is incorrect.';
+  // } else if (error) {
+  //   errorMessage = 'Sorry! Something went wrong. Please try again.';
+  // }
 
   // TODO: test
   const handleFactorSelection = async selected => {
@@ -119,7 +129,7 @@ const LoginApplication = ({
     history.push('/login');
   };
 
-  if (showConsent) {
+  if (showConsent && !hasEverLoggedOn) {
     return <ConsentBanner onAgree={hideConsent} />;
   }
 
