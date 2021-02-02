@@ -1,5 +1,7 @@
 const {
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -8,8 +10,8 @@ const {
 describe('APD endpoint', () => {
   describe('List APDs endpoint | GET /apds', () => {
     const db = getDB();
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     const url = '/apds';
 
@@ -27,9 +29,8 @@ describe('APD endpoint', () => {
 
   describe('Get specific APD | GET /apds/:id', () => {
     const db = getDB();
-
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     const url = id => `/apds/${id}`;
 
