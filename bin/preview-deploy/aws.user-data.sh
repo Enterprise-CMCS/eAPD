@@ -14,7 +14,7 @@ chmod -R g+w /app
 mkdir /app/tls
 
 # Install nginx and postgres
-amazon-linux-extras install nginx1.12
+amazon-linux-extras install -y nginx1.12
 yum -y install git postgresql-server amazon-cloudwatch-agent
 
 # Setup postgres
