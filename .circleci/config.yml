@@ -594,7 +594,7 @@ jobs:
               URL=$(./aws.sh \
                 --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
                 --AWS_REGION "$PREVIEW_AWS_REGION" \
-                --AWS_SECURITY_GROUP "$PREVIEW_AWS_SUBNET" \
+                --AWS_SECURITY_GROUP "$PREVIEW_AWS_SECURITY_GROUP" \
                 --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
                 --BRANCH "$CIRCLE_BRANCH" \
                 --PR_NUM "$PRNUM" \
