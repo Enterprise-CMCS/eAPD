@@ -23,7 +23,7 @@ const validateImage = async buffer => {
         return { error: 'Unsupported file format' };
       }
 
-      const config = {};
+      const config = { fit: 'inside' };
       if (width > MAX_WIDTH) config.width = MAX_WIDTH;
       if (height > MAX_HEIGHT) config.height = MAX_HEIGHT;
       const data = await image
