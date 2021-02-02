@@ -7,17 +7,12 @@ import {
   LOGIN_MFA_ENROLL_START,
   LOGIN_MFA_ENROLL_ADD_PHONE,
   LOGIN_MFA_ENROLL_ACTIVATE,
-  LOGIN_MFA_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN_FAILURE_NOT_IN_GROUP,
-  LOCKED_OUT,
-  RESET_LOCKED_OUT,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
+  STATE_ACCESS_REQUIRED,
   STATE_ACCESS_REQUEST,
-  STATE_ACCESS_SUCCESS,
-  STATE_ACCESS_COMPLETE,
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
@@ -106,12 +101,6 @@ const auth = (state = initialState, action) => {
         verifyData: action.data.activationData,
         error: null
       };
-    case LOGIN_MFA_FAILURE:
-      return {
-        ...state,
-        fetching: false,
-        error: action.error
-      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -125,28 +114,6 @@ const auth = (state = initialState, action) => {
         ...state,
         fetching: false,
         error: action.error
-      };
-    case LOGIN_FAILURE_NOT_IN_GROUP:
-      return {
-        ...state,
-        otpStage: false,
-        fetching: false,
-        isNotInGroup: true,
-        error: action.error
-      };
-    case LOCKED_OUT:
-      return {
-        ...state,
-        isLocked: true,
-        fetching: false,
-        error: null
-      };
-    case RESET_LOCKED_OUT:
-      return {
-        ...state,
-        isLocked: false,
-        fetching: false,
-        error: null
       };
     case LOGOUT_REQUEST:
       return {
@@ -166,26 +133,15 @@ const auth = (state = initialState, action) => {
         isExtendingSession: false,
         isLoggingOut: false
       };
+    case STATE_ACCESS_REQUIRED:
+      return {
+        ...state,
+        fetching: false
+      };
     case STATE_ACCESS_REQUEST:
       return {
         ...state,
-        requestAccess: true,
-        requestAccessSuccess: false,
-        error: ''
-      };
-    case STATE_ACCESS_SUCCESS:
-      return {
-        ...state,
-        requestAccess: false,
-        requestAccessSuccess: true,
-        error: ''
-      };
-    case STATE_ACCESS_COMPLETE:
-      return {
-        ...state,
-        requestAccess: false,
-        requestAccessSuccess: false,
-        error: ''
+        fetching: true
       };
     case LATEST_ACTIVITY:
       return {
