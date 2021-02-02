@@ -593,7 +593,6 @@ jobs:
               PRNUM=$(basename $CIRCLE_PULL_REQUEST)
               URL=$(./aws.sh \
                 --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
-                --AWS_AMI "$PREVIEW_AWS_AMI" \
                 --AWS_REGION "$PREVIEW_AWS_REGION" \
                 --AWS_SECURITY_GROUP "sg-04e87d687a13a3729" \
                 --AWS_SUBNET "subnet-017357978c1a9c6ec" \
