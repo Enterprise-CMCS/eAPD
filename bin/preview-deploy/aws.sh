@@ -111,7 +111,7 @@ function configureUserData() {
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type t3.medium \
-    --image-id "$AWS_AMI" \
+    --image-id $1 \
     --security-group-ids "$AWS_SECURITY_GROUP" \
     --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
