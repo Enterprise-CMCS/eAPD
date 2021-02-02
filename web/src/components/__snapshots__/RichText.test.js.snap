@@ -16,7 +16,7 @@ exports[`RichText component renders as expected 1`] = `
         "encoding": "xml",
         "file_picker_types": "image",
         "forced_root_block": "p",
-        "images_file_types": "jpeg,jpg,jfif,pjeg,pjp,png,gif,webp",
+        "images_file_types": "jpeg,jpg,jfif,pjeg,pjp,png,gif,webp,tif,tiff",
         "images_upload_handler": [Function],
         "invalid_elements": "script",
         "link_assume_external_targets": true,

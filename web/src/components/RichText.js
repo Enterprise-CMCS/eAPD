@@ -30,7 +30,9 @@ const VALID_FILE_TYPES = [
   'pjp',
   'png',
   'gif',
-  'webp'
+  'webp',
+  'tif',
+  'tiff'
 ];
 
 // this function is used when the user presses the image button

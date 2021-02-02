@@ -20,6 +20,7 @@ import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 import LoginMFA from './LoginMFA';
 import LoginLocked from '../components/LoginLocked';
+import LoginGroupError from '../components/LoginGroupError';
 import LoginMFAEnroll from '../components/LoginMFAEnroll';
 import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
 import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
@@ -40,6 +41,7 @@ const Login = ({
   mfaEnrollType,
   verifyData,
   isLocked,
+  isNotInGroup,
   requestAccess,
   requestAccessSuccess,
   login: action,
@@ -88,16 +90,12 @@ const Login = ({
   const { from } = location.state || { from: { pathname: '/' } };
 
   let errorMessage = false;
-  if (isLocked) {
-    errorMessage = 'You are locked out';
-  } else if (otpStage && error === 'Authentication failed') {
+  if (otpStage && error === 'Authentication failed') {
     errorMessage = 'The one-time password you’ve entered is incorrect.';
-  } else if (
-    error === 'Authentication failed' ||
-    error === 'Request failed with status code 401'
-  ) {
-    errorMessage =
-      'Please contact your State Administrator for steps to register an account.';
+  } else if ( error === 'Password expired' ) {
+    errorMessage = <Fragment>Your password has expired. Update your password in <a href="https://cms.okta.com/">Okta</a>.</Fragment>
+  } else if ( error === 'Authentication failed' ) {
+    errorMessage = 'Your username and/or password is incorrect.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
@@ -137,18 +135,8 @@ const Login = ({
     );
   }
 
-  if (isLocked) {
-    errorMessage = 'You are locked out';
-  } else if (otpStage && error === 'Authentication failed') {
-    errorMessage = 'The one-time password you’ve entered is incorrect.';
-  } else if (
-    error === 'Authentication failed' ||
-    error === 'Request failed with status code 401'
-  ) {
-    errorMessage =
-      'Please contact your State Administrator for steps to register an account.';
-  } else if (error) {
-    errorMessage = 'Sorry! Something went wrong. Please try again.';
+  if (isNotInGroup) {
+    return <LoginGroupError />;
   }
 
   if (isLocked) {
@@ -260,6 +248,7 @@ Login.propTypes = {
   mfaEnrollActivateStage: PropTypes.bool.isRequired,
   verifyData: PropTypes.object.isRequired,
   isLocked: PropTypes.bool.isRequired,
+  isNotInGroup: PropTypes.bool.isRequired,
   requestAccess: PropTypes.bool.isRequired,
   requestAccessSuccess: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
@@ -285,6 +274,7 @@ const mapStateToProps = ({
     mfaEnrollActivateStage,
     verifyData,
     isLocked,
+    isNotInGroup,
     mfaType,
     requestAccess,
     requestAccessSuccess
@@ -302,6 +292,7 @@ const mapStateToProps = ({
   mfaEnrollActivateStage,
   verifyData,
   isLocked,
+  isNotInGroup,
   mfaType,
   requestAccess,
   requestAccessSuccess
