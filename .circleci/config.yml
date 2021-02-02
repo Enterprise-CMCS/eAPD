@@ -625,9 +625,8 @@ jobs:
             apt-get install zip -y
             rm -rf api/seeds/development
             rm -rf api/seeds/test
-            rm api/seeds/development.js
-            rm api/seeds/test.js
-            rm api/seeds/shared/delete-everything.js
+            rm -rf api/seeds/production
+            rm -rf api/seeds/shared
             cd api
             npm ci --only=production
             cd ..
