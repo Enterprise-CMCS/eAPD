@@ -26,18 +26,13 @@ export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
 export const LOGIN_MFA_ENROLL_START = 'LOGIN_MFA_ENROLL_START';
 export const LOGIN_MFA_ENROLL_ADD_PHONE = 'LOGIN_MFA_ENROLL_ADD_PHONE';
 export const LOGIN_MFA_ENROLL_ACTIVATE = 'LOGIN_MFA_ENROLL_ACTIVATE';
-export const LOGIN_MFA_FAILURE = 'LOGIN_MFA_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGIN_FAILURE_NOT_IN_GROUP = 'LOGIN_FAILURE_NOT_IN_GROUP';
-export const LOCKED_OUT = 'LOCKED_OUT';
-export const RESET_LOCKED_OUT = 'RESET_LOCKED_OUT';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
+export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
-export const STATE_ACCESS_SUCCESS = 'STATE_ACCESS_SUCCESS';
-export const STATE_ACCESS_COMPLETE = 'STATE_ACCESS_COMPLETE';
 
 export const LATEST_ACTIVITY = 'LATEST_ACTIVITY';
 export const SESSION_ENDING_ALERT = 'SESSION_ENDING_ALERT';
@@ -69,21 +64,10 @@ export const mfaEnrollActivate = (mfaEnrollType, activationData) => ({
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
 export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
-export const failLoginNotInGroup = error => ({
-  type: LOGIN_FAILURE_NOT_IN_GROUP,
-  error
-});
-export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
-export const failLoginLocked = () => ({ type: LOCKED_OUT });
-export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
-
 export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
-
+export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
-export const successAccessToState = () => ({ type: STATE_ACCESS_SUCCESS });
-export const completeAccessToState = () => ({ type: STATE_ACCESS_COMPLETE });
-
 export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
 export const setSessionEnding = () => ({ type: SESSION_ENDING_ALERT });
 export const requestSessionRenewal = () => ({ type: REQUEST_SESSION_RENEWAL });
@@ -110,17 +94,18 @@ const getCurrentUser = () => dispatch =>
     .get('/me')
     .then(userRes => {
       if (userRes.data.states.length === 0) {
+        dispatch(requireAccessToState());
         return '/login/affiliations/request';
       }
       if (userRes.data.activities) {
         dispatch(loadData(userRes.data.activities));
       }
       dispatch(completeLogin(userRes.data));
-      dispatch(resetLocked());
       return null;
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
+      console.log({ reason });
       dispatch(failLogin(reason));
       return null;
     });
@@ -215,11 +200,13 @@ export const login = (username, password) => dispatch => {
   return authenticateUser(username, password)
     .then(async res => {
       if (res.status === 'PASSWORD_EXPIRED') {
-        return dispatch(failLogin('Password expired'));
+        // show error message on current page
+        return dispatch(failLogin('PASSWORD_EXPIRED'));
       }
 
       if (res.status === 'LOCKED_OUT') {
-        dispatch(failLoginLocked());
+        dispatch(failLogin('LOCKED_OUT'));
+        // redirect to locked-out page
         return '/login/locked-out';
       }
       // MFA enrollment starts here. If MFA is required as part
@@ -227,6 +214,7 @@ export const login = (username, password) => dispatch => {
       if (res.status === 'MFA_ENROLL') {
         const factors = getAvailableFactors(res.factors);
         dispatch(mfaEnrollStart(factors));
+        // redirect to MFA enroll page
         return '/login/mfa/enroll';
       }
 
@@ -239,6 +227,7 @@ export const login = (username, password) => dispatch => {
 
         return mfaFactor.verify(res).then(() => {
           dispatch(completeFirstStage());
+          // redirect to MFA verification page
           return '/login/mfa/verify';
         });
       }
@@ -253,7 +242,8 @@ export const login = (username, password) => dispatch => {
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
-      dispatch(failLogin(reason));
+      console.log({ reason });
+      dispatch(failLogin('AUTH_FAILED'));
       return null;
     });
 };
@@ -272,23 +262,27 @@ export const loginOtp = otp => async dispatch => {
       .catch(error => {
         const reason = error ? error.message : 'N/A';
         if (reason === 'User is not assigned to the client application.') {
-          dispatch(failLoginNotInGroup(reason));
+          dispatch(failLogin('NOT_IN_GROUP'));
+          // redirect to not in group page
           return '/login/not-in-group';
         }
         if (reason === 'User Locked') {
-          dispatch(failLoginLocked(reason));
+          dispatch(failLogin('LOCKED_OUT'));
+          // redirect to locked-out page
           return '/login/locked-out';
         }
-        dispatch(failLoginMFA(reason));
+        console.log({ reason });
+        dispatch(failLogin('MFA_AUTH_FAILED'));
         return null;
       });
   }
-  dispatch(failLoginMFA('Authentication failed'));
+  dispatch(failLogin('MFA_AUTH_FAILED'));
   return null;
 };
 
 export const createAccessRequest = states => async dispatch => {
   let failureReason = null;
+  dispatch(requestAccessToState());
   await Promise.all(
     states.map(async stateId => {
       await axios

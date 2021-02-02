@@ -45,7 +45,6 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
           id="username"
           label="EUA ID"
           name="username"
-          errorMessage={errorMessage}
           ariaLabel="Enter your EUA ID."
           value={username}
           onChange={changeUsername}

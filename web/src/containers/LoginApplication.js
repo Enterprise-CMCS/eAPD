@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -40,28 +40,21 @@ const LoginApplication = ({
   const [showConsent, setShowConsent] = useState(!hasConsented());
 
   let errorMessage = null;
-  // if (otpStage && error === 'Authentication failed') {
-  //   errorMessage = 'The one-time password you’ve entered is incorrect.';
-  // } else
-  if (
-    error === 'Authentication failed' ||
-    error === 'Request failed with status code 401'
-  ) {
-    errorMessage =
-      'Please contact your State Administrator for steps to register an account.';
+
+  if (error === 'MFA_AUTH_FAILED') {
+    errorMessage = 'The one-time password you’ve entered is incorrect.';
+  } else if (error === 'PASSWORD_EXPIRED') {
+    errorMessage = (
+      <Fragment>
+        Your password has expired. Update your password in{' '}
+        <a href="https://cms.okta.com/">Okta</a>.
+      </Fragment>
+    );
+  } else if (error === 'AUTH_FAILED') {
+    errorMessage = 'Your username and/or password is incorrect.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
   }
-  // let errorMessage = false;
-  // if (otpStage && error === 'Authentication failed') {
-  //   errorMessage = 'The one-time password you’ve entered is incorrect.';
-  // } else if ( error === 'Password expired' ) {
-  //   errorMessage = <Fragment>Your password has expired. Update your password in <a href="https://cms.okta.com/">Okta</a>.</Fragment>
-  // } else if ( error === 'Authentication failed' ) {
-  //   errorMessage = 'Your username and/or password is incorrect.';
-  // } else if (error) {
-  //   errorMessage = 'Sorry! Something went wrong. Please try again.';
-  // }
 
   // TODO: test
   const handleFactorSelection = async selected => {
