@@ -32,7 +32,7 @@ keyPersonnel:
       - >-
         Key personnel costs entered here are represented in the budget in
         Activity 1: Program Administration, at the 90/10 split.
-    helpText: Program Manager, Director, HIT Coordinator
+    helpText: 'Examples: Program Manager, Director, HIT Coordinator'
   contact: 'Contact #{{number}}'
   labels:
     titlePrimary: Primary APD Point of Contact
