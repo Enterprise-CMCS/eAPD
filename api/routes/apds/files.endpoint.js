@@ -138,11 +138,11 @@ describe('APD files endpoints', () => {
       });
 
       it('with a unsupported image binary file', async () => {
-        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.tiff`;
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.bmp`;
         expect(fs.existsSync(imagePath)).toBeTruthy();
 
         const formData = new FormData();
-        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.tiff');
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.bmp');
         const options = {
           headers: {
             ...formData.getHeaders()
@@ -228,12 +228,12 @@ describe('APD files endpoints', () => {
         expect(response.data).toMatchSnapshot();
       });
 
-      it('with a valid request (jpg)', async () => {
-        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.webp`;
+      it('with a valid request (tiff)', async () => {
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.tiff`;
         expect(fs.existsSync(imagePath)).toBeTruthy();
 
         const formData = new FormData();
-        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.webp');
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.tiff');
         const options = {
           headers: {
             ...formData.getHeaders()
