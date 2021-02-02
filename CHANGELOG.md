@@ -2,7 +2,6 @@
 
 Anticipated release: February 8, 2021
 
-
 #### 🚀 New features
 
 - Improves error messages during the authentication process ([#2694])
@@ -11,12 +10,13 @@ Anticipated release: February 8, 2021
 
 #### 🐛 Bugs fixed
 
-- Fixes issue where "Add another activity" button was not appearing as it should ([#2525])
 - Render "Last saved..." message only on "/apd" paths ([#2186])
+- Fixes issue where "Add another activity" button was not appearing as it should ([#2525])
 - Removes help text and examples from Estimated Quarterly Expenditure section of APD export view ([#2538])
 - Update Babel/Webpack settings so that application loads in IE11 browsers ([#2601])
 - Restrict file uploads ([#2740])
 - Fixes issue where the session ending timeout was not showing on certain pages ([#2770])
+- Resolve patch failure ([#2826])
 
 #### ⚙️ Behind the scenes
 
@@ -33,3 +33,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2770]: https://github.com/CMSgov/eAPD/issues/2770
 [#2776]: https://github.com/CMSgov/eAPD/issues/2776
 [#2793]: https://github.com/CMSgov/eAPD/issues/2793
+[#2826]: https://github.com/CMSgov/eAPD/issues/2826
