@@ -298,8 +298,11 @@ export const createAccessRequest = states => async dispatch => {
     dispatch(failLogin(failureReason));
     return null;
   }
-  dispatch(getCurrentUser());
   return '/login/affiliations/thank-you';
+};
+
+export const completeAccessRequest = () => async dispatch => {
+  dispatch(getCurrentUser());
 };
 
 export const checkAuth = () => async dispatch => {

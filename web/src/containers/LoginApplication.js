@@ -13,8 +13,8 @@ import {
   mfaConfig,
   mfaAddPhone,
   mfaActivate,
-  completeAccessToState,
   createAccessRequest,
+  completeAccessRequest,
   login,
   loginOtp
 } from '../actions/auth';
@@ -32,7 +32,7 @@ const LoginApplication = ({
   mfaAddPhone: mfaActionAddPhone,
   mfaActivate: mfaActivation,
   createAccessRequest: createAccessRequestAction,
-  completeAccessToState: completeAccessToStateAction,
+  completeAccessRequest: completeAccessRequestAction,
   login: loginAction,
   loginOtp: otpAction,
   history
@@ -96,7 +96,7 @@ const LoginApplication = ({
 
   // TODO: test
   const handleCompleteAccessRequest = async () => {
-    await completeAccessToStateAction();
+    await completeAccessRequestAction();
   };
 
   // TODO: test
@@ -165,7 +165,7 @@ LoginApplication.propTypes = {
   mfaAddPhone: PropTypes.func.isRequired,
   mfaActivate: PropTypes.func.isRequired,
   createAccessRequest: PropTypes.func.isRequired,
-  completeAccessToState: PropTypes.func.isRequired,
+  completeAccessRequest: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
@@ -210,7 +210,7 @@ const mapDispatchToProps = {
   mfaAddPhone,
   mfaActivate,
   createAccessRequest,
-  completeAccessToState,
+  completeAccessRequest,
   login,
   loginOtp
 };
