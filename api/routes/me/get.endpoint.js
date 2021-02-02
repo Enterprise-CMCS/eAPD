@@ -1,5 +1,7 @@
 const {
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest
 } = require('../../endpoint-tests/utils');
@@ -10,8 +12,8 @@ const url = '/me';
 
 describe('/me endpoint | GET', () => {
   const db = getDB();
-  beforeAll(() => db.seed.run());
-  afterAll(() => db.destroy());
+  beforeAll(() => setupDB(db));
+  afterAll(() => teardownDB(db));
 
   unauthenticatedTest('get', url);
 

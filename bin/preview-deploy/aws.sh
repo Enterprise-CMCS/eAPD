@@ -110,13 +110,12 @@ function configureUserData() {
 #   PR_NUM - Github pull request number associated with this instance
 function createNewInstance() {
   aws ec2 run-instances \
-    --instance-type t2.medium \
-    --image-id "$AMI_ID" \
+    --instance-type t3.medium \
+    --image-id $1 \
     --security-group-ids "$AWS_SECURITY_GROUP" \
     --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
-    --key-name eapd_bbrooks \
     | jq -r -c '.Instances[0].InstanceId'
 }
 

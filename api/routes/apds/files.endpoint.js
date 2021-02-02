@@ -3,6 +3,8 @@ const FormData = require('form-data');
 const {
   buildForm,
   getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -11,8 +13,8 @@ const {
 describe('APD files endpoints', () => {
   describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {
     const db = getDB();
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     const url = (apdID, fileID) => `/apds/${apdID}/files/${fileID}`;
 
@@ -63,8 +65,8 @@ describe('APD files endpoints', () => {
 
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {
     const db = getDB();
-    beforeAll(() => db.seed.run());
-    afterAll(() => db.destroy());
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     const url = id => `/apds/${id}/files`;
     const form = buildForm({ file: 'this is my new file' });
@@ -136,11 +138,11 @@ describe('APD files endpoints', () => {
       });
 
       it('with a unsupported image binary file', async () => {
-        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.tiff`;
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.bmp`;
         expect(fs.existsSync(imagePath)).toBeTruthy();
 
         const formData = new FormData();
-        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.tiff');
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.bmp');
         const options = {
           headers: {
             ...formData.getHeaders()
@@ -226,12 +228,12 @@ describe('APD files endpoints', () => {
         expect(response.data).toMatchSnapshot();
       });
 
-      it('with a valid request (jpg)', async () => {
-        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.webp`;
+      it('with a valid request (tiff)', async () => {
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.tiff`;
         expect(fs.existsSync(imagePath)).toBeTruthy();
 
         const formData = new FormData();
-        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.webp');
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.tiff');
         const options = {
           headers: {
             ...formData.getHeaders()
