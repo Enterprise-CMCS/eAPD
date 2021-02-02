@@ -19,6 +19,10 @@ const oktaAuth =
           // the 5 seconds gives users the full 5 minutes to select continue
           autoRenew: false // renewing based on user interactions
           // devMode: true
+        },
+        cookies: {
+          secure: true,
+          sameSite: 'none'
         }
       })
     : null;
