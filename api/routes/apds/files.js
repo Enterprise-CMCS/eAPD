@@ -52,18 +52,18 @@ module.exports = (
         const { metadata = null } = req.body;
         const { size = 0, buffer = null } = req.file;
 
-        const { error } = await validateFile(buffer);
+        const { error = null, image = null } = await validateFile(buffer);
         if (error) throw new Error(error);
 
         const fileID = await createNewFileForAPD(
-          buffer,
+          image,
           req.params.id,
           metadata,
           size
         );
 
         try {
-          await putFile(fileID, buffer);
+          await putFile(fileID, image);
         } catch (e) {
           await deleteFileByID(fileID);
           throw e;
