@@ -595,7 +595,7 @@ jobs:
                 --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
                 --AWS_REGION "$PREVIEW_AWS_REGION" \
                 --AWS_SECURITY_GROUP "$PREVIEW_AWS_SUBNET" \
-                --AWS_SUBNET "subnet-017357978c1a9c6ec" \
+                --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
                 --BRANCH "$CIRCLE_BRANCH" \
                 --PR_NUM "$PRNUM" \
                 --OKTA_DOMAIN "$PREVIEW_OKTA_DOMAIN" \
