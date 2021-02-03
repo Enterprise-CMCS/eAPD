@@ -110,6 +110,9 @@ const getUserByID = async (
   const oktaUser = await client.getUser(id);
 
   if (oktaUser && oktaUser.status === 'ACTIVE') {
+    // store data in okta_users table
+    knex('okta_users').insert(JSON.stringify(oktaUser, null, 2));
+
     const { profile } = oktaUser;
     const user = await populate({ id, ...profile, ...additionalValues });
     return user && clean ? sanitizeUser(user) : user;
