@@ -1130,6 +1130,20 @@ Object {
         ],
       },
     },
+    "/logout": Object {
+      "post": Object {
+        "description": "Clears out the cookies for the user",
+        "responses": Object {
+          "200": Object {
+            "description": "Success",
+          },
+        },
+        "summary": "Clears out the user's cookies",
+        "tags": Array [
+          "Users",
+        ],
+      },
+    },
     "/me": Object {
       "get": Object {
         "description": "Get information about the current user",

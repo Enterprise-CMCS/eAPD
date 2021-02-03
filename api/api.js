@@ -5,6 +5,7 @@ require('./env');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const uuid = require('uuid/v1');
 const logger = require('./logger')('main');
@@ -70,6 +71,8 @@ api.use((_, res, next) => {
   res.header('X-XSS-Protection', '1; mode=block');
   next();
 });
+
+api.use(cookieParser());
 
 api.use((req, res, next) => {
   req.id = uuid();
