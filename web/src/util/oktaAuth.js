@@ -22,7 +22,7 @@ const oktaAuth =
         },
         cookies: {
           secure: true,
-          sameSite: 'lax'
+          sameSite: 'none'
         }
       })
     : null;
