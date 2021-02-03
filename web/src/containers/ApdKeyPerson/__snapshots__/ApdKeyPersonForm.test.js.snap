@@ -5,12 +5,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
   <h4
     className="ds-h4"
   >
-    Additional APD Point of Contact
+    Additional Key Personnel
   </h4>
   <p
     className="ds-u-margin-bottom--0"
   >
-    Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
+    Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
   </p>
   <TextField
     autoFocus={true}
@@ -88,12 +88,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
   <h4
     className="ds-h4"
   >
-    Additional APD Point of Contact
+    Additional Key Personnel
   </h4>
   <p
     className="ds-u-margin-bottom--0"
   >
-    Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
+    Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
   </p>
   <TextField
     autoFocus={true}

@@ -14,9 +14,7 @@ chmod -R g+w /app
 mkdir /app/tls
 
 # Install nginx and postgres
-#amazon-linux-extras install nginx1.12
 yum -y install git postgresql-server amazon-cloudwatch-agent nginx-1.16.1-3.el7
-# nginx1.12 is not available by default on the Golden Image
 
 # Setup postgres
 postgresql-setup initdb
@@ -26,7 +24,8 @@ local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
 " > /var/lib/pgsql/data/pg_hba.conf
-systemctl status postgresql
+systemctl start postgresql
+systemctl enable postgresql
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
@@ -425,6 +424,7 @@ semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
 systemctl restart nginx
+systemctl enable nginx
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
