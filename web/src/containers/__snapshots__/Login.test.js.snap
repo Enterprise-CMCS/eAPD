@@ -37,7 +37,6 @@ exports[`login component renders correctly if logged in previously but not logge
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
       id="username"
       label="EUA ID"
       name="username"
@@ -96,7 +95,6 @@ exports[`login component renders correctly if not logged in and fetching data 1`
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
       id="username"
       label="EUA ID"
       name="username"
@@ -155,7 +153,6 @@ exports[`login component renders correctly if not logged in and there is an erro
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage="something here"
       id="username"
       label="EUA ID"
       name="username"
@@ -214,7 +211,6 @@ exports[`login component renders correctly if not logged in, and never logged in
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
       id="username"
       label="EUA ID"
       name="username"
@@ -273,7 +269,6 @@ exports[`login component renders correctly if not logged in, and never logged in
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
       id="username"
       label="EUA ID"
       name="username"
@@ -332,7 +327,6 @@ exports[`login component renders correctly if not logged in, and never logged in
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
       id="username"
       label="EUA ID"
       name="username"
@@ -391,7 +385,6 @@ exports[`login component renders correctly if user is not in correct Okta group 
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
       id="username"
       label="EUA ID"
       name="username"
