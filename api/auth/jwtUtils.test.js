@@ -75,7 +75,7 @@ tap.test('jwtUtils', async t => {
       ],
       [
         '/apds/1/files/12345',
-        'okta-token-storage_accessToken={%22accessToken%22%3A%22example.cookie.value%22%2C%22max-age%22%3A900}',
+        'okta-token-storage_ACCESSTOKEN={%22accessToken%22%3A%22example.cookie.value%22%2C%22max-age%22%3A900}',
         'example.cookie.value',
         'returns the JWT'
       ],
