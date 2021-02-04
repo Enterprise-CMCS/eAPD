@@ -31,8 +31,6 @@ const initialState = {
   mfaEnrollType: '',
   verifyData: {},
   selectState: false,
-  isLocked: false,
-  isNotInGroup: false,
   latestActivity: new Date().getTime(),
   isLoggingOut: false,
   isSessionEnding: false,

@@ -54,13 +54,6 @@ describe('auth actions', () => {
     });
   });
 
-  it('failLoginMFA should create LOGIN_MFA_FAILURE', () => {
-    expect(actions.failLoginMFA('foo')).toEqual({
-      type: actions.LOGIN_MFA_FAILURE,
-      error: 'foo'
-    });
-  });
-
   it('requestLogout should create LOGOUT_REQUEST action', () => {
     expect(actions.requestLogout()).toEqual({
       type: actions.LOGOUT_REQUEST
@@ -101,8 +94,7 @@ describe('auth actions', () => {
         {
           type: actions.LOGIN_SUCCESS,
           data: { name: 'moop', activities: [], states: ['MO'] }
-        },
-        { type: actions.RESET_LOCKED_OUT }
+        }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
@@ -133,7 +125,8 @@ describe('auth actions', () => {
         .reply(200, { name: 'moop', activities: [], states: [] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.UPDATE_EXPIRATION, data: expiresAt }
+        { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.STATE_ACCESS_REQUIRED }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
@@ -194,7 +187,7 @@ describe('auth actions', () => {
         { type: actions.LOGIN_REQUEST },
         {
           type: actions.LOGIN_FAILURE,
-          error: 'Could not find a valid multi-factor'
+          error: 'AUTH_FAILED'
         }
       ];
 
@@ -217,7 +210,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOCKED_OUT }
+        { type: actions.LOGIN_FAILURE, error: 'LOCKED_OUT' }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
@@ -277,7 +270,7 @@ describe('auth actions', () => {
         { type: actions.LOGIN_REQUEST },
         {
           type: actions.LOGIN_FAILURE,
-          error: 'Password expired'
+          error: 'PASSWORD_EXPIRED'
         }
       ];
 
@@ -313,8 +306,7 @@ describe('auth actions', () => {
         {
           type: actions.LOGIN_SUCCESS,
           data: { name: 'moop', activities: [], states: ['MO'] }
-        },
-        { type: actions.RESET_LOCKED_OUT }
+        }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -355,7 +347,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
+        { type: actions.LOGIN_FAILURE, error: 'MFA_AUTH_FAILED' }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -376,7 +368,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
+        { type: actions.LOGIN_FAILURE, error: 'MFA_AUTH_FAILED' }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -397,7 +389,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
+        { type: actions.LOGIN_FAILURE, error: 'MFA_AUTH_FAILED' }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -425,7 +417,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
+        { type: actions.LOGIN_FAILURE, error: 'MFA_AUTH_FAILED' }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -485,7 +477,7 @@ describe('auth actions', () => {
         .reply(200, { name: 'moop', activities: [], states: ['MO'] });
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOGIN_MFA_FAILURE, error: 'Authentication failed' }
+        { type: actions.LOGIN_FAILURE, error: 'MFA_AUTH_FAILED' }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -505,7 +497,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
-        { type: actions.LOCKED_OUT }
+        { type: actions.LOGIN_FAILURE, error: 'LOCKED_OUT' }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -530,8 +522,8 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         {
-          type: actions.LOGIN_FAILURE_NOT_IN_GROUP,
-          error: 'User is not assigned to the client application.'
+          type: actions.LOGIN_FAILURE,
+          error: 'NOT_IN_GROUP'
         }
       ];
 
@@ -575,16 +567,14 @@ describe('auth actions', () => {
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
       jest
         .spyOn(mockAuth, 'authenticateUser')
-        .mockImplementation(() =>
-          Promise.reject(new Error('Authentication failure'))
-        );
+        .mockImplementation(() => Promise.reject(new Error('AUTH_FAILED')));
 
       const store = mockStore({});
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         {
           type: actions.LOGIN_FAILURE,
-          error: 'Authentication failure'
+          error: 'AUTH_FAILED'
         }
       ];
 
@@ -1005,9 +995,6 @@ describe('auth actions', () => {
             activities: [],
             states: ['MO']
           }
-        },
-        {
-          type: actions.RESET_LOCKED_OUT
         }
       ];
 
@@ -1078,6 +1065,9 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [
         {
+          type: actions.STATE_ACCESS_REQUEST
+        },
+        {
           type: actions.LOGIN_FAILURE,
           error: 'Request failed with status code 401'
         }
@@ -1098,6 +1088,9 @@ describe('auth actions', () => {
 
       const store = mockStore({});
       const expectedActions = [
+        {
+          type: actions.STATE_ACCESS_REQUEST
+        },
         {
           type: actions.LOGIN_FAILURE,
           error: 'Request failed with status code 401'
