@@ -54,7 +54,11 @@ const PersonForm = ({
           ? t(`${tRoot}.labels.titlePrimary`)
           : t(`${tRoot}.labels.titleSecondary`)}
       </h4>
-      <p className="ds-u-margin-bottom--0">{t(`${tRoot}.labels.note`)}</p>
+      <p className="ds-u-margin-bottom--0">
+        {primary
+          ? t(`${tRoot}.labels.notePrimary`)
+          : t(`${tRoot}.labels.noteSecondary`)}
+      </p>
       <TextField
         autoFocus
         name={`apd-state-profile-pocname${index}`}
