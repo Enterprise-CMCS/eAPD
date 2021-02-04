@@ -557,6 +557,7 @@ describe('auth actions', () => {
 
     it('creates LOGOUT_SUCCESS after successful request', async () => {
       const store = mockStore({});
+      fetchMock.onPost('/logout').reply(200);
 
       const expectedActions = [
         { type: actions.LOGOUT_REQUEST },
