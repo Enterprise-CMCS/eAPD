@@ -105,7 +105,6 @@ const getCurrentUser = () => dispatch =>
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
-      console.log({ reason });
       dispatch(failLogin(reason));
       return null;
     });
@@ -240,9 +239,7 @@ export const login = (username, password) => dispatch => {
       }
       return null;
     })
-    .catch(error => {
-      const reason = error ? error.message : 'N/A';
-      console.log({ reason });
+    .catch(() => {
       dispatch(failLogin('AUTH_FAILED'));
       return null;
     });
@@ -271,7 +268,6 @@ export const loginOtp = otp => async dispatch => {
           // redirect to locked-out page
           return '/login/locked-out';
         }
-        console.log({ reason });
         dispatch(failLogin('MFA_AUTH_FAILED'));
         return null;
       });
