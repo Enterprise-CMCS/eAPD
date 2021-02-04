@@ -1,6 +1,6 @@
-import { Alert, Button, Dialog } from '@cmsgov/design-system';
+import { Button, Dialog } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { Spinner } from '../components/Icons';
@@ -9,12 +9,8 @@ import { saveApd } from '../actions/app';
 import { selectHasError, selectIsSaving } from '../reducers/saving';
 
 const UnexpectedError = ({ hasError, isSaving, save }) => {
-  const className = hasError ? 'alert--unexpected-error__active' : '';
-
-  const [manageModalDisplay, setManageModalDisplay] = useState(false);
-
-  const hideManageModal = () => {
-    setManageModalDisplay(false);
+  const closeErrorAlert = () => {
+    save();
   };
 
   return (
@@ -23,10 +19,14 @@ const UnexpectedError = ({ hasError, isSaving, save }) => {
         <Dialog
           heading="Unable to save changes!"
           role="alertdialog"
-          hideManageModal={hideManageModal}
-          variation="warn"
+          onExit={closeErrorAlert}
         >
-          Your changes aren't being saved. Try saving your changes again in a few minutes by clicking on the save button. If you refresh your browser without saving backing up your changes, changes made after this message appeared will be lost.
+          <p>
+            Your changes aren&apos;t being saved. Try saving your changes again
+            in a few minutes by clicking on the save button. If you refresh your
+            browser without saving backing up your changes, changes made after
+            this message appeared will be lost.
+          </p>
           <p className="ds-u-text-align--right ds-u-margin-bottom--0">
             <Button variation="primary" onClick={save}>
               {isSaving && <Spinner />}
