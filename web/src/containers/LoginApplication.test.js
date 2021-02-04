@@ -44,15 +44,9 @@ describe('Login Application', () => {
   it('displays authentication error message', () => {
     setConsented();
     const { getAllByText } = renderWithConnection(
-      <LoginApplication
-        {...props}
-        error="Authentication failed"
-        history={history}
-      />
+      <LoginApplication {...props} error="AUTH_FAILED" history={history} />
     );
-    expect(
-      getAllByText(/Please contact your State Administrator/i).length
-    ).toBeGreaterThan(0);
+    expect(getAllByText(/is incorrect/i).length).toBeGreaterThan(0);
   });
 
   it('displays generic error message', () => {

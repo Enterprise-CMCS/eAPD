@@ -9,14 +9,12 @@ import {
   LOGIN_MFA_ENROLL_START,
   LOGIN_MFA_ENROLL_ADD_PHONE,
   LOGIN_MFA_ENROLL_ACTIVATE,
-  LOGIN_MFA_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN_FAILURE_NOT_IN_GROUP,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOCKED_OUT,
-  RESET_LOCKED_OUT,
+  STATE_ACCESS_REQUIRED,
+  STATE_ACCESS_REQUEST,
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
@@ -29,20 +27,18 @@ describe('auth reducer', () => {
     authenticated: false,
     error: null,
     fetching: false,
-    hasEverLoggedOn: false,
     initialCheck: false,
+    hasEverLoggedOn: false,
     factorsList: [],
     mfaPhoneNumber: '',
     mfaEnrollType: '',
     verifyData: {},
     selectState: false,
-    isLocked: false,
-    user: null,
-    isLoggingOut: false,
-    isNotInGroup: false,
     latestActivity: null,
+    isLoggingOut: false,
     isSessionEnding: false,
     isExtendingSession: false,
+    user: null,
     expiresAt: null
   };
 
@@ -127,21 +123,6 @@ describe('auth reducer', () => {
     });
   });
 
-  it('should handle LOGIN_FAILURE_NOT_IN_GROUP', () => {
-    expect(
-      auth(initialState, {
-        type: LOGIN_FAILURE_NOT_IN_GROUP,
-        error: 'not in group'
-      })
-    ).toEqual({
-      ...initialState,
-      otpStage: false,
-      fetching: false,
-      isNotInGroup: true,
-      error: 'not in group'
-    });
-  });
-
   it('should handle LOGIN_MFA_ENROLL_ACTIVATE', () => {
     expect(
       auth(initialState, {
@@ -158,9 +139,7 @@ describe('auth reducer', () => {
   });
 
   it('should handle LOGIN_MFA_FAILURE', () => {
-    expect(
-      auth(initialState, { type: LOGIN_MFA_FAILURE, error: 'foo' })
-    ).toEqual({
+    expect(auth(initialState, { type: LOGIN_FAILURE, error: 'foo' })).toEqual({
       ...initialState,
       fetching: false,
       error: 'foo'
@@ -184,25 +163,6 @@ describe('auth reducer', () => {
       ...initialState,
       fetching: false,
       error: 'foo'
-    });
-  });
-
-  it('should handle LOCKED_OUT', () => {
-    expect(auth(initialState, { type: LOCKED_OUT })).toEqual({
-      ...initialState,
-      isLocked: true,
-      fetching: false,
-      error: null
-    });
-  });
-
-  it('should handle RESET_LOCKED_OUT', () => {
-    expect(auth(initialState, { type: RESET_LOCKED_OUT })).toEqual({
-      ...initialState,
-      hasEverLoggedOn: false,
-      isLocked: false,
-      fetching: false,
-      error: null
     });
   });
 
@@ -241,7 +201,6 @@ describe('auth reducer', () => {
         error: null,
         fetching: false,
         initialCheck: false,
-        isLocked: false,
         isLoggingOut: false,
         user: null,
         selectState: false,
@@ -252,6 +211,22 @@ describe('auth reducer', () => {
         latestActivity: null,
         isSessionEnding: false,
         isExtendingSession: false
+      });
+    });
+  });
+
+  describe('handles setting a state', () => {
+    it('should set fetching to false if STATE_ACCESS_REQUIRED', () => {
+      expect(auth(initialState, { type: STATE_ACCESS_REQUIRED })).toEqual({
+        ...initialState,
+        fetching: false
+      });
+    });
+
+    it('should set fetching to false if STATE_ACCESS_REQUEST', () => {
+      expect(auth(initialState, { type: STATE_ACCESS_REQUEST })).toEqual({
+        ...initialState,
+        fetching: true
       });
     });
   });
