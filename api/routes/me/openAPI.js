@@ -54,7 +54,7 @@ const userObj = jsonResponse({
   }
 });
 
-const openAPI = {
+const getUser = {
   '/me': {
     get: {
       tags: ['Users'],
@@ -70,4 +70,22 @@ const openAPI = {
   }
 };
 
-module.exports = requiresAuth(openAPI, { has403: false });
+const logout = {
+  '/logout': {
+    post: {
+      tags: ['Users'],
+      summary: `Clears out the user's cookies`,
+      description: `Clears out the cookies for the user`,
+      responses: {
+        200: {
+          description: 'Success'
+        }
+      }
+    }
+  }
+};
+
+module.exports = {
+  ...logout,
+  ...requiresAuth(getUser, { has403: false })
+};
