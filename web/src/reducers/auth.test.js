@@ -183,7 +183,8 @@ describe('auth reducer', () => {
       expiresAt: null,
       isSessionEnding: false,
       isExtendingSession: false,
-      isLoggingOut: false
+      isLoggingOut: false,
+      user: null
     });
   });
 

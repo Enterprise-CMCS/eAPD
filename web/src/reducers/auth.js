@@ -129,7 +129,8 @@ const auth = (state = initialState, action) => {
         expiresAt: null,
         isSessionEnding: false,
         isExtendingSession: false,
-        isLoggingOut: false
+        isLoggingOut: false,
+        user: null
       };
     case STATE_ACCESS_REQUIRED:
       return {

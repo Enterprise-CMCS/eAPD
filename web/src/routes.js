@@ -28,7 +28,7 @@ const routes = [
 
   { path: '/login', component: LoginApplication, isPublic: true, isCard: true },
   { path: '/state-admin', component: StateAdmin, isPublic: false },
-  { path: '/logout', component: Logout, isPublic: false },
+  { path: '/logout', component: Logout, isPublic: true },
   { component: NoMatch, isPublic: true }
 ];
 
