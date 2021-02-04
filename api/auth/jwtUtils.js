@@ -43,9 +43,11 @@ const getJWTCookie = cookieStr => {
 };
 
 const setJWTCookie = (res, jwt) => {
+  console.log('setting cookie', process.env.API_URL);
   if (process.env.API_URL) {
     res.cookie('gov.cms.eapd.api-token', `{${escape(`accessToken=${jwt}`)}`, {
       maxAge: 1000 * 60 * 15,
+      domain: 'cms.gov',
       httpOnly: true,
       secure: true,
       sameSite: 'strict'
