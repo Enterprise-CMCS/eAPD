@@ -112,8 +112,8 @@ function createNewInstance() {
   aws ec2 run-instances \
     --instance-type t3.medium \
     --image-id $1 \
-    --security-group-ids "sg-0bc99618daf4cd5da" \
-    --subnet-id "subnet-09af713f4e068ac99" \
+    --security-group-ids "$AWS_SECURITY_GROUP" \
+    --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
