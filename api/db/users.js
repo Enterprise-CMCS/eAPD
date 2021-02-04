@@ -111,10 +111,14 @@ const getUserByID = async (
 
   if (oktaUser && oktaUser.status === 'ACTIVE') {
     // store data in okta_users table
-    await knex('okta_users').insert({
-      user_id: oktaUser.id,
-      email: oktaUser.profile.email,
-    });
+    await knex('okta_users')
+      .insert({
+        user_id: oktaUser.id,
+        email: oktaUser.profile.email,
+        // metadata: JSON.stringify(oktaUser, null, 2),
+      })
+      .onConflict('email')
+      .merge();
 
     const { profile } = oktaUser;
     const user = await populate({ id, ...profile, ...additionalValues });
