@@ -28,9 +28,10 @@ const getJWTCookie = cookieStr => {
   // the access token from there in this instance
   const re = /;\s*/;
   const cookies = cookieStr.split(re); // split the cookie string into individual cookies
-  const tokenRe = process.env.API_URL
-    ? /^gov.cms.eapd.api-token/i
-    : /^okta-token-storage_accessToken/i;
+  const tokenRe =
+    process.env.NODE_ENV === 'production'
+      ? /^gov.cms.eapd.api-token/i
+      : /^okta-token-storage_accessToken/i;
   const accessTokenObj = cookies.find(cookie => cookie.match(tokenRe)); // find the cookie that stores the access token
   if (accessTokenObj) {
     console.log({ accessTokenObj });
@@ -43,12 +44,13 @@ const getJWTCookie = cookieStr => {
 };
 
 const setJWTCookie = (res, jwt) => {
-  if (process.env.API_URL) {
+  console.log('setting cookie', process.env.NODE_ENV);
+  if (process.env.NODE_ENV === 'production') {
     res.cookie('gov.cms.eapd.api-token', `{${escape(`accessToken=${jwt}`)}`, {
       maxAge: 1000 * 60 * 15,
       httpOnly: true,
       secure: true,
-      sameSite: 'strict'
+      sameSite: 'lax'
     });
   }
 };
