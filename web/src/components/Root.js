@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import TagManager from 'react-gtm-module';
+import { CookiesProvider } from 'react-cookie';
 import { setLatestActivity } from '../actions/auth';
 
 import App from './App';
@@ -26,7 +27,9 @@ const Root = ({ history, store }) => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <App />
+        <CookiesProvider>
+          <App />
+        </CookiesProvider>
       </ConnectedRouter>
     </Provider>
   );
