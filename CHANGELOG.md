@@ -17,6 +17,7 @@ Anticipated release: February 8, 2021
 - Update Babel/Webpack settings so that application loads in IE11 browsers ([#2601])
 - Restrict file uploads ([#2740])
 - Fixes issue where the session ending timeout was not showing on certain pages ([#2770])
+- Updates contract term label to the correct one ([#2820])
 - Resolve patch failure ([#2826])
 
 #### ⚙️ Behind the scenes
@@ -37,4 +38,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2538]: https://github.com/CMSgov/eAPD/issues/2538
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
 [#2804]: https://github.com/CMSgov/eAPD/issues/2804
+[#2820]: https://github.com/CMSgov/eAPD/issues/2820
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
