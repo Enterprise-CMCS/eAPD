@@ -323,6 +323,4 @@ chown -R nginx /app/web
 semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
-systemctl restart nginx
-systemctl enable nginx
 R_USER
