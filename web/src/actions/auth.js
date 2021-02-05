@@ -111,6 +111,7 @@ const getCurrentUser = () => dispatch =>
 
 export const logout = () => async dispatch => {
   dispatch(requestLogout());
+  await axios.post('/logout');
   await logoutAndClearTokens();
   dispatch(completeLogout());
   return '/login';
