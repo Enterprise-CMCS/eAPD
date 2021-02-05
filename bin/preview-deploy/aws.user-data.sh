@@ -2,9 +2,6 @@
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
-# Clone from Github
-git clone --single-branch -b bbrooks/2819-Update_Jumpbox_to_Golden_Image https://github.com/CMSgov/eAPD.git
-
 # Create nginx config
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
 user nginx;
@@ -63,6 +60,9 @@ http {
 }
 NGINXCONFIG
 systemctl restart nginx
+
+# Clone from Github
+git clone --single-branch -b bbrooks/2819-Update_Jumpbox_to_Golden_Image https://github.com/CMSgov/eAPD.git
 
 # Build the web app and move it into place
 cd eAPD/web
