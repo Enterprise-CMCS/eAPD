@@ -123,7 +123,8 @@ const getCurrentUser = () => dispatch =>
       dispatch(failLogin(reason));
     });
 
-export const logout = () => dispatch => {
+export const logout = () => async dispatch => {
+  await axios.post('/logout');
   dispatch(requestLogout());
   logoutAndClearTokens();
   dispatch(completeLogout());
@@ -205,9 +206,7 @@ export const login = (username, password) => dispatch => {
   authenticateUser(username, password)
     .then(async res => {
       if (res.status === 'PASSWORD_EXPIRED') {
-        return dispatch(
-          failLogin('Password expired')
-        );
+        return dispatch(failLogin('Password expired'));
       }
 
       if (res.status === 'LOCKED_OUT') {
