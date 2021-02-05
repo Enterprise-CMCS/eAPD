@@ -69,13 +69,13 @@ tap.test('jwtUtils', async t => {
     const scenarios = [
       [
         '/apds/1/files/12345',
-        'okta-token-storage_accessToken={%22value%22%3A%22example.cookie.value%22%2C%22accessToken%22%3A%22example.cookie.value%22%2C%22expiresAt%22%3A1611094321}',
+        'okta-token-storage_accessToken={%22accessToken%22%3A%22example.cookie.value%22%2C%22max-age%22%3A900}',
         'example.cookie.value',
         'returns the JWT'
       ],
       [
         '/apds/1/files/12345',
-        'okta-token-storage_ACCESSTOKEN={%22value%22%3A%22example.cookie.value%22%2C%22accessToken%22%3A%22example.cookie.value%22%2C%22expiresAt%22%3A1611094321}',
+        'okta-token-storage_ACCESSTOKEN={%22accessToken%22%3A%22example.cookie.value%22%2C%22max-age%22%3A900}',
         'example.cookie.value',
         'returns the JWT'
       ],
