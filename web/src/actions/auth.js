@@ -123,7 +123,8 @@ const getCurrentUser = () => dispatch =>
       dispatch(failLogin(reason));
     });
 
-export const logout = () => dispatch => {
+export const logout = () => async dispatch => {
+  await axios.post('/logout');
   dispatch(requestLogout());
   logoutAndClearTokens();
   dispatch(completeLogout());

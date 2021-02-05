@@ -21,8 +21,7 @@ const oktaAuth =
           // devMode: true
         },
         cookies: {
-          secure: true,
-          sameSite: 'lax'
+          secure: true
         }
       })
     : null;
