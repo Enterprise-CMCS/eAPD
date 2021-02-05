@@ -37,7 +37,7 @@ const jwtMiddleware = async (
     // const user = claims;
     if (user) {
       req.user = user;
-      setToken(res, jwt);
+      setToken(res);
     }
   } catch (err) {
     logger.error(`error message: ${err.message}`);
