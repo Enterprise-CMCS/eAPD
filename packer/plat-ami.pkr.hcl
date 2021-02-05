@@ -32,4 +32,7 @@ build {
     provisioner "shell" {
         script = "./bootstrap.sh"
     }
+    provisioner "ansible" {
+      playbook_file = "./ansible/nginx.yml"
+    }
 }

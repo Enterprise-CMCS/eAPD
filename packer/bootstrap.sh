@@ -15,10 +15,9 @@ chmod -R g+w /app
 
 mkdir /app/tls
 
-# Install nginx and postgres
+# Install git and postgres
 yum -y install git 
 yum -y install postgresql-server 
-yum -y install nginx-1.16.1-3.el7
 
 #Install CloudWatch Agent
 curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
@@ -319,7 +318,6 @@ E_USER
 # Become root user again to finished the installation
 sudo su <<R_USER
 # SELinux context so Nginx can READ the files in /app/web
-chown -R nginx /app/web
 semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
