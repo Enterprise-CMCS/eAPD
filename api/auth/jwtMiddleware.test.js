@@ -9,7 +9,8 @@ tap.test('jwtMiddleware', async t => {
   const res = {
     send: sandbox.stub(),
     status: sandbox.stub(),
-    end: sandbox.spy()
+    end: sandbox.spy(),
+    cookie: sandbox.spy()
   };
 
   const next = sandbox.spy();
@@ -25,7 +26,7 @@ tap.test('jwtMiddleware', async t => {
 
   t.test('given a valid authorization header', async t => {
     const req = { headers: { Authorization: 'Bearer xxx.yyy.zzz' } };
-    const extractor = () => true;
+    const extractor = () => 'xxx.yyy.zzz';
     const getUserByID = () => user;
     const verifyToken = () => payload;
     await jwtMiddleware(req, res, next, {
@@ -34,6 +35,7 @@ tap.test('jwtMiddleware', async t => {
       verifyToken
     });
     t.equals(req.user, user, 'attaches the user object to the request');
+    t.equals(res.cookie.notCalled, true, 'was not called');
     t.ok(next.calledOnce, 'calls the next middleware function');
   });
 
