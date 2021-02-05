@@ -1,4 +1,4 @@
-const { jwtExtractor, verifyWebToken, setToken } = require('./jwtUtils');
+const { jwtExtractor, verifyWebToken, setJWTCookie } = require('./jwtUtils');
 const { getUserByID: gu } = require('../db');
 const logger = require('../logger')('jwt middleware');
 
@@ -20,7 +20,7 @@ const jwtMiddleware = async (
     getUserByID = gu,
     extractor = jwtExtractor,
     verifyToken = verifyWebToken,
-    setJWTCookie = setToken
+    setToken = setJWTCookie
   } = {}
 ) => {
   const jwt = extractor(req);
@@ -37,7 +37,7 @@ const jwtMiddleware = async (
     // const user = claims;
     if (user) {
       req.user = user;
-      setJWTCookie(res);
+      setToken(res);
     }
   } catch (err) {
     logger.error(`error message: ${err.message}`);
