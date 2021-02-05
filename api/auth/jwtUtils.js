@@ -47,10 +47,9 @@ const setJWTCookie = (res, jwt) => {
   if (process.env.NODE_ENV === 'production') {
     res.cookie('gov.cms.eapd.api-token', `{${escape(`accessToken=${jwt}`)}`, {
       maxAge: 1000 * 60 * 15,
-      domain: 'cms.gov',
       httpOnly: true,
       secure: true,
-      sameSite: 'strict'
+      sameSite: 'lax'
     });
   }
 };
