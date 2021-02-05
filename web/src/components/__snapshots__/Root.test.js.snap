@@ -32,7 +32,9 @@ exports[`the Root component renders correctly 1`] = `
       }
     }
   >
-    <App />
+    <CookiesProvider>
+      <App />
+    </CookiesProvider>
   </Connect(ConnectedRouterWithContext)>
 </Provider>
 `;
