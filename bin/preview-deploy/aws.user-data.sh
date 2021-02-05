@@ -62,7 +62,7 @@ NGINXCONFIG
 systemctl restart nginx
 
 # Clone from Github
-git clone --single-branch -b bbrooks/2819-Update_Jumpbox_to_Golden_Image https://github.com/CMSgov/eAPD.git
+git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 
 # Build the web app and move it into place
 cd eAPD/web
