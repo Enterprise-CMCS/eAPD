@@ -18,7 +18,6 @@ const UnexpectedError = ({ hasError, isSaving, save }) => {
       {hasError && (
         <Dialog
           heading="Unable to save changes!"
-          role="alertdialog"
           onExit={closeErrorAlert}
         >
           <p>
