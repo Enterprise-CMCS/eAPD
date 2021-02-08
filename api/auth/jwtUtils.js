@@ -43,19 +43,6 @@ const getJWTCookie = cookieStr => {
   return null;
 };
 
-const setJWTCookie = res => {
-  console.log('setting cookie', process.env.NODE_ENV);
-  if (process.env.NODE_ENV === 'production') {
-    res.cookie('api-token', 'TESTING TESTING', {
-      domain: '.cms.gov',
-      maxAge: 1000 * 60 * 15,
-      // httpOnly: true,
-      secure: true,
-      sameSite: 'lax'
-    });
-  }
-};
-
 /**
  * Extracts the JWT from the Request Authorization Header.
  * @name jwtExtractor
@@ -83,6 +70,5 @@ const jwtExtractor = req => {
 
 module.exports = {
   verifyWebToken,
-  jwtExtractor,
-  setJWTCookie
+  jwtExtractor
 };
