@@ -3,6 +3,7 @@ sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
 # Start Nginx
+systemctl enable start
 systemctl start nginx
 
 # Clone from Github
@@ -65,3 +66,4 @@ pm2 start ecosystem.config.js
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart'
+yum remove -y gcc gcc-c++ make
