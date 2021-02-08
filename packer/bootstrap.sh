@@ -22,6 +22,7 @@ yum -y install postgresql-server
 #Install CloudWatch Agent
 curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 rpm -U ./amazon-cloudwatch-agent.rpm
+rm ./amazon-cloudwatch-agent.rpm
 
 # Setup postgres
 postgresql-setup initdb
