@@ -92,9 +92,14 @@ const Login = ({
   let errorMessage = false;
   if (otpStage && error === 'Authentication failed') {
     errorMessage = 'The one-time password you’ve entered is incorrect.';
-  } else if ( error === 'Password expired' ) {
-    errorMessage = <Fragment>Your password has expired. Update your password in <a href="https://cms.okta.com/">Okta</a>.</Fragment>
-  } else if ( error === 'Authentication failed' ) {
+  } else if (error === 'Password expired') {
+    errorMessage = (
+      <Fragment>
+        Your password has expired. Update your password in{' '}
+        <a href="https://cms.okta.com/">Okta</a>.
+      </Fragment>
+    );
+  } else if (error === 'Authentication failed') {
     errorMessage = 'Your username and/or password is incorrect.';
   } else if (error) {
     errorMessage = 'Sorry! Something went wrong. Please try again.';
