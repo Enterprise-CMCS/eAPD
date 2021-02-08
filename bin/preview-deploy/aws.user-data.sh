@@ -1,3 +1,4 @@
+#!/bin/bash
 # Prepare test database
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
