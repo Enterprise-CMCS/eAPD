@@ -23,6 +23,7 @@ const jwtMiddleware = async (
   } = {}
 ) => {
   const jwt = extractor(req);
+  console.log({ jwt });
   try {
     const claims = jwt ? await verifyToken(jwt) : false;
     if (!claims) return next();
