@@ -85,7 +85,7 @@ function configureAWS() {
 function configureUserData() {
   # Use vertical pipes as sed delimiters instead of slashes, since git branch
   # names can contain slashes
-  sed -i'.backup' -e "s|__GIT_BRANCH__|`echo $BRANCH`|g" aws.user-data.sh
+  sed -i'.backup' -e "s|__GIT_BRANCH__|\"`echo $BRANCH`\"|g" aws.user-data.sh
 
   sed -i'.backup' -e "s|__PBKDF2_ITERATIONS__|`echo $API_PBKDF2_ITERATIONS`|g" aws.user-data.sh
 
