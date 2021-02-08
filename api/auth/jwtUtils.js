@@ -37,7 +37,10 @@ const getJWTCookie = cookieStr => {
     console.log({ accessTokenObj });
     // eslint-disable-next-line no-unused-vars
     const [key, value] = accessTokenObj.split('='); // get the value
+    console.log({ value });
     const valueObj = JSON.parse(unescape(value)); // the value is an encoded string, convert it to a json object
+    console.log({ valueObj });
+    console.log('accessToken', valueObj.accessToken);
     return valueObj.accessToken; // return the access token
   }
   return null;
