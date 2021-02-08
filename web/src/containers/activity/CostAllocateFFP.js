@@ -263,7 +263,9 @@ const CostAllocateFFP = ({
 
             {isViewOnly && (
               <h4>
-                {t("activities.costAllocate.ffp.quarterlyFFPInstruction.heading")}
+                {t(
+                  'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
+                )}
               </h4>
             )}
 

@@ -91,7 +91,11 @@ LoginForm.propTypes = {
   cancelable: PropTypes.bool,
   canSubmit: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.element]),
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.element
+  ]),
   footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   history: PropTypes.object.isRequired,
   id: PropTypes.string,
