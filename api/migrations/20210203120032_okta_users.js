@@ -1,8 +1,10 @@
 
 exports.up = async knex =>
   knex.schema.createTable('okta_users', table => {
-    table.increments('id');
-    table.string('user_id');
+    table
+      .string('user_id')
+      .unique('user_id')
+      .notNullable();
     table
       .string('email')
       .unique('email')
