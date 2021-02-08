@@ -16,5 +16,6 @@ Describe the pull request here, including any supplemental information needed to
 
 ### This feature is done when...
 
+- [ ] QA has approved the experience
 - [ ] Design has approved the experience
 - [ ] Product has approved the experience
