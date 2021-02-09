@@ -7,14 +7,16 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 systemctl enable start
 systemctl start nginx
 
-su ec2-user <<E_USER
 # Remove Ansible created directory
-rm -rf ~bbrooks
+rm -rf /home/ec2-user/~bbrooks
 
 # Test to see the command that is getting built for pulling the Git Branch
-touch this_ran.txt
-echo "git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git" > this_ran.txt
+touch /home/ec2-user/this_ran.txt
+cat <<THISRAN > /home/ec2-user/this_ran.txt
+git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
+THISRAN
 
+su ec2-user <<E_USER
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 
