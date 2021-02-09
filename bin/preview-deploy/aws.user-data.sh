@@ -17,6 +17,9 @@ git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 THISRAN
 
 su ec2-user <<E_USER
+# Change to user's home directory
+cd ~
+
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 
