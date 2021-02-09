@@ -33,6 +33,7 @@ describe('<StateDashboard />', () => {
       createApd: jest.fn(),
       deleteApd: jest.fn(),
       selectApd: jest.fn(),
+      stateAdmins: [{ email: 'mo-state-admin@mo.gov' }],
       route: '/apd'
     };
   });
