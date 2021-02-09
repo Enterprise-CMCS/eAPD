@@ -8,6 +8,13 @@ systemctl enable start
 systemctl start nginx
 
 su ec2-user <<E_USER
+# Remove Ansible created directory
+rm -rf ~bbrooks
+
+# Test to see the command that is getting built for pulling the Git Branch
+touch this_ran.txt
+echo "git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git" > this_ran.txt
+
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 
