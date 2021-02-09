@@ -25,11 +25,12 @@ const setCookie = () => {
       path: '/apds/'
     };
   } else if (process.env.API_URL.match(/\/api/i)) {
+    console.log('preview build');
     config = {
-      sameSite: 'strict',
-      path: '/api/apds/'
+      sameSite: 'strict'
     };
   } else {
+    console.log('prod');
     config = {
       domain: '.cms.gov',
       secure: true,
