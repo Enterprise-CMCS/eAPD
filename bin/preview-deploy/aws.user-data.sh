@@ -7,13 +7,6 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 systemctl enable start
 systemctl start nginx
 
-# Test
-touch ~/this_ran.txt 
-cat <<this_ran > /home/ec2-user/this_ran.txt
-# Git Branch
-__GIT_BRANCH__
-this_ran
-
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 
