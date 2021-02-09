@@ -7,6 +7,7 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 systemctl enable start
 systemctl start nginx
 
+su ec2-user <<E_USER
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 
@@ -61,6 +62,7 @@ echo "module.exports = {
 
 # Start it up
 pm2 start ecosystem.config.js
+E_USER
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
