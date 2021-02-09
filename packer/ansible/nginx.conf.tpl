@@ -32,7 +32,7 @@ http {
         location / {
           # For requests without a file extension, send the requested path if
           # it exists, otherwise send index.html to achieve push state routing
-          try_files \$uri /index.html;
+          try_files $uri /index.html;
         }
         location ~ ^.+\..+\$ {
           # For requests with file extensions, send them if the file exists,
