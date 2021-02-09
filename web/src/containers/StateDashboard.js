@@ -21,14 +21,18 @@ const Loading = ({ children }) => (
 );
 Loading.propTypes = { children: PropType.node.isRequired };
 
-const PendingApproval = () => (
+const PendingApproval = ({ mailTo }) => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
     <img alt="Puzzle Piece Icon" src="../static/icons/puzzle.svg" width="57" />
     <h3 className="ds-u-margin-bottom--1">
       Approval Pending From State Administrator
     </h3>
+
     <p className="ds-u-margin--0">
-      Please contact State Administrator for more information.
+      Please contact
+      {mailTo && (<a href={`mailto:${mailTo}`}>State Administrator</a>)}
+      {!mailTo && ("State Administrator")}
+      for more information.
     </p>
   </div>
 );
@@ -77,6 +81,7 @@ const StateDashboard = (
     route,
     selectApd: select,
     state,
+    stateAdmins,
     role,
     stateStatus
   },
@@ -114,6 +119,8 @@ const StateDashboard = (
       </div>
     );
   }
+
+  const mailTo = stateAdmins.map(k => k.email).join(',');
 
   return (
     <div className="site-body ds-l-container">
@@ -158,7 +165,7 @@ const StateDashboard = (
               </div>
             </div>
             {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
-              <PendingApproval />
+              <PendingApproval mailTo />
             ) : null}
             {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
               <ApprovalDenied />
@@ -246,6 +253,7 @@ const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching,
   state: state.user.data.state || null,
+  stateAdmins: state.stateAdmins || [],
   role: state.user.data.role || 'Pending Role',
   stateStatus:
     getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
