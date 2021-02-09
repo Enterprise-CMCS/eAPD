@@ -17,12 +17,14 @@ const setCookie = () => {
   const config =
     !process.env.API_URL || process.env.API_URL.match(new RegExp(/localhost/i))
       ? {
-          sameSite: 'strict'
+          sameSite: 'strict',
+          path: '/apds/'
         }
       : {
           domain: '.cms.gov',
           secure: true,
-          sameSite: 'lax'
+          sameSite: 'lax',
+          path: '/apds/'
         };
   Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
 };
