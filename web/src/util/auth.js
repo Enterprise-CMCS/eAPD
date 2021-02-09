@@ -1,9 +1,35 @@
 import { v4 as uuidv4 } from 'uuid';
+import Cookies from 'js-cookie';
 import oktaAuth from './oktaAuth';
 import { MFA_FACTORS } from '../constants';
 
 export const INACTIVITY_LIMIT = 300000;
 export const EXPIRE_EARLY_SECONDS = 300;
+
+export const getAccessToken = () => oktaAuth.getAccessToken();
+
+// Cookie Methods
+
+const COOKIE_NAME = 'gov.cms.eapd.api-token';
+
+const setCookie = () => {
+  const jwt = getAccessToken();
+  const config =
+    !process.env.API_URL || process.env.API_URL.match(new RegExp(/localhost/i))
+      ? {
+          sameSite: 'strict'
+        }
+      : {
+          domain: '.cms.gov',
+          secure: true,
+          sameSite: 'lax'
+        };
+  Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
+};
+
+const removeCookie = () => {
+  Cookies.remove(COOKIE_NAME);
+};
 
 // Log in methods
 export const authenticateUser = (username, password) => {
@@ -43,6 +69,7 @@ export const setTokens = sessionToken => {
       // if (stateToken === responseToken) { // state not currently being returned
       await oktaAuth.tokenManager.setTokens(tokens);
       const expiresAt = await getSessionExpiration();
+      if (expiresAt) setCookie();
       return expiresAt;
       // }
       // throw new Error('Authentication failed');
@@ -85,8 +112,6 @@ export const setTokenListeners = ({
   if (removedCallback) oktaAuth.tokenManager.on('removed', removedCallback);
 };
 
-export const getAccessToken = () => oktaAuth.getAccessToken();
-
 const renewToken = async key => {
   const token = await oktaAuth.tokenManager.get(key);
   if (token) {
@@ -102,6 +127,7 @@ export const renewTokens = async () => {
   await renewToken('accessToken');
   await renewToken('idToken');
   const expiresAt = await getSessionExpiration();
+  if (expiresAt) setCookie();
   return expiresAt;
 };
 
@@ -116,6 +142,7 @@ export const removeTokenListeners = () => {
 export const logoutAndClearTokens = async () => {
   await oktaAuth.revokeAccessToken();
   await oktaAuth.closeSession();
+  removeCookie();
 };
 
 export const isUserActive = latestActivity => {
