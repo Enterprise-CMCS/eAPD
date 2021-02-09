@@ -39,7 +39,13 @@ const jwtExtractor = req => {
 
   const { url } = req;
   const cookieStr = req.get('Cookie');
-  if (url && url.match(/^\/apds\/(\d+)\/files/i) && cookieStr) {
+
+  if (
+    url &&
+    url.match(/(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)/i) &&
+    cookieStr
+  ) {
+    logger.info('use cookies for auth');
     // because our image files within the RTE are just img tags
     // we cannot append our authorization header, but because
     // we are storing our access token in a cookie, we can read
