@@ -84,6 +84,7 @@ describe('<StateDashboard />', () => {
       expect(
         getByText(/Approval Pending From State Administrator/i)
       ).toBeTruthy();
+      expect(getByText("State Administrator", { selector: 'a' }).href).toBe("mailto:mo-state-admin@mo.gov")
     });
   });
 

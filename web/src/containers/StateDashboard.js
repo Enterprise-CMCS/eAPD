@@ -165,7 +165,7 @@ const StateDashboard = (
               </div>
             </div>
             {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
-              <PendingApproval mailTo />
+              <PendingApproval mailTo={mailTo} />
             ) : null}
             {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
               <ApprovalDenied />
@@ -238,6 +238,7 @@ StateDashboard.propTypes = {
   fetching: PropType.bool.isRequired,
   route: PropType.string,
   state: PropType.object.isRequired,
+  stateAdmins: PropType.array,
   role: PropType.string.isRequired,
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
@@ -246,14 +247,14 @@ StateDashboard.propTypes = {
 };
 
 StateDashboard.defaultProps = {
-  route: '/apd'
+  route: '/apd',
+  stateAdmins: []
 };
 
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching,
   state: state.user.data.state || null,
-  stateAdmins: state.stateAdmins || [],
   role: state.user.data.role || 'Pending Role',
   stateStatus:
     getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
