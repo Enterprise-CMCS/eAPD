@@ -14,6 +14,7 @@ const COOKIE_NAME = 'gov.cms.eapd.api-token';
 
 const setCookie = () => {
   const jwt = getAccessToken();
+  console.log('API_URL', process.env.API_URL);
   const config =
     !process.env.API_URL || process.env.API_URL.match(new RegExp(/localhost/i))
       ? {
