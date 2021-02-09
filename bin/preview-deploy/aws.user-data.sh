@@ -15,13 +15,47 @@ touch /home/ec2-user/3_removed_ansible_dir
 
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
+# The su block begins inside the root user's home directory.  Switch to the
+# ec2-user home directory.
+export OKTA_DOMAIN="__OKTA_DOMAIN__"
+export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
+export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
+export OKTA_API_KEY="__OKTA_API_KEY__"
+
+cd ~
+
+mkdir -p /app/api/logs
+touch /app/api/logs/eAPD-API-error-0.log
+touch /app/api/logs/eAPD-API-out-0.log
+touch /app/api/logs/Database-migration-error.log
+touch /app/api/logs/Database-migration-out.log
+touch /app/api/logs/Database-seeding-error.log
+touch /app/api/logs/Database-seeding-out.log
+touch /app/api/logs/cms-hitech-apd-api.logs
+
+# Install nvm.  Do it inside the ec2-user home directory so that user will have
+# access to it forever, just in case we need to get into the machine and
+# manually do some stuff to it.
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+source ~/.bashrc
+
+# We're using Node 10, and we don't care about minor/patch versions, so always
+# get the latest.
+nvm install 10
+nvm alias default 10
+
+# Install pm2: https://www.npmjs.com/package/pm2
+# This is what'll manage running the API Node app. It'll keep it alive and make
+# sure it's running when the EC2 instance restarts.
+npm i -g pm2
+
 # Change to user's home directory
 cd ~
 touch /home/ec2-user/4_cd
 
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
-touch /home/ec2-user/5_git pulled
+touch /home/ec2-user/5_git_pulled
 
 # Build the web app and move it into place
 cd eAPD/web
