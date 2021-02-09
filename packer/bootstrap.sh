@@ -18,7 +18,7 @@ mkdir /app/tls
 # Install git and postgres
 yum -y install git 
 yum -y install postgresql-server 
-yum -y install -y gcc gcc-c++ make
+#yum -y install -y gcc gcc-c++ make
 
 #Install CloudWatch Agent
 curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
