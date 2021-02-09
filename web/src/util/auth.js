@@ -26,7 +26,6 @@ const setCookie = () => {
   } else if (process.env.API_URL.match(/\/api/i)) {
     config = {
       sameSite: 'strict',
-      path: '/api/apds/',
     };
   } else {
     config = {
