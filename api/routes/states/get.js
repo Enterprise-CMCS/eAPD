@@ -11,17 +11,19 @@ module.exports = app => {
 
   app.get('/states/:id', loggedIn, (request, response, next) => {
     const { id } = request.params;
-    db.raw('states')
-      .where({ id })
-      .first()
-      .then(row => {
-        if (row) {
-          stateAdmins = db.getStateAdmins(id);
-          response.status(200).json({ ...row, stateAdmins });
-        } else {
-          response.status(400).end();
-        }
-      })
-      .catch(next);
+    Promise.all([
+      db.raw('states')
+        .where({ id })
+        .first(),
+      db.stateAdmins(id)
+    ])
+    .then(([row, stateAdmins]) => {
+      if (row) {
+        response.status(200).json({ ...row, stateAdmins });
+      } else {
+        response.status(400).end();
+      }
+    })
+    .catch(next);
   });
 };
