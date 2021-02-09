@@ -24,12 +24,7 @@ const setCookie = () => {
           secure: true,
           sameSite: 'lax'
         };
-  Cookies.set(
-    COOKIE_NAME,
-    escape(JSON.stringify({ accessToken: jwt })),
-    config
-  );
-  console.log('values', Cookies.get());
+  Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
 };
 
 const removeCookie = () => {
