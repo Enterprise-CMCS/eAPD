@@ -2,16 +2,9 @@
 # Prepare test database
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
-touch /home/ec2-user/1_postgres
-
-# Start Nginx
-systemctl enable start
-systemctl start nginx
-touch /home/ec2-user/2_nginx
 
 # Remove Ansible created directory
 rm -rf /home/ec2-user/~bbrooks
-touch /home/ec2-user/3_removed_ansible_dir
 
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
@@ -48,10 +41,6 @@ nvm alias default 10
 # This is what'll manage running the API Node app. It'll keep it alive and make
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
-
-# Change to user's home directory
-cd ~
-touch /home/ec2-user/4_cd
 
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
@@ -112,7 +101,15 @@ echo "module.exports = {
 # Start it up
 pm2 start ecosystem.config.js
 E_USER
-touch /home/ec2-user/8_app_started
+
+# SELinux context so Nginx can READ the files in /app/web
+chown -R nginx /app/web
+semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
+restorecon -Rv /app/web
+setsebool -P httpd_can_network_connect 1
+# Restart Nginx
+systemctl enable nginx
+systemctl restart nginx
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
@@ -120,4 +117,3 @@ su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versi
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart'
 #yum remove -y gcc gcc-c++ make
-touch /home/ec2-user/9_the_end
