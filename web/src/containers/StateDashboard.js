@@ -1,6 +1,6 @@
 import { Button } from '@cmsgov/design-system';
 import PropType from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import TagManager from 'react-gtm-module';
 
@@ -12,6 +12,7 @@ import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from '../components/UpgradeBrowser';
+import axios from '../util/api';
 
 const Loading = ({ children }) => (
   <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
@@ -81,13 +82,22 @@ const StateDashboard = (
     route,
     selectApd: select,
     state,
-    stateAdmins,
     role,
     stateStatus
   },
   { global = window } = {}
 ) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [mailTo, setMailTo] = useState("");
+
+  useEffect(() => {
+    axios.get(`/states/${state.id}`)
+      .then(res => res.data)
+      .then(state => state.stateAdmins.map(user => user.email).join(','))
+      .then(email => setMailTo(email))
+      .catch(e => console.error(e))
+  }, [state]);
+
   TagManager.dataLayer({
     dataLayer: {
       stateId: state ? state.id : null,
@@ -119,8 +129,6 @@ const StateDashboard = (
       </div>
     );
   }
-
-  const mailTo = stateAdmins.map(k => k.email).join(',');
 
   return (
     <div className="site-body ds-l-container">
@@ -238,7 +246,6 @@ StateDashboard.propTypes = {
   fetching: PropType.bool.isRequired,
   route: PropType.string,
   state: PropType.object.isRequired,
-  stateAdmins: PropType.array,
   role: PropType.string.isRequired,
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
@@ -248,7 +255,6 @@ StateDashboard.propTypes = {
 
 StateDashboard.defaultProps = {
   route: '/apd',
-  stateAdmins: []
 };
 
 const mapStateToProps = state => ({
