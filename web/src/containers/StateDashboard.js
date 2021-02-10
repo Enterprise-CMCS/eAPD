@@ -37,6 +37,8 @@ const PendingApproval = ({ mailTo }) => (
     </p>
   </div>
 );
+PendingApproval.defaultProps = { mailTo: "" };
+PendingApproval.propTypes = { mailTo: PropType.string };
 
 const ApprovalDenied = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
@@ -93,9 +95,8 @@ const StateDashboard = (
   useEffect(() => {
     axios.get(`/states/${state.id}`)
       .then(res => res.data)
-      .then(state => state.stateAdmins.map(user => user.email).join(','))
+      .then(usState => usState.stateAdmins.map(user => user.email).join(','))
       .then(email => setMailTo(email))
-      .catch(e => console.error(e))
   }, [state]);
 
   TagManager.dataLayer({
