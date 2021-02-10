@@ -22,8 +22,8 @@ const jwtMiddleware = async (
     verifyToken = verifyWebToken
   } = {}
 ) => {
-  const jwt = extractor(req);
   try {
+    const jwt = extractor(req);
     const claims = jwt ? await verifyToken(jwt) : false;
     if (!claims) return next();
 
@@ -38,6 +38,8 @@ const jwtMiddleware = async (
       req.user = user;
     }
   } catch (err) {
+    console.log({ err });
+    logger.info('error', err.message);
     logger.error(`error message: ${err.message}`);
   }
   return next();
