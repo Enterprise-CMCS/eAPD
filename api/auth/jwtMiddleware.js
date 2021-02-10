@@ -22,8 +22,8 @@ const jwtMiddleware = async (
     verifyToken = verifyWebToken
   } = {}
 ) => {
-  const jwt = extractor(req);
   try {
+    const jwt = extractor(req);
     const claims = jwt ? await verifyToken(jwt) : false;
     if (!claims) return next();
 
