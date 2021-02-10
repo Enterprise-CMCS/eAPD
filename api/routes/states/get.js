@@ -15,7 +15,7 @@ module.exports = app => {
       db.raw('states')
         .where({ id })
         .first(),
-      db.stateAdmins(id)
+      db.getStateAdmins(id)
     ])
     .then(([row, stateAdmins]) => {
       if (row) {
