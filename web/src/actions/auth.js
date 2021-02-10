@@ -12,7 +12,7 @@ import {
   setTokenListeners,
   renewTokens,
   logoutAndClearTokens,
-  isUserActive
+  isUserActive,
 } from '../util/auth';
 import { MFA_FACTOR_TYPES } from '../constants';
 
@@ -46,9 +46,9 @@ export const SESSION_RENEWED = 'SESSION_RENEWED';
 export const UPDATE_EXPIRATION = 'UPDATE_EXPIRATION';
 
 export const requestAuthCheck = () => ({ type: AUTH_CHECK_REQUEST });
-export const completeAuthCheck = user => ({
+export const completeAuthCheck = (user) => ({
   type: AUTH_CHECK_SUCCESS,
-  data: user
+  data: user,
 });
 export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
@@ -56,24 +56,24 @@ export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeFirstStage = () => ({ type: LOGIN_OTP_STAGE });
 export const mfaEnrollStart = (factors, phoneNumber) => ({
   type: LOGIN_MFA_ENROLL_START,
-  data: { factors, phoneNumber }
+  data: { factors, phoneNumber },
 });
-export const mfaEnrollAddPhone = mfaEnrollType => ({
+export const mfaEnrollAddPhone = (mfaEnrollType) => ({
   type: LOGIN_MFA_ENROLL_ADD_PHONE,
-  data: mfaEnrollType
+  data: mfaEnrollType,
 });
 export const mfaEnrollActivate = (mfaEnrollType, activationData) => ({
   type: LOGIN_MFA_ENROLL_ACTIVATE,
-  data: { mfaEnrollType, activationData }
+  data: { mfaEnrollType, activationData },
 });
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
-export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
-export const failLogin = error => ({ type: LOGIN_FAILURE, error });
-export const failLoginNotInGroup = error => ({
+export const completeLogin = (user) => ({ type: LOGIN_SUCCESS, data: user });
+export const failLogin = (error) => ({ type: LOGIN_FAILURE, error });
+export const failLoginNotInGroup = (error) => ({
   type: LOGIN_FAILURE_NOT_IN_GROUP,
-  error
+  error,
 });
-export const failLoginMFA = error => ({ type: LOGIN_MFA_FAILURE, error });
+export const failLoginMFA = (error) => ({ type: LOGIN_MFA_FAILURE, error });
 export const failLoginLocked = () => ({ type: LOCKED_OUT });
 export const resetLocked = () => ({ type: RESET_LOCKED_OUT });
 
@@ -88,12 +88,12 @@ export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
 export const setSessionEnding = () => ({ type: SESSION_ENDING_ALERT });
 export const requestSessionRenewal = () => ({ type: REQUEST_SESSION_RENEWAL });
 export const completeSessionRenewed = () => ({ type: SESSION_RENEWED });
-export const updateSessionExpiration = expiresAt => ({
+export const updateSessionExpiration = (expiresAt) => ({
   type: UPDATE_EXPIRATION,
-  data: expiresAt
+  data: expiresAt,
 });
 
-const loadData = activities => dispatch => {
+const loadData = (activities) => (dispatch) => {
   if (activities.includes('view-document')) {
     dispatch(fetchAllApds());
   }
@@ -105,10 +105,12 @@ const loadData = activities => dispatch => {
   }
 };
 
-const getCurrentUser = () => dispatch =>
-  axios
+const getCurrentUser = () => (dispatch) => {
+  console.log('getting current user');
+  return axios
     .get('/me')
-    .then(userRes => {
+    .then((userRes) => {
+      console.log({ userRes });
       if (userRes.data.states.length === 0) {
         dispatch(requestAccessToState());
       }
@@ -118,13 +120,14 @@ const getCurrentUser = () => dispatch =>
       dispatch(completeLogin(userRes.data));
       dispatch(resetLocked());
     })
-    .catch(error => {
+    .catch((error) => {
+      console.log({ error });
       const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
     });
+};
 
-export const logout = () => async dispatch => {
-  await axios.post('/logout');
+export const logout = () => async (dispatch) => {
   dispatch(requestLogout());
   logoutAndClearTokens();
   dispatch(completeLogout());
@@ -136,7 +139,7 @@ const setupTokenManager = () => (dispatch, getState) => {
       // called when the token is closer to expiring
       // than what was set in expireEarlySeconds
       const {
-        auth: { latestActivity }
+        auth: { latestActivity },
       } = getState();
       if (isUserActive(latestActivity) === true) {
         // the user is still actively using the system
@@ -149,11 +152,11 @@ const setupTokenManager = () => (dispatch, getState) => {
         // and ask them if they want to continue
         dispatch(setSessionEnding());
       }
-    }
+    },
   });
 };
 
-export const extendSession = () => async dispatch => {
+export const extendSession = () => async (dispatch) => {
   dispatch(requestSessionRenewal());
   const expiresAt = await renewTokens();
   dispatch(updateSessionExpiration(expiresAt));
@@ -161,7 +164,7 @@ export const extendSession = () => async dispatch => {
   dispatch(completeSessionRenewed());
 };
 
-export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
+export const mfaConfig = (mfaSelected, phoneNumber) => async (dispatch) => {
   const factor = await getFactor(mfaSelected);
 
   if (factor) {
@@ -169,7 +172,7 @@ export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
       mfaSelected === MFA_FACTOR_TYPES.SMS ||
       mfaSelected === MFA_FACTOR_TYPES.CALL
         ? await factor.enroll({
-            profile: { phoneNumber, updatePhone: true }
+            profile: { phoneNumber, updatePhone: true },
           })
         : await factor.enroll();
 
@@ -182,15 +185,15 @@ export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
   return false;
 };
 
-export const mfaAddPhone = mfaSelected => async dispatch => {
+export const mfaAddPhone = (mfaSelected) => async (dispatch) => {
   dispatch(mfaEnrollAddPhone(mfaSelected));
 };
 
-export const mfaActivate = code => async dispatch => {
+export const mfaActivate = (code) => async (dispatch) => {
   const transaction = await retrieveExistingTransaction();
 
   const activateTransaction = await transaction.activate({
-    passCode: code
+    passCode: code,
   });
 
   if (activateTransaction.status === 'SUCCESS') {
@@ -201,10 +204,10 @@ export const mfaActivate = code => async dispatch => {
   }
 };
 
-export const login = (username, password) => dispatch => {
+export const login = (username, password) => (dispatch) => {
   dispatch(requestLogin());
   authenticateUser(username, password)
-    .then(async res => {
+    .then(async (res) => {
       if (res.status === 'PASSWORD_EXPIRED') {
         return dispatch(failLogin('Password expired'));
       }
@@ -221,7 +224,7 @@ export const login = (username, password) => dispatch => {
 
       if (res.status === 'MFA_REQUIRED') {
         const mfaFactor = res.factors.find(
-          factor => factor.provider === 'OKTA' || factor.provider === 'GOOGLE'
+          (factor) => factor.provider === 'OKTA' || factor.provider === 'GOOGLE'
         );
 
         if (!mfaFactor) throw new Error('Could not find a valid multi-factor');
@@ -239,13 +242,13 @@ export const login = (username, password) => dispatch => {
       }
       return null;
     })
-    .catch(error => {
+    .catch((error) => {
       const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
     });
 };
 
-export const loginOtp = otp => async dispatch => {
+export const loginOtp = (otp) => async (dispatch) => {
   dispatch(startSecondStage());
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
@@ -256,7 +259,7 @@ export const loginOtp = otp => async dispatch => {
         dispatch(updateSessionExpiration(expiresAt));
         return dispatch(getCurrentUser());
       })
-      .catch(error => {
+      .catch((error) => {
         const reason = error ? error.message : 'N/A';
         if (reason === 'User is not assigned to the client application.') {
           dispatch(failLoginNotInGroup(reason));
@@ -270,22 +273,22 @@ export const loginOtp = otp => async dispatch => {
   return dispatch(failLoginMFA('Authentication failed'));
 };
 
-export const createAccessRequest = states => dispatch => {
-  states.forEach(stateId => {
+export const createAccessRequest = (states) => (dispatch) => {
+  states.forEach((stateId) => {
     axios
       .post(`/states/${stateId}/affiliations`)
       .then(() => {
         dispatch(successAccessToState());
         dispatch(getCurrentUser());
       })
-      .catch(error => {
+      .catch((error) => {
         const reason = error ? error.message : 'N/A';
         dispatch(failLogin(reason));
       });
   });
 };
 
-export const checkAuth = () => async dispatch => {
+export const checkAuth = () => async (dispatch) => {
   dispatch(requestAuthCheck());
 
   dispatch(setupTokenManager());
@@ -294,7 +297,7 @@ export const checkAuth = () => async dispatch => {
 
   return axios
     .get('/me')
-    .then(req => {
+    .then((req) => {
       dispatch(completeAuthCheck(req.data));
       dispatch(loadData(req.data.activities));
     })
