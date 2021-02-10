@@ -30,10 +30,10 @@ const PendingApproval = ({ mailTo }) => (
     </h3>
 
     <p className="ds-u-margin--0">
-      Please contact
+      Please contact&nbsp;
       {mailTo && (<a href={`mailto:${mailTo}`}>State Administrator</a>)}
       {!mailTo && ("State Administrator")}
-      for more information.
+      &nbsp;for more information.
     </p>
   </div>
 );
