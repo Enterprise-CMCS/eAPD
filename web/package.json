@@ -26,12 +26,14 @@
     "apd"
   ],
   "contributors": [
+    "Akua Amponsah",
     "Nicolas Aretakis",
     "Heather Battaglia",
     "Ronald Bronson",
     "Bill Brooks",
     "Richard Davis",
     "Jenn Downs",
+    "Amanda Evans",
     "Nicole Fenton",
     "Tiffany Forkner",
     "Eghosa Guobadia",
@@ -71,6 +73,7 @@
     "detect-browser": "^5.2.0",
     "history": "^4.10.1",
     "i18n-js": "^3.5.1",
+    "js-cookie": "^2.2.0",
     "jsonpatch": "^3.0.1",
     "markdown-it": "^10.0.0",
     "moment": "^2.22.2",
