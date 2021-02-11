@@ -16,7 +16,10 @@ const setCookie = () => {
   const jwt = getAccessToken();
 
   const config =
-    !process.env.API_URL || process.env.API_URL.match(new RegExp(/localhost/i))
+    !process.env.API_URL ||
+    process.env.API_URL.match(
+      new RegExp(/localhost/i) || process.env.API_URL.match('/api')
+    )
       ? {
           sameSite: 'strict',
         }
