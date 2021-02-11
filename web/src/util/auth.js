@@ -26,7 +26,7 @@ const setCookie = () => {
   } else if (process.env.API_URL.match('/api')) {
     config = {
       secure: true,
-      sameSite: 'lax',
+      sameSite: 'none',
     };
   } else {
     config = {
