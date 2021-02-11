@@ -1,4 +1,4 @@
-import { Button } from '@cmsgov/design-system';
+import { Alert, Button } from '@cmsgov/design-system';
 import PropType from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from '../components/UpgradeBrowser';
-import axios from '../util/api';
+import StateAffiliationStatus from '../components/StateAffiliationStatus';
 
 const Loading = ({ children }) => (
   <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
@@ -21,59 +21,6 @@ const Loading = ({ children }) => (
   </div>
 );
 Loading.propTypes = { children: PropType.node.isRequired };
-
-const PendingApproval = ({ mailTo }) => (
-  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <img alt="Puzzle Piece Icon" src="../static/icons/puzzle.svg" width="57" />
-    <h3 className="ds-u-margin-bottom--1">
-      Approval Pending From State Administrator
-    </h3>
-
-    <p className="ds-u-margin--0">
-      Please contact&nbsp;
-      {mailTo && (<a href={`mailto:${mailTo}`}>State Administrator</a>)}
-      {!mailTo && ("State Administrator")}
-      &nbsp;for more information.
-    </p>
-  </div>
-);
-PendingApproval.defaultProps = { mailTo: "" };
-PendingApproval.propTypes = { mailTo: PropType.string };
-
-const ApprovalDenied = () => (
-  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <img alt="Puzzle Piece Icon" src="../static/icons/alert.svg" height="51" />
-    <h3 className="ds-u-margin-bottom--1">Approval Has Been Denied</h3>
-    <p className="ds-u-margin--0">
-      Please contact State Administrator for more information.
-    </p>
-  </div>
-);
-
-const ApprovalRevoked = () => (
-  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <img alt="Puzzle Piece Icon" src="../static/icons/alert.svg" height="51" />
-    <h3 className="ds-u-margin-bottom--1">Approval Permissions Revoked</h3>
-    <p className="ds-u-margin--0">
-      Please contact State Administrator for more information.
-    </p>
-  </div>
-);
-
-// TODO: We'll have to figure out a way to only show this the first time they go into an approved state?
-// const Approved = () => (
-//   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-//     <img
-//       alt="Puzzle Piece Icon"
-//       src="../static/icons/thumbs-up.svg"
-//       width="57"
-//     />
-//     <h3 className="ds-u-margin-bottom--1">Approved</h3>
-//     <p className="ds-u-margin--0">
-//       Congratulations! You may now create an APD.
-//     </p>
-//   </div>
-// );
 
 const StateDashboard = (
   {
@@ -87,17 +34,11 @@ const StateDashboard = (
     role,
     stateStatus
   },
-  { global = window } = {}
+  {
+    global = window,
+  } = {}
 ) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [mailTo, setMailTo] = useState("");
-
-  useEffect(() => {
-    axios.get(`/states/${state.id}`)
-      .then(res => res.data)
-      .then(usState => usState.stateAdmins.map(user => user.email).join(','))
-      .then(email => setMailTo(email))
-  }, [state]);
 
   TagManager.dataLayer({
     dataLayer: {
@@ -173,15 +114,7 @@ const StateDashboard = (
                 </div>
               </div>
             </div>
-            {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
-              <PendingApproval mailTo={mailTo} />
-            ) : null}
-            {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
-              <ApprovalDenied />
-            ) : null}
-            {stateStatus === STATE_AFFILIATION_STATUSES.REVOKED ? (
-              <ApprovalRevoked />
-            ) : null}
+            <StateAffiliationStatus />
             {fetching ? <Loading>Loading APDs</Loading> : null}
             {!fetching &&
             stateStatus === STATE_AFFILIATION_STATUSES.APPROVED &&
@@ -261,10 +194,9 @@ StateDashboard.defaultProps = {
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching,
-  state: state.user.data.state || null,
+  state: { id: 'ak' },
   role: state.user.data.role || 'Pending Role',
-  stateStatus:
-    getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
+  stateStatus: STATE_AFFILIATION_STATUSES.REQUESTED
 });
 
 const mapDispatchToProps = {
