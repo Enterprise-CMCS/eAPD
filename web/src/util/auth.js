@@ -15,18 +15,27 @@ const COOKIE_NAME = 'gov.cms.eapd.api-token';
 const setCookie = () => {
   const jwt = getAccessToken();
   console.log('API_URL', process.env.API_URL);
-  const config =
+  let config;
+  if (
     !process.env.API_URL ||
-    process.env.API_URL.match(new RegExp(/localhost/i)) ||
-    process.env.API_URL.match('/api')
-      ? {
-          sameSite: 'strict',
-        }
-      : {
-          domain: '.cms.gov',
-          secure: true,
-          sameSite: 'lax',
-        };
+    process.env.API_URL.match(new RegExp(/localhost/i))
+  ) {
+    config = {
+      sameSite: 'strict',
+    };
+  } else if (process.env.API_URL.match('/api')) {
+    config = {
+      secure: true,
+      sameSite: 'lax',
+    };
+  } else {
+    config = {
+      domain: '.cms.gov',
+      secure: true,
+      sameSite: 'lax',
+    };
+  }
+  console.log({ config });
   Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
 };
 
