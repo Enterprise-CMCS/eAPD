@@ -31,10 +31,12 @@ const getJWTCookie = cookieStr => {
   const accessTokenObj = cookies.find(cookie =>
     cookie.match(/^gov.cms.eapd.api-token/i)
   ); // find the cookie that stores the access token
+  console.log({ accessTokenObj });
   if (accessTokenObj) {
     // eslint-disable-next-line no-unused-vars
     const [key, value] = accessTokenObj.split('='); // get the value
     const valueObj = JSON.parse(unescape(value)); // the value is an encoded string, convert it to a json object
+    console.log({ valueObj });
     return valueObj.accessToken; // return the access token
   }
   return null;
@@ -49,16 +51,16 @@ const getJWTCookie = cookieStr => {
 const jwtExtractor = req => {
   const token = req.get('Authorization');
 
-  if (token && token !== '') {
-    if (token.match(/^bearer\s/i)) {
-      const [temp, result] = token.split(' '); // eslint-disable-line no-unused-vars
-      return result;
-    }
+  if (token && token !== '' && token.match(/^bearer\s/i)) {
+    const [temp, result] = token.split(' '); // eslint-disable-line no-unused-vars
+    console.log({ result });
+    return result;
   }
 
   const { url } = req;
   const cookieStr = req.get('Cookie');
-  if (url && url.match(/^\/apds\/(\d+)\/files/i) && cookieStr) {
+  if (url && url.match(/\/apds\/(\d+)\/files/i) && cookieStr) {
+    console.log('getting cooke from string', cookieStr);
     return getJWTCookie(cookieStr);
   }
   return null;
