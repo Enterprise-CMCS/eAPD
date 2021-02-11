@@ -44,7 +44,6 @@ npm i -g pm2
 
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
-touch /home/ec2-user/5_git_pulled
 
 # Build the web app and move it into place
 cd eAPD/web
@@ -52,15 +51,12 @@ npm ci
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
 mv dist/* /app/web
 cd ~
-touch /home/ec2-user/6_web_built_and_moved
 
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
-touch /home/ec2-user/7_app_moved
 
 npm ci --only=production
-touch /home/ec2-user/8_npm_ci
 
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
@@ -116,4 +112,3 @@ systemctl restart nginx
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart'
-#yum remove -y gcc gcc-c++ make
