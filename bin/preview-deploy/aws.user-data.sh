@@ -72,6 +72,10 @@ http {
     include             /etc/nginx/mime.types;
     default_type        application/octet-stream;
 
+    # Allow larger than normal headers
+    client_header_buffer_size 64k;
+    large_client_header_buffers 4 64k;
+
     server {
         listen       443 default_server ssl;
         listen       [::]:443 default_server ssl;
