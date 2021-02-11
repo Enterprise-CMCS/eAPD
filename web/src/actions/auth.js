@@ -105,10 +105,12 @@ const loadData = activities => dispatch => {
   }
 };
 
-const getCurrentUser = () => dispatch =>
-  axios
+const getCurrentUser = () => dispatch => {
+  console.log('getting current user');
+  return axios
     .get('/me')
     .then(userRes => {
+      console.log({ userRes });
       if (userRes.data.states.length === 0) {
         dispatch(requestAccessToState());
       }
@@ -119,9 +121,11 @@ const getCurrentUser = () => dispatch =>
       dispatch(resetLocked());
     })
     .catch(error => {
+      console.log({ error });
       const reason = error ? error.message : 'N/A';
       dispatch(failLogin(reason));
     });
+};
 
 export const logout = () => async dispatch => {
   dispatch(requestLogout());
