@@ -40,9 +40,16 @@ const initialState = {
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case APD_ACTIVITIES_CHANGE: {
+
+      const items = getItems({
+        activities: action.activities,
+        items: state.items
+      });
+
       return {
         ...state,
-        activities: action.activities
+        activities: action.activities,
+        items
       };
     }
 
