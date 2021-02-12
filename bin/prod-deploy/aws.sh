@@ -217,7 +217,7 @@ function createNewInstance() {
     --ebs-optimized \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT}]" \
     --user-data file://aws.user-data.sh \
-    --key-name eapd_bbrooks
+    --key-name eapd_bbrooks \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
