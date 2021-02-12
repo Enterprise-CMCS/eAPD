@@ -119,7 +119,6 @@ function createNewInstance() {
     --key-name eapd_bbrooks \
     | jq -r -c '.Instances[0].InstanceId'
 }
-# REMOVE ME
 
 # Finds the most recent EAST-RH gold AMI and returns the ID
 function findAMI() {
