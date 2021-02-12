@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const logger = require('../logger')('db/oktaUsers');
 const knex = require('./knex');
 
@@ -24,9 +25,8 @@ const createOrUpdateOktaUser = (user_id, email, metadata) => (
   getOktaUser(user_id).then(user => {
     if (!user) {
       return createOktaUser(user_id, email, metadata)
-    } else {
-      return updateOktaUser(user_id, email, metadata)
     }
+    return updateOktaUser(user_id, email, metadata)
   })
   .catch(e => logger.error({
      message: `could not create or update user_id: ${user_id}`,
