@@ -1,112 +1,68 @@
 import React from 'react';
-import StateAffiliationStatus from './StateAffiliationStatus';
-import { renderWithConnection } from '../shared/apd-testing-library';
+import { render, screen } from '@testing-library/react';
+
+import {
+  plain as StateAffiliationStatus,
+  PendingApproval
+} from './StateAffiliationStatus';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
-jest.mock('../util/api', () => ({
-  get: jest.fn(),
-  post: jest.fn(),
-  patch: jest.fn(),
-  delete: jest.fn()
-}));
+const {
+  DENIED,
+  REQUESTED,
+  REVOKED
+} = STATE_AFFILIATION_STATUSES;
 
-let props;
-let renderUtils;
+const initialProps = {
+  state: {
+    id: 'ak'
+  },
+  stateStatus: REQUESTED
+};
+
+// mock useEffect so we don't make an API call
+jest.spyOn(React, 'useEffect').mockImplementation(() => {});
+
+const setup = (props = {}) => (
+  render(<StateAffiliationStatus {...initialProps} {...props} />)
+);
 
 describe('<StateAffiliationStatus />', () => {
-  beforeEach(() => {
-    props = {
-      apds: [],
-      fetching: false,
-      createApd: jest.fn(),
-      deleteApd: jest.fn(),
-      selectApd: jest.fn(),
-      route: '/apd'
-    };
-  });
-  describe('pending state', () => {
-    beforeEach(() => {
-      renderUtils = renderWithConnection(<StateAffiliationStatus {...props} />, {
-        initialState: {
-          user: {
-            data: {
-              state: { id: 'mo' },
-              affiliations: [
-                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.REQUESTED }
-              ]
-            }
-          }
-        }
-      });
-    });
-
-    it('should display the eAPD Logo', () => {
-      const { getByTestId } = renderUtils;
-      expect(getByTestId('eAPDlogo')).toBeTruthy();
-    });
-
-    it('should display introduction', () => {
-      const { queryByText } = renderUtils;
-      expect(
-        queryByText(
-          /The CMS HITECH APD app is the new way to create and manage/i
-        )
-      ).toBeTruthy();
-    });
-
-    it('should display the pending message', () => {
-      const { getByAltText, getByText } = renderUtils;
-      expect(getByAltText(/Puzzle Piece Icon/i)).toBeTruthy();
-      expect(
-        getByText(/Approval Pending From State Administrator/i)
-      ).toBeTruthy();
-    });
+  it('displays the eAPD Logo', () => {
+    setup();
+    expect(screen.getByAltText('eAPD Logo')).toBeInTheDocument();
   });
 
-  describe('denied state', () => {
-    beforeEach(() => {
-      renderUtils = renderWithConnection(<StateAffiliationStatus {...props} />, {
-        initialState: {
-          user: {
-            data: {
-              state: { id: 'mo' },
-              affiliations: [
-                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.DENIED }
-              ]
-            }
-          }
-        }
-      });
-    });
-
-    it('should display the denied message', () => {
-      const { getByAltText, getByText } = renderUtils;
-      expect(getByAltText(/Puzzle Piece Icon/i)).toBeTruthy();
-      expect(getByText(/Approval Has Been Denied/i)).toBeTruthy();
-    });
+  it('displays the introduction text', () => {
+    setup();
+    const text = 'The CMS HITECH APD app is';
+    expect(screen.getByText(text, { exact: false })).toBeInTheDocument();
   });
 
-  describe('revoked state', () => {
-    beforeEach(() => {
-      renderUtils = renderWithConnection(<StateAffiliationStatus {...props} />, {
-        initialState: {
-          user: {
-            data: {
-              state: { id: 'mo' },
-              affiliations: [
-                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.REVOKED }
-              ]
-            }
-          }
-        }
-      });
-    });
-
-    it('should display the revoked message', () => {
-      const { getByAltText, getByText } = renderUtils;
-      expect(getByAltText(/Puzzle Piece Icon/i)).toBeTruthy();
-      expect(getByText(/Approval Permissions Revoked/i)).toBeTruthy();
-    });
+  it('displays the pending message when stateStatus is REQUESTED', () => {
+    setup();
+    const text = 'Approval Pending From State Administrator';
+    expect(screen.getByText(text)).toBeInTheDocument();
   });
 
+  it('displays the denied message when stateStatus is DENIED', () => {
+    setup({ stateStatus: DENIED });
+    const text = 'Approval Has Been Denied';
+    expect(screen.getByText(text)).toBeInTheDocument();
+  });
+
+  it('displays the revoked message when stateStatus is REVOKED', () => {
+    setup({ stateStatus: REVOKED });
+    const text = 'Approval Permissions Revoked';
+    expect(screen.getByText(text)).toBeInTheDocument();
+  });
+});
+
+describe('<PendingApproval />', () => {
+  it('displays a mailto link', () => {
+    render(<PendingApproval mailTo='em@il.com,admin@mo.gov' />)
+    const aTag = screen.getByText('State Administrator', { selector: 'a' });
+    expect(aTag).toBeInTheDocument();
+    expect(aTag.href).toBe('mailto:em@il.com,admin@mo.gov');
+  });
 });

@@ -1,23 +1,29 @@
 import PropType from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Instruction from "./Instruction";
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from "./UpgradeBrowser";
+import axios from '../util/api';
 
-const PendingApproval = () => (
+const PendingApproval = ({ mailTo }) => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
     <img alt="Puzzle Piece Icon" src="../static/icons/puzzle.svg" width="57" />
     <h3 className="ds-u-margin-bottom--1">
       Approval Pending From State Administrator
     </h3>
     <p className="ds-u-margin--0">
-      Please contact State Administrator for more information.
+      Please contact&nbsp;
+      {mailTo && (<a href={`mailto:${mailTo}`}>State Administrator</a>)}
+      {!mailTo && ("State Administrator")}
+      &nbsp;for more information.
     </p>
   </div>
 );
+PendingApproval.defaultProps = { mailTo: "" };
+PendingApproval.propTypes = { mailTo: PropType.string };
 
 const ApprovalDenied = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
@@ -60,6 +66,14 @@ const StateAffiliationStatus = (
     stateStatus
   }
 ) => {
+  const [mailTo, setMailTo] = useState("");
+
+  React.useEffect(() => {
+    axios.get(`/states/${state.id}`)
+      .then(res => res.data)
+      .then(usState => usState.stateAdmins.map(user => user.email).join(','))
+      .then(email => setMailTo(email))
+  }, [state]);
 
   return (
     <div className="site-body ds-l-container">
@@ -87,7 +101,7 @@ const StateAffiliationStatus = (
               </div>
             </div>
             {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
-              <PendingApproval />
+              <PendingApproval mailTo={mailTo} />
             ) : null}
             {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
               <ApprovalDenied />
@@ -114,3 +128,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(StateAffiliationStatus);
+
+export { StateAffiliationStatus as plain, PendingApproval, mapStateToProps };
