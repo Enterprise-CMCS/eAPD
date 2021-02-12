@@ -1,34 +1,27 @@
 import PropType from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-import PuzzlePieceIcon from '../components/PuzzlePieceIcon';
-import AlertIcon from '../components/AlertIcon';
+import Instruction from "./Instruction";
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
-import axios from '../util/api';
+import UpgradeBrowser from "./UpgradeBrowser";
 
-const PendingApproval = ({ mailTo }) => (
+const PendingApproval = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <PuzzlePieceIcon />
+    <img alt="Puzzle Piece Icon" src="../static/icons/puzzle.svg" width="57" />
     <h3 className="ds-u-margin-bottom--1">
       Approval Pending From State Administrator
     </h3>
-
     <p className="ds-u-margin--0">
-      Please contact&nbsp;
-      {mailTo && (<a href={`mailto:${mailTo}`}>State Administrator</a>)}
-      {!mailTo && ("State Administrator")}
-      &nbsp;for more information.
+      Please contact State Administrator for more information.
     </p>
   </div>
 );
-PendingApproval.defaultProps = { mailTo: "" };
-PendingApproval.propTypes = { mailTo: PropType.string };
 
 const ApprovalDenied = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <AlertIcon />
+    <img alt="Puzzle Piece Icon" src="../static/icons/alert.svg" height="51" />
     <h3 className="ds-u-margin-bottom--1">Approval Has Been Denied</h3>
     <p className="ds-u-margin--0">
       Please contact State Administrator for more information.
@@ -38,7 +31,7 @@ const ApprovalDenied = () => (
 
 const ApprovalRevoked = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <AlertIcon />
+    <img alt="Puzzle Piece Icon" src="../static/icons/alert.svg" height="51" />
     <h3 className="ds-u-margin-bottom--1">Approval Permissions Revoked</h3>
     <p className="ds-u-margin--0">
       Please contact State Administrator for more information.
@@ -61,28 +54,51 @@ const ApprovalRevoked = () => (
 //   </div>
 // );
 
-const StateAffiliationStatus = ({ state, stateStatus }) => {
-  const [mailTo, setMailTo] = useState("");
-
-  useEffect(() => {
-    axios.get(`/states/${state.id}`)
-      .then(res => res.data)
-      .then(usState => usState.stateAdmins.map(user => user.email).join(','))
-      .then(email => setMailTo(email))
-  }, [state]);
+const StateAffiliationStatus = (
+  {
+    state,
+    stateStatus
+  }
+) => {
 
   return (
-    <>
-      {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
-        <PendingApproval mailTo={mailTo} />
-      ) : null}
-      {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
-        <ApprovalDenied />
-      ) : null}
-      {stateStatus === STATE_AFFILIATION_STATUSES.REVOKED ? (
-        <ApprovalRevoked />
-      ) : null}
-    </>
+    <div className="site-body ds-l-container">
+      <div className="ds-u-margin--0">
+        <main id="start-main-content">
+          <div className="ds-u-padding-top--2">
+            <UpgradeBrowser />
+            <div className="ds-l-row ds-u-margin-top--7">
+              <div className="ds-l-col--8 ds-u-margin-x--auto">
+                <div
+                  className="ds-u-display--flex ds-u-justify-content--center"
+                  data-testid="eAPDlogo"
+                >
+                  <img
+                    src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
+                    alt="eAPD Logo"
+                  />
+                </div>
+                <Instruction source="stateDashboard.introduction" />
+                <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
+                  <h2 className="ds-h2 ds-u-display--inline-block">
+                    {state ? state.name : ''} APDs
+                  </h2>
+                </div>
+              </div>
+            </div>
+            {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
+              <PendingApproval />
+            ) : null}
+            {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
+              <ApprovalDenied />
+            ) : null}
+            {stateStatus === STATE_AFFILIATION_STATUSES.REVOKED ? (
+              <ApprovalRevoked />
+            ) : null}
+          </div>
+        </main>
+      </div>
+    </div>
   );
 };
 
@@ -92,8 +108,9 @@ StateAffiliationStatus.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  state: { id: 'ak' },
-  stateStatus: STATE_AFFILIATION_STATUSES.REQUESTED
+  state: state.user.data.state || null,
+  stateStatus:
+    getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
 });
 
 export default connect(mapStateToProps)(StateAffiliationStatus);
