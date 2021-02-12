@@ -8,6 +8,7 @@ Anticipated release: February 8, 2021
 - Swaps My State Dashboard title with eAPD logo ([#2776])
 - Create an endpoint to serve the help doc ([#2793])
 - Update Key State Personnel copy ([#2804])
+- Allow users to email state admin from all relevant dashboards ([#2771])
 
 #### 🐛 Bugs fixed
 
@@ -38,3 +39,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
 [#2804]: https://github.com/CMSgov/eAPD/issues/2804
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
+[#2771]: https://github.com/CMSgov/eAPD/issues/2771
