@@ -283,7 +283,7 @@ npm rebuild knex
 echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
 
 # Start it up
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.js --watch
 
 E_USER
 
