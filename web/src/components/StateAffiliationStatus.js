@@ -22,8 +22,7 @@ const PendingApproval = ({ mailTo }) => (
     </p>
   </div>
 );
-PendingApproval.defaultProps = { mailTo: "" };
-PendingApproval.propTypes = { mailTo: PropType.string };
+PendingApproval.propTypes = { mailTo: PropType.string.isRequired };
 
 const ApprovalDenied = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
@@ -101,7 +100,7 @@ const StateAffiliationStatus = (
               </div>
             </div>
             {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
-              <PendingApproval mailTo={mailTo} />
+              <PendingApproval mailTo={mailTo || 'CMS-EAPD@cms.hhs.gov'} />
             ) : null}
             {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
               <ApprovalDenied />
