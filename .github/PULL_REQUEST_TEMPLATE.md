@@ -7,15 +7,16 @@ Describe the pull request here, including any supplemental information needed to
 
 ### This pull request is ready to merge when...
 
-- [ ] Tests have been updated (and all tests are passing)
+- [ ] Automated Tests have been updated (and all tests are passing)
 - [ ] This code has been reviewed by someone other than the original author
+- [ ] Bugs have been created for any issues found by QA beyond minor fixes
 - [ ] The experience passes a basic manual accessibility audit (keyboard nav, screenreader, text scaling) OR an exemption is documented
 - [ ] The change has been documented
-  - [ ] Associated OpenAPI documentation has been updated
+- [ ] Associated OpenAPI documentation has been updated
 - [ ] Changelog is updated as appropriate
 
 ### This feature is done when...
 
-- [ ] QA has approved the experience
+- [ ] QA has verified the accessibility and functionality related to the change
 - [ ] Design has approved the experience
 - [ ] Product has approved the experience
