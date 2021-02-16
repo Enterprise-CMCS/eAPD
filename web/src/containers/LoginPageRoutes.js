@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Switch,
   Route,
+  Redirect,
   useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
@@ -29,14 +30,15 @@ const LoginPageRoutes = ({
   handleCreateAccessRequest,
   handleCompleteAccessRequest,
   handleLogin,
-  handleLoginOtp
+  handleLoginOtp,
+  handleLogout
 }) => {
   const { path } = useRouteMatch();
 
   return (
     <Switch>
       <Route path={path}>
-        <Route exact path={`${path}`}>
+        <Route path={`${path}`}>
           <Login
             hasEverLoggedOn={hasEverLoggedOn}
             errorMessage={errorMessage}
@@ -91,7 +93,8 @@ const LoginPageRoutes = ({
 
         <Route path={`${path}/affiliations/request`}>
           <StateAccessRequest
-            action={handleCreateAccessRequest}
+            saveAction={handleCreateAccessRequest}
+            cancelAction={handleLogout}
             errorMessage={errorMessage}
             fetching={fetching}
           />
@@ -124,7 +127,8 @@ LoginPageRoutes.propTypes = {
   handleCreateAccessRequest: PropTypes.func.isRequired,
   handleCompleteAccessRequest: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  handleLoginOtp: PropTypes.func.isRequired
+  handleLoginOtp: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired
 };
 
 LoginPageRoutes.defaultProps = {

@@ -5,7 +5,12 @@ import { Dropdown } from '@cmsgov/design-system';
 import AuthenticationForm from '../components/AuthenticationForm';
 import { usStatesDropdownOptions } from '../util/states';
 
-const StateAccessRequest = ({ action, errorMessage, fetching }) => {
+const StateAccessRequest = ({
+  saveAction,
+  cancelAction,
+  errorMessage,
+  fetching
+}) => {
   const [selectedStates, setStates] = useState([
     usStatesDropdownOptions[0].value
   ]);
@@ -16,7 +21,12 @@ const StateAccessRequest = ({ action, errorMessage, fetching }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    action(selectedStates);
+    saveAction(selectedStates);
+  };
+
+  const handleCancel = e => {
+    e.preventDefault();
+    cancelAction();
   };
 
   return (
@@ -32,6 +42,7 @@ const StateAccessRequest = ({ action, errorMessage, fetching }) => {
         working={fetching}
         primaryButtonText={['Submit', 'Submitting']}
         onSave={handleSubmit}
+        onCancel={handleCancel}
       >
         <div className="ds-u-margin-bottom--4">
           <label
@@ -59,7 +70,8 @@ const StateAccessRequest = ({ action, errorMessage, fetching }) => {
 StateAccessRequest.propTypes = {
   errorMessage: PropTypes.bool,
   fetching: PropTypes.bool.isRequired,
-  action: PropTypes.func.isRequired
+  saveAction: PropTypes.func.isRequired,
+  cancelAction: PropTypes.func.isRequired
 };
 
 StateAccessRequest.defaultProps = {
