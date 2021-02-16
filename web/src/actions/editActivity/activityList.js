@@ -9,6 +9,7 @@ import { updateBudget } from '../budget';
 /**
  * Add a new activity to the current APD
  */
+
 export const addActivity = () => (dispatch, getState) => {
   dispatch({
     type: ADD_APD_ITEM,
