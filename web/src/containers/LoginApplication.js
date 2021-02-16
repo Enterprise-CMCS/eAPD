@@ -6,15 +6,16 @@ import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import LoginPageRoutes from './LoginPageRoutes';
 import ConsentBanner from '../components/ConsentBanner';
+import Loading from '../components/Loading';
 
 import { MFA_FACTOR_TYPES } from '../constants';
-import { setConsented, hasConsented } from '../util/auth';
+import { setConsented, hasConsented, getAccessToken } from '../util/auth';
 import {
   mfaConfig,
   mfaAddPhone,
   mfaActivate,
   createAccessRequest,
-  completeAccessToState,
+  completeAccessRequest,
   authCheck,
   login,
   loginOtp,
@@ -39,16 +40,22 @@ const LoginApplication = ({
   loginOtp: otpAction,
   logout: logoutAction
 }) => {
+  const [restoringSession, setRestoringSession] = useState(
+    !authenticated && getAccessToken()
+  );
   const [showConsent, setShowConsent] = useState(!hasConsented());
   const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {
-    if (!authenticated) {
-      const url = authCheckAction();
-      history.push(url);
+    if (!authenticated && getAccessToken()) {
+      setRestoringSession(true);
+      authCheckAction().then(url => {
+        setRestoringSession(false);
+        history.push(url || '/login');
+      });
     }
-  }, [authenticated]);
+  }, []);
 
   let errorMessage = null;
 
@@ -108,6 +115,7 @@ const LoginApplication = ({
   // TODO: test
   const handleCompleteAccessRequest = async () => {
     await completeAccessRequestAction();
+    history.push('/');
   };
 
   // TODO: test
@@ -137,6 +145,14 @@ const LoginApplication = ({
     setShowConsent(false);
     history.push('/login');
   };
+
+  if (restoringSession) {
+    return (
+      <div id="start-main-content">
+        <Loading>Validating your session</Loading>
+      </div>
+    );
+  }
 
   if (showConsent && !hasEverLoggedOn) {
     return <ConsentBanner onAgree={hideConsent} />;
@@ -220,7 +236,7 @@ const mapDispatchToProps = {
   mfaAddPhone,
   mfaActivate,
   createAccessRequest,
-  completeAccessToState,
+  completeAccessRequest,
   authCheck,
   login,
   loginOtp,

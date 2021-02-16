@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Switch,
   Route,
-  Redirect,
   useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
@@ -38,7 +37,7 @@ const LoginPageRoutes = ({
   return (
     <Switch>
       <Route path={path}>
-        <Route path={`${path}`}>
+        <Route exact path={`${path}`}>
           <Login
             hasEverLoggedOn={hasEverLoggedOn}
             errorMessage={errorMessage}
@@ -48,11 +47,11 @@ const LoginPageRoutes = ({
         </Route>
 
         <Route path={`${path}/locked-out`}>
-          <LoginLocked />
+          <LoginLocked onCancel={handleLogout} />
         </Route>
 
         <Route path={`${path}/not-in-group`}>
-          <LoginGroupError />
+          <LoginGroupError onCancel={handleLogout} />
         </Route>
 
         <Route path={`${path}/mfa/enroll`}>
