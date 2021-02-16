@@ -388,7 +388,7 @@ echo "module.exports = {
   }]
 };" > ecosystem.config.js
 # Start it up
-pm2 start ecosystem.config.js
+DEBUG="pm2:*" pm2 start ecosystem.config.js
 
 E_USER
 
