@@ -387,9 +387,6 @@ echo "module.exports = {
     },
   }]
 };" > ecosystem.config.js
-# Start it up
-DEBUG="pm2:*" pm2 start ecosystem.config.js
-
 E_USER
 
 # SELinux context so Nginx can READ the files in /app/web
@@ -402,6 +399,12 @@ systemctl enable nginx
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
+su ec2-user <<E_USER
+# Start it up
+cd /app/api
+DEBUG="pm2:*" pm2 start ecosystem.config.js
+E_USER
+
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart'
