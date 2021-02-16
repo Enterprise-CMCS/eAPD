@@ -48,53 +48,42 @@ user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;
-
 # Load dynamic modules. See /usr/share/nginx/README.dynamic.
 include /usr/share/nginx/modules/*.conf;
-
 events {
     worker_connections 1024;
 }
-
 http {
     log_format  main  '\$remote_addr - \$remote_user [\$time_local] "\$request" '
                       '\$status \$body_bytes_sent "\$http_referer" '
                       '"\$http_user_agent" "\$http_x_forwarded_for"';
-
     access_log  /var/log/nginx/access.log  main;
-
     sendfile            on;
     tcp_nopush          on;
     tcp_nodelay         on;
     keepalive_timeout   65;
     types_hash_max_size 2048;
-
     include             /etc/nginx/mime.types;
     default_type        application/octet-stream;
 
     # Allow larger than normal headers
     client_header_buffer_size 64k;
     large_client_header_buffers 4 64k;
-
     server {
         listen       443 default_server ssl;
         listen       [::]:443 default_server ssl;
         server_name  _;
         root         /app/web;
-
         ssl_certificate     /app/tls/server.crt;
         ssl_certificate_key /app/tls/server.key;
-
         location /api/ {
           proxy_pass http://localhost:8000/;
         }
-
         location / {
           # For requests without a file extension, send the requested path if
           # it exists, otherwise send index.html to achieve push state routing
           try_files \$uri /index.html;
         }
-
         location ~ ^.+\..+\$ {
           # For requests with file extensions, send them if the file exists,
           # otherwise send a 404.
@@ -105,8 +94,6 @@ http {
 NGINXCONFIG
 
 # Configure CloudWatch Agent
-mkdir -p /opt/aws/amazon-cloudwatch-agent/doc/
-touch /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 {
         "agent": {
@@ -174,8 +161,8 @@ cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
         }
 }
 CWAGENTCONFIG
-# Nginx is test/preview only
-touch /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
+
+# Nginx is preview only
 cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 {
   "logs": {
@@ -184,51 +171,51 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
         "collect_list": [
           {
             "file_path": "/var/log/aide/aide.log*",
-            "log_group_name": "test/var/log/aide/aide.log"
+            "log_group_name": "preview/var/log/aide/aide.log"
           },
           {
             "file_path": "/var/log/audit/audit.log*",
-            "log_group_name": "test/var/log/audit/audit.log"
+            "log_group_name": "preview/var/log/audit/audit.log"
           },
           {
             "file_path": "/var/log/awslogs.log*",
-            "log_group_name": "test/var/log/awslogs.log"
+            "log_group_name": "preview/var/log/awslogs.log"
           },
           {
             "file_path": "/var/log/cloud-init.log*",
-            "log_group_name": "test/var/log/cloud-init.log"
+            "log_group_name": "preview/var/log/cloud-init.log"
           },
           {
             "file_path": "/var/log/cloud-init-output.log*",
-            "log_group_name": "test/var/log/cloud-init-output.log"
+            "log_group_name": "preview/var/log/cloud-init-output.log"
           },
           {
             "file_path": "/var/log/cron*",
-            "log_group_name": "test/var/log/cron"
+            "log_group_name": "preview/var/log/cron"
           },
           {
             "file_path": "/var/log/dmesg*",
-            "log_group_name": "test/var/log/dmesg"
+            "log_group_name": "preview/var/log/dmesg"
           },
           {
             "file_path": "/var/log/maillog*",
-            "log_group_name": "test/var/log/maillog"
+            "log_group_name": "preview/var/log/maillog"
           },
           {
             "file_path": "/var/log/messages*",
-            "log_group_name": "test/var/log/messages"
+            "log_group_name": "preview/var/log/messages"
           },
           {
             "file_path": "/var/log/nginx/access_log*",
-            "log_group_name": "test/var/log/nginx/access_log"
+            "log_group_name": "preview/var/log/nginx/access_log"
           },
           {
             "file_path": "/var/log/nginx/error_log*",
-            "log_group_name": "test/var/log/nginx/error_log"
+            "log_group_name": "preview/var/log/nginx/error_log"
           },
           {
             "file_path": "/var/log/secure*",
-            "log_group_name": "test/var/log/secure"
+            "log_group_name": "preview/var/log/secure"
           }
         ]
       }
@@ -236,7 +223,7 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
   }
 }
 CWVARLOGCONFIG
-touch /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
+
 cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 {
   "logs": {
@@ -245,15 +232,15 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
         "collect_list": [
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent.log*",
-            "log_group_name": "test/var/opt/ds_agent/diag/ds_agent.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent-err.log*",
-            "log_group_name": "test/var/opt/ds_agent/diag/ds_agent-err.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent-err.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_am.log*",
-            "log_group_name": "test/var/opt/ds_agent/diag/ds_am.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_am.log"
           }
         ]
       }
@@ -261,7 +248,7 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
   }
 }
 CWVAROPTCONFIG
-touch /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
+
 cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 {
   "logs": {
@@ -270,43 +257,43 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
         "collect_list": [
           {
             "file_path": "/app/api/logs/eAPD-API-error-0.log*",
-            "log_group_name": "test/app/api/logs/eAPD-API-error-0.log"
+            "log_group_name": "preview/app/api/logs/eAPD-API-error-0.log"
           },
           {
             "file_path": "/app/api/logs/eAPD-API-out-0.log*",
-            "log_group_name": "test/app/api/logs/eAPD-API-out-0.log"
+            "log_group_name": "preview/app/api/logs/eAPD-API-out-0.log"
           },
           {
             "file_path": "/app/api/logs/eAPD-API-*",
-            "log_group_name": "test/app/api/logs/eAPD-API-combined-0.log"
+            "log_group_name": "preview/app/api/logs/eAPD-API-combined-0.log"
           },          
           {
             "file_path": "/app/api/logs/Database-migration-error.log*",
-            "log_group_name": "test/app/api/logs/Database-migration-error.log"
+            "log_group_name": "preview/app/api/logs/Database-migration-error.log"
           },
           {
             "file_path": "/app/api/logs/Database-migration-out.log*",
-            "log_group_name": "test/app/api/logs/Database-migration-out.log"
+            "log_group_name": "preview/app/api/logs/Database-migration-out.log"
           },
           {
             "file_path": "/app/api/logs/Database-migration-*",
-            "log_group_name": "test/app/api/logs/Database-migration-combined.log"
+            "log_group_name": "preview/app/api/logs/Database-migration-combined.log"
           },          
           {
             "file_path": "/app/api/logs/Database-seeding-error.log*",
-            "log_group_name": "test/app/api/logs/Database-seeding-error.log"
+            "log_group_name": "preview/app/api/logs/Database-seeding-error.log"
           },
           {
             "file_path": "/app/api/logs/Database-seeding-out.log*",
-            "log_group_name": "test/app/api/logs/Database-seeding-out.log"
+            "log_group_name": "preview/app/api/logs/Database-seeding-out.log"
           },
           {
             "file_path": "/app/api/logs/Database-seeding-*",
-            "log_group_name": "test/app/api/logs/Database-seeding-combined.log"
+            "log_group_name": "preview/app/api/logs/Database-seeding-combined.log"
           },                                           
           {
             "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
-            "log_group_name": "test/app/api/logs/cms-hitech-apd-api.logs"              
+            "log_group_name": "preview/app/api/logs/cms-hitech-apd-api.logs"              
           }    
         ]
       }
@@ -314,24 +301,25 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
   }
 }
 CWAPPLOGCONFIG
+
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
+
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-log.json
+
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
+
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
 su ec2-user <<E_USER
-
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
-
 cd ~
-
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
@@ -340,43 +328,34 @@ touch /app/api/logs/Database-migration-out.log
 touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
-
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
-
 # We're using Node 10, and we don't care about minor/patch versions, so always
 # get the latest.
 nvm install 10
 nvm alias default 10
-
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
-
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
-
 # Build the web app and move it into place
 cd eAPD/web
 npm ci
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
 mv dist/* /app/web
 cd ~
-
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
-
 npm ci --only=production
-
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
 NODE_ENV=development DEV_DB_HOST=localhost npm run seed
-
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace
@@ -404,14 +383,11 @@ echo "module.exports = {
       OKTA_SERVER_ID: '__OKTA_SERVER_ID__',
       OKTA_CLIENT_ID: '__OKTA_CLIENT_ID__',
       OKTA_API_KEY: '__OKTA_API_KEY__'
-
     },
   }]
 };" > ecosystem.config.js
-
 # Start it up
 pm2 start ecosystem.config.js --watch
-
 E_USER
 
 # SELinux context so Nginx can READ the files in /app/web
