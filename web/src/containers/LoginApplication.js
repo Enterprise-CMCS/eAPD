@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import LoginPageRoutes from './LoginPageRoutes';
 import ConsentBanner from '../components/ConsentBanner';
@@ -14,15 +14,16 @@ import {
   mfaAddPhone,
   mfaActivate,
   createAccessRequest,
-  completeAccessRequest,
+  completeAccessToState,
+  authCheck,
   login,
-  loginOtp
+  loginOtp,
+  logout
 } from '../actions/auth';
 
 const LoginApplication = ({
   authenticated,
   hasEverLoggedOn,
-  location,
   error,
   fetching,
   factorsList,
@@ -33,11 +34,21 @@ const LoginApplication = ({
   mfaActivate: mfaActivation,
   createAccessRequest: createAccessRequestAction,
   completeAccessRequest: completeAccessRequestAction,
+  authCheck: authCheckAction,
   login: loginAction,
   loginOtp: otpAction,
-  history
+  logout: logoutAction
 }) => {
   const [showConsent, setShowConsent] = useState(!hasConsented());
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!authenticated) {
+      const url = authCheckAction();
+      history.push(url);
+    }
+  }, [authenticated]);
 
   let errorMessage = null;
 
@@ -107,6 +118,11 @@ const LoginApplication = ({
     }
   };
 
+  const handleLogout = async () => {
+    await logoutAction();
+    history.push('/login');
+  };
+
   // TODO: test
   const handleLoginOtp = async otp => {
     const route = await otpAction(otp);
@@ -149,6 +165,7 @@ const LoginApplication = ({
       handleCompleteAccessRequest={handleCompleteAccessRequest}
       handleLogin={handleLogin}
       handleLoginOtp={handleLoginOtp}
+      handleLogout={handleLogout}
     />
   );
 };
@@ -166,13 +183,10 @@ LoginApplication.propTypes = {
   mfaActivate: PropTypes.func.isRequired,
   createAccessRequest: PropTypes.func.isRequired,
   completeAccessRequest: PropTypes.func.isRequired,
+  authCheck: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
-  history: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.object
-  ]).isRequired
+  logout: PropTypes.func.isRequired
 };
 
 LoginApplication.defaultProps = {
@@ -181,28 +195,24 @@ LoginApplication.defaultProps = {
 };
 
 // TODO: test
-const mapStateToProps = (
-  {
-    auth: {
-      hasEverLoggedOn,
-      authenticated,
-      error,
-      fetching,
-      factorsList,
-      mfaEnrollType,
-      verifyData
-    }
-  },
-  { history }
-) => ({
+const mapStateToProps = ({
+  auth: {
+    hasEverLoggedOn,
+    authenticated,
+    error,
+    fetching,
+    factorsList,
+    mfaEnrollType,
+    verifyData
+  }
+}) => ({
   hasEverLoggedOn,
   authenticated,
   error,
   fetching,
   factorsList,
   mfaEnrollType,
-  verifyData,
-  history
+  verifyData
 });
 
 const mapDispatchToProps = {
@@ -210,13 +220,13 @@ const mapDispatchToProps = {
   mfaAddPhone,
   mfaActivate,
   createAccessRequest,
-  completeAccessRequest,
+  completeAccessToState,
+  authCheck,
   login,
-  loginOtp
+  loginOtp,
+  logout
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(LoginApplication)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginApplication);
 
 export { LoginApplication as plain };

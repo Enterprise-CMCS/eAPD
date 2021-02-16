@@ -1,6 +1,4 @@
 import {
-  AUTH_CHECK_SUCCESS,
-  AUTH_CHECK_FAILURE,
   LOGIN_REQUEST,
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
@@ -13,6 +11,7 @@ import {
   LOGOUT_SUCCESS,
   STATE_ACCESS_REQUIRED,
   STATE_ACCESS_REQUEST,
+  STATE_ACCESS_COMPLETE,
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
@@ -41,20 +40,6 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-    case AUTH_CHECK_SUCCESS:
-      return {
-        ...state,
-        authenticated: true,
-        hasEverLoggedOn: true,
-        initialCheck: true,
-        user: action.data
-      };
-    case AUTH_CHECK_FAILURE:
-      return {
-        ...state,
-        initialCheck: true,
-        authenticated: false
-      };
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -141,6 +126,13 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         fetching: true
+      };
+    case STATE_ACCESS_COMPLETE:
+      return {
+        ...state,
+        requestAccess: false,
+        requestAccessSuccess: false,
+        error: ''
       };
     case LATEST_ACTIVITY:
       return {

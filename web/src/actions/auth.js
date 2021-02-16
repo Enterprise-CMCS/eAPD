@@ -16,10 +16,6 @@ import {
 } from '../util/auth';
 import { MFA_FACTOR_TYPES } from '../constants';
 
-export const AUTH_CHECK_SUCCESS = 'AUTH_CHECK_SUCCESS';
-export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
-
-export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
@@ -33,19 +29,13 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
+export const STATE_ACCESS_COMPLETE = 'STATE_ACCESS_COMPLETE';
 
 export const LATEST_ACTIVITY = 'LATEST_ACTIVITY';
 export const SESSION_ENDING_ALERT = 'SESSION_ENDING_ALERT';
 export const REQUEST_SESSION_RENEWAL = 'REQUEST_SESSION_RENEWAL';
 export const SESSION_RENEWED = 'SESSION_RENEWED';
 export const UPDATE_EXPIRATION = 'UPDATE_EXPIRATION';
-
-export const requestAuthCheck = () => ({ type: AUTH_CHECK_REQUEST });
-export const completeAuthCheck = user => ({
-  type: AUTH_CHECK_SUCCESS,
-  data: user
-});
-export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeFirstStage = () => ({ type: LOGIN_OTP_STAGE });
@@ -68,6 +58,7 @@ export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
+export const completeAccessToState = () => ({ type: STATE_ACCESS_COMPLETE });
 export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
 export const setSessionEnding = () => ({ type: SESSION_ENDING_ALERT });
 export const requestSessionRenewal = () => ({ type: REQUEST_SESSION_RENEWAL });
@@ -87,6 +78,29 @@ const loadData = activities => dispatch => {
   if (activities.includes('view-roles')) {
     dispatch(getRoles());
   }
+};
+
+const setupTokenManager = () => (dispatch, getState) => {
+  setTokenListeners({
+    expiredCallback: async () => {
+      // called when the token is closer to expiring
+      // than what was set in expireEarlySeconds
+      const {
+        auth: { latestActivity }
+      } = getState();
+      if (isUserActive(latestActivity) === true) {
+        // the user is still actively using the system
+        // renew the session for them without asking
+        const expiresAt = await renewTokens();
+        dispatch(updateSessionExpiration(expiresAt));
+      } else {
+        // The user hasn't been active for over 5 minutes
+        // alert them that their session is expiring
+        // and ask them if they want to continue
+        dispatch(setSessionEnding());
+      }
+    }
+  });
 };
 
 const getCurrentUser = () => dispatch =>
@@ -114,30 +128,6 @@ export const logout = () => async dispatch => {
   await axios.post('/logout');
   await logoutAndClearTokens();
   dispatch(completeLogout());
-  return '/login';
-};
-
-const setupTokenManager = () => (dispatch, getState) => {
-  setTokenListeners({
-    expiredCallback: async () => {
-      // called when the token is closer to expiring
-      // than what was set in expireEarlySeconds
-      const {
-        auth: { latestActivity }
-      } = getState();
-      if (isUserActive(latestActivity) === true) {
-        // the user is still actively using the system
-        // renew the session for them without asking
-        const expiresAt = await renewTokens();
-        dispatch(updateSessionExpiration(expiresAt));
-      } else {
-        // The user hasn't been active for over 5 minutes
-        // alert them that their session is expiring
-        // and ask them if they want to continue
-        dispatch(setSessionEnding());
-      }
-    }
-  });
 };
 
 export const extendSession = () => async dispatch => {
@@ -146,6 +136,7 @@ export const extendSession = () => async dispatch => {
   dispatch(updateSessionExpiration(expiresAt));
   dispatch(setLatestActivity());
   dispatch(completeSessionRenewed());
+  return expiresAt;
 };
 
 export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
@@ -179,6 +170,22 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
   dispatch(mfaEnrollAddPhone(mfaSelected));
 };
 
+const authenticationSuccess = sessionToken => async dispatch => {
+  dispatch(setupTokenManager());
+  const expiresAt = await setTokens(sessionToken);
+  dispatch(updateSessionExpiration(expiresAt));
+  return dispatch(getCurrentUser());
+};
+
+export const authCheck = () => async dispatch => {
+  dispatch(setupTokenManager());
+  const expiresAt = await dispatch(extendSession());
+  if (expiresAt) {
+    return dispatch(getCurrentUser());
+  }
+  return '/login';
+};
+
 export const mfaActivate = code => async dispatch => {
   const transaction = await retrieveExistingTransaction();
 
@@ -187,10 +194,7 @@ export const mfaActivate = code => async dispatch => {
   });
 
   if (activateTransaction.status === 'SUCCESS') {
-    const expiresAt = await setTokens(activateTransaction.sessionToken);
-    // dispatch(setupTokenManager());
-    dispatch(updateSessionExpiration(expiresAt));
-    return dispatch(getCurrentUser());
+    return dispatch(authenticationSuccess(activateTransaction.sessionToken));
   }
   return null;
 };
@@ -233,10 +237,7 @@ export const login = (username, password) => dispatch => {
       }
 
       if (res.status === 'SUCCESS') {
-        const expiresAt = await setTokens(res.sessionToken);
-        // dispatch(setupTokenManager());
-        dispatch(updateSessionExpiration(expiresAt));
-        return dispatch(getCurrentUser());
+        return dispatch(authenticationSuccess(res.sessionToken));
       }
       return null;
     })
@@ -252,10 +253,7 @@ export const loginOtp = otp => async dispatch => {
   if (transaction) {
     return verifyMFA({ transaction, otp })
       .then(async ({ sessionToken }) => {
-        const expiresAt = await setTokens(sessionToken);
-        // dispatch(setupTokenManager());
-        dispatch(updateSessionExpiration(expiresAt));
-        return dispatch(getCurrentUser());
+        return dispatch(authenticationSuccess(sessionToken));
       })
       .catch(error => {
         const reason = error ? error.message : 'N/A';
@@ -296,24 +294,4 @@ export const createAccessRequest = states => async dispatch => {
     return null;
   }
   return '/login/affiliations/thank-you';
-};
-
-export const completeAccessRequest = () => async dispatch => {
-  dispatch(getCurrentUser());
-};
-
-export const checkAuth = () => async dispatch => {
-  dispatch(setupTokenManager());
-  dispatch(requestAuthCheck());
-
-  const expiresAt = await renewTokens();
-  dispatch(updateSessionExpiration(expiresAt));
-
-  return axios
-    .get('/me')
-    .then(req => {
-      dispatch(completeAuthCheck(req.data));
-      dispatch(loadData(req.data.activities));
-    })
-    .catch(err => dispatch(failAuthCheck(err)));
 };
