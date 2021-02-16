@@ -5,6 +5,8 @@ Describe the pull request here, including any supplemental information needed to
 - expected change 1
 - expected change 2
 
+### This is how to verify this change...
+
 ### This pull request is ready to merge when...
 
 - [ ] Automated tests have been updated (and all tests are passing)
