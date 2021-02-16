@@ -366,6 +366,7 @@ echo "module.exports = {
     script: 'main.js',
     instances: 1,
     autorestart: true,
+    watch: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
     out_file: '/app/api/logs/eAPD-API-out-0.log',
     env: {
@@ -387,7 +388,8 @@ echo "module.exports = {
   }]
 };" > ecosystem.config.js
 # Start it up
-pm2 start ecosystem.config.js --watch
+pm2 start ecosystem.config.js
+
 E_USER
 
 # SELinux context so Nginx can READ the files in /app/web
