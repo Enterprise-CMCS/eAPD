@@ -43,7 +43,7 @@ function deployPreviewtoEC2() {
   EXISTING_INSTANCES=$(findExistingInstances)
 
   AMI_ID=$(findAMI)
-  print "• Using most recent EAST-RH AMI: $AMI_ID"
+  print "• Using most recent eAPD Plantinum AMI: $AMI_ID"
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
