@@ -352,10 +352,7 @@ cd ~
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
-npm ci --only=production
-# Build and seed the database
-NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
-NODE_ENV=development DEV_DB_HOST=localhost npm run seed
+
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace
@@ -402,6 +399,10 @@ systemctl enable nginx
 su ec2-user <<E_USER
 # Start it up
 cd /app/api
+npm ci --only=production
+# Build and seed the database
+NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
+NODE_ENV=development DEV_DB_HOST=localhost npm run seed
 DEBUG="pm2:*" pm2 start ecosystem.config.js
 E_USER
 
