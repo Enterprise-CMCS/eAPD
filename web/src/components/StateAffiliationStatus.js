@@ -15,10 +15,9 @@ const PendingApproval = ({ mailTo }) => (
       Approval Pending From State Administrator
     </h3>
     <p className="ds-u-margin--0">
-      Please contact&nbsp;
+      Contact the {' '}
       {mailTo && (<a href={`mailto:${mailTo}`}>State Administrator</a>)}
-      {!mailTo && ("State Administrator")}
-      &nbsp;for more information.
+      {' '}for more information.
     </p>
   </div>
 );
