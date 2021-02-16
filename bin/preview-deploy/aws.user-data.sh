@@ -410,7 +410,7 @@ echo "module.exports = {
 };" > ecosystem.config.js
 
 # Start it up
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.js --watch
 
 E_USER
 
