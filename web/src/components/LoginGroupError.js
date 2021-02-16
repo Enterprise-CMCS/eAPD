@@ -1,7 +1,9 @@
 import React from 'react';
+import PropType from 'prop-types';
+import { Button } from '@cmsgov/design-system';
 import { apiUrl } from '../util/api';
 
-const LoginLocked = () => {
+const LoginGroupError = ({ onCancel }) => {
   return (
     <div id="start-main-content">
       <div className="ds-l-container">
@@ -11,12 +13,17 @@ const LoginLocked = () => {
             <span>Job Code Missing</span>
           </h1>
           <p>
-            You don’t have the correct job code to access the eAPD system. The <a href={`${apiUrl}/docs/account-registration`}>account registration guide</a> will help you with instructions on getting the correct job code in your EUA account.
+            You don’t have the correct job code to access the eAPD system. The{' '}
+            <a href={`${apiUrl}/docs/account-registration`}>
+              account registration guide
+            </a>{' '}
+            will help you with instructions on getting the correct job code in
+            your EUA account.
           </p>
           <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
-            <a href="/" className="ds-c-button ds-c-button--transparent">
+            <Button variation="transparent" type="button" onClick={onCancel}>
               Cancel
-            </a>
+            </Button>
           </div>
         </div>
       </div>
@@ -24,4 +31,8 @@ const LoginLocked = () => {
   );
 };
 
-export default LoginLocked;
+LoginGroupError.propTypes = {
+  onCancel: PropType.func.isRequired
+};
+
+export default LoginGroupError;

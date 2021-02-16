@@ -1,7 +1,6 @@
 import auth, { selectIsLoggedIn } from './auth';
 
 import {
-  AUTH_CHECK_FAILURE,
   LOGIN_REQUEST,
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
@@ -45,15 +44,6 @@ describe('auth reducer', () => {
     const result = auth(undefined, {});
     result.latestActivity = null;
     expect(result).toEqual(initialState);
-  });
-
-  it('should handle AUTH_CHECK_FAILURE', () => {
-    expect(auth(initialState, { type: AUTH_CHECK_FAILURE })).toEqual({
-      ...initialState,
-      authenticated: false,
-      initialCheck: true,
-      error: null
-    });
   });
 
   it('should handle LOGIN_REQUEST', () => {

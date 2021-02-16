@@ -125,7 +125,6 @@ const getCurrentUser = () => dispatch =>
 
 export const logout = () => async dispatch => {
   dispatch(requestLogout());
-  await axios.post('/logout');
   await logoutAndClearTokens();
   dispatch(completeLogout());
 };
@@ -185,7 +184,8 @@ export const authCheck = () => async dispatch => {
     dispatch(setLatestActivity());
     return dispatch(getCurrentUser());
   }
-  return dispatch(logout());
+  dispatch(logout());
+  return null;
 };
 
 export const mfaActivate = code => async dispatch => {
@@ -296,4 +296,9 @@ export const createAccessRequest = states => async dispatch => {
     return null;
   }
   return '/login/affiliations/thank-you';
+};
+
+export const completeAccessRequest = () => dispatch => {
+  completeAccessToState();
+  return dispatch(getCurrentUser());
 };

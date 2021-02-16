@@ -73,7 +73,15 @@ exports[`Routes component renders correctly 1`] = `
     path="/edit-account"
   />
   <Route
-    component={[Function]}
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(LoginApplication)",
+        "type": [Function],
+      }
+    }
     isCard={true}
     key="/login"
     path="/login"
