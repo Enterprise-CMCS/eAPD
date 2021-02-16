@@ -7,7 +7,7 @@ Describe the pull request here, including any supplemental information needed to
 
 ### This pull request is ready to merge when...
 
-- [ ] Automated Tests have been updated (and all tests are passing)
+- [ ] Automated tests have been updated (and all tests are passing)
 - [ ] This code has been reviewed by someone other than the original author
 - [ ] Bugs have been created for any issues found by QA beyond minor fixes
 - [ ] The experience passes a basic manual accessibility audit (keyboard nav, screenreader, text scaling) OR an exemption is documented
