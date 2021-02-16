@@ -179,11 +179,13 @@ const authenticationSuccess = sessionToken => async dispatch => {
 
 export const authCheck = () => async dispatch => {
   dispatch(setupTokenManager());
-  const expiresAt = await dispatch(extendSession());
+  const expiresAt = await renewTokens();
   if (expiresAt) {
+    dispatch(updateSessionExpiration(expiresAt));
+    dispatch(setLatestActivity());
     return dispatch(getCurrentUser());
   }
-  return '/login';
+  return dispatch(logout());
 };
 
 export const mfaActivate = code => async dispatch => {

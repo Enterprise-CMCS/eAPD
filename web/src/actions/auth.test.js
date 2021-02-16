@@ -613,13 +613,13 @@ describe('auth actions', () => {
     });
   });
 
-  describe('checkAuth (async)', () => {
+  describe('authCheck (async)', () => {
     afterEach(() => {
       fetchMock.reset();
       jest.clearAllMocks();
     });
 
-    it('creates AUTH_CHECK_SUCCESS after successful auth', async () => {
+    it('reauthenticates a user if their session is still valid', async () => {
       const store = mockStore({});
       fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
       const expiresAt = new Date().getTime() + 5000;
@@ -628,32 +628,27 @@ describe('auth actions', () => {
         .mockImplementation(() => Promise.resolve(expiresAt));
 
       const expectedActions = [
-        { type: actions.AUTH_CHECK_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         {
-          type: actions.AUTH_CHECK_SUCCESS,
+          type: actions.LOGIN_SUCCESS,
           data: { name: 'moop', activities: [] }
         }
       ];
 
-      await store.dispatch(actions.checkAuth());
+      await store.dispatch(actions.authCheck());
       expect(store.getActions()).toEqual(expectedActions);
     });
 
-    it('creates AUTH_CHECK_FAILURE after unsuccessful auth and does not load APDs', () => {
+    it('if the session is expired, redirect the user to login', () => {
       const store = mockStore({});
-      fetchMock.onGet().reply(403);
+      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
       jest
         .spyOn(mockAuth, 'renewTokens')
-        .mockImplementation(() => Promise.resolve(null));
+        .mockImplementation(() => Promise.resolve());
 
-      const expectedActions = [
-        { type: actions.AUTH_CHECK_REQUEST },
-        { type: actions.UPDATE_EXPIRATION, data: null },
-        { type: actions.AUTH_CHECK_FAILURE }
-      ];
+      const expectedActions = [{ type: actions.UPDATE_EXPIRATION, data: null }];
 
-      return store.dispatch(actions.checkAuth()).then(() => {
+      return store.dispatch(actions.authCheck()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
