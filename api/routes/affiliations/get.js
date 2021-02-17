@@ -1,17 +1,28 @@
 const logger = require('../../logger')('affiliations route get');
 const {
   getPopulatedAffiliationsByStateId: gas,
-  getPopulatedAffiliationById: ga
+  getPopulatedAffiliationById: ga,
+  getAffiliations: g
 } = require('../../db');
-const { can } = require('../../middleware');
+const { can, hasRole } = require('../../middleware');
 
 module.exports = (
   app,
   {
     getPopulatedAffiliationsByStateId = gas,
-    getPopulatedAffiliationById = ga
+    getPopulatedAffiliationById = ga,
+    getAffiliations = g
   } = {}
 ) => {
+  app.get(
+    '/states/all/affiliations',
+    hasRole('eAPD Federal Admin'),
+    async (request, response, next) =>
+      await getAffiliations()
+        .then(rows => response.send(rows))
+        .catch(error => next(error))
+  );
+
   app.get(
     '/states/:stateId/affiliations',
     can('view-affiliations'),

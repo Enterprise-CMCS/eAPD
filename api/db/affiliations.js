@@ -85,6 +85,11 @@ const getPopulatedAffiliationsByStateId = async ({ stateId, status }) => {
   );
 };
 
+const getAffiliations = () =>
+  knex('auth_affiliations')
+    .select(selectedColumns)
+    .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id');
+
 const getAffiliationById = ({ stateId, affiliationId }) => {
   return knex('auth_affiliations')
     .select(selectedColumns)
@@ -103,6 +108,7 @@ const getPopulatedAffiliationById = async ({ stateId, affiliationId }) => {
 };
 
 module.exports = {
+  getAffiliations,
   getAffiliationsByStateId,
   getPopulatedAffiliationsByStateId,
   getAffiliationById,

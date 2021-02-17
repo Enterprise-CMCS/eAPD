@@ -16,7 +16,19 @@ describe('Affiliations endpoint | GET', () => {
   beforeAll(() => setupDB(db));
   afterAll(() => teardownDB(db));
 
-  describe('GET /states/:stateId/affiliations', () => {
+  describe('GET /states/all/affiliations', () => {
+    // unauthenticatedTest('get', '/states/all/affiliations');
+    // unauthorizedTest('get', '/states/all/affiliations');
+
+    it('returns 200', async () => {
+      const response = await api.get('/states/all/affiliations');
+      expect(response.status).toEqual(200);
+      // returning 400 because...
+      // seeded user doesn't have appropriate role?
+    });
+  });
+
+  xdescribe('GET /states/:stateId/affiliations', () => {
     unauthenticatedTest('get', '/states/ak/affiliations');
     unauthorizedTest('get', '/states/ak/affiliations');
 
@@ -26,7 +38,7 @@ describe('Affiliations endpoint | GET', () => {
     });
   });
 
-  describe('GET /states/:stateId/affiliations/:id', () => {
+  xdescribe('GET /states/:stateId/affiliations/:id', () => {
     unauthenticatedTest('get', '/states/ak/affiliations/4000');
     unauthorizedTest('get', '/states/ak/affiliations/4000');
 
