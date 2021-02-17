@@ -12,7 +12,7 @@
     "start": "webpack-dev-server --config webpack.config.dev.js",
     "test": "TZ=utc jest --collectCoverage",
     "test-watch": "TZ=utc jest --watch",
-    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
+    "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -179,8 +179,5 @@
         ]
       }
     }
-  },
-  "prettier": {
-    "singleQuote": true
   }
 }

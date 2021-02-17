@@ -103,7 +103,7 @@ describe('Header component', () => {
       role: 'eAPD State Admin',
       state: { id: 'wa', name: 'Washington' },
       username: 'frasiercrane@kacl.com'
-    }
+    };
     const component = setup({
       currentUser,
       canViewStateAdmin: true,

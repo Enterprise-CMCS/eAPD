@@ -21,25 +21,6 @@ const verifyWebToken = async (token, { verifier = verifyJWT } = {}) => {
     });
 };
 
-const getJWTCookie = cookieStr => {
-  // because our image files within the RTE are just img tags
-  // we cannot append our authorization header, but because
-  // we are storing our access token in a cookie, we can read
-  // the access token from there in this instance
-  const re = /;\s*/;
-  const cookies = cookieStr.split(re); // split the cookie string into individual cookies
-  const accessTokenObj = cookies.find(cookie =>
-    cookie.match(/^gov.cms.eapd.api-token/i)
-  ); // find the cookie that stores the access token
-  if (accessTokenObj) {
-    // eslint-disable-next-line no-unused-vars
-    const [key, value] = accessTokenObj.split('='); // get the value
-    const valueObj = JSON.parse(unescape(value)); // the value is an encoded string, convert it to a json object
-    return valueObj.accessToken; // return the access token
-  }
-  return null;
-};
-
 /**
  * Extracts the JWT from the Request Authorization Header.
  * @name jwtExtractor
@@ -58,8 +39,26 @@ const jwtExtractor = req => {
 
   const { url } = req;
   const cookieStr = req.get('Cookie');
-  if (url && url.match(/^\/apds\/(\d+)\/files/i) && cookieStr) {
-    return getJWTCookie(cookieStr);
+  const regex = new RegExp(
+    /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)/i
+  );
+
+  if (url && regex.test(url) && cookieStr) {
+    // because our image files within the RTE are just img tags
+    // we cannot append our authorization header, but because
+    // we are storing our access token in a cookie, we can read
+    // the access token from there in this instance
+    const re = /;\s*/;
+    const cookies = cookieStr.split(re); // split the cookie string into individual cookies
+    const accessTokenObj = cookies.find(cookie =>
+      cookie.match(/^gov.cms.eapd.api-token/i)
+    ); // find the cookie that stores the access token
+    if (accessTokenObj) {
+      // eslint-disable-next-line no-unused-vars
+      const [key, value] = accessTokenObj.split('='); // get the value
+      const valueObj = JSON.parse(unescape(value)); // the value is an encoded string, convert it to a json object
+      return valueObj.accessToken; // return the access token
+    }
   }
   return null;
 };
