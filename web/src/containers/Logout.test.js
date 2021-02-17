@@ -1,17 +1,15 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
+import { renderWithConnection } from 'apd-testing-library';
 
 import { plain as Logout, mapDispatchToProps } from './Logout';
 import { logout } from '../actions/auth';
 
 describe('logout component', () => {
   test('calls the logout property and renders nothing', () => {
-    const props = { logout: sinon.spy() };
-    const component = shallow(<Logout {...props} />);
+    const props = { logout: jest.fn() };
+    renderWithConnection(<Logout {...props} />);
 
-    expect(component).toMatchSnapshot();
-    expect(props.logout.calledOnce).toEqual(true);
+    expect(props.logout).toHaveBeenCalled();
   });
 
   test('maps dispatch to props', () => {

@@ -34,7 +34,7 @@ describe('LoginPageRoutes', () => {
     const { queryByRole } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login' }
+        initialHistory: ['/login']
       }
     );
     expect(queryByRole('heading', { name: /Log in/i })).toBeTruthy();
@@ -45,7 +45,7 @@ describe('LoginPageRoutes', () => {
     const { queryByRole } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/locked-out' }
+        initialHistory: ['/login/locked-out']
       }
     );
     expect(queryByRole('heading', { name: /Account Locked/i })).toBeTruthy();
@@ -56,7 +56,7 @@ describe('LoginPageRoutes', () => {
     const { queryByText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/mfa/enroll' }
+        initialHistory: ['/login/mfa/enroll']
       }
     );
     expect(
@@ -69,7 +69,7 @@ describe('LoginPageRoutes', () => {
     const { queryByText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/mfa/configure-phone' }
+        initialHistory: ['/login/mfa/configure-phone']
       }
     );
     expect(queryByText(/Please enter your phone number/i)).toBeTruthy();
@@ -80,7 +80,7 @@ describe('LoginPageRoutes', () => {
     const { queryByText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/mfa/configure-app' }
+        initialHistory: ['/login/mfa/configure-app']
       }
     );
     expect(queryByText(/Configure Multi-Factor Authentication/i)).toBeTruthy();
@@ -91,7 +91,7 @@ describe('LoginPageRoutes', () => {
     const { queryByText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/mfa/activate' }
+        initialHistory: ['/login/mfa/activate']
       }
     );
     expect(queryByText(/Enter the verification code /i)).toBeTruthy();
@@ -102,7 +102,7 @@ describe('LoginPageRoutes', () => {
     const { queryByText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/mfa/verify' }
+        initialHistory: ['/login/mfa/verify']
       }
     );
     expect(queryByText(/Enter the verification code /i)).toBeTruthy();
@@ -113,7 +113,7 @@ describe('LoginPageRoutes', () => {
     const { queryByText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/affiliations/request' }
+        initialHistory: ['/login/affiliations/request']
       }
     );
     expect(queryByText(/Select your State Affiliation/i)).toBeTruthy();
@@ -124,7 +124,7 @@ describe('LoginPageRoutes', () => {
     const { queryByText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/affiliations/request' }
+        initialHistory: ['/login/affiliations/request']
       }
     );
     expect(queryByText(/Select your State Affiliation/i)).toBeTruthy();
@@ -135,7 +135,7 @@ describe('LoginPageRoutes', () => {
     const { queryByText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
-        initialHistory: { to: '/login/affiliations/thank-you' }
+        initialHistory: ['/login/affiliations/thank-you']
       }
     );
     expect(
