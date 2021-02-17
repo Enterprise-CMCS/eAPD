@@ -125,6 +125,7 @@ function addEcosystemToUserData() {
       script: 'main.js',
       instances: 1,
       autorestart: true,
+      watch: true,
       error_file: '/app/api/logs/eAPD-API-error-0.log',
       out_file: '/app/api/logs/eAPD-API-out-0.log',
       env: {
@@ -217,6 +218,7 @@ function createNewInstance() {
     --ebs-optimized \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT}]" \
     --user-data file://aws.user-data.sh \
+    --key-name eapd_bbrooks \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
