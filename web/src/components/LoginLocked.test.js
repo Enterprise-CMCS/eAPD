@@ -25,7 +25,9 @@ describe('<LoginLocked />', () => {
     const { getByText } = renderUtils;
     expect(
       getByText((content, node) => {
-        const hasText = () => node.textContent === 'Contact CMS-EAPD@cms.hhs.gov for an account reset.';
+        const hasText = () =>
+          node.textContent ===
+          'Contact CMS-EAPD@cms.hhs.gov for an account reset.';
         const nodeHasText = hasText(node);
         return nodeHasText;
       })
