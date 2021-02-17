@@ -56,7 +56,8 @@ export const setActivityName = (index, name) => (dispatch, getState) => {
   });
   dispatch({
     type: APD_ACTIVITIES_CHANGE,
-    activities: getState().apd.data.activities
+    activities: getState().apd.data.activities,
+    url: `/apd/activity/${index}/overview`
   });
 };
 

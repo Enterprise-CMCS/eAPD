@@ -68,10 +68,10 @@ describe('APD activity edit actions for overview section', () => {
   });
 
   it('dispatches correct actions when setting an activity name', () => {
-    store.dispatch(setActivityName(53, 'new name'));
+    store.dispatch(setActivityName(53, 'new name', 'apd/activity/53/overview'));
     expect(store.getActions()).toEqual([
       { type: EDIT_APD, path: '/activities/53/name', value: 'new name' },
-      { type: APD_ACTIVITIES_CHANGE, activities: [] }
+      { type: APD_ACTIVITIES_CHANGE, activities: [], url: '/apd/activity/53/overview' }
     ]);
   });
 
