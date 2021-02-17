@@ -15,9 +15,7 @@ const Logout = ({ authenticated, logout }) => {
   }, []);
 
   useEffect(() => {
-    console.log('authenticated changed', authenticated);
     if (!authenticated) {
-      console.log('authenticated is null, redirecting');
       history.push('/login');
     }
   }, [authenticated]);

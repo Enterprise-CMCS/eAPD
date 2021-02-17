@@ -621,7 +621,11 @@ describe('auth actions', () => {
 
     it('reauthenticates a user if their session is still valid', async () => {
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        activities: ['something'],
+        states: ['mo']
+      });
       const expiresAt = new Date().getTime() + 5000;
       jest
         .spyOn(mockAuth, 'renewTokens')
@@ -629,9 +633,10 @@ describe('auth actions', () => {
 
       const expectedActions = [
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.LATEST_ACTIVITY },
         {
           type: actions.LOGIN_SUCCESS,
-          data: { name: 'moop', activities: [] }
+          data: { name: 'moop', activities: ['something'], states: ['mo'] }
         }
       ];
 
@@ -641,12 +646,17 @@ describe('auth actions', () => {
 
     it('if the session is expired, redirect the user to login', () => {
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(200, { name: 'moop', activities: [] });
       jest
         .spyOn(mockAuth, 'renewTokens')
+        .mockImplementation(() => Promise.resolve(null));
+      jest
+        .spyOn(mockAuth, 'logoutAndClearTokens')
         .mockImplementation(() => Promise.resolve());
 
-      const expectedActions = [{ type: actions.UPDATE_EXPIRATION, data: null }];
+      const expectedActions = [
+        { type: actions.LOGOUT_REQUEST },
+        { type: actions.LOGOUT_SUCCESS }
+      ];
 
       return store.dispatch(actions.authCheck()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);

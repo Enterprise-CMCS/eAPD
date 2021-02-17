@@ -36,6 +36,6 @@ describe('<LoginLocked />', () => {
 
   test('cancel button renders', () => {
     const { getByRole } = renderUtils;
-    expect(getByRole('link', { name: 'Cancel' })).toBeTruthy();
+    expect(getByRole('button', { name: 'Cancel' })).toBeTruthy();
   });
 });

@@ -50,9 +50,8 @@ const LoginApplication = ({
   useEffect(() => {
     if (!authenticated && getAccessToken()) {
       setRestoringSession(true);
-      authCheckAction().then(url => {
+      authCheckAction().then(() => {
         setRestoringSession(false);
-        history.push(url || '/login');
       });
     }
   }, []);
