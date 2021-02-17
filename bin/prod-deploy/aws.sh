@@ -125,7 +125,6 @@ function addEcosystemToUserData() {
       script: 'main.js',
       instances: 1,
       autorestart: true,
-      watch: true,
       error_file: '/app/api/logs/eAPD-API-error-0.log',
       out_file: '/app/api/logs/eAPD-API-out-0.log',
       env: {
