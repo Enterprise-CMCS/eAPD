@@ -16,7 +16,7 @@ const sanitizeUser = user => ({
   permissions: user.permissions,
   phone: user.primaryPhone,
   role: user.role,
-  roles: user.auth_roles,
+  roles: user.roles,
   state: user.state,
   states: user.states,
   username: user.login
@@ -77,6 +77,8 @@ const populateUser = async (
       (await getStateById(affiliation.state_id));
     populatedUser.role = role && role.name;
     populatedUser.activities = (role && role.activities) || [];
+    populatedUser.roles = roles.map(r => r.name);
+    logger.debug({ uid: user.id, roles: populatedUser.roles });
 
     return populatedUser;
   }

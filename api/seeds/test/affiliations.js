@@ -2,7 +2,7 @@ const { roles } = require('./roles');
 const { states } = require('../../util/states');
 
 // affiliate 'all-permissions' user with all states
-const { id: adminRoleId } = roles.find(role => role.name === 'eAPD Admin');
+const { id: adminRoleId } = roles.find(role => role.name === 'eAPD Federal Admin');
 const adminAffiliations = states
   .filter(state => state.id !== 'ak')
   .map(state => ({

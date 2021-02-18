@@ -5,11 +5,12 @@ const logger = require('../logger')('hasRole middleware');
  * role. Returns '400 Bad Request' status and breaks the middleware function
  * chain if the user does not have the provided role.
  *
- * @param {string} role The role to check for
+ * @param {string} role The role name to check
  * @returns {function} middleware function
  */
 const hasRole = role => (request, response, next) => {
-  const { roles = [] } = request.user;
+  const { user = {} } = request;
+  const { roles = [] } = user;
   logger.debug({ id: request.id, roles, role });
   if (!roles.includes(role)) {
     response.status(400).end();

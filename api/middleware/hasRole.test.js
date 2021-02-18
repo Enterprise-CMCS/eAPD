@@ -10,7 +10,7 @@ let response;
 let next;
 
 let user = {
-  roles: ['eAPD Federal Admin']
+  roles: [{ id: 3000, name: 'eAPD Federal Admin' }]
 }
 
 tap.test('hasRole middleware', async t => {

@@ -8,16 +8,15 @@ const { LOG_CONSOLE, LOG_FILE, LOG_LEVEL } = process.env;
 const formats = [
   winston.format.timestamp(),
   winston.format.errors({ stack: true }),
-  winston.format.json()
+  winston.format.json(),
+  winston.format.prettyPrint()
 ];
 
 // https://github.com/winstonjs/winston/blob/master/docs/transports.md
+const filename = `/app/api/logs/${packageName}.log`;
 const transports = [
   LOG_CONSOLE === 'true' && new winston.transports.Console(),
-  LOG_FILE === 'true' &&
-    new winston.transports.File({
-      filename: `/app/api/logs/${packageName}.log`
-    }),
+  LOG_FILE === 'true' && new winston.transports.File({ filename }),
   new winston.transports.Stream({ stream: fs.createWriteStream('/dev/null') })
   // new AwsCloudWatch(options);
 ].filter(Boolean);
