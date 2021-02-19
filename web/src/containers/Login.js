@@ -53,7 +53,7 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
           title="Password"
           value={password}
           onChange={changePassword}
-          errorMessage={errorMessage}
+          errorMessage={typeof errorMessage === 'string' ? errorMessage : null}
           customErrorMessage={errorMessage ? 'Invalid Entry' : null}
         />
       </LoginForm>
@@ -63,7 +63,7 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
 
 Login.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired
 };

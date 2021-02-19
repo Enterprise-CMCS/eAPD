@@ -1,18 +1,20 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+import { renderWithConnection, waitFor } from 'apd-testing-library';
 
-import { plain as Logout, mapDispatchToProps } from './Logout';
-import { logout } from '../actions/auth';
+import Logout from './Logout';
 
 describe('logout component', () => {
-  test('calls the logout property and renders nothing', () => {
-    const props = { logout: jest.fn() };
-    renderWithConnection(<Logout {...props} />);
+  test('calls the logout property and renders nothing', async () => {
+    const props = {
+      logout: jest.fn()
+    };
+    const { history, store } = renderWithConnection(<Logout {...props} />, {
+      initialState: { auth: { authenticated: true } }
+    });
 
-    expect(props.logout).toHaveBeenCalled();
-  });
-
-  test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ logout });
+    await waitFor(() => {
+      expect(store.getState().auth.authenticated).toBeFalsy();
+    });
+    expect(history.location.pathname).toEqual('/login');
   });
 });

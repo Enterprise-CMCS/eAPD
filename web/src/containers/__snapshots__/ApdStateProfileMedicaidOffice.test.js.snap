@@ -9,6 +9,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       Medicaid director
     </legend>
     <TextField
+      errorPlacement="top"
       label="Name"
       name="apd-state-profile-mdname"
       onChange={[Function]}
@@ -16,6 +17,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       value="name"
     />
     <TextField
+      errorPlacement="top"
       label="Email address"
       name="apd-state-profile-mdemail"
       onChange={[Function]}
@@ -23,6 +25,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       value="email"
     />
     <TextField
+      errorPlacement="top"
       label="Phone number"
       name="apd-state-profile-mdphone"
       onChange={[Function]}
@@ -37,6 +40,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       Medicaid office
     </legend>
     <TextField
+      errorPlacement="top"
       label="Address"
       name="apd-state-profile-addr1"
       onChange={[Function]}
@@ -44,6 +48,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       value="address 1"
     />
     <TextField
+      errorPlacement="top"
       hint="Optional"
       label="Address continued"
       name="apd-state-profile-addr2"
@@ -56,6 +61,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
     >
       <TextField
         className="ds-l-col--6"
+        errorPlacement="top"
         label="City"
         name="apd-state-profile-city"
         onChange={[Function]}
@@ -66,6 +72,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
         className="ds-u-clearfix ds-l-col--6"
       >
         <Dropdown
+          errorPlacement="top"
           id="apd-state-profile-state"
           label="State"
           name="apd-state-profile-state"
@@ -303,6 +310,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       </div>
     </div>
     <TextField
+      errorPlacement="top"
       label="ZIP Code"
       mask="zip"
       name="apd-state-profile-zip"

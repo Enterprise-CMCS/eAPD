@@ -8,7 +8,7 @@ let renderUtils;
 describe('<StateAccessRequest />', () => {
   beforeEach(() => {
     props = {
-      errorMessage: false,
+      errorMessage: null,
       saveAction: jest.fn(),
       cancelAction: jest.fn(),
       fetching: false

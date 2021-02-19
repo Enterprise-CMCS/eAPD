@@ -58,7 +58,7 @@ const StateAccessRequest = ({
             name="states"
             options={usStatesDropdownOptions}
             size="medium"
-            value={selectedStates}
+            value={selectedStates[0]}
             onChange={changeStates}
           />
         </div>
@@ -68,7 +68,7 @@ const StateAccessRequest = ({
 };
 
 StateAccessRequest.propTypes = {
-  errorMessage: PropTypes.bool,
+  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
   saveAction: PropTypes.func.isRequired,
   cancelAction: PropTypes.func.isRequired

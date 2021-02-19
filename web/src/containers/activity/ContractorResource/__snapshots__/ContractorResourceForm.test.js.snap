@@ -4,6 +4,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
 <Fragment>
   <TextField
     autoFocus={true}
+    errorPlacement="top"
     label="Contractor Name"
     name="contractor-name"
     onChange={[Function]}
@@ -174,6 +175,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
 <Fragment>
   <TextField
     autoFocus={true}
+    errorPlacement="top"
     label="Contractor Name"
     name="contractor-name"
     onChange={[Function]}

@@ -48,7 +48,10 @@ describe('<ManageUserTable />', () => {
   test('shows loading when data is fetching', () => {
     props = {
       tab: 'active',
-      isFetching: true
+      isFetching: true,
+      affiliations: [],
+      actions: [],
+      currentUser: { id: '123' }
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 
@@ -60,7 +63,9 @@ describe('<ManageUserTable />', () => {
     props = {
       tab: 'pending',
       affiliations: [requestedAffiliation],
-      isFetching: false
+      isFetching: false,
+      actions: [],
+      currentUser: { id: '123' }
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 
@@ -75,7 +80,9 @@ describe('<ManageUserTable />', () => {
     props = {
       tab: 'active',
       affiliations: [approvedAffiliation],
-      isFetching: false
+      isFetching: false,
+      actions: [],
+      currentUser: { id: '123' }
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 
@@ -108,7 +115,9 @@ describe('<ManageUserTable />', () => {
     props = {
       tab: 'inactive',
       affiliations: [deniedAffiliation],
-      isFetching: false
+      isFetching: false,
+      actions: [],
+      currentUser: { id: '123' }
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 
@@ -124,7 +133,9 @@ describe('<ManageUserTable />', () => {
     props = {
       tab: 'pending',
       affiliations: [requestedAffiliation],
-      isFetching: false
+      isFetching: false,
+      actions: [],
+      currentUser: { id: '123' }
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 
@@ -138,7 +149,9 @@ describe('<ManageUserTable />', () => {
     props = {
       tab: 'active',
       affiliations: [approvedAffiliation],
-      isFetching: false
+      isFetching: false,
+      actions: [],
+      currentUser: { id: '123' }
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 
@@ -153,7 +166,9 @@ describe('<ManageUserTable />', () => {
     props = {
       tab: 'inactive',
       affiliations: [deniedAffiliation],
-      isFetching: false
+      isFetching: false,
+      actions: [],
+      currentUser: { id: '123' }
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 
@@ -173,7 +188,8 @@ describe('<ManageUserTable />', () => {
         <button type="button" key="action1">
           Take Action
         </button>
-      ]
+      ],
+      currentUser: { id: '123' }
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);
 

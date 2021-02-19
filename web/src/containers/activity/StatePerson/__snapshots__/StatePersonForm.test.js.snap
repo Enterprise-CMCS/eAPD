@@ -11,6 +11,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
   </h6>
   <TextField
     autoFocus={true}
+    errorPlacement="top"
     label="Personnel title"
     name="title"
     onChange={[Function]}

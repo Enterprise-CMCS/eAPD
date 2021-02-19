@@ -1038,11 +1038,11 @@ describe('auth actions', () => {
         .onGet('/me')
         .reply(200, { name: 'moop', activities: [], states: [] });
     });
-    xit('should handle creating a state affiliation', async () => {
+    it('should handle creating a state affiliation', async () => {
       fetchMock.onPost('/states/fl/affiliations').reply(200);
 
       const store = mockStore({});
-      const expectedActions = [];
+      const expectedActions = [{ type: actions.STATE_ACCESS_REQUEST }];
       const response = await store.dispatch(
         actions.createAccessRequest(['fl'])
       );
@@ -1050,13 +1050,13 @@ describe('auth actions', () => {
       expect(response).toEqual('/login/affiliations/thank-you');
     });
 
-    xit('should handle creating multiple state affiliations', async () => {
+    it('should handle creating multiple state affiliations', async () => {
       fetchMock.onPost('/states/fl/affiliations').reply(200);
       fetchMock.onPost('/states/md/affiliations').reply(200);
       fetchMock.onPost('/states/az/affiliations').reply(200);
 
       const store = mockStore({});
-      const expectedActions = [];
+      const expectedActions = [{ type: actions.STATE_ACCESS_REQUEST }];
       const response = await store.dispatch(
         actions.createAccessRequest(['fl', 'md', 'az'])
       );
@@ -1107,6 +1107,34 @@ describe('auth actions', () => {
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toBeNull();
+    });
+  });
+
+  describe('completeAccessRequest', () => {
+    beforeEach(() => {
+      fetchMock.reset();
+      jest.clearAllMocks();
+
+      fetchMock.onGet('/me').reply(200, {
+        name: 'moop',
+        activities: ['something'],
+        states: ['mo']
+      });
+    });
+    it('should complete the state access request', async () => {
+      const store = mockStore({});
+      const expectedActions = [
+        {
+          type: actions.LOGIN_SUCCESS,
+          data: {
+            name: 'moop',
+            activities: ['something'],
+            states: ['mo']
+          }
+        }
+      ];
+      await store.dispatch(actions.completeAccessRequest());
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });
