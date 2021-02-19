@@ -16,6 +16,7 @@ module.exports = (
 ) => {
   app.get(
     '/states/all/affiliations',
+    can('view-affiliations'),
     hasRole('eAPD Federal Admin'),
     async (request, response, next) =>
       await getAffiliations()

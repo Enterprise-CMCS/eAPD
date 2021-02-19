@@ -18,6 +18,16 @@ describe('Affiliations endpoint | PATCH', () => {
 
   ['approved', 'denied', 'revoked'].forEach(status => {
     it(`returns 200, when an affiliation is ${status}`, async () => {
+      const response = await api.patch('/states/all/affiliations/4000', {
+        status,
+        roleId: 1106
+      });
+      expect(response.status).toEqual(200);
+    });
+  });
+
+  ['approved', 'denied', 'revoked'].forEach(status => {
+    it(`returns 200, when an affiliation is ${status}`, async () => {
       const response = await api.patch('/states/ak/affiliations/4000', {
         status,
         roleId: 1106

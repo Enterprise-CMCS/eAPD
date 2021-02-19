@@ -19,7 +19,43 @@ const statusToAction = status => {
   }
 };
 
+const updateAffiliation = ({ id, roleId, status, userId }) =>
+  db('auth_affiliations')
+    .where({ id })
+    .returning('*')
+    .update({
+      role_id: status !== 'approved' ? null : roleId,
+      status,
+      updated_by: userId
+    });
+
 module.exports = (app, { db = knex } = {}) => {
+  app.patch(
+    '/states/all/affiliations/:id',
+    can('edit-affiliations'),
+    hasRole('eAPD Federal Admin'),
+    async (request, response, next) => {
+      const userId = request.user.id;
+      const { id } = request.params;
+      const { status, roleId } = request.body;
+      const audit = auditor(statusToAction(status), request);
+
+      await updateAffiliation({ id, roleId, status, userId })
+        .then(rows => rows[0])
+        .then(row =>
+          audit.target({
+            userId: row.user_id,
+            stateId: row.state_id,
+            roleId: row.role_id,
+            status: row.status
+          })
+        )
+        .then(() => audit.log())
+        .then(() => response.status(200).end())
+        .catch(() => response.status(400).end());
+
+    });
+
   app.patch(
     '/states/:stateId/affiliations/:id',
     can('edit-affiliations'),
