@@ -29,7 +29,6 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
-export const STATE_ACCESS_COMPLETE = 'STATE_ACCESS_COMPLETE';
 
 export const LATEST_ACTIVITY = 'LATEST_ACTIVITY';
 export const SESSION_ENDING_ALERT = 'SESSION_ENDING_ALERT';
@@ -58,7 +57,6 @@ export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
-export const completeAccessToState = () => ({ type: STATE_ACCESS_COMPLETE });
 export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
 export const setSessionEnding = () => ({ type: SESSION_ENDING_ALERT });
 export const requestSessionRenewal = () => ({ type: REQUEST_SESSION_RENEWAL });
@@ -299,6 +297,5 @@ export const createAccessRequest = states => async dispatch => {
 };
 
 export const completeAccessRequest = () => dispatch => {
-  completeAccessToState();
   return dispatch(getCurrentUser());
 };

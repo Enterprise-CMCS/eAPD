@@ -7,7 +7,9 @@ let renderUtils;
 
 describe('<LoginLocked />', () => {
   beforeEach(() => {
-    props = {};
+    props = {
+      onCancel: jest.fn()
+    };
     renderUtils = renderWithConnection(<LoginLocked {...props} />);
   });
 

@@ -25,12 +25,8 @@ const renderWithConnection = (ui, renderOptions = {}) => {
     initialHistory = ['/'],
     history = createMemoryHistory({ initialEntries: initialHistory }),
     initialState = undefined,
-    middleware = [thunk, routerMiddleware(history)],
-    store = createStore(
-      reducer(history),
-      initialState,
-      applyMiddleware(...middleware)
-    ),
+    enhancer = applyMiddleware(routerMiddleware(history), thunk),
+    store = createStore(reducer(history), initialState, enhancer),
     ...options
   } = renderOptions;
   const wrappedNode = rtlRender(

@@ -104,8 +104,6 @@ const LoginPageRoutes = ({
         <Route path={`${path}/affiliations/thank-you`}>
           <StateAccessRequestConfirmation
             action={handleCompleteAccessRequest}
-            errorMessage={errorMessage}
-            fetching={fetching}
           />
         </Route>
       </Route>
@@ -119,7 +117,7 @@ LoginPageRoutes.propTypes = {
   fetching: PropTypes.bool.isRequired,
   factorsList: PropTypes.arrayOf(PropTypes.object).isRequired,
   verifyData: PropTypes.object.isRequired,
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   handleFactorSelection: PropTypes.func.isRequired,
   handlePhoneSubmit: PropTypes.func.isRequired,
   handleVerificationCode: PropTypes.func.isRequired,

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-
 import { Button, Tabs, TabPanel } from '@cmsgov/design-system';
 
 import {
@@ -127,6 +126,7 @@ const StateAdmin = ({
           <ManageUserTable
             tab="pending"
             affiliations={affiliations}
+            currentUser={currentUser}
             updateAffiliation={updateAffiliation}
             isFetching={isFetching}
             actions={[

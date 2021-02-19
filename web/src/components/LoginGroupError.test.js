@@ -7,7 +7,9 @@ let renderUtils;
 
 describe('<LoginGroupError />', () => {
   beforeEach(() => {
-    props = {};
+    props = {
+      onCancel: jest.fn()
+    };
     renderUtils = renderWithConnection(<LoginGroupError {...props} />);
   });
 

@@ -54,7 +54,7 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
 };
 
 LoginMFA.propTypes = {
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired,
   hasEverLoggedOn: PropTypes.bool.isRequired

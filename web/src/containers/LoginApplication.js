@@ -138,11 +138,9 @@ const LoginApplication = ({
     }
   };
 
-  // TODO: test
   const hideConsent = () => {
     setConsented();
     setShowConsent(false);
-    history.push('/login');
   };
 
   if (restoringSession) {

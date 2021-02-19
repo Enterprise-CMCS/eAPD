@@ -25,7 +25,8 @@ const props = {
   handleCreateAccessRequest: jest.fn(),
   handleCompleteAccessRequest: jest.fn(),
   handleLogin: jest.fn(),
-  handleLoginOtp: jest.fn()
+  handleLoginOtp: jest.fn(),
+  handleLogout: jest.fn()
 };
 
 describe('LoginPageRoutes', () => {

@@ -11,7 +11,6 @@ import {
   LOGOUT_SUCCESS,
   STATE_ACCESS_REQUIRED,
   STATE_ACCESS_REQUEST,
-  STATE_ACCESS_COMPLETE,
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
@@ -126,13 +125,6 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         fetching: true
-      };
-    case STATE_ACCESS_COMPLETE:
-      return {
-        ...state,
-        requestAccess: false,
-        requestAccessSuccess: false,
-        error: ''
       };
     case LATEST_ACTIVITY:
       return {
