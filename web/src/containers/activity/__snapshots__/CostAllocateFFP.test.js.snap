@@ -23,7 +23,22 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       <CostAllocationRows
         activityIndex={0}
         ffy="1990"
-        otherFunding={null}
+        otherFunding={
+          Object {
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2021": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          }
+        }
         years={
           Object {
             "1990": Object {
@@ -203,6 +218,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       source="activities.costAllocate.ffp.federalStateSplitInstruction"
     />
     <Dropdown
+      errorPlacement="top"
       label="federal-state split"
       labelClassName="sr-only"
       name="ffp-1990"
@@ -304,7 +320,22 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       <CostAllocationRows
         activityIndex={0}
         ffy="1991"
-        otherFunding={null}
+        otherFunding={
+          Object {
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2021": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          }
+        }
         years={
           Object {
             "1990": Object {
@@ -484,6 +515,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       source="activities.costAllocate.ffp.federalStateSplitInstruction"
     />
     <Dropdown
+      errorPlacement="top"
       label="federal-state split"
       labelClassName="sr-only"
       name="ffp-1991"
@@ -739,7 +771,22 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
       <CostAllocationRows
         activityIndex={0}
         ffy="1990"
-        otherFunding={null}
+        otherFunding={
+          Object {
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2021": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          }
+        }
         years={
           Object {
             "1990": Object {
@@ -929,7 +976,22 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
       <CostAllocationRows
         activityIndex={0}
         ffy="1991"
-        otherFunding={null}
+        otherFunding={
+          Object {
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2021": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          }
+        }
         years={
           Object {
             "1990": Object {

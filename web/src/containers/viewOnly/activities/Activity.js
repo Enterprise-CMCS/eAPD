@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Dollars from '../../../components/Dollars';
 
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
@@ -10,21 +11,21 @@ const isYear = value => !!value.match(/^[0-9]{4}$/);
 const Activity = ({ activity, activityIndex }) => {
   const buildOutcome = outcome => {
     return (
-      <Fragment>
+      <Fragment key={uuidv4()}>
         <p className="ds-u-margin-top--2">
           <strong>Outcome: </strong>{' '}
           {outcome.outcome || 'Outcome not specified'}
         </p>
-        <p className="ds-u-margin-top--2">
+        <div className="ds-u-margin-top--2">
           <ul className="ds-c-list--bare">
             <strong>Metrics: </strong>
-            {outcome.metrics.map(({ key, metric }, index) => (
-              <li key={key} className="ds-u-margin-bottom--2">
+            {outcome.metrics.map(({ metric }, index) => (
+              <li key={uuidv4()} className="ds-u-margin-bottom--2">
                 {index + 1}. {metric || 'Metric not specified'}
               </li>
             ))}
           </ul>
-        </p>
+        </div>
         <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       </Fragment>
     );
@@ -32,7 +33,7 @@ const Activity = ({ activity, activityIndex }) => {
 
   const buildMilestone = (milestone, index) => {
     return (
-      <Fragment>
+      <Fragment key={uuidv4()}>
         <p>
           <strong>
             {index + 1}. {milestone.milestone || 'Milestone not specified'}
@@ -48,7 +49,7 @@ const Activity = ({ activity, activityIndex }) => {
 
   const buildPerson = (person, index) => {
     return (
-      <Fragment>
+      <Fragment key={uuidv4()}>
         <p>
           <strong>
             {index + 1}. {person.title || 'Personnel title not specified'}
@@ -70,7 +71,7 @@ const Activity = ({ activity, activityIndex }) => {
 
   const buildExpense = (expense, index) => {
     return (
-      <Fragment>
+      <Fragment key={uuidv4()}>
         <p>
           <strong>
             {index + 1}. {expense.category}
@@ -99,7 +100,7 @@ const Activity = ({ activity, activityIndex }) => {
     };
 
     return (
-      <Fragment>
+      <Fragment key={uuidv4()}>
         <p className="ds-u-margin-bottom--0">
           <strong>
             {index + 1}. {contractor.name || 'Contractor name not specified'}
@@ -120,7 +121,7 @@ const Activity = ({ activity, activityIndex }) => {
             <li key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
               {contractor.hourly.useHourly === true && (
-                <Fragment>
+                <Fragment key={uuidv4()}>
                   <p>Number of hours: {contractor.hourly.data[year].hours}</p>
                   <p>
                     Hourly rate:{' '}
@@ -137,7 +138,7 @@ const Activity = ({ activity, activityIndex }) => {
 
   /* eslint-disable react/no-danger */
   return (
-    <Fragment>
+    <Fragment key={uuidv4()}>
       <hr className="section-rule" />
       <h2>
         Activity {activityIndex + 1} ({activity.name})
@@ -273,7 +274,7 @@ const Activity = ({ activity, activityIndex }) => {
       {Object.entries(activity.costAllocationNarrative)
         .filter(([year, _]) => isYear(year)) // eslint-disable-line no-unused-vars
         .map(([year, narrative]) => (
-          <Fragment>
+          <Fragment key={uuidv4()}>
             <h3>FFY {year}</h3>
             <h4>Other Funding Description</h4>
             <div
@@ -312,7 +313,7 @@ const Activity = ({ activity, activityIndex }) => {
 };
 
 Activity.propTypes = {
-  activity: PropTypes.array.isRequired,
+  activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired
 };
 

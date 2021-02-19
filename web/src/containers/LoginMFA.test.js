@@ -7,7 +7,8 @@ let renderUtils;
 describe('<LoginMFA />', () => {
   beforeEach(() => {
     props = {
-      errorMessage: true,
+      errorMessage: null,
+      hasEverLoggedOn: true,
       fetching: false,
       mfaType: 'email',
       action: jest.fn()

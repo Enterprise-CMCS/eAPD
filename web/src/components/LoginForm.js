@@ -111,7 +111,7 @@ LoginForm.propTypes = {
 LoginForm.defaultProps = {
   cancelable: true,
   canSubmit: true,
-  error: false,
+  error: null,
   footer: false,
   id: 'start-main-content',
   legend: '',

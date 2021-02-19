@@ -89,15 +89,17 @@ export const setTokens = sessionToken => {
 };
 
 export const getAvailableFactors = factors =>
-  factors.map(item => {
-    const { factorType, provider } = item;
-    const { displayName, active } = MFA_FACTORS[`${factorType}-${provider}`];
-    return {
-      ...item,
-      displayName,
-      active
-    };
-  });
+  factors
+    .filter(item => item.provider === 'OKTA')
+    .map(item => {
+      const { factorType, provider } = item;
+      const { displayName, active } = MFA_FACTORS[`${factorType}-${provider}`];
+      return {
+        ...item,
+        displayName,
+        active
+      };
+    });
 
 export const getFactor = async mfaSelectedType => {
   const transaction = await retrieveExistingTransaction();
@@ -150,6 +152,7 @@ export const removeTokenListeners = () => {
 
 // Log out methods
 export const logoutAndClearTokens = async () => {
+  await oktaAuth.revokeAccessToken();
   await oktaAuth.closeSession();
   removeCookie();
 };
@@ -157,4 +160,26 @@ export const logoutAndClearTokens = async () => {
 export const isUserActive = latestActivity => {
   const now = new Date().getTime();
   return now - latestActivity < INACTIVITY_LIMIT;
+};
+
+// Cookie
+
+const cookieName = 'gov.cms.eapd.hasConsented';
+
+export const cookie = name => {
+  const cookieMap = (document.cookie || '').split(';').reduce((c, s) => {
+    const bits = s.trim().split('=');
+    if (bits.length === 2) {
+      return { ...c, [bits[0].trim()]: bits[1].trim() };
+    }
+    return c;
+  }, {});
+
+  return cookieMap[name];
+};
+
+export const hasConsented = () => cookie(cookieName) || false;
+
+export const setConsented = () => {
+  document.cookie = `${cookieName}=true;max-age=259200;path=/`; // 3 days
 };

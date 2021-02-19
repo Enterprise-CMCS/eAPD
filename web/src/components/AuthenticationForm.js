@@ -14,6 +14,7 @@ const AuthenticationForm = ({
   id,
   legend,
   onSave,
+  onCancel,
   primaryButtonText: [primaryButtonNormal, primaryButtonWorking],
   sectionName,
   success,
@@ -71,7 +72,15 @@ const AuthenticationForm = ({
                   )}
                 </Button>
               )}
-              {cancelable && (
+              {cancelable && onCancel ? (
+                <Button
+                  variation="transparent"
+                  type="button"
+                  onClick={onCancel}
+                >
+                  Cancel
+                </Button>
+              ) : (
                 <a href="/" className="ds-c-button ds-c-button--transparent">
                   Cancel
                 </a>
@@ -94,6 +103,7 @@ AuthenticationForm.propTypes = {
   id: PropTypes.string,
   legend: PropTypes.string,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  onCancel: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   primaryButtonText: PropTypes.arrayOf(PropTypes.string),
   sectionName: PropTypes.string,
   success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
@@ -110,6 +120,7 @@ AuthenticationForm.defaultProps = {
   id: 'start-main-content',
   legend: '',
   onSave: false,
+  onCancel: false,
   primaryButtonText: ['Save changes', 'Working'],
   sectionName: '',
   success: false,
