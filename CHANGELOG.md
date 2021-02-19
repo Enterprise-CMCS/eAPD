@@ -1,9 +1,10 @@
 # Next release
 
-Anticipated release: February 8, 2021
+Anticipated release: February 22, 2021
 
 #### 🚀 New features
 
+- Combine Authenticators in MFA selection ([#2648])
 - Improves error messages during the authentication process ([#2694])
 - Swaps My State Dashboard title with eAPD logo ([#2776])
 - Create an endpoint to serve the help doc ([#2793])
@@ -15,10 +16,12 @@ Anticipated release: February 8, 2021
 - Fixes issue where "Add another activity" button was not appearing as it should ([#2525])
 - Removes help text and examples from Estimated Quarterly Expenditure section of APD export view ([#2538])
 - Update Babel/Webpack settings so that application loads in IE11 browsers ([#2601])
+- Selecting "Cancel" during the state affiliation selection puts the user into a blank screen ([#2706])
 - Restrict file uploads ([#2740])
 - Fixes issue where the session ending timeout was not showing on certain pages ([#2770])
 - Resolve patch failure ([#2826])
 - Resolved issue with images not loading in staging ([#2845])
+- Logout issues ([#2864])
 
 #### ⚙️ Behind the scenes
 
@@ -33,7 +36,9 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2538]: https://github.com/CMSgov/eAPD/issues/2538
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
 [#2632]: https://github.com/CMSgov/eAPD/issues/2632
+[#2648]: https://github.com/CMSgov/eAPD/issues/2648
 [#2694]: https://github.com/CMSgov/eAPD/issues/2694
+[#2706]: https://github.com/CMSgov/eAPD/issues/2706
 [#2740]: https://github.com/CMSgov/eAPD/issues/2740
 [#2770]: https://github.com/CMSgov/eAPD/issues/2770
 [#2776]: https://github.com/CMSgov/eAPD/issues/2776
@@ -43,3 +48,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2804]: https://github.com/CMSgov/eAPD/issues/2804
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
 [#2845]: https://github.com/CMSgov/eAPD/issues/2845
+[#2864]: https://github.com/CMSgov/eAPD/issues/2864
