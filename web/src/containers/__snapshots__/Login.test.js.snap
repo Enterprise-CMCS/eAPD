@@ -1,25 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`login component renders consent banner initially 1`] = `
-<Fragment>
-  <ConsentBanner
-    onAgree={[Function]}
-  />
-</Fragment>
-`;
-
-exports[`login component renders correctly if logged in 1`] = `
-<Redirect
-  to="origin"
-/>
-`;
-
-exports[`login component renders correctly if logged in and previous location is logout 1`] = `
-<Redirect
-  to="/logout"
-/>
-`;
-
 exports[`login component renders correctly if logged in previously but not logged in now (shows logout notice) 1`] = `
 <main
   id="start-main-content"
@@ -29,7 +9,7 @@ exports[`login component renders correctly if logged in previously but not logge
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -57,7 +37,7 @@ exports[`login component renders correctly if logged in previously but not logge
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
+      errorPlacement="top"
       id="username"
       label="EUA ID"
       name="username"
@@ -79,22 +59,6 @@ exports[`login component renders correctly if logged in previously but not logge
 </main>
 `;
 
-exports[`login component renders correctly if logged in, but no previous location 1`] = `
-<Redirect
-  to={
-    Object {
-      "pathname": "/",
-    }
-  }
-/>
-`;
-
-exports[`login component renders correctly if logged in, but previous was on logout 1`] = `
-<Redirect
-  to="/"
-/>
-`;
-
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
 <main
   id="start-main-content"
@@ -104,7 +68,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -132,7 +96,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
+      errorPlacement="top"
       id="username"
       label="EUA ID"
       name="username"
@@ -163,7 +127,7 @@ exports[`login component renders correctly if not logged in and there is an erro
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error="Sorry! Something went wrong. Please try again."
+    error="something here"
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -191,7 +155,7 @@ exports[`login component renders correctly if not logged in and there is an erro
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage=""
+      errorPlacement="top"
       id="username"
       label="EUA ID"
       name="username"
@@ -203,7 +167,7 @@ exports[`login component renders correctly if not logged in and there is an erro
       className=""
       compareTo={Array []}
       customErrorMessage="Invalid Entry"
-      errorMessage=""
+      errorMessage="something here"
       onChange={[Function]}
       showMeter={false}
       title="Password"
@@ -222,7 +186,7 @@ exports[`login component renders correctly if not logged in, and never logged in
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -250,7 +214,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
+      errorPlacement="top"
       id="username"
       label="EUA ID"
       name="username"
@@ -281,7 +245,7 @@ exports[`login component renders correctly if not logged in, and never logged in
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -309,7 +273,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
+      errorPlacement="top"
       id="username"
       label="EUA ID"
       name="username"
@@ -340,7 +304,7 @@ exports[`login component renders correctly if not logged in, and never logged in
     canSubmit={true}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error={false}
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -368,7 +332,7 @@ exports[`login component renders correctly if not logged in, and never logged in
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage={null}
+      errorPlacement="top"
       id="username"
       label="EUA ID"
       name="username"
@@ -390,7 +354,7 @@ exports[`login component renders correctly if not logged in, and never logged in
 </main>
 `;
 
-exports[`login component renders correctly if there is an authentication error 1`] = `
+exports[`login component renders correctly if user is not in correct Okta group 1`] = `
 <main
   id="start-main-content"
 >
@@ -399,7 +363,7 @@ exports[`login component renders correctly if there is an authentication error 1
     canSubmit={false}
     cancelable={false}
     className="ds-u-margin-top--7"
-    error="Your username and/or password is incorrect."
+    error={null}
     footer={
       <p
         className="ds-u-padding-top--2"
@@ -427,7 +391,7 @@ exports[`login component renders correctly if there is an authentication error 1
   >
     <TextField
       ariaLabel="Enter your EUA ID."
-      errorMessage=""
+      errorPlacement="top"
       id="username"
       label="EUA ID"
       name="username"
@@ -438,8 +402,8 @@ exports[`login component renders correctly if there is an authentication error 1
     <Password
       className=""
       compareTo={Array []}
-      customErrorMessage="Invalid Entry"
-      errorMessage=""
+      customErrorMessage={null}
+      errorMessage={null}
       onChange={[Function]}
       showMeter={false}
       title="Password"
@@ -447,20 +411,4 @@ exports[`login component renders correctly if there is an authentication error 1
     />
   </withRouter(LoginForm)>
 </main>
-`;
-
-exports[`login component renders correctly if there is an otp authentication error 1`] = `
-<Fragment>
-  <ConsentBanner
-    onAgree={[Function]}
-  />
-</Fragment>
-`;
-
-exports[`login component renders correctly if user is not in correct Okta group 1`] = `
-<Fragment>
-  <ConsentBanner
-    onAgree={[Function]}
-  />
-</Fragment>
 `;

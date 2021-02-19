@@ -1,8 +1,4 @@
-import {
-  AUTH_CHECK_SUCCESS,
-  LOGIN_SUCCESS,
-  LOGOUT_SUCCESS
-} from '../actions/auth';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/auth';
 import {
   ADMIN_EDIT_ME_ERROR,
   ADMIN_EDIT_ME_REQUEST,
@@ -34,22 +30,20 @@ describe('user state reducer', () => {
     });
 
     it('should handle a successful user fetch, user check, own-account change, or login', () => {
-      [AUTH_CHECK_SUCCESS, LOGIN_SUCCESS, ADMIN_EDIT_ME_SUCCESS].forEach(
-        action => {
-          expect(
-            user(initialState, {
-              type: action,
-              data: { this: 'is', my: 'user' }
-            })
-          ).toEqual({
-            ...initialState,
-            fetching: false,
-            error: false,
-            loaded: true,
+      [LOGIN_SUCCESS, ADMIN_EDIT_ME_SUCCESS].forEach(action => {
+        expect(
+          user(initialState, {
+            type: action,
             data: { this: 'is', my: 'user' }
-          });
-        }
-      );
+          })
+        ).toEqual({
+          ...initialState,
+          fetching: false,
+          error: false,
+          loaded: true,
+          data: { this: 'is', my: 'user' }
+        });
+      });
     });
 
     it('should handle user edit completions and failures', () => {

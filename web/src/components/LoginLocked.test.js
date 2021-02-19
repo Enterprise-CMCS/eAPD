@@ -7,7 +7,9 @@ let renderUtils;
 
 describe('<LoginLocked />', () => {
   beforeEach(() => {
-    props = {};
+    props = {
+      onCancel: jest.fn()
+    };
     renderUtils = renderWithConnection(<LoginLocked {...props} />);
   });
 
@@ -36,6 +38,6 @@ describe('<LoginLocked />', () => {
 
   test('cancel button renders', () => {
     const { getByRole } = renderUtils;
-    expect(getByRole('link', { name: 'Cancel' })).toBeTruthy();
+    expect(getByRole('button', { name: 'Cancel' })).toBeTruthy();
   });
 });

@@ -23,6 +23,7 @@ describe('apd (application) component', () => {
           place={{}}
           setApdToSelectOnLoad={selectApdOnLoadProp}
           year="the year"
+          userRole="role"
         />
       )
     ).toMatchSnapshot();
@@ -39,6 +40,7 @@ describe('apd (application) component', () => {
           place={{}}
           setApdToSelectOnLoad={selectApdOnLoadProp}
           year="the year"
+          userRole="role"
         />
       )
     ).toMatchSnapshot();
@@ -56,6 +58,7 @@ describe('apd (application) component', () => {
           place={{}}
           setApdToSelectOnLoad={selectApdOnLoadProp}
           year="the future"
+          userRole="role"
         />
       )
     ).toMatchSnapshot();
@@ -85,7 +88,7 @@ describe('apd (application) component', () => {
       apdSelected: true,
       isAdmin: false,
       place: 'place',
-      role: 'test role'
+      userRole: 'test role'
     });
 
     state.apd.data.id = null;
@@ -96,7 +99,7 @@ describe('apd (application) component', () => {
       apdSelected: false,
       isAdmin: false,
       place: 'place',
-      role: 'test role'
+      userRole: 'test role'
     });
   });
 

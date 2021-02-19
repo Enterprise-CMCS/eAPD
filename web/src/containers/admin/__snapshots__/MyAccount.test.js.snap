@@ -13,6 +13,7 @@ exports[`my account page handles submitting the form 1`] = `
   >
     <TextField
       ariaLabel="please enter your full name"
+      errorPlacement="top"
       label="Name"
       name="name"
       onChange={[Function]}
@@ -21,6 +22,7 @@ exports[`my account page handles submitting the form 1`] = `
     />
     <TextField
       ariaLabel="please enter your 10-digit phone number"
+      errorPlacement="top"
       label="Phone number"
       mask="phone"
       name="phone"
@@ -31,6 +33,7 @@ exports[`my account page handles submitting the form 1`] = `
     />
     <TextField
       ariaLabel="please enter your position or role"
+      errorPlacement="top"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -43,6 +46,7 @@ exports[`my account page handles submitting the form 1`] = `
       <TextField
         ariaLabel="Current password"
         disabled={true}
+        errorPlacement="top"
         label="Password"
         name="current password"
         size="medium"
@@ -92,6 +96,7 @@ exports[`my account page handles submitting the form 2`] = `
   >
     <TextField
       ariaLabel="please enter your full name"
+      errorPlacement="top"
       label="Name"
       name="name"
       onChange={[Function]}
@@ -100,6 +105,7 @@ exports[`my account page handles submitting the form 2`] = `
     />
     <TextField
       ariaLabel="please enter your 10-digit phone number"
+      errorPlacement="top"
       label="Phone number"
       mask="phone"
       name="phone"
@@ -110,6 +116,7 @@ exports[`my account page handles submitting the form 2`] = `
     />
     <TextField
       ariaLabel="please enter your position or role"
+      errorPlacement="top"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -122,6 +129,7 @@ exports[`my account page handles submitting the form 2`] = `
       <TextField
         ariaLabel="Current password"
         disabled={true}
+        errorPlacement="top"
         label="Password"
         name="current password"
         size="medium"
@@ -171,6 +179,7 @@ exports[`my account page renders 1`] = `
   >
     <TextField
       ariaLabel="please enter your full name"
+      errorPlacement="top"
       label="Name"
       name="name"
       onChange={[Function]}
@@ -179,6 +188,7 @@ exports[`my account page renders 1`] = `
     />
     <TextField
       ariaLabel="please enter your 10-digit phone number"
+      errorPlacement="top"
       label="Phone number"
       mask="phone"
       name="phone"
@@ -189,6 +199,7 @@ exports[`my account page renders 1`] = `
     />
     <TextField
       ariaLabel="please enter your position or role"
+      errorPlacement="top"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -201,6 +212,7 @@ exports[`my account page renders 1`] = `
       <TextField
         ariaLabel="Current password"
         disabled={true}
+        errorPlacement="top"
         label="Password"
         name="current password"
         size="medium"
@@ -250,6 +262,7 @@ exports[`my account page renders 2`] = `
   >
     <TextField
       ariaLabel="please enter your full name"
+      errorPlacement="top"
       label="Name"
       name="name"
       onChange={[Function]}
@@ -258,6 +271,7 @@ exports[`my account page renders 2`] = `
     />
     <TextField
       ariaLabel="please enter your 10-digit phone number"
+      errorPlacement="top"
       label="Phone number"
       mask="phone"
       name="phone"
@@ -268,6 +282,7 @@ exports[`my account page renders 2`] = `
     />
     <TextField
       ariaLabel="please enter your position or role"
+      errorPlacement="top"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -280,6 +295,7 @@ exports[`my account page renders 2`] = `
       <TextField
         ariaLabel="Current password"
         disabled={true}
+        errorPlacement="top"
         label="Password"
         name="current password"
         size="medium"
@@ -329,6 +345,7 @@ exports[`my account page renders 3`] = `
   >
     <TextField
       ariaLabel="please enter your full name"
+      errorPlacement="top"
       label="Name"
       name="name"
       onChange={[Function]}
@@ -337,6 +354,7 @@ exports[`my account page renders 3`] = `
     />
     <TextField
       ariaLabel="please enter your 10-digit phone number"
+      errorPlacement="top"
       label="Phone number"
       mask="phone"
       name="phone"
@@ -347,6 +365,7 @@ exports[`my account page renders 3`] = `
     />
     <TextField
       ariaLabel="please enter your position or role"
+      errorPlacement="top"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -359,6 +378,7 @@ exports[`my account page renders 3`] = `
       <TextField
         ariaLabel="Current password"
         disabled={true}
+        errorPlacement="top"
         label="Password"
         name="current password"
         size="medium"
@@ -418,6 +438,7 @@ exports[`my account page renders 4`] = `
   >
     <TextField
       ariaLabel="please enter your full name"
+      errorPlacement="top"
       label="Name"
       name="name"
       onChange={[Function]}
@@ -426,6 +447,7 @@ exports[`my account page renders 4`] = `
     />
     <TextField
       ariaLabel="please enter your 10-digit phone number"
+      errorPlacement="top"
       label="Phone number"
       mask="phone"
       name="phone"
@@ -436,6 +458,7 @@ exports[`my account page renders 4`] = `
     />
     <TextField
       ariaLabel="please enter your position or role"
+      errorPlacement="top"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -448,6 +471,7 @@ exports[`my account page renders 4`] = `
       <TextField
         ariaLabel="Current password"
         disabled={true}
+        errorPlacement="top"
         label="Password"
         name="current password"
         size="medium"

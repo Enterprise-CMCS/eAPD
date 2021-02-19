@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Consent banner component when there is a consent cookie calls onAgree prop and does not render anything 1`] = `""`;
-
 exports[`Consent banner component when there is no cookie renders the banner 1`] = `
 <main
   id="start-main-content"

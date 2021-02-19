@@ -1,31 +1,27 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
 const formSubmitNoop = e => e.preventDefault();
 
-class LoginMFAEnroll extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedOption: props.selectedOption
-    };
-  }
+const LoginMFAEnroll = ({
+  handleSelection,
+  factors,
+  selectedOption: propSelectedOption
+}) => {
+  const [selectedOption, setSelectedOption] = useState(propSelectedOption);
 
-  handleOnChange = e => {
-    this.setState({ selectedOption: e.target.value });
+  const handleOnChange = e => {
+    setSelectedOption(e.target.value);
   };
 
-  handleFactorSelection = e => {
+  const handleFactorSelection = e => {
     e.preventDefault();
-    const { handleSelection } = this.props;
-    const { selectedOption } = this.state;
     handleSelection(selectedOption);
   };
 
-  choiceItem = ({ factorType, provider, displayName }, index) => {
-    const { selectedOption } = this.state;
-    const factorTypeId = `${factorType}-${provider}`;
+  const choiceItem = (choice, index) => {
+    const factorTypeId = `${choice.factorType}-${choice.provider}`;
     return (
       <Fragment key={index}>
         <input
@@ -35,49 +31,45 @@ class LoginMFAEnroll extends Component {
           type="radio"
           name="mfa-choices"
           value={factorTypeId}
-          onChange={this.handleOnChange}
+          onChange={handleOnChange}
         />
         <label htmlFor={factorTypeId}>
-          <span>{displayName}</span>
+          <span>{choice.displayName}</span>
         </label>
       </Fragment>
     );
   };
 
-  render() {
-    const { factors } = this.props;
-
-    return (
-      <div id="start-main-content">
-        <div className="ds-l-container">
-          <div className="login-card">
-            <h1 className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center ds-u-margin--0">
-              <span>Verify Your Identity</span>
-            </h1>
-            <form onSubmit={this.handleFactorSelection || formSubmitNoop}>
-              <fieldset className="ds-c-fieldset ds-u-margin-top--1">
-                <legend className="ds-u-margin-y--1">
-                  Choose a Multi-Factor Authentication route.
-                </legend>
-                {factors.map((choice, index) =>
-                  choice.active ? this.choiceItem(choice, index) : null
-                )}
-              </fieldset>
-              <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
-                <button
-                  type="submit"
-                  className="ds-c-button ds-c-button--primary"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+  return (
+    <div id="start-main-content">
+      <div className="ds-l-container">
+        <div className="login-card">
+          <h1 className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center ds-u-margin--0">
+            <span>Verify Your Identity</span>
+          </h1>
+          <form onSubmit={handleFactorSelection || formSubmitNoop}>
+            <fieldset className="ds-c-fieldset ds-u-margin-top--1">
+              <legend className="ds-u-margin-y--1">
+                Choose a Multi-Factor Authentication route.
+              </legend>
+              {factors.map((choice, index) =>
+                choice.active ? choiceItem(choice, index) : null
+              )}
+            </fieldset>
+            <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
+              <button
+                type="submit"
+                className="ds-c-button ds-c-button--primary"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 LoginMFAEnroll.propTypes = {
   handleSelection: PropTypes.func.isRequired,

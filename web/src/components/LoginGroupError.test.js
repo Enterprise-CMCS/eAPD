@@ -7,7 +7,9 @@ let renderUtils;
 
 describe('<LoginGroupError />', () => {
   beforeEach(() => {
-    props = {};
+    props = {
+      onCancel: jest.fn()
+    };
     renderUtils = renderWithConnection(<LoginGroupError {...props} />);
   });
 
@@ -27,6 +29,6 @@ describe('<LoginGroupError />', () => {
 
   test('cancel button renders', () => {
     const { getByRole } = renderUtils;
-    expect(getByRole('link', { name: 'Cancel' })).toBeTruthy();
+    expect(getByRole('button', { name: 'Cancel' })).toBeTruthy();
   });
 });

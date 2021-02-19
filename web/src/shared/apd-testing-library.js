@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
+import { createMemoryHistory } from 'history';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { render as rtlRender } from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
@@ -22,14 +22,11 @@ import reducer from '../reducers';
  */
 const renderWithConnection = (ui, renderOptions = {}) => {
   const {
-    history = createBrowserHistory(),
+    initialHistory = ['/'],
+    history = createMemoryHistory({ initialEntries: initialHistory }),
     initialState = undefined,
-    middleware = [thunk, routerMiddleware(history)],
-    store = createStore(
-      reducer(history),
-      initialState,
-      applyMiddleware(...middleware)
-    ),
+    enhancer = applyMiddleware(routerMiddleware(history), thunk),
+    store = createStore(reducer(history), initialState, enhancer),
     ...options
   } = renderOptions;
   const wrappedNode = rtlRender(
@@ -62,7 +59,11 @@ const renderWithConnection = (ui, renderOptions = {}) => {
  * @returns an option with the rendered container, the history, and related react-testing-library functions
  */
 const renderWithRouter = (ui, renderOptions = {}) => {
-  const { history = createBrowserHistory(), ...options } = renderOptions;
+  const {
+    initialHistory = ['/'],
+    history = createMemoryHistory({ initialEntries: initialHistory }),
+    ...options
+  } = renderOptions;
   const wrappedNode = rtlRender(
     <ConnectedRouter history={history}>{ui}</ConnectedRouter>,
     options

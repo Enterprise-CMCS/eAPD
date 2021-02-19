@@ -22,6 +22,8 @@ Anticipated release: February 8, 2021
 
 #### ⚙️ Behind the scenes
 
+- Refactor login code ([#2632])
+
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
@@ -30,6 +32,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2525]: https://github.com/CMSgov/eAPD/issues/2525
 [#2538]: https://github.com/CMSgov/eAPD/issues/2538
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
+[#2632]: https://github.com/CMSgov/eAPD/issues/2632
 [#2694]: https://github.com/CMSgov/eAPD/issues/2694
 [#2740]: https://github.com/CMSgov/eAPD/issues/2740
 [#2770]: https://github.com/CMSgov/eAPD/issues/2770

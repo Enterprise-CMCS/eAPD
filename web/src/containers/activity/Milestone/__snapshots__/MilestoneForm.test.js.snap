@@ -11,6 +11,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
   </h6>
   <TextField
     autoFocus={true}
+    errorPlacement="top"
     label="Name"
     name="name"
     onChange={[Function]}
