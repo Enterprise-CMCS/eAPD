@@ -14,24 +14,26 @@ const COOKIE_NAME = 'gov.cms.eapd.api-token';
 
 const setCookie = () => {
   const jwt = getAccessToken();
-  const url = process.env.API_URL || 'http://localhost:8000';
   let config = {};
-  if (!url || url.match(new RegExp(/localhost/i))) {
+  if (
+    !process.env.API_URL ||
+    process.env.API_URL.match(new RegExp(/localhost/i))
+  ) {
     config = {
       sameSite: 'strict',
-      path: '/apds/',
+      path: '/apds/'
     };
-  } else if (url.match('/api')) {
+  } else if (process.env.API_URL.match('/api')) {
     config = {
       sameSite: 'strict',
-      path: '/api/apds/',
+      path: '/api/apds/'
     };
   } else {
     config = {
       domain: '.cms.gov',
       secure: true,
       sameSite: 'lax',
-      path: '/apds/',
+      path: '/apds/'
     };
   }
   Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
@@ -54,7 +56,7 @@ export const retrieveExistingTransaction = () => {
 export const verifyMFA = async ({ transaction, otp }) => {
   return transaction.verify({
     passCode: otp,
-    autoPush: true,
+    autoPush: true
   });
 };
 
@@ -64,17 +66,17 @@ export const getSessionExpiration = async () => {
   return expiresAt;
 };
 
-export const setTokens = (sessionToken) => {
+export const setTokens = sessionToken => {
   const stateToken = uuidv4();
   return oktaAuth.token
     .getWithoutPrompt({
       // responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile'],
       sessionToken,
-      state: stateToken,
+      state: stateToken
       // prompt: 'none'
     })
-    .then(async (res) => {
+    .then(async res => {
       const { tokens } = res;
       // if (stateToken === responseToken) { // state not currently being returned
       await oktaAuth.tokenManager.setTokens(tokens);
@@ -86,22 +88,22 @@ export const setTokens = (sessionToken) => {
     });
 };
 
-export const getAvailableFactors = (factors) =>
-  factors.map((item) => {
+export const getAvailableFactors = factors =>
+  factors.map(item => {
     const { factorType, provider } = item;
     const { displayName, active } = MFA_FACTORS[`${factorType}-${provider}`];
     return {
       ...item,
       displayName,
-      active,
+      active
     };
   });
 
-export const getFactor = async (mfaSelectedType) => {
+export const getFactor = async mfaSelectedType => {
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
     const check = MFA_FACTORS[mfaSelectedType].findType || (() => false);
-    return transaction.factors.find((f) => check(f));
+    return transaction.factors.find(f => check(f));
   }
   return null;
 };
@@ -112,7 +114,7 @@ export const setTokenListeners = ({
   expiredCallback = null,
   errorCallback = null,
   renewedCallback = null,
-  removedCallback = null,
+  removedCallback = null
 }) => {
   if (expiredCallback) oktaAuth.tokenManager.on('expired', expiredCallback);
   if (errorCallback) oktaAuth.tokenManager.on('error', errorCallback);
@@ -120,7 +122,7 @@ export const setTokenListeners = ({
   if (removedCallback) oktaAuth.tokenManager.on('removed', removedCallback);
 };
 
-const renewToken = async (key) => {
+const renewToken = async key => {
   const token = await oktaAuth.tokenManager.get(key);
   if (token) {
     if (oktaAuth.tokenManager.hasExpired(token)) {
@@ -152,7 +154,7 @@ export const logoutAndClearTokens = async () => {
   removeCookie();
 };
 
-export const isUserActive = (latestActivity) => {
+export const isUserActive = latestActivity => {
   const now = new Date().getTime();
   return now - latestActivity < INACTIVITY_LIMIT;
 };
