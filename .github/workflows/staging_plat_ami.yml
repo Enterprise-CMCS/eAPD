@@ -1,0 +1,8 @@
+name: Build Preview AMI from CMS Gold AMI using Packer
+on:  
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+jobs:
+  packer-ami-build:
+    runs-on: ubuntu-latest
+
