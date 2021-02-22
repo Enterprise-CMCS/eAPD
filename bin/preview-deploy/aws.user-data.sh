@@ -20,15 +20,15 @@ yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_6
 yum -y install git postgresql10-server-10.15-1PGDG.rhel7 amazon-cloudwatch-agent nginx-1.16.1-3.el7
 
 # Setup postgres
-postgresql-setup initdb
+postgresql-10-setup initdb
 echo "
 # TYPE    DATABASE    USER    ADDRESS         METHODS
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
 " > /var/lib/pgsql/data/pg_hba.conf
-systemctl start postgresql
-systemctl enable postgresql
+systemctl start postgresql-10
+systemctl enable postgresql-10
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
