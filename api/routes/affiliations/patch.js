@@ -1,7 +1,7 @@
 const auditor = require('../../audit');
 const logger = require('../../logger')('affiliations');
 const { raw: knex } = require('../../db');
-const { can } = require('../../middleware');
+const { can, hasRole } = require('../../middleware');
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = auditor.actions;
 
@@ -19,16 +19,6 @@ const statusToAction = status => {
   }
 };
 
-const updateAffiliation = ({ id, roleId, status, userId }) =>
-  db('auth_affiliations')
-    .where({ id })
-    .returning('*')
-    .update({
-      role_id: status !== 'approved' ? null : roleId,
-      status,
-      updated_by: userId
-    });
-
 module.exports = (app, { db = knex } = {}) => {
   app.patch(
     '/states/all/affiliations/:id',
@@ -40,7 +30,14 @@ module.exports = (app, { db = knex } = {}) => {
       const { status, roleId } = request.body;
       const audit = auditor(statusToAction(status), request);
 
-      await updateAffiliation({ id, roleId, status, userId })
+      await db('auth_affiliations')
+        .where({ id })
+        .returning('*')
+        .update({
+          role_id: status !== 'approved' ? null : roleId,
+          status,
+          updated_by: userId
+        })
         .then(rows => rows[0])
         .then(row =>
           audit.target({
@@ -53,7 +50,6 @@ module.exports = (app, { db = knex } = {}) => {
         .then(() => audit.log())
         .then(() => response.status(200).end())
         .catch(() => response.status(400).end());
-
     });
 
   app.patch(
