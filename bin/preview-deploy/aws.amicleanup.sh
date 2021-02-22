@@ -1,6 +1,5 @@
-################## WIP ##################
-
 #!/bin/bash
+################## WIP ##################
 
 # Call with the following arguments:
 #    --AWS_REGION <AWS region name>   | The AWS region the instance should be
@@ -10,7 +9,7 @@
 set -e
 
 # Deploys a preview instance to EC2 with a fully self-contained environment.
-function cleanupPlatinumAMIs() {
+function cleanupPlatinumAMI() {
   # Configure AWS CLI with defaults
   configureAWS
 
@@ -18,7 +17,7 @@ function cleanupPlatinumAMIs() {
   AVAIL_AMIS=$(getAvailableAMIs)            # TODO Create getAvailableAMIs function
   for AMI_ID in $AVAIL_AMIS
   do 
-    aws ec2 describe-instances --filter "Name=image-id,Values=$AMI_ID"
+    aws ec2 describe-instances --filter Name=image-id,Values="$AMI_ID"
   done
   # If above is null, deregister AMI
 }
@@ -45,7 +44,7 @@ function checkAMIForUsage() {
   AVAIL_AMIS=$(getAvailableAMIs)
   for AMI_ID in $AVAIL_AMIS
   do 
-    aws ec2 describe-instances --filter "Name=image-id,Values=$AMI_ID" | jq -rc '.Reservations[].Instances[] | .ImageId'
+    aws ec2 describe-instances --filter Name=image-id,Values="$AMI_ID" | jq -rc '.Reservations[].Instances[] | .ImageId'
   done
 }
 
@@ -53,14 +52,14 @@ function getMostRecentAMI() {
   aws ec2 describe-images --owners self --filters "Name=name,Values=eAPD Platinum AMI - *" --query 'sort_by(Images, &CreationDate)[-1].ImageId' --output text
 }
 
-function deregisterIfNotUsed(){
+function deregisterIfNotUsed() {
   AVAIL_AMIS=$(getAvailableAMIs)
   IN_USE_AMIS=$(checkAMIForUsage)
   MOST_RECENT_AMI=$(getMostRecentAMI)
   for AMI_ID in $AVAIL_AMIS
   do
     if [[ $AMI_ID == $IN_USE_AMIS ]] || [[ $AMI_ID == $MOST_RECENT_AMI ]]; then
-      echo "$AMI_ID is in use."
+      echo "$AMI_ID is in use or new."
     else
       echo "$AMI_ID will be deregistered."
     fi
