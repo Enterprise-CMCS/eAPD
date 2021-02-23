@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+import { renderWithConnection, axe } from 'apd-testing-library';
 import LoginGroupError from './LoginGroupError';
 
 let props;
@@ -11,6 +11,11 @@ describe('<LoginGroupError />', () => {
       onCancel: jest.fn()
     };
     renderUtils = renderWithConnection(<LoginGroupError {...props} />);
+  });
+
+  it('should not fail any accessibility tests', async () => {
+    const { container } = renderUtils;
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   test('title renders', () => {
