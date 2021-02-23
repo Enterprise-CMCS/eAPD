@@ -7,3 +7,5 @@ configure({ adapter: new Adapter() });
 window.matchMedia = () => ({
   matches: ''
 });
+
+window.scroll = () => {};
