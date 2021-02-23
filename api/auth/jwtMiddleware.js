@@ -38,7 +38,6 @@ const jwtMiddleware = async (
       req.user = user;
     }
   } catch (err) {
-    console.log({ err });
     logger.error(`error message: ${err.message}`);
   }
   return next();
