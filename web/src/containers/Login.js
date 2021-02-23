@@ -22,6 +22,7 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
     <main id="start-main-content">
       <UpgradeBrowser />
       <LoginForm
+        id="login-form"
         title="Log in"
         legend="Log in"
         cancelable={false}

@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
+import { renderWithConnection, axe } from 'apd-testing-library';
 
 import Login from './Login';
 
@@ -109,5 +110,18 @@ describe('login component', () => {
 
     expect(loginProp.calledWith('bob', 'secret')).toBeTruthy();
     expect(event.preventDefault.called).toBeTruthy();
+  });
+
+  describe('accessibility', () => {
+    it('should not fail any accessibility tests', async () => {
+      const props = {
+        hasEverLoggedOn: false,
+        errorMessage: null,
+        fetching: false,
+        login: jest.fn()
+      };
+      const { container } = renderWithConnection(<Login {...props} />);
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 });

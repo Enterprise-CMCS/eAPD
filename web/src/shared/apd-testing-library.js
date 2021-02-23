@@ -82,4 +82,5 @@ const renderWithRouter = (ui, renderOptions = {}) => {
 // Re-export all of the react-testing-library functions,
 // so that you don't have to import both libraries
 export * from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
+export * from 'jest-axe'; // eslint-disable-line import/no-extraneous-dependencies
 export { renderWithConnection, renderWithRouter };

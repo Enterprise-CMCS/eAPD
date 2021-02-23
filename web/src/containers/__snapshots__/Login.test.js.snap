@@ -23,6 +23,7 @@ exports[`login component renders correctly if logged in previously but not logge
         </a>
       </p>
     }
+    id="login-form"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -82,6 +83,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
         </a>
       </p>
     }
+    id="login-form"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -141,6 +143,7 @@ exports[`login component renders correctly if not logged in and there is an erro
         </a>
       </p>
     }
+    id="login-form"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -200,6 +203,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id="login-form"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -259,6 +263,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id="login-form"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -318,6 +323,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    id="login-form"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
@@ -377,6 +383,7 @@ exports[`login component renders correctly if user is not in correct Okta group 
         </a>
       </p>
     }
+    id="login-form"
     legend="Log in"
     onSave={[Function]}
     primaryButtonText={
