@@ -3,22 +3,28 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
 
 const cookie = name => {
-  const cookieMap = (document.cookie || '').split(';').reduce((c, s) => {
-    const bits = s.trim().split('=');
-    if (bits.length === 2) {
-      return { ...c, [bits[0].trim()]: bits[1].trim() };
-    }
-    return c;
-  }, {});
+  if (navigator.cookieEnabled) {
+    const cookieMap = (document.cookie || '').split(';').reduce((c, s) => {
+      const bits = s.trim().split('=');
+      if (bits.length === 2) {
+        return { ...c, [bits[0].trim()]: bits[1].trim() };
+      }
+      return c;
+    }, {});
 
-  return cookieMap[name];
+    return cookieMap[name];
+  }
+  return null;
 };
 
 const ConsentBanner = ({ onAgree }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const agreeAndContinue = () => {
-    document.cookie = 'gov.cms.eapd.hasConsented=true; max-age=259200; secure'; // 3 days
+    if (navigator.cookieEnabled) {
+      document.cookie =
+        'gov.cms.eapd.hasConsented=true; max-age=259200; secure'; // 3 days
+    }
     onAgree();
   };
 
@@ -26,7 +32,9 @@ const ConsentBanner = ({ onAgree }) => {
     setShowDetails(true);
   };
 
-  const hasConsented = cookie('gov.cms.eapd.hasConsented');
+  const hasConsented = navigator.cookieEnabled
+    ? cookie('gov.cms.eapd.hasConsented')
+    : false;
   if (hasConsented) {
     agreeAndContinue();
     return null;
