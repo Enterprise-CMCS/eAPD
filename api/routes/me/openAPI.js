@@ -70,22 +70,4 @@ const getUser = {
   }
 };
 
-const logout = {
-  '/logout': {
-    post: {
-      tags: ['Users'],
-      summary: `Clears out the user's cookies`,
-      description: `Clears out the cookies for the user`,
-      responses: {
-        200: {
-          description: 'Success'
-        }
-      }
-    }
-  }
-};
-
-module.exports = {
-  ...logout,
-  ...requiresAuth(getUser, { has403: false })
-};
+module.exports = requiresAuth(getUser, { has403: false });

@@ -24,7 +24,7 @@ const tokenString = [
   .map(token => `"${token}": ":${token}"`)
   .join(', ');
 
-const formatAsJSON = `{${tokenString}, "content-length": ":res[content-length]"}`
+const formatAsJSON = `{${tokenString}, "content-length": ":res[content-length]"}`;
 
 const requestLoggerMiddleware = morgan(formatAsJSON, { stream: logger.stream });
 
