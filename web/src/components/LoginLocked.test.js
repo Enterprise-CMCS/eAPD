@@ -2,34 +2,32 @@ import React from 'react';
 import { renderWithConnection, axe } from 'apd-testing-library';
 import LoginLocked from './LoginLocked';
 
-let props;
-let renderUtils;
+const defaultProps = {
+  onCancel: jest.fn()
+};
+
+// https://testing-library.com/docs/example-input-event/
+const setup = (props = {}) =>
+  renderWithConnection(<LoginLocked {...defaultProps} {...props} />);
 
 describe('<LoginLocked />', () => {
-  beforeEach(() => {
-    props = {
-      onCancel: jest.fn()
-    };
-    renderUtils = renderWithConnection(<LoginLocked {...props} />);
-  });
-
   it('should not fail any accessibility tests', async () => {
-    const { container } = renderUtils;
+    const { container } = setup();
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test('title renders', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(getByText(/Verify Your Identity/)).toBeTruthy();
   });
 
   test('locked message renders', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(getByText(/Account Locked/)).toBeTruthy();
   });
 
   test('contact message renders', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(
       getByText((content, node) => {
         const hasText = () =>
@@ -42,7 +40,7 @@ describe('<LoginLocked />', () => {
   });
 
   test('cancel button renders', () => {
-    const { getByRole } = renderUtils;
+    const { getByRole } = setup();
     expect(getByRole('button', { name: 'Cancel' })).toBeTruthy();
   });
 });

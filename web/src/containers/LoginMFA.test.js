@@ -2,27 +2,26 @@ import React from 'react';
 import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
 import LoginMFA from './LoginMFA';
 
-let props;
-let renderUtils;
-describe('<LoginMFA />', () => {
-  beforeEach(() => {
-    props = {
-      errorMessage: null,
-      hasEverLoggedOn: true,
-      fetching: false,
-      mfaType: 'email',
-      action: jest.fn()
-    };
-    renderUtils = renderWithConnection(<LoginMFA {...props} />);
-  });
+const defaultProps = {
+  errorMessage: null,
+  hasEverLoggedOn: true,
+  fetching: false,
+  mfaType: 'email',
+  action: jest.fn()
+};
 
+// https://testing-library.com/docs/example-input-event/
+const setup = (props = {}) =>
+  renderWithConnection(<LoginMFA {...defaultProps} {...props} />);
+
+describe('<LoginMFA />', () => {
   it('should not fail any accessibility tests', async () => {
-    const { container } = renderUtils;
+    const { container } = setup();
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test('user enters otp', () => {
-    const { getByLabelText, getByRole } = renderUtils;
+    const { getByLabelText, getByRole } = setup();
     expect(
       getByLabelText(
         'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
@@ -38,11 +37,11 @@ describe('<LoginMFA />', () => {
       }
     );
     fireEvent.click(getByRole('button', { name: 'Verify' }));
-    expect(props.action).toHaveBeenCalledWith('testotp');
+    expect(defaultProps.action).toHaveBeenCalledWith('testotp');
   });
 
   test('cancel button renders', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(getByText(/Cancel/i)).toBeTruthy();
   });
 });
