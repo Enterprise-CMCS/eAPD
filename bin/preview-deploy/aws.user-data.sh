@@ -13,19 +13,22 @@ chmod -R g+w /app
 
 mkdir /app/tls
 
-# Install nginx and postgres
-yum -y install git postgresql-server amazon-cloudwatch-agent nginx-1.16.1-3.el7
+# Install nginx and postgres 10.15
+curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-10 -O https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-10
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-10
+yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm -y
+yum -y install git postgresql10-server-10.15-1PGDG.rhel7 amazon-cloudwatch-agent nginx-1.16.1-3.el7
 
 # Setup postgres
-postgresql-setup initdb
+postgresql-10-setup initdb
 echo "
 # TYPE    DATABASE    USER    ADDRESS         METHODS
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
-" > /var/lib/pgsql/data/pg_hba.conf
-systemctl start postgresql
-systemctl enable postgresql
+" > /var/lib/pgsql/10/data/pg_hba.conf
+systemctl start postgresql-10
+systemctl enable postgresql-10
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
@@ -366,7 +369,6 @@ echo "module.exports = {
     script: 'main.js',
     instances: 1,
     autorestart: true,
-    watch: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
     out_file: '/app/api/logs/eAPD-API-out-0.log',
     env: {
