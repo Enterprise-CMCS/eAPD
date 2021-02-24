@@ -3,8 +3,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-// import { Dialog } from '@cmsgov/design-system';
-// import Icon, { faSpinner } from '../components/Icons';
 
 import { logout as dispatchLogout } from '../actions/auth';
 

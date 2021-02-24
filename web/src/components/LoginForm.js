@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
 
+const formSubmitNoop = e => e.preventDefault();
+
 const LoginForm = ({
   cancelable,
   canSubmit,
@@ -19,14 +21,6 @@ const LoginForm = ({
   working
 }) => {
   const history = useHistory();
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (canSubmit && onSave) {
-      return onSave(e);
-    }
-    return null;
-  };
 
   return (
     <div id={id} className="card--container">
@@ -55,7 +49,7 @@ const LoginForm = ({
                 {error}
               </div>
             )}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
               <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
                 {!!legend && (
                   <legend className="ds-u-visibility--screen-reader">
