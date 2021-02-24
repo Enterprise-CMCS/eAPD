@@ -2,48 +2,46 @@ import React from 'react';
 import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
 import LoginMFAEnroll from './LoginMFAEnroll';
 
-let props;
-let renderUtils;
+const defaultProps = {
+  selectedOption: '',
+  handleSelection: jest.fn(),
+  factors: [
+    {
+      factorType: 'call',
+      provider: 'OKTA',
+      vendorName: 'OKTA',
+      status: 'NOT_SETUP',
+      enrollment: 'OPTIONAL',
+      displayName: 'Call',
+      active: true
+    }
+  ]
+};
+
+// https://testing-library.com/docs/example-input-event/
+const setup = (props = {}) =>
+  renderWithConnection(<LoginMFAEnroll {...defaultProps} {...props} />);
 
 describe('<LoginMFAEnroll />', () => {
-  beforeEach(() => {
-    props = {
-      selectedOption: '',
-      handleSelection: jest.fn(),
-      factors: [
-        {
-          factorType: 'call',
-          provider: 'OKTA',
-          vendorName: 'OKTA',
-          status: 'NOT_SETUP',
-          enrollment: 'OPTIONAL',
-          displayName: 'Call',
-          active: true
-        }
-      ]
-    };
-    renderUtils = renderWithConnection(<LoginMFAEnroll {...props} />);
-  });
-
   it('should not fail any accessibility tests', async () => {
-    const { container } = renderUtils;
+    const { container } = setup();
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test('title renders', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(getByText(/Verify Your Identity/)).toBeTruthy();
   });
 
   test('legend renders', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(
       getByText('Choose a Multi-Factor Authentication route.')
     ).toBeTruthy();
   });
 
   test('factor checkbox renders', () => {
-    const { getByLabelText, getByRole } = renderUtils;
+    const { getByLabelText, getByRole } = setup();
     expect(getByLabelText('Call')).toBeTruthy();
 
     expect(getByRole('radio')).not.toHaveAttribute('checked');
@@ -51,10 +49,10 @@ describe('<LoginMFAEnroll />', () => {
   });
 
   test('user selects a mfa option', () => {
-    const { getByLabelText, getByRole } = renderUtils;
+    const { getByLabelText, getByRole } = setup();
     fireEvent.click(getByLabelText('Call'));
 
     fireEvent.click(getByRole('button', { name: 'Submit' }));
-    expect(props.handleSelection).toHaveBeenCalled();
+    expect(defaultProps.handleSelection).toHaveBeenCalled();
   });
 });
