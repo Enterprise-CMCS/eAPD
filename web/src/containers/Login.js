@@ -51,11 +51,10 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
           onChange={changeUsername}
         />
         <Password
+          id="password"
           title="Password"
           value={password}
           onChange={changePassword}
-          errorMessage={typeof errorMessage === 'string' ? errorMessage : null}
-          customErrorMessage={errorMessage ? 'Invalid Entry' : null}
         />
       </LoginForm>
     </main>

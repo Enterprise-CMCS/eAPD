@@ -16,6 +16,7 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
   return (
     <div id="start-main-content">
       <AuthenticationForm
+        id="login-mfa-form"
         title="Verify Your Identity"
         legend="Verify Your Identity"
         cancelable
@@ -31,7 +32,7 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
         <div className="ds-u-margin-bottom--4">
           <label
             htmlFor="otp"
-            id="otp"
+            id="otp-label"
             className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
           >
             Enter the verification code provided to you via call, text, email,
@@ -39,7 +40,7 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
           </label>
           <input
             width="200px"
-            aria-labelledby="otp"
+            aria-labelledby="otp-label"
             className="ds-c-field ds-c-field--medium"
             id="otp"
             type="text"

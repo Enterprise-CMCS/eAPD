@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, fireEvent } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
 import StateAccessRequest from './StateAccessRequest';
 
 let props;
@@ -14,6 +14,11 @@ describe('<StateAccessRequest />', () => {
       fetching: false
     };
     renderUtils = renderWithConnection(<StateAccessRequest {...props} />);
+  });
+
+  it('should not fail any accessibility tests', async () => {
+    const { container } = renderUtils;
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it('title rendered', () => {

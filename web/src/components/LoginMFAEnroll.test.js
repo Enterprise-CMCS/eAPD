@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, fireEvent } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
 import LoginMFAEnroll from './LoginMFAEnroll';
 
 let props;
@@ -23,6 +23,11 @@ describe('<LoginMFAEnroll />', () => {
       ]
     };
     renderUtils = renderWithConnection(<LoginMFAEnroll {...props} />);
+  });
+
+  it('should not fail any accessibility tests', async () => {
+    const { container } = renderUtils;
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   test('title renders', () => {

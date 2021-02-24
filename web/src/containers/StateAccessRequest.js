@@ -32,6 +32,7 @@ const StateAccessRequest = ({
   return (
     <div id="start-main-content">
       <AuthenticationForm
+        id="state-access-request-form"
         title="Verify Your Identity"
         legend="Verify Your Identity"
         cancelable

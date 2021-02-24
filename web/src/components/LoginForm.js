@@ -1,9 +1,7 @@
 import { Button, Spinner } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { withRouter } from 'react-router';
-
-const formSubmitNoop = e => e.preventDefault();
+import { useHistory } from 'react-router';
 
 const LoginForm = ({
   cancelable,
@@ -11,7 +9,6 @@ const LoginForm = ({
   children,
   error,
   footer,
-  history,
   id,
   legend,
   onSave,
@@ -20,72 +17,90 @@ const LoginForm = ({
   success,
   title,
   working
-}) => (
-  <div id={id} className="card--container">
-    <div className="ds-l-container">
-      <div className="ds-l-row card">
-        <div className="ds-l-col--1 ds-u-margin-left--auto" />
-        <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-          <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center">
-            <img
-              src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
-              alt="eAPD Logo"
-            />
-            <h1 className="ds-h1 ds-u-margin-top--2">
-              {sectionName.length > 0 && (
-                <span className="ds-h6 ds-u-display--block">
-                  {sectionName.toUpperCase()}
-                </span>
-              )}
-              {title}
-            </h1>
-          </div>
-          {!!success && <div className="ds-u-margin-top--3">{success}</div>}
+}) => {
+  const history = useHistory();
 
-          {!!error && (
-            <div className="ds-u-margin-top--3 ds-u-color--error">{error}</div>
-          )}
-          <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
-            <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
-              {!!legend && (
-                <legend className="ds-u-visibility--screen-reader">
-                  {legend}
-                </legend>
-              )}
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (canSubmit && onSave) {
+      return onSave(e);
+    }
+    return null;
+  };
 
-              {children}
-
-              <div className="ds-u-margin-top--5">
-                {onSave && (
-                  <Button
-                    variation="primary"
-                    type="submit"
-                    disabled={!canSubmit || working}
-                  >
-                    {working ? (
-                      <Fragment>
-                        <Spinner /> {primaryButtonWorking}
-                      </Fragment>
-                    ) : (
-                      primaryButtonNormal
-                    )}
-                  </Button>
+  return (
+    <div id={id} className="card--container">
+      <div className="ds-l-container">
+        <div className="ds-l-row card">
+          <div className="ds-l-col--1 ds-u-margin-left--auto" />
+          <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
+            <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center">
+              <img
+                src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
+                alt="eAPD Logo"
+              />
+              <h1 className="ds-h1 ds-u-margin-top--2">
+                {sectionName.length > 0 && (
+                  <span className="ds-h6 ds-u-display--block">
+                    {sectionName.toUpperCase()}
+                  </span>
                 )}
-                {cancelable && (
-                  <Button variation="transparent" onClick={history.goBack}>
-                    Cancel
-                  </Button>
-                )}
+                {title}
+              </h1>
+            </div>
+            {!!success && <div className="ds-u-margin-top--3">{success}</div>}
+
+            {!!error && (
+              <div className="ds-u-margin-top--3 ds-u-color--error">
+                {error}
               </div>
-            </fieldset>
-          </form>
-          {footer && <div className="card--foter">{footer}</div>}
+            )}
+            <form onSubmit={handleSubmit}>
+              <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
+                {!!legend && (
+                  <legend className="ds-u-visibility--screen-reader">
+                    {legend}
+                  </legend>
+                )}
+
+                {children}
+
+                <div className="ds-u-margin-top--5">
+                  {onSave && (
+                    <Button
+                      variation="primary"
+                      type="submit"
+                      disabled={!canSubmit || working}
+                    >
+                      {working ? (
+                        <Fragment>
+                          <Spinner /> {primaryButtonWorking}
+                        </Fragment>
+                      ) : (
+                        primaryButtonNormal
+                      )}
+                    </Button>
+                  )}
+                  {cancelable && (
+                    <Button
+                      type="button"
+                      variation="transparent"
+                      onClick={history.goBack}
+                    >
+                      Cancel
+                    </Button>
+                  )}
+                </div>
+              </fieldset>
+            </form>
+            {footer && <div className="card--foter">{footer}</div>}
+          </div>
+          <div className="ds-l-col--1 ds-u-margin-right--auto" />
         </div>
-        <div className="ds-l-col--1 ds-u-margin-right--auto" />
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 LoginForm.propTypes = {
   cancelable: PropTypes.bool,
@@ -97,7 +112,6 @@ LoginForm.propTypes = {
     PropTypes.element
   ]),
   footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-  history: PropTypes.object.isRequired,
   id: PropTypes.string,
   legend: PropTypes.string,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
@@ -113,15 +127,13 @@ LoginForm.defaultProps = {
   canSubmit: true,
   error: null,
   footer: false,
-  id: 'start-main-content',
   legend: '',
   onSave: false,
+  id: null,
   primaryButtonText: ['Save changes', 'Working'],
   sectionName: '',
   success: false,
   working: false
 };
 
-export default withRouter(LoginForm);
-
-export { LoginForm as plain };
+export default LoginForm;
