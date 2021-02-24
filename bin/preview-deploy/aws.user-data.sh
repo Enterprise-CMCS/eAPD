@@ -13,19 +13,22 @@ chmod -R g+w /app
 
 mkdir /app/tls
 
-# Install nginx and postgres
-yum -y install git postgresql-server amazon-cloudwatch-agent nginx-1.16.1-3.el7
+# Install nginx and postgres 10.15
+curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-10 -O https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-10
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-10
+yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm -y
+yum -y install git postgresql10-server-10.15-1PGDG.rhel7 amazon-cloudwatch-agent nginx-1.16.1-3.el7
 
 # Setup postgres
-postgresql-setup initdb
+postgresql-10-setup initdb
 echo "
 # TYPE    DATABASE    USER    ADDRESS         METHODS
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
-" > /var/lib/pgsql/data/pg_hba.conf
-systemctl start postgresql
-systemctl enable postgresql
+" > /var/lib/pgsql/10/data/pg_hba.conf
+systemctl start postgresql-10
+systemctl enable postgresql-10
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
@@ -48,49 +51,42 @@ user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;
-
 # Load dynamic modules. See /usr/share/nginx/README.dynamic.
 include /usr/share/nginx/modules/*.conf;
-
 events {
     worker_connections 1024;
 }
-
 http {
     log_format  main  '\$remote_addr - \$remote_user [\$time_local] "\$request" '
                       '\$status \$body_bytes_sent "\$http_referer" '
                       '"\$http_user_agent" "\$http_x_forwarded_for"';
-
     access_log  /var/log/nginx/access.log  main;
-
     sendfile            on;
     tcp_nopush          on;
     tcp_nodelay         on;
     keepalive_timeout   65;
     types_hash_max_size 2048;
-
     include             /etc/nginx/mime.types;
     default_type        application/octet-stream;
 
+    # Allow larger than normal headers
+    client_header_buffer_size 64k;
+    large_client_header_buffers 4 64k;
     server {
         listen       443 default_server ssl;
         listen       [::]:443 default_server ssl;
         server_name  _;
         root         /app/web;
-
         ssl_certificate     /app/tls/server.crt;
         ssl_certificate_key /app/tls/server.key;
-
         location /api/ {
           proxy_pass http://localhost:8000/;
         }
-
         location / {
           # For requests without a file extension, send the requested path if
           # it exists, otherwise send index.html to achieve push state routing
           try_files \$uri /index.html;
         }
-
         location ~ ^.+\..+\$ {
           # For requests with file extensions, send them if the file exists,
           # otherwise send a 404.
@@ -102,7 +98,6 @@ NGINXCONFIG
 
 # Configure CloudWatch Agent
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
-
 {
         "agent": {
                 "metrics_collection_interval": 60,
@@ -168,7 +163,6 @@ cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
                 }
         }
 }
-
 CWAGENTCONFIG
 
 # Nginx is preview only
@@ -231,7 +225,6 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
     }
   }
 }
-
 CWVARLOGCONFIG
 
 cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
@@ -257,11 +250,9 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
     }
   }
 }
-
 CWVAROPTCONFIG
 
 cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
-
 {
   "logs": {
     "logs_collected": {
@@ -312,7 +303,6 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
     }
   }
 }
-
 CWAPPLOGCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
@@ -326,16 +316,13 @@ CWAPPLOGCONFIG
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
 su ec2-user <<E_USER
-
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
-
 cd ~
-
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
@@ -344,43 +331,34 @@ touch /app/api/logs/Database-migration-out.log
 touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
-
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
-
 # We're using Node 10, and we don't care about minor/patch versions, so always
 # get the latest.
 nvm install 10
 nvm alias default 10
-
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
-
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
-
 # Build the web app and move it into place
 cd eAPD/web
 npm ci
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
 mv dist/* /app/web
 cd ~
-
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
-
 npm ci --only=production
-
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
 NODE_ENV=development DEV_DB_HOST=localhost npm run seed
-
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace
@@ -408,11 +386,9 @@ echo "module.exports = {
       OKTA_SERVER_ID: '__OKTA_SERVER_ID__',
       OKTA_CLIENT_ID: '__OKTA_CLIENT_ID__',
       OKTA_API_KEY: '__OKTA_API_KEY__'
-
     },
   }]
 };" > ecosystem.config.js
-
 # Start it up
 pm2 start ecosystem.config.js
 

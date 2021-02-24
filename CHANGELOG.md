@@ -19,6 +19,7 @@ Anticipated release: February 8, 2021
 - Fixes issue where the session ending timeout was not showing on certain pages ([#2770])
 - Updates contract term label ([#2820])
 - Resolve patch failure ([#2826])
+- Resolved issue with images not loading in staging ([#2845])
 
 #### ⚙️ Behind the scenes
 
@@ -40,3 +41,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2804]: https://github.com/CMSgov/eAPD/issues/2804
 [#2820]: https://github.com/CMSgov/eAPD/issues/2820
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
+[#2845]: https://github.com/CMSgov/eAPD/issues/2845
