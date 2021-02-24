@@ -49,7 +49,7 @@ restorecon -Rv /app/tls
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
 user nginx;
 worker_processes auto;
-error_log /var/log/nginx/error.log;
+error_log /var/log/nginx/error.log debug;
 pid /run/nginx.pid;
 # Load dynamic modules. See /usr/share/nginx/README.dynamic.
 include /usr/share/nginx/modules/*.conf;
