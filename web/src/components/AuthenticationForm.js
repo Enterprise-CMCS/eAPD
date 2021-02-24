@@ -23,7 +23,7 @@ const AuthenticationForm = ({
   hasEverLoggedOn
 }) => (
   <div id={id}>
-    <div className="ds-l-container" id="start-main-content">
+    <div className="ds-l-container">
       <div className="login-card">
         {!!success && (
           <Alert variation="success" role="alert">
@@ -117,7 +117,7 @@ AuthenticationForm.defaultProps = {
   canSubmit: true,
   error: false,
   footer: false,
-  id: 'start-main-content',
+  id: null,
   legend: '',
   onSave: false,
   onCancel: false,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, fireEvent } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
 import LoginMFAVerifyAuthApp from './LoginMFAVerifyAuthApp';
 
 let props;
@@ -15,6 +15,11 @@ describe('<LoginMFAVerifyAuthApp />', () => {
       }
     };
     renderUtils = renderWithConnection(<LoginMFAVerifyAuthApp {...props} />);
+  });
+
+  it('should not fail any accessibility tests', async () => {
+    const { container } = renderUtils;
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   test('title renders', () => {

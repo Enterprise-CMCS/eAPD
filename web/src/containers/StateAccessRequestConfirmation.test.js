@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from 'apd-testing-library';
+import { render, fireEvent, axe } from 'apd-testing-library';
 import StateAccessRequestConfirmation from './StateAccessRequestConfirmation';
 
 let props;
@@ -10,6 +10,11 @@ describe('<StateAccessRequestConfirmation />', () => {
       action: jest.fn()
     };
     renderUtils = render(<StateAccessRequestConfirmation {...props} />);
+  });
+
+  it('should not fail any accessibility tests', async () => {
+    const { container } = renderUtils;
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it('displays the confirmation message', () => {

@@ -1,13 +1,11 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
-import { renderWithConnection, axe } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
 
 import Login from './Login';
 
 describe('login component', () => {
-  test('renders correctly if logged in previously but not logged in now (shows logout notice)', () => {
-    const component = shallow(
+  it('renders correctly if logged in previously but not logged in now (shows logout notice)', () => {
+    const { queryByText } = renderWithConnection(
       <Login
         hasEverLoggedOn
         errorMessage={null}
@@ -17,11 +15,11 @@ describe('login component', () => {
     );
 
     // should never be a consent banner, so no need to clicky through it
-    expect(component).toMatchSnapshot();
+    expect(queryByText(/You have securely logged out/i)).toBeTruthy();
   });
 
-  test('renders correctly if not logged in, and never logged in', () => {
-    const component = shallow(
+  it('renders correctly if not logged in, and never logged in', () => {
+    const { queryByText, queryByRole, queryByLabelText } = renderWithConnection(
       <Login
         hasEverLoggedOn={false}
         errorMessage={null}
@@ -30,20 +28,21 @@ describe('login component', () => {
       />
     );
 
-    expect(component).toMatchSnapshot();
+    expect(queryByText(/You have securely logged out/i)).toBeNull();
+    expect(queryByRole('button', { name: /log in/i })).toBeDisabled();
 
-    component
-      .find('TextField')
-      .simulate('change', { target: { name: 'username', value: 'bob' } });
-    expect(component).toMatchSnapshot();
-    component
-      .find('Password')
-      .simulate('change', { target: { name: 'password', value: 'secret' } });
-    expect(component).toMatchSnapshot();
+    fireEvent.change(queryByLabelText('EUA ID'), {
+      target: { name: 'username', value: 'bob' }
+    });
+    fireEvent.change(queryByLabelText('Password'), {
+      target: { name: 'password', value: 'secret' }
+    });
+
+    expect(queryByRole('button', { name: /log in/i })).toBeEnabled();
   });
 
-  test('renders correctly if not logged in and there is an error', () => {
-    const component = shallow(
+  it('renders correctly if not logged in and there is an error', () => {
+    const { queryByText } = renderWithConnection(
       <Login
         hasEverLoggedOn={false}
         errorMessage="something here"
@@ -52,30 +51,11 @@ describe('login component', () => {
       />
     );
 
-    expect(component).toMatchSnapshot();
+    expect(queryByText('something here')).toBeTruthy();
   });
 
-  test('renders correctly if user is not in correct Okta group', () => {
-    const component = shallow(
-      <Login
-        authenticated={false}
-        error="Authentication failed"
-        customErrorMessage="Invalid Entry"
-        fetching={false}
-        hasEverLoggedOn={false}
-        location={{ state: { from: 'origin' } }}
-        login={() => {}}
-        loginOtp={() => {}}
-        isNotInGroup
-        otpStage
-      />
-    );
-
-    expect(component).toMatchSnapshot();
-  });
-
-  test('renders correctly if not logged in and fetching data', () => {
-    const component = shallow(
+  it('renders correctly if not logged in and fetching data', () => {
+    const { container, queryByRole } = renderWithConnection(
       <Login
         hasEverLoggedOn={false}
         errorMessage={null}
@@ -84,14 +64,15 @@ describe('login component', () => {
       />
     );
 
-    expect(component).toMatchSnapshot();
+    expect(queryByRole('button', { name: /logging in/i })).toBeTruthy();
+    expect(queryByRole('button', { name: /logging in/i })).toBeDisabled();
+    expect(container.querySelector('.ds-c-spinner')).toBeTruthy();
   });
 
-  test('calls login prop', () => {
-    const event = { preventDefault: sinon.spy() };
-    const loginProp = sinon.spy();
+  it('calls login prop', () => {
+    const loginProp = jest.fn();
 
-    const component = shallow(
+    const { queryByRole, queryByLabelText } = renderWithConnection(
       <Login
         hasEverLoggedOn={false}
         errorMessage={null}
@@ -100,28 +81,25 @@ describe('login component', () => {
       />
     );
 
-    component
-      .find('TextField')
-      .simulate('change', { target: { name: 'username', value: 'bob' } });
-    component
-      .find('Password')
-      .simulate('change', { target: { name: 'password', value: 'secret' } });
-    component.find('withRouter(LoginForm)').prop('onSave')(event);
+    fireEvent.change(queryByLabelText('EUA ID'), {
+      target: { name: 'username', value: 'bob' }
+    });
+    fireEvent.change(queryByLabelText('Password'), {
+      target: { name: 'password', value: 'secret' }
+    });
 
-    expect(loginProp.calledWith('bob', 'secret')).toBeTruthy();
-    expect(event.preventDefault.called).toBeTruthy();
+    fireEvent.click(queryByRole('button', { name: /log in/i }));
+    expect(loginProp).toHaveBeenCalledWith('bob', 'secret');
   });
 
-  describe('accessibility', () => {
-    it('should not fail any accessibility tests', async () => {
-      const props = {
-        hasEverLoggedOn: false,
-        errorMessage: null,
-        fetching: false,
-        login: jest.fn()
-      };
-      const { container } = renderWithConnection(<Login {...props} />);
-      expect(await axe(container)).toHaveNoViolations();
-    });
+  it('should not fail any accessibility tests', async () => {
+    const props = {
+      hasEverLoggedOn: false,
+      errorMessage: null,
+      fetching: false,
+      login: jest.fn()
+    };
+    const { container } = renderWithConnection(<Login {...props} />);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });
