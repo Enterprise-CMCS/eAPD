@@ -46,17 +46,21 @@ const adminActivities = activities.map(activity => ({
 
 // 'eAPD Federal Admin'
 const federalAdminRole = roles.find(role => role.name === 'eAPD Federal Admin');
-const federalAdminActivities = roleToActivityMappings['eAPD Federal Admin'].map(activityName => ({
-  role_id: federalAdminRole.id,
-  activity_id: activities.find(activity => activity.name === activityName).id
-}));
+const federalAdminActivities = roleToActivityMappings['eAPD Federal Admin'].map(
+  activityName => ({
+    role_id: federalAdminRole.id,
+    activity_id: activities.find(activity => activity.name === activityName).id
+  })
+);
 
 // 'eAPD State Admin'
 const stateAdminRole = roles.find(role => role.name === 'eAPD State Admin');
-const stateAdminActivities = roleToActivityMappings['eAPD State Admin'].map(activityName => ({
-  role_id: stateAdminRole.id,
-  activity_id: activities.find(activity => activity.name === activityName).id
-}));
+const stateAdminActivities = roleToActivityMappings['eAPD State Admin'].map(
+  activityName => ({
+    role_id: stateAdminRole.id,
+    activity_id: activities.find(activity => activity.name === activityName).id
+  })
+);
 
 exports.seed = async knex => {
   await knex('auth_activities').insert(activities);
