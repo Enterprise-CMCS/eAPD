@@ -8,6 +8,7 @@ Anticipated release: February 8, 2021
 - Swaps My State Dashboard title with eAPD logo ([#2776])
 - Create an endpoint to serve the help doc ([#2793])
 - Update Key State Personnel copy ([#2804])
+- Updates "Unable to save" error to use new text and a modal instead of alert ([#2406])
 
 #### 🐛 Bugs fixed
 
@@ -29,6 +30,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#2186]: https://github.com/CMSgov/eAPD/issues/2186
 [#2232]: https://github.com/CMSgov/eAPD/issues/2232
+[#2406]: https://github.com/CMSgov/eAPD/issues/2406
 [#2525]: https://github.com/CMSgov/eAPD/issues/2525
 [#2538]: https://github.com/CMSgov/eAPD/issues/2538
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
