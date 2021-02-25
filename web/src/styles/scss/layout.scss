@@ -64,19 +64,6 @@ footer {
   }
 }
 
-.alert--unexpected-error {
-  position: sticky;
-  top: -200px;
-  margin-top: -200px;
-  transition: top 400ms, margin-top 400ms;
-  z-index: 9;
-
-  &.alert--unexpected-error__active {
-    top: 60px;
-    margin-top: 0;
-  }
-}
-
 .alert--session-expiring {
   position: sticky;
   top: -200px;

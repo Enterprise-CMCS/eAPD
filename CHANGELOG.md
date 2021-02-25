@@ -8,6 +8,7 @@ Anticipated release: February 8, 2021
 - Swaps My State Dashboard title with eAPD logo ([#2776])
 - Create an endpoint to serve the help doc ([#2793])
 - Update Key State Personnel copy ([#2804])
+- Updates "Unable to save" error to use new text and a modal instead of alert ([#2406])
 
 #### 🐛 Bugs fixed
 
@@ -19,6 +20,7 @@ Anticipated release: February 8, 2021
 - Restrict file uploads ([#2740])
 - Fixes issue where the session ending timeout was not showing on certain pages ([#2770])
 - Resolve patch failure ([#2826])
+- Resolved issue with images not loading in staging ([#2845])
 
 #### ⚙️ Behind the scenes
 
@@ -28,6 +30,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#2186]: https://github.com/CMSgov/eAPD/issues/2186
 [#2370]: https://github.com/CMSgov/eAPD/issues/2370
+[#2406]: https://github.com/CMSgov/eAPD/issues/2406
 [#2525]: https://github.com/CMSgov/eAPD/issues/2525
 [#2538]: https://github.com/CMSgov/eAPD/issues/2538
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
@@ -40,3 +43,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
 [#2804]: https://github.com/CMSgov/eAPD/issues/2804
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
+[#2845]: https://github.com/CMSgov/eAPD/issues/2845
