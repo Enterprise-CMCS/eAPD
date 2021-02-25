@@ -1,7 +1,5 @@
 const get = require('./get');
-const post = require('./post');
 
-module.exports = (app, { getEndpoint = get, postEndpoint = post } = {}) => {
+module.exports = (app, { getEndpoint = get } = {}) => {
   getEndpoint(app);
-  postEndpoint(app);
 };
