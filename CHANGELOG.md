@@ -1,6 +1,6 @@
 # Next release
 
-Anticipated release: February 8, 2021
+Anticipated release: March 12, 2021
 
 #### 🚀 New features
 
@@ -18,6 +18,7 @@ Anticipated release: February 8, 2021
 - Update Babel/Webpack settings so that application loads in IE11 browsers ([#2601])
 - Restrict file uploads ([#2740])
 - Fixes issue where the session ending timeout was not showing on certain pages ([#2770])
+- Fixes an issue where the money fields were not formatting when re-loaded ([#2822])
 - Resolve patch failure ([#2826])
 - Resolved issue with images not loading in staging ([#2845])
 
@@ -40,5 +41,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2538]: https://github.com/CMSgov/eAPD/issues/2538
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
 [#2804]: https://github.com/CMSgov/eAPD/issues/2804
+[#2822]: https://github.com/CMSgov/eAPD/issues/2822
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
 [#2845]: https://github.com/CMSgov/eAPD/issues/2845
