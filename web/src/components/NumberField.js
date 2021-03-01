@@ -12,13 +12,13 @@ const NumberField = ({
   round,
   ...props
 }) => {
-  // set local to null so we can force the component to rerender it 
+  // set local to null so we can force the component to rerender it
   // with the masked value via useEffect
   const [local, setLocal] = useState('');
 
   // rerender component when value changes
   useEffect(() => {
-    setLocal(value.toString())
+    setLocal(value.toString());
   }, []);
 
   const stringToNumber = stringValue => {
