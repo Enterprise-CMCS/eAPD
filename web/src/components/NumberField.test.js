@@ -34,6 +34,11 @@ describe('NumberField component', () => {
     expect(input).toBeInTheDocument();
   });
 
+  xit('renders the initial value with the mask', () => {
+    const { input } = setup({ value: '1234' });
+    expect(input.value).toBe('1,234');
+  });
+
   it('blanks the input value when selected if value is zero', () => {
     const { input } = setup({ value: '0' });
     fireEvent.focus(input);
