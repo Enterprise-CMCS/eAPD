@@ -46,7 +46,7 @@ restorecon -Rv /app/tls
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
 user nginx;
 worker_processes auto;
-error_log /var/log/nginx/error.log;
+error_log /var/log/nginx/error.log debug;
 pid /run/nginx.pid;
 # Load dynamic modules. See /usr/share/nginx/README.dynamic.
 include /usr/share/nginx/modules/*.conf;
@@ -266,7 +266,7 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
           {
             "file_path": "/app/api/logs/eAPD-API-*",
             "log_group_name": "preview/app/api/logs/eAPD-API-combined-0.log"
-          },          
+          },
           {
             "file_path": "/app/api/logs/Database-migration-error.log*",
             "log_group_name": "preview/app/api/logs/Database-migration-error.log"
@@ -278,7 +278,7 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
           {
             "file_path": "/app/api/logs/Database-migration-*",
             "log_group_name": "preview/app/api/logs/Database-migration-combined.log"
-          },          
+          },
           {
             "file_path": "/app/api/logs/Database-seeding-error.log*",
             "log_group_name": "preview/app/api/logs/Database-seeding-error.log"
@@ -290,11 +290,11 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
           {
             "file_path": "/app/api/logs/Database-seeding-*",
             "log_group_name": "preview/app/api/logs/Database-seeding-combined.log"
-          },                                           
+          },
           {
             "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
-            "log_group_name": "preview/app/api/logs/cms-hitech-apd-api.logs"              
-          }    
+            "log_group_name": "preview/app/api/logs/cms-hitech-apd-api.logs"
+          }
         ]
       }
     }
