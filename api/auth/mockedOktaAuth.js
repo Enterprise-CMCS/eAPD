@@ -22,6 +22,12 @@ const allPermissionsAndState = {
   profile: { displayName: 'All Permissions And State' }
 };
 
+const eapdStateAdmin = {
+  status: 'ACTIVE',
+  id: 'eapd-state-admin',
+  profile: { displayName: 'eAPD State Admin' }
+};
+
 const mockOktaClient = {
   listUsers: () => {
     return new Promise(resolve => {
@@ -29,7 +35,8 @@ const mockOktaClient = {
         noPermissions,
         allPermissions,
         allPermissionsNoState,
-        allPermissionsAndState
+        allPermissionsAndState,
+        eapdStateAdmin
       ]);
     });
   },
@@ -47,6 +54,11 @@ const mockOktaClient = {
     if (id === 'all-permissions-no-state') {
       return new Promise(resolve => {
         resolve(allPermissionsNoState);
+      });
+    }
+    if (id === 'eapd-state-admin') {
+      return new Promise(resolve => {
+        resolve(eapdStateAdmin);
       });
     }
     if (id === '0') {
@@ -100,6 +112,15 @@ const mockVerifyJWT = token => {
     return new Promise(resolve => {
       resolve({
         sub: 'apas@email.com',
+        uid
+      });
+    });
+  }
+  if (token === 'eapd-state-admin') {
+    const uid = 'eapd-state-admin';
+    return new Promise(resolve => {
+      resolve({
+        sub: 'stateadmin@state.gov',
         uid
       });
     });

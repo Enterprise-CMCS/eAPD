@@ -32,6 +32,7 @@ const roles = {
 
 const roleToActivityMappings = {
   'eAPD Federal Admin': [
+    'view-users',
     'view-roles',
     'view-state-admins',
     'edit-state-admins',
