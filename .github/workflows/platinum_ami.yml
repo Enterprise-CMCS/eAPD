@@ -1,11 +1,11 @@
 name: Build Preview AMI from CMS Gold AMI using Packer
-environment: Test
 on:  
   push
 #  schedule:
 #    - cron: '0 0 * * *'  # every day at midnight
 # Add AWS Creds
 jobs:
+  environment: Test
   packer-ami-build:
     runs-on: ubuntu-latest
     steps: 
