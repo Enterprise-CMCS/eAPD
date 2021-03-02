@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Instruction from './Instruction';
 import { t } from '../i18n';
@@ -12,7 +12,7 @@ const Section = ({ children, id, resource }) => {
   return (
     <section id={id}>
       {title && <h2 className="ds-h2">{title}</h2>}
-      {helpText && <div className="ds-text--lead">{helpText}</div>}
+      {helpText && <div className="ds-text--lead section--help-text">{helpText}</div>}
       {children}
       <SecondaryNav />
     </section>
@@ -34,11 +34,11 @@ const Subsection = ({ children, headerClassName, id, nested, resource }) => {
   const title = t([resource, 'title'], { defaultValue: '' });
 
   return (
-    <Fragment>
+    <div className="subsection--title">
       {!nested && (
         <h3
           id={id}
-          className={`${headerClassName || ''} subsection--title ds-h3`}
+          className={`${headerClassName || ''} ds-h3`}
         >
           {title}
         </h3>
@@ -50,7 +50,7 @@ const Subsection = ({ children, headerClassName, id, nested, resource }) => {
       )}
       <Instruction source={`${resource}.instruction`} />
       {children}
-    </Fragment>
+    </div>
   );
 };
 
