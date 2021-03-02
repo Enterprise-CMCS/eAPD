@@ -1,4 +1,5 @@
 name: Build Preview AMI from CMS Gold AMI using Packer
+environment: Test
 on:  
   push
 #  schedule:
