@@ -5,6 +5,9 @@ exports[`APD overview component renders correctly 1`] = `
   id={null}
   resource="apd"
 >
+  <hr
+    class="custom-hr"
+  />
   <ChoiceList
     choices={
       Array [
