@@ -5,7 +5,9 @@ on:
 #    - cron: '0 0 * * *'  # every day at midnight
 # Add AWS Creds
 jobs:
-  environment: Test
+  environment:
+    name: Test
+    url: https://github.com
   packer-ami-build:
     runs-on: ubuntu-latest
     steps: 
