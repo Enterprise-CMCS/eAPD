@@ -12,8 +12,20 @@ const adminAffiliations = states
     status: 'approved'
   }));
 
+// affiliate 'eapd-state-admin' user with 'ak'
+const { id: stateAdminRoleId } = roles.find(role => role.name === 'eAPD State Admin');
+const stateAdminAffiliations = states
+  .filter(state => state.id === 'ak')
+  .map(state => ({
+    user_id: 'eapd-state-admin',
+    state_id: state.id,
+    role_id: stateAdminRoleId,
+    status: 'approved'
+  }));
+
 exports.seed = async knex => {
   await knex('auth_affiliations').insert(adminAffiliations);
+  await knex('auth_affiliations').insert(stateAdminAffiliations);
   await knex('auth_affiliations').insert([
     {
       id: 4000,

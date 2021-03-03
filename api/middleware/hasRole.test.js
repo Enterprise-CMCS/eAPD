@@ -30,7 +30,7 @@ tap.test('hasRole middleware', async t => {
 
   t.test('when user does not have the specified role', async t => {
     hasRole('eAPD System Operator')(request, response, next);
-    t.ok(response.status.calledWith(400), 'HTTP status set to 400 Bad Request');
+    t.ok(response.status.calledWith(403), 'HTTP status set to 403 Verboden');
     t.ok(response.end.called, 'response is terminated');
   });
 });
