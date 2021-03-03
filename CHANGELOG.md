@@ -1,6 +1,6 @@
 # Next release
 
-Anticipated release: February 8, 2021
+Anticipated release: March XX, 2021
 
 #### 🚀 New features
 
@@ -19,6 +19,7 @@ Anticipated release: February 8, 2021
 - Restrict file uploads ([#2740])
 - Fixes issue where the session ending timeout was not showing on certain pages ([#2770])
 - Resolve patch failure ([#2826])
+- No longer shows "Saved" when an error occurs with saving ([#2830])
 - Resolved issue with images not loading in staging ([#2845])
 
 #### ⚙️ Behind the scenes
@@ -41,4 +42,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2601]: https://github.com/CMSgov/eAPD/issues/2601
 [#2804]: https://github.com/CMSgov/eAPD/issues/2804
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
+[#2830]: https://github.com/CMSgov/eAPD/issues/2830
 [#2845]: https://github.com/CMSgov/eAPD/issues/2845
