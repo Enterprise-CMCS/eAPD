@@ -1,4 +1,4 @@
-name: Build Preview AMI from CMS Gold AMI using Packer
+name: Cleanup Unused/Old Plantinum AMIs
 on:  
   push
 #  schedule:
