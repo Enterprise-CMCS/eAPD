@@ -14,12 +14,13 @@ function cleanupPlatinumAMI() {
   configureAWS
 
   echo "• Finding available Platinum AMIs"
-  AVAIL_AMIS=$(getAvailableAMIs)            # TODO Create getAvailableAMIs function
-  for AMI_ID in $AVAIL_AMIS
-  do 
-    aws ec2 describe-instances --filter Name=image-id,Values="$AMI_ID"
-  done
-  # If above is null, deregister AMI
+  getAvailableAMIs
+  echo "• Checking for Platinum AMIs currently in use"
+  checkAMIForUsage
+  echo "• Checking for the most recently created Platinum AMI"
+  getMostRecentAMI
+  echo "• These AMIs have been deregistered because they are not most recent or in use"
+  deregisterIfNotUsed
 }
 
 function configureAWS() {
@@ -59,9 +60,9 @@ function deregisterIfNotUsed() {
   for AMI_ID in $AVAIL_AMIS
   do
     if [[ $AMI_ID == $IN_USE_AMIS ]] || [[ $AMI_ID == $MOST_RECENT_AMI ]]; then
-      echo "$AMI_ID is in use or new."
+      :
     else
-      echo "$AMI_ID will be deregistered."
+      aws ec2 deregister-image --image-id $AMI_ID
     fi
   done
 }
@@ -78,14 +79,5 @@ function deregisterIfNotUsed() {
 
 
 # for every AMI, check if its in use, if it is in use, print "in use" if it isn't in use print "not in use"
-echo "getAvailableAMIs"
-getAvailableAMIs
-echo ""
-echo "checkAMIForUsage"
-checkAMIForUsage
-echo ""
-echo "getMostRecentAMI"
-getMostRecentAMI
-echo ""
-echo "deregisterIfNotUsed"
-deregisterIfNotUsed
+
+cleanupPlatinumAMI
