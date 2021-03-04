@@ -1,6 +1,4 @@
 #!/bin/bash
-################## WIP ##################
-
 # Call with the following arguments:
 #    --AWS_REGION <AWS region name>   | The AWS region the instance should be
 #                                     | created in
