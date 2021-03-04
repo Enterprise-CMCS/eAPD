@@ -19,4 +19,4 @@ jobs:
           aws-region: ${{ secrets.TEST_AWS_REGION }}   
       - name: Clean Up Old AMIs
         run: | 
-          ./bin/preview-deploy/aws.cleanup.sh
+          ./bin/preview-deploy/aws.amicleanup.sh
