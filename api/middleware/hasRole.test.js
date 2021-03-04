@@ -10,7 +10,9 @@ let response;
 let next;
 
 let user = {
-  roles: ['eAPD Federal Admin']
+  roles: [
+    { name: 'eAPD Federal Admin' }
+  ]
 }
 
 tap.test('hasRole middleware', async t => {
@@ -32,5 +34,6 @@ tap.test('hasRole middleware', async t => {
     hasRole('eAPD System Operator')(request, response, next);
     t.ok(response.status.calledWith(403), 'HTTP status set to 403 Verboden');
     t.ok(response.end.called, 'response is terminated');
+    t.notOk(next.called, 'next is not called');
   });
 });

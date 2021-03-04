@@ -37,7 +37,9 @@ const roleToActivityMappings = {
     'view-state-admins',
     'edit-state-admins',
     'view-affiliations',
-    'edit-affiliations'
+    'edit-affiliations',
+    'view-document',
+    'edit-document'
   ],
   'eAPD State Admin': [
     'view-roles',

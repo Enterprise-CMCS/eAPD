@@ -18,10 +18,10 @@ describe('Affiliations endpoint | GET', () => {
   afterAll(() => teardownDB(db));
 
   describe('GET /states/all/affiliations', () => {
-    // unauthenticatedTest('get', '/states/all/affiliations');
-    // unauthorizedTest('get', '/states/all/affiliations');
+    unauthenticatedTest('get', '/states/all/affiliations');
+    unauthorizedTest('get', '/states/all/affiliations');
 
-    xit('returns 200', async () => {
+    it('returns 200', async () => {
       api = login('all-permissions');
       const response = await api.get('/states/all/affiliations');
       expect(response.status).toEqual(200);
@@ -34,7 +34,7 @@ describe('Affiliations endpoint | GET', () => {
     });
   });
 
-  xdescribe('GET /states/:stateId/affiliations', () => {
+  describe('GET /states/:stateId/affiliations', () => {
     unauthenticatedTest('get', '/states/ak/affiliations');
     unauthorizedTest('get', '/states/ak/affiliations');
 
@@ -44,7 +44,7 @@ describe('Affiliations endpoint | GET', () => {
     });
   });
 
-  xdescribe('GET /states/:stateId/affiliations/:id', () => {
+  describe('GET /states/:stateId/affiliations/:id', () => {
     unauthenticatedTest('get', '/states/ak/affiliations/4000');
     unauthorizedTest('get', '/states/ak/affiliations/4000');
 

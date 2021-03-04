@@ -12,9 +12,9 @@ const hasRole = role => (request, response, next) => {
   const { user = {} } = request;
   const { roles = [] } = user;
   logger.debug({ id: request.id, roles, role });
-  if (!roles.includes(role)) {
+  if (!roles.map(r => r.name).includes(role)) {
     logger.debug({ id: request.id, message: `user does not have role ${role}`});
-    response.status(403).end();
+    return response.status(403).end();
   }
   logger.debug({ id: request.id, message: `user has role ${role}`});
   next();
