@@ -16,11 +16,9 @@ module.exports = {
         }
       }
     },
-    '@storybook/addon-docs',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
-    '@storybook/addon-controls',
     '@storybook/addon-queryparams',
     '@storybook/addon-jest',
     'storybook-addon-designs'
