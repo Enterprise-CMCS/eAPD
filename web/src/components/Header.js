@@ -167,7 +167,7 @@ Header.defaultProps = {
   currentUser: null,
   currentState: null,
   canViewStateAdmin: false,
-  pathname: ""
+  pathname: ''
 };
 
 const mapStateToProps = state => ({

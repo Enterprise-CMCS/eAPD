@@ -199,6 +199,8 @@ workflows:
             branches:
               ignore:
                 - master
+            tags:
+              ignore: /^noinfra.*/
           requires:
             - frontend build preview
             - yaml test
@@ -623,10 +625,6 @@ jobs:
           command: |
             apt-get update
             apt-get install zip -y
-            rm -rf api/seeds/development
-            rm -rf api/seeds/test
-            rm -rf api/seeds/production
-            rm -rf api/seeds/shared
             cd api
             npm ci --only=production
             cd ..
