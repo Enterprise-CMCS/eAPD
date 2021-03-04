@@ -1,5 +1,6 @@
 import React from 'react';
 import { plain as LoginForm } from './LoginForm';
+import * as CardFormStories from './CardForm.stories';
 
 export default {
   title: 'LoginForm',
@@ -19,47 +20,42 @@ export default {
 export const Basic = args => <LoginForm {...args} />;
 
 Basic.args = {
-  cancelable: true,
-  canSubmit: true,
-  success: false,
-  error: false,
-  primaryButtonText: ['Save changes', 'Working'],
-  sectionName: '',
-  working: false,
-  hasEverLoggedOn: false,
-  history: { goBack: () => {} },
-  onSave: () => {}
+  ...CardFormStories.Basic.args
 };
 
 Basic.parameters = {
   jest: ['LoginForm.test.js']
 };
 
+const Form = () => (
+  <div className="ds-u-margin-bottom--4">
+    <label
+      htmlFor="textfield"
+      id="textfield-label"
+      className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
+    >
+      Enter some text in this field
+    </label>
+    <input
+      width="200px"
+      aria-labelledby="textfield-label"
+      className="ds-c-field ds-c-field--medium"
+      id="textfield"
+      type="text"
+      name="textfield"
+      defaultValue="Some Text"
+    />
+  </div>
+);
+
 export const TextField = args => (
   <LoginForm {...args}>
-    <div className="ds-u-margin-bottom--4">
-      <label
-        htmlFor="textfield"
-        id="textfield-label"
-        className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
-      >
-        Enter some text in this field
-      </label>
-      <input
-        width="200px"
-        aria-labelledby="textfield-label"
-        className="ds-c-field ds-c-field--medium"
-        id="textfield"
-        type="text"
-        name="textfield"
-        defaultValue="Some Text"
-      />
-    </div>
+    <Form />
   </LoginForm>
 );
 
 TextField.args = {
-  ...Basic.args
+  ...CardFormStories.Basic.args
 };
 
 TextField.parameters = {
@@ -68,29 +64,12 @@ TextField.parameters = {
 
 export const TextFieldWithFooter = args => (
   <LoginForm {...args}>
-    <div className="ds-u-margin-bottom--4">
-      <label
-        htmlFor="textfield"
-        id="textfield-label"
-        className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
-      >
-        Enter some text in this field
-      </label>
-      <input
-        width="200px"
-        aria-labelledby="textfield-label"
-        className="ds-c-field ds-c-field--medium"
-        id="textfield"
-        type="text"
-        name="textfield"
-        defaultValue="Some Text"
-      />
-    </div>
+    <Form />
   </LoginForm>
 );
 
 TextFieldWithFooter.args = {
-  ...Basic.args,
+  ...CardFormStories.Basic.args,
   footer: <p className="ds-u-padding-top--2">This is a footer</p>
 };
 

@@ -35,26 +35,30 @@ Basic.parameters = {
   jest: ['CardForm.test.js']
 };
 
+const Form = () => (
+  <div className="ds-u-margin-bottom--4">
+    <label
+      htmlFor="textfield"
+      id="textfield-label"
+      className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
+    >
+      Enter some text in this field
+    </label>
+    <input
+      width="200px"
+      aria-labelledby="textfield-label"
+      className="ds-c-field ds-c-field--medium"
+      id="textfield"
+      type="text"
+      name="textfield"
+      defaultValue="Some Text"
+    />
+  </div>
+);
+
 export const TextField = args => (
   <CardForm {...args}>
-    <div className="ds-u-margin-bottom--4">
-      <label
-        htmlFor="textfield"
-        id="textfield-label"
-        className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
-      >
-        Enter some text in this field
-      </label>
-      <input
-        width="200px"
-        aria-labelledby="textfield-label"
-        className="ds-c-field ds-c-field--medium"
-        id="textfield"
-        type="text"
-        name="textfield"
-        defaultValue="Some Text"
-      />
-    </div>
+    <Form />
   </CardForm>
 );
 
@@ -68,24 +72,7 @@ TextField.parameters = {
 
 export const TextFieldWithFooter = args => (
   <CardForm {...args}>
-    <div className="ds-u-margin-bottom--4">
-      <label
-        htmlFor="textfield"
-        id="textfield-label"
-        className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
-      >
-        Enter some text in this field
-      </label>
-      <input
-        width="200px"
-        aria-labelledby="textfield-label"
-        className="ds-c-field ds-c-field--medium"
-        id="textfield"
-        type="text"
-        name="textfield"
-        defaultValue="Some Text"
-      />
-    </div>
+    <Form />
   </CardForm>
 );
 
