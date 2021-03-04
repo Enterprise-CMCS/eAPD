@@ -2,50 +2,60 @@
 
 exports[`card form wrapper disables the save button if canSubmit is false 1`] = `
 <div
+  className="card--container"
   id="start-main-content"
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
           >
-            <Button
-              component="button"
-              disabled={true}
-              type="submit"
-              variation="primary"
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
             >
-              Save changes
-            </Button>
-            <a
-              className="ds-c-button ds-c-button--transparent"
-              href="/"
-            >
-              Cancel
-            </a>
-          </div>
-        </fieldset>
-      </form>
+              <Button
+                component="button"
+                disabled={true}
+                type="submit"
+                variation="primary"
+              >
+                Save changes
+              </Button>
+              <a
+                className="ds-c-button ds-c-button--transparent"
+                href="/"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
@@ -53,35 +63,45 @@ exports[`card form wrapper disables the save button if canSubmit is false 1`] = 
 
 exports[`card form wrapper does not render a cancel button if form is not cancelable 1`] = `
 <div
+  className="card--container"
   id="start-main-content"
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
-          />
-        </fieldset>
-      </form>
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+          >
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+            />
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
@@ -89,49 +109,59 @@ exports[`card form wrapper does not render a cancel button if form is not cancel
 
 exports[`card form wrapper renders a success alert if message provided 1`] = `
 <div
+  className="card--container"
   id="start-main-content"
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <Alert
-        headingLevel="3"
-        role="alert"
-        variation="success"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        oh yeah!
-      </Alert>
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
-      >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <Alert
+          headingLevel="3"
+          role="alert"
+          variation="success"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+          oh yeah!
+        </Alert>
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+        >
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
           >
-            <a
-              className="ds-c-button ds-c-button--transparent"
-              href="/"
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
             >
-              Cancel
-            </a>
-          </div>
-        </fieldset>
-      </form>
+              <a
+                className="ds-c-button ds-c-button--transparent"
+                href="/"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
@@ -139,49 +169,59 @@ exports[`card form wrapper renders a success alert if message provided 1`] = `
 
 exports[`card form wrapper renders an error alert if message provided 1`] = `
 <div
+  className="card--container"
   id="start-main-content"
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <Alert
-        headingLevel="3"
-        role="alert"
-        variation="error"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        oh noes!
-      </Alert>
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
-      >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <Alert
+          headingLevel="3"
+          role="alert"
+          variation="error"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+          oh noes!
+        </Alert>
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+        >
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
           >
-            <a
-              className="ds-c-button ds-c-button--transparent"
-              href="/"
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
             >
-              Cancel
-            </a>
-          </div>
-        </fieldset>
-      </form>
+              <a
+                className="ds-c-button ds-c-button--transparent"
+                href="/"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
@@ -189,50 +229,60 @@ exports[`card form wrapper renders an error alert if message provided 1`] = `
 
 exports[`card form wrapper renders with a save button if onSave prop is provided 1`] = `
 <div
+  className="card--container"
   id="start-main-content"
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
           >
-            <Button
-              component="button"
-              disabled={false}
-              type="submit"
-              variation="primary"
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
             >
-              Save changes
-            </Button>
-            <a
-              className="ds-c-button ds-c-button--transparent"
-              href="/"
-            >
-              Cancel
-            </a>
-          </div>
-        </fieldset>
-      </form>
+              <Button
+                component="button"
+                disabled={false}
+                type="submit"
+                variation="primary"
+              >
+                Save changes
+              </Button>
+              <a
+                className="ds-c-button ds-c-button--transparent"
+                href="/"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
@@ -240,42 +290,52 @@ exports[`card form wrapper renders with a save button if onSave prop is provided
 
 exports[`card form wrapper renders with the default id on the container if id prop is not set 1`] = `
 <div
+  className="card--container"
   id="start-main-content"
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
           >
-            <a
-              className="ds-c-button ds-c-button--transparent"
-              href="/"
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
             >
-              Cancel
-            </a>
-          </div>
-        </fieldset>
-      </form>
+              <a
+                className="ds-c-button ds-c-button--transparent"
+                href="/"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
@@ -283,42 +343,52 @@ exports[`card form wrapper renders with the default id on the container if id pr
 
 exports[`card form wrapper renders with the provided id on the container if id prop is set 1`] = `
 <div
+  className="card--container"
   id="my custom id"
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
           >
-            <a
-              className="ds-c-button ds-c-button--transparent"
-              href="/"
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
             >
-              Cancel
-            </a>
-          </div>
-        </fieldset>
-      </form>
+              <a
+                className="ds-c-button ds-c-button--transparent"
+                href="/"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
@@ -326,42 +396,52 @@ exports[`card form wrapper renders with the provided id on the container if id p
 
 exports[`card form wrapper renders without a save button if onSave prop is missing 1`] = `
 <div
+  className="card--container"
   id="start-main-content"
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
           >
-            <a
-              className="ds-c-button ds-c-button--transparent"
-              href="/"
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
             >
-              Cancel
-            </a>
-          </div>
-        </fieldset>
-      </form>
+              <a
+                className="ds-c-button ds-c-button--transparent"
+                href="/"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
@@ -369,42 +449,52 @@ exports[`card form wrapper renders without a save button if onSave prop is missi
 
 exports[`card form wrapper renders without an id on the container if id prop is null 1`] = `
 <div
+  className="card--container"
   id={null}
 >
   <div
     className="ds-l-container"
-    id="start-main-content"
   >
     <div
-      className="login-card"
+      className="ds-l-row card"
     >
-      <h1
-        className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
+      <div
+        className="ds-l-col--1 ds-u-margin-left--auto"
+      />
+      <div
+        className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
-        test
-      </h1>
-      <form
-        onSubmit={[Function]}
-      >
-        <fieldset
-          className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
+        <h1
+          className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold"
         >
-          hello world
-          <hr
-            className="ds-u-color--gray-lighter"
-          />
-          <div
-            className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
+          test
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide"
           >
-            <a
-              className="ds-c-button ds-c-button--transparent"
-              href="/"
+            hello world
+            <hr
+              className="ds-u-color--gray-lighter"
+            />
+            <div
+              className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3"
             >
-              Cancel
-            </a>
-          </div>
-        </fieldset>
-      </form>
+              <a
+                className="ds-c-button ds-c-button--transparent"
+                href="/"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div
+        className="ds-l-col--1 ds-u-margin-right--auto"
+      />
     </div>
   </div>
 </div>
