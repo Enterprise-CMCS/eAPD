@@ -199,6 +199,8 @@ workflows:
             branches:
               ignore:
                 - master
+            tags:
+              ignore: /^noinfra.*/
           requires:
             - frontend build preview
             - yaml test
