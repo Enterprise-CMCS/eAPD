@@ -11,7 +11,12 @@ const LoginLocked = () => {
             <span>Job Code Missing</span>
           </h1>
           <p>
-            You don’t have the correct job code to access the eAPD system. The <a href={`${apiUrl}/docs/account-registration`}>account registration guide</a> will help you with instructions on getting the correct job code in your EUA account.
+            You don’t have the correct job code to access the eAPD system. The{' '}
+            <a href={`${apiUrl}/docs/account-registration`}>
+              account registration guide
+            </a>{' '}
+            will help you with instructions on getting the correct job code in
+            your EUA account.
           </p>
           <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
             <a href="/" className="ds-c-button ds-c-button--transparent">

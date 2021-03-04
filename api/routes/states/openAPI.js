@@ -13,7 +13,8 @@ const name = {
   description: 'Full name of US State or Territory'
 };
 
-const medicaid_office = { // eslint-disable-line camelcase
+// eslint-disable-next-line camelcase
+const medicaid_office = {
   type: 'object',
   description: 'Contact information for this US State/Territory Medicaid office'
 };
