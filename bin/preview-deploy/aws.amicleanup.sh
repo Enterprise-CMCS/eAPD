@@ -58,24 +58,13 @@ function deregisterIfNotUsed() {
   for AMI_ID in $AVAIL_AMIS
   do
     if [[ $AMI_ID == $IN_USE_AMIS ]] || [[ $AMI_ID == $MOST_RECENT_AMI ]]; then
-      :
+      #:
+      print "Keeping $AMI_ID"
     else
-      aws ec2 deregister-image --image-id $AMI_ID
+      #aws ec2 deregister-image --image-id $AMI_ID
+      print "Deregistering $AMI_ID"
     fi
   done
 }
-# Gets Instances based on AMI ID
-#aws ec2 describe-instances --filter 'Name=image-id,Values=$AVAIL_AMIS'
-
-# Gets all info on all available AMIs
-#aws ec2 describe-images --filter 'Name=name,Values=eAPD Platinum AMI - *'
-
-# Gets all available Platinum AMIs image-ids
-#aws ec2 describe-images --filter 'Name=name,Values=eAPD Platinum AMI - *' | jq -rc '.Images[].ImageId'
-
-# for available amis check if in use by instance and if not deregister
-
-
-# for every AMI, check if its in use, if it is in use, print "in use" if it isn't in use print "not in use"
 
 cleanupPlatinumAMI
