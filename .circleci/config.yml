@@ -589,6 +589,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Initialize Directory
+          command: npm init
+      - run:
           name: Create GitHub Deployment
           command: ./bin/storybook-deploy/start.sh > deployment
       - restore_cache:
