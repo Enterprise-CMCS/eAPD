@@ -593,7 +593,7 @@ jobs:
           command: ./bin/storybook-deploy/start.sh > deployment
       - restore_cache:
           keys:
-            - cache-{{ checksum "../../web/package.json" }}
+            - cache-{{ checksum "web/package.json" }}
             # fallback to using the latest cache if no exact match is found
             - cache-
       - run:
@@ -615,7 +615,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: cache-{{ checksum "../../web/package.json" }}
+          key: cache-{{ checksum "web/package.json" }}
 
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
