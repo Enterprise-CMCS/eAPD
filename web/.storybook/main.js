@@ -5,7 +5,7 @@ const custom = require('../webpack.config.dev.js');
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
 module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/*.story.mdx', '../src/**/*.story.@(js|jsx|ts|tsx)'],
   addons: [
     {
       name: '@storybook/preset-scss',
@@ -26,6 +26,10 @@ module.exports = {
   webpackFinal: config => {
     return {
       ...config,
+      resolve: {
+        extensions: ['.js', '.jsx'],
+        modules: ['node_modules', 'shared']
+      },
       module: {
         ...config.module,
         rules: [

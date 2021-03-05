@@ -205,6 +205,10 @@ workflows:
             - frontend build preview
             - yaml test
 
+      - build-storybook:
+          name: build storybook
+          requires:
+            - frontend dependency vulnerability scan
       - store artifacts:
           name: store artifacts staging
           filters:
@@ -577,6 +581,41 @@ jobs:
                 }'
             fi
             false
+
+  build-storybook:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run:
+          name: Create GitHub Deployment
+          command: ./bin/storybook-deploy/start.sh > deployment
+      - restore_cache:
+          keys:
+            - cache-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - cache-
+      - run:
+          name: Installing Dependencies
+          command: npm install
+      - run:
+          name: Build Storybook
+          command: npm run build-storybook
+      - store_artifacts:
+          path: storybook-static
+      - run:
+          name: Add GitHub Deployment success status
+          command: ./bin/storybook-deploy/end.sh success
+          when: on_success
+      - run:
+          name: Add GitHub Deployment error status
+          command: ./bin/storybook-deploy/end.sh error
+          when: on_fail
+      - save_cache:
+          paths:
+            - node_modules
+          key: cache-{{ checksum "package.json" }}
 
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:

@@ -1,10 +1,26 @@
 import React from 'react';
-import { plain as AuthenticationForm } from './AuthenticationForm';
-import * as CardFormStories from './CardForm.stories';
+import { decoratorWithProviderAndRouter } from 'apd-storybook-library';
+import { plain as CardForm } from './CardForm';
+
+export const { history, decorators } = decoratorWithProviderAndRouter({
+  initialState: {
+    router: {
+      location: {
+        pathname: '/'
+      }
+    }
+  },
+  initialHistory: ['/']
+});
 
 export default {
-  title: 'AuthenticationForm',
-  component: AuthenticationForm,
+  title: 'CardForm',
+  component: CardForm,
+  decorators,
+  excludeStories: ['Form', 'history', 'decorators'],
+  parameters: {
+    jest: ['CardForm.test.js']
+  },
   argTypes: {
     cancelable: { control: 'boolean' },
     canSubmit: { control: 'boolean' },
@@ -17,17 +33,7 @@ export default {
   }
 };
 
-export const Basic = args => <AuthenticationForm {...args} />;
-
-Basic.args = {
-  ...CardFormStories.Basic.args
-};
-
-Basic.parameters = {
-  jest: ['AuthenticationForm.test.js']
-};
-
-const Form = () => (
+export const Form = () => (
   <div className="ds-u-margin-bottom--4">
     <label
       htmlFor="textfield"
@@ -48,31 +54,38 @@ const Form = () => (
   </div>
 );
 
+export const Basic = args => <CardForm {...args} />;
+
+Basic.args = {
+  cancelable: true,
+  canSubmit: true,
+  success: false,
+  error: false,
+  primaryButtonText: ['Save changes', 'Working'],
+  sectionName: '',
+  working: false,
+  hasEverLoggedOn: false,
+  history,
+  onSave: () => {}
+};
+
 export const TextField = args => (
-  <AuthenticationForm {...args}>
+  <CardForm {...args}>
     <Form />
-  </AuthenticationForm>
+  </CardForm>
 );
 
 TextField.args = {
-  ...CardFormStories.Basic.args
-};
-
-TextField.parameters = {
-  ...Basic.parameters
+  ...Basic.args
 };
 
 export const TextFieldWithFooter = args => (
-  <AuthenticationForm {...args}>
+  <CardForm {...args}>
     <Form />
-  </AuthenticationForm>
+  </CardForm>
 );
 
 TextFieldWithFooter.args = {
-  ...CardFormStories.Basic.args,
+  ...Basic.args,
   footer: <p className="ds-u-padding-top--2">This is a footer</p>
-};
-
-TextFieldWithFooter.parameters = {
-  ...Basic.parameters
 };
