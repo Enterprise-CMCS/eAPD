@@ -9,7 +9,7 @@ compose_file="docker-compose.endpoint-tests.yml"
 alias dc="docker-compose -f $compose_file"
 
 ENDPOINT_COVERAGE_CAPTURE=true \
-  dc up --detach
+  dc up -d
 dc exec api-for-testing npm run migrate
 dc exec api-for-testing npm run seed
 dc exec api-for-testing npm run test-endpoints $@ # -- --update-snapshot
