@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
-rm ./endpoint-tests/endpoint-data.json
+
+[ -e ./endpoint-tests/endpoint-data.json ] && rm -f ./endpoint-tests/endpoint-data.json
 echo "[]" > endpoint-data.json
 
 compose_file="docker-compose.endpoint-tests.yml"
