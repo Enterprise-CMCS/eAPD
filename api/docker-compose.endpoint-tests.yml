@@ -26,7 +26,7 @@ services:
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
-      - LOG_LEVEL=debug
+      - LOG_LEVEL=info
     command: npm start
     expose:
       - 8000
