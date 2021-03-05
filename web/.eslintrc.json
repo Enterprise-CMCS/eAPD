@@ -32,7 +32,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.js"],
+      "files": ["**/*.test.js", "**/*.story.js"],
       "env": {
         "jest": true
       },

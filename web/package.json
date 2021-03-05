@@ -10,7 +10,7 @@
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --config webpack.config.dev.js",
-    "test:generate-output": "jest --json --outputFile=.jest-test-results.json || true",
+    "test:generate-output": "jest --json --outputFile=.jest-test-results.json",
     "test": "TZ=utc jest --collectCoverage",
     "test-watch": "TZ=utc npm run test:generate-output -- --watch",
     "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\"",
