@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "storybook-circleci-github-deployments",
+  "author": "Kasper Mikiewicz <iam@kasper.io>",
+  "license": "MIT",
+  "prettier": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@storybook/html": "^5.0.11",
+    "@babel/core": "^7.4.5",
+    "babel-loader": "^8.0.6"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  }
+}
