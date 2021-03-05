@@ -588,6 +588,8 @@ jobs:
       - image: circleci/node:lts
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Create GitHub Deployment
           command: ./bin/storybook-deploy/start.sh > deployment
