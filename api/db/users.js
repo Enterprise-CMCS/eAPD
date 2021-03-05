@@ -68,10 +68,7 @@ const populateUser = async (
       affiliation = affiliations.find(Boolean);
     }
 
-    // i'm having trouble making sense of roles and such.
-    // does this just get all the roles and activities? yes
-    // how do i limit this to the roles associated with the user?
-    const roles = await getRolesAndActivities();
+    const roles = await getRolesAndActivities();  // gets ALL roles + activities
     const role = affiliation && roles.find(r => r.id === affiliation.role_id);
 
     populatedUser.state =
@@ -80,7 +77,11 @@ const populateUser = async (
       (await getStateById(affiliation.state_id));
     populatedUser.role = role && role.name;
     populatedUser.activities = (role && role.activities) || [];
-    populatedUser.roles = affiliations.map(a => roles.find(r => r.id === a.role_id));
+
+    // select roles assigned to user by affiliations data
+    populatedUser.roles = affiliations.map(a =>
+      roles.find(r => r.id === a.role_id)
+    );
 
     return populatedUser;
   }
