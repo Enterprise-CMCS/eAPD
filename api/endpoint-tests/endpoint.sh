@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -x
+shopt -s expand_aliases
 
 [ -e ./endpoint-tests/endpoint-data.json ] && rm -f ./endpoint-tests/endpoint-data.json
 echo "[]" > endpoint-data.json
