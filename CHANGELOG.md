@@ -22,6 +22,7 @@ Anticipated release: February 8, 2021
 - Updates contract term label ([#2820])
 - Resolve patch failure ([#2826])
 - Resolved issue with images not loading in staging ([#2845])
+- Update assurances and compliance page with accurate links and details ([#2862]) 
 
 #### ⚙️ Behind the scenes
 
@@ -46,3 +47,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2820]: https://github.com/CMSgov/eAPD/issues/2820
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
 [#2845]: https://github.com/CMSgov/eAPD/issues/2845
+[#2862]: https://github.com/CMSgov/eAPD/issues/2862
