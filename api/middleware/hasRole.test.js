@@ -9,7 +9,7 @@ let request;
 let response;
 let next;
 
-let user = {
+const user = {
   roles: [
     { name: 'eAPD Federal Admin' }
   ]

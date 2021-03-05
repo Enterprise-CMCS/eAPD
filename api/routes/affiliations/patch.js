@@ -24,7 +24,7 @@ module.exports = (app, { db = knex } = {}) => {
     '/states/all/affiliations/:id',
     can('edit-affiliations'),
     hasRole('eAPD Federal Admin'),
-    async (request, response, next) => {
+    async (request, response) => {
       const userId = request.user.id;
       const { id } = request.params;
       const { status, roleId } = request.body;

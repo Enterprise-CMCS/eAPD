@@ -18,8 +18,8 @@ module.exports = (
     '/states/all/affiliations',
     can('view-affiliations'),
     hasRole('eAPD Federal Admin'),
-    async (request, response, next) =>
-      await getAffiliations()
+    (request, response, next) =>
+      getAffiliations()
         .then(rows => response.send(rows))
         .catch(error => next(error))
   );

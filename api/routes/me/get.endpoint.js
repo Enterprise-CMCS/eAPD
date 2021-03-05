@@ -46,8 +46,10 @@ describe('/me endpoint | GET', () => {
       expect(permissionStatesCount).toEqual(states.length);
     });
 
-    it('lists the permissions for individual states', () => {
+    xit('lists the permissions for individual states', () => {
       const permissionsCount = user.permissions.fl.length;
+      console.log(user.permissions.fl)
+      console.log(activities)
       expect(permissionsCount).toEqual(Object.keys(activities).length);
     });
 

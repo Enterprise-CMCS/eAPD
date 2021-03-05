@@ -9,7 +9,7 @@ const logger = require('../logger')('hasRole middleware');
  * @returns {function} middleware function
  */
 const hasRole = role => (request, response, next) => {
-  const { user = {} } = request;
+  const { user = {} } = request; // eslint-disable-line prefer-const
   const { roles = [] } = user;
   logger.debug({ id: request.id, roles, role });
   if (!roles.map(r => r.name).includes(role)) {
@@ -17,7 +17,7 @@ const hasRole = role => (request, response, next) => {
     return response.status(403).end();
   }
   logger.debug({ id: request.id, message: `user has role ${role}`});
-  next();
+  return next();
 };
 
 module.exports = hasRole
