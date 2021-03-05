@@ -109,7 +109,7 @@ const Activity = ({ activity, activityIndex }) => {
         <p className="ds-u-margin-top--0">{contractor.description}</p>
         <ul className="ds-c-list--bare">
           <li>
-            <strong>Contract term: </strong>
+            <strong>Full Contract Term: </strong>
             {contractTerm()}
           </li>
           <li>
