@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
-
+#!/usr/bin/env bash
+set -x
 
 [ -e ./endpoint-tests/endpoint-data.json ] && rm -f ./endpoint-tests/endpoint-data.json
 echo "[]" > endpoint-data.json
