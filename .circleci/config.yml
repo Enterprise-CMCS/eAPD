@@ -583,13 +583,11 @@ jobs:
             false
 
   build-storybook:
-    working_directory: ~/project
+    working_directory: ~/repo
     docker:
       - image: circleci/node:lts
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/project
       - run:
           name: Create GitHub Deployment
           command: ./bin/storybook-deploy/start.sh > deployment
