@@ -1,6 +1,6 @@
 import React from 'react';
 import { decoratorWithProviderAndRouter } from 'apd-storybook-library';
-import { plain as CardForm } from './CardForm';
+import CardForm from './CardForm';
 
 export const { history, decorators } = decoratorWithProviderAndRouter({
   initialState: {
