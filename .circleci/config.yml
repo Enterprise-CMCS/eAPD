@@ -583,17 +583,17 @@ jobs:
             false
 
   build-storybook:
-    working_directory: ~/repo
+    working_directory: ~/project/bin/storybook-deploy
     docker:
       - image: circleci/node:lts
     steps:
       - checkout
       - run:
           name: Create GitHub Deployment
-          command: ./bin/storybook-deploy/start.sh > deployment
+          command: ./start.sh > deployment
       - restore_cache:
           keys:
-            - cache-{{ checksum "package.json" }}
+            - cache-{{ checksum "../../web/package.json" }}
             # fallback to using the latest cache if no exact match is found
             - cache-
       - run:
@@ -606,16 +606,16 @@ jobs:
           path: storybook-static
       - run:
           name: Add GitHub Deployment success status
-          command: ./bin/storybook-deploy/end.sh success
+          command: ./end.sh success
           when: on_success
       - run:
           name: Add GitHub Deployment error status
-          command: ./bin/storybook-deploy/end.sh error
+          command: ./end.sh error
           when: on_fail
       - save_cache:
           paths:
             - node_modules
-          key: cache-{{ checksum "package.json" }}
+          key: cache-{{ checksum "../../web/package.json" }}
 
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
