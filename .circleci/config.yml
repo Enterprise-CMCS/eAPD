@@ -583,14 +583,16 @@ jobs:
             false
 
   build-storybook:
-    working_directory: ~/repo
+    working_directory: ~/project/bin/storybook-deploy
     docker:
       - image: circleci/node:lts
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Create GitHub Deployment
-          command: ./bin/storybook-deploy/start.sh > deployment
+          command: ./start.sh > deployment
       - restore_cache:
           keys:
             - cache-{{ checksum "package.json" }}
@@ -606,11 +608,11 @@ jobs:
           path: storybook-static
       - run:
           name: Add GitHub Deployment success status
-          command: ./bin/storybook-deploy/end.sh success
+          command: ./end.sh success
           when: on_success
       - run:
           name: Add GitHub Deployment error status
-          command: ./bin/storybook-deploy/end.sh error
+          command: ./end.sh error
           when: on_fail
       - save_cache:
           paths:
