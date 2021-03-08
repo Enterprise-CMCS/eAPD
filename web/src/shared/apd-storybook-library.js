@@ -11,6 +11,7 @@ const decoratorWithProvider = ({ initialState = {} } = {}) => {
       return initialState;
     },
     subscribe: () => 0,
+    unsubscribe: () => 0,
     dispatch: action('dispatch')
   };
   return {

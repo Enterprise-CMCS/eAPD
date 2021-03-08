@@ -1,9 +1,7 @@
 import { Alert, Button, Spinner } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { withRouter } from 'react-router';
-
-const formSubmitNoop = e => e.preventDefault();
+import { useHistory } from 'react-router-dom';
 
 const AuthenticationForm = ({
   cancelable,
@@ -20,76 +18,88 @@ const AuthenticationForm = ({
   title,
   working,
   hasEverLoggedOn
-}) => (
-  <div id={id} className="card--container">
-    <div className="ds-l-container">
-      <div className="ds-l-row card">
-        <div className="ds-l-col--1 ds-u-margin-left--auto" />
-        <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-          {!!success && (
-            <Alert variation="success" role="alert">
-              {success}
-            </Alert>
-          )}
-          {!!error && (
-            <Alert variation="error" role="alert">
-              {error}
-            </Alert>
-          )}
+}) => {
+  const history = useHistory();
 
-          {hasEverLoggedOn && (
-            <p className="ds-u-color--gray ds-u-margin-bottom--0">
-              Welcome Back
-            </p>
-          )}
-          <h1 className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold">
-            {sectionName.length > 0 && (
-              <span className="ds-h6 ds-u-display--block">
-                {sectionName.toUpperCase()}
-              </span>
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (canSubmit && onSave) onSave(e);
+  };
+
+  return (
+    <div id={id} className="card--container">
+      <div className="ds-l-container">
+        <div className="ds-l-row card">
+          <div className="ds-l-col--1 ds-u-margin-left--auto" />
+          <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
+            {!!success && (
+              <Alert variation="success" role="alert">
+                {success}
+              </Alert>
             )}
-            {title}
-          </h1>
-          <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
-            <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide">
-              {!!legend && (
-                <legend className="ds-u-visibility--screen-reader">
-                  {legend}
-                </legend>
+            {!!error && (
+              <Alert variation="error" role="alert">
+                {error}
+              </Alert>
+            )}
+
+            {hasEverLoggedOn && (
+              <p className="ds-u-color--gray ds-u-margin-bottom--0">
+                Welcome Back
+              </p>
+            )}
+            <h1 className="ds-h1 ds-u-margin--0 ds-u-font-weight--bold">
+              {sectionName.length > 0 && (
+                <span className="ds-h6 ds-u-display--block">
+                  {sectionName.toUpperCase()}
+                </span>
               )}
-              {children}
-              <hr className="ds-u-color--gray-lighter" />
-              <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3">
-                {onSave && (
-                  <Button
-                    variation="primary"
-                    type="submit"
-                    disabled={!canSubmit || working}
-                  >
-                    {working ? (
-                      <Fragment>
-                        <Spinner /> {primaryButtonWorking}
-                      </Fragment>
-                    ) : (
-                      primaryButtonNormal
-                    )}
-                  </Button>
+              {title}
+            </h1>
+            <form onSubmit={handleSubmit}>
+              <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0 ds-u-measure--wide">
+                {!!legend && (
+                  <legend className="ds-u-visibility--screen-reader">
+                    {legend}
+                  </legend>
                 )}
-                {cancelable && (
-                  <a href="/" className="ds-c-button ds-c-button--transparent">
-                    Cancel
-                  </a>
-                )}
-              </div>
-            </fieldset>
-          </form>
-          {footer && <div className="card--foter">{footer}</div>}
+                {children}
+                <hr className="ds-u-color--gray-lighter" />
+                <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3">
+                  {onSave && (
+                    <Button
+                      variation="primary"
+                      type="submit"
+                      disabled={!canSubmit || working}
+                    >
+                      {working ? (
+                        <Fragment>
+                          <Spinner /> {primaryButtonWorking}
+                        </Fragment>
+                      ) : (
+                        primaryButtonNormal
+                      )}
+                    </Button>
+                  )}
+                  {cancelable && (
+                    <Button
+                      variation="transparent"
+                      onClick={() => history.push('/')}
+                    >
+                      Cancel
+                    </Button>
+                  )}
+                </div>
+              </fieldset>
+            </form>
+            {footer && <div className="card--footer">{footer}</div>}
+          </div>
+          <div className="ds-l-col--1 ds-u-margin-right--auto" />
         </div>
-        <div className="ds-l-col--1 ds-u-margin-right--auto" />
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 AuthenticationForm.propTypes = {
   cancelable: PropTypes.bool,
@@ -123,6 +133,4 @@ AuthenticationForm.defaultProps = {
   hasEverLoggedOn: false
 };
 
-export default withRouter(AuthenticationForm);
-
-export { AuthenticationForm as plain };
+export default AuthenticationForm;

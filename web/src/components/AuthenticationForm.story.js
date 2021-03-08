@@ -1,22 +1,13 @@
 import React from 'react';
-import { plain as AuthenticationForm } from './AuthenticationForm';
+import AuthenticationForm from './AuthenticationForm';
 import * as CardFormStory from './CardForm.story';
 
 export default {
   title: 'AuthenticationForm',
   component: AuthenticationForm,
+  decorators: CardFormStory.decorators,
   parameters: {
     jest: ['AuthenticationForm.test.js']
-  },
-  argTypes: {
-    cancelable: { control: 'boolean' },
-    canSubmit: { control: 'boolean' },
-    success: { control: 'text' },
-    error: { control: 'text' },
-    primaryButtonText: { control: 'array' },
-    sectionName: { control: 'text' },
-    working: { control: 'boolean' },
-    hasEverLoggedOn: { control: 'boolean' }
   }
 };
 
@@ -26,23 +17,19 @@ Basic.args = {
   ...CardFormStory.Basic.args
 };
 
-export const TextField = args => (
+const Template = args => (
   <AuthenticationForm {...args}>
     <CardFormStory.Form />
   </AuthenticationForm>
 );
 
+export const TextField = Template.bind({});
 TextField.args = {
   ...Basic.args
 };
 
-export const TextFieldWithFooter = args => (
-  <AuthenticationForm {...args}>
-    <CardFormStory.Form />
-  </AuthenticationForm>
-);
-
+export const TextFieldWithFooter = Template.bind({});
 TextFieldWithFooter.args = {
   ...Basic.args,
-  footer: <p className="ds-u-padding-top--2">This is a footer</p>
+  footer: <CardFormStory.Footer />
 };

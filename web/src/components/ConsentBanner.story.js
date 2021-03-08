@@ -1,16 +1,21 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { action } from '@storybook/addon-actions';
 import ConsentBanner from './ConsentBanner';
 
 export default {
   title: 'ConsentBanner',
   component: ConsentBanner,
+  parameters: {
+    jest: ['ConsentBanner.test.js']
+  },
   argTypes: {
     onAgree: () => {}
   }
 };
 
-export const defaultView = args => <ConsentBanner {...args} />;
+export const Basic = args => <ConsentBanner {...args} />;
 
-defaultView.parameters = {
-  jest: ['ConsentBanner.test.js']
+Basic.args = {
+  onAgree: action('agreed')
 };
