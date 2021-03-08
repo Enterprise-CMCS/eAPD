@@ -22,14 +22,14 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: /packer/plat-ami.pkr.hcl
+          target: packer/plat-ami.pkr.hcl
       # build artifact
       - name: Build Artifact
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
           arguments: "-color=false -on-error=abort"
-          target: /packer/plat-ami.pkr.hcl
+          target: packer/plat-ami.pkr.hcl
         env:
           PACKER_LOG: 1
           PACKER_AMI_NAME: ${{ secrets.PACKER_AMI_NAME }}
