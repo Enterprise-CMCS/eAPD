@@ -3,7 +3,6 @@ on:
   push
 #  schedule:
 #    - cron: '0 0 * * *'  # every day at midnight
-# Add AWS Creds
 jobs:
   packer:
     runs-on: ubuntu-latest
