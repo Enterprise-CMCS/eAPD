@@ -1,5 +1,7 @@
 import React from 'react';
 import { decoratorWithProviderAndRouter } from 'apd-storybook-library';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { action } from '@storybook/addon-actions';
 import CardForm from './CardForm';
 
 export const { history, decorators } = decoratorWithProviderAndRouter({
@@ -17,19 +19,9 @@ export default {
   title: 'CardForm',
   component: CardForm,
   decorators,
-  excludeStories: ['Form', 'history', 'decorators'],
+  excludeStories: ['Form', 'Footer', 'history', 'decorators'],
   parameters: {
     jest: ['CardForm.test.js']
-  },
-  argTypes: {
-    cancelable: { control: 'boolean' },
-    canSubmit: { control: 'boolean' },
-    success: { control: 'text' },
-    error: { control: 'text' },
-    primaryButtonText: { control: 'array' },
-    sectionName: { control: 'text' },
-    working: { control: 'boolean' },
-    hasEverLoggedOn: { control: 'boolean' }
   }
 };
 
@@ -53,6 +45,9 @@ export const Form = () => (
     />
   </div>
 );
+export const Footer = () => (
+  <p className="ds-u-padding-top--2">This is a footer</p>
+);
 
 export const Basic = args => <CardForm {...args} />;
 
@@ -65,27 +60,22 @@ Basic.args = {
   sectionName: '',
   working: false,
   hasEverLoggedOn: false,
-  history,
-  onSave: () => {}
+  onSave: action('onSave')
 };
 
-export const TextField = args => (
+const Template = args => (
   <CardForm {...args}>
     <Form />
   </CardForm>
 );
 
+export const TextField = Template.bind({});
 TextField.args = {
   ...Basic.args
 };
 
-export const TextFieldWithFooter = args => (
-  <CardForm {...args}>
-    <Form />
-  </CardForm>
-);
-
+export const TextFieldWithFooter = Template.bind({});
 TextFieldWithFooter.args = {
   ...Basic.args,
-  footer: <p className="ds-u-padding-top--2">This is a footer</p>
+  footer: <Footer />
 };

@@ -9,14 +9,14 @@ export default {
   }
 };
 
-const Basic = args => <Header {...args} />;
+export const Basic = args => <Header {...args} />;
 Basic.args = {
   ariaExpanded: false,
   showSiteTile: true,
   authenticated: false,
-  currentUser: null,
+  currentUser: { username: 'User', displayName: 'Test User' },
   isAdmin: false,
-  currentState: null,
+  currentState: { id: 'AK' },
   canViewStateAdmin: false,
   pathname: '/'
 };
