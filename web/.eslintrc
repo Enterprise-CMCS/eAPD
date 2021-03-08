@@ -1,6 +1,17 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": [
+    "jest-dom",
+    "testing-library"
+  ],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/react",
+    "plugin:testing-library/recommended"
+  ],
   "rules": {
     "jsx-a11y/anchor-is-valid": [
       2,
