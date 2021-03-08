@@ -1,16 +1,13 @@
 name: Cleanup Unused/Old Plantinum AMIs
 on:  
-  push
-#  schedule:
-#    - cron: '0 0 * * *'  # every day at midnight
-# Add AWS Creds
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
 jobs:
-  packer-ami-build:
+  packer-ami-cleanup:
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout Repo
         uses: actions/checkout@v2
-        #Packer Build
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

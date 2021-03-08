@@ -1,0 +1,37 @@
+name: Create Platinum AMI Using HashiCorp Packer
+on:  
+  push
+#  schedule:
+#    - cron: '0 0 * * *'  # every day at midnight
+# Add AWS Creds
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    name: packer
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      # fix backwards incompatibilities in template
+      - name: Fix Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: fix
+      # validate templates
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: ./packer/plat-ami.pkr.hcl
+      # build artifact
+      - name: Build Artifact
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: ./packer/plat-ami.pkr.hcl
+        env:
+          PACKER_LOG: 1
+          PACKER_AMI_NAME: ${{ secrets.PACKER_AMI_NAME }}
+          PACKER_SUBNET_ID: ${{ secrets.PACKER_SUBNET_ID }}
+          PACKER_VPC_ID: ${{ secrets.PACKER_VPC_ID }}
