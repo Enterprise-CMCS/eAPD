@@ -10,13 +10,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-#      # fix backwards incompatibilities in template
-#      - name: Fix Template
-#        uses: hashicorp/packer-github-actions@master
-#        with:
-#          command: fix
-#          target: packer/plat-ami.pkr.hcl
-      # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
         with:
@@ -29,12 +22,11 @@ jobs:
         with:
           command: build
           arguments: "-color=false -on-error=abort"
+          working_directory: packer
           target: plat-ami.pkr.hcl
-          working_directory: ./packer
         env:
           PACKER_LOG: 1
           PKR_VAR_ami_name: ${{ secrets.PACKER_AMI_NAME }}
           PKR_VAR_subnet_id: ${{ secrets.PACKER_SUBNET_ID }}
           PKR_VAR_vpc_id: ${{ secrets.PACKER_VPC_ID }}
           PKR_VAR_gold_owner: ${{ secrets.PACKER_GOLD_OWNER }}
-
