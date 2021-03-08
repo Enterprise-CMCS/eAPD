@@ -30,7 +30,7 @@ jobs:
         with:
           command: build
           arguments: "-color=false -on-error=abort"
-          target: ./plat-ami.pkr.hcl
+          target: plat-ami.pkr.hcl
           working_directory: ./packer
         env:
           PACKER_LOG: 1
