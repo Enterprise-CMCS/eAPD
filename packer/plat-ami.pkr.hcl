@@ -1,6 +1,7 @@
 variable "vpc_id" {}
 variable "subnet_id" {}
 variable "ami_name" {}
+variable "gold_owner" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -17,7 +18,7 @@ source "amazon-ebs" "Golden_Image" {
             virtualization-type = "hvm"
         }
         most_recent = true
-        owners      = ["842420567215"]
+        owners      = ["var.gold_owner"]
     }
     ssh_username = "ec2-user"
     associate_public_ip_address = true
