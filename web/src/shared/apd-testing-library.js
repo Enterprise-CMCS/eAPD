@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { render as rtlRender } from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
+import userEvent from '@testing-library/user-event';
 
 import reducer from '../reducers';
 
@@ -81,4 +82,4 @@ const renderWithRouter = (ui, renderOptions = {}) => {
 // Re-export all of the react-testing-library functions,
 // so that you don't have to import both libraries
 export * from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
-export { renderWithConnection, renderWithRouter };
+export { renderWithConnection, renderWithRouter, userEvent };
