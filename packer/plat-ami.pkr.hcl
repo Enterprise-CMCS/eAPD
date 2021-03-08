@@ -1,4 +1,3 @@
-# Same var file as test builds
 variable "vpc_id" {}
 variable "subnet_id" {}
 variable "ami_name" {}
