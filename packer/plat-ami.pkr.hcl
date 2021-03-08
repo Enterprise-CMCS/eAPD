@@ -30,9 +30,9 @@ build {
     sources = ["source.amazon-ebs.Golden_Image"]
 
     provisioner "shell" {
-        script = "bootstrap.sh"
+        script = "./bootstrap.sh"
     }
     provisioner "ansible" {
-      playbook_file = "ansible/nginx.yml"
+      playbook_file = "./ansible/nginx.yml"
     }
 }
