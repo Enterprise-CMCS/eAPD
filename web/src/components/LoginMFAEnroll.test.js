@@ -1,9 +1,8 @@
 import React from 'react';
-import { renderWithConnection, fireEvent } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, screen } from 'apd-testing-library';
 import LoginMFAEnroll from './LoginMFAEnroll';
 
 let props;
-let renderUtils;
 
 describe('<LoginMFAEnroll />', () => {
   beforeEach(() => {
@@ -22,34 +21,30 @@ describe('<LoginMFAEnroll />', () => {
         }
       ]
     };
-    renderUtils = renderWithConnection(<LoginMFAEnroll {...props} />);
+    renderWithConnection(<LoginMFAEnroll {...props} />);
   });
 
   test('title renders', () => {
-    const { getByText } = renderUtils;
-    expect(getByText(/Verify Your Identity/)).toBeTruthy();
+    expect(screen.getByText(/Verify Your Identity/)).toBeInTheDocument();
   });
 
   test('legend renders', () => {
-    const { getByText } = renderUtils;
     expect(
-      getByText('Choose a Multi-Factor Authentication route.')
-    ).toBeTruthy();
+      screen.getByText('Choose a Multi-Factor Authentication route.')
+    ).toBeInTheDocument();
   });
 
   test('factor checkbox renders', () => {
-    const { getByLabelText, getByRole } = renderUtils;
-    expect(getByLabelText('Call')).toBeTruthy();
+    expect(screen.getByLabelText('Call')).toBeInTheDocument();
 
-    expect(getByRole('radio')).not.toHaveAttribute('checked');
-    fireEvent.click(getByLabelText('Call'));
+    expect(screen.getByRole('radio')).not.toBeChecked();
+    fireEvent.click(screen.getByLabelText('Call'));
   });
 
   test('user selects a mfa option', () => {
-    const { getByLabelText, getByRole } = renderUtils;
-    fireEvent.click(getByLabelText('Call'));
+    fireEvent.click(screen.getByLabelText('Call'));
 
-    fireEvent.click(getByRole('button', { name: 'Submit' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
     expect(props.handleSelection).toHaveBeenCalled();
   });
 });
