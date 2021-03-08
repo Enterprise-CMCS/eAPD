@@ -1,6 +1,6 @@
 import React from 'react';
 import StateDashboard from './StateDashboard';
-import { renderWithConnection } from '../shared/apd-testing-library';
+import { renderWithConnection, screen, userEvent } from '../shared/apd-testing-library';
 import mockAxios from '../util/api';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
@@ -12,7 +12,6 @@ jest.mock('../util/api', () => ({
 }));
 
 let props;
-let renderUtils;
 
 const apd = {
   id: '1',
@@ -38,7 +37,7 @@ describe('<StateDashboard />', () => {
   });
   describe('pending state', () => {
     beforeEach(() => {
-      renderUtils = renderWithConnection(<StateDashboard {...props} />, {
+      renderWithConnection(<StateDashboard {...props} />, {
         initialState: {
           user: {
             data: {
@@ -53,42 +52,37 @@ describe('<StateDashboard />', () => {
     });
 
     it('should display the eAPD Logo', () => {
-      const { getByTestId } = renderUtils;
-      expect(getByTestId('eAPDlogo')).toBeTruthy();
+      expect(screen.getByTestId('eAPDlogo')).toBeInTheDocument();
     });
 
     it('should display introduction, but not instruction', () => {
-      const { queryByText } = renderUtils;
       expect(
-        queryByText(
+        screen.queryByText(
           /The CMS HITECH APD app is the new way to create and manage/i
         )
-      ).toBeTruthy();
-      expect(queryByText(/All your state's APDs are listed here./i)).toBeNull();
+      ).toBeInTheDocument();
+      expect(screen.queryByText(/All your state's APDs are listed here./i)).not.toBeInTheDocument();
     });
 
     it("shouldn't display the create APD button", () => {
-      const { queryByRole } = renderUtils;
-      expect(queryByRole('button', { name: /create/i })).toBeNull();
+      expect(screen.queryByRole('button', { name: /create/i })).not.toBeInTheDocument();
     });
 
     it("shouldn't display the empty APD message", () => {
-      const { queryByText } = renderUtils;
-      expect(queryByText(/You have not created any APDs./i)).toBeNull();
+      expect(screen.queryByText(/You have not created any APDs./i)).not.toBeInTheDocument();
     });
 
     it('should display the pending message', () => {
-      const { getByAltText, getByText } = renderUtils;
-      expect(getByAltText(/Puzzle Piece Icon/i)).toBeTruthy();
+      expect(screen.getByAltText(/Puzzle Piece Icon/i)).toBeInTheDocument();
       expect(
-        getByText(/Approval Pending From State Administrator/i)
-      ).toBeTruthy();
+        screen.getByText(/Approval Pending From State Administrator/i)
+      ).toBeInTheDocument();
     });
   });
 
   describe('denied state', () => {
     beforeEach(() => {
-      renderUtils = renderWithConnection(<StateDashboard {...props} />, {
+      renderWithConnection(<StateDashboard {...props} />, {
         initialState: {
           user: {
             data: {
@@ -103,15 +97,14 @@ describe('<StateDashboard />', () => {
     });
 
     it('should display the denied message', () => {
-      const { getByAltText, getByText } = renderUtils;
-      expect(getByAltText(/Puzzle Piece Icon/i)).toBeTruthy();
-      expect(getByText(/Approval Has Been Denied/i)).toBeTruthy();
+      expect(screen.getByAltText(/Puzzle Piece Icon/i)).toBeInTheDocument();
+      expect(screen.getByText(/Approval Has Been Denied/i)).toBeInTheDocument();
     });
   });
 
   describe('revoked state', () => {
     beforeEach(() => {
-      renderUtils = renderWithConnection(<StateDashboard {...props} />, {
+      renderWithConnection(<StateDashboard {...props} />, {
         initialState: {
           user: {
             data: {
@@ -126,16 +119,15 @@ describe('<StateDashboard />', () => {
     });
 
     it('should display the revoked message', () => {
-      const { getByAltText, getByText } = renderUtils;
-      expect(getByAltText(/Puzzle Piece Icon/i)).toBeTruthy();
-      expect(getByText(/Approval Permissions Revoked/i)).toBeTruthy();
+      expect(screen.getByAltText(/Puzzle Piece Icon/i)).toBeInTheDocument();
+      expect(screen.getByText(/Approval Permissions Revoked/i)).toBeInTheDocument();
     });
   });
 
   describe('default state, no apds', () => {
     beforeEach(() => {
       mockAxios.get.mockImplementation(() => Promise.resolve({ data: [] }));
-      renderUtils = renderWithConnection(
+      renderWithConnection(
         <StateDashboard {...props} pending={false} />,
         {
           initialState: {
@@ -156,41 +148,45 @@ describe('<StateDashboard />', () => {
     });
 
     it('should display the introduction and instructions', () => {
-      const { queryByText } = renderUtils;
       expect(
-        queryByText(
+        screen.queryByText(
           /The CMS HITECH APD app is the new way to create and manage/i
         )
-      ).toBeTruthy();
-      expect(queryByText(/All your state's APDs are listed here./i)).toBeNull();
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(/All your state's APDs are listed here./i)
+      ).not.toBeInTheDocument();
     });
 
     it('should handle clicking the create APD button', async () => {
       mockAxios.post.mockImplementation(() => Promise.resolve({ data: apd }));
-      const { queryByRole } = renderUtils;
-      expect(queryByRole('button', { name: /Create new/i })).toBeTruthy();
-      // fireEvent.click(queryByRole('button', { name: /Create new/i }));
+      const name = /Create new/i;
+      const createNewButton = screen.queryByRole('button', { name });
+      expect(createNewButton).toBeInTheDocument();
+      userEvent.click(createNewButton)
       // expect(props.createApd).toHaveBeenCalled();
     });
 
     it('should display the empty APD message', () => {
-      const { queryByText } = renderUtils;
-      expect(queryByText(/You have not created any APDs./i)).toBeTruthy();
+      expect(
+        screen.queryByText(/You have not created any APDs./i)
+      ).toBeInTheDocument();
     });
 
     it("shouldn't display the pending message", () => {
-      const { queryByAltText, queryByText } = renderUtils;
-      expect(queryByAltText(/Puzzle Piece Icon/i)).toBeNull();
       expect(
-        queryByText(/Approval Pending From State Administrator/i)
-      ).toBeNull();
+        screen.queryByAltText(/Puzzle Piece Icon/i)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/Approval Pending From State Administrator/i)
+      ).not.toBeInTheDocument();
     });
   });
 
   describe('default state with apds', () => {
     beforeEach(() => {
       mockAxios.get.mockImplementation(() => Promise.resolve({ data: [apd] }));
-      renderUtils = renderWithConnection(
+      renderWithConnection(
         <StateDashboard {...props} pending={false} />,
         {
           initialState: {
@@ -220,23 +216,23 @@ describe('<StateDashboard />', () => {
     });
 
     it('should display the APD', () => {
-      const { getByText } = renderUtils;
-      expect(getByText(apd.name)).toBeTruthy();
-      expect(getByText(updatedStr)).toBeTruthy();
-      expect(getByText(createdStr)).toBeTruthy();
+      expect(screen.getByText(apd.name)).toBeInTheDocument();
+      expect(screen.getByText(updatedStr)).toBeInTheDocument();
+      expect(screen.getByText(createdStr)).toBeInTheDocument();
     });
 
     it('should allow the user to click on the APD to edit', () => {
-      const { getByText } = renderUtils;
-      expect(getByText(apd.name)).toBeTruthy();
-      // fireEvent.click(getByText(apd.name));
+      const apdName = screen.getByText(apd.name);
+      expect(apdName).toBeInTheDocument();
+      // userEvent.click(apdName);
       // expect(props.selectApd).toHaveBeenCalledWith(apd.id, props.route);
     });
 
     it('should allow the user to click the delete APD button', () => {
-      const { getByText } = renderUtils;
-      expect(getByText(/Delete/i)).toBeTruthy();
-      // fireEvent.click(getByText(/Delete/i));
+      window.confirm = jest.fn(() => {});
+      const deleteButton = screen.getByText(/Delete/i);
+      expect(deleteButton).toBeInTheDocument();
+      userEvent.click(deleteButton);
       // expect(props.deleteApd).toHaveBeenCalledWith(apd);
     });
   });
