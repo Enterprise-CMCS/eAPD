@@ -33,6 +33,8 @@ jobs:
           target: packer/plat-ami.pkr.hcl
         env:
           PACKER_LOG: 1
-          ami_name: ${{ secrets.PACKER_AMI_NAME }}
-          subnet_id: ${{ secrets.PACKER_SUBNET_ID }}
-          vpc_id: ${{ secrets.PACKER_VPC_ID }}
+          PKR_VAR_ami_name: ${{ secrets.PACKER_AMI_NAME }}
+          PKR_VAR_subnet_id: ${{ secrets.PACKER_SUBNET_ID }}
+          PKR_VAR_vpc_id: ${{ secrets.PACKER_VPC_ID }}
+          PKR_VAR_gold_owner: ${{ secrets.PACKER_GOLD_OWNER }}
+
