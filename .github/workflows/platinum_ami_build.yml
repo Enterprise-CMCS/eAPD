@@ -11,12 +11,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      # fix backwards incompatibilities in template
-      - name: Fix Template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: fix
-          target: packer/plat-ami.pkr.hcl
+#      # fix backwards incompatibilities in template
+#      - name: Fix Template
+#        uses: hashicorp/packer-github-actions@master
+#        with:
+#          command: fix
+#          target: packer/plat-ami.pkr.hcl
       # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
