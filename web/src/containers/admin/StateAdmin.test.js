@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { renderWithConnection, fireEvent, waitFor } from 'apd-testing-library';
+import { renderWithConnection, userEvent, screen, waitFor } from 'apd-testing-library';
 
 import {
   plain as StateAdmin,
@@ -13,8 +13,6 @@ import {
   updateStateAffiliation,
   getRoleTypes
 } from '../../actions/admin';
-
-let renderUtils;
 
 const requestedAffiliation = {
   displayName: 'Liz Lemon',
@@ -69,26 +67,23 @@ describe('<StateAdmin />', () => {
         getStateAffiliations: jest.fn(),
         updateStateAffiliation: jest.fn()
       };
-      renderUtils = renderWithConnection(<StateAdmin {...props} />);
+      renderWithConnection(<StateAdmin {...props} />);
     });
 
     test('renders no results message', () => {
-      const { getAllByText } = renderUtils;
-      expect(getAllByText('No users on this tab at this time')).toHaveLength(3);
+      expect(screen.getAllByText('No users on this tab at this time')).toHaveLength(3);
     });
 
     test('renders header', () => {
-      const { getByText } = renderUtils;
       expect(
-        getByText('Maryland eAPD State Administrator Portal')
-      ).toBeTruthy();
+        screen.getByText('Maryland eAPD State Administrator Portal')
+      ).toBeInTheDocument();
     });
 
     test('renders correct tabs', () => {
-      const { getByText } = renderUtils;
-      expect(getByText('Requests')).toBeTruthy();
-      expect(getByText('Active')).toBeTruthy();
-      expect(getByText('Inactive')).toBeTruthy();
+      expect(screen.getByText('Requests')).toBeInTheDocument();
+      expect(screen.getByText('Active')).toBeInTheDocument();
+      expect(screen.getByText('Inactive')).toBeInTheDocument();
     });
   });
 
@@ -105,37 +100,33 @@ describe('<StateAdmin />', () => {
         getStateAffiliations: jest.fn(),
         updateStateAffiliation: jest.fn()
       };
-      renderUtils = renderWithConnection(<StateAdmin {...props} />);
+      renderWithConnection(<StateAdmin {...props} />);
     });
 
     test('renders name, email, phone', () => {
       // Note: we render the affiliations in each tab and update on tab change, so we
       // expect to see 3 instances which is why this is using getAllByText
-      const { getAllByText } = renderUtils;
-      expect(getAllByText(requestedAffiliation.displayName)).toHaveLength(3);
-      expect(getAllByText(requestedAffiliation.email)).toHaveLength(3);
-      expect(getAllByText(requestedAffiliation.primaryPhone)).toHaveLength(3);
+      expect(screen.getAllByText(requestedAffiliation.displayName)).toHaveLength(3);
+      expect(screen.getAllByText(requestedAffiliation.email)).toHaveLength(3);
+      expect(screen.getAllByText(requestedAffiliation.primaryPhone)).toHaveLength(3);
     });
 
     test('renders approve and deny buttons', () => {
-      const { getByText } = renderUtils;
-      expect(getByText('Approve')).toBeTruthy();
-      expect(getByText('Deny')).toBeTruthy();
+      expect(screen.getByText('Approve')).toBeInTheDocument();
+      expect(screen.getByText('Deny')).toBeInTheDocument();
     });
 
     it('should open manage modal on approve', async () => {
-      const { getByText } = renderUtils;
-      fireEvent.click(getByText('Approve'));
+      userEvent.click(screen.getByText('Approve'));
       await waitFor(() => {
-        expect(getByText('Edit Permissions')).toBeInTheDocument();
+        expect(screen.getByText('Edit Permissions')).toBeInTheDocument();
       });
     });
 
     it('should open confirmation modal on deny', async () => {
-      const { getByText } = renderUtils;
-      fireEvent.click(getByText('Deny'));
+      userEvent.click(screen.getByText('Deny'));
       await waitFor(() => {
-        expect(getByText('Confirm')).toBeInTheDocument();
+        expect(screen.getByText('Confirm')).toBeInTheDocument();
       });
     });
   });
@@ -153,37 +144,33 @@ describe('<StateAdmin />', () => {
         getStateAffiliations: jest.fn(),
         updateStateAffiliation: jest.fn()
       };
-      renderUtils = renderWithConnection(<StateAdmin {...props} />);
+      renderWithConnection(<StateAdmin {...props} />);
     });
 
     test('renders name, email, phone, role', () => {
-      const { getAllByText } = renderUtils;
-      expect(getAllByText(activeAffiliation.displayName)).toHaveLength(3);
-      expect(getAllByText(activeAffiliation.email)).toHaveLength(3);
-      expect(getAllByText(activeAffiliation.primaryPhone)).toHaveLength(3);
+      expect(screen.getAllByText(activeAffiliation.displayName)).toHaveLength(3);
+      expect(screen.getAllByText(activeAffiliation.email)).toHaveLength(3);
+      expect(screen.getAllByText(activeAffiliation.primaryPhone)).toHaveLength(3);
       // Only show role in the active tab
-      expect(getAllByText(activeAffiliation.role)).toHaveLength(1);
+      expect(screen.getAllByText(activeAffiliation.role)).toBeInTheDocument();
     });
 
     test('renders edit role and revoke buttons', () => {
-      const { getByText } = renderUtils;
-      expect(getByText('Edit Role')).toBeTruthy();
-      expect(getByText('Revoke')).toBeTruthy();
+      expect(screen.getByText('Edit Role')).toBeInTheDocument();
+      expect(screen.getByText('Revoke')).toBeInTheDocument();
     });
 
     it('should open manage modal on Edit Role', async () => {
-      const { getByText } = renderUtils;
-      fireEvent.click(getByText('Edit Role'));
+      userEvent.click(screen.getByText('Edit Role'));
       await waitFor(() => {
-        expect(getByText('Edit Permissions')).toBeInTheDocument();
+        expect(screen.getByText('Edit Permissions')).toBeInTheDocument();
       });
     });
 
     it('should open confirmation modal on revoke', async () => {
-      const { getByText } = renderUtils;
-      fireEvent.click(getByText('Revoke'));
+      userEvent.click(screen.getByText('Revoke'));
       await waitFor(() => {
-        expect(getByText('Confirm')).toBeInTheDocument();
+        expect(screen.getByText('Confirm')).toBeInTheDocument();
       });
     });
   });
@@ -201,28 +188,25 @@ describe('<StateAdmin />', () => {
         getStateAffiliations: jest.fn(),
         updateStateAffiliation: jest.fn()
       };
-      renderUtils = renderWithConnection(<StateAdmin {...props} />);
+      renderWithConnection(<StateAdmin {...props} />);
     });
 
     test('renders name, email, phone, status', () => {
-      const { getAllByText } = renderUtils;
-      expect(getAllByText(inactiveAffiliation.displayName)).toHaveLength(3);
-      expect(getAllByText(inactiveAffiliation.email)).toHaveLength(3);
-      expect(getAllByText(inactiveAffiliation.primaryPhone)).toHaveLength(3);
+      expect(screen.getAllByText(inactiveAffiliation.displayName)).toHaveLength(3);
+      expect(screen.getAllByText(inactiveAffiliation.email)).toHaveLength(3);
+      expect(screen.getAllByText(inactiveAffiliation.primaryPhone)).toHaveLength(3);
       // Only show status in the active tab
-      expect(getAllByText(inactiveAffiliation.status)).toHaveLength(1);
+      expect(screen.getAllByText(inactiveAffiliation.status)).toBeInTheDocument();
     });
 
     test('renders restore access button', () => {
-      const { getByText } = renderUtils;
-      expect(getByText('Restore Access')).toBeTruthy();
+      expect(screen.getByText('Restore Access')).toBeInTheDocument();
     });
 
     it('should open manage modal on Restore Access', async () => {
-      const { getByText } = renderUtils;
-      fireEvent.click(getByText('Restore Access'));
+      userEvent.click(screen.getByText('Restore Access'));
       await waitFor(() => {
-        expect(getByText('Edit Permissions')).toBeInTheDocument();
+        expect(screen.getByText('Edit Permissions')).toBeInTheDocument();
       });
     });
   });

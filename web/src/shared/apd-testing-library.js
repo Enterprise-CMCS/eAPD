@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { render as rtlRender } from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
-import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event'; // eslint-disable-line import/no-extraneous-dependencies
 
 import reducer from '../reducers';
 

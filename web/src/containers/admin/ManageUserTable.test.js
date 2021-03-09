@@ -3,7 +3,6 @@ import { renderWithConnection, screen } from 'apd-testing-library';
 import ManageUserTable from './ManageUserTable';
 
 let props;
-let renderUtils;
 
 const requestedAffiliation = {
   displayName: 'Liz Lemon',
@@ -95,8 +94,8 @@ describe('<ManageUserTable />', () => {
       ]
     };
     renderWithConnection(<ManageUserTable {...props} />);
-    expect(screen.queryByRole('button', { name: 'Edit Role' })).toBeNull();
-    expect(screen.queryByRole('button', { name: 'Revoke' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Edit Role' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Revoke' })).not.toBeInTheDocument();
   });
 
   test('shows correct table headers in inactive tab', () => {
