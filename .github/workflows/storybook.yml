@@ -15,7 +15,9 @@ jobs:
           npm install
       - name: Build
         run: |
+          cd web
           npm run build-storybook
       - name: Deploy
         run: |
+          cd web
           npm run deploy-storybook -- --ci
