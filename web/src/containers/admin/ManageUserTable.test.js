@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+import { renderWithConnection, screen } from 'apd-testing-library';
 import ManageUserTable from './ManageUserTable';
 
 let props;
@@ -50,10 +50,8 @@ describe('<ManageUserTable />', () => {
       tab: 'active',
       isFetching: true
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText('Loading...')).toBeTruthy();
+    renderWithConnection(<ManageUserTable {...props} />);
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   test('shows correct table headers in requests tab', () => {
@@ -62,13 +60,12 @@ describe('<ManageUserTable />', () => {
       affiliations: [requestedAffiliation],
       isFetching: false
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
+    renderWithConnection(<ManageUserTable {...props} />);
 
-    const { getByText } = renderUtils;
-    expect(getByText('Name')).toBeTruthy();
-    expect(getByText('Email')).toBeTruthy();
-    expect(getByText('Phone Number')).toBeTruthy();
-    expect(getByText('Actions')).toBeTruthy();
+    expect(screen.getByText('Name')).toBeInTheDocument();
+    expect(screen.getByText('Email')).toBeInTheDocument();
+    expect(screen.getByText('Phone Number')).toBeInTheDocument();
+    expect(screen.getByText('Actions')).toBeInTheDocument();
   });
 
   test('shows correct table headers in active tab', () => {
@@ -77,14 +74,13 @@ describe('<ManageUserTable />', () => {
       affiliations: [approvedAffiliation],
       isFetching: false
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
+    renderWithConnection(<ManageUserTable {...props} />);
 
-    const { getByText } = renderUtils;
-    expect(getByText('Name')).toBeTruthy();
-    expect(getByText('Email')).toBeTruthy();
-    expect(getByText('Phone Number')).toBeTruthy();
-    expect(getByText('Role')).toBeTruthy();
-    expect(getByText('Actions')).toBeTruthy();
+    expect(screen.getByText('Name')).toBeInTheDocument();
+    expect(screen.getByText('Email')).toBeInTheDocument();
+    expect(screen.getByText('Phone Number')).toBeInTheDocument();
+    expect(screen.getByText('Role')).toBeInTheDocument();
+    expect(screen.getByText('Actions')).toBeInTheDocument();
   });
 
   test('does now show actions for current users affiliation', () => {
@@ -98,10 +94,9 @@ describe('<ManageUserTable />', () => {
         <button type="button">Revoke</button>
       ]
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-    const { queryByRole } = renderUtils;
-    expect(queryByRole('button', { name: 'Edit Role' })).toBeNull();
-    expect(queryByRole('button', { name: 'Revoke' })).toBeNull();
+    renderWithConnection(<ManageUserTable {...props} />);
+    expect(screen.queryByRole('button', { name: 'Edit Role' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Revoke' })).toBeNull();
   });
 
   test('shows correct table headers in inactive tab', () => {
@@ -110,14 +105,13 @@ describe('<ManageUserTable />', () => {
       affiliations: [deniedAffiliation],
       isFetching: false
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
+    renderWithConnection(<ManageUserTable {...props} />);
 
-    const { getByText } = renderUtils;
-    expect(getByText('Name')).toBeTruthy();
-    expect(getByText('Email')).toBeTruthy();
-    expect(getByText('Phone Number')).toBeTruthy();
-    expect(getByText('Status')).toBeTruthy();
-    expect(getByText('Actions')).toBeTruthy();
+    expect(screen.getByText('Name')).toBeInTheDocument();
+    expect(screen.getByText('Email')).toBeInTheDocument();
+    expect(screen.getByText('Phone Number')).toBeInTheDocument();
+    expect(screen.getByText('Status')).toBeInTheDocument();
+    expect(screen.getByText('Actions')).toBeInTheDocument();
   });
 
   test('shows correct data in requests tab', () => {
@@ -126,12 +120,11 @@ describe('<ManageUserTable />', () => {
       affiliations: [requestedAffiliation],
       isFetching: false
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
+    renderWithConnection(<ManageUserTable {...props} />);
 
-    const { getByText } = renderUtils;
-    expect(getByText(requestedAffiliation.displayName)).toBeTruthy();
-    expect(getByText(requestedAffiliation.email)).toBeTruthy();
-    expect(getByText(requestedAffiliation.primaryPhone)).toBeTruthy();
+    expect(screen.getByText(requestedAffiliation.displayName)).toBeInTheDocument();
+    expect(screen.getByText(requestedAffiliation.email)).toBeInTheDocument();
+    expect(screen.getByText(requestedAffiliation.primaryPhone)).toBeInTheDocument();
   });
 
   test('shows correct data in active tab', () => {
@@ -140,13 +133,12 @@ describe('<ManageUserTable />', () => {
       affiliations: [approvedAffiliation],
       isFetching: false
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
+    renderWithConnection(<ManageUserTable {...props} />);
 
-    const { getByText } = renderUtils;
-    expect(getByText(approvedAffiliation.displayName)).toBeTruthy();
-    expect(getByText(approvedAffiliation.email)).toBeTruthy();
-    expect(getByText(approvedAffiliation.primaryPhone)).toBeTruthy();
-    expect(getByText(approvedAffiliation.role)).toBeTruthy();
+    expect(screen.getByText(approvedAffiliation.displayName)).toBeInTheDocument();
+    expect(screen.getByText(approvedAffiliation.email)).toBeInTheDocument();
+    expect(screen.getByText(approvedAffiliation.primaryPhone)).toBeInTheDocument();
+    expect(screen.getByText(approvedAffiliation.role)).toBeInTheDocument();
   });
 
   test('shows correct data in inactive tab', () => {
@@ -155,13 +147,12 @@ describe('<ManageUserTable />', () => {
       affiliations: [deniedAffiliation],
       isFetching: false
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
+    renderWithConnection(<ManageUserTable {...props} />);
 
-    const { getByText } = renderUtils;
-    expect(getByText(deniedAffiliation.displayName)).toBeTruthy();
-    expect(getByText(deniedAffiliation.email)).toBeTruthy();
-    expect(getByText(deniedAffiliation.primaryPhone)).toBeTruthy();
-    expect(getByText(deniedAffiliation.status, { exact: false })).toBeTruthy();
+    expect(screen.getByText(deniedAffiliation.displayName)).toBeInTheDocument();
+    expect(screen.getByText(deniedAffiliation.email)).toBeInTheDocument();
+    expect(screen.getByText(deniedAffiliation.primaryPhone)).toBeInTheDocument();
+    expect(screen.getByText(deniedAffiliation.status, { exact: false })).toBeInTheDocument();
   });
 
   test('renders passed in actions', () => {
@@ -175,9 +166,8 @@ describe('<ManageUserTable />', () => {
         </button>
       ]
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
+    renderWithConnection(<ManageUserTable {...props} />);
 
-    const { getByText } = renderUtils;
-    expect(getByText('Take Action')).toBeTruthy();
+    expect(screen.getByText('Take Action')).toBeInTheDocument();
   });
 });
