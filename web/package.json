@@ -15,8 +15,9 @@
     "test-watch": "TZ=utc npm run test:generate-output -- --watch",
     "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\"",
     "prebuild:storybook": "npm run test:generate-output",
-    "build-storybook": "build-storybook -o docs-build -c .storybook -s ./src",
-    "storybook": "start-storybook -s ./src -p 6006"
+    "build-storybook": "npm run scaffold && build-storybook -o docs-build -c .storybook -s ./dist",
+    "storybook": "npm run scaffold && start-storybook -s ./dist -p 6006",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "repository": {
     "type": "git",
@@ -124,6 +125,7 @@
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^6.1.21",
     "@storybook/source-loader": "^6.1.21",
+    "@storybook/storybook-deployer": "^2.8.7",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.7",
     "@testing-library/react-hooks": "^3.4.1",
