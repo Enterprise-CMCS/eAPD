@@ -36,6 +36,6 @@ build {
     }
     provisioner "file" {
         source = "nginx.conf.tpl"
-        destination = "~/nginx.conf.tpl"
+        destination = "/home/ec2-user/nginx.conf.tpl"
     }
 }
