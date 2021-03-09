@@ -204,7 +204,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
-              
+
       - store artifacts:
           name: store artifacts staging
           filters:
