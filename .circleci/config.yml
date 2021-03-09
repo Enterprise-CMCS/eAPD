@@ -204,19 +204,6 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
-      - frontend storybook:
-          filters:
-            branches:
-              ignore:
-                - master
-            tags:
-              ignore: /^noinfra.*/
-            requires:
-              - frontend build prod
-              - frontend dependency vulnerability scan
-              - frontend lint
-              - frontend test
-              - yaml test
               
       - store artifacts:
           name: store artifacts staging
@@ -416,19 +403,6 @@ jobs:
           when: always
           working_directory: ~/project/web
           command: bash <(curl -s https://codecov.io/bash)
-
-  frontend storybook:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: build storybook
-          working_directory: ~/project/web
-          command: npm run deploy-storybook -- --ci
-
 
   # ===== Shared jobs =====
   # These all depend on "install dependencies" running first.
