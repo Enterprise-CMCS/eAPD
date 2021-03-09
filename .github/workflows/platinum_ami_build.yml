@@ -10,6 +10,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.TEST_AWS_REGION }}   
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
         with:
@@ -31,6 +37,4 @@ jobs:
           PKR_VAR_subnet_id: ${{ secrets.PACKER_SUBNET_ID }}
           PKR_VAR_vpc_id: ${{ secrets.PACKER_VPC_ID }}
           PKR_VAR_gold_owner: ${{ secrets.PACKER_GOLD_OWNER }}
-          aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.TEST_AWS_REGION }}   
+          
