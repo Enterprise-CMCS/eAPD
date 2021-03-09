@@ -29,10 +29,13 @@ source "amazon-ebs" "Golden_Image" {
 build {
     sources = ["source.amazon-ebs.Golden_Image"]
 
+
+
     provisioner "shell" {
         script = "./bootstrap.sh"
     }
-    provisioner "ansible" {
-      playbook_file = "./ansible/nginx.yml"
+    provisioner "file" {
+        source = "nginx.conf.tpl"
+        destination = "~/nginx.conf.tpl"
     }
 }
