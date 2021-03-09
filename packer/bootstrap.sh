@@ -15,12 +15,12 @@ chmod -R g+w /app
 
 mkdir /app/tls
 
-# Install git and postgres
+# Install git, nginx, postgres
 yum -y install git 
+yum -y install nginx
 yum -y install postgresql-server 
-#yum -y install -y gcc gcc-c++ make
 
-#Install CloudWatch Agent
+# Install CloudWatch Agent
 curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 rpm -U ./amazon-cloudwatch-agent.rpm
 rm ./amazon-cloudwatch-agent.rpm
