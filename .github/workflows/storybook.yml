@@ -3,7 +3,10 @@ on:
   push:
     branches:
       - tforkner/2909-storybook
-    paths: ["web/.storybook/**","web/src/stories/**", "web/src/**/*.story.js"]
+    paths:
+      - 'web/.storybook/**'
+      - 'web/src/stories/**'
+      - 'web/src/**/*.story.js'
 jobs:
   storybook-deploy:
     runs-on: ubuntu-latest
