@@ -7,6 +7,7 @@ on:
       - 'web/.storybook/**'
       - 'web/src/stories/**'
       - 'web/src/**/*.story.js'
+      - 'web/src/**/*.story.mdx'
 jobs:
   storybook-deploy:
     runs-on: ubuntu-latest
