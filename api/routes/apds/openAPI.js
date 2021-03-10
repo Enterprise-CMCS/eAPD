@@ -368,9 +368,6 @@ const getApdFile = {
           description: 'The file',
           content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
         },
-        401: {
-          description: 'The apd ID does not match any known apds for the user'
-        },
         422: {
           description: 'The file does not belong to the APD or does not exist'
         }
