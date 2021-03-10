@@ -1,4 +1,4 @@
-name: Create Platinum AMI Using HashiCorp Packer
+name: Create Platinum AMI
 on:  
   schedule:
     - cron: '0 0 * * 1'  # Mondays at midnight
