@@ -19,7 +19,7 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
   >
     <li>
       <strong>
-        Contract term:
+        Full Contract Term:
       </strong>
        
       10/14/1066 - 10/15/1066
