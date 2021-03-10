@@ -1,4 +1,4 @@
-const getHelpDoc = {
+const getAccountRegistrationDoc = {
   '/docs/account-registration': {
     get: {
       tags: ['Docs'],
@@ -15,6 +15,24 @@ const getHelpDoc = {
   }
 };
 
+const getSystemAccessDoc = {
+  '/docs/system-access': {
+    get: {
+      tags: ['Docs'],
+      description: 'Get the account registration documentation',
+      responses: {
+        200: {
+          description: 'The file',
+          content: {
+            'application/pdf': { schema: { type: 'string', format: 'binary' } }
+          }
+        }
+      }
+    }
+  }
+};
+
 module.exports = {
-  ...getHelpDoc
+  ...getAccountRegistrationDoc,
+  ...getSystemAccessDoc
 };
