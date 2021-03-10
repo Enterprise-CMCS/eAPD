@@ -2,8 +2,6 @@
   "low": true,
   "package-manager": "auto",
   "allowlist": [
-    "1550|postcss-custom-properties>postcss-values-parser>is-url-superb>url-regex",
-    "1550|postcss-custom-properties>postcss-values-parser>url-regex",
     "1589|babel-jest>@jest/transform>jest-haste-map>fsevents>node-pre-gyp>rc>ini",
     "1589|webpack>watchpack>watchpack-chokidar2>chokidar>fsevents>node-pre-gyp>rc>ini",
     "1589|webpack-dev-server>chokidar>fsevents>node-pre-gyp>rc>ini"
