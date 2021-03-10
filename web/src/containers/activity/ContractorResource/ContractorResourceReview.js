@@ -30,7 +30,7 @@ const ContractorResourceReview = ({
       </p>
       <ul className="ds-c-list--bare">
         <li>
-          <strong>Contract term:</strong> {dateRangeForHumans}
+          <strong>Full Contract Term:</strong> {dateRangeForHumans}
         </li>
         <li>
           <strong>Total Contract Cost:</strong> <Dollars>{totalCost}</Dollars>
