@@ -11,6 +11,7 @@ import { selectAllActivities } from '../../reducers/activities.selectors';
 const All = ({ addActivity, activities }) => {
   return (
     <Section id="activities" resource="activities">
+      <hr class="custom-hr" />
       {activities.map((activity, index) => (
         <EntryDetails activityIndex={index} key={activity.key} />
       ))}
