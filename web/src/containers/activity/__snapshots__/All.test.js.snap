@@ -5,6 +5,9 @@ exports[`the Activities component renders correctly 1`] = `
   id="activities"
   resource="activities"
 >
+  <hr
+    class="custom-hr"
+  />
   <Connect(EntryDetails)
     activityIndex={0}
     key="key1"
