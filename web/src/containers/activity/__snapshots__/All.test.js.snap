@@ -6,7 +6,7 @@ exports[`the Activities component renders correctly 1`] = `
   resource="activities"
 >
   <hr
-    class="custom-hr"
+    className="custom-hr"
   />
   <Connect(EntryDetails)
     activityIndex={0}
