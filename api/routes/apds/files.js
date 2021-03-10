@@ -47,7 +47,7 @@ module.exports = (
     can('view-document'),
     userCanEditAPD(),
     multer().single('file'),
-    async (req, res) => {
+    async (req, res, next) => {
       try {
         const { metadata = null } = req.body;
         const { size = 0, buffer = null } = req.file;
@@ -60,7 +60,7 @@ module.exports = (
           req.params.id,
           metadata,
           size
-        );
+        ).catch(next);
 
         try {
           await putFile(fileID, image);
