@@ -1,6 +1,6 @@
 const multer = require('multer');
 const logger = require('../../logger')('apds file routes');
-const { can, userCanEditAPD } = require('../../middleware');
+const { can, userCanEditAPD, userCanAccessAPD } = require('../../middleware');
 const { validateFile: vf } = require('../../util/fileValidation');
 const {
   createNewFileForAPD: cf,
@@ -22,20 +22,25 @@ module.exports = (
 ) => {
   logger.silly('setting up GET /apds/:id/files/:fileID route');
 
-  app.get('/apds/:id/files/:fileID', can('view-document'), async (req, res) => {
-    try {
-      if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
-        const file = await getFile(req.params.fileID);
-        res.send(file).end();
-      } else {
+  app.get(
+    '/apds/:id/files/:fileID',
+    can('view-document'),
+    userCanAccessAPD(),
+    async (req, res) => {
+      try {
+        if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
+          const file = await getFile(req.params.fileID);
+          res.send(file).end();
+        } else {
+          res.status(422).end();
+        }
+      } catch (e) {
+        logger.error({ id: req.id, message: 'error fetching file' });
+        logger.error({ id: req.id, message: e });
         res.status(422).end();
       }
-    } catch (e) {
-      logger.error({ id: req.id, message: 'error fetching file' });
-      logger.error({ id: req.id, message: e });
-      res.status(422).end();
     }
-  });
+  );
 
   logger.silly('setting up POST /apds/:id/files route');
 
