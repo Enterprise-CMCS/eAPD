@@ -1,4 +1,4 @@
-name: Cleanup Unused/Old Plantinum AMIs
+name: Cleanup Plantinum AMIs
 on:  
   schedule:
     - cron: '0 0 * * *'  # every day at midnight
@@ -6,14 +6,14 @@ jobs:
   packer-ami-cleanup:
     runs-on: ubuntu-latest
     steps: 
-      - name: Checkout Repo
+      - name: Checkout Repo 🛎️
         uses: actions/checkout@v2
-      - name: Configure AWS Credentials
+      - name: Configure AWS Credentials ☁️
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.TEST_AWS_REGION }}   
-      - name: Clean Up Old AMIs
+      - name: Clean Up Old AMIs 🧹
         run: | 
           ./bin/preview-deploy/aws.amicleanup.sh
