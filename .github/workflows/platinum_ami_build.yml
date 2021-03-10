@@ -1,22 +1,21 @@
 name: Create Platinum AMI Using HashiCorp Packer
 on:  
-  push
-#  schedule:
-#    - cron: '0 0 * * *'  # every day at midnight
+  schedule:
+    - cron: '0 0 * * 1'  # Mondays at midnight
 jobs:
   packer:
     runs-on: ubuntu-latest
     name: packer
     steps:
-      - name: Checkout Repository
+      - name: Checkout Repository 🛎️
         uses: actions/checkout@v2
-      - name: Configure AWS Credentials
+      - name: Configure AWS Credentials ☁️
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.TEST_AWS_REGION }}   
-      - name: Validate Template
+      - name: Validate Template ✔️
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
@@ -24,7 +23,7 @@ jobs:
           working_directory: packer
           target: plat-ami.pkr.hcl
       # build artifact
-      - name: Build Artifact
+      - name: Build Artifact 🧱
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
