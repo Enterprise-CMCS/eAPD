@@ -651,14 +651,14 @@ Object {
           "204": Object {
             "description": "The APD was archived",
           },
-          "400": Object {
-            "description": "Invalid request, such as requesting to archive an APD that is not editable",
-          },
           "401": Object {
             "description": "The apd ID does not match any known apds for the user",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
+          },
+          "422": Object {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable",
           },
         },
         "security": Array [
@@ -773,6 +773,15 @@ Object {
             "description": "The update was successful",
           },
           "400": Object {
+            "description": "There was an error patching the APD",
+          },
+          "401": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "422": Object {
             "content": Object {
               "application/json": Object {
                 "schema": Object {
@@ -799,12 +808,6 @@ Object {
               },
             },
             "description": "The update failed due to a problem with the input data",
-          },
-          "401": Object {
-            "description": "The apd ID does not match any known apds for the user",
-          },
-          "403": Object {
-            "description": "Does not have permission to this activity",
           },
         },
         "security": Array [
@@ -868,14 +871,14 @@ Object {
             },
             "description": "The status of the event being logged",
           },
-          "400": Object {
-            "description": "The apd ID does not match any known apds",
-          },
           "401": Object {
             "description": "The apd ID does not match any known apds for the user",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
+          },
+          "422": Object {
+            "description": "The apd ID does not match any known apds",
           },
         },
         "security": Array [
@@ -941,17 +944,31 @@ Object {
             },
             "description": "The URL of the uploaded file, absolute, relative to the API host",
           },
-          "400": Object {
-            "description": "Invalid request, such as requesting to archive an APD that is not editable",
-          },
           "401": Object {
             "description": "The apd ID does not match any known apds for the user",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
           },
-          "500": Object {
-            "description": "The file is not a valid format",
+          "422": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "oneOf": Array [
+                    Object {
+                      "description": "Invalid request, such as requesting to archive an APD that is not editable",
+                    },
+                    Object {
+                      "description": "The file is not a valid format",
+                    },
+                    Object {
+                      "description": "Invalid request, such as requesting to archive an APD that is not editable",
+                    },
+                  ],
+                },
+              },
+            },
+            "description": "The update failed due to a problem with the input data",
           },
         },
         "security": Array [
@@ -1001,7 +1018,7 @@ Object {
             },
             "description": "The file",
           },
-          "400": Object {
+          "422": Object {
             "description": "The file does not belong to the APD or does not exist",
           },
         },

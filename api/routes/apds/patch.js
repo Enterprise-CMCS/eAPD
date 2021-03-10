@@ -29,11 +29,11 @@ module.exports = (
       logger.silly({ id: req.id, message: 'handling PATCH /apds/:id route' });
       if (!req.params.id) {
         logger.error({ id: req.id, message: 'no ID given' });
-        return res.status(400).end();
+        return res.status(422).end();
       }
       if (!Array.isArray(req.body)) {
         logger.error({ id: req.id, message: 'request body must be an array' });
-        return res.status(400).end();
+        return res.status(422).end();
       }
 
       logger.silly({
@@ -80,7 +80,7 @@ module.exports = (
           }));
           logger.error({ id: req.id, message: errors });
           return res
-            .status(400)
+            .status(422)
             .send(validate.errors.map(v => ({ path: v.dataPath })))
             .end();
         }
@@ -101,7 +101,7 @@ module.exports = (
         });
       } catch (e) {
         logger.error({ id: req.id, message: e });
-        return res.status(500).end();
+        return res.status(400).end();
       }
     }
   );

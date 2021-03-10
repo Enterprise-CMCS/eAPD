@@ -56,7 +56,7 @@ describe('APD edit actions for uploading files', () => {
   });
 
   it('rejects if the upload is not successful', async () => {
-    fetchMock.onPost('/apds/apd id/files').reply(500);
+    fetchMock.onPost('/apds/apd id/files').reply(422);
 
     const test = store.dispatch(uploadFile('asdf')).catch(() => {
       expect(store.getActions()).toEqual([

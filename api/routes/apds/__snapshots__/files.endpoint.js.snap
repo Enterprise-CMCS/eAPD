@@ -22,24 +22,6 @@ Object {
 }
 `;
 
-exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (png) 1`] = `
-Object {
-  "message": "Unable to upload file",
-}
-`;
-
-exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (png) 2`] = `
-Object {
-  "message": "Unable to upload file",
-}
-`;
-
-exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (png) 3`] = `
-Object {
-  "message": "Unable to upload file",
-}
-`;
-
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (tiff) 1`] = `
 Object {
   "url": "/apds/4001/files/1a880c01e883e032ae9b31465b40b0c45e2028f0d98d8dc48aa503d0a8cba326",

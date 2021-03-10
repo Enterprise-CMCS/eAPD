@@ -22,7 +22,7 @@ module.exports = (app, { createEventForAPD = ce } = {}) => {
       });
 
       if (eventID === null) {
-        res.status(400).end();
+        res.status(422).end();
       }
 
       res.send({ success: true });

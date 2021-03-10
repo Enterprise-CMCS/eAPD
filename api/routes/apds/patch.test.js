@@ -57,7 +57,7 @@ tap.test('apds PATCH endpoint', async tests => {
   tests.test('handles the case where an APD ID is not provided', async test => {
     await handler({ params: {} }, res);
 
-    test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
+    test.ok(res.status.calledWith(422), 'sends an HTTP 422 status');
   });
 
   tests.test(
@@ -65,7 +65,7 @@ tap.test('apds PATCH endpoint', async tests => {
     async test => {
       await handler({ params: { id: 'apd id' } }, res);
 
-      test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
+      test.ok(res.status.calledWith(422), 'sends an HTTP 422 status');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
     }
   );
@@ -74,7 +74,7 @@ tap.test('apds PATCH endpoint', async tests => {
     getAPDByID.throws(new Error('fake error'));
     await handler({ body: [], params: { id: 'apd id' } }, res);
 
-    test.ok(res.status.calledWith(500), 'sends an HTTP 500 status');
+    test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
     test.ok(res.end.calledAfter(res.status), 'response is terminated');
   });
 
@@ -117,7 +117,7 @@ tap.test('apds PATCH endpoint', async tests => {
 
     test.ok(patchObject.calledWith('old document', patches), 'applies patches');
     test.ok(validate.calledWith(patchedDocument), 'validates the new document');
-    test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
+    test.ok(res.status.calledWith(422), 'sends an HTTP 422 status');
     test.ok(
       res.send.calledWith([{ path: '/key1/key2/key3' }]),
       'sends back the list of invalid paths'

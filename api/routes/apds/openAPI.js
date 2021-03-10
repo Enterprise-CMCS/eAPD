@@ -136,6 +136,12 @@ const openAPI = {
           content: jsonResponse({ $ref: '#/components/schemas/apd' })
         },
         400: {
+          description: 'There was an error patching the APD'
+        },
+        401: {
+          description: 'The apd ID does not match any known apds for the user'
+        },
+        422: {
           description: 'The update failed due to a problem with the input data',
           content: jsonResponse({
             oneOf: [
@@ -160,9 +166,6 @@ const openAPI = {
               }
             ]
           })
-        },
-        401: {
-          description: 'The apd ID does not match any known apds for the user'
         }
       }
     },
@@ -185,12 +188,12 @@ const openAPI = {
         204: {
           description: 'The APD was archived'
         },
-        400: {
-          description:
-            'Invalid request, such as requesting to archive an APD that is not editable'
-        },
         401: {
           description: 'The apd ID does not match any known apds for the user'
+        },
+        422: {
+          description:
+            'Invalid request, such as requesting to archive an APD that is not editable'
         }
       }
     }
@@ -248,15 +251,26 @@ const openAPI = {
             }
           })
         },
-        400: {
-          description:
-            'Invalid request, such as requesting to archive an APD that is not editable'
-        },
         401: {
           description: 'The apd ID does not match any known apds for the user'
         },
-        500: {
-          description: 'The file is not a valid format'
+        422: {
+          description: 'The update failed due to a problem with the input data',
+          content: jsonResponse({
+            oneOf: [
+              {
+                description:
+                  'Invalid request, such as requesting to archive an APD that is not editable'
+              },
+              {
+                description: 'The file is not a valid format'
+              },
+              {
+                description:
+                  'Invalid request, such as requesting to archive an APD that is not editable'
+              }
+            ]
+          })
         }
       }
     }
@@ -311,11 +325,11 @@ const openAPI = {
             }
           })
         },
-        400: {
-          description: 'The apd ID does not match any known apds'
-        },
         401: {
           description: 'The apd ID does not match any known apds for the user'
+        },
+        422: {
+          description: 'The apd ID does not match any known apds'
         }
       }
     }
@@ -354,7 +368,7 @@ const getApdFile = {
           description: 'The file',
           content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
         },
-        400: {
+        422: {
           description: 'The file does not belong to the APD or does not exist'
         }
       }

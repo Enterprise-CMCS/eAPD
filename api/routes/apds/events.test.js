@@ -73,7 +73,7 @@ tap.test('apds events endpoints', async endpointTest => {
           }),
           'database record was not created from the request data'
         );
-        test.ok(res.status.calledWith(400), 'sends a 500 error');
+        test.ok(res.status.calledWith(422), 'sends a 422 error');
         test.ok(res.end.calledAfter(res.status), 'response is terminated');
       });
 
@@ -93,7 +93,7 @@ tap.test('apds events endpoints', async endpointTest => {
             }),
             'database record is created from the request data'
           );
-          test.ok(res.status.calledWith(400), 'sends a 500 error');
+          test.ok(res.status.calledWith(422), 'sends a 422 error');
           test.ok(res.end.calledAfter(res.status), 'response is terminated');
         }
       );

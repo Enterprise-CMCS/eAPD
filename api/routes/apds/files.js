@@ -28,12 +28,12 @@ module.exports = (
         const file = await getFile(req.params.fileID);
         res.send(file).end();
       } else {
-        res.status(400).end();
+        res.status(422).end();
       }
     } catch (e) {
       logger.error({ id: req.id, message: 'error fetching file' });
       logger.error({ id: req.id, message: e });
-      res.status(400).end();
+      res.status(422).end();
     }
   });
 
@@ -72,7 +72,7 @@ module.exports = (
         res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
       } catch (e) {
         logger.error({ id: req.id, message: e });
-        res.status(500).send({ message: 'Unable to upload file' });
+        res.status(422).send({ message: 'Unable to upload file' });
       }
     }
   );

@@ -70,7 +70,7 @@ tap.only('apds files endpoints', async endpointTest => {
 
         await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
 
-        test.ok(res.status.calledWith(400), 'sends a 400 error');
+        test.ok(res.status.calledWith(422), 'sends a 422 error');
         test.ok(res.end.calledAfter(res.status), 'response is terminated');
       }
     );
@@ -80,7 +80,7 @@ tap.only('apds files endpoints', async endpointTest => {
 
       await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
 
-      test.ok(res.status.calledWith(400), 'sends a 400 error');
+      test.ok(res.status.calledWith(422), 'sends a 422 error');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
     });
 
@@ -90,7 +90,7 @@ tap.only('apds files endpoints', async endpointTest => {
 
       await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
 
-      test.ok(res.status.calledWith(400), 'sends a 400 error');
+      test.ok(res.status.calledWith(422), 'sends a 422 error');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
     });
 
@@ -134,7 +134,7 @@ tap.only('apds files endpoints', async endpointTest => {
         await handler(req, res);
       } catch (err) {
         test.equal(err.message, 'User is trying to upload a text-based file');
-        test.ok(res.status.calledWith(500), 'sends a 500 error');
+        test.ok(res.status.calledWith(422), 'sends a 422 error');
         test.ok(res.send.calledWith({ message: 'Unable to upload file' }));
         test.ok(res.send.calledAfter(res.status), 'response is terminated');
       }
@@ -155,7 +155,7 @@ tap.only('apds files endpoints', async endpointTest => {
           err.message,
           'User is trying to upload a file type of application/pdf'
         );
-        test.ok(res.status.calledWith(500), 'sends a 500 error');
+        test.ok(res.status.calledWith(422), 'sends a 422 error');
         test.ok(res.send.calledWith({ message: 'Unable to upload file' }));
         test.ok(res.send.calledAfter(res.status), 'response is terminated');
       }
@@ -183,7 +183,7 @@ tap.only('apds files endpoints', async endpointTest => {
           ),
           'database record is created from the request data'
         );
-        test.ok(res.status.calledWith(500), 'sends a 500 error');
+        test.ok(res.status.calledWith(422), 'sends a 422 error');
         test.ok(res.send.calledAfter(res.status), 'response is terminated');
         test.ok(
           res.send.calledWith({ message: 'Unable to upload file' }),
@@ -222,7 +222,7 @@ tap.only('apds files endpoints', async endpointTest => {
           di.deleteFileByID.calledWith('new file ID'),
           'file is removed from the database'
         );
-        test.ok(res.status.calledWith(500), 'sends a 500 error');
+        test.ok(res.status.calledWith(422), 'sends a 422 error');
         test.ok(res.send.calledAfter(res.status), 'response is terminated');
         test.ok(
           res.send.calledWith({ message: 'Unable to upload file' }),

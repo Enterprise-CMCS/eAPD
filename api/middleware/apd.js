@@ -29,10 +29,13 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
             id: req.id,
             message: 'requested object does not exist'
           });
-          res.status(400).end();
+          res.status(422).end();
         }
       } catch (e) {
-        next(e);
+        next({
+          ...e,
+          status: 422
+        });
       }
     };
     return loadApd;
@@ -97,8 +100,10 @@ module.exports.userCanEditAPD = ({
       // First make sure they can access the APD.  Same story here
       // as above with respect to await.
       await userCanAccessAPD()(req, res, () => {
-        // Then make sure it's in draft
-        if (req.meta.apd.status === 'draft') {
+        if (res.headersSent) {
+          next();
+        } else if (req.meta.apd.status === 'draft') {
+          // Then make sure it's in draft
           next();
         } else {
           logger.verbose({
@@ -106,7 +111,7 @@ module.exports.userCanEditAPD = ({
             message: `apd status is [${req.meta.apd.status}], not editable`
           });
           res
-            .status(400)
+            .status(422)
             .send({
               error: 'apd-not-editable'
             })

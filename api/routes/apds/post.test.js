@@ -56,23 +56,21 @@ tap.test('apds POST endpoint', async endpointTest => {
       handler = app.post.args.pop().pop();
     });
 
-    tests.test('sends a 500 code for database errors', async test => {
+    tests.test('sends a 400 code for database errors', async test => {
       getStateProfile.throws(new Error('boop'));
       await handler(req, res);
 
-      test.ok(res.status.calledWith(500), 'HTTP status set to 500');
+      test.ok(res.status.calledWith(400), 'HTTP status set to 400');
       test.ok(res.end.calledOnce, 'response is terminated');
     });
 
-    // Why is a 500 status being returned when the frontend sends malformed data?
-    // Should this not be a 4xx status? What the heck?
     tests.test(
-      'sends a 500 if the newly-generated APD fails schema validation',
+      'sends a 422 if the newly-generated APD fails schema validation',
       async test => {
         getStateProfile.resolves({ medicaidDirector: { name: 3 } });
         await handler(req, res);
 
-        test.ok(res.status.calledWith(500), 'HTTP status set to 500');
+        test.ok(res.status.calledWith(422), 'HTTP status set to 422');
         test.ok(res.end.calledOnce, 'response is terminated');
       }
     );

@@ -21,7 +21,7 @@ describe('admin actions', () => {
 
       const roles = {};
 
-      fetchMock.onGet('/auth/activities').reply(500);
+      fetchMock.onGet('/auth/activities').reply(400);
       fetchMock.onGet('/auth/roles').reply(200, roles);
 
       await store.dispatch(actions.getRoles());
@@ -45,7 +45,7 @@ describe('admin actions', () => {
       const activities = {};
 
       fetchMock.onGet('/auth/activities').reply(200, activities);
-      fetchMock.onGet('/auth/roles').reply(500);
+      fetchMock.onGet('/auth/roles').reply(400);
 
       await store.dispatch(actions.getRoles());
 
@@ -65,8 +65,8 @@ describe('admin actions', () => {
     it('handles an error getting both', async () => {
       const store = mockStore();
 
-      fetchMock.onGet('/auth/activities').reply(500);
-      fetchMock.onGet('/auth/roles').reply(500);
+      fetchMock.onGet('/auth/activities').reply(400);
+      fetchMock.onGet('/auth/roles').reply(400);
 
       await store.dispatch(actions.getRoles());
 
@@ -112,7 +112,7 @@ describe('admin actions', () => {
     it('handles an error', async () => {
       const store = mockStore();
 
-      fetchMock.onGet('/users').reply(500);
+      fetchMock.onGet('/users').reply(400);
 
       await store.dispatch(actions.getUsers());
 

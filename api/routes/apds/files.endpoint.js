@@ -30,7 +30,7 @@ describe('APD files endpoints', () => {
           url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(400);
+        expect(response.status).toEqual(422);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -39,7 +39,7 @@ describe('APD files endpoints', () => {
           url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(400);
+        expect(response.status).toEqual(422);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -48,7 +48,7 @@ describe('APD files endpoints', () => {
           url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(400);
+        expect(response.status).toEqual(422);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -83,7 +83,7 @@ describe('APD files endpoints', () => {
       it('with a non-existant apd ID', async () => {
         const response = await api.post(url(9000), form);
 
-        expect(response.status).toEqual(400);
+        expect(response.status).toEqual(422);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -97,7 +97,7 @@ describe('APD files endpoints', () => {
       it('with an APD that is not in draft', async () => {
         const response = await api.post(url(4002), form);
 
-        expect(response.status).toEqual(400);
+        expect(response.status).toEqual(422);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -114,7 +114,7 @@ describe('APD files endpoints', () => {
         };
 
         api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(500);
+          expect(e.response.status).toEqual(422);
           expect(e.response.data).toMatchSnapshot();
         });
       });
@@ -132,7 +132,7 @@ describe('APD files endpoints', () => {
         };
 
         api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(500);
+          expect(e.response.status).toEqual(422);
           expect(e.response.data).toMatchSnapshot();
         });
       });
@@ -150,7 +150,7 @@ describe('APD files endpoints', () => {
         };
 
         api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(500);
+          expect(e.response.status).toEqual(422);
           expect(e.response.data).toMatchSnapshot();
         });
       });

@@ -43,7 +43,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
           message: 'Newly-created APD fails validation'
         });
         logger.error({ id: req.id, message: validateApd.errors });
-        return res.status(500).end();
+        return res.status(422).end();
       }
 
       const id = await createAPD({
@@ -60,7 +60,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       });
     } catch (e) {
       logger.error({ id: req.id, message: e });
-      return res.status(500).end();
+      return res.status(400).end();
     }
   });
 };

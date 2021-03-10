@@ -28,7 +28,10 @@ tap.test('APD-related middleware', async middlewareTests => {
         await loadApd({ getAPDByID })(req, res, next);
 
         invalidTest.ok(next.called, 'next is called');
-        invalidTest.ok(next.calledWith(err), 'pass error to middleware');
+        invalidTest.ok(
+          next.calledWith({ ...err, status: 422 }),
+          'pass error to middleware'
+        );
       }
     );
 
@@ -38,7 +41,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       const req = { meta: {}, params: { 'apd-id': 9 } };
       await loadApd({ getAPDByID })(req, res, next);
 
-      invalidTest.ok(res.status.calledWith(400), 'HTTP status is set to 400');
+      invalidTest.ok(res.status.calledWith(422), 'HTTP status is set to 422');
       invalidTest.ok(res.end.calledOnce, 'response is closed');
       invalidTest.ok(next.notCalled, 'next is not called');
     });
@@ -121,7 +124,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       userCanAccessAPDMock.yields();
     });
 
-    tests.test('sends a 400 if the APD is not editable', async test => {
+    tests.test('sends a 422 if the APD is not editable', async test => {
       const req = {
         meta: { apd: { status: 'not draft' } }
       };
@@ -132,7 +135,7 @@ tap.test('APD-related middleware', async middlewareTests => {
         next
       );
 
-      test.ok(res.status.calledWith(400), 'HTTP status is set to 400');
+      test.ok(res.status.calledWith(422), 'HTTP status is set to 422');
       test.ok(
         res.send.calledWith({ error: 'apd-not-editable' }),
         'sends error token'
