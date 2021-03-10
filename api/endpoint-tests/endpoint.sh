@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x
+# set -x
 shopt -s expand_aliases
 
 [ -e ./endpoint-tests/endpoint-data.json ] && rm -f ./endpoint-tests/endpoint-data.json

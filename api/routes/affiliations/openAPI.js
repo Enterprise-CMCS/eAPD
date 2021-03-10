@@ -196,9 +196,15 @@ const patchAffiliation = {
 };
 
 const affiliationRoutes = {
+  '/states/all/affiliations': {
+    ...getAffiliations,
+  },
   '/states/{stateId}/affiliations': {
     ...getAffiliations,
     ...postAffiliations
+  },
+  '/states/all/affiliations/{id}': {
+    ...patchAffiliation
   },
   '/states/{stateId}/affiliations/{id}': {
     ...getAffiliation,
