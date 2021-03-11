@@ -9,6 +9,7 @@ Anticipated release: February 8, 2021
 - Create an endpoint to serve the help doc ([#2793])
 - Update Key State Personnel copy ([#2804])
 - Updates "Unable to save" error to use new text and a modal instead of alert ([#2406])
+- Establish Process For Implementing Storybook w/ Examples ([#2909])
 
 #### 🐛 Bugs fixed
 
@@ -23,7 +24,7 @@ Anticipated release: February 8, 2021
 - Updates contract term label ([#2820])
 - Resolve patch failure ([#2826])
 - Resolved issue with images not loading in staging ([#2845])
-- Update assurances and compliance page with accurate links and details ([#2862]) 
+- Update assurances and compliance page with accurate links and details ([#2862])
 
 #### ⚙️ Behind the scenes
 
@@ -50,3 +51,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2826]: https://github.com/CMSgov/eAPD/issues/2826
 [#2845]: https://github.com/CMSgov/eAPD/issues/2845
 [#2862]: https://github.com/CMSgov/eAPD/issues/2862
+[#2909]: https://github.com/CMSgov/eAPD/issues/2909
