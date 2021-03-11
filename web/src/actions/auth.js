@@ -16,6 +16,7 @@ import {
 } from '../util/auth';
 import { MFA_FACTOR_TYPES } from '../constants';
 
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
@@ -148,7 +149,7 @@ export const mfaConfig = (mfaSelected, phoneNumber) => async dispatch => {
         : await factor.enroll();
 
     if (enrollTransaction.status === 'MFA_ENROLL_ACTIVATE') {
-      dispatch(
+      return dispatch(
         mfaEnrollActivate(mfaSelected, enrollTransaction.factor.activation)
       );
       if (
