@@ -108,7 +108,7 @@ const StateDashboard = (
     }
   };
 
-  const canCreateApd = (!isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED) ? true : false;
+  const canCreateApd = !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -238,7 +238,8 @@ StateDashboard.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  stateStatus: PropType.string.isRequired
+  stateStatus: PropType.string.isRequired,
+  isFedAdmin: PropType.func.isRequired
 };
 
 StateDashboard.defaultProps = {
