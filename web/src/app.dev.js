@@ -17,6 +17,8 @@ import Root from './components/Root';
 import { browserIsRed } from './util/browser';
 import { html } from './components/UpgradeBrowser';
 
+import './styles/index.scss';
+
 if (browserIsRed) {
   document.getElementById('app').innerHTML = `
   <div style="margin: 30px;">
