@@ -34,53 +34,77 @@ exports[`DollarField component renders correctly 1`] = `
       type="text"
       value="123"
     >
-      <div
+      <FormControl
         className="ds-u-clearfix stuff"
+        component="div"
+        label="test label"
+        labelComponent="label"
+        render={[Function]}
       >
-        <FormLabel
-          component="label"
-          fieldId="textfield_1"
-          id="textfield_label_2"
+        <div
+          className="ds-u-clearfix stuff"
         >
-          <label
-            className="ds-c-label"
-            htmlFor="textfield_1"
-            id="textfield_label_2"
+          <FormLabel
+            component="label"
+            errorId="field_1-error"
+            fieldId="field_1"
+            id="field_1-label"
           >
-            <span
-              className=""
+            <label
+              className="ds-c-label"
+              htmlFor="field_1"
+              id="field_1-label"
             >
-              test label
-            </span>
-          </label>
-        </FormLabel>
-        <Mask
-          mask="currency"
-        >
-          <div
-            className="ds-c-field-mask ds-c-field-mask--currency"
+              <span
+                className=""
+              >
+                test label
+              </span>
+            </label>
+          </FormLabel>
+          <TextInput
+            errorId="field_1-error"
+            errorPlacement="top"
+            id="field_1"
+            mask="currency"
+            name="test name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            setRef={[Function]}
+            size="medium"
+            type="text"
+            value="123"
           >
-            <div
-              className="ds-c-field__before ds-c-field__before--currency"
+            <Mask
+              mask="currency"
             >
-              $
-            </div>
-            <input
-              aria-label="test label. Enter amount in dollars."
-              className="ds-c-field ds-c-field--currency ds-c-field--medium"
-              id="textfield_1"
-              inputMode="numeric"
-              name="test name"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              pattern="[0-9.,-]*"
-              type="text"
-              value="123"
-            />
-          </div>
-        </Mask>
-      </div>
+              <div
+                className="ds-c-field-mask ds-c-field-mask--currency"
+              >
+                <div
+                  className="ds-c-field__before ds-c-field__before--currency"
+                >
+                  $
+                </div>
+                <input
+                  aria-invalid={false}
+                  className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                  id="field_1"
+                  inputMode="numeric"
+                  name="test name"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  pattern="[0-9.,-]*"
+                  type="text"
+                  value="123"
+                />
+              </div>
+            </Mask>
+          </TextInput>
+        </div>
+      </FormControl>
     </TextField>
   </NumberField>
 </DollarField>
