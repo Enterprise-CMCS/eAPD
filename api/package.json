@@ -112,8 +112,5 @@
       "**/__tests__/**/*.js?(x)",
       "**/?(*.)+(spec|test|endpoint).js?(x)"
     ]
-  },
-  "prettier": {
-    "singleQuote": true
   }
 }
