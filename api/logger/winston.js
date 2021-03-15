@@ -6,6 +6,7 @@ const { name: packageName } = require('../package');
 const { LOG_CONSOLE, LOG_FILE, LOG_LEVEL } = process.env;
 
 const formats = [
+  winston.format.colorize(),
   winston.format.timestamp(),
   winston.format.errors({ stack: true }),
   winston.format.json()
