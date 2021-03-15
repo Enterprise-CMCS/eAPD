@@ -1,6 +1,6 @@
 import React from 'react';
 import StateDashboard from './StateDashboard';
-import { renderWithConnection } from '../shared/apd-testing-library';
+import { renderWithConnection } from 'apd-testing-library';
 import mockAxios from '../util/api';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
