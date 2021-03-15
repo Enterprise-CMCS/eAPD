@@ -1,128 +1,93 @@
-import { shallow, mount } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
+import { renderWithConnection, screen } from 'apd-testing-library';
 
-import { plain as AuthenticationForm } from './AuthenticationForm';
+import AuthenticationForm from './AuthenticationForm';
 
-const history = { goBack: sinon.spy() };
+let mockGoBack;
+
+jest.mock('react-router-dom', () => {
+  mockGoBack = jest.fn();
+  return {
+    useHistory: jest.fn().mockReturnValue({ goBack: mockGoBack })
+  };
+});
 
 const defaultProps = {
-  title: 'test',
-  history,
-  children: ''
+  title: 'test'
 };
 
 const setup = (props = {}) => {
-  return mount(<AuthenticationForm {...defaultProps} {...props} />);
+  return renderWithConnection(
+    <AuthenticationForm {...defaultProps} {...props}>
+      hello world
+    </AuthenticationForm>
+  );
 };
 
 describe('card form wrapper', () => {
   beforeEach(() => {
-    history.goBack.resetHistory();
+    mockGoBack.mockReset();
   });
 
   test('renders without an id on the container if id prop is null', () => {
-    expect(
-      shallow(
-        <AuthenticationForm id={null} title="test" history={history}>
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup({ id: null });
+
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
   test('renders with the provided id on the container if id prop is set', () => {
-    expect(
-      shallow(
-        <AuthenticationForm id="my custom id" title="test" history={history}>
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup({ id: 'my-custom-id' });
+
+    expect(document.querySelector('#my-custom-id')).toBeTruthy();
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
   test('renders with the default id on the container if id prop is not set', () => {
-    expect(
-      shallow(
-        <AuthenticationForm title="test" history={history}>
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup();
+
+    expect(document.querySelector('#start-main-content')).toBeTruthy();
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
   test('renders without a save button if onSave prop is missing', () => {
-    expect(
-      shallow(
-        <AuthenticationForm title="test" history={history}>
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup();
+
+    expect(screen.queryByRole('button', { name: 'Save changes' })).toBeNull();
   });
 
   test('renders with a save button if onSave prop is provided', () => {
-    expect(
-      shallow(
-        <AuthenticationForm title="test" history={history} onSave={sinon.spy()}>
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup({ onSave: jest.fn() });
+
+    expect(screen.getByRole('button', { name: 'Save changes' })).toBeTruthy();
   });
 
   test('disables the save button if canSubmit is false', () => {
-    expect(
-      shallow(
-        <AuthenticationForm
-          title="test"
-          history={history}
-          onSave={sinon.spy()}
-          canSubmit={false}
-        >
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup({ onSave: jest.fn(), canSubmit: false });
+
+    expect(screen.getByRole('button', { name: 'Save changes' })).toBeDisabled();
   });
 
   test('renders a legend if provided', () => {
-    const props = {
-      legend: 'hidden temple'
-    };
+    setup({ legend: 'hidden temple' });
 
-    const component = setup(props);
-
-    expect(component.find('legend').exists()).toBe(true);
+    expect(screen.getByText('hidden temple')).toBeTruthy();
   });
 
   test('renders an error alert if message provided', () => {
-    expect(
-      shallow(
-        <AuthenticationForm title="test" history={history} error="oh noes!">
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup({ error: 'oh noes!' });
+
+    expect(screen.getByText('oh noes!')).toBeTruthy();
   });
 
   test('renders a success alert if message provided', () => {
-    expect(
-      shallow(
-        <AuthenticationForm title="test" history={history} success="oh yeah!">
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup({ success: 'oh yeah!' });
+
+    expect(screen.getByText('oh yeah!')).toBeTruthy();
   });
 
   test('does not render a cancel button if form is not cancelable', () => {
-    expect(
-      shallow(
-        <AuthenticationForm title="test" history={history} cancelable={false}>
-          hello world
-        </AuthenticationForm>
-      )
-    ).toMatchSnapshot();
+    setup({ cancelable: false });
+
+    expect(screen.queryByRole('button', { name: 'Cancel' })).toBeNull();
   });
 });
