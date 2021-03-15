@@ -94,7 +94,7 @@ const IncentivePayments = ({
                         <DollarField
                           className="budget-table--input-holder"
                           fieldClassName="budget-table--input__number"
-                          aria-LabelledBy={`q${q} eh-payments`}
+                          aria-labelledby={`q${q} eh-payments`}
                           label={`ehAmt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`ehAmt-payments-${year}-q${q}`}
@@ -123,7 +123,7 @@ const IncentivePayments = ({
                         <NumberField
                           className="budget-table--input-holder"
                           fieldClassName="budget-table--input__number"
-                          aria-LabelledBy={`q${q} eh-count`}
+                          aria-labelledby={`q${q} eh-count`}
                           label={`ehCt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`ehCt-payments-${year}-q${q}`}
@@ -152,7 +152,7 @@ const IncentivePayments = ({
                         <DollarField
                           className="budget-table--input-holder"
                           fieldClassName="budget-table--input__number"
-                          aria-LabelledBy={`q${q} ep-payments`}
+                          aria-labelledby={`q${q} ep-payments`}
                           label={`epAmt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`epAmt-payments-${year}-q${q}`}
@@ -181,7 +181,7 @@ const IncentivePayments = ({
                         <NumberField
                           className="budget-table--input-holder"
                           fieldClassName="budget-table--input__number"
-                          aria-LabelledBy={`q${q} ep-count`}
+                          aria-labelledby={`q${q} ep-count`}
                           label={`epCt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`epCt-payments-${year}-q${q}`}
