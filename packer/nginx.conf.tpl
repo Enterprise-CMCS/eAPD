@@ -19,6 +19,7 @@ http {
     types_hash_max_size 2048;
     include             /etc/nginx/mime.types;
     default_type        application/octet-stream;
+
     # Allow larger than normal headers
     client_header_buffer_size 64k;
     large_client_header_buffers 4 64k;
@@ -37,7 +38,7 @@ http {
           # it exists, otherwise send index.html to achieve push state routing
           try_files $uri /index.html;
         }
-        location ~ ^.+\..+\$ {
+        location ~ ^.+\..+$ {
           # For requests with file extensions, send them if the file exists,
           # otherwise send a 404.
           try_files $uri =404;
