@@ -11,9 +11,12 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
 >
   <p
     className="ds-u-margin-top--0"
-  >
-    They cleaned up the latrines after the Battle of Hastings
-  </p>
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "They cleaned up the latrines after the Battle of Hastings",
+      }
+    }
+  />
   <ul
     className="ds-c-list--bare"
   >
