@@ -196,10 +196,10 @@ describe('the ContractorResourceForm component', () => {
     props.item.hourly.useHourly = false;
     const component = shallow(<ContractorForm {...props} />);
 
-    component    
+    component
       .findWhere(
         c =>
-          c.name() === 'DollarField' && 
+          c.name() === 'DollarField' &&
           c.prop('name') === 'contractor-cost-ffy-1066'
       )
       .simulate('change', { target: { value: '53792' } });
