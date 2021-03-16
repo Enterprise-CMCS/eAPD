@@ -17,7 +17,8 @@ const ContractorResourceReview = ({
     [end, start]
   );
 
-  const descriptionParsed = description || 'Description of services not specified';
+  const descriptionParsed =
+    description || 'Description of services not specified';
 
   return (
     <Review
@@ -28,7 +29,10 @@ const ContractorResourceReview = ({
       ariaLabel={`${index + 1}. ${name || 'Contractor name not specified'}`}
     >
       {/* eslint-disable react/no-danger */}
-      <p dangerouslySetInnerHTML={{ __html: descriptionParsed }} className="ds-u-margin-top--0" /> 
+      <p
+        dangerouslySetInnerHTML={{ __html: descriptionParsed }}
+        className="ds-u-margin-top--0"
+      />
       <ul className="ds-c-list--bare">
         <li>
           <strong>Full Contract Term:</strong> {dateRangeForHumans}
