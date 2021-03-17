@@ -3,6 +3,8 @@
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
+sudo yum install -y gcc-c++
+
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
@@ -94,6 +96,8 @@ echo "module.exports = {
 # Start it up
 pm2 start ecosystem.config.js
 E_USER
+
+sudo yum remove -y gcc-c++
 
 # SELinux context so Nginx can READ the files in /app/web
 mv home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf
