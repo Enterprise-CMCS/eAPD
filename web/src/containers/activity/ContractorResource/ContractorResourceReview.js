@@ -17,9 +17,6 @@ const ContractorResourceReview = ({
     [end, start]
   );
 
-  const descriptionParsed =
-    description || 'Description of services not specified';
-
   return (
     <Review
       heading={`${index + 1}. ${name || 'Contractor name not specified'}`}
@@ -30,7 +27,7 @@ const ContractorResourceReview = ({
     >
       {/* eslint-disable react/no-danger */}
       <p
-        dangerouslySetInnerHTML={{ __html: descriptionParsed }}
+        dangerouslySetInnerHTML={{ __html: description || 'Description of services not specified' }}
         className="ds-u-margin-top--0"
       />
       <ul className="ds-c-list--bare">
