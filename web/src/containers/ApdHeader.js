@@ -4,12 +4,16 @@ import { connect } from 'react-redux';
 
 import { getAPDCreation, getAPDName, getAPDYearRange } from '../reducers/apd';
 
-const ApdHeader = ({ apdCreated, apdName, year }) => (
+const apdNameLocal = () => {
+  return localStorage.getItem('apd-name');
+}
+
+const ApdHeader = ({ apdCreated, year }) => (
   <h1 className="ds-h1 apd--title">
     <span className="ds-h6 ds-u-display--block">
       <strong>Created:</strong> {apdCreated}
     </span>
-    {apdName} | FFY {year}
+    {localStorage.getItem('apd-name')} | FFY {year}
   </h1>
 );
 

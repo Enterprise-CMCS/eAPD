@@ -1,8 +1,15 @@
-import PropTypes from 'prop-types';
+import PropType from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import Icon, { File, faPlusCircle, faSpinner } from '../../components/Icons';
+
 import { Button, Choice, ChoiceList, TextField } from '@cmsgov/design-system';
+import { Fragment } from 'react';
+
+import { createApd } from '../../actions/app';
+
+
 
 const backToDashboard = (e) => {
   e.preventDefault();
@@ -21,35 +28,72 @@ const eligibilityChildren = (
   <ChoiceList
     className="ds-u-margin--0"
     choices={[
-      { label: 'E&E (Eligibility and Enrollment)', value: 'e&e'},
-      { label: 'HITECH', value: 'hitech' },
-      { label: 'MMIS (Medicaid Management Information System', value: 'mmis', disabled: true },
+      { label: 'Planning', value: 'planning', disabled: true},
+      { label: 'Implementation', value: 'implementation' },
+      { label: 'Operations', value: 'operations', disabled: true },
     ]}
     name="size-variants"
     type="radio"
     size="large"
-    onChange={handleFundingChoice}
   />
 );
 
-const childField = (
+const hitechChildren = (
   <ChoiceList
     className="ds-u-margin--0"
     choices={[
-      { label: 'E&E (Eligibility and Enrollment)', value: 'e&e'},
-      { label: 'HITECH', value: 'hitech' },
-      { label: 'MMIS (Medicaid Management Information System', value: 'mmis', disabled: true },
+      { label: 'Planning', value: 'planning', disabled: true},
+      { label: 'Implementation', value: 'implementation' },
+      { label: 'Operations', value: 'operations', disabled: true },
     ]}
     name="size-variants"
     type="radio"
     size="large"
-    onChange={handleFundingChoice}
   />
 );
 
-const CreateAPDForm = (
+const mmisChildren = (
+  <Fragment>
+    <h2 className="ds-u-margin-bottom--0">APD Type ⃰</h2>
+    <p className="ds-u-margin-y--1">This selection is permanent for the APD.</p>
+    <ChoiceList
+      className="ds-u-margin--0"
+      choices={[
+        { label: 'Planning', value: 'planning', disabled: true},
+        { label: 'Implementation', value: 'implementation' },
+        { label: 'Operations', value: 'operations', disabled: true },
+      ]}
+      name="size-variants"
+      type="radio"
+      size="large"
+    />
+  </Fragment>
+);
 
-) => {
+const CreateAPDForm = ({
+  createApd: create
+}) => {
+  const Loading = ({ children }) => (
+    <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
+      <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
+      {children}
+    </div>
+  );
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const createNew = () => {
+    create();
+  };
+
+  if (isLoading) {
+    return (
+      <div id="start-main-content">
+        <Loading>Loading your APD</Loading>
+      </div>
+    );
+  }
+
   return (
     <main
       id="start-main-content"
@@ -72,26 +116,36 @@ const CreateAPDForm = (
           label="E&E (Eligibility and Enrollment)" 
           value="e&e" 
           checkedChildren={<div className="ds-c-choice__checkedChild">{eligibilityChildren}</div>}
+          onChange={handleFundingChoice}
         />
         <Choice
           name="radio_choice"
           type="radio"
           label="HITECH"
           value="hitech"
-          checkedChildren={<div className="ds-c-choice__checkedChild">{childField}</div>}
+          checkedChildren={<div className="ds-c-choice__checkedChild">{hitechChildren}</div>}
+          onChange={handleFundingChoice}
+        />        
+        <Choice
+          name="radio_choice"
+          type="radio"
+          label="MMIS"
+          value="mmis"
+          checkedChildren={<div className="ds-c-choice__checkedChild">{mmisChildren}</div>}
+          onChange={handleFundingChoice}
         />        
       </fieldset>
 
       <div className="ds-u-display--flex ds-u-justify-content--between ds-u-margin-y--6 create-apd-buttons">
         <Button onClick={backToDashboard}>Back to Dashboard</Button>
-        <Button variation="primary">Create an APD</Button>
+        <Button variation="primary" onClick={createNew}>Create an APD</Button>
       </div>
     </main>
   );
 };
 
 CreateAPDForm.propTypes = {
-
+  createApd: PropType.func.isRequired
 };
 
 CreateAPDForm.defaultProps = {
@@ -99,7 +153,7 @@ CreateAPDForm.defaultProps = {
 };
 
 const mapDispatchToProps = {
-
+  createApd
 };
 
 const mapStateToProps = state => ({
@@ -107,5 +161,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAPDForm);
-
-export { CreateAPDForm as plain, mapStateToProps, mapDispatchToProps };
