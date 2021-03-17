@@ -13,14 +13,14 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
   <FormLabel
     className="ds-c-label--full-width"
     component="label"
-    fieldId="activity-short-overview-field"
+    fieldId="contractor-description-field"
   >
     Description of Services
   </FormLabel>
   <Connect(RichText)
     content="They cleaned up the latrines after the Battle of Hastings"
     editorClassName="rte-textarea-l"
-    id="activity-short-overview-field"
+    id="contractor-description-field"
     name="contractor-description"
     onSync={[Function]}
   />
@@ -190,14 +190,14 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
   <FormLabel
     className="ds-c-label--full-width"
     component="label"
-    fieldId="activity-short-overview-field"
+    fieldId="contractor-description-field"
   >
     Description of Services
   </FormLabel>
   <Connect(RichText)
     content="They cleaned up the latrines after the Battle of Hastings"
     editorClassName="rte-textarea-l"
-    id="activity-short-overview-field"
+    id="contractor-description-field"
     name="contractor-description"
     onSync={[Function]}
   />

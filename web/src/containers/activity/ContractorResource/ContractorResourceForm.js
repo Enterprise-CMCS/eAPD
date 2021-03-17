@@ -111,13 +111,13 @@ const ContractorResourceForm = ({
       />
       <FormLabel
         className="ds-c-label--full-width"
-        fieldId="activity-short-overview-field"
+        fieldId="contractor-description-field"
       >
         Description of Services
       </FormLabel>
       <RichText
         name="contractor-description"
-        id="activity-short-overview-field"
+        id="contractor-description-field"
         content={description}
         onSync={syncDescription}
         editorClassName="rte-textarea-l"
