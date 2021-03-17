@@ -1,6 +1,5 @@
 ### Provide variables in non-Git tfvars file
 variable "vpc_id" {}
-variable "vpc_cidr_block" {}
 
 terraform {
   backend "s3" {
