@@ -90,9 +90,9 @@ const StateDashboard = (
     }
   });
 
-  const createNew = () => {
-    setIsLoading(true);
-    create();
+  const createNew = (e) => {
+    e.preventDefault();
+    window.location.href='create-apd-prototype';
   };
 
   const open = id => e => {

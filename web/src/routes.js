@@ -7,6 +7,7 @@ import EditAccount from './containers/admin/EditAccount';
 import StateAdmin from './containers/admin/StateAdmin';
 import Login from './containers/Login';
 import Logout from './containers/Logout';
+import CreateAPDForm from './containers/prototypes/CreateAPDForm';
 
 const routes = [
   { path: '/', component: Dashboard, exact: true, isPublic: false },
@@ -25,6 +26,9 @@ const routes = [
     isAdmin: true,
     isCard: true
   },
+  
+  // Prototype routes
+  { path: '/create-apd-prototype', component: CreateAPDForm, isPublic: true },
 
   { path: '/state-admin', component: StateAdmin, isPublic: false },
   { path: '/login', component: Login, isPublic: true, isCard: true },
