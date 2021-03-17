@@ -27,11 +27,9 @@ tap.test('APD-related middleware', async middlewareTests => {
         const req = { meta: {}, params: { 'apd-id': 9 } };
         await loadApd({ getAPDByID })(req, res, next);
 
-        invalidTest.ok(next.called, 'next is called');
-        invalidTest.ok(
-          next.calledWith({ ...err, status: 422 }),
-          'pass error to middleware'
-        );
+        invalidTest.ok(next.notCalled, 'next is not called');
+        invalidTest.ok(res.status.calledWith(400), 'HTTP status is set to 400');
+        invalidTest.ok(res.end.calledOnce, 'response is closed');
       }
     );
 
@@ -41,7 +39,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       const req = { meta: {}, params: { 'apd-id': 9 } };
       await loadApd({ getAPDByID })(req, res, next);
 
-      invalidTest.ok(res.status.calledWith(422), 'HTTP status is set to 422');
+      invalidTest.ok(res.status.calledWith(400), 'HTTP status is set to 400');
       invalidTest.ok(res.end.calledOnce, 'response is closed');
       invalidTest.ok(next.notCalled, 'next is not called');
     });
@@ -86,7 +84,7 @@ tap.test('APD-related middleware', async middlewareTests => {
     });
 
     accessApdTests.test(
-      'sends a 401 if the user does not have access to the APD',
+      'sends a 403 if the user does not have access to the APD',
       async invalidTest => {
         const req = {
           user: { state: 'not florp' },
@@ -94,7 +92,7 @@ tap.test('APD-related middleware', async middlewareTests => {
         };
         await userCanAccessAPD({ loadApd: loadApdFake })(req, res, next);
 
-        invalidTest.ok(res.status.calledWith(401), 'HTTP status is set to 401');
+        invalidTest.ok(res.status.calledWith(403), 'HTTP status is set to 403');
         invalidTest.ok(res.end.calledOnce, 'response is closed');
         invalidTest.ok(next.notCalled, 'next is not called');
       }
@@ -124,7 +122,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       userCanAccessAPDMock.yields();
     });
 
-    tests.test('sends a 422 if the APD is not editable', async test => {
+    tests.test('sends a 400 if the APD is not editable', async test => {
       const req = {
         meta: { apd: { status: 'not draft' } }
       };
@@ -135,9 +133,9 @@ tap.test('APD-related middleware', async middlewareTests => {
         next
       );
 
-      test.ok(res.status.calledWith(422), 'HTTP status is set to 422');
+      test.ok(res.status.calledWith(400), 'HTTP status is set to 400');
       test.ok(
-        res.send.calledWith({ error: 'apd-not-editable' }),
+        res.send.calledWith('APD status is not editable'),
         'sends error token'
       );
       test.ok(res.end.calledOnce, 'response is closed');

@@ -2,6 +2,7 @@ const logger = require('../logger')('apd middleware');
 const { cache } = require('./cache');
 
 const { getAPDByID: ga } = require('../db');
+const { CODES } = require('../util/errorCodes');
 
 /**
  * @description Middleware to load an APD into the request "meta" property
@@ -29,13 +30,16 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
             id: req.id,
             message: 'requested object does not exist'
           });
-          res.status(422).end();
+          res
+            .status(400)
+            .send('Requested object does not exist')
+            .end();
         }
       } catch (e) {
-        next({
-          ...e,
-          status: 422
-        });
+        res
+          .status(400)
+          .send(CODES['400'])
+          .end();
       }
     };
     return loadApd;
@@ -72,7 +76,10 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
             id: req.id,
             message: 'user does not have access to the APD'
           });
-          res.status(401).end();
+          res
+            .status(403)
+            .send('User does not have access to the APD')
+            .end();
         }
       });
     };
@@ -111,10 +118,8 @@ module.exports.userCanEditAPD = ({
             message: `apd status is [${req.meta.apd.status}], not editable`
           });
           res
-            .status(422)
-            .send({
-              error: 'apd-not-editable'
-            })
+            .status(400)
+            .send('APD status is not editable')
             .end();
         }
       });

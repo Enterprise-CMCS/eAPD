@@ -22,20 +22,24 @@ module.exports = (
 ) => {
   logger.silly('setting up GET /apds/:id/files/:fileID route');
 
-  app.get('/apds/:id/files/:fileID', can('view-document'), async (req, res) => {
-    try {
-      if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
-        const file = await getFile(req.params.fileID);
-        res.send(file).end();
-      } else {
-        res.status(422).end();
+  app.get(
+    '/apds/:id/files/:fileID',
+    can('view-document'),
+    async (req, res, next) => {
+      try {
+        if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
+          const file = await getFile(req.params.fileID);
+          res.send(file).end();
+        } else {
+          next({ status: 400, message: 'Files does not exist' });
+        }
+      } catch (e) {
+        logger.error({ id: req.id, message: 'error fetching file' });
+        logger.error({ id: req.id, message: e });
+        next(e);
       }
-    } catch (e) {
-      logger.error({ id: req.id, message: 'error fetching file' });
-      logger.error({ id: req.id, message: e });
-      res.status(422).end();
     }
-  });
+  );
 
   logger.silly('setting up POST /apds/:id/files route');
 
@@ -53,7 +57,7 @@ module.exports = (
         const { size = 0, buffer = null } = req.file;
 
         const { error = null, image = null } = await validateFile(buffer);
-        if (error) throw new Error(error);
+        if (error) next({ status: 415, message: error });
 
         const fileID = await createNewFileForAPD(
           image,
@@ -72,7 +76,7 @@ module.exports = (
         res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
       } catch (e) {
         logger.error({ id: req.id, message: e });
-        res.status(422).send({ message: 'Unable to upload file' });
+        next({ status: 400, message: 'Unable to upload file' });
       }
     }
   );

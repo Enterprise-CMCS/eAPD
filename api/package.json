@@ -18,7 +18,7 @@
     "start-dev": "NODE_ENV=development nodemon ./main.js -e js",
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout --reporter=spec ${TESTS:-'{,!(node_modules)/**/}*.test.js'}",
-    "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --no-timeout --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
+    "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-timeout --no-browser --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
     "test-endpoints": "jest --detectOpenHandles --runInBand '.+\\.endpoint\\.js'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
     "prettier": "prettier --config \"../.prettierrc\" --write \"**/*.js\""
@@ -68,7 +68,7 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "dependencies": {
-    "@okta/jwt-verifier": "^1.0.0",
+    "@okta/jwt-verifier": "^2.0.1",
     "@okta/okta-sdk-nodejs": "^4.4.0",
     "ajv": "^6.12.0",
     "aws-sdk": "^2.646.0",
@@ -91,7 +91,7 @@
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pg": "^7.18.2",
+    "pg": "^8.5.1",
     "sanitize-html": "^2.3.0",
     "sharp": "^0.27.1",
     "uuid": "^3.4.0",

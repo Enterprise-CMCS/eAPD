@@ -9,7 +9,7 @@ module.exports = (app, { createEventForAPD = ce } = {}) => {
     '/apds/:id/events',
     can('view-document'),
     userCanAccessAPD(),
-    async (req, res) => {
+    async (req, res, next) => {
       const userID = req.user.id;
       const apdID = req.params.id;
       const { eventType, metadata = null } = req.body;
@@ -22,7 +22,7 @@ module.exports = (app, { createEventForAPD = ce } = {}) => {
       });
 
       if (eventID === null) {
-        res.status(422).end();
+        next({ status: 422 });
       }
 
       res.send({ success: true });
