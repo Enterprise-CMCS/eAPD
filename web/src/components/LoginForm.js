@@ -1,9 +1,7 @@
 import { Button, Spinner } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { useHistory } from 'react-router';
-
-const formSubmitNoop = e => e.preventDefault();
+import { useHistory } from 'react-router-dom';
 
 const LoginForm = ({
   cancelable,
@@ -21,6 +19,11 @@ const LoginForm = ({
   working
 }) => {
   const history = useHistory();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (canSubmit && onSave) onSave(e);
+  };
 
   return (
     <div id={id} className="card--container">
@@ -49,7 +52,7 @@ const LoginForm = ({
                 {error}
               </div>
             )}
-            <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
+            <form onSubmit={handleSubmit}>
               <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
                 {!!legend && (
                   <legend className="ds-u-visibility--screen-reader">
@@ -76,11 +79,7 @@ const LoginForm = ({
                     </Button>
                   )}
                   {cancelable && (
-                    <Button
-                      type="button"
-                      variation="transparent"
-                      onClick={history.goBack}
-                    >
+                    <Button variation="transparent" onClick={history.goBack}>
                       Cancel
                     </Button>
                   )}
