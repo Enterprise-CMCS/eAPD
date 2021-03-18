@@ -1,107 +1,126 @@
 import React from 'react';
-import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
+import {
+  renderWithConnection,
+  screen,
+  fireEvent,
+  axe
+} from 'apd-testing-library';
 
 import LoginForm from './LoginForm';
+
+let mockGoBack;
+
+jest.mock('react-router-dom', () => {
+  mockGoBack = jest.fn();
+  return {
+    useHistory: jest.fn().mockReturnValue({ goBack: mockGoBack })
+  };
+});
 
 const defaultProps = {
   title: 'test'
 };
 
-// https://testing-library.com/docs/example-input-event/
-const setup = (props = {}, options = {}) =>
-  renderWithConnection(
+const setup = (props = {}) => {
+  return renderWithConnection(
     <LoginForm {...defaultProps} {...props}>
       hello world
-    </LoginForm>,
-    options
+    </LoginForm>
   );
+};
 
 describe('card form wrapper', () => {
-  it('should not fail any accessibility tests', async () => {
-    const { container } = setup();
-    expect(await axe(container)).toHaveNoViolations();
+  beforeEach(() => {
+    mockGoBack.mockReset();
   });
 
-  it('renders without an id on the container if id prop is null', () => {
-    const { container } = setup({ id: null });
-    expect(container.querySelector('.card--container')).not.toHaveAttribute(
-      'id'
-    );
+  test('should not fail any accessibility tests', async () => {
+    setup();
+
+    expect(await axe(screen)).toHaveNoViolations();
   });
 
-  it('renders with the provided id on the container if id prop is set', () => {
-    const { container } = setup({ id: 'my custom id' });
-    expect(container.querySelector('.card--container')).toHaveAttribute(
-      'id',
-      'my custom id'
-    );
+  test('renders without an id on the container if id prop is null', () => {
+    setup({ id: null });
+
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
-  it('renders without a save button if onSave prop is missing', () => {
-    const { queryByRole } = setup();
+  test('renders with the provided id on the container if id prop is set', () => {
+    setup({ id: 'my-custom-id' });
 
-    expect(queryByRole('button', { name: /save/i })).toBeNull();
+    expect(document.querySelector('#my-custom-id')).toBeTruthy();
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
-  it('renders with a save button if onSave prop is provided', () => {
-    const onSave = jest.fn().mockImplementation(e => e.preventDefault());
-    const { queryByRole } = setup({ onSave });
+  test('renders with the default id on the container if id prop is not set', () => {
+    setup();
 
-    expect(queryByRole('button', { name: /save/i })).toBeTruthy();
+    expect(document.querySelector('#start-main-content')).toBeTruthy();
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
-  it('disables the save button if canSubmit is false', () => {
-    const onSave = jest.fn().mockImplementation(e => e.preventDefault());
-    const { queryByRole } = setup({ onSave, canSubmit: false });
-    expect(queryByRole('button', { name: /save/i })).toBeDisabled();
+  test('renders without a save button if onSave prop is missing', () => {
+    setup();
+
+    expect(screen.queryByRole('button', { name: 'Save changes' })).toBeNull();
   });
 
-  it('renders a legend if provided', () => {
-    const { queryByText } = setup({ legend: 'of zelda' });
-    expect(queryByText('of zelda')).toBeTruthy();
+  test('renders with a save button if onSave prop is provided', () => {
+    setup({ onSave: jest.fn() });
+
+    expect(screen.getByRole('button', { name: 'Save changes' })).toBeTruthy();
   });
 
-  it('renders an error alert if message provided', () => {
-    const { queryByText } = setup({ error: 'oh noes!' });
-    expect(queryByText('oh noes!')).toBeTruthy();
+  test('disables the save button if canSubmit is false', () => {
+    setup({ onSave: jest.fn(), canSubmit: false });
+
+    expect(screen.getByRole('button', { name: 'Save changes' })).toBeDisabled();
   });
 
-  it('renders a success alert if message provided', () => {
-    const { queryByText } = setup({ success: 'oh yeah!' });
-    expect(queryByText('oh yeah!')).toBeTruthy();
+  test('renders a legend if provided', () => {
+    setup({ legend: 'hidden temple' });
+
+    expect(screen.getByText('hidden temple')).toBeTruthy();
   });
 
-  it('does not render a cancel button if form is not cancelable', () => {
-    const { queryByRole } = setup({ cancelable: false });
-    expect(queryByRole('button', { name: /cancel/i })).toBeNull();
+  test('renders an error alert if message provided', () => {
+    setup({ error: 'oh noes!' });
+
+    expect(screen.getByText('oh noes!')).toBeTruthy();
   });
 
-  it('renders a spinny-wheel on the save button and disables it if the form is busy', () => {
-    const onSave = jest.fn().mockImplementation(e => e.preventDefault());
-    const { container, queryByRole } = setup({ onSave, working: true });
+  test('renders a success alert if message provided', () => {
+    setup({ success: 'oh yeah!' });
 
-    expect(queryByRole('button', { name: /working/i })).toBeTruthy();
-    expect(queryByRole('button', { name: /working/i })).toBeDisabled();
-    expect(container.querySelector('.ds-c-spinner')).toBeTruthy();
+    expect(screen.getByText('oh yeah!')).toBeTruthy();
   });
 
-  it('calls the onSave prop when the form is submitted', () => {
-    const onSave = jest.fn().mockImplementation(e => e.preventDefault());
-    const { queryByRole } = setup({ onSave });
-    fireEvent.click(queryByRole('button', { name: /save/i }));
+  test('does not render a cancel button if form is not cancelable', () => {
+    setup({ cancelable: false });
+
+    expect(screen.queryByRole('button', { name: 'Cancel' })).toBeNull();
+  });
+
+  test('renders a spinny-wheel on the save button and disables it if the form is busy', () => {
+    setup({ onSave: jest.fn(), working: true });
+
+    expect(screen.getByRole('button', { name: /Working/ })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Working/ })).toBeDisabled();
+  });
+
+  test('calls the onSave prop when the form is submitted', () => {
+    const onSave = jest.fn();
+    setup({ onSave });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Save changes' }));
     expect(onSave).toHaveBeenCalled();
   });
 
-  it('calls the onCancel prop when the form is canceled', () => {
-    const { queryByRole, history } = setup(
-      {},
-      {
-        initialHistory: ['/']
-      }
-    );
-    history.push('/login');
-    expect(history.index).toEqual(1);
-    fireEvent.click(queryByRole('button', { name: /cancel/i }));
-    expect(history.index).toEqual(0);
+  test('calls the onCancel prop when the form is canceled', () => {
+    setup();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    expect(mockGoBack).toHaveBeenCalled();
   });
 });
