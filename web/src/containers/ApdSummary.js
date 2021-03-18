@@ -62,6 +62,7 @@ const ApdSummary = ({
 
   return (
     <Section resource="apd">
+      <hr className="custom-hr" />
       <ChoiceList
         choices={yearChoices}
         label={t('apd.overview.instruction.short')}

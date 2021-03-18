@@ -5,23 +5,25 @@ exports[`apd export component renders correctly 1`] = `
   id={null}
   resource="exportAndSubmit"
 >
-  <h3
-    className="ds-h3"
+  <Subsection
+    headerClassName={null}
+    id={null}
+    nested={false}
+    resource="reviewAndDownload"
   >
-    Review and Download
-  </h3>
-  <p>
-    On the next page, you will be able to review and download a copy of your APD as the first step in submitting a completed APD to CMS.
-  </p>
-  <Button
-    className="ds-u-margin-top--2"
-    component="button"
-    onClick={[Function]}
-    size="big"
-    type="button"
-    variation="primary"
-  >
-    Continue to Review
-  </Button>
+    <p>
+      On the next page, you will be able to review and download a copy of your APD as the first step in submitting a completed APD to CMS.
+    </p>
+    <Button
+      className="ds-u-margin-top--2"
+      component="button"
+      onClick={[Function]}
+      size="big"
+      type="button"
+      variation="primary"
+    >
+      Continue to Review
+    </Button>
+  </Subsection>
 </Section>
 `;
