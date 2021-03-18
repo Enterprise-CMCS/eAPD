@@ -9,6 +9,7 @@ import { updateBudget } from '../budget';
 /**
  * Add a new activity to the current APD
  */
+
 export const addActivity = () => (dispatch, getState) => {
   dispatch({
     type: ADD_APD_ITEM,
@@ -47,11 +48,18 @@ export const removeActivity = (index, { global = window } = {}) => (
  * @param {Number} index The index of the activity to rename
  * @param {String} name The new activity name
  */
-export const setActivityName = (index, name) => ({
-  type: EDIT_APD,
-  path: `/activities/${index}/name`,
-  value: name
-});
+export const setActivityName = (index, name) => (dispatch, getState) => {
+  dispatch({
+    type: EDIT_APD,
+    path: `/activities/${index}/name`,
+    value: name
+  });
+  dispatch({
+    type: APD_ACTIVITIES_CHANGE,
+    activities: getState().apd.data.activities,
+    url: `/apd/activity/${index}/overview`
+  });
+};
 
 /**
  * Change an activity's Medicaid program funding source

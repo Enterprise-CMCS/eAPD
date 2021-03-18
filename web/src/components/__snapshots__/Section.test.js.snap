@@ -38,9 +38,11 @@ exports[`Section component renders correctly with resource containing title but 
 `;
 
 exports[`Subsection component renders correctly 1`] = `
-<Fragment>
+<div
+  className="subsection--title"
+>
   <h3
-    className=" subsection--title ds-h3"
+    className=" ds-h3"
     id={null}
   >
     Outcomes and Metrics
@@ -58,13 +60,15 @@ exports[`Subsection component renders correctly 1`] = `
     source="activities.outcomes.instruction"
   />
   test child
-</Fragment>
+</div>
 `;
 
 exports[`Subsection component uses the passed-in heading class 1`] = `
-<Fragment>
+<div
+  className="subsection--title"
+>
   <h3
-    className="bobs-burgers subsection--title ds-h3"
+    className="bobs-burgers ds-h3"
     id={null}
   >
     Outcomes and Metrics
@@ -82,5 +86,5 @@ exports[`Subsection component uses the passed-in heading class 1`] = `
     source="activities.outcomes.instruction"
   />
   test child
-</Fragment>
+</div>
 `;

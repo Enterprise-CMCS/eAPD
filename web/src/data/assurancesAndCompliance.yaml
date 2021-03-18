@@ -1,13 +1,13 @@
 procurement:
   42 CFR Part 495.348: https://www.ecfr.gov/cgi-bin/text-idx?SID=60f02a079c6f091871999372387e5750&mc=true&node=se42.5.495_1348&rgn=div8
   SMM Section 11267: https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html
-  45 CFR Part 95.615: https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8
+  45 CFR 95.613: https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&SID=6d93b829c0db163a0124bfeae1704e42&ty=HTML&h=L&mc=true&r=SECTION&n=se45.1.95_1613
   45 CFR 75.326: https://www.ecfr.gov/cgi-bin/text-idx?SID=d1d1ed46083496c2114c787af6f29afc&mc=true&node=pt45.1.75&rgn=div5#se45.1.75_1326
 recordsAccess:
   42 CFR Part 495.350: https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1350&rgn=div8
   42 CFR Part 495.352: https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1352&rgn=div8
   42 CFR Part 495.346: https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1346&rgn=div8
-  42 CFR Part 433.112(b)(5) - (9): https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8
+  42 CFR 433.112(b): https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8
   45 CFR Part 95.615: https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8
   SMM Section 11267: https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html
 softwareRights:
@@ -16,5 +16,5 @@ softwareRights:
   42 CFR Part 431.300: https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.431_1300&rgn=div8
   42 CFR Part 433.112: https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8
 security:
-  45 CFR 164 Securities and Privacy: https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&tpl=/ecfrbrowse/Title45/45cfr164_main_02.tpl
+  45 CFR 164 Security and Privacy: https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&tpl=/ecfrbrowse/Title45/45cfr164_main_02.tpl
 

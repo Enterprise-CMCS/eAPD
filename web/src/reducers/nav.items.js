@@ -143,7 +143,7 @@ const setDefaults = item => {
 
 const setSelected = (items, value, parents = []) => {
   items.forEach(item => {
-    if (item.url === value) {
+    if (item.url === value || item.value === value) {
       item.selected = true;
       if (parents.length) {
         parents.forEach(parent => {
