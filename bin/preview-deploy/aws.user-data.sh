@@ -5,6 +5,10 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
 sudo yum install -y gcc-c++
 
+# Set up the pm2 systemd service for the backend application
+mv pm2-ec2-user.service.tpl /etc/systemd/system/pm2-ec2-user.service
+ln -s /etc/systemd/system/pm2-ec2-user.service /etc/systemd/system/multi-user.target.wants
+
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
@@ -15,9 +19,6 @@ export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
 
 cd ~
-
-mv pm2-ec2-user.service.tpl /etc/systemd/system/pm2-ec2-user.service
-ln -s /etc/systemd/system/pm2-ec2-user.service /etc/systemd/system/multi-user.target.wants
 
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
