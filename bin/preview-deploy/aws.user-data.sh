@@ -16,7 +16,7 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 
 cd ~
 
-mv pm2-ec2-user.service /etc/systemd/system/pm2-ec2-user.service
+mv pm2-ec2-user.service.tpl /etc/systemd/system/pm2-ec2-user.service
 ln -s /etc/systemd/system/pm2-ec2-user.service /etc/systemd/system/multi-user.target.wants
 
 mkdir -p /app/api/logs
