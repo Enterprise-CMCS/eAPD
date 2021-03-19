@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import {
   plain as StateAffiliationStatus,
-  PendingApproval
+  ApprovalStatus,
 } from './StateAffiliationStatus';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
@@ -58,11 +58,33 @@ describe('<StateAffiliationStatus />', () => {
   });
 });
 
-describe('<PendingApproval />', () => {
+describe('<ApprovalStatus />', () => {
+  const options = {
+    status: 'This is a status',
+    src: "../static/icons/icon.svg",
+    alt: "This is ALT text",
+    width: 57
+  }
+
   it('displays a mailto link', () => {
-    render(<PendingApproval mailTo='em@il.com,admin@mo.gov' />)
+    render(<ApprovalStatus mailTo='em@il.com,admin@mo.gov' options={options} />)
     const aTag = screen.getByText('State Administrator', { selector: 'a' });
     expect(aTag).toBeInTheDocument();
     expect(aTag.href).toBe('mailto:em@il.com,admin@mo.gov');
   });
+
+  it('displays the status text', () => {
+    render(<ApprovalStatus mailTo='em@il.com,admin@mo.gov' options={options} />)
+    const statusText = screen.getByText(options.status, { selector: 'h3' });
+    expect(statusText).toBeInTheDocument();
+  });
+
+  it('displays the img correctly', () => {
+    render(<ApprovalStatus mailTo='em@il.com,admin@mo.gov' options={options} />)
+    const img = screen.getByAltText(options.alt);
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', options.src)
+    expect(img).toHaveAttribute('width', options.width.toString())
+  });
 });
+

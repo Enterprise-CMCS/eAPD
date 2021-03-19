@@ -8,40 +8,53 @@ import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from "./UpgradeBrowser";
 import axios from '../util/api';
 
-const PendingApproval = ({ mailTo }) => (
+
+const ApprovalOptions = {
+  [STATE_AFFILIATION_STATUSES.REQUESTED] : {
+    status: 'Approval Pending From State Administrator',
+    src: "../static/icons/puzzle.svg",
+    alt: "Puzzle Piece Icon",
+    width: 57
+  },
+  [STATE_AFFILIATION_STATUSES.DENIED] : {
+    status: 'Approval Has Been Denied',
+    src: "../static/icons/alert.svg",
+    alt: "Alert Icon",
+    width: 51
+  },
+  [STATE_AFFILIATION_STATUSES.REVOKED] : {
+    status: 'Approval Permissions Revoked',
+    src: "../static/icons/alert.svg",
+    alt: "Alert Icon",
+    width: 51
+  }
+}
+
+const ApprovalStatus = ({ mailTo, options }) => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <img alt="Puzzle Piece Icon" src="../static/icons/puzzle.svg" width="57" />
+    <img alt={options.alt} src={options.src} width={options.width} />
     <h3 className="ds-u-margin-bottom--1">
-      Approval Pending From State Administrator
+      {options.status}
     </h3>
     <p className="ds-u-margin--0">
-      Contact the {' '}
+      Contact the
+      {' '}
       {mailTo && (<a href={`mailto:${mailTo}`}>State Administrator</a>)}
-      {' '}for more information.
+      {' '}
+      for more information.
     </p>
   </div>
 );
-PendingApproval.propTypes = { mailTo: PropType.string.isRequired };
+ApprovalStatus.propTypes = {
+  mailTo: PropType.string.isRequired,
+  options: PropType.shape({
+    status: PropType.string,
+    src: PropType.string,
+    alt: PropType.string,
+    width: PropType.string,
+  }).isRequired
+};
 
-const ApprovalDenied = () => (
-  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <img alt="Puzzle Piece Icon" src="../static/icons/alert.svg" height="51" />
-    <h3 className="ds-u-margin-bottom--1">Approval Has Been Denied</h3>
-    <p className="ds-u-margin--0">
-      Please contact State Administrator for more information.
-    </p>
-  </div>
-);
-
-const ApprovalRevoked = () => (
-  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <img alt="Puzzle Piece Icon" src="../static/icons/alert.svg" height="51" />
-    <h3 className="ds-u-margin-bottom--1">Approval Permissions Revoked</h3>
-    <p className="ds-u-margin--0">
-      Please contact State Administrator for more information.
-    </p>
-  </div>
-);
 
 // TODO: We'll have to figure out a way to only show this the first time they go into an approved state?
 // const Approved = () => (
@@ -93,20 +106,13 @@ const StateAffiliationStatus = (
                 <Instruction source="stateDashboard.introduction" />
                 <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
                   <h2 className="ds-h2 ds-u-display--inline-block">
-                    {state ? state.name : ''} APDs
+                    {state ? state.name : ''}
+                    APDs
                   </h2>
                 </div>
               </div>
             </div>
-            {stateStatus === STATE_AFFILIATION_STATUSES.REQUESTED ? (
-              <PendingApproval mailTo={mailTo || 'CMS-EAPD@cms.hhs.gov'} />
-            ) : null}
-            {stateStatus === STATE_AFFILIATION_STATUSES.DENIED ? (
-              <ApprovalDenied />
-            ) : null}
-            {stateStatus === STATE_AFFILIATION_STATUSES.REVOKED ? (
-              <ApprovalRevoked />
-            ) : null}
+            <ApprovalStatus mailTo={mailTo || 'CMS-EAPD@cms.hhs.gov'} options={ApprovalOptions[stateStatus]} />
           </div>
         </main>
       </div>
@@ -127,4 +133,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(StateAffiliationStatus);
 
-export { StateAffiliationStatus as plain, PendingApproval, mapStateToProps };
+export { StateAffiliationStatus as plain, ApprovalStatus, mapStateToProps };
