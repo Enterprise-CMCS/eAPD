@@ -16,6 +16,9 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 
 cd ~
 
+mv pm2-ec2-user.service /etc/systemd/system/pm2-ec2-user.service
+ln -s /etc/systemd/system/pm2-ec2-user.service /etc/systemd/system/multi-user.target.wants
+
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
@@ -94,10 +97,14 @@ echo "module.exports = {
 };" > ecosystem.config.js
 
 # Start it up
-pm2 start ecosystem.config.js
+# pm2 start ecosystem.config.js
 E_USER
 
 sudo yum remove -y gcc-c++
+
+# Start the Application backend service
+systemctl enable pm2-ec2-user.service
+systemctl start pm2-ec2-user.service
 
 # SELinux context so Nginx can READ the files in /app/web
 mv home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf

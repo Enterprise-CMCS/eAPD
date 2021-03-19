@@ -35,7 +35,7 @@ build {
         script = "./bootstrap.sh"
     }
     provisioner "file" {
-        source = "nginx.conf.tpl"
+        sources = ["nginx.conf.tpl", "pm2-ec2-user.service.tpl"]
         destination = "/home/ec2-user/nginx.conf.tpl"
     }
 }
