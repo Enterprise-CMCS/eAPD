@@ -84,7 +84,7 @@ NumberField.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) })
   ]),
-  mask: PropTypes.string,
+  mask: PropTypes.oneOf(['currency', 'phone', 'ssn', 'zip']),
   min: PropTypes.number,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
