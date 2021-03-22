@@ -1,7 +1,7 @@
 import React from 'react';
 import { apiUrl } from '../util/api';
 
-const LoginLocked = () => {
+const LoginGroupError = () => {
   return (
     <div id="start-main-content">
       <div className="ds-l-container">
@@ -29,4 +29,4 @@ const LoginLocked = () => {
   );
 };
 
-export default LoginLocked;
+export default LoginGroupError;

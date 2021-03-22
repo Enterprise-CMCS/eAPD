@@ -2,10 +2,20 @@
 
 exports[`my account page handles submitting the form 1`] = `
 <Fragment>
-  <withRouter(CardForm)
+  <CardForm
+    canSubmit={true}
+    cancelable={true}
     error={false}
+    footer={false}
+    id="start-main-content"
     legend="manage account details"
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
     sectionName="administrator"
     success="Changes saved"
     title="Manage account"
@@ -75,16 +85,26 @@ exports[`my account page handles submitting the form 1`] = `
         </div>
       </div>
     </div>
-  </withRouter(CardForm)>
+  </CardForm>
 </Fragment>
 `;
 
 exports[`my account page handles submitting the form 2`] = `
 <Fragment>
-  <withRouter(CardForm)
+  <CardForm
+    canSubmit={true}
+    cancelable={true}
     error="It went wrong"
+    footer={false}
+    id="start-main-content"
     legend="manage account details"
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -154,16 +174,26 @@ exports[`my account page handles submitting the form 2`] = `
         </div>
       </div>
     </div>
-  </withRouter(CardForm)>
+  </CardForm>
 </Fragment>
 `;
 
 exports[`my account page renders 1`] = `
 <Fragment>
-  <withRouter(CardForm)
+  <CardForm
+    canSubmit={true}
+    cancelable={true}
     error={false}
+    footer={false}
+    id="start-main-content"
     legend="manage account details"
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -233,16 +263,26 @@ exports[`my account page renders 1`] = `
         </div>
       </div>
     </div>
-  </withRouter(CardForm)>
+  </CardForm>
 </Fragment>
 `;
 
 exports[`my account page renders 2`] = `
 <Fragment>
-  <withRouter(CardForm)
+  <CardForm
+    canSubmit={true}
+    cancelable={true}
     error={false}
+    footer={false}
+    id="start-main-content"
     legend="manage account details"
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -312,16 +352,26 @@ exports[`my account page renders 2`] = `
         </div>
       </div>
     </div>
-  </withRouter(CardForm)>
+  </CardForm>
 </Fragment>
 `;
 
 exports[`my account page renders 3`] = `
 <Fragment>
-  <withRouter(CardForm)
+  <CardForm
+    canSubmit={true}
+    cancelable={true}
     error={false}
+    footer={false}
+    id="start-main-content"
     legend="manage account details"
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -401,16 +451,26 @@ exports[`my account page renders 3`] = `
       title="New password"
       value=""
     />
-  </withRouter(CardForm)>
+  </CardForm>
 </Fragment>
 `;
 
 exports[`my account page renders 4`] = `
 <Fragment>
-  <withRouter(CardForm)
+  <CardForm
+    canSubmit={true}
+    cancelable={true}
     error={false}
+    footer={false}
+    id="start-main-content"
     legend="manage account details"
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -480,6 +540,6 @@ exports[`my account page renders 4`] = `
         </div>
       </div>
     </div>
-  </withRouter(CardForm)>
+  </CardForm>
 </Fragment>
 `;
