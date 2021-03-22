@@ -6,7 +6,7 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 sudo yum install -y gcc-c++
 
 # Set up the pm2 systemd service for the backend application
-mv pm2-ec2-user.service.tpl /etc/systemd/system/pm2-ec2-user.service
+mv /home/ec2-user/pm2-ec2-user.service.tpl /etc/systemd/system/pm2-ec2-user.service
 ln -s /etc/systemd/system/pm2-ec2-user.service /etc/systemd/system/multi-user.target.wants
 
 # Test to see the command that is getting built for pulling the Git Branch
@@ -104,6 +104,7 @@ E_USER
 sudo yum remove -y gcc-c++
 
 # Start the Application backend service
+systemctl daemon-reload
 systemctl enable pm2-ec2-user.service
 systemctl start pm2-ec2-user.service
 
