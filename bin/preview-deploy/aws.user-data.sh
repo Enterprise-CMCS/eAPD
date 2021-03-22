@@ -7,6 +7,7 @@ sudo yum install -y gcc-c++
 
 # Set up the pm2 systemd service for the backend application
 mv /home/ec2-user/eapd-backend.service.tpl  /usr/lib/systemd/system/eapd-backend.service
+chmod 644 /usr/lib/systemd/system/eapd-backend.service
 ln -s  /usr/lib/systemd/system/eapd-backend.service /etc/systemd/system/multi-user.target.wants
 
 # Test to see the command that is getting built for pulling the Git Branch
