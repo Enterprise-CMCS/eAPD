@@ -3,6 +3,7 @@ import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import TagManager from 'react-gtm-module';
+import { Link } from 'react-router-dom';
 
 import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
 import Instruction from '../components/Instruction';
@@ -141,18 +142,9 @@ const StateDashboard = (
                     {state ? state.name : ''} APDs
                   </h2>
                   {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
-                    <Button
-                      variation="primary"
-                      className="ds-u-float--right"
-                      onClick={createNew}
-                    >
-                      Create new{' '}
-                      <span className="ds-u-visibility--screen-reader">
-                        APD
-                      </span>
-                      &nbsp;&nbsp;
-                      <Icon icon={faPlusCircle} />
-                    </Button>
+                    <Link className="ds-u-float--right ds-c-button ds-c-button--primary" to={"create-apd-prototype"}>
+                      Create new {' '} <Icon icon={faPlusCircle} />
+                    </Link>
                   )}
                 </div>
               </div>

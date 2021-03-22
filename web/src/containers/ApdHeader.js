@@ -1,20 +1,19 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { getAPDCreation, getAPDName, getAPDYearRange } from '../reducers/apd';
 
-const apdNameLocal = () => {
-  return localStorage.getItem('apd-name');
-}
-
 const ApdHeader = ({ apdCreated, year }) => (
-  <h1 className="ds-h1 apd--title">
-    <span className="ds-h6 ds-u-display--block">
-      <strong>Created:</strong> {apdCreated}
-    </span>
-    {localStorage.getItem('apd-name')} | FFY {year}
-  </h1>
+  <Fragment>
+    <h1 className="ds-h1 ds-u-margin-bottom--0 apd--title">
+      <span className="ds-h6 ds-u-display--block">
+        <strong>Created:</strong> {apdCreated}
+      </span>
+      {localStorage.getItem('apd-name')}
+    </h1>
+    <h2 className="ds-h4 ds-u-margin-top--1 ds-u-margin-bottom--4">{localStorage.getItem('apd-funding-source').toUpperCase() + " IAPD"}| FFY {year}</h2>
+  </Fragment>
 );
 
 ApdHeader.propTypes = {
