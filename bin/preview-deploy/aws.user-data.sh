@@ -103,11 +103,6 @@ E_USER
 
 sudo yum remove -y gcc-c++
 
-# Start the Application backend service
-systemctl daemon-reload
-systemctl enable eapd-backend.service
-systemctl start eapd-backend.service
-
 # SELinux context so Nginx can READ the files in /app/web
 mv home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf
 chown -R nginx /app/web
@@ -122,6 +117,11 @@ systemctl restart nginx
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
-#su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
-#su - ec2-user -c 'pm2 save'
+su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
+su - ec2-user -c 'pm2 save'
 #su - ec2-user -c 'pm2 restart'
+
+# Start the Application backend service
+systemctl daemon-reload
+systemctl enable eapd-backend.service
+systemctl start eapd-backend.service
