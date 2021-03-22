@@ -6,8 +6,8 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 sudo yum install -y gcc-c++
 
 # Set up the pm2 systemd service for the backend application
-mv /home/ec2-user/pm2-ec2-user.service.tpl /etc/systemd/system/pm2-ec2-user.service
-ln -s /etc/systemd/system/pm2-ec2-user.service /etc/systemd/system/multi-user.target.wants
+mv /home/ec2-user/eapd-backend.service.tpl /etc/systemd/system/eapd-backend.service
+ln -s /etc/systemd/system/eapd-backend.service /etc/systemd/system/multi-user.target.wants
 
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
@@ -105,8 +105,8 @@ sudo yum remove -y gcc-c++
 
 # Start the Application backend service
 systemctl daemon-reload
-systemctl enable pm2-ec2-user.service
-systemctl start pm2-ec2-user.service
+systemctl enable eapd-backend.service
+systemctl start eapd-backend.service
 
 # SELinux context so Nginx can READ the files in /app/web
 mv home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf
@@ -122,6 +122,6 @@ systemctl restart nginx
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
-su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
-su - ec2-user -c 'pm2 save'
-su - ec2-user -c 'pm2 restart'
+#su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
+#su - ec2-user -c 'pm2 save'
+#su - ec2-user -c 'pm2 restart'
