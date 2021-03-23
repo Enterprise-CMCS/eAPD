@@ -134,7 +134,7 @@ const apd = {
             ]
           }
         ],
-        name: 'Program Administration',
+        name: '',
         plannedEndDate: '',
         plannedStartDate: '',
         schedule: [

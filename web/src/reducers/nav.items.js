@@ -7,12 +7,7 @@ const staticItems = [
   },
   {
     label: t('activities.title'),
-    items: [
-      {
-        label: t('activities.list.title'),
-        url: '/apd/activities'
-      }
-    ]
+    items: []
   },
   {
     label: t('scheduleSummary.title'),
@@ -72,7 +67,7 @@ const staticItems = [
 
 const buildActivitySection = i => [
   {
-    label: 'Activity overview',
+    label: 'Activity introduction',
     url: `/apd/activity/${i}/overview`
   },
   {
@@ -130,14 +125,18 @@ const getItems = ({ activities = [], items = staticItems, url = '' } = {}) => {
   if (activities.length) {
     const item = items.find(i => i.label === 'Activities');
     item.items = [
-      item.items[0],
       ...activities.map((activity, i) => ({
         label: t(`sidebar.titles.activity-${activity.name ? 'set' : 'unset'}`, {
           number: i + 1,
           name: activity.name
         }),
         items: buildActivitySection(i)
-      }))
+      })),
+      // alternative design demo
+      // {
+      //   label: "Add activity",
+      //   url: "/add/activity"
+      // }
     ];
   }
   items.forEach(item => setDefaults(item)); // collapse all & unselect all, by default

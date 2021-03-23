@@ -39,7 +39,7 @@ const getNewApd = () => {
         description: '',
         expenses: [],
         fundingSource: 'HIT',
-        name: 'Program Administration',
+        name: '',
         outcomes: [],
         plannedEndDate: '',
         plannedStartDate: '',
