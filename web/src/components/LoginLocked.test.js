@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, axe } from 'apd-testing-library';
+import { renderWithConnection, screen, axe } from 'apd-testing-library';
 import LoginLocked from './LoginLocked';
 
 const defaultProps = {
@@ -17,30 +17,24 @@ describe('<LoginLocked />', () => {
   });
 
   test('title renders', () => {
-    const { getByText } = setup();
-    expect(getByText(/Verify Your Identity/)).toBeTruthy();
+    setup();
+    expect(screen.getByText(/Verify Your Identity/)).toBeTruthy();
   });
 
   test('locked message renders', () => {
-    const { getByText } = setup();
-    expect(getByText(/Account Locked/)).toBeTruthy();
+    setup();
+    expect(screen.getByText(/Account Locked/)).toBeTruthy();
   });
 
   test('contact message renders', () => {
-    const { getByText } = setup();
+    setup();
     expect(
-      getByText((content, node) => {
-        const hasText = () =>
-          node.textContent ===
-          'Contact CMS-EAPD@cms.hhs.gov for an account reset.';
-        const nodeHasText = hasText(node);
-        return nodeHasText;
-      })
+      screen.getByText(/Your account will reset automatically in one hour/i)
     ).toBeTruthy();
   });
 
   test('cancel button renders', () => {
-    const { getByRole } = setup();
-    expect(getByRole('button', { name: 'Cancel' })).toBeTruthy();
+    setup();
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeTruthy();
   });
 });

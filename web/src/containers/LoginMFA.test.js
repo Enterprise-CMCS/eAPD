@@ -27,7 +27,7 @@ describe('<LoginMFA />', () => {
         'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
       )
     ).toBeTruthy();
-    expect(getByRole('button', { name: 'Verify' }));
+    expect(getByRole('button', { name: 'Verify Identity' }));
     fireEvent.change(
       getByLabelText(
         'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
@@ -36,12 +36,12 @@ describe('<LoginMFA />', () => {
         target: { value: 'testotp' }
       }
     );
-    fireEvent.click(getByRole('button', { name: 'Verify' }));
+    fireEvent.click(getByRole('button', { name: 'Verify Identity' }));
     expect(defaultProps.action).toHaveBeenCalledWith('testotp');
   });
 
-  test('cancel button renders', () => {
+  test('Go Back to Login button renders', () => {
     const { getByText } = setup();
-    expect(getByText(/Cancel/i)).toBeTruthy();
+    expect(getByText(/Go Back to Login/i)).toBeTruthy();
   });
 });

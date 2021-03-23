@@ -53,6 +53,7 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
         <Password
           id="password"
           title="Password"
+          errorMessage={null}
           value={password}
           onChange={changePassword}
         />

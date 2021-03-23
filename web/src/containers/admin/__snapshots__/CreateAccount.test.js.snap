@@ -2,9 +2,20 @@
 
 exports[`<CreateAccount /> renders correctly 1`] = `
 <Fragment>
-  <withRouter(CardForm)
+  <CardForm
+    canSubmit={true}
+    cancelable={true}
     error={false}
+    footer={false}
+    id="start-main-content"
+    legend=""
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
     sectionName="administrator"
     success={false}
     title="Create account"
@@ -306,6 +317,6 @@ exports[`<CreateAccount /> renders correctly 1`] = `
       title="Password"
       value=""
     />
-  </withRouter(CardForm)>
+  </CardForm>
 </Fragment>
 `;
