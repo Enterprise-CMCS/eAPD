@@ -107,7 +107,7 @@ const ApdSummary = ({
           editorClassName="rte-textarea-l"
         />
       </div>
-      <div>
+      {/* <div>
         <Instruction
           labelFor="mmis-overview-field"
           source="apd.mmis.instruction"
@@ -118,7 +118,7 @@ const ApdSummary = ({
           onSync={syncRichText(setMMIS)}
           editorClassName="rte-textarea-l"
         />
-      </div>
+      </div> */}
     </Section>
   );
 };

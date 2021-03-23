@@ -6,40 +6,6 @@ const staticItems = [
     url: '/apd/apd-overview'
   },
   {
-    label: t('apd.stateProfile.title'),
-    items: [
-      {
-        label: t('apd.stateProfile.title'),
-        url: '/apd/state-profile'
-      },
-      {
-        label: t('apd.stateProfile.directorAndAddress.title'),
-        url: '/apd/state-profile#apd-state-profile-office'
-      },
-      {
-        label: t('apd.stateProfile.keyPersonnel.title'),
-        url: '/apd/state-profile#apd-state-profile-key-personnel'
-      }
-    ]
-  },
-  {
-    label: t('previousActivities.title'),
-    items: [
-      {
-        label: t('previousActivities.title'),
-        url: '/apd/previous-activities'
-      },
-      {
-        label: t('previousActivities.outline.title'),
-        url: '/apd/previous-activities#prev-activities-outline'
-      },
-      {
-        label: t('previousActivities.actualExpenses.title'),
-        url: '/apd/previous-activities#prev-activities-table'
-      }
-    ]
-  },
-  {
     label: t('activities.title'),
     items: [
       {

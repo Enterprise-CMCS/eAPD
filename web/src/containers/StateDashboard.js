@@ -143,7 +143,7 @@ const StateDashboard = (
                   </h2>
                   {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
                     <Link className="ds-u-float--right ds-c-button ds-c-button--primary" to={"create-apd-prototype"}>
-                      Create new {' '} <Icon icon={faPlusCircle} />
+                      Create new<Icon className="ds-u-margin-left--1" icon={faPlusCircle} />
                     </Link>
                   )}
                 </div>

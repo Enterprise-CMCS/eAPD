@@ -6,39 +6,21 @@ overview:
 
 introduction:
   instruction:
-    heading: Introduction
+    heading: Medicaid Program and Priorities
     detail: >-
-      Provide a brief introduction to the state program. Include context for this funding request by providing information such as current size of the program and how the program is positioned within the state. You might also include a high-level look at the history and context of the program and the state’s future vision for it.
+      Provide an introduction to the state Medicaid program. Include context for this funding request by providing information such as current size, future vision, top priorities, delivery system and payment models. (2-3 paragraphs)
 
 hit:
   instruction:
-    heading: HIT Overview
+    heading: Medicaid Enterprise System Introduction
     detail: >-
-      Briefly summarize planned HIT-funded activities contained within this APD.
+      Provide a high-level introduction to the state Medicaid Enterprise System. Include the current state and context of the MES and the state’s future vision for it. (2-3 paragraphs)
 
 hie:
   instruction:
-    heading: HIE Overview
+    heading: Scope of APD Project
     detail: >-
-      Summarize planned HIE-funded activities within this APD.
-
-      If there are no HIE activities, enter “No HIE activities.”
-
-
-      [ol]
-      Description of the state’s HIE approach (statewide, sub-state
-      health information organization (HIO), etc.);
-
-      Anticipated risks and mitigation strategies;
-
-      The short and long term value proposition to providers;
-
-      The role of state government in governance and policy-setting.
-      [/ol]
-    helpText: >-
-      CMS recommends that states connect with regional CMS HITECH contacts prior to
-      developing an HIE funding request. HIE funding requests are complex. Early
-      consultation with CMS facilitates a more efficient approval process.
+      Provide a brief description for the scope of this request and how it fits into the MES vision described above. Include a summary of the outcomes that will enhance the effective and efficient administration of the Medicaid program. Details on how the outcomes will be achieved should be in Section 4: Program Activities. (2-3 paragraphs)
 
 mmis:
   instruction:
