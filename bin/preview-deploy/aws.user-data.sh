@@ -76,6 +76,8 @@ echo "module.exports = {
     script: 'main.js',
     instances: 1,
     autorestart: true,
+    watch: ["api"],
+    watch_delay: 1000,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
     out_file: '/app/api/logs/eAPD-API-out-0.log',
     env: {
@@ -120,9 +122,9 @@ systemctl restart nginx
 # configuration to be restored when it starts
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v10.15.3/bin /home/ec2-user/.nvm/versions/node/v10.15.3/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
-#su - ec2-user -c 'pm2 restart'
+su - ec2-user -c 'pm2 restart'
 
 # Start the Application backend service
-systemctl daemon-reload
-systemctl enable eapd-backend.service
-systemctl start eapd-backend.service
+#systemctl daemon-reload
+#systemctl enable eapd-backend.service
+#systemctl start eapd-backend.service
