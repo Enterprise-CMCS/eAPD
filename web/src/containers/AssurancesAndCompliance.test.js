@@ -26,7 +26,7 @@ describe('assurances and compliance component', () => {
         procurement: [
           { title: '42 CFR Part 495.348', checked: true, explanation: '' },
           { title: 'SMM Section 11267', checked: true, explanation: '' },
-          { title: '45 CFR Part 95.615', checked: '', explanation: '' },
+          { title: '45 CFR 95.613', checked: '', explanation: '' },
           { title: '45 CFR Part 75.326', checked: false, explanation: '' }
         ],
         recordsAccess: [
@@ -38,7 +38,7 @@ describe('assurances and compliance component', () => {
           { title: '42 CFR Part 495.352', checked: true, explanation: '' },
           { title: '42 CFR Part 495.346', checked: true, explanation: '' },
           {
-            title: '42 CFR Part 433.112(b)(5) - (9)',
+            title: '42 CFR 433.112(b)',
             checked: true,
             explanation: ''
           },
@@ -57,7 +57,7 @@ describe('assurances and compliance component', () => {
         ],
         security: [
           {
-            title: '45 CFR 164 Securities and Privacy',
+            title: '45 CFR 164 Security and Privacy',
             checked: false,
             explanation: ''
           }

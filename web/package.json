@@ -10,9 +10,13 @@
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --config webpack.config.dev.js",
+    "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json",
     "test": "TZ=utc jest --collectCoverage",
-    "test-watch": "TZ=utc jest --watch",
-    "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\""
+    "test-watch": "TZ=utc npm run test:generate-output -- --watch",
+    "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\"",
+    "prebuild:storybook": "npm run scaffold && npm run test:generate-output",
+    "build-storybook": "npm run prebuild:storybook && build-storybook -o ../docs-build -c .storybook -s ./dist",
+    "storybook": "npm run scaffold && start-storybook -s ./dist -p 6006"
   },
   "repository": {
     "type": "git",
@@ -73,6 +77,7 @@
     "detect-browser": "^5.2.0",
     "history": "^4.10.1",
     "i18n-js": "^3.5.1",
+    "ini": "^1.3.6",
     "js-cookie": "^2.2.0",
     "jsonpatch": "^3.0.1",
     "markdown-it": "^10.0.0",
@@ -92,42 +97,59 @@
     "stickybits": "^3.7.4",
     "tinymce": "^5.6.2",
     "updeep": "^1.2.0",
+    "url-loader": "^4.1.1",
     "uuid": "^8.3.1",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.9.0",
-    "@babel/node": "^7.8.7",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/node": "^7.13.0",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.4",
-    "@testing-library/jest-dom": "^5.11.2",
-    "@testing-library/react": "^10.4.7",
-    "@testing-library/react-hooks": "^3.4.1",
+    "@babel/plugin-transform-react-jsx": "^7.12.17",
+    "@babel/plugin-transform-runtime": "^7.13.9",
+    "@babel/preset-env": "^7.13.8",
+    "@babel/preset-react": "^7.12.13",
+    "@babel/runtime-corejs3": "^7.13.8",
+    "@mdx-js/loader": "^1.6.22",
+    "@storybook/addon-a11y": "^6.1.21",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-controls": "^6.1.21",
+    "@storybook/addon-docs": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-jest": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/addon-queryparams": "^6.1.21",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "^6.1.21",
+    "@storybook/source-loader": "^6.1.21",
+    "@storybook/storybook-deployer": "^2.8.7",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/react-hooks": "^5.1.0",
     "axios-mock-adapter": "^1.18.1",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^24.9.0",
-    "babel-loader": "^8.1.0",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^8.2.2",
     "babel-plugin-transform-require-context": "^0.1.1",
+    "core-js": "^3.9.0",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
     "d3-geo": "^1.11.9",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "enzyme-to-json": "^3.4.4",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-config-prettier": "^6.10.1",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.1",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-import-resolver-jest": "^3.0.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
     "file-loader": "^4.3.0",
     "html-webpack-plugin": "^3.2.0",
-    "jest": "^25.5.4",
+    "jest": "^26.6.3",
     "js-yaml": "^3.13.1",
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^0.9.0",
@@ -135,7 +157,7 @@
     "postcss": "^7.0.27",
     "postcss-cli": "^7.1.1",
     "postcss-cssnext": "^3.1.0",
-    "postcss-custom-properties": "^9.1.1",
+    "postcss-custom-properties": "^11.0.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-url": "^8.0.0",
@@ -148,36 +170,13 @@
     "resolve-url-loader": "^3.1.2",
     "sass-loader": "^8.0.2",
     "sinon": "^8.1.1",
+    "storybook-addon-designs": "^5.4.5",
     "style-loader": "^1.1.3",
     "topojson": "^3.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
     "yaml-jest": "^1.0.5",
-    "yaml-loader": "^0.5.0"
-  },
-  "babel": {
-    "plugins": [
-      "react-hot-loader/babel",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-syntax-dynamic-import"
-    ],
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": "defaults, ie >= 11"
-        }
-      ],
-      "@babel/preset-react"
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "@babel/plugin-transform-runtime",
-          "transform-require-context"
-        ]
-      }
-    }
+    "yaml-loader": "^0.6.0"
   }
 }

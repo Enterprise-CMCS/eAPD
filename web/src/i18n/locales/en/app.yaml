@@ -21,3 +21,5 @@ wip: '**Stay tuned!** This section is a work in progress.'
 
 exportAndSubmit:
   title: Export and Submit
+reviewAndDownload: 
+  title: Review and Download

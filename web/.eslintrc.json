@@ -1,7 +1,8 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb", "prettier"],
   "rules": {
+    "arrow-body-style": "off",
     "jsx-a11y/anchor-is-valid": [
       2,
       {
@@ -32,7 +33,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.js"],
+      "files": ["**/*.test.js", "**/*.story.js"],
       "env": {
         "jest": true
       },

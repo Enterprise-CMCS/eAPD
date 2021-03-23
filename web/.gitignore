@@ -1,4 +1,4 @@
 dist
 coverage
 
-.storybook-dist/public
+.jest-test-results.json
