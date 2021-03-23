@@ -5,7 +5,6 @@ import StateAccessRequest from './StateAccessRequest';
 const defaultProps = {
   errorMessage: null,
   saveAction: jest.fn(),
-  cancelAction: jest.fn(),
   fetching: false
 };
 
@@ -37,11 +36,5 @@ describe('<StateAccessRequest />', () => {
     });
     fireEvent.click(getByText(/Submit/i));
     expect(defaultProps.saveAction).toHaveBeenCalledWith(['mo']);
-  });
-
-  it('allows the user to cancel the request', () => {
-    const { getByText } = setup();
-    fireEvent.click(getByText(/Cancel/i));
-    expect(defaultProps.cancelAction).toHaveBeenCalled();
   });
 });

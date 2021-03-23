@@ -26,7 +26,8 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
         error={errorMessage}
         success={null}
         working={fetching}
-        primaryButtonText={['Verify', 'Verifying']}
+        primaryButtonText={['Verify Identity', 'Verifying Identity']}
+        secondaryButtonText="Go Back to Login"
         onSave={handleSubmit}
       >
         <div className="ds-u-margin-bottom--4">

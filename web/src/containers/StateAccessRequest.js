@@ -5,12 +5,7 @@ import { Dropdown } from '@cmsgov/design-system';
 import AuthenticationForm from '../components/AuthenticationForm';
 import { usStatesDropdownOptions } from '../util/states';
 
-const StateAccessRequest = ({
-  saveAction,
-  cancelAction,
-  errorMessage,
-  fetching
-}) => {
+const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
   const [selectedStates, setStates] = useState([
     usStatesDropdownOptions[0].value
   ]);
@@ -24,18 +19,13 @@ const StateAccessRequest = ({
     saveAction(selectedStates);
   };
 
-  const handleCancel = e => {
-    e.preventDefault();
-    cancelAction();
-  };
-
   return (
     <div id="start-main-content">
       <AuthenticationForm
         id="state-access-request-form"
         title="Verify Your Identity"
         legend="Verify Your Identity"
-        cancelable
+        cancelable={false}
         className="ds-u-margin-top--7"
         canSubmit={!!selectedStates}
         error={errorMessage}
@@ -43,7 +33,6 @@ const StateAccessRequest = ({
         working={fetching}
         primaryButtonText={['Submit', 'Submitting']}
         onSave={handleSubmit}
-        onCancel={handleCancel}
       >
         <div className="ds-u-margin-bottom--4">
           <label
@@ -71,8 +60,7 @@ const StateAccessRequest = ({
 StateAccessRequest.propTypes = {
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
-  saveAction: PropTypes.func.isRequired,
-  cancelAction: PropTypes.func.isRequired
+  saveAction: PropTypes.func.isRequired
 };
 
 StateAccessRequest.defaultProps = {
