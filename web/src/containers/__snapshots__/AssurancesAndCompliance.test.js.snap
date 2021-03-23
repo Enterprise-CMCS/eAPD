@@ -132,7 +132,7 @@ exports[`assurances and compliance component main component renders correctly 1`
       </fieldset>
       <fieldset
         className="ds-u-margin-top--2"
-        key="45 CFR Part 95.615"
+        key="45 CFR 95.613"
       >
         <legend
           className="ds-c-label"
@@ -141,8 +141,8 @@ exports[`assurances and compliance component main component renders correctly 1`
            
           <strong>
             <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
-              title="45 CFR Part 95.615"
+              link="https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&SID=6d93b829c0db163a0124bfeae1704e42&ty=HTML&h=L&mc=true&r=SECTION&n=se45.1.95_1613"
+              title="45 CFR 95.613"
             />
           </strong>
           ?
@@ -150,7 +150,7 @@ exports[`assurances and compliance component main component renders correctly 1`
         <ChoiceComponent
           checked={false}
           label="Yes"
-          name="apd-assurances-yes-explanation-procurement-45_CFR_Part_95.615"
+          name="apd-assurances-yes-explanation-procurement-45_CFR_95.613"
           onChange={[Function]}
           size="small"
           type="radio"
@@ -164,7 +164,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             >
               <TextArea
                 label="Please explain"
-                name="explanation-procurement-45_CFR_Part_95.615"
+                name="explanation-procurement-45_CFR_95.613"
                 onChange={[Function]}
                 rows={5}
                 value=""
@@ -172,7 +172,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             </div>
           }
           label="No"
-          name="apd-assurances-no-explanation-procurement-45_CFR_Part_95.615"
+          name="apd-assurances-no-explanation-procurement-45_CFR_95.613"
           onChange={[Function]}
           size="small"
           type="radio"
@@ -387,7 +387,7 @@ exports[`assurances and compliance component main component renders correctly 1`
       </fieldset>
       <fieldset
         className="ds-u-margin-top--2"
-        key="42 CFR Part 433.112(b)(5) - (9)"
+        key="42 CFR 433.112(b)"
       >
         <legend
           className="ds-c-label"
@@ -397,7 +397,7 @@ exports[`assurances and compliance component main component renders correctly 1`
           <strong>
             <LinkOrText
               link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
-              title="42 CFR Part 433.112(b)(5) - (9)"
+              title="42 CFR 433.112(b)"
             />
           </strong>
           ?
@@ -405,7 +405,7 @@ exports[`assurances and compliance component main component renders correctly 1`
         <ChoiceComponent
           checked={true}
           label="Yes"
-          name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
+          name="apd-assurances-yes-explanation-recordsAccess-42_CFR_433.112(b)"
           onChange={[Function]}
           size="small"
           type="radio"
@@ -419,7 +419,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             >
               <TextArea
                 label="Please explain"
-                name="explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
+                name="explanation-recordsAccess-42_CFR_433.112(b)"
                 onChange={[Function]}
                 rows={5}
                 value=""
@@ -427,7 +427,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             </div>
           }
           label="No"
-          name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
+          name="apd-assurances-no-explanation-recordsAccess-42_CFR_433.112(b)"
           onChange={[Function]}
           size="small"
           type="radio"
@@ -750,7 +750,7 @@ exports[`assurances and compliance component main component renders correctly 1`
       </h4>
       <fieldset
         className="ds-u-margin-top--2"
-        key="45 CFR 164 Securities and Privacy"
+        key="45 CFR 164 Security and Privacy"
       >
         <legend
           className="ds-c-label"
@@ -760,7 +760,7 @@ exports[`assurances and compliance component main component renders correctly 1`
           <strong>
             <LinkOrText
               link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&tpl=/ecfrbrowse/Title45/45cfr164_main_02.tpl"
-              title="45 CFR 164 Securities and Privacy"
+              title="45 CFR 164 Security and Privacy"
             />
           </strong>
           ?
@@ -768,7 +768,7 @@ exports[`assurances and compliance component main component renders correctly 1`
         <ChoiceComponent
           checked={false}
           label="Yes"
-          name="apd-assurances-yes-explanation-security-45_CFR_164_Securities_and_Privacy"
+          name="apd-assurances-yes-explanation-security-45_CFR_164_Security_and_Privacy"
           onChange={[Function]}
           size="small"
           type="radio"
@@ -782,7 +782,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             >
               <TextArea
                 label="Please explain"
-                name="explanation-security-45_CFR_164_Securities_and_Privacy"
+                name="explanation-security-45_CFR_164_Security_and_Privacy"
                 onChange={[Function]}
                 rows={5}
                 value=""
@@ -790,7 +790,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             </div>
           }
           label="No"
-          name="apd-assurances-no-explanation-security-45_CFR_164_Securities_and_Privacy"
+          name="apd-assurances-no-explanation-security-45_CFR_164_Security_and_Privacy"
           onChange={[Function]}
           size="small"
           type="radio"
