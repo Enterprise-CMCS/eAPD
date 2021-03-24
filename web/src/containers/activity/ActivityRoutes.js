@@ -50,7 +50,7 @@ const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
       <Route>
         <Section>
           <Overview activityIndex={activityIndex} />
-          <StandardsAndConditions activityIndex={activityIndex} />
+          {/* <StandardsAndConditions activityIndex={activityIndex} /> */}
         </Section>
       </Route>
     </Switch>

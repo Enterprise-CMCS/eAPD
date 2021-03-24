@@ -18,6 +18,7 @@ import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import Schedule from './Schedule';
+import ComprehensiveOverview from './ComprehensiveOverview';
 
 
 const ActivityOverview = ({
@@ -174,9 +175,10 @@ const ActivityOverview = ({
         onChange={overviewOnChange}
       />
       
-      <Schedule activityIndex={activityIndex} />
+      <ComprehensiveOverview />
+      {/* <Schedule activityIndex={activityIndex} /> */}
 
-      <div className="data-entry-box">
+      {/* <div className="data-entry-box">
         <FormLabel
           className="ds-c-label--full-width"
           hint={descriptionHint}
@@ -210,8 +212,7 @@ const ActivityOverview = ({
           onSync={syncAlternatives}
           editorClassName="rte-textarea-l"
         />
-      </div>
-      <hr />
+      </div> */}
     </Subsection>
   );
 };
