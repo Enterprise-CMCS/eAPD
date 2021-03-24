@@ -26,7 +26,10 @@ module.exports = (
       try {
         if (stateId !== request.user.state.id) {
           logger.verbose('user does not have access to state');
-          return response.status(401).end();
+          return next({
+            status: 403,
+            message: 'User does not have access to state'
+          });
         }
 
         const affiliations = await getPopulatedAffiliationsByStateId({
@@ -53,7 +56,10 @@ module.exports = (
       try {
         if (stateId !== request.user.state.id) {
           logger.verbose('user does not have access to state');
-          return response.status(401).end();
+          return next({
+            status: 403,
+            message: 'User does not have access to state'
+          });
         }
 
         const affiliation = await getPopulatedAffiliationById({
@@ -69,7 +75,11 @@ module.exports = (
           id: request.id,
           message: `affiliation ${id} does not exist in ${stateId}`
         });
-        return response.status(400).end();
+        return next({
+          status: 422,
+          message:
+            'The state ID and affiliation ID do not correspond to a known record'
+        });
       } catch (e) {
         return next(e);
       }

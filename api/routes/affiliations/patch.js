@@ -23,7 +23,7 @@ module.exports = (app, { db = knex } = {}) => {
   app.patch(
     '/states/:stateId/affiliations/:id',
     can('edit-affiliations'),
-    async (request, response) => {
+    async (request, response, next) => {
       const userId = request.user.id;
       const { stateId, id } = request.params;
 
@@ -32,47 +32,54 @@ module.exports = (app, { db = knex } = {}) => {
           id: request.id,
           message: 'affiliation status or roleId not provided'
         });
-        response.status(400).end();
-        return;
-      }
-
-      const { user_id: affiliationUserId } = await db('auth_affiliations')
-        .select('user_id')
-        .where({ state_id: stateId, id })
-        .first();
-
-      if (userId === affiliationUserId) {
-        logger.error({
-          id: request.id,
-          message: `user ${request.user.id} is attempting to edit their own role`
+        next({
+          status: 422,
+          message: 'Affiliation status or role ID not provided'
         });
-        response.status(401).end();
         return;
       }
 
-      const { status, roleId } = request.body;
-      const audit = auditor(statusToAction(status), request);
+      try {
+        const { user_id: affiliationUserId } = await db('auth_affiliations')
+          .select('user_id')
+          .where({ state_id: stateId, id })
+          .first();
 
-      db('auth_affiliations')
-        .where({ state_id: stateId, id })
-        .returning('*')
-        .update({
-          role_id: status !== 'approved' ? null : roleId,
-          status,
-          updated_by: userId
-        })
-        .then(rows => rows[0])
-        .then(row =>
-          audit.target({
-            userId: row.user_id,
-            stateId: row.state_id,
-            roleId: row.role_id,
-            status: row.status
+        if (userId === affiliationUserId) {
+          logger.error({
+            id: request.id,
+            message: `user ${request.user.id} is attempting to edit their own role`
+          });
+          next({ status: 403, message: 'User cannot edit their own role' });
+          return;
+        }
+
+        const { status, roleId } = request.body;
+        const audit = auditor(statusToAction(status), request);
+
+        db('auth_affiliations')
+          .where({ state_id: stateId, id })
+          .returning('*')
+          .update({
+            role_id: status !== 'approved' ? null : roleId,
+            status,
+            updated_by: userId
           })
-        )
-        .then(() => audit.log())
-        .then(() => response.status(200).end())
-        .catch(() => response.status(400).end());
+          .then(rows => rows[0])
+          .then(row =>
+            audit.target({
+              userId: row.user_id,
+              stateId: row.state_id,
+              roleId: row.role_id,
+              status: row.status
+            })
+          )
+          .then(() => audit.log())
+          .then(() => response.status(200).end())
+          .catch(next);
+      } catch (e) {
+        next(e);
+      }
     }
   );
 };

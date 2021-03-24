@@ -20,14 +20,14 @@ tap.test('errorHandler middleware', async t => {
   t.test('when an error occurs', async t => {
     err = 'error';
     errorHandler(err, req, res, next);
-    t.ok(res.status.calledWith(500), 'HTTP status set to 500');
+    t.ok(res.status.calledWith(400), 'HTTP status set to 500');
     t.ok(res.end.called, 'response is terminated');
   });
 
   t.test('when an error occurs, and status is set', async t => {
-    err = { error: 'err0r', status: 400 };
+    err = { error: 'err0r', status: 422 };
     errorHandler(err, req, res, next);
-    t.ok(res.status.calledWith(400), 'HTTP status set to err.status');
+    t.ok(res.status.calledWith(422), 'HTTP status set to err.status');
     t.ok(res.end.called, 'response is terminated');
   });
 

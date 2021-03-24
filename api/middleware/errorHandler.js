@@ -1,4 +1,5 @@
 const logger = require('../logger')('errorHandler middleware');
+const { ERRORS, CODES } = require('../util/errorCodes');
 
 /**
  * Error-handler Middleware
@@ -22,11 +23,23 @@ const logger = require('../logger')('errorHandler middleware');
  * @param {Function} next
  */
 const errorHandler = (err, req, res, next) => {
-  logger.error({ id: req.id, message: err });
+  let status = err.status || 400;
+  let message =
+    err.message || (typeof err === 'string' ? err : CODES[status.toString()]);
+  if (message === ERRORS.NO_CONNECTION) {
+    status = 500;
+    message = CODES['500'];
+  }
+
+  logger.error({ id: req.id, message });
   if (res.headersSent) {
     return next(err);
   }
-  return res.status(err.status || 500).end();
+
+  return res
+    .status(status)
+    .send(message)
+    .end();
 };
 
 module.exports = errorHandler;

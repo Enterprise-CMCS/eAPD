@@ -62,7 +62,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
     });
 
     handlerTest.test(
-      'sends an unauthorized error code if the user does not have the state',
+      'sends an forbidden error code if the user does not have the state',
       async invalidTest => {
         await handler(
           {
@@ -70,12 +70,17 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
             query: {},
             user: { state: { id: 'fl' } }
           },
-          res
+          res,
+          next
         );
 
-        invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
+        invalidTest.ok(
+          next.calledWith({
+            status: 403,
+            message: 'User does not have access to state'
+          }),
+          'next is called with 403 status and message'
+        );
       }
     );
 
@@ -122,7 +127,8 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
           query: { status: 'pending' },
           user: { state: { id: 'ar' } }
         },
-        res
+        res,
+        next
       );
 
       test.ok(res.status.notCalled, 'HTTP status not explicitly set');
@@ -183,7 +189,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
     });
 
     handlerTest.test(
-      'sends an unauthorized error code if the user does not have access to the state of the affiliation',
+      'sends an forbidden error code if the user does not have access to the state of the affiliation',
       async test => {
         await handler(
           { params: { stateId: 'ar', id: '1' }, user: { state: { id: 'fl' } } },
@@ -191,9 +197,13 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
           next
         );
 
-        test.ok(res.status.calledWith(401), 'HTTP status set to 401');
-        test.ok(res.send.notCalled, 'no body is sent');
-        test.ok(res.end.called, 'response is terminuated');
+        test.ok(
+          next.calledWith({
+            status: 403,
+            message: 'User does not have access to state'
+          }),
+          'next is called with 403 status and message'
+        );
       }
     );
 
@@ -211,9 +221,14 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
           next
         );
 
-        test.ok(res.status.calledWith(400), 'HTTP status set to 400');
-        test.ok(res.send.notCalled, 'no body is sent');
-        test.ok(res.end.called, 'response is terminated');
+        test.ok(
+          next.calledWith({
+            status: 422,
+            message:
+              'The state ID and affiliation ID do not correspond to a known record'
+          }),
+          'next is called with 422 status and message'
+        );
       }
     );
 
@@ -238,7 +253,8 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
 
       await handler(
         { params: { stateId: 'ar', id: '30' }, user: { state: { id: 'ar' } } },
-        res
+        res,
+        next
       );
 
       test.ok(res.status.notCalled, 'HTTP status not explicitly set');

@@ -1,5 +1,6 @@
 const knex = require('knex');
 const config = require('../knexfile');
+const { ERRORS } = require('../util/errorCodes');
 
 const { NODE_ENV } = process.env;
 if (!NODE_ENV) {
@@ -10,4 +11,14 @@ if (!NODE_ENV) {
   process.exit(1);
 }
 
-module.exports = knex(config[NODE_ENV]);
+const safeKnex = () => {
+  const safe = knex(config[NODE_ENV]);
+
+  if (!safe.pool) {
+    throw new Error(ERRORS.NO_CONNECTION);
+  }
+
+  return safe;
+};
+
+module.exports = safeKnex;

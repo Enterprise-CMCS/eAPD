@@ -157,8 +157,11 @@ const getAffiliation = {
         content: jsonResponse(affiliationSchema)
       },
       400: {
+        description: 'The server could not process the request'
+      },
+      422: {
         description:
-          'The stateId and affiliation ID do not correspond to a known record'
+          'The state ID and affiliation ID do not correspond to a known record'
       },
       ...responses.unauthed
     },
@@ -186,8 +189,10 @@ const patchAffiliation = {
         description: 'Record was updated'
       },
       400: {
-        description:
-          'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid'
+        description: 'US State ID or roleId is invalid'
+      },
+      422: {
+        description: 'Affiliation status or status are not provided'
       },
       ...responses.unauthed
     },

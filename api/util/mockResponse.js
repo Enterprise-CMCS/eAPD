@@ -5,6 +5,7 @@ const sinon = require('sinon');
 const mockResponse = () => {
   const res = {};
   res.headersSent = false;
+  res.setHeader = sinon.stub();
   res.status = sinon.stub().returns(res);
   res.send = sinon.stub().returns(res);
   res.end = sinon.stub();

@@ -18,6 +18,8 @@ tap.test('apds events endpoints', async endpointTest => {
     end: sandbox.stub()
   };
 
+  const next = sandbox.stub();
+
   endpointTest.beforeEach(done => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
@@ -62,7 +64,7 @@ tap.test('apds events endpoints', async endpointTest => {
       tests.test('the APD id is invalid', async test => {
         di.createEventForAPD.resolves(null);
 
-        await handler({ ...req, params: { id: 'bad id' } }, res);
+        await handler({ ...req, params: { id: 'bad id' } }, res, next);
 
         test.ok(
           di.createEventForAPD.calledWith({
@@ -73,8 +75,7 @@ tap.test('apds events endpoints', async endpointTest => {
           }),
           'database record was not created from the request data'
         );
-        test.ok(res.status.calledWith(422), 'sends a 422 error');
-        test.ok(res.end.calledAfter(res.status), 'response is terminated');
+        test.ok(next.calledWith({ status: 422 }), 'sends a 422 error');
       });
 
       tests.test(
@@ -82,7 +83,7 @@ tap.test('apds events endpoints', async endpointTest => {
         async test => {
           di.createEventForAPD.resolves(null);
 
-          await handler(req, res);
+          await handler(req, res, next);
 
           test.ok(
             di.createEventForAPD.calledWith({
@@ -93,15 +94,14 @@ tap.test('apds events endpoints', async endpointTest => {
             }),
             'database record is created from the request data'
           );
-          test.ok(res.status.calledWith(422), 'sends a 422 error');
-          test.ok(res.end.calledAfter(res.status), 'response is terminated');
+          test.ok(next.calledWith({ status: 422 }), 'sends a 422 error');
         }
       );
 
       tests.test('the event is created and stored correctly', async test => {
         di.createEventForAPD.resolves('new event ID');
 
-        await handler(req, res);
+        await handler(req, res, next);
 
         test.ok(
           di.createEventForAPD.calledWith({
