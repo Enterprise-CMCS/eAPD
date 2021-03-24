@@ -99,7 +99,7 @@ describe('my account page', () => {
     );
 
     await component
-      .find('withRouter(CardForm)')
+      .find('CardForm')
       .props()
       .onSave({ preventDefault });
 
