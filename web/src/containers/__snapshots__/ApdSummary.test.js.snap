@@ -28,7 +28,6 @@ exports[`APD overview component renders correctly 1`] = `
         },
       ]
     }
-    errorPlacement="top"
     label="Choose the federal fiscal year(s) this APD covers."
     labelClassName="ds-u-margin-bottom--1"
     name="apd-years"

@@ -24,7 +24,6 @@ exports[`DollarField component renders correctly 1`] = `
   >
     <TextField
       className="stuff"
-      errorPlacement="top"
       label="test label"
       mask="currency"
       name="test name"
@@ -35,10 +34,9 @@ exports[`DollarField component renders correctly 1`] = `
       type="text"
       value="123"
     >
-      <FieldContainer
+      <FormControl
         className="ds-u-clearfix stuff"
         component="div"
-        errorPlacement="top"
         label="test label"
         labelComponent="label"
         render={[Function]}
@@ -90,7 +88,6 @@ exports[`DollarField component renders correctly 1`] = `
                   $
                 </div>
                 <input
-                  aria-describedby=""
                   aria-invalid={false}
                   className="ds-c-field ds-c-field--currency ds-c-field--medium"
                   id="field_1"
@@ -107,7 +104,7 @@ exports[`DollarField component renders correctly 1`] = `
             </Mask>
           </TextInput>
         </div>
-      </FieldContainer>
+      </FormControl>
     </TextField>
   </NumberField>
 </DollarField>
