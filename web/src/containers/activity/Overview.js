@@ -115,14 +115,13 @@ const ActivityOverview = ({
       resource="activities.overview"
       id={`activity-overview-${activityIndex}`}
     >
-      {activityIndex === 0 ? (
+
+
+        <NameAndFundingSourceForm
+          index={activityIndex}
+          item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
+        />  
         <Fragment>
-          <TextField
-            defaultValue=""
-            label="Activity Name"
-            labelClassName="ds-u-margin-top--4"
-            name="single_example"
-          />
           <Dropdown
             options={dropdownOptions}
             defaultValue=""
@@ -154,12 +153,8 @@ const ActivityOverview = ({
             type="checkbox"
           />
         </Fragment>
-      ) : (
-        <NameAndFundingSourceForm
-          index={activityIndex}
-          item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
-        />
-      )}
+
+
         <FormLabel
           className="ds-c-label--full-width"
           hint={descriptionHint}
@@ -178,6 +173,7 @@ const ActivityOverview = ({
         value={summary}
         onChange={overviewOnChange}
       />
+      
       <Schedule activityIndex={activityIndex} />
 
       <div className="data-entry-box">

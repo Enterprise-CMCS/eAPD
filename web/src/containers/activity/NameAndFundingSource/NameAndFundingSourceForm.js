@@ -37,14 +37,14 @@ const NameAndFundingSourceForm = ({
         value={name}
         onChange={changeName}
       />
-      <ChoiceList
+      {/* <ChoiceList
         choices={choices}
         label="Program type"
         labelClassName="ds-u-margin-bottom--1"
         name="program-type"
         onChange={changeFundingSource}
         type="checkbox"
-      />
+      /> */}
     </Fragment>
   );
 };

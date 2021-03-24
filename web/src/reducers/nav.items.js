@@ -67,7 +67,7 @@ const staticItems = [
 
 const buildActivitySection = i => [
   {
-    label: 'Activity introduction',
+    label: 'Activity overview',
     url: `/apd/activity/${i}/overview`
   },
   {
