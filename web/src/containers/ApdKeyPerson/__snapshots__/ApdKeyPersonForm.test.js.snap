@@ -14,7 +14,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
   </p>
   <TextField
     autoFocus={true}
-    errorPlacement="top"
     label="Name"
     name="apd-state-profile-pocname1"
     onChange={[Function]}
@@ -22,7 +21,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     value="Bob the Builder"
   />
   <TextField
-    errorPlacement="top"
     label="Email"
     name="apd-state-profile-pocemail1"
     onChange={[Function]}
@@ -30,7 +28,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     value="email address"
   />
   <TextField
-    errorPlacement="top"
     label="Role"
     name="apd-state-profile-pocposition1"
     onChange={[Function]}
@@ -100,7 +97,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
   </p>
   <TextField
     autoFocus={true}
-    errorPlacement="top"
     label="Name"
     name="apd-state-profile-pocname1"
     onChange={[Function]}
@@ -108,7 +104,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     value="Bob the Builder"
   />
   <TextField
-    errorPlacement="top"
     label="Email"
     name="apd-state-profile-pocemail1"
     onChange={[Function]}
@@ -116,7 +111,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     value="email address"
   />
   <TextField
-    errorPlacement="top"
     label="Role"
     name="apd-state-profile-pocposition1"
     onChange={[Function]}
@@ -186,7 +180,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
   </p>
   <TextField
     autoFocus={true}
-    errorPlacement="top"
     label="Name"
     name="apd-state-profile-pocname0"
     onChange={[Function]}
@@ -194,7 +187,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     value="Bob the Builder"
   />
   <TextField
-    errorPlacement="top"
     label="Email"
     name="apd-state-profile-pocemail0"
     onChange={[Function]}
@@ -202,7 +194,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     value="email address"
   />
   <TextField
-    errorPlacement="top"
     label="Role"
     name="apd-state-profile-pocposition0"
     onChange={[Function]}

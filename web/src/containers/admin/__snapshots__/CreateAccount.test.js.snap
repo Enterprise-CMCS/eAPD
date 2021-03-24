@@ -23,7 +23,6 @@ exports[`<CreateAccount /> renders correctly 1`] = `
   >
     <TextField
       ariaLabel="please enter the user's full name"
-      errorPlacement="top"
       label="Name"
       name="name"
       onChange={[Function]}
@@ -31,7 +30,6 @@ exports[`<CreateAccount /> renders correctly 1`] = `
       value=""
     />
     <TextField
-      errorPlacement="top"
       label="Email"
       name="email"
       onChange={[Function]}
@@ -39,7 +37,6 @@ exports[`<CreateAccount /> renders correctly 1`] = `
       value=""
     />
     <Dropdown
-      errorPlacement="top"
       label="State"
       name="state"
       onChange={[Function]}
@@ -279,7 +276,6 @@ exports[`<CreateAccount /> renders correctly 1`] = `
       value=""
     />
     <Dropdown
-      errorPlacement="top"
       label="Authorization role"
       name="role"
       onChange={[Function]}

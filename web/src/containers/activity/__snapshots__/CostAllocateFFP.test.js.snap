@@ -218,7 +218,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       source="activities.costAllocate.ffp.federalStateSplitInstruction"
     />
     <Dropdown
-      errorPlacement="top"
       label="federal-state split"
       labelClassName="sr-only"
       name="ffp-1990"
@@ -515,7 +514,6 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       source="activities.costAllocate.ffp.federalStateSplitInstruction"
     />
     <Dropdown
-      errorPlacement="top"
       label="federal-state split"
       labelClassName="sr-only"
       name="ffp-1991"

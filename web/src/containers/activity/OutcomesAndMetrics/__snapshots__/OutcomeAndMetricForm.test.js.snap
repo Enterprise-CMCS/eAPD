@@ -7,7 +7,6 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
   <TextField
     autoFocus={true}
     className="data-entry-box"
-    errorPlacement="top"
     hint="Describe a discrete and measurable improvement for this system."
     key="activity93-index1"
     label="Outcome"
@@ -30,7 +29,6 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       key="om key 1"
     >
       <TextField
-        errorPlacement="top"
         hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
         label="Metric"
         multiline={true}
@@ -54,7 +52,6 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       key="om key 2"
     >
       <TextField
-        errorPlacement="top"
         hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
         label="Metric"
         multiline={true}

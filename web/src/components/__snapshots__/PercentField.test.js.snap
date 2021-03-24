@@ -28,7 +28,6 @@ exports[`PercentField component renders correctly 1`] = `
   >
     <TextField
       className="stuff"
-      errorPlacement="top"
       label="test label"
       mask={null}
       name="test name"
@@ -39,10 +38,9 @@ exports[`PercentField component renders correctly 1`] = `
       type="text"
       value="123"
     >
-      <FieldContainer
+      <FormControl
         className="ds-u-clearfix stuff"
         component="div"
-        errorPlacement="top"
         label="test label"
         labelComponent="label"
         render={[Function]}
@@ -83,7 +81,6 @@ exports[`PercentField component renders correctly 1`] = `
             value="123"
           >
             <input
-              aria-describedby=""
               aria-invalid={false}
               className="ds-c-field ds-c-field--medium"
               id="field_1"
@@ -96,7 +93,7 @@ exports[`PercentField component renders correctly 1`] = `
             />
           </TextInput>
         </div>
-      </FieldContainer>
+      </FormControl>
     </TextField>
   </NumberField>
 </PercentField>
