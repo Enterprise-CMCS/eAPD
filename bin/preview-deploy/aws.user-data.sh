@@ -76,7 +76,7 @@ echo "module.exports = {
     script: 'main.js',
     instances: 1,
     autorestart: true,
-    watch: ["api"],
+    watch: ['api'],
     watch_delay: 1000,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
     out_file: '/app/api/logs/eAPD-API-out-0.log',
