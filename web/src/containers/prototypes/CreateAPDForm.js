@@ -37,7 +37,7 @@ const eligibilityChildren = (
 
 const hitechChildren = (
   <Fragment>
-    <h2 className="ds-u-margin-bottom--2">APD Type ⃰</h2>
+    <h2 className="ds-u-margin-bottom--2">APD Type *</h2>
     <Alert className="ds-u-measure--wide" variation="warn">Planning and Operations APDs are currently not available for the HITECH funding source.</Alert>
     <p className="ds-u-margin-y--1">This selection is permanent for the APD.</p>
     <ChoiceList
@@ -56,7 +56,7 @@ const hitechChildren = (
 
 const mmisChildren = (
   <Fragment>
-    <h2 className="ds-u-margin-bottom--1">APD Type ⃰</h2>
+    <h2 className="ds-u-margin-bottom--1">APD Type *</h2>
     <p className="ds-u-margin-y--1">This selection is permanent for the APD.</p>
     <ChoiceList
       className="ds-u-margin--0"
