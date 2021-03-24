@@ -1,8 +1,8 @@
 ```mermaid
 sequenceDiagram
   participant W as Web App
-  participant O as Okta
   participant S as Server
+  participant O as Okta
 
   W->>S: Get user information
   Note over W,S: GET /me with access token as Bearer
