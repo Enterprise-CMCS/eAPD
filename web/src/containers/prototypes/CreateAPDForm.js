@@ -117,7 +117,7 @@ const CreateAPDForm = ({
 
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">
-          <h2 className="ds-u-margin-top--2 ds-u-margin-bottom--0">Funding Source ⃰</h2>
+          <h2 className="ds-u-margin-top--2 ds-u-margin-bottom--0">Funding Source *</h2>
         </legend>
         <Choice 
           name="radio_choice" 
