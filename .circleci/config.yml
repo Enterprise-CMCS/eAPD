@@ -310,11 +310,11 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 10.
+            # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 10
-            nvm alias default v10
+            nvm install 14
+            nvm alias default v14
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
