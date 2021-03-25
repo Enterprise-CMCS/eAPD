@@ -17,7 +17,8 @@ exports[`the unexpected error alert component renders as expected if there is an
       Your changes aren't being saved. Verify your internet connection and try saving your changes again in a few minutes by clicking on the save button. If you refresh your browser without saving, changes made after this message appeared will be lost.
     </p>
     <p>
-      If your internet connection is working and this message persists for more than 5 minutes, please contact us at 
+      If your internet connection is working and this message persists for more than 5 minutes, please contact us at
+       
       <a
         href="mailto:CMS-EAPD@cms.hhs.gov"
       >
@@ -58,7 +59,8 @@ exports[`the unexpected error alert component renders as expected if there is an
       Your changes aren't being saved. Verify your internet connection and try saving your changes again in a few minutes by clicking on the save button. If you refresh your browser without saving, changes made after this message appeared will be lost.
     </p>
     <p>
-      If your internet connection is working and this message persists for more than 5 minutes, please contact us at 
+      If your internet connection is working and this message persists for more than 5 minutes, please contact us at
+       
       <a
         href="mailto:CMS-EAPD@cms.hhs.gov"
       >

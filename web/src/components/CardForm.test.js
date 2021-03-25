@@ -1,166 +1,121 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
+import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
 
-import { plain as CardForm } from './CardForm';
+import CardForm from './CardForm';
 
-const history = { goBack: sinon.spy() };
+let mockGoBack;
+
+jest.mock('react-router-dom', () => {
+  mockGoBack = jest.fn();
+  return {
+    useHistory: jest.fn().mockReturnValue({ goBack: mockGoBack })
+  };
+});
+
+const defaultProps = {
+  title: 'test'
+};
+
+const setup = (props = {}) => {
+  return renderWithConnection(
+    <CardForm {...defaultProps} {...props}>
+      hello world
+    </CardForm>
+  );
+};
 
 describe('card form wrapper', () => {
   beforeEach(() => {
-    history.goBack.resetHistory();
+    mockGoBack.mockReset();
   });
 
   test('renders without an id on the container if id prop is null', () => {
-    expect(
-      shallow(
-        <CardForm id={null} title="test" history={history}>
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ id: null });
+
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
   test('renders with the provided id on the container if id prop is set', () => {
-    expect(
-      shallow(
-        <CardForm id="my custom id" title="test" history={history}>
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ id: 'my-custom-id' });
+
+    expect(document.querySelector('#my-custom-id')).toBeTruthy();
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
   test('renders with the default id on the container if id prop is not set', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history}>
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup();
+
+    expect(document.querySelector('#start-main-content')).toBeTruthy();
+    expect(screen.getByText('hello world')).toBeTruthy();
   });
 
   test('renders without a save button if onSave prop is missing', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history}>
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup();
+
+    expect(screen.queryByRole('button', { name: 'Save changes' })).toBeNull();
   });
 
   test('renders with a save button if onSave prop is provided', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history} onSave={sinon.spy()}>
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ onSave: jest.fn() });
+
+    expect(screen.getByRole('button', { name: 'Save changes' })).toBeTruthy();
   });
 
   test('disables the save button if canSubmit is false', () => {
-    expect(
-      shallow(
-        <CardForm
-          title="test"
-          history={history}
-          onSave={sinon.spy()}
-          canSubmit={false}
-        >
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ onSave: jest.fn(), canSubmit: false });
+
+    expect(screen.getByRole('button', { name: 'Save changes' })).toBeDisabled();
   });
 
   test('renders a legend if provided', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history} legend="of zelda">
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ legend: 'hidden temple' });
+
+    expect(screen.getByText('hidden temple')).toBeTruthy();
   });
 
   test('renders an error alert if message provided', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history} error="oh noes!">
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ error: 'oh noes!' });
+
+    expect(screen.getByText('oh noes!')).toBeTruthy();
   });
 
   test('renders a success alert if message provided', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history} success="oh yeah!">
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ success: 'oh yeah!' });
+
+    expect(screen.getByText('oh yeah!')).toBeTruthy();
   });
 
   test('does not render a cancel button if form is not cancelable', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history} cancelable={false}>
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ cancelable: false });
+
+    expect(screen.queryByRole('button', { name: 'Cancel' })).toBeNull();
   });
 
   test('renders a footer if provided', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history} footer={<div>Hello</div>}>
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ footer: <div>hello footer</div> });
+
+    expect(screen.getByText('hello footer')).toBeTruthy();
   });
 
   test('renders a spinny-wheel on the save button and disables it if the form is busy', () => {
-    expect(
-      shallow(
-        <CardForm title="test" history={history} onSave={sinon.spy()} working>
-          hello world
-        </CardForm>
-      )
-    ).toMatchSnapshot();
+    setup({ onSave: jest.fn(), working: true });
+
+    expect(screen.getByRole('button', { name: /Working/ })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Working/ })).toBeDisabled();
   });
 
   test('calls the onSave prop when the form is submitted', () => {
-    const onSave = sinon.spy();
-    const component = shallow(
-      <CardForm title="test" history={history} onSave={onSave}>
-        hello world
-      </CardForm>
-    );
+    const onSave = jest.fn();
+    setup({ onSave });
 
-    component.find('form').simulate('submit');
-
-    expect(onSave.calledOnce).toEqual(true);
+    fireEvent.click(screen.getByRole('button', { name: 'Save changes' }));
+    expect(onSave).toHaveBeenCalled();
   });
 
   test('calls the onCancel prop when the form is canceled', () => {
-    const component = shallow(
-      <CardForm title="test" history={history}>
-        hello world
-      </CardForm>
-    );
+    setup();
 
-    component
-      .find('Button')
-      .findWhere(b => b.prop('variation') === 'transparent')
-      .simulate('click');
-
-    expect(history.goBack.calledOnce).toEqual(true);
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    expect(mockGoBack).toHaveBeenCalled();
   });
 });
