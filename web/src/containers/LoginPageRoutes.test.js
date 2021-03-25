@@ -109,17 +109,6 @@ describe('LoginPageRoutes', () => {
     expect(queryByText(/Enter the verification code /i)).toBeTruthy();
   });
 
-  it('should redirect the user to LoginMFA if that path is /login/affiliations/request', () => {
-    const useRouteMatch = jest.fn().mockReturnValue({ path: '/login' });
-    const { queryByText } = renderWithConnection(
-      <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
-      {
-        initialHistory: ['/login/affiliations/request']
-      }
-    );
-    expect(queryByText(/Select your State Affiliation/i)).toBeTruthy();
-  });
-
   it('should redirect the user to StateAccessRequest if that path is /login/affiliations/request', () => {
     const useRouteMatch = jest.fn().mockReturnValue({ path: '/login' });
     const { queryByText } = renderWithConnection(

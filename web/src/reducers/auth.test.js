@@ -201,7 +201,7 @@ describe('auth reducer', () => {
       });
     });
 
-    it('should set fetching to false if STATE_ACCESS_REQUEST', () => {
+    it('should set fetching to true if STATE_ACCESS_REQUEST', () => {
       expect(auth(initialState, { type: STATE_ACCESS_REQUEST })).toEqual({
         ...initialState,
         fetching: true
