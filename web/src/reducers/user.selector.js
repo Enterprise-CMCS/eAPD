@@ -6,6 +6,16 @@ export const getIsAdmin = ({
   return role === 'admin';
 };
 
+// Adding this for now. Should consider removing specific role checks
+// in favor of a generic getRole selector.
+export const getIsFedAdmin = ({
+  user: {
+    data: { role }
+  }
+}) => {
+  return role === 'eAPD Federal Admin';
+};
+
 export const getUserStateOrTerritory = ({
   user: { data: { state = null } = {} }
 }) => state;

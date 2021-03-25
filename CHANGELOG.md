@@ -12,6 +12,8 @@ Anticipated release: March 30, 2021
 - Fixes issue with section borders ([#2370])
 - Selecting "Cancel" during the state affiliation selection puts the user into a blank screen ([#2706])
 - Logout issues ([#2864])
+- Removes create apd button for federal admins ([#2890])
+
 
 #### ⚙️ Behind the scenes
 
@@ -26,4 +28,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2648]: https://github.com/CMSgov/eAPD/issues/2648
 [#2706]: https://github.com/CMSgov/eAPD/issues/2706
 [#2864]: https://github.com/CMSgov/eAPD/issues/2864
+[#2890]: https://github.com/CMSgov/eAPD/issues/2890
 [#2909]: https://github.com/CMSgov/eAPD/issues/2909
