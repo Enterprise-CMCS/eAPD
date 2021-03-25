@@ -185,17 +185,6 @@ describe('<StateAdmin />', () => {
         expect(getByText('Edit Permissions')).toBeInTheDocument();
       });
     });
-
-    xit('should open confirmation modal on deny', async () => {
-      const { getByText } = renderUtils;
-      await waitFor(() => {
-        expect(getByText('Deny')).toBeTruthy();
-      });
-      fireEvent.click(getByText('Deny'));
-      await waitFor(() => {
-        expect(getByText('Confirm')).toBeInTheDocument();
-      });
-    });
   });
 
   xdescribe('with an active affiliation', () => {
