@@ -139,7 +139,7 @@ describe('APD files endpoints', () => {
           formData.getBuffer(),
           options
         );
-        expect(response.status).toEqual(422);
+        expect(response.status).toEqual(415);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -161,7 +161,7 @@ describe('APD files endpoints', () => {
           options
         );
         console.log('unsupported image binary file', JSON.stringify(response));
-        expect(response.status).toEqual(422);
+        expect(response.status).toEqual(415);
         expect(response.data).toMatchSnapshot();
       });
 
