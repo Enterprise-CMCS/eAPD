@@ -32,7 +32,7 @@ const NameAndFundingSourceForm = ({
     <Fragment>
       <TextField
         autoFocus
-        label="Activity name"
+        label="Activity Name"
         name="activity-name"
         value={name}
         onChange={changeName}

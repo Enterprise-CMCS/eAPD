@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import { TextField, Dropdown, ChoiceList } from '@cmsgov/design-system';
+import { TextField, Dropdown, ChoiceList, Choice } from '@cmsgov/design-system';
 
 import { t } from '../../i18n';
 import {
@@ -104,10 +104,17 @@ const ActivityOverview = ({
 
   const dropdownOptions = [
     { label: '- Select an option -', value: '' },
-    { label: '90/10', value: '90/10' },
-    { label: '75/25', value: '2' },
-    { label: '50/50', value: '3' }
+    { label: '90/10 DDI', value: '90/10 DDI' },
+    { label: '75/25 Operations', value: '75/25 Operations' },
+    { label: '75/25 Eligibility Worker', value: '75/25 Eligibility Worker' },
+    { label: '50/50 DDI', value: '50/50 DDI' },
+    { label: '50/50 Operations', value: '50/50 Operations' },
+    { label: '50/50 Eligibility Worker', value: '50/50 Eligibility Worker' }
   ];
+
+  const otherField = (
+    <TextField label="If other, specify appropriate business area." labelClassName="ds-u-margin-top--0" name="textfield_child" />
+  );
 
   
   return (
@@ -122,38 +129,39 @@ const ActivityOverview = ({
           index={activityIndex}
           item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
         />  
-        <Fragment>
-          <Dropdown
-            options={dropdownOptions}
-            defaultValue=""
-            hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share.  "
-            label="Federal-State Split"
-            name="error_dropdown_field"
+        <fieldset className="ds-c-fieldset">
+          <legend className="ds-c-label">
+            <span>Medicaid Business Areas (MES Modules)</span>
+            <p className="ds-c-field__hint ds-u-font-weight--normal ds-u-margin--0">Select a Medicaid Business Area(s) to represent which module your activity will fall under. If you 
+          do not see your Medicaid Business Area represented below, select other and specify business area.</p>
+          </legend>
+          <Choice name="checkbox_choice" type="checkbox" label="Eligibility and Enrollment (E&E)" value="a" />
+          <Choice name="checkbox_choice" type="checkbox" label="Claims Processing" value="b" />
+          <Choice name="checkbox_choice" type="checkbox" label="Financial Management" value="c" />
+          <Choice name="checkbox_choice" type="checkbox" label="Decision Support System (DSS) / Data Warehouse (DW)" value="d" />
+          <Choice name="checkbox_choice" type="checkbox" label="Encounter Processing System (EPS)" value="e" />
+          <Choice name="checkbox_choice" type="checkbox" label="Long Term Services & Supports (LTSS)" value="f" />
+          <Choice name="checkbox_choice" type="checkbox" label="Member Management" value="g" />
+          <Choice name="checkbox_choice" type="checkbox" label="Prescription Drug Monitoring Program (PDMP)" value="h" />
+          <Choice name="checkbox_choice" type="checkbox" label="Pharmacy Benefit Management (PBM)" value="i" />
+          <Choice name="checkbox_choice" type="checkbox" label="Provider Management" value="j" />
+          <Choice name="checkbox_choice" type="checkbox" label="Third Party Liability (TPL)" value="k" />
+          <Choice name="checkbox_choice" type="checkbox" label="Electronic Visit Verification (EVV)" value="l" />
+          <Choice 
+            name="checkbox_choice" 
+            type="checkbox" 
+            label="Other" 
+            value="m" 
+            checkedChildren={<div className="ds-c-choice__checkedChild">{otherField}</div>} 
           />
-          <ChoiceList
-            choices={[
-              { label: 'Eligibility and Enrollment (E&E)', value: 'A', defaultChecked: true },
-              { label: 'Claims Processing', value: 'B' },
-              { label: 'Financial Management', value: 'C' },
-              { label: 'Decision Support System (DSS) / Data Warehouse (DW)', value: 'D' },
-              { label: 'Encounter Processing System (EPS)', value: 'E' },
-              { label: 'Long Term Services & Supports (LTSS)', value: 'F' },
-              { label: 'Member Management', value: 'G' },
-              { label: 'Prescription Drug Monitoring Program (PDMP)', value: 'H' },
-              { label: 'Pharmacy Benefit Management (PBM)', value: 'I' },
-              { label: 'Provider Management', value: 'J' },
-              { label: 'Third Party Liability (TPL)', value: 'K' },
-              { label: 'Electronic Visit Verification (EVV)', value: 'L' },
-              { label: 'Other', value: 'M' },
-            ]}
-            className="ds-u-margin-top--4"
-            label="Medicaid Business Areas (MES Modules)"
-            hint="Select a Medicaid Business Area(s) to represent which module your activity will fall under. If you 
-            do not see your Medicaid Business Area represented below, select other and specify business area."
-            name="checkbox_choices"
-            type="checkbox"
-          />
-        </Fragment>
+        </fieldset>
+        <Dropdown
+          options={dropdownOptions}
+          defaultValue=""
+          hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share.  "
+          label="Federal-State Split"
+          name="error_dropdown_field"
+        />
 
 
         <FormLabel

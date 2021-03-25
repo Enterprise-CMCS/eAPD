@@ -22,17 +22,21 @@ const handleFundingChoice = (e) => {
 
 
 const eligibilityChildren = (
-  <ChoiceList
-    className="ds-u-margin--0"
-    choices={[
-      { label: 'Planning', value: 'planning', disabled: true},
-      { label: 'Implementation', value: 'implementation' },
-      { label: 'Operations', value: 'operations', disabled: true },
-    ]}
-    name="size-variants"
-    type="radio"
-    size="large"
-  />
+  <Fragment>
+    <h2 className="ds-u-margin-bottom--1">APD Type *</h2>
+    <p className="ds-u-margin-y--1">This selection is permanent for the APD.</p>
+    <ChoiceList
+      className="ds-u-margin--0"
+      choices={[
+        { label: 'Planning', value: 'planning'},
+        { label: 'Implementation', value: 'implementation' },
+        { label: 'Operations', value: 'operations' },
+      ]}
+      name="size-variants"
+      type="radio"
+      size="large"
+      />
+  </Fragment>
 );
 
 const hitechChildren = (
@@ -61,9 +65,9 @@ const mmisChildren = (
     <ChoiceList
       className="ds-u-margin--0"
       choices={[
-        { label: 'Planning', value: 'planning', disabled: true},
+        { label: 'Planning', value: 'planning'},
         { label: 'Implementation', value: 'implementation' },
-        { label: 'Operations', value: 'operations', disabled: true },
+        { label: 'Operations', value: 'operations' },
       ]}
       name="size-variants"
       type="radio"
@@ -110,9 +114,7 @@ const CreateAPDForm = ({
     >
       <h1 className="ds-u-margin-bottom--0">Create a New APD</h1>
       <p className="ds-u-margin-top--0">Complete the fields below to create your APD. Selections with a * cannot be changed after this screen.</p>
-      <h2 className="ds-u-margin-top--4">APD Name</h2>
-      <p className="instruction-box ds-u-measure--wide ds-u-margin-bottom--0">Examples: Identification numbers, brief descriptions of the APD’s purpose, or any identifier that would distinguish this APD from others within your state. This can align with your existing naming conventions.</p>
-      <TextField className="ds-u-margin--0" onChange={handleNameInput} value={apdTitle} />
+      <TextField className="ds-u-margin--0" label={<h2 className="ds-u-margin-y--1">APD Name</h2>} onChange={handleNameInput} value={apdTitle} />
 
 
       <fieldset className="ds-c-fieldset">
