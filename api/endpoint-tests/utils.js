@@ -31,6 +31,7 @@ const login = token => {
 const unauthenticatedTest = (method, url) => {
   it('when unauthenticated', async () => {
     const response = await api[method](url);
+    console.log('unauthenticated', JSON.stringify(response));
     expect(response.status).toEqual(401);
     expect(response.data).toBeFalsy();
   });
@@ -40,6 +41,7 @@ const unauthorizedTest = (method, url) => {
   it('when unauthorized', async () => {
     const authenticatedClient = login('no-permissions');
     const response = await authenticatedClient[method](url);
+    console.log('unauthorized', JSON.stringify(response));
     expect(response.status).toEqual(403);
     expect(response.data).toBeFalsy();
   });

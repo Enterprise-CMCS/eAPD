@@ -11,6 +11,7 @@ const { verifyJWT } = require('./oktaAuth');
 const verifyWebToken = async (token, { verifier = verifyJWT } = {}) => {
   return verifier(token)
     .then(claims => {
+      console.log({ claims });
       // the token is valid (per Okta)
       return claims;
     })
