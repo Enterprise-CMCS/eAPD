@@ -9,6 +9,7 @@ Anticipated release: April 5, 2021
 #### 🐛 Bugs fixed
 
 - Fixes issue with section borders ([#2370])
+- Removes create apd button for federal admins ([#2890])
 
 #### ⚙️ Behind the scenes
 
@@ -17,4 +18,5 @@ Anticipated release: April 5, 2021
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#2370]: https://github.com/CMSgov/eAPD/issues/2370
+[#2890]: https://github.com/CMSgov/eAPD/issues/2890
 [#2909]: https://github.com/CMSgov/eAPD/issues/2909
