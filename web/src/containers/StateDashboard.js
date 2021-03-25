@@ -182,7 +182,7 @@ const StateDashboard = (
                             <span className="ds-u-visibility--screen-reader">
                               Edit APD:{' '}
                             </span>
-                            {apd.name}
+                            {localStorage.getItem('apd-name')}
                           </a>
                         </h3>
                         <ul className="ds-c-list--bare">

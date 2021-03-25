@@ -123,8 +123,6 @@ const ActivityOverview = ({
       resource="activities.overview"
       id={`activity-overview-${activityIndex}`}
     >
-
-
         <NameAndFundingSourceForm
           index={activityIndex}
           item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
@@ -162,8 +160,6 @@ const ActivityOverview = ({
           label="Federal-State Split"
           name="error_dropdown_field"
         />
-
-
         <FormLabel
           className="ds-c-label--full-width"
           hint={descriptionHint}

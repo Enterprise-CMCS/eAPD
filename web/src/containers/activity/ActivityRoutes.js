@@ -23,6 +23,7 @@ const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
     <Switch>
       <Route path={`${path}/oms`}>
         <Section>
+          <StandardsAndConditions activityIndex={activityIndex} />
           <Outcomes activityIndex={activityIndex} />
           <Milestones activityIndex={activityIndex} />
         </Section>
@@ -50,7 +51,6 @@ const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
       <Route>
         <Section>
           <Overview activityIndex={activityIndex} />
-          {/* <StandardsAndConditions activityIndex={activityIndex} /> */}
         </Section>
       </Route>
     </Switch>
