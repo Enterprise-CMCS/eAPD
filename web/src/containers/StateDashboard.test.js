@@ -1,6 +1,6 @@
 import React from 'react';
 import StateDashboard from './StateDashboard';
-import { renderWithConnection } from '../shared/apd-testing-library';
+import { renderWithConnection } from 'apd-testing-library';
 import mockAxios from '../util/api';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
@@ -83,6 +83,29 @@ describe('<StateDashboard />', () => {
       expect(
         getByText(/Approval Pending From State Administrator/i)
       ).toBeTruthy();
+    });
+  });
+
+  describe('federal admin viewing state dashboard', () => {
+    beforeEach(() => {
+      renderUtils = renderWithConnection(<StateDashboard {...props} />, {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              role: 'eAPD Federal Admin',
+              affiliations: [
+                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.APPROVED }
+              ]
+            }
+          }
+        }
+      });
+    });
+
+    it('should not display the create apd button', () => {
+      const { queryByText } = renderUtils;
+      expect(queryByText('Create new')).toBeNull();
     });
   });
 
