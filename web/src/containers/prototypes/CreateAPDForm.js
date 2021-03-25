@@ -144,7 +144,7 @@ const CreateAPDForm = ({
           value="mmis"
           checkedChildren={<div className="ds-c-choice__checkedChild">{mmisChildren}</div>}
           onChange={handleFundingChoice}
-        />        
+        />   
       </fieldset>
 
       <div className="ds-u-display--flex ds-u-justify-content--between ds-u-margin-y--6 create-apd-buttons">
