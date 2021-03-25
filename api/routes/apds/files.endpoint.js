@@ -30,7 +30,7 @@ describe('APD files endpoints', () => {
           url(9000, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -39,7 +39,7 @@ describe('APD files endpoints', () => {
           url(4000, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -48,7 +48,7 @@ describe('APD files endpoints', () => {
           url(4002, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -83,21 +83,21 @@ describe('APD files endpoints', () => {
       it('with a non-existant apd ID', async () => {
         const response = await api.post(url(9000), form);
 
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
         const response = await api.post(url(4000), form);
 
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(403);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with an APD that is not in draft', async () => {
         const response = await api.post(url(4002), form);
 
-        expect(response.status).toEqual(422);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -113,13 +113,16 @@ describe('APD files endpoints', () => {
           }
         };
 
-        api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(422);
-          expect(e.response.data).toMatchSnapshot();
-        });
+        const response = await api.post(
+          url(4001),
+          formData.getBuffer(),
+          options
+        );
+        expect(response.status).toEqual(415);
+        expect(response.data).toMatchSnapshot();
       });
 
-      it('with a non-image binary file', async () => {
+      xit('with a non-image binary file', async () => {
         const pdfPath = `${process.cwd()}/test-data/files/eAPD_logo.pdf`;
         expect(fs.existsSync(pdfPath)).toBeTruthy();
 
@@ -131,13 +134,16 @@ describe('APD files endpoints', () => {
           }
         };
 
-        api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(422);
-          expect(e.response.data).toMatchSnapshot();
-        });
+        const response = await api.post(
+          url(4001),
+          formData.getBuffer(),
+          options
+        );
+        expect(response.status).toEqual(422);
+        expect(response.data).toMatchSnapshot();
       });
 
-      it('with a unsupported image binary file', async () => {
+      xit('with a unsupported image binary file', async () => {
         const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.bmp`;
         expect(fs.existsSync(imagePath)).toBeTruthy();
 
@@ -149,10 +155,14 @@ describe('APD files endpoints', () => {
           }
         };
 
-        api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(422);
-          expect(e.response.data).toMatchSnapshot();
-        });
+        const response = await api.post(
+          url(4001),
+          formData.getBuffer(),
+          options
+        );
+        console.log('unsupported image binary file', JSON.stringify(response));
+        expect(response.status).toEqual(422);
+        expect(response.data).toMatchSnapshot();
       });
 
       it('with a valid request (png)', async () => {

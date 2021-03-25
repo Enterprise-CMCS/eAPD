@@ -23,7 +23,7 @@ describe('APD endpoint', () => {
         const api = login();
         const response = await api.delete(url(9000));
 
-        expect(response.status).toEqual(422);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -31,7 +31,7 @@ describe('APD endpoint', () => {
         const api = login();
         const response = await api.delete(url(4000));
 
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(403);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -39,7 +39,7 @@ describe('APD endpoint', () => {
         const api = login();
         const response = await api.delete(url(4002));
 
-        expect(response.status).toEqual(422);
+        expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 

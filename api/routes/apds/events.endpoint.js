@@ -26,7 +26,7 @@ describe('APD events endpoints', () => {
 
       it('with a non-existant apd ID', async () => {
         const response = await api.post(url(9000), { eventType: 'EXPORT' });
-        expect(response.status).toEqual(422);
+        expect(response.status).toEqual(400);
       });
 
       it('with a valid request', async () => {

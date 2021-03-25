@@ -1613,13 +1613,16 @@ Object {
             "description": "A single user affiliation with a US State",
           },
           "400": Object {
-            "description": "The stateId and affiliation ID do not correspond to a known record",
+            "description": "The server could not process the request",
           },
           "401": Object {
             "description": "Not logged in",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
+          },
+          "422": Object {
+            "description": "The state ID and affiliation ID do not correspond to a known record",
           },
         },
         "security": Array [
@@ -1684,13 +1687,16 @@ Object {
             "description": "Record was updated",
           },
           "400": Object {
-            "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid",
+            "description": "US State ID or roleId is invalid",
           },
           "401": Object {
             "description": "Not logged in",
           },
           "403": Object {
             "description": "Does not have permission to this activity",
+          },
+          "422": Object {
+            "description": "Affiliation status or status are not provided",
           },
         },
         "security": Array [

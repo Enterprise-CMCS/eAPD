@@ -28,12 +28,12 @@ describe('Affiliations endpoint | PATCH', () => {
 
   it('returns 400 when US state is invalid', async () => {
     const response = await api.patch('/states/zz/affiliations/4000');
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(422);
   });
 
   it('returns 400 when affiliation id is invalid', async () => {
     const response = await api.patch('/states/ak/affiliations/NaN');
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(422);
   });
 
   it('returns 400 when status is invalid', async () => {
@@ -41,7 +41,7 @@ describe('Affiliations endpoint | PATCH', () => {
       status: 'blarg',
       roleId: 1106
     });
-    expect(response.status).toEqual(422);
+    expect(response.status).toEqual(400);
   });
 
   it('returns 400 when body is invalid', async () => {

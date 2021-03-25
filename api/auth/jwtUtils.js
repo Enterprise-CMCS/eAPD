@@ -34,6 +34,7 @@ const jwtExtractor = req => {
   if (token && token !== '') {
     if (token.match(/^bearer\s/i)) {
       const [temp, result] = token.split(' '); // eslint-disable-line no-unused-vars
+      console.log({ result });
       return result;
     }
   }

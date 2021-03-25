@@ -26,14 +26,14 @@ describe('APD endpoint | PATCH /apds/:id', () => {
     it('with a non-existant apd ID', async () => {
       const response = await api.patch(url(9000));
 
-      expect(response.status).toEqual(422);
+      expect(response.status).toEqual(400);
       expect(response.data).toMatchSnapshot();
     });
 
     it(`with an APD in a state other than the user's state`, async () => {
       const response = await api.patch(url(4000));
 
-      expect(response.status).toEqual(401);
+      expect(response.status).toEqual(403);
       expect(response.data).toMatchSnapshot();
     });
 

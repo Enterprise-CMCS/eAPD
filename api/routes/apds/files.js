@@ -57,7 +57,10 @@ module.exports = (
         const { size = 0, buffer = null } = req.file;
 
         const { error = null, image = null } = await validateFile(buffer);
-        if (error) next({ status: 415, message: error });
+        console.log({ error });
+        if (error) {
+          next({ status: 415, message: error });
+        }
 
         const fileID = await createNewFileForAPD(
           image,

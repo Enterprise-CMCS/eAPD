@@ -85,7 +85,7 @@
     "jsonpatch": "^3.0.1",
     "jsonpointer": "^4.0.1",
     "jsonwebtoken": "^8.5.0",
-    "knex": "^0.21.12",
+    "knex": "^0.95.3",
     "moment": "^2.24.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
@@ -116,6 +116,7 @@
     "tap": "^14.10.8"
   },
   "jest": {
+    "testEnvironment": "node",
     "testMatch": [
       "**/__tests__/**/*.js?(x)",
       "**/?(*.)+(spec|test|endpoint).js?(x)"

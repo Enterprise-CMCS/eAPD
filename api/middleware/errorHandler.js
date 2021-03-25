@@ -23,13 +23,16 @@ const { ERRORS, CODES } = require('../util/errorCodes');
  * @param {Function} next
  */
 const errorHandler = (err, req, res, next) => {
+  console.log({ err });
   let status = err.status || 400;
   let message =
     err.message || (typeof err === 'string' ? err : CODES[status.toString()]);
-  if (message === ERRORS.NO_CONNECTION) {
-    status = 500;
-    message = CODES['500'];
-  }
+
+  // if (message.match(/getaddrinfo ENOTFOUND db/i)) {
+  //   console.log('getaddrinfo ENOTFOUND db');
+  //   status = 500;
+  //   message = CODES['500'];
+  // }
 
   logger.error({ id: req.id, message });
   if (res.headersSent) {

@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with a non-existant apd ID 1`] = `""`;
+exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with a non-existant apd ID 1`] = `"Requested object does not exist"`;
 
 exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with a valid update 1`] = `""`;
 
-exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with an APD in a state other than the user's state 1`] = `""`;
+exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with an APD in a state other than the user's state 1`] = `"User does not have access to the APD"`;
 
-exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with an APD that is not in draft 1`] = `
-Object {
-  "error": "apd-not-editable",
-}
-`;
+exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with an APD that is not in draft 1`] = `"APD status is not editable"`;

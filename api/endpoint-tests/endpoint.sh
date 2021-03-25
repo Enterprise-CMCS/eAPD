@@ -4,12 +4,12 @@ rm ./endpoint-tests/endpoint-data.json
 
 echo "[]" > endpoint-data.json
 
-# ENDPOINT_COVERAGE_CAPTURE=true docker-compose -f docker-compose.endpoint-tests.yml up -d
+ENDPOINT_COVERAGE_CAPTURE=true docker-compose -f docker-compose.endpoint-tests.yml up -d
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run test-endpoints $@
 EXIT_CODE=$?
-# docker-compose -f docker-compose.endpoint-tests.yml down
+docker-compose -f docker-compose.endpoint-tests.yml down
 
 mv endpoint-data.json ./endpoint-tests
 

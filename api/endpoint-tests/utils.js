@@ -2,6 +2,8 @@ const axios = require('axios');
 const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
+const logger = require('../logger')('endpoint-tests utils');
+const { CODES } = require('../util/errorCodes');
 
 const { API_HOST, API_PORT, PORT } = process.env;
 
@@ -31,9 +33,8 @@ const login = token => {
 const unauthenticatedTest = (method, url) => {
   it('when unauthenticated', async () => {
     const response = await api[method](url);
-    console.log('unauthenticated', JSON.stringify(response));
     expect(response.status).toEqual(401);
-    expect(response.data).toBeFalsy();
+    expect(response.data).toEqual(CODES['401']);
   });
 };
 
@@ -41,9 +42,8 @@ const unauthorizedTest = (method, url) => {
   it('when unauthorized', async () => {
     const authenticatedClient = login('no-permissions');
     const response = await authenticatedClient[method](url);
-    console.log('unauthorized', JSON.stringify(response));
     expect(response.status).toEqual(403);
-    expect(response.data).toBeFalsy();
+    expect(response.data).toEqual(CODES['403']);
   });
 };
 
