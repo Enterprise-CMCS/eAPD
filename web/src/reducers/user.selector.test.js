@@ -1,4 +1,4 @@
-import { getIsAdmin } from './user.selector';
+import { getIsAdmin, getIsFedAdmin } from './user.selector';
 
 describe('user state selectors', () => {
   describe('getIsAdmin selector', () => {
@@ -14,6 +14,24 @@ describe('user state selectors', () => {
       expect(
         getIsAdmin({
           user: { data: { role: 'not an admin' } }
+        })
+      ).toEqual(false);
+    });
+  });
+
+  describe('getIsFedAdmin selector', () => {
+    it('returns true if the user has role eAPD Federal Admin', () => {
+      expect(
+        getIsFedAdmin({
+          user: { data: { role: 'eAPD Federal Admin' } }
+        })
+      ).toEqual(true);
+    });
+
+    it('returns false if the user does not have role eAPD Federal Admin', () => {
+      expect(
+        getIsAdmin({
+          user: { data: { role: 'not a federal admin' } }
         })
       ).toEqual(false);
     });
