@@ -24,7 +24,6 @@ const Milestone = ({ activity, activityIndex, add, remove }) => {
       <Fragment>
         <div className="mb3">
           <hr />
-
           <FormAndReviewList
             activityIndex={activityIndex}
             addButtonText={t('activities.milestones.addMilestoneButtonText')}

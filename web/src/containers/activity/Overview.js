@@ -17,7 +17,6 @@ import { Subsection } from '../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
-import Schedule from './Schedule';
 import ComprehensiveOverview from './ComprehensiveOverview';
 
 
@@ -180,7 +179,6 @@ const ActivityOverview = ({
       />
       
       <ComprehensiveOverview />
-      {/* <Schedule activityIndex={activityIndex} /> */}
 
       {/* <div className="data-entry-box">
         <FormLabel

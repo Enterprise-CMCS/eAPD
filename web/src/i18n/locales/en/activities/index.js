@@ -1,4 +1,5 @@
 import base from './activities.yaml';
+import alternatives from './alternatives.yaml';
 import contractorResources from './contractorResources.yaml';
 import costAllocate from './costAllocate.yaml';
 import expenses from './expenses.yaml';
@@ -12,6 +13,7 @@ import statePersonnel from './statePersonnel.yaml';
 
 export default {
   ...base,
+  alternatives,
   contractorResources,
   costAllocate,
   expenses,

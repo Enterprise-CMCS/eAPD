@@ -6,6 +6,7 @@ import {
   useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
+import AlternativeConsiderations from './AlternativeConsiderations';
 import ContractorResources from './ContractorResources';
 import CostAllocation from './CostAllocation';
 import FFP from './CostAllocateFFP';
@@ -13,7 +14,9 @@ import Costs from './Costs';
 import Milestones from './Milestones';
 import Overview from './Overview';
 import Outcomes from './Outcomes';
+import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
+
 import { Section } from '../../components/Section';
 
 const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
@@ -21,11 +24,26 @@ const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
 
   return (
     <Switch>
-      <Route path={`${path}/oms`}>
+      {/* <Route path={`${path}/oms`}>
         <Section>
-          <StandardsAndConditions activityIndex={activityIndex} />
           <Outcomes activityIndex={activityIndex} />
           <Milestones activityIndex={activityIndex} />
+        </Section>
+      </Route> */}
+      <Route path={`${path}/alternative-considerations`}>
+        <Section>
+          <AlternativeConsiderations activityIndex={activityIndex} />
+        </Section>
+      </Route>
+      <Route path={`${path}/schedule-milestones`}>
+        <Section>
+          <Schedule activityIndex={activityIndex} />
+          <Milestones activityIndex={activityIndex} />
+        </Section>
+      </Route>
+      <Route path={`${path}/standards-conditions`}>
+        <Section>
+          <StandardsAndConditions activityIndex={activityIndex} />
         </Section>
       </Route>
       <Route path={`${path}/state-costs`}>

@@ -71,8 +71,16 @@ const buildActivitySection = i => [
     url: `/apd/activity/${i}/overview`
   },
   {
-    label: 'Outcomes and milestones',
-    url: `/apd/activity/${i}/oms`
+    label: 'Statement of alternative conderations and forseeable risks',
+    url: `/apd/activity/${i}/alternative-considerations`
+  },
+  {
+    label: 'Activity schedule and milestones',
+    url: `/apd/activity/${i}/schedule-milestones`
+  },
+  {
+    label: 'Standards and conditions',
+    url: `/apd/activity/${i}/standards-conditions`
   },
   {
     label: 'State staff and expenses',

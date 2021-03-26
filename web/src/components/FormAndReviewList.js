@@ -95,7 +95,7 @@ const FormAndReviewList = ({
   return (
     <div className={combinedClassName}>
       {list.length === 0 && noDataMessage !== false ? (
-        <Alert variation="error">{noDataMessage || 'This list is empty'}</Alert>
+        <Alert variation="warn">{noDataMessage || 'This list is empty'}</Alert>
       ) : (
         list.map((item, index) => (
           <FormAndReviewItem

@@ -37,7 +37,7 @@ const MilestoneForm = ({
       />
       <DateField
         label="Target completion date"
-        hint=""
+        hint="For example: 4 / 28 / 1986"
         value={endDate}
         onChange={changeDate}
       />
