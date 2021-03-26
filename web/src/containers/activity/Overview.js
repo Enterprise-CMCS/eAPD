@@ -1,9 +1,8 @@
-import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import { TextField, Dropdown, ChoiceList, Choice } from '@cmsgov/design-system';
+import { TextField, Dropdown, ChoiceList, Choice, FormLabel } from '@cmsgov/design-system';
 
 import { t } from '../../i18n';
 import {
@@ -167,16 +166,16 @@ const ActivityOverview = ({
           Activity Snapshot
           <p className="ds-u-font-weight--normal ds-u-margin-top--1">Provide a brief and high-level snapshot of the activity. You can speak on purpose of your activity, its benefits, and any additional information that would give a reviewer a quick understanding of your activity.</p>
         </FormLabel>
-      <RichText
-        name="activity overview"
-        label="Activity Snapshot"
-        hint="Provide a brief and high-level snapshot of the activity. You can speak on purpose of your activity, its benefits, and any additional information that would give a reviewer a quick understanding of your activity."
-        max={280}
-        rows={6}
-        className="data-entry-box"
-        value={summary}
-        onChange={overviewOnChange}
-      />
+        <RichText
+          name="activity overview"
+          label="Activity Snapshot"
+          hint="Provide a brief and high-level snapshot of the activity. You can speak on purpose of your activity, its benefits, and any additional information that would give a reviewer a quick understanding of your activity."
+          max={280}
+          rows={6}
+          className="data-entry-box"
+          value={summary}
+          onChange={overviewOnChange}
+        />
       
       <ComprehensiveOverview />
 
