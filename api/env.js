@@ -6,7 +6,7 @@ const defaults = {
   ENDPOINT_COVERAGE_CAPTURE: 'false',
   FILE_PATH: '__files',
   FILE_STORE: 'local',
-  LOG_LEVEL: 'info',
+  LOG_LEVEL: 'silly', // 'info',
   LOG_FILE: 'false',
   LOG_CONSOLE: 'true',
   NODE_ENV: 'development',
