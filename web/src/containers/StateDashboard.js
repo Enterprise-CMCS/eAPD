@@ -91,9 +91,9 @@ const StateDashboard = (
     }
   });
 
-  const createNew = (e) => {
+  const createNew = e => {
     e.preventDefault();
-    window.location.href='create-apd-prototype';
+    window.location.href = 'create-apd-prototype';
   };
 
   const open = id => e => {
@@ -142,8 +142,15 @@ const StateDashboard = (
                     {state ? state.name : ''} APDs
                   </h2>
                   {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
-                    <Link className="ds-u-float--right ds-c-button ds-c-button--primary" to={"create-apd-prototype"}>
-                      Create new<Icon className="ds-u-margin-left--1" icon={faPlusCircle} />
+                    <Link
+                      className="ds-u-float--right ds-c-button ds-c-button--primary"
+                      to={'create-apd-prototype'}
+                    >
+                      Create new
+                      <Icon
+                        className="ds-u-margin-left--1"
+                        icon={faPlusCircle}
+                      />
                     </Link>
                   )}
                 </div>

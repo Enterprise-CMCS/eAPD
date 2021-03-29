@@ -12,7 +12,10 @@ const ApdHeader = ({ apdCreated, year }) => (
       </span>
       {localStorage.getItem('apd-name')}
     </h1>
-    <h2 className="ds-h4 ds-u-margin-top--1 ds-u-margin-bottom--4">{localStorage.getItem('apd-funding-source').toUpperCase() + " IAPD"}| FFY {year}</h2>
+    <h2 className="ds-h4 ds-u-margin-top--1 ds-u-margin-bottom--4">
+      {localStorage.getItem('apd-funding-source').toUpperCase() + ' IAPD'}| FFY{' '}
+      {year}
+    </h2>
   </Fragment>
 );
 

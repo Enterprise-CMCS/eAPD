@@ -31,10 +31,7 @@ describe('Consent banner component', () => {
 
     test('dismisses on agreement', () => {
       const component = shallow(<ConsentBanner onAgree={onAgree} />);
-      component
-        .find('Button')
-        .find({ variation: 'primary' })
-        .simulate('click');
+      component.find('Button').find({ variation: 'primary' }).simulate('click');
 
       expect(onAgree.calledOnce).toEqual(true);
     });

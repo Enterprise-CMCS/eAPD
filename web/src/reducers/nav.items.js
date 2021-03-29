@@ -139,7 +139,7 @@ const getItems = ({ activities = [], items = staticItems, url = '' } = {}) => {
           name: activity.name
         }),
         items: buildActivitySection(i)
-      })),
+      }))
       // alternative design demo
       // {
       //   label: "Add activity",

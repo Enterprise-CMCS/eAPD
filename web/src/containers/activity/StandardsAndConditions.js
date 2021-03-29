@@ -19,19 +19,17 @@ const StandardsAndConditions = ({
 }) => (
   <Fragment>
     <label htmlFor="standards-and-conditions-supports-field">
-      <h4 className="ds-h4">Standards and Conditions</h4>
+      <h4 className="ds-h4">Standards and Conditions for Enhanced Funding</h4>
     </label>
-
     <div className="ds-u-margin-bottom--6 ds-u-margin-top--3">
       <p className="ds-u-margin-bottom--3">
-        Include a description about how this activity will support the Medicaid
-        standards and conditions{' '}
-        <a href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112">
-          42 CFR 433.112
-        </a>
-        .
+        Review Medicaid Standards and Conditions regulation and answer the
+        following questions. If the activity has a match rate of 50-50, select
+        ‘no’ below to proceed to the next page.
       </p>
+      <a href="#">Review Standards and Conditions Regulation ></a>
 
+      <h4>Enhanced Funding Qualification</h4>
       <RichText
         id="standards-and-conditions-supports-field"
         content={activity.standardsAndConditions.supports}

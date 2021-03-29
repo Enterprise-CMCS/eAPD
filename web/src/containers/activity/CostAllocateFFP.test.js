@@ -14,8 +14,8 @@ describe('the CostAllocateFFP component', () => {
     aKey: 'key',
     activityName: 'activity name',
     costAllocation: {
-      '1990': { ffp: { federal: '90', state: '10' }, other: 100 },
-      '1991': { ffp: { federal: '50', state: '50' }, other: 200 }
+      1990: { ffp: { federal: '90', state: '10' }, other: 100 },
+      1991: { ffp: { federal: '50', state: '50' }, other: 200 }
     },
     costSummary: {
       total: {
@@ -26,7 +26,7 @@ describe('the CostAllocateFFP component', () => {
         totalCost: 500
       },
       years: {
-        '1990': {
+        1990: {
           contractorResources: [
             {
               description: 'contractor 2.1',
@@ -76,7 +76,7 @@ describe('the CostAllocateFFP component', () => {
           stateShare: 1007,
           totalCost: 1008
         },
-        '1991': {
+        1991: {
           contractorResources: [
             {
               description: 'contractor 2.1',
@@ -161,9 +161,9 @@ describe('the CostAllocateFFP component', () => {
 
   it('renders the budget and cost allocation summary narrative', () => {
     const costAllocation = {
-      '1': { ffp: { federal: 'f', state: 's' } },
-      '2': { ffp: { federal: 'f', state: 's' } },
-      '3': { ffp: { federal: 'f', state: 's' } }
+      1: { ffp: { federal: 'f', state: 's' } },
+      2: { ffp: { federal: 'f', state: 's' } },
+      3: { ffp: { federal: 'f', state: 's' } }
     };
 
     const p = {

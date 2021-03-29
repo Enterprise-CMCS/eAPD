@@ -26,7 +26,7 @@ const routes = [
     isAdmin: true,
     isCard: true
   },
-  
+
   // Prototype routes
   { path: '/create-apd-prototype', component: CreateAPDForm, isPublic: true },
 

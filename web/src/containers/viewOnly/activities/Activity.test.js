@@ -6,14 +6,14 @@ import Activity from './Activity';
 const activity = {
   alternatives: '<p>This is a list of alternatives</p>\n',
   costAllocation: {
-    '2020': {
+    2020: {
       ffp: {
         federal: 50,
         state: 50
       },
       other: 0
     },
-    '2021': {
+    2021: {
       ffp: {
         federal: 90,
         state: 10
@@ -36,38 +36,38 @@ const activity = {
   },
   summary: 'This is the summary of the activity',
   quarterlyFFP: {
-    '2020': {
-      '1': {
+    2020: {
+      1: {
         contractors: 25,
         inHouse: 25
       },
-      '2': {
+      2: {
         contractors: 25,
         inHouse: 25
       },
-      '3': {
+      3: {
         contractors: 25,
         inHouse: 25
       },
-      '4': {
+      4: {
         contractors: 25,
         inHouse: 25
       }
     },
-    '2021': {
-      '1': {
+    2021: {
+      1: {
         contractors: 25,
         inHouse: 25
       },
-      '2': {
+      2: {
         contractors: 25,
         inHouse: 25
       },
-      '3': {
+      3: {
         contractors: 25,
         inHouse: 25
       },
-      '4': {
+      4: {
         contractors: 25,
         inHouse: 25
       }
@@ -79,11 +79,11 @@ const activity = {
       end: '',
       hourly: {
         data: {
-          '2020': {
+          2020: {
             hours: '',
             rate: ''
           },
-          '2021': {
+          2021: {
             hours: '',
             rate: ''
           }
@@ -94,8 +94,8 @@ const activity = {
       start: '',
       totalCost: 264574,
       years: {
-        '2020': 450000,
-        '2021': 150000
+        2020: 450000,
+        2021: 150000
       }
     },
     {
@@ -103,11 +103,11 @@ const activity = {
       end: '',
       hourly: {
         data: {
-          '2020': {
+          2020: {
             hours: '',
             rate: ''
           },
-          '2021': {
+          2021: {
             hours: '',
             rate: ''
           }
@@ -118,8 +118,8 @@ const activity = {
       start: '',
       totalCost: 64574,
       years: {
-        '2020': 200000,
-        '2021': 500000
+        2020: 200000,
+        2021: 500000
       }
     }
   ],
@@ -128,8 +128,8 @@ const activity = {
       description: '',
       category: 'Equipment and supplies',
       years: {
-        '2020': 25000,
-        '2021': 25000
+        2020: 25000,
+        2021: 25000
       }
     }
   ],
@@ -158,11 +158,11 @@ const activity = {
       title: 'State MITA Person',
       description: '1',
       years: {
-        '2020': {
+        2020: {
           amt: 100000,
           perc: 0.5
         },
-        '2021': {
+        2021: {
           amt: 100000,
           perc: 1
         }

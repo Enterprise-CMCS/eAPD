@@ -40,10 +40,10 @@ describe('renders correctly', () => {
       shallow(
         <DataRowGroup
           data={{
-            combined: { '1448': {} },
-            contractors: { '1448': {} },
-            expenses: { '1448': {} },
-            statePersonnel: { '1448': {} }
+            combined: { 1448: {} },
+            contractors: { 1448: {} },
+            expenses: { 1448: {} },
+            statePersonnel: { 1448: {} }
           }}
           title="title text"
           groupTitle="MMIS"
@@ -58,20 +58,20 @@ describe('renders correctly', () => {
         <SummaryBudgetByActivityTotals
           data={{
             hit: {
-              '1975': { federal: 1, state: 2, medicaid: 1000, total: 3 },
-              '1976': { federal: 10, state: 20, medicaid: 2000, total: 30 }
+              1975: { federal: 1, state: 2, medicaid: 1000, total: 3 },
+              1976: { federal: 10, state: 20, medicaid: 2000, total: 30 }
             },
             hie: {
-              '1975': { federal: 2, state: 3, medicaid: 2000, total: 5 },
-              '1976': { federal: 20, state: 30, medicaid: 3000, total: 50 }
+              1975: { federal: 2, state: 3, medicaid: 2000, total: 5 },
+              1976: { federal: 20, state: 30, medicaid: 3000, total: 50 }
             },
             mmis: {
-              '1975': { federal: 3, state: 4, medicaid: 3000, total: 7 },
-              '1976': { federal: 30, state: 40, medicaid: 4000, total: 70 }
+              1975: { federal: 3, state: 4, medicaid: 3000, total: 7 },
+              1976: { federal: 30, state: 40, medicaid: 4000, total: 70 }
             },
             combined: {
-              '1975': { federal: 4, state: 5, medicaid: 4000, total: 9 },
-              '1976': { federal: 40, state: 50, medicaid: 5000, total: 90 }
+              1975: { federal: 4, state: 5, medicaid: 4000, total: 9 },
+              1976: { federal: 40, state: 50, medicaid: 5000, total: 90 }
             }
           }}
           ffy="1975"

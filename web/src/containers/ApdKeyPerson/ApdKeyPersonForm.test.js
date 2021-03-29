@@ -17,16 +17,16 @@ describe('the ApdKeyPersonForm component', () => {
     index: 1,
     item: {
       costs: {
-        '1992': 100,
-        '1993': 300
+        1992: 100,
+        1993: 300
       },
       email: 'email address',
       hasCosts: true,
       key: 'person key',
       name: 'Bob the Builder',
       fte: {
-        '1992': 0.32,
-        '1993': 0.57
+        1992: 0.32,
+        1993: 0.57
       },
       position: 'The Builder'
     },
