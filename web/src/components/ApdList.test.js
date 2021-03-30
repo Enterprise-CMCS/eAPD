@@ -145,4 +145,26 @@ describe('<ApdList />', () => {
       // expect(props.deleteApd).toHaveBeenCalledWith(apd);
     });
   });
+  describe('federal admin viewing state dashboard', () => {
+    beforeEach(() => {
+      renderUtils = renderWithConnection(<ApdList {...props} />, {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              role: 'eAPD Federal Admin',
+              affiliations: [
+                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.APPROVED }
+              ]
+            }
+          }
+        }
+      });
+    });
+
+    it('should not display the create apd button', () => {
+      const { queryByText } = renderUtils;
+      expect(queryByText('Create new')).toBeNull();
+    });
+  });
 });
