@@ -9,6 +9,8 @@ import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import UpgradeBrowser from "./UpgradeBrowser";
+import { getUserStateOrTerritoryStatus, getIsFedAdmin } from '../reducers/user.selector';
+import { STATE_AFFILIATION_STATUSES } from '../constants';
 
 const Loading = ({ children }) => (
   <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
@@ -27,6 +29,8 @@ const ApdList = (
     route,
     selectApd: select,
     state,
+    stateStatus,
+    isFedAdmin
   },
   { global = window } = {}
 ) => {
@@ -48,6 +52,8 @@ const ApdList = (
       del(apd.id);
     }
   };
+
+  const canCreateApd = !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -79,18 +85,20 @@ const ApdList = (
                   <h2 className="ds-h2 ds-u-display--inline-block">
                     {state ? state.name : ''} APDs
                   </h2>
-                  <Button
-                    variation="primary"
-                    className="ds-u-float--right"
-                    onClick={createNew}
-                  >
-                    Create new{' '}
-                    <span className="ds-u-visibility--screen-reader">
-                      APD
-                    </span>
-                    &nbsp;&nbsp;
-                    <Icon icon={faPlusCircle} />
-                  </Button>
+                  {canCreateApd &&
+                    <Button
+                      variation="primary"
+                      className="ds-u-float--right"
+                      onClick={createNew}
+                    >
+                      Create new{' '}
+                      <span className="ds-u-visibility--screen-reader">
+                        APD
+                      </span>
+                      &nbsp;&nbsp;
+                      <Icon icon={faPlusCircle} />
+                    </Button>
+                  }
                 </div>
               </div>
             </div>
@@ -159,6 +167,9 @@ ApdList.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
+  stateStatus: PropType.string.isRequired,
+  isFedAdmin: PropType.func.isRequired
+
 };
 
 ApdList.defaultProps = {
@@ -169,6 +180,9 @@ const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching,
   state: state.user.data.state || null,
+  isFedAdmin: getIsFedAdmin(state),
+  stateStatus:
+    getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
 });
 
 const mapDispatchToProps = {
