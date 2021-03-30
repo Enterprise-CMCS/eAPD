@@ -12,9 +12,11 @@ Anticipated release: April 5, 2021
 
 #### ⚙️ Behind the scenes
 
+- Add new seed users for different login issues ([#2989])
+
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
-
+[#2989]: https://github.com/CMSgov/eAPD/issues/2989
 [#2822]: https://github.com/CMSgov/eAPD/issues/2822
 [#2938]: https://github.com/CMSgov/eAPD/issues/2938
