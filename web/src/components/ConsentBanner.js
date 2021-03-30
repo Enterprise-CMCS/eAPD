@@ -1,12 +1,25 @@
 import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
+import Cookies from 'js-cookie';
 
 const ConsentBanner = ({ onAgree }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const agreeAndContinue = () => {
-    document.cookie = 'gov.cms.eapd.hasConsented=true; max-age=259200; secure'; // 3 days
+    if (navigator.cookieEnabled) {
+      const config = {
+        expires: 3 // 3 days
+      };
+      if (
+        process.env.API_URL &&
+        !process.env.API_URL.match(new RegExp(/localhost/i)) &&
+        !process.env.API_URL.match('/api')
+      ) {
+        config.secure = true;
+      }
+      Cookies.set(COOKIE_NAME, true, config);
+    }
     onAgree();
   };
 
