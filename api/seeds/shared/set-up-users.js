@@ -1,3 +1,4 @@
+const moment = require('moment')
 const logger = require('../../logger')('user seeder');
 
 const createUsersToAdd = async (knex, oktaClient) => {
@@ -29,8 +30,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
     .first()
     .then(role => role.id);
 
-  logger.info('Setting up affiliations to add');
+  logger.info('Setting up affiliations and certifications to add');
   const oktaAffiliations = [];
+  const stateCertifications = []
+
   if (regularUserId) {
     oktaAffiliations.push({
       user_id: regularUserId,
@@ -39,6 +42,14 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'approved',
       updated_by: 'seeds'
     });
+    // Add an expired certification and this user will be downgraded to "regular user"
+    stateCertifications.push({
+      uid: regularUserId,
+      state: 'ak',
+      certificationDate: moment().subtract(400, 'days'),
+      certificationExpiration: moment().subtract(35, 'days'),
+      certifiedBy: 'seeds'
+    })
   }
   if (fedAdminId) {
     oktaAffiliations.push({
@@ -57,6 +68,14 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'approved',
       updated_by: 'seeds'
     });
+    // Add a valid certification and this user will remain an admin
+    stateCertifications.push({
+      uid: stateAdminId,
+      state: 'ak',
+      certificationDate: moment().subtract(40, 'days'),
+      certificationExpiration: moment().add(325, 'days'),
+      certifiedBy: 'seeds'
+    })
   }
   if (stateStaffId) {
     oktaAffiliations.push({
@@ -66,6 +85,14 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'approved',
       updated_by: 'seeds'
     });
+    // Add an invalid certification and this user will remain an staff member
+    stateCertifications.push({
+      uid: stateStaffId,
+      state: 'ak',
+      certificationDate: moment().subtract(400, 'days'),
+      certificationExpiration: moment().subtract(35, 'days'),
+      certifiedBy: 'seeds'
+    })
   }
   if (stateContractorId) {
     oktaAffiliations.push({
@@ -76,7 +103,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       updated_by: 'seeds'
     });
   }
-  return oktaAffiliations;
+  return [oktaAffiliations, stateCertifications];
 };
 
 module.exports = {
