@@ -1,7 +1,6 @@
 import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
-import Cookies from 'js-cookie';
 
 const ConsentBanner = ({ onAgree }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -18,7 +17,6 @@ const ConsentBanner = ({ onAgree }) => {
       ) {
         config.secure = true;
       }
-      Cookies.set(COOKIE_NAME, true, config);
     }
     onAgree();
   };
