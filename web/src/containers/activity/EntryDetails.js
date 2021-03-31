@@ -16,9 +16,9 @@ const makeTitle = ({ name, fundingSource }, i) => {
   } else {
     title += `: Untitled`;
   }
-  if (fundingSource) {
-    title += ` (${fundingSource})`;
-  }
+  // if (fundingSource) {
+  //   title += ` (${fundingSource})`;
+  // }
   return title;
 };
 

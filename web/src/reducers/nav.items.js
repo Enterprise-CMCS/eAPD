@@ -7,7 +7,12 @@ const staticItems = [
   },
   {
     label: t('activities.title'),
-    items: []
+    items: [
+      {
+        label: t('activities.list.title'),
+        url: '/apd/activities'
+      }
+    ]
   },
   {
     label: t('scheduleSummary.title'),
@@ -133,6 +138,7 @@ const getItems = ({ activities = [], items = staticItems, url = '' } = {}) => {
   if (activities.length) {
     const item = items.find(i => i.label === 'Activities');
     item.items = [
+      item.items[0],
       ...activities.map((activity, i) => ({
         label: t(`sidebar.titles.activity-${activity.name ? 'set' : 'unset'}`, {
           number: i + 1,

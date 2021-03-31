@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { TextField, Dropdown, ChoiceList, Choice, FormLabel } from '@cmsgov/design-system';
+import { Alert, TextField, Dropdown, ChoiceList, Choice, FormLabel } from '@cmsgov/design-system';
 import RichText from '../../components/RichText';
 
 import { Subsection } from '../../components/Section';
@@ -13,7 +13,10 @@ const AlternativeConsiderations = ({activityIndex}) => {
       resource="activities.alternatives"
       id={`activity-outcomes-${activityIndex}`}
     >
-          <p className="instruction-box">The state must consider sharing, leverage and reuse of Medicaid technologies, including custom open source development, reusing systems that already exist within the state, reusing systems built for other states available under 45 CFR §95.617, licensing or purchasing COTS software or SaaS, or engaging in collaboration with other states.</p>
+          <Alert>
+      <p className="ds-c-alert__text">The state must consider sharing, leverage and reuse of Medicaid technologies, including custom open source development, reusing systems that already exist within the state, reusing systems built for other states available under <a href="#">45 CFR §95.617</a>, licensing or purchasing COTS software or SaaS, or engaging in collaboration with other states.</p>
+    </Alert>
+
       <FormLabel
           className="ds-c-label--full-width ds-u-padding-top--4"
           hint={''}
