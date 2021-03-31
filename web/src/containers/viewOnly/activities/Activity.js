@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import Dollars from '../../../components/Dollars';
@@ -98,6 +99,7 @@ const Activity = ({ activity, activityIndex }) => {
       return `${start} — ${end}`;
     };
 
+    
     return (
       <Fragment>
         <p className="ds-u-margin-bottom--0">
@@ -106,7 +108,7 @@ const Activity = ({ activity, activityIndex }) => {
           </strong>
           {contractor.hourly.useHourly === true && ' (hourly resource)'}
         </p>
-        <p className="ds-u-margin-top--0">{contractor.description}</p>
+        <p className="ds-u-margin-top--0" dangerouslySetInnerHTML={{ __html: contractor.description }} /> 
         <ul className="ds-c-list--bare">
           <li>
             <strong>Full Contract Term: </strong>
@@ -135,17 +137,14 @@ const Activity = ({ activity, activityIndex }) => {
     );
   };
 
-  /* eslint-disable react/no-danger */
   return (
     <Fragment>
       <hr className="section-rule" />
       <h2>
         Activity {activityIndex + 1} ({activity.name})
       </h2>
-      <p>
-        <strong>Provide a short overview of the activity:</strong>{' '}
-        {activity.summary}
-      </p>
+        <strong>Provide a short overview of the activity:</strong>
+      <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
       <p>
         <strong>Start date: </strong>
         {stateDateToDisplay(activity.plannedStartDate) || 'None provided'}
