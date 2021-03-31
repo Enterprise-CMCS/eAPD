@@ -10,6 +10,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const { id: stateStaffId } = (await oktaClient.getUser('statestaff')) || {};
   const { id: stateContractorId } =
     (await oktaClient.getUser('statecontractor')) || {};
+  const { id: requestedRoleId } =
+    (await oktaClient.getUser('requestedrole')) || {};
+  const { id: deniedRoleId } = (await oktaClient.getUser('deniedrole')) || {};
+  const { id: revokedRoleId } = (await oktaClient.getUser('revokedrole')) || {};
 
   logger.info('Retrieving role ids from database');
   const fedAdminRoleId = await knex('auth_roles')
@@ -74,6 +78,27 @@ const createUsersToAdd = async (knex, oktaClient) => {
       role_id: stateContractorRoleId,
       status: 'approved',
       updated_by: 'seeds'
+    });
+  }
+  if (requestedRoleId) {
+    oktaAffiliations.push({
+      user_id: requestedRoleId,
+      state_id: 'ak',
+      status: 'requested'
+    });
+  }
+  if (deniedRoleId) {
+    oktaAffiliations.push({
+      user_id: deniedRoleId,
+      state_id: 'ak',
+      status: 'denied'
+    });
+  }
+  if (revokedRoleId) {
+    oktaAffiliations.push({
+      user_id: revokedRoleId,
+      state_id: 'ak',
+      status: 'revoked'
     });
   }
   return oktaAffiliations;
