@@ -1,24 +1,27 @@
 import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
+import Cookies from 'js-cookie';
 
-const cookie = name => {
-  const cookieMap = (document.cookie || '').split(';').reduce((c, s) => {
-    const bits = s.trim().split('=');
-    if (bits.length === 2) {
-      return { ...c, [bits[0].trim()]: bits[1].trim() };
-    }
-    return c;
-  }, {});
-
-  return cookieMap[name];
-};
+const COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 const ConsentBanner = ({ onAgree }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const agreeAndContinue = () => {
-    document.cookie = 'gov.cms.eapd.hasConsented=true; max-age=259200; secure'; // 3 days
+    if (navigator.cookieEnabled) {
+      const config = {
+        expires: 3 // 3 days
+      };
+      if (
+        process.env.API_URL &&
+        !process.env.API_URL.match(new RegExp(/localhost/i)) &&
+        !process.env.API_URL.match('/api')
+      ) {
+        config.secure = true;
+      }
+      Cookies.set(COOKIE_NAME, true, config);
+    }
     onAgree();
   };
 
@@ -26,7 +29,9 @@ const ConsentBanner = ({ onAgree }) => {
     setShowDetails(true);
   };
 
-  const hasConsented = cookie('gov.cms.eapd.hasConsented');
+  const hasConsented = navigator.cookieEnabled
+    ? Cookies.get(COOKIE_NAME)
+    : false;
   if (hasConsented) {
     agreeAndContinue();
     return null;

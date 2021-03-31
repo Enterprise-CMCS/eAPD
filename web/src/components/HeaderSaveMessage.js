@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { selectIsSaving, selectLastSaved } from '../reducers/saving';
+import { selectHasError, selectIsSaving, selectLastSaved } from '../reducers/saving';
 
 import SaveMessage from './SaveMessage';
 
 import { Check, Spinner } from './Icons';
 
-const HeaderSaveMessage = ({ isSaving, lastSaved }) => {
+const HeaderSaveMessage = ({ isSaving, lastSaved, error }) => {
   const [active, setActive] = useState(isSaving);
   const [delayTimer, setDelayTimer] = useState();
 
@@ -42,19 +42,21 @@ const HeaderSaveMessage = ({ isSaving, lastSaved }) => {
     </span>
   ) : (
     <span>
-      <Check /> <SaveMessage lastSaved={lastSaved} />
+      <Check /> <SaveMessage lastSaved={lastSaved} error={error} />
     </span>
   );
 };
 
 HeaderSaveMessage.propTypes = {
   isSaving: PropTypes.bool.isRequired,
-  lastSaved: PropTypes.string.isRequired
+  lastSaved: PropTypes.string.isRequired,
+  error: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   isSaving: selectIsSaving(state),
-  lastSaved: selectLastSaved(state)
+  lastSaved: selectLastSaved(state),
+  error: selectHasError(state)
 });
 
 export default connect(mapStateToProps)(HeaderSaveMessage);
