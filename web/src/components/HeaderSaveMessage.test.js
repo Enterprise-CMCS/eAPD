@@ -10,7 +10,15 @@ describe('Header save message component', () => {
   it('renders when actively saving', () => {
     expect(
       shallow(
-        <HeaderSaveMessage isSaving lastSaved="2020-01-01T17:00:00.000Z" />
+        <HeaderSaveMessage isSaving error={false} lastSaved="2020-01-01T17:00:00.000Z" />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly when an error saving occurs', () => {
+    expect(
+      shallow(
+        <HeaderSaveMessage isSaving={false} error lastSaved="2020-01-01T17:00:00.000Z" />
       )
     ).toMatchSnapshot();
   });
@@ -20,6 +28,7 @@ describe('Header save message component', () => {
       shallow(
         <HeaderSaveMessage
           isSaving={false}
+          error={false}
           lastSaved="2020-01-01T17:00:00.000Z"
         />
       )
@@ -32,6 +41,7 @@ describe('Header save message component', () => {
     const component = shallow(
       <HeaderSaveMessage
         isSaving={false}
+        error={false}
         lastSaved="2020-01-01T17:00:00.000Z"
       />
     );
@@ -68,13 +78,15 @@ describe('Header save message component', () => {
     const state = {
       saving: {
         lastSaved: 'blorp',
-        saving: 'bloop'
+        saving: 'bloop',
+        error: false
       }
     };
 
     expect(mapStateToProps(state)).toEqual({
       isSaving: 'bloop',
-      lastSaved: 'blorp'
+      lastSaved: 'blorp',
+      error: false
     });
   });
 });
