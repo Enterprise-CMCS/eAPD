@@ -14,7 +14,7 @@ const oktaAuth =
         clientId: OKTA_CLIENT_ID,
         redirectUri: OKTA_REDIRECT_URI,
         tokenManager: {
-          storage: 'localStorage', // defaults to secure cookie
+          storage: 'localStorage',
           expireEarlySeconds: 305, // alerts the user 5 minutes and 5 seconds before session ends
           // the 5 seconds gives users the full 5 minutes to select continue
           autoRenew: false // renewing based on user interactions
