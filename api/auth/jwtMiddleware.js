@@ -32,7 +32,8 @@ const jwtMiddleware = async (
     // by the standard getUser call to Okta, so these values should
     // be passed in as additional values when possible.
     const { uid, ...additionalValues } = claims;
-    const user = await getUserByID(uid, { additionalValues });
+    const checkOkta = req.originalUrl === "/me"
+    const user = await getUserByID(uid, checkOkta, { additionalValues });
     // const user = claims;
     if (user) {
       req.user = user;

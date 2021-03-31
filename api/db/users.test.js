@@ -116,9 +116,21 @@ tap.test('database wrappers / users', async usersTests => {
         .withArgs('user id')
         .resolves({ status: 'ACTIVE', profile: { some: 'user' } });
 
-      const user = await getUserByID('user id', { client, populate });
+      const user = await getUserByID('user id', true, { client, populate });
 
       test.ok(populate.calledWith({ id: 'user id', some: 'user' }));
+      test.same(user, sanitizedUser);
+    });
+
+    getUsersByIDTests.test('without contacting Okta', async test => {
+      client.getUser
+        .withArgs('user id')
+        .resolves({ status: 'ACTIVE', profile: { some: 'user' } });
+
+      const user = await getUserByID('user id', false, { client, populate });
+      test.ok(client.getUser.notCalled)
+      // profile is not in scope because we didn't call OKTA
+      test.ok(populate.calledWith({ id: 'user id'}));
       test.same(user, sanitizedUser);
     });
 
@@ -127,7 +139,7 @@ tap.test('database wrappers / users', async usersTests => {
         .withArgs('user id')
         .resolves({ status: 'ACTIVE', profile: { some: 'user' } });
 
-      const user = await getUserByID('user id', {
+      const user = await getUserByID('user id', true, {
         client,
         populate,
         additionalValues: {}
@@ -142,7 +154,7 @@ tap.test('database wrappers / users', async usersTests => {
         .withArgs('user id')
         .resolves({ status: 'ACTIVE', profile: { some: 'user' } });
 
-      const user = await getUserByID('user id', {
+      const user = await getUserByID('user id', true, {
         clean: false,
         client,
         populate
@@ -155,7 +167,7 @@ tap.test('database wrappers / users', async usersTests => {
     getUsersByIDTests.test('with no user', async test => {
       client.getUser.withArgs('bad user id').resolves(null);
 
-      const user = await getUserByID('bad user id', {
+      const user = await getUserByID('bad user id', true, {
         clean: true,
         client,
         populate
@@ -171,7 +183,7 @@ tap.test('database wrappers / users', async usersTests => {
         .withArgs('user id')
         .resolves({ status: 'INACTIVE', profile: { some: 'user' } });
 
-      const user = await getUserByID('user id', {
+      const user = await getUserByID('user id', true, {
         clean: true,
         client,
         populate

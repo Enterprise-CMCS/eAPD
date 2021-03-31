@@ -31,51 +31,54 @@ const createUsersToAdd = async (knex, oktaClient) => {
 
   logger.info('Setting up affiliations to add');
   const oktaAffiliations = [];
-  if (regularUserId) {
-    oktaAffiliations.push({
-      user_id: regularUserId,
-      state_id: 'ak',
-      role_id: stateAdminRoleId,
-      status: 'approved',
-      updated_by: 'seeds'
-    });
-  }
-  if (fedAdminId) {
-    oktaAffiliations.push({
-      user_id: fedAdminId,
-      state_id: 'ak',
-      role_id: fedAdminRoleId,
-      status: 'approved',
-      updated_by: 'seeds'
-    });
-  }
-  if (stateAdminId) {
-    oktaAffiliations.push({
-      user_id: stateAdminId,
-      state_id: 'ak',
-      role_id: stateAdminRoleId,
-      status: 'approved',
-      updated_by: 'seeds'
-    });
-  }
-  if (stateStaffId) {
-    oktaAffiliations.push({
-      user_id: stateStaffId,
-      state_id: 'ak',
-      role_id: stateStaffRoleId,
-      status: 'approved',
-      updated_by: 'seeds'
-    });
-  }
-  if (stateContractorId) {
-    oktaAffiliations.push({
-      user_id: stateContractorId,
-      state_id: 'ak',
-      role_id: stateContractorRoleId,
-      status: 'approved',
-      updated_by: 'seeds'
-    });
-  }
+
+  oktaAffiliations.push({
+    user_id: regularUserId,
+    state_id: 'ak',
+    role_id: stateAdminRoleId,
+    status: 'approved',
+    updated_by: 'seeds',
+    username: 'em@il.com'
+  });
+
+
+  oktaAffiliations.push({
+    user_id: fedAdminId,
+    state_id: 'ak',
+    role_id: fedAdminRoleId,
+    status: 'approved',
+    updated_by: 'seeds',
+    username: 'fedadmin'
+  });
+
+
+  oktaAffiliations.push({
+    user_id: stateAdminId,
+    state_id: 'ak',
+    role_id: stateAdminRoleId,
+    status: 'approved',
+    updated_by: 'seeds',
+    username: 'stateadmin'
+  });
+
+  oktaAffiliations.push({
+    user_id: stateStaffId,
+    state_id: 'ak',
+    role_id: stateStaffRoleId,
+    status: 'approved',
+    updated_by: 'seeds',
+    username: 'statestaff'
+  });
+
+  oktaAffiliations.push({
+    user_id: stateContractorId,
+    state_id: 'ak',
+    role_id: stateContractorRoleId,
+    status: 'approved',
+    updated_by: 'seeds',
+    username: 'statecontractor'
+  });
+
   return oktaAffiliations;
 };
 
