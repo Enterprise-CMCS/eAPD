@@ -40,8 +40,8 @@ describe('<LoginMFA />', () => {
     expect(defaultProps.action).toHaveBeenCalledWith('testotp');
   });
 
-  test('Go Back to Login button renders', () => {
+  test('Back to Login button renders', () => {
     const { getByText } = setup();
-    expect(getByText(/Go Back to Login/i)).toBeTruthy();
+    expect(getByText(/Back to Login/i)).toBeTruthy();
   });
 });
