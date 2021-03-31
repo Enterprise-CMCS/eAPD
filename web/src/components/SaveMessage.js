@@ -20,7 +20,7 @@ moment.updateLocale('en', {
   }
 });
 
-const SaveMessage = ({ lastSaved }) => {
+const SaveMessage = ({ lastSaved, error }) => {
   const [currentMoment, setCurrentMoment] = useState(() => moment());
 
   useEffect(() => {
@@ -33,7 +33,9 @@ const SaveMessage = ({ lastSaved }) => {
   const duration = moment.duration(difference);
   let result = 'Last saved ';
 
-  if (duration.asMinutes() < 1) return 'Saved';
+  if(!error && duration.asMinutes() < 1) {
+    return 'Saved';
+  }
 
   if (duration.asDays() < 1) {
     result += lastSavedMoment.format('h:mm a');
