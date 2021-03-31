@@ -100,6 +100,7 @@ const getAllUsers = async ({
 
 const getUserByID = async (
   id,
+  checkOkta,
   {
     clean = true,
     client = oktaClient,
@@ -107,7 +108,8 @@ const getUserByID = async (
     additionalValues
   } = {}
 ) => {
-  const oktaUser = await client.getUser(id);
+
+  const oktaUser = checkOkta ? await client.getUser(id): {status:'ACTIVE'};
 
   if (oktaUser && oktaUser.status === 'ACTIVE') {
     const { profile } = oktaUser;
