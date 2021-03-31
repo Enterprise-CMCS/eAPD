@@ -37,7 +37,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const oktaAffiliations = [];
 
   oktaAffiliations.push({
-    user_id: regularUserId,
+    user_id: regularUserId || '',
     state_id: 'ak',
     role_id: stateAdminRoleId,
     status: 'approved',
@@ -47,7 +47,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
 
 
   oktaAffiliations.push({
-    user_id: fedAdminId,
+    user_id: fedAdminId || '',
     state_id: 'ak',
     role_id: fedAdminRoleId,
     status: 'approved',
@@ -57,7 +57,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
 
 
   oktaAffiliations.push({
-    user_id: stateAdminId,
+    user_id: stateAdminId || '',
     state_id: 'ak',
     role_id: stateAdminRoleId,
     status: 'approved',
@@ -66,7 +66,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   });
 
   oktaAffiliations.push({
-    user_id: stateStaffId,
+    user_id: stateStaffId || '',
     state_id: 'ak',
     role_id: stateStaffRoleId,
     status: 'approved',
@@ -75,7 +75,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   });
 
   oktaAffiliations.push({
-    user_id: stateContractorId,
+    user_id: stateContractorId || '',
     state_id: 'ak',
     role_id: stateContractorRoleId,
     status: 'approved',
@@ -83,27 +83,27 @@ const createUsersToAdd = async (knex, oktaClient) => {
     username: 'statecontractor'
   });
 
-  if (requestedRoleId) {
-    oktaAffiliations.push({
-      user_id: requestedRoleId,
-      state_id: 'ak',
-      status: 'requested'
-    });
-  }
-  if (deniedRoleId) {
-    oktaAffiliations.push({
-      user_id: deniedRoleId,
-      state_id: 'ak',
-      status: 'denied'
-    });
-  }
-  if (revokedRoleId) {
-    oktaAffiliations.push({
-      user_id: revokedRoleId,
-      state_id: 'ak',
-      status: 'revoked'
-    });
-  }
+
+  oktaAffiliations.push({
+    user_id: requestedRoleId || '',
+    state_id: 'ak',
+    status: 'requested',
+    username: 'requestedrole'
+  });
+
+  oktaAffiliations.push({
+    user_id: deniedRoleId || '',
+    state_id: 'ak',
+    status: 'denied',
+    username: 'deniedrole'
+  });
+
+  oktaAffiliations.push({
+    user_id: revokedRoleId || '',
+    state_id: 'ak',
+    status: 'revoked',
+    username: 'revokedrole'
+  });
 
   return oktaAffiliations;
 };
