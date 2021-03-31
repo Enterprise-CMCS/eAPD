@@ -14,13 +14,13 @@ hit:
   instruction:
     heading: Medicaid Enterprise System Introduction
     detail: >-
-      Provide a high-level introduction to the state Medicaid Enterprise System. Include the current state and context of the MES and the state’s future vision for it. (2-3 paragraphs)
+      Provide a high-level introduction to the state Medicaid Enterprise System (MES). Include the current state and context of the MES and the state’s future vision for it. (2-3 paragraphs)
 
 hie:
   instruction:
     heading: Scope of APD Project
     detail: >-
-      Provide a brief description for the scope of this request and how it fits into the MES vision described above. Include a summary of the outcomes that will enhance the effective and efficient administration of the Medicaid program. Details on how the outcomes will be achieved should be in Section 4: Program Activities. (2-3 paragraphs)
+      Provide a brief description for the scope of this request and how it fits into the MES vision described above. Include a summary of the outcomes that will enhance the effective and efficient administration of the Medicaid program. (2-3 paragraphs)
 
 mmis:
   instruction:
