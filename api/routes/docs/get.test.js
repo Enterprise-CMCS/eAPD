@@ -39,6 +39,10 @@ tap.test('docs endpoints', async endpointTest => {
       app.get.calledWith('/docs/account-registration', sinon.match.func),
       'endpoint for fetching account registration doc is setup'
     );
+    setupTest.ok(
+      app.get.calledWith('/docs/system-access', sinon.match.func),
+      'endpoint for fetching system access doc is setup'
+    );
   });
 
   endpointTest.test(
@@ -80,6 +84,45 @@ tap.test('docs endpoints', async endpointTest => {
           test.ok(res.end.calledAfter(res.send), 'response is terminated');
         }
       );
+    }
+  );
+
+  endpointTest.test(
+    'GET endpoint for fetching system access doc',
+    async tests => {
+      let handler;
+      tests.beforeEach(async () => {
+        endpoints(app, { ...di });
+        handler = app.get.args[1].pop();
+      });
+
+      tests.test(
+        'there is an unexpected error getting the system access doc',
+        async test => {
+          di.getFile.rejects(new Error('some other error'));
+
+          await handler({ params: {} }, res, next);
+
+          test.ok(
+            next.calledWith(sinon.match.instanceOf(Error)),
+            'sends error to next'
+          );
+          test.ok(
+            next.calledWith(sinon.match({ message: 'some other error' })),
+            'sends some other error message to next'
+          );
+        }
+      );
+
+      tests.test('successfully received system access doc', async test => {
+        const file = {};
+        di.getFile.resolves(file);
+
+        await handler({ params: {} }, res, next);
+
+        test.ok(res.send.calledWith(file), 'sends the file');
+        test.ok(res.end.calledAfter(res.send), 'response is terminated');
+      });
     }
   );
 });
