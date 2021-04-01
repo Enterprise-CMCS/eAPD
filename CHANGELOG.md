@@ -1,11 +1,12 @@
 # Next release
 
-Anticipated release: March 30, 2021
+Anticipated release: April XX, 2021
 
 #### 🚀 New features
 
 - Combine Authenticators in MFA selection ([#2648])
 - Add eADPSystemAccess document to backend ([#2938])
+- Added help guides and links to new documentation on login page ([#2935])
 
 #### 🐛 Bugs fixed
 
@@ -30,5 +31,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2822]: https://github.com/CMSgov/eAPD/issues/2822
 [#2830]: https://github.com/CMSgov/eAPD/issues/2830
 [#2864]: https://github.com/CMSgov/eAPD/issues/2864
+[#2935]: https://github.com/CMSgov/eAPD/issues/2935
 [#2938]: https://github.com/CMSgov/eAPD/issues/2938
 [#2989]: https://github.com/CMSgov/eAPD/issues/2989
