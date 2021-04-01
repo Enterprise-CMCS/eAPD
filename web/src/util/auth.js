@@ -13,34 +13,38 @@ export const getAccessToken = () => oktaAuth.getAccessToken();
 const COOKIE_NAME = 'gov.cms.eapd.api-token';
 
 const setCookie = () => {
-  const jwt = getAccessToken();
-  let config = {};
-  if (
-    !process.env.API_URL ||
-    process.env.API_URL.match(new RegExp(/localhost/i))
-  ) {
-    config = {
-      sameSite: 'strict',
-      path: '/apds/'
-    };
-  } else if (process.env.API_URL.match('/api')) {
-    config = {
-      sameSite: 'strict',
-      path: '/api/apds/'
-    };
-  } else {
-    config = {
-      domain: '.cms.gov',
-      secure: true,
-      sameSite: 'lax',
-      path: '/apds/'
-    };
+  if (navigator.cookieEnabled) {
+    const jwt = getAccessToken();
+    let config = {};
+    if (
+      !process.env.API_URL ||
+      process.env.API_URL.match(new RegExp(/localhost/i))
+    ) {
+      config = {
+        sameSite: 'strict',
+        path: '/apds/'
+      };
+    } else if (process.env.API_URL.match('/api')) {
+      config = {
+        sameSite: 'strict',
+        path: '/api/apds/'
+      };
+    } else {
+      config = {
+        domain: '.cms.gov',
+        secure: true,
+        sameSite: 'lax',
+        path: '/apds/'
+      };
+    }
+    Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
   }
-  Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
 };
 
 const removeCookie = () => {
-  Cookies.remove(COOKIE_NAME);
+  if (navigator.cookieEnabled) {
+    Cookies.remove(COOKIE_NAME);
+  }
 };
 
 // Log in methods
