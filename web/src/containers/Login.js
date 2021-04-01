@@ -1,7 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 
 import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
