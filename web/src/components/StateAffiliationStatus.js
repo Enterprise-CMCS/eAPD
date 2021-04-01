@@ -107,6 +107,7 @@ const StateAffiliationStatus = (
                 <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
                   <h2 className="ds-h2 ds-u-display--inline-block">
                     {state ? state.name : ''}
+                    {' '}
                     APDs
                   </h2>
                 </div>
