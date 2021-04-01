@@ -3,15 +3,6 @@ import { renderWithConnection, screen } from 'apd-testing-library';
 
 import AuthenticationForm from './AuthenticationForm';
 
-let mockGoBack;
-
-jest.mock('react-router-dom', () => {
-  mockGoBack = jest.fn();
-  return {
-    useHistory: jest.fn().mockReturnValue({ goBack: mockGoBack })
-  };
-});
-
 const defaultProps = {
   title: 'test'
 };
@@ -25,10 +16,6 @@ const setup = (props = {}) => {
 };
 
 describe('card form wrapper', () => {
-  beforeEach(() => {
-    mockGoBack.mockReset();
-  });
-
   test('renders without an id on the container if id prop is null', () => {
     setup({ id: null });
 
@@ -39,13 +26,6 @@ describe('card form wrapper', () => {
     setup({ id: 'my-custom-id' });
 
     expect(document.querySelector('#my-custom-id')).toBeTruthy();
-    expect(screen.getByText('hello world')).toBeTruthy();
-  });
-
-  test('renders with the default id on the container if id prop is not set', () => {
-    setup();
-
-    expect(document.querySelector('#start-main-content')).toBeTruthy();
     expect(screen.getByText('hello world')).toBeTruthy();
   });
 

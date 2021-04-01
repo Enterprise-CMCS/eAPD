@@ -4,8 +4,8 @@ import Dashboard from './containers/Dashboard';
 import ApdApplication from './containers/ApdApplication';
 import ApdViewOnly from './containers/viewOnly/Apd';
 import EditAccount from './containers/admin/EditAccount';
+import LoginApplication from './containers/LoginApplication';
 import StateAdmin from './containers/admin/StateAdmin';
-import Login from './containers/Login';
 import Logout from './containers/Logout';
 
 const routes = [
@@ -26,9 +26,9 @@ const routes = [
     isCard: true
   },
 
+  { path: '/login', component: LoginApplication, isPublic: true, isCard: true },
   { path: '/state-admin', component: StateAdmin, isPublic: false },
-  { path: '/login', component: Login, isPublic: true, isCard: true },
-  { path: '/logout', component: Logout, isPublic: false },
+  { path: '/logout', component: Logout, isPublic: true },
   { component: NoMatch, isPublic: true }
 ];
 

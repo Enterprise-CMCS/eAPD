@@ -1,9 +1,6 @@
 import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
-import Cookies from 'js-cookie';
-
-const COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 const ConsentBanner = ({ onAgree }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -20,7 +17,6 @@ const ConsentBanner = ({ onAgree }) => {
       ) {
         config.secure = true;
       }
-      Cookies.set(COOKIE_NAME, true, config);
     }
     onAgree();
   };
@@ -28,14 +24,6 @@ const ConsentBanner = ({ onAgree }) => {
   const expandDetails = () => {
     setShowDetails(true);
   };
-
-  const hasConsented = navigator.cookieEnabled
-    ? Cookies.get(COOKIE_NAME)
-    : false;
-  if (hasConsented) {
-    agreeAndContinue();
-    return null;
-  }
 
   return (
     <main id="start-main-content">
