@@ -1,23 +1,19 @@
 # Next release
 
-Anticipated release: March 30, 2021
+Anticipated release: April 5, 2021
 
 #### 🚀 New features
 
 - Combine Authenticators in MFA selection ([#2648])
-- Add eADPSystemAccess document to backend ([#2938])
 
 #### 🐛 Bugs fixed
 
 - Selecting "Cancel" during the state affiliation selection puts the user into a blank screen ([#2706])
-- Fixes an issue where the money fields were not formatting when re-loaded ([#2822])
-- Checks for error before displaying "Saved!" in message header when app cannot save ([#2830])
 - Logout issues ([#2864])
 
 #### ⚙️ Behind the scenes
 
 - Refactor login code ([#2632])
-- Add new seed users for different login issues ([#2989])
 
 
 # Previous releases
