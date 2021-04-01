@@ -1,11 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
-<Fragment>
+<Fragment
+  key="activity93-index1-form"
+>
   <TextField
     autoFocus={true}
     className="data-entry-box"
     hint="Describe a discrete and measurable improvement for this system."
+    key="activity93-index1"
     label="Outcome"
     multiline={true}
     name="outcome"
@@ -17,6 +20,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
   <Review
     ariaLabel="1. metric 1"
     editHref={null}
+    key="om key 1"
     onDeleteClick={[Function]}
     onEditClick={null}
   >
@@ -39,6 +43,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
   <Review
     ariaLabel="2. metric 2"
     editHref={null}
+    key="om key 2"
     onDeleteClick={[Function]}
     onEditClick={null}
   >

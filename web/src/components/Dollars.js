@@ -23,7 +23,11 @@ const Dollars = ({ children }) => {
 Dollars.propTypes = {
   /** The number, either as a numeric type or a parseable string, to display as
    * dollars. */
-  children: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+  children: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+};
+
+Dollars.defaultProps = {
+  children: null
 };
 
 export default Dollars;

@@ -72,6 +72,7 @@ class Password extends Component {
             label={title || 'Password'}
             id="password"
             name="password"
+            ariaLabel="password"
             className="no-clearfix"
             type={showPassword ? 'text' : 'password'}
             value={value}
