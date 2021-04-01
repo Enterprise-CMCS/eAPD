@@ -94,7 +94,7 @@ const AlternativeConsiderations = ({activityIndex}) => {
           hint={''}
           fieldId="activity-statement-tbd-field"
         >
-          Statement of Forseeable Risks: TBD
+          Statement of Forseeable Risks
           <p className="ds-u-font-weight--normal ds-u-margin-top--1">List the forseeable risks associated with the selected option.
  </p>
         </FormLabel>

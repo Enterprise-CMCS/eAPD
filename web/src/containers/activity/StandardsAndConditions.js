@@ -55,23 +55,6 @@ const StandardsAndConditions = ({
         value={''}
         onChange={() => console.log('yep')}
       />
-      <FormLabel
-        className="ds-c-label--full-width ds-u-margin--0"
-        hint={''}
-        fieldId="activity-description-field"
-        >
-        <p className="ds-u-font-weight--normal">Explain ways it does not support the Standards and Conditions and why?</p>
-      </FormLabel>
-      <RichText
-        name="enhanced funding justification"
-        label="Enhanced funding justification"
-        hint=""
-        max={280}
-        rows={6}
-        className="data-entry-box"
-        value={''}
-        onChange={() => console.log('yep')}
-      />
     </Fragment>
   );
 
@@ -130,7 +113,7 @@ const StandardsAndConditions = ({
               heading="Standards and Conditions Help"
               onCloseClick={handleDrawerClose}
             >
-              <strong>A Snapshot of 42 CFR 433.112 and Additional Conditions for Enhanced Funding</strong>
+              <strong>Excerpt of 42 CFR 433.112 and Additional Conditions for Enhanced Funding</strong>
               <p>
                 <ol>
                   <li>CMS determines the system is likely to provide more efficient, economical. and effective adminstation of the State plan.</li>
