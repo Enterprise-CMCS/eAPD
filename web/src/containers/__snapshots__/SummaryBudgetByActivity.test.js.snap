@@ -141,22 +141,30 @@ exports[`renders correctly data row group renders 1`] = `
 <Fragment>
   <DataRow
     category="statePersonnel"
+    data={Object {}}
     groupTitle="MMIS"
+    key="MMIS"
     title="State Staff Total"
   />
   <DataRow
     category="expenses"
+    data={Object {}}
     groupTitle="MMIS"
+    key="MMIS"
     title="Other State Expenses Total"
   />
   <DataRow
     category="contractors"
+    data={Object {}}
     groupTitle="MMIS"
+    key="MMIS"
     title="Private Contractor Total"
   />
   <DataRow
     category="combined"
+    data={Object {}}
     groupTitle="MMIS"
+    key="MMIS"
     title="Total"
   />
 </Fragment>
@@ -165,6 +173,7 @@ exports[`renders correctly data row group renders 1`] = `
 exports[`renders correctly data row renders 1`] = `
 <tr
   className=""
+  key="category"
 >
   <th
     className="title indent-title"

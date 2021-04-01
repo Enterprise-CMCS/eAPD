@@ -16,6 +16,7 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
   return (
     <div id="start-main-content">
       <AuthenticationForm
+        id="login-mfa-form"
         title="Verify Your Identity"
         legend="Verify Your Identity"
         cancelable
@@ -25,13 +26,14 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
         error={errorMessage}
         success={null}
         working={fetching}
-        primaryButtonText={['Verify', 'Verifying']}
+        primaryButtonText={['Verify Identity', 'Verifying Identity']}
+        secondaryButtonText="Back to Login"
         onSave={handleSubmit}
       >
         <div className="ds-u-margin-bottom--4">
           <label
             htmlFor="otp"
-            id="otp"
+            id="otp-label"
             className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
           >
             Enter the verification code provided to you via call, text, email,
@@ -39,7 +41,7 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
           </label>
           <input
             width="200px"
-            aria-labelledby="otp"
+            aria-labelledby="otp-label"
             className="ds-c-field ds-c-field--medium"
             id="otp"
             type="text"
@@ -54,14 +56,14 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
 };
 
 LoginMFA.propTypes = {
-  errorMessage: PropTypes.bool,
+  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired,
   hasEverLoggedOn: PropTypes.bool.isRequired
 };
 
 LoginMFA.defaultProps = {
-  errorMessage: false
+  errorMessage: null
 };
 
 export default LoginMFA;

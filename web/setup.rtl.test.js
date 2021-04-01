@@ -1,6 +1,9 @@
 // react-testing-library renders your components to document.body,
 // this will ensure they're removed after each test.
 import '@testing-library/jest-dom/extend-expect';
+import { toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
 
 jest.mock('./src/file-loader', () => ({
   importFiles: () => {
@@ -17,6 +20,7 @@ jest.mock('./src/util/oktaAuth', () => {
       getWithoutPrompt: jest.fn()
     },
     getAccessToken: jest.fn(),
+    revokeAccessToken: jest.fn(),
     tokenManager: {
       add: jest.fn(),
       remove: jest.fn(),

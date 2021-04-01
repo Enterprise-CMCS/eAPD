@@ -1,7 +1,6 @@
 import { Alert, Button, Spinner } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { useHistory } from 'react-router-dom';
 
 const AuthenticationForm = ({
   cancelable,
@@ -13,14 +12,13 @@ const AuthenticationForm = ({
   legend,
   onSave,
   primaryButtonText: [primaryButtonNormal, primaryButtonWorking],
+  secondaryButtonText,
   sectionName,
   success,
   title,
   working,
   hasEverLoggedOn
 }) => {
-  const history = useHistory();
-
   const handleSubmit = e => {
     e.preventDefault();
     if (canSubmit && onSave) onSave(e);
@@ -66,6 +64,14 @@ const AuthenticationForm = ({
                 {children}
                 <hr className="ds-u-color--gray-lighter" />
                 <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3">
+                  {cancelable && (
+                    <a
+                      href="/"
+                      className="ds-c-button ds-c-button--transparent"
+                    >
+                      {secondaryButtonText}
+                    </a>
+                  )}
                   {onSave && (
                     <Button
                       variation="primary"
@@ -79,14 +85,6 @@ const AuthenticationForm = ({
                       ) : (
                         primaryButtonNormal
                       )}
-                    </Button>
-                  )}
-                  {cancelable && (
-                    <Button
-                      variation="transparent"
-                      onClick={() => history.push('/')}
-                    >
-                      Cancel
                     </Button>
                   )}
                 </div>
@@ -111,6 +109,7 @@ AuthenticationForm.propTypes = {
   legend: PropTypes.string,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   primaryButtonText: PropTypes.arrayOf(PropTypes.string),
+  secondaryButtonText: PropTypes.string,
   sectionName: PropTypes.string,
   success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   title: PropTypes.string.isRequired,
@@ -123,10 +122,11 @@ AuthenticationForm.defaultProps = {
   canSubmit: true,
   error: false,
   footer: false,
-  id: 'start-main-content',
+  id: null,
   legend: '',
   onSave: false,
   primaryButtonText: ['Save changes', 'Working'],
+  secondaryButtonText: 'Cancel',
   sectionName: '',
   success: false,
   working: false,

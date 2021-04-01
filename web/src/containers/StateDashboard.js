@@ -4,22 +4,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import TagManager from 'react-gtm-module';
 
-import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
+import Icon, { File, faPlusCircle } from '../components/Icons';
 import Instruction from '../components/Instruction';
+import Loading from '../components/Loading';
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
-import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
+import { getUserStateOrTerritoryStatus, getIsFedAdmin } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from '../components/UpgradeBrowser';
-
-const Loading = ({ children }) => (
-  <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
-    <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
-    {children}
-  </div>
-);
-Loading.propTypes = { children: PropType.node.isRequired };
 
 const PendingApproval = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
@@ -78,7 +71,8 @@ const StateDashboard = (
     selectApd: select,
     state,
     role,
-    stateStatus
+    stateStatus,
+    isFedAdmin
   },
   { global = window } = {}
 ) => {
@@ -106,6 +100,8 @@ const StateDashboard = (
       del(apd.id);
     }
   };
+
+  const canCreateApd = !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -140,7 +136,7 @@ const StateDashboard = (
                   <h2 className="ds-h2 ds-u-display--inline-block">
                     {state ? state.name : ''} APDs
                   </h2>
-                  {stateStatus === STATE_AFFILIATION_STATUSES.APPROVED && (
+                  {canCreateApd && (
                     <Button
                       variation="primary"
                       className="ds-u-float--right"
@@ -235,7 +231,8 @@ StateDashboard.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  stateStatus: PropType.string.isRequired
+  stateStatus: PropType.string.isRequired,
+  isFedAdmin: PropType.func.isRequired
 };
 
 StateDashboard.defaultProps = {
@@ -247,6 +244,7 @@ const mapStateToProps = state => ({
   fetching: selectApds(state).fetching,
   state: state.user.data.state || null,
   role: state.user.data.role || 'Pending Role',
+  isFedAdmin: getIsFedAdmin(state),
   stateStatus:
     getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
 });
