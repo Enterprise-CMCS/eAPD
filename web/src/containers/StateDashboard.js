@@ -4,22 +4,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import TagManager from 'react-gtm-module';
 
-import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
+import Icon, { File, faPlusCircle } from '../components/Icons';
 import Instruction from '../components/Instruction';
+import Loading from '../components/Loading';
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import { getUserStateOrTerritoryStatus, getIsFedAdmin } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from '../components/UpgradeBrowser';
-
-const Loading = ({ children }) => (
-  <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
-    <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
-    {children}
-  </div>
-);
-Loading.propTypes = { children: PropType.node.isRequired };
 
 const PendingApproval = () => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">

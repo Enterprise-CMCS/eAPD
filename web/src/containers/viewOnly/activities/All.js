@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import ActivityList from './ActivityList';
 import Activity from './Activity';
@@ -10,7 +11,7 @@ const Activities = ({ activities }) => {
       <ActivityList activities={activities} />
 
       {activities.map((activity, index) => (
-        <Activity activity={activity} activityIndex={index} />
+        <Activity key={uuidv4()} activity={activity} activityIndex={index} />
       ))}
     </div>
   );

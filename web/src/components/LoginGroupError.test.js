@@ -1,23 +1,28 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+import { renderWithConnection, axe } from 'apd-testing-library';
 import LoginGroupError from './LoginGroupError';
 
-let props;
-let renderUtils;
+const defaultProps = {
+  onCancel: jest.fn()
+};
+
+// https://testing-library.com/docs/example-input-event/
+const setup = (props = {}) =>
+  renderWithConnection(<LoginGroupError {...defaultProps} {...props} />);
 
 describe('<LoginGroupError />', () => {
-  beforeEach(() => {
-    props = {};
-    renderUtils = renderWithConnection(<LoginGroupError {...props} />);
+  it('should not fail any accessibility tests', async () => {
+    const { container } = setup();
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   test('title renders', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(getByText(/Job Code Missing/)).toBeTruthy();
   });
 
   test('contact message renders', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(
       getByText(
         /You don’t have the correct job code to access the eAPD system./
@@ -26,7 +31,7 @@ describe('<LoginGroupError />', () => {
   });
 
   test('cancel button renders', () => {
-    const { getByRole } = renderUtils;
-    expect(getByRole('link', { name: 'Cancel' })).toBeTruthy();
+    const { getByRole } = setup();
+    expect(getByRole('button', { name: 'Cancel' })).toBeTruthy();
   });
 });

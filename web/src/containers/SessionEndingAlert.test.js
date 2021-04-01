@@ -8,6 +8,15 @@ import {
 } from './SessionEndingAlert';
 import { extendSession, logout } from '../actions/auth';
 
+let mockPush;
+
+jest.mock('react-router-dom', () => {
+  mockPush = jest.fn();
+  return {
+    useHistory: jest.fn().mockReturnValue({ push: mockPush })
+  };
+});
+
 describe('the session ending alert component', () => {
   it('render as expected if session is not ending and session is not being extended', () => {
     const props = {
