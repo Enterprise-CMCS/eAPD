@@ -118,11 +118,11 @@ LoginForm.propTypes = {
 LoginForm.defaultProps = {
   cancelable: true,
   canSubmit: true,
-  error: false,
+  error: null,
   footer: false,
-  id: 'start-main-content',
   legend: '',
   onSave: false,
+  id: null,
   primaryButtonText: ['Save changes', 'Working'],
   sectionName: '',
   success: false,
