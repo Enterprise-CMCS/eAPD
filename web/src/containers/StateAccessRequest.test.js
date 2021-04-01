@@ -1,37 +1,40 @@
 import React from 'react';
-import { renderWithConnection, fireEvent } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
 import StateAccessRequest from './StateAccessRequest';
 
-let props;
-let renderUtils;
+const defaultProps = {
+  errorMessage: null,
+  saveAction: jest.fn(),
+  fetching: false
+};
+
+// https://testing-library.com/docs/example-input-event/
+const setup = (props = {}) =>
+  renderWithConnection(<StateAccessRequest {...defaultProps} {...props} />);
 
 describe('<StateAccessRequest />', () => {
-  beforeEach(() => {
-    props = {
-      errorMessage: false,
-      action: jest.fn(),
-      fetching: false
-    };
-    renderUtils = renderWithConnection(<StateAccessRequest {...props} />);
+  it('should not fail any accessibility tests', async () => {
+    const { container } = setup();
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it('title rendered', () => {
-    const { getAllByText } = renderUtils;
+    const { getAllByText } = setup();
     expect(getAllByText(/Verify Your Identity/i).length).toBeGreaterThan(0);
   });
 
   it('allows the user to select the first item', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     fireEvent.click(getByText(/Submit/i));
-    expect(props.action).toHaveBeenCalledWith(['al']);
+    expect(defaultProps.saveAction).toHaveBeenCalledWith(['al']);
   });
 
   it('allows the users to select any item', () => {
-    const { getByLabelText, getByText } = renderUtils;
+    const { getByLabelText, getByText } = setup();
     fireEvent.change(getByLabelText(/Select your State Affiliation/i), {
       target: { value: 'mo' }
     });
     fireEvent.click(getByText(/Submit/i));
-    expect(props.action).toHaveBeenCalledWith(['mo']);
+    expect(defaultProps.saveAction).toHaveBeenCalledWith(['mo']);
   });
 });

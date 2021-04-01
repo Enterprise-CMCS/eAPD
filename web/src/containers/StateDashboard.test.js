@@ -29,7 +29,6 @@ describe('<StateDashboard />', () => {
   beforeEach(() => {
     props = {
       apds: [],
-      fetching: false,
       createApd: jest.fn(),
       deleteApd: jest.fn(),
       selectApd: jest.fn(),
@@ -83,6 +82,29 @@ describe('<StateDashboard />', () => {
       expect(
         getByText(/Approval Pending From State Administrator/i)
       ).toBeTruthy();
+    });
+  });
+
+  describe('federal admin viewing state dashboard', () => {
+    beforeEach(() => {
+      renderUtils = renderWithConnection(<StateDashboard {...props} />, {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              role: 'eAPD Federal Admin',
+              affiliations: [
+                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.APPROVED }
+              ]
+            }
+          }
+        }
+      });
+    });
+
+    it('should not display the create apd button', () => {
+      const { queryByText } = renderUtils;
+      expect(queryByText('Create new')).toBeNull();
     });
   });
 
@@ -212,7 +234,8 @@ describe('<StateDashboard />', () => {
                   created: createdStr,
                   updated: updatedStr
                 }
-              }
+              },
+              fetching: false
             }
           }
         }
