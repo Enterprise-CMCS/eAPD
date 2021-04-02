@@ -1,19 +1,23 @@
 import React from 'react';
-import { render, fireEvent } from 'apd-testing-library';
+import { render, fireEvent, axe } from 'apd-testing-library';
 import StateAccessRequestConfirmation from './StateAccessRequestConfirmation';
 
-let props;
-let renderUtils;
+const defaultProps = {
+  action: jest.fn()
+};
+
+// https://testing-library.com/docs/example-input-event/
+const setup = (props = {}) =>
+  render(<StateAccessRequestConfirmation {...defaultProps} {...props} />);
+
 describe('<StateAccessRequestConfirmation />', () => {
-  beforeEach(() => {
-    props = {
-      action: jest.fn()
-    };
-    renderUtils = render(<StateAccessRequestConfirmation {...props} />);
+  it('should not fail any accessibility tests', async () => {
+    const { container } = setup();
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it('displays the confirmation message', () => {
-    const { getByText } = renderUtils;
+    const { getByText } = setup();
     expect(
       getByText(
         /The State Administrator will verify your affiliation and credentials./i
@@ -22,8 +26,8 @@ describe('<StateAccessRequestConfirmation />', () => {
   });
 
   it('handles clicking the ok button', () => {
-    const { getByRole } = renderUtils;
+    const { getByRole } = setup();
     fireEvent.click(getByRole('button', { name: 'Ok' }));
-    expect(props.action).toHaveBeenCalled();
+    expect(defaultProps.action).toHaveBeenCalled();
   });
 });

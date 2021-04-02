@@ -133,7 +133,8 @@ const props = {
       contractors: 150,
       total: 1250
     }
-  }
+  },
+  fundingSource: 'HIE'
 };
 
 describe('Summary Activity Breakdown Table renders correctly', () => {

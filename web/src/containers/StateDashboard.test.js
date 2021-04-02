@@ -29,7 +29,6 @@ describe('<StateDashboard />', () => {
   beforeEach(() => {
     props = {
       apds: [],
-      fetching: false,
       createApd: jest.fn(),
       deleteApd: jest.fn(),
       selectApd: jest.fn(),
@@ -235,7 +234,8 @@ describe('<StateDashboard />', () => {
                   created: createdStr,
                   updated: updatedStr
                 }
-              }
+              },
+              fetching: false
             }
           }
         }

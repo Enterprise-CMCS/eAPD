@@ -29,8 +29,9 @@ const OutcomeAndMetricForm = ({
   };
 
   return (
-    <Fragment>
+    <Fragment key={`activity${activityIndex}-index${index}-form`}>
       <TextField
+        key={`activity${activityIndex}-index${index}`}
         autoFocus
         name="outcome"
         className="data-entry-box"
@@ -44,6 +45,7 @@ const OutcomeAndMetricForm = ({
 
       {metrics.map(({ key, metric }, i) => (
         <Review
+          key={key}
           onDeleteClick={
             metrics.length === 1 && metric === ''
               ? null
