@@ -39,6 +39,18 @@ module.exports = {
           }
         }
       }
+    },
+    'api-docs': {
+      get: {
+        tags: ['Metadata'],
+        summary: 'Displays documentation',
+        description: 'Displays documentation',
+        responses: {
+          200: {
+            description: 'This OpenAPI document'
+          }
+        }
+      }
     }
   },
   components: {
