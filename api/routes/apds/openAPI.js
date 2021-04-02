@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse }
+  schema: { arrayOf, jsonResponse, errorToken }
 } = require('../openAPI/helpers');
 
 const openAPI = {
@@ -80,10 +80,12 @@ const openAPI = {
           content: jsonResponse({ $ref: '#/components/schemas/apd' })
         },
         400: {
-          description: 'The apd ID does not match any known apds'
+          description: 'The apd ID does not match any known apds',
+          content: errorToken
         },
-        401: {
-          description: 'The apd ID does not match any known apds for the user'
+        403: {
+          description: 'The apd ID does not match any known apds for the user',
+          content: errorToken
         }
       }
     },
@@ -161,8 +163,9 @@ const openAPI = {
             ]
           })
         },
-        401: {
-          description: 'The apd ID does not match any known apds for the user'
+        403: {
+          description: 'The apd ID does not match any known apds for the user',
+          content: errorToken
         }
       }
     },
@@ -187,10 +190,12 @@ const openAPI = {
         },
         400: {
           description:
-            'Invalid request, such as requesting to archive an APD that is not editable'
+            'Invalid request, such as requesting to archive an APD that is not editable',
+          content: errorToken
         },
-        401: {
-          description: 'The apd ID does not match any known apds for the user'
+        403: {
+          description: 'The apd ID does not match any known apds for the user',
+          content: errorToken
         }
       }
     }
@@ -250,13 +255,16 @@ const openAPI = {
         },
         400: {
           description:
-            'Invalid request, such as requesting to archive an APD that is not editable'
+            'Invalid request, such as requesting to archive an APD that is not editable',
+          content: errorToken
         },
-        401: {
-          description: 'The apd ID does not match any known apds for the user'
+        403: {
+          description: 'The apd ID does not match any known apds for the user',
+          content: errorToken
         },
-        500: {
-          description: 'The file is not a valid format'
+        415: {
+          description: 'The file is not a valid format',
+          content: errorToken
         }
       }
     }
@@ -312,10 +320,12 @@ const openAPI = {
           })
         },
         400: {
-          description: 'The apd ID does not match any known apds'
+          description: 'The apd ID does not match any known apds',
+          content: errorToken
         },
-        401: {
-          description: 'The apd ID does not match any known apds for the user'
+        403: {
+          description: 'The apd ID does not match any known apds for the user',
+          content: errorToken
         }
       }
     }
@@ -355,7 +365,8 @@ const getApdFile = {
           content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
         },
         400: {
-          description: 'The file does not belong to the APD or does not exist'
+          description: 'The file does not belong to the APD or does not exist',
+          content: errorToken
         }
       }
     }

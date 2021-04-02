@@ -1,11 +1,24 @@
-module.exports.responses = {
-  unauthed: {
-    401: {
-      description: 'Not logged in'
-    },
-    403: {
-      description: 'Does not have permission to this activity'
-    }
+module.exports.ERROR_MESSAGES = {
+  400: {
+    error: 'The server could not process the request'
+  },
+  401: {
+    error: 'The user is not logged in'
+  },
+  403: {
+    error: 'The user does not have permission to perform this activity'
+  },
+  404: {
+    error: 'The server could not find the requested resource'
+  },
+  415: {
+    error: 'The media type is not supported by the server'
+  },
+  422: {
+    error: 'The server could not process the request as submitted'
+  },
+  500: {
+    error: 'There was an error on the server'
   }
 };
 
@@ -20,20 +33,34 @@ const arrayOf = schema => ({
   items: schema
 });
 
+const errorToken = jsonResponse({
+  type: 'object',
+  properties: {
+    error: {
+      type: 'string',
+      description:
+        'An string token indicating the error, which could be translated into a user-readable string for display by the client'
+    }
+  }
+});
+
 module.exports.schema = {
   jsonResponse,
   arrayOf,
+  errorToken
+};
 
-  errorToken: jsonResponse({
-    type: 'object',
-    properties: {
-      error: {
-        type: 'string',
-        description:
-          'An string token indicating the error, which could be translated into a user-readable string for display by the client'
-      }
+module.exports.responses = {
+  unauthed: {
+    401: {
+      description: module.exports.ERROR_MESSAGES[401].error,
+      content: errorToken
+    },
+    403: {
+      description: module.exports.ERROR_MESSAGES[403].error,
+      content: errorToken
     }
-  })
+  }
 };
 
 module.exports.requiresAuth = (

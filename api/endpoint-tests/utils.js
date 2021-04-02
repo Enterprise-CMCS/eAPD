@@ -2,6 +2,7 @@ const axios = require('axios');
 const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
+const { ERROR_MESSAGES } = require('../routes/openAPI/helpers');
 
 const { API_HOST, API_PORT, PORT } = process.env;
 
@@ -32,7 +33,7 @@ const unauthenticatedTest = (method, url) => {
   it('when unauthenticated', async () => {
     const response = await api[method](url);
     expect(response.status).toEqual(401);
-    expect(response.data).toBeFalsy();
+    expect(response.data).toEqual(ERROR_MESSAGES[401]);
   });
 };
 
@@ -41,7 +42,7 @@ const unauthorizedTest = (method, url) => {
     const authenticatedClient = login('no-permissions');
     const response = await authenticatedClient[method](url);
     expect(response.status).toEqual(403);
-    expect(response.data).toBeFalsy();
+    expect(response.data).toEqual(ERROR_MESSAGES[403]);
   });
 };
 

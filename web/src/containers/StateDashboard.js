@@ -10,7 +10,10 @@ import Loading from '../components/Loading';
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
-import { getUserStateOrTerritoryStatus, getIsFedAdmin } from '../reducers/user.selector';
+import {
+  getUserStateOrTerritoryStatus,
+  getIsFedAdmin
+} from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 
@@ -101,7 +104,8 @@ const StateDashboard = (
     }
   };
 
-  const canCreateApd = !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
+  const canCreateApd =
+    !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -232,7 +236,7 @@ StateDashboard.propTypes = {
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
   stateStatus: PropType.string.isRequired,
-  isFedAdmin: PropType.func.isRequired
+  isFedAdmin: PropType.bool.isRequired
 };
 
 StateDashboard.defaultProps = {

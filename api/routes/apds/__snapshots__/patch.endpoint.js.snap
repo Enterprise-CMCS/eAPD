@@ -3624,9 +3624,17 @@ Object {
 }
 `;
 
-exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a body that is not valid 1`] = `""`;
+exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a body that is not valid 1`] = `
+Object {
+  "error": "Operation missing!",
+}
+`;
 
-exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
+exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a non-existant apd ID 1`] = `
+Object {
+  "error": "The server could not process the request",
+}
+`;
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a patch that creates an invalid APD 1`] = `
 Array [
@@ -5448,4 +5456,8 @@ Object {
 }
 `;
 
-exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with an APD in a state other than the user's state 1`] = `""`;
+exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with an APD in a state other than the user's state 1`] = `
+Object {
+  "error": "The user does not have permission to perform this activity",
+}
+`;

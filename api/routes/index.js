@@ -1,3 +1,4 @@
+const swaggerUi = require('swagger-ui-express');
 const logger = require('../logger')('routes index');
 const affiliations = require('./affiliations');
 const apds = require('./apds');
@@ -43,4 +44,8 @@ module.exports = (
     logger.verbose({ id: req.id, message: 'sending OpenAPI documentation' });
     res.send(openAPIdoc);
   });
+
+  logger.debug('setting out route for API docs');
+  app.use('/api-docs', swaggerUi.serve);
+  app.get('/api-docs', swaggerUi.setup(openAPIdoc));
 };
