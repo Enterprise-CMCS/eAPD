@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow, global-require */
 const request = require('supertest');
 const tap = require('tap');
-const sinon = require('sinon');
 
 let api;
 let response;
