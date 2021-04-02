@@ -40,8 +40,6 @@ const errorHandler = (err, req, res, next) => {
   } else {
     message = ERROR_MESSAGES[status];
   }
-  console.log(message);
-  logger.info(message);
 
   if (message.error.match(/getaddrinfo ENOTFOUND db/i)) {
     status = 500;

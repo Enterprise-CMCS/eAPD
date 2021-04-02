@@ -66,8 +66,6 @@ tap.test('apds POST endpoint', async endpointTest => {
       test.ok(next.calledWith(error), 'HTTP status set to 400');
     });
 
-    // Why is a 400 status being returned when the frontend sends malformed data?
-    // Should this not be a 4xx status? What the heck?
     tests.test(
       'sends a 400 if the newly-generated APD fails schema validation',
       async test => {
