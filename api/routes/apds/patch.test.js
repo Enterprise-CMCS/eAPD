@@ -23,6 +23,8 @@ tap.test('apds PATCH endpoint', async tests => {
     status: sandbox.stub()
   };
 
+  const next = sandbox.stub();
+
   tests.beforeEach(async () => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
@@ -55,7 +57,7 @@ tap.test('apds PATCH endpoint', async tests => {
   });
 
   tests.test('handles the case where an APD ID is not provided', async test => {
-    await handler({ params: {} }, res);
+    await handler({ params: {} }, res, next);
 
     test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
   });
@@ -63,7 +65,7 @@ tap.test('apds PATCH endpoint', async tests => {
   tests.test(
     'handles the case where the message body is not an array',
     async test => {
-      await handler({ params: { id: 'apd id' } }, res);
+      await handler({ params: { id: 'apd id' } }, res, next);
 
       test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
@@ -71,26 +73,26 @@ tap.test('apds PATCH endpoint', async tests => {
   );
 
   tests.test('fails gracefully on arbitrary database error', async test => {
-    getAPDByID.throws(new Error('fake error'));
-    await handler({ body: [], params: { id: 'apd id' } }, res);
+    const error = new Error('fake error');
+    getAPDByID.throws(error);
+    await handler({ body: [], params: { id: 'apd id' } }, res, next);
 
-    test.ok(res.status.calledWith(500), 'sends an HTTP 500 status');
-    test.ok(res.end.calledAfter(res.status), 'response is terminated');
+    test.ok(next.calledWith(error), 'calls next with the error');
   });
 
   tests.test(
     'fails gracefully if there is an error patching the document',
     async test => {
+      const error = new Error('fake error');
       getAPDByID.resolves({ document: 'old document' });
-      patchObject.throws(new Error('fake error'));
+      patchObject.throws(error);
 
       const patches = [{ value: 'patch 1' }, { value: 'patch 2' }];
 
-      await handler({ body: patches, params: { id: 'apd id' } }, res);
+      await handler({ body: patches, params: { id: 'apd id' } }, res, next);
 
       test.ok(patchObject.calledWith('old document', patches));
-      test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
-      test.ok(res.end.calledAfter(res.status), 'response is terminated');
+      test.ok(next.calledWith(error), 'calls next with the error');
     }
   );
 
@@ -113,7 +115,7 @@ tap.test('apds PATCH endpoint', async tests => {
 
     const patches = [{ value: 'patch 1' }, { value: 'patch 2' }];
 
-    await handler({ body: patches, params: { id: 'apd id' } }, res);
+    await handler({ body: patches, params: { id: 'apd id' } }, res, next);
 
     test.ok(patchObject.calledWith('old document', patches), 'applies patches');
     test.ok(validate.calledWith(patchedDocument), 'validates the new document');
@@ -143,7 +145,7 @@ tap.test('apds PATCH endpoint', async tests => {
 
     const patches = [{ path: 'path 1' }, { path: 'path 2' }];
 
-    await handler({ body: patches, params: { id: 'apd id' } }, res);
+    await handler({ body: patches, params: { id: 'apd id' } }, res, next);
 
     test.ok(
       updateAPDDocument.calledWith('apd id', 'state id', patchedDocument),

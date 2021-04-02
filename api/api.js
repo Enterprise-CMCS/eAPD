@@ -84,9 +84,9 @@ api.use((req, res, next) => {
 logger.debug('setting global middleware');
 api.use(requestLoggerMiddleware);
 api.use(compression());
-api.use(express.urlencoded({ extended: true }));
+api.use(express.urlencoded({ limit: '50mb', extended: true }));
 api.use(cors({ credentials: true, origin: true }));
-api.use(bodyParser.json({ limit: '5mb' }));
+api.use(bodyParser.json({ limit: '50mb' }));
 
 // Registers Passport, related handlers, and
 // login/logout endpoints

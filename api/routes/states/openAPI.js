@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse }
+  schema: { arrayOf, jsonResponse, errorToken }
 } = require('../openAPI/helpers');
 
 const id = {
@@ -74,7 +74,8 @@ const getState = {
         },
         400: {
           description:
-            'The 2-letter, lowercase US State or Territory ID does not match any records'
+            'The 2-letter, lowercase US State or Territory ID does not match any records',
+          content: errorToken
         }
       }
     }

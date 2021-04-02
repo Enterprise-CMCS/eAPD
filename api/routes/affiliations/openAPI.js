@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 
 const {
-  schema: { arrayOf, jsonResponse },
+  schema: { arrayOf, jsonResponse, errorToken },
   responses
 } = require('../openAPI/helpers');
 
@@ -138,9 +138,12 @@ const postAffiliations = {
         content: jsonResponse(id)
       },
       400: {
-        description: 'Record exists, or US State ID is invalid'
+        description: 'Record exists, or US State ID is invalid',
+        content: errorToken
       },
-      401: responses.unauthed[401]
+      401: {
+        ...responses.unauthed[401]
+      }
     },
     security: [{ bearerAuth: [] }]
   }
@@ -158,7 +161,8 @@ const getAffiliation = {
       },
       400: {
         description:
-          'The stateId and affiliation ID do not correspond to a known record'
+          'The stateId and affiliation ID do not correspond to a known record',
+        content: errorToken
       },
       ...responses.unauthed
     },
@@ -187,7 +191,8 @@ const patchAffiliation = {
       },
       400: {
         description:
-          'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid'
+          'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid',
+        content: errorToken
       },
       ...responses.unauthed
     },

@@ -77,7 +77,7 @@ const mockVerifyJWT = token => {
       });
     });
   }
-  if (token === 'no.permissions.nostate') {
+  if (token === 'no-permissions-no-state') {
     const uid = 'no-permissions-no-state';
     return new Promise(resolve => {
       resolve({
@@ -86,7 +86,7 @@ const mockVerifyJWT = token => {
       });
     });
   }
-  if (token === 'all.permissions.nostate') {
+  if (token === 'all-permissions-no-state') {
     const uid = 'all-permissions-no-state';
     return new Promise(resolve => {
       resolve({
@@ -95,7 +95,7 @@ const mockVerifyJWT = token => {
       });
     });
   }
-  if (token === 'all.permissions.andstate') {
+  if (token === 'all-permissions-and-state') {
     const uid = 'all-permissions-and-state';
     return new Promise(resolve => {
       resolve({

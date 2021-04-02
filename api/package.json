@@ -19,7 +19,7 @@
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout --reporter=spec ${TESTS:-'{,!(node_modules)/**/}*.test.js'}",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --no-timeout --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
-    "test-endpoints": "jest --detectOpenHandles --runInBand '.+\\.endpoint\\.js'",
+    "test-endpoints": "jest -u --detectOpenHandles --runInBand '.+\\.endpoint\\.js'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
     "prettier": "prettier --config \"../.prettierrc\" --write \"**/*.js\""
   },
@@ -94,6 +94,7 @@
     "pg": "^7.18.2",
     "sanitize-html": "^2.3.0",
     "sharp": "^0.27.1",
+    "swagger-ui-express": "^4.1.6",
     "uuid": "^3.4.0",
     "winston": "^3.3.3",
     "zxcvbn": "^4.4.2"

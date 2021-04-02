@@ -73,8 +73,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
           res
         );
 
-        invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
+        invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
         invalidTest.ok(res.end.called, 'response is terminated');
       }
     );
@@ -191,8 +190,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
           next
         );
 
-        test.ok(res.status.calledWith(401), 'HTTP status set to 401');
-        test.ok(res.send.notCalled, 'no body is sent');
+        test.ok(res.status.calledWith(403), 'HTTP status set to 403');
         test.ok(res.end.called, 'response is terminuated');
       }
     );
@@ -212,7 +210,6 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
         );
 
         test.ok(res.status.calledWith(400), 'HTTP status set to 400');
-        test.ok(res.send.notCalled, 'no body is sent');
         test.ok(res.end.called, 'response is terminated');
       }
     );

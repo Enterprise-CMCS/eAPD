@@ -100,10 +100,10 @@
             }
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -142,7 +142,7 @@
             "description": "Record exists, or US State ID is invalid"
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           }
         },
         "security": [
@@ -228,10 +228,10 @@
             "description": "The stateId and affiliation ID do not correspond to a known record"
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -292,10 +292,10 @@
             "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid"
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -351,10 +351,10 @@
             }
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -379,10 +379,10 @@
             }
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -426,7 +426,7 @@
             "description": "The apd ID does not match any known apds for the user"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -522,7 +522,7 @@
             "description": "The apd ID does not match any known apds for the user"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -557,7 +557,7 @@
             "description": "The apd ID does not match any known apds for the user"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -627,9 +627,9 @@
             "description": "The apd ID does not match any known apds for the user"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           },
-          "500": {
+          "415": {
             "description": "The file is not a valid format"
           }
         },
@@ -699,7 +699,7 @@
             "description": "The apd ID does not match any known apds for the user"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -782,10 +782,10 @@
             }
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -832,10 +832,10 @@
             }
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -849,6 +849,25 @@
       "get": {
         "tags": ["Docs"],
         "description": "Get the account registration documentation",
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/docs/system-access": {
+      "get": {
+        "tags": ["Docs"],
+        "description": "Get the eAPD system access documentation",
         "responses": {
           "200": {
             "description": "The file",
@@ -931,7 +950,7 @@
             }
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           }
         },
         "security": [
@@ -970,10 +989,10 @@
             }
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -1058,7 +1077,7 @@
             "description": "The 2-letter, lowercase US State or Territory ID does not match any records"
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           }
         },
         "security": [
@@ -1119,10 +1138,10 @@
             }
           },
           "401": {
-            "description": "Not logged in"
+            "description": "The user is not logged in"
           },
           "403": {
-            "description": "Does not have permission to this activity"
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [
@@ -1190,13 +1209,7 @@
               }
             }
           },
-          "401": {
-            "description": "Not logged in"
-          },
-          "403": {
-            "description": "Does not have permission to this activity"
-          },
-          "404": {
+          "400": {
             "description": "The user ID does not match any known users",
             "content": {
               "application/json": {
@@ -1211,6 +1224,12 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "The user is not logged in"
+          },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
           }
         },
         "security": [

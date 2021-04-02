@@ -22,6 +22,8 @@ tap.only('apds files endpoints', async endpointTest => {
     end: sandbox.stub()
   };
 
+  const next = sandbox.stub();
+
   endpointTest.beforeEach(done => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
@@ -66,32 +68,36 @@ tap.only('apds files endpoints', async endpointTest => {
     tests.test(
       'there is an unexpected error checking if the file belongs to the APD',
       async test => {
-        di.fileBelongsToAPD.rejects(new Error('some error'));
+        const error = new Error('some error');
+        di.fileBelongsToAPD.rejects(error);
 
-        await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
+        await handler(
+          { params: { fileID: 'file id', id: 'apd id' } },
+          res,
+          next
+        );
 
-        test.ok(res.status.calledWith(400), 'sends a 400 error');
-        test.ok(res.end.calledAfter(res.status), 'response is terminated');
+        test.ok(next.calledWith(error));
       }
     );
 
     tests.test('the requested file does not belong to the APD', async test => {
       di.fileBelongsToAPD.resolves(false);
 
-      await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
+      await handler({ params: { fileID: 'file id', id: 'apd id' } }, res, next);
 
       test.ok(res.status.calledWith(400), 'sends a 400 error');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
     });
 
     tests.test('there is an unexpected error getting the file', async test => {
+      const error = new Error('some other error');
       di.fileBelongsToAPD.resolves(true);
-      di.getFile.rejects(new Error('some other error'));
+      di.getFile.rejects(error);
 
-      await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
+      await handler({ params: { fileID: 'file id', id: 'apd id' } }, res, next);
 
-      test.ok(res.status.calledWith(400), 'sends a 400 error');
-      test.ok(res.end.calledAfter(res.status), 'response is terminated');
+      test.ok(next.calledWith(error));
     });
 
     tests.test(
@@ -101,7 +107,11 @@ tap.only('apds files endpoints', async endpointTest => {
         di.fileBelongsToAPD.resolves(true);
         di.getFile.resolves(file);
 
-        await handler({ params: { fileID: 'file id', id: 'apd id' } }, res);
+        await handler(
+          { params: { fileID: 'file id', id: 'apd id' } },
+          res,
+          next
+        );
 
         test.ok(res.send.calledWith(file), 'sends the file');
         test.ok(res.end.calledAfter(res.send), 'response is terminated');
@@ -130,14 +140,16 @@ tap.only('apds files endpoints', async endpointTest => {
         buffer: 'text file buffer',
         size: 1234
       };
-      try {
-        await handler(req, res);
-      } catch (err) {
-        test.equal(err.message, 'User is trying to upload a text-based file');
-        test.ok(res.status.calledWith(500), 'sends a 500 error');
-        test.ok(res.send.calledWith({ message: 'Unable to upload file' }));
-        test.ok(res.send.calledAfter(res.status), 'response is terminated');
-      }
+
+      await handler(req, res, next);
+
+      test.ok(res.status.calledWith(415), 'sends a 415 error');
+      test.ok(
+        res.send.calledWith({
+          error: 'User is trying to upload a text-based file'
+        })
+      );
+      test.ok(res.send.calledAfter(res.status), 'response is terminated');
     });
 
     tests.test('the file is not an image', async test => {
@@ -148,17 +160,15 @@ tap.only('apds files endpoints', async endpointTest => {
         buffer: 'pdf file buffer',
         size: 1234
       };
-      try {
-        await handler(req, res);
-      } catch (err) {
-        test.equal(
-          err.message,
-          'User is trying to upload a file type of application/pdf'
-        );
-        test.ok(res.status.calledWith(500), 'sends a 500 error');
-        test.ok(res.send.calledWith({ message: 'Unable to upload file' }));
-        test.ok(res.send.calledAfter(res.status), 'response is terminated');
-      }
+
+      await handler(req, res, next);
+      test.ok(res.status.calledWith(415), 'sends a 415 error');
+      test.ok(
+        res.send.calledWith({
+          error: 'User is trying to upload a file type of application/pdf'
+        })
+      );
+      test.ok(res.send.calledAfter(res.status), 'response is terminated');
     });
 
     tests.test(
@@ -172,7 +182,7 @@ tap.only('apds files endpoints', async endpointTest => {
         di.validateFile.resolves({ image: 'image file buffer' });
         di.createNewFileForAPD.rejects(new Error('some error'));
 
-        await handler(req, res);
+        await handler(req, res, next);
 
         test.ok(
           di.createNewFileForAPD.calledWith(
@@ -183,10 +193,8 @@ tap.only('apds files endpoints', async endpointTest => {
           ),
           'database record is created from the request data'
         );
-        test.ok(res.status.calledWith(500), 'sends a 500 error');
-        test.ok(res.send.calledAfter(res.status), 'response is terminated');
         test.ok(
-          res.send.calledWith({ message: 'Unable to upload file' }),
+          next.calledWith({ message: 'Unable to upload file' }),
           'sends error message'
         );
       }
@@ -203,7 +211,7 @@ tap.only('apds files endpoints', async endpointTest => {
         di.createNewFileForAPD.resolves('new file ID');
         di.putFile.rejects(new Error('some other error'));
 
-        await handler(req, res);
+        await handler(req, res, next);
 
         test.ok(
           di.createNewFileForAPD.calledWith(
@@ -222,10 +230,8 @@ tap.only('apds files endpoints', async endpointTest => {
           di.deleteFileByID.calledWith('new file ID'),
           'file is removed from the database'
         );
-        test.ok(res.status.calledWith(500), 'sends a 500 error');
-        test.ok(res.send.calledAfter(res.status), 'response is terminated');
         test.ok(
-          res.send.calledWith({ message: 'Unable to upload file' }),
+          next.calledWith({ message: 'Unable to upload file' }),
           'sends error message'
         );
       }
@@ -240,7 +246,7 @@ tap.only('apds files endpoints', async endpointTest => {
       di.createNewFileForAPD.resolves('new file ID');
       di.putFile.resolves();
 
-      await handler(req, res);
+      await handler(req, res, next);
 
       test.ok(
         di.createNewFileForAPD.calledWith(

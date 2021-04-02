@@ -8,6 +8,7 @@ const {
   fileBelongsToAPD: fb
 } = require('../../db');
 const { getFile: get, putFile: put } = require('../../files');
+const { ERROR_MESSAGES } = require('../openAPI/helpers');
 
 module.exports = (
   app,
@@ -22,20 +23,27 @@ module.exports = (
 ) => {
   logger.silly('setting up GET /apds/:id/files/:fileID route');
 
-  app.get('/apds/:id/files/:fileID', can('view-document'), async (req, res) => {
-    try {
-      if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
-        const file = await getFile(req.params.fileID);
-        res.send(file).end();
-      } else {
-        res.status(400).end();
+  app.get(
+    '/apds/:id/files/:fileID',
+    can('view-document'),
+    async (req, res, next) => {
+      try {
+        if (await fileBelongsToAPD(req.params.fileID, req.params.id)) {
+          const file = await getFile(req.params.fileID);
+          res.send(file).end();
+        } else {
+          res
+            .status(400)
+            .send(ERROR_MESSAGES[400])
+            .end();
+        }
+      } catch (e) {
+        logger.error({ id: req.id, message: 'error fetching file' });
+        logger.error({ id: req.id, message: e });
+        next(e);
       }
-    } catch (e) {
-      logger.error({ id: req.id, message: 'error fetching file' });
-      logger.error({ id: req.id, message: e });
-      res.status(400).end();
     }
-  });
+  );
 
   logger.silly('setting up POST /apds/:id/files route');
 
@@ -47,32 +55,37 @@ module.exports = (
     can('view-document'),
     userCanEditAPD(),
     multer().single('file'),
-    async (req, res) => {
+    async (req, res, next) => {
       try {
         const { metadata = null } = req.body;
         const { size = 0, buffer = null } = req.file;
 
         const { error = null, image = null } = await validateFile(buffer);
-        if (error) throw new Error(error);
+        if (error) {
+          res
+            .status(415)
+            .send({ error })
+            .end();
+        } else {
+          const fileID = await createNewFileForAPD(
+            image,
+            req.params.id,
+            metadata,
+            size
+          );
 
-        const fileID = await createNewFileForAPD(
-          image,
-          req.params.id,
-          metadata,
-          size
-        );
+          try {
+            await putFile(fileID, image);
+          } catch (e) {
+            await deleteFileByID(fileID);
+            throw e;
+          }
 
-        try {
-          await putFile(fileID, image);
-        } catch (e) {
-          await deleteFileByID(fileID);
-          throw e;
+          res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
         }
-
-        res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
       } catch (e) {
         logger.error({ id: req.id, message: e });
-        res.status(500).send({ message: 'Unable to upload file' });
+        next({ message: 'Unable to upload file' });
       }
     }
   );
