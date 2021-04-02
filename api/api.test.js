@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow, global-require */
 const request = require('supertest');
 const tap = require('tap');
+const sinon = require('sinon');
 
 let api;
 let response;
@@ -14,6 +15,11 @@ tap.test('express api', async t => {
   t.test('GET /heartbeat', async t => {
     response = await request(api).get('/heartbeat');
     t.equals(response.status, 204, 'HTTP status set to 204');
+  });
+
+  t.test('GET /api-docs', async t => {
+    response = await request(api).get('/api-docs');
+    t.equals(response.status, 301, 'successful');
   });
 
   t.test('headers', async t => {

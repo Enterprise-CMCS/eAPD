@@ -7,12 +7,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const uuid = require('uuid/v1');
+const swaggerUi = require('swagger-ui-express');
 const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
+const openAPI = require('./routes/openAPI/index');
 
 const api = express();
 
@@ -41,6 +43,10 @@ logger.debug('setting up heartbeat endpoint');
 api.get('/heartbeat', (_, res) => {
   res.status(204).end();
 });
+
+logger.debug('setting out route for API docs');
+api.use('/api-docs', swaggerUi.serve);
+api.get('/api-docs', swaggerUi.setup(openAPI));
 
 api.use((_, res, next) => {
   // Disallow proxies from cacheing anything ("private"); instruct browsers to

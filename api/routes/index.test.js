@@ -4,8 +4,7 @@ const endpointIndex = require('./index');
 
 tap.test('endpoint setup', async endpointTest => {
   const app = {
-    get: sinon.spy(),
-    use: sinon.spy()
+    get: sinon.spy()
   };
   const res = {
     send: sinon.spy()
@@ -86,10 +85,5 @@ tap.test('endpoint setup', async endpointTest => {
         'sends back OpenAPI documentation'
       );
     }
-  );
-
-  endpointTest.ok(
-    app.get.calledWith('/api-docs', sinon.match.func),
-    'sets up an endpoint to fetch OpenAPI documentation'
   );
 });
