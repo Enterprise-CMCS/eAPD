@@ -38,12 +38,12 @@ const errorHandler = (err, req, res, next) => {
   } else if (typeof err === 'string') {
     message = { error: err };
   } else {
-    message = ERROR_MESSAGES[status];
+    message = { error: ERROR_MESSAGES[status] };
   }
 
   if (message.error.match(/getaddrinfo ENOTFOUND db/i)) {
     status = 500;
-    message = ERROR_MESSAGES[500];
+    message = { error: ERROR_MESSAGES[500] };
   }
 
   if (res.headersSent) {

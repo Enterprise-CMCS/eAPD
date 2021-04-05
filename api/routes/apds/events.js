@@ -25,7 +25,7 @@ module.exports = (app, { createEventForAPD = ce } = {}) => {
       if (eventID === null) {
         res
           .status(400)
-          .send(ERROR_MESSAGES[400])
+          .send({ error: ERROR_MESSAGES[400] })
           .end();
       }
 

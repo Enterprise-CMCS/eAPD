@@ -1,25 +1,11 @@
 module.exports.ERROR_MESSAGES = {
-  400: {
-    error: 'The server could not process the request'
-  },
-  401: {
-    error: 'The user is not logged in'
-  },
-  403: {
-    error: 'The user does not have permission to perform this activity'
-  },
-  404: {
-    error: 'The server could not find the requested resource'
-  },
-  415: {
-    error: 'The media type is not supported by the server'
-  },
-  422: {
-    error: 'The server could not process the request as submitted'
-  },
-  500: {
-    error: 'There was an error on the server'
-  }
+  400: 'The server could not process the request',
+  401: 'The user is not logged in',
+  403: 'The user does not have permission to perform this activity',
+  404: 'The server could not find the requested resource',
+  415: 'The media type is not supported by the server',
+  422: 'The server could not process the request as submitted',
+  500: 'There was an error on the server'
 };
 
 const jsonResponse = schema => ({

@@ -52,7 +52,7 @@ module.exports = (app, { db = knex } = {}) => {
         });
         response
           .status(403)
-          .send(ERROR_MESSAGES[403])
+          .send({ error: ERROR_MESSAGES[403] })
           .end();
         return;
       }

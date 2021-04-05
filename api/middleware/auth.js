@@ -16,7 +16,7 @@ const loggedIn = (req, res, next) => {
     logger.info({ id: req.id, message: 'user is not logged in' });
     res
       .status(401)
-      .send(ERROR_MESSAGES[401])
+      .send({ error: ERROR_MESSAGES[401] })
       .end();
   }
 };
@@ -54,7 +54,7 @@ const can = activity =>
           });
           res
             .status(403)
-            .send(ERROR_MESSAGES[403])
+            .send({ error: ERROR_MESSAGES[403] })
             .end();
         }
       });
