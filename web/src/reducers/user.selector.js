@@ -21,22 +21,20 @@ export const getUserStateOrTerritory = ({
 }) => state;
 
 export const getUserAffiliationForCurrentState = ({
-  user: {
-    data: { state: { id = null } = {}, affiliations }
-  }
+  user: { data: { state: { id = null } = {}, affiliations = [] } = {} } = {}
 }) => {
-  return affiliations
+  return affiliations.length > 0
     ? affiliations.find(affiliation => affiliation.state_id === id)
     : null;
 };
 
 export const getUserStateOrTerritoryStatus = state => {
-  const { status = null } = getUserAffiliationForCurrentState(state);
+  const { status = null } = getUserAffiliationForCurrentState(state) || {};
   return status;
 };
 
 export const getUserStateOrTerritoryRole = state => {
-  const { role = null } = getUserAffiliationForCurrentState(state);
+  const { role = null } = getUserAffiliationForCurrentState(state) || {};
   return role;
 };
 
