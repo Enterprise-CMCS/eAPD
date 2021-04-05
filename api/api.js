@@ -44,9 +44,9 @@ api.get('/heartbeat', (_, res) => {
   res.status(204).end();
 });
 
-logger.debug('setting out route for API docs');
-api.use('/api-docs', swaggerUi.serve);
-api.get('/api-docs', swaggerUi.setup(openAPI));
+// logger.debug('setting out route for API docs');
+// api.use('/api-docs', swaggerUi.serve);
+// api.get('/api-docs', swaggerUi.setup(openAPI));
 
 api.use((_, res, next) => {
   // Disallow proxies from cacheing anything ("private"); instruct browsers to
