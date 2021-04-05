@@ -7,14 +7,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const uuid = require('uuid/v1');
-const swaggerUi = require('swagger-ui-express');
+// const swaggerUi = require('swagger-ui-express');
 const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
-const openAPI = require('./routes/openAPI/index');
+// const openAPI = require('./routes/openAPI/index');
 
 const api = express();
 
