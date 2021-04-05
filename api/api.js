@@ -44,9 +44,9 @@ api.get('/heartbeat', (_, res) => {
   res.status(204).end();
 });
 
-// logger.debug('setting out route for API docs');
-// api.use('/api-docs', swaggerUi.serve);
-// api.get('/api-docs', swaggerUi.setup(openAPI));
+logger.debug('setting out route for API docs');
+api.use('/api-docs', swaggerUi.serve);
+api.get('/api-docs', swaggerUi.setup(openAPI));
 
 api.use((_, res, next) => {
   // Disallow proxies from cacheing anything ("private"); instruct browsers to
@@ -90,9 +90,9 @@ api.use((req, res, next) => {
 logger.debug('setting global middleware');
 api.use(requestLoggerMiddleware);
 api.use(compression());
-api.use(express.urlencoded({ limit: '50mb', extended: true }));
+api.use(express.urlencoded({ extended: true }));
 api.use(cors({ credentials: true, origin: true }));
-api.use(bodyParser.json({ limit: '50mb' }));
+api.use(bodyParser.json({ limit: '5mb' }));
 
 // Registers Passport, related handlers, and
 // login/logout endpoints
