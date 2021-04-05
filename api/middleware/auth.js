@@ -1,6 +1,5 @@
 const logger = require('../logger')('auth middleware');
 const { cache } = require('./cache');
-const { ERROR_MESSAGES } = require('../routes/openAPI/helpers');
 
 /**
  * @description Middleware to check if the current request is authenticated.
@@ -14,10 +13,7 @@ const loggedIn = (req, res, next) => {
     next();
   } else {
     logger.info({ id: req.id, message: 'user is not logged in' });
-    res
-      .status(401)
-      .send(ERROR_MESSAGES[401])
-      .end();
+    res.status(401).end();
   }
 };
 
@@ -52,10 +48,7 @@ const can = activity =>
             id: req.id,
             message: `user does not have the [${activity}] activity`
           });
-          res
-            .status(403)
-            .send(ERROR_MESSAGES[403])
-            .end();
+          res.status(403).end();
         }
       });
     };

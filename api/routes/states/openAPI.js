@@ -74,8 +74,7 @@ const getState = {
         },
         400: {
           description:
-            'The 2-letter, lowercase US State or Territory ID does not match any records',
-          content: errorToken
+            'The 2-letter, lowercase US State or Territory ID does not match any records'
         }
       }
     }

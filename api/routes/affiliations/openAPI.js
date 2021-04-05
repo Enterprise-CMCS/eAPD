@@ -138,8 +138,7 @@ const postAffiliations = {
         content: jsonResponse(id)
       },
       400: {
-        description: 'Record exists, or US State ID is invalid',
-        content: errorToken
+        description: 'Record exists, or US State ID is invalid'
       },
       401: {
         ...responses.unauthed[401]
@@ -161,8 +160,7 @@ const getAffiliation = {
       },
       400: {
         description:
-          'The stateId and affiliation ID do not correspond to a known record',
-        content: errorToken
+          'The stateId and affiliation ID do not correspond to a known record'
       },
       ...responses.unauthed
     },
@@ -191,8 +189,7 @@ const patchAffiliation = {
       },
       400: {
         description:
-          'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid',
-        content: errorToken
+          'US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid'
       },
       ...responses.unauthed
     },
