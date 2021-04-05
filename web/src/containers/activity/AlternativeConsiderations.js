@@ -13,9 +13,9 @@ const AlternativeConsiderations = ({activityIndex}) => {
       resource="activities.alternatives"
       id={`activity-outcomes-${activityIndex}`}
     >
-          <Alert>
-      <p className="ds-c-alert__text">The state must consider sharing, leverage and reuse of Medicaid technologies, including custom open source development, reusing systems that already exist within the state, reusing systems built for other states available under <a href="#">45 CFR §95.617</a>, licensing or purchasing COTS software or SaaS, or engaging in collaboration with other states.</p>
-    </Alert>
+
+      <p className="instruction-box">The state must consider sharing, leverage and reuse of Medicaid technologies, including custom open source development, reusing systems that already exist within the state, reusing systems built for other states available under <a href="#">45 CFR §95.617</a>, licensing or purchasing COTS software or SaaS, or engaging in collaboration with other states.</p>
+
 
       <FormLabel
           className="ds-c-label--full-width ds-u-padding-top--4"
@@ -94,7 +94,7 @@ const AlternativeConsiderations = ({activityIndex}) => {
           hint={''}
           fieldId="activity-statement-tbd-field"
         >
-          Statement of Forseeable Risks
+          Forseeable Risks
           <p className="ds-u-font-weight--normal ds-u-margin-top--1">List the forseeable risks associated with the selected option.
  </p>
         </FormLabel>

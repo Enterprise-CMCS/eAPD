@@ -76,7 +76,7 @@ const buildActivitySection = i => [
     url: `/apd/activity/${i}/overview`
   },
   {
-    label: 'Statement of alternative conderations and forseeable risks',
+    label: 'Considerations analysis and risks',
     url: `/apd/activity/${i}/alternative-considerations`
   },
   {
