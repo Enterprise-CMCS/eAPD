@@ -4,6 +4,7 @@ const {
   getPopulatedAffiliationById: ga
 } = require('../../db');
 const { can } = require('../../middleware');
+const { ERROR_MESSAGES } = require('../openAPI/helpers');
 
 module.exports = (
   app,
@@ -75,7 +76,10 @@ module.exports = (
           id: request.id,
           message: `affiliation ${id} does not exist in ${stateId}`
         });
-        return response.status(400).end();
+        return response
+          .status(400)
+          .send(ERROR_MESSAGES[400])
+          .end();
       } catch (e) {
         return next(e);
       }

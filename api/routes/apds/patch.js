@@ -6,6 +6,7 @@ const logger = require('../../logger')('apds route put');
 const { getAPDByID: ga, updateAPDDocument: ua } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
 const { validateApd } = require('../../schemas');
+const { ERROR_MESSAGES } = require('../openAPI/helpers');
 
 // This is a list of property paths that cannot be changed with this endpoint.
 // Any patches pointing at these paths will be ignored.
@@ -36,7 +37,10 @@ module.exports = (
       }
       if (!Array.isArray(req.body)) {
         logger.error({ id: req.id, message: 'request body must be an array' });
-        return res.status(400).end();
+        return res
+          .status(400)
+          .send(ERROR_MESSAGES[400])
+          .end();
       }
 
       logger.silly({

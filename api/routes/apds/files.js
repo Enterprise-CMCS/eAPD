@@ -8,6 +8,7 @@ const {
   fileBelongsToAPD: fb
 } = require('../../db');
 const { getFile: get, putFile: put } = require('../../files');
+const { ERROR_MESSAGES } = require('../openAPI/helpers');
 
 module.exports = (
   app,
@@ -31,7 +32,10 @@ module.exports = (
           const file = await getFile(req.params.fileID);
           res.send(file).end();
         } else {
-          res.status(400).end();
+          res
+            .status(400)
+            .send(ERROR_MESSAGES[400])
+            .end();
         }
       } catch (e) {
         logger.error({ id: req.id, message: 'error fetching file' });

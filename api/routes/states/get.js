@@ -1,5 +1,6 @@
 const { raw: knex } = require('../../db');
 const { loggedIn } = require('../../middleware/auth');
+const { ERROR_MESSAGES } = require('../openAPI/helpers');
 
 module.exports = app => {
   app.get('/states', (request, response, next) => {
@@ -18,7 +19,10 @@ module.exports = app => {
         if (row) {
           response.status(200).json(row);
         } else {
-          response.status(400).end();
+          response
+            .status(400)
+            .send(ERROR_MESSAGES[400])
+            .end();
         }
       })
       .catch(next);
