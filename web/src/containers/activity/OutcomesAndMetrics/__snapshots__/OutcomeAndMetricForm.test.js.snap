@@ -7,7 +7,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
   <TextField
     autoFocus={true}
     className="data-entry-box"
-    hint="Describe a discrete and measurable improvement for this system."
+    hint="Describe a distinct and measurable improvement for this system."
     key="activity93-index1"
     label="Outcome"
     multiline={true}
