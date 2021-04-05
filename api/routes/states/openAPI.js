@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse, errorToken }
+  schema: { arrayOf, jsonResponse }
 } = require('../openAPI/helpers');
 
 const id = {

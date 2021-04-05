@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 
 const {
-  schema: { arrayOf, jsonResponse, errorToken },
+  schema: { arrayOf, jsonResponse },
   responses
 } = require('../openAPI/helpers');
 
