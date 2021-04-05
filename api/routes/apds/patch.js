@@ -39,7 +39,7 @@ module.exports = (
         logger.error({ id: req.id, message: 'request body must be an array' });
         return res
           .status(400)
-          .send(ERROR_MESSAGES[400])
+          .send({ error: ERROR_MESSAGES[400] })
           .end();
       }
 

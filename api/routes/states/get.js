@@ -21,7 +21,7 @@ module.exports = app => {
         } else {
           response
             .status(400)
-            .send(ERROR_MESSAGES[400])
+            .send({ error: ERROR_MESSAGES[400] })
             .end();
         }
       })

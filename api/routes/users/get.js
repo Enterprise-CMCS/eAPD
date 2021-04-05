@@ -16,7 +16,7 @@ module.exports = (app, { getAllUsers = ga, getUserByID = gu } = {}) => {
           ? res.send(user)
           : res
               .status(400)
-              .send(ERROR_MESSAGES[400])
+              .send({ error: ERROR_MESSAGES[400] })
               .end()
       )
       .catch(next);
