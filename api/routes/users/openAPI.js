@@ -75,8 +75,7 @@ const openAPI = {
           content: jsonResponse(userObjectSchema)
         },
         400: {
-          description: 'The user ID does not match any known users',
-          content: errorToken
+          description: 'The user ID does not match any known users'
         }
       }
     }

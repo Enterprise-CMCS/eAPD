@@ -53,12 +53,10 @@ module.exports.schema = {
 module.exports.responses = {
   unauthed: {
     401: {
-      description: module.exports.ERROR_MESSAGES[401].error,
-      content: errorToken
+      description: 'The user is not logged in'
     },
     403: {
-      description: module.exports.ERROR_MESSAGES[403].error,
-      content: errorToken
+      description: 'The user does not have permission to perform this activity'
     }
   }
 };
