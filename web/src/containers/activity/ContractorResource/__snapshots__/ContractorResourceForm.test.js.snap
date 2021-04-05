@@ -19,8 +19,8 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
   </FormLabel>
   <Connect(RichText)
     content="They cleaned up the latrines after the Battle of Hastings"
-    editorClassName="rte-textarea-l"
-    id="contractor-description-field"
+    editorClassName="rte-textarea-1"
+    id="contractor-description-field-1"
     name="contractor-description"
     onSync={[Function]}
   />
@@ -196,8 +196,8 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
   </FormLabel>
   <Connect(RichText)
     content="They cleaned up the latrines after the Battle of Hastings"
-    editorClassName="rte-textarea-l"
-    id="contractor-description-field"
+    editorClassName="rte-textarea-1"
+    id="contractor-description-field-1"
     name="contractor-description"
     onSync={[Function]}
   />
