@@ -1,8 +1,4 @@
-import {
-  AUTH_CHECK_SUCCESS,
-  LOGIN_SUCCESS,
-  LOGOUT_SUCCESS
-} from '../actions/auth';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/auth';
 import {
   ADMIN_EDIT_ME_ERROR,
   ADMIN_EDIT_ME_REQUEST,
@@ -23,7 +19,6 @@ const user = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN_EDIT_ME_REQUEST:
       return { ...state, error: false, fetching: true };
-    case AUTH_CHECK_SUCCESS:
     case LOGIN_SUCCESS:
     case ADMIN_EDIT_ME_SUCCESS:
       return {

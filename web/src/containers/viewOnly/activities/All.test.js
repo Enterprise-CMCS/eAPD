@@ -14,7 +14,8 @@ describe('viewOnly <Activities />', () => {
     renderUtils = renderWithConnection(<Activities {...props} />, {
       initialState: {
         apd,
-        budget
+        budget,
+        user: { data: { state: { name: 'Maryland' } } }
       }
     });
   });
