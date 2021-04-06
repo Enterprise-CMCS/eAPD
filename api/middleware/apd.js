@@ -1,6 +1,5 @@
 const logger = require('../logger')('apd middleware');
 const { cache } = require('./cache');
-const { ERROR_MESSAGES } = require('../routes/openAPI/helpers');
 
 const { getAPDByID: ga } = require('../db');
 
@@ -30,10 +29,7 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
             id: req.id,
             message: 'requested object does not exist'
           });
-          res
-            .status(400)
-            .send({ error: ERROR_MESSAGES[400] })
-            .end();
+          res.status(400).end();
         }
       } catch (e) {
         next(e);
@@ -73,10 +69,7 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
             id: req.id,
             message: 'user does not have access to the APD'
           });
-          res
-            .status(403)
-            .send({ error: ERROR_MESSAGES[403] })
-            .end();
+          res.status(403).end();
         }
       });
     };

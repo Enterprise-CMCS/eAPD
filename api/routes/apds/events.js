@@ -1,7 +1,6 @@
 const logger = require('../../logger')('apd event routes');
 const { can, userCanAccessAPD } = require('../../middleware');
 const { createEventForAPD: ce } = require('../../db');
-const { ERROR_MESSAGES } = require('../openAPI/helpers');
 
 module.exports = (app, { createEventForAPD = ce } = {}) => {
   logger.debug('setting up POST /apds/:id/events route');
@@ -23,10 +22,7 @@ module.exports = (app, { createEventForAPD = ce } = {}) => {
       });
 
       if (eventID === null) {
-        res
-          .status(400)
-          .send({ error: ERROR_MESSAGES[400] })
-          .end();
+        res.status(400).end();
       }
 
       res.send({ success: true });

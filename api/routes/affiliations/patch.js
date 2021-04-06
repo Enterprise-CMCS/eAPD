@@ -2,7 +2,6 @@ const auditor = require('../../audit');
 const logger = require('../../logger')('affiliations');
 const { raw: knex } = require('../../db');
 const { can } = require('../../middleware');
-const { ERROR_MESSAGES } = require('../openAPI/helpers');
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = auditor.actions;
 
@@ -50,10 +49,7 @@ module.exports = (app, { db = knex } = {}) => {
           id: request.id,
           message: `user ${request.user.id} is attempting to edit their own role`
         });
-        response
-          .status(403)
-          .send({ error: ERROR_MESSAGES[403] })
-          .end();
+        response.status(403).end();
         return;
       }
 
