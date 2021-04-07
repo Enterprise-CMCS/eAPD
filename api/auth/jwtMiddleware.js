@@ -28,12 +28,12 @@ const jwtMiddleware = async (
     if (!claims) return next();
 
     // some values like group and application profile variables
-    // are returned by the claims for conviences, but not retrieved
+    // are returned by the claims for conveniences, but not retrieved
     // by the standard getUser call to Okta, so these values should
     // be passed in as additional values when possible.
     const { uid, ...additionalValues } = claims;
-    const checkOkta = req.originalUrl === "/me"
-    const user = await getUserByID(uid, checkOkta, { additionalValues });
+    // const checkOkta = req.originalUrl === "/me"
+    const user = await getUserByID(uid, true, { additionalValues });
     // const user = claims;
     if (user) {
       req.user = user;

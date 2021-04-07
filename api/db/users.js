@@ -106,12 +106,12 @@ const getUserByID = async (
     clean = true,
     client = oktaClient,
     populate = populateUser,
-    additionalValues
+    additionalValues,
+    db
   } = {}
 ) => {
 
   let oktaUser
-
   if (checkOkta){
     oktaUser = await client.getUser(id)
     if(oktaUser){
@@ -119,7 +119,7 @@ const getUserByID = async (
     }
   }
   else{
-    oktaUser = getOktaUser(id)
+    oktaUser = await getOktaUser(id, { db })
     if(oktaUser){
       // since we are not talking to Okta here, assume they are active since they are in the DB,
       // maybe we need to store this though
