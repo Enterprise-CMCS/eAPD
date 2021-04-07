@@ -100,14 +100,18 @@ const ContractorResourceForm = ({
     <Fragment>
       <TextField
         autoFocus
-        label="Contractor Name"
+        label="Private Contractor or Vender Name"
         name="contractor-name"
+        hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
+        labelClassName="full-width-label"
         value={name}
         onChange={getHandler(setName)}
       />
       <TextArea
-        label="Description of Services"
+        label="Procurement Methodology and Description of Services"
         name="contractor-description"
+        hint="Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements."
+        labelClassName="full-width-label"
         rows={5}
         value={description}
         onChange={getHandler(setDescription)}
@@ -135,6 +139,7 @@ const ContractorResourceForm = ({
         name="contractor-total-cost"
         size="medium"
         hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."
+        labelClassName="full-width-label"
         value={totalCost}
         onChange={getHandler(setTotalCost)}
       />

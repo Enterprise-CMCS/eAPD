@@ -27,7 +27,7 @@ export const removeContractor = (
   { global = window } = {}
 ) => dispatch => {
   if (
-    global.confirm('Do you really want to delete this contractor resource?')
+    global.confirm('Do you really want to delete this private contractor resource?')
   ) {
     dispatch({
       type: REMOVE_APD_ITEM,
