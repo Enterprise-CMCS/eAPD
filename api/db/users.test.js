@@ -11,6 +11,8 @@ const {
   sanitizeUser
 } = require('./users');
 
+const { createOrUpdateOktaUser } = require('./oktaUsers')
+
 tap.test('database wrappers / users', async usersTests => {
   const sandbox = sinon.createSandbox();
   // const db = dbMock('users');
@@ -126,7 +128,7 @@ tap.test('database wrappers / users', async usersTests => {
       client.getUser
         .withArgs('user id')
         .resolves({ status: 'ACTIVE', profile: { some: 'user' } });
-
+      await createOrUpdateOktaUser('user id',  'someemail@email.com')
       const user = await getUserByID('user id', false, { client, populate });
       test.ok(client.getUser.notCalled)
       // profile is not in scope because we didn't call OKTA
