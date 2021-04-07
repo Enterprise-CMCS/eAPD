@@ -30,7 +30,7 @@ describe('US States endpoint', () => {
       const response = await authedClient.get('/states/fl');
       expect(response.status).toEqual(200);
       const keys = Object.keys(response.data);
-      expect(keys).toEqual(['id', 'name', 'medicaid_office']);
+      expect(keys).toEqual(['id', 'name', 'medicaid_office', 'stateAdmins']);
     });
 
     it('returns 400', async () => {
