@@ -103,14 +103,17 @@ const Activity = ({ activity, activityIndex }) => {
       <Fragment key={uuidv4()}>
         <p className="ds-u-margin-bottom--0">
           <strong>
-            {index + 1}. {contractor.name || 'Private Contractor or Vender Name not specified'}
+            {index + 1}.{' '}
+            {contractor.name ||
+              'Private Contractor or Vender Name not specified'}
           </strong>
           {contractor.hourly.useHourly === true && ' (hourly resource)'}
         </p>
         <p className="ds-u-margin-y--2">
           <strong>Procurement Methodology and Description of Services</strong>
-          <br/>
-          {contractor.description || 'Procurement Methodology and Description of Services not specified'}
+          <br />
+          {contractor.description ||
+            'Procurement Methodology and Description of Services not specified'}
         </p>
         <ul className="ds-c-list--bare">
           <li>
