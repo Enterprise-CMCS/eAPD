@@ -110,14 +110,19 @@ const getUserByID = async (
   } = {}
 ) => {
 
-  const oktaUser = checkOkta ? await client.getUser(id): {status:'ACTIVE'};
 
+  let oktaUser = {id, status:'ACTIVE', profile:{}}
+
+
+  if (checkOkta){
+    oktaUser = await client.getUser(id)
+    if(oktaUser){
+      await createOrUpdateOktaUser(oktaUser.id,  oktaUser.profile.email);
+    }
+  }
   if (oktaUser && oktaUser.status === 'ACTIVE') {
-    // store data in okta_users table
-    createOrUpdateOktaUser(oktaUser.id, oktaUser.profile.email);
 
-    const { profile } = oktaUser;
-    const user = await populate({ id, ...profile, ...additionalValues });
+    const user = await populate({ id, ...oktaUser.profile, ...additionalValues });
     return user && clean ? sanitizeUser(user) : user;
   }
   return null;
