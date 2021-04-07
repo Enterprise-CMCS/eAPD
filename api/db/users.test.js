@@ -1,7 +1,6 @@
 const sinon = require('sinon');
 const tap = require('tap');
-
-// const dbMock = require('./dbMock.test');
+const dbMock = require('./dbMock.test');
 const oktaAuthMock = require('../auth/oktaAuthMock.test');
 
 const {
@@ -11,11 +10,9 @@ const {
   sanitizeUser
 } = require('./users');
 
-const { createOrUpdateOktaUser } = require('./oktaUsers')
-
 tap.test('database wrappers / users', async usersTests => {
   const sandbox = sinon.createSandbox();
-  // const db = dbMock('users');
+  const db = dbMock('okta_users');
   const { oktaClient: client } = oktaAuthMock;
 
   const populate = sinon.stub();
@@ -61,7 +58,7 @@ tap.test('database wrappers / users', async usersTests => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
     populate.reset();
-
+    dbMock.reset();
     oktaAuthMock.reset();
 
     populate.resolves({
@@ -128,8 +125,9 @@ tap.test('database wrappers / users', async usersTests => {
       client.getUser
         .withArgs('user id')
         .resolves({ status: 'ACTIVE', profile: { some: 'user' } });
-      await createOrUpdateOktaUser('user id',  'someemail@email.com')
-      const user = await getUserByID('user id', false, { client, populate });
+      db.where.withArgs({user_id:'user id'}).returnsThis()
+      db.first.resolves({ user_id: 'user id', email:'someAddress@email.com', metadata:'{foo:bar}' });
+      const user = await getUserByID('user id', false, { client, populate, db });
       test.ok(client.getUser.notCalled)
       // profile is not in scope because we didn't call OKTA
       test.ok(populate.calledWith({ id: 'user id'}));

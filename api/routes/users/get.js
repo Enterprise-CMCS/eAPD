@@ -9,7 +9,7 @@ module.exports = (app, { getAllUsers = ga, getUserByID = gu } = {}) => {
   });
 
   app.get('/users/:id', can('view-users'), async (req, res, next) => {
-    await getUserByID(req.params.id)
+    await getUserByID(req.params.id, true, {})
       .then(user => (user ? res.send(user) : res.status(404).end()))
       .catch(next);
   });
