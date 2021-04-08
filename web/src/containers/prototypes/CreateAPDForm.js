@@ -1,8 +1,6 @@
 import PropType from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-
-import Icon, { File, faPlusCircle, faSpinner } from '../../components/Icons';
 
 import {
   Alert,
@@ -11,7 +9,6 @@ import {
   ChoiceList,
   TextField
 } from '@cmsgov/design-system';
-import { Fragment } from 'react';
 
 import { createApd } from '../../actions/app';
 
@@ -83,15 +80,7 @@ const mmisChildren = (
 );
 
 const CreateAPDForm = ({ createApd: create }) => {
-  const Loading = ({ children }) => (
-    <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
-      <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
-      {children}
-    </div>
-  );
-
-  const [isLoading, setIsLoading] = useState(false);
-
+  // Uses local storage to avoid redux for prototype
   const [apdTitle, setApdTitle] = useState(localStorage.getItem('apd-name'));
 
   const handleNameInput = e => {
@@ -102,14 +91,6 @@ const CreateAPDForm = ({ createApd: create }) => {
   const createNew = () => {
     create();
   };
-
-  if (isLoading) {
-    return (
-      <div id="start-main-content">
-        <Loading>Loading your APD</Loading>
-      </div>
-    );
-  }
 
   return (
     <main
@@ -123,11 +104,10 @@ const CreateAPDForm = ({ createApd: create }) => {
       </p>
       <TextField
         className="ds-u-margin--0"
-        label={<h2 className="ds-u-margin-y--1">APD Name</h2>}
+        label={<span className="ds-h2">APD Name</span>}
         onChange={handleNameInput}
         value={apdTitle}
       />
-
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">
           <h2 className="ds-u-margin-top--2 ds-u-margin-bottom--0">
