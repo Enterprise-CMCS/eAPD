@@ -61,6 +61,16 @@ function deployPreviewtoEC2() {
   PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
   print "• Public address: $PUBLIC_DNS"
 
+  print "• Checking availability of Frontend"
+  while [[ "$(curl -s -o /dev/null -w %{http_code} $PUBLIC_DNS)" != "200" ]]; 
+    do sleep 60; 
+  done
+
+  print "• Checking availability of Backend"
+  while [[ "$(curl -s -o /dev/null -w %{http_code} $PUBLIC_DNS/api/heartbeat)" != "204" ]]; 
+    do sleep 60; 
+  done
+
   print "• Cleaning up previous instances"
   while read -r INSTANCE_ID; do
     terminateInstance "$INSTANCE_ID"
