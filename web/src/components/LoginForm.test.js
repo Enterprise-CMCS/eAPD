@@ -1,5 +1,10 @@
 import React from 'react';
-import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
+import {
+  renderWithConnection,
+  screen,
+  fireEvent,
+  axe
+} from 'apd-testing-library';
 
 import LoginForm from './LoginForm';
 
@@ -29,6 +34,12 @@ describe('card form wrapper', () => {
     mockGoBack.mockReset();
   });
 
+  test('should not fail any accessibility tests', async () => {
+    const { container } = setup();
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   test('renders without an id on the container if id prop is null', () => {
     setup({ id: null });
 
@@ -39,13 +50,6 @@ describe('card form wrapper', () => {
     setup({ id: 'my-custom-id' });
 
     expect(document.querySelector('#my-custom-id')).toBeTruthy();
-    expect(screen.getByText('hello world')).toBeTruthy();
-  });
-
-  test('renders with the default id on the container if id prop is not set', () => {
-    setup();
-
-    expect(document.querySelector('#start-main-content')).toBeTruthy();
     expect(screen.getByText('hello world')).toBeTruthy();
   });
 

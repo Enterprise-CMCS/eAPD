@@ -27,6 +27,7 @@ describe('renders correctly', () => {
   test('data row renders', () => {
     const component = shallow(
       <DataRow
+        category="category"
         data={{ federal: 1, state: 2, medicaid: 1000, total: 3 }}
         title="title text"
         groupTitle="group title text"
@@ -39,13 +40,13 @@ describe('renders correctly', () => {
     expect(
       shallow(
         <DataRowGroup
+          year="1448"
           data={{
             combined: { 1448: {} },
             contractors: { 1448: {} },
             expenses: { 1448: {} },
             statePersonnel: { 1448: {} }
           }}
-          title="title text"
           groupTitle="MMIS"
         />
       )

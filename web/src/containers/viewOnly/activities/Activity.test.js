@@ -173,7 +173,9 @@ const activity = {
 
 describe('<Activity /> component', () => {
   test('renders dates correctly', () => {
-    const component = shallow(<Activity activity={activity} />);
+    const component = shallow(
+      <Activity activity={activity} activityIndex={0} />
+    );
     expect(component.text()).toMatch(/Start date: 8\/3\/2020/);
     expect(component.text()).toMatch(/End date: 8\/4\/2021/);
   });

@@ -125,12 +125,22 @@ const otherFunding = {
 
 describe('renders correctly', () => {
   it('renders correctly without otherFunding', () => {
-    const component = mount(<CostAllocationRows {...props} />);
+    const component = mount(
+      <table>
+        <tbody>
+          <CostAllocationRows {...props} />
+        </tbody>
+      </table>
+    );
     expect(component).toMatchSnapshot();
   });
   it('renders correctly with otherFunding', () => {
     const component = mount(
-      <CostAllocationRows {...props} otherFunding={otherFunding} />
+      <table>
+        <tbody>
+          <CostAllocationRows {...props} otherFunding={otherFunding} />
+        </tbody>
+      </table>
     );
     expect(component).toMatchSnapshot();
   });

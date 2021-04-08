@@ -17,7 +17,7 @@ const selectedAffiliation = {
 
 describe('<ManageRoleDialog />', () => {
   const props = {
-    roleTypes: ['State Admin', 'State Contractor'],
+    roleTypes: [{ name: 'State Admin' }, { name: 'State Contractor' }],
     selectedAffiliation,
     hideManageModal: jest.fn(),
     handleAffiliationUpdate: jest.fn()

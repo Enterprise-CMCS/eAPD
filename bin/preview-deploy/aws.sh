@@ -43,7 +43,7 @@ function deployPreviewtoEC2() {
   EXISTING_INSTANCES=$(findExistingInstances)
 
   AMI_ID=$(findAMI)
-  print "• Using most recent EAST-RH AMI: $AMI_ID"
+  print "• Using most recent eAPD Plantinum AMI: $AMI_ID"
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
@@ -116,7 +116,6 @@ function createNewInstance() {
     --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
-    --key-name eapd_bbrooks \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
@@ -125,7 +124,7 @@ function findAMI() {
   aws ec2 describe-images \
     --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
     --filter 'Name=is-public,Values=false' \
-    --filter 'Name=name,Values=EAST-RH 7-*Gold*(HVM)*' \
+    --filter 'Name=name,Values=eAPD Platinum AMI - *' \
     | jq -r -c 'sort_by(.date)|last|.id'
 }
 

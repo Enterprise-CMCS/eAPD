@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
+import { render, axe } from 'apd-testing-library';
 
 import ConsentBanner from './ConsentBanner';
 
@@ -37,16 +38,10 @@ describe('Consent banner component', () => {
     });
   });
 
-  describe('when there is a consent cookie', () => {
-    beforeEach(() => {
-      document.cookie = 'gov.cms.eapd.hasConsented=true';
-    });
-
-    test('calls onAgree prop and does not render anything', () => {
-      const component = shallow(<ConsentBanner onAgree={onAgree} />);
-
-      expect(component).toMatchSnapshot();
-      expect(onAgree.calledOnce).toEqual(true);
+  describe('accesibility', () => {
+    it('should not fail any accessibility tests', async () => {
+      const { container } = render(<ConsentBanner onAgree={jest.fn()} />);
+      expect(await axe(container)).toHaveNoViolations();
     });
   });
 });

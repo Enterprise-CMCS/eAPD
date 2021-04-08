@@ -14,6 +14,7 @@ const categories = [
 
 const DataRow = ({ category, data, title, groupTitle }) => (
   <tr
+    key={category}
     className={
       category === 'combined'
         ? 'budget-table--subtotal budget-table--row__highlight'
@@ -40,6 +41,7 @@ const DataRowGroup = ({ data, year, groupTitle }) => (
   <Fragment>
     {categories.map(({ category, title }) => (
       <DataRow
+        key={groupTitle}
         category={category}
         data={data[category][year]}
         title={title}

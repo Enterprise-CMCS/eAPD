@@ -1,23 +1,16 @@
 import {
-  AUTH_CHECK_SUCCESS,
-  AUTH_CHECK_FAILURE,
   LOGIN_REQUEST,
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
   LOGIN_MFA_ENROLL_START,
   LOGIN_MFA_ENROLL_ADD_PHONE,
   LOGIN_MFA_ENROLL_ACTIVATE,
-  LOGIN_MFA_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN_FAILURE_NOT_IN_GROUP,
-  LOCKED_OUT,
-  RESET_LOCKED_OUT,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
+  STATE_ACCESS_REQUIRED,
   STATE_ACCESS_REQUEST,
-  STATE_ACCESS_SUCCESS,
-  STATE_ACCESS_COMPLETE,
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
@@ -27,23 +20,15 @@ import {
 
 const initialState = {
   authenticated: false,
-  error: '',
+  error: null,
   fetching: false,
-  hasEverLoggedOn: false,
-  otpStage: false,
   initialCheck: false,
-  factorsList: '',
-  mfaEnrollStartStage: false,
-  mfaEnrollAddPhoneStage: false,
-  mfaEnrollActivateStage: false,
+  hasEverLoggedOn: false,
+  factorsList: [],
   mfaPhoneNumber: '',
   mfaEnrollType: '',
-  verifyData: null,
-  requestAccess: false,
-  requestAccessSuccess: false,
+  verifyData: {},
   selectState: false,
-  isLocked: false,
-  isNotInGroup: false,
   latestActivity: new Date().getTime(),
   isLoggingOut: false,
   isSessionEnding: false,
@@ -54,85 +39,53 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-    case AUTH_CHECK_SUCCESS:
-      return {
-        ...state,
-        otpStage: false,
-        authenticated: true,
-        hasEverLoggedOn: true,
-        initialCheck: true,
-        user: action.data
-      };
-    case AUTH_CHECK_FAILURE:
-      return {
-        ...state,
-        initialCheck: true,
-        otpStage: false,
-        authenticated: false
-      };
     case LOGIN_REQUEST:
       return {
         ...state,
         fetching: true,
-        otpStage: false,
         authenticated: false,
-        error: ''
+        error: null
       };
     case LOGIN_OTP_STAGE:
       return {
         ...state,
         fetching: false,
-        otpStage: true,
         authenticated: false,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_REQUEST:
       return {
         ...state,
         fetching: true,
-        otpStage: true,
         authenticated: false,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_ENROLL_START:
       return {
         ...state,
         fetching: false,
-        mfaEnrollStartStage: true,
         mfaPhoneNumber: action.data.phoneNumber,
         factorsList: action.data.factors,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_ENROLL_ADD_PHONE:
       return {
         ...state,
         fetching: false,
-        mfaEnrollStartStage: false,
-        mfaEnrollAddPhoneStage: true,
         mfaEnrollType: action.data,
-        error: ''
+        error: null
       };
     case LOGIN_MFA_ENROLL_ACTIVATE:
       return {
         ...state,
         fetching: false,
-        mfaEnrollStartStage: false,
-        mfaEnrollAddPhoneStage: false,
-        mfaEnrollActivateStage: true,
         mfaEnrollType: action.data.mfaEnrollType,
         verifyData: action.data.activationData,
-        error: ''
-      };
-    case LOGIN_MFA_FAILURE:
-      return {
-        ...state,
-        fetching: false,
-        error: action.error
+        error: null
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        otpStage: false,
         authenticated: true,
         fetching: false,
         hasEverLoggedOn: true,
@@ -141,31 +94,8 @@ const auth = (state = initialState, action) => {
     case LOGIN_FAILURE:
       return {
         ...state,
-        otpStage: false,
         fetching: false,
         error: action.error
-      };
-    case LOGIN_FAILURE_NOT_IN_GROUP:
-      return {
-        ...state,
-        otpStage: false,
-        fetching: false,
-        isNotInGroup: true,
-        error: action.error
-      };
-    case LOCKED_OUT:
-      return {
-        ...state,
-        isLocked: true,
-        fetching: false,
-        error: ''
-      };
-    case RESET_LOCKED_OUT:
-      return {
-        ...state,
-        isLocked: false,
-        fetching: false,
-        error: ''
       };
     case LOGOUT_REQUEST:
       return {
@@ -175,35 +105,26 @@ const auth = (state = initialState, action) => {
     case LOGOUT_SUCCESS:
       return {
         ...initialState,
-        otpStage: false,
-        hasEverLoggedOn: state.hasEverLoggedOn,
-        initialCheck: state.initialCheck,
+        authenticated: false,
+        error: null,
+        hasEverLoggedOn: true,
+        initialCheck: false,
         latestActivity: null,
         expiresAt: null,
         isSessionEnding: false,
         isExtendingSession: false,
-        isLoggingOut: false
+        isLoggingOut: false,
+        user: null
+      };
+    case STATE_ACCESS_REQUIRED:
+      return {
+        ...state,
+        fetching: false
       };
     case STATE_ACCESS_REQUEST:
       return {
         ...state,
-        requestAccess: true,
-        requestAccessSuccess: false,
-        error: ''
-      };
-    case STATE_ACCESS_SUCCESS:
-      return {
-        ...state,
-        requestAccess: false,
-        requestAccessSuccess: true,
-        error: ''
-      };
-    case STATE_ACCESS_COMPLETE:
-      return {
-        ...state,
-        requestAccess: false,
-        requestAccessSuccess: false,
-        error: ''
+        fetching: true
       };
     case LATEST_ACTIVITY:
       return {
