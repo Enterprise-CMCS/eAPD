@@ -95,8 +95,8 @@ const AlternativeConsiderations = ({activityIndex}) => {
           fieldId="activity-statement-tbd-field"
         >
           Forseeable Risks
-          <p className="ds-u-font-weight--normal ds-u-margin-top--1">List the forseeable risks associated with the selected option.
- </p>
+          <p className="ds-u-font-weight--normal ds-u-margin-top--1">Describe any foreseeable risks associated with your proposed solution. Then, include the strategy the State is taking to mitigate the forseeable risk(s).</p>
+          <p className="instruction-box ds-u-font-weight--normal">Example: A potential risk to the proposed solution is outtage and downtime.  The state has decided to accept the risk and set up precautions and communications for when there are outtages.</p>
         </FormLabel>
         <RichText
           name="activity overview"
