@@ -62,7 +62,8 @@ function deployPreviewtoEC2() {
   print "• Public address: $PUBLIC_DNS"
 
   print "• Checking availability of Frontend"
-  if [["test" == "test"]]; then
+  ENVIRONMENT="test"
+  if [[ $ENVIRONMENT == "test" ]]; then
     while [[ "$(curl -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS)" != "200" ]]; 
       do print "• • Frontend currently unavailable" && sleep 60; 
     done
