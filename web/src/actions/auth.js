@@ -247,29 +247,43 @@ export const login = (username, password) => dispatch => {
     });
 };
 
+// Todo: Test this / update tests to support password_expired
+// also test all of the conditions work properly
+// also figure out why the not-in-group view looks weird
+// also ask tif if the locked-out test account is still locked out. I was able to login with it fine.
 export const loginOtp = otp => async dispatch => {
   dispatch(startSecondStage());
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
     return verifyMFA({ transaction, otp })
-      .then(async ({ sessionToken }) => {
-        return dispatch(authenticationSuccess(sessionToken));
-      })
-      .catch(error => {
-        const reason = error ? error.message : 'N/A';
-        if (reason === 'User is not assigned to the client application.') {
-          dispatch(failLogin('NOT_IN_GROUP'));
-          // redirect to not in group page
-          return '/login/not-in-group';
-        }
-        if (reason === 'User Locked') {
-          dispatch(failLogin('LOCKED_OUT'));
-          // redirect to locked-out page
-          return '/login/locked-out';
-        }
-        dispatch(failLogin('MFA_AUTH_FAILED'));
-        return null;
-      });
+    .then((res) => {
+      console.log("res", res);
+      if(res.status === "SUCCESS") {
+        console.log("success heres the response", res);
+        return dispatch(authenticationSuccess(res.sessionToken));
+      }
+      if(res.status === "PASSWORD_EXPIRED") {
+        console.log("password expired heres the response", res);
+        return dispatch(failLogin('PASSWORD_EXPIRED'));
+      }
+      // Need to think about what were actually failing here...
+      dispatch(failLogin('MFA_AUTH_FAILED'));
+      return null;
+    }).catch(error => {
+      const reason = error ? error.message : 'N/A';
+      if (reason === 'User is not assigned to the client application.') {
+        dispatch(failLogin('NOT_IN_GROUP'));
+        // redirect to not in group page
+        return '/login/not-in-group';
+      }
+      if (reason === 'User Locked') {
+        dispatch(failLogin('LOCKED_OUT'));
+        // redirect to locked-out page
+        return '/login/locked-out';
+      }
+      dispatch(failLogin('MFA_AUTH_FAILED'));
+      return null;
+    })
   }
   dispatch(failLogin('MFA_AUTH_FAILED'));
   return null;
