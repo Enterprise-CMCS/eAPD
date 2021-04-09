@@ -62,12 +62,12 @@ function deployPreviewtoEC2() {
   print "• Public address: $PUBLIC_DNS"
 
   print "• Checking availability of Frontend"
-  while [[ "$(curl -k -s -o /dev/null -w %{http_code} $PUBLIC_DNS)" != "200" ]]; 
+  while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS)" != "200" ]]; 
     do print "• • Frontend currently unavailable" && sleep 60;sleep 60; 
   done
 
   print "• Checking availability of Backend"
-  while [[ "$(curl -k -s -o /dev/null -w %{http_code} $PUBLIC_DNS/api/heartbeat)" != "204" ]]; 
+  while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS/api/heartbeat)" != "204" ]]; 
     do print "• • Backend currently unavailable" && sleep 60; 
   done
 
