@@ -92,11 +92,11 @@ function deployAPItoEC2() {
   waitForTargetToBeHealthy $INSTANCE_ID
 
   print "• Checking availability of Frontend"
-  if [["$ENVIRONMENT" == "prod"]]; then
+  if [[ "$ENVIRONMENT" == "production" ]]; then
     while [[ "$(curl -s -o /dev/null -w %{http_code} https://eapd.cms.gov)" != "200" ]]; 
       do print "• • Frontend currently unavailable" && sleep 60; 
     done
-  elif [["$ENVIRONMENT" == "staging"]; then
+  elif [[ "$ENVIRONMENT" == "staging" ]]; then
     while [[ "$(curl -s -o /dev/null -w %{http_code} https://staging-eapd.cms.gov)" != "200" ]]; 
       do print "• • Frontend currently unavailable" && sleep 60; 
   else
@@ -104,11 +104,11 @@ function deployAPItoEC2() {
   fi
 
   print "• Checking availability of Backend"
-  if [["$ENVIRONMENT" == "prod"]]; then
+  if [[ "$ENVIRONMENT" == "production" ]]; then
     while [[ "$(curl -s -o /dev/null -w %{http_code} https://eapd-api.cms.gov/heartbeat)" != "200" ]]; 
       do print "• • Backend currently unavailable" && sleep 60; 
     done
-  elif [["$ENVIRONMENT" == "staging"]; then
+  elif [[ "$ENVIRONMENT" == "staging" ]]; then
     while [[ "$(curl -s -o /dev/null -w %{http_code} https://staging-eapd-api.cms.gov/heartbeat)" != "200" ]]; 
       do print "• • Backend currently unavailable" && sleep 60; 
   else
