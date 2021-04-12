@@ -99,6 +99,7 @@ function deployAPItoEC2() {
   elif [[ $ENVIRONMENT == "staging" ]]; then
     while [[ "$(curl -s -o /dev/null -w %{http_code} https://staging-eapd.cms.gov)" != "200" ]]; 
       do print "• • Frontend currently unavailable" && sleep 60; 
+    done
   else
     print "Environment $ENVIRONMENT is invalid"
   fi
@@ -111,6 +112,7 @@ function deployAPItoEC2() {
   elif [[ $ENVIRONMENT == "staging" ]]; then
     while [[ "$(curl -s -o /dev/null -w %{http_code} https://staging-eapd-api.cms.gov/heartbeat)" != "204" ]]; 
       do print "• • Backend currently unavailable" && sleep 60; 
+    done
   else
     print "Environment $ENVIRONMENT is invalid"
   fi
