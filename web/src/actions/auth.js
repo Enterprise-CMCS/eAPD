@@ -256,17 +256,13 @@ export const loginOtp = otp => async dispatch => {
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
     return verifyMFA({ transaction, otp })
-    .then((res) => {
-      console.log("res", res);
-      if(res.status === "SUCCESS") {
-        console.log("success heres the response", res);
-        return dispatch(authenticationSuccess(res.sessionToken));
-      }
-      if(res.status === "PASSWORD_EXPIRED") {
-        console.log("password expired heres the response", res);
+    .then(({sessionToken, status}) => {
+      if(status === "PASSWORD_EXPIRED") {
         return dispatch(failLogin('PASSWORD_EXPIRED'));
       }
-      // Need to think about what were actually failing here...
+      if(status === "SUCCESS") {
+        return dispatch(authenticationSuccess(sessionToken));
+      }
       dispatch(failLogin('MFA_AUTH_FAILED'));
       return null;
     }).catch(error => {

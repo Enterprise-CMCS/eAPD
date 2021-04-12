@@ -282,7 +282,7 @@ describe('auth actions', () => {
 
     it('creates LOGIN_SUCCESS after successful second stage of multi-factor auth', async () => {
       const verify = jest.fn(() =>
-        Promise.resolve({ sessionToken: 'testSessionToken' })
+        Promise.resolve({ sessionToken: 'testSessionToken', status: 'SUCCESS' })
       );
       const txResumeSpy = jest
         .spyOn(mockAuth, 'retrieveExistingTransaction')
@@ -431,7 +431,7 @@ describe('auth actions', () => {
         .mockImplementation(() =>
           Promise.resolve({
             verify: jest.fn(() =>
-              Promise.resolve({ sessionToken: 'testSessionToken' })
+              Promise.resolve({ sessionToken: 'testSessionToken', status: 'SUCCESS' })
             )
           })
         );
