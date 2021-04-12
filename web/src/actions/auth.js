@@ -247,10 +247,6 @@ export const login = (username, password) => dispatch => {
     });
 };
 
-// Todo: Test this / update tests to support password_expired
-// also test all of the conditions work properly
-// also figure out why the not-in-group view looks weird
-// also ask tif if the locked-out test account is still locked out. I was able to login with it fine.
 export const loginOtp = otp => async dispatch => {
   dispatch(startSecondStage());
   const transaction = await retrieveExistingTransaction();
