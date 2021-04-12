@@ -91,6 +91,30 @@ function deployAPItoEC2() {
   echo "• Waiting for target to be healthy"
   waitForTargetToBeHealthy $INSTANCE_ID
 
+  print "• Checking availability of Frontend"
+  if [[ "$ENVIRONMENT" == "production" ]]; then
+    while [[ "$(curl -s -o /dev/null -w %{http_code} https://eapd.cms.gov)" != "200" ]]; 
+      do print "• • Frontend currently unavailable" && sleep 60; 
+    done
+  elif [[ "$ENVIRONMENT" == "staging" ]]; then
+    while [[ "$(curl -s -o /dev/null -w %{http_code} https://staging-eapd.cms.gov)" != "200" ]]; 
+      do print "• • Frontend currently unavailable" && sleep 60; 
+  else
+    print "Environment $ENVIRONMENT is invalid"
+  fi
+
+  print "• Checking availability of Backend"
+  if [[ "$ENVIRONMENT" == "production" ]]; then
+    while [[ "$(curl -s -o /dev/null -w %{http_code} https://eapd-api.cms.gov/heartbeat)" != "200" ]]; 
+      do print "• • Backend currently unavailable" && sleep 60; 
+    done
+  elif [[ "$ENVIRONMENT" == "staging" ]]; then
+    while [[ "$(curl -s -o /dev/null -w %{http_code} https://staging-eapd-api.cms.gov/heartbeat)" != "200" ]]; 
+      do print "• • Backend currently unavailable" && sleep 60; 
+  else
+    print "Environment $ENVIRONMENT is invalid"
+  fi
+
   # And finally, we terminate previous instances.
   while read -r PREV_INSTANCE_INFO; do
     BITS=(${PREV_INSTANCE_INFO//,/ })
