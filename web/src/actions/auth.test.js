@@ -396,6 +396,28 @@ describe('auth actions', () => {
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
+    
+    it('creates PASSWORD_EXPIRED when verify returns an expired password status', async () => {
+      jest
+        .spyOn(mockAuth, 'retrieveExistingTransaction')
+        .mockImplementation(() =>
+          Promise.resolve({
+            verify: jest.fn(() =>
+              Promise.resolve({ sessionToken: 'testSessionToken', status: 'PASSWORD_EXPIRED' })
+            )
+          })
+        );
+
+      const store = mockStore({});
+      const expectedActions = [
+        { type: actions.LOGIN_MFA_REQUEST },
+        { type: actions.LOGIN_FAILURE, error: 'PASSWORD_EXPIRED' }
+      ];
+
+      await store.dispatch(actions.loginOtp('otp'));
+      await timeout(25);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
 
     it('creates LOGIN_MFA_FAILURE when the token is not returned', async () => {
       const verify = jest.fn(() =>
