@@ -35,8 +35,9 @@ describe('activity overview/summary section (in the activity body)', () => {
   it('handles changing the activity overview/summary', () => {
     const component = shallow(<ActivityOverview {...props} />);
     component
-      .find('TextArea')
-      .simulate('change', { target: { value: 'new overview' } });
+      .find('Connect(RichText)')
+      .at(0) // makes an assumption about what order these components appear in
+      .prop('onSync')('new overview');
 
     expect(props.setOverview).toHaveBeenCalledWith(37, 'new overview');
   });
@@ -45,7 +46,7 @@ describe('activity overview/summary section (in the activity body)', () => {
     const component = shallow(<ActivityOverview {...props} />);
     component
       .find('Connect(RichText)')
-      .at(0) // makes an assumption about what order these components appear in
+      .at(1) // makes an assumption about what order these components appear in
       .prop('onSync')('new description');
 
     expect(props.setDescription).toHaveBeenCalledWith(37, 'new description');
@@ -55,7 +56,7 @@ describe('activity overview/summary section (in the activity body)', () => {
     const component = shallow(<ActivityOverview {...props} />);
     component
       .find('Connect(RichText)')
-      .at(1) // makes an assumption about what order these components appear in
+      .at(2) // makes an assumption about what order these components appear in
       .prop('onSync')('new alternatives');
 
     expect(props.setAlternatives).toHaveBeenCalledWith(37, 'new alternatives');
