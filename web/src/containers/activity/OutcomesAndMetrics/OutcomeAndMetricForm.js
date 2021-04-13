@@ -36,7 +36,7 @@ const OutcomeAndMetricForm = ({
         name="outcome"
         className="data-entry-box"
         label="Outcome"
-        hint="Describe a discrete and measurable improvement for this system."
+        hint="Describe a distinct and measurable improvement for this system."
         value={outcome}
         multiline
         rows="4"
