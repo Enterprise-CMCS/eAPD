@@ -10,10 +10,10 @@ module.exports = (app, { getFile = get } = {}) => {
   app.get('/docs/account-registration', async (req, res, next) => {
     getFile(ACCOUNT_REGISTRATION_DOC)
       .then(file => {
-        res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Content-Type', 'application/pdf');
         res.setHeader(
           'Content-Disposition',
-          `attachment; filename=${ACCOUNT_REGISTRATION_DOC}`
+          `inline; filename=${ACCOUNT_REGISTRATION_DOC}`
         );
         res.send(file).end();
       })
@@ -25,10 +25,10 @@ module.exports = (app, { getFile = get } = {}) => {
   app.get('/docs/system-access', async (req, res, next) => {
     getFile(SYSTEM_ACCESS_DOC)
       .then(file => {
-        res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Content-Type', 'application/pdf');
         res.setHeader(
           'Content-Disposition',
-          `attachment; filename=${SYSTEM_ACCESS_DOC}`
+          `inline; filename=${SYSTEM_ACCESS_DOC}`
         );
         res.send(file).end();
       })
