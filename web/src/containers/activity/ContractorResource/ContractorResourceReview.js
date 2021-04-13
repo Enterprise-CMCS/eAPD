@@ -25,9 +25,11 @@ const ContractorResourceReview = ({
       onEditClick={expand}
       ariaLabel={`${index + 1}. ${name || 'Contractor name not specified'}`}
     >
-      <p className="ds-u-margin-top--0">
-        {description || 'Description of services not specified'}
-      </p>
+      {/* eslint-disable react/no-danger */}
+      <p
+        dangerouslySetInnerHTML={{ __html: description || 'Description of services not specified' }}
+        className="ds-u-margin-top--0"
+      />
       <ul className="ds-c-list--bare">
         <li>
           <strong>Full Contract Term:</strong> {dateRangeForHumans}
