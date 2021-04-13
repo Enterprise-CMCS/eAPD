@@ -1,4 +1,4 @@
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 
 import { plain as ContractorForm } from './ContractorResourceForm';
@@ -80,7 +80,7 @@ describe('the ContractorResourceForm component', () => {
     const component = shallow(<ContractorForm {...props} />);
     component
       .findWhere(c => c.prop('name') === 'contractor-description')
-      .simulate('change', { target: { value: 'new value' } });
+      .simulate('sync', 'new value');
 
     expect(props.setDescription).toHaveBeenCalledWith(43, 1, 'new value');
   });
@@ -194,23 +194,24 @@ describe('the ContractorResourceForm component', () => {
   test('handles changing from non-hourly to hourly and back, replacing cost totals', () => {
     // start with non-hourly and fill in the total cost
     props.item.hourly.useHourly = false;
-    const component = mount(<ContractorForm {...props} />);
+    const component = shallow(<ContractorForm {...props} />);
 
     component
       .findWhere(
         c =>
-          c.name() === 'input' && c.prop('name') === 'contractor-cost-ffy-1066'
+          c.name() === 'DollarField' &&
+          c.prop('name') === 'contractor-cost-ffy-1066'
       )
       .simulate('change', { target: { value: '53792' } });
 
     // now we have the non-hourly cost
-    expect(props.setCostForYear).toHaveBeenCalledWith(43, 1, '1066', 53792);
+    expect(props.setCostForYear).toHaveBeenCalledWith(43, 1, '1066', '53792');
 
     // switch to hourly and we have the hourly cost
     component
       .findWhere(
         c =>
-          c.name() === 'input' &&
+          c.name() === 'ChoiceComponent' &&
           c.prop('name') === 'apd-activity-contractor-hourly-key 1-yes'
       )
       .simulate('change');
@@ -221,11 +222,11 @@ describe('the ContractorResourceForm component', () => {
     component
       .findWhere(
         c =>
-          c.name() === 'input' &&
+          c.name() === 'ChoiceComponent' &&
           c.prop('name') === 'apd-activity-contractor-hourly-key 1-no'
       )
       .simulate('change');
     expect(props.setIsHourly).toHaveBeenCalledWith(43, 1, false);
-    expect(props.setCostForYear).toHaveBeenCalledWith(43, 1, '1066', 53792);
+    expect(props.setCostForYear).toHaveBeenCalledWith(43, 1, '1066', '53792');
   });
 });

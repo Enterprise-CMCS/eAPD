@@ -58,7 +58,9 @@ class ExecutiveSummary extends PureComponent {
             headingLevel="3"
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >
-            {activity.summary && <p>{activity.summary}</p>}
+            {activity.summary && (
+              <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
+            )}
 
             <ul className="ds-c-list--bare">
               <li>
