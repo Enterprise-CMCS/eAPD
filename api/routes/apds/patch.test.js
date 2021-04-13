@@ -74,7 +74,7 @@ tap.test('apds PATCH endpoint', async tests => {
     getAPDByID.throws(new Error('fake error'));
     await handler({ body: [], params: { id: 'apd id' } }, res);
 
-    test.ok(res.status.calledWith(500), 'sends an HTTP 500 status');
+    test.ok(res.status.calledWith(400), 'sends an HTTP 500 status');
     test.ok(res.end.calledAfter(res.status), 'response is terminated');
   });
 
