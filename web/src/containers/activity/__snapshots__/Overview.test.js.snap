@@ -16,16 +16,23 @@ exports[`activity overview/summary section (in the activity body) renders correc
       }
     }
   />
-  <TextArea
+  <div
     className="data-entry-box"
-    hint="Details for the activity go in the following sections."
-    label="Provide a short overview of the activity."
-    max={280}
-    name="activity overview"
-    onChange={[Function]}
-    rows={6}
-    value=""
-  />
+  >
+    <FormLabel
+      className="ds-c-label--full-width"
+      component="label"
+      fieldId="activity-short-overview-field"
+      hint="Details for the activity go in the following sections."
+    >
+      Provide a short overview of the activity.
+    </FormLabel>
+    <Connect(RichText)
+      editorClassName="rte-textarea-l"
+      id="activity-short-overview-field"
+      onSync={[Function]}
+    />
+  </div>
   <Connect(Schedule)
     activityIndex={37}
   />

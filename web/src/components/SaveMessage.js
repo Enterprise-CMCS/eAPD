@@ -33,7 +33,7 @@ const SaveMessage = ({ lastSaved, error }) => {
   const duration = moment.duration(difference);
   let result = 'Last saved ';
 
-  if(!error && duration.asMinutes() < 1) {
+  if (!error && duration.asMinutes() < 1) {
     return 'Saved';
   }
 
