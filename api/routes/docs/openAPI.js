@@ -7,7 +7,7 @@ const getAccountRegistrationDoc = {
         200: {
           description: 'The file',
           content: {
-            'application/pdf': { schema: { type: 'string', format: 'pdf' } }
+            'application/pdf': { schema: { type: 'string', format: 'binary' } }
           }
         }
       }
@@ -24,7 +24,7 @@ const getSystemAccessDoc = {
         200: {
           description: 'The file',
           content: {
-            'application/pdf': { schema: { type: 'string', format: 'pdf' } }
+            'application/pdf': { schema: { type: 'string', format: 'binary' } }
           }
         }
       }
