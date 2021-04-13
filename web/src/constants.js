@@ -51,8 +51,7 @@ export const MFA_FACTOR_TYPES = {
   EMAIL: 'email-OKTA',
   SMS: 'sms-OKTA',
   PUSH: 'push-OKTA',
-  OKTA: 'token:software:totp-OKTA',
-  GOOGLE: 'token:software:totp-GOOGLE'
+  OKTA: 'token:software:totp-OKTA'
 };
 
 export const MFA_FACTORS = {
@@ -85,19 +84,11 @@ export const MFA_FACTORS = {
     findType: f => f.provider === 'OKTA' && f.factorType === 'push'
   },
   [MFA_FACTOR_TYPES.OKTA]: {
-    displayName: 'Okta Authenticator',
+    displayName: 'Software Token',
     factorType: 'token:software:totp',
     provider: 'OKTA',
     active: true,
     findType: f =>
       f.provider === 'OKTA' && f.factorType === 'token:software:totp'
-  },
-  [MFA_FACTOR_TYPES.GOOGLE]: {
-    displayName: 'Google Authenticator',
-    factorType: 'token:software:totp',
-    provider: 'GOOGLE',
-    active: true,
-    findType: f =>
-      f.provider === 'GOOGLE' && f.factorType === 'token:software:totp'
   }
 };

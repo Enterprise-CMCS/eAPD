@@ -61,6 +61,25 @@ function deployPreviewtoEC2() {
   PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
   print "• Public address: $PUBLIC_DNS"
 
+  print "• Checking availability of Frontend"
+  ENVIRONMENT="test"
+  if [[ $ENVIRONMENT == "test" ]]; then
+    while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS)" != "200" ]]; 
+      do print "• • Frontend currently unavailable" && sleep 60; 
+    done
+  else
+    print "Environment $ENVIRONMENT is invalid"
+  fi
+
+  print "• Checking availability of Backend"
+  if [[ $ENVIRONMENT == "test" ]]; then
+    while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS/api/heartbeat)" != "204" ]]; 
+      do print "• • Backend currently unavailable" && sleep 60; 
+    done
+  else
+    print "Environment $ENVIRONMENT is invalid"
+  fi
+
   print "• Cleaning up previous instances"
   while read -r INSTANCE_ID; do
     terminateInstance "$INSTANCE_ID"

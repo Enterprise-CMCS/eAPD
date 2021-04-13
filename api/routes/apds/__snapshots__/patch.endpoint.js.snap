@@ -3628,13 +3628,7 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
 
-exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a patch that creates an invalid APD 1`] = `
-Array [
-  Object {
-    "path": "/stateProfile/medicaidDirector/name",
-  },
-]
-`;
+exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a patch that creates an invalid APD 1`] = `""`;
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a valid patch that also attempts to update a readonly property 1`] = `
 Object {

@@ -18,7 +18,6 @@ rpm -U ./amazon-cloudwatch-agent.rpm
 
 # Configure CloudWatch Agent
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
-
 {
         "agent": {
                 "metrics_collection_interval": 60,
@@ -84,7 +83,6 @@ cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
                 }
         }
 }
-
 CWAGENTCONFIG
 
 # Nginx is preview only
@@ -139,7 +137,6 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
     }
   }
 }
-
 CWVARLOGCONFIG
 
 cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
@@ -165,11 +162,9 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
     }
   }
 }
-
 CWVAROPTCONFIG
 
 cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
-
 {
   "logs": {
     "logs_collected": {
@@ -220,7 +215,6 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
     }
   }
 }
-
 CWAPPLOGCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
@@ -234,11 +228,9 @@ CWAPPLOGCONFIG
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
 su ec2-user <<E_USER
-
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
-
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
@@ -247,7 +239,6 @@ touch /app/api/logs/Database-migration-out.log
 touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
-
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
@@ -263,28 +254,23 @@ nvm alias default 14
 # This is what'll manage running the API Node app. It'll keep it alive and make
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
-
 # Get the built API code
 cd /app
 curl -o backend.zip -L __BUILDURL__
 unzip backend.zip
 rm backend.zip
 cd api
-
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
 npm rebuild knex
-
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace the
 # "ECOSYSTEM" placeholder below with a base64-encoded JSON string of an
 # ecosystem file.
 echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
-
 # Start it up
 pm2 start ecosystem.config.js
-
 E_USER
 
 # Setup pm2 to start itself at machine launch, and save its current

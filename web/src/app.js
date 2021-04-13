@@ -14,7 +14,8 @@ import reducer from './reducers';
 import Root from './components/Root';
 import saveMiddleware from './saveMiddleware';
 import { browserIsRed } from './util/browser';
-import { html } from './components/UpgradeBrowser';
+import { html as browserHtml } from './components/UpgradeBrowser';
+import cookieHtml from './components/EnableCookies';
 
 import './styles/index.scss';
 
@@ -23,7 +24,12 @@ if (browserIsRed) {
   // warning box since we can't be certain that React will work.
   document.getElementById('app').innerHTML = `
   <div style="margin: 30px;">
-    <div class="ds-col-4 ds-c-alert ds-c-alert--error">${html}</div>
+    <div class="ds-col-4 ds-c-alert ds-c-alert--error">${browserHtml}</div>
+  </div>`;
+} else if (!navigator.cookieEnabled) {
+  document.getElementById('app').innerHTML = `
+  <div style="margin: 30px;">
+    <div class="ds-col-4 ds-c-alert ds-c-alert--error">${cookieHtml}</div>
   </div>`;
 } else {
   // Set locale based on browser language
