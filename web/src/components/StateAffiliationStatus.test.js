@@ -3,15 +3,11 @@ import { render, screen } from '@testing-library/react';
 
 import {
   plain as StateAffiliationStatus,
-  ApprovalStatus,
+  ApprovalStatus
 } from './StateAffiliationStatus';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
-const {
-  DENIED,
-  REQUESTED,
-  REVOKED
-} = STATE_AFFILIATION_STATUSES;
+const { DENIED, REQUESTED, REVOKED } = STATE_AFFILIATION_STATUSES;
 
 const initialProps = {
   state: {
@@ -23,9 +19,8 @@ const initialProps = {
 // mock useEffect so we don't make an API call
 jest.spyOn(React, 'useEffect').mockImplementation(() => {});
 
-const setup = (props = {}) => (
-  render(<StateAffiliationStatus {...initialProps} {...props} />)
-);
+const setup = (props = {}) =>
+  render(<StateAffiliationStatus {...initialProps} {...props} />);
 
 describe('<StateAffiliationStatus />', () => {
   it('displays the eAPD Logo', () => {
@@ -61,30 +56,35 @@ describe('<StateAffiliationStatus />', () => {
 describe('<ApprovalStatus />', () => {
   const options = {
     status: 'This is a status',
-    src: "../static/icons/icon.svg",
-    alt: "This is ALT text",
+    src: '../static/icons/icon.svg',
+    alt: 'This is ALT text',
     width: 57
-  }
+  };
 
   it('displays a mailto link', () => {
-    render(<ApprovalStatus mailTo='em@il.com,admin@mo.gov' options={options} />)
+    render(
+      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+    );
     const aTag = screen.getByText('State Administrator', { selector: 'a' });
     expect(aTag).toBeInTheDocument();
     expect(aTag.href).toBe('mailto:em@il.com,admin@mo.gov');
   });
 
   it('displays the status text', () => {
-    render(<ApprovalStatus mailTo='em@il.com,admin@mo.gov' options={options} />)
+    render(
+      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+    );
     const statusText = screen.getByText(options.status, { selector: 'h3' });
     expect(statusText).toBeInTheDocument();
   });
 
   it('displays the img correctly', () => {
-    render(<ApprovalStatus mailTo='em@il.com,admin@mo.gov' options={options} />)
+    render(
+      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+    );
     const img = screen.getByAltText(options.alt);
     expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute('src', options.src)
-    expect(img).toHaveAttribute('width', options.width.toString())
+    expect(img).toHaveAttribute('src', options.src);
+    expect(img).toHaveAttribute('width', options.width.toString());
   });
 });
-

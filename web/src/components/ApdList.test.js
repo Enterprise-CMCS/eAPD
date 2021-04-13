@@ -62,20 +62,24 @@ describe('<ApdList />', () => {
 
     it('should display the introduction and instructions', () => {
       const { getByText } = renderUtils;
-      expect(getByText(/The eAPD is designed to help you create and manage your HITECH Advanced Planning Documents/i)).toBeTruthy();
+      expect(
+        getByText(
+          /The eAPD is designed to help you create and manage your HITECH Advanced Planning Documents/i
+        )
+      ).toBeTruthy();
     });
 
     it('should handle clicking the create APD button', async () => {
       mockAxios.post.mockImplementation(() => Promise.resolve({ data: apd }));
-      const { queryByRole } = renderUtils;
-      expect(queryByRole('button', { name: /Create new/i })).toBeTruthy();
-      // fireEvent.click(queryByRole('button', { name: /Create new/i }));
+      const { getByRole } = renderUtils;
+      expect(getByRole('button', { name: /Create new/i })).toBeTruthy();
+      // fireEvent.click(getByRole('button', { name: /Create new/i }));
       // expect(props.createApd).toHaveBeenCalled();
     });
 
     it('should display the empty APD message', () => {
-      const { queryByText } = renderUtils;
-      expect(queryByText(/You have not created any APDs./i)).toBeTruthy();
+      const { getByText } = renderUtils;
+      expect(getByText(/You have not created any APDs./i)).toBeTruthy();
     });
 
     it("shouldn't display the pending message", () => {
