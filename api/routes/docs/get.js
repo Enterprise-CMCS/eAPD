@@ -1,19 +1,41 @@
 const logger = require('../../logger')('document routes');
 const { getFile: get } = require('../../files');
 
-const HELP_DOC = 'EUAAccountRegistration.pdf';
+const ACCOUNT_REGISTRATION_DOC = 'EUAAccountRegistration.pdf';
+const SYSTEM_ACCESS_DOC = 'eAPDSystemAccess.pdf';
 
 module.exports = (app, { getFile = get } = {}) => {
   logger.silly('setting up GET /docs/account-registration route');
 
   app.get('/docs/account-registration', async (req, res, next) => {
     try {
-      const file = await getFile(HELP_DOC);
+      const file = await getFile(ACCOUNT_REGISTRATION_DOC);
+
       res.setHeader('Content-Type', 'application/octet-stream');
-      res.setHeader('Content-Disposition', `attachment; filename=${HELP_DOC}`);
-      return res.send(file).end();
+      res.setHeader(
+        'Content-Disposition',
+        `attachment; filename=${ACCOUNT_REGISTRATION_DOC}`
+      );
+      res.send(file).end();
     } catch (e) {
-      return next(e);
+      next(e);
+    }
+  });
+
+  logger.silly('setting up GET /docs/system-access route');
+
+  app.get('/docs/system-access', async (req, res, next) => {
+    try {
+      const file = await getFile(SYSTEM_ACCESS_DOC);
+
+      res.setHeader('Content-Type', 'application/octet-stream');
+      res.setHeader(
+        'Content-Disposition',
+        `attachment; filename=${SYSTEM_ACCESS_DOC}`
+      );
+      res.send(file).end();
+    } catch (e) {
+      next(e);
     }
   });
 };

@@ -70,7 +70,7 @@ be used for testing, so they cannot require MFA):
 ```
 
 Make sure you record the passwords that you set them to. You can use fake emails or if you
-have a gmail account, you can add `+reviwer` to your email username (e.g. me+reviewer@gmail.com) to have them all email to your email.
+have a gmail account, you can add `+reviewer` to your email username (e.g. me+reviewer@gmail.com) to have them all email to your email.
 
 ### Making it run
 

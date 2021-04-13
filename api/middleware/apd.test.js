@@ -9,11 +9,10 @@ let res;
 let next;
 
 tap.test('APD-related middleware', async middlewareTests => {
-  middlewareTests.beforeEach(done => {
+  middlewareTests.beforeEach(() => {
     err = { error: 'err0r' };
     res = mockResponse();
     next = sinon.stub();
-    done();
   });
 
   middlewareTests.test('load apd', async loadApdTests => {

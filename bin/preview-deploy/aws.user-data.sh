@@ -13,9 +13,7 @@ export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
-
 cd ~
-
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
@@ -24,7 +22,6 @@ touch /app/api/logs/Database-migration-out.log
 touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
-
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
@@ -40,27 +37,21 @@ nvm alias default 14
 # This is what'll manage running the API Node app. It'll keep it alive and make
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
-
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
-
 # Build the web app and move it into place
 cd eAPD/web
 npm ci
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
 mv dist/* /app/web
 cd ~
-
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
-
 npm ci --only=production
-
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
 NODE_ENV=development DEV_DB_HOST=localhost npm run seed
-
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace
@@ -88,11 +79,9 @@ echo "module.exports = {
       OKTA_SERVER_ID: '__OKTA_SERVER_ID__',
       OKTA_CLIENT_ID: '__OKTA_CLIENT_ID__',
       OKTA_API_KEY: '__OKTA_API_KEY__'
-
     },
   }]
 };" > ecosystem.config.js
-
 # Start it up
 pm2 start ecosystem.config.js
 E_USER

@@ -130,7 +130,11 @@ describe('the CostAllocateFFP component', () => {
     },
     setFundingSplit: jest.fn(),
     setOtherFunding: jest.fn(),
-    stateName: 'test state'
+    stateName: 'test state',
+    otherFunding: {
+      2020: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 },
+      2021: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 }
+    }
   };
 
   beforeEach(() => {

@@ -24,6 +24,14 @@ describe('<SaveMessage />', () => {
     });
   });
 
+  describe('when attempting to save with an error, show the last saved time instead of Saved"', () => {
+    const date = new Date( Date.now() );
+    act(() => {
+      subject = create(<SaveMessage lastSaved={date} error />);
+    });
+    expect(subject.toJSON()).toMatch(/Last saved/);
+  });
+
   describe('when observed saved time changes to 1 minute ago', () => {
     const now = new Date(2020, 0, 1, 12, 0);
     const oneMinuteFromNow = new Date(2020, 0, 1, 12, 1);

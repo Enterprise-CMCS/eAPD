@@ -91,7 +91,6 @@ const ManageRoleDialog = ({
         size="medium"
         label="Role"
         name="selectedPermission"
-        defaultValue={roleSelectedName}
         value={roleSelectedName}
         onChange={handleDropdownUpdate}
       />

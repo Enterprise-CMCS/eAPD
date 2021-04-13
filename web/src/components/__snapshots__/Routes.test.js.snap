@@ -72,6 +72,20 @@ exports[`Routes component renders correctly 1`] = `
     key="/edit-account"
     path="/edit-account"
   />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(LoginApplication)",
+        "type": [Function],
+      }
+    }
+    isCard={true}
+    key="/login"
+    path="/login"
+  />
   <Connect(PrivateRoute)
     component={
       Object {
@@ -86,20 +100,6 @@ exports[`Routes component renders correctly 1`] = `
     path="/state-admin"
   />
   <Route
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(Login)",
-        "type": [Function],
-      }
-    }
-    isCard={true}
-    key="/login"
-    path="/login"
-  />
-  <Connect(PrivateRoute)
     component={
       Object {
         "$$typeof": Symbol(react.memo),
