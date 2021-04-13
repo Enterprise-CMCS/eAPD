@@ -18,6 +18,7 @@ Anticipated release: March 30, 2021
 #### ⚙️ Behind the scenes
 
 - Refactor login code ([#2632])
+- Update description for Outcomes and Metrics ([#2950])
 - Add new seed users for different login issues ([#2989])
 
 
@@ -33,4 +34,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2830]: https://github.com/CMSgov/eAPD/issues/2830
 [#2864]: https://github.com/CMSgov/eAPD/issues/2864
 [#2938]: https://github.com/CMSgov/eAPD/issues/2938
+[#2950]: https://github.com/CMSgov/eAPD/issues/2950
 [#2989]: https://github.com/CMSgov/eAPD/issues/2989

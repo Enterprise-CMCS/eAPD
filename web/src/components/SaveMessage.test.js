@@ -25,7 +25,7 @@ describe('<SaveMessage />', () => {
   });
 
   describe('when attempting to save with an error, show the last saved time instead of Saved"', () => {
-    const date = new Date( Date.now() );
+    const date = new Date(Date.now());
     act(() => {
       subject = create(<SaveMessage lastSaved={date} error />);
     });
