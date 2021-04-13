@@ -8,9 +8,7 @@
   "paths": {
     "/states/{stateId}/affiliations": {
       "get": {
-        "tags": [
-          "Affiliations"
-        ],
+        "tags": ["Affiliations"],
         "description": "Get a list of all user affiliations for a US State",
         "parameters": [
           {
@@ -21,8 +19,35 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "description": "The filter status of the affiliations for this US State",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["pending", "active", "inactive"]
+            }
           }
         ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter_status": {
+                    "type": "string",
+                    "description": "The filter status of the affiliations for this US State",
+                    "enum": ["pending", "active", "inactive"]
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "List of all user affiliations for a US State",
@@ -52,12 +77,7 @@
                       "status": {
                         "type": "string",
                         "description": "The status of the user role for this US State",
-                        "enum": [
-                          "requested",
-                          "approved",
-                          "denied",
-                          "revoked"
-                        ]
+                        "enum": ["requested", "approved", "denied", "revoked"]
                       },
                       "created_at": {
                         "type": "string",
@@ -93,9 +113,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Affiliations"
-        ],
+        "tags": ["Affiliations"],
         "description": "Create a request for the currently logged in user to be affiliated with a US State",
         "parameters": [
           {
@@ -136,9 +154,7 @@
     },
     "/states/{stateId}/affiliations/{id}": {
       "get": {
-        "tags": [
-          "Affiliations"
-        ],
+        "tags": ["Affiliations"],
         "description": "Get a single user affiliation with a US State",
         "parameters": [
           {
@@ -187,12 +203,7 @@
                     "status": {
                       "type": "string",
                       "description": "The status of the user role for this US State",
-                      "enum": [
-                        "requested",
-                        "approved",
-                        "denied",
-                        "revoked"
-                      ]
+                      "enum": ["requested", "approved", "denied", "revoked"]
                     },
                     "created_at": {
                       "type": "string",
@@ -230,9 +241,7 @@
         ]
       },
       "patch": {
-        "tags": [
-          "Affiliations"
-        ],
+        "tags": ["Affiliations"],
         "description": "Update a user affiliation with a US State",
         "parameters": [
           {
@@ -268,12 +277,7 @@
                   "status": {
                     "type": "string",
                     "description": "The status of the user role for this US State",
-                    "enum": [
-                      "requested",
-                      "approved",
-                      "denied",
-                      "revoked"
-                    ]
+                    "enum": ["requested", "approved", "denied", "revoked"]
                   }
                 }
               }
@@ -303,9 +307,7 @@
     },
     "/apds": {
       "get": {
-        "tags": [
-          "APDs"
-        ],
+        "tags": ["APDs"],
         "summary": "Get all of the APDs available to the user",
         "description": "Get a list of all apds associated with requesting user",
         "responses": {
@@ -362,9 +364,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "APDs"
-        ],
+        "tags": ["APDs"],
         "summary": "Create a new draft APD associated with the user's state",
         "description": "Create a new draft APD for the current user's state",
         "responses": {
@@ -394,9 +394,7 @@
     },
     "/apds/{id}": {
       "get": {
-        "tags": [
-          "APDs"
-        ],
+        "tags": ["APDs"],
         "summary": "Get a single, complete APD",
         "description": "Where the /apds GET method only returns a small portion of all APDs, this method returns all of one",
         "parameters": [
@@ -438,9 +436,7 @@
         ]
       },
       "patch": {
-        "tags": [
-          "APDs"
-        ],
+        "tags": ["APDs"],
         "summary": "Update a specific APD",
         "description": "Update an APD in the system using a set of JSON Patch objects. If state profile information is included, the profile information is also updated for the APD's state.",
         "parameters": [
@@ -467,11 +463,7 @@
                   "properties": {
                     "op": {
                       "type": "string",
-                      "enum": [
-                        "add",
-                        "remove",
-                        "replace"
-                      ],
+                      "enum": ["add", "remove", "replace"],
                       "description": "The JSON Patch operation. This API only supports add, remove, and replace."
                     },
                     "path": {
@@ -540,9 +532,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "APDs"
-        ],
+        "tags": ["APDs"],
         "summary": "Archive an APD",
         "description": "Updates an APD's status to \"archive\" and prevents it from being edited",
         "parameters": [
@@ -579,10 +569,7 @@
     },
     "/apds/{id}/files": {
       "post": {
-        "tags": [
-          "APDs",
-          "files"
-        ],
+        "tags": ["APDs", "files"],
         "summary": "Upload a file associated with an APD",
         "description": "Uploads a file, associates it with a given APD, and stores any provided metadata.",
         "parameters": [
@@ -641,63 +628,9 @@
           },
           "403": {
             "description": "Does not have permission to this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/apds/{id}/files/{fileID}": {
-      "get": {
-        "tags": [
-          "APDs",
-          "files"
-        ],
-        "summary": "Get a file associated with an APD",
-        "description": "Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the apd the file is associated with",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
           },
-          {
-            "name": "fileID",
-            "in": "path",
-            "description": "The ID of the file to get",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The file",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The file does not belong to the APD or does not exist"
-          },
-          "401": {
-            "description": "Not logged in"
-          },
-          "403": {
-            "description": "Does not have permission to this activity"
+          "500": {
+            "description": "The file is not a valid format"
           }
         },
         "security": [
@@ -709,10 +642,7 @@
     },
     "/apds/{id}/events": {
       "post": {
-        "tags": [
-          "APDs",
-          "events"
-        ],
+        "tags": ["APDs", "events"],
         "summary": "Log an event performed on an APD",
         "description": "Posts an event, associates it with a given APD, and stores any provided metadata.",
         "parameters": [
@@ -779,11 +709,52 @@
         ]
       }
     },
+    "/apds/{id}/files/{fileID}": {
+      "get": {
+        "tags": ["APDs", "files"],
+        "summary": "Get a file associated with an APD",
+        "description": "Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the apd the file is associated with",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "fileID",
+            "in": "path",
+            "description": "The ID of the file to get",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The file does not belong to the APD or does not exist"
+          }
+        }
+      }
+    },
     "/auth/activities": {
       "get": {
-        "tags": [
-          "Authentication and authorization"
-        ],
+        "tags": ["Authentication and authorization"],
         "summary": "Gets the list of all activities",
         "description": "Get a list of all activities in the system",
         "responses": {
@@ -826,9 +797,7 @@
     },
     "/auth/roles": {
       "get": {
-        "tags": [
-          "Authentication and authorization"
-        ],
+        "tags": ["Authentication and authorization"],
         "summary": "Gets the list of all roles",
         "description": "Get a list of all roles in the system",
         "responses": {
@@ -876,11 +845,28 @@
         ]
       }
     },
+    "/docs/account-registration": {
+      "get": {
+        "tags": ["Docs"],
+        "description": "Get the account registration documentation",
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/me": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Gets the current user's information",
         "description": "Get information about the current user",
         "responses": {
@@ -953,48 +939,41 @@
             "bearerAuth": []
           }
         ]
-      },
-      "patch": {
-        "tags": [
-          "Users"
-        ],
-        "description": "Update user",
-        "parameters": [
-          {
-            "name": "stateId",
-            "in": "query",
-            "description": "2-letter US State or Territory abbreviation, lowercase",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "stateId": {
-                    "type": "string",
-                    "description": "2-letter US State or Territory abbreviation, lowercase"
+      }
+    },
+    "/roles": {
+      "get": {
+        "tags": ["Roles"],
+        "description": "Get a list of all of the active roles",
+        "responses": {
+          "200": {
+            "description": "List of Active Roles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "Integer ID for a role"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Full name of the Role"
+                      }
+                    }
                   }
                 }
               }
             }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Record was updated"
-          },
-          "400": {
-            "description": "stateId is invalid"
           },
           "401": {
             "description": "Not logged in"
+          },
+          "403": {
+            "description": "Does not have permission to this activity"
           }
         },
         "security": [
@@ -1006,9 +985,7 @@
     },
     "/states": {
       "get": {
-        "tags": [
-          "States"
-        ],
+        "tags": ["States"],
         "description": "Get a list of all US States and Territories",
         "responses": {
           "200": {
@@ -1039,9 +1016,7 @@
     },
     "/states/{id}": {
       "get": {
-        "tags": [
-          "States"
-        ],
+        "tags": ["States"],
         "description": "Get a single US State or Territiory",
         "parameters": [
           {
@@ -1095,9 +1070,7 @@
     },
     "/users": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Gets a list of all users",
         "description": "Get a list of all users in the system",
         "responses": {
@@ -1161,9 +1134,7 @@
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Gets the information for a specific user",
         "description": "Get a specific user in the system",
         "parameters": [
@@ -1251,9 +1222,7 @@
     },
     "/open-api": {
       "get": {
-        "tags": [
-          "Metadata"
-        ],
+        "tags": ["Metadata"],
         "summary": "Gets this document",
         "description": "Returns this document",
         "responses": {

@@ -65,6 +65,30 @@ class Header extends Component {
 
     const withinApd = pathname.startsWith('/apd');
 
+    const title = () => {
+      if (!showSiteTitle && !authenticated) {
+        return <span />;
+      }
+      if (showSiteTitle && !authenticated) {
+        return <div>{t('titleBasic')}</div>;
+      }
+      if (showSiteTitle && authenticated) {
+        return <DashboardButton>{t('titleBasic')}</DashboardButton>;
+      }
+      return (
+        <DashboardButton>
+          <Icon icon={faChevronLeft} size="sm" />
+          {isAdmin
+            ? 'Admin Dashboard'
+            : `${
+                currentUser.state && currentUser.state.id
+                  ? `${currentUser.state.id.toUpperCase()} `
+                  : ''
+              }APD Home`}
+        </DashboardButton>
+      );
+    };
+
     return (
       <header ref={this.node}>
         <a href="#start-main-content" className="skip-nav ds-c-dialog__header">
@@ -73,20 +97,7 @@ class Header extends Component {
         <div className="ds-l-container">
           <div className="ds-l-row">
             <div className="ds-l-col--12 ds-l-md-col--3 site-title">
-              {showSiteTitle || !authenticated ? (
-                <DashboardButton>{t('titleBasic')}</DashboardButton>
-              ) : (
-                <DashboardButton>
-                  <Icon icon={faChevronLeft} size="sm" />
-                  {isAdmin
-                    ? 'Admin Dashboard'
-                    : `${
-                        currentUser.state && currentUser.state.id
-                          ? `${currentUser.state.id.toUpperCase()} `
-                          : ''
-                      }APD Home`}
-                </DashboardButton>
-              )}
+              {title()}
             </div>
             {authenticated && (
               <Fragment>

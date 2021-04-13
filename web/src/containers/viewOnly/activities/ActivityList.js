@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const ActivityList = ({ activities }) => {
   const buildActivityListItem = (activity, index) => {
     return (
-      <li>
+      <li key={uuidv4()}>
         <h3>
           {index + 1}. {activity.name} | {activity.fundingSource}
         </h3>
@@ -13,7 +14,7 @@ const ActivityList = ({ activities }) => {
   };
 
   return (
-    <Fragment>
+    <Fragment key={uuidv4()}>
       <h2>Activities</h2>
       <ul className="ds-c-list--bare">
         {activities.map((activity, index) =>
