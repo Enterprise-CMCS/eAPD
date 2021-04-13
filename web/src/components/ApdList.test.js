@@ -61,13 +61,8 @@ describe('<ApdList />', () => {
     });
 
     it('should display the introduction and instructions', () => {
-      const { queryByText } = renderUtils;
-      expect(
-        queryByText(
-          /The CMS HITECH APD app is the new way to create and manage/i
-        )
-      ).toBeTruthy();
-      expect(queryByText(/All your state's APDs are listed here./i)).toBeNull();
+      const { getByText } = renderUtils;
+      expect(getByText(/The eAPD is designed to help you create and manage your HITECH Advanced Planning Documents/i)).toBeTruthy();
     });
 
     it('should handle clicking the create APD button', async () => {
