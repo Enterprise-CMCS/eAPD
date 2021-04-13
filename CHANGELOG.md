@@ -4,6 +4,7 @@ Anticipated release: March 30, 2021
 
 #### 🚀 New features
 
+- Adds the rich text editor to two existing text fields ([#2394])
 - Combine Authenticators in MFA selection ([#2648])
 - Add eADPSystemAccess document to backend ([#2938])
 
@@ -23,7 +24,8 @@ Anticipated release: March 30, 2021
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
-
+[#2394]: https://github.com/CMSgov/eAPD/issues/2394
+[#2989]: https://github.com/CMSgov/eAPD/issues/2989
 [#2632]: https://github.com/CMSgov/eAPD/issues/2632
 [#2648]: https://github.com/CMSgov/eAPD/issues/2648
 [#2706]: https://github.com/CMSgov/eAPD/issues/2706
