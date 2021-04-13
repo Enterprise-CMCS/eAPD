@@ -1,24 +1,34 @@
 # Next release
 
-Anticipated release: April 5, 2021
+Anticipated release: March 30, 2021
 
 #### 🚀 New features
 
-- Establish Process For Implementing Storybook w/ Examples ([#2909])
+- Combine Authenticators in MFA selection ([#2648])
+- Add eADPSystemAccess document to backend ([#2938])
 
 #### 🐛 Bugs fixed
 
-- Fixes issue with section borders ([#2370])
+- Selecting "Cancel" during the state affiliation selection puts the user into a blank screen ([#2706])
 - Fixes an issue where the money fields were not formatting when re-loaded ([#2822])
-- Removes create apd button for federal admins ([#2890])
+- Checks for error before displaying "Saved!" in message header when app cannot save ([#2830])
+- Logout issues ([#2864])
 
 #### ⚙️ Behind the scenes
+
+- Refactor login code ([#2632])
+- Add new seed users for different login issues ([#2989])
+
 
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
-[#2370]: https://github.com/CMSgov/eAPD/issues/2370
+[#2632]: https://github.com/CMSgov/eAPD/issues/2632
+[#2648]: https://github.com/CMSgov/eAPD/issues/2648
+[#2706]: https://github.com/CMSgov/eAPD/issues/2706
 [#2822]: https://github.com/CMSgov/eAPD/issues/2822
-[#2890]: https://github.com/CMSgov/eAPD/issues/2890
-[#2909]: https://github.com/CMSgov/eAPD/issues/2909
+[#2830]: https://github.com/CMSgov/eAPD/issues/2830
+[#2864]: https://github.com/CMSgov/eAPD/issues/2864
+[#2938]: https://github.com/CMSgov/eAPD/issues/2938
+[#2989]: https://github.com/CMSgov/eAPD/issues/2989

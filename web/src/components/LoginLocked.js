@@ -1,6 +1,8 @@
 import React from 'react';
+import PropType from 'prop-types';
+import { Button } from '@cmsgov/design-system';
 
-const LoginLocked = () => {
+const LoginLocked = ({ onCancel }) => {
   return (
     <div id="start-main-content">
       <div className="ds-l-container">
@@ -11,23 +13,23 @@ const LoginLocked = () => {
           </h1>
           <h2 className="ds-h4 ds-u-margin-y--3">Account Locked</h2>
           <p>
-            Contact{' '}
+            Your account will reset automatically in one hour, or contact{' '}
             <a href="mailto:CMS-EAPD@cms.hhs.gov">CMS-EAPD@cms.hhs.gov</a> for
-            an account reset.
-          </p>
-          <p>
-            Reset will occur in{' '}
-            <span className="ds-u-color--error">60 minutes 00 seconds.</span>
+            an account reset if you need access sooner.
           </p>
           <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
-            <a href="/" className="ds-c-button ds-c-button--transparent">
+            <Button variation="transparent" type="button" onClick={onCancel}>
               Cancel
-            </a>
+            </Button>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+LoginLocked.propTypes = {
+  onCancel: PropType.func.isRequired
 };
 
 export default LoginLocked;

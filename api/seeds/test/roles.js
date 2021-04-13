@@ -7,20 +7,14 @@ const { roleToActivityMappings } = require('../../util/roles');
 const activities = [
   { id: 1001, name: 'view-users' },
   { id: 1002, name: 'view-roles' },
-  { id: 1003, name: 'submit-federal-response' },
-  { id: 1004, name: 'submit-clearance' },
-  { id: 1005, name: 'edit-comments' },
-  { id: 1006, name: 'export-document' },
-  { id: 1007, name: 'submit-document' },
-  { id: 1008, name: 'submit-state-response' },
-  { id: 1009, name: 'create-draft' },
-  { id: 1010, name: 'edit-document' },
-  { id: 1011, name: 'edit-response' },
-  { id: 1012, name: 'view-document' },
-  { id: 1013, name: 'view-affiliations' },
-  { id: 1014, name: 'edit-affiliations' },
-  { id: 1015, name: 'view-state-admins' },
-  { id: 1016, name: 'edit-state-admins' }
+  { id: 1003, name: 'export-document' },
+  { id: 1004, name: 'create-draft' },
+  { id: 1005, name: 'edit-document' },
+  { id: 1006, name: 'view-document' },
+  { id: 1007, name: 'view-affiliations' },
+  { id: 1008, name: 'edit-affiliations' },
+  { id: 1009, name: 'view-state-admins' },
+  { id: 1010, name: 'edit-state-admins' }
 ];
 exports.activities = activities;
 

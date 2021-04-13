@@ -1,7 +1,9 @@
 import React from 'react';
+import PropType from 'prop-types';
+import { Button } from '@cmsgov/design-system';
 import { apiUrl } from '../util/api';
 
-const LoginGroupError = () => {
+const LoginGroupError = ({ onCancel }) => {
   return (
     <div id="start-main-content">
       <div className="ds-l-container">
@@ -19,14 +21,18 @@ const LoginGroupError = () => {
             your EUA account.
           </p>
           <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3 ds-u-padding-top--2 ds-u-border-top--2">
-            <a href="/" className="ds-c-button ds-c-button--transparent">
+            <Button variation="transparent" type="button" onClick={onCancel}>
               Cancel
-            </a>
+            </Button>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+LoginGroupError.propTypes = {
+  onCancel: PropType.func.isRequired
 };
 
 export default LoginGroupError;
