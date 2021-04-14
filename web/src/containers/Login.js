@@ -20,6 +20,19 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
     login(username, password);
   };
 
+  const openHelpDoc = (e) => {
+    e.preventDefault();
+    const { docName } = e.target.dataset;
+    fetch(`${apiUrl}/docs/${docName}`)
+      .then(res => res.blob())
+      .then(blob => {
+        const type = 'application/pdf';
+        const docBlob = new Blob([blob], { type });
+        const url = URL.createObjectURL(docBlob);
+        window.open(url);
+      })
+  }
+
   return (
     <main id="start-main-content">
       <UpgradeBrowser />
@@ -39,8 +52,8 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
           <Fragment>
             <h2 className="ds-h4 ds-u-color--base ds-u-padding-top--2">New Users</h2>
             <p className="ds-u-margin-y--0">New users must have an EUA account with the correct job codes before logging into the system.</p>
-            <p className="ds-u-margin-y--1">Need an EUA account? <a href={`${apiUrl}/docs/account-registration`} target="_blank" rel="noreferrer noopener">How to Get Started</a>.</p>
-            <p className="ds-u-margin-y--1">Have an EUA account? <a href={`${apiUrl}/docs/system-access`} target="_blank" rel="noreferrer noopener">How to Access the eAPD</a>.</p>
+            <p className="ds-u-margin-y--1">Need an EUA account? <a onClick={openHelpDoc} data-doc-name="account-registration" href={`${apiUrl}/docs/account-registration`}>How to Get Started</a>.</p>
+            <p className="ds-u-margin-y--1">Have an EUA account? <a onClick={openHelpDoc} data-doc-name="system-access" href={`${apiUrl}/docs/system-access`}>How to Access the eAPD</a>.</p>
             <p className="ds-u-margin-y--3">Still need help? Email us at <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">CMS-EAPD@cms.hhs.gov</a>.</p>
           </Fragment>
         }
