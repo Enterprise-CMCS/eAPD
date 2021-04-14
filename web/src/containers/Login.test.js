@@ -63,13 +63,33 @@ describe('login component', () => {
 
   it('renders new user guides, links, and help email', () => {
     const { getByText, getByRole } = setup();
-
+    
     expect(getByRole('heading', {name: 'New Users'} )).toBeTruthy();
     expect(getByText('New users must have an EUA account with the correct job codes before logging into the system.')).toBeTruthy();
-
+    
     expect(getByRole('link', {name: 'How to Get Started'} )).toBeTruthy();
     expect(getByRole('link', {name: 'How to Access the eAPD'} )).toBeTruthy();    
     expect(getByRole('link', {name: 'CMS-EAPD@cms.hhs.gov'} )).toBeTruthy();
+  });
+  
+  xit('opens help docs in a new window', () => {
+    const { getByRole } = setup();
+
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        blob: () => Promise.resolve({size: 123, type: "application/octet-stream"})
+      })
+    );
+
+    global.URL.createObjectURL = jest.fn(() => {
+      return 'localhost:8080/my-doc';
+    });
+
+    const open = jest.fn()
+    Object.defineProperty(window, 'open', open);
+
+    fireEvent.click(getByRole('link', {name: 'How to Get Started'}));
+    expect(window.open).toBeCalled();
   });
 
   it('calls login prop', () => {

@@ -30,7 +30,7 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
         const docBlob = new Blob([blob], { type });
         const url = URL.createObjectURL(docBlob);
         window.open(url);
-      })
+      });
   }
 
   return (
