@@ -13,7 +13,7 @@ module.exports = (app, { getFile = get } = {}) => {
         res.setHeader('Content-Type', 'application/octet-stream');
         res.setHeader(
           'Content-Disposition',
-          `attachment; filename=${ACCOUNT_REGISTRATION_DOC}`
+          `inline; filename=${ACCOUNT_REGISTRATION_DOC}`
         );
         res.send(file).end();
       })
@@ -28,7 +28,7 @@ module.exports = (app, { getFile = get } = {}) => {
         res.setHeader('Content-Type', 'application/octet-stream');
         res.setHeader(
           'Content-Disposition',
-          `attachment; filename=${SYSTEM_ACCESS_DOC}`
+          `inline; filename=${SYSTEM_ACCESS_DOC}`
         );
         res.send(file).end();
       })
