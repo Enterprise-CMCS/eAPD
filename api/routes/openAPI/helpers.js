@@ -15,7 +15,7 @@ const errorToken = jsonResponse({
     error: {
       type: 'string',
       description:
-        'An string token indicating the error, which could be translated into a user-readable string for display by the client'
+        'A string token indicating the error, which could be translated into a user-readable string for display by the client'
     }
   }
 });
