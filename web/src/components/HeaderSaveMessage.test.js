@@ -10,7 +10,11 @@ describe('Header save message component', () => {
   it('renders when actively saving', () => {
     expect(
       shallow(
-        <HeaderSaveMessage isSaving error={false} lastSaved="2020-01-01T17:00:00.000Z" />
+        <HeaderSaveMessage
+          isSaving
+          error={false}
+          lastSaved="2020-01-01T17:00:00.000Z"
+        />
       )
     ).toMatchSnapshot();
   });
@@ -18,7 +22,11 @@ describe('Header save message component', () => {
   it('renders correctly when an error saving occurs', () => {
     expect(
       shallow(
-        <HeaderSaveMessage isSaving={false} error lastSaved="2020-01-01T17:00:00.000Z" />
+        <HeaderSaveMessage
+          isSaving={false}
+          error
+          lastSaved="2020-01-01T17:00:00.000Z"
+        />
       )
     ).toMatchSnapshot();
   });
