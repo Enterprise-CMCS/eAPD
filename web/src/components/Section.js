@@ -12,7 +12,9 @@ const Section = ({ children, id, resource }) => {
   return (
     <section id={id}>
       {title && <h2 className="ds-h2">{title}</h2>}
-      {helpText && <div className="ds-text--lead section--help-text">{helpText}</div>}
+      {helpText && (
+        <div className="ds-text--lead section--help-text">{helpText}</div>
+      )}
       {children}
       <SecondaryNav />
     </section>
@@ -36,10 +38,7 @@ const Subsection = ({ children, headerClassName, id, nested, resource }) => {
   return (
     <div className="subsection--title">
       {!nested && (
-        <h3
-          id={id}
-          className={`${headerClassName || ''} ds-h3`}
-        >
+        <h3 id={id} className={`${headerClassName || ''} ds-h3`}>
           {title}
         </h3>
       )}
