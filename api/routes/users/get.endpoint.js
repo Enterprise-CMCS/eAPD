@@ -40,7 +40,7 @@ describe('users endpoint', () => {
     describe('when authenticated', () => {
       it('when requesting a non-existant user ID', async () => {
         const response = await get(0);
-        expect(response.status).toEqual(400);
+        expect(response.status).toEqual(404);
       });
 
       it('when requesting a valid user ID', async () => {

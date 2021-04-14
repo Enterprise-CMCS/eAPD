@@ -33,10 +33,10 @@ describe('US States endpoint', () => {
       expect(keys).toEqual(['id', 'name', 'medicaid_office', 'stateAdmins']);
     });
 
-    it('returns 400', async () => {
+    it('returns 404', async () => {
       const authedClient = login();
       const response = await authedClient.get('/states/zz');
-      expect(response.status).toEqual(400);
+      expect(response.status).toEqual(404);
     });
   });
 });

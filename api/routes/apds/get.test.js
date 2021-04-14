@@ -188,7 +188,7 @@ tap.test('apds/:id GET endpoint', async tests => {
     );
 
     handlerTest.test(
-      'sends a not found error if there are no valid APds',
+      'sends a not found error if there are no valid APDs',
       async test => {
         getAPDByIDAndState.returns(undefined);
 
@@ -198,7 +198,7 @@ tap.test('apds/:id GET endpoint', async tests => {
           next
         );
 
-        test.ok(res.status.calledWith(400), 'HTTP status set to 400');
+        test.ok(res.status.calledWith(404), 'HTTP status set to 404');
         test.ok(res.end.called, 'response is terminated');
       }
     );
