@@ -29,8 +29,7 @@ jobs:
     - name: Cleanup Test/Preview Deploys w/No Open PR 🚿
       env:
         API_AWS_REGION: ${{ secrets.TEST_AWS_REGION }}
-        GH_BOT_TOKEN: ${{ GH_TOKEN }}
-        GH_BOT_USER: ${{ GH_BOT_USER }}
+        GH_BOT_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_BOT_USER: ${{ secrets.GH_BOT_USER }}
       run: |
         ./bin/preview-deploy/aws.cleanup.sh \
-        
