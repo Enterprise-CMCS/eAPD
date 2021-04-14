@@ -68,7 +68,7 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "dependencies": {
-    "@okta/jwt-verifier": "^1.0.0",
+    "@okta/jwt-verifier": "^2.1.0",
     "@okta/okta-sdk-nodejs": "^4.4.0",
     "ajv": "^6.12.0",
     "aws-sdk": "^2.646.0",
