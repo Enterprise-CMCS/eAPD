@@ -8,13 +8,7 @@ import StateAffiliationStatus from '../components/StateAffiliationStatus';
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
-const StateDashboard = (
-  {
-    state,
-    role,
-    stateStatus
-  }
-) => {
+const StateDashboard = ({ state, role, stateStatus }) => {
   TagManager.dataLayer({
     dataLayer: {
       stateId: state ? state.id : null,
@@ -26,10 +20,10 @@ const StateDashboard = (
 
   return (
     <React.Fragment>
-      {isApproved && (<ApdList />)}
-      {!isApproved && (<StateAffiliationStatus />)}
+      {isApproved && <ApdList />}
+      {!isApproved && <StateAffiliationStatus />}
     </React.Fragment>
-  )
+  );
 };
 
 StateDashboard.propTypes = {
