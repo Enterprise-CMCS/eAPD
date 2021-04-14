@@ -1,14 +1,6 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [
-    "1589|babel-jest>@jest/transform>jest-haste-map>fsevents>node-pre-gyp>rc>ini",
-    "1589|webpack>watchpack>watchpack-chokidar2>chokidar>fsevents>node-pre-gyp>rc>ini",
-    "1589|@storybook/react>@storybook/core>webpack>watchpack>watchpack-chokidar2>chokidar>fsevents>node-pre-gyp>rc>ini",
-    "1589|@storybook/addon-docs>@storybook/core>webpack>watchpack>watchpack-chokidar2>chokidar>fsevents>node-pre-gyp>rc>ini",
-    "1589|@storybook/addon-essentials>@storybook/addon-docs>@storybook/core>webpack>watchpack>watchpack-chokidar2>chokidar>fsevents>node-pre-gyp>rc>ini",
-    "1589|@storybook/react>webpack>watchpack>watchpack-chokidar2>chokidar>fsevents>node-pre-gyp>rc>ini",
-    "1589|webpack-dev-server>chokidar>fsevents>node-pre-gyp>rc>ini"
-  ],
+  "allowlist": [ ],
   "registry": "https://registry.npmjs.org"
 }
