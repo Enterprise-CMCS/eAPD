@@ -23,8 +23,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies 💿
       run: |
-        apt-get -qq update
-        apt-get -qq install jq -y
+        sudo apt-get -qq update
+        sudo apt-get -qq install jq -y
         pip install --quiet awscli
     - name: Cleanup Test/Preview Deploys w/No Open PR 🚿
       env:
