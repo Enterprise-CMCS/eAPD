@@ -1,4 +1,5 @@
 name: Cleanup Test/Preview Deploys
+on:
   schedule:
     - cron: '0 0 * * *'  # Run every hour, every day
 jobs:
