@@ -1,7 +1,6 @@
 name: Cleanup Test/Preview Deploys
-on:  [push]
-#  schedule:
-#    - cron: '0 0 * * *'  # every day at midnight
+  schedule:
+    - cron: '0 0 * * *'  # Run every hour, every day
 jobs:
   build:
     runs-on: ubuntu-latest
