@@ -72,31 +72,31 @@ const staticItems = [
 
 const buildActivitySection = i => [
   {
-    label: 'Activity overview',
+    label: 'Activity Overview',
     url: `/apd/activity/${i}/overview`
   },
   {
-    label: 'Considerations analysis and risks',
+    label: 'Analysis of Alternatives and Risks',
     url: `/apd/activity/${i}/alternative-considerations`
   },
   {
-    label: 'Activity schedule and milestones',
+    label: 'Activity Schedule and Milestones',
     url: `/apd/activity/${i}/schedule-milestones`
   },
   {
-    label: 'Standards and conditions',
+    label: 'Conditions for Enhanced Funding',
     url: `/apd/activity/${i}/standards-conditions`
   },
   {
-    label: 'State staff and expenses',
+    label: 'State Staff and Expenses',
     url: `/apd/activity/${i}/state-costs`
   },
   {
-    label: 'Private contractor costs',
+    label: 'Private Contractor Costs',
     url: `/apd/activity/${i}/contractor-costs`
   },
   {
-    label: 'Cost allocation and other funding',
+    label: 'Cost Allocation and Other Funding',
     url: `/apd/activity/${i}/cost-allocation`
   },
   {

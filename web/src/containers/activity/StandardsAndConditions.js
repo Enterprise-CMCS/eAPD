@@ -43,7 +43,15 @@ const StandardsAndConditions = ({
       >
         <h4 className="ds-h4">Enhanced Funding Justification</h4>
         <p className="ds-u-font-weight--normal">Describe or list line by line how this activity will support the Medicaid Standards and Conditions <a href="#">42 CFR 433.112.</a></p>
-        <p className="instruction-box ds-u-font-weight--normal">Example: 6. The state is currently developing a software for information retrieval that will be state owned, royalty free, and open source.</p>
+        <p className="instruction-box ds-u-font-weight--normal">Example: This activity addresses conditions 5, 6, 7, 13, and specifically, products delivered for this activity will be owned by the state, and HHS will have a royalty free, non-exclusive, and irrevocable license to reproduce, publish, or otherwise use and authorize others to use. The costs of the system were determined in accordance with 45 CFR 75, subpart E, and this activity will promote resuse of systems across our systems enterprise. <br/> Additionally, this activity will comply with all of the other conditions of enhanced funding except for: 
+        <br />
+        <ul className="ds-u-padding-x--3">
+          <li>3 - this is not a claims processing activity</li>
+          <li>4 - this is not a quality improvement activity</li>
+          <li>17 - this is not a MAGI-based system activity</li>
+        </ul>
+        </p>
+
       </FormLabel>
       <RichText
         name="enhanced funding justification"
@@ -61,16 +69,12 @@ const StandardsAndConditions = ({
   return (
     <Fragment>
       <label htmlFor="standards-and-conditions-supports-field">
-        <p>Standards and Conditions for Enhanced Funding is a set of criteria that qualifies a state for enhanced funding at their selected FFP rate. This is your opportunity to justify how your program supports Medicaid initiatives and warrants the selected match rate.</p>
+        {/* <p>Conditions for Enhanced Funding is a set of criteria that qualifies a state for enhanced funding at their selected FFP rate. This is your opportunity to justify how your program supports Medicaid initiatives and warrants the selected match rate.</p> */}
         <div className="custom-hr" />
-        <h4 className="ds-h4">Standards and Conditions for Enhanced Funding</h4>
+        <h4 className="ds-h4">Conditions for Enhanced Funding</h4>
       </label>
       <div className="ds-u-margin-bottom--6 ds-u-margin-top--3">
-        <p className="ds-u-margin-bottom--3">
-          Review Medicaid Standards and Conditions regulation and answer the
-          following questions. If the activity has a match rate of 50-50, select
-          ‘no’ below to proceed to the next page.
-        </p>
+        <p className="ds-u-margin-bottom--3">Review Medicaid Conditions for Enhanced Funding regulation for the criteria that qualifies activities for enhanced funding that pertains to various FFP rates.</p>
         <HelpDrawerToggle
           helpDrawerOpen={showRegulationDrawer}
           showDrawer={handleDrawerOpen}
@@ -83,7 +87,7 @@ const StandardsAndConditions = ({
             <h4 className="ds-h4 ds-u-margin-top--2 ds-u-margin-bottom--0">
               Enhanced Funding Qualification
             </h4>
-            <p className="ds-u-font-weight--normal">Indicate whether the selected FFP for this activity has a match rate of 75-25 or 90-10, therfore qualifies for enhanced funding.</p>
+            <p className="ds-u-font-weight--normal">Indicate whether the selected FFP for this activity has a match rate of 75-25 or 90-10. Provide justification of how the activity supports Medicaid initiatives and warrants the selected match rate.</p>
           </legend>
           <Choice
             name="radio_choice"
@@ -100,7 +104,7 @@ const StandardsAndConditions = ({
           <Choice
             name="radio_choice"
             type="radio"
-            label="No, this activity is not applicable for enhanced funding (50-50 FFP)."
+            label="No, not applicable for enhanced funding, this activity has a 50-50 federal state split. "
             value="no"
             onChange={() => {}}
           />

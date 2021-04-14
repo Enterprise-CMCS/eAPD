@@ -25,38 +25,38 @@ const getNewApd = () => {
 
   return {
     activities: [
-      {
-        alternatives: '',
-        contractorResources: [],
-        costAllocation: forAllYears({
-          ffp: { federal: 90, state: 10 },
-          other: 0
-        }),
-        costAllocationNarrative: {
-          methodology: '',
-          ...forAllYears({ otherSources: '' })
-        },
-        description: '',
-        expenses: [],
-        fundingSource: 'HIT',
-        name: '',
-        outcomes: [],
-        plannedEndDate: '',
-        plannedStartDate: '',
-        schedule: [],
-        standardsAndConditions: {
-          doesNotSupport: '',
-          supports: ''
-        },
-        statePersonnel: [],
-        summary: '',
-        quarterlyFFP: forAllYears({
-          1: { contractors: 0, inHouse: 0 },
-          2: { contractors: 0, inHouse: 0 },
-          3: { contractors: 0, inHouse: 0 },
-          4: { contractors: 0, inHouse: 0 }
-        })
-      }
+      // {
+      //   alternatives: '',
+      //   contractorResources: [],
+      //   costAllocation: forAllYears({
+      //     ffp: { federal: 90, state: 10 },
+      //     other: 0
+      //   }),
+      //   costAllocationNarrative: {
+      //     methodology: '',
+      //     ...forAllYears({ otherSources: '' })
+      //   },
+      //   description: '',
+      //   expenses: [],
+      //   fundingSource: 'HIT',
+      //   name: '',
+      //   outcomes: [],
+      //   plannedEndDate: '',
+      //   plannedStartDate: '',
+      //   schedule: [],
+      //   standardsAndConditions: {
+      //     doesNotSupport: '',
+      //     supports: ''
+      //   },
+      //   statePersonnel: [],
+      //   summary: '',
+      //   quarterlyFFP: forAllYears({
+      //     1: { contractors: 0, inHouse: 0 },
+      //     2: { contractors: 0, inHouse: 0 },
+      //     3: { contractors: 0, inHouse: 0 },
+      //     4: { contractors: 0, inHouse: 0 }
+      //   })
+      // }
     ],
     federalCitations: {},
     incentivePayments: {

@@ -14,7 +14,7 @@ const AlternativeConsiderations = ({activityIndex}) => {
       id={`activity-outcomes-${activityIndex}`}
     >
 
-      <p className="instruction-box">The state must consider sharing, leverage and reuse of Medicaid technologies, including custom open source development, reusing systems that already exist within the state, reusing systems built for other states available under <a href="#">45 CFR §95.617</a>, licensing or purchasing COTS software or SaaS, or engaging in collaboration with other states.</p>
+      <p className="instruction-box">The state must consider opportunities to share, leverage and reuse Medicaid technologies, including custom open source development, reuse of systems that already exist within the state, reuse of systems built for other states available under 45 CFR §95.617, licensing or purchasing COTS software or SaaS, or engaging in collaboration with other states.</p>
 
 
       <FormLabel
@@ -23,7 +23,7 @@ const AlternativeConsiderations = ({activityIndex}) => {
           fieldId="activity-description-field"
         >
           Alternative Analysis
-          <p className="ds-u-font-weight--normal ds-u-margin-top--1">The state should describe any alternatives that the State Medicaid Agency considered regarding this activity. Where differing alternatives and approaches were studied or assessed, the state should provide a brief description of each option considered, and a justification should be provided for the approach or option that was ultimately selected.</p>
+          <p className="ds-u-font-weight--normal ds-u-margin-top--1">Describe any alternatives considered regarding this activity, including how each potential approach was studied or assessed. Provide a brief description of each option considered, and a justification for the approach or option that was ultimately selected.</p>
         </FormLabel>
         <RichText
           name="activity overview"
@@ -41,7 +41,7 @@ const AlternativeConsiderations = ({activityIndex}) => {
           fieldId="activity-costs-benefit-field"
         >
           Cost Benefit Analysis
-          <p className="ds-u-font-weight--normal ds-u-margin-top--1">The description should include consideration for costs and benefits for each option. Then, indicate which option was finally selected and why the final selection was made. As applicable, include how the selected approach supports the economic and efficient management of the Medicaid program.</p>
+          <p className="ds-u-font-weight--normal ds-u-margin-top--1">Explain consideration for costs and benefits of each option described above. As applicable, include hown the selected approach supports the economic and efficient management of the Medicaid program.</p>
         </FormLabel>
         <RichText
           name="activity overview"
@@ -77,7 +77,7 @@ const AlternativeConsiderations = ({activityIndex}) => {
           fieldId="activity-requirements-field"
         >
           Requirements Analysis
-          <p className="ds-u-font-weight--normal ds-u-margin-top--1">If a requirements analysis was conducted for this activity, then the state should provide a summary of the results. If the state did not conduct a requirements analysis, then it should explain why not. Also, the state should indicate whether a requirements analysis is waived by law or is not required in regulation. </p>
+          <p className="ds-u-font-weight--normal ds-u-margin-top--1"> If a requirements analysis was conducted for this activity, provide a summary of the analysis and the results. If no requirements analysis was conducted, explain the reason. Indicate whether a requirements analysis is waived by law or is not required in regulation.</p>
         </FormLabel>
         <RichText
           name="activity overview"
@@ -95,8 +95,8 @@ const AlternativeConsiderations = ({activityIndex}) => {
           fieldId="activity-statement-tbd-field"
         >
           Forseeable Risks
-          <p className="ds-u-font-weight--normal ds-u-margin-top--1">Describe any foreseeable risks associated with your proposed solution. Then, include the strategy the State is taking to mitigate the forseeable risk(s).</p>
-          <p className="instruction-box ds-u-font-weight--normal">Example: A potential risk to the proposed solution is outtage and downtime.  The state has decided to accept the risk and set up precautions and communications for when there are outtages.</p>
+          <p className="ds-u-font-weight--normal ds-u-margin-top--1">Describe any foreseeable risks associated with your proposed solution, including the strategy for mitigation of the identified risk(s).</p>
+          <p className="instruction-box ds-u-font-weight--normal">Example: A potential risk to the proposed solution is system outage and downtime. The state has determined the risk can be minimized when proper precautions are in place and a plan for communications for outages has been established. The state accepts this risk and will oversee the mitigation efforts through monitoring and oversight of contract service level agreements.</p>
         </FormLabel>
         <RichText
           name="activity overview"
