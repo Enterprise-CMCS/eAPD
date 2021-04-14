@@ -1,3 +1,4 @@
+const moment = require('moment')
 const logger = require('../../logger')('user seeder');
 const { oktaClient } = require('../../auth/oktaAuth');
 const { createUsersToAdd } = require('../shared/set-up-users');
@@ -9,8 +10,8 @@ exports.seed = async knex => {
   await knex('state_admin_certifications').insert(stateCertifications)
   const auditEntries = stateCertifications.map(certification =>{
     return {
-      uid:certification.uid,
-      changeDate:Date.now(),
+      username:certification.uid,
+      changeDate:moment().format('YYYY-MM-DD HH:mm:ss'),
       changedBy: 'seeds'
     }
   })

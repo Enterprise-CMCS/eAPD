@@ -5,7 +5,7 @@ exports.up = async (knex) => {
       'The state certifications list'
     );
     table.increments('id');
-    table.string('uid').comment('id of user from authentication service');
+    table.string('username').comment('id of user from authentication service');
     table
       .string('state', 2)
       .comment('the state this user is certified for');
@@ -19,8 +19,8 @@ exports.up = async (knex) => {
       'changes to the state certifications list'
     );
     table.increments('id');
-    table.string('uid').comment('id of user that was changed');
-    table.date('changeDate').comment("The date the change was made");
+    table.string('username').comment('id of user that was changed');
+    table.datetime('changeDate').comment("The date the change was made");
     table.string('changedBy').comment('The user that made the change');
 
   });
@@ -28,4 +28,5 @@ exports.up = async (knex) => {
 
 exports.down = async (knex) => {
   await knex.schema.dropTable('state_admin_certifications')
+  await knex.schema.dropTable('state_admin_certifications_audit')
 };

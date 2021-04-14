@@ -1,9 +1,12 @@
 const moment = require('moment')
 const logger = require('../../logger')('user seeder');
 
+const PostgresDateFormat = 'YYYY-MM-DD HH:mm:ss'
+
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
-
+  await knex('state_admin_certifications').del();
+  await knex('state_admin_certifications_audit').del();
   logger.info('Retrieving user ids from Okta');
   const { id: regularUserId } = (await oktaClient.getUser('em@il.com')) || {};
   const { id: fedAdminId } = (await oktaClient.getUser('fedadmin')) || {};
@@ -48,10 +51,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add an expired certification and this user will be downgraded to "regular user"
     stateCertifications.push({
-      uid: regularUserId,
+      username: regularUserId,
       state: 'ak',
-      certificationDate: moment().subtract(400, 'days'),
-      certificationExpiration: moment().subtract(35, 'days'),
+      certificationDate: moment().subtract(400, 'days').format(PostgresDateFormat),
+      certificationExpiration: moment().subtract(35, 'days').format(PostgresDateFormat),
       certifiedBy: 'seeds'
     })
   }
@@ -74,10 +77,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
-      uid: stateAdminId,
+      username: stateAdminId,
       state: 'ak',
-      certificationDate: moment().subtract(40, 'days'),
-      certificationExpiration: moment().add(325, 'days'),
+      certificationDate: moment().subtract(40, 'days').format(PostgresDateFormat),
+      certificationExpiration: moment().add(325, 'days').format(PostgresDateFormat),
       certifiedBy: 'seeds'
     })
   }
@@ -91,10 +94,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add an invalid certification and this user will remain an staff member
     stateCertifications.push({
-      uid: stateStaffId,
+      username: stateStaffId,
       state: 'ak',
-      certificationDate: moment().subtract(400, 'days'),
-      certificationExpiration: moment().subtract(35, 'days'),
+      certificationDate: moment().subtract(400, 'days').format(PostgresDateFormat),
+      certificationExpiration: moment().subtract(35, 'days').format(PostgresDateFormat),
       certifiedBy: 'seeds'
     })
   }
@@ -129,7 +132,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'revoked'
     });
   }
-  return [oktaAffiliations, stateCertifications];
+  return {oktaAffiliations, stateCertifications};
 };
 
 module.exports = {
