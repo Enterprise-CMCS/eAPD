@@ -209,7 +209,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
           next
         );
 
-        test.ok(res.status.calledWith(400), 'HTTP status set to 400');
+        test.ok(res.status.calledWith(404), 'HTTP status set to 404');
         test.ok(res.end.called, 'response is terminated');
       }
     );

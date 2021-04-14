@@ -695,14 +695,14 @@ Object {
             },
             "description": "The APD",
           },
-          "400": Object {
-            "description": "The apd ID does not match any known apds",
-          },
           "401": Object {
             "description": "The user is not logged in",
           },
           "403": Object {
             "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd does not exist",
           },
         },
         "security": Array [
@@ -1360,11 +1360,11 @@ Object {
             },
             "description": "US State or Territory",
           },
-          "400": Object {
-            "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
-          },
           "401": Object {
             "description": "The user is not logged in",
+          },
+          "404": Object {
+            "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
           },
         },
         "security": Array [
@@ -1524,7 +1524,7 @@ Object {
             "description": "Record was created",
           },
           "400": Object {
-            "description": "Record exists, or US State ID is invalid",
+            "description": "Record does not exist or US State ID is invalid",
           },
           "401": Object {
             "description": "The user is not logged in",
@@ -1616,14 +1616,14 @@ Object {
             },
             "description": "A single user affiliation with a US State",
           },
-          "400": Object {
-            "description": "The stateId and affiliation ID do not correspond to a known record",
-          },
           "401": Object {
             "description": "The user is not logged in",
           },
           "403": Object {
             "description": "The user does not have permission to perform this activity",
+          },
+          "404": Object {
+            "description": "The affiliation does not exist",
           },
         },
         "security": Array [
@@ -1829,14 +1829,14 @@ Object {
             },
             "description": "The matching user",
           },
-          "400": Object {
-            "description": "The user ID does not match any known users",
-          },
           "401": Object {
             "description": "The user is not logged in",
           },
           "403": Object {
             "description": "The user does not have permission to perform this activity",
+          },
+          "404": Object {
+            "description": "The user ID does not match any known users",
           },
         },
         "security": Array [

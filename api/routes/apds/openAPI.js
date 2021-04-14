@@ -79,11 +79,11 @@ const openAPI = {
           description: 'The APD',
           content: jsonResponse({ $ref: '#/components/schemas/apd' })
         },
-        400: {
-          description: 'The apd ID does not match any known apds'
-        },
         403: {
           description: 'The apd ID does not match any known apds for the user'
+        },
+        404: {
+          description: 'The apd does not exist'
         }
       }
     },
