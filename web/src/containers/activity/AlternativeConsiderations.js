@@ -22,7 +22,7 @@ const AlternativeConsiderations = ({activityIndex}) => {
           hint={''}
           fieldId="activity-description-field"
         >
-          Alternative Analysis
+          Alternatives Analysis
           <p className="ds-u-font-weight--normal ds-u-margin-top--1">Describe any alternatives considered regarding this activity, including how each potential approach was studied or assessed. Provide a brief description of each option considered, and a justification for the approach or option that was ultimately selected.</p>
         </FormLabel>
         <RichText
