@@ -2,4 +2,4 @@
 
 exports[`general dashboard component renders correctly if not an admin 1`] = `<Connect(StateDashboard) />`;
 
-exports[`general dashboard component renders correctly if yes an admin 1`] = `<AdminDashboard />`;
+exports[`general dashboard component renders correctly if yes an admin 1`] = `<Connect(FederalDashboard) />`;

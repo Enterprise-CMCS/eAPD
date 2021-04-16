@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getIsAdmin, getIsFederal } from '../reducers/user.selector';
-import AdminDashboard from './admin/AdminDashboard';
+import FederalDashboard from './FederalDashboard';
 import StateDashboard from './StateDashboard';
 
 const Dashboard = ({ isAdmin, isFederal, ...rest }) =>
-  isAdmin || isFederal ? <AdminDashboard {...rest} /> : <StateDashboard {...rest} />;
+  isAdmin || isFederal ? <FederalDashboard {...rest} /> : <StateDashboard {...rest} />;
 
 Dashboard.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
