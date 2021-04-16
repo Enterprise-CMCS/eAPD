@@ -23,7 +23,7 @@ describe('general dashboard component', () => {
           }
         }
       })
-    ).toEqual({ isAdmin: false });
+    ).toEqual({ isAdmin: false, isFederal: false });
 
     expect(
       mapStateToProps({
@@ -33,6 +33,6 @@ describe('general dashboard component', () => {
           }
         }
       })
-    ).toEqual({ isAdmin: true });
+    ).toEqual({ isAdmin: true, isFederal: false });
   });
 });

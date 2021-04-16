@@ -32,7 +32,7 @@ describe('Wrapper component', () => {
   });
 
   describe('sets the appropriate CSS class if we are on a "gray" path', () =>
-    ['/create-account', '/edit-account', '/login', '/me'].forEach(pathname => {
+    ['/login'].forEach(pathname => {
       test(`renders correctly for the ${pathname} path`, () => {
         const component = shallow(
           <Wrapper isDev={false} location={{ pathname }}>
