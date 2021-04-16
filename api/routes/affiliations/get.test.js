@@ -222,7 +222,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
         createdAt: '2020-12-02T18:50:56.817Z',
         updatedAt: '2020-12-02T18:50:56.817Z',
         updatedById: '00u4nbo8e9BoctLWI297',
-        role: 'eAPD State Coordinator',
+        role: 'eAPD State Staff',
         updatedBy: 'Regular User',
         displayName: 'Jesse James',
         email: 'jjames@fearless.tech',
