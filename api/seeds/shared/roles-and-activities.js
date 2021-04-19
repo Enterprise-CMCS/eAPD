@@ -32,7 +32,7 @@ const insertAndGetIDs = async (knex, tableName, values) => {
       return { name };
     });
 
-  if (insert && insert.length > 0) {
+  if (insert && insert.length) {
     await knex(tableName).insert(insert);
     logger.info(`Completed seeding the ${chalk.cyan(tableName)} table`);
   } else {
