@@ -237,7 +237,7 @@ jobs:
   # because "npm ci" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - restore_cache:
@@ -264,7 +264,7 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:14
     steps:
       - checkout
       - setup_remote_docker
@@ -282,7 +282,7 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - run: npm install glob
@@ -310,17 +310,17 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 10.
+            # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 10
-            nvm alias default v10
+            nvm install 14
+            nvm alias default v14
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
   backend lint:
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - attach_workspace:
@@ -333,7 +333,7 @@ jobs:
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - attach_workspace:
@@ -359,7 +359,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - attach_workspace:
@@ -376,7 +376,7 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - attach_workspace:
@@ -389,7 +389,7 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - attach_workspace:
@@ -414,7 +414,7 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - attach_workspace:
@@ -614,7 +614,7 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - checkout
       - attach_workspace:

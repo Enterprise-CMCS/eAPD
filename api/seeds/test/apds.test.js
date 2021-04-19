@@ -8,8 +8,8 @@ tap.test('test APD seed documents', async t => {
   apdFiles.forEach(filename => {
     const document = require(`./${filename}`);
     t.test(`document '${document.name}' within '${filename}'`, async t => {
-      t.true(validateApd(document), 'is valid, according to apd.json schema');
-      t.false(validateApd.errors, 'has no reported errors');
+      t.ok(validateApd(document), 'is valid, according to apd.json schema');
+      t.notOk(validateApd.errors, 'has no reported errors');
 
       // Determine the specific erroneous document properties.
       if (validateApd.errors) {
