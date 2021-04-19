@@ -13,7 +13,7 @@ const postEndpoint = require('./post');
 //
 // Mock with UTC date so the time is consistent regardless of local timezone
 const mockClock = sinon.useFakeTimers(Date.UTC(2004, 6, 1, 12));
-tap.tearDown(() => {
+tap.teardown(() => {
   mockClock.restore();
 });
 

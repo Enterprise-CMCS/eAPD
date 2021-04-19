@@ -1,9 +1,8 @@
 const tap = require('tap');
 
-tap.beforeEach(done => {
+tap.beforeEach(() => {
   delete require.cache[require.resolve('./env')];
   process.env = {};
-  done();
 });
 
 tap.test('environment setup', async envTest => {
