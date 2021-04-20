@@ -4,10 +4,11 @@ import { FormLabel } from '@cmsgov/design-system';
 import RichText from '../../components/RichText';
 
 const ComprehensiveOverview = () => {
-  const [myState, setMyState] = useState('blah');
+  const [myState, setMyState] = useState('blah'); /* eslint-disable-line */
 
   const syncRichText = html => {
     setMyState(html);
+    /* eslint-disable-next-line  */
     console.log('here is rich text editor input', html);
   };
 

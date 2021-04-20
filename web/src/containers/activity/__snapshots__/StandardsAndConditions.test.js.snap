@@ -5,10 +5,13 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
   <label
     htmlFor="standards-and-conditions-supports-field"
   >
+    <div
+      className="custom-hr"
+    />
     <h4
       className="ds-h4"
     >
-      Standards and Conditions
+      Conditions for Enhanced Funding
     </h4>
   </label>
   <div
@@ -17,37 +20,138 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     <p
       className="ds-u-margin-bottom--3"
     >
-      Include a description about how this activity will support the Medicaid standards and conditions
-       
-      <a
-        href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112"
-      >
-        42 CFR 433.112
-      </a>
-      .
+      Review Medicaid Conditions for Enhanced Funding regulation for the criteria that qualifies activities for enhanced funding that pertains to various FFP rates.
     </p>
-    <Connect(RichText)
-      content="support"
-      editorClassName="rte-textarea-1"
-      id="standards-and-conditions-supports-field"
-      onSync={[Function]}
-    />
-    <div
-      className="ds-c-choice__checkedChild ds-u-margin-top--3"
+    <HelpDrawerToggle
+      helpDrawerOpen={false}
+      showDrawer={[Function]}
     >
-      <TextArea
-        label="If this activity does not support the Medicaid standards and conditions, please explain."
-        name="activity-set-standards-and-conditions-non-support"
-        onChange={[Function]}
-        rows={6}
-        style={
+      Review Standards and Conditions Regulation 
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon={
           Object {
-            "maxWidth": "initial",
+            "icon": Array [
+              320,
+              512,
+              Array [],
+              "f054",
+              "M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z",
+            ],
+            "iconName": "chevron-right",
+            "prefix": "fas",
           }
         }
-        value="does not support"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size="sm"
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
       />
-    </div>
+    </HelpDrawerToggle>
+    <fieldset
+      className="ds-c-fieldset"
+    >
+      <legend
+        className="ds-c-label"
+      >
+        <h4
+          className="ds-h4 ds-u-margin-top--2 ds-u-margin-bottom--0"
+        >
+          Enhanced Funding Qualification
+        </h4>
+        <p
+          className="ds-u-font-weight--normal"
+        >
+          Indicate whether the selected FFP for this activity has a match rate of 75-25 or 90-10. Provide justification of how the activity supports Medicaid initiatives and warrants the selected match rate.
+        </p>
+      </legend>
+      <Choice
+        checkedChildren={
+          <div
+            className="ds-c-choice__checkedChild"
+          >
+            <React.Fragment>
+              <FormLabel
+                className="ds-c-label--full-width ds-u-margin--0"
+                component="label"
+                fieldId="activity-description-field"
+                hint=""
+              >
+                <h4
+                  className="ds-h4"
+                >
+                  Enhanced Funding Justification
+                </h4>
+                <p
+                  className="ds-u-font-weight--normal"
+                >
+                  Describe or list line by line how this activity will support the Medicaid Standards and Conditions 
+                  <a
+                    href="#"
+                  >
+                    42 CFR 433.112.
+                  </a>
+                </p>
+                <p
+                  className="instruction-box ds-u-font-weight--normal"
+                >
+                  Example: This activity addresses conditions 5, 6, 7, 13, and specifically, products delivered for this activity will be owned by the state, and HHS will have a royalty free, non-exclusive, and irrevocable license to reproduce, publish, or otherwise use and authorize others to use. The costs of the system were determined in accordance with 45 CFR 75, subpart E, and this activity will promote resuse of systems across our systems enterprise. 
+                  <br />
+                   Additionally, this activity will comply with all of the other conditions of enhanced funding except for:
+                  <br />
+                  <ul
+                    className="ds-u-padding-x--3"
+                  >
+                    <li>
+                      3 - this is not a claims processing activity
+                    </li>
+                    <li>
+                      4 - this is not a quality improvement activity
+                    </li>
+                    <li>
+                      17 - this is not a MAGI-based system activity
+                    </li>
+                  </ul>
+                </p>
+              </FormLabel>
+              <Memo(Connect(RichText))
+                className="data-entry-box"
+                hint=""
+                label="Enhanced funding justification"
+                max={280}
+                name="enhanced funding justification"
+                onChange={[Function]}
+                rows={6}
+                value=""
+              />
+            </React.Fragment>
+          </div>
+        }
+        label="Yes, this activity is qualified for enhanced funding."
+        name="radio_choice"
+        onChange={[Function]}
+        type="radio"
+        value="yes"
+      />
+      <Choice
+        label="No, not applicable for enhanced funding, this activity has a 50-50 federal state split. "
+        name="radio_choice"
+        onChange={[Function]}
+        type="radio"
+        value="no"
+      />
+    </fieldset>
   </div>
 </Fragment>
 `;

@@ -43,7 +43,7 @@ describe('the activity name and funding source component', () => {
     expect(props.setName).toHaveBeenCalledWith(1, 'new value');
   });
 
-  it('handles changing the funding source/program type', () => {
+  xit('handles changing the funding source/program type', () => {
     const component = shallow(<NameAndFundingSource {...props} />);
 
     component.find('ChoiceList').prop('onChange')({

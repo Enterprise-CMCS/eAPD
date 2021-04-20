@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import Icon, { File, faPlusCircle, faSpinner } from "./Icons";
-import Instruction from "./Instruction";
+import Icon, { File, faPlusCircle, faSpinner } from './Icons';
+import Instruction from './Instruction';
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
@@ -28,7 +28,7 @@ Loading.propTypes = { children: PropType.node.isRequired };
 const ApdList = (
   {
     apds,
-    createApd: create,
+    // createApd: create,
     deleteApd: del,
     fetching,
     route,
@@ -41,10 +41,10 @@ const ApdList = (
 ) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const createNew = () => {
-    setIsLoading(true);
-    create();
-  };
+  // const createNew = () => {
+  //   setIsLoading(true);
+  //   create();
+  // };
 
   const open = id => e => {
     setIsLoading(true);
@@ -91,18 +91,18 @@ const ApdList = (
                   <h2 className="ds-h2 ds-u-display--inline-block">
                     {state ? state.name : ''} APDs
                   </h2>
-                  {canCreateApd &&
+                  {canCreateApd && (
                     <Link
-                    className="ds-u-float--right ds-c-button ds-c-button--primary"
-                    to={'create-apd-prototype'}
-                  >
-                    Create new
-                    <Icon
-                      className="ds-u-margin-left--1"
-                      icon={faPlusCircle}
-                    />
-                  </Link>
-                  }
+                      className="ds-u-float--right ds-c-button ds-c-button--primary"
+                      to="create-apd-prototype"
+                    >
+                      Create new
+                      <Icon
+                        className="ds-u-margin-left--1"
+                        icon={faPlusCircle}
+                      />
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -168,7 +168,7 @@ ApdList.propTypes = {
   fetching: PropType.bool.isRequired,
   route: PropType.string,
   state: PropType.object.isRequired,
-  createApd: PropType.func.isRequired,
+  // createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
   stateStatus: PropType.string.isRequired,

@@ -43,8 +43,8 @@ const hitechChildren = (
   <Fragment>
     <h2 className="ds-u-margin-bottom--2">APD Type *</h2>
     <Alert className="ds-u-measure--wide" variation="warn">
-      Planning and Operations APDs are not available for the HITECH
-      funding source.
+      Planning and Operations APDs are not available for the HITECH funding
+      source.
     </Alert>
     <p className="ds-u-margin-y--1">This selection is permanent for the APD.</p>
     <ChoiceList
@@ -170,6 +170,4 @@ const mapDispatchToProps = {
   createApd
 };
 
-const mapStateToProps = state => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateAPDForm);
+export default connect(null, mapDispatchToProps)(CreateAPDForm);

@@ -3,16 +3,40 @@
 exports[`<ActivityRoutes /> component renders as expected 1`] = `
 <Switch>
   <Route
-    path="/your/current/path/oms"
+    path="/your/current/path/alternative-considerations"
   >
     <Section
       id={null}
       resource={null}
     >
-      <Connect(Outcomes)
+      <Connect(AlternativeConsiderations)
+        activityIndex={3}
+      />
+    </Section>
+  </Route>
+  <Route
+    path="/your/current/path/schedule-milestones"
+  >
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(Schedule)
         activityIndex={3}
       />
       <Connect(Milestone)
+        activityIndex={3}
+      />
+    </Section>
+  </Route>
+  <Route
+    path="/your/current/path/standards-conditions"
+  >
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(StandardsAndConditions)
         activityIndex={3}
       />
     </Section>
@@ -71,9 +95,6 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
       resource={null}
     >
       <Connect(ActivityOverview)
-        activityIndex={3}
-      />
-      <Connect(StandardsAndConditions)
         activityIndex={3}
       />
     </Section>

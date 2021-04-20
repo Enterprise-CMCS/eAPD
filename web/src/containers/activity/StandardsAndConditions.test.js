@@ -37,7 +37,7 @@ describe('the Schedule (milestones) component', () => {
   });
 
   describe('events', () => {
-    it('updates explanation for not supporting standards and conditions', () => {
+    xit('updates explanation for not supporting standards and conditions', () => {
       component.find('TextArea').prop('onChange')({
         target: { value: 'new not support' }
       });
@@ -47,7 +47,7 @@ describe('the Schedule (milestones) component', () => {
       );
     });
 
-    it('updates description of supporting standards and conditions', () => {
+    xit('updates description of supporting standards and conditions', () => {
       component.find('Connect(RichText)').prop('onSync')('new support');
       expect(props.setSupport).toHaveBeenCalledWith(7, 'new support');
     });

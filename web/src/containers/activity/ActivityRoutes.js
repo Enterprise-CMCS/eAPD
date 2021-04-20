@@ -13,7 +13,6 @@ import FFP from './CostAllocateFFP';
 import Costs from './Costs';
 import Milestones from './Milestones';
 import Overview from './Overview';
-import Outcomes from './Outcomes';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
 

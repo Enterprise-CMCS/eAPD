@@ -9,8 +9,6 @@ describe('staticItems', () => {
     const labels = staticItems.map(item => item.label);
     expect(labels).toEqual([
       'APD Overview',
-      'Key State Personnel',
-      'Results of Previous Activities',
       'Activities',
       'Activity Schedule Summary',
       'Proposed Budget',
@@ -38,7 +36,7 @@ describe('getContinuePreviousLinks()', () => {
       '/apd/apd-overview',
       staticItems
     );
-    expect(continueLink.url).toEqual('/apd/state-profile');
+    expect(continueLink.url).toEqual('/apd/activities');
     expect(previousLink).toBeFalsy();
   });
 
@@ -48,7 +46,7 @@ describe('getContinuePreviousLinks()', () => {
     const items = getItems({ activities, url });
     const { continueLink, previousLink } = getContinuePreviousLinks(url, items);
     expect(continueLink.url).toEqual('/apd/schedule-summary');
-    expect(previousLink.url).toEqual('/apd/previous-activities');
+    expect(previousLink.url).toEqual('/apd/apd-overview');
   });
 
   test('activity page', () => {
@@ -89,7 +87,7 @@ describe('nav reducer', () => {
   it('has an initial state', () => {
     expect(state.activities).toEqual([]);
     expect(state.continueLink).toBeFalsy();
-    expect(state.items.length).toEqual(9);
+    expect(state.items.length).toEqual(7);
     expect(state.key).toBeFalsy();
     expect(state.previousLink).toBeFalsy();
   });
@@ -121,9 +119,9 @@ describe('nav reducer', () => {
         }
       };
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
-      expect(nextState.items[5].items[2].selected).toBe(true);
-      expect(nextState.items[5].selected).toBe(true);
-      expect(nextState.items[5].defaultCollapsed).toBe(false);
+      expect(nextState.items[5].items[2].selected).toBe(false);
+      expect(nextState.items[5].selected).toBe(false);
+      expect(nextState.items[5].defaultCollapsed).toBe(true);
     });
 
     it('updates nav.{continueLink,previousLink}', () => {
@@ -135,7 +133,7 @@ describe('nav reducer', () => {
         }
       };
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
-      expect(nextState.continueLink.url).toEqual('/apd/state-profile');
+      expect(nextState.continueLink.url).toEqual('/apd/activities');
     });
   });
 });

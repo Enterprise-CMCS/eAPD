@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import {
   TextField,
   Dropdown,
-  ChoiceList,
+  // ChoiceList,
   Choice,
   FormLabel
 } from '@cmsgov/design-system';
@@ -17,7 +17,7 @@ import {
   setActivityOverview
 } from '../../actions/editActivity';
 import RichText from '../../components/RichText';
-import Instruction from '../../components/Instruction';
+// import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
@@ -25,48 +25,48 @@ import ComprehensiveOverview from './ComprehensiveOverview';
 
 const ActivityOverview = ({
   activity,
-  activityIndex,
-  setAlternatives,
-  setDescription,
-  setOverview
+  activityIndex
+  // setAlternatives,
+  // setDescription,
+  // setOverview
 }) => {
-  const { alternatives, description, summary } = activity;
+  const { summary } = activity;
 
-  const overviewLabel = useMemo(
-    () =>
-      t('activities.overview.activityOverviewInput.label', {
-        defaultValue: 'Provide a short overview of the activity.'
-      }),
-    []
-  );
-  const overviewHint = useMemo(
-    () =>
-      t('activities.overview.activityOverviewInput.hint', {
-        defaultValue: ''
-      }),
-    []
-  );
+  // const overviewLabel = useMemo(
+  //   () =>
+  //     t('activities.overview.activityOverviewInput.label', {
+  //       defaultValue: 'Provide a short overview of the activity.'
+  //     }),
+  //   []
+  // );
+  // const overviewHint = useMemo(
+  //   () =>
+  //     t('activities.overview.activityOverviewInput.hint', {
+  //       defaultValue: ''
+  //     }),
+  //   []
+  // );
 
-  const syncOverview = useCallback(
-    html => {
-      setOverview(activityIndex, html);
-    },
-    [activity.key]
-  );
+  // const syncOverview = useCallback(
+  //   html => {
+  //     setOverview(activityIndex, html);
+  //   },
+  //   [activity.key]
+  // );
 
-  const descriptionLabel = useMemo(
-    () =>
-      t(
-        `activities.overview.activityDescriptionInput.${
-          activity.fundingSource === 'HIE' ? 'hie' : 'standard'
-        }.label`,
-        {
-          defaultValue:
-            'Include as much detail as is necessary to explain the activity.'
-        }
-      ),
-    [activity.fundingSource]
-  );
+  // const descriptionLabel = useMemo(
+  //   () =>
+  //     t(
+  //       `activities.overview.activityDescriptionInput.${
+  //         activity.fundingSource === 'HIE' ? 'hie' : 'standard'
+  //       }.label`,
+  //       {
+  //         defaultValue:
+  //           'Include as much detail as is necessary to explain the activity.'
+  //       }
+  //     ),
+  //   [activity.fundingSource]
+  // );
   const descriptionHint = useMemo(
     () =>
       t(
@@ -79,33 +79,33 @@ const ActivityOverview = ({
       ),
     [activity.fundingSource]
   );
-  const syncDescription = useCallback(
-    html => {
-      setDescription(activityIndex, html);
-    },
-    [activity.key]
-  );
+  // const syncDescription = useCallback(
+  //   html => {
+  //     setDescription(activityIndex, html);
+  //   },
+  //   [activity.key]
+  // );
 
-  const alternativesLabel = useMemo(
-    () =>
-      t('activities.overview.activityAlternativesInput.label', {
-        defaultValue: 'Provide a short overview of the activity.'
-      }),
-    []
-  );
-  const alternativesHint = useMemo(
-    () =>
-      t('activities.overview.activityAlternativesInput.hint', {
-        defaultValue: ''
-      }),
-    []
-  );
-  const syncAlternatives = useCallback(
-    html => {
-      setAlternatives(activityIndex, html);
-    },
-    [activity.key]
-  );
+  // const alternativesLabel = useMemo(
+  //   () =>
+  //     t('activities.overview.activityAlternativesInput.label', {
+  //       defaultValue: 'Provide a short overview of the activity.'
+  //     }),
+  //   []
+  // );
+  // const alternativesHint = useMemo(
+  //   () =>
+  //     t('activities.overview.activityAlternativesInput.hint', {
+  //       defaultValue: ''
+  //     }),
+  //   []
+  // );
+  // const syncAlternatives = useCallback(
+  //   html => {
+  //     setAlternatives(activityIndex, html);
+  //   },
+  //   [activity.key]
+  // );
 
   const dropdownOptions = [
     { label: '- Select an option -', value: '' },
@@ -254,7 +254,7 @@ const ActivityOverview = ({
         rows={6}
         className="data-entry-box"
         value={summary}
-        onChange={overviewOnChange}
+        // onChange={overviewOnChange}
       />
 
       <ComprehensiveOverview />
@@ -300,10 +300,10 @@ const ActivityOverview = ({
 
 ActivityOverview.propTypes = {
   activity: PropTypes.object.isRequired,
-  activityIndex: PropTypes.number.isRequired,
-  setAlternatives: PropTypes.func.isRequired,
-  setDescription: PropTypes.func.isRequired,
-  setOverview: PropTypes.func.isRequired
+  activityIndex: PropTypes.number.isRequired
+  // setAlternatives: PropTypes.func.isRequired,
+  // setDescription: PropTypes.func.isRequired,
+  // setOverview: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => {

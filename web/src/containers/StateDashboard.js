@@ -2,7 +2,6 @@ import PropType from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import TagManager from 'react-gtm-module';
-import { Link } from 'react-router-dom';
 
 import ApdList from '../components/ApdList';
 import StateAffiliationStatus from '../components/StateAffiliationStatus';

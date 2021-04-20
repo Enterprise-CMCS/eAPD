@@ -100,25 +100,5 @@ exports[`APD overview component renders correctly 1`] = `
       onSync={[Function]}
     />
   </div>
-  <div>
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h3",
-          "level": "h3",
-        }
-      }
-      labelFor="mmis-overview-field"
-      reverse={false}
-      source="apd.mmis.instruction"
-    />
-    <Connect(RichText)
-      content="about mmis"
-      editorClassName="rte-textarea-l"
-      id="mmis-overview-field"
-      onSync={[Function]}
-    />
-  </div>
 </Section>
 `;

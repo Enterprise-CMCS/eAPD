@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { getAPDCreation, getAPDName, getAPDYearRange } from '../reducers/apd';
+import { getAPDCreation, getAPDYearRange } from '../reducers/apd';
 
 const ApdHeader = ({ apdCreated, year }) => (
   <Fragment>
@@ -13,7 +13,7 @@ const ApdHeader = ({ apdCreated, year }) => (
       {localStorage.getItem('apd-name')}
     </h1>
     <h2 className="ds-h4 ds-u-margin-top--1 ds-u-margin-bottom--4">
-      {localStorage.getItem('apd-funding-source').toUpperCase() + ' IAPD'}| FFY{' '}
+      {`${localStorage.getItem('apd-funding-source').toUpperCase()} IAPD`}| FFY{' '}
       {year}
     </h2>
   </Fragment>
@@ -21,15 +21,11 @@ const ApdHeader = ({ apdCreated, year }) => (
 
 ApdHeader.propTypes = {
   apdCreated: PropTypes.string.isRequired,
-  apdName: PropTypes.string,
   year: PropTypes.string.isRequired
 };
 
-ApdHeader.defaultProps = { apdName: '' };
-
 const mapStateToProps = state => ({
   apdCreated: getAPDCreation(state),
-  apdName: getAPDName(state),
   year: getAPDYearRange(state)
 });
 

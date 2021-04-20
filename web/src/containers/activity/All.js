@@ -1,30 +1,40 @@
 import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import EntryDetails from './EntryDetails';
 import { addActivity as actualAddActivity } from '../../actions/editActivity';
 import { Section } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
-import { Fragment } from 'react';
 
 const All = ({ addActivity, activities }) => {
   return (
     <Section id="activities" resource="activities">
       <hr className="custom-hr" />
-      <p class="instruction-box">Examples of individual activities include but are not limited to: E&E online application, E&E worker portal, E&E noticing system, claims processing engine, claims processing prior authorization, claims processing record keeping, HIE interface(s), CQM databases, decision support systems analytics platform, provider enrollment screening, provider fraud/waste/abuse, managed care member enrollment, etc. For each activity added, you will have the opportunity to provide details in their own respective subsections.</p>
+      <p className="instruction-box">
+        Examples of individual activities include but are not limited to: E&E
+        online application, E&E worker portal, E&E noticing system, claims
+        processing engine, claims processing prior authorization, claims
+        processing record keeping, HIE interface(s), CQM databases, decision
+        support systems analytics platform, provider enrollment screening,
+        provider fraud/waste/abuse, managed care member enrollment, etc. For
+        each activity added, you will have the opportunity to provide details in
+        their own respective subsections.
+      </p>
       {activities.length ? (
         activities.map((activity, index) => (
           <EntryDetails activityIndex={index} key={activity.key} />
         ))
       ) : (
         <Fragment>
-          <div class="ds-c-alert ds-c-alert--warn">
-              <div class="ds-c-alert__body">
-                <h3 class="ds-c-alert__heading">Activities have not been added for this APD.</h3>
-              </div>
+          <div className="ds-c-alert ds-c-alert--warn">
+            <div className="ds-c-alert__body">
+              <h3 className="ds-c-alert__heading">
+                Activities have not been added for this APD.
+              </h3>
             </div>
+          </div>
         </Fragment>
       )}
       <Button className="ds-u-margin-top--4" onClick={addActivity}>

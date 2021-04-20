@@ -9,7 +9,7 @@ import NavLink from '../../components/NavLink';
 
 import { t } from '../../i18n';
 
-const makeTitle = ({ name, fundingSource }, i) => {
+const makeTitle = ({ name }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
   if (name) {
     title += `: ${name}`;
@@ -82,11 +82,9 @@ const EntryDetails = ({
         headingLevel="4"
         editContent={editContent}
       >
-        {
-          [
-            /* children are required, so send an empty array to suppress errors */
-          ]
-        }
+        {[
+          /* children are required, so send an empty array to suppress errors */
+        ]}
       </Review>
     </div>
   );

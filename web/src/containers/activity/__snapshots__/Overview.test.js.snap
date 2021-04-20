@@ -16,72 +16,171 @@ exports[`activity overview/summary section (in the activity body) renders correc
       }
     }
   />
-  <div
-    className="data-entry-box"
+  <fieldset
+    className="ds-c-fieldset"
   >
-    <FormLabel
-      className="ds-c-label--full-width"
-      component="label"
-      fieldId="activity-short-overview-field"
-      hint="Details for the activity go in the following sections."
+    <legend
+      className="ds-c-label"
     >
-      Provide a short overview of the activity.
-    </FormLabel>
-    <Connect(RichText)
-      editorClassName="rte-textarea-l"
-      id="activity-short-overview-field"
-      onSync={[Function]}
+      <span>
+        Medicaid Business Areas (MES Modules)
+      </span>
+      <p
+        className="ds-c-field__hint ds-u-font-weight--normal ds-u-margin--0"
+      >
+        Select a Medicaid Business Area(s) to represent which module your activity will fall under. If you do not see your Medicaid Business Area represented below, select other and specify business area.
+      </p>
+    </legend>
+    <Choice
+      label="Eligibility and Enrollment (E&E)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="a"
     />
-  </div>
-  <Connect(Schedule)
-    activityIndex={37}
-  />
-  <div
-    className="data-entry-box"
-  >
-    <FormLabel
-      className="ds-c-label--full-width"
-      component="label"
-      fieldId="activity-description-field"
-      hint=""
-    >
-      Include as much detail as is necessary to explain the activity.
-    </FormLabel>
-    <Connect(RichText)
-      editorClassName="rte-textarea-l"
-      id="activity-description-field"
-      onSync={[Function]}
+    <Choice
+      label="Claims Processing"
+      name="checkbox_choice"
+      type="checkbox"
+      value="b"
     />
-  </div>
-  <div
-    className="data-entry-box"
-  >
-    <FormLabel
-      className="ds-c-label--full-width"
-      component="label"
-      fieldId="activity-alternatives-field"
-      hint=""
-    >
-      Statement of alternative considerations and supporting justification
-    </FormLabel>
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h3",
-          "level": "h3",
-        }
+    <Choice
+      label="Financial Management"
+      name="checkbox_choice"
+      type="checkbox"
+      value="c"
+    />
+    <Choice
+      label="Decision Support System (DSS) / Data Warehouse (DW)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="d"
+    />
+    <Choice
+      label="Encounter Processing System (EPS)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="e"
+    />
+    <Choice
+      label="Long Term Services & Supports (LTSS)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="f"
+    />
+    <Choice
+      label="Member Management"
+      name="checkbox_choice"
+      type="checkbox"
+      value="g"
+    />
+    <Choice
+      label="Prescription Drug Monitoring Program (PDMP)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="h"
+    />
+    <Choice
+      label="Pharmacy Benefit Management (PBM)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="i"
+    />
+    <Choice
+      label="Provider Management"
+      name="checkbox_choice"
+      type="checkbox"
+      value="j"
+    />
+    <Choice
+      label="Third Party Liability (TPL)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="k"
+    />
+    <Choice
+      label="Electronic Visit Verification (EVV)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="l"
+    />
+    <Choice
+      checkedChildren={
+        <div
+          className="ds-c-choice__checkedChild"
+        >
+          <TextField
+            label="If other, specify appropriate business area."
+            labelClassName="ds-u-margin-top--0"
+            name="textfield_child"
+            type="text"
+          />
+        </div>
       }
-      labelFor={null}
-      reverse={false}
-      source="activities.overview.activityAlternativesInput"
+      label="Other"
+      name="checkbox_choice"
+      type="checkbox"
+      value="m"
     />
-    <Connect(RichText)
-      editorClassName="rte-textarea-l"
-      id="activity-alternatives-field"
-      onSync={[Function]}
-    />
-  </div>
-  <hr />
+  </fieldset>
+  <Dropdown
+    defaultValue=""
+    hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share.  "
+    label="Federal-State Split"
+    name="error_dropdown_field"
+    options={
+      Array [
+        Object {
+          "label": "- Select an option -",
+          "value": "",
+        },
+        Object {
+          "label": "90/10 DDI",
+          "value": "90/10 DDI",
+        },
+        Object {
+          "label": "75/25 Operations",
+          "value": "75/25 Operations",
+        },
+        Object {
+          "label": "75/25 Eligibility Worker",
+          "value": "75/25 Eligibility Worker",
+        },
+        Object {
+          "label": "50/50 DDI",
+          "value": "50/50 DDI",
+        },
+        Object {
+          "label": "50/50 Operations",
+          "value": "50/50 Operations",
+        },
+        Object {
+          "label": "50/50 Eligibility Worker",
+          "value": "50/50 Eligibility Worker",
+        },
+      ]
+    }
+  />
+  <FormLabel
+    className="ds-c-label--full-width"
+    component="label"
+    fieldId="activity-description-field"
+    hint=""
+  >
+    Activity Snapshot
+    <p
+      className="ds-u-font-weight--normal ds-u-margin-top--1"
+    >
+      Provide a brief and high-level snapshot of the activity. You can speak on purpose of your activity, its benefits, and any additional information that would give a reviewer a quick understanding of your activity.
+    </p>
+  </FormLabel>
+  <Connect(RichText)
+    className="data-entry-box"
+    hint="Provide a brief and high-level snapshot of the activity. You can speak on purpose of your activity, its benefits, and any additional information that would give a reviewer a quick understanding of your activity."
+    label="Activity Snapshot"
+    max={280}
+    name="activity overview"
+    rows={6}
+  />
+  <ComprehensiveOverview />
 </Subsection>
 `;

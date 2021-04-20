@@ -1,4 +1,4 @@
-import { ChoiceList, TextField } from '@cmsgov/design-system';
+import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
@@ -10,23 +10,23 @@ import {
 
 const NameAndFundingSourceForm = ({
   index,
-  item: { fundingSource, name },
-  setFundingSource,
+  item: { name },
+  // setFundingSource,
   setName
 }) => {
   const changeName = useCallback(({ target: { value } }) => {
     setName(index, value);
   });
 
-  const changeFundingSource = useCallback(({ target: { value } }) => {
-    setFundingSource(index, value);
-  });
+  // const changeFundingSource = useCallback(({ target: { value } }) => {
+  //   setFundingSource(index, value);
+  // });
 
-  const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
-    checked: fundingSource === choice,
-    label: choice,
-    value: choice
-  }));
+  // const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
+  //   checked: fundingSource === choice,
+  //   label: choice,
+  //   value: choice
+  // }));
 
   return (
     <Fragment>
@@ -55,7 +55,7 @@ NameAndFundingSourceForm.propTypes = {
     fundingSource: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired,
-  setFundingSource: PropTypes.func.isRequired,
+  // setFundingSource: PropTypes.func.isRequired,
   setName: PropTypes.func.isRequired
 };
 

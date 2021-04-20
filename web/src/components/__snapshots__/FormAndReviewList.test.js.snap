@@ -368,7 +368,7 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
   <Alert
     headingLevel="3"
     role="region"
-    variation="error"
+    variation="warn"
   >
     displayed when there is no data
   </Alert>
@@ -405,7 +405,7 @@ exports[`FormAndReviewList component renders properly without an add button if t
   <Alert
     headingLevel="3"
     role="region"
-    variation="error"
+    variation="warn"
   >
     displayed when there is no data
   </Alert>

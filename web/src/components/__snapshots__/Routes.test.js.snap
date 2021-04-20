@@ -78,6 +78,19 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
+        "displayName": "Connect(CreateAPDForm)",
+        "type": [Function],
+      }
+    }
+    key="/create-apd-prototype"
+    path="/create-apd-prototype"
+  />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
         "displayName": "Connect(LoginApplication)",
         "type": [Function],
       }

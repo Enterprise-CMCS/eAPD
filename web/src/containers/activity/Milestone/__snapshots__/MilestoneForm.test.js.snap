@@ -18,7 +18,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
     value="Milestone name"
   />
   <DateField
-    hint=""
+    hint="For example: 4 / 28 / 1986"
     label="Target completion date"
     onChange={[Function]}
     value="1942-8-16"

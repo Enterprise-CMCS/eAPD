@@ -5,6 +5,7 @@ exports[`<ApdPageRoutes /> component renders as expected 1`] = `
   <Route
     path="/your/current/path/activity/:activityIndex"
   >
+    <Connect(ApdHeader) />
     <Connect(EntryPage) />
   </Route>
   <Route
