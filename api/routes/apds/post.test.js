@@ -79,49 +79,7 @@ tap.test('apds POST endpoint', async endpointTest => {
 
     tests.test('sends back the new APD if everything works', async test => {
       const expectedApd = {
-        activities: [
-          {
-            alternatives: '',
-            contractorResources: [],
-            costAllocation: {
-              '2004': { ffp: { federal: 90, state: 10 }, other: 0 },
-              '2005': { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            costAllocationNarrative: {
-              methodology: '',
-              '2004': { otherSources: '' },
-              '2005': { otherSources: '' }
-            },
-            description: '',
-            expenses: [],
-            fundingSource: 'HIT',
-            outcomes: [],
-            name: 'Program Administration',
-            plannedEndDate: '',
-            plannedStartDate: '',
-            schedule: [],
-            standardsAndConditions: {
-              doesNotSupport: '',
-              supports: ''
-            },
-            statePersonnel: [],
-            summary: '',
-            quarterlyFFP: {
-              '2004': {
-                1: { contractors: 0, inHouse: 0 },
-                2: { contractors: 0, inHouse: 0 },
-                3: { contractors: 0, inHouse: 0 },
-                4: { contractors: 0, inHouse: 0 }
-              },
-              '2005': {
-                1: { contractors: 0, inHouse: 0 },
-                2: { contractors: 0, inHouse: 0 },
-                3: { contractors: 0, inHouse: 0 },
-                4: { contractors: 0, inHouse: 0 }
-              }
-            }
-          }
-        ],
+        activities: [],
         federalCitations: {},
         incentivePayments: {
           ehAmt: {

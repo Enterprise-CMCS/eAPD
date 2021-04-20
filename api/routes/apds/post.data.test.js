@@ -21,49 +21,7 @@ tap.test('APD data initializer', async test => {
   // new properties being added to the getNewApd return.  If we use
   // a "match" test, new properties will fall through the cracks.
   test.same(output, {
-    activities: [
-      {
-        alternatives: '',
-        contractorResources: [],
-        costAllocation: {
-          '1997': { ffp: { federal: 90, state: 10 }, other: 0 },
-          '1998': { ffp: { federal: 90, state: 10 }, other: 0 }
-        },
-        costAllocationNarrative: {
-          methodology: '',
-          '1997': { otherSources: '' },
-          '1998': { otherSources: '' }
-        },
-        description: '',
-        expenses: [],
-        fundingSource: 'HIT',
-        outcomes: [],
-        name: 'Program Administration',
-        plannedEndDate: '',
-        plannedStartDate: '',
-        schedule: [],
-        standardsAndConditions: {
-          doesNotSupport: '',
-          supports: ''
-        },
-        statePersonnel: [],
-        summary: '',
-        quarterlyFFP: {
-          '1997': {
-            1: { contractors: 0, inHouse: 0 },
-            2: { contractors: 0, inHouse: 0 },
-            3: { contractors: 0, inHouse: 0 },
-            4: { contractors: 0, inHouse: 0 }
-          },
-          '1998': {
-            1: { contractors: 0, inHouse: 0 },
-            2: { contractors: 0, inHouse: 0 },
-            3: { contractors: 0, inHouse: 0 },
-            4: { contractors: 0, inHouse: 0 }
-          }
-        }
-      }
-    ],
+    activities: [],
     federalCitations: {},
     incentivePayments: {
       ehAmt: {
