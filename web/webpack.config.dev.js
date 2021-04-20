@@ -7,8 +7,7 @@ const config = {
   mode: 'development',
   entry: {
     js: [
-      path.join(__dirname, 'src/app.dev.js'),
-      path.join(__dirname, 'src/styles/index.scss')
+      path.join(__dirname, 'src/app.dev.js')
     ]
   },
   output: {
@@ -29,18 +28,12 @@ const config = {
       {
         test: /\.scss$/,
         use: [
+          // Creates `style` nodes from JS strings
           'style-loader',
+          // Translates CSS into CommonJS
           'css-loader',
-          'resolve-url-loader',
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                includePaths: [path.resolve(__dirname, 'node_modules')]
-              }
-            }
-          }
+          // Compiles Sass to CSS
+          'sass-loader',
         ]
       },
       {

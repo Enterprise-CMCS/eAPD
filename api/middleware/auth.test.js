@@ -10,15 +10,13 @@ const res = {
 };
 const next = sandbox.spy();
 
-tap.beforeEach(done => {
+tap.beforeEach(() => {
   sandbox.resetBehavior();
   sandbox.resetHistory();
 
   res.status.returns(res);
   res.send.returns(res);
   res.end.returns(res);
-
-  done();
 });
 
 tap.test('logged in middleware', async loggedInMiddlewareTest => {

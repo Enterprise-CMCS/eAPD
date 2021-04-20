@@ -104,19 +104,6 @@ function deployAPItoEC2() {
     echo "Environment $ENVIRONMENT is invalid"
   fi
 
-  echo "• Checking availability of Backend"
-  if [[ $ENVIRONMENT == "production" ]]; then
-    while [[ "$(curl -s -o /dev/null -w %{http_code} https://eapd-api.cms.gov/heartbeat)" != "204" ]]; 
-      do echo "• • Backend currently unavailable" && sleep 60; 
-    done
-  elif [[ $ENVIRONMENT == "staging" ]]; then
-    while [[ "$(curl -s -o /dev/null -w %{http_code} https://staging-eapd-api.cms.gov/heartbeat)" != "204" ]]; 
-      do echo "• • Backend currently unavailable" && sleep 60; 
-    done
-  else
-    echo "Environment $ENVIRONMENT is invalid"
-  fi
-
   # And finally, we terminate previous instances.
   while read -r PREV_INSTANCE_INFO; do
     BITS=(${PREV_INSTANCE_INFO//,/ })
@@ -241,7 +228,7 @@ function createNewInstance() {
     --security-group-ids $AWS_SECURITY_GROUP \
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
-    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT}]" \
+    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT},{Key=cms-cloud-exempt:open-sg,Value=CLDSPT-5877}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
 }
