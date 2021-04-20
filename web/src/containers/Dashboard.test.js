@@ -4,13 +4,13 @@ import React from 'react';
 import { plain as Dashboard, mapStateToProps } from './Dashboard';
 
 describe('general dashboard component', () => {
-  test('renders correctly if not an admin', () => {
-    const component = shallow(<Dashboard isAdmin={false} />);
+  test('renders correctly if not a federal user', () => {
+    const component = shallow(<Dashboard isFederal={false} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('renders correctly if yes an admin', () => {
-    const component = shallow(<Dashboard isAdmin />);
+  test('renders correctly if federal user', () => {
+    const component = shallow(<Dashboard isFederal />);
     expect(component).toMatchSnapshot();
   });
 
@@ -19,20 +19,24 @@ describe('general dashboard component', () => {
       mapStateToProps({
         user: {
           data: {
-            role: 'some value'
+            state: {
+              id: 'fd'
+            }
           }
         }
       })
-    ).toEqual({ isAdmin: false, isFederal: false });
+    ).toEqual({ isFederal: true });
 
     expect(
       mapStateToProps({
         user: {
           data: {
-            role: 'admin'
+            state: {
+              id: 'fl'
+            }
           }
         }
       })
-    ).toEqual({ isAdmin: true, isFederal: false });
+    ).toEqual({ isFederal: false });
   });
 });

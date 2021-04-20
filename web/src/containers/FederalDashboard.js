@@ -7,7 +7,7 @@ import FederalAdmin from "./admin/FederalAdmin";
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
-// This component is mostly a placeholder until we implement this as a federal admin dashboard
+// This component is a placeholder until we implement this with the federal admin dashboard
 const FederalDashboard = ({ stateStatus }) => {
   const isApproved = stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
 
