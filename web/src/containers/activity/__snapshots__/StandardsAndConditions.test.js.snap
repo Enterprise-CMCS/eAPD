@@ -26,7 +26,8 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       helpDrawerOpen={false}
       showDrawer={[Function]}
     >
-      Review Standards and Conditions Regulation 
+      Review Standards and Conditions Regulation
+       
       <FontAwesomeIcon
         border={false}
         className=""

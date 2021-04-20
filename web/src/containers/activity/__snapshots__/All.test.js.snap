@@ -9,7 +9,7 @@ exports[`the Activities component renders correctly 1`] = `
     className="custom-hr"
   />
   <p
-    class="instruction-box"
+    className="instruction-box"
   >
     Examples of individual activities include but are not limited to: E&E online application, E&E worker portal, E&E noticing system, claims processing engine, claims processing prior authorization, claims processing record keeping, HIE interface(s), CQM databases, decision support systems analytics platform, provider enrollment screening, provider fraud/waste/abuse, managed care member enrollment, etc. For each activity added, you will have the opportunity to provide details in their own respective subsections.
   </p>
