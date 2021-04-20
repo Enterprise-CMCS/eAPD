@@ -3,15 +3,23 @@ import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 
 import Icon, { File, faPlusCircle, faSpinner } from "./Icons";
 import Instruction from "./Instruction";
+=======
+import Icon, { File, faPlusCircle, faSpinner } from './Icons';
+import Instruction from './Instruction';
+>>>>>>> master
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
-import UpgradeBrowser from "./UpgradeBrowser";
-import { getUserStateOrTerritoryStatus, getIsFedAdmin } from '../reducers/user.selector';
+import UpgradeBrowser from './UpgradeBrowser';
+import {
+  getUserStateOrTerritoryStatus,
+  getIsFedAdmin
+} from '../reducers/user.selector';
 import { STATE_AFFILIATION_STATUSES } from '../constants';
 
 const Loading = ({ children }) => (
@@ -55,7 +63,8 @@ const ApdList = (
     }
   };
 
-  const canCreateApd = !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
+  const canCreateApd =
+    !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -87,6 +96,7 @@ const ApdList = (
                   <h2 className="ds-h2 ds-u-display--inline-block">
                     {state ? state.name : ''} APDs
                   </h2>
+<<<<<<< HEAD
                   {canCreateApd &&
                     <Link
                     className="ds-u-float--right ds-c-button ds-c-button--primary"
@@ -99,6 +109,22 @@ const ApdList = (
                     />
                   </Link>
                   }
+=======
+                  {canCreateApd && (
+                    <Button
+                      variation="primary"
+                      className="ds-u-float--right"
+                      onClick={createNew}
+                    >
+                      Create new{' '}
+                      <span className="ds-u-visibility--screen-reader">
+                        APD
+                      </span>
+                      &nbsp;&nbsp;
+                      <Icon icon={faPlusCircle} />
+                    </Button>
+                  )}
+>>>>>>> master
                 </div>
               </div>
             </div>
@@ -169,11 +195,10 @@ ApdList.propTypes = {
   selectApd: PropType.func.isRequired,
   stateStatus: PropType.string.isRequired,
   isFedAdmin: PropType.func.isRequired
-
 };
 
 ApdList.defaultProps = {
-  route: '/apd',
+  route: '/apd'
 };
 
 const mapStateToProps = state => ({

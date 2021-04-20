@@ -101,7 +101,7 @@ module.exports = (
         });
       } catch (e) {
         logger.error({ id: req.id, message: e });
-        return res.status(500).end();
+        return res.status(400).end();
       }
     }
   );

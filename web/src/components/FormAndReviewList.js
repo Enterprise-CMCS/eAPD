@@ -33,7 +33,11 @@ const FormAndReviewItem = ({
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
       <Expanded index={index} {...rest} collapse={collapse} />
-      <Button variation="primary" onClick={collapse}>
+      <Button
+        id="form-and-review-list--done-btn"
+        variation="primary"
+        onClick={collapse}
+      >
         Done
       </Button>
       {extraButtons.map(({ onClick, text }) => (

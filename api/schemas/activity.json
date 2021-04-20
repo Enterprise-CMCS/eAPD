@@ -19,38 +19,66 @@
     "quarterlyFFP"
   ],
   "properties": {
-    "alternatives": { "type": "string" },
+    "alternatives": {
+      "type": "string"
+    },
     "contractorResources": {
       "type": "array",
-      "items": { "$ref": "contractorResource.json" }
+      "items": {
+        "$ref": "contractorResource.json"
+      }
     },
-    "costAllocation": { "$ref": "costAllocation.json" },
-    "costAllocationNarrative": { "$ref": "costAllocationNarrative.json" },
-    "description": { "type": "string" },
+    "costAllocation": {
+      "$ref": "costAllocation.json"
+    },
+    "costAllocationNarrative": {
+      "$ref": "costAllocationNarrative.json"
+    },
+    "description": {
+      "type": "string"
+    },
     "expenses": {
       "type": "array",
-      "items": { "$ref": "expense.json" }
+      "items": {
+        "$ref": "expense.json"
+      }
     },
     "fundingSource": {
-      "enum": ["HIE", "HIT", "MMIS", false]
+      "enum": [
+        "HIE",
+        "HIT",
+        "MMIS",
+        false
+      ]
     },
-    "name": { "type": "string" },
+    "name": {
+      "type": "string"
+    },
     "outcomes": {
       "type": "array",
-      "items": { "$ref": "outcome.json" }
+      "items": {
+        "$ref": "outcome.json"
+      }
     },
-    "plannedEndDate": { "$ref": "definitions.json#/optionalFullDate" },
-    "plannedStartDate": { "$ref": "definitions.json#/optionalFullDate" },
+    "plannedEndDate": {
+      "$ref": "definitions.json#/definitions/optionalFullDate"
+    },
+    "plannedStartDate": {
+      "$ref": "definitions.json#/definitions/optionalFullDate"
+    },
     "schedule": {
       "type": "array",
       "items": {
         "$id": "#/properties/activities/items/properties/schedule/items",
         "type": "object",
-        "required": ["endDate", "milestone"],
+        "required": [
+          "endDate",
+          "milestone"
+        ],
         "properties": {
           "endDate": {
             "$id": "#/properties/activities/items/properties/schedule/items/properties/endDate",
-            "$ref": "definitions.json#/optionalFullDate"
+            "$ref": "definitions.json#/definitions/optionalFullDate"
           },
           "milestone": {
             "$id": "#/properties/activities/items/properties/schedule/items/properties/milestone",
@@ -61,7 +89,10 @@
     },
     "standardsAndConditions": {
       "type": "object",
-      "required": ["doesNotSupport", "supports"],
+      "required": [
+        "doesNotSupport",
+        "supports"
+      ],
       "properties": {
         "doesNotSupport": {
           "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/doesNotSupport",
@@ -75,29 +106,41 @@
     },
     "statePersonnel": {
       "type": "array",
-      "items": { "$ref": "person.json" }
+      "items": {
+        "$ref": "person.json"
+      }
     },
-    "summary": { "type": "string" },
+    "summary": {
+      "type": "string"
+    },
     "quarterlyFFP": {
       "type": "object",
       "patternProperties": {
         "^[0-9]{4}$": {
           "$id": "#/properties/activities/items/properties/quarterlyFFP/year",
           "type": "object",
-          "required": ["1", "2", "3", "4"],
+          "required": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
           "patternProperties": {
             "^(1|2|3|4)$": {
               "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter",
               "type": "object",
-              "required": ["contractors", "inHouse"],
+              "required": [
+                "contractors",
+                "inHouse"
+              ],
               "properties": {
                 "contractors": {
                   "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/contractors",
-                  "$ref": "definitions.json#/optionalNumber"
+                  "$ref": "definitions.json#/definitions/optionalNumber"
                 },
                 "inHouse": {
                   "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/inHouse",
-                  "$ref": "definitions.json#/optionalNumber"
+                  "$ref": "definitions.json#/definitions/optionalNumber"
                 }
               }
             }
@@ -105,5 +148,6 @@
         }
       }
     }
-  }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
 }
