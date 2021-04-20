@@ -3,15 +3,10 @@ import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 
 import Icon, { File, faPlusCircle, faSpinner } from "./Icons";
 import Instruction from "./Instruction";
-=======
-import Icon, { File, faPlusCircle, faSpinner } from './Icons';
-import Instruction from './Instruction';
->>>>>>> master
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
@@ -96,7 +91,6 @@ const ApdList = (
                   <h2 className="ds-h2 ds-u-display--inline-block">
                     {state ? state.name : ''} APDs
                   </h2>
-<<<<<<< HEAD
                   {canCreateApd &&
                     <Link
                     className="ds-u-float--right ds-c-button ds-c-button--primary"
@@ -109,22 +103,6 @@ const ApdList = (
                     />
                   </Link>
                   }
-=======
-                  {canCreateApd && (
-                    <Button
-                      variation="primary"
-                      className="ds-u-float--right"
-                      onClick={createNew}
-                    >
-                      Create new{' '}
-                      <span className="ds-u-visibility--screen-reader">
-                        APD
-                      </span>
-                      &nbsp;&nbsp;
-                      <Icon icon={faPlusCircle} />
-                    </Button>
-                  )}
->>>>>>> master
                 </div>
               </div>
             </div>

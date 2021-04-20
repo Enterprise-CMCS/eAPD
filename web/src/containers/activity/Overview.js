@@ -180,7 +180,6 @@ const ActivityOverview = ({
           label="Long Term Services & Supports (LTSS)"
           value="f"
         />
-<<<<<<< HEAD
         <Choice
           name="checkbox_choice"
           type="checkbox"
@@ -257,27 +256,6 @@ const ActivityOverview = ({
         value={summary}
         onChange={overviewOnChange}
       />
-=======
-      )}
-
-      <div className="data-entry-box">
-        <FormLabel
-          className="ds-c-label--full-width"
-          hint={overviewHint}
-          fieldId="activity-short-overview-field"
-        >
-          {overviewLabel}
-        </FormLabel>
-        <RichText
-          id="activity-short-overview-field"
-          content={summary}
-          onSync={syncOverview}
-          editorClassName="rte-textarea-l"
-        />
-      </div>
-
-      <Schedule activityIndex={activityIndex} />
->>>>>>> master
 
       <ComprehensiveOverview />
 
