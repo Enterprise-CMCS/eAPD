@@ -96,7 +96,7 @@ const ApdList = (
                       className="ds-u-float--right ds-c-button ds-c-button--primary"
                       to="create-apd-prototype"
                     >
-                      Create new
+                      Create new APD
                       <Icon
                         className="ds-u-margin-left--1"
                         icon={faPlusCircle}

@@ -30,7 +30,7 @@ const All = ({ addActivity, activities }) => {
         <Fragment>
           <div className="ds-c-alert ds-c-alert--warn">
             <div className="ds-c-alert__body">
-              <h3 className="ds-c-alert__heading">
+              <h3 className="ds-c-alert__heading ds-u-font-weight--normal">
                 Activities have not been added for this APD.
               </h3>
             </div>
