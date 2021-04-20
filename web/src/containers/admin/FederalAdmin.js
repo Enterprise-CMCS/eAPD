@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Note: This component is a placeholder until we implement it in story #2812
 const FederalAdmin = () => {
 
   return (

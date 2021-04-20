@@ -6,10 +6,9 @@ exports[`the unexpected error alert component renders as expected if there is an
 >
   <Dialog
     ariaCloseLabel="Close modal dialog"
-    closeButtonText="Close"
     closeButtonVariation="transparent"
+    closeText="Close"
     escapeExitDisabled={false}
-    escapeExits={true}
     heading="Unable to save changes!"
     onExit={[Function]}
     underlayClickExits={false}
@@ -49,10 +48,9 @@ exports[`the unexpected error alert component renders as expected if there is an
 >
   <Dialog
     ariaCloseLabel="Close modal dialog"
-    closeButtonText="Close"
     closeButtonVariation="transparent"
+    closeText="Close"
     escapeExitDisabled={false}
-    escapeExits={true}
     heading="Unable to save changes!"
     onExit={[Function]}
     underlayClickExits={false}
