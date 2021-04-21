@@ -13,13 +13,13 @@ const AlternativeConsiderations = ({ activityIndex }) => {
       resource="activities.alternatives"
       id={`activity-outcomes-${activityIndex}`}
     >
-      <p className="instruction-box">
+      {/* <p className="instruction-box">
         The state must consider opportunities to share, leverage and reuse
         Medicaid technologies, including custom open source development, reuse
         of systems that already exist within the state, reuse of systems built
         for other states available under 45 CFR §95.617, licensing or purchasing
         COTS software or SaaS, or engaging in collaboration with other states.
-      </p>
+      </p> */}
 
       <FormLabel
         className="ds-c-label--full-width ds-u-padding-top--4"
@@ -52,7 +52,7 @@ const AlternativeConsiderations = ({ activityIndex }) => {
         Cost Benefit Analysis
         <p className="ds-u-font-weight--normal ds-u-margin-top--1">
           Explain consideration for costs and benefits of each option described
-          above. As applicable, include hown the selected approach supports the
+          above. As applicable, include how the selected approach supports the
           economic and efficient management of the Medicaid program.
         </p>
       </FormLabel>

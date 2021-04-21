@@ -39,9 +39,7 @@ const StandardsAndConditions = () => {
       >
         <h4 className="ds-h4">Enhanced Funding Justification</h4>
         <p className="ds-u-font-weight--normal">
-          Describe or list line by line how this activity will support the
-          Medicaid Standards and Conditions {/* eslint-disable-next-line */}
-          <a href="#">42 CFR 433.112.</a>
+          Describe how this activity will or will not support the Medicaid Standards and Conditions <br /> <a href="#">42 CFR 433.112</a>.   
         </p>
         <p className="instruction-box ds-u-font-weight--normal">
           Example: This activity addresses conditions 5, 6, 7, 13, and
@@ -101,10 +99,7 @@ const StandardsAndConditions = () => {
               Enhanced Funding Qualification
             </h4>
             <p className="ds-u-font-weight--normal">
-              Indicate whether the selected FFP for this activity has a match
-              rate of 75-25 or 90-10. Provide justification of how the activity
-              supports Medicaid initiatives and warrants the selected match
-              rate.
+              Provide justification of how the activity supports Medicaid initiatives and warrants the selected match rate.
             </p>
           </legend>
           <Choice

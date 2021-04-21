@@ -241,7 +241,7 @@ const ActivityOverview = ({
         Activity Snapshot
         <p className="ds-u-font-weight--normal ds-u-margin-top--1">
           Provide a brief and high-level snapshot of the activity. You can speak
-          on purpose of your activity, its benefits, and any additional
+          on the purpose of your activity, its benefits, and any additional
           information that would give a reviewer a quick understanding of your
           activity.
         </p>
