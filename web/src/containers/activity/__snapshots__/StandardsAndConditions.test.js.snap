@@ -74,7 +74,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
         <p
           className="ds-u-font-weight--normal"
         >
-          Indicate whether the selected FFP for this activity has a match rate of 75-25 or 90-10. Provide justification of how the activity supports Medicaid initiatives and warrants the selected match rate.
+          Provide justification of how the activity supports Medicaid initiatives and warrants the selected match rate.
         </p>
       </legend>
       <Choice
@@ -97,12 +97,15 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
                 <p
                   className="ds-u-font-weight--normal"
                 >
-                  Describe or list line by line how this activity will support the Medicaid Standards and Conditions 
+                  Describe how this activity will or will not support the Medicaid Standards and Conditions 
+                  <br />
+                   
                   <a
                     href="#"
                   >
-                    42 CFR 433.112.
+                    42 CFR 433.112
                   </a>
+                  .
                 </p>
                 <p
                   className="instruction-box ds-u-font-weight--normal"
