@@ -39,7 +39,7 @@ const StandardsAndConditions = () => {
       >
         <h4 className="ds-h4">Enhanced Funding Justification</h4>
         <p className="ds-u-font-weight--normal">
-          Describe how this activity will or will not support the Medicaid Standards and Conditions <br /> <a href="#">42 CFR 433.112</a>.   
+          Describe how this activity will or will not support the Medicaid Standards and Conditions <br /> <a href="#nowhere">42 CFR 433.112</a>.   
         </p>
         <p className="instruction-box ds-u-font-weight--normal">
           Example: This activity addresses conditions 5, 6, 7, 13, and
