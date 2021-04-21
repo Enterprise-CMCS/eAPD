@@ -13,9 +13,9 @@ const selectedColumns = [
   'auth_roles.name as role'
 ];
 
-const getAffiliationsByStateId = ({ stateId, status }) => {
+const getAffiliationsByStateId = ({ stateId, status, db = knex }) => {
   if (status === 'pending') {
-    return knex('auth_affiliations')
+    return db('auth_affiliations')
       .select(selectedColumns)
       .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
       .where({
@@ -24,7 +24,7 @@ const getAffiliationsByStateId = ({ stateId, status }) => {
       });
   }
   if (status === 'active') {
-    return knex('auth_affiliations')
+    return db('auth_affiliations')
       .select(selectedColumns)
       .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
       .where({
@@ -33,7 +33,7 @@ const getAffiliationsByStateId = ({ stateId, status }) => {
       });
   }
   if (status === 'inactive') {
-    return knex('auth_affiliations')
+    return db('auth_affiliations')
       .select(selectedColumns)
       .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
       .whereIn(
@@ -45,20 +45,20 @@ const getAffiliationsByStateId = ({ stateId, status }) => {
       );
   }
   if (status) logger.error(`invalid status ${status}`);
-  return knex('auth_affiliations')
+  return db('auth_affiliations')
     .select(selectedColumns)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
     .where({ state_id: stateId });
 };
 
-const populateAffiliation = async affiliation => {
+const populateAffiliation = async (affiliation, { client = oktaClient }) => {
   const { userId, updatedById } = affiliation;
   if (userId) {
     const {
       profile: { displayName, email, secondEmail, primaryPhone, mobilePhone }
-    } = await oktaClient.getUser(userId);
+    } = await client.getUser(userId);
     const { profile: { displayName: updatedByName = null } = {} } = updatedById
-      ? await oktaClient.getUser(updatedById).catch(() => {
+      ? await client.getUser(updatedById).catch(() => {
           return { profile: { displayName: updatedById } };
         })
       : {};
@@ -75,18 +75,23 @@ const populateAffiliation = async affiliation => {
   return null;
 };
 
-const getPopulatedAffiliationsByStateId = async ({ stateId, status }) => {
-  const affiliations = await getAffiliationsByStateId({ stateId, status });
+const getPopulatedAffiliationsByStateId = async ({
+  stateId,
+  status,
+  GetAffiliationsByStateId = getAffiliationsByStateId,
+  PopulateAffiliation = populateAffiliation
+}) => {
+  const affiliations = await GetAffiliationsByStateId({ stateId, status });
   if (!affiliations) return [];
   return Promise.all(
     affiliations.map(async affiliation => {
-      return populateAffiliation(affiliation);
+      return PopulateAffiliation(affiliation);
     })
   );
 };
 
-const getAffiliationById = ({ stateId, affiliationId }) => {
-  return knex('auth_affiliations')
+const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
+  return db('auth_affiliations')
     .select(selectedColumns)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
     .where({
@@ -96,15 +101,34 @@ const getAffiliationById = ({ stateId, affiliationId }) => {
     .first();
 };
 
-const getPopulatedAffiliationById = async ({ stateId, affiliationId }) => {
-  const affiliation = await getAffiliationById({ stateId, affiliationId });
+const getPopulatedAffiliationById = async ({
+  stateId,
+  affiliationId,
+  db = knex,
+  client = oktaClient
+}) => {
+  const affiliation = await getAffiliationById({ stateId, affiliationId, db });
   if (!affiliation) return null;
-  return populateAffiliation(affiliation);
+  return populateAffiliation(affiliation, { client });
+};
+
+const getAllAffiliations = async ({ db = knex } = {}) => {
+  return db('auth_affiliations').select(selectedColumns);
+};
+
+const getAffiliationsByStatus = async (status, { db = knex } = {}) => {
+  return db('auth_affiliations')
+    .select(selectedColumns)
+    .where('status', status);
 };
 
 module.exports = {
   getAffiliationsByStateId,
   getPopulatedAffiliationsByStateId,
   getAffiliationById,
-  getPopulatedAffiliationById
+  getPopulatedAffiliationById,
+  getAllAffiliations,
+  getAffiliationsByStatus,
+  populateAffiliation,
+  selectedColumns
 };
