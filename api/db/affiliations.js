@@ -51,7 +51,7 @@ const getAffiliationsByStateId = ({ stateId, status, db = knex }) => {
     .where({ state_id: stateId });
 };
 
-const populateAffiliation = async (affiliation, { client = oktaClient }) => {
+const populateAffiliation = async (affiliation, { client = oktaClient } = {}) => {
   const { userId, updatedById } = affiliation;
   if (userId) {
     const {
@@ -85,7 +85,7 @@ const getPopulatedAffiliationsByStateId = async ({
   if (!affiliations) return [];
   return Promise.all(
     affiliations.map(async affiliation => {
-      return PopulateAffiliation(affiliation, {});
+      return PopulateAffiliation(affiliation);
     })
   );
 };
