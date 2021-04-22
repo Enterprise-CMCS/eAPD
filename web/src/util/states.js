@@ -60,7 +60,7 @@ const STATES = [
   { id: 'pr', name: 'Puerto Rico' },
   { id: 'vi', name: 'U.S. Virgin Islands' },
 
-  // Federal Admin
+  // Federal
   { id: 'fd', name: 'Federal' }
 ];
 
