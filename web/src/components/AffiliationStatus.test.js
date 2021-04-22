@@ -2,12 +2,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import {
-  plain as StateAffiliationStatus,
+  plain as AffiliationStatus,
   ApprovalStatus
-} from './StateAffiliationStatus';
-import { STATE_AFFILIATION_STATUSES } from '../constants';
+} from './AffiliationStatus';
+import { AFFILIATION_STATUSES } from '../constants';
 
-const { DENIED, REQUESTED, REVOKED } = STATE_AFFILIATION_STATUSES;
+const { DENIED, REQUESTED, REVOKED } = AFFILIATION_STATUSES;
 
 const initialProps = {
   state: {
@@ -20,9 +20,9 @@ const initialProps = {
 jest.spyOn(React, 'useEffect').mockImplementation(() => {});
 
 const setup = (props = {}) =>
-  render(<StateAffiliationStatus {...initialProps} {...props} />);
+  render(<AffiliationStatus {...initialProps} {...props} />);
 
-describe('<StateAffiliationStatus />', () => {
+describe('<AffiliationStatus />', () => {
   it('displays the eAPD Logo', () => {
     setup();
     expect(screen.getByAltText('eAPD Logo')).toBeInTheDocument();

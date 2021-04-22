@@ -1,16 +1,16 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { STATE_AFFILIATION_STATUSES } from '../constants';
+import { AFFILIATION_STATUSES } from '../constants';
 
 import ApdList from '../components/ApdList';
-import StateAffiliationStatus from '../components/StateAffiliationStatus';
+import AffiliationStatus from '../components/AffiliationStatus';
 
 import { plain as StateDashboard } from './StateDashboard';
 
 const initialProps = {
   state: { id: 'ak' },
   role: 'some role',
-  stateStatus: STATE_AFFILIATION_STATUSES.APPROVED
+  stateStatus: AFFILIATION_STATUSES.APPROVED
 };
 
 const setup = (props = {}) =>
@@ -22,8 +22,8 @@ describe('<StateDashboard /> component', () => {
     expect(component.find(ApdList).exists()).toBe(true);
   });
 
-  it('renders <StateAffiliationStatus /> otherwise', () => {
+  it('renders <AffiliationStatus /> otherwise', () => {
     const component = setup({ stateStatus: '' });
-    expect(component.find(StateAffiliationStatus).exists()).toBe(true);
+    expect(component.find(AffiliationStatus).exists()).toBe(true);
   });
 });

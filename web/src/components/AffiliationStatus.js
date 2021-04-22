@@ -4,24 +4,24 @@ import { connect } from 'react-redux';
 
 import Instruction from './Instruction';
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
-import { STATE_AFFILIATION_STATUSES } from '../constants';
+import { AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from './UpgradeBrowser';
 import axios from '../util/api';
 
 const ApprovalOptions = {
-  [STATE_AFFILIATION_STATUSES.REQUESTED]: {
+  [AFFILIATION_STATUSES.REQUESTED]: {
     status: 'Approval Pending From State Administrator',
     src: '../static/icons/puzzle.svg',
     alt: 'Puzzle Piece Icon',
     width: 57
   },
-  [STATE_AFFILIATION_STATUSES.DENIED]: {
+  [AFFILIATION_STATUSES.DENIED]: {
     status: 'Approval Has Been Denied',
     src: '../static/icons/alert.svg',
     alt: 'Alert Icon',
     width: 51
   },
-  [STATE_AFFILIATION_STATUSES.REVOKED]: {
+  [AFFILIATION_STATUSES.REVOKED]: {
     status: 'Approval Permissions Revoked',
     src: '../static/icons/alert.svg',
     alt: 'Alert Icon',
@@ -65,7 +65,7 @@ ApprovalStatus.propTypes = {
 //   </div>
 // );
 
-const StateAffiliationStatus = ({ state, stateStatus }) => {
+const AffiliationStatus = ({ state, stateStatus }) => {
   const [mailTo, setMailTo] = useState('');
 
   React.useEffect(() => {
@@ -112,7 +112,7 @@ const StateAffiliationStatus = ({ state, stateStatus }) => {
   );
 };
 
-StateAffiliationStatus.propTypes = {
+AffiliationStatus.propTypes = {
   state: PropType.object.isRequired,
   stateStatus: PropType.string.isRequired
 };
@@ -120,9 +120,9 @@ StateAffiliationStatus.propTypes = {
 const mapStateToProps = state => ({
   state: state.user.data.state || null,
   stateStatus:
-    getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
+    getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });
 
-export default connect(mapStateToProps)(StateAffiliationStatus);
+export default connect(mapStateToProps)(AffiliationStatus);
 
-export { StateAffiliationStatus as plain, ApprovalStatus, mapStateToProps };
+export { AffiliationStatus as plain, ApprovalStatus, mapStateToProps };
