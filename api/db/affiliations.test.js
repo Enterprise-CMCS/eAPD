@@ -42,14 +42,6 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     dbMock.reset();
   });
 
-  affiliationsTests.test('get all Affiliations', async test => {
-    db.select.withArgs(selectedColumns).resolves(expectedUsers);
-    db.where.withArgs('foo').returnsThis();
-
-    const results = await getAllAffiliations({ db });
-    test.equal(expectedUsers, results);
-  });
-
   affiliationsTests.test('get affiliations by state id', async test => {
     db.select.withArgs(selectedColumns).returnsThis();
     db.leftJoin
@@ -200,8 +192,8 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
       const results = await getPopulatedAffiliationsByStateId({
         stateId,
         status,
-        GetAffiliationsByStateId: getAffiliationsByStateStub,
-        PopulateAffiliation: populateAffiliationStub
+        getAffiliationsByStateId_: getAffiliationsByStateStub,
+        populateAffiliation_: populateAffiliationStub
       });
       test.same(results, populatedAffiliations);
     }
@@ -220,12 +212,82 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
       const results = await getPopulatedAffiliationsByStateId({
         stateId,
         status,
-        GetAffiliationsByStateId: getAffiliationsByStateStub,
-        PopulateAffiliation: populateAffiliationStub
+        getAffiliationsByStateId_: getAffiliationsByStateStub,
+        populateAffiliation_: populateAffiliationStub
       });
       test.same(results, []);
 
       sinon.assert.notCalled(populateAffiliationStub);
     }
   );
+
+  affiliationsTests.test('get all Affiliations', async test => {
+    db.leftJoin
+      .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis();
+    db.select.withArgs(selectedColumns).resolves(expectedUsers);
+
+    const results = await getAllAffiliations({ db });
+    test.equal(expectedUsers, results);
+  });
+
+  affiliationsTests.test('get all active Affiliations', async test => {
+    const status = 'active'
+    db.leftJoin
+      .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis();
+    db.select.withArgs(selectedColumns).returnsThis();
+    db.whereIn
+      .withArgs(
+        'status',
+        ['approved']
+      ).resolves(expectedUsers);
+
+    const results = await getAllAffiliations({status, db });
+    test.equal(expectedUsers, results);
+  });
+
+  affiliationsTests.test('get all pending Affiliations', async test => {
+    const status = 'pending'
+    db.leftJoin
+      .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis();
+    db.select.withArgs(selectedColumns).returnsThis();
+    db.whereIn
+      .withArgs(
+        'status',
+        ['requested']
+      ).resolves(expectedUsers)
+
+    const results = await getAllAffiliations({status, db });
+    test.equal(expectedUsers, results);
+  });
+
+  affiliationsTests.test('get all inactive Affiliations', async test => {
+    const status = 'inactive'
+    db.leftJoin
+      .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis();
+    db.select.withArgs(selectedColumns).returnsThis();
+    db.whereIn
+      .withArgs(
+        'status',
+        ['denied', 'revoked']
+      ).resolves(expectedUsers);
+
+    const results = await getAllAffiliations({status, db });
+    test.equal(expectedUsers, results);
+  });
+
+  affiliationsTests.test('get error with invalid Affiliations', async test => {
+    const status = 'NOTVALID'
+    db.leftJoin
+      .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis();
+    db.select.withArgs(selectedColumns).returnsThis();
+
+    const results = await getAllAffiliations({status, db });
+    test.equal([], results);
+
+  });
 });
