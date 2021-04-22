@@ -542,6 +542,119 @@ Object {
   },
   "openapi": "3.0.0",
   "paths": Object {
+    "/affiliations/": Object {
+      "get": Object {
+        "description": "Get a list of all user affiliations",
+        "parameters": Array [
+          Object {
+            "description": "The filter status of the affiliations for this US State",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": Object {
+              "enum": Array [
+                "pending",
+                "active",
+                "inactive",
+              ],
+              "type": "string",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "filter_status": Object {
+                    "description": "The filter status of the affiliations for this US State",
+                    "enum": Array [
+                      "pending",
+                      "active",
+                      "inactive",
+                    ],
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": false,
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "created_at": Object {
+                        "description": "Timestamp of record creation",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "id": Object {
+                        "description": "ID of record",
+                        "type": "integer",
+                      },
+                      "role_id": Object {
+                        "description": "ID of the role applied to this user for this US State",
+                        "type": "integer",
+                      },
+                      "state_id": Object {
+                        "description": "2-letter US State or Territory abbreviation, lowercase",
+                        "type": "string",
+                      },
+                      "status": Object {
+                        "description": "The status of the user role for this US State",
+                        "enum": Array [
+                          "requested",
+                          "approved",
+                          "denied",
+                          "revoked",
+                        ],
+                        "type": "string",
+                      },
+                      "updated_at": Object {
+                        "description": "Timestamp of last update",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "updated_by": Object {
+                        "description": "ID of the user who last updated this record",
+                        "type": "string",
+                      },
+                      "user_id": Object {
+                        "description": "ID of user",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "List of all user affiliations",
+          },
+          "401": Object {
+            "description": "Not logged in",
+          },
+          "403": Object {
+            "description": "Does not have permission to this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+    },
     "/apds": Object {
       "get": Object {
         "description": "Get a list of all apds associated with requesting user",
