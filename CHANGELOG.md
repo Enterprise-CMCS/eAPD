@@ -1,10 +1,12 @@
 # Next release
 
-Anticipated release: April 19, 2021
+Anticipated release: April 26, 2021
 
 #### 🚀 New features
 
 #### 🐛 Bugs fixed
+
+- Refreshing Page Traps the User on Validating the Session ([#2976])
 
 #### ⚙️ Behind the scenes
 
@@ -15,3 +17,4 @@ Anticipated release: April 19, 2021
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#2947]: https://github.com/CMSgov/eAPD/issues/2947
+[#2976]: https://github.com/CMSgov/eAPD/issues/2976
