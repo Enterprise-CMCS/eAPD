@@ -29,13 +29,13 @@ const ApprovalOptions = {
   }
 };
 
-const ApprovalStatus = ({ mailTo, options }) => (
+const ApprovalStatus = ({ mailTo, mailToLabel, options }) => (
   <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
     <img alt={options.alt} src={options.src} width={options.width} />
     <h3 className="ds-u-margin-bottom--1">{options.status}</h3>
     <p className="ds-u-margin--0">
       Contact the{' '}
-      {mailTo && <a href={`mailto:${mailTo}`}>State Administrator</a>} for more
+      {mailTo && <a href={`mailto:${mailTo}`}>{mailToLabel}</a>} for more
       information.
     </p>
   </div>
@@ -103,6 +103,7 @@ const AffiliationStatus = ({ state, stateStatus }) => {
             </div>
             <ApprovalStatus
               mailTo={mailTo || 'CMS-EAPD@cms.hhs.gov'}
+              mailToLabel='State Administrator'
               options={ApprovalOptions[stateStatus]}
             />
           </div>

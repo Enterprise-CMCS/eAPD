@@ -1,5 +1,5 @@
 import PropType from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import TagManager from 'react-gtm-module';
 
@@ -19,10 +19,10 @@ const StateDashboard = ({ state, role, stateStatus }) => {
   const isApproved = stateStatus === AFFILIATION_STATUSES.APPROVED;
 
   return (
-    <React.Fragment>
+    <Fragment>
       {isApproved && <ApdList />}
       {!isApproved && <AffiliationStatus />}
-    </React.Fragment>
+    </Fragment>
   );
 };
 
