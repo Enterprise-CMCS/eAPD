@@ -287,7 +287,7 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     db.select.withArgs(selectedColumns).returnsThis();
 
     const results = await getAllAffiliations({status, db });
-    test.equal([], results);
+    test.same([], results);
 
   });
 });

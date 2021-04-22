@@ -47,9 +47,54 @@ describe('Affiliations endpoint | GET', () => {
 
     it('returns 200', async () => {
       const response = await api.get('/affiliations');
-      console.log(response)
       expect(response.status).toEqual(200);
 
     });
+
+    it('returns only active users', async () => {
+      const response = await api.get('/affiliations?status=active');
+      expect(response.status).toEqual(200);
+      response.data.forEach(affiliation =>{
+        expect(affiliation).toMatchSnapshot({
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+        })
+        expect(affiliation.status).toEqual('approved')
+      })
+
+    });
+    it('returns only pending users', async () => {
+      const response = await api.get('/affiliations?status=pending');
+      expect(response.status).toEqual(200);
+      response.data.forEach(affiliation =>{
+        expect(affiliation).toMatchSnapshot({
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+        })
+        expect(affiliation.status).toEqual('requested')
+      })
+
+    });
+
+    it('returns only inactive users', async () => {
+      const response = await api.get('/affiliations?status=inactive');
+      expect(response.status).toEqual(200);
+      response.data.forEach(affiliation =>{
+        expect(affiliation).toMatchSnapshot({
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+        })
+        expect(['revoked', 'denied'].includes(affiliation.status)).toBeTruthy()
+      })
+
+    });
+
+    it('returns 200 with an invalid status argument', async () => {
+      const response = await api.get('/affiliations?status=IRRELEVANT');
+      expect(response.status).toEqual(200);
+      expect(response.data).toEqual([])
+
+    });
+
   });
 });
