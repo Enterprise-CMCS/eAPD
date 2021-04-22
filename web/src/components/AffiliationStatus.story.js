@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { ApprovalStatus } from './StateAffiliationStatus';
+import { ApprovalStatus } from './AffiliationStatus';
 
 export default {
-  title: 'State Affiliation Status',
+  title: 'Affiliation Status',
   component: ApprovalStatus,
   parameters: {
-    jest: ['StateAffiliationStatus.test.js']
+    jest: ['AffiliationStatus.test.js']
   }
 };
 
@@ -15,7 +15,7 @@ const Template = args => <ApprovalStatus {...args} />;
 export const Requested = Template.bind({});
 Requested.args = {
   options: {
-    status: 'Approval Pending From State Administrator',
+    status: 'Approval Pending From Administrator',
     src: '../static/icons/puzzle.svg',
     alt: 'Puzzle Piece Icon',
     width: 57

@@ -6,9 +6,7 @@ const FederalAdmin = () => {
   return (
     <div className="site-body ds-l-container">
       <main id="start-main-content">
-        <div className="ds-u-padding-top--2">
-          <h2>Federal admin panel coming soon...</h2>
-        </div>
+        <h2>Federal admin panel coming soon...</h2>
       </main>
     </div>
   );

@@ -6,8 +6,8 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from '../../util/api';
 import StateAdmin, { mapStateToProps, mapDispatchToProps } from './StateAdmin';
 import {
-  getStateAffiliations,
-  updateStateAffiliation,
+  getAffiliations,
+  updateAffiliation,
   getRoleTypes
 } from '../../actions/admin';
 
@@ -92,8 +92,8 @@ describe('<StateAdmin />', () => {
     beforeEach(() => {
       const props = {
         getRoleTypes: jest.fn(),
-        getStateAffiliations: jest.fn(),
-        updateStateAffiliation: jest.fn()
+        getAffiliations: jest.fn(),
+        updateAffiliation: jest.fn()
       };
 
       fetchMock
@@ -141,8 +141,8 @@ describe('<StateAdmin />', () => {
     beforeEach(() => {
       const props = {
         getRoleTypes: jest.fn(),
-        getStateAffiliations: jest.fn(),
-        updateStateAffiliation: jest.fn()
+        getAffiliations: jest.fn(),
+        updateAffiliation: jest.fn()
       };
       const stateId = initialState.user.data.state.id;
       fetchMock
@@ -197,8 +197,8 @@ describe('<StateAdmin />', () => {
         affiliations: [activeAffiliation],
         roleTypes: [{ id: 50, name: 'eAPD Federal Admin' }],
         getRoleTypes: jest.fn(),
-        getStateAffiliations: jest.fn(),
-        updateStateAffiliation: jest.fn()
+        getAffiliations: jest.fn(),
+        updateAffiliation: jest.fn()
       };
       renderUtils = renderWithConnection(<StateAdmin {...props} />);
     });
@@ -245,8 +245,8 @@ describe('<StateAdmin />', () => {
         affiliations: [inactiveAffiliation],
         roleTypes: [{ id: 50, name: 'eAPD Federal Admin' }],
         getRoleTypes: jest.fn(),
-        getStateAffiliations: jest.fn(),
-        updateStateAffiliation: jest.fn()
+        getAffiliations: jest.fn(),
+        updateAffiliation: jest.fn()
       };
       renderUtils = renderWithConnection(<StateAdmin {...props} />);
     });
@@ -301,8 +301,8 @@ describe('<StateAdmin />', () => {
 
     test('maps dispatch actions to props', () => {
       expect(mapDispatchToProps).toEqual({
-        getStateAffiliations,
-        updateStateAffiliation,
+        getAffiliations,
+        updateAffiliation,
         getRoleTypes
       });
     });
