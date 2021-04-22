@@ -4,13 +4,11 @@ import { FormLabel } from '@cmsgov/design-system';
 import RichText from '../../components/RichText';
 
 const ComprehensiveOverview = () => {
-  const [myState, setMyState] = useState('blah'); /* eslint-disable-line */
+  const [myState, setMyState] = useState(''); /* eslint-disable-line */
 
-  const syncRichText = html => {
-    setMyState(html);
-    /* eslint-disable-next-line  */
-    console.log('here is rich text editor input', html);
-  };
+  // const syncRichText = html => {
+  //   setMyState(html);
+  // };
 
   return (
     <div className="ds-u-margin-top--6">
@@ -33,7 +31,6 @@ const ComprehensiveOverview = () => {
       <RichText
         id="activity-problem-statement"
         content=""
-        onSync={syncRichText}
         editorClassName="rte-textarea-l"
       />
 
@@ -51,7 +48,6 @@ const ComprehensiveOverview = () => {
       <RichText
         id="activity-proposed-solution"
         content=""
-        onSync={syncRichText}
         editorClassName="rte-textarea-l"
       />
 
@@ -77,7 +73,6 @@ const ComprehensiveOverview = () => {
       <RichText
         id="activity-compliance-statement"
         content=""
-        onSync={syncRichText}
         editorClassName="rte-textarea-l"
       />
     </div>
