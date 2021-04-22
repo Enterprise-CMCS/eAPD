@@ -40,4 +40,16 @@ describe('Affiliations endpoint | GET', () => {
       expect(response.status).toEqual(400);
     });
   });
+
+  describe('GET /affiliations', () => {
+    unauthenticatedTest('get', '/affiliations');
+    unauthorizedTest('get', '/affiliations');
+
+    it('returns 200', async () => {
+      const response = await api.get('/affiliations');
+      console.log(response)
+      expect(response.status).toEqual(200);
+
+    });
+  });
 });

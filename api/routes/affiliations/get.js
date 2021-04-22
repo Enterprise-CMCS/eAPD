@@ -1,15 +1,17 @@
 const logger = require('../../logger')('affiliations route get');
 const {
-  getPopulatedAffiliationsByStateId: gas,
-  getPopulatedAffiliationById: ga
+  getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
+  getPopulatedAffiliationById: _getPopulatedAffiliationsById,
+  getAllAffiliations: _getAllAffiliations,
 } = require('../../db');
 const { can } = require('../../middleware');
 
 module.exports = (
   app,
   {
-    getPopulatedAffiliationsByStateId = gas,
-    getPopulatedAffiliationById = ga
+    getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,
+    getPopulatedAffiliationById = _getPopulatedAffiliationsById,
+    getAllAffiliations = _getAllAffiliations,
   } = {}
 ) => {
   app.get(
@@ -75,4 +77,34 @@ module.exports = (
       }
     }
   );
+
+  app.get(
+    '/affiliations/',
+    can('view-affiliations'),
+    async (request, response, next) => {
+      logger.info({
+        id: request.id,
+        message: `handling GET /affiliations/`
+      });
+
+      const { status = null } = request.query;
+
+      try {
+        const affiliations = await getAllAffiliations({status});
+
+        if (affiliations) {
+          return response.send(affiliations);
+        }
+
+        logger.verbose({
+          id: request.id,
+          message: `There are no affiliations`
+        });
+        return response.status(400).end();
+      } catch (e) {
+      return next(e);
+  }
+
+    }
+  )
 };
