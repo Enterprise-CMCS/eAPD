@@ -14,21 +14,21 @@ const Template = args => <ApprovalStatus {...args} />;
 
 export const Requested = Template.bind({});
 Requested.args = {
-  status: 'REQUESTED',
-  administratorType: 'State',
-  mailTo: 'mail@mail.com'
+  status: 'requested',
+  mailTo: 'mail@mail.com',
+  administratorType: 'State'
 };
 
 export const Denied = Template.bind({});
 Denied.args = {
-  status: 'DENIED',
-  administratorType: 'State',
-  mailTo: 'mail@mail.com'
+  status: 'denied',
+  mailTo: 'mail@mail.com',
+  administratorType: 'State'
 };
 
 export const Revoked = Template.bind({});
 Revoked.args = {
-  status: 'REVOKED',
-  administratorType: 'State',
-  mailTo: 'mail@mail.com'
+  status: 'revoked',
+  mailTo: 'mail@mail.com',
+  administratorType: 'State'
 };
