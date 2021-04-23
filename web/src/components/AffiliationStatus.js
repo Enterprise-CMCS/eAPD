@@ -64,7 +64,7 @@ ApprovalStatus.propTypes = {
 //   </div>
 // );
 
-const AffiliationStatus = ({ state, stateStatus }) => {
+const AffiliationStatus = ({ state, approvalStatus }) => {
   const [mailTo, setMailTo] = useState('');
 
   React.useEffect(() => {
@@ -101,7 +101,7 @@ const AffiliationStatus = ({ state, stateStatus }) => {
               </div>
             </div>
             <ApprovalStatus
-              status={stateStatus}
+              status={approvalStatus}
               mailTo={mailTo || 'CMS-EAPD@cms.hhs.gov'}
               administratorType='State'
             />
@@ -114,12 +114,12 @@ const AffiliationStatus = ({ state, stateStatus }) => {
 
 AffiliationStatus.propTypes = {
   state: PropType.object.isRequired,
-  stateStatus: PropType.string.isRequired
+  approvalStatus: PropType.string.isRequired
 };
 
 const mapStateToProps = state => ({
   state: state.user.data.state || null,
-  stateStatus:
+  approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });
 

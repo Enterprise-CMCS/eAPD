@@ -10,7 +10,7 @@ import { plain as StateDashboard } from './StateDashboard';
 const initialProps = {
   state: { id: 'ak' },
   role: 'some role',
-  stateStatus: AFFILIATION_STATUSES.APPROVED
+  approvalStatus: AFFILIATION_STATUSES.APPROVED
 };
 
 const setup = (props = {}) =>
@@ -23,7 +23,7 @@ describe('<StateDashboard /> component', () => {
   });
 
   it('renders <AffiliationStatus /> otherwise', () => {
-    const component = setup({ stateStatus: '' });
+    const component = setup({ approvalStatus: '' });
     expect(component.find(AffiliationStatus).exists()).toBe(true);
   });
 });
