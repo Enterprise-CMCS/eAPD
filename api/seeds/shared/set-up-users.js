@@ -1,7 +1,7 @@
-const moment = require('moment')
+const { addDays, format, subDays } = require('date-fns')
 const logger = require('../../logger')('user seeder');
 
-const PostgresDateFormat = 'YYYY-MM-DD HH:mm:ss'
+const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss'
 
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
@@ -53,8 +53,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
     stateCertifications.push({
       username: regularUserId,
       state: 'ak',
-      certificationDate: moment().subtract(400, 'days').format(PostgresDateFormat),
-      certificationExpiration: moment().subtract(35, 'days').format(PostgresDateFormat),
+      certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
+      certificationExpiration: format(subDays(new Date(), 35), PostgresDateFormat),
       certifiedBy: 'seeds'
     })
   }
@@ -79,8 +79,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
     stateCertifications.push({
       username: stateAdminId,
       state: 'ak',
-      certificationDate: moment().subtract(40, 'days').format(PostgresDateFormat),
-      certificationExpiration: moment().add(325, 'days').format(PostgresDateFormat),
+      certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
+      certificationExpiration: format(addDays(new Date(), 325), PostgresDateFormat),
       certifiedBy: 'seeds'
     })
   }
@@ -96,8 +96,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
     stateCertifications.push({
       username: stateStaffId,
       state: 'ak',
-      certificationDate: moment().subtract(400, 'days').format(PostgresDateFormat),
-      certificationExpiration: moment().subtract(35, 'days').format(PostgresDateFormat),
+      certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
+      certificationExpiration: format(subDays(new Date(), 35), PostgresDateFormat),
       certifiedBy: 'seeds'
     })
   }
