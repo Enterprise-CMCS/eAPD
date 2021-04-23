@@ -12,7 +12,7 @@ const mockClock = sinon.useFakeTimers(new Date(1997, 6, 4).getTime());
 const getNewApd = require('./post.data');
 
 tap.test('APD data initializer', async test => {
-  tap.tearDown(() => {
+  tap.teardown(() => {
     mockClock.restore();
   });
 
