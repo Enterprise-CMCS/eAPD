@@ -15,12 +15,11 @@ let getAllActiveRoles;
 let handler;
 
 tap.test('GET /roles', async endpointTest => {
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
     next = sinon.stub();
     getAllActiveRoles = sinon.stub();
-    done();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -33,10 +32,9 @@ tap.test('GET /roles', async endpointTest => {
   });
 
   endpointTest.test('get all roles handler', async handlerTest => {
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, { getAllActiveRoles });
       handler = app.get.args.find(args => args[0] === '/roles')[2];
-      done();
     });
 
     handlerTest.test('database error', async invalidTest => {
