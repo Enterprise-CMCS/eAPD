@@ -3,7 +3,7 @@ import React from 'react';
 import { AFFILIATION_STATUSES } from '../constants';
 
 import FederalAdmin from './admin/FederalAdmin';
-import AffiliationStatus from '../components/AffiliationStatus';
+import { ApprovalStatus } from '../components/AffiliationStatus';
 
 import { plain as FederalDashboard } from './FederalDashboard';
 
@@ -20,8 +20,8 @@ describe('<FederalDashboard /> component', () => {
     expect(component.find(FederalAdmin).exists()).toBe(true);
   });
 
-  it('renders <AffiliationStatus /> otherwise', () => {
-    const component = setup({ stateStatus: '' });
-    expect(component.find(AffiliationStatus).exists()).toBe(true);
+  it('renders <ApprovalStatus /> otherwise', () => {
+    const component = setup({ stateStatus: AFFILIATION_STATUSES.DENIED });
+    expect(component.find(ApprovalStatus).exists()).toBe(true);
   });
 });

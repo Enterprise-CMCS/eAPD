@@ -54,16 +54,16 @@ describe('<AffiliationStatus />', () => {
 });
 
 describe('<ApprovalStatus />', () => {
-  const options = {
-    status: 'This is a status',
-    src: '../static/icons/icon.svg',
-    alt: 'This is ALT text',
+  const requestedStatusOptions = {
+    status: `Approval Pending From State Administrator`,
+    src: '../static/icons/puzzle.svg',
+    alt: 'Puzzle Piece Icon',
     width: 57
   };
 
   it('displays a mailto link', () => {
     render(
-      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
     );
     const aTag = screen.getByText('State Administrator', { selector: 'a' });
     expect(aTag).toBeInTheDocument();
@@ -72,19 +72,19 @@ describe('<ApprovalStatus />', () => {
 
   it('displays the status text', () => {
     render(
-      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
     );
-    const statusText = screen.getByText(options.status, { selector: 'h3' });
+    const statusText = screen.getByText(requestedStatusOptions.status, { selector: 'h3' });
     expect(statusText).toBeInTheDocument();
   });
 
   it('displays the img correctly', () => {
     render(
-      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
     );
-    const img = screen.getByAltText(options.alt);
+    const img = screen.getByAltText(requestedStatusOptions.alt);
     expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute('src', options.src);
-    expect(img).toHaveAttribute('width', options.width.toString());
+    expect(img).toHaveAttribute('src', requestedStatusOptions.src);
+    expect(img).toHaveAttribute('width', requestedStatusOptions.width.toString());
   });
 });

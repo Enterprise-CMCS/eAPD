@@ -14,33 +14,21 @@ const Template = args => <ApprovalStatus {...args} />;
 
 export const Requested = Template.bind({});
 Requested.args = {
-  options: {
-    status: 'Approval Pending From Administrator',
-    src: '../static/icons/puzzle.svg',
-    alt: 'Puzzle Piece Icon',
-    width: 57
-  },
+  status: 'REQUESTED',
+  administratorType: 'State',
   mailTo: 'mail@mail.com'
 };
 
 export const Denied = Template.bind({});
 Denied.args = {
-  options: {
-    status: 'Approval Has Been Denied',
-    src: '../static/icons/alert.svg',
-    alt: 'Alert Icon',
-    width: 51
-  },
+  status: 'DENIED',
+  administratorType: 'State',
   mailTo: 'mail@mail.com'
 };
 
 export const Revoked = Template.bind({});
 Revoked.args = {
-  options: {
-    status: 'Approval Permissions Revoked',
-    src: '../static/icons/alert.svg',
-    alt: 'Alert Icon',
-    width: 51
-  },
+  status: 'REVOKED',
+  administratorType: 'State',
   mailTo: 'mail@mail.com'
 };
