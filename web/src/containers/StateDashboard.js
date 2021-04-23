@@ -8,7 +8,7 @@ import AffiliationStatus from '../components/AffiliationStatus';
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { AFFILIATION_STATUSES } from '../constants';
 
-const StateDashboard = ({ state, role, stateStatus }) => {
+const StateDashboard = ({ state, role, approvalStatus }) => {
   TagManager.dataLayer({
     dataLayer: {
       stateId: state ? state.id : null,
@@ -16,7 +16,7 @@ const StateDashboard = ({ state, role, stateStatus }) => {
     }
   });
 
-  const isApproved = stateStatus === AFFILIATION_STATUSES.APPROVED;
+  const isApproved = approvalStatus === AFFILIATION_STATUSES.APPROVED;
 
   return (
     <Fragment>
@@ -29,13 +29,13 @@ const StateDashboard = ({ state, role, stateStatus }) => {
 StateDashboard.propTypes = {
   state: PropType.object.isRequired,
   role: PropType.string.isRequired,
-  stateStatus: PropType.string.isRequired
+  approvalStatus: PropType.string.isRequired
 };
 
 const mapStateToProps = state => ({
   state: state.user.data.state || null,
   role: state.user.data.role || 'Pending Role',
-  stateStatus:
+  approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });
 

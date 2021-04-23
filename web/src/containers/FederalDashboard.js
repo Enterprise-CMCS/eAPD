@@ -8,8 +8,8 @@ import  { ApprovalStatus } from '../components/AffiliationStatus';
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { AFFILIATION_STATUSES } from '../constants';
 
-const FederalDashboard = ({ stateStatus }) => {
-  const isApproved = stateStatus === AFFILIATION_STATUSES.APPROVED;
+const FederalDashboard = ({ approvalStatus }) => {
+  const isApproved = approvalStatus === AFFILIATION_STATUSES.APPROVED;
 
   return (
     <main
@@ -19,7 +19,7 @@ const FederalDashboard = ({ stateStatus }) => {
       <h1>Federal Portal</h1>
       {isApproved && <FederalAdmin />}
       {!isApproved && <ApprovalStatus 
-                        status={stateStatus}
+                        status={approvalStatus}
                         mailTo='CMS-EAPD@cms.hhs.gov'
                         administratorType='Federal' />}
     </main>
@@ -27,11 +27,11 @@ const FederalDashboard = ({ stateStatus }) => {
 };
 
 FederalDashboard.propTypes = {
-  stateStatus: PropType.string.isRequired
+  approvalStatus: PropType.string.isRequired
 };
 
 const mapStateToProps = state => ({
-  stateStatus:
+  approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });
 

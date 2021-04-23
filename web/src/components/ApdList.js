@@ -32,7 +32,7 @@ const ApdList = (
     route,
     selectApd: select,
     state,
-    stateStatus,
+    approvalStatus,
     isFedAdmin
   },
   { global = window } = {}
@@ -57,7 +57,7 @@ const ApdList = (
   };
 
   const canCreateApd =
-    !isFedAdmin && stateStatus === AFFILIATION_STATUSES.APPROVED;
+    !isFedAdmin && approvalStatus === AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -171,7 +171,7 @@ ApdList.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  stateStatus: PropType.string.isRequired,
+  approvalStatus: PropType.string.isRequired,
   isFedAdmin: PropType.func.isRequired
 };
 
@@ -184,7 +184,7 @@ const mapStateToProps = state => ({
   fetching: selectApds(state).fetching,
   state: state.user.data.state || null,
   isFedAdmin: getIsFedAdmin(state),
-  stateStatus:
+  approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });
 

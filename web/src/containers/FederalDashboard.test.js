@@ -8,7 +8,7 @@ import { ApprovalStatus } from '../components/AffiliationStatus';
 import { plain as FederalDashboard } from './FederalDashboard';
 
 const initialProps = {
-  stateStatus: AFFILIATION_STATUSES.APPROVED
+  approvalStatus: AFFILIATION_STATUSES.APPROVED
 };
 
 const setup = (props = {}) =>
@@ -21,7 +21,7 @@ describe('<FederalDashboard /> component', () => {
   });
 
   it('renders <ApprovalStatus /> otherwise', () => {
-    const component = setup({ stateStatus: AFFILIATION_STATUSES.DENIED });
+    const component = setup({ approvalStatus: AFFILIATION_STATUSES.DENIED });
     expect(component.find(ApprovalStatus).exists()).toBe(true);
   });
 });

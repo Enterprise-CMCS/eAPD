@@ -13,7 +13,7 @@ const initialProps = {
   state: {
     id: 'ak'
   },
-  stateStatus: REQUESTED
+  approvalStatus: REQUESTED
 };
 
 // mock useEffect so we don't make an API call
@@ -34,20 +34,20 @@ describe('<AffiliationStatus />', () => {
     expect(screen.getByText(text, { exact: false })).toBeInTheDocument();
   });
 
-  it('displays the pending message when stateStatus is REQUESTED', () => {
+  it('displays the pending message when approvalStatus is REQUESTED', () => {
     setup();
     const text = 'Approval Pending From State Administrator';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
 
-  it('displays the denied message when stateStatus is DENIED', () => {
-    setup({ stateStatus: DENIED });
+  it('displays the denied message when approvalStatus is DENIED', () => {
+    setup({ approvalStatus: DENIED });
     const text = 'Approval Has Been Denied';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
 
-  it('displays the revoked message when stateStatus is REVOKED', () => {
-    setup({ stateStatus: REVOKED });
+  it('displays the revoked message when approvalStatus is REVOKED', () => {
+    setup({ approvalStatus: REVOKED });
     const text = 'Approval Permissions Revoked';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
