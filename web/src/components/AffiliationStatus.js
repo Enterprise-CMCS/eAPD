@@ -8,47 +8,46 @@ import { AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from './UpgradeBrowser';
 import axios from '../util/api';
 
-const ApprovalOptions = {
-  [AFFILIATION_STATUSES.REQUESTED]: {
-    status: 'Approval Pending From State Administrator',
-    src: '../static/icons/puzzle.svg',
-    alt: 'Puzzle Piece Icon',
-    width: 57
-  },
-  [AFFILIATION_STATUSES.DENIED]: {
-    status: 'Approval Has Been Denied',
-    src: '../static/icons/alert.svg',
-    alt: 'Alert Icon',
-    width: 51
-  },
-  [AFFILIATION_STATUSES.REVOKED]: {
-    status: 'Approval Permissions Revoked',
-    src: '../static/icons/alert.svg',
-    alt: 'Alert Icon',
-    width: 51
-  }
+const ApprovalStatus = ({ status, mailTo, administratorType }) => {
+  const options = {
+    [AFFILIATION_STATUSES.REQUESTED]: {
+      status: `Approval Pending From ${administratorType} Administrator`,
+      src: '../static/icons/puzzle.svg',
+      alt: 'Puzzle Piece Icon',
+      width: 57
+    },
+    [AFFILIATION_STATUSES.DENIED]: {
+      status: 'Approval Has Been Denied',
+      src: '../static/icons/alert.svg',
+      alt: 'Alert Icon',
+      width: 18
+    },
+    [AFFILIATION_STATUSES.REVOKED]: {
+      status: 'Approval Permissions Revoked',
+      src: '../static/icons/alert.svg',
+      alt: 'Alert Icon',
+      width: 18
+    }
+  };
+
+  return (
+    <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
+      <img alt={options[status].alt} src={options[status].src} width={options[status].width} />
+      <h3 className="ds-u-margin-bottom--1">{options[status].status}</h3>
+      <p className="ds-u-margin--0">
+        Contact the{' '}
+        {mailTo && <a href={`mailto:${mailTo}`}>{administratorType} Administrator</a>} for more
+        information.
+      </p>
+    </div>
+  )
+};
+ApprovalStatus.propTypes = {
+  status: PropType.string.isRequired,
+  mailTo: PropType.string.isRequired,
+  administratorType: PropType.string.isRequired
 };
 
-const ApprovalStatus = ({ mailTo, mailToLabel, options }) => (
-  <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-    <img alt={options.alt} src={options.src} width={options.width} />
-    <h3 className="ds-u-margin-bottom--1">{options.status}</h3>
-    <p className="ds-u-margin--0">
-      Contact the{' '}
-      {mailTo && <a href={`mailto:${mailTo}`}>{mailToLabel}</a>} for more
-      information.
-    </p>
-  </div>
-);
-ApprovalStatus.propTypes = {
-  mailTo: PropType.string.isRequired,
-  options: PropType.shape({
-    status: PropType.string,
-    src: PropType.string,
-    alt: PropType.string,
-    width: PropType.string
-  }).isRequired
-};
 
 // TODO: We'll have to figure out a way to only show this the first time they go into an approved state?
 // const Approved = () => (
@@ -102,9 +101,9 @@ const AffiliationStatus = ({ state, stateStatus }) => {
               </div>
             </div>
             <ApprovalStatus
+              status={stateStatus}
               mailTo={mailTo || 'CMS-EAPD@cms.hhs.gov'}
-              mailToLabel='State Administrator'
-              options={ApprovalOptions[stateStatus]}
+              administratorType='State'
             />
           </div>
         </main>
