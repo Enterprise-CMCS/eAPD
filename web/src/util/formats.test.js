@@ -19,7 +19,7 @@ describe('formatting util', () => {
 
   test('formats percents', () => {
     expect(formatPerc(0.2575)).toEqual('+26%');
-    expect(formatPerc(-0.35)).toEqual('-35%');
+    expect(formatPerc(-0.35)).toEqual('−35%');
     expect(formatPerc(0.1234, 1)).toEqual('+12.3%');
   });
 });

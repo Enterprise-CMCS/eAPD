@@ -15,27 +15,36 @@
       "$id": "#/properties/activities/items/properties/contractorResources/items/properties/description",
       "type": "string"
     },
-    "end": { "$ref": "definitions.json#/optionalFullDate" },
+    "end": {
+      "$ref": "definitions.json#/definitions/optionalFullDate"
+    },
     "hourly": {
       "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly",
       "type": "object",
-      "required": ["data", "useHourly"],
+      "required": [
+        "data",
+        "useHourly"
+      ],
       "properties": {
         "data": {
           "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/data",
+          "type": "object",
           "patternProperties": {
             "^[0-9]{4}$": {
               "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year",
               "type": "object",
-              "required": ["hours", "rate"],
+              "required": [
+                "hours",
+                "rate"
+              ],
               "properties": {
                 "hours": {
                   "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/hours",
-                  "$ref": "definitions.json#/optionalNumber"
+                  "$ref": "definitions.json#/definitions/optionalNumber"
                 },
                 "rate": {
                   "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/rate",
-                  "$ref":  "definitions.json#/optionalNumber"
+                  "$ref": "definitions.json#/definitions/optionalNumber"
                 }
               }
             }
@@ -51,7 +60,9 @@
       "$id": "#/properties/activities/items/properties/contractorResources/items/properties/name",
       "type": "string"
     },
-    "start": { "$ref": "definitions.json#/optionalFullDate" },
+    "start": {
+      "$ref": "definitions.json#/definitions/optionalFullDate"
+    },
     "totalCost": {
       "$id": "#/properties/activities/items/properties/contractorResources/items/properties/totalCost",
       "type": "integer"
@@ -66,5 +77,6 @@
         }
       }
     }
-  }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
 }
