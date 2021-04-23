@@ -55,11 +55,12 @@ describe('Affiliations endpoint | GET', () => {
       const response = await api.get('/affiliations?status=active');
       expect(response.status).toEqual(200);
       response.data.forEach(affiliation =>{
+        expect(affiliation.status).toEqual('approved')
         expect(affiliation).toMatchSnapshot({
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
         })
-        expect(affiliation.status).toEqual('approved')
+
       })
 
     });
@@ -67,11 +68,12 @@ describe('Affiliations endpoint | GET', () => {
       const response = await api.get('/affiliations?status=pending');
       expect(response.status).toEqual(200);
       response.data.forEach(affiliation =>{
+        expect(affiliation.status).toEqual('requested')
         expect(affiliation).toMatchSnapshot({
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
         })
-        expect(affiliation.status).toEqual('requested')
+
       })
 
     });
@@ -80,11 +82,12 @@ describe('Affiliations endpoint | GET', () => {
       const response = await api.get('/affiliations?status=inactive');
       expect(response.status).toEqual(200);
       response.data.forEach(affiliation =>{
+        expect(['revoked', 'denied'].includes(affiliation.status)).toBeTruthy()
         expect(affiliation).toMatchSnapshot({
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
         })
-        expect(['revoked', 'denied'].includes(affiliation.status)).toBeTruthy()
+
       })
 
     });
