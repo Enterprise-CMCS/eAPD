@@ -290,8 +290,8 @@ exports[`<CreateAccount /> renders correctly 1`] = `
             "value": "admin",
           },
           Object {
-            "label": "State coordinator",
-            "value": "state coordinator",
+            "label": "State staff",
+            "value": "state staff",
           },
         ]
       }
