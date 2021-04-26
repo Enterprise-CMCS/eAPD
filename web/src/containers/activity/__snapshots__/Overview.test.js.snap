@@ -32,22 +32,10 @@ exports[`activity overview/summary section (in the activity body) renders correc
       </p>
     </legend>
     <Choice
-      label="Eligibility and Enrollment (E&E)"
-      name="checkbox_choice"
-      type="checkbox"
-      value="a"
-    />
-    <Choice
       label="Claims Processing"
       name="checkbox_choice"
       type="checkbox"
       value="b"
-    />
-    <Choice
-      label="Financial Management"
-      name="checkbox_choice"
-      type="checkbox"
-      value="c"
     />
     <Choice
       label="Decision Support System (DSS) / Data Warehouse (DW)"
@@ -56,10 +44,28 @@ exports[`activity overview/summary section (in the activity body) renders correc
       value="d"
     />
     <Choice
+      label="Electronic Visit Verification (EVV)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="l"
+    />
+    <Choice
+      label="Eligibility and Enrollment (E&E)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="a"
+    />
+    <Choice
       label="Encounter Processing System (EPS)"
       name="checkbox_choice"
       type="checkbox"
       value="e"
+    />
+    <Choice
+      label="Financial Management"
+      name="checkbox_choice"
+      type="checkbox"
+      value="c"
     />
     <Choice
       label="Long Term Services & Supports (LTSS)"
@@ -74,16 +80,16 @@ exports[`activity overview/summary section (in the activity body) renders correc
       value="g"
     />
     <Choice
-      label="Prescription Drug Monitoring Program (PDMP)"
-      name="checkbox_choice"
-      type="checkbox"
-      value="h"
-    />
-    <Choice
       label="Pharmacy Benefit Management (PBM)"
       name="checkbox_choice"
       type="checkbox"
       value="i"
+    />
+    <Choice
+      label="Prescription Drug Monitoring Program (PDMP)"
+      name="checkbox_choice"
+      type="checkbox"
+      value="h"
     />
     <Choice
       label="Provider Management"
@@ -96,12 +102,6 @@ exports[`activity overview/summary section (in the activity body) renders correc
       name="checkbox_choice"
       type="checkbox"
       value="k"
-    />
-    <Choice
-      label="Electronic Visit Verification (EVV)"
-      name="checkbox_choice"
-      type="checkbox"
-      value="l"
     />
     <Choice
       checkedChildren={
