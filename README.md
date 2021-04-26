@@ -1,6 +1,6 @@
 [![Build status](https://img.shields.io/circleci/project/github/CMSgov/eAPD.svg)](https://circleci.com/gh/CMSgov/workflows/eAPD)
 [![Test coverage](https://img.shields.io/codecov/c/github/CMSgov/eAPD.svg)](https://codecov.io/gh/CMSgov/eAPD)
-![Node.js >= 10.14](https://img.shields.io/badge/node-%3E%3D%2010.14-brightgreen.svg)
+![Node.js >= 14.16](https://img.shields.io/badge/node-%3E%3D%2014.16-brightgreen.svg)
 
 # CMS eAPD app
 
@@ -70,7 +70,7 @@ be used for testing, so they cannot require MFA):
 ```
 
 Make sure you record the passwords that you set them to. You can use fake emails or if you
-have a gmail account, you can add `+reviwer` to your email username (e.g. me+reviewer@gmail.com) to have them all email to your email.
+have a gmail account, you can add `+reviewer` to your email username (e.g. me+reviewer@gmail.com) to have them all email to your email.
 
 ### Making it run
 

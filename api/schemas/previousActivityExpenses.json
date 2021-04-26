@@ -5,12 +5,18 @@
     "^[0-9]{4}$": {
       "$id": "#/properties/previousActivityExpenses/year",
       "type": "object",
-      "required": ["hithie", "mmis"],
+      "required": [
+        "hithie",
+        "mmis"
+      ],
       "properties": {
         "hithie": {
           "$id": "#/properties/previousActivityExpenses/year/hithie",
           "type": "object",
-          "required": ["federalActual", "totalApproved"],
+          "required": [
+            "federalActual",
+            "totalApproved"
+          ],
           "properties": {
             "federalActual": {
               "$id": "#/properties/previousActivityExpenses/year/hithie/federalActual",
@@ -25,12 +31,19 @@
         "mmis": {
           "$id": "#/properties/previousActivityExpenses/year/mmis",
           "type": "object",
-          "required": ["50", "75", "90"],
+          "required": [
+            "50",
+            "75",
+            "90"
+          ],
           "properties": {
             "50": {
               "$id": "#/properties/previousActivityExpenses/year/mmis/50",
               "type": "object",
-              "required": ["federalActual", "totalApproved"],
+              "required": [
+                "federalActual",
+                "totalApproved"
+              ],
               "properties": {
                 "federalActual": {
                   "$id": "#/properties/previousActivityExpenses/year/mmis/50/federalActaul",
@@ -45,7 +58,10 @@
             "75": {
               "$id": "#/properties/previousActivityExpenses/year/mmis/75",
               "type": "object",
-              "required": ["federalActual", "totalApproved"],
+              "required": [
+                "federalActual",
+                "totalApproved"
+              ],
               "properties": {
                 "federalActual": {
                   "$id": "#/properties/previousActivityExpenses/year/mmis/75/federalActual",
@@ -60,7 +76,10 @@
             "90": {
               "$id": "#/properties/previousActivityExpenses/year/mmis/90",
               "type": "object",
-              "required": ["federalActual", "totalApproved"],
+              "required": [
+                "federalActual",
+                "totalApproved"
+              ],
               "properties": {
                 "federalActual": {
                   "$id": "#/properties/previousActivityExpenses/year/mmis/90/federalActual",
@@ -76,5 +95,6 @@
         }
       }
     }
-  }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
 }

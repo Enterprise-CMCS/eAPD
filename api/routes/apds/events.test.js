@@ -18,15 +18,13 @@ tap.test('apds events endpoints', async endpointTest => {
     end: sandbox.stub()
   };
 
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach(() => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
     res.status.returns(res);
     res.send.returns(res);
     res.end.returns(res);
-
-    done();
   });
 
   endpointTest.test('setup', async setupTest => {
