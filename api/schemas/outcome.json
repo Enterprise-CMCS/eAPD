@@ -1,7 +1,10 @@
 {
   "$id": "outcome.json",
   "type": "object",
-  "required": ["metrics", "outcome"],
+  "required": [
+    "metrics",
+    "outcome"
+  ],
   "properties": {
     "metrics": {
       "$id": "#/properties/activities/items/properties/outcomes/items/properties/metrics",
@@ -9,7 +12,9 @@
       "items": {
         "$id": "#/properties/activities/items/properties/outcomes/items/properties/metrics/items",
         "type": "object",
-        "required": ["metric"],
+        "required": [
+          "metric"
+        ],
         "properties": {
           "metric": {
             "$id": "#/properties/activities/items/properties/outcomes/items/properties/metrics/items/properties/metric",
@@ -22,5 +27,6 @@
       "$id": "#/properties/activities/items/properties/outcomes/items/properties/outcome",
       "type": "string"
     }
-  }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
 }
