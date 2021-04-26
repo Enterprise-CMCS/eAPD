@@ -32,8 +32,13 @@ const insertAndGetIDs = async (knex, tableName, values) => {
       return { name };
     });
 
-  await knex(tableName).insert(insert);
-  logger.info(`Completed seeding the ${chalk.cyan(tableName)} table`);
+  if (insert && insert.length) {
+    await knex(tableName).insert(insert);
+    logger.info(`Completed seeding the ${chalk.cyan(tableName)} table`);
+  } else {
+    logger.info(`Nothing to seed for the ${chalk.cyan(tableName)} table`);
+  }
+
   const asInserted = await knex(tableName).select('*');
 
   const idMapping = {};

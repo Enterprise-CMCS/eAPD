@@ -7,8 +7,8 @@ import Choice from '../../../components/Choice';
 import DateField from '../../../components/DateField';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
-import TextArea from '../../../components/TextArea';
 import NumberField from '../../../components/NumberField';
+import RichText from '../../../components/RichText';
 
 import {
   setContractorDescription,
@@ -96,6 +96,10 @@ const ContractorResourceForm = ({
     setHourlyRateForYear(activityIndex, index, year, value);
   };
 
+  const syncDescription = html => {
+    setDescription(activityIndex, index, html);
+  };
+
   return (
     <Fragment>
       <TextField
@@ -107,14 +111,19 @@ const ContractorResourceForm = ({
         value={name}
         onChange={getHandler(setName)}
       />
-      <TextArea
-        label="Procurement Methodology and Description of Services"
+      <FormLabel
+        className="full-width-label"
+        fieldId="contractor-description-field"
+      >
+        Procurement Methodology and Description of Services
+        <span className="ds-c-field__hint ds-u-margin--0">Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements.</span>
+      </FormLabel>
+      <RichText
         name="contractor-description"
-        hint="Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements."
-        labelClassName="full-width-label"
-        rows={5}
-        value={description}
-        onChange={getHandler(setDescription)}
+        id={`contractor-description-field-${index}`}
+        content={description}
+        onSync={syncDescription}
+        editorClassName="rte-textarea-1"
       />
       <FormLabel>Full Contract Term</FormLabel>
       <span className="ds-c-field__hint">

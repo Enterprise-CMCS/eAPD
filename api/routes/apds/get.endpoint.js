@@ -41,7 +41,7 @@ describe('APD endpoint', () => {
       it('as a user without a state', async () => {
         const api = login('all-permissions-no-state');
         const response = await api.get(url(4000));
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(403);
       });
 
       describe('as a user with a state', () => {

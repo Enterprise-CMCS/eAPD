@@ -27,10 +27,11 @@ const ContractorResourceReview = ({
       ariaLabel={`${index + 1}. ${name ||
         'Private Contractor or Vender Name not specified'}`}
     >
-      <p className="ds-u-margin-top--0">
-        {description ||
-          'Procurement Methodology and Description of Services not specified'}
-      </p>
+      {/* eslint-disable react/no-danger */}
+      <p
+        dangerouslySetInnerHTML={{ __html: description || 'Procurement Methodology and Description of Services not specified' }}
+        className="ds-u-margin-top--0"
+      />
       <ul className="ds-c-list--bare">
         <li>
           <strong>Full Contract Term:</strong> {dateRangeForHumans}

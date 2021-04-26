@@ -35,10 +35,9 @@ tap.test('auth activities GET endpoint', async endpointTest => {
 
   endpointTest.test('get all activities handler', async handlerTest => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, { getAuthActivities });
       handler = app.get.args.find(args => args[0] === '/auth/activities')[2];
-      done();
     });
 
     handlerTest.test('database error', async invalidTest => {
