@@ -12,14 +12,24 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     type="text"
     value="Honey Dipper Dan"
   />
-  <TextArea
-    hint="Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements."
-    label="Procurement Methodology and Description of Services"
-    labelClassName="full-width-label"
+  <FormLabel
+    className="full-width-label"
+    component="label"
+    fieldId="contractor-description-field"
+  >
+    Procurement Methodology and Description of Services
+    <span
+      className="ds-c-field__hint ds-u-margin--0"
+    >
+      Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements.
+    </span>
+  </FormLabel>
+  <Connect(RichText)
+    content="They cleaned up the latrines after the Battle of Hastings"
+    editorClassName="rte-textarea-1"
+    id="contractor-description-field-1"
     name="contractor-description"
-    onChange={[Function]}
-    rows={5}
-    value="They cleaned up the latrines after the Battle of Hastings"
+    onSync={[Function]}
   />
   <FormLabel
     component="label"
@@ -187,14 +197,24 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     type="text"
     value="Honey Dipper Dan"
   />
-  <TextArea
-    hint="Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements."
-    label="Procurement Methodology and Description of Services"
-    labelClassName="full-width-label"
+  <FormLabel
+    className="full-width-label"
+    component="label"
+    fieldId="contractor-description-field"
+  >
+    Procurement Methodology and Description of Services
+    <span
+      className="ds-c-field__hint ds-u-margin--0"
+    >
+      Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements.
+    </span>
+  </FormLabel>
+  <Connect(RichText)
+    content="They cleaned up the latrines after the Battle of Hastings"
+    editorClassName="rte-textarea-1"
+    id="contractor-description-field-1"
     name="contractor-description"
-    onChange={[Function]}
-    rows={5}
-    value="They cleaned up the latrines after the Battle of Hastings"
+    onSync={[Function]}
   />
   <FormLabel
     component="label"

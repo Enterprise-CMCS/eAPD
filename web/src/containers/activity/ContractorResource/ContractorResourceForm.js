@@ -116,7 +116,11 @@ const ContractorResourceForm = ({
         fieldId="contractor-description-field"
       >
         Procurement Methodology and Description of Services
-        <span className="ds-c-field__hint ds-u-margin--0">Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements.</span>
+        <span className="ds-c-field__hint ds-u-margin--0">
+          Explain the procurement process for the contractor and the scope of
+          their work. Provide justification for any non-competitive
+          procurements.
+        </span>
       </FormLabel>
       <RichText
         name="contractor-description"

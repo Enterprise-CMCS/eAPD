@@ -13,11 +13,11 @@ describe('the ContractorResourceForm component', () => {
       hourly: {
         useHourly: false,
         data: {
-          '1066': {
+          1066: {
             hours: 10,
             rate: 100
           },
-          '1067': {
+          1067: {
             hours: 20,
             rate: 200
           }
@@ -29,8 +29,8 @@ describe('the ContractorResourceForm component', () => {
       start: '1066-10-14',
       totalCost: 12345,
       years: {
-        '1066': 300,
-        '1067': 400
+        1066: 300,
+        1067: 400
       }
     },
     setDescription: jest.fn(),
