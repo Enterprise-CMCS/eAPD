@@ -1,4 +1,4 @@
-const uuid = require('uuid/v1');
+const { v4: uuidv4 } = require('uuid');
 const logger = require('../logger')('event management');
 const knex = require('./knex');
 
@@ -6,7 +6,7 @@ const createEventForAPD = async (
   { userID, apdID, eventType, metadata = null },
   { db = knex } = {}
 ) => {
-  const eventID = uuid();
+  const eventID = uuidv4();
   logger.verbose(
     `adding ${eventType} event for apd ${apdID}, event ID = ${eventID}`
   );

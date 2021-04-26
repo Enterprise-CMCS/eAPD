@@ -8,8 +8,7 @@ const config = {
   mode: 'production',
   entry: {
     app: [
-      path.join(__dirname, 'src/app.js'),
-      path.join(__dirname, 'src/styles/index.scss')
+      path.join(__dirname, 'src/app.js')
     ]
   },
   output: {
@@ -58,7 +57,7 @@ const config = {
           // with one nice, big file to deal with. Also adds vendor prefixes
           // as necessary for CSS rules that aren't yet widely supported.
           'postcss-loader',
-
+          
           {
             // Parse the Sass into CSS.
             loader: 'sass-loader',
