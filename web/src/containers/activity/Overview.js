@@ -147,20 +147,8 @@ const ActivityOverview = ({
         <Choice
           name="checkbox_choice"
           type="checkbox"
-          label="Eligibility and Enrollment (E&E)"
-          value="a"
-        />
-        <Choice
-          name="checkbox_choice"
-          type="checkbox"
           label="Claims Processing"
           value="b"
-        />
-        <Choice
-          name="checkbox_choice"
-          type="checkbox"
-          label="Financial Management"
-          value="c"
         />
         <Choice
           name="checkbox_choice"
@@ -171,8 +159,26 @@ const ActivityOverview = ({
         <Choice
           name="checkbox_choice"
           type="checkbox"
+          label="Electronic Visit Verification (EVV)"
+          value="l"
+        />
+        <Choice
+          name="checkbox_choice"
+          type="checkbox"
+          label="Eligibility and Enrollment (E&E)"
+          value="a"
+        />
+        <Choice
+          name="checkbox_choice"
+          type="checkbox"
           label="Encounter Processing System (EPS)"
           value="e"
+        />
+        <Choice
+          name="checkbox_choice"
+          type="checkbox"
+          label="Financial Management"
+          value="c"
         />
         <Choice
           name="checkbox_choice"
@@ -189,14 +195,14 @@ const ActivityOverview = ({
         <Choice
           name="checkbox_choice"
           type="checkbox"
-          label="Prescription Drug Monitoring Program (PDMP)"
-          value="h"
+          label="Pharmacy Benefit Management (PBM)"
+          value="i"
         />
         <Choice
           name="checkbox_choice"
           type="checkbox"
-          label="Pharmacy Benefit Management (PBM)"
-          value="i"
+          label="Prescription Drug Monitoring Program (PDMP)"
+          value="h"
         />
         <Choice
           name="checkbox_choice"
@@ -209,12 +215,6 @@ const ActivityOverview = ({
           type="checkbox"
           label="Third Party Liability (TPL)"
           value="k"
-        />
-        <Choice
-          name="checkbox_choice"
-          type="checkbox"
-          label="Electronic Visit Verification (EVV)"
-          value="l"
         />
         <Choice
           name="checkbox_choice"

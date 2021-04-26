@@ -51,7 +51,7 @@ const ComprehensiveOverview = () => {
         editorClassName="rte-textarea-l"
       />
 
-      <FormLabel
+      {/* <FormLabel
         className="ds-c-label--full-width"
         fieldId="activity-compliance-statement"
       >
@@ -74,7 +74,7 @@ const ComprehensiveOverview = () => {
         id="activity-compliance-statement"
         content=""
         editorClassName="rte-textarea-l"
-      />
+      /> */}
     </div>
   );
 };
