@@ -4,6 +4,7 @@ const { raw: knex } = require('../../db');
 const { can } = require('../../middleware');
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = auditor.actions;
+const federalState = 'fd'
 
 // map affiliation status to audit actions
 const statusToAction = status => {
@@ -36,9 +37,10 @@ module.exports = (app, { db = knex } = {}) => {
         return;
       }
 
+      // Check that user is not editing themselves
       const { user_id: affiliationUserId } = await db('auth_affiliations')
         .select('user_id')
-        .where({ state_id: stateId, id })
+        .where({ state_id: stateId, id, status:'approved' })
         .first();
 
       if (userId === affiliationUserId) {
@@ -50,6 +52,14 @@ module.exports = (app, { db = knex } = {}) => {
         return;
       }
 
+      // check that the user is authorized for this state
+      if (!affiliationUserId){
+        logger.error({
+          id: request.id,
+          message: `user ${request.user.id} does not have a valid affiliation for ${stateId}`
+        });
+      }
+      if (!validForState(req.user, stateId))
       const { status, roleId } = request.body;
       const audit = auditor(statusToAction(status), request);
 
@@ -75,4 +85,12 @@ module.exports = (app, { db = knex } = {}) => {
         .catch(() => response.status(400).end());
     }
   );
+
+  app.patch(
+    '/affiliations/:id/:status',
+    can('edit-affiliations'),
+    async (request, response) => {
+
+    }
+  )
 };
