@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Dropdown } from '@cmsgov/design-system';
+// import { Dropdown } from '@cmsgov/design-system';
+
+import MultiSelect from '../components/MultiSelect';
 
 import AuthenticationForm from '../components/AuthenticationForm';
-import { usStatesDropdownOptions } from '../util/states';
+import { usStatesDropdownOptions, STATES } from '../util/states';
 
 const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
   const [selectedStates, setStates] = useState([
-    usStatesDropdownOptions[0].value
+    usStatesDropdownOptions,[0].value
   ]);
 
   const changeStates = ({ target: { value } }) => {
@@ -41,7 +43,17 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
           >
             Select your State Affiliation.
           </label>
-          <Dropdown
+          <MultiSelect
+            label=""
+            ariaLabel="Select your State Affiliation"
+            id="states"
+            name="states"
+            options={STATES}
+            value={selectedStates[0]}
+            onChange={changeStates}
+          />
+
+          {/* <Dropdown
             label=""
             ariaLabel="Select your State Affiliation"
             id="states"
@@ -50,7 +62,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             size="medium"
             value={selectedStates[0]}
             onChange={changeStates}
-          />
+          /> */}
         </div>
       </AuthenticationForm>
     </div>
