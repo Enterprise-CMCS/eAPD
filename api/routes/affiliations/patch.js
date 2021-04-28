@@ -1,10 +1,9 @@
 const auditor = require('../../audit');
 const logger = require('../../logger')('affiliations');
 const { raw: knex } = require('../../db');
-const { can } = require('../../middleware');
+const { can, validForState } = require('../../middleware');
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = auditor.actions;
-const federalState = 'fd'
 
 // map affiliation status to audit actions
 const statusToAction = status => {
@@ -24,10 +23,10 @@ module.exports = (app, { db = knex } = {}) => {
   app.patch(
     '/states/:stateId/affiliations/:id',
     can('edit-affiliations'),
+    validForState('stateId'),
     async (request, response) => {
       const userId = request.user.id;
       const { stateId, id } = request.params;
-
       if (!request.body || !request.body.status || !request.body.roleId) {
         logger.error({
           id: request.id,
@@ -40,7 +39,7 @@ module.exports = (app, { db = knex } = {}) => {
       // Check that user is not editing themselves
       const { user_id: affiliationUserId } = await db('auth_affiliations')
         .select('user_id')
-        .where({ state_id: stateId, id, status:'approved' })
+        .where({ state_id: stateId, id })
         .first();
 
       if (userId === affiliationUserId) {
@@ -52,14 +51,6 @@ module.exports = (app, { db = knex } = {}) => {
         return;
       }
 
-      // check that the user is authorized for this state
-      if (!affiliationUserId){
-        logger.error({
-          id: request.id,
-          message: `user ${request.user.id} does not have a valid affiliation for ${stateId}`
-        });
-      }
-      if (!validForState(req.user, stateId))
       const { status, roleId } = request.body;
       const audit = auditor(statusToAction(status), request);
 
@@ -86,11 +77,4 @@ module.exports = (app, { db = knex } = {}) => {
     }
   );
 
-  app.patch(
-    '/affiliations/:id/:status',
-    can('edit-affiliations'),
-    async (request, response) => {
-
-    }
-  )
 };

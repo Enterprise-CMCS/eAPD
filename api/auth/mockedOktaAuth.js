@@ -105,6 +105,14 @@ const mockVerifyJWT = token => {
       });
     });
   }
+  if (token === 'fed-admin') {
+    return new Promise(resolve => {
+      resolve({
+        sub: 'fedadmin@email.com',
+        uid: 'fed-admin'
+      });
+    });
+  }
   return new Promise(resolve => {
     resolve(false);
   });
