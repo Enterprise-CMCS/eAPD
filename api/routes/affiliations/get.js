@@ -4,7 +4,7 @@ const {
   getPopulatedAffiliationById: _getPopulatedAffiliationsById,
   getAllAffiliations: _getAllAffiliations,
 } = require('../../db');
-const { can } = require('../../middleware');
+const { can, validForState } = require('../../middleware');
 
 module.exports = (
   app,
@@ -17,6 +17,7 @@ module.exports = (
   app.get(
     '/states/:stateId/affiliations',
     can('view-affiliations'),
+    validForState('stateId'),
     async (request, response, next) => {
       logger.info({
         id: request.id,
@@ -26,17 +27,21 @@ module.exports = (
       const { status = null } = request.query;
 
       try {
-        if (stateId !== request.user.state.id) {
-          logger.verbose('user does not have access to state');
-          return response.status(401).end();
-        }
 
+        if (stateId === 'fd'){
+          const affiliations = await getAllAffiliations({
+            status
+          });
+          return response.send(affiliations);
+
+        }
         const affiliations = await getPopulatedAffiliationsByStateId({
           stateId,
           status
         });
 
         return response.send(affiliations);
+
       } catch (e) {
         return next(e);
       }
