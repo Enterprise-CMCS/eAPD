@@ -41,7 +41,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             htmlFor="states"
             className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
           >
-            Select your State Affiliation.
+            Select your Affiliation(s).
           </label>
           <MultiSelect
             label=""
