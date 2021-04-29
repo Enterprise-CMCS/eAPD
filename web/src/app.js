@@ -17,6 +17,8 @@ import { browserIsRed } from './util/browser';
 import { html as browserHtml } from './components/UpgradeBrowser';
 import cookieHtml from './components/EnableCookies';
 
+import './styles/index.scss';
+
 if (browserIsRed) {
   // For browsers we don't support at all, use native DOM APIs to add the
   // warning box since we can't be certain that React will work.

@@ -5,12 +5,18 @@
     "^[0-9]{4}$": {
       "$id": "#/properties/activities/items/properties/costAllocation/year",
       "type": "object",
-      "required": ["ffp", "other"],
+      "required": [
+        "ffp",
+        "other"
+      ],
       "properties": {
         "ffp": {
           "$id": "#/properties/activities/items/properties/costAllocation/year/ffp",
           "type": "object",
-          "required": ["federal", "state"],
+          "required": [
+            "federal",
+            "state"
+          ],
           "properties": {
             "federal": {
               "$id": "#/properties/activities/items/properties/costAllocation/year/ffp/federal",
@@ -28,5 +34,6 @@
         }
       }
     }
-  }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
 }

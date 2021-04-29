@@ -20,9 +20,9 @@ describe('login component', () => {
   });
 
   it('renders correctly if logged in previously but not logged in now (shows logout notice)', () => {
-    const { queryByText } = setup({ hasEverLoggedOn: true });
+    const { getByText } = setup({ hasEverLoggedOn: true });
 
-    expect(queryByText(/You have securely logged out/i)).toBeTruthy();
+    expect(getByText(/You have securely logged out/i)).toBeTruthy();
   });
 
   it('renders correctly if not logged in, and never logged in', () => {
@@ -42,9 +42,9 @@ describe('login component', () => {
   });
 
   it('renders correctly if not logged in and there is an error', () => {
-    const { queryByText } = setup({ errorMessage: 'something here' });
+    const { getByText } = setup({ errorMessage: 'something here' });
 
-    expect(queryByText('something here')).toBeTruthy();
+    expect(getByText('something here')).toBeTruthy();
   });
 
   it('renders correctly if not logged in and fetching data', () => {
@@ -53,6 +53,23 @@ describe('login component', () => {
     expect(queryByRole('button', { name: /logging in/i })).toBeTruthy();
     expect(queryByRole('button', { name: /logging in/i })).toBeDisabled();
     expect(container.querySelector('.ds-c-spinner')).toBeTruthy();
+  });
+  
+  it('renders forgot password help text and link', () => {
+    const { getByText, getByRole } = setup();
+    expect(getByText(/Forgot password?/i)).toBeTruthy();
+    expect(getByRole('link', {name: /Reset password at EUA/i} )).toBeTruthy();
+  });
+
+  it('renders new user guides, links, and help email', () => {
+    const { getByText, getByRole } = setup();
+    
+    expect(getByRole('heading', {name: 'New Users'} )).toBeTruthy();
+    expect(getByText('New users must have an EUA account with the correct job codes before logging into the system.')).toBeTruthy();
+    
+    expect(getByRole('link', {name: 'How to Get Started'} )).toBeTruthy();
+    expect(getByRole('link', {name: 'How to Access the eAPD'} )).toBeTruthy();    
+    expect(getByRole('link', {name: 'CMS-EAPD@cms.hhs.gov'} )).toBeTruthy();
   });
 
   it('calls login prop', () => {

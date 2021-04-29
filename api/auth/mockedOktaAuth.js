@@ -89,30 +89,19 @@ const mockVerifyJWT = token => {
       });
     });
   }
-  if (token === 'no.permissions.nostate') {
-    const uid = 'no-permissions-no-state';
-    return new Promise(resolve => {
-      resolve({
-        sub: 'npno@email.com',
-        uid
-      });
-    });
-  }
-  if (token === 'all.permissions.nostate') {
-    const uid = 'all-permissions-no-state';
+  if (token === 'all-permissions-no-state') {
     return new Promise(resolve => {
       resolve({
         sub: 'apno@email.com',
-        uid
+        uid: 'all-permissions-no-state'
       });
     });
   }
-  if (token === 'all.permissions.andstate') {
-    const uid = 'all-permissions-and-state';
+  if (token === 'all-permissions-and-state') {
     return new Promise(resolve => {
       resolve({
         sub: 'apas@email.com',
-        uid
+        uid: 'all-permissions-and-state'
       });
     });
   }
