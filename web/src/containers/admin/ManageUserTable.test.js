@@ -37,7 +37,7 @@ const deniedAffiliation = {
   id: 24,
   mobilePhone: null,
   primaryPhone: '4045555555',
-  role: 'State Coordinator',
+  role: 'State Staff',
   secondEmail: null,
   stateId: 'md',
   status: 'denied',

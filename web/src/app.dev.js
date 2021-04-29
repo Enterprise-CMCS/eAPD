@@ -18,6 +18,8 @@ import { browserIsRed } from './util/browser';
 import { html as browserHtml } from './components/UpgradeBrowser';
 import cookieHtml from './components/EnableCookies';
 
+import './styles/index.scss';
+
 if (browserIsRed) {
   document.getElementById('app').innerHTML = `
   <div style="margin: 30px;">

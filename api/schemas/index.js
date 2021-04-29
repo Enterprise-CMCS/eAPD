@@ -1,13 +1,13 @@
 /* eslint-disable import/no-dynamic-require, global-require */
-const Ajv = require('ajv');
+const Ajv = require("ajv").default
 
 // all schemas, except the base apd document schema
 const schemas = [
+  'definitions.json',
   'activity.json',
   'contractorResource.json',
   'costAllocation.json',
   'costAllocationNarrative.json',
-  'definitions.json',
   'expense.json',
   'federalCitations.json',
   'incentivePayments.json',
@@ -22,14 +22,14 @@ const apdSchema = require('./apd.json');
 
 const options = {
   allErrors: true,
-  jsonPointers: true,
   // Do not remove APD fields when testing. Our example APD documents should not
   // have any additional or extraneous fields. Ideally, this would be false, always.
-  removeAdditional: process.env.NODE_ENV !== 'test'
+  removeAdditional: process.env.NODE_ENV !== 'test',
+  schemas
 };
 
 const ajv = new Ajv(options);
-schemas.forEach(schema => ajv.addSchema(schema));
+// schemas.forEach(schema => ajv.addSchema(schema));
 const validateApd = ajv.compile(apdSchema);
 
 module.exports = {
