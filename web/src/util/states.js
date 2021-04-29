@@ -58,10 +58,7 @@ const STATES = [
   { id: 'gu', name: 'Guam' },
   { id: 'mp', name: 'Northern Mariana Islands' },
   { id: 'pr', name: 'Puerto Rico' },
-  { id: 'vi', name: 'U.S. Virgin Islands' },
-
-  // Federal
-  { id: 'fd', name: 'Federal'}
+  { id: 'vi', name: 'U.S. Virgin Islands' }
 ];
 
 const usStatesDropdownOptions = STATES.map(s => ({
