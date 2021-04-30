@@ -279,9 +279,9 @@ export const createAccessRequest = states => async dispatch => {
   let failureReason = null;
   dispatch(requestAccessToState());
   await Promise.all(
-    states.map(async stateId => {
+    states.map(async state => {
       await axios
-        .post(`/states/${stateId}/affiliations`)
+        .post(`/states/${state.id}/affiliations`)
         .then(() => {})
         .catch(error => {
           failureReason = error ? error.message : 'N/A';
