@@ -25,7 +25,7 @@ tap.test('okta wrappers', async oktaTests => {
         async test => {
           const url = userApplicationProfileUrl('user_id');
 
-          test.equals(url, `/api/v1/apps/${OKTA_CLIENT_ID}/users/user_id`);
+          test.equal(url, `/api/v1/apps/${OKTA_CLIENT_ID}/users/user_id`);
         }
       );
 
@@ -34,7 +34,7 @@ tap.test('okta wrappers', async oktaTests => {
         async test => {
           const url = userApplicationProfileUrl();
 
-          test.equals(url, `/api/v1/apps/${OKTA_CLIENT_ID}/users/undefined`);
+          test.equal(url, `/api/v1/apps/${OKTA_CLIENT_ID}/users/undefined`);
         }
       );
     }
@@ -77,7 +77,7 @@ tap.test('okta wrappers', async oktaTests => {
         });
 
         const { data } = await callOktaEndpoint('/endpoint', { client });
-        test.equals(data, null);
+        test.equal(data, null);
       }
     );
 
@@ -87,8 +87,8 @@ tap.test('okta wrappers', async oktaTests => {
         client.http.http.rejects({ error: 'http failed' });
 
         const { data } = await callOktaEndpoint('/endpoint', { client });
-        test.equals(data, null);
-        test.equals(jsonResponse.json.callCount, 0);
+        test.equal(data, null);
+        test.equal(jsonResponse.json.callCount, 0);
       }
     );
 
@@ -158,7 +158,7 @@ tap.test('okta wrappers', async oktaTests => {
         error: 'invalid token'
       });
       const claims = await verifyJWT('token', { verifier: oktaVerifier });
-      test.equals(claims, false);
+      test.equal(claims, false);
     });
   });
 });

@@ -13,7 +13,6 @@ import RichText from '../../components/RichText';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource';
-import TextArea from '../../components/TextArea';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import Schedule from './Schedule';
 
@@ -40,8 +39,11 @@ const ActivityOverview = ({
       }),
     []
   );
-  const overviewOnChange = useCallback(
-    ({ target: { value } }) => setOverview(activityIndex, value),
+
+  const syncOverview = useCallback(
+    html => {
+      setOverview(activityIndex, html);
+    },
     [activity.key]
   );
 
@@ -115,16 +117,23 @@ const ActivityOverview = ({
           item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
         />
       )}
-      <TextArea
-        name="activity overview"
-        label={overviewLabel}
-        hint={overviewHint}
-        max={280}
-        rows={6}
-        className="data-entry-box"
-        value={summary}
-        onChange={overviewOnChange}
-      />
+
+      <div className="data-entry-box">
+        <FormLabel
+          className="ds-c-label--full-width"
+          hint={overviewHint}
+          fieldId="activity-short-overview-field"
+        >
+          {overviewLabel}
+        </FormLabel>
+        <RichText
+          id="activity-short-overview-field"
+          content={summary}
+          onSync={syncOverview}
+          editorClassName="rte-textarea-l"
+        />
+      </div>
+
       <Schedule activityIndex={activityIndex} />
 
       <div className="data-entry-box">

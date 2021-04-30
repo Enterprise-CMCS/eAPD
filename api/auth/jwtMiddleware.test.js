@@ -34,8 +34,8 @@ tap.test('jwtMiddleware', async t => {
       extractor,
       verifyToken
     });
-    t.equals(req.user, user, 'attaches the user object to the request');
-    t.equals(res.cookie.notCalled, true, 'was not called');
+    t.equal(req.user, user, 'attaches the user object to the request');
+    t.equal(res.cookie.notCalled, true, 'was not called');
     t.ok(next.calledOnce, 'calls the next middleware function');
   });
 
@@ -79,7 +79,7 @@ tap.test('jwtMiddleware', async t => {
       verifyToken
     });
     t.notOk(req.user, 'req.user is not present');
-    t.equals(getUserByID.callCount, 0, 'getUserByID was not called');
+    t.equal(getUserByID.callCount, 0, 'getUserByID was not called');
     t.ok(next.calledOnce, 'calls the next middleware function');
   });
 });
