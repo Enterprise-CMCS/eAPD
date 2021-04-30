@@ -5,9 +5,7 @@ import { STATE_AFFILIATION_STATUSES } from '../constants';
 import ApdList from '../components/ApdList';
 import StateAffiliationStatus from '../components/StateAffiliationStatus';
 
-import {
-  plain as StateDashboard,
-} from './StateDashboard';
+import { plain as StateDashboard } from './StateDashboard';
 
 const initialProps = {
   state: { id: 'ak' },

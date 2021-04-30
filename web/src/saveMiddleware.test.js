@@ -89,7 +89,7 @@ describe('automatic save middleware', () => {
       ]);
     });
 
-    xit('queues an incoming save if a save is already in progress, then executes that save when the previous save succeeds', done => {
+    xit('queues an incoming save if a save is already in progress, then executes that save when the previous save succeeds', () => {
       const saveResolvers = [];
       const actionResolvers = [];
 
@@ -159,11 +159,10 @@ describe('automatic save middleware', () => {
         jest.advanceTimersByTime(DEBOUNCE_TIME);
         expect(saveAction.mock.calls.length).toBe(2);
         expect(activityAction.mock.calls.length).toBe(2);
-        done();
       });
     });
 
-    it('queues an incoming save if a save is already in progress, then executes that save when the previous save fails', done => {
+    it('queues an incoming save if a save is already in progress, then executes that save when the previous save fails', () => {
       const saveRejectors = [];
       const actionRejectors = [];
 
@@ -234,12 +233,10 @@ describe('automatic save middleware', () => {
       //   jest.advanceTimersByTime(DEBOUNCE_TIME);
       //   expect(activityAction.mock.calls.length).toBe(2);
       //   expect(saveAction.mock.calls.length).toBe(2);
-      //   done();
       // });
-      done();
     });
 
-    xit('queues an incoming save if a save is already in progress, then executes that save when the previous save fails', done => {
+    xit('queues an incoming save if a save is already in progress, then executes that save when the previous save fails', () => {
       const saveRejectors = [];
       const actionRejectors = [];
 
@@ -309,7 +306,6 @@ describe('automatic save middleware', () => {
         jest.advanceTimersByTime(DEBOUNCE_TIME);
         expect(activityAction.mock.calls.length).toBe(2);
         expect(saveAction.mock.calls.length).toBe(2);
-        done();
       });
     });
   });

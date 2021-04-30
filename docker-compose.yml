@@ -52,6 +52,7 @@ services:
       - /app/node_modules
     ports:
       - 8081:8000
+      - 9229:9229
 
 volumes:
   pgdata:

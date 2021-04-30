@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { selectHasError, selectIsSaving, selectLastSaved } from '../reducers/saving';
+import {
+  selectHasError,
+  selectIsSaving,
+  selectLastSaved
+} from '../reducers/saving';
 
 import SaveMessage from './SaveMessage';
 
