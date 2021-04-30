@@ -3,14 +3,12 @@ import React, { useState } from 'react';
 
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
 
-import Icon, { faTimesCircle } from "../components/Icons";
-
 import AuthenticationForm from '../components/AuthenticationForm';
 import { STATES } from '../util/states';
 
 const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
 
-  // Ty Note: Need to maintain 4 state objects to suppor the multiple state selection
+  // Ty Note: Need to maintain 4 state objects to support the multiple state selection
   // 1. initialStates = full list of states that can be filtered against. will be
   // reduced as items are added to selectedStates
   // 2. filteredStates = list of states that match search query
@@ -27,11 +25,15 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
 
 
   const handleOnChange = selection => {
-    console.log("changeStates fired");
+    console.log("changeStates fired", selection);
 
     // set search box to empty
     setInputValue('');
-
+    
+    // ty note: what's a better way to error handle this? try..catch?
+    if(selection === null) {
+      return;
+    }
     // add item to selectedStates
     const newSelection = selectedStates;
     newSelection.push(selection);
@@ -42,7 +44,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
   };
 
   const handleSubmit = e => {
-    console.log("handleSubmit fired");
+    console.log("e.key", e.key);
     e.preventDefault();
     saveAction(selectedStates);
   };
@@ -82,7 +84,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
         <div className="ds-u-margin-bottom--4">
           <label
             htmlFor="states"
-            className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
+            className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
           >
             Select Affiliation(s).
           </label>
@@ -94,23 +96,25 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             clearSearchButton={false}
             inputValue={inputValue}
           >
+
             {/* render a collection of badges here with a button to remove them */}
             {selectedStates.map(el => {
               return (
-                <Badge key={el.id} variation="info">
+                <Badge className="ds-u-margin-y--1" key={el.id} variation="info">
                   {el.name} {' '} 
-                  <button className="remove-item-button" type="button" data-id={el.id} onClick={handleRemoveItem}>
-                    <Icon icon={faTimesCircle} />
+                  <button className="eapd-badge-remove" type="button" data-id={el.id} onClick={handleRemoveItem}>
+                    <span className="ds-u-visibility--screen-reader">Remove {el.name}</span>
                   </button>
                 </Badge>          
               )
             })}
+
             <TextField
               hint=""
               label=""
               placeholder="Search state here"
               labelClassName="ds-u-margin-top--2"
-              name="select-affiliations-autocomplete"
+              name="states"
             />
           </Autocomplete>
 
