@@ -51,7 +51,7 @@ tap.test('GET /apds', async endpointTest => {
       async invalidTest => {
         await handler({ params: {}, user: { state: {} } }, res);
 
-        invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401');
+        invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 401');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
       }
