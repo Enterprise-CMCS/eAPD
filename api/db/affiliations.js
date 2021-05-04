@@ -150,6 +150,17 @@ const getAllAffiliations = async ({ status, db = knex } = {}) => {
   
 };
 
+const getAllPopulatedAffiliations = async ({
+                                             status,
+                                             db = knex,
+                                             client = oktaClient
+                                           }) => {
+  const affiliations = await getAllAffiliations({ status, db });
+  if (!affiliations) return null;
+  const reducedAffiliations = reduceAffiliations(affiliations)
+  return populateAffiliation(reducedAffiliations, { client });
+};
+
 
 module.exports = {
   getAffiliationsByStateId,
@@ -159,5 +170,6 @@ module.exports = {
   getAllAffiliations,
   populateAffiliation,
   reduceAffiliations,
+  getAllPopulatedAffiliations,
   selectedColumns
 };

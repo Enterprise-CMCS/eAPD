@@ -2,7 +2,7 @@ const logger = require('../../logger')('affiliations route get');
 const {
   getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
   getPopulatedAffiliationById: _getPopulatedAffiliationsById,
-  getAllAffiliations: _getAllAffiliations,
+  getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
 } = require('../../db');
 const { can, validForState } = require('../../middleware');
 
@@ -11,7 +11,7 @@ module.exports = (
   {
     getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,
     getPopulatedAffiliationById = _getPopulatedAffiliationsById,
-    getAllAffiliations = _getAllAffiliations,
+    getAllPopulatedAffiliations = _getAllPopulatedAffiliations,
   } = {}
 ) => {
   app.get(
@@ -28,7 +28,7 @@ module.exports = (
 
       try {
         if (stateId === 'fd'){
-          const affiliations = await getAllAffiliations({
+          const affiliations = await getAllPopulatedAffiliations({
             status
           });
           return response.send(affiliations);
@@ -42,7 +42,6 @@ module.exports = (
         return response.send(affiliations);
 
       } catch (e) {
-        console.log("error", e)
         return next(e);
       }
     }
@@ -84,33 +83,4 @@ module.exports = (
     }
   );
 
-  app.get(
-    '/affiliations/',
-    can('view-affiliations'),
-    async (request, response, next) => {
-      logger.info({
-        id: request.id,
-        message: `handling GET /affiliations/`
-      });
-
-      const { status = null } = request.query;
-
-      try {
-        const affiliations = await getAllAffiliations({status});
-
-        if (affiliations) {
-          return response.send(affiliations);
-        }
-
-        logger.verbose({
-          id: request.id,
-          message: `There are no affiliations`
-        });
-        return response.status(400).end();
-      } catch (e) {
-      return next(e);
-  }
-
-    }
-  )
 };
