@@ -305,7 +305,26 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
       expectedResults.push(result)
     }
     const results = reduceAffiliations(affiliations)
-    test.same(results, expectedResults)
+    test.same(Object.values(results), expectedResults)
+
+  });
+
+  affiliationsTests.test('reduces affiliations with duplicate affiliations', async test => {
+    const affiliations = []
+    const expectedResults = []
+    for(let i=1; i<5; i+=1){
+      const user = {...defaultPopulatedAffiliation}
+      user.userId = i
+      affiliations.push(user)
+      affiliations.push(user)
+      affiliations.push(user)
+      const stateAffiliation = {role: user.role, stateId: user.stateId, status: user.status}
+      const result = {... user}
+      result.affiliations = [stateAffiliation, stateAffiliation, stateAffiliation]
+      expectedResults.push(result)
+    }
+    const results = reduceAffiliations(affiliations)
+    test.same(Object.values(results), expectedResults)
 
   });
 
