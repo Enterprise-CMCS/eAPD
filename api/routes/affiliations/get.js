@@ -27,7 +27,6 @@ module.exports = (
       const { status = null } = request.query;
 
       try {
-
         if (stateId === 'fd'){
           const affiliations = await getAllAffiliations({
             status
@@ -43,6 +42,7 @@ module.exports = (
         return response.send(affiliations);
 
       } catch (e) {
+        console.log("error", e)
         return next(e);
       }
     }
@@ -51,6 +51,7 @@ module.exports = (
   app.get(
     '/states/:stateId/affiliations/:id',
     can('view-affiliations'),
+    validForState('stateId'),
     async (request, response, next) => {
       logger.info({
         id: request.id,

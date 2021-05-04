@@ -7,7 +7,8 @@ const {
   getAffiliationsByStateId,
   getAffiliationById,
   populateAffiliation,
-  getPopulatedAffiliationsByStateId
+  getPopulatedAffiliationsByStateId,
+  reduceAffiliations,
 } = require('./affiliations');
 
 const { oktaClient } = require('../auth/oktaAuth');
@@ -290,4 +291,22 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     test.same([], results);
 
   });
+
+  affiliationsTests.test('reduces affiliations with no duplicates', async test => {
+    const affiliations = []
+    const expectedResults = []
+    for(let i=1; i<5; i+=1){
+      const user = {...defaultPopulatedAffiliation}
+      user.userId = i
+      affiliations.push(user)
+      const stateAffiliation = {role: user.role, stateId: user.stateId, status: user.status}
+      const result = {... user}
+      result.affiliations = [stateAffiliation]
+      expectedResults.push(result)
+    }
+    const results = reduceAffiliations(affiliations)
+    test.same(results, expectedResults)
+
+  });
+
 });

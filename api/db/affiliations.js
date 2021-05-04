@@ -110,6 +110,26 @@ const getPopulatedAffiliationById = async ({
   return populateAffiliation(affiliation, { client });
 };
 
+const reduceAffiliations = affiliations =>{
+
+  const reducer = (results, affiliation) => {
+    const stateAffiliation = {role: affiliation.role, stateId: affiliation.stateId, status: affiliation.status}
+    if(!Object.prototype.hasOwnProperty.call(results, affiliation.userId)){
+
+      // eslint-disable-next-line no-param-reassign
+      results[affiliation.userId] = {
+        ...affiliation,
+        affiliations: [stateAffiliation,]
+      }
+      return results
+    }
+    results[affiliation.userId].affiliations.push(stateAffiliation)
+    return results
+  }
+
+  return affiliations.reduce(reducer, {})
+}
+
 const getAllAffiliations = async ({ status, db = knex } = {}) => {
   const query = db('auth_affiliations')
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
@@ -125,10 +145,10 @@ const getAllAffiliations = async ({ status, db = knex } = {}) => {
       statusConverter[status]
     )
   }
+
     return query
   
 };
-
 
 
 module.exports = {
@@ -138,5 +158,6 @@ module.exports = {
   getPopulatedAffiliationById,
   getAllAffiliations,
   populateAffiliation,
+  reduceAffiliations,
   selectedColumns
 };

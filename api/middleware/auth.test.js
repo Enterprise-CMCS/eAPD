@@ -125,19 +125,19 @@ tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
     'rejects if the user does not have the expected state',
     async invalidTest => {
       validForState('stateId')({
-          user: { state: { id: 'YES'}, roles: [{name: 'eAPD State Admin'}] },
+          user: { state: { id: 'YES'}, role: 'eAPD State Admin' },
         params: { stateId: 'NO' } },
         res,
         next);
 
       invalidTest.ok(
         res.status.calledWith(403),
-        'HTTP status set to 403 Forbidden'
+        `HTTP status not set to 403 Forbidden.  Actual status is ${res.status}`
       );
-      invalidTest.ok(res.end.called, 'response is terminated');
+      invalidTest.ok(res.end.called, 'response is not terminated');
       invalidTest.ok(
         next.notCalled,
-        'endpoint handling chain is not continued'
+        'endpoint handling chain was continued'
       );
     }
   );
@@ -146,7 +146,7 @@ tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
     'continues if the user does not have the expected state, but is a federal admin',
     async validTest => {
       validForState('stateId')({
-        user: { state: { id: 'YES'}, roles: [{name:'eAPD Federal Admin'}] },
+        user: { state: { id: 'YES'}, role:'eAPD Federal Admin' },
         params: { stateId: 'NO' } },
         res,
         next);
@@ -164,7 +164,7 @@ tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
     'continues if the user has the expected state',
     async validTest => {
       validForState('stateId')({
-        user: { state: { id: 'yes'}, roles: [] },
+        user: { state: { id: 'yes'}, role: '' },
         params: { stateId: 'yes'} },
         res,
         next);
