@@ -195,30 +195,6 @@ const patchAffiliation = {
   }
 };
 
-const getAllAffiliations = {
-  get: {
-    tags,
-    description: 'Get a list of all user affiliations',
-    parameters: [filterStatusParameter],
-    requestBody: {
-      required: false,
-      content: jsonResponse({
-        type: 'object',
-        properties: {
-          filter_status
-        }
-      })
-    },
-    responses: {
-      200: {
-        description: 'List of all user affiliations',
-        content: jsonResponse(arrayOf(affiliationSchema))
-      },
-      ...responses.unauthed
-    },
-    security: [{ bearerAuth: [] }]
-  }
-};
 
 const affiliationRoutes = {
   '/states/{stateId}/affiliations': {
@@ -228,9 +204,6 @@ const affiliationRoutes = {
   '/states/{stateId}/affiliations/{id}': {
     ...getAffiliation,
     ...patchAffiliation
-  },
-  '/affiliations/': {
-    ...getAllAffiliations,
   }
 };
 
