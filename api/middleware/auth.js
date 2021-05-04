@@ -66,7 +66,7 @@ const can = activity =>
  * @returns {function} The middleware function
  */
 const validForState = paramName =>
-  cache('validForState', () => {
+  cache(['validForState', paramName], () => {
     return (req, res, next) => {
       // This has to be how the param is named for this middleware
       const stateId = req.params[paramName]
@@ -80,11 +80,11 @@ const validForState = paramName =>
         if ([stateId, 'fd'].includes(req.user.state.id)) {
           logger.verbose({
             id: req.id,
-            message: `user has the requested State`
+            message: `user has access to the requested State`
           });
           next();
           // or if they have the fed admin role
-        } else if (req.user.role === 'eAPD Federal Admin') {
+        } else if ( req.user.role === 'eAPD Federal Admin'){
           logger.verbose({
             id: req.id,
             message: `user is a fed admin is valid for ${stateId}`

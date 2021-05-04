@@ -2,6 +2,8 @@ const tap = require('tap');
 const sinon = require('sinon');
 
 const can = require('../../middleware').can;
+const validForState = require('../../middleware').validForState;
+
 const getEndpoint = require('./get');
 
 const mockExpress = require('../../util/mockExpress');
@@ -28,6 +30,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
       app.get.calledWith(
         '/states/:stateId/affiliations',
         can('view-affiliations'),
+        validForState('stateId'),
         sinon.match.func
       ),
       'state-specific affiliations GET endpoint is registered'
@@ -42,7 +45,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
       });
       handler = app.get.args.find(
         args => args[0] === '/states/:stateId/affiliations'
-      )[2];
+      )[3];
     });
 
     handlerTest.test('database error', async invalidTest => {
@@ -58,24 +61,6 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
       invalidTest.ok(next.called, 'next is called');
       invalidTest.ok(next.calledWith(err), 'pass error to middleware');
     });
-
-    handlerTest.test(
-      'sends an unauthorized error code if the user does not have the state',
-      async invalidTest => {
-        await handler(
-          {
-            params: { stateId: 'ar' },
-            query: {},
-            user: { state: { id: 'fl' } }
-          },
-          res
-        );
-
-        invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
 
     handlerTest.test('sends pending affiliations', async test => {
       const pending = [
@@ -149,6 +134,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
       app.get.calledWith(
         '/states/:stateId/affiliations/:id',
         can('view-affiliations'),
+        validForState('stateId'),
         sinon.match.func
       ),
       'specific affiliation GET endpoint is registered'
@@ -161,7 +147,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
       getEndpoint(app, { getPopulatedAffiliationById });
       handler = app.get.args.find(
         args => args[0] === '/states/:stateId/affiliations/:id'
-      )[2];
+      )[3];
     });
 
     handlerTest.test('database error', async t => {
