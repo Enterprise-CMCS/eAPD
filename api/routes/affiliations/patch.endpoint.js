@@ -26,10 +26,10 @@ describe('Affiliations endpoint | PATCH', () => {
     });
   });
 
-  it('returns 400 when US state is invalid', async () => {
+  it('returns 400 when US state is incorrect for a fed admin', async () => {
     const fedAdminApi = login('fed-admin');
     const response = await fedAdminApi.patch('/states/zz/affiliations/4000');
-    expect(response.status).toEqual(401);
+    expect(response.status).toEqual(400);
   });
 
   it('returns 403 when US state is not authorized', async () => {

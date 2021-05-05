@@ -151,14 +151,21 @@ const getAllAffiliations = async ({ status, db = knex } = {}) => {
 };
 
 const getAllPopulatedAffiliations = async ({
-                                             status,
-                                             db = knex,
-                                             client = oktaClient
-                                           }) => {
-  const affiliations = await getAllAffiliations({ status, db });
+    status,
+    db = knex,
+    getAllAffiliations_ = getAllAffiliations,
+    populateAffiliation_ = populateAffiliation,
+    reduceAffiliations_ = reduceAffiliations,
+    client = oktaClient
+  }) => {
+  const affiliations = await getAllAffiliations_({ status, db });
   if (!affiliations) return null;
-  const reducedAffiliations = reduceAffiliations(affiliations)
-  return populateAffiliation(reducedAffiliations, { client });
+  const reducedAffiliations = reduceAffiliations_(affiliations)
+  return Promise.all(
+    reducedAffiliations.map(async affiliation => {
+      return populateAffiliation_(affiliation, {client});
+    })
+  );
 };
 
 

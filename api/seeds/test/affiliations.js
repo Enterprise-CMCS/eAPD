@@ -66,6 +66,11 @@ exports.seed = async knex => {
       email: 'no-permissions@email.com',
       metadata: '{}'
     },
+    {
+      user_id: 'fed-admin',
+      email: 'fedadmin@email.com',
+      metadata: '{}'
+    },
 
   ]);
 
