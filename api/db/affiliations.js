@@ -126,8 +126,9 @@ const reduceAffiliations = affiliations =>{
     results[affiliation.userId].affiliations.push(stateAffiliation)
     return results
   }
-
-  return affiliations.reduce(reducer, {})
+  const results = {}
+  affiliations.reduce(reducer, results)
+  return Object.values(results)
 }
 
 const getAllAffiliations = async ({ status, db = knex } = {}) => {

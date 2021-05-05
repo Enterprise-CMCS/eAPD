@@ -165,21 +165,6 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
     });
 
     handlerTest.test(
-      'sends an unauthorized error code if the user does not have access to the state of the affiliation',
-      async test => {
-        await handler(
-          { params: { stateId: 'ar', id: '1' }, user: { state: { id: 'fl' } } },
-          res,
-          next
-        );
-
-        test.ok(res.status.calledWith(401), 'HTTP status set to 401');
-        test.ok(res.send.notCalled, 'no body is sent');
-        test.ok(res.end.called, 'response is terminuated');
-      }
-    );
-
-    handlerTest.test(
       'sends a not found error if there is no valid Affiliation',
       async test => {
         getPopulatedAffiliationById.returns(undefined);
