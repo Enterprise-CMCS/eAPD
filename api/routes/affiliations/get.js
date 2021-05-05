@@ -58,10 +58,6 @@ module.exports = (
       });
       const { stateId, id } = request.params;
       try {
-        if (stateId !== request.user.state.id) {
-          logger.verbose('user does not have access to state');
-          return response.status(401).end();
-        }
 
         const affiliation = await getPopulatedAffiliationById({
           stateId,

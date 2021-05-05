@@ -8,6 +8,7 @@ const {
   getAffiliationById,
   populateAffiliation,
   getPopulatedAffiliationsByStateId,
+  getAllPopulatedAffiliations,
   reduceAffiliations,
 } = require('./affiliations');
 
@@ -327,5 +328,48 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     test.same(Object.values(results), expectedResults)
 
   });
+
+  affiliationsTests.test(
+    'get populated affiliations for all states',
+    async test => {
+      const status = 'irrelevant';
+      const affiliations = ['foo', 'bar', 'baz'];
+      const populatedAffiliations = [
+        'populatedfoo',
+        'populatedbar',
+        'populatedbaz'
+      ];
+
+      const getAllAffiliationsStub = sinon.stub();
+      getAllAffiliationsStub
+        .withArgs({ status, db })
+        .resolves(affiliations);
+
+      const populateAffiliationStub = sinon.stub();
+      affiliations.forEach(affiliation => {
+        populateAffiliationStub
+          .withArgs(affiliation)
+          .returns(`populated${affiliation}`);
+      });
+
+      const reduceAffiliationsStub = sinon.stub()
+      reduceAffiliationsStub.withArgs(affiliations).returns(affiliations)
+
+      const results = await getAllPopulatedAffiliations({
+        status,
+        db,
+        getAllAffiliations_: getAllAffiliationsStub,
+        populateAffiliation_: populateAffiliationStub,
+        reduceAffiliations_: reduceAffiliationsStub,
+
+      });
+
+      test.same(results, populatedAffiliations);
+      test.equal(getAllAffiliationsStub.callCount, 1)
+      test.equal(reduceAffiliationsStub.callCount, 1)
+      test.equal(populateAffiliationStub.callCount, 3)
+
+    }
+  );
 
 });
