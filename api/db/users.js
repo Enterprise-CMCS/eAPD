@@ -7,7 +7,7 @@ const {
   getUserPermissionsForStates: actualGetUserPermissionsForStates
 } = require('./auth');
 const { getStateById: actualGetStateById } = require('./states');
-const { createOrUpdateOktaUser } = require('./oktaUsers')
+const { createOrUpdateOktaUser, getOktaUser } = require('./oktaUsers')
 
 const sanitizeUser = user => ({
   activities: user.activities,
@@ -101,21 +101,35 @@ const getAllUsers = async ({
 
 const getUserByID = async (
   id,
+  checkOkta,
   {
     clean = true,
     client = oktaClient,
     populate = populateUser,
-    additionalValues
+    additionalValues,
+    db
   } = {}
 ) => {
-  const oktaUser = await client.getUser(id);
 
+  let oktaUser
+  if (checkOkta){
+    oktaUser = await client.getUser(id)
+    if(oktaUser){
+      await createOrUpdateOktaUser(oktaUser.id,  oktaUser.profile.email);
+    }
+  }
+  else{
+    oktaUser = await getOktaUser(id, { db })
+    if(oktaUser){
+      // since we are not talking to Okta here, assume they are active since they are in the DB,
+      // maybe we need to store this though
+      oktaUser.status = 'ACTIVE'
+    }
+
+  }
   if (oktaUser && oktaUser.status === 'ACTIVE') {
-    // store data in okta_users table
-    createOrUpdateOktaUser(oktaUser.id, oktaUser.profile.email);
 
-    const { profile } = oktaUser;
-    const user = await populate({ id, ...profile, ...additionalValues });
+    const user = await populate({ id, ...oktaUser.profile, ...additionalValues });
     return user && clean ? sanitizeUser(user) : user;
   }
   return null;
