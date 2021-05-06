@@ -130,15 +130,9 @@ tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
         res,
         next);
 
-      invalidTest.ok(
-        res.status.calledWith(403),
-        `HTTP status not set to 403 Forbidden.  Actual status is ${res.status}`
-      );
-      invalidTest.ok(res.end.called, 'response is not terminated');
-      invalidTest.ok(
-        next.notCalled,
-        'endpoint handling chain was continued'
-      );
+      invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403 Forbidden.');
+      invalidTest.ok(res.end.called, 'response is  terminated');
+      invalidTest.ok(next.notCalled, 'endpoint handling chain was continued');
     }
   );
 

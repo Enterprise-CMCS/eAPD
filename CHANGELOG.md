@@ -10,6 +10,7 @@ Anticipated release: April 26, 2021
 #### ⚙️ Behind the scenes
 
 - Upgraded modules ([#2947])
+- Allowed Federal Admins to get and approve pending affiliations ([#2811])
 
 # Previous releases
 
