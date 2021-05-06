@@ -11,6 +11,7 @@
     "migrate": "knex migrate:latest",
     "migrate-dev": "NODE_ENV=development DEV_DB_HOST=localhost npm run migrate",
     "rollback": "knex migrate:rollback",
+    "down": "knex migrate:down",
     "seed": "knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost npm run seed",
     "seed-users": "knex seed:run --specific=base-users.js",
