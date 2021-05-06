@@ -8,7 +8,7 @@ const testProps = {
   error: false,
   roles: [
     { id: 1, name: 'admin', isActive: true },
-    { id: 2, name: 'state coordinator', isActive: true }
+    { id: 2, name: 'state staff', isActive: true }
   ],
   working: false
 };

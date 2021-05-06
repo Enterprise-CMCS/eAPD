@@ -15,13 +15,12 @@ let getUserByID;
 let handler;
 
 tap.test('user GET endpoint', async endpointTest => {
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach(() => {
     res = mockResponse();
     next = sinon.stub();
     app = mockExpress();
     getAllUsers = sinon.stub();
     getUserByID = sinon.stub();
-    done();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -38,10 +37,9 @@ tap.test('user GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get all users handler', async handlerTest => {
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, { getAllUsers });
       handler = app.get.args.find(args => args[0] === '/users')[2];
-      done();
     });
 
     handlerTest.test('database error', async invalidTest => {
@@ -66,10 +64,9 @@ tap.test('user GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get single user handler', async handlerTest => {
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, { getUserByID });
       handler = app.get.args.find(args => args[0] === '/users/:id')[2];
-      done();
     });
 
     handlerTest.test('database error', async invalidTest => {

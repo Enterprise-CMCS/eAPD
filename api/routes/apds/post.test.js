@@ -13,7 +13,7 @@ const postEndpoint = require('./post');
 //
 // Mock with UTC date so the time is consistent regardless of local timezone
 const mockClock = sinon.useFakeTimers(Date.UTC(2004, 6, 1, 12));
-tap.tearDown(() => {
+tap.teardown(() => {
   mockClock.restore();
 });
 
@@ -78,11 +78,11 @@ tap.test('apds POST endpoint', async endpointTest => {
             message: [
               {
                 keyword: 'type',
-                dataPath: '/stateProfile/medicaidDirector/name',
+                instancePath: '/stateProfile/medicaidDirector/name',
                 schemaPath:
                   'stateProfile.json/properties/medicaidDirector/properties/name/type',
                 params: { type: 'string' },
-                message: 'should be string'
+                message: 'must be string'
               }
             ]
           }),
@@ -98,13 +98,13 @@ tap.test('apds POST endpoint', async endpointTest => {
             alternatives: '',
             contractorResources: [],
             costAllocation: {
-              '2004': { ffp: { federal: 90, state: 10 }, other: 0 },
-              '2005': { ffp: { federal: 90, state: 10 }, other: 0 }
+              2004: { ffp: { federal: 90, state: 10 }, other: 0 },
+              2005: { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             costAllocationNarrative: {
               methodology: '',
-              '2004': { otherSources: '' },
-              '2005': { otherSources: '' }
+              2004: { otherSources: '' },
+              2005: { otherSources: '' }
             },
             description: '',
             expenses: [],
@@ -121,13 +121,13 @@ tap.test('apds POST endpoint', async endpointTest => {
             statePersonnel: [],
             summary: '',
             quarterlyFFP: {
-              '2004': {
+              2004: {
                 1: { contractors: 0, inHouse: 0 },
                 2: { contractors: 0, inHouse: 0 },
                 3: { contractors: 0, inHouse: 0 },
                 4: { contractors: 0, inHouse: 0 }
               },
-              '2005': {
+              2005: {
                 1: { contractors: 0, inHouse: 0 },
                 2: { contractors: 0, inHouse: 0 },
                 3: { contractors: 0, inHouse: 0 },
@@ -139,20 +139,20 @@ tap.test('apds POST endpoint', async endpointTest => {
         federalCitations: {},
         incentivePayments: {
           ehAmt: {
-            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
-            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
           },
           ehCt: {
-            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
-            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
           },
           epAmt: {
-            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
-            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
           },
           epCt: {
-            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
-            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
           }
         },
         keyPersonnel: [],
@@ -161,7 +161,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         narrativeHIT: '',
         narrativeMMIS: '',
         previousActivityExpenses: {
-          '2004': {
+          2004: {
             hithie: {
               federalActual: 0,
               totalApproved: 0
@@ -172,7 +172,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               50: { federalActual: 0, totalApproved: 0 }
             }
           },
-          '2003': {
+          2003: {
             hithie: {
               federalActual: 0,
               totalApproved: 0
@@ -183,7 +183,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               50: { federalActual: 0, totalApproved: 0 }
             }
           },
-          '2002': {
+          2002: {
             hithie: {
               federalActual: 0,
               totalApproved: 0

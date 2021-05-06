@@ -13,7 +13,7 @@ tap.test('express api', async t => {
 
   t.test('GET /heartbeat', async t => {
     response = await request(api).get('/heartbeat');
-    t.equals(response.status, 204, 'HTTP status set to 204');
+    t.equal(response.status, 204, 'HTTP status set to 204');
   });
 
   // t.test('GET /api-docs', async t => {
@@ -24,7 +24,7 @@ tap.test('express api', async t => {
   t.test('headers', async t => {
     response = await request(api).get('/');
     t.notOk(response.header['x-powered-by'], 'X-Powered-By header is unset');
-    t.equals(
+    t.equal(
       response.header['cache-control'],
       'private, no-cache',
       'Cache-Control header is set'
@@ -33,17 +33,17 @@ tap.test('express api', async t => {
       response.header['strict-transport-security'],
       'Strict-Transport-Security header is set'
     );
-    t.equals(
+    t.equal(
       response.header['x-content-type-options'],
       'nosniff',
       'X-Content-Type-Options header is set'
     );
-    t.equals(
+    t.equal(
       response.header['x-frame-options'],
       'sameorigin',
       'X-Frame-Options is set'
     );
-    t.equals(
+    t.equal(
       response.header['x-xss-protection'],
       '1; mode=block',
       'X-XSS-Protection is set'
@@ -65,7 +65,7 @@ tap.test('express api', async t => {
 
     t.test('GET /states without a database connection returns 500', async t => {
       const response = await request(api).get('/states');
-      t.equals(response.status, 500, 'HTTP status set to 500');
+      t.equal(response.status, 500, 'HTTP status set to 500');
     });
   });
 });

@@ -1,6 +1,6 @@
 [![Build status](https://img.shields.io/circleci/project/github/CMSgov/eAPD.svg)](https://circleci.com/gh/CMSgov/workflows/eAPD)
 [![Test coverage](https://img.shields.io/codecov/c/github/CMSgov/eAPD.svg)](https://codecov.io/gh/CMSgov/eAPD)
-![Node.js >= 10.14](https://img.shields.io/badge/node-%3E%3D%2010.14-brightgreen.svg)
+![Node.js >= 14.16](https://img.shields.io/badge/node-%3E%3D%2014.16-brightgreen.svg)
 
 # CMS eAPD app
 
@@ -120,7 +120,7 @@ our [contributing](CONTRIBUTING.md) guide for info about our policies.
 This project is in the worldwide [public domain](LICENSE.md). As stated in
 [CONTRIBUTING](CONTRIBUTING.md):
 
-> This project is in the public domain within the United States, and copyright
+> This project is in the public domain within the United States. Copyright
 > and related rights in the work worldwide are waived through the
 > [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 >

@@ -6,8 +6,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const uuid = require('uuid/v1');
 const swaggerUi = require('swagger-ui-express');
+const { v4: uuidv4 } = require('uuid');
 const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
@@ -78,7 +78,7 @@ api.use((_, res, next) => {
 });
 
 api.use((req, res, next) => {
-  req.id = uuid();
+  req.id = uuidv4();
   req.meta = {};
   logger.verbose({
     id: req.id,

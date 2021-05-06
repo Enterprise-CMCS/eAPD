@@ -85,10 +85,7 @@ module.exports = (
       }
 
       logger.verbose({ id: req.id, message: 'apd does not exist' });
-      return res
-        .status(404)
-        .send({ error: 'apd does not exist' })
-        .end();
+      return res.status(404).send({ error: 'apd does not exist' }).end();
     } catch (e) {
       return next(e);
     }

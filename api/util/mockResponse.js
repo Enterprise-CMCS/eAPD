@@ -8,6 +8,7 @@ const mockResponse = () => {
   res.status = sinon.stub().returns(res);
   res.send = sinon.stub().returns(res);
   res.end = sinon.stub();
+  res.setHeader = sinon.stub();
   res.clearCookie = sinon.stub();
   return res;
 };
