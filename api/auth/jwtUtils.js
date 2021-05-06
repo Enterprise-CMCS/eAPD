@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 
@@ -63,7 +64,48 @@ const jwtExtractor = req => {
   return null;
 };
 
+// ****** Local JWT implementation below this line
+const getSecret = () => {
+  // todo change this. It is pretty bad.
+  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
+}
+
+/*
+    algorithm (default: HS256)
+    expiresIn || notBefore: expressed in seconds or a string describing a time span zeit/ms.
+    Eg: 60, "2 days", "10h", "7d". A numeric value is interpreted as a seconds count.
+    If you use a string be sure you provide the time units (days, hours, etc),
+    otherwise milliseconds unit is used by default ("120" is equal to "120ms").
+ */
+const defaultOptions = {
+  algorithm: 'HS256',
+  expiresIn: '12h',
+  notBefore: '0',
+  audience: 'eAPD',
+  issuer: 'eAPD',
+}
+
+const getDefaultOptions = () =>{
+  return {...defaultOptions}
+}
+
+const sign = (payload, options=defaultOptions) => {
+
+  return jwt.sign(payload, getSecret(), options);
+}
+
+const verify = token => {
+  try {
+    return jwt.verify(token, getSecret());
+  } catch (err) {
+    throw new Error('invalid Token')
+  }
+}
+
 module.exports = {
   verifyWebToken,
-  jwtExtractor
+  jwtExtractor,
+  getDefaultOptions,
+  sign,
+  verify
 };
