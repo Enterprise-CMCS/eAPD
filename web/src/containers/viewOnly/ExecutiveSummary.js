@@ -59,6 +59,7 @@ class ExecutiveSummary extends PureComponent {
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >
             {activity.summary && (
+              /* eslint-disable react/no-danger */
               <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
             )}
 

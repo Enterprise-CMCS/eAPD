@@ -14,12 +14,11 @@ let next;
 tap.test('GET /states/:stateId/affiliations', async endpointTest => {
   let getPopulatedAffiliationsByStateId;
 
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
     next = sinon.stub();
     getPopulatedAffiliationsByStateId = sinon.stub();
-    done();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -37,14 +36,13 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
 
   endpointTest.test('get all affiliations handler', async handlerTest => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, {
         getPopulatedAffiliationsByStateId
       });
       handler = app.get.args.find(
         args => args[0] === '/states/:stateId/affiliations'
       )[2];
-      done();
     });
 
     handlerTest.test('database error', async invalidTest => {
@@ -136,12 +134,11 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
 tap.test('GET /states/:stateId/affiliations/:id', async tests => {
   let getPopulatedAffiliationById;
 
-  tests.beforeEach(done => {
+  tests.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
     next = sinon.stub();
     getPopulatedAffiliationById = sinon.stub();
-    done();
   });
 
   tests.test('setup', async setupTest => {
@@ -159,12 +156,11 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
 
   tests.test('get single affiliation handler', async handlerTest => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, { getPopulatedAffiliationById });
       handler = app.get.args.find(
         args => args[0] === '/states/:stateId/affiliations/:id'
       )[2];
-      done();
     });
 
     handlerTest.test('database error', async t => {
@@ -223,7 +219,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
         createdAt: '2020-12-02T18:50:56.817Z',
         updatedAt: '2020-12-02T18:50:56.817Z',
         updatedById: '00u4nbo8e9BoctLWI297',
-        role: 'eAPD State Coordinator',
+        role: 'eAPD State Staff',
         updatedBy: 'Regular User',
         displayName: 'Jesse James',
         email: 'jjames@fearless.tech',

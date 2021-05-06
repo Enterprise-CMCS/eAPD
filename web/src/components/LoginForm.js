@@ -86,7 +86,7 @@ const LoginForm = ({
                 </div>
               </fieldset>
             </form>
-            {footer && <div className="card--foter">{footer}</div>}
+            {footer && <div className="card--footer">{footer}</div>}
           </div>
           <div className="ds-l-col--1 ds-u-margin-right--auto" />
         </div>

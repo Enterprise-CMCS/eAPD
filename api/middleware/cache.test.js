@@ -30,7 +30,7 @@ tap.test('middleware cache', async cacheTests => {
       middleware1,
       'returns the result of the first middleware getter'
     );
-    test.notEqual(out1, out2, 'returns the right middleware based on the key');
+    test.not(out1, out2, 'returns the right middleware based on the key');
     test.equal(
       out2,
       middleware2,

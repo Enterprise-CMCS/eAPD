@@ -31,10 +31,9 @@ tap.test('auth roles GET endpoint', async endpointTest => {
 
   endpointTest.test('get roles handler', async handlerTest => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, { getActiveAuthRoles });
       handler = app.get.args.find(args => args[0] === '/auth/roles')[2];
-      done();
     });
 
     handlerTest.test('database error', async invalidTest => {

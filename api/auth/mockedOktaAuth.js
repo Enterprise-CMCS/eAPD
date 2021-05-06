@@ -1,25 +1,37 @@
 const noPermissions = {
   status: 'ACTIVE',
   id: 'no-permissions',
-  profile: { displayName: 'No Permissions Test User' }
+  profile: {
+    displayName: 'No Permissions Test User',
+    email: 'no-permissions@email.com'
+  }
 };
 
 const allPermissions = {
   status: 'ACTIVE',
   id: 'all-permissions',
-  profile: { displayName: 'All Permissions' }
+  profile: {
+    displayName: 'All Permissions',
+    email: 'all-permissions@email.com'
+  }
 };
 
 const allPermissionsNoState = {
   status: 'ACTIVE',
   id: 'all-permissions-no-state',
-  profile: { displayName: 'All Permissions No State Test User' }
+  profile: {
+    displayName: 'All Permissions No State Test User',
+    email: 'apno@email.com'
+  }
 };
 
 const allPermissionsAndState = {
   status: 'ACTIVE',
   id: 'all-permissions-and-state',
-  profile: { displayName: 'All Permissions And State' }
+  profile: {
+    displayName: 'All Permissions And State',
+    email: 'apas@email.com'
+  }
 };
 
 const mockOktaClient = {
@@ -78,29 +90,26 @@ const mockVerifyJWT = token => {
     });
   }
   if (token === 'no-permissions-no-state') {
-    const uid = 'no-permissions-no-state';
     return new Promise(resolve => {
       resolve({
         sub: 'npno@email.com',
-        uid
+        uid: 'no-permissions-no-state'
       });
     });
   }
   if (token === 'all-permissions-no-state') {
-    const uid = 'all-permissions-no-state';
     return new Promise(resolve => {
       resolve({
         sub: 'apno@email.com',
-        uid
+        uid: 'all-permissions-no-state'
       });
     });
   }
   if (token === 'all-permissions-and-state') {
-    const uid = 'all-permissions-and-state';
     return new Promise(resolve => {
       resolve({
         sub: 'apas@email.com',
-        uid
+        uid: 'all-permissions-and-state'
       });
     });
   }

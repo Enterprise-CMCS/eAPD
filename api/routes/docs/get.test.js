@@ -1,39 +1,26 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const endpoints = require('./get');
+const getEndpoint = require('./get');
+
+const mockExpress = require('../../util/mockExpress');
+const mockResponse = require('../../util/mockResponse');
+
+let app;
+let res;
+let next;
+let getFile;
 
 tap.test('docs endpoints', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-  const app = { get: sandbox.stub() };
-
-  const di = {
-    getFile: sandbox.stub()
-  };
-
-  const res = {
-    setHeader: sandbox.stub(),
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
-
-  const next = sandbox.stub();
-
-  endpointTest.beforeEach(done => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-
-    res.setHeader.returns(res);
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
-
-    done();
+  endpointTest.beforeEach(() => {
+    app = mockExpress();
+    res = mockResponse();
+    next = sinon.stub();
+    getFile = sinon.stub();
   });
 
   endpointTest.test('setup', async setupTest => {
-    endpoints(app);
+    getEndpoint(app);
 
     setupTest.ok(
       app.get.calledWith('/docs/account-registration', sinon.match.func),
@@ -47,41 +34,38 @@ tap.test('docs endpoints', async endpointTest => {
 
   endpointTest.test(
     'GET endpoint for fetching account registration doc',
-    async tests => {
+    async handlerTest => {
       let handler;
-      tests.beforeEach(async () => {
-        endpoints(app, { ...di });
-        handler = app.get.args[0].pop();
+      handlerTest.beforeEach(() => {
+        getEndpoint(app, { getFile });
+        handler = app.get.args.find(
+          args => args[0] === '/docs/account-registration'
+        )[1];
       });
 
-      tests.test(
+      handlerTest.test(
         'there is an unexpected error getting the account registration doc',
-        async test => {
-          di.getFile.rejects(new Error('some other error'));
+        async invalidTest => {
+          const err = new Error('some other error');
+          getFile.rejects(err);
 
           await handler({ params: {} }, res, next);
 
-          test.ok(
-            next.calledWith(sinon.match.instanceOf(Error)),
-            'sends error to next'
-          );
-          test.ok(
-            next.calledWith(sinon.match({ message: 'some other error' })),
-            'sends some other error message to next'
-          );
+          invalidTest.ok(next.called, 'next is called');
+          invalidTest.ok(next.calledWith(err), 'pass error to middleware');
         }
       );
 
-      tests.test(
+      handlerTest.test(
         'successfully received account registration doc',
-        async test => {
+        async validTest => {
           const file = {};
-          di.getFile.resolves(file);
+          getFile.resolves(file);
 
           await handler({ params: {} }, res, next);
 
-          test.ok(res.send.calledWith(file), 'sends the file');
-          test.ok(res.end.calledAfter(res.send), 'response is terminated');
+          validTest.ok(res.send.calledWith(file), 'sends the file');
+          validTest.ok(res.end.calledAfter(res.send), 'response is terminated');
         }
       );
     }
@@ -89,40 +73,40 @@ tap.test('docs endpoints', async endpointTest => {
 
   endpointTest.test(
     'GET endpoint for fetching system access doc',
-    async tests => {
+    async handlerTest => {
       let handler;
-      tests.beforeEach(async () => {
-        endpoints(app, { ...di });
-        handler = app.get.args[1].pop();
+      handlerTest.beforeEach(async () => {
+        getEndpoint(app, { getFile });
+        handler = app.get.args.find(
+          args => args[0] === '/docs/system-access'
+        )[1];
       });
 
-      tests.test(
+      handlerTest.test(
         'there is an unexpected error getting the system access doc',
-        async test => {
-          di.getFile.rejects(new Error('some other error'));
+        async invalidTest => {
+          const err = new Error('some other error');
+          getFile.rejects(err);
 
           await handler({ params: {} }, res, next);
 
-          test.ok(
-            next.calledWith(sinon.match.instanceOf(Error)),
-            'sends error to next'
-          );
-          test.ok(
-            next.calledWith(sinon.match({ message: 'some other error' })),
-            'sends some other error message to next'
-          );
+          invalidTest.ok(next.called, 'next is called');
+          invalidTest.ok(next.calledWith(err), 'pass error to middleware');
         }
       );
 
-      tests.test('successfully received system access doc', async test => {
-        const file = {};
-        di.getFile.resolves(file);
+      handlerTest.test(
+        'successfully received system access doc',
+        async validTest => {
+          const file = {};
+          getFile.resolves(file);
 
-        await handler({ params: {} }, res, next);
+          await handler({ params: {} }, res, next);
 
-        test.ok(res.send.calledWith(file), 'sends the file');
-        test.ok(res.end.calledAfter(res.send), 'response is terminated');
-      });
+          validTest.ok(res.send.calledWith(file), 'sends the file');
+          validTest.ok(res.end.calledAfter(res.send), 'response is terminated');
+        }
+      );
     }
   );
 });

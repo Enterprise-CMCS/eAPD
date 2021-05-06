@@ -13,12 +13,11 @@ let next;
 let getAllAPDsByState;
 
 tap.test('GET /apds', async endpointTest => {
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
     next = sinon.stub();
     getAllAPDsByState = sinon.stub();
-    done();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -32,10 +31,9 @@ tap.test('GET /apds', async endpointTest => {
 
   endpointTest.test('get all apds handler', async handlerTest => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, { getAllAPDsByState });
       handler = app.get.args.find(args => args[0] === '/apds')[2];
-      done();
     });
 
     handlerTest.test('database error', async invalidTest => {
@@ -53,7 +51,7 @@ tap.test('GET /apds', async endpointTest => {
       async invalidTest => {
         await handler({ params: {}, user: { state: {} } }, res);
 
-        invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
+        invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 401');
         invalidTest.ok(res.end.called, 'response is terminated');
       }
     );
@@ -134,12 +132,11 @@ tap.test('GET /apds', async endpointTest => {
 tap.test('apds/:id GET endpoint', async tests => {
   let getAPDByIDAndState;
 
-  tests.beforeEach(done => {
+  tests.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
     next = sinon.stub();
     getAPDByIDAndState = sinon.stub();
-    done();
   });
 
   tests.test('setup', async test => {
@@ -157,10 +154,9 @@ tap.test('apds/:id GET endpoint', async tests => {
 
   tests.test('get single apd handler', async handlerTest => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach(() => {
       getEndpoint(app, { getAPDByIDAndState });
       handler = app.get.args.find(args => args[0] === '/apds/:id(\\d+)')[2];
-      done();
     });
 
     handlerTest.test('database error', async t => {
