@@ -9,7 +9,7 @@ import ConsentBanner from '../components/ConsentBanner';
 import Loading from '../components/Loading';
 
 import { MFA_FACTOR_TYPES } from '../constants';
-import { setConsented, hasConsented, getAccessToken } from '../util/auth';
+import { setConsented, hasConsented, getIdToken } from '../util/auth';
 import {
   mfaConfig,
   mfaAddPhone,
@@ -41,14 +41,14 @@ const LoginApplication = ({
   logout: logoutAction
 }) => {
   const [restoringSession, setRestoringSession] = useState(
-    !authenticated && getAccessToken()
+    !authenticated && getIdToken()
   );
   const [showConsent, setShowConsent] = useState(!hasConsented());
   const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {
-    if (!authenticated && getAccessToken()) {
+    if (!authenticated && getIdToken()) {
       setRestoringSession(true);
       authCheckAction().then(() => {
         setRestoringSession(false);
