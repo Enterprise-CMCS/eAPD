@@ -16,7 +16,7 @@ module.exports = (
 
       if (!stateId) {
         logger.verbose('user does not have an associated state');
-        return res.status(401).end();
+        return res.status(403).end();
       }
 
       const apds = (await getAllAPDsByState(stateId)).map(
