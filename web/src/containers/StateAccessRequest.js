@@ -7,7 +7,7 @@ import AuthenticationForm from '../components/AuthenticationForm';
 import { STATES } from '../util/states';
 
 const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
-  // Need to maintain 4 state objects to support the multiple state selection
+  // We maintain 4 objects to support the multiple state selection
   // 1. initialStates - full list of states that can be filtered against. as
   // states/items are selected by the user, they are removed from this list
   const [initialStates, setInitialStates] = useState(STATES);
@@ -84,10 +84,10 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
       >
         <div className="ds-u-margin-bottom--4">
           <label
-            htmlFor="states"
+            htmlFor="state-selection"
             className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
           >
-            Select Affiliation(s).
+            Select Affiliation(s)
           </label>
 
           <Autocomplete
@@ -96,12 +96,13 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             onInputValueChange={handleInputChange}
             clearSearchButton={false}
             inputValue={inputValue}
+            id='state-selection'
           >
 
             {/* render a collection of badges here with a button to remove them */}
             {selectedStates.map(el => {
               return (
-                <Badge className="ds-u-margin-y--1" key={el.id} variation="info">
+                <Badge className="ds-u-margin-bottom--1" key={el.id} variation="info">
                   {el.name} {' '} 
                   <button className="eapd-badge-remove" type="button" data-id={el.id} onClick={handleRemoveItem}>
                     <span className="ds-u-visibility--screen-reader">Remove {el.name}</span>
@@ -111,11 +112,11 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             })}
 
             <TextField
-              hint=""
-              label=""
+              label="Select Affiliation(s)"
               placeholder="Search state here"
-              labelClassName="ds-u-margin-top--2"
-              name="states"
+              className="ds-u-margin-top--2"
+              labelClassName="ds-u-visibility--screen-reader"
+              name="select-states-field"
             />
           </Autocomplete>
 
