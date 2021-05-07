@@ -170,9 +170,9 @@ describe('Auth Util', () => {
       .mockImplementation(() => false);
     const renew = jest.spyOn(mockOktaAuth.tokenManager, 'renew');
     await renewTokens();
-    expect(getToken).toHaveBeenCalledTimes(4);
-    expect(hasExpired).toHaveBeenCalledTimes(2);
-    expect(renew).toHaveBeenCalledTimes(2);
+    expect(getToken).toHaveBeenCalledTimes(2);
+    expect(hasExpired).toHaveBeenCalledTimes(1);
+    expect(renew).toHaveBeenCalledTimes(1);
 
     getToken.mockReset();
     hasExpired.mockReset();
@@ -193,9 +193,9 @@ describe('Auth Util', () => {
       .mockImplementation(() => true);
     const remove = jest.spyOn(mockOktaAuth.tokenManager, 'remove');
     await renewTokens();
-    expect(getToken).toHaveBeenCalledTimes(3);
-    expect(hasExpired).toHaveBeenCalledTimes(2);
-    expect(remove).toHaveBeenCalledTimes(2);
+    expect(getToken).toHaveBeenCalledTimes(2);
+    expect(hasExpired).toHaveBeenCalledTimes(1);
+    expect(remove).toHaveBeenCalledTimes(1);
 
     getToken.mockReset();
     hasExpired.mockReset();
