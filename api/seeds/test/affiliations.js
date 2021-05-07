@@ -36,4 +36,29 @@ exports.seed = async knex => {
       status: 'approved'
     }
   ]);
+  await knex('okta_users').del();
+  await knex('okta_users').insert([
+    {
+      user_id: 2010,
+      email: '2010@email.com',
+      metadata: '{}'
+    },
+    {
+      user_id: 2020,
+      email: '2020@email.com',
+      metadata: '{}'
+    },
+    {
+      user_id: 'all-permissions',
+      email: 'all-permissions@email.com',
+      metadata: '{}'
+    },
+    {
+      user_id: 'no-permissions',
+      email: 'no-permissions@email.com',
+      metadata: '{}'
+    },
+
+  ]);
+
 };
