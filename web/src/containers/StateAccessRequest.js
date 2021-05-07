@@ -7,64 +7,65 @@ import AuthenticationForm from '../components/AuthenticationForm';
 import { STATES } from '../util/states';
 
 const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
-
-  // Ty Note: Need to maintain 4 state objects to support the multiple state selection
-  // 1. initialStates = full list of states that can be filtered against. will be
-  // reduced as items are added to selectedStates
-  // 2. filteredStates = list of states that match search query
-  // 3. selectedStates = array of chosen states. Used for both form submission and
-  // displaying the badges on the page
-  // 4. queryValue = what we want to appear in the search box
+  // Need to maintain 4 state objects to support the multiple state selection
+  // 1. initialStates - full list of states that can be filtered against. as
+  // states/items are selected by the user, they are removed from this list
   const [initialStates, setInitialStates] = useState(STATES);
 
+  // 2. filteredStates - list of states that match search query
   const [filteredStates, setFilteredStates] = useState([]);
 
+  // 3. selectedStates - array of chosen states. Used for both form submission
+  // and displaying the badges on the page
   const [selectedStates, setSelectedStates] = useState([]);
-
+  
+  // 4. queryValue - controlled value for what is displayed in the input field
   const [inputValue, setInputValue] = useState('');
 
-
   const handleOnChange = selection => {
-    console.log("changeStates fired", selection);
-
-    // set search box to empty
     setInputValue('');
     
-    // ty note: what's a better way to error handle this? try..catch?
+    // onChange can be triggered by hitting escape so we need to
+    // return when that happens if nothing is entered
     if(selection === null) {
       return;
     }
-    // add item to selectedStates
+
+    // add state to selectedStates
     const newSelection = selectedStates;
     newSelection.push(selection);
     setSelectedStates(newSelection);
-
+    
     // remove state from initialState list
     setInitialStates(initialStates.filter(item => item.id !== selection.id));
-  };
 
-  const handleSubmit = e => {
-    console.log("e.key", e.key);
-    e.preventDefault();
-    saveAction(selectedStates);
+    // reset filteredStates
+    setFilteredStates(initialStates.filter(item => item.id !== selection.id));
   };
-
+  
   const handleRemoveItem = element => {
+    setInputValue('');
+
     // remove from selectedStates
     const newSelection = selectedStates.filter(item => item.id !== element.target.dataset.id );
     setSelectedStates(newSelection);
-
+    
     // add back to initialStates list
     const newInitialStates = initialStates;
     const addBackState = STATES.find(item => item.id === element.target.dataset.id);
     newInitialStates.push(addBackState);
     setInitialStates(newInitialStates);
   };
-
+  
   const handleInputChange = query => {
     setInputValue(query);
     setFilteredStates(initialStates.filter(el => el.name.toLowerCase().indexOf(query.toLowerCase()) !== -1));
   }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    saveAction(selectedStates);
+  };
 
   return (
     <div id="start-main-content">
@@ -74,7 +75,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
         legend="Verify Your Identity"
         cancelable={false}
         className="ds-u-margin-top--7"
-        canSubmit={!!selectedStates}
+        canSubmit={(selectedStates.length > 0)}
         error={errorMessage}
         success={null}
         working={fetching}
