@@ -7,6 +7,8 @@ const { verifyJWT } = require('./oktaAuth');
  * Uses Okta to verify and decode the token.
  * @name verifyWebToken
  * @param {String} token - signed JWT
+ * @param {Object} Object containing a verifier to be used.
+ * allows for switching between okta and local varification patterns
  * @returns {(Object|Boolean)} JWT payload, or false
  */
 const verifyWebToken = async (token, { verifier = verifyJWT } = {}) => {
@@ -33,7 +35,7 @@ const jwtExtractor = req => {
 
   if (token && token !== '') {
     if (token.match(/^bearer\s/i)) {
-      const [temp, result] = token.split(' '); // eslint-disable-line no-unused-vars
+      const  result = token.split(' ')[1]; // eslint-disable-line no-unused-vars
       return result;
     }
   }
@@ -56,7 +58,7 @@ const jwtExtractor = req => {
     ); // find the cookie that stores the access token
     if (accessTokenObj) {
       // eslint-disable-next-line no-unused-vars
-      const [key, value] = accessTokenObj.split('='); // get the value
+      const value = accessTokenObj.split('=')[1]; // get the value
       const valueObj = JSON.parse(unescape(value)); // the value is an encoded string, convert it to a json object
       return valueObj.accessToken; // return the access token
     }
@@ -96,7 +98,8 @@ const sign = (payload, options=defaultOptions) => {
 
 const verify = token => {
   try {
-    return jwt.verify(token, getSecret());
+    const payload = jwt.verify(token, getSecret());
+    return Promise.resolve(payload)
   } catch (err) {
     throw new Error('invalid Token')
   }

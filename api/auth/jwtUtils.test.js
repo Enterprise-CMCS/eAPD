@@ -103,7 +103,7 @@ tap.test('Okta jwtUtils', async t => {
 });
 
 tap.test('Local jwtUtils', async t => {
-  const { getDefaultOptions, sign, verify } = require('./jwtUtils');
+  const { getDefaultOptions, sign, verify, verifyWebToken } = require('./jwtUtils');
 
   const payload = {
     user: 'Test User',
@@ -184,6 +184,47 @@ tap.test('Local jwtUtils', async t => {
 
     t.throws(() => verify(tokenParts.join('.')), 'a bad token throws an error')
   })
+
+  t.test('overriding iss and aud options', async t =>{
+    const options = getDefaultOptions()
+    const override = 'NOT EapD'
+    options.audience = override
+    options.issuer = override
+    const token = sign(payload, options)
+    // Decodes WITHOUT verifying; only use if certain the token is valid
+    // using this here to prevent a completely circular test
+    const actualPayload = jwt.decode(token);
+    t.same(actualPayload.aud, override, 'audience was overwritten')
+    t.same(actualPayload.iss, override, 'issuer was overwritten')
+
+  })
+
+  t.test('overriding expiration', async t =>{
+    const options = getDefaultOptions()
+    options.expiresIn = 0
+    const token = sign(payload, options)
+    // Decodes WITHOUT verifying; only use if certain the token is valid
+    // using this here to prevent a completely circular test
+    const actualPayload = jwt.decode(token);
+    t.ok(actualPayload.exp < Date.now()/1000 + 1)
+    t.throws(()=>verify(token), 'token is no longer valid')
+
+  })
+
+  t.test('works with the existing webTokenVerify', async t =>{
+    const token = sign(payload)
+
+    // make sure the token is in fact valid
+    t.ok(verify(token), 'a valid token was verified')
+
+    const actualPayload = await verifyWebToken(token, {verifier:verify})
+    // all of the keys seem to be here.
+    Object.keys(payload).forEach(key =>{
+      t.same(actualPayload[key], payload[key], `${key} is in the jwt`)
+    })
+
+  })
+
 
 
 
