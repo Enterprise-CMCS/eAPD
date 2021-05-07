@@ -17,6 +17,7 @@ Anticipated release: April 26, 2021
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2988]: https://github.com/CMSgov/eAPD/issues/2988
 [#2947]: https://github.com/CMSgov/eAPD/issues/2947
 [#2970]: https://github.com/CMSgov/eAPD/issues/2970
 [#2988]: https://github.com/CMSgov/eAPD/issues/2988
