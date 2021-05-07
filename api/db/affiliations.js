@@ -111,9 +111,16 @@ const getPopulatedAffiliationById = async ({
 };
 
 const reduceAffiliations = affiliations =>{
-
+  // combine affiliations for each user.
+  // many fields are omitted for clarity
+  // Given:
+  // [{userId:1, stateId:'ak'}, {userId:1, stateId:'md'}, {userId:2, stateId:'ak}]
+  // becomes
+  // [{userId:1, affiliations: [{stateId:'ak'}, {stateId:'md'}]}, {userId:2, affiliations:[{stateId:'ak'}]}]
   const reducer = (results, affiliation) => {
     const stateAffiliation = {role: affiliation.role, stateId: affiliation.stateId, status: affiliation.status}
+    // If this user ID is not in the object add it and create an
+    // affiliations array with just this affiliation in it.
     if(!Object.prototype.hasOwnProperty.call(results, affiliation.userId)){
 
       // eslint-disable-next-line no-param-reassign
@@ -123,6 +130,7 @@ const reduceAffiliations = affiliations =>{
       }
       return results
     }
+    // add this affiliation to this user's list of affiliations
     results[affiliation.userId].affiliations.push(stateAffiliation)
     return results
   }
