@@ -18,6 +18,7 @@ const MilestoneReview = ({
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
       ariaLabel={`${index + 1}. ${milestone || 'Milestone not specified'}`}
+      objType="Milestone"
     >
       <p className="ds-u-margin-top--2">
         <strong>Target completion date:</strong> {formattedDate}

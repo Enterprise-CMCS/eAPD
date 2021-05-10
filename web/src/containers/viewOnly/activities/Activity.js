@@ -100,7 +100,6 @@ const Activity = ({ activity, activityIndex }) => {
       return `${start} — ${end}`;
     };
 
-    
     return (
       <Fragment key={uuidv4()}>
         <p className="ds-u-margin-bottom--0">
@@ -109,7 +108,10 @@ const Activity = ({ activity, activityIndex }) => {
           </strong>
           {contractor.hourly.useHourly === true && ' (hourly resource)'}
         </p>
-        <p className="ds-u-margin-top--0" dangerouslySetInnerHTML={{ __html: contractor.description }} /> 
+        <p
+          className="ds-u-margin-top--0"
+          dangerouslySetInnerHTML={{ __html: contractor.description }}
+        />
         <ul className="ds-c-list--bare">
           <li>
             <strong>Full Contract Term: </strong>
@@ -144,7 +146,7 @@ const Activity = ({ activity, activityIndex }) => {
       <h2>
         Activity {activityIndex + 1} ({activity.name})
       </h2>
-        <strong>Provide a short overview of the activity:</strong>
+      <strong>Provide a short overview of the activity:</strong>
       <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
       <p>
         <strong>Start date: </strong>

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import Icon, { File, faPlusCircle, faSpinner } from './Icons';
 import Instruction from './Instruction';
+import DeleteModal from './DeleteModal';
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
@@ -35,9 +36,9 @@ const ApdList = (
     stateStatus,
     isFedAdmin
   },
-  { global = window } = {}
 ) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const createNew = () => {
     setIsLoading(true);
@@ -48,12 +49,6 @@ const ApdList = (
     setIsLoading(true);
     e.preventDefault();
     select(id, route);
-  };
-
-  const delApd = apd => () => {
-    if (apd && global.confirm(`Delete ${apd.name}?`)) {
-      del(apd.id);
-    }
   };
 
   const canCreateApd =
@@ -143,7 +138,7 @@ const ApdList = (
                       <Button
                         variation="transparent"
                         size="small"
-                        onClick={delApd(apd)}
+                        onClick={()=>setShowDeleteModal(apd.id)}
                       >
                         Delete{' '}
                         <span className="ds-u-visibility--screen-reader">
@@ -154,6 +149,14 @@ const ApdList = (
                     </div>
                   </div>
                 </div>
+                {
+                  showDeleteModal === apd.id &&
+                  <DeleteModal
+                    objType="APD"
+                    onCancel={() => setShowDeleteModal(false)}
+                    onDelete={() => del(apd.id)}
+                  />
+                }
               </div>
             ))}
           </div>

@@ -6,6 +6,7 @@ node_modules
 .env
 .vscode
 .nova
+.idea
 
 npm-debug.log*
 pgdata/*

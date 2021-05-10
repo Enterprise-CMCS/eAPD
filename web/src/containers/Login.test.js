@@ -54,22 +54,26 @@ describe('login component', () => {
     expect(queryByRole('button', { name: /logging in/i })).toBeDisabled();
     expect(container.querySelector('.ds-c-spinner')).toBeTruthy();
   });
-  
+
   it('renders forgot password help text and link', () => {
     const { getByText, getByRole } = setup();
     expect(getByText(/Forgot password?/i)).toBeTruthy();
-    expect(getByRole('link', {name: /Reset password at EUA/i} )).toBeTruthy();
+    expect(getByRole('link', { name: /Reset password at EUA/i })).toBeTruthy();
   });
 
   it('renders new user guides, links, and help email', () => {
     const { getByText, getByRole } = setup();
-    
-    expect(getByRole('heading', {name: 'New Users'} )).toBeTruthy();
-    expect(getByText('New users must have an EUA account with the correct job codes before logging into the system.')).toBeTruthy();
-    
-    expect(getByRole('link', {name: 'How to Get Started'} )).toBeTruthy();
-    expect(getByRole('link', {name: 'How to Access the eAPD'} )).toBeTruthy();    
-    expect(getByRole('link', {name: 'CMS-EAPD@cms.hhs.gov'} )).toBeTruthy();
+
+    expect(getByRole('heading', { name: 'New Users' })).toBeTruthy();
+    expect(
+      getByText(
+        'New users must have an EUA account with the correct job codes before logging into the system.'
+      )
+    ).toBeTruthy();
+
+    expect(getByRole('link', { name: 'How to Get Started' })).toBeTruthy();
+    expect(getByRole('link', { name: 'How to Access the eAPD' })).toBeTruthy();
+    expect(getByRole('link', { name: 'CMS-EAPD@cms.hhs.gov' })).toBeTruthy();
   });
 
   it('calls login prop', () => {

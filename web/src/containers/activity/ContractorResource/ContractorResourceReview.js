@@ -24,10 +24,13 @@ const ContractorResourceReview = ({
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
       ariaLabel={`${index + 1}. ${name || 'Contractor name not specified'}`}
+      objType="Private Contractor"
     >
       {/* eslint-disable react/no-danger */}
       <p
-        dangerouslySetInnerHTML={{ __html: description || 'Description of services not specified' }}
+        dangerouslySetInnerHTML={{
+          __html: description || 'Description of services not specified'
+        }}
         className="ds-u-margin-top--0"
       />
       <ul className="ds-c-list--bare">
