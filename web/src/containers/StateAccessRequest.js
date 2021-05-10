@@ -54,6 +54,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
     const newInitialStates = initialStates;
     const addBackState = STATES.find(item => item.id === element.target.dataset.id);
     newInitialStates.push(addBackState);
+    newInitialStates.sort( (a, b) => a.name.localeCompare(b.name) );
     setInitialStates(newInitialStates);
   };
   
@@ -87,7 +88,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             htmlFor="state-selection"
             className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
           >
-            Select Affiliation(s)
+            Select your State Affiliation.
           </label>
 
           <Autocomplete
@@ -112,7 +113,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             })}
 
             <TextField
-              label="Select Affiliation(s)"
+              label="Select your State Affiliation."
               placeholder="Search state here"
               className="ds-u-margin-top--2"
               labelClassName="ds-u-visibility--screen-reader"

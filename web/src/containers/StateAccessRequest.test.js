@@ -25,22 +25,46 @@ describe('<StateAccessRequest />', () => {
 
   it('renders label', () => {
     const { getByLabelText } = setup();
-    expect(getByLabelText('Select Affiliation(s)')).toBeTruthy();
+    expect(getByLabelText('Select your State Affiliation.')).toBeTruthy();
   });
-
-  // Need to brainstorm best way to test the interactions of the autocomplete
-  xit('allows the user to select the first item', () => {
-    const { getByText } = setup();
-    fireEvent.click(getByText(/Submit/i));
-    expect(defaultProps.saveAction).toHaveBeenCalledWith([{name: 'Alabama', id: 'al'}]);
-  });
-
-  xit('allows the users to select any item', () => {
-    const { getByLabelText, getByText } = setup();
-    fireEvent.change(getByLabelText(/Select Affiliation(s)/i), {
-      target: { value: 'mo' }
-    });
-    fireEvent.click(getByText(/Submit/i));
-    expect(defaultProps.saveAction).toHaveBeenCalledWith(['mo']);
-  });
+  
+  it('renders the input when entered', () => {
+    const { getByLabelText } = setup();
+    const input = getByLabelText('Select your State Affiliation.');
+    fireEvent.change(input, { target: { value: 'Al' } });
+    expect(input.value).toBe('Al');    
+  })
+  
+  it('renders the selection badge when an item is picked', () => {
+    const { getByText, getByLabelText } = setup();
+    const input = getByLabelText('Select your State Affiliation.');
+    fireEvent.change(input, { target: { value: 'Alabama' } });
+    fireEvent.click(getByText('Alabama'));
+    expect(getByText('Alabama')).toBeTruthy();
+  })
+  
+  it('renders the no results on an invalid entry', () => {
+    const { getByText, getByLabelText } = setup();
+    const input = getByLabelText('Select your State Affiliation.');
+    fireEvent.change(input, { target: { value: 'invalid123' } });
+    expect(getByText('No results')).toBeTruthy();
+  })
+  
+  it('renders the selection badge when an item is picked', () => {
+    const { getByText, getByLabelText } = setup();
+    const input = getByLabelText('Select your State Affiliation.');
+    fireEvent.change(input, { target: { value: 'Alabama' } });
+    fireEvent.click(getByText('Alabama'));
+    fireEvent.click(getByText('Remove Alabama'));
+    expect(getByText('Alabama')).toBeNull();
+  })
+  
+  it('renders the submit button as disabled until a selection is made', () => {
+    const { getByText, getByLabelText } = setup();    
+    const input = getByLabelText('Select your State Affiliation.');
+    expect(getByText('Submit')).toHaveAttribute('disabled');
+    fireEvent.change(input, { target: { value: 'Al' } });
+    fireEvent.click(getByText('Alabama'));
+    expect(getByText('Submit')).not.toHaveAttribute('disabled');    
+  })
 });
