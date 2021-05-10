@@ -106,7 +106,7 @@ const Activity = ({ activity, activityIndex }) => {
           <strong>
             {index + 1}.{' '}
             {contractor.name ||
-              'Private Contractor or Vender Name not specified'}
+              'Private Contractor or Vendor Name not specified'}
           </strong>
           {contractor.hourly.useHourly === true && ' (hourly resource)'}
         </p>

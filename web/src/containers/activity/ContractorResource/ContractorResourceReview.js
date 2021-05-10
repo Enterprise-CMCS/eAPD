@@ -20,13 +20,13 @@ const ContractorResourceReview = ({
   return (
     <Review
       heading={`${index + 1}. ${
-        name || 'Private Contractor or Vender Name not specified'
+        name || 'Private Contractor or Vendor Name not specified'
       }`}
       headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
       ariaLabel={`${index + 1}. ${
-        name || 'Private Contractor or Vender Name not specified'
+        name || 'Private Contractor or Vendor Name not specified'
       }`}
     >
       {/* eslint-disable react/no-danger */}

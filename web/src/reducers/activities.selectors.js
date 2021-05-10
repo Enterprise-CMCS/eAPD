@@ -95,7 +95,7 @@ export const selectActivityCostSummary = createSelector(
         [year]: {
           contractorResources: activity.contractorResources.map(c => ({
             description:
-              c.name || 'Private Contractor or Vender Name not specified',
+              c.name || 'Private Contractor or Vendor Name not specified',
             totalCost: c.years[year],
             unitCost: c.hourly.useHourly ? c.hourly.data[year].rate : null,
             units: c.hourly.useHourly
