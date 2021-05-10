@@ -4,6 +4,8 @@ Anticipated release: April 26, 2021
 
 #### 🚀 New features
 
+- Updated delete dialog to use thematically consistent modal dialogs instead of basic alerts.
+
 #### 🐛 Bugs fixed
 - Shows a "password expired" alert instead of "invalid mfa code" alert when logging in with MFA and an expired password ([#2988])
 

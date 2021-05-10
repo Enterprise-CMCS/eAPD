@@ -1,6 +1,6 @@
 import { Button, Review } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useMemo, useRef, Fragment } from 'react';
+import React, { useMemo, useRef, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
@@ -8,6 +8,7 @@ import { removeActivity } from '../../actions/editActivity';
 import NavLink from '../../components/NavLink';
 
 import { t } from '../../i18n';
+import DeleteModal from '../../components/DeleteModal';
 
 const makeTitle = ({ name, fundingSource }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
@@ -31,8 +32,11 @@ const EntryDetails = ({
 }) => {
   const container = useRef();
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const onRemove = () => {
     remove(activityIndex);
+    setShowDeleteModal(false);
   };
 
   const title = useMemo(
@@ -59,7 +63,7 @@ const EntryDetails = ({
             className="ds-u-color--error"
             size="small"
             variation="transparent"
-            onClick={onRemove}
+            onClick={() => setShowDeleteModal(true)}
           >
             Delete
           </Button>
@@ -86,6 +90,14 @@ const EntryDetails = ({
           /* children are required, so send an empty array to suppress errors */
         ]}
       </Review>
+      {showDeleteModal && (
+        <DeleteModal
+          objType="Activity"
+          onCancel={() => setShowDeleteModal(false)}
+          onDelete={onRemove}
+          objTitle={name}
+        />
+      )}
     </div>
   );
 };
