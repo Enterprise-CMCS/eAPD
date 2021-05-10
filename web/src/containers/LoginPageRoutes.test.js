@@ -117,7 +117,7 @@ describe('LoginPageRoutes', () => {
         initialHistory: ['/login/affiliations/request']
       }
     );
-    expect(getByLabelText('Select Affiliation(s)')).toBeTruthy();
+    expect(getByLabelText('Select your State Affiliation.')).toBeTruthy();
   });
 
   it('should redirect the user to StateAccessRequestConfirmation if that path is /login/affiliations/thank-you', () => {
