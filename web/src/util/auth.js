@@ -2,12 +2,18 @@ import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 import oktaAuth from './oktaAuth';
 import { MFA_FACTORS } from '../constants';
+import axios from './api';
 
 export const INACTIVITY_LIMIT = 300000;
 export const EXPIRE_EARLY_SECONDS = 300;
 
 export const getAccessToken = () => oktaAuth.getAccessToken();
 
+export const getOtherAccessToken = () => {
+  const eAPDToken = axios.get('/me/jwToken')
+  console.log(eAPDToken, eAPDToken.data)
+  return eAPDToken
+}
 // Cookie Methods
 
 const COOKIE_NAME = 'gov.cms.eapd.api-token';
@@ -38,8 +44,17 @@ const getConfig = () =>{
   return config
 }
 const setCookie = () => {
+  console.log('setting cookie')
   if (navigator.cookieEnabled) {
     const jwt = getAccessToken();
+    getOtherAccessToken().then((res)=>{
+      console.log( res)
+      console.log('Local JWT is: ', res.data.token)
+      const config = getConfig()
+      Cookies.set('KNOLLTOKEN', JSON.stringify({ accessToken: jwt }), config);
+    });
+
+    console.log('got cookie of: ', jwt)
     const config = getConfig()
     Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
   }
@@ -86,6 +101,7 @@ export const setTokens = sessionToken => {
     })
     .then(async res => {
       const { tokens } = res;
+      console.log('Setting Token to: ', tokens)
       // if (stateToken === responseToken) { // state not currently being returned
       await oktaAuth.tokenManager.setTokens(tokens);
       const expiresAt = await getSessionExpiration();

@@ -96,7 +96,7 @@ const sign = (payload, options=defaultOptions) => {
   return jwt.sign(payload, getSecret(), options);
 }
 
-const verify = token => {
+const verifyEAPDToken = token => {
   try {
     const payload = jwt.verify(token, getSecret());
     return Promise.resolve(payload)
@@ -110,5 +110,5 @@ module.exports = {
   jwtExtractor,
   getDefaultOptions,
   sign,
-  verify
+  verifyEAPDToken
 };
