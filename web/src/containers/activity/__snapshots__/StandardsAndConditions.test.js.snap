@@ -21,6 +21,8 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
        
       <a
         href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112"
+        rel="noreferrer"
+        target="_blank"
       >
         42 CFR 433.112
       </a>
