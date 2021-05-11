@@ -13,6 +13,7 @@ const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
+const me = require('./routes/me/index');
 
 const api = express();
 
@@ -91,8 +92,10 @@ api.use(bodyParser.json({ limit: '5mb' }));
 // Registers Passport, related handlers, and
 // login/logout endpoints
 logger.debug('setting up authentication');
-api.use(jsonWebTokenMiddleware);
+// todo ME endpoint gets registered her and uses the okta verifier, everything else will use our verifier
 
+api.use(jsonWebTokenMiddleware);
+me(api);
 logger.debug('setting up routes');
 routes(api);
 

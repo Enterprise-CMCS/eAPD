@@ -1,4 +1,4 @@
-const { jwtExtractor, verifyWebToken } = require('./jwtUtils');
+const { jwtExtractor, verifyEAPDToken } = require('./jwtUtils');
 const { getUserByID: gu } = require('../db');
 const logger = require('../logger')('jwt middleware');
 
@@ -19,7 +19,7 @@ const jwtMiddleware = async (
   {
     getUserByID = gu,
     extractor = jwtExtractor,
-    verifyToken = verifyWebToken
+    verifyToken = verifyEAPDToken
   } = {}
 ) => {
   try {
