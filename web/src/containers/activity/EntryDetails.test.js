@@ -70,10 +70,7 @@ describe('the (Activity) EntryDetails component', () => {
     const component = shallow(<EntryDetails {...props} />);
     const review = component.find('Review').dive();
     // Second button is the delete button
-    review
-      .find('Button')
-      .at(1)
-      .simulate('click');
+    review.find('Button').at(1).simulate('click');
     expect(props.remove).toHaveBeenCalled();
   });
 

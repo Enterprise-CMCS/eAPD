@@ -4,14 +4,14 @@ const activities = [
     alternatives:
       '<p>Modifications to State Level Registry (SLR)</p>\n<ul>\n<li>Minimize Modifications</li>\n<li>Minimize cost</li>\n<li>Decreased implementation time.</li>\n</ul>\n<p>The 2015-2017 rule changes are significant and wide ranging; minimally accommodating the new attestations will be problematic for the remainder of the program. Program benefits will potentially not be maximized. To be prepared for Stage 3 and to properly implement all 2015-2017 rule changes; Tycho plans to implement all necessary modifications.</p>\n<ul>\n<li>Modifications to State Level Registry (SLR)</li>\n<li>Implement the changes as outlined</li>\n<li>The EHR Incentive Program will have the ability to be fully supported.</li>\n<li>Support of electronic submission of CQMs, enhancing the support of the emphasis on interoperability.</li>\n</ul>\n<p>There are no significant disadvantages to this option.</p>\n<p></p>\n<p>Implementing the changes as outlined provide the optimal opportunity to maximize the benefits of the EHR program and its impact on the delivery of health care with improved quality and outcomes.</p>\n',
     costAllocation: {
-      '2020': {
+      2020: {
         ffp: {
           federal: 90,
           state: 10
         },
         other: 0
       },
-      '2021': {
+      2021: {
         ffp: {
           federal: 90,
           state: 10
@@ -37,38 +37,38 @@ const activities = [
     summary:
       'Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.',
     quarterlyFFP: {
-      '2020': {
-        '1': {
+      2020: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
       },
-      '2021': {
-        '1': {
+      2021: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
@@ -80,11 +80,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -95,8 +95,8 @@ const activities = [
         start: '',
         totalCost: 32423,
         years: {
-          '2020': 999756,
-          '2021': 342444
+          2020: 999756,
+          2021: 342444
         },
         key: '21453e73'
       },
@@ -105,11 +105,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -120,8 +120,8 @@ const activities = [
         start: '',
         totalCost: 473573,
         years: {
-          '2020': 333000,
-          '2021': 200000
+          2020: 333000,
+          2021: 200000
         },
         key: 'ced39f96'
       }
@@ -131,8 +131,8 @@ const activities = [
         description: '',
         category: 'Training and outreach',
         years: {
-          '2020': 40000,
-          '2021': 40000
+          2020: 40000,
+          2021: 40000
         },
         key: 'ead09f5a'
       },
@@ -140,8 +140,8 @@ const activities = [
         description: '',
         category: 'Travel',
         years: {
-          '2020': 35000,
-          '2021': 35000
+          2020: 35000,
+          2021: 35000
         },
         key: 'c820398f'
       },
@@ -149,8 +149,8 @@ const activities = [
         description: '',
         category: 'Hardware, software, and licensing',
         years: {
-          '2020': 700000,
-          '2021': 0
+          2020: 700000,
+          2021: 0
         },
         key: '35a7eca9'
       }
@@ -209,11 +209,11 @@ const activities = [
         description:
           'Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.',
         years: {
-          '2020': {
+          2020: {
             amt: 86000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 88000,
             perc: 1
           }
@@ -226,11 +226,11 @@ const activities = [
         description:
           'Develop and monitor reports, assist data users in developing and managing queries.',
         years: {
-          '2020': {
+          2020: {
             amt: 101115,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 102111,
             perc: 1
           }
@@ -242,11 +242,11 @@ const activities = [
         description:
           'Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.',
         years: {
-          '2020': {
+          2020: {
             amt: 101000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 104000,
             perc: 1
           }
@@ -258,11 +258,11 @@ const activities = [
         description:
           'Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.',
         years: {
-          '2020': {
+          2020: {
             amt: 101000,
             perc: 3
           },
-          '2021': {
+          2021: {
             amt: 109000,
             perc: 3
           }
@@ -274,11 +274,11 @@ const activities = [
         description:
           'Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program',
         years: {
-          '2020': {
+          2020: {
             amt: 165000,
             perc: 0.5
           },
-          '2021': {
+          2021: {
             amt: 170000,
             perc: 0.5
           }
@@ -290,11 +290,11 @@ const activities = [
         description:
           'Coordinate office resources, manage staff, budget, and resource assignments, and report program status.',
         years: {
-          '2020': {
+          2020: {
             amt: 135000,
             perc: 0.5
           },
-          '2021': {
+          2021: {
             amt: 140000,
             perc: 0.5
           }
@@ -307,11 +307,11 @@ const activities = [
         description:
           'Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.',
         years: {
-          '2020': {
+          2020: {
             amt: 110012,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 111102,
             perc: 1
           }
@@ -323,11 +323,11 @@ const activities = [
         description:
           'Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.',
         years: {
-          '2020': {
+          2020: {
             amt: 98987,
             perc: 4
           },
-          '2021': {
+          2021: {
             amt: 99897,
             perc: 4
           }
@@ -341,14 +341,14 @@ const activities = [
     alternatives:
       "<p>Medicaid Claims Data Feed to the HIE</p>\n<p>Periodic Uploads of Medicaid Claims Data from MMIS to the HIE</p>\n<p>The HIE could consume Medicaid claims data from periodic uploads of an extract/export from the MMIS</p>\n<p>Increase of administrative burden on development staff.</p>\n<p>Short term cost savings, with a higher long-term cost. No real-time data.</p>\n<p>The periodic MMIS uploads would not provide real time data. Therefore, Tycho plans to use a Medicaid claims data feed</p>\n<p>Medicaid Claims Data Feed to the HIE</p>\n<p>Create a Medicaid Claims Data Feed to the HIE</p>\n<p>Implementing a Medicaid Claims Data Feed to the HIE would provide information regarding Medicaid claims to participating providers, Hospitals, and patients</p>\n<p>Data regarding medications prescribed, tests performed, and the resulting diagnosis would improve care coordination</p>\n<p>There are no significant disadvantages to this option</p>\n<p>Implementing a Medicaid Claims data feed to the HIE provides updated claims data in real-time to improve care coordination and increase MU. Because data is updated in real-time, a data feed meets Tycho's needs</p>\n",
     costAllocation: {
-      '2020': {
+      2020: {
         ffp: {
           federal: 90,
           state: 10
         },
         other: 0
       },
-      '2021': {
+      2021: {
         ffp: {
           federal: 75,
           state: 25
@@ -374,38 +374,38 @@ const activities = [
     summary:
       'To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. ',
     quarterlyFFP: {
-      '2020': {
-        '1': {
+      2020: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
       },
-      '2021': {
-        '1': {
+      2021: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
@@ -417,11 +417,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -432,8 +432,8 @@ const activities = [
         start: '',
         totalCost: 26453574,
         years: {
-          '2020': 650000,
-          '2021': 750000
+          2020: 650000,
+          2021: 750000
         },
         key: 'ff88cc66'
       },
@@ -442,11 +442,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -457,8 +457,8 @@ const activities = [
         start: '',
         totalCost: 7398,
         years: {
-          '2020': 0,
-          '2021': 1000000
+          2020: 0,
+          2021: 1000000
         },
         key: '9e285662'
       }
@@ -468,8 +468,8 @@ const activities = [
         description: '',
         category: 'Travel',
         years: {
-          '2020': 0,
-          '2021': 0
+          2020: 0,
+          2021: 0
         },
         key: '24b1b88c'
       }
@@ -507,11 +507,11 @@ const activities = [
         title: 'Project Assistant',
         description: 'Assist with stuff',
         years: {
-          '2020': {
+          2020: {
             amt: 98000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 99000,
             perc: 1
           }
@@ -523,11 +523,11 @@ const activities = [
         description:
           'This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info',
         years: {
-          '2020': {
+          2020: {
             amt: 140000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 144000,
             perc: 1
           }
@@ -539,11 +539,11 @@ const activities = [
         description:
           'Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System',
         years: {
-          '2020': {
+          2020: {
             amt: 115000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 115000,
             perc: 1
           }
@@ -555,11 +555,11 @@ const activities = [
         description:
           'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
         years: {
-          '2020': {
+          2020: {
             amt: 140000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 145000,
             perc: 1
           }
@@ -570,11 +570,11 @@ const activities = [
         title: 'Security IT',
         description: 'Make sure its secure.',
         years: {
-          '2020': {
+          2020: {
             amt: 115000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 120000,
             perc: 1
           }
@@ -585,11 +585,11 @@ const activities = [
         title: 'Operations Specialist',
         description: 'Run the day to day.',
         years: {
-          '2020': {
+          2020: {
             amt: 125000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 130000,
             perc: 1
           }
@@ -601,11 +601,11 @@ const activities = [
         description:
           'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
         years: {
-          '2020': {
+          2020: {
             amt: 150000,
             perc: 2
           },
-          '2021': {
+          2021: {
             amt: 155000,
             perc: 3
           }
@@ -617,11 +617,11 @@ const activities = [
         description:
           'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
         years: {
-          '2020': {
+          2020: {
             amt: 120000,
             perc: 1
           },
-          '2021': {
+          2021: {
             amt: 125000,
             perc: 1
           }
@@ -635,14 +635,14 @@ const activities = [
     alternatives:
       '<p>Health Information Exchange</p>\n<p>Maintain existing system.</p>\n<p>The existing system has a few benefits. The current EDI process while dated still forms the backbone of the Division’s data sharing needs. The technology works in the fashion that it always has.</p>\n<p>The drawbacks of this approach are significant. While the current Edi process affords behavioral health agencies to submit their data to the state, it does not allow for sharing the same data to other providers in either the primary care or behavioral health treatment contexts.</p>\n<p>There are more disadvantages than advantages in pursuing this approach. The drawbacks are substantial, such as absence of data normalization, difficulties with aligning the user interface and application design with industry best practices, inconsistencies in design, and difficulties with support and maintenance, making this approach less favorable than the other two alternatives considered.</p>\n<p>Health Information Exchange</p>\n<p>Update and Enhance Existing System(s), connecting AKAIMS to the Health Information Exchange</p>\n<p>Connecting AKAIMS to the Health Information Exchange will provide for the sending and receiving of data across healthcare disciplines. This data sharing is thought to enhance and provide for better care outcomes for patients who are participating in care across multiple providers. This solution future proofs AKAIMS as it will integrate current technologies and leverages those technologies for a more feature rich process.</p>\n<p>Training and integration of this updated technology will require some effort and outreach. Newly on-boarded agencies will need to adjust to new data collection protocols.</p>\n<p>Full participation in the Health Information Exchange will reduce double data entry at all levels (reducing costs). It is anticipated that efficiencies gained with simplification of data collection and reporting will greatly enhance patient care outcomes.</p>\n<p>HIE Platform</p>\n<p>Upgrade HIE to the Audacious Inquiry (Ai) platform</p>\n<p>Ai offers a strong foundation on which additional functionality can be built. Transitioning to the Ai platform has the potential to minimize the effort required to modernize the HIE, while delivering additional services to users.</p>\n<p>Transitioning to Ai means that the State will be leaving the current HIE platform. There is potential risk in adoption and migration of services and data.</p>\n<p>The HIE platform will be transitioned to Ai to offer additional services, contain costs on enhancements, and maximize the scalability and flexibility of the HIE to support modernization across the enterprise.</p>\n<p>HIE Platform</p>\n<p>Keep platform as it is without upgrade.</p>\n<p>Keeping the platform as it is without upgrade would allow focus to remain on onboarding.</p>\n<p>Functionality supported by existing HIE is not adequate to support future applications. The value delivered by the service as it is could be improved with additional functionality. Potential to ingest different critical types of data is limited without a platform upgrade.</p>\n<p>Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.</p>\n<p></p>\n<p>HIE Platform</p>\n<p>Partner with another state HIE for services ranging from sharing the platform itself, to specific services or commonly-developed interfaces.</p>\n<p>Sharing with another state offers the potential to</p>\n<p>• decrease costs</p>\n<p>• Increase speed of onboarding</p>\n<p>• Increase functionality</p>\n<p>• Provide for greater sustainability</p>\n<p>• Address the needs of our partners faster or better</p>\n<p>No states currently share HIE services entirely, due to perceived legal constraints; this option presents multiple factors to consider ranging from legal to technical. Potential for cost savings is limited because pricing models are usually based on volume. There is a possibility for significant disruption to service during a transition of this type; significant issues with legal arrangements complying with other states.</p>\n<p>Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.</p>\n<p>HIE Tools for Care Coordination</p>\n<p>Add functional tools to support care coordination, referrals and analytics through other module developers or collaborators</p>\n<p>Sharing with another state or regional HIE to develop or utilize HIE tools offers the potential to</p>\n<p>• decrease costs</p>\n<p>• Increase speed of onboarding</p>\n<p>• Increase functionality</p>\n<p>• Provide for greater sustainability</p>\n<p>• Address the needs of our partners faster or better</p>\n<p>If another commercial developer is selected to offer these modules, there is some likelihood that integrating into the HIE platform will be more difficult without the transition to Ai.</p>\n<p>Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.</p>\n<p>HIE Functionality</p>\n<p>Enhancing functionality for participating hospitals</p>\n<p>Hospitals are critical stakeholders in the HIE. Providing functionality to assist hospitals in meeting MU3 and in evaluating ER patients are two areas where HIE could provide valuable information.</p>\n<p>Hospital focus is based on patient safety. Thus far, there has been little incentive for using HIE data for patient safety.</p>\n<p>DHSS is actively pursuing additional functionality for hospitals. This involves hospital stakeholder meetings, vendor discussions, board review and clinical workgroup input.</p>\n<p></p>\n<p>HIE Functionality</p>\n<p>Implement connections with high-value state and federal data sources (Corrections, DJJ, SSA, DoD)</p>\n<p>Including health data from correctional facilities (ADT, ORU and/or CCD files) will help provide better more coordinated care for this vulnerable population, many of whom are also Medicaid-eligible.</p>\n<p>Aside from the need to allocate staff time across projects, there are no significant drawbacks to this option.</p>\n<p>This project should proceed.</p>\n<p>HIE Functionality</p>\n<p>Keep health information exchange functionality substantially the same regarding state and federal data source connections</p>\n<p>Less work for the HIE team, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules.</p>\n<p>Leaving the information gap among these agencies open will lead to continued delays in needed services.</p>\n<p>This option is not preferred.</p>\n<p>HIE Functionality</p>\n<p>Keep health information exchange functionality substantially the same regarding emergency department information exchange</p>\n<p>Giving providers better tools to coordinate care for high-risk, high-utilizer members of the population has the potential to substantially reduce spending and improve outcomes for this vulnerable population.</p>\n<p>Aside from the need to allocate staff time across projects, there are no significant drawbacks to this option.</p>\n<p>This project should proceed.</p>\n<p>HIE Functionality</p>\n<p>Keep health information exchange functionality substantially the same regarding prescription information</p>\n<p>Less work for the HIE, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules</p>\n<p>A continuing information gap around prescriptions filled will limit the potential to improve care coordination for Tycho citizens and heighten patient safety.</p>\n<p>This project should proceed.</p>\n<p>HIE Functionality</p>\n<p>Keep health information exchange functionality substantially the same regarding image exchange</p>\n<p>Less work for the HIE, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules</p>\n<p>The lack of simple diagnostic image exchange presents a significant barrier to widespread health information exchange. Without these technologies, patients often hand-carry their films or electronic files with them, which can present a high risk of lost images and inefficiency.</p>\n<p>This option is not preferred at this time.</p>\n',
     costAllocation: {
-      '2020': {
+      2020: {
         ffp: {
           federal: 90,
           state: 10
         },
         other: 0
       },
-      '2021': {
+      2021: {
         ffp: {
           federal: 90,
           state: 10
@@ -666,38 +666,38 @@ const activities = [
     },
     summary: 'Statewide HIE enhancement and onboarding.',
     quarterlyFFP: {
-      '2020': {
-        '1': {
+      2020: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
       },
-      '2021': {
-        '1': {
+      2021: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
@@ -709,11 +709,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -724,8 +724,8 @@ const activities = [
         start: '',
         totalCost: 3496874,
         years: {
-          '2020': 0,
-          '2021': 0
+          2020: 0,
+          2021: 0
         },
         key: '36ae09b0'
       }
@@ -735,8 +735,8 @@ const activities = [
         description: '',
         category: 'Hardware, software, and licensing',
         years: {
-          '2020': 0,
-          '2021': 0
+          2020: 0,
+          2021: 0
         },
         key: 'abe663e6'
       }
@@ -828,11 +828,11 @@ const activities = [
         description:
           'Lead technical architecture design and development efforts for designing, implementing and maintaining services integrations leveraging resources such as the MCI, MPI and state HIE along with other DHSS Business Systems.',
         years: {
-          '2020': {
+          2020: {
             amt: 115000,
             perc: 4
           },
-          '2021': {
+          2021: {
             amt: 119000,
             perc: 4
           }
@@ -846,14 +846,14 @@ const activities = [
     alternatives:
       '<p>Medicaid PHR/Blue Button</p>\n<p>Integrate MMIS DW into the HIE with Blue Button download</p>\n<p>Allows Medicaid recipients to view their Medicaid claims information in a portal and access it through a Blue Button download</p>\n<p>Assists providers in achieving MU by helping them meet the VDT requirements</p>\n<p>Supports the MU CQMs including EP Core Measure:Electronic Copy of health information</p>\n<p>Alaskans will be able to access their PHRs</p>\n<p>User friendly, easy to use technology helps ensure access</p>\n<p>There are no significant negatives to this approach</p>\n<p>Implement Medicaid PHR/Blue Button</p>\n',
     costAllocation: {
-      '2020': {
+      2020: {
         ffp: {
           federal: 90,
           state: 10
         },
         other: 0
       },
-      '2021': {
+      2021: {
         ffp: {
           federal: 90,
           state: 10
@@ -878,38 +878,38 @@ const activities = [
     summary:
       'DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE.',
     quarterlyFFP: {
-      '2020': {
-        '1': {
+      2020: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
       },
-      '2021': {
-        '1': {
+      2021: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
@@ -921,11 +921,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -936,8 +936,8 @@ const activities = [
         start: '',
         totalCost: 4368734,
         years: {
-          '2020': 500000,
-          '2021': 0
+          2020: 500000,
+          2021: 0
         },
         key: '85a0f303'
       },
@@ -946,11 +946,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -961,8 +961,8 @@ const activities = [
         start: '',
         totalCost: 35246,
         years: {
-          '2020': 0,
-          '2021': 2000000
+          2020: 0,
+          2021: 2000000
         },
         key: '6ad66838'
       }
@@ -972,8 +972,8 @@ const activities = [
         description: '',
         category: 'Hardware, software, and licensing',
         years: {
-          '2020': 0,
-          '2021': 0
+          2020: 0,
+          2021: 0
         },
         key: '39eaeb5c'
       }
@@ -1011,11 +1011,11 @@ const activities = [
         title: '',
         description: '',
         years: {
-          '2020': {
+          2020: {
             amt: 0,
             perc: 0
           },
-          '2021': {
+          2021: {
             amt: 0,
             perc: 0
           }
@@ -1029,14 +1029,14 @@ const activities = [
     alternatives:
       '<p>HIE Functionality</p>\n<p>Update and enhance existing system, adding interfaces with PDMP, PRISM, and Special registries via Public Health Modernization</p>\n<p>Connecting these systems to the health information exchange would improve efficiencies for providers and for public health registrars. Reporting to several of these registries is an essential component of meaningful use for EPs and EHs; integrating this function into the HIE helps to reinforce value for the HIE, and will have the benefit of easing reporting.</p>\n<p>Expanding the utility of the Health Information Exchange will reduce double data entry at all levels (reducing costs) and simplify reporting for participating EPs and EHs.</p>\n<p>Training and integration of this updated technology will require some effort and outreach. Newly on-boarded agencies will need to adjust to new data collection protocols, and currently connected providers will need outreach to help them understand the new functionality.</p>\n<p>It is anticipated that efficiencies gained with simplification of data collection and reporting will greatly enhance patient care outcomes, and will assist EPs and EHs in attesting to meaningful use.</p>\n',
     costAllocation: {
-      '2020': {
+      2020: {
         ffp: {
           federal: 90,
           state: 10
         },
         other: 0
       },
-      '2021': {
+      2021: {
         ffp: {
           federal: 90,
           state: 10
@@ -1061,38 +1061,38 @@ const activities = [
     summary:
       'The purpose of PH modernization is to provide Medicaid EPs and EHs with the tools to improve the coordination of care, transition of care and the availability of specialty registries; increasing the number of providers attesting for meaningful use.',
     quarterlyFFP: {
-      '2020': {
-        '1': {
+      2020: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
       },
-      '2021': {
-        '1': {
+      2021: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
@@ -1104,11 +1104,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -1119,8 +1119,8 @@ const activities = [
         start: '',
         totalCost: 246477,
         years: {
-          '2020': 0,
-          '2021': 1500000
+          2020: 0,
+          2021: 1500000
         },
         key: '5a8d1598'
       },
@@ -1129,11 +1129,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -1144,8 +1144,8 @@ const activities = [
         start: '',
         totalCost: 7473747,
         years: {
-          '2020': 500000,
-          '2021': 0
+          2020: 500000,
+          2021: 0
         },
         key: '9d729529'
       }
@@ -1155,8 +1155,8 @@ const activities = [
         description: '',
         category: 'Hardware, software, and licensing',
         years: {
-          '2020': 0,
-          '2021': 0
+          2020: 0,
+          2021: 0
         },
         key: '46b1e9c9'
       }
@@ -1203,11 +1203,11 @@ const activities = [
         title: '',
         description: '',
         years: {
-          '2020': {
+          2020: {
             amt: 0,
             perc: 0
           },
-          '2021': {
+          2021: {
             amt: 0,
             perc: 0
           }
@@ -1221,14 +1221,14 @@ const activities = [
     alternatives:
       '<p>Must do MITA 3.0 because MITA is awesome and gives Tycho a standardized view of their Medicaid IT maturity.&nbsp;</p>\n',
     costAllocation: {
-      '2020': {
+      2020: {
         ffp: {
           federal: 50,
           state: 50
         },
         other: 0
       },
-      '2021': {
+      2021: {
         ffp: {
           federal: 90,
           state: 10
@@ -1253,38 +1253,38 @@ const activities = [
     summary:
       'DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.',
     quarterlyFFP: {
-      '2020': {
-        '1': {
+      2020: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
       },
-      '2021': {
-        '1': {
+      2021: {
+        1: {
           contractors: 25,
           inHouse: 25
         },
-        '2': {
+        2: {
           contractors: 25,
           inHouse: 25
         },
-        '3': {
+        3: {
           contractors: 25,
           inHouse: 25
         },
-        '4': {
+        4: {
           contractors: 25,
           inHouse: 25
         }
@@ -1296,11 +1296,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -1311,8 +1311,8 @@ const activities = [
         start: '',
         totalCost: 264574,
         years: {
-          '2020': 450000,
-          '2021': 150000
+          2020: 450000,
+          2021: 150000
         },
         key: 'd0352f89'
       },
@@ -1321,11 +1321,11 @@ const activities = [
         end: '',
         hourly: {
           data: {
-            '2020': {
+            2020: {
               hours: '',
               rate: ''
             },
-            '2021': {
+            2021: {
               hours: '',
               rate: ''
             }
@@ -1336,8 +1336,8 @@ const activities = [
         start: '',
         totalCost: 64574,
         years: {
-          '2020': 200000,
-          '2021': 500000
+          2020: 200000,
+          2021: 500000
         },
         key: '419621e2'
       }
@@ -1347,8 +1347,8 @@ const activities = [
         description: '',
         category: 'Equipment and supplies',
         years: {
-          '2020': 25000,
-          '2021': 25000
+          2020: 25000,
+          2021: 25000
         },
         key: '8e68dcee'
       }
@@ -1381,11 +1381,11 @@ const activities = [
         title: 'State MITA Person',
         description: '1',
         years: {
-          '2020': {
+          2020: {
             amt: 100000,
             perc: 0.5
           },
-          '2021': {
+          2021: {
             amt: 100000,
             perc: 1
           }
@@ -1488,59 +1488,59 @@ const apd = {
     },
     incentivePayments: {
       ehAmt: {
-        '2020': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0
+        2020: {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0
         },
-        '2021': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0
+        2021: {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0
         }
       },
       ehCt: {
-        '2020': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0
+        2020: {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0
         },
-        '2021': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0
+        2021: {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0
         }
       },
       epAmt: {
-        '2020': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0
+        2020: {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0
         },
-        '2021': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0
+        2021: {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0
         }
       },
       epCt: {
-        '2020': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0
+        2020: {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0
         },
-        '2021': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0
+        2021: {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0
         }
       }
     },
@@ -1551,13 +1551,13 @@ const apd = {
         email: 'JimPushesButtons@tycho.com',
         isPrimary: true,
         fte: {
-          '2020': 1,
-          '2021': 1
+          2020: 1,
+          2021: 1
         },
         hasCosts: true,
         costs: {
-          '2020': 100000,
-          '2021': 100000
+          2020: 100000,
+          2021: 100000
         },
         key: 'eefa1770'
       },
@@ -1567,13 +1567,13 @@ const apd = {
         email: 'FJohnson@tycho.com',
         isPrimary: false,
         fte: {
-          '2020': 0.3,
-          '2021': 0.3
+          2020: 0.3,
+          2021: 0.3
         },
         hasCosts: false,
         costs: {
-          '2020': 0,
-          '2021': 0
+          2020: 0,
+          2021: 0
         },
         key: 'ca3a8765'
       }
@@ -1585,61 +1585,61 @@ const apd = {
     narrativeMMIS:
       "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>\n<p>Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho's HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>",
     previousActivityExpenses: {
-      '2017': {
+      2017: {
         hithie: {
           federalActual: 140000,
           totalApproved: 280000
         },
         mmis: {
-          '50': {
+          50: {
             federalActual: 23445,
             totalApproved: 82545
           },
-          '75': {
+          75: {
             federalActual: 23440,
             totalApproved: 75340
           },
-          '90': {
+          90: {
             federalActual: 235720,
             totalApproved: 262460
           }
         }
       },
-      '2018': {
+      2018: {
         hithie: {
           federalActual: 146346,
           totalApproved: 234526
         },
         mmis: {
-          '50': {
+          50: {
             federalActual: 129387,
             totalApproved: 375445
           },
-          '75': {
+          75: {
             federalActual: 413246,
             totalApproved: 654455
           },
-          '90': {
+          90: {
             federalActual: 614544,
             totalApproved: 863455
           }
         }
       },
-      '2019': {
+      2019: {
         hithie: {
           federalActual: 320000,
           totalApproved: 540000
         },
         mmis: {
-          '50': {
+          50: {
             federalActual: 0,
             totalApproved: 0
           },
-          '75': {
+          75: {
             federalActual: 0,
             totalApproved: 0
           },
-          '90': {
+          90: {
             federalActual: 0,
             totalApproved: 0
           }
@@ -1673,7 +1673,7 @@ const apd = {
     yearOptions: ['2020', '2021', '2022']
   },
   byId: {
-    '1': {
+    1: {
       id: 1,
       created: 'July 28, 2020',
       name: 'HITECH IAPD',
