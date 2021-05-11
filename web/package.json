@@ -159,7 +159,7 @@
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^1.4.1",
     "node-sass": "^5.0.0",
-    "postcss": "^8.2.10",
+    "postcss": "^8.2.15",
     "postcss-cli": "^8.3.1",
     "postcss-cssnext": "^3.1.0",
     "postcss-custom-properties": "^11.0.0",
@@ -185,6 +185,8 @@
     "yaml-loader": "^0.6.0"
   },
   "resolutions": {
-    "hosted-git-info": "^4.0.2"
+    "hosted-git-info": "^4.0.2",
+    "postcss": "8.2.10",
+    "trim": "0.0.3"
   }
 }
