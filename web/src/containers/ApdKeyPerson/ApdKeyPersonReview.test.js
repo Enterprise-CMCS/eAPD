@@ -9,16 +9,16 @@ describe('the ApdKeyPersonReview component', () => {
     index: 12,
     item: {
       costs: {
-        '1992': 100,
-        '1993': 300
+        1992: 100,
+        1993: 300
       },
       email: 'email address',
       hasCosts: true,
       key: 'person key',
       name: 'Bob the Builder',
       fte: {
-        '1992': 0.32,
-        '1993': 0.84
+        1992: 0.32,
+        1993: 0.84
       },
       position: 'The Builder'
     },
@@ -30,18 +30,12 @@ describe('the ApdKeyPersonReview component', () => {
     const component = shallow(<ApdKeyPersonReview {...props} />);
     expect(component).toMatchSnapshot();
 
-    expect(
-      component
-        .find('Review')
-        .first()
-        .prop('onEditClick')
-    ).toEqual(props.expand);
+    expect(component.find('Review').first().prop('onEditClick')).toEqual(
+      props.expand
+    );
 
-    expect(
-      component
-        .find('Review')
-        .first()
-        .prop('onDeleteClick')
-    ).toEqual(props.onDeleteClick);
+    expect(component.find('Review').first().prop('onDeleteClick')).toEqual(
+      props.onDeleteClick
+    );
   });
 });

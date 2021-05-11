@@ -57,7 +57,7 @@ describe('APD activity edit actions for contractor resources section', () => {
               {
                 hourly: {
                   data: {
-                    '1997': {
+                    1997: {
                       hours: 1234,
                       rate: 4321
                     }

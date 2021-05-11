@@ -18,7 +18,7 @@ const props = {
       totalCost: 500
     },
     years: {
-      '2016': {
+      2016: {
         contractorResources: [
           {
             description: 'contractor 2.1',
@@ -68,7 +68,7 @@ const props = {
         stateShare: 1007,
         totalCost: 1008
       },
-      '2017': {
+      2017: {
         contractorResources: [
           {
             description: 'contractor 2.1',
