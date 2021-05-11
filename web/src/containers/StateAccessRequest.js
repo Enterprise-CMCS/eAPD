@@ -119,6 +119,7 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
               labelClassName="ds-u-visibility--screen-reader"
               name="select-states-field"
             />
+            <img className="eapd-autocomplete__search-icon" src="/static/icons/search.svg" alt="Search icon"/>
           </Autocomplete>
 
         </div>
