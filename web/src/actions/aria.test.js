@@ -40,8 +40,8 @@ describe('aria actions', () => {
         activities: {
           '0123': {
             quarterlyFFP: {
-              '2019': {
-                '1': {
+              2019: {
+                1: {
                   combined: {
                     dollars: '700',
                     percent: '100'
