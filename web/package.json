@@ -186,7 +186,7 @@
   },
   "resolutions": {
     "hosted-git-info": "^4.0.2",
-    "postcss": "8.2.10",
+    "postcss": "^8.2.15",
     "trim": "0.0.3"
   }
 }

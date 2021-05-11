@@ -115,8 +115,7 @@
     "tap": "^15.0.2"
   },
   "resolutions": {
-    "hosted-git-info": "^4.0.2",
-    "postcss": "8.2.10"
+    "hosted-git-info": "^4.0.2"
   },
   "jest": {
     "testMatch": [
