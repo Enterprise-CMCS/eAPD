@@ -51,12 +51,12 @@ describe('<StateAccessRequest />', () => {
   })
   
   it('properly removes a selection', () => {
-    const { getByText, getByLabelText } = setup();
+    const { getByText, getByLabelText, getByRole, queryByText } = setup();
     const input = getByLabelText('Select your State Affiliation.');
     fireEvent.change(input, { target: { value: 'Alabama' } });
     fireEvent.click(getByText('Alabama'));
-    fireEvent.click(getByText('Remove Alabama'));
-    expect(getByText('Alabama')).toBeNull();
+    fireEvent.click(getByRole('button', { name: 'Remove Alabama' }));
+    expect(queryByText('Alabama')).toBeNull();
   })
   
   it('renders the submit button as disabled until a selection is made', () => {
