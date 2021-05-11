@@ -91,11 +91,11 @@ api.use(bodyParser.json({ limit: '5mb' }));
 
 // Registers Passport, related handlers, and
 // login/logout endpoints
-logger.debug('setting up authentication');
-// todo ME endpoint gets registered her and uses the okta verifier, everything else will use our verifier
-
-api.use(jsonWebTokenMiddleware);
+logger.debug('setting up routes for me');
 me(api);
+logger.debug('setting up authentication');
+api.use(jsonWebTokenMiddleware);
+
 logger.debug('setting up routes');
 routes(api);
 
