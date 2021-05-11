@@ -82,9 +82,11 @@ const EntryDetails = ({
         headingLevel="4"
         editContent={editContent}
       >
-        {[
-          /* children are required, so send an empty array to suppress errors */
-        ]}
+        {
+          [
+            /* children are required, so send an empty array to suppress errors */
+          ]
+        }
       </Review>
     </div>
   );
