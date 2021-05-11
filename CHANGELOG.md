@@ -6,6 +6,9 @@ Anticipated release: May 17, 2021
 - Allow multiple states to be selected in onboarding process ([#2638])
 
 #### 🐛 Bugs fixed
+- Shows a "password expired" alert instead of "invalid mfa code" alert when logging in with MFA and an expired password ([#2988])
+
+- Refreshing Page Traps the User on Validating the Session ([#2976])
 
 #### ⚙️ Behind the scenes
 
@@ -16,4 +19,6 @@ Anticipated release: May 17, 2021
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#2638]: https://github.com/CMSgov/eAPD/issues/2638
+[#2988]: https://github.com/CMSgov/eAPD/issues/2988
 [#2947]: https://github.com/CMSgov/eAPD/issues/2947
+[#2976]: https://github.com/CMSgov/eAPD/issues/2976
