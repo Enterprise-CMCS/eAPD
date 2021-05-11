@@ -46,11 +46,11 @@ describe('<StateAccessRequest />', () => {
   it('renders the no results on an invalid entry', () => {
     const { getByText, getByLabelText } = setup();
     const input = getByLabelText('Select your State Affiliation.');
-    fireEvent.change(input, { target: { value: 'invalid123' } });
+    fireEvent.change(input, { target: { value: 'invalid123999' } });
     expect(getByText('No results')).toBeTruthy();
   })
   
-  it('renders the selection badge when an item is picked', () => {
+  it('properly removes a selection', () => {
     const { getByText, getByLabelText } = setup();
     const input = getByLabelText('Select your State Affiliation.');
     fireEvent.change(input, { target: { value: 'Alabama' } });
