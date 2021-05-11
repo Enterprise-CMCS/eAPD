@@ -11,7 +11,7 @@ describe('apd previous activity table, grand total component', () => {
     apd: {
       data: {
         previousActivityExpenses: {
-          '1': {
+          1: {
             hithie: {
               federalActual: 1000,
               totalApproved: 2000
@@ -31,7 +31,7 @@ describe('apd previous activity table, grand total component', () => {
               }
             }
           },
-          '2': {
+          2: {
             hithie: {
               federalActual: 3000,
               totalApproved: 4000
@@ -58,11 +58,11 @@ describe('apd previous activity table, grand total component', () => {
 
   const props = {
     totals: {
-      '1': {
+      1: {
         actual: 1090,
         approved: 1878
       },
-      '2': {
+      2: {
         actual: 3900,
         approved: 4380
       }
