@@ -17,18 +17,18 @@ describe('apd state profile, Medicaid office component', () => {
         name: 'person name',
         email: 'person1@theplace.gov',
         position: 'unobservable',
-        fte: { '1': 0.27, '2': 0.27 },
+        fte: { 1: 0.27, 2: 0.27 },
         hasCosts: true,
-        costs: { '1': 100, '2': 200 }
+        costs: { 1: 100, 2: 200 }
       },
       {
         key: 'person2',
         name: '',
         email: 'person2@theplace.gov',
         position: '',
-        fte: { '1': 0.72, '2': 0.72 },
+        fte: { 1: 0.72, 2: 0.72 },
         hasCosts: false,
-        costs: { '1': 0, '2': 0 }
+        costs: { 1: 0, 2: 0 }
       }
     ],
     remove: jest.fn(),

@@ -122,8 +122,9 @@ const ApdPreviousActivityTableMMIS = ({
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
-                        label={`approved total computable Medicaid funding for MMIS at the ${level}/${100 -
-                          level} level for FFY ${year}, state plus federal`}
+                        label={`approved total computable Medicaid funding for MMIS at the ${level}/${
+                          100 - level
+                        } level for FFY ${year}, state plus federal`}
                         labelClassName="ds-u-visibility--screen-reader"
                         name={`approved-total-mmis${level}-${year}`}
                         value={expenses.totalApproved}
@@ -149,8 +150,9 @@ const ApdPreviousActivityTableMMIS = ({
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
-                        label={`actual ffp expenditures for MMIS at the ${level}/${100 -
-                          level} level for FFY ${year}`}
+                        label={`actual ffp expenditures for MMIS at the ${level}/${
+                          100 - level
+                        } level for FFY ${year}`}
                         labelClassName="ds-u-visibility--screen-reader"
                         name={`actual-federal-mmis${level}-${year}`}
                         value={expenses.federalActual}
