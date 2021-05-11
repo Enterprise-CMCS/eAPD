@@ -14,26 +14,26 @@ describe('<OtherFunding />', () => {
       key: 'activity key',
       costAllocationNarrative: {
         methodology: 'cost allocation',
-        '1066': { otherSources: 'other funding for FFY 1066' },
-        '1067': { otherSources: 'other funding for FFY 1067' }
+        1066: { otherSources: 'other funding for FFY 1066' },
+        1067: { otherSources: 'other funding for FFY 1067' }
       }
     },
     costAllocation: {
-      '1066': {
+      1066: {
         other: 1235
       },
-      '1067': {
+      1067: {
         other: 1234
       }
     },
     costSummary: {
       years: {
-        '1066': {
+        1066: {
           totalCost: 5459076,
           otherFunding: 4322,
           medicaidShare: 3450509
         },
-        '1067': {
+        1067: {
           totalCost: 5459077,
           otherFunding: 4323,
           medicaidShare: 3450510

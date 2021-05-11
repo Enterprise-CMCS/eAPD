@@ -94,7 +94,7 @@ describe('activities state selectors', () => {
             {
               key: 'activity one',
               contractorResources: [],
-              costAllocation: { '1990': { other: 0 }, '1991': { other: 0 } },
+              costAllocation: { 1990: { other: 0 }, 1991: { other: 0 } },
               expenses: [],
               statePersonnel: []
             },
@@ -105,41 +105,41 @@ describe('activities state selectors', () => {
                   name: 'contractor 2.1',
                   hourly: {
                     data: {
-                      '1990': { hours: 10, rate: 10 },
-                      '1991': { hours: 20, rate: 20 }
+                      1990: { hours: 10, rate: 10 },
+                      1991: { hours: 20, rate: 20 }
                     },
                     useHourly: false
                   },
-                  years: { '1990': 1000, '1991': 2000 }
+                  years: { 1990: 1000, 1991: 2000 }
                 },
                 {
                   name: 'contractor 2.2',
                   hourly: {
                     data: {
-                      '1990': { hours: 30, rate: 30 },
-                      '1991': { hours: 40, rate: 40 }
+                      1990: { hours: 30, rate: 30 },
+                      1991: { hours: 40, rate: 40 }
                     },
                     useHourly: true
                   },
-                  years: { '1990': 3000, '1991': 4000 }
+                  years: { 1990: 3000, 1991: 4000 }
                 }
               ],
               costAllocation: {
-                '1990': { other: 10 },
-                '1991': { other: 20 }
+                1990: { other: 10 },
+                1991: { other: 20 }
               },
               expenses: [
                 {
                   category: 'costly costs',
-                  years: { '1990': 500, '1991': 5000 }
+                  years: { 1990: 500, 1991: 5000 }
                 }
               ],
               statePersonnel: [
                 {
                   title: 'personnel role',
                   years: {
-                    '1990': { amt: 100000, perc: 0.5 },
-                    '1991': { amt: 200000, perc: 2.0 }
+                    1990: { amt: 100000, perc: 0.5 },
+                    1991: { amt: 200000, perc: 2.0 }
                   }
                 }
               ]
@@ -148,10 +148,10 @@ describe('activities state selectors', () => {
           ],
           keyPersonnel: [
             {
-              costs: { '1990': 100, '1991': 200 },
+              costs: { 1990: 100, 1991: 200 },
               hasCosts: true,
               name: 'key person',
-              fte: { '1990': 1.0, '1991': 0.75 }
+              fte: { 1990: 1.0, 1991: 0.75 }
             }
           ],
           years: ['1990', '1991']
@@ -161,13 +161,13 @@ describe('activities state selectors', () => {
         activities: {
           'activity one': {
             costsByFFY: {
-              '1990': {
+              1990: {
                 federal: 0,
                 medicaidShare: 0,
                 state: 0,
                 total: 0
               },
-              '1991': {
+              1991: {
                 federal: 0,
                 medicaidShare: 0,
                 state: 0,
@@ -177,13 +177,13 @@ describe('activities state selectors', () => {
           },
           'activity two': {
             costsByFFY: {
-              '1990': {
+              1990: {
                 federal: 2222,
                 medicaidShare: 3333,
                 state: 4444,
                 total: 5555
               },
-              '1991': {
+              1991: {
                 federal: 6666,
                 medicaidShare: 7777,
                 state: 8888,
@@ -206,7 +206,7 @@ describe('activities state selectors', () => {
         totalCost: 0
       },
       years: {
-        '1990': {
+        1990: {
           contractorResources: [],
           contractorResourcesTotal: 0,
           federalPercent: 0,
@@ -229,7 +229,7 @@ describe('activities state selectors', () => {
           stateShare: 0,
           totalCost: 0
         },
-        '1991': {
+        1991: {
           contractorResources: [],
           contractorResourcesTotal: 0,
           federalPercent: 0,
@@ -265,7 +265,7 @@ describe('activities state selectors', () => {
         totalCost: 15554
       },
       years: {
-        '1990': {
+        1990: {
           contractorResources: [
             {
               description: 'contractor 2.1',
@@ -308,7 +308,7 @@ describe('activities state selectors', () => {
           stateShare: 4444,
           totalCost: 5555
         },
-        '1991': {
+        1991: {
           contractorResources: [
             {
               description: 'contractor 2.1',
