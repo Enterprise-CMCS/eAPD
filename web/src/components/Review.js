@@ -39,16 +39,18 @@ const Review = ({
               onClick={editHandler}
               aria-label={`Edit${ariaLabel ? ` ${ariaLabel}` : ''}`}
             >
-              {// If the editHref is set, create a link element here so it'll
-              // behave as intended on the outside.  Otherwise, the button
-              // content can just be text.
-              editHref ? (
-                <Link to={editHref} ref={anchor}>
-                  Edit
-                </Link>
-              ) : (
-                'Edit'
-              )}
+              {
+                // If the editHref is set, create a link element here so it'll
+                // behave as intended on the outside.  Otherwise, the button
+                // content can just be text.
+                editHref ? (
+                  <Link to={editHref} ref={anchor}>
+                    Edit
+                  </Link>
+                ) : (
+                  'Edit'
+                )
+              }
             </Button>
           ) : null}
           {onDeleteClick && (

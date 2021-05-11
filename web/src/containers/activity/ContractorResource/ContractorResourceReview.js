@@ -19,15 +19,23 @@ const ContractorResourceReview = ({
 
   return (
     <Review
-      heading={`${index + 1}. ${name || 'Contractor name not specified'}`}
+      heading={`${index + 1}. ${
+        name || 'Private Contractor or Vendor Name not specified'
+      }`}
       headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
-      ariaLabel={`${index + 1}. ${name || 'Contractor name not specified'}`}
+      ariaLabel={`${index + 1}. ${
+        name || 'Private Contractor or Vendor Name not specified'
+      }`}
     >
       {/* eslint-disable react/no-danger */}
       <p
-        dangerouslySetInnerHTML={{ __html: description || 'Description of services not specified' }}
+        dangerouslySetInnerHTML={{
+          __html:
+            description ||
+            'Procurement Methodology and Description of Services not specified'
+        }}
         className="ds-u-margin-top--0"
       />
       <ul className="ds-c-list--bare">
