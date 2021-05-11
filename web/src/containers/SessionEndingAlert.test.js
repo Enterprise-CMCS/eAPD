@@ -53,13 +53,13 @@ describe('the session ending alert component', () => {
         .childAt(0)
         .dive()
         .text()
-    ).toEqual('Continue');
+    ).toEqual('Sign out');
     expect(
       aside
         .childAt(1)
         .dive()
         .text()
-    ).toEqual('Sign out');
+    ).toEqual('Stay Signed In');
   });
 
   it('renders as expected if there is and error and is saving', () => {
