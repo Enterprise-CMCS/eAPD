@@ -1,19 +1,20 @@
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
+import axios  from "axios";
 import oktaAuth from './oktaAuth';
 import { MFA_FACTORS } from '../constants';
-import axios from './api';
 
 export const INACTIVITY_LIMIT = 300000;
 export const EXPIRE_EARLY_SECONDS = 300;
 
-export const getAccessToken = () => oktaAuth.getAccessToken();
-
-export const getOtherAccessToken = () => {
-  const eAPDToken = axios.get('/me/jwToken')
-  console.log(eAPDToken, eAPDToken.data)
-  return eAPDToken
+export const getAccessToken = async () => {
+  const apiURL = process.env.API_URL
+  const oktaToken = oktaAuth.getAccessToken();
+  if (!oktaToken) return null
+  const tokenResponse = await axios.get(`${apiURL}/me/jwToken?oktaToken=${oktaToken}`)
+  return tokenResponse.data.jwt || null
 }
+
 // Cookie Methods
 
 const COOKIE_NAME = 'gov.cms.eapd.api-token';
@@ -43,20 +44,17 @@ const getConfig = () =>{
   }
   return config
 }
-const setCookie = () => {
+const setCookie = async () => {
   console.log('setting cookie')
   if (navigator.cookieEnabled) {
-    const jwt = getAccessToken();
-    getOtherAccessToken().then((res)=>{
-      console.log( res)
-      console.log('Local JWT is: ', res.data.token)
-      const config = getConfig()
-      Cookies.set('KNOLLTOKEN', JSON.stringify({ accessToken: jwt }), config);
-    });
+    const jwt = await getAccessToken();
 
-    console.log('got cookie of: ', jwt)
+    console.log('setting cookie to: ', COOKIE_NAME,  jwt)
     const config = getConfig()
-    Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
+    console.log(config)
+    Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }));
+    console.log(Cookies.get())
+    console.log('got cookie of: ', Cookies.get(COOKIE_NAME))
   }
 };
 
@@ -65,6 +63,13 @@ const removeCookie = () => {
     Cookies.remove(COOKIE_NAME);
   }
 };
+
+export const getLocalAccessToken = () =>{
+  console.log('getting local access token')
+  console.log(Cookies.get(COOKIE_NAME))
+  const rawCookie = JSON.parse(Cookies.get(COOKIE_NAME))
+  return rawCookie.accessToken
+}
 
 // Log in methods
 export const authenticateUser = (username, password) => {
@@ -101,11 +106,11 @@ export const setTokens = sessionToken => {
     })
     .then(async res => {
       const { tokens } = res;
-      console.log('Setting Token to: ', tokens)
       // if (stateToken === responseToken) { // state not currently being returned
       await oktaAuth.tokenManager.setTokens(tokens);
       const expiresAt = await getSessionExpiration();
-      if (expiresAt) setCookie();
+      if (expiresAt) await setCookie();
+      console.log('cookie set while setting tokens')
       return expiresAt;
       // }
       // throw new Error('Authentication failed');
@@ -163,7 +168,7 @@ export const renewTokens = async () => {
   await renewToken('accessToken');
   await renewToken('idToken');
   const expiresAt = await getSessionExpiration();
-  if (expiresAt) setCookie();
+  if (expiresAt) await setCookie();
   return expiresAt;
 };
 

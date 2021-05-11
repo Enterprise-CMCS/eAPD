@@ -1,5 +1,5 @@
 import axiosClient from 'axios';
-import { getAccessToken } from './auth';
+import { getLocalAccessToken } from './auth';
 
 export const apiUrl = process.env.API_URL || 'http://localhost:8000';
 
@@ -10,7 +10,8 @@ const axios = axiosClient.create({
 // add Authorization header to axios request if jwt is present in localStorage
 const presentTokenViaAuthorizationHeader = async config => {
   // retrieve access token from local storage
-  const accessToken = (await getAccessToken()) || null;
+  const accessToken = getLocalAccessToken() || null;
+  console.log('Bearer', accessToken)
   if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 };
