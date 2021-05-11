@@ -99,8 +99,6 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             inputValue={inputValue}
             id='state-selection'
           >
-
-            {/* render a collection of badges here with a button to remove them */}
             {selectedStates.map(el => {
               return (
                 <Badge className="ds-u-margin-bottom--1" key={el.id} variation="info">
@@ -111,7 +109,6 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
                 </Badge>          
               )
             })}
-
             <TextField
               label="Select your State Affiliation."
               placeholder="Search state here"
