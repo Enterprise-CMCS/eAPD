@@ -4,18 +4,25 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
 <Fragment>
   <TextField
     autoFocus={true}
-    label="Contractor Name"
+    hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
+    label="Private Contractor or Vendor Name"
+    labelClassName="full-width-label"
     name="contractor-name"
     onChange={[Function]}
     type="text"
     value="Honey Dipper Dan"
   />
   <FormLabel
-    className="ds-c-label--full-width"
+    className="full-width-label"
     component="label"
     fieldId="contractor-description-field"
   >
-    Description of Services
+    Procurement Methodology and Description of Services
+    <span
+      className="ds-c-field__hint ds-u-margin--0"
+    >
+      Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements.
+    </span>
   </FormLabel>
   <Connect(RichText)
     content="They cleaned up the latrines after the Battle of Hastings"
@@ -52,6 +59,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
   <DollarField
     hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."
     label="Total Contract Cost"
+    labelClassName="full-width-label"
     name="contractor-total-cost"
     onChange={[Function]}
     size="medium"
@@ -181,18 +189,25 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
 <Fragment>
   <TextField
     autoFocus={true}
-    label="Contractor Name"
+    hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
+    label="Private Contractor or Vendor Name"
+    labelClassName="full-width-label"
     name="contractor-name"
     onChange={[Function]}
     type="text"
     value="Honey Dipper Dan"
   />
   <FormLabel
-    className="ds-c-label--full-width"
+    className="full-width-label"
     component="label"
     fieldId="contractor-description-field"
   >
-    Description of Services
+    Procurement Methodology and Description of Services
+    <span
+      className="ds-c-field__hint ds-u-margin--0"
+    >
+      Explain the procurement process for the contractor and the scope of their work. Provide justification for any non-competitive procurements.
+    </span>
   </FormLabel>
   <Connect(RichText)
     content="They cleaned up the latrines after the Battle of Hastings"
@@ -229,6 +244,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
   <DollarField
     hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."
     label="Total Contract Cost"
+    labelClassName="full-width-label"
     name="contractor-total-cost"
     onChange={[Function]}
     size="medium"

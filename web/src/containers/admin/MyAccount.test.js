@@ -98,10 +98,7 @@ describe('my account page', () => {
       />
     );
 
-    await component
-      .find('CardForm')
-      .props()
-      .onSave({ preventDefault });
+    await component.find('CardForm').props().onSave({ preventDefault });
 
     expect(preventDefault).toHaveBeenCalled();
     expect(editAccount).toHaveBeenCalledWith(

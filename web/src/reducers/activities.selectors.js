@@ -69,8 +69,9 @@ export const selectActivityCostSummary = createSelector(
         [ffy]:
           activityIndex === 0
             ? keyPersonnel.map(kp => ({
-                description: `${kp.name ||
-                  'Not specified'} (APD Key Personnel)`,
+                description: `${
+                  kp.name || 'Not specified'
+                } (APD Key Personnel)`,
                 totalCost: kp.hasCosts ? kp.costs[ffy] * kp.fte[ffy] : 0,
                 unitCost: kp.hasCosts ? kp.costs[ffy] : null,
                 units: kp.hasCosts ? `${kp.fte[ffy]} FTE` : null
@@ -93,7 +94,8 @@ export const selectActivityCostSummary = createSelector(
         ...o,
         [year]: {
           contractorResources: activity.contractorResources.map(c => ({
-            description: c.name || 'Contractor name not specified',
+            description:
+              c.name || 'Private Contractor or Vendor Name not specified',
             totalCost: c.years[year],
             unitCost: c.hourly.useHourly ? c.hourly.data[year].rate : null,
             units: c.hourly.useHourly

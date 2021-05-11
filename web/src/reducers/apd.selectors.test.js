@@ -29,13 +29,13 @@ describe('APD selectors', () => {
       selectApdDashboard({
         apd: {
           byId: {
-            '1': {
+            1: {
               id: '1',
               created: 'creation 1',
               name: 'apd 1',
               updated: 'updated 1'
             },
-            '2': {
+            2: {
               id: '2',
               created: 'creation 2',
               name: 'apd 2',
@@ -79,20 +79,20 @@ describe('APD selectors', () => {
           data: {
             incentivePayments: {
               ehAmt: {
-                '2014': { 1: 10, 2: 20, 3: 30, 4: 40 },
-                '2015': { 1: 100, 2: 200, 3: 300, 4: 400 }
+                2014: { 1: 10, 2: 20, 3: 30, 4: 40 },
+                2015: { 1: 100, 2: 200, 3: 300, 4: 400 }
               },
               ehCt: {
-                '2014': { 1: 1, 2: 2, 3: 3, 4: 4 },
-                '2015': { 1: 5, 2: 6, 3: 7, 4: 8 }
+                2014: { 1: 1, 2: 2, 3: 3, 4: 4 },
+                2015: { 1: 5, 2: 6, 3: 7, 4: 8 }
               },
               epAmt: {
-                '2014': { 1: 10, 2: 15, 3: 20, 4: 25 },
-                '2015': { 1: 30, 2: 35, 3: 40, 4: 45 }
+                2014: { 1: 10, 2: 15, 3: 20, 4: 25 },
+                2015: { 1: 30, 2: 35, 3: 40, 4: 45 }
               },
               epCt: {
-                '2014': { 1: 5, 2: 5, 3: 5, 4: 5 },
-                '2015': { 1: 3, 2: 3, 3: 3, 4: 3 }
+                2014: { 1: 5, 2: 5, 3: 5, 4: 5 },
+                2015: { 1: 3, 2: 3, 3: 3, 4: 3 }
               }
             },
             years: ['2014', '2015']
@@ -100,10 +100,10 @@ describe('APD selectors', () => {
         }
       })
     ).toEqual({
-      ehAmt: { allYears: 1100, byYear: { '2014': 100, '2015': 1000 } },
-      ehCt: { allYears: 36, byYear: { '2014': 10, '2015': 26 } },
-      epAmt: { allYears: 220, byYear: { '2014': 70, '2015': 150 } },
-      epCt: { allYears: 32, byYear: { '2014': 20, '2015': 12 } }
+      ehAmt: { allYears: 1100, byYear: { 2014: 100, 2015: 1000 } },
+      ehCt: { allYears: 36, byYear: { 2014: 10, 2015: 26 } },
+      epAmt: { allYears: 220, byYear: { 2014: 70, 2015: 150 } },
+      epCt: { allYears: 32, byYear: { 2014: 20, 2015: 12 } }
     });
   });
 
@@ -119,20 +119,20 @@ describe('APD selectors', () => {
         apd: {
           data: {
             previousActivityExpenses: {
-              '2014': {
+              2014: {
                 hithie: { federalActual: 10, totalApproved: 100 },
                 mmis: {
-                  '50': { federalActual: 20, totalApproved: 200 },
-                  '75': { federalActual: 30, totalApproved: 300 },
-                  '90': { federalActual: 40, totalApproved: 400 }
+                  50: { federalActual: 20, totalApproved: 200 },
+                  75: { federalActual: 30, totalApproved: 300 },
+                  90: { federalActual: 40, totalApproved: 400 }
                 }
               },
-              '2015': {
+              2015: {
                 hithie: { federalActual: 5, totalApproved: 100 },
                 mmis: {
-                  '50': { federalActual: 10, totalApproved: 100 },
-                  '75': { federalActual: 15, totalApproved: 100 },
-                  '90': { federalActual: 20, totalApproved: 100 }
+                  50: { federalActual: 10, totalApproved: 100 },
+                  75: { federalActual: 15, totalApproved: 100 },
+                  90: { federalActual: 20, totalApproved: 100 }
                 }
               }
             }
@@ -141,11 +141,11 @@ describe('APD selectors', () => {
       })
     ).toEqual({
       // Approved is scaled based on the FFP. HIT/HIE is 90%.
-      '2014': { actual: 100, approved: 775 },
+      2014: { actual: 100, approved: 775 },
       // Eg, approved here is:
       //    HIT/HIE      MMIS 50       MMIS 75        MMIS 90
       //   (100 * 0.9) + (100 * 0.5) + (100 * 0.75) + (100 * 0.9)
-      '2015': { actual: 50, approved: 305 }
+      2015: { actual: 50, approved: 305 }
     });
   });
 
@@ -163,15 +163,15 @@ describe('APD selectors', () => {
         apd: {
           data: {
             previousActivityExpenses: {
-              '2014': { hithie: { federalActual: 123, totalApproved: 456 } },
-              '2015': { hithie: { federalActual: 789, totalApproved: 'abc' } }
+              2014: { hithie: { federalActual: 123, totalApproved: 456 } },
+              2015: { hithie: { federalActual: 789, totalApproved: 'abc' } }
             }
           }
         }
       })
     ).toEqual({
-      '2014': { federalActual: 123, totalApproved: 456 },
-      '2015': { federalActual: 789, totalApproved: 'abc' }
+      2014: { federalActual: 123, totalApproved: 456 },
+      2015: { federalActual: 789, totalApproved: 'abc' }
     });
   });
 
@@ -181,15 +181,15 @@ describe('APD selectors', () => {
         apd: {
           data: {
             previousActivityExpenses: {
-              '2014': { mmis: '2014 data' },
-              '2015': { mmis: '2015 data' }
+              2014: { mmis: '2014 data' },
+              2015: { mmis: '2015 data' }
             }
           }
         }
       })
     ).toEqual({
-      '2014': '2014 data',
-      '2015': '2015 data'
+      2014: '2014 data',
+      2015: '2015 data'
     });
   });
 
