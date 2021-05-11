@@ -14,23 +14,23 @@ import {
 
 describe('the cost allocation quarterly FFP component', () => {
   const quarterlyFFP = {
-    '13': {
-      '1': {
+    13: {
+      1: {
         combined: { dollars: 35769 },
         contractors: { dollars: 7392, percent: 0.85 },
         inHouse: { dollars: 9384, percent: 0.37 }
       },
-      '2': {
+      2: {
         combined: { dollars: 5298 },
         contractors: { dollars: 4258, percent: 0.35 },
         inHouse: { dollars: 25, percent: 0.83 }
       },
-      '3': {
+      3: {
         combined: { dollars: 952863 },
         contractors: { dollars: 72533522, percent: 0.19 },
         inHouse: { dollars: 278, percent: 0.27 }
       },
-      '4': {
+      4: {
         combined: { dollars: 953638 },
         contractors: { dollars: 9275, percent: 0.99 },
         inHouse: { dollars: 2357, percent: 0.72 }
@@ -41,23 +41,23 @@ describe('the cost allocation quarterly FFP component', () => {
         inHouse: { dollars: 47939, percent: 0.72 }
       }
     },
-    '14': {
-      '1': {
+    14: {
+      1: {
         combined: { dollars: 846 },
         contractors: { dollars: 3457, percent: 0.85 },
         inHouse: { dollars: 2753, percent: 0.37 }
       },
-      '2': {
+      2: {
         combined: { dollars: 4856 },
         contractors: { dollars: 2345, percent: 0.35 },
         inHouse: { dollars: 3754, percent: 0.83 }
       },
-      '3': {
+      3: {
         combined: { dollars: 4976 },
         contractors: { dollars: 26, percent: 0.19 },
         inHouse: { dollars: 2754, percent: 0.27 }
       },
-      '4': {
+      4: {
         combined: { dollars: 4976 },
         contractors: { dollars: 2458, percent: 0.99 },
         inHouse: { dollars: 3865, percent: 0.72 }
