@@ -23,8 +23,8 @@ describe('budget summary component', () => {
           hit: {},
           mmis: {},
           combined: {
-            '1': { federal: 1, state: 2, medicaid: 1000, total: 3 },
-            '2': { federal: 10, state: 20, medicaid: 2000, total: 30 }
+            1: { federal: 1, state: 2, medicaid: 1000, total: 3 },
+            2: { federal: 10, state: 20, medicaid: 2000, total: 30 }
           }
         }}
         years={['1', '2']}
@@ -70,10 +70,10 @@ describe('budget summary component', () => {
       shallow(
         <DataRowGroup
           data={{
-            combined: { '1448': {} },
-            contractors: { '1448': {} },
-            expenses: { '1448': {} },
-            statePersonnel: { '1448': {} }
+            combined: { 1448: {} },
+            contractors: { 1448: {} },
+            expenses: { 1448: {} },
+            statePersonnel: { 1448: {} }
           }}
           entries={[10, 20, 30]}
           year="1448"

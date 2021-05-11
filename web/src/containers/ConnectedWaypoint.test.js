@@ -35,10 +35,7 @@ describe('<ConnectedWaypoint /> component', () => {
 
   it('dispatches on entering waypoint', () => {
     const component = setup();
-    component
-      .find('Waypoint')
-      .at(0)
-      .prop('onEnter')('this is some html');
+    component.find('Waypoint').at(0).prop('onEnter')('this is some html');
 
     expect(defaultProps.replace).toHaveBeenCalledWith({ hash: '#element-id' });
   });
