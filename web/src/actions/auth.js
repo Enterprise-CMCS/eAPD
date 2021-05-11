@@ -252,24 +252,30 @@ export const loginOtp = otp => async dispatch => {
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
     return verifyMFA({ transaction, otp })
-      .then(async ({ sessionToken }) => {
+    .then(({sessionToken, status}) => {
+      if(status === "PASSWORD_EXPIRED") {
+        return dispatch(failLogin('PASSWORD_EXPIRED'));
+      }
+      if(status === "SUCCESS") {
         return dispatch(authenticationSuccess(sessionToken));
-      })
-      .catch(error => {
-        const reason = error ? error.message : 'N/A';
-        if (reason === 'User is not assigned to the client application.') {
-          dispatch(failLogin('NOT_IN_GROUP'));
-          // redirect to not in group page
-          return '/login/not-in-group';
-        }
-        if (reason === 'User Locked') {
-          dispatch(failLogin('LOCKED_OUT'));
-          // redirect to locked-out page
-          return '/login/locked-out';
-        }
-        dispatch(failLogin('MFA_AUTH_FAILED'));
-        return null;
-      });
+      }
+      dispatch(failLogin('MFA_AUTH_FAILED'));
+      return null;
+    }).catch(error => {
+      const reason = error ? error.message : 'N/A';
+      if (reason === 'User is not assigned to the client application.') {
+        dispatch(failLogin('NOT_IN_GROUP'));
+        // redirect to not in group page
+        return '/login/not-in-group';
+      }
+      if (reason === 'User Locked') {
+        dispatch(failLogin('LOCKED_OUT'));
+        // redirect to locked-out page
+        return '/login/locked-out';
+      }
+      dispatch(failLogin('MFA_AUTH_FAILED'));
+      return null;
+    })
   }
   dispatch(failLogin('MFA_AUTH_FAILED'));
   return null;

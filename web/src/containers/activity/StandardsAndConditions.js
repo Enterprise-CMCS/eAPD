@@ -26,7 +26,11 @@ const StandardsAndConditions = ({
       <p className="ds-u-margin-bottom--3">
         Include a description about how this activity will support the Medicaid
         standards and conditions{' '}
-        <a href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112">
+        <a
+          href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112"
+          rel="noreferrer"
+          target="_blank"
+        >
           42 CFR 433.112
         </a>
         .
