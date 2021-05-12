@@ -30,7 +30,7 @@ describe('<StateAffiliationStatus />', () => {
 
   it('displays the introduction text', () => {
     setup();
-    const text = 'The CMS HITECH APD app is';
+    const text = 'The eAPD is designed to help you';
     expect(screen.getByText(text, { exact: false })).toBeInTheDocument();
   });
 
