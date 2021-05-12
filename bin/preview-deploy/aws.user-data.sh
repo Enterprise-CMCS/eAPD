@@ -121,11 +121,11 @@ cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
           },
           {
             "file_path": "/var/log/nginx/access.log*",
-            "log_group_name": "test/var/log/nginx/access_log"
+            "log_group_name": "test/var/log/nginx/access.log"
           },
           {
             "file_path": "/var/log/nginx/error.log*",
-            "log_group_name": "test/var/log/nginx/error_log"
+            "log_group_name": "test/var/log/nginx/error.log"
           },
           {
             "file_path": "/var/log/awslogs.log*",
