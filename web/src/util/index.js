@@ -127,11 +127,16 @@ export const generateKey = (() => {
  * @returns {String} Display-formatted date string.
  */
 export const stateDateToDisplay = date => {
-  const m = moment(date, 'YYYY-MM-DD');
-  if (m.isValid()) {
-    return m.format('M/D/YYYY');
-  }
-  return 'Date not specified';
+  // Note: This formatting and validation has been turned off such that the data
+  // that a user enters into the fields is displayed on the page. Showing the 
+  // 'Date not specified' is inaccurate and could cause issues during review.
+  return date;
+
+  // const m = moment(date, 'YYYY-MM-DD');
+  // if (m.isValid()) {
+  //   return m.format('M/D/YYYY');
+  // }
+  // return 'Date not specified';
 };
 
 /**
@@ -143,12 +148,17 @@ export const stateDateToDisplay = date => {
  * @returns {String} Display-formatted date range string
  */
 export const stateDateRangeToDisplay = (start, end) => {
-  const starty = moment(start, 'YYYY-MM-DD');
-  const endy = moment(end, 'YYYY-MM-DD');
-  if (starty.isValid() && endy.isValid()) {
-    return `${starty.format('M/D/YYYY')} - ${endy.format('M/D/YYYY')}`;
-  }
-  return 'Dates not specified';
+  // Note: This formatting and validation has been turned off such that the data
+  // that a user enters into the fields is displayed on the page. Showing the 
+  // 'Date not specified' is inaccurate and could cause issues during review.
+
+  return `${start} - ${end}`;
+  // const starty = moment(start, 'YYYY-MM-DD');
+  // const endy = moment(end, 'YYYY-MM-DD');
+  // if (starty.isValid() && endy.isValid()) {
+  //   return `${starty.format('M/D/YYYY')} - ${endy.format('M/D/YYYY')}`;
+  // }
+  // return 'Dates not specified';
 };
 
 /**
