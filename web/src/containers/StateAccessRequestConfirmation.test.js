@@ -20,7 +20,7 @@ describe('<StateAccessRequestConfirmation />', () => {
     const { getByText } = setup();
     expect(
       getByText(
-        /The State Administrator will verify your affiliation and credentials./i
+        /An administrator will verify your affiliation and credentials./i
       )
     ).toBeTruthy();
   });

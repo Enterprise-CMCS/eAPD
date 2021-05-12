@@ -124,21 +124,21 @@ describe('JSON patch reducer', () => {
                 {
                   contractorResources: [
                     {
-                      hourly: { data: { '2019': 'this gets deleted' } },
-                      years: { '2019': 'this gets deleted' }
+                      hourly: { data: { 2019: 'this gets deleted' } },
+                      years: { 2019: 'this gets deleted' }
                     }
                   ],
-                  costAllocation: { '2019': 'this gets deleted' },
-                  expenses: [{ years: { '2019': 'this gets deleted' } }],
-                  quarterlyFFP: { '2019': 'this gets deleted' },
-                  statePersonnel: [{ years: { '2019': 'this gets deleted' } }]
+                  costAllocation: { 2019: 'this gets deleted' },
+                  expenses: [{ years: { 2019: 'this gets deleted' } }],
+                  quarterlyFFP: { 2019: 'this gets deleted' },
+                  statePersonnel: [{ years: { 2019: 'this gets deleted' } }]
                 }
               ],
-              incentivePayments: { '2019': 'this gets deleted' },
+              incentivePayments: { 2019: 'this gets deleted' },
               keyPersonnel: [
                 {
-                  costs: { '2019': 'this gets deleted' },
-                  fte: { '2019': 'this gets deleted' }
+                  costs: { 2019: 'this gets deleted' },
+                  fte: { 2019: 'this gets deleted' }
                 }
               ],
               years: ['2019']
@@ -149,13 +149,13 @@ describe('JSON patch reducer', () => {
               activityKey: {
                 contractorResources: [
                   {
-                    hourly: { data: { '2019': 'this gets deleted' } },
-                    years: { '2019': 'this gets deleted' }
+                    hourly: { data: { 2019: 'this gets deleted' } },
+                    years: { 2019: 'this gets deleted' }
                   }
                 ],
-                costAllocation: { '2019': 'this gets deleted' },
-                expenses: [{ years: { '2019': 'this gets deleted' } }],
-                statePersonnel: [{ years: { '2019': 'this gets deleted' } }],
+                costAllocation: { 2019: 'this gets deleted' },
+                expenses: [{ years: { 2019: 'this gets deleted' } }],
+                statePersonnel: [{ years: { 2019: 'this gets deleted' } }],
                 years: ['2019']
               }
             }
