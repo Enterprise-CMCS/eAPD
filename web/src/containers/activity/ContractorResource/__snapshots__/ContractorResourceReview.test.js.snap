@@ -6,8 +6,10 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
   editHref={null}
   heading="2. Honey Dipper Dan"
   headingLevel="5"
+  objType="Private Contractor"
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
+  title={null}
 >
   <p
     className="ds-u-margin-top--0"

@@ -17,6 +17,7 @@ const NonPersonnelCostReview = ({
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
       ariaLabel={`${index + 1}. ${category}`}
+      objType="Other State Expense"
     >
       {description}
       <div className="ds-u-margin-top--2">

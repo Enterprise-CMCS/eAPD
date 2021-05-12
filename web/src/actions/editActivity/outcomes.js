@@ -1,4 +1,4 @@
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 export const addOutcome = activityIndex => (dispatch, getState) =>
   dispatch({
@@ -17,33 +17,22 @@ export const addOutcomeMetric = (activityIndex, omIndex) => (
     state: getState()
   });
 
-export const removeOutcome = (
-  activityIndex,
-  omIndex,
-  { global = window } = {}
-) => dispatch => {
-  if (
-    global.confirm('Do you really want to delete this outcome and metrics?')
-  ) {
-    dispatch({
-      type: REMOVE_APD_ITEM,
-      path: `/activities/${activityIndex}/outcomes/${omIndex}`
-    });
-  }
+export const removeOutcome = (activityIndex, omIndex) => dispatch => {
+  dispatch({
+    type: REMOVE_APD_ITEM,
+    path: `/activities/${activityIndex}/outcomes/${omIndex}`
+  });
 };
 
 export const removeOutcomeMetric = (
   activityIndex,
   omIndex,
-  metricIndex,
-  { global = window } = {}
+  metricIndex
 ) => dispatch => {
-  if (global.confirm('Do you really want to delete this metric?')) {
-    dispatch({
-      type: REMOVE_APD_ITEM,
-      path: `/activities/${activityIndex}/outcomes/${omIndex}/metrics/${metricIndex}`
-    });
-  }
+  dispatch({
+    type: REMOVE_APD_ITEM,
+    path: `/activities/${activityIndex}/outcomes/${omIndex}/metrics/${metricIndex}`
+  });
 };
 
 export const setOutcome = (activityIndex, omIndex, outcome) => ({

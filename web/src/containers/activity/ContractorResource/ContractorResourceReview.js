@@ -23,6 +23,7 @@ const ContractorResourceReview = ({
         name || 'Private Contractor or Vendor Name not specified'
       }`}
       headingLevel="5"
+      objType="Private Contractor"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
       ariaLabel={`${index + 1}. ${
