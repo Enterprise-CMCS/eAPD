@@ -14,7 +14,7 @@ const StateAccessRequestConfirmation = ({ action }) => (
               htmlFor="states"
               className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
             >
-              The State Administrator will verify your affiliation and
+              An administrator will verify your affiliation and
               credentials.
             </label>
             <hr className="ds-u-color--gray-lighter ds-u-margin-top--1" />
