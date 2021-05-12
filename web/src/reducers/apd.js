@@ -269,12 +269,6 @@ export const getAPDYearRange = ({
     ? `${years[0]}${years.length > 1 ? `-${years[years.length - 1]}` : ''}`
     : '';
 
-export const getIsAnAPDSelected = ({
-  apd: {
-    data: { id }
-  }
-}) => !!id;
-
 export const getPatchesForAddingItem = (state, path) => {
   switch (path) {
     case '/keyPersonnel/-':

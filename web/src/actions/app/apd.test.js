@@ -71,7 +71,7 @@ describe('application-level actions', () => {
         { type: SELECT_APD, apd },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
         { type: UPDATE_BUDGET, state },
-        { type: 'FAKE_PUSH', pushRoute: '/apd' },
+        { type: 'FAKE_PUSH', pushRoute: '/apd/bloop' },
         {
           type: ARIA_ANNOUNCE_CHANGE,
           message:
