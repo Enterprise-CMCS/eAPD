@@ -31,15 +31,14 @@ describe('Wrapper component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  describe('sets the appropriate CSS class if we are on a "gray" path', () =>
-    ['/create-account', '/edit-account', '/login', '/me'].forEach(pathname => {
-      test(`renders correctly for the ${pathname} path`, () => {
-        const component = shallow(
-          <Wrapper isDev={false} location={{ pathname }}>
-            child content
-          </Wrapper>
-        );
-        expect(component).toMatchSnapshot();
-      });
-    }));
+  describe('sets the appropriate CSS class if we are on a "gray" path', () => {  
+    test(`renders correctly for the /login path`, () => {
+      const component = shallow(
+        <Wrapper isDev={false} location={{ pathname: '/login' }}>
+          child content
+        </Wrapper>
+      );
+      expect(component).toMatchSnapshot();
+    });
+  });
 });

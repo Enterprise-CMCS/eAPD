@@ -2,27 +2,27 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import {
-  plain as StateAffiliationStatus,
+  plain as AffiliationStatus,
   ApprovalStatus
-} from './StateAffiliationStatus';
-import { STATE_AFFILIATION_STATUSES } from '../constants';
+} from './AffiliationStatus';
+import { AFFILIATION_STATUSES } from '../constants';
 
-const { DENIED, REQUESTED, REVOKED } = STATE_AFFILIATION_STATUSES;
+const { DENIED, REQUESTED, REVOKED } = AFFILIATION_STATUSES;
 
 const initialProps = {
   state: {
     id: 'ak'
   },
-  stateStatus: REQUESTED
+  approvalStatus: REQUESTED
 };
 
 // mock useEffect so we don't make an API call
 jest.spyOn(React, 'useEffect').mockImplementation(() => {});
 
 const setup = (props = {}) =>
-  render(<StateAffiliationStatus {...initialProps} {...props} />);
+  render(<AffiliationStatus {...initialProps} {...props} />);
 
-describe('<StateAffiliationStatus />', () => {
+describe('<AffiliationStatus />', () => {
   it('displays the eAPD Logo', () => {
     setup();
     expect(screen.getByAltText('eAPD Logo')).toBeInTheDocument();
@@ -34,36 +34,36 @@ describe('<StateAffiliationStatus />', () => {
     expect(screen.getByText(text, { exact: false })).toBeInTheDocument();
   });
 
-  it('displays the pending message when stateStatus is REQUESTED', () => {
+  it('displays the pending message when approvalStatus is REQUESTED', () => {
     setup();
     const text = 'Approval Pending From State Administrator';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
 
-  it('displays the denied message when stateStatus is DENIED', () => {
-    setup({ stateStatus: DENIED });
+  it('displays the denied message when approvalStatus is DENIED', () => {
+    setup({ approvalStatus: DENIED });
     const text = 'Approval Has Been Denied';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
 
-  it('displays the revoked message when stateStatus is REVOKED', () => {
-    setup({ stateStatus: REVOKED });
+  it('displays the revoked message when approvalStatus is REVOKED', () => {
+    setup({ approvalStatus: REVOKED });
     const text = 'Approval Permissions Revoked';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
 });
 
 describe('<ApprovalStatus />', () => {
-  const options = {
-    status: 'This is a status',
-    src: '../static/icons/icon.svg',
-    alt: 'This is ALT text',
+  const requestedStatusOptions = {
+    status: `Approval Pending From State Administrator`,
+    src: '../static/icons/puzzle.svg',
+    alt: 'Puzzle Piece Icon',
     width: 57
   };
 
   it('displays a mailto link', () => {
     render(
-      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
     );
     const aTag = screen.getByText('State Administrator', { selector: 'a' });
     expect(aTag).toBeInTheDocument();
@@ -72,19 +72,19 @@ describe('<ApprovalStatus />', () => {
 
   it('displays the status text', () => {
     render(
-      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
     );
-    const statusText = screen.getByText(options.status, { selector: 'h3' });
+    const statusText = screen.getByText(requestedStatusOptions.status, { selector: 'h3' });
     expect(statusText).toBeInTheDocument();
   });
 
   it('displays the img correctly', () => {
     render(
-      <ApprovalStatus mailTo="em@il.com,admin@mo.gov" options={options} />
+      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
     );
-    const img = screen.getByAltText(options.alt);
+    const img = screen.getByAltText(requestedStatusOptions.alt);
     expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute('src', options.src);
-    expect(img).toHaveAttribute('width', options.width.toString());
+    expect(img).toHaveAttribute('src', requestedStatusOptions.src);
+    expect(img).toHaveAttribute('width', requestedStatusOptions.width.toString());
   });
 });

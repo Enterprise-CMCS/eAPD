@@ -3,6 +3,7 @@
 Anticipated release: May 17, 2021
 
 #### 🚀 New features
+- New affiliation available for federal users ([#2929])
 
 
 #### 🐛 Bugs fixed
@@ -18,6 +19,7 @@ Anticipated release: May 17, 2021
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2929]: https://github.com/CMSgov/eAPD/issues/2929
 [#2940]: https://github.com/CMSgov/eAPD/issues/2940
 [#2947]: https://github.com/CMSgov/eAPD/issues/2947
 [#2970]: https://github.com/CMSgov/eAPD/issues/2970

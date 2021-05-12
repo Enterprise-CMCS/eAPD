@@ -2,7 +2,7 @@ import React from 'react';
 import ApdList from './ApdList';
 import { renderWithConnection } from '../shared/apd-testing-library';
 import mockAxios from '../util/api';
-import { STATE_AFFILIATION_STATUSES } from '../constants';
+import { AFFILIATION_STATUSES } from '../constants';
 
 jest.mock('../util/api', () => ({
   get: jest.fn(),
@@ -50,7 +50,7 @@ describe('<ApdList />', () => {
                 affiliations: [
                   {
                     state_id: 'mo',
-                    status: STATE_AFFILIATION_STATUSES.APPROVED
+                    status: AFFILIATION_STATUSES.APPROVED
                   }
                 ]
               }
@@ -104,7 +104,7 @@ describe('<ApdList />', () => {
                 affiliations: [
                   {
                     state_id: 'mo',
-                    status: STATE_AFFILIATION_STATUSES.APPROVED
+                    status: AFFILIATION_STATUSES.APPROVED
                   }
                 ]
               }
@@ -153,7 +153,7 @@ describe('<ApdList />', () => {
               state: { id: 'mo' },
               role: 'eAPD Federal Admin',
               affiliations: [
-                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.APPROVED }
+                { state_id: 'mo', status: AFFILIATION_STATUSES.APPROVED }
               ]
             }
           }
