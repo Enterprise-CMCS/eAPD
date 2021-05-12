@@ -120,11 +120,11 @@ cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
             "log_group_name": "test/app/api/logs/eAPD-API-error-0.log"
           },
           {
-            "file_path": "/var/log/nginx/access_log*",
+            "file_path": "/var/log/nginx/access.log*",
             "log_group_name": "test/var/log/nginx/access_log"
           },
           {
-            "file_path": "/var/log/nginx/error_log*",
+            "file_path": "/var/log/nginx/error.log*",
             "log_group_name": "test/var/log/nginx/error_log"
           },
           {
