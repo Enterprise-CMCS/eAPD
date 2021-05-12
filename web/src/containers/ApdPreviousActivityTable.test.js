@@ -15,11 +15,11 @@ import {
 describe('apd previous activity table, mmis component', () => {
   const props = {
     previousActivityExpenses: {
-      '1': {
+      1: {
         federalActual: 10,
         totalApproved: 20
       },
-      '2': {
+      2: {
         federalActual: 100,
         totalApproved: 200
       }
@@ -59,7 +59,7 @@ describe('apd previous activity table, mmis component', () => {
         apd: {
           data: {
             previousActivityExpenses: {
-              '1': {
+              1: {
                 hithie: {
                   federalActual: 1,
                   totalApproved: 2
@@ -68,7 +68,7 @@ describe('apd previous activity table, mmis component', () => {
                   some: 'junk'
                 }
               },
-              '2': {
+              2: {
                 hithie: {
                   federalActual: 3,
                   totalApproved: 4
@@ -83,8 +83,8 @@ describe('apd previous activity table, mmis component', () => {
       })
     ).toEqual({
       previousActivityExpenses: {
-        '1': { federalActual: 1, totalApproved: 2 },
-        '2': { federalActual: 3, totalApproved: 4 }
+        1: { federalActual: 1, totalApproved: 2 },
+        2: { federalActual: 3, totalApproved: 4 }
       }
     });
   });
