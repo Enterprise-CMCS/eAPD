@@ -106,7 +106,9 @@ export const createApd = ({ pushRoute = push } = {}) => dispatch => {
     .post('/apds')
     .then(async req => {
       dispatch({ type: CREATE_APD_SUCCESS, data: req.data });
-      await dispatch(selectApd(req.data.id, '/apd', { pushRoute }));
+      await dispatch(
+        selectApd(req.data.id, `/apd/${req.data.id}`, { pushRoute })
+      );
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';

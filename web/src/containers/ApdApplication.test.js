@@ -1,68 +1,129 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { renderWithConnection, screen } from 'apd-testing-library';
 
-import {
-  plain as ApdApplication,
+import ApdApplication, {
   mapStateToProps,
   mapDispatchToProps
 } from './ApdApplication';
-import { setApdToSelectOnLoad } from '../actions/app';
+import { setApdToSelectOnLoad, selectApd } from '../actions/app';
+import apd from '../fixtures/ak-apd.json';
+import budget from '../fixtures/ak-budget.json';
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn().mockReturnValue({ apdId: 1 })
+}));
+
+const user = {
+  user: {
+    data: {
+      state: {
+        id: 'ak',
+        name: 'Alaska',
+        medicaid_office: {
+          medicaidDirector: {
+            name: 'Cornelius Fudge',
+            email: 'c.fudge@ministry.magic',
+            phone: '5551234567'
+          },
+          medicaidOffice: {
+            address1: '100 Round Sq',
+            address2: '',
+            city: 'Cityville',
+            state: 'AK',
+            zip: '12345'
+          }
+        }
+      }
+    }
+  }
+};
+
+const setup = (props = {}, options = {}) => {
+  return renderWithConnection(<ApdApplication {...props} />, options);
+};
 
 describe('apd (application) component', () => {
-  test('renders correctly', () => {
-    const selectApdOnLoadProp = jest.fn();
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-    // non-admin, APD already selected
-    expect(
-      shallow(
-        <ApdApplication
-          apdCreated="creation date"
-          apdName="test name"
-          apdSelected
-          isAdmin={false}
-          place={{}}
-          setApdToSelectOnLoad={selectApdOnLoadProp}
-          year="the year"
-          userRole="role"
-        />
-      )
-    ).toMatchSnapshot();
-    expect(selectApdOnLoadProp).not.toHaveBeenCalled();
+  it('renders correctly for non-admin, APD already selected', () => {
+    setup(null, {
+      initialState: {
+        ...user,
+        ...apd,
+        ...budget
+      },
+      initialHistory: ['/apd/1']
+    });
 
-    // non-admin, APD not already selected
-    expect(
-      shallow(
-        <ApdApplication
-          apdCreated="creation date"
-          apdName="another apd"
-          apdSelected={false}
-          isAdmin={false}
-          place={{}}
-          setApdToSelectOnLoad={selectApdOnLoadProp}
-          year="the year"
-          userRole="role"
-        />
-      )
-    ).toMatchSnapshot();
-    expect(selectApdOnLoadProp).toHaveBeenCalledWith('/apd');
+    expect(screen.getByText(/HITECH IAPD | FFY 2020-2021/)).toBeTruthy();
+  });
 
-    // admin
-    selectApdOnLoadProp.mockClear();
-    expect(
-      shallow(
-        <ApdApplication
-          apdCreated="creation date"
-          apdName="third"
-          apdSelected={false}
-          isAdmin
-          place={{}}
-          setApdToSelectOnLoad={selectApdOnLoadProp}
-          year="the future"
-          userRole="role"
-        />
-      )
-    ).toMatchSnapshot();
-    expect(selectApdOnLoadProp).not.toHaveBeenCalled();
+  it('renders correct for non-admin, APD selected in URL', () => {
+    const { history } = setup(null, {
+      initialState: {
+        ...user
+      },
+      initialHistory: ['/apd/1']
+    });
+
+    expect(history.length).toEqual(1);
+    expect(history.location.pathname).toEqual('/apd/1');
+  });
+
+  it('renders correctly for non-admin, no APD selected', () => {
+    const useParams = jest.fn().mockReturnValue({});
+    const { history } = setup(
+      {
+        useParams
+      },
+      {
+        initialState: {
+          ...user
+        },
+        initialHistory: ['/apd']
+      }
+    );
+
+    expect(history.length).toEqual(2);
+    expect(history.location.pathname).toEqual('/');
+  });
+
+  it('renders correctly for admin', () => {
+    const { history } = setup(null, {
+      initialState: {
+        user: {
+          data: {
+            role: 'admin',
+            state: {
+              id: 'ak',
+              name: 'Alaska',
+              medicaid_office: {
+                medicaidDirector: {
+                  name: 'Cornelius Fudge',
+                  email: 'c.fudge@ministry.magic',
+                  phone: '5551234567'
+                },
+                medicaidOffice: {
+                  address1: '100 Round Sq',
+                  address2: '',
+                  city: 'Cityville',
+                  state: 'AK',
+                  zip: '12345'
+                }
+              }
+            }
+          }
+        },
+        ...apd,
+        ...budget
+      },
+      initialHistory: ['/apd/1']
+    });
+    expect(history.length).toEqual(1);
+    expect(history.location.pathname).toEqual('/');
   });
 
   test('maps state to props', () => {
@@ -70,7 +131,7 @@ describe('apd (application) component', () => {
       apd: {
         data: {
           created: 'creation date',
-          id: '123456789',
+          id: 123456789,
           name: 'florp',
           years: ['dinkus', 'dorkus', 'durkus']
         }
@@ -84,8 +145,7 @@ describe('apd (application) component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
-      apdId: '123456789',
-      apdSelected: true,
+      apdId: 123456789,
       isAdmin: false,
       place: 'place',
       userRole: 'test role'
@@ -96,7 +156,6 @@ describe('apd (application) component', () => {
 
     expect(mapStateToProps(state)).toEqual({
       apdId: null,
-      apdSelected: false,
       isAdmin: false,
       place: 'place',
       userRole: 'test role'
@@ -104,6 +163,10 @@ describe('apd (application) component', () => {
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ setApdToSelectOnLoad });
+    jest.restoreAllMocks();
+    expect(mapDispatchToProps).toEqual({
+      selectApd,
+      setApdToSelectOnLoad
+    });
   });
 });
