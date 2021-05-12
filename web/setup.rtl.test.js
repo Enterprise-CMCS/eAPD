@@ -15,12 +15,13 @@ jest.mock('./src/file-loader', () => ({
 jest.mock('./src/util/oktaAuth', () => {
   return {
     signInWithCredentials: jest.fn(),
-    closeSession: jest.fn(),
+    closeSession: jest.fn(() => Promise.resolve({})),
     token: {
       getWithoutPrompt: jest.fn()
     },
     getAccessToken: jest.fn(),
-    revokeAccessToken: jest.fn(),
+    getIdToken: jest.fn(),
+    revokeAccessToken: jest.fn(() => Promise.resolve({})),
     tokenManager: {
       add: jest.fn(),
       remove: jest.fn(),

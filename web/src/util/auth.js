@@ -15,9 +15,12 @@ export const getAccessToken = async () => {
   return tokenResponse.data.jwt || null
 }
 
+export const getIdToken = () => oktaAuth.getIdToken();
+
 // Cookie Methods
 
-const COOKIE_NAME = 'gov.cms.eapd.api-token';
+const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
+const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 const getConfig = () =>{
   let config
@@ -49,25 +52,34 @@ const setCookie = async () => {
   if (navigator.cookieEnabled) {
     const jwt = await getAccessToken();
 
-    console.log('setting cookie to: ', COOKIE_NAME,  jwt)
+    console.log('setting cookie to: ', API_COOKIE_NAME,  jwt)
     const config = getConfig()
     console.log(config)
-    Cookies.set(COOKIE_NAME, JSON.stringify({ accessToken: jwt }));
+    Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken: jwt }));
     console.log(Cookies.get())
-    console.log('got cookie of: ', Cookies.get(COOKIE_NAME))
+    console.log('got cookie of: ', Cookies.get(API_COOKIE_NAME))
   }
 };
 
 const removeCookie = () => {
   if (navigator.cookieEnabled) {
-    Cookies.remove(COOKIE_NAME);
+    Cookies.remove(API_COOKIE_NAME);
   }
+};
+
+export const hasConsented = () => Cookies.get(CONSENT_COOKIE_NAME) || false;
+
+export const setConsented = () => {
+  Cookies.set(CONSENT_COOKIE_NAME, true, {
+    expires: 3, // 3 days
+    path: '/'
+  });
 };
 
 export const getLocalAccessToken = () =>{
   console.log('getting local access token')
-  console.log(Cookies.get(COOKIE_NAME))
-  const rawCookie = JSON.parse(Cookies.get(COOKIE_NAME))
+  console.log(Cookies.get(API_COOKIE_NAME))
+  const rawCookie = JSON.parse(Cookies.get(API_COOKIE_NAME))
   return rawCookie.accessToken
 }
 
@@ -78,21 +90,28 @@ export const authenticateUser = (username, password) => {
 
 export const retrieveExistingTransaction = () => {
   const exists = oktaAuth.tx.exists();
-  return exists ? oktaAuth.tx.resume() : null;
+  if (exists) {
+    return oktaAuth.tx
+      .resume()
+      .then(transaction => transaction)
+      .catch(() => null);
+  }
+  return null;
 };
 
-export const verifyMFA = async ({ transaction, otp }) => {
-  return transaction.verify({
+export const verifyMFA = async ({ transaction, otp }) =>
+  transaction.verify({
     passCode: otp,
     autoPush: true
   });
-};
 
-export const getSessionExpiration = async () => {
-  const { expiresAt = null } =
-    (await oktaAuth.tokenManager.get('accessToken')) || {};
-  return expiresAt;
-};
+export const getSessionExpiration = async () =>
+  oktaAuth.tokenManager
+    .get('accessToken')
+    .then(({ expiresAt = 0 }) => {
+      return expiresAt;
+    })
+    .catch(() => 0);
 
 export const setTokens = sessionToken => {
   const stateToken = uuidv4();
@@ -105,12 +124,12 @@ export const setTokens = sessionToken => {
       // prompt: 'none'
     })
     .then(async res => {
-      const { tokens } = res;
+      const { tokens = {} } = res;
+      const { accessToken = {} } = tokens;
+      const { expiresAt = 0 } = accessToken;
       // if (stateToken === responseToken) { // state not currently being returned
-      await oktaAuth.tokenManager.setTokens(tokens);
-      const expiresAt = await getSessionExpiration();
-      if (expiresAt) await setCookie();
-      console.log('cookie set while setting tokens')
+      oktaAuth.tokenManager.setTokens(tokens);
+      if (expiresAt) setCookie(accessToken);
       return expiresAt;
       // }
       // throw new Error('Authentication failed');
@@ -153,24 +172,40 @@ export const setTokenListeners = ({
   if (removedCallback) oktaAuth.tokenManager.on('removed', removedCallback);
 };
 
-const renewToken = async key => {
-  const token = await oktaAuth.tokenManager.get(key);
-  if (token) {
-    if (oktaAuth.tokenManager.hasExpired(token)) {
-      oktaAuth.tokenManager.remove(key);
-    } else {
-      await oktaAuth.tokenManager.renew(key);
-    }
-  }
-};
+const renewToken = async key =>
+  oktaAuth.tokenManager
+    .get(key)
+    .then(token => {
+      if (token) {
+        if (oktaAuth.tokenManager.hasExpired(token)) {
+          oktaAuth.tokenManager.remove(key);
+          return null;
+        }
+        return oktaAuth.tokenManager
+          .renew(key)
+          .then(newToken => newToken)
+          .catch(() => null);
+      }
+      return null;
+    })
+    .catch(() => null);
 
-export const renewTokens = async () => {
-  await renewToken('accessToken');
-  await renewToken('idToken');
-  const expiresAt = await getSessionExpiration();
-  if (expiresAt) await setCookie();
-  return expiresAt;
-};
+export const renewTokens = async () =>
+  renewToken('idToken')
+    .then(async () => {
+      return oktaAuth.tokenManager
+        .get('accessToken')
+        .then(accessToken => {
+          if (accessToken) {
+            const { expiresAt = 0 } = accessToken;
+            if (expiresAt) setCookie(accessToken);
+            return expiresAt;
+          }
+          return 0;
+        })
+        .catch(() => 0);
+    })
+    .catch(() => 0);
 
 export const removeTokenListeners = () => {
   oktaAuth.tokenManager.off('expired');
@@ -181,38 +216,20 @@ export const removeTokenListeners = () => {
 
 // Log out methods
 export const logoutAndClearTokens = async () => {
-  await oktaAuth.revokeAccessToken();
-  await oktaAuth.closeSession();
-  removeCookie();
+  oktaAuth
+    .revokeAccessToken()
+    .then(() => {
+      oktaAuth
+        .closeSession()
+        .then(() => {
+          removeCookie();
+        })
+        .catch(() => {});
+    })
+    .catch(() => {});
 };
 
 export const isUserActive = latestActivity => {
   const now = new Date().getTime();
   return now - latestActivity < INACTIVITY_LIMIT;
-};
-
-// Cookie
-
-const cookieName = 'gov.cms.eapd.hasConsented';
-
-export const cookie = name => {
-  const cookieMap = (document.cookie || '').split(';').reduce((c, s) => {
-    const bits = s.trim().split('=');
-    if (bits.length === 2) {
-      return { ...c, [bits[0].trim()]: bits[1].trim() };
-    }
-    return c;
-  }, {});
-
-  return cookieMap[name];
-};
-
-export const hasConsented = () => cookie(cookieName) || false;
-
-export const setConsented = () => {
-  const config = getConfig()
-  config.expires = 3
-  config.path = '/'
-  Cookies.set(cookieName, true, config);
-  // document.cookie = `${cookieName}=true;max-age=259200;path=/`; // 3 days
 };

@@ -13,7 +13,7 @@ import {
   getUserStateOrTerritoryStatus,
   getIsFedAdmin
 } from '../reducers/user.selector';
-import { STATE_AFFILIATION_STATUSES } from '../constants';
+import { AFFILIATION_STATUSES } from '../constants';
 
 const Loading = ({ children }) => (
   <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
@@ -32,7 +32,7 @@ const ApdList = (
     route,
     selectApd: select,
     state,
-    stateStatus,
+    approvalStatus,
     isFedAdmin
   },
   { global = window } = {}
@@ -57,7 +57,7 @@ const ApdList = (
   };
 
   const canCreateApd =
-    !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
+    !isFedAdmin && approvalStatus === AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -171,7 +171,7 @@ ApdList.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  stateStatus: PropType.string.isRequired,
+  approvalStatus: PropType.string.isRequired,
   isFedAdmin: PropType.func.isRequired
 };
 
@@ -184,8 +184,8 @@ const mapStateToProps = state => ({
   fetching: selectApds(state).fetching,
   state: state.user.data.state || null,
   isFedAdmin: getIsFedAdmin(state),
-  stateStatus:
-    getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
+  approvalStatus:
+    getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });
 
 const mapDispatchToProps = {

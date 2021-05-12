@@ -42,9 +42,7 @@ describe('Login Application', () => {
       states: ['mo']
     });
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
-    jest
-      .spyOn(mockAuth, 'getAccessToken')
-      .mockImplementation(() => '1234567890');
+    jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => '1234567890');
     props.authCheck.mockImplementation(() => Promise.resolve('/dashboard'));
     const { getByText } = renderWithConnection(
       <LoginApplication {...props} />,
@@ -60,7 +58,7 @@ describe('Login Application', () => {
 
   it('should show the consent banner if the user does not have a cookie', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => false);
-    jest.spyOn(mockAuth, 'getAccessToken').mockImplementation(() => null);
+    jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => null);
     const { getByRole } = renderWithConnection(
       <LoginApplication {...props} />,
       {
@@ -76,7 +74,7 @@ describe('Login Application', () => {
 
   it('should hide the consent banner if the user clicks agree', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => false);
-    jest.spyOn(mockAuth, 'getAccessToken').mockImplementation(() => null);
+    jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => null);
     const { getByRole } = renderWithConnection(
       <LoginApplication {...props} />,
       {
@@ -161,9 +159,7 @@ describe('Login Application', () => {
       states: ['mo']
     });
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
-    jest
-      .spyOn(mockAuth, 'getAccessToken')
-      .mockImplementation(() => '1234567890');
+    jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => '1234567890');
     const {
       history: { entries, index }
     } = renderWithConnection(<LoginApplication {...props} />, {
@@ -179,7 +175,7 @@ describe('Login Application', () => {
 
   it('should show the LoginApplication if user is not logged in but has consented', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
-    jest.spyOn(mockAuth, 'getAccessToken').mockImplementation(() => null);
+    jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => null);
     const { getByRole } = renderWithConnection(
       <LoginApplication {...props} />,
       {
