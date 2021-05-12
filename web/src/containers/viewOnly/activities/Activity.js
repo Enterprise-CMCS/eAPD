@@ -100,6 +100,7 @@ const Activity = ({ activity, activityIndex }) => {
       return `${start} — ${end}`;
     };
 
+    
     return (
       <Fragment key={uuidv4()}>
         <p className="ds-u-margin-bottom--0">

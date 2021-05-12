@@ -11,6 +11,7 @@ const OutcomeAndMetricReview = ({
     onDeleteClick={onDeleteClick}
     onEditClick={expand}
     ariaLabel={outcome || 'Outcome not specified'}
+    objType="Outcome and Metrics"
   >
     <p className="ds-u-margin-top--2">
       <strong>Outcome:</strong> {outcome || 'Outcome not specified'}

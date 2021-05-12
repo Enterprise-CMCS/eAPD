@@ -6,6 +6,8 @@ Anticipated release: May 17, 2021
 - New affiliation available for federal users ([#2929])
 
 
+- Updated delete dialog to use thematically consistent modal dialogs instead of basic alerts.
+
 #### 🐛 Bugs fixed
 - Shows a "password expired" alert instead of "invalid mfa code" alert when logging in with MFA and an expired password ([#2988])
 - Refreshing Page Traps the User on Validating the Session ([#2976])
