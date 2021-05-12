@@ -20,10 +20,7 @@ describe('apd export component', () => {
     const component = shallow(
       <ExportInstructions printApd={print} saveApdEvent={log} />
     );
-    component
-      .find('Button')
-      .first()
-      .simulate('click');
+    component.find('Button').first().simulate('click');
 
     expect(print.calledOnce).toEqual(true);
   });
