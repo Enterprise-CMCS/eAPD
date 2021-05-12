@@ -167,12 +167,12 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
             "log_group_name": "test/var/log/messages"
           },
           {
-            "file_path": "/var/log/nginx/access_log*",
-            "log_group_name": "test/var/log/nginx/access_log"
+            "file_path": "/var/log/nginx/access.log*",
+            "log_group_name": "test/var/log/nginx/access.log"
           },
           {
-            "file_path": "/var/log/nginx/error_log*",
-            "log_group_name": "test/var/log/nginx/error_log"
+            "file_path": "/var/log/nginx/error.log*",
+            "log_group_name": "test/var/log/nginx/error.log"
           },
           {
             "file_path": "/var/log/secure*",
