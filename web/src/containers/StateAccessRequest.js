@@ -35,15 +35,9 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
         onSave={handleSubmit}
       >
         <div className="ds-u-margin-bottom--4">
-          <label
-            htmlFor="states"
-            className="ds-c-label ds-u-margin-y--2 ds-u-font-weight--normal"
-          >
-            Select your State Affiliation.
-          </label>
           <Dropdown
-            label=""
-            ariaLabel="Select your State Affiliation"
+            label="Select Affiliation"
+            labelClassName="ds-u-font-weight--normal"
             id="states"
             name="states"
             options={usStatesDropdownOptions}
