@@ -92,6 +92,7 @@ api.use(bodyParser.json({ limit: '5mb' }));
 // Registers Passport, related handlers, and
 // login/logout endpoints
 logger.debug('setting up routes for me');
+// Me endpoints are for token exchange and use Okta tokens, not eAPD tokens
 me(api);
 logger.debug('setting up authentication');
 api.use(jsonWebTokenMiddleware);

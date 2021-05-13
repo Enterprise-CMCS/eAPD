@@ -11,7 +11,6 @@ const axios = axiosClient.create({
 const presentTokenViaAuthorizationHeader = async config => {
   // retrieve access token from local storage
   const accessToken = getLocalAccessToken() || null;
-  console.log('Bearer', accessToken)
   if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 };

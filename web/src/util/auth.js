@@ -1,18 +1,25 @@
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
-import axios  from "axios";
+import axios from "axios";
 import oktaAuth from './oktaAuth';
 import { MFA_FACTORS } from '../constants';
 
 export const INACTIVITY_LIMIT = 300000;
 export const EXPIRE_EARLY_SECONDS = 300;
 
-export const getAccessToken = async () => {
-  const apiURL = process.env.API_URL
-  const oktaToken = oktaAuth.getAccessToken();
-  if (!oktaToken) return null
-  const tokenResponse = await axios.get(`${apiURL}/me/jwToken?oktaToken=${oktaToken}`)
-  return tokenResponse.data.jwt || null
+// exchange an okta token for an EAPD one
+export const exchangeAccessToken = async ({ accessToken }) => {
+  if (!accessToken) return null
+
+  const config = {
+    baseURL: process.env.API_URL,
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  }
+  const tokenResponse = await axios.get(`/me/jwToken`, config)
+  // null token instead of an error if we failed to get a token.
+  return tokenResponse.data?.jwt || null
 }
 
 export const getIdToken = () => oktaAuth.getIdToken();
@@ -47,17 +54,10 @@ const getConfig = () =>{
   }
   return config
 }
-const setCookie = async () => {
-  console.log('setting cookie')
+const setCookie =  (accessToken) => {
   if (navigator.cookieEnabled) {
-    const jwt = await getAccessToken();
-
-    console.log('setting cookie to: ', API_COOKIE_NAME,  jwt)
     const config = getConfig()
-    console.log(config)
-    Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken: jwt }));
-    console.log(Cookies.get())
-    console.log('got cookie of: ', Cookies.get(API_COOKIE_NAME))
+    Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken }, config));
   }
 };
 
@@ -77,10 +77,12 @@ export const setConsented = () => {
 };
 
 export const getLocalAccessToken = () =>{
-  console.log('getting local access token')
-  console.log(Cookies.get(API_COOKIE_NAME))
-  const rawCookie = JSON.parse(Cookies.get(API_COOKIE_NAME))
-  return rawCookie.accessToken
+  try {
+    const rawCookie = JSON.parse(Cookies.get(API_COOKIE_NAME, getConfig()))
+    return rawCookie.accessToken
+  }catch (e){
+    return ''
+  }
 }
 
 // Log in methods
@@ -129,7 +131,13 @@ export const setTokens = sessionToken => {
       const { expiresAt = 0 } = accessToken;
       // if (stateToken === responseToken) { // state not currently being returned
       oktaAuth.tokenManager.setTokens(tokens);
-      if (expiresAt) setCookie(accessToken);
+      if (expiresAt) {
+        // exchange the okta token for an EAPD one.
+        const eAPDToken = await exchangeAccessToken(accessToken)
+        // set the EAPD token in the cookie
+        setCookie(eAPDToken);
+      }
+
       return expiresAt;
       // }
       // throw new Error('Authentication failed');
@@ -195,10 +203,15 @@ export const renewTokens = async () =>
     .then(async () => {
       return oktaAuth.tokenManager
         .get('accessToken')
-        .then(accessToken => {
+        .then(async accessToken => {
           if (accessToken) {
             const { expiresAt = 0 } = accessToken;
-            if (expiresAt) setCookie(accessToken);
+            if (expiresAt) {
+              // exchange the okta token for an EAPD one.
+              const eAPDToken = await exchangeAccessToken(accessToken)
+              // set the EAPD token in the cookie
+              setCookie(eAPDToken);
+            }
             return expiresAt;
           }
           return 0;
