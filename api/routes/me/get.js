@@ -9,14 +9,12 @@ module.exports = app => {
   logger.debug('setting up GET endpoint');
   app.get('/me',
     async (req, res) => {
-    console.log('in the ME endpoint')
-    console.log(req.get('Authorization'))
+
     try{
       const jwt = jwtExtractor(req)
-      console.log('ME JWT is: ', jwt)
       const claims = jwt ? await verifyEAPDToken(jwt) : false;
 
-      if (!claims) return res.status(425).end();
+      if (!claims) return res.status(401).end();
       res.send(claims);
 
     }
@@ -28,8 +26,7 @@ module.exports = app => {
 
   app.get('/me/jwToken', async (req, res) => {
     try{
-      const jwt = req.query.oktaToken
-      console.log(jwt)
+      const jwt = jwtExtractor(req)
       // verify the token using the okta verifier.
       const claims = jwt ? await verifyWebToken(jwt, {verifier:verifyJWT}) : false;
 
