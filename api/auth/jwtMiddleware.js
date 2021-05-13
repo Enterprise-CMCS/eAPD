@@ -13,6 +13,7 @@ const logger = require('../logger')('jwt middleware');
  * @param {Object}
  * an extractor that defines how to extract the JWT from the request
  * a verify function that is used to verify the token.  This could be a request to Okta
+ * or a local verification with a local secret.
  */
 const jwtMiddleware = async (
   req,
