@@ -19,8 +19,10 @@ exports[`the NameAndFundingSourceReview component renders correctly when expandi
       </React.Fragment>
     }
     headingLevel="4"
+    objType="Funding Source"
     onDeleteClick={null}
     onEditClick={null}
+    title={null}
   />
 </div>
 `;
@@ -44,8 +46,10 @@ exports[`the NameAndFundingSourceReview component renders correctly when expandi
       </React.Fragment>
     }
     headingLevel="4"
+    objType="Funding Source"
     onDeleteClick={null}
     onEditClick={[MockFunction]}
+    title={null}
   />
 </div>
 `;

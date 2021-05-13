@@ -76,6 +76,7 @@ describe('Review wrapper component', () => {
       .find('Button[children="Delete"]')
       .simulate('click');
 
-    expect(handler).toHaveBeenCalled();
+    expect(handler).toHaveBeenCalledTimes(0);
+    expect(component.find('Cancel')).toBeTruthy();
   });
 });
