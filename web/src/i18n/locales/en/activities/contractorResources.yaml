@@ -1,10 +1,4 @@
 title: Private Contractor Costs
-instruction:
-  short: >-
-    Outline contracts by contract or vendor name.
-  helpText: >-
-    Itemize federal fiscal year (FFY) costs per contract. If the vendor or contractor
-    name is unknown, generalize by resource name. (For example, computer resources/TBD)
 noDataNotice: Private contractors have not been added for this activity.
 delete:
   text: ✗
@@ -15,8 +9,8 @@ delete:
     _no: 'No'
 labels:
   entryNumber: '#'
-  contractorName: Contractor Name
-  description: Description of Services
+  contractorName: Private Contractor or Vendor Name
+  description: Procurement Methodology and Description of Services
   term: Contract Term
   start: 'Start:'
   end: 'End:'
@@ -28,7 +22,7 @@ labels:
   attachments: Attachments
   yearCost: '{{year}} Cost'
 srLabels:
-  name: Contractor name
+  name: Private Contractor or Vender Name
   description: Describe the services each contractor will provide.
   start: Start
   end: End

@@ -53,13 +53,13 @@ describe('the session ending alert component', () => {
         .childAt(0)
         .dive()
         .text()
-    ).toEqual('Continue');
+    ).toEqual('Sign out');
     expect(
       aside
         .childAt(1)
         .dive()
         .text()
-    ).toEqual('Sign out');
+    ).toEqual('Stay Signed In');
   });
 
   it('renders as expected if there is and error and is saving', () => {
@@ -80,13 +80,13 @@ describe('the session ending alert component', () => {
     const aside = countdown.find('aside');
     expect(
       aside
-        .childAt(0)
+        .childAt(1)
         .dive()
         .text()
-    ).toEqual('<Spinner /> Continuing');
+    ).toEqual('<Spinner /> Signing In');
     expect(
       aside
-        .childAt(1)
+        .childAt(0)
         .dive()
         .text()
     ).toEqual('Sign out');
@@ -110,13 +110,13 @@ describe('the session ending alert component', () => {
     const aside = countdown.find('aside');
     expect(
       aside
-        .childAt(0)
+        .childAt(1)
         .dive()
         .text()
-    ).toEqual('Continue');
+    ).toEqual('Stay Signed In');
     expect(
       aside
-        .childAt(1)
+        .childAt(0)
         .dive()
         .text()
     ).toEqual('<Spinner /> Signing out');
