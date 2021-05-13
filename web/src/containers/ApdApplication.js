@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {
   Redirect,
   useParams as actualUseParams,
-  useHistory as actualUseHistory
+  useHistory as actualUseHistory,
+  useLocation as actualUseLocation
 } from 'react-router-dom';
 import TagManager from 'react-gtm-module';
 
@@ -27,11 +28,13 @@ const ApdApplication = ({
   setApdToSelectOnLoad: dispatchSelectApdOnLoad,
   userRole,
   useParams,
-  useHistory
+  useHistory,
+  useLocation
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const paramApdId = +useParams().apdId;
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     if (!paramApdId && !apdId) {
@@ -41,7 +44,8 @@ const ApdApplication = ({
       history.push(`/apd/${apdId}`);
     } else if (paramApdId && (!apdId || apdId !== paramApdId)) {
       setIsLoading(true);
-      dispatchSelectApd(paramApdId, `/apd/${paramApdId}`);
+      const { pathname = `/apd/${paramApdId}` } = location || {};
+      dispatchSelectApd(paramApdId, pathname);
     } else {
       setIsLoading(false);
     }
@@ -95,13 +99,15 @@ ApdApplication.propTypes = {
   setApdToSelectOnLoad: PropTypes.func.isRequired,
   userRole: PropTypes.string.isRequired,
   useParams: PropTypes.func,
-  useHistory: PropTypes.func
+  useHistory: PropTypes.func,
+  useLocation: PropTypes.func
 };
 
 ApdApplication.defaultProps = {
   apdId: null,
   useParams: actualUseParams,
-  useHistory: actualUseHistory
+  useHistory: actualUseHistory,
+  useLocation: actualUseLocation
 };
 
 const mapStateToProps = state => ({
