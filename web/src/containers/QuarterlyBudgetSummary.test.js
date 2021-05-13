@@ -19,7 +19,7 @@ describe('quarterly budget summary component', () => {
       <QuarterlyBudgetSummary
         budget={{
           hitAndHie: {
-            '1': {
+            1: {
               1: {
                 combined: 1,
                 contractors: 2,
@@ -46,7 +46,7 @@ describe('quarterly budget summary component', () => {
                 inHouse: 15
               }
             },
-            '2': {
+            2: {
               1: {
                 combined: 101,
                 contractors: 102,
@@ -80,7 +80,7 @@ describe('quarterly budget summary component', () => {
             }
           },
           mmis: {
-            '1': {
+            1: {
               1: {
                 combined: 201,
                 contractors: 202,
@@ -107,7 +107,7 @@ describe('quarterly budget summary component', () => {
                 inHouse: 215
               }
             },
-            '2': {
+            2: {
               1: {
                 combined: 1101,
                 contractors: 1102,

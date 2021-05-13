@@ -99,22 +99,10 @@ describe('assurances and compliance component', () => {
       //   Software rights: 20/21
       //   Security: 28/29
 
-      component
-        .find('ChoiceComponent')
-        .at(0)
-        .simulate('change');
-      component
-        .find('ChoiceComponent')
-        .at(9)
-        .simulate('change');
-      component
-        .find('ChoiceComponent')
-        .at(21)
-        .simulate('change');
-      component
-        .find('ChoiceComponent')
-        .at(28)
-        .simulate('change');
+      component.find('ChoiceComponent').at(0).simulate('change');
+      component.find('ChoiceComponent').at(9).simulate('change');
+      component.find('ChoiceComponent').at(21).simulate('change');
+      component.find('ChoiceComponent').at(28).simulate('change');
 
       expect(props.complyingWithProcurement).toHaveBeenCalledWith(0, true);
       expect(props.complyingWithRecordsAccess).toHaveBeenCalledWith(0, false);
