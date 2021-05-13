@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
+const{ mockVerifyJWT } = require('./mockedOktaAuth');
+
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -109,14 +111,13 @@ const exchangeToken = async (
   req,
   {
     extractor = jwtExtractor,
-    oktaVerify = verifyWebToken,
-    oktaVerifier = verifyJWT,
+    verifier = verifyEAPDToken,
     getUser=getUserByID,
   } = {}
 ) => {
   const oktaJWT = extractor(req)
   // verify the token using the okta verifier.
-  const claims = jwt ? await oktaVerify(oktaJWT, {verifier:oktaVerifier}) : false;
+  const claims = oktaJWT ? await verifyWebToken(oktaJWT, {verifier}) : false;
 
   if (!claims) return null;
 
@@ -126,11 +127,25 @@ const exchangeToken = async (
   return user
 }
 
-module.exports = {
-  verifyWebToken,
-  jwtExtractor,
-  getDefaultOptions,
-  sign,
-  verifyEAPDToken,
-  exchangeToken
-};
+
+if (process.env.NODE_ENV === 'test') {
+  module.exports = {
+    verifyWebToken,
+    jwtExtractor,
+    getDefaultOptions,
+    sign,
+    verifyEAPDToken: mockVerifyJWT,
+    exchangeToken,
+    actualVerifyEAPDToken: verifyEAPDToken
+  };
+} else {
+
+  module.exports = {
+    verifyWebToken,
+    jwtExtractor,
+    getDefaultOptions,
+    sign,
+    verifyEAPDToken,
+    exchangeToken
+  };
+}

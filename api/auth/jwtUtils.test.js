@@ -103,7 +103,7 @@ tap.test('Okta jwtUtils', async t => {
 });
 
 tap.test('Local jwtUtils', async t => {
-  const { getDefaultOptions, sign, verifyEAPDToken, verifyWebToken } = require('./jwtUtils');
+  const { getDefaultOptions, sign, actualVerifyEAPDToken, verifyWebToken, exchangeToken } = require('./jwtUtils');
 
   const payload = {
     user: 'Test User',
@@ -158,31 +158,31 @@ tap.test('Local jwtUtils', async t => {
   t.test('verifying a payload', async t =>{
     const token = sign(payload)
 
-    t.ok(verifyEAPDToken(token), 'a valid token was verified')
+    t.ok(actualVerifyEAPDToken(token), 'a valid token was verified')
   })
 
   t.test('verifying a nonsensical token', async t =>{
     const token = 'AAAAAAAAA.BBBBBBBBBBBBBBBBBBBBBBB.CCCCCCCCCCC'
 
-    t.throws(() => verifyEAPDToken(token), 'a bad token throws an error')
+    t.throws(() => actualVerifyEAPDToken(token), 'a bad token throws an error')
   })
 
   t.test('verifying a token signed with a different secret', async t =>{
     const token = jwt.sign(payload, 'BBBBBBBBBBBBBBBBBBBBBBB')
 
-    t.throws(() => verifyEAPDToken(token), 'a bad token throws an error')
+    t.throws(() => actualVerifyEAPDToken(token), 'a bad token throws an error')
   })
 
   t.test('verifying a hacked token', async t =>{
     const token = sign(payload)
     const tokenParts  = token.split('.')
 
-    t.ok(verifyEAPDToken(tokenParts.join('.')), 'splitting and reassembling the token works')
+    t.ok(actualVerifyEAPDToken(tokenParts.join('.')), 'splitting and reassembling the token works')
 
     // hack the payload
     tokenParts [1] = 'CCCCCCCCCCCCCCCC'
 
-    t.throws(() => verifyEAPDToken(tokenParts.join('.')), 'a bad token throws an error')
+    t.throws(() => actualVerifyEAPDToken(tokenParts.join('.')), 'a bad token throws an error')
   })
 
   t.test('overriding iss and aud options', async t =>{
@@ -207,7 +207,7 @@ tap.test('Local jwtUtils', async t => {
     // using this here to prevent a completely circular test
     const actualPayload = jwt.decode(token);
     t.ok(actualPayload.exp < Date.now()/1000 + 1)
-    t.throws(()=>verifyEAPDToken(token), 'token is no longer valid')
+    t.throws(()=>actualVerifyEAPDToken(token), 'token is no longer valid')
 
   })
 
@@ -215,9 +215,9 @@ tap.test('Local jwtUtils', async t => {
     const token = sign(payload)
 
     // make sure the token is in fact valid
-    t.ok(verifyEAPDToken(token), 'a valid token was verified')
+    t.ok(actualVerifyEAPDToken(token), 'a valid token was verified')
 
-    const actualPayload = await verifyWebToken(token, {verifier:verifyEAPDToken})
+    const actualPayload = await verifyWebToken(token, {verifier:actualVerifyEAPDToken})
     // all of the keys seem to be here.
     Object.keys(payload).forEach(key =>{
       t.same(actualPayload[key], payload[key], `${key} is in the jwt`)
@@ -225,8 +225,95 @@ tap.test('Local jwtUtils', async t => {
 
   })
 
+  t.test('tokenExchanger works', async t =>{
+    const extractor = sinon.stub()
+    const verifier = sinon.stub()
+    const getUser = sinon.stub()
+
+    const req = {jwt:'AAAA.BBBB.DDDD'}
+    const claims = {uid: '1234'}
+
+    extractor.withArgs(req).returns(req.jwt)
+    verifier.withArgs(req.jwt).resolves(claims)
+    const { uid, ...additionalValues } = claims;
+    getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims)
+
+    const user = await exchangeToken(req, {extractor, verifier, getUser})
+    t.ok(
+      user.jwt,
+      'user has a JWT'
+    )
+
+    t.ok(
+      actualVerifyEAPDToken(user.jwt),
+      'user has a valid JWT set on them'
+    )
+
+    t.ok(user.uid, claims.uid, 'user has the expected value')
 
 
+  })
 
+  t.test('tokenExchanger returns null if there is no JWT in the req', async t =>{
+    const extractor = sinon.stub()
+    const oktaVerify = sinon.stub()
+    const getUser = sinon.stub()
+
+    const req = {jwt:'AAAA.BBBB.DDDD'}
+    const claims = {uid: '1234'}
+
+    extractor.withArgs(req).returns(false)
+    oktaVerify.withArgs(req.jwt).returns(claims)
+    const { uid, ...additionalValues } = claims;
+    getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims)
+
+    const user = await exchangeToken(req, {extractor, oktaVerify, getUser})
+    t.same(
+      user, null,
+      'user is null'
+    )
+
+    t.ok(
+      oktaVerify.notCalled,
+      'Okta not called because JWT was missing'
+    )
+
+    t.ok(
+      getUser.notCalled,
+      'get user not called because no JWT was present'
+    )
+
+  })
+
+  t.test('tokenExchanger returns null if okta doesn\'t validate it', async t =>{
+    const extractor = sinon.stub()
+    const verifier = sinon.stub()
+    const getUser = sinon.stub()
+
+    const req = {jwt:'AAAA.BBBB.DDDD'}
+    const claims = {uid: '1234'}
+
+    extractor.withArgs(req).returns(req.jwt)
+    verifier.withArgs(req.jwt).resolves(false)
+    const { uid, ...additionalValues } = claims;
+    getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims)
+
+    const user = await exchangeToken(req, {extractor, verifier, getUser})
+    t.same(
+      user, null,
+      'user is null'
+    )
+
+    t.ok(
+      verifier.calledWith(req.jwt),
+      'okta was called with the JWT'
+    )
+
+    t.ok(
+      getUser.notCalled,
+      'get user not called because no JWT was present'
+    )
+
+  })
 
 })
