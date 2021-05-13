@@ -1,19 +1,22 @@
 const logger = require('../../logger')('me route get');
-const { sign } = require('../../auth/jwtUtils')
-const { jwtExtractor, verifyEAPDToken, verifyWebToken } = require('../../auth/jwtUtils');
-const { verifyJWT } = require('../../auth/oktaAuth');
-const { getUserByID } = require('../../db');
+const { jwtExtractor, verifyEAPDToken, exchangeToken } = require('../../auth/jwtUtils');
 
+module.exports = (
+  app,
+  {
+    extractor = jwtExtractor,
+    eapdTokenVerifier = verifyEAPDToken,
+    tokenExchanger = exchangeToken
 
-module.exports = app => {
+  } = {}
+) => {
   logger.debug('setting up GET endpoint');
   app.get('/me',
     async (req, res) => {
 
     try{
-      const jwt = jwtExtractor(req)
-      const claims = jwt ? await verifyEAPDToken(jwt) : false;
-
+      const jwt = extractor(req)
+      const claims = jwt ? await eapdTokenVerifier(jwt) : false;
       if (!claims) return res.status(401).end();
       res.send(claims);
 
@@ -26,17 +29,9 @@ module.exports = app => {
 
   app.get('/me/jwToken', async (req, res) => {
     try{
-      const jwt = jwtExtractor(req)
-      // verify the token using the okta verifier.
-      const claims = jwt ? await verifyWebToken(jwt, {verifier:verifyJWT}) : false;
-
-      if (!claims) return res.status(401).end();
-
-      const { uid, ...additionalValues } = claims;
-      const user = await getUserByID(uid, true, { additionalValues });
-      user.jwt = sign(user)
-      req.user = user
-      res.send(req.user);
+      const user = await tokenExchanger(req)
+      if (!user) res.status(401).send()
+      res.send(user);
     }
     catch(error){
       res.status(500).send(error)

@@ -103,7 +103,7 @@ tap.test('Okta jwtUtils', async t => {
 });
 
 tap.test('Local jwtUtils', async t => {
-  const { getDefaultOptions, sign, verify, verifyWebToken } = require('./jwtUtils');
+  const { getDefaultOptions, sign, verifyEAPDToken, verifyWebToken } = require('./jwtUtils');
 
   const payload = {
     user: 'Test User',
@@ -158,31 +158,31 @@ tap.test('Local jwtUtils', async t => {
   t.test('verifying a payload', async t =>{
     const token = sign(payload)
 
-    t.ok(verify(token), 'a valid token was verified')
+    t.ok(verifyEAPDToken(token), 'a valid token was verified')
   })
 
   t.test('verifying a nonsensical token', async t =>{
     const token = 'AAAAAAAAA.BBBBBBBBBBBBBBBBBBBBBBB.CCCCCCCCCCC'
 
-    t.throws(() => verify(token), 'a bad token throws an error')
+    t.throws(() => verifyEAPDToken(token), 'a bad token throws an error')
   })
 
   t.test('verifying a token signed with a different secret', async t =>{
     const token = jwt.sign(payload, 'BBBBBBBBBBBBBBBBBBBBBBB')
 
-    t.throws(() => verify(token), 'a bad token throws an error')
+    t.throws(() => verifyEAPDToken(token), 'a bad token throws an error')
   })
 
   t.test('verifying a hacked token', async t =>{
     const token = sign(payload)
     const tokenParts  = token.split('.')
 
-    t.ok(verify(tokenParts.join('.')), 'splitting and reassembling the token works')
+    t.ok(verifyEAPDToken(tokenParts.join('.')), 'splitting and reassembling the token works')
 
     // hack the payload
     tokenParts [1] = 'CCCCCCCCCCCCCCCC'
 
-    t.throws(() => verify(tokenParts.join('.')), 'a bad token throws an error')
+    t.throws(() => verifyEAPDToken(tokenParts.join('.')), 'a bad token throws an error')
   })
 
   t.test('overriding iss and aud options', async t =>{
@@ -207,7 +207,7 @@ tap.test('Local jwtUtils', async t => {
     // using this here to prevent a completely circular test
     const actualPayload = jwt.decode(token);
     t.ok(actualPayload.exp < Date.now()/1000 + 1)
-    t.throws(()=>verify(token), 'token is no longer valid')
+    t.throws(()=>verifyEAPDToken(token), 'token is no longer valid')
 
   })
 
@@ -215,9 +215,9 @@ tap.test('Local jwtUtils', async t => {
     const token = sign(payload)
 
     // make sure the token is in fact valid
-    t.ok(verify(token), 'a valid token was verified')
+    t.ok(verifyEAPDToken(token), 'a valid token was verified')
 
-    const actualPayload = await verifyWebToken(token, {verifier:verify})
+    const actualPayload = await verifyWebToken(token, {verifier:verifyEAPDToken})
     // all of the keys seem to be here.
     Object.keys(payload).forEach(key =>{
       t.same(actualPayload[key], payload[key], `${key} is in the jwt`)
