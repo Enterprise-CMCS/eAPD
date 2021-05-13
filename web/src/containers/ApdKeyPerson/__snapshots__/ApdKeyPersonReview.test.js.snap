@@ -10,8 +10,10 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
       editHref={null}
       heading="13. Bob the Builder"
       headingLevel="4"
+      objType="Key Personnel"
       onDeleteClick={[MockFunction]}
       onEditClick={[MockFunction]}
+      title={null}
     >
       <ul
         className="ds-c-list--bare"
@@ -81,8 +83,10 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
       ariaLabel={null}
       editHref={null}
       heading="13. Bob the Builder"
+      objType={null}
       onDeleteClick={null}
       onEditClick={null}
+      title={null}
     >
       <ul
         className="ds-c-list--bare"
