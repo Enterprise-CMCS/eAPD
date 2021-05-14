@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
 
@@ -24,7 +24,6 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
           inputValue: action.payload
         }
       case 'addSelectedState':
-      console.log("fullstates list", state.fullStateList)
         return {
           selectedStates: [...state.selectedStates, action.payload],
           fullStateList: state.fullStateList.filter(item => item.id !== action.payload.id),
@@ -32,13 +31,9 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
           inputValue: ''
         }
       case 'removeSelectedState':
-        const newFullStatesList = state.fullStateList;
-        const addBackState = STATES.find(item => item.id === action.payload);
-        newFullStatesList.push(addBackState);
-        newFullStatesList.sort( (a, b) => a.name.localeCompare(b.name) );
         return {
           ...state,
-          fullStateList: newFullStatesList,
+          fullStateList: [...state.fullStateList, STATES.find(item => item.id === action.payload)].sort( (a, b) => a.name.localeCompare(b.name) ),
           selectedStates: state.selectedStates.filter(item => item.id !== action.payload ),
           inputValue: ''
         }
