@@ -162,8 +162,9 @@ div.form--computed-value__input-aligned {
 }
 
 .eapd-autocomplete__search-icon {
-  position: absolute;
-  top: 26px;
+  position: relative;
   width: 20px;
-  right: 15px;
+  float: right;
+  right: 12px;
+  bottom: 34px;
 }
