@@ -32,9 +32,9 @@ tap.test('me GET endpoint', async endpointTest => {
 
     extractor.withArgs(req).returns(req.jwt)
 
-    eapdTokenVerifier.withArgs(req.jwt).returns(claims)
+    eapdTokenVerifier.withArgs(req.jwt).resolves(claims)
 
-    getEndpoint(app, {extractor, eapdTokenVerifier});
+    getEndpoint(app, {extractor, verifier:eapdTokenVerifier});
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 
     await meHandler(req, res);
@@ -48,9 +48,10 @@ tap.test('me GET endpoint', async endpointTest => {
       eapdTokenVerifier.calledWith(req.jwt),
       'calls the token extractor with the request'
     )
+
     test.ok(
       res.send.calledWith(claims),
-      'sends back the user object'
+      'sends back the claims object'
     );
   });
 
@@ -87,9 +88,9 @@ tap.test('me GET endpoint', async endpointTest => {
 
     extractor.withArgs(req).returns(req.jwt)
 
-    eapdTokenVerifier.withArgs(req.jwt).returns(null)
+    eapdTokenVerifier.withArgs(req.jwt).resolves(null)
 
-    getEndpoint(app, {extractor, eapdTokenVerifier});
+    getEndpoint(app, {extractor, verifier:eapdTokenVerifier});
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 
     await meHandler(req, res);
@@ -118,7 +119,7 @@ tap.test('me GET endpoint', async endpointTest => {
 
     eapdTokenVerifier.withArgs(req.jwt).throws()
 
-    getEndpoint(app, {extractor, eapdTokenVerifier});
+    getEndpoint(app, {extractor, verifier:eapdTokenVerifier});
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 
     await meHandler(req, res);

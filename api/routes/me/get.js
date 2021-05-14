@@ -1,11 +1,11 @@
 const logger = require('../../logger')('me route get');
-const { jwtExtractor, verifyEAPDToken, exchangeToken } = require('../../auth/jwtUtils');
+const { jwtExtractor, verifyEAPDToken, exchangeToken, verifyWebToken } = require('../../auth/jwtUtils');
 
 module.exports = (
   app,
   {
     extractor = jwtExtractor,
-    eapdTokenVerifier = verifyEAPDToken,
+    verifier = verifyEAPDToken,
     tokenExchanger = exchangeToken
 
   } = {}
@@ -16,7 +16,7 @@ module.exports = (
 
     try{
       const jwt = extractor(req)
-      const claims = jwt ? await eapdTokenVerifier(jwt) : false;
+      const claims = jwt ? await verifyWebToken(jwt, {verifier}) : false;
       if (!claims) return res.status(401).end();
       res.send(claims);
 

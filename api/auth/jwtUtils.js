@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
-const{ mockVerifyJWT } = require('./mockedOktaAuth');
 
 
 /**
@@ -127,6 +126,9 @@ const exchangeToken = async (
   return user
 }
 
+const mockVerifyEAPDJWT = token => {
+  return getUserByID(token, false)
+}
 
 if (process.env.NODE_ENV === 'test') {
   module.exports = {
@@ -134,7 +136,7 @@ if (process.env.NODE_ENV === 'test') {
     jwtExtractor,
     getDefaultOptions,
     sign,
-    verifyEAPDToken: mockVerifyJWT,
+    verifyEAPDToken: mockVerifyEAPDJWT,
     exchangeToken,
     actualVerifyEAPDToken: verifyEAPDToken
   };
