@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 import {
   addMilestone,
@@ -47,17 +47,6 @@ describe('APD activity edit actions for activity schedule and milestones section
         path: '/activities/17/schedule/9'
       }
     ]);
-  });
-
-  it('does not dispatch an action for removing a milestone if denied', () => {
-    const global = {
-      confirm: jest.fn()
-    };
-    global.confirm.mockReturnValue(false);
-
-    store.dispatch(removeMilestone(17, 9, { global }));
-
-    expect(store.getActions()).toEqual([]);
   });
 
   it('dispatches an action for setting an activity end date', () => {

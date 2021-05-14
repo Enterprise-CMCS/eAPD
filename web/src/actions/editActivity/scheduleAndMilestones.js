@@ -1,4 +1,4 @@
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 export const addMilestone = activityIndex => (dispatch, getState) => {
   dispatch({
@@ -8,17 +8,11 @@ export const addMilestone = activityIndex => (dispatch, getState) => {
   });
 };
 
-export const removeMilestone = (
-  activityIndex,
-  milestoneIndex,
-  { global = window } = {}
-) => dispatch => {
-  if (global.confirm('Do you really want to delete this activity milestone?')) {
-    dispatch({
-      type: REMOVE_APD_ITEM,
-      path: `/activities/${activityIndex}/schedule/${milestoneIndex}`
-    });
-  }
+export const removeMilestone = (activityIndex, milestoneIndex) => dispatch => {
+  dispatch({
+    type: REMOVE_APD_ITEM,
+    path: `/activities/${activityIndex}/schedule/${milestoneIndex}`
+  });
 };
 
 export const setActivityStartDate = (activityIndex, date) => ({

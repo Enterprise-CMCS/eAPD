@@ -6,8 +6,10 @@ exports[`the NonPersonnelCostReview component renders correctly 1`] = `
   editHref={null}
   heading="54. test category"
   headingLevel="5"
+  objType="Other State Expense"
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
+  title={null}
 >
   test desc
   <div

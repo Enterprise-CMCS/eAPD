@@ -11,7 +11,7 @@ exports[`Review wrapper component renders properly if a delete handler is provid
           aria-label="Delete"
           className="ds-u-color--error"
           component="button"
-          onClick={[MockFunction]}
+          onClick={[Function]}
           size="small"
           type="button"
           variation="transparent"

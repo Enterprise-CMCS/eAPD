@@ -1,11 +1,14 @@
 import { Button, Review as ReviewSummary } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, useRef } from 'react';
+import React, { Fragment, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import DeleteModal from './DeleteModal';
 
 const Review = ({
   children,
   ariaLabel,
+  objType,
+  title,
   editHref,
   onDeleteClick,
   onEditClick,
@@ -27,6 +30,13 @@ const Review = ({
     },
     [editHref]
   );
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const onRemove = () => {
+    onDeleteClick();
+    setShowDeleteModal(false);
+  };
 
   return (
     <ReviewSummary
@@ -61,7 +71,7 @@ const Review = ({
               <Button
                 size="small"
                 variation="transparent"
-                onClick={onDeleteClick}
+                onClick={() => setShowDeleteModal(true)}
                 aria-label={`Delete${ariaLabel ? ` ${ariaLabel}` : ''}`}
                 className="ds-u-color--error"
               >
@@ -74,6 +84,14 @@ const Review = ({
       {...rest}
     >
       {children}
+      {showDeleteModal && (
+        <DeleteModal
+          objType={objType}
+          objTitle={title}
+          onCancel={() => setShowDeleteModal(false)}
+          onDelete={onRemove}
+        />
+      )}
     </ReviewSummary>
   );
 };
@@ -81,6 +99,8 @@ const Review = ({
 Review.propTypes = {
   children: PropTypes.node,
   ariaLabel: PropTypes.string,
+  objType: PropTypes.string,
+  title: PropTypes.string,
   editHref: PropTypes.string,
   onDeleteClick: PropTypes.func,
   onEditClick: PropTypes.func
@@ -89,6 +109,8 @@ Review.propTypes = {
 Review.defaultProps = {
   children: null,
   ariaLabel: null,
+  objType: null,
+  title: null,
   editHref: null,
   onDeleteClick: null,
   onEditClick: null
