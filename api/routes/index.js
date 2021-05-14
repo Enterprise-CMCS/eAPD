@@ -3,7 +3,6 @@ const affiliations = require('./affiliations');
 const apds = require('./apds');
 const auth = require('./auth');
 const docs = require('./docs');
-const me = require('./me');
 const roles = require('./roles');
 const states = require('./states');
 const users = require('./users');

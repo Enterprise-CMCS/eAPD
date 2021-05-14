@@ -105,7 +105,6 @@ const getCurrentUser = () => dispatch =>
   axios
     .get('/me')
     .then(userRes => {
-      console.log('logging in and got a userRes of: ', userRes)
       if (userRes.data.states.length === 0) {
         dispatch(requireAccessToState());
         return '/login/affiliations/request';
