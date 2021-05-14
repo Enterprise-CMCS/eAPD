@@ -110,14 +110,13 @@ const exchangeToken = async (
   req,
   {
     extractor = jwtExtractor,
-    verifier = verifyEAPDToken,
+    verifier = verifyJWT,
     getUser=getUserByID,
   } = {}
 ) => {
   const oktaJWT = extractor(req)
   // verify the token using the okta verifier.
   const claims = oktaJWT ? await verifyWebToken(oktaJWT, {verifier}) : false;
-
   if (!claims) return null;
 
   const { uid, ...additionalValues } = claims;
