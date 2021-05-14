@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import { UPDATE_BUDGET } from '../budget';
 
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 import {
   addNonPersonnelCost,
@@ -50,17 +50,6 @@ describe('APD activity edit actions for non-personnel section', () => {
       },
       { type: UPDATE_BUDGET, state: 'test state' }
     ]);
-  });
-
-  it('does not dispatch an action for removing a non-personnel expense if denied', () => {
-    const global = {
-      confirm: jest.fn()
-    };
-    global.confirm.mockReturnValue(false);
-
-    store.dispatch(removeNonPersonnelCost(17, 9, { global }));
-
-    expect(store.getActions()).toEqual([]);
   });
 
   it('dispatches an action for setting a non-personnel expense cost category', () => {

@@ -21,8 +21,10 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     ariaLabel="1. metric 1"
     editHref={null}
     key="om key 1"
+    objType="Metric"
     onDeleteClick={[Function]}
     onEditClick={null}
+    title={null}
   >
     <div
       className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
@@ -44,8 +46,10 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     ariaLabel="2. metric 2"
     editHref={null}
     key="om key 2"
+    objType="Metric"
     onDeleteClick={[Function]}
     onEditClick={null}
+    title={null}
   >
     <div
       className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
