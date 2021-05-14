@@ -130,7 +130,7 @@ describe('LoginPageRoutes', () => {
     );
     expect(
       queryByText(
-        /The State Administrator will verify your affiliation and credentials/i
+        /An administrator will verify your affiliation and credentials/i
       )
     ).toBeTruthy();
   });

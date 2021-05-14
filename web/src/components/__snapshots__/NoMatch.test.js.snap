@@ -2,15 +2,21 @@
 
 exports[`NoMatch component renders correctly 1`] = `
 <div
-  className="py3 center"
+  className="site-body ds-l-container"
 >
-  <h1
-    className="mb1"
+  <main
+    id="start-main-content"
   >
-    Whoops, we can’t find that page.
-  </h1>
-  <p>
-    You might want to double-check your link and try again. (404)
-  </p>
+    <div
+      className="ds-u-padding-top--2"
+    >
+      <h1>
+        Whoops, we can’t find that page.
+      </h1>
+      <p>
+        You might want to double-check your link and try again. (404)
+      </p>
+    </div>
+  </main>
 </div>
 `;

@@ -116,7 +116,6 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
             />
             <img className="eapd-autocomplete__search-icon" src="/static/icons/search.svg" alt="Search icon"/>
           </Autocomplete>
-
         </div>
       </AuthenticationForm>
     </div>
