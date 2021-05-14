@@ -74,7 +74,8 @@ describe('the (Activity) EntryDetails component', () => {
       .find('Button')
       .at(1)
       .simulate('click');
-    expect(props.remove).toHaveBeenCalled();
+    // The remove function should not have fired.
+    expect(props.remove).toHaveBeenCalledTimes(0);
   });
 
   test('maps state to props', () => {

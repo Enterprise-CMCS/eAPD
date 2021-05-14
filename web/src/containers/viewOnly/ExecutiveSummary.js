@@ -53,8 +53,9 @@ class ExecutiveSummary extends PureComponent {
         {data.map((activity, i) => (
           <Review
             key={activity.key}
-            heading={`Activity ${i + 1}: ${activity.name ||
-              t('activities.noNameYet')}`}
+            heading={`Activity ${i + 1}: ${
+              activity.name || t('activities.noNameYet')
+            }`}
             headingLevel="3"
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >

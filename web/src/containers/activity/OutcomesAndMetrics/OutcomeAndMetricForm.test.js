@@ -71,7 +71,7 @@ describe('the OutcomeAndMetricForm component', () => {
       .find('Button[children="Delete"]')
       .simulate('click');
 
-    expect(props.removeMetric).toHaveBeenCalled();
+    expect(props.removeMetric).toHaveBeenCalledTimes(0);
   });
 
   it('maps dispatch actions to props', () => {

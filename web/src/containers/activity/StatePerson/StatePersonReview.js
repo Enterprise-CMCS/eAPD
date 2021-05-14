@@ -17,6 +17,8 @@ const StatePersonReview = ({
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
       ariaLabel={`${index + 1}. ${title || 'Personnel title not specified'}`}
+      objType="State Staff Expenses"
+
     >
       {description}
       <div className="ds-u-margin-top--2">

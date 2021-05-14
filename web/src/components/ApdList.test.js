@@ -2,7 +2,7 @@ import React from 'react';
 import ApdList from './ApdList';
 import { renderWithConnection } from '../shared/apd-testing-library';
 import mockAxios from '../util/api';
-import { STATE_AFFILIATION_STATUSES } from '../constants';
+import { AFFILIATION_STATUSES } from '../constants';
 
 jest.mock('../util/api', () => ({
   get: jest.fn(),
@@ -50,7 +50,7 @@ describe('<ApdList />', () => {
                 affiliations: [
                   {
                     state_id: 'mo',
-                    status: STATE_AFFILIATION_STATUSES.APPROVED
+                    status: AFFILIATION_STATUSES.APPROVED
                   }
                 ]
               }
@@ -61,26 +61,25 @@ describe('<ApdList />', () => {
     });
 
     it('should display the introduction and instructions', () => {
-      const { queryByText } = renderUtils;
+      const { getByText } = renderUtils;
       expect(
-        queryByText(
-          /The CMS HITECH APD app is the new way to create and manage/i
+        getByText(
+          /The eAPD is designed to help you create and manage your HITECH Advanced Planning Documents/i
         )
       ).toBeTruthy();
-      expect(queryByText(/All your state's APDs are listed here./i)).toBeNull();
     });
 
     it('should handle clicking the create APD button', async () => {
       mockAxios.post.mockImplementation(() => Promise.resolve({ data: apd }));
-      const { queryByRole } = renderUtils;
-      expect(queryByRole('button', { name: /Create new/i })).toBeTruthy();
-      // fireEvent.click(queryByRole('button', { name: /Create new/i }));
+      const { getByRole } = renderUtils;
+      expect(getByRole('button', { name: /Create new/i })).toBeTruthy();
+      // fireEvent.click(getByRole('button', { name: /Create new/i }));
       // expect(props.createApd).toHaveBeenCalled();
     });
 
     it('should display the empty APD message', () => {
-      const { queryByText } = renderUtils;
-      expect(queryByText(/You have not created any APDs./i)).toBeTruthy();
+      const { getByText } = renderUtils;
+      expect(getByText(/You have not created any APDs./i)).toBeTruthy();
     });
 
     it("shouldn't display the pending message", () => {
@@ -105,7 +104,7 @@ describe('<ApdList />', () => {
                 affiliations: [
                   {
                     state_id: 'mo',
-                    status: STATE_AFFILIATION_STATUSES.APPROVED
+                    status: AFFILIATION_STATUSES.APPROVED
                   }
                 ]
               }
@@ -154,7 +153,7 @@ describe('<ApdList />', () => {
               state: { id: 'mo' },
               role: 'eAPD Federal Admin',
               affiliations: [
-                { state_id: 'mo', status: STATE_AFFILIATION_STATUSES.APPROVED }
+                { state_id: 'mo', status: AFFILIATION_STATUSES.APPROVED }
               ]
             }
           }
