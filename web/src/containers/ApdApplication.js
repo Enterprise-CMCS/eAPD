@@ -37,6 +37,7 @@ const ApdApplication = ({
   const location = useLocation();
 
   useEffect(() => {
+    console.log({ location });
     if (!paramApdId && !apdId) {
       dispatchSelectApdOnLoad('/apd');
       history.push('/');
@@ -44,8 +45,8 @@ const ApdApplication = ({
       history.push(`/apd/${apdId}`);
     } else if (paramApdId && (!apdId || apdId !== paramApdId)) {
       setIsLoading(true);
-      const { pathname = `/apd/${paramApdId}` } = location || {};
-      dispatchSelectApd(paramApdId, pathname);
+      const { pathname = `/apd/${paramApdId}`, hash = '' } = location || {};
+      dispatchSelectApd(paramApdId, `${pathname}${hash}`);
     } else {
       setIsLoading(false);
     }
