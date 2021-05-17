@@ -13,6 +13,7 @@ export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
+export JWT_SECRET="__JWT_SECRET__"
 cd ~
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
@@ -78,7 +79,8 @@ echo "module.exports = {
       OKTA_DOMAIN: '__OKTA_DOMAIN__',
       OKTA_SERVER_ID: '__OKTA_SERVER_ID__',
       OKTA_CLIENT_ID: '__OKTA_CLIENT_ID__',
-      OKTA_API_KEY: '__OKTA_API_KEY__'
+      OKTA_API_KEY: '__OKTA_API_KEY__',
+      JWT_SECRET: '__JWT_SECRET__'
     },
   }]
 };" > ecosystem.config.js
@@ -140,4 +142,4 @@ cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
 CWLAUNCHLOGCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/launch-log.json
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a restart
+

@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 import {
   addOutcome,
@@ -46,17 +46,6 @@ describe('APD activity edit actions for outcomes and metrics section', () => {
         path: '/activities/17/outcomes/9'
       }
     ]);
-  });
-
-  it('does not dispatch an action for removing an outcome if denied', () => {
-    const global = {
-      confirm: jest.fn()
-    };
-    global.confirm.mockReturnValue(false);
-
-    store.dispatch(removeOutcome(17, 9, { global }));
-
-    expect(store.getActions()).toEqual([]);
   });
 
   it('dispatches an action for setting an outcome description', () => {

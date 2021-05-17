@@ -39,7 +39,7 @@ export const TABLE_HEADERS = {
   total: <span>Total computable (Federal + state)</span>
 };
 
-export const STATE_AFFILIATION_STATUSES = {
+export const AFFILIATION_STATUSES = {
   REQUESTED: 'requested',
   APPROVED: 'approved',
   DENIED: 'denied',
