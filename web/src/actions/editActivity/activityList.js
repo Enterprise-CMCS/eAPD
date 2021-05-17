@@ -3,7 +3,7 @@ import {
   APD_ACTIVITIES_CHANGE,
   EDIT_APD,
   REMOVE_APD_ITEM
-} from '../editApd/symbols';
+} from '../editApd';
 import { updateBudget } from '../budget';
 
 /**
@@ -26,21 +26,14 @@ export const addActivity = () => (dispatch, getState) => {
 /**
  * Remove an activity from the current APD
  * @param {Number} index The index of the activity to be removed
- * @param {Object} di Dependency injection object
- * @param {Object} di.global The window object, which provides window.confirm
  */
-export const removeActivity = (index, { global = window } = {}) => (
-  dispatch,
-  getState
-) => {
-  if (global.confirm('Do you really want to delete this activity?')) {
-    dispatch({ type: REMOVE_APD_ITEM, path: `/activities/${index}` });
-    dispatch({
-      type: APD_ACTIVITIES_CHANGE,
-      activities: getState().apd.data.activities
-    });
-    dispatch(updateBudget());
-  }
+export const removeActivity = index => (dispatch, getState) => {
+  dispatch({ type: REMOVE_APD_ITEM, path: `/activities/${index}` });
+  dispatch({
+    type: APD_ACTIVITIES_CHANGE,
+    activities: getState().apd.data.activities
+  });
+  dispatch(updateBudget());
 };
 
 /**

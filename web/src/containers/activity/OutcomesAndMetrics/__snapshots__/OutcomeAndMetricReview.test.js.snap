@@ -4,8 +4,10 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
 <Review
   ariaLabel="outcome description"
   editHref={null}
+  objType="Outcome and Metrics"
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
+  title={null}
 >
   <p
     className="ds-u-margin-top--2"
