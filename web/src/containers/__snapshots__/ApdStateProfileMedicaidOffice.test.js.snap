@@ -296,6 +296,10 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
                 "label": "U.S. Virgin Islands",
                 "value": "VI",
               },
+              Object {
+                "label": "Federal",
+                "value": "FD",
+              },
             ]
           }
           value="state"

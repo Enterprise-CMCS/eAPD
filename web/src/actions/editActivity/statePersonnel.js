@@ -1,4 +1,4 @@
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 import { updateBudget } from '../budget';
 
 export const addPersonnel = activityIndex => (dispatch, getState) => {
@@ -10,18 +10,12 @@ export const addPersonnel = activityIndex => (dispatch, getState) => {
   dispatch(updateBudget());
 };
 
-export const removePersonnel = (
-  activityIndex,
-  personnelIndex,
-  { global = window } = {}
-) => dispatch => {
-  if (global.confirm('Do you really want to delete this personnel entry?')) {
-    dispatch({
-      type: REMOVE_APD_ITEM,
-      path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}`
-    });
-    dispatch(updateBudget());
-  }
+export const removePersonnel = (activityIndex, personnelIndex) => dispatch => {
+  dispatch({
+    type: REMOVE_APD_ITEM,
+    path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}`
+  });
+  dispatch(updateBudget());
 };
 
 export const setPersonnelTitle = (activityIndex, personnelIndex, title) => ({

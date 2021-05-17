@@ -117,7 +117,7 @@ describe('LoginPageRoutes', () => {
         initialHistory: ['/login/affiliations/request']
       }
     );
-    expect(queryByText(/Select your State Affiliation/i)).toBeTruthy();
+    expect(queryByText(/Select Affiliation/i)).toBeTruthy();
   });
 
   it('should redirect the user to StateAccessRequestConfirmation if that path is /login/affiliations/thank-you', () => {
@@ -130,7 +130,7 @@ describe('LoginPageRoutes', () => {
     );
     expect(
       queryByText(
-        /The State Administrator will verify your affiliation and credentials/i
+        /An administrator will verify your affiliation and credentials/i
       )
     ).toBeTruthy();
   });

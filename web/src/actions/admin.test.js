@@ -342,12 +342,12 @@ describe('admin actions', () => {
         .onGet('/states/md/affiliations?status=pending')
         .reply(400, { error: 'this-is-the-error' });
 
-      await store.dispatch(actions.getStateAffiliations('md', 'pending'));
+      await store.dispatch(actions.getAffiliations('md', 'pending'));
 
       expect(store.getActions()).toEqual(
         expect.arrayContaining([
           {
-            type: actions.ADMIN_GET_STATE_AFFILIATIONS_ERROR,
+            type: actions.ADMIN_GET_AFFILIATIONS_ERROR,
             data: 'this-is-the-error'
           }
         ])
@@ -364,12 +364,12 @@ describe('admin actions', () => {
         .onGet('/states/md/affiliations?status=pending')
         .reply(200, affiliations);
 
-      await store.dispatch(actions.getStateAffiliations('md', 'pending'));
+      await store.dispatch(actions.getAffiliations('md', 'pending'));
 
       expect(store.getActions()).toEqual(
         expect.arrayContaining([
           {
-            type: actions.ADMIN_GET_STATE_AFFILIATIONS_SUCCESS,
+            type: actions.ADMIN_GET_AFFILIATIONS_SUCCESS,
             data: affiliations
           }
         ])
@@ -390,13 +390,13 @@ describe('admin actions', () => {
         .reply(400, { error: 'this-is-the-error' });
 
       await store.dispatch(
-        actions.updateStateAffiliation(stateId, affiliationId, 21, 'approved')
+        actions.updateAffiliation(stateId, affiliationId, 21, 'approved')
       );
 
       expect(store.getActions()).toEqual(
         expect.arrayContaining([
           {
-            type: actions.ADMIN_UPDATE_STATE_AFFILIATION_ERROR,
+            type: actions.ADMIN_UPDATE_AFFILIATION_ERROR,
             data: 'this-is-the-error'
           }
         ])
@@ -412,12 +412,12 @@ describe('admin actions', () => {
         .reply(200);
 
       await store.dispatch(
-        actions.updateStateAffiliation(stateId, affiliationId, 21, 'approved')
+        actions.updateAffiliation(stateId, affiliationId, 21, 'approved')
       );
 
       expect(store.getActions()).toEqual(
         expect.arrayContaining([
-          { type: actions.ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS }
+          { type: actions.ADMIN_UPDATE_AFFILIATION_SUCCESS }
         ])
       );
       expect(store.getActions().length).toEqual(1);
