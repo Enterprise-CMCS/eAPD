@@ -43,10 +43,23 @@ describe('the session ending alert component', () => {
     };
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
-    const countdown = component.childAt(1).dive().dive();
+    const countdown = component
+      .childAt(1)
+      .dive()
+      .dive();
     const aside = countdown.find('aside');
-    expect(aside.childAt(0).dive().text()).toEqual('Continue');
-    expect(aside.childAt(1).dive().text()).toEqual('Sign out');
+    expect(
+      aside
+        .childAt(0)
+        .dive()
+        .text()
+    ).toEqual('Sign out');
+    expect(
+      aside
+        .childAt(1)
+        .dive()
+        .text()
+    ).toEqual('Stay Signed In');
   });
 
   it('renders as expected if there is and error and is saving', () => {
@@ -60,10 +73,23 @@ describe('the session ending alert component', () => {
     };
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
-    const countdown = component.childAt(1).dive().dive();
+    const countdown = component
+      .childAt(1)
+      .dive()
+      .dive();
     const aside = countdown.find('aside');
-    expect(aside.childAt(0).dive().text()).toEqual('<Spinner /> Continuing');
-    expect(aside.childAt(1).dive().text()).toEqual('Sign out');
+    expect(
+      aside
+        .childAt(1)
+        .dive()
+        .text()
+    ).toEqual('<Spinner /> Signing In');
+    expect(
+      aside
+        .childAt(0)
+        .dive()
+        .text()
+    ).toEqual('Sign out');
   });
 
   it('renders as expected if there is and error and is signing out', () => {
@@ -77,10 +103,23 @@ describe('the session ending alert component', () => {
     };
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
-    const countdown = component.childAt(1).dive().dive();
+    const countdown = component
+      .childAt(1)
+      .dive()
+      .dive();
     const aside = countdown.find('aside');
-    expect(aside.childAt(0).dive().text()).toEqual('Continue');
-    expect(aside.childAt(1).dive().text()).toEqual('<Spinner /> Signing out');
+    expect(
+      aside
+        .childAt(1)
+        .dive()
+        .text()
+    ).toEqual('Stay Signed In');
+    expect(
+      aside
+        .childAt(0)
+        .dive()
+        .text()
+    ).toEqual('<Spinner /> Signing out');
   });
 
   it('maps redux state to component props', () => {

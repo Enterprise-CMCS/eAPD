@@ -48,6 +48,8 @@ const ApdStateKeyPerson = ({
           onDeleteClick={primary ? null : onDeleteClick}
           onEditClick={expand}
           ariaLabel={displayName}
+          objType="Key Personnel"
+
         >
           <ul className="ds-c-list--bare">
             {primary ? <li>Primary APD Point of Contact</li> : null}

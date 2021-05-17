@@ -8,7 +8,7 @@ import {
   APD_ACTIVITIES_CHANGE,
   EDIT_APD,
   REMOVE_APD_ITEM
-} from '../editApd/symbols';
+} from '../editApd';
 
 import {
   addActivity,
@@ -48,23 +48,13 @@ describe('APD activity edit actions for overview section', () => {
   });
 
   it('dispatches an action for removing an activity if confirmed', () => {
-    const global = { confirm: jest.fn().mockReturnValue(true) };
-
-    store.dispatch(removeActivity(3, { global }));
+    store.dispatch(removeActivity(3));
 
     expect(store.getActions()).toEqual([
       { type: REMOVE_APD_ITEM, path: '/activities/3' },
       { type: APD_ACTIVITIES_CHANGE, activities: [] },
       { type: UPDATE_BUDGET, state }
     ]);
-  });
-
-  it('does not dispatch an action for removing an activity if denied', () => {
-    const global = { confirm: jest.fn().mockReturnValue(false) };
-
-    store.dispatch(removeActivity(3, { global }));
-
-    expect(store.getActions()).toEqual([]);
   });
 
   it('dispatches correct actions when setting an activity name', () => {

@@ -1,4 +1,4 @@
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 import { updateBudget } from '../budget';
 
 export const addNonPersonnelCost = activityIndex => (dispatch, getState) => {
@@ -12,16 +12,13 @@ export const addNonPersonnelCost = activityIndex => (dispatch, getState) => {
 
 export const removeNonPersonnelCost = (
   activityIndex,
-  costIndex,
-  { global = window } = {}
+  costIndex
 ) => dispatch => {
-  if (global.confirm('Do you really want to delete this non-personnel cost?')) {
-    dispatch({
-      type: REMOVE_APD_ITEM,
-      path: `/activities/${activityIndex}/expenses/${costIndex}`
-    });
-    dispatch(updateBudget());
-  }
+  dispatch({
+    type: REMOVE_APD_ITEM,
+    path: `/activities/${activityIndex}/expenses/${costIndex}`
+  });
+  dispatch(updateBudget());
 };
 
 export const setNonPersonnelCostCategory = (

@@ -16,19 +16,13 @@ export const addKeyPerson = () => (dispatch, getState) => {
  * Remove a key person from the APD
  * @param {Number} index Index of the key person to remove
  * @param {Object} di Dependency injection object
- * @param {Object} di.global The window object, which provides window.confirm
  */
-export const removeKeyPerson = (
-  index,
-  { global = window } = {}
-) => dispatch => {
-  if (global.confirm('Do you really want to delete this key person?')) {
-    dispatch({
-      type: REMOVE_APD_ITEM,
-      path: `/keyPersonnel/${index}`
-    });
-    dispatch(updateBudget());
-  }
+export const removeKeyPerson = index => dispatch => {
+  dispatch({
+    type: REMOVE_APD_ITEM,
+    path: `/keyPersonnel/${index}`
+  });
+  dispatch(updateBudget());
 };
 
 /**
