@@ -6,6 +6,7 @@ Anticipated release: May 17, 2021
 
 - Updated delete dialog to use thematically consistent modal dialogs instead of basic alerts. ([#2926])
 - New affiliation available for federal users ([#2929])
+- On the state affiliation selection page, give users an option to log out ([#3011])
 
 #### 🐛 Bugs fixed
 
@@ -27,3 +28,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2947]: https://github.com/CMSgov/eAPD/issues/2947
 [#2970]: https://github.com/CMSgov/eAPD/issues/2970
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
+[#3011]: https://github.com/CMSgov/eAPD/issues/3011

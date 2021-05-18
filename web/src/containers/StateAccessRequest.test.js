@@ -37,4 +37,9 @@ describe('<StateAccessRequest />', () => {
     fireEvent.click(getByText(/Submit/i));
     expect(defaultProps.saveAction).toHaveBeenCalledWith(['mo']);
   });
+
+  test('Back to Login button renders', () => {
+    const { getByText } = setup();
+    expect(getByText(/Back to Login/i)).toBeTruthy();
+  });
 });
