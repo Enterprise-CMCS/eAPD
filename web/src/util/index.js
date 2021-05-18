@@ -146,8 +146,8 @@ export const stateDateToDisplay = date => {
  * @returns {String} Display-formatted date range string
  */
 export const stateDateRangeToDisplay = (start, end) => {
-  let startDate = stateDateToDisplay(start);
-  let endDate = stateDateToDisplay(end);
+  const startDate = stateDateToDisplay(start);
+  const endDate = stateDateToDisplay(end);
 
   return `${startDate} - ${endDate}`;
 };
