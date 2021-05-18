@@ -17,6 +17,7 @@ Anticipated release: May 17, 2021
 - Updated field labels and descriptions in the Private Contractor section of activities ([#2940])
 - Upgraded modules ([#2947])
 - Updates text on dashboard ([#2970])
+- Update Github templates ([#3093])
 
 # Previous releases
 
@@ -29,3 +30,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2970]: https://github.com/CMSgov/eAPD/issues/2970
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
 [#3011]: https://github.com/CMSgov/eAPD/issues/3011
+[#3093]: https://github.com/CMSgov/eAPD/issues/3093
