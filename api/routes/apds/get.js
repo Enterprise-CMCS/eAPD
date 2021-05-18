@@ -48,7 +48,7 @@ module.exports = (
     }
   });
 
-  app.get('/apds/:id(\\d+)', can('view-document'), async (req, res, next) => {
+  app.get('/apds/:id(\\d+)', can('edit-document'), async (req, res, next) => {
     logger.silly({ id: req.id, message: 'handling GET /apds/:id' });
 
     try {

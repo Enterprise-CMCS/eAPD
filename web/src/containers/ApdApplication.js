@@ -37,7 +37,6 @@ const ApdApplication = ({
   const location = useLocation();
 
   useEffect(() => {
-    console.log({ location });
     if (!paramApdId && !apdId) {
       dispatchSelectApdOnLoad('/apd');
       history.push('/');

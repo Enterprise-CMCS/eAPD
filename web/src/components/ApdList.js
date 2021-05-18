@@ -22,6 +22,7 @@ const ApdList = ({
   createApd: create,
   deleteApd: del,
   fetching,
+  error,
   route,
   selectApd: select,
   state,
@@ -59,6 +60,14 @@ const ApdList = ({
         <main id="start-main-content">
           <div className="ds-u-padding-top--2">
             <UpgradeBrowser />
+            {error && (
+              <div className="ds-c-alert ds-c-alert--error">
+                <div className="ds-c-alert__body">
+                  <h2 className="ds-c-alert__heading">Error status</h2>
+                  <p className="ds-c-alert__text">{error}</p>
+                </div>
+              </div>
+            )}
             <div className="ds-l-row ds-u-margin-top--7">
               <div className="ds-l-col--8 ds-u-margin-x--auto">
                 <div
@@ -109,7 +118,7 @@ const ApdList = ({
                     </div>
                     <div className="ds-u-display--inline-block">
                       <h3 className="ds-u-margin-y--0">
-                        <a href="#!" onClick={open(apd.id)}>
+                        <a href={`${route}/${apd.id}`} onClick={open(apd.id)}>
                           <span className="ds-u-visibility--screen-reader">
                             Edit APD:{' '}
                           </span>
@@ -159,6 +168,7 @@ const ApdList = ({
 ApdList.propTypes = {
   apds: PropType.array.isRequired,
   fetching: PropType.bool.isRequired,
+  error: PropType.string.isRequired,
   route: PropType.string,
   state: PropType.object.isRequired,
   createApd: PropType.func.isRequired,
@@ -175,6 +185,7 @@ ApdList.defaultProps = {
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching || false,
+  error: selectApds(state).error || null,
   state: state.user.data.state || null,
   isFedAdmin: getIsFedAdmin(state),
   approvalStatus:

@@ -1,5 +1,5 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
-import { SELECT_APD } from '../actions/app/symbols';
+import { SELECT_APD_SUCCESS } from '../actions/app/symbols';
 import { APD_ACTIVITIES_CHANGE } from '../actions/editApd/symbols';
 import staticItems, { getItems } from './nav.items';
 
@@ -59,7 +59,7 @@ const reducer = (state = initialState, action = {}) => {
       };
     }
 
-    case SELECT_APD: {
+    case SELECT_APD_SUCCESS: {
       const apdId = action.apd && action.apd.id ? action.apd.id : null;
       return {
         ...state,
