@@ -134,7 +134,7 @@ export const stateDateToDisplay = date => {
   if (m.isValid()) {
     return m.format('M/D/YYYY');
   }
-  return date;
+  return 'Invalid date';
 };
 
 /**
@@ -146,15 +146,10 @@ export const stateDateToDisplay = date => {
  * @returns {String} Display-formatted date range string
  */
 export const stateDateRangeToDisplay = (start, end) => {
-  if (!start || !end) {
-    return 'Dates not specified';
-  }
-  const starty = moment(start, 'YYYY-MM-DD');
-  const endy = moment(end, 'YYYY-MM-DD');
-  if (starty.isValid() && endy.isValid()) {
-    return `${starty.format('M/D/YYYY')} - ${endy.format('M/D/YYYY')}`;
-  }
-  return `${start} - ${end}`;
+  let startDate = stateDateToDisplay(start);
+  let endDate = stateDateToDisplay(end);
+
+  return `${startDate} - ${endDate}`;
 };
 
 /**
