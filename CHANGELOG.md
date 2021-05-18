@@ -9,7 +9,7 @@ Anticipated release: May 17, 2021
 
 #### 🐛 Bugs fixed
 - Add activity label on nav isn't accurate ([#3010])
-- Removes validation from date display on certain fields ([#3086])
+- Updates date validation and formatting to be more accurate ([#3086])
 
 #### ⚙️ Behind the scenes
 
