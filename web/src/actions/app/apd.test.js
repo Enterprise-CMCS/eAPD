@@ -23,7 +23,8 @@ import {
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS,
-  SELECT_APD,
+  SELECT_APD_SUCCESS,
+  SELECT_APD_REQUEST,
   SET_APD_TO_SELECT_ON_LOAD
 } from './symbols';
 import { ARIA_ANNOUNCE_CHANGE } from '../aria';
@@ -67,8 +68,9 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: CREATE_APD_REQUEST },
         { type: CREATE_APD_SUCCESS, data: newapd },
+        { type: SELECT_APD_REQUEST },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
-        { type: SELECT_APD, apd },
+        { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: '/apd/bloop' },
@@ -324,8 +326,9 @@ describe('application-level actions', () => {
       const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
       const expectedActions = [
+        { type: SELECT_APD_REQUEST },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
-        { type: SELECT_APD, apd },
+        { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
@@ -375,8 +378,9 @@ describe('application-level actions', () => {
       const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
       const expectedActions = [
+        { type: SELECT_APD_REQUEST },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
-        { type: SELECT_APD, apd },
+        { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
         { type: EDIT_APD, path: '/federalCitations', value: regulations },
         { type: UPDATE_BUDGET, state },
