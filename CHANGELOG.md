@@ -8,7 +8,7 @@ Anticipated release: May 17, 2021
 - New affiliation available for federal users ([#2929])
 
 #### 🐛 Bugs fixed
-
+- Investigate why rich text editor is losing formatting after page reload ([#2961])
 - Add activity label on nav isn't accurate ([#3010])
 
 #### ⚙️ Behind the scenes
@@ -28,6 +28,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2940]: https://github.com/CMSgov/eAPD/issues/2940
 [#2947]: https://github.com/CMSgov/eAPD/issues/2947
 [#2550]: https://github.com/CMSgov/eAPD/issues/2550
+[#2961]: https://github.com/CMSgov/eAPD/issues/2961
 [#2970]: https://github.com/CMSgov/eAPD/issues/2970
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
 [#3093]: https://github.com/CMSgov/eAPD/issues/3093
