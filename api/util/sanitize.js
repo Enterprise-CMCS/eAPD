@@ -81,7 +81,11 @@ const sanitize = dirty => {
         // We don't currently allow img itself by default, but this
         // would make sense if we did. You could add srcset here,
         // and if you do the URL is checked for safety
-        img: ['src']
+        img: ['src'],
+        p: ['style'],
+        span: ['style'],
+        ol: ['style'],
+        ul: ['style']
       }
     });
   }
