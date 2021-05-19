@@ -82,12 +82,11 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
         onSave={handleSubmit}
       >
         <div className="ds-u-margin-bottom--4">
-          <label
-            htmlFor="state-selection"
+          <p
             className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
           >
             Select your State Affiliation.
-          </label>
+          </p>
 
           <Autocomplete
             items={state.filteredStates}
