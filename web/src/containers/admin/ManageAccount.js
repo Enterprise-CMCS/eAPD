@@ -6,8 +6,12 @@ import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
 
 import { STATES } from '../../util/states';
 
-// todo: connect saveAction to actual method
-const ManageAccount = ({currentAffiliations, saveAction}) => {
+import { createAccessRequest } from '../../actions/auth';
+
+const ManageAccount = ({
+  currentAffiliations, 
+  createAccessRequest: createAccessRequestAction
+}) => {
 
   const existingAffiliations = currentAffiliations.map(element => { 
     const stateDetails = STATES.find(item => item.id === element.state_id)
@@ -75,75 +79,77 @@ const ManageAccount = ({currentAffiliations, saveAction}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    saveAction(state.selectedStates);
+    createAccessRequestAction(state.selectedStates);
   };
 
   return (
     <div className="site-body ds-l-container">
-      <main id="start-main-content">
-        <div className="ds-u-padding-y--3">
-          <h2>Manage Account</h2>
-          <div className="ds-u-margin-bottom--4">
-            <p>Current Affiliations. Including Requests</p>
-            {existingAffiliations.map(el => {
-                return (
-                  <Badge className="ds-u-margin-bottom--1" key={el.id}>
-                    {el.name} {' '} 
-                    <button className="eapd-badge-remove" type="button" data-id={el.id} onClick={handleRemoveItem} disabled>
-                      <span className="ds-u-visibility--screen-reader">Remove {el.name}</span>
-                    </button>
-                  </Badge>     
-                )
-              })}
-            <label
-              htmlFor="state-selection"
-              className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
-            >
-              Request New Affiliations
-            </label>
-
-            <Autocomplete
-              items={state.filteredStates}
-              onChange={handleOnChange}
-              onInputValueChange={handleInputChange}
-              clearSearchButton={false}
-              inputValue={state.inputValue}
-              id='state-selection'
-            >
-              {state.selectedStates.map(el => {
-                return (
-                  <Badge className="ds-u-margin-bottom--1" key={el.id} variation={el.disabled ? "" : "info"}>
-                    {el.name} {' '} 
-                    <button className="eapd-badge-remove" type="button" data-id={el.id} onClick={handleRemoveItem} disabled={el.disabled}>
-                      <span className="ds-u-visibility--screen-reader">Remove {el.name}</span>
-                    </button>
-                  </Badge>     
-                )
-              })}
-              <TextField
-                label="Select your State Affiliation."
-                placeholder="Search state here"
-                className="ds-u-margin-top--2"
-                labelClassName="ds-u-visibility--screen-reader"
-                name="select-states-field"
-              />
-              <img className="eapd-autocomplete__search-icon" src="/static/icons/search.svg" alt="Search icon"/>
-            </Autocomplete>
-            <button className="ds-c-button ds-c-button--primary" type="button" onClick={handleSubmit}>Save</button>
+      <div class="ds-l-row card">
+        <main id="start-main-content">
+          <div className="ds-u-padding-y--3">
+            <h2>Manage Account</h2>
+            <div className="ds-u-margin-bottom--4">
+              <p>Current Affiliations. Including Requests</p>
+              {existingAffiliations.map(el => {
+                  return (
+                    <Badge className="ds-u-margin-bottom--1" key={el.id}>
+                      {el.name} {' '} 
+                      <button className="eapd-badge-remove" type="button" data-id={el.id} onClick={handleRemoveItem} disabled>
+                        <span className="ds-u-visibility--screen-reader">Remove {el.name}</span>
+                      </button>
+                    </Badge>     
+                  )
+                })}
+              <label
+                htmlFor="state-selection"
+                className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
+              >
+                Request New Affiliations
+              </label>
+  
+              <Autocomplete
+                items={state.filteredStates}
+                onChange={handleOnChange}
+                onInputValueChange={handleInputChange}
+                clearSearchButton={false}
+                inputValue={state.inputValue}
+                id='state-selection'
+              >
+                {state.selectedStates.map(el => {
+                  return (
+                    <Badge className="ds-u-margin-bottom--1" key={el.id} variation={el.disabled ? "" : "info"}>
+                      {el.name} {' '} 
+                      <button className="eapd-badge-remove" type="button" data-id={el.id} onClick={handleRemoveItem} disabled={el.disabled}>
+                        <span className="ds-u-visibility--screen-reader">Remove {el.name}</span>
+                      </button>
+                    </Badge>     
+                  )
+                })}
+                <TextField
+                  label="Select your State Affiliation."
+                  placeholder="Search state here"
+                  className="ds-u-margin-top--2"
+                  labelClassName="ds-u-visibility--screen-reader"
+                  name="select-states-field"
+                />
+                <img className="eapd-autocomplete__search-icon" src="/static/icons/search.svg" alt="Search icon"/>
+              </Autocomplete>
+              <button className="ds-c-button ds-c-button--primary" type="button" onClick={handleSubmit}>Save</button>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };
 
 ManageAccount.propTypes = {
-  saveAction: PropTypes.func.isRequired,
-  currentAffiliations: PropTypes.array.isRequired
+  currentAffiliations: PropTypes.array.isRequired,
+  createAccessRequest: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-
+  createAccessRequest
 };
 
 const mapStateToProps = state => ({
