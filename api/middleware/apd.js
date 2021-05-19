@@ -69,7 +69,7 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
             id: req.id,
             message: 'user does not have access to the APD'
           });
-          res.status(401).end();
+          res.status(403).end();
         }
       });
     };

@@ -84,7 +84,6 @@ tap.test('user GET endpoint', async endpointTest => {
         await handler({ params: { id: 1 } }, res);
 
         invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
       }
     );
