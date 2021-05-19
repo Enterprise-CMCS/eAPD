@@ -105,11 +105,21 @@ const Activity = ({ activity, activityIndex }) => {
       <Fragment key={uuidv4()}>
         <p className="ds-u-margin-bottom--0">
           <strong>
-            {index + 1}. {contractor.name || 'Contractor name not specified'}
+            {index + 1}.{' '}
+            {contractor.name ||
+              'Private Contractor or Vendor Name not specified'}
           </strong>
           {contractor.hourly.useHourly === true && ' (hourly resource)'}
         </p>
-        <p className="ds-u-margin-top--0" dangerouslySetInnerHTML={{ __html: contractor.description }} /> 
+        <strong>Procurement Methodology and Description of Services</strong>
+        <p
+          className="ds-u-margin-top--0"
+          dangerouslySetInnerHTML={{
+            __html:
+              contractor.description ||
+              'Procurement Methodology and Description of Services not specified'
+          }}
+        />
         <ul className="ds-c-list--bare">
           <li>
             <strong>Full Contract Term: </strong>
@@ -144,7 +154,7 @@ const Activity = ({ activity, activityIndex }) => {
       <h2>
         Activity {activityIndex + 1} ({activity.name})
       </h2>
-        <strong>Provide a short overview of the activity:</strong>
+      <strong>Provide a short overview of the activity:</strong>
       <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
       <p>
         <strong>Start date: </strong>
