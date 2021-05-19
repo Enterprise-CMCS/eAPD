@@ -498,7 +498,8 @@ jobs:
               --OKTA_DOMAIN "${<< parameters.env >>_OKTA_DOMAIN}" \
               --OKTA_SERVER_ID "${<< parameters.env >>_OKTA_SERVER_ID}" \
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
-              --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}"
+              --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
+              --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}"
 
       - run:
           when: on_fail
@@ -603,7 +604,8 @@ jobs:
                 --OKTA_DOMAIN "$PREVIEW_OKTA_DOMAIN" \
                 --OKTA_SERVER_ID "$PREVIEW_OKTA_SERVER_ID" \
                 --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
-                --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY"
+                --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY" \
+                --JWT_SECRET "$PREVIEW_JWT_SECRET"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else

@@ -1,39 +1,35 @@
 ---
 name: Design
 about: Design Issue template
-title: "[Design Issue]"
+title: '[Design Issue]'
 labels: design
 assignees: ''
+---
+
+Link or add dependencies to any applicable issues.
+
+Include an explanation of why the design was created or changed, any decisions or conversations that led to this design, any regulatory notations, any user needs that should be surfaced, any risks, or what the user should be able to accomplish once this is done (as appropriate for the particular design).
+
+Include any links or relevant information from Slack conversations that are related to this issue.
+
+Add any deliverables like a mockup, or a link to a prototype, a link to a Figma file etc
+
+Add in screenshots or annotated screenshots that show context of the request within the app, or show before and after if appropriate, however it helps to illustrate a concept or request
+
+If needed, a note about priority (future enhancement tag, before initial release, etc)
+
+### This task is done when…
+
+- [ ] any acceptance criteria (not process oriented, requirements of feature)
+- [ ] designs are created, taking into consideration multiple FFY, multiple entries, long entries, weird entries, and/or the export view if applicable
+- [ ] 508 considerations and/or recommendations are reviewed
+- [ ] designs are shared
+- [ ] designs are approved by product
+- [ ] if there is a long discussion, a summary of changes for dev will be added to the last comment before transfer
+- [ ] a list of changes to be made if this is improving an existing feature
 
 ---
 
-Describe the task here and link or add dependencies to any applicable issues…
+Add additional labels (design, dev, compliance, BUG, etc) and size before submitting.
 
-Design - 
-An issue can include an explanation of why the design was created, any decisions or conversations that led to this design, any regulatory notations, any user needs that should be surfaced, any risks (as appropriate for the particular design)
-
-Content - 
-An issue can include any decisions or conversations that led to this content being created or changed, a consideration of the source/reference docs (APD templates), regulatory rules
-
-*Add in screenshots or annotated screenshots that show context of the request within the app, or show before and after if appropriate, however it helps to illustrate a concept or request
-
-*Add any deliverables like a mockup, or a link to a prototype, etc
-
-*If needed, a note about priority (future enhancement tag, before initial release, etc) 
-
-
-
-### This task is done when…
-This could include:
- - [ ] a list of changes to be made
- - [ ] the description of what a user might be able to accomplish once this is done
- - [ ] any tangible deliverable(s) that need to be created
- - [ ] if there is a long discussion, summarize changes for dev in last comment before transfer
- - [ ] identify 508 considerations and/or recommendations
- - [ ] what to include or change in the export view
- - [ ] consider multiple entries/items/FFY 
- - [ ] who ultimately needs to sign off listed by their role
- 
-*Add additional LABELS (dev, compliance, BUG, size, etc) before submitting.
-
-*If the issue is needed to complete prioritized work for the CURRENT SPRINT, add it to the "This Sprint" pipeline. Otherwise, all other issues will be automatically added to the _unprioritized pipeline_ for PRODUCT to prioritize.
+If the issue is needed to complete prioritized work for the CURRENT SPRINT, add it to the "This Sprint" pipeline. Otherwise, all other issues will be automatically added to the _unprioritized pipeline_ for prioritization in backlog refinement or sprint planning with Product.

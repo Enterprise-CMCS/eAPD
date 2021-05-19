@@ -17,6 +17,7 @@ Anticipated release: May 17, 2021
 - Upgraded modules ([#2947])
 - Updates text on dashboard ([#2970])
 - exchanging Okta Token for a locally generated one containing the user's claims. ([#2811])
+- Update Github templates ([#3093])
 
 # Previous releases
 
@@ -29,3 +30,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2970]: https://github.com/CMSgov/eAPD/issues/2970
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
 [#2811]: https://github.com/CMSgov/eAPD/issues/2811
+[#3093]: https://github.com/CMSgov/eAPD/issues/3093
