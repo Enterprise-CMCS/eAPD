@@ -586,10 +586,10 @@ Object {
             "description": "The list of a user’s apds",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
         },
         "security": Array [
@@ -616,10 +616,10 @@ Object {
             "description": "The new APD",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
         },
         "security": Array [
@@ -655,10 +655,10 @@ Object {
             "description": "Invalid request, such as requesting to archive an APD that is not editable",
           },
           "401": Object {
-            "description": "The apd ID does not match any known apds for the user",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
@@ -695,14 +695,14 @@ Object {
             },
             "description": "The APD",
           },
-          "400": Object {
-            "description": "The apd ID does not match any known apds",
-          },
           "401": Object {
-            "description": "The apd ID does not match any known apds for the user",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd does not exist",
           },
         },
         "security": Array [
@@ -801,10 +801,10 @@ Object {
             "description": "The update failed due to a problem with the input data",
           },
           "401": Object {
-            "description": "The apd ID does not match any known apds for the user",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
@@ -872,10 +872,10 @@ Object {
             "description": "The apd ID does not match any known apds",
           },
           "401": Object {
-            "description": "The apd ID does not match any known apds for the user",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The apd ID does not match any known apds for the user",
           },
         },
         "security": Array [
@@ -945,12 +945,12 @@ Object {
             "description": "Invalid request, such as requesting to archive an APD that is not editable",
           },
           "401": Object {
-            "description": "The apd ID does not match any known apds for the user",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The apd ID does not match any known apds for the user",
           },
-          "500": Object {
+          "415": Object {
             "description": "The file is not a valid format",
           },
         },
@@ -1040,10 +1040,10 @@ Object {
             "description": "The list of activities known to the system",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
         },
         "security": Array [
@@ -1092,10 +1092,10 @@ Object {
             "description": "The list of roles known to the system",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
         },
         "security": Array [
@@ -1216,7 +1216,7 @@ Object {
             "description": "The current user",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
         },
         "security": Array [
@@ -1272,10 +1272,10 @@ Object {
             "description": "List of Active Roles",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
         },
         "security": Array [
@@ -1360,11 +1360,11 @@ Object {
             },
             "description": "US State or Territory",
           },
-          "400": Object {
-            "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
-          },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
+          },
+          "404": Object {
+            "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
           },
         },
         "security": Array [
@@ -1483,10 +1483,10 @@ Object {
             "description": "List of all user affiliations for a US State",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
         },
         "security": Array [
@@ -1524,10 +1524,10 @@ Object {
             "description": "Record was created",
           },
           "400": Object {
-            "description": "Record exists, or US State ID is invalid",
+            "description": "Record does not exist or US State ID is invalid",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
         },
         "security": Array [
@@ -1616,14 +1616,14 @@ Object {
             },
             "description": "A single user affiliation with a US State",
           },
-          "400": Object {
-            "description": "The stateId and affiliation ID do not correspond to a known record",
-          },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
+          },
+          "404": Object {
+            "description": "The affiliation does not exist",
           },
         },
         "security": Array [
@@ -1691,10 +1691,10 @@ Object {
             "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
         },
         "security": Array [
@@ -1756,10 +1756,10 @@ Object {
             "description": "The list of users known to the system",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
         },
         "security": Array [
@@ -1830,25 +1830,12 @@ Object {
             "description": "The matching user",
           },
           "401": Object {
-            "description": "Not logged in",
+            "description": "The user is not logged in",
           },
           "403": Object {
-            "description": "Does not have permission to this activity",
+            "description": "The user does not have permission to perform this activity",
           },
           "404": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
             "description": "The user ID does not match any known users",
           },
         },

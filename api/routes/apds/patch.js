@@ -25,11 +25,11 @@ module.exports = (
     '/apds/:id',
     can('edit-document'),
     userCanEditAPD(),
-    async (req, res) => {
+    async (req, res, next) => {
       logger.silly({ id: req.id, message: 'handling PATCH /apds/:id route' });
       if (!req.params.id) {
         logger.error({ id: req.id, message: 'no ID given' });
-        return res.status(400).end();
+        return res.status(400).send({ error: 'missing APD id' }).end();
       }
       if (!Array.isArray(req.body)) {
         logger.error({ id: req.id, message: 'request body must be an array' });
@@ -66,7 +66,7 @@ module.exports = (
           // operate on a property that doesn't currently exist.
           logger.error({ id: req.id, message: 'error patching the document' });
           logger.error({ id: req.id, message: e });
-          return res.status(400).end();
+          return next(e);
         }
 
         const valid = validate(updatedDocument);
@@ -101,7 +101,7 @@ module.exports = (
         });
       } catch (e) {
         logger.error({ id: req.id, message: e });
-        return res.status(400).end();
+        return next(e);
       }
     }
   );
