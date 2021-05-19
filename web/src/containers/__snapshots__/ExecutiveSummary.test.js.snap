@@ -30,8 +30,10 @@ exports[`executive summary component renders correctly 1`] = `
         }
         headingLevel="4"
         key="a1"
+        objType={null}
         onDeleteClick={null}
         onEditClick={null}
+        title={null}
       >
         <p>
           first activity
@@ -140,8 +142,10 @@ exports[`executive summary component renders correctly 1`] = `
         }
         headingLevel="4"
         key="a2"
+        objType={null}
         onDeleteClick={null}
         onEditClick={null}
+        title={null}
       >
         <p>
           second activity
@@ -245,8 +249,10 @@ exports[`executive summary component renders correctly 1`] = `
         editHref={null}
         heading="Total cost"
         headingLevel="4"
+        objType={null}
         onDeleteClick={null}
         onEditClick={null}
+        title={null}
       >
         <p>
           Verify that this information is correct. Edit activities above to make changes.

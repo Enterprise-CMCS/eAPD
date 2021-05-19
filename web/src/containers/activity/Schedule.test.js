@@ -38,18 +38,12 @@ describe('the Schedule (milestones) component', () => {
 
   describe('events', () => {
     it('updates activity start date', () => {
-      component
-        .find('DateField')
-        .at(0)
-        .prop('onChange')(null, 'new date');
+      component.find('DateField').at(0).prop('onChange')(null, 'new date');
       expect(props.setStartDate).toHaveBeenCalledWith(7, 'new date');
     });
 
     it('updates activity end date', () => {
-      component
-        .find('DateField')
-        .at(1)
-        .prop('onChange')(null, 'other date');
+      component.find('DateField').at(1).prop('onChange')(null, 'other date');
       expect(props.setEndDate).toHaveBeenCalledWith(7, 'other date');
     });
   });
