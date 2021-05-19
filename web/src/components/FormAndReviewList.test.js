@@ -274,10 +274,7 @@ describe('FormAndReviewList component', () => {
         onDeleteClick={onDeleteClick}
       />
     );
-    component
-      .find('FormAndReviewItem')
-      .first()
-      .prop('onDeleteClick')();
+    component.find('FormAndReviewItem').first().prop('onDeleteClick')();
 
     expect(onDeleteClick).toHaveBeenCalledWith(0);
   });

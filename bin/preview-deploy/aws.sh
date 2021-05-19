@@ -116,6 +116,8 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__OKTA_SERVER_ID__|`echo $OKTA_SERVER_ID`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__JWT_SECRET__|`echo $JWT_SECRET`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 

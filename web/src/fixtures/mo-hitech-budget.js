@@ -2,13 +2,13 @@ const budget = {
   activities: {
     '5714113d': {
       costsByFFY: {
-        '2020': {
+        2020: {
           federal: 3109348,
           medicaidShare: 3454831,
           state: 345483,
           total: 3454831
         },
-        '2021': {
+        2021: {
           federal: 1803821,
           medicaidShare: 2004245,
           state: 200424,
@@ -22,8 +22,8 @@ const budget = {
         }
       },
       quarterlyFFP: {
-        '2020': {
-          '1': {
+        2020: {
+          1: {
             combined: {
               dollars: 777337,
               percent: 0
@@ -37,7 +37,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 777337,
               percent: 0
@@ -51,7 +51,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 777337,
               percent: 0
@@ -65,7 +65,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 777337,
               percent: 0
@@ -94,8 +94,8 @@ const budget = {
             }
           }
         },
-        '2021': {
-          '1': {
+        2021: {
+          1: {
             combined: {
               dollars: 450956,
               percent: 0
@@ -109,7 +109,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 450955,
               percent: 0
@@ -123,7 +123,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 450955,
               percent: 0
@@ -137,7 +137,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 450955,
               percent: 0
@@ -175,13 +175,13 @@ const budget = {
     },
     '2170fbea': {
       costsByFFY: {
-        '2020': {
+        2020: {
           federal: 1622700,
           medicaidShare: 1803000,
           state: 180300,
           total: 1803000
         },
-        '2021': {
+        2021: {
           federal: 2319750,
           medicaidShare: 3093000,
           state: 773250,
@@ -195,8 +195,8 @@ const budget = {
         }
       },
       quarterlyFFP: {
-        '2020': {
-          '1': {
+        2020: {
+          1: {
             combined: {
               dollars: 405675,
               percent: 0
@@ -210,7 +210,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 405675,
               percent: 0
@@ -224,7 +224,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 405675,
               percent: 0
@@ -238,7 +238,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 405675,
               percent: 0
@@ -267,8 +267,8 @@ const budget = {
             }
           }
         },
-        '2021': {
-          '1': {
+        2021: {
+          1: {
             combined: {
               dollars: 579938,
               percent: 0
@@ -282,7 +282,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 579938,
               percent: 0
@@ -296,7 +296,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 579937,
               percent: 0
@@ -310,7 +310,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 579937,
               percent: 0
@@ -348,13 +348,13 @@ const budget = {
     },
     af9f9105: {
       costsByFFY: {
-        '2020': {
+        2020: {
           federal: 414000,
           medicaidShare: 460000,
           state: 46000,
           total: 460000
         },
-        '2021': {
+        2021: {
           federal: 428400,
           medicaidShare: 476000,
           state: 47600,
@@ -368,8 +368,8 @@ const budget = {
         }
       },
       quarterlyFFP: {
-        '2020': {
-          '1': {
+        2020: {
+          1: {
             combined: {
               dollars: 103500,
               percent: 0
@@ -383,7 +383,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 103500,
               percent: 0
@@ -397,7 +397,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 103500,
               percent: 0
@@ -411,7 +411,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 103500,
               percent: 0
@@ -440,8 +440,8 @@ const budget = {
             }
           }
         },
-        '2021': {
-          '1': {
+        2021: {
+          1: {
             combined: {
               dollars: 107100,
               percent: 0
@@ -455,7 +455,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 107100,
               percent: 0
@@ -469,7 +469,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 107100,
               percent: 0
@@ -483,7 +483,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 107100,
               percent: 0
@@ -521,13 +521,13 @@ const budget = {
     },
     '5f66be81': {
       costsByFFY: {
-        '2020': {
+        2020: {
           federal: 450000,
           medicaidShare: 500000,
           state: 50000,
           total: 500000
         },
-        '2021': {
+        2021: {
           federal: 1800000,
           medicaidShare: 2000000,
           state: 200000,
@@ -541,8 +541,8 @@ const budget = {
         }
       },
       quarterlyFFP: {
-        '2020': {
-          '1': {
+        2020: {
+          1: {
             combined: {
               dollars: 112500,
               percent: 0
@@ -556,7 +556,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 112500,
               percent: 0
@@ -570,7 +570,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 112500,
               percent: 0
@@ -584,7 +584,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 112500,
               percent: 0
@@ -613,8 +613,8 @@ const budget = {
             }
           }
         },
-        '2021': {
-          '1': {
+        2021: {
+          1: {
             combined: {
               dollars: 450000,
               percent: 0
@@ -628,7 +628,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 450000,
               percent: 0
@@ -642,7 +642,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 450000,
               percent: 0
@@ -656,7 +656,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 450000,
               percent: 0
@@ -694,13 +694,13 @@ const budget = {
     },
     d0963842: {
       costsByFFY: {
-        '2020': {
+        2020: {
           federal: 450000,
           medicaidShare: 500000,
           state: 50000,
           total: 500000
         },
-        '2021': {
+        2021: {
           federal: 1350000,
           medicaidShare: 1500000,
           state: 150000,
@@ -714,8 +714,8 @@ const budget = {
         }
       },
       quarterlyFFP: {
-        '2020': {
-          '1': {
+        2020: {
+          1: {
             combined: {
               dollars: 112500,
               percent: 0
@@ -729,7 +729,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 112500,
               percent: 0
@@ -743,7 +743,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 112500,
               percent: 0
@@ -757,7 +757,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 112500,
               percent: 0
@@ -786,8 +786,8 @@ const budget = {
             }
           }
         },
-        '2021': {
-          '1': {
+        2021: {
+          1: {
             combined: {
               dollars: 337500,
               percent: 0
@@ -801,7 +801,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 337500,
               percent: 0
@@ -815,7 +815,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 337500,
               percent: 0
@@ -829,7 +829,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 337500,
               percent: 0
@@ -867,13 +867,13 @@ const budget = {
     },
     '7bd7353f': {
       costsByFFY: {
-        '2020': {
+        2020: {
           federal: 362500,
           medicaidShare: 725000,
           state: 362500,
           total: 725000
         },
-        '2021': {
+        2021: {
           federal: 697500,
           medicaidShare: 775000,
           state: 77500,
@@ -887,8 +887,8 @@ const budget = {
         }
       },
       quarterlyFFP: {
-        '2020': {
-          '1': {
+        2020: {
+          1: {
             combined: {
               dollars: 90625,
               percent: 0
@@ -902,7 +902,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 90625,
               percent: 0
@@ -916,7 +916,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 90625,
               percent: 0
@@ -930,7 +930,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 90625,
               percent: 0
@@ -959,8 +959,8 @@ const budget = {
             }
           }
         },
-        '2021': {
-          '1': {
+        2021: {
+          1: {
             combined: {
               dollars: 174375,
               percent: 0
@@ -974,7 +974,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '2': {
+          2: {
             combined: {
               dollars: 174375,
               percent: 0
@@ -988,7 +988,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '3': {
+          3: {
             combined: {
               dollars: 174375,
               percent: 0
@@ -1002,7 +1002,7 @@ const budget = {
               percent: 0.25
             }
           },
-          '4': {
+          4: {
             combined: {
               dollars: 174375,
               percent: 0
@@ -1040,13 +1040,13 @@ const budget = {
     }
   },
   combined: {
-    '2020': {
+    2020: {
       total: 7442831,
       federal: 6408548,
       medicaid: 7442831,
       state: 1034283
     },
-    '2021': {
+    2021: {
       total: 9848245,
       federal: 8399471,
       medicaid: 9848245,
@@ -1061,23 +1061,23 @@ const budget = {
   },
   federalShareByFFYQuarter: {
     hitAndHie: {
-      '2020': {
-        '1': {
+      2020: {
+        1: {
           inHouse: 590342,
           contractors: 606120,
           combined: 1196462
         },
-        '2': {
+        2: {
           inHouse: 590342,
           contractors: 606120,
           combined: 1196462
         },
-        '3': {
+        3: {
           inHouse: 590342,
           contractors: 606120,
           combined: 1196462
         },
-        '4': {
+        4: {
           inHouse: 590342,
           contractors: 606120,
           combined: 1196462
@@ -1088,23 +1088,23 @@ const budget = {
           combined: 4785848
         }
       },
-      '2021': {
-        '1': {
+      2021: {
+        1: {
           inHouse: 464131,
           contractors: 1055800,
           combined: 1519931
         },
-        '2': {
+        2: {
           inHouse: 464130,
           contractors: 1055800,
           combined: 1519930
         },
-        '3': {
+        3: {
           inHouse: 464130,
           contractors: 1055800,
           combined: 1519930
         },
-        '4': {
+        4: {
           inHouse: 464130,
           contractors: 1055800,
           combined: 1519930
@@ -1122,23 +1122,23 @@ const budget = {
       }
     },
     mmis: {
-      '2020': {
-        '1': {
+      2020: {
+        1: {
           inHouse: 259425,
           contractors: 146250,
           combined: 405675
         },
-        '2': {
+        2: {
           inHouse: 259425,
           contractors: 146250,
           combined: 405675
         },
-        '3': {
+        3: {
           inHouse: 259425,
           contractors: 146250,
           combined: 405675
         },
-        '4': {
+        4: {
           inHouse: 259425,
           contractors: 146250,
           combined: 405675
@@ -1149,23 +1149,23 @@ const budget = {
           combined: 1622700
         }
       },
-      '2021': {
-        '1': {
+      2021: {
+        1: {
           inHouse: 251813,
           contractors: 328125,
           combined: 579938
         },
-        '2': {
+        2: {
           inHouse: 251813,
           contractors: 328125,
           combined: 579938
         },
-        '3': {
+        3: {
           inHouse: 251812,
           contractors: 328125,
           combined: 579937
         },
-        '4': {
+        4: {
           inHouse: 251812,
           contractors: 328125,
           combined: 579937
@@ -1185,13 +1185,13 @@ const budget = {
   },
   hie: {
     statePersonnel: {
-      '2020': {
+      2020: {
         total: 460000,
         federal: 414000,
         medicaid: 460000,
         state: 46000
       },
-      '2021': {
+      2021: {
         total: 476000,
         federal: 428400,
         medicaid: 476000,
@@ -1205,13 +1205,13 @@ const budget = {
       }
     },
     contractors: {
-      '2020': {
+      2020: {
         total: 1000000,
         federal: 900000,
         medicaid: 1000000,
         state: 100000
       },
-      '2021': {
+      2021: {
         total: 3500000,
         federal: 3150000,
         medicaid: 3500000,
@@ -1225,13 +1225,13 @@ const budget = {
       }
     },
     expenses: {
-      '2020': {
+      2020: {
         total: 0,
         federal: 0,
         medicaid: 0,
         state: 0
       },
-      '2021': {
+      2021: {
         total: 0,
         federal: 0,
         medicaid: 0,
@@ -1245,13 +1245,13 @@ const budget = {
       }
     },
     combined: {
-      '2020': {
+      2020: {
         total: 1460000,
         federal: 1314000,
         medicaid: 1460000,
         state: 146000
       },
-      '2021': {
+      2021: {
         total: 3976000,
         federal: 3578400,
         medicaid: 3976000,
@@ -1267,13 +1267,13 @@ const budget = {
   },
   hit: {
     statePersonnel: {
-      '2020': {
+      2020: {
         total: 1397075,
         federal: 1237368,
         medicaid: 1397075,
         state: 159707
       },
-      '2021': {
+      2021: {
         total: 1486801,
         federal: 1338121,
         medicaid: 1486801,
@@ -1287,13 +1287,13 @@ const budget = {
       }
     },
     contractors: {
-      '2020': {
+      2020: {
         total: 1982756,
         federal: 1524480,
         medicaid: 1982756,
         state: 458276
       },
-      '2021': {
+      2021: {
         total: 1192444,
         federal: 1073200,
         medicaid: 1192444,
@@ -1307,13 +1307,13 @@ const budget = {
       }
     },
     expenses: {
-      '2020': {
+      2020: {
         total: 800000,
         federal: 710000,
         medicaid: 800000,
         state: 90000
       },
-      '2021': {
+      2021: {
         total: 100000,
         federal: 90000,
         medicaid: 100000,
@@ -1327,13 +1327,13 @@ const budget = {
       }
     },
     combined: {
-      '2020': {
+      2020: {
         total: 4179831,
         federal: 3471848,
         medicaid: 4179831,
         state: 707983
       },
-      '2021': {
+      2021: {
         total: 2779245,
         federal: 2501321,
         medicaid: 2779245,
@@ -1349,13 +1349,13 @@ const budget = {
   },
   mmis: {
     statePersonnel: {
-      '2020': {
+      2020: {
         total: 1153000,
         federal: 1037700,
         medicaid: 1153000,
         state: 115300
       },
-      '2021': {
+      2021: {
         total: 1343000,
         federal: 1007250,
         medicaid: 1343000,
@@ -1369,13 +1369,13 @@ const budget = {
       }
     },
     contractors: {
-      '2020': {
+      2020: {
         total: 650000,
         federal: 585000,
         medicaid: 650000,
         state: 65000
       },
-      '2021': {
+      2021: {
         total: 1750000,
         federal: 1312500,
         medicaid: 1750000,
@@ -1389,13 +1389,13 @@ const budget = {
       }
     },
     expenses: {
-      '2020': {
+      2020: {
         total: 0,
         federal: 0,
         medicaid: 0,
         state: 0
       },
-      '2021': {
+      2021: {
         total: 0,
         federal: 0,
         medicaid: 0,
@@ -1409,13 +1409,13 @@ const budget = {
       }
     },
     combined: {
-      '2020': {
+      2020: {
         total: 1803000,
         federal: 1622700,
         medicaid: 1803000,
         state: 180300
       },
-      '2021': {
+      2021: {
         total: 3093000,
         federal: 2319750,
         medicaid: 3093000,
@@ -1431,13 +1431,13 @@ const budget = {
   },
   hitAndHie: {
     statePersonnel: {
-      '2020': {
+      2020: {
         total: 1857075,
         federal: 1651368,
         medicaid: 1857075,
         state: 205707
       },
-      '2021': {
+      2021: {
         total: 1962801,
         federal: 1766521,
         medicaid: 1962801,
@@ -1451,13 +1451,13 @@ const budget = {
       }
     },
     contractors: {
-      '2020': {
+      2020: {
         total: 2982756,
         federal: 2424480,
         medicaid: 2982756,
         state: 558276
       },
-      '2021': {
+      2021: {
         total: 4692444,
         federal: 4223200,
         medicaid: 4692444,
@@ -1471,13 +1471,13 @@ const budget = {
       }
     },
     expenses: {
-      '2020': {
+      2020: {
         total: 800000,
         federal: 710000,
         medicaid: 800000,
         state: 90000
       },
-      '2021': {
+      2021: {
         total: 100000,
         federal: 90000,
         medicaid: 100000,
@@ -1491,13 +1491,13 @@ const budget = {
       }
     },
     combined: {
-      '2020': {
+      2020: {
         total: 5639831,
         federal: 4785848,
         medicaid: 5639831,
         state: 853983
       },
-      '2021': {
+      2021: {
         total: 6755245,
         federal: 6079721,
         medicaid: 6755245,
@@ -1513,13 +1513,13 @@ const budget = {
   },
   mmisByFFP: {
     '90-10': {
-      '2020': {
+      2020: {
         total: 1803000,
         federal: 1622700,
         medicaid: 1803000,
         state: 180300
       },
-      '2021': {
+      2021: {
         total: 0,
         federal: 0,
         medicaid: 0,
@@ -1533,13 +1533,13 @@ const budget = {
       }
     },
     '75-25': {
-      '2020': {
+      2020: {
         total: 0,
         federal: 0,
         medicaid: 0,
         state: 0
       },
-      '2021': {
+      2021: {
         total: 3093000,
         federal: 2319750,
         medicaid: 3093000,
@@ -1553,13 +1553,13 @@ const budget = {
       }
     },
     '50-50': {
-      '2020': {
+      2020: {
         total: 0,
         federal: 0,
         medicaid: 0,
         state: 0
       },
-      '2021': {
+      2021: {
         total: 0,
         federal: 0,
         medicaid: 0,
@@ -1573,13 +1573,13 @@ const budget = {
       }
     },
     combined: {
-      '2020': {
+      2020: {
         total: 1803000,
         federal: 1622700,
         medicaid: 1803000,
         state: 180300
       },
-      '2021': {
+      2021: {
         total: 3093000,
         federal: 2319750,
         medicaid: 3093000,
@@ -1599,28 +1599,28 @@ const budget = {
       name: 'Program Administration',
       data: {
         combined: {
-          '2020': 3454831,
-          '2021': 2004245,
+          2020: 3454831,
+          2021: 2004245,
           total: 5459076
         },
         contractors: {
-          '2020': 1332756,
-          '2021': 542444,
+          2020: 1332756,
+          2021: 542444,
           total: 1875200
         },
         expenses: {
-          '2020': 775000,
-          '2021': 75000,
+          2020: 775000,
+          2021: 75000,
           total: 850000
         },
         otherFunding: {
-          '2020': {
+          2020: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
             total: 0
           },
-          '2021': {
+          2021: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
@@ -1628,8 +1628,8 @@ const budget = {
           }
         },
         statePersonnel: {
-          '2020': 1347075,
-          '2021': 1386801,
+          2020: 1347075,
+          2021: 1386801,
           total: 2733876
         }
       }
@@ -1639,28 +1639,28 @@ const budget = {
       name: 'HIE Claims Data Analytics',
       data: {
         combined: {
-          '2020': 1803000,
-          '2021': 3093000,
+          2020: 1803000,
+          2021: 3093000,
           total: 4896000
         },
         contractors: {
-          '2020': 650000,
-          '2021': 1750000,
+          2020: 650000,
+          2021: 1750000,
           total: 2400000
         },
         expenses: {
-          '2020': 0,
-          '2021': 0,
+          2020: 0,
+          2021: 0,
           total: 0
         },
         otherFunding: {
-          '2020': {
+          2020: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
             total: 0
           },
-          '2021': {
+          2021: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
@@ -1668,8 +1668,8 @@ const budget = {
           }
         },
         statePersonnel: {
-          '2020': 1153000,
-          '2021': 1343000,
+          2020: 1153000,
+          2021: 1343000,
           total: 2496000
         }
       }
@@ -1679,28 +1679,28 @@ const budget = {
       name: 'HIE Enhancement and Onboarding',
       data: {
         combined: {
-          '2020': 460000,
-          '2021': 476000,
+          2020: 460000,
+          2021: 476000,
           total: 936000
         },
         contractors: {
-          '2020': 0,
-          '2021': 0,
+          2020: 0,
+          2021: 0,
           total: 0
         },
         expenses: {
-          '2020': 0,
-          '2021': 0,
+          2020: 0,
+          2021: 0,
           total: 0
         },
         otherFunding: {
-          '2020': {
+          2020: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
             total: 0
           },
-          '2021': {
+          2021: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
@@ -1708,8 +1708,8 @@ const budget = {
           }
         },
         statePersonnel: {
-          '2020': 460000,
-          '2021': 476000,
+          2020: 460000,
+          2021: 476000,
           total: 936000
         }
       }
@@ -1719,28 +1719,28 @@ const budget = {
       name: 'Medicaid Blue Button',
       data: {
         combined: {
-          '2020': 500000,
-          '2021': 2000000,
+          2020: 500000,
+          2021: 2000000,
           total: 2500000
         },
         contractors: {
-          '2020': 500000,
-          '2021': 2000000,
+          2020: 500000,
+          2021: 2000000,
           total: 2500000
         },
         expenses: {
-          '2020': 0,
-          '2021': 0,
+          2020: 0,
+          2021: 0,
           total: 0
         },
         otherFunding: {
-          '2020': {
+          2020: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
             total: 0
           },
-          '2021': {
+          2021: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
@@ -1748,8 +1748,8 @@ const budget = {
           }
         },
         statePersonnel: {
-          '2020': 0,
-          '2021': 0,
+          2020: 0,
+          2021: 0,
           total: 0
         }
       }
@@ -1759,28 +1759,28 @@ const budget = {
       name: 'Public Health System Modernization',
       data: {
         combined: {
-          '2020': 500000,
-          '2021': 1500000,
+          2020: 500000,
+          2021: 1500000,
           total: 2000000
         },
         contractors: {
-          '2020': 500000,
-          '2021': 1500000,
+          2020: 500000,
+          2021: 1500000,
           total: 2000000
         },
         expenses: {
-          '2020': 0,
-          '2021': 0,
+          2020: 0,
+          2021: 0,
           total: 0
         },
         otherFunding: {
-          '2020': {
+          2020: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
             total: 0
           },
-          '2021': {
+          2021: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
@@ -1788,8 +1788,8 @@ const budget = {
           }
         },
         statePersonnel: {
-          '2020': 0,
-          '2021': 0,
+          2020: 0,
+          2021: 0,
           total: 0
         }
       }
@@ -1799,28 +1799,28 @@ const budget = {
       name: 'MITA 3.0 Assessment',
       data: {
         combined: {
-          '2020': 725000,
-          '2021': 775000,
+          2020: 725000,
+          2021: 775000,
           total: 1500000
         },
         contractors: {
-          '2020': 650000,
-          '2021': 650000,
+          2020: 650000,
+          2021: 650000,
           total: 1300000
         },
         expenses: {
-          '2020': 25000,
-          '2021': 25000,
+          2020: 25000,
+          2021: 25000,
           total: 50000
         },
         otherFunding: {
-          '2020': {
+          2020: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
             total: 0
           },
-          '2021': {
+          2021: {
             contractors: 0,
             expenses: 0,
             statePersonnel: 0,
@@ -1828,8 +1828,8 @@ const budget = {
           }
         },
         statePersonnel: {
-          '2020': 50000,
-          '2021': 100000,
+          2020: 50000,
+          2021: 100000,
           total: 150000
         }
       }
