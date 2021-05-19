@@ -1,4 +1,4 @@
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd/symbols';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 import { updateBudget } from '../budget';
 
 /**
@@ -18,23 +18,16 @@ export const addContractor = activityIndex => (dispatch, getState) => {
  * Remove a contractor resource from an activity
  * @param {Number} activityIndex Index of the activity to remove the contractor from
  * @param {Number} contractorIndex Index of the contractor to remove
- * @param {Object} di Dependency injection object
- * @param {Object} di.global The window object, which provides window.confirm
  */
 export const removeContractor = (
   activityIndex,
-  contractorIndex,
-  { global = window } = {}
+  contractorIndex
 ) => dispatch => {
-  if (
-    global.confirm('Do you really want to delete this contractor resource?')
-  ) {
-    dispatch({
-      type: REMOVE_APD_ITEM,
-      path: `/activities/${activityIndex}/contractorResources/${contractorIndex}`
-    });
-    dispatch(updateBudget());
-  }
+  dispatch({
+    type: REMOVE_APD_ITEM,
+    path: `/activities/${activityIndex}/contractorResources/${contractorIndex}`
+  });
+  dispatch(updateBudget());
 };
 
 /**

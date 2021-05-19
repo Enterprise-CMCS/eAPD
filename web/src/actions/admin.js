@@ -158,32 +158,32 @@ export const editSelf = (user, changingPassword) => dispatch => {
     });
 };
 
-export const ADMIN_GET_STATE_AFFILIATIONS_SUCCESS =
-  'ADMIN_GET_STATE_AFFILIATIONS_SUCCESS';
-export const ADMIN_GET_STATE_AFFILIATIONS_ERROR =
-  'ADMIN_GET_STATE_AFFILIATIONS_ERROR';
+export const ADMIN_GET_AFFILIATIONS_SUCCESS =
+  'ADMIN_GET_AFFILIATIONS_SUCCESS';
+export const ADMIN_GET_AFFILIATIONS_ERROR =
+  'ADMIN_GET_AFFILIATIONS_ERROR';
 
-export const getStateAffiliations = (stateId, status) => dispatch => {
+export const getAffiliations = (stateId, status) => dispatch => {
   return axios
     .get(`/states/${stateId}/affiliations?status=${status}`)
     .then(res => {
-      dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_SUCCESS, data: res.data });
+      dispatch({ type: ADMIN_GET_AFFILIATIONS_SUCCESS, data: res.data });
     })
     .catch(e => {
       let error = null;
       if (e.response.data) {
         ({ error } = e.response.data);
       }
-      dispatch({ type: ADMIN_GET_STATE_AFFILIATIONS_ERROR, data: error });
+      dispatch({ type: ADMIN_GET_AFFILIATIONS_ERROR, data: error });
     });
 };
 
-export const ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS =
-  'ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS';
-export const ADMIN_UPDATE_STATE_AFFILIATION_ERROR =
-  'ADMIN_UPDATE_STATE_AFFILIATION_ERROR';
+export const ADMIN_UPDATE_AFFILIATION_SUCCESS =
+  'ADMIN_UPDATE_AFFILIATION_SUCCESS';
+export const ADMIN_UPDATE_AFFILIATION_ERROR =
+  'ADMIN_UPDATE_AFFILIATION_ERROR';
 
-export const updateStateAffiliation = (
+export const updateAffiliation = (
   stateId,
   affiliationId,
   roleId,
@@ -195,14 +195,14 @@ export const updateStateAffiliation = (
       status
     })
     .then(() => {
-      dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_SUCCESS });
+      dispatch({ type: ADMIN_UPDATE_AFFILIATION_SUCCESS });
     })
     .catch(e => {
       let error = null;
       if (e.response.data) {
         ({ error } = e.response.data);
       }
-      dispatch({ type: ADMIN_UPDATE_STATE_AFFILIATION_ERROR, data: error });
+      dispatch({ type: ADMIN_UPDATE_AFFILIATION_ERROR, data: error });
     });
 };
 export const ADMIN_GET_ROLE_TYPES_SUCCESS = 'ADMIN_GET_ROLE_TYPES_SUCCESS';

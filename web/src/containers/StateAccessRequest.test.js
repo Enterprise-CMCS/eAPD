@@ -31,7 +31,7 @@ describe('<StateAccessRequest />', () => {
 
   it('allows the users to select any item', () => {
     const { getByLabelText, getByText } = setup();
-    fireEvent.change(getByLabelText(/Select your State Affiliation/i), {
+    fireEvent.change(getByLabelText(/Select Affiliation/i), {
       target: { value: 'mo' }
     });
     fireEvent.click(getByText(/Submit/i));

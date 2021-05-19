@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Button, Tabs, TabPanel } from '@cmsgov/design-system';
 
 import {
-  getStateAffiliations,
-  updateStateAffiliation,
-  getRoleTypes
+  getRoleTypes,
+  getAffiliations,
+  updateAffiliation
 } from '../../actions/admin';
 
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
@@ -18,11 +18,11 @@ import ManageUserTable from './ManageUserTable';
 const StateAdmin = ({
   currentState,
   currentUser,
-  affiliations,
+  currentAffiliations,
   roleTypes,
   getRoleTypes: fetchTypes,
-  getStateAffiliations: stateAffiliations,
-  updateStateAffiliation: updateAffiliation
+  getAffiliations: affiliations,
+  updateAffiliation: actualUpdateAffiliation
 }) => {
   const [activeTab, setActiveTab] = useState('pending');
   const [isFetching, setIsFetching] = useState(true);
@@ -38,7 +38,7 @@ const StateAdmin = ({
   useEffect(() => {
     setIsFetching(true);
     async function fetchAffiliations() {
-      await stateAffiliations(currentState.id, activeTab);
+      await affiliations(currentState.id, activeTab);
     }
     fetchAffiliations().then(() => setIsFetching(false));
   }, [activeTab]);
@@ -52,7 +52,7 @@ const StateAdmin = ({
   };
 
   const showManageModal = event => {
-    const currentAffiliation = affiliations.find(element => {
+    const currentAffiliation = currentAffiliations.find(element => {
       return (
         element.id === Number(event.target.parentNode.getAttribute('data-id'))
       );
@@ -67,7 +67,7 @@ const StateAdmin = ({
 
   const handleAffiliationUpdate = roleId => {
     async function saveAffiliation() {
-      await updateAffiliation(
+      await actualUpdateAffiliation(
         currentState.id,
         selectedAffiliation.id,
         roleId,
@@ -75,7 +75,7 @@ const StateAdmin = ({
       );
     }
     saveAffiliation().then(() => {
-      stateAffiliations(currentState.id, activeTab);
+      affiliations(currentState.id, activeTab);
       setManageModalDisplay(false);
     });
   };
@@ -85,7 +85,7 @@ const StateAdmin = ({
       event.target.getAttribute('data-deny-or-revoke') === 'deny';
     setIsDenied(checkIsDenied);
 
-    const currentAffiliation = affiliations.find(element => {
+    const currentAffiliation = currentAffiliations.find(element => {
       return (
         element.id === Number(event.target.parentNode.getAttribute('data-id'))
       );
@@ -102,7 +102,7 @@ const StateAdmin = ({
     const permissionChangeType = isDenied ? 'denied' : 'revoked';
 
     async function saveAffiliation() {
-      await updateAffiliation(
+      await actualUpdateAffiliation(
         currentState.id,
         selectedAffiliation.id,
         -1,
@@ -110,7 +110,7 @@ const StateAdmin = ({
       );
     }
     saveAffiliation().then(() => {
-      stateAffiliations(currentState.id, activeTab);
+      affiliations(currentState.id, activeTab);
       setConfirmationModalDisplay(false);
     });
   };
@@ -125,9 +125,9 @@ const StateAdmin = ({
         <TabPanel id="pending" tab="Requests">
           <ManageUserTable
             tab="pending"
-            affiliations={affiliations}
+            affiliations={currentAffiliations}
             currentUser={currentUser}
-            updateAffiliation={updateAffiliation}
+            updateAffiliation={actualUpdateAffiliation}
             isFetching={isFetching}
             actions={[
               <Button
@@ -153,9 +153,9 @@ const StateAdmin = ({
         <TabPanel id="active" tab="Active">
           <ManageUserTable
             tab="active"
-            affiliations={affiliations}
+            affiliations={currentAffiliations}
             currentUser={currentUser}
-            updateAffiliation={updateAffiliation}
+            updateAffiliation={actualUpdateAffiliation}
             isFetching={isFetching}
             actions={[
               <Button
@@ -182,9 +182,9 @@ const StateAdmin = ({
         <TabPanel id="inactive" tab="Inactive">
           <ManageUserTable
             tab="inactive"
-            affiliations={affiliations}
+            affiliations={currentAffiliations}
             currentUser={currentUser}
-            updateAffiliation={updateAffiliation}
+            updateAffiliation={actualUpdateAffiliation}
             isFetching={isFetching}
             actions={[
               <Button
@@ -224,12 +224,12 @@ const StateAdmin = ({
 };
 
 StateAdmin.propTypes = {
-  getStateAffiliations: PropTypes.func.isRequired,
-  updateStateAffiliation: PropTypes.func.isRequired,
+  getAffiliations: PropTypes.func.isRequired,
   getRoleTypes: PropTypes.func.isRequired,
+  updateAffiliation: PropTypes.func.isRequired,
   currentState: PropTypes.object.isRequired,
   currentUser: PropTypes.object,
-  affiliations: PropTypes.array.isRequired,
+  currentAffiliations: PropTypes.array.isRequired,
   roleTypes: PropTypes.array.isRequired
 };
 
@@ -238,15 +238,15 @@ StateAdmin.defaultProps = {
 };
 
 const mapDispatchToProps = {
-  getStateAffiliations,
-  updateStateAffiliation,
+  getAffiliations,
+  updateAffiliation,
   getRoleTypes
 };
 
 const mapStateToProps = state => ({
-  affiliations: state.admin.affiliations,
   roleTypes: state.admin.roleTypes,
   currentState: getUserStateOrTerritory(state),
+  currentAffiliations: state.admin.affiliations,
   currentUser: state.auth.user
 });
 

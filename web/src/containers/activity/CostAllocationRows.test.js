@@ -5,7 +5,7 @@ import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
 const props = {
   ffy: '1990',
   years: {
-    '1990': {
+    1990: {
       contractorResources: [
         {
           description: 'contractor 2.1',
@@ -55,7 +55,7 @@ const props = {
       stateShare: 1007,
       totalCost: 1008
     },
-    '1991': {
+    1991: {
       contractorResources: [
         {
           description: 'contractor 2.1',

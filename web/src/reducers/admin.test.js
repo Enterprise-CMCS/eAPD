@@ -2,7 +2,7 @@ import admin, { selectUsers, selectUsersSorted } from './admin';
 import {
   ADMIN_GET_ACTIVITIES_SUCCESS,
   ADMIN_GET_ROLES_SUCCESS,
-  ADMIN_GET_STATE_AFFILIATIONS_SUCCESS,
+  ADMIN_GET_AFFILIATIONS_SUCCESS,
   ADMIN_GET_USERS_SUCCESS
 } from '../actions/admin';
 
@@ -63,7 +63,7 @@ describe('admin reducer', () => {
   it('should handle successfully getting affiliations', () => {
     expect(
       admin(initialState, {
-        type: ADMIN_GET_STATE_AFFILIATIONS_SUCCESS,
+        type: ADMIN_GET_AFFILIATIONS_SUCCESS,
         data: [
           {
             id: 1,
