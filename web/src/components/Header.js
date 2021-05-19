@@ -137,10 +137,10 @@ class Header extends Component {
                             </Link>
                           </li>
                         )}
-                        {/* Todo: Add authorization check here */}
                         <li>
                           <Link
                             to="/manage-account"
+                            onClick={this.toggleDropdown}
                             className="nav--dropdown__action"
                             >
                               <Icon
