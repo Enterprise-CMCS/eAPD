@@ -3624,11 +3624,19 @@ Object {
 }
 `;
 
-exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a body that is not valid 1`] = `""`;
+exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a body that is not valid 1`] = `
+Object {
+  "error": "Operation missing!",
+}
+`;
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
 
-exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a patch that creates an invalid APD 1`] = `""`;
+exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a patch that creates an invalid APD 1`] = `
+Object {
+  "error": "Invalid JSON pointer.",
+}
+`;
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a valid patch that also attempts to update a readonly property 1`] = `
 Object {

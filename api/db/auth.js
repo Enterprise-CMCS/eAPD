@@ -89,7 +89,7 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
  * @returns {Object} { stateId: activities }
  */
 const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
-  const roles = await getRolesAndActivities();
+  const roles = (await getRolesAndActivities()) || [];
   return db
     .select({
       stateId: 'state_id',
