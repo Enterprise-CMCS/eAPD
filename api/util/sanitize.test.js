@@ -25,7 +25,7 @@ tap.test('sanitize input', async sanitizeTests => {
   sanitizeTests.test('it should allow style for spans', async test => {
     const dirty =
       '<span style="color:#3598db;text-decoration:line-through">styling</span>';
-    test.equals(sanitize(dirty), dirty, 'alows style attributes');
+    test.equals(sanitize(dirty), dirty, 'allows style attributes');
   });
 
   sanitizeTests.test('it should allow style for p', async test => {
