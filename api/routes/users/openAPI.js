@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse, errorToken }
+  schema: { arrayOf, jsonResponse }
 } = require('../openAPI/helpers');
 
 const userObjectSchema = {
@@ -75,8 +75,7 @@ const openAPI = {
           content: jsonResponse(userObjectSchema)
         },
         404: {
-          description: 'The user ID does not match any known users',
-          content: errorToken
+          description: 'The user ID does not match any known users'
         }
       }
     }

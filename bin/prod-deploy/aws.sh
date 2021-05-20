@@ -157,7 +157,8 @@ function addEcosystemToUserData() {
         OKTA_DOMAIN: '$OKTA_DOMAIN',
         OKTA_SERVER_ID: '$OKTA_SERVER_ID',
         OKTA_CLIENT_ID: '$OKTA_CLIENT_ID',
-        OKTA_API_KEY: '$OKTA_API_KEY'
+        OKTA_API_KEY: '$OKTA_API_KEY',
+        JWT_SECRET: '$JWT_SECRET'
       },
     },{
       name: 'Database migration',
