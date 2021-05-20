@@ -230,6 +230,10 @@ CWAPPLOGCONFIG
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
+export OKTA_DOMAIN="__OKTA_DOMAIN__"
+export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
+export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
+export OKTA_API_KEY="__OKTA_API_KEY__"
 cd ~
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
