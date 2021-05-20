@@ -19,3 +19,13 @@
 .login-card img {
 	margin-left: -11px;
 }
+
+.remove-item-button {
+	background-color: transparent;
+	border: none;
+	z-index: 1;
+}
+
+.remove-item-button svg {
+	z-index: 0;
+}
