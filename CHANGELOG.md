@@ -6,6 +6,7 @@ Anticipated release: May 17, 2021
 
 - Updated delete dialog to use thematically consistent modal dialogs instead of basic alerts. ([#2926])
 - New affiliation available for federal users ([#2929])
+- Update State Admin Notification ([#3065])
 
 #### 🐛 Bugs fixed
 - Investigate why rich text editor is losing formatting after page reload ([#2961])
@@ -31,4 +32,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2961]: https://github.com/CMSgov/eAPD/issues/2961
 [#2970]: https://github.com/CMSgov/eAPD/issues/2970
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
+[#3065]: https://github.com/CMSgov/eAPD/issues/3065
 [#3093]: https://github.com/CMSgov/eAPD/issues/3093
