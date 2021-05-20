@@ -1,4 +1,4 @@
-import { Button } from '@cmsgov/design-system';
+import { Alert, Button } from '@cmsgov/design-system';
 import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -61,12 +61,9 @@ const ApdList = ({
           <div className="ds-u-padding-top--2">
             <UpgradeBrowser />
             {error && (
-              <div className="ds-c-alert ds-c-alert--error">
-                <div className="ds-c-alert__body">
-                  <h2 className="ds-c-alert__heading">Error status</h2>
-                  <p className="ds-c-alert__text">{error}</p>
-                </div>
-              </div>
+              <Alert variation="error" role="alert">
+                {error}
+              </Alert>
             )}
             <div className="ds-l-row ds-u-margin-top--7">
               <div className="ds-l-col--8 ds-u-margin-x--auto">
