@@ -32,7 +32,6 @@ const unauthenticatedTest = (method, url) => {
   it('when unauthenticated', async () => {
     const response = await api[method](url);
     expect(response.status).toEqual(401);
-    expect(response.data).toBeFalsy();
   });
 };
 
@@ -41,7 +40,6 @@ const unauthorizedTest = (method, url) => {
     const authenticatedClient = login('no-permissions');
     const response = await authenticatedClient[method](url);
     expect(response.status).toEqual(403);
-    expect(response.data).toBeFalsy();
   });
 };
 
