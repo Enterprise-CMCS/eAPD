@@ -3,6 +3,7 @@
 Anticipated release: May 17, 2021
 
 #### 🚀 New features
+
 - Allow multiple states to be selected in onboarding process ([#2638])
 
 - Updated delete dialog to use thematically consistent modal dialogs instead of basic alerts. ([#2926])
@@ -10,6 +11,7 @@ Anticipated release: May 17, 2021
 - Update State Admin Notification ([#3065])
 
 #### 🐛 Bugs fixed
+
 - Investigate why rich text editor is losing formatting after page reload ([#2961])
 - Add activity label on nav isn't accurate ([#3010])
 
@@ -20,6 +22,7 @@ Anticipated release: May 17, 2021
 - Updates error codes ([#2550])
 - Updates text on dashboard ([#2970])
 - Update Github templates ([#3093])
+- Add a mongo server to the local environment ([#3105])
 
 # Previous releases
 
@@ -36,3 +39,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
 [#3065]: https://github.com/CMSgov/eAPD/issues/3065
 [#3093]: https://github.com/CMSgov/eAPD/issues/3093
+[#3105]: https://github.com/CMSgov/eAPD/issues/3105
