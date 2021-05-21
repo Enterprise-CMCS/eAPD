@@ -1,16 +1,36 @@
 import PropTypes from 'prop-types';
-import React, { useReducer } from 'react';
+import React, { useReducer, Fragment } from 'react';
+
+import { connect } from 'react-redux';
 
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
-
 import AuthenticationForm from '../components/AuthenticationForm';
+
 import { STATES } from '../util/states';
 
-const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
+const StateAccessRequest = ({ 
+  saveAction, 
+  errorMessage, 
+  fetching, 
+  currentAffiliations
+}) => {
+
+  // Need to exclude affiliations that are denied/
+  const existingAffiliations = currentAffiliations.map(element => { 
+    const stateDetails = STATES.find(item => item.id === element.state_id)
+    return { id: element.state_id, name: stateDetails.name, disabled: true } 
+  });
+  
+  const availableStates = STATES.filter( item => {
+    return !existingAffiliations.find(affiliation => {
+      return affiliation.id === item.id;
+    });
+  });
+
 
   const initialState = {
-    fullStateList: STATES,
-    filteredStates: STATES,
+    fullStateList: availableStates,
+    filteredStates: availableStates,
     selectedStates: [],
     inputValue: ''
   };
@@ -66,12 +86,30 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
     saveAction(state.selectedStates);
   };
 
+  const cardTitle = existingAffiliations.length > 0 ? "Manage Account" : "Verify Your Identity"
+
+  const UserExistingAffiliations = () => {
+    return (
+      <Fragment>
+        <p className="ds-u-margin-bottom--0">Current Affiliations</p>
+        <p className="ds-u-margin-top--0 ds-u-font-size--small">This list includes all states you are currently affiliated with. Including requests and states you are denied/revoked access to.</p>
+        {existingAffiliations.map(el => {
+          return (
+            <Badge className="ds-u-margin-bottom--1" key={el.id}>
+              {el.name}
+            </Badge>     
+          )
+        })}
+      </Fragment>
+    )
+  };
+
   return (
     <div id="start-main-content">
       <AuthenticationForm
         id="state-access-request-form"
-        title="Verify Your Identity"
-        legend="Verify Your Identity"
+        title={cardTitle}
+        legend={cardTitle}
         cancelable={false}
         className="ds-u-margin-top--7"
         canSubmit={(state.selectedStates.length > 0)}
@@ -82,6 +120,12 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
         onSave={handleSubmit}
       >
         <div className="ds-u-margin-bottom--4">
+
+          {/* Todo: put this in another component / function component */}
+          {existingAffiliations.length > 0 && (
+          <UserExistingAffiliations />
+          )}
+
           <label
             htmlFor="state-selection"
             className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
@@ -123,13 +167,21 @@ const StateAccessRequest = ({ saveAction, errorMessage, fetching }) => {
 };
 
 StateAccessRequest.propTypes = {
+  currentAffiliations: PropTypes.array,
+  saveAction: PropTypes.func.isRequired,
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
-  saveAction: PropTypes.func.isRequired
 };
 
 StateAccessRequest.defaultProps = {
-  errorMessage: false
+  errorMessage: false,
+  currentAffiliations: []
 };
 
-export default StateAccessRequest;
+const mapStateToProps = state => ({
+  currentAffiliations: state.user.data.affiliations,
+});
+
+export default connect(mapStateToProps)(StateAccessRequest);;
+
+export { StateAccessRequest as plain, mapStateToProps };

@@ -77,6 +77,19 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
+        "displayName": "Connect(ManageAccount)",
+        "type": [Function],
+      }
+    }
+    key="/manage-account"
+    path="/manage-account"
+  />
+  <Connect(PrivateRoute)
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
         "displayName": "Connect(StateAdmin)",
         "type": [Function],
       }
