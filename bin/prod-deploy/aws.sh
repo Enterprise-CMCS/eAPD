@@ -169,7 +169,10 @@ function addEcosystemToUserData() {
       out_file: '/app/api/logs/Database-migration-out.log',
       env: {
         NODE_ENV: 'production',
-        DATABASE_URL: '$API_DATABASE_URL'
+        DATABASE_URL: '$API_DATABASE_URL',
+        OKTA_DOMAIN: '$OKTA_DOMAIN',
+        OKTA_SERVER_ID: '$OKTA_SERVER_ID',
+        OKTA_API_KEY: '$OKTA_API_KEY'
       }
     },{
       name: 'Database seeding',
@@ -180,7 +183,10 @@ function addEcosystemToUserData() {
       out_file: '/app/api/logs/Database-seeding-out.log',
       env: {
         NODE_ENV: 'production',
-        DATABASE_URL: '$API_DATABASE_URL'
+        DATABASE_URL: '$API_DATABASE_URL',
+        OKTA_DOMAIN: '$OKTA_DOMAIN',
+        OKTA_SERVER_ID: '$OKTA_SERVER_ID',
+        OKTA_API_KEY: '$OKTA_API_KEY'
       }
     }]
   };" | base64 -w 0`
