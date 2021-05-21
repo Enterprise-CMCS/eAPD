@@ -1,10 +1,12 @@
 const logger = require('../../logger')('user seeder');
+const { states } = require('../../util/states');
 
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
 
   logger.info('Retrieving user ids from Okta');
   const { id: regularUserId } = (await oktaClient.getUser('em@il.com')) || {};
+  const { id: sysAdminId } = (await oktaClient.getUser('sysadmin')) || {};
   const { id: fedAdminId } = (await oktaClient.getUser('fedadmin')) || {};
   const { id: stateAdminId } = (await oktaClient.getUser('stateadmin')) || {};
   const { id: stateStaffId } = (await oktaClient.getUser('statestaff')) || {};
@@ -16,6 +18,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const { id: revokedRoleId } = (await oktaClient.getUser('revokedrole')) || {};
 
   logger.info('Retrieving role ids from database');
+  const sysAdminRoleId = await knex('auth_roles')
+    .where({ name: 'eAPD System Admin' })
+    .first()
+    .then(role => role.id);
   const fedAdminRoleId = await knex('auth_roles')
     .where({ name: 'eAPD Federal Admin' })
     .first()
@@ -34,7 +40,14 @@ const createUsersToAdd = async (knex, oktaClient) => {
     .then(role => role.id);
 
   logger.info('Setting up affiliations to add');
-  const oktaAffiliations = [];
+  const oktaAffiliations = states.map(state => ({
+    user_id: sysAdminId,
+    state_id: state.id,
+    role_id: sysAdminRoleId,
+    status: 'approved',
+    updated_by: 'seeds',
+    username: 'sysadmin'
+  }));
 
   oktaAffiliations.push({
     user_id: regularUserId || '',
@@ -45,7 +58,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
     username: 'em@il.com'
   });
 
-
   oktaAffiliations.push({
     user_id: fedAdminId || '',
     state_id: 'ak',
@@ -54,7 +66,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
     updated_by: 'seeds',
     username: 'fedadmin'
   });
-
 
   oktaAffiliations.push({
     user_id: stateAdminId || '',
@@ -82,7 +93,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
     updated_by: 'seeds',
     username: 'statecontractor'
   });
-
 
   oktaAffiliations.push({
     user_id: requestedRoleId || '',
