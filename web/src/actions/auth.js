@@ -281,7 +281,6 @@ export const loginOtp = otp => async dispatch => {
   return null;
 };
 
-// ty note: to support the management/updating should I duplicate this method?
 export const createAccessRequest = states => async dispatch => {
   let failureReason = null;
   dispatch(requestAccessToState());
