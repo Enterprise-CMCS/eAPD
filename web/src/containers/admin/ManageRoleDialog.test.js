@@ -24,7 +24,7 @@ describe('<ManageRoleDialog />', () => {
   };
   test('renders dialog box title', () => {
     const component = shallow(<ManageRoleDialog {...props} />);
-    expect(component.find('Edit Permissions')).toBeTruthy();
+    expect(component.find('Edit Role')).toBeTruthy();
   });
 
   test('renders affiliation information', () => {

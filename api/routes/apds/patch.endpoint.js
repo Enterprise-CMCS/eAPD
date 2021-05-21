@@ -33,7 +33,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
     it(`with an APD in a state other than the user's state`, async () => {
       const response = await api.patch(url(4000));
 
-      expect(response.status).toEqual(401);
+      expect(response.status).toEqual(403);
       expect(response.data).toMatchSnapshot();
     });
 

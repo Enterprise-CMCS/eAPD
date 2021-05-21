@@ -62,7 +62,7 @@ const ManageRoleDialog = ({
   return (
     <Dialog
       onExit={hideManageModal}
-      heading="Edit Permissions"
+      heading="Edit Role"
       actions={[
         <Button
           className="ds-u-margin-right--3 ds-u-margin-top--2"
@@ -87,7 +87,7 @@ const ManageRoleDialog = ({
       </p>
       <Dropdown
         options={dropdownOptions}
-        hint="A State Coordinator is someone who works for a state. A State Contractor is someone who works for a vendor on behalf of the state."
+        hint="eAPD State Staff is a state employee. eAPD State Contractor is someone who works for a vendor on behalf of the state."
         size="medium"
         label="Role"
         name="selectedPermission"
