@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { createAccessRequest, completeAccessRequest } from '../../actions/auth';
 
@@ -25,8 +25,8 @@ const ManageAccount = ({
   };
 
   const handleCompleteAccessRequest = () => {
-    history.push('/')
-    // <Redirect to="/" />
+    completeAccessRequest();
+    history.push('/');
   };
 
   return (

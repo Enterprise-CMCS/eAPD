@@ -14,8 +14,7 @@ const StateAccessRequest = ({
   fetching, 
   currentAffiliations
 }) => {
-
-  // Need to exclude affiliations that are denied/
+  // Todo: Exclude revoked/denied states?
   const existingAffiliations = currentAffiliations.map(element => { 
     const stateDetails = STATES.find(item => item.id === element.state_id)
     return { id: element.state_id, name: stateDetails.name, disabled: true } 
@@ -58,7 +57,7 @@ const StateAccessRequest = ({
           inputValue: ''
         }
       default:
-        throw new Error();
+        throw new Error("Unrecognized action provided to StateAccessRequest reducer hook");
     }
   }
   
@@ -92,7 +91,7 @@ const StateAccessRequest = ({
     return (
       <Fragment>
         <p className="ds-u-margin-bottom--0">Current Affiliations</p>
-        <p className="ds-u-margin-top--0 ds-u-font-size--small">This list includes all states you are currently affiliated with. Including requests and states you are denied/revoked access to.</p>
+        <p className="ds-u-margin-top--0 ds-u-font-size--small">This list includes all states you are currently affiliated with. Including requests and states you are denied/revoked access to. To make updates to these affiliations, reach out to your State Administrator.</p>
         {existingAffiliations.map(el => {
           return (
             <Badge className="ds-u-margin-bottom--1" key={el.id}>
@@ -121,9 +120,8 @@ const StateAccessRequest = ({
       >
         <div className="ds-u-margin-bottom--4">
 
-          {/* Todo: put this in another component / function component */}
           {existingAffiliations.length > 0 && (
-          <UserExistingAffiliations />
+            <UserExistingAffiliations />
           )}
 
           <label
