@@ -1066,7 +1066,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [{ type: actions.STATE_ACCESS_REQUEST }];
       const response = await store.dispatch(
-        actions.createAccessRequest(['fl'])
+        actions.createAccessRequest([{name: 'Florida', id: 'fl'}])
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toEqual('/login/affiliations/thank-you');
@@ -1080,7 +1080,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [{ type: actions.STATE_ACCESS_REQUEST }];
       const response = await store.dispatch(
-        actions.createAccessRequest(['fl', 'md', 'az'])
+        actions.createAccessRequest([{name: 'Florida', id: 'fl'}, {name: 'Maryland', id: 'md'}, {name: 'Arizona', id: 'az'}])
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toEqual('/login/affiliations/thank-you');
@@ -1101,7 +1101,7 @@ describe('auth actions', () => {
         }
       ];
       const response = await store.dispatch(
-        actions.createAccessRequest(['fl'])
+        actions.createAccessRequest([{name: 'Florida', id: 'fl'}])
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toBeNull();
@@ -1125,7 +1125,7 @@ describe('auth actions', () => {
         }
       ];
       const response = await store.dispatch(
-        actions.createAccessRequest(['fl', 'md', 'az'])
+        actions.createAccessRequest([{name: 'Florida', id: 'fl'},{name: 'Maryland', id: 'md'}, {name: 'Arizona', id: 'az'}])
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toBeNull();
