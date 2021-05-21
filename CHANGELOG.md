@@ -3,6 +3,7 @@
 Anticipated release: May 17, 2021
 
 #### 🚀 New features
+
 - Allow multiple states to be selected in onboarding process ([#2638])
 
 - Updated delete dialog to use thematically consistent modal dialogs instead of basic alerts. ([#2926])
@@ -10,6 +11,7 @@ Anticipated release: May 17, 2021
 - Update State Admin Notification ([#3065])
 
 #### 🐛 Bugs fixed
+
 - Investigate why rich text editor is losing formatting after page reload ([#2961])
 - Add activity label on nav isn't accurate ([#3010])
 
@@ -17,6 +19,7 @@ Anticipated release: May 17, 2021
 
 - Updated field labels and descriptions in the Private Contractor section of activities ([#2940])
 - Upgraded modules ([#2947])
+- Update Admin role ([#2964])
 - Updates error codes ([#2550])
 - Updates text on dashboard ([#2970])
 - Update Github templates ([#3093])
@@ -25,13 +28,14 @@ Anticipated release: May 17, 2021
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2638]: https://github.com/CMSgov/eAPD/issues/2638
 [#2926]: https://github.com/CMSgov/eAPD/issues/2926
 [#2929]: https://github.com/CMSgov/eAPD/issues/2929
-[#2638]: https://github.com/CMSgov/eAPD/issues/2638
 [#2940]: https://github.com/CMSgov/eAPD/issues/2940
 [#2947]: https://github.com/CMSgov/eAPD/issues/2947
 [#2550]: https://github.com/CMSgov/eAPD/issues/2550
 [#2961]: https://github.com/CMSgov/eAPD/issues/2961
+[#2964]: https://github.com/CMSgov/eAPD/issues/2964
 [#2970]: https://github.com/CMSgov/eAPD/issues/2970
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
 [#3065]: https://github.com/CMSgov/eAPD/issues/3065
