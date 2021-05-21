@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, axe } from '../shared/apd-testing-library';
 import StateAccessRequest from './StateAccessRequest';
 
 const defaultProps = {
@@ -8,9 +8,10 @@ const defaultProps = {
   fetching: false
 };
 
+
 // https://testing-library.com/docs/example-input-event/
-const setup = (props = {}) =>
-  renderWithConnection(<StateAccessRequest {...defaultProps} {...props} />);
+const setup = (props = {}) =>  renderWithConnection(<StateAccessRequest {...defaultProps} {...props} />);
+let setupWithCustomState;
 
 describe('<StateAccessRequest />', () => {
   it('should not fail any accessibility tests', async () => {
@@ -18,9 +19,65 @@ describe('<StateAccessRequest />', () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('renders title', () => {
-    const { getByRole } = setup();
-    expect(getByRole('heading', { name: 'Verify Your Identity' })).toBeTruthy();
+  it('renders correct title when no existing affiliations', () => {
+    setupWithCustomState = renderWithConnection(<StateAccessRequest />,
+      {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              affiliations: []
+            }
+          }
+        }
+      }
+    );
+
+  const { getByRole } = setupWithCustomState;
+  expect(getByRole('heading', { name: 'Verify Your Identity' })).toBeTruthy();
+  });
+
+  it('renders correct title(s) with existing affiliations', () => {
+    setupWithCustomState = renderWithConnection(<StateAccessRequest />,
+        {
+          initialState: {
+            user: {
+              data: {
+                affiliations: [
+                  {
+                    state_id: 'mo',
+                  }
+                ]
+              }
+            }
+          }
+        }
+      );
+
+    const { getByRole, getByText } = setupWithCustomState;
+    expect(getByRole('heading', { name: 'Manage Account' })).toBeTruthy();
+    expect(getByText('Current Affiliations')).toBeTruthy();
+  });
+
+  it('renders the current affiliations', () => {
+    setupWithCustomState = renderWithConnection(<StateAccessRequest />,
+        {
+          initialState: {
+            user: {
+              data: {
+                affiliations: [
+                  {
+                    state_id: 'az',
+                  }
+                ]
+              }
+            }
+          }
+        }
+      );
+
+    const { getByText } = setupWithCustomState;
+    expect(getByText('Arizona')).toBeTruthy();
   });
 
   it('renders label', () => {
