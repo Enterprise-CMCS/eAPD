@@ -107,3 +107,39 @@ systemctl restart nginx
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v14.16.0/bin /home/ec2-user/.nvm/versions/node/v14.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart'
+
+# These logs aren't created until after the Instance is provisioned and need to be added to CloudWatch as a last step
+touch /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
+cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
+
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
+            "log_group_name": "test/app/api/logs/eAPD-API-error-0.log"
+          },
+          {
+            "file_path": "/var/log/nginx/access.log*",
+            "log_group_name": "test/var/log/nginx/access.log"
+          },
+          {
+            "file_path": "/var/log/nginx/error.log*",
+            "log_group_name": "test/var/log/nginx/error.log"
+          },
+          {
+            "file_path": "/var/log/awslogs.log*",
+            "log_group_name": "test/var/log/awslogs.log"
+          }
+        ]
+      }
+    }
+  }
+}
+
+CWLAUNCHLOGCONFIG
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/launch-log.json
+
