@@ -31,15 +31,15 @@ const ManageAccount = ({
 
   return (
     <div>
-      {showConfirmation && <StateAccessRequestConfirmation action={handleCompleteAccessRequest} />}
-      {!showConfirmation && (
-        <StateAccessRequest
-          saveAction={handleCreateAccessRequest}
-          fetching={false}
-          errorMessage={null}
-          currentAffiliations={currentAffiliations}
-        />
-      )}
+      {showConfirmation ? 
+        <StateAccessRequestConfirmation action={handleCompleteAccessRequest} />
+        : <StateAccessRequest
+            saveAction={handleCreateAccessRequest}
+            fetching={false}
+            errorMessage={null}
+            currentAffiliations={currentAffiliations}
+          />
+      }
     </div>
   );
 };
