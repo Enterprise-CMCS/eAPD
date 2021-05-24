@@ -15,6 +15,9 @@ const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
 const openAPI = require('./routes/openAPI/index');
+const setupMongoDB = require('./db/mongodb');
+
+setupMongoDB();
 
 const api = express();
 
