@@ -68,6 +68,9 @@ describe('<StateAccessRequest />', () => {
                 affiliations: [
                   {
                     state_id: 'az',
+                  },
+                  {
+                    state_id: 'md',
                   }
                 ]
               }
@@ -78,6 +81,7 @@ describe('<StateAccessRequest />', () => {
 
     const { getByText } = setupWithCustomState;
     expect(getByText('Arizona')).toBeTruthy();
+    expect(getByText('Maryland')).toBeTruthy();
   });
 
   it('renders label', () => {
