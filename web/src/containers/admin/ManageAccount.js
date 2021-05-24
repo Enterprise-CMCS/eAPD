@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { createAccessRequest, completeAccessRequest } from '../../actions/auth';
+import { updateAccessRequest as actualUpdateAccessRequest } from '../../actions/auth';
 
 import StateAccessRequest from '../StateAccessRequest';
 import StateAccessRequestConfirmation from '../StateAccessRequestConfirmation';
 
 const ManageAccount = ({
   currentAffiliations, 
-  createAccessRequest: createAccessRequestAction
+  updateAccessRequest,
+  error
 }) => {
 
   const history = useHistory();
@@ -19,43 +20,52 @@ const ManageAccount = ({
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleCreateAccessRequest = async states => {
-    await createAccessRequestAction(states).then(() => {
+    await updateAccessRequest(states).then(() => {
       setShowConfirmation(true);
     });
   };
 
   const handleCompleteAccessRequest = () => {
-    completeAccessRequest();
     history.push('/');
   };
 
+  if(error) {
+    setShowConfirmation(false);
+  }
+
+  // todo: get errorMessage from redux and display it
   return (
-    <div>
+    <Fragment>
       {showConfirmation ? 
         <StateAccessRequestConfirmation action={handleCompleteAccessRequest} />
         : <StateAccessRequest
             saveAction={handleCreateAccessRequest}
             fetching={false}
-            errorMessage={null}
+            errorMessage={error}
             currentAffiliations={currentAffiliations}
           />
       }
-    </div>
+    </Fragment>
   );
+};
+
+ManageAccount.defaultProps = {
+  error: null
 };
 
 ManageAccount.propTypes = {
   currentAffiliations: PropTypes.array.isRequired,
-  createAccessRequest: PropTypes.func.isRequired
+  updateAccessRequest: PropTypes.func.isRequired,
+  error: PropTypes.string
 };
 
 const mapDispatchToProps = {
-  createAccessRequest,
-  completeAccessRequest
+  updateAccessRequest: actualUpdateAccessRequest
 };
 
 const mapStateToProps = state => ({
   currentAffiliations: state.user.data.affiliations,
+  error: state.auth.error
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccount);
