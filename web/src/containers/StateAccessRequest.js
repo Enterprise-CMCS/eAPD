@@ -17,7 +17,7 @@ const StateAccessRequest = ({
   // Todo: Exclude revoked/denied states?
   const existingAffiliations = currentAffiliations.map(element => { 
     const stateDetails = STATES.find(item => item.id === element.state_id)
-    return { id: element.state_id, name: stateDetails.name, disabled: true } 
+    return { id: element.state_id, name: stateDetails.name } 
   });
   
   const availableStates = STATES.filter( item => {
