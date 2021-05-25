@@ -282,8 +282,6 @@ export const loginOtp = otp => async dispatch => {
   return null;
 };
 
-
-// remove the duplication here...
 export const createAccessRequest = states => async dispatch => {
   let failureReason = null;
   dispatch(requestAccessToState());
