@@ -185,7 +185,6 @@
   },
   "resolutions": {
     "hosted-git-info": "^4.0.2",
-    "trim": "0.0.3",
-    "browserslist": "4.16.5"
+    "trim": "0.0.3"
   }
 }
