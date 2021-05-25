@@ -7,7 +7,7 @@ const getNewApd = require('./post.data');
 
 module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
   logger.silly('setting up POST /apds/ route');
-  app.post('/apds', can('edit-document'), async (req, res) => {
+  app.post('/apds', can('edit-document'), async (req, res, next) => {
     logger.silly({ id: req.id, message: 'handling POST /apds route' });
 
     try {
@@ -43,7 +43,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
           message: 'Newly-created APD fails validation'
         });
         logger.error({ id: req.id, message: validateApd.errors });
-        return res.status(500).end();
+        return next({ status: 400, message: validateApd.errors });
       }
 
       const id = await createAPD({
@@ -60,7 +60,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       });
     } catch (e) {
       logger.error({ id: req.id, message: e });
-      return res.status(500).end();
+      return next(e);
     }
   });
 };

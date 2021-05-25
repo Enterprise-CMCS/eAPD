@@ -49,15 +49,6 @@ describe('APD edit actions for APD key personnel', () => {
     ]);
   });
 
-  it('does not dispatch an action to remove a key person if denied', () => {
-    const store = mockStore('remove state');
-    const global = { confirm: jest.fn().mockReturnValue(false) };
-
-    store.dispatch(removeKeyPerson(19, { global }));
-
-    expect(store.getActions()).toEqual([]);
-  });
-
   it('dispatches an action for setting a key person name', () => {
     expect(setKeyPersonName(1, 'person name')).toEqual({
       type: EDIT_APD,
