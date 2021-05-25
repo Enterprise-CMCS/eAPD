@@ -6,7 +6,7 @@ import Countdown, { zeroPad } from 'react-countdown';
 import { v4 as uuidv4 } from 'uuid';
 import { useHistory } from 'react-router-dom';
 
-import { Spinner } from '../components/Icons';
+import Icon, { Spinner, faExclamationTriangle } from '../components/Icons';
 
 import { extendSession, logout } from '../actions/auth';
 
@@ -48,17 +48,18 @@ const SessionEndingAlert = ({
       {isSessionEnding && (
         <Dialog
           key={uuidv4()}
-          heading="Your session is expiring."
+          heading={
+            <div>
+              <Icon icon={faExclamationTriangle} /> Your session is expiring.
+            </div>
+          }
           alert
           getApplicationNode={() =>
             document.getElementById('session-ending-modal')
           }
+          className="ds-u-left-border-warning"
           actionsClassName="ds-u-text-align--right ds-u-margin-bottom--0"
           actions={[
-            <Button variation="primary" onClick={extend} key={uuidv4()}>
-              {isExtendingSession && <Spinner />}
-              {isExtendingSession ? ' Continuing' : 'Continue'}
-            </Button>,
             <Button
               variation="transparent"
               onClick={logoutAndRedirect}
@@ -66,10 +67,14 @@ const SessionEndingAlert = ({
             >
               {isLoggingOut && <Spinner />}
               {isLoggingOut ? ' Signing out' : 'Sign out'}
+            </Button>,
+            <Button variation="primary" onClick={extend} key={uuidv4()}>
+              {isExtendingSession && <Spinner />}
+              {isExtendingSession ? ' Signing In' : 'Stay Signed In'}
             </Button>
           ]}
           ariaCloseLabel="Close and continue"
-          closeText="Close"
+          closeText={<span className="ds-u-display--none" />}
           onExit={extend}
           underlayClickExits={false}
           escapeExitDisabled
