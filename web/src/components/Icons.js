@@ -21,7 +21,8 @@ import {
   faUserCog,
   faUserPlus,
   faUserShield,
-  faEnvelope
+  faEnvelope,
+  faPeopleArrows
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -74,7 +75,8 @@ export {
   UnlockIcon,
   faUserCog,
   faUserShield,
-  faUserPlus
+  faUserPlus,
+  faPeopleArrows
 };
 
 export default FontAwesomeIcon;
