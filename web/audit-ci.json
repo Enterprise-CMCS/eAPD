@@ -1,11 +1,6 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [
-    1693,
-    1700,
-    1747,
-    "1745|webpack-dev-server>bonjour>multicast-dns>dns-packet"
-  ],
+  "allowlist": [1693, 1700],
   "registry": "https://registry.npmjs.org"
 }
