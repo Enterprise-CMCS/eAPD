@@ -4,6 +4,7 @@ import ApdApplication from './containers/ApdApplication';
 import ApdViewOnly from './containers/viewOnly/Apd';
 import LoginApplication from './containers/LoginApplication';
 import StateAdmin from './containers/admin/StateAdmin';
+import StateSwitcher from './containers/StateSwitcher';
 import Logout from './containers/Logout';
 
 const routes = [
@@ -12,6 +13,7 @@ const routes = [
   { path: '/print', component: ApdViewOnly, exact: true, isPublic: false },
   { path: '/login', component: LoginApplication, isPublic: true, isCard: true },
   { path: '/logout', component: Logout, isPublic: true },
+  { path: '/switch-state', component: StateSwitcher, isPublic: false },
   { path: '/state-admin', component: StateAdmin, isPublic: false },
   { component: NoMatch, isPublic: true }
 ];
