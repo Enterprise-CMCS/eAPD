@@ -18,8 +18,7 @@ import Icon, {
   faChevronLeft,
   faSignOutAlt,
   faEdit,
-  faUserShield,
-  faPeopleArrows
+  faUserShield
 } from './Icons';
 
 class Header extends Component {
@@ -138,20 +137,6 @@ class Header extends Component {
                             </Link>
                           </li>
                         )}
-                        {/* Todo: Add logic to only show this if user has > 1 affiliations */}
-                        <li>
-                          <Link
-                            to="/switch-state"
-                            onClick={this.toggleDropdown}
-                            className="nav--dropdown__action"
-                            >
-                              <Icon
-                                icon={faPeopleArrows}
-                                style={{ width: '14px' }}
-                              />
-                              Switch State Affiliation
-                            </Link>
-                        </li>
                         <li>
                           <Link
                             to="/manage-account"
