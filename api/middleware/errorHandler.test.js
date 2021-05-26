@@ -17,10 +17,17 @@ tap.test('errorHandler middleware', async t => {
     next = sinon.stub();
   });
 
-  t.test('when an error occurs', async t => {
+  t.test('when an error string occurs', async t => {
     err = 'error';
     errorHandler(err, req, res, next);
-    t.ok(res.status.calledWith(500), 'HTTP status set to 500');
+    t.ok(res.status.calledWith(400), 'HTTP status set to 400');
+    t.ok(res.end.called, 'response is terminated');
+  });
+
+  t.test('when an Error occurs', async t => {
+    err = new Error('error');
+    errorHandler(err, req, res, next);
+    t.ok(res.status.calledWith(400), 'HTTP status set to 400');
     t.ok(res.end.called, 'response is terminated');
   });
 

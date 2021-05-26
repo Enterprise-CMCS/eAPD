@@ -82,7 +82,7 @@ tap.test('APD-related middleware', async middlewareTests => {
     });
 
     accessApdTests.test(
-      'sends a 401 if the user does not have access to the APD',
+      'sends a 403 if the user does not have access to the APD',
       async invalidTest => {
         const req = {
           user: { state: 'not florp' },
@@ -90,7 +90,7 @@ tap.test('APD-related middleware', async middlewareTests => {
         };
         await userCanAccessAPD({ loadApd: loadApdFake })(req, res, next);
 
-        invalidTest.ok(res.status.calledWith(401), 'HTTP status is set to 401');
+        invalidTest.ok(res.status.calledWith(403), 'HTTP status is set to 403');
         invalidTest.ok(res.end.calledOnce, 'response is closed');
         invalidTest.ok(next.notCalled, 'next is not called');
       }

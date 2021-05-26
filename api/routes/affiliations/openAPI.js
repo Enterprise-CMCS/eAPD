@@ -138,9 +138,11 @@ const postAffiliations = {
         content: jsonResponse(id)
       },
       400: {
-        description: 'Record exists, or US State ID is invalid'
+        description: 'Record does not exist or US State ID is invalid'
       },
-      401: responses.unauthed[401]
+      401: {
+        ...responses.unauthed[401]
+      }
     },
     security: [{ bearerAuth: [] }]
   }
@@ -156,9 +158,8 @@ const getAffiliation = {
         description: 'A single user affiliation with a US State',
         content: jsonResponse(affiliationSchema)
       },
-      400: {
-        description:
-          'The stateId and affiliation ID do not correspond to a known record'
+      404: {
+        description: 'The affiliation does not exist'
       },
       ...responses.unauthed
     },

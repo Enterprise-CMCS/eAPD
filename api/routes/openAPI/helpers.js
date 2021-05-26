@@ -1,14 +1,3 @@
-module.exports.responses = {
-  unauthed: {
-    401: {
-      description: 'Not logged in'
-    },
-    403: {
-      description: 'Does not have permission to this activity'
-    }
-  }
-};
-
 const jsonResponse = schema => ({
   'application/json': {
     schema
@@ -20,20 +9,32 @@ const arrayOf = schema => ({
   items: schema
 });
 
+const errorToken = jsonResponse({
+  type: 'object',
+  properties: {
+    error: {
+      type: 'string',
+      description:
+        'A string token indicating the error, which could be translated into a user-readable string for display by the client'
+    }
+  }
+});
+
 module.exports.schema = {
   jsonResponse,
   arrayOf,
+  errorToken
+};
 
-  errorToken: jsonResponse({
-    type: 'object',
-    properties: {
-      error: {
-        type: 'string',
-        description:
-          'An string token indicating the error, which could be translated into a user-readable string for display by the client'
-      }
+module.exports.responses = {
+  unauthed: {
+    401: {
+      description: 'The user is not logged in'
+    },
+    403: {
+      description: 'The user does not have permission to perform this activity'
     }
-  })
+  }
 };
 
 module.exports.requiresAuth = (
