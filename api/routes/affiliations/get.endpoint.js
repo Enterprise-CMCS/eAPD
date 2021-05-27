@@ -35,9 +35,9 @@ describe('Affiliations endpoint | GET', () => {
       expect(response.status).toEqual(200);
     });
 
-    it('returns 400', async () => {
+    it('returns 404', async () => {
       const response = await api.get('/states/ak/affiliations/9000');
-      expect(response.status).toEqual(400);
+      expect(response.status).toEqual(404);
     });
   });
 });
