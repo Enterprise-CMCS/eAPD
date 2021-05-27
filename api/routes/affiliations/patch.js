@@ -24,15 +24,19 @@ module.exports = (app, { db = knex } = {}) => {
     '/states/:stateId/affiliations/:id',
     can('edit-affiliations'),
     validForState('stateId'),
-    async (request, response) => {
+    async (request, response, next) => {
       const userId = request.user.id;
       const { stateId, id } = request.params;
+
       if (!request.body || !request.body.status || !request.body.roleId) {
         logger.error({
           id: request.id,
           message: 'affiliation status or roleId not provided'
         });
-        response.status(400).end();
+        response
+          .status(400)
+          .send({ error: 'affiliation status or roleId not provided' })
+          .end();
         return;
       }
 
@@ -47,33 +51,38 @@ module.exports = (app, { db = knex } = {}) => {
           id: request.id,
           message: `user ${request.user.id} is attempting to edit their own role`
         });
-        response.status(401).end();
+        response.status(403).end();
         return;
       }
 
       const { status, roleId } = request.body;
       const audit = auditor(statusToAction(status), request);
 
-      db('auth_affiliations')
-        .where({ state_id: stateId, id })
-        .returning('*')
-        .update({
-          role_id: status !== 'approved' ? null : roleId,
-          status,
-          updated_by: userId
-        })
-        .then(rows => rows[0])
-        .then(row =>
-          audit.target({
-            userId: row.user_id,
-            stateId: row.state_id,
-            roleId: row.role_id,
-            status: row.status
+      try {
+        db('auth_affiliations')
+          .where({ state_id: stateId, id })
+          .returning('*')
+          .update({
+            role_id: status !== 'approved' ? null : roleId,
+            status,
+            updated_by: userId
           })
-        )
-        .then(() => audit.log())
-        .then(() => response.status(200).end())
-        .catch(() => response.status(400).end());
+          .then(rows => rows[0])
+          .then(row =>
+            audit.target({
+              userId: row.user_id,
+              stateId: row.state_id,
+              roleId: row.role_id,
+              status: row.status
+            })
+          )
+          .then(() => audit.log())
+          .then(() => response.status(200).end())
+          .catch(next);
+      } catch (e) {
+        logger.error({ id: request.id, message: e });
+        next(e);
+      }
     }
   );
 

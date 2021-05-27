@@ -57,7 +57,7 @@ const getRolesAndActivities = async ({ db = knex } = {}) =>
     .select({
       id: 'roles.id',
       name: 'roles.name',
-      activities: db.raw('array_agg(activities.name)')
+      activities: db.raw('array_agg(activities.name)'),
     })
     .from({ rolesActivities: 'auth_role_activity_mapping' })
     .join(
@@ -89,7 +89,7 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
  * @returns {Object} { stateId: activities }
  */
 const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
-  const roles = await getRolesAndActivities();
+  const roles = (await getRolesAndActivities()) || [];
   return db
     .select({
       stateId: 'state_id',

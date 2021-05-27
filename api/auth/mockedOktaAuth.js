@@ -104,6 +104,14 @@ const mockVerifyJWT = token => {
       });
     });
   }
+  if (token === 'no-permissions-no-state') {
+    return new Promise(resolve => {
+      resolve({
+        sub: 'npno@email.com',
+        uid: 'no-permissions-no-state'
+      });
+    });
+  }
   if (token === 'all-permissions-no-state') {
     return new Promise(resolve => {
       resolve({
