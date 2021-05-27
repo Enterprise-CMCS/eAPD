@@ -72,7 +72,7 @@ module.exports = (
           id: request.id,
           message: `affiliation ${id} does not exist in ${stateId}`
         });
-        return response.status(400).end();
+        return response.status(404).end();
       } catch (e) {
         return next(e);
       }

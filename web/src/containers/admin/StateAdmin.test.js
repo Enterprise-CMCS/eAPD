@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { renderWithConnection, fireEvent, waitFor } from 'apd-testing-library';
+import {
+  renderWithConnection,
+  screen,
+  fireEvent,
+  waitFor
+} from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
 import axios from '../../util/api';
@@ -11,7 +16,6 @@ import {
   getRoleTypes
 } from '../../actions/admin';
 
-let renderUtils;
 const fetchMock = new MockAdapter(axios);
 
 const requestedAffiliation = {
@@ -101,39 +105,33 @@ describe('<StateAdmin />', () => {
           `/states/${initialState.user.data.state.id}/affiliations?status=pending`
         )
         .reply(200, []);
-      renderUtils = renderWithConnection(<StateAdmin {...props} />, {
+      renderWithConnection(<StateAdmin {...props} />, {
         initialState
       });
     });
 
     test('renders no results message', async () => {
-      const { getAllByText } = renderUtils;
-
       await waitFor(() => {
-        expect(getAllByText('No users on this tab at this time')).toHaveLength(
-          3
-        );
+        expect(
+          screen.getAllByText('No users on this tab at this time')
+        ).toHaveLength(3);
       });
     });
 
     test('renders header', async () => {
-      const { getByText } = renderUtils;
-
       await waitFor(() => {
         expect(
-          getByText('Maryland eAPD State Administrator Portal')
+          screen.getByText('Maryland eAPD State Administrator Portal')
         ).toBeTruthy();
       });
     });
 
     test('renders correct tabs', async () => {
-      const { getByText } = renderUtils;
-
       await waitFor(() => {
-        expect(getByText('Requests')).toBeTruthy();
+        expect(screen.getByText('Requests')).toBeTruthy();
       });
-      expect(getByText('Active')).toBeTruthy();
-      expect(getByText('Inactive')).toBeTruthy();
+      expect(screen.getByText('Active')).toBeTruthy();
+      expect(screen.getByText('Inactive')).toBeTruthy();
     });
   });
 
@@ -151,7 +149,7 @@ describe('<StateAdmin />', () => {
       fetchMock
         .onPatch(`/states/${stateId}/affiliations/${requestedAffiliation.id}`)
         .reply(200);
-      renderUtils = renderWithConnection(<StateAdmin {...props} />, {
+      renderWithConnection(<StateAdmin {...props} />, {
         initialState
       });
     });
@@ -159,30 +157,33 @@ describe('<StateAdmin />', () => {
     it('renders name, email, phone', async () => {
       // Note: we render the affiliations in each tab and update on tab change, so we
       // expect to see 3 instances which is why this is using getAllByText
-      const { getAllByText } = renderUtils;
       await waitFor(() => {
-        expect(getAllByText(requestedAffiliation.displayName)).toHaveLength(3);
+        expect(
+          screen.getAllByText(requestedAffiliation.displayName)
+        ).toHaveLength(3);
       });
-      expect(getAllByText(requestedAffiliation.email)).toHaveLength(3);
-      expect(getAllByText(requestedAffiliation.primaryPhone)).toHaveLength(3);
+      expect(screen.getAllByText(requestedAffiliation.email)).toHaveLength(3);
+      expect(
+        screen.getAllByText(requestedAffiliation.primaryPhone)
+      ).toHaveLength(3);
     });
 
     it('renders approve and deny buttons', async () => {
-      const { getByText } = renderUtils;
       await waitFor(() => {
-        expect(getByText('Approve')).toBeTruthy();
+        expect(screen.getByText('Approve')).toBeTruthy();
       });
-      expect(getByText('Deny')).toBeTruthy();
+      expect(screen.getByText('Deny')).toBeTruthy();
     });
 
     it('should open manage modal on approve', async () => {
-      const { getByText } = renderUtils;
       await waitFor(() => {
-        expect(getByText('Approve')).toBeTruthy();
+        expect(screen.getByText('Approve')).toBeTruthy();
       });
-      fireEvent.click(getByText('Approve'));
+      fireEvent.click(screen.getByText('Approve'));
       await waitFor(() => {
-        expect(getByText('Edit Permissions')).toBeInTheDocument();
+        expect(
+          screen.getByRole('heading', { name: 'Edit Role' })
+        ).toBeInTheDocument();
       });
     });
   });
@@ -200,37 +201,39 @@ describe('<StateAdmin />', () => {
         getAffiliations: jest.fn(),
         updateAffiliation: jest.fn()
       };
-      renderUtils = renderWithConnection(<StateAdmin {...props} />);
+      renderWithConnection(<StateAdmin {...props} />);
     });
 
     test('renders name, email, phone, role', () => {
-      const { getAllByText } = renderUtils;
-      expect(getAllByText(activeAffiliation.displayName)).toHaveLength(3);
-      expect(getAllByText(activeAffiliation.email)).toHaveLength(3);
-      expect(getAllByText(activeAffiliation.primaryPhone)).toHaveLength(3);
+      expect(screen.getAllByText(activeAffiliation.displayName)).toHaveLength(
+        3
+      );
+      expect(screen.getAllByText(activeAffiliation.email)).toHaveLength(3);
+      expect(screen.getAllByText(activeAffiliation.primaryPhone)).toHaveLength(
+        3
+      );
       // Only show role in the active tab
-      expect(getAllByText(activeAffiliation.role)).toHaveLength(1);
+      expect(screen.getAllByText(activeAffiliation.role)).toHaveLength(1);
     });
 
     test('renders edit role and revoke buttons', () => {
-      const { getByText } = renderUtils;
-      expect(getByText('Edit Role')).toBeTruthy();
-      expect(getByText('Revoke')).toBeTruthy();
+      expect(screen.getByText('Edit Role')).toBeTruthy();
+      expect(screen.getByText('Revoke')).toBeTruthy();
     });
 
     it('should open manage modal on Edit Role', async () => {
-      const { getByText } = renderUtils;
-      fireEvent.click(getByText('Edit Role'));
+      fireEvent.click(screen.getByText('Edit Role'));
       await waitFor(() => {
-        expect(getByText('Edit Permissions')).toBeInTheDocument();
+        expect(
+          screen.getByRole('heading', { name: 'Edit Role' })
+        ).toBeInTheDocument();
       });
     });
 
     it('should open confirmation modal on revoke', async () => {
-      const { getByText } = renderUtils;
-      fireEvent.click(getByText('Revoke'));
+      fireEvent.click(screen.getByText('Revoke'));
       await waitFor(() => {
-        expect(getByText('Confirm')).toBeInTheDocument();
+        expect(screen.getByText('Confirm')).toBeInTheDocument();
       });
     });
   });
@@ -248,28 +251,31 @@ describe('<StateAdmin />', () => {
         getAffiliations: jest.fn(),
         updateAffiliation: jest.fn()
       };
-      renderUtils = renderWithConnection(<StateAdmin {...props} />);
+      renderWithConnection(<StateAdmin {...props} />);
     });
 
     test('renders name, email, phone, status', () => {
-      const { getAllByText } = renderUtils;
-      expect(getAllByText(inactiveAffiliation.displayName)).toHaveLength(3);
-      expect(getAllByText(inactiveAffiliation.email)).toHaveLength(3);
-      expect(getAllByText(inactiveAffiliation.primaryPhone)).toHaveLength(3);
+      expect(screen.getAllByText(inactiveAffiliation.displayName)).toHaveLength(
+        3
+      );
+      expect(screen.getAllByText(inactiveAffiliation.email)).toHaveLength(3);
+      expect(
+        screen.getAllByText(inactiveAffiliation.primaryPhone)
+      ).toHaveLength(3);
       // Only show status in the active tab
-      expect(getAllByText(inactiveAffiliation.status)).toHaveLength(1);
+      expect(screen.getAllByText(inactiveAffiliation.status)).toHaveLength(1);
     });
 
     test('renders restore access button', () => {
-      const { getByText } = renderUtils;
-      expect(getByText('Restore Access')).toBeTruthy();
+      expect(screen.getByText('Restore Access')).toBeTruthy();
     });
 
     it('should open manage modal on Restore Access', async () => {
-      const { getByText } = renderUtils;
-      fireEvent.click(getByText('Restore Access'));
+      fireEvent.click(screen.getByText('Restore Access'));
       await waitFor(() => {
-        expect(getByText('Edit Permissions')).toBeInTheDocument();
+        expect(
+          screen.getByRole('heading', { name: 'Edit Role' })
+        ).toBeInTheDocument();
       });
     });
   });

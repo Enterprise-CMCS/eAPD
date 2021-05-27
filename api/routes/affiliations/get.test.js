@@ -62,6 +62,23 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
       invalidTest.ok(next.calledWith(err), 'pass error to middleware');
     });
 
+    handlerTest.test(
+      'sends an unauthorized error code if the user does not have the state',
+      async invalidTest => {
+        await handler(
+          {
+            params: { stateId: 'ar' },
+            query: {},
+            user: { state: { id: 'fl' } }
+          },
+          res
+        );
+
+        invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
+        invalidTest.ok(res.end.called, 'response is terminated');
+      }
+    );
+
     handlerTest.test('sends pending affiliations', async test => {
       const pending = [
         {
@@ -165,6 +182,20 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
     });
 
     handlerTest.test(
+      'sends an unauthorized error code if the user does not have access to the state of the affiliation',
+      async test => {
+        await handler(
+          { params: { stateId: 'ar', id: '1' }, user: { state: { id: 'fl' } } },
+          res,
+          next
+        );
+
+        test.ok(res.status.calledWith(403), 'HTTP status set to 403');
+        test.ok(res.end.called, 'response is terminuated');
+      }
+    );
+
+    handlerTest.test(
       'sends a not found error if there is no valid Affiliation',
       async test => {
         getPopulatedAffiliationById.returns(undefined);
@@ -178,8 +209,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
           next
         );
 
-        test.ok(res.status.calledWith(400), 'HTTP status set to 400');
-        test.ok(res.send.notCalled, 'no body is sent');
+        test.ok(res.status.calledWith(404), 'HTTP status set to 404');
         test.ok(res.end.called, 'response is terminated');
       }
     );

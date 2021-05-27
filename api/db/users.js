@@ -52,14 +52,15 @@ const populateUser = async (
 ) => {
   if (user) {
     const populatedUser = user;
-    populatedUser.permissions = await getUserPermissionsForStates(user.id);
-    populatedUser.states = await getUserAffiliatedStates(user.id);
-    populatedUser.affiliations = await getAffiliationsByUserId(user.id);
+    populatedUser.permissions =
+      (await getUserPermissionsForStates(user.id)) || [];
+    populatedUser.states = (await getUserAffiliatedStates(user.id)) || [];
+    populatedUser.affiliations = (await getAffiliationsByUserId(user.id)) || [];
 
     // grab the selected affiliation
     const selectedStateId = await getSelectedStateIdByUserId(user.id);
     logger.info({ selectedStateId, uid: user.id });
-    const affiliations = await getAffiliationsByUserId(user.id);
+    const affiliations = (await getAffiliationsByUserId(user.id)) || [];
 
     let affiliation;
     if (selectedStateId) {
@@ -69,7 +70,7 @@ const populateUser = async (
       affiliation = affiliations.find(Boolean);
     }
 
-    const roles = await getRolesAndActivities();
+    const roles = (await getRolesAndActivities()) || [];
     const role = affiliation && roles.find(r => r.id === affiliation.role_id);
 
     populatedUser.state =
