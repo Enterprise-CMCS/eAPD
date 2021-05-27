@@ -6,7 +6,10 @@ const setup = () => {
   mongoose.connection.on('error', err =>
     logger.error(`Error in MongoDB connection: ${err}`)
   );
-  mongoose.connection.on('connected', () => logger.info('MongoDB connected'));
+  mongoose.connection.on('connected', () => {
+    logger.info('MongoDB connected');
+    require('../models'); // eslint-disable-line global-require
+  });
   mongoose.connection.on('disconnected', () =>
     logger.verbose('MongoDB disconnected!')
   );
