@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // todo: use a selector to get affiliations
+// should we get the affiliations from user.data.state or auth.user.state??
 // import { getUserAffiliationForCurrentState } from '../reducers/user.selector';
 
 import { ChoiceList } from '@cmsgov/design-system';
 import CardForm from '../components/CardForm';
+
+import {
+  switchAffiliation
+} from '../actions/auth';
 
 // outline
 // fetch available states the user has access to from redux
@@ -15,11 +20,15 @@ import CardForm from '../components/CardForm';
 // then idk, we need to re-load the whole app with that state?
 
 const StateSwitcher = ({
-  affiliations
+  affiliations,
+  switchAffiliation: switchUserAffiliation
 }) => {
+
+  const [selectedAffiliation, setSelectedAffiliation] = useState('');
 
   const onSave = () => {
     console.log("onSave in StateSwitcher hit...");
+    switchUserAffiliation(selectedAffiliation);
   }
 
   const choiceList = affiliations.map(item => {
@@ -31,6 +40,8 @@ const StateSwitcher = ({
 
   const handleChoiceSelection = e => {
     console.log('change choice selection', e.target.value);
+    // todo: add error handling here
+    setSelectedAffiliation(e.target.value);
   }
 
   return (
@@ -55,7 +66,8 @@ const StateSwitcher = ({
 
 
 StateSwitcher.propTypes = {
-  affiliations: PropTypes.array.isRequired
+  affiliations: PropTypes.array.isRequired,
+  switchAffiliation: PropTypes.func.isRequired
 }
 
 StateSwitcher.defaultProps = {
@@ -66,6 +78,10 @@ const mapStateToProps = state => ({
   affiliations: state.user.data.affiliations,
 })
 
-export default connect(mapStateToProps)(StateSwitcher);
+const mapDispatchToProps = {
+  switchAffiliation
+};
 
-export { StateSwitcher as plain, mapStateToProps};
+export default connect(mapStateToProps, mapDispatchToProps)(StateSwitcher);
+
+export { StateSwitcher as plain, mapStateToProps, mapDispatchToProps};

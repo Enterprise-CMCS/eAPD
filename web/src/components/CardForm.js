@@ -106,7 +106,7 @@ CardForm.propTypes = {
   primaryButtonText: PropTypes.arrayOf(PropTypes.string),
   sectionName: PropTypes.string,
   success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   working: PropTypes.bool
 };
 
@@ -121,7 +121,8 @@ CardForm.defaultProps = {
   primaryButtonText: ['Save changes', 'Working'],
   sectionName: '',
   success: false,
-  working: false
+  working: false,
+  title: ''
 };
 
 export default CardForm;
