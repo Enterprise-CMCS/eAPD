@@ -1,8 +1,8 @@
-const { addDays, format, subDays } = require('date-fns')
+const { addDays, format, subDays } = require('date-fns');
 const logger = require('../../logger')('user seeder');
 const { states } = require('../../util/states');
 
-const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss'
+const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
 
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
@@ -42,20 +42,22 @@ const createUsersToAdd = async (knex, oktaClient) => {
     .where({ name: 'eAPD State Contractor' })
     .first()
     .then(role => role.id);
-  
+
   logger.info('Setting up affiliations and certifications to add');
   const oktaAffiliations = [];
-  const stateCertifications = []
+  const stateCertifications = [];
 
   if (sysAdminId) {
-    const oktaAffiliations = states.map(state => ({
-    user_id: sysAdminId,
-    state_id: state.id,
-    role_id: sysAdminRoleId,
-    status: 'approved',
-    updated_by: 'seeds',
-    username: 'sysadmin'
-  }));
+    oktaAffiliations.concat(
+      states.map(state => ({
+        user_id: sysAdminId,
+        state_id: state.id,
+        role_id: sysAdminRoleId,
+        status: 'approved',
+        updated_by: 'seeds',
+        username: 'sysadmin'
+      }))
+    );
   }
   if (regularUserId) {
     oktaAffiliations.push({
@@ -70,9 +72,12 @@ const createUsersToAdd = async (knex, oktaClient) => {
       username: regularUserId,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
-      certificationExpiration: format(subDays(new Date(), 35), PostgresDateFormat),
+      certificationExpiration: format(
+        subDays(new Date(), 35),
+        PostgresDateFormat
+      ),
       certifiedBy: 'seeds'
-    })
+    });
   }
   if (fedAdminId) {
     oktaAffiliations.push({
@@ -96,9 +101,12 @@ const createUsersToAdd = async (knex, oktaClient) => {
       username: stateAdminId,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
-      certificationExpiration: format(addDays(new Date(), 325), PostgresDateFormat),
+      certificationExpiration: format(
+        addDays(new Date(), 325),
+        PostgresDateFormat
+      ),
       certifiedBy: 'seeds'
-    })
+    });
   }
   if (stateStaffId) {
     oktaAffiliations.push({
@@ -113,9 +121,12 @@ const createUsersToAdd = async (knex, oktaClient) => {
       username: stateStaffId,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
-      certificationExpiration: format(subDays(new Date(), 35), PostgresDateFormat),
+      certificationExpiration: format(
+        subDays(new Date(), 35),
+        PostgresDateFormat
+      ),
       certifiedBy: 'seeds'
-    })
+    });
   }
   if (stateContractorId) {
     oktaAffiliations.push({
@@ -148,7 +159,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'revoked'
     });
   }
-  return {oktaAffiliations, stateCertifications};
+  return { oktaAffiliations, stateCertifications };
 };
 
 module.exports = {
