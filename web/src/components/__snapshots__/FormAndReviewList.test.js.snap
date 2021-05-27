@@ -366,7 +366,7 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
   className="form-and-review-list "
 >
   <Alert
-    headingLevel="2"
+    headingLevel="3"
     role="region"
     variation="error"
   >
@@ -403,7 +403,7 @@ exports[`FormAndReviewList component renders properly without an add button if t
   className="form-and-review-list "
 >
   <Alert
-    headingLevel="2"
+    headingLevel="3"
     role="region"
     variation="error"
   >
