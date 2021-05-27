@@ -121,10 +121,16 @@ const getCurrentUser = () => dispatch =>
       return null;
     });
 
-export const logout = () => async dispatch => {
+export const logout = () => dispatch => {
   dispatch(requestLogout());
-  await logoutAndClearTokens();
-  dispatch(completeLogout());
+  // todo: consider adding error handling or returning something
+  // to indicate that the calls to okta were successful
+  logoutAndClearTokens().then( () => {
+    console.log("in the .then of the logoutAndClearTokens() call");
+    dispatch(completeLogout()) 
+  }).catch(error => {
+    console.log('error attempting logout', error);
+  });
 };
 
 export const extendSession = () => async dispatch => {
