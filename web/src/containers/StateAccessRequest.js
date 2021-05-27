@@ -12,62 +12,72 @@ const StateAccessRequest = ({
   errorMessage,
   fetching
 }) => {
-  const [selectedStates, setStates] = useState([
-    usStatesDropdownOptions[0].value
-  ]);
-
   const initialState = {
     fullStateList: STATES,
     filteredStates: STATES,
     selectedStates: [],
     inputValue: ''
   };
-  
+
   function reducer(state, action) {
     switch (action.type) {
       case 'filter':
         return {
           ...state,
-          filteredStates: state.fullStateList.filter(el => el.name.toLowerCase().startsWith(action.payload.toLowerCase())),
+          filteredStates: state.fullStateList.filter(el =>
+            el.name.toLowerCase().startsWith(action.payload.toLowerCase())
+          ),
           inputValue: action.payload
-        }
+        };
       case 'addSelectedState':
         return {
           selectedStates: [...state.selectedStates, action.payload],
-          fullStateList: state.fullStateList.filter(item => item.id !== action.payload.id),
-          filteredStates: state.fullStateList.filter(item => item.id !== action.payload.id),
+          fullStateList: state.fullStateList.filter(
+            item => item.id !== action.payload.id
+          ),
+          filteredStates: state.fullStateList.filter(
+            item => item.id !== action.payload.id
+          ),
           inputValue: ''
-        }
+        };
       case 'removeSelectedState':
         return {
           ...state,
-          fullStateList: [...state.fullStateList, STATES.find(item => item.id === action.payload)].sort( (a, b) => a.name.localeCompare(b.name) ),
-          selectedStates: state.selectedStates.filter(item => item.id !== action.payload ),
+          fullStateList: [
+            ...state.fullStateList,
+            STATES.find(item => item.id === action.payload)
+          ].sort((a, b) => a.name.localeCompare(b.name)),
+          selectedStates: state.selectedStates.filter(
+            item => item.id !== action.payload
+          ),
           inputValue: ''
-        }
+        };
       default:
         throw new Error();
     }
   }
-  
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleOnChange = selection => {
-    // onChange can be triggered by hitting escape which will 
+    // onChange can be triggered by hitting escape which will
     // pass a null value and make the subsequent actions fail
-    if(selection === null) {
+    if (selection === null) {
       return;
-    }  
-    dispatch({type: 'addSelectedState', payload: selection})
+    }
+    dispatch({ type: 'addSelectedState', payload: selection });
   };
-  
+
   const handleRemoveItem = element => {
-    dispatch({type: 'removeSelectedState', payload: element.target.dataset.id});
+    dispatch({
+      type: 'removeSelectedState',
+      payload: element.target.dataset.id
+    });
   };
-  
+
   const handleInputChange = query => {
-    dispatch({type: 'filter', payload: query})
-  }
+    dispatch({ type: 'filter', payload: query });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -87,7 +97,7 @@ const StateAccessRequest = ({
         legend="Verify Your Identity"
         cancelable
         className="ds-u-margin-top--7"
-        canSubmit={(state.selectedStates.length > 0)}
+        canSubmit={state.selectedStates.length > 0}
         error={errorMessage}
         success={null}
         working={fetching}
@@ -97,9 +107,7 @@ const StateAccessRequest = ({
         onCancel={handleCancel}
       >
         <div className="ds-u-margin-bottom--4">
-          <p
-            className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
-          >
+          <p className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal">
             Select your State Affiliation.
           </p>
 
@@ -109,17 +117,28 @@ const StateAccessRequest = ({
             onInputValueChange={handleInputChange}
             clearSearchButton={false}
             inputValue={state.inputValue}
-            id='state-selection'
+            id="state-selection"
           >
             {state.selectedStates.map(el => {
               return (
-                <Badge className="ds-u-margin-bottom--1" key={el.id} variation="info">
-                  {el.name} {' '} 
-                  <button className="eapd-badge-remove" type="button" data-id={el.id} onClick={handleRemoveItem}>
-                    <span className="ds-u-visibility--screen-reader">Remove {el.name}</span>
+                <Badge
+                  className="ds-u-margin-bottom--1"
+                  key={el.id}
+                  variation="info"
+                >
+                  {el.name}{' '}
+                  <button
+                    className="eapd-badge-remove"
+                    type="button"
+                    data-id={el.id}
+                    onClick={handleRemoveItem}
+                  >
+                    <span className="ds-u-visibility--screen-reader">
+                      Remove {el.name}
+                    </span>
                   </button>
-                </Badge>          
-              )
+                </Badge>
+              );
             })}
             <TextField
               label="Select your State Affiliation."
@@ -128,7 +147,11 @@ const StateAccessRequest = ({
               labelClassName="ds-u-visibility--screen-reader"
               name="select-states-field"
             />
-            <img className="eapd-autocomplete__search-icon" src="/static/icons/search.svg" alt="Search icon"/>
+            <img
+              className="eapd-autocomplete__search-icon"
+              src="/static/icons/search.svg"
+              alt="Search icon"
+            />
           </Autocomplete>
         </div>
       </AuthenticationForm>
