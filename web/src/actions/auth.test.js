@@ -635,6 +635,30 @@ describe('auth actions', () => {
     });
   });
 
+  describe('logout with okta failures', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    
+    it('triggers a failLogout if logoutAndClearTokens throws an error', async () => {
+      const logoutSpy = jest
+        .spyOn(mockAuth, 'logoutAndClearTokens')
+        .mockImplementation(() => Promise.reject(Error('yep')));
+        
+      const store = mockStore({});
+  
+      const expectedActions = [
+        { type: actions.LOGOUT_REQUEST },
+        { type: actions.LOGOUT_FAILURE },
+      ];
+  
+      await store.dispatch(actions.logout());
+      expect(() => logoutSpy.toThrowError('yep'));
+      expect(store.getActions()).toEqual(expectedActions);
+    })
+  })
+  
+
   describe('authCheck (async)', () => {
     afterEach(() => {
       fetchMock.reset();

@@ -234,22 +234,29 @@ describe('Auth Util', () => {
     closeSessionSpy.mockReset();
   });
 
-  // todo: handle okta failure states
-  it('handles logoutAndClearTokens failing', async () => {
+  // These are commented out as they weren't effectively testing that
+  // logoutAndClearTokens was actually throwing an error or not
+  xit('logoutAndClearTokens handles revokeAccessToken failing', async () => {
     const revokeAccessTokenSpy = jest
       .spyOn(mockOktaAuth, 'revokeAccessToken')
       .mockImplementation(() =>
-        Promise.resolve({
-          status: 'FAILURE'
-        })
+        Promise.reject()
       );
 
-    const response = await logoutAndClearTokens();
-    console.log("logoutAndClearTokens response", response);
-    // await expect(closeSessionSpy).toHaveBeenCalledTimes(1);
-    // await expect(revokeAccessTokenSpy).toHaveBeenCalledTimes(1);
+    expect(() => logoutAndClearTokens.toThrow(Error));
 
     revokeAccessTokenSpy.mockReset();
-    // closeSessionSpy.mockReset();
+  });
+
+  xit('logoutAndClearTokens handles closeSession failing', async () => {
+    const closeSession = jest
+      .spyOn(mockOktaAuth, 'closeSession')
+      .mockImplementation(() =>
+        Promise.reject()
+      );
+
+    expect(() => logoutAndClearTokens.toThrowError('okta failed to'));
+
+    closeSession.mockReset();
   });
 });
