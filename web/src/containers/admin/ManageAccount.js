@@ -32,8 +32,7 @@ const ManageAccount = ({
   if(error) {
     setShowConfirmation(false);
   }
-
-  // todo: get errorMessage from redux and display it
+  
   return (
     <Fragment>
       {showConfirmation ? 
