@@ -191,18 +191,17 @@ export const removeTokenListeners = () => {
 };
 
 // Log out methods
-export const logoutAndClearTokens = () =>
-  oktaAuth
-    .revokeAccessToken()
-    .then(() => {
-      oktaAuth
-        .closeSession()
-        .then(() => {
-          removeCookie();
-        })
-        .catch(() => {});
-    })
-    .catch(() => {});
+export const logoutAndClearTokens = () => oktaAuth
+  .revokeAccessToken()
+  .then(() => {
+    oktaAuth
+      .closeSession()
+      .then(() => {
+        removeCookie();
+      })
+      .catch(() => {throw new Error('okta failed to closeSession')});
+  })
+  .catch(() => {throw new Error('okta failed to revokeAccessToken')});
 
 export const isUserActive = latestActivity => {
   const now = new Date().getTime();
