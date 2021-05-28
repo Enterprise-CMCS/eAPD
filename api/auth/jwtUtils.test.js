@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const sandbox = sinon.createSandbox();
 const mockVerifier = sandbox.stub();
 
-const JWT_SECRET = 'SOME_SECRET_VALUE_SHHHHH'
+const JWT_SECRET = process.env.JWT_SECRET || 'SOME_SECRET_VALUE_SHHHHH'
 process.env.JWT_SECRET=JWT_SECRET
 
 tap.test('Okta jwtUtils', async t => {
