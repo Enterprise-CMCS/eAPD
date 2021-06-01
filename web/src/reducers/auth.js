@@ -9,7 +9,6 @@ import {
   LOGIN_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
   STATE_ACCESS_REQUIRED,
   STATE_ACCESS_REQUEST,
   LATEST_ACTIVITY,
@@ -35,8 +34,7 @@ const initialState = {
   isSessionEnding: false,
   isExtendingSession: false,
   user: null,
-  expiresAt: null,
-  failedLogout: false
+  expiresAt: null
 };
 
 const auth = (state = initialState, action) => {
@@ -117,13 +115,6 @@ const auth = (state = initialState, action) => {
         isExtendingSession: false,
         isLoggingOut: false,
         user: null
-      };
-    case LOGOUT_FAILURE:
-      return {
-        ...state,
-        authenticated: false,
-        error: action.error,
-        failedLogout: true
       };
     case STATE_ACCESS_REQUIRED:
       return {

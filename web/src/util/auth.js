@@ -199,9 +199,9 @@ export const logoutAndClearTokens = () => oktaAuth
       .then(() => {
         removeCookie();
       })
-      .catch(() => {throw new Error('okta failed to closeSession')});
+      .catch(() => {});
   })
-  .catch(() => {throw new Error('okta failed to revokeAccessToken')});
+  .catch(() => {});
 
 export const isUserActive = latestActivity => {
   const now = new Date().getTime();

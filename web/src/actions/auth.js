@@ -127,10 +127,7 @@ export const logout = () => dispatch => {
   dispatch(requestLogout());
   logoutAndClearTokens().then( () => {
     dispatch(completeLogout()); 
-  }).catch(error => {
-    const errorMessage = error ? error.message : 'N/A';
-    dispatch(failLogout(`Failure code: ${errorMessage}`));
-  });
+  }).catch(() => {});
 };
 
 export const extendSession = () => async dispatch => {

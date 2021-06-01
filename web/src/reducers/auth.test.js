@@ -11,7 +11,6 @@ import {
   LOGIN_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
   STATE_ACCESS_REQUIRED,
   STATE_ACCESS_REQUEST,
   LATEST_ACTIVITY,
@@ -38,8 +37,7 @@ describe('auth reducer', () => {
     isSessionEnding: false,
     isExtendingSession: false,
     user: null,
-    expiresAt: null,
-    failedLogout: false
+    expiresAt: null
   };
 
   it('should handle initial state', () => {
@@ -167,15 +165,6 @@ describe('auth reducer', () => {
     });
   });
   
-  it('should handle LOGOUT_FAILURE', () => {
-    expect(auth(initialState, { type: LOGOUT_FAILURE, error: 'foo' })).toEqual({
-      ...initialState,
-      authenticated: false,
-      failedLogout: true,
-      error: 'foo'
-    });
-  });
-
   describe('when user is already logged in', () => {
     it('should reset auth after LOGOUT_SUCCESS', () => {
       const state = {
