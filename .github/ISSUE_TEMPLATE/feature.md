@@ -7,6 +7,7 @@ assignees: ''
 ---
 
 **Title should be User Story or Short Description of Task -** e.g.
+
 - As a state admin, I want to approve users, so that they can access our APDs.
 - Create Title Case component and use for all Nav Items, Section Titles, and Table Headers
 
@@ -19,13 +20,9 @@ Describe the feature here and link or add dependencies to any applicable issues;
 
 ### Acceptance criteria
 
-Style for AC: [Given/When/Then](https://martinfowler.com/bliki/GivenWhenThen.html)
-
-This should include at least:
-
-- [ ] Happy path (_cases that give you positive results_)
-- [ ] Sad path (_cases that give you no results_)
-- [ ] Bad path (_cases that give you negative results_)
+| Given | When | Then |
+| ----- | ---- | ---- |
+|       |      |      |
 
 ### This task is done when…
 
