@@ -26,7 +26,6 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
@@ -56,7 +55,6 @@ export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
 export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
-export const failLogout = error => ({ type: LOGOUT_FAILURE, error });
 export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
 export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
