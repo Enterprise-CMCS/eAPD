@@ -48,16 +48,16 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const stateCertifications = [];
 
   if (sysAdminId) {
-    oktaAffiliations.concat(
-      states.map(state => ({
+    states.forEach(state => {
+      oktaAffiliations.push({
         user_id: sysAdminId,
         state_id: state.id,
         role_id: sysAdminRoleId,
         status: 'approved',
         updated_by: 'seeds',
         username: 'sysadmin'
-      }))
-    );
+      });
+    });
   }
   if (regularUserId) {
     oktaAffiliations.push({
