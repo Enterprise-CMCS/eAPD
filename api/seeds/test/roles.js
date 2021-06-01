@@ -27,7 +27,8 @@ const roles = [
   { id: 1106, isActive: true, name: 'eAPD State Admin' },
   { id: 1107, isActive: true, name: 'eAPD State Staff' },
   { id: 1108, isActive: true, name: 'eAPD State Contractor' },
-  { id: 1109, isActive: false, name: 'eAPD State SME' }
+  { id: 1109, isActive: false, name: 'eAPD State SME' },
+  { id: 1110, isActive: true, name: 'eAPD System Admin' }
 ];
 exports.roles = roles;
 

@@ -8,9 +8,7 @@ export const getIsAdmin = ({
 
 export const getIsFederal = ({
   user: {
-    data: {
-      state: { id = null } = {}
-    }
+    data: { state: { id = null } = {} }
   }
 }) => {
   return id === 'fd';
@@ -24,6 +22,14 @@ export const getIsFedAdmin = ({
   }
 }) => {
   return role === 'eAPD Federal Admin';
+};
+
+export const getIsSysAdmin = ({
+  user: {
+    data: { role }
+  }
+}) => {
+  return role === 'eAPD System Admin';
 };
 
 export const getUserStateOrTerritory = ({

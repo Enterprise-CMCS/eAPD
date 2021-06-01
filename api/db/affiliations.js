@@ -75,9 +75,18 @@ const populateAffiliation = async affiliation => {
   return null;
 };
 
-const getPopulatedAffiliationsByStateId = async ({ stateId, status }) => {
-  const affiliations = await getAffiliationsByStateId({ stateId, status });
+const getPopulatedAffiliationsByStateId = async ({
+  stateId,
+  status,
+  isAdmin
+}) => {
+  let affiliations = await getAffiliationsByStateId({ stateId, status });
   if (!affiliations) return [];
+  if (!isAdmin) {
+    affiliations = affiliations.filter(
+      affiliation => affiliation.role !== 'eAPD System Admin'
+    );
+  }
   return Promise.all(
     affiliations.map(async affiliation => {
       return populateAffiliation(affiliation);

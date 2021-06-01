@@ -12,7 +12,8 @@ import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import UpgradeBrowser from './UpgradeBrowser';
 import {
   getUserStateOrTerritoryStatus,
-  getIsFedAdmin
+  getIsFedAdmin,
+  getIsSysAdmin
 } from '../reducers/user.selector';
 import { AFFILIATION_STATUSES } from '../constants';
 
@@ -24,19 +25,18 @@ const Loading = ({ children }) => (
 );
 Loading.propTypes = { children: PropType.node.isRequired };
 
-const ApdList = (
-  {
-    apds,
-    createApd: create,
-    deleteApd: del,
-    fetching,
-    route,
-    selectApd: select,
-    state,
-    approvalStatus,
-    isFedAdmin
-  },
-) => {
+const ApdList = ({
+  apds,
+  createApd: create,
+  deleteApd: del,
+  fetching,
+  route,
+  selectApd: select,
+  state,
+  approvalStatus,
+  isFedAdmin,
+  isSysAdmin
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -52,7 +52,9 @@ const ApdList = (
   };
 
   const canCreateApd =
-    !isFedAdmin && approvalStatus === AFFILIATION_STATUSES.APPROVED;
+    !isFedAdmin &&
+    !isSysAdmin &&
+    approvalStatus === AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -138,7 +140,7 @@ const ApdList = (
                       <Button
                         variation="transparent"
                         size="small"
-                        onClick={()=>setShowDeleteModal(apd.id)}
+                        onClick={() => setShowDeleteModal(apd.id)}
                       >
                         Delete{' '}
                         <span className="ds-u-visibility--screen-reader">
@@ -149,14 +151,13 @@ const ApdList = (
                     </div>
                   </div>
                 </div>
-                {
-                  showDeleteModal === apd.id &&
+                {showDeleteModal === apd.id && (
                   <DeleteModal
                     objType="APD"
                     onCancel={() => setShowDeleteModal(false)}
                     onDelete={() => del(apd.id)}
                   />
-                }
+                )}
               </div>
             ))}
           </div>
@@ -175,7 +176,8 @@ ApdList.propTypes = {
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
   approvalStatus: PropType.string.isRequired,
-  isFedAdmin: PropType.func.isRequired
+  isFedAdmin: PropType.func.isRequired,
+  isSysAdmin: PropType.func.isRequired
 };
 
 ApdList.defaultProps = {
@@ -187,6 +189,7 @@ const mapStateToProps = state => ({
   fetching: selectApds(state).fetching,
   state: state.user.data.state || null,
   isFedAdmin: getIsFedAdmin(state),
+  isSysAdmin: getIsSysAdmin(state),
   approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });

@@ -166,4 +166,27 @@ describe('<ApdList />', () => {
       expect(queryByText('Create new')).toBeNull();
     });
   });
+
+  describe('sysadmin viewing state dashboard', () => {
+    beforeEach(() => {
+      renderUtils = renderWithConnection(<ApdList {...props} />, {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              role: 'eAPD Federal Admin',
+              affiliations: [
+                { state_id: 'mo', status: AFFILIATION_STATUSES.APPROVED }
+              ]
+            }
+          }
+        }
+      });
+    });
+
+    it('should not display the create apd button', () => {
+      const { queryByText } = renderUtils;
+      expect(queryByText('Create new')).toBeNull();
+    });
+  });
 });

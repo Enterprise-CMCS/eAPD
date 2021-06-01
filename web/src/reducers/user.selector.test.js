@@ -36,4 +36,22 @@ describe('user state selectors', () => {
       ).toEqual(false);
     });
   });
+
+  describe('getIsSysAdmin selector', () => {
+    it('returns true if the user has role eAPD System Admin', () => {
+      expect(
+        getIsFedAdmin({
+          user: { data: { role: 'eAPD System Admin' } }
+        })
+      ).toEqual(true);
+    });
+
+    it('returns false if the user does not have role eAPD System Admin', () => {
+      expect(
+        getIsAdmin({
+          user: { data: { role: 'not a sysadmin' } }
+        })
+      ).toEqual(false);
+    });
+  });
 });
