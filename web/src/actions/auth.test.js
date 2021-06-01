@@ -687,8 +687,6 @@ describe('auth actions', () => {
 
   describe('handle loading data', () => {
     let fetchAllApdsSpy;
-    let getUsersSpy;
-    let getRolesSpy;
 
     beforeEach(() => {
       jest.clearAllMocks();
@@ -721,36 +719,6 @@ describe('auth actions', () => {
       await store.dispatch(actions.login('name', 'secret'));
       await timeout(25);
       expect(fetchAllApdsSpy).toHaveBeenCalled();
-      expect(getUsersSpy).not.toHaveBeenCalled();
-      expect(getRolesSpy).not.toHaveBeenCalled();
-    });
-    it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock.onGet('/me').reply(200, {
-        name: 'moop',
-        activities: ['view-users'],
-        states: ['MO']
-      });
-
-      const store = mockStore({});
-      await store.dispatch(actions.login('name', 'secret'));
-      await timeout(25);
-      expect(getUsersSpy).toHaveBeenCalled();
-      expect(fetchAllApdsSpy).not.toHaveBeenCalled();
-      expect(getRolesSpy).not.toHaveBeenCalled();
-    });
-    it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock.onGet('/me').reply(200, {
-        name: 'moop',
-        activities: ['view-roles'],
-        states: ['MO']
-      });
-
-      const store = mockStore({});
-      await store.dispatch(actions.login('name', 'secret'));
-      await timeout(25);
-      expect(getRolesSpy).toHaveBeenCalled();
-      expect(fetchAllApdsSpy).not.toHaveBeenCalled();
-      expect(getUsersSpy).not.toHaveBeenCalled();
     });
   });
 
