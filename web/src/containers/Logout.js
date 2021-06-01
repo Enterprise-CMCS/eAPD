@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { logout as dispatchLogout } from '../actions/auth';
 
-const Logout = ({ authenticated, logout, error }) => {
+const Logout = ({ authenticated, logout }) => {
   const history = useHistory();
   useEffect(() => {
     logout();
@@ -18,27 +18,16 @@ const Logout = ({ authenticated, logout, error }) => {
     }
   }, [authenticated]);
 
-  return <span />
+  return <span />;
 };
 
 Logout.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired,
-  error: PropTypes.string
+  logout: PropTypes.func.isRequired
 };
 
-Logout.defaultProps = {
-  error: ''
-};
-
-const mapStateToProps = ({
-  auth: {
-    authenticated,
-    error
-  }
-}) => ({
-  authenticated,
-  error
+const mapStateToProps = ({ auth: { authenticated } }) => ({
+  authenticated
 });
 
 const mapDispatchToProps = { logout: dispatchLogout };
