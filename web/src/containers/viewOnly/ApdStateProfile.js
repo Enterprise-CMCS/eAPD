@@ -49,31 +49,37 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
     );
   };
 
+  const MedicaidOffice = ({medicaidOffice}) => {
+    const {address1, address2, city, state, zip } = medicaidOffice;
+
+    if(!address1 && !address2 && !city && !state && !zip) {
+      return ( <span>No reponse was provided</span> ) ;
+    }
+
+    return (
+      <address>
+        {address1}
+        <br />
+        {address2 &&
+          address2}
+        {city}, {state}{' '}
+        {zip}
+      </address>
+    )
+  }
+
   return (
     <div>
       <h2>Key State Personnel</h2>
       <h3>Medicaid director</h3>
       <ul className="ds-c-list--bare">
-        <li>{stateProfile.medicaidDirector.name}</li>
-        <li>
-          <strong>Email: </strong>
-          {stateProfile.medicaidDirector.email}
-        </li>
-        <li>
-          <strong>Phone: </strong>
-          {stateProfile.medicaidDirector.phone}
-        </li>
+        <li><strong>Name: </strong> {stateProfile.medicaidDirector.name}</li>
+        <li><strong>Email: </strong>{stateProfile.medicaidDirector.email}</li>
+        <li><strong>Phone: </strong>{stateProfile.medicaidDirector.phone}</li>
       </ul>
-
+      <hr className="subsection-rule"/>
       <h3>Medicaid office address</h3>
-      <address>
-        {stateProfile.medicaidOffice.address1}
-        <br />
-        {stateProfile.medicaidOffice.address2 &&
-          stateProfile.medicaidOffice.address2}
-        {stateProfile.medicaidOffice.city}, {stateProfile.medicaidOffice.state}{' '}
-        {stateProfile.medicaidOffice.zip}
-      </address>
+      <MedicaidOffice medicaidOffice={stateProfile.medicaidOffice}/>
       <hr className="section-rule" />
       <h2>Key Personnel and Program Management</h2>
       <ol className="ds-u-padding-left--0">
@@ -85,7 +91,8 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
 
 ApdStateProfile.propTypes = {
   stateProfile: PropTypes.object.isRequired,
-  keyPersonnel: PropTypes.array.isRequired
+  keyPersonnel: PropTypes.array.isRequired,
+  medicaidOffice: PropTypes.object.isRequired
 };
 
 export default ApdStateProfile;
