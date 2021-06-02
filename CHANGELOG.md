@@ -5,12 +5,14 @@ Anticipated release: May 17, 2021
 #### 🚀 New features
 
 - Allow multiple states to be selected in onboarding process ([#2638])
-- Updated delete dialog to use thematically consistent modal dialogs instead of basic alerts. ([#2926])
+- Update APD paths to include APD id ([#2589])
+- Updated delete dialog to use thematically consistent modal dialogs instead of basic alerts ([#2926])
 - New affiliation available for federal users ([#2929])
 - Update State Admin Notification ([#3065])
 - Update Key State Personnel page to show if no information has been entered ([#3158])
 
 #### 🐛 Bugs fixed
+
 - Investigate why rich text editor is losing formatting after page reload ([#2961])
 - Add activity label on nav isn't accurate ([#3010])
 
@@ -26,6 +28,7 @@ Anticipated release: May 17, 2021
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2589]: https://github.com/CMSgov/eAPD/issues/2589
 [#2926]: https://github.com/CMSgov/eAPD/issues/2926
 [#2929]: https://github.com/CMSgov/eAPD/issues/2929
 [#2638]: https://github.com/CMSgov/eAPD/issues/2638
