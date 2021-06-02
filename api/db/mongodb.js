@@ -8,7 +8,6 @@ const setup = () => {
   );
   mongoose.connection.on('connected', () => {
     logger.info('MongoDB connected');
-    require('../models'); // eslint-disable-line global-require
   });
   mongoose.connection.on('disconnected', () =>
     logger.verbose('MongoDB disconnected!')
