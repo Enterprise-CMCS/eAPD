@@ -12,11 +12,16 @@ import ApdPageRoutes from './ApdPageRoutes';
 
 import { getIsAnAPDSelected, getAPDId } from '../reducers/apd';
 
-import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
+import {
+  getIsAdmin,
+  getUserStateOrTerritory,
+  getCanUserEditAPD
+} from '../reducers/user.selector';
 
 const ApdApplication = ({
   apdSelected,
   isAdmin,
+  isEditor,
   place,
   apdId,
   setApdToSelectOnLoad: dispatchSelectApdOnLoad,
@@ -44,7 +49,7 @@ const ApdApplication = ({
       <div className="ds-u-margin--0">
         <Sidebar place={place} />
         <main id="start-main-content" className="site-main">
-          <UnexpectedError />
+          {isEditor && <UnexpectedError />}
           <div className="ds-u-padding-top--2">
             <ApdPageRoutes />
           </div>
@@ -57,6 +62,7 @@ const ApdApplication = ({
 ApdApplication.propTypes = {
   apdSelected: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  isEditor: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
   apdId: PropTypes.string,
   setApdToSelectOnLoad: PropTypes.func.isRequired,
@@ -70,6 +76,7 @@ ApdApplication.defaultProps = {
 const mapStateToProps = state => ({
   apdSelected: getIsAnAPDSelected(state),
   isAdmin: getIsAdmin(state),
+  isEditor: getCanUserEditAPD(state),
   place: getUserStateOrTerritory(state),
   apdId: getAPDId(state),
   userRole: state.user.data.role || 'Pending Role'

@@ -14,7 +14,6 @@ exports[`apd (application) component renders correctly 1`] = `
       className="site-main"
       id="start-main-content"
     >
-      <Connect(UnexpectedError) />
       <div
         className="ds-u-padding-top--2"
       >

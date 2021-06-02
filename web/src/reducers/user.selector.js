@@ -66,3 +66,16 @@ export const getCanUserViewStateAdmin = ({
   }
   return null;
 };
+
+export const getCanUserEditAPD = ({
+  user: {
+    data: { activities }
+  }
+}) => {
+  if (activities) {
+    return activities.find(activity => activity === 'edit-document')
+      ? true
+      : null;
+  }
+  return null;
+};

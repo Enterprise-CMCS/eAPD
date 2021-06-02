@@ -133,15 +133,11 @@ describe('<ApdList />', () => {
     it('should allow the user to click on the APD to edit', () => {
       const { getByText } = renderUtils;
       expect(getByText(apd.name)).toBeTruthy();
-      // fireEvent.click(getByText(apd.name));
-      // expect(props.selectApd).toHaveBeenCalledWith(apd.id, props.route);
     });
 
     it('should allow the user to click the delete APD button', () => {
       const { getByText } = renderUtils;
       expect(getByText(/Delete/i)).toBeTruthy();
-      // fireEvent.click(getByText(/Delete/i));
-      // expect(props.deleteApd).toHaveBeenCalledWith(apd);
     });
   });
   describe('federal admin viewing state dashboard', () => {
@@ -179,6 +175,15 @@ describe('<ApdList />', () => {
                 { state_id: 'mo', status: AFFILIATION_STATUSES.APPROVED }
               ]
             }
+          },
+          apd: {
+            byId: {
+              [apd.id]: {
+                ...apd,
+                created: createdStr,
+                updated: updatedStr
+              }
+            }
           }
         }
       });
@@ -187,6 +192,23 @@ describe('<ApdList />', () => {
     it('should not display the create apd button', () => {
       const { queryByText } = renderUtils;
       expect(queryByText('Create new')).toBeNull();
+    });
+
+    it('should display the APD', () => {
+      const { getByText } = renderUtils;
+      expect(getByText(apd.name)).toBeTruthy();
+      expect(getByText(updatedStr)).toBeTruthy();
+      expect(getByText(createdStr)).toBeTruthy();
+    });
+
+    it('should allow the user to click on the APD to edit', () => {
+      const { getByText } = renderUtils;
+      expect(getByText(apd.name)).toBeTruthy();
+    });
+
+    it('should not display the delete apd button', () => {
+      const { queryByText } = renderUtils;
+      expect(queryByText('Delete')).toBeNull();
     });
   });
 });

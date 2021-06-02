@@ -56,6 +56,11 @@ const ApdList = ({
     !isSysAdmin &&
     approvalStatus === AFFILIATION_STATUSES.APPROVED;
 
+  const canDeleteApd =
+    !isFedAdmin &&
+    !isSysAdmin &&
+    approvalStatus === AFFILIATION_STATUSES.APPROVED;
+
   if (isLoading) {
     return (
       <div id="start-main-content">
@@ -137,17 +142,19 @@ const ApdList = ({
                       </ul>
                     </div>
                     <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
-                      <Button
-                        variation="transparent"
-                        size="small"
-                        onClick={() => setShowDeleteModal(apd.id)}
-                      >
-                        Delete{' '}
-                        <span className="ds-u-visibility--screen-reader">
-                          {' '}
-                          this APD
-                        </span>
-                      </Button>
+                      {canDeleteApd && (
+                        <Button
+                          variation="transparent"
+                          size="small"
+                          onClick={() => setShowDeleteModal(apd.id)}
+                        >
+                          Delete{' '}
+                          <span className="ds-u-visibility--screen-reader">
+                            {' '}
+                            this APD
+                          </span>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
