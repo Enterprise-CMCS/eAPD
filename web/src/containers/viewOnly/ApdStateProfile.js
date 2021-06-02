@@ -49,10 +49,11 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
     );
   };
 
-  const MedicaidOffice = ({medicaidOffice}) => {
+  const MedicaidOffice = ({ medicaidOffice }) => {
     const {address1, address2, city, state, zip } = medicaidOffice;
 
-    if(!address1 && !address2 && !city && !state && !zip) {
+    // Since we provide a default State don't check if falsy
+    if(!address1 && !address2 && !city && !zip) {
       return ( <span>No reponse was provided</span> ) ;
     }
 
