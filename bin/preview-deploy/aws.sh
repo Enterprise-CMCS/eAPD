@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 # Call with the following arguments:
 #    --API_PBKDF2_ITERATIONS <number> | Number of PBKDF2 iterations the server
 #                                     | should use for hashing user passwords.
