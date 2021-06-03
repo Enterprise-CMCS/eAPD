@@ -9,8 +9,18 @@ import Logout from './containers/Logout';
 
 const routes = [
   { path: '/', component: Dashboard, exact: true, isPublic: false },
-  { path: '/apd', component: ApdApplication, exact: false, isPublic: false },
-  { path: '/print', component: ApdViewOnly, exact: true, isPublic: false },
+  {
+    path: '/apd/:apdId',
+    component: ApdApplication,
+    exact: false,
+    isPublic: false
+  },
+  {
+    path: '/print/:apdId',
+    component: ApdViewOnly,
+    exact: true,
+    isPublic: false
+  },
   { path: '/login', component: LoginApplication, isPublic: true, isCard: true },
   { path: '/logout', component: Logout, isPublic: true },
   { path: '/manage-account', component: ManageAccount, isPublic: false },
