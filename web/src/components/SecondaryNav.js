@@ -20,7 +20,7 @@ const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
       {showAddActivityLink && (
         <div className="pre-button-section-break">
           <Link
-            to="/apd/activities"
+            to="/apd/1/activities"
             onClick={addActivity}
             className="ds-c-button"
           >

@@ -21,3 +21,8 @@ export const ariaAnnounceApdLoaded = () => ({
   message:
     'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
 });
+
+export const ariaAnnounceApdLoadingFailure = error => ({
+  type: ARIA_ANNOUNCE_CHANGE,
+  message: error
+});
