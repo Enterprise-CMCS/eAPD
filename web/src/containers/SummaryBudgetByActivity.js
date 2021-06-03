@@ -41,7 +41,7 @@ const DataRowGroup = ({ data, year, groupTitle }) => (
   <Fragment>
     {categories.map(({ category, title }) => (
       <DataRow
-        key={groupTitle}
+        key={`${groupTitle}-${category}-${title}`}
         category={category}
         data={data[category][year]}
         title={title}
@@ -108,6 +108,7 @@ SummaryBudgetByActivityTotals.propTypes = {
 const SummaryBudgetByActivityBreakdown = ({ data, ffy }) => {
   return data.activityTotals.map((item, index) => (
     <SummaryActivityBreakdownTable
+      key={`${ffy}-${index}` /* eslint-disable-line react/no-array-index-key */}
       ffy={ffy}
       activityIndex={index}
       otherFunding={item.data.otherFunding}

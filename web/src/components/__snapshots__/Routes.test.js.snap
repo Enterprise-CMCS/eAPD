@@ -27,8 +27,8 @@ exports[`Routes component renders correctly 1`] = `
       }
     }
     exact={false}
-    key="/apd"
-    path="/apd"
+    key="/apd/:apdId"
+    path="/apd/:apdId"
   />
   <Connect(PrivateRoute)
     component={
@@ -41,8 +41,8 @@ exports[`Routes component renders correctly 1`] = `
       }
     }
     exact={true}
-    key="/print"
-    path="/print"
+    key="/print/:apdId"
+    path="/print/:apdId"
   />
   <Route
     component={
