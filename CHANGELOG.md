@@ -1,6 +1,6 @@
 # Next release
 
-Anticipated release: May 17, 2021
+Anticipated release: June XX, 2021
 
 #### 🚀 New features
 
