@@ -1,6 +1,10 @@
 /* eslint-disable no-shadow, global-require */
 const request = require('supertest');
 const tap = require('tap');
+const sinon = require('sinon');
+const mongo = require('./db/mongodb');
+
+sinon.stub(mongo, 'setup').returns({});
 
 let api;
 let response;
