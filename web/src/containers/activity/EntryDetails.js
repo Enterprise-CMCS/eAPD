@@ -24,6 +24,7 @@ const makeTitle = ({ name, fundingSource }, i) => {
 };
 
 const EntryDetails = ({
+  apdId,
   activityIndex,
   activityKey,
   fundingSource,
@@ -51,7 +52,7 @@ const EntryDetails = ({
         size="small"
         variation="transparent"
         component={NavLink}
-        href={`/apd/activity/${activityIndex}/overview`}
+        href={`/apd/${apdId}/activity/${activityIndex}/overview`}
       >
         Edit
       </Button>
@@ -105,6 +106,7 @@ const EntryDetails = ({
 };
 
 EntryDetails.propTypes = {
+  apdId: PropTypes.number.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityKey: PropTypes.string.isRequired,
   fundingSource: PropTypes.string,
