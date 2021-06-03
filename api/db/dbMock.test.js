@@ -19,7 +19,8 @@ const getQueryBuilder = () => ({
   update: sandbox.stub(),
   where: sandbox.stub(),
   whereIn: sandbox.stub(),
-  whereRaw: sandbox.stub()
+  whereRaw: sandbox.stub(),
+  leftJoin: sandbox.stub()
 });
 
 const creator = table => {
