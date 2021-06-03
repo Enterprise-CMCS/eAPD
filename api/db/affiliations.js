@@ -13,52 +13,50 @@ const selectedColumns = [
   'auth_roles.name as role'
 ];
 
-const getAffiliationsByStateId = ({ stateId, status }) => {
+const statusConverter = {
+  'pending': ['requested'],
+  'active': ['approved'],
+  'inactive': ['denied', 'revoked']
+}
+
+const getAffiliationsByStateId = ({ stateId, status, db = knex }) => {
+  const query = db('auth_affiliations')
+                .select(selectedColumns)
+                .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+
   if (status === 'pending') {
-    return knex('auth_affiliations')
-      .select(selectedColumns)
-      .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-      .where({
+    return query.where({
         state_id: stateId,
         status: 'requested'
       });
   }
   if (status === 'active') {
-    return knex('auth_affiliations')
-      .select(selectedColumns)
-      .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-      .where({
+    return query.where({
         state_id: stateId,
         status: 'approved'
       });
   }
   if (status === 'inactive') {
-    return knex('auth_affiliations')
-      .select(selectedColumns)
-      .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-      .whereIn(
+    return query.whereIn(
         ['state_id', 'status'],
-        [
-          [stateId, 'denied'],
-          [stateId, 'revoked']
-        ]
+        statusConverter[status].map(thisStatus => [stateId, thisStatus])
       );
   }
-  if (status) logger.error(`invalid status ${status}`);
-  return knex('auth_affiliations')
-    .select(selectedColumns)
-    .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-    .where({ state_id: stateId });
+  if (status) {
+    logger.error(`invalid status ${status}`);
+    return []
+  }
+  return query.where({ state_id: stateId });
 };
 
-const populateAffiliation = async affiliation => {
+const populateAffiliation = async (affiliation, { client = oktaClient } = {}) => {
   const { userId, updatedById } = affiliation;
   if (userId) {
     const {
       profile: { displayName, email, secondEmail, primaryPhone, mobilePhone }
-    } = await oktaClient.getUser(userId);
+    } = await client.getUser(userId);
     const { profile: { displayName: updatedByName = null } = {} } = updatedById
-      ? await oktaClient.getUser(updatedById).catch(() => {
+      ? await client.getUser(updatedById).catch(() => {
           return { profile: { displayName: updatedById } };
         })
       : {};
@@ -75,18 +73,23 @@ const populateAffiliation = async affiliation => {
   return null;
 };
 
-const getPopulatedAffiliationsByStateId = async ({ stateId, status }) => {
-  const affiliations = await getAffiliationsByStateId({ stateId, status });
+const getPopulatedAffiliationsByStateId = async ({
+  stateId,
+  status,
+  getAffiliationsByStateId_ = getAffiliationsByStateId,
+  populateAffiliation_ = populateAffiliation
+}) => {
+  const affiliations = await getAffiliationsByStateId_({ stateId, status });
   if (!affiliations) return [];
   return Promise.all(
     affiliations.map(async affiliation => {
-      return populateAffiliation(affiliation);
+      return populateAffiliation_(affiliation);
     })
   );
 };
 
-const getAffiliationById = ({ stateId, affiliationId }) => {
-  return knex('auth_affiliations')
+const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
+  return db('auth_affiliations')
     .select(selectedColumns)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
     .where({
@@ -96,15 +99,93 @@ const getAffiliationById = ({ stateId, affiliationId }) => {
     .first();
 };
 
-const getPopulatedAffiliationById = async ({ stateId, affiliationId }) => {
-  const affiliation = await getAffiliationById({ stateId, affiliationId });
+const getPopulatedAffiliationById = async ({
+  stateId,
+  affiliationId,
+  db = knex,
+  client = oktaClient
+}) => {
+  const affiliation = await getAffiliationById({ stateId, affiliationId, db });
   if (!affiliation) return null;
-  return populateAffiliation(affiliation);
+  return populateAffiliation(affiliation, { client });
 };
+
+const reduceAffiliations = affiliations =>{
+  // combine affiliations for each user.
+  // many fields are omitted for clarity
+  // Given:
+  // [{userId:1, stateId:'ak'}, {userId:1, stateId:'md'}, {userId:2, stateId:'ak}]
+  // becomes
+  // [{userId:1, affiliations: [{stateId:'ak'}, {stateId:'md'}]}, {userId:2, affiliations:[{stateId:'ak'}]}]
+  const reducer = (results, affiliation) => {
+    const stateAffiliation = {role: affiliation.role, stateId: affiliation.stateId, status: affiliation.status}
+    // If this user ID is not in the object add it and create an
+    // affiliations array with just this affiliation in it.
+    if(!Object.prototype.hasOwnProperty.call(results, affiliation.userId)){
+
+      // eslint-disable-next-line no-param-reassign
+      results[affiliation.userId] = {
+        ...affiliation,
+        affiliations: [stateAffiliation,]
+      }
+      return results
+    }
+    // add this affiliation to this user's list of affiliations
+    results[affiliation.userId].affiliations.push(stateAffiliation)
+    return results
+  }
+  const results = {}
+  affiliations.reduce(reducer, results)
+  return Object.values(results)
+}
+
+const getAllAffiliations = async ({ status, db = knex } = {}) => {
+  const query = db('auth_affiliations')
+    .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+    .select(selectedColumns);
+
+  if (status){
+    if (!Object.keys(statusConverter).includes(status)){
+      logger.error(`invalid status ${status}`);
+      return []
+    }
+    return query.whereIn(
+      'status',
+      statusConverter[status]
+    )
+  }
+
+    return query
+  
+};
+
+const getAllPopulatedAffiliations = async ({
+    status,
+    db = knex,
+    getAllAffiliations_ = getAllAffiliations,
+    populateAffiliation_ = populateAffiliation,
+    reduceAffiliations_ = reduceAffiliations,
+    client = oktaClient
+  }) => {
+  const affiliations = await getAllAffiliations_({ status, db });
+  if (!affiliations) return null;
+  const reducedAffiliations = reduceAffiliations_(affiliations)
+  return Promise.all(
+    reducedAffiliations.map(async affiliation => {
+      return populateAffiliation_(affiliation, {client});
+    })
+  );
+};
+
 
 module.exports = {
   getAffiliationsByStateId,
   getPopulatedAffiliationsByStateId,
   getAffiliationById,
-  getPopulatedAffiliationById
+  getPopulatedAffiliationById,
+  getAllAffiliations,
+  populateAffiliation,
+  reduceAffiliations,
+  getAllPopulatedAffiliations,
+  selectedColumns
 };
