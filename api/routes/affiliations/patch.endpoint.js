@@ -26,9 +26,17 @@ describe('Affiliations endpoint | PATCH', () => {
     });
   });
 
-  it('returns 400 when US state is invalid', async () => {
-    const response = await api.patch('/states/zz/affiliations/4000');
+  it('returns 400 when US state is incorrect for a fed admin', async () => {
+    const fedAdminApi = login('fed-admin');
+    const response = await fedAdminApi.patch('/states/zz/affiliations/4000');
     expect(response.status).toEqual(400);
+  });
+
+  it('returns 403 when US state is not authorized', async () => {
+    // This user does not have state zz in scope and is not a fed admin
+    // validForState middleware should reject the request
+    const response = await api.patch('/states/zz/affiliations/4000');
+    expect(response.status).toEqual(403);
   });
 
   it('returns 400 when affiliation id is invalid', async () => {
@@ -59,4 +67,13 @@ describe('Affiliations endpoint | PATCH', () => {
     });
     expect(response.status).toEqual(403);
   });
+
+  it(`returns 403, when user tries to change for a state they are not authorized for`, async () => {
+    const response = await api.patch('/states/az/affiliations/4020', {
+      status: 'approved',
+      roleId: 1106
+    });
+    expect(response.status).toEqual(403);
+  });
+
 });

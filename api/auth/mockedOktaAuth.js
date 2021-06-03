@@ -16,6 +16,15 @@ const allPermissions = {
   }
 };
 
+const fedAdmin = {
+  status: 'ACTIVE',
+  id: 'fed-admin',
+  profile: {
+    displayName: 'Federal Admin',
+    email: 'fedadmin@email.com'
+  }
+};
+
 const allPermissionsNoState = {
   status: 'ACTIVE',
   id: 'all-permissions-no-state',
@@ -41,7 +50,8 @@ const mockOktaClient = {
         noPermissions,
         allPermissions,
         allPermissionsNoState,
-        allPermissionsAndState
+        allPermissionsAndState,
+        fedAdmin
       ]);
     });
   },
@@ -64,6 +74,11 @@ const mockOktaClient = {
     if (id === '0') {
       return new Promise(resolve => {
         resolve(null);
+      });
+    }
+    if (id === 'fed-admin') {
+      return new Promise(resolve => {
+        resolve(fedAdmin);
       });
     }
     return new Promise(resolve => {
@@ -110,6 +125,14 @@ const mockVerifyJWT = token => {
       resolve({
         sub: 'apas@email.com',
         uid: 'all-permissions-and-state'
+      });
+    });
+  }
+  if (token === 'fed-admin') {
+    return new Promise(resolve => {
+      resolve({
+        sub: 'fedadmin@email.com',
+        uid: 'fed-admin'
       });
     });
   }
