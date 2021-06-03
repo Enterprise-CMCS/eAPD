@@ -2,7 +2,7 @@ import {
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS,
-  SELECT_APD
+  SELECT_APD_SUCCESS
 } from '../actions/app';
 
 import reducer, {
@@ -62,7 +62,7 @@ describe('saving state reducer and selectors', () => {
           { error: 'moop moop', lastSaved: 'builder', saving: true },
           // Marie Curie is selected for the Nobel Prize for Chemistry,
           // becoming the first person in history to receive two.
-          { type: SELECT_APD, apd: { updated: '1911-11-07T00:00:00Z' } }
+          { type: SELECT_APD_SUCCESS, apd: { updated: '1911-11-07T00:00:00Z' } }
         )
       ).toEqual({
         error: false,
