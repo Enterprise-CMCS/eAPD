@@ -1,0 +1,29 @@
+import React from 'react';
+import { render, screen } from 'apd-testing-library'
+
+import ApdStateProfile from './ApdStateProfile';
+
+describe('APD Summary/viewOnly component', () => {
+  test('renders the correct message when no key personnel are provided', () => {
+    const stateProfile = {
+      medicaidOffice: {},
+      medicaidDirector: {}
+    };
+    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
+    expect(screen.queryByText(/No response was provided/i)).toBeTruthy();
+  });
+
+  test('renders key personnel when provided', () => {
+    const stateProfile = {
+      medicaidOffice: {},
+      medicaidDirector: {}
+    };
+    const keyPersonnel = [{
+      isPrimary:true,
+      name:"Primary Person Name",
+    }]
+    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={keyPersonnel} />);
+    expect(screen.queryByText(/Primary Person Name/i)).toBeTruthy();
+    expect(screen.queryByText(/Primary APD Point of Contact/i)).toBeTruthy();
+  });
+});
