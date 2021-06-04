@@ -25,6 +25,25 @@ const incentivePayment = new mongoose.Schema({
 
 const apdSchema = new mongoose.Schema({
   name: String,
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    required: true
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now(),
+    required: true
+  },
+  status: {
+    type: String,
+    enum: ['draft', 'archived'],
+    required: true
+  },
+  stateId: {
+    type: String,
+    required: true
+  },
   activities: [
     {
       alternatives: String,

@@ -15,7 +15,11 @@ tap.test('APD model test', async t => {
   });
 
   t.beforeEach(async () => {
-    newApd = new APD(document);
+    newApd = new APD({
+      status: 'draft',
+      stateId: 'md',
+      ...document
+    });
     newApd = await newApd.save();
   });
 
