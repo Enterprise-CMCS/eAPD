@@ -6,6 +6,7 @@ Anticipated release: June 3, 2021
 
 - Update APD paths to include APD id ([#2589])
 - Updates date validation and formatting to be more accurate ([#3086])
+- Update Key Personnel and Program Management page to show if no information has been entered ([#3159])
 
 #### 🐛 Bugs fixed
 
@@ -23,3 +24,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2811]: https://github.com/CMSgov/eAPD/issues/2811
 [#2976]: https://github.com/CMSgov/eAPD/issues/2976
 [#3086]: https://github.com/CMSgov/eAPD/issues/3086
+[#3159]: https://github.com/CMSgov/eAPD/issues/3159
