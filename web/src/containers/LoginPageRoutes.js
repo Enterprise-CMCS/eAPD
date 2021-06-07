@@ -74,7 +74,8 @@ const LoginPageRoutes = ({
 
         <Route path={`${path}/mfa/activate`}>
           <LoginMFA
-            action={handleVerificationCode}
+            saveAction={handleVerificationCode}
+            cancelAction={handleLogout}
             hasEverLoggedOn={false}
             errorMessage={errorMessage}
             fetching={fetching}
@@ -83,7 +84,8 @@ const LoginPageRoutes = ({
 
         <Route path={`${path}/mfa/verify`}>
           <LoginMFA
-            action={handleLoginOtp}
+            saveAction={handleLoginOtp}
+            cancelAction={handleLogout}
             hasEverLoggedOn
             errorMessage={errorMessage}
             fetching={fetching}
