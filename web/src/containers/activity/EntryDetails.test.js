@@ -21,6 +21,7 @@ jest.mock('react-router-dom', () => {
 
 describe('the (Activity) EntryDetails component', () => {
   const props = {
+    apdId: 1,
     activityIndex: 2,
     activityKey: 'activity key',
     fundingSource: 'money pit',
@@ -55,6 +56,7 @@ describe('the (Activity) EntryDetails component', () => {
 
   test('does not render the delete button on the first element', () => {
     const firstActivityProps = {
+      apdId: 1,
       activityIndex: 0,
       activityKey: 'activity 1 key',
       fundingSource: 'money pit',

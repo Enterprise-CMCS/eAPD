@@ -5,14 +5,20 @@ import { push } from 'connected-react-router';
 
 import { plain as ExportAndSubmit, mapDispatchToProps } from './ApdExport';
 
+const useParams = jest.fn().mockReturnValue({ apdId: 123 });
+
 describe('apd export component', () => {
   test('renders correctly', () => {
-    expect(shallow(<ExportAndSubmit push={() => {}} />)).toMatchSnapshot();
+    expect(
+      shallow(<ExportAndSubmit push={() => {}} useParams={useParams} />)
+    ).toMatchSnapshot();
   });
 
   test('routes to print preview', () => {
     const fakePush = sinon.spy();
-    const component = shallow(<ExportAndSubmit push={fakePush} />);
+    const component = shallow(
+      <ExportAndSubmit push={fakePush} useParams={useParams} />
+    );
     component.find('Button').simulate('click');
 
     expect(fakePush.calledOnce).toEqual(true);
