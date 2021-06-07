@@ -5,7 +5,6 @@ Anticipated release: June 3, 2021
 #### 🚀 New features
 
 - Update APD paths to include APD id ([#2589])
-
 - Additional affiliations may be requested ([#2582])
 - On the state affiliation selection page, give users an option to log out ([#3011])
 - Updates date validation and formatting to be more accurate ([#3086])
