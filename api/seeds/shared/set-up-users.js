@@ -75,6 +75,14 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'approved',
       updated_by: 'seeds'
     });
+    // Let them be a staffer in Maryland too
+    oktaAffiliations.push({
+      user_id: stateAdminId,
+      state_id: 'md',
+      role_id: stateStaffRoleId,
+      status: 'approved',
+      updated_by: 'seeds'
+    });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
       username: stateAdminId,
