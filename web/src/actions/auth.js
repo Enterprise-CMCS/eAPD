@@ -30,6 +30,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
 
+
 export const LATEST_ACTIVITY = 'LATEST_ACTIVITY';
 export const SESSION_ENDING_ALERT = 'SESSION_ENDING_ALERT';
 export const REQUEST_SESSION_RENEWAL = 'REQUEST_SESSION_RENEWAL';
@@ -300,6 +301,26 @@ export const createAccessRequest = states => async dispatch => {
     return null;
   }
   return '/login/affiliations/thank-you';
+};
+
+export const updateAccessRequest = states => async dispatch => {
+  let failureReason = null;
+  await Promise.all(
+    states.map(async state => {
+      await axios
+        .post(`/states/${state.id}/affiliations`)
+        .then(() => {})
+        .catch(error => {
+          failureReason = error ? error.message : 'N/A';
+        });
+    })
+  );
+
+  if (failureReason) {
+    dispatch(failLogin(failureReason));
+    return null;
+  }
+  return dispatch(getCurrentUser());
 };
 
 export const completeAccessRequest = () => dispatch => {
