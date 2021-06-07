@@ -1,20 +1,34 @@
 import PropTypes from 'prop-types';
-import React, { useReducer } from 'react';
+import React, { useReducer, Fragment } from 'react';
+
+import { connect } from 'react-redux';
 
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
-
 import AuthenticationForm from '../components/AuthenticationForm';
+
 import { STATES } from '../util/states';
 
-const StateAccessRequest = ({
-  saveAction,
+const StateAccessRequest = ({ 
+  saveAction, 
   cancelAction,
-  errorMessage,
-  fetching
+  errorMessage, 
+  fetching, 
+  currentAffiliations
 }) => {
+  const existingAffiliations = currentAffiliations.map(element => { 
+    const stateDetails = STATES.find(item => item.id === element.state_id)
+    return { id: element.state_id, name: stateDetails.name } 
+  });
+  
+  const availableStates = STATES.filter( item => {
+    return !existingAffiliations.find(affiliation => {
+      return affiliation.id === item.id;
+    });
+  });
+
   const initialState = {
-    fullStateList: STATES,
-    filteredStates: STATES,
+    fullStateList: availableStates,
+    filteredStates: availableStates,
     selectedStates: [],
     inputValue: ''
   };
@@ -53,7 +67,7 @@ const StateAccessRequest = ({
           inputValue: ''
         };
       default:
-        throw new Error();
+        throw new Error("Unrecognized action provided to StateAccessRequest reducer hook");
     }
   }
 
@@ -84,6 +98,24 @@ const StateAccessRequest = ({
     saveAction(state.selectedStates);
   };
 
+  const cardTitle = existingAffiliations.length > 0 ? "Manage Account" : "Verify Your Identity"
+
+  const UserExistingAffiliations = () => {
+    return (
+      <Fragment>
+        <p className="ds-u-margin-bottom--0">Current Affiliations</p>
+        <p className="ds-u-margin-top--0 ds-u-font-size--small">This list includes all states you are currently affiliated with. Including requests and states you are denied/revoked access to. To make updates to these affiliations, reach out to your State Administrator.</p>
+        {existingAffiliations.map(el => {
+          return (
+            <Badge className="ds-u-margin-bottom--1" key={el.id}>
+              {el.name}
+            </Badge>     
+          )
+        })}
+      </Fragment>
+    )
+  };
+    
   const handleCancel = e => {
     e.preventDefault();
     if (cancelAction) cancelAction();
@@ -93,8 +125,8 @@ const StateAccessRequest = ({
     <div id="start-main-content">
       <AuthenticationForm
         id="state-access-request-form"
-        title="Verify Your Identity"
-        legend="Verify Your Identity"
+        title={cardTitle}
+        legend={cardTitle}
         cancelable
         className="ds-u-margin-top--7"
         canSubmit={state.selectedStates.length > 0}
@@ -107,7 +139,14 @@ const StateAccessRequest = ({
         onCancel={handleCancel}
       >
         <div className="ds-u-margin-bottom--4">
-          <p className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal">
+
+          {existingAffiliations.length > 0 && (
+            <UserExistingAffiliations />
+          )}
+
+          <p
+            className="ds-c-label ds-u-margin-bottom--1 ds-u-font-weight--normal"
+          >
             Select your State Affiliation.
           </p>
 
@@ -160,14 +199,22 @@ const StateAccessRequest = ({
 };
 
 StateAccessRequest.propTypes = {
+  currentAffiliations: PropTypes.array,
+  saveAction: PropTypes.func.isRequired,
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
-  saveAction: PropTypes.func.isRequired,
   cancelAction: PropTypes.func.isRequired
 };
 
 StateAccessRequest.defaultProps = {
-  errorMessage: false
+  errorMessage: false,
+  currentAffiliations: []
 };
 
-export default StateAccessRequest;
+const mapStateToProps = state => ({
+  currentAffiliations: state.user.data.affiliations,
+});
+
+export default connect(mapStateToProps)(StateAccessRequest);
+
+export { StateAccessRequest as plain, mapStateToProps };
