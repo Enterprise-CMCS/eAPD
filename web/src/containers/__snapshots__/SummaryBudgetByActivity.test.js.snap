@@ -143,28 +143,28 @@ exports[`renders correctly data row group renders 1`] = `
     category="statePersonnel"
     data={Object {}}
     groupTitle="MMIS"
-    key="MMIS"
+    key="MMIS-statePersonnel-State Staff Total"
     title="State Staff Total"
   />
   <DataRow
     category="expenses"
     data={Object {}}
     groupTitle="MMIS"
-    key="MMIS"
+    key="MMIS-expenses-Other State Expenses Total"
     title="Other State Expenses Total"
   />
   <DataRow
     category="contractors"
     data={Object {}}
     groupTitle="MMIS"
-    key="MMIS"
+    key="MMIS-contractors-Private Contractor Total"
     title="Private Contractor Total"
   />
   <DataRow
     category="combined"
     data={Object {}}
     groupTitle="MMIS"
-    key="MMIS"
+    key="MMIS-combined-Total"
     title="Total"
   />
 </Fragment>
@@ -354,6 +354,7 @@ Array [
   <Connect(SummaryActivityBreakdownTable)
     activityIndex={0}
     ffy="1975"
+    key="1975-0"
     otherFunding={
       Object {
         "1990": Object {
@@ -374,6 +375,7 @@ Array [
   <Connect(SummaryActivityBreakdownTable)
     activityIndex={1}
     ffy="1975"
+    key="1975-1"
     otherFunding={
       Object {
         "1990": Object {
