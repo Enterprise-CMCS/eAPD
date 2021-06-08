@@ -17,6 +17,7 @@ import Icon, {
   faChevronDown,
   faChevronLeft,
   faSignOutAlt,
+  faEdit,
   faUserShield
 } from './Icons';
 
@@ -136,6 +137,19 @@ class Header extends Component {
                             </Link>
                           </li>
                         )}
+                        <li>
+                          <Link
+                            to="/manage-account"
+                            onClick={this.toggleDropdown}
+                            className="nav--dropdown__action"
+                            >
+                              <Icon
+                                icon={faEdit}
+                                style={{ width: '14px' }}
+                              />
+                              Manage Account
+                            </Link>
+                        </li>
                         <li>
                           <Link
                             to="/logout"
