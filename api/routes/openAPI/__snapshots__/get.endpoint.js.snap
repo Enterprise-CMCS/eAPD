@@ -1112,6 +1112,17 @@ Object {
     "/auth/state/{stateId}": Object {
       "get": Object {
         "description": "Switch from using one state to another, with updated and accurate permissions.",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
         "responses": Object {
           "200": Object {
             "content": Object {
