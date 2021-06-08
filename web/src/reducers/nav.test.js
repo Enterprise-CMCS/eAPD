@@ -6,7 +6,7 @@ import reducer, { getContinuePreviousLinks } from './nav';
 
 describe('staticItems', () => {
   it('defines the apd resources within the app', () => {
-    const labels = staticItems.map(item => item.label);
+    const labels = staticItems(1).map(item => item.label);
     expect(labels).toEqual([
       'APD Overview',
       'Key State Personnel',
@@ -24,7 +24,7 @@ describe('staticItems', () => {
     // getContinuePreviousLinks() uses this feature of the data to ignore links
     // with #fragments in their URL. A URL #fragment indicates a particular
     // section of a resource.
-    staticItems.forEach(item => {
+    staticItems(1).forEach(item => {
       if (!item.items || !item.items.length) return;
       const hash = item.items[0].url.split('#')[2];
       expect(hash).toBeFalsy();
@@ -35,47 +35,64 @@ describe('staticItems', () => {
 describe('getContinuePreviousLinks()', () => {
   test('first apd page', () => {
     const { continueLink, previousLink } = getContinuePreviousLinks(
-      '/apd/apd-overview',
-      staticItems
+      '1',
+      '/apd/1/apd-overview',
+      staticItems(1)
     );
-    expect(continueLink.url).toEqual('/apd/state-profile');
+    expect(continueLink.url).toEqual('/apd/1/state-profile');
     expect(previousLink).toBeFalsy();
   });
 
   test('activities list page', () => {
-    const url = '/apd/activities';
+    const apdId = '1';
+    const url = '/apd/1/activities';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
-    const items = getItems({ activities, url });
-    const { continueLink, previousLink } = getContinuePreviousLinks(url, items);
-    expect(continueLink.url).toEqual('/apd/schedule-summary');
-    expect(previousLink.url).toEqual('/apd/previous-activities');
+    const items = getItems({ apdId, activities, url });
+    const { continueLink, previousLink } = getContinuePreviousLinks(
+      apdId,
+      url,
+      items
+    );
+    expect(continueLink.url).toEqual('/apd/1/schedule-summary');
+    expect(previousLink.url).toEqual('/apd/1/previous-activities');
   });
 
   test('activity page', () => {
-    const url = '/apd/activity/0/ffp';
+    const apdId = '1';
+    const url = '/apd/1/activity/0/ffp';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
-    const items = getItems({ activities, url });
-    const { continueLink, previousLink } = getContinuePreviousLinks(url, items);
-    expect(continueLink.url).toEqual('/apd/activity/1/overview');
-    expect(previousLink.url).toEqual('/apd/activity/0/cost-allocation');
+    const items = getItems({ apdId, activities, url });
+    const { continueLink, previousLink } = getContinuePreviousLinks(
+      apdId,
+      url,
+      items
+    );
+    expect(continueLink.url).toEqual('/apd/1/activity/1/overview');
+    expect(previousLink.url).toEqual('/apd/1/activity/0/cost-allocation');
   });
 
   test('schedule summary page', () => {
-    const url = '/apd/schedule-summary';
+    const apdId = '1';
+    const url = '/apd/1/schedule-summary';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
-    const items = getItems({ activities, url });
-    const { continueLink, previousLink } = getContinuePreviousLinks(url, items);
-    expect(continueLink.url).toEqual('/apd/proposed-budget');
-    expect(previousLink.url).toEqual('/apd/activities');
+    const items = getItems({ apdId, activities, url });
+    const { continueLink, previousLink } = getContinuePreviousLinks(
+      apdId,
+      url,
+      items
+    );
+    expect(continueLink.url).toEqual('/apd/1/proposed-budget');
+    expect(previousLink.url).toEqual('/apd/1/activities');
   });
 
   test('last apd page', () => {
     const { continueLink, previousLink } = getContinuePreviousLinks(
-      '/apd/export',
-      staticItems
+      '1',
+      '/apd/1/export',
+      staticItems(1)
     );
     expect(continueLink).toBeFalsy();
-    expect(previousLink.url).toEqual('/apd/executive-summary');
+    expect(previousLink.url).toEqual('/apd/1/executive-summary');
   });
 });
 
@@ -83,7 +100,13 @@ describe('nav reducer', () => {
   let state;
 
   beforeEach(() => {
-    state = reducer();
+    state = reducer({
+      apdId: 1,
+      activities: [],
+      continueLink: null,
+      items: staticItems(1),
+      previousLink: null
+    });
   });
 
   it('has an initial state', () => {
@@ -115,7 +138,7 @@ describe('nav reducer', () => {
       const payload = {
         payload: {
           location: {
-            pathname: '/apd/proposed-budget',
+            pathname: '/apd/1/proposed-budget',
             hash: '#budget-summary-table'
           }
         }
@@ -130,12 +153,12 @@ describe('nav reducer', () => {
       const payload = {
         payload: {
           location: {
-            pathname: '/apd/apd-overview'
+            pathname: '/apd/1/apd-overview'
           }
         }
       };
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
-      expect(nextState.continueLink.url).toEqual('/apd/state-profile');
+      expect(nextState.continueLink.url).toEqual('/apd/1/state-profile');
     });
   });
 });
