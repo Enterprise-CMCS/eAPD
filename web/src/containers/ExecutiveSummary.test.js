@@ -150,7 +150,7 @@ describe('executive summary component', () => {
         },
         {
           key: 'a2',
-          dateRange: 'Dates not specified',
+          dateRange: 'Date not specified - Date not specified',
           name: 'activity 2',
           summary: 'second activity',
           combined: 310,

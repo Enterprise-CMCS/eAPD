@@ -7,7 +7,8 @@ const defaultProps = {
   hasEverLoggedOn: true,
   fetching: false,
   mfaType: 'email',
-  action: jest.fn()
+  saveAction: jest.fn(),
+  cancelAction: jest.fn()
 };
 
 // https://testing-library.com/docs/example-input-event/
@@ -37,7 +38,7 @@ describe('<LoginMFA />', () => {
       }
     );
     fireEvent.click(getByRole('button', { name: 'Verify Identity' }));
-    expect(defaultProps.action).toHaveBeenCalledWith('testotp');
+    expect(defaultProps.saveAction).toHaveBeenCalledWith('testotp');
   });
 
   test('Back to Login button renders', () => {

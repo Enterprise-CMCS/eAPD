@@ -211,7 +211,14 @@ describe('Auth Util', () => {
   });
 
   it('logoutAndClearTokens', async () => {
-    const signOutSpy = jest
+    const revokeAccessTokenSpy = jest
+      .spyOn(mockOktaAuth, 'revokeAccessToken')
+      .mockImplementation(() =>
+        Promise.resolve({
+          status: 'SUCCESS'
+        })
+      );
+    const closeSessionSpy = jest
       .spyOn(mockOktaAuth, 'closeSession')
       .mockImplementation(() =>
         Promise.resolve({
@@ -220,8 +227,10 @@ describe('Auth Util', () => {
       );
 
     await logoutAndClearTokens();
-    await expect(signOutSpy).toHaveBeenCalledTimes(1);
+    await expect(closeSessionSpy).toHaveBeenCalledTimes(1);
+    await expect(revokeAccessTokenSpy).toHaveBeenCalledTimes(1);
 
-    signOutSpy.mockReset();
+    revokeAccessTokenSpy.mockReset();
+    closeSessionSpy.mockReset();
   });
 });
