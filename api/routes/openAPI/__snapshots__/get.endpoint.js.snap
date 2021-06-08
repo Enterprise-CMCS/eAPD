@@ -1109,6 +1109,44 @@ Object {
         ],
       },
     },
+    "/auth/state/{stateId}": Object {
+      "get": Object {
+        "description": "Switch from using one state to another, with updated and accurate permissions.",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "jwt": Object {
+                      "description": "a JWT",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "A JWT containing the new claims",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user can not switch to this state",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Exchanges a user's token from one state to another.",
+        "tags": Array [
+          "Authentication and authorization",
+        ],
+      },
+    },
     "/docs/account-registration": Object {
       "get": Object {
         "description": "Get the account registration documentation",

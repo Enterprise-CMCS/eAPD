@@ -21,6 +21,15 @@ const roleObjectSchema = {
   }
 };
 
+const jwtObjectSchema = {
+  type: 'object',
+  properties: {
+    jwt: {
+      type: 'string',
+      description: 'a JWT'
+    }
+  }
+}
 const openAPI = {
   '/auth/roles': {
     get: {
@@ -31,6 +40,27 @@ const openAPI = {
         200: {
           description: 'The list of roles known to the system',
           content: jsonResponse(arrayOf(roleObjectSchema))
+        }
+      }
+    }
+  },
+
+  '/auth/state/{stateId}': {
+    get: {
+      tags: ['Authentication and authorization'],
+      summary: 'Exchanges a user\'s token from one state to another.' ,
+      description: 'Switch from using one state to another, with updated and accurate permissions.',
+      responses: {
+        200: {
+          description: 'A JWT containing the new claims',
+          content: jsonResponse(jwtObjectSchema)
+          },
+        401: {
+          description: 'The user is not logged in',
+
+        },
+        403: {
+          description: 'The user can not switch to this state',
         }
       }
     }

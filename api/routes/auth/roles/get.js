@@ -11,6 +11,8 @@ module.exports = (app, { getActiveAuthRoles = gr, changeState = cs } = {}) => {
   app.get('/auth/state/:stateId', async (req, res) => {
     const { stateId } = req.params;
     const user = req.user
+    // todo replace with validForState middleware when available
+    if (!user) res.status(401).send();
     if (user.states.includes(stateId)){
       const jwt = await changeState(user, stateId)
       res.send({jwt})

@@ -1,3 +1,5 @@
+const { actualVerifyEAPDToken } = require('../../../auth/jwtUtils');
+
 const {
   getDB,
   setupDB,
@@ -23,5 +25,25 @@ describe('auth roles endpoint | GET /auth/roles', () => {
 
     expect(response.status).toEqual(200);
     expect(response.data).toMatchSnapshot();
+  });
+});
+
+describe('state switch endpoint | GET /auth/state/:stateId', () => {
+  const db = getDB();
+  beforeAll(() => setupDB(db));
+  afterAll(() => teardownDB(db));
+
+  const url = '/auth/state';
+
+  unauthenticatedTest('get', `${url}/ak`);
+  unauthorizedTest('get', `${url}/ak`);
+
+  it('when authenticated', async () => {
+    const api = login('all-permissions');
+    const response = await api.get(`${url}/mn`);
+
+    expect(response.status).toEqual(200);
+    const claims = await actualVerifyEAPDToken(response.data.jwt)
+    expect(claims.state).toMatchSnapshot();
   });
 });
