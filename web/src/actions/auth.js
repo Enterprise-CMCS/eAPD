@@ -122,10 +122,11 @@ const getCurrentUser = () => dispatch =>
       return null;
     });
 
-export const logout = () => async dispatch => {
+export const logout = () => dispatch => {
   dispatch(requestLogout());
-  await logoutAndClearTokens();
-  dispatch(completeLogout());
+  logoutAndClearTokens().then( () => {
+    dispatch(completeLogout()); 
+  }).catch(() => {});
 };
 
 export const extendSession = () => async dispatch => {
