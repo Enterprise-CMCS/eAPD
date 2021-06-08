@@ -369,11 +369,4 @@ tap.test('Local jwtUtils', async t => {
     t.same(user.state.id, 'original', 'original user is unchanged')
   })
 
-  t.test('Change State of a token', async t =>{
-    const err = { error: 'err0r' };
-    const getStateProfile = sinon.stub()
-    getStateProfile.rejects(err)
-
-  })
-
 })
