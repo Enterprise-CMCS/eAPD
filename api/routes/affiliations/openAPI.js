@@ -101,7 +101,7 @@ const affiliationSchema = {
 
 const tags = ['Affiliations'];
 
-const getAffiliations = {
+const getAffiliationsByState = {
   get: {
     tags,
     description: 'Get a list of all user affiliations for a US State',
@@ -196,9 +196,10 @@ const patchAffiliation = {
   }
 };
 
+
 const affiliationRoutes = {
   '/states/{stateId}/affiliations': {
-    ...getAffiliations,
+    ...getAffiliationsByState,
     ...postAffiliations
   },
   '/states/{stateId}/affiliations/{id}': {

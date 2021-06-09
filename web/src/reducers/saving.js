@@ -2,7 +2,7 @@ import {
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS,
-  SELECT_APD
+  SELECT_APD_SUCCESS
 } from '../actions/app';
 
 const initialState = {
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         lastSaved: new Date(action.data.updated).toLocaleString(),
         saving: false
       };
-    case SELECT_APD:
+    case SELECT_APD_SUCCESS:
       return {
         ...state,
         error: false,
