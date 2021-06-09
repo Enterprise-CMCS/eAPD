@@ -9,12 +9,14 @@ jest.mock('react-router-dom', () => {
   mockPush = jest.fn();
   return {
     useHistory: jest.fn().mockReturnValue({ push: mockPush }),
-    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' })
+    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' }),
+    useParams: jest.fn().mockReturnValue({ apdId: 2 })
   };
 });
 
 describe('executive summary component', () => {
   const props = {
+    apdId: 1,
     data: [
       {
         key: 'a1',
@@ -24,12 +26,12 @@ describe('executive summary component', () => {
         federal: 1050,
         medicaid: 1150,
         ffys: {
-          '1': {
+          1: {
             total: 5232,
             federal: 2883,
             medicaidShare: 23626
           },
-          '2': {
+          2: {
             total: 848622,
             federal: 826,
             medicaidShare: 2468252
@@ -44,12 +46,12 @@ describe('executive summary component', () => {
         federal: 2050,
         medicaid: 2150,
         ffys: {
-          '1': {
+          1: {
             total: 26926,
             federal: 2356,
             medicaidShare: 989264
           },
-          '2': {
+          2: {
             total: 54634738,
             federal: 643,
             medicaidShare: 73
@@ -63,12 +65,12 @@ describe('executive summary component', () => {
       federal: 20,
       medicaid: 30,
       ffys: {
-        '1': {
+        1: {
           total: 5232,
           federal: 2883,
           medicaidShare: 23626
         },
-        '2': {
+        2: {
           total: 848622,
           federal: 826,
           medicaidShare: 2468252
@@ -110,22 +112,22 @@ describe('executive summary component', () => {
         activities: {
           a1: {
             costsByFFY: {
-              '1': 'a1 ffy 1 costs',
-              '2': 'a1 ffy 2 costs',
+              1: 'a1 ffy 1 costs',
+              2: 'a1 ffy 2 costs',
               total: { federal: 1050, medicaidShare: 1150, total: 950 }
             }
           },
           a2: {
             costsByFFY: {
-              '1': 'a2 ffy 1 costs',
-              '2': 'a2 ffy 2 costs',
+              1: 'a2 ffy 1 costs',
+              2: 'a2 ffy 2 costs',
               total: { federal: 410, medicaidShare: 510, total: 310 }
             }
           }
         },
         combined: {
-          '1': 'ffy 1 combined costs',
-          '2': 'ffy 2 combined costs',
+          1: 'ffy 1 combined costs',
+          2: 'ffy 2 combined costs',
           total: { federal: 1360, medicaid: 1460, total: 1260 }
         }
       }
@@ -142,21 +144,21 @@ describe('executive summary component', () => {
           federal: 1050,
           medicaid: 1150,
           ffys: {
-            '1': 'a1 ffy 1 costs',
-            '2': 'a1 ffy 2 costs'
+            1: 'a1 ffy 1 costs',
+            2: 'a1 ffy 2 costs'
           }
         },
         {
           key: 'a2',
-          dateRange: 'Dates not specified',
+          dateRange: 'Date not specified - Date not specified',
           name: 'activity 2',
           summary: 'second activity',
           combined: 310,
           federal: 410,
           medicaid: 510,
           ffys: {
-            '1': 'a2 ffy 1 costs',
-            '2': 'a2 ffy 2 costs'
+            1: 'a2 ffy 1 costs',
+            2: 'a2 ffy 2 costs'
           }
         }
       ],
@@ -165,8 +167,8 @@ describe('executive summary component', () => {
         federal: 1360,
         medicaid: 1460,
         ffys: {
-          '1': 'ffy 1 combined costs',
-          '2': 'ffy 2 combined costs'
+          1: 'ffy 1 combined costs',
+          2: 'ffy 2 combined costs'
         }
       },
       years: ['1', '2']

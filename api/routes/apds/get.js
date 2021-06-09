@@ -16,7 +16,10 @@ module.exports = (
 
       if (!stateId) {
         logger.verbose('user does not have an associated state');
-        return res.status(403).end();
+        return res
+          .status(403)
+          .send({ error: 'user does not have an associated state' })
+          .end();
       }
 
       const apds = (await getAllAPDsByState(stateId)).map(
@@ -48,7 +51,7 @@ module.exports = (
     }
   });
 
-  app.get('/apds/:id(\\d+)', can('view-document'), async (req, res, next) => {
+  app.get('/apds/:id(\\d+)', can('edit-document'), async (req, res, next) => {
     logger.silly({ id: req.id, message: 'handling GET /apds/:id' });
 
     try {
@@ -56,7 +59,10 @@ module.exports = (
 
       if (!stateId) {
         logger.verbose('user does not have an associated state');
-        return res.status(401).end();
+        return res
+          .status(403)
+          .send({ error: 'user does not have an associated state' })
+          .end();
       }
 
       const apdFromDB = await getAPDByIDAndState(req.params.id, stateId);
@@ -79,7 +85,7 @@ module.exports = (
       }
 
       logger.verbose({ id: req.id, message: 'apd does not exist' });
-      return res.status(400).end();
+      return res.status(404).send({ error: 'apd does not exist' }).end();
     } catch (e) {
       return next(e);
     }

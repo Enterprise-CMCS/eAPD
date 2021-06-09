@@ -31,7 +31,8 @@ import {
   FETCH_ALL_APDS_SUCCESS,
   RESET,
   SAVE_APD_SUCCESS,
-  SELECT_APD,
+  SELECT_APD_SUCCESS,
+  SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD
 } from '../actions/app';
 import { defaultAPDYearOptions, generateKey } from '../util';
@@ -269,12 +270,6 @@ export const getAPDYearRange = ({
     ? `${years[0]}${years.length > 1 ? `-${years[years.length - 1]}` : ''}`
     : '';
 
-export const getIsAnAPDSelected = ({
-  apd: {
-    data: { id }
-  }
-}) => !!id;
-
 export const getPatchesForAddingItem = (state, path) => {
   switch (path) {
     case '/keyPersonnel/-':
@@ -427,7 +422,7 @@ const reducer = (state = initialState, action) => {
     case RESET:
       return { ...state, data: {} };
 
-    case SELECT_APD:
+    case SELECT_APD_SUCCESS:
       return {
         ...state,
         data: {
@@ -478,6 +473,8 @@ const reducer = (state = initialState, action) => {
           yearOptions: defaultAPDYearOptions
         }
       };
+    case SELECT_APD_FAILURE:
+      return { ...state, data: {}, fetching: false, error: action.data };
     case SET_APD_TO_SELECT_ON_LOAD:
       return { ...state, selectAPDOnLoad: true };
 

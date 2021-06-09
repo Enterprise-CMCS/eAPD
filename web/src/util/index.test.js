@@ -10,7 +10,7 @@ describe('utility arrays', () => {
     const { ACTIVITY_FUNDING_SOURCES, STATES, STANDARDS } = load();
 
     expect(ACTIVITY_FUNDING_SOURCES).toEqual(['HIT', 'HIE', 'MMIS']);
-    expect(STATES.length).toBe(56);
+    expect(STATES.length).toBe(57);
     expect(STANDARDS.length).toBe(11);
   });
 });
@@ -99,14 +99,20 @@ describe('utility functions', () => {
     expect(stateDateRangeToDisplay('2014-04-03', '2015-04-19')).toEqual(
       '4/3/2014 - 4/19/2015'
     );
-    expect(stateDateRangeToDisplay(null, null)).toEqual('Dates not specified');
+    expect(stateDateRangeToDisplay(null, null)).toEqual('Date not specified - Date not specified');
     expect(stateDateRangeToDisplay('2014-04-03', null)).toEqual(
-      'Dates not specified'
+      '4/3/2014 - Date not specified'
     );
     expect(stateDateRangeToDisplay(null, '2015-04-09')).toEqual(
-      'Dates not specified'
+      'Date not specified - 4/9/2015'
     );
-    expect(stateDateRangeToDisplay()).toEqual('Dates not specified');
+    expect(stateDateRangeToDisplay(null, '9999-01-99')).toEqual(
+      'Date not specified - Invalid date'
+    );
+    expect(stateDateRangeToDisplay('2020-14-35', '9999-01-99')).toEqual(
+      'Invalid date - Invalid date'
+    );
+    expect(stateDateRangeToDisplay()).toEqual('Date not specified - Date not specified');    
   });
 
   test('converts an array into an object with array values as object keys', () => {

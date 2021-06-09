@@ -3,7 +3,7 @@ helpText: >-
   Activities are narrowly scoped bodies of work that comprise the APD. This section will help you 
   explain the goals, timelines, and cost of each activity.
 list:
-  title: Add Activity
+  title: Activities Dashboard
   instruction:
     short: >-
       List as many activities as necessary to cover all scope related to this APD.

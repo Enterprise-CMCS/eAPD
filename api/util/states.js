@@ -58,5 +58,8 @@ module.exports.states = [
   { id: 'gu', name: 'Guam' },
   { id: 'mp', name: 'Northern Mariana Islands' },
   { id: 'pr', name: 'Puerto Rico' },
-  { id: 'vi', name: 'U.S. Virgin Islands' }
+  { id: 'vi', name: 'U.S. Virgin Islands' },
+
+  // Federal
+  { id: 'fd', name: 'Federal'}
 ];

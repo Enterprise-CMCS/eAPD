@@ -27,6 +27,7 @@ const NameAndFundingSourceReview = ({
         }
         headingLevel="4"
         onEditClick={disableExpand ? null : expand}
+        objType="Funding Source"
       />
     </div>
   );

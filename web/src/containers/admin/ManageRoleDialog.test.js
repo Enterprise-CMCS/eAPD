@@ -24,29 +24,20 @@ describe('<ManageRoleDialog />', () => {
   };
   test('renders dialog box title', () => {
     const component = shallow(<ManageRoleDialog {...props} />);
-    expect(component.find('Edit Permissions')).toBeTruthy();
+    expect(component.find('Edit Role')).toBeTruthy();
   });
 
   test('renders affiliation information', () => {
     const component = shallow(<ManageRoleDialog {...props} />);
-    expect(
-      component
-        .find('p')
-        .at(0)
-        .text()
-    ).toEqual(`Name ${selectedAffiliation.displayName}`);
-    expect(
-      component
-        .find('p')
-        .at(1)
-        .text()
-    ).toEqual(`Phone Number ${selectedAffiliation.primaryPhone}`);
-    expect(
-      component
-        .find('p')
-        .at(2)
-        .text()
-    ).toEqual(`Email ${selectedAffiliation.email}`);
+    expect(component.find('p').at(0).text()).toEqual(
+      `Name ${selectedAffiliation.displayName}`
+    );
+    expect(component.find('p').at(1).text()).toEqual(
+      `Phone Number ${selectedAffiliation.primaryPhone}`
+    );
+    expect(component.find('p').at(2).text()).toEqual(
+      `Email ${selectedAffiliation.email}`
+    );
   });
 
   test('renders save and cancel buttons', () => {

@@ -1,10 +1,11 @@
-import { Button } from '@cmsgov/design-system';
+import { Alert, Button } from '@cmsgov/design-system';
 import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import Icon, { File, faPlusCircle, faSpinner } from './Icons';
+import Icon, { File, faPlusCircle } from './Icons';
 import Instruction from './Instruction';
+import DeleteModal from './DeleteModal';
 import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
@@ -13,31 +14,23 @@ import {
   getUserStateOrTerritoryStatus,
   getIsFedAdmin
 } from '../reducers/user.selector';
-import { STATE_AFFILIATION_STATUSES } from '../constants';
+import { AFFILIATION_STATUSES } from '../constants';
+import Loading from './Loading';
 
-const Loading = ({ children }) => (
-  <div className="ds-h2 ds-u-margin-top--7 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
-    <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
-    {children}
-  </div>
-);
-Loading.propTypes = { children: PropType.node.isRequired };
-
-const ApdList = (
-  {
-    apds,
-    createApd: create,
-    deleteApd: del,
-    fetching,
-    route,
-    selectApd: select,
-    state,
-    stateStatus,
-    isFedAdmin
-  },
-  { global = window } = {}
-) => {
+const ApdList = ({
+  apds,
+  createApd: create,
+  deleteApd: del,
+  fetching,
+  error,
+  route,
+  selectApd: select,
+  state,
+  approvalStatus,
+  isFedAdmin
+}) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const createNew = () => {
     setIsLoading(true);
@@ -47,17 +40,11 @@ const ApdList = (
   const open = id => e => {
     setIsLoading(true);
     e.preventDefault();
-    select(id, route);
-  };
-
-  const delApd = apd => () => {
-    if (apd && global.confirm(`Delete ${apd.name}?`)) {
-      del(apd.id);
-    }
+    select(id, `${route}/${id}`);
   };
 
   const canCreateApd =
-    !isFedAdmin && stateStatus === STATE_AFFILIATION_STATUSES.APPROVED;
+    !isFedAdmin && approvalStatus === AFFILIATION_STATUSES.APPROVED;
 
   if (isLoading) {
     return (
@@ -73,6 +60,11 @@ const ApdList = (
         <main id="start-main-content">
           <div className="ds-u-padding-top--2">
             <UpgradeBrowser />
+            {error && (
+              <Alert variation="error" role="alert">
+                {error}
+              </Alert>
+            )}
             <div className="ds-l-row ds-u-margin-top--7">
               <div className="ds-l-col--8 ds-u-margin-x--auto">
                 <div
@@ -123,7 +115,7 @@ const ApdList = (
                     </div>
                     <div className="ds-u-display--inline-block">
                       <h3 className="ds-u-margin-y--0">
-                        <a href="#!" onClick={open(apd.id)}>
+                        <a href={`${route}/${apd.id}`} onClick={open(apd.id)}>
                           <span className="ds-u-visibility--screen-reader">
                             Edit APD:{' '}
                           </span>
@@ -143,7 +135,7 @@ const ApdList = (
                       <Button
                         variation="transparent"
                         size="small"
-                        onClick={delApd(apd)}
+                        onClick={() => setShowDeleteModal(apd.id)}
                       >
                         Delete{' '}
                         <span className="ds-u-visibility--screen-reader">
@@ -154,6 +146,13 @@ const ApdList = (
                     </div>
                   </div>
                 </div>
+                {showDeleteModal === apd.id && (
+                  <DeleteModal
+                    objType="APD"
+                    onCancel={() => setShowDeleteModal(false)}
+                    onDelete={() => del(apd.id)}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -166,13 +165,14 @@ const ApdList = (
 ApdList.propTypes = {
   apds: PropType.array.isRequired,
   fetching: PropType.bool.isRequired,
+  error: PropType.string.isRequired,
   route: PropType.string,
   state: PropType.object.isRequired,
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  stateStatus: PropType.string.isRequired,
-  isFedAdmin: PropType.func.isRequired
+  isFedAdmin: PropType.bool.isRequired,
+  approvalStatus: PropType.string.isRequired
 };
 
 ApdList.defaultProps = {
@@ -181,11 +181,12 @@ ApdList.defaultProps = {
 
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
-  fetching: selectApds(state).fetching,
+  fetching: selectApds(state).fetching || false,
+  error: selectApds(state).error || null,
   state: state.user.data.state || null,
   isFedAdmin: getIsFedAdmin(state),
-  stateStatus:
-    getUserStateOrTerritoryStatus(state) || STATE_AFFILIATION_STATUSES.REQUESTED
+  approvalStatus:
+    getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });
 
 const mapDispatchToProps = {

@@ -19,7 +19,7 @@ exports[`executive summary component renders correctly 1`] = `
       <Review
         ariaLabel={null}
         className=""
-        editHref="/apd/activity/0/overview"
+        editHref="/apd/2/activity/0/overview"
         heading={
           <React.Fragment>
             Activity 
@@ -30,8 +30,10 @@ exports[`executive summary component renders correctly 1`] = `
         }
         headingLevel="4"
         key="a1"
+        objType={null}
         onDeleteClick={null}
         onEditClick={null}
+        title={null}
       >
         <p>
           first activity
@@ -129,7 +131,7 @@ exports[`executive summary component renders correctly 1`] = `
       <Review
         ariaLabel={null}
         className="ds-u-border-bottom--0"
-        editHref="/apd/activity/1/overview"
+        editHref="/apd/2/activity/1/overview"
         heading={
           <React.Fragment>
             Activity 
@@ -140,8 +142,10 @@ exports[`executive summary component renders correctly 1`] = `
         }
         headingLevel="4"
         key="a2"
+        objType={null}
         onDeleteClick={null}
         onEditClick={null}
+        title={null}
       >
         <p>
           second activity
@@ -245,8 +249,10 @@ exports[`executive summary component renders correctly 1`] = `
         editHref={null}
         heading="Total cost"
         headingLevel="4"
+        objType={null}
         onDeleteClick={null}
         onEditClick={null}
+        title={null}
       >
         <p>
           Verify that this information is correct. Edit activities above to make changes.

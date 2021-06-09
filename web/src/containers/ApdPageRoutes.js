@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {
   Switch,
   Route,
-  useRouteMatch as actualUseRouteMatch,
-  Redirect
+  Redirect,
+  useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
 import ApdHeader from './ApdHeader';
@@ -19,7 +19,7 @@ import ProposedBudget from './ProposedBudget';
 import ScheduleSummary from './ScheduleSummary';
 import StateProfile from '../components/ApdStateProfile';
 
-const ApdPageRoutes = ({ useRouteMatch }) => {
+const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
   const { path } = useRouteMatch();
 
   return (
@@ -32,7 +32,7 @@ const ApdPageRoutes = ({ useRouteMatch }) => {
         <ApdHeader />
 
         <Route exact path={path}>
-          <Redirect to={`${path}/apd-overview`} />
+          <Redirect to={`/apd/${apdId}/apd-overview`} />
         </Route>
 
         <Route path={`${path}/state-profile`}>
@@ -75,12 +75,14 @@ const ApdPageRoutes = ({ useRouteMatch }) => {
   );
 };
 
-ApdPageRoutes.defaultProps = {
-  useRouteMatch: actualUseRouteMatch
+ApdPageRoutes.propTypes = {
+  apdId: PropTypes.number,
+  useRouteMatch: PropTypes.func
 };
 
-ApdPageRoutes.propTypes = {
-  useRouteMatch: PropTypes.func
+ApdPageRoutes.defaultProps = {
+  apdId: null,
+  useRouteMatch: actualUseRouteMatch
 };
 
 export default ApdPageRoutes;

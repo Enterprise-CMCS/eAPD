@@ -27,8 +27,8 @@ exports[`Routes component renders correctly 1`] = `
       }
     }
     exact={false}
-    key="/apd"
-    path="/apd"
+    key="/apd/:apdId"
+    path="/apd/:apdId"
   />
   <Connect(PrivateRoute)
     component={
@@ -41,36 +41,8 @@ exports[`Routes component renders correctly 1`] = `
       }
     }
     exact={true}
-    key="/print"
-    path="/print"
-  />
-  <Connect(AdminRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(CreateAccount)",
-        "type": [Function],
-      }
-    }
-    isCard={true}
-    key="/create-account"
-    path="/create-account"
-  />
-  <Connect(AdminRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(EditAccount)",
-        "type": [Function],
-      }
-    }
-    isCard={true}
-    key="/edit-account"
-    path="/edit-account"
+    key="/print/:apdId"
+    path="/print/:apdId"
   />
   <Route
     component={
@@ -86,19 +58,6 @@ exports[`Routes component renders correctly 1`] = `
     key="/login"
     path="/login"
   />
-  <Connect(PrivateRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(StateAdmin)",
-        "type": [Function],
-      }
-    }
-    key="/state-admin"
-    path="/state-admin"
-  />
   <Route
     component={
       Object {
@@ -111,6 +70,32 @@ exports[`Routes component renders correctly 1`] = `
     }
     key="/logout"
     path="/logout"
+  />
+  <Connect(PrivateRoute)
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(ManageAccount)",
+        "type": [Function],
+      }
+    }
+    key="/manage-account"
+    path="/manage-account"
+  />
+  <Connect(PrivateRoute)
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(StateAdmin)",
+        "type": [Function],
+      }
+    }
+    key="/state-admin"
+    path="/state-admin"
   />
   <Route
     component={[Function]}

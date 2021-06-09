@@ -90,7 +90,7 @@ describe('APD files endpoints', () => {
       it(`with an APD in a state other than the user's state`, async () => {
         const response = await api.post(url(4000), form);
 
-        expect(response.status).toEqual(401);
+        expect(response.status).toEqual(403);
         expect(response.data).toMatchSnapshot();
       });
 
@@ -114,7 +114,7 @@ describe('APD files endpoints', () => {
         };
 
         api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(500);
+          expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
       });
@@ -132,7 +132,7 @@ describe('APD files endpoints', () => {
         };
 
         api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(500);
+          expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
       });
@@ -150,7 +150,7 @@ describe('APD files endpoints', () => {
         };
 
         api.post(url(4001), formData.getBuffer(), options).catch(e => {
-          expect(e.response.status).toEqual(500);
+          expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
       });

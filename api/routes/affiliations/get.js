@@ -1,20 +1,23 @@
 const logger = require('../../logger')('affiliations route get');
 const {
-  getPopulatedAffiliationsByStateId: gas,
-  getPopulatedAffiliationById: ga
+  getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
+  getPopulatedAffiliationById: _getPopulatedAffiliationsById,
+  getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
 } = require('../../db');
-const { can } = require('../../middleware');
+const { can, validForState } = require('../../middleware');
 
 module.exports = (
   app,
   {
-    getPopulatedAffiliationsByStateId = gas,
-    getPopulatedAffiliationById = ga
+    getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,
+    getPopulatedAffiliationById = _getPopulatedAffiliationsById,
+    getAllPopulatedAffiliations = _getAllPopulatedAffiliations,
   } = {}
 ) => {
   app.get(
     '/states/:stateId/affiliations',
     can('view-affiliations'),
+    validForState('stateId'),
     async (request, response, next) => {
       logger.info({
         id: request.id,
@@ -24,17 +27,20 @@ module.exports = (
       const { status = null } = request.query;
 
       try {
-        if (stateId !== request.user.state.id) {
-          logger.verbose('user does not have access to state');
-          return response.status(401).end();
-        }
+        if (stateId === 'fd'){
+          const affiliations = await getAllPopulatedAffiliations({
+            status
+          });
+          return response.send(affiliations);
 
+        }
         const affiliations = await getPopulatedAffiliationsByStateId({
           stateId,
           status
         });
 
         return response.send(affiliations);
+
       } catch (e) {
         return next(e);
       }
@@ -44,6 +50,7 @@ module.exports = (
   app.get(
     '/states/:stateId/affiliations/:id',
     can('view-affiliations'),
+    validForState('stateId'),
     async (request, response, next) => {
       logger.info({
         id: request.id,
@@ -51,10 +58,6 @@ module.exports = (
       });
       const { stateId, id } = request.params;
       try {
-        if (stateId !== request.user.state.id) {
-          logger.verbose('user does not have access to state');
-          return response.status(401).end();
-        }
 
         const affiliation = await getPopulatedAffiliationById({
           stateId,
@@ -69,10 +72,11 @@ module.exports = (
           id: request.id,
           message: `affiliation ${id} does not exist in ${stateId}`
         });
-        return response.status(400).end();
+        return response.status(404).end();
       } catch (e) {
         return next(e);
       }
     }
   );
+
 };

@@ -41,6 +41,8 @@ tap.test('apds POST endpoint', async endpointTest => {
       end: sandbox.stub()
     };
 
+    const next = sandbox.stub();
+
     const createAPD = sandbox.stub();
     const getStateProfile = sandbox.stub();
 
@@ -56,24 +58,36 @@ tap.test('apds POST endpoint', async endpointTest => {
       handler = app.post.args.pop().pop();
     });
 
-    tests.test('sends a 500 code for database errors', async test => {
-      getStateProfile.throws(new Error('boop'));
-      await handler(req, res);
+    tests.test('sends a 400 code for database errors', async test => {
+      const error = new Error('boop');
+      getStateProfile.throws(error);
+      await handler(req, res, next);
 
-      test.ok(res.status.calledWith(500), 'HTTP status set to 500');
-      test.ok(res.end.calledOnce, 'response is terminated');
+      test.ok(next.calledWith(error), 'HTTP status set to 400');
     });
 
-    // Why is a 500 status being returned when the frontend sends malformed data?
-    // Should this not be a 4xx status? What the heck?
     tests.test(
-      'sends a 500 if the newly-generated APD fails schema validation',
+      'sends a 400 if the newly-generated APD fails schema validation',
       async test => {
         getStateProfile.resolves({ medicaidDirector: { name: 3 } });
-        await handler(req, res);
+        await handler(req, res, next);
 
-        test.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        test.ok(res.end.calledOnce, 'response is terminated');
+        test.ok(
+          next.calledWith({
+            status: 400,
+            message: [
+              {
+                keyword: 'type',
+                instancePath: '/stateProfile/medicaidDirector/name',
+                schemaPath:
+                  'stateProfile.json/properties/medicaidDirector/properties/name/type',
+                params: { type: 'string' },
+                message: 'must be string'
+              }
+            ]
+          }),
+          'HTTP status set to 400'
+        );
       }
     );
 
@@ -84,13 +98,13 @@ tap.test('apds POST endpoint', async endpointTest => {
             alternatives: '',
             contractorResources: [],
             costAllocation: {
-              '2004': { ffp: { federal: 90, state: 10 }, other: 0 },
-              '2005': { ffp: { federal: 90, state: 10 }, other: 0 }
+              2004: { ffp: { federal: 90, state: 10 }, other: 0 },
+              2005: { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             costAllocationNarrative: {
               methodology: '',
-              '2004': { otherSources: '' },
-              '2005': { otherSources: '' }
+              2004: { otherSources: '' },
+              2005: { otherSources: '' }
             },
             description: '',
             expenses: [],
@@ -107,13 +121,13 @@ tap.test('apds POST endpoint', async endpointTest => {
             statePersonnel: [],
             summary: '',
             quarterlyFFP: {
-              '2004': {
+              2004: {
                 1: { contractors: 0, inHouse: 0 },
                 2: { contractors: 0, inHouse: 0 },
                 3: { contractors: 0, inHouse: 0 },
                 4: { contractors: 0, inHouse: 0 }
               },
-              '2005': {
+              2005: {
                 1: { contractors: 0, inHouse: 0 },
                 2: { contractors: 0, inHouse: 0 },
                 3: { contractors: 0, inHouse: 0 },
@@ -125,20 +139,20 @@ tap.test('apds POST endpoint', async endpointTest => {
         federalCitations: {},
         incentivePayments: {
           ehAmt: {
-            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
-            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
           },
           ehCt: {
-            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
-            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
           },
           epAmt: {
-            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
-            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
           },
           epCt: {
-            '2004': { 1: 0, 2: 0, 3: 0, 4: 0 },
-            '2005': { 1: 0, 2: 0, 3: 0, 4: 0 }
+            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
           }
         },
         keyPersonnel: [],
@@ -147,7 +161,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         narrativeHIT: '',
         narrativeMMIS: '',
         previousActivityExpenses: {
-          '2004': {
+          2004: {
             hithie: {
               federalActual: 0,
               totalApproved: 0
@@ -158,7 +172,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               50: { federalActual: 0, totalApproved: 0 }
             }
           },
-          '2003': {
+          2003: {
             hithie: {
               federalActual: 0,
               totalApproved: 0
@@ -169,7 +183,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               50: { federalActual: 0, totalApproved: 0 }
             }
           },
-          '2002': {
+          2002: {
             hithie: {
               federalActual: 0,
               totalApproved: 0
@@ -209,7 +223,7 @@ tap.test('apds POST endpoint', async endpointTest => {
 
       createAPD.resolves('apd id');
 
-      await handler(req, res);
+      await handler(req, res, next);
 
       test.same(
         createAPD.args[0][0],

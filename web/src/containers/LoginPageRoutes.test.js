@@ -111,13 +111,13 @@ describe('LoginPageRoutes', () => {
 
   it('should redirect the user to StateAccessRequest if that path is /login/affiliations/request', () => {
     const useRouteMatch = jest.fn().mockReturnValue({ path: '/login' });
-    const { queryByText } = renderWithConnection(
+    const { getByLabelText } = renderWithConnection(
       <LoginPageRoutes {...props} useRouteMatch={useRouteMatch} />,
       {
         initialHistory: ['/login/affiliations/request']
       }
     );
-    expect(queryByText(/Select your State Affiliation/i)).toBeTruthy();
+    expect(getByLabelText('Select your State Affiliation.')).toBeTruthy();
   });
 
   it('should redirect the user to StateAccessRequestConfirmation if that path is /login/affiliations/thank-you', () => {
@@ -130,7 +130,7 @@ describe('LoginPageRoutes', () => {
     );
     expect(
       queryByText(
-        /The State Administrator will verify your affiliation and credentials/i
+        /An administrator will verify your affiliation and credentials/i
       )
     ).toBeTruthy();
   });
