@@ -1,10 +1,6 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [
-    1751,
-    1753,
-    1754
-  ],
+  "allowlist": [1748],
   "registry": "https://registry.npmjs.org"
 }
