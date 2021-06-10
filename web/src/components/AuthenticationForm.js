@@ -11,6 +11,7 @@ const AuthenticationForm = ({
   id,
   legend,
   onSave,
+  onCancel,
   primaryButtonText: [primaryButtonNormal, primaryButtonWorking],
   secondaryButtonText,
   sectionName,
@@ -22,6 +23,11 @@ const AuthenticationForm = ({
   const handleSubmit = e => {
     e.preventDefault();
     if (canSubmit && onSave) onSave(e);
+  };
+
+  const handleCancel = e => {
+    e.preventDefault();
+    if (cancelable && onCancel) onCancel(e);
   };
 
   return (
@@ -64,7 +70,11 @@ const AuthenticationForm = ({
                 {children}
                 <hr className="ds-u-color--gray-lighter" />
                 <div className="ds-u-display--flex ds-u-justify-content--end ds-u-margin-top--3">
-                  {cancelable && (
+                  {cancelable && onCancel ? (
+                    <Button variation="transparent" onClick={handleCancel}>
+                      {secondaryButtonText}
+                    </Button>
+                  ) : (
                     <a
                       href="/"
                       className="ds-c-button ds-c-button--transparent"
@@ -108,6 +118,7 @@ AuthenticationForm.propTypes = {
   id: PropTypes.string,
   legend: PropTypes.string,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  onCancel: PropTypes.func,
   primaryButtonText: PropTypes.arrayOf(PropTypes.string),
   secondaryButtonText: PropTypes.string,
   sectionName: PropTypes.string,
@@ -125,6 +136,7 @@ AuthenticationForm.defaultProps = {
   id: null,
   legend: '',
   onSave: false,
+  onCancel: null,
   primaryButtonText: ['Save changes', 'Working'],
   secondaryButtonText: 'Cancel',
   sectionName: '',
