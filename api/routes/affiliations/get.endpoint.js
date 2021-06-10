@@ -24,6 +24,12 @@ describe('Affiliations endpoint | GET', () => {
       const response = await api.get('/states/ak/affiliations');
       expect(response.status).toEqual(200);
     });
+    // Figure this out when we have the
+    it('returns 200 for the "federal" state', async () => {
+      const fedAdminApi = login('fed-admin');
+      const response = await fedAdminApi.get('/states/fd/affiliations');
+      expect(response.status).toEqual(200);
+    });
   });
 
   describe('GET /states/:stateId/affiliations/:id', () => {
@@ -35,9 +41,10 @@ describe('Affiliations endpoint | GET', () => {
       expect(response.status).toEqual(200);
     });
 
-    it('returns 400', async () => {
+    it('returns 404', async () => {
       const response = await api.get('/states/ak/affiliations/9000');
-      expect(response.status).toEqual(400);
+      expect(response.status).toEqual(404);
     });
   });
+
 });
