@@ -1,6 +1,6 @@
 # Next release
 
-Anticipated release: June 1, 2021
+Anticipated release: June 7, 2021
 
 #### 🚀 New features
 
@@ -10,6 +10,7 @@ Anticipated release: June 1, 2021
 
 - Add a mongo server to the local environment ([#3105])
 - Connect API to mongodb ([#3106])
+- Create APD model ([#3107])
 
 # Previous releases
 
@@ -17,3 +18,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#3105]: https://github.com/CMSgov/eAPD/issues/3105
 [#3106]: https://github.com/CMSgov/eAPD/issues/3106
+[#3107]: https://github.com/CMSgov/eAPD/issues/3107
