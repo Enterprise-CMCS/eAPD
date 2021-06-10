@@ -1,7 +1,7 @@
 const auditor = require('../../audit');
 const logger = require('../../logger')('affiliations');
 const { raw: knex } = require('../../db');
-const { can } = require('../../middleware');
+const { can, validForState } = require('../../middleware');
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = auditor.actions;
 
@@ -23,6 +23,7 @@ module.exports = (app, { db = knex } = {}) => {
   app.patch(
     '/states/:stateId/affiliations/:id',
     can('edit-affiliations'),
+    validForState('stateId'),
     async (request, response, next) => {
       const userId = request.user.id;
       const { stateId, id } = request.params;
@@ -39,6 +40,7 @@ module.exports = (app, { db = knex } = {}) => {
         return;
       }
 
+      // Check that user is not editing themselves
       const { user_id: affiliationUserId } = await db('auth_affiliations')
         .select('user_id')
         .where({ state_id: stateId, id })
@@ -83,4 +85,5 @@ module.exports = (app, { db = knex } = {}) => {
       }
     }
   );
+
 };

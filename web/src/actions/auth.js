@@ -31,6 +31,7 @@ export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
 export const SWITCH_STATE_AFFILIATION = 'SWITCH_STATE_AFFILIATION';
 
+
 export const LATEST_ACTIVITY = 'LATEST_ACTIVITY';
 export const SESSION_ENDING_ALERT = 'SESSION_ENDING_ALERT';
 export const REQUEST_SESSION_RENEWAL = 'REQUEST_SESSION_RENEWAL';
@@ -123,10 +124,11 @@ const getCurrentUser = () => dispatch =>
       return null;
     });
 
-export const logout = () => async dispatch => {
+export const logout = () => dispatch => {
   dispatch(requestLogout());
-  await logoutAndClearTokens();
-  dispatch(completeLogout());
+  logoutAndClearTokens().then( () => {
+    dispatch(completeLogout()); 
+  }).catch(() => {});
 };
 
 export const extendSession = () => async dispatch => {
@@ -302,6 +304,26 @@ export const createAccessRequest = states => async dispatch => {
     return null;
   }
   return '/login/affiliations/thank-you';
+};
+
+export const updateAccessRequest = states => async dispatch => {
+  let failureReason = null;
+  await Promise.all(
+    states.map(async state => {
+      await axios
+        .post(`/states/${state.id}/affiliations`)
+        .then(() => {})
+        .catch(error => {
+          failureReason = error ? error.message : 'N/A';
+        });
+    })
+  );
+
+  if (failureReason) {
+    dispatch(failLogin(failureReason));
+    return null;
+  }
+  return dispatch(getCurrentUser());
 };
 
 export const completeAccessRequest = () => dispatch => {
