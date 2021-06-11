@@ -3,14 +3,25 @@ import React, { useState } from 'react';
 
 import AuthenticationForm from '../components/AuthenticationForm';
 
-const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
+const LoginMFA = ({
+  saveAction,
+  cancelAction,
+  errorMessage,
+  fetching,
+  hasEverLoggedOn
+}) => {
   const [otp, setOtp] = useState('');
 
   const changeOtp = ({ target: { value } }) => setOtp(value);
 
   const handleSubmit = e => {
     e.preventDefault();
-    action(otp);
+    saveAction(otp);
+  };
+
+  const handleCancel = e => {
+    e.preventDefault();
+    cancelAction();
   };
 
   return (
@@ -29,6 +40,7 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
         primaryButtonText={['Verify Identity', 'Verifying Identity']}
         secondaryButtonText="Back to Login"
         onSave={handleSubmit}
+        onCancel={handleCancel}
       >
         <div className="ds-u-margin-bottom--4">
           <label
@@ -58,7 +70,8 @@ const LoginMFA = ({ action, errorMessage, fetching, hasEverLoggedOn }) => {
 LoginMFA.propTypes = {
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
-  action: PropTypes.func.isRequired,
+  saveAction: PropTypes.func.isRequired,
+  cancelAction: PropTypes.func.isRequired,
   hasEverLoggedOn: PropTypes.bool.isRequired
 };
 
