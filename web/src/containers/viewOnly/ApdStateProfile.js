@@ -63,6 +63,7 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
         <br />
         {!!address2 &&
           address2}
+        <br />
         {city}, {state}{' '}
         {zip}
       </address>
