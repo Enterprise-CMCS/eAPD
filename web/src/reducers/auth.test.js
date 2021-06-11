@@ -149,7 +149,7 @@ describe('auth reducer', () => {
       isLoggingOut: true
     });
   });
-
+  
   it('should handle LOGOUT_SUCCESS', () => {
     expect(auth(initialState, { type: LOGOUT_SUCCESS })).toEqual({
       ...initialState,
@@ -164,7 +164,7 @@ describe('auth reducer', () => {
       user: null
     });
   });
-
+  
   describe('when user is already logged in', () => {
     it('should reset auth after LOGOUT_SUCCESS', () => {
       const state = {
