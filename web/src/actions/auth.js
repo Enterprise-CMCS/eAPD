@@ -69,6 +69,8 @@ export const updateSessionExpiration = expiresAt => ({
   data: expiresAt
 });
 
+// this could potentially be removed
+// and migrated to an associated dashboard action/reducer
 const loadData = activities => dispatch => {
   if (activities.includes('view-document')) {
     dispatch(fetchAllApds());
@@ -115,6 +117,10 @@ const getCurrentUser = () => dispatch =>
       if (userRes.data.activities) {
         dispatch(loadData(userRes.data.activities));
       }
+      // use another dispatch to update the jwt cookie and user store (this can also be used in the stateSwitch action since we will also need to do the same thing)
+      // build the dispatch(updateUserSession) here
+      
+      // then no longer do we need to set user data this way. only need to switch the "completed login flag"
       dispatch(completeLogin(userRes.data));
       return null;
     })
@@ -333,4 +339,10 @@ export const completeAccessRequest = () => dispatch => {
 
 export const switchAffiliation = state => async dispatch => {
   console.log('hit switchState with this request', state);
+  // hit Knolls state-switch endpoint
+  // which will return the new jwt
+  // update the cookie (overwrite it)
+  // unpack the jwt
+  // update the user object in redux (with the latest jwt)
+  // return them to dashboard or whatever
 }

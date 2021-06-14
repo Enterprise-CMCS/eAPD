@@ -75,6 +75,7 @@ StateSwitcher.defaultProps = {
 }
 
 const mapStateToProps = state => ({
+  // Switch this to just be states and use that from redux
   affiliations: state.user.data.affiliations,
 })
 
