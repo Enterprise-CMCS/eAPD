@@ -3,7 +3,6 @@ const affiliations = require('./affiliations');
 const apds = require('./apds');
 const auth = require('./auth');
 const docs = require('./docs');
-const me = require('./me');
 const roles = require('./roles');
 const states = require('./states');
 const users = require('./users');
@@ -15,7 +14,6 @@ module.exports = (
   apdsEndpoint = apds,
   authEndpoint = auth,
   docsEndpoint = docs,
-  meEndpoint = me,
   rolesEndpoint = roles,
   statesEndpoint = states,
   usersEndpoint = users,
@@ -29,8 +27,6 @@ module.exports = (
   authEndpoint(app);
   logger.debug('setting up routes for docs');
   docsEndpoint(app);
-  logger.debug('setting up routes for me');
-  meEndpoint(app);
   logger.debug('setting up routes for roles');
   rolesEndpoint(app);
   logger.debug('setting up routes for states');

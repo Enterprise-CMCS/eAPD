@@ -3,6 +3,7 @@
 Anticipated release: June 3, 2021
 
 #### 🚀 New features
+- Allow multiple states to be selected in onboarding process ([#2638])
 
 - Update APD paths to include APD id ([#2589])
 - Additional affiliations may be requested ([#2582])
