@@ -26,4 +26,36 @@ describe('APD Summary/viewOnly component', () => {
     expect(screen.queryByText(/Primary Person Name/i)).toBeTruthy();
     expect(screen.queryByText(/Primary APD Point of Contact/i)).toBeTruthy();
   });
+
+  test('renders the correct state medicaid office address when provided', () => {
+    const stateProfile = {
+      medicaidOffice: {
+        address1: '123 Street St',
+        state: 'MD'
+      },
+      medicaidDirector: {
+        name: 'Test'
+      }
+    };
+    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
+    expect(screen.queryByText(/123 Street St/i)).toBeTruthy();
+  });
+
+  test('renders the correct message when no address is provided', () => {
+    const stateProfile = {
+      medicaidOffice: {
+        address1: "",
+        address2: "",
+        state: "",
+        city: "",
+        zip: ""
+      },
+      medicaidDirector: {
+        name: 'Test'
+      }
+    };
+    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
+    expect(screen.queryByText(/No reponse was provided/i)).toBeTruthy();
+  });
+
 });
