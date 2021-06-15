@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const sandbox = sinon.createSandbox();
 const mockVerifier = sandbox.stub();
 
+const JWT_SECRET = process.env.JWT_SECRET || 'SOME_SECRET_VALUE_SHHHHH'
+process.env.JWT_SECRET=JWT_SECRET
 
 tap.test('Okta jwtUtils', async t => {
   t.afterEach(async () => {
@@ -222,6 +224,33 @@ tap.test('Local jwtUtils', async t => {
     Object.keys(payload).forEach(key =>{
       t.same(actualPayload[key], payload[key], `${key} is in the jwt`)
     })
+
+  })
+
+  t.test('missing secret causes an error', async t =>{
+    // remove the JWT_SECRET from the environment.
+    delete process.env.JWT_SECRET
+
+    // can't sign a payload without a JWT_SECRET
+    t.throws(() => sign(payload), 'a missing JWT_SECRET throws an error')
+
+    // reset the JWT_SECRET
+    process.env.JWT_SECRET=JWT_SECRET
+  })
+
+  t.test('changing the secret invalidates the token', async t =>{
+
+    // sanity check here because the rest of the test is inconclusive if this fails.
+    const token = sign(payload)
+    t.ok(actualVerifyEAPDToken(token), 'a valid token was verified')
+
+    // Change the secret and the token is now invalid
+    process.env.JWT_SECRET = 'ABCDEFG'
+    t.throws(() => actualVerifyEAPDToken(token), 'a changed JWT_SECRET throws an error')
+
+    // set it back and the token is valid again.
+    process.env.JWT_SECRET = JWT_SECRET
+    t.ok(actualVerifyEAPDToken(token), 'a valid token was verified')
 
   })
 
