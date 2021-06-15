@@ -1,12 +1,26 @@
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
+import axios from "axios";
 import oktaAuth from './oktaAuth';
 import { MFA_FACTORS } from '../constants';
 
 export const INACTIVITY_LIMIT = 300000;
 export const EXPIRE_EARLY_SECONDS = 300;
 
-export const getAccessToken = () => oktaAuth.getAccessToken();
+// exchange an okta token for an EAPD one
+export const exchangeAccessToken = async ({ accessToken }) => {
+  if (!accessToken) return null
+
+  const config = {
+    baseURL: process.env.API_URL,
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  }
+  const tokenResponse = await axios.get(`/me/jwToken`, config)
+  // null token instead of an error if we failed to get a token.
+  return tokenResponse.data?.jwt || null
+}
 
 export const getIdToken = () => oktaAuth.getIdToken();
 
@@ -15,32 +29,35 @@ export const getIdToken = () => oktaAuth.getIdToken();
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
-const setCookie = () => {
+const getConfig = () =>{
+  let config
+  if (
+    !process.env.API_URL ||
+    process.env.API_URL.match(new RegExp(/localhost/i))
+  ) {
+    config = {
+      sameSite: 'strict',
+      path: '/apds/'
+    };
+  } else if (process.env.API_URL.match('/api')) {
+    config = {
+      sameSite: 'strict',
+      path: '/api/apds/'
+    };
+  } else {
+    config = {
+      domain: '.cms.gov',
+      secure: true,
+      sameSite: 'lax',
+      path: '/apds/'
+    };
+  }
+  return config
+}
+const setCookie =  (accessToken) => {
   if (navigator.cookieEnabled) {
-    const jwt = getAccessToken();
-    let config = {};
-    if (
-      !process.env.API_URL ||
-      process.env.API_URL.match(new RegExp(/localhost/i))
-    ) {
-      config = {
-        sameSite: 'strict',
-        path: '/apds/'
-      };
-    } else if (process.env.API_URL.match('/api')) {
-      config = {
-        sameSite: 'strict',
-        path: '/api/apds/'
-      };
-    } else {
-      config = {
-        domain: '.cms.gov',
-        secure: true,
-        sameSite: 'lax',
-        path: '/apds/'
-      };
-    }
-    Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken: jwt }), config);
+    const config = getConfig()
+    Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken }, config));
   }
 };
 
@@ -58,6 +75,15 @@ export const setConsented = () => {
     path: '/'
   });
 };
+
+export const getLocalAccessToken = () =>{
+  try {
+    const rawCookie = JSON.parse(Cookies.get(API_COOKIE_NAME, getConfig()))
+    return rawCookie.accessToken
+  }catch (e){
+    return ''
+  }
+}
 
 // Log in methods
 export const authenticateUser = (username, password) => {
@@ -105,7 +131,13 @@ export const setTokens = sessionToken => {
       const { expiresAt = 0 } = accessToken;
       // if (stateToken === responseToken) { // state not currently being returned
       oktaAuth.tokenManager.setTokens(tokens);
-      if (expiresAt) setCookie(accessToken);
+      if (expiresAt) {
+        // exchange the okta token for an EAPD one.
+        const eAPDToken = await exchangeAccessToken(accessToken)
+        // set the EAPD token in the cookie
+        setCookie(eAPDToken);
+      }
+
       return expiresAt;
       // }
       // throw new Error('Authentication failed');
@@ -171,10 +203,15 @@ export const renewTokens = async () =>
     .then(async () => {
       return oktaAuth.tokenManager
         .get('accessToken')
-        .then(accessToken => {
+        .then(async accessToken => {
           if (accessToken) {
             const { expiresAt = 0 } = accessToken;
-            if (expiresAt) setCookie(accessToken);
+            if (expiresAt) {
+              // exchange the okta token for an EAPD one.
+              const eAPDToken = await exchangeAccessToken(accessToken)
+              // set the EAPD token in the cookie
+              setCookie(eAPDToken);
+            }
             return expiresAt;
           }
           return 0;

@@ -38,8 +38,8 @@ describe('api wrapper', () => {
       const apiMock = new MockAdapter(api);
       const mockAuth = require('./auth'); // eslint-disable-line global-require
       const managerSpy = jest
-        .spyOn(mockAuth, 'getAccessToken')
-        .mockImplementation(() => Promise.resolve('aaa.bbb.ccc'));
+        .spyOn(mockAuth, 'getLocalAccessToken')
+        .mockImplementation(() => 'aaa.bbb.ccc');
       apiMock.onGet('/').reply(200);
       await api.get('/');
       expect(apiMock.history.get[0].headers.Authorization).toEqual(
@@ -51,10 +51,10 @@ describe('api wrapper', () => {
     test('auth header is empty', async () => {
       const api = require('./api').default; // eslint-disable-line global-require
       const apiMock = new MockAdapter(api);
-      const mockOktaAuth = require('./oktaAuth'); // eslint-disable-line global-require
+      const mockAuth = require('./auth'); // eslint-disable-line global-require
       const managerSpy = jest
-        .spyOn(mockOktaAuth.tokenManager, 'get')
-        .mockImplementation(() => Promise.resolve({}));
+        .spyOn(mockAuth, 'getLocalAccessToken')
+        .mockImplementation(() => '');
       apiMock.onGet('/').reply(200);
       await api.get('/');
       expect(apiMock.history.get[0].headers.Authorization).toBeUndefined();
