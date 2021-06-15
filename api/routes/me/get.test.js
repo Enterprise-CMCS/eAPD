@@ -11,6 +11,7 @@ let app;
 let res;
 
 tap.test('me GET endpoint', async endpointTest => {
+
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
@@ -19,6 +20,7 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
+
     setupTest.ok(
       app.get.calledWith('/me', loggedIn, sinon.match.func),
       'me GET endpoint is registered'
@@ -26,14 +28,18 @@ tap.test('me GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get me users handler', async test => {
-    getEndpoint(app);
+    const updateFromOkta = sinon.stub()
+    getEndpoint(app, {updateFromOkta});
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][2];
-
-    await meHandler({ user: 'this is the user' }, res);
+    await meHandler({ user: {id: 123, message: 'this is the user' }}, res);
 
     test.ok(
-      res.send.calledWith('this is the user'),
+      res.send.calledWith({id: 123, message: 'this is the user' }),
       'sends back the user object'
     );
+
+    test.ok(
+      updateFromOkta.calledWith(123)
+    )
   });
 });
