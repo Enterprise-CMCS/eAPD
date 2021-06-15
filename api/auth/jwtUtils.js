@@ -70,8 +70,7 @@ const jwtExtractor = req => {
 
 // ****** Local JWT implementation below this line
 const getSecret = () => {
-  // todo change this. It is pretty bad.
-  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
+  return process.env.JWT_SECRET
 }
 
 /*
