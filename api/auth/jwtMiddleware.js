@@ -1,5 +1,4 @@
-const { jwtExtractor, verifyWebToken } = require('./jwtUtils');
-const { getUserByID: gu } = require('../db');
+const { jwtExtractor, verifyEAPDToken } = require('./jwtUtils');
 const logger = require('../logger')('jwt middleware');
 
 /**
@@ -11,33 +10,25 @@ const logger = require('../logger')('jwt middleware');
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
+ * @param {Object}
+ * an extractor that defines how to extract the JWT from the request
+ * a verify function that is used to verify the token.  This could be a request to Okta
+ * or a local verification with a local secret.
  */
 const jwtMiddleware = async (
   req,
   res,
   next,
   {
-    getUserByID = gu,
     extractor = jwtExtractor,
-    verifyToken = verifyWebToken
+    verifyToken = verifyEAPDToken
   } = {}
 ) => {
   try {
     const jwt = extractor(req);
     const claims = jwt ? await verifyToken(jwt) : false;
     if (!claims) return next();
-
-    // some values like group and application profile variables
-    // are returned by the claims for conveniences, but not retrieved
-    // by the standard getUser call to Okta, so these values should
-    // be passed in as additional values when possible.
-    const { uid, ...additionalValues } = claims;
-    const checkOkta = req.originalUrl === "/me"
-    const user = await getUserByID(uid, checkOkta, { additionalValues });
-    // const user = claims;
-    if (user) {
-      req.user = user;
-    }
+    req.user = claims
   } catch (err) {
     logger.error(`error message: ${err.message}`);
   }
