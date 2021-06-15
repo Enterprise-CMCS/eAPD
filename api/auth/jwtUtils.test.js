@@ -318,8 +318,8 @@ tap.test('Local jwtUtils', async t => {
 
   t.test('Change State of a token', async t =>{
 
-    const getStateProfile = sinon.stub()
-    getStateProfile.withArgs('new').resolves({
+    const getStateById = sinon.stub()
+    getStateById.withArgs('new').resolves({
       id:'new',
       address1: "New Address1",
       director: {
@@ -360,7 +360,7 @@ tap.test('Local jwtUtils', async t => {
       ]
     }
 
-    const token = await changeState(user, 'new', {getStateProfile_: getStateProfile})
+    const token = await changeState(user, 'new', {getStateById_: getStateById})
     const newUser = await actualVerifyEAPDToken(token)
 
     t.same(newUser.state.id, 'new', 'token has the new state')
