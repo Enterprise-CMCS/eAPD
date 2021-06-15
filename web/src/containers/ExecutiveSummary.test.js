@@ -9,12 +9,14 @@ jest.mock('react-router-dom', () => {
   mockPush = jest.fn();
   return {
     useHistory: jest.fn().mockReturnValue({ push: mockPush }),
-    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' })
+    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' }),
+    useParams: jest.fn().mockReturnValue({ apdId: 2 })
   };
 });
 
 describe('executive summary component', () => {
   const props = {
+    apdId: 1,
     data: [
       {
         key: 'a1',
@@ -148,7 +150,7 @@ describe('executive summary component', () => {
         },
         {
           key: 'a2',
-          dateRange: 'Dates not specified',
+          dateRange: 'Date not specified - Date not specified',
           name: 'activity 2',
           summary: 'second activity',
           combined: 310,
