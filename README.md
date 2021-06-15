@@ -54,6 +54,13 @@ export OKTA_SERVER_ID= #from admin, API -> Authorization Server, and the value u
 export OKTA_CLIENT_ID= #from admin, or Applications -> (your application) -> General
 export OKTA_API_KEY= #from admin, API -> Tokens -> Create Token, and the Token Value
 ```
+In addition, the app will issue a JWT for internal authentication.  This requires a separate secret.
+You will need to create one and export it to your environment using:
+
+```shell
+export JWT_SECRET= #Your secret.  Should be at lest 32 truly random characters (letter and numbers) in production.
+```
+
 
 ### Create Okta accounts
 

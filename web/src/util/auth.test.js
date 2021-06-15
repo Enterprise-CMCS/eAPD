@@ -10,9 +10,13 @@ import {
   renewTokens,
   logoutAndClearTokens,
   removeTokenListeners,
-  isUserActive
+  isUserActive,
+  exchangeAccessToken
 } from './auth';
+
 import { MFA_FACTOR_TYPES } from '../constants';
+import MockAdapter from 'axios-mock-adapter';
+
 
 describe('Auth Util', () => {
   it('authenticateUser', async () => {
@@ -233,4 +237,26 @@ describe('Auth Util', () => {
     revokeAccessTokenSpy.mockReset();
     closeSessionSpy.mockReset();
   });
+
+  it('exchanges an okta token for an eAPD one', async () => {
+    const accessToken = 'AAA.BBBBB.CCC'
+    const axios = require('axios'); // eslint-disable-line global-require
+    const fetchMock = new MockAdapter(axios);
+
+    fetchMock.onGet('/me/jwToken').reply(200, {jwt:accessToken});
+
+    const eAPDToken = await exchangeAccessToken({accessToken: 'XXX.YYYY.ZZZ' })
+    expect(eAPDToken).toEqual(accessToken)
+    expect(fetchMock.history.get[0].headers.Authorization).toEqual(
+      `Bearer XXX.YYYY.ZZZ`
+    );
+
+  });
+
+  it('does not try to contact the api if no access token is provided', async () => {
+
+    const eAPDToken = await exchangeAccessToken({ })
+    expect(eAPDToken).toEqual(null)
+
+  })
 });
