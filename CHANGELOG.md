@@ -20,6 +20,7 @@ Anticipated release: June 3, 2021
 #### ⚙️ Behind the scenes
 
 - Allowed Federal Admins to get and approve pending affiliations ([#2811])
+- Created endpoint to allow a user to switch states ([#3030])
 
 # Previous releases
 
@@ -32,5 +33,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2976]: https://github.com/CMSgov/eAPD/issues/2976
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
 [#3011]: https://github.com/CMSgov/eAPD/issues/3011
+[#3030]: https://github.com/CMSgov/eAPD/issues/3030
 [#3086]: https://github.com/CMSgov/eAPD/issues/3086
 [#3126]: https://github.com/CMSgov/eAPD/issues/3126

@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
+const { getStateProfile } = require('../db/states.js')
 
 
 /**
@@ -124,6 +125,15 @@ const exchangeToken = async (
   return user
 }
 
+const changeState  = async (user, stateId, { getStateProfile_ = getStateProfile }={}) =>{
+  // copy the user to prevent altering it
+  const newUser = JSON.parse(JSON.stringify(user))
+  newUser.state = await getStateProfile_(stateId)
+  newUser.state.id = stateId
+  newUser.activities = user.permissions[stateId]
+  return sign(newUser, {})
+}
+
 const mockVerifyEAPDJWT = token => {
   return getUserByID(token, false)
 }
@@ -136,7 +146,8 @@ if (process.env.NODE_ENV === 'test') {
     sign,
     verifyEAPDToken: mockVerifyEAPDJWT,
     exchangeToken,
-    actualVerifyEAPDToken: verifyEAPDToken
+    actualVerifyEAPDToken: verifyEAPDToken,
+    changeState
   };
 } else {
 
@@ -146,6 +157,7 @@ if (process.env.NODE_ENV === 'test') {
     getDefaultOptions,
     sign,
     verifyEAPDToken,
-    exchangeToken
+    exchangeToken,
+    changeState
   };
 }

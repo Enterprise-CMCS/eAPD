@@ -105,7 +105,7 @@ tap.test('Okta jwtUtils', async t => {
 });
 
 tap.test('Local jwtUtils', async t => {
-  const { getDefaultOptions, sign, actualVerifyEAPDToken, verifyWebToken, exchangeToken } = require('./jwtUtils');
+  const { getDefaultOptions, sign, actualVerifyEAPDToken, verifyWebToken, exchangeToken, changeState } = require('./jwtUtils');
 
   const payload = {
     user: 'Test User',
@@ -343,6 +343,59 @@ tap.test('Local jwtUtils', async t => {
       'get user not called because no JWT was present'
     )
 
+  })
+
+  t.test('Change State of a token', async t =>{
+
+    const getStateProfile = sinon.stub()
+    getStateProfile.withArgs('new').resolves({
+      id:'new',
+      address1: "New Address1",
+      director: {
+        name: "New Director",
+      },
+    })
+
+    const user = {
+      state:{
+        id:'original',
+        address1: "Original Address1",
+        director: {
+          name: "Original Director",
+        },
+      },
+      states: [
+        'original',
+        'new'
+      ],
+      permissions: {
+        original: [
+          "original-roles",
+          "original-affiliations",
+          "original-affiliations",
+        ],
+        new: [
+          "new-draft",
+          "new-document",
+          "new-document",
+          "new-roles"
+        ]
+      },
+      foo: 'bar',
+      activities: [
+        "original-roles",
+        "original-affiliations",
+        "original-affiliations",
+      ]
+    }
+
+    const token = await changeState(user, 'new', {getStateProfile_: getStateProfile})
+    const newUser = await actualVerifyEAPDToken(token)
+
+    t.same(newUser.state.id, 'new', 'token has the new state')
+    t.same(newUser.activities, user.permissions.new, 'token activities are those from the right permission set')
+    t.same(newUser.permissions, user.permissions, 'permissions are unaltered')
+    t.same(user.state.id, 'original', 'original user is unchanged')
   })
 
 })
