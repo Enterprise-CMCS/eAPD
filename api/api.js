@@ -14,7 +14,7 @@ const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
-const openAPI = require('./routes/openAPI/index');
+const me = require('./routes/me/index');
 
 const api = express();
 
@@ -46,7 +46,6 @@ api.get('/heartbeat', (_, res) => {
 
 logger.debug('setting out route for API docs');
 api.use('/api-docs', swaggerUi.serve);
-api.get('/api-docs', swaggerUi.setup(openAPI));
 
 api.use((_, res, next) => {
   // Disallow proxies from cacheing anything ("private"); instruct browsers to
@@ -96,6 +95,9 @@ api.use(bodyParser.json({ limit: '5mb' }));
 
 // Registers Passport, related handlers, and
 // login/logout endpoints
+logger.debug('setting up routes for me');
+// Me endpoints are for token exchange and use Okta tokens, not eAPD tokens
+me(api);
 logger.debug('setting up authentication');
 api.use(jsonWebTokenMiddleware);
 
