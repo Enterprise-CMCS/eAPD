@@ -3,30 +3,44 @@ import { Button } from '@cmsgov/design-system';
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 
 import { Section, Subsection } from '../components/Section';
 
-const ExportAndSubmit = ({ push: pushRoute }) => (
-  <Section resource="exportAndSubmit">
-    <Subsection resource="reviewAndDownload">
-      <p>
-        On the next page, you will be able to review and download a copy of your
-        APD as the first step in submitting a completed APD to CMS.
-      </p>
-      <Button
-        size="big"
-        variation="primary"
-        className="ds-u-margin-top--2"
-        onClick={() => pushRoute('/print')}
-      >
-        Continue to Review
-      </Button>
-    </Subsection>
-  </Section>
-);
+const ExportAndSubmit = ({ push: pushRoute, useParams }) => {
+  const paramApdId = +useParams().apdId;
+
+  if (!paramApdId) {
+    return <Redirect to="/apd" />;
+  }
+
+  return (
+    <Section resource="exportAndSubmit">
+      <Subsection resource="reviewAndDownload">
+        <p>
+          On the next page, you will be able to review and download a copy of
+          your APD as the first step in submitting a completed APD to CMS.
+        </p>
+        <Button
+          size="big"
+          variation="primary"
+          className="ds-u-margin-top--2"
+          onClick={() => pushRoute(`/print/${paramApdId}`)}
+        >
+          Continue to Review
+        </Button>
+      </Subsection>
+    </Section>
+  );
+};
 
 ExportAndSubmit.propTypes = {
-  push: PropTypes.func.isRequired
+  push: PropTypes.func.isRequired,
+  useParams: PropTypes.func
+};
+
+ExportAndSubmit.defaultProps = {
+  useParams: actualUseParams
 };
 
 const mapDispatchToProps = { push };

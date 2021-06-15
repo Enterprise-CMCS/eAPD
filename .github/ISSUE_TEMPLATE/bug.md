@@ -23,6 +23,7 @@ assignees: ''
 3. Step
 
 **Role Affected-**
+
 - [ ] All
 - [ ] Federal Admin
 - [ ] State Admin
@@ -30,7 +31,15 @@ assignees: ''
 - [ ] State Contractor
 - [ ] System Admin
 
+**Environment-**
+
+- [ ] All
+- [ ] PR #\_\_\_\_
+- [ ] Staging
+- [ ] Production
+
 **Browser-**
+
 - [ ] Firefox
 - [ ] Chrome
 - [ ] IE
