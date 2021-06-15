@@ -11,7 +11,7 @@ Anticipated release: June 3, 2021
 - On the state affiliation selection page, give users an option to log out ([#3011])
 - Updates date validation and formatting to be more accurate ([#3086])
 - Update Key State Personnel page to show if no information has been entered ([#3158])
-
+- Updated modal that displays when saving an APD fails ([#2997])
 #### 🐛 Bugs fixed
 
 - Investigate why rich text editor is losing formatting after page reload ([#2961])
@@ -32,6 +32,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2811]: https://github.com/CMSgov/eAPD/issues/2811
 [#2961]: https://github.com/CMSgov/eAPD/issues/2961
 [#2976]: https://github.com/CMSgov/eAPD/issues/2976
+[#2997]: https://github.com/CMSgov/eAPD/issues/2997
 [#3010]: https://github.com/CMSgov/eAPD/issues/3010
 [#3011]: https://github.com/CMSgov/eAPD/issues/3011
 [#3086]: https://github.com/CMSgov/eAPD/issues/3086
