@@ -173,6 +173,7 @@ const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(setupTokenManager());
   const expiresAt = await setTokens(sessionToken);
   dispatch(updateSessionExpiration(expiresAt));
+
   return dispatch(getCurrentUser());
 };
 
