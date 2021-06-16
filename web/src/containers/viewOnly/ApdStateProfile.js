@@ -85,7 +85,9 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
       <hr className="section-rule" />
       <h2>Key Personnel and Program Management</h2>
       <ol className="ds-u-padding-left--0">
-        {keyPersonnel.map((person, index) => buildPerson(person, index))}
+        {keyPersonnel.length > 0 
+          ? keyPersonnel.map((person, index) => buildPerson(person, index)) 
+          : 'No response was provided'}
       </ol>
     </div>
   );
