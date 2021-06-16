@@ -1,9 +1,15 @@
 const sinon = require('sinon');
 const tap = require('tap');
+
 const dbMock = require('./dbMock.test');
+const mongo = require('./mongodb');
+const {
+  apd: { document }
+} = require('../seeds/development/apds');
 
 const {
   createAPD,
+  deleteAPD, // temporarily delete
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,
@@ -11,23 +17,33 @@ const {
   updateAPDDocument
 } = require('./apds');
 
+const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
+let db;
+let clock;
+let clockStub;
+let id;
+
 tap.test('database wrappers / apds', async apdsTests => {
-  // Trisha Elric, Edward and Alfonse's mother, dies of complications from
-  // a plague, kicking off the Elric brothers' quest for human transmutation.
-  sinon.useFakeTimers(Date.UTC(1904, 9, 3, 0, 0, 0, 0));
-  const db = dbMock('apds');
+  apdsTests.before(async () => {
+    id = null;
+    // Trisha Elric, Edward and Alfonse's mother, dies of complications from
+    // a plague, kicking off the Elric brothers' quest for human transmutation.
+    clockStub = sinon.stub(Date, 'now').returns(nowDate);
+    db = dbMock('apds');
+    await mongo.setup();
+  });
 
   apdsTests.beforeEach(async () => {
     dbMock.reset();
   });
 
   apdsTests.test('creating an APD', async test => {
-    db.insert.withArgs('this is an apd').returnsThis();
-    db.returning.withArgs('id').resolves(['apd id']);
-
-    const id = await createAPD('this is an apd', { db });
-
-    test.equal(id, 'apd id');
+    id = await createAPD({
+      stateId: 'md',
+      status: 'draft',
+      ...document
+    });
+    test.ok(id, 'APD was created');
   });
 
   apdsTests.test('deleting an APD', async test => {
@@ -93,6 +109,10 @@ tap.test('database wrappers / apds', async apdsTests => {
   });
 
   apdsTests.test('updating an APD', async updateAPDDocumentTests => {
+    updateAPDDocumentTests.beforeEach(() => {
+      clock = sinon.useFakeTimers(nowDate);
+    });
+
     updateAPDDocumentTests.test('without a state profile', async test => {
       db.where.withArgs('id', 'apd id').returnsThis();
       db.update.rejects();
@@ -135,5 +155,17 @@ tap.test('database wrappers / apds', async apdsTests => {
 
       test.equal(updateDate, '1904-10-03T00:00:00.000Z');
     });
+  });
+
+  apdsTests.afterEach(async () => {
+    if (id) {
+      await deleteAPD(id);
+    }
+  });
+
+  apdsTests.teardown(async () => {
+    await mongo.teardown();
+    clock.restore();
+    clockStub.restore();
   });
 });

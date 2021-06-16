@@ -1,29 +1,29 @@
 const mongoose = require('mongoose');
 const tap = require('tap');
-const sinon = require('sinon');
 
 const mongo = require('./mongodb');
 
-const onSpy = sinon.spy(mongoose.connection, 'on');
-const onceSpy = sinon.spy(mongoose.connection, 'once');
+const STATE = {
+  disconnected: 0,
+  connected: 1,
+  connecting: 2,
+  disconnecting: 3
+};
 
-tap.test('mongo', async t => {
-  t.beforeEach(async () => {
-    onSpy.resetHistory();
-    onceSpy.resetHistory();
-  });
+tap.test('mongo', async mongoTests => {
+  mongoTests.test('setup/teardown', async setupTest => {
+    await mongo.setup();
+    setupTest.equal(
+      mongoose.connection.readyState,
+      STATE.connected,
+      'Mongoose is connected'
+    );
 
-  t.test('setup', async test => {
-    const connection = await mongo.setup();
-
-    test.ok(onSpy.calledWith('connected'), 'Mongoose connected successfully');
-
-    test.ok(onceSpy.calledWith('open'), 'Mongoose connect is open');
-
-    await connection.close();
-    test.ok(
-      onSpy.calledWith('disconnected'),
-      'Mongoose disconnected successfully'
+    await mongo.teardown();
+    setupTest.equal(
+      mongoose.connection.readyState,
+      STATE.disconnected,
+      'Mongoose is disconnected'
     );
   });
 });
