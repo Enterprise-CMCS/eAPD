@@ -1,11 +1,13 @@
 const knex = require('./knex');
 
 const getStateProfile = async (stateID, { db = knex } = {}) => {
+  console.log("in getStateProfile, stateID", stateID);
   const profile = await db('states')
-    .select('medicaid_office')
-    .where('id', stateID)
-    .first();
-
+  .select('medicaid_office')
+  .where('id', stateID)
+  .first();
+  
+  console.log("in getStateProfile, profile", profile);
   return profile.medicaid_office;
 };
 

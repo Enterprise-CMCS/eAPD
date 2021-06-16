@@ -1,3 +1,5 @@
+import jwtDecode from 'jwt-decode';
+
 import axios from '../util/api';
 
 import { fetchAllApds } from './app';
@@ -7,6 +9,8 @@ import {
   retrieveExistingTransaction,
   verifyMFA,
   setTokens,
+  removeCookie,
+  setCookie,
   getAvailableFactors,
   getFactor,
   setTokenListeners,
@@ -29,7 +33,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
-export const SWITCH_STATE_AFFILIATION = 'SWITCH_STATE_AFFILIATION';
+export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
 
 
 export const LATEST_ACTIVITY = 'LATEST_ACTIVITY';
@@ -59,7 +63,7 @@ export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
-// export const switchStateAffiliation = () => ({ type: SWITCH_STATE_AFFILIATION });
+export const updateUserInfo = user => ({ type: UPDATE_USER_INFO, data: user });
 export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
 export const setSessionEnding = () => ({ type: SESSION_ENDING_ALERT });
 export const requestSessionRenewal = () => ({ type: REQUEST_SESSION_RENEWAL });
@@ -339,6 +343,17 @@ export const completeAccessRequest = () => dispatch => {
 
 export const switchAffiliation = state => async dispatch => {
   console.log('hit switchState with this request', state);
+  await axios
+    .get(`/auth/state/${state}`)
+    .then((res) => {
+      console.log(res);
+      // Ty note: I used this because it was quick/easy.
+      // should I use the setTokens method instead?
+      setCookie(res.data.jwt);
+      const decoded = jwtDecode(res.data.jwt);
+      dispatch(updateUserInfo(decoded));
+
+    })
   // hit Knolls state-switch endpoint
   // which will return the new jwt
   // update the cookie (overwrite it)

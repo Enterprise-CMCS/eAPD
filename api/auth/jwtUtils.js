@@ -128,8 +128,11 @@ const exchangeToken = async (
 const changeState  = async (user, stateId, { getStateProfile_ = getStateProfile }={}) =>{
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user))
+  console.log(newUser);
   newUser.state = await getStateProfile_(stateId)
+  console.log(newUser.state);
   newUser.state.id = stateId
+  console.log(newUser.state.id);
   newUser.activities = user.permissions[stateId]
   return sign(newUser, {})
 }

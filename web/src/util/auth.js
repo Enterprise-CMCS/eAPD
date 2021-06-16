@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
-import axios from "axios";
+import axios from 'axios';
 import oktaAuth from './oktaAuth';
 import { MFA_FACTORS } from '../constants';
 
@@ -54,14 +54,14 @@ const getConfig = () =>{
   }
   return config
 }
-const setCookie =  (accessToken) => {
+export const setCookie =  (accessToken) => {
   if (navigator.cookieEnabled) {
     const config = getConfig()
     Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken }, config));
   }
 };
 
-const removeCookie = () => {
+export const removeCookie = () => {
   if (navigator.cookieEnabled) {
     Cookies.remove(API_COOKIE_NAME);
   }
