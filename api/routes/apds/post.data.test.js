@@ -12,7 +12,7 @@ const mockClock = sinon.useFakeTimers(new Date(1997, 6, 4).getTime());
 const getNewApd = require('./post.data');
 
 tap.test('APD data initializer', async test => {
-  tap.teardown(() => {
+  test.teardown(() => {
     mockClock.restore();
   });
 
@@ -26,13 +26,15 @@ tap.test('APD data initializer', async test => {
         alternatives: '',
         contractorResources: [],
         costAllocation: {
-          '1997': { ffp: { federal: 90, state: 10 }, other: 0 },
-          '1998': { ffp: { federal: 90, state: 10 }, other: 0 }
+          1997: { ffp: { federal: 90, state: 10 }, other: 0 },
+          1998: { ffp: { federal: 90, state: 10 }, other: 0 }
         },
         costAllocationNarrative: {
           methodology: '',
-          '1997': { otherSources: '' },
-          '1998': { otherSources: '' }
+          years: {
+            1997: { otherSources: '' },
+            1998: { otherSources: '' }
+          }
         },
         description: '',
         expenses: [],
@@ -49,13 +51,13 @@ tap.test('APD data initializer', async test => {
         statePersonnel: [],
         summary: '',
         quarterlyFFP: {
-          '1997': {
+          1997: {
             1: { contractors: 0, inHouse: 0 },
             2: { contractors: 0, inHouse: 0 },
             3: { contractors: 0, inHouse: 0 },
             4: { contractors: 0, inHouse: 0 }
           },
-          '1998': {
+          1998: {
             1: { contractors: 0, inHouse: 0 },
             2: { contractors: 0, inHouse: 0 },
             3: { contractors: 0, inHouse: 0 },
@@ -67,20 +69,20 @@ tap.test('APD data initializer', async test => {
     federalCitations: {},
     incentivePayments: {
       ehAmt: {
-        '1997': { 1: 0, 2: 0, 3: 0, 4: 0 },
-        '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
+        1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
+        1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
       },
       ehCt: {
-        '1997': { 1: 0, 2: 0, 3: 0, 4: 0 },
-        '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
+        1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
+        1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
       },
       epAmt: {
-        '1997': { 1: 0, 2: 0, 3: 0, 4: 0 },
-        '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
+        1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
+        1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
       },
       epCt: {
-        '1997': { 1: 0, 2: 0, 3: 0, 4: 0 },
-        '1998': { 1: 0, 2: 0, 3: 0, 4: 0 }
+        1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
+        1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
       }
     },
     keyPersonnel: [],
@@ -89,7 +91,7 @@ tap.test('APD data initializer', async test => {
     narrativeHIT: '',
     narrativeMMIS: '',
     previousActivityExpenses: {
-      '1997': {
+      1997: {
         hithie: {
           federalActual: 0,
           totalApproved: 0
@@ -100,7 +102,7 @@ tap.test('APD data initializer', async test => {
           50: { federalActual: 0, totalApproved: 0 }
         }
       },
-      '1996': {
+      1996: {
         hithie: {
           federalActual: 0,
           totalApproved: 0
@@ -111,7 +113,7 @@ tap.test('APD data initializer', async test => {
           50: { federalActual: 0, totalApproved: 0 }
         }
       },
-      '1995': {
+      1995: {
         hithie: {
           federalActual: 0,
           totalApproved: 0

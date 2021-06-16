@@ -1,17 +1,21 @@
+const mongoose = require('mongoose');
 const knex = require('./knex');
 const { updateStateProfile } = require('./states');
 
-const createAPD = async (apd, { db = knex } = {}) => {
-  const ids = await db('apds')
-    .insert(apd)
-    .returning('id');
-  return ids[0];
+const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
+  let newApd = new APD(apd);
+
+  newApd = await newApd.save();
+  return newApd._id; // eslint-disable-line no-underscore-dangle
+};
+
+const deleteAPD = async (id, { APD = mongoose.model('APD') } = {}) => {
+  const result = await APD.findOneAndRemove({ _id: id });
+  return result;
 };
 
 const deleteAPDByID = async (id, { db = knex } = {}) => {
-  await db('apds')
-    .where('id', id)
-    .update({ status: 'archived' });
+  await db('apds').where('id', id).update({ status: 'archived' });
 };
 
 const getAllAPDsByState = async (stateID, { db = knex } = {}) =>
@@ -54,6 +58,7 @@ const updateAPDDocument = async (
 
 module.exports = {
   createAPD,
+  deleteAPD,
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,

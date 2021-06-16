@@ -82,9 +82,6 @@ const apdSchema = new mongoose.Schema({
       },
       costAllocationNarrative: {
         methodology: String,
-        // this had to change slightly from the old model
-        // I had to add this (years) parent object so that the years could
-        // a map type, just wrap the years in the object in years: {}
         years: {
           type: Map,
           of: new mongoose.Schema({

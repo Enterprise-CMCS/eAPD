@@ -1,17 +1,19 @@
+const mongoose = require('mongoose');
 const tap = require('tap');
 
 const mongo = require('../db/mongodb');
-const APD = require('./apd');
+
 const {
   apd: { document }
 } = require('../seeds/development/apds');
 
 let newApd;
-let connection;
+let APD;
 
 tap.test('APD model test', async t => {
   t.before(async () => {
-    connection = await mongo.setup();
+    await mongo.setup();
+    APD = mongoose.model('APD');
   });
 
   t.beforeEach(async () => {
@@ -50,6 +52,6 @@ tap.test('APD model test', async t => {
   });
 
   t.teardown(async () => {
-    connection.close();
+    await mongo.teardown();
   });
 });
