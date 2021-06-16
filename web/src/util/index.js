@@ -127,11 +127,14 @@ export const generateKey = (() => {
  * @returns {String} Display-formatted date string.
  */
 export const stateDateToDisplay = date => {
+  if(!date) {
+    return 'Date not specified';
+  }
   const m = moment(date, 'YYYY-MM-DD');
   if (m.isValid()) {
     return m.format('M/D/YYYY');
   }
-  return 'Date not specified';
+  return 'Invalid date';
 };
 
 /**
@@ -143,12 +146,10 @@ export const stateDateToDisplay = date => {
  * @returns {String} Display-formatted date range string
  */
 export const stateDateRangeToDisplay = (start, end) => {
-  const starty = moment(start, 'YYYY-MM-DD');
-  const endy = moment(end, 'YYYY-MM-DD');
-  if (starty.isValid() && endy.isValid()) {
-    return `${starty.format('M/D/YYYY')} - ${endy.format('M/D/YYYY')}`;
-  }
-  return 'Dates not specified';
+  const startDate = stateDateToDisplay(start);
+  const endDate = stateDateToDisplay(end);
+
+  return `${startDate} - ${endDate}`;
 };
 
 /**

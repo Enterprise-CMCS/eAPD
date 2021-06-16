@@ -1,16 +1,22 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import {
+  Redirect,
+  useParams as actualUseParams,
+  useHistory as actualUseHistory,
+  useLocation as actualUseLocation
+} from 'react-router-dom';
 import TagManager from 'react-gtm-module';
 
 import Sidebar from './Sidebar';
 import UnexpectedError from './UnexpectedError';
-import { setApdToSelectOnLoad } from '../actions/app';
+import { setApdToSelectOnLoad, selectApd } from '../actions/app';
 
 import ApdPageRoutes from './ApdPageRoutes';
+import Loading from '../components/Loading';
 
-import { getIsAnAPDSelected, getAPDId } from '../reducers/apd';
+import { getAPDId } from '../reducers/apd';
 
 import {
   getIsAdmin,
@@ -19,21 +25,52 @@ import {
 } from '../reducers/user.selector';
 
 const ApdApplication = ({
-  apdSelected,
   isAdmin,
   isEditor,
   place,
   apdId,
+  selectApd: dispatchSelectApd,
   setApdToSelectOnLoad: dispatchSelectApdOnLoad,
-  userRole
+  userRole,
+  useParams,
+  useHistory,
+  useLocation
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const paramApdId = +useParams().apdId;
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!paramApdId && !apdId) {
+      dispatchSelectApdOnLoad('/apd');
+      history.push('/');
+    } else if (apdId && !paramApdId) {
+      history.push(`/apd/${apdId}`);
+    } else if (paramApdId && (!apdId || apdId !== paramApdId)) {
+      setIsLoading(true);
+      const { pathname = `/apd/${paramApdId}`, hash = '' } = location || {};
+      dispatchSelectApd(paramApdId, `${pathname}${hash}`);
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (apdId) {
+      setIsLoading(false);
+    }
+  }, [apdId]);
+
   if (isAdmin) {
     return <Redirect to="/" />;
   }
-
-  if (!apdSelected) {
-    dispatchSelectApdOnLoad('/apd');
-    return <Redirect to="/" />;
+  if (isLoading || !apdId) {
+    return (
+      <div id="start-main-content">
+        <Loading>Loading your APD</Loading>
+      </div>
+    );
   }
 
   TagManager.dataLayer({
@@ -51,7 +88,7 @@ const ApdApplication = ({
         <main id="start-main-content" className="site-main">
           {isEditor && <UnexpectedError />}
           <div className="ds-u-padding-top--2">
-            <ApdPageRoutes />
+            <ApdPageRoutes apdId={paramApdId} />
           </div>
         </main>
       </div>
@@ -60,21 +97,26 @@ const ApdApplication = ({
 };
 
 ApdApplication.propTypes = {
-  apdSelected: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   isEditor: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
-  apdId: PropTypes.string,
+  apdId: PropTypes.number,
+  selectApd: PropTypes.func.isRequired,
   setApdToSelectOnLoad: PropTypes.func.isRequired,
-  userRole: PropTypes.string.isRequired
+  userRole: PropTypes.string.isRequired,
+  useParams: PropTypes.func,
+  useHistory: PropTypes.func,
+  useLocation: PropTypes.func
 };
 
 ApdApplication.defaultProps = {
-  apdId: null
+  apdId: null,
+  useParams: actualUseParams,
+  useHistory: actualUseHistory,
+  useLocation: actualUseLocation
 };
 
 const mapStateToProps = state => ({
-  apdSelected: getIsAnAPDSelected(state),
   isAdmin: getIsAdmin(state),
   isEditor: getCanUserEditAPD(state),
   place: getUserStateOrTerritory(state),
@@ -82,7 +124,7 @@ const mapStateToProps = state => ({
   userRole: state.user.data.role || 'Pending Role'
 });
 
-const mapDispatchToProps = { setApdToSelectOnLoad };
+const mapDispatchToProps = { setApdToSelectOnLoad, selectApd };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdApplication);
 

@@ -4,9 +4,7 @@ Anticipated release: June 28, 2021
 
 #### 🚀 New features
 
-
 #### 🐛 Bugs fixed
-
 
 #### ⚙️ Behind the scenes
 

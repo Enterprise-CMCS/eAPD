@@ -13,12 +13,18 @@ import {
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS,
-  SELECT_APD,
+  SELECT_APD_SUCCESS,
+  SELECT_APD_REQUEST,
+  SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD
 } from './symbols';
 import { updateBudget } from '../budget';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
-import { ariaAnnounceApdLoaded, ariaAnnounceApdLoading } from '../aria';
+import {
+  ariaAnnounceApdLoaded,
+  ariaAnnounceApdLoading,
+  ariaAnnounceApdLoadingFailure
+} from '../aria';
 import { t } from '../../i18n';
 
 import { selectApdData } from '../../reducers/apd.selectors';
@@ -78,31 +84,45 @@ export const selectApd = (
   route,
   { global = window, pushRoute = push } = {}
 ) => dispatch => {
+  dispatch({ type: SELECT_APD_REQUEST });
   dispatch(ariaAnnounceApdLoading());
 
-  return axios.get(`/apds/${id}`).then(req => {
-    dispatch({ type: SELECT_APD, apd: req.data });
-    dispatch({ type: APD_ACTIVITIES_CHANGE, activities: req.data.activities });
-
-    // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
-    // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
-    // values using an EDIT_APD action. That way the initial values get saved back to the API.
-    if (Object.keys(req.data.federalCitations).length === 0) {
+  return axios
+    .get(`/apds/${id}`)
+    .then(req => {
+      dispatch({ type: SELECT_APD_SUCCESS, apd: req.data });
       dispatch({
-        type: EDIT_APD,
-        path: '/federalCitations',
-        value: initialAssurances
+        type: APD_ACTIVITIES_CHANGE,
+        activities: req.data.activities
       });
-    }
 
-    dispatch(updateBudget());
-    dispatch(pushRoute(route));
-    dispatch(ariaAnnounceApdLoaded());
+      // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
+      // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
+      // values using an EDIT_APD action. That way the initial values get saved back to the API.
+      if (Object.keys(req.data.federalCitations).length === 0) {
+        dispatch({
+          type: EDIT_APD,
+          path: '/federalCitations',
+          value: initialAssurances
+        });
+      }
 
-    if (global.localStorage) {
-      global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
-    }
-  });
+      dispatch(updateBudget());
+      dispatch(pushRoute(route));
+      dispatch(ariaAnnounceApdLoaded());
+
+      if (global.localStorage) {
+        global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
+      }
+    })
+    .catch(() => {
+      const error =
+        'This APD does not exist at this link. Check your link to make sure it is correct.';
+
+      ariaAnnounceApdLoadingFailure(error);
+      dispatch({ type: SELECT_APD_FAILURE, data: error });
+      dispatch(pushRoute('/'));
+    });
 };
 
 export const setApdToSelectOnLoad = () => (dispatch, getState) => {
@@ -118,7 +138,9 @@ export const createApd = ({ pushRoute = push } = {}) => dispatch => {
     .post('/apds')
     .then(async req => {
       dispatch({ type: CREATE_APD_SUCCESS, data: req.data });
-      await dispatch(selectApd(req.data.id, '/apd', { pushRoute }));
+      await dispatch(
+        selectApd(req.data.id, `/apd/${req.data.id}`, { pushRoute })
+      );
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
