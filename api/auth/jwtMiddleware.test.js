@@ -16,9 +16,6 @@ tap.test('jwtMiddleware', async t => {
   const next = sandbox.spy();
 
   const user = { name: 'dude' };
-  const payload = {
-    uid: '1234'
-  };
 
   t.afterEach(async () => {
     sandbox.resetHistory();
@@ -27,10 +24,8 @@ tap.test('jwtMiddleware', async t => {
   t.test('given a valid authorization header', async t => {
     const req = { headers: { Authorization: 'Bearer xxx.yyy.zzz' } };
     const extractor = () => 'xxx.yyy.zzz';
-    const getUserByID = () => user;
-    const verifyToken = () => payload;
+    const verifyToken = () => user;
     await jwtMiddleware(req, res, next, {
-      getUserByID,
       extractor,
       verifyToken
     });
@@ -56,10 +51,8 @@ tap.test('jwtMiddleware', async t => {
   t.test('cannot retrieve user', async t => {
     const req = { headers: { Authorization: 'blah' } };
     const extractor = () => true;
-    const getUserByID = () => null;
-    const verifyToken = () => payload;
+    const verifyToken = () => null;
     await jwtMiddleware(req, res, next, {
-      getUserByID,
       extractor,
       verifyToken
     });
