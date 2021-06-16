@@ -10,7 +10,7 @@ const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
 };
 
 const deleteAPD = async (id, { APD = mongoose.model('APD') } = {}) => {
-  const result = await APD.findOneAndRemove({ _id: id });
+  const result = await APD.deleteOne({ _id: id });
   return result;
 };
 
