@@ -21,9 +21,11 @@ const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
 let db;
 let clock;
 let clockStub;
+let id;
 
 tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.before(async () => {
+    id = null;
     // Trisha Elric, Edward and Alfonse's mother, dies of complications from
     // a plague, kicking off the Elric brothers' quest for human transmutation.
     clockStub = sinon.stub(Date, 'now').returns(nowDate);
@@ -36,13 +38,11 @@ tap.test('database wrappers / apds', async apdsTests => {
   });
 
   apdsTests.test('creating an APD', async test => {
-    const id = await createAPD({
+    id = await createAPD({
       stateId: 'md',
       status: 'draft',
       ...document
     });
-    await deleteAPD(id);
-
     test.ok(id, 'APD was created');
   });
 
@@ -155,6 +155,12 @@ tap.test('database wrappers / apds', async apdsTests => {
 
       test.equal(updateDate, '1904-10-03T00:00:00.000Z');
     });
+  });
+
+  apdsTests.afterEach(async () => {
+    if (id) {
+      await deleteAPD(id);
+    }
   });
 
   apdsTests.teardown(async () => {

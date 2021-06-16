@@ -1,3 +1,5 @@
+require('../models'); // import all of the mongo models
+
 const mongoose = require('mongoose');
 const logger = require('../logger')('mongoose');
 
@@ -17,8 +19,6 @@ const setup = () =>
       })
       .then(() => {
         logger.verbose('MongoDB connected');
-        require('../models'); // eslint-disable-line global-require
-        logger.verbose('loaded models');
         resolve(mongoose.connection);
       })
       .catch(err => {
