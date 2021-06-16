@@ -43,7 +43,7 @@ tap.test('database wrappers / apds', async apdsTests => {
     });
     await deleteAPD(id);
 
-    test.ok(id !== null, 'APD was created');
+    test.ok(id, 'APD was created');
   });
 
   apdsTests.test('deleting an APD', async test => {
