@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
-const { getStateProfile } = require('../db/states.js')
+const { getStateById } = require('../db/states.js')
 
 
 /**
@@ -125,12 +125,10 @@ const exchangeToken = async (
   return user
 }
 
-const changeState  = async (user, stateId, { getStateProfile_ = getStateProfile }={}) =>{
+const changeState  = async (user, stateId, { getStateById_ = getStateById }={}) =>{
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user))
-  console.log(newUser);
-  newUser.state = await getStateProfile_(stateId)
-  console.log(newUser.state);
+  newUser.state = await getStateById_(stateId)
   newUser.state.id = stateId
   console.log(newUser.state.id);
   newUser.activities = user.permissions[stateId]
