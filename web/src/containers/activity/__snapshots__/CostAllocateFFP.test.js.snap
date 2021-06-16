@@ -748,11 +748,9 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
 
 exports[`the CostAllocateFFP component renders correctly renders correctly in view-only mode 1`] = `
 <Fragment>
-  <h2
-    className="subsection--title ds-h2"
-  >
-    Budget and FFP
-  </h2>
+  <hr
+    className="custom-hr"
+  />
   <table
     className="budget-table activity-budget-table"
     id="activity0-ffy1990"
