@@ -89,6 +89,7 @@
     "form-data": "^4.0.0",
     "jsonpatch": "^3.0.1",
     "jsonpointer": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.4",
     "migrate-mongoose": "^4.0.0",
     "mongoose": "^5.12.11",

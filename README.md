@@ -55,6 +55,13 @@ export OKTA_CLIENT_ID= #from admin, or Applications -> (your application) -> Gen
 export OKTA_API_KEY= #from admin, API -> Tokens -> Create Token, and the Token Value
 export MONGO_URL=mongodb://mongo:cms@localhost:27017/eapd #url should reflect actual mongourl, this defaults to the mongo created by docker-compose
 ```
+In addition, the app will issue a JWT for internal authentication.  This requires a separate secret.
+You will need to create one and export it to your environment using:
+
+```shell
+export JWT_SECRET= #Your secret.  Should be at lest 32 truly random characters (letter and numbers) in production.
+```
+
 
 ### Create Okta accounts
 
