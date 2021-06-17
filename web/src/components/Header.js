@@ -154,7 +154,7 @@ class Header extends Component {
                         {/* Todo: Add logic to only show this if user has > 1 affiliations */}
                         <li>
                           <Link
-                            to="/switch-state"
+                            to="/switch-affiliation"
                             onClick={this.toggleDropdown}
                             className="nav--dropdown__action"
                             >

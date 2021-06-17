@@ -18,8 +18,8 @@ import {
 // when an item is selected and submitted, hit a redux action to update redux `user.data.state`
 // then idk, we need to re-load the whole app with that state?
 
-const StateSwitcher = ({
-  affiliations,
+const SwitchAffiliation = ({
+  availableAffiliations,
   currentStateId,
   switchAffiliation: switchUserAffiliation
 }) => {
@@ -34,20 +34,19 @@ const StateSwitcher = ({
       history.push(route);
     }
   }
-
-  const choiceList = affiliations.map(item => {
+  console.log('availableAffiliations', availableAffiliations);
+  const choiceList = availableAffiliations.map(item => {
     const choice = {
-      label: STATES.find(state => state.id === item.state_id).name,
-      value: item.state_id
+      label: STATES.find(state => state.id === item).name,
+      value: item
     }
-    if(item.state_id === currentStateId) {
+    if(item === currentStateId) {
       choice.defaultChecked = true;
     }
     return choice;
   });
 
   const handleChoiceSelection = e => {
-    // todo: add error handling here
     setSelectedAffiliation(e.target.value);
   }
 
@@ -73,20 +72,19 @@ const StateSwitcher = ({
 }
 
 
-StateSwitcher.propTypes = {
-  affiliations: PropTypes.array.isRequired,
+SwitchAffiliation.propTypes = {
+  availableAffiliations: PropTypes.array.isRequired,
   switchAffiliation: PropTypes.func.isRequired,
   currentStateId: PropTypes.string
 }
 
-StateSwitcher.defaultProps = {
+SwitchAffiliation.defaultProps = {
   // Todo: determine better way to have a default/null state
   currentStateId: ''
 }
 
 const mapStateToProps = state => ({
-  // Switch this to just be states and use that from redux
-  affiliations: state.user.data.affiliations,
+  availableAffiliations: state.user.data.states,
   currentStateId: state.user.data.state.id
 })
 
@@ -94,6 +92,6 @@ const mapDispatchToProps = {
   switchAffiliation
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StateSwitcher);
+export default connect(mapStateToProps, mapDispatchToProps)(SwitchAffiliation);
 
-export { StateSwitcher as plain, mapStateToProps, mapDispatchToProps};
+export { SwitchAffiliation as plain, mapStateToProps, mapDispatchToProps};

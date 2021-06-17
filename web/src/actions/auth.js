@@ -120,10 +120,9 @@ const getCurrentUser = () => dispatch =>
       if (userRes.data.activities) {
         dispatch(loadData(userRes.data.activities));
       }
-      // use another dispatch to update the jwt cookie and user store (this can also be used in the stateSwitch action since we will also need to do the same thing)
-      // build the dispatch(updateUserSession) here
-      
-      // then no longer do we need to set user data this way. only need to switch the "completed login flag"
+      // Ty note: this was updated such that completeLogin() now only
+      // switches redux to a logged in state. no longer does it update /auth/user.
+      // updateUserInfo will take care of updating it in the user reducer
       dispatch(completeLogin());
       dispatch(updateUserInfo(userRes.data));
       return null;
@@ -342,7 +341,7 @@ export const completeAccessRequest = () => dispatch => {
 };
 
 export const switchAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
-  if(stateToSwitchTo !== currentState) {
+  if (stateToSwitchTo !== currentState) {
     await axios
       .get(`/auth/state/${stateToSwitchTo}`)
       .then((res) => {
@@ -353,8 +352,9 @@ export const switchAffiliation = (stateToSwitchTo, currentState) => async dispat
         dispatch(updateUserInfo(decoded));
       })
       .catch(error => {
-        // do something with the error
-        // maybe failStateSwitch
+        // Ty note: should we do something to handle this error?
+        // maybe have something thrown back on the page?
+        console.log("error in switching affiliation", error)
       })
   }
   return '/';

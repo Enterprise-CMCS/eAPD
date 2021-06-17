@@ -5,7 +5,7 @@ import ApdViewOnly from './containers/viewOnly/Apd';
 import LoginApplication from './containers/LoginApplication';
 import ManageAccount from './containers/admin/ManageAccount';
 import StateAdmin from './containers/admin/StateAdmin';
-import StateSwitcher from './containers/StateSwitcher';
+import SwitchAffiliation from './containers/SwitchAffiliation';
 import Logout from './containers/Logout';
 
 const routes = [
@@ -24,7 +24,7 @@ const routes = [
   },
   { path: '/login', component: LoginApplication, isPublic: true, isCard: true },
   { path: '/logout', component: Logout, isPublic: true },
-  { path: '/switch-state', component: StateSwitcher, isPublic: false },
+  { path: '/switch-affiliation', component: SwitchAffiliation, isPublic: false },
   { path: '/manage-account', component: ManageAccount, isPublic: false },
   { path: '/state-admin', component: StateAdmin, isPublic: false },
   { component: NoMatch, isPublic: true }

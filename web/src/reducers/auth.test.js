@@ -36,7 +36,6 @@ describe('auth reducer', () => {
     isLoggingOut: false,
     isSessionEnding: false,
     isExtendingSession: false,
-    user: null,
     expiresAt: null
   };
 
@@ -125,15 +124,25 @@ describe('auth reducer', () => {
 
   it('should handle LOGIN_SUCCESS', () => {
     expect(
-      auth(initialState, { type: LOGIN_SUCCESS, data: 'user goes here' })
+      auth(initialState, { type: LOGIN_SUCCESS })
     ).toEqual({
       ...initialState,
       authenticated: true,
       fetching: false,
-      hasEverLoggedOn: true,
-      user: 'user goes here'
+      hasEverLoggedOn: true
     });
   });
+
+  it('should not update user info with LOGIN_SUCCESS', () => {
+    expect(
+      auth(initialState, { type: LOGIN_SUCCESS, data: 'user data'})
+    ).toEqual({
+      ...initialState,
+      authenticated: true,
+      fetching: false,
+      hasEverLoggedOn: true
+    })
+  })
 
   it('should handle LOGIN_FAILURE', () => {
     expect(auth(initialState, { type: LOGIN_FAILURE, error: 'foo' })).toEqual({
@@ -160,8 +169,7 @@ describe('auth reducer', () => {
       expiresAt: null,
       isSessionEnding: false,
       isExtendingSession: false,
-      isLoggingOut: false,
-      user: null
+      isLoggingOut: false
     });
   });
   
@@ -180,7 +188,6 @@ describe('auth reducer', () => {
         fetching: false,
         initialCheck: false,
         isLoggingOut: false,
-        user: null,
         selectState: false,
         factorsList: [],
         mfaEnrollType: '',

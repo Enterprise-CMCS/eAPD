@@ -91,8 +91,9 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.LOGIN_SUCCESS },
         {
-          type: actions.LOGIN_SUCCESS,
+          type: actions.UPDATE_USER_INFO,
           data: { name: 'moop', activities: [], states: ['MO'] }
         }
       ];
@@ -303,8 +304,9 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.LOGIN_SUCCESS },
         {
-          type: actions.LOGIN_SUCCESS,
+          type: actions.UPDATE_USER_INFO,
           data: { name: 'moop', activities: [], states: ['MO'] }
         }
       ];
@@ -656,8 +658,9 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         { type: actions.LATEST_ACTIVITY },
+        { type: actions.LOGIN_SUCCESS },
         {
-          type: actions.LOGIN_SUCCESS,
+          type: actions.UPDATE_USER_INFO,
           data: { name: 'moop', activities: ['something'], states: ['mo'] }
         }
       ];
@@ -1016,8 +1019,9 @@ describe('auth actions', () => {
           type: actions.UPDATE_EXPIRATION,
           data: expiresAt
         },
+        { type: actions.LOGIN_SUCCESS },
         {
-          type: actions.LOGIN_SUCCESS,
+          type: actions.UPDATE_USER_INFO,
           data: {
             name: 'moop',
             activities: [],
@@ -1146,8 +1150,9 @@ describe('auth actions', () => {
     it('should complete the state access request', async () => {
       const store = mockStore({});
       const expectedActions = [
+        { type: actions.LOGIN_SUCCESS },
         {
-          type: actions.LOGIN_SUCCESS,
+          type: actions.UPDATE_USER_INFO,
           data: {
             name: 'moop',
             activities: ['something'],
