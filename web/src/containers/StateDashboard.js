@@ -33,7 +33,8 @@ StateDashboard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  state: state.user.data.state || null,
+  // Todo: Update this to have a better default state
+  state: state.user.data.state || {name: 'Loading', id: ''},
   role: state.user.data.role || 'Pending Role',
   approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED

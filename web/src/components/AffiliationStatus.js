@@ -118,7 +118,8 @@ AffiliationStatus.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  state: state.user.data.state || null,
+  // Todo: update this to have a better default before user data is loaded in
+  state: state.user.data.state || {name: 'Loading', id: ''},
   approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });

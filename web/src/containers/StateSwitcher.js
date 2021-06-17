@@ -20,36 +20,33 @@ import {
 
 const StateSwitcher = ({
   affiliations,
-  currentState,
+  currentStateId,
   switchAffiliation: switchUserAffiliation
 }) => {
 
   const history = useHistory();
 
-  const [selectedAffiliation, setSelectedAffiliation] = useState('');
+  const [selectedAffiliation, setSelectedAffiliation] = useState(currentStateId);
 
   const onSave = async () => {
-    const route = await switchUserAffiliation(selectedAffiliation);
+    const route = await switchUserAffiliation(selectedAffiliation, currentStateId);
     if(route) {
       history.push(route);
     }
   }
 
   const choiceList = affiliations.map(item => {
-
     const choice = {
       label: STATES.find(state => state.id === item.state_id).name,
-      value: item.state_id,
-      defaultChecked: false
+      value: item.state_id
     }
-    if(item.state_id === currentState) {
+    if(item.state_id === currentStateId) {
       choice.defaultChecked = true;
     }
     return choice;
   });
 
   const handleChoiceSelection = e => {
-    console.log('change choice selection', e.target.value);
     // todo: add error handling here
     setSelectedAffiliation(e.target.value);
   }
@@ -78,17 +75,19 @@ const StateSwitcher = ({
 
 StateSwitcher.propTypes = {
   affiliations: PropTypes.array.isRequired,
-  switchAffiliation: PropTypes.func.isRequired
+  switchAffiliation: PropTypes.func.isRequired,
+  currentStateId: PropTypes.string
 }
 
 StateSwitcher.defaultProps = {
-
+  // Todo: determine better way to have a default/null state
+  currentStateId: ''
 }
 
 const mapStateToProps = state => ({
   // Switch this to just be states and use that from redux
   affiliations: state.user.data.affiliations,
-  currentState: state.user.data.state.id
+  currentStateId: state.user.data.state.id
 })
 
 const mapDispatchToProps = {

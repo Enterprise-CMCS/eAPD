@@ -138,6 +138,19 @@ class Header extends Component {
                             </Link>
                           </li>
                         )}
+                        <li>
+                          <Link
+                            to="/manage-account"
+                            onClick={this.toggleDropdown}
+                            className="nav--dropdown__action"
+                            >
+                              <Icon
+                                icon={faEdit}
+                                style={{ width: '14px' }}
+                                />
+                              Manage Account
+                            </Link>
+                        </li>
                         {/* Todo: Add logic to only show this if user has > 1 affiliations */}
                         <li>
                           <Link
@@ -150,19 +163,6 @@ class Header extends Component {
                                 style={{ width: '14px' }}
                               />
                               Switch State Affiliation
-                            </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/manage-account"
-                            onClick={this.toggleDropdown}
-                            className="nav--dropdown__action"
-                            >
-                              <Icon
-                                icon={faEdit}
-                                style={{ width: '14px' }}
-                              />
-                              Manage Account
                             </Link>
                         </li>
                         <li>

@@ -341,22 +341,22 @@ export const completeAccessRequest = () => dispatch => {
   return dispatch(getCurrentUser());
 };
 
-export const switchAffiliation = state => async dispatch => {
-  console.log('hit switchState with this request', state);
-  await axios
-    .get(`/auth/state/${state}`)
-    .then((res) => {
-      console.log(res);
-      // Ty note: I used this because it was quick/easy.
-      // should I use the setTokens method instead?
-      setCookie(res.data.jwt);
-      const decoded = jwtDecode(res.data.jwt);
-      dispatch(updateUserInfo(decoded));
-    })
-    .catch(error => {
-      // do something with the error
-      // maybe failStateSwitch
-    })
+export const switchAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
+  if(stateToSwitchTo !== currentState) {
+    await axios
+      .get(`/auth/state/${stateToSwitchTo}`)
+      .then((res) => {
+        // Ty note: I used this because it was quick/easy.
+        // should I use the setTokens method instead?
+        setCookie(res.data.jwt);
+        const decoded = jwtDecode(res.data.jwt);
+        dispatch(updateUserInfo(decoded));
+      })
+      .catch(error => {
+        // do something with the error
+        // maybe failStateSwitch
+      })
+  }
   return '/';
   // hit Knolls state-switch endpoint
   // which will return the new jwt
