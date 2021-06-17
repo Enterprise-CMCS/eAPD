@@ -11,7 +11,6 @@ import {
   LOGOUT_SUCCESS,
   STATE_ACCESS_REQUIRED,
   STATE_ACCESS_REQUEST,
-  UPDATE_USER_INFO,
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
@@ -34,7 +33,6 @@ const initialState = {
   isLoggingOut: false,
   isSessionEnding: false,
   isExtendingSession: false,
-  user: null,
   expiresAt: null
 };
 
@@ -89,8 +87,7 @@ const auth = (state = initialState, action) => {
         ...state,
         authenticated: true,
         fetching: false,
-        hasEverLoggedOn: true,
-        user: action.data
+        hasEverLoggedOn: true
       };
     case LOGIN_FAILURE:
       return {
@@ -114,8 +111,7 @@ const auth = (state = initialState, action) => {
         expiresAt: null,
         isSessionEnding: false,
         isExtendingSession: false,
-        isLoggingOut: false,
-        user: null
+        isLoggingOut: false
       };
     case STATE_ACCESS_REQUIRED:
       return {
@@ -126,11 +122,6 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         fetching: true
-      };
-    case UPDATE_USER_INFO:
-      return {
-        ...state,
-        user: action.data
       };
     case LATEST_ACTIVITY:
       return {

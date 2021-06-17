@@ -9,7 +9,6 @@ import {
   retrieveExistingTransaction,
   verifyMFA,
   setTokens,
-  removeCookie,
   setCookie,
   getAvailableFactors,
   getFactor,
@@ -57,7 +56,7 @@ export const mfaEnrollActivate = (mfaEnrollType, activationData) => ({
   data: { mfaEnrollType, activationData }
 });
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
-export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
+export const completeLogin = () => ({ type: LOGIN_SUCCESS });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
 export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
@@ -125,7 +124,8 @@ const getCurrentUser = () => dispatch =>
       // build the dispatch(updateUserSession) here
       
       // then no longer do we need to set user data this way. only need to switch the "completed login flag"
-      dispatch(completeLogin(userRes.data));
+      dispatch(completeLogin());
+      dispatch(updateUserInfo(userRes.data));
       return null;
     })
     .catch(error => {
@@ -352,8 +352,12 @@ export const switchAffiliation = state => async dispatch => {
       setCookie(res.data.jwt);
       const decoded = jwtDecode(res.data.jwt);
       dispatch(updateUserInfo(decoded));
-
     })
+    .catch(error => {
+      // do something with the error
+      // maybe failStateSwitch
+    })
+  return '/';
   // hit Knolls state-switch endpoint
   // which will return the new jwt
   // update the cookie (overwrite it)

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-// todo: use a selector to get affiliations
-// should we get the affiliations from user.data.state or auth.user.state??
-// import { getUserAffiliationForCurrentState } from '../reducers/user.selector';
+import { useHistory } from 'react-router-dom';
 
 import { ChoiceList } from '@cmsgov/design-system';
 import CardForm from '../components/CardForm';
+
+import { STATES } from '../util/states';
 
 import {
   switchAffiliation
@@ -21,21 +20,32 @@ import {
 
 const StateSwitcher = ({
   affiliations,
+  currentState,
   switchAffiliation: switchUserAffiliation
 }) => {
 
+  const history = useHistory();
+
   const [selectedAffiliation, setSelectedAffiliation] = useState('');
 
-  const onSave = () => {
-    console.log("onSave in StateSwitcher hit...");
-    switchUserAffiliation(selectedAffiliation);
+  const onSave = async () => {
+    const route = await switchUserAffiliation(selectedAffiliation);
+    if(route) {
+      history.push(route);
+    }
   }
 
   const choiceList = affiliations.map(item => {
-    return {
-      label: item.state_id,
-      value: item.state_id
+
+    const choice = {
+      label: STATES.find(state => state.id === item.state_id).name,
+      value: item.state_id,
+      defaultChecked: false
     }
+    if(item.state_id === currentState) {
+      choice.defaultChecked = true;
+    }
+    return choice;
   });
 
   const handleChoiceSelection = e => {
@@ -49,6 +59,7 @@ const StateSwitcher = ({
     <CardForm 
       onSave={onSave}
       primaryButtonText={["Submit", "Updating"]}
+      cancelable
     >
       <h1 className="ds-h3">State Affiliation</h1>
       <ChoiceList
@@ -77,6 +88,7 @@ StateSwitcher.defaultProps = {
 const mapStateToProps = state => ({
   // Switch this to just be states and use that from redux
   affiliations: state.user.data.affiliations,
+  currentState: state.user.data.state.id
 })
 
 const mapDispatchToProps = {

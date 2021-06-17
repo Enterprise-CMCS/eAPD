@@ -212,7 +212,7 @@ Header.defaultProps = {
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
-  currentUser: state.auth.user,
+  currentUser: state.user.data,
   isAdmin: getIsAdmin(state),
   currentState: getUserStateOrTerritory(state),
   canViewStateAdmin: getCanUserViewStateAdmin(state),
