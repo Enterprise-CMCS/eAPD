@@ -82,8 +82,8 @@ echo "module.exports = {
       OKTA_SERVER_ID: '__OKTA_SERVER_ID__',
       OKTA_CLIENT_ID: '__OKTA_CLIENT_ID__',
       OKTA_API_KEY: '__OKTA_API_KEY__',
-      JWT_SECRET: '__JWT_SECRET__'
-      MONGO_DATABASE: '__MONGO_DATABASE__'
+      JWT_SECRET: '__JWT_SECRET__',
+      MONGO_DATABASE: '__MONGO_DATABASE__',
       MONGO_URL: '__MONGO_URL__'
     },
   }]
