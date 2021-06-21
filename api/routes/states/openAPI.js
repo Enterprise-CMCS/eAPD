@@ -72,6 +72,11 @@ const getState = {
           description: 'US State or Territory',
           content: jsonResponse(fullStateSchema)
         },
+        403: {
+          description:
+            'Unauthorized, the user does not have permission to access this state.  ' +
+            'Switching states may resolve the issue.'
+        },
         404: {
           description:
             'The 2-letter, lowercase US State or Territory ID does not match any records'

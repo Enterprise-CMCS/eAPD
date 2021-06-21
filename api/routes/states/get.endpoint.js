@@ -23,18 +23,31 @@ describe('US States endpoint', () => {
   });
 
   describe('GET /states/:id', () => {
-    unauthenticatedTest('get', '/states/fl');
+    unauthenticatedTest('get', '/states/ak');
 
     it('returns 200', async () => {
       const authedClient = login();
-      const response = await authedClient.get('/states/fl');
+      const response = await authedClient.get('/states/ak');
       expect(response.status).toEqual(200);
       const keys = Object.keys(response.data);
       expect(keys).toEqual(['id', 'name', 'medicaid_office', 'stateAdmins']);
     });
 
-    it('returns 404', async () => {
+    it('returns 403', async () => {
       const authedClient = login();
+      // This state does not exist, therefore it can't be available to this user.
+      const response = await authedClient.get('/states/zz');
+      expect(response.status).toEqual(403);
+    });
+    it('works for a Federal Admin', async () => {
+      const authedClient = login('fed-admin');
+      // This state does not exist, therefore it can't be available to this user.
+      const response = await authedClient.get('/states/mn');
+      expect(response.status).toEqual(200);
+    });
+    it('gives a 404 to a Federal Admin for a fake state', async () => {
+      const authedClient = login('fed-admin');
+      // This state does not exist, therefore it can't be available to this user.
       const response = await authedClient.get('/states/zz');
       expect(response.status).toEqual(404);
     });
