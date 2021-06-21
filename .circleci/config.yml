@@ -607,7 +607,7 @@ jobs:
                 --OKTA_SERVER_ID "$PREVIEW_OKTA_SERVER_ID" \
                 --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
                 --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY" \
-                --JWT_SECRET "$PREVIEW_JWT_SECRET"
+                --JWT_SECRET "$PREVIEW_JWT_SECRET" \
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
                 --MONGO_URL "$PREVIEW_MONGO_URL"
 
