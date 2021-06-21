@@ -499,7 +499,9 @@ jobs:
               --OKTA_SERVER_ID "${<< parameters.env >>_OKTA_SERVER_ID}" \
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
               --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
-              --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}"
+              --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
+              --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
+              --MONGO_URL "${<< parameters.env >>_MONGO_URL}"
 
       - run:
           when: on_fail
@@ -606,6 +608,9 @@ jobs:
                 --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
                 --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY" \
                 --JWT_SECRET "$PREVIEW_JWT_SECRET"
+                --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
+                --MONGO_URL "$PREVIEW_MONGO_URL"
+
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
