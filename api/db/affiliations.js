@@ -1,16 +1,21 @@
 const logger = require('../logger')('db/affiliations');
-const { oktaClient } = require('../auth/oktaAuth');
 const knex = require('./knex');
 
 const selectedColumns = [
   'auth_affiliations.id',
   'auth_affiliations.user_id as userId',
   'auth_affiliations.state_id as stateId',
-  'auth_affiliations.status',
+  'auth_affiliations.status as status',
   'auth_affiliations.created_at as createdAt',
   'auth_affiliations.updated_at as updatedAt',
   'auth_affiliations.updated_by as updatedById',
-  'auth_roles.name as role'
+  'auth_roles.name as role',
+  'okta_users.displayName as displayName',
+  'okta_users.secondEmail as secondEmail',
+  'okta_users.primaryPhone as primaryPhone',
+  'okta_users.mobilePhone as mobilePhone',
+  'okta_users.email as email',
+
 ];
 
 const statusConverter = {
@@ -23,6 +28,7 @@ const getAffiliationsByStateId = ({ stateId, status, db = knex }) => {
   const query = db('auth_affiliations')
                 .select(selectedColumns)
                 .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+                .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
 
   if (status === 'pending') {
     return query.where({
@@ -49,49 +55,19 @@ const getAffiliationsByStateId = ({ stateId, status, db = knex }) => {
   return query.where({ state_id: stateId });
 };
 
-const populateAffiliation = async (affiliation, { client = oktaClient } = {}) => {
-  const { userId, updatedById } = affiliation;
-  if (userId) {
-    const {
-      profile: { displayName, email, secondEmail, primaryPhone, mobilePhone }
-    } = await client.getUser(userId);
-    const { profile: { displayName: updatedByName = null } = {} } = updatedById
-      ? await client.getUser(updatedById).catch(() => {
-          return { profile: { displayName: updatedById } };
-        })
-      : {};
-    return {
-      ...affiliation,
-      updatedBy: updatedByName,
-      displayName,
-      email,
-      secondEmail,
-      primaryPhone,
-      mobilePhone
-    };
-  }
-  return null;
-};
-
-const getPopulatedAffiliationsByStateId = async ({
+const getPopulatedAffiliationsByStateId = ({
   stateId,
   status,
-  getAffiliationsByStateId_ = getAffiliationsByStateId,
-  populateAffiliation_ = populateAffiliation
+  getAffiliationsByStateId_ = getAffiliationsByStateId
 }) => {
-  const affiliations = await getAffiliationsByStateId_({ stateId, status });
-  if (!affiliations) return [];
-  return Promise.all(
-    affiliations.map(async affiliation => {
-      return populateAffiliation_(affiliation);
-    })
-  );
+  return getAffiliationsByStateId_({ stateId, status });
 };
 
 const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
   return db('auth_affiliations')
     .select(selectedColumns)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+    .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
     .where({
       'auth_affiliations.state_id': stateId,
       'auth_affiliations.id': affiliationId
@@ -99,15 +75,12 @@ const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
     .first();
 };
 
-const getPopulatedAffiliationById = async ({
+const getPopulatedAffiliationById = ({
   stateId,
   affiliationId,
-  db = knex,
-  client = oktaClient
+  db = knex
 }) => {
-  const affiliation = await getAffiliationById({ stateId, affiliationId, db });
-  if (!affiliation) return null;
-  return populateAffiliation(affiliation, { client });
+  return getAffiliationById({ stateId, affiliationId, db });
 };
 
 const reduceAffiliations = affiliations =>{
@@ -142,6 +115,7 @@ const reduceAffiliations = affiliations =>{
 const getAllAffiliations = async ({ status, db = knex } = {}) => {
   const query = db('auth_affiliations')
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+    .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
     .select(selectedColumns);
 
   if (status){
@@ -163,18 +137,11 @@ const getAllPopulatedAffiliations = async ({
     status,
     db = knex,
     getAllAffiliations_ = getAllAffiliations,
-    populateAffiliation_ = populateAffiliation,
-    reduceAffiliations_ = reduceAffiliations,
-    client = oktaClient
+    reduceAffiliations_ = reduceAffiliations
   }) => {
   const affiliations = await getAllAffiliations_({ status, db });
   if (!affiliations) return null;
-  const reducedAffiliations = reduceAffiliations_(affiliations)
-  return Promise.all(
-    reducedAffiliations.map(async affiliation => {
-      return populateAffiliation_(affiliation, {client});
-    })
-  );
+  return reduceAffiliations_(affiliations)
 };
 
 
@@ -184,7 +151,6 @@ module.exports = {
   getAffiliationById,
   getPopulatedAffiliationById,
   getAllAffiliations,
-  populateAffiliation,
   reduceAffiliations,
   getAllPopulatedAffiliations,
   selectedColumns

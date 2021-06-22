@@ -3,21 +3,34 @@ const logger = require('../../logger')('user seeder');
 
 const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss'
 
+const formatOktaUser = oktaResult =>{
+  const {email, displayName, secondEmail, primaryPhone, mobilePhone, login} = oktaResult.profile
+  return {
+    user_id:oktaResult.id,
+    email,
+    // metadata: JSON.stringify(oktaResult.profile),
+    displayName,
+    secondEmail,
+    primaryPhone,
+    mobilePhone,
+    login,
+  }
+}
+
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
   await knex('state_admin_certifications').del();
   await knex('state_admin_certifications_audit').del();
+  await knex('okta_users').del();
   logger.info('Retrieving user ids from Okta');
-  const { id: regularUserId } = (await oktaClient.getUser('em@il.com')) || {};
-  const { id: fedAdminId } = (await oktaClient.getUser('fedadmin')) || {};
-  const { id: stateAdminId } = (await oktaClient.getUser('stateadmin')) || {};
-  const { id: stateStaffId } = (await oktaClient.getUser('statestaff')) || {};
-  const { id: stateContractorId } =
-    (await oktaClient.getUser('statecontractor')) || {};
-  const { id: requestedRoleId } =
-    (await oktaClient.getUser('requestedrole')) || {};
-  const { id: deniedRoleId } = (await oktaClient.getUser('deniedrole')) || {};
-  const { id: revokedRoleId } = (await oktaClient.getUser('revokedrole')) || {};
+  const regularUser = (await oktaClient.getUser('em@il.com')) || {};
+  const fedAdmin = (await oktaClient.getUser('fedadmin')) || {};
+  const stateAdmin = (await oktaClient.getUser('stateadmin')) || {};
+  const stateStaff = (await oktaClient.getUser('statestaff')) || {};
+  const stateContractor = (await oktaClient.getUser('statecontractor')) || {};
+  const requestedRole = (await oktaClient.getUser('requestedrole')) || {};
+  const deniedRole = (await oktaClient.getUser('deniedrole')) || {};
+  const revokedRole = (await oktaClient.getUser('revokedrole')) || {};
 
   logger.info('Retrieving role ids from database');
   const fedAdminRoleId = await knex('auth_roles')
@@ -39,11 +52,12 @@ const createUsersToAdd = async (knex, oktaClient) => {
 
   logger.info('Setting up affiliations and certifications to add');
   const oktaAffiliations = [];
-  const stateCertifications = []
+  const stateCertifications = [];
+  const oktaUsers = [];
 
-  if (regularUserId) {
+  if (regularUser) {
     oktaAffiliations.push({
-      user_id: regularUserId,
+      user_id: regularUser.id,
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
@@ -51,25 +65,27 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add an expired certification and this user will be downgraded to "regular user"
     stateCertifications.push({
-      username: regularUserId,
+      username: regularUser.id,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
       certificationExpiration: format(subDays(new Date(), 35), PostgresDateFormat),
       certifiedBy: 'seeds'
     })
+    oktaUsers.push(formatOktaUser(regularUser))
   }
-  if (fedAdminId) {
+  if (fedAdmin) {
     oktaAffiliations.push({
-      user_id: fedAdminId,
+      user_id: fedAdmin.id,
       state_id: 'ak',
       role_id: fedAdminRoleId,
       status: 'approved',
       updated_by: 'seeds'
     });
+    oktaUsers.push(formatOktaUser(fedAdmin))
   }
-  if (stateAdminId) {
+  if (stateAdmin) {
     oktaAffiliations.push({
-      user_id: stateAdminId,
+      user_id: stateAdmin.id,
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
@@ -77,16 +93,19 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
-      username: stateAdminId,
+      username: stateAdmin.id,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
       certificationExpiration: format(addDays(new Date(), 325), PostgresDateFormat),
       certifiedBy: 'seeds'
     })
+
+    oktaUsers.push(formatOktaUser(stateAdmin))
   }
-  if (stateStaffId) {
+
+  if (stateStaff) {
     oktaAffiliations.push({
-      user_id: stateStaffId,
+      user_id: stateStaff.id,
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
@@ -94,46 +113,55 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add an invalid certification and this user will remain an staff member
     stateCertifications.push({
-      username: stateStaffId,
+      username: stateStaff.id,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
       certificationExpiration: format(subDays(new Date(), 35), PostgresDateFormat),
       certifiedBy: 'seeds'
     })
+    oktaUsers.push(formatOktaUser(stateStaff))
   }
-  if (stateContractorId) {
+  if (stateContractor) {
     oktaAffiliations.push({
-      user_id: stateContractorId,
+      user_id: stateContractor.id,
       state_id: 'ak',
       role_id: stateContractorRoleId,
       status: 'approved',
       updated_by: 'seeds'
     });
+    oktaUsers.push(formatOktaUser(stateContractor))
+
   }
 
-  if (requestedRoleId) {
+  if (requestedRole) {
     oktaAffiliations.push({
-      user_id: requestedRoleId,
+      user_id: requestedRole.id,
       state_id: 'ak',
       status: 'requested'
     });
+
+    oktaUsers.push(formatOktaUser(requestedRole))
   }
-  if (deniedRoleId) {
+  if (deniedRole) {
     oktaAffiliations.push({
-      user_id: deniedRoleId,
+      user_id: deniedRole.id,
       state_id: 'ak',
       status: 'denied'
     });
+    oktaUsers.push(formatOktaUser(deniedRole))
   }
-  if (revokedRoleId) {
+  if (revokedRole) {
     oktaAffiliations.push({
-      user_id: revokedRoleId,
+      user_id: revokedRole.id,
       state_id: 'ak',
       status: 'revoked'
     });
+
+    oktaUsers.push(formatOktaUser(revokedRole))
   }
-  return {oktaAffiliations, stateCertifications};
+  return {oktaAffiliations, stateCertifications, oktaUsers};
 };
+
 
 module.exports = {
   createUsersToAdd
