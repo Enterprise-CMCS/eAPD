@@ -4,7 +4,10 @@ Anticipated release: June 28, 2021
 
 #### 🚀 New features
 
+- Updated modal that displays when saving an APD fails ([#2997])
+
 #### 🐛 Bugs fixed
+
 
 #### ⚙️ Behind the scenes
 
@@ -17,5 +20,6 @@ Anticipated release: June 28, 2021
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#3091]: https://github.com/CMSgov/eAPD/issues/3091
+[#2997]: https://github.com/CMSgov/eAPD/issues/2997
 [#3147]: https://github.com/CMSgov/eAPD/issues/3147
 [#3191]: https://github.com/CMSgov/eAPD/issues/3191
