@@ -340,6 +340,7 @@ export const completeAccessRequest = () => dispatch => {
   return dispatch(getCurrentUser());
 };
 
+// Todo: Test
 export const switchAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
   if (stateToSwitchTo !== currentState) {
     await axios
@@ -350,6 +351,7 @@ export const switchAffiliation = (stateToSwitchTo, currentState) => async dispat
         setCookie(res.data.jwt);
         const decoded = jwtDecode(res.data.jwt);
         dispatch(updateUserInfo(decoded));
+        dispatch(fetchAllApds());
       })
       .catch(error => {
         // Ty note: should we do something to handle this error?
