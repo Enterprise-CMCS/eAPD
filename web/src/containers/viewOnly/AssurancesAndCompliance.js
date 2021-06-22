@@ -18,14 +18,14 @@ const AssurancesAndCompliance = ({ citations }) => {
           </h4>
           <ul className="ds-c-list--bare">
             {citations[name].map(({ title, checked, explanation }) => (
-              <li key={title} style={{"page-break-inside": "avoid"}} className="ds-u-margin--1">
+              <li key={title} style={{"page-break-inside": "avoid"}} className="ds-u-margin--0">
                 <div className="ds-u-padding-bottom--1">
                   Does this APD comply with <LinkOrText link={regulations[title]} title={title} />?
                 </div>
                 {checked && <div><strong>Yes </strong></div> }
 
                 {checked === false &&
-                  <div className="ds-l-container ds-u-margin-left--0">
+                  <div className="ds-l-container ds-u-margin-left--0 ds-u-padding-left--0">
                     <div className="ds-l-row">
                       <div className="ds-l-col--1">
                         <strong>No</strong>
