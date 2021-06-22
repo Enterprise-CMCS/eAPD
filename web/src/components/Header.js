@@ -151,7 +151,6 @@ class Header extends Component {
                               Manage Account
                             </Link>
                         </li>
-                        {/* Todo: Add logic to only show this if user has > 1 affiliations */}
                         <li>
                           <Link
                             to="/switch-affiliation"

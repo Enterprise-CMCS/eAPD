@@ -12,12 +12,6 @@ import {
   switchAffiliation
 } from '../actions/auth';
 
-// outline
-// fetch available states the user has access to from redux
-// display those states in a radio list
-// when an item is selected and submitted, hit a redux action to update redux `user.data.state`
-// then idk, we need to re-load the whole app with that state?
-
 const SwitchAffiliation = ({
   availableAffiliations,
   currentStateId,
@@ -34,7 +28,7 @@ const SwitchAffiliation = ({
       history.push(route);
     }
   }
-  console.log('availableAffiliations', availableAffiliations);
+
   const choiceList = availableAffiliations.map(item => {
     const choice = {
       label: STATES.find(state => state.id === item).name,
@@ -51,7 +45,6 @@ const SwitchAffiliation = ({
   }
 
   return (
-
     <CardForm 
       onSave={onSave}
       primaryButtonText={["Submit", "Updating"]}
@@ -60,7 +53,6 @@ const SwitchAffiliation = ({
       <h1 className="ds-h3">State Affiliation</h1>
       <ChoiceList
         choices={choiceList}
-        // errorMessage="Example error message"
         label="Please select your state affiliation"
         labelClassName="ds-u-font-weight--normal ds-u-padding-bottom--1"
         name="radio_choices"
@@ -71,22 +63,20 @@ const SwitchAffiliation = ({
   )
 }
 
-
 SwitchAffiliation.propTypes = {
   availableAffiliations: PropTypes.array.isRequired,
   switchAffiliation: PropTypes.func.isRequired,
   currentStateId: PropTypes.string
-}
+};
 
 SwitchAffiliation.defaultProps = {
-  // Todo: determine better way to have a default/null state
   currentStateId: ''
-}
+};
 
 const mapStateToProps = state => ({
   availableAffiliations: state.user.data.states,
   currentStateId: state.user.data.state.id
-})
+});
 
 const mapDispatchToProps = {
   switchAffiliation
