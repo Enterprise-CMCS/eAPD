@@ -121,7 +121,7 @@ const getCurrentUser = () => dispatch =>
         dispatch(loadData(userRes.data.activities));
       }
       // Ty note: this was updated such that completeLogin() now only
-      // switches redux to a logged in state. no longer does it update /auth/user.
+      // switches redux to a logged in state. no longer does it update the redux store.
       // updateUserInfo will take care of updating it in the user reducer
       dispatch(completeLogin());
       dispatch(updateUserInfo(userRes.data));
@@ -358,10 +358,4 @@ export const switchAffiliation = (stateToSwitchTo, currentState) => async dispat
       })
   }
   return '/';
-  // hit Knolls state-switch endpoint
-  // which will return the new jwt
-  // update the cookie (overwrite it)
-  // unpack the jwt
-  // update the user object in redux (with the latest jwt)
-  // return them to dashboard or whatever
 }

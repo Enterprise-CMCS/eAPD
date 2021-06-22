@@ -61,7 +61,7 @@ export const setCookie =  (accessToken) => {
   }
 };
 
-export const removeCookie = () => {
+const removeCookie = () => {
   if (navigator.cookieEnabled) {
     Cookies.remove(API_COOKIE_NAME);
   }
