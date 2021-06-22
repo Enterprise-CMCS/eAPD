@@ -27,6 +27,8 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
+      - MONGO_DATABASE=${MONGO_DATABASE}
+      - MONGO_URL=${MONGO_URL}
     command: npm start
     expose:
       - 8000
