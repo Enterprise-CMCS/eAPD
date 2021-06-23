@@ -41,7 +41,6 @@ describe('US States endpoint', () => {
     });
     it('works for a Federal Admin', async () => {
       const authedClient = login('fed-admin');
-      // This state does not exist, therefore it can't be available to this user.
       const response = await authedClient.get('/states/mn');
       expect(response.status).toEqual(200);
     });
