@@ -31,7 +31,7 @@ const getAffiliationsByStateId = ({ stateId, status, db = knex, isAdmin = false 
                 .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
 
   if (!isAdmin){
-      query = query.whereNot('role', 'eAPD System Admin')
+      query = query.whereNot('auth_roles.name', 'eAPD System Admin')
   }
   if (status === 'pending') {
     return query.where({
