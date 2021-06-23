@@ -18,7 +18,7 @@ const AssurancesAndCompliance = ({ citations }) => {
           </h4>
           <ul className="ds-c-list--bare">
             {citations[name].map(({ title, checked, explanation }) => (
-              <li key={title} style={{"page-break-inside": "avoid"}} className="ds-u-margin--0">
+              <li key={title} className="ds-u-margin--0">
                 <div className="ds-u-padding-bottom--1">
                   Does this APD comply with <LinkOrText link={regulations[title]} title={title} />?
                 </div>
@@ -31,7 +31,7 @@ const AssurancesAndCompliance = ({ citations }) => {
                         <strong>No</strong>
                       </div>
                       <div className="ds-l-col--11" style={{ borderLeft:"3px solid #0071BC" }}>
-                        {explanation || <em>No response was provided</em>}
+                        {explanation.split('\n').map(str => <p>{str}</p>) || <em>No response was provided</em>}
                       </div>
                     </div>
                   </div>
