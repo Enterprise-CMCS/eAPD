@@ -30,8 +30,8 @@ const AssurancesAndCompliance = ({ citations }) => {
                       <div className="ds-l-col--1">
                         <strong>No</strong>
                       </div>
-                      <div className="ds-l-col--11" style={{ borderLeft:"3px solid #0071BC" }}>
-                        {explanation.split('\n').map(str => <p>{str}</p>) || <em>No response was provided</em>}
+                      <div className="ds-l-col--11" style={{ borderLeft:"3px solid #0071BC", whiteSpace: 'pre-wrap' }}>
+                        {explanation || <em>No response was provided</em>}
                       </div>
                     </div>
                   </div>
