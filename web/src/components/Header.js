@@ -149,7 +149,7 @@ class Header extends Component {
                                 style={{ width: '14px' }}
                                 />
                               Manage Account
-                            </Link>
+                          </Link>
                         </li>
                         <li>
                           <Link
@@ -162,7 +162,7 @@ class Header extends Component {
                                 style={{ width: '14px' }}
                               />
                               Switch State Affiliation
-                            </Link>
+                          </Link>
                         </li>
                         <li>
                           <Link

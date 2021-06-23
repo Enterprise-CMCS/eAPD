@@ -316,6 +316,7 @@ export const createAccessRequest = states => async dispatch => {
   return '/login/affiliations/thank-you';
 };
 
+// Todo: test
 export const updateAccessRequest = states => async dispatch => {
   let failureReason = null;
   await Promise.all(
@@ -340,22 +341,21 @@ export const completeAccessRequest = () => dispatch => {
   return dispatch(getCurrentUser());
 };
 
-// Todo: Test
 export const selectAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
   if (stateToSwitchTo !== currentState) {
     await axios
       .get(`/auth/state/${stateToSwitchTo}`)
       .then((res) => {
-        // Ty note: I used this because it was quick/easy.
-        // should I use the setTokens method instead?
+        // Ty note: Any concern about only the cookie being set
+        // or only the redux store being set and them being out
+        // of sync? also, how can i test the cookie being set?
         setCookie(res.data.jwt);
         const decoded = jwtDecode(res.data.jwt);
         dispatch(updateUserInfo(decoded));
         dispatch(fetchAllApds());
       })
       .catch(error => {
-        // Ty note: should we do something to handle this error?
-        // maybe have something thrown back on the page?
+        // Ty note: How should we handle this error?
         console.log("error in switching affiliation", error)
       })
   }

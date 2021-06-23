@@ -130,7 +130,7 @@ exports[`Header component opens and closes the dropdown when clicked  1`] = `
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  to="/switch-affiliation"
+                  to="/select-affiliation"
                 >
                   <FontAwesomeIcon
                     border={false}
@@ -355,7 +355,7 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  to="/switch-affiliation"
+                  to="/select-affiliation"
                 >
                   <FontAwesomeIcon
                     border={false}
@@ -611,7 +611,7 @@ exports[`Header component renders the admin home title when an admin user is at 
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  to="/switch-affiliation"
+                  to="/select-affiliation"
                 >
                   <FontAwesomeIcon
                     border={false}
@@ -911,7 +911,7 @@ exports[`Header component renders the state admin link when user has required pe
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  to="/switch-affiliation"
+                  to="/select-affiliation"
                 >
                   <FontAwesomeIcon
                     border={false}

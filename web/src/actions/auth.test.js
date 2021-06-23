@@ -1164,4 +1164,62 @@ describe('auth actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+
+  // test updateAccessRequest
+
+  // test selectAffiliation
+  describe('selectAffiliation', () => {
+    const currentState = 'md';
+    const mockValidJWT = 'ewogICJhbGciOiAiSFMyNTYiLAogICJ0eXAiOiAiSldUIgp9.ewogICJuYW1lIjogIkpvaG4gRG9lIgp9.hqWGSaFpvbrXkOWc6lrnffhNWR19W_S1YKFBx2arWBk';
+
+    beforeEach(() => {
+      fetchMock.reset();
+      jest.clearAllMocks();
+
+      fetchMock.onGet('/auth/state/ak').reply(200, {
+        jwt: mockValidJWT
+    });
+    });
+
+
+    it('should return without calling actions if requesting to switch to their current state', async () => {
+      const store = mockStore({});
+      const expectedActions = [];
+      
+      await store.dispatch(actions.selectAffiliation('md', currentState));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should set the cookie with the returned jwt', async () => {
+      const setCookieSpy = jest.spyOn(mockAuth, 'setCookie');
+      const store = mockStore({});
+
+      await store.dispatch(actions.selectAffiliation('ak', currentState));
+      expect(setCookieSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update the redux store with new user info', async () => {
+      const store = mockStore({});
+      const expectedActions = [
+        {
+          type: actions.UPDATE_USER_INFO,
+          data: {
+            name: "John Doe",
+          }
+        }
+      ];      
+
+      await store.dispatch(actions.selectAffiliation('ak', currentState));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should call to update all APDs based on new state', async () => {
+      const store = mockStore({});
+      const fetchAllApdsSpy = jest.spyOn(mockApp, 'fetchAllApds').mockImplementation(() => {});
+
+      await store.dispatch(actions.selectAffiliation('ak', currentState));
+      expect(fetchAllApdsSpy).toHaveBeenCalledTimes(1);
+    });
+
+  });
 });
