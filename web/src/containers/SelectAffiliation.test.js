@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
 
-import SwitchAffiliation from './SwitchAffiliation';
+import SelectAffiliation from './SelectAffiliation';
 
 const defaultProps = {
   currentStateId: 'md',
@@ -10,7 +10,7 @@ const defaultProps = {
 
 const setup = (props = {}) => {
   return renderWithConnection(
-    <SwitchAffiliation {...defaultProps} {...props} />,
+    <SelectAffiliation {...defaultProps} {...props} />,
     {
       initialState: { 
         user: {

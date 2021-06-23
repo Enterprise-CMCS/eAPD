@@ -9,13 +9,13 @@ import CardForm from '../components/CardForm';
 import { STATES } from '../util/states';
 
 import {
-  switchAffiliation
+  selectAffiliation
 } from '../actions/auth';
 
-const SwitchAffiliation = ({
+const SelectAffiliation = ({
   availableAffiliations,
   currentStateId,
-  switchAffiliation: switchUserAffiliation
+  selectAffiliation: selectUserAffiliation
 }) => {
 
   const history = useHistory();
@@ -23,7 +23,7 @@ const SwitchAffiliation = ({
   const [selectedAffiliation, setSelectedAffiliation] = useState(currentStateId);
 
   const onSave = async () => {
-    const route = await switchUserAffiliation(selectedAffiliation, currentStateId);
+    const route = await selectUserAffiliation(selectedAffiliation, currentStateId);
     if(route) {
       history.push(route);
     }
@@ -63,13 +63,13 @@ const SwitchAffiliation = ({
   )
 }
 
-SwitchAffiliation.propTypes = {
+SelectAffiliation.propTypes = {
   availableAffiliations: PropTypes.array.isRequired,
-  switchAffiliation: PropTypes.func.isRequired,
+  selectAffiliation: PropTypes.func.isRequired,
   currentStateId: PropTypes.string
 };
 
-SwitchAffiliation.defaultProps = {
+SelectAffiliation.defaultProps = {
   currentStateId: ''
 };
 
@@ -79,9 +79,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  switchAffiliation
+  selectAffiliation
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SwitchAffiliation);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectAffiliation);
 
-export { SwitchAffiliation as plain, mapStateToProps, mapDispatchToProps};
+export { SelectAffiliation as plain, mapStateToProps, mapDispatchToProps};

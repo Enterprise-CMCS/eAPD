@@ -77,12 +77,12 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(SwitchAffiliation)",
+        "displayName": "Connect(ManageAccount)",
         "type": [Function],
       }
     }
-    key="/switch-affiliation"
-    path="/switch-affiliation"
+    key="/manage-account"
+    path="/manage-account"
   />
   <Connect(PrivateRoute)
     component={
@@ -90,12 +90,12 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(ManageAccount)",
+        "displayName": "Connect(SelectAffiliation)",
         "type": [Function],
       }
     }
-    key="/manage-account"
-    path="/manage-account"
+    key="/select-affiliation"
+    path="/select-affiliation"
   />
   <Connect(PrivateRoute)
     component={

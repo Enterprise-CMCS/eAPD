@@ -341,7 +341,7 @@ export const completeAccessRequest = () => dispatch => {
 };
 
 // Todo: Test
-export const switchAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
+export const selectAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
   if (stateToSwitchTo !== currentState) {
     await axios
       .get(`/auth/state/${stateToSwitchTo}`)

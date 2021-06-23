@@ -153,7 +153,7 @@ class Header extends Component {
                         </li>
                         <li>
                           <Link
-                            to="/switch-affiliation"
+                            to="/select-affiliation"
                             onClick={this.toggleDropdown}
                             className="nav--dropdown__action"
                             >
