@@ -21,7 +21,7 @@ module.exports = (
     async (request, response, next) => {
       logger.info({
         id: request.id,
-        message: `handling GET /states/${request.params.stateId}/affiliations for ${request.user.role} role`
+        message: `handling GET /states/${request.params.stateId}/affiliations`
       });
       const { stateId } = request.params;
       const { status = null } = request.query;
