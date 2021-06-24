@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Instruction from './Instruction';
-import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
+import { getUserStateOrTerritory, getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from './UpgradeBrowser';
 import axios from '../util/api';
@@ -118,8 +118,7 @@ AffiliationStatus.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  // Todo: update this to have a better default before user data is loaded in
-  state: state.user.data.state || {name: 'Loading', id: ''},
+  state: getUserStateOrTerritory(state),
   approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });

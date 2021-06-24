@@ -316,7 +316,6 @@ export const createAccessRequest = states => async dispatch => {
   return '/login/affiliations/thank-you';
 };
 
-// Todo: test
 export const updateAccessRequest = states => async dispatch => {
   let failureReason = null;
   await Promise.all(

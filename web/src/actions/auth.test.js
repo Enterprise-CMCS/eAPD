@@ -1165,9 +1165,21 @@ describe('auth actions', () => {
     });
   });
 
-  // test updateAccessRequest
+  describe('updateAccessRequest', () => {
+    beforeEach(() => {
+      fetchMock.reset();
+      jest.clearAllMocks();
 
-  // test selectAffiliation
+    it('should throw an error when requesting an invalid state', async () => {
+      fetchMock.onPost('/states/zz/affiliations').reply(400);
+
+      const store = mockStore({});
+      const expectedActions = [{ type: actions.LOGIN_FAILURE }];
+      expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
   describe('selectAffiliation', () => {
     const currentState = 'md';
     const mockValidJWT = 'ewogICJhbGciOiAiSFMyNTYiLAogICJ0eXAiOiAiSldUIgp9.ewogICJuYW1lIjogIkpvaG4gRG9lIgp9.hqWGSaFpvbrXkOWc6lrnffhNWR19W_S1YKFBx2arWBk';
@@ -1178,14 +1190,14 @@ describe('auth actions', () => {
 
       fetchMock.onGet('/auth/state/ak').reply(200, {
         jwt: mockValidJWT
-    });
+      });
     });
 
 
     it('should return without calling actions if requesting to switch to their current state', async () => {
       const store = mockStore({});
       const expectedActions = [];
-      
+
       await store.dispatch(actions.selectAffiliation('md', currentState));
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -1220,6 +1232,5 @@ describe('auth actions', () => {
       await store.dispatch(actions.selectAffiliation('ak', currentState));
       expect(fetchAllApdsSpy).toHaveBeenCalledTimes(1);
     });
-
   });
 });
