@@ -118,7 +118,7 @@ AffiliationStatus.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  state: getUserStateOrTerritory(state),
+  state: getUserStateOrTerritory(state) || {},
   approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });
