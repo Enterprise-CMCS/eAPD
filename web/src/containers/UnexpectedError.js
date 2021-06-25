@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Spinner } from '../components/Icons';
+import Icon, { faExclamationTriangle, Spinner } from '../components/Icons';
 
 import { saveApd } from '../actions/app';
 import { selectHasError, selectIsSaving } from '../reducers/saving';
@@ -16,7 +16,15 @@ const UnexpectedError = ({ hasError, isSaving, save }) => {
   return (
     <div aria-live="polite">
       {hasError && (
-        <Dialog heading="Unable to save changes!" onExit={closeErrorAlert}>
+        <Dialog
+          heading={
+            <div>
+              <Icon icon={faExclamationTriangle} /> Unable to save changes!
+            </div>
+          }
+          onExit={closeErrorAlert}
+          className="ds-u-left-border-warning"
+        >
           <p>
             Your changes aren&apos;t being saved. Verify your internet
             connection and try saving your changes again in a few minutes by

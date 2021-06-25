@@ -28,7 +28,7 @@ const SessionEndingAlert = ({
     return (
       <span>
         Your session will end in {zeroPad(minutes)}:{zeroPad(seconds)} minutes.
-        If you’d like to keep working, choose continue.
+        If you’d like to keep working, select <br/> <em>stay signed in</em>.
       </span>
     );
   };
@@ -70,7 +70,7 @@ const SessionEndingAlert = ({
             </Button>,
             <Button variation="primary" onClick={extend} key={uuidv4()}>
               {isExtendingSession && <Spinner />}
-              {isExtendingSession ? ' Signing In' : 'Stay Signed In'}
+              {isExtendingSession ? ' Signing in' : 'Stay signed in'}
             </Button>
           ]}
           ariaCloseLabel="Close and continue"
