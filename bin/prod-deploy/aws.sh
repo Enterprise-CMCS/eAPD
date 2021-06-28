@@ -158,7 +158,10 @@ function addEcosystemToUserData() {
         OKTA_SERVER_ID: '$OKTA_SERVER_ID',
         OKTA_CLIENT_ID: '$OKTA_CLIENT_ID',
         OKTA_API_KEY: '$OKTA_API_KEY',
-        JWT_SECRET: '$JWT_SECRET'
+        JWT_SECRET: '$JWT_SECRET',
+        MONGO_DATABASE: '$MONGO_DATABASE',
+        MONGO_URL: '$MONGO_URL'
+
       },
     },{
       name: 'Database migration',
@@ -172,7 +175,10 @@ function addEcosystemToUserData() {
         DATABASE_URL: '$API_DATABASE_URL',
         OKTA_DOMAIN: '$OKTA_DOMAIN',
         OKTA_SERVER_ID: '$OKTA_SERVER_ID',
-        OKTA_API_KEY: '$OKTA_API_KEY'
+        OKTA_API_KEY: '$OKTA_API_KEY',
+        JWT_SECRET: '$JWT_SECRET',
+        MONGO_DATABASE: '$MONGO_DATABASE',
+        MONGO_URL: '$MONGO_URL'
       }
     },{
       name: 'Database seeding',
@@ -186,7 +192,10 @@ function addEcosystemToUserData() {
         DATABASE_URL: '$API_DATABASE_URL',
         OKTA_DOMAIN: '$OKTA_DOMAIN',
         OKTA_SERVER_ID: '$OKTA_SERVER_ID',
-        OKTA_API_KEY: '$OKTA_API_KEY'
+        OKTA_API_KEY: '$OKTA_API_KEY',
+        JWT_SECRET: '$JWT_SECRET',
+        MONGO_DATABASE: '$MONGO_DATABASE',
+        MONGO_URL: '$MONGO_URL'
       }
     }]
   };" | base64 -w 0`
