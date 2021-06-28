@@ -22,21 +22,6 @@ const updateOktaUser = (user_id, email, metadata, { db = knex } = {}) => (
   .update({ email, metadata })
 )
 
-const setActiveAffiliation = (user_id, state_id, { db = knex} = {}) => {
-
-  const current_affiliation = db('auth_affiliations')
-    .select('id')
-    .where({user_id, state_id})
-
-  // run the query asynchronously
-  db('okta_users')
-    .where({ user_id })
-    .update({current_affiliation})
-    .then(() => {})
-}
-
-
-
 const createOrUpdateOktaUser = (user_id, email, metadata, {db=knex}={}) => (
   getOktaUser(user_id, {db}).then(user => {
     if (!user) {
@@ -87,6 +72,5 @@ module.exports = {
   getOktaUser,
   updateOktaUser,
   createOrUpdateOktaUserFromOkta,
-  sanitizeProfile,
-  setActiveAffiliation,
+  sanitizeProfile
 }

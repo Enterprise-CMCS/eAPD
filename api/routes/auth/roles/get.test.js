@@ -12,7 +12,6 @@ let res;
 let next;
 let getActiveAuthRoles;
 let changeState;
-let setActiveAffiliation
 
 tap.test('auth roles GET endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
@@ -21,7 +20,6 @@ tap.test('auth roles GET endpoint', async endpointTest => {
     next = sinon.stub();
     getActiveAuthRoles = sinon.stub();
     changeState = sinon.stub();
-    setActiveAffiliation = sinon.stub();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -69,7 +67,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
   endpointTest.test('get state Change handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(() => {
-      getEndpoint(app, { changeState, setActiveAffiliation });
+      getEndpoint(app, { changeState });
       handler = app.get.args.find(args => args[0] === '/auth/state/:stateId')[1];
     });
 
@@ -87,7 +85,6 @@ tap.test('auth roles GET endpoint', async endpointTest => {
 
       validTest.ok(res.status.calledWith(403), 'HTTP status is explicitly set');
       validTest.ok(res.send.calledWith(), 'Body is empty');
-      validTest.ok(setActiveAffiliation.notCalled)
     });
 
     handlerTest.test('calls ChangeState if the user has the state to switch to', async validTest => {
@@ -105,7 +102,6 @@ tap.test('auth roles GET endpoint', async endpointTest => {
 
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(res.send.calledWith({jwt:'JWT for AK'}), 'body is the result of changeState');
-      validTest.ok(setActiveAffiliation.called)
 
     });
   });
