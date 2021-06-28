@@ -7,7 +7,8 @@ const {
   updateOktaUser,
   createOrUpdateOktaUser,
   sanitizeProfile,
-  createOrUpdateOktaUserFromOkta
+  createOrUpdateOktaUserFromOkta,
+  setActiveAffiliation
 
 } = require('./oktaUsers')
 
@@ -145,6 +146,20 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
     test.equal(true, db.update.calledWith(expectedProfile))
     test.same(updatedUser, 'Updated oktaUser id');
 
+  })
+
+  oktaUsersTests.test('updating oktaUser when switching states', async test => {
+    dbMock('auth_affiliations')
+    db('auth_affiliations').select.withArgs('id').returnsThis()
+    // The line below is unnecessary and deleting it has no effect.  I am leaving it in place
+    // in the hopes that we can figure out how to make it meaningful in the future
+    db('auth_affiliations').where.withArgs({user_id: 'okta_user_id', state_id: 'md'}).resolves('abcd')
+
+    db.where.withArgs({user_id:'okta_user_id'}).returnsThis()
+    db.update.resolves('abcd')
+
+    setActiveAffiliation('okta_user_id', 'md', {db })
+    test.assert(db.update.calledOnce)
   })
 
 })
