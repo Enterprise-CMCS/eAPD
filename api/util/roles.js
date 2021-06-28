@@ -14,6 +14,7 @@ const activities = {
 
 const roles = {
   'eAPD Admin': false,
+  'eAPD System Admin': true,
   'eAPD Federal Admin': true,
   'eAPD Federal Leadership': false,
   'eAPD Federal Analyst': false,
@@ -25,6 +26,13 @@ const roles = {
 };
 
 const roleToActivityMappings = {
+  'eAPD System Admin': [
+    'view-users',
+    'view-roles',
+    'view-document',
+    'view-affiliations',
+    'view-state-admins'
+  ],
   'eAPD Federal Admin': [
     'view-roles',
     'view-state-admins',
@@ -56,6 +64,7 @@ const roleToActivityMappings = {
 };
 
 const activeRoles = [
+  'eAPD System Admin',
   'eAPD Federal Admin',
   'eAPD State Admin',
   'eAPD State Staff',

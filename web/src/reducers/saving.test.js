@@ -7,6 +7,7 @@ import {
 
 import reducer, {
   selectHasError,
+  selectError,
   selectIsSaving,
   selectLastSaved
 } from './saving';
@@ -77,6 +78,12 @@ describe('saving state reducer and selectors', () => {
       expect(
         selectHasError({ saving: { error: 'this is the error' } })
       ).toEqual(true);
+    });
+
+    it('selects the error if there is one', () => {
+      expect(selectError({ saving: { error: 'this is the error' } })).toEqual(
+        'this is the error'
+      );
     });
 
     it('selects whether the APD is currently saving', () => {
