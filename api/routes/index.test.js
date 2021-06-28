@@ -26,7 +26,6 @@ tap.test('endpoint setup', async endpointTest => {
     apdsEndpoint,
     authEndpoint,
     docsEndpoint,
-    meEndpoint,
     rolesEndpoint,
     statesEndpoint,
     usersEndpoint,
@@ -49,9 +48,9 @@ tap.test('endpoint setup', async endpointTest => {
     docsEndpoint.calledWith(app),
     'docs endpoint is set up with the app'
   );
-  endpointTest.ok(
+  endpointTest.notOk(
     meEndpoint.calledWith(app),
-    'me endpoint is setup with the app'
+    'me endpoint is no longer setup with the app'
   );
   endpointTest.ok(
     rolesEndpoint.calledWith(app),

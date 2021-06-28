@@ -118,6 +118,10 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__JWT_SECRET__|`echo $JWT_SECRET`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__MONGO_DATABASE__|`echo $MONGO_DATABASE`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_URL__|`echo $MONGO_URL`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 
