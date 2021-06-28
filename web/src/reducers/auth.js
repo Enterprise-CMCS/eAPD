@@ -15,7 +15,9 @@ import {
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
   SESSION_RENEWED,
-  UPDATE_EXPIRATION
+  UPDATE_EXPIRATION,
+  AFFILIATION_SELECTION_REQUIRED,
+  AFFILIATION_SELECTION_COMPLETE
 } from '../actions/auth';
 
 const initialState = {
@@ -28,11 +30,11 @@ const initialState = {
   mfaPhoneNumber: '',
   mfaEnrollType: '',
   verifyData: {},
-  selectState: false,
   latestActivity: new Date().getTime(),
   isLoggingOut: false,
   isSessionEnding: false,
   isExtendingSession: false,
+  isAffiliationSelected: false,
   expiresAt: null
 };
 
@@ -123,6 +125,16 @@ const auth = (state = initialState, action) => {
         ...state,
         fetching: true
       };
+    case AFFILIATION_SELECTION_REQUIRED:
+      return {
+        ...state,
+        isAffiliationSelected: false
+      }
+    case AFFILIATION_SELECTION_COMPLETE:
+      return {
+        ...state,
+        isAffiliationSelected: true
+      }
     case LATEST_ACTIVITY:
       return {
         ...state,

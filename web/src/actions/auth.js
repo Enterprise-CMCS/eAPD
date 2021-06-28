@@ -32,6 +32,8 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
+export const AFFILIATION_SELECTION_REQUIRED = 'AFFILIATION_SELECTION_REQUIRED';
+export const AFFILIATION_SELECTION_COMPLETE = 'AFFILIATION_SELECTION_COMPLETE';
 export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
 
 
@@ -62,6 +64,8 @@ export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
 export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
+export const requireAffiliationSelection = () => ({ type: AFFILIATION_SELECTION_REQUIRED });
+export const completeAffiliationSelection = () => ({ type: AFFILIATION_SELECTION_COMPLETE });
 export const updateUserInfo = user => ({ type: UPDATE_USER_INFO, data: user });
 export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
 export const setSessionEnding = () => ({ type: SESSION_ENDING_ALERT });
@@ -72,8 +76,7 @@ export const updateSessionExpiration = expiresAt => ({
   data: expiresAt
 });
 
-// this could potentially be removed
-// and migrated to an associated dashboard action/reducer
+// Ty note: Tif mentioned this could potentially be removed
 const loadData = activities => dispatch => {
   if (activities.includes('view-document')) {
     dispatch(fetchAllApds());
@@ -117,15 +120,24 @@ const getCurrentUser = () => dispatch =>
         dispatch(requireAccessToState());
         return '/login/affiliations/request';
       }
+      if (userRes.data.states.length === 1) {
+        // Ty note: this was updated such that completeLogin() now only
+        // switches redux to a logged in state. no longer does it update the redux store.
+        // updateUserInfo will take care of updating it in the user reducer
+        dispatch(completeLogin());
+        dispatch(updateUserInfo(userRes.data));
+        return null;
+      }
+      if (userRes.data.states.length > 1) {
+        // Ty note: need to have the data to know what states set
+        console.log("this user has multiple state affiliations");
+        dispatch(updateUserInfo(userRes.data));
+        dispatch(requireAffiliationSelection());
+        return '/login/affiliations/select';
+      }
       if (userRes.data.activities) {
         dispatch(loadData(userRes.data.activities));
       }
-      // Ty note: this was updated such that completeLogin() now only
-      // switches redux to a logged in state. no longer does it update the redux store.
-      // updateUserInfo will take care of updating it in the user reducer
-      dispatch(completeLogin());
-      dispatch(updateUserInfo(userRes.data));
-      return null;
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
@@ -340,6 +352,10 @@ export const completeAccessRequest = () => dispatch => {
   return dispatch(getCurrentUser());
 };
 
+// Ty note: is it weird to use this function for both the login selection
+// and when switching? some logic only applies to switching while the 
+// completeLogin() only applies to the login process but doesn't break when 
+// going to the switching menu once logged in
 export const selectAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
   if (stateToSwitchTo !== currentState) {
     await axios
@@ -352,6 +368,8 @@ export const selectAffiliation = (stateToSwitchTo, currentState) => async dispat
         const decoded = jwtDecode(res.data.jwt);
         dispatch(updateUserInfo(decoded));
         dispatch(fetchAllApds());
+        dispatch(completeAffiliationSelection());
+        dispatch(completeLogin());
       })
       .catch(error => {
         // Ty note: How should we handle this error?
