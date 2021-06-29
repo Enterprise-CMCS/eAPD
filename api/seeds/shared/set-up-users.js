@@ -93,7 +93,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Let them be a staffer in Maryland too
     oktaAffiliations.push({
-      user_id: stateAdminId,
+      user_id: stateAdmin.id,
       state_id: 'md',
       role_id: stateStaffRoleId,
       status: 'approved',

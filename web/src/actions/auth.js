@@ -135,6 +135,7 @@ const getCurrentUser = () => dispatch =>
         dispatch(requireAffiliationSelection());
         return '/login/affiliations/select';
       }
+      // This can be removed
       if (userRes.data.activities) {
         dispatch(loadData(userRes.data.activities));
       }
