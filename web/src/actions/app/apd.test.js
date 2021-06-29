@@ -32,6 +32,7 @@ import { UPDATE_BUDGET } from '../budget';
 import axios from '../../util/api';
 import regulations from '../../util/regulations';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
+import { t } from '../../i18n';
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios);
@@ -61,6 +62,9 @@ describe('application-level actions', () => {
           byId: {
             bloop: { hello: 'world' }
           }
+        },
+        user: {
+          data: { activities: ['edit-document'] }
         }
       };
       const store = mockStore(state);
@@ -235,6 +239,9 @@ describe('application-level actions', () => {
           id: 'id-to-update'
         }
       },
+      user: {
+        data: { activities: ['edit-document'] }
+      },
       activities: {},
       patch: []
     };
@@ -261,7 +268,7 @@ describe('application-level actions', () => {
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
-        { type: SAVE_APD_FAILURE, data: 'save-apd.not-logged-in' }
+        { type: SAVE_APD_FAILURE, data: t('errors.save-apd.not-logged-in') }
       ];
 
       return store.dispatch(saveApd()).catch(() => {
