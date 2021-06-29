@@ -18,7 +18,8 @@
     "build-storybook": "npm run prebuild:storybook && build-storybook -o ../docs-build -c .storybook -s ./dist",
     "storybook": "npm run scaffold && start-storybook -s ./dist -p 6006",
     "preinstall": "npx npm-force-resolutions",
-    "cypress:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",

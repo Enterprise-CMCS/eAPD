@@ -5,7 +5,7 @@
 // @ts-ignore
 const requiredExample = require('../../fixtures/example')
 
-context('Files', () => {
+context.skip('Files', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/files')
   })
@@ -70,7 +70,7 @@ context('Files', () => {
       })
 
     cy.fixture('users').should((users) => {
-      expect(users[0].name).to.exist
+      expect(users[0].name).to.exist()
     })
 
     // JavaScript arrays and objects are stringified

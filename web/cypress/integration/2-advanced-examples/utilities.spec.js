@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context('Utilities', () => {
+context.skip('Utilities', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/utilities')
   })
@@ -9,7 +9,7 @@ context('Utilities', () => {
     // https://on.cypress.io/_
     cy.request('https://jsonplaceholder.cypress.io/users')
       .then((response) => {
-        let ids = Cypress._.chain(response.body).map('id').take(3).value()
+        const ids = Cypress._.chain(response.body).map('id').take(3).value()
 
         expect(ids).to.deep.eq([1, 2, 3])
       })
@@ -17,7 +17,7 @@ context('Utilities', () => {
 
   it('Cypress.$ - call a jQuery method', () => {
     // https://on.cypress.io/$
-    let $li = Cypress.$('.utility-jquery li:first')
+    const $li = Cypress.$('.utility-jquery li:first')
 
     cy.wrap($li)
       .should('not.have.class', 'active')
@@ -33,7 +33,7 @@ context('Utilities', () => {
       return Cypress.Blob.imgSrcToDataURL('https://example.cypress.io/assets/img/javascript-logo.png', undefined, 'anonymous')
       .then((dataUrl) => {
         // create an <img> element and set its src to the dataUrl
-        let img = Cypress.$('<img />', { src: dataUrl })
+        const img = Cypress.$('<img />', { src: dataUrl })
 
         // need to explicitly return cy here since we are initially returning
         // the Cypress.Blob.imgSrcToDataURL promise to our test
@@ -52,20 +52,20 @@ context('Utilities', () => {
       matchBase: true,
     })
 
-    expect(matching, 'matching wildcard').to.be.true
+    expect(matching, 'matching wildcard').to.be.true()
 
     matching = Cypress.minimatch('/users/1/comments/2', '/users/*/comments', {
       matchBase: true,
     })
 
-    expect(matching, 'comments').to.be.false
+    expect(matching, 'comments').to.be.false()
 
     // ** matches against all downstream path segments
     matching = Cypress.minimatch('/foo/bar/baz/123/quux?a=b&c=2', '/foo/**', {
       matchBase: true,
     })
 
-    expect(matching, 'comments').to.be.true
+    expect(matching, 'comments').to.be.true()
 
     // whereas * matches only the next path segment
 
@@ -73,7 +73,7 @@ context('Utilities', () => {
       matchBase: false,
     })
 
-    expect(matching, 'comments').to.be.false
+    expect(matching, 'comments').to.be.false()
   })
 
   it('Cypress.Promise - instantiate a bluebird promise', () => {
@@ -86,7 +86,7 @@ context('Utilities', () => {
     function waitOneSecond () {
       // return a promise that resolves after 1 second
       // @ts-ignore TS2351 (new Cypress.Promise)
-      return new Cypress.Promise((resolve, reject) => {
+      return new Cypress.Promise((resolve) => {
         setTimeout(() => {
           // set waited to true
           waited = true
@@ -103,7 +103,7 @@ context('Utilities', () => {
       // @ts-ignore TS7006
       return waitOneSecond().then((str) => {
         expect(str).to.eq('foo')
-        expect(waited).to.be.true
+        expect(waited).to.be.true()
       })
     })
   })

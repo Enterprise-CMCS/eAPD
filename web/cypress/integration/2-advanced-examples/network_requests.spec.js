@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context('Network Requests', () => {
+context.skip('Network Requests', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/network-requests')
   })
@@ -105,7 +105,7 @@ context('Network Requests', () => {
         })
         .its('body').as('post') // save the new post from the response
       })
-      .then(function () {
+      .then(() => {
         // When this callback runs, both "cy.request" API commands have finished
         // and the test context has "user" and "post" objects set.
         // Let's verify them.
@@ -116,7 +116,7 @@ context('Network Requests', () => {
   it('cy.intercept() - route responses to matching requests', () => {
     // https://on.cypress.io/intercept
 
-    let message = 'whoa, this comment does not exist'
+    const message = 'whoa, this comment does not exist';
 
     // Listen to GET to comments/1
     cy.intercept('GET', '**/comments/*').as('getComment')

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context('Cypress.Commands', () => {
+context.skip('Cypress.Commands', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
@@ -15,7 +15,7 @@ context('Cypress.Commands', () => {
       // and the commands arguments are shifted
 
       // allow us to change the console method used
-      method = method || 'log'
+      method = method || 'log' // eslint-disable-line no-param-reassign
 
       // log the subject to the console
       // @ts-ignore TS7017
@@ -28,13 +28,13 @@ context('Cypress.Commands', () => {
     })
 
     // @ts-ignore TS2339
-    cy.get('button').console('info').then(($button) => {
+    cy.get('button').console('info').then(() => {
       // subject is still $button
     })
   })
 })
 
-context('Cypress.Cookies', () => {
+context.skip('Cypress.Cookies', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
@@ -71,25 +71,25 @@ context('Cypress.Cookies', () => {
   })
 })
 
-context('Cypress.arch', () => {
+context.skip('Cypress.arch', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
 
   it('Get CPU architecture name of underlying OS', () => {
     // https://on.cypress.io/arch
-    expect(Cypress.arch).to.exist
+    expect(Cypress.arch).to.exist()
   })
 })
 
-context('Cypress.config()', () => {
+context.skip('Cypress.config()', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
 
   it('Get and set configuration options', () => {
     // https://on.cypress.io/config
-    let myConfig = Cypress.config()
+    const myConfig = Cypress.config()
 
     expect(myConfig).to.have.property('animationDistanceThreshold', 5)
     expect(myConfig).to.have.property('baseUrl', null)
@@ -112,23 +112,23 @@ context('Cypress.config()', () => {
   })
 })
 
-context('Cypress.dom', () => {
+context.skip('Cypress.dom', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
 
   // https://on.cypress.io/dom
   it('.isHidden() - determine if a DOM element is hidden', () => {
-    let hiddenP = Cypress.$('.dom-p p.hidden').get(0)
-    let visibleP = Cypress.$('.dom-p p.visible').get(0)
+    const hiddenP = Cypress.$('.dom-p p.hidden').get(0)
+    const visibleP = Cypress.$('.dom-p p.visible').get(0)
 
     // our first paragraph has css class 'hidden'
-    expect(Cypress.dom.isHidden(hiddenP)).to.be.true
-    expect(Cypress.dom.isHidden(visibleP)).to.be.false
+    expect(Cypress.dom.isHidden(hiddenP)).to.be(true)
+    expect(Cypress.dom.isHidden(visibleP)).to.be(false)
   })
 })
 
-context('Cypress.env()', () => {
+context.skip('Cypress.env()', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
@@ -157,7 +157,7 @@ context('Cypress.env()', () => {
   })
 })
 
-context('Cypress.log', () => {
+context.skip('Cypress.log', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
@@ -167,29 +167,29 @@ context('Cypress.log', () => {
   })
 })
 
-context('Cypress.platform', () => {
+context.skip('Cypress.platform', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
 
   it('Get underlying OS name', () => {
     // https://on.cypress.io/platform
-    expect(Cypress.platform).to.be.exist
+    expect(Cypress.platform).to.be.exist()
   })
 })
 
-context('Cypress.version', () => {
+context.skip('Cypress.version', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })
 
   it('Get current version of Cypress being run', () => {
     // https://on.cypress.io/version
-    expect(Cypress.version).to.be.exist
+    expect(Cypress.version).to.be.exist()
   })
 })
 
-context('Cypress.spec', () => {
+context.skip('Cypress.spec', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
   })

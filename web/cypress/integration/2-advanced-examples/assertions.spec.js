@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context('Assertions', () => {
+context.skip('Assertions', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/assertions')
   })
@@ -51,7 +51,7 @@ context('Assertions', () => {
     // https://on.cypress.io/assertions
     it('expect - make an assertion about a specified subject', () => {
       // We can use Chai's BDD style assertions
-      expect(true).to.be.true
+      expect(true).to.be(true)
       const o = { foo: 'bar' }
 
       expect(o).to.equal(o)
@@ -97,7 +97,7 @@ context('Assertions', () => {
         .should(($div) => {
           expect($div).to.have.length(1)
 
-          const className = $div[0].className
+          const {className} = $div[0]
 
           expect(className).to.match(/heading-/)
         })
@@ -117,7 +117,7 @@ context('Assertions', () => {
             throw new Error('Did not find 1 element')
           }
 
-          const className = $div[0].className
+          const {className} = $div[0]
 
           if (!className.match(/heading-/)) {
             throw new Error(`Could not find class "heading-" in ${className}`)

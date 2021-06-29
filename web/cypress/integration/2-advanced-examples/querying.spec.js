@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context('Querying', () => {
+context.skip('Querying', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/querying')
   })
