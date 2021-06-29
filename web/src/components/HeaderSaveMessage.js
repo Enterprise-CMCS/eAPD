@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  selectHasError,
+  selectError,
   selectIsSaving,
   selectLastSaved
 } from '../reducers/saving';
 
 import SaveMessage from './SaveMessage';
 
-import { Check, Spinner } from './Icons';
+import { Check, Xmark, Spinner } from './Icons';
 
 const HeaderSaveMessage = ({ isSaving, lastSaved, error }) => {
   const [active, setActive] = useState(isSaving);
@@ -40,11 +40,23 @@ const HeaderSaveMessage = ({ isSaving, lastSaved, error }) => {
     }
   }
 
-  return active ? (
-    <span>
-      <Spinner spin /> Saving...
-    </span>
-  ) : (
+  if (active) {
+    return (
+      <span>
+        <Spinner spin /> Saving...
+      </span>
+    );
+  }
+
+  if (typeof error === 'string') {
+    return (
+      <span>
+        <Xmark /> {error}
+      </span>
+    );
+  }
+
+  return (
     <span>
       <Check /> <SaveMessage lastSaved={lastSaved} error={error} />
     </span>
@@ -60,7 +72,7 @@ HeaderSaveMessage.propTypes = {
 const mapStateToProps = state => ({
   isSaving: selectIsSaving(state),
   lastSaved: selectLastSaved(state),
-  error: selectHasError(state)
+  error: selectError(state)
 });
 
 export default connect(mapStateToProps)(HeaderSaveMessage);
