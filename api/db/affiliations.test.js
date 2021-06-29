@@ -6,21 +6,10 @@ const {
   getAllAffiliations,
   getAffiliationsByStateId,
   getAffiliationById,
-  populateAffiliation,
   getPopulatedAffiliationsByStateId,
   getAllPopulatedAffiliations,
   reduceAffiliations,
 } = require('./affiliations');
-
-const { oktaClient } = require('../auth/oktaAuth');
-
-const defaultProfile = {
-  displayName: 'displayName',
-  email: 'email',
-  secondEmail: 'secondEmail',
-  primaryPhone: 'primaryPhone',
-  mobilePhone: 'mobilePhone'
-};
 
 const defaultPopulatedAffiliation = {
   userId: 'userId',
@@ -48,7 +37,13 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     db.select.withArgs(selectedColumns).returnsThis();
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
+    db.whereNot
+      .withArgs('auth_roles.name', 'eAPD System Admin')
+      .returnsThis()
     db.where.withArgs({ state_id: stateId }).resolves(expectedUsers);
 
     // No specific status
@@ -61,7 +56,13 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     db.select.withArgs(selectedColumns).returnsThis();
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
+    db.whereNot
+      .withArgs('auth_roles.name', 'eAPD System Admin')
+      .returnsThis()
     db.where
       .withArgs({ state_id: stateId, status: 'requested' })
       .resolves(expectedUsers);
@@ -75,7 +76,13 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     db.select.withArgs(selectedColumns).returnsThis();
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
+    db.whereNot
+      .withArgs('auth_roles.name', 'eAPD System Admin')
+      .returnsThis()
     db.where
       .withArgs({ state_id: stateId, status: 'approved' })
       .resolves(expectedUsers);
@@ -91,7 +98,13 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
       db.select.withArgs(selectedColumns).returnsThis();
       db.leftJoin
         .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+        .returnsThis()
+      db.leftJoin
+        .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
         .returnsThis();
+      db.whereNot
+        .withArgs('auth_roles.name', 'eAPD System Admin')
+        .returnsThis()
       db.whereIn
         .withArgs(
           ['state_id', 'status'],
@@ -107,11 +120,41 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     }
   );
 
+  affiliationsTests.test(
+    'get affiliations by state id as an admin',
+    async test => {
+      const status = 'inactive';
+      db.select.withArgs(selectedColumns).returnsThis();
+      db.leftJoin
+        .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+        .returnsThis()
+      db.leftJoin
+        .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+        .returnsThis();
+      db.whereIn
+        .withArgs(
+          ['state_id', 'status'],
+          [
+            [stateId, 'denied'],
+            [stateId, 'revoked']
+          ]
+        )
+        .resolves(expectedUsers);
+      const isAdmin = true
+      const results = await getAffiliationsByStateId({ stateId, status, db, isAdmin });
+      test.equal(expectedUsers, results);
+
+    }
+  );
+
   affiliationsTests.test('get affiliations by id', async test => {
     const affiliationId = 'foo';
     db.select.withArgs(selectedColumns).returnsThis();
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
     db.where
       .withArgs({
@@ -125,79 +168,24 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     test.equal(expectedUsers[0], results);
   });
 
-  affiliationsTests.test('populate affiliations', async test => {
-    const affiliation = { userId: 'userId', updatedById: 'updatedById' };
-
-    const getUserStub = sinon.stub(oktaClient, 'getUser');
-    getUserStub
-      .withArgs(affiliation.userId)
-      .resolves({ profile: defaultProfile });
-    getUserStub
-      .withArgs(affiliation.updatedById)
-      .resolves({ profile: { displayName: 'updatedByName' } });
-    const results = await populateAffiliation(affiliation, {
-      client: oktaClient
-    });
-    test.same(results, {
-      ...defaultPopulatedAffiliation,
-      updatedById: 'updatedById',
-      updatedBy: 'updatedByName'
-    });
-
-    // restore the okta client for the next test
-    oktaClient.getUser.restore();
-  });
-
-  affiliationsTests.test(
-    'populate affiliations with no updatedBy',
-    async test => {
-      const affiliation = { userId: 'userId' };
-
-      const getUserStub = sinon.stub(oktaClient, 'getUser');
-      getUserStub
-        .withArgs(affiliation.userId)
-        .returns({ profile: defaultProfile });
-
-      const results = await populateAffiliation(affiliation, {
-        client: oktaClient
-      });
-      test.same(results, defaultPopulatedAffiliation);
-
-      // restore the okta client for the next test
-      oktaClient.getUser.restore();
-    }
-  );
-
   affiliationsTests.test(
     'get populated affiliations by state id',
     async test => {
       const status = 'irrelevant';
       const affiliations = ['foo', 'bar', 'baz'];
-      const populatedAffiliations = [
-        'populatedfoo',
-        'populatedbar',
-        'populatedbaz'
-      ];
-
+      const isAdmin = false
       const getAffiliationsByStateStub = sinon.stub();
       getAffiliationsByStateStub
-        .withArgs({ stateId, status })
+        .withArgs({ stateId, status, isAdmin })
         .resolves(affiliations);
-
-      const populateAffiliationStub = sinon.stub();
-      affiliations.forEach(affiliation => {
-        populateAffiliationStub
-          .withArgs(affiliation)
-          .returns(`populated${affiliation}`);
-      });
 
       const results = await getPopulatedAffiliationsByStateId({
         stateId,
         status,
-        getAffiliationsByStateId_: getAffiliationsByStateStub,
-        populateAffiliation_: populateAffiliationStub
+        isAdmin,
+        getAffiliationsByStateId_: getAffiliationsByStateStub
       });
-      test.same(results, populatedAffiliations);
+      test.same(results, affiliations);
     }
   );
 
@@ -205,27 +193,26 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     'get populated affiliations by state id with no results',
     async test => {
       const status = 'irrelevant';
-
+      const isAdmin = false
       const getAffiliationsByStateStub = sinon.stub();
-      getAffiliationsByStateStub.withArgs({ stateId, status }).resolves([]);
-      // This should not get called
-      const populateAffiliationStub = sinon.stub();
-
+      getAffiliationsByStateStub.withArgs({ stateId, status, isAdmin }).resolves([]);
       const results = await getPopulatedAffiliationsByStateId({
         stateId,
         status,
-        getAffiliationsByStateId_: getAffiliationsByStateStub,
-        populateAffiliation_: populateAffiliationStub
+        isAdmin,
+        getAffiliationsByStateId_: getAffiliationsByStateStub
       });
       test.same(results, []);
 
-      sinon.assert.notCalled(populateAffiliationStub);
     }
   );
 
   affiliationsTests.test('get all Affiliations', async test => {
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
     db.select.withArgs(selectedColumns).resolves(expectedUsers);
 
@@ -237,6 +224,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     const status = 'active'
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
     db.select.withArgs(selectedColumns).returnsThis();
     db.whereIn
@@ -253,6 +243,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     const status = 'pending'
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
     db.select.withArgs(selectedColumns).returnsThis();
     db.whereIn
@@ -269,6 +262,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     const status = 'inactive'
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
     db.select.withArgs(selectedColumns).returnsThis();
     db.whereIn
@@ -285,6 +281,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     const status = 'NOTVALID'
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis()
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
     db.select.withArgs(selectedColumns).returnsThis();
 
@@ -334,23 +333,11 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     async test => {
       const status = 'irrelevant';
       const affiliations = ['foo', 'bar', 'baz'];
-      const populatedAffiliations = [
-        'populatedfoo',
-        'populatedbar',
-        'populatedbaz'
-      ];
 
       const getAllAffiliationsStub = sinon.stub();
       getAllAffiliationsStub
         .withArgs({ status, db })
         .resolves(affiliations);
-
-      const populateAffiliationStub = sinon.stub();
-      affiliations.forEach(affiliation => {
-        populateAffiliationStub
-          .withArgs(affiliation)
-          .returns(`populated${affiliation}`);
-      });
 
       const reduceAffiliationsStub = sinon.stub()
       reduceAffiliationsStub.withArgs(affiliations).returns(affiliations)
@@ -359,15 +346,12 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
         status,
         db,
         getAllAffiliations_: getAllAffiliationsStub,
-        populateAffiliation_: populateAffiliationStub,
         reduceAffiliations_: reduceAffiliationsStub,
-
       });
 
-      test.same(results, populatedAffiliations);
+      test.same(results, affiliations);
       test.equal(getAllAffiliationsStub.callCount, 1)
       test.equal(reduceAffiliationsStub.callCount, 1)
-      test.equal(populateAffiliationStub.callCount, 3)
 
     }
   );
