@@ -5,11 +5,16 @@ const getAllActiveRoles = async (userRole, { db = knex } = {}) => {
     .select('id', 'name')
     .where({ isActive: true });
   if (userRole === 'eAPD Federal Admin') {
-    return roles.filter(role => role.name !== 'eAPD Federal Admin');
+    return roles.filter(
+      role =>
+        role.name !== 'eAPD System Admin' && role.name !== 'eAPD Federal Admin'
+    );
   }
   return roles.filter(
     role =>
-      role.name !== 'eAPD Federal Admin' && role.name !== 'eAPD State Admin'
+      role.name !== 'eAPD System Admin' &&
+      role.name !== 'eAPD Federal Admin' &&
+      role.name !== 'eAPD State Admin'
   );
 };
 

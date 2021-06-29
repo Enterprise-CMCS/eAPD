@@ -55,7 +55,9 @@ tap.test('GET /roles', async endpointTest => {
       'sends active roles for a Federal Admin',
       async validTest => {
         const roles = activeRoles.filter(
-          role => role.name !== 'eAPD Federal Admin'
+          role =>
+            role.name !== 'eAPD System Admin' &&
+            role.name !== 'eAPD Federal Admin'
         );
         getAllActiveRoles.resolves(roles);
 
@@ -76,7 +78,8 @@ tap.test('GET /roles', async endpointTest => {
         const roles = activeRoles.filter(
           role =>
             role.name !== 'eAPD State Admin' &&
-            role.name !== 'eAPD Federal Admin'
+            role.name !== 'eAPD Federal Admin' &&
+            role.name !== 'eAPD System Admin'
         );
         getAllActiveRoles.resolves(roles);
 
