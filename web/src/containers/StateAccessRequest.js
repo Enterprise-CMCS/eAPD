@@ -13,7 +13,8 @@ const StateAccessRequest = ({
   cancelAction,
   errorMessage, 
   fetching, 
-  currentAffiliations
+  currentAffiliations,
+  secondaryButtonText,
 }) => {
   const existingAffiliations = currentAffiliations.map(element => { 
     const stateDetails = STATES.find(item => item.id === element.state_id)
@@ -134,7 +135,7 @@ const StateAccessRequest = ({
         success={null}
         working={fetching}
         primaryButtonText={['Submit', 'Submitting']}
-        secondaryButtonText="Back to Login"
+        secondaryButtonText={secondaryButtonText}
         onSave={handleSubmit}
         onCancel={handleCancel}
       >
@@ -203,12 +204,14 @@ StateAccessRequest.propTypes = {
   saveAction: PropTypes.func.isRequired,
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   fetching: PropTypes.bool.isRequired,
-  cancelAction: PropTypes.func.isRequired
+  cancelAction: PropTypes.func.isRequired,
+  secondaryButtonText: PropTypes.string.isRequired
 };
 
 StateAccessRequest.defaultProps = {
   errorMessage: false,
-  currentAffiliations: []
+  currentAffiliations: [],
+
 };
 
 const mapStateToProps = state => ({

@@ -8,11 +8,16 @@ import { updateAccessRequest as actualUpdateAccessRequest } from '../../actions/
 
 import StateAccessRequest from '../StateAccessRequest';
 import StateAccessRequestConfirmation from '../StateAccessRequestConfirmation';
+import { getIsAdmin } from '../../reducers/user.selector';
+import { goToDashboard } from '../../actions/app';
 
 const ManageAccount = ({
   currentAffiliations, 
   updateAccessRequest,
-  error
+  error,
+  isAdmin,
+  currentUser,
+  dashboard
 }) => {
 
   const history = useHistory();
@@ -32,6 +37,14 @@ const ManageAccount = ({
   if(error) {
     setShowConfirmation(false);
   }
+
+  const secondaryButtonText = isAdmin
+    ? 'Admin Dashboard'
+    : `< ${
+      currentUser.state && currentUser.state.id
+        ? `${currentUser.state.id.toUpperCase()} `
+        : ''
+    }APD Home`
   
   return (
     <Fragment>
@@ -42,6 +55,8 @@ const ManageAccount = ({
             fetching={false}
             errorMessage={error}
             currentAffiliations={currentAffiliations}
+            secondaryButtonText={secondaryButtonText}
+            cancelAction={dashboard}
           />
       }
     </Fragment>
@@ -49,22 +64,30 @@ const ManageAccount = ({
 };
 
 ManageAccount.defaultProps = {
-  error: null
+  error: null,
+  currentUser: null,
 };
 
 ManageAccount.propTypes = {
   currentAffiliations: PropTypes.array.isRequired,
   updateAccessRequest: PropTypes.func.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
+  isAdmin: PropTypes.bool.isRequired,
+  currentUser: PropTypes.object,
+  dashboard: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  updateAccessRequest: actualUpdateAccessRequest
+  updateAccessRequest: actualUpdateAccessRequest,
+  dashboard: goToDashboard
 };
 
 const mapStateToProps = state => ({
   currentAffiliations: state.user.data.affiliations,
-  error: state.auth.error
+  error: state.auth.error,
+  isAdmin: getIsAdmin(state),
+  currentUser: state.auth.user,
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccount);

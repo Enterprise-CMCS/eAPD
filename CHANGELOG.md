@@ -6,7 +6,7 @@ Anticipated release: July 9, 2021
 
 
 #### 🐛 Bugs fixed
-
+- fixed text on manage account screen to let the user return to an APD instead of logging out.
 
 #### ⚙️ Behind the scenes
 
