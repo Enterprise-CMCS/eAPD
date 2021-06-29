@@ -15,6 +15,7 @@ Anticipated release: June 28, 2021
 - Update Admin role ([#2964])
 - Removes extraneous header for Budget and FPP in the export view ([#3147])
 - Updates text on session expiring modal ([#3191])
+- endpoint for pulling a user's affiliations ([#3207])
 
 # Previous releases
 
