@@ -41,6 +41,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     db.leftJoin
       .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
+    db.whereNot
+      .withArgs('auth_roles.name', 'eAPD System Admin')
+      .returnsThis()
     db.where.withArgs({ state_id: stateId }).resolves(expectedUsers);
 
     // No specific status
@@ -57,6 +60,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     db.leftJoin
       .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
+    db.whereNot
+      .withArgs('auth_roles.name', 'eAPD System Admin')
+      .returnsThis()
     db.where
       .withArgs({ state_id: stateId, status: 'requested' })
       .resolves(expectedUsers);
@@ -74,6 +80,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     db.leftJoin
       .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
+    db.whereNot
+      .withArgs('auth_roles.name', 'eAPD System Admin')
+      .returnsThis()
     db.where
       .withArgs({ state_id: stateId, status: 'approved' })
       .resolves(expectedUsers);
@@ -93,6 +102,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
       db.leftJoin
         .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
         .returnsThis();
+      db.whereNot
+        .withArgs('auth_roles.name', 'eAPD System Admin')
+        .returnsThis()
       db.whereIn
         .withArgs(
           ['state_id', 'status'],
@@ -105,6 +117,33 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
 
       const results = await getAffiliationsByStateId({ stateId, status, db });
       test.equal(expectedUsers, results);
+    }
+  );
+
+  affiliationsTests.test(
+    'get affiliations by state id as an admin',
+    async test => {
+      const status = 'inactive';
+      db.select.withArgs(selectedColumns).returnsThis();
+      db.leftJoin
+        .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+        .returnsThis()
+      db.leftJoin
+        .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+        .returnsThis();
+      db.whereIn
+        .withArgs(
+          ['state_id', 'status'],
+          [
+            [stateId, 'denied'],
+            [stateId, 'revoked']
+          ]
+        )
+        .resolves(expectedUsers);
+      const isAdmin = true
+      const results = await getAffiliationsByStateId({ stateId, status, db, isAdmin });
+      test.equal(expectedUsers, results);
+
     }
   );
 
@@ -134,15 +173,16 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     async test => {
       const status = 'irrelevant';
       const affiliations = ['foo', 'bar', 'baz'];
-
+      const isAdmin = false
       const getAffiliationsByStateStub = sinon.stub();
       getAffiliationsByStateStub
-        .withArgs({ stateId, status })
+        .withArgs({ stateId, status, isAdmin })
         .resolves(affiliations);
 
       const results = await getPopulatedAffiliationsByStateId({
         stateId,
         status,
+        isAdmin,
         getAffiliationsByStateId_: getAffiliationsByStateStub
       });
       test.same(results, affiliations);
@@ -153,12 +193,13 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     'get populated affiliations by state id with no results',
     async test => {
       const status = 'irrelevant';
-
+      const isAdmin = false
       const getAffiliationsByStateStub = sinon.stub();
-      getAffiliationsByStateStub.withArgs({ stateId, status }).resolves([]);
+      getAffiliationsByStateStub.withArgs({ stateId, status, isAdmin }).resolves([]);
       const results = await getPopulatedAffiliationsByStateId({
         stateId,
         status,
+        isAdmin,
         getAffiliationsByStateId_: getAffiliationsByStateStub
       });
       test.same(results, []);
