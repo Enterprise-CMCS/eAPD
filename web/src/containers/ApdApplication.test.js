@@ -139,7 +139,8 @@ describe('apd (application) component', () => {
       user: {
         data: {
           state: 'place',
-          role: 'test role'
+          role: 'test role',
+          activities: ['edit-document']
         }
       }
     };
@@ -147,6 +148,7 @@ describe('apd (application) component', () => {
     expect(mapStateToProps(state)).toEqual({
       apdId: 123456789,
       isAdmin: false,
+      isEditor: true,
       place: 'place',
       userRole: 'test role'
     });
@@ -157,6 +159,7 @@ describe('apd (application) component', () => {
     expect(mapStateToProps(state)).toEqual({
       apdId: null,
       isAdmin: false,
+      isEditor: true,
       place: 'place',
       userRole: 'test role'
     });

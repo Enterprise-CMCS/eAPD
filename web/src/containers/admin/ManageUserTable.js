@@ -16,7 +16,15 @@ const ManageUserTable = ({
   actions,
   currentUser
 }) => {
-  const currentUserId = currentUser && currentUser.id;
+  const { id: currentUserId, role: currentUserRole } = currentUser;
+
+  const showActions = affiliation => {
+    return (
+      currentUserId !== affiliation.userId &&
+      currentUserRole !== 'eAPD System Admin' &&
+      affiliation.role !== 'eAPD System Admin'
+    );
+  };
 
   return (
     <Fragment>
@@ -53,7 +61,7 @@ const ManageUserTable = ({
                 ) : null}
                 <TableCell>
                   <div className="ds-u-display--flex" data-id={affiliation.id}>
-                    {currentUserId !== affiliation.userId && actions && actions}
+                    {showActions(affiliation) && actions}
                   </div>
                 </TableCell>
               </TableRow>
