@@ -92,7 +92,7 @@ export default function getDeleteModalOptions(objType) {
         return (
           <React.Fragment>
             <div>
-              Unchecking Federal Fiscal Year (YEAR) will permanently delete any FFY (YEAR) specific data in the current
+              Unchecking this Federal Fiscal Year (FFY) will permanently delete any FFY specific data in the current
               APD.
               This action cannot be undone.
             </div>
