@@ -14,6 +14,7 @@ Anticipated release: June 28, 2021
 - Use Local Okta User data instead of contacting Okta when populating affiliations ([#3091])
 - Removes extraneous header for Budget and FPP in the export view ([#3147])
 - Updates text on session expiring modal ([#3191])
+- Added security check to state/:id endpoint so only users with access to that state can get the data
 
 # Previous releases
 
