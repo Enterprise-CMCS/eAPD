@@ -98,7 +98,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (fedAdmin) {
     oktaAffiliations.push({
       user_id: fedAdmin.id,
-      state_id: 'ak',
+      state_id: 'fd',
       role_id: fedAdminRoleId,
       status: 'approved',
       updated_by: 'seeds'
