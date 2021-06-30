@@ -4,6 +4,7 @@ Anticipated release: July 9, 2021
 
 #### 🚀 New features
 
+- Update the delete process for FFY ([#2996])
 
 #### 🐛 Bugs fixed
 
@@ -16,3 +17,4 @@ Anticipated release: July 9, 2021
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2996]: https://github.com/CMSgov/eAPD/issues/2996
