@@ -175,7 +175,7 @@ const getMyAffiliations = {
     responses: {
       200: {
         description: 'A list of affiliations for the logged in user',
-        content: arrayOf(affiliationSchema)
+        content: jsonResponse(arrayOf(affiliationSchema))
       },
       401: {...responses.unauthed[401]}
     },
