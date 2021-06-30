@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 import axios from '../util/api';
 
 import { fetchAllApds } from './app';
-import { getRoles, getUsers } from './admin';
+
 import {
   authenticateUser,
   retrieveExistingTransaction,
@@ -76,18 +76,6 @@ export const updateSessionExpiration = expiresAt => ({
   data: expiresAt
 });
 
-// Ty note: Tif mentioned this could potentially be removed
-const loadData = activities => dispatch => {
-  if (activities.includes('view-document')) {
-    dispatch(fetchAllApds());
-  }
-  if (activities.includes('view-users')) {
-    dispatch(getUsers());
-  }
-  if (activities.includes('view-roles')) {
-    dispatch(getRoles());
-  }
-};
 
 const setupTokenManager = () => (dispatch, getState) => {
   setTokenListeners({
@@ -112,6 +100,12 @@ const setupTokenManager = () => (dispatch, getState) => {
   });
 };
 
+// Ty note: the affiliation selection is working this way but breaks
+// some other things: refreshing the page returns user to login page
+// and when on first-login/signup if they choose more than one affiliation
+// they will be taken back to the login page. When loggin in this time it
+// will show the state picker view though. Unsure what's causing both of
+// these conditions
 const getCurrentUser = () => dispatch =>
   axios
     .get('/me')
@@ -120,25 +114,13 @@ const getCurrentUser = () => dispatch =>
         dispatch(requireAccessToState());
         return '/login/affiliations/request';
       }
-      if (userRes.data.states.length === 1) {
-        // Ty note: this was updated such that completeLogin() now only
-        // switches redux to a logged in state. no longer does it update the redux store.
-        // updateUserInfo will take care of updating it in the user reducer
-        dispatch(completeLogin());
-        dispatch(updateUserInfo(userRes.data));
-        return null;
-      }
       if (userRes.data.states.length > 1) {
-        // Ty note: need to have the data to know what states set
-        console.log("this user has multiple state affiliations");
         dispatch(updateUserInfo(userRes.data));
-        dispatch(requireAffiliationSelection());
-        return '/login/affiliations/select';
+        return '/login/affiliations/select'
       }
-      // This can be removed
-      if (userRes.data.activities) {
-        dispatch(loadData(userRes.data.activities));
-      }
+      dispatch(completeLogin());
+      dispatch(updateUserInfo(userRes.data));
+      return null;
     })
     .catch(error => {
       const reason = error ? error.message : 'N/A';
@@ -367,10 +349,9 @@ export const selectAffiliation = (stateToSwitchTo, currentState) => async dispat
         // of sync? also, how can i test the cookie being set?
         setCookie(res.data.jwt);
         const decoded = jwtDecode(res.data.jwt);
+        dispatch(completeLogin());
         dispatch(updateUserInfo(decoded));
         dispatch(fetchAllApds());
-        dispatch(completeAffiliationSelection());
-        dispatch(completeLogin());
       })
       .catch(error => {
         // Ty note: How should we handle this error?
