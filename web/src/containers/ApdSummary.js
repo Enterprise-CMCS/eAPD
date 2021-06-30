@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { ChoiceList } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
+import DeleteModal from '../components/DeleteModal';
 
 import {
   addYear,
@@ -31,19 +32,23 @@ const ApdSummary = ({
   years,
   yearOptions
 }) => {
+  const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
+
+  const onRemove = () => {
+    removeApdYear(elementDeleteFFY.value);
+    setElementDeleteFFY(null);
+  };
+
+  const onCancel = () => {
+    setElementDeleteFFY(null);
+    elementDeleteFFY.checked = true;
+  }
+
   const handleYears = e => {
     const year = e.target.value;
 
     if (e.target.checked === false) {
-      // eslint-disable-next-line no-alert
-      const confirmation = window.confirm(
-        `Unchecking Federal Fiscal Year ${year} will permanently delete any FFY ${year} specific data in the current APD.`
-      );
-      if (confirmation === true) {
-        removeApdYear(year);
-      } else {
-        e.target.checked = true;
-      }
+      setElementDeleteFFY(e.target);
     } else {
       addApdYear(year);
       e.target.checked = true;
@@ -119,6 +124,13 @@ const ApdSummary = ({
           editorClassName="rte-textarea-l"
         />
       </div>
+      {elementDeleteFFY && (
+        <DeleteModal
+          objType="FFY"
+          onCancel={onCancel}
+          onDelete={onRemove}
+        />
+      )}
     </Section>
   );
 };
