@@ -49,7 +49,7 @@ describe('Affiliations endpoint | GET', () => {
 
   describe('GET /affiliations/me', () => {
     unauthenticatedTest('get', '/affiliations/me');
-    // usually there would be an unauthenticated test here, but this endpoint is
+    // usually there would be an unauthorized test here, but this endpoint is
     // implicitly authorized because it is about the current user.
 
     it('returns 200', async () => {
