@@ -128,6 +128,28 @@ const getCurrentUser = () => dispatch =>
       return null;
     });
 
+const updateCurrentUser = () => dispatch =>
+  axios
+    .get('/me')
+    .then(userRes => {
+      // if (userRes.data.states.length === 0) {
+      //   dispatch(requireAccessToState());
+      //   return '/login/affiliations/request';
+      // }
+      // if (userRes.data.states.length > 1) {
+      //   dispatch(updateUserInfo(userRes.data));
+      //   return '/login/affiliations/select'
+      // }
+      dispatch(completeLogin());
+      dispatch(updateUserInfo(userRes.data));
+      return null;
+    })
+    .catch(error => {
+      const reason = error ? error.message : 'N/A';
+      dispatch(failLogin(reason));
+      return null;
+    });
+
 export const logout = () => dispatch => {
   dispatch(requestLogout());
   logoutAndClearTokens().then( () => {
@@ -189,7 +211,7 @@ export const authCheck = () => async dispatch => {
   if (expiresAt) {
     dispatch(updateSessionExpiration(expiresAt));
     dispatch(setLatestActivity());
-    return dispatch(getCurrentUser());
+    return dispatch(updateCurrentUser());
   }
   dispatch(logout());
   return null;

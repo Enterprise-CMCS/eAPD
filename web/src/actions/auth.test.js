@@ -712,12 +712,12 @@ describe('auth actions', () => {
       fetchAllApdsSpy = jest
         .spyOn(mockApp, 'fetchAllApds')
         .mockImplementation(() => {});
-      getUsersSpy = jest
-        .spyOn(mockAdmin, 'getUsers')
-        .mockImplementation(() => {});
-      getRolesSpy = jest
-        .spyOn(mockAdmin, 'getRoles')
-        .mockImplementation(() => {});
+      // getUsersSpy = jest
+      //   .spyOn(mockAdmin, 'getUsers')
+      //   .mockImplementation(() => {});
+      // getRolesSpy = jest
+      //   .spyOn(mockAdmin, 'getRoles')
+      //   .mockImplementation(() => {});
     });
 
     it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
