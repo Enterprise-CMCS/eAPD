@@ -98,12 +98,10 @@ const setupTokenManager = () => (dispatch, getState) => {
   });
 };
 
-// Ty note: the affiliation selection is working this way but breaks
-// some other things: refreshing the page returns user to login page
-// and when on first-login/signup if they choose more than one affiliation
-// they will be taken back to the login page. When loggin in this time it
-// will show the state picker view though. Unsure what's causing both of
-// these conditions
+// Note: This function, the updateCurrentUser function and any functions
+// that call them should be targets for refactoring. When adding a new
+// condition to this method there was some unexpected behavior. Reloading
+// a page when logged in would navigate a user back to the login page.
 const getCurrentUser = () => dispatch =>
   axios
     .get('/me')
@@ -130,14 +128,6 @@ const updateCurrentUser = () => dispatch =>
   axios
     .get('/me')
     .then(userRes => {
-      // if (userRes.data.states.length === 0) {
-      //   dispatch(requireAccessToState());
-      //   return '/login/affiliations/request';
-      // }
-      // if (userRes.data.states.length > 1) {
-      //   dispatch(updateUserInfo(userRes.data));
-      //   return '/login/affiliations/select'
-      // }
       dispatch(completeLogin());
       dispatch(updateUserInfo(userRes.data));
       return null;
@@ -356,28 +346,19 @@ export const completeAccessRequest = () => dispatch => {
   return dispatch(getCurrentUser());
 };
 
-// Ty note: is it weird to use this function for both the login selection
-// and when switching? some logic only applies to switching while the 
-// completeLogin() only applies to the login process but doesn't break when 
-// going to the switching menu once logged in
 export const selectAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
   if (stateToSwitchTo !== currentState) {
     await axios
       .get(`/auth/state/${stateToSwitchTo}`)
       .then((res) => {
-        // Ty note: Any concern about only the cookie being set
-        // or only the redux store being set and them being out
-        // of sync? also, how can i test the cookie being set?
+        // Todo: Refactor this to be more FP style
         setCookie(res.data.jwt);
         const decoded = jwtDecode(res.data.jwt);
         dispatch(completeLogin());
         dispatch(updateUserInfo(decoded));
         dispatch(fetchAllApds());
       })
-      .catch(error => {
-        // Ty note: How should we handle this error?
-        console.log("error in switching affiliation", error)
-      })
+      .catch(() => {});
   }
   return '/';
 }
