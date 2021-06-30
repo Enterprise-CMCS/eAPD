@@ -6,18 +6,11 @@ import * as actions from './auth';
 import axios from '../util/api';
 import * as mockAuth from '../util/auth';
 import mockApp from './app';
-import mockAdmin from './admin';
 import { MFA_FACTOR_TYPES } from '../constants';
 
 jest.mock('./app', () => {
   return {
     fetchAllApds: jest.fn()
-  };
-});
-jest.mock('./admin', () => {
-  return {
-    getUsers: jest.fn(),
-    getRoles: jest.fn()
   };
 });
 
@@ -398,14 +391,17 @@ describe('auth actions', () => {
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
-    
+
     it('creates PASSWORD_EXPIRED when verify returns an expired password status', async () => {
       jest
         .spyOn(mockAuth, 'retrieveExistingTransaction')
         .mockImplementation(() =>
           Promise.resolve({
             verify: jest.fn(() =>
-              Promise.resolve({ sessionToken: 'testSessionToken', status: 'PASSWORD_EXPIRED' })
+              Promise.resolve({
+                sessionToken: 'testSessionToken',
+                status: 'PASSWORD_EXPIRED'
+              })
             )
           })
         );
@@ -455,7 +451,10 @@ describe('auth actions', () => {
         .mockImplementation(() =>
           Promise.resolve({
             verify: jest.fn(() =>
-              Promise.resolve({ sessionToken: 'testSessionToken', status: 'SUCCESS' })
+              Promise.resolve({
+                sessionToken: 'testSessionToken',
+                status: 'SUCCESS'
+              })
             )
           })
         );
@@ -995,7 +994,7 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [{ type: actions.STATE_ACCESS_REQUEST }];
       const response = await store.dispatch(
-        actions.createAccessRequest([{name: 'Florida', id: 'fl'}])
+        actions.createAccessRequest([{ name: 'Florida', id: 'fl' }])
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toEqual('/login/affiliations/thank-you');
@@ -1009,7 +1008,11 @@ describe('auth actions', () => {
       const store = mockStore({});
       const expectedActions = [{ type: actions.STATE_ACCESS_REQUEST }];
       const response = await store.dispatch(
-        actions.createAccessRequest([{name: 'Florida', id: 'fl'}, {name: 'Maryland', id: 'md'}, {name: 'Arizona', id: 'az'}])
+        actions.createAccessRequest([
+          { name: 'Florida', id: 'fl' },
+          { name: 'Maryland', id: 'md' },
+          { name: 'Arizona', id: 'az' }
+        ])
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toEqual('/login/affiliations/thank-you');
@@ -1030,7 +1033,7 @@ describe('auth actions', () => {
         }
       ];
       const response = await store.dispatch(
-        actions.createAccessRequest([{name: 'Florida', id: 'fl'}])
+        actions.createAccessRequest([{ name: 'Florida', id: 'fl' }])
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toBeNull();
@@ -1054,7 +1057,11 @@ describe('auth actions', () => {
         }
       ];
       const response = await store.dispatch(
-        actions.createAccessRequest([{name: 'Florida', id: 'fl'},{name: 'Maryland', id: 'md'}, {name: 'Arizona', id: 'az'}])
+        actions.createAccessRequest([
+          { name: 'Florida', id: 'fl' },
+          { name: 'Maryland', id: 'md' },
+          { name: 'Arizona', id: 'az' }
+        ])
       );
       expect(store.getActions()).toEqual(expectedActions);
       expect(response).toBeNull();

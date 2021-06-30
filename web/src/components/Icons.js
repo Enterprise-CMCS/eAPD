@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRight,
   faCheck,
+  faXmark,
   faCheckCircle,
   faChevronDown,
   faChevronLeft,
@@ -32,6 +33,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 
 const Check = ({ ...props }) => <FontAwesomeIcon icon={faCheck} {...props} />;
+const Xmark = ({ ...props }) => <FontAwesomeIcon icon={faXmark} {...props} />;
 const CheckCircle = ({ ...props }) => (
   <FontAwesomeIcon icon={faCheckCircle} {...props} />
 );
@@ -65,6 +67,7 @@ export {
   faTimesCircle,
   faUnlock,
   Check,
+  Xmark,
   CheckCircle,
   File,
   Envelope,

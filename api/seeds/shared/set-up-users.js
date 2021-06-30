@@ -1,7 +1,8 @@
-const { addDays, format, subDays } = require('date-fns')
+const { addDays, format, subDays } = require('date-fns');
 const logger = require('../../logger')('user seeder');
+const { states } = require('../../util/states');
 
-const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss'
+const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
 
 const formatOktaUser = oktaResult =>{
   const {email, displayName, secondEmail, primaryPhone, mobilePhone, login} = oktaResult.profile
@@ -24,6 +25,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   await knex('okta_users').del();
   logger.info('Retrieving user ids from Okta');
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
+  const sysAdmin  = (await oktaClient.getUser('sysadmin')) || {};
   const fedAdmin = (await oktaClient.getUser('fedadmin')) || {};
   const stateAdmin = (await oktaClient.getUser('stateadmin')) || {};
   const stateStaff = (await oktaClient.getUser('statestaff')) || {};
@@ -33,6 +35,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const revokedRole = (await oktaClient.getUser('revokedrole')) || {};
 
   logger.info('Retrieving role ids from database');
+  const sysAdminRoleId = await knex('auth_roles')
+    .where({ name: 'eAPD System Admin' })
+    .first()
+    .then(role => role.id);
   const fedAdminRoleId = await knex('auth_roles')
     .where({ name: 'eAPD Federal Admin' })
     .first()
@@ -55,6 +61,19 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const stateCertifications = [];
   const oktaUsers = [];
 
+  if (sysAdmin) {
+    states.forEach(state => {
+      oktaAffiliations.push({
+        user_id: sysAdmin.id,
+        state_id: state.id,
+        role_id: sysAdminRoleId,
+        status: 'approved',
+        updated_by: 'seeds',
+        username: 'sysadmin'
+      });
+    });
+    oktaUsers.push(formatOktaUser(sysAdmin))
+  }
   if (regularUser) {
     oktaAffiliations.push({
       user_id: regularUser.id,
@@ -68,7 +87,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
       username: regularUser.id,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
-      certificationExpiration: format(subDays(new Date(), 35), PostgresDateFormat),
+      certificationExpiration: format(
+        subDays(new Date(), 35),
+        PostgresDateFormat
+      ),
       certifiedBy: 'seeds'
     })
     oktaUsers.push(formatOktaUser(regularUser))
@@ -104,7 +126,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
       username: stateAdmin.id,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
-      certificationExpiration: format(addDays(new Date(), 325), PostgresDateFormat),
+      certificationExpiration: format(
+        addDays(new Date(), 325),
+        PostgresDateFormat
+      ),
       certifiedBy: 'seeds'
     })
 
@@ -124,7 +149,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
       username: stateStaff.id,
       state: 'ak',
       certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
-      certificationExpiration: format(subDays(new Date(), 35), PostgresDateFormat),
+      certificationExpiration: format(
+        subDays(new Date(), 35),
+        PostgresDateFormat
+      ),
       certifiedBy: 'seeds'
     })
     oktaUsers.push(formatOktaUser(stateStaff))

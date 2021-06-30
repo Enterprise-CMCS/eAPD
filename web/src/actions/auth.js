@@ -3,7 +3,6 @@ import jwtDecode from 'jwt-decode';
 import axios from '../util/api';
 
 import { fetchAllApds } from './app';
-
 import {
   authenticateUser,
   retrieveExistingTransaction,
@@ -75,7 +74,6 @@ export const updateSessionExpiration = expiresAt => ({
   type: UPDATE_EXPIRATION,
   data: expiresAt
 });
-
 
 const setupTokenManager = () => (dispatch, getState) => {
   setTokenListeners({
@@ -283,30 +281,31 @@ export const loginOtp = otp => async dispatch => {
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
     return verifyMFA({ transaction, otp })
-    .then(({sessionToken, status}) => {
-      if(status === "PASSWORD_EXPIRED") {
-        return dispatch(failLogin('PASSWORD_EXPIRED'));
-      }
-      if(status === "SUCCESS") {
-        return dispatch(authenticationSuccess(sessionToken));
-      }
-      dispatch(failLogin('MFA_AUTH_FAILED'));
-      return null;
-    }).catch(error => {
-      const reason = error ? error.message : 'N/A';
-      if (reason === 'User is not assigned to the client application.') {
-        dispatch(failLogin('NOT_IN_GROUP'));
-        // redirect to not in group page
-        return '/login/not-in-group';
-      }
-      if (reason === 'User Locked') {
-        dispatch(failLogin('LOCKED_OUT'));
-        // redirect to locked-out page
-        return '/login/locked-out';
-      }
-      dispatch(failLogin('MFA_AUTH_FAILED'));
-      return null;
-    })
+      .then(({ sessionToken, status }) => {
+        if (status === 'PASSWORD_EXPIRED') {
+          return dispatch(failLogin('PASSWORD_EXPIRED'));
+        }
+        if (status === 'SUCCESS') {
+          return dispatch(authenticationSuccess(sessionToken));
+        }
+        dispatch(failLogin('MFA_AUTH_FAILED'));
+        return null;
+      })
+      .catch(error => {
+        const reason = error ? error.message : 'N/A';
+        if (reason === 'User is not assigned to the client application.') {
+          dispatch(failLogin('NOT_IN_GROUP'));
+          // redirect to not in group page
+          return '/login/not-in-group';
+        }
+        if (reason === 'User Locked') {
+          dispatch(failLogin('LOCKED_OUT'));
+          // redirect to locked-out page
+          return '/login/locked-out';
+        }
+        dispatch(failLogin('MFA_AUTH_FAILED'));
+        return null;
+      });
   }
   dispatch(failLogin('MFA_AUTH_FAILED'));
   return null;
