@@ -1,4 +1,4 @@
-FROM cypress/base:14
+FROM node:14
 
 RUN npm i -g npm@^6
 
