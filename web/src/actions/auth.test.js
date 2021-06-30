@@ -689,81 +689,6 @@ describe('auth actions', () => {
     });
   });
 
-  describe('handle loading data', () => {
-    let fetchAllApdsSpy;
-    let getUsersSpy;
-    let getRolesSpy;
-
-    beforeEach(() => {
-      jest.clearAllMocks();
-
-      jest.spyOn(mockAuth, 'authenticateUser').mockImplementation(() =>
-        Promise.resolve({
-          sessionToken: 'testSessionToken',
-          status: 'SUCCESS'
-        })
-      );
-      jest
-        .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve(new Date().getTime() + 5000));
-      jest
-        .spyOn(mockAuth, 'renewTokens')
-        .mockImplementation(() => new Promise(() => {}));
-      fetchAllApdsSpy = jest
-        .spyOn(mockApp, 'fetchAllApds')
-        .mockImplementation(() => {});
-      // getUsersSpy = jest
-      //   .spyOn(mockAdmin, 'getUsers')
-      //   .mockImplementation(() => {});
-      // getRolesSpy = jest
-      //   .spyOn(mockAdmin, 'getRoles')
-      //   .mockImplementation(() => {});
-    });
-
-    it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock.onGet('/me').reply(200, {
-        name: 'moop',
-        states: ['MO'],
-        activities: ['view-document']
-      });
-
-      const store = mockStore({});
-      await store.dispatch(actions.login('name', 'secret'));
-      await timeout(25);
-      expect(fetchAllApdsSpy).toHaveBeenCalled();
-      expect(getUsersSpy).not.toHaveBeenCalled();
-      expect(getRolesSpy).not.toHaveBeenCalled();
-    });
-    it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock.onGet('/me').reply(200, {
-        name: 'moop',
-        activities: ['view-users'],
-        states: ['MO']
-      });
-
-      const store = mockStore({});
-      await store.dispatch(actions.login('name', 'secret'));
-      await timeout(25);
-      expect(getUsersSpy).toHaveBeenCalled();
-      expect(fetchAllApdsSpy).not.toHaveBeenCalled();
-      expect(getRolesSpy).not.toHaveBeenCalled();
-    });
-    it('creates LOGIN_SUCCESS after successful single factor auth', async () => {
-      fetchMock.onGet('/me').reply(200, {
-        name: 'moop',
-        activities: ['view-roles'],
-        states: ['MO']
-      });
-
-      const store = mockStore({});
-      await store.dispatch(actions.login('name', 'secret'));
-      await timeout(25);
-      expect(getRolesSpy).toHaveBeenCalled();
-      expect(fetchAllApdsSpy).not.toHaveBeenCalled();
-      expect(getUsersSpy).not.toHaveBeenCalled();
-    });
-  });
-
   describe('handling sessions', () => {
     it('extendSession', async () => {
       const expiresAt = new Date().getTime() + 5000;
@@ -1210,9 +1135,10 @@ describe('auth actions', () => {
       expect(setCookieSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should update the redux store with new user info', async () => {
+    it('should fire a login success and update the redux store with new user info', async () => {
       const store = mockStore({});
       const expectedActions = [
+        { type: actions.LOGIN_SUCCESS },
         {
           type: actions.UPDATE_USER_INFO,
           data: {
