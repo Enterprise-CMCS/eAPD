@@ -32,7 +32,7 @@ import {
   selectHasChanges,
   selectPatches
 } from '../../reducers/patch.selectors';
-import { getIsAdmin, getCanUserEditAPD } from '../../reducers/user.selector';
+import { getIsFedAdmin, getCanUserEditAPD } from '../../reducers/user.selector';
 
 import axios from '../../util/api';
 import initialAssurances from '../../util/regulations';
@@ -126,7 +126,7 @@ export const selectApd = (
 };
 
 export const setApdToSelectOnLoad = () => (dispatch, getState) => {
-  const isAdmin = getIsAdmin(getState());
+  const isAdmin = getIsFedAdmin(getState());
   if (!isAdmin) {
     dispatch({ type: SET_APD_TO_SELECT_ON_LOAD });
   }

@@ -428,7 +428,7 @@ describe('application-level actions', () => {
     });
 
     it('does nothing if user is an admin', async () => {
-      const store = mockStore({ user: { data: { role: 'admin' } } });
+      const store = mockStore({ user: { data: { role: 'eAPD Federal Admin' } } });
 
       await store.dispatch(setApdToSelectOnLoad());
 

@@ -8,7 +8,7 @@ import { updateAccessRequest as actualUpdateAccessRequest } from '../../actions/
 
 import StateAccessRequest from '../StateAccessRequest';
 import StateAccessRequestConfirmation from '../StateAccessRequestConfirmation';
-import { getIsAdmin } from '../../reducers/user.selector';
+import { getIsFedAdmin } from '../../reducers/user.selector';
 import { goToDashboard } from '../../actions/app';
 
 const ManageAccount = ({
@@ -85,7 +85,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   currentAffiliations: state.user.data.affiliations,
   error: state.auth.error,
-  isAdmin: getIsAdmin(state),
+  isAdmin: getIsFedAdmin(state),
   currentUser: state.auth.user,
 
 });
