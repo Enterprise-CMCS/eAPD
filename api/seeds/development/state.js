@@ -15,4 +15,21 @@ exports.seed = async knex => {
         }
       })
     });
+
+  await knex
+    .table('states')
+    .where({ id: 'md' })
+    .update({
+      medicaid_office: JSON.stringify({
+        address1: '1 Infinite loop',
+        city: 'Cupertino',
+        zip: '21276',
+        state: 'Maryland',
+        director: {
+          name: 'Bertha Jorkins',
+          email: 'b.jorkins@ministry.magic',
+          phone: '5558675309'
+        }
+      })
+    });
 };

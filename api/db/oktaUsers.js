@@ -72,5 +72,5 @@ module.exports = {
   getOktaUser,
   updateOktaUser,
   createOrUpdateOktaUserFromOkta,
-  sanitizeProfile,
+  sanitizeProfile
 }
