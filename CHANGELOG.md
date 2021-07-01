@@ -1,10 +1,10 @@
 # Next release
 
-Anticipated release: June 28, 2021
+Anticipated release: July 9, 2021
 
 #### 🚀 New features
 
-- Updated modal that displays when saving an APD fails ([#2997])
+- Update the delete process for FFY ([#2996])
 
 #### 🐛 Bugs fixed
 
@@ -12,16 +12,11 @@ Anticipated release: June 28, 2021
 
 #### ⚙️ Behind the scenes
 
-- Use Local Okta User data instead of contacting Okta when populating affiliations ([#3091])
-- Removes extraneous header for Budget and FPP in the export view ([#3147])
-- Updates text on session expiring modal ([#3191])
+
 
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
-[#2997]: https://github.com/CMSgov/eAPD/issues/2997
-[#3091]: https://github.com/CMSgov/eAPD/issues/3091
-[#3147]: https://github.com/CMSgov/eAPD/issues/3147
+[#2996]: https://github.com/CMSgov/eAPD/issues/2996
 [#3181]: https://github.com/CMSgov/eAPD/issues/3181
-[#3191]: https://github.com/CMSgov/eAPD/issues/3191

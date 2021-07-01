@@ -24,12 +24,15 @@ const statusConverter = {
   'inactive': ['denied', 'revoked']
 }
 
-const getAffiliationsByStateId = ({ stateId, status, db = knex }) => {
-  const query = db('auth_affiliations')
+const getAffiliationsByStateId = ({ stateId, status, db = knex, isAdmin = false }) => {
+  let query = db('auth_affiliations')
                 .select(selectedColumns)
                 .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
                 .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
 
+  if (!isAdmin){
+      query = query.whereNot('auth_roles.name', 'eAPD System Admin')
+  }
   if (status === 'pending') {
     return query.where({
         state_id: stateId,
@@ -58,9 +61,10 @@ const getAffiliationsByStateId = ({ stateId, status, db = knex }) => {
 const getPopulatedAffiliationsByStateId = ({
   stateId,
   status,
+  isAdmin,
   getAffiliationsByStateId_ = getAffiliationsByStateId
 }) => {
-  return getAffiliationsByStateId_({ stateId, status });
+  return getAffiliationsByStateId_({ stateId, status, isAdmin });
 };
 
 const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {

@@ -57,5 +57,11 @@ Array [
     "isActive": true,
     "name": "eAPD State Contractor",
   },
+  Object {
+    "activities": Array [],
+    "id": 1110,
+    "isActive": true,
+    "name": "eAPD System Admin",
+  },
 ]
 `;

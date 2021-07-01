@@ -25,13 +25,14 @@ import {
   ariaAnnounceApdLoading,
   ariaAnnounceApdLoadingFailure
 } from '../aria';
+import { t } from '../../i18n';
 
 import { selectApdData } from '../../reducers/apd.selectors';
 import {
   selectHasChanges,
   selectPatches
 } from '../../reducers/patch.selectors';
-import { getIsAdmin } from '../../reducers/user.selector';
+import { getIsAdmin, getCanUserEditAPD } from '../../reducers/user.selector';
 
 import axios from '../../util/api';
 import initialAssurances from '../../util/regulations';
@@ -40,31 +41,42 @@ const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
 export const saveApd = () => (dispatch, getState) => {
   const state = getState();
-  const hasChanges = selectHasChanges(state);
+  const canEdit = getCanUserEditAPD(state);
+  if (canEdit) {
+    const hasChanges = selectHasChanges(state);
 
-  if (!hasChanges) {
-    return Promise.resolve();
+    if (!hasChanges) {
+      return Promise.resolve();
+    }
+
+    dispatch({ type: SAVE_APD_REQUEST });
+
+    const { id: apdID } = selectApdData(state);
+    const patches = selectPatches(state);
+
+    return axios
+      .patch(`/apds/${apdID}`, patches)
+      .then(res => {
+        dispatch({ type: SAVE_APD_SUCCESS, data: res.data });
+        return res.data;
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 403) {
+          dispatch({
+            type: SAVE_APD_FAILURE,
+            data: t('errors.save-apd.not-logged-in')
+          });
+        } else {
+          dispatch({ type: SAVE_APD_FAILURE });
+        }
+        throw error;
+      });
   }
-
-  dispatch({ type: SAVE_APD_REQUEST });
-
-  const { id: apdID } = selectApdData(state);
-  const patches = selectPatches(state);
-
-  return axios
-    .patch(`/apds/${apdID}`, patches)
-    .then(res => {
-      dispatch({ type: SAVE_APD_SUCCESS, data: res.data });
-      return res.data;
-    })
-    .catch(error => {
-      if (error.response && error.response.status === 403) {
-        dispatch({ type: SAVE_APD_FAILURE, data: 'save-apd.not-logged-in' });
-      } else {
-        dispatch({ type: SAVE_APD_FAILURE });
-      }
-      throw error;
-    });
+  dispatch({
+    type: SAVE_APD_FAILURE,
+    data: t('errors.save-apd.no-save-permissions')
+  });
+  return null;
 };
 
 export const selectApd = (

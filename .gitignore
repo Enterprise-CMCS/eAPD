@@ -10,6 +10,7 @@ node_modules
 
 npm-debug.log*
 pgdata/*
+mongodata/*
 __files
 api/test-data/files
 notes.md
