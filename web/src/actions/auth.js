@@ -1,4 +1,4 @@
-import jwtDecode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 
 import axios from '../util/api';
 
@@ -353,7 +353,7 @@ export const selectAffiliation = (stateToSwitchTo, currentState) => async dispat
       .then((res) => {
         // Todo: Refactor this to be more FP style
         setCookie(res.data.jwt);
-        const decoded = jwtDecode(res.data.jwt);
+        const decoded = jwt_decode(res.data.jwt);
         dispatch(completeLogin());
         dispatch(updateUserInfo(decoded));
         dispatch(fetchAllApds());
