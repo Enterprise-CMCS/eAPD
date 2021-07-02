@@ -2,9 +2,9 @@ const knex = require('./knex');
 
 const getStateProfile = async (stateID, { db = knex } = {}) => {
   const profile = await db('states')
-  .select('medicaid_office')
-  .where('id', stateID)
-  .first();
+    .select('medicaid_office')
+    .where('id', stateID)
+    .first();
   return profile.medicaid_office;
 };
 
