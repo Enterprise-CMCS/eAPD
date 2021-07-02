@@ -63,7 +63,6 @@ export const failLogin = error => ({ type: LOGIN_FAILURE, error });
 export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
-export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
 export const requireAffiliationSelection = () => ({ type: AFFILIATION_SELECTION_REQUIRED });
 export const completeAffiliationSelection = () => ({ type: AFFILIATION_SELECTION_COMPLETE });
 export const updateUserInfo = user => ({ type: UPDATE_USER_INFO, data: user });
@@ -185,12 +184,18 @@ const authenticationSuccess = sessionToken => async dispatch => {
   return '/login/affiliations/select';
 };
 
+// Ty note: had to add fetchAllApds() to this. I feel
+// like we should revisit this and consider refactoring
+// such that we don't have to re-fetch the apds or update
+// the current users info
 export const authCheck = () => async dispatch => {
   dispatch(setupTokenManager());
   const expiresAt = await renewTokens();
+
   if (expiresAt) {
     dispatch(updateSessionExpiration(expiresAt));
     dispatch(setLatestActivity());
+    dispatch(fetchAllApds());
     return dispatch(updateCurrentUser());
   }
   dispatch(logout());
@@ -295,7 +300,6 @@ export const loginOtp = otp => async dispatch => {
 
 export const createAccessRequest = states => async dispatch => {
   let failureReason = null;
-  dispatch(requestAccessToState());
   await Promise.all(
     states.map(async state => {
       await axios
@@ -314,6 +318,8 @@ export const createAccessRequest = states => async dispatch => {
   return '/login/affiliations/thank-you';
 };
 
+// Todo: since this isn't part of the initial login flow we
+// should consider using a different failure method
 export const updateAccessRequest = states => async dispatch => {
   let failureReason = null;
   await Promise.all(
