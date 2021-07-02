@@ -130,7 +130,6 @@ const changeState  = async (user, stateId, { getStateById_ = getStateById }={}) 
   const newUser = JSON.parse(JSON.stringify(user))
   newUser.state = await getStateById_(stateId)
   newUser.state.id = stateId
-  console.log(newUser.state.id);
   newUser.activities = user.permissions[stateId]
   return sign(newUser, {})
 }

@@ -19,7 +19,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
     res = mockResponse();
     next = sinon.stub();
     getActiveAuthRoles = sinon.stub();
-    changeState = sinon.stub()
+    changeState = sinon.stub();
   });
 
   endpointTest.test('setup', async setupTest => {
