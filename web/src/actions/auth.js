@@ -15,7 +15,7 @@ import {
   setTokenListeners,
   renewTokens,
   logoutAndClearTokens,
-  isUserActive,
+  isUserActive
 } from '../util/auth';
 import { MFA_FACTOR_TYPES } from '../constants';
 
@@ -32,8 +32,6 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
-export const AFFILIATION_SELECTION_REQUIRED = 'AFFILIATION_SELECTION_REQUIRED';
-export const AFFILIATION_SELECTION_COMPLETE = 'AFFILIATION_SELECTION_COMPLETE';
 export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
 
 
@@ -63,8 +61,6 @@ export const failLogin = error => ({ type: LOGIN_FAILURE, error });
 export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
-export const requireAffiliationSelection = () => ({ type: AFFILIATION_SELECTION_REQUIRED });
-export const completeAffiliationSelection = () => ({ type: AFFILIATION_SELECTION_COMPLETE });
 export const updateUserInfo = user => ({ type: UPDATE_USER_INFO, data: user });
 export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
 export const setSessionEnding = () => ({ type: SESSION_ENDING_ALERT });
@@ -98,6 +94,9 @@ const setupTokenManager = () => (dispatch, getState) => {
   });
 };
 
+// Todo: how should we handle the error if we
+// only want to return the user object? Previously
+// and in updateCurrentUser we would dispatch a failLogin
 const getCurrentUser = async () => {
   // Todo: check cookie for jwt first
   const userResponse = await axios.get('/me');

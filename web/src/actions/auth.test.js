@@ -84,11 +84,11 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
-        { type: actions.LOGIN_SUCCESS },
         {
           type: actions.UPDATE_USER_INFO,
           data: { name: 'moop', activities: [], states: ['MO'] }
-        }
+        },
+        { type: actions.LOGIN_SUCCESS }
       ];
 
       await store.dispatch(actions.login('name', 'secret'));
@@ -297,11 +297,11 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
-        { type: actions.LOGIN_SUCCESS },
         {
           type: actions.UPDATE_USER_INFO,
           data: { name: 'moop', activities: [], states: ['MO'] }
-        }
+        },
+        { type: actions.LOGIN_SUCCESS }
       ];
 
       await store.dispatch(actions.loginOtp('otp'));
@@ -943,7 +943,6 @@ describe('auth actions', () => {
           type: actions.UPDATE_EXPIRATION,
           data: expiresAt
         },
-        { type: actions.LOGIN_SUCCESS },
         {
           type: actions.UPDATE_USER_INFO,
           data: {
@@ -951,7 +950,8 @@ describe('auth actions', () => {
             activities: [],
             states: ['MO']
           }
-        }
+        },
+        { type: actions.LOGIN_SUCCESS }
       ];
 
       await store.dispatch(actions.mfaActivate('1234'));
@@ -988,25 +988,22 @@ describe('auth actions', () => {
         .onGet('/me')
         .reply(200, { name: 'moop', activities: [], states: [] });
     });
-    it('should handle creating a state affiliation', async () => {
+    it('should return the thank you page path on successful request', async () => {
       fetchMock.onPost('/states/fl/affiliations').reply(200);
 
       const store = mockStore({});
-      const expectedActions = [{ type: actions.STATE_ACCESS_REQUEST }];
       const response = await store.dispatch(
         actions.createAccessRequest([{ name: 'Florida', id: 'fl' }])
       );
-      expect(store.getActions()).toEqual(expectedActions);
       expect(response).toEqual('/login/affiliations/thank-you');
     });
 
-    it('should handle creating multiple state affiliations', async () => {
+    it('should return the thank you page path on successful requests of multiple states', async () => {
       fetchMock.onPost('/states/fl/affiliations').reply(200);
       fetchMock.onPost('/states/md/affiliations').reply(200);
       fetchMock.onPost('/states/az/affiliations').reply(200);
 
       const store = mockStore({});
-      const expectedActions = [{ type: actions.STATE_ACCESS_REQUEST }];
       const response = await store.dispatch(
         actions.createAccessRequest([
           { name: 'Florida', id: 'fl' },
@@ -1014,7 +1011,6 @@ describe('auth actions', () => {
           { name: 'Arizona', id: 'az' }
         ])
       );
-      expect(store.getActions()).toEqual(expectedActions);
       expect(response).toEqual('/login/affiliations/thank-you');
     });
 
@@ -1024,9 +1020,6 @@ describe('auth actions', () => {
         .reply(401, { error: 'Unauthorized' });
       const store = mockStore({});
       const expectedActions = [
-        {
-          type: actions.STATE_ACCESS_REQUEST
-        },
         {
           type: actions.LOGIN_FAILURE,
           error: 'Request failed with status code 401'
@@ -1048,9 +1041,6 @@ describe('auth actions', () => {
 
       const store = mockStore({});
       const expectedActions = [
-        {
-          type: actions.STATE_ACCESS_REQUEST
-        },
         {
           type: actions.LOGIN_FAILURE,
           error: 'Request failed with status code 401'
