@@ -20,17 +20,13 @@ const ManageAccount = ({
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleCreateAccessRequest = async states => {
-    await updateAccessRequest(states);
-    setShowConfirmation(true);
+    const response = await updateAccessRequest(states);
+    if (response) { setShowConfirmation(true) };
   };
 
   const handleCompleteAccessRequest = () => {
     history.push('/');
   };
-
-  if(error) {
-    setShowConfirmation(false);
-  }
   
   return (
     <Fragment>

@@ -205,13 +205,6 @@ describe('auth reducer', () => {
         fetching: false
       });
     });
-
-    it('should set fetching to true if STATE_ACCESS_REQUEST', () => {
-      expect(auth(initialState, { type: STATE_ACCESS_REQUEST })).toEqual({
-        ...initialState,
-        fetching: true
-      });
-    });
   });
 
   it('selects the current logged-in state', () => {
