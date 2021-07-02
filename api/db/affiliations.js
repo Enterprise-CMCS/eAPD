@@ -24,38 +24,33 @@ const statusConverter = {
   'inactive': ['denied', 'revoked']
 }
 
-const getAffiliationsByStateId = ({ stateId, status, db = knex, isAdmin = false }) => {
-  let query = db('auth_affiliations')
+const getAffiliationsByStateId = ({ stateId, status, db = knex, isFedAdmin = false }) => {
+  const query = db('auth_affiliations')
                 .select(selectedColumns)
                 .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
                 .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
 
-  if (!isAdmin){
-      query = query.whereNot('auth_roles.name', 'eAPD System Admin')
+  // No one should see the Sys Admins in the Admin Panel, if isFedAdmin is null, then the user is
+  // a State Admin and they shouldn't see Federal Admins
+  const skipRoles = (isFedAdmin) ? ['eAPD System Admin'] : ['eAPD System Admin', 'eAPD Federal Admin'];
+  // Get the list of statuses to query
+  const affiliationStatuses = statusConverter[status] || null;
+
+  if (affiliationStatuses) {
+    return query.where((builder) => {
+      // Where statuses equal what was requested
+      builder.whereIn('status', affiliationStatuses);
+    }).andWhere(builder => {
+      // Where the role isn't in the skip roles or is null
+      builder.whereNotIn('auth_roles.name', skipRoles).orWhereNull('auth_roles.name');
+    }).andWhere((builder) => {
+      // where the state equals what was requested
+      builder.where('state_id', stateId)
+    });
   }
-  if (status === 'pending') {
-    return query.where({
-        state_id: stateId,
-        status: 'requested'
-      });
-  }
-  if (status === 'active') {
-    return query.where({
-        state_id: stateId,
-        status: 'approved'
-      });
-  }
-  if (status === 'inactive') {
-    return query.whereIn(
-        ['state_id', 'status'],
-        statusConverter[status].map(thisStatus => [stateId, thisStatus])
-      );
-  }
-  if (status) {
-    logger.error(`invalid status ${status}`);
-    return []
-  }
-  return query.where({ state_id: stateId });
+
+  logger.error(`invalid status ${status}`);
+  return [];
 };
 
 const getPopulatedAffiliationsByStateId = ({

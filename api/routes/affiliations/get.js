@@ -37,7 +37,7 @@ module.exports = (
         const affiliations = await getPopulatedAffiliationsByStateId({
           stateId,
           status,
-          isAdmin: request.user.role === 'eAPD Federal Admin'
+          isFedAdmin: request.user.role === 'eAPD Federal Admin'
         });
 
         return response.send(affiliations);
