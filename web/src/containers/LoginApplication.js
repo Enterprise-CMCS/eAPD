@@ -46,7 +46,7 @@ const LoginApplication = ({
   const [showConsent, setShowConsent] = useState(!hasConsented());
   const history = useHistory();
   const location = useLocation();
-
+  (console.log("LoginApplication rendered..."));
   useEffect(() => {
     if (!authenticated && getIdToken()) {
       setRestoringSession(true);

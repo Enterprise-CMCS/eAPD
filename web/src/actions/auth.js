@@ -176,7 +176,9 @@ const authenticationSuccess = sessionToken => async dispatch => {
   }
   if (user.states.length === 1) {
     dispatch(updateUserInfo(user));
-    dispatch(completeLogin());
+    // Ty note: seems like we dont need to complete the login here
+    // because LoginApplication has a useEffect that triggeres authCheck
+    // dispatch(completeLogin());
     return '/';
   }
   dispatch(updateUserInfo(user));
