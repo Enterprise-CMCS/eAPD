@@ -1,3 +1,4 @@
+// eslint-disable-next-line camelcase
 import jwt_decode from "jwt-decode";
 
 import axios from '../util/api';
@@ -98,31 +99,11 @@ const setupTokenManager = () => (dispatch, getState) => {
   });
 };
 
-// Note: This function, the updateCurrentUser function and any functions
-// that call them should be targets for refactoring. When adding a new
-// condition to this method there was some unexpected behavior. Reloading
-// a page when logged in would navigate a user back to the login page.
-const getCurrentUser = () => dispatch =>
-  axios
-    .get('/me')
-    .then(userRes => {
-      if (userRes.data.states.length === 0) {
-        dispatch(requireAccessToState());
-        return '/login/affiliations/request';
-      }
-      if (userRes.data.states.length > 1) {
-        dispatch(updateUserInfo(userRes.data));
-        return '/login/affiliations/select'
-      }
-      dispatch(completeLogin());
-      dispatch(updateUserInfo(userRes.data));
-      return null;
-    })
-    .catch(error => {
-      const reason = error ? error.message : 'N/A';
-      dispatch(failLogin(reason));
-      return null;
-    });
+const getCurrentUser = async () => {
+  // Todo: check cookie for jwt first
+  const userResponse = await axios.get('/me');
+  return userResponse.data;
+}
 
 const updateCurrentUser = () => dispatch =>
   axios
@@ -190,7 +171,18 @@ const authenticationSuccess = sessionToken => async dispatch => {
   const expiresAt = await setTokens(sessionToken);
   dispatch(updateSessionExpiration(expiresAt));
 
-  return dispatch(getCurrentUser());
+  const user = await getCurrentUser();
+  if (!user.states || user.states.length === 0) {
+    dispatch(requireAccessToState());
+    return '/login/affiliations/request';
+  }
+  if (user.states.length === 1) {
+    dispatch(updateUserInfo(user));
+    dispatch(completeLogin());
+    return '/';
+  }
+  dispatch(updateUserInfo(user));
+  return '/login/affiliations/select';
 };
 
 export const authCheck = () => async dispatch => {
@@ -314,11 +306,11 @@ export const createAccessRequest = states => async dispatch => {
         });
     })
   );
-
-  if (failureReason) {
+  if (failureReason) { 
     dispatch(failLogin(failureReason));
     return null;
   }
+  dispatch(authenticationSuccess());
   return '/login/affiliations/thank-you';
 };
 
@@ -334,16 +326,16 @@ export const updateAccessRequest = states => async dispatch => {
         });
     })
   );
-
   if (failureReason) {
     dispatch(failLogin(failureReason));
     return null;
   }
-  return dispatch(getCurrentUser());
+  dispatch(authenticationSuccess());
+  return '/login/affiliations/thank-you';
 };
 
 export const completeAccessRequest = () => dispatch => {
-  return dispatch(getCurrentUser());
+  return dispatch(authenticationSuccess());
 };
 
 export const selectAffiliation = (stateToSwitchTo, currentState) => async dispatch => {

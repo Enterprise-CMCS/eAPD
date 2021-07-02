@@ -20,9 +20,8 @@ const ManageAccount = ({
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleCreateAccessRequest = async states => {
-    await updateAccessRequest(states).then(() => {
-      setShowConfirmation(true);
-    });
+    await updateAccessRequest(states);
+    setShowConfirmation(true);
   };
 
   const handleCompleteAccessRequest = () => {
