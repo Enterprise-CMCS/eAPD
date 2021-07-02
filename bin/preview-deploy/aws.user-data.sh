@@ -142,6 +142,10 @@ cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
           {
             "file_path": "/var/log/awslogs.log*",
             "log_group_name": "test/var/log/awslogs.log"
+          },
+          {
+            "file_path": "/var/log/mongodb/mongod.log*",
+            "log_group_name": "test/var/log/mongodb/mongod.log"
           }
         ]
       }
