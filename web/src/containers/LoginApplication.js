@@ -48,6 +48,7 @@ const LoginApplication = ({
   const location = useLocation();
 
   useEffect(() => {
+    console.log("LoginApplication useEffect called");
     if (!authenticated && getIdToken()) {
       setRestoringSession(true);
       authCheckAction().then(() => {
@@ -157,11 +158,11 @@ const LoginApplication = ({
 
   if (authenticated) {
     const { from = { pathname: '/' } } = location.state || {};
-    if (from.pathname !== '/logout') {
-      return <Redirect to={from} push />;
+    if (from.pathname === '/logout') {
+      return <Redirect to="/" push />;
     }
     // TODO: test
-    return <Redirect to="/" push />;
+    return <Redirect to={from} push />;
   }
 
   return (

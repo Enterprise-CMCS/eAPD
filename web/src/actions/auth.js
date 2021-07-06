@@ -99,7 +99,12 @@ const setupTokenManager = () => (dispatch, getState) => {
 // and in updateCurrentUser we would dispatch a failLogin
 const getCurrentUser = async () => {
   // Todo: check cookie for jwt first
-  const userResponse = await axios.get('/me');
+  let failureReason = null;
+  const userResponse = await axios
+                              .get('/me')
+                              .catch(error => { failureReason = error ? error.message : 'N/A';
+  });
+  if(failureReason) { return failureReason; }
   return userResponse.data;
 }
 
@@ -164,6 +169,8 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
   dispatch(mfaEnrollAddPhone(mfaSelected));
 };
 
+// Ty note:
+// why does this method not need to call completeLogin???
 const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(setupTokenManager());
   const expiresAt = await setTokens(sessionToken);
@@ -190,6 +197,7 @@ const authenticationSuccess = sessionToken => async dispatch => {
 // such that we don't have to re-fetch the apds or update
 // the current users info
 export const authCheck = () => async dispatch => {
+  console.log("auth check called");
   dispatch(setupTokenManager());
   const expiresAt = await renewTokens();
 
@@ -319,8 +327,6 @@ export const createAccessRequest = states => async dispatch => {
   return '/login/affiliations/thank-you';
 };
 
-// Todo: since this isn't part of the initial login flow we
-// should consider using a different failure method
 export const updateAccessRequest = states => async dispatch => {
   let failureReason = null;
   await Promise.all(
@@ -334,6 +340,9 @@ export const updateAccessRequest = states => async dispatch => {
     })
   );
   if (failureReason) {
+    // We use failLogin to update the error message but
+    // since this method is not part of the login flow
+    // this does not log the user out
     dispatch(failLogin(failureReason));
     return null;
   }
@@ -345,7 +354,9 @@ export const completeAccessRequest = () => dispatch => {
   return dispatch(authenticationSuccess());
 };
 
+// Todo: update this to failLogin and return an error to the state switch page
 export const selectAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
+  let failureReason = null;
   if (stateToSwitchTo !== currentState) {
     await axios
       .get(`/auth/state/${stateToSwitchTo}`)
@@ -353,11 +364,20 @@ export const selectAffiliation = (stateToSwitchTo, currentState) => async dispat
         // Todo: Refactor this to be more FP style
         setCookie(res.data.jwt);
         const decoded = jwt_decode(res.data.jwt);
-        dispatch(completeLogin());
+        // dispatch(completeLogin());
         dispatch(updateUserInfo(decoded));
         dispatch(fetchAllApds());
       })
-      .catch(() => {});
+      .catch(error => {
+        failureReason = error ? error.message : 'N/A';
+      });
+  }
+  if (failureReason) {
+    // We use failLogin to update the error message but
+    // since this method is not part of the login flow
+    // this does not log the user out
+    dispatch(failLogin(failureReason));
+    return null;
   }
   return '/';
 }

@@ -15,6 +15,7 @@ import {
 const SelectAffiliation = ({
   availableAffiliations,
   currentStateId,
+  error,
   selectAffiliation: selectUserAffiliation
 }) => {
 
@@ -47,6 +48,7 @@ const SelectAffiliation = ({
   return (
     <CardForm 
       onSave={onSave}
+      error={error}
       primaryButtonText={["Submit", "Updating"]}
       cancelable
     >
@@ -66,16 +68,19 @@ const SelectAffiliation = ({
 SelectAffiliation.propTypes = {
   availableAffiliations: PropTypes.array.isRequired,
   selectAffiliation: PropTypes.func.isRequired,
-  currentStateId: PropTypes.string
+  currentStateId: PropTypes.string,
+  error: PropTypes.string
 };
 
 SelectAffiliation.defaultProps = {
-  currentStateId: ''
+  currentStateId: '',
+  error: null,
 };
 
 const mapStateToProps = state => ({
   availableAffiliations: state.user.data.states,
-  currentStateId: state.user.data.state.id
+  currentStateId: state.user.data.state.id,
+  error: state.auth.error
 });
 
 const mapDispatchToProps = {
