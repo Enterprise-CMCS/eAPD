@@ -40,7 +40,7 @@ const ManageAccount = ({
 
   const secondaryButtonText = isAdmin
     ? 'Admin Dashboard'
-    : `< ${
+    : `${
       currentUser.state && currentUser.state.id
         ? `${currentUser.state.id.toUpperCase()} `
         : ''
