@@ -46,7 +46,7 @@ const getConfig = () =>{
     };
   } else {
     config = {
-      domain: '.cms.gov',
+      domain: 'cms.gov',
       secure: true,
       sameSite: 'lax',
       path: '/apds/'
@@ -54,16 +54,16 @@ const getConfig = () =>{
   }
   return config
 }
+
 export const setCookie =  (accessToken) => {
   if (navigator.cookieEnabled) {
-    const config = getConfig()
-    Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken }, config));
+    Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken }, getConfig()));
   }
 };
 
 const removeCookie = () => {
   if (navigator.cookieEnabled) {
-    Cookies.remove(API_COOKIE_NAME);
+    Cookies.remove(API_COOKIE_NAME, getConfig());
   }
 };
 

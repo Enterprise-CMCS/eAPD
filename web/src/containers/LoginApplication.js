@@ -9,7 +9,7 @@ import ConsentBanner from '../components/ConsentBanner';
 import Loading from '../components/Loading';
 
 import { MFA_FACTOR_TYPES } from '../constants';
-import { setConsented, hasConsented, getIdToken } from '../util/auth';
+import { setConsented, hasConsented } from '../util/auth';
 import {
   mfaConfig,
   mfaAddPhone,
@@ -25,6 +25,7 @@ import {
 const LoginApplication = ({
   authenticated,
   hasEverLoggedOn,
+  initialCheck,
   error,
   fetching,
   factorsList,
@@ -40,18 +41,17 @@ const LoginApplication = ({
   loginOtp: otpAction,
   logout: logoutAction
 }) => {
-  const [restoringSession, setRestoringSession] = useState(
-    !authenticated && getIdToken()
-  );
+  const [restoringSession, setRestoringSession] = useState(false);
   const [showConsent, setShowConsent] = useState(!hasConsented());
   const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {
     console.log("LoginApplication useEffect called");
-    if (!authenticated && getIdToken()) {
+    if (!initialCheck) {
       setRestoringSession(true);
       authCheckAction().then(() => {
+        console.log("setting restoring session to false")
         setRestoringSession(false);
       });
     }
@@ -186,6 +186,7 @@ const LoginApplication = ({
 
 LoginApplication.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
+  initialCheck: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
   error: PropTypes.string,
   fetching: PropTypes.bool.isRequired,
@@ -217,7 +218,8 @@ const mapStateToProps = ({
     fetching,
     factorsList,
     mfaEnrollType,
-    verifyData
+    verifyData,
+    initialCheck
   }
 }) => ({
   hasEverLoggedOn,
@@ -226,7 +228,8 @@ const mapStateToProps = ({
   fetching,
   factorsList,
   mfaEnrollType,
-  verifyData
+  verifyData,
+  initialCheck
 });
 
 const mapDispatchToProps = {

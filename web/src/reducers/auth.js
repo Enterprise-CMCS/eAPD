@@ -1,4 +1,5 @@
 import {
+  AUTH_CHECK_REQUEST,
   LOGIN_REQUEST,
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
@@ -36,6 +37,11 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_CHECK_REQUEST:
+      return {
+        ...state,
+        initialCheck: true
+      }
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -85,7 +91,8 @@ const auth = (state = initialState, action) => {
         ...state,
         authenticated: true,
         fetching: false,
-        hasEverLoggedOn: true
+        hasEverLoggedOn: true,
+        initialCheck: true
       };
     case LOGIN_FAILURE:
       return {

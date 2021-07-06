@@ -1,5 +1,5 @@
 // eslint-disable-next-line camelcase
-import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 import axios from '../util/api';
 
@@ -19,6 +19,7 @@ import {
 } from '../util/auth';
 import { MFA_FACTOR_TYPES } from '../constants';
 
+export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
@@ -41,6 +42,7 @@ export const REQUEST_SESSION_RENEWAL = 'REQUEST_SESSION_RENEWAL';
 export const SESSION_RENEWED = 'SESSION_RENEWED';
 export const UPDATE_EXPIRATION = 'UPDATE_EXPIRATION';
 
+export const authCheckRequest = () => ({ type: AUTH_CHECK_REQUEST });
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeFirstStage = () => ({ type: LOGIN_OTP_STAGE });
 export const mfaEnrollStart = (factors, phoneNumber) => ({
@@ -108,20 +110,6 @@ const getCurrentUser = async () => {
   return userResponse.data;
 }
 
-const updateCurrentUser = () => dispatch =>
-  axios
-    .get('/me')
-    .then(userRes => {
-      dispatch(completeLogin());
-      dispatch(updateUserInfo(userRes.data));
-      return null;
-    })
-    .catch(error => {
-      const reason = error ? error.message : 'N/A';
-      dispatch(failLogin(reason));
-      return null;
-    });
-
 export const logout = () => dispatch => {
   dispatch(requestLogout());
   logoutAndClearTokens().then( () => {
@@ -175,6 +163,7 @@ const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(setupTokenManager());
   const expiresAt = await setTokens(sessionToken);
   dispatch(updateSessionExpiration(expiresAt));
+  dispatch(setLatestActivity());
 
   const user = await getCurrentUser();
   if (!user.states || user.states.length === 0) {
@@ -185,7 +174,7 @@ const authenticationSuccess = sessionToken => async dispatch => {
     dispatch(updateUserInfo(user));
     // Ty note: seems like we dont need to complete the login here
     // because LoginApplication has a useEffect that triggeres authCheck
-    // dispatch(completeLogin());
+    dispatch(completeLogin());
     return '/';
   }
   dispatch(updateUserInfo(user));
@@ -198,16 +187,18 @@ const authenticationSuccess = sessionToken => async dispatch => {
 // the current users info
 export const authCheck = () => async dispatch => {
   console.log("auth check called");
+  dispatch(authCheckRequest());
   dispatch(setupTokenManager());
   const expiresAt = await renewTokens();
 
   if (expiresAt) {
     dispatch(updateSessionExpiration(expiresAt));
     dispatch(setLatestActivity());
-    dispatch(fetchAllApds());
-    return dispatch(updateCurrentUser());
+    const user = await getCurrentUser();
+    dispatch(updateUserInfo(user));
+    dispatch(completeLogin());
+    return null;
   }
-  dispatch(logout());
   return null;
 };
 
@@ -358,18 +349,20 @@ export const completeAccessRequest = () => dispatch => {
 export const selectAffiliation = (stateToSwitchTo, currentState) => async dispatch => {
   let failureReason = null;
   if (stateToSwitchTo !== currentState) {
-    await axios
+    return axios
       .get(`/auth/state/${stateToSwitchTo}`)
       .then((res) => {
         // Todo: Refactor this to be more FP style
         setCookie(res.data.jwt);
-        const decoded = jwt_decode(res.data.jwt);
-        // dispatch(completeLogin());
+        const decoded = jwtDecode(res.data.jwt);
         dispatch(updateUserInfo(decoded));
+        dispatch(completeLogin());
         dispatch(fetchAllApds());
+        return '/';
       })
       .catch(error => {
         failureReason = error ? error.message : 'N/A';
+        return null;
       });
   }
   if (failureReason) {
@@ -379,5 +372,5 @@ export const selectAffiliation = (stateToSwitchTo, currentState) => async dispat
     dispatch(failLogin(failureReason));
     return null;
   }
-  return '/';
+  return null;
 }
