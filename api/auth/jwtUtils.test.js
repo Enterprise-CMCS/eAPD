@@ -43,6 +43,7 @@ tap.test('Okta jwtUtils', async t => {
     t.beforeEach(async () => {
       request = new Map();
       request.url = '/apds';
+      request.headers = {};
     });
 
     const scenarios = [
@@ -68,6 +69,7 @@ tap.test('Okta jwtUtils', async t => {
 
     t.beforeEach(async () => {
       request = new Map();
+      request.headers = {};
     });
 
     const scenarios = [
@@ -97,6 +99,15 @@ tap.test('Okta jwtUtils', async t => {
       t.test(`given Authorization cookie is '${cookie}'`, async t => {
         request.url = url;
         request.set('Cookie', cookie);
+        const result = jwtExtractor(request);
+        t.equal(result, expected, message);
+      });
+    });
+
+    scenarios.forEach(([url, cookie, expected, message]) => {
+      t.test(`given Authorization cookie is '${cookie}'`, async t => {
+        request.url = url;
+        request.headers.cookie = cookie;
         const result = jwtExtractor(request);
         t.equal(result, expected, message);
       });
