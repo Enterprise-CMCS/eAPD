@@ -21,8 +21,6 @@ import {
   loginOtp,
   logout
 } from '../actions/auth';
-import axios from '../util/api';
-import SystemDown from '../components/SystemDown';
 
 const LoginApplication = ({
   authenticated,
@@ -46,7 +44,6 @@ const LoginApplication = ({
     !authenticated && getIdToken()
   );
   const [showConsent, setShowConsent] = useState(!hasConsented());
-  const [systemUp, setSystemUp] = useState(null)
   const history = useHistory();
   const location = useLocation();
 
@@ -58,17 +55,6 @@ const LoginApplication = ({
       });
     }
   }, []);
-
-  useEffect(() => {
-    axios
-      .get('/heartbeat')
-      .then(() => {
-        setSystemUp(true)
-      })
-      .catch(() => {
-        setSystemUp(false)
-      });
-  }, [])
 
   let errorMessage = null;
 
@@ -157,19 +143,6 @@ const LoginApplication = ({
     setShowConsent(false);
   };
 
-  if (systemUp === null) {
-    return (
-      <div id="start-main-content">
-        <Loading>Performing Heartbeat Check</Loading>
-      </div>
-    )
-  }
-
-  if (systemUp === false){
-   return (
-     <SystemDown/>
-   )
-  }
   if (restoringSession) {
     return (
       <div id="start-main-content">
