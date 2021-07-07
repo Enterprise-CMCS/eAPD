@@ -29,6 +29,7 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test('get me handler', async test => {
     const extractor = sinon.stub()
     const eapdTokenVerifier = sinon.stub()
+    const updateFromOkta = sinon.stub()
 
     extractor.withArgs(req).returns(req.jwt)
 
@@ -47,6 +48,10 @@ tap.test('me GET endpoint', async endpointTest => {
     test.ok(
       eapdTokenVerifier.calledWith(req.jwt),
       'calls the token extractor with the request'
+    )
+
+    test.ok(
+      updateFromOkta.calledWith(123)
     )
 
     test.ok(
