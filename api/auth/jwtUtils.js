@@ -42,7 +42,9 @@ const jwtExtractor = req => {
   }
 
   const { url } = req;
-  const cookieStr = req.get('Cookie');
+  logger.info(`req cookie ${JSON.stringify(req.headers.cookie)}`);
+  logger.info(`get cookie ${JSON.stringify(req.get('Cookie'))}`);
+  const cookieStr = req.headers.cookie || req.get('Cookie');
   logger.info({ cookieStr });
   const regex = new RegExp(
     /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)/i

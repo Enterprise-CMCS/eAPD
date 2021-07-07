@@ -40,35 +40,40 @@ const getConfig = () => {
     config = {
       domain: '.cms.gov',
       secure: true,
-      sameSite: 'lax',
-      path: '/apds/'
-    };
-  } else if (process.env.API_URL && process.env.API_URL.match('/api')) {
-    console.log('PR');
-    config = {
-      sameSite: 'strict',
-      path: '/api/apds/'
+      sameSite: 'lax'
     };
   } else {
-    console.log('localhost');
-    config = {
-      sameSite: 'strict',
-      path: '/apds/'
-    };
+    console.log('PR or localhost');
+    config = { sameSite: 'strict' };
   }
-  console.log({ config });
+
   return config;
 };
+const COOKIE_CONFIG = getConfig();
+console.log({ COOKIE_CONFIG });
+
 const setCookie = accessToken => {
   if (navigator.cookieEnabled) {
-    const config = getConfig();
-    Cookies.set(API_COOKIE_NAME, JSON.stringify({ accessToken }, config));
+    Cookies.set(
+      API_COOKIE_NAME,
+      JSON.stringify({ accessToken }),
+      COOKIE_CONFIG
+    );
   }
 };
 
 const removeCookie = () => {
   if (navigator.cookieEnabled) {
-    Cookies.remove(API_COOKIE_NAME);
+    Cookies.remove(API_COOKIE_NAME, COOKIE_CONFIG);
+  }
+};
+
+export const getLocalAccessToken = () => {
+  try {
+    const rawCookie = JSON.parse(Cookies.get(API_COOKIE_NAME));
+    return rawCookie.accessToken;
+  } catch (e) {
+    return '';
   }
 };
 
@@ -79,15 +84,6 @@ export const setConsented = () => {
     expires: 3, // 3 days
     path: '/'
   });
-};
-
-export const getLocalAccessToken = () => {
-  try {
-    const rawCookie = JSON.parse(Cookies.get(API_COOKIE_NAME, getConfig()));
-    return rawCookie.accessToken;
-  } catch (e) {
-    return '';
-  }
 };
 
 // Log in methods
