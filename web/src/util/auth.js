@@ -56,7 +56,7 @@ const setCookie = accessToken => {
   if (navigator.cookieEnabled) {
     Cookies.set(
       API_COOKIE_NAME,
-      escape(JSON.stringify({ accessToken })),
+      JSON.stringify({ accessToken }),
       COOKIE_CONFIG
     );
   }
