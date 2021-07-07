@@ -17,6 +17,7 @@ import {
   createAccessRequest,
   completeAccessRequest,
   authCheck,
+  isLoggingOut,
   login,
   loginOtp,
   logout
@@ -31,6 +32,7 @@ const LoginApplication = ({
   factorsList,
   mfaEnrollType,
   verifyData,
+  isLoggingOut,
   mfaConfig: mfaAction,
   mfaAddPhone: mfaActionAddPhone,
   mfaActivate: mfaActivation,
@@ -48,6 +50,7 @@ const LoginApplication = ({
 
   useEffect(() => {
     console.log("LoginApplication useEffect called");
+    console.log("isLoggingOut", isLoggingOut);
     if (!initialCheck) {
       setRestoringSession(true);
       authCheckAction().then(() => {
@@ -199,6 +202,7 @@ LoginApplication.propTypes = {
   createAccessRequest: PropTypes.func.isRequired,
   completeAccessRequest: PropTypes.func.isRequired,
   authCheck: PropTypes.func.isRequired,
+  isLoggingOut: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginOtp: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired
@@ -219,7 +223,8 @@ const mapStateToProps = ({
     factorsList,
     mfaEnrollType,
     verifyData,
-    initialCheck
+    initialCheck,
+    isLoggingOut
   }
 }) => ({
   hasEverLoggedOn,
@@ -229,7 +234,8 @@ const mapStateToProps = ({
   factorsList,
   mfaEnrollType,
   verifyData,
-  initialCheck
+  initialCheck,
+  isLoggingOut
 });
 
 const mapDispatchToProps = {

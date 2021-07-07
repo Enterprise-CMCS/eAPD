@@ -9,8 +9,9 @@ import {
   retrieveExistingTransaction,
   verifyMFA,
   setTokens,
+  getCookie,
   setCookie,
-  getApiCookie,
+  removeCookie,
   getAvailableFactors,
   getFactor,
   setTokenListeners,
@@ -18,7 +19,7 @@ import {
   logoutAndClearTokens,
   isUserActive
 } from '../util/auth';
-import { MFA_FACTOR_TYPES } from '../constants';
+import { MFA_FACTOR_TYPES, API_COOKIE_NAME } from '../constants';
 
 export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -197,24 +198,40 @@ const authenticationSuccess = sessionToken => async dispatch => {
   return '/login/affiliations/select';
 };
 
+// This method loads on page re-load or a new tab. First, it sets a
+// flag in redux to tell LoginApplication to only perform this check once.
+// Then it will get our eAPD jwt cookie, decode it, and update the redux 
+// store with it. If the jwt cookie doesn't exist, we fall back on using
+// okta to verify an active and valid token.
 export const authCheck = () => async dispatch => {
   dispatch(authCheckRequest());
-  dispatch(setupTokenManager());
-  const expiresAt = await renewTokens();
-
-  if (expiresAt) {
-    dispatch(updateSessionExpiration(expiresAt));
-    dispatch(setLatestActivity());
-
-    const eapdCookie = getApiCookie();
-    const state = jwtDecode(eapdCookie).state.id;
-    console.log("state", state);
-
-    dispatch(selectAffiliation(state));
-
-    // dispatch(updateUserInfo(user));
-    // dispatch(completeLogin());
-    return null;
+  
+  const eapdCookie = getCookie(API_COOKIE_NAME);  
+  console.log("eapdCookie", eapdCookie);
+  if(eapdCookie) {
+    const decodedCookie = jwtDecode(eapdCookie);  
+    console.log("decodedCookie", decodedCookie);
+    const epochTimestampInSeconds = Math.round(new Date() / 1000);
+    
+    if(decodedCookie.exp && decodedCookie.exp > epochTimestampInSeconds) {
+      dispatch(updateUserInfo(decodedCookie));
+      dispatch(completeLogin());
+    }    
+  }
+  
+  if(!eapdCookie) {
+    console.log("there is no cookie!");
+    dispatch(setupTokenManager());
+    const expiresAt = await renewTokens();
+    
+    if (expiresAt) {
+      dispatch(updateSessionExpiration(expiresAt));
+      dispatch(setLatestActivity());
+      const user = await getCurrentUser();
+      dispatch(updateUserInfo(user));
+      dispatch(completeLogin());
+      return null;
+    }
   }
   return null;
 };
