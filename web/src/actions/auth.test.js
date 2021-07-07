@@ -1115,15 +1115,6 @@ describe('auth actions', () => {
       });
     });
 
-
-    it('should return without calling actions if requesting to switch to their current state', async () => {
-      const store = mockStore({});
-      const expectedActions = [];
-
-      await store.dispatch(actions.selectAffiliation('md', currentState));
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-
     it('should set the cookie with the returned jwt', async () => {
       const setCookieSpy = jest.spyOn(mockAuth, 'setCookie');
       const store = mockStore({});

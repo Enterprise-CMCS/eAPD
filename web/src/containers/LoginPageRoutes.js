@@ -106,8 +106,6 @@ const LoginPageRoutes = ({
           <SelectAffiliation />
         </Route>
 
-        {/* <Route path={`${path}/affiliations/select`}></Route> */}
-
         <Route path={`${path}/affiliations/thank-you`}>
           <StateAccessRequestConfirmation
             action={handleCompleteAccessRequest}
