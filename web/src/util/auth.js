@@ -61,6 +61,12 @@ export const setCookie =  (accessToken) => {
   }
 };
 
+export const getApiCookie =  () => {
+  if (navigator.cookieEnabled) {
+    return Cookies.get(API_COOKIE_NAME);
+  }
+};
+
 const removeCookie = () => {
   if (navigator.cookieEnabled) {
     Cookies.remove(API_COOKIE_NAME, getConfig());

@@ -10,6 +10,7 @@ import {
   verifyMFA,
   setTokens,
   setCookie,
+  getApiCookie,
   getAvailableFactors,
   getFactor,
   setTokenListeners,
@@ -72,6 +73,28 @@ export const updateSessionExpiration = expiresAt => ({
   type: UPDATE_EXPIRATION,
   data: expiresAt
 });
+
+
+export const selectAffiliation = selectedState => dispatch => {
+  console.log("selectAffiliation called");
+  return axios
+    .get(`/auth/state/${selectedState}`)
+    .then((res) => {
+      // Todo: Refactor this to be more FP style
+      setCookie(res.data.jwt);
+      const decoded = jwtDecode(res.data.jwt);
+      dispatch(updateUserInfo(decoded));
+      dispatch(completeLogin());
+      dispatch(fetchAllApds());
+      return '/';
+    })
+    .catch(error => {
+      const failureReason = error ? error.message : 'N/A';
+      dispatch(failLogin(failureReason));
+      return null;
+    });
+}
+
 
 const setupTokenManager = () => (dispatch, getState) => {
   setTokenListeners({
@@ -182,10 +205,15 @@ export const authCheck = () => async dispatch => {
   if (expiresAt) {
     dispatch(updateSessionExpiration(expiresAt));
     dispatch(setLatestActivity());
-    // try switching this to use the selectAffiliation method/endpoint
-    const user = await getCurrentUser();
-    dispatch(updateUserInfo(user));
-    dispatch(completeLogin());
+
+    const eapdCookie = getApiCookie();
+    const state = jwtDecode(eapdCookie).state.id;
+    console.log("state", state);
+
+    dispatch(selectAffiliation(state));
+
+    // dispatch(updateUserInfo(user));
+    // dispatch(completeLogin());
     return null;
   }
   return null;
@@ -323,25 +351,10 @@ export const updateAccessRequest = states => async dispatch => {
   return '/login/affiliations/thank-you';
 };
 
+// Todo: update this method to be more deliberate about
+// what needs to happen once the access request is complete.
+// additionally consider splitting it based on initial 
+// request vs. updating/adding new request
 export const completeAccessRequest = () => dispatch => {
   return dispatch(authenticationSuccess());
 };
-
-export const selectAffiliation = selectedState => dispatch => {
-  return axios
-    .get(`/auth/state/${selectedState}`)
-    .then((res) => {
-      // Todo: Refactor this to be more FP style
-      setCookie(res.data.jwt);
-      const decoded = jwtDecode(res.data.jwt);
-      dispatch(updateUserInfo(decoded));
-      dispatch(completeLogin());
-      dispatch(fetchAllApds());
-      return '/';
-    })
-    .catch(error => {
-      const failureReason = error ? error.message : 'N/A';
-      dispatch(failLogin(failureReason));
-      return null;
-    });
-}
