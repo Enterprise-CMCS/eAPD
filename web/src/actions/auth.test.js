@@ -1087,21 +1087,6 @@ describe('auth actions', () => {
     });
   });
 
-  describe('updateAccessRequest', () => {
-    beforeEach(() => {
-      fetchMock.reset();
-      jest.clearAllMocks();
-
-    it('should throw an error when requesting an invalid state', async () => {
-      fetchMock.onPost('/states/zz/affiliations').reply(400);
-
-      const store = mockStore({});
-      const expectedActions = [{ type: actions.LOGIN_FAILURE }];
-      expect(store.getActions()).toEqual(expectedActions);
-      });
-    });
-  });
-
   describe('selectAffiliation', () => {
     const currentState = 'md';
     const mockValidJWT = 'ewogICJhbGciOiAiSFMyNTYiLAogICJ0eXAiOiAiSldUIgp9.ewogICJuYW1lIjogIkpvaG4gRG9lIgp9.hqWGSaFpvbrXkOWc6lrnffhNWR19W_S1YKFBx2arWBk';

@@ -47,8 +47,8 @@ const LoginApplication = ({
   const location = useLocation();
 
   useEffect(() => {
-    console.log("LoginApplication useEffect called");
     if (!initialCheck) {
+      console.log("LoginApplication useEffect called");
       setRestoringSession(true);
       authCheckAction().then(() => {
         console.log("setting restoring session to false")
@@ -114,8 +114,8 @@ const LoginApplication = ({
 
   // TODO: test
   const handleCompleteAccessRequest = async () => {
-    await completeAccessRequestAction();
-    history.push('/');
+    let route = await completeAccessRequestAction();
+    history.push(route);
   };
 
   // TODO: test

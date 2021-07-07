@@ -178,22 +178,26 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
   dispatch(mfaEnrollAddPhone(mfaSelected));
 };
 
-const authenticationSuccess = sessionToken => async dispatch => {
+const authenticationSuccess = sessionToken => async dispatch => {  
   dispatch(setupTokenManager());
   const expiresAt = await setTokens(sessionToken);
   dispatch(updateSessionExpiration(expiresAt));
   dispatch(setLatestActivity());
 
   const user = await getCurrentUser();
+  console.log("user", user);
   if (!user.states || user.states.length === 0) {
+    console.log("0 states logic hit")
     dispatch(requireAccessToState());
     return '/login/affiliations/request';
   }
   if (user.states.length === 1) {
+    console.log("single state logic hit")
     dispatch(updateUserInfo(user));
     dispatch(completeLogin());
     return '/';
   }
+  console.log("updating user info and re-routing to /affiliations/select")
   dispatch(updateUserInfo(user));
   return '/login/affiliations/select';
 };
