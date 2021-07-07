@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { updateAccessRequest as actualUpdateAccessRequest } from '../../actions/auth';
+import { createAccessRequest as actualCreateAccessRequest } from '../../actions/auth';
 
 import StateAccessRequest from '../StateAccessRequest';
 import StateAccessRequestConfirmation from '../StateAccessRequestConfirmation';
 
 const ManageAccount = ({
   currentAffiliations, 
-  updateAccessRequest,
+  createAccessRequest,
   error
 }) => {
 
@@ -20,7 +20,7 @@ const ManageAccount = ({
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleCreateAccessRequest = async states => {
-    const response = await updateAccessRequest(states);
+    const response = await createAccessRequest(states);
     if (response) { setShowConfirmation(true) };
   };
 
@@ -49,12 +49,12 @@ ManageAccount.defaultProps = {
 
 ManageAccount.propTypes = {
   currentAffiliations: PropTypes.array.isRequired,
-  updateAccessRequest: PropTypes.func.isRequired,
+  createAccessRequest: PropTypes.func.isRequired,
   error: PropTypes.string
 };
 
 const mapDispatchToProps = {
-  updateAccessRequest: actualUpdateAccessRequest
+  createAccessRequest: actualCreateAccessRequest
 };
 
 const mapStateToProps = state => ({

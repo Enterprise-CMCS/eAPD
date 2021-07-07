@@ -350,24 +350,6 @@ export const createAccessRequest = states => async dispatch => {
   return '/login/affiliations/thank-you';
 };
 
-export const updateAccessRequest = states => async dispatch => {
-  let failureReason = null;
-  await Promise.all(
-    states.map(async state => {
-      await axios
-        .post(`/states/${state.id}/affiliations`)
-        .catch(error => {
-          failureReason = error ? error.message : 'N/A';
-        });
-    })
-  );
-  if (failureReason) {
-    dispatch(failLogin(failureReason));
-    return null;
-  }
-  return '/login/affiliations/thank-you';
-};
-
 // Todo: update this method to be more deliberate about
 // what needs to happen once the access request is complete.
 // additionally consider splitting it based on initial 
