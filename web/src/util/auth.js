@@ -32,7 +32,10 @@ const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 const getConfig = () => {
   let config;
   console.log('API_URL', process.env.API_URL);
-  if (process.env.API_URL.match(new RegExp(/cms.gov$/))) {
+  if (
+    process.env.API_URL &&
+    process.env.API_URL.match(new RegExp(/cms.gov$/))
+  ) {
     console.log('staging or production');
     config = {
       domain: '.cms.gov',
@@ -40,7 +43,7 @@ const getConfig = () => {
       sameSite: 'lax',
       path: '/apds/'
     };
-  } else if (process.env.API_URL.match('/api')) {
+  } else if (process.env.API_URL && process.env.API_URL.match('/api')) {
     console.log('PR');
     config = {
       sameSite: 'strict',
