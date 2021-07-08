@@ -17,8 +17,12 @@ const StateAccessRequest = ({
 }) => {
   const existingAffiliations = currentAffiliations.map(element => { 
     const stateDetails = STATES.find(item => item.id === element.state_id)
-    return { id: element.state_id, name: stateDetails.name } 
+    return { id: element.state_id, name: stateDetails.name, status: element.status } 
   });
+  
+  const pendingAffiliations = existingAffiliations.filter(element => element.status === 'requested');
+  const inactiveAffiliations = existingAffiliations.filter(element => element.status === 'revoked' || element.status === 'denied');
+  const activeAffiliations = existingAffiliations.filter(element => element.status === 'approved');
   
   const availableStates = STATES.filter( item => {
     return !existingAffiliations.find(affiliation => {
@@ -108,7 +112,8 @@ const StateAccessRequest = ({
         <h2 className="ds-h4 ds-u-margin-y--1">Existing Affiliations</h2>
         <p className="ds-u-margin-top--0 ds-u-font-size--small">Below are your current, pending and/or revoked state affiliations. Contact the State Administrator for the state you wish to be have removed from your state affiliation list.</p>
         <h3 className="ds-h5">Active</h3>
-        {existingAffiliations.map(el => {
+        {activeAffiliations.length === 0 && "No active affiliations"}
+        {activeAffiliations.map(el => {
           return (
             <Badge className="ds-u-margin-bottom--1" key={el.id}>
               {el.name}
@@ -116,8 +121,23 @@ const StateAccessRequest = ({
           )
         })}
         <h3 className="ds-h5">Pending</h3>
-        <p>No affiliations.</p>
+        {pendingAffiliations.length === 0 && "No pending affiliations"}
+        {pendingAffiliations.map(el => {
+          return (
+            <Badge className="ds-u-margin-bottom--1" key={el.id}>
+              {el.name}
+            </Badge>     
+          )
+        })}
         <h3 className="ds-h5">Revoked</h3>
+        {inactiveAffiliations.length === 0 && "No revoked affiliations"}
+        {inactiveAffiliations.map(el => {
+          return (
+            <Badge className="ds-u-margin-bottom--1" key={el.id}>
+              {el.name}
+            </Badge>     
+          )
+        })}
       </Fragment>
     )
   };
