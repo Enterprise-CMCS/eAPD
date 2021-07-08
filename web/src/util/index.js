@@ -130,7 +130,7 @@ export const stateDateToDisplay = date => {
   if(!date) {
     return 'Date not specified';
   }
-  const m = moment(date, 'YYYY-MM-DD');
+  const m = moment(date, 'YYYY-MM-DD', true);
   if (m.isValid()) {
     return m.format('M/D/YYYY');
   }
