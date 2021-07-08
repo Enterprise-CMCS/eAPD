@@ -11,7 +11,6 @@ import {
   setTokens,
   getCookie,
   setCookie,
-  removeCookie,
   getAvailableFactors,
   getFactor,
   setTokenListeners,
@@ -75,27 +74,11 @@ export const updateSessionExpiration = expiresAt => ({
   data: expiresAt
 });
 
-
-export const selectAffiliation = selectedState => dispatch => {
-  console.log("selectAffiliation called");
-  return axios
-    .get(`/auth/state/${selectedState}`)
-    .then((res) => {
-      // Todo: Refactor this to be more FP style
-      setCookie(res.data.jwt);
-      const decoded = jwtDecode(res.data.jwt);
-      dispatch(updateUserInfo(decoded));
-      dispatch(completeLogin());
-      dispatch(fetchAllApds());
-      return '/';
-    })
-    .catch(error => {
-      const failureReason = error ? error.message : 'N/A';
-      dispatch(failLogin(failureReason));
-      return null;
-    });
-}
-
+const loadData = activities => dispatch => {
+  if (activities.includes('view-document')) {
+    dispatch(fetchAllApds());
+  }
+};
 
 const setupTokenManager = () => (dispatch, getState) => {
   setTokenListeners({
@@ -185,19 +168,18 @@ const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(setLatestActivity());
 
   const user = await getCurrentUser();
-  console.log("user", user);
   if (!user.states || user.states.length === 0) {
-    console.log("0 states logic hit")
     dispatch(requireAccessToState());
     return '/login/affiliations/request';
   }
   if (user.states.length === 1) {
-    console.log("single state logic hit")
     dispatch(updateUserInfo(user));
     dispatch(completeLogin());
+    if (user.data.activities) {
+      dispatch(loadData(user.data.activities));
+    }
     return '/';
   }
-  console.log("updating user info and re-routing to /affiliations/select")
   dispatch(updateUserInfo(user));
   return '/login/affiliations/select';
 };
@@ -206,25 +188,25 @@ const authenticationSuccess = sessionToken => async dispatch => {
 // flag in redux to tell LoginApplication to only perform this check once.
 // Then it will get our eAPD jwt cookie, decode it, and update the redux 
 // store with it. If the jwt cookie doesn't exist, we fall back on using
-// okta to verify an active and valid token.
+// okta to verify and provide a new token.
 export const authCheck = () => async dispatch => {
   dispatch(authCheckRequest());
   
   const eapdCookie = getCookie(API_COOKIE_NAME);  
-  console.log("eapdCookie", eapdCookie);
   if(eapdCookie) {
     const decodedCookie = jwtDecode(eapdCookie);  
-    console.log("decodedCookie", decodedCookie);
     const epochTimestampInSeconds = Math.round(new Date() / 1000);
     
     if(decodedCookie.exp && decodedCookie.exp > epochTimestampInSeconds) {
       dispatch(updateUserInfo(decodedCookie));
       dispatch(completeLogin());
+      if (decodedCookie.activities) {
+        dispatch(loadData(decodedCookie.activities));
+      }
     }    
   }
   
   if(!eapdCookie) {
-    console.log("there is no cookie!");
     dispatch(setupTokenManager());
     const expiresAt = await renewTokens();
     
@@ -234,6 +216,9 @@ export const authCheck = () => async dispatch => {
       const user = await getCurrentUser();
       dispatch(updateUserInfo(user));
       dispatch(completeLogin());
+      if (user.data.activities) {
+        dispatch(loadData(user.data.activities));
+      }
       return null;
     }
   }
@@ -354,10 +339,27 @@ export const createAccessRequest = states => async dispatch => {
   return '/login/affiliations/thank-you';
 };
 
-// Todo: update this method to be more deliberate about
-// what needs to happen once the access request is complete.
-// additionally consider splitting it based on initial 
-// request vs. updating/adding new request
 export const completeAccessRequest = () => dispatch => {
   return dispatch(authenticationSuccess());
 };
+
+export const selectAffiliation = selectedState => dispatch => {
+  return axios
+    .get(`/auth/state/${selectedState}`)
+    .then((res) => {
+      // Todo: Refactor this to be more FP style
+      setCookie(res.data.jwt);
+      const decoded = jwtDecode(res.data.jwt);
+      dispatch(updateUserInfo(decoded));
+      dispatch(completeLogin());
+      if (decoded.activities) {
+        dispatch(loadData(decoded.activities));
+      }
+      return '/';
+    })
+    .catch(error => {
+      const failureReason = error ? error.message : 'N/A';
+      dispatch(failLogin(failureReason));
+      return null;
+    });
+}

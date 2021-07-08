@@ -111,7 +111,7 @@ const auth = (state = initialState, action) => {
         authenticated: false,
         error: null,
         hasEverLoggedOn: true,
-        initialCheck: true,
+        initialCheck: false,
         latestActivity: null,
         expiresAt: null,
         isSessionEnding: false,

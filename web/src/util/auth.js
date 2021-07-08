@@ -62,6 +62,7 @@ export const getCookie =  (name) => {
   if (navigator.cookieEnabled) {
     return Cookies.get(name);
   }
+  return null;
 };
 
 export const removeCookie = () => {

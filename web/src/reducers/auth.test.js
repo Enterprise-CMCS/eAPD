@@ -127,6 +127,7 @@ describe('auth reducer', () => {
       ...initialState,
       authenticated: true,
       fetching: false,
+      initialCheck: true,
       hasEverLoggedOn: true
     });
   });
@@ -138,6 +139,7 @@ describe('auth reducer', () => {
       ...initialState,
       authenticated: true,
       fetching: false,
+      initialCheck: true,
       hasEverLoggedOn: true
     })
   })
