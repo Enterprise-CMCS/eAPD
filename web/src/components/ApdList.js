@@ -81,7 +81,7 @@ const ApdList = ({
                   data-testid="eAPDlogo"
                 >
                   <img
-                    src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
+                    src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
                     alt="eAPD Logo"
                   />
                 </div>

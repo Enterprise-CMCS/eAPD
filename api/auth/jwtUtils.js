@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
-const { getStateById } = require('../db/states.js')
-
+const { getStateById } = require('../db/states.js');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -43,7 +42,10 @@ const jwtExtractor = req => {
   }
 
   const { url } = req;
-  const cookieStr = req.get('Cookie');
+  logger.info(`req cookie ${JSON.stringify(req.headers.cookie)}`);
+  logger.info(`get cookie ${JSON.stringify(req.get('Cookie'))}`);
+  const cookieStr = req.headers.cookie || req.get('Cookie');
+  logger.info({ cookieStr });
   const regex = new RegExp(
     /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)/i
   );
@@ -53,15 +55,18 @@ const jwtExtractor = req => {
     // we cannot append our authorization header, but because
     // we are storing our access token in a cookie, we can read
     // the access token from there in this instance
+    logger.info('use cookies');
     const re = /;\s*/;
     const cookies = cookieStr.split(re); // split the cookie string into individual cookies
     const accessTokenObj = cookies.find(cookie =>
       cookie.match(/^gov.cms.eapd.api-token/i)
     ); // find the cookie that stores the access token
     if (accessTokenObj) {
+      logger.info('found the right cookie');
       // eslint-disable-next-line no-unused-vars
       const value = accessTokenObj.split('=')[1]; // get the value
       const valueObj = JSON.parse(unescape(value)); // the value is an encoded string, convert it to a json object
+      logger.info('accessToken', valueObj.accessToken);
       return valueObj.accessToken; // return the access token
     }
   }
@@ -70,8 +75,8 @@ const jwtExtractor = req => {
 
 // ****** Local JWT implementation below this line
 const getSecret = () => {
-  return process.env.JWT_SECRET
-}
+  return process.env.JWT_SECRET;
+};
 
 /*
     algorithm (default: HS256)
@@ -85,58 +90,59 @@ const defaultOptions = {
   expiresIn: '12h',
   notBefore: '0',
   audience: 'eAPD',
-  issuer: 'eAPD',
-}
+  issuer: 'eAPD'
+};
 
-const getDefaultOptions = () =>{
-  return {...defaultOptions}
-}
+const getDefaultOptions = () => {
+  return { ...defaultOptions };
+};
 
-const sign = (payload, options=defaultOptions) => {
-
+const sign = (payload, options = defaultOptions) => {
   return jwt.sign(payload, getSecret(), options);
-}
+};
 
 const verifyEAPDToken = token => {
   try {
     const payload = jwt.verify(token, getSecret());
-    return Promise.resolve(payload)
+    logger.info({ payload });
+    return Promise.resolve(payload);
   } catch (err) {
-    throw new Error('invalid Token')
+    logger.error('invalid token');
+    throw new Error('invalid Token');
   }
-}
+};
 
 const exchangeToken = async (
   req,
-  {
-    extractor = jwtExtractor,
-    verifier = verifyJWT,
-    getUser=getUserByID,
-  } = {}
+  { extractor = jwtExtractor, verifier = verifyJWT, getUser = getUserByID } = {}
 ) => {
-  const oktaJWT = extractor(req)
+  const oktaJWT = extractor(req);
   // verify the token using the okta verifier.
-  const claims = oktaJWT ? await verifyWebToken(oktaJWT, {verifier}) : false;
+  const claims = oktaJWT ? await verifyWebToken(oktaJWT, { verifier }) : false;
   if (!claims) return null;
 
   const { uid, ...additionalValues } = claims;
   const user = await getUser(uid, true, { additionalValues });
-  user.jwt = sign(user)
-  return user
-}
+  user.jwt = sign(user);
+  return user;
+};
 
-const changeState  = async (user, stateId, { getStateById_ = getStateById }={}) =>{
+const changeState = async (
+  user,
+  stateId,
+  { getStateById_ = getStateById } = {}
+) => {
   // copy the user to prevent altering it
-  const newUser = JSON.parse(JSON.stringify(user))
-  newUser.state = await getStateById_(stateId)
-  newUser.state.id = stateId
-  newUser.activities = user.permissions[stateId]
-  return sign(newUser, {})
-}
+  const newUser = JSON.parse(JSON.stringify(user));
+  newUser.state = await getStateById_(stateId);
+  newUser.state.id = stateId;
+  newUser.activities = user.permissions[stateId];
+  return sign(newUser, {});
+};
 
 const mockVerifyEAPDJWT = token => {
-  return getUserByID(token, false)
-}
+  return getUserByID(token, false);
+};
 
 if (process.env.NODE_ENV === 'test') {
   module.exports = {
@@ -150,7 +156,6 @@ if (process.env.NODE_ENV === 'test') {
     changeState
   };
 } else {
-
   module.exports = {
     verifyWebToken,
     jwtExtractor,
