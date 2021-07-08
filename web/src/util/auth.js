@@ -48,7 +48,7 @@ const getConfig = () => {
 const COOKIE_CONFIG = getConfig();
 console.log({ COOKIE_CONFIG });
 
-const setCookie = accessToken => {
+export const setCookie = accessToken => {
   if (navigator.cookieEnabled) {
     Cookies.set(
       API_COOKIE_NAME,
