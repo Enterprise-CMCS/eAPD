@@ -11,6 +11,7 @@ let app;
 let res;
 let next;
 let getActiveAuthRoles;
+let changeState;
 
 tap.test('auth roles GET endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
@@ -18,6 +19,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
     res = mockResponse();
     next = sinon.stub();
     getActiveAuthRoles = sinon.stub();
+    changeState = sinon.stub();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -26,6 +28,10 @@ tap.test('auth roles GET endpoint', async endpointTest => {
     setupTest.ok(
       app.get.calledWith('/auth/roles', can('view-roles'), sinon.match.func),
       'roles GET endpoint is registered'
+    );
+    setupTest.ok(
+      app.get.calledWith('/auth/state/:stateId', sinon.match.func),
+      'change state GET endpoint is registered'
     );
   });
 
@@ -55,6 +61,48 @@ tap.test('auth roles GET endpoint', async endpointTest => {
 
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(res.send.calledWith(roles), 'body is a list of roles roles');
+    });
+  });
+
+  endpointTest.test('get state Change handler', async handlerTest => {
+    let handler;
+    handlerTest.beforeEach(() => {
+      getEndpoint(app, { changeState });
+      handler = app.get.args.find(args => args[0] === '/auth/state/:stateId')[1];
+    });
+
+
+    handlerTest.test('denies if user does not have state to switch to', async validTest => {
+
+      await handler({
+          user: {
+            states:['md']
+          },
+          params:{
+            stateId:'ak'
+          }
+        }, res);
+
+      validTest.ok(res.status.calledWith(403), 'HTTP status is explicitly set');
+      validTest.ok(res.send.calledWith(), 'Body is empty');
+    });
+
+    handlerTest.test('calls ChangeState if the user has the state to switch to', async validTest => {
+      const user = {
+        states:['ak', 'md']
+      }
+
+      changeState.withArgs(user, 'ak').resolves('JWT for AK')
+      await handler({
+        user,
+        params:{
+          stateId:'ak'
+        }
+      }, res);
+
+      validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+      validTest.ok(res.send.calledWith({jwt:'JWT for AK'}), 'body is the result of changeState');
+
     });
   });
 });
