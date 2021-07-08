@@ -42,133 +42,113 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
       .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
       .returnsThis();
 
-    db.where
-      .withArgs(
-        sinon.match.any
-        // sinon.stub().returns({
-        //   status: ['requested', 'approved', 'denied', 'revoked']
-        // })
-      )
+    db.whereIn
+      .withArgs('status', ['requested', 'approved', 'denied', 'revoked'])
       .returnsThis();
-    db.andWhere
-      .withArgs(
-        sinon.match.any
-        // sinon.stub().returns({
-        //   'auth_roles.name': ['eAPD System Admin', 'eAPD Federal Admin']
-        // })
-      )
-      .returnsThis();
-    db.andWhere.withArgs(sinon.match.any).resolves(expectedUsers);
+    db.andWhere.withArgs('state_id', stateId).returnsThis();
+    // TODO: need to fix calls to actually test something
+    db.andWhere.onSecondCall().resolves(expectedUsers);
 
     // No specific status
     const results = await getAffiliationsByStateId({ stateId, db });
     test.equal(results, expectedUsers);
   });
 
-  // affiliationsTests.test('get pending affiliations by state id', async test => {
-  //   const status = 'pending';
-  //   db.select.withArgs(selectedColumns).returnsThis();
-  //   db.leftJoin
-  //     .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-  //     .returnsThis();
-  //   db.leftJoin
-  //     .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
-  //     .returnsThis();
-  //   db.whereNot.withArgs('auth_roles.name', 'eAPD System Admin').returnsThis();
-  //   db.where
-  //     .withArgs({ state_id: stateId, status: 'requested' })
-  //     .resolves(expectedUsers);
+  affiliationsTests.test('get pending affiliations by state id', async test => {
+    const status = 'pending';
+    db.select.withArgs(selectedColumns).returnsThis();
+    db.leftJoin
+      .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis();
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+      .returnsThis();
 
-  //   const results = await getAffiliationsByStateId({ stateId, status, db });
-  //   test.equal(expectedUsers, results);
-  // });
+    db.whereIn.withArgs('status', ['requested']).returnsThis();
+    db.andWhere.withArgs('state_id', stateId).returnsThis();
+    // TODO: need to fix calls to actually test something
+    db.andWhere.onSecondCall().resolves(expectedUsers);
 
-  // affiliationsTests.test('get active affiliations by state id', async test => {
-  //   const status = 'active';
-  //   db.select.withArgs(selectedColumns).returnsThis();
-  //   db.leftJoin
-  //     .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-  //     .returnsThis();
-  //   db.leftJoin
-  //     .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
-  //     .returnsThis();
-  //   db.whereNot.withArgs('auth_roles.name', 'eAPD System Admin').returnsThis();
-  //   db.where
-  //     .withArgs({ state_id: stateId, status: 'approved' })
-  //     .resolves(expectedUsers);
+    const results = await getAffiliationsByStateId({ stateId, status, db });
+    test.equal(expectedUsers, results);
+  });
 
-  //   const results = await getAffiliationsByStateId({ stateId, status, db });
-  //   test.equal(expectedUsers, results);
-  // });
+  affiliationsTests.test('get active affiliations by state id', async test => {
+    const status = 'active';
+    db.select.withArgs(selectedColumns).returnsThis();
+    db.leftJoin
+      .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .returnsThis();
+    db.leftJoin
+      .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+      .returnsThis();
 
-  // affiliationsTests.test(
-  //   'get inactive affiliations by state id',
-  //   async test => {
-  //     const status = 'inactive';
-  //     db.select.withArgs(selectedColumns).returnsThis();
-  //     db.leftJoin
-  //       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-  //       .returnsThis();
-  //     db.leftJoin
-  //       .withArgs(
-  //         'okta_users',
-  //         'auth_affiliations.user_id',
-  //         'okta_users.user_id'
-  //       )
-  //       .returnsThis();
+    db.whereIn.withArgs('status', ['approved']).returnsThis();
+    db.andWhere.withArgs('state_id', stateId).returnsThis();
+    // TODO: need to fix calls to actually test something
+    db.andWhere.onSecondCall().resolves(expectedUsers);
 
-  //     db.whereNot
-  //       .withArgs('auth_roles.name', 'eAPD System Admin')
-  //       .returnsThis();
-  //     db.whereIn
-  //       .withArgs(
-  //         ['state_id', 'status'],
-  //         [
-  //           [stateId, 'denied'],
-  //           [stateId, 'revoked']
-  //         ]
-  //       )
-  //       .resolves(expectedUsers);
+    const results = await getAffiliationsByStateId({ stateId, status, db });
+    test.equal(expectedUsers, results);
+  });
 
-  //     const results = await getAffiliationsByStateId({ stateId, status, db });
-  //     test.equal(expectedUsers, results);
-  //   }
-  // );
+  affiliationsTests.test(
+    'get inactive affiliations by state id',
+    async test => {
+      const status = 'inactive';
+      db.select.withArgs(selectedColumns).returnsThis();
+      db.leftJoin
+        .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+        .returnsThis();
+      db.leftJoin
+        .withArgs(
+          'okta_users',
+          'auth_affiliations.user_id',
+          'okta_users.user_id'
+        )
+        .returnsThis();
 
-  // affiliationsTests.test(
-  //   'get affiliations by state id as an admin',
-  //   async test => {
-  //     const status = 'inactive';
-  //     db.select.withArgs(selectedColumns).returnsThis();
-  //     db.leftJoin
-  //       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-  //       .returnsThis();
-  //     db.leftJoin
-  //       .withArgs(
-  //         'okta_users',
-  //         'auth_affiliations.user_id',
-  //         'okta_users.user_id'
-  //       )
-  //       .returnsThis();
-  //     db.whereIn
-  //       .withArgs(
-  //         ['state_id', 'status'],
-  //         [
-  //           [stateId, 'denied'],
-  //           [stateId, 'revoked']
-  //         ]
-  //       )
-  //       .resolves(expectedUsers);
-  //     const isAdmin = true;
-  //     const results = await getAffiliationsByStateId({
-  //       stateId,
-  //       status,
-  //       db,
-  //       isAdmin
-  //     });
-  //     test.equal(expectedUsers, results);
-  //   }
-  // );
+      db.whereIn.withArgs('status', ['denied', 'revoked']).returnsThis();
+      db.andWhere.withArgs('state_id', stateId).returnsThis();
+      // TODO: need to fix calls to actually test something
+      db.andWhere.onSecondCall().resolves(expectedUsers);
+
+      const results = await getAffiliationsByStateId({ stateId, status, db });
+      test.equal(expectedUsers, results);
+    }
+  );
+
+  affiliationsTests.test(
+    'get affiliations by state id as an admin',
+    async test => {
+      const status = 'inactive';
+      db.select.withArgs(selectedColumns).returnsThis();
+      db.leftJoin
+        .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+        .returnsThis();
+      db.leftJoin
+        .withArgs(
+          'okta_users',
+          'auth_affiliations.user_id',
+          'okta_users.user_id'
+        )
+        .returnsThis();
+
+      db.whereIn.withArgs('status', ['denied', 'revoked']).returnsThis();
+      db.andWhere.withArgs('state_id', stateId).returnsThis();
+      // TODO: need to fix calls to actually test something
+      db.andWhere.onSecondCall().resolves(expectedUsers);
+
+      const isAdmin = true;
+      const results = await getAffiliationsByStateId({
+        stateId,
+        status,
+        db,
+        isAdmin
+      });
+      test.equal(expectedUsers, results);
+    }
+  );
 
   affiliationsTests.test('get affiliations by id', async test => {
     const affiliationId = 'foo';

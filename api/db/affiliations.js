@@ -45,19 +45,13 @@ const getAffiliationsByStateId = ({
 
   if (affiliationStatuses) {
     return query
-      .where(builder => {
-        // Where statuses equal what was requested
-        builder.whereIn('status', affiliationStatuses);
-      })
+      .whereIn('status', affiliationStatuses)
+      .andWhere('state_id', stateId)
       .andWhere(builder => {
         // Where the role isn't in the skip roles or is null
         builder
           .whereNotIn('auth_roles.name', skipRoles)
           .orWhereNull('auth_roles.name');
-      })
-      .andWhere(builder => {
-        // where the state equals what was requested
-        builder.where('state_id', stateId);
       });
   }
 
