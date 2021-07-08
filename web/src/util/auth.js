@@ -25,8 +25,6 @@ export const exchangeAccessToken = async ({ accessToken }) => {
 export const getIdToken = () => oktaAuth.getIdToken();
 
 // Cookie Methods
-const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
-const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 const getConfig = () => {
   let config;
