@@ -2,7 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import oktaAuth from './oktaAuth';
-import { MFA_FACTORS, API_COOKIE_NAME, CONSENT_COOKIE_NAME } from '../constants';
+import {
+  MFA_FACTORS,
+  API_COOKIE_NAME,
+  CONSENT_COOKIE_NAME
+} from '../constants';
 
 export const INACTIVITY_LIMIT = 300000;
 export const EXPIRE_EARLY_SECONDS = 300;
@@ -28,25 +32,21 @@ export const getIdToken = () => oktaAuth.getIdToken();
 
 const getConfig = () => {
   let config;
-  console.log('API_URL', process.env.API_URL);
   if (
     process.env.API_URL &&
     process.env.API_URL.match(new RegExp(/cms.gov$/))
   ) {
-    console.log('staging or production');
     config = {
       domain: 'cms.gov',
       secure: true,
       sameSite: 'lax'
     };
   } else {
-    console.log('PR or localhost');
     config = { sameSite: 'strict' };
   }
   return config;
 };
 const COOKIE_CONFIG = getConfig();
-console.log({ COOKIE_CONFIG });
 
 export const setCookie = accessToken => {
   if (navigator.cookieEnabled) {
@@ -58,7 +58,7 @@ export const setCookie = accessToken => {
   }
 };
 
-export const getCookie =  (name) => {
+export const getCookie = name => {
   if (navigator.cookieEnabled) {
     return Cookies.get(name);
   }
