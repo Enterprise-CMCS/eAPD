@@ -19,16 +19,15 @@ const jwtMiddleware = async (
   req,
   res,
   next,
-  {
-    extractor = jwtExtractor,
-    verifyToken = verifyEAPDToken
-  } = {}
+  { extractor = jwtExtractor, verifyToken = verifyEAPDToken } = {}
 ) => {
   try {
     const jwt = extractor(req);
     const claims = jwt ? await verifyToken(jwt) : false;
+    logger.info({ claims });
     if (!claims) return next();
-    req.user = claims
+    req.user = claims;
+    logger.info('user', req.user);
   } catch (err) {
     logger.error(`error message: ${err.message}`);
   }
