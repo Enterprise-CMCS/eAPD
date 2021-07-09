@@ -10,7 +10,7 @@ describe('utility arrays', () => {
     const { ACTIVITY_FUNDING_SOURCES, STATES, STANDARDS } = load();
 
     expect(ACTIVITY_FUNDING_SOURCES).toEqual(['HIT', 'HIE', 'MMIS']);
-    expect(STATES.length).toBe(57);
+    expect(STATES.length).toBe(56);
     expect(STANDARDS.length).toBe(11);
   });
 });
