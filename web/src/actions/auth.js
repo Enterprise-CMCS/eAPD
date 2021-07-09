@@ -175,8 +175,8 @@ const authenticationSuccess = sessionToken => async dispatch => {
   if (user.states.length === 1) {
     dispatch(updateUserInfo(user));
     dispatch(completeLogin());
-    if (user.data.activities) {
-      dispatch(loadData(user.data.activities));
+    if (user.activities) {
+      dispatch(loadData(user.activities));
     }
     return '/';
   }
@@ -216,8 +216,8 @@ export const authCheck = () => async dispatch => {
       const user = await getCurrentUser();
       dispatch(updateUserInfo(user));
       dispatch(completeLogin());
-      if (user.data.activities) {
-        dispatch(loadData(user.data.activities));
+      if (user.activities) {
+        dispatch(loadData(user.activities));
       }
       return null;
     }
@@ -351,10 +351,10 @@ export const selectAffiliation = selectedState => dispatch => {
       setCookie(res.data.jwt);
       const decoded = jwtDecode(res.data.jwt);
       dispatch(updateUserInfo(decoded));
-      dispatch(completeLogin());
       if (decoded.activities) {
         dispatch(loadData(decoded.activities));
       }
+      dispatch(completeLogin());
       return '/';
     })
     .catch(error => {

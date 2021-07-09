@@ -155,7 +155,8 @@ describe('auth reducer', () => {
   it('should handle LOGOUT_REQUEST', () => {
     expect(auth(initialState, { type: LOGOUT_REQUEST })).toEqual({
       ...initialState,
-      isLoggingOut: true
+      isLoggingOut: true,
+      initialCheck: true
     });
   });
   
@@ -164,7 +165,7 @@ describe('auth reducer', () => {
       ...initialState,
       hasEverLoggedOn: true,
       authenticated: false,
-      initialCheck: false,
+      initialCheck: true,
       latestActivity: null,
       expiresAt: null,
       isSessionEnding: false,
@@ -186,7 +187,7 @@ describe('auth reducer', () => {
         hasEverLoggedOn: true,
         error: null,
         fetching: false,
-        initialCheck: false,
+        initialCheck: true,
         isLoggingOut: false,
         factorsList: [],
         mfaEnrollType: '',

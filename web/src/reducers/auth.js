@@ -103,7 +103,8 @@ const auth = (state = initialState, action) => {
     case LOGOUT_REQUEST:
       return {
         ...state,
-        isLoggingOut: true
+        isLoggingOut: true,
+        initialCheck: true
       };
     case LOGOUT_SUCCESS:
       return {
@@ -111,7 +112,7 @@ const auth = (state = initialState, action) => {
         authenticated: false,
         error: null,
         hasEverLoggedOn: true,
-        initialCheck: false,
+        initialCheck: true,
         latestActivity: null,
         expiresAt: null,
         isSessionEnding: false,

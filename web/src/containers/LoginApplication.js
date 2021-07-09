@@ -26,6 +26,7 @@ const LoginApplication = ({
   authenticated,
   hasEverLoggedOn,
   initialCheck,
+  isLoggingOut,
   error,
   fetching,
   factorsList,
@@ -185,6 +186,7 @@ const LoginApplication = ({
 LoginApplication.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
   initialCheck: PropTypes.bool.isRequired,
+  isLoggingOut: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
   error: PropTypes.string,
   fetching: PropTypes.bool.isRequired,
@@ -217,7 +219,8 @@ const mapStateToProps = ({
     factorsList,
     mfaEnrollType,
     verifyData,
-    initialCheck
+    initialCheck,
+    isLoggingOut
   }
 }) => ({
   hasEverLoggedOn,
@@ -227,7 +230,8 @@ const mapStateToProps = ({
   factorsList,
   mfaEnrollType,
   verifyData,
-  initialCheck
+  initialCheck,
+  isLoggingOut
 });
 
 const mapDispatchToProps = {
