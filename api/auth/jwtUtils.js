@@ -42,10 +42,7 @@ const jwtExtractor = req => {
   }
 
   const { url } = req;
-  logger.info(`req cookie ${JSON.stringify(req.headers.cookie)}`);
-  logger.info(`get cookie ${JSON.stringify(req.get('Cookie'))}`);
   const cookieStr = req.headers.cookie || req.get('Cookie');
-  logger.info({ cookieStr });
   const regex = new RegExp(
     /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)/i
   );
@@ -55,18 +52,15 @@ const jwtExtractor = req => {
     // we cannot append our authorization header, but because
     // we are storing our access token in a cookie, we can read
     // the access token from there in this instance
-    logger.info('use cookies');
     const re = /;\s*/;
     const cookies = cookieStr.split(re); // split the cookie string into individual cookies
     const accessTokenObj = cookies.find(cookie =>
       cookie.match(/^gov.cms.eapd.api-token/i)
     ); // find the cookie that stores the access token
     if (accessTokenObj) {
-      logger.info('found the right cookie');
       // eslint-disable-next-line no-unused-vars
       const value = accessTokenObj.split('=')[1]; // get the value
       const valueObj = JSON.parse(unescape(value)); // the value is an encoded string, convert it to a json object
-      logger.info('accessToken', valueObj.accessToken);
       return valueObj.accessToken; // return the access token
     }
   }
@@ -104,10 +98,8 @@ const sign = (payload, options = defaultOptions) => {
 const verifyEAPDToken = token => {
   try {
     const payload = jwt.verify(token, getSecret());
-    logger.info({ payload });
     return Promise.resolve(payload);
   } catch (err) {
-    logger.error('invalid token');
     throw new Error('invalid Token');
   }
 };
