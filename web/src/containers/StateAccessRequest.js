@@ -8,6 +8,8 @@ import AuthenticationForm from '../components/AuthenticationForm';
 
 import { STATES } from '../util/states';
 
+const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
+
 const StateAccessRequest = ({ 
   saveAction, 
   cancelAction,
@@ -15,20 +17,21 @@ const StateAccessRequest = ({
   fetching, 
   currentAffiliations
 }) => {
+
   const existingAffiliations = currentAffiliations.map(element => { 
-    const stateDetails = STATES.find(item => item.id === element.state_id)
+    const stateDetails = statesWithFederal.find(item => item.id === element.state_id)
     return { id: element.state_id, name: stateDetails.name, status: element.status } 
   });
   
-  const pendingAffiliations = existingAffiliations.filter(element => element.status === 'requested');
-  const inactiveAffiliations = existingAffiliations.filter(element => element.status === 'revoked' || element.status === 'denied');
-  const activeAffiliations = existingAffiliations.filter(element => element.status === 'approved');
-  
-  const availableStates = STATES.filter( item => {
+  const availableStates = statesWithFederal.filter( item => {
     return !existingAffiliations.find(affiliation => {
       return affiliation.id === item.id;
     });
   });
+
+  const pendingAffiliations = existingAffiliations.filter(element => element.status === 'requested');
+  const inactiveAffiliations = existingAffiliations.filter(element => element.status === 'revoked' || element.status === 'denied');
+  const activeAffiliations = existingAffiliations.filter(element => element.status === 'approved');
 
   const autocompleteLabel = existingAffiliations.length > 0 ? "Request a new State Affiliation" : "Select your State Affiliation";
 
@@ -65,7 +68,7 @@ const StateAccessRequest = ({
           ...state,
           fullStateList: [
             ...state.fullStateList,
-            STATES.find(item => item.id === action.payload)
+            statesWithFederal.find(item => item.id === action.payload)
           ].sort((a, b) => a.name.localeCompare(b.name)),
           selectedStates: state.selectedStates.filter(
             item => item.id !== action.payload
