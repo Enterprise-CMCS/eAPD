@@ -37,7 +37,7 @@ const getConfig = () => {
     process.env.API_URL.match(new RegExp(/cms.gov$/))
   ) {
     config = {
-      domain: 'cms.gov',
+      domain: '.cms.gov',
       secure: true,
       sameSite: 'lax'
     };
