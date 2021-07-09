@@ -1109,6 +1109,55 @@ Object {
         ],
       },
     },
+    "/auth/state/{stateId}": Object {
+      "get": Object {
+        "description": "Switch from using one state to another, with updated and accurate permissions.",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "jwt": Object {
+                      "description": "a JWT",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "A JWT containing the new claims",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user can not switch to this state",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Exchanges a user's token from one state to another.",
+        "tags": Array [
+          "Authentication and authorization",
+        ],
+      },
+    },
     "/docs/account-registration": Object {
       "get": Object {
         "description": "Get the account registration documentation",
@@ -1362,9 +1411,6 @@ Object {
           },
           "401": Object {
             "description": "The user is not logged in",
-          },
-          "403": Object {
-            "description": "Unauthorized, the user does not have permission to access this state.  Switching states may resolve the issue.",
           },
           "404": Object {
             "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
