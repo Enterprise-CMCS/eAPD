@@ -1,4 +1,6 @@
 const tap = require('tap');
+const sinon = require('sinon');
+const { format } = require('date-fns');
 const dbMock = require('./dbMock.test');
 
 const {
@@ -6,7 +8,8 @@ const {
   getAuthActivitiesByIDs,
   getAuthRoleByID,
   getAuthRoleByName,
-  getActiveAuthRoles
+  getActiveAuthRoles,
+  isAdminForState
 } = require('./auth');
 
 tap.test('database wrappers / auth', async authTests => {
@@ -78,4 +81,31 @@ tap.test('database wrappers / auth', async authTests => {
       { id: 'role2', activities: ['activity 1', 'activity 2'] }
     ]);
   });
+
+  authTests.test('get isAdminForState for an admin', async test => {
+    const affiliations = dbMock('auth_affiliations');
+    affiliations.select.withArgs('auth_affiliations.state_id').returnsThis()
+    affiliations.join.withArgs('state_admin_certifications', sinon.match.any).returnsThis()
+    affiliations.where.withArgs('auth_affiliations.user_id', 'user_id').returnsThis()
+    affiliations.where.withArgs('auth_affiliations.status', 'approved').returnsThis()
+    affiliations.where.withArgs('state_admin_certifications.certificationExpiration', '>', format( new Date(), 'yyyy-MM-dd')).returnsThis()
+    affiliations.where.withArgs('auth_affiliations.state_id', 'ak').resolves([{state_id: 'ak'}])
+
+    test.ok(await isAdminForState('user_id', 'ak', {db:affiliations}), 'is an admin for ak')
+
+  });
+
+  authTests.test('get isAdminForState for not an admin', async test => {
+    const affiliations = dbMock('auth_affiliations');
+    affiliations.select.withArgs('auth_affiliations.state_id').returnsThis()
+    affiliations.join.withArgs('state_admin_certifications', sinon.match.any).returnsThis()
+    affiliations.where.withArgs('auth_affiliations.user_id', 'user_id').returnsThis()
+    affiliations.where.withArgs('auth_affiliations.status', 'approved').returnsThis()
+    affiliations.where.withArgs('state_admin_certifications.certificationExpiration', '>', format( new Date(), 'yyyy-MM-dd')).returnsThis()
+    affiliations.where.withArgs('auth_affiliations.state_id', 'al').resolves([])
+
+    test.notOk(await isAdminForState('user_id', 'al', {db:affiliations}), 'is not an admin for al')
+
+  });
+
 });

@@ -4,7 +4,8 @@ const knex = require('./knex');
 const {
   getRolesAndActivities: actualGetRolesAndActivities,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
-  getUserPermissionsForStates: actualGetUserPermissionsForStates
+  getUserPermissionsForStates: actualGetUserPermissionsForStates,
+  isAdminForState: actualIsAdminForState
 } = require('./auth');
 const { getStateById: actualGetStateById } = require('./states');
 const { createOrUpdateOktaUser, getOktaUser } = require('./oktaUsers');
@@ -22,6 +23,24 @@ const sanitizeUser = user => ({
   states: user.states,
   username: user.login
 });
+
+const actualGetRole = async (affiliation, {
+                         getRolesAndActivities = actualGetRolesAndActivities,
+                         isAdminForState = actualIsAdminForState
+                       } = {}
+) => {
+
+  let roleId = affiliation.role_id;
+  const roles = (await getRolesAndActivities()) || [];
+  const isAdmin = await isAdminForState(affiliation.user_id, affiliation.state_id);
+
+  if (isAdmin) {
+    const adminRole = roles.find(r => r.name === 'eAPD State Admin');
+    roleId = adminRole.id;
+  }
+
+  return roles.find(r => r.id === roleId)
+};
 
 const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
   return db.select('*').from('auth_affiliations').where({ user_id: id });
@@ -42,9 +61,9 @@ const populateUser = async (
     getUserPermissionsForStates = actualGetUserPermissionsForStates,
     getUserAffiliatedStates = actualGetUserAffiliatedStates,
     getStateById = actualGetStateById,
-    getRolesAndActivities = actualGetRolesAndActivities,
     getSelectedStateIdByUserId = actualGetSelectedStateIdByUserId,
-    getAffiliationsByUserId = actualGetAffiliationsByUserId
+    getAffiliationsByUserId = actualGetAffiliationsByUserId,
+    getRole = actualGetRole
   } = {}
 ) => {
   if (user) {
@@ -66,27 +85,25 @@ const populateUser = async (
       // grab the first affiliation if none selected
       affiliation = affiliations.find(Boolean);
     }
+    if (affiliation) {
+      const role = await getRole(affiliation);
 
-    const roles = (await getRolesAndActivities()) || [];
-    const role = affiliation && roles.find(r => r.id === affiliation.role_id);
-
-    populatedUser.state =
-      affiliation &&
-      affiliation.state_id &&
-      (await getStateById(affiliation.state_id));
-    populatedUser.role = role && role.name;
-    populatedUser.activities = (role && role.activities) || [];
-
+      populatedUser.state =
+        affiliation.state_id &&
+        (await getStateById(affiliation.state_id));
+      populatedUser.role = role && role.name;
+      populatedUser.activities = (role && role.activities) || [];
+    }
     return populatedUser;
   }
   return user;
 };
 
 const getAllUsers = async ({
-  clean = true,
-  client = oktaClient,
-  populate = populateUser
-} = {}) => {
+                             clean = true,
+                             client = oktaClient,
+                             populate = populateUser
+                           } = {}) => {
   const users = await client.listUsers();
 
   const full = await Promise.all(users.map(user => populate(user)));
@@ -131,11 +148,13 @@ const getUserByID = async (
     return user && clean ? sanitizeUser(user) : user;
   }
   return null;
+
 };
 
 module.exports = {
   getAllUsers,
   getUserByID,
   populateUser,
-  sanitizeUser
+  sanitizeUser,
+  actualGetRole
 };

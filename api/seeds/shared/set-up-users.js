@@ -80,7 +80,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: regularUser.profile.displayName
     });
     // Add an expired certification and this user will be downgraded to "regular user"
     stateCertifications.push({
@@ -109,9 +110,26 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       user_id: stateAdmin.id,
       state_id: 'ak',
-      role_id: stateAdminRoleId,
+      role_id: stateStaffRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: stateAdmin.profile.displayName
+    });
+    oktaAffiliations.push({
+      user_id: stateAdmin.id,
+      state_id: 'ar',
+      role_id: stateStaffRoleId,
+      status: 'approved',
+      updated_by: 'seeds',
+      username: stateAdmin.profile.displayName
+    });
+    oktaAffiliations.push({
+      user_id: stateAdmin.id,
+      state_id: 'al',
+      role_id: stateStaffRoleId,
+      status: 'approved',
+      updated_by: 'seeds',
+      username: stateAdmin.profile.displayName
     });
     // Let them be a staffer in Maryland too
     oktaAffiliations.push({
@@ -119,7 +137,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'md',
       role_id: stateStaffRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: stateAdmin.profile.displayName
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
@@ -128,6 +147,28 @@ const createUsersToAdd = async (knex, oktaClient) => {
       certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
       certificationExpiration: format(
         addDays(new Date(), 325),
+        PostgresDateFormat
+      ),
+      certifiedBy: 'seeds'
+    })
+    // admin for Arkansas too
+    stateCertifications.push({
+      username: stateAdmin.id,
+      state: 'ar',
+      certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
+      certificationExpiration: format(
+        addDays(new Date(), 325),
+        PostgresDateFormat
+      ),
+      certifiedBy: 'seeds'
+    })
+
+    stateCertifications.push({
+      username: stateAdmin.id,
+      state: 'al',
+      certificationDate: format(subDays(new Date(), 405), PostgresDateFormat),
+      certificationExpiration: format(
+        subDays(new Date(), 40),
         PostgresDateFormat
       ),
       certifiedBy: 'seeds'

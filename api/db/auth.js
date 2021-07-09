@@ -1,4 +1,6 @@
+const { format } = require('date-fns');
 const knex = require('./knex');
+
 
 const getAuthActivities = async ({ db = knex } = {}) =>
   db('auth_activities').select();
@@ -108,6 +110,25 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
     );
 };
 
+const isAdminForState = async (userId, stateId, {db = knex} = {}) => {
+  const results = await db('auth_affiliations')
+    .select('auth_affiliations.state_id')
+    .join('state_admin_certifications', () => {
+      this.on(() => {
+        this.on('state_admin_certifications.username', '=', 'auth_affiliations.user_id')
+        this.andOn('state_admin_certifications.state', '=', 'auth_affiliations.state_id')
+      })
+    })
+    .where('auth_affiliations.user_id', userId)
+    // only care about approved affiliations here.
+    .where('auth_affiliations.status', 'approved')
+    .where('state_admin_certifications.certificationExpiration', '>', format( new Date(), 'yyyy-MM-dd'))
+    .where('auth_affiliations.state_id', stateId)
+
+    return results.length > 0
+}
+
+
 module.exports = {
   getAuthActivities,
   getAuthActivitiesByIDs,
@@ -116,5 +137,6 @@ module.exports = {
   getActiveAuthRoles,
   getRolesAndActivities,
   getUserAffiliatedStates,
-  getUserPermissionsForStates
+  getUserPermissionsForStates,
+  isAdminForState
 };

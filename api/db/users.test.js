@@ -7,7 +7,8 @@ const {
   getAllUsers,
   getUserByID,
   populateUser,
-  sanitizeUser
+  sanitizeUser,
+  actualGetRole
 } = require('./users');
 
 tap.test('database wrappers / users', async usersTests => {
@@ -48,6 +49,10 @@ tap.test('database wrappers / users', async usersTests => {
     states: []
   };
 
+  const roles = [
+    {id: 1, name:'role', activities:['activity']},
+    {id: 2, name:'eAPD State Admin', activities:['admin', 'activity']},
+  ]
   // let getUserPermissionsForStates;
   // let getUserAffiliatedStates;
   // let getAffiliationsByUserId;
@@ -462,4 +467,24 @@ tap.test('database wrappers / users', async usersTests => {
       }
     );
   });
+
+  usersTests.test('getting a role for an affiliation', async test => {
+    const getRolesAndActivities =  sinon.stub()
+    const isAdminForState = sinon.stub()
+    const affiliation = {user_id: 'user_id', state_id:'al', role_id:1}
+    getRolesAndActivities.withArgs().resolves(roles)
+    isAdminForState.withArgs('user_id', 'al').resolves(false)
+    test.same(await actualGetRole(affiliation, {getRolesAndActivities, isAdminForState }), roles[0])
+
+  })
+
+  usersTests.test('getting a role for an affiliation that is promoted to admin', async test => {
+    const getRolesAndActivities =  sinon.stub()
+    const isAdminForState = sinon.stub()
+    const affiliation = {user_id: 'user_id', state_id:'ak', role_id:1}
+    getRolesAndActivities.withArgs().resolves(roles)
+    isAdminForState.withArgs('user_id', 'ak').resolves(true)
+    test.same(await actualGetRole(affiliation, {getRolesAndActivities, isAdminForState }), roles[1])
+
+  })
 });
