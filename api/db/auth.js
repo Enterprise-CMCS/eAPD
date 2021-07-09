@@ -113,8 +113,8 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
 const isAdminForState = async (userId, stateId, {db = knex} = {}) => {
   const results = await db('auth_affiliations')
     .select('auth_affiliations.state_id')
-    .join('state_admin_certifications', () => {
-      this.on(() => {
+    .join('state_admin_certifications', function joinFunc() {
+      this.on(function joinOnFunc() {
         this.on('state_admin_certifications.username', '=', 'auth_affiliations.user_id')
         this.andOn('state_admin_certifications.state', '=', 'auth_affiliations.state_id')
       })

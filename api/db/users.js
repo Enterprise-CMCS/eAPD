@@ -4,7 +4,6 @@ const knex = require('./knex');
 const {
   getRolesAndActivities: actualGetRolesAndActivities,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
-  getUserPermissionsForStates: actualGetUserPermissionsForStates,
   isAdminForState: actualIsAdminForState
 } = require('./auth');
 const { getStateById: actualGetStateById } = require('./states');
@@ -58,7 +57,6 @@ const actualGetSelectedStateIdByUserId = (id, { db = knex } = {}) => {
 const populateUser = async (
   user,
   {
-    getUserPermissionsForStates = actualGetUserPermissionsForStates,
     getUserAffiliatedStates = actualGetUserAffiliatedStates,
     getStateById = actualGetStateById,
     getSelectedStateIdByUserId = actualGetSelectedStateIdByUserId,
@@ -68,11 +66,13 @@ const populateUser = async (
 ) => {
   if (user) {
     const populatedUser = user;
-    populatedUser.permissions =
-      (await getUserPermissionsForStates(user.id)) || [];
     populatedUser.states = (await getUserAffiliatedStates(user.id)) || [];
     populatedUser.affiliations = (await getAffiliationsByUserId(user.id)) || [];
-
+    const permissions = populatedUser.affiliations.map(async affiliation => {
+      const role = await getRole(affiliation);
+      return {[affiliation.state_id]: role.activities}
+    })
+    populatedUser.permissions = await Promise.all(permissions)
     // grab the selected affiliation
     const selectedStateId = await getSelectedStateIdByUserId(user.id);
     logger.info({ selectedStateId, uid: user.id });
