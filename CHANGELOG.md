@@ -5,6 +5,7 @@ Anticipated release: July 9, 2021
 #### 🚀 New features
 
 - Update the delete process for FFY ([#2996])
+- updated Assurance and Compliance text on APD review and export screen to show more detailed information. ([#3169]))
 
 #### 🐛 Bugs fixed
 
@@ -23,3 +24,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3030]: https://github.com/CMSgov/eAPD/issues/3030
 [#3180]: https://github.com/CMSgov/eAPD/issues/3180
 [#3181]: https://github.com/CMSgov/eAPD/issues/3181
+[#3169]: https://github.com/CMSgov/eAPD/issues/3169
