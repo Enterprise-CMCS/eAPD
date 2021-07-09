@@ -542,79 +542,6 @@ Object {
   },
   "openapi": "3.0.0",
   "paths": Object {
-    "/affiliations/me": Object {
-      "get": Object {
-        "description": "Get the current affiliations for the logged in user",
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "items": Object {
-                    "properties": Object {
-                      "created_at": Object {
-                        "description": "Timestamp of record creation",
-                        "format": "date-time",
-                        "type": "string",
-                      },
-                      "id": Object {
-                        "description": "ID of record",
-                        "type": "integer",
-                      },
-                      "role_id": Object {
-                        "description": "ID of the role applied to this user for this US State",
-                        "type": "integer",
-                      },
-                      "state_id": Object {
-                        "description": "2-letter US State or Territory abbreviation, lowercase",
-                        "type": "string",
-                      },
-                      "status": Object {
-                        "description": "The status of the user role for this US State",
-                        "enum": Array [
-                          "requested",
-                          "approved",
-                          "denied",
-                          "revoked",
-                        ],
-                        "type": "string",
-                      },
-                      "updated_at": Object {
-                        "description": "Timestamp of last update",
-                        "format": "date-time",
-                        "type": "string",
-                      },
-                      "updated_by": Object {
-                        "description": "ID of the user who last updated this record",
-                        "type": "string",
-                      },
-                      "user_id": Object {
-                        "description": "ID of user",
-                        "type": "string",
-                      },
-                    },
-                    "type": "object",
-                  },
-                  "type": "array",
-                },
-              },
-            },
-            "description": "A list of affiliations for the logged in user",
-          },
-          "401": Object {
-            "description": "The user is not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "bearerAuth": Array [],
-          },
-        ],
-        "tags": Array [
-          "Affiliations",
-        ],
-      },
-    },
     "/apds": Object {
       "get": Object {
         "description": "Get a list of all apds associated with requesting user",
@@ -1177,6 +1104,55 @@ Object {
           },
         ],
         "summary": "Gets the list of all roles",
+        "tags": Array [
+          "Authentication and authorization",
+        ],
+      },
+    },
+    "/auth/state/{stateId}": Object {
+      "get": Object {
+        "description": "Switch from using one state to another, with updated and accurate permissions.",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "jwt": Object {
+                      "description": "a JWT",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "A JWT containing the new claims",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user can not switch to this state",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Exchanges a user's token from one state to another.",
         "tags": Array [
           "Authentication and authorization",
         ],
