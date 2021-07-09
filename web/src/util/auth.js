@@ -31,26 +31,22 @@ const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 const getConfig = () => {
   let config;
-  console.log('API_URL', process.env.API_URL);
   if (
     process.env.API_URL &&
     process.env.API_URL.match(new RegExp(/cms.gov$/))
   ) {
-    console.log('staging or production');
     config = {
       domain: '.cms.gov',
       secure: true,
       sameSite: 'lax'
     };
   } else {
-    console.log('PR or localhost');
     config = { sameSite: 'strict' };
   }
 
   return config;
 };
 const COOKIE_CONFIG = getConfig();
-console.log({ COOKIE_CONFIG });
 
 const setCookie = accessToken => {
   if (navigator.cookieEnabled) {
