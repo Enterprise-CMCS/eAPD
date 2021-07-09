@@ -30,7 +30,7 @@ const StateAccessRequest = ({
     });
   });
 
-  const autocompleteLabel = existingAffiliations.length > 0 ? "Request a new state affiliation" : {autocompleteLabel};
+  const autocompleteLabel = existingAffiliations.length > 0 ? "Request a new State Affiliation" : "Select your State Affiliation";
 
   const initialState = {
     fullStateList: availableStates,
@@ -111,33 +111,35 @@ const StateAccessRequest = ({
       <Fragment>
         <h2 className="ds-h4 ds-u-margin-y--1">Existing Affiliations</h2>
         <p className="ds-u-margin-top--0 ds-u-font-size--small">Below are your current, pending and/or revoked state affiliations. Contact the State Administrator for the state you wish to be have removed from your state affiliation list.</p>
-        <h3 className="ds-h5">Active</h3>
-        {activeAffiliations.length === 0 && "No active affiliations"}
-        {activeAffiliations.map(el => {
-          return (
-            <Badge className="ds-u-margin-bottom--1" key={el.id}>
-              {el.name}
-            </Badge>     
-          )
-        })}
-        <h3 className="ds-h5">Pending</h3>
-        {pendingAffiliations.length === 0 && "No pending affiliations"}
-        {pendingAffiliations.map(el => {
-          return (
-            <Badge className="ds-u-margin-bottom--1" key={el.id}>
-              {el.name}
-            </Badge>     
-          )
-        })}
-        <h3 className="ds-h5">Revoked</h3>
-        {inactiveAffiliations.length === 0 && "No revoked affiliations"}
-        {inactiveAffiliations.map(el => {
-          return (
-            <Badge className="ds-u-margin-bottom--1" key={el.id}>
-              {el.name}
-            </Badge>     
-          )
-        })}
+        <div className="ds-u-border--1 ds-u-padding--2">
+          <h3 className="ds-h5">Active</h3>
+          {activeAffiliations.length === 0 && "No active affiliations"}
+          {activeAffiliations.map(el => {
+            return (
+              <Badge className="ds-u-margin-bottom--1" key={el.id}>
+                {el.name}
+              </Badge>     
+            )
+          })}
+          <h3 className="ds-h5 ds-u-padding-top--2 ds-u-margin-top--1 ds-u-border-top--1">Pending</h3>
+          {pendingAffiliations.length === 0 && "No pending affiliations"}
+          {pendingAffiliations.map(el => {
+            return (
+              <Badge className="ds-u-margin-bottom--1" key={el.id}>
+                {el.name}
+              </Badge>     
+            )
+          })}
+          <h3 className="ds-h5 ds-u-padding-top--2 ds-u-margin-top--1 ds-u-border-top--1">Revoked</h3>
+          {inactiveAffiliations.length === 0 && "No revoked affiliations"}
+          {inactiveAffiliations.map(el => {
+            return (
+              <Badge className="ds-u-margin-bottom--1" key={el.id}>
+                {el.name}
+              </Badge>     
+            )
+          })}
+        </div>
       </Fragment>
     )
   };
