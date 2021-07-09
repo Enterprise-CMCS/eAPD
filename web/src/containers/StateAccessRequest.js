@@ -8,6 +8,8 @@ import AuthenticationForm from '../components/AuthenticationForm';
 
 import { STATES } from '../util/states';
 
+const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
+
 const StateAccessRequest = ({ 
   saveAction, 
   cancelAction,
@@ -15,12 +17,13 @@ const StateAccessRequest = ({
   fetching, 
   currentAffiliations
 }) => {
+
   const existingAffiliations = currentAffiliations.map(element => { 
-    const stateDetails = STATES.find(item => item.id === element.state_id)
+    const stateDetails = statesWithFederal.find(item => item.id === element.state_id)
     return { id: element.state_id, name: stateDetails.name } 
   });
   
-  const availableStates = STATES.filter( item => {
+  const availableStates = statesWithFederal.filter( item => {
     return !existingAffiliations.find(affiliation => {
       return affiliation.id === item.id;
     });
@@ -59,7 +62,7 @@ const StateAccessRequest = ({
           ...state,
           fullStateList: [
             ...state.fullStateList,
-            STATES.find(item => item.id === action.payload)
+            statesWithFederal.find(item => item.id === action.payload)
           ].sort((a, b) => a.name.localeCompare(b.name)),
           selectedStates: state.selectedStates.filter(
             item => item.id !== action.payload

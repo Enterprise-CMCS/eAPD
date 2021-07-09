@@ -9,6 +9,7 @@ Anticipated release: July 9, 2021
 
 #### 🐛 Bugs fixed
 
+- Removes "Federal" as an option for State Medicaid address ([#3181])
 
 #### ⚙️ Behind the scenes
 
@@ -21,3 +22,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2581]: https://github.com/CMSgov/eAPD/issues/2581
 [#2996]: https://github.com/CMSgov/eAPD/issues/2996
 [#3030]: https://github.com/CMSgov/eAPD/issues/3030
+[#3181]: https://github.com/CMSgov/eAPD/issues/3181
