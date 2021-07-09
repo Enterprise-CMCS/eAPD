@@ -8,6 +8,7 @@ Anticipated release: July 9, 2021
 
 #### 🐛 Bugs fixed
 
+- Revoking a user's access is causing them to disappear and not show in the Inactive tab ([#3238])
 
 #### ⚙️ Behind the scenes
 
@@ -19,3 +20,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#2996]: https://github.com/CMSgov/eAPD/issues/2996
 [#3030]: https://github.com/CMSgov/eAPD/issues/3030
+[#3238]: https://github.com/CMSgov/eAPD/issues/3238
