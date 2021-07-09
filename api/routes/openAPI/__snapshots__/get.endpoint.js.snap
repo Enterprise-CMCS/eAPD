@@ -1412,6 +1412,9 @@ Object {
           "401": Object {
             "description": "The user is not logged in",
           },
+          "403": Object {
+            "description": "Unauthorized, the user does not have permission to access this state.  Switching states may resolve the issue.",
+          },
           "404": Object {
             "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
           },
