@@ -20,7 +20,8 @@ const getQueryBuilder = () => ({
   where: sandbox.stub(),
   whereIn: sandbox.stub(),
   whereRaw: sandbox.stub(),
-  leftJoin: sandbox.stub()
+  leftJoin: sandbox.stub(),
+  whereNot:sandbox.stub()
 });
 
 const creator = table => {

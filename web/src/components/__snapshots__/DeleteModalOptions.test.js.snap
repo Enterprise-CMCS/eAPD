@@ -59,7 +59,7 @@ exports[`DeleteModalOptions function has the correct body text 7`] = `
 exports[`DeleteModalOptions function has the correct body text 8`] = `
 <React.Fragment>
   <div>
-    Unchecking Federal Fiscal Year (YEAR) will permanently delete any FFY (YEAR) specific data in the current APD. This action cannot be undone.
+    Unchecking this Federal Fiscal Year (FFY) will permanently delete any FFY specific data in the current APD. This action cannot be undone.
   </div>
   <br />
   <div>
@@ -196,7 +196,7 @@ Object {
 exports[`DeleteModalOptions function returns consistent values 16`] = `
 <React.Fragment>
   <div>
-    Unchecking Federal Fiscal Year (YEAR) will permanently delete any FFY (YEAR) specific data in the current APD. This action cannot be undone.
+    Unchecking this Federal Fiscal Year (FFY) will permanently delete any FFY specific data in the current APD. This action cannot be undone.
   </div>
   <br />
   <div>

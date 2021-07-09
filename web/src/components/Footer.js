@@ -24,7 +24,7 @@ const Footer = () => {
             width="100px"
           />
           <img
-            src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
+            src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
             alt="eAPD logo"
             className="eAPD-logo"
             width="115px"
