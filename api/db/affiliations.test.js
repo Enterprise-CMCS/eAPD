@@ -176,16 +176,16 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     async test => {
       const status = 'irrelevant';
       const affiliations = ['foo', 'bar', 'baz'];
-      const isAdmin = false;
+      const isFedAdmin = false;
       const getAffiliationsByStateStub = sinon.stub();
       getAffiliationsByStateStub
-        .withArgs({ stateId, status, isAdmin })
+        .withArgs({ stateId, status, isFedAdmin })
         .resolves(affiliations);
 
       const results = await getPopulatedAffiliationsByStateId({
         stateId,
         status,
-        isAdmin,
+        isFedAdmin,
         getAffiliationsByStateId_: getAffiliationsByStateStub
       });
       test.same(results, affiliations);
@@ -196,15 +196,15 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     'get populated affiliations by state id with no results',
     async test => {
       const status = 'irrelevant';
-      const isAdmin = false;
+      const isFedAdmin = false;
       const getAffiliationsByStateStub = sinon.stub();
       getAffiliationsByStateStub
-        .withArgs({ stateId, status, isAdmin })
+        .withArgs({ stateId, status, isFedAdmin })
         .resolves([]);
       const results = await getPopulatedAffiliationsByStateId({
         stateId,
         status,
-        isAdmin,
+        isFedAdmin,
         getAffiliationsByStateId_: getAffiliationsByStateStub
       });
       test.same(results, []);

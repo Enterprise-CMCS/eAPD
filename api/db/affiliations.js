@@ -27,8 +27,8 @@ const statusConverter = {
 const getAffiliationsByStateId = ({
   stateId,
   status = null,
-  db = knex,
-  isFedAdmin = false
+  isFedAdmin = false,
+  db = knex
 }) => {
   const query = db('auth_affiliations')
     .select(selectedColumns)
@@ -62,10 +62,10 @@ const getAffiliationsByStateId = ({
 const getPopulatedAffiliationsByStateId = ({
   stateId,
   status,
-  isAdmin,
+  isFedAdmin,
   getAffiliationsByStateId_ = getAffiliationsByStateId
 }) => {
-  return getAffiliationsByStateId_({ stateId, status, isAdmin });
+  return getAffiliationsByStateId_({ stateId, status, isFedAdmin });
 };
 
 const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
