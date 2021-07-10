@@ -2,3 +2,4 @@ dist
 coverage
 
 .jest-test-results.json
+cypress.env.json

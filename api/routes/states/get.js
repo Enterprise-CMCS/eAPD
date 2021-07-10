@@ -1,5 +1,5 @@
 const db = require('../../db');
-const { loggedIn } = require('../../middleware/auth');
+const { validForState } = require('../../middleware/auth');
 
 module.exports = app => {
   app.get('/states', (request, response, next) => {
@@ -9,7 +9,7 @@ module.exports = app => {
       .catch(next);
   });
 
-  app.get('/states/:id', loggedIn, (request, response, next) => {
+  app.get('/states/:id', validForState('id'), (request, response, next) => {
     const { id } = request.params;
     Promise.all([
       db
