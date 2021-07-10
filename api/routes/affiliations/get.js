@@ -2,7 +2,7 @@ const logger = require('../../logger')('affiliations route get');
 const {
   getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
   getPopulatedAffiliationById: _getPopulatedAffiliationsById,
-  getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
+  getAllPopulatedAffiliations: _getAllPopulatedAffiliations
 } = require('../../db');
 const { can, validForState } = require('../../middleware');
 
@@ -11,7 +11,7 @@ module.exports = (
   {
     getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,
     getPopulatedAffiliationById = _getPopulatedAffiliationsById,
-    getAllPopulatedAffiliations = _getAllPopulatedAffiliations,
+    getAllPopulatedAffiliations = _getAllPopulatedAffiliations
   } = {}
 ) => {
   app.get(
@@ -27,21 +27,19 @@ module.exports = (
       const { status = null } = request.query;
 
       try {
-        if (stateId === 'fd'){
+        if (stateId === 'fd') {
           const affiliations = await getAllPopulatedAffiliations({
             status
           });
           return response.send(affiliations);
-
         }
         const affiliations = await getPopulatedAffiliationsByStateId({
           stateId,
           status,
-          isAdmin: request.user.role === 'eAPD Federal Admin'
+          isFedAdmin: request.user.role === 'eAPD Federal Admin'
         });
 
         return response.send(affiliations);
-
       } catch (e) {
         return next(e);
       }
@@ -59,7 +57,6 @@ module.exports = (
       });
       const { stateId, id } = request.params;
       try {
-
         const affiliation = await getPopulatedAffiliationById({
           stateId,
           affiliationId: id
@@ -79,5 +76,4 @@ module.exports = (
       }
     }
   );
-
 };
