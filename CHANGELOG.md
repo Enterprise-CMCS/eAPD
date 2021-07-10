@@ -16,6 +16,7 @@ Anticipated release: July 9, 2021
 #### ⚙️ Behind the scenes
 
 - Created endpoint to allow a user to switch states ([#3030])
+- Added security check to state/:id endpoint so only users with access to that state can get the data ([#3129])
 
 # Previous releases
 
