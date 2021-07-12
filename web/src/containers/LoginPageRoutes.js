@@ -15,6 +15,7 @@ import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
 import LoginMFA from './LoginMFA';
 import StateAccessRequest from './StateAccessRequest';
 import StateAccessRequestConfirmation from './StateAccessRequestConfirmation';
+import SelectAffiliation from './SelectAffiliation';
 
 const LoginPageRoutes = ({
   useRouteMatch,
@@ -101,7 +102,9 @@ const LoginPageRoutes = ({
           />
         </Route>
 
-        {/* <Route path={`${path}/affiliations/select`}></Route> */}
+        <Route path={`${path}/affiliations/select`}>
+          <SelectAffiliation />
+        </Route>
 
         <Route path={`${path}/affiliations/thank-you`}>
           <StateAccessRequestConfirmation
