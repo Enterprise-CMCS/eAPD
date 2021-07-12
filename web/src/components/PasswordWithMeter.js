@@ -37,7 +37,8 @@ class Password extends Component {
       value,
       showMeter,
       errorMessage,
-      customErrorMessage
+      customErrorMessage,
+      disabled
     } = this.props;
     const { showPassword, strength } = this.state;
 
@@ -62,6 +63,7 @@ class Password extends Component {
             size="small"
             type="checkbox"
             value="on"
+            disabled={disabled}
           />
 
           <TextField
@@ -78,6 +80,7 @@ class Password extends Component {
             value={value}
             onChange={this.changePassword}
             errorMessage={errorMessage == null ? null : ''}
+            disabled={disabled}
           />
           {customErrorMessage && (
             <label htmlFor="password" className="ds-u-color--error">
@@ -115,7 +118,8 @@ Password.propTypes = {
   value: PropTypes.string,
   showMeter: PropTypes.bool,
   errorMessage: PropTypes.string,
-  customErrorMessage: PropTypes.string
+  customErrorMessage: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 Password.defaultProps = {
@@ -126,7 +130,8 @@ Password.defaultProps = {
   value: '',
   showMeter: false,
   errorMessage: '',
-  customErrorMessage: ''
+  customErrorMessage: '',
+  disabled: false
 };
 
 export default Password;

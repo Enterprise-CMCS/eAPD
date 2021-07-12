@@ -1,7 +1,10 @@
 import React from 'react';
-import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, axe, waitFor, } from 'apd-testing-library';
 
 import Login from './Login';
+
+import MockAdapter from 'axios-mock-adapter';
+import axios from '../util/api';
 
 const defaultProps = {
   hasEverLoggedOn: false,
@@ -14,15 +17,20 @@ const defaultProps = {
 const setup = (props = {}) =>
   renderWithConnection(<Login {...defaultProps} {...props} />);
 
+const fetchMock = new MockAdapter(axios);
+
 describe('login component', () => {
   beforeEach(() => {
     defaultProps.login.mockReset();
+    fetchMock.reset();
+    fetchMock.onGet("/heartbeat").reply(200, {})
   });
 
   it('renders correctly if logged in previously but not logged in now (shows logout notice)', () => {
     const { getByText } = setup({ hasEverLoggedOn: true });
 
     expect(getByText(/You have securely logged out/i)).toBeTruthy();
+
   });
 
   it('renders correctly if not logged in, and never logged in', () => {
@@ -94,5 +102,15 @@ describe('login component', () => {
     const { container } = setup();
 
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('should show the warning text if heartbeat returns an error', async () => {
+    fetchMock.onGet("/heartbeat").reply(500, {})
+    const { getByText } = setup();
+
+    await waitFor(() => {
+      expect(getByText('The eAPD system is down, try again later.')).toBeTruthy()
+    });
+
   });
 });
