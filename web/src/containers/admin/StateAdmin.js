@@ -247,7 +247,7 @@ const mapStateToProps = state => ({
   roleTypes: state.admin.roleTypes,
   currentState: getUserStateOrTerritory(state),
   currentAffiliations: state.admin.affiliations,
-  currentUser: state.auth.user
+  currentUser: state.user.data
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StateAdmin);

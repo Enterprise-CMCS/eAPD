@@ -85,6 +85,7 @@
     "is-svg": ">=4.2.2",
     "js-cookie": "^2.2.1",
     "jsonpatch": "^3.0.1",
+    "jwt-decode": "^3.1.2",
     "markdown-it": "^12.0.6",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
