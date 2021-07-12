@@ -36,14 +36,6 @@ if (process.env.PROXY_TRUST !== 'false') {
   );
 }
 
-// This endpoint doesn't do anything, but lets us verify that the api is
-// online without triggering any other processing - e.g., no authentication,
-// no cookie/token processing, etc.
-logger.debug('setting up heartbeat endpoint');
-api.get('/heartbeat', (_, res) => {
-  res.status(204).end();
-});
-
 logger.debug('setting out route for API docs');
 api.use('/api-docs', swaggerUi.serve);
 
@@ -92,6 +84,14 @@ api.use(compression());
 api.use(express.urlencoded({ extended: true }));
 api.use(cors({ credentials: true, origin: true }));
 api.use(bodyParser.json({ limit: '5mb' }));
+
+// This endpoint doesn't do anything, but lets us verify that the api is
+// online without triggering any other processing - e.g., no authentication,
+// no cookie/token processing, etc.
+logger.debug('setting up heartbeat endpoint');
+api.get('/heartbeat', (_, res) => {
+  res.status(204).end();
+});
 
 // Registers Passport, related handlers, and
 // login/logout endpoints

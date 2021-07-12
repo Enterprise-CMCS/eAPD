@@ -96,7 +96,7 @@ describe('apd (application) component', () => {
       initialState: {
         user: {
           data: {
-            role: 'admin',
+            role: 'eAPD Federal Admin',
             state: {
               id: 'ak',
               name: 'Alaska',
@@ -139,7 +139,7 @@ describe('apd (application) component', () => {
       user: {
         data: {
           state: 'place',
-          role: 'test role',
+          role: 'eAPD Federal Admin',
           activities: ['edit-document']
         }
       }
@@ -147,14 +147,15 @@ describe('apd (application) component', () => {
 
     expect(mapStateToProps(state)).toEqual({
       apdId: 123456789,
-      isAdmin: false,
+      isAdmin: true,
       isEditor: true,
       place: 'place',
-      userRole: 'test role'
+      userRole: 'eAPD Federal Admin'
     });
 
     state.apd.data.id = null;
     delete state.apd.data.years;
+    state.user.data.role = 'test role'
 
     expect(mapStateToProps(state)).toEqual({
       apdId: null,
