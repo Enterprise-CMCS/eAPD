@@ -166,7 +166,7 @@ describe('Login Application', () => {
       initialHistory: [
         { pathname: '/', state: { from: { pathname: '/dashboard' } } }
       ],
-      initialState: { auth: { ...initialAuth, authenticated: true } }
+      initialState: { auth: { ...initialAuth, authenticated: true, initialCheck: true } }
     });
     await waitFor(() => {
       expect(entries[index - 1].pathname).toEqual('/dashboard');
