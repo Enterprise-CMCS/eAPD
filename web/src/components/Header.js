@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {
-  getIsAdmin,
+  getIsFedAdmin,
   getUserStateOrTerritory,
   getCanUserViewStateAdmin
 } from '../reducers/user.selector';
@@ -212,7 +212,7 @@ Header.defaultProps = {
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
   currentUser: state.user.data,
-  isAdmin: getIsAdmin(state),
+  isAdmin: getIsFedAdmin(state),
   currentState: getUserStateOrTerritory(state),
   canViewStateAdmin: getCanUserViewStateAdmin(state),
   pathname: state.router.location.pathname
