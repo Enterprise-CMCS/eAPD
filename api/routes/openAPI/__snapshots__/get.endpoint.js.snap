@@ -542,6 +542,79 @@ Object {
   },
   "openapi": "3.0.0",
   "paths": Object {
+    "/affiliations/me": Object {
+      "get": Object {
+        "description": "Get the current affiliations for the logged in user",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "created_at": Object {
+                        "description": "Timestamp of record creation",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "id": Object {
+                        "description": "ID of record",
+                        "type": "integer",
+                      },
+                      "role_id": Object {
+                        "description": "ID of the role applied to this user for this US State",
+                        "type": "integer",
+                      },
+                      "state_id": Object {
+                        "description": "2-letter US State or Territory abbreviation, lowercase",
+                        "type": "string",
+                      },
+                      "status": Object {
+                        "description": "The status of the user role for this US State",
+                        "enum": Array [
+                          "requested",
+                          "approved",
+                          "denied",
+                          "revoked",
+                        ],
+                        "type": "string",
+                      },
+                      "updated_at": Object {
+                        "description": "Timestamp of last update",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "updated_by": Object {
+                        "description": "ID of the user who last updated this record",
+                        "type": "string",
+                      },
+                      "user_id": Object {
+                        "description": "ID of user",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "A list of affiliations for the logged in user",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+    },
     "/apds": Object {
       "get": Object {
         "description": "Get a list of all apds associated with requesting user",
@@ -1411,6 +1484,9 @@ Object {
           },
           "401": Object {
             "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "Unauthorized, the user does not have permission to access this state.  Switching states may resolve the issue.",
           },
           "404": Object {
             "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
