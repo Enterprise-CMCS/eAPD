@@ -19,7 +19,7 @@ import Loading from '../components/Loading';
 import { getAPDId } from '../reducers/apd';
 
 import {
-  getIsAdmin,
+  getIsFedAdmin,
   getUserStateOrTerritory,
   getCanUserEditAPD
 } from '../reducers/user.selector';
@@ -117,7 +117,7 @@ ApdApplication.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  isAdmin: getIsAdmin(state),
+  isAdmin: getIsFedAdmin(state),
   isEditor: getCanUserEditAPD(state),
   place: getUserStateOrTerritory(state),
   apdId: getAPDId(state),

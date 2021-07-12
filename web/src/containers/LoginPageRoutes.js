@@ -99,6 +99,7 @@ const LoginPageRoutes = ({
             cancelAction={handleLogout}
             errorMessage={errorMessage}
             fetching={fetching}
+            secondaryButtonText="Back to Login"
           />
         </Route>
 

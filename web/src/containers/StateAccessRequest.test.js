@@ -5,7 +5,8 @@ import StateAccessRequest from './StateAccessRequest';
 const defaultProps = {
   errorMessage: null,
   saveAction: jest.fn(),
-  fetching: false
+  fetching: false,
+  secondaryButtonText: "Back to Login"
 };
 
 
@@ -125,9 +126,14 @@ describe('<StateAccessRequest />', () => {
     expect(getByLabelText('Select your State Affiliation')).toBeTruthy();
   });
 
-  test('Back to Login button renders', () => {
+  test('Secondary button renders the right text', () => {
     const { getByText } = setup();
     expect(getByText(/Back to Login/i)).toBeTruthy();
+  });
+
+  test('Back to Login button renders', () => {
+    const { getByText } = setup({secondaryButtonText:"This is a secondary button"});
+    expect(getByText(/This is a secondary button/i)).toBeTruthy();
   });
 
   it('renders the input when entered', () => {

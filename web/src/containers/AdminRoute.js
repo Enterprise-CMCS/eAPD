@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getIsAdmin } from '../reducers/user.selector';
+import { getIsFedAdmin } from '../reducers/user.selector';
 import NoMatch from '../components/NoMatch';
 
 const AdminRoute = ({
@@ -43,7 +43,7 @@ AdminRoute.propTypes = {
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
-  isAdmin: getIsAdmin(state)
+  isAdmin: getIsFedAdmin(state)
 });
 
 export default connect(mapStateToProps)(AdminRoute);
