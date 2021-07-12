@@ -167,6 +167,22 @@ const getAffiliation = {
   }
 };
 
+const getMyAffiliations = {
+  get: {
+    tags,
+    description: 'Get the current affiliations for the logged in user',
+
+    responses: {
+      200: {
+        description: 'A list of affiliations for the logged in user',
+        content: jsonResponse(arrayOf(affiliationSchema))
+      },
+      401: {...responses.unauthed[401]}
+    },
+    security: [{ bearerAuth: [] }]
+  }
+};
+
 const patchAffiliation = {
   patch: {
     tags,
@@ -205,6 +221,9 @@ const affiliationRoutes = {
   '/states/{stateId}/affiliations/{id}': {
     ...getAffiliation,
     ...patchAffiliation
+  },
+  '/affiliations/me': {
+    ...getMyAffiliations
   }
 };
 
