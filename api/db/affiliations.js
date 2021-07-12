@@ -14,57 +14,68 @@ const selectedColumns = [
   'okta_users.secondEmail as secondEmail',
   'okta_users.primaryPhone as primaryPhone',
   'okta_users.mobilePhone as mobilePhone',
-  'okta_users.email as email',
-
+  'okta_users.email as email'
 ];
 
 const statusConverter = {
-  'pending': ['requested'],
-  'active': ['approved'],
-  'inactive': ['denied', 'revoked']
-}
+  pending: ['requested'],
+  active: ['approved'],
+  inactive: ['denied', 'revoked'],
+  null: ['requested', 'approved', 'denied', 'revoked']
+};
 
-const getAffiliationsByStateId = ({ stateId, status, db = knex, isAdmin = false }) => {
-  let query = db('auth_affiliations')
-                .select(selectedColumns)
-                .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-                .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+const getAffiliationsByStateId = ({
+  stateId,
+  status = null,
+  isFedAdmin = false,
+  db = knex
+}) => {
+  const query = db('auth_affiliations')
+    .select(selectedColumns)
+    .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+    .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id');
 
-  if (!isAdmin){
-      query = query.whereNot('auth_roles.name', 'eAPD System Admin')
-  }
-  if (status === 'pending') {
-    return query.where({
-        state_id: stateId,
-        status: 'requested'
+  // No one should see the Sys Admins in the Admin Panel, if isFedAdmin is null, then the user is
+  // a State Admin and they shouldn't see Federal Admins
+  const skipRoles = isFedAdmin
+    ? ['eAPD System Admin']
+    : ['eAPD System Admin', 'eAPD Federal Admin'];
+  // Get the list of statuses to query
+  const affiliationStatuses = statusConverter[status] || null;
+
+  if (affiliationStatuses) {
+    return query
+      .whereIn('status', affiliationStatuses)
+      .andWhere('state_id', stateId)
+      .andWhere(builder => {
+        // Where the role isn't in the skip roles or is null
+        builder
+          .whereNotIn('auth_roles.name', skipRoles)
+          .orWhereNull('auth_roles.name');
       });
   }
-  if (status === 'active') {
-    return query.where({
-        state_id: stateId,
-        status: 'approved'
-      });
-  }
-  if (status === 'inactive') {
-    return query.whereIn(
-        ['state_id', 'status'],
-        statusConverter[status].map(thisStatus => [stateId, thisStatus])
-      );
-  }
-  if (status) {
-    logger.error(`invalid status ${status}`);
-    return []
-  }
-  return query.where({ state_id: stateId });
+
+  logger.error(`invalid status ${status}`);
+  return [];
 };
 
 const getPopulatedAffiliationsByStateId = ({
   stateId,
   status,
-  isAdmin,
+  isFedAdmin,
   getAffiliationsByStateId_ = getAffiliationsByStateId
 }) => {
-  return getAffiliationsByStateId_({ stateId, status, isAdmin });
+  return getAffiliationsByStateId_({ stateId, status, isFedAdmin });
+};
+
+const getAffiliationsByUserId = (userId, {db = knex } = {}) => {
+  return db('auth_affiliations')
+    .select(selectedColumns)
+    .where('auth_affiliations.user_id', userId )
+    .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+    .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+
+
 };
 
 const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
@@ -79,15 +90,11 @@ const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
     .first();
 };
 
-const getPopulatedAffiliationById = ({
-  stateId,
-  affiliationId,
-  db = knex
-}) => {
+const getPopulatedAffiliationById = ({ stateId, affiliationId, db = knex }) => {
   return getAffiliationById({ stateId, affiliationId, db });
 };
 
-const reduceAffiliations = affiliations =>{
+const reduceAffiliations = affiliations => {
   // combine affiliations for each user.
   // many fields are omitted for clarity
   // Given:
@@ -95,26 +102,29 @@ const reduceAffiliations = affiliations =>{
   // becomes
   // [{userId:1, affiliations: [{stateId:'ak'}, {stateId:'md'}]}, {userId:2, affiliations:[{stateId:'ak'}]}]
   const reducer = (results, affiliation) => {
-    const stateAffiliation = {role: affiliation.role, stateId: affiliation.stateId, status: affiliation.status}
+    const stateAffiliation = {
+      role: affiliation.role,
+      stateId: affiliation.stateId,
+      status: affiliation.status
+    };
     // If this user ID is not in the object add it and create an
     // affiliations array with just this affiliation in it.
-    if(!Object.prototype.hasOwnProperty.call(results, affiliation.userId)){
-
+    if (!Object.prototype.hasOwnProperty.call(results, affiliation.userId)) {
       // eslint-disable-next-line no-param-reassign
       results[affiliation.userId] = {
         ...affiliation,
-        affiliations: [stateAffiliation,]
-      }
-      return results
+        affiliations: [stateAffiliation]
+      };
+      return results;
     }
     // add this affiliation to this user's list of affiliations
-    results[affiliation.userId].affiliations.push(stateAffiliation)
-    return results
-  }
-  const results = {}
-  affiliations.reduce(reducer, results)
-  return Object.values(results)
-}
+    results[affiliation.userId].affiliations.push(stateAffiliation);
+    return results;
+  };
+  const results = {};
+  affiliations.reduce(reducer, results);
+  return Object.values(results);
+};
 
 const getAllAffiliations = async ({ status, db = knex } = {}) => {
   const query = db('auth_affiliations')
@@ -122,32 +132,27 @@ const getAllAffiliations = async ({ status, db = knex } = {}) => {
     .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
     .select(selectedColumns);
 
-  if (status){
-    if (!Object.keys(statusConverter).includes(status)){
+  if (status) {
+    if (!Object.keys(statusConverter).includes(status)) {
       logger.error(`invalid status ${status}`);
-      return []
+      return [];
     }
-    return query.whereIn(
-      'status',
-      statusConverter[status]
-    )
+    return query.whereIn('status', statusConverter[status]);
   }
 
-    return query
-  
+  return query;
 };
 
 const getAllPopulatedAffiliations = async ({
-    status,
-    db = knex,
-    getAllAffiliations_ = getAllAffiliations,
-    reduceAffiliations_ = reduceAffiliations
-  }) => {
+  status,
+  db = knex,
+  getAllAffiliations_ = getAllAffiliations,
+  reduceAffiliations_ = reduceAffiliations
+}) => {
   const affiliations = await getAllAffiliations_({ status, db });
   if (!affiliations) return null;
-  return reduceAffiliations_(affiliations)
+  return reduceAffiliations_(affiliations);
 };
-
 
 module.exports = {
   getAffiliationsByStateId,
@@ -157,5 +162,6 @@ module.exports = {
   getAllAffiliations,
   reduceAffiliations,
   getAllPopulatedAffiliations,
+  getAffiliationsByUserId,
   selectedColumns
 };
