@@ -2,7 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import oktaAuth from './oktaAuth';
-import { MFA_FACTORS } from '../constants';
+import {
+  MFA_FACTORS,
+  API_COOKIE_NAME,
+  CONSENT_COOKIE_NAME
+} from '../constants';
 
 export const INACTIVITY_LIMIT = 300000;
 export const EXPIRE_EARLY_SECONDS = 300;
@@ -26,9 +30,6 @@ export const getIdToken = () => oktaAuth.getIdToken();
 
 // Cookie Methods
 
-const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
-const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
-
 const getConfig = () => {
   let config;
   if (
@@ -43,12 +44,11 @@ const getConfig = () => {
   } else {
     config = { sameSite: 'strict' };
   }
-
   return config;
 };
 const COOKIE_CONFIG = getConfig();
 
-const setCookie = accessToken => {
+export const setCookie = accessToken => {
   if (navigator.cookieEnabled) {
     Cookies.set(
       API_COOKIE_NAME,
@@ -58,7 +58,14 @@ const setCookie = accessToken => {
   }
 };
 
-const removeCookie = () => {
+export const getCookie = name => {
+  if (navigator.cookieEnabled) {
+    return Cookies.get(name);
+  }
+  return null;
+};
+
+export const removeCookie = () => {
   if (navigator.cookieEnabled) {
     Cookies.remove(API_COOKIE_NAME, COOKIE_CONFIG);
   }

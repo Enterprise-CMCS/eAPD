@@ -17,6 +17,7 @@ import Icon, {
   faChevronDown,
   faChevronLeft,
   faSignOutAlt,
+  faPeopleArrows,
   faEdit,
   faUserShield
 } from './Icons';
@@ -146,9 +147,22 @@ class Header extends Component {
                               <Icon
                                 icon={faEdit}
                                 style={{ width: '14px' }}
-                              />
+                                />
                               Manage Account
-                            </Link>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/select-affiliation"
+                            onClick={this.toggleDropdown}
+                            className="nav--dropdown__action"
+                            >
+                              <Icon
+                                icon={faPeopleArrows}
+                                style={{ width: '14px' }}
+                              />
+                              Switch State Affiliation
+                          </Link>
                         </li>
                         <li>
                           <Link
@@ -197,7 +211,7 @@ Header.defaultProps = {
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
-  currentUser: state.auth.user,
+  currentUser: state.user.data,
   isAdmin: getIsAdmin(state),
   currentState: getUserStateOrTerritory(state),
   canViewStateAdmin: getCanUserViewStateAdmin(state),
