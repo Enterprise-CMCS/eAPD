@@ -56,10 +56,10 @@ describe('<StateAccessRequest />', () => {
 
     const { getByRole, getByText } = setupWithCustomState;
     expect(getByRole('heading', { name: 'Manage Account' })).toBeTruthy();
-    expect(getByText('Current Affiliations')).toBeTruthy();
+    expect(getByText('Existing Affiliations')).toBeTruthy();
   });
 
-  it('renders the current affiliations', () => {
+  it('renders existing affiliations', () => {
     setupWithCustomState = renderWithConnection(<StateAccessRequest />,
         {
           initialState: {
@@ -68,9 +68,15 @@ describe('<StateAccessRequest />', () => {
                 affiliations: [
                   {
                     state_id: 'az',
+                    status: 'approved'
                   },
                   {
                     state_id: 'md',
+                    status: 'revoked'
+                  },
+                  {
+                    state_id: 'ak',
+                    status: 'requested'
                   }
                 ]
               }
@@ -80,13 +86,43 @@ describe('<StateAccessRequest />', () => {
       );
 
     const { getByText } = setupWithCustomState;
+    expect(getByText('Active')).toBeTruthy();
     expect(getByText('Arizona')).toBeTruthy();
+    expect(getByText('Revoked')).toBeTruthy();
     expect(getByText('Maryland')).toBeTruthy();
+    expect(getByText('Pending')).toBeTruthy();
+    expect(getByText('Alaska')).toBeTruthy();
+  });
+
+  it('renders message when no affiliations exist per status', () => {
+    setupWithCustomState = renderWithConnection(<StateAccessRequest />,
+        {
+          initialState: {
+            user: {
+              data: {
+                affiliations: [
+                  {
+                    state_id: 'ak',
+                    status: 'requested'
+                  },
+                  {
+                    state_id: 'ak',
+                    status: 'revoked'
+                  }
+                ]
+              }
+            }
+          }
+        }
+      );
+
+    const { getByText } = setupWithCustomState;
+    expect(getByText('No active affiliations')).toBeTruthy();
   });
 
   it('renders label', () => {
     const { getByLabelText } = setup();
-    expect(getByLabelText('Select your State Affiliation.')).toBeTruthy();
+    expect(getByLabelText('Select your State Affiliation')).toBeTruthy();
   });
 
   test('Back to Login button renders', () => {
@@ -96,14 +132,14 @@ describe('<StateAccessRequest />', () => {
 
   it('renders the input when entered', () => {
     const { getByLabelText } = setup();
-    const input = getByLabelText('Select your State Affiliation.');
+    const input = getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Al' } });
     expect(input.value).toBe('Al');
   });
 
   it('renders the selection badge when an item is picked', () => {
     const { getByText, getByLabelText } = setup();
-    const input = getByLabelText('Select your State Affiliation.');
+    const input = getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Alabama' } });
     fireEvent.click(getByText('Alabama'));
     expect(getByText('Alabama')).toBeTruthy();
@@ -111,14 +147,14 @@ describe('<StateAccessRequest />', () => {
 
   it('renders the no results on an invalid entry', () => {
     const { getByText, getByLabelText } = setup();
-    const input = getByLabelText('Select your State Affiliation.');
+    const input = getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'invalid123999' } });
     expect(getByText('No results')).toBeTruthy();
   });
 
   it('properly removes a selection', () => {
     const { getByText, getByLabelText, getByRole, queryByText } = setup();
-    const input = getByLabelText('Select your State Affiliation.');
+    const input = getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Alabama' } });
     fireEvent.click(getByText('Alabama'));
     fireEvent.click(getByRole('button', { name: 'Remove Alabama' }));
@@ -127,7 +163,7 @@ describe('<StateAccessRequest />', () => {
 
   it('renders the submit button as disabled until a selection is made', () => {
     const { getByText, getByLabelText } = setup();
-    const input = getByLabelText('Select your State Affiliation.');
+    const input = getByLabelText('Select your State Affiliation');
     expect(getByText('Submit')).toHaveAttribute('disabled');
     fireEvent.change(input, { target: { value: 'Al' } });
     fireEvent.click(getByText('Alabama'));
