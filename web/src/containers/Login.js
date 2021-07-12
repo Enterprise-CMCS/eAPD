@@ -1,16 +1,17 @@
-import { TextField } from '@cmsgov/design-system';
+import { TextField, Alert } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 
 import LoginForm from '../components/LoginForm';
 import Password from '../components/PasswordWithMeter';
 import UpgradeBrowser from '../components/UpgradeBrowser';
 
-import { apiUrl } from '../util/api';
+import axios, { apiUrl } from '../util/api';
 
 const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [systemDown, setSystemDown] = useState(false)
 
   const changeUsername = ({ target: { value } }) => setUsername(value);
   const changePassword = ({ target: { value } }) => setPassword(value);
@@ -33,6 +34,17 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
       });
   };
 
+  useEffect(() => {
+    axios
+      .get('/heartbeat')
+      .then(() => {
+
+      })
+      .catch(() => {
+        setSystemDown(true)
+      });
+  }, [])
+
   return (
     <main id="start-main-content">
       <UpgradeBrowser />
@@ -42,7 +54,7 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
         legend="Log in"
         cancelable={false}
         className="ds-u-margin-top--7"
-        canSubmit={!!username && !!password}
+        canSubmit={!systemDown && !!username && !!password}
         error={errorMessage}
         success={hasEverLoggedOn ? 'You have securely logged out.' : null}
         working={fetching}
@@ -89,6 +101,9 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
           </Fragment>
         }
       >
+        {
+          systemDown && <Alert variation="error" className="ds-u-margin-top--2">The eAPD system is down, try again later.</Alert>
+        }
         <TextField
           id="username"
           label="EUA ID"
@@ -96,6 +111,7 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
           ariaLabel="Enter your EUA ID."
           value={username}
           onChange={changeUsername}
+          disabled={systemDown}
         />
         <Password
           id="password"
@@ -103,6 +119,7 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
           errorMessage={null}
           value={password}
           onChange={changePassword}
+          disabled={systemDown}
         />
         <p>
           Forgot password?{' '}
