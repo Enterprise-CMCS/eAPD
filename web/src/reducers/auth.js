@@ -1,4 +1,5 @@
 import {
+  AUTH_CHECK_REQUEST,
   LOGIN_REQUEST,
   LOGIN_OTP_STAGE,
   LOGIN_MFA_REQUEST,
@@ -10,7 +11,6 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   STATE_ACCESS_REQUIRED,
-  STATE_ACCESS_REQUEST,
   LATEST_ACTIVITY,
   SESSION_ENDING_ALERT,
   REQUEST_SESSION_RENEWAL,
@@ -28,17 +28,20 @@ const initialState = {
   mfaPhoneNumber: '',
   mfaEnrollType: '',
   verifyData: {},
-  selectState: false,
   latestActivity: new Date().getTime(),
   isLoggingOut: false,
   isSessionEnding: false,
   isExtendingSession: false,
-  user: null,
   expiresAt: null
 };
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_CHECK_REQUEST:
+      return {
+        ...state,
+        initialCheck: true
+      }
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -89,7 +92,7 @@ const auth = (state = initialState, action) => {
         authenticated: true,
         fetching: false,
         hasEverLoggedOn: true,
-        user: action.data
+        initialCheck: true
       };
     case LOGIN_FAILURE:
       return {
@@ -100,7 +103,8 @@ const auth = (state = initialState, action) => {
     case LOGOUT_REQUEST:
       return {
         ...state,
-        isLoggingOut: true
+        isLoggingOut: true,
+        initialCheck: true
       };
     case LOGOUT_SUCCESS:
       return {
@@ -108,23 +112,17 @@ const auth = (state = initialState, action) => {
         authenticated: false,
         error: null,
         hasEverLoggedOn: true,
-        initialCheck: false,
+        initialCheck: true,
         latestActivity: null,
         expiresAt: null,
         isSessionEnding: false,
         isExtendingSession: false,
-        isLoggingOut: false,
-        user: null
+        isLoggingOut: false
       };
     case STATE_ACCESS_REQUIRED:
       return {
         ...state,
         fetching: false
-      };
-    case STATE_ACCESS_REQUEST:
-      return {
-        ...state,
-        fetching: true
       };
     case LATEST_ACTIVITY:
       return {

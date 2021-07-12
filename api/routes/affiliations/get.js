@@ -2,16 +2,18 @@ const logger = require('../../logger')('affiliations route get');
 const {
   getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
   getPopulatedAffiliationById: _getPopulatedAffiliationsById,
-  getAllPopulatedAffiliations: _getAllPopulatedAffiliations
+  getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
+  getAffiliationsByUserId: _getAffiliationsByUserId,
 } = require('../../db');
-const { can, validForState } = require('../../middleware');
+const { loggedIn, can, validForState } = require('../../middleware');
 
 module.exports = (
   app,
   {
     getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,
     getPopulatedAffiliationById = _getPopulatedAffiliationsById,
-    getAllPopulatedAffiliations = _getAllPopulatedAffiliations
+    getAllPopulatedAffiliations = _getAllPopulatedAffiliations,
+    getAffiliationsByUserId = _getAffiliationsByUserId,
   } = {}
 ) => {
   app.get(
@@ -76,4 +78,22 @@ module.exports = (
       }
     }
   );
+
+  app.get(
+    '/affiliations/me',
+    loggedIn,
+    async (request, response, next) => {
+      logger.info({
+        id: request.id,
+        message: `handling GET /me endpoint}`
+      });
+      try {
+        const resp = await getAffiliationsByUserId(request.user.id)
+        return response.send(resp)
+      }
+      catch(e){
+        return next(e)
+      }
+    })
+
 };

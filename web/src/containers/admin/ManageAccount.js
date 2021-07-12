@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { updateAccessRequest as actualUpdateAccessRequest } from '../../actions/auth';
+import {
+  createAccessRequest as actualCreateAccessRequest,
+  completeAccessRequest as actualCompleteAccessRequest
+} from '../../actions/auth';
 
 import StateAccessRequest from '../StateAccessRequest';
 import StateAccessRequestConfirmation from '../StateAccessRequestConfirmation';
@@ -13,6 +16,8 @@ import { goToDashboard } from '../../actions/app';
 
 const ManageAccount = ({
   currentAffiliations, 
+  createAccessRequest,
+  completeAccessRequest,
   updateAccessRequest,
   error,
   isAdmin,
@@ -25,12 +30,12 @@ const ManageAccount = ({
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleCreateAccessRequest = async states => {
-    await updateAccessRequest(states).then(() => {
-      setShowConfirmation(true);
-    });
+    const response = await createAccessRequest(states);
+    if (response) { setShowConfirmation(true) };
   };
 
-  const handleCompleteAccessRequest = () => {
+  const handleCompleteAccessRequest = async () => {
+    await completeAccessRequest();
     history.push('/');
   };
 
@@ -70,6 +75,8 @@ ManageAccount.defaultProps = {
 
 ManageAccount.propTypes = {
   currentAffiliations: PropTypes.array.isRequired,
+  createAccessRequest: PropTypes.func.isRequired,
+  completeAccessRequest: PropTypes.func.isRequired,
   updateAccessRequest: PropTypes.func.isRequired,
   error: PropTypes.string,
   isAdmin: PropTypes.bool.isRequired,
@@ -80,6 +87,8 @@ ManageAccount.propTypes = {
 const mapDispatchToProps = {
   updateAccessRequest: actualUpdateAccessRequest,
   dashboard: goToDashboard
+  createAccessRequest: actualCreateAccessRequest,
+  completeAccessRequest: actualCompleteAccessRequest
 };
 
 const mapStateToProps = state => ({
