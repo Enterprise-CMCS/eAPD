@@ -15,6 +15,7 @@ Anticipated release: July 9, 2021
 - Images don't load unless you refresh page after logging in ([#3180])
 - Removes "Federal" as an option for State Medicaid address ([#3181])
 - Revoking a user's access is causing them to disappear and not show in the Inactive tab ([#3238])
+- Fixed issue with not storing okta data on login ([#3242])
 
 #### ⚙️ Behind the scenes
 
@@ -29,6 +30,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2581]: https://github.com/CMSgov/eAPD/issues/2581
 [#2996]: https://github.com/CMSgov/eAPD/issues/2996
 [#3030]: https://github.com/CMSgov/eAPD/issues/3030
+[#3242]: https://github.com/CMSgov/eAPD/issues/3242
 [#3223]: https://github.com/CMSgov/eAPD/issues/3223
 [#3181]: https://github.com/CMSgov/eAPD/issues/3181
 [#3204]: https://github.com/CMSgov/eAPD/issues/3204

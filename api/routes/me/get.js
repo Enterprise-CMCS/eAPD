@@ -5,13 +5,17 @@ const {
   exchangeToken,
   verifyWebToken
 } = require('../../auth/jwtUtils');
+const { createOrUpdateOktaUserFromOkta } = require('../../db/oktaUsers')
+
 
 module.exports = (
   app,
   {
     extractor = jwtExtractor,
     verifier = verifyEAPDToken,
-    tokenExchanger = exchangeToken
+    tokenExchanger = exchangeToken,
+    updateFromOkta = createOrUpdateOktaUserFromOkta
+
   } = {}
 ) => {
   logger.debug('setting up GET endpoint');
@@ -20,6 +24,7 @@ module.exports = (
       const jwt = extractor(req);
       const claims = jwt ? await verifyWebToken(jwt, { verifier }) : false;
       if (!claims) return res.status(401).end();
+      await updateFromOkta(claims.id)
       res.send(claims);
     } catch (error) {
       res.status(500).send(error);
