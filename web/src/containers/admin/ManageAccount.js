@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import {
   createAccessRequest as actualCreateAccessRequest,
-  completeAccessRequest as actualCompleteAccessRequest
+  completeAccessRequest as actualCompleteAccessRequest,
 } from '../../actions/auth';
 
 import StateAccessRequest from '../StateAccessRequest';
@@ -18,7 +18,6 @@ const ManageAccount = ({
   currentAffiliations, 
   createAccessRequest,
   completeAccessRequest,
-  updateAccessRequest,
   error,
   isAdmin,
   currentUser,
@@ -31,7 +30,7 @@ const ManageAccount = ({
 
   const handleCreateAccessRequest = async states => {
     const response = await createAccessRequest(states);
-    if (response) { setShowConfirmation(true) };
+    if (response) { setShowConfirmation(true) }
   };
 
   const handleCompleteAccessRequest = async () => {
@@ -77,7 +76,6 @@ ManageAccount.propTypes = {
   currentAffiliations: PropTypes.array.isRequired,
   createAccessRequest: PropTypes.func.isRequired,
   completeAccessRequest: PropTypes.func.isRequired,
-  updateAccessRequest: PropTypes.func.isRequired,
   error: PropTypes.string,
   isAdmin: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
@@ -85,8 +83,7 @@ ManageAccount.propTypes = {
 };
 
 const mapDispatchToProps = {
-  updateAccessRequest: actualUpdateAccessRequest,
-  dashboard: goToDashboard
+  dashboard: goToDashboard,
   createAccessRequest: actualCreateAccessRequest,
   completeAccessRequest: actualCompleteAccessRequest
 };

@@ -135,7 +135,10 @@ describe('Header component', () => {
 
     expect(mapStateToProps(state)).toEqual({
       authenticated: 'some value',
-      currentUser: { role: 'admin' },
+      currentUser: {
+        role: 'admin',
+        state: { id: 'md', name: 'Maryland' }
+      },
       isAdmin: false,
       currentState: { id: 'md', name: 'Maryland' },
       canViewStateAdmin: null,
@@ -166,7 +169,10 @@ describe('Header component', () => {
 
     expect(mapStateToProps(state)).toEqual({
       authenticated: 'some value',
-      currentUser: { role: 'eAPD Federal Admin' },
+      currentUser: {
+        role: 'eAPD Federal Admin',
+        state: { id: 'md', name: 'Maryland' }
+      },
       isAdmin: true,
       currentState: { id: 'md', name: 'Maryland' },
       canViewStateAdmin: null,
