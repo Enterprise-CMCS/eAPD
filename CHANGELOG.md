@@ -6,6 +6,7 @@ Anticipated release: July 9, 2021
 
 - Allow switching between states/affiliations when applicable ([#2581])
 - Update the delete process for FFY ([#2996])
+- New design updates to Manage Account page ([#3204])
 - updated Assurance and Compliance text on APD review and export screen to show more detailed information. ([#3169]))
 
 #### 🐛 Bugs fixed
@@ -27,9 +28,10 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2581]: https://github.com/CMSgov/eAPD/issues/2581
 [#2996]: https://github.com/CMSgov/eAPD/issues/2996
 [#3030]: https://github.com/CMSgov/eAPD/issues/3030
+[#3181]: https://github.com/CMSgov/eAPD/issues/3181
+[#3204]: https://github.com/CMSgov/eAPD/issues/3204
+[#3207]: https://github.com/CMSgov/eAPD/issues/3207
 [#3180]: https://github.com/CMSgov/eAPD/issues/3180
 [#3181]: https://github.com/CMSgov/eAPD/issues/3181
 [#3169]: https://github.com/CMSgov/eAPD/issues/3169
 [#3238]: https://github.com/CMSgov/eAPD/issues/3238
-
-[#3207]: https://github.com/CMSgov/eAPD/issues/3207
