@@ -68,7 +68,6 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.8.7",
     "@cmsgov/design-system": "^2.5.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
