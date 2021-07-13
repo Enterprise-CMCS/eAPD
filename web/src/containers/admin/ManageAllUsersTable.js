@@ -50,9 +50,9 @@ const ManageUserTable = ({
             {affiliations.map(affiliation => (
               <Fragment>
                 <TableRow key={affiliation.id}>
-                  <th style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.displayName}</th>
-                  <th style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.email}</th>
-                  <th style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.primaryPhone}</th>
+                  <TableCell component='th' style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.displayName}</TableCell>
+                  <TableCell component='td' style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.email}</TableCell>
+                  <TableCell component='td' style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.primaryPhone}</TableCell>
                   <TableCell>
                       {affiliation.affiliations[0].role}
                     </TableCell>

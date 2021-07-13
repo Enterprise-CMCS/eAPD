@@ -53,6 +53,7 @@ const FederalAdmin = ({
   };
 
   const showManageModal = event => {
+    console.log("event passed to modal", event)
     // Need to get the specific affiliation state/role
     const currentAffiliation = currentAffiliations.find(element => {
       return (
