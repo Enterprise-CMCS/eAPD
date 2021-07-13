@@ -25,6 +25,7 @@ const SelectAffiliation = ({
   const [selectedAffiliation, setSelectedAffiliation] = useState(currentStateId);
   const [availableAffiliations, setAvailableAffiliations] = useState([])
 
+
   useEffect( ()=>{
     const fetchData = async () => {
       const affiliations = await axios.get('/affiliations/me')
