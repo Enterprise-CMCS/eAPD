@@ -92,7 +92,7 @@ const mapStateToProps = state => ({
   currentAffiliations: state.user.data.affiliations,
   error: state.auth.error,
   isAdmin: getIsFedAdmin(state),
-  currentUser: state.auth.user,
+  currentUser: state.user,
 
 });
 
