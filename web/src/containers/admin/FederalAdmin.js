@@ -1,15 +1,253 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Button, Tabs, TabPanel } from '@cmsgov/design-system';
 
-// Note: This component is a placeholder until we implement it in story #2812
-const FederalAdmin = () => {
+import {
+  getRoleTypes,
+  getAffiliations,
+  updateAffiliation
+} from '../../actions/admin';
 
+import { getUserStateOrTerritory } from '../../reducers/user.selector';
+
+import ManageRoleDialog from './ManageRoleDialog';
+import ConfirmationDialog from './ConfirmationDialog';
+import ManageAllUsersTable from './ManageAllUsersTable';
+
+
+const FederalAdmin = ({
+  currentState,
+  currentUser,
+  currentAffiliations,
+  roleTypes,
+  getRoleTypes: fetchTypes,
+  getAffiliations: affiliations,
+  updateAffiliation: actualUpdateAffiliation
+}) => {
+  const [activeTab, setActiveTab] = useState('pending');
+  const [isFetching, setIsFetching] = useState(true);
+  const [isDenied, setIsDenied] = useState(true);
+
+  const [selectedAffiliation, setSelectedAffiliation] = useState();
+
+  const [manageModalDisplay, setManageModalDisplay] = useState(false);
+  const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(
+    false
+  );
+
+  useEffect(() => {
+    setIsFetching(true);
+    async function fetchAffiliations() {
+      await affiliations(currentState.id, activeTab);
+    }
+    fetchAffiliations().then(() => setIsFetching(false));
+  }, [activeTab]);
+
+  useEffect(() => {
+    fetchTypes();
+  }, []);
+
+  const currentTab = id => {
+    setActiveTab(id);
+  };
+
+  const showManageModal = event => {
+    // Need to get the specific affiliation state/role
+    const currentAffiliation = currentAffiliations.find(element => {
+      return (
+        element.id === Number(event.target.parentNode.getAttribute('data-id'))
+      );
+    });
+    setSelectedAffiliation(currentAffiliation);
+    setManageModalDisplay(true);
+  };
+
+  const hideManageModal = () => {
+    setManageModalDisplay(false);
+  };
+
+  const handleAffiliationUpdate = roleId => {
+    async function saveAffiliation() {
+      await actualUpdateAffiliation(
+        currentState.id,
+        selectedAffiliation.id,
+        roleId,
+        'approved'
+      );
+    }
+    saveAffiliation().then(() => {
+      affiliations(currentState.id, activeTab);
+      setManageModalDisplay(false);
+    });
+  };
+
+  const showConfirmationModal = event => {
+    const checkIsDenied =
+      event.target.getAttribute('data-deny-or-revoke') === 'deny';
+    setIsDenied(checkIsDenied);
+
+    const currentAffiliation = currentAffiliations.find(element => {
+      return (
+        element.id === Number(event.target.parentNode.getAttribute('data-id'))
+      );
+    });
+    setSelectedAffiliation(currentAffiliation);
+    setConfirmationModalDisplay(true);
+  };
+
+  const hideConfirmationModal = () => {
+    setConfirmationModalDisplay(false);
+  };
+
+  const handleDenyOrRevoke = () => {
+    const permissionChangeType = isDenied ? 'denied' : 'revoked';
+
+    async function saveAffiliation() {
+      await actualUpdateAffiliation(
+        currentState.id,
+        selectedAffiliation.id,
+        -1,
+        permissionChangeType
+      );
+    }
+    saveAffiliation().then(() => {
+      affiliations(currentState.id, activeTab);
+      setConfirmationModalDisplay(false);
+    });
+  };
+  
   return (
-    <div className="site-body ds-l-container">
-      <main id="start-main-content">
-        <h2>Federal admin panel coming soon...</h2>
-      </main>
-    </div>
+    <main>
+      <Tabs onChange={currentTab}>
+        <TabPanel id="pending" tab="Requests">
+          <ManageAllUsersTable
+            tab="pending"
+            affiliations={currentAffiliations}
+            currentUser={currentUser}
+            updateAffiliation={actualUpdateAffiliation}
+            isFetching={isFetching}
+            actions={[
+              <Button
+                onClick={showManageModal}
+                size="small"
+                className="ds-u-margin-right--2"
+                key="action1"
+              >
+                Approve
+              </Button>,
+              <Button
+                onClick={showConfirmationModal}
+                size="small"
+                variation="danger"
+                data-deny-or-revoke="deny"
+                key="action2"
+              >
+                Deny
+              </Button>
+            ]}
+          />
+        </TabPanel>
+        <TabPanel id="active" tab="Active">
+          <ManageAllUsersTable
+            tab="active"
+            affiliations={currentAffiliations}
+            currentUser={currentUser}
+            updateAffiliation={actualUpdateAffiliation}
+            isFetching={isFetching}
+            actions={[
+              <Button
+                onClick={showManageModal}
+                size="small"
+                className="ds-u-margin-right--2"
+                key="action1"
+              >
+                Edit Role
+              </Button>,
+              <Button
+                onClick={showConfirmationModal}
+                size="small"
+                variation="danger"
+                className="ds-u-margin-right--2"
+                data-deny-or-revoke="revoke"
+                key="action2"
+              >
+                Revoke
+              </Button>
+            ]}
+          />
+        </TabPanel>
+        <TabPanel id="inactive" tab="Inactive">
+          <ManageAllUsersTable
+            tab="inactive"
+            affiliations={currentAffiliations}
+            currentUser={currentUser}
+            updateAffiliation={actualUpdateAffiliation}
+            isFetching={isFetching}
+            actions={[
+              <Button
+                onClick={showManageModal}
+                size="small"
+                className="ds-u-margin-right--2"
+                key="action1"
+              >
+                Restore Access
+              </Button>
+            ]}
+          />
+        </TabPanel>
+      </Tabs>
+
+      {confirmationModalDisplay && (
+        <ConfirmationDialog
+          hideConfirmationModal={hideConfirmationModal}
+          showConfirmationModal={showConfirmationModal}
+          isDenied={isDenied}
+          handleDenyOrRevoke={handleDenyOrRevoke}
+          selectedAffiliation={selectedAffiliation}
+        />
+      )}
+
+      {manageModalDisplay && (
+        <ManageRoleDialog
+          roleTypes={roleTypes}
+          hideManageModal={hideManageModal}
+          showManageModal={showManageModal}
+          handleAffiliationUpdate={handleAffiliationUpdate}
+          selectedAffiliation={selectedAffiliation}
+        />
+      )}
+    </main>
   );
 };
 
-export default FederalAdmin;
+FederalAdmin.propTypes = {
+  getAffiliations: PropTypes.func.isRequired,
+  getRoleTypes: PropTypes.func.isRequired,
+  updateAffiliation: PropTypes.func.isRequired,
+  currentState: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
+  currentAffiliations: PropTypes.array.isRequired,
+  roleTypes: PropTypes.array.isRequired
+};
+
+FederalAdmin.defaultProps = {
+  currentUser: null
+};
+
+const mapDispatchToProps = {
+  getAffiliations,
+  updateAffiliation,
+  getRoleTypes
+};
+
+const mapStateToProps = state => ({
+  roleTypes: state.admin.roleTypes,
+  currentState: getUserStateOrTerritory(state),
+  currentAffiliations: state.admin.affiliations,
+  currentUser: state.user.data
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FederalAdmin);
+
+export { FederalAdmin as plain, mapStateToProps, mapDispatchToProps };
