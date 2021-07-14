@@ -9,7 +9,7 @@ import {
   TableBody
 } from '@cmsgov/design-system';
 
-const ManageUserTable = ({
+const ManageAllUsersTable = ({
   tab,
   affiliations,
   isFetching,
@@ -25,7 +25,39 @@ const ManageUserTable = ({
       affiliation.role !== 'eAPD System Admin'
     );
   };
-
+  
+  const AffiliationFirstRow = ({ activeAffiliation, affiliation }) => {
+    return (
+      <TableRow key={affiliation.id}>
+        <TableCell component='th' style= {{ 'verticalAlign': 'top' }} rowSpan={activeAffiliation.affiliations.length}>{activeAffiliation.displayName}</TableCell>
+        <TableCell component='td' style= {{ 'verticalAlign': 'top' }} rowSpan={activeAffiliation.affiliations.length}>{activeAffiliation.email}</TableCell>
+        <TableCell component='td' style= {{ 'verticalAlign': 'top' }} rowSpan={activeAffiliation.affiliations.length}>{activeAffiliation.primaryPhone}</TableCell>
+          <TableCell>{affiliation.stateId}</TableCell>
+          {tab === 'active' ? <TableCell>{affiliation.role}</TableCell> : null}
+          {tab === 'inactive' ? <TableCell>{affiliation.status}</TableCell> : null}
+          <TableCell>
+            <div className="ds-u-display--flex" data-id={affiliation.id}>
+              {showActions(affiliation) && actions} 
+            </div>
+          </TableCell>
+      </TableRow>
+    )
+  }
+  const AffiliationRow = ({ affiliation }) => {
+    return (
+      <TableRow key={affiliation.id}>
+        <TableCell>{affiliation.stateId}</TableCell>
+        <TableCell>{affiliation.role}</TableCell>
+        {tab === 'inactive' ? <TableCell>{affiliation.status}</TableCell> : null}
+        <TableCell>
+          <div className="ds-u-display--flex" data-id={affiliation.id}>
+            {showActions(affiliation) && actions}
+          </div>
+        </TableCell>
+      </TableRow>
+    )
+  }
+  
   return (
     <Fragment>
       {isFetching && <p>Loading...</p>}
@@ -39,53 +71,24 @@ const ManageUserTable = ({
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Phone Number</TableCell>
+              <TableCell>State</TableCell>
               {tab === 'active' ? <TableCell>Role</TableCell> : null}
               {tab === 'inactive' ? <TableCell>Status</TableCell> : null}
-              <TableCell>State</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* Todo: Add description on why we have to do the tables this way */}
-            {affiliations.map(affiliation => (
+            {/* The data structure is such that we have a top-level "affiliations" object that 
+                contains another affiliations objects which contains additional affiliations 
+                if the user has multiple. */}
+            {affiliations.map(activeAffiliation => (
               <Fragment>
-                <TableRow key={affiliation.id}>
-                  <TableCell component='th' style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.displayName}</TableCell>
-                  <TableCell component='td' style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.email}</TableCell>
-                  <TableCell component='td' style= {{ 'vertical-align': 'top' }} rowSpan={affiliation.affiliations.length}>{affiliation.primaryPhone}</TableCell>
-                  <TableCell>
-                      {affiliation.affiliations[0].role}
-                    </TableCell>
-                    <TableCell>
-                      {affiliation.affiliations[0].stateId}
-                    </TableCell>
-                    <TableCell>
-                      <div className="ds-u-display--flex" data-id={affiliation.affiliations[0].id}>
-                        {showActions(affiliation) && actions} 
-                      </div>
-                    </TableCell>
-                </TableRow>
-                {/* Filter out the first item since we use it in the above */}
-                {affiliation.affiliations.filter((item, index) => {
-                  if(index === 0) {
-                    return false;
+                {activeAffiliation.affiliations.map((affiliation, index) => {
+                  if (index === 0) {
+                    return (<AffiliationFirstRow activeAffiliation={activeAffiliation} affiliation={affiliation} />)
                   }
-                  return true;
-                }).map(stateAffiliation => (
-                  <TableRow key={stateAffiliation.stateId}>
-                    <TableCell>
-                      {stateAffiliation.role}
-                    </TableCell>
-                    <TableCell>
-                      {stateAffiliation.stateId}
-                    </TableCell>
-                    <TableCell>
-                      <div className="ds-u-display--flex" data-id={stateAffiliation.stateId}>
-                        {showActions(stateAffiliation) && actions}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                  return (<AffiliationRow affiliation={affiliation} />)
+                })}
               </Fragment>
             ))}
           </TableBody>
@@ -95,7 +98,7 @@ const ManageUserTable = ({
   );
 };
 
-ManageUserTable.propTypes = {
+ManageAllUsersTable.propTypes = {
   tab: PropTypes.string.isRequired,
   affiliations: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
@@ -103,8 +106,8 @@ ManageUserTable.propTypes = {
   currentUser: PropTypes.object.isRequired
 };
 
-ManageUserTable.defaultProps = {
+ManageAllUsersTable.defaultProps = {
   actions: ''
 };
 
-export default ManageUserTable;
+export default ManageAllUsersTable;
