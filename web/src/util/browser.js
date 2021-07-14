@@ -18,10 +18,12 @@ const browserIsGreen =
 
 // Yellow support is for browsers we think should support all the basic
 // functionality of the app, though more advanced features and some visual
-// styles may be broken. Our yellow-level browsers are Safari and IE11.
+// styles may be broken. Our yellow-level browser is Safari.
 const browserIsYellow = browser.name === 'safari';
 
 // Red support is for browsers we don't support at all.
+// We no longer support any IE browsers. User will see prompt to download
+// a more modern browser.
 const browserIsRed = !browserIsGreen && !browserIsYellow;
 
 export { browserIsGreen, browserIsYellow, browserIsRed };
