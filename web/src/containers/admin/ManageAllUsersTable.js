@@ -36,9 +36,7 @@ const ManageAllUsersTable = ({
           {tab === 'active' ? <TableCell>{affiliation.role}</TableCell> : null}
           {tab === 'inactive' ? <TableCell>{affiliation.status}</TableCell> : null}
           <TableCell>
-            <div className="ds-u-display--flex" data-id={affiliation.id}>
-              {showActions(affiliation) && actions} 
-            </div>
+            <AffiliationActions affiliation={affiliation} />
           </TableCell>
       </TableRow>
     )
@@ -50,11 +48,17 @@ const ManageAllUsersTable = ({
         <TableCell>{affiliation.role}</TableCell>
         {tab === 'inactive' ? <TableCell>{affiliation.status}</TableCell> : null}
         <TableCell>
-          <div className="ds-u-display--flex" data-id={affiliation.id}>
-            {showActions(affiliation) && actions}
-          </div>
+          <AffiliationActions affiliation={affiliation} />
         </TableCell>
       </TableRow>
+    )
+  }
+
+  const AffiliationActions = ({ affiliation }) => {
+    return (
+      <div className="ds-u-display--flex" data-id={affiliation.id} data-state={affiliation.stateId} >
+        {showActions(affiliation) && actions}
+       </div>
     )
   }
   
