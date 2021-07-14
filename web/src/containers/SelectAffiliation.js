@@ -13,6 +13,8 @@ import {
   selectAffiliation
 } from '../actions/auth';
 
+const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
+
 const SelectAffiliation = ({
   currentStateId,
   error,
@@ -47,7 +49,7 @@ const SelectAffiliation = ({
 
   const choiceList = availableAffiliations.map(item => {
     const choice = {
-      label: STATES.find(state => state.id === item).name,
+      label: statesWithFederal.find(state => state.id === item).name,
       value: item
     }
     if(item === currentStateId) {
