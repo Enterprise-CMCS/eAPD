@@ -5,8 +5,6 @@ const {
   login,
   unauthenticatedTest
 } = require('../../endpoint-tests/utils');
-const { states } = require('../../util/states');
-const { activities } = require('../../util/roles');
 
 const url = '/me';
 
