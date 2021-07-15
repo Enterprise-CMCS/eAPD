@@ -46,6 +46,9 @@ const ManageRoleDialog = ({
   };
 
   const handleUpdate = () => {
+    console.log("selected affiliation in ManageRoleDialog", selectedAffiliation);
+    // Dialog gets the selected affiliation
+    // then on save it will send the role by id
     handleAffiliationUpdate(roleSelectedId);
   };
 

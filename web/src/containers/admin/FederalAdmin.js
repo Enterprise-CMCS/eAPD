@@ -30,6 +30,8 @@ const FederalAdmin = ({
   const [isDenied, setIsDenied] = useState(true);
 
   const [selectedAffiliation, setSelectedAffiliation] = useState();
+  const [selectedAffiliationId, setSelectedAffiliationId] = useState();
+  const [selectedAffiliationState, setSelectedAffiliationState] = useState();
 
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
   const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(
@@ -54,13 +56,23 @@ const FederalAdmin = ({
 
   const showManageModal = event => {
     console.log("event passed to modal", event.target.parentNode)
-    // Need to get the specific affiliation state/role
+    // Need 3 things to suppor the modal:
+    // 1. The "primary" affiliation id that contains name / email / phone
+    // 2. The specific affiliation id
+    // 3. The specific state 
+    console.log("currentAffiliations", currentAffiliations);
     const currentAffiliation = currentAffiliations.find(element => {
       return (
-        element.id === Number(event.target.parentNode.getAttribute('data-id'))
+        element.id === Number(event.target.parentNode.getAttribute('data-primary-affiliation-id'))
       );
     });
+
+    const currentAffiliationId = event.target.parentNode.getAttribute('data-id');
+    const currentAffiliationState = event.target.parentNode.getAttribute('data-state');
+
     setSelectedAffiliation(currentAffiliation);
+    setSelectedAffiliationId(currentAffiliationId);
+    setSelectedAffiliationState(currentAffiliationState);
     setManageModalDisplay(true);
   };
 
@@ -71,8 +83,8 @@ const FederalAdmin = ({
   const handleAffiliationUpdate = roleId => {
     async function saveAffiliation() {
       await actualUpdateAffiliation(
-        currentState.id,
-        selectedAffiliation.id,
+        selectedAffiliationState,
+        selectedAffiliationId,
         roleId,
         'approved'
       );
@@ -90,10 +102,17 @@ const FederalAdmin = ({
 
     const currentAffiliation = currentAffiliations.find(element => {
       return (
-        element.id === Number(event.target.parentNode.getAttribute('data-id'))
+        element.id === Number(event.target.parentNode.getAttribute('data-primary-affiliation-id'))
       );
     });
+
+    const currentAffiliationId = event.target.parentNode.getAttribute('data-id');
+    const currentAffiliationState = event.target.parentNode.getAttribute('data-state');
+
     setSelectedAffiliation(currentAffiliation);
+    setSelectedAffiliationId(currentAffiliationId);
+    setSelectedAffiliationState(currentAffiliationState);
+
     setConfirmationModalDisplay(true);
   };
 
@@ -106,8 +125,8 @@ const FederalAdmin = ({
 
     async function saveAffiliation() {
       await actualUpdateAffiliation(
-        currentState.id,
-        selectedAffiliation.id,
+        selectedAffiliationState,
+        selectedAffiliationId,
         -1,
         permissionChangeType
       );
