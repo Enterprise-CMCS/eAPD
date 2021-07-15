@@ -7,9 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = {
   mode: 'production',
   entry: {
-    app: [
-      path.join(__dirname, 'src/app.js')
-    ]
+    app: [path.join(__dirname, 'src/app.js')]
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -28,9 +26,26 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: { loader: 'babel-loader' }
+        test: /\.m?js$/,
+        exclude: {
+          and: [/node_modules/], // Exclude libraries in node_modules ...
+          not: [
+            // Except for a few of them that needs to be transpiled because they use modern syntax
+            /unfetch/,
+            /d3-array|d3-scale|d3-format/,
+            /@hapi[\\/]joi-date/
+          ]
+        },
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [['@babel/preset-env', { targets: 'ie 11' }]],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-transform-runtime'
+            ]
+          }
+        }
       },
       {
         test: /\.scss$/,
@@ -57,7 +72,7 @@ const config = {
           // with one nice, big file to deal with. Also adds vendor prefixes
           // as necessary for CSS rules that aren't yet widely supported.
           'postcss-loader',
-          
+
           {
             // Parse the Sass into CSS.
             loader: 'sass-loader',
