@@ -32,7 +32,7 @@ const ManageAllUsersTable = ({
         <TableCell component='th' style= {{ 'verticalAlign': 'middle' }} rowSpan={primaryAffiliation.affiliations.length}>{primaryAffiliation.displayName}</TableCell>
         <TableCell component='td' style= {{ 'verticalAlign': 'middle' }} rowSpan={primaryAffiliation.affiliations.length}>{primaryAffiliation.email}</TableCell>
         <TableCell component='td' style= {{ 'verticalAlign': 'middle' }} rowSpan={primaryAffiliation.affiliations.length}>{primaryAffiliation.primaryPhone}</TableCell>
-          <TableCell>{affiliation.stateId}</TableCell>
+          <TableCell>{affiliation.stateId.toUpperCase()}</TableCell>
           {tab === 'active' ? <TableCell>{affiliation.role}</TableCell> : null}
           {tab === 'inactive' ? <TableCell>{affiliation.status}</TableCell> : null}
           <TableCell>
@@ -44,7 +44,7 @@ const ManageAllUsersTable = ({
   const AffiliationRow = ({ primaryAffiliation, affiliation }) => {
     return (
       <TableRow className="all-users-table--row" key={affiliation.id}>
-        <TableCell>{affiliation.stateId}</TableCell>
+        <TableCell>{affiliation.stateId.toUpperCase()}</TableCell>
         {tab === 'active' ? <TableCell>{affiliation.role}</TableCell> : null}
         {tab === 'inactive' ? <TableCell>{affiliation.status}</TableCell> : null}
         <TableCell>
