@@ -6,9 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   mode: 'development',
   entry: {
-    js: [
-      path.join(__dirname, 'src/app.dev.js')
-    ]
+    js: [path.join(__dirname, 'src/app.dev.js')]
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -18,9 +16,26 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
+        test: /\.m?js$/,
+        exclude: {
+          and: [/node_modules/], // Exclude libraries in node_modules ...
+          not: [
+            // Except for a few of them that needs to be transpiled because they use modern syntax
+            /unfetch/,
+            /d3-array|d3-scale|d3-format/,
+            /@hapi[\\/]joi-date/
+          ]
+        },
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [['@babel/preset-env', { targets: 'ie 11' }]],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-transform-runtime'
+            ]
+          }
+        }
       },
 
       // In dev, load our styles directly into the generated JS. That way
@@ -33,7 +48,7 @@ const config = {
           // Translates CSS into CommonJS
           'css-loader',
           // Compiles Sass to CSS
-          'sass-loader',
+          'sass-loader'
         ]
       },
       {

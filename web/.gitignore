@@ -3,3 +3,4 @@ coverage
 
 .jest-test-results.json
 cypress.env.json
+storybook-static/*
