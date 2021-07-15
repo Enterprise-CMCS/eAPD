@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useReducer, Fragment, useState, useEffect } from 'react';
 
-import { connect } from 'react-redux';
-
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
 import AuthenticationForm from '../components/AuthenticationForm';
 
@@ -255,10 +253,9 @@ StateAccessRequest.propTypes = {
 StateAccessRequest.defaultProps = {
   errorMessage: false,
 
-
 };
 
 
-export default connect()(StateAccessRequest);
+export default StateAccessRequest;
 
 export { StateAccessRequest as plain };
