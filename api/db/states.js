@@ -5,7 +5,7 @@ const getStateProfile = async (stateID, { db = knex } = {}) => {
     .select('medicaid_office')
     .where('id', stateID)
     .first();
-
+     
   return profile.medicaid_office;
 };
 

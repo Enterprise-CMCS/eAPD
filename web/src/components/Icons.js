@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRight,
   faCheck,
-  faXmark,
+  faTimes,
   faCheckCircle,
   faChevronDown,
   faChevronLeft,
@@ -22,7 +22,8 @@ import {
   faUserCog,
   faUserPlus,
   faUserShield,
-  faEnvelope
+  faEnvelope,
+  faPeopleArrows
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -32,7 +33,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 
 const Check = ({ ...props }) => <FontAwesomeIcon icon={faCheck} {...props} />;
-const Xmark = ({ ...props }) => <FontAwesomeIcon icon={faXmark} {...props} />;
+const Xmark = ({ ...props }) => <FontAwesomeIcon icon={faTimes} {...props} />;
 const CheckCircle = ({ ...props }) => (
   <FontAwesomeIcon icon={faCheckCircle} {...props} />
 );
@@ -77,7 +78,8 @@ export {
   UnlockIcon,
   faUserCog,
   faUserShield,
-  faUserPlus
+  faUserPlus,
+  faPeopleArrows
 };
 
 export default FontAwesomeIcon;

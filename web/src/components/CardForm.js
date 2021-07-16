@@ -41,15 +41,16 @@ const CardForm = ({
                 {error}
               </Alert>
             )}
-
-            <h1 className="ds-h1">
-              {sectionName.length > 0 && (
-                <span className="ds-h6 ds-u-display--block">
-                  {sectionName.toUpperCase()}
-                </span>
-              )}
-              {title}
-            </h1>
+            {!!title && (
+              <h1 className="ds-h1">
+                {sectionName.length > 0 && (
+                  <span className="ds-h6 ds-u-display--block">
+                    {sectionName.toUpperCase()}
+                  </span>
+                )}
+                {title}
+              </h1>
+            )}
             <form onSubmit={handleSubmit}>
               <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
                 {!!legend && (
@@ -105,7 +106,7 @@ CardForm.propTypes = {
   primaryButtonText: PropTypes.arrayOf(PropTypes.string),
   sectionName: PropTypes.string,
   success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   working: PropTypes.bool
 };
 
@@ -120,7 +121,8 @@ CardForm.defaultProps = {
   primaryButtonText: ['Save changes', 'Working'],
   sectionName: '',
   success: false,
-  working: false
+  working: false,
+  title: ''
 };
 
 export default CardForm;
