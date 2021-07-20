@@ -64,8 +64,8 @@ describe('browser support detection util', () => {
     // eslint-disable-next-line global-require
     const browser = require('./browser');
     expect(browser.browserIsGreen).toEqual(false);
-    expect(browser.browserIsYellow).toEqual(true);
-    expect(browser.browserIsRed).toEqual(false);
+    expect(browser.browserIsYellow).toEqual(false);
+    expect(browser.browserIsRed).toEqual(true);
   });
 
   describe('indicates red for everything else', () => {
