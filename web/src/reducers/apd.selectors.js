@@ -128,3 +128,12 @@ export const selectApdDashboard = createSelector([selectApds], ({ byId }) =>
 );
 
 export const selectLastSavedTimestamp = state => state.apd.data.updated;
+
+export const getYearsAlert = ({
+  apd: {
+    data: { years }
+  }
+}) => {
+  return years.length > 0 ? null: 'Please select an FFY'
+}
+
