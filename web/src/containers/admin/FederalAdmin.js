@@ -55,12 +55,6 @@ const FederalAdmin = ({
   };
 
   const showManageModal = event => {
-    console.log("event passed to modal", event.target.parentNode)
-    // Need 3 things to suppor the modal:
-    // 1. The "primary" affiliation id that contains name / email / phone
-    // 2. The specific affiliation id
-    // 3. The specific state 
-    console.log("currentAffiliations", currentAffiliations);
     const currentAffiliation = currentAffiliations.find(element => {
       return (
         element.id === Number(event.target.parentNode.getAttribute('data-primary-affiliation-id'))

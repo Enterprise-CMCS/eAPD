@@ -11,6 +11,6 @@ describe('<FederalAdmin />', () => {
 
     render(<FederalAdmin />)
   
-    expect(screen.getByRole('heading')).toHaveTextContent('Federal admin panel coming soon...');
+    expect(screen.getByRole('heading')).toHaveTextContent('Federal Administrator Portal');
   });  
 });

@@ -5,6 +5,7 @@ import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
 
 const ManageRoleDialog = ({
   roleTypes,
+  roleDescription,
   selectedAffiliation,
   hideManageModal,
   handleAffiliationUpdate
@@ -90,7 +91,7 @@ const ManageRoleDialog = ({
       </p>
       <Dropdown
         options={dropdownOptions}
-        hint="eAPD State Staff is a state employee. eAPD State Contractor is someone who works for a vendor on behalf of the state."
+        hint={roleDescription}
         size="medium"
         label="Role"
         name="selectedPermission"
@@ -103,9 +104,14 @@ const ManageRoleDialog = ({
 
 ManageRoleDialog.propTypes = {
   roleTypes: PropTypes.array.isRequired,
+  roleDescription: PropTypes.string,
   selectedAffiliation: PropTypes.object.isRequired,
   hideManageModal: PropTypes.func.isRequired,
   handleAffiliationUpdate: PropTypes.func.isRequired
 };
+
+ManageRoleDialog.defaultProps = {
+  roleDescription: ''
+}
 
 export default ManageRoleDialog;
