@@ -95,7 +95,7 @@ npm install newrelic --save
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed "1 s|^|require('newrelic');\n|" main.js
+sed -i "1 s|^|require('newrelic');\n|" main.js
 E_USER
 
 sudo yum remove -y gcc-c++
