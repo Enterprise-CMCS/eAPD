@@ -4,10 +4,9 @@ const knex = require('./knex');
 const {
   getRolesAndActivities: actualGetRolesAndActivities,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
-  getUserPermissionsForStates: actualGetUserPermissionsForStates
 } = require('./auth');
 const { getStateById: actualGetStateById } = require('./states');
-const { createOrUpdateOktaUser, getOktaUser } = require('./oktaUsers')
+const { createOrUpdateOktaUser, getOktaUser } = require('./oktaUsers');
 
 const sanitizeUser = user => ({
   activities: user.activities,
@@ -24,10 +23,7 @@ const sanitizeUser = user => ({
 });
 
 const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
-  return db
-    .select('*')
-    .from('auth_affiliations')
-    .where({ user_id: id });
+  return db.select('*').from('auth_affiliations').where({ user_id: id });
 };
 
 const actualGetSelectedStateIdByUserId = (id, { db = knex } = {}) => {
@@ -42,7 +38,6 @@ const actualGetSelectedStateIdByUserId = (id, { db = knex } = {}) => {
 const populateUser = async (
   user,
   {
-    getUserPermissionsForStates = actualGetUserPermissionsForStates,
     getUserAffiliatedStates = actualGetUserAffiliatedStates,
     getStateById = actualGetStateById,
     getRolesAndActivities = actualGetRolesAndActivities,
@@ -52,10 +47,7 @@ const populateUser = async (
 ) => {
   if (user) {
     const populatedUser = user;
-    populatedUser.permissions =
-      (await getUserPermissionsForStates(user.id)) || [];
     populatedUser.states = (await getUserAffiliatedStates(user.id)) || [];
-    populatedUser.affiliations = (await getAffiliationsByUserId(user.id)) || [];
 
     // grab the selected affiliation
     const selectedStateId = await getSelectedStateIdByUserId(user.id);
@@ -111,26 +103,26 @@ const getUserByID = async (
     db
   } = {}
 ) => {
-
-  let oktaUser
-  if (checkOkta){
-    oktaUser = await client.getUser(id)
-    if(oktaUser){
-      await createOrUpdateOktaUser(oktaUser.id,  oktaUser.profile.email);
+  let oktaUser;
+  if (checkOkta) {
+    oktaUser = await client.getUser(id);
+    if (oktaUser) {
+      await createOrUpdateOktaUser(oktaUser.id, oktaUser.profile.email);
     }
-  }
-  else{
-    oktaUser = await getOktaUser(id, { db })
-    if(oktaUser){
+  } else {
+    oktaUser = await getOktaUser(id, { db });
+    if (oktaUser) {
       // since we are not talking to Okta here, assume they are active since they are in the DB,
       // maybe we need to store this though
-      oktaUser.status = 'ACTIVE'
+      oktaUser.status = 'ACTIVE';
     }
-
   }
   if (oktaUser && oktaUser.status === 'ACTIVE') {
-
-    const user = await populate({ id, ...oktaUser.profile, ...additionalValues });
+    const user = await populate({
+      id,
+      ...oktaUser.profile,
+      ...additionalValues
+    });
     return user && clean ? sanitizeUser(user) : user;
   }
   return null;

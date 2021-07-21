@@ -59,7 +59,7 @@ describe('the session ending alert component', () => {
         .childAt(1)
         .dive()
         .text()
-    ).toEqual('Stay Signed In');
+    ).toEqual('Stay signed in');
   });
 
   it('renders as expected if there is and error and is saving', () => {
@@ -83,7 +83,7 @@ describe('the session ending alert component', () => {
         .childAt(1)
         .dive()
         .text()
-    ).toEqual('<Spinner /> Signing In');
+    ).toEqual('<Spinner /> Signing in');
     expect(
       aside
         .childAt(0)
@@ -113,7 +113,7 @@ describe('the session ending alert component', () => {
         .childAt(1)
         .dive()
         .text()
-    ).toEqual('Stay Signed In');
+    ).toEqual('Stay signed in');
     expect(
       aside
         .childAt(0)

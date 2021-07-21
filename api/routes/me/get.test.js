@@ -9,7 +9,7 @@ let app;
 let res;
 const req = { jwt: 'aaaa.bbbb.cccc' }
 const user = {uid: 1234, state:{id: 'ak'}}
-const claims = {claims: 'this is a claim'}
+const claims = {id:123, claims: 'this is a claim'}
 
 tap.test('me GET endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
@@ -29,12 +29,13 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test('get me handler', async test => {
     const extractor = sinon.stub()
     const eapdTokenVerifier = sinon.stub()
+    const updateFromOkta = sinon.stub()
 
     extractor.withArgs(req).returns(req.jwt)
 
     eapdTokenVerifier.withArgs(req.jwt).resolves(claims)
 
-    getEndpoint(app, {extractor, verifier:eapdTokenVerifier});
+    getEndpoint(app, {extractor, verifier:eapdTokenVerifier, updateFromOkta});
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 
     await meHandler(req, res);
@@ -47,6 +48,10 @@ tap.test('me GET endpoint', async endpointTest => {
     test.ok(
       eapdTokenVerifier.calledWith(req.jwt),
       'calls the token extractor with the request'
+    )
+
+    test.ok(
+      updateFromOkta.calledWith(123)
     )
 
     test.ok(

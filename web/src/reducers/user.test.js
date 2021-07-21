@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/auth';
+import { LOGOUT_SUCCESS } from '../actions/auth';
 import {
   ADMIN_EDIT_ME_ERROR,
   ADMIN_EDIT_ME_REQUEST,
@@ -30,7 +30,7 @@ describe('user state reducer', () => {
     });
 
     it('should handle a successful user fetch, user check, own-account change, or login', () => {
-      [LOGIN_SUCCESS, ADMIN_EDIT_ME_SUCCESS].forEach(action => {
+      [ADMIN_EDIT_ME_SUCCESS].forEach(action => {
         expect(
           user(initialState, {
             type: action,

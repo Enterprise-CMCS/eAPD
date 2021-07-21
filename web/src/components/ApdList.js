@@ -10,11 +10,6 @@ import { createApd, deleteApd, selectApd } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import UpgradeBrowser from './UpgradeBrowser';
-import {
-  getUserStateOrTerritoryStatus,
-  getIsFedAdmin
-} from '../reducers/user.selector';
-import { AFFILIATION_STATUSES } from '../constants';
 import Loading from './Loading';
 
 const ApdList = ({
@@ -26,8 +21,7 @@ const ApdList = ({
   route,
   selectApd: select,
   state,
-  approvalStatus,
-  isFedAdmin
+  activities
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -43,8 +37,9 @@ const ApdList = ({
     select(id, `${route}/${id}`);
   };
 
-  const canCreateApd =
-    !isFedAdmin && approvalStatus === AFFILIATION_STATUSES.APPROVED;
+  const canCreateApd = activities.indexOf('edit-document') >=0
+
+  const canDeleteApd = activities.indexOf('edit-document') >=0
 
   if (isLoading) {
     return (
@@ -72,7 +67,7 @@ const ApdList = ({
                   data-testid="eAPDlogo"
                 >
                   <img
-                    src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
+                    src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
                     alt="eAPD Logo"
                   />
                 </div>
@@ -132,17 +127,19 @@ const ApdList = ({
                       </ul>
                     </div>
                     <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
-                      <Button
-                        variation="transparent"
-                        size="small"
-                        onClick={() => setShowDeleteModal(apd.id)}
-                      >
-                        Delete{' '}
-                        <span className="ds-u-visibility--screen-reader">
-                          {' '}
-                          this APD
-                        </span>
-                      </Button>
+                      {canDeleteApd && (
+                        <Button
+                          variation="transparent"
+                          size="small"
+                          onClick={() => setShowDeleteModal(apd.id)}
+                        >
+                          Delete{' '}
+                          <span className="ds-u-visibility--screen-reader">
+                            {' '}
+                            this APD
+                          </span>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -171,8 +168,7 @@ ApdList.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  isFedAdmin: PropType.bool.isRequired,
-  approvalStatus: PropType.string.isRequired
+  activities: PropType.array.isRequired
 };
 
 ApdList.defaultProps = {
@@ -182,11 +178,9 @@ ApdList.defaultProps = {
 const mapStateToProps = state => ({
   apds: selectApdDashboard(state),
   fetching: selectApds(state).fetching || false,
-  error: selectApds(state).error || null,
+  error: selectApds(state).error || '',
   state: state.user.data.state || null,
-  isFedAdmin: getIsFedAdmin(state),
-  approvalStatus:
-    getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
+  activities: state.user.data.activities
 });
 
 const mapDispatchToProps = {

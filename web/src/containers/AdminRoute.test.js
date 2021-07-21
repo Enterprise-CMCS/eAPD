@@ -48,7 +48,7 @@ describe('admin route component', () => {
         auth: {
           authenticated: 'some value'
         },
-        user: { data: { role: 'admin' } }
+        user: { data: { role: 'eAPD Federal Admin' } }
       })
     ).toEqual({ authenticated: 'some value', isAdmin: true });
   });
