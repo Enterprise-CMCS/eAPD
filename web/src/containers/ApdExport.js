@@ -29,9 +29,10 @@ const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
           </p>
           <Button
             size="big"
-            variation={years.length > 0 ? "primary": 'danger'}
+            variation="primary"
             className="ds-u-margin-top--2"
             onClick={() => years.length > 0 && pushRoute(`/print/${paramApdId}`)}
+            disabled={years.length === 0}
           >
             Continue to Review
           </Button>
