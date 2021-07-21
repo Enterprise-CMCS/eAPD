@@ -16,6 +16,7 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
+export NEW_RELIC_LICENSE_KEY="__NEW_RELIC_LICENSE_KEY__"
 cd ~
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
@@ -105,6 +106,10 @@ setsebool -P httpd_can_network_connect 1
 # Restart Nginx
 systemctl enable nginx
 systemctl restart nginx
+
+# Restart New Relic Infrastructure Monitor
+systemctl enable newrelic-infra
+systemctl start newrelic-infra
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
