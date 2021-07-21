@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
@@ -82,16 +83,13 @@ const ManageAllUsersTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* The data structure is such that we have a top-level "affiliations" object that 
-                contains another affiliations objects which contains additional affiliations 
-                if the user has multiple. */}
             {affiliations.map(primaryAffiliation => (
-              <Fragment>
+              <Fragment key={primaryAffiliation.id}>
                 {primaryAffiliation.affiliations.map((affiliation, index) => {
                   if (index === 0) {
-                    return (<AffiliationFirstRow primaryAffiliation={primaryAffiliation} affiliation={affiliation} />)
+                    return (<AffiliationFirstRow key={affiliation.id} primaryAffiliation={primaryAffiliation} affiliation={affiliation} />)
                   }
-                  return (<AffiliationRow primaryAffiliation={primaryAffiliation} affiliation={affiliation} />)
+                  return (<AffiliationRow key={affiliation.id} primaryAffiliation={primaryAffiliation} affiliation={affiliation} />)
                 })}
               </Fragment>
             ))}

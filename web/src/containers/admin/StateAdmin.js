@@ -81,8 +81,6 @@ const StateAdmin = ({
   };
 
   const showConfirmationModal = event => {
-    console.log("event", event.target.parentNode);
-    console.log("currentAffs", currentAffiliations);
     const checkIsDenied =
       event.target.getAttribute('data-deny-or-revoke') === 'deny';
     setIsDenied(checkIsDenied);
