@@ -8,8 +8,9 @@ import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 import { Section, Subsection } from '../components/Section';
 import Waypoint from './ConnectedWaypoint';
 import AlertMissingFFY from '../components/AlertMissingFFY';
+import { selectApdYears } from '../reducers/apd.selectors';
 
-const ExportAndSubmit = ({ push: pushRoute, useParams }) => {
+const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
   const paramApdId = +useParams().apdId;
 
   if (!paramApdId) {
@@ -28,9 +29,9 @@ const ExportAndSubmit = ({ push: pushRoute, useParams }) => {
           </p>
           <Button
             size="big"
-            variation="primary"
+            variation={years.length > 0 ? "primary": 'danger'}
             className="ds-u-margin-top--2"
-            onClick={() => pushRoute(`/print/${paramApdId}`)}
+            onClick={() => years.length > 0 && pushRoute(`/print/${paramApdId}`)}
           >
             Continue to Review
           </Button>
@@ -42,15 +43,20 @@ const ExportAndSubmit = ({ push: pushRoute, useParams }) => {
 
 ExportAndSubmit.propTypes = {
   push: PropTypes.func.isRequired,
-  useParams: PropTypes.func
+  useParams: PropTypes.func,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 ExportAndSubmit.defaultProps = {
   useParams: actualUseParams
 };
 
+const mapStateToProps = state => ({
+  years: selectApdYears(state)
+});
+
 const mapDispatchToProps = { push };
 
-export default connect(null, mapDispatchToProps)(ExportAndSubmit);
+export default connect(mapStateToProps, mapDispatchToProps)(ExportAndSubmit);
 
 export { ExportAndSubmit as plain, mapDispatchToProps };

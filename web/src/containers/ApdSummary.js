@@ -75,7 +75,7 @@ const ApdSummary = ({
         {t('apd.overview.instruction.short')}
         <Alert variation='error' >
           <div style={{fontWeight: 400}}>
-            At least one FFY must be selected to continue with your APD. Select your FFY.
+            At least one FFY must be selected to continue with your APD. Select your FFY(s).
           </div>
         </Alert>
 

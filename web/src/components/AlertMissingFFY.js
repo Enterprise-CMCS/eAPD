@@ -10,7 +10,7 @@ const AlertMissingFFY = ({ years, apdId }) => {
   }
   return(
       <Alert variation='error' className="ds-u-margin-bottom--2">
-        At least one FFY must be selected to continue with your APD. <a href={`/apd/${apdId}/apd-overview`}>Select your FFY.</a>
+        At least one FFY must be selected to continue with your APD. <a href={`/apd/${apdId}/apd-overview`}>Select your FFY(s).</a>
       </Alert>
  )
 }
