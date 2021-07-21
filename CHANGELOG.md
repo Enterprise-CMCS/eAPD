@@ -1,10 +1,11 @@
 # Next release
 
-Anticipated release: July 15, 2021
+Anticipated release: July 19, 2021
 
 #### 🚀 New features
 
 - manage affiliations and choose state page now make live calls for the list of affiliations ([#3264])
+- Federal admin panel ([#2812])
 
 #### 🐛 Bugs fixed
 
@@ -18,6 +19,7 @@ Anticipated release: July 15, 2021
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2812]: https://github.com/CMSgov/eAPD/issues/2812
 [#3272]: https://github.com/CMSgov/eAPD/issues/3272
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
 [#3164]: https://github.com/CMSgov/eAPD/issues/3264
