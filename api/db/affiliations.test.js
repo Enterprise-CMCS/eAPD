@@ -299,7 +299,7 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
           role: user.role,
           stateId: user.stateId,
           status: user.status,
-          id: i
+          id: null
         };
         const result = { ...user };
         result.affiliations = [stateAffiliation];
@@ -325,7 +325,7 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
           role: user.role,
           stateId: user.stateId,
           status: user.status,
-          id: i
+          id: null
         };
         const result = { ...user };
         result.affiliations = [
