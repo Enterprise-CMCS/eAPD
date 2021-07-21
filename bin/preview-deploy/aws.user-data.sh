@@ -16,7 +16,7 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
-export NEW_RELIC_LICENSE_KEY="__NEW_RELIC_LICENSE_KEY__"
+echo "license_key: __NEW_RELIC_LICENSE_KEY__" >> /etc/newrelic-infra.yml
 cd ~
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
