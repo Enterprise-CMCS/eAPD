@@ -14,10 +14,13 @@ Anticipated release: July 15, 2021
 
 #### ⚙️ Behind the scenes
 
+- updated APD seed data used for testing ([#2863])
+
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2863]: https://github.com/CMSgov/eAPD/issues/2863
 [#3272]: https://github.com/CMSgov/eAPD/issues/3272
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
 [#3164]: https://github.com/CMSgov/eAPD/issues/3264
