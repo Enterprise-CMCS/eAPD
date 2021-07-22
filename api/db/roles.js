@@ -4,18 +4,23 @@ const getAllActiveRoles = async (userRole, { db = knex } = {}) => {
   const roles = await db('auth_roles')
     .select('id', 'name')
     .where({ isActive: true });
-  if (userRole === 'eAPD Federal Admin') {
-    return roles.filter(
-      role =>
-        role.name !== 'eAPD System Admin' && role.name !== 'eAPD Federal Admin'
-    );
+  
+  switch (userRole) {
+    case 'eAPD System Admin':
+      return roles;
+    case 'eAPD Federal Admin':
+      return roles.filter(
+        role =>
+          role.name === 'eAPD Federal Admin' || role.name === 'eAPD State Admin'
+      );
+    case 'eAPD State Admin':
+      return roles.filter(
+        role =>
+          role.name === 'eAPD State Staff' || role.name === 'eAPD State Contractor'
+      );
+    default:
+      return null;
   }
-  return roles.filter(
-    role =>
-      role.name !== 'eAPD System Admin' &&
-      role.name !== 'eAPD Federal Admin' &&
-      role.name !== 'eAPD State Admin'
-  );
 };
 
 module.exports = {
