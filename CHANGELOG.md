@@ -1,10 +1,11 @@
 # Next release
 
-Anticipated release: July 15, 2021
+Anticipated release: July XX, 2021
 
 #### 🚀 New features
 
 - manage affiliations and choose state page now make live calls for the list of affiliations ([#3264])
+- Update the roles returned by the roles endpoint ([#3277])
 
 #### 🐛 Bugs fixed
 
@@ -13,6 +14,7 @@ Anticipated release: July 15, 2021
 - fixed error for users with view-document permission not being able to load an APD([#3264])
 
 #### ⚙️ Behind the scenes
+
 - created test tokens when database is seeded (development and test only) ([#3128]) 
 
 # Previous releases
@@ -21,5 +23,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 
 [#3i28]: https://github.com/CMSgov/eAPD/issues/3128
 [#3272]: https://github.com/CMSgov/eAPD/issues/3272
+[#3277]: https://github.com/CMSgov/eAPD/issues/3277
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
 [#3164]: https://github.com/CMSgov/eAPD/issues/3264
