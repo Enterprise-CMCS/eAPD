@@ -7,3 +7,5 @@ docker-compose -f ../docker-compose.yml exec db sh -c 'PGPASSWORD=cms psql -U po
 
 docker-compose -f ../docker-compose.yml exec -e NODE_ENV=development -e DEV_DB_NAME=apd_cypress_test api npm run migrate
 docker-compose -f ../docker-compose.yml exec -e NODE_ENV=development -e DEV_DB_NAME=apd_cypress_test api npm run seed
+
+export API_URL=http://localhost:8081
