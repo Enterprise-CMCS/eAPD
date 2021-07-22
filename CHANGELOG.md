@@ -13,11 +13,13 @@ Anticipated release: July 15, 2021
 - fixed error for users with view-document permission not being able to load an APD([#3264])
 
 #### ⚙️ Behind the scenes
+- created test tokens when database is seeded (development and test only) ([#3128]) 
 
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#3i28]: https://github.com/CMSgov/eAPD/issues/3128
 [#3272]: https://github.com/CMSgov/eAPD/issues/3272
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
 [#3164]: https://github.com/CMSgov/eAPD/issues/3264
