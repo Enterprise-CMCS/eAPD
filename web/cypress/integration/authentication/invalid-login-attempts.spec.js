@@ -34,9 +34,11 @@ describe('Invalid Login Attempts', () => {
     it('uses the wrong password', () => {
       cy.login(Cypress.env('lockedoutmfa'), 'bad password');
 
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.url().then(url => {
         // This is to prevent the tests from failing if they are run quickly more
         // than 3 times and the lockedoutmfa account becomes locked.
+        cy.log({ url });
         if (url.endsWith('/login')) {
           cy.log('just error message');
           cy.findByText('Your username and/or password is incorrect.').should(
