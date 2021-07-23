@@ -42,7 +42,6 @@ logger.stream = {
       logger.log('info', result);
     } catch(e){
       logger.log('info', `unable to parse JSON string: ${json}`)
-      logger.log('error', `ERROR: unable to parse JSON string: ${json}`)
     }
 
   }

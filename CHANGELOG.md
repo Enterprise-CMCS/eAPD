@@ -17,6 +17,7 @@ Anticipated release: July 15, 2021
 - install cypress for end-to-end testing ([#3226])
 
 - updated APD seed data used for testing ([#2863])
+- prevented some unexpected JSON parsing errors from being escalated to the error log. ([#3176])
 
 # Previous releases
 
@@ -27,4 +28,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#2863]: https://github.com/CMSgov/eAPD/issues/2863
 [#3272]: https://github.com/CMSgov/eAPD/issues/3272
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
-[#3164]: https://github.com/CMSgov/eAPD/issues/3264
+[#3164]: https://github.com/CMSgov/eAPD/issues/3164
+[#3176]: https://github.com/CMSgov/eAPD/issues/3176
