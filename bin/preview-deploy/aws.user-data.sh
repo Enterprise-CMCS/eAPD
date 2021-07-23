@@ -126,34 +126,34 @@ su - ec2-user -c 'pm2 restart "eAPD API"'
 #touch /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
 #cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
 
-# {
-#  "logs": {
-#    "logs_collected": {
-#      "files": {
-#        "collect_list": [
-#          {
-#            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
-#            "log_group_name": "test/app/api/logs/eAPD-API-error-0.log"
-#          },
-#          {
-#            "file_path": "/var/log/nginx/access.log*",
-#            "log_group_name": "test/var/log/nginx/access.log"
-#          },
-#          {
-#            "file_path": "/var/log/nginx/error.log*",
-#            "log_group_name": "test/var/log/nginx/error.log"
-#          },
-#          {
-#            "file_path": "/var/log/awslogs.log*",
-#            "log_group_name": "test/var/log/awslogs.log"
-#          }
-#        ]
-#      }
-#    }
-#  }
-#}
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
+            "log_group_name": "test/app/api/logs/eAPD-API-error-0.log"
+          },
+          {
+            "file_path": "/var/log/nginx/access.log*",
+            "log_group_name": "test/var/log/nginx/access.log"
+          },
+          {
+            "file_path": "/var/log/nginx/error.log*",
+            "log_group_name": "test/var/log/nginx/error.log"
+          },
+          {
+            "file_path": "/var/log/awslogs.log*",
+            "log_group_name": "test/var/log/awslogs.log"
+          }
+        ]
+      }
+    }
+  }
+}
 
-#CWLAUNCHLOGCONFIG
+CWLAUNCHLOGCONFIG
 
-#/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/launch-log.json
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/launch-log.json
 
