@@ -2,6 +2,12 @@
 sudo su <<R_USER
 #!/bin/bash
 
+# Install New Relic Infrastructure Monitor
+curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
+yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
+yum install newrelic-infra -y
+
+
 # Add a user group for the default user, and make it the owner of the /app
 # directory.  Unzip stuff there and then set permissions.
 groupadd eapd
