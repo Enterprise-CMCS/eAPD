@@ -1,4 +1,4 @@
-version: "3.2"
+version: '3.2'
 services:
   db:
     image: postgres:10
@@ -37,7 +37,7 @@ services:
       - db
     environment:
       - PORT=8000
-      - DATABASE_URL=postgres://postgres:cms@db/hitech_apd
+      - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
       - NODE_ENV=development
       - DISABLE_SAME_SITE=yes
       - OKTA_DOMAIN=${OKTA_DOMAIN}
@@ -47,6 +47,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - MONGO_DATABASE=${MONGO_DATABASE}
       - MONGO_URL=${MONGO_URL}
+      - CYPRESS_TESTS=${CYPRESS_TESTS}
     volumes:
       - type: bind
         source: ./api

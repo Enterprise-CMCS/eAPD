@@ -2,9 +2,20 @@ const tap = require('tap');
 const sinon = require('sinon');
 const endpointIndex = require('./index');
 
+let CYPRESS_TESTS = false;
 tap.test('endpoint setup', async endpointTest => {
+  endpointTest.before(() => {
+    CYPRESS_TESTS = process.env.CYPRESS_TESTS;
+    process.env.CYPRESS_TESTS = 'true';
+  });
+
+  endpointTest.teardown(() => {
+    process.env.CYPRESS_TESTS = CYPRESS_TESTS;
+  });
+
   const app = {
-    get: sinon.spy()
+    get: sinon.spy(),
+    use: sinon.spy()
   };
   const res = {
     send: sinon.spy()
@@ -18,6 +29,7 @@ tap.test('endpoint setup', async endpointTest => {
   const rolesEndpoint = sinon.spy();
   const statesEndpoint = sinon.spy();
   const usersEndpoint = sinon.spy();
+  const cypressEndpoint = sinon.spy();
   const openAPI = {};
 
   endpointIndex(
@@ -29,6 +41,7 @@ tap.test('endpoint setup', async endpointTest => {
     rolesEndpoint,
     statesEndpoint,
     usersEndpoint,
+    cypressEndpoint,
     {}
   );
 
@@ -66,6 +79,11 @@ tap.test('endpoint setup', async endpointTest => {
   );
 
   endpointTest.ok(
+    cypressEndpoint.calledWith(app),
+    'users endpoint is setup with the app'
+  );
+
+  endpointTest.ok(
     app.get.calledWith('/open-api', sinon.match.func),
     'sets up an endpoint to fetch OpenAPI spec'
   );
@@ -85,4 +103,9 @@ tap.test('endpoint setup', async endpointTest => {
       );
     }
   );
+
+  // endpointTest.test('GET /api-docs', async t => {
+  //   const response = await request(api).get('/api-docs');
+  //   t.equals(response.status, 301, 'successful');
+  // });
 });

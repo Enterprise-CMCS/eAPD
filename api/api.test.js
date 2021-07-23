@@ -16,11 +16,6 @@ tap.test('express api', async t => {
     t.equal(response.status, 204, 'HTTP status set to 204');
   });
 
-  // t.test('GET /api-docs', async t => {
-  //   response = await request(api).get('/api-docs');
-  //   t.equals(response.status, 301, 'successful');
-  // });
-
   t.test('headers', async t => {
     response = await request(api).get('/');
     t.notOk(response.header['x-powered-by'], 'X-Powered-By header is unset');
