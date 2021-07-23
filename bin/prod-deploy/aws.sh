@@ -204,6 +204,8 @@ function addEcosystemToUserData() {
 
   sed -i'.backup' -e "s|__ENVIRONMENT__|`echo $ENVIRONMENT`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__NEW_RELIC_LICENSE_KEY__|`echo $NEW_RELIC_LICENSE_KEY`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 
