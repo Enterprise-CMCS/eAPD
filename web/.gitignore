@@ -2,5 +2,6 @@ dist
 coverage
 
 .jest-test-results.json
+cypress/videos/*
 cypress.env.json
 storybook-static/*
