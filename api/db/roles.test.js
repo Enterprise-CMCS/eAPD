@@ -26,7 +26,9 @@ const allRoles = [
   }
 ];
 
-const fedAdminRoles = [
+const requestedRoles = ['eAPD Federal Admin', 'eAPD State Admin'];
+
+const requestedRolesExpected = [
   {
     id: 23,
     name: 'eAPD Federal Admin'
@@ -37,39 +39,27 @@ const fedAdminRoles = [
   }
 ];
 
-const stateAdminRoles = [
-  {
-    id: 28,
-    name: 'eAPD State Staff'
-  },
-  {
-    id: 29,
-    name: 'eAPD State Contractor'
-  }
-]
-
 tap.test('database wrappers / roles', async rolesTests => {
   const db = dbMock('auth_roles');
   
 
   rolesTests.beforeEach(async () => {
     dbMock.reset();        
+  });
+  
+  rolesTests.test('gets all roles when no specific roles requested', async test => {        
     db.select.withArgs('id', 'name').returnsThis();
     db.where.withArgs({isActive: true}).resolves(allRoles);
-  });
-
-  rolesTests.test('gets all roles as System Admin', async test => {        
-    const response = await getAllActiveRoles('eAPD System Admin', { db });
+    const response = await getAllActiveRoles(null, { db });
     test.same(response, allRoles);
   });
   
-  rolesTests.test('gets allowed roles for Federal Admin', async test => {   
-    const response = await getAllActiveRoles('eAPD Federal Admin', { db });
-    test.same(response, fedAdminRoles);
-  });
-  
-  rolesTests.test('gets allowed roles for State Admin', async test => {        
-    const response = await getAllActiveRoles('eAPD State Admin', { db });
-    test.same(response, stateAdminRoles);
+  rolesTests.test('returns specific roles if requested', async test => {   
+    db.select.withArgs('id', 'name').returnsThis();
+    db.where.withArgs({isActive: true}).returnsThis();
+    db.whereIn.withArgs('name', requestedRoles ).resolves(requestedRolesExpected);
+
+    const response = await getAllActiveRoles(requestedRoles, { db });
+    test.same(response, requestedRolesExpected);
   });
 });
