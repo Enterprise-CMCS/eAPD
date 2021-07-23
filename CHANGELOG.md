@@ -27,5 +27,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3226]: https://github.com/CMSgov/eAPD/issues/3226
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
 [#3164]: https://github.com/CMSgov/eAPD/issues/3264
-[#3272]: https://github.com/CMSgov/eAPD/issues/3272
 [#3277]: https://github.com/CMSgov/eAPD/issues/3277
