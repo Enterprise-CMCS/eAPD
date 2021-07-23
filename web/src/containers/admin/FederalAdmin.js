@@ -30,8 +30,6 @@ const FederalAdmin = ({
   const [isDenied, setIsDenied] = useState(true);
 
   const [selectedAffiliation, setSelectedAffiliation] = useState();
-  const [selectedAffiliationId, setSelectedAffiliationId] = useState();
-  const [selectedAffiliationState, setSelectedAffiliationState] = useState();
 
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
   const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(
@@ -64,9 +62,11 @@ const FederalAdmin = ({
     const currentAffiliationId = event.target.parentNode.getAttribute('data-id');
     const currentAffiliationState = event.target.parentNode.getAttribute('data-state');
 
-    setSelectedAffiliation(currentAffiliation);
-    setSelectedAffiliationId(currentAffiliationId);
-    setSelectedAffiliationState(currentAffiliationState);
+    setSelectedAffiliation({
+      currentAffiliation, 
+      currentAffiliationId, 
+      currentAffiliationState
+    });
     setManageModalDisplay(true);
   };
 
@@ -77,8 +77,8 @@ const FederalAdmin = ({
   const handleAffiliationUpdate = roleId => {
     async function saveAffiliation() {
       await actualUpdateAffiliation(
-        selectedAffiliationState,
-        selectedAffiliationId,
+        selectedAffiliation.currentAffiliationState,
+        selectedAffiliation.currentAffiliationId,
         roleId,
         'approved'
       );
@@ -103,10 +103,11 @@ const FederalAdmin = ({
     const currentAffiliationId = event.target.parentNode.getAttribute('data-id');
     const currentAffiliationState = event.target.parentNode.getAttribute('data-state');
 
-    setSelectedAffiliation(currentAffiliation);
-    setSelectedAffiliationId(currentAffiliationId);
-    setSelectedAffiliationState(currentAffiliationState);
-
+    setSelectedAffiliation({
+      currentAffiliation, 
+      currentAffiliationId, 
+      currentAffiliationState
+    });
     setConfirmationModalDisplay(true);
   };
 
@@ -119,8 +120,8 @@ const FederalAdmin = ({
 
     async function saveAffiliation() {
       await actualUpdateAffiliation(
-        selectedAffiliationState,
-        selectedAffiliationId,
+        selectedAffiliation.currentAffiliationState,
+        selectedAffiliation.currentAffiliationId,
         -1,
         permissionChangeType
       );
@@ -218,7 +219,7 @@ const FederalAdmin = ({
           showConfirmationModal={showConfirmationModal}
           isDenied={isDenied}
           handleDenyOrRevoke={handleDenyOrRevoke}
-          selectedAffiliation={selectedAffiliation}
+          selectedAffiliation={selectedAffiliation.currentAffiliation}
         />
       )}
 
@@ -228,7 +229,7 @@ const FederalAdmin = ({
           hideManageModal={hideManageModal}
           showManageModal={showManageModal}
           handleAffiliationUpdate={handleAffiliationUpdate}
-          selectedAffiliation={selectedAffiliation}
+          selectedAffiliation={selectedAffiliation.currentAffiliation}
         />
       )}
     </main>

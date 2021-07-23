@@ -67,7 +67,7 @@ describe('<FederalAdmin />', () => {
 
   describe('with no affiliations', () => {
     beforeEach(() => {
-
+      fetchMock.reset();
       fetchMock.onGet(`/states/fd/affiliations`).reply(200, []);
       renderWithConnection(<FederalAdmin />, {
         initialState

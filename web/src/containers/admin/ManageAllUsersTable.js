@@ -17,13 +17,12 @@ const ManageAllUsersTable = ({
   actions,
   currentUser
 }) => {
-  const { id: currentUserId, role: currentUserRole } = currentUser;
+  const { id: currentUserId, activities: currentUserActivities } = currentUser;
 
   const showActions = affiliation => {
     return (
       currentUserId !== affiliation.userId &&
-      currentUserRole !== 'eAPD System Admin' &&
-      affiliation.role !== 'eAPD System Admin'
+      currentUserActivities.indexOf('edit-affiliations')
     );
   };
   
@@ -58,7 +57,7 @@ const ManageAllUsersTable = ({
   const AffiliationActions = ({ primaryAffiliation, affiliation }) => {
     return (
       <div className="ds-u-display--flex" data-primary-affiliation-id={primaryAffiliation.id} data-id={affiliation.id} data-state={affiliation.stateId} >
-        {showActions(affiliation) && actions}
+        {showActions(primaryAffiliation) && actions}
        </div>
     )
   }
