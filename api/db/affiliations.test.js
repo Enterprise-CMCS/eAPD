@@ -9,8 +9,7 @@ const {
   getPopulatedAffiliationsByStateId,
   getAllPopulatedAffiliations,
   reduceAffiliations,
-  getAffiliationsByUserId,
-  removeAffiliationsForUser
+  getAffiliationsByUserId
 } = require('./affiliations');
 
 const defaultPopulatedAffiliation = {
@@ -377,39 +376,4 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     const results = await getAffiliationsByUserId('a user_id', { db });
     test.same(['result1'], results);
   });
-
-  affiliationsTests.test('delete affiliations for a user', async test => {
-    db.where.withArgs('user_id', '12345').returnsThis();
-    db.delete.resolves(1);
-
-    const getUserFromOkta = sinon.stub().resolves({ id: '12345' });
-
-    const results = await removeAffiliationsForUser({
-      username: 'someuser',
-      db,
-      getUserFromOkta
-    });
-    test.equal(results, 1);
-  });
-
-  affiliationsTests.test(
-    'handles error with getting user id to delete affiliation',
-    async test => {
-      db.where.withArgs('user_id', '12345').returnsThis();
-      db.delete.resolves(1);
-      const err = { error: 'err0r' };
-
-      const getUserFromOkta = sinon.stub().rejects(err);
-
-      try {
-        await removeAffiliationsForUser({
-          username: 'someuser',
-          db,
-          getUserFromOkta
-        });
-      } catch (e) {
-        test.equal(e, err);
-      }
-    }
-  );
 });

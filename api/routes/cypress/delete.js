@@ -1,12 +1,12 @@
 const logger = require('../../logger')('affiliations route delete');
 const { can } = require('../../middleware');
-const { removeAffiliationsForUser: ra } = require('../../db');
+const { removeAffiliationsForUser: ra } = require('../../db/cypressUtils');
 
 module.exports = (app, { removeAffiliationsForUser = ra } = {}) => {
-  logger.debug('setting up DELETE /affiliations/:username route');
+  logger.debug('setting up DELETE /cypress/affiliations/:username route');
 
   app.delete(
-    '/affiliations/:username',
+    '/cypress/affiliations/:username',
     can('edit-affiliations'),
     async (req, res, next) => {
       if (req.user.role === 'eAPD Federal Admin') {

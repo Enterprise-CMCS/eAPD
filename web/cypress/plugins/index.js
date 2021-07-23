@@ -24,7 +24,7 @@ const apiUrl = process.env.API_URL || 'http://localhost:8000';
 module.exports = (on, config) => {
   on('task', {
     'db:resetnorole': async () => {
-      await axios.delete(`${apiUrl}/affiliations/norole`, {
+      await axios.delete(`${apiUrl}/cypress/affiliations/norole`, {
         headers: {
           Authorization: `Bearer ${tokens.fedadmin}`
         }
@@ -32,6 +32,7 @@ module.exports = (on, config) => {
       return null;
     }
   });
+
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 };

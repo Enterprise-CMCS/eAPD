@@ -62,6 +62,8 @@ describe('Affiliation', () => {
       // select from the new affiliations
       cy.findByLabelText('Alaska').should('exist');
       cy.findByLabelText('Alabama').should('exist');
+
+      cy.findByText(/Alaska/).click();
       cy.findByRole('button', { name: 'Submit' }).click();
 
       cy.findByRole('button', { name: /norole/ }).click();

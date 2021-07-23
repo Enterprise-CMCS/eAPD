@@ -1,6 +1,5 @@
 const logger = require('../logger')('db/affiliations');
 const knex = require('./knex');
-const { getUserFromOkta: getUserFromOkta_ } = require('./oktaUsers');
 
 const selectedColumns = [
   'auth_affiliations.id',
@@ -153,15 +152,6 @@ const getAllPopulatedAffiliations = async ({
   return reduceAffiliations_(affiliations);
 };
 
-const removeAffiliationsForUser = async ({
-  username,
-  db = knex,
-  getUserFromOkta = getUserFromOkta_
-}) => {
-  const { id } = await getUserFromOkta(username);
-  return db('auth_affiliations').where('user_id', id).delete();
-};
-
 module.exports = {
   getAffiliationsByStateId,
   getPopulatedAffiliationsByStateId,
@@ -171,6 +161,5 @@ module.exports = {
   reduceAffiliations,
   getAllPopulatedAffiliations,
   getAffiliationsByUserId,
-  selectedColumns,
-  removeAffiliationsForUser
+  selectedColumns
 };
