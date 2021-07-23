@@ -38,7 +38,8 @@ describe('RichText component', () => {
         registry: {
           addButton: jest.fn()
         }
-      }
+      },
+      on: jest.fn()
     };
 
     setupTinyMCE(upload)(editor);
