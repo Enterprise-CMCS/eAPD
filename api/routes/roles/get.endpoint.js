@@ -16,25 +16,25 @@ describe('Roles endpoint', () => {
     unauthenticatedTest('get', '/roles');
     unauthorizedTest('get', '/roles');
 
-    it('returns expected number of roles given a system admin', async () => {
+    it('returns expected roles given a system admin', async () => {
       const authedClient = login('all-permissions');
       const response = await authedClient.get('/roles');
       expect(response.status).toEqual(200);
-      expect(response.data.length).toBe(6);
+      expect(response.data).toMatchSnapshot();
     });
 
-    it('returns expected number of roles given a fed admin', async () => {
+    it('returns expected roles given a fed admin', async () => {
       const authedClient = login('fed-admin');
       const response = await authedClient.get('/roles');
       expect(response.status).toEqual(200);
-      expect(response.data.length).toBe(2);
+      expect(response.data).toMatchSnapshot();
     });
 
-    it('returns expected number of roles given a state admin', async () => {
+    it('returns expected roles given a state admin', async () => {
       const authedClient = login('state-admin');
       const response = await authedClient.get('/roles');
       expect(response.status).toEqual(200);
-      expect(response.data.length).toBe(2);
+      expect(response.data).toMatchSnapshot();
     });
 
     it('returns 200', async () => {
