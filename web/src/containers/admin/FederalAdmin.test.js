@@ -118,4 +118,29 @@ describe('<FederalAdmin />', () => {
       });
     });
   });
+
+  describe('with multiple affiliations', () => {
+    beforeEach(() => {
+      fetchMock
+        .onGet(`/states/fd/affiliations?status=pending`)
+        .reply(200, [mockAffiliation, mockAffiliation]);
+      renderWithConnection(<FederalAdmin  />, {
+        initialState
+      });
+    });
+
+    it('renders name, email, phone, state', async () => {
+      await waitFor(() => {
+        expect(
+          screen.getAllByText(mockAffiliation.displayName)
+        ).toHaveLength(6);
+      });
+    });
+
+    it('renders sub affiliation state', async () => {
+      await waitFor(() => {
+        expect(screen.getAllByText('LA')).toHaveLength(6);
+      });
+    });
+  });
 });
