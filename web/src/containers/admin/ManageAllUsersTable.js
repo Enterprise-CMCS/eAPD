@@ -22,7 +22,7 @@ const ManageAllUsersTable = ({
   const showActions = affiliation => {
     return (
       currentUserId !== affiliation.userId &&
-      currentUserActivities.indexOf('edit-affiliations')
+      currentUserActivities.indexOf('edit-affiliations') !== -1
     );
   };
   

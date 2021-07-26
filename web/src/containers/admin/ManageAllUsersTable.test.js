@@ -3,7 +3,7 @@ import { renderWithConnection } from 'apd-testing-library';
 import ManageAllUsersTable from './ManageAllUsersTable';
 
 let props;
-let renderUtils;
+let render;
 
 const mockAffiliation = {
   displayName: 'Liz Lemon',
@@ -33,11 +33,11 @@ describe('<ManageAllUsersTable />', () => {
       isFetching: true,
       affiliations: [],
       actions: [],
-      currentUser: { id: '123' }
+      currentUser: { id: '123', activities: ['edit-affiliations'] }
     };
-    renderUtils = renderWithConnection(<ManageAllUsersTable {...props} />);
+    render = renderWithConnection(<ManageAllUsersTable {...props} />);
 
-    const { getByText } = renderUtils;
+    const { getByText } = render;
     expect(getByText('Loading...')).toBeTruthy();
   });
 
@@ -48,11 +48,11 @@ describe('<ManageAllUsersTable />', () => {
       affiliations: [mockAffiliation],
       isFetching: false,
       actions: [],
-      currentUser: { id: '123' }
+      currentUser: { id: '123', activities: ['edit-affiliations'] }
     };
-    renderUtils = renderWithConnection(<ManageAllUsersTable {...props} />);
+    render = renderWithConnection(<ManageAllUsersTable {...props} />);
 
-    const { getByText } = renderUtils;
+    const { getByText } = render;
     expect(getByText('Name')).toBeTruthy();
     expect(getByText('Email')).toBeTruthy();
     expect(getByText('Phone Number')).toBeTruthy();
@@ -66,11 +66,11 @@ describe('<ManageAllUsersTable />', () => {
       affiliations: [mockAffiliation],
       isFetching: false,
       actions: [],
-      currentUser: { id: '123' }
+      currentUser: { id: '123', activities: ['edit-affiliations'] }
     };
-    renderUtils = renderWithConnection(<ManageAllUsersTable {...props} />);
+    render = renderWithConnection(<ManageAllUsersTable {...props} />);
 
-    const { getByText } = renderUtils;
+    const { getByText } = render;
     expect(getByText('Name')).toBeTruthy();
     expect(getByText('Email')).toBeTruthy();
     expect(getByText('Phone Number')).toBeTruthy();
@@ -85,11 +85,11 @@ describe('<ManageAllUsersTable />', () => {
       affiliations: [mockAffiliation],
       isFetching: false,
       actions: [],
-      currentUser: { id: '123' }
+      currentUser: { id: '123', activities: ['edit-affiliations'] }
     };
-    renderUtils = renderWithConnection(<ManageAllUsersTable {...props} />);
+    render = renderWithConnection(<ManageAllUsersTable {...props} />);
 
-    const { getByText } = renderUtils;
+    const { getByText } = render;
     expect(getByText('Name')).toBeTruthy();
     expect(getByText('Email')).toBeTruthy();
     expect(getByText('Phone Number')).toBeTruthy();
@@ -108,11 +108,11 @@ describe('<ManageAllUsersTable />', () => {
           Take Action
         </button>
       ],
-      currentUser: { id: '123' }
+      currentUser: { id: '1234', activities: ['edit-affiliations'] }
     };
-    renderUtils = renderWithConnection(<ManageAllUsersTable {...props} />);
+    render = renderWithConnection(<ManageAllUsersTable {...props} />);
 
-    const { getByText } = renderUtils;
+    const { getByText } = render;
     expect(getByText('Take Action')).toBeTruthy();
   });
 });

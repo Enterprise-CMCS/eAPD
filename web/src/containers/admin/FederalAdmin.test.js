@@ -37,7 +37,10 @@ const initialState = {
       state: {
         id: 'fd',
         name: 'Federal'
-      }
+      },
+      activities: [
+        'edit-affiliations'
+      ]
     }
   }
 };
