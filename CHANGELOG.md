@@ -16,6 +16,7 @@ Anticipated release: July 26, 2021
 - install cypress for end-to-end testing ([#3226])
 - Reduced the size of the JWT payload because sys admins had a 24KB payload and the max size is 4KB. ([#3246])
 - fixed error for users with view-document permission not being able to load an APD([#3264])
+- added end-to-end test for APD overview section ([#3282])
 
 # Previous releases
 
