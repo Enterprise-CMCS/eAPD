@@ -4,19 +4,26 @@ const { states } = require('../../util/states');
 
 const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
 
-const formatOktaUser = oktaResult =>{
-  const {email, displayName, secondEmail, primaryPhone, mobilePhone, login} = oktaResult.profile
+const formatOktaUser = oktaResult => {
+  const {
+    email,
+    displayName,
+    secondEmail,
+    primaryPhone,
+    mobilePhone,
+    login
+  } = oktaResult.profile;
   return {
-    user_id:oktaResult.id,
+    user_id: oktaResult.id,
     email,
     // metadata: JSON.stringify(oktaResult.profile),
     displayName,
     secondEmail,
     primaryPhone,
     mobilePhone,
-    login,
-  }
-}
+    login
+  };
+};
 
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
@@ -25,11 +32,12 @@ const createUsersToAdd = async (knex, oktaClient) => {
   await knex('okta_users').del();
   logger.info('Retrieving user ids from Okta');
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
-  const sysAdmin  = (await oktaClient.getUser('sysadmin')) || {};
+  const sysAdmin = (await oktaClient.getUser('sysadmin')) || {};
   const fedAdmin = (await oktaClient.getUser('fedadmin')) || {};
   const stateAdmin = (await oktaClient.getUser('stateadmin')) || {};
   const stateStaff = (await oktaClient.getUser('statestaff')) || {};
   const stateContractor = (await oktaClient.getUser('statecontractor')) || {};
+  const resetmfa = (await oktaClient.getUser('resetmfa')) || {};
   const requestedRole = (await oktaClient.getUser('requestedrole')) || {};
   const deniedRole = (await oktaClient.getUser('deniedrole')) || {};
   const revokedRole = (await oktaClient.getUser('revokedrole')) || {};
@@ -72,7 +80,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
         username: 'sysadmin'
       });
     });
-    oktaUsers.push(formatOktaUser(sysAdmin))
+    oktaUsers.push(formatOktaUser(sysAdmin));
   }
   if (regularUser) {
     oktaAffiliations.push({
@@ -80,7 +88,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: 'em@il.com'
     });
     // Add an expired certification and this user will be downgraded to "regular user"
     stateCertifications.push({
@@ -92,8 +101,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
         PostgresDateFormat
       ),
       certifiedBy: 'seeds'
-    })
-    oktaUsers.push(formatOktaUser(regularUser))
+    });
+    oktaUsers.push(formatOktaUser(regularUser));
   }
   if (fedAdmin) {
     oktaAffiliations.push({
@@ -103,7 +112,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'approved',
       updated_by: 'seeds'
     });
-    oktaUsers.push(formatOktaUser(fedAdmin))
+    oktaUsers.push(formatOktaUser(fedAdmin));
   }
   if (stateAdmin) {
     oktaAffiliations.push({
@@ -131,9 +140,9 @@ const createUsersToAdd = async (knex, oktaClient) => {
         PostgresDateFormat
       ),
       certifiedBy: 'seeds'
-    })
+    });
 
-    oktaUsers.push(formatOktaUser(stateAdmin))
+    oktaUsers.push(formatOktaUser(stateAdmin));
   }
 
   if (stateStaff) {
@@ -154,8 +163,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
         PostgresDateFormat
       ),
       certifiedBy: 'seeds'
-    })
-    oktaUsers.push(formatOktaUser(stateStaff))
+    });
+    oktaUsers.push(formatOktaUser(stateStaff));
   }
   if (stateContractor) {
     oktaAffiliations.push({
@@ -165,8 +174,18 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'approved',
       updated_by: 'seeds'
     });
-    oktaUsers.push(formatOktaUser(stateContractor))
+    oktaUsers.push(formatOktaUser(stateContractor));
+  }
 
+  if (resetmfa) {
+    oktaAffiliations.push({
+      user_id: resetmfa.id,
+      state_id: 'ak',
+      role_id: stateStaffRoleId,
+      status: 'approved',
+      updated_by: 'seeds'
+    });
+    oktaUsers.push(formatOktaUser(resetmfa));
   }
 
   if (requestedRole) {
@@ -176,7 +195,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'requested'
     });
 
-    oktaUsers.push(formatOktaUser(requestedRole))
+    oktaUsers.push(formatOktaUser(requestedRole));
   }
   if (deniedRole) {
     oktaAffiliations.push({
@@ -184,7 +203,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       status: 'denied'
     });
-    oktaUsers.push(formatOktaUser(deniedRole))
+    oktaUsers.push(formatOktaUser(deniedRole));
   }
   if (revokedRole) {
     oktaAffiliations.push({
@@ -193,11 +212,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'revoked'
     });
 
-    oktaUsers.push(formatOktaUser(revokedRole))
+    oktaUsers.push(formatOktaUser(revokedRole));
   }
-  return {oktaAffiliations, stateCertifications, oktaUsers};
+  return { oktaAffiliations, stateCertifications, oktaUsers };
 };
-
 
 module.exports = {
   createUsersToAdd

@@ -85,7 +85,6 @@ cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 }
 CWAGENTCONFIG
 
-# Nginx is preview only
 cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 {
   "logs": {
@@ -225,6 +224,11 @@ CWAPPLOGCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 
+# Install New Relic Infrastructure Monitor
+curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
+yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
+yum install newrelic-infra -y
+
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
 su ec2-user <<E_USER
@@ -239,6 +243,10 @@ touch /app/api/logs/Database-migration-out.log
 touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
+
+# Add New Relic License Key to Infra Monitor config
+sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
+
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
@@ -271,9 +279,19 @@ npm rebuild knex
 echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
+npm install newrelic --save
+cp node_modules/newrelic/newrelic.js ./newrelic.js
+sed -i 's|My Application|eAPD API|g' newrelic.js
+sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
+sed -i "1 s|^|require('newrelic');\n|" main.js
 E_USER
+
+# Restart New Relic Infrastructure Monitor
+systemctl enable newrelic-infra
+systemctl start newrelic-infra
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v14.16.0/bin /home/ec2-user/.nvm/versions/node/v14.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
+su - ec2-user -c 'pm2 restart "eAPD API"'

@@ -68,14 +68,12 @@ const getPopulatedAffiliationsByStateId = ({
   return getAffiliationsByStateId_({ stateId, status, isFedAdmin });
 };
 
-const getAffiliationsByUserId = (userId, {db = knex } = {}) => {
+const getAffiliationsByUserId = (userId, { db = knex } = {}) => {
   return db('auth_affiliations')
     .select(selectedColumns)
-    .where('auth_affiliations.user_id', userId )
+    .where('auth_affiliations.user_id', userId)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-    .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
-
-
+    .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id');
 };
 
 const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
