@@ -16,6 +16,7 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
+sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
@@ -90,6 +91,11 @@ echo "module.exports = {
 };" > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
+npm install newrelic --save
+cp node_modules/newrelic/newrelic.js ./newrelic.js
+sed -i 's|My Application|eAPD API|g' newrelic.js
+sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
+sed -i "1 s|^|require('newrelic');\n|" main.js
 E_USER
 
 sudo yum remove -y gcc-c++
@@ -106,15 +112,19 @@ setsebool -P httpd_can_network_connect 1
 systemctl enable nginx
 systemctl restart nginx
 
+# Restart New Relic Infrastructure Monitor
+systemctl enable newrelic-infra
+systemctl start newrelic-infra
+
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v14.16.0/bin /home/ec2-user/.nvm/versions/node/v14.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
-su - ec2-user -c 'pm2 restart'
+su - ec2-user -c 'pm2 restart "eAPD API"'
 
 # These logs aren't created until after the Instance is provisioned and need to be added to CloudWatch as a last step
-touch /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
-cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
+#touch /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
+#cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
 
 {
   "logs": {

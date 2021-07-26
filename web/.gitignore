@@ -3,5 +3,6 @@ coverage
 
 .jest-test-results.json
 cypress/videos/*
+cypress/screenshots/*
 cypress.env.json
 storybook-static/*
