@@ -9,7 +9,6 @@ module.exports = (app, { getAllActiveRoles = gr } = {}) => {
     'eAPD State Admin': ['eAPD State Staff', 'eAPD State Contractor']
   }
   app.get('/roles', can('view-roles'), async (req, res, next) => {
-    console.log('req.user', req.user);
     logger.silly({ id: req.id, message: 'handling GET /roles' });
 
     try {
