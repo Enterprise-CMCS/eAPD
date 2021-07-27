@@ -19,6 +19,7 @@ const ManageAllUsersTable = ({
 }) => {
   const { id: currentUserId, activities: currentUserActivities } = currentUser;
 
+  
   const showActions = affiliation => {
     return (
       currentUserId !== affiliation.userId &&
