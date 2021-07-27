@@ -7,13 +7,17 @@ describe('filling out Activities section', function () {
   before(function () {
     cy.useStateStaff();
     // cy.findByRole('button', {name: /Create new/i}).click();
-    cy.get('[href="/apd/295"]').click();
+    cy.get('[href="/apd/297"]').click();
 
     //Gets list of available years
-    cy.get("[class='ds-c-choice']").each(($el, index, list) => {
-      cy.get(list[index]).check({force: true});
-      years.push(list[index].value);
-    });
+    // cy.get("[class='ds-c-choice']").each(($el, index, list) => {
+    //   if (list[index].checked) {
+    //     years.push(list[index].value);
+    //   }
+    // });
+    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+      years.push(list[index].value),
+    );
 
     //Gets to the activity page
     for (let i = 0; i < 3; i++) {
@@ -66,7 +70,8 @@ describe('filling out Activities section', function () {
     cy.contains('Back').click();
     cy.url().should('include', '/activities');
 
-    cy.contains('Activity 1').should('exist');
+    cy.contains('Activity 1: Program Administration (HIT)')
+      .should('exist');
 
     //Shouldn't be able to delete the default activity
     cy.contains('Delete').should('not.exist');
@@ -168,6 +173,7 @@ describe('filling out Activities section', function () {
         cy.findByLabelText(`${years[i]} Cost`).should('have.value', 0);
       }
     });
+
     cy.findByRole('button', {name: /Done/i}).click();
 
     checkDeleteButton(
@@ -178,6 +184,34 @@ describe('filling out Activities section', function () {
     //Private Contractor Costs
     cy.contains('Continue').click();
     cy.url().should('contain', '/activity/0/contractor-costs');
+    cy.contains('Private contractors have not been added for this activity.')
+      .should('exist');
+
+    cy.findByRole('button', {name: /Add another contractor/i}).click();
+
+    cy.get('[class="ds-c-label full-width-label"]').next('input')
+      .should('have.value', '')
+    cy.get('[id="contractor-description-field-0"]').should('have.value', '');
+    checkDefaultDate('Contract start date');
+    checkDefaultDate('Contract end date');
+    cy.get('[class="ds-c-field ds-c-field--currency ds-c-field--medium"]')
+      .should('have.value', 0);
+    cy.contains('No').parent().parent().within(() => {
+      cy.get('[class="ds-c-choice"]').should('be.checked');
+    });
+
+    cy.then(() => {
+      for(let i = 0; i < years.length; i++){
+        cy.findByLabelText(`FFY ${years[i]} Cost`).should('have.value', 0);
+      }
+    });
+
+    cy.findByRole('button', {name: /Done/i}).click();
+
+    checkDeleteButton(
+      'Private contractors have not been added for this activity',
+      'Delete Private Contractor?'
+    );
 
     //Cost Allocation and Other Funding
     cy.contains('Continue').click();
