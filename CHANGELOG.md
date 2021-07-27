@@ -28,3 +28,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3226]: https://github.com/CMSgov/eAPD/issues/3226
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
 [#3264]: https://github.com/CMSgov/eAPD/issues/3264
+[#3284]: https://github.com/CMSgov/eAPD/issues/3284
