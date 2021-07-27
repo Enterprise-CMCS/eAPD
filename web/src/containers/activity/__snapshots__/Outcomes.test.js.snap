@@ -12,7 +12,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
   />
   <FormAndReviewList
     activityIndex={0}
-    addButtonText="Add another outcome"
+    addButtonText="Add outcome"
     allowDeleteAll={true}
     className={null}
     collapsed={[Function]}
@@ -29,7 +29,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
       Array [
         Object {
           "onClick": [Function],
-          "text": "Add another metric",
+          "text": "Add metric",
         },
       ]
     }
