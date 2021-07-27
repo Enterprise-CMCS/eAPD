@@ -18,7 +18,7 @@ const All = ({ addActivity, activities }) => {
         <EntryDetails apdId={apdId} activityIndex={index} key={activity.key} />
       ))}
       <Button className="ds-u-margin-top--4" onClick={addActivity}>
-        Add another activity
+        Add activity
       </Button>
     </Section>
   );

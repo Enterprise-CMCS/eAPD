@@ -52,8 +52,8 @@ keyPersonnel:
     hasCosts: Does this person have costs directly attributable to this program?
     addButton:
       zero: Add key personnel
-      one: Add another person
-      other: Add another person
+      one: Add person
+      other: Add person
   delete:
     text: Remove contact
     confirm:
