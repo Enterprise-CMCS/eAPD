@@ -55,7 +55,7 @@ describe('APD Summary/viewOnly component', () => {
       }
     };
     render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
-    expect(screen.queryByText(/No reponse was provided/i)).toBeTruthy();
+    expect(screen.queryByText(/No response was provided/i)).toBeTruthy();
   });
 
 });
