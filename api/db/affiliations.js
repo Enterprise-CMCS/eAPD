@@ -128,6 +128,11 @@ const getAllAffiliations = async ({ status, db = knex } = {}) => {
   const query = db('auth_affiliations')
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
     .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+    .where(function () {
+      this
+      .whereNot('auth_roles.name', 'eAPD System Admin')
+      .orWhere('auth_roles.name', 'is', null);
+    })
     .select(selectedColumns);
 
   if (status) {
