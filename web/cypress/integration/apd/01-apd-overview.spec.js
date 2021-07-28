@@ -115,8 +115,9 @@ describe('filling out APD overview section', function () {
     );
     cy.setTinyMceContent('hit-overview-field', this.userContent.HIT);
     cy.setTinyMceContent('hie-overview-field', this.userContent.HIE);
+    cy.wait(1000);
     cy.setTinyMceContent('mmis-overview-field', this.userContent.MMIS);
-    cy.wait(500); //Gives time to save
+    cy.wait(1000); //Gives time to save
   });
 
   it('Tests export view', function () {
@@ -149,7 +150,5 @@ describe('filling out APD overview section', function () {
     cy.contains('MMIS overview')
       .next()
       .should('have.text', this.userContent.MMIS);
-
-    cy.contains('Back to APD').click();
   });
 });
