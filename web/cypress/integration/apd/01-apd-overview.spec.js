@@ -60,22 +60,23 @@ describe('filling out APD overview section', function () {
     //Gets list of available years
     cy.get("[class='ds-c-choice']").each(($el, index, list) => {
       years.push(list[index].value);
+      if (!list[index].checked) {
+        cy.findByRole('checkbox', { name: list[index].value }).check({
+          force: true
+        });
+  
+        cy.contains('Saving').should('exist');
+        cy.contains('Saved').should('exist');
+      }
     });
 
     cy.then(() => {
-      //Loop over years and make sure checkboxes are defaulted correctly
-      for (let i = 0; i < years.length; i++) {
-        if (i === years.length - 1) {
-          cy.findByRole('checkbox', { name: years[i] }).check({ force: true });
-
-          cy.contains('Saving').should('exist');
-          cy.contains('Saved').should('exist');
-          cy.get('[class="ds-h1 apd--title"]').should('contain', years[i]);
-        } else {
-          cy.findByRole('checkbox', { name: years[i] }).should('be.checked');
-        }
-      }
-
+      cy.get('[class="ds-h1 apd--title"]').should('contain', years[0]);
+      cy.get('[class="ds-h1 apd--title"]').should(
+        'contain',
+        years[years.length - 1]
+      );
+      
       //Testing delete(cancel) FFY
       cy.findByRole('checkbox', { name: years[years.length - 1] }).uncheck({
         force: true
