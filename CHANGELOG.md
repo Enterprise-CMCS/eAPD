@@ -8,6 +8,8 @@ Anticipated release: July 26, 2021
 
 #### 🐛 Bugs fixed
 
+- Activity Summary displaying incorrectly in Executive Summary ([#3338])
+
 #### ⚙️ Behind the scenes
 
 - updated APD seed data used for testing ([#2863])
@@ -27,3 +29,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3226]: https://github.com/CMSgov/eAPD/issues/3226
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
 [#3264]: https://github.com/CMSgov/eAPD/issues/3264
+[#3338]: https://github.com/CMSgov/eAPD/issues/3338
