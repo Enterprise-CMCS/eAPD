@@ -285,6 +285,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
           cy.get('input[name="apd-state-profile-pocposition0"]').type(userData[1].username);
         })
         cy.findByRole('button', { name: /Done/i }).click();
+        cy.wait(500);   // Wait to save data
       });
 
       it('Values entered in form remain on page', () => {
