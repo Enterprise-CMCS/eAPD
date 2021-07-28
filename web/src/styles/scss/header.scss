@@ -42,7 +42,7 @@ header:not(.ds-c-dialog__header) {
   float: right;
   text-align: right;
   position: relative; /* needed for submenu absolute positioning */
-  min-width: 200px; /* don't render submenu oddly if email is very short */
+  min-width: 250px; /* don't render submenu oddly if email is very short */
   &[aria-expanded='true'] {
     .nav--dropdown__trigger {
       border-bottom: 2px solid $color-primary;

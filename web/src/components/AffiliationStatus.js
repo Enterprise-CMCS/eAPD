@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Instruction from './Instruction';
-import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
+import { getUserStateOrTerritory, getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from './UpgradeBrowser';
 import axios from '../util/api';
@@ -88,7 +88,7 @@ const AffiliationStatus = ({ state, approvalStatus }) => {
                   data-testid="eAPDlogo"
                 >
                   <img
-                    src="/static/img/eAPDLogoSVG:ICO/SVG/eAPDColVarSVG.svg"
+                    src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
                     alt="eAPD Logo"
                   />
                 </div>
@@ -118,7 +118,7 @@ AffiliationStatus.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  state: state.user.data.state || null,
+  state: getUserStateOrTerritory(state) || {},
   approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
 });

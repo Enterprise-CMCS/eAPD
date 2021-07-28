@@ -122,6 +122,8 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__MONGO_URL__|`echo $MONGO_URL`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__NEW_RELIC_LICENSE_KEY__|`echo $NEW_RELIC_LICENSE_KEY`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 

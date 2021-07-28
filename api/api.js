@@ -6,7 +6,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const swaggerUi = require('swagger-ui-express');
 const { v4: uuidv4 } = require('uuid');
 const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
@@ -35,17 +34,6 @@ if (process.env.PROXY_TRUST !== 'false') {
     process.env.PROXY_TRUST === 'true' || process.env.PROXY_TRUST
   );
 }
-
-// This endpoint doesn't do anything, but lets us verify that the api is
-// online without triggering any other processing - e.g., no authentication,
-// no cookie/token processing, etc.
-logger.debug('setting up heartbeat endpoint');
-api.get('/heartbeat', (_, res) => {
-  res.status(204).end();
-});
-
-logger.debug('setting out route for API docs');
-api.use('/api-docs', swaggerUi.serve);
 
 api.use((_, res, next) => {
   // Disallow proxies from cacheing anything ("private"); instruct browsers to
@@ -92,6 +80,14 @@ api.use(compression());
 api.use(express.urlencoded({ extended: true }));
 api.use(cors({ credentials: true, origin: true }));
 api.use(bodyParser.json({ limit: '5mb' }));
+
+// This endpoint doesn't do anything, but lets us verify that the api is
+// online without triggering any other processing - e.g., no authentication,
+// no cookie/token processing, etc.
+logger.debug('setting up heartbeat endpoint');
+api.get('/heartbeat', (_, res) => {
+  res.status(204).end();
+});
 
 // Registers Passport, related handlers, and
 // login/logout endpoints
