@@ -35,9 +35,13 @@ exports[`executive summary component renders correctly 1`] = `
         onEditClick={null}
         title={null}
       >
-        <p>
-          first activity
-        </p>
+        <p
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "first activity",
+            }
+          }
+        />
         <ul
           className="ds-c-list--bare"
         >
@@ -147,9 +151,13 @@ exports[`executive summary component renders correctly 1`] = `
         onEditClick={null}
         title={null}
       >
-        <p>
-          second activity
-        </p>
+        <p
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "second activity",
+            }
+          }
+        />
         <ul
           className="ds-c-list--bare"
         >
