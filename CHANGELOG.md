@@ -18,8 +18,11 @@ Anticipated release: July 28, 2021
 - created test tokens when database is seeded (development and test only) ([#3128])
 - add tests for authentication ([#3188])
 - install cypress for end-to-end testing ([#3226])
+- updated APD seed data used for testing ([#2863])
+- prevented some unexpected JSON parsing errors from being escalated to the error log. ([#3176])
 - Reduced the size of the JWT payload because sys admins had a 24KB payload and the max size is 4KB. ([#3246])
 - fixed error for users with view-document permission not being able to load an APD([#3264])
+
 
 # Previous releases
 
@@ -31,4 +34,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3188]: https://github.com/CMSgov/eAPD/issues/3188
 [#3226]: https://github.com/CMSgov/eAPD/issues/3226
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
+[#3164]: https://github.com/CMSgov/eAPD/issues/3164
+[#3176]: https://github.com/CMSgov/eAPD/issues/3176
 [#3264]: https://github.com/CMSgov/eAPD/issues/3264
+
