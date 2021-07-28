@@ -13,23 +13,23 @@ services:
     ports:
       - 54325:5432
 
-  mongo:
+  mongodb:
     image: mongo:4
     environment:
       - PUID=1000
       - PGID=1000
       - MONGO_INITDB_ROOT_USERNAME=admin-user
       - MONGO_INITDB_ROOT_PASSWORD=admin-password
-      - DB_USER=mongo
-      - DB_PASSWORD=cms
-      - DB_NAME=eapd
+      - MONGO_INITDB_DATABASE=eapd
+      - DATABASE_USERNAME=mongo
+      - DATABASE_PASSWORD=cms
     volumes:
       - ./mongodata/database:/data/db
       - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
     ports:
       - 27017:27017
     restart: unless-stopped
-
+    command: [--auth]
   web:
     build: ./web
     image: cms-eapd/web
@@ -55,7 +55,8 @@ services:
     environment:
       - PORT=8000
       - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
-      - MONGO_URL=mongodb://mongo:cms@mongo:27017/eapd
+      - MONGO_URL=mongodb://mongo:cms@mongodb:27017/eapd
+      - MONGO_DATABASE=eapd
       - NODE_ENV=development
       - DISABLE_SAME_SITE=yes
       - OKTA_DOMAIN=${OKTA_DOMAIN}

@@ -10,20 +10,20 @@ services:
     ports:
       - '55432:5432'
 
-  mongo:
+  mongodb:
     image: mongo:4
     environment:
       - PUID=1000
       - PGID=1000
       - MONGO_INITDB_ROOT_USERNAME=admin-user
       - MONGO_INITDB_ROOT_PASSWORD=admin-password
-      - DB_USER=mongo
-      - DB_PASSWORD=cms
-      - DB_NAME=eapd
+      - MONGO_INITDB_DATABASE=eapd-test
+      - DATABASE_USERNAME=mongo-test
+      - DATABASE_PASSWORD=cms
     volumes:
-      - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
-    ports:
-      - 27017:27017
+      - ./db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+    restart: unless-stopped
+    command: [--auth]
 
   api-for-testing:
     image: cms-eapd/api
@@ -35,6 +35,8 @@ services:
       - API_PORT=8000
       - API_HOST=api-for-testing
       - ENDPOINT_COVERAGE_CAPTURE=${ENDPOINT_COVERAGE_CAPTURE}
+      - MONGO_URL=mongodb://mongo-test:cms@mongodb:27017/eapd-test?authSource=eapd-test
+      - MONGO_DATABASE=eapd-test
       - FILE_STORE=local
       - FILE_PATH=test-data/files
       - OKTA_DOMAIN=${OKTA_DOMAIN}
