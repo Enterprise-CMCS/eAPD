@@ -26,6 +26,8 @@ workflows:
             branches:
               only:
                 - master
+                - main
+                - development
     jobs:
       - install dependencies
       - dependency vulnerability scan:
@@ -94,6 +96,7 @@ workflows:
             branches:
               only:
                 - master
+                - development
           requires:
             - store artifacts staging
             - backend api endpoint test
@@ -144,6 +147,7 @@ workflows:
             branches:
               ignore:
                 - master
+                - development
           requires:
             - frontend dependency vulnerability scan
       - frontend build:
@@ -163,6 +167,7 @@ workflows:
             branches:
               only:
                 - master
+                - development
           requires:
             - frontend dependency vulnerability scan
       - frontend deploy:
@@ -172,6 +177,7 @@ workflows:
             branches:
               only:
                 - master
+                - development
           requires:
             - frontend build staging
             - frontend dependency vulnerability scan
@@ -199,6 +205,7 @@ workflows:
             branches:
               ignore:
                 - master
+                - development
             tags:
               ignore: /^noinfra.*/
           requires:
@@ -211,6 +218,7 @@ workflows:
             branches:
               only:
                 - master
+                - development
           requires:
             - backend dependency vulnerability scan
             - frontend build staging
