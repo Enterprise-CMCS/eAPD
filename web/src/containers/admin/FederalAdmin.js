@@ -51,22 +51,21 @@ const FederalAdmin = ({
   const currentTab = id => {
     setActiveTab(id);
   };
-
-  const showManageModal = event => {
-    const currentAffiliation = currentAffiliations.find(element => {
-      return (
-        element.id === Number(event.target.parentNode.getAttribute('data-primary-affiliation-id'))
-      );
-    });
-
+  
+  const setCurrentAffiliation = event => {
+    const currentAffiliation = currentAffiliations.find(element => element.id === Number(event.target.parentNode.getAttribute('data-primary-affiliation-id')) );
     const currentAffiliationId = event.target.parentNode.getAttribute('data-id');
     const currentAffiliationState = event.target.parentNode.getAttribute('data-state');
-
+    
     setSelectedAffiliation({
       currentAffiliation, 
       currentAffiliationId, 
       currentAffiliationState
     });
+  };
+  
+  const showManageModal = event => {
+    setCurrentAffiliation(event);
     setManageModalDisplay(true);
   };
 
@@ -74,59 +73,37 @@ const FederalAdmin = ({
     setManageModalDisplay(false);
   };
 
+  const showConfirmationModal = event => {
+    const checkIsDenied = event.target.getAttribute('data-deny-or-revoke') === 'deny';
+    setIsDenied(checkIsDenied);
+    setCurrentAffiliation(event);
+    setConfirmationModalDisplay(true);
+  };
+
+  const hideConfirmationModal = () => setConfirmationModalDisplay(false);
+  
+  const saveAffiliation = async (roleId, permissionChangeType) => {
+    const role = roleId || -1;
+    const changeType = permissionChangeType || 'approved';
+    
+    await actualUpdateAffiliation(
+      selectedAffiliation.currentAffiliationState,
+      selectedAffiliation.currentAffiliationId,
+      role,
+      changeType
+    );
+  };
+  
   const handleAffiliationUpdate = roleId => {
-    async function saveAffiliation() {
-      await actualUpdateAffiliation(
-        selectedAffiliation.currentAffiliationState,
-        selectedAffiliation.currentAffiliationId,
-        roleId,
-        'approved'
-      );
-    }
-    saveAffiliation().then(() => {
+    saveAffiliation(roleId).then(() => {
       affiliations(currentState.id, activeTab);
       setManageModalDisplay(false);
     });
   };
-
-  const showConfirmationModal = event => {
-    const checkIsDenied =
-      event.target.getAttribute('data-deny-or-revoke') === 'deny';
-    setIsDenied(checkIsDenied);
-
-    const currentAffiliation = currentAffiliations.find(element => {
-      return (
-        element.id === Number(event.target.parentNode.getAttribute('data-primary-affiliation-id'))
-      );
-    });
-
-    const currentAffiliationId = event.target.parentNode.getAttribute('data-id');
-    const currentAffiliationState = event.target.parentNode.getAttribute('data-state');
-
-    setSelectedAffiliation({
-      currentAffiliation, 
-      currentAffiliationId, 
-      currentAffiliationState
-    });
-    setConfirmationModalDisplay(true);
-  };
-
-  const hideConfirmationModal = () => {
-    setConfirmationModalDisplay(false);
-  };
-
+  
   const handleDenyOrRevoke = () => {
     const permissionChangeType = isDenied ? 'denied' : 'revoked';
-
-    async function saveAffiliation() {
-      await actualUpdateAffiliation(
-        selectedAffiliation.currentAffiliationState,
-        selectedAffiliation.currentAffiliationId,
-        -1,
-        permissionChangeType
-      );
-    }
-    saveAffiliation().then(() => {
+    saveAffiliation(permissionChangeType).then(() => {
       affiliations(currentState.id, activeTab);
       setConfirmationModalDisplay(false);
     });
