@@ -6,7 +6,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const swaggerUi = require('swagger-ui-express');
 const { v4: uuidv4 } = require('uuid');
 const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
@@ -39,9 +38,6 @@ if (process.env.PROXY_TRUST !== 'false') {
     process.env.PROXY_TRUST === 'true' || process.env.PROXY_TRUST
   );
 }
-
-logger.debug('setting out route for API docs');
-api.use('/api-docs', swaggerUi.serve);
 
 api.use((_, res, next) => {
   // Disallow proxies from cacheing anything ("private"); instruct browsers to

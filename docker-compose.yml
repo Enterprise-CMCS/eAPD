@@ -54,7 +54,7 @@ services:
       - db
     environment:
       - PORT=8000
-      - DATABASE_URL=postgres://postgres:cms@db/hitech_apd
+      - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
       - MONGO_URL=mongodb://mongo:cms@mongo:27017/eapd
       - NODE_ENV=development
       - DISABLE_SAME_SITE=yes
@@ -65,6 +65,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - MONGO_DATABASE=${MONGO_DATABASE}
       - MONGO_URL=${MONGO_URL}
+      - CYPRESS_TESTS=${CYPRESS_TESTS}
     volumes:
       - type: bind
         source: ./api

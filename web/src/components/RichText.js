@@ -88,6 +88,15 @@ const fileButtonOnClick = (button, editor, upload) => () => {
 
 // sets up the image button
 const setupTinyMCE = upload => editor => {
+  editor.on('init', () => {
+    const { id } = editor;
+    const event = new CustomEvent(`tinymceLoaded.${id}`, {
+      detail: {},
+      editor: this
+    });
+    document.dispatchEvent(event);
+  });
+
   editor.ui.registry.addButton('eapdImageUpload', {
     icon: 'image',
     onAction: () => {
@@ -195,7 +204,8 @@ class RichText extends Component {
             remove_trailing_brs: true,
             link_assume_external_targets: true,
             default_link_target: '_blank',
-            toolbar_mode: 'wrap'
+            toolbar_mode: 'wrap',
+            selector: 'textarea'
           }}
           value={content}
           onEditorChange={this.onEditorChange}

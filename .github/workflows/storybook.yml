@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - development
     paths:
       - 'web/.storybook/**'
       - 'web/src/stories/**'

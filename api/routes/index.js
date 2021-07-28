@@ -1,3 +1,4 @@
+const swaggerUi = require('swagger-ui-express');
 const logger = require('../logger')('routes index');
 const affiliations = require('./affiliations');
 const apds = require('./apds');
@@ -7,6 +8,7 @@ const roles = require('./roles');
 const states = require('./states');
 const users = require('./users');
 const openAPI = require('./openAPI');
+const cypress = require('./cypress');
 
 module.exports = (
   app,
@@ -17,6 +19,7 @@ module.exports = (
   rolesEndpoint = roles,
   statesEndpoint = states,
   usersEndpoint = users,
+  cypressEndpoint = cypress,
   openAPIdoc = openAPI
 ) => {
   logger.debug('setting up routes for affilitions');
@@ -35,8 +38,17 @@ module.exports = (
   usersEndpoint(app);
 
   logger.debug('setting up route for OpenAPI');
+
   app.get('/open-api', (req, res) => {
     logger.verbose({ id: req.id, message: 'sending OpenAPI documentation' });
     res.send(openAPIdoc);
   });
+
+  logger.debug('setting out route for API docs');
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openAPIdoc));
+
+  if (process.env.CYPRESS_TESTS === 'true') {
+    logger.debug('setting up route for cypress');
+    cypressEndpoint(app);
+  }
 };

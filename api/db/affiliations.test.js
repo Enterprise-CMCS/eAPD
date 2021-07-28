@@ -9,7 +9,7 @@ const {
   getPopulatedAffiliationsByStateId,
   getAllPopulatedAffiliations,
   reduceAffiliations,
-  getAffiliationsByUserId,
+  getAffiliationsByUserId
 } = require('./affiliations');
 
 const defaultPopulatedAffiliation = {
@@ -364,21 +364,16 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
   );
 
   affiliationsTests.test('get affiliations for a user', async test => {
-
-    db.where.withArgs('auth_affiliations.user_id', 'a user_id').returnsThis()
+    db.where.withArgs('auth_affiliations.user_id', 'a user_id').returnsThis();
     db.select.withArgs(selectedColumns).returnsThis();
     db.leftJoin
       .withArgs('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
-      .returnsThis()
+      .returnsThis();
     db.leftJoin
       .withArgs('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
-      .resolves(["result1", ]);
-
-
+      .resolves(['result1']);
 
     const results = await getAffiliationsByUserId('a user_id', { db });
-    test.same(["result1", ], results);
-
+    test.same(['result1'], results);
   });
-
 });

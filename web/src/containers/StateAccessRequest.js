@@ -10,28 +10,33 @@ import axios from '../util/api';
 
 const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
 
-const StateAccessRequest = ({ 
-  saveAction, 
+const StateAccessRequest = ({
+  saveAction,
   cancelAction,
-  errorMessage, 
+  errorMessage,
   fetching,
-  secondaryButtonText,
+  secondaryButtonText
 }) => {
+  const [existingAffiliations, setExistingAffiliations] = useState([]);
 
-  const [existingAffiliations, setExistingAffiliations] = useState([])
-
-  useEffect( ()=>{
+  useEffect(() => {
     const fetchData = async () => {
-      const affiliations = await axios.get('/affiliations/me')
-      const results = affiliations.data.map(affiliation =>{
-        const stateDetails = statesWithFederal.find(item => item.id === affiliation.stateId)
-        return { id: affiliation.stateId, name: stateDetails.name, status: affiliation.status }
-      })
-      setExistingAffiliations(results)
-      return null
-    }
-    fetchData()
-  }, [])
+      const affiliations = await axios.get('/affiliations/me');
+      const results = affiliations.data.map(affiliation => {
+        const stateDetails = statesWithFederal.find(
+          item => item.id === affiliation.stateId
+        );
+        return {
+          id: affiliation.stateId,
+          name: stateDetails.name,
+          status: affiliation.status
+        };
+      });
+      setExistingAffiliations(results);
+      return null;
+    };
+    fetchData();
+  }, []);
 
   /**
   const existingAffiliations = Object.keys(currentAffiliations).map(stateId => {
@@ -39,17 +44,26 @@ const StateAccessRequest = ({
     return { id: stateId, name: stateDetails.name, status: currentAffiliations[stateId] }
   });
   */
-  const availableStates = statesWithFederal.filter( item => {
+  const availableStates = statesWithFederal.filter(item => {
     return !existingAffiliations.find(affiliation => {
       return affiliation.id === item.id;
     });
   });
 
-  const pendingAffiliations = existingAffiliations.filter(element => element.status === 'requested');
-  const inactiveAffiliations = existingAffiliations.filter(element => element.status === 'revoked' || element.status === 'denied');
-  const activeAffiliations = existingAffiliations.filter(element => element.status === 'approved');
+  const pendingAffiliations = existingAffiliations.filter(
+    element => element.status === 'requested'
+  );
+  const inactiveAffiliations = existingAffiliations.filter(
+    element => element.status === 'revoked' || element.status === 'denied'
+  );
+  const activeAffiliations = existingAffiliations.filter(
+    element => element.status === 'approved'
+  );
 
-  const autocompleteLabel = existingAffiliations.length > 0 ? "Request a new State Affiliation" : "Select your State Affiliation";
+  const autocompleteLabel =
+    existingAffiliations.length > 0
+      ? 'Request a new State Affiliation'
+      : 'Select your State Affiliation';
 
   const initialState = {
     fullStateList: availableStates,
@@ -92,7 +106,9 @@ const StateAccessRequest = ({
           inputValue: ''
         };
       default:
-        throw new Error("Unrecognized action provided to StateAccessRequest reducer hook");
+        throw new Error(
+          'Unrecognized action provided to StateAccessRequest reducer hook'
+        );
     }
   }
 
@@ -123,46 +139,55 @@ const StateAccessRequest = ({
     saveAction(state.selectedStates);
   };
 
-  const cardTitle = existingAffiliations.length > 0 ? "Manage Account" : "Verify Your Identity"
+  const cardTitle =
+    existingAffiliations.length > 0 ? 'Manage Account' : 'Verify Your Identity';
 
   const UserExistingAffiliations = () => {
     return (
       <Fragment>
         <h2 className="ds-h4 ds-u-margin-y--1">Existing Affiliations</h2>
-        <p className="ds-u-margin-top--0 ds-u-font-size--small">Below are your current, pending and/or revoked state affiliations. Contact the State Administrator for the state you wish to be have removed from your state affiliation list.</p>
+        <p className="ds-u-margin-top--0 ds-u-font-size--small">
+          Below are your current, pending and/or revoked state affiliations.
+          Contact the State Administrator for the state you wish to be have
+          removed from your state affiliation list.
+        </p>
         <div className="ds-u-border--1 ds-u-padding--2">
           <h3 className="ds-h5">Active</h3>
-          {activeAffiliations.length === 0 && "No active affiliations"}
-          {activeAffiliations.map(el => {
-            return (
+          <span id="active">
+            {activeAffiliations.length === 0 && 'No active affiliations'}
+            {activeAffiliations.map(el => (
               <Badge className="ds-u-margin-bottom--1" key={el.id}>
                 {el.name}
-              </Badge>     
-            )
-          })}
-          <h3 className="ds-h5 ds-u-padding-top--2 ds-u-margin-top--1 ds-u-border-top--1">Pending</h3>
-          {pendingAffiliations.length === 0 && "No pending affiliations"}
-          {pendingAffiliations.map(el => {
-            return (
+              </Badge>
+            ))}
+          </span>
+          <h3 className="ds-h5 ds-u-padding-top--2 ds-u-margin-top--1 ds-u-border-top--1">
+            Pending
+          </h3>
+          <span id="pending">
+            {pendingAffiliations.length === 0 && 'No pending affiliations'}
+            {pendingAffiliations.map(el => (
               <Badge className="ds-u-margin-bottom--1" key={el.id}>
                 {el.name}
-              </Badge>     
-            )
-          })}
-          <h3 className="ds-h5 ds-u-padding-top--2 ds-u-margin-top--1 ds-u-border-top--1">Revoked</h3>
-          {inactiveAffiliations.length === 0 && "No revoked affiliations"}
-          {inactiveAffiliations.map(el => {
-            return (
+              </Badge>
+            ))}
+          </span>
+          <h3 className="ds-h5 ds-u-padding-top--2 ds-u-margin-top--1 ds-u-border-top--1">
+            Revoked
+          </h3>
+          <span id="revoked">
+            {inactiveAffiliations.length === 0 && 'No revoked affiliations'}
+            {inactiveAffiliations.map(el => (
               <Badge className="ds-u-margin-bottom--1" key={el.id}>
                 {el.name}
-              </Badge>     
-            )
-          })}
+              </Badge>
+            ))}
+          </span>
         </div>
       </Fragment>
-    )
+    );
   };
-    
+
   const handleCancel = e => {
     e.preventDefault();
     if (cancelAction) cancelAction();
@@ -186,9 +211,7 @@ const StateAccessRequest = ({
         onCancel={handleCancel}
       >
         <div className="ds-u-margin-bottom--4">
-          <h2 className="ds-h4 ds-u-margin-top--2">
-            {autocompleteLabel}
-          </h2>
+          <h2 className="ds-h4 ds-u-margin-top--2">{autocompleteLabel}</h2>
 
           <Autocomplete
             items={state.filteredStates}
@@ -233,9 +256,7 @@ const StateAccessRequest = ({
             />
           </Autocomplete>
 
-          {existingAffiliations.length > 0 && (
-            <UserExistingAffiliations />
-          )}
+          {existingAffiliations.length > 0 && <UserExistingAffiliations />}
         </div>
       </AuthenticationForm>
     </div>
@@ -251,10 +272,8 @@ StateAccessRequest.propTypes = {
 };
 
 StateAccessRequest.defaultProps = {
-  errorMessage: false,
-
+  errorMessage: false
 };
-
 
 export default StateAccessRequest;
 
