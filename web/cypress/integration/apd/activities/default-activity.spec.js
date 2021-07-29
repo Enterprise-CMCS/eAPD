@@ -3,12 +3,11 @@
 describe('filling out Activities section', function () {
   let apdUrl;
   let years = [];
-  let nonDefault = [1,2,3,4,5,6,7,8,9];
 
   before(function () {
     cy.useStateStaff();
     // cy.findByRole('button', {name: /Create new/i}).click();
-    cy.get('[href="/apd/316"]').click();
+    cy.get('[href="/apd/321"]').click();
 
     //Gets list of available years
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
@@ -45,20 +44,30 @@ describe('filling out Activities section', function () {
       });
     };
 
-    const checkDeleteButton = (errMsg, heading) => {
-      cy.contains(errMsg).should('not.exist');
+    const checkDeleteButton = (alert, heading, check) => {
+      cy.contains(alert).should('not.exist');
       cy.contains('Delete').click();
       cy.contains(heading).should('exist');
       cy.contains('Cancel').click();
       cy.contains(heading).should('not.exist');
-      cy.contains(errMsg).should('not.exist');
+      cy.contains(alert).should('not.exist');
+      cy.contains(check).should('exist');
 
       cy.contains('Delete').click();
       cy.contains(heading).should('exist');
       cy.get('[class="ds-c-button ds-c-button--danger"]').click();
       cy.contains(heading).should('not.exist');
-      cy.contains(errMsg).should('exist');
+      cy.contains(alert).should('exist');
+      cy.contains(check).should('not.exist');
     };
+
+    const checkFFYcosts = () => {
+      cy.then(() => {
+        for (let i = 0; i < years.length; i++){
+          cy.contains(`FFY ${years[i]} Cost: $0`).should('exist');
+        }
+      });
+    }
 
     const checkTotalCostTable = () => {
       cy.contains('Activity Total Cost').parent().should('contain', '$0');
@@ -78,8 +87,23 @@ describe('filling out Activities section', function () {
         cy.contains('Total Computable Medicaid Cost').parent()
           .should('contain', '$0');
 
-        cy.contains('Federal Share').parent().should('contain', federal);
-        cy.contains('State Share').parent().should('contain', state);
+        costSplitTableRow('Federal Share', federal);
+        costSplitTableRow('State Share', state);
+      });
+    };
+
+    const costSplitTableRow = (fedOrState, split) => {
+      cy.contains(fedOrState).parent().within(() => {
+        cy.get('[class="budget-table--number"]').eq(0)
+          .should('contain', '$0');
+        cy.get('[class="budget-table--number ds-u-padding--0"]')
+          .should('have.text', '×');
+        cy.get('[class="budget-table--number ds-u-text-align--left"]')
+          .should('contain', split);
+        cy.get('[class="budget-table--number"]').eq(1)
+          .should('contain', '=');
+        cy.get('[class="budget-table--number"]').eq(2)
+          .should('contain', '$0');
       });
     };
 
@@ -161,9 +185,13 @@ describe('filling out Activities section', function () {
     cy.contains('Describe a measure').next().should('have.value', '');
     cy.findByRole('button', { name: /Done/i }).click();
 
+    cy.contains('Outcome not specified').should('exist');
+    cy.contains('Metric not specified').should('exist');
+
     checkDeleteButton(
       'Outcomes have not been added for this activity.',
-      'Delete Outcome and Metrics?'
+      'Delete Outcome and Metrics?',
+      'Outcome not specified'
     );
 
     cy.findByRole('button', { name: /Add another milestone/i }).click();
@@ -171,9 +199,13 @@ describe('filling out Activities section', function () {
     checkDefaultDate('Target completion date');
     cy.findByRole('button', { name: /Done/i }).click();
 
+    cy.contains('Milestone not specified').should('exist');
+    cy.contains('Date not specified').should('exist');
+
     checkDeleteButton(
       'Milestones have not been added for this activity.',
-      'Delete Milestone?'
+      'Delete Milestone?',
+      'Milestone not specified'
     );
 
     //State Staff and Expenses
@@ -201,14 +233,25 @@ describe('filling out Activities section', function () {
     });
     cy.findByRole('button', {name: /Done/i}).click();
 
+    cy.contains('Personnel title not specified').should('exist');
+    cy.then(() => {
+      for(let i = 0; i < years.length; i++){
+        cy.contains(`FFY ${years[i]}`).parent().within(() => {
+          cy.contains('Cost: $0').should('exist');
+          cy.contains('FTEs:').should('exist');
+          cy.contains('Total: $0');
+        });
+      };
+    });
+
     checkDeleteButton(
       'State staff have not been added for this activity.',
-      'Delete State Staff Expenses?'
+      'Delete State Staff Expenses?',
+      'Personnel title not specified'
     );
 
     cy.findByRole('button', {name: /Add another state expense/i}).click();
 
-    //Checks dropdown menu elements
     cy.contains('Category').parent().next().click();
     cy.contains('Hardware, software, and licensing').should('exist');
     cy.contains('Equipment and supplies').should('exist');
@@ -223,12 +266,15 @@ describe('filling out Activities section', function () {
         cy.findByLabelText(`${years[i]} Cost`).should('have.value', 0);
       }
     });
-
     cy.findByRole('button', {name: /Done/i}).click();
+
+    cy.contains('Hardware, software, and licensing').should('exist');
+    checkFFYcosts();
 
     checkDeleteButton(
       'Other state expenses have not been added for this activity.',
-      'Delete Other State Expense?'
+      'Delete Other State Expense?',
+      'Hardware, software, and licensing'
     );
 
     //Private Contractor Costs
@@ -255,12 +301,21 @@ describe('filling out Activities section', function () {
         cy.findByLabelText(`FFY ${years[i]} Cost`).should('have.value', 0);
       }
     });
-
     cy.findByRole('button', {name: /Done/i}).click();
+
+    cy.contains('Private Contractor or Vendor Name not specified')
+      .should('exist');
+    cy.contains('Procurement Methodology and Description of Services not specified')
+      .should('exist');
+    cy.contains('Full Contract Term: Date not specified - Date not specified')
+      .should('exist');
+    cy.contains('Total Contract Cost: $0').should('exist');
+    checkFFYcosts();
 
     checkDeleteButton(
       'Private contractors have not been added for this activity',
-      'Delete Private Contractor?'
+      'Delete Private Contractor?',
+      'Private Contractor or Vendor Name not specified'
     );
 
     //Cost Allocation and Other Funding
@@ -310,6 +365,10 @@ describe('filling out Activities section', function () {
             cy.contains('75-25').should('exist');
             cy.contains('50-50').should('exist');
 
+            cy.contains('Federal-State Split').parent().next('div')
+              .find(':selected')
+              .contains('90-10');
+            
             costSplitTable('90%', '10%');
 
             cy.get('[class="ds-c-field"]').select('75-25');
