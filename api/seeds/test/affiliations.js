@@ -4,6 +4,7 @@ const { states } = require('../../util/states');
 // affiliate 'all-permissions' user with all states
 const { id: adminRoleId } = roles.find(role => role.name === 'eAPD Admin');
 const { id: fedAdminRoleId } = roles.find(role => role.name === 'eAPD Federal Admin');
+const { id: stateAdminRoleId } = roles.find(role => role.name === 'eAPD State Admin');
 const adminAffiliations = states
   .filter(state => state.id !== 'ak')
   .map(state => ({
@@ -42,6 +43,13 @@ exports.seed = async knex => {
       state_id: 'fd',
       role_id: fedAdminRoleId,
       status: 'approved'
+    },
+    {
+      id: 4004,
+      user_id: 'state-admin',
+      state_id: 'ak',
+      role_id: stateAdminRoleId,
+      status: 'approved'
     }
   ]);
   await knex('okta_users').del();
@@ -71,7 +79,11 @@ exports.seed = async knex => {
       email: 'fedadmin@email.com',
       metadata: '{}'
     },
-
+    {
+      user_id: 'state-admin',
+      email: 'stateadmin@email.com',
+      metadata: '{}'
+    }
   ]);
 
 };
