@@ -7,6 +7,8 @@ Anticipated release: July 28, 2021
 - manage affiliations and choose state page now make live calls for the list of affiliations ([#3264])
 - Update the roles returned by the roles endpoint ([#3277])
 
+- added alerts to each section if no FFY has been selected ([#3202])
+
 #### 🐛 Bugs fixed
 
 - resolved issue with invalid jwt throwing error ([#3283])
@@ -36,6 +38,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3188]: https://github.com/CMSgov/eAPD/issues/3188
 [#3226]: https://github.com/CMSgov/eAPD/issues/3226
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
+[#3202]: https://github.com/CMSgov/eAPD/issues/3202
 [#3164]: https://github.com/CMSgov/eAPD/issues/3164
 [#3176]: https://github.com/CMSgov/eAPD/issues/3176
 [#3264]: https://github.com/CMSgov/eAPD/issues/3264
