@@ -14,12 +14,14 @@ import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
 } from '../reducers/budget.selectors';
+import AlertMissingFFY from '../components/AlertMissingFFY';
 
 const ExecutiveSummary = ({ data, total, years }) => {
   const apdId = +useParams().apdId;
   return (
     <React.Fragment>
       <Waypoint />
+      <AlertMissingFFY/>
       <Section resource="executiveSummary">
         <Waypoint id="executive-summary-summary" />
         <Subsection
