@@ -2,8 +2,8 @@ const sinon = require('sinon');
 const tap = require('tap');
 const dbMock = require('./dbMock.test');
 const {
+  // getAllAffiliations
   selectedColumns,
-  getAllAffiliations,
   getAffiliationsByStateId,
   getAffiliationById,
   getPopulatedAffiliationsByStateId,
