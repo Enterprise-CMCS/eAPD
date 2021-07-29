@@ -5,6 +5,7 @@ Anticipated release: July 28, 2021
 #### 🚀 New features
 
 - manage affiliations and choose state page now make live calls for the list of affiliations ([#3264])
+- Update the roles returned by the roles endpoint ([#3277])
 
 #### 🐛 Bugs fixed
 
@@ -38,4 +39,5 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3164]: https://github.com/CMSgov/eAPD/issues/3164
 [#3176]: https://github.com/CMSgov/eAPD/issues/3176
 [#3264]: https://github.com/CMSgov/eAPD/issues/3264
+[#3277]: https://github.com/CMSgov/eAPD/issues/3277
 [#3282]: https://github.com/CMSgov/eAPD/issues/3282
