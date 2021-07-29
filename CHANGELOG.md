@@ -16,6 +16,7 @@ Anticipated release: July 26, 2021
 - install cypress for end-to-end testing ([#3226])
 - Reduced the size of the JWT payload because sys admins had a 24KB payload and the max size is 4KB. ([#3246])
 - fixed error for users with view-document permission not being able to load an APD([#3264])
+- remove sys admins being returned in affiliations ([#3295])
 
 # Previous releases
 
@@ -27,3 +28,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3226]: https://github.com/CMSgov/eAPD/issues/3226
 [#3246]: https://github.com/CMSgov/eAPD/issues/3246
 [#3264]: https://github.com/CMSgov/eAPD/issues/3264
+[#3295]: https://github.com/CMSgov/eAPD/issues/3295
