@@ -319,14 +319,19 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         
         // Toggle to see if the FFY cost prompts appear/disappear
         cy.get('input[type="radio"][value="no"]').check({ force: true });
+        cy.wait(500);   // Wait for page data to update
         for(let year of years) {
           cy.contains('FFY ' + year + ' Cost').should('not.exist');
         }
 
         cy.get('input[type="radio"][value="yes"]').check({ force: true });
+        cy.wait(500);   // Wait for page data to update
         for(let year of years) {
           cy.contains('FFY ' + year + ' Cost').should('exist');
         }
+
+        cy.findByRole('button', { name: /Done/i }).click();
+        cy.wait(500);   // Wait to save data
       });
 
       it('Edit Key Personnel', () => {
@@ -337,6 +342,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
           cy.get('input[name="apd-state-profile-pocemail1"]').type(userData[2].email);
           cy.get('input[name="apd-state-profile-pocposition1"]').type(userData[2].username);
         })
+        
         cy.findByRole('button', { name: /Done/i }).click();
         cy.wait(500);   // Wait to save data
       });
