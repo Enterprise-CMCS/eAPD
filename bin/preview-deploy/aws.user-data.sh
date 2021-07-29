@@ -108,6 +108,12 @@ restorecon -Rv /etc/nginx/nginx.conf
 semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
+
+# Start/Enable Mongo
+systemctl daemon-reload
+systemctl enable mongod
+systemctl start mongod
+
 # Restart Nginx
 systemctl enable nginx
 systemctl restart nginx
