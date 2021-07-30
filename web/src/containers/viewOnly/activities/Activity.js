@@ -149,7 +149,7 @@ const Activity = ({ activity, activityIndex }) => {
   };
 
   return (
-    <Fragment key={uuidv4()}>
+    <div key={uuidv4()}>
       <hr className="section-rule" />
       <h2>
         Activity {activityIndex + 1} ({activity.name})
@@ -317,7 +317,7 @@ const Activity = ({ activity, activityIndex }) => {
         costAllocation={activity.costAllocation}
         isViewOnly
       />
-    </Fragment>
+    </div>
   );
 };
 
