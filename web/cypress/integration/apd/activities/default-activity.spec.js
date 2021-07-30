@@ -6,8 +6,8 @@ describe('filling out Activities section', function () {
 
   before(function () {
     cy.useStateStaff();
-    // cy.findByRole('button', {name: /Create new/i}).click();
-    cy.get('[href="/apd/321"]').click();
+    cy.findByRole('button', {name: /Create new/i}).click();
+    // cy.get('[href="/apd/321"]').click();
 
     //Gets list of available years
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
@@ -188,6 +188,26 @@ describe('filling out Activities section', function () {
     cy.contains('Outcome not specified').should('exist');
     cy.contains('Metric not specified').should('exist');
 
+    cy.contains('Edit').click();
+    cy.findByRole('button', {name: /Add another metric/i}).click();
+    for (let i = 0; i < 2; i++){
+      cy.get('[class="ds-c-review"]').eq(i).within(() => {
+        cy.contains('Delete').should('exist');
+      });
+    };
+    cy.contains('Delete').click();
+    cy.contains('Delete Metric?').should('exist');
+    cy.contains('Cancel').click();
+    cy.contains('Delete Metric?').should('not.exist');
+    cy.get('[class="ds-u-margin-right--2"]').eq(2).should('exist');
+    cy.contains('Delete').click();
+    cy.contains('Delete Metric?').should('exist');
+    cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+    cy.contains('Delete').should('not.exist');
+    cy.get('[class="ds-u-margin-right--2"]').eq(2).should('not.exist');
+    cy.contains('Delete').should('not.exist');
+    cy.findByRole('button', { name: /Done/i }).click();
+
     checkDeleteButton(
       'Outcomes have not been added for this activity.',
       'Delete Outcome and Metrics?',
@@ -234,6 +254,10 @@ describe('filling out Activities section', function () {
     cy.findByRole('button', {name: /Done/i}).click();
 
     cy.contains('Personnel title not specified').should('exist');
+    // cy.get('[class="ds-c-review__heading"]').next().should('have.text', '');
+    // cy.get('[class="ds-c-review__heading"]').next().contains('#text').should('not.exist');
+
+    // cy.pause();
     cy.then(() => {
       for(let i = 0; i < years.length; i++){
         cy.contains(`FFY ${years[i]}`).parent().within(() => {
@@ -384,6 +408,20 @@ describe('filling out Activities section', function () {
             FFYbudgetTableRow('Total Enhanced FFP');
         });
       }
+
+      cy.contains(`FFY ${years[0]}-${years[years.length-1]} Totals`)
+        .next().within(() => {
+          cy.contains('Program Administration activity is $0').should('exist');
+          cy.contains('other funding of $0').should('exist');
+          cy.contains('Medicaid cost is $0').should('exist');
+          cy.contains('90/10').should('exist');
+          cy.contains('federal share of $0').should('exist');
+          cy.contains('Alaska share of $0').should('exist');
+
+          for(let i =0; i < years.length; i++){
+            cy.contains(years[i]).should('exist');
+          }
+      });
     });
 
     //Testing add activity button at end of Activitiy
@@ -399,5 +437,8 @@ describe('filling out Activities section', function () {
     //test naming and funding type on branad new activity
   });
 
-  // it('checks default activity export view')
+  it('checks default activity export view', () => {
+    cy.contains('Export and Submite').click();
+    cy.contains('Continue and Review').click();
+  });
 });
