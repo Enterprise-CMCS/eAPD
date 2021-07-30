@@ -82,10 +82,9 @@ const FederalAdmin = ({
 
   const hideConfirmationModal = () => setConfirmationModalDisplay(false);
   
-  const saveAffiliation = async (roleId, permissionChangeType) => {
+  const saveAffiliation = async (roleId, deniedOrRevoked) => {
     const role = roleId || -1;
-    const changeType = permissionChangeType || 'approved';
-    
+    const changeType = deniedOrRevoked || 'approved';
     await actualUpdateAffiliation(
       selectedAffiliation.currentAffiliationState,
       selectedAffiliation.currentAffiliationId,
@@ -95,15 +94,15 @@ const FederalAdmin = ({
   };
   
   const handleAffiliationUpdate = roleId => {
-    saveAffiliation(roleId).then(() => {
+    saveAffiliation(roleId, null).then(() => {
       affiliations(currentState.id, activeTab);
       setManageModalDisplay(false);
     });
   };
   
   const handleDenyOrRevoke = () => {
-    const permissionChangeType = isDenied ? 'denied' : 'revoked';
-    saveAffiliation(permissionChangeType).then(() => {
+    const deniedOrRevoked = isDenied ? 'denied' : 'revoked';
+    saveAffiliation(null, deniedOrRevoked).then(() => {
       affiliations(currentState.id, activeTab);
       setConfirmationModalDisplay(false);
     });
@@ -113,80 +112,86 @@ const FederalAdmin = ({
     <main>
       <Tabs onChange={currentTab}>
         <TabPanel id="pending" tab="Requests">
-          <ManageAllUsersTable
-            tab="pending"
-            affiliations={currentAffiliations}
-            currentUser={currentUser}
-            updateAffiliation={actualUpdateAffiliation}
-            isFetching={isFetching}
-            actions={[
-              <Button
-                onClick={showManageModal}
-                size="small"
-                className="ds-u-margin-right--2"
-                key="action1"
-              >
-                Approve
-              </Button>,
-              <Button
-                onClick={showConfirmationModal}
-                size="small"
-                variation="danger"
-                data-deny-or-revoke="deny"
-                key="action2"
-              >
-                Deny
-              </Button>
-            ]}
-          />
+          {activeTab === 'pending' && (
+            <ManageAllUsersTable
+              tab="pending"
+              affiliations={currentAffiliations}
+              currentUser={currentUser}
+              updateAffiliation={actualUpdateAffiliation}
+              isFetching={isFetching}
+              actions={[
+                <Button
+                  onClick={showManageModal}
+                  size="small"
+                  className="ds-u-margin-right--2"
+                  key="action1"
+                >
+                  Approve
+                </Button>,
+                <Button
+                  onClick={showConfirmationModal}
+                  size="small"
+                  variation="danger"
+                  data-deny-or-revoke="deny"
+                  key="action2"
+                >
+                  Deny
+                </Button>
+              ]}
+            />
+          )}
         </TabPanel>
         <TabPanel id="active" tab="Active">
-          <ManageAllUsersTable
-            tab="active"
-            affiliations={currentAffiliations}
-            currentUser={currentUser}
-            updateAffiliation={actualUpdateAffiliation}
-            isFetching={isFetching}
-            actions={[
-              <Button
-                onClick={showManageModal}
-                size="small"
-                className="ds-u-margin-right--2"
-                key="action1"
-              >
-                Edit Role
-              </Button>,
-              <Button
-                onClick={showConfirmationModal}
-                size="small"
-                variation="danger"
-                className="ds-u-margin-right--2"
-                data-deny-or-revoke="revoke"
-                key="action2"
-              >
-                Revoke
-              </Button>
-            ]}
-          />
+          {activeTab === 'active' && (
+            <ManageAllUsersTable
+              tab="active"
+              affiliations={currentAffiliations}
+              currentUser={currentUser}
+              updateAffiliation={actualUpdateAffiliation}
+              isFetching={isFetching}
+              actions={[
+                <Button
+                  onClick={showManageModal}
+                  size="small"
+                  className="ds-u-margin-right--2"
+                  key="action1"
+                >
+                  Edit Role
+                </Button>,
+                <Button
+                  onClick={showConfirmationModal}
+                  size="small"
+                  variation="danger"
+                  className="ds-u-margin-right--2"
+                  data-deny-or-revoke="revoke"
+                  key="action2"
+                >
+                  Revoke
+                </Button>
+              ]}
+            />
+          )}
         </TabPanel>
         <TabPanel id="inactive" tab="Inactive">
-          <ManageAllUsersTable
-            tab="inactive"
-            affiliations={currentAffiliations}
-            currentUser={currentUser}
-            updateAffiliation={actualUpdateAffiliation}
-            isFetching={isFetching}
-            actions={[
-              <Button
-                onClick={showManageModal}
-                size="small"
-                className="ds-u-margin-right--2"
-                key="action1"
-              >
-                Restore Access
-              </Button>
-            ]}
-          />
+          {activeTab === 'inactive' && (
+            <ManageAllUsersTable
+              tab="inactive"
+              affiliations={currentAffiliations}
+              currentUser={currentUser}
+              updateAffiliation={actualUpdateAffiliation}
+              isFetching={isFetching}
+              actions={[
+                <Button
+                  onClick={showManageModal}
+                  size="small"
+                  className="ds-u-margin-right--2"
+                  key="action1"
+                >
+                  Restore Access
+                </Button>
+              ]}
+            />
+          )}
         </TabPanel>
       </Tabs>
 
