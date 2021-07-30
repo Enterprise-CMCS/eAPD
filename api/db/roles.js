@@ -1,21 +1,13 @@
 const knex = require('./knex');
 
-const getAllActiveRoles = async (userRole, { db = knex } = {}) => {
-  const roles = await db('auth_roles')
+const getAllActiveRoles = (requestedRoles, { db = knex } = {}) => {
+  const query = db('auth_roles')
     .select('id', 'name')
-    .where({ isActive: true });
-  if (userRole === 'eAPD Federal Admin') {
-    return roles.filter(
-      role =>
-        role.name !== 'eAPD System Admin' && role.name !== 'eAPD Federal Admin'
-    );
+    .where({ isActive: true })
+  if(requestedRoles) {
+    return query.whereIn('name', requestedRoles);
   }
-  return roles.filter(
-    role =>
-      role.name !== 'eAPD System Admin' &&
-      role.name !== 'eAPD Federal Admin' &&
-      role.name !== 'eAPD State Admin'
-  );
+  return query;
 };
 
 module.exports = {
