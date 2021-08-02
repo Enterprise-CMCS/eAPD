@@ -12,6 +12,7 @@ import PercentField from '../../components/PercentField';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
 import { formatPerc } from '../../util/formats';
+import { titleCase } from "title-case";
 
 const QUARTERS = [1, 2, 3, 4];
 const EXPENSE_NAME_DISPLAY = {
@@ -52,18 +53,18 @@ const CostAllocateFFPQuarterly = ({
       </caption>
       <thead>
         <tr>
-          <th>{t('ffy', { year })}</th>
+          <th>{titleCase(t('ffy', { year }))}</th>
           <Fragment key={year}>
             {QUARTERS.map(q => (
               <th key={q} scope="col" className="ds-u-text-align--right">
-                {t('table.quarter', { q })}
+                {titleCase(t('table.quarter', { q }))}
               </th>
             ))}
             <th
               scope="col"
               className="budget-table--subtotal ds-u-text-align--right"
             >
-              {t('table.subtotal')}
+              {titleCase(t('table.subtotal'))}
             </th>
           </Fragment>
         </tr>
@@ -71,7 +72,7 @@ const CostAllocateFFPQuarterly = ({
       <tbody>
         <tr>
           <th rowSpan="2" scope="row">
-            {t('activities.costAllocate.quarterly.expenseNames.state')}
+            {titleCase(t('activities.costAllocate.quarterly.expenseNames.state'))}
           </th>
           {QUARTERS.map(q => (
             <td key={q}>
@@ -112,7 +113,7 @@ const CostAllocateFFPQuarterly = ({
 
         <tr>
           <th rowSpan="2" scope="row">
-            {t('activities.costAllocate.quarterly.expenseNames.contractor')}
+            {titleCase(t('activities.costAllocate.quarterly.expenseNames.contractor'))}
           </th>
           {QUARTERS.map(q => (
             <td key={q}>

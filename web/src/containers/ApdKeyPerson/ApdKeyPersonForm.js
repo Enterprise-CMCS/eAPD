@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { t } from '../../i18n';
 import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
+import { titleCase } from "title-case";
 
 import {
   setKeyPersonCost,
@@ -51,8 +52,8 @@ const PersonForm = ({
     <Fragment>
       <h4 className="ds-h4">
         {primary
-          ? t(`${tRoot}.labels.titlePrimary`)
-          : t(`${tRoot}.labels.titleSecondary`)}
+          ? titleCase(t(`${tRoot}.labels.titlePrimary`))
+          : titleCase(t(`${tRoot}.labels.titleSecondary`))}
       </h4>
       <p className="ds-u-margin-bottom--0">
         {primary

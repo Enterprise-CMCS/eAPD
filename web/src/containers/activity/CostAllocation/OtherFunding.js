@@ -19,6 +19,7 @@ import {
 
 import { t } from '../../../i18n';
 import RichText from '../../../components/RichText';
+import { titleCase } from "title-case";
 
 const OtherFunding = ({
   activityIndex,
@@ -39,7 +40,7 @@ const OtherFunding = ({
   return (
     <Fragment>
       <h2 className="ds-u-margin-bottom--0">
-        {t('activities.otherFunding.title')}
+        {titleCase(t('activities.otherFunding.title'))}
       </h2>
       {Object.keys(years).map(ffy => (
         <Fragment key={ffy}>

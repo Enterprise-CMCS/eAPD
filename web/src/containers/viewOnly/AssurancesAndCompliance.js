@@ -6,6 +6,7 @@ import regLinks from '../../data/assurancesAndCompliance.yaml';
 import { selectFederalCitations } from '../../reducers/apd.selectors';
 import { t } from '../../i18n';
 import {LinkOrText} from '../AssurancesAndCompliance'
+import { titleCase } from "title-case";
 
 const AssurancesAndCompliance = ({ citations }) => {
   return (
@@ -14,7 +15,7 @@ const AssurancesAndCompliance = ({ citations }) => {
       {Object.entries(regLinks).map(([name, regulations]) => (
         <div key={name} className="ds-u-margin-bottom--3">
           <h4 className="ds-h4">
-            {t(`assurancesAndCompliance.headings.${name}`)}
+            {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
           </h4>
           <ul className="ds-c-list--bare">
             {citations[name].map(({ title, checked, explanation }) => (

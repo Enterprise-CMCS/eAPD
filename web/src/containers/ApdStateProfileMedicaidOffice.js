@@ -17,6 +17,7 @@ import { t } from '../i18n';
 import { selectStateProfile } from '../reducers/apd.selectors';
 import { selectState } from '../reducers/user';
 import { STATES } from '../util';
+import { titleCase } from "title-case";
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';
@@ -43,7 +44,7 @@ const ApdStateProfile = ({
     <Fragment>
       <fieldset>
         <legend className="ds-u-padding-bottom--1">
-          {t(`${dirTRoot}.title`)}
+          {titleCase(t(`${dirTRoot}.title`))}
         </legend>
         <TextField
           name="apd-state-profile-mdname"
@@ -67,7 +68,7 @@ const ApdStateProfile = ({
 
       <fieldset>
         <legend className="ds-u-padding-bottom--1">
-          {t(`${offTRoot}.title`)}
+          {titleCase(t(`${offTRoot}.title`))}
         </legend>
         <TextField
           name="apd-state-profile-addr1"

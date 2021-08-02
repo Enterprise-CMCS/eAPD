@@ -17,6 +17,7 @@ import {
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
 import { t } from '../../i18n';
+import { titleCase } from "title-case";
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -265,9 +266,9 @@ const CostAllocateFFP = ({
 
             {isViewOnly && (
               <h4>
-                {t(
+                {titleCase(t(
                   'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
-                )}
+                ))}
               </h4>
             )}
 

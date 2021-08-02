@@ -12,6 +12,7 @@ import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
 import { selectPreviousActivitySummary } from '../reducers/apd.selectors';
 import AlertMissingFFY from '../components/AlertMissingFFY'
+import { titleCase } from "title-case";
 
 
 const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
@@ -30,7 +31,7 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
         >
           <label htmlFor="previous-activity-summary-field">
             <h4 className="ds-c-label">
-              {t('previousActivities.outline.instruction.label')}
+              {titleCase(t('previousActivities.outline.instruction.label'))}
             </h4>
           </label>
           <RichText

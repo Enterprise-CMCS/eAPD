@@ -9,6 +9,7 @@ import NavLink from '../../components/NavLink';
 
 import { t } from '../../i18n';
 import DeleteModal from '../../components/DeleteModal';
+import { titleCase } from "title-case";
 
 const makeTitle = ({ name, fundingSource }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
@@ -20,7 +21,7 @@ const makeTitle = ({ name, fundingSource }, i) => {
   if (fundingSource) {
     title += ` (${fundingSource})`;
   }
-  return title;
+  return titleCase(title);
 };
 
 const EntryDetails = ({
