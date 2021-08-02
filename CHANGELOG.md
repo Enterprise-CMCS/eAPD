@@ -6,11 +6,11 @@ Anticipated release: July 28, 2021
 
 - manage affiliations and choose state page now make live calls for the list of affiliations ([#3264])
 - Update the roles returned by the roles endpoint ([#3277])
-
 - added alerts to each section if no FFY has been selected ([#3202])
 
 #### 🐛 Bugs fixed
 
+- Activity Summary displaying incorrectly in Executive Summary ([#3338])
 - "Add Activity" button in activity page links to wrong APD ([#3334])
 - resolved issue with invalid jwt throwing error ([#3283])
 - Reduced the size of the JWT payload because sys admins had a 24KB payload and the max size is 4KB. ([#3246])
@@ -44,5 +44,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3176]: https://github.com/CMSgov/eAPD/issues/3176
 [#3264]: https://github.com/CMSgov/eAPD/issues/3264
 [#3334]: https://github.com/CMSgov/eAPD/issues/3334
+[#3338]: https://github.com/CMSgov/eAPD/issues/3338
 [#3277]: https://github.com/CMSgov/eAPD/issues/3277
 [#3282]: https://github.com/CMSgov/eAPD/issues/3282
