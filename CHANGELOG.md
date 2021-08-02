@@ -4,8 +4,6 @@ Anticipated release: July 28, 2021
 
 #### 🚀 New features
 
-#### 🐛 Bugs fixed
-
 #### ⚙️ Behind the scenes
 
 - Add a mongo server to the local environment ([#3105])
