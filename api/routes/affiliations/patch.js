@@ -45,18 +45,35 @@ module.exports = (app, { db = knex } = {}) => {
         .select('user_id')
         .where({ state_id: stateId, id })
         .first();
+        
+        if (userId === affiliationUserId) {
+          logger.error({
+            id: request.id,
+            message: `user ${request.user.id} is attempting to edit their own role`
+          });
+          response.status(403).end();
+          return;
+        }
+        
+        const { status, roleId } = request.body;
+        const audit = auditor(statusToAction(status), request);
+        
+        
+      // Lookup role name and set expiration date accordingly
+      const { name: roleName } = await db('auth_roles')
+        .select('name')
+        .where({'auth_roles.id': roleId })
+        .first();
 
-      if (userId === affiliationUserId) {
-        logger.error({
-          id: request.id,
-          message: `user ${request.user.id} is attempting to edit their own role`
-        });
-        response.status(403).end();
-        return;
+      let expirationDate = null;
+      const today = new Date();
+      if(roleName === 'eAPD State Admin') {
+        expirationDate = new Date(today.getFullYear() + 1, '06', '30');
       }
-
-      const { status, roleId } = request.body;
-      const audit = auditor(statusToAction(status), request);
+      if(roleName === 'eAPD State Staff' || roleName === 'eAPD State Contractor') {
+        expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
+      }
+      
 
       try {
         db('auth_affiliations')
@@ -65,7 +82,8 @@ module.exports = (app, { db = knex } = {}) => {
           .update({
             role_id: status !== 'approved' ? null : roleId,
             status,
-            updated_by: userId
+            updated_by: userId,
+            expires_at: expirationDate
           })
           .then(rows => rows[0])
           .then(row =>

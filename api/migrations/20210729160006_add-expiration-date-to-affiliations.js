@@ -16,9 +16,8 @@ exports.up = async knex => {
     .then(affiliations =>
       Promise.all(
         affiliations.map(({ id, role_id, created_at }) => {
-          if(role_id !== roles['eAPD System Admin'] 
-          && role_id !== roles['eAPD Federal Admin'] 
-          && role_id !== roles['eAPD State Admin']) {
+          if(role_id === roles['eAPD State Contractor'] 
+          || role_id === roles['eAPD State Staff']) {
             return knex('auth_affiliations')
               .where('status', 'approved')
               .where('id', id)
