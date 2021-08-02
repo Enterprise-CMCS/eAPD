@@ -14,7 +14,7 @@ services:
       - 54325:5432
 
   mongo:
-    image: mongo
+    image: mongo:4
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongo_admin
       - MONGO_INITDB_ROOT_PASSWORD=example   

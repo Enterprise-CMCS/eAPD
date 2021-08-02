@@ -113,6 +113,10 @@ setsebool -P httpd_can_network_connect 1
 systemctl daemon-reload
 systemctl enable mongod
 systemctl start mongod
+sh bin/preview-deploy/mongo-init.sh
+sed -i 's|#security:|security:|g' /etc/mongod.conf
+sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
+systemctl restart mongod
 
 # Restart Nginx
 systemctl enable nginx
