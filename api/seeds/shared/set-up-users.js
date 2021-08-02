@@ -121,7 +121,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      expires_at: '06-30-2022',
+      expires_at: format(new Date(new Date().getFullYear() + 1, '06', '30'), PostgresDateFormat),
       updated_by: 'seeds'
     });
     // Let them be a staffer in Maryland too
@@ -130,7 +130,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'md',
       role_id: stateStaffRoleId,
       status: 'approved',
-      expires_at: '06-30-2022',
+      expires_at: format(new Date(new Date().getFullYear() + 1, '06', '30'), PostgresDateFormat),
       updated_by: 'seeds'
     });
     // Add a valid certification and this user will remain an admin
