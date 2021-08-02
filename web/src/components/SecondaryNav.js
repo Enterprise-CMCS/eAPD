@@ -24,7 +24,7 @@ const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
             onClick={addActivity}
             className="ds-c-button"
           >
-            Add activity
+            Add Activity
           </Link>
         </div>
       )}

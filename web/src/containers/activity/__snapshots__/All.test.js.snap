@@ -29,7 +29,7 @@ exports[`the Activities component renders correctly 1`] = `
     onClick={[Function]}
     type="button"
   >
-    Add activity
+    Add Activity
   </Button>
 </Section>
 `;
