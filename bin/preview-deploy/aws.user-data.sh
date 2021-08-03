@@ -105,8 +105,8 @@ sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
-cd ~
-echo "echo 'Creating Mongo Admin User'
+cat <<MONGOUSERCONFIG > /home/ec2-user/mongo-init.sh
+echo 'Creating Mongo Admin User'
 mongo admin \
         --eval "db.runCommand({'createUser' : '${PREVIEW_MONGO_INITDB_ROOT_USERNAME}','pwd' : '${PREVIEW_MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
 
@@ -117,7 +117,7 @@ mongo ${PREVIEW_MONGO_INITDB_DATABASE} \
         -p ${PREVIEW_MONGO_INITDB_ROOT_PASSWORD} \
         --authenticationDatabase admin \
         --eval "db.createUser({user: '${PREVIEW_MONGO_DATABASE_USERNAME}', pwd: '${PREVIEW_MONGO_DATABASE_PASSWORD}', roles:[{role:'readWrite', db: '${PREVIEW_MONGO_INITDB_DATABASE}'}]});"
-" > mongo-init.sh
+MONGOUSERCONFIG
 E_USER
 
 sudo yum remove -y gcc-c++
