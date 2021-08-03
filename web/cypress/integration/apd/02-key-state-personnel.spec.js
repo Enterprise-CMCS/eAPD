@@ -54,7 +54,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
       cy.get('input[name="apd-state-profile-zip"]').clear();
       cy.get('select[name="apd-state-profile-state"]').invoke('val', '').trigger('change');
 
-      cy.wait(500);   // Wait to save data
+      cy.wait(1000);   // Wait to save data
     });
     
     it('State dropdown has 56 states & territories', () => {
@@ -92,7 +92,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         .contains('$')
         .should('have.text', '$0');
 
-        cy.wait(500);   // Wait to save data
+        cy.wait(1000);   // Wait to save data
     });
   
     it('Add blank non-primary key personnel', () => {
@@ -119,7 +119,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         .contains('$')
         .should('have.text', '$0');
 
-      cy.wait(500);   // Wait to save data
+      cy.wait(1000);   // Wait to save data
     });
 
     it('Add blank key personnel that is chargeable to the project', () => {
@@ -142,7 +142,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
           expect($lis).to.have.length(1)
           expect($lis.eq(0)).to.contain('Role not specified')
       });
-      cy.wait(500);   // Wait to save data
+      cy.wait(1000);   // Wait to save data
       
       // Check that FFY, FTE, and Total cost for each applicable year is 0.
       for(let year of years) {
@@ -244,7 +244,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         cy.get('input[name="apd-state-profile-zip"]').type(userData[0].address.zipcode);
         cy.get('select[name="apd-state-profile-state"]').invoke('val', 'AL').trigger('change');
       })
-      cy.wait(500);   // Wait to save data
+      cy.wait(1000);   // Wait to save data
     });
 
     describe('Should be able to delete Key Personnel', () => {
@@ -271,7 +271,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         cy.get('.ds-c-button--danger').click();
         // If there is just one delete button, then a key personnel has been deleted.
         cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 1);
-        cy.wait(500);   // Wait to save data
+        cy.wait(1000);   // Wait to save data
       });
     });
 
@@ -292,7 +292,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
           cy.get('input[name="apd-state-profile-pocposition0"]').type(userData[1].username);
         })
         cy.findByRole('button', { name: /Done/i }).click();
-        cy.wait(500);   // Wait to save data
+        cy.wait(1000);   // Wait to save data
       });
 
       it('Values entered in form remain on page', () => {
@@ -326,19 +326,19 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         
         // Toggle to see if the FFY cost prompts appear/disappear
         cy.get('input[type="radio"][value="no"]').check({ force: true });
-        cy.wait(500);   // Wait for page data to update
+        cy.wait(1000);   // Wait for page data to update
         for(let year of years) {
           cy.contains('FFY ' + year + ' Cost').should('not.exist');
         }
 
         cy.get('input[type="radio"][value="yes"]').check({ force: true });
-        cy.wait(500);   // Wait for page data to update
+        cy.wait(1000);   // Wait for page data to update
         for(let year of years) {
           cy.contains('FFY ' + year + ' Cost').should('exist');
         }
 
         cy.findByRole('button', { name: /Done/i }).click();
-        cy.wait(500);   // Wait to save data
+        cy.wait(1000);   // Wait to save data
       });
 
       it('Edit Key Personnel', () => {
@@ -351,7 +351,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         })
         
         cy.findByRole('button', { name: /Done/i }).click();
-        cy.wait(500);   // Wait to save data
+        cy.wait(1000);   // Wait to save data
       });
 
       it('Values entered in form remain on page', () => {
