@@ -4,6 +4,7 @@ exports[`previous activities component renders correctly 1`] = `
 <Fragment>
   <Connect(ConnectedWaypoint) />
    
+  <Connect(AlertMissingFFY) />
   <Section
     id={null}
     resource="previousActivities"
