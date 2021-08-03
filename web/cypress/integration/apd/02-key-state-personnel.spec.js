@@ -91,6 +91,8 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         .parent()
         .contains('$')
         .should('have.text', '$0');
+
+        cy.wait(500);   // Wait to save data
     });
   
     it('Add blank non-primary key personnel', () => {
@@ -116,6 +118,8 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         .parent()
         .contains('$')
         .should('have.text', '$0');
+
+      cy.wait(500);   // Wait to save data
     });
 
     it('Add blank key personnel that is chargeable to the project', () => {
@@ -138,6 +142,8 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
           expect($lis).to.have.length(1)
           expect($lis.eq(0)).to.contain('Role not specified')
       });
+      cy.wait(500);   // Wait to save data
+      
       // Check that FFY, FTE, and Total cost for each applicable year is 0.
       for(let year of years) {
         cy.get('@personnelVals')
@@ -265,6 +271,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
         cy.get('.ds-c-button--danger').click();
         // If there is just one delete button, then a key personnel has been deleted.
         cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 1);
+        cy.wait(500);   // Wait to save data
       });
     });
 
