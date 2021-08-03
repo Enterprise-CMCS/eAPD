@@ -16,6 +16,11 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
+export PREVIEW_MONGO_INITDB_ROOT_USERNAME=mongo_admin
+export PREVIEW_MONGO_INITDB_ROOT_PASSWORD=Preview_APD_Mongo_InitDB_Root_Password
+export PREVIEW_MONGO_INITDB_DATABASE=eapd_mongo
+export PREVIEW_MONGO_DATABASE_USERNAME=eapd_admin
+export PREVIEW_MONGO_DATABASE_PASSWORD=Preview_eAPD_Mongo_Password
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
@@ -91,11 +96,27 @@ echo "module.exports = {
 };" > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
+
+# Setting Up New Relic Application Monitor
 npm install newrelic --save
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
+
+#Preparing Mongo DB Users
+echo "echo 'Creating Mongo Admin User'
+mongo admin \
+        --eval "db.runCommand({'createUser' : '${PREVIEW_MONGO_INITDB_ROOT_USERNAME}','pwd' : '${PREVIEW_MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+
+echo 'Creating eAPD Application Eser and DB'
+
+mongo ${PREVIEW_MONGO_INITDB_DATABASE} \
+        -u ${PREVIEW_MONGO_INITDB_ROOT_USERNAME} \
+        -p ${PREVIEW_MONGO_INITDB_ROOT_PASSWORD} \
+        --authenticationDatabase admin \
+        --eval "db.createUser({user: '${PREVIEW_MONGO_DATABASE_USERNAME}', pwd: '${PREVIEW_MONGO_DATABASE_PASSWORD}', roles:[{role:'readWrite', db: '${PREVIEW_MONGO_INITDB_DATABASE}'}]});"
+" > mongo-init.sh
 E_USER
 
 sudo yum remove -y gcc-c++
@@ -113,25 +134,11 @@ setsebool -P httpd_can_network_connect 1
 systemctl daemon-reload
 systemctl enable mongod
 systemctl start mongod
-echo "
-echo 'Creating Mongo Admin User'
-
-mongo admin \
-        --eval \"db.runCommand({'createUser' : '${PREVIEW_MONGO_INITDB_ROOT_USERNAME}','pwd' : '${PREVIEW_MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});\"
-
-echo 'Creating eAPD Application Eser and DB'
-
-mongo ${PREVIEW_MONGO_INITDB_DATABASE} \
-        -u ${PREVIEW_MONGO_INITDB_ROOT_USERNAME} \
-        -p ${PREVIEW_MONGO_INITDB_ROOT_PASSWORD} \
-        --authenticationDatabase admin \
-        --eval \"db.createUser({user: '${PREVIEW_MONGO_DATABASE_USERNAME}', pwd: '${PREVIEW_MONGO_DATABASE_PASSWORD}', roles:[{role:'readWrite', db: '${PREVIEW_MONGO_INITDB_DATABASE}'}]});\"
-" > mongo-init.sh
-sh mongo-init.sh
+sh /home/ec2-user/mongo-init.sh
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
-rm mongo-init.sh
+#rm mongo-init.sh
 
 # Restart Nginx
 systemctl enable nginx
