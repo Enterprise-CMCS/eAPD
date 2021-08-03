@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { titleCase } from 'title-case';
 import Md from './Md';
 import { t } from '../i18n';
-import { titleCase } from "title-case";
 
 const Heading = ({ children, className, labelFor, level }) => {
   const Tag = level;
@@ -29,7 +29,7 @@ Heading.defaultProps = {
 };
 
 const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
-  const heading = t([source, titleCase('heading')], { defaultValue: false, ...args });
+  const heading = t([source, 'heading'], { defaultValue: false, ...args });
   const short = t([source, 'short'], { defaultValue: false, ...args });
   const detail = t([source, 'detail'], { defaultValue: false, ...args });
   const list = t([source, 'list'], { defaultValue: false, ...args });
@@ -40,7 +40,7 @@ const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
       <div>
         {heading && (
           <Heading {...headingDisplay} labelFor={labelFor}>
-            {heading}
+            {titleCase(heading)}
           </Heading>
         )}
         {(short || detail || list || helpText) && (
