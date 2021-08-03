@@ -105,6 +105,7 @@ sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
+cd ~
 echo "echo 'Creating Mongo Admin User'
 mongo admin \
         --eval "db.runCommand({'createUser' : '${PREVIEW_MONGO_INITDB_ROOT_USERNAME}','pwd' : '${PREVIEW_MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
