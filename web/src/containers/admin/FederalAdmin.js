@@ -36,6 +36,8 @@ const FederalAdmin = ({
     false
   );
 
+  const [limitedRoleTypes, setLimitedRoleTypes] = useState(roleTypes);
+
   useEffect(() => {
     setIsFetching(true);
     async function fetchAffiliations() {
@@ -52,6 +54,17 @@ const FederalAdmin = ({
     setActiveTab(id);
   };
   
+  const limitDisplayedRoleTypes = currentAffiliation => {
+    let limitedRoles;
+    if(currentAffiliation.stateId === 'fd') {
+      limitedRoles = roleTypes.filter(item => item.name === 'eAPD Federal Admin')
+    }    
+    if(currentAffiliation.stateId !== 'fd') {
+      limitedRoles = roleTypes.filter(item => item.name === 'eAPD State Admin')
+    }
+    setLimitedRoleTypes(limitedRoles);
+  }
+
   const setCurrentAffiliation = event => {
     const currentAffiliation = currentAffiliations.find(element => element.id === Number(event.target.parentNode.getAttribute('data-primary-affiliation-id')) );
     const currentAffiliationId = event.target.parentNode.getAttribute('data-id');
@@ -62,6 +75,8 @@ const FederalAdmin = ({
       currentAffiliationId, 
       currentAffiliationState
     });
+
+    limitDisplayedRoleTypes(currentAffiliation);
   };
   
   const showManageModal = event => {
@@ -207,7 +222,7 @@ const FederalAdmin = ({
 
       {manageModalDisplay && (
         <ManageRoleDialog
-          roleTypes={roleTypes}
+          roleTypes={limitedRoleTypes}
           hideManageModal={hideManageModal}
           showManageModal={showManageModal}
           handleAffiliationUpdate={handleAffiliationUpdate}
