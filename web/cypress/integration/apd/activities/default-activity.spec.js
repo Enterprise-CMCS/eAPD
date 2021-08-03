@@ -1,31 +1,33 @@
 /// <reference types="cypress" />
 
-describe('checking default values in Activities section', function () {
+describe('checking default values in Activities section', () => {
   let apdUrl;
-  let years = [];
-  let activities = [['Program Administration', 'HIT']];
+  const years = [];
+  const activities = [['Program Administration', 'HIT']];
 
-  before(function () {
+  before(() => {
     cy.useStateStaff();
     cy.findByRole('button', { name: /Create new/i }).click();
     // cy.get('[href="/apd/324"]').click();
 
-    //Gets list of available years
+    // Gets list of available years
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
       years.push(list[index].value)
     );
 
-    //Gets to the activity page
-    for (let i = 0; i < 3; i++) {
+    // Gets to the activity page
+    for (let i = 0; i < 3; i += 1) {
       cy.contains('Continue').click();
     }
 
     cy.url().should('include', '/activities');
-    cy.wait(500); //Gives time for webpage to load
-    cy.location('pathname').then(pathname => (apdUrl = pathname));
+    cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.location('pathname').then(pathname => {
+      apdUrl = pathname;
+    });
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     cy.useStateStaff(apdUrl);
   });
 
@@ -41,7 +43,7 @@ describe('checking default values in Activities section', function () {
           cy.contains('federal share of $0').should('exist');
           cy.contains('Alaska share of $0').should('exist');
 
-          for (let i = 0; i < years.length; i++) {
+          for (let i = 0; i < years.length; i += 1) {
             cy.contains(years[i]).should('exist');
           }
         });
@@ -62,19 +64,6 @@ describe('checking default values in Activities section', function () {
       .should('contain', '$0');
   };
 
-  const costSplitTable = (federal, state) => {
-    cy.get('[class="data-entry-box ds-u-margin-bottom--5"]')
-      .next()
-      .within(() => {
-        cy.contains('Total Computable Medicaid Cost')
-          .parent()
-          .should('contain', '$0');
-
-        costSplitTableRow('Federal Share', federal);
-        costSplitTableRow('State Share', state);
-      });
-  };
-
   const costSplitTableRow = (fedOrState, split) => {
     cy.contains(fedOrState)
       .parent()
@@ -93,18 +82,31 @@ describe('checking default values in Activities section', function () {
       });
   };
 
+  const costSplitTable = (federal, state) => {
+    cy.get('[class="data-entry-box ds-u-margin-bottom--5"]')
+      .next()
+      .within(() => {
+        cy.contains('Total Computable Medicaid Cost')
+          .parent()
+          .should('contain', '$0');
+
+        costSplitTableRow('Federal Share', federal);
+        costSplitTableRow('State Share', state);
+      });
+  };
+
   const quarterTableInputRow = (row, defaultOrExport) => {
     cy.contains(row)
       .parent()
       .within(() => {
         if (defaultOrExport === 'default') {
-          for (let i = 0; i < 4; i++) {
+          for (let i = 0; i < 4; i += 1) {
             cy.get('[class="ds-c-field budget-table--input__number"]')
               .eq(i)
               .should('have.value', 0);
           }
         } else {
-          for (let i = 0; i < 4; i++) {
+          for (let i = 0; i < 4; i += 1) {
             cy.get('[class="budget-table--number"]')
               .eq(i)
               .should('contain', '0 %');
@@ -122,7 +124,7 @@ describe('checking default values in Activities section', function () {
       .parent()
       .next()
       .within(() => {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 4; i += 1) {
           cy.get('[class="budget-table--number"]')
             .eq(i)
             .should('contain', '$0');
@@ -138,7 +140,7 @@ describe('checking default values in Activities section', function () {
     cy.contains('Total Enhanced FFP')
       .parent()
       .within(() => {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 4; i += 1) {
           cy.get('[class="budget-table--number budget-table--total"]')
             .eq(i)
             .should('contain', '$0');
@@ -174,7 +176,7 @@ describe('checking default values in Activities section', function () {
     quarterTableTotalRow();
   };
 
-  it('tests default values', function () {
+  it('tests default values', () => {
     const checkDefaultDate = string => {
       cy.contains(string)
         .parent()
@@ -205,7 +207,7 @@ describe('checking default values in Activities section', function () {
 
     const checkFFYcosts = () => {
       cy.then(() => {
-        for (let i = 0; i < years.length; i++) {
+        for (let i = 0; i < years.length; i += 1) {
           cy.contains(`FFY ${years[i]} Cost: $0`).should('exist');
         }
       });
@@ -221,7 +223,7 @@ describe('checking default values in Activities section', function () {
 
     cy.url().should('include', '/activities');
 
-    //Tests Continue button on Activities Dashboard
+    // Tests Continue button on Activities Dashboard
     cy.contains('Continue').click();
     cy.url().should('contain', '/schedule-summary');
     cy.contains('Back').click();
@@ -248,7 +250,7 @@ describe('checking default values in Activities section', function () {
     );
     cy.get('[class="ds-c-field visibility--screen"]').should('have.value', '');
 
-    //Outcomes and Milestones
+    // Outcomes and Milestones
     cy.contains('Continue').click();
     cy.url().should('contain', '/activity/0/oms');
 
@@ -269,7 +271,7 @@ describe('checking default values in Activities section', function () {
 
     cy.contains('Edit').click();
     cy.findByRole('button', { name: /Add another metric/i }).click();
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i += 1) {
       cy.get('[class="ds-c-review"]')
         .eq(i)
         .within(() => {
@@ -309,7 +311,7 @@ describe('checking default values in Activities section', function () {
       'Milestone not specified'
     );
 
-    //State Staff and Expenses
+    // State Staff and Expenses
     cy.contains('Continue').click();
     cy.url().should('contain', '/activity/0/state-costs');
 
@@ -324,7 +326,7 @@ describe('checking default values in Activities section', function () {
     cy.findByLabelText('Personnel title').should('have.value', '');
     cy.findByLabelText('Description').should('have.value', '');
     cy.then(() => {
-      for (let i = 0; i < years.length; i++) {
+      for (let i = 0; i < years.length; i += 1) {
         cy.contains(`FFY ${years[i]} Cost`)
           .next('div')
           .within(() => {
@@ -338,7 +340,7 @@ describe('checking default values in Activities section', function () {
     cy.contains('Personnel title not specified').should('exist');
 
     cy.then(() => {
-      for (let i = 0; i < years.length; i++) {
+      for (let i = 0; i < years.length; i += 1) {
         cy.contains(`FFY ${years[i]}`)
           .parent()
           .within(() => {
@@ -367,7 +369,7 @@ describe('checking default values in Activities section', function () {
 
     cy.findByLabelText('Description').should('have.value', '');
     cy.then(() => {
-      for (let i = 0; i < years.length; i++) {
+      for (let i = 0; i < years.length; i += 1) {
         cy.findByLabelText(`${years[i]} Cost`).should('have.value', 0);
       }
     });
@@ -382,7 +384,7 @@ describe('checking default values in Activities section', function () {
       'Hardware, software, and licensing'
     );
 
-    //Private Contractor Costs
+    // Private Contractor Costs
     cy.contains('Continue').click();
     cy.url().should('contain', '/activity/0/contractor-costs');
     cy.contains(
@@ -408,7 +410,7 @@ describe('checking default values in Activities section', function () {
       });
 
     cy.then(() => {
-      for (let i = 0; i < years.length; i++) {
+      for (let i = 0; i < years.length; i += 1) {
         cy.findByLabelText(`FFY ${years[i]} Cost`).should('have.value', 0);
       }
     });
@@ -432,14 +434,14 @@ describe('checking default values in Activities section', function () {
       'Private Contractor or Vendor Name not specified'
     );
 
-    //Cost Allocation and Other Funding
+    // Cost Allocation and Other Funding
     cy.contains('Continue').click();
     cy.url().should('contain', '/activity/0/cost-allocation');
 
     cy.get('[id="cost-allocation-methodology-field"]').should('have.value', '');
 
     cy.then(() => {
-      for (let i = 0; i < years.length; i++) {
+      for (let i = 0; i < years.length; i += 1) {
         cy.get(
           `[id="cost-allocation-narrative-${years[i]}-other-sources-field"]`
         ).should('have.value', '');
@@ -462,12 +464,12 @@ describe('checking default values in Activities section', function () {
       }
     });
 
-    //Budget and FFP
+    // Budget and FFP
     cy.contains('Continue').click();
     cy.url().should('contain', '/activity/0/ffp');
 
     cy.then(() => {
-      for (let i = 0; i < years.length; i++) {
+      for (let i = 0; i < years.length; i += 1) {
         cy.contains(`Budget for FFY ${years[i]}`)
           .parent()
           .parent()
@@ -503,7 +505,7 @@ describe('checking default values in Activities section', function () {
       checkFFYtotals('Program Administration');
     });
 
-    //Testing add activity button at end of Activitiy
+    // Testing add activity button at end of Activitiy
     cy.contains('Add another activity').click();
     cy.url().should('include', '/activities');
     cy.contains('Activity 2').should('exist');
@@ -527,7 +529,7 @@ describe('checking default values in Activities section', function () {
         ).should('exist');
 
         cy.then(() => {
-          for (let i = 0; i < years.length; i++) {
+          for (let i = 0; i < years.length; i += 1) {
             cy.contains(
               `FFY ${years[i]}: $0 | Total Computable Medicaid Cost: $0 ($0 Federal share)`
             ).should('exist');
@@ -541,13 +543,13 @@ describe('checking default values in Activities section', function () {
       .next()
       .within(() => {
         cy.then(() => {
-          for (let i = 0; i < activities.length; i++) {
+          for (let i = 0; i < activities.length; i += 1) {
             cy.contains(
               `${i + 1}. ${activities[i][0]} | ${activities[i][1]}`
             ).should('exist');
           }
 
-          for (let i = 0; i < activities.length; i++) {
+          for (let i = 0; i < activities.length; i += 1) {
             cy.contains(`Activity ${i + 1} (${activities[i][0]})`)
               .parent()
               .within(() => {
@@ -601,7 +603,7 @@ describe('checking default values in Activities section', function () {
                   .next()
                   .should('be.empty');
 
-                for (let k = 0; k < years.length; k++) {
+                for (let k = 0; k < years.length; k += 1) {
                   cy.contains(`FFY ${years[k]}`)
                     .next()
                     .should('contain', 'Other Funding Description')
