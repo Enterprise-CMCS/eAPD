@@ -1,14 +1,19 @@
 /// <reference types="cypress" />
 
+import { activityPage } from '../../../page-objects/activity-page';
+
 describe('checking default values in Activities section', () => {
+  // eslint-disable-next-line new-cap
+  const ActivityPage = new activityPage();
+
   let apdUrl;
   const years = [];
   const activities = [['Program Administration', 'HIT']];
 
   before(() => {
     cy.useStateStaff();
-    cy.findByRole('button', { name: /Create new/i }).click();
-    // cy.get('[href="/apd/324"]').click();
+    // cy.findByRole('button', { name: /Create new/i }).click();
+    cy.get('[href="/apd/333"]').click();
 
     // Gets list of available years
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
@@ -176,43 +181,7 @@ describe('checking default values in Activities section', () => {
     quarterTableTotalRow();
   };
 
-  it('tests default values', () => {
-    const checkDefaultDate = string => {
-      cy.contains(string)
-        .parent()
-        .next('div')
-        .within(() => {
-          cy.findByLabelText('Month').should('have.value', '');
-          cy.findByLabelText('Day').should('have.value', '');
-          cy.findByLabelText('Year').should('have.value', '');
-        });
-    };
-
-    const checkDeleteButton = (alert, heading, check) => {
-      cy.contains(alert).should('not.exist');
-      cy.contains('Delete').click();
-      cy.contains(heading).should('exist');
-      cy.contains('Cancel').click();
-      cy.contains(heading).should('not.exist');
-      cy.contains(alert).should('not.exist');
-      cy.contains(check).should('exist');
-
-      cy.contains('Delete').click();
-      cy.contains(heading).should('exist');
-      cy.get('[class="ds-c-button ds-c-button--danger"]').click();
-      cy.contains(heading).should('not.exist');
-      cy.contains(alert).should('exist');
-      cy.contains(check).should('not.exist');
-    };
-
-    const checkFFYcosts = () => {
-      cy.then(() => {
-        for (let i = 0; i < years.length; i += 1) {
-          cy.contains(`FFY ${years[i]} Cost: $0`).should('exist');
-        }
-      });
-    };
-
+  it.only('tests default values', () => {
     const checkTotalCostTable = () => {
       cy.contains('Activity Total Cost').parent().should('contain', '$0');
       cy.contains('Other Funding').parent().should('contain', '$0');
@@ -236,19 +205,18 @@ describe('checking default values in Activities section', () => {
     cy.contains('Edit').should('exist');
 
     cy.contains('Edit').click();
+
+    // Activity overview
     cy.url().should('contain', '/activity/0/overview');
 
-    checkDefaultDate('Start date');
-    checkDefaultDate('End date');
+    ActivityPage.checkDate('Start date');
+    ActivityPage.checkDate('End date');
 
-    cy.get('[id="activity-short-overview-field"]').should('have.value', '');
-    cy.get('[id="activity-description-field"]').should('have.value', '');
-    cy.get('[id="activity-alternatives-field"]').should('have.value', '');
-    cy.get('[id="standards-and-conditions-supports-field"]').should(
-      'have.value',
-      ''
-    );
-    cy.get('[class="ds-c-field visibility--screen"]').should('have.value', '');
+    ActivityPage.checkTinyMCE('activity-short-overview-field', '');
+    ActivityPage.checkTinyMCE('activity-description-field', '');
+    ActivityPage.checkTinyMCE('activity-alternatives-field', '');
+    ActivityPage.checkTinyMCE('standards-and-conditions-supports-field', '');
+    ActivityPage.checkTextField('ds-c-field visibility--screen', '');
 
     // Outcomes and Milestones
     cy.contains('Continue').click();
@@ -262,50 +230,35 @@ describe('checking default values in Activities section', () => {
     );
 
     cy.findByRole('button', { name: /Add another outcome/i }).click();
-    cy.contains('Describe a distinct').next().should('have.value', '');
-    cy.contains('Describe a measure').next().should('have.value', '');
+    ActivityPage.checkTextField('ds-c-field', '', 0); // Outcome
+    ActivityPage.checkTextField('ds-c-field', '', 1); // Metric
     cy.findByRole('button', { name: /Done/i }).click();
 
-    cy.contains('Outcome not specified').should('exist');
-    cy.contains('Metric not specified').should('exist');
+    ActivityPage.checkOutcomeOutput(
+      'Outcome not specified',
+      'Metric not specified'
+    );
 
     cy.contains('Edit').click();
-    cy.findByRole('button', { name: /Add another metric/i }).click();
-    for (let i = 0; i < 2; i += 1) {
-      cy.get('[class="ds-c-review"]')
-        .eq(i)
-        .within(() => {
-          cy.contains('Delete').should('exist');
-        });
-    }
-    cy.contains('Delete').click();
-    cy.contains('Delete Metric?').should('exist');
-    cy.contains('Cancel').click();
-    cy.contains('Delete Metric?').should('not.exist');
-    cy.get('[class="ds-u-margin-right--2"]').eq(2).should('exist');
-    cy.contains('Delete').click();
-    cy.contains('Delete Metric?').should('exist');
-    cy.get('[class="ds-c-button ds-c-button--danger"]').click();
-    cy.contains('Delete').should('not.exist');
-    cy.get('[class="ds-u-margin-right--2"]').eq(2).should('not.exist');
-    cy.contains('Delete').should('not.exist');
-    cy.findByRole('button', { name: /Done/i }).click();
+    ActivityPage.checkMetricFunctionality();
 
-    checkDeleteButton(
+    ActivityPage.checkDeleteButton(
       'Outcomes have not been added for this activity.',
       'Delete Outcome and Metrics?',
       'Outcome not specified'
     );
 
     cy.findByRole('button', { name: /Add another milestone/i }).click();
-    cy.findByLabelText('Name').should('have.value', '');
-    checkDefaultDate('Target completion date');
+    ActivityPage.checkInputField('Name', '');
+    ActivityPage.checkDate('Target completion date');
     cy.findByRole('button', { name: /Done/i }).click();
 
-    cy.contains('Milestone not specified').should('exist');
-    cy.contains('Date not specified').should('exist');
+    ActivityPage.checkMilestoneOutput(
+      'Milestone not specified',
+      'Date not specified'
+    );
 
-    checkDeleteButton(
+    ActivityPage.checkDeleteButton(
       'Milestones have not been added for this activity.',
       'Delete Milestone?',
       'Milestone not specified'
@@ -323,22 +276,16 @@ describe('checking default values in Activities section', () => {
     ).should('exist');
 
     cy.findByRole('button', { name: /Add another state staff/i }).click();
-    cy.findByLabelText('Personnel title').should('have.value', '');
-    cy.findByLabelText('Description').should('have.value', '');
+    ActivityPage.checkInputField('Personnel title', '');
+    ActivityPage.checkInputField('Description', '');
     cy.then(() => {
-      for (let i = 0; i < years.length; i += 1) {
-        cy.contains(`FFY ${years[i]} Cost`)
-          .next('div')
-          .within(() => {
-            cy.findByLabelText('Cost with benefits').should('have.value', '');
-            cy.findByLabelText('Number of FTEs').should('have.value', '');
-            cy.contains('Total: $0').should('exist');
-          });
-      }
-    });
+      ActivityPage.checkStateStaffFFY(years, '');
+    }); // SEE IF THIS RUNS OUTSIDE OF THE THIS
+
     cy.findByRole('button', { name: /Done/i }).click();
     cy.contains('Personnel title not specified').should('exist');
 
+    // CAN FTEs DEFAULT TO ZERO?
     cy.then(() => {
       for (let i = 0; i < years.length; i += 1) {
         cy.contains(`FFY ${years[i]}`)
@@ -351,38 +298,34 @@ describe('checking default values in Activities section', () => {
       }
     });
 
-    checkDeleteButton(
+    ActivityPage.checkDeleteButton(
       'State staff have not been added for this activity.',
       'Delete State Staff Expenses?',
       'Personnel title not specified'
     );
 
     cy.findByRole('button', { name: /Add another state expense/i }).click();
-
-    cy.contains('Category').parent().next().click();
-    cy.contains('Hardware, software, and licensing').should('exist');
-    cy.contains('Equipment and supplies').should('exist');
-    cy.contains('Training and outreach').should('exist');
-    cy.contains('Travel').should('exist');
-    cy.contains('Administrative operations').should('exist');
-    cy.contains('Miscellaneous expenses for the project').should('exist');
-
-    cy.findByLabelText('Description').should('have.value', '');
+    ActivityPage.checkInputField('Description', '');
     cy.then(() => {
-      for (let i = 0; i < years.length; i += 1) {
-        cy.findByLabelText(`${years[i]} Cost`).should('have.value', 0);
-      }
+      ActivityPage.otherStateExpensesFFY(years, 0);
     });
     cy.findByRole('button', { name: /Done/i }).click();
 
-    cy.contains('Hardware, software, and licensing').should('exist');
-    checkFFYcosts();
+    cy.then(() => {
+      ActivityPage.checkOtherStateExpensesOutput(
+        'Hardware, software, and licensing',
+        years,
+        0
+      );
+    });
 
-    checkDeleteButton(
+    ActivityPage.checkDeleteButton(
       'Other state expenses have not been added for this activity.',
       'Delete Other State Expense?',
       'Hardware, software, and licensing'
     );
+
+    cy.pause();
 
     // Private Contractor Costs
     cy.contains('Continue').click();
@@ -397,8 +340,8 @@ describe('checking default values in Activities section', () => {
       .next('input')
       .should('have.value', '');
     cy.get('[id="contractor-description-field-0"]').should('have.value', '');
-    checkDefaultDate('Contract start date');
-    checkDefaultDate('Contract end date');
+    ActivityPage.checkDate('Contract start date');
+    ActivityPage.checkDate('Contract end date');
     cy.get(
       '[class="ds-c-field ds-c-field--currency ds-c-field--medium"]'
     ).should('have.value', 0);
@@ -426,9 +369,9 @@ describe('checking default values in Activities section', () => {
       'Full Contract Term: Date not specified - Date not specified'
     ).should('exist');
     cy.contains('Total Contract Cost: $0').should('exist');
-    checkFFYcosts();
+    // checkFFYcosts();
 
-    checkDeleteButton(
+    ActivityPage.checkDeleteButton(
       'Private contractors have not been added for this activity',
       'Delete Private Contractor?',
       'Private Contractor or Vendor Name not specified'
