@@ -4,10 +4,12 @@ import { Section, Subsection } from './Section';
 import MedicaidOffice from '../containers/ApdStateProfileMedicaidOffice';
 import KeyPersonnel from '../containers/ApdStateKeyPersonnel';
 import Waypoint from '../containers/ConnectedWaypoint';
+import AlertMissingFFY from './AlertMissingFFY';
 
 const ApdStateProfile = () => (
   <React.Fragment>
     <Waypoint />
+    <AlertMissingFFY/>
     <Section resource="apd.stateProfile">
       <Waypoint id="apd-state-profile-office" />
       <Subsection
