@@ -276,6 +276,9 @@ jobs:
   validate openapi:
     docker:
       - image: circleci/node:14
+        auth: 
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD      
     steps:
       - checkout
       - setup_remote_docker
