@@ -50,16 +50,7 @@ const toCacheUserCanAccessAPD = ({ loadApd = toCacheLoadApd } = {}) => (
   // Load the APD first
   loadApd()(req, res, () => {
     // check that the user can view the APD
-    if (
-      req &&
-      req.meta &&
-      req.user &&
-      req.meta.apd &&
-      req.user.state &&
-      req.meta.apd.state &&
-      req.user.state.id &&
-      req.meta.apd.state === req.user.state.id
-    ) {
+    if (req?.meta?.apd?.state === req?.user?.state?.id) {
       next();
     } else {
       logger.verbose({
@@ -81,7 +72,7 @@ const toCacheUserCanEditAPD = ({
 
   userCanAccessAPD()(req, res, () => {
     // Then make sure it's in draft
-    if (req && req.meta && req.meta.apd && req.meta.apd.status === 'draft') {
+    if (req?.meta?.apd?.status === 'draft') {
       next();
     } else {
       logger.verbose({
