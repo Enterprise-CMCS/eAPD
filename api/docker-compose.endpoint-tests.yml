@@ -11,7 +11,7 @@ services:
       - '55432:5432'
 
   mongodb:
-    image: mongo:4
+    image: mongo:latest
     environment:
       - PUID=1000
       - PGID=1000
@@ -27,6 +27,7 @@ services:
       - 27018:27017
 
   api-for-testing:
+    build: .
     image: cms-eapd/api
     depends_on:
       - db
