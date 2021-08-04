@@ -6,10 +6,12 @@ import BudgetSummary from './BudgetSummary';
 import Waypoint from './ConnectedWaypoint';
 import IncentivePayments from './IncentivePayments';
 import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
+import AlertMissingFFY from '../components/AlertMissingFFY';
 
 const ProposedBudget = () => (
   <React.Fragment>
     <Waypoint />
+    <AlertMissingFFY/>
     <Section resource="proposedBudget">
       <Waypoint id="summary-schedule-by-activity-table" />
       <Subsection

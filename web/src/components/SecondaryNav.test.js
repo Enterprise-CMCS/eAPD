@@ -41,7 +41,7 @@ describe('Secondary Nav component', () => {
   it('handles add activity button click', () => {
     const component = setup();
     const link = component.find('.ds-c-button');
-    expect(link.props().to).toBe('/apd/1/activities');
+    expect(link.props().to).toBe(`/apd/${defaultProps.useParams().apdId}/activities`);
 
     link.simulate('click');
 
