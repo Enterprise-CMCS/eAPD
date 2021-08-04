@@ -8,7 +8,7 @@ exports.up = async knex => {
 
   const rolesQuery = await knex('auth_roles').where({isActive: true});
 
-  cosnt today = new Date();
+  const today = new Date();
 
   const roles = Object.fromEntries(
     rolesQuery.map(item => [item.name, item.id])
