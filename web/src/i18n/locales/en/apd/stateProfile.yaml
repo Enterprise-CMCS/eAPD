@@ -51,9 +51,9 @@ keyPersonnel:
     primary: 'This person is the primary APD point of contact:'
     hasCosts: Does this person have costs directly attributable to this program?
     addButton:
-      zero: Add key personnel
-      one: Add another person
-      other: Add another person
+      zero: Add Key Personnel
+      one: Add Person
+      other: Add Person
   delete:
     text: Remove contact
     confirm:
