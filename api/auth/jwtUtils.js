@@ -3,7 +3,9 @@ const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
 const { getStateById } = require('../db/states.js');
-const { getUserPermissionsForStates: actualGetUserPermissionsForStates } = require('../db/auth');
+const {
+  getUserPermissionsForStates: actualGetUserPermissionsForStates
+} = require('../db/auth');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -125,7 +127,7 @@ const changeState = async (
   stateId,
   {
     getStateById_ = getStateById,
-    getUserPermissionsForStates_ = actualGetUserPermissionsForStates,
+    getUserPermissionsForStates_ = actualGetUserPermissionsForStates
   } = {}
 ) => {
   // copy the user to prevent altering it
@@ -134,7 +136,7 @@ const changeState = async (
   newUser.state.id = stateId;
   const permissions = await getUserPermissionsForStates_(user.id);
   newUser.activities = permissions[stateId];
-  newUser.permissions = [{[stateId]: permissions[stateId]},]
+  newUser.permissions = [{ [stateId]: permissions[stateId] }];
 
   return sign(newUser, {});
 };

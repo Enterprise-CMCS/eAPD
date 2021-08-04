@@ -37,7 +37,7 @@ const apdSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['draft', 'archived'],
+    enum: ['draft', 'archived', 'submitted', 'approved'],
     required: true
   },
   stateId: {

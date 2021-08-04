@@ -22,8 +22,9 @@ services:
       - DATABASE_PASSWORD=cms
     volumes:
       - ./db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
-    restart: unless-stopped
     command: [--auth]
+    ports:
+      - 27018:27017
 
   api-for-testing:
     image: cms-eapd/api
@@ -44,8 +45,6 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
-      - MONGO_DATABASE=${MONGO_DATABASE}
-      - MONGO_URL=${MONGO_URL}
     command: npm start
     expose:
       - 8000

@@ -59,36 +59,33 @@ tap.test('GET /apds', async endpointTest => {
     handlerTest.test('sends apds', async validTest => {
       getAllAPDsByState.resolves([
         {
-          created_at: 'created a',
-          document: {
-            name: 'apd a',
-            years: 'years a'
-          },
-          id: 'a',
+          _id: 'a',
+          createdAt: 'created a',
+          updatedAt: 'updated a',
+          stateId: 'va',
+          name: 'apd a',
+          years: 'years a',
           status: 'status a',
-          updated_at: 'updated a',
           other: 'stuff'
         },
         {
-          created_at: 'created b',
-          document: {
-            name: 'apd b',
-            years: 'years b'
-          },
-          id: 'b',
+          _id: 'b',
+          createdAt: 'created b',
+          updatedAt: 'updated b',
+          stateId: 'va',
+          name: 'apd b',
+          years: 'years b',
           status: 'status b',
-          updated_at: 'updated b',
           gets: 'removed'
         },
         {
-          created_at: 'created c',
-          document: {
-            name: 'apd c',
-            years: 'years c'
-          },
-          id: 'c',
+          _id: 'c',
+          createdAt: 'created c',
+          updatedAt: 'updated c',
+          stateId: 'va',
+          name: 'apd c',
+          years: 'years c',
           status: 'status c',
-          updated_at: 'updated c',
           from: 'results'
         }
       ]);
@@ -101,25 +98,28 @@ tap.test('GET /apds', async endpointTest => {
           {
             id: 'a',
             created: 'created a',
+            updated: 'updated a',
+            state: 'va',
             name: 'apd a',
             status: 'status a',
-            updated: 'updated a',
             years: 'years a'
           },
           {
             id: 'b',
             created: 'created b',
+            updated: 'updated b',
+            state: 'va',
             name: 'apd b',
             status: 'status b',
-            updated: 'updated b',
             years: 'years b'
           },
           {
             id: 'c',
             created: 'created c',
+            updated: 'updated c',
+            state: 'va',
             name: 'apd c',
             status: 'status c',
-            updated: 'updated c',
             years: 'years c'
           }
         ]),
@@ -144,7 +144,7 @@ tap.test('apds/:id GET endpoint', async tests => {
 
     test.ok(
       app.get.calledWith(
-        '/apds/:id(\\d+)',
+        '/apds/:id([0-9a-fA-F]{24}$)',
         can('view-document'),
         sinon.match.func
       ),
@@ -156,7 +156,9 @@ tap.test('apds/:id GET endpoint', async tests => {
     let handler;
     handlerTest.beforeEach(() => {
       getEndpoint(app, { getAPDByIDAndState });
-      handler = app.get.args.find(args => args[0] === '/apds/:id(\\d+)')[2];
+      handler = app.get.args.find(
+        args => args[0] === '/apds/:id([0-9a-fA-F]{24}$)'
+      )[2];
     });
 
     handlerTest.test('database error', async t => {
@@ -201,16 +203,13 @@ tap.test('apds/:id GET endpoint', async tests => {
 
     handlerTest.test('sends apd', async test => {
       getAPDByIDAndState.returns({
-        created_at: 'created at',
-        document: {
-          stuff: 'from',
-          document: 'column',
-          goes: 'here'
-        },
-        id: 'id',
-        state_id: 'state',
+        _id: 'id',
+        createdAt: 'created at',
+        updatedAt: 'updated at',
+        stateId: 'va',
+        stuff: 'from',
+        goes: 'here',
         status: 'status',
-        updated_at: 'updated at',
         other: 'stuff'
       });
 
@@ -222,14 +221,14 @@ tap.test('apds/:id GET endpoint', async tests => {
       test.ok(res.status.notCalled, 'HTTP status not explicitly set');
       test.ok(
         res.send.calledWith({
-          created: 'created at',
           id: 'id',
+          created: 'created at',
+          updated: 'updated at',
           stuff: 'from',
-          document: 'column',
           goes: 'here',
-          state: 'state',
+          state: 'va',
           status: 'status',
-          updated: 'updated at'
+          other: 'stuff'
         }),
         'APD info is sent back'
       );

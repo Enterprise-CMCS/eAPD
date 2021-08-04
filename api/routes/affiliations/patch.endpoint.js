@@ -8,7 +8,7 @@ const {
 } = require('../../endpoint-tests/utils');
 
 describe('Affiliations endpoint | PATCH', () => {
-  const api = login('all-permissions');
+  const api = login('state-admin');
   const db = getDB();
   beforeAll(() => setupDB(db));
   afterAll(() => teardownDB(db));
@@ -61,7 +61,7 @@ describe('Affiliations endpoint | PATCH', () => {
   });
 
   it(`returns 403, when user tries to change their status`, async () => {
-    const response = await api.patch('/states/ak/affiliations/4002', {
+    const response = await api.patch('/states/ak/affiliations/4004', {
       status: 'approved',
       roleId: 1106
     });
@@ -75,5 +75,4 @@ describe('Affiliations endpoint | PATCH', () => {
     });
     expect(response.status).toEqual(403);
   });
-
 });

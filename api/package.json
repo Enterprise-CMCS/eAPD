@@ -95,6 +95,7 @@
     "migrate-mongoose": "^4.0.0",
     "mongoose": "^5.12.11",
     "mongoose-patcher": "^0.2.15",
+    "mongoose-seed": "^0.6.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
@@ -130,6 +131,7 @@
     "testMatch": [
       "**/__tests__/**/*.js?(x)",
       "**/?(*.)+(spec|test|endpoint).js?(x)"
-    ]
+    ],
+    "testEnvironment": "node"
   }
 }
