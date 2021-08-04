@@ -8,6 +8,8 @@ exports.up = async knex => {
 
   const rolesQuery = await knex('auth_roles').where({isActive: true});
 
+  cosnt today = new Date();
+
   const roles = Object.fromEntries(
     rolesQuery.map(item => [item.name, item.id])
   )
@@ -30,7 +32,7 @@ exports.up = async knex => {
               .where('status', 'approved')
               .where('id', id)
               .update({
-                expires_at: new Date('06-30-2022')
+                expires_at: new Date(today.getFullYear() + 1, '06', '30')
               })
           }
           return null;
