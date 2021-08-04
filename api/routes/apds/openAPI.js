@@ -86,7 +86,7 @@ const openAPI = {
           description: 'The apd does not exist'
         }
       }
-    }
+    },
     // patch: {
     //   tags: ['APDs'],
     //   summary: 'Update a specific APD',
@@ -166,34 +166,37 @@ const openAPI = {
     //     }
     //   }
     // },
-    // delete: {
-    //   tags: ['APDs'],
-    //   summary: 'Archive an APD',
-    //   description: `Updates an APD's status to "archive" and prevents it from being edited`,
-    //   parameters: [
-    //     {
-    //       name: 'id',
-    //       in: 'path',
-    //       description: 'The ID of the apd to archive',
-    //       required: true,
-    //       schema: {
-    //         type: 'number'
-    //       }
-    //     }
-    //   ],
-    //   responses: {
-    //     204: {
-    //       description: 'The APD was archived'
-    //     },
-    //     400: {
-    //       description:
-    //         'Invalid request, such as requesting to archive an APD that is not editable'
-    //     },
-    //     403: {
-    //       description: 'The apd ID does not match any known apds for the user'
-    //     }
-    //   }
-    // }
+    delete: {
+      tags: ['APDs'],
+      summary: 'Archive an APD',
+      description: `Updates an APD's status to "archive" and prevents it from being edited`,
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the apd to archive',
+          required: true,
+          schema: {
+            type: 'number'
+          }
+        }
+      ],
+      responses: {
+        204: {
+          description: 'The APD was archived'
+        },
+        400: {
+          description: 'The apd is not in draft'
+        },
+        403: {
+          description: 'The apd ID does not match any known apds for the user'
+        },
+        404: {
+          description:
+            'Invalid request, such as requesting to archive an APD that is not editable'
+        }
+      }
+    }
   },
 
   '/apds/{id}/files': {
