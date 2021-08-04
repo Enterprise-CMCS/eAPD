@@ -67,7 +67,7 @@ const NonPersonnelCostForm = ({
       {Object.entries(years).map(([year, cost]) => (
         <DollarField
           key={year}
-          label={`${year} Cost`}
+          label={`FFY ${year} Cost`}
           name="cost"
           size="medium"
           value={cost}
