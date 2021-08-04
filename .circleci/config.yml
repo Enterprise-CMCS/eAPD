@@ -246,6 +246,9 @@ jobs:
   install dependencies:
     docker:
       - image: node:14
+        auth: 
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - restore_cache:
@@ -291,6 +294,9 @@ jobs:
   yaml test:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - run: npm install glob
@@ -329,6 +335,9 @@ jobs:
   backend lint:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -342,6 +351,9 @@ jobs:
   backend unit test:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -368,6 +380,9 @@ jobs:
         type: string
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -385,6 +400,9 @@ jobs:
   frontend lint:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -398,6 +416,9 @@ jobs:
   frontend test:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -423,6 +444,9 @@ jobs:
         type: string
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -478,6 +502,9 @@ jobs:
         type: string
     docker:
       - image: python:3
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -557,6 +584,9 @@ jobs:
         type: string
     docker:
       - image: python:3
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -593,6 +623,9 @@ jobs:
   preview deploy:
     docker:
       - image: python:3
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - run:
@@ -630,6 +663,9 @@ jobs:
   store artifacts:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
