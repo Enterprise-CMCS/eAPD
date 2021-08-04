@@ -18,6 +18,7 @@ import TextArea from '../components/TextArea';
 import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
 import { selectFederalCitations } from '../reducers/apd.selectors';
+import AlertMissingFFY from '../components/AlertMissingFFY';
 
 const namify = (name, title) =>
   `explanation-${name}-${title}`.replace(/\s/g, '_');
@@ -85,60 +86,63 @@ const AssurancesAndCompliance = ({
   };
 
   return (
-    <Section id="assurances-compliance" resource="assurancesAndCompliance">
-      <Subsection
-        id="assurances-compliance-fed-citations"
-        resource="assurancesAndCompliance.citations"
-      >
-        {Object.entries(regLinks).map(([name, regulations]) => (
-          <div key={name} className="ds-u-margin-bottom--3">
-            <h4 className="ds-h4">
-              {t(`assurancesAndCompliance.headings.${name}`)}
-            </h4>
-            {citations[name].map(({ title, checked, explanation }, index) => (
-              <fieldset key={title} className="ds-u-margin-top--2">
-                <legend className="ds-c-label">
-                  Are you complying with{' '}
-                  <strong>
-                    <LinkOrText link={regulations[title]} title={title} />
-                  </strong>
-                  ?
-                </legend>
-                <Choice
-                  checked={checked === true}
-                  label="Yes"
-                  name={`apd-assurances-yes-${namify(name, title)}`}
-                  onChange={handleCheckChange(name, index, true)}
-                  size="small"
-                  type="radio"
-                  value="yes"
-                />
-                <Choice
-                  checked={checked === false}
-                  label="No"
-                  name={`apd-assurances-no-${namify(name, title)}`}
-                  onChange={handleCheckChange(name, index, false)}
-                  size="small"
-                  type="radio"
-                  value="no"
-                  checkedChildren={
-                    <div className="ds-c-choice__checkedChild">
-                      <TextArea
-                        label="Please explain"
-                        name={namify(name, title)}
-                        value={explanation}
-                        onChange={handleExplanationChange(name, index)}
-                        rows={5}
-                      />
-                    </div>
-                  }
-                />
-              </fieldset>
-            ))}
-          </div>
-        ))}
-      </Subsection>
-    </Section>
+    <React.Fragment>
+    <AlertMissingFFY/>
+      <Section id="assurances-compliance" resource="assurancesAndCompliance">
+        <Subsection
+          id="assurances-compliance-fed-citations"
+          resource="assurancesAndCompliance.citations"
+        >
+          {Object.entries(regLinks).map(([name, regulations]) => (
+            <div key={name} className="ds-u-margin-bottom--3">
+              <h4 className="ds-h4">
+                {t(`assurancesAndCompliance.headings.${name}`)}
+              </h4>
+              {citations[name].map(({ title, checked, explanation }, index) => (
+                <fieldset key={title} className="ds-u-margin-top--2">
+                  <legend className="ds-c-label">
+                    Are you complying with{' '}
+                    <strong>
+                      <LinkOrText link={regulations[title]} title={title} />
+                    </strong>
+                    ?
+                  </legend>
+                  <Choice
+                    checked={checked === true}
+                    label="Yes"
+                    name={`apd-assurances-yes-${namify(name, title)}`}
+                    onChange={handleCheckChange(name, index, true)}
+                    size="small"
+                    type="radio"
+                    value="yes"
+                  />
+                  <Choice
+                    checked={checked === false}
+                    label="No"
+                    name={`apd-assurances-no-${namify(name, title)}`}
+                    onChange={handleCheckChange(name, index, false)}
+                    size="small"
+                    type="radio"
+                    value="no"
+                    checkedChildren={
+                      <div className="ds-c-choice__checkedChild">
+                        <TextArea
+                          label="Please explain"
+                          name={namify(name, title)}
+                          value={explanation}
+                          onChange={handleExplanationChange(name, index)}
+                          rows={5}
+                        />
+                      </div>
+                    }
+                  />
+                </fieldset>
+              ))}
+            </div>
+          ))}
+        </Subsection>
+      </Section>
+    </React.Fragment>
   );
 };
 

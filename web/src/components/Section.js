@@ -15,6 +15,7 @@ const Section = ({ children, id, resource }) => {
       {helpText && (
         <div className="ds-text--lead section--help-text">{helpText}</div>
       )}
+
       {children}
       <SecondaryNav />
     </section>
