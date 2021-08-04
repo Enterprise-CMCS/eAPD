@@ -33,7 +33,7 @@ exports[`the Activities component renders correctly 1`] = `
       onClick={[Function]}
       type="button"
     >
-      Add another activity
+      Add Activity
     </Button>
   </Section>
 </Fragment>

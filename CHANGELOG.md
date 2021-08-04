@@ -26,8 +26,9 @@ Anticipated release: July 28, 2021
 - prevented some unexpected JSON parsing errors from being escalated to the error log. ([#3176])
 - Reduced the size of the JWT payload because sys admins had a 24KB payload and the max size is 4KB. ([#3246])
 - fixed error for users with view-document permission not being able to load an APD([#3264])
+- remove sys admins being returned in affiliations ([#3295])
 - added end-to-end test for APD overview section ([#3282])
-- added e2e cypress tests for filling out key personnel page ([#3284])
+- added end-to-end tests for filling out key personnel page ([#3284])
 
 # Previous releases
 
@@ -43,6 +44,7 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3164]: https://github.com/CMSgov/eAPD/issues/3164
 [#3176]: https://github.com/CMSgov/eAPD/issues/3176
 [#3264]: https://github.com/CMSgov/eAPD/issues/3264
+[#3295]: https://github.com/CMSgov/eAPD/issues/3295
 [#3334]: https://github.com/CMSgov/eAPD/issues/3334
 [#3338]: https://github.com/CMSgov/eAPD/issues/3338
 [#3277]: https://github.com/CMSgov/eAPD/issues/3277
