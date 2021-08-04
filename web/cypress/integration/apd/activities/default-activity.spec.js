@@ -1,10 +1,11 @@
 /// <reference types="cypress" />
 
-import { activityPage } from '../../../page-objects/activity-page';
+import { ActivityPage } from '../../../page-objects/activity-page';
+import { BudgetPage } from '../../../page-objects/budget-page';
 
 describe('checking default values in Activities section', () => {
-  // eslint-disable-next-line new-cap
-  const ActivityPage = new activityPage();
+  const activityPage = new ActivityPage();
+  const budgetPage = new BudgetPage();
 
   let apdUrl;
   const years = [];
@@ -87,18 +88,18 @@ describe('checking default values in Activities section', () => {
       });
   };
 
-  const costSplitTable = (federal, state) => {
-    cy.get('[class="data-entry-box ds-u-margin-bottom--5"]')
-      .next()
-      .within(() => {
-        cy.contains('Total Computable Medicaid Cost')
-          .parent()
-          .should('contain', '$0');
+  // const costSplitTable = (federal, state) => {
+  //   cy.get('[class="data-entry-box ds-u-margin-bottom--5"]')
+  //     .next()
+  //     .within(() => {
+  //       cy.contains('Total Computable Medicaid Cost')
+  //         .parent()
+  //         .should('contain', '$0');
 
-        costSplitTableRow('Federal Share', federal);
-        costSplitTableRow('State Share', state);
-      });
-  };
+  //       costSplitTableRow('Federal Share', federal);
+  //       costSplitTableRow('State Share', state);
+  //     });
+  // };
 
   const quarterTableInputRow = (row, defaultOrExport) => {
     cy.contains(row)
@@ -182,14 +183,6 @@ describe('checking default values in Activities section', () => {
   };
 
   it.only('tests default values', () => {
-    const checkTotalCostTable = () => {
-      cy.contains('Activity Total Cost').parent().should('contain', '$0');
-      cy.contains('Other Funding').parent().should('contain', '$0');
-      cy.contains('Total Computable Medicaid Cost')
-        .parent()
-        .should('contain', '$0');
-    };
-
     cy.url().should('include', '/activities');
 
     // Tests Continue button on Activities Dashboard
@@ -209,14 +202,14 @@ describe('checking default values in Activities section', () => {
     // Activity overview
     cy.url().should('contain', '/activity/0/overview');
 
-    ActivityPage.checkDate('Start date');
-    ActivityPage.checkDate('End date');
+    activityPage.checkDate('Start date');
+    activityPage.checkDate('End date');
 
-    ActivityPage.checkTinyMCE('activity-short-overview-field', '');
-    ActivityPage.checkTinyMCE('activity-description-field', '');
-    ActivityPage.checkTinyMCE('activity-alternatives-field', '');
-    ActivityPage.checkTinyMCE('standards-and-conditions-supports-field', '');
-    ActivityPage.checkTextField('ds-c-field visibility--screen', '');
+    activityPage.checkTinyMCE('activity-short-overview-field', '');
+    activityPage.checkTinyMCE('activity-description-field', '');
+    activityPage.checkTinyMCE('activity-alternatives-field', '');
+    activityPage.checkTinyMCE('standards-and-conditions-supports-field', '');
+    activityPage.checkTextField('ds-c-field visibility--screen', '');
 
     // Outcomes and Milestones
     cy.contains('Continue').click();
@@ -230,35 +223,35 @@ describe('checking default values in Activities section', () => {
     );
 
     cy.findByRole('button', { name: /Add another outcome/i }).click();
-    ActivityPage.checkTextField('ds-c-field', '', 0); // Outcome
-    ActivityPage.checkTextField('ds-c-field', '', 1); // Metric
+    activityPage.checkTextField('ds-c-field', '', 0); // Outcome
+    activityPage.checkTextField('ds-c-field', '', 1); // Metric
     cy.findByRole('button', { name: /Done/i }).click();
 
-    ActivityPage.checkOutcomeOutput(
+    activityPage.checkOutcomeOutput(
       'Outcome not specified',
       'Metric not specified'
     );
 
     cy.contains('Edit').click();
-    ActivityPage.checkMetricFunctionality();
+    activityPage.checkMetricFunctionality();
 
-    ActivityPage.checkDeleteButton(
+    activityPage.checkDeleteButton(
       'Outcomes have not been added for this activity.',
       'Delete Outcome and Metrics?',
       'Outcome not specified'
     );
 
     cy.findByRole('button', { name: /Add another milestone/i }).click();
-    ActivityPage.checkInputField('Name', '');
-    ActivityPage.checkDate('Target completion date');
+    activityPage.checkInputField('Name', '');
+    activityPage.checkDate('Target completion date');
     cy.findByRole('button', { name: /Done/i }).click();
 
-    ActivityPage.checkMilestoneOutput(
+    activityPage.checkMilestoneOutput(
       'Milestone not specified',
       'Date not specified'
     );
 
-    ActivityPage.checkDeleteButton(
+    activityPage.checkDeleteButton(
       'Milestones have not been added for this activity.',
       'Delete Milestone?',
       'Milestone not specified'
@@ -276,11 +269,10 @@ describe('checking default values in Activities section', () => {
     ).should('exist');
 
     cy.findByRole('button', { name: /Add another state staff/i }).click();
-    ActivityPage.checkInputField('Personnel title', '');
-    ActivityPage.checkInputField('Description', '');
-    cy.then(() => {
-      ActivityPage.checkStateStaffFFY(years, '');
-    }); // SEE IF THIS RUNS OUTSIDE OF THE THIS
+
+    activityPage.checkInputField('Personnel title', '');
+    activityPage.checkInputField('Description', '');
+    activityPage.checkStateStaffFFY(years, '');
 
     cy.findByRole('button', { name: /Done/i }).click();
     cy.contains('Personnel title not specified').should('exist');
@@ -298,34 +290,28 @@ describe('checking default values in Activities section', () => {
       }
     });
 
-    ActivityPage.checkDeleteButton(
+    activityPage.checkDeleteButton(
       'State staff have not been added for this activity.',
       'Delete State Staff Expenses?',
       'Personnel title not specified'
     );
 
     cy.findByRole('button', { name: /Add another state expense/i }).click();
-    ActivityPage.checkInputField('Description', '');
-    cy.then(() => {
-      ActivityPage.otherStateExpensesFFY(years, 0);
-    });
+    activityPage.checkInputField('Description', '');
+    activityPage.checkFFYinputCostFields(years, 0);
     cy.findByRole('button', { name: /Done/i }).click();
 
-    cy.then(() => {
-      ActivityPage.checkOtherStateExpensesOutput(
-        'Hardware, software, and licensing',
-        years,
-        0
-      );
-    });
+    activityPage.checkOtherStateExpensesOutput(
+      'Hardware, software, and licensing',
+      years,
+      0
+    );
 
-    ActivityPage.checkDeleteButton(
+    activityPage.checkDeleteButton(
       'Other state expenses have not been added for this activity.',
       'Delete Other State Expense?',
       'Hardware, software, and licensing'
     );
-
-    cy.pause();
 
     // Private Contractor Costs
     cy.contains('Continue').click();
@@ -336,42 +322,30 @@ describe('checking default values in Activities section', () => {
 
     cy.findByRole('button', { name: /Add another contractor/i }).click();
 
-    cy.get('[class="ds-c-label full-width-label"]')
-      .next('input')
-      .should('have.value', '');
-    cy.get('[id="contractor-description-field-0"]').should('have.value', '');
-    ActivityPage.checkDate('Contract start date');
-    ActivityPage.checkDate('Contract end date');
-    cy.get(
-      '[class="ds-c-field ds-c-field--currency ds-c-field--medium"]'
-    ).should('have.value', 0);
-    cy.contains('No')
-      .parent()
-      .parent()
-      .within(() => {
-        cy.get('[class="ds-c-choice"]').should('be.checked');
-      });
+    activityPage.checkTextField('ds-c-field', '');
+    activityPage.checkTinyMCE('contractor-description-field-0', '');
+    activityPage.checkDate('Contract start date');
+    activityPage.checkDate('Contract end date');
+    activityPage.checkTextField(
+      'ds-c-field ds-c-field--currency ds-c-field--medium',
+      0,
+      0
+    );
+    cy.get('[type="radio"][checked]').should('have.value', 'no');
+    activityPage.checkFFYinputCostFields(years, 0);
 
-    cy.then(() => {
-      for (let i = 0; i < years.length; i += 1) {
-        cy.findByLabelText(`FFY ${years[i]} Cost`).should('have.value', 0);
-      }
-    });
     cy.findByRole('button', { name: /Done/i }).click();
 
-    cy.contains('Private Contractor or Vendor Name not specified').should(
-      'exist'
+    activityPage.checkPrivateContractorOutput(
+      'Private Contractor or Vendor Name not specified',
+      'Procurement Methodology and Description of Services not specified',
+      'Full Contract Term: Date not specified - Date not specified',
+      'Total Contract Cost: $0',
+      years,
+      0
     );
-    cy.contains(
-      'Procurement Methodology and Description of Services not specified'
-    ).should('exist');
-    cy.contains(
-      'Full Contract Term: Date not specified - Date not specified'
-    ).should('exist');
-    cy.contains('Total Contract Cost: $0').should('exist');
-    // checkFFYcosts();
 
-    ActivityPage.checkDeleteButton(
+    activityPage.checkDeleteButton(
       'Private contractors have not been added for this activity',
       'Delete Private Contractor?',
       'Private Contractor or Vendor Name not specified'
@@ -381,29 +355,16 @@ describe('checking default values in Activities section', () => {
     cy.contains('Continue').click();
     cy.url().should('contain', '/activity/0/cost-allocation');
 
-    cy.get('[id="cost-allocation-methodology-field"]').should('have.value', '');
+    activityPage.checkTinyMCE('cost-allocation-methodology-field', '');
 
     cy.then(() => {
       for (let i = 0; i < years.length; i += 1) {
-        cy.get(
-          `[id="cost-allocation-narrative-${years[i]}-other-sources-field"]`
-        ).should('have.value', '');
-
-        cy.contains(`FFY ${years[i]}`)
-          .parent()
-          .parent()
-          .within(() => {
-            cy.get('[class="ds-c-field ds-c-field--currency"]').should(
-              'have.value',
-              0
-            );
-
-            cy.get('[class="budget-table activity-budget-table"]').within(
-              () => {
-                checkTotalCostTable();
-              }
-            );
-          });
+        activityPage.checkTinyMCE(
+          `cost-allocation-narrative-${years[i]}-other-sources-field`,
+          ''
+        );
+        activityPage.checkTextField('ds-c-field ds-c-field--currency', 0, i);
+        budgetPage.checkActivityTotalCostTable(0, 0, 0, i);
       }
     });
 
@@ -417,29 +378,57 @@ describe('checking default values in Activities section', () => {
           .parent()
           .parent()
           .within(() => {
-            checkFFYbudgetTable();
-            checkTotalCostTable();
+            budgetPage.checkSubtotalTable('State Staff', 0, 0);
+            budgetPage.checkSubtotalTable('Other State Expenses', 0);
+            budgetPage.checkSubtotalTable('Private Contractor', 0);
+            budgetPage.checkTotalComputableMedicaidCost(0);
+            budgetPage.checkActivityTotalCostTable(0, 0, 0, 1);
 
-            cy.contains('Federal-State Split').parent().next().click();
-            cy.contains('90-10').should('exist');
-            cy.contains('75-25').should('exist');
-            cy.contains('50-50').should('exist');
-
-            cy.contains('Federal-State Split')
-              .parent()
-              .next('div')
-              .find(':selected')
-              .contains('90-10');
-
-            costSplitTable('90%', '10%');
+            budgetPage.checkSplitFunctionality();
+            budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
 
             cy.get('[class="ds-c-field"]').select('75-25');
-            costSplitTable('75%', '25%');
+            budgetPage.checkCostSplitTable(75, 25, 0, 0, 0);
 
             cy.get('[class="ds-c-field"]').select('50-50');
-            costSplitTable('50%', '50%');
+            budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
 
             cy.get('[class="ds-c-field"]').select('90-10');
+          });
+      }
+    });
+
+    cy.pause();
+
+    cy.then(() => {
+      for (let i = 0; i < years.length; i += 1) {
+        cy.contains(`Budget for FFY ${years[i]}`)
+          .parent()
+          .parent()
+          .within(() => {
+            // checkFFYbudgetTable();
+            // checkTotalCostTable();
+
+            // cy.contains('Federal-State Split').parent().next().click();
+            // cy.contains('90-10').should('exist');
+            // cy.contains('75-25').should('exist');
+            // cy.contains('50-50').should('exist');
+
+            // cy.contains('Federal-State Split')
+            //   .parent()
+            //   .next('div')
+            //   .find(':selected')
+            //   .contains('90-10');
+
+            // costSplitTable('90%', '10%');
+
+            // cy.get('[class="ds-c-field"]').select('75-25');
+            // costSplitTable('75%', '25%');
+
+            // cy.get('[class="ds-c-field"]').select('50-50');
+            // costSplitTable('50%', '50%');
+
+            // cy.get('[class="ds-c-field"]').select('90-10');
 
             quarterTabledefault();
           });

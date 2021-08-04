@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export class activityPage {
+export class ActivityPage {
   // eslint-disable-next-line class-methods-use-this
   checkTinyMCE(id, expectedValue) {
     cy.get(`[id="${id}"]`).should('have.value', expectedValue);
@@ -107,9 +107,9 @@ export class activityPage {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  otherStateExpensesFFY(years, expectedValue) {
+  checkFFYinputCostFields(years, expectedValue) {
     for (let i = 0; i < years.length; i += 1) {
-      cy.findByLabelText(`${years[i]} Cost`).should(
+      cy.findByLabelText(`FFY ${years[i]} Cost`).should(
         'have.value',
         expectedValue
       );
@@ -128,6 +128,22 @@ export class activityPage {
   // eslint-disable-next-line class-methods-use-this
   checkOtherStateExpensesOutput(category, years, expectedValue) {
     cy.contains(category).should('exist');
+    this.checkFFYcosts(years, expectedValue);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  checkPrivateContractorOutput(
+    name,
+    description,
+    dateRange,
+    totalCost,
+    years,
+    expectedValue
+  ) {
+    cy.contains(name).should('exist');
+    cy.contains(description).should('exist');
+    cy.contains(dateRange).should('exist');
+    cy.contains(totalCost).should('exist');
     this.checkFFYcosts(years, expectedValue);
   }
 }
