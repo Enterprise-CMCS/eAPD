@@ -5,6 +5,11 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
 sudo yum install -y gcc-c++
 
+# Start & Enable Mongo
+systemctl daemon-reload
+systemctl enable mongod
+systemctl start mongod
+
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
@@ -105,6 +110,7 @@ sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
+cd ~
 cat <<MONGOUSERCONFIG > /home/ec2-user/mongo-init.sh
 echo 'Creating Mongo Admin User'
 mongo admin --eval "db.runCommand({'createUser' : '${PREVIEW_MONGO_INITDB_ROOT_USERNAME}','pwd' : '${PREVIEW_MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
@@ -126,10 +132,7 @@ semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
 
-# Start/Enable Mongo
-systemctl daemon-reload
-systemctl enable mongod
-systemctl start mongod
+# Harden & Restart Mongo
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
