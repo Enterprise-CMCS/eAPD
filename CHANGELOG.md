@@ -1,7 +1,3 @@
-# Next release
-
-Anticipated release: July 28, 2021
-
 #### 🚀 New features
 
 - manage affiliations and choose state page now make live calls for the list of affiliations ([#3264])
