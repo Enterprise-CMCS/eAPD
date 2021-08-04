@@ -54,12 +54,12 @@ const FederalAdmin = ({
     setActiveTab(id);
   };
   
-  const limitDisplayedRoleTypes = currentAffiliation => {
+  const limitDisplayedRoleTypes = currentAffiliationState => {
     let limitedRoles;
-    if(currentAffiliation.stateId === 'fd') {
+    if(currentAffiliationState === 'fd') {
       limitedRoles = roleTypes.filter(item => item.name === 'eAPD Federal Admin')
     }    
-    if(currentAffiliation.stateId !== 'fd') {
+    if(currentAffiliationState !== 'fd') {
       limitedRoles = roleTypes.filter(item => item.name === 'eAPD State Admin')
     }
     setLimitedRoleTypes(limitedRoles);
@@ -76,7 +76,7 @@ const FederalAdmin = ({
       currentAffiliationState
     });
 
-    limitDisplayedRoleTypes(currentAffiliation);
+    limitDisplayedRoleTypes(currentAffiliationState);
   };
   
   const showManageModal = event => {
