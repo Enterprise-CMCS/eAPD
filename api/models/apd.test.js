@@ -3,9 +3,7 @@ const tap = require('tap');
 
 const mongo = require('../db/mongodb');
 
-const {
-  apd: { document }
-} = require('../seeds/development/apds');
+const { apd } = require('../seeds/development/apds');
 
 let newApd;
 let APD;
@@ -20,7 +18,7 @@ tap.test('APD model test', async t => {
     newApd = new APD({
       status: 'draft',
       stateId: 'md',
-      ...document
+      ...apd
     });
     newApd = await newApd.save();
   });

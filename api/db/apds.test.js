@@ -3,13 +3,11 @@ const tap = require('tap');
 
 const dbMock = require('./dbMock.test');
 const mongo = require('./mongodb');
-const {
-  apd: { document }
-} = require('../seeds/development/apds');
+const { apd } = require('../seeds/development/apds');
 
 const {
   createAPD,
-  deleteAPD, // temporarily delete
+  deleteAPD, // temporary delete
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,
@@ -35,15 +33,24 @@ tap.test('database wrappers / apds', async apdsTests => {
 
   apdsTests.beforeEach(async () => {
     dbMock.reset();
+    if (id) {
+      await deleteAPD(id);
+    }
+    id = await createAPD({
+      stateId: 'co',
+      status: 'draft',
+      ...apd
+    });
   });
 
   apdsTests.test('creating an APD', async test => {
-    id = await createAPD({
+    const newId = await createAPD({
       stateId: 'md',
       status: 'draft',
-      ...document
+      ...apd
     });
-    test.ok(id, 'APD was created');
+    test.ok(newId, 'APD was created');
+    await deleteAPD(newId);
   });
 
   apdsTests.test('deleting an APD', async test => {
@@ -54,58 +61,35 @@ tap.test('database wrappers / apds', async apdsTests => {
   });
 
   apdsTests.test('getting all APDs for a state', async test => {
-    db.where.withArgs('state_id', 'state id').returnsThis();
-    db.select
-      .withArgs(
-        'created_at',
-        'document',
-        'id',
-        'state_id',
-        'status',
-        'updated_at'
-      )
-      .resolves('some apds');
+    const approvedId = await createAPD({
+      stateId: 'co',
+      status: 'approved',
+      ...apd
+    });
+    const mnId = await createAPD({
+      stateId: 'mn',
+      status: 'approved',
+      ...apd
+    });
 
-    const apds = await getAllAPDsByState('state id', { db });
+    const apds = await getAllAPDsByState('co');
 
-    test.equal(apds, 'some apds');
+    test.ok(apds.length === 1, '1 APD was found');
+    test.equal(apds[0]._id.toString(), id, 'the APD was found'); // eslint-disable-line no-underscore-dangle
+    await deleteAPD(approvedId);
+    await deleteAPD(mnId);
   });
 
   apdsTests.test('getting a single APD by ID', async test => {
-    db.where.withArgs('id', 'apd id').returnsThis();
-    db.first
-      .withArgs(
-        'created_at',
-        'document',
-        'id',
-        'state_id',
-        'status',
-        'updated_at'
-      )
-      .resolves('an apd');
+    const found = await getAPDByID(id);
 
-    const apds = await getAPDByID('apd id', { db });
-
-    test.equal(apds, 'an apd');
+    test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
   });
 
   apdsTests.test('getting a single APD by ID for a state', async test => {
-    db.where.withArgs('id', 'apd id').returnsThis();
-    db.andWhere.withArgs('state_id', 'state id').returnsThis();
-    db.first
-      .withArgs(
-        'created_at',
-        'document',
-        'id',
-        'state_id',
-        'status',
-        'updated_at'
-      )
-      .resolves('an apd');
+    const found = await getAPDByIDAndState(id, 'co');
 
-    const apds = await getAPDByIDAndState('apd id', 'state id', { db });
-
-    test.equal(apds, 'an apd');
+    test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
   });
 
   apdsTests.test('updating an APD', async updateAPDDocumentTests => {
@@ -157,13 +141,10 @@ tap.test('database wrappers / apds', async apdsTests => {
     });
   });
 
-  apdsTests.afterEach(async () => {
+  apdsTests.teardown(async () => {
     if (id) {
       await deleteAPD(id);
     }
-  });
-
-  apdsTests.teardown(async () => {
     await mongo.teardown();
     clock.restore();
     clockStub.restore();

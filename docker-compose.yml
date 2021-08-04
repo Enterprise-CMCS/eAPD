@@ -14,7 +14,7 @@ services:
       - 54325:5432
 
   mongodb:
-    image: mongo:4
+    image: mongo:latest
     environment:
       - PUID=1000
       - PGID=1000
@@ -26,10 +26,10 @@ services:
     volumes:
       - ./mongodata/database:/data/db
       - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+    command: [--auth]
     ports:
       - 27017:27017
     restart: unless-stopped
-    command: [--auth]
   web:
     build: ./web
     image: cms-eapd/web
@@ -64,8 +64,6 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
-      - MONGO_DATABASE=${MONGO_DATABASE}
-      - MONGO_URL=${MONGO_URL}
       - CYPRESS_TESTS=${CYPRESS_TESTS}
     volumes:
       - type: bind

@@ -707,43 +707,6 @@ Object {
       },
     },
     "/apds/{id}": Object {
-      "delete": Object {
-        "description": "Updates an APD's status to \\"archive\\" and prevents it from being edited",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the apd to archive",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "number",
-            },
-          },
-        ],
-        "responses": Object {
-          "204": Object {
-            "description": "The APD was archived",
-          },
-          "400": Object {
-            "description": "Invalid request, such as requesting to archive an APD that is not editable",
-          },
-          "401": Object {
-            "description": "The user is not logged in",
-          },
-          "403": Object {
-            "description": "The apd ID does not match any known apds for the user",
-          },
-        },
-        "security": Array [
-          Object {
-            "bearerAuth": Array [],
-          },
-        ],
-        "summary": "Archive an APD",
-        "tags": Array [
-          "APDs",
-        ],
-      },
       "get": Object {
         "description": "Where the /apds GET method only returns a small portion of all APDs, this method returns all of one",
         "parameters": Array [
@@ -784,108 +747,6 @@ Object {
           },
         ],
         "summary": "Get a single, complete APD",
-        "tags": Array [
-          "APDs",
-        ],
-      },
-      "patch": Object {
-        "description": "Update an APD in the system using a set of JSON Patch objects. If state profile information is included, the profile information is also updated for the APD's state.",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the apd to update",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "number",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "items": Object {
-                  "description": "A JSON Patch object",
-                  "properties": Object {
-                    "op": Object {
-                      "description": "The JSON Patch operation. This API only supports add, remove, and replace.",
-                      "enum": Array [
-                        "add",
-                        "remove",
-                        "replace",
-                      ],
-                      "type": "string",
-                    },
-                    "path": Object {
-                      "description": "The path of the value to be operated on, specified as a JSON Pointer",
-                      "type": "string",
-                    },
-                    "value": Object {
-                      "description": "For add or replace operations, the new value to be applied",
-                    },
-                  },
-                  "type": "object",
-                },
-                "type": "array",
-              },
-            },
-          },
-          "description": "A set of JSON Patch objects to be applied to the APD to change it",
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/apd",
-                },
-              },
-            },
-            "description": "The update was successful",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "oneOf": Array [
-                    Object {
-                      "items": Object {
-                        "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
-                        "properties": Object {
-                          "path": Object {
-                            "description": "A JSON Pointer path whose patched value is invalid",
-                            "type": "string",
-                          },
-                        },
-                        "type": "object",
-                      },
-                      "type": "array",
-                    },
-                    Object {
-                      "description": "If the requested patch failed for unknown reasons, nothing will be returned",
-                      "type": "null",
-                    },
-                  ],
-                },
-              },
-            },
-            "description": "The update failed due to a problem with the input data",
-          },
-          "401": Object {
-            "description": "The user is not logged in",
-          },
-          "403": Object {
-            "description": "The apd ID does not match any known apds for the user",
-          },
-        },
-        "security": Array [
-          Object {
-            "bearerAuth": Array [],
-          },
-        ],
-        "summary": "Update a specific APD",
         "tags": Array [
           "APDs",
         ],
@@ -941,14 +802,14 @@ Object {
             },
             "description": "The status of the event being logged",
           },
-          "400": Object {
-            "description": "The apd ID does not match any known apds",
-          },
           "401": Object {
             "description": "The user is not logged in",
           },
           "403": Object {
             "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds",
           },
         },
         "security": Array [
@@ -1023,6 +884,9 @@ Object {
           "403": Object {
             "description": "The apd ID does not match any known apds for the user",
           },
+          "404": Object {
+            "description": "The apd does not exist",
+          },
           "415": Object {
             "description": "The file is not a valid format",
           },
@@ -1077,7 +941,18 @@ Object {
           "400": Object {
             "description": "The file does not belong to the APD or does not exist",
           },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
         },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
         "summary": "Get a file associated with an APD",
         "tags": Array [
           "APDs",

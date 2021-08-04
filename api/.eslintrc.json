@@ -1,4 +1,7 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
   "extends": ["airbnb-base", "prettier"],
   "rules": {
     "arrow-body-style": "off",

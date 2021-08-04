@@ -3,7 +3,7 @@ const { oktaClient } = require('../auth/oktaAuth');
 const knex = require('./knex');
 const {
   getRolesAndActivities: actualGetRolesAndActivities,
-  getUserAffiliatedStates: actualGetUserAffiliatedStates,
+  getUserAffiliatedStates: actualGetUserAffiliatedStates
 } = require('./auth');
 const { getStateById: actualGetStateById } = require('./states');
 const { createOrUpdateOktaUser, getOktaUser } = require('./oktaUsers');

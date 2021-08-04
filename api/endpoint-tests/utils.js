@@ -2,6 +2,9 @@ const axios = require('axios');
 const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
+const { setup: setupMongo, teardown: teardownMongo } = require('../db/mongodb');
+const { drop } = require('../seeds/shared/apds');
+const logger = require('../logger')('endpoint-utils');
 
 const { API_HOST, API_PORT, PORT } = process.env;
 
@@ -44,8 +47,17 @@ const unauthorizedTest = (method, url) => {
 };
 
 const getDB = () => knex(knexConfig[process.env.NODE_ENV]);
-const setupDB = db => db.seed.run({ specific: 'main.js' });
-const teardownDB = db => db.destroy();
+const setupDB = async db => {
+  await db.seed.run({ specific: 'main.js' });
+  await setupMongo();
+};
+const teardownDB = async db => {
+  await teardownMongo();
+  await db.destroy();
+  logger.info('Database teardown complete.');
+  await drop();
+  logger.info('Mongo teardown complete.');
+};
 
 const buildForm = data => {
   const form = new FormData();
