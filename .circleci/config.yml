@@ -4,24 +4,24 @@ workflows:
   version: 2
 
   # Workflow to cleanup preview deploys from AWS.  Runs every two hours.
-#  cleanup preview deploys:
-#    triggers:
-#      - schedule:
-          # Run every hour, every day. Specified this way because the more
-          # compact cron syntax wasn't working.
-#          cron: "0 0 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - cleanup preview deploys
+  #  cleanup preview deploys:
+  #    triggers:
+  #      - schedule:
+  # Run every hour, every day. Specified this way because the more
+  # compact cron syntax wasn't working.
+  #          cron: "0 0 * * *"
+  #          filters:
+  #            branches:
+  #              only:
+  #                - master
+  #    jobs:
+  #      - cleanup preview deploys
 
   # Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          cron: '0 0 * * *'
           filters:
             branches:
               only:
@@ -532,22 +532,22 @@ jobs:
 
   # Cleans up preview deploys that are no longer associated with open pull
   # requests.
-#  cleanup preview deploys:
-#    docker:
-#      - image: python:3
-#    steps:
-#      - checkout
-#      - run:
-#          name: cleanup deploys with no open PR
-#          working_directory: ~/project/bin/preview-deploy
-#          command: |
-#            apt-get -qq update
-#            apt-get -qq install jq -y
-#            pip install --quiet awscli
-#            ./aws.cleanup.sh \
-#              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
-#              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
-#              --GH_BOT_USER "$GH_BOT_USER"
+  #  cleanup preview deploys:
+  #    docker:
+  #      - image: python:3
+  #    steps:
+  #      - checkout
+  #      - run:
+  #          name: cleanup deploys with no open PR
+  #          working_directory: ~/project/bin/preview-deploy
+  #          command: |
+  #            apt-get -qq update
+  #            apt-get -qq install jq -y
+  #            pip install --quiet awscli
+  #            ./aws.cleanup.sh \
+  #              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+  #              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
+  #              --GH_BOT_USER "$GH_BOT_USER"
 
   # Frontend production deployment.
   frontend deploy:
@@ -606,6 +606,11 @@ jobs:
               PRNUM=$(basename $CIRCLE_PULL_REQUEST)
               URL=$(./aws.sh \
                 --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
+                --MONGO_INITDB_ROOT_USERNAME "$PREVIEW_MONGO_INITDB_ROOT_USERNAME" \
+                --MONGO_INITDB_ROOT_PASSWORD "$PREVIEW_MONGO_INITDB_ROOT_PASSWORD" \
+                --MONGO_INITDB_DATABASE "$PREVIEW_MONGO_INITDB_DATABASE" \
+                --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME" \
+                --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD" \
                 --AWS_REGION "$PREVIEW_AWS_REGION" \
                 --AWS_SECURITY_GROUP "$PREVIEW_AWS_SECURITY_GROUP" \
                 --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
@@ -617,12 +622,7 @@ jobs:
                 --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY" \
                 --JWT_SECRET "$PREVIEW_JWT_SECRET" \
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
-                --MONGO_URL "$PREVIEW_MONGO_URL" \
-                --MONGO_INITDB_ROOT_USERNAME "$PREVIEW_MONGO_INITDB_ROOT_USERNAME" \
-                --MONGO_INITDB_ROOT_PASSWORD "$PREVIEW_MONGO_INITDB_ROOT_PASSWORD" \
-                --MONGO_INITDB_DATABASE "$PREVIEW_MONGO_INITDB_DATABASE" \
-                --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME"\
-                --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD"
+                --MONGO_URL "$PREVIEW_MONGO_URL"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
