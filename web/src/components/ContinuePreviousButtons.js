@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { titleCase } from 'title-case';
 import ArrowRightIcon from './ArrowRightIcon';
 import ArrowLeftIcon from './ArrowLeftIcon';
-import { titleCase } from "title-case";
 
 const continueLabelId = 'continue-button-label';
 const previousLabelId = 'previous-button-label';

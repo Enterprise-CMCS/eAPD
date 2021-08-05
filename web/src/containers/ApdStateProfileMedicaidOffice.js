@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import {
   setMedicaidDirectorEmail,
   setMedicaidDirectorName,
@@ -17,7 +18,6 @@ import { t } from '../i18n';
 import { selectStateProfile } from '../reducers/apd.selectors';
 import { selectState } from '../reducers/user';
 import { STATES } from '../util';
-import { titleCase } from "title-case";
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';

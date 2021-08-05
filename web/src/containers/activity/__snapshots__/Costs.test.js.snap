@@ -10,7 +10,7 @@ exports[`activity costs wrapper (around personnel and non-personnel)  renders pr
   <h6
     className="ds-h4"
   >
-    State staff
+    State Staff
   </h6>
   <Connect(StatePersonnel)
     activityIndex={0}
@@ -18,7 +18,7 @@ exports[`activity costs wrapper (around personnel and non-personnel)  renders pr
   <h6
     className="ds-h4"
   >
-    Other state expenses
+    Other State Expenses
   </h6>
   <Connect(NonPersonnelCosts)
     activityIndex={0}

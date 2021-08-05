@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import { t } from '../../i18n';
 import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
-import { titleCase } from "title-case";
 
 import {
   setKeyPersonCost,

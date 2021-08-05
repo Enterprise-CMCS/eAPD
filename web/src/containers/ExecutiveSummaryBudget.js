@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import Dollars from '../components/Dollars';
 import { t } from '../i18n';
-import { titleCase } from "title-case";
 
 const thId = (program, share) =>
-  titleCase(`program-budget-table-${program}${share ? `-${share}` : ''}`);
+  `program-budget-table-${program}${share ? `-${share}` : ''}`;
 const tdHdrs = (program, share) =>
-  titleCase(`program-budget-table-${program} program-budget-table-${program}-${share}`);
+  `program-budget-table-${program} program-budget-table-${program}-${share}`;
 
 const DollarCell = ({ headers, value }) => (
   <td className="budget-table--number" headers={headers}>

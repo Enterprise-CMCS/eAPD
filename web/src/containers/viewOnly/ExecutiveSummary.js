@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import ExecutiveSummaryBudget from '../ExecutiveSummaryBudget';
 import Dollars from '../../components/Dollars';
 import Review from '../../components/Review';
 import { t } from '../../i18n';
-import { titleCase } from "title-case";
 
 import { selectApdYears } from '../../reducers/apd.selectors';
 import {
@@ -54,9 +54,9 @@ class ExecutiveSummary extends PureComponent {
         {data.map((activity, i) => (
           <Review
             key={activity.key}
-            heading={titleCase(`Activity ${i + 1}: ${
-              activity.name || t('activities.noNameYet')
-            }`)}
+            heading={titleCase(
+              `Activity ${i + 1}: ${activity.name || t('activities.noNameYet')}`
+            )}
             headingLevel="3"
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >

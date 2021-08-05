@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import {
   setFFPForContractorCostsForFiscalQuarter,
   setFFPForInHouseCostsForFiscalQuarter
@@ -12,7 +13,6 @@ import PercentField from '../../components/PercentField';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
 import { formatPerc } from '../../util/formats';
-import { titleCase } from "title-case";
 
 const QUARTERS = [1, 2, 3, 4];
 const EXPENSE_NAME_DISPLAY = {
@@ -72,7 +72,9 @@ const CostAllocateFFPQuarterly = ({
       <tbody>
         <tr>
           <th rowSpan="2" scope="row">
-            {titleCase(t('activities.costAllocate.quarterly.expenseNames.state'))}
+            {titleCase(
+              t('activities.costAllocate.quarterly.expenseNames.state')
+            )}
           </th>
           {QUARTERS.map(q => (
             <td key={q}>
@@ -113,7 +115,9 @@ const CostAllocateFFPQuarterly = ({
 
         <tr>
           <th rowSpan="2" scope="row">
-            {titleCase(t('activities.costAllocate.quarterly.expenseNames.contractor'))}
+            {titleCase(
+              t('activities.costAllocate.quarterly.expenseNames.contractor')
+            )}
           </th>
           {QUARTERS.map(q => (
             <td key={q}>

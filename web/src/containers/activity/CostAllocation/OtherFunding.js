@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import Instruction from '../../../components/Instruction';
 
 import {
@@ -19,7 +20,6 @@ import {
 
 import { t } from '../../../i18n';
 import RichText from '../../../components/RichText';
-import { titleCase } from "title-case";
 
 const OtherFunding = ({
   activityIndex,

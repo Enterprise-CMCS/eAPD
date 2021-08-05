@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import {
   setComplyingWithProcurement,
   setComplyingWithRecordsAccess,
@@ -19,7 +20,6 @@ import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
 import { selectFederalCitations } from '../reducers/apd.selectors';
 import AlertMissingFFY from '../components/AlertMissingFFY';
-import { titleCase } from "title-case";
 
 const namify = (name, title) =>
   `explanation-${name}-${title}`.replace(/\s/g, '_');
@@ -88,7 +88,7 @@ const AssurancesAndCompliance = ({
 
   return (
     <React.Fragment>
-    <AlertMissingFFY/>
+      <AlertMissingFFY />
       <Section id="assurances-compliance" resource="assurancesAndCompliance">
         <Subsection
           id="assurances-compliance-fed-citations"

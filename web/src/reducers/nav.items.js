@@ -1,5 +1,5 @@
+import { titleCase } from 'title-case';
 import { t } from '../i18n';
-import { titleCase } from "title-case";
 
 const staticItems = apdId => {
   if (apdId) {

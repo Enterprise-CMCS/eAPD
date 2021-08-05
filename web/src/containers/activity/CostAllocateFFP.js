@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
@@ -17,7 +18,6 @@ import {
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
 import { t } from '../../i18n';
-import { titleCase } from "title-case";
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -114,9 +114,11 @@ const CostAllocateFFP = ({
 
   return (
     <Fragment>
-      {isViewOnly
-        ? <hr className="custom-hr" />
-        : <h2 className="subsection--title ds-h2">Budget and FFP</h2> }
+      {isViewOnly ? (
+        <hr className="custom-hr" />
+      ) : (
+        <h2 className="subsection--title ds-h2">Budget and FFP</h2>
+      )}
       {Object.keys(years).map(ffy => (
         <Fragment key={ffy}>
           <table
@@ -266,9 +268,11 @@ const CostAllocateFFP = ({
 
             {isViewOnly && (
               <h4>
-                {titleCase(t(
-                  'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
-                ))}
+                {titleCase(
+                  t(
+                    'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
+                  )
+                )}
               </h4>
             )}
 
