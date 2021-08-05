@@ -40,3 +40,42 @@
   width: 10px;
   cursor: pointer;
 }
+
+
+.all-users-table th {
+  background-color: #fff;
+}
+
+.all-users-table--first-row-multi .all-users-table--state {
+  border: none;
+  border-top: 1px solid #000;
+}
+.all-users-table--first-row-multi .all-users-table--role {
+  border: none;
+  border-top: 1px solid #000;
+}
+.all-users-table--first-row-multi .all-users-table--status {
+  border: none;
+  border-top: 1px solid #000;
+}
+.all-users-table--first-row-multi .all-users-table--actions {
+  border: none;
+  border-top: 1px solid #000;
+}
+
+.all-users-table--row-multi td {
+  border: none;
+}
+
+.all-users-table--row-multi:last-of-type .all-users-table--state{
+  border-bottom: 1px solid #000;
+}
+.all-users-table--row-multi:last-of-type .all-users-table--role{
+  border-bottom: 1px solid #000;
+}
+.all-users-table--row-multi:last-of-type .all-users-table--status{
+  border-bottom: 1px solid #000;
+}
+.all-users-table--row-multi:last-of-type .all-users-table--actions{
+  border-bottom: 1px solid #000;
+}

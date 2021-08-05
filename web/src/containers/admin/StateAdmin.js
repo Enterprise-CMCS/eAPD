@@ -213,6 +213,7 @@ const StateAdmin = ({
       {manageModalDisplay && (
         <ManageRoleDialog
           roleTypes={roleTypes}
+          roleDescription="eAPD State Staff is a state employee. eAPD State Contractor is someone who works for a vendor on behalf of the state."
           hideManageModal={hideManageModal}
           showManageModal={showManageModal}
           handleAffiliationUpdate={handleAffiliationUpdate}
