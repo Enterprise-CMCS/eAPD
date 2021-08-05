@@ -157,6 +157,45 @@ const getAllPopulatedAffiliations = async ({
   return reduceAffiliations_(affiliations);
 };
 
+const updateAuthAffiliation = async({
+  db = knex,
+  affiliationId,
+  newRoleId,
+  newStatus,
+  changedBy,
+  stateId
+}) =>{
+  // Check that user is not editing themselves
+  const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
+    .select('user_id', 'role_id', 'status')
+    .where({ state_id: stateId, id: affiliationId })
+    .first();
+  if (changedBy === affiliationUserId) {
+    throw new Error('User is editing their own affiliation')
+  }
+
+  const authAffiliationAudit = {
+    original_role_id: originalRoleId,
+    original_status: originalStatus,
+    new_role_id: newStatus !== 'approved' ? null : newRoleId,
+    new_status: newStatus || null,
+    changed_by:changedBy}
+
+
+  await db('auth_affiliations')
+    .where({ state_id: stateId, id: affiliationId })
+    .update({
+      role_id: newStatus !== 'approved' ? null : newRoleId,
+      status: newStatus
+    })
+    .then(() =>{
+      return db('auth_affiliation_audit')
+        .insert(authAffiliationAudit)
+    })
+    
+
+}
+
 module.exports = {
   getAffiliationsByStateId,
   getPopulatedAffiliationsByStateId,
@@ -166,5 +205,6 @@ module.exports = {
   reduceAffiliations,
   getAllPopulatedAffiliations,
   getAffiliationsByUserId,
+  updateAuthAffiliation,
   selectedColumns
 };

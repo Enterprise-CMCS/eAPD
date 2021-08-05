@@ -24,6 +24,7 @@
 - fixed error for users with view-document permission not being able to load an APD([#3264])
 - remove sys admins being returned in affiliations ([#3295])
 - added end-to-end test for APD overview section ([#3282])
+- added audit log to track changes to user access ([#3262])
 
 # Previous releases
 
@@ -44,3 +45,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3338]: https://github.com/CMSgov/eAPD/issues/3338
 [#3277]: https://github.com/CMSgov/eAPD/issues/3277
 [#3282]: https://github.com/CMSgov/eAPD/issues/3282
+[#3262]: https://github.com/CMSgov/eAPD/issues/3262
