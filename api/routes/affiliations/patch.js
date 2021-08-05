@@ -1,6 +1,5 @@
 const auditor = require('../../audit');
 const logger = require('../../logger')('affiliations');
-const { raw: knex } = require('../../db');
 const { can, validForState } = require('../../middleware');
 const { updateAuthAffiliation } = require('../../db/affiliations')
 
@@ -20,7 +19,7 @@ const statusToAction = status => {
   }
 };
 
-module.exports = (app, { db = knex, updateAuthAffiliation_ = updateAuthAffiliation } = {}) => {
+module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) => {
   app.patch(
     '/states/:stateId/affiliations/:id',
     can('edit-affiliations'),
@@ -46,7 +45,6 @@ module.exports = (app, { db = knex, updateAuthAffiliation_ = updateAuthAffiliati
 
       try{
         await updateAuthAffiliation_({
-          db,
           stateId,
           newRoleId: request.body.roleId,
           newStatus: request.body.status,
