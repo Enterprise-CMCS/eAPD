@@ -3,7 +3,7 @@ helpText: >-
   Review topline budget data associated with this APD. Totals are based on the information entered by
   the state. Capture incentive payments if applicable.
 summaryBudgetByActivity:
-  title: Summary Budget By Activity
+  title: Summary Budget by Activity
   totalMedicaidCost:
     detail: >-
       The following tables summarize the **Total Computable Medicaid Cost** for all activities organized by their funding 

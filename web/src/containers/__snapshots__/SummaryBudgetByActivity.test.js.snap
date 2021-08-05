@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly Summary Budget By Activity Totals renders 1`] = `
+exports[`renders correctly Summary Budget by Activity Totals renders 1`] = `
 <table
   className="budget-table"
 >
@@ -349,7 +349,7 @@ Array [
 ]
 `;
 
-exports[`renders correctly summary budget by activity breakdown renders 1`] = `
+exports[`renders correctly Summary Budget by activity breakdown renders 1`] = `
 Array [
   <Connect(SummaryActivityBreakdownTable)
     activityIndex={0}
