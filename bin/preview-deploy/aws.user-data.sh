@@ -27,9 +27,10 @@ export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
 export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
 export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
-echo "Mongo envs exported: $MONGO_INITDB_ROOT_USERNAME for $MONGO_INITDB_DATABASE and $MONGO_DATABASE_USERNAME for $MONGO_INITDB_DATABASE" > mongo-envs.txt
 
 cd ~
+touch mongo-envs.txt
+echo "Mongo envs exported: $MONGO_INITDB_ROOT_USERNAME for $MONGO_INITDB_DATABASE and $MONGO_DATABASE_USERNAME for $MONGO_INITDB_DATABASE" > mongo-envs.txt
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
