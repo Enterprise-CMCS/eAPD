@@ -76,7 +76,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
         state_id: state.id,
         role_id: sysAdminRoleId,
         status: 'approved',
-        updated_by: 'seeds',
         username: 'sysadmin'
       });
     });
@@ -88,7 +87,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      updated_by: 'seeds',
       username: 'em@il.com'
     });
     // Add an expired certification and this user will be downgraded to "regular user"
@@ -110,7 +108,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'fd',
       role_id: fedAdminRoleId,
       status: 'approved',
-      updated_by: 'seeds'
     });
     oktaUsers.push(formatOktaUser(fedAdmin));
   }
@@ -120,7 +117,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+
     });
     // Let them be a staffer in Maryland too
     oktaAffiliations.push({
@@ -128,7 +125,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'md',
       role_id: stateStaffRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
@@ -151,7 +148,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
-      updated_by: 'seeds'
     });
     // Add an invalid certification and this user will remain an staff member
     stateCertifications.push({
@@ -172,7 +168,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateContractorRoleId,
       status: 'approved',
-      updated_by: 'seeds'
     });
     oktaUsers.push(formatOktaUser(stateContractor));
   }
@@ -183,7 +178,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
-      updated_by: 'seeds'
     });
     oktaUsers.push(formatOktaUser(resetmfa));
   }

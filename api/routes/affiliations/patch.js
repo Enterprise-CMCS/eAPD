@@ -3,6 +3,7 @@ const logger = require('../../logger')('affiliations');
 const { raw: knex } = require('../../db');
 const { can, validForState } = require('../../middleware');
 
+
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = auditor.actions;
 
 // map affiliation status to audit actions
@@ -41,11 +42,10 @@ module.exports = (app, { db = knex } = {}) => {
       }
 
       // Check that user is not editing themselves
-      const { user_id: affiliationUserId } = await db('auth_affiliations')
-        .select('user_id')
+      const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
+        .select('user_id', 'role_id', 'status')
         .where({ state_id: stateId, id })
         .first();
-
       if (userId === affiliationUserId) {
         logger.error({
           id: request.id,
@@ -57,6 +57,12 @@ module.exports = (app, { db = knex } = {}) => {
 
       const { status, roleId } = request.body;
       const audit = auditor(statusToAction(status), request);
+      const authAffiliationAudit = {
+        original_role_id: originalRoleId,
+        original_status: originalStatus,
+        new_role_id: status !== 'approved' ? null : roleId,
+        new_status: status || null,
+        changed_by:userId}
 
       try {
         db('auth_affiliations')
@@ -64,8 +70,7 @@ module.exports = (app, { db = knex } = {}) => {
           .returning('*')
           .update({
             role_id: status !== 'approved' ? null : roleId,
-            status,
-            updated_by: userId
+            status
           })
           .then(rows => rows[0])
           .then(row =>
@@ -77,6 +82,10 @@ module.exports = (app, { db = knex } = {}) => {
             })
           )
           .then(() => audit.log())
+          .then(() =>{
+            return db('auth_affiliation_audit')
+              .insert(authAffiliationAudit)
+          })
           .then(() => response.status(200).end())
           .catch(next);
       } catch (e) {

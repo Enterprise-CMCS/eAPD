@@ -8,7 +8,6 @@ const selectedColumns = [
   'auth_affiliations.status as status',
   'auth_affiliations.created_at as createdAt',
   'auth_affiliations.updated_at as updatedAt',
-  'auth_affiliations.updated_by as updatedById',
   'auth_roles.name as role',
   'okta_users.displayName as displayName',
   'okta_users.secondEmail as secondEmail',
