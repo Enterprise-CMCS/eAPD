@@ -5,6 +5,11 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
 sudo yum install -y gcc-c++
 
+# Start & Enable Mongo
+systemctl daemon-reload
+systemctl enable mongod
+systemctl start mongod
+
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
@@ -16,6 +21,11 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
+export PREVIEW_MONGO_INITDB_ROOT_USERNAME=mongo_admin
+export PREVIEW_MONGO_INITDB_ROOT_PASSWORD=Preview_APD_Mongo_InitDB_Root_Password
+export PREVIEW_MONGO_INITDB_DATABASE=eapd_mongo
+export PREVIEW_MONGO_DATABASE_USERNAME=eapd_admin
+export PREVIEW_MONGO_DATABASE_PASSWORD=Preview_eAPD_Mongo_Password
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
@@ -91,11 +101,20 @@ echo "module.exports = {
 };" > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
+
+# Setting Up New Relic Application Monitor
 npm install newrelic --save
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
+
+#Preparing Mongo DB Users
+cd ~
+mongo admin --eval "db.runCommand({'createUser' : '${MONGO_INITDB_ROOT_USERNAME}','pwd' : '${MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo ${MONGO_INITDB_DATABASE} -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --authenticationDatabase admin --eval "db.createUser({user: '${MONGO_DATABASE_USERNAME}', pwd: '${MONGO_DATABASE_PASSWORD}', roles:[{role:'readWrite', db: '${MONGO_INITDB_DATABASE}'}]});"
+touch mongo-ran.txt
+echo "Mango Ran: $MONGO_INITDB_ROOT_USERNAME" > mongo-ran.txt
 E_USER
 
 sudo yum remove -y gcc-c++
@@ -108,6 +127,13 @@ restorecon -Rv /etc/nginx/nginx.conf
 semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
+
+# Harden & Restart Mongo
+sed -i 's|#security:|security:|g' /etc/mongod.conf
+sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
+systemctl restart mongod
+#rm mongo-init.sh
+
 # Restart Nginx
 systemctl enable nginx
 systemctl restart nginx
