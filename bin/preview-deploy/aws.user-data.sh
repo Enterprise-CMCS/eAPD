@@ -21,11 +21,11 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
-export PREVIEW_MONGO_INITDB_ROOT_USERNAME=mongo_admin
-export PREVIEW_MONGO_INITDB_ROOT_PASSWORD=Preview_APD_Mongo_InitDB_Root_Password
-export PREVIEW_MONGO_INITDB_DATABASE=eapd_mongo
-export PREVIEW_MONGO_DATABASE_USERNAME=eapd_admin
-export PREVIEW_MONGO_DATABASE_PASSWORD=Preview_eAPD_Mongo_Password
+export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
+export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
+export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
+export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
+export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
@@ -111,10 +111,11 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
 cd ~
+echo "Mango Ran: $MONGO_INITDB_ROOT_USERNAME for $MONGO_INITDB_DATABASE and $MONGO_DATABASE_USERNAME for $MONGO_INITDB_DATABASE" > mongo-ran.txt
 mongo admin --eval "db.runCommand({'createUser' : '${MONGO_INITDB_ROOT_USERNAME}','pwd' : '${MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
 mongo ${MONGO_INITDB_DATABASE} -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --authenticationDatabase admin --eval "db.createUser({user: '${MONGO_DATABASE_USERNAME}', pwd: '${MONGO_DATABASE_PASSWORD}', roles:[{role:'readWrite', db: '${MONGO_INITDB_DATABASE}'}]});"
 touch mongo-ran.txt
-echo "Mango Ran: $MONGO_INITDB_ROOT_USERNAME" > mongo-ran.txt
+
 E_USER
 
 sudo yum remove -y gcc-c++
