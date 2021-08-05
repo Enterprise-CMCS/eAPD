@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export class BudgetPage {
+class BudgetPage {
   // eslint-disable-next-line class-methods-use-this
   checkTotalComputableMedicaidCost(expectedValue) {
     cy.contains('Total Computable Medicaid Cost')
@@ -87,18 +86,134 @@ export class BudgetPage {
 
   // eslint-disable-next-line class-methods-use-this
   checkCostSplitTable(federal, state, federalVal, stateVal, expectedMedicaid) {
-    cy.get('[class="budget-table activity-budget-table"]')
-      .eq(2)
+    let fedTotal = 0;
+    let stateTotal = 0;
+
+    fedTotal = federal * 0.01 * federalVal;
+    stateTotal = state * 0.01 * stateVal;
+
+    this.checkTotalComputableMedicaidCost(expectedMedicaid);
+    this.costSplitTableRow('Federal Share', federal, federalVal, fedTotal);
+    this.costSplitTableRow('State Share', state, stateVal, stateTotal);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  checkFFYtotals(
+    years,
+    activityName,
+    totalCost,
+    otherFundingCost,
+    medicaidCost,
+    split,
+    federalShare,
+    state,
+    stateShare
+  ) {
+    cy.contains(`FFY ${years[0]}-${years[years.length - 1]} Totals`)
+      .next()
       .within(() => {
-        let fedTotal = 0;
-        let stateTotal = 0;
+        cy.contains(`${activityName} activity is $${totalCost}`).should(
+          'exist'
+        );
+        cy.contains(`other funding of $${otherFundingCost}`).should('exist');
+        cy.contains(`Medicaid cost is $${medicaidCost}`).should('exist');
+        cy.contains(split).should('exist');
+        cy.contains(`federal share of $${federalShare}`).should('exist');
+        cy.contains(`${state} share of $${stateShare}`).should('exist');
 
-        fedTotal = federal * 0.01 * federalVal;
-        stateTotal = state * 0.01 * stateVal;
-
-        this.checkTotalComputableMedicaidCost(expectedMedicaid);
-        this.costSplitTableRow('Federal Share', federal, federalVal, fedTotal);
-        this.costSplitTableRow('State Share', state, stateVal, stateTotal);
+        for (let i = 0; i < years.length; i += 1) {
+          cy.contains(years[i]).should('exist');
+        }
       });
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  checkSubtotal(expectedValue) {
+    cy.get('[class="budget-table--number budget-table--subtotal"]').should(
+      'contain',
+      expectedValue
+    );
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  quarterTableInputRow(row, defaultOrExport, expectedValue, expectedSubtotal) {
+    cy.contains(row)
+      .parent()
+      .within(() => {
+        if (defaultOrExport === 'default') {
+          for (let i = 0; i < 4; i += 1) {
+            cy.get('[class="ds-c-field budget-table--input__number"]')
+              .eq(i)
+              .should('have.value', expectedValue);
+          }
+        } else {
+          for (let i = 0; i < 4; i += 1) {
+            cy.get('[class="budget-table--number"]')
+              .eq(i)
+              .should('contain', `${expectedValue} %`);
+          }
+        }
+        this.checkSubtotal(`+${expectedSubtotal}%`);
+      });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  quarterTableSubtotalRow(row, expectedValue, expectedSubtotal) {
+    cy.contains(row)
+      .parent()
+      .next()
+      .within(() => {
+        for (let i = 0; i < 4; i += 1) {
+          cy.get('[class="budget-table--number"]')
+            .eq(i)
+            .should('contain', `$${expectedValue}`);
+        }
+        this.checkSubtotal(`$${expectedSubtotal}`);
+      });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  quarterTableBottomRow(expectedValue, expectedSubtotal) {
+    cy.contains('Total Enhanced FFP')
+      .parent()
+      .within(() => {
+        for (let i = 0; i < 4; i += 1) {
+          cy.get('[class="budget-table--number budget-table--total"]')
+            .eq(i)
+            .should('contain', `$${expectedValue}`);
+        }
+        this.checkSubtotal(`$${expectedSubtotal}`);
+      });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  checkQuarterTable(defaultOrExport, expectedValue, expectedSubtotal) {
+    this.quarterTableInputRow(
+      'State Staff and Expenses (In-House Costs)',
+      defaultOrExport,
+      expectedValue,
+      expectedSubtotal
+    );
+    this.quarterTableSubtotalRow(
+      'State Staff and Expenses (In-House Costs)',
+      expectedValue,
+      expectedSubtotal
+    );
+
+    this.quarterTableInputRow(
+      'Private Contractor Costs',
+      defaultOrExport,
+      expectedValue,
+      expectedSubtotal
+    );
+    this.quarterTableSubtotalRow(
+      'Private Contractor Costs',
+      expectedValue,
+      expectedSubtotal
+    );
+
+    this.quarterTableBottomRow(expectedValue, expectedSubtotal);
+  }
 }
+
+export default BudgetPage;

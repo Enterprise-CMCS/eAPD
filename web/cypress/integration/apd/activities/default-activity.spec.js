@@ -1,11 +1,14 @@
 /// <reference types="cypress" />
 
-import { ActivityPage } from '../../../page-objects/activity-page';
-import { BudgetPage } from '../../../page-objects/budget-page';
+import ActivityPage from '../../../page-objects/activity-page';
+import BudgetPage from '../../../page-objects/budget-page';
+import ExportPage from '../../../page-objects/export-page';
 
 describe('checking default values in Activities section', () => {
+  // const activityPage = new ActivityPage();
   const activityPage = new ActivityPage();
   const budgetPage = new BudgetPage();
+  const exportPage = new ExportPage();
 
   let apdUrl;
   const years = [];
@@ -13,8 +16,7 @@ describe('checking default values in Activities section', () => {
 
   before(() => {
     cy.useStateStaff();
-    // cy.findByRole('button', { name: /Create new/i }).click();
-    cy.get('[href="/apd/333"]').click();
+    cy.findByRole('button', { name: /Create new/i }).click();
 
     // Gets list of available years
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
@@ -37,152 +39,7 @@ describe('checking default values in Activities section', () => {
     cy.useStateStaff(apdUrl);
   });
 
-  const checkFFYtotals = activityName => {
-    cy.then(() => {
-      cy.contains(`FFY ${years[0]}-${years[years.length - 1]} Totals`)
-        .next()
-        .within(() => {
-          cy.contains(`${activityName} activity is $0`).should('exist');
-          cy.contains('other funding of $0').should('exist');
-          cy.contains('Medicaid cost is $0').should('exist');
-          cy.contains('90/10').should('exist');
-          cy.contains('federal share of $0').should('exist');
-          cy.contains('Alaska share of $0').should('exist');
-
-          for (let i = 0; i < years.length; i += 1) {
-            cy.contains(years[i]).should('exist');
-          }
-        });
-    });
-  };
-
-  const checkSubtotalTable = (msg, subtotalMsg) => {
-    cy.contains(msg).parent().next().should('contain', '$0');
-    cy.contains(subtotalMsg).parent().should('contain', '$0');
-  };
-
-  const checkFFYbudgetTable = () => {
-    checkSubtotalTable('State Staff', 'State Staff Subtotal');
-    checkSubtotalTable('Other State Expenses', 'Other State Expenses Subtotal');
-    checkSubtotalTable('Private Contractor', 'Private Contractor Subtotal');
-    cy.contains('Total Computable Medicaid Cost')
-      .parent()
-      .should('contain', '$0');
-  };
-
-  const costSplitTableRow = (fedOrState, split) => {
-    cy.contains(fedOrState)
-      .parent()
-      .within(() => {
-        cy.get('[class="budget-table--number"]').eq(0).should('contain', '$0');
-        cy.get('[class="budget-table--number ds-u-padding--0"]').should(
-          'have.text',
-          '×'
-        );
-        cy.get('[class="budget-table--number ds-u-text-align--left"]').should(
-          'contain',
-          split
-        );
-        cy.get('[class="budget-table--number"]').eq(1).should('contain', '=');
-        cy.get('[class="budget-table--number"]').eq(2).should('contain', '$0');
-      });
-  };
-
-  // const costSplitTable = (federal, state) => {
-  //   cy.get('[class="data-entry-box ds-u-margin-bottom--5"]')
-  //     .next()
-  //     .within(() => {
-  //       cy.contains('Total Computable Medicaid Cost')
-  //         .parent()
-  //         .should('contain', '$0');
-
-  //       costSplitTableRow('Federal Share', federal);
-  //       costSplitTableRow('State Share', state);
-  //     });
-  // };
-
-  const quarterTableInputRow = (row, defaultOrExport) => {
-    cy.contains(row)
-      .parent()
-      .within(() => {
-        if (defaultOrExport === 'default') {
-          for (let i = 0; i < 4; i += 1) {
-            cy.get('[class="ds-c-field budget-table--input__number"]')
-              .eq(i)
-              .should('have.value', 0);
-          }
-        } else {
-          for (let i = 0; i < 4; i += 1) {
-            cy.get('[class="budget-table--number"]')
-              .eq(i)
-              .should('contain', '0 %');
-          }
-        }
-        cy.get('[class="budget-table--number budget-table--subtotal"]').should(
-          'contain',
-          '+0%'
-        );
-      });
-  };
-
-  const quarterTableSubtotalRow = row => {
-    cy.contains(row)
-      .parent()
-      .next()
-      .within(() => {
-        for (let i = 0; i < 4; i += 1) {
-          cy.get('[class="budget-table--number"]')
-            .eq(i)
-            .should('contain', '$0');
-        }
-        cy.get('[class="budget-table--number budget-table--subtotal"]').should(
-          'contain',
-          '$0'
-        );
-      });
-  };
-
-  const quarterTableTotalRow = () => {
-    cy.contains('Total Enhanced FFP')
-      .parent()
-      .within(() => {
-        for (let i = 0; i < 4; i += 1) {
-          cy.get('[class="budget-table--number budget-table--total"]')
-            .eq(i)
-            .should('contain', '$0');
-        }
-
-        cy.get('[class="budget-table--number budget-table--subtotal"]').should(
-          'contain',
-          '$0'
-        );
-      });
-  };
-
-  const quarterTabledefault = () => {
-    quarterTableInputRow(
-      'State Staff and Expenses (In-House Costs)',
-      'default'
-    );
-    quarterTableSubtotalRow('State Staff and Expenses (In-House Costs)');
-
-    quarterTableInputRow('Private Contractor Costs', 'default');
-    quarterTableSubtotalRow('Private Contractor Costs');
-
-    quarterTableTotalRow();
-  };
-
-  const quarterTableExport = () => {
-    quarterTableInputRow('State Staff and Expenses (In-House Costs)', 'export');
-    quarterTableSubtotalRow('State Staff and Expenses (In-House Costs)');
-
-    quarterTableInputRow('Private Contractor Costs', 'export');
-    quarterTableSubtotalRow('Private Contractor Costs');
-
-    quarterTableTotalRow();
-  };
-
-  it.only('tests default values', () => {
+  it('tests default values in an activity', () => {
     cy.url().should('include', '/activities');
 
     // Tests Continue button on Activities Dashboard
@@ -275,20 +132,13 @@ describe('checking default values in Activities section', () => {
     activityPage.checkStateStaffFFY(years, '');
 
     cy.findByRole('button', { name: /Done/i }).click();
-    cy.contains('Personnel title not specified').should('exist');
 
-    // CAN FTEs DEFAULT TO ZERO?
-    cy.then(() => {
-      for (let i = 0; i < years.length; i += 1) {
-        cy.contains(`FFY ${years[i]}`)
-          .parent()
-          .within(() => {
-            cy.contains('Cost: $0').should('exist');
-            cy.contains('FTEs:').should('exist');
-            cy.contains('Total: $0');
-          });
-      }
-    });
+    activityPage.checkStateStaffOutput(
+      'Personnel title not specified',
+      years,
+      0,
+      0
+    );
 
     activityPage.checkDeleteButton(
       'State staff have not been added for this activity.',
@@ -394,184 +244,91 @@ describe('checking default values in Activities section', () => {
             budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
 
             cy.get('[class="ds-c-field"]').select('90-10');
+
+            budgetPage.checkQuarterTable('default', 0, 0);
           });
       }
-    });
-
-    cy.pause();
-
-    cy.then(() => {
-      for (let i = 0; i < years.length; i += 1) {
-        cy.contains(`Budget for FFY ${years[i]}`)
-          .parent()
-          .parent()
-          .within(() => {
-            // checkFFYbudgetTable();
-            // checkTotalCostTable();
-
-            // cy.contains('Federal-State Split').parent().next().click();
-            // cy.contains('90-10').should('exist');
-            // cy.contains('75-25').should('exist');
-            // cy.contains('50-50').should('exist');
-
-            // cy.contains('Federal-State Split')
-            //   .parent()
-            //   .next('div')
-            //   .find(':selected')
-            //   .contains('90-10');
-
-            // costSplitTable('90%', '10%');
-
-            // cy.get('[class="ds-c-field"]').select('75-25');
-            // costSplitTable('75%', '25%');
-
-            // cy.get('[class="ds-c-field"]').select('50-50');
-            // costSplitTable('50%', '50%');
-
-            // cy.get('[class="ds-c-field"]').select('90-10');
-
-            quarterTabledefault();
-          });
-      }
-
-      checkFFYtotals('Program Administration');
+      budgetPage.checkFFYtotals(
+        years,
+        activities[0][0],
+        0,
+        0,
+        0,
+        '90/10',
+        0,
+        'Alaska',
+        0
+      );
     });
 
     // Testing add activity button at end of Activitiy
-    cy.contains('Add another activity').click();
-    cy.url().should('include', '/activities');
-    cy.contains('Activity 2').should('exist');
-    cy.contains('Delete').click();
-    cy.findByRole('button', { name: /Delete Activity/i }).click();
-    cy.contains('Activity 2').should('not.exist');
+    activityPage.checkAddActivityButton();
   });
 
   it('checks default activity export view', () => {
-    cy.contains('Export and Submit').click();
-    cy.contains('Continue to Review').click();
+    exportPage.goToExportView();
 
-    cy.contains('Executive Summary')
-      .parent()
-      .within(() => {
-        cy.contains('Activity 1: Program Administration').should('exist');
-        cy.contains('Date not specified - Date not specified').should('exist');
-        cy.contains('Total cost of activity: $0').should('exist');
-        cy.contains(
-          'Total Computable Medicaid Cost: $0 ($0 Federal share)'
-        ).should('exist');
+    exportPage.checkExecutiveSummary(
+      activities,
+      years,
+      'Date not specified - Date not specified',
+      0,
+      0,
+      0
+    );
 
-        cy.then(() => {
-          for (let i = 0; i < years.length; i += 1) {
-            cy.contains(
-              `FFY ${years[i]}: $0 | Total Computable Medicaid Cost: $0 ($0 Federal share)`
-            ).should('exist');
-          }
-        });
-      });
+    exportPage.checkActivityList(activities);
 
-    cy.contains('Activities')
-      .parent()
-      .next()
-      .next()
-      .within(() => {
-        cy.then(() => {
-          for (let i = 0; i < activities.length; i += 1) {
-            cy.contains(
-              `${i + 1}. ${activities[i][0]} | ${activities[i][1]}`
-            ).should('exist');
-          }
+    for (let i = 0; i < activities.length; i += 1) {
+      cy.contains(`Activity ${i + 1} (${activities[i][0]})`)
+        .parent()
+        .within(() => {
+          exportPage.checkActivityOverview(
+            '',
+            'Date not specified',
+            'Date not specified',
+            '',
+            '',
+            'No response was provided for how this activity will support the Medicaid standards and conditions.',
+            'No response was provided for how this activity will support the Medicaid standards and conditions.'
+          );
 
-          for (let i = 0; i < activities.length; i += 1) {
-            cy.contains(`Activity ${i + 1} (${activities[i][0]})`)
-              .parent()
+          exportPage.checkOutcomesAndMilestones('empty');
+          exportPage.checkStateExpenses('empty');
+          exportPage.checkPrivateContractorCosts('empty');
+          exportPage.checkCostAllocation('');
+
+          for (let k = 0; k < years.length; k += 1) {
+            exportPage.checkOtherFunding(years[i], '', 0);
+
+            cy.contains(`Activity ${i + 1} Budget for FFY ${years[k]}`)
+              .next()
               .within(() => {
-                cy.contains('Provide a short overview of the activity:')
-                  .next()
-                  .should('have.text', '');
-                cy.contains('Start date')
-                  .parent()
-                  .should('contain', 'Date not specified');
-                cy.contains('End date')
-                  .parent()
-                  .should('contain', 'Date not specified');
-
-                cy.contains('Activity Overview').next().should('be.empty');
-                cy.contains('Supporting Justification')
-                  .next()
-                  .should('be.empty');
-
-                cy.contains('This activity supports')
-                  .parent()
-                  .next()
-                  .should(
-                    'contain',
-                    'No response was provided for how this activity will support the Medicaid standards and conditions.'
-                  );
-                cy.contains('This activity does not support')
-                  .parent()
-                  .next()
-                  .should(
-                    'contain',
-                    'No response was provided for how this activity will support the Medicaid standards and conditions.'
-                  );
-
-                cy.contains('Outcomes and Metrics')
-                  .next()
-                  .next()
-                  .should('contain', 'Milestones');
-                cy.contains('Milestones')
-                  .next()
-                  .should('contain', 'State staff');
-                cy.contains('State staff')
-                  .next()
-                  .should('contain', 'Other state expenses');
-                cy.contains('Other state expenses')
-                  .next()
-                  .should('contain', 'Private Contractor Costs');
-                cy.contains('Private Contractor Costs')
-                  .next()
-                  .should('contain', 'Cost Allocation');
-                cy.contains('Description of Cost Allocation Methodology')
-                  .next()
-                  .should('be.empty');
-
-                for (let k = 0; k < years.length; k += 1) {
-                  cy.contains(`FFY ${years[k]}`)
-                    .next()
-                    .should('contain', 'Other Funding Description')
-                    .next()
-                    .should('be.empty')
-                    .next()
-                    .should('contain', 'Other Funding Amount: $0');
-
-                  cy.contains(`Activity ${i + 1} Budget for FFY ${years[k]}`)
-                    .next()
-                    .within(() => {
-                      checkFFYbudgetTable();
-                      cy.contains(
-                        `Activity ${i + 1} Total Computable Medicaid Cost`
-                      )
-                        .parent()
-                        .next()
-                        .should('contain', '$0')
-                        .next()
-                        .should('contain', '$0');
-
-                      costSplitTableRow('Federal Share', '90%');
-                      costSplitTableRow('State Share', '10%');
-                    });
-                  cy.contains(`Activity ${i + 1} Budget for FFY ${years[k]}`)
-                    .parent()
-                    .next()
-                    .within(() => {
-                      quarterTableExport();
-                    });
-                }
-
-                checkFFYtotals(activities[i][0]);
+                budgetPage.checkSubtotalTable('State Staff', 0, 0);
+                budgetPage.checkSubtotalTable('Other State Expenses', 0);
+                budgetPage.checkSubtotalTable('Private Contractor', 0);
+                budgetPage.checkTotalComputableMedicaidCost(0);
+                exportPage.checkRowTotals(0, 0);
+                budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
+              });
+            cy.contains('Estimated Quarterly Expenditure')
+              .next()
+              .within(() => {
+                budgetPage.checkQuarterTable('export', 0, 0);
               });
           }
+          budgetPage.checkFFYtotals(
+            years,
+            activities[i][0],
+            0,
+            0,
+            0,
+            '90/10',
+            0,
+            'Alaska',
+            0
+          );
         });
-      });
+    }
   });
 });

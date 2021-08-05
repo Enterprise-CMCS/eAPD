@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export class ActivityPage {
+class ActivityPage {
   // eslint-disable-next-line class-methods-use-this
   checkTinyMCE(id, expectedValue) {
     cy.get(`[id="${id}"]`).should('have.value', expectedValue);
@@ -107,6 +107,21 @@ export class ActivityPage {
   }
 
   // eslint-disable-next-line class-methods-use-this
+  checkStateStaffOutput(name, years, cost, numFTEs) {
+    cy.contains(name).should('exist');
+
+    for (let i = 0; i < years.length; i += 1) {
+      cy.contains(`FFY ${years[i]}`)
+        .parent()
+        .within(() => {
+          cy.contains(`Cost: $${cost}`).should('exist');
+          cy.contains(`FTEs: ${numFTEs}`).should('exist');
+          cy.contains(`Total: $${cost * numFTEs}`);
+        });
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   checkFFYinputCostFields(years, expectedValue) {
     for (let i = 0; i < years.length; i += 1) {
       cy.findByLabelText(`FFY ${years[i]} Cost`).should(
@@ -146,4 +161,16 @@ export class ActivityPage {
     cy.contains(totalCost).should('exist');
     this.checkFFYcosts(years, expectedValue);
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  checkAddActivityButton() {
+    cy.contains('Add another activity').click();
+    cy.url().should('include', '/activities');
+    cy.contains('Activity 2').should('exist');
+    cy.contains('Delete').click();
+    cy.findByRole('button', { name: /Delete Activity/i }).click();
+    cy.contains('Activity 2').should('not.exist');
+  }
 }
+
+export default ActivityPage;
