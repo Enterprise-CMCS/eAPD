@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, useParams as actualUseParams } from 'react-router-dom';
 import ContinuePreviousButtons from './ContinuePreviousButtons';
+
 import {
   selectActivitiesSidebar,
   selectActivityCount
@@ -11,6 +12,8 @@ import { addActivity as actualAddActivity } from '../actions/editActivity';
 
 const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
   const { activityIndex } = useParams();
+  const apdId = +useParams().apdId;
+
   const showAddActivityLink =
     Number(activityIndex) + 1 === activityCount &&
     location.pathname.endsWith('ffp');
@@ -20,11 +23,11 @@ const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
       {showAddActivityLink && (
         <div className="pre-button-section-break">
           <Link
-            to="/apd/1/activities"
+            to={`/apd/${apdId}/activities`}
             onClick={addActivity}
             className="ds-c-button"
           >
-            Add another activity
+            Add Activity
           </Link>
         </div>
       )}

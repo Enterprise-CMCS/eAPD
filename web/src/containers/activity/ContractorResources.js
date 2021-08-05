@@ -39,7 +39,7 @@ const ContractorResources = ({
     >
       <FormAndReviewList
         activityIndex={activityIndex}
-        addButtonText="Add another contractor"
+        addButtonText="Add Contractor"
         list={contractors}
         collapsed={ContractorResourceReview}
         expanded={ContractorResourceForm}
