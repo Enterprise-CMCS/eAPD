@@ -111,10 +111,10 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
 cd ~
-mongo admin --eval "db.runCommand({'createUser' : '${PREVIEW_MONGO_INITDB_ROOT_USERNAME}','pwd' : '${PREVIEW_MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo ${PREVIEW_MONGO_INITDB_DATABASE} -u ${PREVIEW_MONGO_INITDB_ROOT_USERNAME} -p ${PREVIEW_MONGO_INITDB_ROOT_PASSWORD} --authenticationDatabase admin --eval "db.createUser({user: '${PREVIEW_MONGO_DATABASE_USERNAME}', pwd: '${PREVIEW_MONGO_DATABASE_PASSWORD}', roles:[{role:'readWrite', db: '${PREVIEW_MONGO_INITDB_DATABASE}'}]});"
+mongo admin --eval "db.runCommand({'createUser' : '${MONGO_INITDB_ROOT_USERNAME}','pwd' : '${MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo ${MONGO_INITDB_DATABASE} -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --authenticationDatabase admin --eval "db.createUser({user: '${MONGO_DATABASE_USERNAME}', pwd: '${MONGO_DATABASE_PASSWORD}', roles:[{role:'readWrite', db: '${MONGO_INITDB_DATABASE}'}]});"
 touch mongo-ran.txt
-echo "Mango Ran: $PREVIEW_MONGO_INITDB_ROOT_USERNAME" > mongo-ran.txt
+echo "Mango Ran: $MONGO_INITDB_ROOT_USERNAME" > mongo-ran.txt
 E_USER
 
 sudo yum remove -y gcc-c++
