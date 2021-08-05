@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import ExecutiveSummaryBudget from '../ExecutiveSummaryBudget';
 import Dollars from '../../components/Dollars';
 import Review from '../../components/Review';
@@ -20,7 +21,7 @@ class ExecutiveSummary extends PureComponent {
       <div>
         <h2>Executive Summary</h2>
         <Review
-          heading="Total cost of all activities"
+          heading="Total Cost of All Activities"
           headingLevel="3"
           className="ds-u-border--0"
         >
@@ -53,9 +54,9 @@ class ExecutiveSummary extends PureComponent {
         {data.map((activity, i) => (
           <Review
             key={activity.key}
-            heading={`Activity ${i + 1}: ${
-              activity.name || t('activities.noNameYet')
-            }`}
+            heading={titleCase(
+              `Activity ${i + 1}: ${activity.name || t('activities.noNameYet')}`
+            )}
             headingLevel="3"
             className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
           >

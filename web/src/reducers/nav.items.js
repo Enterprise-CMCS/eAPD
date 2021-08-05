@@ -1,107 +1,108 @@
+import { titleCase } from 'title-case';
 import { t } from '../i18n';
 
 const staticItems = apdId => {
   if (apdId) {
     return [
       {
-        label: t('apd.title'),
+        label: titleCase(t('apd.title')),
         url: `/apd/${apdId}/apd-overview`
       },
       {
-        label: t('apd.stateProfile.title'),
+        label: titleCase(t('apd.stateProfile.title')),
         items: [
           {
-            label: t('apd.stateProfile.title'),
+            label: titleCase(t('apd.stateProfile.title')),
             url: `/apd/${apdId}/state-profile`
           },
           {
-            label: t('apd.stateProfile.directorAndAddress.title'),
+            label: titleCase(t('apd.stateProfile.directorAndAddress.title')),
             url: `/apd/${apdId}/state-profile#apd-state-profile-office`
           },
           {
-            label: t('apd.stateProfile.keyPersonnel.title'),
+            label: titleCase(t('apd.stateProfile.keyPersonnel.title')),
             url: `/apd/${apdId}/state-profile#apd-state-profile-key-personnel`
           }
         ]
       },
       {
-        label: t('previousActivities.title'),
+        label: titleCase(t('previousActivities.title')),
         items: [
           {
-            label: t('previousActivities.title'),
+            label: titleCase(t('previousActivities.title')),
             url: `/apd/${apdId}/previous-activities`
           },
           {
-            label: t('previousActivities.outline.title'),
+            label: titleCase(t('previousActivities.outline.title')),
             url: `/apd/${apdId}/previous-activities#prev-activities-outline`
           },
           {
-            label: t('previousActivities.actualExpenses.title'),
+            label: titleCase(t('previousActivities.actualExpenses.title')),
             url: `/apd/${apdId}/previous-activities#prev-activities-table`
           }
         ]
       },
       {
-        label: t('activities.title'),
+        label: titleCase(t('activities.title')),
         items: [
           {
-            label: t('activities.list.title'),
+            label: titleCase(t('activities.list.title')),
             url: `/apd/${apdId}/activities`
           }
         ]
       },
       {
-        label: t('scheduleSummary.title'),
+        label: titleCase(t('scheduleSummary.title')),
         url: `/apd/${apdId}/schedule-summary`
       },
       {
-        label: t('proposedBudget.title'),
+        label: titleCase(t('proposedBudget.title')),
         items: [
           {
-            label: t('proposedBudget.title'),
+            label: titleCase(t('proposedBudget.title')),
             url: `/apd/${apdId}/proposed-budget`
           },
           {
-            label: t('proposedBudget.summaryBudgetByActivity.title'),
+            label: titleCase(t('proposedBudget.summaryBudgetByActivity.title')),
             url: `/apd/${apdId}/proposed-budget#summary-schedule-by-activity-table`
           },
           {
-            label: t('proposedBudget.summaryBudget.title'),
+            label: titleCase(t('proposedBudget.summaryBudget.title')),
             url: `/apd/${apdId}/proposed-budget#budget-summary-table`
           },
           {
-            label: t('proposedBudget.quarterlyBudget.title'),
+            label: titleCase(t('proposedBudget.quarterlyBudget.title')),
             url: `/apd/${apdId}/proposed-budget#budget-federal-by-quarter`
           },
           {
-            label: t('proposedBudget.paymentsByFFYQuarter.title'),
+            label: titleCase(t('proposedBudget.paymentsByFFYQuarter.title')),
             url: `/apd/${apdId}/proposed-budget#budget-incentive-by-quarter`
           }
         ]
       },
       {
-        label: t('assurancesAndCompliance.title'),
+        label: titleCase(t('assurancesAndCompliance.title')),
         url: `/apd/${apdId}/assurances-and-compliance`
       },
       {
-        label: t('executiveSummary.title'),
+        label: titleCase(t('executiveSummary.title')),
         items: [
           {
-            label: t('executiveSummary.title'),
+            label: titleCase(t('executiveSummary.title')),
             url: `/apd/${apdId}/executive-summary`
           },
           {
-            label: t('executiveSummary.summary.title'),
+            label: titleCase(t('executiveSummary.summary.title')),
             url: `/apd/${apdId}/executive-summary#executive-summary-summary`
           },
           {
-            label: t('executiveSummary.budgetTable.title'),
+            label: titleCase(t('executiveSummary.budgetTable.title')),
             url: `/apd/${apdId}/executive-summary#executive-summary-budget-table`
           }
         ]
       },
       {
-        label: t('exportAndSubmit.title'),
+        label: titleCase(t('exportAndSubmit.title')),
         url: `/apd/${apdId}/export`
       }
     ];
@@ -111,23 +112,23 @@ const staticItems = apdId => {
 
 const buildActivitySection = (apdId, activityId) => [
   {
-    label: 'Activity overview',
+    label: 'Activity Overview',
     url: `/apd/${apdId}/activity/${activityId}/overview`
   },
   {
-    label: 'Outcomes and milestones',
+    label: 'Outcomes and Milestones',
     url: `/apd/${apdId}/activity/${activityId}/oms`
   },
   {
-    label: 'State staff and expenses',
+    label: 'State Staff and Expenses',
     url: `/apd/${apdId}/activity/${activityId}/state-costs`
   },
   {
-    label: 'Private contractor costs',
+    label: 'Private Contractor Costs',
     url: `/apd/${apdId}/activity/${activityId}/contractor-costs`
   },
   {
-    label: 'Cost allocation and other funding',
+    label: 'Cost Allocation and Other Funding',
     url: `/apd/${apdId}/activity/${activityId}/cost-allocation`
   },
   {

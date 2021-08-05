@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useMemo, useRef, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import { removeActivity } from '../../actions/editActivity';
 import NavLink from '../../components/NavLink';
@@ -20,7 +21,7 @@ const makeTitle = ({ name, fundingSource }, i) => {
   if (fundingSource) {
     title += ` (${fundingSource})`;
   }
-  return title;
+  return titleCase(title);
 };
 
 const EntryDetails = ({

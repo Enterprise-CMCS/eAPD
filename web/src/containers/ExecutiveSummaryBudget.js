@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import Dollars from '../components/Dollars';
 import { t } from '../i18n';
 
@@ -46,43 +47,43 @@ const ExecutiveSummaryBudget = ({ budget }) => {
           <tr>
             <td className="th" id="program-budget-table-null1" />
             <th colSpan="2" id={thId('hit')}>
-              {t('executiveSummary.budgetTable.hit')}
+              {titleCase(t('executiveSummary.budgetTable.hit'))}
             </th>
             <th colSpan="2" id={thId('hie')}>
-              {t('executiveSummary.budgetTable.hie')}
+              {titleCase(t('executiveSummary.budgetTable.hie'))}
             </th>
             <th colSpan="3" id={thId('combined')}>
-              {t('executiveSummary.budgetTable.hitHie')}
+              {titleCase(t('executiveSummary.budgetTable.hitHie'))}
             </th>
           </tr>
           <tr>
             <td className="th" id="program-budget-table-null2" />
             <th className="ds-u-text-align--right" id={thId('hit', 'fed')}>
-              {t('executiveSummary.budgetTable.fedShare')}
+              {titleCase(t('executiveSummary.budgetTable.fedShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('hit', 'state')}>
-              {t('executiveSummary.budgetTable.stateShare')}
+              {titleCase(t('executiveSummary.budgetTable.stateShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('hie', 'fed')}>
-              {t('executiveSummary.budgetTable.fedShare')}
+              {titleCase(t('executiveSummary.budgetTable.fedShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('hie', 'state')}>
-              {t('executiveSummary.budgetTable.stateShare')}
+              {titleCase(t('executiveSummary.budgetTable.stateShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('combined', 'fed')}>
-              {t('executiveSummary.budgetTable.fedShare')}
+              {titleCase(t('executiveSummary.budgetTable.fedShare'))}
             </th>
             <th
               className="ds-u-text-align--right"
               id={thId('combined', 'state')}
             >
-              {t('executiveSummary.budgetTable.stateShare')}
+              {titleCase(t('executiveSummary.budgetTable.stateShare'))}
             </th>
             <th
               className="ds-u-text-align--right"
               id={thId('combined', 'total')}
             >
-              {t('executiveSummary.budgetTable.grandTotal')}
+              {titleCase(t('executiveSummary.budgetTable.grandTotal'))}
             </th>
           </tr>
         </thead>
@@ -146,55 +147,55 @@ const ExecutiveSummaryBudget = ({ budget }) => {
           <tr>
             <td className="th" id="program-budget-table-null3" />
             <th colSpan="2" id={thId('mmis90')}>
-              {t('executiveSummary.budgetTable.mmis90')}
+              {titleCase(t('executiveSummary.budgetTable.mmis90'))}
             </th>
             <th colSpan="2" id={thId('mmis75')}>
-              {t('executiveSummary.budgetTable.mmis75')}
+              {titleCase(t('executiveSummary.budgetTable.mmis75'))}
             </th>
             <th colSpan="2" id={thId('mmis50')}>
-              {t('executiveSummary.budgetTable.mmis50')}
+              {titleCase(t('executiveSummary.budgetTable.mmis50'))}
             </th>
             <th colSpan="3" id={thId('mmisTotal')}>
-              {t('executiveSummary.budgetTable.mmisTotal')}
+              {titleCase(t('executiveSummary.budgetTable.mmisTotal'))}
             </th>
           </tr>
           <tr>
             <td className="th" id="program-budget-table-null4" />
             <th className="ds-u-text-align--right" id={thId('mmis90', 'fed')}>
-              {t('executiveSummary.budgetTable.fedShare')}
+              {titleCase(t('executiveSummary.budgetTable.fedShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('mmis90', 'state')}>
-              {t('executiveSummary.budgetTable.stateShare')}
+              {titleCase(t('executiveSummary.budgetTable.stateShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('mmis75', 'fed')}>
-              {t('executiveSummary.budgetTable.fedShare')}
+              {titleCase(t('executiveSummary.budgetTable.fedShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('mmis75', 'state')}>
-              {t('executiveSummary.budgetTable.stateShare')}
+              {titleCase(t('executiveSummary.budgetTable.stateShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('mmis50', 'fed')}>
-              {t('executiveSummary.budgetTable.fedShare')}
+              {titleCase(t('executiveSummary.budgetTable.fedShare'))}
             </th>
             <th className="ds-u-text-align--right" id={thId('mmis50', 'state')}>
-              {t('executiveSummary.budgetTable.stateShare')}
+              {titleCase(t('executiveSummary.budgetTable.stateShare'))}
             </th>
             <th
               className="ds-u-text-align--right"
               id={thId('mmisTotal', 'fed')}
             >
-              {t('executiveSummary.budgetTable.fedShare')}
+              {titleCase(t('executiveSummary.budgetTable.fedShare'))}
             </th>
             <th
               className="ds-u-text-align--right"
               id={thId('mmisTotal', 'state')}
             >
-              {t('executiveSummary.budgetTable.stateShare')}
+              {titleCase(t('executiveSummary.budgetTable.stateShare'))}
             </th>
             <th
               className="ds-u-text-align--right"
               id={thId('mmisTotal', 'total')}
             >
-              {t('executiveSummary.budgetTable.grandTotal')}
+              {titleCase(t('executiveSummary.budgetTable.grandTotal'))}
             </th>
           </tr>
         </thead>

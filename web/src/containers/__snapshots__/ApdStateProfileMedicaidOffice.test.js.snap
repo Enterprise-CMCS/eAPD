@@ -6,7 +6,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
     <legend
       className="ds-u-padding-bottom--1"
     >
-      Medicaid director
+      Medicaid Director
     </legend>
     <TextField
       label="Name"
@@ -34,7 +34,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
     <legend
       className="ds-u-padding-bottom--1"
     >
-      Medicaid office
+      Medicaid Office
     </legend>
     <TextField
       label="Address"
