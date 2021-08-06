@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { ChoiceList } from '@cmsgov/design-system';
+import { Alert, ChoiceList } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
 
@@ -32,6 +32,7 @@ const ApdSummary = ({
   years,
   yearOptions
 }) => {
+
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
 
   const onRemove = () => {
@@ -65,12 +66,30 @@ const ApdSummary = ({
     value: year
   }));
 
+  const getLabelElement = () => {
+    if (years.length > 0) {
+      return t('apd.overview.instruction.short')
+    }
+    return (
+      <React.Fragment>
+        {t('apd.overview.instruction.short')}
+        <Alert variation='error' >
+          <div style={{fontWeight: 400}}>
+            At least one FFY must be selected to continue with your APD. Select your FFY(s).
+          </div>
+        </Alert>
+
+
+      </React.Fragment>
+    )
+  }
+
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
       <ChoiceList
         choices={yearChoices}
-        label={t('apd.overview.instruction.short')}
+        label={getLabelElement()}
         labelClassName="ds-u-margin-bottom--1"
         name="apd-years"
         onChange={handleYears}
@@ -158,7 +177,8 @@ const mapDispatchToProps = {
   setHIE: setNarrativeForHIE,
   setHIT: setNarrativeForHIT,
   setMMIS: setNarrativeForMMIS,
-  setOverview: setProgramOverview
+  setOverview: setProgramOverview,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdSummary);
