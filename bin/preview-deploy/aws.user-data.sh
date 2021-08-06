@@ -115,9 +115,8 @@ cat <<MONGOUSERSEED > mongo-init.sh
 mongo admin --eval "db.runCommand({'createUser' : '${__MONGO_INITDB_ROOT_USERNAME__}','pwd' : '${__MONGO_INITDB_ROOT_PASSWORD__}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
 mongo ${__MONGO_INITDB_DATABASE__} -u ${__MONGO_INITDB_ROOT_USERNAME__} -p ${__MONGO_INITDB_ROOT_PASSWORD__} --authenticationDatabase admin --eval "db.createUser({user: '${__MONGO_DATABASE_USERNAME__}', pwd: '${__MONGO_DATABASE_PASSWORD__}', roles:[{role:'readWrite', db: '${__MONGO_INITDB_DATABASE__}'}]});"
 MONGOUSERSEED
-sh mongo-init.sh
 touch mongo-ran.txt
-echo "Mango Ran: $MONGO_INITDB_ROOT_USERNAME or __MONGO_INITDB_ROOT_USERNAME__" > mongo-ran.txt
+echo "Mongo envs exported: Okta Domain $OKTA_DOMAIN, MongoDB $MONGO_DATABASE, and MongoUrl $MONGO_URL; $MONGO_INITDB_ROOT_USERNAME for $MONGO_INITDB_DATABASE and $MONGO_DATABASE_USERNAME for $MONGO_INITDB_DATABASE" > mongo-envs.txt
 E_USER
 
 sudo yum remove -y gcc-c++
@@ -132,6 +131,7 @@ restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
 
 # Harden & Restart Mongo
+sh /home/ec2-user/mongo-init.sh
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
