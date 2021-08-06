@@ -102,7 +102,8 @@ const reduceAffiliations = affiliations => {
     const stateAffiliation = {
       role: affiliation.role,
       stateId: affiliation.stateId,
-      status: affiliation.status
+      status: affiliation.status,
+      id: affiliation.id
     };
     // If this user ID is not in the object add it and create an
     // affiliations array with just this affiliation in it.

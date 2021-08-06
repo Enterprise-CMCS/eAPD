@@ -7,11 +7,10 @@ const initialProps = {
   ariaExpanded: false,
   authenticated: true,
   currentUser: {
-    role: 'admin',
+    role: 'eAPD System Admin',
     state: { id: 'wa', name: 'Washington' },
     username: 'frasiercrane@kacl.com'
   },
-  isAdmin: true,
   showSiteTitle: true
 };
 
@@ -139,7 +138,7 @@ describe('Header component', () => {
         role: 'admin',
         state: { id: 'md', name: 'Maryland' }
       },
-      isAdmin: false,
+      isFedAdmin: false,
       currentState: { id: 'md', name: 'Maryland' },
       canViewStateAdmin: null,
       pathname: 'pathname'
@@ -173,7 +172,7 @@ describe('Header component', () => {
         role: 'eAPD Federal Admin',
         state: { id: 'md', name: 'Maryland' }
       },
-      isAdmin: true,
+      isFedAdmin: true,
       currentState: { id: 'md', name: 'Maryland' },
       canViewStateAdmin: null,
       pathname: 'pathname'
