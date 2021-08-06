@@ -128,7 +128,7 @@ sh /home/ec2-user/mongo-init.sh
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
-#rm mongo-init.sh
+rm mongo-init.sh
 
 # Restart Nginx
 systemctl enable nginx
