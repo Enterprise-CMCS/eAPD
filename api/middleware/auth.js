@@ -39,7 +39,7 @@ const can = activity =>
       module.exports.loggedIn(req, res, () => {
 
         if (Array.isArray(activity) ){
-          const hasActivity = activity.some((action) => {
+          const hasActivity = activity.every((action) => {
             return req.user.activities.includes(action)
           })
           if (hasActivity) {

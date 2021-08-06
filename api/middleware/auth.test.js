@@ -102,26 +102,28 @@ tap.test('"can" middleware', async canMiddlewareTest => {
 
 
   canMiddlewareTest.test(
-    'continues if the user has one of the expected activities',
-    async validTest => {
+    'rejects if the user has one of the expected activities',
+    async invalidTest => {
       can(['foo', 'bar'])({ user: { activities: ['foo'] } }, res, next);
 
-      validTest.ok(res.send.notCalled, 'no body is sent');
-      validTest.ok(res.status.notCalled, 'HTTP status not set');
-      validTest.ok(res.end.notCalled, 'response is not terminated');
-      validTest.ok(next.called, 'endpoint handling chain is continued');
+      invalidTest.ok(res.send.notCalled, 'no body is sent');
+      invalidTest.ok(
+        next.notCalled,
+        'endpoint handling chain is not continued'
+      );
     }
   );
 
   canMiddlewareTest.test(
-    'continues if the user has one of the expected activities',
-    async validTest => {
+    'rejects if the user has one of the expected activities',
+    async invalidTest => {
       can(['foo', 'bar'])({ user: { activities: ['bar'] } }, res, next);
 
-      validTest.ok(res.send.notCalled, 'no body is sent');
-      validTest.ok(res.status.notCalled, 'HTTP status not set');
-      validTest.ok(res.end.notCalled, 'response is not terminated');
-      validTest.ok(next.called, 'endpoint handling chain is continued');
+      invalidTest.ok(res.send.notCalled, 'no body is sent');
+      invalidTest.ok(
+        next.notCalled,
+        'endpoint handling chain is not continued'
+      );
     }
   );
 
