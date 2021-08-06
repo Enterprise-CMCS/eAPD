@@ -27,45 +27,45 @@ module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) 
     async (request, response, next) => {
       const userId = request.user.id;
       const { stateId, id } = request.params;
-      const {status, roleId} = request.body
+      const { status, roleId } = request.body
 
       if (!request.body || !status || !roleId) {
         logger.error({
           id: request.id,
           message: 'affiliation status or roleId not provided'
         });
-        response
+        return response
           .status(400)
           .send({ error: 'affiliation status or roleId not provided' })
           .end();
-        return;
+
       }
 
-      const audit = auditor(statusToAction(request.body.status), request);
-
+      const audit = auditor(statusToAction(status), request);
       try{
+
         await updateAuthAffiliation_({
           stateId,
-          newRoleId: request.body.roleId,
-          newStatus: request.body.status,
+          newRoleId: roleId,
+          newStatus: status,
           changedBy: userId,
           affiliationId: id
         })
 
+      } catch(e) {
+          logger.error({ id: request.id, message: e });
+          return next(e);
+      }
 
-        audit.target({
-          userId: id,
-          stateId,
-          roleId,
-          status
-        })
-        audit.log()
-        response.status(200).end()
-      }
-      catch(e){
-        logger.error({ id: request.id, message: e });
-        next(e);
-      }
+      audit.target({
+        userId: id,
+        stateId,
+        roleId,
+        status
+      })
+      audit.log()
+      return response.status(200).end()
+
     }
   );
 
