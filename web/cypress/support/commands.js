@@ -123,3 +123,9 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
     return false;
   });
 });
+
+Cypress.Commands.add('goToActivityDashboard', () => {
+  for (let i = 0; i < 3; i += 1) {
+    cy.contains('Continue').click();
+  }
+});

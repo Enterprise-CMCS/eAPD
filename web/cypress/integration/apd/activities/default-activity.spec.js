@@ -23,10 +23,7 @@ describe('checking default values in Activities section', () => {
       years.push(list[index].value)
     );
 
-    // Gets to the activity page
-    for (let i = 0; i < 3; i += 1) {
-      cy.contains('Continue').click();
-    }
+    cy.goToActivityDashboard();
 
     cy.url().should('include', '/activities');
     cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
