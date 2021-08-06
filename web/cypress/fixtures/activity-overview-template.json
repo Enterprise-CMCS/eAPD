@@ -1,0 +1,23 @@
+{
+  "a1_short_overview": "Somebody once told me",
+  "a1_start_m": 7,
+  "a1_start_d": 14,
+  "a1_start_y": 2021,
+  "a1_end_m": 3,
+  "a1_end_d": 12,
+  "a1_end_y": 2024,
+  "a1_detailed": "The world was gonna roll me",
+  "a1_supporting_justifications": "I ain't the sharpest tool",
+  "a1_supports_medicaid": "in the shed",
+
+  "a2_short_overview": "She was looking kind of dumb",
+  "a2_start_m": 2,
+  "a2_start_d": 24,
+  "a2_start_y": 2032,
+  "a2_end_m": 8,
+  "a2_end_d": 28,
+  "a2_end_y": 2034,
+  "a2_detailed": "With her finger and her thumb",
+  "a2_supporting_justifications": "In the shape of an L",
+  "a2_does_not_support_medicaid": "On her forehead"
+}
