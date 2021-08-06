@@ -9,11 +9,8 @@ const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
-const deleteAPDByID = async (id, { APD = mongoose.model('APD') } = {}) => {
-  const apd = await APD.findById(id).exec();
-  apd.status = 'archived';
-  return apd.save();
-};
+const deleteAPDByID = async (id, { APD = mongoose.model('APD') } = {}) =>
+  APD.updateOne({ _id: id }, { status: 'archived' }).exec();
 
 const getAllAPDsByState = async (
   stateId,

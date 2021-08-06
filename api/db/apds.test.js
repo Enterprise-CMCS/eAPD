@@ -65,7 +65,8 @@ tap.test('database wrappers / apds', async apdsTests => {
 
   apdsTests.test('deleting an APD', async test => {
     const result = await deleteAPDByID(id, { APD });
-    test.equal(result.status, 'archived', 'APD was deleted');
+    test.equal(result.n, 1, 'one APD was found');
+    test.equal(result.nModified, 1, 'one APD was updated');
   });
 
   apdsTests.test('getting all APDs for a state', async test => {
