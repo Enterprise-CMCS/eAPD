@@ -21,11 +21,11 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
-export PREVIEW_MONGO_INITDB_ROOT_USERNAME=mongo_admin
-export PREVIEW_MONGO_INITDB_ROOT_PASSWORD=Preview_APD_Mongo_InitDB_Root_Password
-export PREVIEW_MONGO_INITDB_DATABASE=eapd_mongo
-export PREVIEW_MONGO_DATABASE_USERNAME=eapd_admin
-export PREVIEW_MONGO_DATABASE_PASSWORD=Preview_eAPD_Mongo_Password
+export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
+export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
+export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
+export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
+export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
@@ -112,11 +112,23 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 #Preparing Mongo DB Users
 cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '${__MONGO_INITDB_ROOT_USERNAME__}','pwd' : '${__MONGO_INITDB_ROOT_PASSWORD__}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo ${__MONGO_INITDB_DATABASE__} -u ${__MONGO_INITDB_ROOT_USERNAME__} -p ${__MONGO_INITDB_ROOT_PASSWORD__} --authenticationDatabase admin --eval "db.createUser({user: '${__MONGO_DATABASE_USERNAME__}', pwd: '${__MONGO_DATABASE_PASSWORD__}', roles:[{role:'readWrite', db: '${__MONGO_INITDB_DATABASE__}'}]});"
+mongo admin --eval "db.runCommand({'createUser' : '__MONGO_INITDB_ROOT_USERNAME__','pwd' : '__MONGO_INITDB_ROOT_PASSWORD__', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo __MONGO_INITDB_DATABASE__ -u __MONGO_INITDB_ROOT_USERNAME__ -p __MONGO_INITDB_ROOT_PASSWORD__ --authenticationDatabase admin --eval "db.createUser({user: '__MONGO_DATABASE_USERNAME__', pwd: '__MONGO_DATABASE_PASSWORD__', roles:[{role:'readWrite', db: '__MONGO_INITDB_DATABASE__'}]});"
 MONGOUSERSEED
-touch mongo-ran.txt
-echo "Mongo envs exported: Okta Domain $OKTA_DOMAIN, MongoDB $MONGO_DATABASE, and MongoUrl $MONGO_URL; $MONGO_INITDB_ROOT_USERNAME for $MONGO_INITDB_DATABASE and $MONGO_DATABASE_USERNAME for $MONGO_INITDB_DATABASE" > mongo-envs.txt
+cat <<MONGOTEST > mongo-test.txt
+Substitution
+MONGO_INITDB_ROOT_USERNAME=__MONGO_INITDB_ROOT_USERNAME__
+MONGO_INITDB_ROOT_PASSWORD=__MONGO_INITDB_ROOT_PASSWORD__
+MONGO_INITDB_DATABASE=__MONGO_INITDB_DATABASE__
+MONGO_DATABASE_USERNAME=__MONGO_DATABASE_USERNAME__
+MONGO_DATABASE_PASSWORD=__MONGO_DATABASE_PASSWORD__
+Env Var
+MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
+MONGO_INITDB_DATABASE=$MONGO_INITDB_DATABASE
+MONGO_DATABASE_USERNAME=$MONGO_DATABASE_USERNAME
+MONGO_DATABASE_PASSWORD=$MONGO_DATABASE_PASSWORD
+MONGOTEST
 E_USER
 
 sudo yum remove -y gcc-c++
