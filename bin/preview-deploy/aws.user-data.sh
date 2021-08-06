@@ -111,8 +111,11 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
 cd ~
+cat <<MONGOUSERSEED > mongo-init.sh
 mongo admin --eval "db.runCommand({'createUser' : '${__MONGO_INITDB_ROOT_USERNAME__}','pwd' : '${__MONGO_INITDB_ROOT_PASSWORD__}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
 mongo ${__MONGO_INITDB_DATABASE__} -u ${__MONGO_INITDB_ROOT_USERNAME__} -p ${__MONGO_INITDB_ROOT_PASSWORD__} --authenticationDatabase admin --eval "db.createUser({user: '${__MONGO_DATABASE_USERNAME__}', pwd: '${__MONGO_DATABASE_PASSWORD__}', roles:[{role:'readWrite', db: '${__MONGO_INITDB_DATABASE__}'}]});"
+MONGOUSERSEED
+sh mongo-init.sh
 touch mongo-ran.txt
 echo "Mango Ran: $MONGO_INITDB_ROOT_USERNAME or __MONGO_INITDB_ROOT_USERNAME__" > mongo-ran.txt
 E_USER
