@@ -1,12 +1,9 @@
-// eslint-disable-next-line import/prefer-default-export
 class ActivityPage {
-  // eslint-disable-next-line class-methods-use-this
-  checkTinyMCE(id, expectedValue) {
+  checkTinyMCE = (id, expectedValue) => {
     cy.get(`[id="${id}"]`).should('have.value', expectedValue);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkTextField(className, expectedValue, index) {
+  checkTextField = (className, expectedValue, index) => {
     if (Number.isInteger(index)) {
       cy.get(`[class="${className}"]`)
         .eq(index)
@@ -14,15 +11,13 @@ class ActivityPage {
     } else {
       cy.get(`[class="${className}"]`).should('have.value', expectedValue);
     }
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkInputField(name, expectedValue) {
+  checkInputField = (name, expectedValue) => {
     cy.findByLabelText(name).should('have.value', expectedValue);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkDate(string, month, day, year) {
+  checkDate = (string, month, day, year) => {
     cy.contains(string)
       .parent()
       .next('div')
@@ -31,10 +26,9 @@ class ActivityPage {
         cy.findByLabelText('Day').should('have.value', day || '');
         cy.findByLabelText('Year').should('have.value', year || '');
       });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkDeleteButton(alert, heading, check) {
+  checkDeleteButton = (alert, heading, check) => {
     cy.contains(alert).should('not.exist');
     cy.contains('Delete').click();
     cy.contains(heading).should('exist');
@@ -49,16 +43,14 @@ class ActivityPage {
     cy.contains(heading).should('not.exist');
     cy.contains(alert).should('exist');
     cy.contains(check).should('not.exist');
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkOutcomeOutput(outcome, metric) {
+  checkOutcomeOutput = (outcome, metric) => {
     cy.contains(outcome).should('exist');
     cy.contains(metric).should('exist');
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkMetricFunctionality() {
+  checkMetricFunctionality = () => {
     cy.findByRole('button', { name: /Add another metric/i }).click();
     for (let i = 0; i < 2; i += 1) {
       cy.get('[class="ds-c-review"]')
@@ -79,16 +71,14 @@ class ActivityPage {
     cy.get('[class="ds-u-margin-right--2"]').eq(2).should('not.exist');
     cy.contains('Delete').should('not.exist');
     cy.findByRole('button', { name: /Done/i }).click();
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkMilestoneOutput(name, dateRange) {
+  checkMilestoneOutput = (name, dateRange) => {
     cy.contains(name).should('exist');
     cy.contains(dateRange).should('exist');
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkStateStaffFFY(years, expectedValue) {
+  checkStateStaffFFY = (years, expectedValue) => {
     for (let i = 0; i < years.length; i += 1) {
       cy.contains(`FFY ${years[i]} Cost`)
         .next('div')
@@ -104,10 +94,9 @@ class ActivityPage {
           cy.contains('Total: $0').should('exist');
         });
     }
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkStateStaffOutput(name, years, cost, numFTEs) {
+  checkStateStaffOutput = (name, years, cost, numFTEs) => {
     cy.contains(name).should('exist');
 
     for (let i = 0; i < years.length; i += 1) {
@@ -119,58 +108,53 @@ class ActivityPage {
           cy.contains(`Total: $${cost * numFTEs}`);
         });
     }
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkFFYinputCostFields(years, expectedValue) {
+  checkFFYinputCostFields = (years, expectedValue) => {
     for (let i = 0; i < years.length; i += 1) {
       cy.findByLabelText(`FFY ${years[i]} Cost`).should(
         'have.value',
         expectedValue
       );
     }
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkFFYcosts(years, expectedValue) {
+  checkFFYcosts = (years, expectedValue) => {
     cy.then(() => {
       for (let i = 0; i < years.length; i += 1) {
         cy.contains(`FFY ${years[i]} Cost: $${expectedValue}`).should('exist');
       }
     });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkOtherStateExpensesOutput(category, years, expectedValue) {
+  checkOtherStateExpensesOutput = (category, years, expectedValue) => {
     cy.contains(category).should('exist');
     this.checkFFYcosts(years, expectedValue);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkPrivateContractorOutput(
+  checkPrivateContractorOutput = (
     name,
     description,
     dateRange,
     totalCost,
     years,
     expectedValue
-  ) {
+  ) => {
     cy.contains(name).should('exist');
     cy.contains(description).should('exist');
     cy.contains(dateRange).should('exist');
     cy.contains(totalCost).should('exist');
     this.checkFFYcosts(years, expectedValue);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkAddActivityButton() {
+  checkAddActivityButton = () => {
     cy.contains('Add another activity').click();
     cy.url().should('include', '/activities');
     cy.contains('Activity 2').should('exist');
     cy.contains('Delete').click();
     cy.findByRole('button', { name: /Delete Activity/i }).click();
     cy.contains('Activity 2').should('not.exist');
-  }
+  };
 }
 
 export default ActivityPage;

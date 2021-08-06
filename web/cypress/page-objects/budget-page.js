@@ -1,18 +1,16 @@
 class BudgetPage {
-  // eslint-disable-next-line class-methods-use-this
-  checkTotalComputableMedicaidCost(expectedValue) {
+  checkTotalComputableMedicaidCost = expectedValue => {
     cy.contains('Total Computable Medicaid Cost')
       .parent()
       .should('contain', `$${expectedValue}`);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkActivityTotalCostTable(
+  checkActivityTotalCostTable = (
     activityValue,
     otherFundingValue,
     medicaidValue,
     index
-  ) {
+  ) => {
     cy.get('[class="budget-table activity-budget-table"]')
       .eq(index)
       .within(() => {
@@ -24,10 +22,9 @@ class BudgetPage {
           .should('contain', `$${otherFundingValue}`);
         this.checkTotalComputableMedicaidCost(medicaidValue);
       });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkSubtotalTable(title, otherFundingAmount, keyPersonnelAmount) {
+  checkSubtotalTable = (title, otherFundingAmount, keyPersonnelAmount) => {
     let subtotal = 0;
     if (title === 'State Staff') {
       cy.contains(title)
@@ -47,10 +44,9 @@ class BudgetPage {
     }
 
     cy.contains(`${title} Subtotal`).parent().should('contain', `$${subtotal}`);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkSplitFunctionality() {
+  checkSplitFunctionality = () => {
     cy.get('[class="ds-c-field"]').parent().click();
     cy.contains('90-10').should('exist');
     cy.contains('75-25').should('exist');
@@ -59,10 +55,9 @@ class BudgetPage {
     cy.get('[class="ds-c-field"]')
       .find(':selected')
       .should('have.value', '90-10');
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  costSplitTableRow(fedOrState, split, value, total) {
+  costSplitTableRow = (fedOrState, split, value, total) => {
     cy.contains(fedOrState)
       .parent()
       .within(() => {
@@ -82,10 +77,15 @@ class BudgetPage {
           .eq(2)
           .should('contain', `$${total}`);
       });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkCostSplitTable(federal, state, federalVal, stateVal, expectedMedicaid) {
+  checkCostSplitTable = (
+    federal,
+    state,
+    federalVal,
+    stateVal,
+    expectedMedicaid
+  ) => {
     let fedTotal = 0;
     let stateTotal = 0;
 
@@ -95,10 +95,9 @@ class BudgetPage {
     this.checkTotalComputableMedicaidCost(expectedMedicaid);
     this.costSplitTableRow('Federal Share', federal, federalVal, fedTotal);
     this.costSplitTableRow('State Share', state, stateVal, stateTotal);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkFFYtotals(
+  checkFFYtotals = (
     years,
     activityName,
     totalCost,
@@ -108,7 +107,7 @@ class BudgetPage {
     federalShare,
     state,
     stateShare
-  ) {
+  ) => {
     cy.contains(`FFY ${years[0]}-${years[years.length - 1]} Totals`)
       .next()
       .within(() => {
@@ -125,18 +124,21 @@ class BudgetPage {
           cy.contains(years[i]).should('exist');
         }
       });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkSubtotal(expectedValue) {
+  checkSubtotal = expectedValue => {
     cy.get('[class="budget-table--number budget-table--subtotal"]').should(
       'contain',
       expectedValue
     );
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  quarterTableInputRow(row, defaultOrExport, expectedValue, expectedSubtotal) {
+  quarterTableInputRow = (
+    row,
+    defaultOrExport,
+    expectedValue,
+    expectedSubtotal
+  ) => {
     cy.contains(row)
       .parent()
       .within(() => {
@@ -155,10 +157,9 @@ class BudgetPage {
         }
         this.checkSubtotal(`+${expectedSubtotal}%`);
       });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  quarterTableSubtotalRow(row, expectedValue, expectedSubtotal) {
+  quarterTableSubtotalRow = (row, expectedValue, expectedSubtotal) => {
     cy.contains(row)
       .parent()
       .next()
@@ -170,10 +171,9 @@ class BudgetPage {
         }
         this.checkSubtotal(`$${expectedSubtotal}`);
       });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  quarterTableBottomRow(expectedValue, expectedSubtotal) {
+  quarterTableBottomRow = (expectedValue, expectedSubtotal) => {
     cy.contains('Total Enhanced FFP')
       .parent()
       .within(() => {
@@ -184,10 +184,9 @@ class BudgetPage {
         }
         this.checkSubtotal(`$${expectedSubtotal}`);
       });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkQuarterTable(defaultOrExport, expectedValue, expectedSubtotal) {
+  checkQuarterTable = (defaultOrExport, expectedValue, expectedSubtotal) => {
     this.quarterTableInputRow(
       'State Staff and Expenses (In-House Costs)',
       defaultOrExport,
@@ -213,7 +212,7 @@ class BudgetPage {
     );
 
     this.quarterTableBottomRow(expectedValue, expectedSubtotal);
-  }
+  };
 }
 
 export default BudgetPage;

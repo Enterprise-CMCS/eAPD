@@ -1,19 +1,21 @@
 class ExportPage {
-  // eslint-disable-next-line class-methods-use-this
-  goToExportView() {
+  goToExportView = () => {
     cy.contains('Export and Submit').click();
     cy.contains('Continue to Review').click();
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkExecutiveSummary(
+  checkActivityHeader = (name, num) => {
+    cy.contains(`Activity ${num}: ${name}`).should('exist');
+  };
+
+  checkExecutiveSummary = (
     activities,
     years,
     dateRange,
     totalCost,
     medicaidCost,
     federalShare
-  ) {
+  ) => {
     for (let i = 0; i < activities.length; i += 1) {
       cy.contains(`Activity ${i + 1}: ${activities[i][0]}`)
         .parent()
@@ -32,10 +34,9 @@ class ExportPage {
           }
         });
     }
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkActivityList(activities) {
+  checkActivityList = activities => {
     cy.findAllByText('Activities')
       .next()
       .within(() => {
@@ -45,10 +46,9 @@ class ExportPage {
           ).should('exist');
         }
       });
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkActivityOverview(
+  checkActivityOverview = (
     desc,
     start,
     end,
@@ -56,7 +56,7 @@ class ExportPage {
     supportingJustifications,
     supports,
     doesNotSupport
-  ) {
+  ) => {
     cy.contains('Provide a short overview of the activity:')
       .next()
       .should('have.text', desc);
@@ -76,16 +76,15 @@ class ExportPage {
       .parent()
       .next()
       .should('contain', doesNotSupport);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkOutcomesAndMilestones(
+  checkOutcomesAndMilestones = (
     emptyOrFilled,
     outcomeName,
     metricName,
     milestoneName,
     dateRange
-  ) {
+  ) => {
     if (emptyOrFilled === 'empty') {
       cy.contains('Outcomes and Metrics')
         .next()
@@ -105,10 +104,9 @@ class ExportPage {
         .next()
         .should(dateRange);
     }
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkStateExpenses(emptyOrFilled) {
+  checkStateExpenses = emptyOrFilled => {
     if (emptyOrFilled === 'empty') {
       cy.contains('State staff')
         .next()
@@ -117,10 +115,15 @@ class ExportPage {
         .next()
         .should('contain', 'Private Contractor Costs');
     }
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkPrivateContractorCosts(emptyOrFilled, name, desc, dateRange, totalCost) {
+  checkPrivateContractorCosts = (
+    emptyOrFilled,
+    name,
+    desc,
+    dateRange,
+    totalCost
+  ) => {
     if (emptyOrFilled === 'empty') {
       cy.contains('Private Contractor Costs')
         .next()
@@ -139,17 +142,15 @@ class ExportPage {
           // still need to get individual year costs
         });
     }
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkCostAllocation(desc) {
+  checkCostAllocation = desc => {
     cy.contains('Description of Cost Allocation Methodology')
       .next()
       .should('have.text', desc);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkOtherFunding(year, expectedText, expectedValue) {
+  checkOtherFunding = (year, expectedText, expectedValue) => {
     cy.contains(`FFY ${year}`)
       .next()
       .should('contain', 'Other Funding Description')
@@ -161,10 +162,9 @@ class ExportPage {
       .next()
       .next()
       .should('contain', `$${expectedValue}`);
-  }
+  };
 
-  // eslint-disable-next-line class-methods-use-this
-  checkRowTotals(otherFundingValue, medicaidValue) {
+  checkRowTotals = (otherFundingValue, medicaidValue) => {
     cy.findAllByText('Other Funding')
       .parent()
       .should('contain', `$${otherFundingValue}`);
@@ -172,7 +172,7 @@ class ExportPage {
     cy.findAllByText('Total Computable Medicaid Cost')
       .parent()
       .should('contain', `$${medicaidValue}`);
-  }
+  };
 }
 
 export default ExportPage;
