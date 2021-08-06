@@ -129,3 +129,8 @@ Cypress.Commands.add('goToActivityDashboard', () => {
     cy.contains('Continue').click();
   }
 });
+
+Cypress.Commands.add('goToExportView', () => {
+  cy.contains('Export and Submit').click();
+  cy.contains('Continue to Review').click();
+});

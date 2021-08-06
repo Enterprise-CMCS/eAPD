@@ -263,7 +263,7 @@ describe('checking default values in Activities section', () => {
   });
 
   it('checks default activity export view', () => {
-    exportPage.goToExportView();
+    cy.goToExportView();
 
     exportPage.checkExecutiveSummary(
       activities,

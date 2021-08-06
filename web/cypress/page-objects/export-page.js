@@ -1,9 +1,4 @@
 class ExportPage {
-  goToExportView = () => {
-    cy.contains('Export and Submit').click();
-    cy.contains('Continue to Review').click();
-  };
-
   checkActivityHeader = (name, num) => {
     cy.contains(`Activity ${num} (${name})`).should('exist');
   };
