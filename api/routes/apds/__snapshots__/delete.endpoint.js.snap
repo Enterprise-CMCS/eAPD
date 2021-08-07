@@ -6,8 +6,4 @@ exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authen
 
 exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with an APD in a state other than the user's state 1`] = `""`;
 
-exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with an APD that is not in draft 1`] = `
-Object {
-  "error": "apd-not-editable",
-}
-`;
+exports[`APD endpoint Delete/archive APD endpoint | DELETE /apds/:id when authenticated as a user with an APD that is not in draft 1`] = `""`;

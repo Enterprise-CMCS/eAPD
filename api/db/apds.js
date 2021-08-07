@@ -9,14 +9,8 @@ const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
-const deleteAPD = async (id, { APD = mongoose.model('APD') } = {}) => {
-  const result = await APD.deleteOne({ _id: id });
-  return result;
-};
-
-const deleteAPDByID = async (id, { db = knex } = {}) => {
-  await db('apds').where('id', id).update({ status: 'archived' });
-};
+const deleteAPDByID = async (id, { APD = mongoose.model('APD') } = {}) =>
+  APD.updateOne({ _id: id }, { status: 'archived' }).exec();
 
 const getAllAPDsByState = async (
   stateId,
@@ -60,7 +54,6 @@ const updateAPDDocument = async (
 
 module.exports = {
   createAPD,
-  deleteAPD,
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,

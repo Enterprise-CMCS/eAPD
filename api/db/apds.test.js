@@ -1,5 +1,6 @@
 const sinon = require('sinon');
 const tap = require('tap');
+const mongoose = require('mongoose');
 
 const dbMock = require('./dbMock.test');
 const mongo = require('./mongodb');
@@ -7,7 +8,6 @@ const { apd } = require('../seeds/development/apds');
 
 const {
   createAPD,
-  deleteAPD, // temporary delete
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,
@@ -21,6 +21,8 @@ let clock;
 let clockStub;
 let id;
 
+let APD;
+
 tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.before(async () => {
     id = null;
@@ -29,50 +31,63 @@ tap.test('database wrappers / apds', async apdsTests => {
     clockStub = sinon.stub(Date, 'now').returns(nowDate);
     db = dbMock('apds');
     await mongo.setup();
+    APD = mongoose.model('APD');
   });
+  const deleteAPD = async apdId => APD.deleteOne({ _id: apdId });
 
   apdsTests.beforeEach(async () => {
     dbMock.reset();
     if (id) {
       await deleteAPD(id);
     }
-    id = await createAPD({
-      stateId: 'co',
-      status: 'draft',
-      ...apd
-    });
+    id = await createAPD(
+      {
+        stateId: 'co',
+        status: 'draft',
+        ...apd
+      },
+      { APD }
+    );
   });
 
   apdsTests.test('creating an APD', async test => {
-    const newId = await createAPD({
-      stateId: 'md',
-      status: 'draft',
-      ...apd
-    });
+    const newId = await createAPD(
+      {
+        stateId: 'md',
+        status: 'draft',
+        ...apd
+      },
+      { APD }
+    );
     test.ok(newId, 'APD was created');
     await deleteAPD(newId);
   });
 
   apdsTests.test('deleting an APD', async test => {
-    db.where.withArgs('id', 'apd id').returnsThis();
-    db.update.withArgs({ status: 'archived' }).resolves();
-
-    test.resolves(deleteAPDByID('apd id', { db }));
+    const result = await deleteAPDByID(id, { APD });
+    test.equal(result.n, 1, 'one APD was found');
+    test.equal(result.nModified, 1, 'one APD was updated');
   });
 
   apdsTests.test('getting all APDs for a state', async test => {
-    const approvedId = await createAPD({
-      stateId: 'co',
-      status: 'approved',
-      ...apd
-    });
-    const mnId = await createAPD({
-      stateId: 'mn',
-      status: 'approved',
-      ...apd
-    });
+    const approvedId = await createAPD(
+      {
+        stateId: 'co',
+        status: 'approved',
+        ...apd
+      },
+      { APD }
+    );
+    const mnId = await createAPD(
+      {
+        stateId: 'mn',
+        status: 'approved',
+        ...apd
+      },
+      { APD }
+    );
 
-    const apds = await getAllAPDsByState('co');
+    const apds = await getAllAPDsByState('co', { APD });
 
     test.ok(apds.length === 1, '1 APD was found');
     test.equal(apds[0]._id.toString(), id, 'the APD was found'); // eslint-disable-line no-underscore-dangle
@@ -81,13 +96,13 @@ tap.test('database wrappers / apds', async apdsTests => {
   });
 
   apdsTests.test('getting a single APD by ID', async test => {
-    const found = await getAPDByID(id);
+    const found = await getAPDByID(id, { APD });
 
     test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
   });
 
   apdsTests.test('getting a single APD by ID for a state', async test => {
-    const found = await getAPDByIDAndState(id, 'co');
+    const found = await getAPDByIDAndState(id, 'co', { APD });
 
     test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
   });
