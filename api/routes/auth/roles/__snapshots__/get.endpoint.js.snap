@@ -57,5 +57,29 @@ Array [
     "isActive": true,
     "name": "eAPD State Contractor",
   },
+  Object {
+    "activities": Array [],
+    "id": 1110,
+    "isActive": true,
+    "name": "eAPD System Admin",
+  },
 ]
+`;
+
+exports[`state switch endpoint | GET /auth/state/:stateId when authenticated 1`] = `
+Object {
+  "id": "mn",
+  "medicaid_office": Object {
+    "address1": "100 Round Sq",
+    "city": "Cityville",
+    "director": Object {
+      "email": "c.fudge@ministry.magic",
+      "name": "Cornelius Fudge",
+      "phone": "5551234567",
+    },
+    "state": "Minnesota",
+    "zip": "12345",
+  },
+  "name": "Minnesota",
+}
 `;

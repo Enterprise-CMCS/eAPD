@@ -33,12 +33,17 @@ const logger = winston.createLogger({
 // ingest morgan http request data as json, write data to winston logs
 logger.stream = {
   write: json => {
-    const request = JSON.parse(json);
-    const result = {
-      message: `${request.method} ${request.url} ${request.status}`,
-      ...request
-    };
-    logger.log('info', result);
+    try {
+      const request = JSON.parse(json);
+      const result = {
+        message: `${request.method} ${request.url} ${request.status}`,
+        ...request
+      };
+      logger.log('info', result);
+    } catch(e){
+      logger.log('info', `unable to parse JSON string: ${json}`)
+    }
+
   }
 };
 

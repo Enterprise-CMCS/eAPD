@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { ChoiceList } from '@cmsgov/design-system';
+import React, { useState } from 'react';
+import { Alert, ChoiceList } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
+import DeleteModal from '../components/DeleteModal';
 
 import {
   addYear,
@@ -31,19 +32,24 @@ const ApdSummary = ({
   years,
   yearOptions
 }) => {
+
+  const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
+
+  const onRemove = () => {
+    removeApdYear(elementDeleteFFY.value);
+    setElementDeleteFFY(null);
+  };
+
+  const onCancel = () => {
+    setElementDeleteFFY(null);
+    elementDeleteFFY.checked = true;
+  }
+
   const handleYears = e => {
     const year = e.target.value;
 
     if (e.target.checked === false) {
-      // eslint-disable-next-line no-alert
-      const confirmation = window.confirm(
-        `Unchecking Federal Fiscal Year ${year} will permanently delete any FFY ${year} specific data in the current APD.`
-      );
-      if (confirmation === true) {
-        removeApdYear(year);
-      } else {
-        e.target.checked = true;
-      }
+      setElementDeleteFFY(e.target);
     } else {
       addApdYear(year);
       e.target.checked = true;
@@ -60,12 +66,30 @@ const ApdSummary = ({
     value: year
   }));
 
+  const getLabelElement = () => {
+    if (years.length > 0) {
+      return t('apd.overview.instruction.short')
+    }
+    return (
+      <React.Fragment>
+        {t('apd.overview.instruction.short')}
+        <Alert variation='error' >
+          <div style={{fontWeight: 400}}>
+            At least one FFY must be selected to continue with your APD. Select your FFY(s).
+          </div>
+        </Alert>
+
+
+      </React.Fragment>
+    )
+  }
+
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
       <ChoiceList
         choices={yearChoices}
-        label={t('apd.overview.instruction.short')}
+        label={getLabelElement()}
         labelClassName="ds-u-margin-bottom--1"
         name="apd-years"
         onChange={handleYears}
@@ -119,6 +143,13 @@ const ApdSummary = ({
           editorClassName="rte-textarea-l"
         />
       </div>
+      {elementDeleteFFY && (
+        <DeleteModal
+          objType="FFY"
+          onCancel={onCancel}
+          onDelete={onRemove}
+        />
+      )}
     </Section>
   );
 };
@@ -146,7 +177,8 @@ const mapDispatchToProps = {
   setHIE: setNarrativeForHIE,
   setHIT: setNarrativeForHIT,
   setMMIS: setNarrativeForMMIS,
-  setOverview: setProgramOverview
+  setOverview: setProgramOverview,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdSummary);

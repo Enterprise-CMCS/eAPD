@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
-
+const { getStateById } = require('../db/states.js');
+const { getUserPermissionsForStates: actualGetUserPermissionsForStates } = require('../db/auth');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -42,7 +43,7 @@ const jwtExtractor = req => {
   }
 
   const { url } = req;
-  const cookieStr = req.get('Cookie');
+  const cookieStr = req.headers.cookie || req.get('Cookie');
   const regex = new RegExp(
     /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)/i
   );
@@ -69,8 +70,8 @@ const jwtExtractor = req => {
 
 // ****** Local JWT implementation below this line
 const getSecret = () => {
-  return process.env.JWT_SECRET
-}
+  return process.env.JWT_SECRET;
+};
 
 /*
     algorithm (default: HS256)
@@ -84,49 +85,63 @@ const defaultOptions = {
   expiresIn: '12h',
   notBefore: '0',
   audience: 'eAPD',
-  issuer: 'eAPD',
-}
+  issuer: 'eAPD'
+};
 
-const getDefaultOptions = () =>{
-  return {...defaultOptions}
-}
+const getDefaultOptions = () => {
+  return { ...defaultOptions };
+};
 
-const sign = (payload, options=defaultOptions) => {
-
+const sign = (payload, options = defaultOptions) => {
   return jwt.sign(payload, getSecret(), options);
-}
+};
 
 const verifyEAPDToken = token => {
   try {
     const payload = jwt.verify(token, getSecret());
-    return Promise.resolve(payload)
+    return Promise.resolve(payload);
   } catch (err) {
-    throw new Error('invalid Token')
+    throw new Error('invalid Token');
   }
-}
+};
 
 const exchangeToken = async (
   req,
-  {
-    extractor = jwtExtractor,
-    verifier = verifyJWT,
-    getUser=getUserByID,
-  } = {}
+  { extractor = jwtExtractor, verifier = verifyJWT, getUser = getUserByID } = {}
 ) => {
-  const oktaJWT = extractor(req)
+  const oktaJWT = extractor(req);
   // verify the token using the okta verifier.
-  const claims = oktaJWT ? await verifyWebToken(oktaJWT, {verifier}) : false;
+  const claims = oktaJWT ? await verifyWebToken(oktaJWT, { verifier }) : false;
   if (!claims) return null;
 
   const { uid, ...additionalValues } = claims;
   const user = await getUser(uid, true, { additionalValues });
-  user.jwt = sign(user)
-  return user
-}
+  user.jwt = sign(user);
+  return user;
+};
+
+const changeState = async (
+  user,
+  stateId,
+  {
+    getStateById_ = getStateById,
+    getUserPermissionsForStates_ = actualGetUserPermissionsForStates,
+  } = {}
+) => {
+  // copy the user to prevent altering it
+  const newUser = JSON.parse(JSON.stringify(user));
+  newUser.state = await getStateById_(stateId);
+  newUser.state.id = stateId;
+  const permissions = await getUserPermissionsForStates_(user.id);
+  newUser.activities = permissions[stateId];
+  newUser.permissions = [{[stateId]: permissions[stateId]},]
+
+  return sign(newUser, {});
+};
 
 const mockVerifyEAPDJWT = token => {
-  return getUserByID(token, false)
-}
+  return getUserByID(token, false);
+};
 
 if (process.env.NODE_ENV === 'test') {
   module.exports = {
@@ -136,16 +151,17 @@ if (process.env.NODE_ENV === 'test') {
     sign,
     verifyEAPDToken: mockVerifyEAPDJWT,
     exchangeToken,
-    actualVerifyEAPDToken: verifyEAPDToken
+    actualVerifyEAPDToken: verifyEAPDToken,
+    changeState
   };
 } else {
-
   module.exports = {
     verifyWebToken,
     jwtExtractor,
     getDefaultOptions,
     sign,
     verifyEAPDToken,
-    exchangeToken
+    exchangeToken,
+    changeState
   };
 }

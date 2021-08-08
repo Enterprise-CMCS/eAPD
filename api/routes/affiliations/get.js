@@ -3,8 +3,9 @@ const {
   getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
   getPopulatedAffiliationById: _getPopulatedAffiliationsById,
   getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
+  getAffiliationsByUserId: _getAffiliationsByUserId,
 } = require('../../db');
-const { can, validForState } = require('../../middleware');
+const { loggedIn, can, validForState } = require('../../middleware');
 
 module.exports = (
   app,
@@ -12,6 +13,7 @@ module.exports = (
     getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,
     getPopulatedAffiliationById = _getPopulatedAffiliationsById,
     getAllPopulatedAffiliations = _getAllPopulatedAffiliations,
+    getAffiliationsByUserId = _getAffiliationsByUserId,
   } = {}
 ) => {
   app.get(
@@ -27,20 +29,19 @@ module.exports = (
       const { status = null } = request.query;
 
       try {
-        if (stateId === 'fd'){
+        if (stateId === 'fd') {
           const affiliations = await getAllPopulatedAffiliations({
             status
           });
           return response.send(affiliations);
-
         }
         const affiliations = await getPopulatedAffiliationsByStateId({
           stateId,
-          status
+          status,
+          isFedAdmin: request.user.role === 'eAPD Federal Admin'
         });
 
         return response.send(affiliations);
-
       } catch (e) {
         return next(e);
       }
@@ -58,7 +59,6 @@ module.exports = (
       });
       const { stateId, id } = request.params;
       try {
-
         const affiliation = await getPopulatedAffiliationById({
           stateId,
           affiliationId: id
@@ -78,5 +78,22 @@ module.exports = (
       }
     }
   );
+
+  app.get(
+    '/affiliations/me',
+    loggedIn,
+    async (request, response, next) => {
+      logger.info({
+        id: request.id,
+        message: `handling GET /me endpoint}`
+      });
+      try {
+        const resp = await getAffiliationsByUserId(request.user.id)
+        return response.send(resp)
+      }
+      catch(e){
+        return next(e)
+      }
+    })
 
 };

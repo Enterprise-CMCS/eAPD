@@ -7,11 +7,10 @@ const initialProps = {
   ariaExpanded: false,
   authenticated: true,
   currentUser: {
-    role: 'admin',
+    role: 'eAPD System Admin',
     state: { id: 'wa', name: 'Washington' },
     username: 'frasiercrane@kacl.com'
   },
-  isAdmin: true,
   showSiteTitle: true
 };
 
@@ -112,7 +111,7 @@ describe('Header component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('maps state to props', () => {
+  it('maps state to props for an admin', () => {
     const state = {
       auth: {
         authenticated: 'some value',
@@ -135,8 +134,45 @@ describe('Header component', () => {
 
     expect(mapStateToProps(state)).toEqual({
       authenticated: 'some value',
-      currentUser: { role: 'admin' },
-      isAdmin: true,
+      currentUser: {
+        role: 'admin',
+        state: { id: 'md', name: 'Maryland' }
+      },
+      isFedAdmin: false,
+      currentState: { id: 'md', name: 'Maryland' },
+      canViewStateAdmin: null,
+      pathname: 'pathname'
+    });
+  });
+
+  it('maps state to props for a federal admin', () => {
+    const state = {
+      auth: {
+        authenticated: 'some value',
+        user: {
+          role: 'eAPD Federal Admin'
+        }
+      },
+      user: {
+        data: {
+          role: 'eAPD Federal Admin',
+          state: { id: 'md', name: 'Maryland' }
+        }
+      },
+      router: {
+        location: {
+          pathname: 'pathname'
+        }
+      }
+    };
+
+    expect(mapStateToProps(state)).toEqual({
+      authenticated: 'some value',
+      currentUser: {
+        role: 'eAPD Federal Admin',
+        state: { id: 'md', name: 'Maryland' }
+      },
+      isFedAdmin: true,
       currentState: { id: 'md', name: 'Maryland' },
       canViewStateAdmin: null,
       pathname: 'pathname'

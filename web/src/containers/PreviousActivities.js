@@ -11,13 +11,17 @@ import RichText from '../components/RichText';
 import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
 import { selectPreviousActivitySummary } from '../reducers/apd.selectors';
+import AlertMissingFFY from '../components/AlertMissingFFY'
+
 
 const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
   const onChange = value => setSummary(value);
 
+
   return (
     <React.Fragment>
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
+      <AlertMissingFFY/>
       <Section resource="previousActivities">
         <Waypoint id="prev-activities-outline" />
         <Subsection
@@ -53,7 +57,7 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
 
 PreviousActivities.propTypes = {
   previousActivitySummary: PropTypes.string.isRequired,
-  setSummary: PropTypes.func.isRequired
+  setSummary: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

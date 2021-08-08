@@ -8,19 +8,25 @@ import EntryDetails from './EntryDetails';
 import { addActivity as actualAddActivity } from '../../actions/editActivity';
 import { Section } from '../../components/Section';
 import { selectAllActivities } from '../../reducers/activities.selectors';
+import Waypoint from '../ConnectedWaypoint';
+import AlertMissingFFY from '../../components/AlertMissingFFY';
 
 const All = ({ addActivity, activities }) => {
   const apdId = +useParams().apdId;
   return (
+    <React.Fragment>
+      <Waypoint /> {/* Waypoint w/o id indicates top of page */}
+      <AlertMissingFFY/>
     <Section id="activities" resource="activities">
       <hr className="custom-hr" />
       {activities.map((activity, index) => (
         <EntryDetails apdId={apdId} activityIndex={index} key={activity.key} />
       ))}
       <Button className="ds-u-margin-top--4" onClick={addActivity}>
-        Add another activity
+        Add Activity
       </Button>
     </Section>
+    </React.Fragment>
   );
 };
 

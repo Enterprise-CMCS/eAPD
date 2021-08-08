@@ -213,6 +213,7 @@ const StateAdmin = ({
       {manageModalDisplay && (
         <ManageRoleDialog
           roleTypes={roleTypes}
+          roleDescription="eAPD State Staff is a state employee. eAPD State Contractor is someone who works for a vendor on behalf of the state."
           hideManageModal={hideManageModal}
           showManageModal={showManageModal}
           handleAffiliationUpdate={handleAffiliationUpdate}
@@ -247,7 +248,7 @@ const mapStateToProps = state => ({
   roleTypes: state.admin.roleTypes,
   currentState: getUserStateOrTerritory(state),
   currentAffiliations: state.admin.affiliations,
-  currentUser: state.auth.user
+  currentUser: state.user.data
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StateAdmin);

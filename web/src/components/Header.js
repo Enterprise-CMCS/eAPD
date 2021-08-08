@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {
-  getIsAdmin,
+  getIsFedAdmin,
   getUserStateOrTerritory,
   getCanUserViewStateAdmin
 } from '../reducers/user.selector';
@@ -17,6 +17,7 @@ import Icon, {
   faChevronDown,
   faChevronLeft,
   faSignOutAlt,
+  faPeopleArrows,
   faEdit,
   faUserShield
 } from './Icons';
@@ -56,7 +57,7 @@ class Header extends Component {
     const {
       authenticated,
       currentUser,
-      isAdmin,
+      isFedAdmin,
       currentState,
       canViewStateAdmin,
       pathname,
@@ -79,7 +80,7 @@ class Header extends Component {
       return (
         <DashboardButton>
           <Icon icon={faChevronLeft} size="sm" />
-          {isAdmin
+          {isFedAdmin
             ? 'Admin Dashboard'
             : `${
                 currentUser.state && currentUser.state.id
@@ -120,7 +121,7 @@ class Header extends Component {
                         <Icon icon={faChevronDown} style={{ width: '8px' }} />
                       </button>
                       <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
-                        {canViewStateAdmin && (
+                        {canViewStateAdmin && !isFedAdmin && (
                           <li>
                             <Link
                               to="/state-admin"
@@ -137,19 +138,36 @@ class Header extends Component {
                             </Link>
                           </li>
                         )}
-                        <li>
-                          <Link
-                            to="/manage-account"
-                            onClick={this.toggleDropdown}
-                            className="nav--dropdown__action"
-                            >
-                              <Icon
-                                icon={faEdit}
-                                style={{ width: '14px' }}
-                              />
-                              Manage Account
+                        {!isFedAdmin && (
+                          <Fragment>
+                            <li>
+                              <Link
+                                to="/manage-account"
+                                onClick={this.toggleDropdown}
+                                className="nav--dropdown__action"
+                                >
+                                  <Icon
+                                    icon={faEdit}
+                                    style={{ width: '14px' }}
+                                    />
+                                  Manage Account
+                              </Link>
+                            </li>                        
+                          <li>
+                            <Link
+                              to="/select-affiliation"
+                              onClick={this.toggleDropdown}
+                              className="nav--dropdown__action"
+                              >
+                                <Icon
+                                  icon={faPeopleArrows}
+                                  style={{ width: '14px' }}
+                                />
+                                Switch State Affiliation
                             </Link>
-                        </li>
+                          </li>
+                        </Fragment>
+                        )}
                         <li>
                           <Link
                             to="/logout"
@@ -181,7 +199,7 @@ Header.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
   currentState: PropTypes.object,
-  isAdmin: PropTypes.bool.isRequired,
+  isFedAdmin: PropTypes.bool.isRequired,
   canViewStateAdmin: PropTypes.bool,
   showSiteTitle: PropTypes.bool.isRequired,
   pathname: PropTypes.string
@@ -197,8 +215,8 @@ Header.defaultProps = {
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
-  currentUser: state.auth.user,
-  isAdmin: getIsAdmin(state),
+  currentUser: state.user.data,
+  isFedAdmin: getIsFedAdmin(state),
   currentState: getUserStateOrTerritory(state),
   canViewStateAdmin: getCanUserViewStateAdmin(state),
   pathname: state.router.location.pathname

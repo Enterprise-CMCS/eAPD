@@ -52,10 +52,29 @@ tap.test('GET /roles', async endpointTest => {
     });
 
     handlerTest.test(
-      'sends active roles for a Federal Admin',
+      'sends all roles for a System Admin',
+      async validTest => {
+        const roles = activeRoles;
+        getAllActiveRoles.resolves(roles);
+
+        await handler(
+          { user: { activities: ['view-roles'], role: 'eAPD System Admin' } },
+          res,
+          next
+        );
+
+        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
+        validTest.ok(res.send.calledWith(roles), 'Roles info sent back');
+      }
+    );
+
+    handlerTest.test(
+      'sends active and available roles for a Federal Admin',
       async validTest => {
         const roles = activeRoles.filter(
-          role => role.name !== 'eAPD Federal Admin'
+          role =>
+            role.name === 'eAPD State Admin' &&
+            role.name === 'eAPD Federal Admin'
         );
         getAllActiveRoles.resolves(roles);
 
@@ -71,12 +90,12 @@ tap.test('GET /roles', async endpointTest => {
     );
 
     handlerTest.test(
-      'sends active roles for a State Admin',
+      'sends active and available roles for a State Admin',
       async validTest => {
         const roles = activeRoles.filter(
           role =>
-            role.name !== 'eAPD State Admin' &&
-            role.name !== 'eAPD Federal Admin'
+            role.name !== 'eAPD State Staff' &&
+            role.name !== 'eAPD State Contractor'
         );
         getAllActiveRoles.resolves(roles);
 

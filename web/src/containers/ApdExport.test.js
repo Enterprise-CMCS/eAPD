@@ -10,14 +10,14 @@ const useParams = jest.fn().mockReturnValue({ apdId: 123 });
 describe('apd export component', () => {
   test('renders correctly', () => {
     expect(
-      shallow(<ExportAndSubmit push={() => {}} useParams={useParams} />)
+      shallow(<ExportAndSubmit push={() => {}} useParams={useParams} years={['2021', '2022']} />)
     ).toMatchSnapshot();
   });
 
   test('routes to print preview', () => {
     const fakePush = sinon.spy();
     const component = shallow(
-      <ExportAndSubmit push={fakePush} useParams={useParams} />
+      <ExportAndSubmit push={fakePush} useParams={useParams} years={['2021', '2022']} />
     );
     component.find('Button').simulate('click');
 

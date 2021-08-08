@@ -1,12 +1,16 @@
+// eslint-disable-next-line camelcase
+import jwtDecode from "jwt-decode";
+
 import axios from '../util/api';
 
 import { fetchAllApds } from './app';
-import { getRoles, getUsers } from './admin';
 import {
   authenticateUser,
   retrieveExistingTransaction,
   verifyMFA,
   setTokens,
+  getCookie,
+  setCookie,
   getAvailableFactors,
   getFactor,
   setTokenListeners,
@@ -14,8 +18,9 @@ import {
   logoutAndClearTokens,
   isUserActive
 } from '../util/auth';
-import { MFA_FACTOR_TYPES } from '../constants';
+import { MFA_FACTOR_TYPES, API_COOKIE_NAME } from '../constants';
 
+export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_OTP_STAGE = 'LOGIN_OTP_STAGE';
 export const LOGIN_MFA_REQUEST = 'LOGIN_MFA_REQUEST';
@@ -29,6 +34,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
+export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
 
 
 export const LATEST_ACTIVITY = 'LATEST_ACTIVITY';
@@ -37,6 +43,7 @@ export const REQUEST_SESSION_RENEWAL = 'REQUEST_SESSION_RENEWAL';
 export const SESSION_RENEWED = 'SESSION_RENEWED';
 export const UPDATE_EXPIRATION = 'UPDATE_EXPIRATION';
 
+export const authCheckRequest = () => ({ type: AUTH_CHECK_REQUEST });
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeFirstStage = () => ({ type: LOGIN_OTP_STAGE });
 export const mfaEnrollStart = (factors, phoneNumber) => ({
@@ -52,12 +59,12 @@ export const mfaEnrollActivate = (mfaEnrollType, activationData) => ({
   data: { mfaEnrollType, activationData }
 });
 export const startSecondStage = () => ({ type: LOGIN_MFA_REQUEST });
-export const completeLogin = user => ({ type: LOGIN_SUCCESS, data: user });
+export const completeLogin = () => ({ type: LOGIN_SUCCESS });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
 export const requestLogout = () => ({ type: LOGOUT_REQUEST });
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 export const requireAccessToState = () => ({ type: STATE_ACCESS_REQUIRED });
-export const requestAccessToState = () => ({ type: STATE_ACCESS_REQUEST });
+export const updateUserInfo = user => ({ type: UPDATE_USER_INFO, data: user });
 export const setLatestActivity = () => ({ type: LATEST_ACTIVITY });
 export const setSessionEnding = () => ({ type: SESSION_ENDING_ALERT });
 export const requestSessionRenewal = () => ({ type: REQUEST_SESSION_RENEWAL });
@@ -70,12 +77,6 @@ export const updateSessionExpiration = expiresAt => ({
 const loadData = activities => dispatch => {
   if (activities.includes('view-document')) {
     dispatch(fetchAllApds());
-  }
-  if (activities.includes('view-users')) {
-    dispatch(getUsers());
-  }
-  if (activities.includes('view-roles')) {
-    dispatch(getRoles());
   }
 };
 
@@ -102,25 +103,16 @@ const setupTokenManager = () => (dispatch, getState) => {
   });
 };
 
-const getCurrentUser = () => dispatch =>
-  axios
-    .get('/me')
-    .then(userRes => {
-      if (userRes.data.states.length === 0) {
-        dispatch(requireAccessToState());
-        return '/login/affiliations/request';
-      }
-      if (userRes.data.activities) {
-        dispatch(loadData(userRes.data.activities));
-      }
-      dispatch(completeLogin(userRes.data));
-      return null;
-    })
-    .catch(error => {
-      const reason = error ? error.message : 'N/A';
-      dispatch(failLogin(reason));
-      return null;
-    });
+const getCurrentUser = async () => {
+  let failureReason = null;
+  const userResponse = await axios.get("/me").catch((error) => {
+    failureReason = error ? error.message : "N/A";
+  });
+  if (failureReason) {
+    return failureReason;
+  }
+  return userResponse.data;
+};
 
 export const logout = () => dispatch => {
   dispatch(requestLogout());
@@ -169,23 +161,67 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
   dispatch(mfaEnrollAddPhone(mfaSelected));
 };
 
-const authenticationSuccess = sessionToken => async dispatch => {
+const authenticationSuccess = sessionToken => async dispatch => {  
   dispatch(setupTokenManager());
   const expiresAt = await setTokens(sessionToken);
   dispatch(updateSessionExpiration(expiresAt));
+  dispatch(setLatestActivity());
 
-  return dispatch(getCurrentUser());
+  const user = await getCurrentUser();
+  if (!user.states || Object.keys(user.states).length === 0) {
+    dispatch(requireAccessToState());
+    return '/login/affiliations/request';
+  }
+  if (Object.keys(user.states).length === 1) {
+    dispatch(updateUserInfo(user));
+    dispatch(completeLogin());
+    if (user.activities) {
+      dispatch(loadData(user.activities));
+    }
+    return '/';
+  }
+  dispatch(updateUserInfo(user));
+  return '/login/affiliations/select';
 };
 
+// This method loads on page re-load or a new tab. First, it sets a
+// flag in redux to tell LoginApplication to only perform this check once.
+// Then it will get our eAPD jwt cookie, decode it, and update the redux 
+// store with it. If the jwt cookie doesn't exist, we fall back on using
+// okta to verify and provide a new token.
 export const authCheck = () => async dispatch => {
-  dispatch(setupTokenManager());
-  const expiresAt = await renewTokens();
-  if (expiresAt) {
-    dispatch(updateSessionExpiration(expiresAt));
-    dispatch(setLatestActivity());
-    return dispatch(getCurrentUser());
+  dispatch(authCheckRequest());
+  
+  const eapdCookie = getCookie(API_COOKIE_NAME);  
+  if(eapdCookie) {
+    const decodedCookie = jwtDecode(eapdCookie);  
+    const epochTimestampInSeconds = Math.round(new Date() / 1000);
+    
+    if(decodedCookie.exp && decodedCookie.exp > epochTimestampInSeconds) {
+      dispatch(updateUserInfo(decodedCookie));
+      dispatch(completeLogin());
+      if (decodedCookie.activities) {
+        dispatch(loadData(decodedCookie.activities));
+      }
+    }    
   }
-  dispatch(logout());
+  
+  if(!eapdCookie) {
+    dispatch(setupTokenManager());
+    const expiresAt = await renewTokens();
+    
+    if (expiresAt) {
+      dispatch(updateSessionExpiration(expiresAt));
+      dispatch(setLatestActivity());
+      const user = await getCurrentUser();
+      dispatch(updateUserInfo(user));
+      dispatch(completeLogin());
+      if (user.activities) {
+        dispatch(loadData(user.activities));
+      }
+      return null;
+    }
+  }
   return null;
 };
 
@@ -255,30 +291,31 @@ export const loginOtp = otp => async dispatch => {
   const transaction = await retrieveExistingTransaction();
   if (transaction) {
     return verifyMFA({ transaction, otp })
-    .then(({sessionToken, status}) => {
-      if(status === "PASSWORD_EXPIRED") {
-        return dispatch(failLogin('PASSWORD_EXPIRED'));
-      }
-      if(status === "SUCCESS") {
-        return dispatch(authenticationSuccess(sessionToken));
-      }
-      dispatch(failLogin('MFA_AUTH_FAILED'));
-      return null;
-    }).catch(error => {
-      const reason = error ? error.message : 'N/A';
-      if (reason === 'User is not assigned to the client application.') {
-        dispatch(failLogin('NOT_IN_GROUP'));
-        // redirect to not in group page
-        return '/login/not-in-group';
-      }
-      if (reason === 'User Locked') {
-        dispatch(failLogin('LOCKED_OUT'));
-        // redirect to locked-out page
-        return '/login/locked-out';
-      }
-      dispatch(failLogin('MFA_AUTH_FAILED'));
-      return null;
-    })
+      .then(({ sessionToken, status }) => {
+        if (status === 'PASSWORD_EXPIRED') {
+          return dispatch(failLogin('PASSWORD_EXPIRED'));
+        }
+        if (status === 'SUCCESS') {
+          return dispatch(authenticationSuccess(sessionToken));
+        }
+        dispatch(failLogin('MFA_AUTH_FAILED'));
+        return null;
+      })
+      .catch(error => {
+        const reason = error ? error.message : 'N/A';
+        if (reason === 'User is not assigned to the client application.') {
+          dispatch(failLogin('NOT_IN_GROUP'));
+          // redirect to not in group page
+          return '/login/not-in-group';
+        }
+        if (reason === 'User Locked') {
+          dispatch(failLogin('LOCKED_OUT'));
+          // redirect to locked-out page
+          return '/login/locked-out';
+        }
+        dispatch(failLogin('MFA_AUTH_FAILED'));
+        return null;
+      });
   }
   dispatch(failLogin('MFA_AUTH_FAILED'));
   return null;
@@ -286,45 +323,43 @@ export const loginOtp = otp => async dispatch => {
 
 export const createAccessRequest = states => async dispatch => {
   let failureReason = null;
-  dispatch(requestAccessToState());
   await Promise.all(
     states.map(async state => {
       await axios
         .post(`/states/${state.id}/affiliations`)
-        .then(() => {})
         .catch(error => {
           failureReason = error ? error.message : 'N/A';
         });
     })
   );
-
-  if (failureReason) {
+  if (failureReason) { 
     dispatch(failLogin(failureReason));
     return null;
   }
   return '/login/affiliations/thank-you';
 };
 
-export const updateAccessRequest = states => async dispatch => {
-  let failureReason = null;
-  await Promise.all(
-    states.map(async state => {
-      await axios
-        .post(`/states/${state.id}/affiliations`)
-        .then(() => {})
-        .catch(error => {
-          failureReason = error ? error.message : 'N/A';
-        });
-    })
-  );
-
-  if (failureReason) {
-    dispatch(failLogin(failureReason));
-    return null;
-  }
-  return dispatch(getCurrentUser());
-};
-
 export const completeAccessRequest = () => dispatch => {
-  return dispatch(getCurrentUser());
+  return dispatch(authenticationSuccess());
 };
+
+export const selectAffiliation = selectedState => dispatch => {
+  return axios
+    .get(`/auth/state/${selectedState}`)
+    .then((res) => {
+      // Todo: Refactor this to be more FP style
+      setCookie(res.data.jwt);
+      const decoded = jwtDecode(res.data.jwt);
+      dispatch(updateUserInfo(decoded));
+      if (decoded.activities) {
+        dispatch(loadData(decoded.activities));
+      }
+      dispatch(completeLogin());
+      return '/';
+    })
+    .catch(error => {
+      const failureReason = error ? error.message : 'N/A';
+      dispatch(failLogin(failureReason));
+      return null;
+    });
+}
