@@ -6,8 +6,13 @@ import ApdStateProfile from './ApdStateProfile';
 describe('APD Summary/viewOnly component', () => {
   test('renders the correct message when no key personnel are provided', () => {
     const stateProfile = {
-      medicaidOffice: {},
-      medicaidDirector: {}
+      medicaidOffice: {
+        address1: '123 Street St',
+        state: 'MD'
+      },
+      medicaidDirector: {
+        name: 'Test'
+      }
     };
     render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
     expect(screen.queryByText(/No response was provided/i)).toBeTruthy();
@@ -54,8 +59,12 @@ describe('APD Summary/viewOnly component', () => {
         name: 'Test'
       }
     };
-    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
-    expect(screen.queryByText(/No reponse was provided/i)).toBeTruthy();
+    const keyPersonnel = [{
+      isPrimary:true,
+      name:"Primary Person Name",
+    }]
+    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={keyPersonnel} />);
+    expect(screen.queryByText(/No response was provided/i)).toBeTruthy();
   });
 
 });

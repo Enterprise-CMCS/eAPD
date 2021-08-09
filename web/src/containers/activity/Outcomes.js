@@ -49,12 +49,12 @@ const Outcomes = ({
       <hr className="subsection-rule" />
       <FormAndReviewList
         activityIndex={activityIndex}
-        addButtonText="Add another outcome"
+        addButtonText="Add Outcome"
         list={outcomes}
         collapsed={OutcomeAndMetricReview}
         expanded={OutcomeAndMetricForm}
         extraItemButtons={[
-          { onClick: handleAddMetric, text: 'Add another metric' }
+          { onClick: handleAddMetric, text: 'Add Metric' }
         ]}
         removeMetric={handleDeleteMetric}
         noDataMessage={t('activities.outcomes.noDataNotice')}
