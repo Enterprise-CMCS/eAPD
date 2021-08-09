@@ -76,7 +76,7 @@ describe('checking default values in Activities section', () => {
       'exist'
     );
 
-    cy.findByRole('button', { name: /Add another outcome/i }).click();
+    cy.findByRole('button', { name: /Add Outcome/i }).click();
     activityPage.checkTextField('ds-c-field', '', 0); // Outcome
     activityPage.checkTextField('ds-c-field', '', 1); // Metric
     cy.findByRole('button', { name: /Done/i }).click();
@@ -95,7 +95,7 @@ describe('checking default values in Activities section', () => {
       'Outcome not specified'
     );
 
-    cy.findByRole('button', { name: /Add another milestone/i }).click();
+    cy.findByRole('button', { name: /Add Milestone/i }).click();
     activityPage.checkInputField('Name', '');
     activityPage.checkDate('Target completion date');
     cy.findByRole('button', { name: /Done/i }).click();
@@ -122,7 +122,7 @@ describe('checking default values in Activities section', () => {
       'Other state expenses have not been added for this activity.'
     ).should('exist');
 
-    cy.findByRole('button', { name: /Add another state staff/i }).click();
+    cy.findByRole('button', { name: /Add State Staff/i }).click();
 
     activityPage.checkInputField('Personnel title', '');
     activityPage.checkInputField('Description', '');
@@ -143,7 +143,7 @@ describe('checking default values in Activities section', () => {
       'Personnel title not specified'
     );
 
-    cy.findByRole('button', { name: /Add another state expense/i }).click();
+    cy.findByRole('button', { name: /Add State Expense/i }).click();
     activityPage.checkInputField('Description', '');
     activityPage.checkFFYinputCostFields(years, 0);
     cy.findByRole('button', { name: /Done/i }).click();
@@ -167,7 +167,7 @@ describe('checking default values in Activities section', () => {
       'Private contractors have not been added for this activity.'
     ).should('exist');
 
-    cy.findByRole('button', { name: /Add another contractor/i }).click();
+    cy.findByRole('button', { name: /Add Contractor/i }).click();
 
     activityPage.checkTextField('ds-c-field', '');
     activityPage.checkTinyMCE('contractor-description-field-0', '');

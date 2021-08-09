@@ -51,7 +51,7 @@ class ActivityPage {
   };
 
   checkMetricFunctionality = () => {
-    cy.findByRole('button', { name: /Add another metric/i }).click();
+    cy.findByRole('button', { name: /Add Metric/i }).click();
     for (let i = 0; i < 2; i += 1) {
       cy.get('[class="ds-c-review"]')
         .eq(i)
@@ -148,7 +148,7 @@ class ActivityPage {
   };
 
   checkAddActivityButton = () => {
-    cy.contains('Add another activity').click();
+    cy.contains('Add Activity').click();
     cy.url().should('include', '/activities');
     cy.contains('Activity 2').should('exist');
     cy.contains('Delete').click();
