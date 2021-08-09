@@ -63,7 +63,7 @@ describe('auth actions', () => {
       jest.clearAllMocks();
     });
 
-    xit('creates LOGIN_SUCCESS after successful single factor auth', async () => {
+    it('creates LOGIN_SUCCESS after successful single factor auth, with a state already selected', async () => {
       const signInSpy = jest
         .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
@@ -72,6 +72,7 @@ describe('auth actions', () => {
             status: 'SUCCESS'
           })
         );
+
       const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
@@ -81,45 +82,49 @@ describe('auth actions', () => {
       fetchMock
         .onGet('/me')
         .reply(200, { name: 'moop', activities: [], states: ['MO'] });
+
+      
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.LATEST_ACTIVITY },
         {
           type: actions.UPDATE_USER_INFO,
           data: { name: 'moop', activities: [], states: ['MO'] }
         },
         { type: actions.LOGIN_SUCCESS }
       ];
-
+      
       await store.dispatch(actions.login('name', 'secret'));
       expect(signInSpy).toHaveBeenCalledTimes(1);
       await expect(getTokenSpy).toHaveBeenCalledTimes(1);
-
+      
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
-
-    xit('creates LOGIN_SUCCESS after successful single factor auth, sends user to state request', async () => {
+    
+    it('creates LOGIN_SUCCESS after successful single factor auth, sends user to state request', async () => {
       const signInSpy = jest
         .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
-          Promise.resolve({
-            sessionToken: 'testSessionToken',
-            status: 'SUCCESS'
-          })
-        );
+        Promise.resolve({
+          sessionToken: 'testSessionToken',
+          status: 'SUCCESS'
+        })
+      );
       const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
-        .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve(expiresAt));
-
+      .spyOn(mockAuth, 'setTokens')
+      .mockImplementation(() => Promise.resolve(expiresAt));
+      
       const store = mockStore({});
       fetchMock
-        .onGet('/me')
-        .reply(200, { name: 'moop', activities: [], states: [] });
+      .onGet('/me')
+      .reply(200, { name: 'moop', activities: [], states: [] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.LATEST_ACTIVITY },
         { type: actions.STATE_ACCESS_REQUIRED }
       ];
 
@@ -274,7 +279,7 @@ describe('auth actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
 
-    xit('creates LOGIN_SUCCESS after successful second stage of multi-factor auth', async () => {
+    it('creates LOGIN_SUCCESS after successful second stage of multi-factor auth', async () => {
       const verify = jest.fn(() =>
         Promise.resolve({ sessionToken: 'testSessionToken', status: 'SUCCESS' })
       );
@@ -297,6 +302,7 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.LATEST_ACTIVITY },
         {
           type: actions.UPDATE_USER_INFO,
           data: { name: 'moop', activities: [], states: ['MO'] }
@@ -445,6 +451,7 @@ describe('auth actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    // actually test this one with the UI and make sure the MFA process still works with pre-set jwt, etc...
     xit('creates LOGIN_MFA_FAILURE when returned session token does not match the one sent in', async () => {
       jest
         .spyOn(mockAuth, 'retrieveExistingTransaction')
@@ -636,13 +643,15 @@ describe('auth actions', () => {
     });
   });
 
+  // These need to be updated to support the authCheck now that it handles
+  // the jwt cookie logic
   describe('authCheck (async)', () => {
     afterEach(() => {
       fetchMock.reset();
       jest.clearAllMocks();
     });
 
-    xit('reauthenticates a user if their session is still valid', async () => {
+    it('reauthenticates a user if their session is still valid', async () => {
       const store = mockStore({});
       fetchMock.onGet('/me').reply(200, {
         name: 'moop',
@@ -655,29 +664,31 @@ describe('auth actions', () => {
         .mockImplementation(() => Promise.resolve(expiresAt));
 
       const expectedActions = [
+        { type: actions.AUTH_CHECK_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
         { type: actions.LATEST_ACTIVITY },
-        { type: actions.LOGIN_SUCCESS },
         {
           type: actions.UPDATE_USER_INFO,
           data: { name: 'moop', activities: ['something'], states: ['mo'] }
-        }
+        },
+        { type: actions.LOGIN_SUCCESS }
       ];
-
+      
       await store.dispatch(actions.authCheck());
       expect(store.getActions()).toEqual(expectedActions);
     });
-
+    
     xit('if the session is expired, redirect the user to login', () => {
       const store = mockStore({});
       jest
-        .spyOn(mockAuth, 'renewTokens')
-        .mockImplementation(() => Promise.resolve(null));
+      .spyOn(mockAuth, 'renewTokens')
+      .mockImplementation(() => Promise.resolve(null));
       jest
-        .spyOn(mockAuth, 'logoutAndClearTokens')
-        .mockImplementation(() => Promise.resolve());
-
+      .spyOn(mockAuth, 'logoutAndClearTokens')
+      .mockImplementation(() => Promise.resolve());
+      
       const expectedActions = [
+        { type: actions.AUTH_CHECK_REQUEST },
         { type: actions.LOGOUT_REQUEST },
         { type: actions.LOGOUT_SUCCESS }
       ];
@@ -1058,32 +1069,22 @@ describe('auth actions', () => {
     });
   });
 
+  // really this should just check if authSuccess is fired
   describe('completeAccessRequest', () => {
     beforeEach(() => {
       fetchMock.reset();
       jest.clearAllMocks();
-
-      fetchMock.onGet('/me').reply(200, {
-        name: 'moop',
-        activities: ['something'],
-        states: ['mo']
-      });
     });
     xit('should complete the state access request', async () => {
+      const authSuccessSpy = jest
+        .spyOn(actions, 'authenticationSuccess')
+        .mockImplementation(() =>
+          Promise.resolve({})
+        );
       const store = mockStore({});
-      const expectedActions = [
-        { type: actions.LOGIN_SUCCESS },
-        {
-          type: actions.UPDATE_USER_INFO,
-          data: {
-            name: 'moop',
-            activities: ['something'],
-            states: ['mo']
-          }
-        }
-      ];
+
       await store.dispatch(actions.completeAccessRequest());
-      expect(store.getActions()).toEqual(expectedActions);
+      expect(authSuccessSpy).toHaveBeenCalledTimes(1);
     });
   });
 
