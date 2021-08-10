@@ -103,14 +103,10 @@ const setupTokenManager = () => (dispatch, getState) => {
   });
 };
 
-const getCurrentUser = async () => {
-  let failureReason = null;
+const getCurrentUser = async dispatch => {
   const userResponse = await axios.get("/me").catch((error) => {
-    failureReason = error ? error.message : "N/A";
+    return dispatch(failLogin(error.message));
   });
-  if (failureReason) {
-    return failureReason;
-  }
   return userResponse.data;
 };
 
@@ -189,7 +185,8 @@ const authenticationSuccess = sessionToken => async dispatch => {
 // Then it will get our eAPD jwt cookie, decode it, and update the redux 
 // store with it. If the jwt cookie doesn't exist, we fall back on using
 // okta to verify and provide a new token.
-export const authCheck = () => async dispatch => {
+export const authCheck = () => async dispatch => {   
+   
   dispatch(authCheckRequest());
   
   const eapdCookie = getCookie(API_COOKIE_NAME);  
@@ -221,6 +218,7 @@ export const authCheck = () => async dispatch => {
       }
       return null;
     }
+    // dispatch(logout());
   }
   return null;
 };
