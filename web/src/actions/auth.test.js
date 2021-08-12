@@ -5,7 +5,6 @@ import thunk from 'redux-thunk';
 import * as actions from './auth';
 import axios from '../util/api';
 import * as mockAuth from '../util/auth';
-import mockApp from './app';
 import { MFA_FACTOR_TYPES } from '../constants';
 
 jest.mock('./app', () => {
@@ -646,7 +645,7 @@ describe('auth actions', () => {
       jest.clearAllMocks();
     });
 
-    xit('reauthenticates a user if their session is still valid', async () => {
+    it('reauthenticates a user if their session is still valid', async () => {
       const store = mockStore({});
       fetchMock.onGet('/me').reply(200, {
         name: 'moop',
@@ -673,10 +672,7 @@ describe('auth actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
 
-    // Look in authCheck at the uncommented code. Adding this code back fixes this
-    // test but breaks the application (and LoginApplication test) by showing the
-    // you have been successfully logged out page instead of showing the consent 
-    xit('if the session is expired, redirect the user to login', () => {
+    it('if the session is expired, redirect the user to login', () => {
       const store = mockStore({});
       jest
       .spyOn(mockAuth, 'renewTokens')

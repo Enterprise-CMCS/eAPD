@@ -199,6 +199,7 @@ export const authCheck = () => async dispatch => {
   dispatch(authCheckRequest());
   
   const eapdCookie = getCookie(API_COOKIE_NAME);  
+  
   if(eapdCookie) {
     const decodedCookie = jwtDecode(eapdCookie);  
     const epochTimestampInSeconds = Math.round(new Date() / 1000);
@@ -215,11 +216,13 @@ export const authCheck = () => async dispatch => {
   if(!eapdCookie) {
     dispatch(setupTokenManager());
     const expiresAt = await renewTokens();
-    
     if (expiresAt) {
       dispatch(updateSessionExpiration(expiresAt));
       dispatch(setLatestActivity());
-      const user = await getCurrentUser();
+      const user = await dispatch(getCurrentUser());
+      if(!user) {
+        return dispatch(logout());        
+      }
       dispatch(updateUserInfo(user));
       dispatch(completeLogin());
       if (user.activities) {
@@ -227,7 +230,8 @@ export const authCheck = () => async dispatch => {
       }
       return null;
     }
-    // dispatch(logout());
+    dispatch(logout());
+    return null;
   }
   return null;
 };
