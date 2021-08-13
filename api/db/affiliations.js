@@ -167,7 +167,7 @@ const updateAuthAffiliation = async({
   stateId
 }) => {
   // Check that user is not editing themselves
-  const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
+    const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
     .select('user_id', 'role_id', 'status')
     .where({ state_id: stateId, id: affiliationId })
     .first();
@@ -176,6 +176,7 @@ const updateAuthAffiliation = async({
   }
 
   const authAffiliationAudit = {
+    user_id: affiliationUserId,
     original_role_id: originalRoleId,
     original_status: originalStatus,
     new_role_id: newStatus !== 'approved' ? null : newRoleId,

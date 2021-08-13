@@ -12,6 +12,9 @@ exports.up = async (knex) => {
       .string('changed_by')
 
     table
+      .string('user_id')
+
+    table
       .integer('original_role_id')
 
     table
