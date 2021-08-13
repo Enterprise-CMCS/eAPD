@@ -48,7 +48,7 @@ const ContractorResourceReview = ({
         </li>
         {apdFFYs.map(ffy => (
           <li key={ffy}>
-            <strong>FFY {ffy} cost:</strong> <Dollars>{years[ffy]}</Dollars>
+            <strong>FFY {ffy} Cost:</strong> <Dollars>{years[ffy]}</Dollars>
           </li>
         ))}
       </ul>

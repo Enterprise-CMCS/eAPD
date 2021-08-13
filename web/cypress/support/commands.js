@@ -123,3 +123,12 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
     return false;
   });
 });
+
+Cypress.Commands.add('goToActivityDashboard', () => {
+  cy.contains('Activities Dashboard').click({ force: true });
+});
+
+Cypress.Commands.add('goToExportView', () => {
+  cy.contains('Export and Submit').click();
+  cy.contains('Continue to Review').click();
+});

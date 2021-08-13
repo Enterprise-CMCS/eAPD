@@ -1,23 +1,122 @@
 {
-  "a1_short_overview": "Somebody once told me",
-  "a1_start_m": 7,
-  "a1_start_d": 14,
-  "a1_start_y": 2021,
-  "a1_end_m": 3,
-  "a1_end_d": 12,
-  "a1_end_y": 2024,
-  "a1_detailed": "The world was gonna roll me",
-  "a1_supporting_justifications": "I ain't the sharpest tool",
-  "a1_supports_medicaid": "in the shed",
+  "newActivityName": "SS Training App",
 
-  "a2_short_overview": "She was looking kind of dumb",
-  "a2_start_m": 2,
-  "a2_start_d": 24,
-  "a2_start_y": 2032,
-  "a2_end_m": 8,
-  "a2_end_d": 28,
-  "a2_end_y": 2034,
-  "a2_detailed": "With her finger and her thumb",
-  "a2_supporting_justifications": "In the shape of an L",
-  "a2_does_not_support_medicaid": "On her forehead"
+  "activityOverview": [
+    {
+      "name": "Program Administration",
+      "fundingType": "HIT",
+      "shortOverview": "This is the default activity, each APD has one.",
+      "startDate": [7, 14, 2021],
+      "endDate": [3, 12, 2024],
+      "detailedDescription": "This is the detailed description for the Program Administration.",
+      "supportingJustificaions": "This text area is about the supporting justifications.",
+      "supportsMedicaid": "This activity support the medicaid standards and conditions." 
+    },
+    {
+      "name": "SS Training App",
+      "fundingType": "HIT",
+      "shortOverview": "This is where it all started!",
+      "startDate": [2, 24, 2032],
+      "endDate": [8, 28, 2034],
+      "detailedDescription": "Hard work and S l e e p l e s s  N i g h t s",
+      "supportingJustificaions": "The SS training App has supporting justifications",
+      "supportsMedicaid": "This activity does support the medicaid standards and conditions." 
+    }
+  ],
+
+  "outcomes": [
+    {
+      "names": ["Is this the real life?", "No escape from reality"],
+      "metrics": [["Is this just fantasy", "Caught in a landslide"], ["Open your eyes", "Look up to the skies and see"]]
+    }
+  ],
+
+  "milestones": [
+    {
+      "names": ["Freddie Mercury", "Bon Jovi"],
+      "dates": [[10, 5, 1946], [3, 2, 1962]]
+    }
+  ],
+
+  "staff": [
+    {
+      "title": "Project Assistant",
+      "description": "Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.",
+      "costs": [86000, 88000],
+      "ftes": [1, 1]
+    },
+    {
+      "title": "Accountant III",
+      "description": "Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.",
+      "costs": [101000, 109000],
+      "ftes": [3, 3]
+    },
+    {
+      "title": "Public Information Officer",
+      "description": "Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program",
+      "costs": [165000, 170000],
+      "ftes": [0.5, 0.5]
+    },
+    {
+      "title": "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
+      "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
+      "costs": [110012, 111102],
+      "ftes": [1, 1]
+    }
+  ],
+
+  "expenses": [
+    {
+      "category": "Training and outreach",
+      "costs": [40000, 40000],
+      "description": "Recorded media and radio for supporting outreach."
+    },
+    {
+      "category": "Travel",
+      "costs": [35000, 35000],
+      "description": "Airplane tickets, gasoline, and taxi services."
+    },
+    {
+      "category": "Hardware, software, and licensing",
+      "costs": [40000, 40000],
+      "description": "Purchases of new laptops and licenses for Office software."
+    },
+    {
+      "category": "Equipment and supplies",
+      "costs": [500, 200],
+      "description": "Paper, pens, and pencils."
+    }
+  ],
+
+  "privateContractors": [
+    {
+      "names": ["Jasmine the shih tzu", "Bob the Builder"],
+      "descriptions": ["She is a lazy white fluffy dog, almost cat like", "Can he build it? Yes he can!"],
+      "start": [[12, 9, 2034], [2, 4, 2006]],
+      "end": [[5, 12, 2040], [5, 16, 2008]],
+      "totalCosts": [50000, 60000],
+      "FFYcosts": [[25000, 25000], [30000, 30000]]
+    },
+    {
+      "names": ["Ash Catchem", "Teddy Bear"],
+      "descriptions": ["He likes to catch them all", "He is a big stuffed teddy bear"],
+      "start": [[1, 5, 2124], [4, 7, 1980]],
+      "end": [[3, 2, 2234], [1, 2, 3333]],
+      "totalCosts": [80000, 3000],
+      "FFYcosts": [[40000, 40000], [[10, 150],[75, 20]]]
+    }
+  ],
+
+  "costAllocation": [
+    {
+      "description": "Actiity 1 description for overall cost allocation.",
+      "FFYdescriptions": ["This is the Other Funding description for Activity 1 - FFY 2021", "This is the Other Funding description for Activity 1 - FFY 2022"],
+      "costs": [5000, 8000]
+    },
+    {
+      "description": "Actiity 1 description for overall cost allocation.",
+      "FFYdescriptions": ["This is the Other Funding description for Activity 2 - FFY 2021", "This is the Other Funding description for Activity 2 - FFY 2022"],
+      "costs": [4000, 9000]
+    }
+  ]
 }
