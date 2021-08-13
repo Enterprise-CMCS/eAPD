@@ -26,5 +26,3 @@ docs-build
 # Terraform ignores
 *.terraform
 env_vars.sh
-/cypress tests/cypress/screenshots/*
-/cypress tests/cypress/videos/*
