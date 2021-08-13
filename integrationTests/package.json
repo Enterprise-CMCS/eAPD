@@ -1,0 +1,27 @@
+{
+  "name": "cypress_tests",
+  "version": "1.0.0",
+  "description": "Cypres tests for the EAPD tool",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "./cypress-setup.sh open",
+    "cy:run": "./cypress-setup.sh run",
+    "cy:run:ci": "cypress run"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@foreachbe/cypress-tinymce": "^1.0.0",
+    "axe-core": "^4.3.2",
+    "axios": "^0.21.1",
+    "cypress-axe-core": "^1.2.0",
+    "knex": "^0.21.21",
+    "pg": "^8.7.1",
+    "sqlite3": "^5.0.2",
+    "tinymce": "^5.8.2"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^8.0.0",
+    "cypress": "^8.2.0"
+  }
+}

@@ -3,7 +3,7 @@ import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
 import tokens from '../../../api/seeds/test/tokens.json';
-import { API_COOKIE_NAME } from '../../src/constants';
+import { API_COOKIE_NAME } from '../../../web/src/constants';
 
 const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000
