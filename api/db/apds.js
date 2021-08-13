@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const knex = require('./knex');
+const toMongodb = require('jsonpatch-to-mongodb');
+const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 
 const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
@@ -32,24 +33,43 @@ const getAPDByIDAndState = (
 
 const updateAPDDocument = async (
   id,
-  stateID,
-  document,
-  { db = knex, updateProfile = updateStateProfile } = {}
+  stateId,
+  patch,
+  { APD = mongoose.model('APD'), updateProfile = updateStateProfile } = {}
 ) => {
-  const updateTime = new Date().toISOString();
-
-  const transaction = await db.transaction();
-  await transaction('apds')
-    .where('id', id)
-    .update({ document, updated_at: updateTime });
-
-  if (document.stateProfile) {
-    await updateProfile(stateID, document.stateProfile, { transaction });
+  // Convert the patches to a mongo update format and update the APD
+  let updateErrors;
+  try {
+    await APD.updateOne(
+      { _id: id, stateId },
+      toMongodb([
+        ...patch,
+        { op: 'replace', path: '/updatedAt', value: Date.now() }
+      ]),
+      {
+        multipleCastError: true,
+        strict: true
+      }
+    );
+  } catch (err) {
+    updateErrors = err.errors;
+    logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
   }
 
-  await transaction.commit();
+  const apd = await APD.findOne({ _id: id, stateId }).exec();
 
-  return updateTime;
+  // Determine if state profile needs to be updated in postgres
+  const stateUpdated = patch.find(({ path }) => path.includes('/stateProfile'));
+  if (stateUpdated) {
+    await updateProfile(stateId, apd.stateProfile);
+  }
+  const validationErrors = apd.validateSync() || [];
+
+  return {
+    errors: { ...updateErrors, ...validationErrors },
+    apd: apd._doc, // eslint-disable-line no-underscore-dangle
+    stateUpdated
+  };
 };
 
 module.exports = {

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const jsonPatchPlugin = require('mongoose-patcher');
 
 const quarterlyFFP = new mongoose.Schema({
   combined: Number,
@@ -235,10 +234,19 @@ const apdSchema = new mongoose.Schema({
       zip: String
     }
   },
-  years: [String]
+  years: [
+    {
+      type: String,
+      validate: {
+        validator: v => {
+          const re = /^[0-9]{4}$/;
+          return v == null || re.test(v);
+        },
+        message: 'Provided year is invalid.'
+      }
+    }
+  ]
 });
-
-apdSchema.plugin(jsonPatchPlugin, { autosave: true });
 
 const APD = mongoose.model('APD', apdSchema);
 

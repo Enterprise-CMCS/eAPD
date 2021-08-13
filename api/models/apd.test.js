@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const tap = require('tap');
+const toMongodb = require('jsonpatch-to-mongodb');
 
 const mongo = require('../db/mongodb');
 
@@ -30,16 +31,22 @@ tap.test('APD model test', async t => {
   });
 
   t.test('patch APD', async test => {
-    await newApd.jsonPatch([
-      {
-        op: 'replace',
-        path: '/activities/0/outcomes/1/metrics/1/metric',
-        value: 'TEST VALUE'
-      }
-    ]);
+    const id = newApd._id; // eslint-disable-line no-underscore-dangle
+    await APD.updateOne(
+      { _id: id },
+      toMongodb([
+        {
+          op: 'replace',
+          path: '/activities/0/outcomes/1/metrics/1/metric',
+          value: 'TEST VALUE'
+        }
+      ])
+    );
+
+    const updatedApd = await APD.findOne({ _id: id }).exec();
 
     test.equal(
-      newApd.activities[0].outcomes[1].metrics[1].metric,
+      updatedApd.activities[0].outcomes[1].metrics[1].metric,
       'TEST VALUE',
       'APD was patched'
     );
