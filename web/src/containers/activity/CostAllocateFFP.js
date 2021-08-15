@@ -132,12 +132,22 @@ const CostAllocateFFP = ({
                 activityIndex={activityIndex}
                 otherFunding={otherFunding}
               />
+            </tbody>
+          </table>
 
-              {/* in viewonly mode, we'll pull everything into a single table
-                  table since there aren't form elements to fill in */}
-              {isViewOnly && (
-                <Fragment>
-                  <tr>
+          {/* in viewonly mode, we'll pull everything into a single table
+              table since there aren't form elements to fill in */}
+          {isViewOnly && (
+            <Fragment>
+              <table className="budget-table activity-budget-table">
+                <tbody>
+                  <tr className="budget-table--subtotal budget-table--row__header">
+                    <th colSpan="5">Activity Total Cost</th>
+                    <td className="budget-table--number">
+                      <Dollars>{years[ffy].totalCost}</Dollars>
+                    </td>
+                  </tr>
+                  <tr className="title">
                     <td>Other Funding</td>
                     <td colSpan="3" />
                     <td>-</td>
@@ -168,10 +178,10 @@ const CostAllocateFFP = ({
                       }
                     ]}
                   />
-                </Fragment>
-              )}
-            </tbody>
-          </table>
+                </tbody>
+              </table>
+            </Fragment>
+          )}
 
           {!isViewOnly && (
             <Fragment>
