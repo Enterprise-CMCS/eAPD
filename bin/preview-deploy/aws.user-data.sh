@@ -14,19 +14,19 @@ systemctl start mongod
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
-export OKTA_DOMAIN="__OKTA_DOMAIN__"
-export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
-export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
-export OKTA_API_KEY="__OKTA_API_KEY__"
-export JWT_SECRET="__JWT_SECRET__"
-export MONGO_DATABASE="__MONGO_DATABASE__"
-export MONGO_URL="__MONGO_URL__"
-#export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
-#export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
-#export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
-#export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
-#export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
-sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
+export OKTA_DOMAIN="https://test.idp.idm.cms.gov"
+export OKTA_SERVER_ID="aus4bfo99zdTbaChU297"
+export OKTA_CLIENT_ID="0oa4bfhqmijhhhjwv297"
+export OKTA_API_KEY="00S4oK6r556-RUSUbRUbx9RLnAsJlotYuVbL4AkypR"
+export JWT_SECRET="thisisnotthegreatestvariableintheworldjustatribute"
+export MONGO_DATABASE=""
+export MONGO_URL=""
+#export MONGO_INITDB_ROOT_USERNAME=""
+#export MONGO_INITDB_ROOT_PASSWORD=""
+#export MONGO_INITDB_DATABASE=""
+#export MONGO_DATABASE_USERNAME=""
+#export MONGO_DATABASE_PASSWORD=""
+sudo sh -c "echo license_key: '' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
@@ -52,11 +52,11 @@ nvm alias default 14
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
 # Clone from Github
-git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
+git clone --single-branch -b "" https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
 npm ci
-API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
+API_URL=/api OKTA_DOMAIN="https://test.idp.idm.cms.gov" npm run build
 mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up
@@ -85,17 +85,17 @@ echo "module.exports = {
       FILE_PATH: '__files',
       FILE_STORE: 'local',
       NODE_ENV: 'development',
-      PBKDF2_ITERATIONS: '__PBKDF2_ITERATIONS__',
+      PBKDF2_ITERATIONS: '',
       PORT: '8000',
       DEV_DB_HOST: 'localhost',
       DISABLE_SAME_SITE: 'yes',
-      OKTA_DOMAIN: '__OKTA_DOMAIN__',
-      OKTA_SERVER_ID: '__OKTA_SERVER_ID__',
-      OKTA_CLIENT_ID: '__OKTA_CLIENT_ID__',
-      OKTA_API_KEY: '__OKTA_API_KEY__',
-      JWT_SECRET: '__JWT_SECRET__',
-      MONGO_DATABASE: '__MONGO_DATABASE__',
-      MONGO_URL: '__MONGO_URL__'
+      OKTA_DOMAIN: 'https://test.idp.idm.cms.gov',
+      OKTA_SERVER_ID: 'aus4bfo99zdTbaChU297',
+      OKTA_CLIENT_ID: '0oa4bfhqmijhhhjwv297',
+      OKTA_API_KEY: '00S4oK6r556-RUSUbRUbx9RLnAsJlotYuVbL4AkypR',
+      JWT_SECRET: 'thisisnotthegreatestvariableintheworldjustatribute',
+      MONGO_DATABASE: '',
+      MONGO_URL: ''
     },
   }]
 };" > ecosystem.config.js
@@ -106,14 +106,14 @@ pm2 start ecosystem.config.js
 npm install newrelic --save
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
-sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
+sed -i 's|license key here||g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
 cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '__MONGO_INITDB_ROOT_USERNAME__','pwd' : '__MONGO_INITDB_ROOT_PASSWORD__', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo __MONGO_INITDB_DATABASE__ -u __MONGO_INITDB_ROOT_USERNAME__ -p __MONGO_INITDB_ROOT_PASSWORD__ --authenticationDatabase admin --eval "db.createUser({user: '__MONGO_DATABASE_USERNAME__', pwd: '__MONGO_DATABASE_PASSWORD__', roles:[{role:'readWrite', db: '__MONGO_INITDB_DATABASE__'}]});"
+mongo admin --eval "db.runCommand({'createUser' : '','pwd' : '', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo  -u  -p  --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role:'readWrite', db: ''}]});"
 MONGOUSERSEED
 E_USER
 
