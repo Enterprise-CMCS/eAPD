@@ -28,3 +28,4 @@ docs-build
 env_vars.sh
 /cypress tests/cypress/screenshots/*
 /cypress tests/cypress/videos/*
+*cypress.env.json
