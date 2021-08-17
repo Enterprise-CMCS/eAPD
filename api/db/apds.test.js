@@ -110,14 +110,55 @@ tap.test('database wrappers / apds', async apdsTests => {
       clock = sinon.useFakeTimers(nowDate);
     });
 
-    updateAPDDocumentTests.test('with patch error', async test => {
+    updateAPDDocumentTests.test('with only patch errors', async test => {
       const {
         errors,
-        apd: { updatedAt }
-      } = await updateAPDDocument(
-        id,
-        'co',
-        [
+        apd: { updatedAt, activities }
+      } = await updateAPDDocument(id, 'co', [
+        {
+          op: 'replace',
+          path: '/activities/0/schedule/0/endDate',
+          value: '2021-01-36'
+        },
+        {
+          op: 'replace',
+          path: '/activities/0/schedule/1/endDate',
+          value: '2022-15-31'
+        }
+      ]);
+
+      test.ok(
+        errors['/activities/0/schedule/0/endDate'],
+        'found endDate validation error'
+      );
+      test.ok(
+        errors['/activities/0/schedule/1/endDate'],
+        'found endDate validation error'
+      );
+      test.equal(
+        activities[0].schedule[0].endDate,
+        null,
+        'Error in Activity 1, Milestone 1, endDate; it has been set to null'
+      );
+      test.equal(
+        activities[0].schedule[1].endDate,
+        null,
+        'Error in Activity 1 Milestone 2 endDate; it has been set to null'
+      );
+      test.equal(
+        updatedAt.toISOString(),
+        '1904-10-03T00:00:00.000Z',
+        'updatedAt was updated'
+      );
+    });
+
+    updateAPDDocumentTests.test(
+      'with patch error and valid patch',
+      async test => {
+        const {
+          errors,
+          apd: { updatedAt, activities }
+        } = await updateAPDDocument(id, 'co', [
           {
             op: 'replace',
             path: '/activities/0/schedule/0/endDate',
@@ -125,22 +166,52 @@ tap.test('database wrappers / apds', async apdsTests => {
           },
           {
             op: 'replace',
-            path: '/activities/0/schedule/1/endDate',
-            value: '2022-15-31'
+            path: '/activities/0/schedule/0/milestone',
+            value: 'Updated milestone'
           }
-        ],
-        false
-      );
+        ]);
 
-      test.ok(
-        errors['activities.0.schedule.0.endDate'],
-        'found endDate validation error'
+        test.ok(
+          errors['/activities/0/schedule/0/endDate'],
+          'found endDate validation error'
+        );
+        test.equal(
+          activities[0].schedule[0].endDate,
+          null,
+          'Error in Activity 1, Milestone 1, endDate; it has been set to null'
+        );
+        test.equal(
+          activities[0].schedule[0].milestone,
+          'Updated milestone',
+          'Activity 1, Milestone 1, milestone was updated'
+        );
+        test.equal(
+          updatedAt.toISOString(),
+          '1904-10-03T00:00:00.000Z',
+          'updatedAt was updated'
+        );
+      }
+    );
+
+    updateAPDDocumentTests.test('with a valid patch', async test => {
+      const {
+        errors,
+        apd: { updatedAt, programOverview }
+      } = await updateAPDDocument(id, 'co', [
+        {
+          op: 'replace',
+          path: `/programOverview`,
+          value: 'This is the test of a <a>program overview</a>'
+        }
+      ]);
+
+      test.equal(Object.keys(errors).length, 0, 'no errors');
+      test.equal(updatedAt.toISOString(), '1904-10-03T00:00:00.000Z');
+      test.equal(
+        programOverview,
+        'This is the test of a <a>program overview</a>',
+        'programOverview was updated'
       );
-      test.ok(
-        errors['activities.0.schedule.1.endDate'],
-        'found endDate validation error'
-      );
-      test.not(updatedAt, '1904-10-03T00:00:00.000Z');
     });
 
     updateAPDDocumentTests.test('without a state profile', async test => {
@@ -148,18 +219,13 @@ tap.test('database wrappers / apds', async apdsTests => {
         errors,
         apd: { updatedAt },
         stateUpdated
-      } = await updateAPDDocument(
-        id,
-        'co',
-        [
-          {
-            op: 'replace',
-            path: '/activities/0/schedule/1/endDate',
-            value: '2022-12-31'
-          }
-        ],
-        false
-      );
+      } = await updateAPDDocument(id, 'co', [
+        {
+          op: 'replace',
+          path: '/activities/0/schedule/1/endDate',
+          value: '2022-12-31'
+        }
+      ]);
 
       test.equal(Object.keys(errors).length, 0, 'no errors');
       test.equal(updatedAt.toISOString(), '1904-10-03T00:00:00.000Z');

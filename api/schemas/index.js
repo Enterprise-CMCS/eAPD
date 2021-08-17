@@ -1,5 +1,5 @@
 /* eslint-disable import/no-dynamic-require, global-require */
-const Ajv = require("ajv").default
+const Ajv = require('ajv').default;
 
 // all schemas, except the base apd document schema
 const schemas = [
@@ -29,7 +29,14 @@ const options = {
 };
 
 const ajv = new Ajv(options);
-// schemas.forEach(schema => ajv.addSchema(schema));
+ajv.addFormat('custom-date-time', dateTimeString => {
+  if (dateTimeString) {
+    const isoRegex = /^[0-9]{4}-((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(02)-(0[1-9]|[12][0-9]))T(0[0-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9]):(0[0-9]|[1-5][0-9])\.[0-9]{3}Z$|^[0-9]{4}-((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(02)-(0[1-9]|[12][0-9]))$/;
+    return dateTimeString.match(isoRegex);
+  }
+  return true;
+});
+
 const validateApd = ajv.compile(apdSchema);
 
 module.exports = {

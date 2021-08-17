@@ -2,16 +2,20 @@
   "$id": "definitions.json",
   "definitions": {
     "optionalFullDate": {
-      "type": "string"
+      "type": "string",
+      "format": "custom-date-time",
+      "nullable": true
     },
     "optionalNumber": {
       "anyOf": [
         {
-          "type": "number"
+          "type": "number",
+          "nullable": true
         },
         {
           "type": "string",
-          "pattern": "\\d*"
+          "pattern": "\\d*",
+          "nullable": true
         }
       ]
     }
