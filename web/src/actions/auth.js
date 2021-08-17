@@ -108,8 +108,8 @@ const getCurrentUser = () => async dispatch => {
     .then(res => {
       return res;
     })
-    .catch(res => {
-      dispatch(failLogin(res.response.data.error));
+    .catch(error => {
+      dispatch(failLogin(error.message));
       return null;
     })
   

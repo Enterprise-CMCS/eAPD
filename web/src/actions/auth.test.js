@@ -571,7 +571,10 @@ describe('auth actions', () => {
         .mockImplementation(() => Promise.resolve(expiresAt));
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(401, {error: "Request failed with status code 401"});
+      fetchMock.onGet('/me').reply(401, 'Request failed with status code 401' );
+      // fetchMock.onGet('/me', () => {
+      //   throw new Error("Request failed with status code 401")
+      // })
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
