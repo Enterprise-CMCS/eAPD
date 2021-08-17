@@ -14,18 +14,18 @@ systemctl start mongod
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
-export OKTA_DOMAIN="https://test.idp.idm.cms.gov"
-export OKTA_SERVER_ID="aus4bfo99zdTbaChU297"
-export OKTA_CLIENT_ID="0oa4bfhqmijhhhjwv297"
-export OKTA_API_KEY="00S4oK6r556-RUSUbRUbx9RLnAsJlotYuVbL4AkypR"
-export JWT_SECRET="thisisnotthegreatestvariableintheworldjustatribute"
-export MONGO_DATABASE=""
-export MONGO_URL=""
-#export MONGO_INITDB_ROOT_USERNAME=""
-#export MONGO_INITDB_ROOT_PASSWORD=""
-#export MONGO_INITDB_DATABASE=""
-#export MONGO_DATABASE_USERNAME=""
-#export MONGO_DATABASE_PASSWORD=""
+export OKTA_DOMAIN="__OKTA_DOMAIN__"
+export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
+export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
+export OKTA_API_KEY="__OKTA_API_KEY__"
+export JWT_SECRET="__JWT_SECRET__"
+export MONGO_DATABASE="__MONGO_DATABASE__"
+export MONGO_URL="__MONGO_URL__"
+export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
+export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
+export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
+export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
+export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 sudo sh -c "echo license_key: '' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
@@ -184,4 +184,3 @@ su - ec2-user -c 'pm2 restart "eAPD API"'
 CWLAUNCHLOGCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/launch-log.json
-
