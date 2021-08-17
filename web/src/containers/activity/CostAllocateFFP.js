@@ -117,7 +117,7 @@ const CostAllocateFFP = ({
         ? <hr className="custom-hr" />
         : <h2 className="subsection--title ds-h2">Budget and FFP</h2> }
       {Object.keys(years).map(ffy => (
-        <Fragment key={ffy}>
+        <div key={ffy}>
           <table
             className="budget-table activity-budget-table"
             id={`activity${activityIndex}-ffy${ffy}`}
@@ -288,7 +288,7 @@ const CostAllocateFFP = ({
               year={ffy}
             />
           </div>
-        </Fragment>
+        </div>
       ))}
 
       <h3 className="subsection--title ds-h3">

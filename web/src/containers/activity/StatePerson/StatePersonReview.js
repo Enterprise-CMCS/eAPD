@@ -18,7 +18,6 @@ const StatePersonReview = ({
       onEditClick={expand}
       ariaLabel={`${index + 1}. ${title || 'Personnel title not specified'}`}
       objType="State Staff Expenses"
-
     >
       {description}
       <div className="ds-u-margin-top--2">
@@ -26,7 +25,7 @@ const StatePersonReview = ({
           <div key={year}>
             <strong>FFY {year} Cost: </strong>
             <Dollars>{amt}</Dollars> | <strong>FTEs: </strong>
-            {perc} | <strong>Total: </strong>
+            {perc === '' ? '0' : perc} | <strong>Total: </strong>
             <Dollars>{amt * perc}</Dollars>
           </div>
         ))}
