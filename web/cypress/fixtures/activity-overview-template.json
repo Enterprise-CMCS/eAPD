@@ -1,40 +1,48 @@
 {
-  "newActivityName": "SS Training App",
+  "newActivityName": "Claims Data Analytics",
 
   "activityOverview": [
     {
       "name": "Program Administration",
       "fundingType": "HIT",
-      "shortOverview": "This is the default activity, each APD has one.",
+      "shortOverview": "Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.",
       "startDate": [7, 14, 2021],
       "endDate": [3, 12, 2024],
-      "detailedDescription": "This is the detailed description for the Program Administration.",
-      "supportingJustificaions": "This text area is about the supporting justifications.",
+      "detailedDescription": "Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program. The modifications of the SLR for CMS program rule changes and guidance changes (Stage 3, IPPS, and OPPS) will require extensive development and implementation efforts and is essential to the effective administration of the Medicaid EHR Incentive Program. Modifications to the SLR are done in phases depending on how CMS rule changes occur. The implementation of the design elements will require provider onboarding activities to be initiated and completed including outreach and training for all program participants. The SLR will increase the efficiency with which Tycho Medicaid administers the program; allow for increased oversight and assure that the program is operated in accordance with the complex and evolving program rules and requirements.",
+      "supportingJustificaions": "The 2015-2017 rule changes are significant and wide ranging; minimally accommodating the new attestations will be problematic for the remainder of the program. Program benefits will potentially not be maximized. To be prepared for Stage 3 and to properly implement all 2015-2017 rule changes; Tycho plans to implement all necessary modifications.",
       "supportsMedicaid": "This activity support the medicaid standards and conditions." 
     },
     {
-      "name": "SS Training App",
+      "name": "Claims Data Analytics",
       "fundingType": "HIT",
-      "shortOverview": "This is where it all started!",
+      "shortOverview": "To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
       "startDate": [2, 24, 2032],
       "endDate": [8, 28, 2034],
-      "detailedDescription": "Hard work and S l e e p l e s s  N i g h t s",
-      "supportingJustificaions": "The SS training App has supporting justifications",
+      "detailedDescription": "Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the HIT Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required HIT changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.",
+      "supportingJustificaions": "Medicaid Claims Data Feed to the HIE",
       "supportsMedicaid": "This activity does support the medicaid standards and conditions." 
     }
   ],
 
   "outcomes": [
     {
-      "names": ["Is this the real life?", "No escape from reality"],
-      "metrics": [["Is this just fantasy", "Caught in a landslide"], ["Open your eyes", "Look up to the skies and see"]]
+      "names": ["Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.", "Provide support to EPs and EHs through attestation process."],
+      "metrics": [["Complete SLR modifications by 11/1/21", "Accept attestations through 4/30/22"], ["Guidance available on Tycho''s websites", "Office hours availble for EPs and EHs"]]
+    },
+    {
+      "names": ["Supplies driven across the continent", "Free community cooking lessons"],
+      "metrics": [["Provides supplies across the U.S.", "Must be completed by due date"], ["Gives opporunity to cook cheap meals", "Provides recepie save feature"]]
     }
   ],
 
   "milestones": [
     {
-      "names": ["Freddie Mercury", "Bon Jovi"],
-      "dates": [[10, 5, 1946], [3, 2, 1962]]
+      "names": ["Implementation of Final Rule and Stage 3 System Developments", "Environmental Scan Completion"],
+      "dates": [[10, 5, 2021], [3, 2, 2022]]
+    },
+    {
+      "names": ["Completion by the due date", "Follows the 3 guiding principles"],
+      "dates": [[12, 6, 2022], [3, 5, 2023]]
     }
   ],
 
@@ -90,16 +98,16 @@
 
   "privateContractors": [
     {
-      "names": ["Jasmine the shih tzu", "Bob the Builder"],
-      "descriptions": ["She is a lazy white fluffy dog, almost cat like", "Can he build it? Yes he can!"],
+      "names": ["Super SLR Incorporated", "Bob the Builder"],
+      "descriptions": ["Maintain SLR", "Can he build it? Yes he can!"],
       "start": [[12, 9, 2034], [2, 4, 2006]],
       "end": [[5, 12, 2040], [5, 16, 2008]],
       "totalCosts": [50000, 60000],
       "FFYcosts": [[25000, 25000], [30000, 30000]]
     },
     {
-      "names": ["Ash Catchem", "Teddy Bear"],
-      "descriptions": ["He likes to catch them all", "He is a big stuffed teddy bear"],
+      "names": ["Tech Consulting Inc.", "Interface Vendor Inc."],
+      "descriptions": ["Technology consulting and planning services.", "Hosting and development support."],
       "start": [[1, 5, 2124], [4, 7, 1980]],
       "end": [[3, 2, 2234], [1, 2, 3333]],
       "totalCosts": [80000, 3000],
@@ -109,12 +117,12 @@
 
   "costAllocation": [
     {
-      "description": "Actiity 1 description for overall cost allocation.",
+      "description": "Activity 1 description for overall cost allocation.",
       "FFYdescriptions": ["This is the Other Funding description for Activity 1 - FFY 2021", "This is the Other Funding description for Activity 1 - FFY 2022"],
       "costs": [5000, 8000]
     },
     {
-      "description": "Actiity 1 description for overall cost allocation.",
+      "description": "Activity 2 description for overall cost allocation.",
       "FFYdescriptions": ["This is the Other Funding description for Activity 2 - FFY 2021", "This is the Other Funding description for Activity 2 - FFY 2022"],
       "costs": [4000, 9000]
     }

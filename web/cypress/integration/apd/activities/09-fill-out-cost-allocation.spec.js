@@ -3,13 +3,13 @@
 /* eslint-disable prefer-arrow-callback */
 /// <reference types="cypress" />
 
-// import BudgetPage from '../../../page-objects/budget-page';
+import BudgetPage from '../../../page-objects/budget-page';
 import PopulatePage from '../../../page-objects/populate-page';
 
 // Assumes a 2nd activity exists
-describe('Filling out section in the activity overview page', () => {
+describe('Filling out cost allocation page', () => {
   const populatePage = new PopulatePage();
-  // const budgetPage = new BudgetPage();
+  const budgetPage = new BudgetPage();
 
   let dashboardUrl;
   const years = [2021, 2022];
@@ -38,7 +38,18 @@ describe('Filling out section in the activity overview page', () => {
       years
     );
 
-    // budgetPage.checkActivityTotalCostTable();
+    // Deleted the first one from each catagory
+    const staff = this.data.staff[1];
+    const expenses = this.data.expenses[1];
+    const contractor = this.data.privateContractors[0];
+
+    for (let i = 0; i < years.length; i += 1) {
+      const FFYtotal =
+        staff.costs[i] * staff.ftes[i] +
+        expenses.costs[i] +
+        contractor.FFYcosts[1][i];
+      budgetPage.checkActivityTotalCostTable(FFYtotal, allocation.costs[i], i);
+    }
 
     cy.wait(1000);
     cy.goToActivityDashboard();
@@ -56,8 +67,28 @@ describe('Filling out section in the activity overview page', () => {
       years
     );
 
-    // budgetPage.checkActivityTotalCostTable(); FOR QUARTER, CHECK TIF DMs
-    cy.wait(1000);
+    const staff1 = this.data.staff[2];
+    const staff2 = this.data.staff[3];
+    const expense1 = this.data.expenses[2];
+    const expense2 = this.data.expenses[3];
+    const contractor = this.data.privateContractors[1];
+
+    for (let i = 0; i < years.length; i += 1) {
+      const staffTotal =
+        staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
+
+      const expenseTotal = expense1.costs[i] + expense2.costs[i];
+
+      const contractorTotal =
+        contractor.FFYcosts[0][i] +
+        contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1];
+
+      const FFYtotal = staffTotal + expenseTotal + contractorTotal;
+
+      budgetPage.checkActivityTotalCostTable(FFYtotal, allocation.costs[i], i);
+    }
+
+    cy.wait(2000);
     cy.goToActivityDashboard();
   });
 });

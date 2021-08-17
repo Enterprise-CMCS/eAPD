@@ -7,7 +7,7 @@ import ActivityPage from '../../../page-objects/activity-page';
 import PopulatePage from '../../../page-objects/populate-page';
 
 // Assumes a 2nd activity exists
-describe('Filling out section in the activity overview page', () => {
+describe('Filling out private contractors page', () => {
   const populatePage = new PopulatePage();
   const activityPage = new ActivityPage();
 

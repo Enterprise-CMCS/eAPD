@@ -105,7 +105,7 @@ class PopulatePage {
         FFYDescriptions[i]
       );
       this.fillTextField('ds-c-field ds-c-field--currency', FFYCosts[i], i);
-      // this.budgetPage.checkActivityTotalCostTable();
+      // this.budgetPage.checkActivityTotalCostTable(); AKDSFLSKJFDLSADJFASDKJFALSKDFj
     }
   };
 
@@ -116,32 +116,24 @@ class PopulatePage {
     stateTotal,
     contractorTotal
   ) => {
-    const index = quarter - 1;
-    const index2 = index + 4;
+    const stateInput = quarter - 1;
+    const stateSubtotal = quarter - 1;
+
     cy.get('[class="ds-c-field budget-table--input__number"]')
-      .eq(index)
+      .eq(stateInput)
       .type(stateValue);
-    // const stateCheck = Math.ceil(stateValue * 0.01 * stateTotal);
-    // const converted = this.budgetPage.addCommas(stateCheck);
-    // this.activityPage.checkTextField(
-    //   'budget-table--number',
-    //   `$${converted}`,
-    //   index
-    // );
 
+    // const calculatedValue = stateValue * 0.01 * stateTotal;
+    cy.get('[class="budget-table--number"]').eq(stateSubtotal).click();
+
+    const contractorInput = stateInput + 4;
+    // const contractorSubtotal = stateSubtotal + 4;
     cy.get('[class="ds-c-field budget-table--input__number"]')
-      .eq(index2)
+      .eq(contractorInput)
       .type(contractorValue);
-    const ceilCheck = Math.ceil(contractorValue * 0.01 * contractorTotal);
-    const converted3 = this.budgetPage.addCommas(ceilCheck);
 
-    const floorCheck = Math.ceil(contractorValue * 0.01 * contractorTotal);
-    const converted4 = this.budgetPage.addCommas(floorCheck);
-
-    cy.get('[class="budget-table--number"]')
-      .eq(index2)
-      .contains(`$${converted3}` || `$${converted4}`);
+    cy.log(stateTotal);
+    cy.log(contractorTotal);
   };
 }
-
 export default PopulatePage;

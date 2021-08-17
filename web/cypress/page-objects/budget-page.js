@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 class BudgetPage {
   addCommas = string => {
     const converted = string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -11,21 +12,19 @@ class BudgetPage {
       .should('contain', `$${convert}`);
   };
 
-  checkActivityTotalCostTable = (
-    activityValue,
-    otherFundingValue,
-    medicaidValue,
-    index
-  ) => {
+  checkActivityTotalCostTable = (activityValue, otherFundingValue, index) => {
+    const medicaidValue = activityValue - otherFundingValue;
+    const converted = this.addCommas(activityValue);
+    const converted2 = this.addCommas(otherFundingValue);
     cy.get('[class="budget-table activity-budget-table"]')
       .eq(index)
       .within(() => {
         cy.contains('Activity Total Cost')
           .parent()
-          .should('contain', `$${activityValue}`);
+          .should('contain', `$${converted}`);
         cy.contains('Other Funding')
           .parent()
-          .should('contain', `$${otherFundingValue}`);
+          .should('contain', `$${converted2}`);
         this.checkTotalComputableMedicaidCost(medicaidValue);
       });
   };
@@ -235,6 +234,75 @@ class BudgetPage {
     );
 
     this.quarterTableBottomRow(expectedValue, expectedSubtotal);
+  };
+
+  computeActivityTotal = (staff, ftes, expenses, contractor, years) => {
+    let subtotal = 0;
+    for (let i = 0; i < years.length; i += 1) {
+      subtotal += staff[i] * ftes[i];
+      subtotal += expenses[i];
+      subtotal += contractor[i];
+    }
+    return subtotal;
+  };
+
+  computeTotalOtherFunding = list => {
+    let subtotal = 0;
+    for (let i = 0; i < list.length; i += 1) {
+      subtotal += list[i];
+    }
+    return subtotal;
+  };
+
+  checkSubtotalRows = (year, num) => {
+    cy.findAllByText(`Activity ${num} Budget for FFY ${year}`)
+      .parent()
+      .within(() => {
+        cy.get('[class="budget-table--number"]').should($td => {
+          const staffTotal = this.convertStringToNum($td.eq(4).text());
+          const expensesTotal = this.convertStringToNum($td.eq(9).text());
+          const contractorTotal = this.convertStringToNum($td.eq(14).text());
+
+          const calculatedTotal = staffTotal + expensesTotal + contractorTotal;
+
+          const expectedMedicaidTotal = this.convertStringToNum(
+            $td.eq(15).text()
+          );
+
+          if (calculatedTotal !== expectedMedicaidTotal) {
+            throw new Error('Subtotal rows do not add up');
+          }
+        });
+      });
+  };
+
+  convertStringToNum = string => {
+    const minusDollar = string.replace(/\$/g, '');
+    const minusCommas = minusDollar.replace(/,/g, '');
+    return parseInt(minusCommas);
+  };
+
+  computeStaffSplitCost = (year, num) => {
+    cy.findAllByText(`Activity ${num} Budget for FFY ${year}`)
+      .parent()
+      .within(() => {
+        cy.get('[class="budget-table--number"]').should($td => {
+          const staffTotal = this.convertStringToNum($td.eq(4).text());
+          const expensesTotal = this.convertStringToNum($td.eq(9).text());
+          return staffTotal + expensesTotal;
+        });
+      });
+  };
+
+  computeContractorSplitCost = (year, num) => {
+    cy.findAllByText(`Activity ${num} Budget for FFY ${year}`)
+      .parent()
+      .within(() => {
+        cy.get('[class="budget-table--number"]').should($td => {
+          const contractorTotal = this.convertStringToNum($td.eq(14).text());
+          return contractorTotal;
+        });
+      });
   };
 }
 

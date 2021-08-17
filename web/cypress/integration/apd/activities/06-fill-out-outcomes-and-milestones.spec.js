@@ -5,7 +5,7 @@
 import ActivityPage from '../../../page-objects/activity-page';
 import PopulatePage from '../../../page-objects/populate-page';
 
-describe('Filling out section in the activity overview page', () => {
+describe('Filling out Outcomes and Milestones page', () => {
   const populatePage = new PopulatePage();
   const activityPage = new ActivityPage();
 
@@ -21,11 +21,12 @@ describe('Filling out section in the activity overview page', () => {
   beforeEach(function () {
     cy.fixture('activity-overview-template.json').as('data');
     cy.useStateStaff(dashboardUrl);
-    cy.contains('Edit').click();
-    cy.contains('Outcomes and milestones').click();
   });
 
-  it('fills out outcomes', function () {
+  it('fills out outcomes in activity 1', function () {
+    cy.contains('Edit').click();
+    cy.contains('Outcomes and milestones').click();
+
     const outcomes = this.data.outcomes[0];
     for (let i = 0; i < 2; i += 1) {
       if (i === 0) {
@@ -49,28 +50,29 @@ describe('Filling out section in the activity overview page', () => {
       );
     }
 
-    const checkOutcomes = this.data.outcomes[0];
-
     cy.contains('Edit').click();
     cy.contains('Delete').click();
     cy.contains('Delete Metric?').should('exist');
     cy.findAllByText('Delete').eq(3).click();
     cy.findByRole('button', { name: /Done/i }).click();
     cy.contains('Delete Metric?').should('not.exist');
-    cy.contains(checkOutcomes.metrics[0][0]).should('not.exist');
-    cy.contains(`1. ${checkOutcomes.metrics[0][1]}`).should('exist');
+    cy.contains(outcomes.metrics[0][0]).should('not.exist');
+    cy.contains(`1. ${outcomes.metrics[0][1]}`).should('exist');
 
     cy.contains('Delete').click();
     cy.contains('Delete Outcome and Metrics?').should('exist');
     cy.findAllByText('Delete').eq(2).click();
-    cy.contains(checkOutcomes.names[0]).should('not.exist');
-    cy.contains(`Outcome: ${checkOutcomes.names[1]}`).should('exist');
+    cy.contains(outcomes.names[0]).should('not.exist');
+    cy.contains(`Outcome: ${outcomes.names[1]}`).should('exist');
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.goToActivityDashboard();
   });
 
-  it('fills out milestones', function () {
-    const milestone = this.data.milestones[0];
+  it('fills out milestones in activity 1', function () {
+    cy.contains('Edit').click();
+    cy.contains('Outcomes and milestones').click();
+
+    const milestones = this.data.milestones[0];
     for (let i = 0; i < 2; i += 1) {
       if (i === 0) {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
@@ -80,11 +82,11 @@ describe('Filling out section in the activity overview page', () => {
         cy.findAllByText('Edit').eq(2).click();
       }
 
-      populatePage.fillMilestoneForm(milestone.names[i], milestone.dates[i]);
+      populatePage.fillMilestoneForm(milestones.names[i], milestones.dates[i]);
 
       activityPage.checkMilestoneOutput(
-        `${i + 1}. ${milestone.names[i]}`,
-        `${milestone.dates[i][0]}/${milestone.dates[i][1]}/${milestone.dates[i][2]}`
+        `${i + 1}. ${milestones.names[i]}`,
+        `${milestones.dates[i][0]}/${milestones.dates[i][1]}/${milestones.dates[i][2]}`
       );
     }
 
@@ -92,8 +94,29 @@ describe('Filling out section in the activity overview page', () => {
     cy.contains('Delete Milestone?').should('exist');
     cy.findAllByText('Delete').eq(3).click();
     cy.contains('Delete Milestone?').should('not.exist');
-    cy.contains(milestone.names[0]).should('not.exist');
-    cy.contains(`1. ${milestone.names[1]}`).should('exist');
+    cy.contains(milestones.names[0]).should('not.exist');
+    cy.contains(`1. ${milestones.names[1]}`).should('exist');
+    cy.goToActivityDashboard();
+  });
+
+  it('fills out outcomes and milestones in activity 2', function () {
+    cy.findAllByText('Edit').eq(1).click();
+    cy.findAllByText('Outcomes and milestones').eq(1).click();
+
+    const outcomes = this.data.outcomes[1];
+    const milestones = this.data.milestones[1];
+
+    for (let i = 0; i < 2; i += 1) {
+      cy.findByRole('button', { name: /Add Outcome/i }).click();
+      populatePage.fillOutcomeForm(
+        outcomes.names[i],
+        outcomes.metrics[i][0],
+        outcomes.metrics[i][1]
+      );
+
+      cy.findByRole('button', { name: /Add Milestone/i }).click();
+      populatePage.fillMilestoneForm(milestones.names[i], milestones.dates[i]);
+    }
     cy.goToActivityDashboard();
   });
 });
