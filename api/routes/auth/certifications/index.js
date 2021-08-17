@@ -1,7 +1,7 @@
 const logger = require('../../../logger')('auth certifications route index');
-const post = require('./post');
+const files = require('./files');
 
-module.exports = (app, postEndpoint = post) => {
+module.exports = (app, filesEndpoint = files) => {
   logger.debug('setting up POST endpoint');
-  postEndpoint(app);
+  filesEndpoint(app);
 };

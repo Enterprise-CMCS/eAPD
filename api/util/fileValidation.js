@@ -37,6 +37,14 @@ const validateImage = async buffer => {
     });
 };
 
+const validateDoc = async buffer => {
+  // Todo: Validate the doc type extension. Probably
+  // only support pdf and doc/docx
+  console.log("file info...", buffer);
+  return buffer;
+}
+
 module.exports = {
-  validateFile: validateImage
+  validateFile: validateImage,
+  validateDoc
 };

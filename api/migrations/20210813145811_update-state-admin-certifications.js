@@ -1,7 +1,7 @@
 exports.up = async knex => {
   await knex.schema.table('state_admin_certifications', table => {
     table
-      .uuid('fileId')
+      .string('fileId', 64)
       .comment(
         'unique identifier shared with the storage system; this value could be a foreign key, depending on the storage mechanism being used'
       );

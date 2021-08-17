@@ -2,6 +2,7 @@ const knex = require('./knex');
 const affiliations = require('./affiliations');
 const apds = require('./apds');
 const auth = require('./auth');
+const certifications = require('./certifications');
 const files = require('./files');
 const events = require('./events');
 const roles = require('./roles');
@@ -13,6 +14,7 @@ module.exports = {
   ...affiliations,
   ...auth,
   ...apds,
+  ...certifications,
   ...files,
   ...events,
   ...roles,
