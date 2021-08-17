@@ -667,12 +667,7 @@ jobs:
                 --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME" \
                 --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD" \
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
-                --MONGO_URL "$PREVIEW_MONGO_URL" \
-                --MONGO_INITDB_ROOT_USERNAME "$PREVIEW_MONGO_INITDB_ROOT_USERNAME" \
-                --MONGO_INITDB_ROOT_PASSWORD "$PREVIEW_MONGO_INITDB_ROOT_PASSWORD" \
-                --MONGO_INITDB_DATABASE "$PREVIEW_MONGO_INITDB_DATABASE" \
-                --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME"\
-                --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD"
+                --MONGO_URL "$PREVIEW_MONGO_URL" 
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
@@ -715,4 +710,3 @@ jobs:
       - store_artifacts:
           path: /tmp/frontend.zip
           destination: frontend.zip
-
