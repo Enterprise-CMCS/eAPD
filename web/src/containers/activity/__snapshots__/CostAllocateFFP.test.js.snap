@@ -898,40 +898,32 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
               },
             }
           }
-        }
-      />
-    </tbody>
-  </table>
-  <table
-    className="budget-table activity-budget-table"
-  >
-    <tbody>
-      <tr
-        className="budget-table--subtotal budget-table--row__header"
-      >
-        <th
-          colSpan="5"
-        >
-          Activity Total Cost
-        </th>
-        <td
-          className="budget-table--number"
-        >
-          <Dollars>
-            1008
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        className="title"
-      >
-        <td>
-          Other Funding
-        </td>
-        <td
-          colSpan="3"
         />
-        <tr>
+      </tbody>
+    </table>
+    <table
+      className="budget-table activity-budget-table"
+    >
+      <tbody>
+        <tr
+          className="budget-table--subtotal budget-table--row__header"
+        >
+          <th
+            colSpan="5"
+          >
+            Activity Total Cost
+          </th>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              1008
+            </Dollars>
+          </td>
+        </tr>
+        <tr
+          className="title"
+        >
           <td>
             Other Funding
           </td>
@@ -1139,40 +1131,32 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
               },
             }
           }
-        }
-      />
-    </tbody>
-  </table>
-  <table
-    className="budget-table activity-budget-table"
-  >
-    <tbody>
-      <tr
-        className="budget-table--subtotal budget-table--row__header"
-      >
-        <th
-          colSpan="5"
-        >
-          Activity Total Cost
-        </th>
-        <td
-          className="budget-table--number"
-        >
-          <Dollars>
-            7008
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        className="title"
-      >
-        <td>
-          Other Funding
-        </td>
-        <td
-          colSpan="3"
         />
-        <tr>
+      </tbody>
+    </table>
+    <table
+      className="budget-table activity-budget-table"
+    >
+      <tbody>
+        <tr
+          className="budget-table--subtotal budget-table--row__header"
+        >
+          <th
+            colSpan="5"
+          >
+            Activity Total Cost
+          </th>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              7008
+            </Dollars>
+          </td>
+        </tr>
+        <tr
+          className="title"
+        >
           <td>
             Other Funding
           </td>
