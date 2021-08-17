@@ -22,6 +22,11 @@ describe('<ManageRoleDialog />', () => {
     hideManageModal: jest.fn(),
     handleAffiliationUpdate: jest.fn()
   };
+
+  test('matches snapshot', () => {
+    expect(shallow(<ManageRoleDialog {...props} />)).toMatchSnapshot();
+  });
+
   test('renders dialog box title', () => {
     const component = shallow(<ManageRoleDialog {...props} />);
     expect(component.find('Edit Role')).toBeTruthy();

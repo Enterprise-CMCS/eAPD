@@ -225,6 +225,10 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       options={
         Array [
           Object {
+            "label": "Select an option",
+            "value": "",
+          },
+          Object {
             "label": "90-10",
             "value": "90-10",
           },
@@ -520,6 +524,10 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
       onChange={[Function]}
       options={
         Array [
+          Object {
+            "label": "Select an option",
+            "value": "",
+          },
           Object {
             "label": "90-10",
             "value": "90-10",

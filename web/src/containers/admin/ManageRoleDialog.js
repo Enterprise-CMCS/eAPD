@@ -62,6 +62,8 @@ const ManageRoleDialog = ({
     return updatedRole;
   });
 
+  dropdownOptions.unshift({label:'Select an option', value:'', key:'selectAnOption'})
+
   return (
     <Dialog
       onExit={hideManageModal}

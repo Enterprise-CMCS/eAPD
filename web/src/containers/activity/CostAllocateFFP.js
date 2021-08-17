@@ -214,6 +214,7 @@ const CostAllocateFFP = ({
                   label="federal-state split"
                   labelClassName="sr-only"
                   options={[
+                    { label: "Select an option", value:'' },
                     { label: '90-10', value: '90-10' },
                     { label: '75-25', value: '75-25' },
                     { label: '50-50', value: '50-50' }

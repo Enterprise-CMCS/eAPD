@@ -43,7 +43,7 @@ const NonPersonnelCostForm = ({
     'Administrative operations',
     'Miscellaneous expenses for the project'
   ].map(item => ({ label: item, value: item }));
-
+  categories.unshift({label:'Select an option', value:''})
   return (
     <Fragment>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
