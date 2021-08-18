@@ -4,22 +4,18 @@ const {
 } = require('../../openAPI/helpers');
 
 const openAPI = {
-  '/auth/certificates': {
+  '/auth/certificates/files': {
     post: {
       tags: ['Certificates', 'State Admins', 'files'],
       summary: 'Upload a state admin certification file',
       description:
-        'Uploads a certification file that authorizes a user to be granted the state admin role.',
+        'Uploads a state admin certification letter.',
       requestBody: {
         content: {
           'multipart/form-data': {
             schema: {
               type: 'object',
               properties: {
-                metadata: {
-                  type: 'object',
-                  description: 'arbitrary metadata to attach to the file'
-                },
                 file: {
                   type: 'string',
                   format: 'binary',
@@ -50,7 +46,7 @@ const openAPI = {
             'Invalid request'
         },
         403: {
-          description: 'The user does not have sufficient authorization to upload data'
+          description: 'The user does not have sufficient authorization to upload certification letters'
         },
         415: {
           description: 'The file is not a valid format'
