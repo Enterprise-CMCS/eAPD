@@ -1,27 +1,35 @@
 const mongoose = require('mongoose');
-const jsonPatchPlugin = require('mongoose-patcher');
 
-const quarterlyFFP = new mongoose.Schema({
-  combined: Number,
-  contractors: Number,
-  inHouse: Number
-});
-
-const federalCitation = new mongoose.Schema({
-  title: String,
-  checked: {
-    type: Boolean,
-    default: null
+const quarterlyFFP = new mongoose.Schema(
+  {
+    combined: Number,
+    contractors: Number,
+    inHouse: Number
   },
-  explanation: String
-});
+  { _id: false }
+);
 
-const incentivePayment = new mongoose.Schema({
-  1: Number,
-  2: Number,
-  3: Number,
-  4: Number
-});
+const federalCitation = new mongoose.Schema(
+  {
+    title: String,
+    checked: {
+      type: Boolean,
+      default: null
+    },
+    explanation: String
+  },
+  { _id: false }
+);
+
+const incentivePayment = new mongoose.Schema(
+  {
+    1: Number,
+    2: Number,
+    3: Number,
+    4: Number
+  },
+  { _id: false }
+);
 
 const apdSchema = new mongoose.Schema({
   name: String,
@@ -46,18 +54,23 @@ const apdSchema = new mongoose.Schema({
   },
   activities: [
     {
+      _id: false,
       alternatives: String,
       contractorResources: [
         {
+          _id: false,
           description: String,
           end: Date,
           hourly: {
             data: {
               type: Map,
-              of: new mongoose.Schema({
-                hours: Number,
-                rate: Number
-              })
+              of: new mongoose.Schema(
+                {
+                  hours: Number,
+                  rate: Number
+                },
+                { _id: false }
+              )
             },
             useHourly: Boolean
           },
@@ -72,26 +85,33 @@ const apdSchema = new mongoose.Schema({
       ],
       costAllocation: {
         type: Map,
-        of: new mongoose.Schema({
-          ffp: {
-            federal: Number,
-            state: Number
+        of: new mongoose.Schema(
+          {
+            ffp: {
+              federal: Number,
+              state: Number
+            },
+            other: Number
           },
-          other: Number
-        })
+          { _id: false }
+        )
       },
       costAllocationNarrative: {
         methodology: String,
         years: {
           type: Map,
-          of: new mongoose.Schema({
-            otherSources: String
-          })
+          of: new mongoose.Schema(
+            {
+              otherSources: String
+            },
+            { _id: false }
+          )
         }
       },
       description: String,
       expenses: [
         {
+          _id: false,
           description: String,
           category: String,
           years: {
@@ -107,9 +127,11 @@ const apdSchema = new mongoose.Schema({
       name: String,
       outcomes: [
         {
+          _id: false,
           outcome: String,
           metrics: [
             {
+              _id: false,
               metric: String
             }
           ]
@@ -119,6 +141,7 @@ const apdSchema = new mongoose.Schema({
       plannedStartDate: Date,
       schedule: [
         {
+          _id: false,
           endDate: Date,
           milestone: String
         }
@@ -129,26 +152,33 @@ const apdSchema = new mongoose.Schema({
       },
       statePersonnel: [
         {
+          _id: false,
           title: String,
           description: String,
           years: {
             type: Map,
-            of: new mongoose.Schema({
-              amt: Number,
-              perc: Number
-            })
+            of: new mongoose.Schema(
+              {
+                amt: Number,
+                perc: Number
+              },
+              { _id: false }
+            )
           }
         }
       ],
       summary: String,
       quarterlyFFP: {
         type: Map,
-        of: new mongoose.Schema({
-          1: quarterlyFFP,
-          2: quarterlyFFP,
-          3: quarterlyFFP,
-          4: quarterlyFFP
-        })
+        of: new mongoose.Schema(
+          {
+            1: quarterlyFFP,
+            2: quarterlyFFP,
+            3: quarterlyFFP,
+            4: quarterlyFFP
+          },
+          { _id: false }
+        )
       }
     }
   ],
@@ -178,6 +208,7 @@ const apdSchema = new mongoose.Schema({
   },
   keyPersonnel: [
     {
+      _id: false,
       name: String,
       position: String,
       email: String,
@@ -198,26 +229,29 @@ const apdSchema = new mongoose.Schema({
   narrativeMMIS: String,
   previousActivityExpenses: {
     type: Map,
-    of: new mongoose.Schema({
-      hithie: {
-        federalActual: Number,
-        totalApproved: Number
-      },
-      mmis: {
-        50: {
+    of: new mongoose.Schema(
+      {
+        hithie: {
           federalActual: Number,
           totalApproved: Number
         },
-        75: {
-          federalActual: Number,
-          totalApproved: Number
-        },
-        90: {
-          federalActual: Number,
-          totalApproved: Number
+        mmis: {
+          50: {
+            federalActual: Number,
+            totalApproved: Number
+          },
+          75: {
+            federalActual: Number,
+            totalApproved: Number
+          },
+          90: {
+            federalActual: Number,
+            totalApproved: Number
+          }
         }
-      }
-    })
+      },
+      { _id: false }
+    )
   },
   previousActivitySummary: String,
   programOverview: String,
@@ -235,10 +269,20 @@ const apdSchema = new mongoose.Schema({
       zip: String
     }
   },
-  years: [String]
+  years: [
+    {
+      _id: false,
+      type: String,
+      validate: {
+        validator: v => {
+          const re = /^[0-9]{4}$/;
+          return v == null || re.test(v);
+        },
+        message: 'Provided year is invalid.'
+      }
+    }
+  ]
 });
-
-apdSchema.plugin(jsonPatchPlugin, { autosave: true });
 
 const APD = mongoose.model('APD', apdSchema);
 
