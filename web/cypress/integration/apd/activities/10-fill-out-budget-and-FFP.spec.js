@@ -112,27 +112,46 @@ describe('Filling out budget and FFP', () => {
             .parent()
             .should('contain', `$${budgetPage.addCommas(otherFFYfunding)}`);
 
-          let staffTotal = budgetPage.computeStaffSplitCost(years[i], 1);
-          let contractorTotal = budgetPage.computeContractorSplitCost(
-            years[i],
-            1
-          );
-          if (i === 0) {
-            cy.get('[class="ds-c-field"]').select('75-25');
-            staffTotal *= 0.75;
-            contractorTotal *= 0.75;
-          } else {
-            cy.get('[class="ds-c-field"]').select('50-50');
-            staffTotal *= 0.5;
-            contractorTotal *= 0.5;
-          }
+          cy.get('[class="budget-table--number"]').should($td => {
+            const staffSubtotal = budgetPage.convertStringToNum(
+              $td.eq(4).text()
+            );
+            const expensesSubtotal = budgetPage.convertStringToNum(
+              $td.eq(9).text()
+            );
+            let contractorTotal = budgetPage.convertStringToNum(
+              $td.eq(14).text()
+            );
 
-          cy.get('[class="budget-table"]').within(() => {
-            populatePage.fillQuarter(1, 25, 25, staffTotal, contractorTotal);
-            populatePage.fillQuarter(2, 25, 25, staffTotal, contractorTotal);
-            populatePage.fillQuarter(3, 25, 25, staffTotal, contractorTotal);
-            populatePage.fillQuarter(4, 25, 25, staffTotal, contractorTotal);
+            let staffTotal = staffSubtotal + expensesSubtotal;
+
+            if (i === 0) {
+              cy.get('[class="ds-c-field"]').select('75-25');
+              staffTotal *= 0.75;
+              contractorTotal *= 0.75;
+            } else {
+              cy.get('[class="ds-c-field"]').select('50-50');
+              staffTotal *= 0.5;
+              contractorTotal *= 0.5;
+            }
           });
+
+          // if (i === 0) {
+          //   cy.get('[class="ds-c-field"]').select('75-25');
+          //   staffTotal *= 0.75;
+          //   contractorTotal *= 0.75;
+          // } else {
+          //   cy.get('[class="ds-c-field"]').select('50-50');
+          //   staffTotal *= 0.5;
+          //   contractorTotal *= 0.5;
+          // }
+
+          // cy.get('[class="budget-table"]').within(() => {
+          //   populatePage.fillQuarter(1, 25, 25, staffTotal, contractorTotal);
+          //   populatePage.fillQuarter(2, 25, 25, staffTotal, contractorTotal);
+          //   populatePage.fillQuarter(3, 25, 25, staffTotal, contractorTotal);
+          //   populatePage.fillQuarter(4, 25, 25, staffTotal, contractorTotal);
+          // });
         });
     }
     // const activityTotal = budgetPage.computeActivityTotal(
