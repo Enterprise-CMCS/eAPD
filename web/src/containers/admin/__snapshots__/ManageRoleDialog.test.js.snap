@@ -79,7 +79,7 @@ exports[`<ManageRoleDialog /> matches snapshot 1`] = `
       ]
     }
     size="medium"
-    value="State Admin"
+    value={null}
   />
 </Dialog>
 `;

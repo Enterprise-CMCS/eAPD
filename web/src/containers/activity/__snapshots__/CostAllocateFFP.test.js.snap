@@ -226,7 +226,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         Array [
           Object {
             "label": "Select an option",
-            "value": "",
+            "value": "0-100",
           },
           Object {
             "label": "90-10",
@@ -526,7 +526,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         Array [
           Object {
             "label": "Select an option",
-            "value": "",
+            "value": "0-100",
           },
           Object {
             "label": "90-10",

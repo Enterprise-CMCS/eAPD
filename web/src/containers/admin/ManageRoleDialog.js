@@ -20,7 +20,7 @@ const ManageRoleDialog = ({
     if (selectedRoleName) {
       return findRoleByName(selectedRoleName) || roleTypes[0];
     }
-    return roleTypes[0];
+    return '';
   };
 
   const getRoleName = selectedRoleName => {

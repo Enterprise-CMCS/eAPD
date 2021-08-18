@@ -36,7 +36,7 @@ describe('activities reducer helpers', () => {
   it('can create a new non-personnel expense', () => {
     expect(newExpense(['1472'])).toEqual({
       key: '--- key ---',
-      category: 'Hardware, software, and licensing',
+      category: '',
       description: '',
       years: { 1472: 0 }
     });
@@ -78,7 +78,7 @@ describe('activities reducer helpers', () => {
     expect(newActivity({ years: ['2020'] })).toEqual({
       alternatives: '',
       contractorResources: [],
-      costAllocation: { 2020: { other: 0, ffp: { federal: 90, state: 10 } } },
+      costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
       costAllocationNarrative: {
         2020: { otherSources: '' },
         methodology: ''

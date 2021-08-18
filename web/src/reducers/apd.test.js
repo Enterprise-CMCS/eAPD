@@ -392,7 +392,7 @@ describe('APD reducer', () => {
         activities: [
           {
             costAllocation: {
-              1741: { other: 0, ffp: { federal: 90, state: 10 } },
+              1741: { other: 0, ffp: { federal: 0, state: 100 } },
               1742: 'yes',
               1743: 'no'
             },
@@ -813,7 +813,7 @@ describe('APD reducer', () => {
                 alternatives: '',
                 contractorResources: [],
                 costAllocation: {
-                  1787: { ffp: { federal: 90, state: 10 }, other: 0 }
+                  1787: { ffp: { federal: 0, state: 100 }, other: 0 }
                 },
                 costAllocationNarrative: {
                   1787: { otherSources: '' },
@@ -1004,7 +1004,7 @@ describe('APD reducer', () => {
             {
               expenses: [
                 {
-                  category: 'Hardware, software, and licensing',
+                  category: '',
                   description: '',
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   years: {
