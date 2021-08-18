@@ -42,7 +42,6 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = 'update something';
 
       const response = await api.patch(url(akAPDId), data);
-      delete response?.data?.apd?.updated;
 
       expect(response.status).toEqual(400);
       expect(response.data.errors).not.toBeNull();
@@ -59,10 +58,15 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       ];
 
       const response = await api.patch(url(akAPDId), data);
-      delete response?.data?.apd?.updated;
 
       expect(response.status).toEqual(200);
-      expect(response.data).toMatchSnapshot();
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
 
     it('with a valid patch that also attempts to update a readonly property', async () => {
@@ -86,12 +90,14 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       // it'll change with each test run.  Rather than figure out something
       // fancy with the snapshots, just pull out the date and test it with a
       // regex.
-      const { apd: { updated } = {} } = response.data;
-      delete response?.data?.apd?.updated;
-
       expect(response.status).toEqual(200);
-      expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
-      expect(response.data).toMatchSnapshot();
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
 
     it(`patch succeeds with an invalid date`, async () => {
@@ -109,12 +115,14 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       // it'll change with each test run.  Rather than figure out something
       // fancy with the snapshots, just pull out the date and test it with a
       // regex.
-      const { apd: { updated } = {} } = response.data;
-      delete response?.data?.apd?.updated;
-
       expect(response.status).toEqual(200);
-      expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
-      expect(response.data).toMatchSnapshot();
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
 
     it('prevents a dangerous value from being stored', async () => {
@@ -129,11 +137,16 @@ describe('APD endpoint | PATCH /apds/:id', () => {
 
       const response = await api.patch(url(akAPDId), data);
       const { apd: { programOverview } = {} } = response.data;
-      delete response?.data?.apd?.updated;
 
       expect(response.status).toEqual(200);
       expect(programOverview).toEqual('<a>XSS</a>');
-      expect(response.data).toMatchSnapshot();
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
 
     it('with a valid patch that also attempts to update a readonly property', async () => {
@@ -157,11 +170,16 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       // it'll change with each test run.  Rather than figure out something
       // fancy with the snapshots, just pull out the date and test it with a
       // regex.
-      delete response?.data?.apd?.updated;
 
       expect(response.status).toEqual(200);
       expect(response.data.apd.status).toEqual('draft');
-      expect(response.data).toMatchSnapshot();
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
   });
 });
