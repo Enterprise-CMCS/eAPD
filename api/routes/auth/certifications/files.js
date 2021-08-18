@@ -16,10 +16,10 @@ module.exports = (
     crypto = nodeCrypto
   } = {}
 ) => {
-  logger.silly('setting up POST /auth/certificates/files route');
+  logger.silly('setting up POST /auth/certifications/files route');
 
   app.post(
-    '/auth/certificates/files',
+    '/auth/certifications/files',
     loggedIn,
     can('edit-state-certifications'),
     multer().single('file'),
@@ -46,7 +46,7 @@ module.exports = (
             logger.error({ error: `error persisting file: ${e}`})
             throw e;
           }
-          res.send({ url: `/auth/certificates/files/${fileId}` });        
+          res.send({ url: `/auth/certifications/files/${fileId}` });        
         }       
       } catch (e) {
         logger.error({ id: req.id, message: e });
