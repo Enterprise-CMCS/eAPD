@@ -17,7 +17,8 @@ exports.seed = async knex => {
     return {
       username:certification.uid,
       changeDate:format( new Date(), 'yyyy-MM-dd HH:mm:ss'),
-      changedBy: 'seeds'
+      changedBy: 'seeds',
+      changeType: 'add'
     }
   })
 
