@@ -31,6 +31,7 @@ Anticipated release: July 28, 2021
 - added end-to-end test for APD overview section ([#3282])
 - added end-to-end tests for filling out key personnel page ([#3284])
 - added end-to-end tests for previous activities page ([#3312])
+- fixed export view of activity budgets ([#3388])
 
 # Previous releases
 
@@ -54,3 +55,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3282]: https://github.com/CMSgov/eAPD/issues/3282
 [#3284]: https://github.com/CMSgov/eAPD/issues/3284
 [#3312]: https://github.com/CMSgov/eAPD/issues/3312
+[#3388]: https://github.com/CMSgov/eAPD/issues/3388
