@@ -15,6 +15,7 @@ describe('Filling out budget and FFP', () => {
   let dashboardUrl;
   const splitVals = ['90-10', '75-25', '50-50'];
   const years = [2021, 2022];
+  const split = ['75-25', '50-50'];
 
   before(() => {
     cy.useStateStaff();
@@ -81,6 +82,7 @@ describe('Filling out budget and FFP', () => {
     const allocation = this.data.costAllocation[0];
 
     for (let i = 0; i < years.length; i += 1) {
+      cy.get('[class="ds-c-field"]').eq(i).select(split[i]);
       cy.findAllByText(`Activity 1 Budget for FFY ${years[i]}`)
         .parent()
         .parent()
@@ -112,6 +114,23 @@ describe('Filling out budget and FFP', () => {
             .parent()
             .should('contain', `$${budgetPage.addCommas(otherFFYfunding)}`);
 
+          const inputs = this.data.quarterVals[0];
+          let staffPercentageSum = 0;
+          let contractorPercentageSum = 0;
+          for (let k = 0; k < 4; k += 1) {
+            populatePage.fillQuarter(
+              k,
+              inputs.stateVals[i][k],
+              inputs.contractorVals[i][k]
+            );
+            staffPercentageSum += inputs.stateVals[i][k];
+            contractorPercentageSum += inputs.stateVals[i][k];
+          }
+          populatePage.checkPercentageSubtotal(
+            staffPercentageSum,
+            contractorPercentageSum
+          );
+
           cy.get('[class="budget-table--number"]').should($td => {
             const staffSubtotal = budgetPage.convertStringToNum(
               $td.eq(4).text()
@@ -125,33 +144,20 @@ describe('Filling out budget and FFP', () => {
 
             let staffTotal = staffSubtotal + expensesSubtotal;
 
-            if (i === 0) {
-              cy.get('[class="ds-c-field"]').select('75-25');
-              staffTotal *= 0.75;
-              contractorTotal *= 0.75;
-            } else {
-              cy.get('[class="ds-c-field"]').select('50-50');
-              staffTotal *= 0.5;
-              contractorTotal *= 0.5;
+            const splitMultipliers = this.data.splitConstants[i];
+
+            staffTotal *= splitMultipliers.fed;
+            contractorTotal *= splitMultipliers.fed;
+
+            for (let k = 0; k < 4; k += 1) {
+              populatePage.checkQuarterSubtotal(
+                $td.eq(k + 26).text(), // +25 gets to the quarter table state subtotal
+                $td.eq(k + 30).text(), // +29 gets to the quarter contractor subtotal
+                staffTotal * (inputs.stateVals[i][k] * 0.01),
+                contractorTotal * inputs.contractorVals[i][k] * 0.01
+              );
             }
           });
-
-          // if (i === 0) {
-          //   cy.get('[class="ds-c-field"]').select('75-25');
-          //   staffTotal *= 0.75;
-          //   contractorTotal *= 0.75;
-          // } else {
-          //   cy.get('[class="ds-c-field"]').select('50-50');
-          //   staffTotal *= 0.5;
-          //   contractorTotal *= 0.5;
-          // }
-
-          // cy.get('[class="budget-table"]').within(() => {
-          //   populatePage.fillQuarter(1, 25, 25, staffTotal, contractorTotal);
-          //   populatePage.fillQuarter(2, 25, 25, staffTotal, contractorTotal);
-          //   populatePage.fillQuarter(3, 25, 25, staffTotal, contractorTotal);
-          //   populatePage.fillQuarter(4, 25, 25, staffTotal, contractorTotal);
-          // });
         });
     }
     // const activityTotal = budgetPage.computeActivityTotal(

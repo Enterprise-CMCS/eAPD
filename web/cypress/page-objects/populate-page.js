@@ -109,31 +109,42 @@ class PopulatePage {
     }
   };
 
-  fillQuarter = (
-    quarter,
-    stateValue,
-    contractorValue,
-    stateTotal,
-    contractorTotal
+  fillQuarter = (quarter, stateValue, contractorValue) => {
+    const contractorInput = quarter + 4;
+
+    cy.get('[class="budget-table"]').within(() => {
+      cy.get('[class="ds-c-field budget-table--input__number"]')
+        .eq(quarter)
+        .type(stateValue);
+
+      cy.get('[class="ds-c-field budget-table--input__number"]')
+        .eq(contractorInput)
+        .type(contractorValue);
+    });
+  };
+
+  checkQuarterSubtotal = (
+    stateString,
+    contractorString,
+    expectedState,
+    expectedContractor
   ) => {
-    const stateInput = quarter - 1;
-    const stateSubtotal = quarter - 1;
+    const stateVal = this.budgetPage.convertStringToNum(stateString);
+    const contractorVal = this.budgetPage.convertStringToNum(contractorString);
 
-    cy.get('[class="ds-c-field budget-table--input__number"]')
-      .eq(stateInput)
-      .type(stateValue);
+    expect(stateVal).to.be.closeTo(expectedState, 5);
+    expect(contractorVal).to.be.closeTo(expectedContractor, 5);
+  };
 
-    // const calculatedValue = stateValue * 0.01 * stateTotal;
-    cy.get('[class="budget-table--number"]').eq(stateSubtotal).click();
-
-    const contractorInput = stateInput + 4;
-    // const contractorSubtotal = stateSubtotal + 4;
-    cy.get('[class="ds-c-field budget-table--input__number"]')
-      .eq(contractorInput)
-      .type(contractorValue);
-
-    cy.log(stateTotal);
-    cy.log(contractorTotal);
+  checkPercentageSubtotal = (staff, contractor) => {
+    cy.get('[class="budget-table"]').within(() => {
+      cy.get('[class="budget-table--number budget-table--subtotal"]')
+        .eq(0)
+        .should('contain', `+${staff}%`);
+      cy.get('[class="budget-table--number budget-table--subtotal"]')
+        .eq(2)
+        .should('contain', `+${contractor}%`);
+    });
   };
 }
 export default PopulatePage;

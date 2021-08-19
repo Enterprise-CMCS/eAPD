@@ -126,5 +126,31 @@
       "FFYdescriptions": ["This is the Other Funding description for Activity 2 - FFY 2021", "This is the Other Funding description for Activity 2 - FFY 2022"],
       "costs": [4000, 9000]
     }
+  ],
+
+  "splitConstants": [
+    {
+      "split": "75-25",
+      "fed": 0.75,
+      "state": 0.25
+    },
+    {
+      "split": "50-50",
+      "fed": 0.50,
+      "state": 0.50
+    },
+    {
+      "split": "90-10",
+      "fed": 0.90,
+      "state": 0.10
+    }
+  ],
+
+  "quarterVals" : [
+    {
+      "string": "For Activity 1",
+      "stateVals": [[25, 25,25, 25], [25, 25, 25, 25]],
+      "contractorVals": [[25, 25, 25, 25], [25, 25, 25, 25]]
+    }
   ]
 }
