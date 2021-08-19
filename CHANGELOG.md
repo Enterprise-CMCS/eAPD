@@ -16,6 +16,7 @@ Anticipated release: July 28, 2021
 - resolved issue with invalid jwt throwing error ([#3283])
 - Reduced the size of the JWT payload because sys admins had a 24KB payload and the max size is 4KB. ([#3246])
 - fixed error for users with view-document permission not being able to load an APD([#3264])
+- fixed issue where frontend would accept a token that is valid for another EAPD version as valid ([#3408])
 
 #### ⚙️ Behind the scenes
 
@@ -56,3 +57,4 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3284]: https://github.com/CMSgov/eAPD/issues/3284
 [#3312]: https://github.com/CMSgov/eAPD/issues/3312
 [#3388]: https://github.com/CMSgov/eAPD/issues/3388
+[#3408]: https://github.com/CMSgov/eAPD/issues/3408
