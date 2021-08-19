@@ -1,0 +1,31 @@
+name: Cypress Tests
+on:
+#  schedule:
+#    - cron: '0 0 * * *'  # every day at midnight
+  push:
+    branches:
+      - bbrooks/3227-Cypress-CI
+
+jobs:
+  install-dependencies:
+    runs-on: node:14
+    steps:
+      - name: Checkout Repo 🛎️
+        uses: actions/checkout@v2
+      - name: Install Web Dependencies 🕸️
+        working-directory: ~/project/web
+        run: |
+          npm ci
+      - name: Install API Dependencies ✨
+        working-directory: ~/project/api
+        run: |
+          npm ci
+
+  cypress-run-headless:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          headless: true
