@@ -16,11 +16,11 @@ jobs:
       - name: Checkout Repo 🛎️
         uses: actions/checkout@v2
       - name: Install Web Dependencies 🕸️
-        working-directory: ~/project/web
+        working-directory: ~/web
         run: |
           npm ci
       - name: Install API Dependencies ✨
-        working-directory: ~/project/api
+        working-directory: ~/api
         run: |
           npm ci
 
