@@ -24,7 +24,7 @@ jobs:
         run: |
           npm ci
 
-  dependency vulnerability scan:
+  dependency-vulnerability-scan:
     runs-on: ubuntu-latest
     strategy:
       matrix:
