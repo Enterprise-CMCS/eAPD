@@ -13,9 +13,10 @@ let app;
 let res;
 let next;
 
-tap.test('POST /auth/certifications/files', async endpointTest => {
+tap.test('state certifications files endpoints', async endpointTest => {
   let di = {
     putFile: sinon.stub(),
+    getFile: sinon.stub(),
     crypto: {
       createHash: sinon.stub(),
       update: sinon.stub(),
@@ -42,6 +43,16 @@ tap.test('POST /auth/certifications/files', async endpointTest => {
         sinon.match.func
       ),
       '/auth/certifications/files POST endpoint is setup'
+    );
+
+    setupTest.ok(
+      app.get.calledWith(
+        '/auth/certifications/files/123', 
+        loggedIn,
+        can('view-state-certifications'), 
+        sinon.match.func
+      ),
+      '/auth/certifications/files/:fileId GET endpoint is setup'
     );
   });
   
