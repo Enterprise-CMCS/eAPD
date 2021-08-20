@@ -1192,7 +1192,7 @@ Object {
         ],
       },
     },
-    "/auth/certifications/files/:fileId": Object {
+    "/auth/certifications/files/{fileID}": Object {
       "get": Object {
         "description": "Returns a state admin certification letter",
         "parameters": Array [
