@@ -16,13 +16,15 @@ jobs:
       - name: Checkout Repo 🛎️
         uses: actions/checkout@v2
       - name: Install Web Dependencies 🕸️
-        working-directory: ~/web
+        working-directory: ./web
         run: |
-          pwd && npm ci
+          pwd
+          npm ci
       - name: Install API Dependencies ✨
-        working-directory: ~/api
+        working-directory: ./api
         run: |
-          pwd && npm ci
+          pwd
+          npm ci
 
   cypress-run-headless:
     runs-on: ubuntu-latest
