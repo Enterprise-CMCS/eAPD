@@ -18,11 +18,11 @@ jobs:
       - name: Install Web Dependencies 🕸️
         working-directory: ~/web
         run: |
-          npm ci
+          pwd && npm ci
       - name: Install API Dependencies ✨
         working-directory: ~/api
         run: |
-          npm ci
+          pwd && npm ci
 
   cypress-run-headless:
     runs-on: ubuntu-latest
