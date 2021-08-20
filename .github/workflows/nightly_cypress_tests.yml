@@ -26,8 +26,9 @@ jobs:
 
   dependency vulnerability scan:
     runs-on: ubuntu-latest
-    strategy matrix:
-      node-version: ['14']
+    strategy:
+      matrix:
+        node-version: ['14']
     steps:
       - name: Frontend Vulnerability Scan 🕸️
         working-directory: ./web
