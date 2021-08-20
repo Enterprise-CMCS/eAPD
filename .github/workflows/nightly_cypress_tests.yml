@@ -18,13 +18,25 @@ jobs:
       - name: Install Web Dependencies 🕸️
         working-directory: ./web
         run: |
-          pwd
           npm ci
       - name: Install API Dependencies ✨
         working-directory: ./api
         run: |
-          pwd
           npm ci
+
+  dependency vulnerability scan:
+    runs-on: ubuntu-latest
+    strategy matrix:
+      node-version: ['14']
+    steps:
+      - name: Frontend Vulnerability Scan 🕸️
+        working-directory: ./web
+        run: |
+          npm run audit
+      - name: Backend Vulnerability Scan ✨
+        working-directory: ./api
+        run: |
+          npm run audit
 
   cypress-run-headless:
     runs-on: ubuntu-latest
