@@ -3,8 +3,8 @@ const {
   schema: { jsonResponse }
 } = require('../../openAPI/helpers');
 
-const openAPI = {
-  '/auth/certifications/files/:fileId': {
+const getStateCertificationFile = {
+  '/auth/certifications/files/{fileID}': {
     get: {
       tags: ['State Admin Certifications', 'files'],
       summary: 'Get a state admin certification letter',
@@ -31,8 +31,10 @@ const openAPI = {
         }
       }
     }
-  },
-  
+  }
+};
+
+const postStateCertificationFile = {
   '/auth/certifications/files': {
     post: {
       tags: ['Certifications', 'State Admins', 'files'],
@@ -86,5 +88,6 @@ const openAPI = {
 };
 
 module.exports = {
-  ...requiresAuth(openAPI)
+  ...requiresAuth(getStateCertificationFile),
+  ...requiresAuth(postStateCertificationFile)
 };
