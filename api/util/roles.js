@@ -10,7 +10,8 @@ const activities = {
   'edit-affiliations': true,
   'view-state-admins': true,
   'edit-state-admins': true,
-  'edit-state-certifications': true
+  'edit-state-certifications': true,
+  'view-state-certifications': true
 };
 
 const roles = {
@@ -40,7 +41,8 @@ const roleToActivityMappings = {
     'edit-state-admins',
     'view-affiliations',
     'edit-affiliations',
-    'edit-state-certifications'
+    'edit-state-certifications',
+    'view-state-certifications'
   ],
   'eAPD State Admin': [
     'view-roles',

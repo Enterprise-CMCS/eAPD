@@ -21,6 +21,7 @@ module.exports = (
 
   app.get(
     '/auth/certifications/files/:fileID',
+    loggedIn,
     can('view-state-certifications'),
     async (req, res, next) => {
       try {
@@ -63,7 +64,7 @@ module.exports = (
           try {
             await putFile(fileId, buffer);
           } catch (e) {
-            logger.error(`Error persisting file`)
+            logger.error(`Error persisting file`);
             throw e;
           }
           res.send({ url: `/auth/certifications/files/${fileId}` });        

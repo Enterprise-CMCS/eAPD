@@ -4,9 +4,38 @@ const {
 } = require('../../openAPI/helpers');
 
 const openAPI = {
-  '/auth/certificates/files': {
+  '/auth/certifications/files/:fileId': {
+    get: {
+      tags: ['State Admin Certifications', 'files'],
+      summary: 'Get a state admin certification letter',
+      description:
+        'Returns a state admin certification letter',
+      parameters: [
+        {
+          name: 'fileID',
+          in: 'path',
+          description: 'The ID of the file to get',
+          required: true,
+          schema: {
+            type: 'number'
+          }
+        }
+      ],
+      responses: {
+        200: {
+          description: 'The file',
+          content: { '*/*': { schema: { type: 'string', format: 'binary' } } }
+        },
+        400: {
+          description: 'The file does not exist'
+        }
+      }
+    }
+  },
+  
+  '/auth/certifications/files': {
     post: {
-      tags: ['Certificates', 'State Admins', 'files'],
+      tags: ['Certifications', 'State Admins', 'files'],
       summary: 'Upload a state admin certification file',
       description:
         'Uploads a state admin certification letter.',

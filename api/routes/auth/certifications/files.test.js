@@ -15,8 +15,8 @@ let next;
 
 tap.test('state certifications files endpoints', async endpointTest => {
   let di = {
-    putFile: sinon.stub(),
     getFile: sinon.stub(),
+    putFile: sinon.stub(),
     crypto: {
       createHash: sinon.stub(),
       update: sinon.stub(),
@@ -47,7 +47,7 @@ tap.test('state certifications files endpoints', async endpointTest => {
 
     setupTest.ok(
       app.get.calledWith(
-        '/auth/certifications/files/123', 
+        '/auth/certifications/files/:fileID', 
         loggedIn,
         can('view-state-certifications'), 
         sinon.match.func
@@ -122,4 +122,41 @@ tap.test('state certifications files endpoints', async endpointTest => {
       );
     });      
   });    
+  
+  endpointTest.test('GET endpoint for fetching a state certification letter/file', async tests => {
+    let handler; 
+    
+    tests.beforeEach(async () => {
+      filesEndpoint(app, { ...di });
+      handler = app.get.args[0].pop();
+    });
+
+    tests.test('there is an error retrieving the file', async test => {
+      const error = new Error('some error');
+      
+      di.getFile.rejects(error);
+      
+      await handler(
+        { params: { fileID: 'file id' } },
+        res,
+        next
+      );
+
+      test.ok(next.calledWith(error));
+    });
+    
+    tests.test('file is returned successfully', async test => {
+      const file = {};
+      di.getFile.resolves(file);
+      
+      await handler(
+        { params: { fileID: 'file id' } },
+        res,
+        next
+      );
+
+      test.ok(res.send.calledWith(file), 'sends the file');
+      test.ok(res.end.calledAfter(res.send), 'response is terminated');
+    });    
+  });
 });
