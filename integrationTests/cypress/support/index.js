@@ -19,3 +19,4 @@ import 'cypress-axe-core'; // eslint-disable-line import/no-extraneous-dependenc
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
