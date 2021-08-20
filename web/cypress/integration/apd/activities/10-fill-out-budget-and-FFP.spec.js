@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable radix */
 /* eslint-disable cypress/no-unnecessary-waiting */
 /* eslint-disable no-loop-func */
@@ -13,9 +14,8 @@ describe('Filling out budget and FFP', () => {
   const budgetPage = new BudgetPage();
 
   let dashboardUrl;
-  const splitVals = ['90-10', '75-25', '50-50'];
   const years = [2021, 2022];
-  const split = ['75-25', '50-50'];
+  const split = ['75-25', '50-50', '90-10'];
 
   before(() => {
     cy.useStateStaff();
@@ -35,14 +35,14 @@ describe('Filling out budget and FFP', () => {
     cy.useStateStaff(dashboardUrl);
   });
 
-  it('Tests cost split table (Activity 1 - 2021)', function costSplit() {
+  it.only('Tests cost split table (Activity 1 - 2021)', function () {
     cy.findAllByText('Budget and FFP').eq(0).click({ force: true });
     const staff = this.data.staff[1];
     const expenses = this.data.expenses[1];
     const contractor = this.data.privateContractors[0];
     const allocation = this.data.costAllocation[0];
 
-    let FFYtotal = budgetPage.computeActivityTotal(
+    let FFYtotal = budgetPage.computeFFYtotal(
       staff.costs[0] * staff.ftes[0],
       expenses.costs[0],
       contractor.FFYcosts[1][0]
@@ -50,17 +50,17 @@ describe('Filling out budget and FFP', () => {
 
     FFYtotal -= allocation.costs[0];
 
-    for (let i = 0; i < splitVals.length; i += 1) {
-      cy.get('[class="ds-c-field"]').eq(0).select(splitVals[i]);
+    for (let i = 0; i < split.length; i += 1) {
+      cy.get('[class="ds-c-field"]').eq(0).select(split[i]);
       let fedSplit = 0;
       let stateSplit = 0;
-      if (splitVals[i] === '90-10') {
+      if (split[i] === '90-10') {
         fedSplit = 90;
         stateSplit = 10;
-      } else if (splitVals[i] === '75-25') {
+      } else if (split[i] === '75-25') {
         fedSplit = 75;
         stateSplit = 25;
-      } else if (splitVals[i] === '50-50') {
+      } else if (split[i] === '50-50') {
         fedSplit = 50;
         stateSplit = 50;
       }
@@ -73,7 +73,7 @@ describe('Filling out budget and FFP', () => {
     }
   });
 
-  it.only('fills out Budget and FFP for activity 1', function activity1() {
+  it('fills out Budget and FFP for activity 1', function () {
     cy.findAllByText('Budget and FFP').eq(0).click({ force: true });
 
     const staff = this.data.staff[1];
@@ -131,15 +131,24 @@ describe('Filling out budget and FFP', () => {
             contractorPercentageSum
           );
 
-          cy.get('[class="budget-table--number"]').should($td => {
+          // for (let k = 1; k < 5; k += 1) {
+          //   cy.get(`[data-cy="sbd-${years[i]}-${k}"]`).should($val => {
+          //     cy.log($val);
+          //     cy.log($val.text());
+          //   });
+          // console.log(tableValue);
+          // budgetPage.convertStringToNum(tableValue);
+          // }
+
+          cy.get('[data-cy="subtotal"]').should($td => {
             const staffSubtotal = budgetPage.convertStringToNum(
-              $td.eq(4).text()
+              $td.eq(0).text()
             );
             const expensesSubtotal = budgetPage.convertStringToNum(
-              $td.eq(9).text()
+              $td.eq(1).text()
             );
             let contractorTotal = budgetPage.convertStringToNum(
-              $td.eq(14).text()
+              $td.eq(2).text()
             );
 
             let staffTotal = staffSubtotal + expensesSubtotal;
@@ -151,66 +160,200 @@ describe('Filling out budget and FFP', () => {
 
             for (let k = 0; k < 4; k += 1) {
               populatePage.checkQuarterSubtotal(
-                $td.eq(k + 26).text(), // +25 gets to the quarter table state subtotal
-                $td.eq(k + 30).text(), // +29 gets to the quarter contractor subtotal
+                $td.eq(k + 4).text(), // +4 gets to the first quarter table state subtotal
+                $td.eq(k + 8).text(), // +8 gets to the first quarter contractor subtotal
                 staffTotal * (inputs.stateVals[i][k] * 0.01),
                 contractorTotal * inputs.contractorVals[i][k] * 0.01
               );
             }
           });
+          budgetPage.checkEachQuarterSubtotal();
         });
     }
-    // const activityTotal = budgetPage.computeActivityTotal(
-    //   staff.costs,
-    //   staff.ftes,
-    //   expenses.costs,
-    //   contractor.FFYcosts[1],
-    //   years
-    // );
 
-    // const otherFundingTotal = budgetPage.computeTotalOtherFunding(
-    //   allocation.costs
-    // );
-
-    // const totalMedicaid = activityTotal - otherFundingTotal;
-    // budgetPage.checkFFYtotals(
-    //   years,
-    //   'Program Administration',
-    //   budgetPage.addCommas(activityTotal),
-    //   budgetPage.addCommas(otherFundingTotal),
-    //   budgetPage.addCommas(totalMedicaid),
-    //   '75/25 (FFY 2021) and 50/50 (FFY 2022)'
-    //   // CALCULATE FEDERAL AND STATE SHARE SOMEHOW
-    // );
-  });
-
-  it('fills out Budget and FFP for activity 2', function activity1() {
-    cy.findAllByText('Budget and FFP').eq(1).click({ force: true });
-    const a2TotalCost2021 = 25000;
+    // Calculate totals for final section
+    let activityTotal = 0;
+    let otherFundingTotal = 0;
+    let federalShare = 0;
+    let stateShare = 0;
 
     for (let i = 0; i < years.length; i += 1) {
-      // CHECK FIRST TABLE
-      cy.findAllByText(`Activity 1 Budget for FFY ${years[i]}`)
+      let FFYtotal = budgetPage.computeFFYtotal(
+        staff.costs[i] * staff.ftes[i],
+        expenses.costs[i],
+        contractor.FFYcosts[1][i]
+      );
+
+      activityTotal += FFYtotal;
+      otherFundingTotal += allocation.costs[i];
+
+      FFYtotal -= allocation.costs[i];
+
+      const splitMultipliers = this.data.splitConstants[i];
+      federalShare += FFYtotal * splitMultipliers.fed;
+      stateShare += FFYtotal * splitMultipliers.state;
+    }
+
+    const totalMedicaid = activityTotal - otherFundingTotal;
+    budgetPage.checkFFYtotals(
+      years,
+      'Program Administration',
+      budgetPage.addCommas(activityTotal),
+      budgetPage.addCommas(otherFundingTotal),
+      budgetPage.addCommas(totalMedicaid),
+      '75/25 (FFY 2021) and 50/50 (FFY 2022)',
+      budgetPage.addCommas(federalShare),
+      'Alaska',
+      budgetPage.addCommas(stateShare)
+    );
+  });
+
+  it('fills out Budget and FFP for activity 2', function () {
+    cy.findAllByText('Budget and FFP').eq(1).click({ force: true });
+
+    const staff = this.data.staff[2];
+    const staff2 = this.data.staff[3];
+    const expenses = this.data.expenses[2];
+    const expenses2 = this.data.expenses[3];
+    const contractor = this.data.privateContractors[1];
+    const allocation = this.data.costAllocation[1];
+
+    for (let i = 0; i < years.length; i += 1) {
+      cy.get('[class="ds-c-field"]')
+        .eq(i)
+        .select(split[i + 1]);
+      cy.findAllByText(`Activity 2 Budget for FFY ${years[i]}`)
         .parent()
         .parent()
         .within(() => {
-          let fedTotal = 0;
-          if (i === 0) {
-            cy.get('[class="ds-c-field"]').select('75-25');
-            fedTotal = a2TotalCost2021 * 0.75;
-          } else {
-            cy.get('[class="ds-c-field"]').select('50-50');
-            fedTotal = a2TotalCost2021 * 0.5;
-          }
+          cy.get('[class="budget-table activity-budget-table"]')
+            .eq(0)
+            .within(() => {
+              budgetPage.checkTableRow(
+                staff.title,
+                budgetPage.addCommas(staff.costs[i]),
+                staff.ftes[i]
+              );
+              budgetPage.checkTableRow(
+                staff2.title,
+                budgetPage.addCommas(staff2.costs[i]),
+                staff2.ftes[i]
+              );
 
-          cy.get('[class="budget-table"]').within(() => {
-            populatePage.fillQuarter(1, 25, 25, fedTotal);
-            populatePage.fillQuarter(2, 25, 25, fedTotal);
-            populatePage.fillQuarter(3, 25, 25, fedTotal);
-            populatePage.fillQuarter(4, 25, 25, fedTotal);
-            // Found an inconsistency, one rounds up, another rounds down
+              budgetPage.checkTableRow(
+                expenses.category,
+                budgetPage.addCommas(expenses.costs[i])
+              );
+              budgetPage.checkTableRow(
+                expenses2.category,
+                budgetPage.addCommas(expenses2.costs[i])
+              );
+
+              budgetPage.checkTableRow(
+                contractor.names[0],
+                budgetPage.addCommas(contractor.FFYcosts[0][i])
+              );
+
+              budgetPage.checkTableRow(
+                contractor.names[1],
+                budgetPage.addCommas(
+                  contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1]
+                )
+              );
+
+              budgetPage.checkSubtotalRows(years[i], 2);
+            });
+
+          const otherFFYfunding = allocation.costs[i];
+          cy.findAllByText('Other Funding')
+            .parent()
+            .should('contain', `$${budgetPage.addCommas(otherFFYfunding)}`);
+
+          const inputs = this.data.quarterVals[1];
+          let staffPercentageSum = 0;
+          let contractorPercentageSum = 0;
+          for (let k = 0; k < 4; k += 1) {
+            populatePage.fillQuarter(
+              k,
+              inputs.stateVals[i][k],
+              inputs.contractorVals[i][k]
+            );
+            staffPercentageSum += inputs.stateVals[i][k];
+            contractorPercentageSum += inputs.stateVals[i][k];
+          }
+          populatePage.checkPercentageSubtotal(
+            staffPercentageSum,
+            contractorPercentageSum
+          );
+
+          cy.get('[data-cy="subtotal"]').should($td => {
+            const staffSubtotal = budgetPage.convertStringToNum(
+              $td.eq(0).text()
+            );
+            const expensesSubtotal = budgetPage.convertStringToNum(
+              $td.eq(1).text()
+            );
+            let contractorTotal = budgetPage.convertStringToNum(
+              $td.eq(2).text()
+            );
+
+            let staffTotal = staffSubtotal + expensesSubtotal;
+
+            const splitMultipliers = this.data.splitConstants[i + 1];
+
+            staffTotal *= splitMultipliers.fed;
+            contractorTotal *= splitMultipliers.fed;
+
+            for (let k = 0; k < 4; k += 1) {
+              populatePage.checkQuarterSubtotal(
+                $td.eq(k + 4).text(),
+                $td.eq(k + 8).text(),
+                staffTotal * (inputs.stateVals[i][k] * 0.01),
+                contractorTotal * inputs.contractorVals[i][k] * 0.01
+              );
+            }
           });
+          budgetPage.checkEachQuarterSubtotal();
         });
     }
+
+    let activityTotal = 0;
+    let otherFundingTotal = 0;
+    let federalShare = 0;
+    let stateShare = 0;
+
+    for (let i = 0; i < years.length; i += 1) {
+      let FFYtotal = budgetPage.computeFFYtotal(
+        staff.costs[i] * staff.ftes[i] + staff2.costs[i] * staff2.ftes[i],
+        expenses.costs[i] + expenses2.costs[i],
+        contractor.FFYcosts[0][i] +
+          contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1]
+      );
+
+      activityTotal += FFYtotal;
+      otherFundingTotal += allocation.costs[i];
+
+      FFYtotal -= allocation.costs[i];
+
+      const splitMultipliers = this.data.splitConstants[i + 1];
+      federalShare += FFYtotal * splitMultipliers.fed;
+      stateShare += FFYtotal * splitMultipliers.state;
+    }
+
+    federalShare = Math.ceil(federalShare);
+    stateShare = Math.floor(stateShare);
+
+    const totalMedicaid = activityTotal - otherFundingTotal;
+    budgetPage.checkFFYtotals(
+      years,
+      this.data.newActivityName,
+      budgetPage.addCommas(activityTotal),
+      budgetPage.addCommas(otherFundingTotal),
+      budgetPage.addCommas(totalMedicaid),
+      '50/50 (FFY 2021) and 90/10 (FFY 2022)',
+      budgetPage.addCommas(federalShare),
+      'Alaska',
+      budgetPage.addCommas(stateShare)
+    );
   });
 });

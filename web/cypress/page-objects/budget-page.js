@@ -236,37 +236,20 @@ class BudgetPage {
     this.quarterTableBottomRow(expectedValue, expectedSubtotal);
   };
 
-  computeActivityTotal = (staff, ftes, expenses, contractor, years) => {
-    let subtotal = 0;
-    for (let i = 0; i < years.length; i += 1) {
-      subtotal += staff[i] * ftes[i];
-      subtotal += expenses[i];
-      subtotal += contractor[i];
-    }
-    return subtotal;
-  };
-
-  computeTotalOtherFunding = list => {
-    let subtotal = 0;
-    for (let i = 0; i < list.length; i += 1) {
-      subtotal += list[i];
-    }
-    return subtotal;
-  };
-
+  // Indexes for subtotals
   checkSubtotalRows = (year, num) => {
     cy.findAllByText(`Activity ${num} Budget for FFY ${year}`)
       .parent()
       .within(() => {
-        cy.get('[class="budget-table--number"]').should($td => {
-          const staffTotal = this.convertStringToNum($td.eq(4).text());
-          const expensesTotal = this.convertStringToNum($td.eq(9).text());
-          const contractorTotal = this.convertStringToNum($td.eq(14).text());
+        cy.get('[data-cy="subtotal"]').should($td => {
+          const staffTotal = this.convertStringToNum($td.eq(0).text());
+          const expensesTotal = this.convertStringToNum($td.eq(1).text());
+          const contractorTotal = this.convertStringToNum($td.eq(2).text());
 
           const calculatedTotal = staffTotal + expensesTotal + contractorTotal;
 
           const expectedMedicaidTotal = this.convertStringToNum(
-            $td.eq(15).text()
+            $td.eq(3).text()
           );
 
           if (calculatedTotal !== expectedMedicaidTotal) {
@@ -282,27 +265,25 @@ class BudgetPage {
     return parseInt(minusCommas);
   };
 
-  computeStaffSplitCost = (year, num) => {
-    cy.findAllByText(`Activity ${num} Budget for FFY ${year}`)
-      .parent()
-      .within(() => {
-        cy.get('[class="budget-table--number"]').should($td => {
-          const staffTotal = this.convertStringToNum($td.eq(4).text());
-          const expensesTotal = this.convertStringToNum($td.eq(9).text());
-          return staffTotal + expensesTotal;
-        });
-      });
+  computeFFYtotal = (staff, expenses, contractor) => {
+    return staff + expenses + contractor;
   };
 
-  computeContractorSplitCost = (year, num) => {
-    cy.findAllByText(`Activity ${num} Budget for FFY ${year}`)
-      .parent()
-      .within(() => {
-        cy.get('[class="budget-table--number"]').should($td => {
-          const contractorTotal = this.convertStringToNum($td.eq(14).text());
-          return contractorTotal;
+  checkEachQuarterSubtotal = () => {
+    cy.get('[class="budget-table"]').within(() => {
+      for (let i = 0; i < 4; i += 1) {
+        cy.get('[data-cy="subtotal"]').should($el => {
+          const subtotal = this.convertStringToNum($el.eq(i).text());
+          const subtotal2 = this.convertStringToNum($el.eq(i + 4).text());
+
+          const sum = this.convertStringToNum($el.eq(i + 8).text());
+
+          if (subtotal + subtotal2 !== sum) {
+            throw new Error(`Quarter ${i + 1} does not add up`);
+          }
         });
-      });
+      }
+    });
   };
 }
 

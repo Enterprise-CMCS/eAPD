@@ -159,7 +159,11 @@ const CostAllocateFFPQuarterly = ({
           </th>
           <Fragment key={year}>
             {QUARTERS.map(q => (
-              <td className="budget-table--number budget-table--total" key={q}>
+              <td
+                className="budget-table--number budget-table--total"
+                key={q}
+                data-cy="subtotal"
+              >
                 <Dollars>{quarterlyFFP[year][q].combined.dollars}</Dollars>
               </td>
             ))}

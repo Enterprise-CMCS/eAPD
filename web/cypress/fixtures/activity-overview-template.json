@@ -151,6 +151,11 @@
       "string": "For Activity 1",
       "stateVals": [[25, 25,25, 25], [25, 25, 25, 25]],
       "contractorVals": [[25, 25, 25, 25], [25, 25, 25, 25]]
+    },
+    {
+      "string": "For Activity 2",
+      "stateVals": [[25, 25,25, 25], [25, 25, 25, 25]],
+      "contractorVals": [[25, 25, 25, 25], [25, 25, 25, 25]]
     }
   ]
 }
