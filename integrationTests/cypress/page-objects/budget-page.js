@@ -17,15 +17,15 @@ class BudgetPage {
         cy.contains('Activity Total Cost')
           .parent()
           .should('contain', `$${activityValue}`);
-        cy.contains('Other Funding')
-          .parent()
-          .should('contain', `$${otherFundingValue}`);
+        cy.contains('td', 'Other Funding')
+           .parent()
+           .should('contain', `$${otherFundingValue}`);
         this.checkTotalComputableMedicaidCost(medicaidValue);
       });
   };
 
   checkSubtotalTable = (title, otherFundingAmount, keyPersonnelAmount) => {
-    let subtotal = 0;
+    let subtotal;
     if (title === 'State Staff') {
       cy.contains(title)
         .parent()
@@ -58,7 +58,7 @@ class BudgetPage {
   };
 
   costSplitTableRow = (fedOrState, split, value, total) => {
-    cy.contains(fedOrState)
+    cy.contains('td', fedOrState)
       .parent()
       .within(() => {
         cy.get('[class="budget-table--number"]')
@@ -76,7 +76,7 @@ class BudgetPage {
         cy.get('[class="budget-table--number"]')
           .eq(2)
           .should('contain', `$${total}`);
-      });
+       });
   };
 
   checkCostSplitTable = (
@@ -86,11 +86,9 @@ class BudgetPage {
     stateVal,
     expectedMedicaid
   ) => {
-    let fedTotal = 0;
-    let stateTotal = 0;
 
-    fedTotal = federal * 0.01 * federalVal;
-    stateTotal = state * 0.01 * stateVal;
+    const fedTotal = federal * 0.01 * federalVal;
+    const stateTotal = state * 0.01 * stateVal;
 
     this.checkTotalComputableMedicaidCost(expectedMedicaid);
     this.costSplitTableRow('Federal Share', federal, federalVal, fedTotal);

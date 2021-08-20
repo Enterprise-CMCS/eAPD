@@ -306,6 +306,11 @@ describe('checking default values in Activities section', () => {
                 budgetPage.checkSubtotalTable('Private Contractor', 0);
                 budgetPage.checkTotalComputableMedicaidCost(0);
                 exportPage.checkRowTotals(0, 0);
+              });
+            cy.contains(`Activity ${i + 1} Budget for FFY ${years[k]}`)
+              .parent()
+              .next()
+              .within(() => {
                 budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
               });
             cy.contains('Estimated Quarterly Expenditure')

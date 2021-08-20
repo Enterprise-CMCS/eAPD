@@ -8,7 +8,6 @@ const roles = require('./roles');
 const states = require('./states');
 const users = require('./users');
 const openAPI = require('./openAPI');
-const cypress = require('./cypress');
 
 module.exports = (
   app,
@@ -19,7 +18,6 @@ module.exports = (
   rolesEndpoint = roles,
   statesEndpoint = states,
   usersEndpoint = users,
-  cypressEndpoint = cypress,
   openAPIdoc = openAPI
 ) => {
   logger.debug('setting up routes for affilitions');
@@ -47,8 +45,4 @@ module.exports = (
   logger.debug('setting out route for API docs');
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openAPIdoc));
 
-  if (process.env.CYPRESS_TESTS === 'true') {
-    logger.debug('setting up route for cypress');
-    cypressEndpoint(app);
-  }
 };
