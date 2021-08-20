@@ -49,8 +49,8 @@ const validateDoc = async buffer => {
       return { error: 'Unsupported file format' };
     }
     return {};    
-  } catch {
-    return { error: 'Unsupported file format' }
+  } catch (e) {
+    return { error: 'Unsupported file format' };
   }  
 }
 

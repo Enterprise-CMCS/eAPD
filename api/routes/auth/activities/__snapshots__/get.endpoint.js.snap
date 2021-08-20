@@ -42,5 +42,13 @@ Array [
     "id": 1010,
     "name": "edit-state-admins",
   },
+  Object {
+    "id": 1011,
+    "name": "view-state-certifications",
+  },
+  Object {
+    "id": 1012,
+    "name": "edit-state-certifications",
+  },
 ]
 `;

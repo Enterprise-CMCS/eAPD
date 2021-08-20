@@ -14,7 +14,7 @@ let res;
 let next;
 
 tap.test('state certifications files endpoints', async endpointTest => {
-  let di = {
+  const di = {
     getFile: sinon.stub(),
     putFile: sinon.stub(),
     crypto: {
@@ -74,7 +74,7 @@ tap.test('state certifications files endpoints', async endpointTest => {
         error: 'Unsupported file format'
       })      
       req.file = {
-        buffer: buffer,
+        buffer,
         size: 1234
       };      
       
@@ -92,7 +92,7 @@ tap.test('state certifications files endpoints', async endpointTest => {
     tests.test('with a valid doc the file is saved to storage provider', async test => {
       di.validateDoc.returns({});     
       req.file = {
-        buffer: buffer,
+        buffer,
         size: 1234
       };
       di.putFile.resolves();
@@ -109,7 +109,7 @@ tap.test('state certifications files endpoints', async endpointTest => {
     tests.test('error persisting file to local or remote storage', async test => {
       di.validateDoc.returns({});     
       req.file = {
-        buffer: buffer,
+        buffer,
         size: 1234
       };
       di.putFile.rejects();

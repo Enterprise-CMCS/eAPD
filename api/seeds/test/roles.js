@@ -14,7 +14,9 @@ const activities = [
   { id: 1007, name: 'view-affiliations' },
   { id: 1008, name: 'edit-affiliations' },
   { id: 1009, name: 'view-state-admins' },
-  { id: 1010, name: 'edit-state-admins' }
+  { id: 1010, name: 'edit-state-admins' },
+  { id: 1011, name: 'view-state-certifications' },
+  { id: 1012, name: 'edit-state-certifications' }
 ];
 exports.activities = activities;
 

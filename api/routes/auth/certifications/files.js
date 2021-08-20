@@ -46,7 +46,7 @@ module.exports = (
     multer().single('file'),
     async (req, res, next) => {
       try {
-        const { size = 0, buffer = null } = req.file;
+        const { buffer = null } = req.file;
         
         const fileId = crypto
           .createHash('sha256')
@@ -60,15 +60,15 @@ module.exports = (
             .send({ error })
             .end();
           return;
-        } else {
-          try {
-            await putFile(fileId, buffer);
-          } catch (e) {
-            logger.error(`Error persisting file`);
-            throw e;
-          }
-          res.send({ url: `/auth/certifications/files/${fileId}` });        
-        }       
+        } 
+        
+        try {
+          await putFile(fileId, buffer);
+        } catch (e) {
+          logger.error(`Error persisting file`);
+          throw e;
+        }
+        res.send({ url: `/auth/certifications/files/${fileId}` });              
       } catch (e) {
         logger.error({ id: req.id, message: e });
         next({ message: 'Unable to upload file' });
