@@ -6,14 +6,15 @@ const { can } = require('../../../middleware');
 const logger = require('../../../logger')('auth certifications post');
 
 const { getFile: get, putFile: put } = require('../../../files');
-const { validateDoc } = require('../../../util/fileValidation');
+const { validateDoc: validDoc } = require('../../../util/fileValidation');
 
 module.exports = (
   app,
   {
     getFile = get,
     putFile = put,
-    crypto = nodeCrypto
+    crypto = nodeCrypto,
+    validateDoc = validDoc
   } = {}
 ) => {
   logger.silly('setting up POST /auth/certifications/files route');
@@ -43,7 +44,7 @@ module.exports = (
           try {
             await putFile(fileId, buffer);
           } catch (e) {
-            logger.error({ error: `error persisting file: ${e}`})
+            logger.error(`Error persisting file`)
             throw e;
           }
           res.send({ url: `/auth/certifications/files/${fileId}` });        

@@ -1,9 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
-const multer = require('multer');
 
-const can = require('../../../middleware').can;
-
+const { can } = require('../../../middleware');
 const { loggedIn } = require('../../../middleware/auth');
 
 const filesEndpoint = require('./files');
@@ -16,30 +14,20 @@ let res;
 let next;
 
 tap.test('POST /auth/certifications/files', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-  const app = { get: sandbox.stub(), post: sandbox.stub() };
-  
-  const di = {
-    validateDoc: sandbox.stub(),
-    getFile: sandbox.stub(),
-    putFile: sandbox.stub()
-  };
-  
-  const res = {
-    status: sandbox.stub(),
-    send: sandbox.stub(),
-    end: sandbox.stub()
-  };
-  
-  const next = sandbox.stub();
+  let di = {
+    putFile: sinon.stub(),
+    crypto: {
+      createHash: sinon.stub(),
+      update: sinon.stub(),
+      digest: sinon.stub(),      
+    },
+    validateDoc: sinon.stub()
+  }
   
   endpointTest.beforeEach(() => {
-    sandbox.resetBehavior();
-    sandbox.resetHistory();
-  
-    res.status.returns(res);
-    res.send.returns(res);
-    res.end.returns(res);
+    app = mockExpress();
+    res = mockResponse();
+    next = sinon.stub();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -50,32 +38,36 @@ tap.test('POST /auth/certifications/files', async endpointTest => {
         '/auth/certifications/files', 
         loggedIn,
         can('edit-state-certifications'), 
-        sinon.match.func // Question: what is this?
+        sinon.match.func,
+        sinon.match.func
       ),
       '/auth/certifications/files POST endpoint is setup'
     );
   });
   
-  endpointTest.test('POST endpoint for uploading an state certification letter/file', async tests => {
-    let handler;
-  
+  endpointTest.test('POST endpoint for uploading a state certification letter/file', async tests => {
+    let handler; 
+    const buffer = 'buff';    
     const req = {};
     
     tests.beforeEach(async () => {
       filesEndpoint(app, { ...di });
-      handler = app.post.args[0].pop(); // Figure out why we are using this handler and removing the first arg. Perhaps to manually mock the file?
+      handler = app.post.args[0].pop();
+      di.crypto.createHash.withArgs('sha256').returnsThis();
+      di.crypto.update.withArgs(buffer).returnsThis();
+      di.crypto.digest.withArgs('hex').returns('123');
     });
   
-    tests.test('the file is an image', async test => {
+    tests.test('the file is not a valid doc type', async test => {
       di.validateDoc.resolves({
         error: 'Unsupported file format'
-      });
+      })      
       req.file = {
-        buffer: 'this needs to be binary data?',
+        buffer: buffer,
         size: 1234
-      };
-  
-      await handler(req, res, next);
+      };      
+      
+      await handler(req, res, next); 
   
       test.ok(res.status.calledWith(415), 'sends a 415 error');
       test.ok(
@@ -86,7 +78,37 @@ tap.test('POST /auth/certifications/files', async endpointTest => {
       test.ok(res.send.calledAfter(res.status), 'response is terminated');
     });
     
+    tests.test('with a valid doc the file is saved to storage provider', async test => {
+      di.validateDoc.returns({});     
+      req.file = {
+        buffer: buffer,
+        size: 1234
+      };
+      di.putFile.resolves();
+      
+      await handler(req, res, next);
+      
+      test.ok(
+        res.send.calledWith({
+          url: '/auth/certifications/files/123'
+        })
+      );
+    });  
     
-  });
-    
+    tests.test('error persisting file to local or remote storage', async test => {
+      di.validateDoc.returns({});     
+      req.file = {
+        buffer: buffer,
+        size: 1234
+      };
+      di.putFile.rejects();
+      
+      await handler(req, res, next);
+
+      test.ok(
+        next.calledWith({ message: 'Unable to upload file' }),
+        'sends error message'
+      );
+    });      
+  });    
 });

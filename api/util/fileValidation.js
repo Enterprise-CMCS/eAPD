@@ -39,15 +39,19 @@ const validateImage = async buffer => {
 };
 
 const validateDoc = async buffer => {
-  const { ext = null } = await ft.fromBuffer(buffer);  
-  if (
-    ext !== 'doc' &&
-    ext !== 'docx' &&
-    ext !== 'pdf'
-  ) {
-    return { error: 'Unsupported file format' };
-  }
-  return buffer;
+  try {
+    const { ext = null } = await ft.fromBuffer(buffer); 
+    if (
+      ext !== 'doc' &&
+      ext !== 'docx' &&
+      ext !== 'pdf'
+    ) {
+      return { error: 'Unsupported file format' };
+    }
+    return;    
+  } catch {
+    return { error: 'Unsupported file format' }
+  }  
 }
 
 module.exports = {
