@@ -61,8 +61,8 @@ const Activity = ({ activity, activityIndex }) => {
           {Object.entries(person.years).map(([year, { amt, perc }]) => (
             <li key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{amt}</Dollars> |{' '}
-              <strong>FTEs:</strong> {perc} | <strong>Total:</strong>{' '}
-              <Dollars>{perc * amt}</Dollars>
+              <strong>FTEs:</strong> {perc === '' ? '0' : perc} |{' '}
+              <strong>Total:</strong> <Dollars>{perc * amt}</Dollars>
             </li>
           ))}
         </ul>
@@ -100,7 +100,6 @@ const Activity = ({ activity, activityIndex }) => {
       return `${start} — ${end}`;
     };
 
-    
     return (
       <Fragment key={uuidv4()}>
         <p className="ds-u-margin-bottom--0">
@@ -149,7 +148,7 @@ const Activity = ({ activity, activityIndex }) => {
   };
 
   return (
-    <Fragment key={uuidv4()}>
+    <div key={uuidv4()}>
       <hr className="section-rule" />
       <h2>
         Activity {activityIndex + 1} ({activity.name})
@@ -317,7 +316,7 @@ const Activity = ({ activity, activityIndex }) => {
         costAllocation={activity.costAllocation}
         isViewOnly
       />
-    </Fragment>
+    </div>
   );
 };
 

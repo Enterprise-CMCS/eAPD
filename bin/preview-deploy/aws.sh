@@ -116,6 +116,16 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__OKTA_SERVER_ID__|`echo $OKTA_SERVER_ID`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__MONGO_INITDB_ROOT_USERNAME__|`echo $MONGO_INITDB_ROOT_USERNAME`|g" aws.user-data.sh
+  
+  sed -i'.backup' -e "s|__MONGO_INITDB_ROOT_PASSWORD__|`echo $MONGO_INITDB_ROOT_PASSWORD`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_INITDB_DATABASE__|`echo $MONGO_INITDB_DATABASE`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_DATABASE_USERNAME__|`echo $MONGO_DATABASE_USERNAME`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_DATABASE_PASSWORD__|`echo $MONGO_DATABASE_PASSWORD`|g" aws.user-data.sh
+
   sed -i'.backup' -e "s|__JWT_SECRET__|`echo $JWT_SECRET`|g" aws.user-data.sh
 
   sed -i'.backup' -e "s|__MONGO_DATABASE__|`echo $MONGO_DATABASE`|g" aws.user-data.sh

@@ -1,6 +1,11 @@
+# Next release
+
+Anticipated release: July 28, 2021
+
 #### 🚀 New features
 
 - manage affiliations and choose state page now make live calls for the list of affiliations ([#3264])
+- Federal admin panel ([#2812])
 - Update the roles returned by the roles endpoint ([#3277])
 - added alerts to each section if no FFY has been selected ([#3202])
 
@@ -24,11 +29,15 @@
 - fixed error for users with view-document permission not being able to load an APD([#3264])
 - remove sys admins being returned in affiliations ([#3295])
 - added end-to-end test for APD overview section ([#3282])
+- added end-to-end tests for filling out key personnel page ([#3284])
+- added end-to-end tests for previous activities page ([#3312])
+- fixed export view of activity budgets ([#3388])
 
 # Previous releases
 
 See our [release history](https://github.com/CMSgov/eAPD/releases)
 
+[#2812]: https://github.com/CMSgov/eAPD/issues/2812
 [#3283]: https://github.com/CMSgov/eAPD/issues/3283
 [#2863]: https://github.com/CMSgov/eAPD/issues/2863
 [#3128]: https://github.com/CMSgov/eAPD/issues/3128
@@ -44,3 +53,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3338]: https://github.com/CMSgov/eAPD/issues/3338
 [#3277]: https://github.com/CMSgov/eAPD/issues/3277
 [#3282]: https://github.com/CMSgov/eAPD/issues/3282
+[#3284]: https://github.com/CMSgov/eAPD/issues/3284
+[#3312]: https://github.com/CMSgov/eAPD/issues/3312
+[#3388]: https://github.com/CMSgov/eAPD/issues/3388

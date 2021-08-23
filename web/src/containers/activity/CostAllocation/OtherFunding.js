@@ -42,7 +42,7 @@ const OtherFunding = ({
         {t('activities.otherFunding.title')}
       </h2>
       {Object.keys(years).map(ffy => (
-        <Fragment key={ffy}>
+        <div key={ffy}>
           <h3 className="heading-ffy ds-u-padding-top--4">
             <span>FFY {ffy}</span>
           </h3>
@@ -103,7 +103,7 @@ const OtherFunding = ({
               </tr>
             </tbody>
           </table>
-        </Fragment>
+        </div>
       ))}
     </Fragment>
   );

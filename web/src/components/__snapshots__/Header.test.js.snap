@@ -499,7 +499,7 @@ exports[`Header component renders the admin home title when an admin user is at 
             title=""
             transform={null}
           />
-          Admin Dashboard
+          WA APD Home
         </Connect(DashboardButton)>
       </div>
       <div
@@ -755,7 +755,7 @@ exports[`Header component renders the state admin link when user has required pe
             title=""
             transform={null}
           />
-          Admin Dashboard
+          WA APD Home
         </Connect(DashboardButton)>
       </div>
       <div
