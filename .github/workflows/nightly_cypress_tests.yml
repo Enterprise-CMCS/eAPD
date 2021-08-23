@@ -30,8 +30,6 @@ jobs:
       - name: Tar and Zip Frontend Node Modules
         working-directory: ./web
         run: |
-          pwd
-          ls -la
           tar -cvzf frontend-modules.tar.gz ./node_modules
       - name: Upload Frontend Node Modules 🕸️
         uses: actions/upload-artifact@v2
@@ -47,8 +45,6 @@ jobs:
         working-directory: ./api
         run: |
           pwd
-          ls -la
-          tar -cvzf backend-modules.tar.gz ./node_modules
       - name: Upload Frontend Node Modules 🕸️
         uses: actions/upload-artifact@v2
         with:
@@ -75,14 +71,14 @@ jobs:
       - name: Unarchieve and zip Frontend Node Modules
         working-directory: ./web/
         run: |
-          pwd
           ls -la
+          pwd
           tar xzvf frontend-modules.tar.gz
       - name: Frontend Vulnerability Scan 🕸️
-        working-directory: ./web/node_modules/
+        working-directory: ./web
         run: |
-          pwd
           ls -la
+          pwd
           npm run audit
     
       - name: Retrieve Cached Backend Modules
@@ -93,14 +89,14 @@ jobs:
       - name: Unarchieve and zip Backend Node Modules
         working-directory: ./api/
         run: |
-          pwd
           ls -la
+          pwd
           tar xzvf backend-modules.tar.gz
       - name: Backend Vulnerability Scan ✨
         working-directory: ./api
         run: |
-          pwd
           ls -la
+          pwd
           npm run audit
     needs: install-dependencies
 
