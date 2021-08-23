@@ -65,7 +65,6 @@ jobs:
     steps:
       - name: Retrieve Cached Frontend Modules
         uses: actions/download-artifact@v2
-        working-directory: ./web/
         with:
           name: frontend-modules.tar.gz
       - name: Unarchieve and zip Frontend Node Modules
@@ -83,7 +82,7 @@ jobs:
     
       - name: Retrieve Cached Backend Modules
         uses: actions/download-artifact@v2
-        working-directory: ./api/
+
         with:
           name: backend-modules
       - name: Unarchieve and zip Backend Node Modules
