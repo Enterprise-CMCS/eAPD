@@ -32,7 +32,7 @@ jobs:
         run: |
           pwd
           ls -la
-          tar -cvzf frontend-modules.tar.gz ./web/node_modules
+          tar -cvzf frontend-modules.tar.gz ./node_modules
       - name: Upload Frontend Node Modules 🕸️
         uses: actions/upload-artifact@v2
         with:
@@ -48,7 +48,7 @@ jobs:
         run: |
           pwd
           ls -la
-          tar -cvzf backend-modules.tar.gz ./api/node_modules
+          tar -cvzf backend-modules.tar.gz ./node_modules
       - name: Upload Frontend Node Modules 🕸️
         uses: actions/upload-artifact@v2
         with:
