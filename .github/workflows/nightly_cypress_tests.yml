@@ -58,6 +58,7 @@ jobs:
         working-directory: ./web
         run: |
           npm run audit
+    needs: install-dependencies
 
       - name: Retrieve Cached Backend Modules
         uses: actions/download-artifact@v2
@@ -80,3 +81,4 @@ jobs:
         with:
           browser: chrome
           headless: true
+    needs: install-dependencies
