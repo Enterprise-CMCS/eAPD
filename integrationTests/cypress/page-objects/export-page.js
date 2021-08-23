@@ -371,11 +371,11 @@ class ExportPage {
   };
 
   checkRowTotals = (otherFundingValue, medicaidValue) => {
-    cy.findAllByText('Other Funding')
+    cy.contains('td', 'Other Funding')
       .parent()
       .should('contain', `$${otherFundingValue}`);
 
-    cy.findAllByText('Total Computable Medicaid Cost')
+    cy.contains('td', 'Total Computable Medicaid Cost')
       .parent()
       .should('contain', `$${medicaidValue}`);
   };
