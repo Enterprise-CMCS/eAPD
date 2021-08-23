@@ -76,7 +76,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
         state_id: state.id,
         role_id: sysAdminRoleId,
         status: 'approved',
-        updated_by: 'seeds',
         username: 'sysadmin'
       });
     });
