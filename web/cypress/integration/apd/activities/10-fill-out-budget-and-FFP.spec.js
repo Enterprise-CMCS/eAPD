@@ -18,11 +18,6 @@ describe('Filling out budget and FFP', () => {
   const split = ['75-25', '50-50', '90-10'];
 
   before(() => {
-    cy.useStateStaff();
-    cy.contains('HITECH IAPD').click();
-
-    cy.goToActivityDashboard();
-
     cy.url().should('include', '/activities');
     cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.location('pathname').then(pathname => {
@@ -35,7 +30,7 @@ describe('Filling out budget and FFP', () => {
     cy.useStateStaff(dashboardUrl);
   });
 
-  it.only('Tests cost split table (Activity 1 - 2021)', function () {
+  it('Tests cost split table (Activity 1 - 2021)', function () {
     cy.findAllByText('Budget and FFP').eq(0).click({ force: true });
     const staff = this.data.staff[1];
     const expenses = this.data.expenses[1];
@@ -114,6 +109,7 @@ describe('Filling out budget and FFP', () => {
             .parent()
             .should('contain', `$${budgetPage.addCommas(otherFFYfunding)}`);
 
+          // Fill out quarter table
           const inputs = this.data.quarterVals[0];
           let staffPercentageSum = 0;
           let contractorPercentageSum = 0;
@@ -130,15 +126,6 @@ describe('Filling out budget and FFP', () => {
             staffPercentageSum,
             contractorPercentageSum
           );
-
-          // for (let k = 1; k < 5; k += 1) {
-          //   cy.get(`[data-cy="sbd-${years[i]}-${k}"]`).should($val => {
-          //     cy.log($val);
-          //     cy.log($val.text());
-          //   });
-          // console.log(tableValue);
-          // budgetPage.convertStringToNum(tableValue);
-          // }
 
           cy.get('[data-cy="subtotal"]').should($td => {
             const staffSubtotal = budgetPage.convertStringToNum(
@@ -170,7 +157,6 @@ describe('Filling out budget and FFP', () => {
           budgetPage.checkEachQuarterSubtotal();
         });
     }
-
     // Calculate totals for final section
     let activityTotal = 0;
     let otherFundingTotal = 0;
@@ -206,9 +192,11 @@ describe('Filling out budget and FFP', () => {
       'Alaska',
       budgetPage.addCommas(stateShare)
     );
+    cy.goToActivityDashboard();
   });
 
-  it('fills out Budget and FFP for activity 2', function () {
+  it.skip('fills out Budget and FFP for activity 2', function () {
+    cy.findAllByText('Edit').eq(1).click();
     cy.findAllByText('Budget and FFP').eq(1).click({ force: true });
 
     const staff = this.data.staff[2];

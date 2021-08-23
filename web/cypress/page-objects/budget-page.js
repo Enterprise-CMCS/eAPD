@@ -99,11 +99,8 @@ class BudgetPage {
   };
 
   checkCostSplitTable = (federal, state, expectedMedicaid) => {
-    let fedTotal = 0;
-    let stateTotal = 0;
-
-    fedTotal = federal * 0.01 * expectedMedicaid;
-    stateTotal = state * 0.01 * expectedMedicaid;
+    const fedTotal = federal * 0.01 * expectedMedicaid;
+    const stateTotal = state * 0.01 * expectedMedicaid;
 
     if (fedTotal + stateTotal !== expectedMedicaid) {
       throw new Error('Activity Table Calculation Failure');

@@ -12,9 +12,9 @@ class ActivityPage {
     if (Number.isInteger(index)) {
       cy.get(`[class="${className}"]`)
         .eq(index)
-        .should('contain', expectedValue);
+        .should('have.value', expectedValue);
     } else {
-      cy.get(`[class="${className}"]`).should('contain', expectedValue);
+      cy.get(`[class="${className}"]`).should('have.value', expectedValue);
     }
   };
 

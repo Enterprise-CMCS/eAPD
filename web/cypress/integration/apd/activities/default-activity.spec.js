@@ -151,7 +151,7 @@ describe('checking default values in Activities section', () => {
     activityPage.checkOtherStateExpensesOutput(
       'Hardware, software, and licensing',
       years,
-      0
+      [0, 0]
     );
 
     activityPage.checkDeleteButton(
@@ -189,7 +189,7 @@ describe('checking default values in Activities section', () => {
       'Full Contract Term: Date not specified - Date not specified',
       'Total Contract Cost: $0',
       years,
-      0
+      [0, 0]
     );
 
     activityPage.checkDeleteButton(
@@ -229,7 +229,7 @@ describe('checking default values in Activities section', () => {
             budgetPage.checkSubtotalTable('Other State Expenses', 0);
             budgetPage.checkSubtotalTable('Private Contractor', 0);
             budgetPage.checkTotalComputableMedicaidCost(0);
-            budgetPage.checkActivityTotalCostTable(0, 0, 0, 1);
+            budgetPage.checkActivityTotalCostTable(0, 0, 1);
 
             budgetPage.checkSplitFunctionality();
             budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
@@ -305,8 +305,13 @@ describe('checking default values in Activities section', () => {
                 budgetPage.checkSubtotalTable('Other State Expenses', 0);
                 budgetPage.checkSubtotalTable('Private Contractor', 0);
                 budgetPage.checkTotalComputableMedicaidCost(0);
+              });
+            cy.contains(`Activity ${i + 1} Budget for FFY ${years[k]}`)
+              .parent()
+              .next()
+              .within(() => {
                 exportPage.checkRowTotals(0, 0);
-                budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
+                budgetPage.checkCostSplitTable(90, 10, 0);
               });
             cy.contains('Estimated Quarterly Expenditure')
               .next()
