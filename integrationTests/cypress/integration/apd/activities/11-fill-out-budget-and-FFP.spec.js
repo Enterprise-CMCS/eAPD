@@ -18,6 +18,10 @@ describe('Filling out budget and FFP', () => {
   const split = ['75-25', '50-50', '90-10'];
 
   before(() => {
+    cy.useStateStaff();
+    cy.contains('HITECH IAPD').click();
+    cy.goToActivityDashboard();
+
     cy.url().should('include', '/activities');
     cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.location('pathname').then(pathname => {

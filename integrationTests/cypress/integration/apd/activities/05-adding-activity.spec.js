@@ -12,8 +12,7 @@ describe('Adding an activity in the Activity Dashboard', () => {
 
   before(() => {
     cy.useStateStaff();
-    cy.findByRole('button', { name: /Create new/i }).click();
-
+    cy.contains('HITECH IAPD').click();
     cy.goToActivityDashboard();
 
     cy.url().should('include', '/activities');

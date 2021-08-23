@@ -72,6 +72,7 @@ class PopulatePage {
     index
   ) => {
     this.fillTextField('ds-c-field', name);
+    cy.wait(1000);
     cy.setTinyMceContent(`contractor-description-field-${index}`, desc);
     this.fillDate('Contract start date', startDate);
     this.fillDate('Contract end date', endDate);

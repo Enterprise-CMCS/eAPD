@@ -12,6 +12,10 @@ describe('Filling out Outcomes and Milestones page', () => {
   let dashboardUrl;
 
   before(() => {
+    cy.useStateStaff();
+    cy.contains('HITECH IAPD').click();
+    cy.goToActivityDashboard();
+
     cy.url().should('include', '/activities');
     cy.location('pathname').then(pathname => {
       dashboardUrl = pathname;

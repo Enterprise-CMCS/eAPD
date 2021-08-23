@@ -16,7 +16,7 @@ describe('checking default values in Activities section', () => {
 
   before(() => {
     cy.useStateStaff();
-    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.contains('HITECH IAPD').click();
 
     // Gets list of available years
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>

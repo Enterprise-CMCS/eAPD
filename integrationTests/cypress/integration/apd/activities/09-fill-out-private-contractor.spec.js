@@ -15,6 +15,10 @@ describe('Filling out private contractors page', () => {
   const years = [2021, 2022];
 
   before(() => {
+    cy.useStateStaff();
+    cy.contains('HITECH IAPD').click();
+    cy.goToActivityDashboard();
+
     cy.url().should('include', '/activities');
     cy.location('pathname').then(pathname => {
       dashboardUrl = pathname;

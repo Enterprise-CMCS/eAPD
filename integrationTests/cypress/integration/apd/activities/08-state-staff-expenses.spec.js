@@ -13,6 +13,10 @@ describe('filling out staff & expenses for activities', function () {
   let dashboardUrl;
 
   before(() => {
+    cy.useStateStaff();
+    cy.contains('HITECH IAPD').click();
+    cy.goToActivityDashboard();
+
     cy.url().should('include', '/activities');
     cy.location('pathname').then(pathname => {
       dashboardUrl = pathname;
