@@ -71,7 +71,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: frontend-modules
-          path: web/frontend-modules.tar.gz
+          path: web/
       - name: Unarchieve and zip Frontend Node Modules
         working-directory: ./web/
         run: |
@@ -89,7 +89,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: backend-modules
-          path: api/backend-modules.tar.gz
+          path: api/
       - name: Unarchieve and zip Backend Node Modules
         working-directory: ./api/
         run: |
