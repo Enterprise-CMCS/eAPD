@@ -30,7 +30,7 @@ jobs:
       - name: Tar and Zip Frontend Node Modules
         working-directory: ./web
         run: |
-          tar -cvzf ./web/node_modules frontend-modules.tar.gz
+          tar -cvzf frontend-modules.tar.gz ./web/node_modules
       - name: Upload Frontend Node Modules 🕸️
         uses: actions/upload-artifact@v2
         with:
@@ -44,7 +44,7 @@ jobs:
       - name: Tar and Zip Backend Node Modules
         working-directory: ./api
         run: |
-          tar -cvzf ./api/node_modules backend-modules.tar.gz
+          tar -cvzf backend-modules.tar.gz ./api/node_modules
       - name: Upload Frontend Node Modules 🕸️
         uses: actions/upload-artifact@v2
         with:
