@@ -30,7 +30,7 @@ class BudgetPage {
   };
 
   checkSubtotalTable = (title, otherFundingAmount, keyPersonnelAmount) => {
-    let subtotal = 0;
+    let subtotal;
     if (title === 'State Staff') {
       cy.contains(title)
         .parent()
