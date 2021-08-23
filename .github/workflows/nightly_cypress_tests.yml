@@ -50,23 +50,24 @@ jobs:
       matrix:
         node-version: ['14']
     steps:
-      - name: Frontend Vulnerability Scan 🕸️
-        working-directory: ./web
-        run: |
-          npm run audit
       - name: Retrieve Cached Frontend Modules
         uses: actions/download-artifact@v2
         with:
           name: frontend-modules
+      - name: Frontend Vulnerability Scan 🕸️
+        working-directory: ./web
+        run: |
+          npm run audit
 
+      - name: Retrieve Cached Backend Modules
+        uses: actions/download-artifact@v2
+        with:
+          name: backend-modules
       - name: Backend Vulnerability Scan ✨
         working-directory: ./api
         run: |
           npm run audit
-      - name: Retrieve Cached Backend Modules
-        uses: actions/download-artifact@v2
-        with:
-          name: backend-modules          
+
 
   cypress-run-headless:
     runs-on: ubuntu-latest
