@@ -58,8 +58,7 @@ jobs:
         working-directory: ./web
         run: |
           npm run audit
-    needs: install-dependencies
-
+    
       - name: Retrieve Cached Backend Modules
         uses: actions/download-artifact@v2
         with:
@@ -68,7 +67,7 @@ jobs:
         working-directory: ./api
         run: |
           npm run audit
-
+    needs: install-dependencies
 
   cypress-run-headless:
     runs-on: ubuntu-latest
