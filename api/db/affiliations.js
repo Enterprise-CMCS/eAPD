@@ -167,7 +167,7 @@ const updateAuthAffiliation = async({
   stateId
 }) => {
   // Check that user is not editing themselves
-    const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
+  const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
     .select('user_id', 'role_id', 'status')
     .where({ state_id: stateId, id: affiliationId })
     .first();
@@ -182,12 +182,14 @@ const updateAuthAffiliation = async({
     .first();
 
   let expirationDate = null;
-  const today = new Date();
-  if (roleName === 'eAPD State Admin') {
-    expirationDate = new Date(today.getFullYear() + 1, '06', '30');
-  }
-  if (roleName === 'eAPD State Staff' || roleName === 'eAPD State Contractor') {
-    expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
+  if ( newStatus === 'approved' ) {
+    const today = new Date();
+    if (roleName === 'eAPD State Admin') {
+      expirationDate = new Date(today.getFullYear() + 1, '06', '30');
+    }
+    if (roleName === 'eAPD State Staff' || roleName === 'eAPD State Contractor') {
+      expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
+    }
   }
 
   const authAffiliationAudit = {
