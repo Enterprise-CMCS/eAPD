@@ -584,10 +584,6 @@ Object {
                         "format": "date-time",
                         "type": "string",
                       },
-                      "updated_by": Object {
-                        "description": "ID of the user who last updated this record",
-                        "type": "string",
-                      },
                       "user_id": Object {
                         "description": "ID of user",
                         "type": "string",
@@ -1610,10 +1606,6 @@ Object {
                         "format": "date-time",
                         "type": "string",
                       },
-                      "updated_by": Object {
-                        "description": "ID of the user who last updated this record",
-                        "type": "string",
-                      },
                       "user_id": Object {
                         "description": "ID of user",
                         "type": "string",
@@ -1744,10 +1736,6 @@ Object {
                     "updated_at": Object {
                       "description": "Timestamp of last update",
                       "format": "date-time",
-                      "type": "string",
-                    },
-                    "updated_by": Object {
-                      "description": "ID of the user who last updated this record",
                       "type": "string",
                     },
                     "user_id": Object {

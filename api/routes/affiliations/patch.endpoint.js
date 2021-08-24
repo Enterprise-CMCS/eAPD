@@ -65,7 +65,7 @@ describe('Affiliations endpoint | PATCH', () => {
       status: 'approved',
       roleId: 1106
     });
-    expect(response.status).toEqual(403);
+    expect(response.status).toEqual(400);
   });
 
   it(`returns 403, when user tries to change for a state they are not authorized for`, async () => {

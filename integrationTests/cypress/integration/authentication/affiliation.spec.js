@@ -221,7 +221,7 @@ describe('Affiliation', () => {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
+      cy.findByRole('heading', { name: /Alabama APDs/ }).should('exist');
 
       cy.findByRole('button', { name: /norole/ }).click();
       cy.findByText(/Switch State Affiliation/).click();

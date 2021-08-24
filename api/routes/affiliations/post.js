@@ -15,7 +15,8 @@ module.exports = app => {
           .returning(['id'])
           .insert({
             user_id: userId,
-            state_id: stateId
+            state_id: stateId,
+            username: request.user.username,
             // status: 'requested' // default status enum value
           })
           .then(rows => response.status(201).json(rows[0]))
