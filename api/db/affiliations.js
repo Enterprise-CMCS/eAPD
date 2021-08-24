@@ -175,20 +175,39 @@ const updateAuthAffiliation = async({
     throw new Error('User is editing their own affiliation')
   }
 
+  // Lookup role name and set expiration date accordingly
+  const { name: roleName } = await db('auth_roles')
+    .select('name')
+    .where({'auth_roles.id': newRoleId })
+    .first();
+
+  let expirationDate = null;
+  const today = new Date();
+  if(roleName === 'eAPD State Admin') {
+    expirationDate = new Date(today.getFullYear() + 1, '06', '30');
+  }
+  if(roleName === 'eAPD State Staff' || roleName === 'eAPD State Contractor') {
+    expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
+  }
+
+
   const authAffiliationAudit = {
     user_id: affiliationUserId,
     original_role_id: originalRoleId,
     original_status: originalStatus,
     new_role_id: newStatus !== 'approved' ? null : newRoleId,
     new_status: newStatus || null,
-    changed_by:changedBy}
+    changed_by:changedBy
+  }
+
 
 
   return db('auth_affiliations')
     .where({ state_id: stateId, id: affiliationId })
     .update({
       role_id: newStatus !== 'approved' ? null : newRoleId,
-      status: newStatus
+      status: newStatus,
+      expires_at: expirationDate
     })
     .then(() =>{
       return db('auth_affiliation_audit')
