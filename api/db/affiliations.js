@@ -183,13 +183,12 @@ const updateAuthAffiliation = async({
 
   let expirationDate = null;
   const today = new Date();
-  if(roleName === 'eAPD State Admin') {
+  if (roleName === 'eAPD State Admin') {
     expirationDate = new Date(today.getFullYear() + 1, '06', '30');
   }
-  if(roleName === 'eAPD State Staff' || roleName === 'eAPD State Contractor') {
+  if (roleName === 'eAPD State Staff' || roleName === 'eAPD State Contractor') {
     expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
   }
-
 
   const authAffiliationAudit = {
     user_id: affiliationUserId,

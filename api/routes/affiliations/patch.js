@@ -38,12 +38,11 @@ module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) 
           .status(400)
           .send({ error: 'affiliation status or roleId not provided' })
           .end();
-
       }
 
       const audit = auditor(statusToAction(status), request);
-      try{
 
+      try {
         await updateAuthAffiliation_({
           stateId,
           newRoleId: roleId,
@@ -51,10 +50,9 @@ module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) 
           changedBy: userId,
           affiliationId: id
         })
-
       } catch(e) {
-          logger.error({ id: request.id, message: e });
-          return next(e);
+        logger.error({ id: request.id, message: e });
+        return next(e);
       }
 
       audit.target({
@@ -65,8 +63,6 @@ module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) 
       })
       audit.log()
       return response.status(200).end()
-
     }
   );
-
 };
