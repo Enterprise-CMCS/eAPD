@@ -24,7 +24,7 @@ exports.up = async knex => {
               .where('status', 'approved')
               .where('id', id)
               .update({
-                expires_at: new Date(created_at.getFullYear() + 1, created_at.getMonth(), created_at.getDate())
+                expires_at: created_at.setFullYear(created_at.getFullYear + 1)
               })
             }
           if(role_id === roles['eAPD State Admin']) {
