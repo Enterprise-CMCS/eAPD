@@ -63,7 +63,9 @@ tap.test('state certifications files endpoints', async endpointTest => {
     
     tests.beforeEach(async () => {
       filesEndpoint(app, { ...di });
-      handler = app.post.args[0].pop();
+      handler = app.post.args.find(
+        args => args[0] === '/auth/certifications/files'
+      ).pop();
       di.crypto.createHash.withArgs('sha256').returnsThis();
       di.crypto.update.withArgs(buffer).returnsThis();
       di.crypto.digest.withArgs('hex').returns('123');
@@ -128,7 +130,9 @@ tap.test('state certifications files endpoints', async endpointTest => {
     
     tests.beforeEach(async () => {
       filesEndpoint(app, { ...di });
-      handler = app.get.args[0].pop();
+      handler = app.get.args.find(
+        args => args[0] === '/auth/certifications/files/:fileID'
+      ).pop();
     });
 
     tests.test('there is an error retrieving the file', async test => {
