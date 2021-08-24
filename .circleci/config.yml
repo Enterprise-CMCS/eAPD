@@ -246,6 +246,9 @@ jobs:
   install dependencies:
     docker:
       - image: node:14
+        auth: 
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - restore_cache:
@@ -273,6 +276,9 @@ jobs:
   validate openapi:
     docker:
       - image: circleci/node:14
+        auth: 
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD      
     steps:
       - checkout
       - setup_remote_docker
@@ -282,6 +288,7 @@ jobs:
       - run:
           name: validate
           command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker create -v /openapi --name openapi alpine /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
@@ -291,6 +298,9 @@ jobs:
   yaml test:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - run: npm install glob
@@ -313,7 +323,9 @@ jobs:
       - run:
           name: build API image
           working_directory: ~/project/api
-          command: docker build -t cms-eapd/api ./
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker build -t cms-eapd/api ./
       - run:
           name: run tests
           working_directory: ~/project/api
@@ -329,6 +341,9 @@ jobs:
   backend lint:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -342,6 +357,9 @@ jobs:
   backend unit test:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -368,6 +386,9 @@ jobs:
         type: string
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -385,6 +406,9 @@ jobs:
   frontend lint:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -398,6 +422,9 @@ jobs:
   frontend test:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -423,6 +450,9 @@ jobs:
         type: string
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -443,20 +473,26 @@ jobs:
       - run:
           name: build API image
           working_directory: ~/project/api
-          command: docker build -t cms-eapd/api ./
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker build -t cms-eapd/api ./
       - run:
           name: start everything up
           working_directory: ~/project/api
           command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
-          command: docker pull owasp/zap2docker-stable
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker pull owasp/zap2docker-stable
       - run:
           name: run owasp zap
           command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
@@ -478,6 +514,9 @@ jobs:
         type: string
     docker:
       - image: python:3
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -557,6 +596,9 @@ jobs:
         type: string
     docker:
       - image: python:3
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:
@@ -593,6 +635,9 @@ jobs:
   preview deploy:
     docker:
       - image: python:3
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - run:
@@ -634,6 +679,9 @@ jobs:
   store artifacts:
     docker:
       - image: node:14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - attach_workspace:

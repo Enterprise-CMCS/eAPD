@@ -21,22 +21,10 @@ chmod -R g+w /app
 
 mkdir /app/tls
 
-# Setup Mongo Repo
-touch /etc/yum.repos.d/mongodb-org-4.4.repo
-echo "
-[mongodb-org-4.4]
-name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/7/mongodb-org/4.4/x86_64/
-gpgcheck=1
-enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
-" > /etc/yum.repos.d/mongodb-org-4.4.repo
-
 # Install git, nginx, postgres
 yum -y install git 
 yum -y install nginx
 yum -y install postgresql-server 
-yum -y install mongodb-org checkpolicy
 
 # Install CloudWatch Agent
 curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
@@ -66,23 +54,6 @@ rm -f /app/tls/server.csr
 # Set SELinux context so Nginx can read the cert files
 semanage fcontext -a -t httpd_sys_content_t "/app/tls(/.*)?"
 restorecon -Rv /app/tls
-
-# SELinux for Mongo
-cat > mongodb_cgroup_memory.te <<EOF
-module mongodb_cgroup_memory 1.0;
-require {
-      type cgroup_t;
-      type mongod_t;
-      class dir search;
-      class file { getattr open read };
-}
-#============= mongod_t ==============
-allow mongod_t cgroup_t:dir search;
-allow mongod_t cgroup_t:file { getattr open read };
-EOF
-checkmodule -M -m -o mongodb_cgroup_memory.mod mongodb_cgroup_memory.te
-semodule_package -o mongodb_cgroup_memory.pp -m mongodb_cgroup_memory.mod
-sudo semodule -i mongodb_cgroup_memory.pp
 
 # Configure CloudWatch Agent
 mkdir -p /opt/aws/amazon-cloudwatch-agent/doc/
@@ -167,51 +138,51 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
         "collect_list": [
           {
             "file_path": "/var/log/aide/aide.log*",
-            "log_group_name": "test/var/log/aide/aide.log"
+            "log_group_name": "preview/var/log/aide/aide.log"
           },
           {
             "file_path": "/var/log/audit/audit.log*",
-            "log_group_name": "test/var/log/audit/audit.log"
+            "log_group_name": "preview/var/log/audit/audit.log"
           },
           {
             "file_path": "/var/log/awslogs.log*",
-            "log_group_name": "test/var/log/awslogs.log"
+            "log_group_name": "preview/var/log/awslogs.log"
           },
           {
             "file_path": "/var/log/cloud-init.log*",
-            "log_group_name": "test/var/log/cloud-init.log"
+            "log_group_name": "preview/var/log/cloud-init.log"
           },
           {
             "file_path": "/var/log/cloud-init-output.log*",
-            "log_group_name": "test/var/log/cloud-init-output.log"
+            "log_group_name": "preview/var/log/cloud-init-output.log"
           },
           {
             "file_path": "/var/log/cron*",
-            "log_group_name": "test/var/log/cron"
+            "log_group_name": "preview/var/log/cron"
           },
           {
             "file_path": "/var/log/dmesg*",
-            "log_group_name": "test/var/log/dmesg"
+            "log_group_name": "preview/var/log/dmesg"
           },
           {
             "file_path": "/var/log/maillog*",
-            "log_group_name": "test/var/log/maillog"
+            "log_group_name": "preview/var/log/maillog"
           },
           {
             "file_path": "/var/log/messages*",
-            "log_group_name": "test/var/log/messages"
+            "log_group_name": "preview/var/log/messages"
           },
           {
             "file_path": "/var/log/nginx/access.log*",
-            "log_group_name": "test/var/log/nginx/access.log"
+            "log_group_name": "preview/var/log/nginx/access.log"
           },
           {
             "file_path": "/var/log/nginx/error.log*",
-            "log_group_name": "test/var/log/nginx/error.log"
+            "log_group_name": "preview/var/log/nginx/error.log"
           },
           {
             "file_path": "/var/log/secure*",
-            "log_group_name": "test/var/log/secure"
+            "log_group_name": "preview/var/log/secure"
           }
         ]
       }
@@ -230,15 +201,15 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
         "collect_list": [
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent.log*",
-            "log_group_name": "test/var/opt/ds_agent/diag/ds_agent.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent-err.log*",
-            "log_group_name": "test/var/opt/ds_agent/diag/ds_agent-err.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent-err.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_am.log*",
-            "log_group_name": "test/var/opt/ds_agent/diag/ds_am.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_am.log"
           }
         ]
       }
@@ -258,43 +229,43 @@ cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
         "collect_list": [
           {
             "file_path": "/app/api/logs/eAPD-API-error-0.log*",
-            "log_group_name": "test/app/api/logs/eAPD-API-error-0.log"
+            "log_group_name": "preview/app/api/logs/eAPD-API-error-0.log"
           },
           {
             "file_path": "/app/api/logs/eAPD-API-out-0.log*",
-            "log_group_name": "test/app/api/logs/eAPD-API-out-0.log"
+            "log_group_name": "preview/app/api/logs/eAPD-API-out-0.log"
           },
           {
             "file_path": "/app/api/logs/eAPD-API-*",
-            "log_group_name": "test/app/api/logs/eAPD-API-combined-0.log"
+            "log_group_name": "preview/app/api/logs/eAPD-API-combined-0.log"
           },          
           {
             "file_path": "/app/api/logs/Database-migration-error.log*",
-            "log_group_name": "test/app/api/logs/Database-migration-error.log"
+            "log_group_name": "preview/app/api/logs/Database-migration-error.log"
           },
           {
             "file_path": "/app/api/logs/Database-migration-out.log*",
-            "log_group_name": "test/app/api/logs/Database-migration-out.log"
+            "log_group_name": "preview/app/api/logs/Database-migration-out.log"
           },
           {
             "file_path": "/app/api/logs/Database-migration-*",
-            "log_group_name": "test/app/api/logs/Database-migration-combined.log"
+            "log_group_name": "preview/app/api/logs/Database-migration-combined.log"
           },          
           {
             "file_path": "/app/api/logs/Database-seeding-error.log*",
-            "log_group_name": "test/app/api/logs/Database-seeding-error.log"
+            "log_group_name": "preview/app/api/logs/Database-seeding-error.log"
           },
           {
             "file_path": "/app/api/logs/Database-seeding-out.log*",
-            "log_group_name": "test/app/api/logs/Database-seeding-out.log"
+            "log_group_name": "preview/app/api/logs/Database-seeding-out.log"
           },
           {
             "file_path": "/app/api/logs/Database-seeding-*",
-            "log_group_name": "test/app/api/logs/Database-seeding-combined.log"
+            "log_group_name": "preview/app/api/logs/Database-seeding-combined.log"
           },                                           
           {
             "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
-            "log_group_name": "test/app/api/logs/cms-hitech-apd-api.logs"              
+            "log_group_name": "preview/app/api/logs/cms-hitech-apd-api.logs"              
           }    
         ]
       }
@@ -312,3 +283,4 @@ CWAPPLOGCONFIG
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 R_USER
+
