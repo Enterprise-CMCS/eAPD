@@ -123,7 +123,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       role_id: stateAdminRoleId,
       status: 'approved',
       updated_by: 'seeds',
-      username: stateAdmin.profile.login
+      username: stateAdmin.profile.login,
       expires_at: format(new Date(new Date().getFullYear() + 1, '06', '30'), PostgresDateFormat),
     });
     // Let them be a staffer in Maryland too
