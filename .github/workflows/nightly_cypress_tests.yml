@@ -178,10 +178,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Cypress Run Frontend
-        working-directory: ./web      
         uses: cypress-io/github-action@v2
         with:
 #          record: true
+          working-directory: ./web      
           browser: chrome
           headless: true
           project: ./web
@@ -191,10 +191,10 @@ jobs:
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Cypress Run Backend
-        working-directory: ./api      
         uses: cypress-io/github-action@v2
         with:
 #          record: true
+          working-directory: ./api      
           browser: chrome
           headless: true
           project: ./api
