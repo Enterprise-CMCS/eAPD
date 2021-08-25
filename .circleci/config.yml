@@ -25,7 +25,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
                 - main
                 - development
     jobs:
@@ -95,7 +94,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
                 - development
           requires:
             - store artifacts staging
@@ -146,7 +144,6 @@ workflows:
           filters:
             branches:
               ignore:
-                - master
                 - development
           requires:
             - frontend dependency vulnerability scan
@@ -166,7 +163,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
                 - development
           requires:
             - frontend dependency vulnerability scan
@@ -176,7 +172,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
                 - development
           requires:
             - frontend build staging
@@ -204,7 +199,6 @@ workflows:
           filters:
             branches:
               ignore:
-                - master
                 - development
             tags:
               ignore: /^noinfra.*/
@@ -217,7 +211,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
                 - development
           requires:
             - backend dependency vulnerability scan
