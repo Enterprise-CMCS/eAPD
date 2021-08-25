@@ -100,7 +100,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
         subDays(new Date(), 35),
         PostgresDateFormat
       ),
-      certifiedBy: 'seeds'
     });
     oktaUsers.push(formatOktaUser(regularUser));
   }
@@ -142,7 +141,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
         addDays(new Date(), 325),
         PostgresDateFormat
       ),
-      certifiedBy: 'seeds'
+
     });
 
     oktaUsers.push(formatOktaUser(stateAdmin));
@@ -166,7 +165,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
         subDays(new Date(), 35),
         PostgresDateFormat
       ),
-      certifiedBy: 'seeds'
     });
     oktaUsers.push(formatOktaUser(stateStaff));
   }
@@ -223,6 +221,111 @@ const createUsersToAdd = async (knex, oktaClient) => {
 
     oktaUsers.push(formatOktaUser(revokedRole));
   }
+  // completely fake people for state certification matching
+
+  // This pending affiliation should be matched by E-mail
+  oktaUsers.push(formatOktaUser({
+    profile:{
+      email: 'Dirtbaler@email.com',
+      displayName: 'Dirtbaler Wynne',
+      secondEmail: '' ,
+      primaryPhone: '',
+      mobilePhone: '',
+      login: '7e304c3d23e0'
+    },
+    id: 'pendingMatchByEmail'
+  }))
+
+  oktaAffiliations.push({
+    user_id: 'pendingMatchByEmail',
+    state_id: 'ak',
+    status: 'requested',
+    username: '7e304c3d23e0'
+  });
+
+  // This pending affiliation should be matched by name
+  oktaUsers.push(formatOktaUser({
+    profile:{
+      email: 'Hunnicutt@email.com',
+      displayName: 'Pickuptrigger Hunnicutt',
+      secondEmail: '' ,
+      primaryPhone: '',
+      mobilePhone: '',
+      login: 'c3fea0fa8d82'
+    },
+    id: 'pendingMatchByName'
+  }))
+
+  oktaAffiliations.push({
+    user_id: 'pendingMatchByName',
+    state_id: 'ak',
+    status: 'requested',
+    username: 'c3fea0fa8d82'
+  });
+
+  // This state staff should be matched by email
+  oktaUsers.push(formatOktaUser({
+    profile:{
+      email: 'Horsepicker@email.com',
+      displayName: 'Mitchell Horsepicker',
+      secondEmail: '' ,
+      primaryPhone: '',
+      mobilePhone: '',
+      login: '25be870b19b1'
+    },
+    id: 'staffMatchByEmail'
+  }))
+
+  oktaAffiliations.push({
+    user_id: 'staffMatchByEmail',
+    state_id: 'ak',
+    role_id: stateStaffRoleId,
+    status: 'approved',
+    username: '25be870b19b1'
+  });
+
+  // This state staff should be matched by name
+  oktaUsers.push(formatOktaUser({
+    profile:{
+      email: 'wflynn@email.com',
+      displayName: 'Wheatgreaser Flynn',
+      secondEmail: '' ,
+      primaryPhone: '',
+      mobilePhone: '',
+      login: '4fae6634ef51'
+    },
+    id: 'staffMatchByName'
+  }))
+
+  oktaAffiliations.push({
+    user_id: 'staffMatchByName',
+    state_id: 'ak',
+    role_id: stateStaffRoleId,
+    status: 'approved',
+    username: '4fae6634ef51'
+  });
+  // This state staff should be matched by email to the same record as the above user
+  oktaUsers.push(formatOktaUser({
+    profile:{
+      email: 'Wheatgreaser@email.com',
+      displayName: 'Will Wheaton',
+      secondEmail: '' ,
+      primaryPhone: '',
+      mobilePhone: '',
+      login: '59f4dfda92c8'
+    },
+    id: 'staffMatchByEmail2'
+  }))
+
+  oktaAffiliations.push({
+    user_id: 'staffMatchByEmail2',
+    state_id: 'ak',
+    role_id: stateStaffRoleId,
+    status: 'approved',
+    username: '59f4dfda92c8'
+  });
+
+
   return { oktaAffiliations, stateCertifications, oktaUsers };
 };
 

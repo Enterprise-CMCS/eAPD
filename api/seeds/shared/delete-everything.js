@@ -21,4 +21,6 @@ exports.seed = async knex =>
     .then(() => Promise.all([knex('auth_affiliations').del()]))
     .then(() => Promise.all([knex('auth_roles').del()]))
     .then(() => knex('apds').del())
-    .then(() => knex('states').del());
+    .then(() => knex('states').del())
+    .then(() => knex('state_admin_certification_match').del())
+    .then(() => knex('state_admin_certifications').del());
