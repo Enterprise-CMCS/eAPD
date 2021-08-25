@@ -57,7 +57,7 @@ exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
   />
   <DollarField
     key="7473"
-    label="7473 Cost"
+    label="FFY 7473 Cost"
     name="cost"
     onChange={[Function]}
     size="medium"
@@ -65,7 +65,7 @@ exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
   />
   <DollarField
     key="7474"
-    label="7474 Cost"
+    label="FFY 7474 Cost"
     name="cost"
     onChange={[Function]}
     size="medium"
