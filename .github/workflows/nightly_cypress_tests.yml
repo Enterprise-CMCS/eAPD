@@ -31,6 +31,8 @@ jobs:
         working-directory: ./web
         run: |
           tar -cvzf frontend-modules.tar.gz ./node_modules
+          ls -la
+          pwd
       - name: Upload Frontend Node Modules 🕸️
         uses: actions/upload-artifact@v2
         with:
@@ -44,6 +46,8 @@ jobs:
       - name: Tar and Zip Backend Node Modules
         working-directory: ./api
         run: |
+          tar -cvzf backend-modules.tar.gz ./node_modules
+          ls -la
           pwd
       - name: Upload Frontend Node Modules 🕸️
         uses: actions/upload-artifact@v2
