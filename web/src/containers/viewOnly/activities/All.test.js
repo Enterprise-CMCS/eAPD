@@ -28,7 +28,7 @@ describe('viewOnly <Activities />', () => {
     activities.forEach((activity, index) => {
       expect(
         getByTextWithin(
-          `${index + 1}. ${activity.name} | ${activity.fundingSource}`
+          `${index + 1}. ${activity.name || "Untitled"} | ${activity.fundingSource}`
         )
       ).toBeTruthy();
     });

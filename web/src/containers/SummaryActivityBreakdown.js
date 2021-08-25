@@ -67,7 +67,7 @@ const mapStateToProps = (
   const activity = getActivity(state, { activityIndex });
 
   return {
-    activityName: activity.name || `Activity ${activityIndex + 1}`,
+    activityName: activity.name || "Untitled",
     fundingSource: activity.fundingSource,
     costSummary: getCostSummary(state, { activityIndex })
   };

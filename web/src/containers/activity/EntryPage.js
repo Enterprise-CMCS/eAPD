@@ -12,7 +12,7 @@ const EntryPage = ({ activityNames }) => {
   return (
     <div id="activity-entry-page">
       <h2>
-        Activity {activityIndex + 1}: {activityNames[activityIndex]}
+        Activity {activityIndex + 1}: {activityNames[activityIndex] || "Untitled"}
       </h2>
       <AlertMissingFFY />
       <ActivityRoutes activityIndex={activityIndex} />
