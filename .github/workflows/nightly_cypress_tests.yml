@@ -181,7 +181,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
 #          record: true
-          working-directory: ./web      
+          working-directory: ./integrationTests
           browser: chrome
           headless: true
           project: ./web
@@ -190,11 +190,12 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
       - name: Cypress Run Backend
         uses: cypress-io/github-action@v2
         with:
 #          record: true
-          working-directory: ./api      
+          working-directory: ./integrationTests
           browser: chrome
           headless: true
           project: ./api
