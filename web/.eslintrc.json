@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier", "plugin:jsx-a11y/strict", "plugin:cypress/recommended"],
+  "extends": ["airbnb", "prettier", "plugin:jsx-a11y/strict"],
   "rules": {
     "arrow-body-style": "off",
     "jsx-a11y/anchor-is-valid": [

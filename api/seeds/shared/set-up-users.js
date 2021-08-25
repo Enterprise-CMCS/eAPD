@@ -89,7 +89,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       role_id: stateAdminRoleId,
       status: 'approved',
       updated_by: 'seeds',
-      username: 'em@il.com'
+      username: 'em@il.com',
     });
     // Add an expired certification and this user will be downgraded to "regular user"
     stateCertifications.push({
@@ -110,7 +110,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'fd',
       role_id: fedAdminRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: fedAdmin.profile.login
     });
     oktaUsers.push(formatOktaUser(fedAdmin));
   }
@@ -120,7 +121,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: stateAdmin.profile.login
     });
     // Let them be a staffer in Maryland too
     oktaAffiliations.push({
@@ -128,7 +130,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'md',
       role_id: stateStaffRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: stateAdmin.profile.login
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
@@ -151,7 +154,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: stateStaff.profile.login
     });
     // Add an invalid certification and this user will remain an staff member
     stateCertifications.push({
@@ -172,7 +176,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateContractorRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: stateContractor.profile.login
     });
     oktaUsers.push(formatOktaUser(stateContractor));
   }
@@ -183,7 +188,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
-      updated_by: 'seeds'
+      updated_by: 'seeds',
+      username: resetmfa.profile.login
     });
     oktaUsers.push(formatOktaUser(resetmfa));
   }
@@ -192,7 +198,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       user_id: requestedRole.id,
       state_id: 'ak',
-      status: 'requested'
+      status: 'requested',
+      username: requestedRole.profile.login
     });
 
     oktaUsers.push(formatOktaUser(requestedRole));
@@ -201,7 +208,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       user_id: deniedRole.id,
       state_id: 'ak',
-      status: 'denied'
+      status: 'denied',
+      username: deniedRole.profile.login
     });
     oktaUsers.push(formatOktaUser(deniedRole));
   }
@@ -209,7 +217,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       user_id: revokedRole.id,
       state_id: 'ak',
-      status: 'revoked'
+      status: 'revoked',
+      username: revokedRole.profile.login
     });
 
     oktaUsers.push(formatOktaUser(revokedRole));
