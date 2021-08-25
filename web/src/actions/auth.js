@@ -197,7 +197,11 @@ export const authCheck = () => async dispatch => {
     const decodedCookie = jwtDecode(eapdCookie);  
     const epochTimestampInSeconds = Math.round(new Date() / 1000);
     
-    if(decodedCookie.exp && decodedCookie.exp > epochTimestampInSeconds && decodedCookie.aud === process.env.NODE_ENV) {
+    if(
+      decodedCookie.exp
+      && decodedCookie.exp > epochTimestampInSeconds
+      && decodedCookie.aud === `eAPD-${process.env.NODE_ENV}`
+    ){
       dispatch(updateUserInfo(decodedCookie));
       dispatch(completeLogin());
       if (decodedCookie.activities) {

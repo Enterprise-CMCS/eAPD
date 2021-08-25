@@ -84,7 +84,7 @@ const defaultOptions = {
   algorithm: 'HS256',
   expiresIn: '12h',
   notBefore: '0',
-  audience: process.env.NODE_ENV,
+  audience: `eAPD-${process.env.NODE_ENV}`,
   issuer: 'eAPD'
 };
 
