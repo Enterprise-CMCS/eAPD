@@ -16,7 +16,6 @@ Anticipated release: July 28, 2021
 - resolved issue with invalid jwt throwing error ([#3283])
 - Reduced the size of the JWT payload because sys admins had a 24KB payload and the max size is 4KB. ([#3246])
 - fixed error for users with view-document permission not being able to load an APD([#3264])
-- fixed issue where frontend would accept a token that is valid for another EAPD version as valid ([#3408])
 
 #### ⚙️ Behind the scenes
 
@@ -28,11 +27,13 @@ Anticipated release: July 28, 2021
 - prevented some unexpected JSON parsing errors from being escalated to the error log. ([#3176])
 - Reduced the size of the JWT payload because sys admins had a 24KB payload and the max size is 4KB. ([#3246])
 - fixed error for users with view-document permission not being able to load an APD([#3264])
+- added audit log to track changes to user access ([#3262])
 - remove sys admins being returned in affiliations ([#3295])
 - added end-to-end test for APD overview section ([#3282])
 - added end-to-end tests for filling out key personnel page ([#3284])
 - added end-to-end tests for previous activities page ([#3312])
 - fixed export view of activity budgets ([#3388])
+- added end-to-end tests for assurances and compliance page ([#3390])
 
 # Previous releases
 
@@ -56,5 +57,6 @@ See our [release history](https://github.com/CMSgov/eAPD/releases)
 [#3282]: https://github.com/CMSgov/eAPD/issues/3282
 [#3284]: https://github.com/CMSgov/eAPD/issues/3284
 [#3312]: https://github.com/CMSgov/eAPD/issues/3312
+[#3262]: https://github.com/CMSgov/eAPD/issues/3262
 [#3388]: https://github.com/CMSgov/eAPD/issues/3388
-[#3408]: https://github.com/CMSgov/eAPD/issues/3408
+[#3390]: https://github.com/CMSgov/eAPD/issues/3390
