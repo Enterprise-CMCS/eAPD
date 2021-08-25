@@ -115,13 +115,28 @@ jobs:
       - name: Checkout Repo 🛎️
         uses: actions/checkout@v2
 
-      - name: Cypress run
+      - name: Cypress Run Frontend
         uses: cypress-io/github-action@v2
         with:
-          record: true
+#          record: true
+          browser: chrome
+          headless: true
+          project: ./web
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Cypress Run Backend
+        uses: cypress-io/github-action@v2
+        with:
+#          record: true
+          browser: chrome
+          headless: true
+          project: ./api
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}             
     needs: install-dependencies
