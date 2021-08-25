@@ -3,7 +3,7 @@ import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
 import tokens from '../../../api/seeds/test/tokens.json';
-import { API_COOKIE_NAME } from '../../src/constants';
+import { API_COOKIE_NAME } from '../../../web/src/constants';
 
 const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000
@@ -122,4 +122,14 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
   Cypress.on('uncaught:exception', () => {
     return false;
   });
+});
+
+Cypress.Commands.add('goToActivityDashboard', () => {
+  cy.findAllByText('Activities').click();
+  cy.contains('Activities Dashboard').click();
+});
+
+Cypress.Commands.add('goToExportView', () => {
+  cy.contains('Export and Submit').click();
+  cy.contains('Continue to Review').click();
 });
