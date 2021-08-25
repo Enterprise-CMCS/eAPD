@@ -184,7 +184,7 @@ jobs:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
-          project: ./web
+#          project: ./web
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
@@ -198,7 +198,7 @@ jobs:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
-          project: ./api
+#          project: ./api
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
