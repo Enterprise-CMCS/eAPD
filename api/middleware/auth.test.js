@@ -99,6 +99,50 @@ tap.test('"can" middleware', async canMiddlewareTest => {
       validTest.ok(next.called, 'endpoint handling chain is continued');
     }
   );
+
+
+  canMiddlewareTest.test(
+    'rejects if the user has one of the expected activities',
+    async invalidTest => {
+      can(['foo', 'bar'])({ user: { activities: ['foo'] } }, res, next);
+
+      invalidTest.ok(res.send.notCalled, 'no body is sent');
+      invalidTest.ok(
+        next.notCalled,
+        'endpoint handling chain is not continued'
+      );
+    }
+  );
+
+  canMiddlewareTest.test(
+    'rejects if the user has one of the expected activities',
+    async invalidTest => {
+      can(['foo', 'bar'])({ user: { activities: ['bar'] } }, res, next);
+
+      invalidTest.ok(res.send.notCalled, 'no body is sent');
+      invalidTest.ok(
+        next.notCalled,
+        'endpoint handling chain is not continued'
+      );
+    }
+  );
+
+  canMiddlewareTest.test(
+    'rejects if the user does not have the expected activity',
+    async invalidTest => {
+      can(['activity', 'quidditch'])({ user: { activities: ['foo', 'bar', 'baz', 'qux'] } }, res, next);
+
+      invalidTest.ok(
+        res.status.calledWith(403),
+        'HTTP status set to 403 Forbidden'
+      );
+      invalidTest.ok(res.end.called, 'response is terminated');
+      invalidTest.ok(
+        next.notCalled,
+        'endpoint handling chain is not continued'
+      );
+    }
+  );
 });
 
 tap.test('"validForState" middleware', async validForStateMiddlewareTest => {

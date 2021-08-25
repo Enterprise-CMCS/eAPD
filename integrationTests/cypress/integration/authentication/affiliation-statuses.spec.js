@@ -22,7 +22,7 @@ describe('Invalid Login Attempts', () => {
   it('show the revoked page for a user with a revoked request', () => {
     cy.loginWithEnv('revokedrole');
 
-    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
+    cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
     cy.findByRole('heading', { name: 'Approval Permissions Revoked' }).should(
       'exist'
     );

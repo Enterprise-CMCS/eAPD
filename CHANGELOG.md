@@ -4,13 +4,11 @@ Anticipated release: Aug 20, 2021
 
 #### 🚀 New features
 
-
 #### 🐛 Bugs fixed
 
-
 #### ⚙️ Behind the scenes
-- Updates previously broken auth tests ([#3254])
 
+- Updates previously broken auth tests ([#3254])
 
 # Previous releases
 
