@@ -371,17 +371,36 @@ class ExportPage {
   };
 
   checkRowTotals = (otherFundingValue, medicaidValue) => {
-    cy.findAllByText('Other Funding')
+    cy.contains('td', 'Other Funding')
       .parent()
       .should('contain', `$${otherFundingValue}`);
 
-    cy.findAllByText('Total Computable Medicaid Cost')
+    cy.contains('td', 'Total Computable Medicaid Cost')
       .parent()
       .should('contain', `$${medicaidValue}`);
   };
 
   checkActivityNameAtEnd = name => {
     cy.contains(`The total cost of the ${name}`).should('exist');
+  };
+
+  // assert if a link with the given text and URL reference exists here
+  assurancesComplianceAssertLink = (category, regulation, ref) => {
+    cy.findByRole('heading', { name: /Assurances and Compliance/i }).parent()
+      .findByRole('heading', { name: category }).parent()
+      .contains(regulation)
+      .invoke('attr', 'href')
+      .then(href => {
+        cy.wrap(href).should('eq', ref);
+      });
+  };
+
+  // Given a regulation name, get the response entered by the user
+  assurancesComplianceResponse = (category, regulation) => {
+    return cy.findByRole('heading', { name: /Assurances and Compliance/i }).parent()
+      .findByRole('heading', { name: category }).parent()
+      .contains('a', regulation).parent().next()
+      .invoke('text')
   };
 }
 
