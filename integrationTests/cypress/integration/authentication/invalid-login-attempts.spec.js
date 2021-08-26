@@ -26,7 +26,7 @@ describe('Invalid Login Attempts', () => {
       cy.login('bad user', 'bad password');
       cy.findByRole('button', { name: /Logging in/i }).should('exist');
 
-      cy.wait(3000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.wait(6000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.findByText('Your username and/or password is incorrect.').should(
         'exist'
       );
