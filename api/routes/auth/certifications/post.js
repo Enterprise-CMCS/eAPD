@@ -32,18 +32,18 @@ module.exports = (
       const username = req.user.id;
 
       try {        
-        const { error = null } = await addStateAdminCertification(
-          username,
-          name, 
-          email, 
-          phone, 
-          state, 
-          certifiedByName,
-          certifiedByTitle,
-          certifiedByEmail,
-          certifiedBySignature,
-          fileUrl
-        );        
+        const { error = null } = await addStateAdminCertification({
+          username: username,
+          name: name, 
+          email: email, 
+          phone: phone, 
+          state: state, 
+          certifiedByName: certifiedByName,
+          certifiedByTitle: certifiedByTitle,
+          certifiedByEmail: certifiedByEmail,
+          certifiedBySignature: certifiedBySignature,
+          fileUrl: fileUrl            
+        });        
         if (error) {
           res.status(400).end();
         }

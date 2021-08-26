@@ -98,7 +98,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
         subDays(new Date(), 35),
         PostgresDateFormat
       ),
-      certifiedBy: 'seeds'
+      certifiedByName: 'seeds'
     });
     oktaUsers.push(formatOktaUser(regularUser));
   }
@@ -137,7 +137,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
         addDays(new Date(), 325),
         PostgresDateFormat
       ),
-      certifiedBy: 'seeds'
+      certifiedByName: 'seeds'
     });
 
     oktaUsers.push(formatOktaUser(stateAdmin));
@@ -160,7 +160,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
         subDays(new Date(), 35),
         PostgresDateFormat
       ),
-      certifiedBy: 'seeds'
+      certifiedByName: 'seeds'
     });
     oktaUsers.push(formatOktaUser(stateStaff));
   }
