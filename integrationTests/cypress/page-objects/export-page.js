@@ -454,6 +454,24 @@ class ExportPage {
       .invoke('text');
   };
   
+  // assert if a link with the given text and URL reference exists here
+  assurancesComplianceAssertLink = (category, regulation, ref) => {
+    cy.findByRole('heading', { name: /Assurances and Compliance/i }).parent()
+      .findByRole('heading', { name: category }).parent()
+      .contains(regulation)
+      .invoke('attr', 'href')
+      .then(href => {
+        cy.wrap(href).should('eq', ref);
+      });
+  };
+
+  // Given a regulation name, get the response entered by the user
+  assurancesComplianceResponse = (category, regulation) => {
+    return cy.findByRole('heading', { name: /Assurances and Compliance/i }).parent()
+      .findByRole('heading', { name: category }).parent()
+      .contains('a', regulation).parent().next()
+      .invoke('text')
+  };
 }
 
 export default ExportPage;
