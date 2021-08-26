@@ -43,7 +43,7 @@ const NameAndFundingSourceForm = ({
         labelClassName="ds-u-margin-bottom--1"
         name="program-type"
         onChange={changeFundingSource}
-        type="checkbox"
+        type="radio"
       />
     </Fragment>
   );
