@@ -34,7 +34,7 @@ exports[`the activity name and funding source component renders correctly 1`] = 
     labelClassName="ds-u-margin-bottom--1"
     name="program-type"
     onChange={[Function]}
-    type="checkbox"
+    type="radio"
   />
 </Fragment>
 `;
