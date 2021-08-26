@@ -14,10 +14,10 @@ services:
       - 54325:5432
 
   mongo:
-    image: mongo:4
+    image: mongo:latest
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongo_admin
-      - MONGO_INITDB_ROOT_PASSWORD=example   
+      - MONGO_INITDB_ROOT_PASSWORD=example
       - MONGODATA=/mongodata
     volumes:
       - mongodata:/mongodata

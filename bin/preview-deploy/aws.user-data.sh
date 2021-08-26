@@ -21,11 +21,11 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
-export PREVIEW_MONGO_INITDB_ROOT_USERNAME=mongo_admin
-export PREVIEW_MONGO_INITDB_ROOT_PASSWORD=Preview_APD_Mongo_InitDB_Root_Password
-export PREVIEW_MONGO_INITDB_DATABASE=eapd_mongo
-export PREVIEW_MONGO_DATABASE_USERNAME=eapd_admin
-export PREVIEW_MONGO_DATABASE_PASSWORD=Preview_eAPD_Mongo_Password
+export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
+export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
+export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
+export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
+export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
@@ -111,10 +111,10 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
 cd ~
-mongo admin --eval "db.runCommand({'createUser' : '${MONGO_INITDB_ROOT_USERNAME}','pwd' : '${MONGO_INITDB_ROOT_PASSWORD}', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo ${MONGO_INITDB_DATABASE} -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --authenticationDatabase admin --eval "db.createUser({user: '${MONGO_DATABASE_USERNAME}', pwd: '${MONGO_DATABASE_PASSWORD}', roles:[{role:'readWrite', db: '${MONGO_INITDB_DATABASE}'}]});"
-touch mongo-ran.txt
-echo "Mango Ran: $MONGO_INITDB_ROOT_USERNAME" > mongo-ran.txt
+cat <<MONGOUSERSEED > mongo-init.sh
+mongo admin --eval "db.runCommand({'createUser' : '','pwd' : '', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo  -u  -p  --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role:'readWrite', db: ''}]});"
+MONGOUSERSEED
 E_USER
 
 sudo yum remove -y gcc-c++
@@ -129,10 +129,12 @@ restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
 
 # Harden & Restart Mongo
+sh /home/ec2-user/mongo-init.sh
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
-#rm mongo-init.sh
+rm mongo-init.sh
+#su - ec2-user -c 'npm run mongoose-migrate'
 
 # Restart Nginx
 systemctl enable nginx
@@ -147,39 +149,3 @@ systemctl start newrelic-infra
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v14.16.0/bin /home/ec2-user/.nvm/versions/node/v14.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'
-
-# These logs aren't created until after the Instance is provisioned and need to be added to CloudWatch as a last step
-#touch /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
-#cat <<CWLAUNCHLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/launch-logs.json
-
-# {
-#  "logs": {
-#    "logs_collected": {
-#      "files": {
-#        "collect_list": [
-#          {
-#            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
-#            "log_group_name": "test/app/api/logs/eAPD-API-error-0.log"
-#          },
-#          {
-#            "file_path": "/var/log/nginx/access.log*",
-#            "log_group_name": "test/var/log/nginx/access.log"
-#          },
-#          {
-#            "file_path": "/var/log/nginx/error.log*",
-#            "log_group_name": "test/var/log/nginx/error.log"
-#          },
-#          {
-#            "file_path": "/var/log/awslogs.log*",
-#            "log_group_name": "test/var/log/awslogs.log"
-#          }
-#        ]
-#      }
-#    }
-#  }
-#}
-
-#CWLAUNCHLOGCONFIG
-
-#/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/launch-log.json
-

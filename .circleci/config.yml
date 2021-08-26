@@ -4,24 +4,24 @@ workflows:
   version: 2
 
   # Workflow to cleanup preview deploys from AWS.  Runs every two hours.
-#  cleanup preview deploys:
-#    triggers:
-#      - schedule:
-          # Run every hour, every day. Specified this way because the more
-          # compact cron syntax wasn't working.
-#          cron: "0 0 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - cleanup preview deploys
+  #  cleanup preview deploys:
+  #    triggers:
+  #      - schedule:
+  # Run every hour, every day. Specified this way because the more
+  # compact cron syntax wasn't working.
+  #          cron: "0 0 * * *"
+  #          filters:
+  #            branches:
+  #              only:
+  #                - master
+  #    jobs:
+  #      - cleanup preview deploys
 
   # Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          cron: '0 0 * * *'
           filters:
             branches:
               only:
@@ -246,7 +246,7 @@ jobs:
   install dependencies:
     docker:
       - image: node:14
-        auth: 
+        auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
     steps:
@@ -276,9 +276,9 @@ jobs:
   validate openapi:
     docker:
       - image: circleci/node:14
-        auth: 
+        auth:
           username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD      
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - setup_remote_docker
@@ -396,7 +396,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_DATABASE="${<< parameters.env >>_MONGO_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -547,7 +547,7 @@ jobs:
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
               --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
-              --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
+              --MONGO_MONGO_INITDB_DATABASE "${<< parameters.env >>_MONGO_INITDB_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}"
 
       - run:
@@ -571,22 +571,22 @@ jobs:
 
   # Cleans up preview deploys that are no longer associated with open pull
   # requests.
-#  cleanup preview deploys:
-#    docker:
-#      - image: python:3
-#    steps:
-#      - checkout
-#      - run:
-#          name: cleanup deploys with no open PR
-#          working_directory: ~/project/bin/preview-deploy
-#          command: |
-#            apt-get -qq update
-#            apt-get -qq install jq -y
-#            pip install --quiet awscli
-#            ./aws.cleanup.sh \
-#              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
-#              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
-#              --GH_BOT_USER "$GH_BOT_USER"
+  #  cleanup preview deploys:
+  #    docker:
+  #      - image: python:3
+  #    steps:
+  #      - checkout
+  #      - run:
+  #          name: cleanup deploys with no open PR
+  #          working_directory: ~/project/bin/preview-deploy
+  #          command: |
+  #            apt-get -qq update
+  #            apt-get -qq install jq -y
+  #            pip install --quiet awscli
+  #            ./aws.cleanup.sh \
+  #              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+  #              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
+  #              --GH_BOT_USER "$GH_BOT_USER"
 
   # Frontend production deployment.
   frontend deploy:
@@ -661,13 +661,13 @@ jobs:
                 --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
                 --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY" \
                 --JWT_SECRET "$PREVIEW_JWT_SECRET" \
-                --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
-                --MONGO_URL "$PREVIEW_MONGO_URL" \
-                --MONGO_INITDB_ROOT_USERNAME "$PREVIEW_MONGO_INITDB_ROOT_USERNAME" \
+                --MONGO_INITDB_ROOT_USERNAME "$REVIEW_MONGO_INITDB_ROOT_USERNAME" \
                 --MONGO_INITDB_ROOT_PASSWORD "$PREVIEW_MONGO_INITDB_ROOT_PASSWORD" \
                 --MONGO_INITDB_DATABASE "$PREVIEW_MONGO_INITDB_DATABASE" \
-                --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME"\
-                --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD"
+                --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME" \
+                --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD" \
+                --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
+                --MONGO_URL "$PREVIEW_MONGO_URL" 
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else

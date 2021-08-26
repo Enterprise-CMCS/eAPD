@@ -12,10 +12,7 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const axios = require('axios');
-const tokens = require('../../../api/seeds/test/tokens.json');
-
-const apiUrl = process.env.API_URL || 'http://localhost:8000';
+const knex = require('./knex')
 
 /**
  * @type {Cypress.PluginConfig}
@@ -24,13 +21,13 @@ const apiUrl = process.env.API_URL || 'http://localhost:8000';
 module.exports = (on, config) => {
   on('task', {
     'db:resetnorole': async () => {
-      await axios.delete(`${apiUrl}/cypress/affiliations/norole`, {
-        headers: {
-          Authorization: `Bearer ${tokens.fedadmin}`
-        }
-      });
+      const okta_user = await knex('okta_users').where('login',  'norole').first()
+      if (okta_user) {
+        await knex('auth_affiliations').where('user_id', okta_user.user_id).delete();
+      }
       return null;
-    }
+    },
+
   });
 
   // `on` is used to hook into various events Cypress emits
