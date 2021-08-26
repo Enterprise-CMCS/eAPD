@@ -1,8 +1,12 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [
-    1747
-  ],
+  "allowlist": [],
+  "_comment": {
+    "e.g. - 1747": {
+      "module": "browserslist",
+      "affects": ["jest@26.6.3 - testing tool", "tap@15.0.2 - testing tool"]
+    }
+  },
   "registry": "https://registry.npmjs.org"
 }
