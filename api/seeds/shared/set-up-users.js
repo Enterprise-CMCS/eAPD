@@ -89,17 +89,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       status: 'approved',
       username: 'em@il.com'
     });
-    // Add an expired certification and this user will be downgraded to "regular user"
-    stateCertifications.push({
-      username: regularUser.id,
-      state: 'ak',
-      certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
-      certificationExpiration: format(
-        subDays(new Date(), 35),
-        PostgresDateFormat
-      ),
-      certifiedByName: 'seeds'
-    });
     oktaUsers.push(formatOktaUser(regularUser));
   }
   if (fedAdmin) {
@@ -150,17 +139,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       role_id: stateStaffRoleId,
       status: 'approved',
       username: stateStaff.profile.login
-    });
-    // Add an invalid certification and this user will remain an staff member
-    stateCertifications.push({
-      username: stateStaff.id,
-      state: 'ak',
-      certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
-      certificationExpiration: format(
-        subDays(new Date(), 35),
-        PostgresDateFormat
-      ),
-      certifiedByName: 'seeds'
     });
     oktaUsers.push(formatOktaUser(stateStaff));
   }
