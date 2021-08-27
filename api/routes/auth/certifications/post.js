@@ -43,7 +43,7 @@ module.exports = (
           certifiedByEmail: certifiedByEmail,
           certifiedBySignature: certifiedBySignature,
           fileUrl: fileUrl            
-        });        
+        });
         if (error) {
           res.status(400).end();
         }

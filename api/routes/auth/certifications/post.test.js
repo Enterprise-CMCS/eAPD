@@ -71,13 +71,11 @@ tap.test('state certifications post endpoint', async postTest => {
     });
     
     tests.test('with valid data', async test => {
-      di.addStateAdminCertification.resolves();    
+      di.addStateAdminCertification.resolves({});    
       
       await handler(req, res, next); 
   
-      test.ok(res.status.calledWith(200), 'sends a 200 success response');
-      test.ok(res.send.calledAfter(res.status), 'response is terminated');
+      test.ok(res.send.calledWith(200), 'sends a 200 success response');
     });
-  });
-  
+  });  
 });
