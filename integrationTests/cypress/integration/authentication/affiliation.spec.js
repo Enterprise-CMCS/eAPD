@@ -204,7 +204,7 @@ describe('Affiliation', () => {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByRole('heading', { name: /(Alaska|Alabama) APDs/ }).should(
+      cy.findByRole('heading', { name: /(Alabama|Alaska) APDs/ }).should(
         'exist'
       );
 
@@ -223,7 +223,7 @@ describe('Affiliation', () => {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByRole('heading', { name: /(Alaska|Alabama) APDs/ }).should(
+      cy.findByRole('heading', { name: /(Alabama|Alaska) APDs/ }).should(
         'exist'
       );
 
