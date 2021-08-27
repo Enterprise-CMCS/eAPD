@@ -190,6 +190,7 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_ENV: production
 
       - name: Cypress Run Backend
         uses: cypress-io/github-action@v2
@@ -203,5 +204,6 @@ jobs:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}             
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_ENV: production
     needs: install-dependencies
