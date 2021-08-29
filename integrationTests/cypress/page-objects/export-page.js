@@ -384,6 +384,76 @@ class ExportPage {
     cy.contains(`The total cost of the ${name}`).should('exist');
   };
 
+  // Activity Schedule Summary
+  // Activity Schedule Summary - Schedule Summary by Activity
+  getAllActivityScheduleOverviews = () => {
+    return cy.contains('thead', /Activity List Overview/i)
+      .parent()
+      .find('tbody>tr')
+  };
+
+  getActivityScheduleOverview = (index) => {
+    return this.getAllActivityScheduleOverviews().eq(index);
+  }
+
+  // Assumes the name is in the first column of the overview
+  getActivityScheduleOverviewName = (index) => {
+    return this.getActivityScheduleOverview(index)
+      .find('td')
+      .first()
+      .invoke('text')
+  };
+
+  // Assumes dates are in the last column
+  getActivityScheduleOverviewDates = (index) => {
+    return this.getActivityScheduleOverview(index)
+      .find('td')
+      .last()
+      .invoke('text')
+  };
+
+  // Activity Schedule Summary - Milestone Tables by Activity
+  // Get the milestone tables for all activities.
+  getAllActivityScheduleMilestoneTables = () => {
+    return cy.findByRole('heading', { name: /^Milestone Tables by Activity$/i })
+      .nextAll('table');
+  };
+
+  // Return all milestone rows for a given activity
+  getAllActivityScheduleMilestones = (activityIndex) => {
+    return this.getAllActivityScheduleMilestoneTables()
+      .eq(activityIndex)
+      .find('tbody>tr'); // returns undefined if no milestone was added
+  };
+
+  // Return the name of an activity's milestone table
+  // Assumes the name is the last row in the table header
+  getActivityScheduleMilestoneTableName = (activityIndex) => {
+    return this.getAllActivityScheduleMilestoneTables()
+      .eq(activityIndex)
+      .find('thead>tr')
+      .last()
+      .invoke('text')
+  };
+
+  // Return the name of an entry in an activity's milestone table
+  // Assumes names are in the last column
+  getActivityScheduleMilestoneName = (activityIndex, milestoneIndex) => {
+    return this.getAllActivityScheduleMilestones(activityIndex)
+      .eq(milestoneIndex)
+      .first()
+      .invoke('text');
+  };
+
+  // Return the dates of an entry in an activity's milestone table
+  // Assumes dates are in the last column
+  getActivityScheduleMilestoneDates = (activityIndex, milestoneIndex) => {
+    return this.getAllActivityScheduleMilestones(activityIndex)
+      .eq(milestoneIndex)
+      .last()
+      .invoke('text');
+  };
+  
   // assert if a link with the given text and URL reference exists here
   assurancesComplianceAssertLink = (category, regulation, ref) => {
     cy.findByRole('heading', { name: /Assurances and Compliance/i }).parent()
