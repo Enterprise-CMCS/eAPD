@@ -7,6 +7,7 @@ on:
       - bbrooks/3227-Cypress-CI
 
 jobs:
+  environment: Test
   install-dependencies:
     runs-on: ubuntu-latest
     strategy:
@@ -165,7 +166,6 @@ jobs:
           npm run start -- --public=0.0.0.0:8080 &
 
       - name: Install API Dependencies ✨
-        environment: Test
         working-directory: ./api
         env: 
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
