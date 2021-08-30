@@ -128,6 +128,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
     <tr>
       <td
         className="budget-table--number"
+        data-cy="subtotal"
         key="1"
       >
         <Dollars>
@@ -136,6 +137,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number"
+        data-cy="subtotal"
         key="2"
       >
         <Dollars>
@@ -144,6 +146,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number"
+        data-cy="subtotal"
         key="3"
       >
         <Dollars>
@@ -152,6 +155,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number"
+        data-cy="subtotal"
         key="4"
       >
         <Dollars>
@@ -238,6 +242,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
     <tr>
       <td
         className="budget-table--number"
+        data-cy="subtotal"
         key="1"
       >
         <Dollars>
@@ -246,6 +251,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number"
+        data-cy="subtotal"
         key="2"
       >
         <Dollars>
@@ -254,6 +260,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number"
+        data-cy="subtotal"
         key="3"
       >
         <Dollars>
@@ -262,6 +269,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number"
+        data-cy="subtotal"
         key="4"
       >
         <Dollars>
@@ -287,6 +295,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </th>
       <td
         className="budget-table--number budget-table--total"
+        data-cy="subtotal"
         key="1"
       >
         <Dollars>
@@ -295,6 +304,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number budget-table--total"
+        data-cy="subtotal"
         key="2"
       >
         <Dollars>
@@ -303,6 +313,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number budget-table--total"
+        data-cy="subtotal"
         key="3"
       >
         <Dollars>
@@ -311,6 +322,7 @@ exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
       </td>
       <td
         className="budget-table--number budget-table--total"
+        data-cy="subtotal"
         key="4"
       >
         <Dollars>
