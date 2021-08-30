@@ -21,3 +21,4 @@ jobs:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
+          NODE_ENV: development
