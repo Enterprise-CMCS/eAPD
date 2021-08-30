@@ -1,0 +1,22 @@
+name: Cypress E2E Tests
+on:
+#  schedule:
+#    - cron: '0 0 * * *'  # every day at midnight
+  push:
+    branches:
+      - bbrooks/3227-Cypress-CI
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup npm package
+        working-directory: ./web
+        run: npm install
+      - name: Run E2E test
+        uses: cypress-io/github-action@v2
+        with:   
+         browser: chrome
+         headless: true
