@@ -62,7 +62,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
       <td className="title" colSpan="5">
         State Staff Subtotal
       </td>
-      <td className="budget-table--number">
+      <td className="budget-table--number" data-cy="subtotal">
         <Dollars>
           {otherFunding
             ? years[ffy].statePersonnelTotal - otherFunding[ffy].statePersonnel
@@ -91,7 +91,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
       <td className="title" colSpan="5">
         Other State Expenses Subtotal
       </td>
-      <td className="budget-table--number">
+      <td className="budget-table--number" data-cy="subtotal">
         <Dollars>
           {otherFunding
             ? years[ffy].nonPersonnelTotal - otherFunding[ffy].expenses
@@ -120,7 +120,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
       <td className="title" colSpan="5">
         Private Contractor Subtotal
       </td>
-      <td className="budget-table--number">
+      <td className="budget-table--number" data-cy="subtotal">
         <Dollars>
           {otherFunding
             ? years[ffy].contractorResourcesTotal -
@@ -134,7 +134,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         Activity {activityIndex >= 0 && activityIndex + 1} Total Computable
         Medicaid Cost
       </td>
-      <td className="budget-table--number">
+      <td className="budget-table--number" data-cy="subtotal">
         <Dollars>
           {otherFunding
             ? years[ffy].totalCost - otherFunding[ffy].total
