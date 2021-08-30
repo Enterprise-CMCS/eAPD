@@ -95,20 +95,48 @@ const postStateCertification = {
       description:
         'Handle the submission of the state admin certification form which includes the URL of the file from the related /files endpoint as well as additional details that are added manually.',
       requestBody: {
-        content: jsonResponse({
-          type: 'object',
-          properties: {
-            name,
-            email,
-            phone,
-            state,
-            certifiedByName,
-            certifiedByTitle,
-            certifiedByEmail,
-            certifiedBySignature,
-            fileUrl,
+        required: true,
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  description: 'Name of individual being certified'
+                },
+                email: {
+                  type: 'string',
+                  description: 'Email of individual being certified'
+                },
+                phone: {
+                  type: 'string',
+                  description: 'Phone Number of individual being certified'
+                },
+                state: {
+                  type: 'string',
+                  description: 'State of individual being certified'
+                },
+                certifiedByName: {
+                  type: 'string',
+                  description: 'Name of individual who is granting the certification'
+                },
+                certifiedByTitle: {
+                  type: 'string',
+                  description: 'Title/Role of individual who is granting the certification'
+                },
+                certifiedByEmail: {
+                  type: 'string',
+                  description: 'Email of individual who is granting the certification'
+                },
+                certifiedBySignature: {
+                  type: 'string',
+                  description: 'Printed name of individual who is granting the certification'
+                }
+              }
+            }
           }
-        })
+        }
       },
       responses: {
         200: {
