@@ -162,14 +162,14 @@ jobs:
         working-directory: ./web
         run: |
           npm ci
-          npm run start -- --public=0.0.0.0:8080
+#          npm run start -- --public=0.0.0.0:8080
 
       - name: Install API Dependencies ✨
         working-directory: ./api
         run: |
           npm ci
           npm install
-          npm run start-dev
+#          npm run start-dev
 
       - name: Setup Node
         uses: actions/setup-node@v2
