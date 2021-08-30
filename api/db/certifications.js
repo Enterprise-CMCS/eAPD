@@ -14,14 +14,6 @@ const addStateAdminCertification = (
       certificationExpiration: oneYearFromToday,
       ...data
     })
-    .then(() =>{
-      return db('state_admin_certifications_audit')
-        .insert({
-          changedBy: data.username,
-          changeDate: today,
-          changeType: 'add'
-        })
-    });
 };
     
 module.exports = { addStateAdminCertification };

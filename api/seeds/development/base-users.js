@@ -22,8 +22,6 @@ exports.seed = async knex => {
     }
   })
 
-  await knex('state_admin_certifications_audit').insert(auditEntries)
-
   const testTokens = await issueTokens(oktaUsers)
 
   // save the tokens to a file

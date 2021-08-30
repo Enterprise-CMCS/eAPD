@@ -28,7 +28,6 @@ const formatOktaUser = oktaResult => {
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
   await knex('state_admin_certifications').del();
-  await knex('state_admin_certifications_audit').del();
   await knex('okta_users').del();
   logger.info('Retrieving user ids from Okta');
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
@@ -119,14 +118,20 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
-      username: stateAdmin.id,
+      uploadedBy: fedAdmin.id,
       state: 'ak',
+      name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
+      email: stateAdmin.profile.primaryPhone,
+      phone: stateAdmin.profile.email,
       certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
       certificationExpiration: format(
         addDays(new Date(), 325),
         PostgresDateFormat
       ),
-      certifiedByName: 'seeds'
+      certifiedByName: 'Test SMD',
+      certifiedByTitle: 'State Medicaid Director',
+      certifiedByEmail: 'testsmd@fake.com',
+      certifiedBySignature: 'Test SMD'
     });
 
     oktaUsers.push(formatOktaUser(stateAdmin));

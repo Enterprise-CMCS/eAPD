@@ -29,11 +29,9 @@ module.exports = (
         fileUrl
       } = req.body;
 
-      const username = req.user.id;
-
       try {        
         const { error = null } = await addStateAdminCertification({
-          username: username,
+          uploadedBy: req.user.id,
           name: name, 
           email: email, 
           phone: phone, 

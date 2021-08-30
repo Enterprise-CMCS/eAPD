@@ -87,6 +87,44 @@ const postStateCertificationFile = {
   }
 };
 
+const postStateCertification = {
+  '/auth/certifications': {
+    post: {
+      tags: ['Certifications', 'State Admins'],
+      summary: 'Submit the Add State Certification and additional details',
+      description:
+        'Handle the submission of the state admin certification form which includes the URL of the file from the related /files endpoint as well as additional details that are added manually.',
+      requestBody: {
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            name,
+            email,
+            phone,
+            state,
+            certifiedByName,
+            certifiedByTitle,
+            certifiedByEmail,
+            certifiedBySignature,
+            fileUrl,
+          }
+        })
+      },
+      responses: {
+        200: {
+          description: 'State Admin Certification form successfully saved'
+        },
+        400: {
+          description: 'Invalid request'
+        },
+        403: {
+          description: 'The user does not have sufficient authorization to upload certification letters'
+        }
+      }
+    }
+  }
+};
+
 module.exports = {
   ...requiresAuth(getStateCertificationFile),
   ...requiresAuth(postStateCertificationFile)
