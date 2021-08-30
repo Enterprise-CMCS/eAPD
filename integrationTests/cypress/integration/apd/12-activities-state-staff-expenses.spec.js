@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import ActivitiesStateStaffExpensesPage from '../../../page-objects/activities-state-staff-expenses-page';
+import ActivitiesStateStaffExpensesPage from '../../page-objects/activities-state-staff-expenses-page';
 
 // Tests filling out state staff & expenses for the activities section
 

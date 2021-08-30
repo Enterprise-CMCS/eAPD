@@ -3,7 +3,7 @@
 /* eslint-disable prefer-arrow-callback */
 /// <reference types="cypress" />
 
-import PopulatePage from '../../../page-objects/populate-page';
+import PopulatePage from '../../page-objects/populate-page';
 
 // This test assumes a 2nd activity already exists
 describe('Filling out section in the activity overview page', () => {

@@ -3,8 +3,8 @@
 /* eslint-disable prefer-arrow-callback */
 /// <reference types="cypress" />
 
-import ActivityPage from '../../../page-objects/activity-page';
-import PopulatePage from '../../../page-objects/populate-page';
+import ActivityPage from '../../page-objects/activity-page';
+import PopulatePage from '../../page-objects/populate-page';
 
 // Assumes a 2nd activity exists
 describe('Filling out private contractors page', () => {

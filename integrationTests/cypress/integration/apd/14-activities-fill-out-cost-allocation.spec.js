@@ -3,8 +3,8 @@
 /* eslint-disable prefer-arrow-callback */
 /// <reference types="cypress" />
 
-import BudgetPage from '../../../page-objects/budget-page';
-import PopulatePage from '../../../page-objects/populate-page';
+import BudgetPage from '../../page-objects/budget-page';
+import PopulatePage from '../../page-objects/populate-page';
 
 // Assumes a 2nd activity exists
 describe('Filling out cost allocation page', () => {

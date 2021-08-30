@@ -2,8 +2,8 @@
 /* eslint-disable prefer-arrow-callback */
 /// <reference types="cypress" />
 
-import ActivityPage from '../../../page-objects/activity-page';
-import PopulatePage from '../../../page-objects/populate-page';
+import ActivityPage from '../../page-objects/activity-page';
+import PopulatePage from '../../page-objects/populate-page';
 
 describe('Filling out Outcomes and Milestones page', () => {
   const populatePage = new PopulatePage();

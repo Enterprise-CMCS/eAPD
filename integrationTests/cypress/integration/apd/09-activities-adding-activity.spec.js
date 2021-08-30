@@ -2,7 +2,7 @@
 /* eslint-disable prefer-arrow-callback */
 /// <reference types="cypress" />
 
-import ExportPage from '../../../page-objects/export-page';
+import ExportPage from '../../page-objects/export-page';
 
 describe('Adding an activity in the Activity Dashboard', () => {
   const exportPage = new ExportPage();
@@ -51,7 +51,7 @@ describe('Adding an activity in the Activity Dashboard', () => {
     cy.findAllByText('Edit').eq(1).click();
 
     cy.findByLabelText('Activity name').type(this.data.newActivityName);
-    cy.findByRole('checkbox', { name: /HIT/i }).check({ force: true });
+    cy.findByRole('radio', { name: /HIT/i }).check({ force: true });
     activities.push([this.data.newActivityName, 'HIT']);
 
     cy.findAllByText(`Activity 2: ${this.data.newActivityName}`).eq(0);

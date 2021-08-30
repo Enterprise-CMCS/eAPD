@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
-import ActivityPage from '../../../page-objects/activity-page';
-import BudgetPage from '../../../page-objects/budget-page';
-import ExportPage from '../../../page-objects/export-page';
+import ActivityPage from '../../page-objects/activity-page';
+import BudgetPage from '../../page-objects/budget-page';
+import ExportPage from '../../page-objects/export-page';
 
 describe('checking default values in Activities section', () => {
   // const activityPage = new ActivityPage();
