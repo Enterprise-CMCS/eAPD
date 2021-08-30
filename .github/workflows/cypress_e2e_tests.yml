@@ -17,6 +17,7 @@ jobs:
         run: npm install
       - name: Run E2E test
         uses: cypress-io/github-action@v2
-        with:   
-         browser: chrome
-         headless: true
+        with:
+          working-directory: ./integrationTests
+          browser: chrome
+          headless: true
