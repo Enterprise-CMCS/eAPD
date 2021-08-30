@@ -165,7 +165,11 @@ jobs:
           npm run start -- --public=0.0.0.0:8080 &
 
       - name: Install API Dependencies ✨
+        environment: Test
         working-directory: ./api
+        env: 
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
           npm ci
           npm install
