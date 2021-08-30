@@ -6,8 +6,7 @@ on:
     branches:
       - bbrooks/3227-Cypress-CI
 
-jobs:
-  environment: Test
+jobs:  
   install-dependencies:
     runs-on: ubuntu-latest
     strategy:
@@ -148,6 +147,7 @@ jobs:
     strategy:
       matrix:
         node-version: ['14']
+    environment: Test
     steps:
       - name: Cache Node Modules 💾
         uses: actions/cache@v2
