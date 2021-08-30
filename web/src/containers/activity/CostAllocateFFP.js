@@ -113,9 +113,11 @@ const CostAllocateFFP = ({
 
   return (
     <Fragment>
-      {isViewOnly
-        ? <hr className="custom-hr" />
-        : <h2 className="subsection--title ds-h2">Budget and FFP</h2> }
+      {isViewOnly ? (
+        <hr className="custom-hr" />
+      ) : (
+        <h2 className="subsection--title ds-h2">Budget and FFP</h2>
+      )}
       {Object.keys(years).map(ffy => (
         <div key={ffy}>
           <table
