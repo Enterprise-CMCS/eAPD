@@ -43,11 +43,6 @@ const updated_at = {
   description: 'Timestamp of last update'
 };
 
-const updated_by = {
-  type: 'string',
-  description: 'ID of the user who last updated this record'
-};
-
 const filter_status = {
   type: 'string',
   description: 'The filter status of the affiliations for this US State',
@@ -95,7 +90,6 @@ const affiliationSchema = {
     status,
     created_at,
     updated_at,
-    updated_by
   }
 };
 
