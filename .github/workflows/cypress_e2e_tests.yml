@@ -8,6 +8,7 @@ on:
 
 jobs:
   cypress-run:
+    environment: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,7 +20,6 @@ jobs:
           npm install
           npm run start -- --public=0.0.0.0:8080 &
       - name: Setup npm package Backend
-        environment: Test
         working-directory: ./api
         env:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
