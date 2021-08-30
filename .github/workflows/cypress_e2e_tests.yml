@@ -12,9 +12,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup npm package
+      - name: Setup npm package Frontend
         working-directory: ./web
-        run: npm install
+        run: |
+          npm ci
+          npm install
+          npm run start -- --public=0.0.0.0:8080 &
+      - name: Setup npm package Backend
+        working-directory: ./api
+        run: |
+          npm ci
+          npm install
+          npm run start-dev &       
       - name: Run E2E test
         uses: cypress-io/github-action@v2
         env:
