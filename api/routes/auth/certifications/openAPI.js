@@ -6,7 +6,7 @@ const {
 const getStateCertificationFile = {
   '/auth/certifications/files/{fileID}': {
     get: {
-      tags: ['State Admin Certifications', 'files'],
+      tags: ['files'],
       summary: 'Get a state admin certification letter',
       description:
         'Returns a state admin certification letter',
@@ -37,7 +37,7 @@ const getStateCertificationFile = {
 const postStateCertificationFile = {
   '/auth/certifications/files': {
     post: {
-      tags: ['Certifications', 'State Admins', 'files'],
+      tags: ['files'],
       summary: 'Upload a state admin certification file',
       description:
         'Uploads a state admin certification letter.',
@@ -90,7 +90,7 @@ const postStateCertificationFile = {
 const postStateCertification = {
   '/auth/certifications': {
     post: {
-      tags: ['Certifications', 'State Admins'],
+      tags: ['Certifications'],
       summary: 'Submit the Add State Certification and additional details',
       description:
         'Handle the submission of the state admin certification form which includes the URL of the file from the related /files endpoint as well as additional details that are added manually.',
@@ -132,6 +132,10 @@ const postStateCertification = {
                 certifiedBySignature: {
                   type: 'string',
                   description: 'Printed name of individual who is granting the certification'
+                },
+                fileUrl: {
+                  type: 'string',
+                  description: 'URL provided from the /certifications/files endpoint'
                 }
               }
             }
@@ -155,5 +159,6 @@ const postStateCertification = {
 
 module.exports = {
   ...requiresAuth(getStateCertificationFile),
-  ...requiresAuth(postStateCertificationFile)
+  ...requiresAuth(postStateCertificationFile),
+  ...requiresAuth(postStateCertification)
 };
