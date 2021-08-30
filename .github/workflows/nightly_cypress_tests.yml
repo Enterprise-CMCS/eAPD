@@ -213,5 +213,6 @@ jobs:
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_ENV: development
-    needs: install-dependencies
-    needs: dependency-vulnerability-scan
+    needs: 
+      - install-dependencies
+      - dependency-vulnerability-scan
