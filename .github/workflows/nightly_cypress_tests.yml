@@ -214,3 +214,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_ENV: development
     needs: install-dependencies
+    needs: dependency-vulnerability-scan
