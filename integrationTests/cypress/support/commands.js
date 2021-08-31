@@ -125,8 +125,7 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
 });
 
 Cypress.Commands.add('goToActivityDashboard', () => {
-  cy.findAllByText('Activities').click();
-  cy.contains('Activities Dashboard').click();
+  cy.contains('Activities Dashboard').click({ force: true });
 });
 
 Cypress.Commands.add('goToExportView', () => {

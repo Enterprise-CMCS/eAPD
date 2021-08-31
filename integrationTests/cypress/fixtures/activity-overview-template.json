@@ -1,0 +1,161 @@
+{
+  "newActivityName": "Claims Data Analytics",
+
+  "activityOverview": [
+    {
+      "name": "Program Administration",
+      "fundingType": "HIT",
+      "shortOverview": "Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.",
+      "startDate": [7, 14, 2021],
+      "endDate": [3, 12, 2024],
+      "detailedDescription": "Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program. The modifications of the SLR for CMS program rule changes and guidance changes (Stage 3, IPPS, and OPPS) will require extensive development and implementation efforts and is essential to the effective administration of the Medicaid EHR Incentive Program. Modifications to the SLR are done in phases depending on how CMS rule changes occur. The implementation of the design elements will require provider onboarding activities to be initiated and completed including outreach and training for all program participants. The SLR will increase the efficiency with which Tycho Medicaid administers the program; allow for increased oversight and assure that the program is operated in accordance with the complex and evolving program rules and requirements.",
+      "supportingJustificaions": "The 2015-2017 rule changes are significant and wide ranging; minimally accommodating the new attestations will be problematic for the remainder of the program. Program benefits will potentially not be maximized. To be prepared for Stage 3 and to properly implement all 2015-2017 rule changes; Tycho plans to implement all necessary modifications.",
+      "supportsMedicaid": "This activity support the medicaid standards and conditions." 
+    },
+    {
+      "name": "Claims Data Analytics",
+      "fundingType": "HIT",
+      "shortOverview": "To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
+      "startDate": [2, 24, 2032],
+      "endDate": [8, 28, 2034],
+      "detailedDescription": "Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the HIT Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required HIT changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.",
+      "supportingJustificaions": "Medicaid Claims Data Feed to the HIE",
+      "supportsMedicaid": "This activity does support the medicaid standards and conditions." 
+    }
+  ],
+
+  "outcomes": [
+    {
+      "names": ["Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.", "Provide support to EPs and EHs through attestation process."],
+      "metrics": [["Complete SLR modifications by 11/1/21", "Accept attestations through 4/30/22"], ["Guidance available on Tycho''s websites", "Office hours availble for EPs and EHs"]]
+    },
+    {
+      "names": ["Supplies driven across the continent", "Free community cooking lessons"],
+      "metrics": [["Provides supplies across the U.S.", "Must be completed by due date"], ["Gives opporunity to cook cheap meals", "Provides recepie save feature"]]
+    }
+  ],
+
+  "milestones": [
+    {
+      "names": ["Implementation of Final Rule and Stage 3 System Developments", "Environmental Scan Completion"],
+      "dates": [[10, 5, 2021], [3, 2, 2022]]
+    },
+    {
+      "names": ["Completion by the due date", "Follows the 3 guiding principles"],
+      "dates": [[12, 6, 2022], [3, 5, 2023]]
+    }
+  ],
+
+  "staff": [
+    {
+      "title": "Project Assistant",
+      "description": "Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.",
+      "costs": [86000, 88000],
+      "ftes": [1, 1]
+    },
+    {
+      "title": "Accountant III",
+      "description": "Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.",
+      "costs": [101000, 109000],
+      "ftes": [3, 3]
+    },
+    {
+      "title": "Public Information Officer",
+      "description": "Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program",
+      "costs": [165000, 170000],
+      "ftes": [0.5, 0.5]
+    },
+    {
+      "title": "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
+      "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
+      "costs": [110012, 111102],
+      "ftes": [1, 1]
+    }
+  ],
+
+  "expenses": [
+    {
+      "category": "Training and outreach",
+      "costs": [40000, 40000],
+      "description": "Recorded media and radio for supporting outreach."
+    },
+    {
+      "category": "Travel",
+      "costs": [35000, 35000],
+      "description": "Airplane tickets, gasoline, and taxi services."
+    },
+    {
+      "category": "Hardware, software, and licensing",
+      "costs": [40000, 40000],
+      "description": "Purchases of new laptops and licenses for Office software."
+    },
+    {
+      "category": "Equipment and supplies",
+      "costs": [500, 200],
+      "description": "Paper, pens, and pencils."
+    }
+  ],
+
+  "privateContractors": [
+    {
+      "names": ["Super SLR Incorporated", "Bob the Builder"],
+      "descriptions": ["Maintain SLR", "Can he build it? Yes he can!"],
+      "start": [[12, 9, 2034], [2, 4, 2006]],
+      "end": [[5, 12, 2040], [5, 16, 2008]],
+      "totalCosts": [50000, 60000],
+      "FFYcosts": [[25000, 25000], [30000, 30000]]
+    },
+    {
+      "names": ["Tech Consulting Inc.", "Interface Vendor Inc."],
+      "descriptions": ["Technology consulting and planning services.", "Hosting and development support."],
+      "start": [[1, 5, 2124], [4, 7, 1980]],
+      "end": [[3, 2, 2234], [1, 2, 3333]],
+      "totalCosts": [80000, 3000],
+      "FFYcosts": [[40000, 40000], [[10, 150],[75, 20]]]
+    }
+  ],
+
+  "costAllocation": [
+    {
+      "description": "Activity 1 description for overall cost allocation.",
+      "FFYdescriptions": ["This is the Other Funding description for Activity 1 - FFY 2021", "This is the Other Funding description for Activity 1 - FFY 2022"],
+      "costs": [5000, 8000]
+    },
+    {
+      "description": "Activity 2 description for overall cost allocation.",
+      "FFYdescriptions": ["This is the Other Funding description for Activity 2 - FFY 2021", "This is the Other Funding description for Activity 2 - FFY 2022"],
+      "costs": [4000, 9000]
+    }
+  ],
+
+  "splitConstants": [
+    {
+      "split": "75-25",
+      "fed": 0.75,
+      "state": 0.25
+    },
+    {
+      "split": "50-50",
+      "fed": 0.50,
+      "state": 0.50
+    },
+    {
+      "split": "90-10",
+      "fed": 0.90,
+      "state": 0.10
+    }
+  ],
+
+  "quarterVals" : [
+    {
+      "string": "For Activity 1",
+      "stateVals": [[25, 25,25, 25], [25, 25, 25, 25]],
+      "contractorVals": [[25, 25, 25, 25], [25, 25, 25, 25]]
+    },
+    {
+      "string": "For Activity 2",
+      "stateVals": [[25, 25,25, 25], [25, 25, 25, 25]],
+      "contractorVals": [[25, 25, 25, 25], [25, 25, 25, 25]]
+    }
+  ]
+}
