@@ -33,7 +33,7 @@ describe('Filling out cost allocation page', () => {
   it('fills out cost allocation page for activity 1', function () {
     const allocation = this.data.costAllocation[0];
     cy.findAllByText('Edit').eq(0).click();
-    cy.contains('Cost allocation and other funding').click();
+    cy.contains('Cost Allocation and Other Funding').click();
 
     populatePage.fillCostAllocation(
       allocation.description,
@@ -62,7 +62,7 @@ describe('Filling out cost allocation page', () => {
   it('fills out cost allocation page for activity 2', function () {
     const allocation = this.data.costAllocation[1];
     cy.findAllByText('Edit').eq(1).click();
-    cy.findAllByText('Cost allocation and other funding').eq(1).click();
+    cy.findAllByText('Cost Allocation and Other Funding').eq(1).click();
 
     populatePage.fillCostAllocation(
       allocation.description,
