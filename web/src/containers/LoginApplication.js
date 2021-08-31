@@ -47,7 +47,7 @@ const LoginApplication = ({
   const location = useLocation();
 
   useEffect(() => {
-    if (!initialCheck) {
+    if (!initialCheck && !showConsent) {
       setRestoringSession(true);
       authCheckAction().then(() => {
         setRestoringSession(false);
