@@ -10,7 +10,7 @@
 exports[`auth/jwtUtils.test.js --silent TAP > output 1`] = `
 Object {
   "algorithm": "HS256",
-  "audience": "eAPD",
+  "audience": "eAPD-test",
   "expiresIn": "12h",
   "issuer": "eAPD",
   "notBefore": "0",
