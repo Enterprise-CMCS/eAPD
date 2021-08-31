@@ -174,7 +174,6 @@
     "react-test-renderer": "^16.14.0",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.4",
-    "resolve-url-loader": "^3.1.2",
     "sass-loader": "^10.1.1",
     "sinon": "^10.0.0",
     "storybook-addon-designs": "^6.0.1",
@@ -187,9 +186,12 @@
     "yaml-loader": "^0.6.0"
   },
   "resolutions": {
+    "browserslist": "4.16.5",
     "hosted-git-info": "2.8.9",
+    "path-parse": "^1.0.7",
+    "prismjs": "1.24.0",
+    "tar": "6.1.2",
     "trim": "0.0.3",
-    "url-parse": "^1.5.2",
-    "path-parse": "^1.0.7"
+    "url-parse": "^1.5.2"
   }
 }

@@ -86,7 +86,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
             </p>
             <ul className="ds-c-list--bare">
               <li>
-                <strong>Federal Fiscal Years requested:</strong> FFY{' '}
+                <strong>Federal Fiscal Years Requested:</strong> FFY{' '}
                 {years.join(', ')}
               </li>
               <li>
