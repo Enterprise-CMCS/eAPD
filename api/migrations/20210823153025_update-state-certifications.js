@@ -3,17 +3,23 @@ exports.up = async knex => {
     table.dropColumn('certifiedBy'); // replaced by the ones below
     table.dropColumn('username'); // replaced by uploadedBy
     
-    table.string('fileUrl').comment('address of the file previously uploaded');
-    table.string('email').comment('email of the user being certified');
-    table.string('name').comment('name of the user being certified');
-    table.string('phone').comment('phone number of the user being certified');
-    table.string('certifiedByName').comment('name of person who completed the designation letter');
-    table.string('certifiedByTitle').comment('title of person who completed the designation letter');
-    table.string('certifiedByEmail').comment('email of person who completed the designation letter');
-    table.string('certifiedBySignature').comment('printed name of person who signed the designation letter');
-    table.string('uploadedBy').comment('user_id of the person who submitted the certification form');
+    table.string('fileUrl').notNullable().comment('address of the file previously uploaded');
+    table.string('email').notNullable().comment('email of the user being certified');
+    table.string('name').notNullable().comment('name of the user being certified');
+    table.string('phone').notNullable().comment('phone number of the user being certified');
+    table.string('certifiedByName').notNullable().comment('name of person who completed the designation letter');
+    table.string('certifiedByTitle').notNullable().comment('title of person who completed the designation letter');
+    table.string('certifiedByEmail').notNullable().comment('email of person who completed the designation letter');
+    table.string('certifiedBySignature').notNullable().comment('printed name of person who signed the designation letter');
+    table.string('uploadedBy').notNullable().comment('user_id of the person who submitted the certification form');
     
     table.unique(['state', 'email']);
+  });
+  
+  await knex.schema.alterTable('state_admin_certifications', table => {
+    table.string('state').notNullable().alter();
+    table.string('certificationDate').notNullable().alter();
+    table.string('certificationExpiration').notNullable().alter();
   });
 };
 

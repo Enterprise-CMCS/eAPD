@@ -131,7 +131,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       certifiedByName: 'Test SMD',
       certifiedByTitle: 'State Medicaid Director',
       certifiedByEmail: 'testsmd@fake.com',
-      certifiedBySignature: 'Test SMD'
+      certifiedBySignature: 'Test SMD',
+      fileUrl: '12345' // Todo: Update this to have a valid fileUrl
     });
 
     oktaUsers.push(formatOktaUser(stateAdmin));

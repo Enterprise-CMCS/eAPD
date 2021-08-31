@@ -6,8 +6,6 @@ const { loggedIn } = require('../../../middleware/auth');
 
 const postEndpoint = require('./post');
 
-const { addStateAdminCertification } = require('../../../db/certifications.js');
-
 const mockExpress = require('../../../util/mockExpress');
 const mockResponse = require('../../../util/mockResponse');
 
