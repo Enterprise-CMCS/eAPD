@@ -1,7 +1,4 @@
-const FormData = require('form-data');
-
 const {
-  buildForm,
   login,
   unauthenticatedTest,
   unauthorizedTest
