@@ -27,7 +27,8 @@ tap.test('state_admin_certification_match generation tests', async sacMatchGener
   })
 
   sacMatchGenerationTest.teardown(() =>{
-    return knex.destroy()
+    knex.destroy()
+    return null
   })
 })
 
