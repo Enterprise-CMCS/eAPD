@@ -5,6 +5,7 @@ import ApdViewOnly from './containers/viewOnly/Apd';
 import LoginApplication from './containers/LoginApplication';
 import ManageAccount from './containers/admin/ManageAccount';
 import StateAdmin from './containers/admin/StateAdmin';
+import DelegateStateAdminForm from './containers/admin/DelegateStateAdminForm';
 import SelectAffiliation from './containers/SelectAffiliation';
 import Logout from './containers/Logout';
 
@@ -27,6 +28,7 @@ const routes = [
   { path: '/manage-account', component: ManageAccount, isPublic: false },
   { path: '/select-affiliation', component: SelectAffiliation, isPublic: false },
   { path: '/state-admin', component: StateAdmin, isPublic: false },
+  { path: '/delegate-state-admin', component: DelegateStateAdminForm, isPublic: false },
   { component: NoMatch, isPublic: true }
 ];
 
