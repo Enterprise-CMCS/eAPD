@@ -103,15 +103,17 @@ const setupTokenManager = () => (dispatch, getState) => {
   });
 };
 
-const getCurrentUser = async () => {
-  let failureReason = null;
-  const userResponse = await axios.get("/me").catch((error) => {
-    failureReason = error ? error.message : "N/A";
-  });
-  if (failureReason) {
-    return failureReason;
-  }
-  return userResponse.data;
+const getCurrentUser = () => async dispatch => {
+  const response = await axios.get("/me")
+    .then(res => {
+      return res;
+    })
+    .catch(error => {
+      dispatch(failLogin(error.message));
+      return null;
+    })
+  
+  return response ? response.data : null;
 };
 
 export const logout = () => dispatch => {
@@ -167,7 +169,11 @@ const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(updateSessionExpiration(expiresAt));
   dispatch(setLatestActivity());
 
-  const user = await getCurrentUser();
+  const user = await dispatch(getCurrentUser());
+  
+  if (!user) {
+    return '/login';
+  }
   if (!user.states || Object.keys(user.states).length === 0) {
     dispatch(requireAccessToState());
     return '/login/affiliations/request';
@@ -189,15 +195,20 @@ const authenticationSuccess = sessionToken => async dispatch => {
 // Then it will get our eAPD jwt cookie, decode it, and update the redux 
 // store with it. If the jwt cookie doesn't exist, we fall back on using
 // okta to verify and provide a new token.
-export const authCheck = () => async dispatch => {
+export const authCheck = () => async dispatch => { 
   dispatch(authCheckRequest());
   
   const eapdCookie = getCookie(API_COOKIE_NAME);  
+  
   if(eapdCookie) {
     const decodedCookie = jwtDecode(eapdCookie);  
     const epochTimestampInSeconds = Math.round(new Date() / 1000);
     
-    if(decodedCookie.exp && decodedCookie.exp > epochTimestampInSeconds) {
+    if(
+      decodedCookie.exp
+      && decodedCookie.exp > epochTimestampInSeconds
+      && decodedCookie.aud === `eAPD-${process.env.NODE_ENV}`
+    ){
       dispatch(updateUserInfo(decodedCookie));
       dispatch(completeLogin());
       if (decodedCookie.activities) {
@@ -209,11 +220,13 @@ export const authCheck = () => async dispatch => {
   if(!eapdCookie) {
     dispatch(setupTokenManager());
     const expiresAt = await renewTokens();
-    
     if (expiresAt) {
       dispatch(updateSessionExpiration(expiresAt));
       dispatch(setLatestActivity());
-      const user = await getCurrentUser();
+      const user = await dispatch(getCurrentUser());
+      if(!user) {
+        return dispatch(logout());        
+      }
       dispatch(updateUserInfo(user));
       dispatch(completeLogin());
       if (user.activities) {
@@ -221,6 +234,8 @@ export const authCheck = () => async dispatch => {
       }
       return null;
     }
+    dispatch(logout());
+    return null;
   }
   return null;
 };
