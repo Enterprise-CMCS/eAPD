@@ -10,9 +10,7 @@ docker-compose -f docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cm
 docker-compose -f docker-compose.endpoint-tests.yml run api-for-testing npm run migrate
 docker-compose -f docker-compose.endpoint-tests.yml run api-for-testing npm run seed
 
-docker-compose -f docker-compose.endpoint-tests.yml run api-for-testing npm run test $@
-EXIT_CODE=$?
-
-docker-compose -f docker-compose.endpoint-tests.yml down
-
-exit $EXIT_CODE
+echo "Test DB is now running (docker ps to confirm)"
+echo "Please run the following commands to ensure tests run successfully"
+echo "export TEST_DB_HOST=localhost"
+echo "export TEST_DB_PORT=55432"
