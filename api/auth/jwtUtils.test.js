@@ -161,7 +161,7 @@ tap.test('Local jwtUtils', async t => {
       'ak',
       'A complex object is stored correctly in the token'
     );
-    t.equal(actualPayload.aud, 'eAPD', 'Token has the correct audience');
+    t.equal(actualPayload.aud, `eAPD-${process.env.NODE_ENV}`, 'Token has the correct audience');
     t.equal(actualPayload.iss, 'eAPD', 'Token has the correct issuer');
     // iat = Issued At
     // nbf = Not Valid Before
