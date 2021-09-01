@@ -21,7 +21,7 @@ jest.mock('react-router-dom', () => {
 
 describe('the (Activity) EntryDetails component', () => {
   const props = {
-    apdId: 1,
+    apdId: '0123456789abcdef01234567',
     activityIndex: 2,
     activityKey: 'activity key',
     fundingSource: 'money pit',
@@ -56,7 +56,7 @@ describe('the (Activity) EntryDetails component', () => {
 
   test('does not render the delete button on the first element', () => {
     const firstActivityProps = {
-      apdId: 1,
+      apdId: '0123456789abcdef01234567',
       activityIndex: 0,
       activityKey: 'activity 1 key',
       fundingSource: 'money pit',
@@ -72,10 +72,7 @@ describe('the (Activity) EntryDetails component', () => {
     const component = shallow(<EntryDetails {...props} />);
     const review = component.find('Review').dive();
     // Second button is the delete button
-    review
-      .find('Button')
-      .at(1)
-      .simulate('click');
+    review.find('Button').at(1).simulate('click');
     // The remove function should not have fired.
     expect(props.remove).toHaveBeenCalledTimes(0);
   });

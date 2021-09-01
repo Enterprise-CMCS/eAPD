@@ -57,7 +57,7 @@ const OtherFunding = ({
             />
             <RichText
               id={`cost-allocation-narrative-${ffy}-other-sources-field`}
-              content={costAllocationNarrative[ffy].otherSources}
+              content={costAllocationNarrative.years[ffy].otherSources}
               onSync={syncOther(ffy)}
               editorClassName="rte-textarea-l"
             />

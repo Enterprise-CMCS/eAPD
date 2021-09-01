@@ -13,45 +13,45 @@ const apd = {
           end: '',
           hourly: {
             data: {
-              2021: { hours: '', rate: '' },
-              2022: { hours: '', rate: '' }
+              2022: { hours: '', rate: '' },
+              2023: { hours: '', rate: '' }
             },
             useHourly: false
           },
           name: 'Super SLR Incorporated',
           start: '',
           totalCost: 32423,
-          years: { 2021: 999756, 2022: 342444 }
+          years: { 2022: 999756, 2023: 342444 }
         },
         {
           description: 'Technology consulting and planning services.',
           end: '',
           hourly: {
             data: {
-              2021: { hours: '', rate: '' },
-              2022: { hours: '', rate: '' }
+              2022: { hours: '', rate: '' },
+              2023: { hours: '', rate: '' }
             },
             useHourly: false
           },
           name: 'Tech Consulting Inc.',
           start: '',
           totalCost: 473573,
-          years: { 2021: 333000, 2022: 200000 }
+          years: { 2022: 333000, 2023: 200000 }
         }
       ],
       costAllocation: {
-        2021: { ffp: { federal: 90, state: 10 }, other: 105000 },
-        2022: { ffp: { federal: 90, state: 10 }, other: 0 }
+        2022: { ffp: { federal: 90, state: 10 }, other: 105000 },
+        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
       },
       costAllocationNarrative: {
         years: {
-          2021: {
-            otherSources:
-              '<p>No other funding is provided for this activity for FFY 2021.</p>'
-          },
           2022: {
             otherSources:
               '<p>No other funding is provided for this activity for FFY 2022.</p>'
+          },
+          2023: {
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2023.</p>'
           }
         },
         methodology: '<p>No cost allocation is necessary for this activity.</p>'
@@ -62,24 +62,24 @@ const apd = {
         {
           description: '',
           category: 'Training and outreach',
-          years: { 2021: 40000, 2022: 40000 }
+          years: { 2022: 40000, 2023: 40000 }
         },
         {
           description: '',
           category: 'Travel',
-          years: { 2021: 35000, 2022: 35000 }
+          years: { 2022: 35000, 2023: 35000 }
         },
         {
           description: '',
           category: 'Hardware, software, and licensing',
-          years: { 2021: 700000, 2022: 0 }
+          years: { 2022: 700000, 2023: 0 }
         }
       ],
       fundingSource: 'HIT',
       outcomes: [
         {
           outcome:
-            'Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.',
+            'Accept attestations for 2022, and modify SLR to meet new spec sheets released by CMS.',
           metrics: [
             { metric: 'Complete SLR modifications by 11/1/21' },
             { metric: 'Accept attestations through 4/30/22.' }
@@ -96,7 +96,7 @@ const apd = {
         }
       ],
       name: 'Program Administration',
-      plannedEndDate: '2022-09-30',
+      plannedEndDate: '2023-09-30',
       plannedStartDate: '2017-10-01',
       schedule: [
         {
@@ -109,7 +109,7 @@ const apd = {
           milestone: 'Environmental Scan Completion'
         },
         {
-          endDate: '2021-05-30',
+          endDate: '2022-05-30',
           milestone: 'HIT Roadmap Development'
         }
       ],
@@ -124,8 +124,8 @@ const apd = {
           description:
             'Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.',
           years: {
-            2021: { amt: 86000, perc: 1 },
-            2022: { amt: 88000, perc: 1 }
+            2022: { amt: 86000, perc: 1 },
+            2023: { amt: 88000, perc: 1 }
           }
         },
         {
@@ -134,8 +134,8 @@ const apd = {
           description:
             'Develop and monitor reports, assist data users in developing and managing queries.',
           years: {
-            2021: { amt: 101115, perc: 1 },
-            2022: { amt: 102111, perc: 1 }
+            2022: { amt: 101115, perc: 1 },
+            2023: { amt: 102111, perc: 1 }
           }
         },
         {
@@ -143,8 +143,8 @@ const apd = {
           description:
             'Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.',
           years: {
-            2021: { amt: 101000, perc: 1 },
-            2022: { amt: 104000, perc: 1 }
+            2022: { amt: 101000, perc: 1 },
+            2023: { amt: 104000, perc: 1 }
           }
         },
         {
@@ -152,8 +152,8 @@ const apd = {
           description:
             'Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.',
           years: {
-            2021: { amt: 101000, perc: 3 },
-            2022: { amt: 109000, perc: 3 }
+            2022: { amt: 101000, perc: 3 },
+            2023: { amt: 109000, perc: 3 }
           }
         },
         {
@@ -161,8 +161,8 @@ const apd = {
           description:
             'Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program',
           years: {
-            2021: { amt: 165000, perc: 0.5 },
-            2022: { amt: 170000, perc: 0.5 }
+            2022: { amt: 165000, perc: 0.5 },
+            2023: { amt: 170000, perc: 0.5 }
           }
         },
         {
@@ -170,8 +170,8 @@ const apd = {
           description:
             'Coordinate office resources, manage staff, budget, and resource assignments, and report program status.',
           years: {
-            2021: { amt: 135000, perc: 0.5 },
-            2022: { amt: 140000, perc: 0.5 }
+            2022: { amt: 135000, perc: 0.5 },
+            2023: { amt: 140000, perc: 0.5 }
           }
         },
         {
@@ -180,8 +180,8 @@ const apd = {
           description:
             'Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.',
           years: {
-            2021: { amt: 110012, perc: 1 },
-            2022: { amt: 111102, perc: 1 }
+            2022: { amt: 110012, perc: 1 },
+            2023: { amt: 111102, perc: 1 }
           }
         },
         {
@@ -189,21 +189,21 @@ const apd = {
           description:
             'Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.',
           years: {
-            2021: { amt: 98987, perc: 4 },
-            2022: { amt: 99897, perc: 4 }
+            2022: { amt: 98987, perc: 4 },
+            2023: { amt: 99897, perc: 4 }
           }
         }
       ],
       summary:
         'Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.',
       quarterlyFFP: {
-        2021: {
+        2022: {
           1: { combined: 25, contractors: 25, inHouse: 25 },
           2: { combined: 25, contractors: 25, inHouse: 25 },
           3: { combined: 25, contractors: 25, inHouse: 25 },
           4: { combined: 25, contractors: 25, inHouse: 25 }
         },
-        2022: {
+        2023: {
           1: { combined: 25, contractors: 25, inHouse: 25 },
           2: { combined: 25, contractors: 25, inHouse: 25 },
           3: { combined: 25, contractors: 25, inHouse: 25 },
@@ -220,45 +220,45 @@ const apd = {
           end: '',
           hourly: {
             data: {
-              2021: { hours: '', rate: '' },
-              2022: { hours: '', rate: '' }
+              2022: { hours: '', rate: '' },
+              2023: { hours: '', rate: '' }
             },
             useHourly: false
           },
           name: 'Interface Vendor Inc.',
           start: '',
           totalCost: 26453574,
-          years: { 2021: 650000, 2022: 750000 }
+          years: { 2022: 650000, 2023: 750000 }
         },
         {
           description: 'Interface M&O contractor.',
           end: '',
           hourly: {
             data: {
-              2021: { hours: '', rate: '' },
-              2022: { hours: '', rate: '' }
+              2022: { hours: '', rate: '' },
+              2023: { hours: '', rate: '' }
             },
             useHourly: false
           },
           name: 'TBD',
           start: '',
           totalCost: 7398,
-          years: { 2021: 0, 2022: 1000000 }
+          years: { 2022: 0, 2023: 1000000 }
         }
       ],
       costAllocation: {
-        2021: { ffp: { federal: 90, state: 10 }, other: 0 },
-        2022: { ffp: { federal: 75, state: 25 }, other: 0 }
+        2022: { ffp: { federal: 90, state: 10 }, other: 0 },
+        2023: { ffp: { federal: 75, state: 25 }, other: 0 }
       },
       costAllocationNarrative: {
         years: {
-          2021: {
-            otherSources:
-              '<p>No other funding is provided for this activity for FFY 2021.</p>'
-          },
           2022: {
             otherSources:
-              '<p>No other funding is provided for this activity for FFY 2022.</p>\n'
+              '<p>No other funding is provided for this activity for FFY 2022.</p>'
+          },
+          2023: {
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2023.</p>\n'
           }
         },
         methodology:
@@ -270,7 +270,7 @@ const apd = {
         {
           description: '',
           category: 'Travel',
-          years: { 2021: 0, 2022: 0 }
+          years: { 2022: 0, 2023: 0 }
         }
       ],
       fundingSource: 'MMIS',
@@ -288,15 +288,15 @@ const apd = {
         }
       ],
       name: 'Claims Data Analytics',
-      plannedEndDate: '2021-09-30',
+      plannedEndDate: '2022-09-30',
       plannedStartDate: '2019-10-01',
       schedule: [
         {
-          endDate: '2021-12-31',
+          endDate: '2022-12-31',
           milestone: 'Implement MMIS-HIE Interface'
         },
         {
-          endDate: '2021-12-31',
+          endDate: '2022-12-31',
           milestone: 'Develop MMIS-HIE Interface Requirements'
         }
       ],
@@ -310,8 +310,8 @@ const apd = {
           title: 'Project Assistant',
           description: 'Assist with stuff',
           years: {
-            2021: { amt: 98000, perc: 1 },
-            2022: { amt: 99000, perc: 1 }
+            2022: { amt: 98000, perc: 1 },
+            2023: { amt: 99000, perc: 1 }
           }
         },
         {
@@ -319,8 +319,8 @@ const apd = {
           description:
             'This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info',
           years: {
-            2021: { amt: 140000, perc: 1 },
-            2022: { amt: 144000, perc: 1 }
+            2022: { amt: 140000, perc: 1 },
+            2023: { amt: 144000, perc: 1 }
           }
         },
         {
@@ -328,8 +328,8 @@ const apd = {
           description:
             'Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System',
           years: {
-            2021: { amt: 115000, perc: 1 },
-            2022: { amt: 115000, perc: 1 }
+            2022: { amt: 115000, perc: 1 },
+            2023: { amt: 115000, perc: 1 }
           }
         },
         {
@@ -337,24 +337,24 @@ const apd = {
           description:
             'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
           years: {
-            2021: { amt: 140000, perc: 1 },
-            2022: { amt: 145000, perc: 1 }
+            2022: { amt: 140000, perc: 1 },
+            2023: { amt: 145000, perc: 1 }
           }
         },
         {
           title: 'Security IT',
           description: 'Make sure its secure.',
           years: {
-            2021: { amt: 115000, perc: 1 },
-            2022: { amt: 120000, perc: 1 }
+            2022: { amt: 115000, perc: 1 },
+            2023: { amt: 120000, perc: 1 }
           }
         },
         {
           title: 'Operations Specialist',
           description: 'Run the day to day.',
           years: {
-            2021: { amt: 125000, perc: 1 },
-            2022: { amt: 130000, perc: 1 }
+            2022: { amt: 125000, perc: 1 },
+            2023: { amt: 130000, perc: 1 }
           }
         },
         {
@@ -362,8 +362,8 @@ const apd = {
           description:
             'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
           years: {
-            2021: { amt: 150000, perc: 2 },
-            2022: { amt: 155000, perc: 3 }
+            2022: { amt: 150000, perc: 2 },
+            2023: { amt: 155000, perc: 3 }
           }
         },
         {
@@ -371,21 +371,21 @@ const apd = {
           description:
             'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
           years: {
-            2021: { amt: 120000, perc: 1 },
-            2022: { amt: 125000, perc: 1 }
+            2022: { amt: 120000, perc: 1 },
+            2023: { amt: 125000, perc: 1 }
           }
         }
       ],
       summary:
         'To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. ',
       quarterlyFFP: {
-        2021: {
+        2022: {
           1: { combined: 25, contractors: 25, inHouse: 25 },
           2: { combined: 25, contractors: 25, inHouse: 25 },
           3: { combined: 25, contractors: 25, inHouse: 25 },
           4: { combined: 25, contractors: 25, inHouse: 25 }
         },
-        2022: {
+        2023: {
           1: { combined: 25, contractors: 25, inHouse: 25 },
           2: { combined: 25, contractors: 25, inHouse: 25 },
           3: { combined: 25, contractors: 25, inHouse: 25 },
@@ -399,28 +399,28 @@ const apd = {
       contractorResources: [
         {
           description: 'Creates materials for training ',
-          end: '2021-05-31',
+          end: '2022-05-31',
           hourly: {
             data: {
-              2021: { hours: '', rate: '' },
-              2022: { hours: '', rate: '' }
+              2022: { hours: '', rate: '' },
+              2023: { hours: '', rate: '' }
             },
             useHourly: false
           },
           name: 'Sample Training Contractor Name',
-          start: '2021-01-01',
+          start: '2022-01-01',
           totalCost: 20000,
-          years: { 2021: 0, 2022: 0 }
+          years: { 2022: 0, 2023: 0 }
         }
       ],
       costAllocation: {
-        2021: { ffp: { federal: 90, state: 10 }, other: 0 },
-        2022: { ffp: { federal: 90, state: 10 }, other: 0 }
+        2022: { ffp: { federal: 90, state: 10 }, other: 0 },
+        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
       },
       costAllocationNarrative: {
         years: {
-          2021: { otherSources: '' },
-          2022: { otherSources: '' }
+          2022: { otherSources: '' },
+          2023: { otherSources: '' }
         },
         methodology: ''
       },
@@ -431,7 +431,7 @@ const apd = {
           description:
             'Training materials creation and software for compliance',
           category: 'Hardware, software, and licensing',
-          years: { 2021: 10000, 2022: 10000 }
+          years: { 2022: 10000, 2023: 10000 }
         }
       ],
       fundingSource: 'HIE',
@@ -442,45 +442,45 @@ const apd = {
         }
       ],
       name: 'HIE Enhancement and Onboarding',
-      plannedEndDate: '2022-09-30',
+      plannedEndDate: '2023-09-30',
       plannedStartDate: '2018-01-01',
       schedule: [
         {
-          endDate: '2021-09-30',
+          endDate: '2022-09-30',
           milestone: 'Onboard providers to assistance program'
         },
-        { endDate: '2021-12-31', milestone: 'Development of Roadmap' },
+        { endDate: '2022-12-31', milestone: 'Development of Roadmap' },
         {
-          endDate: '2022-01-01',
+          endDate: '2023-01-01',
           milestone: 'HIE Staff Augmentation'
         },
         {
-          endDate: '2021-01-01',
+          endDate: '2022-01-01',
           milestone: 'Modules for Care Coordination'
         },
         {
-          endDate: '2022-09-30',
+          endDate: '2023-09-30',
           milestone: 'Provider Onboarding'
         },
         {
-          endDate: '2021-10-01',
+          endDate: '2022-10-01',
           milestone: 'EDIE System Implementation'
         },
         {
-          endDate: '2021-12-31',
+          endDate: '2022-12-31',
           milestone: 'Develop myAlaska HIE Authentication Requirements'
         },
         {
-          endDate: '2021-03-31',
+          endDate: '2022-03-31',
           milestone:
             'Completion of requirements gathering to prepare to receive ELR'
         },
         {
-          endDate: '2021-12-31',
+          endDate: '2022-12-31',
           milestone:
             'Configuration of internal BizTalk HL7 processes to translate the HL7 messages to PRISM'
         },
-        { endDate: '2021-09-30', milestone: 'Onboard Lab Providers' },
+        { endDate: '2022-09-30', milestone: 'Onboard Lab Providers' },
         {
           endDate: '2018-12-31',
           milestone:
@@ -499,20 +499,20 @@ const apd = {
           description:
             'Lead technical architecture design and development efforts for designing, implementing and maintaining services integrations leveraging resources such as the MCI, MPI and state HIE along with other DHSS Business Systems.',
           years: {
-            2021: { amt: 115000, perc: 4 },
-            2022: { amt: 119000, perc: 4 }
+            2022: { amt: 115000, perc: 4 },
+            2023: { amt: 119000, perc: 4 }
           }
         }
       ],
       summary: 'Statewide HIE enhancement and onboarding.',
       quarterlyFFP: {
-        2021: {
+        2022: {
           1: { combined: 25, contractors: 25, inHouse: 25 },
           2: { combined: 25, contractors: 25, inHouse: 25 },
           3: { combined: 25, contractors: 25, inHouse: 25 },
           4: { combined: 25, contractors: 25, inHouse: 25 }
         },
-        2022: {
+        2023: {
           1: { combined: 25, contractors: 25, inHouse: 25 },
           2: { combined: 25, contractors: 25, inHouse: 25 },
           3: { combined: 25, contractors: 25, inHouse: 25 },
@@ -529,42 +529,42 @@ const apd = {
           end: '',
           hourly: {
             data: {
-              2021: { hours: '', rate: '' },
-              2022: { hours: '', rate: '' }
+              2022: { hours: '', rate: '' },
+              2023: { hours: '', rate: '' }
             },
             useHourly: false
           },
           name: 'RFP Planning Vendor Inc.',
           start: '',
           totalCost: 68734,
-          years: { 2021: 50000, 2022: 5000 }
+          years: { 2022: 50000, 2023: 5000 }
         },
         {
           description: '',
           end: '',
           hourly: {
             data: {
-              2021: { hours: '', rate: '' },
-              2022: { hours: '', rate: '' }
+              2022: { hours: '', rate: '' },
+              2023: { hours: '', rate: '' }
             },
             useHourly: false
           },
           name: 'Blue Button Builder Inc.',
           start: '',
           totalCost: 1235246,
-          years: { 2021: 735246, 2022: 500000 }
+          years: { 2022: 735246, 2023: 500000 }
         }
       ],
       costAllocation: {
-        2021: { ffp: { federal: 90, state: 10 }, other: 15000 },
-        2022: { ffp: { federal: 90, state: 10 }, other: 0 }
+        2022: { ffp: { federal: 90, state: 10 }, other: 15000 },
+        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
       },
       costAllocationNarrative: {
         years: {
-          2021: {
+          2022: {
             otherSources: '<p>Sample Grant Related to Blue Button $15000</p>'
           },
-          2022: { otherSources: '' }
+          2023: { otherSources: '' }
         },
         methodology: ''
       },
@@ -574,7 +574,7 @@ const apd = {
         {
           description: '',
           category: 'Hardware, software, and licensing',
-          years: { 2021: 0, 2022: 0 }
+          years: { 2022: 0, 2023: 0 }
         }
       ],
       fundingSource: 'HIE',
@@ -585,16 +585,16 @@ const apd = {
         }
       ],
       name: 'Medicaid Blue Button',
-      plannedEndDate: '2021-09-30',
+      plannedEndDate: '2022-09-30',
       plannedStartDate: '2018-06-01',
       schedule: [
-        { endDate: '2021-04-01', milestone: 'PHR/Blue Button HIE Build' },
+        { endDate: '2022-04-01', milestone: 'PHR/Blue Button HIE Build' },
         {
-          endDate: '2021-12-31',
+          endDate: '2022-12-31',
           milestone: 'Blue Button Implementation'
         },
         {
-          endDate: '2021-12-31',
+          endDate: '2022-12-31',
           milestone: 'On-Boarding of PHR/Blue Button Participants'
         }
       ],
@@ -603,19 +603,19 @@ const apd = {
         {
           title: '',
           description: '',
-          years: { 2021: { amt: 0, perc: 0 }, 2022: { amt: 0, perc: 0 } }
+          years: { 2022: { amt: 0, perc: 0 }, 2023: { amt: 0, perc: 0 } }
         }
       ],
       summary:
         'DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE.',
       quarterlyFFP: {
-        2021: {
+        2022: {
           1: { combined: 25, contractors: 25, inHouse: 25 },
           2: { combined: 25, contractors: 25, inHouse: 25 },
           3: { combined: 25, contractors: 25, inHouse: 25 },
           4: { combined: 25, contractors: 25, inHouse: 25 }
         },
-        2022: {
+        2023: {
           1: { combined: 25, contractors: 25, inHouse: 25 },
           2: { combined: 25, contractors: 25, inHouse: 25 },
           3: { combined: 25, contractors: 25, inHouse: 25 },
@@ -688,20 +688,20 @@ const apd = {
   },
   incentivePayments: {
     ehAmt: {
-      2021: { 1: 0, 2: 0, 3: 0, 4: 0 },
-      2022: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
+      2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     ehCt: {
-      2021: { 1: 0, 2: 0, 3: 0, 4: 0 },
-      2022: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
+      2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     epAmt: {
-      2021: { 1: 0, 2: 0, 3: 0, 4: 0 },
-      2022: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
+      2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     epCt: {
-      2021: { 1: 0, 2: 0, 3: 0, 4: 0 },
-      2022: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
+      2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
     }
   },
   keyPersonnel: [
@@ -710,28 +710,28 @@ const apd = {
       position: 'HIT Coordinator',
       email: 'JimPushesButtons@tycho.com',
       isPrimary: true,
-      fte: { 2021: 1, 2022: 1 },
+      fte: { 2022: 1, 2023: 1 },
       hasCosts: true,
-      costs: { 2021: 100000, 2022: 100000 }
+      costs: { 2022: 100000, 2023: 100000 }
     },
     {
       name: 'Fred Johnson',
       position: 'Project Management Office Director',
       email: 'FJohnson@tycho.com',
       isPrimary: false,
-      fte: { 2021: 0.3, 2022: 0.3 },
+      fte: { 2022: 0.3, 2023: 0.3 },
       hasCosts: false,
-      costs: { 2021: 0, 2022: 0 }
+      costs: { 2022: 0, 2023: 0 }
     }
   ],
   narrativeHIE:
     "<p>Tycho''s existing health information infrastructure consists of various organizations operating at the enterprise, local, regional and state levels, and includes:</p>\n<ul>\n<li>Health systems, affiliated providers, and ancillary services;</li>\n<li>State agencies health data repositories;</li>\n<li>Specialized participants that operate for specific purposes including, but not limited to, laboratory services, radiology, public health, research and quality assessment;</li>\n<li>Information and service providers that operate in vertical markets such as e-Prescribing, State registries, Medicaid and Medicare;</li>\n<li>Private payers and clearinghouses that transmit administrative data for claims purposes and for pay for performance programs.</li>\n</ul>\n<p>The Tycho HIE has planned to implement a robust public health modernization plan which includes the development of specialized registries and interfaces to the HIE to significantly increase the ability for EPs and EHs to achieve meaningful use. Additionally, plans to collect CQM data and the creation of a Personal Health Record (PHR) has been identified as activities to complete.</p>\n<p></p>\n<p>Payers/Providers must complete a participation agreement form and possible addendum to participate in the HIE and other services. Governance for the HIE has been defined by the State statute, any related regulations and by the HIE board of directors.</p>\n<p></p>\n<p>Appropriate cost allocation is a fundamental principle of the federal FFP program to ensure that private sector beneficiaries of public investments are covering the incremental cost of their use. A sustainability plan for proportional investments by other payers/providers than Medicaid was developed in concert with the Tycho HIE Board of Directors and a broad cross-section of stakeholders under the leadership of the Tycho HIE Executive Director and State HIT Coordinator. The Tycho HIEâs fee structure and detailed participation agreements can be viewed at: tychoMedicaid.com</p>",
   narrativeHIT:
-    '<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>\n<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2022).</span></p>',
+    '<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>\n<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>',
   narrativeMMIS:
     "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>\n<p>Currently, Tycho does not have an All-Payersâ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>",
   previousActivityExpenses: {
-    2017: {
+    2019: {
       hithie: { federalActual: 140000, totalApproved: 280000 },
       mmis: {
         50: { federalActual: 23445, totalApproved: 82545 },
@@ -739,7 +739,7 @@ const apd = {
         90: { federalActual: 235720, totalApproved: 262460 }
       }
     },
-    2018: {
+    2020: {
       hithie: { federalActual: 146346, totalApproved: 234526 },
       mmis: {
         50: { federalActual: 129387, totalApproved: 375445 },
@@ -747,7 +747,7 @@ const apd = {
         90: { federalActual: 614544, totalApproved: 863455 }
       }
     },
-    2019: {
+    2021: {
       hithie: { federalActual: 320000, totalApproved: 540000 },
       mmis: {
         50: { federalActual: 0, totalApproved: 0 },
@@ -759,7 +759,7 @@ const apd = {
   previousActivitySummary:
     '<p><span style="font-size: 18px;"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>\n<p>As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.</p>\n<p></p>\n<p>Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the Stateâs audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the stateâs accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.</p>\n<p></p>\n<p>IAPD Funding Milestones and Expenditures</p>\n<p>The first IAPDU which was approved by CMS in October 2012 requested funding for HIT initiatives. The primary focus of the activities in the IAPDU # 2, which was approved in April 2013 was support of MU Stage 1, preparation for MU Stage 2, and the ongoing administration of the EHR Incentive Payment program. Subsequent IAPD submissions requested continued funding to support program operations and modernization of enterprise systems.</p>\n<p></p>\n<p>Tycho recently transitioned to a new state-wide financial system and it would be overly burdensome and a manual process to detail expenses out in the method done in previous HITECH IAPD submissions. Tycho has elected to report expenditures based on the CMS-64 line reporting for HITECH as this will be the most audible method due to the stateâs transition to a new financial system.</p>\n<p>Detailed List of Expenditure Types:</p>\n<ul>\n<li>State personnel</li>\n<li>Travel and conferences: CMS Regional Meeting, attendance at local/Anchorage-based conferences to support EHR Incentive Program and Meaningful Use, and other HIT/HIE related conferences such as StateHealth IT Connect, IT Solutions Management (ISM) annual conference</li>\n<li>Contract payments for State Level Registry solution</li>\n<li>Contract payments for post-payment audits for the Medicaid EHR Incentive Program</li>\n<li>Contract payments for Technical Assistance for EHR Incentive Program and other HITECH activities identified in HITECH IAPD</li>\n<li>Contract payments for MITA 3.0 COTS solution as outlined in HITECH IAPD to support the development of a HITECH MITA 3.0 State Self-Assessment</li>\n<li>Administrative costs: copy paper, office supplies</li>\n</ul>',
   programOverview:
-    "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2021.</p>\n<p>The original IAPD request supported the first phase of the Station''s participation in the development and expansion of the use of EHR and collaboration among state entities in a Health Information Exchange (HIE) network. In the first phase, Tycho implemented the system changes necessary to support the Tycho EHR Provider Incentive Payment Program as well as the administrative supports necessary for implementation and operation of this program.&nbsp;</p>\n<ol>\n<li>The first IAPDU requested additional support for the EHR Provider Incentive Payment Program and additional project support.</li>\n<li>The second IAPDU requested funding for the Division of Senior and Disabilities Services (DSDS) Automated Service Plan (ASP) system, supporting expanded use of EHRs.</li>\n<li>The third IAPDU requested additional and continued support of HIT initiatives.</li>\n</ol>\n<p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>\n<p>This funding request time frame is for the period of October 1, 2018 to September 30, 2022.&nbsp;</p>",
+    "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.</p>\n<p>The original IAPD request supported the first phase of the Station''s participation in the development and expansion of the use of EHR and collaboration among state entities in a Health Information Exchange (HIE) network. In the first phase, Tycho implemented the system changes necessary to support the Tycho EHR Provider Incentive Payment Program as well as the administrative supports necessary for implementation and operation of this program.&nbsp;</p>\n<ol>\n<li>The first IAPDU requested additional support for the EHR Provider Incentive Payment Program and additional project support.</li>\n<li>The second IAPDU requested funding for the Division of Senior and Disabilities Services (DSDS) Automated Service Plan (ASP) system, supporting expanded use of EHRs.</li>\n<li>The third IAPDU requested additional and continued support of HIT initiatives.</li>\n</ol>\n<p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>\n<p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
   stateProfile: {
     medicaidDirector: {
       name: 'Cornelius Fudge',
@@ -773,7 +773,7 @@ const apd = {
       state: 'AK',
       zip: '12345'
     },
-    years: ['2021', '2022']
+    years: ['2022', '2023']
   }
 };
 

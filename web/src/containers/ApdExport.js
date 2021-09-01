@@ -11,7 +11,7 @@ import AlertMissingFFY from '../components/AlertMissingFFY';
 import { selectApdYears } from '../reducers/apd.selectors';
 
 const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
-  const paramApdId = +useParams().apdId;
+  const paramApdId = useParams().apdId;
 
   if (!paramApdId) {
     return <Redirect to="/apd" />;
@@ -20,7 +20,7 @@ const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
   return (
     <React.Fragment>
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
-      <AlertMissingFFY/>
+      <AlertMissingFFY />
       <Section resource="exportAndSubmit">
         <Subsection resource="reviewAndDownload">
           <p>
@@ -31,7 +31,9 @@ const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
             size="big"
             variation="primary"
             className="ds-u-margin-top--2"
-            onClick={() => years.length > 0 && pushRoute(`/print/${paramApdId}`)}
+            onClick={() =>
+              years.length > 0 && pushRoute(`/print/${paramApdId}`)
+            }
             disabled={years.length === 0}
           >
             Continue to Review
@@ -45,7 +47,7 @@ const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
 ExportAndSubmit.propTypes = {
   push: PropTypes.func.isRequired,
   useParams: PropTypes.func,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 ExportAndSubmit.defaultProps = {

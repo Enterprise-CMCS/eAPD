@@ -313,8 +313,10 @@ describe('APD reducer', () => {
               1743: 'no'
             },
             costAllocationNarrative: {
-              1741: { otherSources: '' },
-              1742: { otherSources: '' },
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
               methodology: ''
             },
             contractorResources: [
@@ -397,8 +399,10 @@ describe('APD reducer', () => {
               1743: 'no'
             },
             costAllocationNarrative: {
-              1741: { otherSources: '' },
-              1742: { otherSources: '' },
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
               methodology: ''
             },
             contractorResources: [
@@ -515,8 +519,10 @@ describe('APD reducer', () => {
               1743: 'no'
             },
             costAllocationNarrative: {
-              1741: { otherSources: '' },
-              1742: { otherSources: '' },
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
               methodology: ''
             },
             contractorResources: [
@@ -630,7 +636,9 @@ describe('APD reducer', () => {
               1743: 'no'
             },
             costAllocationNarrative: {
-              1742: { otherSources: '' },
+              years: {
+                1742: { otherSources: '' }
+              },
               methodology: ''
             },
             contractorResources: [
@@ -816,12 +824,14 @@ describe('APD reducer', () => {
                   1787: { ffp: { federal: 90, state: 10 }, other: 0 }
                 },
                 costAllocationNarrative: {
-                  1787: { otherSources: '' },
+                  years: {
+                    1787: { otherSources: '' }
+                  },
                   methodology: ''
                 },
                 description: '',
                 expenses: [],
-                fundingSource: false,
+                fundingSource: null,
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
                 name: '',

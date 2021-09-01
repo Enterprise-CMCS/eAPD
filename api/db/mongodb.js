@@ -7,7 +7,7 @@ const setup = () =>
   new Promise((resolve, reject) => {
     logger.verbose('Setting up MongoDB connection');
     const connectionString =
-      process.env.MONGO_URL || 'mongodb://mongo:cms@mongodb:27017/eapd';
+      process.env.MONGO_URL || 'mongodb://mongo:cms@mongo:27017/eapd';
     const dbName =
       process.env.MONGO_DATABASE || connectionString.split('/').pop();
     return mongoose

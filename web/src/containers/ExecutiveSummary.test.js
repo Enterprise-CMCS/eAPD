@@ -10,13 +10,13 @@ jest.mock('react-router-dom', () => {
   return {
     useHistory: jest.fn().mockReturnValue({ push: mockPush }),
     useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' }),
-    useParams: jest.fn().mockReturnValue({ apdId: 2 })
+    useParams: jest.fn().mockReturnValue({ apdId: '0123456789abcdef01234560' })
   };
 });
 
 describe('executive summary component', () => {
   const props = {
-    apdId: 1,
+    apdId: '0123456789abcdef01234567',
     data: [
       {
         key: 'a1',

@@ -23,7 +23,14 @@ const activity = {
   },
   costAllocationNarrative: {
     methodology: '',
-    otherSources: ''
+    years: {
+      2020: {
+        otherSources: ''
+      },
+      2021: {
+        otherSources: ''
+      }
+    }
   },
   description: '<p>This is a description of the activity</p>\n',
   fundingSource: 'HIT',

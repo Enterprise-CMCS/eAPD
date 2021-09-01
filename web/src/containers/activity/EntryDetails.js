@@ -106,7 +106,7 @@ const EntryDetails = ({
 };
 
 EntryDetails.propTypes = {
-  apdId: PropTypes.number.isRequired,
+  apdId: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityKey: PropTypes.string.isRequired,
   fundingSource: PropTypes.string,

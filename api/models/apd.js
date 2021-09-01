@@ -122,7 +122,7 @@ const apdSchema = new mongoose.Schema({
       ],
       fundingSource: {
         type: String,
-        enum: ['HIE', 'HIT', 'MMIS', false]
+        enum: ['HIE', 'HIT', 'MMIS', null]
       },
       name: String,
       outcomes: [

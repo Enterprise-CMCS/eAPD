@@ -76,7 +76,7 @@ const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
 };
 
 ApdPageRoutes.propTypes = {
-  apdId: PropTypes.number,
+  apdId: PropTypes.string,
   useRouteMatch: PropTypes.func
 };
 

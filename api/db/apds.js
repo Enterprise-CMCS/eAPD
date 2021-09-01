@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const toMongodb = require('jsonpatch-to-mongodb');
+const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
@@ -33,6 +33,27 @@ const getAPDByIDAndState = (
   { APD = mongoose.model('APD') } = {}
 ) => APD.findOne({ _id: id, stateId }).lean();
 
+// Apply the patches to the APD document
+const patchAPD = async (
+  id,
+  stateId,
+  apdDoc,
+  patch,
+  { APD = mongoose.model('APD') }
+) => {
+  // duplicate the apdDoc so that dates will be converted to strings
+  const apdJSON = JSON.parse(JSON.stringify(apdDoc));
+  // apply the patches to the apd
+  const { newDocument } = applyPatch(apdJSON, patch);
+  // update the apd in the database
+  await APD.replaceOne({ _id: id, stateId }, newDocument, {
+    multipleCastError: true,
+    runValidators: true
+  });
+  // return the updated apd
+  return newDocument;
+};
+
 const updateAPDDocument = async (
   id,
   stateId,
@@ -43,17 +64,20 @@ const updateAPDDocument = async (
     validate = validateApd
   } = {}
 ) => {
+  // Get the updated apd json
+  const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
   if (patch.length > 0) {
+    let updatedDoc;
     const updateErrors = {};
     let updated = [...patch];
     // Add updatedAt timestamp to the patch
-    patch.push({ op: 'replace', path: 'updatedAt', value: Date.now() });
+    patch.push({
+      op: 'replace',
+      path: '/updatedAt',
+      value: new Date().toISOString()
+    });
     try {
-      // Convert the patches to a mongo update format and update the APD
-      const mongoPatch = toMongodb(patch);
-      await APD.updateOne({ _id: id, stateId }, mongoPatch, {
-        multipleCastError: true
-      });
+      updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
     } catch (err) {
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
 
@@ -63,82 +87,83 @@ const updateAPDDocument = async (
         updatedPatch[path] = { op, path, value };
       });
 
-      Object.keys(err.errors).forEach(key => {
-        const {
-          name,
-          message,
-          stringValue,
-          value,
-          kind,
-          valueType
-        } = err.errors[key];
+      if (err?.errors) {
+        Object.keys(err.errors).forEach(key => {
+          const {
+            name,
+            message,
+            stringValue,
+            value,
+            kind,
+            valueType
+          } = err.errors[key];
 
-        // convert error path from mongo style to json patch style
-        const dataPath = `/${key.replace(/\./g, '/')}`;
-        // Add error to updateErrors map
-        updateErrors[dataPath] = {
-          dataPath,
-          name,
-          message,
-          valueType,
-          stringValue,
-          kind,
-          errorValue: value,
-          newValue: null
-        };
+          // convert error path from mongo style to json patch style
+          const dataPath = `/${key.replace(/\./g, '/')}`;
+          // Add error to updateErrors map
+          updateErrors[dataPath] = {
+            dataPath,
+            name,
+            message,
+            valueType,
+            stringValue,
+            kind,
+            errorValue: value,
+            newValue: null
+          };
 
-        // update the updatePatch to set the value to null instead of the invalid value
-        updatedPatch[dataPath] = { op: 'replace', path: dataPath, value: null };
-      });
+          // update the updatePatch to set the value to null instead of the invalid value
+          updatedPatch[dataPath] = {
+            op: 'replace',
+            path: dataPath,
+            value: null
+          };
+        });
+      }
 
       // If there are errors, nothing was saved, so we need to try to update again
       const validPatches = Object.keys(updatedPatch).map(
         key => updatedPatch[key]
       );
-      const mongoPatch = toMongodb(validPatches);
-      await APD.updateOne({ _id: id, stateId }, mongoPatch, {
-        multipleCastError: true
-      });
+      updatedDoc = await patchAPD(id, stateId, apdDoc, validPatches, { APD });
 
       // convert updatedPatch map to an array and set it to updated
       updated = Object.keys(updatedPatch).map(key => updatedPatch[key]);
     }
-    // Get the updated apd json
-    const apd = await APD.findOne({ _id: id, stateId }).lean();
 
     // Determine if state profile needs to be updated in postgres
     const stateUpdated = patch.find(({ path }) =>
       path.includes('/stateProfile')
     );
     if (stateUpdated) {
-      await updateProfile(stateId, apd.stateProfile);
+      await updateProfile(stateId, updatedDoc.stateProfile);
     }
 
     // Will probably eventually switch to apd.validate
     const validationErrors = {};
-    const valid = validate(JSON.parse(JSON.stringify(apd)));
+    const valid = validate(JSON.parse(JSON.stringify(updatedDoc)));
     if (!valid) {
       // Rather than send back the full error from the validator, pull out just the relevant bits
       // and fetch the value that's causing the error.
-      validate.errors.forEach(({ dataPath, message }) => {
-        validationErrors[dataPath] = {
-          dataPath,
+      validate.errors.forEach(({ instancePath, message }) => {
+        validationErrors[instancePath] = {
+          dataPath: instancePath,
           message,
-          value: jsonpointer.get(apd, dataPath)
+          value: jsonpointer.get(updatedDoc, instancePath)
         };
       });
     }
 
     return {
       errors: { ...updateErrors, ...validationErrors },
-      apd,
+      apd: updatedDoc,
       stateUpdated,
       updated
     };
   }
   // If there are no patches, return the original APD
   return {
-    apd: await APD.findOne({ _id: id, stateId }).lean(),
+    apd: apdDoc,
     errors: {},
     stateUpdated: false,
     updated: []
