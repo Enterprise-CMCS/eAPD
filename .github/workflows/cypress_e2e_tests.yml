@@ -46,13 +46,13 @@ jobs:
       - name: Run E2E test
         if: ${{ always() }}
         uses: cypress-io/github-action@v2
-        env: host=api.dev.local,port=8080
+        env: 
           NODE_ENV: development
         with:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
-          env: 
+          env: host=api.dev.local,port=8080
       - name: Debugging Info
         working-directory: ./integrationTests
         run: |
