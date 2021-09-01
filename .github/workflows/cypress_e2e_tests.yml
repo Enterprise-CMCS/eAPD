@@ -28,6 +28,10 @@ jobs:
 #          npm ci
 #          npm install
 #          npm run start-dev &       
+      - name: Cypress Dependency
+        working-directory: ./integrationTests
+        run: |
+          npm install knex
       - name: Testing different method
         working-directory: ./integrationTests
         env:
@@ -39,11 +43,13 @@ jobs:
         uses: cypress-io/github-action@v2
         env:
           NODE_ENV: development
-        run: |
-          ls -la
-          pwd
-          find ./ -type f -name index.js
         with:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
+      - name: Debugging Info
+        working-directory: ./integrationTests
+        run: |
+          ls -la
+          pwd
+          find ./ -type f -name index.js
