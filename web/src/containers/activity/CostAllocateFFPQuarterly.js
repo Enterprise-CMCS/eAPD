@@ -100,7 +100,7 @@ const CostAllocateFFPQuarterly = ({
         <tr>
           <Fragment key={year}>
             {QUARTERS.map(q => (
-              <td className="budget-table--number" key={q}>
+              <td className="budget-table--number" key={q} data-cy="subtotal">
                 <Dollars>{quarterlyFFP[year][q].inHouse.dollars}</Dollars>
               </td>
             ))}
@@ -141,7 +141,7 @@ const CostAllocateFFPQuarterly = ({
         <tr>
           <Fragment key={year}>
             {QUARTERS.map(q => (
-              <td className="budget-table--number" key={q}>
+              <td className="budget-table--number" key={q} data-cy="subtotal">
                 <Dollars>{quarterlyFFP[year][q].contractors.dollars}</Dollars>
               </td>
             ))}
@@ -159,7 +159,11 @@ const CostAllocateFFPQuarterly = ({
           </th>
           <Fragment key={year}>
             {QUARTERS.map(q => (
-              <td className="budget-table--number budget-table--total" key={q}>
+              <td
+                className="budget-table--number budget-table--total"
+                key={q}
+                data-cy="subtotal"
+              >
                 <Dollars>{quarterlyFFP[year][q].combined.dollars}</Dollars>
               </td>
             ))}

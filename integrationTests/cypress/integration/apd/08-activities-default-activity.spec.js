@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
-import ActivityPage from '../../../page-objects/activity-page';
-import BudgetPage from '../../../page-objects/budget-page';
-import ExportPage from '../../../page-objects/export-page';
+import ActivityPage from '../../page-objects/activity-page';
+import BudgetPage from '../../page-objects/budget-page';
+import ExportPage from '../../page-objects/export-page';
 
 describe('checking default values in Activities section', () => {
   // const activityPage = new ActivityPage();
@@ -16,7 +16,7 @@ describe('checking default values in Activities section', () => {
 
   before(() => {
     cy.useStateStaff();
-    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.contains('HITECH IAPD').click();
 
     // Gets list of available years
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
@@ -151,7 +151,7 @@ describe('checking default values in Activities section', () => {
     activityPage.checkOtherStateExpensesOutput(
       'Hardware, software, and licensing',
       years,
-      0
+      [0, 0]
     );
 
     activityPage.checkDeleteButton(
@@ -189,7 +189,7 @@ describe('checking default values in Activities section', () => {
       'Full Contract Term: Date not specified - Date not specified',
       'Total Contract Cost: $0',
       years,
-      0
+      [0, 0]
     );
 
     activityPage.checkDeleteButton(
@@ -229,7 +229,7 @@ describe('checking default values in Activities section', () => {
             budgetPage.checkSubtotalTable('Other State Expenses', 0);
             budgetPage.checkSubtotalTable('Private Contractor', 0);
             budgetPage.checkTotalComputableMedicaidCost(0);
-            budgetPage.checkActivityTotalCostTable(0, 0, 0, 1);
+            budgetPage.checkActivityTotalCostTable(0, 0, 1);
 
             budgetPage.checkSplitFunctionality();
             budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
@@ -305,13 +305,13 @@ describe('checking default values in Activities section', () => {
                 budgetPage.checkSubtotalTable('Other State Expenses', 0);
                 budgetPage.checkSubtotalTable('Private Contractor', 0);
                 budgetPage.checkTotalComputableMedicaidCost(0);
-                exportPage.checkRowTotals(0, 0);
               });
             cy.contains(`Activity ${i + 1} Budget for FFY ${years[k]}`)
               .parent()
               .next()
               .within(() => {
-                budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
+                exportPage.checkRowTotals(0, 0);
+                budgetPage.checkCostSplitTable(90, 10, 0);
               });
             cy.contains('Estimated Quarterly Expenditure')
               .next()
