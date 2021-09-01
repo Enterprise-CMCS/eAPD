@@ -40,6 +40,7 @@ jobs:
         run: |
           sh cypress-setup.sh run
       - name: Run E2E test
+        if: ${{ always() }}
         uses: cypress-io/github-action@v2
         env:
           NODE_ENV: development
