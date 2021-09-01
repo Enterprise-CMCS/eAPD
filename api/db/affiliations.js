@@ -176,11 +176,13 @@ const updateAuthAffiliation = async({
   }
 
   // Lookup role name and set expiration date accordingly
-  const { name: roleName } = await db('auth_roles')
-    .select('name')
-    .where({'auth_roles.id': newRoleId })
-    .first();
-
+  // The front end will pass in a -1 if the role is being revoked/denied so we
+  // need to handle that case here
+  const { name: roleName } = newRoleId < 0 ? { name: null } : await db('auth_roles')
+                                                                .select('name')
+                                                                .where({id: newRoleId })
+                                                                .first();
+  
   let expirationDate = null;
   if ( newStatus === 'approved' ) {
     const today = new Date();
@@ -191,17 +193,15 @@ const updateAuthAffiliation = async({
       expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
     }
   }
-
+  
   const authAffiliationAudit = {
     user_id: affiliationUserId,
     original_role_id: originalRoleId,
     original_status: originalStatus,
     new_role_id: newStatus !== 'approved' ? null : newRoleId,
     new_status: newStatus || null,
-    changed_by:changedBy
+    changed_by: changedBy
   }
-
-
 
   return db('auth_affiliations')
     .where({ state_id: stateId, id: affiliationId })
