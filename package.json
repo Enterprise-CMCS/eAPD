@@ -1,6 +1,11 @@
 {
   "name": "cms-hitech-apd",
   "description": "APD app for CMS HITECH program",
+  "url": "https://github.com/CMSgov/eAPD/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CMSgov/eAPD.git"
+  },
   "scripts": {
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
