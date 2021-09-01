@@ -13,21 +13,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup npm package Frontend
-        working-directory: ./web
-        run: |
-          npm ci
-          npm install
-          npm run start -- --public=0.0.0.0:8080 &
-      - name: Setup npm package Backend
-        working-directory: ./api
+#      - name: Setup npm package Frontend
+#        working-directory: ./web
+#        run: |
+#          npm ci
+#          npm install
+#          npm run start -- --public=0.0.0.0:8080 &
+#      - name: Setup npm package Backend
+#        working-directory: ./api
+#        env:
+#          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+#          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+#        run: |
+#          npm ci
+#          npm install
+#          npm run start-dev &       
+      - name: Testing different method
+        working-directory: ./integrationTests
         env:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
-          npm ci
-          npm install
-          npm run start-dev &       
+          sh cypress-setup.sh
       - name: Run E2E test
         uses: cypress-io/github-action@v2
         env:
@@ -36,4 +43,3 @@ jobs:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
-        
