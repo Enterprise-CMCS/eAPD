@@ -125,7 +125,9 @@
     "tap": "^15.0.2"
   },
   "resolutions": {
-    "hosted-git-info": "4.0.2"
+    "browserslist": "4.16.5",
+    "hosted-git-info": "4.0.2",
+    "path-parse": "1.0.7"
   },
   "jest": {
     "testMatch": [
