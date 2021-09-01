@@ -30,8 +30,12 @@ jobs:
 #          npm run start-dev &       
       - name: Cypress Dependency
         working-directory: ./integrationTests
+        env:
+          NODE_ENV: development
         run: |
           npm install knex
+          docker-compose exec api npm run migrate
+          docker-compose exec api npm run seed
       - name: Testing different method
         working-directory: ./integrationTests
         env:
@@ -42,12 +46,13 @@ jobs:
       - name: Run E2E test
         if: ${{ always() }}
         uses: cypress-io/github-action@v2
-        env:
+        env: host=api.dev.local,port=8080
           NODE_ENV: development
         with:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
+          env: 
       - name: Debugging Info
         working-directory: ./integrationTests
         run: |
