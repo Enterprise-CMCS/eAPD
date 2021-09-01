@@ -53,7 +53,7 @@ jobs:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
-          env: host=http://localhost:8080/,port=8080
+          config: baseUrl=http://localhost:8001
       - name: Debugging Info
         working-directory: ./integrationTests
         run: |
