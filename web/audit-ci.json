@@ -1,17 +1,40 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [
-    1693,
-    1700,
-    1747,
-    1751,
-    1753,
-    1754,
-    1755,
-    1762,
-    1770,
-    1771
-  ],
+  "allowlist": [1751, 1753, 1780, 1781],
+  "_comment": {
+    "1751": {
+      "advisory": "https://www.npmjs.com/advisories/1751",
+      "module": "glob-parent",
+      "affects": [
+        "@babel/cli@7.13.14 - compiles the code to run on older browsers",
+        "@storybook/addon-docs@6.3.4 - storybook",
+        "@storybook/react@6.3.4 - storybook",
+        "webpack-dev-server@3.11.2 - webpack development server",
+        "webpack@4.46.0 - used to build the web application"
+      ]
+    },
+    "1753": {
+      "advisory": "https://www.npmjs.com/advisories/1753",
+      "module": "trim-newlines",
+      "affects": ["node-sass@5.0.0 - process sass into css"]
+    },
+    "1780": {
+      "advisory": "https://www.npmjs.com/advisories/1780",
+      "module": "tar",
+      "affects": [
+        "@storybook/addon-docs@6.3.7 - storybook",
+        "node-sass@5.0.0 - used to build the css for the web application"
+      ]
+    },
+    "1781": {
+      "advisory": "https://www.npmjs.com/advisories/1781",
+      "module": "tar",
+      "affects": [
+        "@storybook/addon-docs@6.3.7 - storybook",
+        "node-sass@5.0.0 - used to build the css for the web application"
+      ]
+    }
+  },
   "registry": "https://registry.npmjs.org"
 }

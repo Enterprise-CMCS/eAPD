@@ -8,6 +8,9 @@ describe('filling out APD overview section', function () {
 
   before(function () {
     cy.useStateStaff();
+    cy.contains('Delete').click();
+    cy.findAllByText('Delete APD').click();
+
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.wait(1000); //Gives time for webpage to load
     cy.location('pathname').then(pathname => (apdUrl = pathname));
@@ -64,7 +67,7 @@ describe('filling out APD overview section', function () {
         cy.findByRole('checkbox', { name: list[index].value }).check({
           force: true
         });
-  
+
         cy.contains('Saving').should('exist');
         cy.contains('Saved').should('exist');
       }
@@ -76,7 +79,7 @@ describe('filling out APD overview section', function () {
         'contain',
         years[years.length - 1]
       );
-      
+
       //Testing delete(cancel) FFY
       cy.findByRole('checkbox', { name: years[years.length - 1] }).uncheck({
         force: true
