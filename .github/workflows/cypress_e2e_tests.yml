@@ -24,7 +24,7 @@ jobs:
           npm install knex
           npm install cypress
           npm audit fix
-      - name: Testing Script
+      - name: Cypress E2E Tests
         if: ${{ always() }}
         working-directory: ./integrationTests
         env:
