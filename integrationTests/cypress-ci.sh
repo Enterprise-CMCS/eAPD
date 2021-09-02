@@ -7,6 +7,7 @@ export CYPRESS_TESTS=true
 docker-compose -f ../docker-compose.yml up -d
 docker-compose exec api npm run migrate
 docker-compose exec api npm run seed
+docker cp api:eAPD/api/seeds/test/tokens.json eAPD/api/seeds/test/tokens.json
 
 npx cypress run --headless $@
 EXIT_CODE=$?
