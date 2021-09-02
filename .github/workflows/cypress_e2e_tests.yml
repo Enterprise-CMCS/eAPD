@@ -32,6 +32,8 @@ jobs:
         working-directory: ./integrationTests
         env:
           NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
         run: |
           npm install knex
           npm install cypress
@@ -42,6 +44,7 @@ jobs:
         if: ${{ always() }}
         working-directory: ./integrationTests
         env:
+          NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
@@ -50,6 +53,7 @@ jobs:
         if: ${{ always() }}
         working-directory: ./integrationTests
         env:
+          NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
@@ -59,6 +63,8 @@ jobs:
         uses: cypress-io/github-action@v2
         env: 
           NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         with:
           working-directory: ./integrationTests
           browser: chrome
