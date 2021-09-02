@@ -341,7 +341,7 @@ const mapStateToProps = (
 
   return {
     aKey: activity.key,
-    activityName: activity.name || `Activity ${activityIndex + 1}`,
+    activityName: activity.name || "Untitled",
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,

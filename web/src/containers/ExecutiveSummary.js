@@ -33,7 +33,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
               key={activity.key}
               heading={
                 <Fragment>
-                  Activity {i + 1}: {activity.name}
+                  Activity {i + 1}: {activity.name || "Untitled"}
                 </Fragment>
               }
               headingLevel="4"
