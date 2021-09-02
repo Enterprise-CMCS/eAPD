@@ -34,6 +34,7 @@ jobs:
           NODE_ENV: development
         run: |
           npm install knex
+          npm install cypress
           npm audit fix
           docker-compose exec api npm run migrate
           docker-compose exec api npm run seed
