@@ -13,21 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-#      - name: Setup npm package Frontend
-#        working-directory: ./web
-#        run: |
-#          npm ci
-#          npm install
-#          npm run start -- --public=0.0.0.0:8080 &
-#      - name: Setup npm package Backend
-#        working-directory: ./api
-#        env:
-#          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-#          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-#        run: |
-#          npm ci
-#          npm install
-#          npm run start-dev &       
       - name: Cypress Dependency
         working-directory: ./integrationTests
         env:
@@ -35,25 +20,10 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
         run: |
+          apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
           npm install knex
           npm install cypress
           npm audit fix
-      - name: Start the App
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-        run: |
-          docker-compose up &
-      - name: Testing CLI NPM Command
-        if: ${{ always() }}
-        working-directory: ./integrationTests
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-        run: |
-          npx cypress run --headless
       - name: Testing Script
         if: ${{ always() }}
         working-directory: ./integrationTests
@@ -62,22 +32,4 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
-          sh cypress-setup.sh run
-      - name: Run E2E test
-        if: ${{ always() }}
-        uses: cypress-io/github-action@v2
-        env: 
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-        with:
-          working-directory: ./integrationTests
-          browser: chrome
-          headless: true
-          start: npm cypress run
-      - name: Debugging Info
-        working-directory: ./integrationTests
-        run: |
-          ls -la
-          pwd
-          find ./ -type f -name index.js
+          sh cypress-ci.sh
