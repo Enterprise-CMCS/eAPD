@@ -34,17 +34,17 @@ jobs:
           NODE_ENV: development
         run: |
           npm install knex
-          npm audit fix
           docker-compose exec api npm run migrate
           docker-compose exec api npm run seed
       - name: Testing different method
+        if: ${{ always() }}
         working-directory: ./integrationTests
         env:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
           #sh cypress-setup.sh run
-          npm cypress open
+          npm cypress run
       - name: Run E2E test
         if: ${{ always() }}
         uses: cypress-io/github-action@v2
@@ -54,7 +54,7 @@ jobs:
           working-directory: ./integrationTests
           browser: chrome
           headless: true
-          start: npm cypress open
+          start: npm cypress run
       - name: Debugging Info
         working-directory: ./integrationTests
         run: |
