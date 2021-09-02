@@ -1,9 +1,14 @@
+import BudgetPage from './budget-page';
+
 class ActivityPage {
+  budgetPage = new BudgetPage();
+
   checkTinyMCE = (id, expectedValue) => {
     cy.get(`[id="${id}"]`).should('have.value', expectedValue);
   };
 
   checkTextField = (className, expectedValue, index) => {
+    // I CHANGED THIS TO 'CONTAIN' FROM 'HAVE.VALUE' FOR populatePage.fillQuarters()
     if (Number.isInteger(index)) {
       cy.get(`[class="${className}"]`)
         .eq(index)
@@ -45,9 +50,12 @@ class ActivityPage {
     cy.contains(check).should('not.exist');
   };
 
-  checkOutcomeOutput = (outcome, metric) => {
+  checkOutcomeOutput = (outcome, metric1, metric2) => {
     cy.contains(outcome).should('exist');
-    cy.contains(metric).should('exist');
+    cy.contains(metric1).should('exist');
+    if (metric2 != null) {
+      cy.contains(metric2).should('exist');
+    }
   };
 
   checkMetricFunctionality = () => {
@@ -119,10 +127,11 @@ class ActivityPage {
     }
   };
 
-  checkFFYcosts = (years, expectedValue) => {
+  checkFFYcosts = (years, expectedValues) => {
     cy.then(() => {
       for (let i = 0; i < years.length; i += 1) {
-        cy.contains(`FFY ${years[i]} Cost: $${expectedValue}`).should('exist');
+        const convert = this.budgetPage.addCommas(expectedValues[i]);
+        cy.contains(`FFY ${years[i]} Cost: $${convert}`).should('exist');
       }
     });
   };
@@ -140,10 +149,11 @@ class ActivityPage {
     years,
     expectedValue
   ) => {
+    const convert = this.budgetPage.addCommas(totalCost);
     cy.contains(name).should('exist');
     cy.contains(description).should('exist');
     cy.contains(dateRange).should('exist');
-    cy.contains(totalCost).should('exist');
+    cy.contains(`${convert}`).should('exist');
     this.checkFFYcosts(years, expectedValue);
   };
 
