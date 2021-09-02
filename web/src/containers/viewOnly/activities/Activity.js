@@ -151,7 +151,7 @@ const Activity = ({ activity, activityIndex }) => {
     <div key={uuidv4()}>
       <hr className="section-rule" />
       <h2>
-        Activity {activityIndex + 1} ({activity.name})
+        Activity {activityIndex + 1}: {activity.name || "Untitled"}
       </h2>
       <strong>Provide a short overview of the activity:</strong>
       <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
@@ -169,7 +169,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1} ({activity.name})
+          Activity {activityIndex + 1}: {activity.name || "Untitled"}
         </small>
         <br />
         Statement of Alternative Considerations and Supporting Justification
@@ -178,7 +178,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1} ({activity.name})
+          Activity {activityIndex + 1}: {activity.name || "Untitled"}
         </small>
         <br /> Standards and Conditions
       </h3>
@@ -219,7 +219,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1} ({activity.name})
+          Activity {activityIndex + 1}: {activity.name || "Untitled"}
         </small>
         <br />
         Outcomes and Metrics
@@ -234,7 +234,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1} ({activity.name})
+          Activity {activityIndex + 1}: {activity.name || "Untitled"}
         </small>
         <br />
         State staff
@@ -245,7 +245,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1} ({activity.name})
+          Activity {activityIndex + 1}: {activity.name || "Untitled"}
         </small>
         <br />
         Other state expenses
@@ -254,7 +254,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1} ({activity.name})
+          Activity {activityIndex + 1}: {activity.name || "Untitled"}
         </small>
         <br />
         Private Contractor Costs
@@ -265,7 +265,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1} ({activity.name})
+          Activity {activityIndex + 1}: {activity.name || "Untitled"}
         </small>
         <br />
         Cost Allocation
@@ -305,7 +305,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1} ({activity.name})
+          Activity {activityIndex + 1}: {activity.name || "Untitled"}
         </small>
         <br />
         Budget and FFP
