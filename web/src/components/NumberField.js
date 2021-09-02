@@ -1,6 +1,6 @@
-import { TextField, unmaskValue } from '@cmsgov/design-system';
+import { TextField, unmaskValue, maskValue } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 
 const NumberField = ({
   fieldRef,
@@ -13,6 +13,7 @@ const NumberField = ({
   ...props
 }) => {
   const [local, setLocal] = useState(value.toString());
+  useEffect(() => setLocal(maskValue(value.toString(), mask)), [value]);
 
   const stringToNumber = stringValue => {
     // use ParseFloat rather than "+" because it won't throw an error and
