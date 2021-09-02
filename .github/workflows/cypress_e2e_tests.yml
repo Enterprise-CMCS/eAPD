@@ -38,14 +38,22 @@ jobs:
           npm audit fix
           docker-compose exec api npm run migrate
           docker-compose exec api npm run seed
-      - name: Testing different method
+      - name: Testing CLI NPM Command
         if: ${{ always() }}
         working-directory: ./integrationTests
         env:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
-          npm cypress run
+          npx cypress run --headless
+      - name: Testing Script
+        if: ${{ always() }}
+        working-directory: ./integrationTests
+        env:
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+        run: |
+          sh cypress-setup-sh
       - name: Run E2E test
         if: ${{ always() }}
         uses: cypress-io/github-action@v2
