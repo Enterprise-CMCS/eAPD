@@ -44,7 +44,7 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
-          docker-compose up
+          docker-compose up &
       - name: Testing CLI NPM Command
         if: ${{ always() }}
         working-directory: ./integrationTests
