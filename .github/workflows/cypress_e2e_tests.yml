@@ -43,7 +43,7 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
-#          sh cypress-setup.sh run
+          #sh cypress-setup.sh run
           npm cypress open
       - name: Run E2E test
         if: ${{ always() }}
