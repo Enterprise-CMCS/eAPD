@@ -20,9 +20,9 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 cd api
 npm run migrate
 npm run seed
-npm start
+npm start &
 cd ../web
-npm start
+npm start &
 cd ../integrationTests
 
 npm run cy:run:ci $@
