@@ -94,8 +94,7 @@ const DelegateStateAdminForm = () => {
     setShowAddedFile(false);
   };
   
-  const handleFormSubmit = async event => {
-    event.preventDefault();
+  const handleFormSubmit = async () => {
     const response = await axios
       .post('/auth/certifications', state)
       .then(res => {
@@ -144,7 +143,7 @@ const DelegateStateAdminForm = () => {
             }}
           />
         </div>        
-        <span>*All fields are required</span>
+        <span className="ds-u-font-weight--bold">*All fields are required</span>
         <TextField
           hint="Cannot be a contractor"
           label="Name of State employee to be delegated as eAPD State Adminstrator"
