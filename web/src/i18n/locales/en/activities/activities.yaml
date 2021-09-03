@@ -18,7 +18,7 @@ list:
       administration.
 addActivityButtonText: Add activity
 noActivityMessage: There are no activities. Add one below.
-noNameYet: (No name provided yet)
+noNameYet: Untitled
 delete:
   text: Remove Activity
   confirm:
