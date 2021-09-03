@@ -24,7 +24,7 @@ const SummaryActivityBreakdownTable = ({
           <th scope="col">
             Activity {activityIndex + 1}{' '}
             <span style={{ fontWeight: '100' }}>
-              {activityName} ({fundingSource})
+              {activityName || "Untitled"} {fundingSource ? `(${fundingSource})` : ""}
             </span>
           </th>
           <th scope="col" colSpan="4">
@@ -67,7 +67,7 @@ const mapStateToProps = (
   const activity = getActivity(state, { activityIndex });
 
   return {
-    activityName: activity.name || `Activity ${activityIndex + 1}`,
+    activityName: activity.name,
     fundingSource: activity.fundingSource,
     costSummary: getCostSummary(state, { activityIndex })
   };

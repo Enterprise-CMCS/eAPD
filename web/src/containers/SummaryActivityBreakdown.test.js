@@ -178,7 +178,7 @@ describe('Summary Activity Breakdown Table renders correctly', () => {
         { getActivity, getCostSummary }
       )
     ).toEqual({
-      activityName: 'Activity 1',
+      activityName: '',
       costSummary: 'cost summary'
     });
   });

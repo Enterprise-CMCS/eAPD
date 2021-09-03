@@ -10,8 +10,8 @@
     "make-migrate": "knex migrate:make",
     "migrate": "knex migrate:latest",
     "migrate-dev": "NODE_ENV=development DEV_DB_HOST=localhost npm run migrate",
-    "rollback": "knex migrate:rollback",
-    "down": "knex migrate:down",
+    "migrate:rollback": "knex migrate:rollback",
+    "migrate:down": "knex migrate:down",
     "seed": "knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost npm run seed",
     "seed-users": "knex seed:run --specific=base-users.js",
@@ -121,7 +121,8 @@
     "tap": "^15.0.2"
   },
   "resolutions": {
-    "hosted-git-info": "4.0.2"
+    "hosted-git-info": "4.0.2",
+    "browserslist": "4.16.5"
   },
   "jest": {
     "testMatch": [

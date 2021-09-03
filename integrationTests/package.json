@@ -1,0 +1,38 @@
+{
+  "name": "cypress_tests",
+  "version": "1.0.0",
+  "description": "Cypress tests for the EAPD tool",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "./cypress-setup.sh open",
+    "cy:run": "./cypress-setup.sh run",
+    "cy:run:ci": "cypress run",
+    "lint": "eslint 'cypress/**/*.js'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@foreachbe/cypress-tinymce": "^1.0.0",
+    "tinymce": "^5.8.2"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^8.0.0",
+    "axe-core": "^4.3.2",
+    "axios": "^0.21.1",
+    "babel-eslint": "^10.1.0",
+    "cypress": "^8.2.0",
+    "cypress-axe-core": "^1.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "knex": "^0.21.21",
+    "pg": "^8.7.1",
+    "sqlite3": "^5.0.2"
+  }
+}

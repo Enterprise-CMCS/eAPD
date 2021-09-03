@@ -113,9 +113,11 @@ const CostAllocateFFP = ({
 
   return (
     <Fragment>
-      {isViewOnly
-        ? <hr className="custom-hr" />
-        : <h2 className="subsection--title ds-h2">Budget and FFP</h2> }
+      {isViewOnly ? (
+        <hr className="custom-hr" />
+      ) : (
+        <h2 className="subsection--title ds-h2">Budget and FFP</h2>
+      )}
       {Object.keys(years).map(ffy => (
         <div key={ffy}>
           <table
@@ -336,7 +338,7 @@ const mapStateToProps = (
 
   return {
     aKey: activity.key,
-    activityName: activity.name || `Activity ${activityIndex + 1}`,
+    activityName: activity.name || "Untitled",
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,
