@@ -9,6 +9,7 @@ docker-compose exec api npm run migrate
 docker-compose exec api npm run seed
 #docker-compose -f docker-compose.cypress.yml up $@
 
+cd integrationTests
 npx cypress run --headless $@
 EXIT_CODE=$?
 docker-compose down
