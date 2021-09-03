@@ -2,7 +2,7 @@
 
 export NODE_ENV=development
 #export API_URL=http://localhost:8081
-#export CYPRESS_TESTS=true
+export CYPRESS_TESTS=true
 
 docker-compose -f ../docker-compose.yml up -d
 docker-compose exec -t api npm run migrate
