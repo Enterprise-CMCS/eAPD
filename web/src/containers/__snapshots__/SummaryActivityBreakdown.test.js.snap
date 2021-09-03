@@ -22,9 +22,8 @@ exports[`Summary Activity Breakdown Table renders correctly renders correctly 1`
           }
         >
           activity name
-           (
-          HIE
-          )
+           
+          (HIE)
         </span>
       </th>
       <th

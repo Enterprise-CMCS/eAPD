@@ -270,7 +270,7 @@ describe('the CostAllocateFFP component', () => {
       )
     ).toEqual({
       aKey: 'activity key',
-      activityName: 'Activity 1',
+      activityName: 'Untitled',
       costAllocation: 'cost allocation',
       costSummary: 'cost summary',
       otherFunding: {

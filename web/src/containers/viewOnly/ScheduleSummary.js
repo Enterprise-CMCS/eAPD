@@ -36,7 +36,7 @@ const ScheduleSummary = ({ activities }) => (
                 className="ds-u-font-weight--bold ds-u-border-right--0"
                 style={{ width: '70%' }}
               >
-                Activity {i + 1}: {activityName} Milestones
+                Activity {i + 1}: {activityName || "Untitled"} Milestones
               </td>
               <td className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
                 {dateRange}
@@ -56,7 +56,7 @@ const ScheduleSummary = ({ activities }) => (
       activities.map(({ name: activityName, milestones }, i) => (
         <table key={activityName} className="budget-table">
           <caption className="ds-u-visibility--screen-reader">
-            Activity {i + 1}: {activityName}
+            Activity {i + 1}: {activityName || "Untitled"}
           </caption>
           <thead>
             <tr className="budget-table--row__primary-header">
@@ -72,7 +72,7 @@ const ScheduleSummary = ({ activities }) => (
                 className="ds-u-font-weight--bold ds-u-border-right--0"
                 colSpan={2}
               >
-                Activity {i + 1}: {activityName} Milestones
+                Activity {i + 1}: {activityName || "Untitled"} Milestones
               </th>
             </tr>
           </thead>
