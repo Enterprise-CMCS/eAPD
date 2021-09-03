@@ -1,7 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1751, 1753, 1780, 1781],
+  "allowlist": [1693, 1751, 1753, 1779],
   "_comment": {
     "1693": {
       "advisory": "https://www.npmjs.com/advisories/1693",
@@ -30,21 +30,10 @@
       "module": "trim-newlines",
       "affects": ["node-sass@5.0.0 - process sass into css"]
     },
-    "1780": {
-      "advisory": "https://www.npmjs.com/advisories/1780",
+    "1779": {
+      "advisory": "https://www.npmjs.com/advisories/1779",
       "module": "tar",
-      "affects": [
-        "@storybook/addon-docs@6.3.7 - storybook",
-        "node-sass@5.0.0 - used to build the css for the web application"
-      ]
-    },
-    "1781": {
-      "advisory": "https://www.npmjs.com/advisories/1781",
-      "module": "tar",
-      "affects": [
-        "@storybook/addon-docs@6.3.7 - storybook",
-        "node-sass@5.0.0 - used to build the css for the web application"
-      ]
+      "affects": ["@storybook/addon-docs@6.3.4 - storybook"]
     }
   },
   "registry": "https://registry.npmjs.org"
