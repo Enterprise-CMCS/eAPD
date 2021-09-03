@@ -11,7 +11,7 @@ export NODE_ENV=development
 
 ##npx cypress run --headless $@
 
-cd web
+cd ../web
 npm install
 cd ../api
 cd ..
