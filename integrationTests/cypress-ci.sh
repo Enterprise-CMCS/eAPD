@@ -11,7 +11,7 @@ docker-compose exec -t api npm run seed
 
 #npx cypress run --headless $@
 
-docker exec -i api npm run cy:run:ci $@
+docker-compose exec -i api npm run cy:run:ci $@
 EXIT_CODE=$?
 docker-compose down
 exit $EXIT_CODE
