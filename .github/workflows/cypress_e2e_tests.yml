@@ -31,5 +31,8 @@ jobs:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+          OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
+          OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
           sh cypress-ci.sh
