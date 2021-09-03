@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { TextField, Dropdown, Button } from '@cmsgov/design-system';
@@ -24,8 +24,8 @@ const DelegateStateAdminForm = () => {
   const history = useHistory();
   const [showAddedFile, setShowAddedFile] = useState(false);
   const [fileName, setFileName] = useState('');
-  const [uploadedFileUrl, setUploadedFileUrl] = useState('');
-    
+  const [isFormComplete, setIsFormComplete] = useState(false);
+  
   const initialState = {
     name: '',
     email: '',
@@ -54,6 +54,12 @@ const DelegateStateAdminForm = () => {
   
   const [state, dispatch] = useReducer(reducer, initialState);
   
+  useEffect(() => {
+    const hasFalseValues = Object.values(state).every(element => Boolean(element));
+    console.log("checking..", hasFalseValues);
+    setIsFormComplete(hasFalseValues);
+  }, [state])
+  
   const uppy = useUppy(() => {
     const authToken = JSON.parse(getCookie(API_COOKIE_NAME)).accessToken;
     
@@ -79,9 +85,8 @@ const DelegateStateAdminForm = () => {
     
     setShowAddedFile(true);
     setFileName(result.successful[0].name);
-    setUploadedFileUrl(`${apiUrl}${result.successful[0].response.body.url}`);
     
-    dispatch({type: 'update', field: 'fileUrl', payload: uploadedFileUrl });
+    dispatch({type: 'update', field: 'fileUrl', payload: `${apiUrl}${result.successful[0].response.body.url}` });
   });
   
   const hideUploadedFileLink = () => {
@@ -118,7 +123,7 @@ const DelegateStateAdminForm = () => {
         {showAddedFile && (
           <div className="ds-u-display--flex ds-u-align-items--center ds-u-justify--space-between">
             <PDFFileBlue />
-            <a className="ds-u-margin-x--1" download={`${uploadedFileUrl}`}>{fileName}</a>
+            <a className="ds-u-margin-x--1" download={`${state.fileUrl}`}>{fileName}</a>
             <button type="button" className="ds-u-fill--transparent ds-u-border--0 cursor-pointer" onClick={hideUploadedFileLink}>
               <div className="ds-u-visibility--screen-reader">Remove selected file</div>
               <Xmark />
@@ -155,7 +160,7 @@ const DelegateStateAdminForm = () => {
           labelClassName="ds-u-margin-top--0"
           name="dropdown_field"
           onChange={ (e) => dispatch({type: 'update', field: 'state', payload: e.target.value }) }
-          />
+        />
         <TextField
           label="State employee email address"
           name="state-employee-email"
@@ -195,7 +200,7 @@ const DelegateStateAdminForm = () => {
         />
         <div className="ds-u-padding-top--4">
           <Button className="ds-u-margin-right--2" onClick={history.goBack}>Cancel</Button>
-          <Button variation="primary" onClick={handleFormSubmit}>Add State Admin</Button>
+          <Button variation="primary" onClick={handleFormSubmit} disabled={isFormComplete ? false : true}>Add State Admin</Button>
         </div>
       </form>
     </main>
