@@ -16,7 +16,9 @@ const Card = ({
           <h5 className="ds-h5 card-title ds-u-margin-top--0">{title}</h5>
           <p className="card-text">{body}</p>
           <div className="ds-u-display--flex ds-u-justify-content--end ds-u-padding-top--3 ds-u-padding-bottom--1">
-            <Button variation="primary" onClick={buttonOnClick}>{buttonTitle}</Button>
+          {buttonTitle && (
+            <Button variation="primary" onClick={buttonOnClick}>{buttonTitle}</Button>            
+          )}
           </div>
         </div>
       </div>
@@ -25,11 +27,16 @@ const Card = ({
 };
 
 Card.propTypes = {
-  title: PropTypes.string
+  width: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  buttonTitle: PropTypes.string,
+  buttonOnClick: PropTypes.func
 };
 
 Card.defaultProps = { 
-  title: ''
+  buttonTitle: '',
+  buttonOnClick: null
 };
 
 export default Card;

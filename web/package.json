@@ -76,6 +76,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@okta/okta-auth-js": "^4.8.0",
     "@tinymce/tinymce-react": "^3.9.1",
+    "@uppy/core": "^2.0.2",
     "@uppy/react": "^2.0.2",
     "@uppy/xhr-upload": "^2.0.2",
     "axe-core": "^4.3.1",

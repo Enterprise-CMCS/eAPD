@@ -28,7 +28,7 @@ const routes = [
   { path: '/manage-account', component: ManageAccount, isPublic: false },
   { path: '/select-affiliation', component: SelectAffiliation, isPublic: false },
   { path: '/state-admin', component: StateAdmin, isPublic: false },
-  { path: '/delegate-state-admin', component: DelegateStateAdminForm, isPublic: false },
+  { path: '/delegate-state-admin', component: DelegateStateAdminForm, isAdmin: true },
   { component: NoMatch, isPublic: true }
 ];
 

@@ -31,9 +31,9 @@ const FederalDashboard = ({ approvalStatus }) => {
             <Card
               className="ds-u-margin-bottom--3"
               width={20} 
-              title={"Add a new state administrator"}
-              body={"Complete the Add State Admin form to delegate a state administrator to approve state author access to the eAPD system."}
-              buttonTitle={"Add State Admin"}
+              title="Add a new state administrator"
+              body="Complete the Add State Admin form to delegate a state administrator to approve state author access to the eAPD system."
+              buttonTitle="Add State Admin"
               buttonOnClick={handleAddStateButton}
             />
           </div>

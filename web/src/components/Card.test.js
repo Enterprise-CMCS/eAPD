@@ -9,14 +9,19 @@ const defaultProps = {
 
 const setup = (props = {}) => {
   return render(
-    <Card {...defaultProps} {...props}></Card>
+    <Card {...defaultProps} {...props} />
   );
 };
 
 describe('card wrapper', () => {
-  test('renders card title', () => {
-    setup();
-
+  test('renders correctly with valid data', () => {
+    const props = {
+      title: 'test',
+      body: 'foo',
+      width: "20rem"
+    }
+    setup(props);
     expect(screen.getByText('test')).toBeTruthy();
+    expect(screen.getByText('foo')).toBeTruthy();
   });
 });
