@@ -10,12 +10,12 @@ services:
     working_dir: /eAPD/integrationTests
     volumes:
       - ../:/eAPD
-    entrypoint: cypress run --headless
-#    entrypoint: /bin/sh
-#    stdin_open: true # docker run -i
-#    tty: true        # docker run -t
-    ports:
-      - 9119:9119
+#    entrypoint: cypress run --headless
+    entrypoint: /bin/sh
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+#    ports:
+#      - 9119:9119
 networks:
   default:
     external: true
