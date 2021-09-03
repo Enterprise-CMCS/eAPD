@@ -47,7 +47,6 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v2
-        working-directory: ./integrationTests
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
@@ -56,5 +55,6 @@ jobs:
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
         with:
+          working-directory: ./integrationTests
           build: npm run build
           start: npm start
