@@ -6,6 +6,36 @@ on:
     branches:
       - bbrooks/3227-Cypress-CI
 
+#jobs:
+#  cypress-run:
+#    environment: Test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#      - name: Cypress Dependency
+#        env:
+#          NODE_ENV: development
+#          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+#          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
+#        run: |
+#          sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+#          npm install knex
+#          npm install cypress
+#          npm audit fix
+#      - name: Cypress E2E Tests
+#        if: ${{ always() }}
+#        working-directory: ./integrationTests
+#        env:
+#          NODE_ENV: development
+#          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+#          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+#          OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
+#          OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
+#          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+#        run: |
+#          sh cypress-ci.sh
+
 jobs:
   cypress-run:
     environment: Test
@@ -13,18 +43,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Cypress Dependency
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
-        run: |
-          sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-          npm install knex
-          npm install cypress
-          npm audit fix
-      - name: Cypress E2E Tests
-        if: ${{ always() }}
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
         working-directory: ./integrationTests
         env:
           NODE_ENV: development
@@ -33,5 +55,6 @@ jobs:
           OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-        run: |
-          sh cypress-ci.sh
+        with:
+          build: npm run build
+          start: npm start
