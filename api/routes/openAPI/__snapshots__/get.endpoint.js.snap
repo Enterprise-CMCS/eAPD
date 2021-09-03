@@ -1126,6 +1126,116 @@ Object {
         ],
       },
     },
+    "/auth/certifications/files": Object {
+      "post": Object {
+        "description": "Uploads a state admin certification letter.",
+        "requestBody": Object {
+          "content": Object {
+            "multipart/form-data": Object {
+              "schema": Object {
+                "properties": Object {
+                  "file": Object {
+                    "description": "The file body",
+                    "format": "binary",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "url": Object {
+                      "description": "The URL of the uploaded file, absolute, relative to the API host",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The URL of the uploaded file, absolute, relative to the API host",
+          },
+          "400": Object {
+            "description": "Invalid request",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to upload certification letters",
+          },
+          "415": Object {
+            "description": "The file is not a valid format",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Upload a state admin certification file",
+        "tags": Array [
+          "Certifications",
+          "State Admins",
+          "files",
+        ],
+      },
+    },
+    "/auth/certifications/files/{fileID}": Object {
+      "get": Object {
+        "description": "Returns a state admin certification letter",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the file to get",
+            "in": "path",
+            "name": "fileID",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "*/*": Object {
+                "schema": Object {
+                  "format": "binary",
+                  "type": "string",
+                },
+              },
+            },
+            "description": "The file",
+          },
+          "400": Object {
+            "description": "The file does not exist",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Get a state admin certification letter",
+        "tags": Array [
+          "State Admin Certifications",
+          "files",
+        ],
+      },
+    },
     "/auth/roles": Object {
       "get": Object {
         "description": "Get a list of all roles in the system",
