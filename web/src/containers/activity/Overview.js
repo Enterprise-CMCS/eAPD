@@ -108,7 +108,7 @@ const ActivityOverview = ({
     >
       {activityIndex === 0 ? (
         <Fragment>
-          <h4>Activity name: {activity.name}</h4>
+          <h4>Activity name: {activity.name || "Untitled"}</h4>
           <h4>Funding source: {activity.fundingSource}</h4>
         </Fragment>
       ) : (
