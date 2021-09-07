@@ -1,6 +1,6 @@
 // For auditing events. Create an auditor object, set its target, then use
 // set on each field that was changed. Finally call log when you're done to
-// persis the audit log. Uses the standard logger
+// persist the audit log. Uses the standard logger
 
 const logger = require('./logger')('AUDIT');
 
