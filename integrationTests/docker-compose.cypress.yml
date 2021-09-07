@@ -111,7 +111,7 @@ services:
 #        target: /app
 #        consistency: delegated
 #      - /app/node_modules
-    working_dir: /integrationTests
+    working_dir: /eAPD/integrationTests
     volumes:
       - ../:/integrationTests
 
