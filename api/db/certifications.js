@@ -42,6 +42,31 @@ const generateMatches = async (
   }
 }
 
+const getMatchesByStatus = async (status, { db = knex } = {})  =>{
+  let results
+  if (status) {
+    results = await db('state_admin_certification_match').select([
+      'state_admin_certification_match.status',
+      'state_admin_certification_match.id',
+      'okta_users.email',
+      'okta_users.displayName',
+      'okta_users.primaryPhone',
+
+    ])
+      .leftJoin('okta_users', 'state_admin_certification_match.user_id', 'okta_users.user_id')
+      .leftJoin('auth_affiliations', 'auth_affiliations.user_id', 'okta_users.user_id'  )
+      .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+      .where({ status })
+      .andWhere();
+
+  } else{
+    results = await db('state_admin_certification_match')
+  }
+
+  return results
+
+}
+
 module.exports = {
   generateMatches
 }
