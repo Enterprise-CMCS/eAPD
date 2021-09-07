@@ -114,6 +114,7 @@ services:
     working_dir: /eAPD/integrationTests
     volumes:
       - ../:/eAPD
+      - /app/node_modules
 
 volumes:
   pgdata:
