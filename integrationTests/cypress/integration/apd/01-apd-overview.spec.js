@@ -1,10 +1,13 @@
 /// <reference types="cypress" />
 
-//Tests filling out APD overview section
+// Tests filling out APD overview section
+
+/* eslint-disable no-return-assign */
+/* eslint-disable prefer-arrow-callback */
 
 describe('filling out APD overview section', function () {
   let apdUrl;
-  let years = [];
+  const years = [];
 
   before(function () {
     cy.useStateStaff();
@@ -12,7 +15,7 @@ describe('filling out APD overview section', function () {
     cy.findAllByText('Delete APD').click();
 
     cy.findByRole('button', { name: /Create new/i }).click();
-    cy.wait(1000); //Gives time for webpage to load
+    cy.wait(1000); // Gives time for webpage to load
     cy.location('pathname').then(pathname => (apdUrl = pathname));
   });
 
@@ -24,16 +27,15 @@ describe('filling out APD overview section', function () {
   it('tests default values', function () {
     cy.url().should('include', '/apd-overview');
 
-    //Check if input fields are empty
+    // Check if input fields are empty
     cy.get('[id="program-introduction-field"]').should('have.value', '');
     cy.get('[id="hit-overview-field"]').should('have.value', '');
     cy.get('[id="hie-overview-field"]').should('have.value', '');
     cy.get('[id="mmis-overview-field"]').should('have.value', '');
 
-    cy.contains('Export and Submit').click();
-    cy.findByRole('button', { name: /Continue to Review/i }).click();
+    cy.goToExportView();
 
-    //Check if exported output was defaulted correctly
+    // Check if exported output was defaulted correctly
     cy.contains('Program introduction')
       .next()
       .should('have.text', 'No response was provided');
@@ -53,14 +55,14 @@ describe('filling out APD overview section', function () {
     cy.scrollTo('top');
     cy.contains('Back to APD').click();
 
-    //Tests continue button
+    // Tests continue button
     cy.contains('Continue').click();
     cy.get('[class="ds-h2"]').should('contain', 'Key State Personnel');
     cy.contains('Back').click();
   });
 
   it('adds value to the APD', function () {
-    //Gets list of available years
+    // Gets list of available years
     cy.get("[class='ds-c-choice']").each(($el, index, list) => {
       years.push(list[index].value);
       if (!list[index].checked) {
@@ -80,7 +82,7 @@ describe('filling out APD overview section', function () {
         years[years.length - 1]
       );
 
-      //Testing delete(cancel) FFY
+      // Testing delete(cancel) FFY
       cy.findByRole('checkbox', { name: years[years.length - 1] }).uncheck({
         force: true
       });
@@ -95,7 +97,7 @@ describe('filling out APD overview section', function () {
         years[years.length - 1]
       );
 
-      //Testing delete(confirm) FFY
+      // Testing delete(confirm) FFY
       cy.findByRole('checkbox', { name: years[years.length - 1] }).uncheck({
         force: true
       });
@@ -111,7 +113,7 @@ describe('filling out APD overview section', function () {
       );
     });
 
-    //Put content into input fields
+    // Put content into input fields
     cy.setTinyMceContent(
       'program-introduction-field',
       this.userContent.introduction
@@ -120,14 +122,13 @@ describe('filling out APD overview section', function () {
     cy.setTinyMceContent('hie-overview-field', this.userContent.HIE);
     cy.wait(1000);
     cy.setTinyMceContent('mmis-overview-field', this.userContent.MMIS);
-    cy.wait(1000); //Gives time to save
+    cy.wait(1000); // Gives time to save
   });
 
   it('Tests export view', function () {
-    cy.contains('Export and Submit').click();
-    cy.findByRole('button', { name: /Continue to Review/i }).click();
+    cy.goToExportView();
 
-    //FFY Check
+    // FFY Check
     cy.then(() => {
       for (let i = 0; i < years.length; i++) {
         if (i === years.length - 1) {
