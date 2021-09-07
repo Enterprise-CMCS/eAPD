@@ -22,7 +22,7 @@ dropdownOptions.unshift({label: 'Select an Option', value: ''});
 
 const DelegateStateAdminForm = () => {
   const history = useHistory();
-  const [showAddedFile, setShowAddedFile] = useState(false);
+  
   const [fileName, setFileName] = useState('');
   const [isFormComplete, setIsFormComplete] = useState(false);
   
@@ -82,8 +82,6 @@ const DelegateStateAdminForm = () => {
   
   uppy.on('complete', (result) => {
     uppy.reset();
-    
-    setShowAddedFile(true);
     setFileName(result.successful[0].name);
     
     dispatch({type: 'update', field: 'fileUrl', payload: `${apiUrl}${result.successful[0].response.body.url}` });
@@ -91,7 +89,7 @@ const DelegateStateAdminForm = () => {
   
   const hideUploadedFileLink = () => {
     uppy.reset();
-    setShowAddedFile(false);
+    setFileName('');
   };
   
   const handleFormSubmit = async () => {
@@ -119,7 +117,7 @@ const DelegateStateAdminForm = () => {
           Upload the State Administrator Delegation of Authority letter below.
           <span className="ds-c-field__hint ds-u-padding-y--1">Accepted files: .doc and.pdf only</span>
         </label>
-        {showAddedFile && (
+        {fileName && (
           <div className="ds-u-display--flex ds-u-align-items--center ds-u-justify--space-between">
             <PDFFileBlue />
             <a className="ds-u-margin-x--1" download={`${state.fileUrl}`}>{fileName}</a>
