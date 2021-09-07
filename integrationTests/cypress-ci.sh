@@ -7,11 +7,11 @@ export CYPRESS_TESTS=true
 docker-compose -f ../docker-compose.yml up --build -d
 docker-compose exec -t api npm run migrate
 docker-compose exec -t api npm run seed
+docker-compose exec -i api npm run cy:run:ci $@
 #docker-compose -f docker-compose.cypress.yml up $@
 
 #npx cypress run --headless $@
 
-docker-compose exec -i api npm run cy:run:ci $@
 EXIT_CODE=$?
 docker-compose down
 exit $EXIT_CODE
