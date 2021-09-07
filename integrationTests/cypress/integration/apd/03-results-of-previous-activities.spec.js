@@ -140,7 +140,6 @@ describe('Results of Previous Activities', function () {
 
     it('Fill Previous Activities Summary', function () {
       previousActivitiesPage.setSummary(this.activityData.summary);
-
       // Wait to save
       cy.contains('Saving').should('exist');
       cy.contains('Saved').should('exist');

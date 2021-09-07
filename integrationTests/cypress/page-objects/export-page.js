@@ -172,14 +172,12 @@ class ExportPage {
       for (let i = 0; i < this.prevActYears.length; i += 1) {
         totals[expenditureType][this.prevActYears[i]] = 0;
 
-        totals[expenditureType][
-          this.prevActYears[i]
-        ] += this.expenditures.hithie[expenditureType][i];
+        totals[expenditureType][this.prevActYears[i]] +=
+          this.expenditures.hithie[expenditureType][i];
 
         Object.values(mmisSharePercents).forEach(sharePercent => {
-          totals[expenditureType][this.prevActYears[i]] += this.expenditures[
-            `mmis${sharePercent}`
-          ][expenditureType][i];
+          totals[expenditureType][this.prevActYears[i]] +=
+            this.expenditures[`mmis${sharePercent}`][expenditureType][i];
         });
       }
     });
@@ -387,40 +385,42 @@ class ExportPage {
   // Activity Schedule Summary
   // Activity Schedule Summary - Schedule Summary by Activity
   getAllActivityScheduleOverviews = () => {
-    return cy.contains('thead', /Activity List Overview/i)
+    return cy
+      .contains('thead', /Activity List Overview/i)
       .parent()
-      .find('tbody>tr')
+      .find('tbody>tr');
   };
 
-  getActivityScheduleOverview = (index) => {
+  getActivityScheduleOverview = index => {
     return this.getAllActivityScheduleOverviews().eq(index);
-  }
+  };
 
   // Assumes the name is in the first column of the overview
-  getActivityScheduleOverviewName = (index) => {
+  getActivityScheduleOverviewName = index => {
     return this.getActivityScheduleOverview(index)
       .find('td')
       .first()
-      .invoke('text')
+      .invoke('text');
   };
 
   // Assumes dates are in the last column
-  getActivityScheduleOverviewDates = (index) => {
+  getActivityScheduleOverviewDates = index => {
     return this.getActivityScheduleOverview(index)
       .find('td')
       .last()
-      .invoke('text')
+      .invoke('text');
   };
 
   // Activity Schedule Summary - Milestone Tables by Activity
   // Get the milestone tables for all activities.
   getAllActivityScheduleMilestoneTables = () => {
-    return cy.findByRole('heading', { name: /^Milestone Tables by Activity$/i })
+    return cy
+      .findByRole('heading', { name: /^Milestone Tables by Activity$/i })
       .nextAll('table');
   };
 
   // Return all milestone rows for a given activity
-  getAllActivityScheduleMilestones = (activityIndex) => {
+  getAllActivityScheduleMilestones = activityIndex => {
     return this.getAllActivityScheduleMilestoneTables()
       .eq(activityIndex)
       .find('tbody>tr'); // returns undefined if no milestone was added
@@ -428,12 +428,12 @@ class ExportPage {
 
   // Return the name of an activity's milestone table
   // Assumes the name is the last row in the table header
-  getActivityScheduleMilestoneTableName = (activityIndex) => {
+  getActivityScheduleMilestoneTableName = activityIndex => {
     return this.getAllActivityScheduleMilestoneTables()
       .eq(activityIndex)
       .find('thead>tr')
       .last()
-      .invoke('text')
+      .invoke('text');
   };
 
   // Return the name of an entry in an activity's milestone table
@@ -453,11 +453,13 @@ class ExportPage {
       .last()
       .invoke('text');
   };
-  
+
   // assert if a link with the given text and URL reference exists here
   assurancesComplianceAssertLink = (category, regulation, ref) => {
-    cy.findByRole('heading', { name: /Assurances and Compliance/i }).parent()
-      .findByRole('heading', { name: category }).parent()
+    cy.findByRole('heading', { name: /Assurances and Compliance/i })
+      .parent()
+      .findByRole('heading', { name: category })
+      .parent()
       .contains(regulation)
       .invoke('attr', 'href')
       .then(href => {
@@ -467,10 +469,15 @@ class ExportPage {
 
   // Given a regulation name, get the response entered by the user
   assurancesComplianceResponse = (category, regulation) => {
-    return cy.findByRole('heading', { name: /Assurances and Compliance/i }).parent()
-      .findByRole('heading', { name: category }).parent()
-      .contains('a', regulation).parent().next()
-      .invoke('text')
+    return cy
+      .findByRole('heading', { name: /Assurances and Compliance/i })
+      .parent()
+      .findByRole('heading', { name: category })
+      .parent()
+      .contains('a', regulation)
+      .parent()
+      .next()
+      .invoke('text');
   };
 }
 
