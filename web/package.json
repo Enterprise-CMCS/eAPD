@@ -190,7 +190,7 @@
     "hosted-git-info": "2.8.9",
     "path-parse": "^1.0.7",
     "prismjs": "1.24.0",
-    "tar": "6.1.2",
+    "tar": "6.1.9",
     "trim": "0.0.3",
     "url-parse": "^1.5.2"
   }

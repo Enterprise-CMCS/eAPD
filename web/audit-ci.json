@@ -1,7 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1693, 1751, 1753, 1779],
+  "allowlist": [1693, 1751, 1753],
   "_comment": {
     "1693": {
       "advisory": "https://www.npmjs.com/advisories/1693",
@@ -29,11 +29,6 @@
       "advisory": "https://www.npmjs.com/advisories/1753",
       "module": "trim-newlines",
       "affects": ["node-sass@5.0.0 - process sass into css"]
-    },
-    "1779": {
-      "advisory": "https://www.npmjs.com/advisories/1779",
-      "module": "tar",
-      "affects": ["@storybook/addon-docs@6.3.4 - storybook"]
     }
   },
   "registry": "https://registry.npmjs.org"
