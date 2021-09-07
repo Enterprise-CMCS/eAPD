@@ -113,7 +113,7 @@ services:
 #      - /app/node_modules
     working_dir: /eAPD/integrationTests
     volumes:
-      - ../:/eAPD/integrationTests
+      - ../:/eAPD
 
 volumes:
   pgdata:
