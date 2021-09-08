@@ -96,14 +96,15 @@ services:
       - 9229:9229
 
   cypress:
-    build: ./
-    image: cms-eapd/cypress
-#    image: "cypress/included:6.0.0"
+#    build: ./
+#    image: cms-eapd/cypress
+    image: "cypress/included:8.3.1"
     depends_on:
       - api
       - web
     environment:
-      - CYPRESS_baseUrl=http://localhost:8001/
+#      - CYPRESS_baseUrl=http://web:8001/
+      - CYPRESS_baseUrl=http://localhost:8080/
       - NODE_ENV=development
 #    volumes:
 #      - type: bind

@@ -4,7 +4,7 @@ RUN npm i -g npm@^7
 
 
 #RUN mkdir -p /eAPD/integrationTests
-COPY ./ /eAPD/integrationTests/
+COPY ../ /eAPD/integrationTests/
 WORKDIR /eAPD/integrationTests
 RUN echo "deb-src http://deb.debian.org/debian stretch main" >> /etc/apt/sources.list
 RUN apt-get update -y
@@ -19,5 +19,6 @@ RUN npm ci
 
 #COPY ../api/seeds/test/tokens.json ../api/seeds/test/tokens.json
 
+#CMD npm run cy:run:ci
 
-CMD npm run cy:run:ci
+CMD npx cypress run
