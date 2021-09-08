@@ -96,14 +96,14 @@ services:
       - 9229:9229
 
   cypress:
-#    build: ./
-#    image: cms-eapd/cypress
-    image: "cypress/included:6.0.0"
+    build: ./
+    image: cms-eapd/cypress
+#    image: "cypress/included:6.0.0"
     depends_on:
       - api
       - web
     environment:
-      - CYPRESS_baseUrl=http://web:8001
+      - CYPRESS_baseUrl=http://localhost:8001/
       - NODE_ENV=development
 #    volumes:
 #      - type: bind
@@ -112,9 +112,12 @@ services:
 #        consistency: delegated
 #      - /app/node_modules
     working_dir: /eAPD/integrationTests
+#    entrypoint: "/bin/sh"
+#    tty: true
+    network_mode: "host"
     volumes:
       - ../:/eAPD
-      - /app/node_modules
+      - /eAPD/integrationTests/node_modules
 
 volumes:
   pgdata:
