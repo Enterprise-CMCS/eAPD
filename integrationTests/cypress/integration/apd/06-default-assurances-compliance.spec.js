@@ -17,7 +17,7 @@ const categories = [
 describe('Assurances and Compliance', function ()  {
   const assurancesCompliancePage = new AssurancesCompliancePage();
   const exportPage = new ExportPage();
-  // Create APD as state staff
+  // Reuse existing APD
   let apdURL;
 
   before(function ()  {
@@ -35,8 +35,7 @@ describe('Assurances and Compliance', function ()  {
       cy.useStateStaff(apdURL);
 
       // Navigate to export data page
-      cy.get('a.ds-c-vertical-nav__label').contains("Export and Submit").click();
-      cy.findByRole('button', { name: /Continue to Review/i }).click();
+      cy.goToExportView();
       cy.url().should('contain', '/print');
       cy.location('pathname').then(pathname => apdExportURL = pathname);
     });
@@ -73,9 +72,8 @@ describe('Assurances and Compliance', function ()  {
     before(function ()  {
       cy.useStateStaff(apdURL);
 
-      // Navigate to export data page
-      cy.get('a.ds-c-vertical-nav__label').contains(/Assurances and compliance/i).click();
-      cy.url().should('contain', '/assurances-and-compliance');
+      // Navigate to assurances and compliance editor view
+      cy.goToAssurancesCompliance();
       cy.location('pathname').then(pathname => apdAssurancesComplianceURL = pathname);
     });
 

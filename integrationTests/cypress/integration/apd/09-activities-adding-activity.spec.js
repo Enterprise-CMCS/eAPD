@@ -44,7 +44,7 @@ describe('Adding an activity in the Activity Dashboard', () => {
     cy.goToExportView();
     cy.contains('2. Untitled');
     exportPage.checkActivityHeader('', 2);
-    exportPage.checkActivityNameAtEnd('Untitled');
+    exportPage.checkActivityNameAtEnd('');
   });
 
   it('tests naming an activity', function () {

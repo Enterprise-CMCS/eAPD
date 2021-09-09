@@ -9,12 +9,12 @@ describe('Activity Schedule Summary', () => {
   const schedulePage = new ActivitySchedulePage();
   const exportPage = new ExportPage();
 
-  // Create APD as state staff
+  // Reuse existing APD
   let apdURL;
 
   before(() => {
     cy.useStateStaff();
-    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.contains('HITECH IAPD').click();
     cy.url().should('contain', '/apd');
     cy.location('pathname').then(pathname => apdURL = pathname);
   });
@@ -85,8 +85,7 @@ describe('Activity Schedule Summary', () => {
       cy.useStateStaff(apdURL);
 
       // Navigate to export data page
-      cy.get('a.ds-c-vertical-nav__label').contains(/Export and Submit/i).click();
-      cy.findByRole('button', { name: /Continue to Review/i }).click();
+      cy.goToExportView();
       cy.url().should('contain', '/print');
       cy.location('pathname').then(pathname => apdExportURL = pathname);
     });
