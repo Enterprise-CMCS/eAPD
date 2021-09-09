@@ -163,7 +163,7 @@ Cypress.Commands.add('goToProposedBudget', () => {
     .click();
 });
 
-Cypress.Commands.add('goToAssuranceCompliance', () => {
+Cypress.Commands.add('goToAssurancesCompliance', () => {
   cy.get('a.ds-c-vertical-nav__label')
     .contains(/Assurances and Compliance/i)
     .click();

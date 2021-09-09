@@ -11,8 +11,16 @@ describe('filling out APD overview section', function () {
 
   before(function () {
     cy.useStateStaff();
-    cy.contains('Delete').click();
-    cy.findAllByText('Delete APD').click();
+
+    // Delete all existing APDs
+    cy.get('button')
+      .each($el => {
+        if($el.text().includes('Delete')) {
+          cy.wrap($el).click();
+          cy.findAllByText('Delete APD').click();
+        }
+      });
+    cy.wait(1000); // Wait for saving
 
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.wait(1000); // Gives time for webpage to load
