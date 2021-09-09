@@ -1,10 +1,13 @@
 // E2E tests for the key state personnel page & associated data as state staff.
 // Uses the fixture "users.json" for filling in personnel data.
 
+/* eslint-disable no-return-assign */
+/* eslint-disable prefer-arrow-callback */
+
 describe('Filling out Key Personnel for eAPD with valid login token', () => {
-  // Create APD as state staff
+  // Reuse existing APD
   let apdURL;
-  let years = [];
+  const years = [];
 
   before(() => {
     cy.useStateStaff();
@@ -25,15 +28,8 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
   describe('Add blank key personnel', () => {
     before(() => {
       cy.useStateStaff(apdURL);
-      // Expand nav menu option
-      cy.get('.ds-c-vertical-nav__label--parent')
-        .contains('Key State Personnel')
-        .click();
-
-      // Click on nav submenu button
-      cy.get('a.ds-c-vertical-nav__label')
-        .contains('Key State Personnel')
-        .click();
+      cy.goToKeyStatePersonnel();
+      
       cy.url().should('contain', '/state-profile');
       cy.location('pathname').then(pathname => (apdPersonnelURL = pathname));
     });
@@ -157,7 +153,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
       cy.wait(1000); // Wait to save data
 
       // Check that FFY, FTE, and Total cost for each applicable year is 0.
-      for (let year of years) {
+      for (const year of years) {
         cy.get('@personnelVals').should(
           'contain',
           'FFY ' + year + ' Cost: $0 | FTE: 0 | Total: $0'
@@ -172,11 +168,7 @@ describe('Filling out Key Personnel for eAPD with valid login token', () => {
     before(() => {
       cy.useStateStaff(apdURL);
 
-      // Navigate to export data page
-      cy.get('a.ds-c-vertical-nav__label')
-        .contains('Export and Submit')
-        .click();
-      cy.findByRole('button', { name: /Continue to Review/i }).click();
+      cy.goToExportView();
       cy.url().should('contain', '/print');
       cy.location('pathname').then(pathname => (exportURL = pathname));
     });
