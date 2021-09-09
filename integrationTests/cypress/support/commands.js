@@ -124,8 +124,60 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
   });
 });
 
+Cypress.Commands.add('goToKeyStatePersonnel', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Key State Personnel/i)
+    .click();
+  // Click on nav submenu button
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/Key State Personnel/i)
+    .click();
+});
+
+Cypress.Commands.add('goToPreviousActivities', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Results of Previous Activities/i)
+    .click();
+  // Click on nav submenu button
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/Results of Previous Activities/i)
+    .click();
+});
+
 Cypress.Commands.add('goToActivityDashboard', () => {
-  cy.contains('Activities Dashboard').click({ force: true });
+  cy.contains(/Activities Dashboard/i)
+    .click({ force: true });
+});
+
+
+Cypress.Commands.add('goToProposedBudget', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Proposed Budget/i)
+    .click();
+  // Click on nav submenu button
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/Proposed Budget/i)
+    .click();
+});
+
+Cypress.Commands.add('goToAssurancesCompliance', () => {
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/Assurances and Compliance/i)
+    .click();
+});
+
+Cypress.Commands.add('goToExecutiveSummary', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Executive Summary/i)
+    .click();
+  // Click on nav submenu button
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/Executive Summary/i)
+    .click();
 });
 
 Cypress.Commands.add('goToExportView', () => {
