@@ -42,9 +42,9 @@ describe('Adding an activity in the Activity Dashboard', () => {
     cy.contains('Activity 3: Untitled').should('not.exist');
 
     cy.goToExportView();
-    cy.contains('2. |');
+    cy.contains('2. Untitled');
     exportPage.checkActivityHeader('', 2);
-    exportPage.checkActivityNameAtEnd('Activity 2');
+    exportPage.checkActivityNameAtEnd('Untitled');
   });
 
   it('tests naming an activity', function () {
