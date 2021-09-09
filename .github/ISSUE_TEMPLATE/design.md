@@ -21,7 +21,7 @@ If needed, a note about priority (future enhancement tag, before initial release
 ### This task is done when…
 
 - [ ] any acceptance criteria (not process oriented, requirements of feature)
-- [ ] designs are created, taking into consideration multiple FFY, multiple entries, long entries, weird entries, and/or the export view if applicable
+- [ ] designs are created, taking into consideration validation, multiple FFY, multiple entries, long entries, weird entries, and/or the export view if applicable
 - [ ] 508 considerations and/or recommendations are reviewed
 - [ ] designs are shared
 - [ ] designs are approved by product
