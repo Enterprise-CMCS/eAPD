@@ -1,16 +1,17 @@
 import { Alert, Button } from '@cmsgov/design-system';
 import PropType from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Icon, { File, faPlusCircle } from './Icons';
 import Instruction from './Instruction';
 import DeleteModal from './DeleteModal';
-import { createApd, deleteApd, selectApd } from '../actions/app';
+import { createApd, deleteApd, selectApd, fetchAllApds } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import UpgradeBrowser from './UpgradeBrowser';
 import Loading from './Loading';
+import { disconnectSocket, initiateSocket, joinRoom } from '../util/sockets';
 
 const ApdList = ({
   apds,
@@ -21,10 +22,30 @@ const ApdList = ({
   route,
   selectApd: select,
   state,
-  activities
+  activities,
+  fetchAllApds: fetchApds
+
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const listenForNewAPD = data =>{
+    console.log("Heard about a new APD")
+    console.log(data)
+    fetchApds()
+  }
+
+  useEffect(() => {
+    console.log('initializing socket')
+    // not strictly necessary, but a best practice
+    initiateSocket();
+    // join the room and on join register a listener for a "newAPD" event
+    joinRoom(`${state.name}_room`, {"newAPD": listenForNewAPD})
+
+    return () => {
+      disconnectSocket();
+    }
+  }, []);
 
   const createNew = () => {
     setIsLoading(true);
@@ -168,7 +189,8 @@ ApdList.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  activities: PropType.array.isRequired
+  activities: PropType.array.isRequired,
+  fetchAllApds: PropType.func.isRequired
 };
 
 ApdList.defaultProps = {
@@ -186,7 +208,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   createApd,
   deleteApd,
-  selectApd
+  selectApd,
+  fetchAllApds
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdList);

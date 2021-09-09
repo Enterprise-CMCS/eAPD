@@ -52,6 +52,8 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         document: apd
       });
 
+      console.log('creating an APD')
+      app.io.to(`${req.user.state.name}_room`).emit('newAPD', `a New APD has been created with ID: ${id}`)
       return res.send({
         ...apd,
         id,
