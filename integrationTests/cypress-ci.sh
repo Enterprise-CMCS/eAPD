@@ -17,6 +17,14 @@ docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY
 echo "Copying tokens from API container"
 docker cp $(docker ps -aqf "name=eapd_api_1"):./seeds/test/tokens.json ../api/seeds/test/
 docker cp $(docker ps -aqf "name=eapd_api_1"):./seeds/test/tokens.json ./api/seeds/test/
+echo "Print API Container home directory contents"
+docker exec $(docker ps -aqf "name=eapd_api_1") ls -la
+echo "Print API Container present working directory"
+docker exec $(docker ps -aqf "name=eapd_api_1") pwd
+echo "Print API Container seeds location from root"
+docker exec $(docker ps -aqf "name=eapd_api_1") ls -la /app/seeds/test/tokens.json
+echo "Print API Container seeds location from current"
+docker exec $(docker ps -aqf "name=eapd_api_1") ls -la ./seeds/test/tokens.json
 echo "Print running Docker containers"
 docker ps
 
