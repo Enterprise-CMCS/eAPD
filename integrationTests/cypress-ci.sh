@@ -1,19 +1,30 @@
-#!/usr/bin/env sh
+export OKTA_DOMAIN="$OKTA_DOMAIN"
+export OKTA_SERVER_ID="$OKTA_SERVER_ID"
+export OKTA_CLIENT_ID="$OKTA_CLIENT_ID"
+export OKTA_API_KEY="$OKTA_API_KEY"
+export JWT_SECRET="$JWT_SECRET"
+echo "OKTA_DOMAIN=$OKTA_DOMAIN"
+echo "OKTA_SERVER_ID=$OKTA_SERVER_ID"
+echo "OKTA_CLIENT_ID=$OKTA_CLIENT_ID"
+echo "OKTA_API_KEY=$OKTA_API_KEY"
+echo "JWT_SECRET=$JWT_SECRET"
 
-export NODE_ENV=development
-#export API_URL=http://localhost:8081
-export CYPRESS_TESTS=true
+echo "Startng and backgrounding the App"
+docker-compose -f ../docker-compose.yml up -d
 
-#docker-compose -f ../docker-compose.yml up --build -d --verbose
-#docker-compose exec -t api npm run migrate
-#docker-compose exec -t api npm run seed
-#docker-compose exec -t api npm run cy:run:ci $@
-#docker-compose -f docker-compose.cypress.yml up $@
+echo "Waiting for the App to start"
+sleep 60
 
-#npx cypress run --headless $@
+echo "Running migrate on API container"
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" api npm run migrate
+echo "Running seed on API container"
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" api npm run seed
+#docker cp eapd_api_1:/app/seeds/development/main.js
 
-docker-compose -f ./docker-compose.cypress.yml up $@
+echo "NODE_ENV=$NODE_ENV"
 
-EXIT_CODE=$?
-docker-compose down
-exit $EXIT_CODE
+echo "Starting Cypress E2E Tests"
+npx cypress run
+
+echo "Shutting down the App"
+docker-compose -f ../docker-compose.yml down
