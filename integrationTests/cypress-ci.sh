@@ -13,7 +13,7 @@ sleep 60
 echo "Running migrate on API container"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run migrate
 echo "Running seed on API container"
-docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed > ../api/seeds/test/tokens.json
 echo "Copying test tokens from API container method 1"
 docker cp $(docker ps -aqf "name=eapd_api_1"):./seeds/test/tokens.json ../api/seeds/test/
 echo "Copying development tokens from API container method 1"
@@ -27,10 +27,9 @@ docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds/test
 echo "Print API Container seeds/test/tokens.json directory contents"
 docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds/test/tokens.json
 echo "Print API Container seeds/development working directory"
-docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds/test
+docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds/development
 echo "Print API Container seeds/development/tokens.json directory contents"
-docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds/test/tokens.json
-echo "Print API Container present working directory"
+docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds/development/tokens.json
 
 echo "Starting Cypress E2E Tests"
 npx cypress run $@
