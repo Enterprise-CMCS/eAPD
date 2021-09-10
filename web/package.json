@@ -187,6 +187,7 @@
   "resolutions": {
     "hosted-git-info": "2.8.9",
     "trim": "0.0.3",
-    "browserslist": "4.16.5"
+    "browserslist": "4.16.5",
+    "tar": "6.1.9"
   }
 }
