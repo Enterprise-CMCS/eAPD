@@ -18,6 +18,14 @@ docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY
 echo "Starting Cypress E2E Tests"
 npx cypress run $@
 
+echo "ls from home"
+ls -la
+echo "Home"
+pwd
+echo "ls from root"
+ls -la /
+
+
 EXIT_CODE=$?
 echo "Shutting down the App"
 docker-compose -f ../docker-compose.yml down
