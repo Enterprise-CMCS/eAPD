@@ -447,6 +447,7 @@ class ExportPage {
   getActivityScheduleMilestoneName = (activityIndex, milestoneIndex) => {
     return this.getAllActivityScheduleMilestones(activityIndex)
       .eq(milestoneIndex)
+      .children()
       .first()
       .invoke('text');
   };
@@ -456,6 +457,7 @@ class ExportPage {
   getActivityScheduleMilestoneDates = (activityIndex, milestoneIndex) => {
     return this.getAllActivityScheduleMilestones(activityIndex)
       .eq(milestoneIndex)
+      .children()
       .last()
       .invoke('text');
   };
