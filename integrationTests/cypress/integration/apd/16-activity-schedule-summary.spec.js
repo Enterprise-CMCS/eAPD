@@ -5,6 +5,57 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 
 /* eslint no-return-assign: "off" */
 
+const testActivityListOver = page => {
+  cy.get('@data').then(data => {
+    data.activityOverview.forEach((activity, index) => {
+      const activityId = index + 1; // Activity Id is 1-base and index is 0-based
+      const activityName = `Activity ${activityId}: ${activity.name} Milestones`;
+      const activityRange = `${activity.startDate.join(
+        '/'
+      )} - ${activity.endDate.join('/')}`;
+
+      cy.log(`Activity is called ${activityName}`);
+      page.getActivityScheduleOverviewName(index).should('eq', activityName);
+      cy.log(`Activity date range is "${activityRange}"`);
+      page.getActivityScheduleOverviewDates(index).should('eq', activityRange);
+    });
+  });
+};
+
+const testActivityMilestone = page => {
+  cy.get('@data').then(data => {
+    const [first, ...rest] = data.milestones;
+    // You need to remove the first elements from the first milestone
+    // because they were delete in previous tests
+    const milestones = [
+      { names: first.names.slice(1), dates: first.dates.slice(1) },
+      ...rest
+    ];
+    cy.log({ milestones });
+    milestones.forEach(({ names, dates }, index) => {
+      const activityId = index + 1; // Activity Id is 1-base and index is 0-based
+      const activityName = `Activity ${activityId}: ${data.activityOverview[index].name} Milestones`;
+      cy.log(`Milestone is called "${activityName}"`);
+      page
+        .getActivityScheduleMilestoneTableName(index)
+        .should('eq', activityName);
+
+      cy.log(`Activity ${activityId} milestones are correct`);
+      page
+        .getAllActivityScheduleMilestones(index)
+        .should('have.length', names.length);
+      names.forEach((name, nameIndex) => {
+        page
+          .getActivityScheduleMilestoneName(index, nameIndex)
+          .should('eq', name);
+        page
+          .getActivityScheduleMilestoneDates(index, nameIndex)
+          .should('eq', dates[nameIndex].join('/'));
+      });
+    });
+  });
+};
+
 describe('Activity Schedule Summary', () => {
   const schedulePage = new ActivitySchedulePage();
   const exportPage = new ExportPage();
@@ -38,79 +89,34 @@ describe('Activity Schedule Summary', () => {
       cy.useStateStaff(apdActivityScheduleURL);
       // Check that the page has loaded
       cy.findByRole('heading', { name: /^Activity Schedule Summary$/i });
+      cy.fixture('activity-overview-template.json').as('data');
     });
 
     describe('Activities Overview', () => {
-      it('Only one activity in the Activity List Overview', () => {
-        schedulePage.getAllActivityOverviews().should('have.length', 2);
+      it('The correct number of activities in the Activity List Overview', () => {
+        cy.get('@data').then(data => {
+          schedulePage
+            .getAllActivityScheduleOverviews()
+            .should('have.length', data.activityOverview.length);
+        });
       });
 
-      it('Activity is called "Activity 1: Program Administration Milestones"', () => {
-        // Activity 1 has index 0
-        schedulePage
-          .getActivityOverviewName(0)
-          .should('eq', 'Activity 1: Program Administration Milestones');
-      });
-
-      it('Activity date range is "7/14/2021 - 3/12/2024"', () => {
-        schedulePage
-          .getActivityOverviewDates(0)
-          .should('eq', '7/14/2021 - 3/12/2024');
-      });
-
-      it('Activity is called "Activity 2: Claims Data Analytics Milestones"', () => {
-        // Activity 2 has index 1
-        schedulePage
-          .getActivityOverviewName(1)
-          .should('eq', 'Activity 2: Claims Data Analytics Milestones');
-      });
-
-      it('Activity date range is "2/24/2032 - 8/28/2034"', () => {
-        schedulePage
-          .getActivityOverviewDates(1)
-          .should('eq', '2/24/2032 - 8/28/2034');
+      it('Activity List Overview should show the correct name and date range', () => {
+        testActivityListOver(schedulePage);
       });
     });
 
     describe('Milestones', () => {
       it('Only one activity in Milestone Tables', () => {
-        schedulePage.getAllMilestoneTables().should('have.length', 2);
+        cy.get('@data').then(data => {
+          schedulePage
+            .getAllActivityScheduleMilestoneTables()
+            .should('have.length', data.milestones.length);
+        });
       });
 
-      it('Milestone is called "Activity 1: Program Administration Milestones"', () => {
-        // Activity 1 has index 0
-        schedulePage
-          .getMilestoneTableName(0)
-          .should('eq', 'Activity 1: Program Administration Milestones');
-      });
-
-      it('Activity 1 milestones are correct', () => {
-        // Get the milestones for Activity 1
-        schedulePage.getAllActivityMilestones(0).should('have.length', 1);
-        schedulePage
-          .getActivityMilestoneName(0, 0)
-          .should('eq', 'Environmental Scan Completion');
-        schedulePage.getActivityMilestoneDates(0, 0).should('eq', '3/2/2022');
-      });
-
-      it('Milestone is called "Activity 2: Claims Data Analytics Milestones"', () => {
-        // Activity 2 has index 1
-        schedulePage
-          .getMilestoneTableName(1)
-          .should('eq', 'Activity 2: Claims Data Analytics Milestones');
-      });
-
-      it('Activity 2 milestones are correct', () => {
-        // Get the milestones for Activity 2
-        schedulePage.getAllActivityMilestones(1).should('have.length', 2);
-        schedulePage
-          .getActivityMilestoneName(1, 0)
-          .should('eq', 'Completion by the due date');
-        schedulePage.getActivityMilestoneDates(1, 0).should('eq', '12/6/2022');
-        schedulePage
-          .getActivityMilestoneName(1, 1)
-          .should('eq', 'Follows the 3 guiding principles');
-        schedulePage.getActivityMilestoneDates(1, 1).should('eq', '3/5/2023');
+      it('Activity Milestones should sow the correct names and dates', () => {
+        testActivityMilestone(schedulePage);
       });
     });
   });
@@ -133,87 +139,34 @@ describe('Activity Schedule Summary', () => {
       cy.useStateStaff(apdExportURL);
       // Check that the page has loaded
       cy.findByRole('heading', { name: /^Activity Schedule Summary$/i });
+      cy.fixture('activity-overview-template.json').as('data');
     });
 
     describe('Activities Overview', () => {
       it('Only one activity in the Activity List Overview', () => {
-        exportPage.getAllActivityScheduleOverviews().should('have.length', 2);
+        cy.get('@data').then(data => {
+          exportPage
+            .getAllActivityScheduleOverviews()
+            .should('have.length', data.activityOverview.length);
+        });
       });
 
-      it('Activity is called "Activity 1: Program Administration Milestones"', () => {
-        // Activity 1 has index 0
-        exportPage
-          .getActivityScheduleOverviewName(0)
-          .should('eq', 'Activity 1: Program Administration Milestones');
-      });
-
-      it('Activity date range is "7/14/2021 - 3/12/2024"', () => {
-        exportPage
-          .getActivityScheduleOverviewDates(0)
-          .should('eq', '7/14/2021 - 3/12/2024');
-      });
-
-      it('Activity is called "Activity 2: Claims Data Analytics Milestones"', () => {
-        // Activity 2 has index 1
-        exportPage
-          .getActivityScheduleOverviewName(1)
-          .should('eq', 'Activity 2: Claims Data Analytics Milestones');
-      });
-
-      it('Activity date range is "2/24/2032 - 8/28/2034"', () => {
-        exportPage
-          .getActivityScheduleOverviewDates(1)
-          .should('eq', '2/24/2032 - 8/28/2034');
+      it('Activity List Overview should show the correct name and date range', () => {
+        testActivityListOver(exportPage);
       });
     });
 
     describe('Milestones', () => {
       it('Only one activity in Milestone Tables', () => {
-        exportPage
-          .getAllActivityScheduleMilestoneTables()
-          .should('have.length', 2);
+        cy.get('@data').then(data => {
+          exportPage
+            .getAllActivityScheduleMilestoneTables()
+            .should('have.length', data.milestones.length);
+        });
       });
 
-      it('Milestone is called "Activity 1: Program Administration Milestones"', () => {
-        // Activity 1 has index 0
-        exportPage
-          .getActivityScheduleMilestoneTableName(0)
-          .should('eq', 'Activity 1: Program Administration Milestones');
-      });
-
-      it('Activity 1 milestones are correct', () => {
-        // Get the milestones for Activity 1
-        exportPage.getAllActivityScheduleMilestones(0).should('have.length', 1);
-        exportPage
-          .getActivityScheduleMilestoneName(0, 0)
-          .should('eq', 'Environmental Scan Completion');
-        exportPage
-          .getActivityScheduleMilestoneDates(0, 0)
-          .should('eq', '3/2/2022');
-      });
-
-      it('Milestone is called "Activity 2: Claims Data Analytics Milestones"', () => {
-        // Activity 2 has index 1
-        exportPage
-          .getActivityScheduleMilestoneTableName(1)
-          .should('eq', 'Activity 2: Claims Data Analytics Milestones');
-      });
-
-      it('Activity 2 milestones are correct', () => {
-        // Get the milestones for Activity 2
-        exportPage.getAllActivityScheduleMilestones(1).should('have.length', 2);
-        exportPage
-          .getActivityScheduleMilestoneName(1, 0)
-          .should('eq', 'Completion by the due date');
-        exportPage
-          .getActivityScheduleMilestoneDates(1, 0)
-          .should('eq', '12/6/2022');
-        exportPage
-          .getActivityScheduleMilestoneName(1, 1)
-          .should('eq', 'Follows the 3 guiding principles');
-        exportPage
-          .getActivityScheduleMilestoneDates(1, 1)
-          .should('eq', '3/5/2023');
+      it('Activity Milestones should show the correct names and dates', () => {
+        testActivityMilestone(exportPage);
       });
     });
   });

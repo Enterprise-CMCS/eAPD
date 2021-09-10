@@ -1,27 +1,33 @@
 class ActivitySchedulePage {
-  getAllActivityOverviews = () => {
+  getAllActivityScheduleOverviews = () => {
     return cy
       .contains('thead', /Activity List Overview/i)
       .parent()
       .find('tbody>tr');
   };
 
-  getActivityOverview = index => {
-    return this.getAllActivityOverviews().eq(index);
+  getActivityScheduleOverview = index => {
+    return this.getAllActivityScheduleOverviews().eq(index);
   };
 
   // Assumes the name is in the first column of the overview
-  getActivityOverviewName = index => {
-    return this.getActivityOverview(index).find('td').first().invoke('text');
+  getActivityScheduleOverviewName = index => {
+    return this.getActivityScheduleOverview(index)
+      .find('td')
+      .first()
+      .invoke('text');
   };
 
   // Assumes dates are in the last column
-  getActivityOverviewDates = index => {
-    return this.getActivityOverview(index).find('td').last().invoke('text');
+  getActivityScheduleOverviewDates = index => {
+    return this.getActivityScheduleOverview(index)
+      .find('td')
+      .last()
+      .invoke('text');
   };
 
   // Get the milestone tables for all activities.
-  getAllMilestoneTables = () => {
+  getAllActivityScheduleMilestoneTables = () => {
     return cy
       .findByRole('heading', { name: /^Milestone Tables by Activity$/i })
       .parent()
@@ -29,13 +35,15 @@ class ActivitySchedulePage {
   };
 
   // Return all milestone rows for a given activity.
-  getAllActivityMilestones = activityIndex => {
-    return this.getAllMilestoneTables().eq(activityIndex).find('tbody>tr'); // returns undefined if no milestone was added
+  getAllActivityScheduleMilestones = activityIndex => {
+    return this.getAllActivityScheduleMilestoneTables()
+      .eq(activityIndex)
+      .find('tbody>tr'); // returns undefined if no milestone was added
   };
 
   // Assumes the name is the last row in the table header
-  getMilestoneTableName = activityIndex => {
-    return this.getAllMilestoneTables()
+  getActivityScheduleMilestoneTableName = activityIndex => {
+    return this.getAllActivityScheduleMilestoneTables()
       .eq(activityIndex)
       .find('thead>tr')
       .last()
@@ -43,8 +51,8 @@ class ActivitySchedulePage {
   };
 
   // Assumes names are in the last column
-  getActivityMilestoneName = (activityIndex, milestoneIndex) => {
-    return this.getAllActivityMilestones(activityIndex)
+  getActivityScheduleMilestoneName = (activityIndex, milestoneIndex) => {
+    return this.getAllActivityScheduleMilestones(activityIndex)
       .eq(milestoneIndex)
       .children()
       .first()
@@ -52,8 +60,8 @@ class ActivitySchedulePage {
   };
 
   // Assumes dates are in the last column
-  getActivityMilestoneDates = (activityIndex, milestoneIndex) => {
-    return this.getAllActivityMilestones(activityIndex)
+  getActivityScheduleMilestoneDates = (activityIndex, milestoneIndex) => {
+    return this.getAllActivityScheduleMilestones(activityIndex)
       .eq(milestoneIndex)
       .children()
       .last()
