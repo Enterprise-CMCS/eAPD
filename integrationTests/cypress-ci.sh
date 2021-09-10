@@ -11,20 +11,18 @@ echo "Waiting for the App to start"
 sleep 60
 
 echo "Running migrate on API container"
-docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" api npm run migrate
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run migrate
 echo "Running seed on API container"
-docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" api npm run seed
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed
 echo "Copying tokens from API container method 1"
 docker cp $(docker ps -aqf "name=eapd_api_1"):./seeds/test/tokens.json ../api/seeds/test/
-echo "Copying tokens from API container method 2"
-docker cp $(docker ps -aqf "name=eapd_api_1"):./seeds/test/tokens.json ./api/seeds/test/
 echo "Print API Container home directory contents"
 docker exec $(docker ps -aqf "name=eapd_api_1") ls -la
 echo "Print API Container seeds directory contents"
 docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds
 echo "Print API Container home directory contents"
 docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds/test
-echo "Print API Container home directory contents"
+echo "Print API Container test directory contents"
 docker exec $(docker ps -aqf "name=eapd_api_1") ls -la seeds/test/tokens.json
 echo "Print API Container present working directory"
 docker exec $(docker ps -aqf "name=eapd_api_1") pwd
