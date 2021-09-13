@@ -22,7 +22,7 @@ describe('Assurances and Compliance', function ()  {
 
   before(function ()  {
     cy.useStateStaff();
-    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.contains('HITECH IAPD').click();
     cy.url().should('contain', '/apd');
     cy.location('pathname').then(pathname => apdURL = pathname);
   });
