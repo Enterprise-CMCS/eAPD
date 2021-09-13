@@ -20,7 +20,10 @@ sleep 60
 echo "Running migrate on API container"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run migrate
 echo "Running seed on API container"
-docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed > ../api/seeds/test/tokens.json
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed
+echo "Copy seed to local"
+rm ../api/seeds/test/tokens.json
+docker cp eapd_api_1:/app/seeds/test/tokens.json ../api/seeds/test/tokens.json
 
 echo "Running npm dependencies"
 npm install knex
