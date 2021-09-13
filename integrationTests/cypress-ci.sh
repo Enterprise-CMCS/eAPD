@@ -22,6 +22,11 @@ docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY
 echo "Running seed on API container"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed > ../api/seeds/test/tokens.json
 
+npm install knex
+npm install pg
+npm install cypress
+npm install
+
 echo "Starting Cypress E2E Tests"
 npx cypress run --headless $@
 
