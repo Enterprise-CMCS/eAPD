@@ -210,8 +210,10 @@ class ExportPage {
     }
   }
 
-  checkActivityHeader = (name, num) => {
-    cy.contains(`Activity ${num} (${name})`).should('exist');
+  checkActivityHeader = (name = 'Untitled', num) => {
+    cy.findByRole('heading', { name: /^Activities$/i } )
+      .parent()
+      .contains(`Activity ${num}: ${name}`).should('exist');
   };
 
   checkExecutiveSummary = (
@@ -380,7 +382,7 @@ class ExportPage {
       .should('contain', `$${medicaidValue}`);
   };
 
-  checkActivityNameAtEnd = name => {
+  checkActivityNameAtEnd = (name = 'Untitled') => {
     cy.contains(`The total cost of the ${name}`).should('exist');
   };
 
