@@ -75,7 +75,7 @@ const Activity = ({ activity, activityIndex }) => {
       <Fragment key={uuidv4()}>
         <p>
           <strong>
-            {index + 1}. {expense.category}
+            {index + 1}. {expense.category || 'Category Not Selected'}
           </strong>
         </p>
         <p>{expense.description}</p>
