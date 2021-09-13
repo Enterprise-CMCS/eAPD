@@ -1,8 +1,9 @@
-const { addDays, format, subDays } = require('date-fns');
+const { addDays, format, subDays, addYears } = require('date-fns');
 const logger = require('../../logger')('user seeder');
 const { states } = require('../../util/states');
 
 const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
+const today = new Date();
 
 const formatOktaUser = oktaResult => {
   const {
@@ -87,7 +88,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      username: 'em@il.com'
+      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
+      username: 'em@il.com',
     });
     // Add an expired certification and this user will be downgraded to "regular user"
     stateCertifications.push({
@@ -118,7 +120,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      username: stateAdmin.profile.login
+      username: stateAdmin.profile.login,
+      expires_at: format(new Date(new Date().getFullYear() + 1, '06', '30'), PostgresDateFormat)
     });
     // Let them be a staffer in Maryland too
     oktaAffiliations.push({
@@ -126,6 +129,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'md',
       role_id: stateStaffRoleId,
       status: 'approved',
+      expires_at: format(new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()), PostgresDateFormat),
       username: stateAdmin.profile.login
     });
     // Add a valid certification and this user will remain an admin
@@ -149,6 +153,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
+      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: stateStaff.profile.login
     });
     // Add an invalid certification and this user will remain an staff member
@@ -159,18 +164,19 @@ const createUsersToAdd = async (knex, oktaClient) => {
       certificationExpiration: format(
         subDays(new Date(), 35),
         PostgresDateFormat
-      ),
-      certifiedBy: 'seeds'
-    });
-    oktaUsers.push(formatOktaUser(stateStaff));
-  }
-  if (stateContractor) {
-    oktaAffiliations.push({
-      user_id: stateContractor.id,
-      state_id: 'ak',
-      role_id: stateContractorRoleId,
-      status: 'approved',
-      username: stateContractor.profile.login
+        ),
+        certifiedBy: 'seeds'
+      });
+      oktaUsers.push(formatOktaUser(stateStaff));
+    }
+    if (stateContractor) {
+      oktaAffiliations.push({
+        user_id: stateContractor.id,
+        state_id: 'ak',
+        role_id: stateContractorRoleId,
+        status: 'approved',
+        expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
+        username: stateContractor.profile.login
     });
     oktaUsers.push(formatOktaUser(stateContractor));
   }
