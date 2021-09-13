@@ -21,6 +21,10 @@ echo "Running migrate on API container"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run migrate
 echo "Running seed on API container"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed
+echo "List Docker containers"
+docker ps
+echo "Api Container path to tokens"
+docker exec eapd_api_1 ls -la /app/seeds/test/tokens.json
 echo "Copy seed to local"
 rm ../api/seeds/test/tokens.json
 docker cp eapd_api_1:/app/seeds/test/tokens.json ../api/seeds/test/tokens.json
