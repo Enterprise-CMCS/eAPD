@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
@@ -278,8 +279,10 @@ const CostAllocateFFP = ({
 
             {isViewOnly && (
               <h4>
-                {t(
-                  'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
+                {titleCase(
+                  t(
+                    'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
+                  )
                 )}
               </h4>
             )}

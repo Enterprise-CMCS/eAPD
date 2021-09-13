@@ -29,7 +29,7 @@ describe('Filling out Outcomes and Milestones page', () => {
 
   it('fills out outcomes in activity 1', function () {
     cy.contains('Edit').click();
-    cy.contains('Outcomes and milestones').click();
+    cy.contains('Outcomes and Milestones').click();
 
     const outcomes = this.data.outcomes[0];
     for (let i = 0; i < 2; i += 1) {
@@ -74,7 +74,7 @@ describe('Filling out Outcomes and Milestones page', () => {
 
   it('fills out milestones in activity 1', function () {
     cy.contains('Edit').click();
-    cy.contains('Outcomes and milestones').click();
+    cy.contains('Outcomes and Milestones').click();
 
     const milestones = this.data.milestones[0];
     for (let i = 0; i < 2; i += 1) {
@@ -105,7 +105,7 @@ describe('Filling out Outcomes and Milestones page', () => {
 
   it('fills out outcomes and milestones in activity 2', function () {
     cy.findAllByText('Edit').eq(1).click();
-    cy.findAllByText('Outcomes and milestones').eq(1).click();
+    cy.findAllByText('Outcomes and Milestones').eq(1).click();
 
     const outcomes = this.data.outcomes[1];
     const milestones = this.data.milestones[1];
