@@ -17,7 +17,8 @@ module.exports = (
     loggedIn,
     can('edit-state-certifications'),
     async (req, res, next) => {
-      const { 
+      const {
+        ffy,
         name, 
         email, 
         phone, 
@@ -32,6 +33,8 @@ module.exports = (
       try {        
         const { error = null } = await addStateAdminCertification({
           uploadedBy: req.user.id,
+          uploadedOn: new Date(),
+          ffy,
           name, 
           email, 
           phone, 

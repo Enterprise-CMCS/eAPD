@@ -5,15 +5,22 @@ const addStateAdminCertification = (
   data,
   { db = knex } = {}
 ) => {    
-  const today = new Date();      
-  const oneYearFromToday = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
   
+  // const authAffiliationAudit = {
+  //   changeDate: newDate(),
+  //   changedBy: ???,
+  //   changeType: "CREATED??"
+  //   certificationId: ??? // need to get from the record created below
+  // }
+    
   return db('state_admin_certifications')
     .insert({
-      certificationDate: today,
-      certificationExpiration: oneYearFromToday,
       ...data
     })
+    // .then(() =>{
+    //   return db('state_admin_certifications_audit')
+    //     .insert(authAffiliationAudit)
+    // })
 };
     
 module.exports = { addStateAdminCertification };

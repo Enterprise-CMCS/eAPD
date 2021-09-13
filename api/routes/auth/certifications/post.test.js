@@ -42,6 +42,7 @@ tap.test('state certifications post endpoint', async postTest => {
     let handler; 
     const req = {
       body: {
+        ffy: 2021,
         name: "Test Name",
         email: "test@email.com",
         phone: "4105555555",

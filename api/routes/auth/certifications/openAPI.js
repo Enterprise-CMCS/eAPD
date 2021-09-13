@@ -101,6 +101,10 @@ const postStateCertification = {
             schema: {
               type: 'object',
               properties: {
+                ffy: {
+                  type: 'integer',
+                  description: 'Federal Fiscal Year (FFY) that the certification is valid for'
+                },
                 name: {
                   type: 'string',
                   description: 'Name of individual being certified'
