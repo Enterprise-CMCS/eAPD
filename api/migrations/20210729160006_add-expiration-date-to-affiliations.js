@@ -8,8 +8,6 @@ exports.up = async knex => {
 
   const rolesQuery = await knex('auth_roles').where({isActive: true});
 
-  const today = new Date();
-
   const roles = Object.fromEntries(
     rolesQuery.map(item => [item.name, item.id])
   )
@@ -27,19 +25,10 @@ exports.up = async knex => {
                 expires_at: new Date(created_at.getFullYear() + 1, created_at.getMonth(), created_at.getDate())
               })
             }
-          if(role_id === roles['eAPD State Admin']) {
-            return knex('auth_affiliations')
-              .where('status', 'approved')
-              .where('id', id)
-              .update({
-                expires_at: new Date(today.getFullYear() + 1, '06', '30')
-              })
-          }
           return null;
         })
       )
     )
-
 };
 
 exports.down = knex => {
