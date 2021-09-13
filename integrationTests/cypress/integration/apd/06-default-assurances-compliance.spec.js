@@ -17,7 +17,7 @@ const categories = [
 describe('Assurances and Compliance', function () {
   const assurancesCompliancePage = new AssurancesCompliancePage();
   const exportPage = new ExportPage();
-  // Create APD as state staff
+  // Reuse existing APD
   let apdURL;
 
   before(function () {
