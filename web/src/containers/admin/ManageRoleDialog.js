@@ -20,7 +20,7 @@ const ManageRoleDialog = ({
     if (selectedRoleName) {
       return findRoleByName(selectedRoleName) || roleTypes[0];
     }
-    return roleTypes[0];
+    return '';
   };
 
   const getRoleName = selectedRoleName => {
@@ -61,6 +61,8 @@ const ManageRoleDialog = ({
     updatedRole.label = role.name;
     return updatedRole;
   });
+
+  dropdownOptions.unshift({label:'Select an option', value:'', key:'selectAnOption'})
 
   return (
     <Dialog
