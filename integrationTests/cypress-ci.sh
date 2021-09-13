@@ -23,7 +23,7 @@ echo "Running seed on API container"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed > ../api/seeds/test/tokens.json
 
 echo "Starting Cypress E2E Tests"
-npx cypress run $@
+npx cypress run --headless $@
 
 EXIT_CODE=$?
 echo "Shutting down the App"
