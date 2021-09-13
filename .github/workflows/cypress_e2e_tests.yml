@@ -14,7 +14,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        working-directory: /home/runner/work/
       - name: Cypress Dependency
         env:
           NODE_ENV: development
