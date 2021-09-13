@@ -52,12 +52,12 @@ export const expenseDefaultYear = () => 0;
 
 export const newExpense = years => ({
   key: generateKey(),
-  category: 'Hardware, software, and licensing',
+  category: '',
   description: '',
   years: arrToObj(years, expenseDefaultYear())
 });
 
-export const costAllocationEntry = (other = 0, federal = 90, state = 10) => ({
+export const costAllocationEntry = (other = 0, federal = 0, state = 100) => ({
   other,
   ffp: { federal, state }
 });
