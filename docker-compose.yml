@@ -17,7 +17,7 @@ services:
     image: mongo:latest
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongo_admin
-      - MONGO_INITDB_ROOT_PASSWORD=example   
+      - MONGO_INITDB_ROOT_PASSWORD=example
       - MONGODATA=/mongodata
     volumes:
       - mongodata:/mongodata
