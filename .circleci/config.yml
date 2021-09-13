@@ -4,24 +4,24 @@ workflows:
   version: 2
 
   # Workflow to cleanup preview deploys from AWS.  Runs every two hours.
-#  cleanup preview deploys:
-#    triggers:
-#      - schedule:
-          # Run every hour, every day. Specified this way because the more
-          # compact cron syntax wasn't working.
-#          cron: "0 0 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - cleanup preview deploys
+  #  cleanup preview deploys:
+  #    triggers:
+  #      - schedule:
+  # Run every hour, every day. Specified this way because the more
+  # compact cron syntax wasn't working.
+  #          cron: "0 0 * * *"
+  #          filters:
+  #            branches:
+  #              only:
+  #                - master
+  #    jobs:
+  #      - cleanup preview deploys
 
   # Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          cron: '0 0 * * *'
           filters:
             branches:
               only:
@@ -246,7 +246,7 @@ jobs:
   install dependencies:
     docker:
       - image: node:14
-        auth: 
+        auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
     steps:
@@ -276,9 +276,9 @@ jobs:
   validate openapi:
     docker:
       - image: circleci/node:14
-        auth: 
+        auth:
           username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD      
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - setup_remote_docker
@@ -571,22 +571,22 @@ jobs:
 
   # Cleans up preview deploys that are no longer associated with open pull
   # requests.
-#  cleanup preview deploys:
-#    docker:
-#      - image: python:3
-#    steps:
-#      - checkout
-#      - run:
-#          name: cleanup deploys with no open PR
-#          working_directory: ~/project/bin/preview-deploy
-#          command: |
-#            apt-get -qq update
-#            apt-get -qq install jq -y
-#            pip install --quiet awscli
-#            ./aws.cleanup.sh \
-#              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
-#              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
-#              --GH_BOT_USER "$GH_BOT_USER"
+  #  cleanup preview deploys:
+  #    docker:
+  #      - image: python:3
+  #    steps:
+  #      - checkout
+  #      - run:
+  #          name: cleanup deploys with no open PR
+  #          working_directory: ~/project/bin/preview-deploy
+  #          command: |
+  #            apt-get -qq update
+  #            apt-get -qq install jq -y
+  #            pip install --quiet awscli
+  #            ./aws.cleanup.sh \
+  #              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+  #              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
+  #              --GH_BOT_USER "$GH_BOT_USER"
 
   # Frontend production deployment.
   frontend deploy:

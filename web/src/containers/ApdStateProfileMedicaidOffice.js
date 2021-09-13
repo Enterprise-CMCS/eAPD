@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import {
   setMedicaidDirectorEmail,
   setMedicaidDirectorName,
@@ -43,7 +44,7 @@ const ApdStateProfile = ({
     <Fragment>
       <fieldset>
         <legend className="ds-u-padding-bottom--1">
-          {t(`${dirTRoot}.title`)}
+          {titleCase(t(`${dirTRoot}.title`))}
         </legend>
         <TextField
           name="apd-state-profile-mdname"
@@ -67,7 +68,7 @@ const ApdStateProfile = ({
 
       <fieldset>
         <legend className="ds-u-padding-bottom--1">
-          {t(`${offTRoot}.title`)}
+          {titleCase(t(`${offTRoot}.title`))}
         </legend>
         <TextField
           name="apd-state-profile-addr1"

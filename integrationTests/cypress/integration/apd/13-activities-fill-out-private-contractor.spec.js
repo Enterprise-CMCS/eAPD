@@ -33,7 +33,7 @@ describe('Filling out private contractors page', () => {
   it('fills our private contractor form', function () {
     const contractor = this.data.privateContractors[0];
     cy.contains('Edit').click();
-    cy.contains('Private contractor costs').click();
+    cy.contains('Private Contractor Costs').click();
 
     for (let i = 0; i < 2; i += 1) {
       if (i === 0) {
@@ -73,7 +73,7 @@ describe('Filling out private contractors page', () => {
   it('tests deleting a private contractor', function () {
     const contractor = this.data.privateContractors[0];
     cy.contains('Edit').click();
-    cy.findAllByText('Private contractor costs').eq(0).click();
+    cy.findAllByText('Private Contractor Costs').eq(0).click();
 
     cy.contains('Delete').click();
     cy.contains('Delete Private Contractor?').should('exist');
@@ -88,7 +88,7 @@ describe('Filling out private contractors page', () => {
   it('fills 2nd activity private contractor', function () {
     const contractor = this.data.privateContractors[1];
     cy.findAllByText('Edit').eq(1).click();
-    cy.findAllByText('Private contractor costs').eq(1).click();
+    cy.findAllByText('Private Contractor Costs').eq(1).click();
 
     cy.findByRole('button', { name: /Add Contractor/i }).click();
     populatePage.fillContractorForm(
