@@ -14,8 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Cypress Dependency
         working-directory: /home/runner/work/
+      - name: Cypress Dependency
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
@@ -29,9 +29,7 @@ jobs:
           npm install pg
           npm install cypress
           npm install
-#          npm audit fix
       - name: Cypress E2E Tests
-#        if: ${{ always() }}
         working-directory: ./integrationTests
         env:
           NODE_ENV: development

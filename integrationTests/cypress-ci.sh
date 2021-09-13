@@ -7,6 +7,13 @@ export JWT_SECRET="$JWT_SECRET"
 echo "Startng and backgrounding the App"
 docker-compose -f ../docker-compose.yml up -d
 
+echo "ls from home"
+ls -la
+echo "Home"
+pwd
+echo "ls from root"
+ls -la /
+
 echo "Waiting for the App to start"
 sleep 60
 
@@ -17,14 +24,6 @@ docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY
 
 echo "Starting Cypress E2E Tests"
 npx cypress run $@
-
-echo "ls from home"
-ls -la
-echo "Home"
-pwd
-echo "ls from root"
-ls -la /
-
 
 EXIT_CODE=$?
 echo "Shutting down the App"
