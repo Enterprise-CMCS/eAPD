@@ -27,7 +27,7 @@ echo "Api Container path to tokens"
 docker exec eapd_api_1 ls -la /app/seeds/test/tokens.json
 echo "Copy seed to local"
 rm ../api/seeds/test/tokens.json
-docker cp eapd_api_1:/app/seeds/test/tokens.json ../api/seeds/test/tokens.json
+docker cp $(docker ps -aqf "name=eapd_api_1"):/app/seeds/test/tokens.json ../api/seeds/test/tokens.json
 
 echo "Running npm dependencies"
 npm install knex
