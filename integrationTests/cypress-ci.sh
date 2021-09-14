@@ -11,10 +11,10 @@ echo "Waiting for the App to start"
 sleep 60
 
 echo "Running migrate"
-docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" api npm run migrate --verbose
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run migrate --verbose
 
 echo "Running seed"
-docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" api npm run seed --verbose
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run seed --verbose
 
 echo "Running containers"
 docker ps
