@@ -14,6 +14,7 @@ import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import ManageRoleDialog from './ManageRoleDialog';
 import ConfirmationDialog from './ConfirmationDialog';
 import ManageAllUsersTable from './ManageAllUsersTable';
+import StateAdminLetters from './StateAdminLetters';
 
 
 const FederalAdmin = ({
@@ -39,11 +40,13 @@ const FederalAdmin = ({
   const [limitedRoleTypes, setLimitedRoleTypes] = useState(roleTypes);
 
   useEffect(() => {
-    setIsFetching(true);
-    async function fetchAffiliations() {
-      await affiliations(currentState.id, activeTab);
+    if(activeTab != 'letters') {
+      setIsFetching(true);
+      async function fetchAffiliations() {
+        await affiliations(currentState.id, activeTab);
+      }
+      fetchAffiliations().then(() => setIsFetching(false));      
     }
-    fetchAffiliations().then(() => setIsFetching(false));
   }, [activeTab]);
 
   useEffect(() => {
@@ -126,6 +129,9 @@ const FederalAdmin = ({
   return (
     <main>
       <Tabs onChange={currentTab}>
+        <TabPanel id="letters" tab="State Admin Letters">
+          <StateAdminLetters />
+        </TabPanel>
         <TabPanel id="pending" tab="Requests">
           {activeTab === 'pending' && (
             <ManageAllUsersTable
