@@ -16,16 +16,13 @@ docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY
 echo "Running seed"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed
 
-echo "Checking Running containers"
-docker ps
-
-echo "Looking for tokens.json"
-find / -type f -name tokens.json
-
 echo "Copying token"
 docker cp \
   $(docker ps -aqf "name=eapd_api_1"):$(docker exec eapd_api_1 find /app -type f -name tokens.json) \
   ./tokens.json
+
+echo "Confirm token placement on host"
+ls -la ./tokens.json
 
 docker-compose -f docker-compose.new-cypress.yml up
 
