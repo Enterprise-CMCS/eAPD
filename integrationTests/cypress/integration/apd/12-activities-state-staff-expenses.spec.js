@@ -31,7 +31,7 @@ describe('filling out staff & expenses for activities', function () {
   // Repeat tests for two activities.
   describe(`Activity 1`, function () {
     beforeEach(function () {
-      cy.findAllByText('State staff and expenses').eq(0).click({ force: true });
+      cy.findAllByText('State Staff and Expenses').eq(0).click({ force: true });
     });
 
     describe('State staff', function () {
@@ -152,7 +152,7 @@ describe('filling out staff & expenses for activities', function () {
   // Activity 2 will not involve deleting data, but will use different data.
   describe('Activity 2', function () {
     beforeEach(function () {
-      cy.findAllByText('State staff and expenses').eq(1).click({ force: true });
+      cy.findAllByText('State Staff and Expenses').eq(1).click({ force: true });
     });
 
     describe('State staff', function () {

@@ -12,12 +12,7 @@
       "https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&SID=6d93b829c0db163a0124bfeae1704e42&ty=HTML&h=L&mc=true&r=SECTION&n=se45.1.95_1613",
       "https://www.ecfr.gov/cgi-bin/text-idx?SID=d1d1ed46083496c2114c787af6f29afc&mc=true&node=pt45.1.75&rgn=div5#se45.1.75_1326"
     ],
-    "responses": [
-      "Next response will be blank",
-      "",
-      null,
-      null
-    ]
+    "responses": ["Next response will be blank", "", null, null]
   },
   "Access to Records, Reporting and Agency Attestations": {
     "regulations": [
@@ -45,7 +40,7 @@
       null
     ]
   },
-  "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports": {
+  "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports": {
     "regulations": [
       "42 CFR 495.360",
       "45 CFR 95.617",
@@ -65,15 +60,11 @@
       null
     ]
   },
-  "Security and interface requirements to be employed for all state HIT systems": {
-    "regulations": [
-      "45 CFR 164 Security and Privacy"
-    ],
+  "Security and Interface Requirements to Be Employed for All State HIT Systems": {
+    "regulations": ["45 CFR 164 Security and Privacy"],
     "links": [
       "https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&tpl=/ecfrbrowse/Title45/45cfr164_main_02.tpl"
     ],
-    "responses": [
-      null
-    ]
+    "responses": [null]
   }
 }

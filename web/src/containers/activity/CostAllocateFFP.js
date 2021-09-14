@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import Instruction from '../../components/Instruction';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
@@ -226,6 +227,7 @@ const CostAllocateFFP = ({
                   label="federal-state split"
                   labelClassName="sr-only"
                   options={[
+                    { label: "Select an option", value:'0-100' },
                     { label: '90-10', value: '90-10' },
                     { label: '75-25', value: '75-25' },
                     { label: '50-50', value: '50-50' }
@@ -277,8 +279,10 @@ const CostAllocateFFP = ({
 
             {isViewOnly && (
               <h4>
-                {t(
-                  'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
+                {titleCase(
+                  t(
+                    'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
+                  )
                 )}
               </h4>
             )}
