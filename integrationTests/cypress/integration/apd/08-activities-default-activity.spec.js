@@ -277,7 +277,9 @@ describe('checking default values in Activities section', () => {
     exportPage.checkActivityList(activities);
 
     for (let i = 0; i < activities.length; i += 1) {
-      cy.contains(`Activity ${i + 1} (${activities[i][0]})`)
+      cy.findByRole('heading', { name: /^Activities$/i } )
+        .parent()
+        .contains(`Activity ${i + 1}: ${activities[i][0]}`)
         .parent()
         .within(() => {
           exportPage.checkActivityOverview(

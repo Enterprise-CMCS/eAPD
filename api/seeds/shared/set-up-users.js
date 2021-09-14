@@ -1,8 +1,5 @@
-const { addDays, format, subDays } = require('date-fns');
 const logger = require('../../logger')('user seeder');
 const { states } = require('../../util/states');
-
-const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
 
 const formatOktaUser = oktaResult => {
   const {
@@ -28,6 +25,7 @@ const formatOktaUser = oktaResult => {
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
   await knex('state_admin_certifications').del();
+  await knex('state_admin_certifications_audit').del();
   await knex('okta_users').del();
   logger.info('Retrieving user ids from Okta');
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
@@ -119,20 +117,18 @@ const createUsersToAdd = async (knex, oktaClient) => {
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
       uploadedBy: fedAdmin.id,
+      uploadedOn: new Date(),
+      ffy: 2021,
       state: 'ak',
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       email: stateAdmin.profile.primaryPhone,
       phone: stateAdmin.profile.email,
-      certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
-      certificationExpiration: format(
-        addDays(new Date(), 325),
-        PostgresDateFormat
-      ),
       certifiedByName: 'Test SMD',
       certifiedByTitle: 'State Medicaid Director',
       certifiedByEmail: 'testsmd@fake.com',
       certifiedBySignature: 'Test SMD',
-      fileUrl: '12345' // Todo: Update this to have a valid fileUrl
+      fileUrl: '12345', // Todo: Update this to have a valid fileUrl
+      affiliationId: null
     });
 
     oktaUsers.push(formatOktaUser(stateAdmin));

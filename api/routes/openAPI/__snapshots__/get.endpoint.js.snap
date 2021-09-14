@@ -1154,6 +1154,10 @@ Object {
                     "description": "Email of individual being certified",
                     "type": "string",
                   },
+                  "ffy": Object {
+                    "description": "Federal Fiscal Year (FFY) that the certification is valid for",
+                    "type": "integer",
+                  },
                   "fileUrl": Object {
                     "description": "URL provided from the /certifications/files endpoint",
                     "type": "string",

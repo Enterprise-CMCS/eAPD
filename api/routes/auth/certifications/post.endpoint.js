@@ -8,6 +8,7 @@ const {
 describe('auth/certifications endpoints', () => {
   describe('POST /auth/certifications', () => {
     const validRequestBody = {
+      "ffy": 2021,
       "name": "Roger Klotz",
       "email": "fake@email.com",
       "phone": "4105555555",
