@@ -20,21 +20,16 @@ sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
 echo "Startng and backgrounding the App"
-#docker-compose -f ../docker-compose.yml up -d
-cd ../api
-npm start
-cd ../web
-npm start
-cd ../integrationTests
+docker-compose -f ../docker-compose.yml up -d
 
 echo "Waiting for the App to start"
 sleep 60
 
 echo "Running migrate"
-#docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run migrate
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run migrate
 npm run migrate
 echo "Running seed"
-#docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed
+docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed
 npm run seed
 #echo "Copy seed to local"
 #rm ../api/seeds/test/tokens.json
