@@ -34,4 +34,12 @@ exports.seed = async knex => {
     console.error(err)
   }
 
+  try {
+    fs.writeFileSync(`${__dirname  }/../../../integrationTests/tokens.json`, JSON.stringify(testTokens,null, 4))
+  } catch (err) {
+    // not much to do here but log it
+    // eslint-disable-next-line no-console
+    console.error(err)
+  }
+  
 };

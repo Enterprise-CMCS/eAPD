@@ -20,7 +20,7 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
         run: |
-          sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+          sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb postgresql-server
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
@@ -57,6 +57,9 @@ jobs:
           OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DEV_DB_HOST: 
+          DEV_DB_USER: 
+          DEV_DB_PASSWORD: 
         run: |
           sh cypress-ci.sh
 
