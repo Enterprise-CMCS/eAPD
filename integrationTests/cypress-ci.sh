@@ -16,9 +16,16 @@ docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY
 echo "Running seed"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run seed
 
+echo "Running containers"
+docker ps
+
+echo "Creatng TOKEN_LOC env var"
+export TOKEN_LOC=$(docker exec eapd_api_1 find /app -type f -name tokens.json)
+echo $TOKEN_LOC
+
 echo "Copying token"
 docker cp \
-  $(docker ps -aqf "name=eapd_api_1"):$(docker exec eapd_api_1 find /app -type f -name tokens.json) \
+  $(docker ps -aqf "name=eapd_api_1"):$TOKEN_LOC \
   ./tokens.json
 
 echo "Confirm token placement on host"
