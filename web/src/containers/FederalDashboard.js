@@ -25,21 +25,7 @@ const FederalDashboard = ({ approvalStatus }) => {
       className="ds-l-container ds-u-margin-bottom--5"
     >
       <h1>Federal Administrator Portal</h1>
-      {isApproved && (
-        <Fragment>
-          <div className="ds-u-margin-bottom--5">
-            <Card
-              className="ds-u-margin-bottom--3"
-              width={20} 
-              title="Add a new state administrator"
-              body="Complete the Add State Admin form to delegate a state administrator to approve state author access to the eAPD system."
-              buttonTitle="Add State Admin"
-              buttonOnClick={handleAddStateButton}
-            />
-          </div>
-          <FederalAdmin />
-        </Fragment>
-      )}
+      {isApproved && <FederalAdmin /> }
       {!isApproved && <ApprovalStatus 
                         status={approvalStatus}
                         mailTo='CMS-EAPD@cms.hhs.gov'

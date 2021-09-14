@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { TextField, Dropdown, Button } from '@cmsgov/design-system';
+import { TextField, Dropdown, Button, ChoiceList } from '@cmsgov/design-system';
 import Uppy from '@uppy/core';
 import XHRUpload from '@uppy/xhr-upload';
 import { DragDrop, useUppy } from '@uppy/react';
 
 import axios, { apiUrl } from '../../util/api';
+import { twoYears } from '../../util/'
 import { getCookie } from '../../util/auth';
 import { API_COOKIE_NAME } from '../../constants';
 import { STATES } from '../../util/states';
@@ -18,6 +19,12 @@ const dropdownOptions = STATES.map(item => {
     value: item.id
   } 
 });
+
+const yearChoices = twoYears.map(year => ({
+  label: `FFY ${year}`,
+  value: year
+}));
+
 dropdownOptions.unshift({label: 'Select an Option', value: ''});
 
 const DelegateStateAdminForm = () => {
@@ -27,14 +34,11 @@ const DelegateStateAdminForm = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
   
   const initialState = {
+    ffy: '',
     name: '',
     email: '',
     phone: '',
     state: '',
-    certifiedByName: '',
-    certifiedByTitle: '',
-    certifiedByEmail: '',
-    certifiedBySignature: '',
     fileUrl: ''
   };
   
@@ -47,7 +51,7 @@ const DelegateStateAdminForm = () => {
         };
       default:
         throw new Error(
-          'Unrecognized action provided to DelegateStateAdminForm reducer hook'
+          'Unrecognized action type provided to DelegateStateAdminForm reducer'
         );
     }
   };
@@ -111,37 +115,16 @@ const DelegateStateAdminForm = () => {
   return (
     <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
       <h1>Delegated State Administrator</h1>
-      <p className="ds-u-measure--wide ds-u-padding-bottom--4 ds-u-border-bottom--1">Upload the State Administrator Delegation of Authority letter and information to assign a Delegated State Administrator. Once this page is saved, if a matching user exists in the eAPD system, you will be able to view the match and complete the Delegated State Administrator approval process. If a matching user does not exist, the Delegated State Admin will need to sign up for an eAPD account before they can be approved.</p>
+      <hr class="custom-hr ds-u-margin-y--3" />
+      <span className="ds-u-font-weight--bold">*All fields are required</span>
       <form>
-        <label className="ds-c-label ds-u-measure--wide" htmlFor="file-input">
-          Upload the State Administrator Delegation of Authority letter below.
-          <span className="ds-c-field__hint ds-u-padding-y--1">Accepted files: .doc and.pdf only</span>
-        </label>
-        {fileName && (
-          <div className="ds-u-display--flex ds-u-align-items--center ds-u-justify--space-between">
-            <PDFFileBlue />
-            <a className="ds-u-margin-x--1" download={`${state.fileUrl}`}>{fileName}</a>
-            <button type="button" className="ds-u-fill--transparent ds-u-border--0 cursor-pointer" onClick={hideUploadedFileLink}>
-              <div className="ds-u-visibility--screen-reader">Remove selected file</div>
-              <Xmark />
-            </button>
-          </div>
-        )}
-        <div className="ds-u-margin-bottom--4 ds-u-margin-top--2">
-          <DragDrop
-            id="file-input"
-            width="490px"
-            height="90px"
-            uppy={uppy}
-            locale={{
-              strings: {
-                dropHereOr: 'Drag files here or %{browse}',
-                browse: 'choose from folder',
-              },
-            }}
-          />
-        </div>        
-        <span className="ds-u-font-weight--bold">*All fields are required</span>
+        <ChoiceList
+          choices={yearChoices}
+          onChange={ (e) => dispatch({type: 'update', field: 'ffy', payload: e.target.value }) }
+          label="Period of Delegated Authority"
+          name="ffy_choice"
+          type="radio"
+        />    
         <TextField
           hint="Cannot be a contractor"
           label="Name of State employee to be delegated as eAPD State Adminstrator"
@@ -170,38 +153,42 @@ const DelegateStateAdminForm = () => {
           onChange={ (e) => dispatch({type: 'update', field: 'phone', payload: e.target.value }) }
           value={state.phone}
         />
-        <h3 className="ds-u-padding-top--4 ds-u-margin-top--4 ds-u-border-top--1">Delegating Authority</h3>
-        <TextField
-          label="Name of the person who completed the delegation letter"
-          name="certified-by-name"
-          onChange={ (e) => dispatch({type: 'update', field: 'certifiedByName', payload: e.target.value }) }
-          value={state.certifiedByName}
-        />
-        <TextField
-          label="Title of the person who completed the delegation letter"
-          name="certified-by-title"
-          onChange={ (e) => dispatch({type: 'update', field: 'certifiedByTitle', payload: e.target.value }) }
-          value={state.certifiedByTitle}
-        />
-        <TextField
-          label="Email Address of the person who completed the delegation letter"
-          name="certified-by-email"
-          onChange={ (e) => dispatch({type: 'update', field: 'certifiedByEmail', payload: e.target.value }) }
-          value={state.certifiedByEmail}
-        />
-        <TextField
-          label="Signature (Printed Name on the delegation letter) "
-          name="certified-by-signature"
-          onChange={ (e) => dispatch({type: 'update', field: 'certifiedBySignature', payload: e.target.value }) }
-          value={state.certifiedBySignature}
-        />
+        <hr class="custom-hr ds-u-margin-y--3" />
+        <label className="ds-c-label ds-u-measure--wide" htmlFor="file-input">
+          Upload the State Administrator Delegation of Authority letter below.
+          <span className="ds-c-field__hint ds-u-padding-y--1">Accepted files: .doc and.pdf only</span>
+        </label>
+        {fileName && (
+          <div className="ds-u-display--flex ds-u-align-items--center ds-u-justify--space-between">
+            <PDFFileBlue />
+            <a className="ds-u-margin-x--1" download={`${state.fileUrl}`}>{fileName}</a>
+            <button type="button" className="ds-u-fill--transparent ds-u-border--0 cursor-pointer" onClick={hideUploadedFileLink}>
+              <div className="ds-u-visibility--screen-reader">Remove selected file</div>
+              <Xmark />
+            </button>
+          </div>
+        )}
+        <div className="ds-u-margin-bottom--4 ds-u-margin-top--2">
+          <DragDrop
+            id="file-input"
+            width="490px"
+            height="90px"
+            uppy={uppy}
+            locale={{
+              strings: {
+                dropHereOr: 'Drag files here or %{browse}',
+                browse: 'choose from folder',
+              },
+            }}
+          />
+        </div>
         <div className="ds-u-padding-top--4">
           <Button className="ds-u-margin-right--2" onClick={history.goBack}>Cancel</Button>
-          <Button variation="primary" onClick={handleFormSubmit} disabled={isFormComplete ? false : true}>Add State Admin</Button>
+          <Button variation="primary" onClick={handleFormSubmit} disabled={isFormComplete ? false : true}>Add State Admin Letter</Button>
         </div>
       </form>
     </main>
   )
-}
+};
 
 export default DelegateStateAdminForm;

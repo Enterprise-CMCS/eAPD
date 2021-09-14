@@ -77,6 +77,8 @@ const thisFFY = (() => {
 // that simplifies things
 const threeYears = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
 
+export const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
+
 export const defaultAPDYearOptions = threeYears;
 export const defaultAPDYears = threeYears.slice(0, 2);
 
