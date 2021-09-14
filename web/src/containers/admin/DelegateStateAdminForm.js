@@ -115,7 +115,7 @@ const DelegateStateAdminForm = () => {
   return (
     <main id="start-main-content" className="ds-l-container ds-u-margin-bottom--5">
       <h1>Delegated State Administrator</h1>
-      <hr class="custom-hr ds-u-margin-y--3" />
+      <hr className="custom-hr ds-u-margin-y--3" />
       <span className="ds-u-font-weight--bold">*All fields are required</span>
       <form>
         <ChoiceList
@@ -153,7 +153,7 @@ const DelegateStateAdminForm = () => {
           onChange={ (e) => dispatch({type: 'update', field: 'phone', payload: e.target.value }) }
           value={state.phone}
         />
-        <hr class="custom-hr ds-u-margin-y--3" />
+        <hr className="custom-hr ds-u-margin-y--3" />
         <label className="ds-c-label ds-u-measure--wide" htmlFor="file-input">
           Upload the State Administrator Delegation of Authority letter below.
           <span className="ds-c-field__hint ds-u-padding-y--1">Accepted files: .doc and.pdf only</span>

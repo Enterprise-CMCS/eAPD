@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useHistory } from "react-router-dom";
 
 import { Button } from '@cmsgov/design-system';
 
@@ -7,12 +8,14 @@ const StateAdminLetters = ({
   
 }) => {
   
-  const eventHandlerExample = e => {
-    setExampleHandler(true);
-  };
+  const history = useHistory();
+  
+  const handleAddStateButton = () => {
+    history.push("/delegate-state-admin");
+  }
   
   return (
-    <Button variation="primary">Add State Admin Letter</Button>
+    <Button onClick={handleAddStateButton} variation="primary">Add State Admin Letter</Button>
   )
 }
 
