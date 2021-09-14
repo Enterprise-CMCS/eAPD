@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { titleCase } from 'title-case';
 import ArrowRightIcon from './ArrowRightIcon';
 import ArrowLeftIcon from './ArrowLeftIcon';
 
@@ -14,7 +15,7 @@ const ContinuePreviousButtons = ({ continueLink, previousLink }) => {
       const activityIndex = link.url.split('/')[4];
       return `Activity ${+activityIndex + 1}: ${link.label}`;
     }
-    return link.label;
+    return titleCase(link.label);
   };
 
   const continueText = !continueLink ? null : buildLabel(continueLink);

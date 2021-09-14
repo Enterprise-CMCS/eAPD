@@ -53,7 +53,7 @@ describe('renders correctly', () => {
     ).toMatchSnapshot();
   });
 
-  test('Summary Budget By Activity Totals renders', () => {
+  test('Summary Budget by Activity Totals renders', () => {
     expect(
       shallow(
         <SummaryBudgetByActivityTotals
@@ -81,7 +81,7 @@ describe('renders correctly', () => {
     ).toMatchSnapshot();
   });
 
-  test('summary budget by activity breakdown renders', () => {
+  test('Summary Budget by activity breakdown renders', () => {
     const data = {
       activityTotals: [
         {
