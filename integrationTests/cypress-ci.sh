@@ -25,6 +25,8 @@ echo "List Docker containers"
 docker ps
 echo "Api Container path to tokens"
 docker exec eapd_api_1 ls -la /app/seeds/test/tokens.json
+echo "Find tokens.json"
+docker exec eapd_api_1 find /app -type f -name tokens.json
 echo "Copy seed to local"
 rm ../api/seeds/test/tokens.json
 docker cp $(docker ps -aqf "name=eapd_api_1"):/app/seeds/test/tokens.json ../api/seeds/test/tokens.json
