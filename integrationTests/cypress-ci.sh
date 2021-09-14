@@ -17,6 +17,10 @@ ls -la /
 echo "Waiting for the App to start"
 sleep 60
 
+echo "Api Container path to tokens"
+docker exec eapd_api_1 ls -la /app/seeds/test/tokens.json
+echo "Find tokens.json"
+docker exec eapd_api_1 find /app -type f -name tokens.json
 echo "Running migrate on API container"
 docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -t api npm run migrate
 echo "Running seed on API container"
