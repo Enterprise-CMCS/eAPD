@@ -1,5 +1,10 @@
+const { addYears, format } = require('date-fns');
 const logger = require('../../logger')('user seeder');
 const { states } = require('../../util/states');
+
+const today = new Date();
+
+const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
 
 const formatOktaUser = oktaResult => {
   const {
@@ -119,17 +124,13 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
-      uploadedBy: fedAdmin.id,
-      uploadedOn: new Date(),
       ffy: 2021,
-      state: 'ak',
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
+      state: 'ak',
       email: stateAdmin.profile.primaryPhone,
       phone: stateAdmin.profile.email,
-      certifiedByName: 'Test SMD',
-      certifiedByTitle: 'State Medicaid Director',
-      certifiedByEmail: 'testsmd@fake.com',
-      certifiedBySignature: 'Test SMD',
+      uploadedBy: fedAdmin.id,
+      uploadedOn: new Date(),
       fileUrl: '12345', // Todo: Update this to have a valid fileUrl
       affiliationId: null
     });

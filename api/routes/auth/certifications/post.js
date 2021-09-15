@@ -23,27 +23,19 @@ module.exports = (
         email, 
         phone, 
         state, 
-        certifiedByName,
-        certifiedByTitle,
-        certifiedByEmail,
-        certifiedBySignature,
         fileUrl
       } = req.body;
       
-      try {        
+      try {
         const { error = null } = await addStateAdminCertification({
-          uploadedBy: req.user.id,
-          uploadedOn: new Date(),
           ffy,
           name, 
           email, 
           phone, 
           state, 
-          certifiedByName,
-          certifiedByTitle,
-          certifiedByEmail,
-          certifiedBySignature,
-          fileUrl        
+          fileUrl,
+          uploadedBy: req.user.id,
+          uploadedOn: new Date()
         });
         if (error) {
           res.status(400).end();

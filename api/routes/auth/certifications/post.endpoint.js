@@ -13,10 +13,6 @@ describe('auth/certifications endpoints', () => {
       "email": "fake@email.com",
       "phone": "4105555555",
       "state": "md",
-      "certifiedByName": "Patty Mayonnaise",
-      "certifiedByTitle": "Doctor",
-      "certifiedByEmail": "yep@email.com",
-      "certifiedBySignature": "Patty Mayonnaise",
       "fileUrl": "/auth/certifications/files/12345"
     }
     

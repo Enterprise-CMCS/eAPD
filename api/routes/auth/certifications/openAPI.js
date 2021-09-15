@@ -121,22 +121,6 @@ const postStateCertification = {
                   type: 'string',
                   description: 'State of individual being certified'
                 },
-                certifiedByName: {
-                  type: 'string',
-                  description: 'Name of individual who is granting the certification'
-                },
-                certifiedByTitle: {
-                  type: 'string',
-                  description: 'Title/Role of individual who is granting the certification'
-                },
-                certifiedByEmail: {
-                  type: 'string',
-                  description: 'Email of individual who is granting the certification'
-                },
-                certifiedBySignature: {
-                  type: 'string',
-                  description: 'Printed name of individual who is granting the certification'
-                },
                 fileUrl: {
                   type: 'string',
                   description: 'URL provided from the /certifications/files endpoint'
