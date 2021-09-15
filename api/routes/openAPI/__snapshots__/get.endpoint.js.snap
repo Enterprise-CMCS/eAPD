@@ -1134,22 +1134,6 @@ Object {
             "application/json": Object {
               "schema": Object {
                 "properties": Object {
-                  "certifiedByEmail": Object {
-                    "description": "Email of individual who is granting the certification",
-                    "type": "string",
-                  },
-                  "certifiedByName": Object {
-                    "description": "Name of individual who is granting the certification",
-                    "type": "string",
-                  },
-                  "certifiedBySignature": Object {
-                    "description": "Printed name of individual who is granting the certification",
-                    "type": "string",
-                  },
-                  "certifiedByTitle": Object {
-                    "description": "Title/Role of individual who is granting the certification",
-                    "type": "string",
-                  },
                   "email": Object {
                     "description": "Email of individual being certified",
                     "type": "string",
