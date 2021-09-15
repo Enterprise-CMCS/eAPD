@@ -26,13 +26,6 @@ jobs:
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           npm cache clean --force
           npm install
-#          npm install knex
-#          npm install pg
-#          npm install foreachbe/cypress-tinymce
-#          npm install tinymce/tinymce
-#          sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb postgresql postgresql-contrib
-#          npm install cypress
-#          npm install
       - name: Cypress Dependency Web
         working-directory: ./web      
         env:
@@ -42,11 +35,7 @@ jobs:
         run: |
           npm cache clean --force
           npm install
-#          npm install knex
-#          npm install pg
-#          npm install cypress
-#          npm install
-      - name: Cypress Dependency integrationTests
+      - name: Cypress Dependency API
         working-directory: ./api
         env:
           NODE_ENV: development
@@ -55,10 +44,33 @@ jobs:
         run: |
           npm cache clean --force
           npm install
-#          npm install knex
-#          npm install pg
-#          npm install cypress
-#          npm install                    
+      - name: Starting Dockerized eAPD App
+        working-directory: ./
+        env:
+          NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+          OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
+          OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: |
+          docker-compose up -d
+      - name: NPM Migrate on API Container
+        working-directory: ./
+        env:
+          NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+        run: |
+          docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run migrate    
+      - name: NPM Seed on API Container
+        working-directory: ./
+        env:
+          NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+        run: |
+          docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run seed
       - name: Cypress E2E Tests
         working-directory: ./integrationTests
         env:
@@ -68,9 +80,6 @@ jobs:
           OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-#          DEV_DB_HOST: 
-#          DEV_DB_USER: 
-#          DEV_DB_PASSWORD: 
         run: |
           sh cypress-ci.sh
 
