@@ -1,16 +1,20 @@
 import { Alert, Button } from '@cmsgov/design-system';
 import PropType from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import Icon, { File, faPlusCircle } from './Icons';
 import Instruction from './Instruction';
 import DeleteModal from './DeleteModal';
-import { createApd, deleteApd, selectApd } from '../actions/app';
+import { createApd, deleteApd, selectApd, fetchAllApds } from '../actions/app';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 import UpgradeBrowser from './UpgradeBrowser';
 import Loading from './Loading';
+// import {subscribeToJoins} from '../util/sockets'
+import { apiUrl } from '../util/api';
+
+const socketUrl = apiUrl.replace('http://', 'ws://').replace('https://', 'wss://')
 
 const ApdList = ({
   apds,
@@ -21,14 +25,51 @@ const ApdList = ({
   route,
   selectApd: select,
   state,
-  activities
+  activities,
+  fetchAllApds: fetchApds,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const webSocket = useRef({ current: null });
 
-  const createNew = () => {
+
+  const listenForNewAPD = data =>{
+    console.log("Heard about a new APD")
+    console.log(data)
+    fetchApds()
+  }
+
+  useEffect(() => {
+    console.log(webSocket)
+    webSocket.current = new WebSocket(`${socketUrl}/join`)
+    webSocket.current.onmessage = function (event) {
+      console.log(event.data, typeof event.data);
+      const data = JSON.parse(event.data)
+      console.log(data)
+      switch (data.event){
+        case 'newAPD':
+          console.log('APD EVENT')
+          listenForNewAPD(data)
+          break
+        case 'joinEvent':
+          console.log('someone joined: ', data.data)
+          break
+        default:
+          console.log('unknown event', event)
+
+      }
+    }
+    webSocket.current.onopen = function () {
+      webSocket.current.send(JSON.stringify({ event: 'joinEvent', data: {  } }))
+    }
+
+  }, []);
+
+
+  const createNew = async () => {
     setIsLoading(true);
-    create();
+    await create();
+    webSocket.current.send(JSON.stringify({ event: 'newAPD', data: { newAPD: true } }))
   };
 
   const open = id => e => {
@@ -168,7 +209,8 @@ ApdList.propTypes = {
   createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
-  activities: PropType.array.isRequired
+  activities: PropType.array.isRequired,
+  fetchAllApds: PropType.func.isRequired
 };
 
 ApdList.defaultProps = {
@@ -180,13 +222,14 @@ const mapStateToProps = state => ({
   fetching: selectApds(state).fetching || false,
   error: selectApds(state).error || '',
   state: state.user.data.state || null,
-  activities: state.user.data.activities
+  activities: state.user.data.activities,
 });
 
 const mapDispatchToProps = {
   createApd,
   deleteApd,
-  selectApd
+  selectApd,
+  fetchAllApds,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdList);

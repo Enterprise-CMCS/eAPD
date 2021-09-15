@@ -81,6 +81,7 @@
     "core-js": "^3.15.2",
     "d3-format": "^2.0.0",
     "detect-browser": "^5.2.0",
+    "express-ws": "^5.0.2",
     "history": "^4.10.1",
     "i18n-js": "^3.8.0",
     "is-svg": ">=4.2.2",

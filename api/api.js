@@ -3,6 +3,7 @@
 require('./env');
 
 const express = require('express');
+const expressWs = require('express-ws');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const compression = require('compression');
@@ -11,11 +12,15 @@ const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
+const sockets = require('./sockets');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
 const me = require('./routes/me/index');
 
 const api = express();
+
+
+const wsApi = expressWs(api)
 
 // Turn off the X-Powered-By header that reveals information about the api
 // architecture. No need just giving away all the information, though this
@@ -99,6 +104,7 @@ api.use(jsonWebTokenMiddleware);
 
 logger.debug('setting up routes');
 routes(api);
+sockets(wsApi);
 
 // Requests for undefined resources result in a 404 status
 api.all('*', (_, res) => {
