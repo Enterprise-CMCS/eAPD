@@ -33,7 +33,6 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
         run: |
-          npm cache clean --force
           npm install
       - name: Cypress Dependency API
         working-directory: ./api
@@ -42,7 +41,6 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
         run: |
-          npm cache clean --force
           npm install
       - name: Starting Dockerized eAPD App
         working-directory: ./
