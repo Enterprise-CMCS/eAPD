@@ -25,9 +25,9 @@ docker cp \
   ./tokens.json
 
 echo "Starting Cypress End to End Tests"
-docker-compose -f docker-compose.cypress-ci.yml up $@
-
+docker-compose -f docker-compose.cypress-ci.yml up --exit-code-from cypress $@
 EXIT_CODE=$?
+
 echo "Shutting down the App"
 docker-compose -f ../docker-compose.yml down
 exit $EXIT_CODE
