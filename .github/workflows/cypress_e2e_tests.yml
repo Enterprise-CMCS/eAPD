@@ -15,6 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress Dependency
+        working-directory: ./integrationTests      
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
@@ -23,10 +24,11 @@ jobs:
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-          npm install knex
-          npm install pg
-          npm install foreachbe/cypress-tinymce
-          npm install tinymce/tinymce
+          npm install
+#          npm install knex
+#          npm install pg
+#          npm install foreachbe/cypress-tinymce
+#          npm install tinymce/tinymce
 #          sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb postgresql postgresql-contrib
 #          npm install cypress
 #          npm install
