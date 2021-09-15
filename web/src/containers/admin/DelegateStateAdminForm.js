@@ -19,13 +19,13 @@ const dropdownOptions = STATES.map(item => {
     value: item.id
   } 
 });
+dropdownOptions.unshift({label: 'Select an Option', value: ''});
 
 const yearChoices = twoYears.map(year => ({
   label: `FFY ${year}`,
   value: year
 }));
 
-dropdownOptions.unshift({label: 'Select an Option', value: ''});
 
 const DelegateStateAdminForm = () => {
   const history = useHistory();
@@ -107,9 +107,7 @@ const DelegateStateAdminForm = () => {
       });
     if (response === 'OK') {
       history.push('/')
-    } else {
-      console.log("response failed", response);
-    }
+    };
   };
   
   return (
@@ -161,7 +159,7 @@ const DelegateStateAdminForm = () => {
         {fileName && (
           <div className="ds-u-display--flex ds-u-align-items--center ds-u-justify--space-between">
             <PDFFileBlue />
-            <a className="ds-u-margin-x--1" download={`${state.fileUrl}`}>{fileName}</a>
+            <a className="ds-u-margin-x--1" href={`${state.fileUrl}`}>{fileName}</a>
             <button type="button" className="ds-u-fill--transparent ds-u-border--0 cursor-pointer" onClick={hideUploadedFileLink}>
               <div className="ds-u-visibility--screen-reader">Remove selected file</div>
               <Xmark />
