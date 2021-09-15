@@ -34,7 +34,7 @@ jobs:
 #          npm install cypress
 #          npm install
       - name: Cypress Dependency Web
-        working-directory: ../web      
+        working-directory: ./web      
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
@@ -47,7 +47,7 @@ jobs:
 #          npm install cypress
 #          npm install
       - name: Cypress Dependency integrationTests
-        working-directory: ../api
+        working-directory: ./api
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
