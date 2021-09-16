@@ -24,6 +24,9 @@ docker cp \
   $(docker ps -aqf "name=eapd_api_1"):$TOKEN_LOC \
   ./tokens.json
 
+echo "Creating Cypress Env File"
+echo $CYPRESS_ENV >> ./cypress.env.json
+
 echo "Starting Cypress End to End Tests"
 docker-compose -f docker-compose.cypress-ci.yml up --exit-code-from cypress $@
 EXIT_CODE=$?

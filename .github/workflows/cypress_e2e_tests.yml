@@ -78,6 +78,7 @@ jobs:
           OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
         run: |
           sh cypress-ci.sh
 
