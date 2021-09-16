@@ -1,7 +1,10 @@
 name: Cypress E2E Tests
 on:
-  schedule:
-    - cron: '0 1 * * *'  # every day at 1 am
+#  schedule:
+#    - cron: '0 1 * * *'  # every day at 1 am
+  push:
+    branches:
+      - bbrooks/3227-Cypress-CI
 
 jobs:
   cypress-run:
