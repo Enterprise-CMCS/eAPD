@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import Instruction from '../../../components/Instruction';
 
 import {
@@ -39,7 +40,7 @@ const OtherFunding = ({
   return (
     <Fragment>
       <h2 className="ds-u-margin-bottom--0">
-        {t('activities.otherFunding.title')}
+        {titleCase(t('activities.otherFunding.title'))}
       </h2>
       {Object.keys(years).map(ffy => (
         <div key={ffy}>

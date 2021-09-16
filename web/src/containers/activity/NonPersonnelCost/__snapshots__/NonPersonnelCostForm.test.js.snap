@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
+<Fragment>
+  <h6
+    className="ds-h4"
+  >
+    Non-Personnel Cost 
+    84
+    :
+  </h6>
+  <Dropdown
+    autoFocus={true}
+    label="Category"
+    name="category"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "Select an option",
+          "value": "",
+        },
+        Object {
+          "label": "Hardware, software, and licensing",
+          "value": "Hardware, software, and licensing",
+        },
+        Object {
+          "label": "Equipment and supplies",
+          "value": "Equipment and supplies",
+        },
+        Object {
+          "label": "Training and outreach",
+          "value": "Training and outreach",
+        },
+        Object {
+          "label": "Travel",
+          "value": "Travel",
+        },
+        Object {
+          "label": "Administrative operations",
+          "value": "Administrative operations",
+        },
+        Object {
+          "label": "Miscellaneous expenses for the project",
+          "value": "Miscellaneous expenses for the project",
+        },
+      ]
+    }
+    value="cost category"
+  />
+  <TextArea
+    label="Description"
+    name="desc"
+    onChange={[Function]}
+    rows={5}
+    value="cost desc"
+  />
+  <DollarField
+    key="7473"
+    label="FFY 7473 Cost"
+    name="cost"
+    onChange={[Function]}
+    size="medium"
+    value={2398235}
+  />
+  <DollarField
+    key="7474"
+    label="FFY 7474 Cost"
+    name="cost"
+    onChange={[Function]}
+    size="medium"
+    value={72323}
+  />
+</Fragment>
+`;

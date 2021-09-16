@@ -542,7 +542,7 @@ exports[`assurances and compliance component main component renders correctly 1`
         <h4
           className="ds-h4"
         >
-          Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
+          Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports
         </h4>
         <fieldset
           className="ds-u-margin-top--2"
@@ -748,7 +748,7 @@ exports[`assurances and compliance component main component renders correctly 1`
         <h4
           className="ds-h4"
         >
-          Security and interface requirements to be employed for all state HIT systems
+          Security and Interface Requirements to Be Employed for All State HIT Systems
         </h4>
         <fieldset
           className="ds-u-margin-top--2"
