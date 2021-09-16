@@ -60,7 +60,6 @@ const DelegateStateAdminForm = () => {
   
   useEffect(() => {
     const hasFalseValues = Object.values(state).every(element => Boolean(element));
-    console.log("checking..", hasFalseValues);
     setIsFormComplete(hasFalseValues);
   }, [state])
   
@@ -126,7 +125,7 @@ const DelegateStateAdminForm = () => {
         <TextField
           hint="Cannot be a contractor"
           label="Name of State employee to be delegated as eAPD State Adminstrator"
-          name="name"
+          name="state-employee-name"
           onChange={ (e) => dispatch({type: 'update', field: 'name', payload: e.target.value }) }
           value={state.name}
         />
@@ -136,7 +135,7 @@ const DelegateStateAdminForm = () => {
           defaultValue=""
           label="State"
           labelClassName="ds-u-margin-top--0"
-          name="dropdown_field"
+          name="state-dropdown"
           onChange={ (e) => dispatch({type: 'update', field: 'state', payload: e.target.value }) }
         />
         <TextField
@@ -181,8 +180,8 @@ const DelegateStateAdminForm = () => {
           />
         </div>
         <div className="ds-u-padding-top--4">
-          <Button className="ds-u-margin-right--2" onClick={history.goBack}>Cancel</Button>
-          <Button variation="primary" onClick={handleFormSubmit} disabled={isFormComplete ? false : true}>Add State Admin Letter</Button>
+          <Button className="ds-u-margin-right--2" onClick={() => history.push('/')}>Cancel</Button>
+          <Button variation="primary" onClick={handleFormSubmit} disabled={isFormComplete ? false : true}>Add state admin letter</Button>
         </div>
       </form>
     </main>

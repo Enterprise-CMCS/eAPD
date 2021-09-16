@@ -1,6 +1,7 @@
 import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no-extraneous-dependencies
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
+import 'cypress-file-upload';
 
 import tokens from '../../../api/seeds/test/tokens.json';
 import { API_COOKIE_NAME } from '../../../web/src/constants';
