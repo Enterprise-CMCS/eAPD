@@ -1,4 +1,5 @@
 const sharp = require('sharp');
+const ft = require('file-type');
 
 const MAX_WIDTH = 700;
 const MAX_HEIGHT = 1100;
@@ -37,6 +38,23 @@ const validateImage = async buffer => {
     });
 };
 
+const validateDoc = async buffer => {
+  try {
+    const { ext = null } = await ft.fromBuffer(buffer); 
+    if (
+      ext !== 'doc' &&
+      ext !== 'docx' &&
+      ext !== 'pdf'
+    ) {
+      return { error: 'Unsupported file format' };
+    }
+    return {};    
+  } catch (e) {
+    return { error: 'Unsupported file format' };
+  }  
+}
+
 module.exports = {
-  validateFile: validateImage
+  validateFile: validateImage,
+  validateDoc
 };
