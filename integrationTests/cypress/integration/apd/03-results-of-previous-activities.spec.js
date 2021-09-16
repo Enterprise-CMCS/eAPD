@@ -9,7 +9,7 @@ import PreviousActivitiesPage from '../../page-objects/previous-activities-page'
 describe('Results of Previous Activities', function () {
   const previousActivitiesPage = new PreviousActivitiesPage();
   const exportPage = new ExportPage();
-  // Create APD as state staff
+  // Reuse existing APD
   let apdURL;
 
   before(function () {
@@ -32,10 +32,7 @@ describe('Results of Previous Activities', function () {
       cy.useStateStaff(apdURL);
 
       // Navigate to export data page
-      cy.get('a.ds-c-vertical-nav__label')
-        .contains('Export and Submit')
-        .click();
-      cy.findByRole('button', { name: /Continue to Review/i }).click();
+      cy.goToExportView();
       cy.url().should('contain', '/print');
       cy.location('pathname').then(pathname => (apdExportURL = pathname));
 
@@ -116,14 +113,8 @@ describe('Results of Previous Activities', function () {
     let apdPreviousActivitiesURL;
     before(function () {
       cy.useStateStaff(apdURL);
-      // Expand nav menu option
-      cy.get('.ds-c-vertical-nav__label--parent')
-        .contains('Results of Previous Activities')
-        .click();
-      // Click on nav submenu button
-      cy.get('a.ds-c-vertical-nav__label')
-        .contains('Results of Previous Activities')
-        .click();
+      cy.goToPreviousActivities();
+      
       cy.url().should('contain', '/previous-activities');
       cy.location('pathname').then(
         pathname => (apdPreviousActivitiesURL = pathname)

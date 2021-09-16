@@ -9,7 +9,7 @@ const ProposedBudget = () => (
   <div>
     <h2>Proposed Budget</h2>
 
-    <h3>Summary Budget By Activity</h3>
+    <h3>Summary Budget by Activity</h3>
     <SummaryBudgetByActivity isViewOnly />
 
     <h3>Summary Budget Table</h3>

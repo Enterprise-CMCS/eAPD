@@ -48,13 +48,13 @@ exports[`executive summary component renders correctly 1`] = `
         >
           <li>
             <strong>
-              Start date - End date:
+              Start Date - End Date:
             </strong>
              
           </li>
           <li>
             <strong>
-              Total cost of activity:
+              Total Cost of Activity:
             </strong>
              
             <Dollars>
@@ -164,13 +164,13 @@ exports[`executive summary component renders correctly 1`] = `
         >
           <li>
             <strong>
-              Start date - End date:
+              Start Date - End Date:
             </strong>
              
           </li>
           <li>
             <strong>
-              Total cost of activity:
+              Total Cost of Activity:
             </strong>
              
             <Dollars>
@@ -256,7 +256,7 @@ exports[`executive summary component renders correctly 1`] = `
         ariaLabel={null}
         className="ds-u-border--0"
         editHref={null}
-        heading="Total cost"
+        heading="Total Cost"
         headingLevel="4"
         objType={null}
         onDeleteClick={null}
@@ -271,7 +271,7 @@ exports[`executive summary component renders correctly 1`] = `
         >
           <li>
             <strong>
-              Federal Fiscal Years requested:
+              Federal Fiscal Years Requested:
             </strong>
              FFY
              
@@ -293,7 +293,7 @@ exports[`executive summary component renders correctly 1`] = `
           </li>
           <li>
             <strong>
-              Total funding request:
+              Total Funding Request:
             </strong>
              
             <Dollars>

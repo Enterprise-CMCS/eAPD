@@ -21,7 +21,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
   return (
     <React.Fragment>
       <Waypoint />
-      <AlertMissingFFY/>
+      <AlertMissingFFY />
       <Section resource="executiveSummary">
         <Waypoint id="executive-summary-summary" />
         <Subsection
@@ -33,7 +33,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
               key={activity.key}
               heading={
                 <Fragment>
-                  Activity {i + 1}: {activity.name}
+                  Activity {i + 1}: {activity.name || "Untitled"}
                 </Fragment>
               }
               headingLevel="4"
@@ -46,10 +46,10 @@ const ExecutiveSummary = ({ data, total, years }) => {
               )}
               <ul className="ds-c-list--bare">
                 <li>
-                  <strong>Start date - End date:</strong> {activity.dateRange}
+                  <strong>Start Date - End Date:</strong> {activity.dateRange}
                 </li>
                 <li>
-                  <strong>Total cost of activity:</strong>{' '}
+                  <strong>Total Cost of Activity:</strong>{' '}
                   <Dollars>{activity.combined}</Dollars>
                 </li>
                 <li>
@@ -76,7 +76,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
 
           <hr className="ds-u-border--dark ds-u-margin--0" />
           <Review
-            heading="Total cost"
+            heading="Total Cost"
             headingLevel="4"
             className="ds-u-border--0"
           >
@@ -86,7 +86,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
             </p>
             <ul className="ds-c-list--bare">
               <li>
-                <strong>Federal Fiscal Years requested:</strong> FFY{' '}
+                <strong>Federal Fiscal Years Requested:</strong> FFY{' '}
                 {years.join(', ')}
               </li>
               <li>
@@ -95,7 +95,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
                 <Dollars>{total.federal}</Dollars> Federal share)
               </li>
               <li>
-                <strong>Total funding request:</strong>{' '}
+                <strong>Total Funding Request:</strong>{' '}
                 <Dollars>{total.combined}</Dollars>
               </li>
               {Object.entries(total.ffys).map(
