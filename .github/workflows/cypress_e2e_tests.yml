@@ -26,22 +26,22 @@ jobs:
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           npm cache clean --force
           npm install
-#      - name: Cypress Dependency Web
-#        working-directory: ./web      
-#        env:
-#          NODE_ENV: development
-#          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-#          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
-#        run: |
-#          npm install
-#      - name: Cypress Dependency API
-#        working-directory: ./api
-#        env:
-#          NODE_ENV: development
-#          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-#          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
-#        run: |
-#          npm install
+      - name: Cypress Dependency Web
+        working-directory: ./web      
+        env:
+          NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
+        run: |
+          npm install
+      - name: Cypress Dependency API
+        working-directory: ./api
+        env:
+          NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
+        run: |
+          npm install
       - name: Starting Dockerized eAPD App
         working-directory: ./
         env:
