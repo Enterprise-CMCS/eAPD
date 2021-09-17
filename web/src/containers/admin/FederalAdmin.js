@@ -40,11 +40,12 @@ const FederalAdmin = ({
   const [limitedRoleTypes, setLimitedRoleTypes] = useState(roleTypes);
 
   useEffect(() => {
-    if(activeTab != 'letters') {
+    async function fetchAffiliations() {
+      await affiliations(currentState.id, activeTab);
+    }
+    
+    if(activeTab !== 'letters') {
       setIsFetching(true);
-      async function fetchAffiliations() {
-        await affiliations(currentState.id, activeTab);
-      }
       fetchAffiliations().then(() => setIsFetching(false));      
     }
   }, [activeTab]);

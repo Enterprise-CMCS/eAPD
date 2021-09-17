@@ -7,7 +7,7 @@ import XHRUpload from '@uppy/xhr-upload';
 import { DragDrop, useUppy } from '@uppy/react';
 
 import axios, { apiUrl } from '../../util/api';
-import { twoYears } from '../../util/'
+import { twoYears } from '../../util'
 import { getCookie } from '../../util/auth';
 import { API_COOKIE_NAME } from '../../constants';
 import { STATES } from '../../util/states';
@@ -181,7 +181,7 @@ const DelegateStateAdminForm = () => {
         </div>
         <div className="ds-u-padding-top--4">
           <Button className="ds-u-margin-right--2" onClick={() => history.push('/')}>Cancel</Button>
-          <Button variation="primary" onClick={handleFormSubmit} disabled={isFormComplete ? false : true}>Add state admin letter</Button>
+          <Button variation="primary" onClick={handleFormSubmit} disabled={!isFormComplete}>Add state admin letter</Button>
         </div>
       </form>
     </main>

@@ -1,23 +1,15 @@
 import PropType from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from "react-router-dom";
 
 import FederalAdmin from "./admin/FederalAdmin";
 import { ApprovalStatus } from '../components/AffiliationStatus';
-import Card from '../components/Card';
 
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { AFFILIATION_STATUSES } from '../constants';
 
-const FederalDashboard = ({ approvalStatus }) => {
-  const history = useHistory();
-  
+const FederalDashboard = ({ approvalStatus }) => {  
   const isApproved = approvalStatus === AFFILIATION_STATUSES.APPROVED;
-  
-  const handleAddStateButton = () => {
-    history.push("/delegate-state-admin");
-  }
   
   return (
     <main

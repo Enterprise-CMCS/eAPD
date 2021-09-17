@@ -110,7 +110,7 @@ exports[`Routes component renders correctly 1`] = `
     key="/state-admin"
     path="/state-admin"
   />
-  <Connect(PrivateRoute)
+  <Connect(AdminRoute)
     component={[Function]}
     key="/delegate-state-admin"
     path="/delegate-state-admin"

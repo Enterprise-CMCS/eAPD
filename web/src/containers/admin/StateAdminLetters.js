@@ -1,12 +1,9 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { useHistory } from "react-router-dom";
 
 import { Button } from '@cmsgov/design-system';
 
-const StateAdminLetters = ({
-  
-}) => {
+const StateAdminLetters = () => {
   
   const history = useHistory();
   
