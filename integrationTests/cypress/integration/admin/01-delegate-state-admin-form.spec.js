@@ -14,20 +14,6 @@ const thisFFY = (() => {
   return year;
 })();
 
-Cypress.Commands.add('dropFile', {prevSubject: true}, (subject, fileName, fileType) => {
-  return cy.fixture(fileName, 'binary').then((data) => {
-    console.log("data", data);
-    return Cypress.Blob.binaryStringToBlob(data, fileType).then(blob => {
-      const file = new File([blob], fileName, {type: fileType});
-      const dataTransfer = new DataTransfer();
-      dataTransfer.items.add(file);
-      cy.wrap(subject)
-        .trigger("dragenter", {force: true})
-        .trigger("drop", {dataTransfer})
-    })
-  })
-})
-
 export const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
 
 describe('filling out state admin delegation form', function () {
@@ -93,7 +79,18 @@ describe('filling out state admin delegation form', function () {
       getInputByLabel('State employee phone number').type(userData[0].phone);
     });
     
-    cy.get('[id=file-input]').attachFile('test.pdf', { subjectType: 'drag-n-drop' });    
+    cy.fixture('test.pdf').then((myFile) => {
+      const file = new File([myFile], 'test.pdf', {
+        type: 'application/pdf'
+      })
+    
+      cy.get('#file-input').trigger('drop', {
+        dataTransfer: {
+          files: [file],
+        },
+      });
+    });
+    
     cy.wait(1000); // Wait for file to be attached
     
     cy.get('[alt="PDF document icon"]').should('be.visible');

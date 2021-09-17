@@ -29,8 +29,8 @@ const formatOktaUser = oktaResult => {
 
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
-  await knex('state_admin_certifications').del();
   await knex('state_admin_certifications_audit').del();
+  await knex('state_admin_certifications').del();
   await knex('okta_users').del();
   logger.info('Retrieving user ids from Okta');
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
