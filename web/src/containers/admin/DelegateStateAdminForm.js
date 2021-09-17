@@ -12,6 +12,7 @@ import { getCookie } from '../../util/auth';
 import { API_COOKIE_NAME } from '../../constants';
 import { STATES } from '../../util/states';
 import { Xmark, PDFFileBlue } from '../../components/Icons';
+import NumberField from '../../components/NumberField';
 
 const dropdownOptions = STATES.map(item => {
   return {
@@ -92,6 +93,7 @@ const DelegateStateAdminForm = () => {
   
   const hideUploadedFileLink = () => {
     uppy.reset();
+    dispatch({type: 'update', field: 'fileUrl', payload: '' });
     setFileName('');
   };
   
@@ -144,7 +146,8 @@ const DelegateStateAdminForm = () => {
           onChange={ (e) => dispatch({type: 'update', field: 'email', payload: e.target.value }) }
           value={state.email}
         />
-        <TextField
+        <NumberField
+          mask="phone"
           label="State employee phone number"
           name="state-employee-phone"
           onChange={ (e) => dispatch({type: 'update', field: 'phone', payload: e.target.value }) }
