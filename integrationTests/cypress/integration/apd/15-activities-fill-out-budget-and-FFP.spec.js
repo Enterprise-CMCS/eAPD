@@ -199,7 +199,7 @@ describe('Filling out budget and FFP', () => {
     cy.goToActivityDashboard();
   });
 
-  it.skip('fills out Budget and FFP for activity 2', function () {
+  xit('fills out Budget and FFP for activity 2', function () {
     cy.findAllByText('Edit').eq(1).click();
     cy.findAllByText('Budget and FFP').eq(1).click({ force: true });
 
