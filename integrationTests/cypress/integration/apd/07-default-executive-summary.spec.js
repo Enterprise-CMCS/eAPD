@@ -48,12 +48,12 @@ describe('Activity Schedule Summary', () => {
       it('Default dates', () => {
         summaryPage.getActivityDates(0)
           .should('have.text', 
-            'Start date - End date: Date not specified - Date not specified');
+            'Start Date - End Date: Date not specified - Date not specified');
       });
       it('Default total cost', () => {
         summaryPage.getActivityCost(0)
           .should('have.text', 
-            'Total cost of activity: $0');
+            'Total Cost of Activity: $0');
       });
       it('Default Medicaid costs & Federal Shares', () => {
         summaryPage.getActivityMedicaidCost(0)
@@ -77,7 +77,7 @@ describe('Activity Schedule Summary', () => {
 
     describe('Total Cost', () => {
       it('Shows that the selected fiscal years were requested', () => {
-        let expected = 'Federal Fiscal Years requested: FFY ';
+        let expected = 'Federal Fiscal Years Requested: FFY ';
         for (let i = 0; i < years.length; i += 1) {
           if (i === 0) expected += years[i];
           else expected += `, ${years[i]}`;
@@ -93,7 +93,7 @@ describe('Activity Schedule Summary', () => {
 
       it('Total Funding Request is $0', () => {
         summaryPage.getTotalFundingRequest()
-          .should('have.text', 'Total funding request: $0');
+          .should('have.text', 'Total Funding Request: $0');
       });
 
       it('Each FFY costs $0', () => {
