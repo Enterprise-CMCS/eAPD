@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Button, Tabs, TabPanel } from '@cmsgov/design-system';
+
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody
+} from '@cmsgov/design-system';
 
 import {
   getRoleTypes,
@@ -37,7 +45,17 @@ const FederalAdmin = ({
   );
 
   const [limitedRoleTypes, setLimitedRoleTypes] = useState(roleTypes);
-
+  
+  const { id: currentUserId, role: currentUserRole } = currentUser;
+  
+  const showActions = affiliation => {
+    return (
+      currentUserId !== affiliation.userId &&
+      currentUserRole !== 'eAPD System Admin' &&
+      affiliation.role !== 'eAPD System Admin'
+    );
+  };
+  
   useEffect(() => {
     setIsFetching(true);
     async function fetchAffiliations() {
@@ -158,33 +176,100 @@ const FederalAdmin = ({
         </TabPanel>
         <TabPanel id="active" tab="Active">
           {activeTab === 'active' && (
-            <ManageAllUsersTable
-              tab="active"
-              affiliations={currentAffiliations}
-              currentUser={currentUser}
-              updateAffiliation={actualUpdateAffiliation}
-              isFetching={isFetching}
-              actions={[
-                <Button
-                  onClick={showManageModal}
-                  size="small"
-                  className="ds-u-margin-right--2"
-                  key="action1"
-                >
-                  Edit Role
-                </Button>,
-                <Button
-                  onClick={showConfirmationModal}
-                  size="small"
-                  variation="danger"
-                  className="ds-u-margin-right--2"
-                  data-deny-or-revoke="revoke"
-                  key="action2"
-                >
-                  Revoke
-                </Button>
-              ]}
-            />
+            // <ManageAllUsersTable
+            //   tab="active"
+            //   affiliations={currentAffiliations}
+            //   currentUser={currentUser}
+            //   updateAffiliation={actualUpdateAffiliation}
+            //   isFetching={isFetching}
+            //   actions={[
+            //     <Button
+            //       onClick={showManageModal}
+            //       size="small"
+            //       className="ds-u-margin-right--2"
+            //       key="action1"
+            //     >
+            //       Edit Role
+            //     </Button>,
+            //     <Button
+            //       onClick={showConfirmationModal}
+            //       size="small"
+            //       variation="danger"
+            //       className="ds-u-margin-right--2"
+            //       data-deny-or-revoke="revoke"
+            //       key="action2"
+            //     >
+            //       Revoke
+            //     </Button>
+            //   ]}
+            // />
+            <Fragment>
+            {isFetching && <p>Loading...</p>}
+            {!isFetching && currentAffiliations.length === 0 && (
+              <p>No users on this tab at this time</p>
+            )}
+            {!isFetching && currentAffiliations.length > 0 && (
+              <Table borderless>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    {activeTab === 'active' ? <TableCell>Role</TableCell> : null}
+                    {activeTab === 'inactive' ? <TableCell>Status</TableCell> : null}
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {currentAffiliations.map(affiliation => (
+                    <TableRow key={affiliation.id}>
+                      <TableCell>{affiliation.displayName}</TableCell>
+                      <TableCell>{affiliation.email}</TableCell>
+                      <TableCell>{affiliation.primaryPhone}</TableCell>
+                      {activeTab === 'active' ? (
+                        <TableCell>{affiliation.role}</TableCell>
+                      ) : null}
+                      {activeTab === 'inactive' ? (
+                        <TableCell>
+                          {affiliation.status.charAt(0).toUpperCase() +
+                            affiliation.status.slice(1)}
+                        </TableCell>
+                      ) : null}
+                      <TableCell>
+                        <div className="ds-u-display--flex" data-id={affiliation.id}>
+                          {showActions(affiliation) && (
+                            <Fragment>
+                              <Button
+                                onClick={showManageModal}
+                                size="small"
+                                className="ds-u-margin-right--2"
+                                key="action1"
+                              >
+                                Edit Role
+                              </Button>
+                              <Button
+                                onClick={showConfirmationModal}
+                                size="small"
+                                variation="danger"
+                                className="ds-u-margin-right--2"
+                                data-deny-or-revoke="revoke"
+                                key="action2"
+                              >
+                              Revoke
+                              </Button>
+                            </Fragment>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
+            </Fragment>
+            
+            
+            
           )}
         </TabPanel>
         <TabPanel id="inactive" tab="Inactive">
