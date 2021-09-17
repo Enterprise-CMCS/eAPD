@@ -61,7 +61,6 @@ jobs:
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
           docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run migrate
-#          docker-compose exec -T api npm run migrate
       - name: NPM Seed on API Container
         working-directory: ./
         env:
@@ -69,8 +68,7 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
-#          docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run seed
-#          docker-compose exec -T api npm run seed        
+          docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run seed
       - name: Cypress E2E Tests
         working-directory: ./integrationTests
         env:
