@@ -1,9 +1,6 @@
 // E2E tests for the executive summary page after filling out activities.
 
 import ExecutiveSummaryPage from "../../page-objects/executive-summary-page";
-// import data from "../../fixtures/activity-overview-template.json"
-
-// const data = require('../../fixtures/activity-overview-template.json');
 
 /* eslint no-return-assign: "off" */
 /* eslint func-names: "off" */
