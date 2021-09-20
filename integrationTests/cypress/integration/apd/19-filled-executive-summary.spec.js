@@ -1,13 +1,21 @@
 // E2E tests for the executive summary page after filling out activities.
 
 import ExecutiveSummaryPage from "../../page-objects/executive-summary-page";
-import data from "../../fixtures/activity-overview-template.json"
+// import data from "../../fixtures/activity-overview-template.json"
 
 // const data = require('../../fixtures/activity-overview-template.json');
 
 /* eslint no-return-assign: "off" */
 /* eslint func-names: "off" */
 /* eslint prefer-arrow-callback: "off" */
+/* eslint one-var: "off" */
+
+const addCommas = string => {
+  if (string) {
+    return string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  return '0';
+};
 
 describe('Activity Schedule Summary', function () {
   const summaryPage = new ExecutiveSummaryPage();
@@ -23,8 +31,8 @@ describe('Activity Schedule Summary', function () {
     cy.location('pathname').then(pathname => apdURL = pathname);
 
     // Gets list of available years
-    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-      years.push(list[index].value)
+    cy.get('[type="checkbox"][checked]').each((_, i, list) =>
+      years.push(list[i].value)
     );
   });
 
@@ -49,12 +57,16 @@ describe('Activity Schedule Summary', function () {
       cy.findByRole('heading', { name: /^Executive Summary$/i })
     });
 
+    let totalActivityCostsByYear, totalActivityCosts,
+        totalActivityMedicaidByYear, totalActivityMedicaid,
+        fedShares, totalActivityFedSharesByYear, totalActivityFedShares;
+
     describe('Fixture values in Activities Summary', function () {
       
       it('Fixture names', function () {
-        this.data.activityOverview.forEach((activity, index) => {
-          summaryPage.getActivityName(index).should('have.text', 
-            `Activity ${index + 1}: ${activity.name}`)
+        this.data.activityOverview.forEach((activity, i) => {
+          summaryPage.getActivityName(i).should('have.text', 
+            `Activity ${i + 1}: ${activity.name}`)
         });
       });
 
@@ -63,124 +75,163 @@ describe('Activity Schedule Summary', function () {
           return `${dateArray[0]}/${dateArray[1]}/${dateArray[2]}`
         }
 
-        this.data.activityOverview.forEach((activity, index) => {
-          summaryPage.getActivityDates(index)
+        this.data.activityOverview.forEach((activity, i) => {
+          summaryPage.getActivityDates(i)
             .should('have.text', 
               `Start date - End date: ${createDate(activity.startDate)} - `
               + `${createDate(activity.endDate)}`);
         });
       });
 
-      it('Fixture costs', function () {
-        /*
-        // Activity 1 has staff #2, Activity 2 has staff #3-4
-        const staff = [
-          this.data.staff.slice(1, 2),
-          this.data.staff.slice(2)
-        ];
-        const expenses = [
-          this.data.expenses.slice(1, 2).map(a => a.costs),
-          this.data.expenses.slice(2).map(a => a.costs)
-        ];
-        const contractors = [
-          [this.data.privateContractors[0].FFYcosts[1]],
-          this.data.privateContractors[1].FFYcosts
-        ];
-        cy.log(staff);
-        cy.log(expenses);
-        cy.log(contractors);
-        // Create an array of arrays of costs for each activity such that
-        // costs[x][y] is the cost of activity x in FFY y
-        const costs = [[], []];
-        for(let i = 0; i < costs.length; i += 1) {
-          for (let j = 0; j < years.length; j += 1) {
-            costs[i][j] += staff[i][j] + expenses[i][j] + contractors[i][j];
+      it('Fixture total costs', function () {
+        totalActivityCostsByYear = this.data.totals.map(total => 
+          total.staff.map((val, i) => 
+          val + total.expenses[i] + total.contractors[i]));
+        
+        totalActivityCosts = 
+          totalActivityCostsByYear.map(total => total.reduce((a, b) => a + b));
+
+        totalActivityCosts.forEach((total, i) => {
+          summaryPage.getActivityCost(i)
+            .should('have.text', 
+            `Total cost of activity: $${addCommas(total)}`);
+        });
+        
+      });
+      
+      it('Fixture Medicaid costs & Federal Shares', function () {
+        // All totals are seperated by activity
+
+        totalActivityMedicaidByYear = this.data.totals.map(total => 
+          total.staff.map((val, i) => 
+          val + total.expenses[i] + total.contractors[i] - total.other[i]));
+        totalActivityMedicaid = 
+          totalActivityMedicaidByYear.map(total => total.reduce((a, b) => a + b));
+
+        fedShares = this.data.totals.map(total => total.fedShare);
+        totalActivityFedSharesByYear = totalActivityMedicaidByYear.map((yearlyTotals, i) =>
+          yearlyTotals.map((total, j) => Math.ceil(total * fedShares[i][j])));
+        totalActivityFedShares = 
+          totalActivityFedSharesByYear.map(total => total.reduce((a, b) => a + b));
+        
+        for(let i = 0; i < totalActivityMedicaid.length; i += 1) {
+          summaryPage.getActivityMedicaidCost(i)
+            .should('have.text', 
+            `Total Computable Medicaid Cost: `
+            + `$${addCommas(totalActivityMedicaid[i])} `
+            + `($${addCommas(totalActivityFedShares[i])} Federal share)`);
+          
+          // Break down by FFY
+          for(let j = 0; j < years.length; j += 1) {
+            summaryPage.getActivityMedicaidCost(i, years[j])
+              .should('have.text', 
+              `FFY ${years[j]}: $${addCommas(totalActivityCostsByYear[i][j])} | `
+              + `Total Computable Medicaid Cost: `
+              + `$${addCommas(totalActivityMedicaidByYear[i][j])} `
+              + `($${addCommas(totalActivityFedSharesByYear[i][j])} Federal share)`);
           }
         }
-        */
-
-        it('Fixture total costs', function () {
-          summaryPage.getActivityCost(0)
-          .should('have.text', 
-            'Total cost of activity: $0');
-        });
-        
       });
-      
-      /*
-      it('Fixture Medicaid costs & Federal Shares', function () {
-        summaryPage.getActivityMedicaidCost(0)
-          .should('have.text', 
-          'Total Computable Medicaid Cost: $0 ($0 Federal share)');
-        
-          // Repeat for all FFYs
-          years.forEach(year => {
-          summaryPage.getActivityMedicaidCost(0, year)
-            .should('have.text', 
-            `FFY ${year}: $0 | Total Computable Medicaid Cost: $0 ($0 Federal share)`);
-        })
-      });
-      it('Clicking edit navigates to activity overview page for activity', function () {
-        summaryPage.clickActivityEdit(0);
-        cy.location('pathname').should(($pathname) => {
-          expect($pathname).to.contain('/activity/0/overview');
-        });
-      });
-      */
-      
     });
-/*
+
+    let totalCostsByYear, totalMedicaidByYear, totalFedShareByYear,
+        totalMedicaidCost, totalFedShareCost, totalFundingRequest;
+
     describe('Total Cost', function () {
-      it('Shows that the selected fiscal years were requested', function () {
-        let expected = 'Federal Fiscal Years requested: FFY ';
-        for (let i = 0; i < years.length; i += 1) {
-          if (i === 0) expected += years[i];
-          else expected += `, ${years[i]}`;
-        }
-        summaryPage.getRequestedFiscalYears()
-          .should('have.text', expected);
-      });
 
-      it('Total Medicaid cost/Federal share is $0', function () {
+      it('Total Medicaid cost/Federal share is correct', function () {
+        totalMedicaidCost = totalActivityMedicaid.reduce((a, b) => a + b);
+        totalFedShareCost = totalActivityFedShares.reduce((a, b) => a + b);
+
         summaryPage.getTotalMedicaidCost()
-          .should('have.text', 'Total Computable Medicaid Cost: $0 ($0 Federal share)');
+          .should('have.text', 'Total Computable Medicaid Cost: '
+          + `$${addCommas(totalMedicaidCost)} `
+          + `($${addCommas(totalFedShareCost)} Federal share)`);
       });
 
-      it('Total Funding Request is $0', function () {
+      it('Total Funding Request is correct', function () {
+        totalFundingRequest = totalActivityCosts.reduce((a, b) => a + b);
         summaryPage.getTotalFundingRequest()
-          .should('have.text', 'Total funding request: $0');
+          .should('have.text', 
+          `Total funding request: $${addCommas(totalFundingRequest)}`);
       });
 
-      it('Each FFY costs $0', function () {
-        years.forEach(year => {
+      it('Each FFY costs correct amount', function () {
+        const calcTotalByYear = (totalActivityByYear) => {
+          const result = [];
+          for(let j = 0; j < totalActivityByYear.length; j += 1) {
+            let total = 0;
+            for(let i = 0; i < years.length; i += 1) {
+              total += totalActivityByYear[i][j];
+            }
+            result.push(total);
+          }
+          return result;
+        }
+
+        totalCostsByYear = calcTotalByYear(totalActivityCostsByYear);
+        totalMedicaidByYear = calcTotalByYear(totalActivityMedicaidByYear);
+        totalFedShareByYear = calcTotalByYear(totalActivityFedSharesByYear);
+
+        years.forEach((year, i) => {
           summaryPage.getTotalYearCost(year)
             .should('have.text', 
-            `FFY ${year}: $0 | $0 Total Computable Medicaid Cost | $0 Federal share`);
+            `FFY ${year}: $${addCommas(totalCostsByYear[i])} | `
+            + `$${addCommas(totalMedicaidByYear[i])} Total Computable Medicaid Cost | `
+            + `$${addCommas(totalFedShareByYear[i])} Federal share`);
         });
       });
     });
 
     describe('Fixture values in HIT + HIE and MMIS table', function () {
-      const costCategories = ['HIT + HIE', 'MMIS'];
-      
-      costCategories.forEach(category => {
-        it(`All ${category} rows are $0`, function () {
-          years.forEach(year => {
-            summaryPage.getTableRows(category, year)
-              .each($el => {
-                cy.wrap($el).should('have.text', '$0');
-              });
+      // Both activities are HIT, not HIE or MMIS
+      const sources = ['hit', 'combined'];
+      const payers = ['fed', 'state'];
+
+      it(`All HIT + HIE rows have fixture values`, function () {
+
+        sources.forEach(source => {
+          summaryPage.getCategoryCells(source, 'fed').each(($el, i) => {
+            if (i < totalFedShareByYear.length)
+              cy.wrap($el).should('have.text', 
+                `$${addCommas(totalFedShareByYear[i])}`);
+            else
+              cy.wrap($el).should('have.text', `$${addCommas(totalFedShareCost)}`);
           });
-  
-          summaryPage.getTableRows(category)
-            .each($el => {
-              cy.wrap($el).should('have.text', '$0');
+
+          summaryPage.getCategoryCells(source, 'state').each(($el, i) => {
+            if (i < totalFedShareByYear.length)
+              cy.wrap($el).should('have.text', 
+                `$${addCommas(totalMedicaidByYear[i] - totalFedShareByYear[i])}`);
+            else
+              cy.wrap($el).should('have.text', 
+                `$${addCommas(totalMedicaidCost - totalFedShareCost)}`);
           });
         });
-      })
+        
+        payers.forEach(payer => {
+          summaryPage.getCategoryCells('hie', payer).each($el => {
+            cy.wrap($el).should('have.text', '$0');
+          });
+        });
+
+      });
+
+      it('All MMIS rows are $0', function () {
+        years.forEach(year => {
+          summaryPage.getTableRows('MMIS', year)
+            .each($el => {
+              cy.wrap($el).should('have.text', '$0');
+            });
+        });
+
+        summaryPage.getTableRows('MMIS')
+          .each($el => {
+            cy.wrap($el).should('have.text', '$0');
+        });
+      });
       
     });
-    */
   });
  
 })
