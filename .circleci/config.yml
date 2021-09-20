@@ -355,19 +355,28 @@ jobs:
 
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
-    docker:
-      - image: node:14
-        auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+    machine:
+      image: circleci/classic:latest
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
       - run:
+          name: build API image
+          working_directory: ~/project/api
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker build -t cms-eapd/api ./
+      - run:
           name: run tests
           working_directory: ~/project/api
-          command: npm test
+          command: |
+            # Switch to Node 14.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 14
+            nvm alias default v14
+            ./unit-test.sh
       - run:
           name: report coverage
           when: always
