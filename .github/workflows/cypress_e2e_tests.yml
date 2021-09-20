@@ -2,6 +2,9 @@ name: Cypress E2E Tests
 on:
   schedule:
     - cron: '0 1 * * *'  # every day at 1 am
+  pull_request:
+    branches:
+      - development
 
 jobs:
   cypress-run:
