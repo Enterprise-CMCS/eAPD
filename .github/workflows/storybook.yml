@@ -4,7 +4,6 @@ on:
     branches:
       - master
       - development
-      - bbrooks/environment_vulnerability_scans
     paths:
       - 'web/.storybook/**'
       - 'web/src/stories/**'
