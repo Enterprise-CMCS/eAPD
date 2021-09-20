@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import {
   setComplyingWithProcurement,
   setComplyingWithRecordsAccess,
@@ -87,7 +88,7 @@ const AssurancesAndCompliance = ({
 
   return (
     <React.Fragment>
-    <AlertMissingFFY/>
+      <AlertMissingFFY />
       <Section id="assurances-compliance" resource="assurancesAndCompliance">
         <Subsection
           id="assurances-compliance-fed-citations"
@@ -96,7 +97,7 @@ const AssurancesAndCompliance = ({
           {Object.entries(regLinks).map(([name, regulations]) => (
             <div key={name} className="ds-u-margin-bottom--3">
               <h4 className="ds-h4">
-                {t(`assurancesAndCompliance.headings.${name}`)}
+                {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
               </h4>
               {citations[name].map(({ title, checked, explanation }, index) => (
                 <fieldset key={title} className="ds-u-margin-top--2">

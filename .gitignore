@@ -26,4 +26,4 @@ docs-build
 # Terraform ignores
 *.terraform
 env_vars.sh
-*cypress.env.json
+/integrationTests/cypress.env.json
