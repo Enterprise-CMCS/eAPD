@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Preview    
+    timeout-minutes: 60    
     strategy:
       matrix:
         python-version: ['3.x']

@@ -5,6 +5,8 @@ on:
 jobs:
   packer:
     runs-on: ubuntu-latest
+    environment: Preview    
+    timeout-minutes: 60    
     name: packer
     steps:
       - name: Checkout Repository 🛎️
