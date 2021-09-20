@@ -1,9 +1,7 @@
 name: Cleanup Test/Preview Deploys
 on:
-  push: 
-    branches: bbrooks/environment_vulnerability_scans
-#  schedule:
-#    - cron: '0 0 * * *'  # Run every hour, every day
+  schedule:
+    - cron: '0 0 * * *'  # Run every hour, every day
 jobs:
   build:
     runs-on: ubuntu-latest
