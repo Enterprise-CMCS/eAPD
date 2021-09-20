@@ -1,7 +1,9 @@
 name: Cleanup Plantinum AMIs
-on:  
-  schedule:
-    - cron: '0 0 * * *'  # every day at midnight
+on:
+  push: 
+    branches: bbrooks/environment_vulnerability_scans
+#  schedule:
+#    - cron: '0 0 * * *'  # every day at midnight
 jobs:
   packer-ami-cleanup:
     runs-on: ubuntu-latest

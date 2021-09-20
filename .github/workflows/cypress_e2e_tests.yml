@@ -1,7 +1,9 @@
 name: Cypress E2E Tests
 on:
-  schedule:
-    - cron: '0 1 * * *'  # every day at 1 am
+  push: 
+    branches: bbrooks/environment_vulnerability_scans
+#  schedule:
+#    - cron: '0 1 * * *'  # every day at 1 am
 
 jobs:
   cypress-run:

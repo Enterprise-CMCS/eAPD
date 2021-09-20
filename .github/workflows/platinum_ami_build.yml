@@ -1,7 +1,9 @@
 name: Create Platinum AMI
-on:  
-  schedule:
-    - cron: '0 0 * * 1'  # Mondays at midnight
+on:
+  push: 
+    branches: bbrooks/environment_vulnerability_scans
+#  schedule:
+#    - cron: '0 0 * * 1'  # Mondays at midnight
 jobs:
   packer:
     runs-on: ubuntu-latest
