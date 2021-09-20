@@ -322,8 +322,9 @@ class ExportPage {
         .next()
         .should('contain', 'Other state expenses');
       cy.contains('Other state expenses')
-        .next()
-        .should('contain', 'Private Contractor Costs');
+     // This is no longer the next element
+     //   .next()
+     //   .should('contain', 'Private Contractor Costs');
     }
   };
 
@@ -361,13 +362,13 @@ class ExportPage {
   };
 
   checkOtherFunding = (year, expectedText, expectedValue) => {
-    cy.contains(`FFY ${year}`)
+    cy.contains('h3', `FFY ${year}`)
       .next()
       .should('contain', 'Other Funding Description')
       .next()
       .should('have.text', expectedText);
 
-    cy.contains(`FFY ${year}`)
+    cy.contains('h3', `FFY ${year}`)
       .next()
       .next()
       .next()

@@ -10,8 +10,8 @@ no-return-assign: "off", no-restricted-syntax: "off" */
 const categories = [
   'Procurement Standards (Competition / Sole Source)',
   'Access to Records, Reporting and Agency Attestations',
-  'Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports',
-  'Security and interface requirements to be employed for all state HIT systems'
+  'Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports',
+  'Security and Interface Requirements to Be Employed for All State HIT Systems'
 ];
 
 describe('Assurances and Compliance', function () {
@@ -35,7 +35,10 @@ describe('Assurances and Compliance', function () {
       cy.useStateStaff(apdURL);
 
       // Navigate to export data page
-      cy.goToExportView();
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains('Export and Submit')
+        .click();
+      cy.findByRole('button', { name: /Continue to Review/i }).click();
       cy.url().should('contain', '/print');
       cy.location('pathname').then(pathname => (apdExportURL = pathname));
     });
@@ -76,8 +79,11 @@ describe('Assurances and Compliance', function () {
     before(function () {
       cy.useStateStaff(apdURL);
 
-      // Navigate to assurances and compliance editor view
-      cy.goToAssurancesCompliance();
+      // Navigate to export data page
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Assurances and compliance/i)
+        .click();
+      cy.url().should('contain', '/assurances-and-compliance');
       cy.location('pathname').then(
         pathname => (apdAssurancesComplianceURL = pathname)
       );
