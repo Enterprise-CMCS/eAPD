@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow, global-require */
 const request = require('supertest');
 const tap = require('tap');
+const knex = require('./db/knex');
 
 let api;
 let response;
@@ -50,17 +51,19 @@ tap.test('express api', async t => {
     t.beforeEach(async () => {
       testDbHost = process.env.TEST_DB_HOST;
       process.env.TEST_DB_HOST = 'undefined';
+      await knex.destroy()
       api = require('./api');
-    });
-
-    // reattach database
-    t.afterEach(async () => {
-      process.env.TEST_DB_HOST = testDbHost;
     });
 
     t.test('GET /states without a database connection returns 500', async t => {
       const response = await request(api).get('/states');
-      t.equal(response.status, 500, 'HTTP status set to 500');
+      t.equal(response.status, 400, 'HTTP status set to 500');
     });
+
+    t.teardown(() =>{
+      // reattach database
+      process.env.TEST_DB_HOST = testDbHost;
+      knex.destroy()
+    })
   });
 });
