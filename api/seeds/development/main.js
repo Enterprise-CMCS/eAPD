@@ -4,6 +4,7 @@ const states = require('../shared/states');
 const apds = require('./apds');
 const state = require('./state');
 const users = require('./base-users');
+const {getStateAdminCertifications} = require('../../db/certifications')
 
 exports.seed = async knex => {
   // Don't seed this data if we're not in a development environment.
@@ -18,4 +19,7 @@ exports.seed = async knex => {
   await apds.seed(knex);
   await state.seed(knex);
   await users.seed(knex);
+
+  const results = await getStateAdminCertifications()
+  console.log(results)
 };
