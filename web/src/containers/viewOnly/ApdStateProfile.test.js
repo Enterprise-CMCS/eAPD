@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from 'apd-testing-library'
+import { render, screen } from 'apd-testing-library';
 
 import ApdStateProfile from './ApdStateProfile';
 
@@ -23,11 +23,18 @@ describe('APD Summary/viewOnly component', () => {
       medicaidOffice: {},
       medicaidDirector: {}
     };
-    const keyPersonnel = [{
-      isPrimary:true,
-      name:"Primary Person Name",
-    }]
-    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={keyPersonnel} />);
+    const keyPersonnel = [
+      {
+        isPrimary: true,
+        name: 'Primary Person Name'
+      }
+    ];
+    render(
+      <ApdStateProfile
+        stateProfile={stateProfile}
+        keyPersonnel={keyPersonnel}
+      />
+    );
     expect(screen.queryByText(/Primary Person Name/i)).toBeTruthy();
     expect(screen.queryByText(/Primary APD Point of Contact/i)).toBeTruthy();
   });
@@ -49,22 +56,28 @@ describe('APD Summary/viewOnly component', () => {
   test('renders the correct message when no address is provided', () => {
     const stateProfile = {
       medicaidOffice: {
-        address1: "",
-        address2: "",
-        state: "",
-        city: "",
-        zip: ""
+        address1: '',
+        address2: '',
+        state: '',
+        city: '',
+        zip: ''
       },
       medicaidDirector: {
         name: 'Test'
       }
     };
-    const keyPersonnel = [{
-      isPrimary:true,
-      name:"Primary Person Name",
-    }]
-    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={keyPersonnel} />);
+    const keyPersonnel = [
+      {
+        isPrimary: true,
+        name: 'Primary Person Name'
+      }
+    ];
+    render(
+      <ApdStateProfile
+        stateProfile={stateProfile}
+        keyPersonnel={keyPersonnel}
+      />
+    );
     expect(screen.queryByText(/No response was provided/i)).toBeTruthy();
   });
-
 });

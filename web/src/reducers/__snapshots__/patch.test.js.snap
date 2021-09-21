@@ -88,7 +88,7 @@ Array [
   },
   Object {
     "op": "add",
-    "path": "/activities/0/costAllocationNarrative/2019",
+    "path": "/activities/0/costAllocationNarrative/years/2019",
     "value": Object {
       "otherSources": "",
     },
@@ -176,7 +176,7 @@ Array [
   },
   Object {
     "op": "remove",
-    "path": "/activities/0/costAllocationNarrative/2019",
+    "path": "/activities/0/costAllocationNarrative/years/2019",
   },
   Object {
     "op": "remove",

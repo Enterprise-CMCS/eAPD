@@ -3,8 +3,13 @@ const { states } = require('../../util/states');
 
 // affiliate 'all-permissions' user with all states
 const { id: adminRoleId } = roles.find(role => role.name === 'eAPD Admin');
-const { id: fedAdminRoleId } = roles.find(role => role.name === 'eAPD Federal Admin');
-const { id: stateAdminRoleId } = roles.find(role => role.name === 'eAPD State Admin');
+const { id: fedAdminRoleId } = roles.find(
+  role => role.name === 'eAPD Federal Admin'
+);
+const { id: stateAdminRoleId } = roles.find(
+  role => role.name === 'eAPD State Admin'
+);
+
 const adminAffiliations = states
   .filter(state => state.id !== 'ak')
   .map(state => ({
@@ -85,5 +90,4 @@ exports.seed = async knex => {
       metadata: '{}'
     }
   ]);
-
 };

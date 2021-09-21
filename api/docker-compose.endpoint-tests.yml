@@ -8,9 +8,26 @@ services:
     expose:
       - 5432
     ports:
-      - "55432:5432"
+      - '55432:5432'
+
+  mongo:
+    image: mongo:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MONGO_INITDB_ROOT_USERNAME=admin-user
+      - MONGO_INITDB_ROOT_PASSWORD=admin-password
+      - MONGO_INITDB_DATABASE=eapd-test
+      - DATABASE_USERNAME=mongo-test
+      - DATABASE_PASSWORD=cms
+    volumes:
+      - ./db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+    command: [--auth]
+    ports:
+      - 27018:27017
 
   api-for-testing:
+    build: .
     image: cms-eapd/api
     depends_on:
       - db
@@ -19,7 +36,9 @@ services:
       - NODE_ENV=test
       - API_PORT=8000
       - API_HOST=api-for-testing
-      - ENDPOINT_COVERAGE_CAPTURE=${ENDPOINT_COVERAGE_CAPTURE}
+      - ENDPOINT_COVERAGE_CAPTURE=true
+      - MONGO_URL=mongodb://mongo-test:cms@mongo:27017/eapd-test?authSource=eapd-test
+      - MONGO_DATABASE=eapd-test
       - FILE_STORE=local
       - FILE_PATH=test-data/files
       - OKTA_DOMAIN=${OKTA_DOMAIN}
@@ -27,8 +46,6 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
-      - MONGO_DATABASE=${MONGO_DATABASE}
-      - MONGO_URL=${MONGO_URL}
     command: npm start
     expose:
       - 8000

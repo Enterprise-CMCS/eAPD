@@ -15,6 +15,9 @@
     "seed": "knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost npm run seed",
     "seed-users": "knex seed:run --specific=base-users.js",
+    "make-mongoose-migrate": "migrate --config mongo-migrate.js create",
+    "mongoose-migrate": "migrate --config mongo-migrate.js up",
+    "mongoose-migrate-down": "migrate --config mongo-migrate.js down",
     "start": "node main.js",
     "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 ./main.js -e js",
     "jest": "NODE_ENV=test jest",
@@ -88,11 +91,16 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "file-type": "^16.5.3",
+    "fast-json-patch": "^3.1.0",
     "form-data": "^4.0.0",
     "jsonpatch": "^3.0.1",
+    "jsonpatch-to-mongodb": "^1.0.0",
     "jsonpointer": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.4",
+    "migrate-mongoose": "^4.0.0",
+    "mongoose": "^5.13.9",
+    "mongoose-seed": "^0.6.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
@@ -114,7 +122,6 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "hosted-git-info": "4.0.2",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
@@ -123,13 +130,16 @@
     "tap": "^15.0.2"
   },
   "resolutions": {
+    "browserslist": "4.16.5",
     "hosted-git-info": "4.0.2",
-    "browserslist": "4.16.5"
+    "mpath": "0.8.4",
+    "path-parse": "1.0.7"
   },
   "jest": {
     "testMatch": [
       "**/__tests__/**/*.js?(x)",
       "**/?(*.)+(spec|test|endpoint).js?(x)"
-    ]
+    ],
+    "testEnvironment": "node"
   }
 }

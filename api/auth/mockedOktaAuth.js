@@ -25,6 +25,15 @@ const fedAdmin = {
   }
 };
 
+const stateAdmin = {
+  status: 'ACTIVE',
+  id: 'state-admin',
+  profile: {
+    displayName: 'State Admin',
+    email: 'stateadmin@email.com'
+  }
+};
+
 const allPermissionsNoState = {
   status: 'ACTIVE',
   id: 'all-permissions-no-state',
@@ -45,100 +54,82 @@ const allPermissionsAndState = {
 
 const mockOktaClient = {
   listUsers: () => {
-    return new Promise(resolve => {
-      resolve([
-        noPermissions,
-        allPermissions,
-        allPermissionsNoState,
-        allPermissionsAndState,
-        fedAdmin
-      ]);
-    });
+    return Promise.resolve([
+      noPermissions,
+      allPermissions,
+      allPermissionsNoState,
+      allPermissionsAndState,
+      fedAdmin,
+      stateAdmin
+    ]);
   },
   getUser: id => {
     if (id === 'no-permissions') {
-      return new Promise(resolve => {
-        resolve(noPermissions);
-      });
+      return Promise.resolve(noPermissions);
     }
     if (id === 'all-permissions') {
-      return new Promise(resolve => {
-        resolve(allPermissions);
-      });
+      return Promise.resolve(allPermissions);
     }
     if (id === 'all-permissions-no-state') {
-      return new Promise(resolve => {
-        resolve(allPermissionsNoState);
-      });
+      return Promise.resolve(allPermissionsNoState);
     }
     if (id === '0') {
-      return new Promise(resolve => {
-        resolve(null);
-      });
+      return Promise.resolve(null);
     }
     if (id === 'fed-admin') {
-      return new Promise(resolve => {
-        resolve(fedAdmin);
-      });
+      return Promise.resolve(fedAdmin);
     }
-    return new Promise(resolve => {
-      resolve(allPermissionsAndState);
-    });
+    if (id === 'state-admin') {
+      return Promise.resolve(stateAdmin);
+    }
+    return Promise.resolve(allPermissionsAndState);
   }
 };
 
 const mockVerifyJWT = token => {
   if (token === 'no-permissions') {
-    return new Promise(resolve => {
-      resolve({
-        sub: 'no-permissions@email.com',
-        uid: 'no-permissions'
-      });
+    return Promise.resolve({
+      sub: 'no-permissions@email.com',
+      uid: 'no-permissions'
     });
   }
   if (token === 'all-permissions') {
-    return new Promise(resolve => {
-      resolve({
-        sub: 'all-permissions@email.com',
-        uid: 'all-permissions'
-      });
+    return Promise.resolve({
+      sub: 'all-permissions@email.com',
+      uid: 'all-permissions'
     });
   }
   if (token === 'no-permissions-no-state') {
-    return new Promise(resolve => {
-      resolve({
-        sub: 'npno@email.com',
-        uid: 'no-permissions-no-state'
-      });
+    return Promise.resolve({
+      sub: 'npno@email.com',
+      uid: 'no-permissions-no-state'
     });
   }
   if (token === 'all-permissions-no-state') {
-    return new Promise(resolve => {
-      resolve({
-        sub: 'apno@email.com',
-        uid: 'all-permissions-no-state'
-      });
+    return Promise.resolve({
+      sub: 'apno@email.com',
+      uid: 'all-permissions-no-state'
     });
   }
   if (token === 'all-permissions-and-state') {
-    return new Promise(resolve => {
-      resolve({
-        sub: 'apas@email.com',
-        uid: 'all-permissions-and-state'
-      });
+    return Promise.resolve({
+      sub: 'apas@email.com',
+      uid: 'all-permissions-and-state'
     });
   }
   if (token === 'fed-admin') {
-    return new Promise(resolve => {
-      resolve({
-        sub: 'fedadmin@email.com',
-        uid: 'fed-admin'
-      });
+    return Promise.resolve({
+      sub: 'fedadmin@email.com',
+      uid: 'fed-admin'
     });
   }
-  return new Promise(resolve => {
-    resolve(false);
-  });
+  if (token === 'state-admin') {
+    return Promise.resolve({
+      sub: 'stateadmin@email.com',
+      uid: 'state-admin'
+    });
+  }
+  return Promise.resolve(false);
 };
 
 module.exports = {

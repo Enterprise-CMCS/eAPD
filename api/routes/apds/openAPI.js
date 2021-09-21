@@ -163,6 +163,9 @@ const openAPI = {
         },
         403: {
           description: 'The apd ID does not match any known apds for the user'
+        },
+        404: {
+          description: 'The apd does not exist'
         }
       }
     },
@@ -186,11 +189,14 @@ const openAPI = {
           description: 'The APD was archived'
         },
         400: {
-          description:
-            'Invalid request, such as requesting to archive an APD that is not editable'
+          description: 'The apd is not in draft'
         },
         403: {
           description: 'The apd ID does not match any known apds for the user'
+        },
+        404: {
+          description:
+            'Invalid request, such as requesting to archive an APD that is not editable'
         }
       }
     }
@@ -255,6 +261,9 @@ const openAPI = {
         403: {
           description: 'The apd ID does not match any known apds for the user'
         },
+        404: {
+          description: 'The apd does not exist'
+        },
         415: {
           description: 'The file is not a valid format'
         }
@@ -311,11 +320,11 @@ const openAPI = {
             }
           })
         },
-        400: {
-          description: 'The apd ID does not match any known apds'
-        },
         403: {
           description: 'The apd ID does not match any known apds for the user'
+        },
+        404: {
+          description: 'The apd ID does not match any known apds'
         }
       }
     }
@@ -364,5 +373,5 @@ const getApdFile = {
 
 module.exports = {
   ...requiresAuth(openAPI),
-  ...getApdFile
+  ...requiresAuth(getApdFile)
 };

@@ -26,7 +26,7 @@ describe('US States endpoint', () => {
     unauthenticatedTest('get', '/states/ak');
 
     it('returns 200', async () => {
-      const authedClient = login();
+      const authedClient = login('state-admin');
       const response = await authedClient.get('/states/ak');
       expect(response.status).toEqual(200);
       const keys = Object.keys(response.data);
@@ -39,11 +39,13 @@ describe('US States endpoint', () => {
       const response = await authedClient.get('/states/zz');
       expect(response.status).toEqual(403);
     });
+
     it('works for a Federal Admin', async () => {
       const authedClient = login('fed-admin');
       const response = await authedClient.get('/states/mn');
       expect(response.status).toEqual(200);
     });
+
     it('gives a 404 to a Federal Admin for a fake state', async () => {
       const authedClient = login('fed-admin');
       // This state does not exist, therefore it can't be available to this user.
