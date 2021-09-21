@@ -34,7 +34,7 @@ const ApdViewOnly = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const apdId = apd.id || null;
-  const paramApdId = +useParams().apdId;
+  const paramApdId = useParams().apdId;
   const history = useHistory();
 
   useEffect(() => {

@@ -10,7 +10,7 @@ services:
     ports:
       - '55432:5432'
 
-  mongodb:
+  mongo:
     image: mongo:latest
     environment:
       - PUID=1000
@@ -37,7 +37,7 @@ services:
       - API_PORT=8000
       - API_HOST=api-for-testing
       - ENDPOINT_COVERAGE_CAPTURE=true
-      - MONGO_URL=mongodb://mongo-test:cms@mongodb:27017/eapd-test?authSource=eapd-test
+      - MONGO_URL=mongodb://mongo-test:cms@mongo:27017/eapd-test?authSource=eapd-test
       - MONGO_DATABASE=eapd-test
       - FILE_STORE=local
       - FILE_PATH=test-data/files

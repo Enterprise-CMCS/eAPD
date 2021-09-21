@@ -294,7 +294,7 @@ describe('application-level actions', () => {
       const updatedApd = {};
       const store = mockStore(state);
 
-      fetchMock.onPatch('/apds/id-to-update').reply(200, updatedApd);
+      fetchMock.onPatch('/apds/id-to-update').reply(200, { apd: updatedApd });
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
@@ -428,7 +428,9 @@ describe('application-level actions', () => {
     });
 
     it('does nothing if user is an admin', async () => {
-      const store = mockStore({ user: { data: { role: 'eAPD Federal Admin' } } });
+      const store = mockStore({
+        user: { data: { role: 'eAPD Federal Admin' } }
+      });
 
       await store.dispatch(setApdToSelectOnLoad());
 

@@ -102,7 +102,7 @@ export const getPatchesToAddYear = (state, year) => {
 
     patches.push({
       op: 'add',
-      path: `/activities/${activityIndex}/costAllocationNarrative/${year}`,
+      path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`,
       value: costAllocationNarrative()
     });
 
@@ -186,7 +186,7 @@ export const getPatchesToRemoveYear = (state, year) => {
 
     patches.push({
       op: 'remove',
-      path: `/activities/${activityIndex}/costAllocationNarrative/${year}`
+      path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`
     });
 
     patches.push({

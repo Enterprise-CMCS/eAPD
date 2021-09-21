@@ -81,7 +81,7 @@ export const quarterlyFFPEntry = () =>
 
 export const newActivity = ({
   name = '',
-  fundingSource = false,
+  fundingSource = null,
   years = []
 } = {}) => {
   const costAllocationNarrativeYears = arrToObj(
@@ -95,7 +95,9 @@ export const newActivity = ({
     costAllocation: arrToObj(years, costAllocationEntry()),
     costAllocationNarrative: {
       methodology: '',
-      ...costAllocationNarrativeYears
+      years: {
+        ...costAllocationNarrativeYears
+      }
     },
     description: '',
     expenses: [],

@@ -22,11 +22,13 @@
             }
           },
           "costAllocationNarrative": {
-            "2020": {
-              "otherSources": "<p>No other funding is provided for this activity for FFY 2020.</p>\n"
-            },
-            "2021": {
-              "otherSources": "<p>No other funding is provided for this activity for FFY 2021.</p>\n"
+            "years": {
+              "2020": {
+                "otherSources": "<p>No other funding is provided for this activity for FFY 2020.</p>\n"
+              },
+              "2021": {
+                "otherSources": "<p>No other funding is provided for this activity for FFY 2021.</p>\n"
+              }
             },
             "methodology": "<p>No cost allocation is necessary for this activity.</p>\n"
           },
@@ -356,11 +358,13 @@
             }
           },
           "costAllocationNarrative": {
-            "2020": {
-              "otherSources": "<p>No other funding is provided for this activity for FFY 2020.</p>\n"
-            },
-            "2021": {
-              "otherSources": "<p>No other funding is provided for this activity for FFY 2021.</p>\n"
+            "years": {
+              "2020": {
+                "otherSources": "<p>No other funding is provided for this activity for FFY 2020.</p>\n"
+              },
+              "2021": {
+                "otherSources": "<p>No other funding is provided for this activity for FFY 2021.</p>\n"
+              }
             },
             "methodology": "<p>No cost allocation is necessary for this activity.</p>\n"
           },
@@ -652,11 +656,13 @@
             }
           },
           "costAllocationNarrative": {
-            "2020": {
-              "otherSources": ""
-            },
-            "2021": {
-              "otherSources": ""
+            "years": {
+              "2020": {
+                "otherSources": ""
+              },
+              "2021": {
+                "otherSources": ""
+              }
             },
             "methodology": ""
           },
@@ -869,11 +875,13 @@
             }
           },
           "costAllocationNarrative": {
-            "2020": {
-              "otherSources": ""
-            },
-            "2021": {
-              "otherSources": ""
+            "years": {
+              "2020": {
+                "otherSources": ""
+              },
+              "2021": {
+                "otherSources": ""
+              }
             },
             "methodology": ""
           },
@@ -1062,11 +1070,13 @@
             }
           },
           "costAllocationNarrative": {
-            "2020": {
-              "otherSources": ""
-            },
-            "2021": {
-              "otherSources": ""
+            "years": {
+              "2020": {
+                "otherSources": ""
+              },
+              "2021": {
+                "otherSources": ""
+              }
             },
             "methodology": ""
           },
@@ -1264,11 +1274,13 @@
             }
           },
           "costAllocationNarrative": {
-            "2020": {
-              "otherSources": ""
-            },
-            "2021": {
-              "otherSources": ""
+            "years": {
+              "2020": {
+                "otherSources": ""
+              },
+              "2021": {
+                "otherSources": ""
+              }
             },
             "methodology": ""
           },
