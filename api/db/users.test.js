@@ -2,6 +2,7 @@ const sinon = require('sinon');
 const tap = require('tap');
 const dbMock = require('./dbMock.test');
 const oktaAuthMock = require('../auth/oktaAuthMock.test');
+const knex = require('./knex')
 
 const {
   getAllUsers,
@@ -462,4 +463,8 @@ tap.test('database wrappers / users', async usersTests => {
       }
     );
   });
+
+  usersTests.teardown(() =>{
+    knex.destroy()
+  })
 });
