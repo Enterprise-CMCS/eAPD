@@ -135,6 +135,17 @@ const createUsersToAdd = async (knex, oktaClient) => {
       affiliationId: null
     });
 
+    stateCertifications.push({
+      ffy: 2021,
+      name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
+      state: 'tn',
+      email: stateAdmin.profile.primaryPhone,
+      phone: stateAdmin.profile.email,
+      uploadedBy: fedAdmin.id,
+      uploadedOn: new Date(),
+      fileUrl: '6789', // Todo: Update this to have a valid fileUrl
+      affiliationId: null
+    });
     oktaUsers.push(formatOktaUser(stateAdmin));
   }
 
