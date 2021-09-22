@@ -127,8 +127,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       ffy: 2021,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'ak',
-      email: stateAdmin.profile.primaryPhone,
-      phone: stateAdmin.profile.email,
+      email: stateAdmin.profile.email,
+      phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
       fileUrl: '12345', // Todo: Update this to have a valid fileUrl
@@ -139,8 +139,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       ffy: 2021,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'tn',
-      email: stateAdmin.profile.primaryPhone,
-      phone: stateAdmin.profile.email,
+      email: stateAdmin.profile.email,
+      phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
       fileUrl: '6789', // Todo: Update this to have a valid fileUrl
