@@ -8,6 +8,11 @@ To track branch with Git-Flow, change off of the branch, then run:
 ```git flow feature track branch/name```
 Git-Flow will rename it: feature/branch/name
 
+Git-Flow push to remote (GitHub) either/or
+```git flow feature publish branch/name```
+```git push origin feature/branch/name```
+
+Create Pull Request
 
 Git-Flow Primer
 Install:
@@ -24,3 +29,11 @@ release - Branch getting ready to be deployed to Prod, heavily tested
 hotfix - Branch applied to fix bugs in main
 bugfix - Branch applied to fix bugs in release
 support - 
+
+Demo/Exercise
+Setup
+Git-Flow-Test Repo
+Branches: main, development
+Branch Protections: main, development, release(?)
+Initial Commit to development, and main
+Add a feature
