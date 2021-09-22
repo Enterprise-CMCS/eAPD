@@ -20,6 +20,4 @@ exports.seed = async knex => {
   await state.seed(knex);
   await users.seed(knex);
 
-  const results = await getStateAdminCertifications()
-  console.log(results)
 };
