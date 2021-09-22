@@ -12,6 +12,8 @@ on:
 jobs:
   storybook-deploy:
     runs-on: ubuntu-latest
+    environment: Preview
+    timeout-minutes: 60    
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
