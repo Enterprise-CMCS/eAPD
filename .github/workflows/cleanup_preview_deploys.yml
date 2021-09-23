@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Preview    
+    timeout-minutes: 60    
     strategy:
       matrix:
         python-version: ['3.x']
@@ -14,9 +16,9 @@ jobs:
     - name: Configure AWS Credentials ☁️
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.TEST_AWS_REGION }}   
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}   
     - name: Set up Python ${{ matrix.python-version }} 🐍
       uses: actions/setup-python@v2
       with:
@@ -28,7 +30,7 @@ jobs:
         pip install --quiet awscli
     - name: Cleanup Test/Preview Deploys w/No Open PR 🚿
       env:
-        API_AWS_REGION: ${{ secrets.TEST_AWS_REGION }}
+        API_AWS_REGION: ${{ secrets.AWS_REGION }}
         GH_BOT_TOKEN: ${{ secrets.GH_TOKEN }}
         GH_BOT_USER: ${{ secrets.GH_BOT_USER }}
       run: |
