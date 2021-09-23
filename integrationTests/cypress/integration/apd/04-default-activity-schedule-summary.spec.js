@@ -1,7 +1,7 @@
 // E2E tests for activity schdule summary
 
-import ExportPage from "../../page-objects/export-page";
-import ActivitySchedulePage from "../../page-objects/activity-schedule-page";
+import ExportPage from '../../page-objects/export-page';
+import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 
 /* eslint no-return-assign: "off" */
 
@@ -16,7 +16,7 @@ describe('Activity Schedule Summary', () => {
     cy.useStateStaff();
     cy.contains('HITECH IAPD').click();
     cy.url().should('contain', '/apd');
-    cy.location('pathname').then(pathname => apdURL = pathname);
+    cy.location('pathname').then(pathname => (apdURL = pathname));
   });
 
   describe('Default Values in Activity Schedules', () => {
@@ -26,54 +26,60 @@ describe('Activity Schedule Summary', () => {
     before(() => {
       cy.useStateStaff(apdURL);
       cy.get('a.ds-c-vertical-nav__label')
-        .contains(/Activity Schedule Summary/i).click();
+        .contains(/Activity Schedule Summary/i)
+        .click();
       cy.url().should('contain', '/schedule-summary');
-      cy.location('pathname').then(pathname => apdActivityScheduleURL = pathname);
+      cy.location('pathname').then(
+        pathname => (apdActivityScheduleURL = pathname)
+      );
     });
 
     beforeEach(() => {
       cy.useStateStaff(apdActivityScheduleURL);
       // Check that the page has loaded
-      cy.findByRole('heading', { name: /^Activity Schedule Summary$/i })
+      cy.findByRole('heading', { name: /^Activity Schedule Summary$/i });
     });
 
     describe('Activities Overview', () => {
       it('Only one activity in the Activity List Overview', () => {
-        schedulePage.getAllActivityOverviews()
-          .should('have.length', 1);
+        schedulePage.getAllActivityScheduleOverviews().should('have.length', 1);
       });
-  
+
       it('Activity is called "Activity 1: Program Administration Milestones"', () => {
         // Activity 1 has index 0
-        schedulePage.getActivityOverviewName(0)
+        schedulePage
+          .getActivityScheduleOverviewName(0)
           .should('eq', 'Activity 1: Program Administration Milestones');
       });
-  
+
       it('Activity date range is "Date not specified - Date not specified"', () => {
-        schedulePage.getActivityOverviewDates(0)
+        schedulePage
+          .getActivityScheduleOverviewDates(0)
           .should('eq', 'Date not specified - Date not specified');
       });
-    })
+    });
 
     describe('Milestones', () => {
       it('Only one activity in Milestone Tables', () => {
-        schedulePage.getAllMilestoneTables()
+        schedulePage
+          .getAllActivityScheduleMilestoneTables()
           .should('have.length', 1);
       });
-  
+
       it('Milestone is called "Activity 1: Program Administration Milestones"', () => {
         // Activity 1 has index 0
-        schedulePage.getMilestoneTableName(0)
+        schedulePage
+          .getActivityScheduleMilestoneTableName(0)
           .should('eq', 'Activity 1: Program Administration Milestones');
       });
-  
+
       it('Activity 1 milestones are blank', () => {
         // Get the first milestone for Activity 1
-        schedulePage.getAllActivityMilestones(0)
-        .should('have.length', 0);
+        schedulePage
+          .getAllActivityScheduleMilestones(0)
+          .should('have.length', 0);
       });
-    })
-
+    });
   });
 
   describe('Default Values in Export View', () => {
@@ -87,52 +93,52 @@ describe('Activity Schedule Summary', () => {
       // Navigate to export data page
       cy.goToExportView();
       cy.url().should('contain', '/print');
-      cy.location('pathname').then(pathname => apdExportURL = pathname);
+      cy.location('pathname').then(pathname => (apdExportURL = pathname));
     });
 
     beforeEach(() => {
       cy.useStateStaff(apdExportURL);
       // Check that the page has loaded
-      cy.findByRole('heading', { name: /^Activity Schedule Summary$/i })
+      cy.findByRole('heading', { name: /^Activity Schedule Summary$/i });
     });
-    
+
     describe('Activities Overview', () => {
       it('Only one activity in the Activity List Overview', () => {
-        exportPage.getAllActivityScheduleOverviews()
-          .should('have.length', 1);
+        exportPage.getAllActivityScheduleOverviews().should('have.length', 1);
       });
-  
+
       it('Activity is called "Activity 1: Program Administration Milestones"', () => {
         // Activity 1 has index 0
-        exportPage.getActivityScheduleOverviewName(0)
+        exportPage
+          .getActivityScheduleOverviewName(0)
           .should('eq', 'Activity 1: Program Administration Milestones');
       });
-  
+
       it('Activity date range is "Date not specified - Date not specified"', () => {
-        exportPage.getActivityScheduleOverviewDates(0)
+        exportPage
+          .getActivityScheduleOverviewDates(0)
           .should('eq', 'Date not specified - Date not specified');
       });
-    })
+    });
 
     describe('Milestones', () => {
       it('Only one activity in Milestone Tables', () => {
-        exportPage.getAllActivityScheduleMilestoneTables()
+        exportPage
+          .getAllActivityScheduleMilestoneTables()
           .should('have.length', 1);
       });
-  
+
       it('Milestone is called "Activity 1: Program Administration Milestones"', () => {
         // Activity 1 has index 0
-        exportPage.getActivityScheduleMilestoneTableName(0)
+        exportPage
+          .getActivityScheduleMilestoneTableName(0)
           .should('eq', 'Activity 1: Program Administration Milestones');
       });
-  
+
       it('Activity 1 milestones are blank', () => {
         // Get the first milestone for Activity 1
-        exportPage.getAllActivityScheduleMilestones(0)
-          .should('have.length', 0);
+        exportPage.getAllActivityScheduleMilestones(0).should('have.length', 0);
       });
-    })
-
+    });
   });
- 
-})
+});
