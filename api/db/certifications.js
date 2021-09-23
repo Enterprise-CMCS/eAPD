@@ -41,13 +41,14 @@ const getStateAdminCertifications = (
       'state_admin_certifications.ffy'
     ])
     .countDistinct('affiliations.id as potentialMatches')
-    .leftOuterJoin('okta_users', function() {
+    .leftOuterJoin('okta_users', function oktaCertificationsJoin() {
       this
         .on('okta_users.email', '=', 'state_admin_certifications.email')
         .orOn('okta_users.displayName', '=', 'state_admin_certifications.name')
 
     })
-    .leftOuterJoin(subQuery, function() {
+
+    .leftOuterJoin(subQuery, function oktaAffiliationJoin() {
       this.on('okta_users.user_id', '=', 'affiliations.user_id')
         .andOn('state_admin_certifications.state', '=', 'affiliations.state_id')
     })

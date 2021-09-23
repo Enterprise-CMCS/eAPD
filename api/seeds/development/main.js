@@ -4,7 +4,6 @@ const states = require('../shared/states');
 const apds = require('./apds');
 const state = require('./state');
 const users = require('./base-users');
-const {getStateAdminCertifications} = require('../../db/certifications')
 
 exports.seed = async knex => {
   // Don't seed this data if we're not in a development environment.
