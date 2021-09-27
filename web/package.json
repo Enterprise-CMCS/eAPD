@@ -76,7 +76,7 @@
     "@okta/okta-auth-js": "^4.8.0",
     "@tinymce/tinymce-react": "^3.9.1",
     "axe-core": "^4.3.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "connected-react-router": "^6.9.1",
     "core-js": "^3.15.2",
     "d3-format": "^2.0.0",
