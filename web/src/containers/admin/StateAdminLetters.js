@@ -1,6 +1,8 @@
-import React, { Fragment, useMemo, useState } from 'react';
+import React, { Fragment, useMemo, useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination, useAsyncDebounce } from 'react-table';
+
+import axios, { apiUrl } from '../../util/api';
 
 import {
   Button,
@@ -25,7 +27,7 @@ const mockapi = [
       "state": "ak",
       "ffy": "2020",
       "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
+      "affiliationId": 12345,
       "potentialMatches": "1"
   },
   {
@@ -82,121 +84,32 @@ const mockapi = [
       "file": "/auth/certifications/09e2109ei",
       "affiliationId": null,
       "potentialMatches": "1"
-  },
-  {
-      "id": 48,
-      "name": "Test Okta",
-      "email": "testokta@fearless.tech",
-      "phone": "4105554444",
-      "state": "md",
-      "ffy": "2019",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 49,
-      "name": "State Contractor",
-      "email": "statecontractor@fearless.tech",
-      "phone": "4105553333",
-      "state": "ga",
-      "ffy": "2021",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 50,
-      "name": "State Staff",
-      "email": "statestaff@fearless.tech",
-      "phone": "4105552222",
-      "state": "ak",
-      "ffy": "2021",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 51,
-      "name": "Reese Set",
-      "email": "resetmfa@fearless.tech",
-      "phone": "4105551111",
-      "state": "tn",
-      "ffy": "2021",
-      "file": "/auth/certifications/09123098",
-      "affiliationId": null,
-      "potentialMatches": "0"
-  },
-  {
-      "id": 47,
-      "name": "State Admin",
-      "email": "stateadmin@fearless.tech",
-      "phone": "4105555555",
-      "state": "ak",
-      "ffy": "2020",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 48,
-      "name": "Test Okta",
-      "email": "testokta@fearless.tech",
-      "phone": "4105554444",
-      "state": "md",
-      "ffy": "2019",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 49,
-      "name": "State Contractor",
-      "email": "statecontractor@fearless.tech",
-      "phone": "4105553333",
-      "state": "ga",
-      "ffy": "2021",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 50,
-      "name": "State Staff",
-      "email": "statestaff@fearless.tech",
-      "phone": "4105552222",
-      "state": "ak",
-      "ffy": "2021",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 51,
-      "name": "Reese Set",
-      "email": "resetmfa@fearless.tech",
-      "phone": "4105551111",
-      "state": "tn",
-      "ffy": "2021",
-      "file": "/auth/certifications/09123098",
-      "affiliationId": null,
-      "potentialMatches": "0"
-  },
+  }
 ];
 
+const calculateStatus = record => {  
+  if(record.affiliationId) {
+    return 'Matched';
+  }
+  if(!record.affiliationId && record.potentialMatches > 0) {
+    return 'Pending Match';
+  }
+  if(!record.affiliationId && record.potentialMatches == 0) {
+    return 'No Match';
+  }
+  return '';
+}
 // Using React-Table we will need to format the data before
 // supplying it to the table. Consider moving this step to
 // a redux action or a utility file.
 const certificationRow = record => {
-  const statusCalculated = record.potentialMatches > 0 ? 'Pending' : 'Unmatched';
   return {
     name: record.name,
     email: record.email,
-    phone: record.phone,
     state: record.state.toUpperCase(),
     ffy: record.ffy,
-    file: record.file,
-    status: statusCalculated,
+    file: record.fileUrl,
+    status: calculateStatus(record),
     actions: record.affiliationId
   };
 }
@@ -275,6 +188,16 @@ function SelectColumnFilter({
 const StateAdminLetters = () => {  
   const history = useHistory();
   
+  const [tableData, setTableData] = useState([]);
+  
+  useEffect(() => {
+    async function fetchData() {
+      const certificationLetters = await axios.get('/auth/certifications');
+      setTableData(certificationLetters.data);
+    }
+    fetchData();
+  }, []);
+  
   const handleAddStateButton = () => {
     history.push("/delegate-state-admin");
   };
@@ -288,11 +211,6 @@ const StateAdminLetters = () => {
       {
         Header: 'Email',
         accessor: 'email',
-      },
-      {
-        Header: 'Phone Number',
-        accessor: 'phone',
-        disableSortBy: true,
       },
       {
         Header: 'FFY',
@@ -326,7 +244,7 @@ const StateAdminLetters = () => {
     []
   );
   
-  const data = React.useMemo(() => makeData(mockapi), [])
+  const data = React.useMemo(() => makeData(tableData), [tableData]);
   
   const {
    getTableProps,
@@ -358,8 +276,7 @@ const StateAdminLetters = () => {
   )  
   
   return (
-    <div>
-     
+    <div>     
       <Button onClick={handleAddStateButton} variation="primary">Add State Admin Letter</Button>
       
       <div className="ds-u-display--flex ds-u-justify-content--between" style={{maxWidth: '30rem'}}>
@@ -378,7 +295,6 @@ const StateAdminLetters = () => {
          </TableRow>
          {headerGroups.map(headerGroup => (
            <TableRow {...headerGroup.getHeaderGroupProps()}>
-             {/* {console.log("headerGroup.headers", headerGroup.headers)} */}
              {headerGroup.headers.map(column => (
                <TableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
                  {column.render('Header')}
@@ -406,14 +322,14 @@ const StateAdminLetters = () => {
                  if(cell.column.id === 'file') {
                    return (
                      <TableCell {...cell.getCellProps()}>
-                       <a href={`${cell.value}`}><PDFFileBlue /></a>
+                       <a href={`${cell.value}`} ><PDFFileBlue /></a>
                      </TableCell>
                    )
                  }
                  if (cell.column.id === 'actions') {
                    return (
                      <TableCell {...cell.getCellProps()}>
-                      <Button>OK</Button>
+                        {/* Todo: Add actions here */}
                      </TableCell>
                    )
                  } 
