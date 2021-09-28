@@ -156,7 +156,7 @@ const DelegateStateAdminForm = () => {
         <hr className="custom-hr ds-u-margin-y--3" />
         <label className="ds-c-label ds-u-measure--wide" htmlFor="file-input">
           Upload the State Administrator Delegation of Authority letter below.
-          <span className="ds-c-field__hint ds-u-padding-y--1">Accepted files: .doc and.pdf only</span>
+          <span className="ds-c-field__hint ds-u-padding-y--1">Accepted files: .doc, .docx, and .pdf only</span>
         </label>
         {fileName && (
           <div className="ds-u-display--flex ds-u-align-items--center ds-u-justify--space-between">
@@ -184,7 +184,7 @@ const DelegateStateAdminForm = () => {
         </div>
         <div className="ds-u-padding-top--4">
           <Button className="ds-u-margin-right--2" onClick={() => history.push('/')}>Cancel</Button>
-          <Button variation="primary" onClick={handleFormSubmit} disabled={!isFormComplete}>Add state admin letter</Button>
+          <Button variation="primary" onClick={handleFormSubmit} disabled={!isFormComplete}>Add State Admin Letter</Button>
         </div>
       </form>
     </main>
