@@ -80,6 +80,11 @@ class ExecutiveSummaryPage {
       .siblings()
   }
 
+  getCategoryCells = (source, payer) => {
+    return cy.get(`[headers="program-budget-table-${source} `
+    + `program-budget-table-${source}-${payer}"]`);
+  }
+
 }
 
 export default ExecutiveSummaryPage;
