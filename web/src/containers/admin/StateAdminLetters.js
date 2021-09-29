@@ -44,7 +44,7 @@ const certificationRow = record => {
   };
 }
 
-function makeData(payload) {
+const makeData = payload => {
   return payload.map(record => {
     return {
       ...certificationRow(record)
@@ -52,10 +52,10 @@ function makeData(payload) {
   });
 };
 
-function GlobalFilter({
+const GlobalFilter = ({
   globalFilter,
   setGlobalFilter,
-}) {
+}) => {
   const [value, setValue] = React.useState(globalFilter)
   
   const onChange = useAsyncDebounce(val => {
@@ -77,9 +77,9 @@ function GlobalFilter({
   )
 };
 
-function SelectColumnFilter({
+const SelectColumnFilter = ({
   column: { filterValue, setFilter, preFilteredRows, id, Header },
-}) {
+}) => {
   const options = React.useMemo(() => {
     const opts = new Set();
     preFilteredRows.forEach(row => {
@@ -207,7 +207,7 @@ const StateAdminLetters = () => {
   )
   
   return (
-    <div>
+    <div id="state-admin-letters">
       <Button onClick={handleAddStateButton} variation="primary">Add State Admin Letter</Button>
       
       <div className="ds-u-display--flex ds-u-justify-content--between" style={{maxWidth: '30rem'}}>
@@ -310,6 +310,6 @@ StateAdminLetters.defaultProps = {
   glbalFilter: {},
   setGlobalFilter: {},
   column: []
-}
+};
 
 export default StateAdminLetters;

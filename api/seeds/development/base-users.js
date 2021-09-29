@@ -17,11 +17,13 @@ exports.seed = async knex => {
 
   // save the tokens to a file
   try {
-    fs.writeFileSync(`${__dirname  }/../test/tokens.json`, JSON.stringify(testTokens,null, 4))
+    fs.writeFileSync(
+      `${__dirname}/../test/tokens.json`,
+      JSON.stringify(testTokens, null, 4)
+    );
   } catch (err) {
     // not much to do here but log it
-    // eslint-disable-next-line no-console
-    console.error(err)
+    logger.error(`Errors creating tokens ${err}`);
   }
 
   try {
@@ -33,3 +35,4 @@ exports.seed = async knex => {
   }
   
 };
+

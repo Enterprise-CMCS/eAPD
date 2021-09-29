@@ -114,6 +114,7 @@ describe('<FederalAdmin />', () => {
     beforeEach(() => {
       fetchMock.reset();
       fetchMock.onGet(`/states/fd/affiliations`).reply(200, []);
+      fetchMock.onGet(`/auth/certifications`).reply(200, []);
       renderWithConnection(<FederalAdmin />, {
         initialState
       });
@@ -121,9 +122,7 @@ describe('<FederalAdmin />', () => {
 
     test('renders no results message', async () => {
       await waitFor(() => {
-        expect(
-          screen.getAllByText('No users on this tab at this time')
-        ).toBeTruthy();
+        expect(screen.getAllByText('No users on this tab at this time')).toBeTruthy();
       });
     });
 
