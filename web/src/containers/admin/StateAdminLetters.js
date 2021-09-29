@@ -1,8 +1,7 @@
-import React, { Fragment, useMemo, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination, useAsyncDebounce } from 'react-table';
-
-import axios, { apiUrl } from '../../util/api';
 
 import {
   Button,
@@ -15,101 +14,32 @@ import {
   TextField
 } from '@cmsgov/design-system';
 
+import axios from '../../util/api';
+
 import { PDFFileBlue } from '../../components/Icons';
 
-
-const mockapi = [
-  {
-      "id": 47,
-      "name": "State Admin",
-      "email": "stateadmin@fearless.tech",
-      "phone": "4105555555",
-      "state": "ak",
-      "ffy": "2020",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": 12345,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 48,
-      "name": "Test Okta",
-      "email": "testokta@fearless.tech",
-      "phone": "4105554444",
-      "state": "md",
-      "ffy": "2019",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 49,
-      "name": "State Contractor",
-      "email": "statecontractor@fearless.tech",
-      "phone": "4105553333",
-      "state": "ga",
-      "ffy": "2021",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 50,
-      "name": "State Staff",
-      "email": "statestaff@fearless.tech",
-      "phone": "4105552222",
-      "state": "ak",
-      "ffy": "2021",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  },
-  {
-      "id": 51,
-      "name": "Reese Set",
-      "email": "resetmfa@fearless.tech",
-      "phone": "4105551111",
-      "state": "tn",
-      "ffy": "2021",
-      "file": "/auth/certifications/09123098",
-      "affiliationId": null,
-      "potentialMatches": "0"
-  },
-  {
-      "id": 47,
-      "name": "State Admin",
-      "email": "stateadmin@fearless.tech",
-      "phone": "4105555555",
-      "state": "ak",
-      "ffy": "2020",
-      "file": "/auth/certifications/09e2109ei",
-      "affiliationId": null,
-      "potentialMatches": "1"
-  }
-];
-
-const calculateStatus = record => {  
-  if(record.affiliationId) {
-    return 'Matched';
-  }
-  if(!record.affiliationId && record.potentialMatches > 0) {
-    return 'Pending Match';
-  }
-  if(!record.affiliationId && record.potentialMatches == 0) {
-    return 'No Match';
-  }
-  return '';
-}
-// Using React-Table we will need to format the data before
-// supplying it to the table. Consider moving this step to
-// a redux action or a utility file.
 const certificationRow = record => {
+  
+  const calculateStatus = (affiliationId, potentialMatches) => {  
+    if(affiliationId) {
+      return 'Matched';
+    }
+    if(!affiliationId && Number(potentialMatches) > 0) {
+      return 'Pending Match';
+    }
+    if(!affiliationId && Number(potentialMatches) === 0) {
+      return 'No Match';
+    }
+    return '';
+  }
+  
   return {
     name: record.name,
     email: record.email,
     state: record.state.toUpperCase(),
     ffy: record.ffy,
     file: record.fileUrl,
-    status: calculateStatus(record),
+    status: calculateStatus(record.affiliationId, record.potentialMatches),
     actions: record.affiliationId
   };
 }
@@ -122,18 +52,14 @@ function makeData(payload) {
   });
 };
 
-
 function GlobalFilter({
-  preGlobalFilteredRows,
   globalFilter,
   setGlobalFilter,
 }) {
-  const count = preGlobalFilteredRows.length
   const [value, setValue] = React.useState(globalFilter)
   
-  const onChange = useAsyncDebounce(value => {
-    console.log("whats happening here");
-    setGlobalFilter(value || undefined)
+  const onChange = useAsyncDebounce(val => {
+    setGlobalFilter(val || undefined)
   }, 200)
 
   return (
@@ -145,7 +71,7 @@ function GlobalFilter({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        label={`Search all`}
+        label="Search All"
       />
     </span>
   )
@@ -154,17 +80,14 @@ function GlobalFilter({
 function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id, Header },
 }) {
-  // Calculate the options for filtering
-  // using the preFilteredRows
   const options = React.useMemo(() => {
-    const options = new Set()
+    const opts = new Set();
     preFilteredRows.forEach(row => {
-      options.add(row.values[id])
+      opts.add(row.values[id]);
     })
-    return [...options.values()]
+    return [...opts.values()];
   }, [id, preFilteredRows])
 
-  // Render a multi-select box
   return (
     <Dropdown
       name="dropdownFilter"
@@ -176,13 +99,26 @@ function SelectColumnFilter({
       }}
     >
       <option value="">All</option>
-      {options.map((option, i) => (
-        <option key={i} value={option}>
+      {options.map((option) => (
+        <option key={option} value={option}>
           {option}
         </option>
       ))}
     </Dropdown>
   )
+};
+
+const SortIndicator = ({canSort, isSorted, isSortedDesc}) => {
+  if (canSort) {
+    if (isSorted) {
+      if (isSortedDesc) {
+        return ' ▾';
+      }
+      return ' ▴';
+    }
+    return ' ⬍';
+  }
+  return '';   
 };
 
 const StateAdminLetters = () => {  
@@ -206,45 +142,44 @@ const StateAdminLetters = () => {
     () => [
       {
         Header: 'Name',
-        accessor: 'name',
+        accessor: 'name'
       },
       {
         Header: 'Email',
-        accessor: 'email',
+        accessor: 'email'
       },
       {
         Header: 'FFY',
         accessor: 'ffy',
-        disableSortBy: true,
+        disableSortBy: true
       },
       {
         Header: 'State',
         accessor: 'state',
         Filter: SelectColumnFilter,
-        filter: 'includes',
+        filter: 'includes'
       },
       {
         Header: 'Status',
         accessor: 'status',
         Filter: SelectColumnFilter,
-        filter: 'includes',
-        disableSortBy: true,
+        filter: 'includes'
       },
       {
         Header: 'View',
         accessor: 'file',
-        disableSortBy: true,
+        disableSortBy: true
       },
       {
         Header: 'Actions',
         accessor: 'actions',
-        disableSortBy: true,
+        disableSortBy: true
       },
     ],
     []
   );
   
-  const data = React.useMemo(() => makeData(tableData), [tableData]);
+  const data = useMemo(() => makeData(tableData), [tableData]);
   
   const {
    getTableProps,
@@ -256,13 +191,9 @@ const StateAdminLetters = () => {
    canPreviousPage,
    canNextPage,
    pageOptions,
-   pageCount,
-   gotoPage,
    nextPage,
    previousPage,
    setPageSize,
-   
-   preGlobalFilteredRows,
    setGlobalFilter,
   } = useTable(
    { 
@@ -273,17 +204,16 @@ const StateAdminLetters = () => {
    useGlobalFilter,
    useSortBy,
    usePagination
-  )  
+  )
   
   return (
-    <div>     
+    <div>
       <Button onClick={handleAddStateButton} variation="primary">Add State Admin Letter</Button>
       
       <div className="ds-u-display--flex ds-u-justify-content--between" style={{maxWidth: '30rem'}}>
         {headerGroups[0].headers.find(item => item.Header === 'Status').render('Filter')}
         {headerGroups[0].headers.find(item => item.Header === 'State').render('Filter')}
         <GlobalFilter
-           preGlobalFilteredRows={preGlobalFilteredRows}
            globalFilter={globalFilter}
            setGlobalFilter={setGlobalFilter}
         />
@@ -291,30 +221,19 @@ const StateAdminLetters = () => {
       
       <Table {...getTableProps()} className="ds-u-margin-top--1" borderless>
        <TableHead>
-          <TableRow>
-         </TableRow>
          {headerGroups.map(headerGroup => (
            <TableRow {...headerGroup.getHeaderGroupProps()}>
              {headerGroup.headers.map(column => (
                <TableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
                  {column.render('Header')}
-                 <span>
-                   {/* Todo: make this not awful and unreadable */}
-                   {column.canSort ?
-                      column.isSorted
-                       ? column.isSortedDesc
-                         ? ' ▾'
-                         : ' ▴'
-                       : ' ⬍'
-                     : ''}
-                 </span>
+                 <SortIndicator canSort={column.canSort} isSorted={column.isSorted} isSortedDesc={column.isSortedDesc} />
                </TableCell>
              ))}
            </TableRow>
-         ))}
+          ))}
        </TableHead>
        <TableBody {...getTableBodyProps()}>
-         {page.map((row, i) => {
+         {page.map((row) => {
            prepareRow(row)
            return (
              <TableRow {...row.getRowProps()}>
@@ -338,7 +257,6 @@ const StateAdminLetters = () => {
                      {cell.render('Cell')}
                    </TableCell>
                  )
-
                })}
              </TableRow>
            )
@@ -356,9 +274,9 @@ const StateAdminLetters = () => {
             setPageSize(Number(e.target.value))
           }}
         >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              {pageSize}
+          {[10, 20, 30, 40, 50].map(size => (
+            <option key={size} value={size}>
+              {size}
             </option>
           ))}
         </select>
@@ -370,16 +288,28 @@ const StateAdminLetters = () => {
           </strong>{' '}
         </span>
         
-        <button style={{border: "none", background: "transparent"}} onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <button type="button" style={{border: "none", background: "transparent"}} onClick={() => previousPage()} disabled={!canPreviousPage}>
           {'<'}
         </button>{' '}
-        <button style={{border: "none", background: "transparent"}} onClick={() => nextPage()} disabled={!canNextPage}>
+        <button type="button" style={{border: "none", background: "transparent"}} onClick={() => nextPage()} disabled={!canNextPage}>
           {'>'}
         </button>{' '}
       </div>
       
     </div>
   )
+}
+
+StateAdminLetters.propTypes = {
+  globalFilter: PropTypes.object,
+  setGlobalFilter: PropTypes.object,
+  column: PropTypes.array
+};
+
+StateAdminLetters.defaultProps = {
+  glbalFilter: {},
+  setGlobalFilter: {},
+  column: []
 }
 
 export default StateAdminLetters;
