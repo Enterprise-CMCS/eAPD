@@ -2,6 +2,7 @@ const pkg = require('../../package.json');
 
 const affiliations = require('../affiliations/openAPI');
 const apds = require('../apds/openAPI');
+const apdsEvents = require('../apds/events/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
 const authCertifications = require('../auth/certifications/openAPI');
@@ -9,6 +10,7 @@ const docs = require('../docs/openAPI');
 const me = require('../me/openAPI');
 const roles = require('../roles/openAPI');
 const states = require('../states/openAPI');
+const statesAffiliations = require('../states/affilitations/openAPI');
 const users = require('../users/openAPI');
 const { arrayOf } = require('./helpers').schema;
 
@@ -22,6 +24,7 @@ module.exports = {
   paths: {
     ...affiliations,
     ...apds,
+    ...apdsEvents,
     ...authActivities,
     ...authRoles,
     ...authCertifications,
@@ -29,6 +32,7 @@ module.exports = {
     ...me,
     ...roles,
     ...states,
+    ...statesAffiliations,
     ...users,
     '/open-api': {
       get: {

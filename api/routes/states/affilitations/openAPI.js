@@ -3,7 +3,7 @@
 const {
   schema: { arrayOf, jsonResponse },
   responses
-} = require('../openAPI/helpers');
+} = require('../../openAPI/helpers');
 
 const id = {
   type: 'integer',
@@ -95,6 +95,31 @@ const affiliationSchema = {
 
 const tags = ['Affiliations'];
 
+const getAffiliationsByState = {
+  get: {
+    tags,
+    description: 'Get a list of all user affiliations for a US State',
+    parameters: [stateIdParameter, filterStatusParameter],
+    requestBody: {
+      required: false,
+      content: jsonResponse({
+        type: 'object',
+        properties: {
+          filter_status
+        }
+      })
+    },
+    responses: {
+      200: {
+        description: 'List of all user affiliations for a US State',
+        content: jsonResponse(arrayOf(affiliationSchema))
+      },
+      ...responses.unauthed
+    },
+    security: [{ bearerAuth: [] }]
+  }
+};
+
 const postAffiliations = {
   post: {
     tags,
@@ -117,21 +142,25 @@ const postAffiliations = {
   }
 };
 
-const getMyAffiliations = {
+const getAffiliation = {
   get: {
     tags,
-    description: 'Get the current affiliations for the logged in user',
-
+    description: 'Get a single user affiliation with a US State',
+    parameters: [stateIdParameter, idParameter],
     responses: {
       200: {
-        description: 'A list of affiliations for the logged in user',
-        content: jsonResponse(arrayOf(affiliationSchema))
+        description: 'A single user affiliation with a US State',
+        content: jsonResponse(affiliationSchema)
       },
-      401: {...responses.unauthed[401]}
+      404: {
+        description: 'The affiliation does not exist'
+      },
+      ...responses.unauthed
     },
     security: [{ bearerAuth: [] }]
   }
 };
+
 
 const patchAffiliation = {
   patch: {
@@ -164,9 +193,14 @@ const patchAffiliation = {
 
 
 const affiliationRoutes = {
-  '/affiliations/me': {
-    ...getMyAffiliations
-  }
+  '/states/{stateId}/affiliations': {
+    ...getAffiliationsByState,
+    ...postAffiliations
+  },
+  '/states/{stateId}/affiliations/{id}': {
+    ...getAffiliation,
+    ...patchAffiliation
+  },
 };
 
 module.exports = affiliationRoutes;

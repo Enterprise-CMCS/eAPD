@@ -5,7 +5,7 @@ const {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
+} = require('../../../endpoint-tests/utils');
 
 describe('Affiliations endpoint | PATCH', () => {
   const api = login('all-permissions');

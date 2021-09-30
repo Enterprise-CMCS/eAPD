@@ -2,10 +2,12 @@ const swaggerUi = require('swagger-ui-express');
 const logger = require('../logger')('routes index');
 const affiliations = require('./affiliations');
 const apds = require('./apds');
+const apdsEvents = require('./apds/events')
 const auth = require('./auth');
 const docs = require('./docs');
 const roles = require('./roles');
 const states = require('./states');
+const statesAffiliations = require('./states/affilitations');
 const users = require('./users');
 const openAPI = require('./openAPI');
 
@@ -13,10 +15,12 @@ module.exports = (
   app,
   affiliationsEndpoint = affiliations,
   apdsEndpoint = apds,
+  apdsEventsEndpoint = apdsEvents,
   authEndpoint = auth,
   docsEndpoint = docs,
   rolesEndpoint = roles,
   statesEndpoint = states,
+  statesAffiliationEndpoint = statesAffiliations,
   usersEndpoint = users,
   openAPIdoc = openAPI
 ) => {
@@ -24,6 +28,8 @@ module.exports = (
   affiliationsEndpoint(app);
   logger.debug('setting up routes for apds');
   apdsEndpoint(app);
+  logger.debug('setting up routes for apds/events');
+  apdsEventsEndpoint(app)
   logger.debug('setting up routes for auth');
   authEndpoint(app);
   logger.debug('setting up routes for docs');
@@ -32,6 +38,8 @@ module.exports = (
   rolesEndpoint(app);
   logger.debug('setting up routes for states');
   statesEndpoint(app);
+  logger.debug('setting up routes for states/affiliation');
+  statesAffiliationEndpoint(app)
   logger.debug('setting up routes for users');
   usersEndpoint(app);
 
