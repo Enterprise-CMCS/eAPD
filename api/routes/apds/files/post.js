@@ -1,13 +1,12 @@
 const multer = require('multer');
-const logger = require('../../logger')('apds file routes');
-const { can, userCanEditAPD } = require('../../middleware');
-const { validateFile: vf } = require('../../util/fileValidation');
+const logger = require('../../../logger')('apds file routes');
+const { can, userCanEditAPD } = require('../../../middleware');
+const { validateFile: vf } = require('../../../util/fileValidation');
 const {
   createNewFileForAPD: cf,
   deleteFileByID: df,
-  fileBelongsToAPD: fb
-} = require('../../db');
-const { getFile: get, putFile: put } = require('../../files');
+} = require('../../../db');
+const { putFile: put } = require('../../../files');
 
 module.exports = (
   app,

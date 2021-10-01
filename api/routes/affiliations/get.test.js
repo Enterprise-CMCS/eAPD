@@ -1,9 +1,6 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const can = require('../../middleware').can;
-const validForState = require('../../middleware').validForState;
-
 const getEndpoint = require('./get');
 
 const mockExpress = require('../../util/mockExpress');

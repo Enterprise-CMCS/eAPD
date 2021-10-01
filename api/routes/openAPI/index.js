@@ -3,9 +3,12 @@ const pkg = require('../../package.json');
 const affiliations = require('../affiliations/openAPI');
 const apds = require('../apds/openAPI');
 const apdsEvents = require('../apds/events/openAPI');
+const apdsFiles= require('../apds/files/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
+const authStates = require('../auth/states/openAPI');
 const authCertifications = require('../auth/certifications/openAPI');
+const authCertificationsFiles = require('../auth/certifications/files/openAPI');
 const docs = require('../docs/openAPI');
 const me = require('../me/openAPI');
 const roles = require('../roles/openAPI');
@@ -24,10 +27,13 @@ module.exports = {
   paths: {
     ...affiliations,
     ...apds,
+    ...apdsFiles,
     ...apdsEvents,
     ...authActivities,
     ...authRoles,
+    ...authStates,
     ...authCertifications,
+    ...authCertificationsFiles,
     ...docs,
     ...me,
     ...roles,
