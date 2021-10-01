@@ -16,6 +16,8 @@ import {
 
 import axios from '../../util/api';
 
+import MatchStateAdminDialog from './MatchStateAdminDialog';
+
 import { PDFFileBlue } from '../../components/Icons';
 
 const certificationRow = record => {
@@ -34,6 +36,7 @@ const certificationRow = record => {
   }
   
   return {
+    id: record.id,
     name: record.name,
     email: record.email,
     state: record.state.toUpperCase(),
@@ -125,6 +128,8 @@ const StateAdminLetters = () => {
   const history = useHistory();
   
   const [tableData, setTableData] = useState([]);
+  const [showMatchUserDialog, setShowMatchUserDialog]= useState(false);
+  const [selectedCertification, setSelectedCertification]= useState({});
   
   useEffect(() => {
     async function fetchData() {
@@ -133,10 +138,6 @@ const StateAdminLetters = () => {
     }
     fetchData();
   }, []);
-  
-  const handleAddStateButton = () => {
-    history.push("/delegate-state-admin");
-  };
   
   const columns = React.useMemo(
     () => [
@@ -204,7 +205,22 @@ const StateAdminLetters = () => {
    useGlobalFilter,
    useSortBy,
    usePagination
-  )
+  );
+  
+  const handleAddStateButton = () => {
+    history.push("/delegate-state-admin");
+  };
+  
+  const handleShowMatchUserDialog = event => {
+    const certificationId = event.target.parentNode.parentNode.getAttribute('data-certification-id');
+    const certification = page.find(row => Number(certificationId) === Number(row.original.id) );
+    setSelectedCertification(certification.original);
+    setShowMatchUserDialog(true);
+  };
+  
+  const handleHideMatchUserDialog = () => {
+    setShowMatchUserDialog(false);
+  }
   
   return (
     <div id="state-admin-letters">
@@ -236,7 +252,7 @@ const StateAdminLetters = () => {
          {page.map((row) => {
            prepareRow(row)
            return (
-             <TableRow {...row.getRowProps()}>
+             <TableRow {...row.getRowProps()} data-certification-id={row.original.id}>
                {row.cells.map(cell => {
                  if(cell.column.id === 'file') {
                    return (
@@ -248,7 +264,9 @@ const StateAdminLetters = () => {
                  if (cell.column.id === 'actions') {
                    return (
                      <TableCell {...cell.getCellProps()}>
-                        {/* Todo: Add actions here */}
+                       {cell.row.values.status === 'Pending Match' &&
+                        <Button onClick={handleShowMatchUserDialog}>Match To User</Button>
+                       }
                      </TableCell>
                    )
                  } 
@@ -295,7 +313,12 @@ const StateAdminLetters = () => {
           {'>'}
         </button>{' '}
       </div>
-      
+      {showMatchUserDialog && (
+        <MatchStateAdminDialog
+          certification={selectedCertification}
+          hideModal={handleHideMatchUserDialog} 
+        />
+      )}
     </div>
   )
 }
