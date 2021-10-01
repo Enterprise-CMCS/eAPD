@@ -374,6 +374,7 @@ jobs:
             # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use --delete-prefix v6.1.0 --silent
             nvm install 14
             nvm alias default v14
             ./unit-test.sh
