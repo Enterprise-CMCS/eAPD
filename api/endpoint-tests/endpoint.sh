@@ -3,7 +3,6 @@
 rm ./endpoint-tests/endpoint-data.json
 
 export NODE_ENV=test
-export NODE_DEBUG="net,tls,http,https"
 export API_URL=http://localhost:8081
 export CYPRESS_TESTS=false
 unset DEV_DB_NAME

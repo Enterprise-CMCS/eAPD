@@ -330,7 +330,6 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            export NODE_DEBUG="net,tls,http,https"
             # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -372,7 +371,6 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            export NODE_DEBUG="net,tls,http,https"
             # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -491,7 +489,6 @@ jobs:
           name: start everything up
           working_directory: ~/project/api
           command: |
-            export NODE_DEBUG="net,tls,http,https"
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
@@ -504,9 +501,8 @@ jobs:
       - run:
           name: run owasp zap
           command: |
-            export NODE_DEBUG="net,tls,http,https"
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker run -e NODE_DEBUG="net,tls,http,https" \
+            docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
               owasp/zap2docker-stable \

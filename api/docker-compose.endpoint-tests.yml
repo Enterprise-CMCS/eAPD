@@ -17,7 +17,6 @@ services:
     environment:
       - PORT=8000
       - NODE_ENV=test
-      - NODE_DEBUG='net,tls,http,https'
       - API_PORT=8000
       - API_HOST=api-for-testing
       - ENDPOINT_COVERAGE_CAPTURE=${ENDPOINT_COVERAGE_CAPTURE}
