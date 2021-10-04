@@ -490,9 +490,9 @@ jobs:
           working_directory: ~/project/api
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker-compose -f docker-compose.endpoint-tests.yml up -d -e NODE_DEBUG='net,tls,http,https'
-            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate -e NODE_DEBUG='net,tls,http,https'
-            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed -e NODE_DEBUG='net,tls,http,https'
+            docker-compose -e NODE_DEBUG='net,tls,http,https' -f docker-compose.endpoint-tests.yml up -d
+            docker-compose -e NODE_DEBUG='net,tls,http,https' -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
+            docker-compose -e NODE_DEBUG='net,tls,http,https' -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
           command: |
@@ -502,15 +502,14 @@ jobs:
           name: run owasp zap
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker run \
+            docker run -e NODE_DEBUG='net,tls,http,https' \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
               owasp/zap2docker-stable \
               zap-api-scan.py \
               -c api-scan.conf \
               -t http://api-for-testing:8000/open-api \
-              -f openapi \
-              -e NODE_DEBUG='net,tls,http,https'
+              -f openapi
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
