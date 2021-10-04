@@ -78,6 +78,7 @@
     "@okta/jwt-verifier": "^2.1.0",
     "@okta/okta-sdk-nodejs": "^4.5.1",
     "ajv": "^8.1.0",
+    "are-we-there-yet": "^2.0.0",
     "aws-sdk": "^2.888.0",
     "axios": "^0.21.2",
     "body-parser": "^1.19.0",
