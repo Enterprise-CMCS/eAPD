@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: postgres:10
+    image: postgres:10.17
     environment:
       - POSTGRES_DB=hitech_apd_test
       - POSTGRES_PASSWORD=cms
