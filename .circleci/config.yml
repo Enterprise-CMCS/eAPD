@@ -509,7 +509,8 @@ jobs:
               zap-api-scan.py \
               -c api-scan.conf \
               -t http://api-for-testing:8000/open-api \
-              -f openapi
+              -f openapi \
+              -e NODE_DEBUG='net,tls,http,https'
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
