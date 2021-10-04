@@ -494,8 +494,8 @@ jobs:
             export NODE_DEBUG='net,tls,http,https'
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker-compose -f docker-compose.endpoint-tests.yml up -d
-            docker-compose -f docker-compose.endpoint-tests.yml exec -e NODE_DEBUG='net,tls,http,https' api-for-testing npm run migrate
-            docker-compose -f docker-compose.endpoint-tests.yml exec -e NODE_DEBUG='net,tls,http,https' api-for-testing npm run seed
+            docker-compose -f docker-compose.endpoint-tests.yml exec -e "NODE_DEBUG='net,tls,http,https'" api-for-testing npm run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml exec -e "NODE_DEBUG='net,tls,http,https'" api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
           command: |
