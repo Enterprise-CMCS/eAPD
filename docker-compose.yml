@@ -30,6 +30,7 @@ services:
     build: ./web
     image: cms-eapd/web
     environment:
+      - NODE_DEBUG="net,tls,http,https"
       - API_URL=http://localhost:8081
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
@@ -52,6 +53,7 @@ services:
       - PORT=8000
       - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
       - NODE_ENV=development
+      - NODE_DEBUG="net,tls,http,https"
       - DISABLE_SAME_SITE=yes
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}

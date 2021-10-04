@@ -11,9 +11,9 @@ unset DEV_DB_NAME
 echo "[]" > endpoint-data.json
 
 ENDPOINT_COVERAGE_CAPTURE=true docker-compose -f docker-compose.endpoint-tests.yml up -d
-docker-compose -f docker-compose.endpoint-tests.yml exec --env-file ../.env.net api-for-testing npm run migrate
-docker-compose -f docker-compose.endpoint-tests.yml exec --env-file ../.env.net api-for-testing api-for-testing npm run seed
-docker-compose -f docker-compose.endpoint-tests.yml exec --env-file ../.env.net api-for-testing api-for-testing npm run test-endpoints $@
+docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
+docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing api-for-testing npm run seed
+docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing api-for-testing npm run test-endpoints $@
 EXIT_CODE=$?
 docker-compose -f docker-compose.endpoint-tests.yml down
 
