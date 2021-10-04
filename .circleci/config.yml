@@ -331,8 +331,8 @@ jobs:
           working_directory: ~/project/api
           command: |
             # Switch to Node 14.
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install v14
             nvm alias default v14
             ./endpoint-tests/endpoint.sh
@@ -372,8 +372,8 @@ jobs:
           working_directory: ~/project/api
           command: |
             # Switch to Node 14.
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install v14
             nvm alias default v14
             ./unit-test.sh
