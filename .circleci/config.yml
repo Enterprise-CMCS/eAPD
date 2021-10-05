@@ -359,7 +359,7 @@ jobs:
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
     machine:
-      image: cimg/base:latest
+      image: cimg/base:2021.10
     steps:
       - checkout
       - attach_workspace:
@@ -480,7 +480,7 @@ jobs:
 
   owasp zap scan:
     machine:
-      image: cimg/base:latest
+      image: cimg/base:2021.10
     steps:
       - checkout
       - attach_workspace:
