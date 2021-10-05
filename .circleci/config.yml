@@ -333,9 +333,6 @@ jobs:
             # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            npm cache clean --force
-            npm config delete prefix
-            npm config set prefix $NVM_DIR/versions/node/v6.1.0
             nvm install 14
             nvm alias default v14
             ./endpoint-tests/endpoint.sh
@@ -377,9 +374,6 @@ jobs:
             # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            npm cache clean --force
-            npm config delete prefix
-            npm config set prefix $NVM_DIR/versions/node/v6.1.0
             nvm install 14
             nvm alias default v14
             ./unit-test.sh
