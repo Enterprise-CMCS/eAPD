@@ -6,20 +6,14 @@ export NODE_ENV=test
 export API_URL=http://localhost:8081
 export CYPRESS_TESTS=false
 
-npm cache clean --force
-#nvm use --delete-prefix v6.1.0 --silent
-nvm install 14
-nvm alias default v14
-which npm
-
 unset DEV_DB_NAME
 
 echo "[]" > endpoint-data.json
 
 ENDPOINT_COVERAGE_CAPTURE=true docker-compose -f docker-compose.endpoint-tests.yml up -d
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
-docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing api-for-testing npm run seed
-docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing api-for-testing npm run test-endpoints $@
+docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
+docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run test-endpoints $@
 EXIT_CODE=$?
 docker-compose -f docker-compose.endpoint-tests.yml down
 
