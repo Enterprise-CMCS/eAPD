@@ -5,6 +5,13 @@ rm ./endpoint-tests/endpoint-data.json
 export NODE_ENV=test
 export API_URL=http://localhost:8081
 export CYPRESS_TESTS=false
+
+npm cache clean --force
+#nvm use --delete-prefix v6.1.0 --silent
+nvm install 14
+nvm alias default v14
+which npm
+
 unset DEV_DB_NAME
 
 echo "[]" > endpoint-data.json
