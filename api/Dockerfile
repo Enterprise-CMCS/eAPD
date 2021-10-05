@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:14.16
 
 RUN npm i -g npm@^6
 
