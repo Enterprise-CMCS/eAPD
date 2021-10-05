@@ -334,11 +334,10 @@ jobs:
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm cache clean --force
-            nvm use --delete-prefix v6.1.0 --silent
+            npm config delete prefix
+            npm config set prefix $NVM_DIR/versions/node/v6.1.0
             nvm install 14
             nvm alias default v14
-            which npm
-            npm config get prefix
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -379,11 +378,10 @@ jobs:
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm cache clean --force
-            nvm use --delete-prefix v6.1.0 --silent
+            npm config delete prefix
+            npm config set prefix $NVM_DIR/versions/node/v6.1.0
             nvm install 14
             nvm alias default v14
-            which npm
-            npm config get prefix            
             ./unit-test.sh
       - run:
           name: report coverage
