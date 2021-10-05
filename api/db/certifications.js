@@ -19,6 +19,15 @@ const addStateAdminCertification = (
     })
 };
 
+const updateStateAdminCertification = (
+  data,
+  { db = knex } = {}
+) => {
+  return db('state_admin_certifications')
+    .where({ id: data.certificationId })
+    .update({ affiliationId: data.affiliationId })
+};
+
 const getStateAdminCertifications = (
   {db = knex} = {}
 ) =>{
@@ -60,5 +69,5 @@ const getStateAdminCertifications = (
 module.exports = {
   addStateAdminCertification,
   getStateAdminCertifications,
-
+  updateStateAdminCertification
 };

@@ -138,7 +138,7 @@ const StateAdminLetters = () => {
       setTableData(certificationLetters.data);
     }
     fetchData();
-  }, []);
+  }, [showMatchUserDialog]);
   
   const columns = React.useMemo(
     () => [

@@ -10,7 +10,7 @@ const MatchStateAdminDialog = ({
   hideModal
 }) => {
   const [stateAffiliations, setStateAffiliations] = useState([]);
-  const [selectedUser, setSelectedUser] = useState({});
+  const [selectedAffiliation, setSelectedAffiliation] = useState({});
   
   useEffect(() => {
     const state = certification.state.toLowerCase();
@@ -18,22 +18,28 @@ const MatchStateAdminDialog = ({
     async function fetchDataAndSetDefault() {
       const affiliations = await axios.get(`/states/${state}/affiliations`);
       setStateAffiliations(affiliations.data);
-      {/* Compare the certification email/name to the affiliations and make it the default */}
+      {/* Compare the certification email/name to the affiliations and make 
+          it the default one selected in the dropdown */}
       const match = affiliations.data.find(affiliation => {
         return affiliation.email === certification.email || affiliation.displayName === certification.name;
       });
-      setSelectedUser(match);
+      setSelectedAffiliation(match);
     };
     fetchDataAndSetDefault();
   },[]);
   
   const handleUserSelect = async event => {
     const userInfo = stateAffiliations.find(affiliation => affiliation.id == event.target.value);
-    setSelectedUser(userInfo);
+    setSelectedAffiliation(userInfo);
   };
   
-  const handleMatch = event => {
-    console.log("submit the match");
+  const handleSubmit = event => {
+    const submissionResponse = axios.put('/auth/certifications', {
+      certificationId: certification.id,
+      affiliationId: selectedAffiliation.id,
+      stateId: selectedAffiliation.stateId     
+    });
+    hideModal();
   }
   
   const stateName = STATES.find(state => state.id === certification.state.toLowerCase()).name;
@@ -57,7 +63,7 @@ const MatchStateAdminDialog = ({
           Cancel
         </Button>,
         <Button
-          onClick={handleMatch}
+          onClick={handleSubmit}
           key="action1"
           variation="primary"
         >
@@ -73,17 +79,17 @@ const MatchStateAdminDialog = ({
         label={`Select User`}
         name="selectedPermission"
         onChange={handleUserSelect}
-        value={selectedUser.id}
+        value={selectedAffiliation.id}
       />
       <div className="ds-l-row ds-u-padding-y--3">
         <div className="ds-l-col">
           <h4>EUA User Account</h4>
           <div className="ds-u-border--2 ds-u-padding--2">
             <ul className="ds-c-list ds-c-list--bare" aria-labelledby="unstyled-list-id">
-              <li><strong>{selectedUser.displayName}</strong></li>
-              <li><strong>Email:</strong> <span>{selectedUser.email}</span></li>
-              <li><strong>Phone:</strong> <span>{selectedUser.primaryPhone}</span></li>
-              <li><strong>State:</strong> <span>{selectedUser.stateId ? selectedUser.stateId.toUpperCase() : ''}</span></li>
+              <li><strong>{selectedAffiliation.displayName}</strong></li>
+              <li><strong>Email:</strong> <span>{selectedAffiliation.email}</span></li>
+              <li><strong>Phone:</strong> <span>{selectedAffiliation.primaryPhone}</span></li>
+              <li><strong>State:</strong> <span>{selectedAffiliation.stateId ? selectedAffiliation.stateId.toUpperCase() : ''}</span></li>
             </ul>
           </div>
         </div>
