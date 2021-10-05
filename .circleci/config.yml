@@ -315,7 +315,7 @@ jobs:
   # Runs backend API integration/end-to-end tests.
   backend api endpoint test:
     machine:
-      image: circleci/node:14
+      image: cimg/node:14
     steps:
       - checkout
       - attach_workspace:
@@ -359,7 +359,7 @@ jobs:
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
     machine:
-      image: circleci/base:latest
+      image: cimg/base:latest
     steps:
       - checkout
       - attach_workspace:
@@ -480,7 +480,7 @@ jobs:
 
   owasp zap scan:
     machine:
-      image: circleci/classic:latest
+      image: cimg/base:latest
     steps:
       - checkout
       - attach_workspace:
