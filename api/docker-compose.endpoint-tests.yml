@@ -32,6 +32,8 @@ services:
     command: npm start
     expose:
       - 8000
+    requires:
+      - db
     volumes:
       - ./:/app
       - /app/node_modules
