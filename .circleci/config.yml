@@ -337,6 +337,8 @@ jobs:
             nvm use --delete-prefix v6.1.0 --silent
             nvm install 14
             nvm alias default v14
+            which npm
+            npm config get prefix
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -380,6 +382,8 @@ jobs:
             nvm use --delete-prefix v6.1.0 --silent
             nvm install 14
             nvm alias default v14
+            which npm
+            npm config get prefix            
             ./unit-test.sh
       - run:
           name: report coverage
