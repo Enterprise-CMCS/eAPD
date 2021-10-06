@@ -2,6 +2,9 @@ name: Cleanup Plantinum AMIs
 on:
   schedule:
     - cron: '0 0 * * *'  # every day at midnight
+  push:
+    branches:
+      - bbrooks/3510-Packer_Secrets    
 jobs:
   packer-ami-cleanup:
     runs-on: ubuntu-latest
