@@ -33,26 +33,27 @@ module.exports = (
       
       const {
         certificationId,
+        certificationFfy,
         affiliationId,
         stateId
       } = req.body;
 
       try {
+        await updateStateAdminCertification({
+          certificationId: certificationId,
+          affiliationId: affiliationId,
+          changedBy: req.user.id
+        });
         
-        const stateAdminCert = await updateStateAdminCertification({certificationId, affiliationId});
-        console.log("stateadmincert resolution", stateAdminCert);
-        const authAffiliation = await updateAuthAffiliation({
+        await updateAuthAffiliation({
           affiliationId: Number(affiliationId),
           newRoleId: stateAdminId,
           newStatus: 'approved',
           changedBy: req.user.id,
-          stateId: stateId
+          stateId: stateId,
+          ffy: certificationFfy
         });
-        console.log("authAffiliation resolution", authAffiliation);
         
-        if (error) {
-          res.status(400).end();
-        }
         res.send(200);
       } catch (e) {
         logger.error({ id: req.id, message: 'error updating state admin certification' });

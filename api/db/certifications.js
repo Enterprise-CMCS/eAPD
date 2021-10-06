@@ -26,6 +26,15 @@ const updateStateAdminCertification = (
   return db('state_admin_certifications')
     .where({ id: data.certificationId })
     .update({ affiliationId: data.affiliationId })
+    .then(() => {
+      return db('state_admin_certifications_audit')
+        .insert({
+          changeDate: new Date(),
+          changedBy: data.changedBy,
+          changeType: 'match',
+          certificationId: data.certificationId
+        })
+    });
 };
 
 const getStateAdminCertifications = (

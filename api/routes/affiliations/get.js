@@ -4,6 +4,7 @@ const {
   getPopulatedAffiliationById: _getPopulatedAffiliationsById,
   getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
   getAffiliationsByUserId: _getAffiliationsByUserId,
+  getAffiliationMatches: _getAffiliationMatches,
 } = require('../../db');
 const { loggedIn, can, validForState } = require('../../middleware');
 
@@ -14,6 +15,7 @@ module.exports = (
     getPopulatedAffiliationById = _getPopulatedAffiliationsById,
     getAllPopulatedAffiliations = _getAllPopulatedAffiliations,
     getAffiliationsByUserId = _getAffiliationsByUserId,
+    getAffiliationMatches = _getAffiliationMatches,
   } = {}
 ) => {
   app.get(
@@ -26,7 +28,7 @@ module.exports = (
         message: `handling GET /states/${request.params.stateId}/affiliations`
       });
       const { stateId } = request.params;
-      const { status = null } = request.query;
+      const { status = null, matches = false } = request.query;
 
       try {
         if (stateId === 'fd') {
@@ -34,7 +36,14 @@ module.exports = (
             status
           });
           return response.send(affiliations);
-        }
+        };
+        if (matches === 'true') {
+          const affiliations = await getAffiliationMatches({
+            stateId,
+            isFedAdmin: true
+          });
+          return response.send(affiliations);
+        };
         const affiliations = await getPopulatedAffiliationsByStateId({
           stateId,
           status,

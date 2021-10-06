@@ -16,7 +16,7 @@ const MatchStateAdminDialog = ({
     const state = certification.state.toLowerCase();
     
     async function fetchDataAndSetDefault() {
-      const affiliations = await axios.get(`/states/${state}/affiliations`);
+      const affiliations = await axios.get(`/states/${state}/affiliations?matches=true`);
       setStateAffiliations(affiliations.data);
       {/* Compare the certification email/name to the affiliations and make 
           it the default one selected in the dropdown */}
@@ -36,6 +36,7 @@ const MatchStateAdminDialog = ({
   const handleSubmit = event => {
     const submissionResponse = axios.put('/auth/certifications', {
       certificationId: certification.id,
+      certificationFfy: certification.ffy,
       affiliationId: selectedAffiliation.id,
       stateId: selectedAffiliation.stateId     
     });
