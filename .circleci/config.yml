@@ -333,8 +333,8 @@ jobs:
             # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v14
-            nvm alias default v14
+            nvm install 14
+            nvm alias default 14
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -374,8 +374,8 @@ jobs:
             # Switch to Node 14.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v14
-            nvm alias default v14
+            nvm install 14
+            nvm alias default 14
             ./unit-test.sh
       - run:
           name: report coverage
