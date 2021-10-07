@@ -8,6 +8,7 @@ const {
   getAffiliationById,
   getPopulatedAffiliationsByStateId,
   getAllPopulatedAffiliations,
+  getAffiliationMatches,
   reduceAffiliations,
   getAffiliationsByUserId
 } = require('./affiliations');

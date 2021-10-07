@@ -159,9 +159,8 @@ const getAllPopulatedAffiliations = async ({
 };
 
 const getAffiliationMatches = async ({
-  db = knex,
   stateId,
-  getAffiliationsByStateId_ = getAffiliationsByStateId
+  db = knex
 }) => {
   const query = db('auth_affiliations')
     .select(selectedColumns)
@@ -214,7 +213,7 @@ const updateAuthAffiliation = async({
       expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
     }
     if (roleName === 'eAPD State Admin') {
-      expirationDate = new Date(ffy + 1, '08', '30')
+      expirationDate = new Date(ffy, '09', '01')
     }
   }
   
@@ -238,8 +237,7 @@ const updateAuthAffiliation = async({
       return db('auth_affiliation_audit')
         .insert(authAffiliationAudit)
     })
-
-}
+};
 
 module.exports = {
   getAffiliationsByStateId,

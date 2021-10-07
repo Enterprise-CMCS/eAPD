@@ -6,12 +6,6 @@ const { updateStateAdminCertification: updateCertification } = require('../../..
 const { updateAuthAffiliation: updateAffiliation } = require('../../../db/affiliations');
 const { getAllActiveRoles: getActiveRoles } = require('../../../db/roles');
 
-// affiliationId,
-// newRoleId,
-// newStatus,
-// changedBy,
-// stateId
-
 module.exports = (
   app,
   {

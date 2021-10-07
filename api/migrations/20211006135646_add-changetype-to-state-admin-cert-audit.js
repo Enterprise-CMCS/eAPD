@@ -13,6 +13,13 @@ const formatAlterTableEnumSql = (
 };
 
 exports.up = async knex => {
+  await knex.schema.table('state_admin_certifications', table => {
+    table.dropColumn('certifiedByName');
+    table.dropColumn('certifiedByTitle');
+    table.dropColumn('certifiedByEmail');
+    table.dropColumn('certifiedBySignature');
+  });
+  
   await knex.raw(
     formatAlterTableEnumSql('state_admin_certifications_audit', 'changeType', [
       'add',
@@ -23,6 +30,13 @@ exports.up = async knex => {
 };
 
 exports.down = async knex => {
+  await knex.schema.table('state_admin_certifications', table => {
+    table.string('certifiedByName').comment('name of person who completed the designation letter');
+    table.string('certifiedByTitle').comment('title of person who completed the designation letter');
+    table.string('certifiedByEmail').comment('email of person who completed the designation letter');
+    table.string('certifiedBySignature').comment('printed name of person who signed the designation letter');
+  });
+  
   await knex.raw(
     formatAlterTableEnumSql('state_admin_certifications_audit', 'changeType', [
       'add',
