@@ -20,3 +20,7 @@ import 'cypress-axe-core'; // eslint-disable-line import/no-extraneous-dependenc
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+Cypress.Cookies.defaults({
+  preserve: ['gov.cms.eapd.api-token', 'gov.cms.eapd.hasConsented']
+});
+Cypress.Cookies.debug(true, { verbose: true });

@@ -3,7 +3,10 @@ import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
 import tokens from '../../tokens.json';
-import { API_COOKIE_NAME } from '../../../web/src/constants';
+import {
+  CONSENT_COOKIE_NAME,
+  API_COOKIE_NAME
+} from '../../../web/src/constants';
 
 const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000
@@ -37,7 +40,8 @@ const EXPIRY_DATE = Math.ceil(
 
 // Login methods
 Cypress.Commands.add('login', (username, password) => {
-  cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
+  cy.clearCookies();
+  cy.setCookie(CONSENT_COOKIE_NAME, 'true', {
     expiry: EXPIRY_DATE
   });
   cy.visit('/');
@@ -53,6 +57,7 @@ Cypress.Commands.add('loginWithEnv', username => {
 });
 
 Cypress.Commands.add('useJwtUser', (username, url) => {
+  cy.clearCookies();
   cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
     expiry: EXPIRY_DATE
   });
@@ -124,6 +129,20 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
   });
 });
 
+Cypress.Commands.add('waitForSave', () => {
+  cy.get('body').then($body => {
+    if ($body) {
+      if ($body.text().includes('Saving')) {
+        cy.wrap($body).contains('Saved', { timeout: 10000 }).should('exist');
+      }
+
+      cy.wrap($body)
+        .contains(/Saved|Last saved/i)
+        .should('exist');
+    }
+  });
+});
+
 Cypress.Commands.add('goToKeyStatePersonnel', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
@@ -147,10 +166,73 @@ Cypress.Commands.add('goToPreviousActivities', () => {
 });
 
 Cypress.Commands.add('goToActivityDashboard', () => {
-  cy.contains(/Activities Dashboard/i)
-    .click({ force: true });
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/^Activities$/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        cy.log('clicking on Activities');
+        cy.wrap($el).click();
+      }
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Activities Dashboard/i)
+        .click();
+    });
 });
 
+const openActivitySection = (activityIndex, subNavName) => {
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/^Activities$/i)
+    .click({ force: true });
+
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/^Activities$/i)
+    .next()
+    .within(() => {
+      cy.get('.ds-c-vertical-nav__label--parent')
+        .contains('Activity')
+        .eq(activityIndex)
+        .click({ force: true });
+      cy.get('.ds-c-vertical-nav__label--parent')
+        .contains('Activity')
+        .eq(activityIndex)
+        .next()
+        .within(() => {
+          cy.get('a.ds-c-vertical-nav__label')
+            .contains(subNavName)
+            .click({ force: true });
+        });
+    });
+};
+
+Cypress.Commands.add('goToActivityOverview', activityIndex => {
+  openActivitySection(activityIndex, 'Activity Overview');
+});
+
+Cypress.Commands.add('goToOutcomesAndMilestones', activityIndex => {
+  openActivitySection(activityIndex, 'Outcomes and Milestones');
+});
+
+Cypress.Commands.add('goToStateStaffAndExpenses', activityIndex => {
+  openActivitySection(activityIndex, 'State Staff and Expenses');
+});
+
+Cypress.Commands.add('goToPrivateContractorCosts', activityIndex => {
+  openActivitySection(activityIndex, 'Private Contractor Costs');
+});
+
+Cypress.Commands.add('goToCostAllocationAndOtherFunding', activityIndex => {
+  openActivitySection(activityIndex, 'Cost Allocation and Other Funding');
+});
+
+Cypress.Commands.add('goToBudgetAndFFP', activityIndex => {
+  openActivitySection(activityIndex, 'Budget and FFP');
+});
+
+Cypress.Commands.add('goToActivityScheduleSummary', () => {
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/Activity Schedule Summary/i)
+    .click();
+});
 
 Cypress.Commands.add('goToProposedBudget', () => {
   // Expand nav menu option
@@ -163,7 +245,7 @@ Cypress.Commands.add('goToProposedBudget', () => {
     .click();
 });
 
-Cypress.Commands.add('goToAssurancesCompliance', () => {
+Cypress.Commands.add('goToAssurancesAndCompliance', () => {
   cy.get('a.ds-c-vertical-nav__label')
     .contains(/Assurances and Compliance/i)
     .click();
