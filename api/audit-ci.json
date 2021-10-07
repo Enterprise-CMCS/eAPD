@@ -1,7 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [],
+  "allowlist": [1002401, 1002475],
   "_comment": {
     "e.g. - 1747": {
       "module": "browserslist",

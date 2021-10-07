@@ -1,7 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1693, 1751, 1753],
+  "allowlist": [1002401, 1002422, 1002475, 1002487, 1002492, 1002522, 1002580, 1002581, 1002624, 1002627, 1002655, 1002775],
   "_comment": {
     "1693": {
       "advisory": "https://www.npmjs.com/advisories/1693",
