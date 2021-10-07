@@ -102,12 +102,11 @@ export const testDefaultKeyStatePersonnel = years => {
       .parent()
       .contains('$')
       .should('have.text', '$0');
-
-    // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
   });
 
   it('Add blank key personnel that is chargeable to the project', () => {
     cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+    cy.waitForSave();
     // Have to force check; cypress does not think radio buttons are visible
     cy.get('input[type="radio"][value="yes"]')
       .scrollIntoView()
@@ -206,17 +205,9 @@ export const testDefaultKeyStatePersonnelExportView = years => {
 };
 
 export const testKeyStatePersonnelWithData = years => {
-  let apdPersonnelURL;
-  before(() => {
+  beforeEach(() => {
     cy.goToKeyStatePersonnel();
     cy.url().should('contain', '/state-profile');
-    cy.location('pathname').then(pathname => {
-      apdPersonnelURL = pathname;
-    });
-  });
-
-  beforeEach(() => {
-    cy.useStateStaff(apdPersonnelURL);
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
   });
 
@@ -245,24 +236,31 @@ export const testKeyStatePersonnelWithData = years => {
       cy.get('input[name="apd-state-profile-mdname"]')
         .clear()
         .type(userData[0].name);
+      cy.waitForSave();
       cy.get('input[name="apd-state-profile-mdemail"]')
         .clear()
         .type(userData[0].email);
+      cy.waitForSave();
       cy.get('input[name="apd-state-profile-mdphone"]')
         .clear()
         .type(userData[0].phone);
+      cy.waitForSave();
       cy.get('input[name="apd-state-profile-addr1"]')
         .clear()
         .type(userData[0].address.street);
+      cy.waitForSave();
       cy.get('input[name="apd-state-profile-addr2"]')
         .clear()
         .type(userData[0].address.suite);
+      cy.waitForSave();
       cy.get('input[name="apd-state-profile-city"]')
         .clear()
         .type(userData[0].address.city);
+      cy.waitForSave();
       cy.get('input[name="apd-state-profile-zip"]')
         .clear()
         .type(userData[0].address.zipcode);
+      cy.waitForSave();
       cy.get('select[name="apd-state-profile-state"]')
         .invoke('val', 'AL')
         .trigger('change');
@@ -318,9 +316,11 @@ export const testKeyStatePersonnelWithData = years => {
         cy.get('input[name="apd-state-profile-pocname0"]')
           .clear()
           .type(userData[1].name);
+        cy.waitForSave();
         cy.get('input[name="apd-state-profile-pocemail0"]')
           .clear()
           .type(userData[1].email);
+        cy.waitForSave();
         cy.get('input[name="apd-state-profile-pocposition0"]')
           .clear()
           .type(userData[1].username);
@@ -379,9 +379,11 @@ export const testKeyStatePersonnelWithData = years => {
         cy.get('input[name="apd-state-profile-pocname1"]')
           .clear()
           .type(userData[2].name);
+        cy.waitForSave();
         cy.get('input[name="apd-state-profile-pocemail1"]')
           .clear()
           .type(userData[2].email);
+        cy.waitForSave();
         cy.get('input[name="apd-state-profile-pocposition1"]')
           .clear()
           .type(userData[2].username);

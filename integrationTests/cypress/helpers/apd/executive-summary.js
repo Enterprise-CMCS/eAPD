@@ -1,7 +1,11 @@
 import ExecutiveSummaryPage from '../../page-objects/executive-summary-page';
 
 export const testDefaultExecutiveSummary = years => {
-  const summaryPage = new ExecutiveSummaryPage();
+  let summaryPage;
+
+  before(() => {
+    summaryPage = new ExecutiveSummaryPage();
+  });
 
   beforeEach(() => {
     cy.goToExecutiveSummary();

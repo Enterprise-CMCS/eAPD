@@ -6,13 +6,14 @@ export const testDefaultResultsOfPreviousActivities = () => {
 
   before(() => {
     previousActivitiesPage = new PreviousActivitiesPage();
+    cy.goToPreviousActivities();
+    // Get the years referenced by previous activities
+    previousActivitiesPage.getYears();
   });
 
   beforeEach(() => {
     cy.goToPreviousActivities();
     cy.url().should('contain', '/previous-activities');
-    // Get the years referenced by previous activities
-    previousActivitiesPage.getYears();
   });
 
   it('should be on the correct page', () => {
@@ -108,17 +109,11 @@ export const testDefaultResultsOfPreviousActivitiesExportView = () => {
 
 export const testResultsOfPreviousActivitiesWithData = () => {
   let previousActivitiesPage;
-  let previousActivitiesURL;
   let resultsOfPreviousActivities;
 
   before(() => {
     previousActivitiesPage = new PreviousActivitiesPage();
     cy.goToPreviousActivities();
-    cy.url().should('contain', '/previous-activities');
-    cy.location('pathname').then(pathname => {
-      previousActivitiesURL = pathname;
-    });
-
     // Get the years referenced by previous activities
     previousActivitiesPage.getYears();
   });
@@ -130,7 +125,7 @@ export const testResultsOfPreviousActivitiesWithData = () => {
         resultsOfPreviousActivities = activityData;
       }
     );
-    cy.useStateStaff(previousActivitiesURL);
+    cy.goToPreviousActivities();
     cy.findByRole('heading', {
       name: /Results of Previous Activities/i
     }).should('exist');

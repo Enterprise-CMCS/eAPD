@@ -45,6 +45,7 @@ class ActivityPage {
     cy.contains('Delete').click();
     cy.contains(heading).should('exist');
     cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+    cy.waitForSave();
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.waitForSave();
     cy.contains(heading).should('not.exist');
@@ -62,6 +63,7 @@ class ActivityPage {
 
   checkMetricFunctionality = () => {
     cy.findByRole('button', { name: /Add Metric/i }).click();
+    cy.waitForSave();
     for (let i = 0; i < 2; i += 1) {
       cy.get('[class="ds-c-review"]')
         .eq(i)

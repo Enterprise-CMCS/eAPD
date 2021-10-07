@@ -129,24 +129,14 @@ export const testDefaultActivityDashboardExportView = years => {
 };
 
 export const testActivityDashboardWithData = () => {
-  let activityDashboardURL;
   let activityOverview;
-
-  before(() => {
-    cy.goToActivityDashboard();
-
-    cy.url().should('include', '/activities');
-    cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
-    cy.location('pathname').then(pathname => {
-      activityDashboardURL = pathname;
-    });
-  });
 
   beforeEach(() => {
     cy.fixture('activity-overview-template.json').then(data => {
       activityOverview = data;
     });
-    cy.useStateStaff(activityDashboardURL);
+    cy.goToActivityDashboard();
+    cy.url().should('include', '/activities');
     cy.findByRole('heading', { name: /Activities/i, level: 2 }).should('exist');
   });
 
@@ -157,6 +147,7 @@ export const testActivityDashboardWithData = () => {
     cy.findAllByText('Edit').eq(1).click();
 
     cy.findByLabelText('Activity name').type(activityOverview.newActivityName);
+    cy.waitForSave();
     cy.findByRole('radio', { name: /HIT/i }).check({ force: true });
     cy.waitForSave();
     activities.push([activityOverview.newActivityName, 'HIT']);

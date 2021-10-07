@@ -43,13 +43,12 @@ export const testActivityOverviewWithData = () => {
 
   describe('Activity 1', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToActivityOverview(url, 0);
-        cy.findByRole('heading', {
-          name: /Activity Overview/i,
-          level: 3
-        }).should('exist');
-      });
+      cy.goToActivityOverview(0);
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
     });
     it('Fills in fields on first activity', () => {
       const overview = activityOverview.activityOverview[0];
@@ -61,25 +60,24 @@ export const testActivityOverviewWithData = () => {
         overview.detailedDescription,
         overview.supportingJustificaions
       );
+      cy.waitForSave();
 
       cy.setTinyMceContent(
         'standards-and-conditions-supports-field',
         overview.supportsMedicaid
       );
-
       cy.waitForSave();
     });
   });
 
   describe('Activity 2', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToActivityOverview(url, 1);
-        cy.findByRole('heading', {
-          name: /Activity Overview/i,
-          level: 3
-        }).should('exist');
-      });
+      cy.goToActivityOverview(1);
+      cy.findByRole('heading', {
+        name: /^Activity 2:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
     });
     it('Fills in fields on second activity', () => {
       const overview = activityOverview.activityOverview[1];
@@ -90,11 +88,11 @@ export const testActivityOverviewWithData = () => {
         overview.detailedDescription,
         overview.supportingJustificaions
       );
+      cy.waitForSave();
 
       cy.get('[class="ds-c-field visibility--screen"]').type(
         overview.supportsMedicaid
       );
-
       cy.waitForSave();
     });
   });

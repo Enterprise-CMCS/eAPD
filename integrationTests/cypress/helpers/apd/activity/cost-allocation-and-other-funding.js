@@ -56,12 +56,14 @@ export const testCostAllocationAndOtherFundingWithData = years => {
 
   describe('Activity 1', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToCostAllocationAndOtherFunding(url, 0);
-        cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
-          'exist'
-        );
-      });
+      cy.goToCostAllocationAndOtherFunding(0);
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
+        'exist'
+      );
     });
 
     it('fills out cost allocation page for activity 1', () => {
@@ -73,8 +75,7 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         allocation.costs,
         years
       );
-
-      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
 
       // Deleted the first one from each catagory
       const staff = activityData.staff[1];
@@ -105,12 +106,14 @@ export const testCostAllocationAndOtherFundingWithData = years => {
 
   describe('Activity 2', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToCostAllocationAndOtherFunding(url, 0);
-        cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
-          'exist'
-        );
-      });
+      cy.goToCostAllocationAndOtherFunding(1);
+      cy.findByRole('heading', {
+        name: /^Activity 2:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
+        'exist'
+      );
     });
 
     it('fills out cost allocation page for activity 2', () => {
@@ -122,8 +125,7 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         allocation.costs,
         years
       );
-
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
 
       const staff1 = activityData.staff[2];
       const staff2 = activityData.staff[3];

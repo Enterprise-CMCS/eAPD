@@ -130,13 +130,13 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
 });
 
 Cypress.Commands.add('waitForSave', () => {
-  cy.get('body').then($body => {
-    if ($body) {
-      if ($body.text().includes('Saving')) {
-        cy.wrap($body).contains('Saved', { timeout: 10000 }).should('exist');
+  cy.get('header').then($header => {
+    if ($header) {
+      if ($header.text().includes('Saving')) {
+        cy.wrap($header).contains('Saved', { timeout: 10000 }).should('exist');
       }
 
-      cy.wrap($body)
+      cy.wrap($header)
         .contains(/Saved|Last saved/i)
         .should('exist');
     }
@@ -147,32 +147,46 @@ Cypress.Commands.add('goToKeyStatePersonnel', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/Key State Personnel/i)
-    .click();
-  // Click on nav submenu button
-  cy.get('a.ds-c-vertical-nav__label')
-    .contains(/Key State Personnel/i)
-    .click();
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Key State Personnel/i)
+        .click();
+    });
 });
 
 Cypress.Commands.add('goToPreviousActivities', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/Results of Previous Activities/i)
-    .click();
-  // Click on nav submenu button
-  cy.get('a.ds-c-vertical-nav__label')
-    .contains(/Results of Previous Activities/i)
-    .click();
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Results of Previous Activities/i)
+        .click();
+    });
 });
 
 Cypress.Commands.add('goToActivityDashboard', () => {
+  // check to see if Activities is expanded
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/^Activities$/i)
     .then($el => {
       if ($el.attr('aria-expanded') === 'false') {
-        cy.log('clicking on Activities');
+        // if it's not expanded, expand it
         cy.wrap($el).click();
       }
+      // click on Activities Dashboard
       cy.get('a.ds-c-vertical-nav__label')
         .contains(/Activities Dashboard/i)
         .click();
@@ -180,26 +194,38 @@ Cypress.Commands.add('goToActivityDashboard', () => {
 });
 
 const openActivitySection = (activityIndex, subNavName) => {
+  // check to see if Activities is expanded
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/^Activities$/i)
-    .click({ force: true });
+    .then($activities => {
+      if ($activities.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($activities).click();
+      }
 
-  cy.get('.ds-c-vertical-nav__label--parent')
-    .contains(/^Activities$/i)
-    .next()
-    .within(() => {
-      cy.get('.ds-c-vertical-nav__label--parent')
-        .contains('Activity')
-        .eq(activityIndex)
-        .click({ force: true });
-      cy.get('.ds-c-vertical-nav__label--parent')
-        .contains('Activity')
-        .eq(activityIndex)
+      cy.wrap($activities)
         .next()
-        .within(() => {
-          cy.get('a.ds-c-vertical-nav__label')
-            .contains(subNavName)
-            .click({ force: true });
+        .within($list => {
+          cy.log({ $list });
+          // find the Activity section with the correct index
+          // check to see if Activity Index is expanded
+          cy.get('.ds-c-vertical-nav__label--parent')
+            .contains(`Activity ${activityIndex + 1}: `)
+            .then($activity => {
+              // if it's not expanded, expand it
+              if ($activity.attr('aria-expanded') === 'false') {
+                cy.wrap($activity).click();
+              }
+
+              cy.wrap($activity)
+                .next()
+                .within(() => {
+                  // find the subNavName section and click on it
+                  cy.get('a.ds-c-vertical-nav__label')
+                    .contains(subNavName)
+                    .click();
+                });
+            });
         });
     });
 };
@@ -238,11 +264,17 @@ Cypress.Commands.add('goToProposedBudget', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/Proposed Budget/i)
-    .click();
-  // Click on nav submenu button
-  cy.get('a.ds-c-vertical-nav__label')
-    .contains(/Proposed Budget/i)
-    .click();
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Proposed Budget/i)
+        .click();
+    });
 });
 
 Cypress.Commands.add('goToAssurancesAndCompliance', () => {
@@ -255,11 +287,17 @@ Cypress.Commands.add('goToExecutiveSummary', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/Executive Summary/i)
-    .click();
-  // Click on nav submenu button
-  cy.get('a.ds-c-vertical-nav__label')
-    .contains(/Executive Summary/i)
-    .click();
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Executive Summary/i)
+        .click();
+    });
 });
 
 Cypress.Commands.add('goToExportView', () => {

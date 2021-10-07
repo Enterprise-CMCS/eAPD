@@ -73,17 +73,18 @@ describe('APD with Data', () => {
   });
 
   beforeEach(() => {
-    cy.useStateStaff(apdUrl);
+    cy.visit(apdUrl);
   });
 
   describe('Form View', () => {
     /* eslint-disable-next-line prefer-arrow-callback, func-names */
     beforeEach(function () {
-      cy.wrap(apdUrl).as('apdUrl');
       cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     });
 
     afterEach(() => {
+      cy.waitForSave();
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.waitForSave();
     });
 

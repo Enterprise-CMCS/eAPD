@@ -80,19 +80,22 @@ export const testPrivateContractorCostsWithData = years => {
 
   describe('Activity 1', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToPrivateContractorCosts(url, 0);
-        cy.findByRole('heading', {
-          name: /Private Contractor Costs/i,
-          level: 3
-        }).should('exist');
-      });
+      cy.goToPrivateContractorCosts(0);
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', {
+        name: /Private Contractor Costs/i,
+        level: 3
+      }).should('exist');
     });
     it('fills our private contractor form', () => {
       const contractor = activityData.privateContractors[0];
 
       for (let i = 0; i < 2; i += 1) {
         cy.findByRole('button', { name: /Add Contractor/i }).click();
+        cy.waitForSave();
         cy.findByLabelText(/Private Contractor or Vendor Name/i).should(
           'exist'
         );
@@ -106,6 +109,7 @@ export const testPrivateContractorCostsWithData = years => {
           contractor.FFYcosts[i],
           i
         );
+        cy.waitForSave();
 
         const startDate = `${contractor.start[i][0]}/${contractor.start[i][1]}/${contractor.start[i][2]}`;
         const endDate = `${contractor.end[i][0]}/${contractor.end[i][1]}/${contractor.end[i][2]}`;
@@ -127,7 +131,6 @@ export const testPrivateContractorCostsWithData = years => {
       cy.findAllByText('Delete').eq(0).click();
       cy.contains('Delete Private Contractor?').should('exist');
       cy.get('.ds-c-button--danger').click();
-      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.waitForSave();
       cy.contains(`1. ${contractor.names[0]}`).should('not.exist');
       cy.contains(`1. ${contractor.names[1]}`).should('exist');
@@ -136,18 +139,21 @@ export const testPrivateContractorCostsWithData = years => {
 
   describe('Activity 2', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToPrivateContractorCosts(url, 1);
-        cy.findByRole('heading', {
-          name: /Private Contractor Costs/i,
-          level: 3
-        }).should('exist');
-      });
+      cy.goToPrivateContractorCosts(1);
+      cy.findByRole('heading', {
+        name: /^Activity 2:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', {
+        name: /Private Contractor Costs/i,
+        level: 3
+      }).should('exist');
     });
     it('fills 2nd activity private contractor', () => {
       const contractor = activityData.privateContractors[1];
 
       cy.findByRole('button', { name: /Add Contractor/i }).click();
+      cy.waitForSave();
       cy.findByLabelText(/Private Contractor or Vendor Name/i).should('exist');
       populatePage.fillContractorForm(
         contractor.names[0],
@@ -158,9 +164,11 @@ export const testPrivateContractorCostsWithData = years => {
         contractor.FFYcosts[0],
         0
       );
+      cy.waitForSave();
 
       // Add another private contractor
       cy.findByRole('button', { name: /Add Contractor/i }).click();
+      cy.waitForSave();
       cy.findByLabelText(/Private Contractor or Vendor Name/i).should('exist');
       populatePage.fillTextField('ds-c-field', contractor.names[1]);
       cy.setTinyMceContent(
@@ -168,21 +176,26 @@ export const testPrivateContractorCostsWithData = years => {
         contractor.descriptions[1]
       );
       populatePage.fillDate('Contract start date', contractor.start[1]);
+      cy.waitForSave();
       populatePage.fillDate('Contract end date', contractor.end[1]);
+      cy.waitForSave();
 
       populatePage.fillTextField(
         'ds-c-field ds-c-field--currency ds-c-field--medium',
         contractor.totalCosts[1],
         0
       );
+      cy.waitForSave();
 
       cy.findByRole('radio', { name: /Yes/i }).click({ force: true });
+      cy.waitForSave();
       for (let i = 0; i < years.length; i += 1) {
         populatePage.fillTextField(
           'ds-c-field ds-c-field--medium',
           contractor.FFYcosts[1][i][0],
           i
         );
+        cy.waitForSave();
         populatePage.fillTextField(
           'ds-c-field ds-c-field--currency ds-c-field--medium',
           contractor.FFYcosts[1][i][1],

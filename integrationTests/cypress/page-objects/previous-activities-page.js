@@ -11,6 +11,7 @@ class PreviousActivitiesPage {
   years = [];
 
   getYears() {
+    if (this.years.length > 0) return;
     cy.contains('HIT + HIE Federal share 90% FFP')
       .parent()
       .find('[headers="prev_act_hit_header_ffy"]')
@@ -31,27 +32,34 @@ class PreviousActivitiesPage {
       cy.get(`[name='hithie-approved-total-${year}']`).type(
         expenditures.hithie.approved[i]
       );
+      cy.waitForSave();
       cy.get(`[name='hithie-actual-federal-${year}']`).type(
         expenditures.hithie.actual[i]
       );
+      cy.waitForSave();
 
       cy.get(`[name='approved-total-mmis90-${year}']`).type(
         expenditures.mmis90.approved[i]
       );
+      cy.waitForSave();
       cy.get(`[name='actual-federal-mmis90-${year}']`).type(
         expenditures.mmis90.actual[i]
       );
+      cy.waitForSave();
 
       cy.get(`[name='approved-total-mmis75-${year}']`).type(
         expenditures.mmis75.approved[i]
       );
+      cy.waitForSave();
       cy.get(`[name='actual-federal-mmis75-${year}']`).type(
         expenditures.mmis75.actual[i]
       );
+      cy.waitForSave();
 
       cy.get(`[name='approved-total-mmis50-${year}']`).type(
         expenditures.mmis50.approved[i]
       );
+      cy.waitForSave();
       cy.get(`[name='actual-federal-mmis50-${year}']`).type(
         expenditures.mmis50.actual[i]
       );

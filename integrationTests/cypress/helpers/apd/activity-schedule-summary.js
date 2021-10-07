@@ -27,7 +27,6 @@ const testActivityMilestone = page => {
       { names: first.names.slice(1), dates: first.dates.slice(1) },
       ...rest
     ];
-    cy.log({ milestones });
     milestones.forEach(({ names, dates }, index) => {
       const activityId = index + 1; // Activity Id is 1-base and index is 0-based
       const activityName = `Activity ${activityId}: ${data.activityOverview[index].name} Milestones`;
@@ -158,19 +157,11 @@ export const testDefaultActivityScheduleSummaryExportView = () => {
 
 export const testActivityScheduleSummaryWithData = () => {
   const schedulePage = new ActivitySchedulePage();
-  let activityScheduleSummaryURL;
-
-  before(() => {
-    cy.goToActivityScheduleSummary();
-    cy.url().should('contain', '/schedule-summary');
-    cy.location('pathname').then(pathname => {
-      activityScheduleSummaryURL = pathname;
-    });
-  });
 
   beforeEach(() => {
     cy.fixture('activity-overview-template.json').as('data');
-    cy.useStateStaff(activityScheduleSummaryURL);
+    cy.goToActivityScheduleSummary();
+    cy.url().should('contain', '/schedule-summary');
     cy.findByRole('heading', { name: /Activity Schedule Summary/i }).should(
       'exist'
     );

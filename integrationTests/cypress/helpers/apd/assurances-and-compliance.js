@@ -18,12 +18,12 @@ export const testDefaultAssurancesAndCompliance = () => {
 
   // eslint-disable-next-line prefer-arrow-callback, func-names
   beforeEach(function () {
-    cy.goToAssurancesAndCompliance();
-    cy.url().should('contain', '/assurances-and-compliance');
-
     cy.fixture('assurances-compliance-test.json').then(data => {
       assurancesAndCompliance = data;
     });
+
+    cy.goToAssurancesAndCompliance();
+    cy.url().should('contain', '/assurances-and-compliance');
 
     cy.findByRole('heading', { name: /Assurances and Compliance/i })
       .parent()
@@ -87,16 +87,10 @@ export const testDefaultAssurancesAndComplianceExportView = () => {
 
 export const testAssurancesAndComplianceWithData = () => {
   let assurancesCompliancePage;
-  let assurancesAndComplianceURL;
   let assurancesAndCompliance;
 
   before(() => {
     assurancesCompliancePage = new AssurancesCompliancePage();
-    cy.goToAssurancesAndCompliance();
-    cy.url().should('contain', '/assurances-and-compliance');
-    cy.location('pathname').then(pathname => {
-      assurancesAndComplianceURL = pathname;
-    });
   });
 
   // eslint-disable-next-line prefer-arrow-callback, func-names
@@ -105,7 +99,8 @@ export const testAssurancesAndComplianceWithData = () => {
       assurancesAndCompliance = data;
     });
 
-    cy.useStateStaff(assurancesAndComplianceURL);
+    cy.goToAssurancesAndCompliance();
+    cy.url().should('contain', '/assurances-and-compliance');
 
     // Get div with data, also makes sure page is loaded
     cy.findByRole('heading', { name: /Assurances and Compliance/i })
@@ -127,6 +122,7 @@ export const testAssurancesAndComplianceWithData = () => {
           regulation,
           val.responses[i]
         );
+        cy.waitForSave();
       });
     });
   });

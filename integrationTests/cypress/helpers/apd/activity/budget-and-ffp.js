@@ -80,12 +80,14 @@ export const testBudgetAndFFPWithData = years => {
 
   describe('Activity 1', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToBudgetAndFFP(url, 0);
-        cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
-          'exist'
-        );
-      });
+      cy.goToBudgetAndFFP(0);
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
+        'exist'
+      );
     });
 
     it('Tests cost split table (Activity 1 - 2021)', () => {
@@ -176,6 +178,7 @@ export const testBudgetAndFFPWithData = years => {
                 inputs.stateVals[i][k],
                 inputs.contractorVals[i][k]
               );
+              cy.waitForSave();
               staffPercentageSum += inputs.stateVals[i][k];
               contractorPercentageSum += inputs.stateVals[i][k];
             }
@@ -255,12 +258,14 @@ export const testBudgetAndFFPWithData = years => {
 
   describe('Activity 2', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToBudgetAndFFP(url, 1);
-        cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
-          'exist'
-        );
-      });
+      cy.goToBudgetAndFFP(1);
+      cy.findByRole('heading', {
+        name: /^Activity 2:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
+        'exist'
+      );
     });
 
     xit('fills out Budget and FFP for activity 2', () => {
@@ -332,6 +337,7 @@ export const testBudgetAndFFPWithData = years => {
                 inputs.stateVals[i][k],
                 inputs.contractorVals[i][k]
               );
+              cy.waitForSave();
               staffPercentageSum += inputs.stateVals[i][k];
               contractorPercentageSum += inputs.stateVals[i][k];
             }

@@ -81,13 +81,15 @@ export const testStateStaffAndExpensesWithData = () => {
 
   describe('Activity 1', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToStateStaffAndExpenses(url, 0);
-        cy.findByRole('heading', {
-          name: /State Staff and Expenses/i,
-          level: 3
-        }).should('exist');
-      });
+      cy.goToStateStaffAndExpenses(0);
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', {
+        name: /State Staff and Expenses/i,
+        level: 3
+      }).should('exist');
     });
 
     describe('State staff', () => {
@@ -106,6 +108,7 @@ export const testStateStaffAndExpensesWithData = () => {
             staff.costs,
             staff.ftes
           );
+          cy.waitForSave();
         });
       });
 
@@ -130,7 +133,7 @@ export const testStateStaffAndExpensesWithData = () => {
           .then(children => {
             if (children.length > 1) {
               staffExpensesPage.deleteStaff(0);
-              cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+              cy.waitForSave();
             }
           });
       });
@@ -172,6 +175,7 @@ export const testStateStaffAndExpensesWithData = () => {
             expense.costs,
             expense.description
           );
+          cy.waitForSave();
         });
       });
 
@@ -195,7 +199,7 @@ export const testStateStaffAndExpensesWithData = () => {
           .then(children => {
             if (children.length > 1) {
               staffExpensesPage.deleteExpense(0);
-              cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+              cy.waitForSave();
             }
           });
       });
@@ -225,13 +229,15 @@ export const testStateStaffAndExpensesWithData = () => {
 
   describe('Activity 2', () => {
     beforeEach(() => {
-      cy.get('@apdUrl').then(url => {
-        cy.goToStateStaffAndExpenses(url, 0);
-        cy.findByRole('heading', {
-          name: /State Staff and Expenses/i,
-          level: 3
-        }).should('exist');
-      });
+      cy.goToStateStaffAndExpenses(1);
+      cy.findByRole('heading', {
+        name: /Activity 2:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', {
+        name: /State Staff and Expenses/i,
+        level: 3
+      }).should('exist');
     });
 
     describe('State staff', () => {
@@ -250,6 +256,7 @@ export const testStateStaffAndExpensesWithData = () => {
             staff.costs,
             staff.ftes
           );
+          cy.waitForSave();
         });
       });
 
@@ -282,6 +289,7 @@ export const testStateStaffAndExpensesWithData = () => {
             expense.costs,
             expense.description
           );
+          cy.waitForSave();
         });
       });
 

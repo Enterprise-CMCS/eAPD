@@ -59,17 +59,12 @@ import {
 // Tests the default values of an APD
 describe('Default APD', () => {
   let apdUrl;
-  let apdId;
   const years = [];
 
-  before(() => {
-    cy.intercept('POST', `${Cypress.env('API')}/apds`, req => {
-      req.continue(res => {
-        apdId = res.body.id;
-        return res;
-      });
-    });
+  /* eslint-disable-next-line prefer-arrow-callback, func-names */
+  before(function () {
     cy.useStateStaff();
+
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.location('pathname').then(pathname => {
@@ -84,7 +79,6 @@ describe('Default APD', () => {
   describe('Form View', () => {
     /* eslint-disable-next-line prefer-arrow-callback, func-names */
     beforeEach(function () {
-      cy.wrap(`apd/${apdId}`).as('apdUrl');
       cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     });
 
