@@ -12,7 +12,7 @@ exports[`the (Activity) EntryDetails component does not render the delete button
         className="nowrap visibility--screen"
       >
         <Button
-          aria-label="Edit: Activity 1: activity 1 name (money pit)"
+          aria-label="Edit: Activity 1: Activity 1 Name (Money Pit)"
           component={[Function]}
           href="/apd/1/activity/0/overview"
           size="small"
@@ -24,7 +24,7 @@ exports[`the (Activity) EntryDetails component does not render the delete button
       </div>
     }
     editText="Edit"
-    heading="Activity 1: activity 1 name (money pit)"
+    heading="Activity 1: Activity 1 Name (Money Pit)"
     headingLevel="4"
   />
 </div>
@@ -42,7 +42,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         className="nowrap visibility--screen"
       >
         <Button
-          aria-label="Edit: Activity 3: activity name"
+          aria-label="Edit: Activity 3: Activity Name"
           component={[Function]}
           href="/apd/1/activity/2/overview"
           size="small"
@@ -56,7 +56,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
-            aria-label="Delete: Activity 3: activity name"
+            aria-label="Delete: Activity 3: Activity Name"
             className="ds-u-color--error"
             component="button"
             onClick={[Function]}
@@ -70,7 +70,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
       </div>
     }
     editText="Edit"
-    heading="Activity 3: activity name"
+    heading="Activity 3: Activity Name"
     headingLevel="4"
   />
 </div>
@@ -88,7 +88,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         className="nowrap visibility--screen"
       >
         <Button
-          aria-label="Edit: Activity 3: Untitled (money pit)"
+          aria-label="Edit: Activity 3: Untitled (Money Pit)"
           component={[Function]}
           href="/apd/1/activity/2/overview"
           size="small"
@@ -102,7 +102,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
-            aria-label="Delete: Activity 3: Untitled (money pit)"
+            aria-label="Delete: Activity 3: Untitled (Money Pit)"
             className="ds-u-color--error"
             component="button"
             onClick={[Function]}
@@ -116,7 +116,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
       </div>
     }
     editText="Edit"
-    heading="Activity 3: Untitled (money pit)"
+    heading="Activity 3: Untitled (Money Pit)"
     headingLevel="4"
   />
 </div>

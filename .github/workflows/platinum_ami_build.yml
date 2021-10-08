@@ -1,10 +1,12 @@
 name: Create Platinum AMI
-on:  
+on:
   schedule:
     - cron: '0 0 * * 1'  # Mondays at midnight
 jobs:
   packer:
     runs-on: ubuntu-latest
+    environment: Preview    
+    timeout-minutes: 60    
     name: packer
     steps:
       - name: Checkout Repository 🛎️
@@ -12,9 +14,9 @@ jobs:
       - name: Configure AWS Credentials ☁️
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.TEST_AWS_REGION }}   
+          aws-access-key-id: ${{ secrets.CICD_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CICD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}   
       - name: Validate Template ✔️
         uses: hashicorp/packer-github-actions@master
         with:

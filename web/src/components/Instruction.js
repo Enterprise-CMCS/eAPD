@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { titleCase } from 'title-case';
 import Md from './Md';
 import { t } from '../i18n';
 
@@ -39,7 +40,7 @@ const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
       <div>
         {heading && (
           <Heading {...headingDisplay} labelFor={labelFor}>
-            {heading}
+            {titleCase(heading)}
           </Heading>
         )}
         {(short || detail || list || helpText) && (

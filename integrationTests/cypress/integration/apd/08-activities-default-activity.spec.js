@@ -118,9 +118,9 @@ describe('checking default values in Activities section', () => {
     cy.contains('State staff have not been added for this activity.').should(
       'exist'
     );
-    cy.contains(
-      'Other state expenses have not been added for this activity.'
-    ).should('exist');
+    // cy.contains(
+    //  'Other state expenses have not been added for this activity.'
+    // ).should('exist');
 
     cy.findByRole('button', { name: /Add State Staff/i }).click();
 
@@ -149,7 +149,7 @@ describe('checking default values in Activities section', () => {
     cy.findByRole('button', { name: /Done/i }).click();
 
     activityPage.checkOtherStateExpensesOutput(
-      'Hardware, software, and licensing',
+      'Category not specified',
       years,
       [0, 0]
     );
@@ -157,7 +157,7 @@ describe('checking default values in Activities section', () => {
     activityPage.checkDeleteButton(
       'Other state expenses have not been added for this activity.',
       'Delete Other State Expense?',
-      'Hardware, software, and licensing'
+      'Category not specified'
     );
 
     // Private Contractor Costs
@@ -277,9 +277,12 @@ describe('checking default values in Activities section', () => {
     exportPage.checkActivityList(activities);
 
     for (let i = 0; i < activities.length; i += 1) {
-      cy.contains(`Activity ${i + 1} (${activities[i][0]})`)
+      cy.findByRole('heading', { name: /^Activities$/i })
         .parent()
-        .within(() => {
+        .contains(`Activity ${i + 1}: ${activities[i][0]}`)
+        .parent()
+        .within($activity => {
+          cy.log($activity);
           exportPage.checkActivityOverview(
             '',
             'Date not specified',

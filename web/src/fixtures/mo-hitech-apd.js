@@ -1414,7 +1414,7 @@ const apd = {
           explanation: ''
         },
         {
-          title: '45 CFR Part 95.615',
+          title: '45 CFR 95.613',
           checked: '',
           explanation: ''
         },
@@ -1441,7 +1441,7 @@ const apd = {
           explanation: ''
         },
         {
-          title: '42 CFR Part 433.112(b)(5) - (9)',
+          title: '42 CFR 433.112(b)',
           checked: '',
           explanation: ''
         },
@@ -1480,7 +1480,7 @@ const apd = {
       ],
       security: [
         {
-          title: '45 CFR 164 Securities and Privacy',
+          title: '45 CFR 164 Security and Privacy',
           checked: '',
           explanation: ''
         }
