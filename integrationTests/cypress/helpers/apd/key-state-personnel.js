@@ -13,24 +13,31 @@ export const testDefaultKeyStatePersonnel = years => {
     cy.get('input[name="apd-state-profile-mdname"]')
       .clear()
       .should('have.text', '');
+    cy.waitForSave();
     cy.get('input[name="apd-state-profile-mdemail"]')
       .clear()
       .should('have.text', '');
+    cy.waitForSave();
     cy.get('input[name="apd-state-profile-mdphone"]')
       .clear()
       .should('have.text', '');
+    cy.waitForSave();
     cy.get('input[name="apd-state-profile-addr1"]')
       .clear()
       .should('have.text', '');
+    cy.waitForSave();
     cy.get('input[name="apd-state-profile-addr2"]')
       .clear()
       .should('have.text', '');
+    cy.waitForSave();
     cy.get('input[name="apd-state-profile-city"]')
       .clear()
       .should('have.text', '');
+    cy.waitForSave();
     cy.get('input[name="apd-state-profile-zip"]')
       .clear()
       .should('have.text', '');
+    cy.waitForSave();
     cy.get('select[name="apd-state-profile-state"]')
       .invoke('val', '')
       .trigger('change');
@@ -82,6 +89,7 @@ export const testDefaultKeyStatePersonnel = years => {
     cy.findByRole('button', { name: /Add Key Personnel/i }).click();
     cy.waitForSave();
     cy.findByRole('button', { name: /Done/i }).click();
+    cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
 
     // Check for default values
     cy.get('.form-and-review-list')
@@ -113,6 +121,7 @@ export const testDefaultKeyStatePersonnel = years => {
       .check({ force: true });
     cy.waitForSave();
     cy.findByRole('button', { name: /Done/i }).click();
+    cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
 
     // Check for default values
     cy.get('.form-and-review-list')

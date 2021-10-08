@@ -83,8 +83,8 @@ describe('Default APD', () => {
     });
 
     afterEach(() => {
+      // wait for the save cycle to complete
       cy.waitForSave();
-      cy.log('Waiting to save');
     });
 
     describe('default APD Overview', () => {

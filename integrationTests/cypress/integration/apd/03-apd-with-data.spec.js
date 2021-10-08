@@ -83,8 +83,9 @@ describe('APD with Data', () => {
     });
 
     afterEach(() => {
-      cy.waitForSave();
-      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      // wait for another save cycle to trigger
+      cy.wait(300); // eslint-disable-line cypress/no-unnecessary-waiting
+      // wait for the save cycle to complete
       cy.waitForSave();
     });
 
@@ -132,24 +133,24 @@ describe('APD with Data', () => {
         testCostAllocationAndOtherFundingWithData(years);
       });
 
-      xdescribe('Budget and FFP', () => {
+      describe('Budget and FFP', () => {
         testBudgetAndFFPWithData(years);
       });
     });
 
-    xdescribe('Activity Schedule Summary', () => {
+    describe('Activity Schedule Summary', () => {
       testActivityScheduleSummaryWithData(years);
     });
 
-    xdescribe('Proposed Budget', () => {
+    describe('Proposed Budget', () => {
       testProposedBudgetWithData(years);
     });
 
-    xdescribe('Assurances and Compliance', () => {
+    describe('Assurances and Compliance', () => {
       testAssurancesAndComplianceWithData(years);
     });
 
-    xdescribe('Executive Summary', () => {
+    describe('Executive Summary', () => {
       testExecutiveSummaryWithData(years);
     });
   });
@@ -196,24 +197,24 @@ describe('APD with Data', () => {
         testCostAllocationAndOtherFundingExportViewWithData(years);
       });
 
-      xdescribe('Budget and FFP', () => {
+      describe('Budget and FFP', () => {
         testBudgetAndFFPExportViewWithData(years);
       });
     });
 
-    xdescribe('Activity Schedule Summary', () => {
+    describe('Activity Schedule Summary', () => {
       testActivityScheduleSummaryExportViewWithData(years);
     });
 
-    xdescribe('Proposed Budget', () => {
+    describe('Proposed Budget', () => {
       testProposedBudgetExportViewWithData(years);
     });
 
-    xdescribe('Assurances and Compliance', () => {
+    describe('Assurances and Compliance', () => {
       testAssurancesAndComplianceExportViewWithData(years);
     });
 
-    xdescribe('Executive Summary', () => {
+    describe('Executive Summary', () => {
       testExecutiveSummaryExportViewWithData(years);
     });
   });

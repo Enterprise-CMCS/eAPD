@@ -178,7 +178,6 @@ export const testBudgetAndFFPWithData = years => {
                 inputs.stateVals[i][k],
                 inputs.contractorVals[i][k]
               );
-              cy.waitForSave();
               staffPercentageSum += inputs.stateVals[i][k];
               contractorPercentageSum += inputs.stateVals[i][k];
             }
@@ -216,6 +215,7 @@ export const testBudgetAndFFPWithData = years => {
             });
             budgetPage.checkEachQuarterSubtotal();
           });
+        cy.waitForSave();
       });
       // Calculate totals for final section
       let activityTotal = 0;
@@ -247,12 +247,11 @@ export const testBudgetAndFFPWithData = years => {
         budgetPage.addCommas(activityTotal),
         budgetPage.addCommas(otherFundingTotal),
         budgetPage.addCommas(totalMedicaid),
-        '75/25 (FFY 2021) and 50/50 (FFY 2022)',
+        `75/25 (FFY ${years[0]}) and 50/50 (FFY ${years[1]})`,
         budgetPage.addCommas(federalShare),
         'Alaska',
         budgetPage.addCommas(stateShare)
       );
-      cy.goToActivityDashboard();
     });
   });
 
@@ -280,7 +279,6 @@ export const testBudgetAndFFPWithData = years => {
         cy.get('[class="ds-c-field"]')
           .eq(i)
           .select(splits[i + 1]);
-        cy.waitForSave();
         cy.findAllByText(`Activity 2 Budget for FFY ${year}`)
           .parent()
           .parent()
@@ -337,7 +335,6 @@ export const testBudgetAndFFPWithData = years => {
                 inputs.stateVals[i][k],
                 inputs.contractorVals[i][k]
               );
-              cy.waitForSave();
               staffPercentageSum += inputs.stateVals[i][k];
               contractorPercentageSum += inputs.stateVals[i][k];
             }
@@ -375,6 +372,7 @@ export const testBudgetAndFFPWithData = years => {
             });
             budgetPage.checkEachQuarterSubtotal();
           });
+        cy.waitForSave();
       });
 
       let activityTotal = 0;
@@ -410,7 +408,7 @@ export const testBudgetAndFFPWithData = years => {
         budgetPage.addCommas(activityTotal),
         budgetPage.addCommas(otherFundingTotal),
         budgetPage.addCommas(totalMedicaid),
-        '50/50 (FFY 2021) and 90/10 (FFY 2022)',
+        `50/50 (FFY ${years[0]}) and 90/10 (FFY ${years[1]})`,
         budgetPage.addCommas(federalShare),
         'Alaska',
         budgetPage.addCommas(stateShare)

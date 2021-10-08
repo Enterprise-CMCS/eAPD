@@ -39,8 +39,13 @@ const EXPIRY_DATE = Math.ceil(
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 // Login methods
+Cypress.Commands.add('clearAuthCookies', () => {
+  cy.clearCookie(CONSENT_COOKIE_NAME);
+  cy.clearCookie(API_COOKIE_NAME);
+});
+
 Cypress.Commands.add('login', (username, password) => {
-  cy.clearCookies();
+  cy.clearAuthCookies();
   cy.setCookie(CONSENT_COOKIE_NAME, 'true', {
     expiry: EXPIRY_DATE
   });
@@ -57,7 +62,7 @@ Cypress.Commands.add('loginWithEnv', username => {
 });
 
 Cypress.Commands.add('useJwtUser', (username, url) => {
-  cy.clearCookies();
+  cy.clearAuthCookies();
   cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
     expiry: EXPIRY_DATE
   });
@@ -130,17 +135,22 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
 });
 
 Cypress.Commands.add('waitForSave', () => {
-  cy.get('header').then($header => {
-    if ($header) {
-      if ($header.text().includes('Saving')) {
-        cy.wrap($header).contains('Saved', { timeout: 10000 }).should('exist');
-      }
+  cy.document()
+    .its('body')
+    .find('header')
+    .then($header => {
+      if ($header) {
+        if ($header.text().includes('Saving')) {
+          cy.wrap($header)
+            .contains('Saved', { timeout: 10000 })
+            .should('exist');
+        }
 
-      cy.wrap($header)
-        .contains(/Saved|Last saved/i)
-        .should('exist');
-    }
-  });
+        cy.wrap($header)
+          .contains(/Saved|Last saved/i)
+          .should('exist');
+      }
+    });
 });
 
 Cypress.Commands.add('goToKeyStatePersonnel', () => {

@@ -131,13 +131,13 @@ class PopulatePage {
         .eq(quarter)
         .clear()
         .type(stateValue);
+      cy.waitForSave();
 
       cy.get('[class="ds-c-field budget-table--input__number"]')
         .eq(contractorInput)
         .clear()
         .type(contractorValue);
     });
-    cy.waitForSave();
   };
 
   checkQuarterSubtotal = (
