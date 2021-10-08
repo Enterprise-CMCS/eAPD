@@ -24,6 +24,6 @@ web/yarn.lock
 docs-build
 
 # Terraform ignores
-*.terraform
+*.terraform*
 env_vars.sh
 /integrationTests/cypress.env.json
