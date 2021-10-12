@@ -4,6 +4,7 @@
   "description": "Cypress tests for the EAPD tool",
   "main": "index.js",
   "scripts": {
+    "audit": "npx audit-ci --config ./audit-ci.json",
     "cy:open": "./cypress-setup.sh open",
     "cy:run": "./cypress-setup.sh run",
     "cy:run:ci": "cypress run",
@@ -20,7 +21,7 @@
     "axe-core": "^4.3.2",
     "axios": "^0.21.2",
     "babel-eslint": "^10.1.0",
-    "cypress": "^8.5.0",
+    "cypress": "^8.6.0",
     "cypress-axe-core": "^1.2.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
