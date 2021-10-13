@@ -3,6 +3,7 @@
   "viewportWidth": 1000,
   "viewportHeight": 1000,
   "defaultCommandTimeout": 9000,
+  "videoUploadOnPasses": false,
   "env": {
     "API": "http://localhost:8081",
     "fedadmin": "fedadmin",
