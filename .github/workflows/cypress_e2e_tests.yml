@@ -25,7 +25,6 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           npm cache clean --force
-          npm install node-gyp -g node-gyp
           npm install
       - name: Cypress Dependency Web
         working-directory: ./web
