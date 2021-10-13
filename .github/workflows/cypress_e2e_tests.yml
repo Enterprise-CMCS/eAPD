@@ -1,7 +1,7 @@
 name: Cypress E2E Tests
 on:
   schedule:
-    - cron: '0 1 * * *'  # every day at 1 am
+    - cron: '0 1 * * *' # every day at 1 am
   pull_request:
     branches:
       - development
@@ -10,16 +10,16 @@ jobs:
   cypress-run:
     environment: Preview
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress Dependency
-        working-directory: ./integrationTests      
+        working-directory: ./integrationTests
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
@@ -27,11 +27,11 @@ jobs:
           npm cache clean --force
           npm install
       - name: Cypress Dependency Web
-        working-directory: ./web      
+        working-directory: ./web
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
           npm install
       - name: Cypress Dependency API
@@ -39,7 +39,7 @@ jobs:
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}          
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
           npm install
       - name: Starting Dockerized eAPD App
@@ -81,4 +81,3 @@ jobs:
           CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
         run: |
           sh cypress-ci.sh
-
