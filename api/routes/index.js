@@ -9,6 +9,7 @@ const states = require('./states');
 const users = require('./users');
 const openAPI = require('./openAPI');
 
+// ############### ROUTE IMPORT INSERTION POINT #######################
 module.exports = (
   app,
   affiliationsEndpoint = affiliations,
@@ -20,7 +21,7 @@ module.exports = (
   usersEndpoint = users,
   openAPIdoc = openAPI
 ) => {
-  logger.debug('setting up routes for affilitions');
+  logger.debug('setting up routes for affiliations');
   affiliationsEndpoint(app);
   logger.debug('setting up routes for apds');
   apdsEndpoint(app);
@@ -35,6 +36,7 @@ module.exports = (
   logger.debug('setting up routes for users');
   usersEndpoint(app);
 
+  // ############### ROUTE REGISTRATION INSERTION POINT #######################
   logger.debug('setting up route for OpenAPI');
 
   app.get('/open-api', (req, res) => {

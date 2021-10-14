@@ -2,7 +2,7 @@
   "baseUrl": "http://localhost:8080/",
   "viewportWidth": 1000,
   "viewportHeight": 1000,
-  "defaultCommandTimeout": 9000,
+  "defaultCommandTimeout": 36000,
   "videoUploadOnPasses": false,
   "env": {
     "API": "http://localhost:8081",
