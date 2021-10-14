@@ -18,4 +18,5 @@ exports.seed = async knex => {
   await apds.seed(knex);
   await state.seed(knex);
   await users.seed(knex);
+
 };
