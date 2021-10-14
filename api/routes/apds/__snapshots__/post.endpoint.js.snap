@@ -7,14 +7,14 @@ Object {
       "alternatives": "",
       "contractorResources": Array [],
       "costAllocation": Object {
-        "2021": Object {
+        "2022": Object {
           "ffp": Object {
             "federal": 90,
             "state": 10,
           },
           "other": 0,
         },
-        "2022": Object {
+        "2023": Object {
           "ffp": Object {
             "federal": 90,
             "state": 10,
@@ -25,10 +25,10 @@ Object {
       "costAllocationNarrative": Object {
         "methodology": "",
         "years": Object {
-          "2021": Object {
+          "2022": Object {
             "otherSources": "",
           },
-          "2022": Object {
+          "2023": Object {
             "otherSources": "",
           },
         },
@@ -41,7 +41,7 @@ Object {
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
-        "2021": Object {
+        "2022": Object {
           "1": Object {
             "contractors": 0,
             "inHouse": 0,
@@ -59,7 +59,7 @@ Object {
             "inHouse": 0,
           },
         },
-        "2022": Object {
+        "2023": Object {
           "1": Object {
             "contractors": 0,
             "inHouse": 0,
@@ -90,13 +90,13 @@ Object {
   "federalCitations": Object {},
   "incentivePayments": Object {
     "ehAmt": Object {
-      "2021": Object {
+      "2022": Object {
         "1": 0,
         "2": 0,
         "3": 0,
         "4": 0,
       },
-      "2022": Object {
+      "2023": Object {
         "1": 0,
         "2": 0,
         "3": 0,
@@ -104,13 +104,13 @@ Object {
       },
     },
     "ehCt": Object {
-      "2021": Object {
+      "2022": Object {
         "1": 0,
         "2": 0,
         "3": 0,
         "4": 0,
       },
-      "2022": Object {
+      "2023": Object {
         "1": 0,
         "2": 0,
         "3": 0,
@@ -118,13 +118,13 @@ Object {
       },
     },
     "epAmt": Object {
-      "2021": Object {
+      "2022": Object {
         "1": 0,
         "2": 0,
         "3": 0,
         "4": 0,
       },
-      "2022": Object {
+      "2023": Object {
         "1": 0,
         "2": 0,
         "3": 0,
@@ -132,13 +132,13 @@ Object {
       },
     },
     "epCt": Object {
-      "2021": Object {
+      "2022": Object {
         "1": 0,
         "2": 0,
         "3": 0,
         "4": 0,
       },
-      "2022": Object {
+      "2023": Object {
         "1": 0,
         "2": 0,
         "3": 0,
@@ -152,26 +152,6 @@ Object {
   "narrativeHIT": "",
   "narrativeMMIS": "",
   "previousActivityExpenses": Object {
-    "2019": Object {
-      "hithie": Object {
-        "federalActual": 0,
-        "totalApproved": 0,
-      },
-      "mmis": Object {
-        "50": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-        "75": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-        "90": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-      },
-    },
     "2020": Object {
       "hithie": Object {
         "federalActual": 0,
@@ -212,6 +192,26 @@ Object {
         },
       },
     },
+    "2022": Object {
+      "hithie": Object {
+        "federalActual": 0,
+        "totalApproved": 0,
+      },
+      "mmis": Object {
+        "50": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "75": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "90": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+      },
+    },
   },
   "previousActivitySummary": "",
   "programOverview": "",
@@ -230,8 +230,8 @@ Object {
     },
   },
   "years": Array [
-    "2021",
     "2022",
+    "2023",
   ],
 }
 `;
