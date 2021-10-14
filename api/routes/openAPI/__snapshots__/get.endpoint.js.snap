@@ -1138,6 +1138,29 @@ Object {
       },
     },
     "/auth/certifications": Object {
+      "get": Object {
+        "description": "get the state admin certifications and potential matches for loading up the state admin certification table",
+        "responses": Object {
+          "200": Object {
+            "description": "State Admin Certification form successfully saved",
+          },
+          "401": Object {
+            "description": "Unauthorized",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to upload certification letters",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "retrieve the Add State Certifications and additional details",
+        "tags": Array [
+          "Certifications",
+        ],
+      },
       "post": Object {
         "description": "Handle the submission of the state admin certification form which includes the URL of the file from the related /files endpoint as well as additional details that are added manually.",
         "requestBody": Object {

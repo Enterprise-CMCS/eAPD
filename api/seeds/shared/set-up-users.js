@@ -108,7 +108,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       user_id: stateAdmin.id,
       state_id: 'ak',
-      role_id: stateAdminRoleId,
+      role_id: stateStaffRoleId,
       status: 'approved',
       username: stateAdmin.profile.login,
       expires_at: format(new Date(new Date().getFullYear() + 1, '06', '30'), PostgresDateFormat)
@@ -127,14 +127,25 @@ const createUsersToAdd = async (knex, oktaClient) => {
       ffy: 2021,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'ak',
-      email: stateAdmin.profile.primaryPhone,
-      phone: stateAdmin.profile.email,
+      email: stateAdmin.profile.email,
+      phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
       fileUrl: '12345', // Todo: Update this to have a valid fileUrl
       affiliationId: null
     });
 
+    stateCertifications.push({
+      ffy: 2021,
+      name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
+      state: 'tn',
+      email: stateAdmin.profile.email,
+      phone: stateAdmin.profile.primaryPhone,
+      uploadedBy: fedAdmin.id,
+      uploadedOn: new Date(),
+      fileUrl: '6789', // Todo: Update this to have a valid fileUrl
+      affiliationId: null
+    });
     oktaUsers.push(formatOktaUser(stateAdmin));
   }
 
