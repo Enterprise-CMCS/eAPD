@@ -1,34 +1,27 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1693, 1751, 1753],
+  "allowlist": [1002401, 1002466, 1002475],
   "_comment": {
-    "1693": {
-      "advisory": "https://www.npmjs.com/advisories/1693",
-      "module": "postcss",
+    "1002401": {
+      "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
+      "module": "ansi-regex",
       "affects": [
-        "@storybook/addon-docs@6.3.7 - storybook",
-        "@storybook/core@6.3.7 - storybook",
-        "cssnano@4.1.10 - processes css during the build",
-        "postcss-cssnext@3.1.0 - processes css during the build",
-        "postcss-custom-properties@11.0.0 - processes css during the build"
+        "eslint@7.24.0 - linter",
+        "jest@26.6.3 - testing",
+        "tap@15.0.10 - testing",
+        "sharp@0.29.1 - image process, but ansi-regex is in the npmlog"
       ]
     },
-    "1751": {
-      "advisory": "https://www.npmjs.com/advisories/1751",
-      "module": "glob-parent",
-      "affects": [
-        "@babel/cli@7.13.14 - compiles the code to run on older browsers",
-        "@storybook/addon-docs@6.3.4 - storybook",
-        "@storybook/react@6.3.4 - storybook",
-        "webpack-dev-server@3.11.2 - webpack development server",
-        "webpack@4.46.0 - used to build the web application"
-      ]
+    "1002466": {
+      "advisory": "https://github.com/advisories/GHSA-jgrx-mgxx-jf9v",
+      "module": "tmpl",
+      "affects": ["jest@26.6.3 - testing"]
     },
-    "1753": {
-      "advisory": "https://www.npmjs.com/advisories/1753",
-      "module": "trim-newlines",
-      "affects": ["node-sass@5.0.0 - process sass into css"]
+    "1002475": {
+      "advisory": "https://github.com/advisories/GHSA-4jqc-8m5r-9rpr",
+      "module": "set-value",
+      "affects": ["jest@26.6.3 - testing"]
     }
   },
   "registry": "https://registry.npmjs.org"
