@@ -89,6 +89,23 @@ const postStateCertificationFile = {
 
 const postStateCertification = {
   '/auth/certifications': {
+    get: {
+      tags: ['Certifications'],
+      summary: 'retrieve the Add State Certifications and additional details',
+      description:
+        'get the state admin certifications and potential matches for loading up the state admin certification table',
+      responses: {
+        200: {
+          description: 'State Admin Certification form successfully saved'
+        },
+        401: {
+          description: 'Unauthorized'
+        },
+        403: {
+          description: 'The user does not have sufficient authorization to upload certification letters'
+        }
+      }
+    },
     post: {
       tags: ['Certifications'],
       summary: 'Submit the Add State Certification and additional details',
@@ -148,5 +165,5 @@ const postStateCertification = {
 module.exports = {
   ...requiresAuth(getStateCertificationFile),
   ...requiresAuth(postStateCertificationFile),
-  ...requiresAuth(postStateCertification)
+  ...requiresAuth(postStateCertification),
 };
