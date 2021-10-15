@@ -9,8 +9,12 @@ const {
 describe('Affiliations endpoint | POST', () => {
   const api = login('no-permissions');
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   unauthenticatedTest('post', '/states/ak/affiliations');
 

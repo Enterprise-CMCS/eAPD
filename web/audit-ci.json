@@ -8,7 +8,6 @@
     1002466,
     1002475,
     1002487,
-    1002492,
     1002522,
     1002581,
     1002594,
@@ -56,11 +55,6 @@
     },
     "1002487": {
       "advisory": "https://github.com/advisories/GHSA-c36v-fmgq-m8hx",
-      "module": "immer",
-      "affects": ["@storybook/react@6.3.7 - storybook"]
-    },
-    "1002492": {
-      "advisory": "https://github.com/advisories/GHSA-33f9-j839-rf8h",
       "module": "immer",
       "affects": ["@storybook/react@6.3.7 - storybook"]
     },

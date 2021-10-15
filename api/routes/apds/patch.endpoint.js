@@ -10,8 +10,12 @@ const { mnAPDId, akAPDId, badAPDId } = require('../../seeds/test/apds');
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   const url = apdID => `/apds/${apdID}`;
 
@@ -20,7 +24,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
 
   describe('when authenticated as a user with permission', () => {
     let api;
-    beforeAll(async () => {
+    beforeAll(() => {
       api = login('state-admin');
     });
 

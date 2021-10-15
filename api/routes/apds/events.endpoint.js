@@ -11,8 +11,12 @@ const { akAPDId, badAPDId } = require('../../seeds/test/apds');
 describe('APD events endpoints', () => {
   describe('Record an event associated with an APD | POST /apds/:id/events', () => {
     const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+    beforeAll(async () => {
+      await setupDB(db);
+    });
+    afterAll(async () => {
+      await teardownDB(db);
+    });
 
     const url = id => `/apds/${id}/events`;
 
@@ -21,8 +25,8 @@ describe('APD events endpoints', () => {
 
     describe('when authenticated as a user with permissions', () => {
       let api;
-      beforeAll(async () => {
-        api = await login('state-admin');
+      beforeAll(() => {
+        api = login('state-admin');
       });
 
       it('with a non-existant apd ID', async () => {

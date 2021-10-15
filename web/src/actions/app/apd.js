@@ -99,14 +99,11 @@ export const selectApd = (
       // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
       // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
       // values using an EDIT_APD action. That way the initial values get saved back to the API.
-      console.log(`APD ${id} SELECTED`);
-      console.log('federalCitation', req.data.federalCitations);
       if (
         Object.values(req.data.federalCitations).every(
           regs => regs.length === 0
         )
       ) {
-        console.log('update federalCitations');
         dispatch({
           type: EDIT_APD,
           path: '/federalCitations',

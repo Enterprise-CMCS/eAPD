@@ -17,8 +17,12 @@ const {
 
 describe('APD files endpoints', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {
     const url = (apdID, fileID) => `/apds/${apdID}/files/${fileID}`;
@@ -28,8 +32,8 @@ describe('APD files endpoints', () => {
     describe('when authenticated as a user with permission', () => {
       let api;
 
-      beforeAll(async () => {
-        api = await login();
+      beforeAll(() => {
+        api = login();
       });
 
       it('with a non-existant apd ID', async () => {
@@ -92,8 +96,8 @@ describe('APD files endpoints', () => {
 
     describe('when authenticated as a user with permission', () => {
       let api;
-      beforeAll(async () => {
-        api = await login('state-admin');
+      beforeAll(() => {
+        api = login('state-admin');
       });
 
       it('with a non-existant apd ID', async () => {

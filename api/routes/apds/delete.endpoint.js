@@ -16,8 +16,12 @@ const {
 describe('APD endpoint', () => {
   describe('Delete/archive APD endpoint | DELETE /apds/:id', () => {
     const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+    beforeAll(async () => {
+      await setupDB(db);
+    });
+    afterAll(async () => {
+      await teardownDB(db);
+    });
 
     const url = id => `/apds/${id}`;
 

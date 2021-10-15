@@ -9,8 +9,12 @@ const {
 
 describe('APD endpoint | POST /apds', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   const url = `/apds`;
 

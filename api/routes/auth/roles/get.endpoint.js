@@ -11,8 +11,12 @@ const {
 
 describe('auth roles endpoint | GET /auth/roles', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   const url = '/auth/roles';
 
@@ -30,8 +34,12 @@ describe('auth roles endpoint | GET /auth/roles', () => {
 
 describe('state switch endpoint | GET /auth/state/:stateId', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   const url = '/auth/state';
 
@@ -43,7 +51,7 @@ describe('state switch endpoint | GET /auth/state/:stateId', () => {
     const response = await api.get(`${url}/mn`);
 
     expect(response.status).toEqual(200);
-    const claims = await actualVerifyEAPDToken(response.data.jwt)
+    const claims = await actualVerifyEAPDToken(response.data.jwt);
     expect(claims.state).toMatchSnapshot();
   });
 });

@@ -55,6 +55,7 @@ services:
     environment:
       - PORT=8000
       - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
+      - TEST_DB_NAME=${TEST_DB_NAME:-hitech_apd_test}
       - NODE_ENV=development
       - DISABLE_SAME_SITE=yes
       - OKTA_DOMAIN=${OKTA_DOMAIN}

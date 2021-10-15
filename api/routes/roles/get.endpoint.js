@@ -9,8 +9,12 @@ const {
 
 describe('Roles endpoint', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   describe('GET /roles', () => {
     unauthenticatedTest('get', '/roles');

@@ -29,8 +29,8 @@ const formatOktaUser = oktaResult => {
 
 const createUsersToAdd = async (knex, oktaClient) => {
   await knex('auth_affiliations').del();
-  await knex('state_admin_certifications').del();
   await knex('state_admin_certifications_audit').del();
+  await knex('state_admin_certifications').del();
   await knex('okta_users').del();
   logger.info('Retrieving user ids from Okta');
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
@@ -90,7 +90,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       role_id: stateAdminRoleId,
       status: 'approved',
       expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
-      username: 'em@il.com',
+      username: 'em@il.com'
     });
     oktaUsers.push(formatOktaUser(regularUser));
   }
@@ -108,10 +108,13 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       user_id: stateAdmin.id,
       state_id: 'ak',
-      role_id: stateStaffRoleId,
+      role_id: stateAdminRoleId,
       status: 'approved',
       username: stateAdmin.profile.login,
-      expires_at: format(new Date(new Date().getFullYear() + 1, '06', '30'), PostgresDateFormat)
+      expires_at: format(
+        new Date(new Date().getFullYear() + 1, '06', '30'),
+        PostgresDateFormat
+      )
     });
     // Let them be a staffer in Maryland too
     oktaAffiliations.push({
@@ -119,11 +122,15 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'md',
       role_id: stateStaffRoleId,
       status: 'approved',
-      expires_at: format(new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()), PostgresDateFormat),
+      expires_at: format(
+        new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()),
+        PostgresDateFormat
+      ),
       username: stateAdmin.profile.login
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
+      id: 123,
       ffy: 2021,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'ak',
@@ -136,6 +143,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
 
     stateCertifications.push({
+      id: 456,
       ffy: 2021,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'tn',

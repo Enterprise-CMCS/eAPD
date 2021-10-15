@@ -18,7 +18,7 @@ exports.seed = async knex => {
   await knex('state_admin_certifications').insert(stateCertifications);
   const auditEntries = stateCertifications.map(certification => {
     return {
-      username: certification.uid,
+      certificationId: certification.id,
       changeDate: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       changedBy: 'seeds'
     };

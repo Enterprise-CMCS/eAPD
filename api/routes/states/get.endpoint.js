@@ -9,8 +9,12 @@ const {
 
 describe('US States endpoint', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   describe('GET /states', () => {
     it('returns 200', async () => {

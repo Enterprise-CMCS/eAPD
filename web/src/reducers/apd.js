@@ -428,8 +428,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, data: {} };
 
     case SELECT_APD_SUCCESS: {
-      console.log('federal citations', action.apd.federalCitations);
-      console.log({ initialAssurances });
       return {
         ...state,
         data: {

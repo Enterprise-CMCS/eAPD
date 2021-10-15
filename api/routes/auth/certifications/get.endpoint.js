@@ -4,19 +4,16 @@ const {
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
 
-
 describe('auth/certifications endpoints', () => {
   describe('GET /auth/certifications', () => {
-
-
-    const url = '/auth/certifications'
+    const url = '/auth/certifications';
 
     unauthenticatedTest('get', url);
     unauthorizedTest('get', url);
 
     describe('when authenticated as a user with permission', () => {
       let api;
-      beforeAll(async () => {
+      beforeAll(() => {
         api = login();
       });
 
@@ -26,7 +23,6 @@ describe('auth/certifications endpoints', () => {
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
       });
-
     });
   });
 });

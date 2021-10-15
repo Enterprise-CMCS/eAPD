@@ -47,15 +47,17 @@ const unauthorizedTest = (method, url) => {
 };
 
 const getDB = () => knex(knexConfig[process.env.NODE_ENV]);
+
 const setupDB = async db => {
-  await db.seed.run({ specific: 'main.js' });
   await setupMongo();
+  await db.seed.run({ specific: 'main.js' });
 };
+
 const teardownDB = async db => {
-  await teardownMongo();
   await db.destroy();
   logger.info('Database teardown complete.');
   await drop();
+  await teardownMongo();
   logger.info('Mongo teardown complete.');
 };
 

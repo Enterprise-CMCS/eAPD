@@ -55,21 +55,27 @@ tap.test('express api', async t => {
     );
   });
 
-  t.test('error handling', async test => {
-    test.test(
+  t.test('error handling', async errorTests => {
+    // disconnect database from api via environment
+    errorTests.beforeEach(async () => {
+      testDbHost = process.env.TEST_DB_HOST;
+      process.env.TEST_DB_HOST = 'undefined';
+      await knex.destroy();
+      api = require('./api');
+    });
+
+    errorTests.test(
       'GET /states without a database connection returns 500',
-      async errorTest => {
-        // disconnect database from api via environment
-        testDbHost = process.env.TEST_DB_HOST;
-        process.env.TEST_DB_HOST = 'undefined';
-        await knex.destroy();
-
-        response = await request(api).get('/states');
-        errorTest.equal(response.status, 400, 'HTTP status set to 500'); // TODO: change to 500
-
-        // reattach database
-        process.env.TEST_DB_HOST = testDbHost;
+      async connTests => {
+        const res = await request(api).get('/states');
+        connTests.equal(res.status, 400, 'HTTP status set to 500');
       }
     );
+
+    errorTests.teardown(() => {
+      // reattach database
+      process.env.TEST_DB_HOST = testDbHost;
+      knex.destroy();
+    });
   });
 });
