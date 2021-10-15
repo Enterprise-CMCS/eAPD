@@ -28,6 +28,7 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           npm cache clean --force
+          npm update sqlite3
           npm i node-gyp
           npm cache clean
           npm i
