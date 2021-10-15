@@ -4,9 +4,8 @@ export OKTA_CLIENT_ID="$OKTA_CLIENT_ID"
 export OKTA_API_KEY="$OKTA_API_KEY"
 export JWT_SECRET="$JWT_SECRET"
 
-
 # Launch Dbus Session manager
-dbus-launch
+#dbus-launch
 #echo "Startng and backgrounding the App"
 #docker-compose -f ../docker-compose.yml up -d
 
