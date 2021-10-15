@@ -28,7 +28,10 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           npm cache clean --force
-          npm install
+          npm i windows-build-tools
+          npm i node-gyp
+          npm cache clean
+          npm i
       - name: Cypress Dependency Web
         working-directory: ./web
         env:
