@@ -25,7 +25,8 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           npm cache clean --force
-          npm install
+          which python3
+          npm i --python=/usr/bin/python3
       - name: Cypress Dependency Web
         working-directory: ./web
         env:

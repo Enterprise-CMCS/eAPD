@@ -16,6 +16,7 @@ exports.seed = async knex => {
   await knex('okta_users').insert(oktaUsers);
   logger.info('Completed adding okta_users');
   await knex('state_admin_certifications').insert(stateCertifications);
+
   const auditEntries = stateCertifications.map(certification => {
     return {
       certificationId: certification.id,
@@ -23,7 +24,6 @@ exports.seed = async knex => {
       changedBy: 'seeds'
     };
   });
-
   await knex('state_admin_certifications_audit').insert(auditEntries);
 
   const testTokens = await issueTokens(oktaUsers);
