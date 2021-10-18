@@ -11,7 +11,7 @@ import AlertMissingFFY from '../components/AlertMissingFFY';
 const ScheduleSummary = ({ activities }) => (
   <React.Fragment>
     <Waypoint /> {/* Waypoint w/o id indicates top of page */}
-    <AlertMissingFFY />
+    <AlertMissingFFY/>
     <Section id="schedule-summary" resource="scheduleSummary">
       <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
         {activities.length === 0 ? (
@@ -38,7 +38,7 @@ const ScheduleSummary = ({ activities }) => (
                     className="ds-u-font-weight--bold ds-u-border-right--0"
                     style={{ width: '70%' }}
                   >
-                    Activity {i + 1}: {activityName || 'Untitled'} Milestones
+                    Activity {i + 1}: {activityName || "Untitled"} Milestones
                   </td>
                   <td className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
                     {dateRange}
@@ -74,21 +74,19 @@ const ScheduleSummary = ({ activities }) => (
                     className="ds-u-font-weight--bold ds-u-border-right--0"
                     colSpan={2}
                   >
-                    Activity {i + 1}: {activityName || 'Untitled'} Milestones
+                    Activity {i + 1}: {activityName || "Untitled"} Milestones
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {milestones.map(
-                  ({ end: milestoneEnd, name: milestoneName }) => (
-                    <tr key={`${milestoneName}-${milestoneEnd}`}>
-                      <td className="ds-u-border-right--0">{milestoneName}</td>
-                      <td className="ds-u-border-left--0 ds-u-text-align--left">
-                        {milestoneEnd}
-                      </td>
-                    </tr>
-                  )
-                )}
+                {milestones.map(({ end: milestoneEnd, name: milestoneName }) => (
+                  <tr key={`${milestoneName}-${milestoneEnd}`}>
+                    <td className="ds-u-border-right--0">{milestoneName}</td>
+                    <td className="ds-u-border-left--0 ds-u-text-align--left">
+                      {milestoneEnd}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           ))

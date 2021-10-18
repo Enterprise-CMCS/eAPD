@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
 import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
 import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
@@ -11,8 +12,7 @@ import RichText from '../components/RichText';
 import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
 import { selectPreviousActivitySummary } from '../reducers/apd.selectors';
-import AlertMissingFFY from '../components/AlertMissingFFY'
-
+import AlertMissingFFY from '../components/AlertMissingFFY';
 
 const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
   const onChange = value => setSummary(value);
@@ -21,7 +21,7 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
   return (
     <React.Fragment>
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
-      <AlertMissingFFY/>
+      <AlertMissingFFY />
       <Section resource="previousActivities">
         <Waypoint id="prev-activities-outline" />
         <Subsection
@@ -30,7 +30,7 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
         >
           <label htmlFor="previous-activity-summary-field">
             <h4 className="ds-c-label">
-              {t('previousActivities.outline.instruction.label')}
+              {titleCase(t('previousActivities.outline.instruction.label'))}
             </h4>
           </label>
           <RichText

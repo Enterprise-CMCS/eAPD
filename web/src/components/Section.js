@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { titleCase } from 'title-case';
 import Instruction from './Instruction';
 import { t } from '../i18n';
 import SecondaryNav from './SecondaryNav';
@@ -11,7 +12,7 @@ const Section = ({ children, id, resource }) => {
 
   return (
     <section id={id}>
-      {title && <h2 className="ds-h2">{title}</h2>}
+      {title && <h2 className="ds-h2">{titleCase(title)}</h2>}
       {helpText && (
         <div className="ds-text--lead section--help-text">{helpText}</div>
       )}

@@ -1,6 +1,8 @@
-const { addDays, format, subDays } = require('date-fns');
+const { addYears, format } = require('date-fns');
 const logger = require('../../logger')('user seeder');
 const { states } = require('../../util/states');
+
+const today = new Date();
 
 const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
 
@@ -87,18 +89,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      username: 'em@il.com'
-    });
-    // Add an expired certification and this user will be downgraded to "regular user"
-    stateCertifications.push({
-      username: regularUser.id,
-      state: 'ak',
-      certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
-      certificationExpiration: format(
-        subDays(new Date(), 35),
-        PostgresDateFormat
-      ),
-      certifiedBy: 'seeds'
+      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
+      username: 'em@il.com',
     });
     oktaUsers.push(formatOktaUser(regularUser));
   }
@@ -116,9 +108,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       user_id: stateAdmin.id,
       state_id: 'ak',
-      role_id: stateAdminRoleId,
+      role_id: stateStaffRoleId,
       status: 'approved',
-      username: stateAdmin.profile.login
+      username: stateAdmin.profile.login,
+      expires_at: format(new Date(new Date().getFullYear() + 1, '06', '30'), PostgresDateFormat)
     });
     // Let them be a staffer in Maryland too
     oktaAffiliations.push({
@@ -126,20 +119,33 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'md',
       role_id: stateStaffRoleId,
       status: 'approved',
+      expires_at: format(new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()), PostgresDateFormat),
       username: stateAdmin.profile.login
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
-      username: stateAdmin.id,
+      ffy: 2021,
+      name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'ak',
-      certificationDate: format(subDays(new Date(), 40), PostgresDateFormat),
-      certificationExpiration: format(
-        addDays(new Date(), 325),
-        PostgresDateFormat
-      ),
-      certifiedBy: 'seeds'
+      email: stateAdmin.profile.email,
+      phone: stateAdmin.profile.primaryPhone,
+      uploadedBy: fedAdmin.id,
+      uploadedOn: new Date(),
+      fileUrl: '12345', // Todo: Update this to have a valid fileUrl
+      affiliationId: null
     });
 
+    stateCertifications.push({
+      ffy: 2021,
+      name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
+      state: 'tn',
+      email: stateAdmin.profile.email,
+      phone: stateAdmin.profile.primaryPhone,
+      uploadedBy: fedAdmin.id,
+      uploadedOn: new Date(),
+      fileUrl: '6789', // Todo: Update this to have a valid fileUrl
+      affiliationId: null
+    });
     oktaUsers.push(formatOktaUser(stateAdmin));
   }
 
@@ -149,18 +155,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
+      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: stateStaff.profile.login
-    });
-    // Add an invalid certification and this user will remain an staff member
-    stateCertifications.push({
-      username: stateStaff.id,
-      state: 'ak',
-      certificationDate: format(subDays(new Date(), 400), PostgresDateFormat),
-      certificationExpiration: format(
-        subDays(new Date(), 35),
-        PostgresDateFormat
-      ),
-      certifiedBy: 'seeds'
     });
     oktaUsers.push(formatOktaUser(stateStaff));
   }

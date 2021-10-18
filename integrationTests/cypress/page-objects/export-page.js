@@ -208,8 +208,11 @@ class ExportPage {
     }
   }
 
-  checkActivityHeader = (name, num) => {
-    cy.contains(`Activity ${num} (${name})`).should('exist');
+  checkActivityHeader = (name = 'Untitled', num) => {
+    cy.findByRole('heading', { name: /^Activities$/i })
+      .parent()
+      .contains(`Activity ${num}: ${name}`)
+      .should('exist');
   };
 
   checkExecutiveSummary = (
@@ -261,7 +264,10 @@ class ExportPage {
     supports,
     doesNotSupport
   ) => {
-    cy.contains('Provide a short overview of the activity:')
+    cy.findByText(/Provide a short overview of the activity/i)
+      .next()
+      .then($paragraph => cy.log($paragraph.text()));
+    cy.findByText(/Provide a short overview of the activity/i)
       .next()
       .should('have.text', desc);
     cy.contains('Start date').parent().should('contain', start);
@@ -316,8 +322,9 @@ class ExportPage {
         .next()
         .should('contain', 'Other state expenses');
       cy.contains('Other state expenses')
-        .next()
-        .should('contain', 'Private Contractor Costs');
+     // This is no longer the next element
+     //   .next()
+     //   .should('contain', 'Private Contractor Costs');
     }
   };
 
@@ -355,13 +362,13 @@ class ExportPage {
   };
 
   checkOtherFunding = (year, expectedText, expectedValue) => {
-    cy.contains(`FFY ${year}`)
+    cy.contains('h3', `FFY ${year}`)
       .next()
       .should('contain', 'Other Funding Description')
       .next()
       .should('have.text', expectedText);
 
-    cy.contains(`FFY ${year}`)
+    cy.contains('h3', `FFY ${year}`)
       .next()
       .next()
       .next()
@@ -378,7 +385,7 @@ class ExportPage {
       .should('contain', `$${medicaidValue}`);
   };
 
-  checkActivityNameAtEnd = name => {
+  checkActivityNameAtEnd = (name = 'Untitled') => {
     cy.contains(`The total cost of the ${name}`).should('exist');
   };
 
@@ -441,6 +448,7 @@ class ExportPage {
   getActivityScheduleMilestoneName = (activityIndex, milestoneIndex) => {
     return this.getAllActivityScheduleMilestones(activityIndex)
       .eq(milestoneIndex)
+      .children()
       .first()
       .invoke('text');
   };
@@ -450,6 +458,7 @@ class ExportPage {
   getActivityScheduleMilestoneDates = (activityIndex, milestoneIndex) => {
     return this.getAllActivityScheduleMilestones(activityIndex)
       .eq(milestoneIndex)
+      .children()
       .last()
       .invoke('text');
   };

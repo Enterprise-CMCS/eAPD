@@ -12,7 +12,7 @@ const NonPersonnelCostReview = ({
 }) => {
   return (
     <Review
-      heading={`${index + 1}. ${category}`}
+      heading={`${index + 1}. ${category || 'Category not specified'}`}
       headingLevel="5"
       onDeleteClick={onDeleteClick}
       onEditClick={expand}
