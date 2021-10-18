@@ -1,7 +1,7 @@
-const auditor = require('../../audit');
-const logger = require('../../logger')('affiliations');
-const { can, validForState } = require('../../middleware');
-const { updateAuthAffiliation } = require('../../db/affiliations')
+const auditor = require('../../../audit');
+const logger = require('../../../logger')('affiliations');
+const { can, validForState } = require('../../../middleware');
+const { updateAuthAffiliation } = require('../../../db/affiliations')
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = auditor.actions;
 

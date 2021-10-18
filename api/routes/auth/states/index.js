@@ -1,4 +1,4 @@
-const logger = require('../../../logger')('auth activities route index');
+const logger = require('../../../logger')('auth states route index');
 const get = require('./get');
 
 module.exports = (app, getEndpoint = get) => {

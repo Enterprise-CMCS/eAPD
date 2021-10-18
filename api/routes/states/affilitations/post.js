@@ -1,6 +1,6 @@
-const { raw: knex } = require('../../db');
-const { loggedIn } = require('../../middleware/auth');
-const logger = require('../../logger')('affiliations route post');
+const { raw: knex } = require('../../../db');
+const { loggedIn } = require('../../../middleware/auth');
+const logger = require('../../../logger')('affiliations route post');
 
 module.exports = app => {
   app.post(
