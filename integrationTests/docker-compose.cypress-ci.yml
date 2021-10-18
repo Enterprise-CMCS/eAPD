@@ -1,12 +1,12 @@
 version: '3.2'
 services:
   cypress:
-    image: "cypress/included:8.3.1"
+    image: 'cypress/included:8.6.0'
     environment:
       - CYPRESS_baseUrl=http://localhost:8080/
       - NODE_ENV=development
     working_dir: /eAPD/integrationTests
-    network_mode: "host"
+    network_mode: 'host'
     volumes:
       - ../:/eAPD
 

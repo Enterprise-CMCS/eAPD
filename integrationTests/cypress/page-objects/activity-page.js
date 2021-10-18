@@ -45,6 +45,9 @@ class ActivityPage {
     cy.contains('Delete').click();
     cy.contains(heading).should('exist');
     cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+    cy.waitForSave();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
     cy.contains(heading).should('not.exist');
     cy.contains(alert).should('exist');
     cy.contains(check).should('not.exist');
@@ -60,6 +63,7 @@ class ActivityPage {
 
   checkMetricFunctionality = () => {
     cy.findByRole('button', { name: /Add Metric/i }).click();
+    cy.waitForSave();
     for (let i = 0; i < 2; i += 1) {
       cy.get('[class="ds-c-review"]')
         .eq(i)
@@ -75,6 +79,7 @@ class ActivityPage {
     cy.contains('Delete').click();
     cy.contains('Delete Metric?').should('exist');
     cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+    cy.waitForSave();
     cy.contains('Delete').should('not.exist');
     cy.get('[class="ds-u-margin-right--2"]').eq(2).should('not.exist');
     cy.contains('Delete').should('not.exist');
@@ -87,8 +92,8 @@ class ActivityPage {
   };
 
   checkStateStaffFFY = (years, expectedValue) => {
-    for (let i = 0; i < years.length; i += 1) {
-      cy.contains(`FFY ${years[i]} Cost`)
+    years.forEach(year => {
+      cy.contains(`FFY ${year} Cost`)
         .next('div')
         .within(() => {
           cy.findByLabelText('Cost with benefits').should(
@@ -101,38 +106,38 @@ class ActivityPage {
           );
           cy.contains('Total: $0').should('exist');
         });
-    }
+    });
   };
 
   checkStateStaffOutput = (name, years, cost, numFTEs) => {
     cy.contains(name).should('exist');
 
-    for (let i = 0; i < years.length; i += 1) {
-      cy.contains(`FFY ${years[i]}`)
+    years.forEach(year => {
+      cy.contains(`FFY ${year}`)
         .parent()
         .within(() => {
           cy.contains(`Cost: $${cost}`).should('exist');
           cy.contains(`FTEs: ${numFTEs}`).should('exist');
           cy.contains(`Total: $${cost * numFTEs}`);
         });
-    }
+    });
   };
 
   checkFFYinputCostFields = (years, expectedValue) => {
-    for (let i = 0; i < years.length; i += 1) {
-      cy.findByLabelText(`FFY ${years[i]} Cost`).should(
+    years.forEach(year => {
+      cy.findByLabelText(`FFY ${year} Cost`).should(
         'have.value',
         expectedValue
       );
-    }
+    });
   };
 
   checkFFYcosts = (years, expectedValues) => {
     cy.then(() => {
-      for (let i = 0; i < years.length; i += 1) {
+      years.forEach((year, i) => {
         const convert = this.budgetPage.addCommas(expectedValues[i]);
-        cy.contains(`FFY ${years[i]} Cost: $${convert}`).should('exist');
-      }
+        cy.contains(`FFY ${year} Cost: $${convert}`).should('exist');
+      });
     });
   };
 
@@ -155,15 +160,6 @@ class ActivityPage {
     cy.contains(dateRange).should('exist');
     cy.contains(`${convert}`).should('exist');
     this.checkFFYcosts(years, expectedValue);
-  };
-
-  checkAddActivityButton = () => {
-    cy.contains('Add Activity').click();
-    cy.url().should('include', '/activities');
-    cy.contains('Activity 2').should('exist');
-    cy.contains('Delete').click();
-    cy.findByRole('button', { name: /Delete Activity/i }).click();
-    cy.contains('Activity 2').should('not.exist');
   };
 }
 

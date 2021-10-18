@@ -1,6 +1,9 @@
 // affiliation-statuses.spec.js created with Cypress
 
 describe('Invalid Login Attempts', () => {
+  beforeEach(() => {
+    cy.clearAuthCookies();
+  });
   it('show the pending page for a user with a pending request', () => {
     cy.loginWithEnv('requestedrole');
 
