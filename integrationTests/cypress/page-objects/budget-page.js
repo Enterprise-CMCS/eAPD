@@ -139,9 +139,9 @@ class BudgetPage {
         cy.contains(`federal share of $${federalShare}`).should('exist');
         cy.contains(`${state} share of $${stateShare}`).should('exist');
 
-        for (let i = 0; i < years.length; i += 1) {
-          cy.contains(years[i]).should('exist');
-        }
+        years.forEach(year => {
+          cy.contains(year).should('exist');
+        });
       });
   };
 
