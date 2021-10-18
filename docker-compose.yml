@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   db:
-    image: postgres:10
+    image: postgres:10.18-bullseye
     environment:
       - POSTGRES_DB=hitech_apd
       - POSTGRES_PASSWORD=cms
@@ -14,13 +14,17 @@ services:
       - 54325:5432
 
   mongo:
-    image: mongo:latest
+    image: mongo:5.0.3
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongo_admin
-      - MONGO_INITDB_ROOT_PASSWORD=example
-      - MONGODATA=/mongodata
+      - MONGO_INITDB_ROOT_USERNAME=admin-user
+      - MONGO_INITDB_ROOT_PASSWORD=admin-password
+      - MONGO_INITDB_DATABASE=eapd
+      - DATABASE_USERNAME=mongo
+      - DATABASE_PASSWORD=cms
     volumes:
       - mongodata:/mongodata
+      - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+    command: [--auth]
     expose:
       - 27017
     ports:
@@ -59,7 +63,7 @@ services:
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
       - MONGO_DATABASE=${MONGO_DATABASE}
-      - MONGO_URL=${MONGO_URL}
+      - MONGO_URL=mongodb://mongo:cms@mongo:27017/eapd
       - CYPRESS_TESTS=${CYPRESS_TESTS}
     volumes:
       - type: bind
