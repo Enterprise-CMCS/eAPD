@@ -2,6 +2,7 @@
 
 describe('Invalid Login Attempts', () => {
   beforeEach(() => {
+    cy.clearAuthCookies();
     cy.setCookie('gov.cms.eapd.hasConsented', 'true');
     cy.visit('/');
   });

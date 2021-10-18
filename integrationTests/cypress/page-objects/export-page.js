@@ -234,11 +234,11 @@ class ExportPage {
           ).should('exist');
 
           // Need to figure out a way to pass in totals for each year
-          for (let k = 0; k < years.length; k += 1) {
+          years.forEach(year => {
             cy.contains(
-              `FFY ${years[k]}: $0 | Total Computable Medicaid Cost: $0 ($0 Federal share)`
+              `FFY ${year}: $0 | Total Computable Medicaid Cost: $0 ($0 Federal share)`
             ).should('exist');
-          }
+          });
         });
     }
   };
@@ -247,11 +247,11 @@ class ExportPage {
     cy.findAllByText('Activities')
       .next()
       .within(() => {
-        for (let i = 0; i < activities.length; i += 1) {
-          cy.contains(
-            `${i + 1}. ${activities[i][0]} | ${activities[i][1]}`
-          ).should('exist');
-        }
+        activities.forEach((activity, i) => {
+          cy.contains(`${i + 1}. ${activity[0]} | ${activity[1]}`).should(
+            'exist'
+          );
+        });
       });
   };
 
@@ -300,7 +300,9 @@ class ExportPage {
         .next()
         .next()
         .should('contain', 'Milestones');
-      cy.contains('Milestones').next().should('contain', 'State staff');
+      cy.contains('Milestones')
+        .next()
+        .should('contain', 'Milestone not specified');
     } else {
       cy.contains('Outcomes and Metrics')
         .next()
@@ -321,10 +323,10 @@ class ExportPage {
       cy.contains('State staff')
         .next()
         .should('contain', 'Other state expenses');
-      cy.contains('Other state expenses')
-     // This is no longer the next element
-     //   .next()
-     //   .should('contain', 'Private Contractor Costs');
+      cy.contains('Other state expenses');
+      // This is no longer the next element
+      //   .next()
+      //   .should('contain', 'Private Contractor Costs');
     }
   };
 
@@ -338,7 +340,7 @@ class ExportPage {
     if (emptyOrFilled === 'empty') {
       cy.contains('Private Contractor Costs')
         .next()
-        .should('contain', 'Cost Allocation');
+        .should('contain', 'Private Contractor or Vendor Name not specified');
     } else {
       cy.contains('Private Contractor Costs')
         .next()
