@@ -1,6 +1,6 @@
 FROM node:14
 
-RUN npm i
+RUN npm i -g npm
 
 RUN mkdir /app
 WORKDIR /app

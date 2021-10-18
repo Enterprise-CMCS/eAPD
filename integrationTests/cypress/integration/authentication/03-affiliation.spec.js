@@ -1,6 +1,10 @@
 // affiliation.spec.js created with Cypress
 
 describe('Affiliation', () => {
+  beforeEach(() => {
+    cy.clearAuthCookies();
+  });
+
   after(() => cy.task('db:resetnorole'));
 
   describe('Logging in with a user that does not have an affiliation', () => {
