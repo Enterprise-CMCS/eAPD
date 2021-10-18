@@ -5,7 +5,7 @@ const {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
+} = require('../../../endpoint-tests/utils');
 
 describe('APD events endpoints', () => {
   describe('Record an event associated with an APD | POST /apds/:id/events', () => {
