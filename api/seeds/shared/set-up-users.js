@@ -108,7 +108,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       user_id: stateAdmin.id,
       state_id: 'ak',
-      role_id: stateStaffRoleId,
+      role_id: stateAdminRoleId,
       status: 'approved',
       username: stateAdmin.profile.login,
       expires_at: format(new Date(new Date().getFullYear() + 1, '06', '30'), PostgresDateFormat)
