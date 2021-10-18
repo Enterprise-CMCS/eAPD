@@ -4,7 +4,7 @@ const {
   teardownDB,
   login,
   unauthenticatedTest
-} = require('../../endpoint-tests/utils');
+} = require('../../../endpoint-tests/utils');
 
 describe('Affiliations endpoint | POST', () => {
   const api = login('no-permissions');

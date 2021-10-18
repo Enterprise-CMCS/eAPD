@@ -1,6 +1,6 @@
-const logger = require('../../logger')('apd event routes');
-const { can, userCanAccessAPD } = require('../../middleware');
-const { createEventForAPD: ce } = require('../../db');
+const logger = require('../../../logger')('apd event routes');
+const { can, userCanAccessAPD } = require('../../../middleware');
+const { createEventForAPD: ce } = require('../../../db');
 
 module.exports = (app, { createEventForAPD = ce } = {}) => {
   logger.debug('setting up POST /apds/:id/events route');
