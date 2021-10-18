@@ -35,12 +35,15 @@ export const testDefaultBudgetAndFFP = years => {
             budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
 
             cy.get('[class="ds-c-field"]').select('75-25');
+            cy.waitForSave();
             budgetPage.checkCostSplitTable(75, 25, 0, 0, 0);
 
             cy.get('[class="ds-c-field"]').select('50-50');
+            cy.waitForSave();
             budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
 
             cy.get('[class="ds-c-field"]').select('90-10');
+            cy.waitForSave();
             budgetPage.checkQuarterTable('default', '', 0);
           });
       });
