@@ -1,0 +1,17 @@
+{
+  "low": true,
+  "package-manager": "auto",
+  "allowlist": [1002401],
+  "_comment": {
+    "1002401": {
+      "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
+      "module": "ansi-regex",
+      "affects": [
+        "eslint@7.32.0 - linter",
+        "@testing-library/cypress@8.0.0 - testing",
+        "sqlite3@4.2.0 - database, but ansi-regex is in the npmlog"
+      ]
+    }
+  },
+  "registry": "https://registry.npmjs.org"
+}
