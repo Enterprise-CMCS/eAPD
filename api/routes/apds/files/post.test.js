@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
-const { can, userCanEditAPD } = require('../../middleware');
-const endpoints = require('./files');
+const { can } = require('../../../middleware');
+const endpoints = require('./post');
 
 tap.only('apds files endpoints', async endpointTest => {
   const sandbox = sinon.createSandbox();
@@ -32,91 +32,19 @@ tap.only('apds files endpoints', async endpointTest => {
     res.send.returns(res);
     res.end.returns(res);
   });
-
   endpointTest.test('setup', async setupTest => {
     endpoints(app);
-
-    setupTest.ok(
-      app.get.calledWith(
-        '/apds/:id/files/:fileID',
-        can('view-document'),
-        sinon.match.func
-      ),
-      'endpoint for fetching APD files is setup'
-    );
 
     setupTest.ok(
       app.post.calledWith(
         '/apds/:id/files',
         can('view-document'),
-        userCanEditAPD(),
         sinon.match.func
       ),
       'endpoint for posting APD files is setup'
     );
+
   });
-
-  endpointTest.test('GET endpoint for fetching an APD file', async tests => {
-    let handler;
-    tests.beforeEach(async () => {
-      endpoints(app, { ...di });
-      handler = app.get.args[0].pop();
-    });
-
-    tests.test(
-      'there is an unexpected error checking if the file belongs to the APD',
-      async test => {
-        const error = new Error('some error');
-        di.fileBelongsToAPD.rejects(error);
-
-        await handler(
-          { params: { fileID: 'file id', id: 'apd id' } },
-          res,
-          next
-        );
-
-        test.ok(next.calledWith(error));
-      }
-    );
-
-    tests.test('the requested file does not belong to the APD', async test => {
-      di.fileBelongsToAPD.resolves(false);
-
-      await handler({ params: { fileID: 'file id', id: 'apd id' } }, res, next);
-
-      test.ok(res.status.calledWith(400), 'sends a 400 error');
-      test.ok(res.end.calledAfter(res.status), 'response is terminated');
-    });
-
-    tests.test('there is an unexpected error getting the file', async test => {
-      const error = new Error('some other error');
-      di.fileBelongsToAPD.resolves(true);
-      di.getFile.rejects(error);
-
-      await handler({ params: { fileID: 'file id', id: 'apd id' } }, res, next);
-
-      test.ok(next.calledWith(error));
-    });
-
-    tests.test(
-      'the file belongs to the APD and there is no trouble getting it',
-      async test => {
-        const file = {};
-        di.fileBelongsToAPD.resolves(true);
-        di.getFile.resolves(file);
-
-        await handler(
-          { params: { fileID: 'file id', id: 'apd id' } },
-          res,
-          next
-        );
-
-        test.ok(res.send.calledWith(file), 'sends the file');
-        test.ok(res.end.calledAfter(res.send), 'response is terminated');
-      }
-    );
-  });
-
   endpointTest.test('POST endpoint for uploading an APD file', async tests => {
     let handler;
 
