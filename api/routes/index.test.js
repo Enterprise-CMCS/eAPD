@@ -14,24 +14,32 @@ tap.test('endpoint setup', async endpointTest => {
 
   const affiliationsEndpoint = sinon.spy();
   const apdsEndpoint = sinon.spy();
+  const apdsEventsEndpoint = sinon.spy();
+  const apdsFilesEndpoint = sinon.spy();
   const authEndpoint = sinon.spy();
   const docsEndpoint = sinon.spy();
   const meEndpoint = sinon.spy();
   const rolesEndpoint = sinon.spy();
   const statesEndpoint = sinon.spy();
+  const stateAffiliationEndpoint = sinon.spy()
   const usersEndpoint = sinon.spy();
   const openAPI = {};
 
   endpointIndex(
     app,
-    affiliationsEndpoint,
-    apdsEndpoint,
-    authEndpoint,
-    docsEndpoint,
-    rolesEndpoint,
-    statesEndpoint,
-    usersEndpoint,
-    {}
+    {
+      affiliationsEndpoint,
+      apdsEndpoint,
+      apdsEventsEndpoint,
+      apdsFilesEndpoint,
+      authEndpoint,
+      docsEndpoint,
+      rolesEndpoint,
+      statesEndpoint,
+      stateAffiliationEndpoint,
+      usersEndpoint,
+      openAPIdoc:{}
+    }
   );
 
   endpointTest.ok(
@@ -42,6 +50,16 @@ tap.test('endpoint setup', async endpointTest => {
     apdsEndpoint.calledWith(app),
     'apds endpoint is setup with the app'
   );
+  endpointTest.ok(
+    apdsEventsEndpoint.calledWith(app),
+    'apds events endpoint is setup with the app'
+  );
+
+  endpointTest.ok(
+    apdsFilesEndpoint.calledWith(app),
+    'apds files endpoint is setup with the app'
+  );
+
   endpointTest.ok(
     authEndpoint.calledWith(app),
     'auth endpoint is setup with the app'
@@ -61,6 +79,10 @@ tap.test('endpoint setup', async endpointTest => {
   endpointTest.ok(
     statesEndpoint.calledWith(app),
     'states endpoint is set up with the app'
+  );
+  endpointTest.ok(
+    stateAffiliationEndpoint.calledWith(app),
+    'state Affiliation endpoint is set up with the app'
   );
   endpointTest.ok(
     usersEndpoint.calledWith(app),
