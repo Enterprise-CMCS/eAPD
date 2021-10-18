@@ -2,11 +2,11 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const can = require('../../middleware').can;
+const can = require('../../../middleware').can;
 const patchEndpoint = require('./patch');
 
-const mockExpress = require('../../util/mockExpress');
-const mockResponse = require('../../util/mockResponse');
+const mockExpress = require('../../../util/mockExpress');
+const mockResponse = require('../../../util/mockResponse');
 
 let app;
 let res;

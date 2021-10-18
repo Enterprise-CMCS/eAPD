@@ -1,79 +1,18 @@
 const fs = require('fs');
 const FormData = require('form-data');
 const {
-  getDB,
-  setupDB,
-  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
+} = require('../../../endpoint-tests/utils');
 const {
   mnAPDId,
   akAPDId,
   finalAPDId,
   badAPDId
-} = require('../../seeds/test/apds');
+} = require('../../../seeds/test/apds');
 
 describe('APD files endpoints', () => {
-  const db = getDB();
-  beforeAll(async () => {
-    await setupDB(db);
-  });
-  afterAll(async () => {
-    await teardownDB(db);
-  });
-
-  describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {
-    const url = (apdID, fileID) => `/apds/${apdID}/files/${fileID}`;
-
-    unauthenticatedTest('get', url(badAPDId));
-    unauthorizedTest('get', url(badAPDId));
-    describe('when authenticated as a user with permission', () => {
-      let api;
-
-      beforeAll(() => {
-        api = login();
-      });
-
-      it('with a non-existant apd ID', async () => {
-        const response = await api.get(
-          url(badAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
-        );
-
-        expect(response.status).toEqual(400);
-        expect(response.data).toMatchSnapshot();
-      });
-
-      it(`with an APD in a state other than the user's state`, async () => {
-        const response = await api.get(
-          url(mnAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
-        );
-
-        expect(response.status).toEqual(400);
-        expect(response.data).toMatchSnapshot();
-      });
-
-      it('with an APD that is not associated with the file', async () => {
-        const response = await api.get(
-          url(finalAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
-        );
-
-        expect(response.status).toEqual(400);
-        expect(response.data).toMatchSnapshot();
-      });
-
-      it('with a valid request', async () => {
-        const response = await api.get(
-          url(akAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
-        );
-
-        expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
-      });
-    });
-  });
-
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {
     const url = id => `/apds/${id}/files`;
 

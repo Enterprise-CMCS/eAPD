@@ -1036,7 +1036,7 @@ Object {
             "description": "The apd ID does not match any known apds for the user",
           },
           "404": Object {
-            "description": "The apd does not exist",
+            "description": "The apd ID does not match any known apds",
           },
           "415": Object {
             "description": "The file is not a valid format",
