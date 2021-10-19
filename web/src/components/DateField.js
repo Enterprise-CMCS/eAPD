@@ -8,7 +8,14 @@ import React, { useState, useMemo } from 'react';
 // date up into its pieces.
 const splitDate = date =>
   useMemo(() => {
-    const [year, month, day] = date.split('-');
+    if (!date) {
+      return {
+        day: '',
+        month: '',
+        year: ''
+      };
+    }
+    const [year, month, day] = date.slice(0, 10).split('-');
     return { day: +day || '', month: +month || '', year: +year || '' };
   }, [date]);
 

@@ -77,6 +77,8 @@ const thisFFY = (() => {
 // that simplifies things
 const threeYears = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
 
+export const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
+
 export const defaultAPDYearOptions = threeYears;
 export const defaultAPDYears = threeYears.slice(0, 2);
 
@@ -127,10 +129,10 @@ export const generateKey = (() => {
  * @returns {String} Display-formatted date string.
  */
 export const stateDateToDisplay = date => {
-  if(!date) {
+  if (!date) {
     return 'Date not specified';
   }
-  const m = moment(date, 'YYYY-MM-DD', true);
+  const m = moment(date.slice(0, 10), 'YYYY-MM-DD', true);
   if (m.isValid()) {
     return m.format('M/D/YYYY');
   }
