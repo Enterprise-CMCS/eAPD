@@ -86,12 +86,19 @@ tap.test('Okta jwtUtils', async t => {
         'returns the JWT'
       ],
       [
+        '/auth/certifications/files/12345',
+        'gov.cms.eapd.API-TOKEN={%22accessToken%22%3A%22example.cookie.value%22%2C%22max-age%22%3A900}',
+        'example.cookie.value',
+        'returns the JWT'
+      ],
+      [
         '/apds/1/files/12345',
         'gov.cms.eapd.hasConsented=true;',
         null,
         'returns null'
       ],
       ['/apds/1/files/12345', '', null, 'returns null'],
+      ['/auth/certifications/files/12345', '', null, 'returns null'],
       ['/apds/1/files/12345', 'Elephanter xxx.yyy.zzz', null, 'returns null']
     ];
 
