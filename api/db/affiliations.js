@@ -175,9 +175,7 @@ const getAffiliationMatches = async ({
       .where('state_id', stateId)
       .andWhere('status', 'approved')
       .andWhere('auth_roles.name', 'eAPD State Staff')
-    })
-  
-  return query;
+    });
 };
 
 const updateAuthAffiliation = async({
