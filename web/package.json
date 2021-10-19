@@ -34,6 +34,7 @@
     "Akua Amponsah",
     "Nicolas Aretakis",
     "Heather Battaglia",
+    "Ty Bolt",
     "Ronald Bronson",
     "Bill Brooks",
     "Richard Davis",
@@ -48,6 +49,8 @@
     "Jerome Lee",
     "Nikki Lee",
     "Christopher (CM) Lubinksi",
+    "Chris Miraflor",
+    "Darren Mirano",
     "Aviva Oskow",
     "Paul Phillips",
     "Laura Poncé",
@@ -56,8 +59,7 @@
     "Jen Thibault",
     "Greg Walker",
     "Nichole Weems",
-    "Darren Mirano",
-    "Chris Miraflor"
+    "Nicole Zonnenberg"
   ],
   "license": "CC0-1.0",
   "bugs": {
@@ -75,6 +77,9 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@okta/okta-auth-js": "^4.8.0",
     "@tinymce/tinymce-react": "^3.9.1",
+    "@uppy/core": "^2.0.2",
+    "@uppy/react": "^2.0.2",
+    "@uppy/xhr-upload": "^2.0.2",
     "axe-core": "^4.3.1",
     "axios": "^0.21.4",
     "connected-react-router": "^6.9.1",
