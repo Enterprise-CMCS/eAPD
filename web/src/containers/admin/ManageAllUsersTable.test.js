@@ -128,7 +128,7 @@ describe('<ManageAllUsersTable />', () => {
 
   test('renders passed in actions', () => {
     props = {
-      tab: 'active',
+      tab: 'pending',
       affiliations: [mockSingleAffiliation],
       isFetching: false,
       actions: [
@@ -161,5 +161,27 @@ describe('<ManageAllUsersTable />', () => {
     const { queryByText } = renderResult;
     expect(queryByText('Take Action')).not.toBeInTheDocument();
   });
+  
+  test('does not render edit action for active affiliations', () => {
+    props = {
+      tab: 'active',
+      affiliations: [mockFedAffiliation],
+      isFetching: false,
+      actions: [
+        <button type="button" key="action1">
+          Edit Role
+        </button>,
+        <button type="button" key="action1">
+          Revoke
+        </button>
+      ],
+      currentUser: { id: '42', activities: ['edit-affiliations'] }
+    };
+    renderResult = render(<ManageAllUsersTable {...props} />);
+
+    const { queryByText } = renderResult;
+    expect(queryByText('Edit Role')).not.toBeInTheDocument();
+  });
+
 
 });
