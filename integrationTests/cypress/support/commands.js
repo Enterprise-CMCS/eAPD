@@ -3,7 +3,10 @@ import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
 import tokens from '../../tokens.json';
-import { API_COOKIE_NAME } from '../../../web/src/constants';
+import {
+  CONSENT_COOKIE_NAME,
+  API_COOKIE_NAME
+} from '../../../web/src/constants';
 
 const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000
@@ -36,8 +39,14 @@ const EXPIRY_DATE = Math.ceil(
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 // Login methods
+Cypress.Commands.add('clearAuthCookies', () => {
+  cy.clearCookie(CONSENT_COOKIE_NAME);
+  cy.clearCookie(API_COOKIE_NAME);
+});
+
 Cypress.Commands.add('login', (username, password) => {
-  cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
+  cy.clearAuthCookies();
+  cy.setCookie(CONSENT_COOKIE_NAME, 'true', {
     expiry: EXPIRY_DATE
   });
   cy.visit('/');
@@ -53,6 +62,7 @@ Cypress.Commands.add('loginWithEnv', username => {
 });
 
 Cypress.Commands.add('useJwtUser', (username, url) => {
+  cy.clearAuthCookies();
   cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
     expiry: EXPIRY_DATE
   });
@@ -124,46 +134,160 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
   });
 });
 
+Cypress.Commands.add('waitForSave', () => {
+  cy.document()
+    .its('body')
+    .find('header')
+    .then($header => {
+      if ($header) {
+        if ($header.text().includes('Saving')) {
+          cy.wrap($header)
+            .contains('Saved', { timeout: 10000 })
+            .should('exist');
+        }
+
+        cy.wrap($header)
+          .contains(/Saved|Last saved/i)
+          .should('exist');
+      }
+    });
+});
+
 Cypress.Commands.add('goToKeyStatePersonnel', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/Key State Personnel/i)
-    .click();
-  // Click on nav submenu button
-  cy.get('a.ds-c-vertical-nav__label')
-    .contains(/Key State Personnel/i)
-    .click();
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Key State Personnel/i)
+        .click();
+    });
 });
 
 Cypress.Commands.add('goToPreviousActivities', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/Results of Previous Activities/i)
-    .click();
-  // Click on nav submenu button
-  cy.get('a.ds-c-vertical-nav__label')
-    .contains(/Results of Previous Activities/i)
-    .click();
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Results of Previous Activities/i)
+        .click();
+    });
 });
 
 Cypress.Commands.add('goToActivityDashboard', () => {
-  cy.contains(/Activities Dashboard/i)
-    .click({ force: true });
+  // check to see if Activities is expanded
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/^Activities$/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+      // click on Activities Dashboard
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Activities Dashboard/i)
+        .click();
+    });
 });
 
+const openActivitySection = (activityIndex, subNavName) => {
+  // check to see if Activities is expanded
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/^Activities$/i)
+    .then($activities => {
+      if ($activities.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($activities).click();
+      }
+
+      cy.wrap($activities)
+        .next()
+        .within($list => {
+          cy.log({ $list });
+          // find the Activity section with the correct index
+          // check to see if Activity Index is expanded
+          cy.get('.ds-c-vertical-nav__label--parent')
+            .contains(`Activity ${activityIndex + 1}: `)
+            .then($activity => {
+              // if it's not expanded, expand it
+              if ($activity.attr('aria-expanded') === 'false') {
+                cy.wrap($activity).click();
+              }
+
+              cy.wrap($activity)
+                .next()
+                .within(() => {
+                  // find the subNavName section and click on it
+                  cy.get('a.ds-c-vertical-nav__label')
+                    .contains(subNavName)
+                    .click();
+                });
+            });
+        });
+    });
+};
+
+Cypress.Commands.add('goToActivityOverview', activityIndex => {
+  openActivitySection(activityIndex, 'Activity Overview');
+});
+
+Cypress.Commands.add('goToOutcomesAndMilestones', activityIndex => {
+  openActivitySection(activityIndex, 'Outcomes and Milestones');
+});
+
+Cypress.Commands.add('goToStateStaffAndExpenses', activityIndex => {
+  openActivitySection(activityIndex, 'State Staff and Expenses');
+});
+
+Cypress.Commands.add('goToPrivateContractorCosts', activityIndex => {
+  openActivitySection(activityIndex, 'Private Contractor Costs');
+});
+
+Cypress.Commands.add('goToCostAllocationAndOtherFunding', activityIndex => {
+  openActivitySection(activityIndex, 'Cost Allocation and Other Funding');
+});
+
+Cypress.Commands.add('goToBudgetAndFFP', activityIndex => {
+  openActivitySection(activityIndex, 'Budget and FFP');
+});
+
+Cypress.Commands.add('goToActivityScheduleSummary', () => {
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/Activity Schedule Summary/i)
+    .click();
+});
 
 Cypress.Commands.add('goToProposedBudget', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/Proposed Budget/i)
-    .click();
-  // Click on nav submenu button
-  cy.get('a.ds-c-vertical-nav__label')
-    .contains(/Proposed Budget/i)
-    .click();
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Proposed Budget/i)
+        .click();
+    });
 });
 
-Cypress.Commands.add('goToAssurancesCompliance', () => {
+Cypress.Commands.add('goToAssurancesAndCompliance', () => {
   cy.get('a.ds-c-vertical-nav__label')
     .contains(/Assurances and Compliance/i)
     .click();
@@ -173,11 +297,17 @@ Cypress.Commands.add('goToExecutiveSummary', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
     .contains(/Executive Summary/i)
-    .click();
-  // Click on nav submenu button
-  cy.get('a.ds-c-vertical-nav__label')
-    .contains(/Executive Summary/i)
-    .click();
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Executive Summary/i)
+        .click();
+    });
 });
 
 Cypress.Commands.add('goToExportView', () => {
