@@ -21,6 +21,11 @@ module.exports = (
       try {
         const file = await getFile(req.params.fileID);
         if(file) {
+          res.setHeader('Content-Type', 'application/octet-stream');
+          res.setHeader(
+            'Content-Disposition',
+            `attachment; filename=upload.pdf` // Todo: Capture metadata when file is uploaded and return it back
+          );
           res.send(file).end();
         } else {
           res.status(400).end();
