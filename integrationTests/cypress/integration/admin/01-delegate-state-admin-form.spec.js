@@ -31,7 +31,7 @@ describe('filling out state admin delegation form', function () {
   before(function () {
     cy.useFedAdmin();
 
-    cy.findByRole('button', { name: /Add state admin letter/i }).click();
+    cy.findByRole('button', { name: /Add State Admin Letter/i }).click();
     cy.wait(1000);
     cy.location('pathname').then(pathname => (delegateStateAdminFormUrl = pathname));
   });
@@ -68,7 +68,7 @@ describe('filling out state admin delegation form', function () {
   
   it('tests filling out and submitting the form', function () {
     // Check that submit button starts disabled
-    cy.get('button').contains('Add state admin letter').should('be.disabled');
+    cy.get('button').contains('Add State Admin Letter').should('be.disabled');
     
     cy.get('input[type=radio]').first().check({force: true});
     
@@ -97,9 +97,9 @@ describe('filling out state admin delegation form', function () {
     cy.get('a').contains('test.pdf').should('be.visible');
     
     // When filled out form submit button should be enabled
-    cy.get('button').contains('Add state admin letter').should('not.be.disabled');
+    cy.get('button').contains('Add State Admin Letter').should('not.be.disabled');
     
-    cy.contains('Add state admin letter').click();
+    cy.contains('Add State Admin Letter').click();
     
     cy.contains('Federal Administrator Portal').should('be.visible');
   });

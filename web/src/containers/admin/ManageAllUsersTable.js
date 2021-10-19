@@ -56,9 +56,19 @@ const ManageAllUsersTable = ({
   }
 
   const AffiliationActions = ({ primaryAffiliation, affiliation }) => {
+    // Only show revoked for the active tab
+    let displayedActions;
+    if (tab !== 'active') {
+      displayedActions = [...actions];
+    }
+    if (tab === 'active') {
+      displayedActions = [actions[1]];
+    }
     return (
       <div className="ds-u-display--flex" data-primary-affiliation-id={primaryAffiliation.id} data-id={affiliation.id} data-state={affiliation.stateId} >
-        {showActions(primaryAffiliation) && actions}
+        {showActions(primaryAffiliation) && (
+          displayedActions            
+        )}
        </div>
     )
   }
