@@ -59,6 +59,11 @@
       "module": "immer",
       "affects": ["@storybook/react@6.3.7 - storybook"]
     },
+    "1002492": {
+      "advisory": "https://github.com/advisories/GHSA-33f9-j839-rf8h",
+      "module": "immer",
+      "affects": ["@storybook/react@6.3.7 - storybook"]
+    },
     "1002522": {
       "advisory": "https://github.com/advisories/GHSA-whgm-jr23-g3j9",
       "module": "ansi-html",
