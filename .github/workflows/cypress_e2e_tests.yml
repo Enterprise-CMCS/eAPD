@@ -4,7 +4,7 @@ on:
     - cron: '0 1 * * *' # every day at 1 am
   pull_request:
     branches:
-      - development
+      - main
 
 jobs:
   cypress-run:
