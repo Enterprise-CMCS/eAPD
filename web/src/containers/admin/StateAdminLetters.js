@@ -81,13 +81,8 @@ const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
 };
 
 GlobalFilter.propTypes = {
-  globalFilter: PropTypes.object,
-  setGlobalFilter: PropTypes.object
-};
-
-GlobalFilter.defaultProps = {
-  globalFilter: {},
-  setGlobalFilter: {}
+  globalFilter: PropTypes.func.isRequired,
+  setGlobalFilter: PropTypes.func.isRequired
 };
 
 const SelectColumnFilter = ({
