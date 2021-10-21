@@ -44,7 +44,7 @@ const DocumentUpload = ({
     setFileName(result.successful[0].name);
     setFileUrl(`${apiUrl}${result.successful[0].response.body.url}`);
     
-    handleFileChange(fileUrl);
+    handleFileChange(`${apiUrl}${result.successful[0].response.body.url}`);
   });
   
   const hideUploadedFileLink = () => {
