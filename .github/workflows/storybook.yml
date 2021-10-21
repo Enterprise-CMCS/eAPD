@@ -2,8 +2,7 @@ name: Deploy Storybook
 on:
   push:
     branches:
-      - master
-      - development
+      - main
     paths:
       - 'web/.storybook/**'
       - 'web/src/stories/**'
