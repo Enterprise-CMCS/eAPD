@@ -10,11 +10,7 @@ const { validateDoc: validDoc } = require('../../../../util/fileValidation');
 
 module.exports = (
   app,
-  {
-    putFile = put,
-    crypto = nodeCrypto,
-    validateDoc = validDoc
-  } = {}
+  { putFile = put, crypto = nodeCrypto, validateDoc = validDoc } = {}
 ) => {
   logger.silly('setting up POST /auth/certifications/files route');
 
@@ -27,17 +23,11 @@ module.exports = (
       try {
         const { buffer = null } = req.file;
 
-        const fileId = crypto
-          .createHash('sha256')
-          .update(buffer)
-          .digest('hex');
+        const fileId = crypto.createHash('sha256').update(buffer).digest('hex');
 
         const { error = null } = await validateDoc(buffer);
         if (error) {
-          res
-            .status(415)
-            .send({ error })
-            .end();
+          res.status(415).send({ error }).end();
           return;
         }
 

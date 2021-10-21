@@ -18,6 +18,7 @@
         }
       }
     ],
+    "jsx-a11y/no-onchange": "off",
     "jsx-a11y/label-has-associated-control": ["error", { "assert": "either" }],
 
     "no-param-reassign": [2, { "props": false }],
