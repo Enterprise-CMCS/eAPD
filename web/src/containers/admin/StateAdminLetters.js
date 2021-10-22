@@ -202,28 +202,28 @@ const StateAdminLetters = () => {
   const data = useMemo(() => makeData(tableData), [tableData]);
   
   const {
-   getTableProps,
-   getTableBodyProps,
-   headerGroups,
-   prepareRow,
-   state: { globalFilter, pageIndex, pageSize },
-   page,
-   canPreviousPage,
-   canNextPage,
-   pageOptions,
-   nextPage,
-   previousPage,
-   setPageSize,
-   setGlobalFilter,
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    state: { globalFilter, pageIndex, pageSize },
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    nextPage,
+    previousPage,
+    setPageSize,
+    setGlobalFilter,
   } = useTable(
-   { 
+    { 
      columns, 
      data
-   },
-   useFilters,
-   useGlobalFilter,
-   useSortBy,
-   usePagination
+    },
+    useFilters,
+    useGlobalFilter,
+    useSortBy,
+    usePagination
   );
   
   const handleAddStateButton = () => {

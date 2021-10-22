@@ -9,14 +9,6 @@ const setupDB = async (oktaUsers, authAffiliations) =>{
 }
 
 tap.test('database wrappers / affiliations with live db', async affiliations => {
-//   console.log("test started!");
-//   let stateStaffRoleId
-//   let stateAdminRoleId
-// 
-//   affiliations.before(async () => {
-//  
-//   });
-  
   affiliations.test('only returns pending state admins and approved state staff', async test => {
     let stateStaffRoleId = await knex('auth_roles')
       .where({ name: 'eAPD State Staff' })
