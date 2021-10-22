@@ -1,16 +1,10 @@
-
 const { loggedIn } = require('../../../../middleware/auth');
 const { can } = require('../../../../middleware');
 const logger = require('../../../../logger')('auth certifications post');
 
-const { getFile: get} = require('../../../../files');
+const { getFile: get } = require('../../../../files');
 
-module.exports = (
-  app,
-  {
-    getFile = get,
-  } = {}
-) => {
+module.exports = (app, { getFile = get } = {}) => {
   logger.silly('setting up GET /auth/certifications/files/:fileID route');
 
   app.get(
@@ -20,7 +14,7 @@ module.exports = (
     async (req, res, next) => {
       try {
         const file = await getFile(req.params.fileID);
-        if(file) {
+        if (file) {
           res.setHeader('Content-Type', 'application/octet-stream');
           res.setHeader(
             'Content-Disposition',
@@ -37,6 +31,4 @@ module.exports = (
       }
     }
   );
-
-
 };

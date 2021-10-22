@@ -14,7 +14,7 @@ const FederalDashboard = ({ approvalStatus }) => {
   return (
     <main
       id="start-main-content"
-      className="ds-l-container ds-u-margin-bottom--5"
+      className="ds-l-container--fluid ds-u-margin-x--5 ds-u-margin-bottom--5"
     >
       <h1>Federal Administrator Portal</h1>
       {isApproved && <FederalAdmin /> }
