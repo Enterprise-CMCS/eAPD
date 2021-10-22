@@ -2,17 +2,13 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { TextField, Dropdown, Button, ChoiceList } from '@cmsgov/design-system';
-import Uppy from '@uppy/core';
-import XHRUpload from '@uppy/xhr-upload';
-import { DragDrop, useUppy } from '@uppy/react';
 
 import axios, { apiUrl } from '../../util/api';
 import { twoYears } from '../../util'
-import { getCookie } from '../../util/auth';
-import { API_COOKIE_NAME } from '../../constants';
 import { STATES } from '../../util/states';
-import { Xmark, PDFFileBlue } from '../../components/Icons';
 import NumberField from '../../components/NumberField';
+import DocumentUpload from '../../components/DocumentUpload';
+
 
 const dropdownOptions = STATES.map(item => {
   return {
@@ -27,11 +23,8 @@ const yearChoices = twoYears.map(year => ({
   value: year
 }));
 
-
 const DelegateStateAdminForm = () => {
   const history = useHistory();
-  
-  const [fileName, setFileName] = useState('');
   const [isFormComplete, setIsFormComplete] = useState(false);
   
   const initialState = {
@@ -63,38 +56,9 @@ const DelegateStateAdminForm = () => {
     const hasFalseValues = Object.values(state).every(element => Boolean(element));
     setIsFormComplete(hasFalseValues);
   }, [state])
-  
-  const uppy = useUppy(() => {
-    const authToken = JSON.parse(getCookie(API_COOKIE_NAME)).accessToken;
-    
-    return new Uppy({
-      meta: { type: 'doc' },
-      restrictions: { 
-        maxNumberOfFiles: 1, 
-        allowedFileTypes: ['.doc', '.docx', '.pdf'] 
-      },
-      autoProceed: true
-    }).use(XHRUpload, {
-      endpoint: `${apiUrl}/auth/certifications/files`,
-      formData: true,
-      fieldName: 'file',
-      headers: {
-        authorization: `Bearer ${authToken}`
-      }
-    });
-  });
-  
-  uppy.on('complete', (result) => {
-    uppy.reset();
-    setFileName(result.successful[0].name);
-    
-    dispatch({type: 'update', field: 'fileUrl', payload: `${apiUrl}${result.successful[0].response.body.url}` });
-  });
-  
-  const hideUploadedFileLink = () => {
-    uppy.reset();
-    dispatch({type: 'update', field: 'fileUrl', payload: '' });
-    setFileName('');
+ 
+  const handleFileChange = fileUrl => {
+    dispatch({type: 'update', field: 'fileUrl', payload: fileUrl });
   };
   
   const handleFormSubmit = async () => {
@@ -157,31 +121,12 @@ const DelegateStateAdminForm = () => {
         <label className="ds-c-label ds-u-measure--wide" htmlFor="file-input">
           Upload the State Administrator Delegation of Authority letter below.
           <span className="ds-c-field__hint ds-u-padding-y--1">Accepted files: .doc, .docx, and .pdf only</span>
-        </label>
-        {fileName && (
-          <div className="ds-u-display--flex ds-u-align-items--center ds-u-justify--space-between">
-            <PDFFileBlue />
-            <a className="ds-u-margin-x--1" href={`${state.fileUrl}`}>{fileName}</a>
-            <button type="button" className="ds-u-fill--transparent ds-u-border--0 cursor-pointer" onClick={hideUploadedFileLink}>
-              <div className="ds-u-visibility--screen-reader">Remove selected file</div>
-              <Xmark />
-            </button>
-          </div>
-        )}
-        <div className="ds-u-margin-bottom--4 ds-u-margin-top--2">
-          <DragDrop
-            id="file-input"
-            width="490px"
-            height="90px"
-            uppy={uppy}
-            locale={{
-              strings: {
-                dropHereOr: 'Drag files here or %{browse}',
-                browse: 'choose from folder',
-              },
-            }}
-          />
-        </div>
+        </label>        
+        <DocumentUpload
+          endpoint={`${apiUrl}/auth/certifications/files`}
+          fileTypes={['.doc', '.docx', '.pdf']}
+          handleFileChange={handleFileChange}        
+        />        
         <div className="ds-u-padding-top--4">
           <Button className="ds-u-margin-right--2" onClick={() => history.push('/')}>Cancel</Button>
           <Button variation="primary" onClick={handleFormSubmit} disabled={!isFormComplete}>Add State Admin Letter</Button>

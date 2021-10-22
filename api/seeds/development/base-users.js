@@ -1,19 +1,22 @@
-const fs = require('fs')
+const fs = require('fs');
 const logger = require('../../logger')('user seeder');
 const { oktaClient } = require('../../auth/oktaAuth');
 const { createUsersToAdd } = require('../shared/set-up-users');
-const { issueTokens} = require('../shared/issueTokens')
-
+const { issueTokens } = require('../shared/issueTokens');
 
 exports.seed = async knex => {
-  const {oktaAffiliations, stateCertifications, oktaUsers} = await createUsersToAdd(knex, oktaClient);
+  const {
+    oktaAffiliations,
+    stateCertifications,
+    oktaUsers
+  } = await createUsersToAdd(knex, oktaClient);
   await knex('auth_affiliations').insert(oktaAffiliations);
   logger.info('Completed adding affiliations');
-  await knex('okta_users').insert(oktaUsers)
+  await knex('okta_users').insert(oktaUsers);
   logger.info('Completed adding okta_users');
-  await knex('state_admin_certifications').insert(stateCertifications)
+  await knex('state_admin_certifications').insert(stateCertifications);
 
-  const testTokens = await issueTokens(oktaUsers)
+  const testTokens = await issueTokens(oktaUsers);
 
   // save the tokens to a file
   try {
@@ -25,14 +28,5 @@ exports.seed = async knex => {
     // not much to do here but log it
     logger.error(`Errors creating tokens ${err}`);
   }
-
-  try {
-    fs.writeFileSync(`${__dirname  }/../../../integrationTests/tokens.json`, JSON.stringify(testTokens,null, 4))
-  } catch (err) {
-    // not much to do here but log it
-    // eslint-disable-next-line no-console
-    console.error(err)
-  }
-  
 };
 

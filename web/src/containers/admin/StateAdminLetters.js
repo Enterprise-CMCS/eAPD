@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { useMemo, useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination, useAsyncDebounce } from 'react-table';
+
+import { useHistory } from 'react-router-dom';
+import {
+  useTable,
+  useFilters,
+  useGlobalFilter,
+  useSortBy,
+  usePagination,
+  useAsyncDebounce
+} from 'react-table';
 
 import {
   Button,
@@ -21,32 +29,29 @@ import MatchStateAdminDialog from './MatchStateAdminDialog';
 import { PDFFileBlue } from '../../components/Icons';
 
 const certificationRow = record => {
-  
-  const calculateStatus = (affiliationId, potentialMatches) => {  
-    if(affiliationId) {
+  const calculateStatus = (affiliationId, potentialMatches) => {
+    if (affiliationId) {
       return 'Matched';
     }
-    if(!affiliationId && Number(potentialMatches) > 0) {
+    if (!affiliationId && Number(potentialMatches) > 0) {
       return 'Pending Match';
     }
-    if(!affiliationId && Number(potentialMatches) === 0) {
+    if (!affiliationId && Number(potentialMatches) === 0) {
       return 'No Match';
     }
     return '';
-  }
-  
+  };
+
   return {
-    id: record.id,
     name: record.name,
     email: record.email,
-    phone: record.phone,
     state: record.state.toUpperCase(),
     ffy: record.ffy,
     file: record.fileUrl,
     status: calculateStatus(record.affiliationId, record.potentialMatches),
     actions: record.affiliationId
   };
-}
+};
 
 const makeData = payload => {
   return payload.map(record => {
@@ -75,22 +80,27 @@ const GlobalFilter = ({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        label="Search All"
+        label="Search"
       />
     </span>
-  )
+  );
+};
+
+GlobalFilter.propTypes = {
+  globalFilter: PropTypes.func.isRequired,
+  setGlobalFilter: PropTypes.func.isRequired
 };
 
 const SelectColumnFilter = ({
-  column: { filterValue, setFilter, preFilteredRows, id, Header },
+  column: { filterValue, setFilter, preFilteredRows, id, Header }
 }) => {
   const options = React.useMemo(() => {
     const opts = new Set();
     preFilteredRows.forEach(row => {
       opts.add(row.values[id]);
-    })
+    });
     return [...opts.values()];
-  }, [id, preFilteredRows])
+  }, [id, preFilteredRows]);
 
   return (
     <Dropdown
@@ -99,20 +109,28 @@ const SelectColumnFilter = ({
       value={filterValue}
       options={[]}
       onChange={e => {
-        setFilter(e.target.value || undefined)
+        setFilter(e.target.value || undefined);
       }}
     >
       <option value="">All</option>
-      {options.map((option) => (
+      {options.map(option => (
         <option key={option} value={option}>
           {option}
         </option>
       ))}
     </Dropdown>
-  )
+  );
 };
 
-const SortIndicator = ({canSort, isSorted, isSortedDesc}) => {
+SelectColumnFilter.propTypes = {
+  column: PropTypes.array
+};
+
+SelectColumnFilter.defaultProps = {
+  column: []
+};
+
+const SortIndicator = ({ canSort, isSorted, isSortedDesc }) => {
   if (canSort) {
     if (isSorted) {
       if (isSortedDesc) {
@@ -139,7 +157,7 @@ const StateAdminLetters = () => {
     }
     fetchData();
   }, [showMatchUserDialog]);
-  
+
   const columns = React.useMemo(
     () => [
       {
@@ -290,7 +308,7 @@ const StateAdminLetters = () => {
           value={pageSize}
           className="ds-u-margin-left--1 ds-u-margin-right--2"
           onChange={e => {
-            setPageSize(Number(e.target.value))
+            setPageSize(Number(e.target.value));
           }}
         >
           {[10, 20, 30, 40, 50].map(size => (
@@ -299,14 +317,13 @@ const StateAdminLetters = () => {
             </option>
           ))}
         </select>
-        
+
         <span className="ds-u-padding-x--1">
           Page{' '}
           <strong>
             {pageIndex + 1} of {pageOptions.length}
           </strong>{' '}
-        </span>
-        
+        </span>        
         <button type="button" style={{border: "none", background: "transparent"}} onClick={() => previousPage()} disabled={!canPreviousPage}>
           {'<'}
         </button>{' '}
@@ -331,7 +348,7 @@ StateAdminLetters.propTypes = {
 };
 
 StateAdminLetters.defaultProps = {
-  glbalFilter: {},
+  globalFilter: {},
   setGlobalFilter: {},
   column: []
 };

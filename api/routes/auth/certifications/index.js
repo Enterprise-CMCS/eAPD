@@ -4,7 +4,6 @@ const post = require('./post');
 const put = require('./put');
 const get = require('./get')
 
-
 module.exports = (app, 
   { filesEndpoint = files, postEndpoint = post, putEndpoint = put, getEndpoint = get } = {}
 ) => {
@@ -12,5 +11,5 @@ module.exports = (app,
   filesEndpoint(app);
   postEndpoint(app);
   putEndpoint(app);
-  getEndpoint(app)
+  getEndpoint(app);
 };

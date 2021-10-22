@@ -26,7 +26,7 @@ const OKTA_USERS = {
     primaryPhone: '',
     mobilePhone: '',
     login: 'namematchusername'
-  },
+  }
 }
 
 const AUTH_AFFILIATIONS = {
