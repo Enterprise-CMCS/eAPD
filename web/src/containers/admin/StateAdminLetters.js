@@ -43,8 +43,10 @@ const certificationRow = record => {
   };
 
   return {
+    id: record.id,
     name: record.name,
     email: record.email,
+    phone: record.phone,
     state: record.state.toUpperCase(),
     ffy: record.ffy,
     file: record.fileUrl,

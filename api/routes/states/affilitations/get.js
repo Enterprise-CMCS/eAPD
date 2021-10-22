@@ -3,6 +3,7 @@ const {
   getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
   getPopulatedAffiliationById: _getPopulatedAffiliationsById,
   getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
+  getAffiliationMatches: _getAffiliationMatches,
 } = require('../../../db');
 const { can, validForState } = require('../../../middleware');
 
@@ -12,6 +13,7 @@ module.exports = (
     getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,
     getPopulatedAffiliationById = _getPopulatedAffiliationsById,
     getAllPopulatedAffiliations = _getAllPopulatedAffiliations,
+    getAffiliationMatches = _getAffiliationMatches,
   } = {}
 ) => {
   app.get(
