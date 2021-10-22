@@ -1,15 +1,13 @@
 const logger = require('../../logger')('affiliations route get');
 const {
-  getAffiliationsByUserId: _getAffiliationsByUserId,
-  getAffiliationMatches: _getAffiliationMatches,
+  getAffiliationsByUserId: _getAffiliationsByUserId
 } = require('../../db');
 const { loggedIn} = require('../../middleware');
 
 module.exports = (
   app,
   {
-    getAffiliationsByUserId = _getAffiliationsByUserId,
-    getAffiliationMatches = _getAffiliationMatches,
+    getAffiliationsByUserId = _getAffiliationsByUserId
   } = {}
 ) => {
   app.get(

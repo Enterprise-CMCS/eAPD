@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 
 import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
@@ -18,8 +19,8 @@ const MatchStateAdminDialog = ({
     async function fetchDataAndSetDefault() {
       const affiliations = await axios.get(`/states/${state}/affiliations?matches=true`);
       setStateAffiliations(affiliations.data);
-      {/* Compare the certification email/name to the affiliations and make 
-          it the default one selected in the dropdown */}
+      /* Compare the certification email/name to the affiliations and make 
+          it the default one selected in the dropdown */
       const match = affiliations.data.find(affiliation => {
         return affiliation.email === certification.email || affiliation.displayName === certification.name;
       });
@@ -28,13 +29,13 @@ const MatchStateAdminDialog = ({
     fetchDataAndSetDefault();
   },[]);
   
-  const handleUserSelect = async event => {
-    const userInfo = stateAffiliations.find(affiliation => affiliation.id == event.target.value);
+  const handleUserSelect = event => {
+    const userInfo = stateAffiliations.find(affiliation => Number(affiliation.id) === Number(event.target.value));
     setSelectedAffiliation(userInfo);
   };
   
-  const handleSubmit = event => {
-    const submissionResponse = axios.put('/auth/certifications', {
+  const handleSubmit = async () => {
+    await axios.put('/auth/certifications', {
       certificationId: certification.id,
       certificationFfy: certification.ffy,
       affiliationId: selectedAffiliation.id,
@@ -77,7 +78,7 @@ const MatchStateAdminDialog = ({
       <Dropdown
         options={dropdownOptions}
         size="medium"
-        label={`Select User`}
+        label="Select User"
         name="selectedPermission"
         onChange={handleUserSelect}
         value={selectedAffiliation.id}

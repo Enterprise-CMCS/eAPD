@@ -170,6 +170,7 @@ const getAffiliationMatches = async ({
   return query
     .where('state_id', stateId)
     .andWhere('status', 'requested')
+    // eslint-disable-next-line func-names
     .orWhere(function() {
       this
       .where('state_id', stateId)

@@ -34,8 +34,8 @@ module.exports = (
 
       try {
         await updateStateAdminCertification({
-          certificationId: certificationId,
-          affiliationId: affiliationId,
+          certificationId,
+          affiliationId,
           changedBy: req.user.id
         });
         
@@ -44,7 +44,7 @@ module.exports = (
           newRoleId: stateAdminId,
           newStatus: 'approved',
           changedBy: req.user.id,
-          stateId: stateId,
+          stateId,
           ffy: certificationFfy
         });
         
