@@ -5,23 +5,23 @@ const {
 } = require('../../../endpoint-tests/utils');
 
 
-describe('auth/certifications get endpoint', () => {
-  describe('GET /auth/certifications', () => {
+describe('auth/certifications put endpoint', () => {
+  describe('PUT /auth/certifications', () => {
 
 
     const url = '/auth/certifications'
 
-    unauthenticatedTest('get', url);
-    unauthorizedTest('get', url);
+    unauthenticatedTest('put', url);
+    unauthorizedTest('put', url);
 
-    describe('when authenticated as a user with permission', () => {
+    describe('when authenticated as a user with permissions', () => {
       let api;
       beforeAll(async () => {
         api = login();
       });
 
       it('valid request', async () => {
-        const response = await api.get(url);
+        const response = await api.put(url);
 
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
