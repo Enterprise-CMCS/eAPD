@@ -335,6 +335,7 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
             nvm alias default v14
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -376,6 +377,7 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
             nvm alias default v14
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             ./unit-test.sh
       - run:
           name: report coverage
