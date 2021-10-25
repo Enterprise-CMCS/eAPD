@@ -9,11 +9,12 @@ describe('auth/certifications put endpoint', () => {
   describe('PUT /auth/certifications', () => {
     
     const url = '/auth/certifications';
+
     const payload = {
-      certificationId: '1',
-      certificationFfy: '2021',
-      affiliationId: '58',
-      stateId: 'ak'
+      "certificationId": "123",
+      "affiliationId": "123",
+      "stateId": "ak",
+      "ffy": "2021"
     };
 
     unauthenticatedTest('put', url);
@@ -25,10 +26,17 @@ describe('auth/certifications put endpoint', () => {
         api = login();
       });
 
-      it('valid request', async () => {
+      it('with no request body', async () => {
+        const response = await api.put(url, {});
+        
+        expect(response.status).toEqual(400);
+        expect(response.data).toMatchSnapshot();
+      });
+
+      it('with a valid request body', async () => {
         const response = await api.put(url, payload);
         console.log("response", response);
-
+        
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
       });
