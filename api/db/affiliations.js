@@ -212,7 +212,7 @@ const updateAuthAffiliation = async({
       expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
     }
     if (roleName === 'eAPD State Admin') {
-      expirationDate = ffy == undefined ? null : new Date(ffy, '09', '01');
+      expirationDate = ffy === undefined ? null : new Date(ffy, '09', '01');
     }
   }
   

@@ -1257,6 +1257,9 @@ Object {
           "200": Object {
             "description": "State Admin Certification match successful",
           },
+          "400": Object {
+            "description": "Invalid request",
+          },
           "401": Object {
             "description": "Unauthorized",
           },

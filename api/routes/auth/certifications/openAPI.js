@@ -112,6 +112,9 @@ const stateCertifications = {
         200: {
           description: 'State Admin Certification match successful'
         },
+        400: {
+          description: 'Invalid request'
+        },
         401: {
           description: 'Unauthorized'
         },
