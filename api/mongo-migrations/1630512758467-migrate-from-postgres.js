@@ -55,6 +55,11 @@ async function up() {
   // retrieve postgres APDs
   const postgresApds = await knex('apds').select();
 
+  if (postgresApds.length === 0) {
+    logger.info('No APDs found in postgres database');
+    return;
+  }
+
   const apds = postgresApds.map(apd => {
     logger.debug(`converting APD ${apd.id} for state ${apd.state_id}`);
     // eslint-disable-next-line camelcase
