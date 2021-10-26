@@ -15,7 +15,11 @@ exports.seed = async knex =>
         knex('auth_activities').del(),
         knex('apd_events').del(),
         knex('apd_files').del(),
-        knex('users').del()
+        knex('users').del(),
+        knex('state_admin_certifications_audit').del(),
+        knex('state_admin_certifications').del(),
+        knex('auth_affiliations').del(),
+        knex('okta_users').del()
       ])
     )
     .then(() => Promise.all([knex('auth_affiliations').del()]))
