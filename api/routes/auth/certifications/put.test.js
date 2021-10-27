@@ -66,9 +66,9 @@ tap.test('state certifications post endpoint', async putTest => {
           stateId: 'ak'
         }
       }, res, next);
-
+      
+      test.ok(res.send.notCalled, 'no body is sent');
       test.ok(next.called, 'next is called')
-      // test.ok(next.calledWith(err), 'Unable to complete state admin certification');
     });
 
     tests.test('with valid response', async test => {
