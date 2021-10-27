@@ -148,9 +148,9 @@ export const testActivityDashboardWithData = () => {
 
     cy.findByLabelText('Activity name').type(activityOverview.newActivityName);
     cy.waitForSave();
-    cy.findByRole('radio', { name: /HIT/i }).check({ force: true });
+    cy.findByRole('radio', { name: /HIE/i }).check({ force: true });
     cy.waitForSave();
-    activities.push([activityOverview.newActivityName, 'HIT']);
+    activities.push([activityOverview.newActivityName, 'HIE']);
 
     cy.findAllByText(`Activity 2: ${activityOverview.newActivityName}`).should(
       'exist'

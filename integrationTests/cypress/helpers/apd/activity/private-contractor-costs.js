@@ -91,49 +91,51 @@ export const testPrivateContractorCostsWithData = years => {
       }).should('exist');
     });
     it('fills our private contractor form', () => {
-      const contractor = activityData.privateContractors[0];
+      const contractors = activityData.privateContractors.slice(0, 2);
 
-      for (let i = 0; i < 2; i += 1) {
-        cy.findByRole('button', { name: /Add Contractor/i }).click();
-        cy.waitForSave();
-        cy.findByLabelText(/Private Contractor or Vendor Name/i).should(
-          'exist'
-        );
+      contractors.forEach(
+        ({ name, description, start, end, totalCosts, FFYcosts }, index) => {
+          cy.findByRole('button', { name: /Add Contractor/i }).click();
+          cy.waitForSave();
+          cy.findByLabelText(/Private Contractor or Vendor Name/i).should(
+            'exist'
+          );
 
-        populatePage.fillContractorForm(
-          contractor.names[i],
-          contractor.descriptions[i],
-          contractor.start[i],
-          contractor.end[i],
-          contractor.totalCosts[i],
-          contractor.FFYcosts[i],
-          i
-        );
-        cy.waitForSave();
+          populatePage.fillContractorForm(
+            name,
+            description,
+            start,
+            end,
+            totalCosts,
+            FFYcosts,
+            index
+          );
+          cy.waitForSave();
 
-        const startDate = `${contractor.start[i][0]}/${contractor.start[i][1]}/${contractor.start[i][2]}`;
-        const endDate = `${contractor.end[i][0]}/${contractor.end[i][1]}/${contractor.end[i][2]}`;
+          const startDate = `${start[0]}/${start[1]}/${start[2]}`;
+          const endDate = `${end[0]}/${end[1]}/${end[2]}`;
 
-        activityPage.checkPrivateContractorOutput(
-          contractor.names[i],
-          contractor.descriptions[i],
-          `${startDate} - ${endDate}`,
-          contractor.totalCosts[i],
-          years,
-          contractor.FFYcosts[i]
-        );
-      }
+          activityPage.checkPrivateContractorOutput(
+            name,
+            description,
+            `${startDate} - ${endDate}`,
+            totalCosts,
+            years,
+            FFYcosts
+          );
+        }
+      );
     });
 
     it('tests deleting a private contractor', () => {
-      const contractor = activityData.privateContractors[0];
+      const contractors = activityData.privateContractors.slice(0, 2);
 
       cy.findAllByText('Delete').eq(0).click();
       cy.contains('Delete Private Contractor?').should('exist');
       cy.get('.ds-c-button--danger').click();
       cy.waitForSave();
-      cy.contains(`1. ${contractor.names[0]}`).should('not.exist');
-      cy.contains(`1. ${contractor.names[1]}`).should('exist');
+      cy.contains(`1. ${contractors[0].name}`).should('not.exist');
+      cy.contains(`1. ${contractors[1].name}`).should('exist');
     });
   });
 
@@ -150,18 +152,19 @@ export const testPrivateContractorCostsWithData = years => {
       }).should('exist');
     });
     it('fills 2nd activity private contractor', () => {
-      const contractor = activityData.privateContractors[1];
+      const [contractor1, contractor2] =
+        activityData.privateContractors.slice(2);
 
       cy.findByRole('button', { name: /Add Contractor/i }).click();
       cy.waitForSave();
       cy.findByLabelText(/Private Contractor or Vendor Name/i).should('exist');
       populatePage.fillContractorForm(
-        contractor.names[0],
-        contractor.descriptions[0],
-        contractor.start[0],
-        contractor.end[0],
-        contractor.totalCosts[0],
-        contractor.FFYcosts[0],
+        contractor1.name,
+        contractor1.description,
+        contractor1.start,
+        contractor1.end,
+        contractor1.totalCosts,
+        contractor1.FFYcosts,
         0
       );
       cy.waitForSave();
@@ -170,19 +173,19 @@ export const testPrivateContractorCostsWithData = years => {
       cy.findByRole('button', { name: /Add Contractor/i }).click();
       cy.waitForSave();
       cy.findByLabelText(/Private Contractor or Vendor Name/i).should('exist');
-      populatePage.fillTextField('ds-c-field', contractor.names[1]);
+      populatePage.fillTextField('ds-c-field', contractor2.name);
       cy.setTinyMceContent(
         'contractor-description-field-1',
-        contractor.descriptions[1]
+        contractor2.description
       );
-      populatePage.fillDate('Contract start date', contractor.start[1]);
+      populatePage.fillDate('Contract start date', contractor2.start);
       cy.waitForSave();
-      populatePage.fillDate('Contract end date', contractor.end[1]);
+      populatePage.fillDate('Contract end date', contractor2.end);
       cy.waitForSave();
 
       populatePage.fillTextField(
         'ds-c-field ds-c-field--currency ds-c-field--medium',
-        contractor.totalCosts[1],
+        contractor2.totalCosts,
         0
       );
       cy.waitForSave();
@@ -192,13 +195,13 @@ export const testPrivateContractorCostsWithData = years => {
       for (let i = 0; i < years.length; i += 1) {
         populatePage.fillTextField(
           'ds-c-field ds-c-field--medium',
-          contractor.FFYcosts[1][i][0],
+          contractor2.FFYcosts[i][0],
           i
         );
         cy.waitForSave();
         populatePage.fillTextField(
           'ds-c-field ds-c-field--currency ds-c-field--medium',
-          contractor.FFYcosts[1][i][1],
+          contractor2.FFYcosts[i][1],
           i + 1
         );
         cy.waitForSave();

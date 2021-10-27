@@ -80,7 +80,7 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       // Deleted the first one from each catagory
       const staff = activityData.staff[1];
       const expenses = activityData.expenses[1];
-      const contractor = activityData.privateContractors[0];
+      const contractor = activityData.privateContractors[1];
       cy.log({ staff, expenses, contractor });
 
       years.forEach((year, i) => {
@@ -88,13 +88,13 @@ export const testCostAllocationAndOtherFundingWithData = years => {
           `FFY Total: ${
             staff.costs[i] * staff.ftes[i] +
             expenses.costs[i] +
-            contractor.FFYcosts[1][i]
+            contractor.FFYcosts[i]
           }`
         );
         const FFYtotal =
           staff.costs[i] * staff.ftes[i] +
           expenses.costs[i] +
-          contractor.FFYcosts[1][i];
+          contractor.FFYcosts[i];
         budgetPage.checkActivityTotalCostTable(
           FFYtotal,
           allocation.costs[i],
@@ -131,8 +131,9 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       const staff2 = activityData.staff[3];
       const expense1 = activityData.expenses[2];
       const expense2 = activityData.expenses[3];
-      const contractor = activityData.privateContractors[1];
-      cy.log({ staff1, staff2, expense1, expense2, contractor });
+      const contractor1 = activityData.privateContractors[2];
+      const contractor2 = activityData.privateContractors[3];
+      cy.log({ staff1, staff2, expense1, expense2, contractor1, contractor2 });
 
       years.forEach((year, i) => {
         cy.log(
@@ -146,13 +147,16 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         cy.log(`expenseTotal ${expense1.costs[i] + expense2.costs[i]}`);
         const expenseTotal = expense1.costs[i] + expense2.costs[i];
 
+        cy.log(
+          `hours: ${contractor2.FFYcosts[i][0]}, pay: ${contractor2.FFYcosts[i][1]}`
+        );
         const contractorTotal =
-          contractor.FFYcosts[0][i] +
-          contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1];
+          contractor1.FFYcosts[i] +
+          contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
         cy.log(
           `contractorTotal ${
-            contractor.FFYcosts[0][i] +
-            contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1]
+            contractor1.FFYcosts[i] +
+            contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
           }`
         );
 

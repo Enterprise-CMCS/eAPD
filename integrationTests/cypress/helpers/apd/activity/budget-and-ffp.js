@@ -93,13 +93,13 @@ export const testBudgetAndFFPWithData = years => {
     it('Tests cost split table (Activity 1 - 2021)', () => {
       const staff = activityData.staff[1];
       const expenses = activityData.expenses[1];
-      const contractor = activityData.privateContractors[0];
+      const contractor = activityData.privateContractors[1];
       const allocation = activityData.costAllocation[0];
 
       let FFYtotal = budgetPage.computeFFYtotal(
         staff.costs[0] * staff.ftes[0],
         expenses.costs[0],
-        contractor.FFYcosts[1][0]
+        contractor.FFYcosts[0]
       );
 
       FFYtotal -= allocation.costs[0];
@@ -131,7 +131,7 @@ export const testBudgetAndFFPWithData = years => {
     it('fills out Budget and FFP for activity 1', () => {
       const staff = activityData.staff[1];
       const expenses = activityData.expenses[1];
-      const contractor = activityData.privateContractors[0];
+      const contractor = activityData.privateContractors[1];
       const allocation = activityData.costAllocation[0];
 
       years.forEach((year, i) => {
@@ -156,8 +156,8 @@ export const testBudgetAndFFPWithData = years => {
                 );
 
                 budgetPage.checkTableRow(
-                  contractor.names[1],
-                  budgetPage.addCommas(contractor.FFYcosts[1][i])
+                  contractor.name,
+                  budgetPage.addCommas(contractor.FFYcosts[i])
                 );
 
                 budgetPage.checkSubtotalRows(year, 1);
@@ -227,7 +227,7 @@ export const testBudgetAndFFPWithData = years => {
         let FFYtotal = budgetPage.computeFFYtotal(
           staff.costs[i] * staff.ftes[i],
           expenses.costs[i],
-          contractor.FFYcosts[1][i]
+          contractor.FFYcosts[i]
         );
 
         activityTotal += FFYtotal;
@@ -272,7 +272,8 @@ export const testBudgetAndFFPWithData = years => {
       const staff2 = activityData.staff[3];
       const expenses = activityData.expenses[2];
       const expenses2 = activityData.expenses[3];
-      const contractor = activityData.privateContractors[1];
+      const contractor = activityData.privateContractors[2];
+      const contractor2 = activityData.privateContractors[3];
       const allocation = activityData.costAllocation[1];
 
       years.forEach((year, i) => {
@@ -307,14 +308,14 @@ export const testBudgetAndFFPWithData = years => {
                 );
 
                 budgetPage.checkTableRow(
-                  contractor.names[0],
-                  budgetPage.addCommas(contractor.FFYcosts[0][i])
+                  contractor.name,
+                  budgetPage.addCommas(contractor.FFYcosts[i])
                 );
 
                 budgetPage.checkTableRow(
-                  contractor.names[1],
+                  contractor2.name,
                   budgetPage.addCommas(
-                    contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1]
+                    contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
                   )
                 );
 
@@ -384,8 +385,8 @@ export const testBudgetAndFFPWithData = years => {
         let FFYtotal = budgetPage.computeFFYtotal(
           staff.costs[i] * staff.ftes[i] + staff2.costs[i] * staff2.ftes[i],
           expenses.costs[i] + expenses2.costs[i],
-          contractor.FFYcosts[0][i] +
-            contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1]
+          contractor.FFYcosts[i] +
+            contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
         );
 
         activityTotal += FFYtotal;
