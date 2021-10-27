@@ -108,356 +108,360 @@ exports[`<Nav /> component renders correctly 1`] = `
           }
           key="asdf1234"
         >
-          <ul
-            className="ds-c-vertical-nav"
-          >
-            <VerticalNavItem
-              ariaCollapsedStateButtonLabel="Expand sub-navigation"
-              ariaExpandedStateButtonLabel="Collapse sub-navigation"
-              component={[Function]}
-              defaultCollapsed={false}
-              id="home-nav"
-              key="home-nav/Home"
-              label="Home"
-              url="/"
+          <nav>
+            <ul
+              className="ds-c-vertical-nav"
             >
-              <li
-                className="ds-c-vertical-nav__item"
+              <VerticalNavItem
+                ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                component={[Function]}
+                defaultCollapsed={false}
+                id="home-nav"
+                key="home-nav/Home"
+                label="Home"
+                url="/"
               >
-                <VerticalNavItemLabel
-                  ariaCollapsedStateButtonLabel="Expand sub-navigation"
-                  ariaExpandedStateButtonLabel="Collapse sub-navigation"
-                  collapsed={false}
-                  component={[Function]}
-                  hasSubnav={false}
-                  label="Home"
-                  onClick={[Function]}
-                  selected={false}
-                  subnavId="home-nav__subnav"
-                  url="/"
+                <li
+                  className="ds-c-vertical-nav__item"
                 >
-                  <NavLink
-                    className="ds-c-vertical-nav__label"
-                    href="/"
+                  <VerticalNavItemLabel
+                    ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                    ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                    collapsed={false}
+                    component={[Function]}
+                    hasSubnav={false}
+                    label="Home"
                     onClick={[Function]}
+                    selected={false}
+                    subnavId="home-nav__subnav"
+                    url="/"
                   >
-                    <Link
+                    <NavLink
                       className="ds-c-vertical-nav__label"
+                      href="/"
                       onClick={[Function]}
-                      to="/"
                     >
-                      <LinkAnchor
+                      <Link
                         className="ds-c-vertical-nav__label"
-                        href="/"
-                        navigate={[Function]}
                         onClick={[Function]}
+                        to="/"
                       >
-                        <a
+                        <LinkAnchor
                           className="ds-c-vertical-nav__label"
                           href="/"
+                          navigate={[Function]}
                           onClick={[Function]}
                         >
-                          Home
-                        </a>
-                      </LinkAnchor>
-                    </Link>
-                  </NavLink>
-                </VerticalNavItemLabel>
-              </li>
-            </VerticalNavItem>
-            <VerticalNavItem
-              ariaCollapsedStateButtonLabel="Expand sub-navigation"
-              ariaExpandedStateButtonLabel="Collapse sub-navigation"
-              component={[Function]}
-              defaultCollapsed={false}
-              id="apd-nav"
-              key="apd-nav/apdView APD"
-              label="View APD"
-              selected={true}
-              url="/apd"
-            >
-              <li
-                className="ds-c-vertical-nav__item"
+                          <a
+                            className="ds-c-vertical-nav__label"
+                            href="/"
+                            onClick={[Function]}
+                          >
+                            Home
+                          </a>
+                        </LinkAnchor>
+                      </Link>
+                    </NavLink>
+                  </VerticalNavItemLabel>
+                </li>
+              </VerticalNavItem>
+              <VerticalNavItem
+                ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                component={[Function]}
+                defaultCollapsed={false}
+                id="apd-nav"
+                key="apd-nav/apdView APD"
+                label="View APD"
+                selected={true}
+                url="/apd"
               >
-                <VerticalNavItemLabel
-                  ariaCollapsedStateButtonLabel="Expand sub-navigation"
-                  ariaExpandedStateButtonLabel="Collapse sub-navigation"
-                  collapsed={false}
-                  component={[Function]}
-                  hasSubnav={false}
-                  label="View APD"
-                  onClick={[Function]}
-                  selected={true}
-                  subnavId="apd-nav__subnav"
-                  url="/apd"
+                <li
+                  className="ds-c-vertical-nav__item"
                 >
-                  <NavLink
-                    className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
-                    href="/apd"
+                  <VerticalNavItemLabel
+                    ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                    ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                    collapsed={false}
+                    component={[Function]}
+                    hasSubnav={false}
+                    label="View APD"
                     onClick={[Function]}
+                    selected={true}
+                    subnavId="apd-nav__subnav"
+                    url="/apd"
                   >
-                    <Link
+                    <NavLink
                       className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
+                      href="/apd"
                       onClick={[Function]}
-                      to="/apd"
                     >
-                      <LinkAnchor
+                      <Link
                         className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
-                        href="/apd"
-                        navigate={[Function]}
                         onClick={[Function]}
+                        to="/apd"
                       >
-                        <a
+                        <LinkAnchor
                           className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                           href="/apd"
+                          navigate={[Function]}
                           onClick={[Function]}
                         >
-                          View APD
-                        </a>
-                      </LinkAnchor>
-                    </Link>
-                  </NavLink>
-                </VerticalNavItemLabel>
-              </li>
-            </VerticalNavItem>
-            <VerticalNavItem
-              ariaCollapsedStateButtonLabel="Expand sub-navigation"
-              ariaExpandedStateButtonLabel="Collapse sub-navigation"
-              component={[Function]}
-              defaultCollapsed={false}
-              id="search-nav"
-              key="search-nav/searchSearch"
-              label="Search"
-              url="/search"
-            >
-              <li
-                className="ds-c-vertical-nav__item"
+                          <a
+                            className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
+                            href="/apd"
+                            onClick={[Function]}
+                          >
+                            View APD
+                          </a>
+                        </LinkAnchor>
+                      </Link>
+                    </NavLink>
+                  </VerticalNavItemLabel>
+                </li>
+              </VerticalNavItem>
+              <VerticalNavItem
+                ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                component={[Function]}
+                defaultCollapsed={false}
+                id="search-nav"
+                key="search-nav/searchSearch"
+                label="Search"
+                url="/search"
               >
-                <VerticalNavItemLabel
-                  ariaCollapsedStateButtonLabel="Expand sub-navigation"
-                  ariaExpandedStateButtonLabel="Collapse sub-navigation"
-                  collapsed={false}
-                  component={[Function]}
-                  hasSubnav={false}
-                  label="Search"
-                  onClick={[Function]}
-                  selected={false}
-                  subnavId="search-nav__subnav"
-                  url="/search"
+                <li
+                  className="ds-c-vertical-nav__item"
                 >
-                  <NavLink
-                    className="ds-c-vertical-nav__label"
-                    href="/search"
+                  <VerticalNavItemLabel
+                    ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                    ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                    collapsed={false}
+                    component={[Function]}
+                    hasSubnav={false}
+                    label="Search"
                     onClick={[Function]}
+                    selected={false}
+                    subnavId="search-nav__subnav"
+                    url="/search"
                   >
-                    <Link
+                    <NavLink
                       className="ds-c-vertical-nav__label"
+                      href="/search"
                       onClick={[Function]}
-                      to="/search"
                     >
-                      <LinkAnchor
+                      <Link
                         className="ds-c-vertical-nav__label"
-                        href="/search"
-                        navigate={[Function]}
                         onClick={[Function]}
+                        to="/search"
                       >
-                        <a
+                        <LinkAnchor
                           className="ds-c-vertical-nav__label"
                           href="/search"
+                          navigate={[Function]}
                           onClick={[Function]}
                         >
-                          Search
-                        </a>
-                      </LinkAnchor>
-                    </Link>
-                  </NavLink>
-                </VerticalNavItemLabel>
-              </li>
-            </VerticalNavItem>
-            <VerticalNavItem
-              ariaCollapsedStateButtonLabel="Expand sub-navigation"
-              ariaExpandedStateButtonLabel="Collapse sub-navigation"
-              component={[Function]}
-              defaultCollapsed={false}
-              id="settings-nav"
-              items={
-                Array [
-                  Object {
-                    "id": "profile-nav",
-                    "label": "Profile",
-                    "url": "/me",
-                  },
-                  Object {
-                    "id": "logout-nav",
-                    "label": "Log out",
-                    "url": "/logout",
-                  },
-                ]
-              }
-              key="settings-navundefinedSettings"
-              label="Settings"
-            >
-              <li
-                className="ds-c-vertical-nav__item"
+                          <a
+                            className="ds-c-vertical-nav__label"
+                            href="/search"
+                            onClick={[Function]}
+                          >
+                            Search
+                          </a>
+                        </LinkAnchor>
+                      </Link>
+                    </NavLink>
+                  </VerticalNavItemLabel>
+                </li>
+              </VerticalNavItem>
+              <VerticalNavItem
+                ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                component={[Function]}
+                defaultCollapsed={false}
+                id="settings-nav"
+                items={
+                  Array [
+                    Object {
+                      "id": "profile-nav",
+                      "label": "Profile",
+                      "url": "/me",
+                    },
+                    Object {
+                      "id": "logout-nav",
+                      "label": "Log out",
+                      "url": "/logout",
+                    },
+                  ]
+                }
+                key="settings-navundefinedSettings"
+                label="Settings"
               >
-                <VerticalNavItemLabel
-                  ariaCollapsedStateButtonLabel="Expand sub-navigation"
-                  ariaExpandedStateButtonLabel="Collapse sub-navigation"
-                  collapsed={false}
-                  component={[Function]}
-                  hasSubnav={true}
-                  label="Settings"
-                  onClick={[Function]}
-                  selected={false}
-                  subnavId="settings-nav__subnav"
+                <li
+                  className="ds-c-vertical-nav__item"
                 >
-                  <button
-                    aria-controls="settings-nav__subnav"
-                    aria-expanded={true}
-                    className="ds-c-vertical-nav__label ds-c-vertical-nav__label--parent"
+                  <VerticalNavItemLabel
+                    ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                    ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                    collapsed={false}
+                    component={[Function]}
+                    hasSubnav={true}
+                    label="Settings"
                     onClick={[Function]}
-                    title="Collapse sub-navigation"
+                    selected={false}
+                    subnavId="settings-nav__subnav"
                   >
-                    Settings
-                  </button>
-                </VerticalNavItemLabel>
-                <VerticalNav
-                  collapsed={false}
-                  component={[Function]}
-                  id="settings-nav__subnav"
-                  items={
-                    Array [
-                      Object {
-                        "id": "profile-nav",
-                        "label": "Profile",
-                        "url": "/me",
-                      },
-                      Object {
-                        "id": "logout-nav",
-                        "label": "Log out",
-                        "url": "/logout",
-                      },
-                    ]
-                  }
-                  nested={true}
-                >
-                  <ul
-                    className="ds-c-vertical-nav__subnav"
-                    id="settings-nav__subnav"
-                  >
-                    <VerticalNavItem
-                      ariaCollapsedStateButtonLabel="Expand sub-navigation"
-                      ariaExpandedStateButtonLabel="Collapse sub-navigation"
-                      component={[Function]}
-                      defaultCollapsed={false}
-                      id="profile-nav"
-                      key="profile-nav/meProfile"
-                      label="Profile"
-                      url="/me"
+                    <button
+                      aria-controls="settings-nav__subnav"
+                      aria-expanded={true}
+                      className="ds-c-vertical-nav__label ds-c-vertical-nav__label--parent"
+                      onClick={[Function]}
+                      title="Collapse sub-navigation"
                     >
-                      <li
-                        className="ds-c-vertical-nav__item"
+                      Settings
+                    </button>
+                  </VerticalNavItemLabel>
+                  <VerticalNav
+                    collapsed={false}
+                    component={[Function]}
+                    id="settings-nav__subnav"
+                    items={
+                      Array [
+                        Object {
+                          "id": "profile-nav",
+                          "label": "Profile",
+                          "url": "/me",
+                        },
+                        Object {
+                          "id": "logout-nav",
+                          "label": "Log out",
+                          "url": "/logout",
+                        },
+                      ]
+                    }
+                    nested={true}
+                  >
+                    <nav>
+                      <ul
+                        className="ds-c-vertical-nav__subnav"
+                        id="settings-nav__subnav"
                       >
-                        <VerticalNavItemLabel
+                        <VerticalNavItem
                           ariaCollapsedStateButtonLabel="Expand sub-navigation"
                           ariaExpandedStateButtonLabel="Collapse sub-navigation"
-                          collapsed={false}
                           component={[Function]}
-                          hasSubnav={false}
+                          defaultCollapsed={false}
+                          id="profile-nav"
+                          key="profile-nav/meProfile"
                           label="Profile"
-                          onClick={[Function]}
-                          selected={false}
-                          subnavId="profile-nav__subnav"
                           url="/me"
                         >
-                          <NavLink
-                            className="ds-c-vertical-nav__label"
-                            href="/me"
-                            onClick={[Function]}
+                          <li
+                            className="ds-c-vertical-nav__item"
                           >
-                            <Link
-                              className="ds-c-vertical-nav__label"
+                            <VerticalNavItemLabel
+                              ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                              ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                              collapsed={false}
+                              component={[Function]}
+                              hasSubnav={false}
+                              label="Profile"
                               onClick={[Function]}
-                              to="/me"
+                              selected={false}
+                              subnavId="profile-nav__subnav"
+                              url="/me"
                             >
-                              <LinkAnchor
+                              <NavLink
                                 className="ds-c-vertical-nav__label"
                                 href="/me"
-                                navigate={[Function]}
                                 onClick={[Function]}
                               >
-                                <a
+                                <Link
                                   className="ds-c-vertical-nav__label"
-                                  href="/me"
                                   onClick={[Function]}
+                                  to="/me"
                                 >
-                                  Profile
-                                </a>
-                              </LinkAnchor>
-                            </Link>
-                          </NavLink>
-                        </VerticalNavItemLabel>
-                      </li>
-                    </VerticalNavItem>
-                    <VerticalNavItem
-                      ariaCollapsedStateButtonLabel="Expand sub-navigation"
-                      ariaExpandedStateButtonLabel="Collapse sub-navigation"
-                      component={[Function]}
-                      defaultCollapsed={false}
-                      id="logout-nav"
-                      key="logout-nav/logoutLog out"
-                      label="Log out"
-                      url="/logout"
-                    >
-                      <li
-                        className="ds-c-vertical-nav__item"
-                      >
-                        <VerticalNavItemLabel
+                                  <LinkAnchor
+                                    className="ds-c-vertical-nav__label"
+                                    href="/me"
+                                    navigate={[Function]}
+                                    onClick={[Function]}
+                                  >
+                                    <a
+                                      className="ds-c-vertical-nav__label"
+                                      href="/me"
+                                      onClick={[Function]}
+                                    >
+                                      Profile
+                                    </a>
+                                  </LinkAnchor>
+                                </Link>
+                              </NavLink>
+                            </VerticalNavItemLabel>
+                          </li>
+                        </VerticalNavItem>
+                        <VerticalNavItem
                           ariaCollapsedStateButtonLabel="Expand sub-navigation"
                           ariaExpandedStateButtonLabel="Collapse sub-navigation"
-                          collapsed={false}
                           component={[Function]}
-                          hasSubnav={false}
+                          defaultCollapsed={false}
+                          id="logout-nav"
+                          key="logout-nav/logoutLog out"
                           label="Log out"
-                          onClick={[Function]}
-                          selected={false}
-                          subnavId="logout-nav__subnav"
                           url="/logout"
                         >
-                          <NavLink
-                            className="ds-c-vertical-nav__label"
-                            href="/logout"
-                            onClick={[Function]}
+                          <li
+                            className="ds-c-vertical-nav__item"
                           >
-                            <Link
-                              className="ds-c-vertical-nav__label"
+                            <VerticalNavItemLabel
+                              ariaCollapsedStateButtonLabel="Expand sub-navigation"
+                              ariaExpandedStateButtonLabel="Collapse sub-navigation"
+                              collapsed={false}
+                              component={[Function]}
+                              hasSubnav={false}
+                              label="Log out"
                               onClick={[Function]}
-                              to="/logout"
+                              selected={false}
+                              subnavId="logout-nav__subnav"
+                              url="/logout"
                             >
-                              <LinkAnchor
+                              <NavLink
                                 className="ds-c-vertical-nav__label"
                                 href="/logout"
-                                navigate={[Function]}
                                 onClick={[Function]}
                               >
-                                <a
+                                <Link
                                   className="ds-c-vertical-nav__label"
-                                  href="/logout"
                                   onClick={[Function]}
+                                  to="/logout"
                                 >
-                                  Log out
-                                </a>
-                              </LinkAnchor>
-                            </Link>
-                          </NavLink>
-                        </VerticalNavItemLabel>
-                      </li>
-                    </VerticalNavItem>
-                  </ul>
-                </VerticalNav>
-              </li>
-            </VerticalNavItem>
-          </ul>
+                                  <LinkAnchor
+                                    className="ds-c-vertical-nav__label"
+                                    href="/logout"
+                                    navigate={[Function]}
+                                    onClick={[Function]}
+                                  >
+                                    <a
+                                      className="ds-c-vertical-nav__label"
+                                      href="/logout"
+                                      onClick={[Function]}
+                                    >
+                                      Log out
+                                    </a>
+                                  </LinkAnchor>
+                                </Link>
+                              </NavLink>
+                            </VerticalNavItemLabel>
+                          </li>
+                        </VerticalNavItem>
+                      </ul>
+                    </nav>
+                  </VerticalNav>
+                </li>
+              </VerticalNavItem>
+            </ul>
+          </nav>
         </VerticalNav>
       </nav>
     </Nav>

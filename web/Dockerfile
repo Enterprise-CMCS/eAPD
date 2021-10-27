@@ -8,6 +8,6 @@ WORKDIR /app
 ADD ./package.json .
 ADD ./package-lock.json .
 
-RUN npm install
+RUN npm ci
 
 CMD npm run start -- --public=0.0.0.0:8080
