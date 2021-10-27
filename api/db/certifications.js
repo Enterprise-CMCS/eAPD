@@ -40,7 +40,7 @@ const matchStateAdminCertification = async (
       certificationId: data.certificationId
     })  
     
-  await updateAuthAffiliation(data, { transaction })
+  await updateAffiliation(data, { transaction })
   
   await transaction.commit();
 };

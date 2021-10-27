@@ -3,14 +3,12 @@ const { can } = require('../../../middleware');
 const logger = require('../../../logger')('auth certifications put');
 
 const { matchStateAdminCertification: matchCertification } = require('../../../db/certifications');
-const { updateAuthAffiliation: updateAffiliation } = require('../../../db/affiliations');
 const { getAllActiveRoles: getActiveRoles } = require('../../../db/roles');
 
 module.exports = (
   app,
   {
     matchStateAdminCertification = matchCertification,
-    updateAuthAffiliation = updateAffiliation,
     getAllActiveRoles = getActiveRoles
   } = {}
 ) => {
