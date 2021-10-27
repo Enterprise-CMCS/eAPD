@@ -6,6 +6,7 @@ const files = require('./files');
 const roles = require('./roles');
 const testStates = require('./states');
 const affiliations = require('./affiliations');
+const certifications = require('./certifications');
 
 exports.seed = async knex => {
   // Don't seed this data if we're not in a test environment.
@@ -15,10 +16,12 @@ exports.seed = async knex => {
 
   // Call specific seeds from here.
   await truncate.seed(knex);
-  await roles.seed(knex);
   await states.seed(knex);
+  
   await apds.seed(knex);
   await files.seed(knex);
+  await roles.seed(knex);
   await testStates.seed(knex);
   await affiliations.seed(knex);
+  await certifications.seed(knex);
 };

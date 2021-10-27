@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 const knex = require('./knex');
 
+const { updateAuthAffiliation } = require('./affiliations');
+
 const addStateAdminCertification = (
   data,
   { db = knex } = {}
@@ -19,22 +21,28 @@ const addStateAdminCertification = (
     })
 };
 
-const updateStateAdminCertification = (
+// Update the state admin certification and the associated auth affiliation
+const matchStateAdminCertification = async (
   data,
-  { db = knex } = {}
+  { db = knex, updateAffiliation = updateAuthAffiliation } = {}
 ) => {
-  return db('state_admin_certifications')
+  const transaction = await db.transaction();
+  
+  await transaction('state_admin_certifications')
     .where({ id: data.certificationId })
     .update({ affiliationId: data.affiliationId })
-    .then(() => {
-      return db('state_admin_certifications_audit')
-        .insert({
-          changeDate: new Date(),
-          changedBy: data.changedBy,
-          changeType: 'match',
-          certificationId: data.certificationId
-        })
-    });
+    
+  await transaction('state_admin_certifications_audit')
+    .insert({
+      changeDate: new Date(),
+      changedBy: data.changedBy,
+      changeType: 'match',
+      certificationId: data.certificationId
+    })  
+    
+  await updateAuthAffiliation(data, { transaction })
+  
+  await transaction.commit();
 };
 
 const getStateAdminCertifications = (
@@ -78,5 +86,5 @@ const getStateAdminCertifications = (
 module.exports = {
   addStateAdminCertification,
   getStateAdminCertifications,
-  updateStateAdminCertification
+  matchStateAdminCertification
 };

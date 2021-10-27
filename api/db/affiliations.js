@@ -179,7 +179,7 @@ const getAffiliationMatches = async ({
     });
 };
 
-const updateAuthAffiliation = async({
+const updateAuthAffiliation = async ({
   db = knex,
   affiliationId,
   newRoleId,

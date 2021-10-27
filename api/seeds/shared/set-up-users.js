@@ -102,6 +102,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   }
   if (stateAdmin) {
     oktaAffiliations.push({
+      id: 1001, // manually set id for testing
       user_id: stateAdmin.id,
       state_id: 'ak',
       role_id: stateStaffRoleId,
@@ -126,6 +127,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
+      id: 1002, // manually set id for testing
       ffy: 2021,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'ak',

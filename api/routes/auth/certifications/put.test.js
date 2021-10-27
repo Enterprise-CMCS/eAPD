@@ -15,7 +15,7 @@ let next;
 
 tap.test('state certifications post endpoint', async putTest => {
   const di = {
-    updateStateAdminCertification: sinon.stub(),
+    matchStateAdminCertification: sinon.stub(),
     updateAuthAffiliation: sinon.stub(),
     getAllActiveRoles: sinon.stub()
   };
@@ -53,7 +53,7 @@ tap.test('state certifications post endpoint', async putTest => {
 
     tests.test('the db fails to save', async test => {
       const err = { error: "cant save" }
-      di.updateStateAdminCertification.throws(err)
+      di.matchStateAdminCertification.throws(err)
 
       await handler({
         user: {
@@ -72,7 +72,7 @@ tap.test('state certifications post endpoint', async putTest => {
     });
 
     tests.test('with valid response', async test => {
-      di.updateStateAdminCertification.resolves();
+      di.matchStateAdminCertification.resolves();
       di.updateAuthAffiliation.resolves();
 
       await handler({

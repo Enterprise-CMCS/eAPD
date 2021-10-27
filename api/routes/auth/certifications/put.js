@@ -2,14 +2,14 @@ const { loggedIn } = require('../../../middleware/auth');
 const { can } = require('../../../middleware');
 const logger = require('../../../logger')('auth certifications put');
 
-const { updateStateAdminCertification: updateCertification } = require('../../../db/certifications');
+const { matchStateAdminCertification: matchCertification } = require('../../../db/certifications');
 const { updateAuthAffiliation: updateAffiliation } = require('../../../db/affiliations');
 const { getAllActiveRoles: getActiveRoles } = require('../../../db/roles');
 
 module.exports = (
   app,
   {
-    updateStateAdminCertification = updateCertification,
+    matchStateAdminCertification = matchCertification,
     updateAuthAffiliation = updateAffiliation,
     getAllActiveRoles = getActiveRoles
   } = {}
@@ -31,24 +31,19 @@ module.exports = (
         affiliationId,
         stateId
       } = req.body;
-
+      
       try {
-        await updateStateAdminCertification({
-          certificationId,
-          affiliationId,
-          changedBy: req.user.id
-        });
-        
-        await updateAuthAffiliation({
+        await matchStateAdminCertification({
+          certificationId: Number(certificationId),
           affiliationId: Number(affiliationId),
+          changedBy: req.user.id,
           newRoleId: stateAdminId,
           newStatus: 'approved',
-          changedBy: req.user.id,
           stateId,
           ffy: certificationFfy
         });
         
-        res.send(200);
+        res.send(200);        
       } catch (e) {
         logger.error({ id: req.id, message: 'error updating state admin certification' });
         logger.error({ id: req.id, message: e });

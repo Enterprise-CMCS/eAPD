@@ -11,10 +11,10 @@ describe('auth/certifications put endpoint', () => {
     const url = '/auth/certifications';
 
     const payload = {
-      "certificationId": "123",
-      "affiliationId": "123",
+      "certificationId": "5004",
+      "affiliationId": "4004",
       "stateId": "ak",
-      "ffy": "2021"
+      "certificationFfy": "2022"
     };
 
     unauthenticatedTest('put', url);
