@@ -45,7 +45,7 @@ const jwtExtractor = req => {
   const { url } = req;
   const cookieStr = req.headers.cookie || req.get('Cookie');
   const regex = new RegExp(
-    /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)/i
+    /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)|(^\/auth\/certifications\/files\/.*)/i
   );
 
   if (url && regex.test(url) && cookieStr) {

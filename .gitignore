@@ -18,6 +18,10 @@ schema.sql
 Makefile
 api/seeds/test/tokens.json
 
+/integrationTests/cypress.env.json
+*/cypress.env.json
+*cypress.env.json
+
 # use npm to manage packages, not yarn
 api/yarn.lock
 web/yarn.lock
@@ -26,4 +30,3 @@ docs-build
 # Terraform ignores
 *.terraform*
 env_vars.sh
-/integrationTests/cypress.env.json

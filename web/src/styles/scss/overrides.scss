@@ -79,3 +79,28 @@
 .all-users-table--row-multi:last-of-type .all-users-table--actions{
   border-bottom: 1px solid #000;
 }
+
+
+.uppy-DragDrop-arrow {
+  display: none;
+}
+
+.uppy-DragDrop--isDragDropSupported {
+  border: 1px dashed #323A44;
+  border-radius: 0px;
+}
+
+.uppy-DragDrop-label {
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.uppy-DragDrop-browse {
+  text-decoration: underline;
+}
+
+.uppy-DragDrop-inner {
+  padding: 0px;
+}

@@ -3,21 +3,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import FederalAdmin from "./admin/FederalAdmin";
-import  { ApprovalStatus } from '../components/AffiliationStatus';
+import { ApprovalStatus } from '../components/AffiliationStatus';
 
 import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
 import { AFFILIATION_STATUSES } from '../constants';
 
-const FederalDashboard = ({ approvalStatus }) => {
+const FederalDashboard = ({ approvalStatus }) => {  
   const isApproved = approvalStatus === AFFILIATION_STATUSES.APPROVED;
-
+  
   return (
     <main
       id="start-main-content"
-      className="ds-l-container ds-u-margin-bottom--5"
+      className="ds-l-container--fluid ds-u-margin-x--5 ds-u-margin-bottom--5"
     >
       <h1>Federal Administrator Portal</h1>
-      {isApproved && <FederalAdmin />}
+      {isApproved && <FederalAdmin /> }
       {!isApproved && <ApprovalStatus 
                         status={approvalStatus}
                         mailTo='CMS-EAPD@cms.hhs.gov'
