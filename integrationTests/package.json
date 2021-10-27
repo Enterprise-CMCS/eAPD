@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@foreachbe/cypress-tinymce": "^1.0.0",
-    "tinymce": "^5.8.2"
+    "tinymce": "^5.10.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "^8.0.0",
