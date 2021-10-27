@@ -21,11 +21,11 @@ describe('state admin letters table', () => {
     // Filter labels
     cy.get('#state-admin-letters').contains('Status');
     cy.get('#state-admin-letters').contains('State');
-    cy.get('#state-admin-letters').contains('Search All');
+    cy.get('#state-admin-letters').contains('Search');
 
     getInputByLabel('Status').should('have.value', '');
     getInputByLabel('State').should('have.value', '');
-    getInputByLabel('Search All').should('have.value', '');
+    getInputByLabel('Search').should('have.value', '');
 
     // Table column headers
     cy.get('#state-admin-letters').contains('Name');
@@ -110,7 +110,7 @@ describe('state admin letters table', () => {
       2
     );
 
-    getInputByLabel('Search All').type('Leanne');
+    getInputByLabel('Search').type('Leanne');
 
     cy.get('#state-admin-letters td:contains(Leanne Graham)').should(
       'be.visible'
