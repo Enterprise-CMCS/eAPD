@@ -108,6 +108,20 @@ describe('filling out APD overview section', function () {
       .should('have.class', 'ds-c-vertical-nav__label--current');
 
     cy.get('.ds-h2')
-    .should('contain', 'Export and Submit');
+      .should('contain', 'Export and Submit');
   })
+
+  it('deletes the APD', () => {
+    cy.visit('/');
+
+    cy.contains('HITECH IAPD')
+      .should('have.length', 1);
+
+    cy.contains('Delete').click();
+
+    cy.get('.ds-c-button--danger').click();
+
+    cy.contains('HITECH IAPD')
+      .should('have.length', 0);
+  });
 });
