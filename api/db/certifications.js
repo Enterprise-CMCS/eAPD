@@ -7,7 +7,6 @@ const addStateAdminCertification = (
   data,
   { db = knex } = {}
 ) => {
-    
   return db('state_admin_certifications')
     .insert({...data}, ['id'])
     .then(ids => {
@@ -19,6 +18,29 @@ const addStateAdminCertification = (
           certificationId: ids[0].id
         })
     })
+};
+
+const archiveStateAdminCertification = async (
+  data,
+  { db = knex } = {}
+) => {
+  const record = await db('state_admin_certifications').select('status').where('id', data.id).first();
+  console.log("status", record);
+  if ( record.status === 'archived' ) {
+    return { error: 'certification already archived' };
+  }
+  return db('state_admin_certifications')
+    .where('id', data.id).first()
+    .update({ 'status': 'archived' })
+    .then(() => {      
+      return db('state_admin_certifications_audit')
+        .insert({
+          changeDate: new Date(),
+          changedBy: data.archived_by,
+          changeType: 'remove',
+          certificationId: data.id
+        })
+    })      
 };
 
 // Update the state admin certification and the associated auth affiliation
@@ -86,5 +108,6 @@ const getStateAdminCertifications = (
 module.exports = {
   addStateAdminCertification,
   getStateAdminCertifications,
-  matchStateAdminCertification
+  matchStateAdminCertification,
+  archiveStateAdminCertification
 };
