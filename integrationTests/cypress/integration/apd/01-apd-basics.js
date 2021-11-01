@@ -25,7 +25,7 @@ describe('filling out APD overview section', function () {
     cy.contains('Create new').click();
 
     cy.get('.apd--title').contains("Created: " + today.toLocaleDateString("en-US", options));
-  })
+  });
 
   it('confirms side nav buttons redirect to correct sections', () => {
     cy.get('.ds-c-vertical-nav')
@@ -42,7 +42,7 @@ describe('filling out APD overview section', function () {
       .should('have.class', 'ds-c-vertical-nav__label--current');
 
     cy.get('.ds-h2')
-    .should('contain', 'Key State Personnel');
+      .should('contain', 'Key State Personnel');
 
     cy.goToPreviousActivities();
 
@@ -51,7 +51,7 @@ describe('filling out APD overview section', function () {
       .should('have.class', 'ds-c-vertical-nav__label--current');
 
     cy.get('.ds-h2')
-    .should('contain', 'Results of Previous Activities');
+      .should('contain', 'Results of Previous Activities');
 
     cy.goToActivityDashboard();
 
@@ -72,7 +72,7 @@ describe('filling out APD overview section', function () {
       .should('have.class', 'ds-c-vertical-nav__label--current');
 
     cy.get('.ds-h2')
-    .should('contain', 'Activity Schedule Summary');
+      .should('contain', 'Activity Schedule Summary');
 
     cy.goToProposedBudget();
 
@@ -81,7 +81,7 @@ describe('filling out APD overview section', function () {
       .should('have.class', 'ds-c-vertical-nav__label--current');
 
     cy.get('.ds-h2')
-    .should('contain', 'Proposed Budget');
+      .should('contain', 'Proposed Budget');
 
     cy.goToAssurancesAndCompliance();
 
@@ -90,7 +90,7 @@ describe('filling out APD overview section', function () {
       .should('have.class', 'ds-c-vertical-nav__label--current');
 
     cy.get('.ds-h2')
-    .should('contain', 'Assurances and Compliance');
+      .should('contain', 'Assurances and Compliance');
 
     cy.goToExecutiveSummary();
 
@@ -99,7 +99,7 @@ describe('filling out APD overview section', function () {
       .should('have.class', 'ds-c-vertical-nav__label--current');
 
     cy.get('.ds-h2')
-    .should('contain', 'Executive Summary');
+      .should('contain', 'Executive Summary');
 
     cy.contains('Export and Submit').click();
 
@@ -109,7 +109,72 @@ describe('filling out APD overview section', function () {
 
     cy.get('.ds-h2')
       .should('contain', 'Export and Submit');
-  })
+  });
+
+  it('confirms anchor links work', () => {
+    cy.goToKeyStateProgramManagememt();
+
+    cy.get('#apd-state-profile-key-personnel')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+
+    cy.goToPriorActOverview();
+
+    cy.get('#prev-activities-outline')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+
+    cy.goToActualExpenditures();
+
+    cy.get('#prev-activities-table')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+
+    cy.goToProposedSummary();
+
+    cy.get('#summary-schedule-by-activity-table')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+
+    cy.goToProposedSummaryTable();
+
+    cy.get('#budget-summary-table')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+
+    cy.goToQuarterlyFedShare();
+
+    cy.get('#budget-federal-by-quarter')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+
+    cy.goToEstimatedQuarterly();
+
+    cy.get('#budget-incentive-by-quarter')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+
+    cy.goToActivitiesSummary();
+
+    cy.get('#executive-summary-summary')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+
+    cy.goToProgramBudgetTable();
+
+    cy.get('#executive-summary-budget-table')
+      .then((element) => element[0].offsetTop)
+      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+  });
 
   it('deletes the APD', () => {
     cy.visit('/');
