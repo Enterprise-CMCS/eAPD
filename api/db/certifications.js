@@ -15,6 +15,7 @@ const addStateAdminCertification = (
           changeDate: new Date(),
           changedBy: data.uploadedBy,
           changeType: 'add',
+          status: 'active',
           certificationId: ids[0].id
         })
     })
@@ -24,15 +25,17 @@ const archiveStateAdminCertification = async (
   data,
   { db = knex } = {}
 ) => {
-  const record = await db('state_admin_certifications').select('status').where('id', data.id).first();
-  console.log("status", record);
+  const record = await db('state_admin_certifications').select('status', 'affiliationId').where('id', data.id).first();
+  if ( record.affiliation !== null ) {
+    return { error: 'certification is already matched'};
+  }
   if ( record.status === 'archived' ) {
     return { error: 'certification already archived' };
   }
   return db('state_admin_certifications')
     .where('id', data.id).first()
     .update({ 'status': 'archived' })
-    .then(() => {      
+    .then(() => {
       return db('state_admin_certifications_audit')
         .insert({
           changeDate: new Date(),
@@ -40,7 +43,7 @@ const archiveStateAdminCertification = async (
           changeType: 'remove',
           certificationId: data.id
         })
-    })      
+    })
 };
 
 // Update the state admin certification and the associated auth affiliation
@@ -88,6 +91,7 @@ const getStateAdminCertifications = (
       'state_admin_certifications.fileUrl',
       'state_admin_certifications.ffy'
     ])
+    .where('status', '=', 'active')
     .countDistinct('affiliations.id as potentialMatches')
     .leftOuterJoin('okta_users', function oktaCertificationsJoin() {
       this
