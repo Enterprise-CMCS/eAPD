@@ -48,9 +48,9 @@ class ExportPage {
   }
 
   getPrevActExpenditureVals() {
-    for (let i = 0; i < this.prevActYears.length; i += 1) {
+    this.prevActYears.forEach(prevActYear => {
       cy.get(
-        `[headers="prev_act_hithie_row_${this.prevActYears[i]} ` +
+        `[headers="prev_act_hithie_row_${prevActYear} ` +
           `prev_act_hithie_total prev_act_hithie_total_approved"]`
       )
         .invoke('text')
@@ -58,7 +58,7 @@ class ExportPage {
           this.expenditures.hithie.approved.push(extractNumber(text));
         });
       cy.get(
-        `[headers="prev_act_hithie_row_${this.prevActYears[i]} ` +
+        `[headers="prev_act_hithie_row_${prevActYear} ` +
           `prev_act_hithie_federal prev_act_hithie_federal_approved"]`
       )
         .invoke('text')
@@ -66,7 +66,7 @@ class ExportPage {
           this.expenditures.hithie.FFP.push(extractNumber(text));
         });
       cy.get(
-        `[headers="prev_act_hithie_row_${this.prevActYears[i]} ` +
+        `[headers="prev_act_hithie_row_${prevActYear} ` +
           `prev_act_hithie_federal prev_act_hithie_federal_actual"]`
       )
         .invoke('text')
@@ -78,7 +78,7 @@ class ExportPage {
 
       Object.values(mmisSharePercents).forEach(sharePercent => {
         cy.get(
-          `[headers="prev_act_mmis_row_${this.prevActYears[i]} ` +
+          `[headers="prev_act_mmis_row_${prevActYear} ` +
             `prev_act_mmis${sharePercent}_total ` +
             `prev_act_mmis${sharePercent}_total_approved"]`
         )
@@ -89,7 +89,7 @@ class ExportPage {
             );
           });
         cy.get(
-          `[headers="prev_act_mmis_row_${this.prevActYears[i]} ` +
+          `[headers="prev_act_mmis_row_${prevActYear} ` +
             `prev_act_mmis${sharePercent}_federal ` +
             `prev_act_mmis${sharePercent}_federal_approved"]`
         )
@@ -100,7 +100,7 @@ class ExportPage {
             );
           });
         cy.get(
-          `[headers="prev_act_mmis_row_${this.prevActYears[i]} ` +
+          `[headers="prev_act_mmis_row_${prevActYear} ` +
             `prev_act_mmis${sharePercent}_federal ` +
             `prev_act_mmis${sharePercent}_federal_actual"]`
         )
@@ -111,7 +111,7 @@ class ExportPage {
             );
           });
       });
-    }
+    });
   }
 
   verifyPrevActInputs(expendituresTest) {
@@ -183,29 +183,29 @@ class ExportPage {
     });
 
     // Check totals against what is on the page
-    for (let i = 0; i < this.prevActYears.length; i += 1) {
+    this.prevActYears.forEach(prevActYear => {
       // Totals for approved FFP
       cy.get(
-        `[headers="prev_act_total_row_${this.prevActYears[i]} ` +
+        `[headers="prev_act_total_row_${prevActYear} ` +
           `prev_act_total_approved"]`
       )
         .invoke('text')
         .then(text => {
           const total = extractNumber(text);
-          cy.wrap(total).should('eq', totals.FFP[this.prevActYears[i]]);
+          cy.wrap(total).should('eq', totals.FFP[prevActYear]);
         });
 
       // Totals for actual expenditure
       cy.get(
-        `[headers="prev_act_total_row_${this.prevActYears[i]} ` +
+        `[headers="prev_act_total_row_${prevActYear} ` +
           `prev_act_total_actual"]`
       )
         .invoke('text')
         .then(text => {
           const total = extractNumber(text);
-          cy.wrap(total).should('eq', totals.actual[this.prevActYears[i]]);
+          cy.wrap(total).should('eq', totals.actual[prevActYear]);
         });
-    }
+    });
   }
 
   checkActivityHeader = (name = 'Untitled', num) => {
@@ -412,6 +412,20 @@ class ExportPage {
       .invoke('text');
   };
 
+  getActivityScheduleOverviewNameList = () => {
+    const activityNames = [];
+    this.getAllActivityScheduleOverviews().each($el => {
+      cy.wrap($el)
+        .find('td')
+        .first()
+        .invoke('text')
+        .then(text => {
+          activityNames.push(text);
+        });
+    });
+    return activityNames;
+  };
+
   // Assumes dates are in the last column
   getActivityScheduleOverviewDates = index => {
     return this.getActivityScheduleOverview(index)
@@ -464,6 +478,8 @@ class ExportPage {
       .last()
       .invoke('text');
   };
+
+  // Proposed Budget
 
   // assert if a link with the given text and URL reference exists here
   assurancesComplianceAssertLink = (category, regulation, ref) => {
