@@ -6,6 +6,8 @@
 /* eslint-disable prefer-arrow-callback */
 
 describe('filling out APD overview section', function () {
+  const page_titles = ['APD Overview', 'Key State Personnel', 'Results of Previous Activities', 'Activities', 'Activity Schedule Summary', 'Proposed Budget', 'Assurances and Compliance', 'Executive Summary', 'Export and Submit'];
+
   before(() => {
     cy.useStateStaff();
     // Delete all existing APDs
@@ -25,6 +27,30 @@ describe('filling out APD overview section', function () {
     cy.contains('Create new').click();
 
     cy.get('.apd--title').contains("Created: " + today.toLocaleDateString("en-US", options));
+  });
+
+  it('confirms Continue buttons redirect to correct sections', () => {
+    cy.wrap(page_titles).each((index) => {
+      cy.get('.ds-h2')
+        .should('contain', index);
+
+      if(index != page_titles[page_titles.length - 1]) {
+        cy.get('#continue-button').click();
+      }
+    });
+  });
+
+  it('confirms Back buttons redirect to correct sections', () => {
+    const reverse_page_titles = page_titles.reverse()
+
+    cy.wrap(reverse_page_titles).each((index) => {
+      cy.get('.ds-h2')
+        .should('contain', index);
+
+      if(index != reverse_page_titles[reverse_page_titles.length - 1]) {
+        cy.get('#previous-button').click();
+      }
+    });
   });
 
   it('confirms side nav buttons redirect to correct sections', () => {
@@ -111,7 +137,7 @@ describe('filling out APD overview section', function () {
       .should('contain', 'Export and Submit');
   });
 
-  it('confirms anchor links work', () => {
+  it('confirms anchor links redirect to correct sections', () => {
     cy.goToKeyStateProgramManagememt();
 
     cy.get('#apd-state-profile-key-personnel')
