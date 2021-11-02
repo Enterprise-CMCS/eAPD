@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-// Tests filling out APD overview section
+// Tests performing basic APD tasks
 
 /* eslint-disable no-return-assign */
 /* eslint-disable prefer-arrow-callback */
