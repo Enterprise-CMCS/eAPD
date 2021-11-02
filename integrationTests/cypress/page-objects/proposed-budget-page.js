@@ -29,12 +29,11 @@ class ProposedBudgetPage {
             ffy,
             type,
             expense
-          }).should('have.text', expected[index].programTypes[type][expense]);
+          }).shouldBeCloseTo(expected[index].programTypes[type][expense]);
         });
       });
 
-      this.getTotalComputableMedicaidCostByFFY({ ffy }).should(
-        'have.text',
+      this.getTotalComputableMedicaidCostByFFY({ ffy }).shouldBeCloseTo(
         expected[index].totalComputableMedicaidCost
       );
     });
@@ -105,8 +104,16 @@ class ProposedBudgetPage {
   }) => {
     years.forEach((ffy, ffyIndex) => {
       activityList.forEach((activityName, index) => {
+        cy.log(`expected ${JSON.stringify(expected)}`);
         Object.keys(expected[ffyIndex].activities[index].expenses).forEach(
           expense => {
+            cy.log(
+              `verifying expense - ${expense} - ${
+                expected[ffyIndex].activities[index].expenses[expense][
+                  `${expense} Subtotal`
+                ]
+              }`
+            );
             // TODO: Add this back once the default test is truly default
             // this.getBreakdownByFFYAndActivityAndExpense({
             //   ffy,
@@ -122,8 +129,7 @@ class ProposedBudgetPage {
               ffy,
               index,
               expense
-            }).should(
-              'have.text',
+            }).shouldBeCloseTo(
               expected[ffyIndex].activities[index].expenses[expense][
                 'Other Funding Amount'
               ]
@@ -132,17 +138,15 @@ class ProposedBudgetPage {
               ffy,
               index,
               expense
-            }).should(
-              'have.text',
+            }).shouldBeCloseTo(
               expected[ffyIndex].activities[index].expenses[expense][
-                'State Staff Subtotal'
+                `${expense} Subtotal`
               ]
             );
           }
         );
 
-        this.getTCMCValueByActivity({ ffy, index }).should(
-          'have.text',
+        this.getTCMCValueByActivity({ ffy, index }).shouldBeCloseTo(
           expected[ffyIndex].activities[index].totalComputableMedicaidCost
         );
       });
@@ -183,17 +187,17 @@ class ProposedBudgetPage {
             type,
             ffy,
             expense
-          }).should('have.text', expected[type][index][expense][0]);
+          }).shouldBeCloseTo(expected[type][index][expense][0]);
           this.getSBTByTypeAndFFYAndExpenseFederalTotalValue({
             type,
             ffy,
             expense
-          }).should('have.text', expected[type][index][expense][1]);
+          }).shouldBeCloseTo(expected[type][index][expense][1]);
           this.getSBTByTypeAndFFYAndExpenseMTCValue({
             type,
             ffy,
             expense
-          }).should('have.text', expected[type][index][expense][2]);
+          }).shouldBeCloseTo(expected[type][index][expense][2]);
         });
       });
     });
@@ -216,16 +220,13 @@ class ProposedBudgetPage {
 
   verifySummaryBudgetTableTotal = ({ expected }) => {
     Object.keys(expected).forEach(header => {
-      this.getActivityTotalsByRowHeaderStateTotalValue({ header }).should(
-        'have.text',
-        expected[header][0]
-      );
-      this.getActivityTotalsByRowHeaderFederalTotalValue({ header }).should(
-        'have.text',
-        expected[header][1]
-      );
-      this.getActivityTotalsByRowHeaderMTCValue({ header }).should(
-        'have.text',
+      this.getActivityTotalsByRowHeaderStateTotalValue({
+        header
+      }).shouldBeCloseTo(expected[header][0]);
+      this.getActivityTotalsByRowHeaderFederalTotalValue({
+        header
+      }).shouldBeCloseTo(expected[header][1]);
+      this.getActivityTotalsByRowHeaderMTCValue({ header }).shouldBeCloseTo(
         expected[header][2]
       );
     });
@@ -256,10 +257,7 @@ class ProposedBudgetPage {
               header,
               row,
               columnIndex
-            }).should(
-              'have.text',
-              expected[header].byFFY[index][row][columnIndex]
-            );
+            }).shouldBeCloseTo(expected[header].byFFY[index][row][columnIndex]);
           });
         });
       });
@@ -278,10 +276,10 @@ class ProposedBudgetPage {
   verifyQuarterlyFederalShareByFFYTotals = ({ expected }) => {
     Object.keys(expected).forEach(header => {
       Object.keys(expected[header].totals).forEach(row => {
-        this.getQFSTotalsByHeaderAndRowHeaderValue({ header, row }).should(
-          'have.text',
-          expected[header].totals[row]
-        );
+        this.getQFSTotalsByHeaderAndRowHeaderValue({
+          header,
+          row
+        }).shouldBeCloseTo(expected[header].totals[row]);
       });
     });
   };
@@ -310,7 +308,7 @@ class ProposedBudgetPage {
               ffy,
               type,
               quarterIndex
-            }).should('have.text', expected[index][type][quarterIndex]);
+            }).shouldBeCloseTo(expected[index][type][quarterIndex]);
           } else {
             this.getEQIPByFFYAndIncentiveTypeAndQuarter({
               ffy,
@@ -318,7 +316,7 @@ class ProposedBudgetPage {
               quarterIndex
             })
               .find('input')
-              .should('have.text', expected[index][type][quarterIndex]);
+              .shouldBeCloseTo(expected[index][type][quarterIndex]);
           }
         });
       });
@@ -333,7 +331,7 @@ class ProposedBudgetPage {
             ffy,
             type,
             quarterIndex
-          }).should('have.text', expected[index][type][quarterIndex]);
+          }).shouldBeCloseTo(expected[index][type][quarterIndex]);
         });
       });
     });

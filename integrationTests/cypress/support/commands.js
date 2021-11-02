@@ -12,6 +12,17 @@ const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000
 );
 
+const convertDollarStrToNum = string => {
+  if (!string || string === '') {
+    return 0;
+  }
+  const numString = string.replace(/[^0-9.-]+/g, '');
+  if (Number.isNaN(numString)) {
+    return 0;
+  }
+  return Number(numString);
+};
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -139,6 +150,23 @@ Cypress.Commands.add(
   { prevSubject: true },
   ($element, selector) =>
     cy.wrap($element).parentsUntil(selector).last().parent()
+);
+
+Cypress.Commands.add(
+  'shouldBeCloseTo',
+  { prevSubject: true },
+  ($element, expected, delta = 1) => {
+    cy.log($element.text());
+    cy.log(`converted ${convertDollarStrToNum($element.text())}`);
+    cy.log(`typeof ${typeof convertDollarStrToNum($element.text())}`);
+    cy.log(`expected ${expected}`);
+    cy.log(`typeof ${typeof expected}`);
+    cy.log(`delta ${delta}`);
+    expect(convertDollarStrToNum($element.text())).to.be.closeTo(
+      expected,
+      delta
+    );
+  }
 );
 
 Cypress.Commands.add('waitForSave', () => {
