@@ -79,8 +79,9 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
-
+      status: 'active'
     }
+    
     const expectedFields = [
       'id',
       'name',
@@ -120,6 +121,7 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
 
     }
     const oktaUsers = OKTA_USERS.emailMatch
@@ -145,6 +147,7 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
     }
 
     const oktaUsers = OKTA_USERS.nameMatch
@@ -169,6 +172,7 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
     }
 
     const oktaUsers = OKTA_USERS.nameMatch
@@ -193,6 +197,7 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
     }
     const oktaUsers = [OKTA_USERS.nameMatch, OKTA_USERS.emailMatch]
 
@@ -220,6 +225,7 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
     }
     const oktaUsers = OKTA_USERS.emailMatch
 
@@ -243,6 +249,7 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedOn: new Date(),
       ffy: 2022,
       affiliationId: 1234,
+      status: 'active'
     }
     const authAffiliations = [
       {id: 1234, role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
