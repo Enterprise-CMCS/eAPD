@@ -87,73 +87,48 @@ describe('filling out APD overview section', function () {
       };
 
       cy.get('.ds-h2')
-        .should('contain', index.parent);
+        .should('contain', index.parent)
     })
   });
 
   it('confirms anchor links redirect to correct sections', () => {
-    cy.goToKeyStateProgramManagememt();
+    const pages_with_anchors = [{parent: 'Key State Personnel', label: 'Key Personnel and Program Management', subnav: '#apd-state-profile-key-personnel'},
+                                {parent: 'Results of Previous Activities', label: 'Prior Activities Overview', subnav: ['#prev-activities-outline', '#prev-activities-table']},
+                                {parent: 'Proposed Budget', label: 'Summary Budget by Activity', subnav: ['#summary-schedule-by-activity-table', '#budget-summary-table', '#budget-federal-by-quarter', '#budget-incentive-by-quarter']},
+                                {parent: 'Executive Summary', label: 'Activities Summary', subnav: ['#executive-summary-summary', '#executive-summary-budget-table']}]
 
-    cy.get('#apd-state-profile-key-personnel')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+    cy.wrap(pages_with_anchors).each((index) => {
+      const subnav = index.subnav;
 
-    cy.goToPriorActOverview();
+      cy.get('.ds-c-vertical-nav__label--parent')
+        .contains(index.parent)
+        .then($el => {
+          if($el.attr('aria-expanded') === 'false') {
+            // if it's not expanded, expand it
+            cy.wrap($el).click();
+          }
 
-    cy.get('#prev-activities-outline')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+          // Click on anchor link
+          cy.get('a.ds-c-vertical-nav__label')
+            .contains(index.label)
+            .click();
+        });
 
-    cy.goToActualExpenditures();
 
-    cy.get('#prev-activities-table')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
-
-    cy.goToProposedSummary();
-
-    cy.get('#summary-schedule-by-activity-table')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
-
-    cy.goToProposedSummaryTable();
-
-    cy.get('#budget-summary-table')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
-
-    cy.goToQuarterlyFedShare();
-
-    cy.get('#budget-federal-by-quarter')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
-
-    cy.goToEstimatedQuarterly();
-
-    cy.get('#budget-incentive-by-quarter')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
-
-    cy.goToActivitiesSummary();
-
-    cy.get('#executive-summary-summary')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
-
-    cy.goToProgramBudgetTable();
-
-    cy.get('#executive-summary-budget-table')
-      .then((element) => element[0].offsetTop)
-      .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
-      .then((offset) => cy.window().its('scrollY').should('eq', offset));
+      if (Array.isArray(subnav)) {
+        cy.wrap(subnav).each((index) => {
+          cy.get(index)
+            .then((element) => element[0].offsetTop)
+            .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+            .then((offset) => cy.window().its('scrollY').should('eq', offset));
+        })
+      } else {
+        cy.get(subnav)
+          .then((element) => element[0].offsetTop)
+          .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+          .then((offset) => cy.window().its('scrollY').should('eq', offset));
+      }
+    });
   });
 
   it('deletes the APD', () => {
