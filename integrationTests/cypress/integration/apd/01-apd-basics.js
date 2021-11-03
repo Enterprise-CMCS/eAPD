@@ -54,87 +54,41 @@ describe('filling out APD overview section', function () {
   });
 
   it('confirms side nav buttons redirect to correct sections', () => {
-    cy.get('.ds-c-vertical-nav')
-      .contains('APD Overview')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
-    
-    cy.get('.ds-h2')
-      .should('contain', 'APD Overview');
+    const pages = [{parent: 'APD Overview', label: ''},
+                   {parent: 'Key State Personnel', label: 'Key Personnel and Program Management'},
+                   {parent: 'Results of Previous Activities', label: 'Results of Previous Activities'},
+                   {parent: 'Activities', label: ''},
+                   {parent: 'Activity Schedule Summary', label: ''},
+                   {parent: 'Proposed Budget', label: 'Proposed Budget'},
+                   {parent: 'Assurances and Compliance', label: ''},
+                   {parent: 'Executive Summary', label: 'Executive Summary'},
+                   {parent: 'Export and Submit', label: ''}]
 
-    cy.goToKeyStatePersonnel();
+    cy.wrap(pages).each((index) => {
+      if (index.label != '') {
+        // Expand nav menu option
+        cy.get('.ds-c-vertical-nav__label--parent')
+          .contains(index.parent)
+          .then($el => {
+            if($el.attr('aria-expanded') === 'false') {
+              // if it's not expanded, expand it
+              cy.wrap($el).click();
+            }
 
-    cy.get('.ds-c-vertical-nav')
-      .contains('Key State Personnel')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
+            // Click on nav submenu button
+            cy.get('a.ds-c-vertical-nav__label')
+              .contains(index.label)
+              .click();
+          });
+      } else {
+        cy.get('a.ds-c-vertical-nav__label')
+          .contains(index.parent)
+          .click();
+      };
 
-    cy.get('.ds-h2')
-      .should('contain', 'Key State Personnel');
-
-    cy.goToPreviousActivities();
-
-    cy.get('.ds-c-vertical-nav')
-      .contains('Results of Previous Activities')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
-
-    cy.get('.ds-h2')
-      .should('contain', 'Results of Previous Activities');
-
-    cy.goToActivityDashboard();
-
-    cy.get('.ds-c-vertical-nav')
-      .contains('Activities Dashboard')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
-
-    cy.get('.ds-h2')
-      .should('contain', 'Activities');
-    
-    cy.get('#activities')
-      .contains('Add Activity');
-
-    cy.goToActivityScheduleSummary();
-
-    cy.get('.ds-c-vertical-nav')
-      .contains('Activity Schedule Summary')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
-
-    cy.get('.ds-h2')
-      .should('contain', 'Activity Schedule Summary');
-
-    cy.goToProposedBudget();
-
-    cy.get('.ds-c-vertical-nav')
-      .contains('Proposed Budget')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
-
-    cy.get('.ds-h2')
-      .should('contain', 'Proposed Budget');
-
-    cy.goToAssurancesAndCompliance();
-
-    cy.get('.ds-c-vertical-nav')
-      .contains('Assurances and Compliance')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
-
-    cy.get('.ds-h2')
-      .should('contain', 'Assurances and Compliance');
-
-    cy.goToExecutiveSummary();
-
-    cy.get('.ds-c-vertical-nav')
-      .contains('Executive Summary')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
-
-    cy.get('.ds-h2')
-      .should('contain', 'Executive Summary');
-
-    cy.contains('Export and Submit').click();
-
-    cy.get('.ds-c-vertical-nav')
-      .contains('Export and Submit')
-      .should('have.class', 'ds-c-vertical-nav__label--current');
-
-    cy.get('.ds-h2')
-      .should('contain', 'Export and Submit');
+      cy.get('.ds-h2')
+        .should('contain', index.parent);
+    })
   });
 
   it('confirms anchor links redirect to correct sections', () => {
