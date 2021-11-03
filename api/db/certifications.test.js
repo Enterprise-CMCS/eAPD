@@ -240,6 +240,7 @@ tap.test('certifications query tests', async sacQueryTest => {
   
   sacQueryTest.test('returns an error when attempting to archive a matched certification', async t => {
     const certifications = {
+      id: '1001',
       email: 'matchme@email.com',
       name: 'Cant match me Flynn',
       state: 'ak',
@@ -248,11 +249,12 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
-      affiliationId: 1234,
+      affiliationId: '1234',
       status: 'active'
     }
+
     const authAffiliations = [
-      {id: 1234, role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
+      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
     ]
     
     const oktaUsers = OKTA_USERS.emailMatch
@@ -260,11 +262,75 @@ tap.test('certifications query tests', async sacQueryTest => {
     await setupDB(certifications, oktaUsers, authAffiliations)
     
     const results = await archiveStateAdminCertification({
-      id: '1234',
-      archived_by: '2345'
+      id: '1001',
+      archived_by: 'emailMatch'
     })
     
-    t.same(results, 'error')
+    t.same(results.error, 'certification is already matched')
+  })
+
+  sacQueryTest.test('returns an error when attempting to archive an already archived certification', async t => {
+    const certifications = {
+      id: '1001',
+      email: 'matchme@email.com',
+      name: 'Cant match me Flynn',
+      state: 'ak',
+      fileUrl: '/auth/certifications/files/whatever.pdf',
+      phone: '4438675309',
+      uploadedBy: 'unitTest',
+      uploadedOn: new Date(),
+      ffy: 2022,
+      affiliationId: null,
+      status: 'archived'
+    }
+
+    const authAffiliations = [
+      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
+    ]
+    
+    const oktaUsers = OKTA_USERS.emailMatch
+    
+    await setupDB(certifications, oktaUsers, authAffiliations)
+    
+    const results = await archiveStateAdminCertification({
+      id: '1001',
+      archived_by: 'emailMatch'
+    })
+    
+    t.same(results.error, 'certification is already archived')
+  })
+
+  sacQueryTest.test('updates a certification to archived with valid data', async t => {
+    const certifications = {
+      id: '1001',
+      email: 'matchme@email.com',
+      name: 'Cant match me Flynn',
+      state: 'ak',
+      fileUrl: '/auth/certifications/files/whatever.pdf',
+      phone: '4438675309',
+      uploadedBy: 'unitTest',
+      uploadedOn: new Date(),
+      ffy: 2022,
+      affiliationId: null,
+      status: 'active'
+    }
+    
+    const authAffiliations = [
+      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
+    ]
+    
+    const oktaUsers = OKTA_USERS.emailMatch
+    
+    await setupDB(certifications, oktaUsers, authAffiliations)
+    
+    await archiveStateAdminCertification({
+      id: '1001',
+      archived_by: 'emailMatch'
+    })
+
+    const results = await knex('state_admin_certifications').select('status').where('id', certifications.id).first().then((row) => row);
+
+    t.same(results.status, 'archived')
   })
 
 

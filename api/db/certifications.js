@@ -26,11 +26,11 @@ const archiveStateAdminCertification = async (
   { db = knex } = {}
 ) => {
   const record = await db('state_admin_certifications').select('status', 'affiliationId').where('id', data.id).first();
-  if ( record.affiliation !== null ) {
+  if ( record.affiliationId !== null ) {
     return { error: 'certification is already matched'};
   }
   if ( record.status === 'archived' ) {
-    return { error: 'certification already archived' };
+    return { error: 'certification is already archived' };
   }
   return db('state_admin_certifications')
     .where('id', data.id).first()
