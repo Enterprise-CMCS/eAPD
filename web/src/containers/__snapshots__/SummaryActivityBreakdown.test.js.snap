@@ -3,6 +3,7 @@
 exports[`Summary Activity Breakdown Table renders correctly renders correctly 1`] = `
 <table
   className="budget-table activity-budget-table"
+  id="activity-3-2016"
 >
   <thead>
     <tr
@@ -22,8 +23,7 @@ exports[`Summary Activity Breakdown Table renders correctly renders correctly 1`
           }
         >
           activity name
-           
-          (HIE)
+           (HIE)
         </span>
       </th>
       <th
