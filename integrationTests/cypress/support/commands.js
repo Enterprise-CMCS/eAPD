@@ -134,6 +134,13 @@ Cypress.Commands.add('ignoreTinyMceError', () => {
   });
 });
 
+Cypress.Commands.add(
+  'findParent',
+  { prevSubject: true },
+  ($element, selector) =>
+    cy.wrap($element).parentsUntil(selector).last().parent()
+);
+
 Cypress.Commands.add('waitForSave', () => {
   cy.document()
     .its('body')
