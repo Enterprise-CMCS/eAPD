@@ -1,4 +1,7 @@
 const {
+  getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -7,6 +10,9 @@ const {
 
 describe('auth/certifications put endpoint', () => {
   describe('PUT /auth/certifications', () => {
+    const db = getDB();
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
     
     const url = '/auth/certifications';
 

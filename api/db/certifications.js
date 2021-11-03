@@ -15,7 +15,6 @@ const addStateAdminCertification = (
           changeDate: new Date(),
           changedBy: data.uploadedBy,
           changeType: 'add',
-          status: 'active',
           certificationId: ids[0].id
         })
     })

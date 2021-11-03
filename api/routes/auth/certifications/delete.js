@@ -17,6 +17,10 @@ module.exports = (
     loggedIn,
     can('edit-state-certifications'),
     async (req, res, next) => {
+      const {
+        certificationId
+      } = req.body;
+      
       try {
         const { error = null } = await archiveStateAdminCertification({
           id: req.body.certificationId,

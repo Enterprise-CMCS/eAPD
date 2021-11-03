@@ -10,7 +10,8 @@ exports.seed = async knex => {
       fileUrl: 'test-123',
       uploadedBy: 'fed-admin',
       uploadedOn: new Date(),
-      affiliationId: null
+      affiliationId: null,
+      status: 'active'
     },
   ]);
 };
