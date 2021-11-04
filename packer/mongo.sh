@@ -9,20 +9,6 @@ curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infra
 yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
 yum install newrelic-infra -y
 
-
-# Add a user group for the default user, and make it the owner of the /app
-# directory.  Unzip stuff there and then set permissions.
-groupadd eapd
-gpasswd -a ec2-user eapd
-mkdir /app
-mkdir /app/api
-mkdir /app/web
-
-chown -R :eapd /app
-chmod -R g+w /app
-
-mkdir /app/tls
-
 # Setup Mongo Repo
 touch /etc/yum.repos.d/mongodb-org-4.4.repo
 echo "
@@ -34,40 +20,13 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
 " > /etc/yum.repos.d/mongodb-org-4.4.repo
 
-# Install git, nginx, postgres
-yum -y install git 
-yum -y install nginx
-yum -y install postgresql-server 
+# Install mongo
 yum -y install mongodb-org checkpolicy
 
 # Install CloudWatch Agent
 curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 rpm -U ./amazon-cloudwatch-agent.rpm
 rm ./amazon-cloudwatch-agent.rpm
-
-# Setup postgres
-postgresql-setup initdb
-echo "
-# TYPE    DATABASE    USER    ADDRESS         METHODS
-local     all         all                     peer
-host      all         all     127.0.0.1/32    password
-host      all         all     ::1/128         password
-" > /var/lib/pgsql/data/pg_hba.conf
-systemctl start postgresql
-systemctl enable postgresql
-
-# Create self-signed certificates
-openssl genrsa -des3 -passout pass:x -out /app/tls/server.pass.key 2048
-openssl rsa -passin pass:x -in /app/tls/server.pass.key -out /app/tls/server.key
-rm -f /app/tls/server.pass.key
-# Use the instance metadata service to get public hostname
-openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
-openssl x509 -req -sha256 -days 365 -in /app/tls/server.csr -signkey /app/tls/server.key -out /app/tls/server.crt
-rm -f /app/tls/server.csr
-
-# Set SELinux context so Nginx can read the cert files
-semanage fcontext -a -t httpd_sys_content_t "/app/tls(/.*)?"
-restorecon -Rv /app/tls
 
 # SELinux for Mongo
 cat > mongodb_cgroup_memory.te <<EOF
@@ -82,9 +41,42 @@ require {
 allow mongod_t cgroup_t:dir search;
 allow mongod_t cgroup_t:file { getattr open read };
 EOF
+
 checkmodule -M -m -o mongodb_cgroup_memory.mod mongodb_cgroup_memory.te
 semodule_package -o mongodb_cgroup_memory.pp -m mongodb_cgroup_memory.mod
 sudo semodule -i mongodb_cgroup_memory.pp
+
+# Start & Enable Mongo
+systemctl daemon-reload
+systemctl enable mongod
+systemctl start mongod
+
+# Test to see the command that is getting built for pulling the Git Branch
+su ec2-user <<E_USER
+# The su block begins inside the root user's home directory.  Switch to the
+# ec2-user home directory.
+export MONGO_DATABASE="__MONGO_DATABASE__"
+export MONGO_URL="__MONGO_URL__"
+export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
+export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
+export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
+export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
+export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
+
+#Preparing Mongo DB Users
+cd ~
+cat <<MONGOUSERSEED > mongo-init.sh
+mongo admin --eval "db.runCommand({'createUser' : '','pwd' : '', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo  -u  -p  --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role:'readWrite', db: ''}]});"
+MONGOUSERSEED
+E_USER
+
+# Harden & Restart Mongo
+sh /home/ec2-user/mongo-init.sh
+sed -i 's|#security:|security:|g' /etc/mongod.conf
+sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
+systemctl restart mongod
+rm mongo-init.sh
 
 # Configure CloudWatch Agent
 mkdir -p /opt/aws/amazon-cloudwatch-agent/doc/
@@ -159,7 +151,6 @@ cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
 CWAGENTCONFIG
 
-# Nginx is test/preview only
 touch /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 {
@@ -169,52 +160,48 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
         "collect_list": [
           {
             "file_path": "/var/log/aide/aide.log*",
-            "log_group_name": "preview/var/log/aide/aide.log"
+            "log_group_name": "staging/var/log/aide/aide.log"
           },
           {
             "file_path": "/var/log/audit/audit.log*",
-            "log_group_name": "preview/var/log/audit/audit.log"
+            "log_group_name": "staging/var/log/audit/audit.log"
           },
           {
             "file_path": "/var/log/awslogs.log*",
-            "log_group_name": "preview/var/log/awslogs.log"
+            "log_group_name": "staging/var/log/awslogs.log"
           },
           {
             "file_path": "/var/log/cloud-init.log*",
-            "log_group_name": "preview/var/log/cloud-init.log"
+            "log_group_name": "staging/var/log/cloud-init.log"
           },
           {
             "file_path": "/var/log/cloud-init-output.log*",
-            "log_group_name": "preview/var/log/cloud-init-output.log"
+            "log_group_name": "staging/var/log/cloud-init-output.log"
           },
           {
             "file_path": "/var/log/cron*",
-            "log_group_name": "preview/var/log/cron"
+            "log_group_name": "staging/var/log/cron"
           },
           {
             "file_path": "/var/log/dmesg*",
-            "log_group_name": "preview/var/log/dmesg"
+            "log_group_name": "staging/var/log/dmesg"
           },
           {
             "file_path": "/var/log/maillog*",
-            "log_group_name": "preview/var/log/maillog"
+            "log_group_name": "staging/var/log/maillog"
           },
           {
             "file_path": "/var/log/messages*",
-            "log_group_name": "preview/var/log/messages"
-          },
-          {
-            "file_path": "/var/log/nginx/access.log*",
-            "log_group_name": "preview/var/log/nginx/access.log"
-          },
-          {
-            "file_path": "/var/log/nginx/error.log*",
-            "log_group_name": "preview/var/log/nginx/error.log"
+            "log_group_name": "staging/var/log/messages"
           },
           {
             "file_path": "/var/log/secure*",
-            "log_group_name": "preview/var/log/secure"
-          }
+            "log_group_name": "staging/var/log/secure"
+          },
+          {
+            "file_path": "/var/log/mongodb/mongod.log*",
+            "log_group_name": "staging/var/log/mongodb/mongod.log"
+          }          
         ]
       }
     }
@@ -232,15 +219,15 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
         "collect_list": [
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent.log*",
-            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent.log"
+            "log_group_name": "staging/var/opt/ds_agent/diag/ds_agent.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent-err.log*",
-            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent-err.log"
+            "log_group_name": "staging/var/opt/ds_agent/diag/ds_agent-err.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_am.log*",
-            "log_group_name": "preview/var/opt/ds_agent/diag/ds_am.log"
+            "log_group_name": "staging/var/opt/ds_agent/diag/ds_am.log"
           }
         ]
       }
@@ -250,67 +237,10 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 
 CWVAROPTCONFIG
 
-touch /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
-cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
-
-{
-  "logs": {
-    "logs_collected": {
-      "files": {
-        "collect_list": [
-          {
-            "file_path": "/app/api/logs/eAPD-API-error-0.log*",
-            "log_group_name": "preview/app/api/logs/eAPD-API-error-0.log"
-          },
-          {
-            "file_path": "/app/api/logs/eAPD-API-out-0.log*",
-            "log_group_name": "preview/app/api/logs/eAPD-API-out-0.log"
-          },
-          {
-            "file_path": "/app/api/logs/eAPD-API-*",
-            "log_group_name": "preview/app/api/logs/eAPD-API-combined-0.log"
-          },          
-          {
-            "file_path": "/app/api/logs/Database-migration-error.log*",
-            "log_group_name": "preview/app/api/logs/Database-migration-error.log"
-          },
-          {
-            "file_path": "/app/api/logs/Database-migration-out.log*",
-            "log_group_name": "preview/app/api/logs/Database-migration-out.log"
-          },
-          {
-            "file_path": "/app/api/logs/Database-migration-*",
-            "log_group_name": "preview/app/api/logs/Database-migration-combined.log"
-          },          
-          {
-            "file_path": "/app/api/logs/Database-seeding-error.log*",
-            "log_group_name": "preview/app/api/logs/Database-seeding-error.log"
-          },
-          {
-            "file_path": "/app/api/logs/Database-seeding-out.log*",
-            "log_group_name": "preview/app/api/logs/Database-seeding-out.log"
-          },
-          {
-            "file_path": "/app/api/logs/Database-seeding-*",
-            "log_group_name": "preview/app/api/logs/Database-seeding-combined.log"
-          },                                           
-          {
-            "file_path": "/app/api/logs/cms-hitech-apd-api.logs*",
-            "log_group_name": "preview/app/api/logs/cms-hitech-apd-api.logs"              
-          }    
-        ]
-      }
-    }
-  }
-}
-
-CWAPPLOGCONFIG
-
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 R_USER

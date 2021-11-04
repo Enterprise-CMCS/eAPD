@@ -6,7 +6,7 @@ variable "gold_owner" {}
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
 source "amazon-ebs" "Golden_Image" {
-    ami_name      = "eAPD Platinum AMI - ${local.timestamp}"
+    ami_name      = "eAPD Preview AMI - ${local.timestamp}"
     instance_type = "t3.micro"
     access_key    = ""
     secret_key    = ""
