@@ -156,12 +156,6 @@ Cypress.Commands.add(
   'shouldBeCloseTo',
   { prevSubject: true },
   ($element, expected, delta = 1) => {
-    cy.log($element.text());
-    cy.log(`converted ${convertDollarStrToNum($element.text())}`);
-    cy.log(`typeof ${typeof convertDollarStrToNum($element.text())}`);
-    cy.log(`expected ${expected}`);
-    cy.log(`typeof ${typeof expected}`);
-    cy.log(`delta ${delta}`);
     expect(convertDollarStrToNum($element.text())).to.be.closeTo(
       expected,
       delta
@@ -185,6 +179,23 @@ Cypress.Commands.add('waitForSave', () => {
           .contains(/Saved|Last saved/i)
           .should('exist');
       }
+    });
+});
+
+Cypress.Commands.add('goToKeyStateProgramManagememt', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Key State Personnel/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Key Personnel and Program Management/i)
+        .click();
     });
 });
 
@@ -222,6 +233,40 @@ Cypress.Commands.add('goToPreviousActivities', () => {
     });
 });
 
+Cypress.Commands.add('goToPriorActOverview', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Results of Previous Activities/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Prior Activities Overview/i)
+        .click();
+    });
+});
+
+Cypress.Commands.add('goToActualExpenditures', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Results of Previous Activities/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Actual Expenditures/i)
+        .click();
+    });
+});
+
 Cypress.Commands.add('goToActivityDashboard', () => {
   // check to see if Activities is expanded
   cy.get('.ds-c-vertical-nav__label--parent')
@@ -250,8 +295,7 @@ const openActivitySection = (activityIndex, subNavName) => {
 
       cy.wrap($activities)
         .next()
-        .within($list => {
-          cy.log({ $list });
+        .within(() => {
           // find the Activity section with the correct index
           // check to see if Activity Index is expanded
           cy.get('.ds-c-vertical-nav__label--parent')
@@ -322,6 +366,74 @@ Cypress.Commands.add('goToProposedBudget', () => {
     });
 });
 
+Cypress.Commands.add('goToProposedSummary', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Proposed Budget/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Summary Budget by Activity/i)
+        .click();
+    });
+});
+
+Cypress.Commands.add('goToProposedSummaryTable', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Proposed Budget/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Summary Budget by Activity/i)
+        .click();
+    });
+});
+
+Cypress.Commands.add('goToQuarterlyFedShare', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Proposed Budget/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Quarterly Federal Share/i)
+        .click();
+    });
+});
+
+Cypress.Commands.add('goToEstimatedQuarterly', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Proposed Budget/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Estimated Quarterly Incentive Payments/i)
+        .click();
+    });
+});
+
 Cypress.Commands.add('goToAssurancesAndCompliance', () => {
   cy.get('a.ds-c-vertical-nav__label')
     .contains(/Assurances and Compliance/i)
@@ -341,6 +453,40 @@ Cypress.Commands.add('goToExecutiveSummary', () => {
       // Click on nav submenu button
       cy.get('a.ds-c-vertical-nav__label')
         .contains(/Executive Summary/i)
+        .click();
+    });
+});
+
+Cypress.Commands.add('goToActivitiesSummary', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Executive Summary/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Activities Summary/i)
+        .click();
+    });
+});
+
+Cypress.Commands.add('goToProgramBudgetTable', () => {
+  // Expand nav menu option
+  cy.get('.ds-c-vertical-nav__label--parent')
+    .contains(/Executive Summary/i)
+    .then($el => {
+      if ($el.attr('aria-expanded') === 'false') {
+        // if it's not expanded, expand it
+        cy.wrap($el).click();
+      }
+
+      // Click on nav submenu button
+      cy.get('a.ds-c-vertical-nav__label')
+        .contains(/Program Budget Tables/i)
         .click();
     });
 });

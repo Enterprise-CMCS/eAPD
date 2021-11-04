@@ -266,9 +266,6 @@ class ExportPage {
   ) => {
     cy.findByText(/Provide a short overview of the activity/i)
       .next()
-      .then($paragraph => cy.log($paragraph.text()));
-    cy.findByText(/Provide a short overview of the activity/i)
-      .next()
       .should('have.text', desc);
     cy.contains('Start date').parent().should('contain', start);
     cy.contains('End date').parent().should('contain', end);

@@ -10,9 +10,7 @@ const testActivityListOver = page => {
         '/'
       )} - ${activity.endDate.join('/')}`;
 
-      cy.log(`Activity is called ${activityName}`);
       page.getActivityScheduleOverviewName(index).should('eq', activityName);
-      cy.log(`Activity date range is "${activityRange}"`);
       page.getActivityScheduleOverviewDates(index).should('eq', activityRange);
     });
   });
@@ -30,12 +28,10 @@ const testActivityMilestone = page => {
     milestones.forEach(({ names, dates }, index) => {
       const activityId = index + 1; // Activity Id is 1-base and index is 0-based
       const activityName = `Activity ${activityId}: ${data.activityOverview[index].name} Milestones`;
-      cy.log(`Milestone is called "${activityName}"`);
       page
         .getActivityScheduleMilestoneTableName(index)
         .should('eq', activityName);
 
-      cy.log(`Activity ${activityId} milestones are correct`);
       page
         .getAllActivityScheduleMilestones(index)
         .should('have.length', names.length);

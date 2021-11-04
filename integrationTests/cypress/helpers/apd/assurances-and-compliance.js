@@ -35,7 +35,6 @@ export const testDefaultAssurancesAndCompliance = () => {
       const val = assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
-        cy.log(`Testing for regulation ${regulation}`);
         // Check that regulations link to the correct URLs
         assurancesCompliancePage.assertLink(category, regulation, val.links[i]);
         assurancesCompliancePage.verifyRegulationValue(category, regulation);
@@ -69,7 +68,6 @@ export const testDefaultAssurancesAndComplianceExportView = () => {
       const val = assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
-        cy.log(`Testing for regulation ${regulation}`);
         // Check that regulations link to the correct URLs
         exportPage.assurancesComplianceAssertLink(
           category,
@@ -113,7 +111,6 @@ export const testAssurancesAndComplianceWithData = () => {
       const val = assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
-        cy.log(`Testing for regulation ${regulation}`);
         // Check that regulations link to the correct URLs
         assurancesCompliancePage.assertLink(category, regulation, val.links[i]);
 
@@ -151,8 +148,6 @@ export const testAssurancesAndComplianceExportViewWithData = () => {
       const val = assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
-        cy.log(`Testing for regulation ${regulation}`);
-
         let expectedResponse = '';
 
         if (val.responses[i] === null) {

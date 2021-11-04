@@ -87,9 +87,6 @@ class PreviousActivitiesPage {
             .invoke('text')
             .then(text => {
               const FFP = extractNumber(text);
-              cy.log(medicaid);
-              cy.log(expectedFFP);
-              cy.log(FFP);
               cy.wrap(FFP).should('eq', expectedFFP);
             });
         });
@@ -243,8 +240,6 @@ class PreviousActivitiesPage {
         .invoke('text')
         .then(text => {
           const yearlyTotalExpenditure = extractNumber(text);
-          cy.log({ yearlyTotalExpenditure });
-          cy.log('total', totals[year]);
           cy.wrap(yearlyTotalExpenditure).should('eq', totals[year]);
         });
 

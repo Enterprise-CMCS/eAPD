@@ -65,10 +65,6 @@ class ActivitiesStateStaffExpensesPage {
           .next()
           .invoke('text')
           .then(text => {
-            cy.log(
-              `Checking that Personnel ${staffNumber}'s total ` +
-                `expenses = Cost with Benefits * Number of FTEs`
-            );
             const total = extractNumber(text);
             cy.wrap(total).should('eq', costs[index] * ftes[index]);
           });
@@ -116,9 +112,7 @@ class ActivitiesStateStaffExpensesPage {
             // Get first match for string slice of "FTE: *** |"
             // where "***" is the FTE and "|" is a seperator.
             const slice = text.match(/FTEs: (.*)\|/i)[0];
-            cy.log(slice);
             const fte = extractNumber(slice);
-            cy.log(fte);
             cy.wrap(fte).should('eq', ftes[index]);
           });
       });

@@ -81,16 +81,8 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       const staff = activityData.staff[1];
       const expenses = activityData.expenses[1];
       const contractor = activityData.privateContractors[1];
-      cy.log({ staff, expenses, contractor });
 
       years.forEach((year, i) => {
-        cy.log(
-          `FFY Total: ${
-            staff.costs[i] * staff.ftes[i] +
-            expenses.costs[i] +
-            contractor.FFYcosts[i]
-          }`
-        );
         const FFYtotal =
           staff.costs[i] * staff.ftes[i] +
           expenses.costs[i] +
@@ -133,35 +125,18 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       const expense2 = activityData.expenses[3];
       const contractor1 = activityData.privateContractors[2];
       const contractor2 = activityData.privateContractors[3];
-      cy.log({ staff1, staff2, expense1, expense2, contractor1, contractor2 });
 
       years.forEach((year, i) => {
-        cy.log(
-          `staffTotal ${
-            staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i]
-          }`
-        );
         const staffTotal =
           staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
 
-        cy.log(`expenseTotal ${expense1.costs[i] + expense2.costs[i]}`);
         const expenseTotal = expense1.costs[i] + expense2.costs[i];
 
-        cy.log(
-          `hours: ${contractor2.FFYcosts[i][0]}, pay: ${contractor2.FFYcosts[i][1]}`
-        );
         const contractorTotal =
           contractor1.FFYcosts[i] +
           contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
-        cy.log(
-          `contractorTotal ${
-            contractor1.FFYcosts[i] +
-            contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
-          }`
-        );
 
         const FFYtotal = staffTotal + expenseTotal + contractorTotal;
-        cy.log(`FFYtotal ${staffTotal + expenseTotal + contractorTotal}`);
 
         budgetPage.checkActivityTotalCostTable(
           FFYtotal,
