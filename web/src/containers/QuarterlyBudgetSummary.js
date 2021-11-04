@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Dollars from '../components/Dollars';
@@ -21,16 +21,16 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
   if (!years.length) return null;
 
   return (
-    <Fragment>
+    <div>
       {FUNDING_SOURCES.map(([source, sourceDisplay]) => {
         const data = budget[source];
         return (
-          <Fragment key={source}>
-            <h4 className="ds-h4">{sourceDisplay}</h4>
+          <div key={source}>
+            <h4 className="ds-h4 header-with-top-margin">{sourceDisplay}</h4>
             {years.map(year => (
               <table className="budget-table" key={year}>
                 <caption className="ds-u-visibility--screen-reader">
-                  {t('ffy', { year })} {sourceDisplay}
+                  {t('ffy', { year })} {sourceDisplay} Quarterly Federal Share
                 </caption>
                 <colgroup>
                   <col className="budget-table--col-header__fixed-width" />
@@ -110,10 +110,10 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 ))}
               </tbody>
             </table>
-          </Fragment>
+          </div>
         );
       })}
-    </Fragment>
+    </div>
   );
 };
 
