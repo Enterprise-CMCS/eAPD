@@ -514,7 +514,7 @@ const calculateSummaryBudgetTableTotal = ({ years, activityBudget }) => {
       return expected;
 }
 
-const calculateQuarterlyFederalShareByFFY = ({ years, activityBudget, totals, quarterVals }) => {
+const calculateQuarterlyFederalShareByFFY = ({ years, activityBudget, quarterVals }) => {
   const hitAndHieByFFY = years.map((year, yearIndex) => {
     const inHouseCostsByActivity = activityBudget.map((activity, activityIndex) => {
       const total = (activity.staff[yearIndex].fedShare +
@@ -523,7 +523,7 @@ const calculateQuarterlyFederalShareByFFY = ({ years, activityBudget, totals, qu
       costs.push(total);
       
       return costs;
-    })
+    });
     const inHouseCosts = Array(inHouseCostsByActivity[0].length).fill(0).map((_, index) =>
       inHouseCostsByActivity.map(costs => costs[index]).reduce((acc, curr) => acc + curr)
     );
@@ -555,8 +555,8 @@ const calculateQuarterlyFederalShareByFFY = ({ years, activityBudget, totals, qu
     "Private Contractor Costs": 0,
     "Total Enhanced FFP": 0
   };
-  Object.keys(totals).forEach(key => {
-    totals[key] = hitAndHieByFFY.map(ffy => ffy[key]).reduce((acc, curr) => acc + curr);
+  Object.keys(totalCosts).forEach(key => {
+    totalCosts[key] = hitAndHieByFFY.map(ffy => [...ffy[key]].pop()).reduce((acc, curr) => acc + curr);
   });
 
   return {
@@ -579,7 +579,6 @@ const calculateQuarterlyFederalShareByFFY = ({ years, activityBudget, totals, qu
     }
   };
 }
-
 
 export const testProposedBudgetWithData = years => {
   let proposedBudgetPage;
@@ -617,7 +616,6 @@ export const testProposedBudgetWithData = years => {
           totals: activityData.totals[1]
         })
       ); // activity 2 - HIE
-      cy.log(`activityBudget ${JSON.stringify(activityBudget)}`)
     });
   });
 
@@ -671,7 +669,6 @@ export const testProposedBudgetWithData = years => {
       const expected = calculateQuarterlyFederalShareByFFY({
         years,
         activityBudget,
-        totals: activityData.totals,
         quarterVals: activityData.quarterVals
       });
 
@@ -685,15 +682,114 @@ export const testProposedBudgetWithData = years => {
       const expected = calculateQuarterlyFederalShareByFFY({
         years,
         activityBudget,
-        totals: activityData.totals,
         quarterVals: activityData.quarterVals
       });
 
       proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-        expected: expected.totals
+        expected
       });
     });
   });
 };
 
-export const testProposedBudgetExportViewWithData = () => {};
+export const testProposedBudgetExportViewWithData = years => {
+  let proposedBudgetPage;
+  let activityList;
+  let activityData;
+  let activityBudget;
+
+  before(() => {
+    proposedBudgetPage = new ProposedBudgetPage();
+    const exportPage = new ExportPage();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    activityList = exportPage.getActivityScheduleOverviewNameList();
+
+    cy.fixture('activity-overview-template.json').then(data => {
+      activityData = data;
+      activityBudget = [];
+      // the first was deleted in the tests
+      activityBudget.push(
+        calculateCostsByActivityOrProgramType({
+          years,
+          staff: activityData.staff.slice(1, 2),
+          expenses: activityData.expenses.slice(1, 2),
+          privateContractors: activityData.privateContractors.slice(1, 2),
+          totals: activityData.totals[0]
+        })
+      ); // activity 1 - HIT
+
+      activityBudget.push(
+        calculateCostsByActivityOrProgramType({
+          years,
+          staff: activityData.staff.slice(2),
+          expenses: activityData.expenses.slice(2),
+          privateContractors: activityData.privateContractors.slice(2),
+          totals: activityData.totals[1]
+        })
+      ); // activity 2 - HIE
+    });
+  });
+
+  describe('Summary Budget by Activity', () => {
+    it('should have the correct values for Total Computable Medicaid Cost', () => {
+      const expected = calculateComputableMedicaidCostByFFY({ years, activityBudget });
+      proposedBudgetPage.verifyComputableMedicaidCostByFFY({ years, expected });
+    });
+
+    it('should have the correct values for Activity Breakdown', () => {
+      const expected = calculateActvityBreakdownByFFYAndActivity({ years, activityBudget });
+
+      proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
+        years,
+        activityList,
+        expected
+      });
+    });
+  });
+
+  describe('Summary Budget Table by Expense Type', () => {
+    it('should have the correct values for Expense Type tables', () => {
+      const expected = calculateSummaryBudgetTableByTypeAndFFY({ years, activityBudget });
+
+      proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
+        years: [...years, 'total'],
+        expected: expected.byTypes
+      });
+    });
+
+    it('should have the correct values for Activities Totals table', () => {
+      const expected = calculateSummaryBudgetTableTotal({ years, activityBudget });
+
+      proposedBudgetPage.verifySummaryBudgetTableTotal({
+        expected
+      });
+    });
+  });
+
+  describe('Quarterly Federal Share by FFP', () => {
+    it('should have the correct values for FFY tables', () => {
+      const expected = calculateQuarterlyFederalShareByFFY({
+        years,
+        activityBudget,
+        quarterVals: activityData.quarterVals
+      });
+
+      proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
+        years,
+        expected
+      });
+    });
+
+    it('should have the correct values for Total tables', () => {
+      const expected = calculateQuarterlyFederalShareByFFY({
+        years,
+        activityBudget,
+        quarterVals: activityData.quarterVals
+      });
+
+      proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
+        expected
+      });
+    });
+  });
+};

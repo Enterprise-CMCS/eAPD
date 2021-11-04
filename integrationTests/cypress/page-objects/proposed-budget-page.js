@@ -104,16 +104,8 @@ class ProposedBudgetPage {
   }) => {
     years.forEach((ffy, ffyIndex) => {
       activityList.forEach((activityName, index) => {
-        cy.log(`expected ${JSON.stringify(expected)}`);
         Object.keys(expected[ffyIndex].activities[index].expenses).forEach(
           expense => {
-            cy.log(
-              `verifying expense - ${expense} - ${
-                expected[ffyIndex].activities[index].expenses[expense][
-                  `${expense} Subtotal`
-                ]
-              }`
-            );
             // TODO: Add this back once the default test is truly default
             // this.getBreakdownByFFYAndActivityAndExpense({
             //   ffy,
