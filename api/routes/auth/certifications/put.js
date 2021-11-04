@@ -30,8 +30,12 @@ module.exports = (
         stateId
       } = req.body;
       
+      if (!certificationId || !certificationFfy || !affiliationId || !stateId) {
+        res.send(400, 'please provide all required fields');
+      }
+      
       try {
-        await matchStateAdminCertification({
+        const { error = null } = await matchStateAdminCertification({
           certificationId: Number(certificationId),
           affiliationId: Number(affiliationId),
           changedBy: req.user.id,
@@ -40,6 +44,10 @@ module.exports = (
           stateId,
           ffy: certificationFfy
         });
+
+        if(error) {
+          res.send(400, `failed to complete match with error: ${error}`)
+        }
         
         res.send(200);        
       } catch (e) {
