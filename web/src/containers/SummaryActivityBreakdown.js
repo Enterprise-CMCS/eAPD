@@ -18,13 +18,17 @@ const SummaryActivityBreakdownTable = ({
   const { years } = costSummary;
 
   return (
-    <table className="budget-table activity-budget-table">
+    <table
+      className="budget-table activity-budget-table"
+      id={`activity-${activityIndex + 1}-${ffy}`}
+    >
       <thead>
         <tr className="budget-table--row__primary-header">
           <th scope="col">
             Activity {activityIndex + 1}{' '}
             <span style={{ fontWeight: '100' }}>
-              {activityName || "Untitled"} {fundingSource ? `(${fundingSource})` : ""}
+              {activityName || 'Untitled'}
+              {fundingSource ? ` (${fundingSource})` : ''}
             </span>
           </th>
           <th scope="col" colSpan="4">

@@ -18,6 +18,20 @@ class ActivitySchedulePage {
       .invoke('text');
   };
 
+  getActivityScheduleOverviewNameList = () => {
+    const activityNames = [];
+    this.getAllActivityScheduleOverviews().each($el => {
+      cy.wrap($el)
+        .find('td')
+        .first()
+        .invoke('text')
+        .then(text => {
+          activityNames.push(text);
+        });
+    });
+    return activityNames;
+  };
+
   // Assumes dates are in the last column
   getActivityScheduleOverviewDates = index => {
     return this.getActivityScheduleOverview(index)
