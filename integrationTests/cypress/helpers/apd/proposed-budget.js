@@ -25,7 +25,6 @@ export const testDefaultProposedBudget = years => {
   it('should go to the correct page', () => {
     cy.url().should('include', '/proposed-budget');
     cy.findByRole('heading', { level: 2, name: 'Proposed Budget' });
-    cy.log(`years: ${JSON.stringify(years)}`);
   });
 
   describe('Default values in Summary Budget by Activity', () => {
@@ -48,7 +47,7 @@ export const testDefaultProposedBudget = years => {
   describe('Default values for Summary Budget Table by Expense Type', () => {
     it('should have default values of $0 for Expense Type tables', () => {
       proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
-        years,
+        years: [...years, 'total'],
         expected: budgetData.defaultSummaryBudgetTable.byTypes
       });
     });
@@ -123,7 +122,7 @@ export const testDefaultProposedBudgetExportView = years => {
   describe('Default values for Summary Budget Table by Expense Type', () => {
     it('should have default values of $0 for Expense Type Tables', () => {
       proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
-        years,
+        years: [...years, 'total'],
         expected: budgetData.defaultSummaryBudgetTable.byTypes
       });
     });
@@ -167,10 +166,10 @@ const calculateCostsByActivityOrProgramType = ({
   privateContractors,
   totals
 }) => {
-  const staffCosts = new Array(years.length);
-  const expensesCosts = new Array(years.length);
-  const contractorCosts = new Array(years.length);
-  const ffyTotals = new Array(years.length);
+  const staffCosts = [];
+  const expensesCosts = [];
+  const contractorCosts = [];
+  const ffyTotals = [];
 
   years.forEach((year, yearIndex) => {
     const staffCost = staff
@@ -194,8 +193,20 @@ const calculateCostsByActivityOrProgramType = ({
       .reduce((acc, curr) => acc + curr, 0);
 
     const total = staffCost + expenseCost + contractorCost;
+    const other = totals.other[yearIndex];
+    const fedShare = totals.fedShare[yearIndex];
+    const stateShare = Number(1 - fedShare).toPrecision(2);
 
-    staffCosts[yearIndex] = {
+    const staffOtherFunds = Math.round(other * (staffCost / total));
+    const staffSubtotal = staffCost - staffOtherFunds;
+
+    const expensesOtherFunds = Math.round(other * (expenseCost / total));
+    const expensesSubtotal = expenseCost - expensesOtherFunds;
+    
+    const privateOtherFunds = Math.round(other * (contractorCost / total));
+    const privateSubtotal = contractorCost - privateOtherFunds;
+    
+    staffCosts.push({
       items: staff.map(emp => ({
         name: emp.title,
         salary: emp.costs[yearIndex],
@@ -203,29 +214,25 @@ const calculateCostsByActivityOrProgramType = ({
         costs: emp.costs[yearIndex] * emp.ftes[yearIndex]
       })),
       total: staffCost,
-      other: Math.round(totals.other[yearIndex] * (staffCost / total)),
-      subtotal: Math.round(
-        staffCost - totals.other[yearIndex] * (staffCost / total)
-      ),
-      fedShare: Math.round(staffCost * totals.fedShare[yearIndex]),
-      stateShare: Math.round(staffCost * (1 - totals.fedShare[yearIndex]))
-    };
+      other: staffOtherFunds,
+      subtotal: staffSubtotal,
+      fedShare: Math.round(staffSubtotal * fedShare),
+      stateShare: Math.round(staffSubtotal * stateShare)
+    });
 
-    expensesCosts[yearIndex] = {
+    expensesCosts.push({
       items: expenses.map(expense => ({
         name: expense.category,
         costs: expense.costs[yearIndex]
       })),
       total: expenseCost,
-      other: Math.round(totals.other[yearIndex] * (expenseCost / total)),
-      subtotal: Math.round(
-        expenseCost - totals.other[yearIndex] * (expenseCost / total)
-      ),
-      fedShare: Math.round(expenseCost * totals.fedShare[yearIndex]),
-      stateShare: Math.round(expenseCost * (1 - totals.fedShare[yearIndex]))
-    };
+      other: expensesOtherFunds,
+      subtotal: expensesSubtotal,
+      fedShare: Math.round(expensesSubtotal * fedShare),
+      stateShare: Math.round(expensesSubtotal * stateShare)
+    });
 
-    contractorCosts[yearIndex] = {
+    contractorCosts.push({
       items: privateContractors.map(contractor => ({
         name: contractor.name,
         costs: Array.isArray(contractor.FFYcosts[yearIndex])
@@ -234,15 +241,14 @@ const calculateCostsByActivityOrProgramType = ({
           : contractor.FFYcosts[yearIndex]
       })),
       total: contractorCost,
-      other: Math.round(totals.other[yearIndex] * (contractorCost / total)),
-      subtotal: Math.round(
-        contractorCost - totals.other[yearIndex] * (contractorCost / total)
-      ),
-      fedShare: Math.round(contractorCost * totals.fedShare[yearIndex]),
-      stateShare: Math.round(contractorCost * (1 - totals.fedShare[yearIndex]))
-    };
-    ffyTotals[yearIndex] = total - totals.other[yearIndex];
+      other: privateOtherFunds,
+      subtotal: privateSubtotal,
+      fedShare: Math.round(privateSubtotal * fedShare),
+      stateShare: Math.round(privateSubtotal * stateShare)
+    });
+    ffyTotals.push(total - other);
   });
+  
   return {
     staff: staffCosts,
     expenses: expensesCosts,
@@ -288,65 +294,65 @@ const calculateComputableMedicaidCostByFFY = ({ years, activityBudget }) => year
       activityBudget[1].ffyTotals[yearIndex]
   }));
 
-const calculateActvityBreakdownByFFYAndActivity = ({ years, activityBudget }) => years.map((year, yearIndex) =>
-activityBudget.forEach(activity => {
-  const stateStaff = {
-    'Other Funding Amount': activity.staff[yearIndex].other,
-    'State Staff Subtotal': activity.staff[yearIndex].subtotal
-  };
-  const stateExpenses = {
-    'Other Funding Amount': activity.expenses[yearIndex].other,
-    'Other State Expenses Subtotal':
-      activity.expenses[yearIndex].subtotal
-  };
-  const privateContractors = {
-    'Other Funding Amount':
-      activity.privateContractors.FFYcosts[yearIndex].other,
-    'Private Contractor Subtotal':
-      activity.privateContractors.FFYcosts[yearIndex].subtotal
-  };
-
-  activity.staff[yearIndex].items.forEach(item => {
-    stateStaff[item.name] = [item.salary, item.ftes, item.costs];
-  });
-
-  activity.expenses[yearIndex].items.forEach(item => {
-    stateExpenses[item.name] = [item.costs];
-  });
-
-  activity.privateContractors.FFYcosts[yearIndex].items.forEach(
-    item => {
-      privateContractors[item.name] = [item.costs];
-    }
-  );
-
-  return {
-    expenses: {
-      'State Staff': stateStaff,
-      'Other State Expenses': stateExpenses,
-      'Private Contractor': privateContractors
-    },
-    totalComputableMedicaidCost: activity.ffyTotals[yearIndex]
-  };
-})
-);
+const calculateActvityBreakdownByFFYAndActivity = ({ years, activityBudget }) => years.map((year, yearIndex) => ({
+  "activities": activityBudget.map(activity => {
+    const stateStaff = {
+      'Other Funding Amount': activity.staff[yearIndex].other,
+      'State Staff Subtotal': activity.staff[yearIndex].subtotal
+    };
+    const stateExpenses = {
+      'Other Funding Amount': activity.expenses[yearIndex].other,
+      'Other State Expenses Subtotal':
+        activity.expenses[yearIndex].subtotal
+    };
+    const privateContractors = {
+      'Other Funding Amount':
+        activity.privateContractors.FFYcosts[yearIndex].other,
+      'Private Contractor Subtotal':
+        activity.privateContractors.FFYcosts[yearIndex].subtotal
+    };
+  
+    activity.staff[yearIndex].items.forEach(item => {
+      stateStaff[item.name] = [item.salary, item.ftes, item.costs];
+    });
+  
+    activity.expenses[yearIndex].items.forEach(item => {
+      stateExpenses[item.name] = [item.costs];
+    });
+  
+    activity.privateContractors.FFYcosts[yearIndex].items.forEach(
+      item => {
+        privateContractors[item.name] = [item.costs];
+      }
+    );
+  
+    return {
+      expenses: {
+        'State Staff': stateStaff,
+        'Other State Expenses': stateExpenses,
+        'Private Contractor': privateContractors
+      },
+      totalComputableMedicaidCost: activity.ffyTotals[yearIndex]
+    };
+  })
+}));
 
 const calculateSummaryBudgetTableByTypeAndFFY = ({ years, activityBudget }) => {
   const HIT = years.map((year, yearIndex) => ({
     'State Staff': [
       activityBudget[0].staff[yearIndex].stateShare,
       activityBudget[0].staff[yearIndex].fedShare,
-      activityBudget[0].staff[yearIndex].total
+      activityBudget[0].staff[yearIndex].subtotal
     ],
     'Other State Expenses': [
       activityBudget[0].expenses[yearIndex].stateShare,
       activityBudget[0].expenses[yearIndex].fedShare,
-      activityBudget[0].expenses[yearIndex].total
+      activityBudget[0].expenses[yearIndex].subtotal
     ],
     'Private Contractor': [
       activityBudget[0].privateContractors.FFYcosts[yearIndex].stateShare,
       activityBudget[0].privateContractors.FFYcosts[yearIndex].fedShare,
-      activityBudget[0].privateContractors.FFYcosts[yearIndex].total
+      activityBudget[0].privateContractors.FFYcosts[yearIndex].subtotal
     ],
     Subtotal: [
       activityBudget[0].staff[yearIndex].stateShare +
@@ -355,131 +361,117 @@ const calculateSummaryBudgetTableByTypeAndFFY = ({ years, activityBudget }) => {
       activityBudget[0].staff[yearIndex].fedShare +
         activityBudget[0].expenses[yearIndex].fedShare +
         activityBudget[0].privateContractors.FFYcosts[yearIndex].fedShare,
-      activityBudget[0].staff[yearIndex].total +
-        activityBudget[0].expenses[yearIndex].total +
-        activityBudget[0].privateContractors.FFYcosts[yearIndex].total
+      activityBudget[0].staff[yearIndex].subtotal +
+        activityBudget[0].expenses[yearIndex].subtotal +
+        activityBudget[0].privateContractors.FFYcosts[yearIndex].subtotal
     ]
   }));
   HIT.push({
     'State Staff': [
-      HIT.map(hit => hit['State Staff']).reduce((acc, curr) => acc + curr),
-      HIT.map(hit => hit['State Staff']).reduce((acc, curr) => acc + curr),
-      HIT.map(hit => hit['State Staff']).reduce((acc, curr) => acc + curr)
+      HIT.map(hit => hit['State Staff'][0]).reduce((acc, curr) => acc + curr),
+      HIT.map(hit => hit['State Staff'][1]).reduce((acc, curr) => acc + curr),
+      HIT.map(hit => hit['State Staff'][2]).reduce((acc, curr) => acc + curr)
     ],
     'Other State Expenses': [
-      HIT.map(hit => hit['Other State Expenses']).reduce(
+      HIT.map(hit => hit['Other State Expenses'][0]).reduce(
         (acc, curr) => acc + curr
       ),
-      HIT.map(hit => hit['Other State Expenses']).reduce(
+      HIT.map(hit => hit['Other State Expenses'][1]).reduce(
         (acc, curr) => acc + curr
       ),
-      HIT.map(hit => hit['Other State Expenses']).reduce(
+      HIT.map(hit => hit['Other State Expenses'][2]).reduce(
         (acc, curr) => acc + curr
       )
     ],
     'Private Contractor': [
-      HIT.map(hit => hit['Private Contractor']).reduce(
+      HIT.map(hit => hit['Private Contractor'][0]).reduce(
         (acc, curr) => acc + curr
       ),
-      HIT.map(hit => hit['Private Contractor']).reduce(
+      HIT.map(hit => hit['Private Contractor'][1]).reduce(
         (acc, curr) => acc + curr
       ),
-      HIT.map(hit => hit['Private Contractor']).reduce(
+      HIT.map(hit => hit['Private Contractor'][2]).reduce(
         (acc, curr) => acc + curr
       )
     ],
     Subtotal: [
-      HIT.map(hit => hit.Subtotal).reduce((acc, curr) => acc + curr),
-      HIT.map(hit => hit.Subtotal).reduce((acc, curr) => acc + curr),
-      HIT.map(hit => hit.Subtotal).reduce((acc, curr) => acc + curr)
+      HIT.map(hit => hit.Subtotal[0]).reduce((acc, curr) => acc + curr),
+      HIT.map(hit => hit.Subtotal[1]).reduce((acc, curr) => acc + curr),
+      HIT.map(hit => hit.Subtotal[2]).reduce((acc, curr) => acc + curr)
     ]
   });
   const HIE = years.map((year, yearIndex) => ({
     'State Staff': [
-      activityBudget[0].staff[yearIndex].stateShare,
-      activityBudget[0].staff[yearIndex].fedShare,
-      activityBudget[0].staff[yearIndex].total
+      activityBudget[1].staff[yearIndex].stateShare,
+      activityBudget[1].staff[yearIndex].fedShare,
+      activityBudget[1].staff[yearIndex].subtotal
     ],
     'Other State Expenses': [
-      activityBudget[0].expenses[yearIndex].stateShare,
-      activityBudget[0].expenses[yearIndex].fedShare,
-      activityBudget[0].expenses[yearIndex].total
+      activityBudget[1].expenses[yearIndex].stateShare,
+      activityBudget[1].expenses[yearIndex].fedShare,
+      activityBudget[1].expenses[yearIndex].subtotal
     ],
     'Private Contractor': [
-      activityBudget[0].privateContractors.FFYcosts[yearIndex].stateShare,
-      activityBudget[0].privateContractors.FFYcosts[yearIndex].fedShare,
-      activityBudget[0].privateContractors.FFYcosts[yearIndex].total
+      activityBudget[1].privateContractors.FFYcosts[yearIndex].stateShare,
+      activityBudget[1].privateContractors.FFYcosts[yearIndex].fedShare,
+      activityBudget[1].privateContractors.FFYcosts[yearIndex].subtotal
     ],
     Subtotal: [
-      activityBudget[0].staff[yearIndex].stateShare +
-        activityBudget[0].expenses[yearIndex].stateShare +
-        activityBudget[0].privateContractors.FFYcosts[yearIndex].stateShare,
-      activityBudget[0].staff[yearIndex].fedShare +
-        activityBudget[0].expenses[yearIndex].fedShare +
-        activityBudget[0].privateContractors.FFYcosts[yearIndex].fedShare,
-      activityBudget[0].staff[yearIndex].total +
-        activityBudget[0].expenses[yearIndex].total +
-        activityBudget[0].privateContractors.FFYcosts[yearIndex].total
+      activityBudget[1].staff[yearIndex].stateShare +
+        activityBudget[1].expenses[yearIndex].stateShare +
+        activityBudget[1].privateContractors.FFYcosts[yearIndex].stateShare,
+      activityBudget[1].staff[yearIndex].fedShare +
+        activityBudget[1].expenses[yearIndex].fedShare +
+        activityBudget[1].privateContractors.FFYcosts[yearIndex].fedShare,
+      activityBudget[1].staff[yearIndex].subtotal +
+        activityBudget[1].expenses[yearIndex].subtotal +
+        activityBudget[1].privateContractors.FFYcosts[yearIndex].subtotal
     ]
   }));
   HIE.push({
     'State Staff': [
-      HIE.map(hie => hie['State Staff']).reduce((acc, curr) => acc + curr),
-      HIE.map(hie => hie['State Staff']).reduce((acc, curr) => acc + curr),
-      HIE.map(hie => hie['State Staff']).reduce((acc, curr) => acc + curr)
+      HIE.map(hie => hie['State Staff'][0]).reduce((acc, curr) => acc + curr),
+      HIE.map(hie => hie['State Staff'][1]).reduce((acc, curr) => acc + curr),
+      HIE.map(hie => hie['State Staff'][2]).reduce((acc, curr) => acc + curr)
     ],
     'Other State Expenses': [
-      HIE.map(hie => hie['Other State Expenses']).reduce(
+      HIE.map(hie => hie['Other State Expenses'][0]).reduce(
         (acc, curr) => acc + curr
       ),
-      HIE.map(hie => hie['Other State Expenses']).reduce(
+      HIE.map(hie => hie['Other State Expenses'][1]).reduce(
         (acc, curr) => acc + curr
       ),
-      HIE.map(hie => hie['Other State Expenses']).reduce(
+      HIE.map(hie => hie['Other State Expenses'][2]).reduce(
         (acc, curr) => acc + curr
       )
     ],
     'Private Contractor': [
-      HIE.map(hie => hie['Private Contractor']).reduce(
+      HIE.map(hie => hie['Private Contractor'][0]).reduce(
         (acc, curr) => acc + curr
       ),
-      HIE.map(hie => hie['Private Contractor']).reduce(
+      HIE.map(hie => hie['Private Contractor'][1]).reduce(
         (acc, curr) => acc + curr
       ),
-      HIE.map(hie => hie['Private Contractor']).reduce(
+      HIE.map(hie => hie['Private Contractor'][2]).reduce(
         (acc, curr) => acc + curr
       )
     ],
     Subtotal: [
-      HIE.map(hie => hie.Subtotal).reduce((acc, curr) => acc + curr),
-      HIE.map(hie => hie.Subtotal).reduce((acc, curr) => acc + curr),
-      HIE.map(hie => hie.Subtotal).reduce((acc, curr) => acc + curr)
+      HIE.map(hie => hie.Subtotal[0]).reduce((acc, curr) => acc + curr),
+      HIE.map(hie => hie.Subtotal[1]).reduce((acc, curr) => acc + curr),
+      HIE.map(hie => hie.Subtotal[2]).reduce((acc, curr) => acc + curr)
     ]
   });
   return {
     byTypes: {
       HIT,
       HIE,
-      MMIS: [
-        {
+      MMIS: Array(years.length + 1).fill(0).map(() => ({
           'State Staff': [0, 0, 0],
           'Other State Expenses': [0, 0, 0],
           'Private Contractor': [0, 0, 0],
           Subtotal: [0, 0, 0]
-        },
-        {
-          'State Staff': [0, 0, 0],
-          'Other State Expenses': [0, 0, 0],
-          'Private Contractor': [0, 0, 0],
-          Subtotal: [0, 0, 0]
-        },
-        {
-          'State Staff': [0, 0, 0],
-          'Other State Expenses': [0, 0, 0],
-          'Private Contractor': [0, 0, 0],
-          Subtotal: [0, 0, 0]
-        }
-      ]
+        }))
     }
   };
 };
@@ -498,6 +490,7 @@ const calculateSummaryBudgetTableTotal = ({ years, activityBudget }) => {
             activity.privateContractors.FFYcosts[yearIndex].stateShare
         ).reduce((acc, curr) => acc + curr, 0);
         totalStateShare += ffyStateShare;
+        
 
         const ffyFedShare = activityBudget.map(
           activity =>
@@ -509,9 +502,9 @@ const calculateSummaryBudgetTableTotal = ({ years, activityBudget }) => {
 
         const ffyTotal = activityBudget.map(
           activity =>
-            activity.staff[yearIndex].total +
-            activity.expenses[yearIndex].total +
-            activity.privateContractors.FFYcosts[yearIndex].total
+            activity.staff[yearIndex].subtotal +
+            activity.expenses[yearIndex].subtotal +
+            activity.privateContractors.FFYcosts[yearIndex].subtotal
         ).reduce((acc, curr) => acc + curr, 0);
         totalTotal += ffyTotal;
 
@@ -521,26 +514,25 @@ const calculateSummaryBudgetTableTotal = ({ years, activityBudget }) => {
       return expected;
 }
 
-const calculateQuarterlyFederalShareByFFY = ({ years, totals, quarterVals }) => {
+const calculateQuarterlyFederalShareByFFY = ({ years, activityBudget, totals, quarterVals }) => {
   const hitAndHieByFFY = years.map((year, yearIndex) => {
-    const inHouseCostsByActivity = totals.map((activity, activityIndex) => {
-      cy.log(`activity: ${JSON.stringify(activity)}`)
-      cy.log(`total = ${activity.staff[yearIndex]} + ${activity.expenses[yearIndex]} * ${activity.fedShare[yearIndex]}`);
-      const total = (activity.staff[yearIndex] +
-        activity.expenses[yearIndex]) * activity.fedShare[yearIndex];
-      const costs = quarterVals[activityIndex].stateVals[yearIndex].map(val => total * val);
+    const inHouseCostsByActivity = activityBudget.map((activity, activityIndex) => {
+      const total = (activity.staff[yearIndex].fedShare +
+        activity.expenses[yearIndex].fedShare);
+      const costs = quarterVals[activityIndex].stateVals[yearIndex].map(val => total * (val/100));
       costs.push(total);
-      cy.log(`costs ${JSON.stringify(costs)}`);
+      
       return costs;
     })
     const inHouseCosts = Array(inHouseCostsByActivity[0].length).fill(0).map((_, index) =>
       inHouseCostsByActivity.map(costs => costs[index]).reduce((acc, curr) => acc + curr)
     );
 
-    const privateCostsByActivity = totals.map((activity, activityIndex) => {
-      const total = activity.contractors[yearIndex] * activity.fedShare[yearIndex];
-      const costs = quarterVals[activityIndex].contractorVals[yearIndex].map(val => total * val);
+    const privateCostsByActivity = activityBudget.map((activity, activityIndex) => {
+      const total = activity.privateContractors.FFYcosts[yearIndex].fedShare;
+      const costs = quarterVals[activityIndex].contractorVals[yearIndex].map(val => total * (val/100));
       costs.push(total);
+
       return costs;
     })
     const privateCosts = Array(privateCostsByActivity[0].length).fill(0).map((_, index) =>
@@ -625,6 +617,7 @@ export const testProposedBudgetWithData = years => {
           totals: activityData.totals[1]
         })
       ); // activity 2 - HIE
+      cy.log(`activityBudget ${JSON.stringify(activityBudget)}`)
     });
   });
 
@@ -635,7 +628,6 @@ export const testProposedBudgetWithData = years => {
   it('should go to the correct page', () => {
     cy.url().should('include', '/proposed-budget');
     cy.findByRole('heading', { level: 2, name: 'Proposed Budget' });
-    cy.log(`years: ${JSON.stringify(years)}`);
   });
 
   describe('Summary Budget by Activity', () => {
@@ -660,8 +652,8 @@ export const testProposedBudgetWithData = years => {
       const expected = calculateSummaryBudgetTableByTypeAndFFY({ years, activityBudget });
 
       proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
-        years,
-        expected
+        years: [...years, 'total'],
+        expected: expected.byTypes
       });
     });
 
@@ -678,10 +670,10 @@ export const testProposedBudgetWithData = years => {
     it('should have the correct values for FFY tables', () => {
       const expected = calculateQuarterlyFederalShareByFFY({
         years,
+        activityBudget,
         totals: activityData.totals,
         quarterVals: activityData.quarterVals
       });
-      cy.log(`expected ${JSON.stringify(expected)}`);
 
       proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
         years,
@@ -689,15 +681,16 @@ export const testProposedBudgetWithData = years => {
       });
     });
 
-    xit('should have the correct values for Total tables', () => {
+    it('should have the correct values for Total tables', () => {
       const expected = calculateQuarterlyFederalShareByFFY({
         years,
+        activityBudget,
         totals: activityData.totals,
         quarterVals: activityData.quarterVals
       });
 
       proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-        expected
+        expected: expected.totals
       });
     });
   });

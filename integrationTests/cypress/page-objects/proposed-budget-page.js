@@ -158,7 +158,7 @@ class ProposedBudgetPage {
 
   getSBTByTypeAndFFY = ({ type, ffy }) =>
     this.getSBTByType({ type })
-      .get(`#summary-budget-fy-${ffy}`)
+      .find(`#summary-budget-fy-${ffy}`)
       .findParent('.budget-table');
 
   getSBTByTypeAndFFYAndExpense = ({ type, ffy, expense }) =>
@@ -187,17 +187,17 @@ class ProposedBudgetPage {
             type,
             ffy,
             expense
-          }).shouldBeCloseTo(expected[type][index][expense][0]);
+          }).shouldBeCloseTo(expected[type][index][expense][0], 3);
           this.getSBTByTypeAndFFYAndExpenseFederalTotalValue({
             type,
             ffy,
             expense
-          }).shouldBeCloseTo(expected[type][index][expense][1]);
+          }).shouldBeCloseTo(expected[type][index][expense][1], 3);
           this.getSBTByTypeAndFFYAndExpenseMTCValue({
             type,
             ffy,
             expense
-          }).shouldBeCloseTo(expected[type][index][expense][2]);
+          }).shouldBeCloseTo(expected[type][index][expense][2], 3);
         });
       });
     });
@@ -222,12 +222,13 @@ class ProposedBudgetPage {
     Object.keys(expected).forEach(header => {
       this.getActivityTotalsByRowHeaderStateTotalValue({
         header
-      }).shouldBeCloseTo(expected[header][0]);
+      }).shouldBeCloseTo(expected[header][0], 5);
       this.getActivityTotalsByRowHeaderFederalTotalValue({
         header
-      }).shouldBeCloseTo(expected[header][1]);
+      }).shouldBeCloseTo(expected[header][1], 5);
       this.getActivityTotalsByRowHeaderMTCValue({ header }).shouldBeCloseTo(
-        expected[header][2]
+        expected[header][2],
+        5
       );
     });
   };
@@ -257,7 +258,10 @@ class ProposedBudgetPage {
               header,
               row,
               columnIndex
-            }).shouldBeCloseTo(expected[header].byFFY[index][row][columnIndex]);
+            }).shouldBeCloseTo(
+              expected[header].byFFY[index][row][columnIndex],
+              3
+            );
           });
         });
       });
@@ -279,7 +283,7 @@ class ProposedBudgetPage {
         this.getQFSTotalsByHeaderAndRowHeaderValue({
           header,
           row
-        }).shouldBeCloseTo(expected[header].totals[row]);
+        }).shouldBeCloseTo(expected[header].totals[row], 5);
       });
     });
   };

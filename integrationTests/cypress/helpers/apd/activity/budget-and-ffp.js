@@ -267,7 +267,7 @@ export const testBudgetAndFFPWithData = years => {
       );
     });
 
-    xit('fills out Budget and FFP for activity 2', () => {
+    it('fills out Budget and FFP for activity 2', () => {
       const staff = activityData.staff[2];
       const staff2 = activityData.staff[3];
       const expenses = activityData.expenses[2];
