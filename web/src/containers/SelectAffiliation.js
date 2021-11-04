@@ -49,6 +49,7 @@ const SelectAffiliation = ({
 
   const choiceList = availableAffiliations.map(item => {
     const choice = {
+      className: "state-aff-item",
       label: statesWithFederal.find(state => state.id === item).name,
       value: item
     }
