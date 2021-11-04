@@ -63,8 +63,6 @@ const SelectAffiliation = ({
     return 0;
   });
 
-  console.log(choiceList)
-
   const handleChoiceSelection = e => {
     setSelectedAffiliation(e.target.value);
   }
