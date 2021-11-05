@@ -44,7 +44,7 @@ module.exports = (
       } catch (e) {
         logger.error({ id: req.id, message: 'error adding new state admin certification' });
         logger.error({ id: req.id, message: e });
-        next({ message: 'Unable to save state admin certification' });
+        return next({ message: 'Unable to save state admin certification' });
       }
     }
   );

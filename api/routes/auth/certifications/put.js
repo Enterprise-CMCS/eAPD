@@ -48,7 +48,7 @@ module.exports = (
       } catch (e) {
         logger.error({ id: req.id, message: 'error updating state admin certification' });
         logger.error({ id: req.id, message: e });
-        next({ message: 'Unable to complete state admin certification' });
+        return next({ message: 'Unable to complete state admin certification' });
       }
     }
   );
