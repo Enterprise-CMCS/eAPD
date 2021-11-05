@@ -57,7 +57,7 @@ const SelectAffiliation = ({
       choice.defaultChecked = true;
     }
     return choice;
-  }).sort(function(a, b){
+  }).sort((a, b) => {
     if(a.label < b.label) { return -1; }
     if(a.label > b.label) { return 1; }
     return 0;
