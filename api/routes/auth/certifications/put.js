@@ -28,7 +28,7 @@ module.exports = (
         affiliationId,
         stateId
       } = req.body;
-      
+     
       try {
         const { error = null } = await matchStateAdminCertification({
           certificationId,

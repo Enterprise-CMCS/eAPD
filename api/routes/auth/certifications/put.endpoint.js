@@ -40,7 +40,6 @@ describe('auth/certifications put endpoint', () => {
 
       it('with a valid request body', async () => {
         const response = await api.put(url, payload);
-        console.log("response", response);
         
         expect(response.status).toEqual(200);
       });
