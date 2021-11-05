@@ -38,9 +38,9 @@ module.exports = (
           uploadedOn: new Date()
         });
         if (error) {
-          res.status(400).end();
+          return res.status(400).end();
         }
-        res.status(200).end();
+        return res.status(200).end();
       } catch (e) {
         logger.error({ id: req.id, message: 'error adding new state admin certification' });
         logger.error({ id: req.id, message: e });
