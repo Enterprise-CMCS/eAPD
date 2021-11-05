@@ -152,8 +152,8 @@ describe('filling out APD overview section', () => {
         });
 
       if (Array.isArray(subnav)) {
-        cy.wrap(subnav).each(subNavIndex => {
-          cy.get(subNavIndex)
+        cy.wrap(subnav).each(subnavIndex => {
+          cy.get(subnavIndex)
             .then(element => element[0].offsetTop)
             .then(() => cy.window().its('scrollY').should('be.gt', 0))
             .then(offset => cy.window().its('scrollY').should('eq', offset));
