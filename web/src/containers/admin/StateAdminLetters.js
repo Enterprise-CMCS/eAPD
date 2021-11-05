@@ -26,6 +26,7 @@ import axios from '../../util/api';
 
 import MatchStateAdminDialog from './MatchStateAdminDialog';
 
+import DeleteModal from '../../components/DeleteModal';
 import { PDFFileBlue } from '../../components/Icons';
 
 const certificationRow = record => {
@@ -50,7 +51,8 @@ const certificationRow = record => {
     state: record.state.toUpperCase(),
     ffy: record.ffy,
     file: record.fileUrl,
-    status: calculateStatus(record.affiliationId, record.potentialMatches),
+    matchStatus: calculateStatus(record.affiliationId, record.potentialMatches),
+    status: record.status,
     actions: record.affiliationId
   };
 };
@@ -150,6 +152,7 @@ const StateAdminLetters = () => {
   
   const [tableData, setTableData] = useState([]);
   const [showMatchUserDialog, setShowMatchUserDialog]= useState(false);
+  const [showDeleteCertificationDialog, setShowDeleteCertificationDialog]= useState(false);
   const [selectedCertification, setSelectedCertification]= useState({});
   
   useEffect(() => {
@@ -158,7 +161,7 @@ const StateAdminLetters = () => {
       setTableData(certificationLetters.data);
     }
     fetchData();
-  }, [showMatchUserDialog]);
+  }, [showMatchUserDialog, showDeleteCertificationDialog]);
 
   const columns = React.useMemo(
     () => [
@@ -183,7 +186,7 @@ const StateAdminLetters = () => {
       },
       {
         Header: 'Status',
-        accessor: 'status',
+        accessor: 'matchStatus',
         Filter: SelectColumnFilter,
         filter: 'includes'
       },
@@ -243,6 +246,29 @@ const StateAdminLetters = () => {
     setShowMatchUserDialog(false);
   }
   
+  const handleShowDeleteCertificationDialog = event => {
+    const certificationId = event.target.parentNode.parentNode.getAttribute('data-certification-id');
+    const certification = page.find(row => Number(certificationId) === Number(row.original.id) );
+    setSelectedCertification(certification.original);
+    setShowDeleteCertificationDialog(true);
+  }
+  
+  const handleHideDeleteCertificationDialog = () => {
+    setShowDeleteCertificationDialog(false);
+  }
+  
+  const handleDeleteConfirmationSubmit = async () => {
+    const response = await axios
+      .delete('/auth/certifications', {
+        data: { 
+          certificationId: selectedCertification.id
+        }
+      });
+    if (response.status === 200) {
+      setShowDeleteCertificationDialog(false);
+    }
+  }
+  
   return (
     <div id="state-admin-letters">
       <Button onClick={handleAddStateButton} variation="primary">Add State Admin Letter</Button>
@@ -285,9 +311,12 @@ const StateAdminLetters = () => {
                  if (cell.column.id === 'actions') {
                    return (
                      <TableCell {...cell.getCellProps()}>
-                       {cell.row.values.status === 'Pending Match' &&
+                      {cell.row.values.matchStatus !== 'Matched' &&
+                        <Button variation="transparent" onClick={handleShowDeleteCertificationDialog}>Delete</Button>
+                      } 
+                      {cell.row.values.matchStatus === 'Pending Match' &&
                         <Button onClick={handleShowMatchUserDialog}>Match To User</Button>
-                       }
+                      }
                      </TableCell>
                    )
                  } 
@@ -337,6 +366,13 @@ const StateAdminLetters = () => {
         <MatchStateAdminDialog
           certification={selectedCertification}
           hideModal={handleHideMatchUserDialog} 
+        />
+      )}
+      {showDeleteCertificationDialog && (
+        <DeleteModal
+          objType="Certification"
+          onCancel={handleHideDeleteCertificationDialog}
+          onDelete={handleDeleteConfirmationSubmit}
         />
       )}
     </div>
