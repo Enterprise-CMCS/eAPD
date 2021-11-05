@@ -5,7 +5,7 @@ exports.seed = async knex => {
       state: 'ak',
       ffy: 2022,
       name: 'State Admin Test',
-      email: 'stateadmin@email.com',
+      email: 'stateadminmatch@email.com',
       phone: '4105555555',
       fileUrl: 'test-123',
       uploadedBy: 'fed-admin',

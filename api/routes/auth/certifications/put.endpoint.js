@@ -1,20 +1,25 @@
 const {
+  getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
 
-
 describe('auth/certifications put endpoint', () => {
   describe('PUT /auth/certifications', () => {
+    const db = getDB();
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
     
     const url = '/auth/certifications';
 
     const payload = {
       "certificationId": "5004",
-      "affiliationId": "4004",
-      "stateId": "ak",
-      "certificationFfy": "2022"
+      "certificationFfy": "2022",
+      "affiliationId": "4005",
+      "stateId": "ak"
     };
 
     unauthenticatedTest('put', url);
@@ -28,16 +33,16 @@ describe('auth/certifications put endpoint', () => {
 
       it('with no request body', async () => {
         const response = await api.put(url, {});
-        
+
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with a valid request body', async () => {
         const response = await api.put(url, payload);
+        console.log("response", response);
         
         expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
       });
 
     });
