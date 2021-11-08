@@ -200,7 +200,7 @@
       }
     }
   },
-  "defaultEQIPForm": [
+  "defaultEQIP": [
     {
       "EH Payments": [0, 0, 0, 0, 0],
       "EH Count (optional)": [0, 0, 0, 0, 0],
@@ -214,7 +214,270 @@
       "EP Count (optional)": [0, 0, 0, 0, 0]
     }
   ],
-  "defaultEQIPView": [
+  "dataSummaryBudgetByActivity": [
+    {
+      "programTypes": {
+        "HIT": {
+          "State Staff Total": 298883,
+          "Other State Expenses Total": 34524,
+          "Private Contractor Total": 29592,
+          "HIT Total": 363000
+        },
+        "HIE": {
+          "State Staff Total": 189707,
+          "Other State Expenses Total": 39910,
+          "Private Contractor Total": 40895,
+          "HIE Total": 270512
+        },
+        "MMIS": {
+          "State Staff Total": 0,
+          "Other State Expenses Total": 0,
+          "Private Contractor Total": 0,
+          "MMIS Total": 0
+        }
+      },
+      "totalComputableMedicaidCost": 633512
+    },
+    {
+      "programTypes": {
+        "HIT": {
+          "State Staff Total": 320327,
+          "Other State Expenses Total": 34286,
+          "Private Contractor Total": 29388,
+          "HIT Total": 384000
+        },
+        "HIE": {
+          "State Staff Total": 189749,
+          "Other State Expenses Total": 38898,
+          "Private Contractor Total": 40156,
+          "HIE Total": 268802
+        },
+        "MMIS": {
+          "State Staff Total": 0,
+          "Other State Expenses Total": 0,
+          "Private Contractor Total": 0,
+          "MMIS Total": 0
+        }
+      },
+      "totalComputableMedicaidCost": 652802
+    }
+  ],
+  "dataActivityBreakdown": [
+    {
+      "activities": [
+        {
+          "expenses": {
+            "State Staff": {
+              "Accountant III": [101000, 3, 303000],
+              "Other Funding Amount": 4117,
+              "State Staff Subtotal": 298883
+            },
+            "Other State Expenses": {
+              "Travel": [35000],
+              "Other Funding Amount": 476,
+              "Other State Expenses Subtotal": 34524
+            },
+            "Private Contractor": {
+              "Bob the Builder": [30000],
+              "Other Funding Amount": 408,
+              "Private Contractor Subtotal": 29592
+            }
+          },
+          "totalComputableMedicaidCost": 363000
+        },
+        {
+          "expenses": {
+            "State Staff": {
+              "Public Information Officer": [165000, 0.5, 82500],
+              "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)": [
+                110012, 1, 110012
+              ],
+              "Other Funding Amount": 2805,
+              "State Staff Subtotal": 189707
+            },
+            "Other State Expenses": {
+              "Hardware, software, and licensing": [40000],
+              "Equipment and supplies": [500],
+              "Other Funding Amount": 590,
+              "Other State Expenses Subtotal": 39910
+            },
+            "Private Contractor": {
+              "Tech Consulting Inc.": [40000],
+              "Interface Vendor Inc.": [1500],
+              "Other Funding Amount": 605,
+              "Private Contractor Subtotal": 40895
+            }
+          },
+          "totalComputableMedicaidCost": 270512
+        }
+      ]
+    },
+    {
+      "activities": [
+        {
+          "expenses": {
+            "State Staff": {
+              "Accountant III": [109000, 3, 327000],
+              "Other Funding Amount": 6673,
+              "State Staff Subtotal": 320327
+            },
+            "Other State Expenses": {
+              "Travel": [35000],
+              "Other Funding Amount": 714,
+              "Other State Expenses Subtotal": 34286
+            },
+            "Private Contractor": {
+              "Bob the Builder": [30000],
+              "Other Funding Amount": 612,
+              "Private Contractor Subtotal": 29388
+            }
+          },
+          "totalComputableMedicaidCost": 384000
+        },
+        {
+          "expenses": {
+            "State Staff": {
+              "Public Information Officer": [170000, 0.5, 85000],
+              "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)": [
+                111102, 1, 111102
+              ],
+              "Other Funding Amount": 6353,
+              "State Staff Subtotal": 189749
+            },
+            "Other State Expenses": {
+              "Hardware, software, and licensing": [40000],
+              "Equipment and supplies": [200],
+              "Other Funding Amount": 1302,
+              "Other State Expenses Subtotal": 38898
+            },
+            "Private Contractor": {
+              "Tech Consulting Inc.": [40000],
+              "Interface Vendor Inc.": [1500],
+              "Other Funding Amount": 1344,
+              "Private Contractor Subtotal": 40156
+            }
+          },
+          "totalComputableMedicaidCost": 268802
+        }
+      ]
+    }
+  ],
+  "dataSummaryBudgetTable": {
+    "byTypes": {
+      "HIT": [
+        {
+          "State Staff": [74721, 224162, 298883],
+          "Other State Expenses": [8631, 25893, 34524],
+          "Private Contractor": [7398, 22194, 29592],
+          "Subtotal": [90750, 272249, 362999]
+        },
+        {
+          "State Staff": [160164, 160164, 320327],
+          "Other State Expenses": [17143, 17143, 34286],
+          "Private Contractor": [14694, 14694, 29388],
+          "Subtotal": [192001, 192001, 384001]
+        },
+        {
+          "State Staff": [234885, 384326, 619210],
+          "Other State Expenses": [25774, 43036, 68810],
+          "Private Contractor": [22092, 36888, 58980],
+          "Subtotal": [282751, 464250, 747000]
+        }
+      ],
+      "HIE": [
+        {
+          "State Staff": [94854, 94854, 189707],
+          "Other State Expenses": [19955, 19955, 39910],
+          "Private Contractor": [20448, 20448, 40895],
+          "Subtotal": [135257, 135257, 270512]
+        },
+        {
+          "State Staff": [18975, 170774, 189749],
+          "Other State Expenses": [3890, 35008, 38898],
+          "Private Contractor": [4016, 36140, 40156],
+          "Subtotal": [26881, 241922, 268803]
+        },
+        {
+          "State Staff": [113829, 265628, 379456],
+          "Other State Expenses": [23845, 54963, 78808],
+          "Private Contractor": [24464, 56588, 81051],
+          "Subtotal": [162138, 377179, 539315]
+        }
+      ],
+      "MMIS": [
+        {
+          "State Staff": [0, 0, 0],
+          "Other State Expenses": [0, 0, 0],
+          "Private Contractor": [0, 0, 0],
+          "Subtotal": [0, 0, 0]
+        },
+        {
+          "State Staff": [0, 0, 0],
+          "Other State Expenses": [0, 0, 0],
+          "Private Contractor": [0, 0, 0],
+          "Subtotal": [0, 0, 0]
+        },
+        {
+          "State Staff": [0, 0, 0],
+          "Other State Expenses": [0, 0, 0],
+          "Private Contractor": [0, 0, 0],
+          "Subtotal": [0, 0, 0]
+        }
+      ]
+    },
+    "totals": {
+      "FFY 2022": [226007, 407506, 633511],
+      "FFY 2023": [218882, 433923, 652804],
+      "Total": [444889, 841429, 1286315]
+    }
+  },
+  "dataQuarterlyFederalShare": {
+    "HIT and HIE": {
+      "byFFY": [
+        {
+          "In-House Costs": [91216, 91216, 91216, 91216, 364864],
+          "Private Contractor Costs": [
+            10660.5, 10660.5, 10660.5, 10660.5, 42642
+          ],
+          "Total Enhanced FFP": [101876.5, 101876.5, 101876.5, 101876.5, 407506]
+        },
+        {
+          "In-House Costs": [95772.25, 95772.25, 95772.25, 95772.25, 383089],
+          "Private Contractor Costs": [
+            12708.5, 12708.5, 12708.5, 12708.5, 50834
+          ],
+          "Total Enhanced FFP": [
+            108480.75, 108480.75, 108480.75, 108480.75, 433923
+          ]
+        }
+      ],
+      "totals": {
+        "In-House Costs": 747953,
+        "Private Contractor Costs": 93476,
+        "Total Enhanced FFP": 841429
+      }
+    },
+    "MMIS": {
+      "byFFY": [
+        {
+          "In-House Costs": [0, 0, 0, 0, 0],
+          "Private Contractor Costs": [0, 0, 0, 0, 0],
+          "Total Enhanced FFP": [0, 0, 0, 0, 0]
+        },
+        {
+          "In-House Costs": [0, 0, 0, 0, 0],
+          "Private Contractor Costs": [0, 0, 0, 0, 0],
+          "Total Enhanced FFP": [0, 0, 0, 0, 0]
+        }
+      ],
+      "totals": {
+        "In-House Costs": 0,
+        "Private Contractor Costs": 0,
+        "Total Enhanced FFP": 0
+      }
+    }
+  },
+  "dataEQIP": [
     {
       "EH Payments": [0, 0, 0, 0, 0],
       "EH Count (optional)": [0, 0, 0, 0, 0],
