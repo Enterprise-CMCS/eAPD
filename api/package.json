@@ -89,7 +89,7 @@
     "file-type": "^16.5.3",
     "form-data": "^4.0.0",
     "jsonpatch": "^3.0.1",
-    "jsonpointer": "^4.1.0",
+    "jsonpointer": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.4",
     "morgan": "^1.10.0",
