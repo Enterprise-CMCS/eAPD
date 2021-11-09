@@ -479,16 +479,16 @@
   },
   "dataEQIP": [
     {
-      "EH Payments": [0, 0, 0, 0, 0],
-      "EH Count (optional)": [0, 0, 0, 0, 0],
-      "EP Payments": [0, 0, 0, 0, 0],
-      "EP Count (optional)": [0, 0, 0, 0, 0]
+      "EH Payments": [500, 500, 500, 500, 2000],
+      "EH Count (optional)": [3, 3, 3, 3, 12],
+      "EP Payments": [250, 350, 200, 300, 1100],
+      "EP Count (optional)": [5, 5, 5, 10, 25]
     },
     {
-      "EH Payments": [0, 0, 0, 0, 0],
-      "EH Count (optional)": [0, 0, 0, 0, 0],
-      "EP Payments": [0, 0, 0, 0, 0],
-      "EP Count (optional)": [0, 0, 0, 0, 0]
+      "EH Payments": [1000, 1000, 1000, 1000, 4000],
+      "EH Count (optional)": [10, 10, 10, 10, 40],
+      "EP Payments": [800, 400, 500, 750, 2450],
+      "EP Count (optional)": [1, 2, 3, 4, 10]
     }
   ]
 }

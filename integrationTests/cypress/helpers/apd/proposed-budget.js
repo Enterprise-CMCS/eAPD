@@ -230,6 +230,15 @@ export const testProposedBudgetWithData = years => {
       });
     });
   });
+
+  describe('Estimated Quarterly Incentive Payments', () => {
+    it('should have the correc values for FFY tables', () => {
+      proposedBudgetPage.fillInEQIPFormByFFY({
+        years,
+        expected: budgetData.dataEQIP
+      });
+    });
+  });
 };
 
 export const testProposedBudgetExportViewWithData = years => {
@@ -293,6 +302,15 @@ export const testProposedBudgetExportViewWithData = years => {
     it('should have the correct values for Total tables', () => {
       proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
         expected: budgetData.dataQuarterlyFederalShare
+      });
+    });
+  });
+
+  describe('Default values for Estimated Quarterly Incentive Payments', () => {
+    it('should have default values for FFY tables', () => {
+      proposedBudgetPage.verifyEQIPViewByFFY({
+        years,
+        expected: budgetData.dataEQIP
       });
     });
   });

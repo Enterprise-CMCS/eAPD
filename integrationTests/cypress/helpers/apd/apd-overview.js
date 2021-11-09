@@ -132,18 +132,19 @@ export const testAPDOverviewWithData = () => {
       apdOverview.introduction
     );
     cy.waitForSave();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
     cy.setTinyMceContent('hit-overview-field', apdOverview.HIT);
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.waitForSave();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
     cy.setTinyMceContent('hie-overview-field', apdOverview.HIE);
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.waitForSave();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
     cy.setTinyMceContent('mmis-overview-field', apdOverview.MMIS);
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.waitForSave();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
   });
 
   it('should handle the navigation buttons', () => {

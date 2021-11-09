@@ -295,6 +295,30 @@ class ProposedBudgetPage {
       .siblings()
       .eq(quarterIndex);
 
+  fillInEQIPFormByFFY = ({ years, expected }) => {
+    years.forEach((ffy, index) => {
+      Object.keys(expected[index]).forEach(type => {
+        expected[index][type].forEach((quarter, quarterIndex) => {
+          if (quarterIndex === expected[index][type].length - 1) {
+            this.getEQIPByFFYAndIncentiveTypeAndQuarter({
+              ffy,
+              type,
+              quarterIndex
+            }).shouldBeCloseTo(expected[index][type][quarterIndex]);
+          } else {
+            this.getEQIPByFFYAndIncentiveTypeAndQuarter({
+              ffy,
+              type,
+              quarterIndex
+            })
+              .find('input')
+              .type(expected[index][type][quarterIndex]);
+          }
+        });
+      });
+    });
+  };
+
   verifyEQIPFormByFFY = ({ years, expected }) => {
     years.forEach((ffy, index) => {
       Object.keys(expected[index]).forEach(type => {
