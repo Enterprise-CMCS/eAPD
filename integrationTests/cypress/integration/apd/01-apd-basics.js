@@ -6,7 +6,7 @@
 /* eslint-disable prefer-arrow-callback */
 
 describe('filling out APD overview section', function () {
-  const page_titles = ['APD Overview', 'Key State Personnel', 'Results of Previous Activities', 'Activities', 'Activity Schedule Summary', 'Proposed Budget', 'Assurances and Compliance', 'Executive Summary', 'Export and Submit'];
+  const pageTitles = ['APD Overview', 'Key State Personnel', 'Results of Previous Activities', 'Activities', 'Activity Schedule Summary', 'Proposed Budget', 'Assurances and Compliance', 'Executive Summary', 'Export and Submit'];
 
   before(() => {
     cy.useStateStaff();
@@ -21,33 +21,33 @@ describe('filling out APD overview section', function () {
   });
 
   it('creates a new APD with current date', () => {
-    var options = { year: 'numeric', month: 'long', day: 'numeric' };
-    var today  = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const today  = new Date();
 
     cy.contains('Create new').click();
 
-    cy.get('.apd--title').contains("Created: " + today.toLocaleDateString("en-US", options));
+    cy.get('.apd--title').contains(`Created: ${  today.toLocaleDateString("en-US", options)}`);
   });
 
   it('confirms Continue buttons redirect to correct sections', () => {
-    cy.wrap(page_titles).each((index) => {
+    cy.wrap(pageTitles).each((index) => {
       cy.get('.ds-h2')
         .should('contain', index);
 
-      if(index != page_titles[page_titles.length - 1]) {
+      if(index !== pageTitles[pageTitles.length - 1]) {
         cy.get('#continue-button').click();
       }
     });
   });
 
   it('confirms Back buttons redirect to correct sections', () => {
-    const reverse_page_titles = page_titles.reverse()
+    const reversePageTitles = pageTitles.reverse()
 
-    cy.wrap(reverse_page_titles).each((index) => {
+    cy.wrap(reversePageTitles).each((index) => {
       cy.get('.ds-h2')
         .should('contain', index);
 
-      if(index != reverse_page_titles[reverse_page_titles.length - 1]) {
+      if(index !== reversePageTitles[reversePageTitles.length - 1]) {
         cy.get('#previous-button').click();
       }
     });
@@ -92,13 +92,13 @@ describe('filling out APD overview section', function () {
   });
 
   it('confirms anchor links redirect to correct sections', () => {
-    const pages_with_anchors = [{parent: 'Key State Personnel', label: 'Key Personnel and Program Management', subnav: '#apd-state-profile-key-personnel'},
+    const pageWithAnchors = [{parent: 'Key State Personnel', label: 'Key Personnel and Program Management', subnav: '#apd-state-profile-key-personnel'},
                                 {parent: 'Results of Previous Activities', label: 'Prior Activities Overview', subnav: ['#prev-activities-outline', '#prev-activities-table']},
                                 {parent: 'Proposed Budget', label: 'Summary Budget by Activity', subnav: ['#summary-schedule-by-activity-table', '#budget-summary-table', '#budget-federal-by-quarter', '#budget-incentive-by-quarter']},
                                 {parent: 'Executive Summary', label: 'Activities Summary', subnav: ['#executive-summary-summary', '#executive-summary-budget-table']}]
 
-    cy.wrap(pages_with_anchors).each((index) => {
-      const subnav = index.subnav;
+    cy.wrap(pageWithAnchors).each((index) => {
+      const {subnav} = index;
 
       cy.get('.ds-c-vertical-nav__label--parent')
         .contains(index.parent)
@@ -116,16 +116,16 @@ describe('filling out APD overview section', function () {
 
 
       if (Array.isArray(subnav)) {
-        cy.wrap(subnav).each((index) => {
-          cy.get(index)
+        cy.wrap(subnav).each((sub) => {
+          cy.get(sub)
             .then((element) => element[0].offsetTop)
-            .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+            .then(() => cy.window().its('scrollY').should('be.gt', 0))
             .then((offset) => cy.window().its('scrollY').should('eq', offset));
         })
       } else {
         cy.get(subnav)
           .then((element) => element[0].offsetTop)
-          .then((offset) => cy.window().its('scrollY').should('be.gt', 0))
+          .then(() => cy.window().its('scrollY').should('be.gt', 0))
           .then((offset) => cy.window().its('scrollY').should('eq', offset));
       }
     });
