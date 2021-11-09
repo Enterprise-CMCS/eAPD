@@ -49,6 +49,7 @@ const SelectAffiliation = ({
 
   const choiceList = availableAffiliations.map(item => {
     const choice = {
+      className: "state-aff-item",
       label: statesWithFederal.find(state => state.id === item).name,
       value: item
     }
@@ -56,6 +57,12 @@ const SelectAffiliation = ({
       choice.defaultChecked = true;
     }
     return choice;
+  })
+
+  const sortedChoiceList = choiceList.sort((a, b) => {
+    if(a.label < b.label) { return -1; }
+    if(a.label > b.label) { return 1; }
+    return 0;
   });
 
   const handleChoiceSelection = e => {
@@ -71,7 +78,7 @@ const SelectAffiliation = ({
     >
       <h1 className="ds-h3">State Affiliation</h1>
       <ChoiceList
-        choices={choiceList}
+        choices={sortedChoiceList}
         label="Please select your state affiliation"
         labelClassName="ds-u-font-weight--normal ds-u-padding-bottom--1"
         name="radio_choices"
