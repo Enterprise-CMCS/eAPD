@@ -105,7 +105,7 @@ describe('filling out APD overview section', () => {
   });
 
   it('confirms anchor links redirect to correct sections', () => {
-    const pagesWithAnchors = [
+    const pageWithAnchors = [
       {
         parent: 'Key State Personnel',
         label: 'Key Personnel and Program Management',
@@ -136,7 +136,7 @@ describe('filling out APD overview section', () => {
       }
     ];
 
-    cy.wrap(pagesWithAnchors).each(index => {
+    cy.wrap(pageWithAnchors).each(index => {
       const { subnav } = index;
 
       cy.get('.ds-c-vertical-nav__label--parent')
@@ -152,8 +152,8 @@ describe('filling out APD overview section', () => {
         });
 
       if (Array.isArray(subnav)) {
-        cy.wrap(subnav).each(subnavIndex => {
-          cy.get(subnavIndex)
+        cy.wrap(subnav).each(sub => {
+          cy.get(sub)
             .then(element => element[0].offsetTop)
             .then(() => cy.window().its('scrollY').should('be.gt', 0))
             .then(offset => cy.window().its('scrollY').should('eq', offset));
