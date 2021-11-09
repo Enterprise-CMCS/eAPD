@@ -16,7 +16,7 @@ const thisFFY = (() => {
 
 export const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
 
-describe('filling out state admin delegation form', function () {
+describe('adding and removing state admin delegation forms', function () {
   let delegateStateAdminFormUrl;
 
   const getInputByLabel = (label) => {
@@ -33,6 +33,7 @@ describe('filling out state admin delegation form', function () {
     cy.findByRole('button', { name: /Add State Admin Letter/i }).click();
     cy.wait(1000);
     cy.location('pathname').then(pathname => (delegateStateAdminFormUrl = pathname));
+    cy.task('db:resetcertification', { email: 'Sincere@april.biz' });
   });
   
   beforeEach(function () {
@@ -102,4 +103,26 @@ describe('filling out state admin delegation form', function () {
     
     cy.contains('Federal Administrator Portal').should('be.visible');
   });
+  
+    
+  it('allows a letter to be deleted', () => {
+    cy.contains('Cancel').click(); // Return to letters tab
+    
+    cy.fixture('users').then(userData => {
+      cy.contains(userData[0].name)
+      .parent('tr')
+      .within(() => {
+        // all searches are automatically rooted to the found tr element
+        cy.get('td').eq(6).contains('button', 'Delete').click();
+      })
+      
+      cy.contains('Delete Certification?');
+      cy.get('#react-aria-modal-dialog').within(() => {
+        cy.get('button').contains('Delete').click();
+      })
+      
+      cy.contains(userData[0].name).should('not.exist');
+    });
+    
+  })
 });
