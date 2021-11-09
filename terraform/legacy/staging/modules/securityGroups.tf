@@ -2,8 +2,8 @@ data "aws_vpc" "HI-C-dev-vpc" {
   id = "vpc-00a77739f6d1c4175"
 }
 
-resource "aws_security_group" "eapd-staning-mongo-ec2" {
-  name        = "eapd-staning-mongo-ec2"
+resource "aws_security_group" "eapd-staging-mongo-ec2" {
+  name        = "eapd-staging-mongo-ec2"
   description = "Mongo instance security group"
   vpc_id      = data.aws_vpc.HI-C-dev-vpc.id
 
@@ -31,7 +31,7 @@ resource "aws_security_group" "eapd-staning-mongo-ec2" {
   }
 
   tags = {
-    Name = "eapd-staning-mongo-ec2"
+    Name = "eapd-staging-mongo-ec2"
     Terraform = "Yes"
   }
 }

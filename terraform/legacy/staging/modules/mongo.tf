@@ -15,7 +15,7 @@ resource "aws_instance" "eapd_mongo_staging" {
 #    ami                         = data.aws_ami.latest_golden_image.id
     ami                         = "ami-0ca43bc063f64efe3"
     instance_type               = "m3.medium"
-    vpc_security_group_ids      = ["sg-01e01435dbbe6ce32"]
+    vpc_security_group_ids      = ["sg-01e01435dbbe6ce32", "eapd-staging-mongo-ec2"]
     subnet_id                   = "subnet-07e1b9ed6ed5fb8c7"
     key_name                    = "eapd_bbrooks"
     user_data                   = "../../../bin/prod-deploy/aws.user-data.sh"
