@@ -196,6 +196,7 @@ describe('Affiliation', () => {
       cy.findByRole('heading', { name: /Colorado APDs/ }).should('exist');
     });
   });
+
   describe('New user selecting affiliation the first time and the requesting multiple additional affiliations', () => {
     before(() => cy.task('db:resetnorole'));
 
@@ -208,7 +209,7 @@ describe('Affiliation', () => {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByRole('heading', { name: /(Alabama|Alaska) APDs/ }).should(
+      cy.findByRole('heading', { name: /Alaska APDs/ }).should(
         'exist'
       );
 
@@ -234,9 +235,10 @@ describe('Affiliation', () => {
       cy.findByRole('button', { name: /norole/ }).click();
       cy.findByText(/Switch State Affiliation/).click();
 
-      cy.findByText(/Alaska/).should('exist');
-      cy.findByText(/Alabama/).should('exist');
-      cy.findByText(/Colorado/).should('exist');
+      cy.get('.state-aff-item').then($elements => {
+        const stateList = [...$elements].map($el => $el.innerText);
+        expect(stateList).to.deep.equal([...stateList].sort());
+      });
 
       cy.findByText(/Colorado/).click();
 
