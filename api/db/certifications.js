@@ -22,7 +22,8 @@ const matchStateAdminCertification = async (
   { db = knex, updateAffiliation = updateAuthAffiliation } = {}
 ) => {
   const transaction = await db.transaction();
-
+  console.log("matchStateAdminCertification, data object:", data);
+  
   try {
     await transaction('state_admin_certifications')
       .where({ id: data.certificationId })
