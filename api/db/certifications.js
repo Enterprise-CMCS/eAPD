@@ -25,18 +25,21 @@ const matchStateAdminCertification = async (
   console.log("matchStateAdminCertification, data object:", data);
   
   try {
-    await transaction('state_admin_certifications')
+    const certUpdate = await transaction('state_admin_certifications')
       .where({ id: data.certificationId })
       .update({ affiliationId: data.affiliationId });
+    console.log("certUpdate:", certUpdate);
 
-    await transaction('state_admin_certifications_audit').insert({
+    const certAudit = await transaction('state_admin_certifications_audit').insert({
       changeDate: new Date(),
       changedBy: data.changedBy,
       changeType: 'match',
       certificationId: data.certificationId
     });
+    console.log("certAudit:", certAudit);
 
-    await updateAffiliation(data, { transaction });
+    const affiliationUpdate = await updateAffiliation(data, { transaction });
+    console.log("affiliationUpdate:", affiliationUpdate);
 
     await transaction.commit();
     return { error: null };
