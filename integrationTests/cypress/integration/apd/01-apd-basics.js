@@ -27,7 +27,7 @@ describe('filling out APD overview section', () => {
         cy.findAllByText('Delete APD').click();
       }
     });
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
   });
 
   it('creates a new APD with current date', () => {

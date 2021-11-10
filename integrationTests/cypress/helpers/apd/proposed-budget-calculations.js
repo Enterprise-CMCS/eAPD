@@ -139,6 +139,7 @@ export const calculateCostsByActivityOrProgramType = ({
         activity.staff[yearIndex].items.forEach(item => {
             stateStaff[item.name] = [item.salary, item.ftes, item.costs];
           });
+        
         stateStaff.['Other Funding Amount'] = activity.staff[yearIndex].other;
         stateStaff.['State Staff Subtotal'] = activity.staff[yearIndex].subtotal;
 

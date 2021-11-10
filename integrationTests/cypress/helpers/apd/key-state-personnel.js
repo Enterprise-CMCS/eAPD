@@ -89,7 +89,7 @@ export const testDefaultKeyStatePersonnel = years => {
     cy.findByRole('button', { name: /Add Key Personnel/i }).click();
     cy.waitForSave();
     cy.findByRole('button', { name: /Done/i }).click();
-    cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
 
     // Check for default values
     cy.get('.form-and-review-list')
@@ -121,7 +121,7 @@ export const testDefaultKeyStatePersonnel = years => {
       .check({ force: true });
     cy.waitForSave();
     cy.findByRole('button', { name: /Done/i }).click();
-    cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
 
     // Check for default values
     cy.get('.form-and-review-list')

@@ -11,7 +11,7 @@ export const testDefaultProposedBudget = years => {
     proposedBudgetPage = new ProposedBudgetPage();
     const activityPage = new ActivitySchedulePage();
     cy.goToActivityScheduleSummary();
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     activityList = activityPage.getActivityScheduleOverviewNameList();
   });
 
@@ -92,7 +92,7 @@ export const testDefaultProposedBudgetExportView = years => {
   before(() => {
     proposedBudgetPage = new ProposedBudgetPage();
     const exportPage = new ExportPage();
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     activityList = exportPage.getActivityScheduleOverviewNameList();
   });
 
@@ -168,7 +168,7 @@ export const testProposedBudgetWithData = years => {
     proposedBudgetPage = new ProposedBudgetPage();
     const activityPage = new ActivitySchedulePage();
     cy.goToActivityScheduleSummary();
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     activityList = activityPage.getActivityScheduleOverviewNameList();
   });
 
@@ -249,7 +249,7 @@ export const testProposedBudgetExportViewWithData = years => {
   before(() => {
     proposedBudgetPage = new ProposedBudgetPage();
     const exportPage = new ExportPage();
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     activityList = exportPage.getActivityScheduleOverviewNameList();
   });
 

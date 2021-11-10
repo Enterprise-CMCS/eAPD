@@ -5,6 +5,9 @@
   "defaultCommandTimeout": 36000,
   "videoUploadOnPasses": false,
   "env": {
+    "cypress-react-selector": {
+      "root": "#app"
+    },
     "API": "http://localhost:8081",
     "fedadmin": "fedadmin",
     "fedadmin_pw": "",

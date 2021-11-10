@@ -1,4 +1,5 @@
 import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no-extraneous-dependencies
+import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dependencies
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
@@ -61,6 +62,7 @@ Cypress.Commands.add('login', (username, password) => {
     expiry: EXPIRY_DATE
   });
   cy.visit('/');
+  cy.waitForReact();
   cy.findByLabelText('EUA ID').type(username);
   cy.findByLabelText('Password').type(password, {
     log: false
@@ -86,6 +88,7 @@ Cypress.Commands.add('useJwtUser', (username, url) => {
     }
   );
   cy.visit(url || '/');
+  cy.waitForReact();
 });
 
 Cypress.Commands.add('useSysAdmin', url => {
@@ -164,22 +167,13 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('waitForSave', () => {
-  cy.document()
-    .its('body')
-    .find('header')
-    .then($header => {
-      if ($header) {
-        if ($header.text().includes('Saving')) {
-          cy.wrap($header)
-            .contains('Saved', { timeout: 10000 })
-            .should('exist');
-        }
-
-        cy.wrap($header)
-          .contains(/Saved|Last saved/i)
-          .should('exist');
-      }
-    });
+  cy.waitUntil(() =>
+    cy
+      .document()
+      .its('body')
+      .find('header')
+      .then($header => $header.text().match(/Saved|Last saved/i) !== null)
+  );
 });
 
 Cypress.Commands.add('goToKeyStateProgramManagememt', () => {

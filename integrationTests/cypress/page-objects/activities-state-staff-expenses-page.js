@@ -70,7 +70,7 @@ class ActivitiesStateStaffExpensesPage {
           });
       });
 
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
@@ -169,7 +169,7 @@ class ActivitiesStateStaffExpensesPage {
       cy.waitForSave();
     });
 
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
     cy.findByRole('button', { name: /Done/i }).click();
   };
 

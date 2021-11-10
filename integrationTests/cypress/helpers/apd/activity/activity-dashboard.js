@@ -8,7 +8,7 @@ export const testDefaultActivityDashboard = () => {
     cy.goToActivityDashboard();
 
     cy.url().should('include', '/activities');
-    cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
+    // cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
   });
 
   it('should go to the correct page', () => {

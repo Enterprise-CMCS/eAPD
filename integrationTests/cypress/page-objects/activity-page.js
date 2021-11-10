@@ -46,8 +46,6 @@ class ActivityPage {
     cy.contains(heading).should('exist');
     cy.get('[class="ds-c-button ds-c-button--danger"]').click();
     cy.waitForSave();
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
-    cy.waitForSave();
     cy.contains(heading).should('not.exist');
     cy.contains(alert).should('exist');
     cy.contains(check).should('not.exist');

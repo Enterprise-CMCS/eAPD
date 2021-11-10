@@ -57,7 +57,7 @@ import {
 } from '../../helpers/apd/executive-summary';
 
 // Tests the default values of an APD
-describe('Default APD', () => {
+describe('Default APD', { tags: ['@apd', '@default'] }, () => {
   let apdUrl;
   const years = [];
 

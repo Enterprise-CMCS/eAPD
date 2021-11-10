@@ -158,11 +158,9 @@ export const testOutcomesAndMilestonesWithData = () => {
       for (let i = 0; i < 2; i += 1) {
         if (i === 0) {
           cy.findByRole('button', { name: /Add Milestone/i }).click();
-          cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
           cy.waitForSave();
         } else {
           cy.findByRole('button', { name: /Add Milestone/i }).click();
-          cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
           cy.waitForSave();
           cy.findByRole('button', { name: /Done/i }).click();
           cy.findAllByText('Edit').eq(2).click();
