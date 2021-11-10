@@ -145,7 +145,17 @@ workflows:
               ignore:
                 - main
           requires:
+            - validate openapi
+            - owasp zap scan
+            - frontend lint
+            - backend lint
             - frontend dependency vulnerability scan
+            - backend dependency vulnerability scan
+            - frontend test
+            - yaml test
+            - backend unit test
+            - backend api endpoint test
+            
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
@@ -489,7 +499,7 @@ jobs:
       - run:
           name: pull owasp zap docker image
           command: |
-            docker login -u $DOCKER_v -p $DOCKER_OWASP_ZAP_SCAN_PW
+            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker pull owasp/zap2docker-stable
       - run:
           name: run owasp zap
