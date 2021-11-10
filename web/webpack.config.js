@@ -39,7 +39,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [['@babel/preset-env', { targets: 'ie 11' }]],
+            presets: [['@babel/preset-env', { targets: 'defaults, ie >= 11' }]],
             plugins: [
               '@babel/plugin-proposal-class-properties',
               '@babel/plugin-transform-runtime'

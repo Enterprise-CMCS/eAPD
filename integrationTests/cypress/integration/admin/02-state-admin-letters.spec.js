@@ -10,7 +10,6 @@ describe('state admin letters table', () => {
 
   before(() => {
     cy.useFedAdmin();
-    cy.location('pathname').then(pathname => '/');
   });
 
   beforeEach(() => {

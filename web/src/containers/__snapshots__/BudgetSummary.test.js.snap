@@ -154,277 +154,283 @@ exports[`budget summary component header row renders 2`] = `
 `;
 
 exports[`budget summary component renders correctly 1`] = `
-<Fragment>
-  <h4
-    aria-hidden="true"
-    className="ds-h4"
-  >
-    HIT Activities
-  </h4>
-  <table
-    className="budget-table"
-    key="1"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+<div>
+  <div>
+    <h4
+      aria-hidden="true"
+      className="ds-h4 header-with-top-margin"
     >
-      FFY 
-      1
-       HIT Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="1"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "hit data",
-          ]
-        }
-        year="1"
-      />
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-    key="2"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+      HIT Activities
+    </h4>
+    <table
+      className="budget-table"
+      key="1"
     >
-      FFY 
-      2
-       HIT Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="2"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "hit data",
-          ]
-        }
-        year="2"
-      />
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-    key="total"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        1
+         HIT Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="1"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "hit data",
+            ]
+          }
+          year="1"
+        />
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      key="2"
     >
-      FFY 
-      total
-       HIT Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="total"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "hit data",
-          ]
-        }
-        year="total"
-      />
-    </tbody>
-  </table>
-  <h4
-    aria-hidden="true"
-    className="ds-h4"
-  >
-    HIE Activities
-  </h4>
-  <table
-    className="budget-table"
-    key="1"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        2
+         HIT Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="2"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "hit data",
+            ]
+          }
+          year="2"
+        />
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      key="total"
     >
-      FFY 
-      1
-       HIE Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="1"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "hie data",
-          ]
-        }
-        year="1"
-      />
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-    key="2"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        total
+         HIT Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="total"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "hit data",
+            ]
+          }
+          year="total"
+        />
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h4
+      aria-hidden="true"
+      className="ds-h4 header-with-top-margin"
     >
-      FFY 
-      2
-       HIE Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="2"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "hie data",
-          ]
-        }
-        year="2"
-      />
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-    key="total"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+      HIE Activities
+    </h4>
+    <table
+      className="budget-table"
+      key="1"
     >
-      FFY 
-      total
-       HIE Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="total"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "hie data",
-          ]
-        }
-        year="total"
-      />
-    </tbody>
-  </table>
-  <h4
-    aria-hidden="true"
-    className="ds-h4"
-  >
-    MMIS Activities
-  </h4>
-  <table
-    className="budget-table"
-    key="1"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        1
+         HIE Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="1"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "hie data",
+            ]
+          }
+          year="1"
+        />
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      key="2"
     >
-      FFY 
-      1
-       MMIS Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="1"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "mmis data",
-          ]
-        }
-        year="1"
-      />
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-    key="2"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        2
+         HIE Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="2"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "hie data",
+            ]
+          }
+          year="2"
+        />
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      key="total"
     >
-      FFY 
-      2
-       MMIS Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="2"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "mmis data",
-          ]
-        }
-        year="2"
-      />
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-    key="total"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        total
+         HIE Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="total"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "hie data",
+            ]
+          }
+          year="total"
+        />
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h4
+      aria-hidden="true"
+      className="ds-h4 header-with-top-margin"
     >
-      FFY 
-      total
-       MMIS Activities
-    </caption>
-    <thead>
-      <HeaderRow
-        yr="total"
-      />
-    </thead>
-    <tbody>
-      <DataRowGroup
-        data={Object {}}
-        entries={
-          Array [
-            "mmis data",
-          ]
-        }
-        year="total"
-      />
-    </tbody>
-  </table>
+      MMIS Activities
+    </h4>
+    <table
+      className="budget-table"
+      key="1"
+    >
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        1
+         MMIS Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="1"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "mmis data",
+            ]
+          }
+          year="1"
+        />
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      key="2"
+    >
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        2
+         MMIS Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="2"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "mmis data",
+            ]
+          }
+          year="2"
+        />
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      key="total"
+    >
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        total
+         MMIS Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          yr="total"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          data={Object {}}
+          entries={
+            Array [
+              "mmis data",
+            ]
+          }
+          year="total"
+        />
+      </tbody>
+    </table>
+  </div>
   <table
     className="budget-table"
   >
@@ -524,5 +530,5 @@ exports[`budget summary component renders correctly 1`] = `
       </tr>
     </tbody>
   </table>
-</Fragment>
+</div>
 `;

@@ -83,57 +83,67 @@ HeaderRow.propTypes = {
 };
 
 const BudgetSummary = ({ activities, data, years }) => (
-  <Fragment>
-    <h4 className="ds-h4" aria-hidden="true">
-      HIT Activities
-    </h4>
-    {[...years, 'total'].map(yr => (
-      <table className="budget-table" key={yr}>
-        <caption className="ds-u-visibility--screen-reader">
-          FFY {yr} HIT Activities
-        </caption>
-        <thead>
-          <HeaderRow yr={yr} />
-        </thead>
-        <tbody>
-          <DataRowGroup data={data.hit} entries={activities.hit} year={yr} />
-        </tbody>
-      </table>
-    ))}
+  <div>
+    <div>
+      <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
+        HIT Activities
+      </h4>
+      {[...years, 'total'].map(yr => (
+        <table className="budget-table" key={yr}>
+          <caption className="ds-u-visibility--screen-reader">
+            FFY {yr} HIT Activities
+          </caption>
+          <thead>
+            <HeaderRow yr={yr} />
+          </thead>
+          <tbody>
+            <DataRowGroup data={data.hit} entries={activities.hit} year={yr} />
+          </tbody>
+        </table>
+      ))}
+    </div>
 
-    <h4 className="ds-h4" aria-hidden="true">
-      HIE Activities
-    </h4>
-    {[...years, 'total'].map(yr => (
-      <table className="budget-table" key={yr}>
-        <caption className="ds-u-visibility--screen-reader">
-          FFY {yr} HIE Activities
-        </caption>
-        <thead>
-          <HeaderRow yr={yr} />
-        </thead>
-        <tbody>
-          <DataRowGroup data={data.hie} entries={activities.hie} year={yr} />
-        </tbody>
-      </table>
-    ))}
+    <div>
+      <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
+        HIE Activities
+      </h4>
+      {[...years, 'total'].map(yr => (
+        <table className="budget-table" key={yr}>
+          <caption className="ds-u-visibility--screen-reader">
+            FFY {yr} HIE Activities
+          </caption>
+          <thead>
+            <HeaderRow yr={yr} />
+          </thead>
+          <tbody>
+            <DataRowGroup data={data.hie} entries={activities.hie} year={yr} />
+          </tbody>
+        </table>
+      ))}
+    </div>
 
-    <h4 className="ds-h4" aria-hidden="true">
-      MMIS Activities
-    </h4>
-    {[...years, 'total'].map(yr => (
-      <table className="budget-table" key={yr}>
-        <caption className="ds-u-visibility--screen-reader">
-          FFY {yr} MMIS Activities
-        </caption>
-        <thead>
-          <HeaderRow yr={yr} />
-        </thead>
-        <tbody>
-          <DataRowGroup data={data.mmis} entries={activities.mmis} year={yr} />
-        </tbody>
-      </table>
-    ))}
+    <div>
+      <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
+        MMIS Activities
+      </h4>
+      {[...years, 'total'].map(yr => (
+        <table className="budget-table" key={yr}>
+          <caption className="ds-u-visibility--screen-reader">
+            FFY {yr} MMIS Activities
+          </caption>
+          <thead>
+            <HeaderRow yr={yr} />
+          </thead>
+          <tbody>
+            <DataRowGroup
+              data={data.mmis}
+              entries={activities.mmis}
+              year={yr}
+            />
+          </tbody>
+        </table>
+      ))}
+    </div>
 
     <table className="budget-table">
       <caption className="ds-h4">Activities Totals</caption>
@@ -178,7 +188,7 @@ const BudgetSummary = ({ activities, data, years }) => (
         })}
       </tbody>
     </table>
-  </Fragment>
+  </div>
 );
 
 BudgetSummary.propTypes = {
