@@ -1,9 +1,13 @@
 const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
-const { getUserByID } = require('../db');
+const { getUserByID, updateAuthAffiliation } = require('../db');
 const { getStateById } = require('../db/states.js');
-const { getUserPermissionsForStates: actualGetUserPermissionsForStates } = require('../db/auth');
+const { 
+  getUserPermissionsForStates: actualGetUserPermissionsForStates,
+  getAffiliationByState: actualGetAffiliationByState
+} = require('../db/auth');
+// const { updateAffiliation } = require('../db/affiliations.js');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -120,6 +124,39 @@ const exchangeToken = async (
   return user;
 };
 
+const verifyExpiration = async (
+  req,
+  user,
+  stateId,
+  {
+    getAffiliationByState_ = actualGetAffiliationByState,
+    updateAffiliation_ = updateAuthAffiliation
+  } = {}
+) => {
+  const stateAffiliation = await getAffiliationByState_(user.id, stateId);
+  
+  if (stateAffiliation.expiration === null) {
+    return null;
+  }
+  
+  if (stateAffiliation.expiration < new Date()) {
+    return await updateAffiliation_({
+      affiliationId: stateAffiliation.id,
+      newRoleId: -1,
+      newStatus: 'revoked',
+      changedBy: null,
+      stateId: stateAffiliation.stateId,
+      ffy: null
+    })
+    .then((res) => {
+      return null;
+    })
+    .catch(e => `Error updating affiliation: ${e}`)
+  }
+    
+  return null;
+};
+
 const changeState = async (
   user,
   stateId,
@@ -152,7 +189,8 @@ if (process.env.NODE_ENV === 'test') {
     verifyEAPDToken: mockVerifyEAPDJWT,
     exchangeToken,
     actualVerifyEAPDToken: verifyEAPDToken,
-    changeState
+    changeState,
+    verifyExpiration
   };
 } else {
   module.exports = {
@@ -162,6 +200,7 @@ if (process.env.NODE_ENV === 'test') {
     sign,
     verifyEAPDToken,
     exchangeToken,
-    changeState
+    changeState,
+    verifyExpiration
   };
 }
