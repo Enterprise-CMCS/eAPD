@@ -27,4 +27,5 @@ resource "aws_instance" "eapd_mongo_staging" {
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
         Terraform = "True"
     }
+    depends_on = [aws_security_group.eapd-staging-mongo-ec2]
 }
