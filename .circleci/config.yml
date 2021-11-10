@@ -239,8 +239,8 @@ jobs:
     docker:
       - image: node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_INSTALL_DEPS_UN
+          password: $DOCKER_INSTALL_DEPS_PW
     steps:
       - checkout
       - restore_cache:
@@ -269,8 +269,8 @@ jobs:
     docker:
       - image: circleci/node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_VALIDATE_OPENAPI_UN
+          password: $DOCKER_VALIDATE_OPENAPI_PW
     steps:
       - checkout
       - setup_remote_docker
@@ -475,25 +475,25 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker build -t cms-eapd/api ./
       - run:
           name: start everything up
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_v -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker pull owasp/zap2docker-stable
       - run:
           name: run owasp zap
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
