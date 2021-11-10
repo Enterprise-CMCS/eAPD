@@ -39,7 +39,6 @@ module.exports = (
           newRoleId: stateAdminId,
           newStatus: 'approved'
         });
-        console.log("error from put.js endpoint:", error);
 
         if (error) {
           return res.status(400).send({ message: 'Unable to complete state admin certification' }).end();

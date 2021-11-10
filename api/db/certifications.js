@@ -22,24 +22,20 @@ const matchStateAdminCertification = async (
   { db = knex, updateAffiliation = updateAuthAffiliation } = {}
 ) => {
   const transaction = await db.transaction();
-  console.log("matchStateAdminCertification, data object:", data);
   
   try {
-    const certUpdate = await transaction('state_admin_certifications')
+    await transaction('state_admin_certifications')
       .where({ id: data.certificationId })
       .update({ affiliationId: data.affiliationId });
-    console.log("certUpdate:", certUpdate);
 
-    const certAudit = await transaction('state_admin_certifications_audit').insert({
+    await transaction('state_admin_certifications_audit').insert({
       changeDate: new Date(),
       changedBy: data.changedBy,
       changeType: 'match',
       certificationId: data.certificationId
     });
-    console.log("certAudit:", certAudit);
 
-    const affiliationUpdate = await updateAffiliation(data, { transaction });
-    console.log("affiliationUpdate:", affiliationUpdate);
+    await updateAffiliation({...data, transaction });
 
     await transaction.commit();
     return { error: null };
