@@ -39,13 +39,13 @@ git clone https://github.com/CMSgov/eAPD.git
 ```
 
 If you can't use git for some reason, you can also download the most recent
-code as [a ZIP file](https://github.com/CMSgov/eAPD/archive/master.zip).
+code as [a ZIP file](https://github.com/CMSgov/eAPD/archive/refs/heads/main.zip).
 
 ### Setting up environment variables
 
 The app uses Okta for authentication. If you do not have an Okta application already
 set up, you can create an Okta account and Okta application following these
-[instructions](https://developer.okta.com/docs/guides/sign-into-spa/react/before-you-begin/).
+[instructions](https://developer.okta.com/docs/guides/sign-into-spa/react/main/).
 Set the following environment variables:
 
 ```shell
@@ -53,12 +53,9 @@ export OKTA_DOMAIN= #from admin, or Applications -> (your application) -> Genera
 export OKTA_SERVER_ID= #from admin, API -> Authorization Server, and the value under Name
 export OKTA_CLIENT_ID= #from admin, or Applications -> (your application) -> General
 export OKTA_API_KEY= #from admin, API -> Tokens -> Create Token, and the Token Value
-```
-In addition, the app will issue a JWT for internal authentication.  This requires a separate secret.
-You will need to create one and export it to your environment using:
-
-```shell
-export JWT_SECRET= #Your secret.  Should be at lest 32 truly random characters (letter and numbers) in production.
+export JWT_SECRET=# any string is fine here.  It does affect your security posture, but for local development it doesn't matter.
+export MONGO_DATABASE="eapd" #This is only a local value.  It will be different in production
+export MONGO_URL="mongodb://mongo:cms@localhost:27017/eapd" #This is only a local value.  It will be different in production
 ```
 
 
@@ -114,6 +111,8 @@ for information about running tests.
 Check out the
 [developer documentation](https://github.com/CMSgov/eAPD/wiki/Development-index)
 for a deeper dive into how the app works.
+
+Check out [our troubleshooting guide](https://github.com/CMSgov/eAPD/wiki/Troubleshooting-Development-Environment) if you run into any difficulties.
 
 ## Contributing
 
