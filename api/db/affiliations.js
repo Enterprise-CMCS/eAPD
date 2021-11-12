@@ -158,13 +158,35 @@ const getAllPopulatedAffiliations = async ({
   return reduceAffiliations_(affiliations);
 };
 
-const updateAuthAffiliation = async({
+const getAffiliationMatches = async ({
+  stateId,
+  db = knex
+}) => {
+  const query = db('auth_affiliations')
+    .select(selectedColumns)
+    .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+    .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+
+  return query
+    .where('state_id', stateId)
+    .andWhere('status', 'requested')
+    // eslint-disable-next-line func-names
+    .orWhere(function() {
+      this
+      .where('state_id', stateId)
+      .andWhere('status', 'approved')
+      .andWhere('auth_roles.name', 'eAPD State Staff')
+    });
+};
+
+const updateAuthAffiliation = async ({
   db = knex,
   affiliationId,
   newRoleId,
   newStatus,
   changedBy,
-  stateId
+  stateId,
+  ffy
 }) => {
   // Check that user is not editing themselves
   const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
@@ -189,6 +211,9 @@ const updateAuthAffiliation = async({
     if (roleName === 'eAPD State Staff' || roleName === 'eAPD State Contractor') {
       expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
     }
+    if (roleName === 'eAPD State Admin') {
+      expirationDate = ffy === undefined ? null : new Date(ffy, '09', '01');
+    }
   }
   
   const authAffiliationAudit = {
@@ -211,8 +236,7 @@ const updateAuthAffiliation = async({
       return db('auth_affiliation_audit')
         .insert(authAffiliationAudit)
     })
-
-}
+};
 
 module.exports = {
   getAffiliationsByStateId,
@@ -223,6 +247,7 @@ module.exports = {
   reduceAffiliations,
   getAllPopulatedAffiliations,
   getAffiliationsByUserId,
+  getAffiliationMatches,
   updateAuthAffiliation,
   selectedColumns
 };

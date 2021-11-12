@@ -1,11 +1,12 @@
 /* eslint-disable camelcase */
 const knex = require('./knex');
 
+const { updateAuthAffiliation } = require('./affiliations');
+
 const addStateAdminCertification = (
   data,
   { db = knex } = {}
 ) => {
-    
   return db('state_admin_certifications')
     .insert({...data}, ['id'])
     .then(ids => {
@@ -17,6 +18,55 @@ const addStateAdminCertification = (
           certificationId: ids[0].id
         })
     })
+};
+
+const archiveStateAdminCertification = async (
+  data,
+  { db = knex } = {}
+) => {
+  const record = await db('state_admin_certifications').select('status', 'affiliationId').where('id', data.id).first();
+  if ( record.affiliationId !== null ) {
+    return { error: 'certification is already matched'};
+  }
+  if ( record.status === 'archived' ) {
+    return { error: 'certification is already archived' };
+  }
+  return db('state_admin_certifications')
+    .where('id', data.id).first()
+    .update({ 'status': 'archived' })
+    .then(() => {
+      return db('state_admin_certifications_audit')
+        .insert({
+          changeDate: new Date(),
+          changedBy: data.archived_by,
+          changeType: 'remove',
+          certificationId: data.id
+        })
+    })
+};
+
+// Update the state admin certification and the associated auth affiliation
+const matchStateAdminCertification = async (
+  data,
+  { db = knex, updateAffiliation = updateAuthAffiliation } = {}
+) => {
+  const transaction = await db.transaction();
+  
+  await transaction('state_admin_certifications')
+    .where({ id: data.certificationId })
+    .update({ affiliationId: data.affiliationId })
+    
+  await transaction('state_admin_certifications_audit')
+    .insert({
+      changeDate: new Date(),
+      changedBy: data.changedBy,
+      changeType: 'match',
+      certificationId: data.certificationId
+    })  
+    
+  await updateAffiliation(data, { transaction })
+  
+  await transaction.commit();
 };
 
 const getStateAdminCertifications = (
@@ -40,6 +90,7 @@ const getStateAdminCertifications = (
       'state_admin_certifications.fileUrl',
       'state_admin_certifications.ffy'
     ])
+    .where('status', '=', 'active')
     .countDistinct('affiliations.id as potentialMatches')
     .leftOuterJoin('okta_users', function oktaCertificationsJoin() {
       this
@@ -60,5 +111,6 @@ const getStateAdminCertifications = (
 module.exports = {
   addStateAdminCertification,
   getStateAdminCertifications,
-
+  matchStateAdminCertification,
+  archiveStateAdminCertification
 };

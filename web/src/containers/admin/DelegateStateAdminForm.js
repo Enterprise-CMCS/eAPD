@@ -9,6 +9,7 @@ import { STATES } from '../../util/states';
 import NumberField from '../../components/NumberField';
 import DocumentUpload from '../../components/DocumentUpload';
 
+
 const dropdownOptions = STATES.map(item => {
   return {
     label: item.name,
@@ -22,10 +23,8 @@ const yearChoices = twoYears.map(year => ({
   value: year
 }));
 
-
 const DelegateStateAdminForm = () => {
   const history = useHistory();
-
   const [isFormComplete, setIsFormComplete] = useState(false);
   
   const initialState = {
@@ -57,7 +56,7 @@ const DelegateStateAdminForm = () => {
     const hasFalseValues = Object.values(state).every(element => Boolean(element));
     setIsFormComplete(hasFalseValues);
   }, [state])
-  
+ 
   const handleFileChange = fileUrl => {
     dispatch({type: 'update', field: 'fileUrl', payload: fileUrl });
   };
