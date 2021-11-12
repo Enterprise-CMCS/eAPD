@@ -4,7 +4,9 @@ const logger = require('../../../../logger')('auth certifications post');
 
 const { getFile: get } = require('../../../../files');
 
-module.exports = (app, { getFile = get } = {}) => {
+const { generateFileName: generateName } = require('../../../../util/fileUtils');
+
+module.exports = (app, { getFile = get, generateFileName = generateName } = {}) => {
   logger.silly('setting up GET /auth/certifications/files/:fileID route');
 
   app.get(
@@ -15,10 +17,13 @@ module.exports = (app, { getFile = get } = {}) => {
       try {
         const file = await getFile(req.params.fileID);
         if (file) {
+          // Generate filename
+          const fileName = await generateFileName(file, req.params.fileID);
+          
           res.setHeader('Content-Type', 'application/octet-stream');
           res.setHeader(
             'Content-Disposition',
-            `attachment; filename=upload.pdf` // Todo: Capture metadata when file is uploaded and return it back
+            `attachment; filename=${fileName}`
           );
           res.send(file).end();
         } else {
