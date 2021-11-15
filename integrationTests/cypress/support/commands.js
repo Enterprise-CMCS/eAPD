@@ -128,20 +128,6 @@ Cypress.Commands.add('useJWTrevokedrole', url => {
 });
 
 // TinyMCE
-Cypress.Commands.add('waitForTinyMCELoaded', tinyMceId => {
-  const eventName = `tinymceLoaded.${tinyMceId}`;
-  cy.document().then($doc => {
-    return new Cypress.Promise(resolve => {
-      // Cypress will wait for this Promise to resolve
-      const onTinyMceLoaded = () => {
-        $doc.removeEventListener(eventName, onTinyMceLoaded); // cleanup
-        resolve(); // resolve and allow Cypress to continue
-      };
-      $doc.addEventListener(eventName, onTinyMceLoaded);
-    });
-  });
-});
-
 Cypress.Commands.add('ignoreTinyMceError', () => {
   Cypress.on('uncaught:exception', () => {
     return false;
@@ -167,13 +153,22 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('waitForSave', () => {
-  cy.waitUntil(() =>
-    cy
-      .document()
-      .its('body')
-      .find('header')
-      .then($header => $header.text().match(/Saved|Last saved/i) !== null)
-  );
+  cy.document()
+    .its('body')
+    .find('header')
+    .then($header => {
+      if ($header) {
+        if ($header.text().includes('Saving')) {
+          cy.wrap($header)
+            .contains('Saved', { timeout: 10000 })
+            .should('exist');
+        }
+
+        cy.wrap($header)
+          .contains(/Saved|Last saved/i)
+          .should('exist');
+      }
+    });
 });
 
 Cypress.Commands.add('goToKeyStateProgramManagememt', () => {

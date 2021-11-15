@@ -19,7 +19,7 @@ export const testDefaultCostAllocationAndOtherFunding = years => {
   });
 
   it('should display the default values for Cost Allocation and Other Funding', () => {
-    cy.waitForTinyMCELoaded('cost-allocation-methodology-field');
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     activityPage.checkTinyMCE('cost-allocation-methodology-field', '');
 
     cy.then(() => {

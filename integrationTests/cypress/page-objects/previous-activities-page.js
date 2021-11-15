@@ -22,7 +22,7 @@ class PreviousActivitiesPage {
 
   setSummary(summary) {
     // Wait for textbox to load before filling data
-    cy.waitForTinyMCELoaded('previous-activity-summary-field');
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('previous-activity-summary-field', summary);
     cy.waitForSave();
   }

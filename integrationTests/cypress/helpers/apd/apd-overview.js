@@ -126,22 +126,22 @@ export const testAPDOverviewWithData = () => {
   it('should fill out the APD Overview', () => {
     // must be done as a chunk because the tinyMCE fields don't have
     // time to load if they are done individually
-    cy.waitForTinyMCELoaded('program-introduction-field');
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent(
       'program-introduction-field',
       apdOverview.introduction
     );
     cy.waitForSave();
 
-    cy.waitForTinyMCELoaded('hit-overview-field');
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('hit-overview-field', apdOverview.HIT);
     cy.waitForSave();
 
-    cy.waitForTinyMCELoaded('hie-overview-field');
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('hie-overview-field', apdOverview.HIE);
     cy.waitForSave();
 
-    cy.waitForTinyMCELoaded('mmis-overview-field');
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('mmis-overview-field', apdOverview.MMIS);
     cy.waitForSave();
   });

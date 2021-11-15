@@ -81,7 +81,7 @@ class PopulatePage {
     index
   ) => {
     this.fillTextField('ds-c-field', name);
-    cy.waitForTinyMCELoaded(`contractor-description-field-${index}`);
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent(`contractor-description-field-${index}`, desc);
     cy.waitForSave();
     this.fillDate('Contract start date', startDate);
