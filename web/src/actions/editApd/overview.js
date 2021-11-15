@@ -2,6 +2,19 @@ import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from './symbols';
 import { updateBudget } from '../budget';
 
 /**
+ * Rename an activity
+ * @param {Number} index The index of the activity to rename
+ * @param {String} name The new activity name
+ */
+ export const setActivityName = (index, name) => (dispatch, getState) => {
+  dispatch({
+    type: EDIT_APD,
+    path: `/apd/${index}/name`,
+    value: name
+  });
+};
+
+/**
  * Add a fiscal year to the APD
  * @param {String} year Year to add, four-digit
  */
