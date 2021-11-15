@@ -25,7 +25,21 @@ export const testDefaultActivityOverview = () => {
   });
 };
 
-export const testDefaultActivityOverviewExportView = () => {};
+export const testDefaultActivityOverviewExportView = () => {
+  beforeEach(() => {
+    cy.findByRole('heading', { level: 3, name: 'Activity Overview' }).should(
+      'exist'
+    );
+  });
+
+  it('should display the default activity overview', () => {
+    cy.findByRole('heading', {
+      name: /Statement of Alternative Considerations and Supporting Justification/i
+    })
+      .next()
+      .should('have.text', '');
+  });
+};
 
 export const testActivityOverviewWithData = () => {
   let populatePage;
