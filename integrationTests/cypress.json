@@ -4,6 +4,7 @@
   "viewportHeight": 1000,
   "defaultCommandTimeout": 36000,
   "videoUploadOnPasses": false,
+  "numTestsKeptInMemory": 10,
   "env": {
     "cypress-react-selector": {
       "root": "#app"

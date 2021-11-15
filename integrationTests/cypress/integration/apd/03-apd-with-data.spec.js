@@ -77,11 +77,6 @@ describe('APD with Data', () => {
   });
 
   describe('Form View', () => {
-    /* eslint-disable-next-line prefer-arrow-callback, func-names */
-    beforeEach(function () {
-      cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
-    });
-
     afterEach(() => {
       // wait for another save cycle to trigger
       cy.wait(300); // eslint-disable-line cypress/no-unnecessary-waiting

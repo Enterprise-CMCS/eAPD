@@ -5,7 +5,8 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable prefer-arrow-callback */
 
-describe('filling out APD overview section', () => {
+describe('filling out APD overview section', { tags: ['@apd'] }, () => {
+  let apdUrl;
   const pageTitles = [
     'APD Overview',
     'Key State Personnel',
@@ -20,21 +21,21 @@ describe('filling out APD overview section', () => {
 
   before(() => {
     cy.useStateStaff();
-    // Delete all existing APDs
-    cy.get('button').each($el => {
-      if ($el.text().includes('Delete')) {
-        cy.wrap($el).click();
-        cy.findAllByText('Delete APD').click();
-      }
+
+    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.location('pathname').then(pathname => {
+      apdUrl = pathname.replace('/apd-overview', '');
     });
-    cy.waitForSave();
+  });
+
+  beforeEach(() => {
+    cy.visit(apdUrl);
   });
 
   it('creates a new APD with current date', () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const today = new Date();
-
-    cy.contains('Create new').click();
 
     cy.get('.apd--title').contains(
       `Created: ${today.toLocaleDateString('en-US', options)}`
@@ -42,11 +43,13 @@ describe('filling out APD overview section', () => {
   });
 
   it('confirms Continue buttons redirect to correct sections', () => {
-    cy.wrap(pageTitles).each(index => {
-      cy.get('.ds-h2').should('contain', index);
+    cy.wrap(pageTitles).each((title, index) => {
+      cy.get('.ds-c-vertical-nav__item').contains(title).click();
+      cy.get('.ds-h2').should('contain', title);
 
-      if (index !== pageTitles[pageTitles.length - 1]) {
+      if (index < pageTitles.length - 1) {
         cy.get('#continue-button').click();
+        cy.get('.ds-h2').should('contain', pageTitles[index + 1]);
       }
     });
   });
@@ -54,11 +57,13 @@ describe('filling out APD overview section', () => {
   it('confirms Back buttons redirect to correct sections', () => {
     const reversePageTitles = pageTitles.reverse();
 
-    cy.wrap(reversePageTitles).each(index => {
-      cy.get('.ds-h2').should('contain', index);
+    cy.wrap(reversePageTitles).each((title, index) => {
+      cy.get('.ds-c-vertical-nav__item').contains(title).click();
+      cy.get('.ds-h2').should('contain', title);
 
-      if (index !== reversePageTitles[reversePageTitles.length - 1]) {
+      if (index < reversePageTitles.length - 1) {
         cy.get('#previous-button').click();
+        cy.get('.ds-h2').should('contain', pageTitles[index + 1]);
       }
     });
   });
@@ -168,14 +173,19 @@ describe('filling out APD overview section', () => {
   });
 
   it('deletes the APD', () => {
-    cy.visit('/');
+    cy.useStateStaff();
 
-    cy.contains('HITECH IAPD').should('have.length', 1);
+    cy.get(`a[href='${apdUrl}']`).should('exist');
 
-    cy.contains('Delete').click();
+    cy.get(`a[href='${apdUrl}']`)
+      .parent()
+      .parent()
+      .parent()
+      .contains('Delete')
+      .click();
 
     cy.get('.ds-c-button--danger').click();
 
-    cy.contains('HITECH IAPD').should('have.length', 0);
+    cy.get(`a[href='${apdUrl}']`).should('not.exist');
   });
 });

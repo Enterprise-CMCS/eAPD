@@ -25,6 +25,12 @@ module.exports = (on, config) => {
   // eslint-disable-next-line no-unused-vars
   on('before:browser:launch', (browser = {}, launchOptions) => {
     prepareAudit(launchOptions);
+
+    if (browser.family === 'chromium') {
+      launchOptions.args.push('--disable-dev-shm-usage');
+    }
+
+    return launchOptions;
   });
 
   on('task', {
