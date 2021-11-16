@@ -31,8 +31,6 @@ describe('auth/certifications/files endpoints', () => {
         const response = await api.get(
           url('test-123')
         );
-        
-        console.log("response", response);
 
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
