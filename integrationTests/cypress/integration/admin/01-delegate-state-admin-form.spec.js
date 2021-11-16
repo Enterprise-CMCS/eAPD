@@ -106,7 +106,7 @@ describe('adding and removing state admin delegation forms', function () {
   
     
   it('allows a letter to be deleted', () => {
-    cy.contains('Cancel').click(); // Return to letters tab
+    cy.visit('/');
     
     cy.fixture('users').then(userData => {
       cy.contains(userData[0].name)
