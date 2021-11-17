@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
 const logger = require('../logger')('jwtUtils');
+const isPast = require('date-fns/isPast');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID, updateAuthAffiliation } = require('../db');
 const { getStateById } = require('../db/states.js');
 const { 
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
-  getAffiliationByState: actualGetAffiliationByState
+  getAffiliationByState: actualGetAffiliationByState,
+  getUserAffiliatedStates: actualGetUserAffiliatedStates
 } = require('../db/auth');
 // const { updateAffiliation } = require('../db/affiliations.js');
 
@@ -135,12 +137,14 @@ const verifyExpiration = async (
 ) => {
   const stateAffiliation = await getAffiliationByState_(user.id, stateId);
   
+  console.log("stateAffiliation", stateAffiliation);
+  
   if (stateAffiliation.expiration === null) {
     return null;
   }
-  
-  if (stateAffiliation.expiration < new Date()) {
-    return await updateAffiliation_({
+
+  if (isPast(stateAffiliation.expiration)) {
+    return updateAffiliation_({
       affiliationId: stateAffiliation.id,
       newRoleId: -1,
       newStatus: 'revoked',
@@ -149,9 +153,9 @@ const verifyExpiration = async (
       ffy: null
     })
     .then((res) => {
-      return null;
+      return { error: null };
     })
-    .catch(e => `Error updating affiliation: ${e}`)
+    .catch(e => { error: `Error updating expired affiliation: ${e}` });
   }
     
   return null;
@@ -163,6 +167,7 @@ const changeState = async (
   {
     getStateById_ = getStateById,
     getUserPermissionsForStates_ = actualGetUserPermissionsForStates,
+    getAffiliatedStates_ = actualGetUserAffiliatedStates
   } = {}
 ) => {
   // copy the user to prevent altering it
@@ -172,6 +177,8 @@ const changeState = async (
   const permissions = await getUserPermissionsForStates_(user.id);
   newUser.activities = permissions[stateId];
   newUser.permissions = [{[stateId]: permissions[stateId]},]
+  const affiliations = await getAffiliatedStates_(user.id);
+  newUser.states = affiliations;
 
   return sign(newUser, {});
 };
