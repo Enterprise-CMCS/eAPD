@@ -8,7 +8,7 @@ import { updateBudget } from '../budget';
  export const setApdName = (name) => (dispatch, getState) => {
   dispatch({
     type: EDIT_APD,
-    path: `/apd/name`,
+    path: `/name`,
     value: name,
     state: getState()
   });
