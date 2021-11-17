@@ -11,21 +11,24 @@ describe('state admin letters table', () => {
   before(() => {
     cy.useFedAdmin();
     cy.location('pathname').then(pathname => '/');
+    cy.task('db:resetcertification', { email: 'Sincere@april.biz' });
   });
 
   beforeEach(() => {
     cy.useFedAdmin('/');
   });
+  
+  after(() => cy.task('db:resetcertificationmatch'));
 
   it('tests default values', () => {
     // Filter labels
     cy.get('#state-admin-letters').contains('Status');
     cy.get('#state-admin-letters').contains('State');
-    cy.get('#state-admin-letters').contains('Search All');
+    cy.get('#state-admin-letters').contains('Search');
 
     getInputByLabel('Status').should('have.value', '');
     getInputByLabel('State').should('have.value', '');
-    getInputByLabel('Search All').should('have.value', '');
+    getInputByLabel('Search').should('have.value', '');
 
     // Table column headers
     cy.get('#state-admin-letters').contains('Name');
@@ -42,7 +45,7 @@ describe('state admin letters table', () => {
   it('allows filtering by status', () => {
     cy.get('#state-admin-letters td:contains(No Match)').should(
       'have.length',
-      2
+      1
     );
     cy.get('#state-admin-letters td:contains(Pending Match)').should(
       'have.length',
@@ -62,7 +65,7 @@ describe('state admin letters table', () => {
     getInputByLabel('Status').select('No Match');
     cy.get('#state-admin-letters td:contains(No Match)').should(
       'have.length',
-      2
+      1
     );
     cy.get('#state-admin-letters td:contains(Pending Match)').should(
       'have.length',
@@ -72,7 +75,7 @@ describe('state admin letters table', () => {
     getInputByLabel('Status').select('All');
     cy.get('#state-admin-letters td:contains(No Match)').should(
       'have.length',
-      2
+      1
     );
     cy.get('#state-admin-letters td:contains(Pending Match)').should(
       'have.length',
@@ -81,43 +84,46 @@ describe('state admin letters table', () => {
   });
 
   it('allows filtering by state', () => {
-    cy.get('#state-admin-letters td:contains(MD)').should('be.visible');
     cy.get('#state-admin-letters td:contains(AK)').should('be.visible');
     cy.get('#state-admin-letters td:contains(TN)').should('be.visible');
 
-    getInputByLabel('State').select('MD');
-    cy.get('#state-admin-letters td:contains(MD)').should('be.visible');
-    cy.get('#state-admin-letters td:contains(AK)').should('have.length', 0);
-    cy.get('#state-admin-letters td:contains(TN)').should('have.length', 0);
-
     getInputByLabel('State').select('AK');
-    cy.get('#state-admin-letters td:contains(MD)').should('have.length', 0);
     cy.get('#state-admin-letters td:contains(AK)').should('be.visible');
     cy.get('#state-admin-letters td:contains(TN)').should('have.length', 0);
 
     getInputByLabel('State').select('All');
-    cy.get('#state-admin-letters td:contains(MD)').should('be.visible');
     cy.get('#state-admin-letters td:contains(AK)').should('be.visible');
     cy.get('#state-admin-letters td:contains(TN)').should('be.visible');
   });
 
   it('allows search filtering', () => {
-    cy.get('#state-admin-letters td:contains(Leanne Graham)').should(
-      'be.visible'
-    );
+    getInputByLabel('Search').type('State Admin');
     cy.get('#state-admin-letters td:contains(State Admin)').should(
       'have.length',
       2
     );
-
-    getInputByLabel('Search All').type('Leanne');
-
-    cy.get('#state-admin-letters td:contains(Leanne Graham)').should(
-      'be.visible'
-    );
-    cy.get('#state-admin-letters td:contains(State Admin)').should(
-      'have.length',
-      0
-    );
   });
+  
+  it('allows matching to users/affiliations', () => {
+    cy.contains('Match To User').click();
+    
+    cy.contains('Cancel').click();
+    
+    cy.contains('Match To User').click();
+    
+    cy.contains('Match State Admin Letter to User');
+    
+    getInputByLabel('Select User').select('State Staff');
+    
+    cy.get('#dialog-content').find('li').contains('State Staff');
+    
+    getInputByLabel('Select User').select('State Admin');
+    
+    cy.contains('Match and Approve Access').click();
+    
+    cy.get('#state-admin-letters td:contains(Matched)').should(
+      'have.length',
+      1
+    );    
+  })
 });

@@ -66,7 +66,7 @@ tap.test('state certifications post endpoint', async postTest => {
       await handler(req, res, next); 
   
       test.ok(res.status.calledWith(400), 'sends a 400 error');
-      test.ok(res.send.calledAfter(res.status), 'response is terminated');
+      test.ok(res.end.calledAfter(res.status), 'response is terminated');
     });
     
     tests.test('with valid data', async test => {
@@ -74,7 +74,7 @@ tap.test('state certifications post endpoint', async postTest => {
       
       await handler(req, res, next); 
   
-      test.ok(res.send.calledWith(200), 'sends a 200 success response');
+      test.ok(res.status.calledWith(200), 'sends a 200 success response');
     });
   });  
 });

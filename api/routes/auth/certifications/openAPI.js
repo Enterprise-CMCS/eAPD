@@ -3,12 +3,11 @@ const {
 } = require('../../openAPI/helpers');
 
 
-
-const postStateCertification = {
+const stateCertifications = {
   '/auth/certifications': {
     get: {
       tags: ['Certifications'],
-      summary: 'retrieve the Add State Certifications and additional details',
+      summary: 'Retrieve the Add State Certifications and additional details',
       description:
         'get the state admin certifications and potential matches for loading up the state admin certification table',
       responses: {
@@ -75,10 +74,58 @@ const postStateCertification = {
           description: 'The user does not have sufficient authorization to upload certification letters'
         }
       }
+    },
+    put: {
+      tags: ['Certifications'],
+      summary: 'Match a state admin certification letter to an affiliation',
+      description:
+        'update a state admin certification to associate it with an affiliation and approve that affiliation as a state admin',
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  certificationId: {
+                    type: 'string',
+                    description: 'ID of the certification letter'
+                  },
+                  certificationFfy: {
+                    type: 'string',
+                    description: 'Federal Fiscal Year (FFY) from the certification upload form'
+                  },
+                  affiliationId: {
+                    type: 'string',
+                    description: 'ID of the affiliation to be matched'
+                  },
+                  stateId: {
+                    type: 'string',
+                    description: 'ID of the state associated with the affiliation'
+                  },
+                }
+              }
+            }
+          }
+        },
+      responses: {
+        200: {
+          description: 'State Admin Certification match successful'
+        },
+        400: {
+          description: 'Invalid request'
+        },
+        401: {
+          description: 'Unauthorized'
+        },
+        403: {
+          description: 'The user does not have sufficient authorization to match certification letters'
+        }
+      }
     }
   }
 };
 
 module.exports = {
-  ...requiresAuth(postStateCertification)
+  ...requiresAuth(stateCertifications)
 };
