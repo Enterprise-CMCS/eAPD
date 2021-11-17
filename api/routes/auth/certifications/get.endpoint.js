@@ -1,13 +1,18 @@
 const {
+  getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
 
 
-describe('auth/certifications endpoints', () => {
+describe('auth/certifications get endpoint', () => {  
   describe('GET /auth/certifications', () => {
-
+    const db = getDB();
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
 
     const url = '/auth/certifications'
 
