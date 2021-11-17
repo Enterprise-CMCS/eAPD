@@ -3,14 +3,14 @@ import { updateBudget } from '../budget';
 
 /**
  * Rename an activity
- * @param {Number} index The index of the activity to rename
  * @param {String} name The new activity name
  */
- export const setActivityName = (index, name) => (dispatch, getState) => {
+ export const setApdName = (name) => (dispatch, getState) => {
   dispatch({
     type: EDIT_APD,
-    path: `/apd/${index}/name`,
-    value: name
+    path: `/apd/name`,
+    value: name,
+    state: getState()
   });
 };
 
