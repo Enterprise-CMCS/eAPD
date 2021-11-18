@@ -94,15 +94,14 @@ const ApdSummary = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
-      <Fragment>
-        <TextField
-          autoFocus
-          label="APD Name"
-          name="apd-name"
-          value={name}
-          onChange={changeName}
-        />
-      </Fragment>
+      <TextField
+        autoFocus
+        className="apd-name"
+        label="APD Name"
+        name="apd-name"
+        onChange={changeName}
+        value={name}
+      />
       <ChoiceList
         choices={yearChoices}
         label={getLabelElement()}

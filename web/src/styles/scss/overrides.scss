@@ -16,6 +16,14 @@
   }
 }
 
+.apd-name.ds-u-clearfix {
+  &::before,
+  &::after {
+    // override default clearfix
+    display: none;
+    content: normal;
+  }
+}
 
 .ds-c-choice+label {
   width: fit-content;
