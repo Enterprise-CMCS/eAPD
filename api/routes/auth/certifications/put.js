@@ -19,7 +19,7 @@ module.exports = (
     loggedIn,
     can('edit-state-certifications'),
     async (req, res, next) => {
-      
+
       const allRoleIds = await getAllActiveRoles();
       const stateAdminId = allRoleIds.find(role => role.name === 'eAPD State Admin').id;
       
@@ -31,21 +31,25 @@ module.exports = (
       } = req.body;
       
       try {
-        await matchStateAdminCertification({
-          certificationId: Number(certificationId),
-          affiliationId: Number(affiliationId),
+        const { error = null } = await matchStateAdminCertification({
+          certificationId,
+          affiliationId,
+          stateId,
+          ffy: certificationFfy,
           changedBy: req.user.id,
           newRoleId: stateAdminId,
-          newStatus: 'approved',
-          stateId,
-          ffy: certificationFfy
+          newStatus: 'approved'
         });
+
+        if (error) {
+          return res.status(400).send({ message: 'Unable to complete state admin certification' }).end();
+        }
         
-        res.send(200);        
+        return res.status(200).end();     
       } catch (e) {
         logger.error({ id: req.id, message: 'error updating state admin certification' });
         logger.error({ id: req.id, message: e });
-        next({ message: 'Unable to complete state admin certification' });
+        return next({ message: 'Unable to complete state admin certification' });
       }
     }
   );
