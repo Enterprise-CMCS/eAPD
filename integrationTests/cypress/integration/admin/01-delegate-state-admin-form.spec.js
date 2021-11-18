@@ -30,16 +30,15 @@ describe('filling out state admin delegation form', function () {
   
   before(function () {
     cy.useFedAdmin();
-
     cy.findByRole('button', { name: /Add State Admin Letter/i }).click();
     cy.wait(1000);
     cy.location('pathname').then(pathname => (delegateStateAdminFormUrl = pathname));
   });
-
+  
   beforeEach(function () {
     cy.useFedAdmin(delegateStateAdminFormUrl);
   });
-
+  
   it('tests default values', function () {
     cy.url().should('include', '/delegate-state-admin');
     
