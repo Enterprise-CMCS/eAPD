@@ -181,6 +181,7 @@ const getAffiliationMatches = async ({
 
 const updateAuthAffiliation = async ({
   db = knex,
+  transaction = null,
   affiliationId,
   newRoleId,
   newStatus,
@@ -189,10 +190,14 @@ const updateAuthAffiliation = async ({
   ffy
 }) => {
   // Check that user is not editing themselves
-  const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
-    .select('user_id', 'role_id', 'status')
-    .where({ state_id: stateId, id: affiliationId })
-    .first();
+  const { 
+    user_id: affiliationUserId, 
+    role_id: originalRoleId, 
+    status: originalStatus } = await (transaction || db)('auth_affiliations')
+      .select('user_id', 'role_id', 'status')
+      .where({ state_id: stateId, id: affiliationId })
+      .first();
+      
   if (changedBy === affiliationUserId) {
     throw new Error('User is editing their own affiliation')
   }
@@ -200,7 +205,7 @@ const updateAuthAffiliation = async ({
   // Lookup role name and set expiration date accordingly
   // The front end will pass in a -1 if the role is being revoked/denied so we
   // need to handle that case here
-  const { name: roleName } = newRoleId < 0 ? { name: null } : await db('auth_roles')
+  const { name: roleName } = newRoleId < 0 ? { name: null } : await (transaction || db)('auth_roles')
                                                                 .select('name')
                                                                 .where({id: newRoleId })
                                                                 .first();
@@ -225,7 +230,7 @@ const updateAuthAffiliation = async ({
     changed_by: changedBy
   }
 
-  return db('auth_affiliations')
+  return (transaction || db)('auth_affiliations')
     .where({ state_id: stateId, id: affiliationId })
     .update({
       role_id: newStatus !== 'approved' ? null : newRoleId,
@@ -233,7 +238,7 @@ const updateAuthAffiliation = async ({
       expires_at: expirationDate
     })
     .then(() =>{
-      return db('auth_affiliation_audit')
+      return (transaction || db)('auth_affiliation_audit')
         .insert(authAffiliationAudit)
     })
 };

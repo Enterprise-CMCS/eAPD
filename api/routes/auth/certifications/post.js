@@ -39,13 +39,13 @@ module.exports = (
           status: 'active'
         });
         if (error) {
-          res.status(400).end();
+          return res.status(400).end();
         }
-        res.send(200);
+        return res.status(200).end();
       } catch (e) {
         logger.error({ id: req.id, message: 'error adding new state admin certification' });
         logger.error({ id: req.id, message: e });
-        next({ message: 'Unable to save state admin certification' });
+        return next({ message: 'Unable to save state admin certification' });
       }
     }
   );

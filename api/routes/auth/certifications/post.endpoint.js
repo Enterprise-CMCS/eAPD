@@ -44,7 +44,6 @@ describe('auth/certifications endpoints', () => {
         const response = await api.post(url, validRequestBody);
         
         expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
       });
     });
   });

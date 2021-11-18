@@ -4,13 +4,13 @@ exports[`auth/certifications get endpoint GET /auth/certifications when authenti
 Array [
   Object {
     "affiliationId": null,
-    "email": "stateadmin@email.com",
+    "email": "stateadminmatch@email.com",
     "ffy": 2022,
     "fileUrl": "test-123",
     "id": 5004,
     "name": "State Admin Test",
     "phone": "4105555555",
-    "potentialMatches": "0",
+    "potentialMatches": "1",
     "state": "ak",
   },
 ]
