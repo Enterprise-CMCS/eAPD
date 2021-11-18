@@ -7,16 +7,7 @@
   font-size: $h4-font-size;
 }
 
-#activity-entry-page .ds-u-clearfix {
-  &::before,
-  &::after {
-    // override default clearfix
-    display: none;
-    content: normal;
-  }
-}
-
-.apd-name.ds-u-clearfix {
+.remove-clearfix.ds-u-clearfix {
   &::before,
   &::after {
     // override default clearfix

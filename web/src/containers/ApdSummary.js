@@ -96,7 +96,7 @@ const ApdSummary = ({
       <hr className="custom-hr" />
       <TextField
         autoFocus
-        className="apd-name"
+        className="remove-clearfix"
         label="APD Name"
         name="apd-name"
         onChange={changeName}
