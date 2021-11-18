@@ -66,8 +66,8 @@ export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 #Preparing Mongo DB Users
 cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '','pwd' : '', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo  -u  -p  --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role:'readWrite', db: ''}]});"
+mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo  -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval "db.createUser({user: '$MONGO_DATABASE_USERNAME', pwd: '$MONGO_DATABASE_PASSWORD', roles:[{role:'readWrite', db: '$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 E_USER
 
