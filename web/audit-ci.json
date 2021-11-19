@@ -3,7 +3,7 @@
   "package-manager": "auto",
   "allowlist": [
     1002401, 1002422, 1002423, 1002475, 1002487, 1002492, 1002522, 1002581,
-    1002624, 1002627, 1002655
+    1002624, 1002627, 1002655, 1005059
   ],
   "_comment": {
     "1002401": {
@@ -91,6 +91,14 @@
         "@storybook/react@6.3.12 - storybook",
         "cssnano@4.1.11 - css before build",
         "postcss-cssnext@3.1.1 - css before build"
+      ]
+    },
+    "1005059": {
+      "advisory": "https://github.com/advisories/GHSA-whgm-jr23-g3j9",
+      "module": "ansi-html",
+      "affects": [
+        "webpack-dev-server>ansi-html",
+        "@storybook/react>@pmmmwh/react-refresh-webpack-plugin>ansi-html"
       ]
     }
   },

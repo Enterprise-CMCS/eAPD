@@ -7,7 +7,6 @@ const {
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
 
-
 describe('auth/certifications put endpoint', () => {
   describe('PUT /auth/certifications', () => {
     const db = getDB();
@@ -34,7 +33,6 @@ describe('auth/certifications put endpoint', () => {
 
       it('with no request body', async () => {
         const response = await api.put(url, {});
-        
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
@@ -45,7 +43,6 @@ describe('auth/certifications put endpoint', () => {
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
       });
-
     });
   });
 });

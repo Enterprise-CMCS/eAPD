@@ -50,6 +50,13 @@ exports.seed = async knex => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved'
+    },
+    {
+      id: 4005,
+      user_id: 'state-admin-match',
+      state_id: 'ak',
+      role_id: null,
+      status: 'requested'
     }
   ]);
   await knex('okta_users').del();
@@ -82,6 +89,11 @@ exports.seed = async knex => {
     {
       user_id: 'state-admin',
       email: 'stateadmin@email.com',
+      metadata: '{}'
+    },
+    {
+      user_id: 'state-admin-match',
+      email: 'stateadminmatch@email.com',
       metadata: '{}'
     }
   ]);

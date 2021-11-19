@@ -65,14 +65,15 @@ const DelegateStateAdminForm = () => {
     const response = await axios
       .post('/auth/certifications', state)
       .then(res => {
-        return res.data;
+        return res;
       })
       .catch(error => {
         return error;
       });
-    if (response === 'OK') {
-      history.push('/')
-    };
+    if(response.status === 200) {
+      console.log("response", response);
+      history.push('/');
+    }
   };
   
   return (
