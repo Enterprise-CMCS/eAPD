@@ -2,22 +2,20 @@ import ActivityPage from '../../../page-objects/activity-page';
 import PopulatePage from '../../../page-objects/populate-page';
 
 export const testDefaultPrivateContractorCosts = () => {
-  beforeEach(() => {
+  it('should display the default Private Contractor Costs', () => {
     cy.goToPrivateContractorCosts(0);
     cy.findByRole('heading', {
       name: /Private Contractor Costs/i,
       level: 3
     }).should('exist');
-  });
 
-  it('should display the default Private Contractor Costs', () => {
     cy.contains(
       'Private contractors have not been added for this activity.'
     ).should('exist');
   });
-};
 
-export const testDefaultPrivateContractorCostsExportView = () => {};
+  // TODO: export view tests
+};
 
 export const testPrivateContractorCostsWithData = years => {
   let populatePage;
@@ -166,6 +164,6 @@ export const testPrivateContractorCostsWithData = years => {
       cy.findByRole('button', { name: /Done/i }).click();
     });
 
-    // TODO: add test for export view
+    // TODO: export view tests
   });
 };

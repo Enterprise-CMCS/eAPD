@@ -11,11 +11,9 @@ export const testDefaultCostAllocationAndOtherFunding = years => {
     activityPage = new ActivityPage();
   });
 
-  beforeEach(() => {
-    cy.goToCostAllocationAndOtherFunding(0);
-  });
-
   it('should display the default values for Cost Allocation and Other Funding', () => {
+    cy.goToCostAllocationAndOtherFunding(0);
+
     cy.findByRole('heading', {
       name: /^Activity 1:/i,
       level: 2
@@ -37,9 +35,9 @@ export const testDefaultCostAllocationAndOtherFunding = years => {
       });
     });
   });
-};
 
-export const testDefaultCostAllocationAndOtherFundingExportView = () => {};
+  // TODO: export view tests
+};
 
 export const testCostAllocationAndOtherFundingWithData = years => {
   let populatePage;
@@ -99,7 +97,7 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       });
     });
 
-    // TODO: add tests for export view
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
@@ -152,6 +150,6 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       });
     });
 
-    // TODO: write test for export view
+    // TODO: export view tests
   });
 };

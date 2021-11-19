@@ -11,14 +11,12 @@ export const testDefaultBudgetAndFFP = years => {
     budgetPage = new BudgetPage();
   });
 
-  beforeEach(() => {
+  it('should display the default Budget and FFP', () => {
     cy.goToBudgetAndFFP(0);
     cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
       'exist'
     );
-  });
 
-  it('should display the default Budget and FFP', () => {
     cy.then(() => {
       years.forEach(year => {
         cy.contains(`Budget for FFY ${year}`)
@@ -48,9 +46,9 @@ export const testDefaultBudgetAndFFP = years => {
       );
     });
   });
-};
 
-export const testDefaultBudgetAndFFPExportView = () => {};
+  // TODO: export view tests
+};
 
 export const testBudgetAndFFPWithData = years => {
   let populatePage;

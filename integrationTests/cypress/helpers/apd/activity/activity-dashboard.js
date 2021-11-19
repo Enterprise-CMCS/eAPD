@@ -3,13 +3,13 @@ import ExportPage from '../../../page-objects/export-page';
 
 const activities = [['Program Administration', 'HIT']];
 
-export const testDefaultActivityDashboard = () => {
-  beforeEach(() => {
-    cy.goToActivityDashboard();
-    cy.url().should('include', '/activities');
-  });
-
+export const testDefaultActivityDashboard = years => {
   it('tests default values in an activity', () => {
+    cy.goToActivityDashboard();
+
+    cy.url().should('include', '/activities');
+    cy.findByRole('heading', { name: /Activities/i, level: 2 }).should('exist');
+
     cy.contains('Activity 1: Program Administration (HIT)').should('exist');
     cy.contains('Activity 2').should('not.exist');
 
@@ -19,18 +19,13 @@ export const testDefaultActivityDashboard = () => {
     cy.contains('Edit').click();
     cy.url().should('contain', '/activity/0/overview');
   });
-};
-
-export const testDefaultActivityDashboardExportView = years => {
-  let exportPage;
-  let budgetPage;
-
-  before(() => {
-    exportPage = new ExportPage();
-    budgetPage = new BudgetPage();
-  });
 
   it('checks default activity export view', () => {
+    const exportPage = new ExportPage();
+    const budgetPage = new BudgetPage();
+
+    cy.goToExportView();
+
     exportPage.checkExecutiveSummary(
       activities,
       years,
@@ -100,6 +95,8 @@ export const testDefaultActivityDashboardExportView = years => {
           );
         });
     });
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 

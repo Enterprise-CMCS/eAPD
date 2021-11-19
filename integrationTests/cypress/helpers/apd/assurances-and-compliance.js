@@ -9,18 +9,17 @@ const categories = [
 ];
 
 export const testDefaultAssurancesAndCompliance = () => {
-  let assurancesCompliancePage;
   let assurancesAndCompliance;
-
-  before(() => {
-    assurancesCompliancePage = new AssurancesCompliancePage();
-  });
 
   // eslint-disable-next-line prefer-arrow-callback, func-names
   beforeEach(function () {
     cy.fixture('assurances-compliance-test.json').then(data => {
       assurancesAndCompliance = data;
     });
+  });
+
+  it('should display the default settings in Assurance and Compliance', () => {
+    const assurancesCompliancePage = new AssurancesCompliancePage();
 
     cy.goToAssurancesAndCompliance();
     cy.url().should('contain', '/assurances-and-compliance');
@@ -28,10 +27,8 @@ export const testDefaultAssurancesAndCompliance = () => {
     cy.findByRole('heading', { name: /Assurances and Compliance/i })
       .parent()
       .as('previousActivitiesDiv');
-  });
 
-  categories.forEach(category => {
-    it(`${category}`, () => {
+    categories.forEach(category => {
       const val = assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
@@ -41,30 +38,17 @@ export const testDefaultAssurancesAndCompliance = () => {
       });
     });
   });
-};
 
-export const testDefaultAssurancesAndComplianceExportView = () => {
-  let exportPage;
-  let assurancesAndCompliance;
+  it('should display default Assurance and Compliance in export view', () => {
+    const exportPage = new ExportPage();
 
-  before(() => {
-    exportPage = new ExportPage();
-  });
+    cy.goToExportView();
 
-  // eslint-disable-next-line prefer-arrow-callback, func-names
-  beforeEach(function () {
-    cy.fixture('assurances-compliance-test.json').then(data => {
-      assurancesAndCompliance = data;
-    });
-
-    // Get div with data, also makes sure page is loaded
     cy.findByRole('heading', { name: /Assurances and Compliance/i })
       .parent()
       .as('assurancesComplianceDiv');
-  });
 
-  categories.forEach(category => {
-    it(`${category}`, () => {
+    categories.forEach(category => {
       const val = assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
@@ -80,18 +64,13 @@ export const testDefaultAssurancesAndComplianceExportView = () => {
           .should('eq', 'No response was provided');
       });
     });
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 
 export const testAssurancesAndComplianceWithData = () => {
-  let assurancesCompliancePage;
-  let exportPage;
   let assurancesAndCompliance;
-
-  before(() => {
-    assurancesCompliancePage = new AssurancesCompliancePage();
-    exportPage = new ExportPage();
-  });
 
   // eslint-disable-next-line prefer-arrow-callback, func-names
   beforeEach(function () {
@@ -102,6 +81,7 @@ export const testAssurancesAndComplianceWithData = () => {
   });
 
   it('should handle setting Assurance and Compliance', () => {
+    const assurancesCompliancePage = new AssurancesCompliancePage();
     cy.url().should('contain', '/assurances-and-compliance');
     cy.findByRole('heading', { name: /Assurances and Compliance/i })
       .parent()
@@ -126,6 +106,8 @@ export const testAssurancesAndComplianceWithData = () => {
   });
 
   it('should display Assurance and Compliance in export view', () => {
+    const exportPage = new ExportPage();
+
     cy.goToExportView();
 
     categories.forEach(category => {

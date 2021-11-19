@@ -2,15 +2,13 @@ import ActivityPage from '../../../page-objects/activity-page';
 import PopulatePage from '../../../page-objects/populate-page';
 
 export const testDefaultOutcomesAndMilestones = () => {
-  beforeEach(() => {
+  it('should display the default activity overview', () => {
     cy.goToOutcomesAndMilestones(0);
     cy.findByRole('heading', {
       name: /Outcomes and Metrics/i,
       level: 3
     }).should('exist');
-  });
 
-  it('should display the default activity overview', () => {
     cy.contains('Outcomes have not been added for this activity.').should(
       'exist'
     );
@@ -18,9 +16,9 @@ export const testDefaultOutcomesAndMilestones = () => {
       'exist'
     );
   });
-};
 
-export const testDefaultOutcomesAndMilestonesExportView = () => {};
+  // TODO: export view tests
+};
 
 export const testOutcomesAndMilestonesWithData = () => {
   let populatePage;

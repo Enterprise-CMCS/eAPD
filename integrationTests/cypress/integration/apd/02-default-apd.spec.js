@@ -1,60 +1,18 @@
 // <reference types="cypress" />
-import {
-  testDefaultAPDOverview,
-  testDefaultAPDOverviewExportView
-} from '../../helpers/apd/apd-overview';
-import {
-  testDefaultKeyStatePersonnel,
-  testDefaultKeyStatePersonnelExportView
-} from '../../helpers/apd/key-state-personnel';
-import {
-  testDefaultResultsOfPreviousActivities,
-  testDefaultResultsOfPreviousActivitiesExportView
-} from '../../helpers/apd/results-of-previous-activities';
-import {
-  testDefaultActivityDashboard,
-  testDefaultActivityDashboardExportView
-} from '../../helpers/apd/activity/activity-dashboard';
-import {
-  testDefaultActivityOverview,
-  testDefaultActivityOverviewExportView
-} from '../../helpers/apd/activity/activity-overview';
-import {
-  testDefaultOutcomesAndMilestones,
-  testDefaultOutcomesAndMilestonesExportView
-} from '../../helpers/apd/activity/outcomes-and-milestones';
-import {
-  testDefaultStateStaffAndExpenses,
-  testDefaultStateStaffAndExpensesExportView
-} from '../../helpers/apd/activity/state-staff-and-expenses';
-import {
-  testDefaultPrivateContractorCosts,
-  testDefaultPrivateContractorCostsExportView
-} from '../../helpers/apd/activity/private-contractor-costs';
-import {
-  testDefaultCostAllocationAndOtherFunding,
-  testDefaultCostAllocationAndOtherFundingExportView
-} from '../../helpers/apd/activity/cost-allocation-and-other-funding';
-import {
-  testDefaultBudgetAndFFP,
-  testDefaultBudgetAndFFPExportView
-} from '../../helpers/apd/activity/budget-and-ffp';
-import {
-  testDefaultActivityScheduleSummary,
-  testDefaultActivityScheduleSummaryExportView
-} from '../../helpers/apd/activity-schedule-summary';
-import {
-  testDefaultProposedBudget,
-  testDefaultProposedBudgetExportView
-} from '../../helpers/apd/proposed-budget';
-import {
-  testDefaultAssurancesAndCompliance,
-  testDefaultAssurancesAndComplianceExportView
-} from '../../helpers/apd/assurances-and-compliance';
-import {
-  testDefaultExecutiveSummary,
-  testDefaultExecutiveSummaryExportView
-} from '../../helpers/apd/executive-summary';
+import { testDefaultAPDOverview } from '../../helpers/apd/apd-overview';
+import { testDefaultKeyStatePersonnel } from '../../helpers/apd/key-state-personnel';
+import { testDefaultResultsOfPreviousActivities } from '../../helpers/apd/results-of-previous-activities';
+import { testDefaultActivityDashboard } from '../../helpers/apd/activity/activity-dashboard';
+import { testDefaultActivityOverview } from '../../helpers/apd/activity/activity-overview';
+import { testDefaultOutcomesAndMilestones } from '../../helpers/apd/activity/outcomes-and-milestones';
+import { testDefaultStateStaffAndExpenses } from '../../helpers/apd/activity/state-staff-and-expenses';
+import { testDefaultPrivateContractorCosts } from '../../helpers/apd/activity/private-contractor-costs';
+import { testDefaultCostAllocationAndOtherFunding } from '../../helpers/apd/activity/cost-allocation-and-other-funding';
+import { testDefaultBudgetAndFFP } from '../../helpers/apd/activity/budget-and-ffp';
+import { testDefaultActivityScheduleSummary } from '../../helpers/apd/activity-schedule-summary';
+import { testDefaultProposedBudget } from '../../helpers/apd/proposed-budget';
+import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance';
+import { testDefaultExecutiveSummary } from '../../helpers/apd/executive-summary';
 
 // Tests the default values of an APD
 describe('Default APD', { tags: ['@apd', '@default'] }, () => {
@@ -166,70 +124,6 @@ describe('Default APD', { tags: ['@apd', '@default'] }, () => {
 
     describe('default Executive Summary', () => {
       testDefaultExecutiveSummary(years);
-    });
-  });
-
-  describe('Export View', () => {
-    beforeEach(() => {
-      cy.goToExportView();
-    });
-
-    describe('default APD Overview', () => {
-      testDefaultAPDOverviewExportView(years);
-    });
-
-    describe('default Key State Personnel', () => {
-      testDefaultKeyStatePersonnelExportView(years);
-    });
-
-    describe('default Results of Previous Activities', () => {
-      testDefaultResultsOfPreviousActivitiesExportView(years);
-    });
-
-    describe('default Activities', () => {
-      describe('default Activities Dashboard', () => {
-        testDefaultActivityDashboardExportView(years);
-      });
-
-      describe('default Activity Overview', () => {
-        testDefaultActivityOverviewExportView(years);
-      });
-
-      describe('default Outcomes and Milestones', () => {
-        testDefaultOutcomesAndMilestonesExportView(years);
-      });
-
-      describe('default State Staff and Expenses', () => {
-        testDefaultStateStaffAndExpensesExportView(years);
-      });
-
-      describe('default Private Contractor Costs', () => {
-        testDefaultPrivateContractorCostsExportView(years);
-      });
-
-      describe('default Cost Allocation and Other Funding', () => {
-        testDefaultCostAllocationAndOtherFundingExportView(years);
-      });
-
-      describe('default Budget and FFP', () => {
-        testDefaultBudgetAndFFPExportView(years);
-      });
-    });
-
-    describe('default Activity Schedule Summary', () => {
-      testDefaultActivityScheduleSummaryExportView(years);
-    });
-
-    describe('default Proposed Budget', () => {
-      testDefaultProposedBudgetExportView(years);
-    });
-
-    describe('default Assurances and Compliance', () => {
-      testDefaultAssurancesAndComplianceExportView(years);
-    });
-
-    describe('default Executive Summary', () => {
-      testDefaultExecutiveSummaryExportView(years);
     });
   });
 });

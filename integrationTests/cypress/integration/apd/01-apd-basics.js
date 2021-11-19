@@ -41,16 +41,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   describe('Create APD', () => {
-    it('creates a new APD with current date', () => {
+    it('creates a new APD with current date and the first two years checked', () => {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       const today = new Date();
 
       cy.get('.apd--title').contains(
         `Created: ${today.toLocaleDateString('en-US', options)}`
       );
-    });
 
-    it('should have two checked years', () => {
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
       cy.get('[type="checkbox"][checked]').each((_, index, list) =>
         years.push(list[index].value)
@@ -207,695 +205,641 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       proposedBudgetPage = new ProposedBudgetPage();
     });
 
-    describe('Key State Personnel', () => {
-      beforeEach(() => {
-        cy.goToKeyStatePersonnel();
+    it('should handle entering data in Key State Personnel', () => {
+      cy.goToKeyStatePersonnel();
+      cy.log('Add blank primary contact');
+      cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      // Get div for the element containing user data as an alias
+      cy.get('.form-and-review-list')
+        .findByRole('heading', { name: /1.*/i })
+        .parent()
+        .parent()
+        .as('primaryContactVals');
+      // Check for default values
+      cy.get('@primaryContactVals')
+        .findByRole('heading', {
+          name: /Primary Point of Contact name not specified/i
+        })
+        .should('exist');
+      cy.get('@primaryContactVals')
+        .find('li')
+        .should($lis => {
+          expect($lis).to.have.length(2);
+          expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
+          expect($lis.eq(1)).to.contain('Role not specified');
+        });
+      // Protects against edge case of having '$' in name or role
+      cy.get('@primaryContactVals')
+        .contains('Total cost:')
+        .next()
+        .shouldHaveValue(0);
+
+      cy.get('@primaryContactVals').contains('Delete').should('not.exist');
+      cy.get('@primaryContactVals').contains('Edit').should('exist');
+
+      cy.log('Add blank non-primary key personnel');
+      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      // Check for default values
+      cy.get('.form-and-review-list')
+        .findByRole('heading', { name: /2.*/i })
+        .parent()
+        .parent()
+        .as('personnelVals');
+      cy.get('@personnelVals')
+        .findByRole('heading', { name: /Key Personnel name not specified/i })
+        .should('exist');
+      cy.get('@personnelVals')
+        .find('li')
+        .should($lis => {
+          expect($lis).to.have.length(1);
+          expect($lis.eq(0)).to.contain('Role not specified');
+        });
+      cy.get('@personnelVals')
+        .contains('Total cost:')
+        .next()
+        .shouldHaveValue(0);
+
+      cy.get('@personnelVals').contains('Delete').should('exist');
+      cy.get('@personnelVals').contains('Edit').should('exist');
+
+      cy.log('Add blank key personnel that is chargeable to the project');
+      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+      // Have to force check; cypress does not think radio buttons are visible
+      cy.get('input[type="radio"][value="yes"]')
+        .scrollIntoView()
+        .check({ force: true });
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      // Check for default values
+      cy.get('.form-and-review-list')
+        .findByRole('heading', { name: /3.*/i })
+        .parent()
+        .parent()
+        .as('personnelVals');
+      cy.get('@personnelVals')
+        .findByRole('heading', { name: /Key Personnel name not specified/i })
+        .should('exist');
+      cy.get('@personnelVals')
+        .find('li')
+        .should($lis => {
+          expect($lis).to.have.length(1);
+          expect($lis.eq(0)).to.contain('Role not specified');
+        });
+
+      // Check that FFY, FTE, and Total cost for each applicable year is 0.
+      years.forEach(year => {
+        cy.get('@personnelVals').should(
+          'contain',
+          `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`
+        );
       });
-      it('Add blank primary contact', () => {
-        cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-        cy.findByRole('button', { name: /Done/i }).click();
 
-        // Get div for the element containing user data as an alias
-        cy.get('.form-and-review-list')
-          .findByRole('heading', { name: /1.*/i })
-          .parent()
-          .parent()
-          .as('primaryContactVals');
-        // Check for default values
-        cy.get('@primaryContactVals')
-          .findByRole('heading', {
-            name: /Primary Point of Contact name not specified/i
-          })
-          .should('exist');
-        cy.get('@primaryContactVals')
-          .find('li')
-          .should($lis => {
-            expect($lis).to.have.length(2);
-            expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
-            expect($lis.eq(1)).to.contain('Role not specified');
-          });
-        // Protects against edge case of having '$' in name or role
-        cy.get('@primaryContactVals')
-          .contains('Total cost:')
-          .next()
-          .shouldHaveValue(0);
+      cy.get('@personnelVals').contains('Delete').should('exist');
+      cy.get('@personnelVals').contains('Edit').should('exist');
+    });
 
-        cy.get('@primaryContactVals').contains('Delete').should('not.exist');
-        cy.get('@primaryContactVals').contains('Edit').should('exist');
-      });
+    it('should handle entering data in Activity Dashboard', () => {
+      cy.goToActivityDashboard();
 
-      it('Add blank non-primary key personnel', () => {
-        cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-        cy.findByRole('button', { name: /Done/i }).click();
+      // Testing add activity button at end of Activitiy
+      cy.contains('Add Activity').click();
+      cy.contains('Activity 2').should('exist');
+      cy.contains('Delete').should('exist');
+      cy.contains('Delete').click();
+      cy.findByRole('button', { name: /Delete Activity/i }).click();
+      cy.waitForSave();
+      cy.contains('Activity 2').should('not.exist');
+    });
 
-        // Check for default values
-        cy.get('.form-and-review-list')
-          .findByRole('heading', { name: /2.*/i })
-          .parent()
-          .parent()
-          .as('personnelVals');
-        cy.get('@personnelVals')
-          .findByRole('heading', { name: /Key Personnel name not specified/i })
-          .should('exist');
-        cy.get('@personnelVals')
-          .find('li')
-          .should($lis => {
-            expect($lis).to.have.length(1);
-            expect($lis.eq(0)).to.contain('Role not specified');
-          });
-        cy.get('@personnelVals')
-          .contains('Total cost:')
-          .next()
-          .shouldHaveValue(0);
+    it('should handle enter data in Outcomes and Milestones', () => {
+      cy.goToOutcomesAndMilestones(0);
 
-        cy.get('@personnelVals').contains('Delete').should('exist');
-        cy.get('@personnelVals').contains('Edit').should('exist');
-      });
+      cy.log('should be able to add a blank Outcome');
+      cy.findByRole('button', { name: /Add Outcome/i }).click();
 
-      it('Add blank key personnel that is chargeable to the project', () => {
-        cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-        // Have to force check; cypress does not think radio buttons are visible
-        cy.get('input[type="radio"][value="yes"]')
-          .scrollIntoView()
-          .check({ force: true });
-        cy.findByRole('button', { name: /Done/i }).click();
+      activityPage.checkTextField('ds-c-field', '', 0); // Outcome
+      activityPage.checkTextField('ds-c-field', '', 1); // Metric
 
-        // Check for default values
-        cy.get('.form-and-review-list')
-          .findByRole('heading', { name: /3.*/i })
-          .parent()
-          .parent()
-          .as('personnelVals');
-        cy.get('@personnelVals')
-          .findByRole('heading', { name: /Key Personnel name not specified/i })
-          .should('exist');
-        cy.get('@personnelVals')
-          .find('li')
-          .should($lis => {
-            expect($lis).to.have.length(1);
-            expect($lis.eq(0)).to.contain('Role not specified');
-          });
+      cy.findByRole('button', { name: /Done/i }).click();
 
-        // Check that FFY, FTE, and Total cost for each applicable year is 0.
+      activityPage.checkOutcomeOutput(
+        'Outcome not specified',
+        'Metric not specified'
+      );
+
+      cy.contains('Edit').click();
+      activityPage.checkMetricFunctionality();
+
+      cy.log('should be able to add Milestone');
+      cy.findByRole('button', { name: /Add Milestone/i }).click();
+      activityPage.checkInputField('Name', '');
+      activityPage.checkDate('Target completion date');
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      activityPage.checkMilestoneOutput(
+        'Milestone not specified',
+        'Date not specified'
+      );
+    });
+
+    it('should handle entering data inState Staff and Expenses', () => {
+      cy.goToStateStaffAndExpenses(0);
+
+      cy.log('should be able to add a state staff');
+      cy.findByRole('button', { name: /Add State Staff/i }).click();
+
+      activityPage.checkInputField('Personnel title', '');
+      activityPage.checkInputField('Description', '');
+      activityPage.checkStateStaffFFY(years, '');
+
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      activityPage.checkStateStaffOutput(
+        'Personnel title not specified',
+        years,
+        0,
+        0
+      );
+
+      cy.log('should be able to add a state expense');
+      cy.findByRole('button', { name: /Add State Expense/i }).click();
+      activityPage.checkInputField('Description', '');
+      activityPage.checkFFYinputCostFields(years, '');
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      activityPage.checkOtherStateExpensesOutput(
+        'Category not specified',
+        years,
+        [0, 0]
+      );
+    });
+
+    it('should handle entering data in Private Contractor Costs', () => {
+      cy.goToPrivateContractorCosts(0);
+
+      cy.findByRole('button', { name: /Add Contractor/i }).click();
+
+      activityPage.checkTextField('ds-c-field', '');
+      activityPage.checkTinyMCE('contractor-description-field-0', '');
+      activityPage.checkDate('Contract start date');
+      activityPage.checkDate('Contract end date');
+      activityPage.checkTextField(
+        'ds-c-field ds-c-field--currency ds-c-field--medium',
+        '',
+        0
+      );
+      cy.get('[type="radio"][checked]').should('have.value', 'no');
+      activityPage.checkFFYinputCostFields(years, '');
+
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      activityPage.checkPrivateContractorOutput(
+        'Private Contractor or Vendor Name not specified',
+        'Procurement Methodology and Description of Services not specified',
+        'Full Contract Term: Date not specified - Date not specified',
+        'Total Contract Cost: $0',
+        years,
+        [0, 0]
+      );
+    });
+
+    it('should handle entering data in Budget and FFP', () => {
+      cy.goToBudgetAndFFP(0);
+
+      cy.log('should change calculations based on federal-state split');
+      cy.then(() => {
         years.forEach(year => {
-          cy.get('@personnelVals').should(
-            'contain',
-            `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`
-          );
-        });
+          cy.contains(`Budget for FFY ${year}`)
+            .parent()
+            .parent()
+            .within(() => {
+              budgetPage.checkSplitFunctionality();
 
-        cy.get('@personnelVals').contains('Delete').should('exist');
-        cy.get('@personnelVals').contains('Edit').should('exist');
-      });
-    });
+              cy.get('[class="ds-c-field"]').select('75-25');
+              budgetPage.checkCostSplitTable(75, 25, 0, 0, 0);
 
-    describe('Activity Dashboard', () => {
-      beforeEach(() => {
-        cy.goToActivityDashboard();
-      });
+              cy.get('[class="ds-c-field"]').select('50-50');
+              budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
 
-      it('should be able to add and remove an activity', () => {
-        // Testing add activity button at end of Activitiy
-        cy.contains('Add Activity').click();
-        cy.contains('Activity 2').should('exist');
-        cy.contains('Delete').should('exist');
-        cy.contains('Delete').click();
-        cy.findByRole('button', { name: /Delete Activity/i }).click();
-        cy.waitForSave();
-        cy.contains('Activity 2').should('not.exist');
-      });
-    });
-
-    describe('Outcomes and Milestones', () => {
-      beforeEach(() => {
-        cy.goToOutcomesAndMilestones(0);
-      });
-
-      it('should be able to add a blank Outcome', () => {
-        cy.findByRole('button', { name: /Add Outcome/i }).click();
-
-        activityPage.checkTextField('ds-c-field', '', 0); // Outcome
-        activityPage.checkTextField('ds-c-field', '', 1); // Metric
-
-        cy.findByRole('button', { name: /Done/i }).click();
-
-        activityPage.checkOutcomeOutput(
-          'Outcome not specified',
-          'Metric not specified'
-        );
-
-        cy.contains('Edit').click();
-        activityPage.checkMetricFunctionality();
-      });
-
-      it('should be able to add Milestone', () => {
-        cy.findByRole('button', { name: /Add Milestone/i }).click();
-        activityPage.checkInputField('Name', '');
-        activityPage.checkDate('Target completion date');
-        cy.findByRole('button', { name: /Done/i }).click();
-
-        activityPage.checkMilestoneOutput(
-          'Milestone not specified',
-          'Date not specified'
-        );
-      });
-    });
-
-    describe('State Staff and Expenses', () => {
-      beforeEach(() => {
-        cy.goToStateStaffAndExpenses(0);
-      });
-
-      it('should be able to add a state staff', () => {
-        cy.findByRole('button', { name: /Add State Staff/i }).click();
-
-        activityPage.checkInputField('Personnel title', '');
-        activityPage.checkInputField('Description', '');
-        activityPage.checkStateStaffFFY(years, '');
-
-        cy.findByRole('button', { name: /Done/i }).click();
-
-        activityPage.checkStateStaffOutput(
-          'Personnel title not specified',
-          years,
-          0,
-          0
-        );
-      });
-
-      it('should be able to add a state expense', () => {
-        cy.findByRole('button', { name: /Add State Expense/i }).click();
-        activityPage.checkInputField('Description', '');
-        activityPage.checkFFYinputCostFields(years, '');
-        cy.findByRole('button', { name: /Done/i }).click();
-
-        activityPage.checkOtherStateExpensesOutput(
-          'Category not specified',
-          years,
-          [0, 0]
-        );
-      });
-    });
-
-    describe('Private Contractor Costs', () => {
-      beforeEach(() => {
-        cy.goToPrivateContractorCosts(0);
-      });
-
-      it('should be able to add a private contractor', () => {
-        cy.findByRole('button', { name: /Add Contractor/i }).click();
-
-        activityPage.checkTextField('ds-c-field', '');
-        activityPage.checkTinyMCE('contractor-description-field-0', '');
-        activityPage.checkDate('Contract start date');
-        activityPage.checkDate('Contract end date');
-        activityPage.checkTextField(
-          'ds-c-field ds-c-field--currency ds-c-field--medium',
-          '',
-          0
-        );
-        cy.get('[type="radio"][checked]').should('have.value', 'no');
-        activityPage.checkFFYinputCostFields(years, '');
-
-        cy.findByRole('button', { name: /Done/i }).click();
-
-        activityPage.checkPrivateContractorOutput(
-          'Private Contractor or Vendor Name not specified',
-          'Procurement Methodology and Description of Services not specified',
-          'Full Contract Term: Date not specified - Date not specified',
-          'Total Contract Cost: $0',
-          years,
-          [0, 0]
-        );
-      });
-    });
-
-    describe('Budget and FFP', () => {
-      beforeEach(() => {
-        cy.goToBudgetAndFFP(0);
-      });
-
-      it('should change calculations based on federal-state split', () => {
-        cy.then(() => {
-          years.forEach(year => {
-            cy.contains(`Budget for FFY ${year}`)
-              .parent()
-              .parent()
-              .within(() => {
-                budgetPage.checkSplitFunctionality();
-
-                cy.get('[class="ds-c-field"]').select('75-25');
-                budgetPage.checkCostSplitTable(75, 25, 0, 0, 0);
-
-                cy.get('[class="ds-c-field"]').select('50-50');
-                budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
-
-                cy.get('[class="ds-c-field"]').select('90-10');
-                budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
-              });
-          });
+              cy.get('[class="ds-c-field"]').select('90-10');
+              budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
+            });
         });
       });
 
-      it('should show the default values in the budget table', () => {
-        cy.then(() => {
-          years.forEach(year => {
-            cy.contains(`Activity 1 Budget for FFY ${year}`)
-              .parent()
-              .within(() => {
-                cy.contains('State Staff')
-                  .parent()
-                  .next()
-                  .should('have.text', 'Not specified (APD Key Personnel)$0')
-                  .next()
-                  .should('have.text', 'Not specified (APD Key Personnel)$0')
-                  .next()
-                  .should(
-                    'have.text',
-                    'Not specified (APD Key Personnel)$0×0 FTE=$0'
-                  )
-                  .next()
-                  .should(
-                    'have.text',
-                    'Personnel title not specified$0× FTE=$0'
-                  )
-                  .next()
-                  .next()
-                  .next()
-                  .next()
-                  .should('have.text', 'Category Not Selected$0')
-                  .next()
-                  .next()
-                  .next()
-                  .next()
-                  .should(
-                    'have.text',
-                    'Private Contractor or Vendor Name not specified$0'
-                  );
-              });
-          });
+      cy.log('should show the default values in the budget table');
+      cy.then(() => {
+        years.forEach(year => {
+          cy.contains(`Activity 1 Budget for FFY ${year}`)
+            .parent()
+            .within(() => {
+              cy.contains('State Staff')
+                .parent()
+                .next()
+                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .next()
+                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .next()
+                .should(
+                  'have.text',
+                  'Not specified (APD Key Personnel)$0×0 FTE=$0'
+                )
+                .next()
+                .should('have.text', 'Personnel title not specified$0× FTE=$0')
+                .next()
+                .next()
+                .next()
+                .next()
+                .should('have.text', 'Category Not Selected$0')
+                .next()
+                .next()
+                .next()
+                .next()
+                .should(
+                  'have.text',
+                  'Private Contractor or Vendor Name not specified$0'
+                );
+            });
         });
       });
     });
 
-    describe('Activity Schedule Summary', () => {
-      beforeEach(() => {
-        cy.goToActivityScheduleSummary();
-      });
-      it('Only one activity in Milestone Tables', () => {
-        schedulePage
-          .getAllActivityScheduleMilestoneTables()
-          .should('have.length', 1);
-      });
+    it('should handle entering data in Activity Schedule Summary', () => {
+      cy.goToActivityScheduleSummary();
+      schedulePage
+        .getAllActivityScheduleMilestoneTables()
+        .should('have.length', 1);
 
-      it('Milestone is called "Activity 1: Program Administration Milestones"', () => {
-        // Activity 1 has index 0
-        schedulePage
-          .getActivityScheduleMilestoneTableName(0)
-          .should('eq', 'Activity 1: Program Administration Milestones');
-      });
+      // Activity 1 has index 0
+      schedulePage
+        .getActivityScheduleMilestoneTableName(0)
+        .should('eq', 'Activity 1: Program Administration Milestones');
 
-      it('Activity 1 milestones are blank', () => {
-        // Get the first milestone for Activity 1
-        schedulePage
-          .getAllActivityScheduleMilestones(0)
-          .should('have.length', 1);
-        schedulePage
-          .getActivityScheduleMilestoneName(0, 0)
-          .should('eq', 'Milestone not specified');
-      });
+      // Get the first milestone for Activity 1
+      schedulePage.getAllActivityScheduleMilestones(0).should('have.length', 1);
+      schedulePage
+        .getActivityScheduleMilestoneName(0, 0)
+        .should('eq', 'Milestone not specified');
     });
 
-    describe('Proposed Budget', () => {
-      beforeEach(() => {
-        cy.goToProposedBudget();
-      });
+    it('should handle entering data in Proposed Budget', () => {
+      cy.goToProposedBudget();
 
-      it('should display the default values in the activity breakdown table', () => {
-        cy.then(() => {
-          years.forEach(year => {
-            proposedBudgetPage
-              .getBreakdownByFFYAndActivityAndExpense({
-                ffy: year,
-                index: 0,
-                expense: 'State Staff'
-              })
-              .as('stateStaff');
-            cy.get('@stateStaff')
-              .eq(0)
-              .should('have.text', 'Not specified (APD Key Personnel)$0');
-            cy.get('@stateStaff')
-              .eq(1)
-              .should('have.text', 'Not specified (APD Key Personnel)$0');
-            cy.get('@stateStaff')
-              .eq(2)
-              .should(
-                'have.text',
-                'Not specified (APD Key Personnel)$0×0 FTE=$0'
-              );
-            cy.get('@stateStaff')
-              .eq(3)
-              .should('have.text', 'Personnel title not specified$0× FTE=$0');
+      cy.then(() => {
+        years.forEach(year => {
+          proposedBudgetPage
+            .getBreakdownByFFYAndActivityAndExpense({
+              ffy: year,
+              index: 0,
+              expense: 'State Staff'
+            })
+            .as('stateStaff');
+          cy.get('@stateStaff')
+            .eq(0)
+            .should('have.text', 'Not specified (APD Key Personnel)$0');
+          cy.get('@stateStaff')
+            .eq(1)
+            .should('have.text', 'Not specified (APD Key Personnel)$0');
+          cy.get('@stateStaff')
+            .eq(2)
+            .should(
+              'have.text',
+              'Not specified (APD Key Personnel)$0×0 FTE=$0'
+            );
+          cy.get('@stateStaff')
+            .eq(3)
+            .should('have.text', 'Personnel title not specified$0× FTE=$0');
 
-            proposedBudgetPage
-              .getBreakdownByFFYAndActivityAndExpense({
-                ffy: year,
-                index: 0,
-                expense: 'Other State Expenses'
-              })
-              .eq(0)
-              .should('have.text', 'Category Not Selected$0');
+          proposedBudgetPage
+            .getBreakdownByFFYAndActivityAndExpense({
+              ffy: year,
+              index: 0,
+              expense: 'Other State Expenses'
+            })
+            .eq(0)
+            .should('have.text', 'Category Not Selected$0');
 
-            proposedBudgetPage
-              .getBreakdownByFFYAndActivityAndExpense({
-                ffy: year,
-                index: 0,
-                expense: 'Private Contractor'
-              })
-              .eq(0)
-              .should(
-                'have.text',
-                'Private Contractor or Vendor Name not specified$0'
-              );
-          });
+          proposedBudgetPage
+            .getBreakdownByFFYAndActivityAndExpense({
+              ffy: year,
+              index: 0,
+              expense: 'Private Contractor'
+            })
+            .eq(0)
+            .should(
+              'have.text',
+              'Private Contractor or Vendor Name not specified$0'
+            );
         });
       });
     });
 
-    describe('Export views', () => {
-      beforeEach(() => {
-        cy.goToExportView();
+    it('should display the correct data in Export views', () => {
+      cy.goToExportView();
+
+      cy.log('Key State Personnel');
+      cy.findByRole('heading', { name: /Key State Personnel/i })
+        .parent()
+        .as('personnel');
+
+      // Check text data for the first two personnel
+      cy.get('@personnel')
+        .findByRole('heading', {
+          name: /Key Personnel and Program Management/i
+        })
+        .next()
+        .find('ul')
+        .first()
+        .should(
+          'have.text',
+          '1. Primary Point of Contact name not specified' +
+            'Primary APD Point of Contact' +
+            'Role not specified' +
+            'Email: ' +
+            'Total cost: $0'
+        )
+        .next()
+        .should(
+          'have.text',
+          '2. Key Personnel name not specified' +
+            'Role not specified' +
+            'Email: ' +
+            'Total cost: $0'
+        );
+
+      // Create string to check for personnel who is chargeable for the project for certain years.
+      let str = '3. Key Personnel name not specifiedRole not specifiedEmail: ';
+      str += years
+        .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
+        .join('');
+
+      cy.get('@personnel')
+        .findByRole('heading', {
+          name: /Key Personnel and Program Management/i
+        })
+        .next()
+        .find('ul')
+        .eq(2)
+        .should('have.text', str);
+
+      cy.log('Activities');
+      cy.findByRole('heading', {
+        name: /Activity 1: Program AdministrationOutcomes and Metrics/i
+      })
+        .next()
+        .next()
+        .should('have.text', 'Outcome:  Outcome not specified')
+        .next()
+        .should('have.text', 'Metrics: 1. Metric not specified')
+        .next()
+        .next()
+        .next()
+        .should('have.text', '1. Milestone not specified')
+        .next()
+        .should('have.text', 'Target completion date:  Date not specified');
+
+      cy.findByRole('heading', {
+        name: /Activity 1: Program AdministrationState staff/i
+      })
+        .next()
+        .should('have.text', '1. Personnel title not specified')
+        .next()
+        .next()
+        .should(
+          'have.text',
+          years
+            .map(year => `FFY ${year} Cost: $0 | FTEs: 0 | Total: $0`)
+            .join('')
+        );
+
+      cy.findByRole('heading', {
+        name: /Activity 1: Program AdministrationOther state expenses/i
+      })
+        .next()
+        .should('have.text', '1. Category Not Selected')
+        .next()
+        .next()
+        .should(
+          'have.text',
+          years.map(year => `FFY ${year} Cost: $0`).join('')
+        );
+
+      const privateContractorCosts = years
+        .map(year => `FFY ${year} Cost: $0`)
+        .join('');
+      cy.findByRole('heading', {
+        name: /Activity 1: Program AdministrationPrivate Contractor Costs/i
+      })
+        .next()
+        .should(
+          'have.text',
+          '1. Private Contractor or Vendor Name not specified'
+        )
+        .next()
+        .should(
+          'have.text',
+          'Procurement Methodology and Description of Services'
+        )
+        .next()
+        .should(
+          'have.text',
+          'Procurement Methodology and Description of Services not specified'
+        )
+        .next()
+        .should(
+          'have.text',
+          `Full Contract Term: Dates not specifiedTotal Contract Cost: $0${privateContractorCosts}`
+        );
+
+      cy.then(() => {
+        years.forEach(year => {
+          cy.contains(`Activity 1 Budget for FFY ${year}`)
+            .parent()
+            .within(() => {
+              cy.contains('State Staff')
+                .parent()
+                .next()
+                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .next()
+                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .next()
+                .should(
+                  'have.text',
+                  'Not specified (APD Key Personnel)$0×0 FTE=$0'
+                )
+                .next()
+                .should('have.text', 'Personnel title not specified$0× FTE=$0')
+                .next()
+                .next()
+                .next()
+                .next()
+                .should('have.text', 'Category Not Selected$0')
+                .next()
+                .next()
+                .next()
+                .next()
+                .should(
+                  'have.text',
+                  'Private Contractor or Vendor Name not specified$0'
+                );
+            });
+        });
       });
 
-      it('Key State Personnel', () => {
-        cy.findByRole('heading', { name: /Key State Personnel/i })
+      cy.log('Activity Schedule Summary');
+      exportPage
+        .getAllActivityScheduleMilestoneTables()
+        .should('have.length', 1);
+      // Activity 1 has index 0
+      exportPage
+        .getActivityScheduleMilestoneTableName(0)
+        .should('eq', 'Activity 1: Program Administration Milestones');
+      // Get the first milestone for Activity 1
+      exportPage.getAllActivityScheduleMilestones(0).should('have.length', 1);
+      exportPage
+        .getActivityScheduleMilestoneName(0, 0)
+        .should('eq', 'Milestone not specified');
+
+      cy.log(
+        'should display the default values in the activity breakdown table'
+      );
+      cy.then(() => {
+        years.forEach(year => {
+          proposedBudgetPage
+            .getBreakdownByFFYAndActivityAndExpense({
+              ffy: year,
+              index: 0,
+              expense: 'State Staff'
+            })
+            .as('stateStaff');
+          cy.get('@stateStaff')
+            .eq(0)
+            .should('have.text', 'Not specified (APD Key Personnel)$0');
+          cy.get('@stateStaff')
+            .eq(1)
+            .should('have.text', 'Not specified (APD Key Personnel)$0');
+          cy.get('@stateStaff')
+            .eq(2)
+            .should(
+              'have.text',
+              'Not specified (APD Key Personnel)$0×0 FTE=$0'
+            );
+          cy.get('@stateStaff')
+            .eq(3)
+            .should('have.text', 'Personnel title not specified$0× FTE=$0');
+
+          proposedBudgetPage
+            .getBreakdownByFFYAndActivityAndExpense({
+              ffy: year,
+              index: 0,
+              expense: 'Other State Expenses'
+            })
+            .eq(0)
+            .should('have.text', 'Category Not Selected$0');
+
+          proposedBudgetPage
+            .getBreakdownByFFYAndActivityAndExpense({
+              ffy: year,
+              index: 0,
+              expense: 'Private Contractor'
+            })
+            .eq(0)
+            .should(
+              'have.text',
+              'Private Contractor or Vendor Name not specified$0'
+            );
+        });
+      });
+    });
+
+    it('should handle deleting subform values', () => {
+      cy.log('Key Personnel');
+      cy.goToKeyStatePersonnel();
+
+      const deleteKeyPersonnel = name => {
+        cy.get('.form-and-review-list')
+          .findByRole('heading', { name })
           .parent()
-          .as('personnel');
-
-        // Check text data for the first two personnel
-        cy.get('@personnel')
-          .findByRole('heading', {
-            name: /Key Personnel and Program Management/i
-          })
-          .next()
-          .find('ul')
-          .first()
-          .should(
-            'have.text',
-            '1. Primary Point of Contact name not specified' +
-              'Primary APD Point of Contact' +
-              'Role not specified' +
-              'Email: ' +
-              'Total cost: $0'
-          )
-          .next()
-          .should(
-            'have.text',
-            '2. Key Personnel name not specified' +
-              'Role not specified' +
-              'Email: ' +
-              'Total cost: $0'
-          );
-
-        // Create string to check for personnel who is chargeable for the project for certain years.
-        let str =
-          '3. Key Personnel name not specifiedRole not specifiedEmail: ';
-        str += years
-          .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
-          .join('');
-
-        cy.get('@personnel')
-          .findByRole('heading', {
-            name: /Key Personnel and Program Management/i
-          })
-          .next()
-          .find('ul')
-          .eq(2)
-          .should('have.text', str);
-      });
-
-      it('Activities', () => {
-        cy.findByRole('heading', {
-          name: /Activity 1: Program AdministrationOutcomes and Metrics/i
-        })
-          .next()
-          .next()
-          .should('have.text', 'Outcome:  Outcome not specified')
-          .next()
-          .should('have.text', 'Metrics: 1. Metric not specified')
-          .next()
-          .next()
-          .next()
-          .should('have.text', '1. Milestone not specified')
-          .next()
-          .should('have.text', 'Target completion date:  Date not specified');
-
-        cy.findByRole('heading', {
-          name: /Activity 1: Program AdministrationState staff/i
-        })
-          .next()
-          .should('have.text', '1. Personnel title not specified')
-          .next()
-          .next()
-          .should(
-            'have.text',
-            years
-              .map(year => `FFY ${year} Cost: $0 | FTEs: 0 | Total: $0`)
-              .join('')
-          );
-
-        cy.findByRole('heading', {
-          name: /Activity 1: Program AdministrationOther state expenses/i
-        })
-          .next()
-          .should('have.text', '1. Category Not Selected')
-          .next()
-          .next()
-          .should(
-            'have.text',
-            years.map(year => `FFY ${year} Cost: $0`).join('')
-          );
-
-        const privateContractorCosts = years
-          .map(year => `FFY ${year} Cost: $0`)
-          .join('');
-        cy.findByRole('heading', {
-          name: /Activity 1: Program AdministrationPrivate Contractor Costs/i
-        })
-          .next()
-          .should(
-            'have.text',
-            '1. Private Contractor or Vendor Name not specified'
-          )
-          .next()
-          .should(
-            'have.text',
-            'Procurement Methodology and Description of Services'
-          )
-          .next()
-          .should(
-            'have.text',
-            'Procurement Methodology and Description of Services not specified'
-          )
-          .next()
-          .should(
-            'have.text',
-            `Full Contract Term: Dates not specifiedTotal Contract Cost: $0${privateContractorCosts}`
-          );
-
-        cy.then(() => {
-          years.forEach(year => {
-            cy.contains(`Activity 1 Budget for FFY ${year}`)
-              .parent()
-              .within(() => {
-                cy.contains('State Staff')
-                  .parent()
-                  .next()
-                  .should('have.text', 'Not specified (APD Key Personnel)$0')
-                  .next()
-                  .should('have.text', 'Not specified (APD Key Personnel)$0')
-                  .next()
-                  .should(
-                    'have.text',
-                    'Not specified (APD Key Personnel)$0×0 FTE=$0'
-                  )
-                  .next()
-                  .should(
-                    'have.text',
-                    'Personnel title not specified$0× FTE=$0'
-                  )
-                  .next()
-                  .next()
-                  .next()
-                  .next()
-                  .should('have.text', 'Category Not Selected$0')
-                  .next()
-                  .next()
-                  .next()
-                  .next()
-                  .should(
-                    'have.text',
-                    'Private Contractor or Vendor Name not specified$0'
-                  );
-              });
-          });
-        });
-      });
-
-      it('Activity Schedule Summary', () => {
-        exportPage
-          .getAllActivityScheduleMilestoneTables()
-          .should('have.length', 1);
-        // Activity 1 has index 0
-        exportPage
-          .getActivityScheduleMilestoneTableName(0)
-          .should('eq', 'Activity 1: Program Administration Milestones');
-        // Get the first milestone for Activity 1
-        exportPage.getAllActivityScheduleMilestones(0).should('have.length', 1);
-        exportPage
-          .getActivityScheduleMilestoneName(0, 0)
-          .should('eq', 'Milestone not specified');
-      });
-
-      it('should display the default values in the activity breakdown table', () => {
-        cy.then(() => {
-          years.forEach(year => {
-            proposedBudgetPage
-              .getBreakdownByFFYAndActivityAndExpense({
-                ffy: year,
-                index: 0,
-                expense: 'State Staff'
-              })
-              .as('stateStaff');
-            cy.get('@stateStaff')
-              .eq(0)
-              .should('have.text', 'Not specified (APD Key Personnel)$0');
-            cy.get('@stateStaff')
-              .eq(1)
-              .should('have.text', 'Not specified (APD Key Personnel)$0');
-            cy.get('@stateStaff')
-              .eq(2)
-              .should(
-                'have.text',
-                'Not specified (APD Key Personnel)$0×0 FTE=$0'
-              );
-            cy.get('@stateStaff')
-              .eq(3)
-              .should('have.text', 'Personnel title not specified$0× FTE=$0');
-
-            proposedBudgetPage
-              .getBreakdownByFFYAndActivityAndExpense({
-                ffy: year,
-                index: 0,
-                expense: 'Other State Expenses'
-              })
-              .eq(0)
-              .should('have.text', 'Category Not Selected$0');
-
-            proposedBudgetPage
-              .getBreakdownByFFYAndActivityAndExpense({
-                ffy: year,
-                index: 0,
-                expense: 'Private Contractor'
-              })
-              .eq(0)
-              .should(
-                'have.text',
-                'Private Contractor or Vendor Name not specified$0'
-              );
-          });
-        });
-      });
-    });
-
-    describe('Delete subform values', () => {
-      it('Key Personnel', () => {
-        cy.goToKeyStatePersonnel();
-
-        const deleteKeyPersonnel = name => {
-          cy.get('.form-and-review-list')
-            .findByRole('heading', { name })
-            .parent()
-            .parent()
-            .contains('Delete')
-            .click();
-          cy.contains('Delete Key Personnel?').should('exist');
-          cy.contains('Cancel').click();
-          cy.contains('Delete Key Personnel?').should('not.exist');
-          cy.get('.form-and-review-list')
-            .findByRole('heading', { name })
-            .should('exist');
-
-          cy.get('.form-and-review-list')
-            .findByRole('heading', { name })
-            .parent()
-            .parent()
-            .contains('Delete')
-            .click();
-          cy.get('[class="ds-c-button ds-c-button--danger"]').click();
-          cy.waitForSave();
-          cy.contains('Delete Key Personnel?').should('not.exist');
-
-          cy.get('.form-and-review-list')
-            .findByRole('heading', { name })
-            .should('not.exist');
-        };
-
-        deleteKeyPersonnel(/3.*/i);
-        deleteKeyPersonnel(/2.*/i);
-
+          .parent()
+          .contains('Delete')
+          .click();
+        cy.contains('Delete Key Personnel?').should('exist');
+        cy.contains('Cancel').click();
+        cy.contains('Delete Key Personnel?').should('not.exist');
         cy.get('.form-and-review-list')
-          .findByRole('heading', { name: /1.*/i })
+          .findByRole('heading', { name })
           .should('exist');
+
         cy.get('.form-and-review-list')
-          .findByRole('heading', { name: /2.*/i })
-          .should('not.exist');
+          .findByRole('heading', { name })
+          .parent()
+          .parent()
+          .contains('Delete')
+          .click();
+        cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+        cy.waitForSave();
+        cy.contains('Delete Key Personnel?').should('not.exist');
+
         cy.get('.form-and-review-list')
-          .findByRole('heading', { name: /3.*/i })
+          .findByRole('heading', { name })
           .should('not.exist');
-      });
+      };
 
-      it('Outcomes and Milestones', () => {
-        cy.goToOutcomesAndMilestones(0);
+      deleteKeyPersonnel(/3.*/i);
+      deleteKeyPersonnel(/2.*/i);
 
-        activityPage.checkDeleteButton(
-          'Outcomes have not been added for this activity.',
-          'Delete Outcome and Metrics?',
-          'Outcome not specified'
-        );
+      cy.get('.form-and-review-list')
+        .findByRole('heading', { name: /1.*/i })
+        .should('exist');
+      cy.get('.form-and-review-list')
+        .findByRole('heading', { name: /2.*/i })
+        .should('not.exist');
+      cy.get('.form-and-review-list')
+        .findByRole('heading', { name: /3.*/i })
+        .should('not.exist');
 
-        activityPage.checkDeleteButton(
-          'Milestones have not been added for this activity.',
-          'Delete Milestone?',
-          'Milestone not specified'
-        );
-      });
+      cy.log('Outcomes and Milestones');
+      cy.goToOutcomesAndMilestones(0);
 
-      it('State Staff and Expenses', () => {
-        cy.goToStateStaffAndExpenses(0);
+      activityPage.checkDeleteButton(
+        'Outcomes have not been added for this activity.',
+        'Delete Outcome and Metrics?',
+        'Outcome not specified'
+      );
 
-        activityPage.checkDeleteButton(
-          'State staff have not been added for this activity.',
-          'Delete State Staff Expenses?',
-          'Personnel title not specified'
-        );
+      activityPage.checkDeleteButton(
+        'Milestones have not been added for this activity.',
+        'Delete Milestone?',
+        'Milestone not specified'
+      );
 
-        activityPage.checkDeleteButton(
-          'Other state expenses have not been added for this activity.',
-          'Delete Other State Expense?',
-          'Category not specified'
-        );
-      });
+      cy.log('State Staff and Expenses');
+      cy.goToStateStaffAndExpenses(0);
 
-      it('Private Contractor Costs', () => {
-        cy.goToPrivateContractorCosts(0);
+      activityPage.checkDeleteButton(
+        'State staff have not been added for this activity.',
+        'Delete State Staff Expenses?',
+        'Personnel title not specified'
+      );
 
-        activityPage.checkDeleteButton(
-          'Private contractors have not been added for this activity',
-          'Delete Private Contractor?',
-          'Private Contractor or Vendor Name not specified'
-        );
-      });
+      activityPage.checkDeleteButton(
+        'Other state expenses have not been added for this activity.',
+        'Delete Other State Expense?',
+        'Category not specified'
+      );
+
+      cy.log('Private Contractor Costs');
+      cy.goToPrivateContractorCosts(0);
+
+      activityPage.checkDeleteButton(
+        'Private contractors have not been added for this activity',
+        'Delete Private Contractor?',
+        'Private Contractor or Vendor Name not specified'
+      );
     });
   });
 

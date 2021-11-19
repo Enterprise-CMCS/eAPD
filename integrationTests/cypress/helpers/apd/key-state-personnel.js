@@ -1,83 +1,75 @@
 export const testDefaultKeyStatePersonnel = () => {
-  beforeEach(() => {
+  it('should have the default values for Key State Personnel', () => {
     cy.goToKeyStatePersonnel();
+
     cy.url().should('contain', '/state-profile');
-  });
-  it('should have the default State Director/Office', () => {
+    cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
+
     cy.get('input[name="apd-state-profile-mdname"]')
       .clear()
       .should('have.text', '');
-    cy.waitForSave();
+
     cy.get('input[name="apd-state-profile-mdemail"]')
       .clear()
       .should('have.text', '');
-    cy.waitForSave();
+
     cy.get('input[name="apd-state-profile-mdphone"]')
       .clear()
       .should('have.text', '');
-    cy.waitForSave();
+
     cy.get('input[name="apd-state-profile-addr1"]')
       .clear()
       .should('have.text', '');
-    cy.waitForSave();
+
     cy.get('input[name="apd-state-profile-addr2"]')
       .clear()
       .should('have.text', '');
-    cy.waitForSave();
+
     cy.get('input[name="apd-state-profile-city"]')
       .clear()
       .should('have.text', '');
-    cy.waitForSave();
+
     cy.get('input[name="apd-state-profile-zip"]')
       .clear()
       .should('have.text', '');
-    cy.waitForSave();
+
     cy.get('select[name="apd-state-profile-state"]')
       .invoke('val', '')
       .trigger('change');
     cy.waitForSave();
-  });
 
-  it('State dropdown has 56 states & territories', () => {
     cy.get('#apd-state-profile-state>option').should('have.length', 56);
-  });
 
-  it('Verify no primary contacts message', () => {
     cy.contains(
       'Primary Point of Contact has not been added for this activity'
     ).should('exist');
   });
-};
 
-export const testDefaultKeyStatePersonnelExportView = () => {
-  beforeEach(() => {
-    // Get div with personnel data
+  it('should display the default values in the export view', () => {
+    cy.goToExportView();
+
     cy.findByRole('heading', { name: /Key State Personnel/i })
       .parent()
       .as('personnel');
-  });
 
-  it('Medicaid director has default/blank values', () => {
     cy.get('@personnel')
       .findByRole('heading', { name: /Medicaid director/i })
       .next()
       .should('have.text', 'Name:  Email: Phone: '); // Name has a mysterious extra space...
-  });
 
-  it('No response for Medicaid office address', () => {
     cy.get('@personnel')
       .findByRole('heading', { name: /Medicaid office address/i })
       .next()
       .should('have.text', 'No response was provided');
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 
 export const testKeyStatePersonnelWithData = years => {
-  beforeEach(() => {
-    cy.goToKeyStatePersonnel();
-  });
-
   it('Fill out Key State Personnel', () => {
+    cy.goToKeyStatePersonnel();
+
     cy.url().should('include', '/state-profile');
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
 
@@ -166,9 +158,7 @@ export const testKeyStatePersonnelWithData = years => {
       });
       cy.findByRole('button', { name: /Done/i }).click();
     });
-  });
 
-  it('Edit Key Personnel', () => {
     cy.findAllByRole('button', { name: /Delete/i })
       .eq(0)
       .click();

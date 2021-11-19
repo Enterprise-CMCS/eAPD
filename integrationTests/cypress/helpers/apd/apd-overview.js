@@ -1,5 +1,8 @@
 export const testDefaultAPDOverview = () => {
-  it('should have the first two FFYs checked', () => {
+  it('should verify the default values the FFYs and APD Overview', () => {
+    cy.url().should('include', '/apd-overview');
+    cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
+
     cy.get('[type="checkbox"]').each(($year, index, list) => {
       if (index === list.length - 1) {
         cy.wrap($year).should('not.be.checked');
@@ -7,48 +10,33 @@ export const testDefaultAPDOverview = () => {
         cy.wrap($year).should('be.checked');
       }
     });
-  });
 
-  it('should have an empty Program Introduction field', () => {
     cy.get('[id="program-introduction-field"]').should('have.value', '');
-  });
-
-  it('should have an empty HIT Overview field', () => {
     cy.get('[id="hit-overview-field"]').should('have.value', '');
-  });
-
-  it('should have an empty HIE Overview field', () => {
     cy.get('[id="hie-overview-field"]').should('have.value', '');
-  });
-
-  it('should have an empty MMIS Overview field', () => {
     cy.get('[id="mmis-overview-field"]').should('have.value', '');
   });
-};
 
-export const testDefaultAPDOverviewExportView = () => {
-  it('should have the default value for Program Introduction', () => {
+  it('should display the default values in the export view', () => {
+    cy.goToExportView();
+
     cy.contains('Program introduction')
       .next()
       .should('have.text', 'No response was provided');
-  });
 
-  it('should have the default value for HIT Overview', () => {
     cy.contains('HIT overview')
       .next()
       .should('have.text', 'No response was provided');
-  });
 
-  it('should have the default value for HIE Overview', () => {
     cy.contains('HIE overview')
       .next()
       .should('have.text', 'No response was provided');
-  });
 
-  it('should have the default value for MMIS Overview', () => {
     cy.contains('MMIS overview')
       .next()
       .should('have.text', 'No response was provided');
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 

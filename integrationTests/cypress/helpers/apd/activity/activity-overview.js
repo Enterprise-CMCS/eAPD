@@ -8,12 +8,11 @@ export const testDefaultActivityOverview = () => {
     activityPage = new ActivityPage();
   });
 
-  beforeEach(() => {
-    cy.goToActivityOverview(0);
-    cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
-  });
-
   it('should display the default activity overview', () => {
+    cy.goToActivityOverview(0);
+
+    cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
+
     activityPage.checkDate('Start date');
     activityPage.checkDate('End date');
 
@@ -23,21 +22,21 @@ export const testDefaultActivityOverview = () => {
     activityPage.checkTinyMCE('standards-and-conditions-supports-field', '');
     activityPage.checkTextField('ds-c-field visibility--screen', '');
   });
-};
 
-export const testDefaultActivityOverviewExportView = () => {
-  beforeEach(() => {
+  it('should display the default activity overview in the export view', () => {
+    cy.goToExportView();
+
     cy.findByRole('heading', { level: 3, name: 'Activity Overview' }).should(
       'exist'
     );
-  });
 
-  it('should display the default activity overview', () => {
     cy.findByRole('heading', {
       name: /Statement of Alternative Considerations and Supporting Justification/i
     })
       .next()
       .should('have.text', '');
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 

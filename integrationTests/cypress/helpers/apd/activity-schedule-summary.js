@@ -48,93 +48,63 @@ const testActivityMilestone = page => {
 };
 
 export const testDefaultActivityScheduleSummary = () => {
-  const schedulePage = new ActivitySchedulePage();
+  it('should have the default values for Activity Schedule Summary', () => {
+    const schedulePage = new ActivitySchedulePage();
 
-  beforeEach(() => {
     cy.goToActivityScheduleSummary();
     cy.url().should('contain', '/schedule-summary');
+    cy.findByRole('heading', { name: 'Activity Schedule Summary' }).should(
+      'exist'
+    );
+
+    schedulePage.getAllActivityScheduleOverviews().should('have.length', 1);
+
+    // Activity List
+    schedulePage
+      .getActivityScheduleOverviewName(0)
+      .should('eq', 'Activity 1: Program Administration Milestones');
+
+    schedulePage
+      .getActivityScheduleOverviewDates(0)
+      .should('eq', 'Date not specified - Date not specified');
+
+    // Milestones
+    schedulePage
+      .getAllActivityScheduleMilestoneTables()
+      .should('have.length', 1);
+
+    schedulePage
+      .getActivityScheduleMilestoneTableName(0)
+      .should('eq', 'Activity 1: Program Administration Milestones');
+
+    schedulePage.getAllActivityScheduleMilestones(0).should('not.exist');
   });
 
-  describe('Activities Overview', () => {
-    it('Only one activity in the Activity List Overview', () => {
-      schedulePage.getAllActivityScheduleOverviews().should('have.length', 1);
-    });
+  it('should have the default values for Activity Schedule Summary in the export view', () => {
+    const exportPage = new ExportPage();
+    cy.goToExportView();
 
-    it('Activity is called "Activity 1: Program Administration Milestones"', () => {
-      // Activity 1 has index 0
-      schedulePage
-        .getActivityScheduleOverviewName(0)
-        .should('eq', 'Activity 1: Program Administration Milestones');
-    });
+    // Activity List
+    exportPage.getAllActivityScheduleOverviews().should('have.length', 1);
 
-    it('Activity date range is "Date not specified - Date not specified"', () => {
-      schedulePage
-        .getActivityScheduleOverviewDates(0)
-        .should('eq', 'Date not specified - Date not specified');
-    });
-  });
+    exportPage
+      .getActivityScheduleOverviewName(0)
+      .should('eq', 'Activity 1: Program Administration Milestones');
 
-  describe('Milestones', () => {
-    it('Only one activity in Milestone Tables', () => {
-      schedulePage
-        .getAllActivityScheduleMilestoneTables()
-        .should('have.length', 1);
-    });
+    exportPage
+      .getActivityScheduleOverviewDates(0)
+      .should('eq', 'Date not specified - Date not specified');
 
-    it('Milestone is called "Activity 1: Program Administration Milestones"', () => {
-      // Activity 1 has index 0
-      schedulePage
-        .getActivityScheduleMilestoneTableName(0)
-        .should('eq', 'Activity 1: Program Administration Milestones');
-    });
+    // Milestones
+    exportPage.getAllActivityScheduleMilestoneTables().should('have.length', 1);
 
-    it('Activity 1 milestones are empty', () => {
-      // Get the first milestone for Activity 1
-      schedulePage.getAllActivityScheduleMilestones(0).should('not.exist');
-    });
-  });
-};
+    exportPage
+      .getActivityScheduleMilestoneTableName(0)
+      .should('eq', 'Activity 1: Program Administration Milestones');
 
-export const testDefaultActivityScheduleSummaryExportView = () => {
-  const exportPage = new ExportPage();
+    exportPage.getAllActivityScheduleMilestones(0).should('not.exist');
 
-  describe('Activities Overview', () => {
-    it('Only one activity in the Activity List Overview', () => {
-      exportPage.getAllActivityScheduleOverviews().should('have.length', 1);
-    });
-
-    it('Activity is called "Activity 1: Program Administration Milestones"', () => {
-      // Activity 1 has index 0
-      exportPage
-        .getActivityScheduleOverviewName(0)
-        .should('eq', 'Activity 1: Program Administration Milestones');
-    });
-
-    it('Activity date range is "Date not specified - Date not specified"', () => {
-      exportPage
-        .getActivityScheduleOverviewDates(0)
-        .should('eq', 'Date not specified - Date not specified');
-    });
-  });
-
-  describe('Milestones', () => {
-    it('Only one activity in Milestone Tables', () => {
-      exportPage
-        .getAllActivityScheduleMilestoneTables()
-        .should('have.length', 1);
-    });
-
-    it('Milestone is called "Activity 1: Program Administration Milestones"', () => {
-      // Activity 1 has index 0
-      exportPage
-        .getActivityScheduleMilestoneTableName(0)
-        .should('eq', 'Activity 1: Program Administration Milestones');
-    });
-
-    it('Activity 1 milestones are empty', () => {
-      // Get the first milestone for Activity 1
-      exportPage.getAllActivityScheduleMilestones(0).should('not.exist');
-    });
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 
@@ -149,17 +119,15 @@ export const testActivityScheduleSummaryWithData = () => {
 
   beforeEach(() => {
     cy.fixture('activity-overview-template.json').as('data');
-    cy.goToActivityScheduleSummary();
   });
 
-  it('should be on the correct page', () => {
+  it('should display the correct values for the Activity Schedule Summary', () => {
+    cy.goToActivityScheduleSummary();
     cy.url().should('include', '/schedule-summary');
     cy.findByRole('heading', {
       name: /Activity Schedule Summary/i
     }).should('exist');
-  });
 
-  it('should display the correct values for the Activity Schedule Summary', () => {
     cy.get('@data').then(data => {
       schedulePage
         .getAllActivityScheduleOverviews()

@@ -1,22 +1,20 @@
 import ActivitiesStateStaffExpensesPage from '../../../page-objects/activities-state-staff-expenses-page';
 
 export const testDefaultStateStaffAndExpenses = () => {
-  beforeEach(() => {
+  it('should display the default state staff and expenses', () => {
     cy.goToStateStaffAndExpenses(0);
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
     }).should('exist');
-  });
 
-  it('should display the default state staff and expenses', () => {
     cy.contains('State staff have not been added for this activity.').should(
       'exist'
     );
   });
-};
 
-export const testDefaultStateStaffAndExpensesExportView = () => {};
+  // TODO: export view tests
+};
 
 export const testStateStaffAndExpensesWithData = () => {
   let staffExpensesPage;
@@ -137,7 +135,7 @@ export const testStateStaffAndExpensesWithData = () => {
       );
     });
 
-    // TODO: Add test for export view
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
@@ -198,6 +196,6 @@ export const testStateStaffAndExpensesWithData = () => {
       });
     });
 
-    // TODO: Add test for export view
+    // TODO: export view tests
   });
 };
