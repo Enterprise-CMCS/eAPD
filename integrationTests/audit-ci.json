@@ -1,9 +1,9 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1002401],
+  "allowlist": [1004946],
   "_comment": {
-    "1002401": {
+    "1004946": {
       "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
       "module": "ansi-regex",
       "affects": [
