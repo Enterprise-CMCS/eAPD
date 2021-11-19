@@ -11,7 +11,6 @@ export const testDefaultProposedBudget = years => {
     proposedBudgetPage = new ProposedBudgetPage();
     const activityPage = new ActivitySchedulePage();
     cy.goToActivityScheduleSummary();
-    // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     activityList = activityPage.getActivityScheduleOverviewNameList();
   });
 
@@ -168,7 +167,9 @@ export const testProposedBudgetWithData = years => {
     proposedBudgetPage = new ProposedBudgetPage();
     const activityPage = new ActivitySchedulePage();
     cy.goToActivityScheduleSummary();
-    // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.findByRole('heading', {
+      name: /Activity Schedule Summary/i
+    }).should('exist');
     activityList = activityPage.getActivityScheduleOverviewNameList();
   });
 
@@ -184,134 +185,93 @@ export const testProposedBudgetWithData = years => {
     cy.findByRole('heading', { level: 2, name: 'Proposed Budget' });
   });
 
-  describe('Summary Budget by Activity', () => {
-    it('should have the correct values for Total Computable Medicaid Cost', () => {
-      proposedBudgetPage.verifyComputableMedicaidCostByFFY({
-        years,
-        expected: budgetData.dataSummaryBudgetByActivity
-      });
+  it('should have the correct values for Proposed Budget', () => {
+    cy.log('Summary Budget by Activity, Total Computable Medicaid Cost');
+    proposedBudgetPage.verifyComputableMedicaidCostByFFY({
+      years,
+      expected: budgetData.dataSummaryBudgetByActivity
     });
 
-    it('should have the correct values for Activity Breakdown', () => {
-      proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
-        years,
-        activityList,
-        expected: budgetData.dataActivityBreakdown
-      });
-    });
-  });
-
-  describe('Summary Budget Table by Expense Type', () => {
-    it('should have the correct values for Expense Type tables', () => {
-      proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
-        years: [...years, 'total'],
-        expected: budgetData.dataSummaryBudgetTable.byTypes
-      });
+    cy.log('Summary Budget by Activity, Activity Breakdown');
+    proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
+      years,
+      activityList,
+      expected: budgetData.dataActivityBreakdown
     });
 
-    it('should have the correct values for Activities Totals table', () => {
-      proposedBudgetPage.verifySummaryBudgetTableTotal({
-        expected: budgetData.dataSummaryBudgetTable.totals
-      });
-    });
-  });
-
-  describe('Quarterly Federal Share by FFP', () => {
-    it('should have the correct values for FFY tables', () => {
-      proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
-        years,
-        expected: budgetData.dataQuarterlyFederalShare
-      });
+    cy.log('Summary Budget Table by Expense Type, Expense Type tables');
+    proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
+      years: [...years, 'total'],
+      expected: budgetData.dataSummaryBudgetTable.byTypes
     });
 
-    it('should have the correct values for Total tables', () => {
-      proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-        expected: budgetData.dataQuarterlyFederalShare
-      });
+    cy.log('Summary Budget Table by Expense Type, Activities Totals table');
+    proposedBudgetPage.verifySummaryBudgetTableTotal({
+      expected: budgetData.dataSummaryBudgetTable.totals
+    });
+
+    cy.log('Quarterly Federal Share by FFY, FFY tables');
+    proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
+      years,
+      expected: budgetData.dataQuarterlyFederalShare
+    });
+
+    cy.log('Quarterly Federal Share by FFY, Total tables');
+    proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
+      expected: budgetData.dataQuarterlyFederalShare
+    });
+
+    cy.log('Estimated Quarterly Incentive Payments, FFY tables');
+    proposedBudgetPage.fillInEQIPFormByFFY({
+      years,
+      expected: budgetData.dataEQIP
     });
   });
 
-  describe('Estimated Quarterly Incentive Payments', () => {
-    it('should have the correc values for FFY tables', () => {
-      proposedBudgetPage.fillInEQIPFormByFFY({
-        years,
-        expected: budgetData.dataEQIP
-      });
-    });
-  });
-};
+  it('should export the correct values for Proposed Budget Export View', () => {
+    cy.goToExportView();
 
-export const testProposedBudgetExportViewWithData = years => {
-  let proposedBudgetPage;
-  let activityList;
-  let budgetData;
+    // cy.log('Summary Budget by Activity, Total Computable Medicaid Cost');
+    // proposedBudgetPage.verifyComputableMedicaidCostByFFY({
+    //   years,
+    //   expected: budgetData.dataSummaryBudgetByActivity
+    // });
 
-  before(() => {
-    proposedBudgetPage = new ProposedBudgetPage();
-    const exportPage = new ExportPage();
-    // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
-    activityList = exportPage.getActivityScheduleOverviewNameList();
-  });
+    // cy.log('Summary Budget by Activity, Activity Breakdown');
+    // proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
+    //   years,
+    //   activityList,
+    //   expected: budgetData.dataActivityBreakdown
+    // });
 
-  beforeEach(() => {
-    cy.fixture('proposed-budget-test.json').then(data => {
-      budgetData = data;
-    });
-  });
+    // cy.log('Summary Budget Table by Expense Type, Expense Type tables');
+    // proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
+    //   years: [...years, 'total'],
+    //   expected: budgetData.dataSummaryBudgetTable.byTypes
+    // });
 
-  describe('Summary Budget by Activity', () => {
-    it('should have the correct values for Total Computable Medicaid Cost', () => {
-      proposedBudgetPage.verifyComputableMedicaidCostByFFY({
-        years,
-        expected: budgetData.dataSummaryBudgetByActivity
-      });
-    });
+    // cy.log('Summary Budget Table by Expense Type, Activities Totals table');
+    // proposedBudgetPage.verifySummaryBudgetTableTotal({
+    //   expected: budgetData.dataSummaryBudgetTable.totals
+    // });
 
-    it('should have the correct values for Activity Breakdown', () => {
-      proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
-        years,
-        activityList,
-        expected: budgetData.dataActivityBreakdown
-      });
-    });
-  });
+    // cy.log('Quarterly Federal Share by FFP, FFY tables');
+    // proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
+    //   years,
+    //   expected: budgetData.dataQuarterlyFederalShare
+    // });
 
-  describe('Summary Budget Table by Expense Type', () => {
-    it('should have the correct values for Expense Type tables', () => {
-      proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
-        years: [...years, 'total'],
-        expected: budgetData.dataSummaryBudgetTable.byTypes
-      });
-    });
+    // cy.log('Quarterly Federal Share by FFP, Total tables');
+    // proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
+    //   expected: budgetData.dataQuarterlyFederalShare
+    // });
 
-    it('should have the correct values for Activities Totals table', () => {
-      proposedBudgetPage.verifySummaryBudgetTableTotal({
-        expected: budgetData.dataSummaryBudgetTable.totals
-      });
-    });
-  });
+    // cy.log('Estimated Quarterly Incentive Payments, FFY tables');
+    // proposedBudgetPage.verifyEQIPViewByFFY({
+    //   years,
+    //   expected: budgetData.dataEQIP
+    // });
 
-  describe('Quarterly Federal Share by FFP', () => {
-    it('should have the correct values for FFY tables', () => {
-      proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
-        years,
-        expected: budgetData.dataQuarterlyFederalShare
-      });
-    });
-
-    it('should have the correct values for Total tables', () => {
-      proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-        expected: budgetData.dataQuarterlyFederalShare
-      });
-    });
-  });
-
-  describe('Default values for Estimated Quarterly Incentive Payments', () => {
-    it('should have default values for FFY tables', () => {
-      proposedBudgetPage.verifyEQIPViewByFFY({
-        years,
-        expected: budgetData.dataEQIP
-      });
-    });
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };

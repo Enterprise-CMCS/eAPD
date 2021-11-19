@@ -1,4 +1,5 @@
 /* eslint class-methods-use-this: "off" */
+const { _ } = Cypress;
 
 class ProposedBudgetPage {
   // Combined Activity Costs - CAC
@@ -22,14 +23,16 @@ class ProposedBudgetPage {
     cy.contains(`FFY ${ffy} Total Computable Medicaid Cost`).next();
 
   verifyComputableMedicaidCostByFFY = ({ years, expected }) => {
-    years.forEach((ffy, index) => {
-      Object.keys(expected[index].programTypes).forEach(type => {
-        Object.keys(expected[index].programTypes[type]).forEach(expense => {
+    _.forEach(years, (ffy, index) => {
+      const { programsTypes } = expected[index];
+      _.forEach(programsTypes, type => {
+        const expenses = expected[index].programTypes[type];
+        _.forEach(expenses, (value, expense) => {
           this.getCACByFFYAndTypeAndExpense({
             ffy,
             type,
             expense
-          }).shouldBeCloseTo(expected[index].programTypes[type][expense]);
+          }).shouldBeCloseTo(value);
         });
       });
 
@@ -102,44 +105,34 @@ class ProposedBudgetPage {
     activityList,
     expected
   }) => {
-    years.forEach((ffy, ffyIndex) => {
-      activityList.forEach((activityName, index) => {
-        Object.keys(expected[ffyIndex].activities[index].expenses).forEach(
-          expense => {
-            // TODO: Add this back once the default test is truly default
-            // this.getBreakdownByFFYAndActivityAndExpense({
-            //   ffy,
-            //   index,
-            //   expense
-            // }).should(
-            //   'have.length',
-            //   Object.keys(
-            //     expected[ffyIndex].activities[index].expenses[expense]
-            //   ).length
-            // );
-            this.getBreakdownByFFYAndActivityAndExpenseOtherFundingTotalValue({
-              ffy,
-              index,
-              expense
-            }).shouldBeCloseTo(
-              expected[ffyIndex].activities[index].expenses[expense][
-                'Other Funding Amount'
-              ]
-            );
-            this.getBreakdownByFFYAndActivityAndExpenseSubtotalValue({
-              ffy,
-              index,
-              expense
-            }).shouldBeCloseTo(
-              expected[ffyIndex].activities[index].expenses[expense][
-                `${expense} Subtotal`
-              ]
-            );
-          }
-        );
+    _.forEach(years, (ffy, ffyIndex) => {
+      cy.log(`ffy ${ffy}, ffyIndex ${ffyIndex}`);
+      _.forEach(activityList, (activityName, index) => {
+        cy.log(`activityName ${activityName}, index ${index}`);
+        const { expenses, totalComputableMedicaidCost } =
+          expected[ffyIndex].activities[index];
+        cy.log(`expenses ${JSON.stringify(expenses)}`);
+        _.forEach(expenses, (items, expense) => {
+          // TODO: Add this back once the default test is truly default
+          this.getBreakdownByFFYAndActivityAndExpense({
+            ffy,
+            index,
+            expense
+          }).should('have.length', Object.keys(items).length);
+          this.getBreakdownByFFYAndActivityAndExpenseOtherFundingTotalValue({
+            ffy,
+            index,
+            expense
+          }).shouldBeCloseTo(items['Other Funding Amount']);
+          this.getBreakdownByFFYAndActivityAndExpenseSubtotalValue({
+            ffy,
+            index,
+            expense
+          }).shouldBeCloseTo(items[`${expense} Subtotal`]);
+        });
 
         this.getTCMCValueByActivity({ ffy, index }).shouldBeCloseTo(
-          expected[ffyIndex].activities[index].totalComputableMedicaidCost
+          totalComputableMedicaidCost
         );
       });
     });
@@ -172,24 +165,25 @@ class ProposedBudgetPage {
       .eq(2);
 
   verifySummaryBudgetTableByTypeAndFFY = ({ years, expected }) => {
-    Object.keys(expected).forEach(type => {
-      years.forEach((ffy, index) => {
-        Object.keys(expected[type][index]).forEach(expense => {
+    _.forEach(expected, (typeValue, type) => {
+      _.forEach(years, (ffy, index) => {
+        const expenses = typeValue[index];
+        _.forEach(expenses, (values, expense) => {
           this.getSBTByTypeAndFFYAndExpenseStateTotalValue({
             type,
             ffy,
             expense
-          }).shouldBeCloseTo(expected[type][index][expense][0], 3);
+          }).shouldBeCloseTo(values[0], 3);
           this.getSBTByTypeAndFFYAndExpenseFederalTotalValue({
             type,
             ffy,
             expense
-          }).shouldBeCloseTo(expected[type][index][expense][1], 3);
+          }).shouldBeCloseTo(values[1], 3);
           this.getSBTByTypeAndFFYAndExpenseMTCValue({
             type,
             ffy,
             expense
-          }).shouldBeCloseTo(expected[type][index][expense][2], 3);
+          }).shouldBeCloseTo(values[2], 3);
         });
       });
     });
@@ -211,15 +205,15 @@ class ProposedBudgetPage {
     this.getActivityTotalsByRowHeader({ header }).siblings().eq(2);
 
   verifySummaryBudgetTableTotal = ({ expected }) => {
-    Object.keys(expected).forEach(header => {
+    _.forEach(expected, (values, header) => {
       this.getActivityTotalsByRowHeaderStateTotalValue({
         header
-      }).shouldBeCloseTo(expected[header][0], 5);
+      }).shouldBeCloseTo(values[0], 5);
       this.getActivityTotalsByRowHeaderFederalTotalValue({
         header
-      }).shouldBeCloseTo(expected[header][1], 5);
+      }).shouldBeCloseTo(values[1], 5);
       this.getActivityTotalsByRowHeaderMTCValue({ header }).shouldBeCloseTo(
-        expected[header][2],
+        values[2],
         5
       );
     });
@@ -241,19 +235,17 @@ class ProposedBudgetPage {
       .eq(columnIndex);
 
   verifyQuarterlyFederalShareByFFY = ({ years, expected }) => {
-    Object.keys(expected).forEach(header => {
-      years.forEach((ffy, index) => {
-        Object.keys(expected[header].byFFY[index]).forEach(row => {
-          expected[header].byFFY[index][row].forEach((column, columnIndex) => {
+    _.forEach(expected, (values, header) => {
+      _.forEach(years, (ffy, index) => {
+        const ffyValues = expected[header].byFFY[index];
+        _.forEach(ffyValues, (ffyValue, row) => {
+          _.forEach(ffyValue, (columnValue, columnIndex) => {
             this.getQFSByHeaderAndRowHeaderValue({
               ffy,
               header,
               row,
               columnIndex
-            }).shouldBeCloseTo(
-              expected[header].byFFY[index][row][columnIndex],
-              3
-            );
+            }).shouldBeCloseTo(columnValue, 3);
           });
         });
       });
@@ -270,12 +262,13 @@ class ProposedBudgetPage {
     this.getQFSTotalsByHeaderAndRowHeader({ header, row }).siblings().eq(0);
 
   verifyQuarterlyFederalShareByFFYTotals = ({ expected }) => {
-    Object.keys(expected).forEach(header => {
-      Object.keys(expected[header].totals).forEach(row => {
+    _.forEach(expected, (ffyValues, header) => {
+      const { totals } = ffyValues;
+      _.forEach(totals, (value, row) => {
         this.getQFSTotalsByHeaderAndRowHeaderValue({
           header,
           row
-        }).shouldBeCloseTo(expected[header].totals[row], 5);
+        }).shouldBeCloseTo(value, 5);
       });
     });
   };
@@ -296,15 +289,16 @@ class ProposedBudgetPage {
       .eq(quarterIndex);
 
   fillInEQIPFormByFFY = ({ years, expected }) => {
-    years.forEach((ffy, index) => {
-      Object.keys(expected[index]).forEach(type => {
-        expected[index][type].forEach((quarter, quarterIndex) => {
-          if (quarterIndex === expected[index][type].length - 1) {
+    _.forEach(years, (ffy, index) => {
+      const ffyValues = expected[index];
+      _.forEach(ffyValues, (equipValues, type) => {
+        _.forEach(equipValues, (quarterValue, quarterIndex) => {
+          if (quarterIndex === equipValues.length - 1) {
             this.getEQIPByFFYAndIncentiveTypeAndQuarter({
               ffy,
               type,
               quarterIndex
-            }).shouldBeCloseTo(expected[index][type][quarterIndex]);
+            }).shouldBeCloseTo(quarterValue);
           } else {
             this.getEQIPByFFYAndIncentiveTypeAndQuarter({
               ffy,
@@ -312,7 +306,7 @@ class ProposedBudgetPage {
               quarterIndex
             })
               .find('input')
-              .type(expected[index][type][quarterIndex]);
+              .type(quarterValue);
           }
         });
       });
@@ -320,15 +314,16 @@ class ProposedBudgetPage {
   };
 
   verifyEQIPFormByFFY = ({ years, expected }) => {
-    years.forEach((ffy, index) => {
-      Object.keys(expected[index]).forEach(type => {
-        expected[index][type].forEach((quarter, quarterIndex) => {
-          if (quarterIndex === expected[index][type].length - 1) {
+    _.forEach(years, (ffy, index) => {
+      const ffyValues = expected[index];
+      _.forEach(ffyValues, (typeValues, type) => {
+        _.forEach(typeValues, (quarterValues, quarterIndex) => {
+          if (quarterIndex === typeValues.length - 1) {
             this.getEQIPByFFYAndIncentiveTypeAndQuarter({
               ffy,
               type,
               quarterIndex
-            }).shouldBeCloseTo(expected[index][type][quarterIndex]);
+            }).shouldBeCloseTo(quarterValues);
           } else {
             this.getEQIPByFFYAndIncentiveTypeAndQuarter({
               ffy,
@@ -336,7 +331,7 @@ class ProposedBudgetPage {
               quarterIndex
             })
               .find('input')
-              .shouldBeCloseTo(expected[index][type][quarterIndex]);
+              .shouldBeCloseTo(quarterValues);
           }
         });
       });
@@ -344,14 +339,15 @@ class ProposedBudgetPage {
   };
 
   verifyEQIPViewByFFY = ({ years, expected }) => {
-    years.forEach((ffy, index) => {
-      Object.keys(expected[index]).forEach(type => {
-        expected[index][type].forEach((quarter, quarterIndex) => {
+    _.forEach(years, (ffy, index) => {
+      const ffyValues = expected[index];
+      _.forEach(ffyValues, (typeValues, type) => {
+        _.forEach(typeValues, (quarter, quarterIndex) => {
           this.getEQIPByFFYAndIncentiveTypeAndQuarter({
             ffy,
             type,
             quarterIndex
-          }).shouldBeCloseTo(expected[index][type][quarterIndex]);
+          }).shouldBeCloseTo(quarter);
         });
       });
     });

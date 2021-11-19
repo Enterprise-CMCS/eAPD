@@ -1,6 +1,6 @@
 // affiliation.spec.js created with Cypress
 
-describe('Affiliation', () => {
+describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
   beforeEach(() => {
     cy.clearAuthCookies();
   });
@@ -209,9 +209,7 @@ describe('Affiliation', () => {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should(
-        'exist'
-      );
+      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
 
       cy.findByRole('button', { name: /norole/ }).click();
       cy.findByText(/Manage Account/).click();

@@ -1,6 +1,6 @@
 // invalid-password.spec.js created with Cypress
 
-describe('Invalid Login Attempts', () => {
+describe('Invalid Login Attempts', { tags: ['@auth'] }, () => {
   beforeEach(() => {
     cy.clearAuthCookies();
     cy.setCookie('gov.cms.eapd.hasConsented', 'true');

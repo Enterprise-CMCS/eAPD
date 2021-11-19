@@ -58,13 +58,15 @@ export const testActivityOverviewWithData = () => {
   describe('Activity 1', () => {
     beforeEach(() => {
       cy.goToActivityOverview(0);
+    });
+
+    it('Fills in fields on first activity', () => {
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
       }).should('exist');
       cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
-    });
-    it('Fills in fields on first activity', () => {
+
       const overview = activityOverview.activityOverview[0];
 
       populatePage.fillActivityOverview(
@@ -82,18 +84,22 @@ export const testActivityOverviewWithData = () => {
       );
       cy.waitForSave();
     });
+
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
     beforeEach(() => {
       cy.goToActivityOverview(1);
+    });
+
+    it('Fills in fields on second activity', () => {
       cy.findByRole('heading', {
         name: /^Activity 2:/i,
         level: 2
       }).should('exist');
       cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
-    });
-    it('Fills in fields on second activity', () => {
+
       const overview = activityOverview.activityOverview[1];
       populatePage.fillActivityOverview(
         overview.shortOverview,
@@ -109,7 +115,7 @@ export const testActivityOverviewWithData = () => {
       );
       cy.waitForSave();
     });
+
+    // TODO: export view tests
   });
 };
-
-export const testActivityOverviewExportViewWithData = () => {};

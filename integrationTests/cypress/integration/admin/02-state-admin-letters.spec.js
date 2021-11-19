@@ -1,4 +1,4 @@
-describe('state admin letters table', () => {
+describe('state admin letters table', { tags: ['@admin'] }, () => {
   const getInputByLabel = label => {
     return cy
       .contains('label', label)
@@ -10,7 +10,7 @@ describe('state admin letters table', () => {
 
   before(() => {
     cy.useFedAdmin();
-    cy.location('pathname').then(pathname => '/');
+    // cy.location('pathname').then(pathname => '/');
   });
 
   beforeEach(() => {

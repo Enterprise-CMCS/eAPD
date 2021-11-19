@@ -6,24 +6,10 @@ const activities = [['Program Administration', 'HIT']];
 export const testDefaultActivityDashboard = () => {
   beforeEach(() => {
     cy.goToActivityDashboard();
-
-    cy.url().should('include', '/activities');
-    // cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
-  });
-
-  it('should go to the correct page', () => {
     cy.url().should('include', '/activities');
   });
 
   it('tests default values in an activity', () => {
-    cy.url().should('include', '/activities');
-
-    // Tests Continue button on Activities Dashboard
-    cy.contains('Continue').click();
-    cy.url().should('contain', '/schedule-summary');
-    cy.contains('Back').click();
-    cy.url().should('include', '/activities');
-
     cy.contains('Activity 1: Program Administration (HIT)').should('exist');
     cy.contains('Activity 2').should('not.exist');
 
@@ -32,17 +18,6 @@ export const testDefaultActivityDashboard = () => {
 
     cy.contains('Edit').click();
     cy.url().should('contain', '/activity/0/overview');
-    cy.goToActivityDashboard();
-
-    // Testing add activity button at end of Activitiy
-    cy.contains('Add Activity').click();
-    cy.waitForSave();
-    cy.url().should('include', '/activities');
-    cy.contains('Activity 2').should('exist');
-    cy.contains('Delete').click();
-    cy.findByRole('button', { name: /Delete Activity/i }).click();
-    cy.waitForSave();
-    cy.contains('Activity 2').should('not.exist');
   });
 };
 
@@ -136,11 +111,12 @@ export const testActivityDashboardWithData = () => {
       activityOverview = data;
     });
     cy.goToActivityDashboard();
-    cy.url().should('include', '/activities');
-    cy.findByRole('heading', { name: /Activities/i, level: 2 }).should('exist');
   });
 
   it('tests naming an activity', () => {
+    cy.url().should('include', '/activities');
+    cy.findByRole('heading', { name: /Activities/i, level: 2 }).should('exist');
+
     cy.contains('Add Activity').click();
     cy.waitForSave();
     cy.contains('Activity 2: Untitled').should('exist');
@@ -157,17 +133,16 @@ export const testActivityDashboardWithData = () => {
     );
     cy.goToActivityDashboard();
   });
-};
 
-export const testActivityDashboardExportViewWithData = () => {
-  let exportPage;
-  before(() => {
-    exportPage = new ExportPage();
-  });
+  it('should show the correct values on the export view', () => {
+    const exportPage = new ExportPage();
 
-  it('tests naming an activity', () => {
+    cy.goToExportView();
+
     exportPage.checkActivityList(activities);
     exportPage.checkActivityHeader(activities[1][0], 2);
     exportPage.checkActivityNameAtEnd(activities[1][0]);
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };

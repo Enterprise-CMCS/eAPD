@@ -68,12 +68,28 @@ describe('Default APD', { tags: ['@apd', '@default'] }, () => {
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.location('pathname').then(pathname => {
-      apdUrl = pathname;
+      apdUrl = pathname.replace('/apd-overview', '');
     });
   });
 
   beforeEach(() => {
     cy.visit(apdUrl);
+  });
+
+  after(() => {
+    cy.useStateStaff();
+    cy.get(`a[href='${apdUrl}']`).should('exist');
+
+    cy.get(`a[href='${apdUrl}']`)
+      .parent()
+      .parent()
+      .parent()
+      .contains('Delete')
+      .click();
+
+    cy.get('.ds-c-button--danger').click();
+
+    cy.get(`a[href='${apdUrl}']`).should('not.exist');
   });
 
   describe('Form View', () => {

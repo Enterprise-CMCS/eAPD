@@ -297,9 +297,6 @@ class ExportPage {
         .next()
         .next()
         .should('contain', 'Milestones');
-      cy.contains('Milestones')
-        .next()
-        .should('contain', 'Milestone not specified');
     } else {
       cy.contains('Outcomes and Metrics')
         .next()
@@ -337,7 +334,7 @@ class ExportPage {
     if (emptyOrFilled === 'empty') {
       cy.contains('Private Contractor Costs')
         .next()
-        .should('contain', 'Private Contractor or Vendor Name not specified');
+        .should('contain', 'Cost Allocation');
     } else {
       cy.contains('Private Contractor Costs')
         .next()

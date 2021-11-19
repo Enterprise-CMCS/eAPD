@@ -1,13 +1,7 @@
 import ActivityPage from '../../../page-objects/activity-page';
 import PopulatePage from '../../../page-objects/populate-page';
 
-export const testDefaultPrivateContractorCosts = years => {
-  let activityPage;
-
-  before(() => {
-    activityPage = new ActivityPage();
-  });
-
+export const testDefaultPrivateContractorCosts = () => {
   beforeEach(() => {
     cy.goToPrivateContractorCosts(0);
     cy.findByRole('heading', {
@@ -20,42 +14,6 @@ export const testDefaultPrivateContractorCosts = years => {
     cy.contains(
       'Private contractors have not been added for this activity.'
     ).should('exist');
-
-    cy.findByRole('button', { name: /Add Contractor/i }).click();
-    cy.waitForSave();
-
-    activityPage.checkTextField('ds-c-field', '');
-    activityPage.checkTinyMCE('contractor-description-field-0', '');
-    activityPage.checkDate('Contract start date');
-    activityPage.checkDate('Contract end date');
-    activityPage.checkTextField(
-      'ds-c-field ds-c-field--currency ds-c-field--medium',
-      '',
-      0
-    );
-    cy.get('[type="radio"][checked]').should('have.value', 'no');
-    activityPage.checkFFYinputCostFields(years, '');
-
-    cy.findByRole('button', { name: /Done/i }).click();
-
-    activityPage.checkPrivateContractorOutput(
-      'Private Contractor or Vendor Name not specified',
-      'Procurement Methodology and Description of Services not specified',
-      'Full Contract Term: Date not specified - Date not specified',
-      'Total Contract Cost: $0',
-      years,
-      [0, 0]
-    );
-
-    activityPage.checkDeleteButton(
-      'Private contractors have not been added for this activity',
-      'Delete Private Contractor?',
-      'Private Contractor or Vendor Name not specified'
-    );
-
-    cy.findByRole('button', { name: /Add Contractor/i }).click();
-    cy.waitForSave();
-    cy.findByRole('button', { name: /Done/i }).click();
   });
 };
 
@@ -64,7 +22,6 @@ export const testDefaultPrivateContractorCostsExportView = () => {};
 export const testPrivateContractorCostsWithData = years => {
   let populatePage;
   let activityPage;
-
   let activityData;
 
   before(() => {
@@ -81,6 +38,8 @@ export const testPrivateContractorCostsWithData = years => {
   describe('Activity 1', () => {
     beforeEach(() => {
       cy.goToPrivateContractorCosts(0);
+    });
+    it('fills our private contractor form', () => {
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
@@ -89,8 +48,6 @@ export const testPrivateContractorCostsWithData = years => {
         name: /Private Contractor Costs/i,
         level: 3
       }).should('exist');
-    });
-    it('fills our private contractor form', () => {
       const contractors = activityData.privateContractors.slice(0, 2);
 
       contractors.forEach(
@@ -125,11 +82,8 @@ export const testPrivateContractorCostsWithData = years => {
           );
         }
       );
-    });
 
-    it('tests deleting a private contractor', () => {
-      const contractors = activityData.privateContractors.slice(0, 2);
-
+      cy.log('delete a private contractor');
       cy.findAllByText('Delete').eq(0).click();
       cy.contains('Delete Private Contractor?').should('exist');
       cy.get('.ds-c-button--danger').click();
@@ -137,11 +91,15 @@ export const testPrivateContractorCostsWithData = years => {
       cy.contains(`1. ${contractors[0].name}`).should('not.exist');
       cy.contains(`1. ${contractors[1].name}`).should('exist');
     });
+
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
     beforeEach(() => {
       cy.goToPrivateContractorCosts(1);
+    });
+    it('fills 2nd activity private contractor', () => {
       cy.findByRole('heading', {
         name: /^Activity 2:/i,
         level: 2
@@ -150,8 +108,7 @@ export const testPrivateContractorCostsWithData = years => {
         name: /Private Contractor Costs/i,
         level: 3
       }).should('exist');
-    });
-    it('fills 2nd activity private contractor', () => {
+
       const [contractor1, contractor2] =
         activityData.privateContractors.slice(2);
 
@@ -208,7 +165,7 @@ export const testPrivateContractorCostsWithData = years => {
       }
       cy.findByRole('button', { name: /Done/i }).click();
     });
+
+    // TODO: add test for export view
   });
 };
-
-export const testPrivateContractorCostsExportViewWithData = () => {};

@@ -31,16 +31,7 @@ export const testDefaultBudgetAndFFP = years => {
             budgetPage.checkTotalComputableMedicaidCost(0);
             budgetPage.checkActivityTotalCostTable(0, 0, 1);
 
-            budgetPage.checkSplitFunctionality();
             budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
-
-            cy.get('[class="ds-c-field"]').select('75-25');
-            budgetPage.checkCostSplitTable(75, 25, 0, 0, 0);
-
-            cy.get('[class="ds-c-field"]').select('50-50');
-            budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
-
-            cy.get('[class="ds-c-field"]').select('90-10');
             budgetPage.checkQuarterTable('default', '', 0);
           });
       });
@@ -81,6 +72,9 @@ export const testBudgetAndFFPWithData = years => {
   describe('Activity 1', () => {
     beforeEach(() => {
       cy.goToBudgetAndFFP(0);
+    });
+
+    it('Tests cost split table (Activity 1 - 2021)', () => {
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
@@ -88,22 +82,21 @@ export const testBudgetAndFFPWithData = years => {
       cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
         'exist'
       );
-    });
 
-    it('Tests cost split table (Activity 1 - 2021)', () => {
       const staff = activityData.staff[1];
       const expenses = activityData.expenses[1];
       const contractor = activityData.privateContractors[1];
       const allocation = activityData.costAllocation[0];
 
-      let FFYtotal = budgetPage.computeFFYtotal(
+      let firstYearTotal = budgetPage.computeFFYtotal(
         staff.costs[0] * staff.ftes[0],
         expenses.costs[0],
         contractor.FFYcosts[0]
       );
 
-      FFYtotal -= allocation.costs[0];
+      firstYearTotal -= allocation.costs[0];
 
+      cy.log('test splits and updating calculations');
       splits.forEach(split => {
         cy.get('[class="ds-c-field"]').eq(0).select(split);
         cy.waitForSave();
@@ -123,17 +116,15 @@ export const testBudgetAndFFPWithData = years => {
         cy.get('[class="budget-table activity-budget-table"]')
           .eq(2)
           .within(() => {
-            budgetPage.checkCostSplitTable(fedSplit, stateSplit, FFYtotal);
+            budgetPage.checkCostSplitTable(
+              fedSplit,
+              stateSplit,
+              firstYearTotal
+            );
           });
       });
-    });
 
-    it('fills out Budget and FFP for activity 1', () => {
-      const staff = activityData.staff[1];
-      const expenses = activityData.expenses[1];
-      const contractor = activityData.privateContractors[1];
-      const allocation = activityData.costAllocation[0];
-
+      cy.log('fill in budget');
       years.forEach((year, i) => {
         cy.get('[class="ds-c-field"]').eq(i).select(splits[i]);
         cy.waitForSave();
@@ -217,13 +208,14 @@ export const testBudgetAndFFPWithData = years => {
           });
         cy.waitForSave();
       });
+
       // Calculate totals for final section
       let activityTotal = 0;
       let otherFundingTotal = 0;
       let federalShare = 0;
       let stateShare = 0;
 
-      for (let i = 0; i < years.length; i += 1) {
+      years.forEach((year, i) => {
         let FFYtotal = budgetPage.computeFFYtotal(
           staff.costs[i] * staff.ftes[i],
           expenses.costs[i],
@@ -238,7 +230,7 @@ export const testBudgetAndFFPWithData = years => {
         const splitMultipliers = activityData.splitConstants[i];
         federalShare += FFYtotal * splitMultipliers.fed;
         stateShare += FFYtotal * splitMultipliers.state;
-      }
+      });
 
       const totalMedicaid = activityTotal - otherFundingTotal;
       budgetPage.checkFFYtotals(
@@ -253,11 +245,16 @@ export const testBudgetAndFFPWithData = years => {
         budgetPage.addCommas(stateShare)
       );
     });
+
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
     beforeEach(() => {
       cy.goToBudgetAndFFP(1);
+    });
+
+    it('fills out Budget and FFP for activity 2', () => {
       cy.findByRole('heading', {
         name: /^Activity 2:/i,
         level: 2
@@ -265,9 +262,7 @@ export const testBudgetAndFFPWithData = years => {
       cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
         'exist'
       );
-    });
 
-    it('fills out Budget and FFP for activity 2', () => {
       const staff = activityData.staff[2];
       const staff2 = activityData.staff[3];
       const expenses = activityData.expenses[2];
@@ -381,7 +376,7 @@ export const testBudgetAndFFPWithData = years => {
       let federalShare = 0;
       let stateShare = 0;
 
-      for (let i = 0; i < years.length; i += 1) {
+      years.forEach((year, i) => {
         let FFYtotal = budgetPage.computeFFYtotal(
           staff.costs[i] * staff.ftes[i] + staff2.costs[i] * staff2.ftes[i],
           expenses.costs[i] + expenses2.costs[i],
@@ -397,7 +392,7 @@ export const testBudgetAndFFPWithData = years => {
         const splitMultipliers = activityData.splitConstants[i + 1];
         federalShare += FFYtotal * splitMultipliers.fed;
         stateShare += FFYtotal * splitMultipliers.state;
-      }
+      });
 
       federalShare = Math.ceil(federalShare);
       stateShare = Math.floor(stateShare);
@@ -415,7 +410,7 @@ export const testBudgetAndFFPWithData = years => {
         budgetPage.addCommas(stateShare)
       );
     });
+
+    // TODO: export view tests
   });
 };
-
-export const testBudgetAndFFPExportViewWithData = () => {};

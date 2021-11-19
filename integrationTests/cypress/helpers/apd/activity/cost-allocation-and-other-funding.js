@@ -13,12 +13,16 @@ export const testDefaultCostAllocationAndOtherFunding = years => {
 
   beforeEach(() => {
     cy.goToCostAllocationAndOtherFunding(0);
-    cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
-      'exist'
-    );
   });
 
   it('should display the default values for Cost Allocation and Other Funding', () => {
+    cy.findByRole('heading', {
+      name: /^Activity 1:/i,
+      level: 2
+    }).should('exist');
+    cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
+      'exist'
+    );
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     activityPage.checkTinyMCE('cost-allocation-methodology-field', '');
 
@@ -57,6 +61,9 @@ export const testCostAllocationAndOtherFundingWithData = years => {
   describe('Activity 1', () => {
     beforeEach(() => {
       cy.goToCostAllocationAndOtherFunding(0);
+    });
+
+    it('fills out cost allocation page for activity 1', () => {
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
@@ -64,9 +71,6 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
         'exist'
       );
-    });
-
-    it('fills out cost allocation page for activity 1', () => {
       const allocation = activityData.costAllocation[0];
 
       populatePage.fillCostAllocation(
@@ -94,6 +98,8 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         );
       });
     });
+
+    // TODO: add tests for export view
   });
 
   describe('Activity 2', () => {
@@ -145,7 +151,7 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         );
       });
     });
+
+    // TODO: write test for export view
   });
 };
-
-export const testCostAllocationAndOtherFundingExportViewWithData = () => {};

@@ -268,6 +268,8 @@
         {
           "expenses": {
             "State Staff": {
+              "Ervin Howell (APD Key Personnel)": 0,
+              "Clementine Bauch (APD Key Personnel)": [0, 0, 0],
               "Accountant III": [101000, 3, 303000],
               "Other Funding Amount": 4117,
               "State Staff Subtotal": 298883
@@ -317,6 +319,8 @@
         {
           "expenses": {
             "State Staff": {
+              "Ervin Howell (APD Key Personnel)": 0,
+              "Clementine Bauch (APD Key Personnel)": [0, 0, 0],
               "Accountant III": [109000, 3, 327000],
               "Other Funding Amount": 6673,
               "State Staff Subtotal": 320327

@@ -123,5 +123,3 @@ export const testExecutiveSummaryWithData = () => {
   //   const summaryPage = new ExecutiveSummaryPage();
   //   let executiveSummaryURL;
 };
-
-export const testExecutiveSummaryExportViewWithData = () => {};

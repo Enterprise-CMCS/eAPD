@@ -142,6 +142,14 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add(
+  'shouldHaveValue',
+  { prevSubject: true },
+  ($element, expected) => {
+    expect(convertDollarStrToNum($element.text())).to.equal(expected);
+  }
+);
+
+Cypress.Commands.add(
   'shouldBeCloseTo',
   { prevSubject: true },
   ($element, expected, delta = 1) => {
@@ -169,6 +177,12 @@ Cypress.Commands.add('waitForSave', () => {
           .should('exist');
       }
     });
+});
+
+Cypress.Commands.add('goToApdOverview', () => {
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/APD Overview/i)
+    .click();
 });
 
 Cypress.Commands.add('goToKeyStateProgramManagememt', () => {
