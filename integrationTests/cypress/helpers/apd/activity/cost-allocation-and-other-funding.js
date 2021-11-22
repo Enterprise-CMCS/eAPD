@@ -34,6 +34,8 @@ export const testDefaultCostAllocationAndOtherFunding = years => {
         budgetPage.checkActivityTotalCostTable(0, 0, 0, i);
       });
     });
+
+    cy.waitForSave();
   });
 
   // TODO: export view tests
@@ -77,7 +79,6 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         allocation.costs,
         years
       );
-      cy.waitForSave();
 
       // Deleted the first one from each catagory
       const staff = activityData.staff[1];
@@ -95,6 +96,9 @@ export const testCostAllocationAndOtherFundingWithData = years => {
           i
         );
       });
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
 
     // TODO: export view tests
@@ -121,7 +125,6 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         allocation.costs,
         years
       );
-      cy.waitForSave();
 
       const staff1 = activityData.staff[2];
       const staff2 = activityData.staff[3];
@@ -148,6 +151,9 @@ export const testCostAllocationAndOtherFundingWithData = years => {
           i
         );
       });
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
 
     // TODO: export view tests

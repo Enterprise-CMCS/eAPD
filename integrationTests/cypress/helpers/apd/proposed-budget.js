@@ -109,9 +109,11 @@ export const testProposedBudgetWithData = years => {
   before(() => {
     proposedBudgetPage = new ProposedBudgetPage();
     const activityPage = new ActivitySchedulePage();
+    cy.waitForSave(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.goToActivityScheduleSummary();
     cy.findByRole('heading', {
-      name: /Activity Schedule Summary/i
+      name: /Activity Schedule Summary/i,
+      timeout: 10000
     }).should('exist');
     activityList = activityPage.getActivityScheduleOverviewNameList();
   });
@@ -167,6 +169,9 @@ export const testProposedBudgetWithData = years => {
       years,
       expected: budgetData.dataEQIP
     });
+
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
   });
 
   it('should export the correct values for Proposed Budget Export View', () => {

@@ -21,6 +21,8 @@ export const testDefaultActivityOverview = () => {
     activityPage.checkTinyMCE('activity-alternatives-field', '');
     activityPage.checkTinyMCE('standards-and-conditions-supports-field', '');
     activityPage.checkTextField('ds-c-field visibility--screen', '');
+
+    cy.waitForSave();
   });
 
   it('should display the default activity overview in the export view', () => {
@@ -75,12 +77,12 @@ export const testActivityOverviewWithData = () => {
         overview.detailedDescription,
         overview.supportingJustificaions
       );
-      cy.waitForSave();
 
       cy.setTinyMceContent(
         'standards-and-conditions-supports-field',
         overview.supportsMedicaid
       );
+
       cy.waitForSave();
     });
 
@@ -107,7 +109,6 @@ export const testActivityOverviewWithData = () => {
         overview.detailedDescription,
         overview.supportingJustificaions
       );
-      cy.waitForSave();
 
       cy.get('[class="ds-c-field visibility--screen"]').type(
         overview.supportsMedicaid

@@ -97,10 +97,11 @@ export const testResultsOfPreviousActivitiesWithData = () => {
         resultsOfPreviousActivities = activityData;
       }
     );
-    cy.goToPreviousActivities();
   });
 
   it('fill form', () => {
+    cy.goToPreviousActivities();
+
     cy.url().should('include', '/previous-activities');
     cy.findByRole('heading', {
       name: /Results of Previous Activities/i
@@ -114,6 +115,9 @@ export const testResultsOfPreviousActivitiesWithData = () => {
     previousActivitiesPage.verifyFFP();
     previousActivitiesPage.verifyTotalFFP();
     previousActivitiesPage.verifyTotalExpenditures();
+
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
   });
 
   it('should have the correct values on the export view', () => {

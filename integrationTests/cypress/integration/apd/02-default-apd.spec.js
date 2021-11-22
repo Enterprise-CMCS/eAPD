@@ -56,11 +56,6 @@ describe('Default APD', { tags: ['@apd', '@default'] }, () => {
       cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     });
 
-    afterEach(() => {
-      // wait for the save cycle to complete
-      cy.waitForSave();
-    });
-
     describe('default APD Overview', () => {
       testDefaultAPDOverview(years);
 

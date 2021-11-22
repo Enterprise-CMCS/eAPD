@@ -45,6 +45,8 @@ export const testDefaultBudgetAndFFP = years => {
         0
       );
     });
+
+    cy.waitForSave();
   });
 
   // TODO: export view tests
@@ -97,7 +99,7 @@ export const testBudgetAndFFPWithData = years => {
       cy.log('test splits and updating calculations');
       splits.forEach(split => {
         cy.get('[class="ds-c-field"]').eq(0).select(split);
-        cy.waitForSave();
+
         let fedSplit = 0;
         let stateSplit = 0;
         if (split === '90-10') {
@@ -125,7 +127,7 @@ export const testBudgetAndFFPWithData = years => {
       cy.log('fill in budget');
       years.forEach((year, i) => {
         cy.get('[class="ds-c-field"]').eq(i).select(splits[i]);
-        cy.waitForSave();
+
         cy.findAllByText(`Activity 1 Budget for FFY ${year}`)
           .parent()
           .parent()
@@ -204,7 +206,6 @@ export const testBudgetAndFFPWithData = years => {
             });
             budgetPage.checkEachQuarterSubtotal();
           });
-        cy.waitForSave();
       });
 
       // Calculate totals for final section
@@ -242,6 +243,9 @@ export const testBudgetAndFFPWithData = years => {
         'Alaska',
         budgetPage.addCommas(stateShare)
       );
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
 
     // TODO: export view tests
@@ -366,7 +370,6 @@ export const testBudgetAndFFPWithData = years => {
             });
             budgetPage.checkEachQuarterSubtotal();
           });
-        cy.waitForSave();
       });
 
       let activityTotal = 0;
@@ -407,6 +410,9 @@ export const testBudgetAndFFPWithData = years => {
         'Alaska',
         budgetPage.addCommas(stateShare)
       );
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
 
     // TODO: export view tests

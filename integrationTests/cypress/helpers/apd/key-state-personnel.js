@@ -36,13 +36,14 @@ export const testDefaultKeyStatePersonnel = () => {
     cy.get('select[name="apd-state-profile-state"]')
       .invoke('val', '')
       .trigger('change');
-    cy.waitForSave();
 
     cy.get('#apd-state-profile-state>option').should('have.length', 56);
 
     cy.contains(
       'Primary Point of Contact has not been added for this activity'
     ).should('exist');
+
+    cy.waitForSave();
   });
 
   it('should display the default values in the export view', () => {
@@ -78,56 +79,55 @@ export const testKeyStatePersonnelWithData = years => {
       cy.get('input[name="apd-state-profile-mdname"]')
         .clear()
         .type(userData[0].name);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-mdemail"]')
         .clear()
         .type(userData[0].email);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-mdphone"]')
         .clear()
         .type(userData[0].phone);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-addr1"]')
         .clear()
         .type(userData[0].address.street);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-addr2"]')
         .clear()
         .type(userData[0].address.suite);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-city"]')
         .clear()
         .type(userData[0].address.city);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-zip"]')
         .clear()
         .type(userData[0].address.zipcode);
-      cy.waitForSave();
+
       cy.get('select[name="apd-state-profile-state"]')
         .invoke('val', 'AL')
         .trigger('change');
-      cy.waitForSave();
 
       cy.log('Primary Point of Contact');
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-pocname0"]')
         .clear()
         .type(userData[1].name);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-pocemail0"]')
         .clear()
         .type(userData[1].email);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-pocposition0"]')
         .clear()
         .type(userData[1].username);
-      cy.waitForSave();
+
       cy.findByRole('button', { name: /Done/i }).click();
 
       cy.log('Key Personnel');
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-      cy.waitForSave();
+
       cy.get('.ds-c-review__heading')
         .contains('1.')
         .should('have.text', `1. ${userData[1].name}`);
@@ -143,16 +143,16 @@ export const testKeyStatePersonnelWithData = years => {
 
       cy.log('Key Personnel (hourly)');
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-      cy.waitForSave();
+
       // Toggle to see if the FFY cost prompts appear/disappear
       cy.get('input[type="radio"][value="no"]').check({ force: true });
-      cy.waitForSave();
+
       years.forEach(year => {
         cy.contains(`FFY ${year} Cost`).should('not.exist');
       });
 
       cy.get('input[type="radio"][value="yes"]').check({ force: true });
-      cy.waitForSave();
+
       years.forEach(year => {
         cy.contains(`FFY ${year} Cost`).should('exist');
       });
@@ -171,15 +171,14 @@ export const testKeyStatePersonnelWithData = years => {
       cy.get('input[name="apd-state-profile-pocname1"]')
         .clear()
         .type(userData[2].name);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-pocemail1"]')
         .clear()
         .type(userData[2].email);
-      cy.waitForSave();
+
       cy.get('input[name="apd-state-profile-pocposition1"]')
         .clear()
         .type(userData[2].username);
-      cy.waitForSave();
 
       cy.findByRole('button', { name: /Done/i }).click();
       cy.log('Values entered in form remain on page');
@@ -194,6 +193,9 @@ export const testKeyStatePersonnelWithData = years => {
         .should($lis => {
           expect($lis.eq(0)).to.contain(userData[2].username);
         });
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
   });
 

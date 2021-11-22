@@ -18,6 +18,8 @@ export const testDefaultActivityDashboard = years => {
 
     cy.contains('Edit').click();
     cy.url().should('contain', '/activity/0/overview');
+
+    cy.waitForSave();
   });
 
   it('checks default activity export view', () => {
@@ -115,19 +117,18 @@ export const testActivityDashboardWithData = () => {
     cy.findByRole('heading', { name: /Activities/i, level: 2 }).should('exist');
 
     cy.contains('Add Activity').click();
-    cy.waitForSave();
     cy.contains('Activity 2: Untitled').should('exist');
     cy.findAllByText('Edit').eq(1).click();
 
     cy.findByLabelText('Activity name').type(activityOverview.newActivityName);
-    cy.waitForSave();
     cy.findByRole('radio', { name: /HIE/i }).check({ force: true });
-    cy.waitForSave();
     activities.push([activityOverview.newActivityName, 'HIE']);
 
     cy.findAllByText(`Activity 2: ${activityOverview.newActivityName}`).should(
       'exist'
     );
+    cy.waitForSave();
+
     cy.goToActivityDashboard();
   });
 

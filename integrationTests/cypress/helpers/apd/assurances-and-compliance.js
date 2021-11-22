@@ -37,6 +37,8 @@ export const testDefaultAssurancesAndCompliance = () => {
         assurancesCompliancePage.verifyRegulationValue(category, regulation);
       });
     });
+
+    cy.waitForSave();
   });
 
   it('should display default Assurance and Compliance in export view', () => {

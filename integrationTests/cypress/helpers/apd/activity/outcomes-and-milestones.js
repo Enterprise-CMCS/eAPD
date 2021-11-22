@@ -15,6 +15,8 @@ export const testDefaultOutcomesAndMilestones = () => {
     cy.contains('Milestones have not been added for this activity.').should(
       'exist'
     );
+
+    cy.waitForSave();
   });
 
   // TODO: export view tests
@@ -55,7 +57,6 @@ export const testOutcomesAndMilestonesWithData = () => {
 
       Cypress._.times(2, i => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
-        cy.waitForSave();
 
         populatePage.fillOutcomeForm(
           outcomes.names[i],
@@ -73,7 +74,7 @@ export const testOutcomesAndMilestonesWithData = () => {
       cy.contains('Delete').click();
       cy.contains('Delete Outcome and Metrics?').should('exist');
       cy.get('[class="ds-c-button ds-c-button--danger"]').click();
-      cy.waitForSave();
+
       cy.contains(outcomes.names[0]).should('not.exist');
       cy.contains(`Outcome: ${outcomes.names[1]}`).should('exist');
 
@@ -83,13 +84,11 @@ export const testOutcomesAndMilestonesWithData = () => {
       const milestones = activityData.milestones[0];
       Cypress._.times(2, i => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
-        cy.waitForSave();
 
         populatePage.fillMilestoneForm(
           milestones.names[i],
           milestones.dates[i]
         );
-        cy.waitForSave();
 
         activityPage.checkMilestoneOutput(
           `${i + 1}. ${milestones.names[i]}`,
@@ -100,10 +99,12 @@ export const testOutcomesAndMilestonesWithData = () => {
       cy.findAllByText('Delete').eq(1).click();
       cy.contains('Delete Milestone?').should('exist');
       cy.get('[class="ds-c-button ds-c-button--danger"]').click();
-      cy.waitForSave();
+
       cy.contains('Delete Milestone?').should('not.exist');
       cy.contains(milestones.names[0]).should('not.exist');
       cy.contains(`1. ${milestones.names[1]}`).should('exist');
+
+      cy.waitForSave();
     });
 
     // TODO: export view tests
@@ -133,15 +134,15 @@ export const testOutcomesAndMilestonesWithData = () => {
           outcomes.metrics[i][0],
           outcomes.metrics[i][1]
         );
-        cy.waitForSave();
 
         cy.findByRole('button', { name: /Add Milestone/i }).click();
         populatePage.fillMilestoneForm(
           milestones.names[i],
           milestones.dates[i]
         );
-        cy.waitForSave();
       });
+
+      cy.waitForSave();
     });
 
     // TODO: export view tests

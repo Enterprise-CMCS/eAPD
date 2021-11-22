@@ -15,6 +15,8 @@ export const testDefaultAPDOverview = () => {
     cy.get('[id="hit-overview-field"]').should('have.value', '');
     cy.get('[id="hie-overview-field"]').should('have.value', '');
     cy.get('[id="mmis-overview-field"]').should('have.value', '');
+
+    cy.waitForSave();
   });
 
   it('should display the default values in the export view', () => {
@@ -63,7 +65,6 @@ export const testAPDOverviewWithData = () => {
         cy.findByRole('checkbox', { name: list[index].value }).check({
           force: true
         });
-        cy.waitForSave();
       } else {
         years.push(list[index].value);
       }
@@ -100,7 +101,6 @@ export const testAPDOverviewWithData = () => {
         force: true
       });
       cy.findByRole('button', { name: /Delete FFY/i }).click();
-      cy.waitForSave();
       cy.contains('Delete FFY?').should('not.exist');
 
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(
@@ -128,6 +128,8 @@ export const testAPDOverviewWithData = () => {
 
     cy.log('MMIS');
     cy.setTinyMceContent('mmis-overview-field', apdOverview.MMIS);
+
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.waitForSave();
   });
 

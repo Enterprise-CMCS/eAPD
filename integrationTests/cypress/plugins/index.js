@@ -13,6 +13,7 @@
 // the project's config changing)
 
 const { lighthouse, pa11y, prepareAudit } = require('cypress-audit'); // eslint-disable-line import/no-extraneous-dependencies
+const browserify = require('@cypress/browserify-preprocessor'); // eslint-disable-line import/no-extraneous-dependencies
 const knex = require('./knex');
 
 /**
@@ -32,6 +33,12 @@ module.exports = (on, config) => {
 
     return launchOptions;
   });
+  on(
+    'file:preprocessor',
+    browserify({
+      parser: 'babel-eslint'
+    })
+  );
 
   on('task', {
     'db:resetnorole': async () => {

@@ -51,13 +51,6 @@ describe('APD with Data', { tags: ['@apd', '@data'] }, () => {
   });
 
   describe('Form View', () => {
-    afterEach(() => {
-      // wait for another save cycle to trigger
-      cy.wait(300); // eslint-disable-line cypress/no-unnecessary-waiting
-      // wait for the save cycle to complete
-      cy.waitForSave();
-    });
-
     describe('APD Overview', () => {
       testAPDOverviewWithData(years);
 

@@ -1,3 +1,5 @@
+import { recurse } from 'cypress-recurse'; // eslint-disable-line import/no-extraneous-dependencies
+
 import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no-extraneous-dependencies
 import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dependencies
 import '@foreachbe/cypress-tinymce';
@@ -161,22 +163,19 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('waitForSave', () => {
-  cy.document()
-    .its('body')
-    .find('header')
-    .then($header => {
-      if ($header) {
-        if ($header.text().includes('Saving')) {
-          cy.wrap($header)
-            .contains('Saved', { timeout: 10000 })
-            .should('exist');
-        }
-
-        cy.wrap($header)
-          .contains(/Saved|Last saved/i)
-          .should('exist');
-      }
-    });
+  // Adding a wait initially to allow the save to complete
+  // and another save to start if it was queued
+  cy.wait(400); // eslint-disable-line cypress/no-unnecessary-waiting
+  return recurse(
+    () => cy.document().its('body').find('header'),
+    $header => !$header.text().includes('Saving'),
+    {
+      log: true,
+      limit: 10, // max number of iterations
+      timeout: 30000, // time limit in ms
+      delay: 400 // delay before next iteration, ms
+    }
+  );
 });
 
 Cypress.Commands.add('goToApdOverview', () => {

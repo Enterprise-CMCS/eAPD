@@ -11,6 +11,8 @@ export const testDefaultStateStaffAndExpenses = () => {
     cy.contains('State staff have not been added for this activity.').should(
       'exist'
     );
+
+    cy.waitForSave();
   });
 
   // TODO: export view tests
@@ -75,7 +77,6 @@ export const testStateStaffAndExpensesWithData = () => {
         .then(children => {
           if (children.length > 1) {
             staffExpensesPage.deleteStaff(0);
-            cy.waitForSave();
           }
         });
 
@@ -119,7 +120,6 @@ export const testStateStaffAndExpensesWithData = () => {
         .then(children => {
           if (children.length > 1) {
             staffExpensesPage.deleteExpense(0);
-            cy.waitForSave();
           }
         });
 
@@ -133,6 +133,9 @@ export const testStateStaffAndExpensesWithData = () => {
         expenses[1].costs,
         expenses[1].description
       );
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
 
     // TODO: export view tests
@@ -194,6 +197,9 @@ export const testStateStaffAndExpensesWithData = () => {
           expense.description
         );
       });
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
 
     // TODO: export view tests
