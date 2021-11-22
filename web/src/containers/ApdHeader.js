@@ -4,26 +4,30 @@ import { connect } from 'react-redux';
 import EditableLabel from 'react-inline-editing';
 
 import { getAPDCreation, getAPDName, getAPDYearRange } from '../reducers/apd';
+import { setApdName } from '../actions/editApd';
 
-const ApdHeader = ({ apdName, year }) => (
-  <div>
-    <EditableLabel 
-      text={apdName}
-      labelClassName='ds-h1 apd--title'
-      inputClassName='ds-h1 apd--title'
-      inputWidth='250px'
-      inputHeight='46px'
-      inputMaxLength='50'
-    />
-    <h1 className="ds-h4">
-      HITECH IAPD | FFY {year}
-    </h1>
-  </div>
-);
+const ApdHeader = ({ apdName, setName, year }) => {
+  return (
+    <div>
+      <EditableLabel
+        text={apdName}
+        value={apdName}
+        labelClassName='ds-h1 apd--title'
+        inputClassName='ds-h1 apd--title'
+        inputWidth='250px'
+        inputHeight='46px'
+        onFocusOut={text => setName(text)}
+      />
+      <h1 className="ds-h4">
+        HITECH IAPD | FFY {year}
+      </h1>
+    </div>
+  );
+};
 
 ApdHeader.propTypes = {
-  // apdCreated: PropTypes.string.isRequired,
   apdName: PropTypes.string,
+  setName: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired
 };
 
@@ -35,6 +39,10 @@ const mapStateToProps = state => ({
   year: getAPDYearRange(state)
 });
 
-export default connect(mapStateToProps)(ApdHeader);
+const mapDispatchToProps = {
+  setName: setApdName
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApdHeader);
 
 export { ApdHeader as plain, mapStateToProps };
