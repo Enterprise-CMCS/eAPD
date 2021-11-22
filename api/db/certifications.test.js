@@ -26,8 +26,7 @@ const OKTA_USERS = {
     primaryPhone: '',
     mobilePhone: '',
     login: 'namematchusername'
-  },
-
+  }
 }
 
 const AUTH_AFFILIATIONS = {
@@ -43,8 +42,8 @@ const AUTH_AFFILIATIONS = {
     status: 'approved',
     username: 'namematchusername'
   }
-
 }
+
 // This query is not that complicated, except for the part where it guesses how many matches
 // might exist for a given state admin certifications. As a result that is what the tests focus on.
 tap.test('state_admin_certification query tests', async sacQueryTest => {

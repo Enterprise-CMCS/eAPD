@@ -1,12 +1,18 @@
 const {
+  getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
 
-
 describe('auth/certifications endpoints', () => {
   describe('POST /auth/certifications', () => {
+    const db = getDB();
+    beforeAll(() => setupDB(db));
+    afterAll(() => teardownDB(db));
+    
     const validRequestBody = {
       "ffy": 2021,
       "name": "Roger Klotz",
@@ -38,7 +44,6 @@ describe('auth/certifications endpoints', () => {
         const response = await api.post(url, validRequestBody);
         
         expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
       });
     });
   });

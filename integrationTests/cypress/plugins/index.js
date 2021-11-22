@@ -52,10 +52,33 @@ module.exports = (on, config) => {
       }
       return null;
     },
+    'db:resetcertification': async ({ email }) => {
+      const cert = await knex('state_admin_certifications')
+        .where('email', email)
+        .first();
+      if (cert) {
+        await knex('state_admin_certifications_audit')
+          .where('certificationId', cert.id)
+          .delete();
+        await knex('state_admin_certifications').where('email', email).delete();
+      }
+      return null;
+    },
+    'db:resetcertificationmatch': async () => {
+      await knex('state_admin_certifications_audit')
+        .where('certificationId', 1002)
+        .delete();
+      await knex('state_admin_certifications')
+        .where('id', 1002)
+        .update({ affiliationId: null });
+      await knex('auth_affiliations')
+        .where('id', 1001)
+        .update({ role_id: null, status: 'requested' });
+      return null;
+    },
     lighthouse: lighthouse(), // calling the function is important
     pa11y: pa11y() // calling the function is important
   });
-
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   return config;
