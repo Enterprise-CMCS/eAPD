@@ -122,7 +122,8 @@
     "tap": "^15.1.2"
   },
   "resolutions": {
-    "hosted-git-info": "4.0.2"
+    "hosted-git-info": "4.0.2",
+    "json-schema": "0.4.0"
   },
   "jest": {
     "testMatch": [
