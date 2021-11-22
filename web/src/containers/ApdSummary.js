@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
