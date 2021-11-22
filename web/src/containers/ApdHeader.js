@@ -1,20 +1,28 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import EditableLabel from 'react-inline-editing';
 
 import { getAPDCreation, getAPDName, getAPDYearRange } from '../reducers/apd';
 
-const ApdHeader = ({ apdCreated, apdName, year }) => (
-  <h1 className="ds-h1 apd--title">
-    <span className="ds-h6 ds-u-display--block">
-      <strong>Created:</strong> {apdCreated}
-    </span>
-    {apdName} | FFY {year}
-  </h1>
+const ApdHeader = ({ apdName, year }) => (
+  <div>
+    <EditableLabel 
+      text={apdName}
+      labelClassName='ds-h1 apd--title'
+      inputClassName='ds-h1 apd--title'
+      inputWidth='250px'
+      inputHeight='46px'
+      inputMaxLength='50'
+    />
+    <h1 className="ds-h4">
+      HITECH IAPD | FFY {year}
+    </h1>
+  </div>
 );
 
 ApdHeader.propTypes = {
-  apdCreated: PropTypes.string.isRequired,
+  // apdCreated: PropTypes.string.isRequired,
   apdName: PropTypes.string,
   year: PropTypes.string.isRequired
 };
