@@ -55,13 +55,13 @@ systemctl start mongod
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
-export MONGO_DATABASE="__MONGO_DATABASE__"
-export MONGO_URL="__MONGO_URL__"
-export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
-export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
-export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
-export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
-export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
+export MONGO_DATABASE="$mongo_database"
+export MONGO_URL=""
+export MONGO_INITDB_ROOT_USERNAME="$mongo_initdb_root_username"
+export MONGO_INITDB_ROOT_PASSWORD="$mongo_initdb_root_password"
+export MONGO_INITDB_DATABASE="$mongo_initdb_database"
+export MONGO_DATABASE_USERNAME="$mongo_database_username"
+export MONGO_DATABASE_PASSWORD="$mongo_database_password"
 
 #Preparing Mongo DB Users
 cd ~
