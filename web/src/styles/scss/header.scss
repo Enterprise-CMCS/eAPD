@@ -131,13 +131,8 @@ header:not(.ds-c-dialog__header) {
 }
 
 .apd--title {
-  border: 1px solid $color-gray-light;
+  border: 1px solid $color-primary-alt-dark;
   cursor: pointer;
   padding: 0 15px;
   min-width: 500px !important;
-}
-
-#title-edit-link {
-  padding-left: 5px;
-  padding-right: 5px;
 }
