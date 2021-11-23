@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { Button } from '@cmsgov/design-system';
 import React from 'react';
 import { connect } from 'react-redux';
-import EditableLabel from 'react-inline-editing';
 
 import { getAPDCreation, getAPDName, getAPDYearRange } from '../reducers/apd';
 import { setApdName } from '../actions/editApd';
@@ -15,7 +14,7 @@ const ApdHeader = ({ apdName, setName, year }) => {
     <div>
       <div id='apd-title-container' className='flex-align-row'>
         <div id='editable-label'>
-          <EditableLabel
+          {/* <EditableLabel
             text={apdName}
             labelClassName='ds-h1 apd--title'
             labelWidth='250px'
@@ -23,7 +22,7 @@ const ApdHeader = ({ apdName, setName, year }) => {
             inputWidth='250px'
             inputHeight='46px'
             onFocusOut={text => setName(text)}
-          />
+          /> */}
         </div>
         <Button id='title-edit-link' class='ds-c-button ds-c-button--transparent' onClick={() => {
           const elements = document.getElementsByClassName('apd--title')
