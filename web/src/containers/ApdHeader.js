@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import EditableLabel from 'react-inline-editing';
 
 import { getAPDCreation, getAPDName, getAPDYearRange } from '../reducers/apd';
-import { setApdName } from '../actions/editApd';
 
+<<<<<<< HEAD
 import Icon, { faEdit } from '../components/Icons';
 
 const ApdHeader = ({ apdName, setName, year }) => {
@@ -40,10 +40,27 @@ const ApdHeader = ({ apdName, setName, year }) => {
     </div>
   );
 };
+=======
+const ApdHeader = ({ apdName, year }) => (
+  <div>
+    <EditableLabel 
+      text={apdName}
+      labelClassName='ds-h1 apd--title'
+      inputClassName='ds-h1 apd--title'
+      inputWidth='250px'
+      inputHeight='46px'
+      inputMaxLength='50'
+    />
+    <h1 className="ds-h4">
+      HITECH IAPD | FFY {year}
+    </h1>
+  </div>
+);
+>>>>>>> parent of 83033e67 (Editable update state + update front end)
 
 ApdHeader.propTypes = {
+  // apdCreated: PropTypes.string.isRequired,
   apdName: PropTypes.string,
-  setName: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired
 };
 
@@ -55,10 +72,6 @@ const mapStateToProps = state => ({
   year: getAPDYearRange(state)
 });
 
-const mapDispatchToProps = {
-  setName: setApdName
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ApdHeader);
+export default connect(mapStateToProps)(ApdHeader);
 
 export { ApdHeader as plain, mapStateToProps };
