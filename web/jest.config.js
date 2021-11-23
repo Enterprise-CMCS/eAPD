@@ -9,7 +9,9 @@ module.exports = {
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
-    '\\.js?$': 'babel-jest',
-    '\\.yaml$': 'yaml-jest'
-  }
+    '\\.yaml$': 'jest-transform-yaml',
+    '\\.js?$': 'babel-jest'
+  },
+  moduleFileExtensions: ['js', 'yaml'],
+  testEnvironment: 'jsdom'
 };

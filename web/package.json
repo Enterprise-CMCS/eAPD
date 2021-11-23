@@ -145,7 +145,7 @@
     "@testing-library/user-event": "^13.1.9",
     "axios-mock-adapter": "^1.19.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.3",
+    "babel-jest": "^27.3.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-require-context": "^0.1.1",
     "css-loader": "^5.2.2",
@@ -164,8 +164,9 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.2",
-    "jest": "^26.6.3",
+    "jest": "^27.3.1",
     "jest-axe": "^4.1.0",
+    "jest-transform-yaml": "^0.1.2",
     "js-yaml": "^4.1.0",
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^1.4.1",
@@ -190,7 +191,6 @@
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.2",
-    "yaml-jest": "^1.0.5",
     "yaml-loader": "^0.6.0"
   },
   "resolutions": {
