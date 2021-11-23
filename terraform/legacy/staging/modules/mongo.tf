@@ -13,7 +13,7 @@ data "aws_ami" "latest_golden_image" {
 
 resource "aws_instance" "eapd_mongo_staging" {
 #    ami                         = data.aws_ami.latest_golden_image.id
-    ami                         = "ami-030c0e03c63093464"
+    ami                         = "ami-0bbea254941343567"
     instance_type               = "m3.medium"
     vpc_security_group_ids      = ["sg-01e01435dbbe6ce32", aws_security_group.eapd-staging-mongo-ec2.id]
     subnet_id                   = "subnet-07e1b9ed6ed5fb8c7"
