@@ -16,7 +16,7 @@ const thisFFY = (() => {
 
 const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
 
-describe('adding and removing state admin delegation forms', function () {
+describe('filling out state admin delegation form', () => {
   let delegateStateAdminFormUrl;
 
   const getInputByLabel = label => {
@@ -34,7 +34,6 @@ describe('adding and removing state admin delegation forms', function () {
     cy.location('pathname').then(pathname => {
       delegateStateAdminFormUrl = pathname
     });
-    cy.task('db:resetcertification', { email: 'Sincere@april.biz' });
   });
   
   beforeEach(() => {
