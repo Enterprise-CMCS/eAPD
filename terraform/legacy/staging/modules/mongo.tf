@@ -28,4 +28,5 @@ resource "aws_instance" "eapd_mongo_staging" {
         Terraform = "True"
     }
     depends_on = [aws_security_group.eapd-staging-mongo-ec2]
+    disable_api_termination = false # True in Prod
 }
