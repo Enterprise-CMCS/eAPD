@@ -27,8 +27,10 @@ const ApdHeader = ({ apdName, setName, year }) => {
           />
         </div>
         <Button id='title-edit-link' class='ds-c-button ds-c-button--transparent' onClick={() => {
-          const titleEdit = document.getElementById('editable-label').firstChild;
-          titleEdit.click();
+          const elements = document.getElementsByClassName('apd--title')
+          const first = elements[0]
+
+          first.click();
         }}>
           <Icon icon={faEdit} style={{ width: '14px' }} /> Edit
         </Button>
