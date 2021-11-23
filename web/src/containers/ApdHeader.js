@@ -19,7 +19,6 @@ const ApdHeader = ({ apdName, setName, year }) => {
             text={apdName}
             value={apdName}
             labelClassName='ds-h1 apd--title'
-            labelWidth='250px'
             inputClassName='ds-h1 apd--title'
             inputWidth='250px'
             inputHeight='46px'
