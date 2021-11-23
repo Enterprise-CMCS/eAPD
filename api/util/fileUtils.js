@@ -13,11 +13,11 @@ const generateFileName = async (
     .where('fileUrl', 'like', `%${fileId}%`)
     .first();
     
-  const reversedName = certification.name.split(' ').reverse().join('-');
+  const formattedName = certification.name.split(' ').join('-');
   
   const upperCaseState = certification.state.toUpperCase();
   
-  return `${reversedName}-${upperCaseState}-${certification.ffy}.${ext}`;
+  return `${formattedName}-${upperCaseState}-${certification.ffy}.${ext}`;
 }
   
 module.exports = {
