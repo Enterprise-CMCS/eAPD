@@ -14,14 +14,12 @@ const ApdHeader = ({ apdName, setName, year }) => {
     <div>
       <div id='apd-title-container' className='flex-align-row'>
         <div id='editable-label'>
-          {/* <EditableLabel
-            text={apdName}
-            labelClassName='ds-h1 apd--title'
-            inputClassName='ds-h1 apd--title'
-            inputWidth='250px'
-            inputHeight='46px'
-            onFocusOut={text => setName(text)}
-          /> */}
+          <input
+            className='ds-h1 apd--title'
+            type='text'
+            value={apdName}
+            onChange={value => setName(value.target.value)}
+          />
         </div>
         <Button id='title-edit-link' class='ds-c-button ds-c-button--transparent' onClick={() => {
           const elements = document.getElementsByClassName('apd--title')
