@@ -90,6 +90,7 @@ GlobalFilter.propTypes = {
   setGlobalFilter: PropTypes.func.isRequired
 };
 
+/* eslint-disable react/prop-types */
 const SelectColumnFilter = ({
   column: { filterValue, setFilter, preFilteredRows, id, Header }
 }) => {
