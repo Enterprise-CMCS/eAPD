@@ -1,104 +1,21 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [
-    1002401, 1002422, 1002423, 1002475, 1002487, 1002492, 1002522, 1002581,
-    1002624, 1002627, 1002655, 1005059
-  ],
+  "allowlist": [1005059, 1006724],
   "_comment": {
-    "1002401": {
-      "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
-      "module": "ansi-regex",
-      "affects": [
-        "@storybook/addon-docs@6.3.4 - storybook",
-        "@storybook/core@6.3.7 - storybook",
-        "@testing-library/react@11.2.6 - testing",
-        "eslint@7.24.0 - linting",
-        "node-sass@5.0.0 - sass before build",
-        "webpack-cli@3.3.12 - used to build the application",
-        "webpack-dev-server@3.11.2 - webpack development server"
-      ]
-    },
-    "1002422": {
-      "advisory": "https://github.com/advisories/GHSA-hqhp-5p83-hx96",
-      "module": "prismjs",
-      "affects": ["@storybook/addon-a11y@6.3.7 - storybook"]
-    },
-    "1002423": {
-      "advisory": "https://github.com/advisories/GHSA-rp65-9cf3-cjxr",
-      "module": "nth-check",
-      "affects": [
-        "cssnano@4.1.10 - css before build",
-        "enzyme@3.11.0 - testing",
-        "html-webpack-plugin@4.5.2 - webpack for building"
-      ]
-    },
-    "1002475": {
-      "advisory": "https://github.com/advisories/GHSA-4jqc-8m5r-9rpr",
-      "module": "set-value",
-      "affects": ["webpack@4.46.0 - used to build the web application"]
-    },
-    "1002487": {
-      "advisory": "https://github.com/advisories/GHSA-c36v-fmgq-m8hx",
-      "module": "immer",
-      "affects": ["@storybook/react@6.3.7 - storybook"]
-    },
-    "1002492": {
-      "advisory": "https://github.com/advisories/GHSA-33f9-j839-rf8h",
-      "module": "immer",
-      "affects": ["@storybook/react@6.3.7 - storybook"]
-    },
-    "1002522": {
-      "advisory": "https://github.com/advisories/GHSA-whgm-jr23-g3j9",
-      "module": "ansi-html",
-      "affects": [
-        "@storybook/addon-docs@6.3.4 - storybook",
-        "@storybook/react@6.3.4 - storybook",
-        "webpack-dev-server@3.11.2 - webpack development server"
-      ]
-    },
-    "1002581": {
-      "advisory": "https://github.com/advisories/GHSA-257v-vj4p-3w2h",
-      "module": "color-string",
-      "affects": [
-        "cssnano@4.1.10 - css before build",
-        "postcss-cssnext@3.1.0 - css before build"
-      ]
-    },
-    "1002624": {
-      "advisory": "https://github.com/advisories/GHSA-7p7h-4mm5-852v",
-      "module": "trim-newlines",
-      "affects": ["node-sass@5.0.0 - sass before build"]
-    },
-    "1002627": {
-      "advisory": "https://github.com/advisories/GHSA-ww39-953v-wcq6",
-      "module": "glob-parent",
-      "affects": [
-        "@babel/cli@7.13.14 - compiles the code to run on older browsers",
-        "@storybook/addon-docs@6.3.4 - storybook",
-        "@storybook/react@6.3.4 - storybook",
-        "webpack-dev-server@3.11.2 - webpack development server",
-        "webpack@4.46.0 - used to build the web application"
-      ]
-    },
-    "1002655": {
-      "advisory": "https://github.com/advisories/GHSA-w8qv-6jwh-64r5",
-      "module": "browserslist",
-      "affects": [
-        "@babel/core@7.15.8 - compiles the code to run on older browsers",
-        "@babel/preset-env@7.15.8 - compiles the code to run on older browsers",
-        "@storybook/addon-docs@6.3.12 - storybook",
-        "@storybook/react@6.3.12 - storybook",
-        "cssnano@4.1.11 - css before build",
-        "postcss-cssnext@3.1.1 - css before build"
-      ]
-    },
     "1005059": {
       "advisory": "https://github.com/advisories/GHSA-whgm-jr23-g3j9",
       "module": "ansi-html",
       "affects": [
         "webpack-dev-server>ansi-html",
         "@storybook/react>@pmmmwh/react-refresh-webpack-plugin>ansi-html"
+      ]
+    },
+    "1006724": {
+      "advisory": "https://github.com/advisories/GHSA-896r-f27r-55mw",
+      "module": "json-schema",
+      "affects": [
+        "node-sass@5.0.0 - used by webpack when building the site, but not in production"
       ]
     }
   },
