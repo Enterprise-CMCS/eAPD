@@ -120,3 +120,19 @@ header:not(.ds-c-dialog__header) {
     }
   }
 }
+
+#apd-title-container.flex-align-row {
+  display: flex;
+  flex-direction: row;
+
+  #title-edit-link {
+    margin-left: 10px;
+  }
+}
+
+.apd--title {
+  border: 1px solid $color-primary-alt-dark;
+  cursor: pointer;
+  padding: 0 15px;
+  min-width: 500px !important;
+}
