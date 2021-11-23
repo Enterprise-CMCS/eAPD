@@ -1,4 +1,4 @@
-import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from './symbols';
+import { ADD_APD_YEAR, EDIT_APD, EDIT_APD_NAME, REMOVE_APD_YEAR } from './symbols';
 import { updateBudget } from '../budget';
 
 /**
@@ -12,6 +12,11 @@ import { updateBudget } from '../budget';
     value: name,
     state: getState()
   });
+  dispatch({
+    type: EDIT_APD_NAME,
+    id: getState().apd.data.id,
+    name
+  })
 };
 
 /**

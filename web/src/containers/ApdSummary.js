@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
@@ -38,9 +38,9 @@ const ApdSummary = ({
 
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
 
-  const changeName = useCallback(({ target: { value } }) => {
+  const changeName = ({ target: { value } }) => {
     setName(value);
-  })
+  }
 
   const onRemove = () => {
     removeApdYear(elementDeleteFFY.value);
