@@ -13,5 +13,5 @@ module.exports = {
     '\\.js?$': 'babel-jest'
   },
   moduleFileExtensions: ['js', 'yaml'],
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jest-environment-jsdom'
 };
