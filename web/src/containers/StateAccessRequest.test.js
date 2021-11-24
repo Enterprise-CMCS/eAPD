@@ -112,45 +112,65 @@ describe('<StateAccessRequest />', () => {
     });
   });
 
-  it('renders label', () => {
+  it('renders label', async () => {
+    fetchMock.onGet('/affiliations/me').reply(200, []);
     setup();
-    expect(screen.getByLabelText('Select your State Affiliation')).toBeTruthy();
+
+    await waitFor(() => {
+      expect(
+        screen.getByLabelText('Select your State Affiliation')
+      ).toBeTruthy();
+    });
   });
 
-  test('Secondary button renders the right text', () => {
+  test('Secondary button renders the right text', async () => {
+    fetchMock.onGet('/affiliations/me').reply(200, []);
     setup();
-    expect(screen.getByText(/Back to Login/i)).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText(/Back to Login/i)).toBeTruthy();
+    });
   });
 
-  test('Back to Login button renders', () => {
+  test('Back to Login button renders', async () => {
+    fetchMock.onGet('/affiliations/me').reply(200, []);
     setup({ secondaryButtonText: 'This is a secondary button' });
-    expect(screen.getByText(/This is a secondary button/i)).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText(/This is a secondary button/i)).toBeTruthy();
+    });
   });
 
-  it('renders the input when entered', () => {
+  it('renders the input when entered', async () => {
+    fetchMock.onGet('/affiliations/me').reply(200, []);
     setup();
+    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
     const input = screen.getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Al' } });
     expect(input.value).toBe('Al');
   });
 
-  it('renders the selection badge when an item is picked', () => {
+  it('renders the selection badge when an item is picked', async () => {
+    fetchMock.onGet('/affiliations/me').reply(200, []);
     setup();
+    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
     const input = screen.getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Alabama' } });
     fireEvent.click(screen.getByText('Alabama'));
     expect(screen.getByText('Alabama')).toBeTruthy();
   });
 
-  it('renders the no results on an invalid entry', () => {
+  it('renders the no results on an invalid entry', async () => {
+    fetchMock.onGet('/affiliations/me').reply(200, []);
     const { getByText, getByLabelText } = setup();
+    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
     const input = getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'invalid123999' } });
     expect(getByText('No results')).toBeTruthy();
   });
 
-  it('properly removes a selection', () => {
+  it('properly removes a selection', async () => {
+    fetchMock.onGet('/affiliations/me').reply(200, []);
     const { getByText, getByLabelText, getByRole, queryByText } = setup();
+    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
     const input = getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Alabama' } });
     fireEvent.click(getByText('Alabama'));
@@ -158,8 +178,10 @@ describe('<StateAccessRequest />', () => {
     expect(queryByText('Alabama')).toBeNull();
   });
 
-  it('renders the submit button as disabled until a selection is made', () => {
+  it('renders the submit button as disabled until a selection is made', async () => {
+    fetchMock.onGet('/affiliations/me').reply(200, []);
     const { getByText, getByLabelText } = setup();
+    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
     const input = getByLabelText('Select your State Affiliation');
     expect(getByText('Submit')).toHaveAttribute('disabled');
     fireEvent.change(input, { target: { value: 'Al' } });

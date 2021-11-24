@@ -31,16 +31,15 @@ const StateAdmin = ({
   const [selectedAffiliation, setSelectedAffiliation] = useState();
 
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
-  const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(
-    false
-  );
+  const [confirmationModalDisplay, setConfirmationModalDisplay] =
+    useState(false);
 
   useEffect(() => {
-    setIsFetching(true);
-    async function fetchAffiliations() {
+    (async () => {
+      setIsFetching(true);
       await affiliations(currentState.id, activeTab);
-    }
-    fetchAffiliations().then(() => setIsFetching(false));
+      setIsFetching(false);
+    })();
   }, [activeTab]);
 
   useEffect(() => {
