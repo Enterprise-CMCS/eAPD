@@ -35,7 +35,8 @@ module.exports = (
           state, 
           fileUrl,
           uploadedBy: req.user.id,
-          uploadedOn: new Date()
+          uploadedOn: new Date(),
+          status: 'active'
         });
         if (error) {
           return res.status(400).end();
