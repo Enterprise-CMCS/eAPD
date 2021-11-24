@@ -134,6 +134,7 @@ header:not(.ds-c-dialog__header) {
   border: 1px solid $color-gray-light;
   cursor: pointer;
   padding: 0 15px;
+  white-space: pre-wrap;
 }
 
 .apd--title:hover {
