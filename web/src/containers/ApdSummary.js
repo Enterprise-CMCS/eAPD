@@ -42,6 +42,16 @@ const ApdSummary = ({
     setName(value);
   }
 
+  const onBlur = (e) => {
+    const apdNameInput = e.target.value;
+
+    if (apdNameInput.trim() === '') {
+      setName('Untitled APD')
+    } else {
+      setName(apdNameInput)
+    }
+  }
+
   const onRemove = () => {
     removeApdYear(elementDeleteFFY.value);
     setElementDeleteFFY(null);
@@ -100,6 +110,7 @@ const ApdSummary = ({
         label="APD Name"
         name="apd-name"
         onChange={changeName}
+        onBlur={onBlur}
         value={name}
       />
       <ChoiceList

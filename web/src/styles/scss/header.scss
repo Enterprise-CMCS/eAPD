@@ -137,6 +137,10 @@ header:not(.ds-c-dialog__header) {
   min-width: 500px !important;
 }
 
+.apd--title:hover {
+  cursor: pointer;
+}
+
 #title-edit-link {
   padding-left: 5px;
   padding-right: 5px;

@@ -9,23 +9,33 @@ import { setApdName } from '../actions/editApd';
 import Icon, { faEdit } from '../components/Icons';
 
 const ApdHeader = ({ apdName, setName, year }) => {
+  const onBlur = (e) => {
+    const apdNameInput = e.target.value;
+
+    if (apdNameInput.trim() === '') {
+      setName('Untitled APD')
+    } else {
+      setName(apdNameInput)
+    }
+  }
 
   return (
     <div>
       <div id='apd-title-container' className='flex-align-row'>
         <div id='editable-label'>
           <input
+            id='apd-title-input'
             className='ds-h1 apd--title'
             type='text'
             value={apdName}
             onChange={value => setName(value.target.value)}
+            onBlur={onBlur}
           />
         </div>
         <Button id='title-edit-link' class='ds-c-button ds-c-button--transparent' onClick={() => {
-          const elements = document.getElementsByClassName('apd--title')
-          const first = elements[0]
+          const e = document.getElementById('apd-title-input')
 
-          first.click();
+          e.click();
         }}>
           <Icon icon={faEdit} style={{ width: '14px' }} /> Edit
         </Button>
