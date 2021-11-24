@@ -30,6 +30,7 @@ const ApdHeader = ({ apdName, setName, year }) => {
             value={apdName}
             onChange={value => setName(value.target.value)}
             onBlur={onBlur}
+            size={apdName.length}
           />
         </div>
         <Button id='title-edit-link' class='ds-c-button ds-c-button--transparent' onClick={() => {
