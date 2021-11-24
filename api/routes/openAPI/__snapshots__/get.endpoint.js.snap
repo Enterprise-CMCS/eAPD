@@ -1156,7 +1156,7 @@ Object {
             "bearerAuth": Array [],
           },
         ],
-        "summary": "retrieve the Add State Certifications and additional details",
+        "summary": "Retrieve the Add State Certifications and additional details",
         "tags": Array [
           "Certifications",
         ],
@@ -1219,6 +1219,60 @@ Object {
           },
         ],
         "summary": "Submit the Add State Certification and additional details",
+        "tags": Array [
+          "Certifications",
+        ],
+      },
+      "put": Object {
+        "description": "update a state admin certification to associate it with an affiliation and approve that affiliation as a state admin",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "affiliationId": Object {
+                    "description": "ID of the affiliation to be matched",
+                    "type": "string",
+                  },
+                  "certificationFfy": Object {
+                    "description": "Federal Fiscal Year (FFY) from the certification upload form",
+                    "type": "string",
+                  },
+                  "certificationId": Object {
+                    "description": "ID of the certification letter",
+                    "type": "string",
+                  },
+                  "stateId": Object {
+                    "description": "ID of the state associated with the affiliation",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "State Admin Certification match successful",
+          },
+          "400": Object {
+            "description": "Invalid request",
+          },
+          "401": Object {
+            "description": "Unauthorized",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to match certification letters",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Match a state admin certification letter to an affiliation",
         "tags": Array [
           "Certifications",
         ],

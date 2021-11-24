@@ -23,10 +23,8 @@ const SelectAffiliation = ({
 
   const history = useHistory();
 
-
   const [selectedAffiliation, setSelectedAffiliation] = useState(currentStateId);
   const [availableAffiliations, setAvailableAffiliations] = useState([])
-
 
   useEffect( ()=>{
     const fetchData = async () => {

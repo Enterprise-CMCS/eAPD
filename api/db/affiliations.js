@@ -158,19 +158,46 @@ const getAllPopulatedAffiliations = async ({
   return reduceAffiliations_(affiliations);
 };
 
-const updateAuthAffiliation = async({
+const getAffiliationMatches = async ({
+  stateId,
+  db = knex
+}) => {
+  const query = db('auth_affiliations')
+    .select(selectedColumns)
+    .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
+    .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
+
+  return query
+    .where('state_id', stateId)
+    .andWhere('status', 'requested')
+    // eslint-disable-next-line func-names
+    .orWhere(function() {
+      this
+      .where('state_id', stateId)
+      .andWhere('status', 'approved')
+      .andWhere('auth_roles.name', 'eAPD State Staff')
+    });
+};
+
+const updateAuthAffiliation = async ({
   db = knex,
+  transaction = null,
   affiliationId,
   newRoleId,
   newStatus,
   changedBy,
-  stateId
+  stateId,
+  ffy
 }) => {
   // Check that user is not editing themselves
-  const { user_id: affiliationUserId, role_id: originalRoleId, status: originalStatus } = await db('auth_affiliations')
-    .select('user_id', 'role_id', 'status')
-    .where({ state_id: stateId, id: affiliationId })
-    .first();
+  const { 
+    user_id: affiliationUserId, 
+    role_id: originalRoleId, 
+    status: originalStatus } = await (transaction || db)('auth_affiliations')
+      .select('user_id', 'role_id', 'status')
+      .where({ state_id: stateId, id: affiliationId })
+      .first();
+      
   if (changedBy === affiliationUserId) {
     throw new Error('User is editing their own affiliation')
   }
@@ -178,7 +205,7 @@ const updateAuthAffiliation = async({
   // Lookup role name and set expiration date accordingly
   // The front end will pass in a -1 if the role is being revoked/denied so we
   // need to handle that case here
-  const { name: roleName } = newRoleId < 0 ? { name: null } : await db('auth_roles')
+  const { name: roleName } = newRoleId < 0 ? { name: null } : await (transaction || db)('auth_roles')
                                                                 .select('name')
                                                                 .where({id: newRoleId })
                                                                 .first();
@@ -188,6 +215,9 @@ const updateAuthAffiliation = async({
     const today = new Date();
     if (roleName === 'eAPD State Staff' || roleName === 'eAPD State Contractor') {
       expirationDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
+    }
+    if (roleName === 'eAPD State Admin') {
+      expirationDate = ffy === undefined ? null : new Date(ffy, '09', '01');
     }
   }
   
@@ -200,7 +230,7 @@ const updateAuthAffiliation = async({
     changed_by: changedBy
   }
 
-  return db('auth_affiliations')
+  return (transaction || db)('auth_affiliations')
     .where({ state_id: stateId, id: affiliationId })
     .update({
       role_id: newStatus !== 'approved' ? null : newRoleId,
@@ -208,11 +238,10 @@ const updateAuthAffiliation = async({
       expires_at: expirationDate
     })
     .then(() =>{
-      return db('auth_affiliation_audit')
+      return (transaction || db)('auth_affiliation_audit')
         .insert(authAffiliationAudit)
     })
-
-}
+};
 
 module.exports = {
   getAffiliationsByStateId,
@@ -223,6 +252,7 @@ module.exports = {
   reduceAffiliations,
   getAllPopulatedAffiliations,
   getAffiliationsByUserId,
+  getAffiliationMatches,
   updateAuthAffiliation,
   selectedColumns
 };
