@@ -10,7 +10,7 @@ import StateAccessRequest from './StateAccessRequest';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../util/api';
 
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 const defaultProps = {
   errorMessage: null,
   saveAction: jest.fn(),

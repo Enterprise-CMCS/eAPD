@@ -12,7 +12,7 @@ import { uploadFile } from './uploadFile';
 import axios from '../../util/api';
 
 const mockStore = configureStore([thunk]);
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 describe('APD edit actions for uploading files', () => {
   const reader = {

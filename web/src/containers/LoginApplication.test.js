@@ -27,7 +27,7 @@ const initialAuth = {
   verifyData: {}
 };
 
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 describe('Login Application', () => {
   beforeEach(() => {
@@ -166,7 +166,9 @@ describe('Login Application', () => {
       initialHistory: [
         { pathname: '/', state: { from: { pathname: '/dashboard' } } }
       ],
-      initialState: { auth: { ...initialAuth, authenticated: true, initialCheck: true } }
+      initialState: {
+        auth: { ...initialAuth, authenticated: true, initialCheck: true }
+      }
     });
     await waitFor(() => {
       expect(entries[index - 1].pathname).toEqual('/dashboard');

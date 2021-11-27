@@ -14,6 +14,8 @@ module.exports.loadApd = ({ getAPDByID = ga } = {}) =>
       logger.silly({ id: req.id, message: 'loading APD for request' });
       try {
         const apdFromDB = await getAPDByID(+req.params.id);
+        console.log('retrieved APD');
+        logger.info('retrieved APD');
 
         if (apdFromDB) {
           req.meta.apd = {
@@ -59,6 +61,8 @@ module.exports.userCanAccessAPD = ({ loadApd = module.exports.loadApd } = {}) =>
       // if we don't await this, the function will return immediately
       // and that causes problems in testing.  So we await.  :)
       await loadApd()(req, res, async () => {
+        console.log('loadApd callback');
+        logger.info('loadApd callback');
         // ...then get a list of APDs this user is associated with
 
         // Make sure there's overlap
@@ -97,6 +101,8 @@ module.exports.userCanEditAPD = ({
       // First make sure they can access the APD.  Same story here
       // as above with respect to await.
       await userCanAccessAPD()(req, res, () => {
+        console.log('userCanAccessAPD callback');
+        logger.info('userCanAccessAPD callback');
         // Then make sure it's in draft
         if (req.meta.apd.status === 'draft') {
           next();

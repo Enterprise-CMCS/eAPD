@@ -3,8 +3,7 @@ import {
   renderWithConnection,
   waitFor,
   screen,
-  fireEvent,
-  act
+  fireEvent
 } from 'apd-testing-library';
 
 import SelectAffiliation from './SelectAffiliation';
@@ -72,12 +71,9 @@ describe('Switch Affiliation component', () => {
       .onGet('/affiliations/me')
       .reply(200, [{ stateId: 'md' }, { stateId: 'ak' }]);
     setup();
-    await act(() => {
-      waitFor(() => {
-        expect(screen.getByLabelText('Maryland')).toBeChecked();
-        expect(screen.getByLabelText('Alaska')).not.toBeChecked();
-      });
-    });
+    await waitFor(() => screen.getByLabelText('Maryland'));
+    expect(screen.getByLabelText('Maryland')).toBeChecked();
+    expect(screen.getByLabelText('Alaska')).not.toBeChecked();
   });
   test('allows different states to be selected', async () => {
     fetchMock

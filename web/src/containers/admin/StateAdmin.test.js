@@ -17,7 +17,7 @@ import {
   getRoleTypes
 } from '../../actions/admin';
 
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 const requestedAffiliation = {
   displayName: 'Liz Lemon',
