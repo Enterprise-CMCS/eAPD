@@ -31,7 +31,7 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
     }
     return (
       <Fragment>
-        <ul className="ds-c-list--bare">
+        <ul className="ds-c-list--bare" key={person.name}>
           <li>
             <h3>
               {index + 1}. {displayName}
@@ -50,43 +50,59 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
   };
 
   const MedicaidOffice = ({ medicaidOffice }) => {
-    const {address1, address2, city, state, zip } = medicaidOffice;
+    const { address1, address2, city, state, zip } = medicaidOffice;
 
     // Since we provide a default State don't check if falsy
-    if(!address1 && !address2 && !city && !zip) {
-      return ( <span>No response was provided</span> ) ;
+    if (!address1 && !address2 && !city && !zip) {
+      return <span>No response was provided</span>;
     }
 
     return (
       <address>
         {address1}
         <br />
-        {!!address2 &&
-          address2}
+        {!!address2 && address2}
         <br />
-        {city}, {state}{' '}
-        {zip}
+        {city}, {state} {zip}
       </address>
-    )
-  }
+    );
+  };
+
+  MedicaidOffice.propTypes = {
+    medicaidOffice: PropTypes.shape({
+      address1: PropTypes.string,
+      address2: PropTypes.string,
+      city: PropTypes.string,
+      state: PropTypes.string,
+      zip: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    }).isRequired
+  };
 
   return (
     <div>
       <h2>Key State Personnel</h2>
       <h3>Medicaid director</h3>
       <ul className="ds-c-list--bare">
-        <li><strong>Name: </strong> {stateProfile.medicaidDirector.name}</li>
-        <li><strong>Email: </strong>{stateProfile.medicaidDirector.email}</li>
-        <li><strong>Phone: </strong>{stateProfile.medicaidDirector.phone}</li>
+        <li>
+          <strong>Name: </strong> {stateProfile.medicaidDirector.name}
+        </li>
+        <li>
+          <strong>Email: </strong>
+          {stateProfile.medicaidDirector.email}
+        </li>
+        <li>
+          <strong>Phone: </strong>
+          {stateProfile.medicaidDirector.phone}
+        </li>
       </ul>
-      <hr className="subsection-rule"/>
+      <hr className="subsection-rule" />
       <h3>Medicaid office address</h3>
-      <MedicaidOffice medicaidOffice={stateProfile.medicaidOffice}/>
+      <MedicaidOffice medicaidOffice={stateProfile.medicaidOffice} />
       <hr className="section-rule" />
       <h2>Key Personnel and Program Management</h2>
-      <ol className="ds-u-padding-left--0">
-        {keyPersonnel.length > 0 
-          ? keyPersonnel.map((person, index) => buildPerson(person, index)) 
+      <ol className="ds-u-padding-left--0" key="key-personnel">
+        {keyPersonnel.length > 0
+          ? keyPersonnel.map((person, index) => buildPerson(person, index))
           : 'No response was provided'}
       </ol>
     </div>
@@ -94,9 +110,17 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
 };
 
 ApdStateProfile.propTypes = {
-  stateProfile: PropTypes.object.isRequired,
-  keyPersonnel: PropTypes.array.isRequired,
-  medicaidOffice: PropTypes.object.isRequired
+  stateProfile: PropTypes.shape({
+    medicaidOffice: PropTypes.shape({
+      address1: PropTypes.string,
+      address2: PropTypes.string,
+      city: PropTypes.string,
+      state: PropTypes.string,
+      zip: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    }).isRequired,
+    medicaidDirector: PropTypes.object.isRequired
+  }).isRequired,
+  keyPersonnel: PropTypes.array.isRequired
 };
 
 export default ApdStateProfile;

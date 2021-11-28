@@ -86,8 +86,13 @@ const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
 };
 
 GlobalFilter.propTypes = {
-  globalFilter: PropTypes.func.isRequired,
-  setGlobalFilter: PropTypes.func.isRequired
+  globalFilter: PropTypes.object,
+  setGlobalFilter: PropTypes.func
+};
+
+GlobalFilter.defaultProps = {
+  globalFilter: {},
+  setGlobalFilter: null
 };
 
 /* eslint-disable react/prop-types */
@@ -377,13 +382,13 @@ const StateAdminLetters = () => {
 
 StateAdminLetters.propTypes = {
   globalFilter: PropTypes.object,
-  setGlobalFilter: PropTypes.object,
+  setGlobalFilter: PropTypes.func,
   column: PropTypes.array
 };
 
 StateAdminLetters.defaultProps = {
   globalFilter: {},
-  setGlobalFilter: {},
+  setGlobalFilter: null,
   column: []
 };
 

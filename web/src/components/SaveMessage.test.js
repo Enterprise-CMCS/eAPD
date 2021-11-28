@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor, screen } from 'apd-testing-library';
+import { render, screen } from 'apd-testing-library';
 import moment from 'moment';
 import SaveMessage from './SaveMessage';
 
@@ -27,7 +27,9 @@ describe('<SaveMessage />', () => {
         const lastSaved = moment().subtract(seconds, 'seconds');
         // https://reactjs.org/docs/test-renderer.html#testrendereract
         render(<SaveMessage lastSaved={lastSaved} />);
-        await waitFor(() => screen.getByText('Saved'));
+        // await waitFor(() =>
+        screen.getByText('Saved');
+        // );
         expect(screen.getByText('Saved')).toBeTruthy();
       });
     });
@@ -37,7 +39,9 @@ describe('<SaveMessage />', () => {
     it('last saved', async () => {
       const date = new Date(Date.now());
       render(<SaveMessage lastSaved={date} error />);
-      await waitFor(() => screen.getByText(/Last saved/i));
+      // await waitFor(() =>
+      screen.getByText(/Last saved/i);
+      // );
       expect(screen.getByText(/Last saved/i)).toBeTruthy();
     });
   });
@@ -62,7 +66,9 @@ describe('<SaveMessage />', () => {
 
     it('auto-updates from "Saved" to (1 minute ago)', async () => {
       render(<SaveMessage lastSaved={now} />);
-      await waitFor(() => screen.getByText('Saved'));
+      // await waitFor(() =>
+      screen.getByText('Saved');
+      // );
       expect(screen.getByText('Saved')).toBeTruthy();
       jest.advanceTimersByTime(60 * 1000);
       expect(screen.getByText(/Last saved/i)).toHaveTextContent(
@@ -97,7 +103,9 @@ describe('<SaveMessage />', () => {
       test(`when saved ${value} ${timeUnit} ago, it displays "${result}"`, async () => {
         const lastSaved = moment().subtract(value, timeUnit);
         render(<SaveMessage lastSaved={lastSaved} />);
-        await waitFor(() => screen.getByText(/Last saved/i));
+        // await waitFor(() =>
+        screen.getByText(/Last saved/i);
+        // );
         expect(screen.getByText(/Last saved/i)).toHaveTextContent(result);
       });
     });

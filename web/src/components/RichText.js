@@ -14,7 +14,6 @@ import 'tinymce/plugins/autoresize';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/image';
 import 'tinymce/plugins/paste';
-import 'tinymce/plugins/spellchecker';
 import 'tinymce/plugins/help';
 import 'tinymce/plugins/link';
 
@@ -161,7 +160,6 @@ class RichText extends Component {
       'autoresize',
       'lists',
       'paste',
-      'spellchecker',
       'help',
       'link',
       'image'

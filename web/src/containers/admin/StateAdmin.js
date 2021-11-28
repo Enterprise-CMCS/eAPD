@@ -35,11 +35,16 @@ const StateAdmin = ({
     useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
     (async () => {
       setIsFetching(true);
-      await affiliations(currentState.id, activeTab);
+      await affiliations(currentState.id, activeTab, {
+        signal: controller.signal
+      });
       setIsFetching(false);
     })();
+
+    return () => controller?.abort();
   }, [activeTab]);
 
   useEffect(() => {

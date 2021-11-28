@@ -70,7 +70,7 @@ const initialState = {
         name: 'eAPD State Contractor'
       }
     ],
-    affiliations: []
+    affiliations: [requestedAffiliation, activeAffiliation, inactiveAffiliation]
   },
   auth: {
     user: {
@@ -113,7 +113,13 @@ describe('<StateAdmin />', () => {
         .onGet(`/states/${stateId}/affiliations?status=pending`)
         .reply(200, []);
       renderWithConnection(<StateAdmin {...props} />, {
-        initialState
+        initialState: {
+          ...initialState,
+          admin: {
+            ...initialState.admin,
+            affiliations: []
+          }
+        }
       });
 
       await waitForElementToBeRemoved(
