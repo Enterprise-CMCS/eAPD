@@ -171,7 +171,7 @@
     "jest-transform-yaml": "^0.1.2",
     "js-yaml": "^4.1.0",
     "json-loader": "^0.5.7",
-    "mini-css-extract-plugin": "^1.4.1",
+    "mini-css-extract-plugin": "^1.6.2",
     "node-sass": "4.14",
     "postcss": "^8.2.15",
     "postcss-cli": "^8.3.1",
