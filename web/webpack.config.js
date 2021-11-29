@@ -1,5 +1,7 @@
 const path = require('path');
 
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -53,11 +55,11 @@ const config = {
         // Remember that these run in reverse, so start at the last item in the
         // array and read up to understand what's going on.
         use: [
-          {
-            // Extracts all that CSS into a file and plops it on the disk.
-            loader: 'file-loader',
-            options: { name: 'app.css' }
-          },
+          // {
+          //   // Extracts all that CSS into a file and plops it on the disk.
+          //   loader: 'file-loader',
+          //   options: { name: 'app.css' }
+          // },
 
           // Converts the local disk paths from css-loader into their final
           // paths relative to the dist directory, then pulls everything
@@ -68,20 +70,30 @@ const config = {
           // their full path on the local disk.
           'css-loader',
 
-          // Handles resolving and importing all the CSS files, so we end up
-          // with one nice, big file to deal with. Also adds vendor prefixes
-          // as necessary for CSS rules that aren't yet widely supported.
-          'postcss-loader',
-
+          // Add browser prefixes and minify CSS.
           {
-            // Parse the Sass into CSS.
-            loader: 'sass-loader',
+            loader: 'postcss-loader',
             options: {
-              sassOptions: {
-                includePaths: [path.resolve(__dirname, 'node_modules')]
-              }
+              postcssOptions: { plugins: [autoprefixer(), cssnano()] }
             }
-          }
+          },
+          // Load the SCSS/SASS
+          { loader: 'sass-loader' }
+
+          // // Handles resolving and importing all the CSS files, so we end up
+          // // with one nice, big file to deal with. Also adds vendor prefixes
+          // // as necessary for CSS rules that aren't yet widely supported.
+          // 'postcss-loader',
+
+          // {
+          //   // Parse the Sass into CSS.
+          //   loader: 'sass-loader',
+          //   options: {
+          //     sassOptions: {
+          //       includePaths: [path.resolve(__dirname, 'node_modules')]
+          //     }
+          //   }
+          // }
         ]
       },
       {
