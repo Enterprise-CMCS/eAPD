@@ -136,7 +136,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
       fileUrl: '12345', // Todo: Update this to have a valid fileUrl
-      affiliationId: null
+      affiliationId: null,
+      status: 'active'
     });
 
     stateCertifications.push({
@@ -148,7 +149,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
       fileUrl: '6789', // Todo: Update this to have a valid fileUrl
-      affiliationId: null
+      affiliationId: null,
+      status: 'active'
     });
     oktaUsers.push(formatOktaUser(stateAdmin));
   }
