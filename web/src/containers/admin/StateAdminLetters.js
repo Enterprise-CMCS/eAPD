@@ -86,12 +86,12 @@ const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
 };
 
 GlobalFilter.propTypes = {
-  globalFilter: PropTypes.object,
+  globalFilter: PropTypes.string,
   setGlobalFilter: PropTypes.func
 };
 
 GlobalFilter.defaultProps = {
-  globalFilter: {},
+  globalFilter: '',
   setGlobalFilter: null
 };
 
@@ -381,13 +381,13 @@ const StateAdminLetters = () => {
 };
 
 StateAdminLetters.propTypes = {
-  globalFilter: PropTypes.object,
+  globalFilter: PropTypes.string,
   setGlobalFilter: PropTypes.func,
   column: PropTypes.array
 };
 
 StateAdminLetters.defaultProps = {
-  globalFilter: {},
+  globalFilter: '',
   setGlobalFilter: null,
   column: []
 };
