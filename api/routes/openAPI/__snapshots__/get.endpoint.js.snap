@@ -1138,6 +1138,48 @@ Object {
       },
     },
     "/auth/certifications": Object {
+      "delete": Object {
+        "description": "Archives a previously uploaded state admin certification letter. Only non-matched letters can be archived/deleted.",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "certificationId": Object {
+                    "description": "ID of the certification letter",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "State Admin Certification archived successfully",
+          },
+          "400": Object {
+            "description": "Invalid request",
+          },
+          "401": Object {
+            "description": "Unauthorized",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to archive certification letters",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Archives a previously uploaded state admin certification letter.",
+        "tags": Array [
+          "Certifications",
+        ],
+      },
       "get": Object {
         "description": "get the state admin certifications and potential matches for loading up the state admin certification table",
         "responses": Object {

@@ -72,6 +72,7 @@ tap.test('state certifications post endpoint', async putTest => {
     });
 
     tests.test('with valid response', async test => {
+      di.updateAuthAffiliation.resolves();
       di.matchStateAdminCertification.resolves({ error: null });
 
       await handler({

@@ -122,6 +122,42 @@ const stateCertifications = {
           description: 'The user does not have sufficient authorization to match certification letters'
         }
       }
+    },
+    delete: {
+      tags: ['Certifications'],
+      summary: 'Archives a previously uploaded state admin certification letter.',
+      description:
+        'Archives a previously uploaded state admin certification letter. Only non-matched letters can be archived/deleted.',
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  certificationId: {
+                    type: 'string',
+                    description: 'ID of the certification letter'
+                  }
+                }
+              }
+            }
+          }
+        },
+      responses: {
+        200: {
+          description: 'State Admin Certification archived successfully'
+        },
+        400: {
+          description: 'Invalid request'
+        },
+        401: {
+          description: 'Unauthorized'
+        },
+        403: {
+          description: 'The user does not have sufficient authorization to archive certification letters'
+        }
+      }
     }
   }
 };
