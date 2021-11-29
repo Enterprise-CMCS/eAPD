@@ -11,6 +11,7 @@ const setup = (props = {}) =>
   renderWithConnection(<LoginLocked {...defaultProps} {...props} />);
 
 describe('<LoginLocked />', () => {
+  // TODO:
   xit('should not fail any accessibility tests', async () => {
     const { container } = setup();
     expect(await axe(container)).toHaveNoViolations();

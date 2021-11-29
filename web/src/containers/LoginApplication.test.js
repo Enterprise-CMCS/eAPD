@@ -74,9 +74,7 @@ describe('Login Application', () => {
         }
       }
     );
-    // await waitFor(() => {
     expect(getByRole('button', { name: /Agree and continue/i })).toBeTruthy();
-    // });
   });
 
   it('should hide the consent banner if the user clicks agree', async () => {
@@ -90,9 +88,7 @@ describe('Login Application', () => {
         }
       }
     );
-    // await waitFor(() => {
     expect(getByRole('button', { name: /Agree and continue/i })).toBeTruthy();
-    // });
     fireEvent.click(getByRole('button', { name: /Agree and continue/i }));
     expect(getByRole('button', { name: /Log in/i })).toBeTruthy();
   });
@@ -105,9 +101,7 @@ describe('Login Application', () => {
         initialState: { auth: { ...initialAuth, error: 'MFA_AUTH_FAILED' } }
       }
     );
-    // await waitFor(() =>
     expect(getByText(/one-time password .* incorrect/i)).toBeTruthy();
-    // );
   });
 
   it('displays an expired password error message', async () => {
@@ -118,9 +112,7 @@ describe('Login Application', () => {
         initialState: { auth: { ...initialAuth, error: 'PASSWORD_EXPIRED' } }
       }
     );
-    // await waitFor(() =>
     expect(getByText(/password has expired/i)).toBeTruthy();
-    // );
   });
 
   it('displays authentication error message', async () => {
@@ -131,9 +123,7 @@ describe('Login Application', () => {
         initialState: { auth: { ...initialAuth, error: 'AUTH_FAILED' } }
       }
     );
-    // await waitFor(() =>
     expect(getAllByText(/is incorrect/i).length).toBeGreaterThan(0);
-    // );
   });
 
   it('displays generic error message', async () => {
@@ -144,9 +134,7 @@ describe('Login Application', () => {
         initialState: { auth: { ...initialAuth, error: 'generic error' } }
       }
     );
-    // await waitFor(() =>
     expect(getAllByText(/Something went wrong/i).length).toBeGreaterThan(0);
-    // );
   });
 
   it('should redirect to root if authenticated', () => {
@@ -177,9 +165,7 @@ describe('Login Application', () => {
         auth: { ...initialAuth, authenticated: true, initialCheck: true }
       }
     });
-    // await waitFor(() => {
     expect(entries[index - 1].pathname).toEqual('/dashboard');
-    // });
   });
 
   it('should show the LoginApplication if user is not logged in but has consented', async () => {
@@ -191,8 +177,6 @@ describe('Login Application', () => {
         initialState: { auth: initialAuth }
       }
     );
-    // await waitFor(() =>
     expect(getByRole('button', { name: /Log in/i })).toBeTruthy();
-    // );
   });
 });
