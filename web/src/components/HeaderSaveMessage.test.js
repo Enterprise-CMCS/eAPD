@@ -80,6 +80,8 @@ describe('Header save message component', () => {
     jest.advanceTimersByTime(50);
     // Should now have switched back to the "saved" state.
     expect(component).toMatchSnapshot();
+
+    jest.useRealTimers()
   });
 
   it('maps redux state to component props', () => {

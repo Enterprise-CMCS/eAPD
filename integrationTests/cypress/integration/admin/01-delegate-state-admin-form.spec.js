@@ -86,30 +86,15 @@ describe(
         getInputByLabel('State employee phone number').type(userData[0].phone);
       });
 
-      it('hitting cancel should return user back to federal dashboard', () => {
-        cy.contains('Cancel').click();
-        cy.contains('Federal Administrator Portal').should('be.visible');
-      });
+      cy.fixture('test.pdf').then(myFile => {
+        const file = new File([myFile], 'test.pdf', {
+          type: 'application/pdf'
+        });
 
-      it('tests filling out and submitting the form', () => {
-        // Check that submit button starts disabled
-        cy.get('button')
-          .contains('Add State Admin Letter')
-          .should('be.disabled');
-
-        cy.get('input[type=radio]').first().check({ force: true });
-
-        cy.fixture('users').then(userData => {
-          getInputByLabel(
-            'Name of State employee to be delegated as eAPD State Adminstrator'
-          ).type(userData[0].name);
-          cy.get('select').select('Maryland');
-          getInputByLabel('State employee email address').type(
-            userData[0].email
-          );
-          getInputByLabel('State employee phone number').type(
-            userData[0].phone
-          );
+        cy.get('#file-input').trigger('drop', {
+          dataTransfer: {
+            files: [file]
+          }
         });
       });
 

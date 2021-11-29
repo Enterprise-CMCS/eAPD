@@ -20,6 +20,7 @@ const props = {
 const initialAuth = {
   hasEverLoggedOn: false,
   authenticated: false,
+  initialCheck: true,
   error: null,
   fetching: false,
   factorsList: [],
@@ -27,12 +28,13 @@ const initialAuth = {
   verifyData: {}
 };
 
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 describe('Login Application', () => {
   beforeEach(() => {
     fetchMock.reset();
     jest.clearAllMocks();
+    fetchMock.onGet('/heartbeat').reply(200, {});
   });
 
   it('should renew the session if the user is not authenticated, but they have an access token', async () => {
@@ -47,7 +49,12 @@ describe('Login Application', () => {
     const { getByText } = renderWithConnection(
       <LoginApplication {...props} />,
       {
-        initialState: { auth: initialAuth }
+        initialState: {
+          auth: {
+            ...initialAuth,
+            initialCheck: false
+          }
+        }
       }
     );
     // have to use waitFor because there is an async method in useEffect
@@ -67,9 +74,7 @@ describe('Login Application', () => {
         }
       }
     );
-    await waitFor(() => {
-      expect(getByRole('button', { name: /Agree and continue/i })).toBeTruthy();
-    });
+    expect(getByRole('button', { name: /Agree and continue/i })).toBeTruthy();
   });
 
   it('should hide the consent banner if the user clicks agree', async () => {
@@ -83,9 +88,7 @@ describe('Login Application', () => {
         }
       }
     );
-    await waitFor(() => {
-      expect(getByRole('button', { name: /Agree and continue/i })).toBeTruthy();
-    });
+    expect(getByRole('button', { name: /Agree and continue/i })).toBeTruthy();
     fireEvent.click(getByRole('button', { name: /Agree and continue/i }));
     expect(getByRole('button', { name: /Log in/i })).toBeTruthy();
   });
@@ -98,9 +101,7 @@ describe('Login Application', () => {
         initialState: { auth: { ...initialAuth, error: 'MFA_AUTH_FAILED' } }
       }
     );
-    await waitFor(() =>
-      expect(getByText(/one-time password .* incorrect/i)).toBeTruthy()
-    );
+    expect(getByText(/one-time password .* incorrect/i)).toBeTruthy();
   });
 
   it('displays an expired password error message', async () => {
@@ -111,9 +112,7 @@ describe('Login Application', () => {
         initialState: { auth: { ...initialAuth, error: 'PASSWORD_EXPIRED' } }
       }
     );
-    await waitFor(() =>
-      expect(getByText(/password has expired/i)).toBeTruthy()
-    );
+    expect(getByText(/password has expired/i)).toBeTruthy();
   });
 
   it('displays authentication error message', async () => {
@@ -124,9 +123,7 @@ describe('Login Application', () => {
         initialState: { auth: { ...initialAuth, error: 'AUTH_FAILED' } }
       }
     );
-    await waitFor(() =>
-      expect(getAllByText(/is incorrect/i).length).toBeGreaterThan(0)
-    );
+    expect(getAllByText(/is incorrect/i).length).toBeGreaterThan(0);
   });
 
   it('displays generic error message', async () => {
@@ -137,9 +134,7 @@ describe('Login Application', () => {
         initialState: { auth: { ...initialAuth, error: 'generic error' } }
       }
     );
-    await waitFor(() =>
-      expect(getAllByText(/Something went wrong/i).length).toBeGreaterThan(0)
-    );
+    expect(getAllByText(/Something went wrong/i).length).toBeGreaterThan(0);
   });
 
   it('should redirect to root if authenticated', () => {
@@ -166,11 +161,11 @@ describe('Login Application', () => {
       initialHistory: [
         { pathname: '/', state: { from: { pathname: '/dashboard' } } }
       ],
-      initialState: { auth: { ...initialAuth, authenticated: true, initialCheck: true } }
+      initialState: {
+        auth: { ...initialAuth, authenticated: true, initialCheck: true }
+      }
     });
-    await waitFor(() => {
-      expect(entries[index - 1].pathname).toEqual('/dashboard');
-    });
+    expect(entries[index - 1].pathname).toEqual('/dashboard');
   });
 
   it('should show the LoginApplication if user is not logged in but has consented', async () => {
@@ -182,8 +177,6 @@ describe('Login Application', () => {
         initialState: { auth: initialAuth }
       }
     );
-    await waitFor(() =>
-      expect(getByRole('button', { name: /Log in/i })).toBeTruthy()
-    );
+    expect(getByRole('button', { name: /Log in/i })).toBeTruthy();
   });
 });
