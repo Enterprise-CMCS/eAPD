@@ -29,6 +29,51 @@ describe('filling out APD overview section', function () {
     cy.get('#apd-header-info').contains(`Created: ${  today.toLocaleDateString("en-US", options)}`);
   });
 
+  it('changes the apd name', () => {
+    cy.visit('/');
+    cy.contains('Create new').click();
+
+    const title1 = 'HITECH IAPD';
+    const title2 = 'My Awesome eAPD';
+    const title3 = 'Magnus Archive Project';
+
+    cy.get('#apd-title-input').contains(`${title1}`)
+
+    // Change name in APD Summary text box
+    cy.focused()
+      .should('have.attr', 'name', 'apd-name')
+      .clear()
+      .type(`${title2}`)
+      .blur();
+
+    cy.get('#apd-title-input')
+      .contains(`${title2}`)
+      .click();
+
+    // Change name via APD Header
+    cy.focused()
+      .should('have.attr', 'id', 'apd-title-input')
+      .clear()
+      .type(`${title3}`)
+      .blur();
+
+    cy.get('#apd-title-input')
+      .contains(`${title3}`);
+
+    // Change name by clicking EDIT button
+    cy.get('#title-edit-link')
+      .click();
+
+    cy.focused()
+      .should('have.attr', 'id', 'apd-title-input')
+      .clear()
+      .type(`${title2}`)
+      .blur();
+
+      cy.get('#apd-title-input')
+        .contains(`${title2}`);
+  });
+
   it('confirms Continue buttons redirect to correct sections', () => {
     cy.wrap(pageTitles).each((index) => {
       cy.get('.ds-h2')
@@ -93,9 +138,9 @@ describe('filling out APD overview section', function () {
 
   it('confirms anchor links redirect to correct sections', () => {
     const pageWithAnchors = [{parent: 'Key State Personnel', label: 'Key Personnel and Program Management', subnav: '#apd-state-profile-key-personnel'},
-                                {parent: 'Results of Previous Activities', label: 'Prior Activities Overview', subnav: ['#prev-activities-outline', '#prev-activities-table']},
-                                {parent: 'Proposed Budget', label: 'Summary Budget by Activity', subnav: ['#summary-schedule-by-activity-table', '#budget-summary-table', '#budget-federal-by-quarter', '#budget-incentive-by-quarter']},
-                                {parent: 'Executive Summary', label: 'Activities Summary', subnav: ['#executive-summary-summary', '#executive-summary-budget-table']}]
+                             {parent: 'Results of Previous Activities', label: 'Prior Activities Overview', subnav: ['#prev-activities-outline', '#prev-activities-table']},
+                             {parent: 'Proposed Budget', label: 'Summary Budget by Activity', subnav: ['#summary-schedule-by-activity-table', '#budget-summary-table', '#budget-federal-by-quarter', '#budget-incentive-by-quarter']},
+                             {parent: 'Executive Summary', label: 'Activities Summary', subnav: ['#executive-summary-summary', '#executive-summary-budget-table']}]
 
     cy.wrap(pageWithAnchors).each((index) => {
       const {subnav} = index;
