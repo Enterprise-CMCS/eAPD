@@ -8,7 +8,7 @@ import { setApdName } from '../actions/editApd';
 
 import Icon, { faEdit } from '../components/Icons';
 
-const ApdHeader = ({ apdName, setName, year }) => {
+const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
   const [isEditing, setEditing] = useState(false);
 
   useEffect(() => {
@@ -70,15 +70,21 @@ const ApdHeader = ({ apdName, setName, year }) => {
           <Icon icon={faEdit} style={{ width: '14px' }} /> Edit
         </Button>
       </div>
-      <h1 className="ds-h5 ds-u-margin-top--1 ds-u-margin-bottom--3">
-        HITECH IAPD | FFY {year}
-      </h1>
+      <div id='apd-header-info'>
+        <h1 className="ds-h5 ds-u-margin-top--1">
+          HITECH IAPD | FFY {year}
+        </h1>
+
+        <span className="ds-h6 ds-u-display--block ds-u-margin-top--1 ds-u-margin-bottom--3">
+          <strong>Created:</strong> {apdCreated}
+        </span>
+      </div>
     </div>
   );
 };
 
 ApdHeader.propTypes = {
-  // apdCreated: PropTypes.string.isRequired,
+  apdCreated: PropTypes.string.isRequired,
   apdName: PropTypes.string,
   setName: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired

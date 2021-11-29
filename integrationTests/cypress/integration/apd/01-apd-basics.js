@@ -26,7 +26,7 @@ describe('filling out APD overview section', function () {
 
     cy.contains('Create new').click();
 
-    cy.get('.apd--title').contains(`Created: ${  today.toLocaleDateString("en-US", options)}`);
+    cy.get('#apd-header-info').contains(`Created: ${  today.toLocaleDateString("en-US", options)}`);
   });
 
   it('confirms Continue buttons redirect to correct sections', () => {
