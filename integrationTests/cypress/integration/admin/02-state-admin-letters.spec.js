@@ -10,7 +10,7 @@ describe('state admin letters table', () => {
 
   before(() => {
     cy.useFedAdmin();
-    cy.location('pathname').then(pathname => '/');
+    cy.location('pathname').then(() => '/');
     cy.task('db:resetcertification', { email: 'Sincere@april.biz' });
   });
 

@@ -19,6 +19,7 @@ module.exports = (
     loggedIn,
     can('edit-state-certifications'),
     async (req, res, next) => {
+
       const allRoleIds = await getAllActiveRoles();
       const stateAdminId = allRoleIds.find(role => role.name === 'eAPD State Admin').id;
       
@@ -28,7 +29,7 @@ module.exports = (
         affiliationId,
         stateId
       } = req.body;
-     
+      
       try {
         const { error = null } = await matchStateAdminCertification({
           certificationId,
