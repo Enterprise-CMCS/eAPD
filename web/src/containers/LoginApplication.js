@@ -47,12 +47,17 @@ const LoginApplication = ({
   const location = useLocation();
 
   useEffect(() => {
+    const controller = new AbortController();
     if (!initialCheck && !showConsent) {
       setRestoringSession(true);
-      authCheckAction().then(() => {
+      authCheckAction({
+        signal: controller.signal
+      }).then(() => {
         setRestoringSession(false);
       });
     }
+
+    return () => controller?.abort();
   }, []);
 
   let errorMessage = null;
@@ -184,7 +189,7 @@ const LoginApplication = ({
 
 LoginApplication.propTypes = {
   hasEverLoggedOn: PropTypes.bool.isRequired,
-  initialCheck: PropTypes.bool.isRequired,
+  initialCheck: PropTypes.bool,
   authenticated: PropTypes.bool.isRequired,
   error: PropTypes.string,
   fetching: PropTypes.bool.isRequired,
@@ -204,7 +209,8 @@ LoginApplication.propTypes = {
 
 LoginApplication.defaultProps = {
   error: null,
-  verifyData: {}
+  verifyData: {},
+  initialCheck: true
 };
 
 // TODO: test
