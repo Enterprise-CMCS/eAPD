@@ -34,7 +34,8 @@ const user = {
             zip: '12345'
           }
         }
-      }
+      },
+      activities: ['edit-document']
     }
   }
 };
@@ -155,7 +156,7 @@ describe('apd (application) component', () => {
 
     state.apd.data.id = null;
     delete state.apd.data.years;
-    state.user.data.role = 'test role'
+    state.user.data.role = 'test role';
 
     expect(mapStateToProps(state)).toEqual({
       apdId: null,

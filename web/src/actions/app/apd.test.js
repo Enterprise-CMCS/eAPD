@@ -35,7 +35,7 @@ import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import { t } from '../../i18n';
 
 const mockStore = configureStore([thunk]);
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 describe('application-level actions', () => {
   beforeEach(() => {
@@ -428,7 +428,9 @@ describe('application-level actions', () => {
     });
 
     it('does nothing if user is an admin', async () => {
-      const store = mockStore({ user: { data: { role: 'eAPD Federal Admin' } } });
+      const store = mockStore({
+        user: { data: { role: 'eAPD Federal Admin' } }
+      });
 
       await store.dispatch(setApdToSelectOnLoad());
 
