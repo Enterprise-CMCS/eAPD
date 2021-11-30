@@ -141,7 +141,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
     });
 
     stateCertifications.push({
-      id: 456,
       ffy: 2021,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'tn',
