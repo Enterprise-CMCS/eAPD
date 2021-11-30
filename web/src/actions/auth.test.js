@@ -14,7 +14,7 @@ jest.mock('./app', () => {
 });
 
 const mockStore = configureStore([thunk]);
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -82,7 +82,6 @@ describe('auth actions', () => {
         .onGet('/me')
         .reply(200, { name: 'moop', activities: [], states: ['MO'] });
 
-      
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
@@ -93,33 +92,33 @@ describe('auth actions', () => {
         },
         { type: actions.LOGIN_SUCCESS }
       ];
-      
+
       await store.dispatch(actions.login('name', 'secret'));
       expect(signInSpy).toHaveBeenCalledTimes(1);
       await expect(getTokenSpy).toHaveBeenCalledTimes(1);
-      
+
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
-    
+
     it('creates LOGIN_SUCCESS after successful single factor auth, sends user to state request', async () => {
       const signInSpy = jest
         .spyOn(mockAuth, 'authenticateUser')
         .mockImplementation(() =>
-        Promise.resolve({
-          sessionToken: 'testSessionToken',
-          status: 'SUCCESS'
-        })
-      );
+          Promise.resolve({
+            sessionToken: 'testSessionToken',
+            status: 'SUCCESS'
+          })
+        );
       const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
-      .spyOn(mockAuth, 'setTokens')
-      .mockImplementation(() => Promise.resolve(expiresAt));
-      
+        .spyOn(mockAuth, 'setTokens')
+        .mockImplementation(() => Promise.resolve(expiresAt));
+
       const store = mockStore({});
       fetchMock
-      .onGet('/me')
-      .reply(200, { name: 'moop', activities: [], states: [] });
+        .onGet('/me')
+        .reply(200, { name: 'moop', activities: [], states: [] });
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
@@ -480,11 +479,11 @@ describe('auth actions', () => {
       await timeout(25);
       expect(store.getActions()).toEqual(expectedActions);
     });
-    
+
     it('creates LOGIN_MFA_FAILURE after fails to add access token', async () => {
       const verifyMock = jest.fn(() =>
         Promise.resolve({ sessionToken: 'testSessionToken' })
-      )
+      );
       const retrieveExistingTransactionSpy = jest
         .spyOn(mockAuth, 'retrieveExistingTransaction')
         .mockImplementation(() =>
@@ -492,9 +491,9 @@ describe('auth actions', () => {
             verify: verifyMock
           })
         );
-        
+
       const store = mockStore({});
-      
+
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         { type: actions.LOGIN_FAILURE, error: 'MFA_AUTH_FAILED' }
@@ -502,7 +501,7 @@ describe('auth actions', () => {
 
       await store.dispatch(actions.loginOtp('otp'));
       await timeout(25);
-      
+
       expect(retrieveExistingTransactionSpy).toHaveBeenCalledTimes(1);
       expect(verifyMock).toHaveBeenCalledTimes(1);
       expect(store.getActions()).toEqual(expectedActions);
@@ -564,14 +563,14 @@ describe('auth actions', () => {
             status: 'SUCCESS'
           })
         );
-        
+
       const expiresAt = new Date().getTime() + 5000;
       const setTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
         .mockImplementation(() => Promise.resolve(expiresAt));
 
       const store = mockStore({});
-      fetchMock.onGet('/me').reply(401, 'Request failed with status code 401' );
+      fetchMock.onGet('/me').reply(401, 'Request failed with status code 401');
       // fetchMock.onGet('/me', () => {
       //   throw new Error("Request failed with status code 401")
       // })
@@ -670,7 +669,7 @@ describe('auth actions', () => {
         },
         { type: actions.LOGIN_SUCCESS }
       ];
-      
+
       await store.dispatch(actions.authCheck());
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -678,12 +677,12 @@ describe('auth actions', () => {
     it('if the session is expired, redirect the user to login', () => {
       const store = mockStore({});
       jest
-      .spyOn(mockAuth, 'renewTokens')
-      .mockImplementation(() => Promise.resolve(null));
+        .spyOn(mockAuth, 'renewTokens')
+        .mockImplementation(() => Promise.resolve(null));
       jest
-      .spyOn(mockAuth, 'logoutAndClearTokens')
-      .mockImplementation(() => Promise.resolve());
-      
+        .spyOn(mockAuth, 'logoutAndClearTokens')
+        .mockImplementation(() => Promise.resolve());
+
       const expectedActions = [
         { type: actions.AUTH_CHECK_REQUEST },
         { type: actions.LOGOUT_REQUEST },
@@ -1069,7 +1068,8 @@ describe('auth actions', () => {
 
   describe('selectAffiliation', () => {
     const currentState = 'md';
-    const mockValidJWT = 'ewogICJhbGciOiAiSFMyNTYiLAogICJ0eXAiOiAiSldUIgp9.ewogICJuYW1lIjogIkpvaG4gRG9lIgp9.hqWGSaFpvbrXkOWc6lrnffhNWR19W_S1YKFBx2arWBk';
+    const mockValidJWT =
+      'ewogICJhbGciOiAiSFMyNTYiLAogICJ0eXAiOiAiSldUIgp9.ewogICJuYW1lIjogIkpvaG4gRG9lIgp9.hqWGSaFpvbrXkOWc6lrnffhNWR19W_S1YKFBx2arWBk';
 
     beforeEach(() => {
       fetchMock.reset();
@@ -1094,11 +1094,11 @@ describe('auth actions', () => {
         {
           type: actions.UPDATE_USER_INFO,
           data: {
-            name: "John Doe",
+            name: 'John Doe'
           }
         },
         { type: actions.LOGIN_SUCCESS }
-      ];      
+      ];
 
       await store.dispatch(actions.selectAffiliation('ak', currentState));
       expect(store.getActions()).toEqual(expectedActions);

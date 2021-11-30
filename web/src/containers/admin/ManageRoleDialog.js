@@ -20,17 +20,17 @@ const ManageRoleDialog = ({
     if (selectedRoleName) {
       return findRoleByName(selectedRoleName) || roleTypes[0];
     }
-    return '';
+    return roleTypes[0];
   };
 
   const getRoleName = selectedRoleName => {
     const role = getRole(selectedRoleName);
-    return role ? role.name : null;
+    return role ? role.name : '';
   };
 
   const getRoleId = selectedRoleName => {
     const role = getRole(selectedRoleName);
-    return role ? role.id : null;
+    return role ? role.id : 0;
   };
 
   const [roleSelectedName, setRoleSelectedName] = useState(
@@ -62,7 +62,11 @@ const ManageRoleDialog = ({
     return updatedRole;
   });
 
-  dropdownOptions.unshift({label:'Select an option', value:'', key:'selectAnOption'})
+  dropdownOptions.unshift({
+    label: 'Select an option',
+    value: '',
+    key: 'selectAnOption'
+  });
 
   return (
     <Dialog
@@ -113,6 +117,6 @@ ManageRoleDialog.propTypes = {
 
 ManageRoleDialog.defaultProps = {
   roleDescription: ''
-}
+};
 
 export default ManageRoleDialog;
