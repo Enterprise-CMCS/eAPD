@@ -3,12 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon, { faExclamationTriangle } from './Icons';
-import getDeleteModalOptions from './DeleteModalOptions'
-
+import getDeleteModalOptions from './DeleteModalOptions';
 
 const DeleteModal = ({ onDelete, onCancel, objType }) => {
-
-  const bodyOptions = getDeleteModalOptions(objType)
+  const bodyOptions = getDeleteModalOptions(objType);
 
   return (
     <Dialog
@@ -32,9 +30,7 @@ const DeleteModal = ({ onDelete, onCancel, objType }) => {
       onExit={onCancel}
       size="wide"
     >
-
       {bodyOptions?.body() || 'MISSING BODY TEXT'}
-
     </Dialog>
   );
 };
@@ -42,7 +38,11 @@ const DeleteModal = ({ onDelete, onCancel, objType }) => {
 DeleteModal.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  objType: PropTypes.string.isRequired,
+  objType: PropTypes.string
+};
+
+DeleteModal.defaultProps = {
+  objType: ''
 };
 
 export default DeleteModal;

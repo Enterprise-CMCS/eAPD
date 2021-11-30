@@ -14,40 +14,40 @@ const thisFFY = (() => {
   return year;
 })();
 
-export const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
+const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
 
-describe('filling out state admin delegation form', function () {
+describe('filling out state admin delegation form', () => {
   let delegateStateAdminFormUrl;
 
-  const getInputByLabel = (label) => {
+  const getInputByLabel = label => {
     return cy
       .contains('label', label)
       .invoke('attr', 'for')
       .then((id) => {
-        cy.get('#' + id)
+        cy.get(`#${id}`)
       })
   };
   
-  before(function () {
+  before(() => {
     cy.useFedAdmin();
-
     cy.findByRole('button', { name: /Add State Admin Letter/i }).click();
-    cy.wait(1000);
-    cy.location('pathname').then(pathname => (delegateStateAdminFormUrl = pathname));
+    cy.location('pathname').then(pathname => {
+      delegateStateAdminFormUrl = pathname
+    });
   });
-
-  beforeEach(function () {
+  
+  beforeEach(() => {
     cy.useFedAdmin(delegateStateAdminFormUrl);
   });
-
-  it('tests default values', function () {
+  
+  it('tests default values', () => {
     cy.url().should('include', '/delegate-state-admin');
     
     cy.get('legend').contains('Period of Delegated Authority');
     
     cy.get('input[type=radio]').should('have.length', 2);
     
-    twoYears.map(year => {
+    twoYears.forEach(year => {
       getInputByLabel(year).should('have.value', year);
       getInputByLabel(year).should('not.be.checked');
     })
@@ -61,12 +61,12 @@ describe('filling out state admin delegation form', function () {
     cy.get('[id=file-input]').contains('Drag files here');
   });
   
-  it('hitting cancel should return user back to federal dashboard', function () {
+  it('hitting cancel should return user back to federal dashboard', () => {
     cy.contains('Cancel').click();
     cy.contains('Federal Administrator Portal').should('be.visible');
   });  
   
-  it('tests filling out and submitting the form', function () {
+  it('tests filling out and submitting the form', () => {
     // Check that submit button starts disabled
     cy.get('button').contains('Add State Admin Letter').should('be.disabled');
     
@@ -90,8 +90,6 @@ describe('filling out state admin delegation form', function () {
         },
       });
     });
-    
-    cy.wait(1000); // Wait for file to be attached
     
     cy.get('[alt="PDF document icon"]').should('be.visible');
     cy.get('a').contains('test.pdf').should('be.visible');

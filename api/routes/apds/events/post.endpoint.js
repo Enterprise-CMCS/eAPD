@@ -25,6 +25,7 @@ describe('APD events endpoints', () => {
 
     describe('when authenticated as a user with permissions', () => {
       let api;
+
       beforeAll(() => {
         api = login('state-admin');
       });

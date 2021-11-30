@@ -8,7 +8,7 @@ import * as actions from './admin';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 describe('admin actions', () => {
   beforeEach(() => {

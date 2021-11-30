@@ -145,7 +145,17 @@ workflows:
               ignore:
                 - main
           requires:
+            - validate openapi
+            - owasp zap scan
+            - frontend lint
+            - backend lint
             - frontend dependency vulnerability scan
+            - backend dependency vulnerability scan
+            - frontend test
+            - yaml test
+            - backend unit test
+            - backend api endpoint test
+            
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
@@ -239,8 +249,8 @@ jobs:
     docker:
       - image: node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_INSTALL_DEPS_UN
+          password: $DOCKER_INSTALL_DEPS_PW
     steps:
       - checkout
       - restore_cache:
@@ -269,8 +279,8 @@ jobs:
     docker:
       - image: circleci/node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_VALIDATE_OPENAPI_UN
+          password: $DOCKER_VALIDATE_OPENAPI_PW
     steps:
       - checkout
       - setup_remote_docker
@@ -291,8 +301,8 @@ jobs:
     docker:
       - image: node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_TESTS_UN
+          password: $DOCKER_TESTS_PW
     steps:
       - checkout
       - run: npm install glob
@@ -316,7 +326,7 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
             docker build -t cms-eapd/api ./
       - run:
           name: run tests
@@ -335,8 +345,8 @@ jobs:
     docker:
       - image: node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_LINT_UN
+          password: $DOCKER_LINT_PW
     steps:
       - checkout
       - attach_workspace:
@@ -358,7 +368,7 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
             docker build -t cms-eapd/api ./
       - run:
           name: run tests
@@ -410,8 +420,8 @@ jobs:
     docker:
       - image: node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_LINT_UN
+          password: $DOCKER_LINT_PW
     steps:
       - checkout
       - attach_workspace:
@@ -426,8 +436,8 @@ jobs:
     docker:
       - image: node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_TESTS_UN
+          password: $DOCKER_TESTS_PW
     steps:
       - checkout
       - attach_workspace:
@@ -454,8 +464,9 @@ jobs:
     docker:
       - image: node:14
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_DEPS_VULN_UN
+
+          password: $DOCKER_DEPS_VULN_PW
     steps:
       - checkout
       - attach_workspace:
@@ -477,25 +488,25 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker build -t cms-eapd/api ./
       - run:
           name: start everything up
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker pull owasp/zap2docker-stable
       - run:
           name: run owasp zap
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
