@@ -43,7 +43,7 @@ describe('state switch endpoint | GET /auth/state/:stateId', () => {
     const response = await api.get(`${url}/mn`);
 
     expect(response.status).toEqual(200);
-    const claims = await actualVerifyEAPDToken(response.data.jwt)
+    const claims = await actualVerifyEAPDToken(response.data.jwt);
     expect(claims.state).toMatchSnapshot();
   });
 });

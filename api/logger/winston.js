@@ -1,7 +1,7 @@
 require('../env');
 const fs = require('fs');
 const winston = require('winston');
-const { name: packageName } = require('../package');
+const { name: packageName } = require('../package.json');
 
 const { LOG_CONSOLE, LOG_FILE, LOG_LEVEL } = process.env;
 
@@ -40,10 +40,9 @@ logger.stream = {
         ...request
       };
       logger.log('info', result);
-    } catch(e){
-      logger.log('info', `unable to parse JSON string: ${json}`)
+    } catch (e) {
+      logger.log('info', `unable to parse JSON string: ${json}`);
     }
-
   }
 };
 
