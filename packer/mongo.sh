@@ -66,8 +66,24 @@ export MONGO_DATABASE_PASSWORD="$mongo_database_password"
 #Preparing Mongo DB Users
 cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo admin -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval "db.createUser({user: '$MONGO_DATABASE_USERNAME', pwd: '$MONGO_DATABASE_PASSWORD', roles:[{role:'dbAdmin', db:'$MONGO_DATABASE'}]});"
+#mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+#mongo admin -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval "db.createUser({user: '$MONGO_DATABASE_USERNAME', pwd: '$MONGO_DATABASE_PASSWORD', roles:[{role:'userAdmin', db:'$MONGO_DATABASE'}]});"
+db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+db.createUser(
+  {
+    user: '$MONGO_INITDB_ROOT_USERNAME',
+    pwd: '$MONGO_INITDB_ROOT_PASSWORD',
+    roles: [{'role' : 'root','db' : 'admin'}]
+  }
+ );
+db.createUser(
+  {
+    user: '$MONGO_DATABASE_USERNAME',
+    pwd: '$MONGO_DATABASE_PASSWORD',
+    roles: [{role:'userAdmin', db:'$MONGO_DATABASE'}]
+  }
+);"
+
 MONGOUSERSEED
 E_USER
 
