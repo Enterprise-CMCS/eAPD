@@ -157,13 +157,12 @@ const StateAdminLetters = () => {
   const [showMatchUserDialog, setShowMatchUserDialog]= useState(false);
   const [showDeleteCertificationDialog, setShowDeleteCertificationDialog]= useState(false);
   const [selectedCertification, setSelectedCertification]= useState({});
-  
+    
   useEffect(() => {
     (async () => {
       const certificationLetters = await axios.get('/auth/certifications');
       setTableData(certificationLetters.data);
-    }
-    fetchData();
+    })();
   }, [showMatchUserDialog, showDeleteCertificationDialog]);
 
   const columns = React.useMemo(
