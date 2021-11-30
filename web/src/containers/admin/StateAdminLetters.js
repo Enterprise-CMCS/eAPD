@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useMemo, useState, useEffect } from 'react';
+
 import { useHistory } from 'react-router-dom';
 import {
   useTable,
@@ -23,6 +24,8 @@ import {
 
 import axios from '../../util/api';
 
+import MatchStateAdminDialog from './MatchStateAdminDialog';
+
 import { PDFFileBlue } from '../../components/Icons';
 
 const certificationRow = record => {
@@ -40,8 +43,10 @@ const certificationRow = record => {
   };
 
   return {
+    id: record.id,
     name: record.name,
     email: record.email,
+    phone: record.phone,
     state: record.state.toUpperCase(),
     ffy: record.ffy,
     file: record.fileUrl,
@@ -74,17 +79,23 @@ const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        label="Search All"
+        label="Search"
       />
     </span>
   );
 };
 
 GlobalFilter.propTypes = {
-  globalFilter: PropTypes.func.isRequired,
-  setGlobalFilter: PropTypes.func.isRequired
+  globalFilter: PropTypes.string,
+  setGlobalFilter: PropTypes.func
 };
 
+GlobalFilter.defaultProps = {
+  globalFilter: '',
+  setGlobalFilter: null
+};
+
+/* eslint-disable react/prop-types */
 const SelectColumnFilter = ({
   column: { filterValue, setFilter, preFilteredRows, id, Header }
 }) => {
@@ -117,11 +128,11 @@ const SelectColumnFilter = ({
 };
 
 SelectColumnFilter.propTypes = {
-  column: PropTypes.array
+  column: PropTypes.shape({})
 };
 
 SelectColumnFilter.defaultProps = {
-  column: []
+  column: {}
 };
 
 const SortIndicator = ({ canSort, isSorted, isSortedDesc }) => {
@@ -141,18 +152,15 @@ const StateAdminLetters = () => {
   const history = useHistory();
 
   const [tableData, setTableData] = useState([]);
+  const [showMatchUserDialog, setShowMatchUserDialog] = useState(false);
+  const [selectedCertification, setSelectedCertification] = useState({});
 
   useEffect(() => {
-    async function fetchData() {
+    (async () => {
       const certificationLetters = await axios.get('/auth/certifications');
       setTableData(certificationLetters.data);
-    }
-    fetchData();
-  }, []);
-
-  const handleAddStateButton = () => {
-    history.push('/delegate-state-admin');
-  };
+    })();
+  }, [showMatchUserDialog]);
 
   const columns = React.useMemo(
     () => [
@@ -222,6 +230,25 @@ const StateAdminLetters = () => {
     usePagination
   );
 
+  const handleAddStateButton = () => {
+    history.push('/delegate-state-admin');
+  };
+
+  const handleShowMatchUserDialog = event => {
+    const certificationId = event.target.parentNode.parentNode.getAttribute(
+      'data-certification-id'
+    );
+    const certification = page.find(
+      row => Number(certificationId) === Number(row.original.id)
+    );
+    setSelectedCertification(certification.original);
+    setShowMatchUserDialog(true);
+  };
+
+  const handleHideMatchUserDialog = () => {
+    setShowMatchUserDialog(false);
+  };
+
   return (
     <div id="state-admin-letters">
       <Button onClick={handleAddStateButton} variation="primary">
@@ -267,7 +294,10 @@ const StateAdminLetters = () => {
           {page.map(row => {
             prepareRow(row);
             return (
-              <TableRow {...row.getRowProps()}>
+              <TableRow
+                {...row.getRowProps()}
+                data-certification-id={row.original.id}
+              >
                 {row.cells.map(cell => {
                   if (cell.column.id === 'file') {
                     return (
@@ -281,7 +311,11 @@ const StateAdminLetters = () => {
                   if (cell.column.id === 'actions') {
                     return (
                       <TableCell {...cell.getCellProps()}>
-                        {/* Todo: Add actions here */}
+                        {cell.row.values.status === 'Pending Match' && (
+                          <Button onClick={handleShowMatchUserDialog}>
+                            Match To User
+                          </Button>
+                        )}
                       </TableCell>
                     );
                   }
@@ -336,19 +370,25 @@ const StateAdminLetters = () => {
           {'>'}
         </button>{' '}
       </div>
+      {showMatchUserDialog && (
+        <MatchStateAdminDialog
+          certification={selectedCertification}
+          hideModal={handleHideMatchUserDialog}
+        />
+      )}
     </div>
   );
 };
 
 StateAdminLetters.propTypes = {
-  globalFilter: PropTypes.object,
-  setGlobalFilter: PropTypes.object,
+  globalFilter: PropTypes.string,
+  setGlobalFilter: PropTypes.func,
   column: PropTypes.array
 };
 
 StateAdminLetters.defaultProps = {
-  globalFilter: {},
-  setGlobalFilter: {},
+  globalFilter: '',
+  setGlobalFilter: null,
   column: []
 };
 

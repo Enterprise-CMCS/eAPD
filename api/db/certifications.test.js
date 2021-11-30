@@ -1,11 +1,11 @@
 const tap = require('tap');
 const knex = require('./knex')
-const {getStateAdminCertifications} = require('./certifications')
+const { getStateAdminCertifications, archiveStateAdminCertification } = require('./certifications')
 
 const setupDB = async (certifications, oktaUsers, authAffiliations) =>{
-  await knex('state_admin_certifications').insert(certifications)
   await knex('okta_users').insert(oktaUsers)
   await knex('auth_affiliations').insert(authAffiliations)
+  await knex('state_admin_certifications').insert(certifications)
 }
 
 const OKTA_USERS = {
@@ -26,8 +26,7 @@ const OKTA_USERS = {
     primaryPhone: '',
     mobilePhone: '',
     login: 'namematchusername'
-  },
-
+  }
 }
 
 const AUTH_AFFILIATIONS = {
@@ -43,11 +42,11 @@ const AUTH_AFFILIATIONS = {
     status: 'approved',
     username: 'namematchusername'
   }
-
 }
+
 // This query is not that complicated, except for the part where it guesses how many matches
 // might exist for a given state admin certifications. As a result that is what the tests focus on.
-tap.test('state_admin_certification query tests', async sacQueryTest => {
+tap.test('certifications query tests', async sacQueryTest => {
   let stateStaffRoleId
   let fedAdminRoleId
 
@@ -80,8 +79,9 @@ tap.test('state_admin_certification query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
-
+      status: 'active'
     }
+    
     const expectedFields = [
       'id',
       'name',
@@ -121,6 +121,7 @@ tap.test('state_admin_certification query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
 
     }
     const oktaUsers = OKTA_USERS.emailMatch
@@ -146,6 +147,7 @@ tap.test('state_admin_certification query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
     }
 
     const oktaUsers = OKTA_USERS.nameMatch
@@ -170,6 +172,7 @@ tap.test('state_admin_certification query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
     }
 
     const oktaUsers = OKTA_USERS.nameMatch
@@ -194,6 +197,7 @@ tap.test('state_admin_certification query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
     }
     const oktaUsers = [OKTA_USERS.nameMatch, OKTA_USERS.emailMatch]
 
@@ -221,6 +225,7 @@ tap.test('state_admin_certification query tests', async sacQueryTest => {
       uploadedBy: 'unitTest',
       uploadedOn: new Date(),
       ffy: 2022,
+      status: 'active'
     }
     const oktaUsers = OKTA_USERS.emailMatch
 
@@ -231,6 +236,101 @@ tap.test('state_admin_certification query tests', async sacQueryTest => {
     const results = await getStateAdminCertifications()
     t.same(results.length, 1)
     t.same(results[0].potentialMatches, 0)
+  })
+  
+  sacQueryTest.test('returns an error when attempting to archive a matched certification', async t => {
+    const certifications = {
+      id: '1001',
+      email: 'matchme@email.com',
+      name: 'Cant match me Flynn',
+      state: 'ak',
+      fileUrl: '/auth/certifications/files/whatever.pdf',
+      phone: '4438675309',
+      uploadedBy: 'unitTest',
+      uploadedOn: new Date(),
+      ffy: 2022,
+      affiliationId: '1234',
+      status: 'active'
+    }
+
+    const authAffiliations = [
+      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
+    ]
+    
+    const oktaUsers = OKTA_USERS.emailMatch
+    
+    await setupDB(certifications, oktaUsers, authAffiliations)
+    
+    const results = await archiveStateAdminCertification({
+      id: '1001',
+      archived_by: 'emailMatch'
+    })
+    
+    t.same(results.error, 'certification is already matched')
+  })
+
+  sacQueryTest.test('returns an error when attempting to archive an already archived certification', async t => {
+    const certifications = {
+      id: '1001',
+      email: 'matchme@email.com',
+      name: 'Cant match me Flynn',
+      state: 'ak',
+      fileUrl: '/auth/certifications/files/whatever.pdf',
+      phone: '4438675309',
+      uploadedBy: 'unitTest',
+      uploadedOn: new Date(),
+      ffy: 2022,
+      affiliationId: null,
+      status: 'archived'
+    }
+
+    const authAffiliations = [
+      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
+    ]
+    
+    const oktaUsers = OKTA_USERS.emailMatch
+    
+    await setupDB(certifications, oktaUsers, authAffiliations)
+    
+    const results = await archiveStateAdminCertification({
+      id: '1001',
+      archived_by: 'emailMatch'
+    })
+    
+    t.same(results.error, 'certification is already archived')
+  })
+
+  sacQueryTest.test('updates a certification to archived with valid data', async t => {
+    const certifications = {
+      id: '1001',
+      email: 'matchme@email.com',
+      name: 'Cant match me Flynn',
+      state: 'ak',
+      fileUrl: '/auth/certifications/files/whatever.pdf',
+      phone: '4438675309',
+      uploadedBy: 'unitTest',
+      uploadedOn: new Date(),
+      ffy: 2022,
+      affiliationId: null,
+      status: 'active'
+    }
+    
+    const authAffiliations = [
+      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
+    ]
+    
+    const oktaUsers = OKTA_USERS.emailMatch
+    
+    await setupDB(certifications, oktaUsers, authAffiliations)
+    
+    await archiveStateAdminCertification({
+      id: '1001',
+      archived_by: 'emailMatch'
+    })
+
+    const results = await knex('state_admin_certifications').select('status').where('id', certifications.id).first().then((row) => row);
+
+    t.same(results.status, 'archived')
   })
 
 

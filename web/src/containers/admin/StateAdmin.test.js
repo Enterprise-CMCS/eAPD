@@ -4,7 +4,8 @@ import {
   renderWithConnection,
   screen,
   fireEvent,
-  waitFor
+  waitFor,
+  waitForElementToBeRemoved
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -16,7 +17,7 @@ import {
   getRoleTypes
 } from '../../actions/admin';
 
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 const requestedAffiliation = {
   displayName: 'Liz Lemon',
@@ -69,7 +70,7 @@ const initialState = {
         name: 'eAPD State Contractor'
       }
     ],
-    affiliations: []
+    affiliations: [requestedAffiliation, activeAffiliation, inactiveAffiliation]
   },
   auth: {
     user: {
@@ -93,56 +94,73 @@ describe('<StateAdmin />', () => {
   });
 
   describe('with no affiliations', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       const props = {
         getRoleTypes: jest.fn(),
         getAffiliations: jest.fn(),
         updateAffiliation: jest.fn()
       };
 
+      const stateId = initialState.user.data.state.id;
+      fetchMock.onGet('/roles').reply(200, []);
       fetchMock
-        .onGet(
-          `/states/${initialState.user.data.state.id}/affiliations?status=pending`
-        )
+        .onGet(`/states/${stateId}/affiliations?status=active`)
+        .reply(200, []);
+      fetchMock
+        .onGet(`/states/${stateId}/affiliations?status=inactive`)
+        .reply(200, []);
+      fetchMock
+        .onGet(`/states/${stateId}/affiliations?status=pending`)
         .reply(200, []);
       renderWithConnection(<StateAdmin {...props} />, {
-        initialState
+        initialState: {
+          ...initialState,
+          admin: {
+            ...initialState.admin,
+            affiliations: []
+          }
+        }
       });
+
+      await waitForElementToBeRemoved(
+        () => screen.getAllByText('Loading...')[0]
+      );
     });
 
-    test('renders no results message', async () => {
-      await waitFor(() => {
-        expect(
-          screen.getAllByText('No users on this tab at this time')
-        ).toHaveLength(3);
-      });
+    it('renders no results message', () => {
+      expect(
+        screen.getAllByText('No users on this tab at this time')
+      ).toHaveLength(3);
     });
 
-    test('renders header', async () => {
-      await waitFor(() => {
-        expect(
-          screen.getByText('Maryland eAPD State Administrator Portal')
-        ).toBeTruthy();
-      });
+    it('renders header', () => {
+      expect(
+        screen.getByText('Maryland eAPD State Administrator Portal')
+      ).toBeTruthy();
     });
 
-    test('renders correct tabs', async () => {
-      await waitFor(() => {
-        expect(screen.getByText('Requests')).toBeTruthy();
-      });
+    it('renders correct tabs', () => {
+      expect(screen.getByText('Requests')).toBeTruthy();
       expect(screen.getByText('Active')).toBeTruthy();
       expect(screen.getByText('Inactive')).toBeTruthy();
     });
   });
 
   describe('with a pending request', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       const props = {
         getRoleTypes: jest.fn(),
         getAffiliations: jest.fn(),
         updateAffiliation: jest.fn()
       };
       const stateId = initialState.user.data.state.id;
+      fetchMock.onGet('/roles').reply(200, []);
+      fetchMock
+        .onGet(`/states/${stateId}/affiliations?status=active`)
+        .reply(200, []);
+      fetchMock
+        .onGet(`/states/${stateId}/affiliations?status=inactive`)
+        .reply(200, []);
       fetchMock
         .onGet(`/states/${stateId}/affiliations?status=pending`)
         .reply(200, [requestedAffiliation]);
@@ -152,16 +170,18 @@ describe('<StateAdmin />', () => {
       renderWithConnection(<StateAdmin {...props} />, {
         initialState
       });
+
+      await waitForElementToBeRemoved(
+        () => screen.getAllByText('Loading...')[0]
+      );
     });
 
     it('renders name, email, phone', async () => {
       // Note: we render the affiliations in each tab and update on tab change, so we
       // expect to see 3 instances which is why this is using getAllByText
-      await waitFor(() => {
-        expect(
-          screen.getAllByText(requestedAffiliation.displayName)
-        ).toHaveLength(3);
-      });
+      expect(
+        screen.getAllByText(requestedAffiliation.displayName)
+      ).toHaveLength(3);
       expect(screen.getAllByText(requestedAffiliation.email)).toHaveLength(3);
       expect(
         screen.getAllByText(requestedAffiliation.primaryPhone)
@@ -169,16 +189,12 @@ describe('<StateAdmin />', () => {
     });
 
     it('renders approve and deny buttons', async () => {
-      await waitFor(() => {
-        expect(screen.getByText('Approve')).toBeTruthy();
-      });
+      expect(screen.getByText('Approve')).toBeTruthy();
       expect(screen.getByText('Deny')).toBeTruthy();
     });
 
     it('should open manage modal on approve', async () => {
-      await waitFor(() => {
-        expect(screen.getByText('Approve')).toBeTruthy();
-      });
+      expect(screen.getByText('Approve')).toBeTruthy();
       fireEvent.click(screen.getByText('Approve'));
       await waitFor(() => {
         expect(
@@ -201,6 +217,13 @@ describe('<StateAdmin />', () => {
         getAffiliations: jest.fn(),
         updateAffiliation: jest.fn()
       };
+      fetchMock.onGet('/roles').reply(200, []);
+      fetchMock
+        .onGet(`/states/md/affiliations?status=pending`)
+        .reply(200, [requestedAffiliation]);
+      fetchMock
+        .onPatch(`/states/md/affiliations/${requestedAffiliation.id}`)
+        .reply(200);
       renderWithConnection(<StateAdmin {...props} />);
     });
 
@@ -251,6 +274,13 @@ describe('<StateAdmin />', () => {
         getAffiliations: jest.fn(),
         updateAffiliation: jest.fn()
       };
+      fetchMock.onGet('/roles').reply(200, []);
+      fetchMock
+        .onGet(`/states/md/affiliations?status=pending`)
+        .reply(200, [requestedAffiliation]);
+      fetchMock
+        .onPatch(`/states/md/affiliations/${requestedAffiliation.id}`)
+        .reply(200);
       renderWithConnection(<StateAdmin {...props} />);
     });
 

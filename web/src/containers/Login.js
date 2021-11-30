@@ -11,7 +11,7 @@ import axios, { apiUrl } from '../util/api';
 const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [systemDown, setSystemDown] = useState(false)
+  const [systemDown, setSystemDown] = useState(false);
 
   const changeUsername = ({ target: { value } }) => setUsername(value);
   const changePassword = ({ target: { value } }) => setPassword(value);
@@ -35,15 +35,18 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     axios
-      .get('/heartbeat')
-      .then(() => {
-
+      .get('/heartbeat', {
+        signal: controller.signal
       })
+      .then(() => {})
       .catch(() => {
-        setSystemDown(true)
+        setSystemDown(true);
       });
-  }, [])
+
+    return () => controller?.abort();
+  }, []);
 
   return (
     <main id="start-main-content">
@@ -101,9 +104,11 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
           </Fragment>
         }
       >
-        {
-          systemDown && <Alert variation="error" className="ds-u-margin-top--2">The eAPD system is down, try again later.</Alert>
-        }
+        {systemDown && (
+          <Alert variation="error" className="ds-u-margin-top--2">
+            The eAPD system is down, try again later.
+          </Alert>
+        )}
         <TextField
           id="username"
           label="EUA ID"

@@ -11,7 +11,6 @@ const {
 } = require('../../../endpoint-tests/utils');
 
 describe('APD files endpoints', () => {
-
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {
     const db = getDB();
     beforeAll(() => setupDB(db));
@@ -26,7 +25,7 @@ describe('APD files endpoints', () => {
     describe('when authenticated as a user with permission', () => {
       let api;
       beforeAll(async () => {
-        api = login();
+        api = login('state-admin');
       });
 
       it('with a non-existant apd ID', async () => {
@@ -37,14 +36,44 @@ describe('APD files endpoints', () => {
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const response = await api.post(url(4000), form);
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.png`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.png');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        const response = await api.post(
+          url(4000),
+          formData.getBuffer(),
+          options
+        );
 
         expect(response.status).toEqual(403);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with an APD that is not in draft', async () => {
-        const response = await api.post(url(4002), form);
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.png`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.png');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        const response = await api.post(
+          url(4002),
+          formData.getBuffer(),
+          options
+        );
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();

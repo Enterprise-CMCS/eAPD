@@ -21,7 +21,7 @@ describe('APD events endpoints', () => {
     describe('when authenticated as a user with permissions', () => {
       let api;
       beforeAll(async () => {
-        api = await login();
+        api = await login('state-admin');
       });
 
       it('with a non-existant apd ID', async () => {

@@ -16,7 +16,6 @@ import ConfirmationDialog from './ConfirmationDialog';
 import ManageAllUsersTable from './ManageAllUsersTable';
 import StateAdminLetters from './StateAdminLetters';
 
-
 const FederalAdmin = ({
   currentState,
   currentUser,
@@ -33,56 +32,71 @@ const FederalAdmin = ({
   const [selectedAffiliation, setSelectedAffiliation] = useState();
 
   const [manageModalDisplay, setManageModalDisplay] = useState(false);
-  const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(
-    false
-  );
+  const [confirmationModalDisplay, setConfirmationModalDisplay] =
+    useState(false);
 
   const [limitedRoleTypes, setLimitedRoleTypes] = useState(roleTypes);
 
   useEffect(() => {
-    async function fetchAffiliations() {
-      await affiliations(currentState.id, activeTab);
-    }
-    
-    if(activeTab !== 'letters') {
-      setIsFetching(true);
-      fetchAffiliations().then(() => setIsFetching(false));      
-    }
+    const controller = new AbortController();
+    (async () => {
+      if (activeTab !== 'letters') {
+        setIsFetching(true);
+        await affiliations(currentState.id, activeTab, {
+          signal: controller.signal
+        });
+        setIsFetching(false);
+      }
+
+      return () => controller?.abort();
+    })();
   }, [activeTab]);
 
   useEffect(() => {
-    fetchTypes();
+    (async () => {
+      await fetchTypes();
+    })();
   }, []);
 
   const currentTab = id => {
     setActiveTab(id);
   };
-  
+
   const limitDisplayedRoleTypes = currentAffiliationState => {
     let limitedRoles;
-    if(currentAffiliationState === 'fd') {
-      limitedRoles = roleTypes.filter(item => item.name === 'eAPD Federal Admin')
-    }    
-    if(currentAffiliationState !== 'fd') {
-      limitedRoles = roleTypes.filter(item => item.name === 'eAPD State Admin')
+    if (currentAffiliationState === 'fd') {
+      limitedRoles = roleTypes.filter(
+        item => item.name === 'eAPD Federal Admin'
+      );
+    }
+    if (currentAffiliationState !== 'fd') {
+      limitedRoles = roleTypes.filter(item => item.name === 'eAPD State Admin');
     }
     setLimitedRoleTypes(limitedRoles);
-  }
+  };
 
   const setCurrentAffiliation = event => {
-    const currentAffiliation = currentAffiliations.find(element => element.id === Number(event.target.parentNode.getAttribute('data-primary-affiliation-id')) );
-    const currentAffiliationId = event.target.parentNode.getAttribute('data-id');
-    const currentAffiliationState = event.target.parentNode.getAttribute('data-state');
-    
+    const currentAffiliation = currentAffiliations.find(
+      element =>
+        element.id ===
+        Number(
+          event.target.parentNode.getAttribute('data-primary-affiliation-id')
+        )
+    );
+    const currentAffiliationId =
+      event.target.parentNode.getAttribute('data-id');
+    const currentAffiliationState =
+      event.target.parentNode.getAttribute('data-state');
+
     setSelectedAffiliation({
-      currentAffiliation, 
-      currentAffiliationId, 
+      currentAffiliation,
+      currentAffiliationId,
       currentAffiliationState
     });
 
     limitDisplayedRoleTypes(currentAffiliationState);
   };
-  
+
   const showManageModal = event => {
     setCurrentAffiliation(event);
     setManageModalDisplay(true);
@@ -93,14 +107,15 @@ const FederalAdmin = ({
   };
 
   const showConfirmationModal = event => {
-    const checkIsDenied = event.target.getAttribute('data-deny-or-revoke') === 'deny';
+    const checkIsDenied =
+      event.target.getAttribute('data-deny-or-revoke') === 'deny';
     setIsDenied(checkIsDenied);
     setCurrentAffiliation(event);
     setConfirmationModalDisplay(true);
   };
 
   const hideConfirmationModal = () => setConfirmationModalDisplay(false);
-  
+
   const saveAffiliation = async (roleId, deniedOrRevoked) => {
     const role = roleId || -1;
     const changeType = deniedOrRevoked || 'approved';
@@ -111,14 +126,14 @@ const FederalAdmin = ({
       changeType
     );
   };
-  
+
   const handleAffiliationUpdate = roleId => {
     saveAffiliation(roleId, null).then(() => {
       affiliations(currentState.id, activeTab);
       setManageModalDisplay(false);
     });
   };
-  
+
   const handleDenyOrRevoke = () => {
     const deniedOrRevoked = isDenied ? 'denied' : 'revoked';
     saveAffiliation(null, deniedOrRevoked).then(() => {
@@ -126,7 +141,7 @@ const FederalAdmin = ({
       setConfirmationModalDisplay(false);
     });
   };
-  
+
   return (
     <main>
       <Tabs onChange={currentTab}>
