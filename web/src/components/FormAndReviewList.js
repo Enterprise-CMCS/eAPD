@@ -8,6 +8,7 @@ const FormAndReviewItem = ({
   extraButtons,
   index,
   initialExpanded,
+  onCancel,
   ...rest
 }) => {
   const container = useRef(null);
@@ -34,11 +35,17 @@ const FormAndReviewItem = ({
     <div ref={container} className="form-and-review-list--item__expanded">
       <Expanded index={index} {...rest} collapse={collapse} />
       <Button
+        onClick={() => onCancel(index)}
+        className="ds-u-margin-right--2"
+      >
+        Cancel
+      </Button>
+      <Button
         id="form-and-review-list--done-btn"
         variation="primary"
         onClick={collapse}
       >
-        Done
+        Add
       </Button>
       {extraButtons.map(({ onClick, text }) => (
         <Button
@@ -83,6 +90,7 @@ const FormAndReviewList = ({
   noDataMessage,
   onAddClick,
   onDeleteClick,
+  onCancelClick,
   ...rest
 }) => {
   const combinedClassName = useMemo(
@@ -110,6 +118,7 @@ const FormAndReviewList = ({
             index={index}
             initialExpanded={hasAdded && index === list.length - 1}
             item={item}
+            onCancel={onCancelClick}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
                 ? () => onDeleteClick(index)

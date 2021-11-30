@@ -17,8 +17,9 @@ const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
       collapsed={ApdKeyPersonReview}
       expanded={ApdKeyPersonForm}
       onAddClick={() => add()}
+      onCancelClick={index => remove(index)}
       onDeleteClick={index => remove(index)}
-      noDataMessage="Primary Point of Contact has not been added for this activity."
+      noDataMessage={false}
       years={years}
     />
   );
