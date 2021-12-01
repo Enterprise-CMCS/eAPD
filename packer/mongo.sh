@@ -68,6 +68,17 @@ export MONGO_DATABASE_PASSWORD="$mongo_database_password"
 
 # Seed eAPD Mongo Database
 cd ~
+# Install nvm.  Do it inside the ec2-user home directory so that user will have
+# access to it forever, just in case we need to get into the machine and
+# manually do some stuff to it.
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+source ~/.bashrc
+
+# We're using Node 14, and we don't care about minor/patch versions, so always
+# get the latest.
+nvm install 14
+nvm alias default 14
+
 git clone --single-branch -b main https://github.com/CMSgov/eAPD.git
 cd eAPD/api
 npm i
