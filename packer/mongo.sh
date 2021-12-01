@@ -63,6 +63,12 @@ export MONGO_INITDB_DATABASE="$mongo_initdb_database"
 export MONGO_DATABASE_USERNAME="$mongo_database_username"
 export MONGO_DATABASE_PASSWORD="$mongo_database_password"
 
+# Seed eAPD Mongo Database
+git clone --single-branch -b main https://github.com/CMSgov/eAPD.git
+cd eAPD/api
+npm i
+npm run mongoose-migrate
+
 #Preparing Mongo DB Users
 cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
