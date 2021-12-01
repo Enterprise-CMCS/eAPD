@@ -23,6 +23,9 @@ gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
 # Install mongo
 yum -y install mongodb-org checkpolicy
 
+# Install git
+yum -y install git
+
 # Install CloudWatch Agent
 curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 rpm -U ./amazon-cloudwatch-agent.rpm
@@ -74,7 +77,8 @@ npm run mongoose-migrate
 cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
 mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo admin -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval "db.createUser({user: '$MONGO_DATABASE_USERNAME', pwd: '$MONGO_DATABASE_PASSWORD', roles:[{role:'userAdmin', db:'$MONGO_DATABASE'}]});"
+mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'userAdmin', 'db' :'$MONGO_DATABASE'}]});"
+#mongo admin -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '$MONGO_DATABASE_PASSWORD', roles:[{role:'userAdmin', db:'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 E_USER
 
