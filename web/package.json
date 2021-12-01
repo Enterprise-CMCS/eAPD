@@ -109,6 +109,7 @@
     "regenerator-runtime": "^0.13.7",
     "reselect": "^4.0.0",
     "stickybits": "^3.7.9",
+    "storybook": "^6.4.1",
     "tinymce": "^5.10.0",
     "title-case": "^3.0.3",
     "updeep": "^1.2.0",
