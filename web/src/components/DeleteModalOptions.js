@@ -125,6 +125,13 @@ export default function getDeleteModalOptions(objType) {
         )
       }
     },
+    'Certification': {
+      body: () => {
+        return (
+          <div>Are you sure you want to delete this certification? This action cannot be undone.</div>
+        )
+      }
+    },
     'Funding Source': {
       body: () => {
         return (
