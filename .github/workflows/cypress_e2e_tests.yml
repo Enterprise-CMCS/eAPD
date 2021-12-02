@@ -29,6 +29,8 @@ jobs:
           npm i --python=/usr/bin/python3
           node --version
           npm --version
+        with:
+          node-version: '14'
       - name: Cypress Dependency Web
         working-directory: ./web
         env:
