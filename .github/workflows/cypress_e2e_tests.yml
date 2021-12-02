@@ -28,7 +28,7 @@ jobs:
           which python3
           npm i --python=/usr/bin/python3
           # Install nvm
-          curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
           source ~/.bashrc
           
           # We're using Node 14, and we don't care about minor/patch versions, so always
