@@ -29,6 +29,7 @@ resource "aws_instance" "eapd_jumpbox_bb" {
     associate_public_ip_address = var.eapd_jumpbox_associate_public_ip_address
     tags = {
         Name = "eAPD Jumpbox BB"
+        "cms-cloud-exempt:open-sg" = "CLDSPT-5877"
     }
 }
 
@@ -42,5 +43,6 @@ resource "aws_instance" "eapd_jumpbox_tf" {
     associate_public_ip_address = var.eapd_jumpbox_associate_public_ip_address
     tags = {
         Name = "eAPD Jumpbox TF"
+        "cms-cloud-exempt:open-sg" = "CLDSPT-5877"
     }
 }
