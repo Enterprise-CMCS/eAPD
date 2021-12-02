@@ -15,9 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress Dependency
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
         working-directory: ./integrationTests
         env:
           NODE_ENV: development
@@ -30,6 +27,8 @@ jobs:
           npm cache clean --force
           which python3
           npm i --python=/usr/bin/python3
+          node --version
+          npm --version
       - name: Cypress Dependency Web
         working-directory: ./web
         env:
