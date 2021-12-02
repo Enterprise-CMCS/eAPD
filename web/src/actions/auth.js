@@ -1,5 +1,5 @@
 // eslint-disable-next-line camelcase
-import jwtDecode from "jwt-decode";
+import jwtDecode from 'jwt-decode';
 
 import axios from '../util/api';
 
@@ -35,7 +35,6 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const STATE_ACCESS_REQUIRED = 'STATE_ACCESS_REQUIRED';
 export const STATE_ACCESS_REQUEST = 'STATE_ACCESS_REQUEST';
 export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
-
 
 export const LATEST_ACTIVITY = 'LATEST_ACTIVITY';
 export const SESSION_ENDING_ALERT = 'SESSION_ENDING_ALERT';
@@ -103,24 +102,29 @@ const setupTokenManager = () => (dispatch, getState) => {
   });
 };
 
-const getCurrentUser = () => async dispatch => {
-  const response = await axios.get("/me")
-    .then(res => {
-      return res;
-    })
-    .catch(error => {
-      dispatch(failLogin(error.message));
-      return null;
-    })
-  
-  return response ? response.data : null;
-};
+const getCurrentUser =
+  (options = {}) =>
+  async dispatch => {
+    const response = await axios
+      .get('/me', options)
+      .then(res => {
+        return res;
+      })
+      .catch(error => {
+        dispatch(failLogin(error.message));
+        return null;
+      });
+
+    return response ? response.data : null;
+  };
 
 export const logout = () => dispatch => {
   dispatch(requestLogout());
-  logoutAndClearTokens().then( () => {
-    dispatch(completeLogout()); 
-  }).catch(() => {});
+  logoutAndClearTokens()
+    .then(() => {
+      dispatch(completeLogout());
+    })
+    .catch(() => {});
 };
 
 export const extendSession = () => async dispatch => {
@@ -163,14 +167,14 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
   dispatch(mfaEnrollAddPhone(mfaSelected));
 };
 
-const authenticationSuccess = sessionToken => async dispatch => {  
+const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(setupTokenManager());
   const expiresAt = await setTokens(sessionToken);
   dispatch(updateSessionExpiration(expiresAt));
   dispatch(setLatestActivity());
 
   const user = await dispatch(getCurrentUser());
-  
+
   if (!user) {
     return '/login';
   }
@@ -192,53 +196,55 @@ const authenticationSuccess = sessionToken => async dispatch => {
 
 // This method loads on page re-load or a new tab. First, it sets a
 // flag in redux to tell LoginApplication to only perform this check once.
-// Then it will get our eAPD jwt cookie, decode it, and update the redux 
+// Then it will get our eAPD jwt cookie, decode it, and update the redux
 // store with it. If the jwt cookie doesn't exist, we fall back on using
 // okta to verify and provide a new token.
-export const authCheck = () => async dispatch => { 
-  dispatch(authCheckRequest());
-  
-  const eapdCookie = getCookie(API_COOKIE_NAME);  
-  
-  if(eapdCookie) {
-    const decodedCookie = jwtDecode(eapdCookie);  
-    const epochTimestampInSeconds = Math.round(new Date() / 1000);
-    
-    if(
-      decodedCookie.exp
-      && decodedCookie.exp > epochTimestampInSeconds
-      && decodedCookie.aud === `eAPD-${process.env.NODE_ENV}`
-    ){
-      dispatch(updateUserInfo(decodedCookie));
-      dispatch(completeLogin());
-      if (decodedCookie.activities) {
-        dispatch(loadData(decodedCookie.activities));
+export const authCheck =
+  (options = {}) =>
+  async dispatch => {
+    dispatch(authCheckRequest());
+
+    const eapdCookie = getCookie(API_COOKIE_NAME);
+
+    if (eapdCookie) {
+      const decodedCookie = jwtDecode(eapdCookie);
+      const epochTimestampInSeconds = Math.round(new Date() / 1000);
+
+      if (
+        decodedCookie.exp &&
+        decodedCookie.exp > epochTimestampInSeconds &&
+        decodedCookie.aud === `eAPD-${process.env.NODE_ENV}`
+      ) {
+        dispatch(updateUserInfo(decodedCookie));
+        dispatch(completeLogin());
+        if (decodedCookie.activities) {
+          dispatch(loadData(decodedCookie.activities));
+        }
       }
-    }    
-  }
-  
-  if(!eapdCookie) {
-    dispatch(setupTokenManager());
-    const expiresAt = await renewTokens();
-    if (expiresAt) {
-      dispatch(updateSessionExpiration(expiresAt));
-      dispatch(setLatestActivity());
-      const user = await dispatch(getCurrentUser());
-      if(!user) {
-        return dispatch(logout());        
+    }
+
+    if (!eapdCookie) {
+      dispatch(setupTokenManager());
+      const expiresAt = await renewTokens();
+      if (expiresAt) {
+        dispatch(updateSessionExpiration(expiresAt));
+        dispatch(setLatestActivity());
+        const user = await dispatch(getCurrentUser(options));
+        if (!user) {
+          return dispatch(logout());
+        }
+        dispatch(updateUserInfo(user));
+        dispatch(completeLogin());
+        if (user.activities) {
+          dispatch(loadData(user.activities));
+        }
+        return null;
       }
-      dispatch(updateUserInfo(user));
-      dispatch(completeLogin());
-      if (user.activities) {
-        dispatch(loadData(user.activities));
-      }
+      dispatch(logout());
       return null;
     }
-    dispatch(logout());
     return null;
-  }
-  return null;
-};
+  };
 
 export const mfaActivate = code => async dispatch => {
   const transaction = await retrieveExistingTransaction();
@@ -340,14 +346,12 @@ export const createAccessRequest = states => async dispatch => {
   let failureReason = null;
   await Promise.all(
     states.map(async state => {
-      await axios
-        .post(`/states/${state.id}/affiliations`)
-        .catch(error => {
-          failureReason = error ? error.message : 'N/A';
-        });
+      await axios.post(`/states/${state.id}/affiliations`).catch(error => {
+        failureReason = error ? error.message : 'N/A';
+      });
     })
   );
-  if (failureReason) { 
+  if (failureReason) {
     dispatch(failLogin(failureReason));
     return null;
   }
@@ -361,7 +365,7 @@ export const completeAccessRequest = () => dispatch => {
 export const selectAffiliation = selectedState => dispatch => {
   return axios
     .get(`/auth/state/${selectedState}`)
-    .then((res) => {
+    .then(res => {
       // Todo: Refactor this to be more FP style
       setCookie(res.data.jwt);
       const decoded = jwtDecode(res.data.jwt);
@@ -377,4 +381,4 @@ export const selectAffiliation = selectedState => dispatch => {
       dispatch(failLogin(failureReason));
       return null;
     });
-}
+};

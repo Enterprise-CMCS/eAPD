@@ -1,32 +1,12 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1002401, 1002466, 1002475, 1002655],
+  "allowlist": [1006724],
   "_comment": {
-    "1002401": {
-      "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
-      "module": "ansi-regex",
-      "affects": [
-        "eslint@7.24.0 - linter",
-        "jest@26.6.3 - testing",
-        "tap@15.0.10 - testing",
-        "sharp@0.29.1 - image process, but ansi-regex is in the npmlog"
-      ]
-    },
-    "1002466": {
-      "advisory": "https://github.com/advisories/GHSA-jgrx-mgxx-jf9v",
-      "module": "tmpl",
-      "affects": ["jest@26.6.3 - testing"]
-    },
-    "1002475": {
-      "advisory": "https://github.com/advisories/GHSA-4jqc-8m5r-9rpr",
-      "module": "set-value",
-      "affects": ["jest@26.6.3 - testing"]
-    },
-    "1002655": {
-      "advisory": "https://github.com/advisories/GHSA-w8qv-6jwh-64r5",
-      "module": "browserslist",
-      "affects": ["jest@26.6.3 - testing", "tap@15.0.2 - testing"]
+    "1006724": {
+      "advisory": "https://github.com/advisories/GHSA-896r-f27r-55mw",
+      "module": "json-schema",
+      "affects": ["tap@15.1.2 - testing"]
     }
   },
   "registry": "https://registry.npmjs.org"

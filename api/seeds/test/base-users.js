@@ -1,7 +1,6 @@
-const { format } = require('date-fns');
 const fs = require('fs');
 const logger = require('../../logger')('user seeder');
-const { actualOktaClient: oktaClient } = require('../../auth/oktaAuth');
+const { oktaClient } = require('../../auth/oktaAuth');
 const { createUsersToAdd } = require('../shared/set-up-users');
 const { issueTokens } = require('../shared/issueTokens');
 
@@ -16,6 +15,7 @@ exports.seed = async knex => {
   await knex('okta_users').insert(oktaUsers);
   logger.info('Completed adding okta_users');
   await knex('state_admin_certifications').insert(stateCertifications);
+<<<<<<< HEAD
   const auditEntries = stateCertifications.map(certification => {
     return {
       certificationId: certification.id,
@@ -25,6 +25,8 @@ exports.seed = async knex => {
   });
 
   await knex('state_admin_certifications_audit').insert(auditEntries);
+=======
+>>>>>>> main
 
   const testTokens = await issueTokens(oktaUsers);
 

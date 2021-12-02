@@ -2,7 +2,11 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
+<<<<<<< HEAD
 const { getStateById } = require('../db/states.js');
+=======
+const { getStateById } = require('../db/states');
+>>>>>>> main
 const {
   getUserPermissionsForStates: actualGetUserPermissionsForStates
 } = require('../db/auth');

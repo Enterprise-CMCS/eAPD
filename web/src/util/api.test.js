@@ -35,7 +35,7 @@ describe('api wrapper', () => {
   describe('token auth', () => {
     test('auth header is populated when jwt is present in localStorage', async () => {
       const api = require('./api').default; // eslint-disable-line global-require
-      const apiMock = new MockAdapter(api);
+      const apiMock = new MockAdapter(api, { onNoMatch: 'throwException' });
       const mockAuth = require('./auth'); // eslint-disable-line global-require
       const managerSpy = jest
         .spyOn(mockAuth, 'getLocalAccessToken')
@@ -50,7 +50,7 @@ describe('api wrapper', () => {
 
     test('auth header is empty', async () => {
       const api = require('./api').default; // eslint-disable-line global-require
-      const apiMock = new MockAdapter(api);
+      const apiMock = new MockAdapter(api, { onNoMatch: 'throwException' });
       const mockAuth = require('./auth'); // eslint-disable-line global-require
       const managerSpy = jest
         .spyOn(mockAuth, 'getLocalAccessToken')

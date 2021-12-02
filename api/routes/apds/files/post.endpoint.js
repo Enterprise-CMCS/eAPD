@@ -35,7 +35,11 @@ describe('APD files endpoints', () => {
 
     describe('when authenticated as a user with permission', () => {
       let api;
+<<<<<<< HEAD
       beforeAll(() => {
+=======
+      beforeAll(async () => {
+>>>>>>> main
         api = login('state-admin');
       });
 
@@ -52,9 +56,25 @@ describe('APD files endpoints', () => {
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
+<<<<<<< HEAD
         const { formData, options } = buildFileForm('eAPD_logo.png');
         const response = await api.post(
           url(mnAPDId),
+=======
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.png`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.png');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        const response = await api.post(
+          url(4000),
+>>>>>>> main
           formData.getBuffer(),
           options
         );
@@ -64,9 +84,25 @@ describe('APD files endpoints', () => {
       });
 
       it('with an APD that is not in draft', async () => {
+<<<<<<< HEAD
         const { formData, options } = buildFileForm('eAPD_logo.png');
         const response = await api.post(
           url(finalAPDId),
+=======
+        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.png`;
+        expect(fs.existsSync(imagePath)).toBeTruthy();
+
+        const formData = new FormData();
+        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.png');
+        const options = {
+          headers: {
+            ...formData.getHeaders()
+          }
+        };
+
+        const response = await api.post(
+          url(4002),
+>>>>>>> main
           formData.getBuffer(),
           options
         );

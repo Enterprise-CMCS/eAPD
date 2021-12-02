@@ -39,3 +39,4 @@ exports.seed = async knex => {
     logger.error(`Errors creating tokens ${err}`);
   }
 };
+

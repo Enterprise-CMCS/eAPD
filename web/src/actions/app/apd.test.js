@@ -35,7 +35,7 @@ import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import { t } from '../../i18n';
 
 const mockStore = configureStore([thunk]);
-const fetchMock = new MockAdapter(axios);
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 describe('application-level actions', () => {
   beforeEach(() => {

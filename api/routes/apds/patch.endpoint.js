@@ -24,7 +24,11 @@ describe('APD endpoint | PATCH /apds/:id', () => {
 
   describe('when authenticated as a user with permission', () => {
     let api;
+<<<<<<< HEAD
     beforeAll(() => {
+=======
+    beforeAll(async () => {
+>>>>>>> main
       api = login('state-admin');
     });
 

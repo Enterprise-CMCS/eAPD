@@ -34,7 +34,8 @@ const user = {
             zip: '12345'
           }
         }
-      }
+      },
+      activities: ['edit-document']
     }
   }
 };
