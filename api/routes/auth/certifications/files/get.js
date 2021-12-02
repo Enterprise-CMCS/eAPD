@@ -1,6 +1,6 @@
 const { loggedIn } = require('../../../../middleware/auth');
 const { can } = require('../../../../middleware');
-const logger = require('../../../../logger')('auth certifications post');
+const logger = require('../../../../logger')('auth certifications get');
 
 const { getFile: get } = require('../../../../files');
 
@@ -16,6 +16,7 @@ module.exports = (app, { getFile = get, generateFileName = generateName } = {}) 
     async (req, res, next) => {
       try {
         const file = await getFile(req.params.fileID);
+        console.log("file", file);
         if (file) {
           // Generate filename
           const fileName = await generateFileName(file, req.params.fileID);

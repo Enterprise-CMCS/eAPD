@@ -135,7 +135,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
-      fileUrl: '12345', // Todo: Update this to have a valid fileUrl
+      fileUrl: 'http://localhost:8081/auth/certifications/files/test-123',
       affiliationId: null,
       status: 'active'
     });
@@ -148,7 +148,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
-      fileUrl: '6789', // Todo: Update this to have a valid fileUrl
+      fileUrl: 'http://localhost:8081/auth/certifications/files/test-123',
       affiliationId: null,
       status: 'active'
     });
