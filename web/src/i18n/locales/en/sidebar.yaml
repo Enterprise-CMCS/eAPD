@@ -1,6 +1,0 @@
-# The sidebar
-titles:
-  activity-set: 'Activity {{number}}: {{name}}'
-  activity-unset: 'Activity {{number}}: Untitled'
-savePdfButtonText: Save as PDF
-saveApdButtonText: Save APD

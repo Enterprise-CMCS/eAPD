@@ -1,6 +1,0 @@
-# Used by the cost allocation quarterly breakdown table, the proposed quarterly
-# budget tables, and the table where states indicate how much of their funding
-# they want for each quarter.
-total: Total
-subtotal: Subtotal
-quarter: Q{{q}}
