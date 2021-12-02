@@ -1,5 +1,0 @@
-# Ignore artifacts:
-bin
-api/coverage
-web/coverage
-web/dist
