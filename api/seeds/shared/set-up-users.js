@@ -135,7 +135,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
-      fileUrl: 'http://localhost:8081/auth/certifications/files/74aa0d06-ae6f-472f-8999-6ca0487c494f',
+      fileUrl: 'http://localhost:8081/auth/certifications/files/eAPDSystemAccess.pdf',
       affiliationId: null,
       status: 'active'
     });
@@ -148,7 +148,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
-      fileUrl: 'http://localhost:8081/auth/certifications/files/74aa0d06-ae6f-472f-8999-6ca0487c494f',
+      fileUrl: 'http://localhost:8081/auth/certifications/files/eAPDSystemAccess.pdf',
       affiliationId: null,
       status: 'active'
     });
