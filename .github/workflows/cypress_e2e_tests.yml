@@ -9,7 +9,7 @@ on:
 jobs:
   cypress-run:
     environment: Preview
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     timeout-minutes: 90
     steps:
       - name: Checkout
