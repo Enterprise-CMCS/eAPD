@@ -1,5 +1,6 @@
 {
   "name": "cypress_tests",
+  "repository": "https://github.com/CMSgov/eAPD",
   "version": "1.0.0",
   "description": "Cypress tests for the EAPD tool",
   "main": "index.js",
