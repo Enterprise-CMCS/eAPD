@@ -16,7 +16,6 @@ module.exports = (app, { getFile = get, generateFileName = generateName } = {}) 
     async (req, res, next) => {
       try {
         const file = await getFile(req.params.fileID);
-        console.log("file", file);
         if (file) {
           // Generate filename
           const fileName = await generateFileName(file, req.params.fileID);
