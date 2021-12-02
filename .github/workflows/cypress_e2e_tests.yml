@@ -10,6 +10,7 @@ jobs:
   cypress-run:
     environment: Preview
     runs-on: ubuntu-18.04
+    container: node:14
     timeout-minutes: 90
     steps:
       - name: Checkout
@@ -27,14 +28,6 @@ jobs:
           npm cache clean --force
           which python3
           npm i --python=/usr/bin/python3
-          # Install nvm
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-          source ~/.bashrc
-          
-          # We're using Node 14, and we don't care about minor/patch versions, so always
-          # get the latest.
-          nvm install 14
-          nvm alias default 14
       - name: Cypress Dependency Web
         working-directory: ./web
         env:
