@@ -82,7 +82,7 @@ nvm alias default 14
 git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
 cd eAPD/api
 npm i
-npm run mongoose-migrate
+npm run migrate
 
 #Preparing Mongo DB Users
 cd ~
