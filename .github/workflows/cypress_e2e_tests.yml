@@ -10,8 +10,9 @@ jobs:
   cypress-run:
     environment: Preview
     runs-on: ubuntu-18.04
+    with:
+      node-version: '14'
     timeout-minutes: 90
-    node-version: '14'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
