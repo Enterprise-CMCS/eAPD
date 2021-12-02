@@ -65,7 +65,7 @@ describe(
       // Check the drop target zone is rendered
       cy.get('[id=file-input]').contains('Drag files here');
     });
-
+  
     it('hitting cancel should return user back to federal dashboard', () => {
       cy.contains('Cancel').click();
       cy.contains('Federal Administrator Portal').should('be.visible');
