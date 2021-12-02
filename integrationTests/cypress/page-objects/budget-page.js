@@ -1,30 +1,29 @@
 /* eslint-disable radix */
-class BudgetPage {
-  addCommas = string => {
-    const converted = string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return converted;
-  };
+import { addCommas } from './helper';
 
+class BudgetPage {
   checkTotalComputableMedicaidCost = expectedValue => {
-    const convert = this.addCommas(expectedValue);
+    const convert = addCommas(expectedValue);
     cy.contains('Total Computable Medicaid Cost')
       .parent()
       .should('contain', `$${convert}`);
   };
 
-  checkActivityTotalCostTable = (activityValue, otherFundingValue, index) => {
-    const medicaidValue = activityValue - otherFundingValue;
-    const converted = this.addCommas(activityValue);
-    const converted2 = this.addCommas(otherFundingValue);
+  checkActivityTotalCostTable = ({
+    activityTotalCost,
+    otherFunding,
+    index
+  }) => {
+    const medicaidValue = activityTotalCost - otherFunding;
     cy.get('[class="budget-table activity-budget-table"]')
       .eq(index)
       .within(() => {
         cy.contains('Activity Total Cost')
           .parent()
-          .should('contain', `$${converted}`);
+          .should('contain', `$${addCommas(activityTotalCost)}`);
         cy.contains('Other Funding')
           .parent()
-          .should('contain', `$${converted2}`);
+          .should('contain', `$${addCommas(otherFunding)}`);
         this.checkTotalComputableMedicaidCost(medicaidValue);
       });
   };
@@ -74,8 +73,8 @@ class BudgetPage {
   };
 
   costSplitTableRow = (fedOrState, split, value, total) => {
-    const convertedVal = this.addCommas(value);
-    const convertedTotal = this.addCommas(total);
+    const convertedVal = addCommas(value);
+    const convertedTotal = addCommas(total);
 
     cy.contains(fedOrState)
       .parent()

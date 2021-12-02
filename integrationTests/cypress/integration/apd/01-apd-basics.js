@@ -326,10 +326,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkOutcomeOutput(
-        'Outcome not specified',
-        'Metric not specified'
-      );
+      activityPage.checkOutcomeOutput({
+        outcome: 'Outcome not specified',
+        metrics: ['Metric not specified']
+      });
 
       cy.contains('Edit').click();
       activityPage.checkMetricFunctionality();
@@ -340,10 +340,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkDate('Target completion date');
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkMilestoneOutput(
-        'Milestone not specified',
-        'Date not specified'
-      );
+      activityPage.checkMilestoneOutput({
+        milestone: 'Milestone not specified',
+        targetDate: 'Date not specified'
+      });
     });
 
     it('should handle entering data inState Staff and Expenses', () => {
@@ -354,28 +354,38 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       activityPage.checkInputField('Personnel title', '');
       activityPage.checkInputField('Description', '');
-      activityPage.checkStateStaffFFY(years, '');
+      activityPage.checkStateStaffFFY({
+        years,
+        expectedValue: years.map(() => ({
+          cost: '',
+          fte: '',
+          total: 0
+        }))
+      });
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkStateStaffOutput(
-        'Personnel title not specified',
+      activityPage.checkStateStaffOutput({
+        name: 'Personnel title not specified',
         years,
-        0,
-        0
-      );
+        cost: 0,
+        fte: 0
+      });
 
       cy.log('should be able to add a state expense');
       cy.findByRole('button', { name: /Add State Expense/i }).click();
       activityPage.checkInputField('Description', '');
-      activityPage.checkFFYinputCostFields(years, '');
+      activityPage.checkFFYinputCostFields({
+        years,
+        FFYcosts: years.map(() => '')
+      });
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkOtherStateExpensesOutput(
-        'Category not specified',
+      activityPage.checkOtherStateExpensesOutput({
+        category: 'Category not specified',
         years,
-        [0, 0]
-      );
+        FFYcosts: [0, 0]
+      });
     });
 
     it('should handle entering data in Private Contractor Costs', () => {
@@ -393,18 +403,22 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         0
       );
       cy.get('[type="radio"][checked]').should('have.value', 'no');
-      activityPage.checkFFYinputCostFields(years, '');
+      activityPage.checkFFYinputCostFields({
+        years,
+        FFYcosts: years.map(() => '')
+      });
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkPrivateContractorOutput(
-        'Private Contractor or Vendor Name not specified',
-        'Procurement Methodology and Description of Services not specified',
-        'Full Contract Term: Date not specified - Date not specified',
-        'Total Contract Cost: $0',
+      activityPage.checkPrivateContractorOutput({
+        name: 'Private Contractor or Vendor Name not specified',
+        description:
+          'Procurement Methodology and Description of Services not specified',
+        dateRange: 'Date not specified - Date not specified',
+        totalCosts: 0,
         years,
-        [0, 0]
-      );
+        FFYcosts: [0, 0]
+      });
     });
 
     it('should handle entering data in Budget and FFP', () => {
@@ -652,7 +666,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .next()
         .should(
           'have.text',
-          `Full Contract Term: Dates not specifiedTotal Contract Cost: $0${privateContractorCosts}`
+          `Full Contract Term: Date not specified - Date not specifiedTotal Contract Cost: $0${privateContractorCosts}`
         );
 
       cy.then(() => {

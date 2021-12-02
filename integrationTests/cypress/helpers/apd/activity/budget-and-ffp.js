@@ -1,5 +1,6 @@
 import BudgetPage from '../../../page-objects/budget-page';
 import PopulatePage from '../../../page-objects/populate-page';
+// import ExportPage from '../../../page-objects/export-page';
 
 const activities = [['Program Administration', 'HIT']];
 const splits = ['75-25', '50-50', '90-10'];
@@ -49,7 +50,13 @@ export const testDefaultBudgetAndFFP = years => {
     cy.waitForSave();
   });
 
-  // TODO: export view tests
+  it('should display the default activity overview in the export view', () => {
+    // const exportPage = new ExportPage();
+
+    cy.goToExportView();
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+  });
 };
 
 export const testBudgetAndFFPWithData = years => {

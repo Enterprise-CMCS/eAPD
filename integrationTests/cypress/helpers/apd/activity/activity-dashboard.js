@@ -28,14 +28,14 @@ export const testDefaultActivityDashboard = years => {
 
     cy.goToExportView();
 
-    exportPage.checkExecutiveSummary(
+    exportPage.checkExecutiveSummary({
       activities,
       years,
-      'Date not specified - Date not specified',
-      0,
-      0,
-      0
-    );
+      dateRange: 'Date not specified - Date not specified',
+      totalCost: 0,
+      medicaidCost: 0,
+      federalShare: 0
+    });
 
     exportPage.checkActivityList(activities);
 
@@ -45,24 +45,7 @@ export const testDefaultActivityDashboard = years => {
         .contains(`Activity ${activityIndex + 1}: ${activity[0]}`)
         .parent()
         .within(() => {
-          exportPage.checkActivityOverview(
-            '',
-            'Date not specified',
-            'Date not specified',
-            '',
-            '',
-            'No response was provided for how this activity will support the Medicaid standards and conditions.',
-            'No response was provided for how this activity will support the Medicaid standards and conditions.'
-          );
-
-          exportPage.checkOutcomesAndMilestones('empty');
-          exportPage.checkStateExpenses('empty');
-          exportPage.checkPrivateContractorCosts('empty');
-          exportPage.checkCostAllocation('');
-
           years.forEach(year => {
-            exportPage.checkOtherFunding(year, '', 0);
-
             cy.contains(`Activity ${activityIndex + 1} Budget for FFY ${year}`)
               .next()
               .within(() => {
