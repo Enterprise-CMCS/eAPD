@@ -27,6 +27,8 @@ jobs:
           npm cache clean --force
           which python3
           npm i --python=/usr/bin/python3
+          nvm install 14
+          nvm alias default 14
       - name: Cypress Dependency Web
         working-directory: ./web
         env:
