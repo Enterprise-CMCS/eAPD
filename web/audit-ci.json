@@ -1,7 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1005059, 1005174, 1006724],
+  "allowlist": [1005059, 1005174, 1006724, 1006754],
   "_comment": {
     "1005059": {
       "advisory": "https://github.com/advisories/GHSA-whgm-jr23-g3j9",
