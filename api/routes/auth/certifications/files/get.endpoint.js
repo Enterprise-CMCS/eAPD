@@ -29,7 +29,7 @@ describe('auth/certifications/files endpoints', () => {
 
       it('with a valid request', async () => {
         const response = await api.get(
-          url('74aa0d06-ae6f-472f-8999-6ca0487c494f')
+          url('test-123')
         );
 
         expect(response.status).toEqual(200);
