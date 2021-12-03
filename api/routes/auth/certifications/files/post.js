@@ -3,7 +3,7 @@ const nodeCrypto = require('crypto');
 
 const { loggedIn } = require('../../../../middleware/auth');
 const { can } = require('../../../../middleware');
-const logger = require('../../../../logger')('auth certifications post');
+const logger = require('../../../../logger')('auth certifications files post');
 
 const { putFile: put } = require('../../../../files');
 const { validateDoc: validDoc } = require('../../../../util/fileValidation');
