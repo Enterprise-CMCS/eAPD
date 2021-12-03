@@ -162,12 +162,7 @@ const StateAdminLetters = () => {
     (async () => {
       const certificationLetters = await axios.get('/auth/certifications');
       setTableData(certificationLetters.data);
-<<<<<<< HEAD
-    }
-    fetchData();
-=======
     })();
->>>>>>> main
   }, [showMatchUserDialog, showDeleteCertificationDialog]);
 
   const columns = React.useMemo(
