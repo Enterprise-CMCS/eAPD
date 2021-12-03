@@ -1,10 +1,20 @@
 import React from 'react';
-import { create, act } from 'react-test-renderer';
+import { render, screen } from 'apd-testing-library';
 import moment from 'moment';
 import SaveMessage from './SaveMessage';
 
 describe('<SaveMessage />', () => {
-  let subject;
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.clearAllTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
 
   describe('when saved less than 1 minute ago, it displays "Saved"', () => {
     [
@@ -13,23 +23,27 @@ describe('<SaveMessage />', () => {
       ['30 seconds ago', 30],
       ['59 seconds', 59]
     ].forEach(([testName, seconds]) => {
-      test(testName, () => {
+      it(testName, async () => {
         const lastSaved = moment().subtract(seconds, 'seconds');
         // https://reactjs.org/docs/test-renderer.html#testrendereract
-        act(() => {
-          subject = create(<SaveMessage lastSaved={lastSaved} />);
-        });
-        expect(subject.toJSON()).toEqual('Saved');
+        render(<SaveMessage lastSaved={lastSaved} />);
+        // await waitFor(() =>
+        screen.getByText('Saved');
+        // );
+        expect(screen.getByText('Saved')).toBeTruthy();
       });
     });
   });
 
   describe('when attempting to save with an error, show the last saved time instead of Saved"', () => {
-    const date = new Date(Date.now());
-    act(() => {
-      subject = create(<SaveMessage lastSaved={date} error />);
+    it('last saved', async () => {
+      const date = new Date(Date.now());
+      render(<SaveMessage lastSaved={date} error />);
+      // await waitFor(() =>
+      screen.getByText(/Last saved/i);
+      // );
+      expect(screen.getByText(/Last saved/i)).toBeTruthy();
     });
-    expect(subject.toJSON()).toMatch(/Last saved/);
   });
 
   describe('when observed saved time changes to 1 minute ago', () => {
@@ -38,7 +52,6 @@ describe('<SaveMessage />', () => {
     let mockDateNow;
 
     beforeEach(() => {
-      jest.useFakeTimers();
       mockDateNow = jest
         .spyOn(Date, 'now')
         .mockReturnValueOnce(now)
@@ -49,16 +62,18 @@ describe('<SaveMessage />', () => {
 
     afterEach(() => {
       mockDateNow.mockRestore();
-      jest.clearAllTimers();
     });
 
-    it('auto-updates from "Saved" to (1 minute ago)', () => {
-      act(() => {
-        subject = create(<SaveMessage lastSaved={now} />);
-      });
-      expect(subject.toJSON()).toMatch('Saved');
-      act(() => jest.advanceTimersByTime(60 * 1000));
-      expect(subject.toJSON()).toMatch(/\(1 minute ago\)$/);
+    it('auto-updates from "Saved" to (1 minute ago)', async () => {
+      render(<SaveMessage lastSaved={now} />);
+      // await waitFor(() =>
+      screen.getByText('Saved');
+      // );
+      expect(screen.getByText('Saved')).toBeTruthy();
+      jest.advanceTimersByTime(60 * 1000);
+      expect(screen.getByText(/Last saved/i)).toHaveTextContent(
+        /\(1 minute ago\)$/
+      );
     });
   });
 
@@ -85,12 +100,13 @@ describe('<SaveMessage />', () => {
       [364, 'days', 'Last saved January 2 (1 year ago)'],
       [3, 'years', 'Last saved January 1, 2017 (3 years ago)']
     ].forEach(([value, timeUnit, result]) => {
-      test(`when saved ${value} ${timeUnit} ago, it displays "${result}"`, () => {
+      test(`when saved ${value} ${timeUnit} ago, it displays "${result}"`, async () => {
         const lastSaved = moment().subtract(value, timeUnit);
-        act(() => {
-          subject = create(<SaveMessage lastSaved={lastSaved} />);
-        });
-        expect(subject.toJSON()).toEqual(result);
+        render(<SaveMessage lastSaved={lastSaved} />);
+        // await waitFor(() =>
+        screen.getByText(/Last saved/i);
+        // );
+        expect(screen.getByText(/Last saved/i)).toHaveTextContent(result);
       });
     });
   });

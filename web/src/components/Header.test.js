@@ -6,6 +6,7 @@ import { plain as Header, mapStateToProps } from './Header';
 const initialProps = {
   ariaExpanded: false,
   authenticated: true,
+  isFedAdmin: false,
   currentUser: {
     role: 'eAPD System Admin',
     state: { id: 'wa', name: 'Washington' },

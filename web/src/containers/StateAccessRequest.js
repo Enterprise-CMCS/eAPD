@@ -20,7 +20,7 @@ const StateAccessRequest = ({
   const [existingAffiliations, setExistingAffiliations] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       const affiliations = await axios.get('/affiliations/me');
       const results = affiliations.data.map(affiliation => {
         const stateDetails = statesWithFederal.find(
@@ -33,9 +33,7 @@ const StateAccessRequest = ({
         };
       });
       setExistingAffiliations(results);
-      return null;
-    };
-    fetchData();
+    })();
   }, []);
 
   /**

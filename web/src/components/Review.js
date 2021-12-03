@@ -20,14 +20,15 @@ const Review = ({
   // link wouldn't get clicked.
   const anchor = useRef(null);
   const editHandler = useMemo(
-    () => (...args) => {
-      if (editHref) {
-        anchor.current.click();
-      }
-      if (onEditClick) {
-        onEditClick(...args);
-      }
-    },
+    () =>
+      (...args) => {
+        if (editHref) {
+          anchor.current.click();
+        }
+        if (onEditClick) {
+          onEditClick(...args);
+        }
+      },
     [editHref]
   );
 
