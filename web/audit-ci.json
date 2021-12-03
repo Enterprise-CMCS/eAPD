@@ -25,6 +25,13 @@
       "affects": [
         "node-sass@5.0.0 - used by webpack when building the site, but not in production"
       ]
+    },
+    "1006754": {
+      "advisory": "https://github.com/advisories/GHSA-7p7h-4mm5-852v",
+      "module": "trim-newlines",
+      "affects": [
+        "Requires node-sass@6.0.1 - currently not in production."
+      ]
     }
   },
   "registry": "https://registry.npmjs.org"
