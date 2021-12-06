@@ -101,4 +101,26 @@ describe('filling out state admin delegation form', () => {
     
     cy.contains('Federal Administrator Portal').should('be.visible');
   });
+  
+    
+  it('allows a letter to be deleted', () => {
+    cy.visit('/');
+    
+    cy.fixture('users').then(userData => {
+      cy.contains(userData[0].name)
+      .parent('tr')
+      .within(() => {
+        // all searches are automatically rooted to the found tr element
+        cy.get('td').eq(6).contains('button', 'Delete').click();
+      })
+      
+      cy.contains('Delete Certification?');
+      cy.get('#react-aria-modal-dialog').within(() => {
+        cy.get('button').contains('Delete').click();
+      })
+      
+      cy.contains(userData[0].name).should('not.exist');
+    });
+    
+  })
 });
