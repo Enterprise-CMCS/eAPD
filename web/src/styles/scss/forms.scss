@@ -172,3 +172,12 @@ div.form--computed-value__input-aligned {
 .full-width-label {
   max-width: initial;
 }
+
+.missing-text-alert {
+  border: 2px solid $color-error;
+}
+
+.missing-text-error {
+  color: $color-error;
+  font-weight: 700;
+}

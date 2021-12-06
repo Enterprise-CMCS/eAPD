@@ -17,6 +17,29 @@ const OutcomeAndMetricForm = ({
   setOutcome,
   removeMetric
 }) => {
+  const addMissingTextAlert = (e, p) => {
+    const lastDiv = p.lastChild;
+    const missTextError = 'missing-text-error';
+    const div = document.createElement('div');
+    div.innerHTML = 'Provide a metric';
+    
+    if (!lastDiv.classList.contains(missTextError)) {
+      div.classList.add('missing-text-error')
+      e.classList.add('missing-text-alert')
+      p.appendChild(div)
+    }
+  }
+
+  const removeMissingTextAlert = (e, p) => {
+    const lastDiv = p.lastChild;
+    const missTextError = 'missing-text-error';
+    e.classList.remove('missing-text-alert')
+    
+    if (lastDiv.classList.contains(missTextError)) {
+      p.removeChild(lastDiv);
+    }
+  }
+
   const changeOutcome = useMemo(
     () => ({ target: { value } }) => {
       setOutcome(activityIndex, index, value);
@@ -28,11 +51,12 @@ const OutcomeAndMetricForm = ({
     setMetric(activityIndex, index, i, value);
   };
 
-  const checkForText = (e) => {
+  const checkForText = e => {
     const element = e.currentTarget;
     const text = element.innerHTML.trim();
+    const parent = element.parentNode;
     
-    return text === '' ? element.classList.add('missing-text-alert') : element.classList.remove('missing-text-alert');
+    return text === '' ? addMissingTextAlert(element, parent) : removeMissingTextAlert(element, parent);
   }
 
   return (
