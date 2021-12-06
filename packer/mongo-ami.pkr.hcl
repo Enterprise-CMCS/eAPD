@@ -46,7 +46,7 @@ build {
             "MONGO_INITDB_ROOT_PASSWORD=${var.mongo_initdb_root_password}",
             "MONGO_INITDB_DATABASE=${var.mongo_initdb_database}",
             "MONGO_DATABASE_USERNAME=${var.mongo_database_username}",
-            "MONGO_DATABASE_PASSWORD=${var.mongo_database_password}"
+            "MONGO_DATABASE_PASSWORD=${var.mongo_database_password}",
             "MONGO_URL=${var.mongo_url}",
             "POSTGRES_URL=${var.postgres_url}"
         ]
