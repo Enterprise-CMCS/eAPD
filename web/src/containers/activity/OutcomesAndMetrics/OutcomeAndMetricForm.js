@@ -28,6 +28,13 @@ const OutcomeAndMetricForm = ({
     setMetric(activityIndex, index, i, value);
   };
 
+  const checkForText = (e) => {
+    const element = e.currentTarget;
+    const text = element.innerHTML.trim();
+    
+    return text === '' ? element.classList.add('missing-text-alert') : element.classList.remove('missing-text-alert');
+  }
+
   return (
     <Fragment key={`activity${activityIndex}-index${index}-form`}>
       <TextField
@@ -46,11 +53,7 @@ const OutcomeAndMetricForm = ({
       {metrics.map(({ key, metric }, i) => (
         <Review
           key={key}
-          onDeleteClick={
-            metrics.length === 1 && metric === ''
-              ? null
-              : () => removeMetric(index, i)
-          }
+          onDeleteClick={() => removeMetric(index, i)}
           ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
           objType="Metric"
         >
@@ -59,6 +62,7 @@ const OutcomeAndMetricForm = ({
             className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
           >
             <TextField
+              id={`${activityIndex}-metric${index}`}
               name="metric"
               label="Metric"
               hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
@@ -66,6 +70,7 @@ const OutcomeAndMetricForm = ({
               multiline
               rows="4"
               onChange={changeMetric(i)}
+              onBlur={checkForText}
             />
           </div>
         </Review>
