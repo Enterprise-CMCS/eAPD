@@ -3,12 +3,13 @@ variable "subnet_id" {}
 variable "ami_name" {}
 variable "gold_owner" {}
 variable "mongo_database" {}
-variable "mongo_url" {}
 variable "mongo_initdb_root_username" {}
 variable "mongo_initdb_root_password" {}
 variable "mongo_initdb_database" {}
 variable "mongo_database_username"{}
 variable "mongo_database_password" {}
+variable "mongo_location" {}
+variable "postgres_url" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 

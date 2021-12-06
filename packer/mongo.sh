@@ -59,7 +59,6 @@ su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 export MONGO_DATABASE="$mongo_database"
-export MONGO_URL=""
 export MONGO_INITDB_ROOT_USERNAME="$mongo_initdb_root_username"
 export MONGO_INITDB_ROOT_PASSWORD="$mongo_initdb_root_password"
 export MONGO_INITDB_DATABASE="$mongo_initdb_database"
