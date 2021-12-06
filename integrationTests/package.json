@@ -10,6 +10,10 @@
     "cy:run:ci": "cypress run",
     "lint": "eslint 'cypress/**/*.js'"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMSgov/eAPD.git"
+  },
   "author": "",
   "license": "ISC",
   "engines": {
