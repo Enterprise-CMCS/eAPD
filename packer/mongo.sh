@@ -88,8 +88,8 @@ npm run migrate
 cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
 mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo admin --eval "db.eapd.insert({'name': 'Garbage'});"
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'userAdmin', 'db' :'$MONGO_DATABASE'}]});"
+#mongo admin --eval "db.runCommand({insert: eapd, documents: [{name: "Garbage"}]})"
+mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 E_USER
 
