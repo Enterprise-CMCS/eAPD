@@ -8,7 +8,6 @@ const extractNumber = str => {
 class ActivitiesStateStaffExpensesPage {
   addStaff = () => {
     cy.findByRole('button', { name: /^Add State Staff$/i }).click();
-    cy.waitForSave();
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
@@ -21,7 +20,6 @@ class ActivitiesStateStaffExpensesPage {
       .click();
     // Specifically click on the delete button on the modal
     cy.get('.ds-c-button--danger').click();
-    cy.waitForSave();
     cy.findByRole('banner', { name: /Delete State Staff Expenses?/i }).should(
       'not.exist'
     );
@@ -40,20 +38,16 @@ class ActivitiesStateStaffExpensesPage {
 
     // Lower default typing delays for long titles/descriptions
     cy.get('[name="title"]').clear().type(title, { delay: 1 });
-    cy.waitForSave();
 
     cy.get('[name="desc"]').clear().type(desc, { delay: 1 });
-    cy.waitForSave();
 
     // There are multiple years to fill in for cost/FTE
     cy.get('[name="cost"]').each(($el, index) => {
       cy.wrap($el).clear().type(costs[index]);
-      cy.waitForSave();
     });
 
     cy.get('[name="ftes"]').each(($el, index) => {
       cy.wrap($el).clear().type(ftes[index]);
-      cy.waitForSave();
     });
 
     // Verify that Total = Cost with Benefits * Number of FTEs
@@ -65,16 +59,11 @@ class ActivitiesStateStaffExpensesPage {
           .next()
           .invoke('text')
           .then(text => {
-            cy.log(
-              `Checking that Personnel ${staffNumber}'s total ` +
-                `expenses = Cost with Benefits * Number of FTEs`
-            );
             const total = extractNumber(text);
             cy.wrap(total).should('eq', costs[index] * ftes[index]);
           });
       });
 
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
@@ -116,9 +105,7 @@ class ActivitiesStateStaffExpensesPage {
             // Get first match for string slice of "FTE: *** |"
             // where "***" is the FTE and "|" is a seperator.
             const slice = text.match(/FTEs: (.*)\|/i)[0];
-            cy.log(slice);
             const fte = extractNumber(slice);
-            cy.log(fte);
             cy.wrap(fte).should('eq', ftes[index]);
           });
       });
@@ -139,7 +126,6 @@ class ActivitiesStateStaffExpensesPage {
 
   addExpense = () => {
     cy.findByRole('button', { name: /^Add State Expense$/i }).click();
-    cy.waitForSave();
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
@@ -152,7 +138,6 @@ class ActivitiesStateStaffExpensesPage {
       .click();
     // Specifically click on the delete button on the modal
     cy.get('.ds-c-button--danger').click();
-    cy.waitForSave();
   };
 
   fillExpense = (expenseIndex, category, costs, desc) => {
@@ -164,18 +149,14 @@ class ActivitiesStateStaffExpensesPage {
       .click();
 
     cy.get('[name="category"]').select(category);
-    cy.waitForSave();
 
     cy.get('[name="desc"]').clear().type(desc, { delay: 1 });
-    cy.waitForSave();
 
     // There are multiple years to fill in for cost/FTE
     cy.get('[name="cost"]').each(($el, index) => {
       cy.wrap($el).clear().type(costs[index]);
-      cy.waitForSave();
     });
 
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.findByRole('button', { name: /Done/i }).click();
   };
 

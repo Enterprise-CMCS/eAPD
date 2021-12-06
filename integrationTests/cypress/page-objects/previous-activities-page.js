@@ -22,9 +22,8 @@ class PreviousActivitiesPage {
 
   setSummary(summary) {
     // Wait for textbox to load before filling data
-    cy.waitForTinyMCELoaded('previous-activity-summary-field');
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('previous-activity-summary-field', summary);
-    cy.waitForSave();
   }
 
   setExpenditures(expenditures) {
@@ -32,38 +31,30 @@ class PreviousActivitiesPage {
       cy.get(`[name='hithie-approved-total-${year}']`).type(
         expenditures.hithie.approved[i]
       );
-      cy.waitForSave();
       cy.get(`[name='hithie-actual-federal-${year}']`).type(
         expenditures.hithie.actual[i]
       );
-      cy.waitForSave();
 
       cy.get(`[name='approved-total-mmis90-${year}']`).type(
         expenditures.mmis90.approved[i]
       );
-      cy.waitForSave();
       cy.get(`[name='actual-federal-mmis90-${year}']`).type(
         expenditures.mmis90.actual[i]
       );
-      cy.waitForSave();
 
       cy.get(`[name='approved-total-mmis75-${year}']`).type(
         expenditures.mmis75.approved[i]
       );
-      cy.waitForSave();
       cy.get(`[name='actual-federal-mmis75-${year}']`).type(
         expenditures.mmis75.actual[i]
       );
-      cy.waitForSave();
 
       cy.get(`[name='approved-total-mmis50-${year}']`).type(
         expenditures.mmis50.approved[i]
       );
-      cy.waitForSave();
       cy.get(`[name='actual-federal-mmis50-${year}']`).type(
         expenditures.mmis50.actual[i]
       );
-      cy.waitForSave();
     });
   }
 
@@ -87,9 +78,6 @@ class PreviousActivitiesPage {
             .invoke('text')
             .then(text => {
               const FFP = extractNumber(text);
-              cy.log(medicaid);
-              cy.log(expectedFFP);
-              cy.log(FFP);
               cy.wrap(FFP).should('eq', expectedFFP);
             });
         });
@@ -153,7 +141,6 @@ class PreviousActivitiesPage {
               cy.wrap(FFP).should('eq', expectedFFP);
             });
         });
-      cy.waitForSave();
     });
   }
 
@@ -205,7 +192,6 @@ class PreviousActivitiesPage {
           const yearlyTotalFFP = extractNumber(text);
           cy.wrap(yearlyTotalFFP).should('eq', totals[year]);
         });
-      cy.waitForSave();
     });
   }
 
@@ -243,12 +229,8 @@ class PreviousActivitiesPage {
         .invoke('text')
         .then(text => {
           const yearlyTotalExpenditure = extractNumber(text);
-          cy.log({ yearlyTotalExpenditure });
-          cy.log('total', totals[year]);
           cy.wrap(yearlyTotalExpenditure).should('eq', totals[year]);
         });
-
-      cy.waitForSave();
     });
   }
 }
