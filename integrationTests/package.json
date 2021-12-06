@@ -10,16 +10,19 @@
     "cy:run:ci": "cypress run",
     "lint": "eslint 'cypress/**/*.js'"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMSgov/eAPD.git"
+  },
   "author": "",
   "license": "ISC",
   "engines": {
     "node": "^14.16.0"
   },
-  "dependencies": {
-    "@foreachbe/cypress-tinymce": "^1.0.0",
-    "tinymce": "^5.10.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@foreachbe/cypress-tinymce": "^1.0.0",
+    "tinymce": "^5.10.0",
     "@testing-library/cypress": "^8.0.0",
     "axe-core": "^4.3.2",
     "axios": "^0.21.2",

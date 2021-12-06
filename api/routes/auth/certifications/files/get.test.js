@@ -22,7 +22,8 @@ tap.test('state certifications files endpoints', async endpointTest => {
       update: sinon.stub(),
       digest: sinon.stub(),
     },
-    validateDoc: sinon.stub()
+    validateDoc: sinon.stub(),
+    generateFileName: sinon.stub()
   }
 
   endpointTest.beforeEach(() => {
@@ -72,13 +73,14 @@ tap.test('state certifications files endpoints', async endpointTest => {
     tests.test('file is returned successfully', async test => {
       const file = {};
       di.getFile.resolves(file);
+      di.generateFileName.resolves('Sample-File-Name.pdf');
 
       await handler(
         { params: { fileID: 'file id' } },
         res,
         next
       );
-
+      
       test.ok(res.send.calledWith(file), 'sends the file');
       test.ok(res.end.calledAfter(res.send), 'response is terminated');
     });
