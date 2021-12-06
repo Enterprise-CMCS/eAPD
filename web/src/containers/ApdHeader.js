@@ -51,14 +51,19 @@ const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
               onBlur={onBlur}
             />
           ) : (
-            <div
-              id='apd-title-input'
-              className='ds-h1 apd--title'
-              onClick={() => setEditing(true)}
-              onKeyPress={onKeyPress}
-              role="button"
-              tabIndex="0">
-                {apdName}
+            <div>
+              <label className='ds-u-visibility--screen-reader'>
+                Edit APD Name
+              </label>
+              <div
+                id='apd-title-input'
+                className='ds-h1 apd--title'
+                onClick={() => setEditing(true)}
+                onKeyPress={onKeyPress}
+                role="button"
+                tabIndex="0">
+                  {apdName}
+              </div>
             </div>
           ) }
         </div>

@@ -2,8 +2,8 @@ import { ADD_APD_YEAR, EDIT_APD, EDIT_APD_NAME, REMOVE_APD_YEAR } from './symbol
 import { updateBudget } from '../budget';
 
 /**
- * Rename an activity
- * @param {String} name The new activity name
+ * Rename an apd
+ * @param {String} name The new apd name
  */
  export const setApdName = (name) => (dispatch, getState) => {
   dispatch({
