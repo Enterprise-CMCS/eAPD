@@ -24,9 +24,11 @@ const OutcomeAndMetricForm = ({
     div.innerHTML = 'Provide a metric';
     
     if (!lastDiv.classList.contains(missTextError)) {
+      const doneBtn = document.getElementById('form-and-review-list--done-btn')
       div.classList.add('missing-text-error')
       e.classList.add('missing-text-alert')
       p.appendChild(div)
+      doneBtn.disabled = true;
     }
   }
 
@@ -36,7 +38,9 @@ const OutcomeAndMetricForm = ({
     e.classList.remove('missing-text-alert')
     
     if (lastDiv.classList.contains(missTextError)) {
+      const doneBtn = document.getElementById('form-and-review-list--done-btn')
       p.removeChild(lastDiv);
+      doneBtn.disabled = false;
     }
   }
 
