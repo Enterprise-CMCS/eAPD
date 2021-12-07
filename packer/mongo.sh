@@ -83,7 +83,7 @@ nvm alias default 14
 
 git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
 cd eAPD/api
-npm install
+npm ci
 NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run migrate
 
 #Preparing Mongo DB Users
