@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button } from '@cmsgov/design-system';
+import { Button, FormLabel } from '@cmsgov/design-system';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
@@ -52,9 +52,9 @@ const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
             />
           ) : (
             <div>
-              <div className='ds-u-visibility--screen-reader'>
+              <FormLabel className='ds-u-visibility--screen-reader'>
                 Edit APD Name
-              </div>
+              </FormLabel>
               <div
                 id='apd-title-input'
                 className='ds-h1 apd--title'
