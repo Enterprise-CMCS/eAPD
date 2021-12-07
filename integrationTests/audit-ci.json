@@ -1,22 +1,37 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1004946, 1006724],
+  "allowlist": [1005059, 1005174, 1006724, 1006754],
   "_comment": {
-    "1004946": {
-      "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
-      "module": "ansi-regex",
+    "1005059": {
+      "advisory": "https://github.com/advisories/GHSA-whgm-jr23-g3j9",
+      "module": "ansi-html",
       "affects": [
-        "@testing-library/cypress@8.0.0 - testing",
-        "cypress-grep@2.10.1 - testing",
-        "eslint@7.32.0 - linter",
-        "sqlite3@4.2.0 - database, but ansi-regex is in the npmlog"
+        "webpack-dev-server>ansi-html",
+        "@storybook/react>@pmmmwh/react-refresh-webpack-plugin>ansi-html"
+      ]
+    },
+    "1005174": {
+      "advisory": "https://github.com/advisories/GHSA-w8qv-6jwh-64r5",
+      "module": "browserslist",
+      "affects": [
+        "@storybook/react@6.3.12 - storybook",
+        "postcss-cssnext@3.1.1 - css before build"
       ]
     },
     "1006724": {
       "advisory": "https://github.com/advisories/GHSA-896r-f27r-55mw",
       "module": "json-schema",
-      "affects": ["cypress@8.6.0 - testing"]
+      "affects": [
+        "node-sass@5.0.0 - used by webpack when building the site, but not in production"
+      ]
+    },
+    "1006754": {
+      "advisory": "https://github.com/advisories/GHSA-7p7h-4mm5-852v",
+      "module": "trim-newlines",
+      "affects": [
+        "Requires node-sass@6.0.1 - currently not in production."
+      ]
     }
   },
   "registry": "https://registry.npmjs.org"
