@@ -7,4 +7,4 @@ docker-compose exec api npm run seed
 
 cp ../api/seeds/test/tokens.json ./tokens.json
 
-npx cypress $1
+npx cypress $1 $2 $3

@@ -31,14 +31,11 @@ class AssurancesCompliancePage {
 
     if (response === null) {
       cy.get('@regulationDiv').find('[value="yes"]').check({ force: true });
-      cy.waitForSave();
     } else {
       cy.get('@regulationDiv').find('[value="no"]').check({ force: true });
-      cy.waitForSave();
 
       if (response.length > 0) {
         cy.get('@regulationDiv').find('textarea').type(response);
-        cy.waitForSave();
       }
     }
   };
