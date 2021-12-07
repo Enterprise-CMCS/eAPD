@@ -52,9 +52,9 @@ const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
             />
           ) : (
             <div>
-              <label className='ds-u-visibility--screen-reader'>
+              <div className='ds-u-visibility--screen-reader'>
                 Edit APD Name
-              </label>
+              </div>
               <div
                 id='apd-title-input'
                 className='ds-h1 apd--title'
