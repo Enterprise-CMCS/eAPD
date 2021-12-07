@@ -236,29 +236,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
-<<<<<<< HEAD
-  it('confirms anchor links redirect to correct sections', () => {
-    const pageWithAnchors = [{parent: 'Key State Personnel', label: 'Key Personnel and Program Management', subnav: '#apd-state-profile-key-personnel'},
-                             {parent: 'Results of Previous Activities', label: 'Prior Activities Overview', subnav: ['#prev-activities-outline', '#prev-activities-table']},
-                             {parent: 'Proposed Budget', label: 'Summary Budget by Activity', subnav: ['#summary-schedule-by-activity-table', '#budget-summary-table', '#budget-federal-by-quarter', '#budget-incentive-by-quarter']},
-                             {parent: 'Executive Summary', label: 'Activities Summary', subnav: ['#executive-summary-summary', '#executive-summary-budget-table']}]
-
-    cy.wrap(pageWithAnchors).each((index) => {
-      const {subnav} = index;
-
-      cy.get('.ds-c-vertical-nav__label--parent')
-        .contains(index.parent)
-        .then($el => {
-          if($el.attr('aria-expanded') === 'false') {
-            // if it's not expanded, expand it
-            cy.wrap($el).click();
-          }
-
-          // Click on anchor link
-          cy.get('a.ds-c-vertical-nav__label')
-            .contains(index.label)
-            .click();
-=======
   describe('Subforms', () => {
     let activityPage;
     let budgetPage;
@@ -298,7 +275,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           expect($lis).to.have.length(2);
           expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
           expect($lis.eq(1)).to.contain('Role not specified');
->>>>>>> main
         });
       // Protects against edge case of having '$' in name or role
       cy.get('@primaryContactVals')
