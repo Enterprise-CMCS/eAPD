@@ -1,4 +1,7 @@
+import { recurse } from 'cypress-recurse'; // eslint-disable-line import/no-extraneous-dependencies
+
 import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no-extraneous-dependencies
+import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dependencies
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
@@ -11,6 +14,17 @@ import {
 const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000
 );
+
+const convertDollarStrToNum = string => {
+  if (!string || string === '') {
+    return 0;
+  }
+  const numString = string.replace(/[^0-9.-]+/g, '');
+  if (Number.isNaN(numString)) {
+    return 0;
+  }
+  return Number(numString);
+};
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -50,6 +64,7 @@ Cypress.Commands.add('login', (username, password) => {
     expiry: EXPIRY_DATE
   });
   cy.visit('/');
+  cy.waitForReact();
   cy.findByLabelText('EUA ID').type(username);
   cy.findByLabelText('Password').type(password, {
     log: false
@@ -75,6 +90,7 @@ Cypress.Commands.add('useJwtUser', (username, url) => {
     }
   );
   cy.visit(url || '/');
+  cy.waitForReact();
 });
 
 Cypress.Commands.add('useSysAdmin', url => {
@@ -114,20 +130,6 @@ Cypress.Commands.add('useJWTrevokedrole', url => {
 });
 
 // TinyMCE
-Cypress.Commands.add('waitForTinyMCELoaded', tinyMceId => {
-  const eventName = `tinymceLoaded.${tinyMceId}`;
-  cy.document().then($doc => {
-    return new Cypress.Promise(resolve => {
-      // Cypress will wait for this Promise to resolve
-      const onTinyMceLoaded = () => {
-        $doc.removeEventListener(eventName, onTinyMceLoaded); // cleanup
-        resolve(); // resolve and allow Cypress to continue
-      };
-      $doc.addEventListener(eventName, onTinyMceLoaded);
-    });
-  });
-});
-
 Cypress.Commands.add('ignoreTinyMceError', () => {
   Cypress.on('uncaught:exception', () => {
     return false;
@@ -141,23 +143,45 @@ Cypress.Commands.add(
     cy.wrap($element).parentsUntil(selector).last().parent()
 );
 
-Cypress.Commands.add('waitForSave', () => {
-  cy.document()
-    .its('body')
-    .find('header')
-    .then($header => {
-      if ($header) {
-        if ($header.text().includes('Saving')) {
-          cy.wrap($header)
-            .contains('Saved', { timeout: 10000 })
-            .should('exist');
-        }
+Cypress.Commands.add(
+  'shouldHaveValue',
+  { prevSubject: true },
+  ($element, expected) => {
+    expect(convertDollarStrToNum($element.text())).to.equal(expected);
+  }
+);
 
-        cy.wrap($header)
-          .contains(/Saved|Last saved/i)
-          .should('exist');
-      }
-    });
+Cypress.Commands.add(
+  'shouldBeCloseTo',
+  { prevSubject: true },
+  ($element, expected, delta = 1) => {
+    expect(convertDollarStrToNum($element.text())).to.be.closeTo(
+      expected,
+      delta
+    );
+  }
+);
+
+Cypress.Commands.add('waitForSave', () => {
+  // Adding a wait initially to allow the save to complete
+  // and another save to start if it was queued
+  cy.wait(400); // eslint-disable-line cypress/no-unnecessary-waiting
+  return recurse(
+    () => cy.document().its('body').find('header'),
+    $header => !$header.text().includes('Saving'),
+    {
+      log: true,
+      limit: 10, // max number of iterations
+      timeout: 30000, // time limit in ms
+      delay: 400 // delay before next iteration, ms
+    }
+  );
+});
+
+Cypress.Commands.add('goToApdOverview', () => {
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/APD Overview/i)
+    .click();
 });
 
 Cypress.Commands.add('goToKeyStateProgramManagememt', () => {
@@ -273,8 +297,7 @@ const openActivitySection = (activityIndex, subNavName) => {
 
       cy.wrap($activities)
         .next()
-        .within($list => {
-          cy.log({ $list });
+        .within(() => {
           // find the Activity section with the correct index
           // check to see if Activity Index is expanded
           cy.get('.ds-c-vertical-nav__label--parent')

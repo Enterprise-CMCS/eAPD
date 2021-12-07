@@ -1,6 +1,6 @@
 // invalid-password.spec.js created with Cypress
 
-describe('Invalid Login Attempts', () => {
+describe('Invalid Login Attempts', { tags: ['@auth'] }, () => {
   beforeEach(() => {
     cy.clearAuthCookies();
     cy.setCookie('gov.cms.eapd.hasConsented', 'true');
@@ -40,14 +40,11 @@ describe('Invalid Login Attempts', () => {
       cy.url().then(url => {
         // This is to prevent the tests from failing if they are run quickly more
         // than 3 times and the lockedoutmfa account becomes locked.
-        cy.log({ url });
         if (url.endsWith('/login')) {
-          cy.log('just error message');
           cy.findByText('Your username and/or password is incorrect.').should(
             'exist'
           );
         } else {
-          cy.log('account locked');
           cy.findByText('Account Locked').should('exist');
         }
       });

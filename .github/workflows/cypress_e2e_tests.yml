@@ -10,7 +10,7 @@ jobs:
   cypress-run:
     environment: Preview
     runs-on: ubuntu-18.04
-    timeout-minutes: 90
+    timeout-minutes: 150
     steps:
       - uses: actions/setup-node@v2
         with:

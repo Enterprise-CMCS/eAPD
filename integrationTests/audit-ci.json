@@ -6,12 +6,17 @@
     "1004946": {
       "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
       "module": "ansi-regex",
-      "affects": ["nothing use here is used in production"]
+      "affects": [
+        "@testing-library/cypress@8.0.0 - testing",
+        "cypress-grep@2.10.1 - testing",
+        "eslint@7.32.0 - linter",
+        "sqlite3@4.2.0 - database, but ansi-regex is in the npmlog"
+      ]
     },
     "1006724": {
       "advisory": "https://github.com/advisories/GHSA-896r-f27r-55mw",
       "module": "json-schema",
-      "affects": ["nothing use here is used in production"]
+      "affects": ["cypress@8.6.0 - testing"]
     }
   },
   "registry": "https://registry.npmjs.org"
