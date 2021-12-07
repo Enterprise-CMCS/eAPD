@@ -10,11 +10,12 @@ exports[`APD header renders correctly 1`] = `
       id="editable-label"
     >
       <div>
-        <label
+        <FormLabel
           className="ds-u-visibility--screen-reader"
+          component="label"
         >
           Edit APD Name
-        </label>
+        </FormLabel>
         <div
           className="ds-h1 apd--title"
           id="apd-title-input"
