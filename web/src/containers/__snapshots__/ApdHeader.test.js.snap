@@ -9,15 +9,22 @@ exports[`APD header renders correctly 1`] = `
     <div
       id="editable-label"
     >
-      <div
-        className="ds-h1 apd--title"
-        id="apd-title-input"
-        onClick={[Function]}
-        onKeyPress={[Function]}
-        role="button"
-        tabIndex="0"
-      >
-        namey name
+      <div>
+        <label
+          className="ds-u-visibility--screen-reader"
+        >
+          Edit APD Name
+        </label>
+        <div
+          className="ds-h1 apd--title"
+          id="apd-title-input"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          namey name
+        </div>
       </div>
     </div>
     <Button
