@@ -1,5 +1,5 @@
 import { Alert, Button } from '@cmsgov/design-system';
-import React, { useCallback, useMemo, useRef, createRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const FormAndReviewItem = ({
@@ -9,13 +9,11 @@ const FormAndReviewItem = ({
   index,
   initialExpanded,
   onCancel,
-  onDoneClick,
   ...rest
 }) => {
-  
   const container = useRef(null);
-  const formRef = createRef();
-  
+  const formRef = useRef(null);
+
   const [collapsed, setCollapsed] = useState(!initialExpanded);
   const collapse = useCallback(() => {
     const { top } = container.current.getBoundingClientRect();
@@ -26,7 +24,7 @@ const FormAndReviewItem = ({
     setCollapsed(true);
   }, []);
   const expand = useCallback(() => setCollapsed(false), []);
-  
+
   // const onDone = (e) => {
   //   e.preventDefault();
   //   console.log("onDone called with event:", e);
@@ -42,18 +40,15 @@ const FormAndReviewItem = ({
 
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
-      <Expanded index={index} {...rest} collapse={collapse} ref={formRef} />
-      <Button
-        onClick={() => onCancel(index)}
-        className="ds-u-margin-right--2"
-      >
+      <Expanded index={index} ref={formRef} {...rest} collapse={collapse} />
+      <Button onClick={() => onCancel(index)} className="ds-u-margin-right--2">
         Cancel
       </Button>
       <Button
         id="form-and-review-list--done-btn"
         variation="primary"
         // type="submit"
-        onClick={(event) => formRef.submit(event)}
+        onClick={() => formRef.current.dispatchEvent(new Event('submit'))}
       >
         Done
       </Button>
@@ -75,10 +70,7 @@ FormAndReviewItem.propTypes = {
     PropTypes.string,
     PropTypes.elementType
   ]).isRequired,
-  expandedComponent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.elementType
-  ]).isRequired,
+  expandedComponent: PropTypes.elementType.isRequired,
   extraButtons: PropTypes.array,
   index: PropTypes.number.isRequired,
   initialExpanded: PropTypes.bool
@@ -111,19 +103,19 @@ const FormAndReviewList = ({
   );
 
   const [hasAdded, setHasAdded] = useState(false);
-  
+
   const [localList, setLocalList] = useState(list);
-  
+
   const addClick = e => {
     setHasAdded(true);
     const newListItem = createNew([2022], false);
     setLocalList([...localList, newListItem]);
   };
-  
+
   const cancelClick = index => {
     const removed = localList.splice(index, index);
     setLocalList(removed);
-  }
+  };
 
   return (
     <div className={combinedClassName}>
@@ -163,8 +155,7 @@ FormAndReviewList.propTypes = {
   className: PropTypes.string,
   collapsed: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
     .isRequired,
-  expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
-    .isRequired,
+  expanded: PropTypes.elementType.isRequired,
   extraItemButtons: PropTypes.array,
   list: PropTypes.array.isRequired,
   noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),

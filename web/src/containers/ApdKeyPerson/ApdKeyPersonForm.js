@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect, forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
@@ -19,119 +19,124 @@ import {
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
-const PersonForm = forwardRef(({
-  index,
-  item: { costs, email, hasCosts, name, fte, position },
-  setCost,
-  setEmail,
-  setHasCosts,
-  setName,
-  setRole,
-  setTime,
-  years
-}, ref) => {
-  const handleUsingTheRef = () => {
-    console.log("useRef worked");
-  }
-  
-  useEffect(() => {
-    console.log("do i see ref", ref);
-  },[] )
-  
-  const handleSubmit = (e) => {
-    console.log("test");
-  }
-  
-  const handleChange = action => ({ target: { value } }) => {
-    action(index, value);
-  };
+const PersonForm = forwardRef(
+  (
+    {
+      index,
+      item: { costs, email, hasCosts, name, fte, position },
+      setCost,
+      setEmail,
+      setHasCosts,
+      setName,
+      setRole,
+      setTime,
+      years
+    },
+    ref
+  ) => {
+    const [name2, setName2] = useState('testing');
 
-  const setPersonHasCosts = newHasCosts => () => {
-    setHasCosts(index, newHasCosts);
-  };
+    const handleSubmit = e => {
+      e.preventDefault();
+      console.log('test');
+      console.log({ name2 });
+    };
 
-  const setCostForYear = (year, value) => {
-    setCost(index, year, value);
-  };
+    const handleChange =
+      action =>
+      ({ target: { value } }) => {
+        action(index, value);
+      };
 
-  const setFTEForYear = (year, value) => {
-    setTime(index, year, +value);
-  };
+    const setPersonHasCosts = newHasCosts => () => {
+      setHasCosts(index, newHasCosts);
+    };
 
-  const primary = index === 0;
+    const setCostForYear = (year, value) => {
+      setCost(index, year, value);
+    };
 
-  return (
-    <form ref={ref} onSubmit={handleSubmit}>
-      <h4 className="ds-h4">
-        {primary
-          ? titleCase(t(`${tRoot}.labels.titlePrimary`))
-          : titleCase(t(`${tRoot}.labels.titleSecondary`))}
-      </h4>
-      <p className="ds-u-margin-bottom--0">
-        {primary
-          ? t(`${tRoot}.labels.notePrimary`)
-          : t(`${tRoot}.labels.noteSecondary`)}
-      </p>
-      <TextField
-        autoFocus
-        name={`apd-state-profile-pocname${index}`}
-        label={t(`${tRoot}.labels.name`)}
-        // value={name}
-        // onChange={handleChange(setName)}
-      />
-      <TextField
-        name={`apd-state-profile-pocemail${index}`}
-        label={t(`${tRoot}.labels.email`)}
-        // value={email}
-        // onChange={handleChange(setEmail)}
-      />
-      <TextField
-        name={`apd-state-profile-pocposition${index}`}
-        label={t(`${tRoot}.labels.position`)}
-        // value={position}
-        // onChange={handleChange(setRole)}
-      />
+    const setFTEForYear = (year, value) => {
+      setTime(index, year, +value);
+    };
 
-      <fieldset className="ds-c-fieldset">
-        <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
-        <Choice
-          // checked={!hasCosts}
-          label="No"
-          name={`apd-state-profile-hascosts-${index}`}
-          // onChange={setPersonHasCosts(false)}
-          type="radio"
-          value="no"
+    const primary = index === 0;
+
+    return (
+      <form ref={ref} onSubmit={handleSubmit}>
+        <h4 className="ds-h4">
+          {primary
+            ? titleCase(t(`${tRoot}.labels.titlePrimary`))
+            : titleCase(t(`${tRoot}.labels.titleSecondary`))}
+        </h4>
+        <p className="ds-u-margin-bottom--0">
+          {primary
+            ? t(`${tRoot}.labels.notePrimary`)
+            : t(`${tRoot}.labels.noteSecondary`)}
+        </p>
+        <TextField
+          autoFocus
+          name={`apd-state-profile-pocname${index}`}
+          label={t(`${tRoot}.labels.name`)}
+          // value={name}
+          // onChange={handleChange(setName)}
         />
-        <Choice
-          // checked={hasCosts}
-          label="Yes"
-          name={`apd-state-profile-hascosts-${index}`}
-          // onChange={setPersonHasCosts(true)}
-          type="radio"
-          value="yes"
-          checkedChildren={
-            <PersonCostForm
-              items={years.reduce(
-                (o, year) => ({
-                  ...o,
-                  [year]: {
-                    amt: costs[year],
-                    perc: fte[year]
-                  }
-                }),
-                {}
-              )}
-              fteLabel="FTE Allocation"
-              hint="For example: 0.5 = 0.5 FTE = 50% time"
-              setCost={setCostForYear}
-              setFTE={setFTEForYear}
-            />
-          }
+        <TextField
+          name={`apd-state-profile-pocemail${index}`}
+          label={t(`${tRoot}.labels.email`)}
+          // value={email}
+          // onChange={handleChange(setEmail)}
         />
-      </fieldset>
-    </form>
-  );
-});
+        <TextField
+          name={`apd-state-profile-pocposition${index}`}
+          label={t(`${tRoot}.labels.position`)}
+          // value={position}
+          // onChange={handleChange(setRole)}
+        />
+
+        <fieldset className="ds-c-fieldset">
+          <legend className="ds-c-label">
+            {t(`${tRoot}.labels.hasCosts`)}
+          </legend>
+          <Choice
+            // checked={!hasCosts}
+            label="No"
+            name={`apd-state-profile-hascosts-${index}`}
+            // onChange={setPersonHasCosts(false)}
+            type="radio"
+            value="no"
+          />
+          <Choice
+            // checked={hasCosts}
+            label="Yes"
+            name={`apd-state-profile-hascosts-${index}`}
+            // onChange={setPersonHasCosts(true)}
+            type="radio"
+            value="yes"
+            checkedChildren={
+              <PersonCostForm
+                items={years.reduce(
+                  (o, year) => ({
+                    ...o,
+                    [year]: {
+                      amt: costs[year],
+                      perc: fte[year]
+                    }
+                  }),
+                  {}
+                )}
+                fteLabel="FTE Allocation"
+                hint="For example: 0.5 = 0.5 FTE = 50% time"
+                setCost={setCostForYear}
+                setFTE={setFTEForYear}
+              />
+            }
+          />
+        </fieldset>
+      </form>
+    );
+  }
+);
 PersonForm.propTypes = {
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
@@ -160,6 +165,8 @@ const mapDispatchToProps = {
   setTime: setKeyPersonFTE
 };
 
-export default connect(null, mapDispatchToProps)(PersonForm);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  PersonForm
+);
 
 export { PersonForm as plain, mapDispatchToProps };
