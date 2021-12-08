@@ -493,14 +493,47 @@ class ExportPage {
       });
   };
 
-  checkRowTotals = (otherFundingValue, medicaidValue) => {
-    cy.contains('td', 'Other Funding')
+  checkRowTotals = ({
+    year,
+    activityIndex,
+    activityTotalCost,
+    otherFunding,
+    totalMedicaidCost,
+    federalShare,
+    stateShare
+  }) => {
+    const fedTotal = totalMedicaidCost * (federalShare / 100);
+    const stateTotal = totalMedicaidCost * (stateShare / 100);
+    cy.contains(`Activity ${activityIndex + 1} Budget for FFY ${year}`)
       .parent()
-      .should('contain', `$${otherFundingValue}`);
-
-    cy.contains('td', 'Total Computable Medicaid Cost')
-      .parent()
-      .should('contain', `$${medicaidValue}`);
+      .next()
+      .within(() => {
+        cy.contains('Activity Total Cost')
+          .next()
+          .should('contain', `$${addCommas(activityTotalCost)}`)
+          .parent()
+          .next()
+          .should('have.text', `Other Funding-$${addCommas(otherFunding)}`)
+          .next()
+          .should(
+            'have.text',
+            `Total Computable Medicaid Cost$${addCommas(totalMedicaidCost)}`
+          )
+          .next()
+          .should(
+            'have.text',
+            `Federal Share$${addCommas(
+              totalMedicaidCost
+            )}×${federalShare}%=$${addCommas(fedTotal)}`
+          )
+          .next()
+          .should(
+            'have.text',
+            `State Share$${addCommas(
+              totalMedicaidCost
+            )}×${stateShare}%=$${addCommas(stateTotal)}`
+          );
+      });
   };
 
   checkActivityNameAtEnd = (name = 'Untitled') => {

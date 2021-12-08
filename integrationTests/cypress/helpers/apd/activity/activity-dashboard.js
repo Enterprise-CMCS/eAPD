@@ -1,4 +1,3 @@
-import BudgetPage from '../../../page-objects/budget-page';
 import ExportPage from '../../../page-objects/export-page';
 
 const activities = [['Program Administration', 'HIT']];
@@ -24,7 +23,6 @@ export const testDefaultActivityDashboard = years => {
 
   it('checks default activity export view', () => {
     const exportPage = new ExportPage();
-    const budgetPage = new BudgetPage();
 
     cy.goToExportView();
 
@@ -38,48 +36,6 @@ export const testDefaultActivityDashboard = years => {
     });
 
     exportPage.checkActivityList(activities);
-
-    activities.forEach((activity, activityIndex) => {
-      cy.findByRole('heading', { name: /^Activities$/i })
-        .parent()
-        .contains(`Activity ${activityIndex + 1}: ${activity[0]}`)
-        .parent()
-        .within(() => {
-          years.forEach(year => {
-            cy.contains(`Activity ${activityIndex + 1} Budget for FFY ${year}`)
-              .next()
-              .within(() => {
-                budgetPage.checkSubtotalTable('State Staff', 0, 0);
-                budgetPage.checkSubtotalTable('Other State Expenses', 0);
-                budgetPage.checkSubtotalTable('Private Contractor', 0);
-                budgetPage.checkTotalComputableMedicaidCost(0);
-              });
-            cy.contains(`Activity ${activityIndex + 1} Budget for FFY ${year}`)
-              .parent()
-              .next()
-              .within(() => {
-                exportPage.checkRowTotals(0, 0);
-                budgetPage.checkCostSplitTable(90, 10, 0);
-              });
-            cy.contains('Estimated Quarterly Expenditure')
-              .next()
-              .within(() => {
-                budgetPage.checkQuarterTable('export', '', 0);
-              });
-          });
-          budgetPage.checkFFYtotals(
-            years,
-            activity[0],
-            0,
-            0,
-            0,
-            '90/10',
-            0,
-            'Alaska',
-            0
-          );
-        });
-    });
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
@@ -121,8 +77,6 @@ export const testActivityDashboardWithData = () => {
     cy.goToExportView();
 
     exportPage.checkActivityList(activities);
-    exportPage.checkActivityHeader(activities[1][0], 2);
-    exportPage.checkActivityNameAtEnd(activities[1][0]);
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });

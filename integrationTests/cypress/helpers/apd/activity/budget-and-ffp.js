@@ -1,6 +1,6 @@
 import BudgetPage from '../../../page-objects/budget-page';
 import PopulatePage from '../../../page-objects/populate-page';
-// import ExportPage from '../../../page-objects/export-page';
+import ExportPage from '../../../page-objects/export-page';
 
 const activities = [['Program Administration', 'HIT']];
 const splits = ['75-25', '50-50', '90-10'];
@@ -18,42 +18,140 @@ export const testDefaultBudgetAndFFP = years => {
       'exist'
     );
 
+    splits.forEach(split => {
+      cy.get('[class="ds-c-field"]').eq(0).select(split);
+
+      let federalShare = 0;
+      let stateShare = 0;
+      if (split === '90-10') {
+        federalShare = 90;
+        stateShare = 10;
+      } else if (split === '75-25') {
+        federalShare = 75;
+        stateShare = 25;
+      } else if (split === '50-50') {
+        federalShare = 50;
+        stateShare = 50;
+      }
+
+      budgetPage.checkCostSplitTable({
+        federalShare,
+        stateShare,
+        totalMedicaidCost: 0
+      });
+    });
+
     cy.then(() => {
       years.forEach(year => {
         cy.contains(`Budget for FFY ${year}`)
           .parent()
           .parent()
           .within(() => {
-            budgetPage.checkSubtotalTable('State Staff', 0, 0);
-            budgetPage.checkSubtotalTable('Other State Expenses', 0);
-            budgetPage.checkSubtotalTable('Private Contractor', 0);
-            budgetPage.checkTotalComputableMedicaidCost(0);
-            budgetPage.checkActivityTotalCostTable(0, 0, 1);
+            budgetPage.checkSubtotalTable({
+              title: 'State Staff',
+              costs: 0,
+              otherFundingAmount: 0
+            });
+            budgetPage.checkSubtotalTable({
+              title: 'Other State Expenses',
+              costs: 0,
+              otherFundingAmount: 0
+            });
+            budgetPage.checkSubtotalTable({
+              title: 'Private Contractor',
+              costs: 0,
+              otherFundingAmount: 0
+            });
+            budgetPage.checkTotalComputableMedicaidCost({
+              label: 'Activity 1 Total Computable Medicaid Cost',
+              totalMedicaidCost: 0
+            });
 
-            budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
-            budgetPage.checkQuarterTable('default', '', 0);
+            budgetPage.checkActivityTotalCostTable({
+              activityTotalCost: 0,
+              otherFunding: 0,
+              index: 1
+            });
+
+            budgetPage.checkCostSplitTable({
+              federalShare: 90,
+              stateShare: 10,
+              totalMedicaidCost: 0
+            });
+            budgetPage.checkQuarterTable();
           });
       });
-      budgetPage.checkFFYtotals(
+      budgetPage.checkFFYtotals({
         years,
-        activities[0][0],
-        0,
-        0,
-        0,
-        '90/10',
-        0,
-        'Alaska',
-        0
-      );
+        activityName: activities[0][0],
+        totalCost: 0,
+        otherFunding: 0,
+        totalMedicaidCost: 0,
+        fundingSplit: '90/10',
+        federalShare: 0,
+        state: 'Alaska',
+        stateShare: 0
+      });
     });
 
     cy.waitForSave();
   });
 
   it('should display the default activity overview in the export view', () => {
-    // const exportPage = new ExportPage();
+    const exportPage = new ExportPage();
 
     cy.goToExportView();
+
+    years.forEach(year => {
+      cy.contains(`Activity 1 Budget for FFY ${year}`)
+        .next()
+        .within(() => {
+          budgetPage.checkSubtotalTable({
+            title: 'State Staff',
+            keyPersonnelAmount: 0,
+            otherFundingAmount: 0
+          });
+          budgetPage.checkSubtotalTable({
+            title: 'Other State Expenses',
+            keyPersonnelAmount: 0,
+            otherFundingAmount: 0
+          });
+          budgetPage.checkSubtotalTable({
+            title: 'Private Contractor',
+            keyPersonnelAmount: 0,
+            otherFundingAmount: 0
+          });
+          budgetPage.checkTotalComputableMedicaidCost({
+            label: 'Activity 1 Total Computable Medicaid Cost',
+            totalMedicaidCost: 0
+          });
+        });
+      exportPage.checkRowTotals({
+        year,
+        activityIndex: 0,
+        activityTotalCost: 0,
+        otherFunding: 0,
+        totalMedicaidCost: 0,
+        federalShare: 90,
+        stateShare: 10
+      });
+      cy.contains('Estimated Quarterly Expenditure')
+        .next()
+        .within(() => {
+          budgetPage.checkQuarterTable({ isExportView: true });
+        });
+    });
+    budgetPage.checkFFYtotals({
+      years,
+      activityName: activities[0][0],
+      totalCost: 0,
+      otherFunding: 0,
+      totalMedicaidCost: 0,
+      fundingSplit: '90/10',
+      federalShare: 0,
+      state: 'Alaska',
+      stateShare: 0
+    });
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
@@ -77,11 +175,30 @@ export const testBudgetAndFFPWithData = years => {
   });
 
   describe('Activity 1', () => {
+    let totalActivityTotalCost = 0;
+    let totalOtherFunding = 0;
+    let totalTotalMedicaidCost = 0;
+    let totalFederalShare = 0;
+    let totalStateShare = 0;
+
+    let staff;
+    let expenses;
+    let contractor;
+    let allocation;
+    let quarterValues;
+
     beforeEach(() => {
       cy.goToBudgetAndFFP(0);
+
+      /* eslint-disable prefer-destructuring */
+      staff = activityData.staff[1];
+      expenses = activityData.expenses[1];
+      contractor = activityData.privateContractors[1];
+      allocation = activityData.costAllocation[0];
+      quarterValues = activityData.quarterVals[0];
     });
 
-    it('Tests cost split table (Activity 1 - 2021)', () => {
+    it('fills out Budget and FFP for activity 1', () => {
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
@@ -90,50 +207,32 @@ export const testBudgetAndFFPWithData = years => {
         'exist'
       );
 
-      const staff = activityData.staff[1];
-      const expenses = activityData.expenses[1];
-      const contractor = activityData.privateContractors[1];
-      const allocation = activityData.costAllocation[0];
-
-      let firstYearTotal = budgetPage.computeFFYtotal(
-        staff.costs[0] * staff.ftes[0],
-        expenses.costs[0],
-        contractor.FFYcosts[0]
-      );
-
-      firstYearTotal -= allocation.costs[0];
-
-      cy.log('test splits and updating calculations');
-      splits.forEach(split => {
-        cy.get('[class="ds-c-field"]').eq(0).select(split);
-
-        let fedSplit = 0;
-        let stateSplit = 0;
-        if (split === '90-10') {
-          fedSplit = 90;
-          stateSplit = 10;
-        } else if (split === '75-25') {
-          fedSplit = 75;
-          stateSplit = 25;
-        } else if (split === '50-50') {
-          fedSplit = 50;
-          stateSplit = 50;
-        }
-
-        cy.get('[class="budget-table activity-budget-table"]')
-          .eq(2)
-          .within(() => {
-            budgetPage.checkCostSplitTable(
-              fedSplit,
-              stateSplit,
-              firstYearTotal
-            );
-          });
-      });
-
-      cy.log('fill in budget');
       years.forEach((year, i) => {
-        cy.get('[class="ds-c-field"]').eq(i).select(splits[i]);
+        // Activity Costs
+        const staffCosts = staff.costs[i] * staff.ftes[i];
+        const activityTotalCost = budgetPage.computeFFYtotal(
+          staffCosts,
+          expenses.costs[i],
+          contractor.FFYcosts[i]
+        );
+        totalActivityTotalCost += activityTotalCost;
+
+        // Other Funding
+        const otherFunding = allocation.costs[i];
+        const staffOtherFunding = Math.round(
+          otherFunding * (staffCosts / activityTotalCost)
+        );
+        const expensesOtherFunding = Math.round(
+          otherFunding * (expenses.costs[i] / activityTotalCost)
+        );
+        const contractorOtherFunding = Math.round(
+          otherFunding * (contractor.FFYcosts[i] / activityTotalCost)
+        );
+        totalOtherFunding += otherFunding;
+
+        // Total Medicaid Cost
+        const totalMedicaidCost = activityTotalCost - otherFunding;
+        totalTotalMedicaidCost += totalMedicaidCost;
 
         cy.findAllByText(`Activity 1 Budget for FFY ${year}`)
           .parent()
@@ -142,120 +241,184 @@ export const testBudgetAndFFPWithData = years => {
             cy.get('[class="budget-table activity-budget-table"]')
               .eq(0)
               .within(() => {
-                budgetPage.checkTableRow(
-                  staff.title,
-                  budgetPage.addCommas(staff.costs[i]),
-                  staff.ftes[i]
-                );
+                budgetPage.checkTableRow({
+                  title: staff.title,
+                  costs: staff.costs[i],
+                  ftes: staff.ftes[i]
+                });
+                budgetPage.checkSubtotalTable({
+                  title: 'State Staff',
+                  costs: staffCosts,
+                  otherFundingAmount: staffOtherFunding
+                });
 
-                budgetPage.checkTableRow(
-                  expenses.category,
-                  budgetPage.addCommas(expenses.costs[i])
-                );
+                budgetPage.checkTableRow({
+                  title: expenses.category,
+                  costs: expenses.costs[i]
+                });
+                budgetPage.checkSubtotalTable({
+                  title: 'Other State Expenses',
+                  costs: expenses.costs[i],
+                  otherFundingAmount: expensesOtherFunding
+                });
 
-                budgetPage.checkTableRow(
-                  contractor.name,
-                  budgetPage.addCommas(contractor.FFYcosts[i])
-                );
+                budgetPage.checkTableRow({
+                  title: contractor.name,
+                  costs: contractor.FFYcosts[i]
+                });
+                budgetPage.checkSubtotalTable({
+                  title: 'Private Contractor',
+                  costs: contractor.FFYcosts[i],
+                  otherFundingAmount: contractorOtherFunding
+                });
+                budgetPage.checkSubtotalRows({ year, activityIndex: 0 });
 
-                budgetPage.checkSubtotalRows(year, 1);
+                budgetPage.checkTotalComputableMedicaidCost({
+                  totalMedicaidCost,
+                  label: 'Activity 1 Total Computable Medicaid Cost'
+                });
               });
 
-            const otherFFYfunding = allocation.costs[i];
-            cy.findAllByText('Other Funding')
-              .parent()
-              .should('contain', `$${budgetPage.addCommas(otherFFYfunding)}`);
+            budgetPage.checkActivityTotalCostTable({
+              activityTotalCost,
+              otherFunding,
+              index: 1
+            });
 
-            // Fill out quarter table
-            const inputs = activityData.quarterVals[0];
+            // Federal Share, State Share
+            const split = activityData.splitConstants[i];
+            totalFederalShare += totalMedicaidCost * split.fed;
+            totalStateShare += totalMedicaidCost * split.state;
+
+            cy.get('[class="ds-c-field"]').eq(i).select(split.split);
+
+            budgetPage.checkCostSplitTable({
+              federalShare: split.fed * 100,
+              stateShare: split.state * 100,
+              totalMedicaidCost
+            });
+
+            // Quarter Table
             let staffPercentageSum = 0;
             let contractorPercentageSum = 0;
-            for (let k = 0; k < 4; k += 1) {
-              populatePage.fillQuarter(
-                k,
-                inputs.stateVals[i][k],
-                inputs.contractorVals[i][k]
-              );
-              staffPercentageSum += inputs.stateVals[i][k];
-              contractorPercentageSum += inputs.stateVals[i][k];
+
+            const stateQuarterValues = quarterValues.stateVals[i];
+            const contractorQuarterValues = quarterValues.contractorVals[i];
+
+            for (let quarter = 0; quarter < 4; quarter += 1) {
+              const stateValue = stateQuarterValues[quarter];
+              const contractorValue = contractorQuarterValues[quarter];
+              staffPercentageSum += stateValue;
+              contractorPercentageSum += contractorValue;
+
+              populatePage.fillQuarter({
+                quarter,
+                stateValue,
+                contractorValue
+              });
             }
-            populatePage.checkPercentageSubtotal(
-              staffPercentageSum,
-              contractorPercentageSum
-            );
 
-            cy.get('[data-cy="subtotal"]').should($td => {
-              const staffSubtotal = budgetPage.convertStringToNum(
-                $td.eq(0).text()
-              );
-              const expensesSubtotal = budgetPage.convertStringToNum(
-                $td.eq(1).text()
-              );
-              let contractorTotal = budgetPage.convertStringToNum(
-                $td.eq(2).text()
-              );
-
-              let staffTotal = staffSubtotal + expensesSubtotal;
-
-              const splitMultipliers = activityData.splitConstants[i];
-
-              staffTotal *= splitMultipliers.fed;
-              contractorTotal *= splitMultipliers.fed;
-
-              for (let k = 0; k < 4; k += 1) {
-                populatePage.checkQuarterSubtotal(
-                  $td.eq(k + 4).text(), // +4 gets to the first quarter table state subtotal
-                  $td.eq(k + 8).text(), // +8 gets to the first quarter contractor subtotal
-                  staffTotal * (inputs.stateVals[i][k] * 0.01),
-                  contractorTotal * inputs.contractorVals[i][k] * 0.01
-                );
-              }
+            populatePage.checkPercentageSubtotal({
+              staff: staffPercentageSum,
+              contractor: contractorPercentageSum
             });
+
+            // Total State Costs
+            const stateTotal =
+              (staffCosts +
+                expenses.costs[i] -
+                staffOtherFunding -
+                expensesOtherFunding) *
+              split.fed;
+            // Total Contractor Costs
+            const contractorTotal =
+              (contractor.FFYcosts[i] - contractorOtherFunding) * split.fed;
+
+            populatePage.checkQuarterSubtotal({
+              stateTotal,
+              contractorTotal,
+              stateQuarterValues,
+              contractorQuarterValues
+            });
+
             budgetPage.checkEachQuarterSubtotal();
           });
       });
 
-      // Calculate totals for final section
-      let activityTotal = 0;
-      let otherFundingTotal = 0;
-      let federalShare = 0;
-      let stateShare = 0;
-
-      years.forEach((year, i) => {
-        let FFYtotal = budgetPage.computeFFYtotal(
-          staff.costs[i] * staff.ftes[i],
-          expenses.costs[i],
-          contractor.FFYcosts[i]
-        );
-
-        activityTotal += FFYtotal;
-        otherFundingTotal += allocation.costs[i];
-
-        FFYtotal -= allocation.costs[i];
-
-        const splitMultipliers = activityData.splitConstants[i];
-        federalShare += FFYtotal * splitMultipliers.fed;
-        stateShare += FFYtotal * splitMultipliers.state;
-      });
-
-      const totalMedicaid = activityTotal - otherFundingTotal;
-      budgetPage.checkFFYtotals(
+      budgetPage.checkFFYtotals({
         years,
-        'Program Administration',
-        budgetPage.addCommas(activityTotal),
-        budgetPage.addCommas(otherFundingTotal),
-        budgetPage.addCommas(totalMedicaid),
-        `75/25 (FFY ${years[0]}) and 50/50 (FFY ${years[1]})`,
-        budgetPage.addCommas(federalShare),
-        'Alaska',
-        budgetPage.addCommas(stateShare)
-      );
+        activityName: 'Program Administration',
+        totalCost: totalActivityTotalCost,
+        otherFunding: totalOtherFunding,
+        totalMedicaidCost: totalTotalMedicaidCost,
+        fundingSplit: `75/25 (FFY ${years[0]}) and 50/50 (FFY ${years[1]})`,
+        federalShare: Math.round(totalFederalShare),
+        state: 'Alaska',
+        stateShare: Math.round(totalStateShare)
+      });
 
       cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.waitForSave();
     });
 
-    // TODO: export view tests
+    it('should display the default activity overview in the export view', () => {
+      const exportPage = new ExportPage();
+
+      cy.goToExportView();
+
+      years.forEach(year => {
+        cy.contains(`Activity 1 Budget for FFY ${year}`)
+          .next()
+          .within(() => {
+            budgetPage.checkSubtotalTable({
+              title: 'State Staff',
+              keyPersonnelAmount: 0,
+              otherFundingAmount: 0
+            });
+            budgetPage.checkSubtotalTable({
+              title: 'Other State Expenses',
+              keyPersonnelAmount: 0,
+              otherFundingAmount: 0
+            });
+            budgetPage.checkSubtotalTable({
+              title: 'Private Contractor',
+              keyPersonnelAmount: 0,
+              otherFundingAmount: 0
+            });
+            budgetPage.checkTotalComputableMedicaidCost({
+              label: 'Activity 1 Total Computable Medicaid Cost',
+              totalMedicaidCost: 0
+            });
+          });
+        exportPage.checkRowTotals({
+          year,
+          activityIndex: 0,
+          activityTotalCost: 0,
+          otherFunding: 0,
+          totalMedicaidCost: 0,
+          federalShare: 90,
+          stateShare: 10
+        });
+        cy.contains('Estimated Quarterly Expenditure')
+          .next()
+          .within(() => {
+            budgetPage.checkQuarterTable({ isExportView: true });
+          });
+      });
+      budgetPage.checkFFYtotals({
+        years,
+        activityName: activities[0][0],
+        totalCost: 0,
+        otherFunding: 0,
+        totalMedicaidCost: 0,
+        fundingSplit: '90/10',
+        federalShare: 0,
+        state: 'Alaska',
+        stateShare: 0
+      });
+
+      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+    });
   });
 
   describe('Activity 2', () => {
@@ -272,18 +435,52 @@ export const testBudgetAndFFPWithData = years => {
         'exist'
       );
 
-      const staff = activityData.staff[2];
+      const staff1 = activityData.staff[2];
       const staff2 = activityData.staff[3];
-      const expenses = activityData.expenses[2];
+      const expenses1 = activityData.expenses[2];
       const expenses2 = activityData.expenses[3];
-      const contractor = activityData.privateContractors[2];
+      const contractor1 = activityData.privateContractors[2];
       const contractor2 = activityData.privateContractors[3];
       const allocation = activityData.costAllocation[1];
 
+      let totalActivityTotalCost = 0;
+      let totalOtherFunding = 0;
+      let totalTotalMedicaidCost = 0;
+      let totalFederalShare = 0;
+      let totalStateShare = 0;
+
       years.forEach((year, i) => {
-        cy.get('[class="ds-c-field"]')
-          .eq(i)
-          .select(splits[i + 1]);
+        const otherFunding = allocation.costs[i];
+        totalOtherFunding += otherFunding;
+
+        const staffCosts =
+          staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
+        const expensesCosts = expenses1.costs[i] + expenses2.costs[i];
+        const contractorCosts =
+          contractor1.FFYcosts[i] +
+          contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
+        const activityTotalCost = staffCosts + expensesCosts + contractorCosts;
+        totalActivityTotalCost += activityTotalCost;
+
+        const totalMedicaidCost = activityTotalCost - otherFunding;
+        totalTotalMedicaidCost += totalMedicaidCost;
+
+        const staffOtherFunding = Math.round(
+          otherFunding * (staffCosts / activityTotalCost)
+        );
+        const expensesOtherFunding = Math.round(
+          otherFunding * (expensesCosts / activityTotalCost)
+        );
+        const contractorOtherFunding = Math.round(
+          otherFunding * (contractorCosts / activityTotalCost)
+        );
+
+        const split = activityData.splitConstants[i + 1];
+        totalFederalShare += totalMedicaidCost * split.fed;
+        totalStateShare += totalMedicaidCost * split.state;
+
+        cy.get('[class="ds-c-field"]').eq(i).select(split.split);
+
         cy.findAllByText(`Activity 2 Budget for FFY ${year}`)
           .parent()
           .parent()
@@ -291,132 +488,126 @@ export const testBudgetAndFFPWithData = years => {
             cy.get('[class="budget-table activity-budget-table"]')
               .eq(0)
               .within(() => {
-                budgetPage.checkTableRow(
-                  staff.title,
-                  budgetPage.addCommas(staff.costs[i]),
-                  staff.ftes[i]
-                );
-                budgetPage.checkTableRow(
-                  staff2.title,
-                  budgetPage.addCommas(staff2.costs[i]),
-                  staff2.ftes[i]
-                );
+                budgetPage.checkTableRow({
+                  title: staff1.title,
+                  costs: staff1.costs[i],
+                  ftes: staff1.ftes[i]
+                });
+                budgetPage.checkTableRow({
+                  title: staff2.title,
+                  costs: staff2.costs[i],
+                  ftes: staff2.ftes[i]
+                });
+                budgetPage.checkSubtotalTable({
+                  title: 'State Staff',
+                  costs: staffCosts,
+                  otherFundingAmount: staffOtherFunding
+                });
 
-                budgetPage.checkTableRow(
-                  expenses.category,
-                  budgetPage.addCommas(expenses.costs[i])
-                );
-                budgetPage.checkTableRow(
-                  expenses2.category,
-                  budgetPage.addCommas(expenses2.costs[i])
-                );
+                budgetPage.checkTableRow({
+                  title: expenses1.category,
+                  costs: expenses1.costs[i]
+                });
+                budgetPage.checkTableRow({
+                  title: expenses2.category,
+                  costs: expenses2.costs[i]
+                });
+                budgetPage.checkSubtotalTable({
+                  title: 'Other State Expenses',
+                  costs: expensesCosts,
+                  otherFundingAmount: expensesOtherFunding
+                });
 
-                budgetPage.checkTableRow(
-                  contractor.name,
-                  budgetPage.addCommas(contractor.FFYcosts[i])
-                );
+                budgetPage.checkTableRow({
+                  title: contractor1.name,
+                  costs: contractor1.FFYcosts[i]
+                });
 
-                budgetPage.checkTableRow(
-                  contractor2.name,
-                  budgetPage.addCommas(
-                    contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
-                  )
-                );
+                budgetPage.checkTableRow({
+                  title: contractor2.name,
+                  costs: contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
+                });
+                budgetPage.checkSubtotalTable({
+                  title: 'Private Contractor',
+                  costs: contractorCosts,
+                  otherFundingAmount: contractorOtherFunding
+                });
 
-                budgetPage.checkSubtotalRows(years[i], 2);
+                budgetPage.checkSubtotalRows({ year, activityIndex: 1 });
+
+                budgetPage.checkTotalComputableMedicaidCost({
+                  totalMedicaidCost,
+                  label: 'Activity 2 Total Computable Medicaid Cost'
+                });
               });
+            budgetPage.checkActivityTotalCostTable({
+              activityTotalCost,
+              otherFunding,
+              index: 1
+            });
 
-            const otherFFYfunding = allocation.costs[i];
-            cy.findAllByText('Other Funding')
-              .parent()
-              .should('contain', `$${budgetPage.addCommas(otherFFYfunding)}`);
+            budgetPage.checkCostSplitTable({
+              federalShare: split.fed * 100,
+              stateShare: split.state * 100,
+              totalMedicaidCost
+            });
 
-            const inputs = activityData.quarterVals[1];
+            // Fill out quarter table
             let staffPercentageSum = 0;
             let contractorPercentageSum = 0;
-            for (let k = 0; k < 4; k += 1) {
-              populatePage.fillQuarter(
-                k,
-                inputs.stateVals[i][k],
-                inputs.contractorVals[i][k]
-              );
-              staffPercentageSum += inputs.stateVals[i][k];
-              contractorPercentageSum += inputs.stateVals[i][k];
+
+            const inputs = activityData.quarterVals[1];
+            const stateQuarterValues = inputs.stateVals[i];
+            const contractorQuarterValues = inputs.contractorVals[i];
+
+            for (let quarter = 0; quarter < 4; quarter += 1) {
+              const stateValue = stateQuarterValues[quarter];
+              const contractorValue = contractorQuarterValues[quarter];
+
+              populatePage.fillQuarter({
+                quarter,
+                stateValue,
+                contractorValue
+              });
+              staffPercentageSum += stateValue;
+              contractorPercentageSum += contractorValue;
             }
-            populatePage.checkPercentageSubtotal(
-              staffPercentageSum,
-              contractorPercentageSum
-            );
 
-            cy.get('[data-cy="subtotal"]').should($td => {
-              const staffSubtotal = budgetPage.convertStringToNum(
-                $td.eq(0).text()
-              );
-              const expensesSubtotal = budgetPage.convertStringToNum(
-                $td.eq(1).text()
-              );
-              let contractorTotal = budgetPage.convertStringToNum(
-                $td.eq(2).text()
-              );
-
-              let staffTotal = staffSubtotal + expensesSubtotal;
-
-              const splitMultipliers = activityData.splitConstants[i + 1];
-
-              staffTotal *= splitMultipliers.fed;
-              contractorTotal *= splitMultipliers.fed;
-
-              for (let k = 0; k < 4; k += 1) {
-                populatePage.checkQuarterSubtotal(
-                  $td.eq(k + 4).text(),
-                  $td.eq(k + 8).text(),
-                  staffTotal * (inputs.stateVals[i][k] * 0.01),
-                  contractorTotal * inputs.contractorVals[i][k] * 0.01
-                );
-              }
+            populatePage.checkPercentageSubtotal({
+              staff: staffPercentageSum,
+              contractor: contractorPercentageSum
             });
+
+            const stateTotal =
+              (staffCosts +
+                expensesCosts -
+                staffOtherFunding -
+                expensesOtherFunding) *
+              split.fed;
+            const contractorTotal =
+              (contractorCosts - contractorOtherFunding) * split.fed;
+
+            populatePage.checkQuarterSubtotal({
+              stateTotal,
+              contractorTotal,
+              stateQuarterValues,
+              contractorQuarterValues
+            });
+
             budgetPage.checkEachQuarterSubtotal();
           });
       });
-
-      let activityTotal = 0;
-      let otherFundingTotal = 0;
-      let federalShare = 0;
-      let stateShare = 0;
-
-      years.forEach((year, i) => {
-        let FFYtotal = budgetPage.computeFFYtotal(
-          staff.costs[i] * staff.ftes[i] + staff2.costs[i] * staff2.ftes[i],
-          expenses.costs[i] + expenses2.costs[i],
-          contractor.FFYcosts[i] +
-            contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
-        );
-
-        activityTotal += FFYtotal;
-        otherFundingTotal += allocation.costs[i];
-
-        FFYtotal -= allocation.costs[i];
-
-        const splitMultipliers = activityData.splitConstants[i + 1];
-        federalShare += FFYtotal * splitMultipliers.fed;
-        stateShare += FFYtotal * splitMultipliers.state;
-      });
-
-      federalShare = Math.ceil(federalShare);
-      stateShare = Math.floor(stateShare);
-
-      const totalMedicaid = activityTotal - otherFundingTotal;
-      budgetPage.checkFFYtotals(
+      budgetPage.checkFFYtotals({
         years,
-        activityData.newActivityName,
-        budgetPage.addCommas(activityTotal),
-        budgetPage.addCommas(otherFundingTotal),
-        budgetPage.addCommas(totalMedicaid),
-        `50/50 (FFY ${years[0]}) and 90/10 (FFY ${years[1]})`,
-        budgetPage.addCommas(federalShare),
-        'Alaska',
-        budgetPage.addCommas(stateShare)
-      );
+        activityName: activityData.newActivityName,
+        totalCost: totalActivityTotalCost,
+        otherFunding: totalOtherFunding,
+        totalMedicaidCost: totalTotalMedicaidCost,
+        fundingSplit: `50/50 (FFY ${years[0]}) and 90/10 (FFY ${years[1]})`,
+        federalShare: Math.round(totalFederalShare),
+        state: 'Alaska',
+        stateShare: Math.round(totalStateShare)
+      });
 
       cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.waitForSave();

@@ -36,7 +36,7 @@ class PopulatePage {
     detailedDescription,
     supportingJustifications,
     supportsMedicaid
-  }) => {
+  } = {}) => {
     this.fillDate('Start date', startDate);
     this.fillDate('End date', endDate);
 
@@ -52,7 +52,7 @@ class PopulatePage {
     );
   };
 
-  fillOutcomeForm = ({ outcome, metrics }) => {
+  fillOutcomeForm = ({ outcome, metrics } = {}) => {
     cy.findByRole('button', { name: /Add Outcome/i }).click();
     this.fillTextField('ds-c-field', outcome, 0);
     metrics.forEach((metric, index) => {
@@ -64,7 +64,7 @@ class PopulatePage {
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
-  fillMilestoneForm = ({ milestone, targetDate }) => {
+  fillMilestoneForm = ({ milestone, targetDate } = {}) => {
     this.fillInputField('Name', milestone);
     cy.get('[class="ds-c-fieldset"]').within(() => {
       this.fillDate('Target completion date', targetDate);
@@ -82,7 +82,7 @@ class PopulatePage {
     hourly = false,
     FFYcosts,
     index
-  }) => {
+  } = {}) => {
     this.fillTextField('ds-c-field', name);
 
     this.fillDate('Contract start date', start);
@@ -121,7 +121,12 @@ class PopulatePage {
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
-  fillCostAllocation = ({ description, FFYdescriptions, costs, years }) => {
+  fillCostAllocation = ({
+    description,
+    FFYdescriptions,
+    costs,
+    years
+  } = {}) => {
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('cost-allocation-methodology-field', description);
 
@@ -134,7 +139,7 @@ class PopulatePage {
     });
   };
 
-  fillQuarter = (quarter, stateValue, contractorValue) => {
+  fillQuarter = ({ quarter, stateValue, contractorValue } = {}) => {
     const contractorInput = quarter + 4;
 
     cy.get('[class="budget-table"]').within(() => {
@@ -150,20 +155,32 @@ class PopulatePage {
     });
   };
 
-  checkQuarterSubtotal = (
-    stateString,
-    contractorString,
-    expectedState,
-    expectedContractor
-  ) => {
-    const stateVal = this.budgetPage.convertStringToNum(stateString);
-    const contractorVal = this.budgetPage.convertStringToNum(contractorString);
+  checkQuarterSubtotal = ({
+    stateTotal,
+    contractorTotal,
+    stateQuarterValues,
+    contractorQuarterValues
+  } = {}) => {
+    cy.get('[class="budget-table"]').within(() => {
+      cy.get('[data-cy="subtotal"]').then($td => {
+        expect($td.length).to.equal(12);
+        for (let quarter = 0; quarter < 4; quarter += 1) {
+          const expectedStateValue =
+            stateTotal * (stateQuarterValues[quarter] / 100);
+          const expectedContractorValue =
+            contractorTotal * (contractorQuarterValues[quarter] / 100);
 
-    expect(stateVal).to.be.closeTo(expectedState, 5);
-    expect(contractorVal).to.be.closeTo(expectedContractor, 5);
+          cy.wrap($td.eq(quarter)).shouldBeCloseTo(expectedStateValue, 5);
+          cy.wrap($td.eq(quarter + 4)).shouldBeCloseTo(
+            expectedContractorValue,
+            5
+          );
+        }
+      });
+    });
   };
 
-  checkPercentageSubtotal = (staff, contractor) => {
+  checkPercentageSubtotal = ({ staff, contractor } = {}) => {
     cy.get('[class="budget-table"]').within(() => {
       cy.get('[class="budget-table--number budget-table--subtotal"]')
         .eq(0)
