@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
@@ -19,7 +19,7 @@ import {
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
-const PersonForm = ({
+const PersonForm = forwardRef(({
   index,
   item: { costs, email, hasCosts, name, fte, position },
   setCost,
@@ -29,7 +29,19 @@ const PersonForm = ({
   setRole,
   setTime,
   years
-}) => {
+}, ref) => {
+  const handleUsingTheRef = () => {
+    console.log("useRef worked");
+  }
+  
+  useEffect(() => {
+    console.log("do i see ref", ref);
+  },[] )
+  
+  const handleSubmit = (e) => {
+    console.log("test");
+  }
+  
   const handleChange = action => ({ target: { value } }) => {
     action(index, value);
   };
@@ -49,7 +61,7 @@ const PersonForm = ({
   const primary = index === 0;
 
   return (
-    <Fragment>
+    <form ref={ref} onSubmit={handleSubmit}>
       <h4 className="ds-h4">
         {primary
           ? titleCase(t(`${tRoot}.labels.titlePrimary`))
@@ -64,37 +76,37 @@ const PersonForm = ({
         autoFocus
         name={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
-        value={name}
-        onChange={handleChange(setName)}
+        // value={name}
+        // onChange={handleChange(setName)}
       />
       <TextField
         name={`apd-state-profile-pocemail${index}`}
         label={t(`${tRoot}.labels.email`)}
-        value={email}
-        onChange={handleChange(setEmail)}
+        // value={email}
+        // onChange={handleChange(setEmail)}
       />
       <TextField
         name={`apd-state-profile-pocposition${index}`}
         label={t(`${tRoot}.labels.position`)}
-        value={position}
-        onChange={handleChange(setRole)}
+        // value={position}
+        // onChange={handleChange(setRole)}
       />
 
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
         <Choice
-          checked={!hasCosts}
+          // checked={!hasCosts}
           label="No"
-          name={`apd-state-profile-hascosts-no${index}`}
-          onChange={setPersonHasCosts(false)}
+          name={`apd-state-profile-hascosts-${index}`}
+          // onChange={setPersonHasCosts(false)}
           type="radio"
           value="no"
         />
         <Choice
-          checked={hasCosts}
+          // checked={hasCosts}
           label="Yes"
-          name={`apd-state-profile-hascosts-yes${index}`}
-          onChange={setPersonHasCosts(true)}
+          name={`apd-state-profile-hascosts-${index}`}
+          // onChange={setPersonHasCosts(true)}
           type="radio"
           value="yes"
           checkedChildren={
@@ -117,9 +129,9 @@ const PersonForm = ({
           }
         />
       </fieldset>
-    </Fragment>
+    </form>
   );
-};
+});
 PersonForm.propTypes = {
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({

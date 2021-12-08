@@ -1,5 +1,5 @@
 import { Alert, Button } from '@cmsgov/design-system';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, createRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const FormAndReviewItem = ({
@@ -9,9 +9,13 @@ const FormAndReviewItem = ({
   index,
   initialExpanded,
   onCancel,
+  onDoneClick,
   ...rest
 }) => {
+  
   const container = useRef(null);
+  const formRef = createRef();
+  
   const [collapsed, setCollapsed] = useState(!initialExpanded);
   const collapse = useCallback(() => {
     const { top } = container.current.getBoundingClientRect();
@@ -22,6 +26,11 @@ const FormAndReviewItem = ({
     setCollapsed(true);
   }, []);
   const expand = useCallback(() => setCollapsed(false), []);
+  
+  // const onDone = (e) => {
+  //   e.preventDefault();
+  //   console.log("onDone called with event:", e);
+  // }
 
   if (collapsed) {
     return (
@@ -33,7 +42,7 @@ const FormAndReviewItem = ({
 
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
-      <Expanded index={index} {...rest} collapse={collapse} />
+      <Expanded index={index} {...rest} collapse={collapse} ref={formRef} />
       <Button
         onClick={() => onCancel(index)}
         className="ds-u-margin-right--2"
@@ -43,9 +52,10 @@ const FormAndReviewItem = ({
       <Button
         id="form-and-review-list--done-btn"
         variation="primary"
-        onClick={collapse}
+        // type="submit"
+        onClick={(event) => formRef.submit(event)}
       >
-        Add
+        Done
       </Button>
       {extraButtons.map(({ onClick, text }) => (
         <Button
@@ -80,6 +90,7 @@ FormAndReviewItem.defaultProps = {
 };
 
 const FormAndReviewList = ({
+  createNew,
   addButtonText,
   allowDeleteAll,
   className,
@@ -88,6 +99,7 @@ const FormAndReviewList = ({
   extraItemButtons,
   list,
   noDataMessage,
+  onDoneClick,
   onAddClick,
   onDeleteClick,
   onCancelClick,
@@ -99,26 +111,36 @@ const FormAndReviewList = ({
   );
 
   const [hasAdded, setHasAdded] = useState(false);
+  
+  const [localList, setLocalList] = useState(list);
+  
   const addClick = e => {
     setHasAdded(true);
-    onAddClick(e);
+    const newListItem = createNew([2022], false);
+    setLocalList([...localList, newListItem]);
   };
+  
+  const cancelClick = index => {
+    const removed = localList.splice(index, index);
+    setLocalList(removed);
+  }
 
   return (
     <div className={combinedClassName}>
-      {list.length === 0 && noDataMessage !== false ? (
+      {localList.length === 0 && noDataMessage !== false ? (
         <Alert variation="error">{noDataMessage || 'This list is empty'}</Alert>
       ) : (
-        list.map((item, index) => (
+        localList.map((item, index) => (
           <FormAndReviewItem
             key={item.key}
             collapsedComponent={collapsed}
             expandedComponent={expanded}
             extraButtons={extraItemButtons}
             index={index}
-            initialExpanded={hasAdded && index === list.length - 1}
+            initialExpanded={hasAdded && index === localList.length - 1}
             item={item}
-            onCancel={onCancelClick}
+            onCancel={cancelClick}
+            onDoneClick={onDoneClick}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
                 ? () => onDeleteClick(index)
@@ -128,11 +150,9 @@ const FormAndReviewList = ({
           />
         ))
       )}
-      {onAddClick && (
-        <Button className="visibility--screen" onClick={addClick}>
-          {addButtonText || 'Add another'}
-        </Button>
-      )}
+      <Button className="visibility--screen" onClick={addClick}>
+        {addButtonText || 'Add another'}
+      </Button>
     </div>
   );
 };

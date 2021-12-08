@@ -3,11 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { ApdKeyPersonForm, ApdKeyPersonReview } from './ApdKeyPerson';
-import { addKeyPerson, removeKeyPerson } from '../actions/editApd';
+import { createKeyPerson, saveKeyPerson, editKeyPerson, removeKeyPerson } from '../actions/editApd';
 import FormAndReviewList from '../components/FormAndReviewList';
 import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 
-const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
+// Should we move this to a helper function since it's no longer
+// connected to redux? It's just creating the boilerplate object
+import { getKeyPersonnel } from '../reducers/apd';
+// 1. try useRef
+// 2. manage all of the state here
+
+const ApdStateKeyPersonnel = ({ save, edit, poc, remove, years }) => {  
   return (
     <FormAndReviewList
       addButtonText={
@@ -16,17 +22,18 @@ const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
       list={poc}
       collapsed={ApdKeyPersonReview}
       expanded={ApdKeyPersonForm}
-      onAddClick={() => add()}
-      onCancelClick={index => remove(index)}
+      createNew={getKeyPersonnel}
+      onSaveClick={() => save()}
       onDeleteClick={index => remove(index)}
-      noDataMessage={false}
       years={years}
     />
   );
 };
 
 ApdStateKeyPersonnel.propTypes = {
-  add: PropTypes.func.isRequired,
+  create: PropTypes.func.isRequired,
+  save: PropTypes.func.isRequired,
+  edit: PropTypes.func.isRequired,
   poc: PropTypes.arrayOf(PropTypes.object).isRequired,
   remove: PropTypes.func.isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired
@@ -37,8 +44,10 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
+// Todo: Add an edit
 const mapDispatchToProps = {
-  add: addKeyPerson,
+  save: saveKeyPerson,
+  edit: editKeyPerson,
   remove: removeKeyPerson
 };
 
