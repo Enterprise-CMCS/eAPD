@@ -14,9 +14,11 @@ export const testDefaultActivityDashboard = years => {
     cy.contains('Activity 2').should('not.exist');
 
     cy.contains('Delete').should('not.exist');
-    cy.contains('Edit').should('exist');
 
-    cy.contains('Edit').click();
+    cy.get('#activities')
+      .contains('Edit').should('exist')
+      .contains('Edit').click();
+    
     cy.url().should('contain', '/activity/0/overview');
 
     cy.waitForSave();

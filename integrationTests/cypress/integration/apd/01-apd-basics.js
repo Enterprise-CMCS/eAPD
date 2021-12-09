@@ -45,7 +45,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       const today = new Date();
 
-      cy.get('.apd--title').contains(
+      cy.get('#apd-header-info').contains(
         `Created: ${today.toLocaleDateString('en-US', options)}`
       );
 
