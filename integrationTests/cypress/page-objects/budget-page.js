@@ -99,7 +99,9 @@ class BudgetPage {
       .children($cells => {
         cy.wrap($cells.eq(0)).should('contain', 'Federal Share');
         cy.wrap($cells.eq(1)).shouldBeCloseTo(totalMedicaidCost);
+        // cell 2 is X
         cy.wrap($cells.eq(3)).should('have.text', `${federalShare}%`);
+        // cell 4 is =
         cy.wrap($cells.eq(5)).shouldBeCloseTo(fedTotal);
       })
       .next()

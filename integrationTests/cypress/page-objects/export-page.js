@@ -520,19 +520,23 @@ class ExportPage {
             `Total Computable Medicaid Cost$${addCommas(totalMedicaidCost)}`
           )
           .next()
-          .should(
-            'have.text',
-            `Federal Share$${addCommas(
-              totalMedicaidCost
-            )}×${federalShare}%=$${addCommas(fedTotal)}`
-          )
+          .children($cells => {
+            cy.wrap($cells.eq(0)).should('contain', 'Federal Share');
+            cy.wrap($cells.eq(1)).shouldBeCloseTo(totalMedicaidCost);
+            // cell 2 is X
+            cy.wrap($cells.eq(3)).should('have.text', `${federalShare}%`);
+            // cell 4 is =
+            cy.wrap($cells.eq(5)).shouldBeCloseTo(fedTotal);
+          })
           .next()
-          .should(
-            'have.text',
-            `State Share$${addCommas(
-              totalMedicaidCost
-            )}×${stateShare}%=$${addCommas(stateTotal)}`
-          );
+          .children($cells => {
+            cy.wrap($cells.eq(0)).should('contain', 'State Share');
+            cy.wrap($cells.eq(1)).shouldBeCloseTo(totalMedicaidCost);
+            // cell 2 is X
+            cy.wrap($cells.eq(3)).should('have.text', `${stateShare}%`);
+            // cell 4 is =
+            cy.wrap($cells.eq(5)).shouldBeCloseTo(stateTotal);
+          });
       });
   };
 
