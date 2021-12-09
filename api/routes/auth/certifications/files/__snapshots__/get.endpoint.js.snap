@@ -1,3 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`auth/certifications/files endpoints Get a file by fileId | GET /auth/certifications/:fileID when authenticated as a user with permission with a valid request 1`] = `"hello, this is downloaded"`;
+exports[`auth/certifications/files endpoints Get a file by fileId | GET /auth/certifications/:fileID when authenticated as a user with permission with a valid request 1`] = `
+"%PDF-1.5
+its a document
+%%EOF
+"
+`;

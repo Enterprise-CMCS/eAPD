@@ -9,9 +9,12 @@ on:
 jobs:
   cypress-run:
     environment: Preview
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     timeout-minutes: 150
     steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress Dependency

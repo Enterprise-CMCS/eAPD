@@ -128,6 +128,7 @@ export const testPrivateContractorCostsWithData = years => {
       // Add another private contractor
       cy.findByRole('button', { name: /Add Contractor/i }).click();
       cy.findByLabelText(/Private Contractor or Vendor Name/i).should('exist');
+
       populatePage.fillContractorForm({
         ...contractor2,
         hourly: true,
