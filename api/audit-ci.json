@@ -1,7 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1004946, 1006724],
+  "allowlist": [1004946, 1006724, 1006767],
   "_comment": {
     "1004946": {
       "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
@@ -19,6 +19,12 @@
       "advisory": "https://github.com/advisories/GHSA-896r-f27r-55mw",
       "module": "json-schema",
       "affects": ["tap@15.1.2 - testing"]
+    },
+    "1006767": {
+      "advisory": "https://github.com/advisories/GHSA-qrmm-w75w-3wpx",
+      "module": "swagger-ui-dist",
+      "affects": ["swagger-ui-express - is used in production"],
+      "remediation": "commented out swagger docs until they patch this issue"
     }
   },
   "registry": "https://registry.npmjs.org"
