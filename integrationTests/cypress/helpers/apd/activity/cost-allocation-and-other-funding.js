@@ -11,14 +11,16 @@ export const testDefaultCostAllocationAndOtherFunding = years => {
     activityPage = new ActivityPage();
   });
 
-  beforeEach(() => {
+  it('should display the default values for Cost Allocation and Other Funding', () => {
     cy.goToCostAllocationAndOtherFunding(0);
+
+    cy.findByRole('heading', {
+      name: /^Activity 1:/i,
+      level: 2
+    }).should('exist');
     cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
       'exist'
     );
-  });
-
-  it('should display the default values for Cost Allocation and Other Funding', () => {
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     activityPage.checkTinyMCE('cost-allocation-methodology-field', '');
 
@@ -32,10 +34,12 @@ export const testDefaultCostAllocationAndOtherFunding = years => {
         budgetPage.checkActivityTotalCostTable(0, 0, 0, i);
       });
     });
-  });
-};
 
-export const testDefaultCostAllocationAndOtherFundingExportView = () => {};
+    cy.waitForSave();
+  });
+
+  // TODO: export view tests
+};
 
 export const testCostAllocationAndOtherFundingWithData = years => {
   let populatePage;
@@ -57,6 +61,9 @@ export const testCostAllocationAndOtherFundingWithData = years => {
   describe('Activity 1', () => {
     beforeEach(() => {
       cy.goToCostAllocationAndOtherFunding(0);
+    });
+
+    it('fills out cost allocation page for activity 1', () => {
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
@@ -64,9 +71,6 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       cy.findByRole('heading', { name: /Cost Allocation/i, level: 3 }).should(
         'exist'
       );
-    });
-
-    it('fills out cost allocation page for activity 1', () => {
       const allocation = activityData.costAllocation[0];
 
       populatePage.fillCostAllocation(
@@ -75,33 +79,29 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         allocation.costs,
         years
       );
-      cy.waitForSave();
 
       // Deleted the first one from each catagory
       const staff = activityData.staff[1];
       const expenses = activityData.expenses[1];
-      const contractor = activityData.privateContractors[0];
-      cy.log({ staff, expenses, contractor });
+      const contractor = activityData.privateContractors[1];
 
       years.forEach((year, i) => {
-        cy.log(
-          `FFY Total: ${
-            staff.costs[i] * staff.ftes[i] +
-            expenses.costs[i] +
-            contractor.FFYcosts[1][i]
-          }`
-        );
         const FFYtotal =
           staff.costs[i] * staff.ftes[i] +
           expenses.costs[i] +
-          contractor.FFYcosts[1][i];
+          contractor.FFYcosts[i];
         budgetPage.checkActivityTotalCostTable(
           FFYtotal,
           allocation.costs[i],
           i
         );
       });
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
+
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
@@ -125,39 +125,25 @@ export const testCostAllocationAndOtherFundingWithData = years => {
         allocation.costs,
         years
       );
-      cy.waitForSave();
 
       const staff1 = activityData.staff[2];
       const staff2 = activityData.staff[3];
       const expense1 = activityData.expenses[2];
       const expense2 = activityData.expenses[3];
-      const contractor = activityData.privateContractors[1];
-      cy.log({ staff1, staff2, expense1, expense2, contractor });
+      const contractor1 = activityData.privateContractors[2];
+      const contractor2 = activityData.privateContractors[3];
 
       years.forEach((year, i) => {
-        cy.log(
-          `staffTotal ${
-            staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i]
-          }`
-        );
         const staffTotal =
           staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
 
-        cy.log(`expenseTotal ${expense1.costs[i] + expense2.costs[i]}`);
         const expenseTotal = expense1.costs[i] + expense2.costs[i];
 
         const contractorTotal =
-          contractor.FFYcosts[0][i] +
-          contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1];
-        cy.log(
-          `contractorTotal ${
-            contractor.FFYcosts[0][i] +
-            contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1]
-          }`
-        );
+          contractor1.FFYcosts[i] +
+          contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
 
         const FFYtotal = staffTotal + expenseTotal + contractorTotal;
-        cy.log(`FFYtotal ${staffTotal + expenseTotal + contractorTotal}`);
 
         budgetPage.checkActivityTotalCostTable(
           FFYtotal,
@@ -165,8 +151,11 @@ export const testCostAllocationAndOtherFundingWithData = years => {
           i
         );
       });
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
+
+    // TODO: export view tests
   });
 };
-
-export const testCostAllocationAndOtherFundingExportViewWithData = () => {};

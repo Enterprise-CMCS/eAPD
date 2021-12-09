@@ -1,4 +1,4 @@
-describe('state admin letters table', () => {
+describe('state admin letters table', { tags: ['@admin'] }, () => {
   const getInputByLabel = label => {
     return cy
       .contains('label', label)

@@ -11,14 +11,12 @@ export const testDefaultBudgetAndFFP = years => {
     budgetPage = new BudgetPage();
   });
 
-  beforeEach(() => {
+  it('should display the default Budget and FFP', () => {
     cy.goToBudgetAndFFP(0);
     cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
       'exist'
     );
-  });
 
-  it('should display the default Budget and FFP', () => {
     cy.then(() => {
       years.forEach(year => {
         cy.contains(`Budget for FFY ${year}`)
@@ -31,19 +29,8 @@ export const testDefaultBudgetAndFFP = years => {
             budgetPage.checkTotalComputableMedicaidCost(0);
             budgetPage.checkActivityTotalCostTable(0, 0, 1);
 
-            budgetPage.checkSplitFunctionality();
             budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
 
-            cy.get('[class="ds-c-field"]').select('75-25');
-            cy.waitForSave();
-            budgetPage.checkCostSplitTable(75, 25, 0, 0, 0);
-
-            cy.get('[class="ds-c-field"]').select('50-50');
-            cy.waitForSave();
-            budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
-
-            cy.get('[class="ds-c-field"]').select('90-10');
-            cy.waitForSave();
             budgetPage.checkQuarterTable('default', '', 0);
           });
       });
@@ -59,10 +46,12 @@ export const testDefaultBudgetAndFFP = years => {
         0
       );
     });
-  });
-};
 
-export const testDefaultBudgetAndFFPExportView = () => {};
+    cy.waitForSave();
+  });
+
+  // TODO: export view tests
+};
 
 export const testBudgetAndFFPWithData = years => {
   let populatePage;
@@ -84,6 +73,9 @@ export const testBudgetAndFFPWithData = years => {
   describe('Activity 1', () => {
     beforeEach(() => {
       cy.goToBudgetAndFFP(0);
+    });
+
+    it('Tests cost split table (Activity 1 - 2021)', () => {
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
@@ -91,25 +83,24 @@ export const testBudgetAndFFPWithData = years => {
       cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
         'exist'
       );
-    });
 
-    it('Tests cost split table (Activity 1 - 2021)', () => {
       const staff = activityData.staff[1];
       const expenses = activityData.expenses[1];
-      const contractor = activityData.privateContractors[0];
+      const contractor = activityData.privateContractors[1];
       const allocation = activityData.costAllocation[0];
 
-      let FFYtotal = budgetPage.computeFFYtotal(
+      let firstYearTotal = budgetPage.computeFFYtotal(
         staff.costs[0] * staff.ftes[0],
         expenses.costs[0],
-        contractor.FFYcosts[1][0]
+        contractor.FFYcosts[0]
       );
 
-      FFYtotal -= allocation.costs[0];
+      firstYearTotal -= allocation.costs[0];
 
+      cy.log('test splits and updating calculations');
       splits.forEach(split => {
         cy.get('[class="ds-c-field"]').eq(0).select(split);
-        cy.waitForSave();
+
         let fedSplit = 0;
         let stateSplit = 0;
         if (split === '90-10') {
@@ -126,20 +117,18 @@ export const testBudgetAndFFPWithData = years => {
         cy.get('[class="budget-table activity-budget-table"]')
           .eq(2)
           .within(() => {
-            budgetPage.checkCostSplitTable(fedSplit, stateSplit, FFYtotal);
+            budgetPage.checkCostSplitTable(
+              fedSplit,
+              stateSplit,
+              firstYearTotal
+            );
           });
       });
-    });
 
-    it('fills out Budget and FFP for activity 1', () => {
-      const staff = activityData.staff[1];
-      const expenses = activityData.expenses[1];
-      const contractor = activityData.privateContractors[0];
-      const allocation = activityData.costAllocation[0];
-
+      cy.log('fill in budget');
       years.forEach((year, i) => {
         cy.get('[class="ds-c-field"]').eq(i).select(splits[i]);
-        cy.waitForSave();
+
         cy.findAllByText(`Activity 1 Budget for FFY ${year}`)
           .parent()
           .parent()
@@ -159,8 +148,8 @@ export const testBudgetAndFFPWithData = years => {
                 );
 
                 budgetPage.checkTableRow(
-                  contractor.names[1],
-                  budgetPage.addCommas(contractor.FFYcosts[1][i])
+                  contractor.name,
+                  budgetPage.addCommas(contractor.FFYcosts[i])
                 );
 
                 budgetPage.checkSubtotalRows(year, 1);
@@ -218,19 +207,19 @@ export const testBudgetAndFFPWithData = years => {
             });
             budgetPage.checkEachQuarterSubtotal();
           });
-        cy.waitForSave();
       });
+
       // Calculate totals for final section
       let activityTotal = 0;
       let otherFundingTotal = 0;
       let federalShare = 0;
       let stateShare = 0;
 
-      for (let i = 0; i < years.length; i += 1) {
+      years.forEach((year, i) => {
         let FFYtotal = budgetPage.computeFFYtotal(
           staff.costs[i] * staff.ftes[i],
           expenses.costs[i],
-          contractor.FFYcosts[1][i]
+          contractor.FFYcosts[i]
         );
 
         activityTotal += FFYtotal;
@@ -241,7 +230,7 @@ export const testBudgetAndFFPWithData = years => {
         const splitMultipliers = activityData.splitConstants[i];
         federalShare += FFYtotal * splitMultipliers.fed;
         stateShare += FFYtotal * splitMultipliers.state;
-      }
+      });
 
       const totalMedicaid = activityTotal - otherFundingTotal;
       budgetPage.checkFFYtotals(
@@ -255,12 +244,20 @@ export const testBudgetAndFFPWithData = years => {
         'Alaska',
         budgetPage.addCommas(stateShare)
       );
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
+
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
     beforeEach(() => {
       cy.goToBudgetAndFFP(1);
+    });
+
+    it('fills out Budget and FFP for activity 2', () => {
       cy.findByRole('heading', {
         name: /^Activity 2:/i,
         level: 2
@@ -268,14 +265,13 @@ export const testBudgetAndFFPWithData = years => {
       cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
         'exist'
       );
-    });
 
-    xit('fills out Budget and FFP for activity 2', () => {
       const staff = activityData.staff[2];
       const staff2 = activityData.staff[3];
       const expenses = activityData.expenses[2];
       const expenses2 = activityData.expenses[3];
-      const contractor = activityData.privateContractors[1];
+      const contractor = activityData.privateContractors[2];
+      const contractor2 = activityData.privateContractors[3];
       const allocation = activityData.costAllocation[1];
 
       years.forEach((year, i) => {
@@ -310,14 +306,14 @@ export const testBudgetAndFFPWithData = years => {
                 );
 
                 budgetPage.checkTableRow(
-                  contractor.names[0],
-                  budgetPage.addCommas(contractor.FFYcosts[0][i])
+                  contractor.name,
+                  budgetPage.addCommas(contractor.FFYcosts[i])
                 );
 
                 budgetPage.checkTableRow(
-                  contractor.names[1],
+                  contractor2.name,
                   budgetPage.addCommas(
-                    contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1]
+                    contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
                   )
                 );
 
@@ -375,7 +371,6 @@ export const testBudgetAndFFPWithData = years => {
             });
             budgetPage.checkEachQuarterSubtotal();
           });
-        cy.waitForSave();
       });
 
       let activityTotal = 0;
@@ -383,12 +378,12 @@ export const testBudgetAndFFPWithData = years => {
       let federalShare = 0;
       let stateShare = 0;
 
-      for (let i = 0; i < years.length; i += 1) {
+      years.forEach((year, i) => {
         let FFYtotal = budgetPage.computeFFYtotal(
           staff.costs[i] * staff.ftes[i] + staff2.costs[i] * staff2.ftes[i],
           expenses.costs[i] + expenses2.costs[i],
-          contractor.FFYcosts[0][i] +
-            contractor.FFYcosts[1][i][0] * contractor.FFYcosts[1][i][1]
+          contractor.FFYcosts[i] +
+            contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1]
         );
 
         activityTotal += FFYtotal;
@@ -399,7 +394,7 @@ export const testBudgetAndFFPWithData = years => {
         const splitMultipliers = activityData.splitConstants[i + 1];
         federalShare += FFYtotal * splitMultipliers.fed;
         stateShare += FFYtotal * splitMultipliers.state;
-      }
+      });
 
       federalShare = Math.ceil(federalShare);
       stateShare = Math.floor(stateShare);
@@ -416,8 +411,11 @@ export const testBudgetAndFFPWithData = years => {
         'Alaska',
         budgetPage.addCommas(stateShare)
       );
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
+
+    // TODO: export view tests
   });
 };
-
-export const testBudgetAndFFPExportViewWithData = () => {};

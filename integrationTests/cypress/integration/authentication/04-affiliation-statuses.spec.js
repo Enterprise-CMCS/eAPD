@@ -1,6 +1,6 @@
 // affiliation-statuses.spec.js created with Cypress
 
-describe('Invalid Login Attempts', () => {
+describe('Invalid Login Attempts', { tags: ['@auth', '@affiliations'] }, () => {
   beforeEach(() => {
     cy.clearAuthCookies();
   });
