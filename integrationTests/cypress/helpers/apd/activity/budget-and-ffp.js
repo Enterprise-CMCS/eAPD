@@ -350,6 +350,9 @@ export const testBudgetAndFFPWithData = years => {
           });
       });
 
+      cy.log(`totalActivityTotalCost ${totalActivityTotalCost}`);
+      cy.log(`totalOtherFunding ${totalOtherFunding}`);
+      cy.log(`totalTotalMedicaidCost ${totalTotalMedicaidCost}`);
       cy.log(`totalFederalShare ${totalFederalShare}`);
       cy.log(`totalStateShare ${totalStateShare}`);
 
