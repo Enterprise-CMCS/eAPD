@@ -8,8 +8,9 @@ variable "mongo_initdb_root_password" {}
 variable "mongo_initdb_database" {}
 variable "mongo_database_username"{}
 variable "mongo_database_password" {}
-variable "mongo_location" {}
+variable "mongo_url" {}
 variable "postgres_url" {}
+#variable "security_group_id" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -32,6 +33,7 @@ source "amazon-ebs" "Golden_Image" {
     associate_public_ip_address = true
     vpc_id = var.vpc_id
     subnet_id = var.subnet_id
+#    security_group_id = var.security_group_id
 }
 
 build {
@@ -47,7 +49,7 @@ build {
             "MONGO_INITDB_DATABASE=${var.mongo_initdb_database}",
             "MONGO_DATABASE_USERNAME=${var.mongo_database_username}",
             "MONGO_DATABASE_PASSWORD=${var.mongo_database_password}",
-            "MONGO_LOCATION=${var.mongo_location}",
+            "MONGO_URL=${var.mongo_url}",
             "POSTGRES_URL=${var.postgres_url}"
         ]
         script = "./mongo.sh"

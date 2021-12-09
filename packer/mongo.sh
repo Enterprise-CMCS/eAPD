@@ -9,6 +9,19 @@ curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infra
 yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
 yum install newrelic-infra -y
 
+# Setup PostGres for Mongo Migraton
+yum -y install postgresql-server
+
+postgresql-setup initdb
+echo "
+# TYPE    DATABASE    USER    ADDRESS         METHODS
+local     all         all                     peer
+host      all         all     127.0.0.1/32    password
+host      all         all     ::1/128         password
+" > /var/lib/pgsql/data/pg_hba.conf
+systemctl start postgresql
+systemctl enable postgresql
+
 # Setup Mongo Repo
 touch /etc/yum.repos.d/mongodb-org-4.4.repo
 echo "
@@ -58,18 +71,30 @@ systemctl start mongod
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
+cd /home/ec2-user
 export MONGO_DATABASE="$mongo_database"
 export MONGO_INITDB_ROOT_USERNAME="$mongo_initdb_root_username"
 export MONGO_INITDB_ROOT_PASSWORD="$mongo_initdb_root_password"
 export MONGO_INITDB_DATABASE="$mongo_initdb_database"
 export MONGO_DATABASE_USERNAME="$mongo_database_username"
 export MONGO_DATABASE_PASSWORD="$mongo_database_password"
-export MONGO_LOCATION="$mongo_location"
-export MONGO_URL="mongodb://$mongo_database_username:$mongo_database_password@$mongo_location"
+export MONGO_URL="$mongo_url"
 export POSTGRES_URL="$postgres_url"
 
+#!/bin/bash
+# Prepare PostGres test database
+sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
+sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
+
+#Preparing Mongo DB Users
+cat <<MONGOUSERSEED > mongo-init.sh
+mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
+MONGOUSERSEED
+
+#Migrate from PostGres
 # Seed eAPD Mongo Database
-cd ~
+cd /home/ec2-user
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
@@ -84,15 +109,10 @@ nvm alias default 14
 git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
 cd eAPD/api
 npm ci
-NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
+#NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
+NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=localhost npm run migrate
 
-#Preparing Mongo DB Users
-cd ~
-cat <<MONGOUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
-MONGOUSERSEED
+cd /home/ec2-user
 E_USER
 
 # Harden & Restart Mongo
@@ -100,7 +120,7 @@ sh /home/ec2-user/mongo-init.sh
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
-rm mongo-init.sh
+rm /home/ec2-user/mongo-init.sh
 
 # Configure CloudWatch Agent
 mkdir -p /opt/aws/amazon-cloudwatch-agent/doc/
