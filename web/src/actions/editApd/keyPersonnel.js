@@ -16,6 +16,7 @@ export const createKeyPerson = (years, isPrimary) => {
 export const saveKeyPerson = (index, data) => (dispatch, getState) => {
   const previousState = getState();
   
+  console.log("index", index);
   if(previousState.apd.data.keyPersonnel[index] === undefined) {
     dispatch({
       type: ADD_APD_ITEM,
@@ -24,9 +25,10 @@ export const saveKeyPerson = (index, data) => (dispatch, getState) => {
     });
   }
   
+  const indexCalculated = previousState.apd.data.keyPersonnel.length;
   dispatch({
     type: EDIT_APD,
-    path: `/keyPersonnel/${index}`,
+    path: `/keyPersonnel/${indexCalculated}`,
     value: data
   });
   
