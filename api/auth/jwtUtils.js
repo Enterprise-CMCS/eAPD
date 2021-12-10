@@ -127,7 +127,6 @@ const exchangeToken = async (
 };
 
 const verifyExpiration = async (
-  req,
   user,
   stateId,
   {
@@ -172,6 +171,9 @@ const changeState = async (
   const newUser = JSON.parse(JSON.stringify(user));
   newUser.state = await getStateById_(stateId);
   newUser.state.id = stateId;
+  
+  await verifyExpiration(user, stateId);
+  
   const permissions = await getUserPermissionsForStates_(user.id);
   newUser.activities = permissions[stateId];
   newUser.permissions = [{[stateId]: permissions[stateId]},]
