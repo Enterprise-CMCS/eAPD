@@ -86,12 +86,6 @@ export POSTGRES_URL="$postgres_url"
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
-#Preparing Mongo DB Users
-cat <<MONGOUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
-MONGOUSERSEED
-
 #Migrate from PostGres
 # Seed eAPD Mongo Database
 cd /home/ec2-user
@@ -107,12 +101,16 @@ nvm install 14
 nvm alias default 14
 
 git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
-cd eAPD/api
+cd /home/ec2-user/eAPD/api
 npm ci
-#NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
-NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=localhost npm run migrate
+NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
+#NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run migrate
 
-cd /home/ec2-user
+#Preparing Mongo DB Users
+cat <<MONGOUSERSEED > mongo-init.sh
+mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
+MONGOUSERSEED
 E_USER
 
 # Harden & Restart Mongo
