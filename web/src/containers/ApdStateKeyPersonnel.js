@@ -10,8 +10,6 @@ import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 // Should we move this to a helper function since it's no longer
 // connected to redux? It's just creating the boilerplate object
 import { getKeyPersonnel } from '../reducers/apd';
-// 1. try useRef
-// 2. manage all of the state here
 
 const ApdStateKeyPersonnel = ({ save, edit, poc, remove, years }) => {  
   return (
@@ -31,7 +29,6 @@ const ApdStateKeyPersonnel = ({ save, edit, poc, remove, years }) => {
 };
 
 ApdStateKeyPersonnel.propTypes = {
-  create: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
   edit: PropTypes.func.isRequired,
   poc: PropTypes.arrayOf(PropTypes.object).isRequired,

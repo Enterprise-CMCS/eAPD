@@ -1,5 +1,5 @@
 import { Alert, Button } from '@cmsgov/design-system';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const FormAndReviewItem = ({
@@ -9,11 +9,13 @@ const FormAndReviewItem = ({
   index,
   initialExpanded,
   onCancel,
+  item,
+  years,
   ...rest
 }) => {
   const container = useRef(null);
   const formRef = useRef(null);
-
+  
   const [collapsed, setCollapsed] = useState(!initialExpanded);
   const collapse = useCallback(() => {
     const { top } = container.current.getBoundingClientRect();
@@ -25,32 +27,30 @@ const FormAndReviewItem = ({
   }, []);
   const expand = useCallback(() => setCollapsed(false), []);
 
-  // const onDone = (e) => {
-  //   e.preventDefault();
-  //   console.log("onDone called with event:", e);
-  // }
-
   if (collapsed) {
     return (
       <div ref={container} className="form-and-review-list--item__collapsed">
-        <Collapsed index={index} {...rest} expand={expand} />
+        <Collapsed index={index} years={years} item={item} {...rest} expand={expand} />
       </div>
     );
   }
 
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
-      <Expanded index={index} ref={formRef} {...rest} collapse={collapse} />
-      <Button onClick={() => onCancel(index)} className="ds-u-margin-right--2">
+      <Expanded index={index} ref={formRef} years={years} item={item} {...rest} collapse={collapse} />
+      <Button onClick={() => collapse()} className="ds-u-margin-right--2">
         Cancel
       </Button>
       <Button
         id="form-and-review-list--done-btn"
         variation="primary"
-        // type="submit"
-        onClick={() => formRef.current.dispatchEvent(new Event('submit'))}
+        onClick={() => {
+          collapse();
+          formRef.current.dispatchEvent(new Event('submit'));
+          }
+        }
       >
-        Done
+        Save
       </Button>
       {extraButtons.map(({ onClick, text }) => (
         <Button
@@ -95,26 +95,27 @@ const FormAndReviewList = ({
   onAddClick,
   onDeleteClick,
   onCancelClick,
+  years,
   ...rest
 }) => {
+
+  const [hasAdded, setHasAdded] = useState(false);
+
+  const [localList, setLocalList] = useState(list);
+  
+  useEffect(() => {
+    setLocalList(list)
+  }, [list])
+  
   const combinedClassName = useMemo(
     () => ['form-and-review-list', className].join(' '),
     className
   );
 
-  const [hasAdded, setHasAdded] = useState(false);
-
-  const [localList, setLocalList] = useState(list);
-
   const addClick = e => {
     setHasAdded(true);
-    const newListItem = createNew([2022], false);
+    const newListItem = createNew(years, false); // this wont work since its specific to keyPersonnel
     setLocalList([...localList, newListItem]);
-  };
-
-  const cancelClick = index => {
-    const removed = localList.splice(index, index);
-    setLocalList(removed);
   };
 
   return (
@@ -131,13 +132,13 @@ const FormAndReviewList = ({
             index={index}
             initialExpanded={hasAdded && index === localList.length - 1}
             item={item}
-            onCancel={cancelClick}
             onDoneClick={onDoneClick}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
                 ? () => onDeleteClick(index)
                 : null
             }
+            years={years}
             {...rest}
           />
         ))

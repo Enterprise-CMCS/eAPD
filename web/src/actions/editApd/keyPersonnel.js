@@ -13,13 +13,24 @@ export const createKeyPerson = (years, isPrimary) => {
 /**
  * Save key person to the APD
  */
-export const saveKeyPerson = () => (dispatch, getState, data) => {
+export const saveKeyPerson = (index, data) => (dispatch, getState) => {
+  const previousState = getState();
+  
+  if(previousState.apd.data.keyPersonnel[index] === undefined) {
+    dispatch({
+      type: ADD_APD_ITEM,
+      path: '/keyPersonnel/-',
+      state: getState()
+    });
+  }
+  
   dispatch({
-    type: ADD_APD_ITEM,
-    path: '/keyPersonnel/-',
-    state: getState(),
+    type: EDIT_APD,
+    path: `/keyPersonnel/${index}`,
     value: data
   });
+  
+  dispatch(updateBudget());
 };
 
 /**

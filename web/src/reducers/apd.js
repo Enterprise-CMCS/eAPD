@@ -270,17 +270,14 @@ export const getAPDYearRange = ({
     ? `${years[0]}${years.length > 1 ? `-${years[years.length - 1]}` : ''}`
     : '';
 
-export const getPatchesForAddingItem = (state, path) => {
+export const getPatchesForAddingItem = (state, path, data) => {
   switch (path) {
     case '/keyPersonnel/-':
       return [
         {
           op: 'add',
           path,
-          value: getKeyPersonnel(
-            state.data.years,
-            !state.data.keyPersonnel || state.data.keyPersonnel.length === 0
-          )
+          value: data
         }
       ];
     case '/activities/-':
