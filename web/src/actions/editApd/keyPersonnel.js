@@ -16,8 +16,14 @@ export const createKeyPerson = (years, isPrimary) => {
 export const saveKeyPerson = (index, data) => (dispatch, getState) => {
   const previousState = getState();
   
+  // Use the provided index unless we are creating a new item in the array
+  // If its a newly created item set it to the length which will be the latest
+  // added item
+  let indexCalculated = index;
   console.log("index", index);
+  
   if(previousState.apd.data.keyPersonnel[index] === undefined) {
+    indexCalculated = previousState.apd.data.keyPersonnel.length;
     dispatch({
       type: ADD_APD_ITEM,
       path: '/keyPersonnel/-',
@@ -25,7 +31,6 @@ export const saveKeyPerson = (index, data) => (dispatch, getState) => {
     });
   }
   
-  const indexCalculated = previousState.apd.data.keyPersonnel.length;
   dispatch({
     type: EDIT_APD,
     path: `/keyPersonnel/${indexCalculated}`,
