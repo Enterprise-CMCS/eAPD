@@ -16,7 +16,8 @@ locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
 source "amazon-ebs" "Golden_Image" {
     ami_name      = "eAPD Staging Mongo AMI - ${local.timestamp}"
-    instance_type = "t3.micro"
+#    instance_type = "t3.micro"
+    instance_type = "t3.small"
     access_key    = ""
     secret_key    = ""
     region        = ""

@@ -103,12 +103,14 @@ nvm alias default 14
 git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
 cd /home/ec2-user/eAPD/api
 npm ci
-NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
+#NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
 #NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run migrate
 
 #Preparing Mongo DB Users
+cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
 mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
 mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 E_USER
