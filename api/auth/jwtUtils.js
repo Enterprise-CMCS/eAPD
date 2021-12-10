@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
-const logger = require('../logger')('jwtUtils');
 const isPast = require('date-fns/isPast');
+const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID, updateAuthAffiliation } = require('../db');
-const { getStateById } = require('../db/states.js');
+const { getStateById } = require('../db/states');
 const { 
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getAffiliationByState: actualGetAffiliationByState,
@@ -137,8 +137,6 @@ const verifyExpiration = async (
 ) => {
   const stateAffiliation = await getAffiliationByState_(user.id, stateId);
   
-  console.log("stateAffiliation", stateAffiliation);
-  
   if (stateAffiliation.expiration === null) {
     return null;
   }
@@ -152,10 +150,10 @@ const verifyExpiration = async (
       stateId: stateAffiliation.stateId,
       ffy: null
     })
-    .then((res) => {
-      return { error: null };
+    .then(() => {
+      return null;
     })
-    .catch(e => { error: `Error updating expired affiliation: ${e}` });
+    .catch(e => `Error updating expired affiliation: ${e}`);
   }
     
   return null;

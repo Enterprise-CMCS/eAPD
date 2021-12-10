@@ -15,8 +15,7 @@ module.exports = (app, {changeState = cs, verifyExpiration = ve } = {}) => {
         }
         else{
           res.status(403).send()
-        }        
+        }
       })
-      .catch(error => console.log("hit the error for verifyExpiration"))    
   });
 };
