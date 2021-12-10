@@ -71,8 +71,8 @@ export const testAPDOverviewWithData = () => {
     });
 
     cy.then(() => {
-      cy.get('[class="ds-h1 apd--title"]').should('contain', allYears[0]);
-      cy.get('[class="ds-h1 apd--title"]').should(
+      cy.get('#apd-header-info').should('contain', allYears[0]);
+      cy.get('#apd-header-info').should(
         'contain',
         allYears[allYears.length - 1]
       );
@@ -89,7 +89,7 @@ export const testAPDOverviewWithData = () => {
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(
         'be.checked'
       );
-      cy.get('[class="ds-h1 apd--title"]').should(
+      cy.get('#apd-header-info').should(
         'contain',
         allYears[allYears.length - 1]
       );
@@ -106,7 +106,7 @@ export const testAPDOverviewWithData = () => {
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(
         'not.be.checked'
       );
-      cy.get('[class="ds-h1 apd--title"]').should(
+      cy.get('#apd-header-info').should(
         'not.contain',
         allYears[allYears.length - 1]
       );
@@ -134,14 +134,16 @@ export const testAPDOverviewWithData = () => {
   });
 
   it('should display the correct values in the export view', () => {
+    const numberOfYears = years.length;
+    const yearRange = [years[0], years[numberOfYears - 1]];
     cy.goToExportView();
 
     // FFY Check
     cy.then(() => {
-      years.forEach((year, i) => {
+      yearRange.forEach((y, i) => {
         cy.get('[class="ds-h1 ds-u-margin-top--2"]').should(
           'contain',
-          years[i]
+          y[i]
         );
       });
     });

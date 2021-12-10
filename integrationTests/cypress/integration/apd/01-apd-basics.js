@@ -286,6 +286,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@primaryContactVals').contains('Edit').should('exist');
 
       cy.log('Add blank non-primary key personnel');
+      cy.reload(); /* Needs to be addressed */
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
       cy.findByRole('button', { name: /Done/i }).click();
 
@@ -313,6 +314,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@personnelVals').contains('Edit').should('exist');
 
       cy.log('Add blank key personnel that is chargeable to the project');
+      cy.reload(); /* Needs to be addressed */
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
       // Have to force check; cypress does not think radio buttons are visible
       cy.get('input[type="radio"][value="yes"]')
@@ -830,6 +832,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.waitForSave();
         cy.contains('Delete Key Personnel?').should('not.exist');
 
+        cy.reload();
         cy.get('.form-and-review-list')
           .findByRole('heading', { name })
           .should('not.exist');
