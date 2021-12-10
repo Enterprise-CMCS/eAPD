@@ -108,9 +108,11 @@ npm ci
 
 #Preparing Mongo DB Users
 cd ~
-cat <<MONGOUSERSEED > mongo-init.sh
+cat <<MONGOROOTUSERSEED > mongo-init.sh
 mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+MONGOROOTUSERSEED
 NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
+cat <<MONGOROOTUSERSEED > mongo-user.sh
 mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 E_USER
@@ -120,6 +122,7 @@ sh /home/ec2-user/mongo-init.sh
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
+rm /home/ec2-user/mongo-user.sh
 rm /home/ec2-user/mongo-init.sh
 
 # Configure CloudWatch Agent
