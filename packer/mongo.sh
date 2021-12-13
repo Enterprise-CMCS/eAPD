@@ -111,14 +111,19 @@ cd ~
 cat <<MONGOROOTUSERSEED > mongo-init.sh
 mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
 MONGOROOTUSERSEED
+cd ~/eAPD/api
+sh /home/ec2-user/mongo-init.sh
 NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
+#NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run migrate
+cd ~
 cat <<MONGOROOTUSERSEED > mongo-user.sh
 mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
+sh /home/ec2-user/mongo-user.sh
 E_USER
 
 # Harden & Restart Mongo
-sh /home/ec2-user/mongo-init.sh
+#sh /home/ec2-user/mongo-init.sh
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
