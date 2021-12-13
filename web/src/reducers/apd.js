@@ -1,5 +1,5 @@
 import u from 'updeep';
-import { applyPatch } from 'fast-json-patch';
+import { apply_patch as applyPatch } from 'jsonpatch';
 
 import {
   contractorDefaultHourly,
@@ -326,13 +326,13 @@ const reducer = (state = initialState, action) => {
       const patches = getPatchesForAddingItem(state, action.path);
       return {
         ...state,
-        data: applyPatch(state.data, patches).newDocument
+        data: applyPatch(state.data, patches)
       };
     }
 
     case ADD_APD_YEAR: {
       const patches = getPatchesToAddYear(state, action.value);
-      return { ...state, data: applyPatch(state.data, patches).newDocument };
+      return { ...state, data: applyPatch(state.data, patches) };
     }
 
     case EDIT_APD: {
@@ -344,7 +344,7 @@ const reducer = (state = initialState, action) => {
             path: action.path,
             value: action.value
           }
-        ]).newDocument
+        ])
       };
     }
 
@@ -369,13 +369,13 @@ const reducer = (state = initialState, action) => {
             op: 'remove',
             path: action.path
           }
-        ]).newDocument
+        ])
       };
     }
 
     case REMOVE_APD_YEAR: {
       const patches = getPatchesToRemoveYear(state, action.value);
-      return { ...state, data: applyPatch(state.data, patches).newDocument };
+      return { ...state, data: applyPatch(state.data, patches) };
     }
 
     case CREATE_APD_SUCCESS:
