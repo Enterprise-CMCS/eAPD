@@ -11,7 +11,7 @@ const {
 // list so it will be the first affiliation loaded into the
 // user, change once user is set
 describe('Affiliations endpoint | GET', () => {
-  const api = login('all-permissions');
+  const api = login('state-admin');
   const db = getDB();
   beforeAll(() => setupDB(db));
   afterAll(() => teardownDB(db));
@@ -46,5 +46,4 @@ describe('Affiliations endpoint | GET', () => {
       expect(response.status).toEqual(404);
     });
   });
-
 });
