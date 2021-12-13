@@ -291,7 +291,7 @@ jobs:
           name: validate
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker create -v /openapi --name openapi alpine /bin/true
+            docker create -v /openapi --name openapi alpine:3 /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
 
