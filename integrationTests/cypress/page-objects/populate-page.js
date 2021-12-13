@@ -161,14 +161,22 @@ class PopulatePage {
     stateQuarterValues,
     contractorQuarterValues
   } = {}) => {
+    cy.log({
+      stateTotal,
+      contractorTotal,
+      stateQuarterValues,
+      contractorQuarterValues
+    });
     cy.get('[class="budget-table"]').within(() => {
       cy.get('[data-cy="subtotal"]').then($td => {
         expect($td.length).to.equal(12);
         for (let quarter = 0; quarter < 4; quarter += 1) {
-          const expectedStateValue =
-            stateTotal * (stateQuarterValues[quarter] / 100);
-          const expectedContractorValue =
-            contractorTotal * (contractorQuarterValues[quarter] / 100);
+          const expectedStateValue = Math.round(
+            stateTotal * (stateQuarterValues[quarter] / 100)
+          );
+          const expectedContractorValue = Math.round(
+            contractorTotal * (contractorQuarterValues[quarter] / 100)
+          );
 
           cy.wrap($td.eq(quarter)).shouldBeCloseTo(expectedStateValue, 5);
           cy.wrap($td.eq(quarter + 4)).shouldBeCloseTo(

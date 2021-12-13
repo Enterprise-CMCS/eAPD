@@ -21,22 +21,22 @@ export const testDefaultBudgetAndFFP = years => {
     splits.forEach(split => {
       cy.get('[class="ds-c-field"]').eq(0).select(split);
 
-      let federalShare = 0;
-      let stateShare = 0;
+      let federalPercent = 0;
+      let statePercent = 0;
       if (split === '90-10') {
-        federalShare = 90;
-        stateShare = 10;
+        federalPercent = 0.9;
+        statePercent = 0.1;
       } else if (split === '75-25') {
-        federalShare = 75;
-        stateShare = 25;
+        federalPercent = 0.75;
+        statePercent = 0.25;
       } else if (split === '50-50') {
-        federalShare = 50;
-        stateShare = 50;
+        federalPercent = 0.5;
+        statePercent = 0.5;
       }
 
       budgetPage.checkCostSplitTable({
-        federalShare,
-        stateShare,
+        federalPercent,
+        statePercent,
         totalMedicaidCost: 0
       });
     });
@@ -74,8 +74,8 @@ export const testDefaultBudgetAndFFP = years => {
             });
 
             budgetPage.checkCostSplitTable({
-              federalShare: 90,
-              stateShare: 10,
+              federalPercent: 0.9,
+              statePercent: 0.1,
               totalMedicaidCost: 0
             });
             budgetPage.checkQuarterTable();
@@ -288,18 +288,23 @@ export const testBudgetAndFFPWithData = years => {
             });
 
             // Federal Share, State Share
-            const split = activityData.splitConstants[i];
-            cy.log(`split ${JSON.stringify(split)}`);
-            totalFederalShare += totalMedicaidCost * split.fed;
+            const {
+              split,
+              fed: federalPercent,
+              state: statePercent
+            } = activityData.splitConstants[i];
+            const federalShare = totalMedicaidCost * federalPercent;
+            totalFederalShare += federalShare;
             cy.log(`totalFederalShare ${totalFederalShare}`);
-            totalStateShare += totalMedicaidCost * split.state;
+            const stateShare = totalMedicaidCost * statePercent;
+            totalStateShare += stateShare;
             cy.log(`totalStateShare ${totalStateShare}`);
 
-            cy.get('select.ds-c-field').select(split.split);
+            cy.get('select.ds-c-field').select(split);
 
             budgetPage.checkCostSplitTable({
-              federalShare: split.fed * 100,
-              stateShare: split.state * 100,
+              federalPercent,
+              statePercent,
               totalMedicaidCost
             });
 
@@ -666,8 +671,8 @@ export const testBudgetAndFFPWithData = years => {
             });
 
             budgetPage.checkCostSplitTable({
-              federalShare: split.fed * 100,
-              stateShare: split.state * 100,
+              federalPercent: split.fed,
+              statePercent: split.state,
               totalMedicaidCost
             });
 

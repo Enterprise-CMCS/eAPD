@@ -83,13 +83,17 @@ class BudgetPage {
       .should('have.value', '90-10');
   };
 
-  checkCostSplitTable = ({ federalShare, stateShare, totalMedicaidCost }) => {
-    if (federalShare + stateShare !== 100) {
+  checkCostSplitTable = ({
+    federalPercent,
+    statePercent,
+    totalMedicaidCost
+  }) => {
+    if (federalPercent + statePercent !== 1) {
       throw new Error('Activity Table Calculation Failure');
     }
 
-    const fedTotal = federalShare * 0.01 * totalMedicaidCost;
-    const stateTotal = stateShare * 0.01 * totalMedicaidCost;
+    const fedTotal = federalPercent * totalMedicaidCost;
+    const stateTotal = statePercent * totalMedicaidCost;
 
     cy.get('[class="budget-table--subtotal budget-table--row__header"]')
       .contains(/^Total Computable Medicaid Cost$/i)
@@ -100,7 +104,7 @@ class BudgetPage {
         cy.wrap($cells.eq(0)).should('contain', 'Federal Share');
         cy.wrap($cells.eq(1)).shouldBeCloseTo(totalMedicaidCost);
         // cell 2 is X
-        cy.wrap($cells.eq(3)).should('have.text', `${federalShare}%`);
+        cy.wrap($cells.eq(3)).should('have.text', `${federalPercent * 100}%`);
         // cell 4 is =
         cy.wrap($cells.eq(5)).shouldBeCloseTo(fedTotal);
       })
@@ -109,7 +113,7 @@ class BudgetPage {
         cy.wrap($cells.eq(0)).should('contain', 'State Share');
         cy.wrap($cells.eq(1)).shouldBeCloseTo(totalMedicaidCost);
         // cell 2 is X
-        cy.wrap($cells.eq(3)).should('have.text', `${stateShare}%`);
+        cy.wrap($cells.eq(3)).should('have.text', `${statePercent * 100}%`);
         // cell 4 is =
         cy.wrap($cells.eq(5)).shouldBeCloseTo(stateTotal);
       });
