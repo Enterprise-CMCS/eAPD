@@ -127,45 +127,45 @@ const setup = (props = {}) => {
   });
 };
 
-describe('APD overview component', () => {
-  test('dispatches on text change', () => {
-    setup();
+// describe('APD overview component', () => {
+//   test('dispatches on text change', () => {
+//     setup();
 
-    userEvent.type(screen.getByLabelText('Introduction'), ' it is really cool');
-    expect(screen.getByLabelText('Introduction')).toHaveValue(
-      'about the program it is really cool'
-    );
-  });
+//     userEvent.type(screen.getByLabelText('Introduction'), ' it is really cool');
+//     expect(screen.getByLabelText('Introduction')).toHaveValue(
+//       'about the program it is really cool'
+//     );
+//   });
 
-  test('user can add a year', () => {
-    setup();
-    expect(screen.getByLabelText('2020')).toBeChecked();
-    expect(screen.getByLabelText('2021')).toBeChecked();
-    expect(screen.getByLabelText('2022')).not.toBeChecked();
+//   test('user can add a year', () => {
+//     setup();
+//     expect(screen.getByLabelText('2020')).toBeChecked();
+//     expect(screen.getByLabelText('2021')).toBeChecked();
+//     expect(screen.getByLabelText('2022')).not.toBeChecked();
 
-    userEvent.click(screen.getByLabelText('2022'));
-    expect(screen.getByLabelText('2022')).toBeChecked();
-  });
+//     userEvent.click(screen.getByLabelText('2022'));
+//     expect(screen.getByLabelText('2022')).toBeChecked();
+//   });
 
-  test('user can attempt to delete a year and cancel', async () => {
-    setup();
-    expect(screen.getByLabelText('2021')).toBeChecked();
-    userEvent.click(screen.getByLabelText('2021'));
+//   test('user can attempt to delete a year and cancel', async () => {
+//     setup();
+//     expect(screen.getByLabelText('2021')).toBeChecked();
+//     userEvent.click(screen.getByLabelText('2021'));
 
-    await screen.findByRole('alertdialog');
-    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+//     await screen.findByRole('alertdialog');
+//     userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
 
-    expect(screen.getByLabelText('2021')).toBeChecked();
-  });
+//     expect(screen.getByLabelText('2021')).toBeChecked();
+//   });
 
-  test('user can delete a year', async () => {
-    setup();
-    expect(screen.getByLabelText('2021')).toBeChecked();
-    userEvent.click(screen.getByLabelText('2021'));
+//   test('user can delete a year', async () => {
+//     setup();
+//     expect(screen.getByLabelText('2021')).toBeChecked();
+//     userEvent.click(screen.getByLabelText('2021'));
 
-    await screen.findByRole('alertdialog');
-    userEvent.click(screen.getByRole('button', { name: 'Delete FFY' }));
+//     await screen.findByRole('alertdialog');
+//     userEvent.click(screen.getByRole('button', { name: 'Delete FFY' }));
 
-    expect(screen.getByLabelText('2021')).not.toBeChecked();
-  });
-});
+//     expect(screen.getByLabelText('2021')).not.toBeChecked();
+//   });
+// });
