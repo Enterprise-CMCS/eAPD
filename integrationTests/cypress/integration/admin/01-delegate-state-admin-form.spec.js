@@ -121,13 +121,9 @@ describe('adding and removing state admin delegation forms', () => {
           // all searches are automatically rooted to the found tr element
           cy.get('td').eq(6).contains('button', 'Delete').click();
         });
-
-      
-      cy.contains('Delete Certification?');
-      
-      cy.wait(5000);
       
       cy.get('#react-aria-modal-dialog').within(() => {
+        cy.contains('Delete Certification?').should('be.visible');
         cy.get('button').contains('Delete').click({force: true});
       });
 

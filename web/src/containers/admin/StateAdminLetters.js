@@ -412,13 +412,6 @@ const StateAdminLetters = () => {
           onDelete={handleDeleteConfirmationSubmit}
         />
       )}
-      {showDeleteCertificationDialog && (
-        <DeleteModal
-          objType="Certification"
-          onCancel={handleHideDeleteCertificationDialog}
-          onDelete={handleDeleteConfirmationSubmit}
-        />
-      )}
     </div>
   );
 };
