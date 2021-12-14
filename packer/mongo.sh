@@ -71,15 +71,17 @@ systemctl start mongod
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
-cd /home/ec2-user
-export MONGO_DATABASE="$mongo_database"
-export MONGO_INITDB_ROOT_USERNAME="$mongo_initdb_root_username"
-export MONGO_INITDB_ROOT_PASSWORD="$mongo_initdb_root_password"
-export MONGO_INITDB_DATABASE="$mongo_initdb_database"
-export MONGO_DATABASE_USERNAME="$mongo_database_username"
-export MONGO_DATABASE_PASSWORD="$mongo_database_password"
-export MONGO_URL="$mongo_url"
-export POSTGRES_URL="$postgres_url"
+cd ~
+export MONGO_DATABASE="$staging_mongo_database"
+export MONGO_INITDB_ROOT_USERNAME="$staging_mongo_initdb_root_username"
+export MONGO_INITDB_ROOT_PASSWORD="$staging_mongo_initdb_root_password"
+export MONGO_INITDB_DATABASE="$staging_mongo_initdb_database"
+export MONGO_DATABASE_USERNAME="$staging_mongo_database_username"
+export MONGO_DATABASE_PASSWORD="$staging_mongo_database_password"
+export MONGO_URL="$staging_mongo_admin_url"
+export DATABASE_URL="$staging_database_url"
+export OKTA_DOMAIN="$staging_okta_domain"
+export OKTA_API_KEY="$staging_okta_api_key"
 
 #!/bin/bash
 # Prepare PostGres test database
@@ -88,7 +90,6 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 
 #Migrate from PostGres
 # Seed eAPD Mongo Database
-cd /home/ec2-user
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
@@ -101,29 +102,25 @@ nvm install 14
 nvm alias default 14
 
 git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
-cd /home/ec2-user/eAPD/api
+cd ~/eAPD/api
 npm ci
-#NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
-#NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run migrate
 
 #Preparing Mongo DB Users
 cd ~
 cat <<MONGOROOTUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : '$MONGO_INITDB_DATABASE'}]});"
 MONGOROOTUSERSEED
 cd ~/eAPD/api
-sh /home/ec2-user/mongo-init.sh
-NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run mongoose-migrate
-#NODE_ENV=production MONGO_URL=$MONGO_URL POSTGRES_URL=$POSTGRES_URL npm run migrate
+sh ~/mongo-init.sh
+NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY npm run migrate
 cd ~
-cat <<MONGOROOTUSERSEED > mongo-user.sh
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
+cat <<MONGOUSERSEED > mongo-user.sh
+mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
-sh /home/ec2-user/mongo-user.sh
+sh ~/mongo-user.sh
 E_USER
 
 # Harden & Restart Mongo
-#sh /home/ec2-user/mongo-init.sh
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
@@ -294,5 +291,11 @@ CWVAROPTCONFIG
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
+
+#Remove PostGres
+systemctl stop postgresql
+systemctl disable postgresql
+rm -rf /var/lib/pgsql
+yum remove postgresql* -y
 
 R_USER
