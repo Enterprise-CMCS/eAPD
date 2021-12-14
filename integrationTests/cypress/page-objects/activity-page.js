@@ -72,13 +72,11 @@ class ActivityPage {
     cy.contains('Delete Metric?').should('exist');
     cy.contains('Cancel').click();
     cy.contains('Delete Metric?').should('not.exist');
-    cy.get('[class="ds-u-margin-right--2"]').eq(2).should('exist');
+    cy.get('.ds-u-color--error').should('have.length', 2);
     cy.contains('Delete').click();
     cy.contains('Delete Metric?').should('exist');
     cy.get('[class="ds-c-button ds-c-button--danger"]').click();
 
-    cy.contains('Delete').should('not.exist');
-    cy.get('[class="ds-u-margin-right--2"]').eq(2).should('not.exist');
     cy.contains('Delete').should('not.exist');
     cy.findByRole('button', { name: /Done/i }).click();
   };
