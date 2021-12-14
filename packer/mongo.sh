@@ -293,9 +293,9 @@ CWVAROPTCONFIG
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 
 #Remove PostGres
-#systemctl stop postgresql
-#systemctl disable postgresql
-#rm -rf /var/lib/pgsql
-#yum remove postgresql* -y
+systemctl stop postgresql
+systemctl disable postgresql
+rm -rf /var/lib/pgsql
+yum remove postgresql* -y
 
 R_USER
