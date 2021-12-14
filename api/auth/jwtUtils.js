@@ -167,13 +167,13 @@ const changeState = async (
     getAffiliatedStates_ = actualGetUserAffiliatedStates
   } = {}
 ) => {
+  // First verify affiliation is not expired
+  await verifyExpiration(user, stateId);
+  
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user));
   newUser.state = await getStateById_(stateId);
-  newUser.state.id = stateId;
-  
-  await verifyExpiration(user, stateId);
-  
+  newUser.state.id = stateId;  
   const permissions = await getUserPermissionsForStates_(user.id);
   newUser.activities = permissions[stateId];
   newUser.permissions = [{[stateId]: permissions[stateId]},]

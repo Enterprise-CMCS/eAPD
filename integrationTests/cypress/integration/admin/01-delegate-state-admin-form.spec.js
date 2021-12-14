@@ -34,6 +34,9 @@ describe('adding and removing state admin delegation forms', () => {
     cy.location('pathname').then(pathname => {
       delegateStateAdminFormUrl = pathname;
     });
+    cy.fixture('users').then(userData => {
+      cy.task('db:resetcertification', { email: userData[0].email })
+    });
   });
 
   beforeEach(() => {
@@ -119,9 +122,13 @@ describe('adding and removing state admin delegation forms', () => {
           cy.get('td').eq(6).contains('button', 'Delete').click();
         });
 
+      
       cy.contains('Delete Certification?');
+      
+      cy.wait(5000);
+      
       cy.get('#react-aria-modal-dialog').within(() => {
-        cy.get('button').contains('Delete').click();
+        cy.get('button').contains('Delete').click({force: true});
       });
 
       cy.contains(userData[0].name).should('not.exist');
