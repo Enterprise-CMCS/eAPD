@@ -72,16 +72,16 @@ su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
-export MONGO_DATABASE="$staging_mongo_database"
-export MONGO_INITDB_ROOT_USERNAME="$staging_mongo_initdb_root_username"
-export MONGO_INITDB_ROOT_PASSWORD="$staging_mongo_initdb_root_password"
-export MONGO_INITDB_DATABASE="$staging_mongo_initdb_database"
-export MONGO_DATABASE_USERNAME="$staging_mongo_database_username"
-export MONGO_DATABASE_PASSWORD="$staging_mongo_database_password"
-export MONGO_URL="$staging_mongo_admin_url"
-export DATABASE_URL="$staging_database_url"
-export OKTA_DOMAIN="$staging_okta_domain"
-export OKTA_API_KEY="$staging_okta_api_key"
+export MONGO_DATABASE="$MONGO_DATABASE"
+export MONGO_INITDB_ROOT_USERNAME="$MONGO_INITDB_ROOT_USERNAME"
+export MONGO_INITDB_ROOT_PASSWORD="$MONGO_INITDB_ROOT_PASSWORD"
+export MONGO_INITDB_DATABASE="$MONGO_INITDB_DATABASE"
+export MONGO_DATABASE_USERNAME="$MONGO_DATABASE_USERNAME"
+export MONGO_DATABASE_PASSWORD="$MONGO_DATABASE_PASSWORD"
+export MONGO_URL="$MONGO_URL"
+export DATABASE_URL="$DATABASE_URL"
+export OKTA_DOMAIN="$OKTA_DOMAIN"
+export OKTA_API_KEY="$OKTA_API_KEY"
 
 #!/bin/bash
 # Prepare PostGres test database
@@ -293,9 +293,9 @@ CWVAROPTCONFIG
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 
 #Remove PostGres
-systemctl stop postgresql
-systemctl disable postgresql
-rm -rf /var/lib/pgsql
-yum remove postgresql* -y
+#systemctl stop postgresql
+#systemctl disable postgresql
+#rm -rf /var/lib/pgsql
+#yum remove postgresql* -y
 
 R_USER
