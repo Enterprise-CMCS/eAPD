@@ -50,7 +50,7 @@ build {
             "MONGO_INITDB_DATABASE=${var.staging_mongo_initdb_database}",
             "MONGO_DATABASE_USERNAME=${var.staging_mongo_database_username}",
             "MONGO_DATABASE_PASSWORD=${var.staging_mongo_database_password}",
-            "MONGO_URL=${var.staging_mongo_admin_url}",
+            "MONGO_ADMIN_URL=${var.staging_mongo_admin_url}",
             "DATABASE_URL=${var.staging_database_url}",
             "OKTA_DOMAIN=${var.staging_okta_domain}",
             "OKTA_API_KEY=${var.staging_okta_api_key}"

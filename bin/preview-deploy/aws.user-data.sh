@@ -134,7 +134,6 @@ sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
 rm mongo-init.sh
-#su - ec2-user -c 'npm run mongoose-migrate'
 
 # Restart Nginx
 systemctl enable nginx
