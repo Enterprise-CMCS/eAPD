@@ -1,5 +1,5 @@
 // import React from 'react';
-// import { renderWithConnection, screen } from 'apd-testing-library';
+// import { renderWithConnection } from 'apd-testing-library';
 // import userEvent from '@testing-library/user-event';
 
 // import ApdSummary from './ApdSummary';
@@ -127,7 +127,7 @@
 //   });
 // };
 
-// describe('APD overview component', () => {
+describe('APD overview component', () => {
 //   test('dispatches on text change', () => {
 //     setup();
 
@@ -137,15 +137,15 @@
 //     );
 //   });
 
-//   test('user can add a year', () => {
-//     setup();
-//     expect(screen.getByLabelText('2020')).toBeChecked();
-//     expect(screen.getByLabelText('2021')).toBeChecked();
-//     expect(screen.getByLabelText('2022')).not.toBeChecked();
+  // test('user can add a year', () => {
+  //   setup();
+  //   expect(screen.getByLabelText('2020')).toBeChecked();
+  //   expect(screen.getByLabelText('2021')).toBeChecked();
+  //   expect(screen.getByLabelText('2022')).not.toBeChecked();
 
-//     userEvent.click(screen.getByLabelText('2022'));
-//     expect(screen.getByLabelText('2022')).toBeChecked();
-//   });
+  //   userEvent.click(screen.getByLabelText('2022'));
+  //   expect(screen.getByLabelText('2022')).toBeChecked();
+  // });
 
 //   test('user can attempt to delete a year and cancel', async () => {
 //     setup();
@@ -168,4 +168,4 @@
 
 //     expect(screen.getByLabelText('2021')).not.toBeChecked();
 //   });
-// });
+});
