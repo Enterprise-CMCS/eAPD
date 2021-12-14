@@ -163,7 +163,7 @@ export const testKeyStatePersonnelWithData = years => {
       .eq(0)
       .click();
     cy.get('.ds-c-button--danger').click();
-    cy.findAllByRole('button', { name: /Edit/i }).should('have.length', 2);
+    cy.get('.form-and-review-list').findAllByRole('button', { name: /Edit/i }).should('have.length', 2);
 
     cy.findAllByRole('button', { name: /Edit/i }).eq(1).click();
 
