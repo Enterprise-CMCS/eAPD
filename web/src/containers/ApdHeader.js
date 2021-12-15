@@ -72,7 +72,7 @@ const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
           const e = document.getElementById('apd-title-input')
           e.click()
         }}>
-          <Icon icon={faEdit} style={{ width: '14px' }} /> Edit APD Name
+          <Icon icon={faEdit} style={{ width: '14px' }} /> Edit
         </Button>
       </div>
       <div id='apd-header-info'>
