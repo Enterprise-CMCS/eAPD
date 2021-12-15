@@ -9,7 +9,7 @@ const {
   getAffiliationByState: actualGetAffiliationByState,
   getUserAffiliatedStates: actualGetUserAffiliatedStates
 } = require('../db/auth');
-const { updateAffiliation: actualUpdateAffiliation } = require('../db/affiliations');
+const { updateAuthAffiliation: actualUpdateAuthAffiliation } = require('../db/affiliations');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -131,13 +131,13 @@ const verifyExpiration = async (
   stateId,
   {
     getAffiliationByState = actualGetAffiliationByState,
-    updateAffiliation = actualUpdateAffiliation
+    updateAuthAffiliation = actualUpdateAuthAffiliation
   } = {}
 ) => {
   const stateAffiliation = await getAffiliationByState(user.id, stateId);
 
   if (isPast(stateAffiliation.expiration)) {
-    updateAffiliation({
+    await updateAuthAffiliation({
       affiliationId: stateAffiliation.id,
       newRoleId: -1,
       newStatus: 'revoked',
@@ -158,7 +158,7 @@ const changeState = async (
   } = {}
 ) => {
   // First verify affiliation is not expired
-  verifyExpiration(user, stateId);
+  await verifyExpiration(user, stateId);
   
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user));
