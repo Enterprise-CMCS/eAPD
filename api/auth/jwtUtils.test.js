@@ -399,13 +399,21 @@ tap.test('Local jwtUtils', async t => {
       'new-roles'
     ]
     const getUserPermissionsForStates = sinon.stub()
+    
     getUserPermissionsForStates
       .withArgs('ABCD1234')
       .resolves({
         original:originalPermissions,
         new: newPermissions
       })
-
+      
+    const getAffiliationByState = sinon.stub()
+    
+    const expiresDate = new Date()
+    
+    getAffiliationByState
+      .withArgs('abc', 'md')
+      .resolves({expires_at: expiresDate})
 
     const user = {
       id: 'ABCD1234',
@@ -428,7 +436,8 @@ tap.test('Local jwtUtils', async t => {
 
     const token = await changeState(user, 'new', {
       getStateById_: getStateById,
-      getUserPermissionsForStates_:getUserPermissionsForStates
+      getUserPermissionsForStates_: getUserPermissionsForStates,
+      getAffiliationByState_: getAffiliationByState
     });
     const newUser = await actualVerifyEAPDToken(token);
 

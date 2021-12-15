@@ -95,13 +95,7 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
  */
 const getAffiliationByState = async (userId, stateId, { db = knex } = {}) => {
   return db
-    .select({
-      id: 'id',
-      stateId: 'state_id',
-      roleId: 'role_id',
-      expiration: 'expires_at',
-      status: 'status'
-    })
+    .select('state_id', 'role_id', 'expires_at', 'status')
     .from('auth_affiliations')
     .where('user_id', userId)
     .andWhere('state_id', stateId)

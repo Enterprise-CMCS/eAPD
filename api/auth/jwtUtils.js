@@ -126,18 +126,22 @@ const exchangeToken = async (
   return user;
 };
 
-const verifyExpiration = async (
+const changeState = async (
   user,
   stateId,
   {
-    getAffiliationByState = actualGetAffiliationByState,
-    updateAuthAffiliation = actualUpdateAuthAffiliation
+    getStateById_ = getStateById,
+    getUserPermissionsForStates_ = actualGetUserPermissionsForStates,
+    getAffiliatedStates_ = actualGetUserAffiliatedStates,
+    getAffiliationByState_ = actualGetAffiliationByState,
+    updateAuthAffiliation_ = actualUpdateAuthAffiliation
   } = {}
 ) => {
-  const stateAffiliation = await getAffiliationByState(user.id, stateId);
-
-  if (isPast(stateAffiliation.expiration)) {
-    await updateAuthAffiliation({
+  // First verify affiliation is not expired
+  const stateAffiliation = await getAffiliationByState_(user.id, stateId);
+  
+  if (isPast(stateAffiliation.expires_at)) {
+    await updateAuthAffiliation_({
       affiliationId: stateAffiliation.id,
       newRoleId: -1,
       newStatus: 'revoked',
@@ -146,19 +150,6 @@ const verifyExpiration = async (
       ffy: null
     })
   }
-};
-
-const changeState = async (
-  user,
-  stateId,
-  {
-    getStateById_ = getStateById,
-    getUserPermissionsForStates_ = actualGetUserPermissionsForStates,
-    getAffiliatedStates_ = actualGetUserAffiliatedStates
-  } = {}
-) => {
-  // First verify affiliation is not expired
-  await verifyExpiration(user, stateId);
   
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user));
