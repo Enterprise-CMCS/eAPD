@@ -2,14 +2,14 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 const isPast = require('date-fns/isPast');
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
-const { getUserByID, updateAuthAffiliation } = require('../db');
+const { getUserByID } = require('../db');
 const { getStateById } = require('../db/states');
 const { 
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getAffiliationByState: actualGetAffiliationByState,
   getUserAffiliatedStates: actualGetUserAffiliatedStates
 } = require('../db/auth');
-// const { updateAffiliation } = require('../db/affiliations.js');
+const { updateAffiliation: actualUpdateAffiliation } = require('../db/affiliations');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -130,18 +130,14 @@ const verifyExpiration = async (
   user,
   stateId,
   {
-    getAffiliationByState_ = actualGetAffiliationByState,
-    updateAffiliation_ = updateAuthAffiliation
+    getAffiliationByState = actualGetAffiliationByState,
+    updateAffiliation = actualUpdateAffiliation
   } = {}
 ) => {
-  const stateAffiliation = await getAffiliationByState_(user.id, stateId);
-  
-  if (stateAffiliation.expiration === null) {
-    return null;
-  }
+  const stateAffiliation = await getAffiliationByState(user.id, stateId);
 
   if (isPast(stateAffiliation.expiration)) {
-    return updateAffiliation_({
+    updateAffiliation({
       affiliationId: stateAffiliation.id,
       newRoleId: -1,
       newStatus: 'revoked',
@@ -149,13 +145,7 @@ const verifyExpiration = async (
       stateId: stateAffiliation.stateId,
       ffy: null
     })
-    .then(() => {
-      return null;
-    })
-    .catch(e => `Error updating expired affiliation: ${e}`);
   }
-    
-  return null;
 };
 
 const changeState = async (
@@ -168,7 +158,7 @@ const changeState = async (
   } = {}
 ) => {
   // First verify affiliation is not expired
-  await verifyExpiration(user, stateId);
+  verifyExpiration(user, stateId);
   
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user));
@@ -196,8 +186,7 @@ if (process.env.NODE_ENV === 'test') {
     verifyEAPDToken: mockVerifyEAPDJWT,
     exchangeToken,
     actualVerifyEAPDToken: verifyEAPDToken,
-    changeState,
-    verifyExpiration
+    changeState
   };
 } else {
   module.exports = {
@@ -207,7 +196,6 @@ if (process.env.NODE_ENV === 'test') {
     sign,
     verifyEAPDToken,
     exchangeToken,
-    changeState,
-    verifyExpiration
+    changeState
   };
 }

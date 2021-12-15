@@ -120,8 +120,7 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
   return db
     .select({
       stateId: 'state_id',
-      roleId: 'role_id',
-      status: 'status'
+      roleId: 'role_id'
     })
     .from('auth_affiliations')
     .where('user_id', userId)
