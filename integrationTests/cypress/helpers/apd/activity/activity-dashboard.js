@@ -120,7 +120,8 @@ export const testActivityDashboardWithData = () => {
 
     cy.contains('Add Activity').click();
     cy.contains('Activity 2: Untitled').should('exist');
-    cy.findAllByText('Edit').eq(1).click();
+    cy.get('#activities')
+      .findAllByText('Edit').eq(1).click();
 
     cy.findByLabelText('Activity name').type(activityOverview.newActivityName);
     cy.findByRole('radio', { name: /HIE/i }).check({ force: true });
