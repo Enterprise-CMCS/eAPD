@@ -93,14 +93,12 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
  * @function
  * @returns {Object}
  */
-const getAffiliationByState = async (userId, stateId, { db = knex } = {}) => {
-  return db
-    .select('state_id', 'role_id', 'expires_at', 'status')
-    .from('auth_affiliations')
+const getAffiliationByState = async (userId, stateId, { db = knex } = {}) => 
+  db('auth_affiliations')
     .where('user_id', userId)
     .andWhere('state_id', stateId)
+    .select()
     .first();
-}
 
 /**
  * Retrieves a user's permissions per state

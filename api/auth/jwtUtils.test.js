@@ -403,17 +403,19 @@ tap.test('Local jwtUtils', async t => {
     getUserPermissionsForStates
       .withArgs('ABCD1234')
       .resolves({
-        original:originalPermissions,
+        original: originalPermissions,
         new: newPermissions
       })
       
     const getAffiliationByState = sinon.stub()
     
-    const expiresDate = new Date()
-    
     getAffiliationByState
-      .withArgs('abc', 'md')
-      .resolves({expires_at: expiresDate})
+      .withArgs('ABCD1234', 'new')
+      .resolves({
+        id: 60,
+        state_id: 'new',
+        expires_at: new Date('2029-12-16T00:00:00.000Z')
+      })
 
     const user = {
       id: 'ABCD1234',

@@ -146,7 +146,7 @@ const changeState = async (
       newRoleId: -1,
       newStatus: 'revoked',
       changedBy: null,
-      stateId: stateAffiliation.stateId,
+      stateId: stateAffiliation.state_id,
       ffy: null
     })
   }
