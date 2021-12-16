@@ -529,14 +529,13 @@ tap.test('Local jwtUtils', async t => {
     
     const updateAuthAffiliation = sinon.spy();
     
-    const token = await changeState(user, 'new', {
+    await changeState(user, 'new', {
       getStateById_: getStateById,
       getUserPermissionsForStates_: getUserPermissionsForStates,
       getAffiliatedStates_ : getAffiliatedStates,
       getAffiliationByState_: getAffiliationByState,
       updateAuthAffiliation_: updateAuthAffiliation
     });
-    const newUser = await actualVerifyEAPDToken(token);
 
     t.assert(updateAuthAffiliation.calledOnce);
   });
