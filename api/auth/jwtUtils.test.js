@@ -414,8 +414,15 @@ tap.test('Local jwtUtils', async t => {
       .resolves({
         id: 60,
         state_id: 'new',
-        expires_at: new Date('2029-12-16T00:00:00.000Z')
+        expires_at: new Date('2090-12-16T00:00:00.000Z')
       })
+    
+    const getAffiliatedStates = sinon.stub()
+    
+    getAffiliatedStates.withArgs('new').resolves({
+      new: 'approved',
+      original: 'approved'
+    })
 
     const user = {
       id: 'ABCD1234',
@@ -439,6 +446,7 @@ tap.test('Local jwtUtils', async t => {
     const token = await changeState(user, 'new', {
       getStateById_: getStateById,
       getUserPermissionsForStates_: getUserPermissionsForStates,
+      getAffiliatedStates_ : getAffiliatedStates,
       getAffiliationByState_: getAffiliationByState
     });
     const newUser = await actualVerifyEAPDToken(token);
@@ -451,5 +459,85 @@ tap.test('Local jwtUtils', async t => {
     );
 
     t.same(user.state.id, 'original', 'original user is unchanged');
+  });
+  
+  t.test('Change State of a token with expired affiliation', async t => {
+    const getStateById = sinon.stub();
+    getStateById.withArgs('new').resolves({
+      id: 'new',
+      address1: 'New Address1',
+      director: {
+        name: 'New Director'
+      }
+    });
+
+    const originalPermissions = [
+      'original-roles',
+      'original-affiliations',
+      'original-affiliations'
+    ]
+    const newPermissions = [
+      'new-draft',
+      'new-document',
+      'new-document',
+      'new-roles'
+    ]
+    const getUserPermissionsForStates = sinon.stub()
+    
+    getUserPermissionsForStates
+      .withArgs('ABCD1234')
+      .resolves({
+        original: originalPermissions,
+        new: newPermissions
+      })
+      
+    const getAffiliationByState = sinon.stub()
+    
+    getAffiliationByState
+      .withArgs('ABCD1234', 'new')
+      .resolves({
+        id: 60,
+        state_id: 'new',
+        expires_at: new Date('2020-12-16T00:00:00.000Z')
+      })
+    
+    const getAffiliatedStates = sinon.stub()
+    
+    getAffiliatedStates.withArgs('new').resolves({
+      new: 'approved',
+      original: 'approved'
+    })
+
+    const user = {
+      id: 'ABCD1234',
+      state: {
+        id: 'original',
+        address1: 'Original Address1',
+        director: {
+          name: 'Original Director'
+        }
+      },
+      states: {original:'approved', new: 'approved'},
+
+      foo: 'bar',
+      activities: [
+        'original-roles',
+        'original-affiliations',
+        'original-affiliations'
+      ]
+    };
+    
+    const updateAuthAffiliation = sinon.spy();
+    
+    const token = await changeState(user, 'new', {
+      getStateById_: getStateById,
+      getUserPermissionsForStates_: getUserPermissionsForStates,
+      getAffiliatedStates_ : getAffiliatedStates,
+      getAffiliationByState_: getAffiliationByState,
+      updateAuthAffiliation_: updateAuthAffiliation
+    });
+    const newUser = await actualVerifyEAPDToken(token);
+
+    t.assert(updateAuthAffiliation.calledOnce);
   });
 });
