@@ -33,8 +33,9 @@ export const testDefaultCostAllocationAndOtherFunding = years => {
         );
         activityPage.checkTextField('ds-c-field ds-c-field--currency', 0, i);
         budgetPage.checkActivityTotalCostTable({
-          activityTotalCost: 0,
+          activityTotalCosts: 0,
           otherFunding: 0,
+          totalComputableMedicaidCost: 0,
           index: i
         });
       });
@@ -103,13 +104,14 @@ export const testCostAllocationAndOtherFundingWithData = years => {
       const contractor = activityData.privateContractors[1];
 
       years.forEach((year, i) => {
-        const activityTotalCost =
+        const activityTotalCosts =
           staff.costs[i] * staff.ftes[i] +
           expenses.costs[i] +
           contractor.FFYcosts[i];
         budgetPage.checkActivityTotalCostTable({
-          activityTotalCost,
+          activityTotalCosts,
           otherFunding: allocation.costs[i],
+          totalComputableMedicaidCost: activityTotalCosts - allocation.costs[i],
           index: i
         });
       });
@@ -172,11 +174,12 @@ export const testCostAllocationAndOtherFundingWithData = years => {
           contractor1.FFYcosts[i] +
           contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
 
-        const activityTotalCost = staffTotal + expenseTotal + contractorTotal;
+        const activityTotalCosts = staffTotal + expenseTotal + contractorTotal;
 
         budgetPage.checkActivityTotalCostTable({
-          activityTotalCost,
+          activityTotalCosts,
           otherFunding: allocation.costs[i],
+          totalComputableMedicaidCost: activityTotalCosts - allocation.costs[i],
           index: i
         });
       });

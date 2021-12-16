@@ -435,23 +435,29 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
               cy.get('[class="ds-c-field"]').select('75-25');
               budgetPage.checkCostSplitTable({
-                federalPercent: 0.75,
-                statePercent: 0.25,
-                totalMedicaidCost: 0
+                federalSharePercentage: 0.75,
+                federalShareAmount: 0,
+                stateSharePercentage: 0.25,
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
               budgetPage.checkCostSplitTable({
-                federalPercent: 0.5,
-                statePercent: 0.5,
-                totalMedicaidCost: 0
+                federalSharePercentage: 0.5,
+                federalShareAmount: 0,
+                stateSharePercentage: 0.5,
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
               budgetPage.checkCostSplitTable({
-                federalPercent: 0.9,
-                statePercent: 0.1,
-                totalMedicaidCost: 0
+                federalSharePercentage: 0.9,
+                federalShareAmount: 0,
+                stateSharePercentage: 0.1,
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
               });
             });
         });

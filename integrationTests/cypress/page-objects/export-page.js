@@ -494,49 +494,43 @@ class ExportPage {
   };
 
   checkRowTotals = ({
-    year,
-    activityIndex,
-    activityTotalCost,
+    activityTotalCosts,
     otherFunding,
-    totalMedicaidCost,
-    federalShare,
-    stateShare
+    totalComputableMedicaidCost,
+    federalSharePercentage,
+    federalShareAmount,
+    stateSharePercentage,
+    stateShareAmount
   }) => {
-    const fedTotal = totalMedicaidCost * (federalShare / 100);
-    const stateTotal = totalMedicaidCost * (stateShare / 100);
-    cy.contains(`Activity ${activityIndex + 1} Budget for FFY ${year}`)
+    cy.contains('Activity Total Cost')
       .parent()
+      .should('contain', `$${addCommas(activityTotalCosts)}`)
       .next()
-      .within(() => {
-        cy.contains('Activity Total Cost')
-          .next()
-          .should('contain', `$${addCommas(activityTotalCost)}`)
-          .parent()
-          .next()
-          .should('have.text', `Other Funding-$${addCommas(otherFunding)}`)
-          .next()
-          .should(
-            'have.text',
-            `Total Computable Medicaid Cost$${addCommas(totalMedicaidCost)}`
-          )
-          .next()
-          .children($cells => {
-            cy.wrap($cells.eq(0)).should('contain', 'Federal Share');
-            cy.wrap($cells.eq(1)).shouldBeCloseTo(totalMedicaidCost);
-            // cell 2 is X
-            cy.wrap($cells.eq(3)).should('have.text', `${federalShare}%`);
-            // cell 4 is =
-            cy.wrap($cells.eq(5)).shouldBeCloseTo(fedTotal);
-          })
-          .next()
-          .children($cells => {
-            cy.wrap($cells.eq(0)).should('contain', 'State Share');
-            cy.wrap($cells.eq(1)).shouldBeCloseTo(totalMedicaidCost);
-            // cell 2 is X
-            cy.wrap($cells.eq(3)).should('have.text', `${stateShare}%`);
-            // cell 4 is =
-            cy.wrap($cells.eq(5)).shouldBeCloseTo(stateTotal);
-          });
+      .should('have.text', `Other Funding-$${addCommas(otherFunding)}`)
+      .next()
+      .should(
+        'have.text',
+        `Total Computable Medicaid Cost$${addCommas(
+          totalComputableMedicaidCost
+        )}`
+      )
+      .next()
+      .children($cells => {
+        cy.wrap($cells.eq(0)).should('contain', 'Federal Share');
+        cy.wrap($cells.eq(1)).shouldBeCloseTo(totalComputableMedicaidCost);
+        // cell 2 is X
+        cy.wrap($cells.eq(3)).should('have.text', `${federalSharePercentage}%`);
+        // cell 4 is =
+        cy.wrap($cells.eq(5)).shouldBeCloseTo(federalShareAmount);
+      })
+      .next()
+      .children($cells => {
+        cy.wrap($cells.eq(0)).should('contain', 'State Share');
+        cy.wrap($cells.eq(1)).shouldBeCloseTo(totalComputableMedicaidCost);
+        // cell 2 is X
+        cy.wrap($cells.eq(3)).should('have.text', `${stateSharePercentage}%`);
+        // cell 4 is =
+        cy.wrap($cells.eq(5)).shouldBeCloseTo(stateShareAmount);
       });
   };
 
