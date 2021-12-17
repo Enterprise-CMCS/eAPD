@@ -74,7 +74,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@okta/okta-auth-js": "^5.9.0",
+    "@okta/okta-auth-js": "^5.9.1",
     "@tinymce/tinymce-react": "^3.13.0",
     "@uppy/core": "^2.0.2",
     "@uppy/react": "^2.0.2",
@@ -93,6 +93,7 @@
     "jwt-decode": "^3.1.2",
     "markdown-it": "^12.0.6",
     "moment": "^2.29.1",
+    "node-sass": "^6.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-app-polyfill": "^2.0.0",
@@ -172,7 +173,6 @@
     "js-yaml": "^4.1.0",
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^1.6.2",
-    "node-sass": "^5.0.0",
     "postcss": "^8.4.4",
     "postcss-cli": "^9.0.2",
     "postcss-loader": "^4.3.0",
@@ -192,15 +192,16 @@
     "yaml-loader": "^0.6.0"
   },
   "resolutions": {
+    "ansi-regex": "5.0.1",
+    "browserslist": "4.19.1",
+    "glob-parent": "^5.1.2",
     "hosted-git-info": "2.8.9",
+    "immer": "^9.0.6",
+    "nth-check": "^2.0.1",
     "path-parse": "^1.0.7",
     "prismjs": "1.25.0",
     "tar": "6.1.9",
     "trim": "0.0.3",
-    "url-parse": "^1.5.2",
-    "ansi-regex": "5.0.1",
-    "nth-check": "^2.0.1",
-    "immer": "^9.0.6",
-    "glob-parent": "^5.1.2"
+    "url-parse": "^1.5.2"
   }
 }
