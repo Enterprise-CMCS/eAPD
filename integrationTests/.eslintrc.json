@@ -1,6 +1,14 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier", "plugin:jsx-a11y/strict", "plugin:cypress/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:jsx-a11y/strict",
+    "plugin:cypress/recommended"
+  ],
   "rules": {
     "arrow-body-style": "off",
     "jsx-a11y/anchor-is-valid": [
@@ -29,7 +37,8 @@
     "react/no-array-index-key": "warn"
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "overrides": [
     {
