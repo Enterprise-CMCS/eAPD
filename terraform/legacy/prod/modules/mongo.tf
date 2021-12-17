@@ -3,7 +3,7 @@ data "aws_ami" "latest_mongo_image" {
     owners = ["582599238767"]
         filter {
             name = "name"
-            values = ["eAPD Staging Mongo AMI*"]
+            values = ["eAPD Production Mongo AMI*"]
         }
         filter {
             name   = "virtualization-type"
@@ -14,18 +14,18 @@ data "aws_ami" "latest_mongo_image" {
 resource "aws_instance" "eapd_mongo" {
     ami                         = data.aws_ami.latest_mongo_image.id
     instance_type               = "m3.medium"
-    vpc_security_group_ids      = ["sg-01e01435dbbe6ce32", aws_security_group.eapd-staging-mongo-ec2.id]
+    vpc_security_group_ids      = ["sg-01e01435dbbe6ce32", aws_security_group.eapd-production-mongo-ec2.id]
     subnet_id                   = "subnet-07e1b9ed6ed5fb8c7"
     key_name                    = "eapd_bbrooks"
     user_data                   = "../../../bin/prod-deploy/aws.user-data.sh"
     tags = {
         Name = var.instance_name
-        Environment = "staging"
+        Environment = "production"
         "Patch Group" = "RHEL7"
         "cms-cloud-exempt:open-sg" = "CLDSPT-5877"
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
         Terraform = "True"
     }
-    depends_on = [aws_security_group.eapd-staging-mongo-ec2]
+    depends_on = [aws_security_group.eapd-production-mongo-ec2]
     disable_api_termination = false # True in Prod
 }

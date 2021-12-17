@@ -123,6 +123,7 @@ E_USER
 # Harden & Restart Mongo
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
+sed -i 's|bindIp:.*|bindIp: 0.0.0.0|g' /etc/mongod.conf
 systemctl restart mongod
 rm /home/ec2-user/mongo-user.sh
 rm /home/ec2-user/mongo-init.sh

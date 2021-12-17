@@ -1,4 +1,3 @@
-### FUTURE USE ###
 ### Will function like main.tf for Staging ###
 terraform {
   backend "s3" {
@@ -21,4 +20,5 @@ provider "aws" {
 
 module "eAPD" {
     source = "./modules"
+    instance_name = var.instance_name
 }

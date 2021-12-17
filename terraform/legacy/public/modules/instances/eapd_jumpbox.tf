@@ -1,17 +1,9 @@
-variable "eapd_jumpbox_ami" {}
-variable "eapd_jumpbox_instance_type" {}
-variable "eapd_jumpbox_key_name_bb" {}
-variable "eapd_jumpbox_key_name_tf" {}
-variable "eapd_jumpbox_vpc_security_group_ids" {}
-variable "eapd_jumpbox_subnet_id" {}
-variable "eapd_jumpbox_associate_public_ip_address" {}
-
-data "aws_ami" "latest_golden_image" {
+data "aws_ami" "latest_silver_image" {
     most_recent = true
-    owners = ["842420567215"]
+    owners = ["582599238767"]
         filter {
             name = "name"
-            values = ["EAST-RH 7-9 Gold Image V.*"]
+            values = ["eAPD Preview AMI*"]
         }
         filter {
             name   = "virtualization-type"
@@ -21,25 +13,25 @@ data "aws_ami" "latest_golden_image" {
 
 resource "aws_instance" "eapd_jumpbox_bb" {
 
-    ami                         = data.aws_ami.latest_golden_image.id
-    instance_type               = var.eapd_jumpbox_instance_type
-    key_name                    = var.eapd_jumpbox_key_name_bb
-    vpc_security_group_ids      = var.eapd_jumpbox_vpc_security_group_ids
-    subnet_id                   = var.eapd_jumpbox_subnet_id
-    associate_public_ip_address = var.eapd_jumpbox_associate_public_ip_address
+    ami                         = data.aws_ami.latest_silver_image.id
+    instance_type               = "t3.medium"
+    key_name                    = "eapd_bbrooks"
+    vpc_security_group_ids      = [ "sg-084cef5d95e485fd4", "sg-0f3c6bfa62fcefa4a", "sg-02271e574628f901f"]
+    subnet_id                   = "subnet-04c22c81fd7060c13"
+    associate_public_ip_address = false
     tags = {
         Name = "eAPD Jumpbox BB"
-    }
+    }   
 }
 
 resource "aws_instance" "eapd_jumpbox_tf" {
 
-    ami                         = data.aws_ami.latest_golden_image.id
-    instance_type               = var.eapd_jumpbox_instance_type
-    key_name                    = var.eapd_jumpbox_key_name_tf
-    vpc_security_group_ids      = var.eapd_jumpbox_vpc_security_group_ids
-    subnet_id                   = var.eapd_jumpbox_subnet_id
-    associate_public_ip_address = var.eapd_jumpbox_associate_public_ip_address
+    ami                         = data.aws_ami.latest_silver_image.id
+    instance_type               = "t3.medium"
+    key_name                    = "tforkner_eapd"
+    vpc_security_group_ids      = [ "sg-084cef5d95e485fd4", "sg-0f3c6bfa62fcefa4a", "sg-02271e574628f901f"]
+    subnet_id                   = "subnet-04c22c81fd7060c13"
+    associate_public_ip_address = false
     tags = {
         Name = "eAPD Jumpbox TF"
     }
