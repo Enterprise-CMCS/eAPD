@@ -188,6 +188,24 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
       });
     });
+
+    it('should go to the Activity Overview page when edit is clicked in Executive Summary', () => {
+      cy.goToExecutiveSummary();
+
+      cy.get('#executive-summary-summary')
+        .parent()
+        .contains('div', 'Activity 1: Program Administration')
+        .parent()
+        .parent()
+        .findByRole('button', { name: 'Edit' })
+        .click();
+
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
+    });
   });
 
   describe('Subforms', () => {
