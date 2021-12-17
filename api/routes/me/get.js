@@ -3,7 +3,9 @@ const {
   jwtExtractor,
   verifyEAPDToken,
   exchangeToken,
-  verifyWebToken
+  verifyWebToken,
+  verifyExpirations,
+  changeState
 } = require('../../auth/jwtUtils');
 const { createOrUpdateOktaUserFromOkta } = require('../../db/oktaUsers');
 
@@ -13,7 +15,8 @@ module.exports = (
     extractor = jwtExtractor,
     verifier = verifyEAPDToken,
     tokenExchanger = exchangeToken,
-    updateFromOkta = createOrUpdateOktaUserFromOkta
+    updateFromOkta = createOrUpdateOktaUserFromOkta,
+    hasExpired = verifyExpirations
   } = {}
 ) => {
   logger.debug('setting up GET endpoint');
@@ -21,8 +24,12 @@ module.exports = (
     try {
       const jwt = extractor(req);
       const claims = jwt ? await verifyWebToken(jwt, { verifier }) : false;
-      if (!claims) return res.status(401).end();
+      if (!claims) return res.status(401).end();      
       await updateFromOkta(claims.id);
+      // check expiration dates
+      // todo: if this method returns true, generate a new jwt
+      await hasExpired(claims);
+      // generate new jwt claim object
       return res.send(claims);
     } catch (e) {
       return next(e);

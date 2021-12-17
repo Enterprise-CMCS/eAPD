@@ -84,21 +84,19 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
       // eslint-disable-next-line no-param-reassign
       states[row.state_id] = row.status
       return states
-
     }, {}));
 
 /**
- * Retrieves a single affiliation by user per state
+ * Retrieves all affiliations tied to a user
  * @async
  * @function
- * @returns {Object}
+ * @returns {Array} 
  */
-const getAffiliationByState = async (userId, stateId, { db = knex } = {}) => 
+const getUserAffiliations = async (userId, { db = knex } = {}) => 
+// Todo: update this to return only expired affiliations
   db('auth_affiliations')
     .where('user_id', userId)
-    .andWhere('state_id', stateId)
     .select()
-    .first();
 
 /**
  * Retrieves a user's permissions per state
@@ -136,5 +134,5 @@ module.exports = {
   getRolesAndActivities,
   getUserAffiliatedStates,
   getUserPermissionsForStates,
-  getAffiliationByState
+  getUserAffiliations
 };

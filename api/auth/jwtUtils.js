@@ -7,7 +7,8 @@ const { getStateById } = require('../db/states');
 const { 
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getAffiliationByState: actualGetAffiliationByState,
-  getUserAffiliatedStates: actualGetUserAffiliatedStates
+  getUserAffiliatedStates: actualGetUserAffiliatedStates,
+  getUserAffiliations: actualGetUserAffiliations
 } = require('../db/auth');
 const { updateAuthAffiliation: actualUpdateAuthAffiliation } = require('../db/affiliations');
 
@@ -132,25 +133,9 @@ const changeState = async (
   {
     getStateById_ = getStateById,
     getUserPermissionsForStates_ = actualGetUserPermissionsForStates,
-    getAffiliatedStates_ = actualGetUserAffiliatedStates,
-    getAffiliationByState_ = actualGetAffiliationByState,
-    updateAuthAffiliation_ = actualUpdateAuthAffiliation
+    getAffiliatedStates_ = actualGetUserAffiliatedStates
   } = {}
 ) => {
-  // First verify affiliation is not expired
-  const stateAffiliation = await getAffiliationByState_(user.id, stateId);
-  
-  if (isPast(stateAffiliation.expires_at)) {
-    await updateAuthAffiliation_({
-      affiliationId: stateAffiliation.id,
-      newRoleId: -1,
-      newStatus: 'revoked',
-      changedBy: 'system',
-      stateId: stateAffiliation.state_id,
-      ffy: null
-    })
-  }
-  
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user));
   newUser.state = await getStateById_(stateId);
@@ -162,6 +147,33 @@ const changeState = async (
   newUser.states = affiliations;
 
   return sign(newUser, {});
+};
+
+const verifyExpirations = async (
+  claims,
+  {
+    getUserAffiliations_ = actualGetUserAffiliations,
+    updateAuthAffiliation_ = actualUpdateAuthAffiliation
+  } = {}
+) => {
+  // Todo:
+  // * update this method to only get expired affiliations
+  // * loop over that list and call updateAuthAffiliation_ on each
+  // * idea: return true/false from this method if there were expired affiliations
+  const affiliations = await getUserAffiliations_(claims.id);
+  console.log("affiliations", affiliations);
+  // const stateAffiliation = await getAffiliationByState_(user.id, stateId);
+  
+  // if (isPast(stateAffiliation.expires_at)) {
+  //   await updateAuthAffiliation_({
+  //     affiliationId: stateAffiliation.id,
+  //     newRoleId: -1,
+  //     newStatus: 'revoked',
+  //     changedBy: 'system',
+  //     stateId: stateAffiliation.state_id,
+  //     ffy: null
+  //   })
+  // }
 };
 
 const mockVerifyEAPDJWT = token => {
@@ -187,6 +199,7 @@ if (process.env.NODE_ENV === 'test') {
     sign,
     verifyEAPDToken,
     exchangeToken,
-    changeState
+    changeState,
+    verifyExpirations
   };
 }
