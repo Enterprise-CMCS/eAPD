@@ -192,15 +192,15 @@
     "yaml-loader": "^0.6.0"
   },
   "resolutions": {
-    "ansi-regex": "6.0.1",
-    "glob-parent": "^5.1.2",
+    "ansi-regex": ">=5.0.1",
+    "glob-parent": ">=5.1.2",
     "hosted-git-info": "2.8.9",
-    "immer": "^9.0.6",
+    "immer": ">=9.0.6",
     "nth-check": "^2.0.1",
     "path-parse": "^1.0.7",
     "prismjs": "1.25.0",
     "tar": "6.1.9",
-    "trim": "0.0.3",
+    "trim": ">=0.0.3",
     "url-parse": "^1.5.2"
   }
 }
