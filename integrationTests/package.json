@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@foreachbe/cypress-tinymce": "^1.0.0",
+    "react": "^16.14.0",
     "tinymce": "^5.10.1"
   },
   "devDependencies": {
