@@ -84,32 +84,31 @@ describe(
         cy.get('select').select('Maryland');
         getInputByLabel('State employee email address').type(userData[0].email);
         getInputByLabel('State employee phone number').type(userData[0].phone);
-      });
 
-      cy.fixture('test.pdf').then(myFile => {
-        const file = new File([myFile], 'test.pdf', {
-          type: 'application/pdf'
+        cy.fixture('test.pdf').then(myFile => {
+          const file = new File([myFile], 'test.pdf', {
+            type: 'application/pdf'
+          });
+
+          cy.get('#file-input').trigger('drop', {
+            dataTransfer: {
+              files: [file]
+            }
+          });
+
+          cy.get('[alt="PDF document icon"]').should('be.visible');
+          cy.get('a').contains('test.pdf').should('be.visible');
+
+          // When filled out form submit button should be enabled
+          cy.get('button')
+            .contains('Add State Admin Letter')
+            .should('not.be.disabled');
+
+          cy.contains('Add State Admin Letter').click();
+
+          cy.contains('Federal Administrator Portal').should('be.visible');
         });
-
-        cy.get('#file-input').trigger('drop', {
-          dataTransfer: {
-            files: [file]
-          }
-        });
       });
-
-      cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.get('[alt="PDF document icon"]').should('be.visible');
-      cy.get('a').contains('test.pdf').should('be.visible');
-
-      // When filled out form submit button should be enabled
-      cy.get('button')
-        .contains('Add State Admin Letter')
-        .should('not.be.disabled');
-
-      cy.contains('Add State Admin Letter').click();
-
-      cy.contains('Federal Administrator Portal').should('be.visible');
     });
 
     it('allows a letter to be deleted', () => {

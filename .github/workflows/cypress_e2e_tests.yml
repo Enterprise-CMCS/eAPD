@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         # run 3 copies of the current job in parallel
-        containers: [1, 2, 3]
+        containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -44,6 +44,7 @@ jobs:
       - name: Cache NPM and Cypress 📦
         uses: actions/cache@v2
         with:
+          working-directory: ./integrationTests
           path: |
             ~/.cache/Cypress
             node_modules
@@ -52,11 +53,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: Install cypress dependencies
-        working-directory: ./integrationTests
-        run: npm ci
       - name: Cypress setup
         working-directory: ./integrationTests
+        run: |
+          npm ci
+          sh cypress-ci-setup.sh
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
@@ -65,15 +66,14 @@ jobs:
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
-        run: |
-          sh cypress-ci-setup.sh
       - name: Cypress tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2.9.7
         with:
           # we have already installed all dependencies above
           install: false
           build: npx cypress info
           working-directory: ./integrationTests
+          browser: chrome
           config-file: cypress.json
           wait-on: 'http://localhost:8080'
           headless: true
@@ -81,11 +81,6 @@ jobs:
           parallel: true
           group: 'Actions example'
         env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
@@ -93,18 +88,8 @@ jobs:
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          working-directory: ./integrationTests
-          name: cypress-screenshots
-          path: cypress/screenshots
-      # Test run video was always captured, so this action uses "always()" condition
-      - name: Upload videos
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          working-directory: ./integrationTests
-          name: cypress-videos
-          path: cypress/videos
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
