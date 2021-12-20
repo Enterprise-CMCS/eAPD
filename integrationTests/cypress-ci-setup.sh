@@ -4,8 +4,6 @@ export OKTA_CLIENT_ID="$OKTA_CLIENT_ID"
 export OKTA_API_KEY="$OKTA_API_KEY"
 export JWT_SECRET="$JWT_SECRET"
 
-npm ci
-
 echo "Creatng TOKEN_LOC env var"
 export TOKEN_LOC=$(docker exec eapd_api_1 find /app -type f -name tokens.json)
 
