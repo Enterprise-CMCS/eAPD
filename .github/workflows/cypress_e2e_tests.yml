@@ -70,9 +70,11 @@ jobs:
       - name: Cypress tests
         uses: cypress-io/github-action@v2
         with:
-          install-command: npm ci
-          start: npm start
-          config-file: ./integrationTests/cypress.json
+          # we have already installed all dependencies above
+          install: false
+          build: npx cypress info
+          working-directory: ./integrationTests
+          config-file: cypress.json
           wait-on: 'http://localhost:8080'
           headless: true
           record: true
