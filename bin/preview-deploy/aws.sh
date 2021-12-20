@@ -239,6 +239,7 @@ function waitForInstanceToBeReady() {
     INSTANCE_CHECK_COUNT=$((INSTANCE_CHECK_COUNT+1))
   done
   print "  ...status check #$INSTANCE_CHECK_COUNT: READY"
+  aws ssm send-command --instance-ids "$1" --document-name "AWS-RunPatchBaseline" --comment "CMS Patch Compliance"
 }
 
 # Iterate while there are arguments
