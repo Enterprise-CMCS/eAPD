@@ -86,10 +86,18 @@ jobs:
           # Recommended: pass the GitHub token lets this action correctly
           # determine the unique run id necessary to re-run the checks
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+          OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
+          OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
       - name: Upload screenshots
         uses: actions/upload-artifact@v2
         if: failure()
         with:
+          working-directory: ./integrationTests
           name: cypress-screenshots
           path: cypress/screenshots
       # Test run video was always captured, so this action uses "always()" condition
@@ -97,5 +105,6 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
+          working-directory: ./integrationTests
           name: cypress-videos
           path: cypress/videos
