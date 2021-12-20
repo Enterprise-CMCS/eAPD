@@ -36,3 +36,29 @@ resource "aws_instance" "eapd_jumpbox_tf" {
         Name = "eAPD Jumpbox TF"
     }
 }
+
+resource "aws_instance" "eapd_jumpbox_tb" {
+
+    ami                         = data.aws_ami.latest_silver_image.id
+    instance_type               = "t3.medium"
+    key_name                    = "tbolt-eapd"
+    vpc_security_group_ids      = [ "sg-084cef5d95e485fd4", "sg-0f3c6bfa62fcefa4a", "sg-02271e574628f901f"]
+    subnet_id                   = "subnet-04c22c81fd7060c13"
+    associate_public_ip_address = false
+    tags = {
+        Name = "eAPD Jumpbox TB"
+    }   
+}
+
+resource "aws_instance" "eapd_jumpbox_nz" {
+
+    ami                         = data.aws_ami.latest_silver_image.id
+    instance_type               = "t3.medium"
+    key_name                    = "keyname-tbd"
+    vpc_security_group_ids      = [ "sg-084cef5d95e485fd4", "sg-0f3c6bfa62fcefa4a", "sg-02271e574628f901f"]
+    subnet_id                   = "subnet-04c22c81fd7060c13"
+    associate_public_ip_address = false
+    tags = {
+        Name = "eAPD Jumpbox TF"
+    }
+}
