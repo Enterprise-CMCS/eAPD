@@ -36,11 +36,23 @@ jobs:
           docker-compose up -d
           docker-compose exec -T api npm run migrate
           docker-compose exec -T api npm run seed
+        # cache NPM modules and Cypress binary folder
+        # we can use "package-lock.json" as the key file
+        # to make sure we use the precise Cypress version
+        # (which is important when using ^ version in package.json)
+        # see https://github.com/actions/cache
+      - name: Cache NPM and Cypress 📦
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            node_modules
+          key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install node
         uses: actions/setup-node@v2
         with:
           node:version: '14'
-      - name: Install dependencies
+      - name: Install cypress dependencies
         working-directory: ./integrationTests
         run: npm ci
       - name: Cypress setup
@@ -70,13 +82,15 @@ jobs:
           # Recommended: pass the GitHub token lets this action correctly
           # determine the unique run id necessary to re-run the checks
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - uses: actions/upload-artifact@v2
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
       # Test run video was always captured, so this action uses "always()" condition
-      - uses: actions/upload-artifact@v2
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
         if: always()
         with:
           name: cypress-videos
