@@ -19,10 +19,9 @@ import 'cypress-react-selector'; // eslint-disable-line import/no-extraneous-dep
 import { commandTimings } from 'cypress-timings'; // eslint-disable-line import/no-extraneous-dependencies
 
 import './commands';
-import {
-  CONSENT_COOKIE_NAME,
-  API_COOKIE_NAME
-} from '../../../web/src/constants';
+
+export const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
+export const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 // Alternatively you can use CommonJS syntax:
 require('cypress-grep')(); // eslint-disable-line import/no-extraneous-dependencies
