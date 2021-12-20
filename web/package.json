@@ -192,7 +192,7 @@
     "yaml-loader": "^0.6.0"
   },
   "resolutions": {
-    "ansi-regex": "5.0.1",
+    "ansi-regex": "6.0.1",
     "glob-parent": "^5.1.2",
     "hosted-git-info": "2.8.9",
     "immer": "^9.0.6",
