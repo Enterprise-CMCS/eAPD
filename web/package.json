@@ -109,12 +109,7 @@
     "regenerator-runtime": "^0.13.7",
     "reselect": "^4.0.0",
     "stickybits": "^3.7.9",
-<<<<<<< HEAD
-    "storybook": "^6.4.1",
-    "tinymce": "^5.10.0",
-=======
     "tinymce": "^5.10.1",
->>>>>>> main
     "title-case": "^3.0.3",
     "updeep": "^1.2.0",
     "url-loader": "^4.1.1",
@@ -136,12 +131,12 @@
     "@storybook/addon-a11y": "^6.3.12",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-controls": "^6.3.12",
-    "@storybook/addon-docs": "^6.4.7",
-    "@storybook/addon-essentials": "^6.4.7",
+    "@storybook/addon-docs": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addon-jest": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
     "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^6.4.7",
+    "@storybook/react": "^6.3.12",
     "@storybook/source-loader": "^6.3.12",
     "@storybook/storybook-deployer": "^2.8.10",
     "@testing-library/jest-dom": "^5.15.1",
