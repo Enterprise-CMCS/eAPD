@@ -95,6 +95,7 @@ describe(
               files: [file]
             }
           });
+          cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
           cy.get('[alt="PDF document icon"]').should('be.visible');
           cy.get('a').contains('test.pdf').should('be.visible');
@@ -105,6 +106,7 @@ describe(
             .should('not.be.disabled');
 
           cy.contains('Add State Admin Letter').click();
+          cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
           cy.contains('Federal Administrator Portal').should('be.visible');
         });
@@ -113,6 +115,7 @@ describe(
 
     it('allows a letter to be deleted', () => {
       cy.visit('/');
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.fixture('users').then(userData => {
         cy.contains(userData[0].name)
@@ -124,9 +127,8 @@ describe(
 
         cy.contains('Delete Certification?');
         cy.get('#react-aria-modal-dialog').within(() => {
-          cy.get('button').contains('Delete').click();
+          cy.findByRole('button', { name: /Delete/ }).click();
         });
-        cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
 
         cy.contains(userData[0].name).should('not.exist');
       });

@@ -1,4 +1,4 @@
-describe('state admin letters table', { tags: ['@admin'] }, () => {
+describe('state admin letters table', { tags: ['@fed', '@admin'] }, () => {
   const getInputByLabel = label => {
     return cy
       .contains('label', label)
@@ -15,6 +15,7 @@ describe('state admin letters table', { tags: ['@admin'] }, () => {
 
   beforeEach(() => {
     cy.useFedAdmin('/');
+    cy.wait(3000); // eslint-disable-line cypress/no-unnecessary-waiting
   });
 
   after(() => cy.task('db:resetcertificationmatch'));
