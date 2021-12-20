@@ -1,8 +1,5 @@
 import React from 'react';
 
-export const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
-export const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
-
 export const APD_STATUS = {
   DRAFT: Symbol('draft'),
   SUBMITTED: Symbol('submitted'),

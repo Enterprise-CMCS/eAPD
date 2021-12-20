@@ -16,115 +16,121 @@ const thisFFY = (() => {
 
 const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
 
-describe('filling out state admin delegation form', () => {
-  let delegateStateAdminFormUrl;
+describe(
+  'filling out state admin delegation form',
+  { tags: ['@fed', '@admin'] },
+  () => {
+    let delegateStateAdminFormUrl;
 
-  const getInputByLabel = label => {
-    return cy
-      .contains('label', label)
-      .invoke('attr', 'for')
-      .then(id => {
-        cy.get(`#${id}`);
+    const getInputByLabel = label => {
+      return cy
+        .contains('label', label)
+        .invoke('attr', 'for')
+        .then(id => {
+          cy.get(`#${id}`);
+        });
+    };
+
+    before(() => {
+      cy.useFedAdmin();
+      cy.findByRole('button', { name: /Add State Admin Letter/i }).click();
+      cy.location('pathname').then(pathname => {
+        delegateStateAdminFormUrl = pathname;
       });
-  };
-
-  before(() => {
-    cy.useFedAdmin();
-    cy.findByRole('button', { name: /Add State Admin Letter/i }).click();
-    cy.location('pathname').then(pathname => {
-      delegateStateAdminFormUrl = pathname;
-    });
-  });
-
-  beforeEach(() => {
-    cy.useFedAdmin(delegateStateAdminFormUrl);
-  });
-
-  it('tests default values', () => {
-    cy.url().should('include', '/delegate-state-admin');
-
-    cy.get('legend').contains('Period of Delegated Authority');
-
-    cy.get('input[type=radio]').should('have.length', 2);
-
-    twoYears.forEach(year => {
-      getInputByLabel(year).should('have.value', year);
-      getInputByLabel(year).should('not.be.checked');
     });
 
-    getInputByLabel(
-      'Name of State employee to be delegated as eAPD State Adminstrator'
-    ).should('have.value', '');
-    cy.get('select').first().contains('Select an Option');
-    getInputByLabel('State employee email address').should('have.value', '');
-    getInputByLabel('State employee phone number').should('have.value', '');
+    beforeEach(() => {
+      cy.useFedAdmin(delegateStateAdminFormUrl);
+    });
 
-    // Check the drop target zone is rendered
-    cy.get('[id=file-input]').contains('Drag files here');
-  });
+    it('tests default values', () => {
+      cy.url().should('include', '/delegate-state-admin');
 
-  it('hitting cancel should return user back to federal dashboard', () => {
-    cy.contains('Cancel').click();
-    cy.contains('Federal Administrator Portal').should('be.visible');
-  });
+      cy.get('legend').contains('Period of Delegated Authority');
 
-  it('tests filling out and submitting the form', () => {
-    // Check that submit button starts disabled
-    cy.get('button').contains('Add State Admin Letter').should('be.disabled');
+      cy.get('input[type=radio]').should('have.length', 2);
 
-    cy.get('input[type=radio]').first().check({ force: true });
+      twoYears.forEach(year => {
+        getInputByLabel(year).should('have.value', year);
+        getInputByLabel(year).should('not.be.checked');
+      });
 
-    cy.fixture('users').then(userData => {
       getInputByLabel(
         'Name of State employee to be delegated as eAPD State Adminstrator'
-      ).type(userData[0].name);
-      cy.get('select').select('Maryland');
-      getInputByLabel('State employee email address').type(userData[0].email);
-      getInputByLabel('State employee phone number').type(userData[0].phone);
+      ).should('have.value', '');
+      cy.get('select').first().contains('Select an Option');
+      getInputByLabel('State employee email address').should('have.value', '');
+      getInputByLabel('State employee phone number').should('have.value', '');
+
+      // Check the drop target zone is rendered
+      cy.get('[id=file-input]').contains('Drag files here');
     });
 
-    cy.fixture('test.pdf').then(myFile => {
-      const file = new File([myFile], 'test.pdf', {
-        type: 'application/pdf'
-      });
-
-      cy.get('#file-input').trigger('drop', {
-        dataTransfer: {
-          files: [file]
-        }
-      });
+    it('hitting cancel should return user back to federal dashboard', () => {
+      cy.contains('Cancel').click();
+      cy.contains('Federal Administrator Portal').should('be.visible');
     });
 
-    cy.get('[alt="PDF document icon"]').should('be.visible');
-    cy.get('a').contains('test.pdf').should('be.visible');
+    it('tests filling out and submitting the form', () => {
+      // Check that submit button starts disabled
+      cy.get('button').contains('Add State Admin Letter').should('be.disabled');
 
-    // When filled out form submit button should be enabled
-    cy.get('button')
-      .contains('Add State Admin Letter')
-      .should('not.be.disabled');
+      cy.get('input[type=radio]').first().check({ force: true });
 
-    cy.contains('Add State Admin Letter').click();
+      cy.fixture('users').then(userData => {
+        getInputByLabel(
+          'Name of State employee to be delegated as eAPD State Adminstrator'
+        ).type(userData[0].name);
+        cy.get('select').select('Maryland');
+        getInputByLabel('State employee email address').type(userData[0].email);
+        getInputByLabel('State employee phone number').type(userData[0].phone);
+      });
 
-    cy.contains('Federal Administrator Portal').should('be.visible');
-  });
-
-  it('allows a letter to be deleted', () => {
-    cy.visit('/');
-
-    cy.fixture('users').then(userData => {
-      cy.contains(userData[0].name)
-        .parent('tr')
-        .within(() => {
-          // all searches are automatically rooted to the found tr element
-          cy.get('td').eq(6).contains('button', 'Delete').click();
+      cy.fixture('test.pdf').then(myFile => {
+        const file = new File([myFile], 'test.pdf', {
+          type: 'application/pdf'
         });
 
-      cy.contains('Delete Certification?');
-      cy.get('#react-aria-modal-dialog').within(() => {
-        cy.get('button').contains('Delete').click();
+        cy.get('#file-input').trigger('drop', {
+          dataTransfer: {
+            files: [file]
+          }
+        });
       });
 
-      cy.contains(userData[0].name).should('not.exist');
+      cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.get('[alt="PDF document icon"]').should('be.visible');
+      cy.get('a').contains('test.pdf').should('be.visible');
+
+      // When filled out form submit button should be enabled
+      cy.get('button')
+        .contains('Add State Admin Letter')
+        .should('not.be.disabled');
+
+      cy.contains('Add State Admin Letter').click();
+
+      cy.contains('Federal Administrator Portal').should('be.visible');
     });
-  });
-});
+
+    it('allows a letter to be deleted', () => {
+      cy.visit('/');
+
+      cy.fixture('users').then(userData => {
+        cy.contains(userData[0].name)
+          .parent('tr')
+          .within(() => {
+            // all searches are automatically rooted to the found tr element
+            cy.get('td').eq(6).contains('button', 'Delete').click();
+          });
+
+        cy.contains('Delete Certification?');
+        cy.get('#react-aria-modal-dialog').within(() => {
+          cy.get('button').contains('Delete').click();
+        });
+        cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
+
+        cy.contains(userData[0].name).should('not.exist');
+      });
+    });
+  }
+);
