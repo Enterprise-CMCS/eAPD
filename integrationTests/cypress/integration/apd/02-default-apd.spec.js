@@ -46,7 +46,6 @@ describe('Default APD', { tags: ['@apd', '@default'] }, () => {
       .click();
 
     cy.get('.ds-c-button--danger').click();
-    cy.waitForSave();
 
     cy.get(`a[href='${apdUrl}']`).should('not.exist');
   });

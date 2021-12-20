@@ -1,6 +1,5 @@
 import ActivityPage from '../../../page-objects/activity-page';
 import PopulatePage from '../../../page-objects/populate-page';
-import ExportPage from '../../../page-objects/export-page';
 
 export const testDefaultPrivateContractorCosts = () => {
   it('should display the default Private Contractor Costs', () => {
@@ -17,17 +16,7 @@ export const testDefaultPrivateContractorCosts = () => {
     cy.waitForSave();
   });
 
-  it('should display the default activity overview in the export view', () => {
-    const exportPage = new ExportPage();
-
-    cy.goToExportView();
-
-    exportPage.checkPrivateContractorCosts({
-      activityHeader: 'Activity 1: Program Administration'
-    });
-
-    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
-  });
+  // TODO: export view tests
 };
 
 export const testPrivateContractorCostsWithData = years => {
@@ -61,19 +50,36 @@ export const testPrivateContractorCostsWithData = years => {
       }).should('exist');
       const contractors = activityData.privateContractors.slice(0, 2);
 
-      contractors.forEach((contractor, index) => {
-        cy.findByRole('button', { name: /Add Contractor/i }).click();
-        cy.findByLabelText(/Private Contractor or Vendor Name/i).should(
-          'exist'
-        );
+      contractors.forEach(
+        ({ name, description, start, end, totalCosts, FFYcosts }, index) => {
+          cy.findByRole('button', { name: /Add Contractor/i }).click();
+          cy.findByLabelText(/Private Contractor or Vendor Name/i).should(
+            'exist'
+          );
 
-        populatePage.fillContractorForm({ ...contractor, years, index });
-        activityPage.checkPrivateContractorOutput({
-          ...contractor,
-          years,
-          index
-        });
-      });
+          populatePage.fillContractorForm(
+            name,
+            description,
+            start,
+            end,
+            totalCosts,
+            FFYcosts,
+            index
+          );
+
+          const startDate = `${start[0]}/${start[1]}/${start[2]}`;
+          const endDate = `${end[0]}/${end[1]}/${end[2]}`;
+
+          activityPage.checkPrivateContractorOutput(
+            name,
+            description,
+            `${startDate} - ${endDate}`,
+            totalCosts,
+            years,
+            FFYcosts
+          );
+        }
+      );
 
       cy.log('delete a private contractor');
       cy.findAllByText('Delete').eq(0).click();
@@ -86,22 +92,7 @@ export const testPrivateContractorCostsWithData = years => {
       cy.waitForSave();
     });
 
-    it('should display the default activity overview in the export view', () => {
-      const exportPage = new ExportPage();
-
-      cy.goToExportView();
-
-      const { name } = activityData.activityOverview[0];
-      const contractors = activityData.privateContractors.slice(1, 2);
-
-      exportPage.checkPrivateContractorCosts({
-        activityHeader: `Activity 1: ${name}`,
-        contractors,
-        years
-      });
-
-      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
-    });
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
@@ -123,36 +114,53 @@ export const testPrivateContractorCostsWithData = years => {
 
       cy.findByRole('button', { name: /Add Contractor/i }).click();
       cy.findByLabelText(/Private Contractor or Vendor Name/i).should('exist');
-      populatePage.fillContractorForm({ ...contractor1, years, index: 0 });
+      populatePage.fillContractorForm(
+        contractor1.name,
+        contractor1.description,
+        contractor1.start,
+        contractor1.end,
+        contractor1.totalCosts,
+        contractor1.FFYcosts,
+        0
+      );
 
       // Add another private contractor
       cy.findByRole('button', { name: /Add Contractor/i }).click();
       cy.findByLabelText(/Private Contractor or Vendor Name/i).should('exist');
+      populatePage.fillTextField('ds-c-field', contractor2.name);
+      cy.setTinyMceContent(
+        'contractor-description-field-1',
+        contractor2.description
+      );
+      populatePage.fillDate('Contract start date', contractor2.start);
+      populatePage.fillDate('Contract end date', contractor2.end);
 
-      populatePage.fillContractorForm({
-        ...contractor2,
-        hourly: true,
-        years,
-        index: 1
-      });
+      populatePage.fillTextField(
+        'ds-c-field ds-c-field--currency ds-c-field--medium',
+        contractor2.totalCosts,
+        0
+      );
+
+      cy.findByRole('radio', { name: /Yes/i }).click({ force: true });
+      for (let i = 0; i < years.length; i += 1) {
+        populatePage.fillTextField(
+          'ds-c-field ds-c-field--medium',
+          contractor2.FFYcosts[i][0],
+          i
+        );
+
+        populatePage.fillTextField(
+          'ds-c-field ds-c-field--currency ds-c-field--medium',
+          contractor2.FFYcosts[i][1],
+          i + 1
+        );
+      }
+
+      cy.findByRole('button', { name: /Done/i }).click();
+
       cy.waitForSave();
     });
 
-    it('should display the default activity overview in the export view', () => {
-      const exportPage = new ExportPage();
-
-      cy.goToExportView();
-
-      const { name } = activityData.activityOverview[1];
-      const contractors = activityData.privateContractors.slice(2);
-
-      exportPage.checkPrivateContractorCosts({
-        activityHeader: `Activity 2: ${name}`,
-        contractors,
-        years
-      });
-
-      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
-    });
+    // TODO: export view tests
   });
 };

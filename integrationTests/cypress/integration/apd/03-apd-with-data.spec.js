@@ -46,7 +46,6 @@ describe('APD with Data', { tags: ['@apd', '@data'] }, () => {
       .click();
 
     cy.get('.ds-c-button--danger').click();
-    cy.waitForSave();
 
     cy.get(`a[href='${apdUrl}']`).should('not.exist');
   });

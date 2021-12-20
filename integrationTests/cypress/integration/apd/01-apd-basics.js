@@ -188,24 +188,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
       });
     });
-
-    it('should go to the Activity Overview page when edit is clicked in Executive Summary', () => {
-      cy.goToExecutiveSummary();
-
-      cy.get('#executive-summary-summary')
-        .parent()
-        .contains('div', 'Activity 1: Program Administration')
-        .parent()
-        .parent()
-        .findByRole('button', { name: 'Edit' })
-        .click();
-
-      cy.findByRole('heading', {
-        name: /^Activity 1:/i,
-        level: 2
-      }).should('exist');
-      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
-    });
   });
 
   describe('Subforms', () => {
@@ -344,10 +326,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkOutcomeOutput({
-        outcome: 'Outcome not specified',
-        metrics: ['Metric not specified']
-      });
+      activityPage.checkOutcomeOutput(
+        'Outcome not specified',
+        'Metric not specified'
+      );
 
       cy.contains('Edit').click();
       activityPage.checkMetricFunctionality();
@@ -358,10 +340,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkDate('Target completion date');
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkMilestoneOutput({
-        milestone: 'Milestone not specified',
-        targetDate: 'Date not specified'
-      });
+      activityPage.checkMilestoneOutput(
+        'Milestone not specified',
+        'Date not specified'
+      );
     });
 
     it('should handle entering data inState Staff and Expenses', () => {
@@ -372,38 +354,28 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       activityPage.checkInputField('Personnel title', '');
       activityPage.checkInputField('Description', '');
-      activityPage.checkStateStaffFFY({
-        years,
-        expectedValue: years.map(() => ({
-          cost: '',
-          fte: '',
-          total: 0
-        }))
-      });
+      activityPage.checkStateStaffFFY(years, '');
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkStateStaffOutput({
-        name: 'Personnel title not specified',
+      activityPage.checkStateStaffOutput(
+        'Personnel title not specified',
         years,
-        cost: 0,
-        fte: 0
-      });
+        0,
+        0
+      );
 
       cy.log('should be able to add a state expense');
       cy.findByRole('button', { name: /Add State Expense/i }).click();
       activityPage.checkInputField('Description', '');
-      activityPage.checkFFYinputCostFields({
-        years,
-        FFYcosts: years.map(() => '')
-      });
+      activityPage.checkFFYinputCostFields(years, '');
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkOtherStateExpensesOutput({
-        category: 'Category not specified',
+      activityPage.checkOtherStateExpensesOutput(
+        'Category not specified',
         years,
-        FFYcosts: [0, 0]
-      });
+        [0, 0]
+      );
     });
 
     it('should handle entering data in Private Contractor Costs', () => {
@@ -421,22 +393,18 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         0
       );
       cy.get('[type="radio"][checked]').should('have.value', 'no');
-      activityPage.checkFFYinputCostFields({
-        years,
-        FFYcosts: years.map(() => '')
-      });
+      activityPage.checkFFYinputCostFields(years, '');
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkPrivateContractorOutput({
-        name: 'Private Contractor or Vendor Name not specified',
-        description:
-          'Procurement Methodology and Description of Services not specified',
-        dateRange: 'Date not specified - Date not specified',
-        totalCosts: 0,
+      activityPage.checkPrivateContractorOutput(
+        'Private Contractor or Vendor Name not specified',
+        'Procurement Methodology and Description of Services not specified',
+        'Full Contract Term: Date not specified - Date not specified',
+        'Total Contract Cost: $0',
         years,
-        FFYcosts: [0, 0]
-      });
+        [0, 0]
+      );
     });
 
     it('should handle entering data in Budget and FFP', () => {
@@ -452,31 +420,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               budgetPage.checkSplitFunctionality();
 
               cy.get('[class="ds-c-field"]').select('75-25');
-              budgetPage.checkCostSplitTable({
-                federalSharePercentage: 0.75,
-                federalShareAmount: 0,
-                stateSharePercentage: 0.25,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
-              });
+              budgetPage.checkCostSplitTable(75, 25, 0, 0, 0);
 
               cy.get('[class="ds-c-field"]').select('50-50');
-              budgetPage.checkCostSplitTable({
-                federalSharePercentage: 0.5,
-                federalShareAmount: 0,
-                stateSharePercentage: 0.5,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
-              });
+              budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
 
               cy.get('[class="ds-c-field"]').select('90-10');
-              budgetPage.checkCostSplitTable({
-                federalSharePercentage: 0.9,
-                federalShareAmount: 0,
-                stateSharePercentage: 0.1,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
-              });
+              budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
             });
         });
       });
@@ -702,7 +652,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .next()
         .should(
           'have.text',
-          `Full Contract Term: Date not specified - Date not specifiedTotal Contract Cost: $0${privateContractorCosts}`
+          `Full Contract Term: Dates not specifiedTotal Contract Cost: $0${privateContractorCosts}`
         );
 
       cy.then(() => {
