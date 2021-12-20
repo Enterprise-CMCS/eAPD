@@ -75,7 +75,8 @@ jobs:
           working-directory: ./integrationTests
           browser: chrome
           config-file: cypress.json
-          wait-on: 'http://localhost:8080'
+          wait-on: 'http://localhost:8080, http://localhost:8081/heartbeat'
+          wait-on-timeout: 300
           headless: true
           record: true
           parallel: true
