@@ -34,8 +34,8 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
           docker-compose up -d
-          docker-compose exec api npm run migrate
-          docker-compose exec api npm run seed
+          docker-compose exec -T api npm run migrate
+          docker-compose exec -T api npm run seed
       - name: Cypress setup
         working-directory: ./integrationTests
         env:
