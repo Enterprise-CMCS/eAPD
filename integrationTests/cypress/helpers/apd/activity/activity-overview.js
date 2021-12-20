@@ -1,5 +1,6 @@
 import ActivityPage from '../../../page-objects/activity-page';
 import PopulatePage from '../../../page-objects/populate-page';
+import ExportPage from '../../../page-objects/export-page';
 
 export const testDefaultActivityOverview = () => {
   let activityPage;
@@ -26,17 +27,21 @@ export const testDefaultActivityOverview = () => {
   });
 
   it('should display the default activity overview in the export view', () => {
+    const exportPage = new ExportPage();
     cy.goToExportView();
 
-    cy.findByRole('heading', { level: 3, name: 'Activity Overview' }).should(
-      'exist'
-    );
-
-    cy.findByRole('heading', {
-      name: /Statement of Alternative Considerations and Supporting Justification/i
-    })
-      .next()
-      .should('have.text', '');
+    exportPage.checkActivityOverview({
+      activityHeader: 'Activity 1: Program Administration',
+      shortOverview: '',
+      startDate: 'Date not specified',
+      endDate: 'Date not specified',
+      detailedDescription: '',
+      supportingJustifications: '',
+      supportsMedicaid:
+        'No response was provided for how this activity will support the Medicaid standards and conditions.',
+      doesNotSupportsMedicaid:
+        'No response was provided for how this activity will support the Medicaid standards and conditions.'
+    });
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
@@ -70,20 +75,26 @@ export const testActivityOverviewWithData = () => {
 
       const overview = activityOverview.activityOverview[0];
 
-      populatePage.fillActivityOverview(
-        overview.shortOverview,
-        overview.startDate,
-        overview.endDate,
-        overview.detailedDescription,
-        overview.supportingJustificaions
-      );
-
-      cy.setTinyMceContent(
-        'standards-and-conditions-supports-field',
-        overview.supportsMedicaid
-      );
-
+      populatePage.fillActivityOverview(overview);
       cy.waitForSave();
+    });
+
+    it('should display the default activity overview in the export view', () => {
+      const exportPage = new ExportPage();
+      cy.goToExportView();
+
+      const overview = activityOverview.activityOverview[0];
+
+      exportPage.checkActivityOverview({
+        ...overview,
+        activityHeader: `Activity 1: ${overview.name}`,
+        doesNotSupportsMedicaid:
+          'No response was provided for how this activity will support the Medicaid standards and conditions.',
+        startDate: overview.startDate.join('/'),
+        endDate: overview.endDate.join('/')
+      });
+
+      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
     });
 
     // TODO: export view tests
@@ -102,20 +113,27 @@ export const testActivityOverviewWithData = () => {
       cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
 
       const overview = activityOverview.activityOverview[1];
-      populatePage.fillActivityOverview(
-        overview.shortOverview,
-        overview.startDate,
-        overview.endDate,
-        overview.detailedDescription,
-        overview.supportingJustificaions
-      );
+      populatePage.fillActivityOverview(overview);
 
-      cy.get('[class="ds-c-field visibility--screen"]').type(
-        overview.supportsMedicaid
-      );
       cy.waitForSave();
     });
 
-    // TODO: export view tests
+    it('should display the default activity overview in the export view', () => {
+      const exportPage = new ExportPage();
+      cy.goToExportView();
+
+      const overview = activityOverview.activityOverview[1];
+
+      exportPage.checkActivityOverview({
+        ...overview,
+        activityHeader: `Activity 2: ${overview.name}`,
+        doesNotSupportsMedicaid:
+          'No response was provided for how this activity will support the Medicaid standards and conditions.',
+        startDate: overview.startDate.join('/'),
+        endDate: overview.endDate.join('/')
+      });
+
+      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+    });
   });
 };

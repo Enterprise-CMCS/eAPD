@@ -1,0 +1,67 @@
+{
+  "activitySummaries": [
+    {
+      "activityTotalCosts": 760000,
+      "totalComputableMedicaidCost": 747000,
+      "federalShareAmount": 464250,
+      "ffys": [
+        {
+          "activityTotalCosts": 368000,
+          "totalComputableMedicaidCost": 363000,
+          "federalShareAmount": 272250
+        },
+        {
+          "activityTotalCosts": 392000,
+          "totalComputableMedicaidCost": 384000,
+          "federalShareAmount": 192000
+        }
+      ]
+    },
+    {
+      "activityTotalCosts": 552314,
+      "totalComputableMedicaidCost": 539314,
+      "federalShareAmount": 377178,
+      "ffys": [
+        {
+          "activityTotalCosts": 368000,
+          "totalComputableMedicaidCost": 363000,
+          "federalShareAmount": 135256
+        },
+        {
+          "activityTotalCosts": 392000,
+          "totalComputableMedicaidCost": 384000,
+          "federalShareAmount": 241922
+        }
+      ]
+    }
+  ],
+  "totalCostSummary": {
+    "totalCost": 1312314,
+    "totalTotalMedicaidCost": 1286314,
+    "totalFederalShare": 841428,
+    "ffys": [
+      {
+        "activityTotalCosts": 736000,
+        "totalComputableMedicaidCost": 726000,
+        "federalShareAmount": 407506
+      },
+      {
+        "activityTotalCosts": 784000,
+        "totalComputableMedicaidCost": 768000,
+        "federalShareAmount": 43392
+      }
+    ]
+  },
+  "programBudgetTables": {
+    "hitAndHie": [
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 241922, 26880, 241922, 26880, 268802],
+      [0, 0, 241922, 26880, 241922, 26880, 268802]
+    ],
+    "mmis": [
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0]
+    ]
+  }
+}
