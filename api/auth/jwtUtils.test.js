@@ -407,9 +407,9 @@ tap.test('Local jwtUtils', async t => {
         new: newPermissions
       })
       
-    const getAffiliationByState = sinon.stub()
+    const getAffiliationsByState = sinon.stub()
     
-    getAffiliationByState
+    getAffiliationsByState
       .withArgs('ABCD1234', 'new')
       .resolves({
         id: 60,
@@ -447,7 +447,7 @@ tap.test('Local jwtUtils', async t => {
       getStateById_: getStateById,
       getUserPermissionsForStates_: getUserPermissionsForStates,
       getAffiliatedStates_ : getAffiliatedStates,
-      getAffiliationByState_: getAffiliationByState
+      getAffiliationsByState_: getAffiliationsByState
     });
     const newUser = await actualVerifyEAPDToken(token);
 
@@ -491,9 +491,9 @@ tap.test('Local jwtUtils', async t => {
         new: newPermissions
       })
       
-    const getAffiliationByState = sinon.stub()
+    const getAffiliationsByState = sinon.stub()
     
-    getAffiliationByState
+    getAffiliationsByState
       .withArgs('ABCD1234', 'new')
       .resolves({
         id: 60,
@@ -533,7 +533,7 @@ tap.test('Local jwtUtils', async t => {
       getStateById_: getStateById,
       getUserPermissionsForStates_: getUserPermissionsForStates,
       getAffiliatedStates_ : getAffiliatedStates,
-      getAffiliationByState_: getAffiliationByState,
+      getAffiliationsByState_: getAffiliationsByState,
       updateAuthAffiliation_: updateAuthAffiliation
     });
 

@@ -1,3 +1,4 @@
+const isPast = require('date-fns/isPast');
 const knex = require('./knex');
 
 const getAuthActivities = async ({ db = knex } = {}) =>
@@ -92,11 +93,27 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
  * @function
  * @returns {Array} 
  */
-const getUserAffiliations = async (userId, { db = knex } = {}) => 
-// Todo: update this to return only expired affiliations
+const getExpiredUserAffiliations = async (userId, { db = knex } = {}) => 
+  db('auth_affiliations')
+    .select()
+    .where('user_id', userId)
+    .then(rows => {
+      const expiredRows = rows.filter(row => isPast(row.expires_at))
+      return expiredRows;
+    })
+
+/**
+ * Retrieves a single affiliation by user per state
+ * @async
+ * @function
+ * @returns {Object}
+ */
+const getAffiliationsByState = async (userId, stateId, { db = knex } = {}) => 
   db('auth_affiliations')
     .where('user_id', userId)
+    .andWhere('state_id', stateId)
     .select()
+    .first();
 
 /**
  * Retrieves a user's permissions per state
@@ -134,5 +151,6 @@ module.exports = {
   getRolesAndActivities,
   getUserAffiliatedStates,
   getUserPermissionsForStates,
-  getUserAffiliations
+  getExpiredUserAffiliations,
+  getAffiliationsByState
 };

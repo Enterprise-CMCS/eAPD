@@ -8,7 +8,8 @@ const {
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getAffiliationByState: actualGetAffiliationByState,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
-  getUserAffiliations: actualGetUserAffiliations
+  getExpiredUserAffiliations: actualGetExpiredUserAffiliations,
+  getAffiliationsByState: actualGetAffiliationsByState
 } = require('../db/auth');
 const { updateAuthAffiliation: actualUpdateAuthAffiliation } = require('../db/affiliations');
 
@@ -133,9 +134,24 @@ const changeState = async (
   {
     getStateById_ = getStateById,
     getUserPermissionsForStates_ = actualGetUserPermissionsForStates,
-    getAffiliatedStates_ = actualGetUserAffiliatedStates
+    getAffiliatedStates_ = actualGetUserAffiliatedStates,
+    getAffiliationsByState_ = actualGetAffiliationsByState,
+    updateAuthAffiliation_ = actualUpdateAuthAffiliation
   } = {}
 ) => {
+  const stateAffiliation = await getAffiliationsByState_(user.id, stateId);
+  
+  if (isPast(stateAffiliation.expires_at)) {
+    await updateAuthAffiliation_({
+      affiliationId: stateAffiliation.id,
+      newRoleId: -1,
+      newStatus: 'revoked',
+      changedBy: 'system',
+      stateId: stateAffiliation.state_id,
+      ffy: null
+    })
+  }
+    
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user));
   newUser.state = await getStateById_(stateId);
@@ -149,31 +165,32 @@ const changeState = async (
   return sign(newUser, {});
 };
 
-const verifyExpirations = async (
+const verifyAndUpdateExpirations = async (
   claims,
   {
-    getUserAffiliations_ = actualGetUserAffiliations,
+    getExpiredUserAffiliations_ = actualGetExpiredUserAffiliations,
+    getAffiliatedStates_ = actualGetUserAffiliatedStates,
     updateAuthAffiliation_ = actualUpdateAuthAffiliation
   } = {}
 ) => {
-  // Todo:
-  // * update this method to only get expired affiliations
-  // * loop over that list and call updateAuthAffiliation_ on each
-  // * idea: return true/false from this method if there were expired affiliations
-  const affiliations = await getUserAffiliations_(claims.id);
-  console.log("affiliations", affiliations);
-  // const stateAffiliation = await getAffiliationByState_(user.id, stateId);
+  const expiredAffiliations = await getExpiredUserAffiliations_(claims.id);
+
+  const updatedAffiliations = expiredAffiliations.map(async affiliation => {
+    await updateAuthAffiliation_({
+      affiliationId: affiliation.id,
+      newRoleId: -1,
+      newStatus: 'revoked',
+      changedBy: 'system',
+      stateId: affiliation.state_id,
+      ffy: null
+    })
+  });
   
-  // if (isPast(stateAffiliation.expires_at)) {
-  //   await updateAuthAffiliation_({
-  //     affiliationId: stateAffiliation.id,
-  //     newRoleId: -1,
-  //     newStatus: 'revoked',
-  //     changedBy: 'system',
-  //     stateId: stateAffiliation.state_id,
-  //     ffy: null
-  //   })
-  // }
+  await Promise.all(updatedAffiliations);
+  
+  const affiliations = await getAffiliatedStates_(claims.id);
+  claims.states = affiliations;
+  return claims;
 };
 
 const mockVerifyEAPDJWT = token => {
@@ -200,6 +217,6 @@ if (process.env.NODE_ENV === 'test') {
     verifyEAPDToken,
     exchangeToken,
     changeState,
-    verifyExpirations
+    verifyAndUpdateExpirations
   };
 }
