@@ -72,6 +72,16 @@ describe(
     });
 
     it('tests filling out and submitting the form', () => {
+      cy.intercept({
+        method: 'POST',
+        pathname: '/auth/certifications/files'
+      }).as('uploadFile');
+
+      cy.intercept({
+        method: 'POST',
+        pathname: '/auth/certifications'
+      }).as('submitForm');
+
       // Check that submit button starts disabled
       cy.get('button').contains('Add State Admin Letter').should('be.disabled');
 
@@ -85,37 +95,47 @@ describe(
         getInputByLabel('State employee email address').type(userData[0].email);
         getInputByLabel('State employee phone number').type(userData[0].phone);
 
-        cy.fixture('test.pdf').then(myFile => {
-          const file = new File([myFile], 'test.pdf', {
-            type: 'application/pdf'
+        cy.fixture('test.pdf', 'binary')
+          .then(Cypress.Blob.binaryStringToBlob)
+          .then(fileContent => {
+            const file = new File([fileContent], 'test.pdf', {
+              type: 'application/pdf'
+            });
+
+            cy.get('#file-input').trigger('drop', {
+              dataTransfer: {
+                files: [file]
+              }
+            });
           });
 
-          cy.get('#file-input').trigger('drop', {
-            dataTransfer: {
-              files: [file]
-            }
-          });
-          cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+        cy.wait('@uploadFile', { timeout: 30000 });
 
-          cy.get('[alt="PDF document icon"]').should('be.visible');
-          cy.get('a').contains('test.pdf').should('be.visible');
+        cy.get('[alt="PDF document icon"]').should('be.visible');
+        cy.get('a').contains('test.pdf').should('be.visible');
 
-          // When filled out form submit button should be enabled
-          cy.get('button')
-            .contains('Add State Admin Letter')
-            .should('not.be.disabled');
+        // When filled out form submit button should be enabled
+        cy.get('button')
+          .contains('Add State Admin Letter')
+          .should('not.be.disabled');
 
-          cy.contains('Add State Admin Letter').click();
-          cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+        cy.contains('Add State Admin Letter').click();
+        cy.wait('@submitForm', { timeout: 30000 });
 
-          cy.contains('Federal Administrator Portal').should('be.visible');
-        });
+        cy.contains('Federal Administrator Portal').should('be.visible');
       });
     });
 
     it('allows a letter to be deleted', () => {
+      cy.intercept({
+        method: 'GET',
+        pathname: '/auth/certifications'
+      }).as('loadCertifications');
+
       cy.visit('/');
-      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.wait('@loadCertifications');
+
+      cy.findByRole('heading', { name: /Federal Administrator Portal/i });
 
       cy.fixture('users').then(userData => {
         cy.contains(userData[0].name)

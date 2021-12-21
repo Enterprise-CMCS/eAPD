@@ -15,7 +15,7 @@ describe('state admin letters table', { tags: ['@fed', '@admin'] }, () => {
 
   beforeEach(() => {
     cy.useFedAdmin('/');
-    cy.wait(3000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.findByRole('heading', { name: /Federal Administrator Portal/i });
   });
 
   after(() => cy.task('db:resetcertificationmatch'));
