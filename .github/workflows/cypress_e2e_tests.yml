@@ -11,7 +11,6 @@ jobs:
     environment: Preview
     runs-on: ubuntu-18.04
     timeout-minutes: 150
-    container: cypress/browsers:node14.17.0-chrome91-ff89
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -80,7 +79,6 @@ jobs:
           headless: true
           record: true
           tag: ${{ matrix.containers }}
-          cache-key: node-v${{ matrix.containers }}-on-${{ runner.os }}-hash-${{ hashFiles('yarn.lock') }}
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
