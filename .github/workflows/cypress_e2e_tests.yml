@@ -70,8 +70,9 @@ jobs:
         uses: cypress-io/github-action@v2.9.7
         with:
           # we have already installed all dependencies above
+          working-directory: ./integrationTests
           browser: chrome
-          config-file: integrationTests/cypress.json
+          config-file: cypress.json
           install: false
           build: npx cypress info
           command: npx cypress run --env grepTags=${{ matrix.containers }}
