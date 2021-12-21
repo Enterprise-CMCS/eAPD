@@ -6,7 +6,6 @@ const { getUserByID } = require('../db');
 const { getStateById } = require('../db/states');
 const { 
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
-  getAffiliationByState: actualGetAffiliationByState,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
   getExpiredUserAffiliations: actualGetExpiredUserAffiliations,
   getAffiliationsByState: actualGetAffiliationsByState
@@ -188,9 +187,11 @@ const verifyAndUpdateExpirations = async (
   
   await Promise.all(updatedAffiliations);
   
+  // copy the token to prevent altering it
+  const newClaims = JSON.parse(JSON.stringify(claims));
   const affiliations = await getAffiliatedStates_(claims.id);
-  claims.states = affiliations;
-  return claims;
+  newClaims.states = affiliations;
+  return newClaims;
 };
 
 const mockVerifyEAPDJWT = token => {
