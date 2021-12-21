@@ -11,7 +11,7 @@ import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 /* eslint-disable no-return-assign */
 /* eslint-disable prefer-arrow-callback */
 
-describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
+describe('APD Basics', { tags: ['@apd', '@basic'] }, () => {
   let apdUrl;
   const years = [];
   const pageTitles = [
