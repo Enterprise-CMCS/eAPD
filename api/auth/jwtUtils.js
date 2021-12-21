@@ -171,9 +171,9 @@ const verifyAndUpdateExpirations = async (
     getAffiliatedStates_ = actualGetUserAffiliatedStates,
     updateAuthAffiliation_ = actualUpdateAuthAffiliation
   } = {}
-) => {
+) => { 
   const expiredAffiliations = await getExpiredUserAffiliations_(claims.id);
-
+  
   const updatedAffiliations = expiredAffiliations.map(async affiliation => {
     await updateAuthAffiliation_({
       affiliationId: affiliation.id,
@@ -207,7 +207,8 @@ if (process.env.NODE_ENV === 'test') {
     verifyEAPDToken: mockVerifyEAPDJWT,
     exchangeToken,
     actualVerifyEAPDToken: verifyEAPDToken,
-    changeState
+    changeState,
+    verifyAndUpdateExpirations
   };
 } else {
   module.exports = {
