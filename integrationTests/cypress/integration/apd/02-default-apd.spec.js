@@ -35,20 +35,23 @@ describe('Default APD', { tags: ['@apd', '@default'] }, () => {
   });
 
   after(() => {
-    cy.useStateStaff();
-    cy.get(`a[href='${apdUrl}']`).should('exist');
+    if (apdUrl) {
+      cy.intercept('DELETE', `/apds/${apdUrl}/`).as('delete');
+      cy.useStateStaff();
+      cy.get(`a[href='${apdUrl}']`).should('exist');
 
-    cy.get(`a[href='${apdUrl}']`)
-      .parent()
-      .parent()
-      .parent()
-      .contains('Delete')
-      .click();
+      cy.get(`a[href='${apdUrl}']`)
+        .parent()
+        .parent()
+        .parent()
+        .contains('Delete')
+        .click();
 
-    cy.get('.ds-c-button--danger').click();
-    cy.waitForSave();
+      cy.get('.ds-c-button--danger').click();
+      cy.wait('@delete');
 
-    cy.get(`a[href='${apdUrl}']`).should('not.exist');
+      cy.get(`a[href='${apdUrl}']`).should('not.exist');
+    }
   });
 
   describe('Form View', () => {
