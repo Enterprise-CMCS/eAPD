@@ -164,6 +164,7 @@ function createNewInstance() {
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}},{Key=cms-cloud-exempt:open-sg,Value=CLDSPT-5877}]" \
     --user-data file://aws.user-data.sh \
     --key-name eapd_bbrooks \
+    --iam-instance-profile "EnablesEC2ToAccessSystemsManagerRole" \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
@@ -239,7 +240,7 @@ function waitForInstanceToBeReady() {
     INSTANCE_CHECK_COUNT=$((INSTANCE_CHECK_COUNT+1))
   done
   print "  ...status check #$INSTANCE_CHECK_COUNT: READY"
-  aws ssm send-command --instance-ids "$1" --document-name "AWS-RunPatchBaseline" --comment "CMS Patch Compliance" --iam-instance-profile "EnablesEC2ToAccessSystemsManagerRole"
+  aws ssm send-command --instance-ids "$1" --document-name "AWS-RunPatchBaseline" --comment "CMS Patch Compliance"
 }
 
 # Iterate while there are arguments
