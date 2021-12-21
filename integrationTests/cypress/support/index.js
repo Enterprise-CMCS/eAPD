@@ -14,7 +14,8 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import 'cypress-axe-core'; // eslint-disable-line import/no-extraneous-dependencies
+// TODO: reenable cypress axe
+// import 'cypress-axe-core'; // eslint-disable-line import/no-extraneous-dependencies
 import 'cypress-react-selector'; // eslint-disable-line import/no-extraneous-dependencies
 import { commandTimings } from 'cypress-timings'; // eslint-disable-line import/no-extraneous-dependencies
 
