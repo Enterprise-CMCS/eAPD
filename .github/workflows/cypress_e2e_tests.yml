@@ -42,20 +42,23 @@ jobs:
         # to make sure we use the precise Cypress version
         # (which is important when using ^ version in package.json)
         # see https://github.com/actions/cache
-        # - name: Cache NPM and Cypress 📦
-        #   uses: actions/cache@v2
-        #   with:
-        #     working-directory: ./integrationTests
-        #     path: |
-        #       ~/.cache/Cypress
-        #       node_modules
-        #     key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-      - name: Install Cypress
-        uses: cypress-io/github-action@v2
+      - name: Cache NPM and Cypress 📦
+        uses: actions/cache@v2
         with:
           working-directory: ./integrationTests
-          runTests: false
-          install-command: npm ci && sh cypress-ci-setup.sh
+          path: |
+            ~/.cache/Cypress
+            node_modules
+          key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Cypress setup
+        working-directory: ./integrationTests
+        run: |
+          npm ci
+          sh cypress-ci-setup.sh
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
