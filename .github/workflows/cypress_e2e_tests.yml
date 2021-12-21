@@ -44,9 +44,7 @@ jobs:
         with:
           working-directory: ./integrationTests
           runTests: false
-          install-command: |
-            npm ci
-            sh cypress-ci-setup.sh
+          install-command: npm ci && sh cypress-ci-setup.sh
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
