@@ -32,6 +32,8 @@ jobs:
           OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DOCKER_CYPRESS_UN: ${{ secrets.DOCKER_CYPRESS_UN }}
+          DOCKER_CYPRESS_PW: ${{ secrets.DOCKER_CYPRESS_PW }}
         run: |
           docker login -u $DOCKER_CYPRESS_UN -p $DOCKER_CYPRESS_PW
           docker-compose up -d
