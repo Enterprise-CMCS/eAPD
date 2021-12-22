@@ -15,7 +15,7 @@ import { testAssurancesAndComplianceWithData } from '../../helpers/apd/assurance
 import { testExecutiveSummaryWithData } from '../../helpers/apd/executive-summary';
 
 // Tests an APD by adding data and checking the results
-describe('APD with Data', { tags: ['@apd', '@data'] }, () => {
+describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   let apdUrl;
   const years = [];
 

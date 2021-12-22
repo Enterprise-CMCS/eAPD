@@ -15,7 +15,7 @@ import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances
 import { testDefaultExecutiveSummary } from '../../helpers/apd/executive-summary';
 
 // Tests the default values of an APD
-describe('Default APD', { tags: ['@apd', '@default'] }, () => {
+describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   let apdUrl;
   const years = [];
 
