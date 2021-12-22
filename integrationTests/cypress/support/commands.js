@@ -178,6 +178,24 @@ Cypress.Commands.add('waitForSave', () => {
   );
 });
 
+Cypress.Commands.add('deleteAPD', apdId => {
+  if (apdId) {
+    cy.useStateStaff();
+    cy.get(`a[href='/apd/${apdId}']`).then($el => {
+      cy.intercept('DELETE', `${Cypress.env('API')}/apds/${apdId}`).as(
+        'delete'
+      );
+
+      cy.wrap($el).parent().parent().parent().contains('Delete').click();
+
+      cy.get('.ds-c-button--danger').click();
+      cy.wait('@delete');
+    });
+  }
+
+  cy.get(`a[href='/apd/${apdId}']`).should('not.exist');
+});
+
 Cypress.Commands.add('goToApdOverview', () => {
   cy.get('a.ds-c-vertical-nav__label')
     .contains(/APD Overview/i)

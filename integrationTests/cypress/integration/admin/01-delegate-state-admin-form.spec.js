@@ -72,15 +72,14 @@ describe(
     });
 
     it('tests filling out and submitting the form', () => {
-      cy.intercept({
-        method: 'POST',
-        pathname: '/auth/certifications/files'
-      }).as('uploadFile');
+      cy.intercept(
+        'POST',
+        `${Cypress.env('API')}/auth/certifications/files`
+      ).as('uploadFile');
 
-      cy.intercept({
-        method: 'POST',
-        pathname: '/auth/certifications'
-      }).as('submitForm');
+      cy.intercept('POST', `${Cypress.env('API')}/auth/certifications`).as(
+        'submitForm'
+      );
 
       // Check that submit button starts disabled
       cy.get('button').contains('Add State Admin Letter').should('be.disabled');
@@ -127,10 +126,12 @@ describe(
     });
 
     it('allows a letter to be deleted', () => {
-      cy.intercept({
-        method: 'GET',
-        pathname: '/auth/certifications'
-      }).as('loadCertifications');
+      cy.intercept('GET', `${Cypress.env('API')}/auth/certifications`).as(
+        'loadCertifications'
+      );
+      cy.intercept('DELETE', `${Cypress.env('API')}/auth/certifications`).as(
+        'deleteCertification'
+      );
 
       cy.visit('/');
       cy.wait('@loadCertifications');
@@ -145,10 +146,15 @@ describe(
             cy.get('td').eq(6).contains('button', 'Delete').click();
           });
 
-        cy.contains('Delete Certification?');
-        cy.get('#react-aria-modal-dialog').within(() => {
-          cy.findByRole('button', { name: /Delete/ }).click();
+        cy.get('#react-aria-modal-dialog').then($el => {
+          if ($el) {
+            cy.wrap($el).within(() => {
+              cy.contains('Delete Certification?').should('exist');
+              cy.get('button').contains('Delete').click();
+            });
+          }
         });
+        cy.wait('@deleteCertification');
 
         cy.contains(userData[0].name).should('not.exist');
       });
