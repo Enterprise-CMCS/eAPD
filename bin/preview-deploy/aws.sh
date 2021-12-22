@@ -56,12 +56,6 @@ function deployPreviewtoEC2() {
   print "• Waiting for instance to be ready"
   waitForInstanceToBeReady "$INSTANCE_ID"
 
-  print "• Applying CMS Patches"
-  aws ssm send-command \
-    --targets Key=instanceids,Values=$INSTANCE_ID \
-    --document-name "AWS-RunPatchBaseline" \
-    --comment "CMS Patch Compliance"
-
   print "• Getting public DNS name of new instance"
   associateElasticIP "$INSTANCE_ID"
   PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
@@ -92,6 +86,12 @@ function deployPreviewtoEC2() {
   done <<< "$EXISTING_INSTANCES"
 
   echo "$PUBLIC_DNS"
+  
+  print "• Applying CMS Patches"
+  aws ssm send-command \
+    --targets Key=instanceids,Values=$INSTANCE_ID \
+    --document-name "AWS-RunPatchBaseline" \
+    --comment "CMS Patch Compliance"
 }
 
 # Sets up AWS global configuration for all subsequent commands.
