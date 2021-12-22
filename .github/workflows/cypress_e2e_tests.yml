@@ -33,6 +33,7 @@ jobs:
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
+          docker login -u $DOCKER_CYPRESS_UN -p $DOCKER_CYPRESS_PW
           docker-compose up -d
           docker-compose exec -T api npm run migrate
           docker-compose exec -T api npm run seed
