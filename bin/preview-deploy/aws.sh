@@ -82,7 +82,7 @@ function deployPreviewtoEC2() {
 
   print "• Applying CMS Patches"
   aws ssm send-command \
-    --targets "[{"Key":"InstanceIds","Values":["$INSTANCE_ID"]}]" \
+    --targets '[{\"Key\":\"InstanceIds\",\"Values\":[\"$INSTANCE_ID\"]}]' \
     --document-name "AWS-RunPatchBaseline" \
     --comment "CMS Patch Compliance"
 
