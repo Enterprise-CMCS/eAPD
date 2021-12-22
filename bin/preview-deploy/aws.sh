@@ -65,7 +65,7 @@ function deployPreviewtoEC2() {
   ENVIRONMENT="test"
   if [[ $ENVIRONMENT == "test" ]]; then
     while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS)" != "200" ]]; 
-      do print "• • Frontend currently unavailable" && sleep 60; 
+      do print "  ...Frontend currently unavailable" && sleep 60; 
     done
   else
     print "Environment $ENVIRONMENT is invalid"
@@ -74,19 +74,18 @@ function deployPreviewtoEC2() {
   print "• Checking availability of Backend"
   if [[ $ENVIRONMENT == "test" ]]; then
     while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS/api/heartbeat)" != "204" ]]; 
-      do print "• • Backend currently unavailable" && sleep 60; 
+      do print "  ...Backend currently unavailable" && sleep 60; 
     done
   else
     print "Environment $ENVIRONMENT is invalid"
   fi
 
   print "• Applying CMS Patches"
-  sh '''
   aws ssm send-command \
-    --targets '[{"Key":"InstanceIds","Values":["$INSTANCE_ID"]}]' \
+    --targets "Key=InstanceIds","Values=$INSTANCE_ID" \
     --document-name "AWS-RunPatchBaseline" \
     --comment "CMS Patch Compliance"
-  '''
+  
   print "• Cleaning up previous instances"
   while read -r INSTANCE_ID; do
     terminateInstance "$INSTANCE_ID"
