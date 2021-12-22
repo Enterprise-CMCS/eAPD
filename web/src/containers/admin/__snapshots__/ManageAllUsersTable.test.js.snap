@@ -16,42 +16,42 @@ Object {
             role="row"
           >
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Name
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Email
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Phone Number
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               State
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Role
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
@@ -67,7 +67,7 @@ Object {
             role="row"
           >
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="rowheader"
               rowspan="2"
               style="vertical-align: top;"
@@ -75,7 +75,7 @@ Object {
               Liz Lemon
             </th>
             <td
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="cell"
               rowspan="2"
               style="vertical-align: top;"
@@ -83,7 +83,7 @@ Object {
               liz@lemon.com
             </td>
             <td
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="cell"
               rowspan="2"
               style="vertical-align: top;"
@@ -91,19 +91,19 @@ Object {
               4045555555
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--state"
+              class="ds-c-table__cell--align-left all-users-table--state"
               role="cell"
             >
               MD
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--role"
+              class="ds-c-table__cell--align-left all-users-table--role"
               role="cell"
             >
               eAPD State Contractor
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--actions"
+              class="ds-c-table__cell--align-left all-users-table--actions"
               role="cell"
             >
               <div
@@ -119,19 +119,19 @@ Object {
             role="row"
           >
             <td
-              class="ds-u-text-align--left all-users-table--state"
+              class="ds-c-table__cell--align-left all-users-table--state"
               role="cell"
             >
               LA
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--role"
+              class="ds-c-table__cell--align-left all-users-table--role"
               role="cell"
             >
               eAPD State Contractor
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--actions"
+              class="ds-c-table__cell--align-left all-users-table--actions"
               role="cell"
             >
               <div
@@ -158,42 +158,42 @@ Object {
           role="row"
         >
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Name
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Email
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Phone Number
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Role
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
@@ -209,7 +209,7 @@ Object {
           role="row"
         >
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="rowheader"
             rowspan="2"
             style="vertical-align: top;"
@@ -217,7 +217,7 @@ Object {
             Liz Lemon
           </th>
           <td
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="cell"
             rowspan="2"
             style="vertical-align: top;"
@@ -225,7 +225,7 @@ Object {
             liz@lemon.com
           </td>
           <td
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="cell"
             rowspan="2"
             style="vertical-align: top;"
@@ -233,19 +233,19 @@ Object {
             4045555555
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--state"
+            class="ds-c-table__cell--align-left all-users-table--state"
             role="cell"
           >
             MD
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--role"
+            class="ds-c-table__cell--align-left all-users-table--role"
             role="cell"
           >
             eAPD State Contractor
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--actions"
+            class="ds-c-table__cell--align-left all-users-table--actions"
             role="cell"
           >
             <div
@@ -261,19 +261,19 @@ Object {
           role="row"
         >
           <td
-            class="ds-u-text-align--left all-users-table--state"
+            class="ds-c-table__cell--align-left all-users-table--state"
             role="cell"
           >
             LA
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--role"
+            class="ds-c-table__cell--align-left all-users-table--role"
             role="cell"
           >
             eAPD State Contractor
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--actions"
+            class="ds-c-table__cell--align-left all-users-table--actions"
             role="cell"
           >
             <div
@@ -357,35 +357,35 @@ Object {
             role="row"
           >
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Name
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Email
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Phone Number
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               State
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
@@ -401,7 +401,7 @@ Object {
             role="row"
           >
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="rowheader"
               rowspan="1"
               style="vertical-align: top;"
@@ -409,7 +409,7 @@ Object {
               Liz Lemon
             </th>
             <td
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="cell"
               rowspan="1"
               style="vertical-align: top;"
@@ -417,7 +417,7 @@ Object {
               liz@lemon.com
             </td>
             <td
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="cell"
               rowspan="1"
               style="vertical-align: top;"
@@ -425,13 +425,13 @@ Object {
               4045555555
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--state"
+              class="ds-c-table__cell--align-left all-users-table--state"
               role="cell"
             >
               MD
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--actions"
+              class="ds-c-table__cell--align-left all-users-table--actions"
               role="cell"
             >
               <div
@@ -458,35 +458,35 @@ Object {
           role="row"
         >
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Name
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Email
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Phone Number
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
@@ -502,7 +502,7 @@ Object {
           role="row"
         >
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="rowheader"
             rowspan="1"
             style="vertical-align: top;"
@@ -510,7 +510,7 @@ Object {
             Liz Lemon
           </th>
           <td
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="cell"
             rowspan="1"
             style="vertical-align: top;"
@@ -518,7 +518,7 @@ Object {
             liz@lemon.com
           </td>
           <td
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="cell"
             rowspan="1"
             style="vertical-align: top;"
@@ -526,13 +526,13 @@ Object {
             4045555555
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--state"
+            class="ds-c-table__cell--align-left all-users-table--state"
             role="cell"
           >
             MD
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--actions"
+            class="ds-c-table__cell--align-left all-users-table--actions"
             role="cell"
           >
             <div
@@ -616,42 +616,42 @@ Object {
             role="row"
           >
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Name
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Email
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Phone Number
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               State
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
               Role
             </th>
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="columnheader"
               scope="col"
             >
@@ -667,7 +667,7 @@ Object {
             role="row"
           >
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="rowheader"
               rowspan="1"
               style="vertical-align: top;"
@@ -675,7 +675,7 @@ Object {
               Liz Lemon
             </th>
             <td
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="cell"
               rowspan="1"
               style="vertical-align: top;"
@@ -683,7 +683,7 @@ Object {
               liz@lemon.com
             </td>
             <td
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="cell"
               rowspan="1"
               style="vertical-align: top;"
@@ -691,19 +691,19 @@ Object {
               4045555555
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--state"
+              class="ds-c-table__cell--align-left all-users-table--state"
               role="cell"
             >
               MD
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--role"
+              class="ds-c-table__cell--align-left all-users-table--role"
               role="cell"
             >
               eAPD State Contractor
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--actions"
+              class="ds-c-table__cell--align-left all-users-table--actions"
               role="cell"
             >
               <div
@@ -719,7 +719,7 @@ Object {
             role="row"
           >
             <th
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="rowheader"
               rowspan="2"
               style="vertical-align: top;"
@@ -727,7 +727,7 @@ Object {
               Liz Lemon
             </th>
             <td
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="cell"
               rowspan="2"
               style="vertical-align: top;"
@@ -735,7 +735,7 @@ Object {
               liz@lemon.com
             </td>
             <td
-              class="ds-u-text-align--left"
+              class="ds-c-table__cell--align-left"
               role="cell"
               rowspan="2"
               style="vertical-align: top;"
@@ -743,19 +743,19 @@ Object {
               4045555555
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--state"
+              class="ds-c-table__cell--align-left all-users-table--state"
               role="cell"
             >
               MD
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--role"
+              class="ds-c-table__cell--align-left all-users-table--role"
               role="cell"
             >
               eAPD State Contractor
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--actions"
+              class="ds-c-table__cell--align-left all-users-table--actions"
               role="cell"
             >
               <div
@@ -771,19 +771,19 @@ Object {
             role="row"
           >
             <td
-              class="ds-u-text-align--left all-users-table--state"
+              class="ds-c-table__cell--align-left all-users-table--state"
               role="cell"
             >
               LA
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--role"
+              class="ds-c-table__cell--align-left all-users-table--role"
               role="cell"
             >
               eAPD State Contractor
             </td>
             <td
-              class="ds-u-text-align--left all-users-table--actions"
+              class="ds-c-table__cell--align-left all-users-table--actions"
               role="cell"
             >
               <div
@@ -810,42 +810,42 @@ Object {
           role="row"
         >
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Name
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Email
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Phone Number
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
             Role
           </th>
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="columnheader"
             scope="col"
           >
@@ -861,7 +861,7 @@ Object {
           role="row"
         >
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="rowheader"
             rowspan="1"
             style="vertical-align: top;"
@@ -869,7 +869,7 @@ Object {
             Liz Lemon
           </th>
           <td
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="cell"
             rowspan="1"
             style="vertical-align: top;"
@@ -877,7 +877,7 @@ Object {
             liz@lemon.com
           </td>
           <td
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="cell"
             rowspan="1"
             style="vertical-align: top;"
@@ -885,19 +885,19 @@ Object {
             4045555555
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--state"
+            class="ds-c-table__cell--align-left all-users-table--state"
             role="cell"
           >
             MD
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--role"
+            class="ds-c-table__cell--align-left all-users-table--role"
             role="cell"
           >
             eAPD State Contractor
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--actions"
+            class="ds-c-table__cell--align-left all-users-table--actions"
             role="cell"
           >
             <div
@@ -913,7 +913,7 @@ Object {
           role="row"
         >
           <th
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="rowheader"
             rowspan="2"
             style="vertical-align: top;"
@@ -921,7 +921,7 @@ Object {
             Liz Lemon
           </th>
           <td
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="cell"
             rowspan="2"
             style="vertical-align: top;"
@@ -929,7 +929,7 @@ Object {
             liz@lemon.com
           </td>
           <td
-            class="ds-u-text-align--left"
+            class="ds-c-table__cell--align-left"
             role="cell"
             rowspan="2"
             style="vertical-align: top;"
@@ -937,19 +937,19 @@ Object {
             4045555555
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--state"
+            class="ds-c-table__cell--align-left all-users-table--state"
             role="cell"
           >
             MD
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--role"
+            class="ds-c-table__cell--align-left all-users-table--role"
             role="cell"
           >
             eAPD State Contractor
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--actions"
+            class="ds-c-table__cell--align-left all-users-table--actions"
             role="cell"
           >
             <div
@@ -965,19 +965,19 @@ Object {
           role="row"
         >
           <td
-            class="ds-u-text-align--left all-users-table--state"
+            class="ds-c-table__cell--align-left all-users-table--state"
             role="cell"
           >
             LA
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--role"
+            class="ds-c-table__cell--align-left all-users-table--role"
             role="cell"
           >
             eAPD State Contractor
           </td>
           <td
-            class="ds-u-text-align--left all-users-table--actions"
+            class="ds-c-table__cell--align-left all-users-table--actions"
             role="cell"
           >
             <div
