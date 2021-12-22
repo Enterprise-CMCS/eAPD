@@ -56,6 +56,12 @@ function deployPreviewtoEC2() {
   print "• Waiting for instance to be ready"
   waitForInstanceToBeReady "$INSTANCE_ID"
 
+  print "• Applying CMS Patches"
+  aws ssm send-command \
+    --targets "Key=instanceids,Values=$INSTANCE_ID" \
+    --document-name "AWS-RunPatchBaseline" \
+    --comment "CMS Patch Compliance"
+
   print "• Getting public DNS name of new instance"
   associateElasticIP "$INSTANCE_ID"
   PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
@@ -80,12 +86,6 @@ function deployPreviewtoEC2() {
     print "Environment $ENVIRONMENT is invalid"
   fi
 
-  print "• Applying CMS Patches"
-  aws ssm send-command \
-    --targets "Key=instanceids,Values=$INSTANCE_ID" \
-    --document-name "AWS-RunPatchBaseline" \
-    --comment "CMS Patch Compliance"
-  
   print "• Cleaning up previous instances"
   while read -r INSTANCE_ID; do
     terminateInstance "$INSTANCE_ID"
