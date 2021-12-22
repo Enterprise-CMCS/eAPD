@@ -56,14 +56,9 @@ function deployPreviewtoEC2() {
   print "• Waiting for instance to be ready"
   waitForInstanceToBeReady "$INSTANCE_ID"
 
-  print "• Addint IAM Role to new instance"
-  aws ec2 associate-iam-instance-profile \
-    --instance-id $INSTANCE_ID \
-    --iam-instance-profile Name="CCSPatchRole"
-
   print "• Applying CMS Patches"
   aws ssm send-command \
-    --targets "Key=instanceids,Values=$INSTANCE_ID" \
+    --targets Key=instanceids,Values=$INSTANCE_ID \
     --document-name "AWS-RunPatchBaseline" \
     --comment "CMS Patch Compliance"
 
