@@ -19,7 +19,8 @@ jobs:
       fail-fast: false
       matrix:
         # run 3 copies of the current job in parallel
-        containers: ['@apd+@default', '@apd+@data', '-@slow']
+        containers:
+          ['@apd+@default', '@apd+@data', '-@apd+@default;-@apd+@data']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
