@@ -250,7 +250,7 @@ function applyCMSPatches() {
   aws ssm send-command \
     --targets Key=instanceids,Values=$1 \
     --document-name "AWS-RunPatchBaseline" \
-    --comment "CMS Patch Compliance"
+    --comment "CMS Patch Compliance" \
     > /dev/null
   print "  ...patches applied"
 }
