@@ -249,6 +249,7 @@ function applyCMSPatches() {
     --targets Key=instanceids,Values=$1 \
     --document-name "AWS-RunPatchBaseline" \
     --comment "CMS Patch Compliance"
+    > /dev/null    
 }
 
 # Iterate while there are arguments
