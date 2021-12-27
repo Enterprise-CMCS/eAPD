@@ -245,8 +245,6 @@ function waitForInstanceToBeReady() {
 }
 
 function applyCMSPatches() {
-
-  print "• Applying CMS Patches"
   aws ssm send-command \
     --targets Key=instanceids,Values=$1 \
     --document-name "AWS-RunPatchBaseline" \
