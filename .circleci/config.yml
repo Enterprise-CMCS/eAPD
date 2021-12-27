@@ -682,6 +682,9 @@ jobs:
                 --MONGO_URL "$PREVIEW_MONGO_URL" 
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
+              echo $PRNUM
+              echo $URL
+              echo $CIRCLE_SHA1
             else
               echo "Not a pull request"
             fi
