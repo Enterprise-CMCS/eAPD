@@ -92,6 +92,9 @@ function deployPreviewtoEC2() {
   done <<< "$EXISTING_INSTANCES"
 
   echo "$PUBLIC_DNS"
+
+  print "• Applying CMS Patches"
+  applyCMSPatches "$INSTANCE_ID"
 }
 
 # Sets up AWS global configuration for all subsequent commands.
@@ -247,6 +250,15 @@ function waitForInstanceToBeReady() {
   print "  ...status check #$INSTANCE_CHECK_COUNT: READY"
 }
 
+function applyCMSPatches() {
+
+  print "• Applying CMS Patches"
+  aws ssm send-command \
+    --targets Key=instanceids,Values=$1 \
+    --document-name "AWS-RunPatchBaseline" \
+    --comment "CMS Patch Compliance"
+}
+
 # Iterate while there are arguments
 while [ $# -gt 0 ]; do
   # If the argument begins with --, strip the -- to create the variable name
@@ -261,9 +273,3 @@ while [ $# -gt 0 ]; do
 done
 
 echo "$(deployPreviewtoEC2)"
-
-  print "• Applying CMS Patches"
-  aws ssm send-command \
-    --targets Key=instanceids,Values=$INSTANCE_ID \
-    --document-name "AWS-RunPatchBaseline" \
-    --comment "CMS Patch Compliance"
