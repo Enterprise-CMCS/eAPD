@@ -264,6 +264,6 @@ echo "$(deployPreviewtoEC2)"
 
   print "• Applying CMS Patches"
   aws ssm send-command \
-    --targets Key=instanceids,Values=$1 \
+    --targets Key=instanceids,Values=$INSTANCE_ID \
     --document-name "AWS-RunPatchBaseline" \
     --comment "CMS Patch Compliance"
