@@ -80,11 +80,11 @@ function deployPreviewtoEC2() {
     print "Environment $ENVIRONMENT is invalid"
   fi
 
-  print "• Applying CMS Patches"
-  aws ssm send-command \
-    --targets Key=instanceids,Values=$INSTANCE_ID \
-    --document-name "AWS-RunPatchBaseline" \
-    --comment "CMS Patch Compliance"
+#  print "• Applying CMS Patches"
+#  aws ssm send-command \
+#    --targets Key=instanceids,Values=$INSTANCE_ID \
+#    --document-name "AWS-RunPatchBaseline" \
+#    --comment "CMS Patch Compliance"
 
   print "• Cleaning up previous instances"
   while read -r INSTANCE_ID; do
@@ -261,3 +261,9 @@ while [ $# -gt 0 ]; do
 done
 
 echo "$(deployPreviewtoEC2)"
+
+  print "• Applying CMS Patches"
+  aws ssm send-command \
+    --targets Key=instanceids,Values=$1 \
+    --document-name "AWS-RunPatchBaseline" \
+    --comment "CMS Patch Compliance"
