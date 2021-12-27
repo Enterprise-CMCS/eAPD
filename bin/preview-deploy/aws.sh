@@ -80,11 +80,8 @@ function deployPreviewtoEC2() {
     print "Environment $ENVIRONMENT is invalid"
   fi
 
-#  print "• Applying CMS Patches"
-#  aws ssm send-command \
-#    --targets Key=instanceids,Values=$INSTANCE_ID \
-#    --document-name "AWS-RunPatchBaseline" \
-#    --comment "CMS Patch Compliance"
+  print "• Applying CMS Patches"
+  applyCMSPatches "$INSTANCE_ID"
 
   print "• Cleaning up previous instances"
   while read -r INSTANCE_ID; do
@@ -92,9 +89,6 @@ function deployPreviewtoEC2() {
   done <<< "$EXISTING_INSTANCES"
 
   echo "$PUBLIC_DNS"
-
-  print "• Applying CMS Patches"
-  applyCMSPatches "$INSTANCE_ID"
 }
 
 # Sets up AWS global configuration for all subsequent commands.
