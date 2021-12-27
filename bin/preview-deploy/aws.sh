@@ -48,7 +48,7 @@ function deployPreviewtoEC2() {
   # Create new EC2 instance
   print "• Creating EC2 instance"
   INSTANCE_ID=$(createNewInstance $AMI_ID)
-  print "• Created instance $INSTANCE_ID"
+  print "  ...Created instance $INSTANCE_ID"
 
   # Wait for the instance to become ready.  This will happen once the VM is
   # networkically available, which isn't strictly useful to us, but it's as
@@ -59,7 +59,7 @@ function deployPreviewtoEC2() {
   print "• Getting public DNS name of new instance"
   associateElasticIP "$INSTANCE_ID"
   PUBLIC_DNS=$(getPublicDNS "$INSTANCE_ID")
-  print "• Public address: $PUBLIC_DNS"
+  print "  ...Public address: $PUBLIC_DNS"
 
   print "• Checking availability of Frontend"
   ENVIRONMENT="test"
@@ -67,6 +67,7 @@ function deployPreviewtoEC2() {
     while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS)" != "200" ]]; 
       do print "  ...Frontend currently unavailable" && sleep 60; 
     done
+    print "  ...Frontend is available"
   else
     print "Environment $ENVIRONMENT is invalid"
   fi
@@ -76,6 +77,7 @@ function deployPreviewtoEC2() {
     while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://$PUBLIC_DNS/api/heartbeat)" != "204" ]]; 
       do print "  ...Backend currently unavailable" && sleep 60; 
     done
+    print "  ...Backend is available"
   else
     print "Environment $ENVIRONMENT is invalid"
   fi
@@ -249,7 +251,8 @@ function applyCMSPatches() {
     --targets Key=instanceids,Values=$1 \
     --document-name "AWS-RunPatchBaseline" \
     --comment "CMS Patch Compliance"
-    > /dev/null    
+    > /dev/null
+  print "  ...patches applied"
 }
 
 # Iterate while there are arguments
