@@ -1,4 +1,4 @@
-describe('state admin letters table', () => {
+describe('state admin letters table', { tags: ['@admin'] }, () => {
   const getInputByLabel = label => {
     return cy
       .contains('label', label)
@@ -10,17 +10,13 @@ describe('state admin letters table', () => {
 
   before(() => {
     cy.useFedAdmin();
-<<<<<<< HEAD
-=======
-    cy.location('pathname').then(() => '/');
     cy.task('db:resetcertification', { email: 'Sincere@april.biz' });
->>>>>>> main
   });
 
   beforeEach(() => {
     cy.useFedAdmin('/');
   });
-  
+
   after(() => cy.task('db:resetcertificationmatch'));
 
   it('tests default values', () => {
@@ -45,7 +41,7 @@ describe('state admin letters table', () => {
     cy.get('#state-admin-letters').contains('Rows per page:');
   });
 
-  xit('allows filtering by status', () => {
+  it('allows filtering by status', () => {
     cy.get('#state-admin-letters td:contains(No Match)').should(
       'have.length',
       1
@@ -106,27 +102,27 @@ describe('state admin letters table', () => {
       2
     );
   });
-  
+
   it('allows matching to users/affiliations', () => {
     cy.contains('Match To User').click();
-    
+
     cy.contains('Cancel').click();
-    
+
     cy.contains('Match To User').click();
-    
+
     cy.contains('Match State Admin Letter to User');
-    
+
     getInputByLabel('Select User').select('State Staff');
-    
+
     cy.get('#dialog-content').find('li').contains('State Staff');
-    
+
     getInputByLabel('Select User').select('State Admin');
-    
+
     cy.contains('Match and Approve Access').click();
-    
+
     cy.get('#state-admin-letters td:contains(Matched)').should(
       'have.length',
       1
-    );    
-  })
+    );
+  });
 });

@@ -9,9 +9,12 @@ on:
 jobs:
   cypress-run:
     environment: Preview
-    runs-on: ubuntu-latest
-    timeout-minutes: 90
+    runs-on: ubuntu-18.04
+    timeout-minutes: 150
     steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress Dependency
@@ -26,7 +29,7 @@ jobs:
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           npm cache clean --force
           which python3
-          npm i --python=/usr/bin/python3
+          npm ci --python=/usr/bin/python3
       - name: Cypress Dependency Web
         working-directory: ./web
         env:
@@ -34,7 +37,7 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
-          npm install
+          npm ci
       - name: Cypress Dependency API
         working-directory: ./api
         env:
@@ -42,7 +45,7 @@ jobs:
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
           OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
         run: |
-          npm install
+          npm ci
       - name: Starting Dockerized eAPD App
         working-directory: ./
         env:
