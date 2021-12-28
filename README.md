@@ -58,7 +58,6 @@ export MONGO_DATABASE="eapd" #This is only a local value.  It will be different 
 export MONGO_URL="mongodb://mongo:cms@localhost:27017/eapd" #This is only a local value.  It will be different in production
 ```
 
-
 ### Create Okta accounts
 
 Create accounts in your Okta application with the following User Names (these accounts will

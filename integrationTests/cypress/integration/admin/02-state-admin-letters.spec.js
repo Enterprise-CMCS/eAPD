@@ -41,7 +41,7 @@ describe('state admin letters table', { tags: ['@admin'] }, () => {
     cy.get('#state-admin-letters').contains('Rows per page:');
   });
 
-  it('allows filtering by status', () => {
+  xit('allows filtering by status', () => {
     cy.get('#state-admin-letters td:contains(No Match)').should(
       'have.length',
       1

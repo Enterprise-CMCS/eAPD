@@ -155,7 +155,7 @@ workflows:
             - yaml test
             - backend unit test
             - backend api endpoint test
-            
+
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
@@ -291,7 +291,7 @@ jobs:
           name: validate
           command: |
             echo $DOCKER_PASSWORD |docker login -u $DOCKER_USERNAME --password-stdin 
-            docker create -v /openapi --name openapi alpine /bin/true
+            docker create -v /openapi --name openapi alpine:3 /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
 
@@ -407,7 +407,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_DATABASE="${<< parameters.env >>_MONGO_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -559,8 +559,9 @@ jobs:
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
               --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
-              --MONGO_MONGO_INITDB_DATABASE "${<< parameters.env >>_MONGO_INITDB_DATABASE}" \
+              --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}"
+              --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}"
 
       - run:
           when: on_fail
@@ -680,6 +681,7 @@ jobs:
                 --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD" \
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
                 --MONGO_URL "$PREVIEW_MONGO_URL" 
+                --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else

@@ -80,12 +80,14 @@ describe('activities reducer helpers', () => {
       contractorResources: [],
       costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
       costAllocationNarrative: {
-        2020: { otherSources: '' },
+        years: {
+          2020: { otherSources: '' }
+        },
         methodology: ''
       },
       description: '',
       expenses: [],
-      fundingSource: false,
+      fundingSource: null,
       key: '--- key ---',
       name: '',
       plannedEndDate: '',

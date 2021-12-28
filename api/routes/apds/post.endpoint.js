@@ -9,8 +9,12 @@ const {
 
 describe('APD endpoint | POST /apds', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   const url = `/apds`;
 
@@ -29,6 +33,7 @@ describe('APD endpoint | POST /apds', () => {
     const { created, updated } = response.data;
     delete response.data.created;
     delete response.data.updated;
+    delete response.data.id;
 
     expect(created).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
     expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);

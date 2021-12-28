@@ -34,7 +34,7 @@ tap.test('database wrappers / events', async eventsTests => {
           /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
         ),
         user_id: 'user id',
-        apd_id: 42,
+        apd_id: '42',
         event_type: 'export apd',
         event_at: '2020-11-01T00:00:00.000Z',
         metadata: null
@@ -69,7 +69,7 @@ tap.test('database wrappers / events', async eventsTests => {
             /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
           ),
           user_id: 'user id',
-          apd_id: 42,
+          apd_id: '42',
           event_type: 'export apd',
           event_at: '2020-11-01T00:00:00.000Z',
           metadata: { message: 'some metadata' }

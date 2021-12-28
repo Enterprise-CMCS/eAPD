@@ -23,13 +23,15 @@ Object {
         },
       },
       "costAllocationNarrative": Object {
-        "2022": Object {
-          "otherSources": "",
-        },
-        "2023": Object {
-          "otherSources": "",
-        },
         "methodology": "",
+        "years": Object {
+          "2022": Object {
+            "otherSources": "",
+          },
+          "2023": Object {
+            "otherSources": "",
+          },
+        },
       },
       "description": "",
       "expenses": Array [],
@@ -86,7 +88,6 @@ Object {
     },
   ],
   "federalCitations": Object {},
-  "id": 1,
   "incentivePayments": Object {
     "ehAmt": Object {
       "2022": Object {

@@ -122,14 +122,17 @@ export const testAPDOverviewWithData = () => {
 
     cy.log('HIT');
     cy.setTinyMceContent('hit-overview-field', apdOverview.HIT);
+    cy.wait(1500); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
 
     cy.log('HIE');
     cy.setTinyMceContent('hie-overview-field', apdOverview.HIE);
+    cy.wait(1500); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
 
     cy.log('MMIS');
     cy.setTinyMceContent('mmis-overview-field', apdOverview.MMIS);
-
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.wait(1500); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.waitForSave();
   });
 

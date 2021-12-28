@@ -35,30 +35,26 @@ module.exports = (
 
         const { error = null, image = null } = await validateFile(buffer);
         if (error) {
-          res
-            .status(415)
-            .send({ error })
-            .end();
-        } else {
-          const fileID = await createNewFileForAPD(
-            image,
-            req.params.id,
-            metadata,
-            size
-          );
-
-          try {
-            await putFile(fileID, image);
-          } catch (e) {
-            await deleteFileByID(fileID);
-            throw e;
-          }
-
-          res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
+          return res.status(415).send({ error }).end();
         }
+        const fileID = await createNewFileForAPD(
+          image,
+          req.params.id,
+          metadata,
+          size
+        );
+
+        try {
+          await putFile(fileID, image);
+        } catch (e) {
+          await deleteFileByID(fileID);
+          throw e;
+        }
+
+        return res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
       } catch (e) {
         logger.error({ id: req.id, message: e });
-        next({ message: 'Unable to upload file' });
+        return next({ message: 'Unable to upload file' });
       }
     }
   );

@@ -174,7 +174,12 @@ describe('APD reducer', () => {
         // them out a window. The king literally died of shock. This was the
         // First Defenestration of Prague.
         created: '1419-07-30T00:00:00Z',
-        federalCitations: {},
+        federalCitations: {
+          procurement: [],
+          recordsAccess: [],
+          softwareRights: [],
+          security: []
+        },
         keyPersonnel: [{ name: 'key person 1' }],
         value: `hurr hurr i'm a burr`,
         // Some nobles are tossed out a window in the Second Defenestration
@@ -313,8 +318,10 @@ describe('APD reducer', () => {
               1743: 'no'
             },
             costAllocationNarrative: {
-              1741: { otherSources: '' },
-              1742: { otherSources: '' },
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
               methodology: ''
             },
             contractorResources: [
@@ -397,8 +404,10 @@ describe('APD reducer', () => {
               1743: 'no'
             },
             costAllocationNarrative: {
-              1741: { otherSources: '' },
-              1742: { otherSources: '' },
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
               methodology: ''
             },
             contractorResources: [
@@ -515,8 +524,10 @@ describe('APD reducer', () => {
               1743: 'no'
             },
             costAllocationNarrative: {
-              1741: { otherSources: '' },
-              1742: { otherSources: '' },
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
               methodology: ''
             },
             contractorResources: [
@@ -630,7 +641,9 @@ describe('APD reducer', () => {
               1743: 'no'
             },
             costAllocationNarrative: {
-              1742: { otherSources: '' },
+              years: {
+                1742: { otherSources: '' }
+              },
               methodology: ''
             },
             contractorResources: [
@@ -816,12 +829,14 @@ describe('APD reducer', () => {
                   1787: { ffp: { federal: 0, state: 100 }, other: 0 }
                 },
                 costAllocationNarrative: {
-                  1787: { otherSources: '' },
+                  years: {
+                    1787: { otherSources: '' }
+                  },
                   methodology: ''
                 },
                 description: '',
                 expenses: [],
-                fundingSource: false,
+                fundingSource: null,
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
                 name: '',

@@ -3,6 +3,7 @@
 export NODE_ENV=test
 
 docker-compose -f docker-compose.endpoint-tests.yml up -d db
+docker-compose -f docker-compose.endpoint-tests.yml up -d mongo
 
 docker-compose -f docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "DROP DATABASE IF EXISTS hitech_apd_test;"'
 docker-compose -f docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "CREATE DATABASE hitech_apd_test;"'

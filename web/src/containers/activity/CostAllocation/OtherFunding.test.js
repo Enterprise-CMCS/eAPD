@@ -14,8 +14,10 @@ describe('<OtherFunding />', () => {
       key: 'activity key',
       costAllocationNarrative: {
         methodology: 'cost allocation',
-        1066: { otherSources: 'other funding for FFY 1066' },
-        1067: { otherSources: 'other funding for FFY 1067' }
+        years: {
+          1066: { otherSources: 'other funding for FFY 1066' },
+          1067: { otherSources: 'other funding for FFY 1067' }
+        }
       }
     },
     costAllocation: {

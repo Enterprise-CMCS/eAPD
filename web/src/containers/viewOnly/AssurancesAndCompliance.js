@@ -24,7 +24,7 @@ const AssurancesAndCompliance = ({ citations }) => {
                   Does this APD comply with{' '}
                   <LinkOrText link={regulations[title]} title={title} />?
                 </div>
-                {checked && (
+                {checked === true && (
                   <div>
                     <strong>Yes </strong>
                   </div>
@@ -48,7 +48,7 @@ const AssurancesAndCompliance = ({ citations }) => {
                     </div>
                   </div>
                 )}
-                {checked === '' && (
+                {checked === null && (
                   <div>
                     <strong>No response was provided</strong>
                   </div>

@@ -12,20 +12,24 @@ import Waypoint from '../ConnectedWaypoint';
 import AlertMissingFFY from '../../components/AlertMissingFFY';
 
 const All = ({ addActivity, activities }) => {
-  const apdId = +useParams().apdId;
+  const { apdId } = useParams();
   return (
     <React.Fragment>
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
-      <AlertMissingFFY/>
-    <Section id="activities" resource="activities">
-      <hr className="custom-hr" />
-      {activities.map((activity, index) => (
-        <EntryDetails apdId={apdId} activityIndex={index} key={activity.key} />
-      ))}
-      <Button className="ds-u-margin-top--4" onClick={addActivity}>
-        Add Activity
-      </Button>
-    </Section>
+      <AlertMissingFFY />
+      <Section id="activities" resource="activities">
+        <hr className="custom-hr" />
+        {activities.map((activity, index) => (
+          <EntryDetails
+            apdId={apdId}
+            activityIndex={index}
+            key={activity.key}
+          />
+        ))}
+        <Button className="ds-u-margin-top--4" onClick={addActivity}>
+          Add Activity
+        </Button>
+      </Section>
     </React.Fragment>
   );
 };

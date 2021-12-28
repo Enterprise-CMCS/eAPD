@@ -587,10 +587,12 @@ const buildBudget = incomingBigState => {
 
   const roundProps = o => {
     Object.entries(o).forEach(([key, value]) => {
-      if (typeof value === 'number') {
-        o[key] = fixNum(value);
-      } else if (typeof value === 'object') {
-        roundProps(value);
+      if (value) {
+        if (typeof value === 'number') {
+          o[key] = fixNum(value);
+        } else if (typeof value === 'object') {
+          roundProps(value);
+        }
       }
     });
   };

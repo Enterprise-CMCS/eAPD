@@ -12,10 +12,7 @@ tap.test('apds PATCH endpoint', async tests => {
     patch: sandbox.spy()
   };
 
-  const getAPDByID = sandbox.stub();
-  const patchObject = sandbox.stub();
   const updateAPDDocument = sandbox.stub();
-  const validate = sandbox.stub();
 
   const res = {
     end: sandbox.spy(),
@@ -32,13 +29,8 @@ tap.test('apds PATCH endpoint', async tests => {
     res.send.returns(res);
     res.status.returns(res);
 
-    validate.errors = [];
-
     patchEndpoint(app, {
-      getAPDByID,
-      patchObject,
-      updateAPDDocument,
-      validate
+      updateAPDDocument
     });
     handler = app.patch.args[0][app.patch.args[0].length - 1];
   });
@@ -59,13 +51,17 @@ tap.test('apds PATCH endpoint', async tests => {
   tests.test('handles the case where an APD ID is not provided', async test => {
     await handler({ params: {} }, res, next);
 
-    test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
+    test.ok(res.status.calledWith(400), 'sends an HTTP 404 status');
   });
 
   tests.test(
     'handles the case where the message body is not an array',
     async test => {
-      await handler({ params: { id: 'apd id' } }, res, next);
+      await handler(
+        { params: { id: 'apd id' }, user: { state: { id: 'co' } } },
+        res,
+        next
+      );
 
       test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
       test.ok(res.end.calledAfter(res.status), 'response is terminated');
@@ -74,92 +70,117 @@ tap.test('apds PATCH endpoint', async tests => {
 
   tests.test('fails gracefully on arbitrary database error', async test => {
     const error = new Error('fake error');
-    getAPDByID.throws(error);
-    await handler({ body: [], params: { id: 'apd id' } }, res, next);
+    updateAPDDocument.throws(error);
+    await handler(
+      { body: [], params: { id: 'apd id' }, user: { state: { id: 'co' } } },
+      res,
+      next
+    );
 
     test.ok(next.calledWith(error), 'calls next with the error');
   });
 
-  tests.test(
-    'fails gracefully if there is an error patching the document',
-    async test => {
-      const error = new Error('fake error');
-      getAPDByID.resolves({ document: 'old document' });
-      patchObject.throws(error);
-
-      const patches = [{ value: 'patch 1' }, { value: 'patch 2' }];
-
-      await handler({ body: patches, params: { id: 'apd id' } }, res, next);
-
-      test.ok(patchObject.calledWith('old document', patches));
-      test.ok(next.calledWith(error), 'calls next with the error');
-    }
-  );
-
   tests.test('fails if there are validation errors', async test => {
-    const patchedDocument = {
-      key1: {
-        key2: {
-          key3: 'value 1',
-          key4: 'value 2'
-        }
+    const errors = {
+      field1: {
+        value: '2022-15-31',
+        path: 'field1',
+        name: 'CastError',
+        message:
+          'Cast to date failed for value "2022-15-31" (type string) at path "field1"'
       }
     };
 
-    getAPDByID.resolves({ document: 'old document' });
-    patchObject.returns(patchedDocument);
-    validate.returns(false);
-    validate.errors = [
-      { dataPath: '/key1/key2/key3', message: 'validation error' }
-    ];
+    updateAPDDocument.resolves({ errors, apd: {} });
 
     const patches = [{ value: 'patch 1' }, { value: 'patch 2' }];
 
-    await handler({ body: patches, params: { id: 'apd id' } }, res, next);
+    await handler(
+      {
+        body: patches,
+        params: { id: 'apd id' },
+        user: { state: { id: 'co' } }
+      },
+      res,
+      next
+    );
 
-    test.ok(patchObject.calledWith('old document', patches), 'applies patches');
-    test.ok(validate.calledWith(patchedDocument), 'validates the new document');
-    test.ok(res.status.calledWith(400), 'sends an HTTP 400 status');
     test.ok(
-      res.send.calledWith([{ path: '/key1/key2/key3' }]),
+      res.send.calledWith({
+        errors,
+        apd: {
+          id: 'apd id',
+          created: undefined,
+          state: undefined,
+          updated: undefined
+        }
+      }),
       'sends back the list of invalid paths'
     );
-    test.ok(
-      res.send.calledAfter(res.status),
-      'response is sent after the status'
-    );
-    test.ok(res.end.calledAfter(res.send), 'response is terminated');
   });
 
   tests.test('saves the updated document if everything is good', async test => {
-    getAPDByID.resolves({
-      created_at: 'created at',
-      document: 'old document',
-      state_id: 'state id',
-      status: 'status'
+    const apd = {
+      id: 'apd id',
+      status: 'draft'
+    };
+    updateAPDDocument.resolves({
+      errors: {},
+      apd: {
+        ...apd,
+        createdAt: 'created at',
+        updatedAt: 'updated at',
+        stateId: 'co',
+        keyPersonnel: [
+          {
+            name: 'Sam I Am',
+            email: 'sam@greeneggs.com'
+          }
+        ]
+      }
     });
-    const patchedDocument = { key1: 'value 1' };
-    patchObject.returns(patchedDocument);
-    validate.returns(true);
-    updateAPDDocument.resolves('update time');
 
-    const patches = [{ path: 'path 1' }, { path: 'path 2' }];
+    const patches = [
+      { op: 'replace', path: '/keyPersonnel/0/name', value: 'Sam I Am' },
+      {
+        op: 'replace',
+        path: '/keyPersonnel/0/email',
+        value: 'sam@greeneggs.com'
+      }
+    ];
 
-    await handler({ body: patches, params: { id: 'apd id' } }, res, next);
+    await handler(
+      {
+        body: patches,
+        params: { id: 'apd id' },
+        user: { state: { id: 'co' } }
+      },
+      res,
+      next
+    );
 
     test.ok(
-      updateAPDDocument.calledWith('apd id', 'state id', patchedDocument),
+      updateAPDDocument.calledWith('apd id', 'co', patches),
       'updates the right set of things'
     );
 
     test.ok(
       res.send.calledWith({
-        ...patchedDocument,
-        created: 'created at',
-        id: 'apd id',
-        state: 'state id',
-        status: 'status',
-        updated: 'update time'
+        errors: {},
+        apd: {
+          ...apd,
+          id: 'apd id',
+          created: 'created at',
+          updated: 'updated at',
+          state: 'co',
+          status: 'draft',
+          keyPersonnel: [
+            {
+              name: 'Sam I Am',
+              email: 'sam@greeneggs.com'
+            }
+          ]
+        }
       })
     );
   });

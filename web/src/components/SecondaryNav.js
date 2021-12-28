@@ -12,7 +12,7 @@ import { addActivity as actualAddActivity } from '../actions/editActivity';
 
 const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
   const { activityIndex } = useParams();
-  const apdId = +useParams().apdId;
+  const { apdId } = useParams();
 
   const showAddActivityLink =
     Number(activityIndex) + 1 === activityCount &&
