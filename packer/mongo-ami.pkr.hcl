@@ -55,7 +55,8 @@ build {
             "MONGO_ADMIN_URL=${var.mongo_admin_url}",
             "DATABASE_URL=${var.database_url}",
             "OKTA_DOMAIN=${var.okta_domain}",
-            "OKTA_API_KEY=${var.okta_api_key}"
+            "OKTA_API_KEY=${var.okta_api_key}",
+            "ENVIRONMENT=${var.environment}"
         ]
         script = "./mongo.sh"
     }

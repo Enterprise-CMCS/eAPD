@@ -82,6 +82,7 @@ export MONGO_ADMIN_URL="$MONGO_ADMIN_URL"
 export DATABASE_URL="$DATABASE_URL"
 export OKTA_DOMAIN="$OKTA_DOMAIN"
 export OKTA_API_KEY="$OKTA_API_KEY"
+export ENVIRONMENT="$ENVIRONMENT"
 
 #!/bin/bash
 # Prepare PostGres test database
@@ -210,47 +211,47 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
         "collect_list": [
           {
             "file_path": "/var/log/aide/aide.log*",
-            "log_group_name": "staging/var/log/aide/aide.log"
+            "log_group_name": "$ENVIRONMENT/var/log/aide/aide.log"
           },
           {
             "file_path": "/var/log/audit/audit.log*",
-            "log_group_name": "staging/var/log/audit/audit.log"
+            "log_group_name": "$ENVIRONMENT/var/log/audit/audit.log"
           },
           {
             "file_path": "/var/log/awslogs.log*",
-            "log_group_name": "staging/var/log/awslogs.log"
+            "log_group_name": "$ENVIRONMENT/var/log/awslogs.log"
           },
           {
             "file_path": "/var/log/cloud-init.log*",
-            "log_group_name": "staging/var/log/cloud-init.log"
+            "log_group_name": "$ENVIRONMENT/var/log/cloud-init.log"
           },
           {
             "file_path": "/var/log/cloud-init-output.log*",
-            "log_group_name": "staging/var/log/cloud-init-output.log"
+            "log_group_name": "$ENVIRONMENT/var/log/cloud-init-output.log"
           },
           {
             "file_path": "/var/log/cron*",
-            "log_group_name": "staging/var/log/cron"
+            "log_group_name": "$ENVIRONMENT/var/log/cron"
           },
           {
             "file_path": "/var/log/dmesg*",
-            "log_group_name": "staging/var/log/dmesg"
+            "log_group_name": "$ENVIRONMENT/var/log/dmesg"
           },
           {
             "file_path": "/var/log/maillog*",
-            "log_group_name": "staging/var/log/maillog"
+            "log_group_name": "$ENVIRONMENT/var/log/maillog"
           },
           {
             "file_path": "/var/log/messages*",
-            "log_group_name": "staging/var/log/messages"
+            "log_group_name": "$ENVIRONMENT/var/log/messages"
           },
           {
             "file_path": "/var/log/secure*",
-            "log_group_name": "staging/var/log/secure"
+            "log_group_name": "$ENVIRONMENT/var/log/secure"
           },
           {
             "file_path": "/var/log/mongodb/mongod.log*",
-            "log_group_name": "staging/var/log/mongodb/mongod.log"
+            "log_group_name": "$ENVIRONMENT/var/log/mongodb/mongod.log"
           }          
         ]
       }
@@ -269,15 +270,15 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
         "collect_list": [
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent.log*",
-            "log_group_name": "staging/var/opt/ds_agent/diag/ds_agent.log"
+            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_agent.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent-err.log*",
-            "log_group_name": "staging/var/opt/ds_agent/diag/ds_agent-err.log"
+            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_agent-err.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_am.log*",
-            "log_group_name": "staging/var/opt/ds_agent/diag/ds_am.log"
+            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_am.log"
           }
         ]
       }
