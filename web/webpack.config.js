@@ -107,12 +107,11 @@ const config = {
 
     // uses module hashs as IDs instead of numeric indices, so adding a new
     // file to the app doesn't cause vendored output hash to change
-    // new webpack.moduleIds: 'hashed',
+    new webpack.HashedModuleIdsPlugin(),
 
     // Inject our app scripts into our HTML kickstarter
     new HtmlWebpackPlugin({
       minify: { removeComments: true },
-      moduleIds: 'hashed',
       template: 'src/index.html'
     })
   ]
