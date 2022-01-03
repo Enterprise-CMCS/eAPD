@@ -39,7 +39,6 @@ commandTimings();
 
 Cypress.on('uncaught:exception', err => {
   cy.log(err.message);
-  cy.log(err.stack);
   // returning false here prevents Cypress from
   // failing the test
   return false;
