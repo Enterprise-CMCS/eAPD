@@ -7,7 +7,7 @@
     "audit": "npx audit-ci --config ./audit-ci.json",
     "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
-    "build": "npm run scaffold && NODE_ENV=production webpack --mode production --env production",
+    "build": "npm run scaffold && NODE_ENV=production webpack --mode production",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --config webpack.config.dev.js",
     "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json",
