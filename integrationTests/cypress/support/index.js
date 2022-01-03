@@ -14,15 +14,17 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import 'cypress-axe-core'; // eslint-disable-line import/no-extraneous-dependencies
+// TODO: reenable cypress axe
+// import 'cypress-axe-core'; // eslint-disable-line import/no-extraneous-dependencies
 import 'cypress-react-selector'; // eslint-disable-line import/no-extraneous-dependencies
 import { commandTimings } from 'cypress-timings'; // eslint-disable-line import/no-extraneous-dependencies
 
 import './commands';
+
 import {
-  CONSENT_COOKIE_NAME,
-  API_COOKIE_NAME
-} from '../../../web/src/constants';
+  API_COOKIE_NAME,
+  CONSENT_COOKIE_NAME
+} from '../../../web/src/cookie-constants';
 
 // Alternatively you can use CommonJS syntax:
 require('cypress-grep')(); // eslint-disable-line import/no-extraneous-dependencies
@@ -34,3 +36,11 @@ Cypress.Cookies.defaults({
 Cypress.Cookies.debug(true, { verbose: true });
 
 commandTimings();
+
+Cypress.on('uncaught:exception', err => {
+  cy.log(err.message);
+  cy.log(err.stack);
+  // returning false here prevents Cypress from
+  // failing the test
+  return false;
+});

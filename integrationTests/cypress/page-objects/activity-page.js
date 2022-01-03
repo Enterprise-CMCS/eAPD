@@ -61,25 +61,36 @@ class ActivityPage {
 
   checkMetricFunctionality = () => {
     cy.findByRole('button', { name: /Add Metric/i }).click();
-    for (let i = 0; i < 2; i += 1) {
-      cy.get('[class="ds-c-review"]')
-        .eq(i)
-        .within(() => {
-          cy.contains('Delete').should('exist');
-        });
-    }
-    cy.contains('Delete').click();
-    cy.contains('Delete Metric?').should('exist');
-    cy.contains('Cancel').click();
-    cy.contains('Delete Metric?').should('not.exist');
-    cy.get('[class="ds-u-margin-right--2"]').eq(2).should('exist');
-    cy.contains('Delete').click();
-    cy.contains('Delete Metric?').should('exist');
-    cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+    cy.get('[class="ds-c-review"]')
+      .eq(0)
+      .within(() => {
+        cy.contains('Delete').should('exist');
+      });
+    cy.get('[class="ds-c-review"]')
+      .eq(1)
+      .within(() => {
+        cy.contains('Delete').should('exist');
+      });
 
-    cy.contains('Delete').should('not.exist');
-    cy.get('[class="ds-u-margin-right--2"]').eq(2).should('not.exist');
-    cy.contains('Delete').should('not.exist');
+    cy.get('div.ds-c-review > div > button.ds-c-button').eq(1).click();
+    cy.contains('Delete Metric?').should('exist');
+    cy.get('#react-aria-modal-dialog').within(() => {
+      cy.findByRole('button', { name: /Cancel/ }).click();
+    });
+    cy.contains('Delete Metric?').should('not.exist');
+    cy.get('div.ds-c-review > div > button.ds-c-button').should(
+      'have.length',
+      2
+    );
+
+    cy.get('div.ds-c-review > div > button.ds-c-button').eq(1).click();
+    cy.contains('Delete Metric?').should('exist');
+    cy.get('#react-aria-modal-dialog').within(() => {
+      cy.findByRole('button', { name: /Delete/ }).click();
+    });
+    cy.contains('Delete Metric?').should('not.exist');
+
+    cy.get('div.ds-c-review > div > button.ds-c-button').should('not.exist');
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
