@@ -16,7 +16,7 @@ const thisFFY = (() => {
 
 const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
 
-describe('filling out state admin delegation form', () => {
+describe('adding and removing state admin delegation forms', () => {
   let delegateStateAdminFormUrl;
 
   const getInputByLabel = label => {
@@ -33,6 +33,9 @@ describe('filling out state admin delegation form', () => {
     cy.findByRole('button', { name: /Add State Admin Letter/i }).click();
     cy.location('pathname').then(pathname => {
       delegateStateAdminFormUrl = pathname;
+    });
+    cy.fixture('users').then(userData => {
+      cy.task('db:resetcertification', { email: userData[0].email })
     });
   });
 
@@ -118,10 +121,10 @@ describe('filling out state admin delegation form', () => {
           // all searches are automatically rooted to the found tr element
           cy.get('td').eq(6).contains('button', 'Delete').click();
         });
-
-      cy.contains('Delete Certification?');
+      
       cy.get('#react-aria-modal-dialog').within(() => {
-        cy.get('button').contains('Delete').click();
+        cy.contains('Delete Certification?').should('be.visible');
+        cy.get('button').contains('Delete').click({force: true});
       });
 
       cy.contains(userData[0].name).should('not.exist');
