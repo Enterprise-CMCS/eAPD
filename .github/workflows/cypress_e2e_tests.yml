@@ -11,41 +11,18 @@ jobs:
     environment: Preview
     runs-on: ubuntu-18.04
     timeout-minutes: 150
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving the Dashboard hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: ['@apd+@default', '@apd+@data', '@admin; @auth']
     steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Cypress Dependency
-        working-directory: ./integrationTests
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-        run: |
-          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
-          sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-          npm cache clean --force
-          which python3
-          npm ci --python=/usr/bin/python3
-      - name: Cypress Dependency Web
-        working-directory: ./web
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-        run: |
-          npm ci
-      - name: Cypress Dependency API
-        working-directory: ./api
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-        run: |
-          npm ci
       - name: Starting Dockerized eAPD App
         working-directory: ./
         env:
@@ -55,26 +32,34 @@ jobs:
           OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DOCKER_CYPRESS_UN: ${{ secrets.DOCKER_CYPRESS_UN }}
+          DOCKER_CYPRESS_PW: ${{ secrets.DOCKER_CYPRESS_PW }}
         run: |
+          docker login -u $DOCKER_CYPRESS_UN -p $DOCKER_CYPRESS_PW
           docker-compose up -d
-      - name: NPM Migrate on API Container
-        working-directory: ./
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-        run: |
-          docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run migrate
-      - name: NPM Seed on API Container
-        working-directory: ./
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-        run: |
-          docker-compose exec -e OKTA_DOMAIN="$OKTA_DOMAIN" -e OKTA_API_KEY="$OKTA_API_KEY" -T api npm run seed
-      - name: Cypress E2E Tests
+          docker-compose exec -T api npm run migrate
+          docker-compose exec -T api npm run seed
+        # cache NPM modules and Cypress binary folder
+        # we can use "package-lock.json" as the key file
+        # to make sure we use the precise Cypress version
+        # (which is important when using ^ version in package.json)
+        # see https://github.com/actions/cache
+      - name: Cache NPM and Cypress 📦
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            integrationTests/node_modules
+          key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Cypress setup
         working-directory: ./integrationTests
+        run: |
+          npm ci
+          sh cypress-ci-setup.sh
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
@@ -83,5 +68,50 @@ jobs:
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
-        run: |
-          sh cypress-ci.sh
+      - name: Cypress tests
+        uses: cypress-io/github-action@v2.9.7
+        with:
+          # we have already installed all dependencies above
+          working-directory: ./integrationTests
+          browser: chrome
+          config-file: cypress.json
+          install: false
+          build: npx cypress info
+          command: npx cypress run --env grepTags=${{ matrix.containers }}
+          wait-on: 'http://localhost:8080, http://localhost:8081/heartbeat'
+          wait-on-timeout: 300
+          headless: true
+          record: true
+          tag: ${{ matrix.containers }}
+        env:
+          NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+          OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
+          OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
+          # pass the Dashboard record key as an environment variable
+          # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        # after the test run completes
+        # store videos and any screenshots
+        # NOTE: screenshots will be generated only if E2E test failed
+        # thus we store screenshots only on failures
+        # Alternative: create and commit an empty cypress/screenshots folder
+        # to always have something to upload
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos

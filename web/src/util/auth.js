@@ -2,11 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import oktaAuth from './oktaAuth';
-import {
-  MFA_FACTORS,
-  API_COOKIE_NAME,
-  CONSENT_COOKIE_NAME
-} from '../constants';
+import { MFA_FACTORS } from '../constants';
+import { API_COOKIE_NAME, CONSENT_COOKIE_NAME } from '../cookie-constants';
 
 export const INACTIVITY_LIMIT = 300000;
 export const EXPIRE_EARLY_SECONDS = 300;
