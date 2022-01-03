@@ -11,6 +11,7 @@ unset DEV_DB_NAME
 echo "[]" > endpoint-data.json
 
 docker-compose -f docker-compose.endpoint-tests.yml up -d
+sleep 3
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run test-endpoints $@
