@@ -22,10 +22,12 @@ describe(
 
     it('should login', () => {
       cy.findByRole('heading', { name: /Log in/i }).should('exist');
-      cy.findByLabelText('EUA ID').type(Cypress.env('statestaff'));
-      cy.findByLabelText('Password').type(Cypress.env('statestaff_pw'), {
-        log: false
-      });
+      cy.findByLabelText('EUA ID').clear().type(Cypress.env('statestaff'));
+      cy.findByLabelText('Password')
+        .clear()
+        .type(Cypress.env('statestaff_pw'), {
+          log: false
+        });
       cy.findByRole('button', { name: /Log in/i }).click();
       cy.findByRole('button', { name: /Logging in/i }).should('exist');
 

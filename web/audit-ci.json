@@ -1,7 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1005174],
+  "allowlist": [1005174, 1004946, 1004967, 1005024, 1005029, 1005154, 1005291],
   "_comment": {
     "1005174": {
       "advisory": "https://github.com/advisories/GHSA-w8qv-6jwh-64r5",
