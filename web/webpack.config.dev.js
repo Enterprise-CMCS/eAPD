@@ -79,7 +79,10 @@ const config = {
   ],
   devtool: 'eval-source-map',
   devServer: {
-    contentBase: './src',
+    static: {
+      directory: path.resolve(__dirname, 'src/static'),
+      publicPath: '/static/'
+    },
     historyApiFallback: true,
     host: '0.0.0.0',
     hot: true,
