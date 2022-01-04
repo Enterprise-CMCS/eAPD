@@ -7,7 +7,7 @@
   font-size: $h4-font-size;
 }
 
-#activity-entry-page .ds-u-clearfix {
+.remove-clearfix.ds-u-clearfix {
   &::before,
   &::after {
     // override default clearfix
@@ -15,7 +15,6 @@
     content: normal;
   }
 }
-
 
 .ds-c-choice+label {
   width: fit-content;

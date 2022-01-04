@@ -25,6 +25,7 @@ exports[`<ManageRoleDialog /> matches snapshot 1`] = `
   ariaCloseLabel="Close modal dialog"
   closeButtonText="Close"
   closeButtonVariation="transparent"
+  closeIcon={<CloseIcon />}
   escapeExitDisabled={false}
   escapeExits={true}
   heading="Edit Role"

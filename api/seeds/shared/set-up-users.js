@@ -4,6 +4,18 @@ const { states } = require('../../util/states');
 
 const today = new Date();
 
+const currentFfy = (() => {
+  const year = new Date().getFullYear();
+
+  // Federal fiscal year starts October 1,
+  // but Javascript months start with 0 for
+  // some reason, so October is month 9.
+  if (new Date().getMonth() > 8) {
+    return year + 1;
+  }
+  return year;
+})();
+
 const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
 
 const formatOktaUser = oktaResult => {
@@ -128,27 +140,27 @@ const createUsersToAdd = async (knex, oktaClient) => {
     // Add a valid certification and this user will remain an admin
     stateCertifications.push({
       id: 1002, // manually set id for testing
-      ffy: 2021,
+      ffy: currentFfy,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'ak',
       email: stateAdmin.profile.email,
       phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
-      fileUrl: '12345', // Todo: Update this to have a valid fileUrl
+      fileUrl: 'http://localhost:8081/auth/certifications/files/eAPDSystemAccess.pdf',
       affiliationId: null,
       status: 'active'
     });
 
     stateCertifications.push({
-      ffy: 2021,
+      ffy: currentFfy,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'tn',
       email: stateAdmin.profile.email,
       phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
-      fileUrl: '6789', // Todo: Update this to have a valid fileUrl
+      fileUrl: 'http://localhost:8081/auth/certifications/files/eAPDSystemAccess.pdf',
       affiliationId: null,
       status: 'active'
     });

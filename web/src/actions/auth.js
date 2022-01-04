@@ -18,7 +18,8 @@ import {
   logoutAndClearTokens,
   isUserActive
 } from '../util/auth';
-import { MFA_FACTOR_TYPES, API_COOKIE_NAME } from '../constants';
+import { MFA_FACTOR_TYPES } from '../constants';
+import { API_COOKIE_NAME } from '../cookie-constants';
 
 export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';

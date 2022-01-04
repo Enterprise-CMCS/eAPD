@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Alert, ChoiceList } from '@cmsgov/design-system';
+import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
 
 import {
   addYear,
   removeYear,
+  setApdName,
   setNarrativeForHIE,
   setNarrativeForHIT,
   setNarrativeForMMIS,
@@ -20,6 +21,7 @@ import { selectSummary } from '../reducers/apd.selectors';
 
 const ApdSummary = ({
   addApdYear,
+  name,
   narrativeHIE,
   narrativeHIT,
   narrativeMMIS,
@@ -28,12 +30,27 @@ const ApdSummary = ({
   setHIE,
   setHIT,
   setMMIS,
+  setName,
   setOverview,
   years,
   yearOptions
 }) => {
 
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
+
+  const changeName = ({ target: { value } }) => {
+    setName(value);
+  }
+
+  const onBlur = (e) => {
+    const apdNameInput = e.target.value;
+
+    if (apdNameInput.trim() === '') {
+      setName('Untitled APD')
+    } else {
+      setName(apdNameInput)
+    }
+  }
 
   const onRemove = () => {
     removeApdYear(elementDeleteFFY.value);
@@ -87,6 +104,15 @@ const ApdSummary = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
+      <TextField
+        autoFocus
+        className="remove-clearfix"
+        label="APD Name"
+        name="apd-name"
+        onChange={changeName}
+        onBlur={onBlur}
+        value={name}
+      />
       <ChoiceList
         choices={yearChoices}
         label={getLabelElement()}
@@ -157,6 +183,7 @@ const ApdSummary = ({
 ApdSummary.propTypes = {
   addApdYear: PropTypes.func.isRequired,
   removeApdYear: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
   narrativeHIE: PropTypes.string.isRequired,
   narrativeHIT: PropTypes.string.isRequired,
   narrativeMMIS: PropTypes.string.isRequired,
@@ -164,6 +191,7 @@ ApdSummary.propTypes = {
   setHIE: PropTypes.func.isRequired,
   setHIT: PropTypes.func.isRequired,
   setMMIS: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired,
   setOverview: PropTypes.func.isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
   yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired
@@ -177,8 +205,8 @@ const mapDispatchToProps = {
   setHIE: setNarrativeForHIE,
   setHIT: setNarrativeForHIT,
   setMMIS: setNarrativeForMMIS,
+  setName: setApdName,
   setOverview: setProgramOverview,
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdSummary);

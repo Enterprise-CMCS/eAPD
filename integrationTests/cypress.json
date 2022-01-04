@@ -1,10 +1,15 @@
 {
+  "projectId": "t4uk19",
   "baseUrl": "http://localhost:8080/",
   "viewportWidth": 1000,
   "viewportHeight": 1000,
   "defaultCommandTimeout": 36000,
   "videoUploadOnPasses": false,
+  "numTestsKeptInMemory": 10,
   "env": {
+    "cypress-react-selector": {
+      "root": "#app"
+    },
     "API": "http://localhost:8081",
     "fedadmin": "fedadmin",
     "fedadmin_pw": "",

@@ -1,127 +1,255 @@
 import ExecutiveSummaryPage from '../../page-objects/executive-summary-page';
+import ExportPage from '../../page-objects/export-page';
+
+const tableTitles = ['HIT + HIE', 'MMIS'];
 
 export const testDefaultExecutiveSummary = years => {
   let summaryPage;
+  let exportPage;
 
   before(() => {
     summaryPage = new ExecutiveSummaryPage();
+    exportPage = new ExportPage();
   });
 
-  beforeEach(() => {
+  it('should display the default values for Executive Summary page', () => {
     cy.goToExecutiveSummary();
-  });
 
-  it('should go to the correct page', () => {
     cy.url().should('contain', '/executive-summary');
-    cy.findByRole('heading', { name: /^Executive Summary$/i });
-  });
+    cy.findByRole('heading', { name: /^Executive Summary$/i }).should('exist');
 
-  describe('Default values in Activities Summary', () => {
-    it('Default name', () => {
-      summaryPage
-        .getActivityName(0)
-        .should('have.text', 'Activity 1: Program Administration');
+    summaryPage.checkActivitySummary({
+      index: 0,
+      years,
+      activityName: 'Program Administration',
+      activityTotalCosts: 0,
+      totalComputableMedicaidCost: 0,
+      federalShareAmount: 0,
+      ffys: [
+        {
+          activityTotalCosts: 0,
+          totalComputableMedicaidCost: 0,
+          federalShareAmount: 0
+        },
+        {
+          activityTotalCosts: 0,
+          totalComputableMedicaidCost: 0,
+          federalShareAmount: 0
+        }
+      ]
     });
-    it('Default dates', () => {
-      summaryPage
-        .getActivityDates(0)
-        .should(
-          'have.text',
-          'Start Date - End Date: Date not specified - Date not specified'
-        );
-    });
-    it('Default total cost', () => {
-      summaryPage
-        .getActivityCost(0)
-        .should('have.text', 'Total Cost of Activity: $0');
-    });
-    it('Default Medicaid costs & Federal Shares', () => {
-      summaryPage
-        .getActivityMedicaidCost(0)
-        .should(
-          'have.text',
-          'Total Computable Medicaid Cost: $0 ($0 Federal share)'
-        );
 
-      // Repeat for all FFYs
+    summaryPage.checkTotalCostSummary({
+      years,
+      totalCost: 0,
+      totalTotalMedicaidCost: 0,
+      totalFederalShare: 0,
+      ffys: [
+        {
+          activityTotalCosts: 0,
+          totalComputableMedicaidCost: 0,
+          federalShareAmount: 0
+        },
+        {
+          activityTotalCosts: 0,
+          totalComputableMedicaidCost: 0,
+          federalShareAmount: 0
+        }
+      ]
+    });
+
+    tableTitles.forEach(title => {
       years.forEach(year => {
-        summaryPage
-          .getActivityMedicaidCost(0, year)
-          .should(
-            'have.text',
-            `FFY ${year}: $0 | Total Computable Medicaid Cost: $0 ($0 Federal share)`
-          );
-      });
-    });
-    it('Clicking edit navigates to activity overview page for activity', () => {
-      summaryPage.clickActivityEdit(0);
-      cy.location('pathname').should($pathname => {
-        expect($pathname).to.contain('/activity/0/overview');
-      });
-    });
-  });
-
-  describe('Total Cost', () => {
-    it('Shows that the selected fiscal years were requested', () => {
-      let expected = 'Federal Fiscal Years Requested: FFY ';
-      for (let i = 0; i < years.length; i += 1) {
-        if (i === 0) expected += years[i];
-        else expected += `, ${years[i]}`;
-      }
-      summaryPage.getRequestedFiscalYears().should('have.text', expected);
-    });
-
-    it('Total Medicaid cost/Federal share is $0', () => {
-      summaryPage
-        .getTotalMedicaidCost()
-        .should(
-          'have.text',
-          'Total Computable Medicaid Cost: $0 ($0 Federal share)'
-        );
-    });
-
-    it('Total Funding Request is $0', () => {
-      summaryPage
-        .getTotalFundingRequest()
-        .should('have.text', 'Total Funding Request: $0');
-    });
-
-    it('Each FFY costs $0', () => {
-      years.forEach(year => {
-        summaryPage
-          .getTotalYearCost(year)
-          .should(
-            'have.text',
-            `FFY ${year}: $0 | $0 Total Computable Medicaid Cost | $0 Federal share`
-          );
-      });
-    });
-  });
-
-  describe('Default values in HIT + HIE and MMIS table', () => {
-    const costCategories = ['HIT + HIE', 'MMIS'];
-
-    costCategories.forEach(category => {
-      it(`All ${category} rows are $0`, () => {
-        years.forEach(year => {
-          summaryPage.getTableRows(category, year).each($el => {
-            cy.wrap($el).should('have.text', '$0');
-          });
-        });
-
-        summaryPage.getTableRows(category).each($el => {
+        summaryPage.getTableRows({ title, year }).each($el => {
           cy.wrap($el).should('have.text', '$0');
         });
       });
+
+      summaryPage.getTableRows({ title }).each($el => {
+        cy.wrap($el).should('have.text', '$0');
+      });
     });
+  });
+
+  it('should display the default values in the export view', () => {
+    cy.goToExportView();
+
+    exportPage.checkExecutiveSummaryTotalCostSummary({
+      years,
+      totalCost: 0,
+      totalTotalMedicaidCost: 0,
+      totalFederalShare: 0,
+      ffys: [
+        {
+          activityTotalCosts: 0,
+          totalComputableMedicaidCost: 0,
+          federalShareAmount: 0
+        },
+        {
+          activityTotalCosts: 0,
+          totalComputableMedicaidCost: 0,
+          federalShareAmount: 0
+        }
+      ]
+    });
+
+    exportPage.checkExecutiveSummaryActivitySummary({
+      index: 0,
+      years,
+      activityName: 'Program Administration',
+      activityTotalCosts: 0,
+      totalComputableMedicaidCost: 0,
+      federalShareAmount: 0,
+      ffys: [
+        {
+          activityTotalCosts: 0,
+          totalComputableMedicaidCost: 0,
+          federalShareAmount: 0
+        },
+        {
+          activityTotalCosts: 0,
+          totalComputableMedicaidCost: 0,
+          federalShareAmount: 0
+        }
+      ]
+    });
+
+    tableTitles.forEach(title => {
+      years.forEach(year => {
+        exportPage
+          .getExecutiveSummaryProgramBudgetTableRow({ title, year })
+          .each($el => {
+            cy.wrap($el).should('have.text', '$0');
+          });
+      });
+
+      exportPage
+        .getExecutiveSummaryProgramBudgetTableRow({ title })
+        .each($el => {
+          cy.wrap($el).should('have.text', '$0');
+        });
+    });
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 
-export const testDefaultExecutiveSummaryExportView = () => {};
+export const testExecutiveSummaryWithData = years => {
+  let summaryPage;
+  let exportPage;
 
-export const testExecutiveSummaryWithData = () => {
-  //   const summaryPage = new ExecutiveSummaryPage();
-  //   let executiveSummaryURL;
+  let activityData;
+  let executiveSummaryData;
+
+  before(() => {
+    summaryPage = new ExecutiveSummaryPage();
+    exportPage = new ExportPage();
+  });
+
+  beforeEach(() => {
+    cy.fixture('activity-overview-template.json').then(data => {
+      activityData = data;
+    });
+    cy.fixture('executive-summary-test.json').then(data => {
+      executiveSummaryData = data;
+    });
+    cy.goToBudgetAndFFP(0);
+  });
+
+  it('should display the correct values for Executive Summary page', () => {
+    cy.goToExecutiveSummary();
+
+    cy.url().should('contain', '/executive-summary');
+    cy.findByRole('heading', { name: /^Executive Summary$/i }).should('exist');
+
+    executiveSummaryData.activitySummaries.forEach(
+      (
+        {
+          activityTotalCosts,
+          totalComputableMedicaidCost,
+          federalShareAmount,
+          ffys
+        },
+        index
+      ) => {
+        const {
+          name: activityName,
+          shortOverview,
+          startDate,
+          endDate
+        } = activityData.activityOverview[index];
+
+        summaryPage.checkActivitySummary({
+          index,
+          years,
+          activityName,
+          shortOverview,
+          startDate,
+          endDate,
+          activityTotalCosts,
+          totalComputableMedicaidCost,
+          federalShareAmount,
+          ffys
+        });
+      }
+    );
+
+    const { totalCost, totalTotalMedicaidCost, totalFederalShare, ffys } =
+      executiveSummaryData.totalCostSummary;
+    summaryPage.checkTotalCostSummary({
+      years,
+      totalCost,
+      totalTotalMedicaidCost,
+      totalFederalShare,
+      ffys
+    });
+  });
+
+  it('should display the default values in the export view', () => {
+    cy.goToExportView();
+
+    const { totalCost, totalTotalMedicaidCost, totalFederalShare, ffys } =
+      executiveSummaryData.totalCostSummary;
+    exportPage.checkExecutiveSummaryTotalCostSummary({
+      years,
+      totalCost,
+      totalTotalMedicaidCost,
+      totalFederalShare,
+      ffys
+    });
+
+    executiveSummaryData.activitySummaries.forEach(
+      (
+        {
+          activityTotalCosts,
+          totalComputableMedicaidCost,
+          federalShareAmount,
+          ffys: activityFFYs
+        },
+        index
+      ) => {
+        const {
+          name: activityName,
+          shortOverview,
+          startDate,
+          endDate
+        } = activityData.activityOverview[index];
+
+        exportPage.checkExecutiveSummaryActivitySummary({
+          index,
+          years,
+          activityName,
+          shortOverview,
+          startDate,
+          endDate,
+          activityTotalCosts,
+          totalComputableMedicaidCost,
+          federalShareAmount,
+          ffys: activityFFYs
+        });
+      }
+    );
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+  });
 };
-
-export const testExecutiveSummaryExportViewWithData = () => {};

@@ -10,7 +10,7 @@ const EntryPage = ({ activityNames }) => {
   const activityIndex = +useParams().activityIndex;
 
   return (
-    <div id="activity-entry-page">
+    <div className="remove-clearfix" id="activity-entry-page">
       <h2>
         Activity {activityIndex + 1}: {activityNames[activityIndex] || "Untitled"}
       </h2>

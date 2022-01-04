@@ -1,71 +1,37 @@
-import ActivityPage from '../../../page-objects/activity-page';
 import ActivitiesStateStaffExpensesPage from '../../../page-objects/activities-state-staff-expenses-page';
+import ExportPage from '../../../page-objects/export-page';
 
-export const testDefaultStateStaffAndExpenses = years => {
-  let activityPage;
-
-  before(() => {
-    activityPage = new ActivityPage();
-  });
-
-  beforeEach(() => {
+export const testDefaultStateStaffAndExpenses = () => {
+  it('should display the default state staff and expenses', () => {
     cy.goToStateStaffAndExpenses(0);
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
     }).should('exist');
-  });
 
-  it('should display the default state staff and expenses', () => {
     cy.contains('State staff have not been added for this activity.').should(
       'exist'
     );
 
-    cy.findByRole('button', { name: /Add State Staff/i }).click();
     cy.waitForSave();
+  });
 
-    activityPage.checkInputField('Personnel title', '');
-    activityPage.checkInputField('Description', '');
-    activityPage.checkStateStaffFFY(years, '');
+  it('should display the default activity overview in the export view', () => {
+    const exportPage = new ExportPage();
+    cy.goToExportView();
 
-    cy.findByRole('button', { name: /Done/i }).click();
+    exportPage.checkStateStaff({
+      activityHeader: 'Activity 1: Program Administration'
+    });
+    exportPage.checkStateExpenses({
+      activityHeader: 'Activity 1: Program Administration'
+    });
 
-    activityPage.checkStateStaffOutput(
-      'Personnel title not specified',
-      years,
-      0,
-      0
-    );
-
-    activityPage.checkDeleteButton(
-      'State staff have not been added for this activity.',
-      'Delete State Staff Expenses?',
-      'Personnel title not specified'
-    );
-
-    cy.findByRole('button', { name: /Add State Expense/i }).click();
-    cy.waitForSave();
-    activityPage.checkInputField('Description', '');
-    activityPage.checkFFYinputCostFields(years, '');
-    cy.findByRole('button', { name: /Done/i }).click();
-
-    activityPage.checkOtherStateExpensesOutput(
-      'Category not specified',
-      years,
-      [0, 0]
-    );
-
-    activityPage.checkDeleteButton(
-      'Other state expenses have not been added for this activity.',
-      'Delete Other State Expense?',
-      'Category not specified'
-    );
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 
-export const testDefaultStateStaffAndExpensesExportView = () => {};
-
-export const testStateStaffAndExpensesWithData = () => {
+export const testStateStaffAndExpensesWithData = years => {
   let staffExpensesPage;
   let activityData;
 
@@ -82,6 +48,9 @@ export const testStateStaffAndExpensesWithData = () => {
   describe('Activity 1', () => {
     beforeEach(() => {
       cy.goToStateStaffAndExpenses(0);
+    });
+
+    it('fills out state staff and expenses in activity 1', () => {
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
@@ -90,146 +59,125 @@ export const testStateStaffAndExpensesWithData = () => {
         name: /State Staff and Expenses/i,
         level: 3
       }).should('exist');
-    });
 
-    describe('State staff', () => {
-      it('Create two new state staff', () => {
-        staffExpensesPage.addStaff();
-        staffExpensesPage.addStaff();
-      });
+      staffExpensesPage.addStaff();
+      staffExpensesPage.addStaff();
 
-      it('Fill in data for staff', () => {
-        const stateStaff = activityData.staff.slice(0, 2);
-        stateStaff.forEach((staff, i) => {
-          staffExpensesPage.fillStaff(
-            i,
-            staff.title,
-            staff.description,
-            staff.costs,
-            staff.ftes
-          );
-          cy.waitForSave();
-        });
-      });
-
-      it('Verify data for staff after editing', () => {
-        const stateStaff = activityData.staff.slice(0, 2);
-        stateStaff.forEach((staff, i) => {
-          staffExpensesPage.verifyStaff(
-            i,
-            staff.title,
-            staff.description,
-            staff.costs,
-            staff.ftes
-          );
-        });
-      });
-
-      it('Delete the first staff', () => {
-        cy.findByRole('heading', { name: /^State Staff$/i })
-          .next()
-          .next()
-          .children()
-          .then(children => {
-            if (children.length > 1) {
-              staffExpensesPage.deleteStaff(0);
-              cy.waitForSave();
-            }
-          });
-      });
-
-      it('Pressing delete at delete confirmation model did delete staff', () => {
-        // If there is just one delete button, then staff has been deleted.
-        cy.findAllByRole('button', { name: /Delete/i }).should(
-          'have.length',
-          1
+      const stateStaff = activityData.staff.slice(0, 2);
+      stateStaff.forEach((staff, i) => {
+        staffExpensesPage.fillStaff(
+          i,
+          staff.title,
+          staff.description,
+          staff.costs,
+          staff.ftes
         );
-      });
 
-      it('Confirm the second staff created is now the first staff', () => {
-        const staff = activityData.staff[1];
-        // Check that the first staff on the page (index 0) has the second
-        // staff's info
         staffExpensesPage.verifyStaff(
-          0,
+          i,
           staff.title,
           staff.description,
           staff.costs,
           staff.ftes
         );
       });
-    });
 
-    describe('State expenses', () => {
-      it('Create two new state expenses', () => {
-        staffExpensesPage.addExpense();
-        staffExpensesPage.addExpense();
-      });
-
-      it('Fill in data for expenses', () => {
-        const expenses = activityData.expenses.slice(0, 2);
-        expenses.forEach((expense, i) => {
-          staffExpensesPage.fillExpense(
-            i,
-            expense.category,
-            expense.costs,
-            expense.description
-          );
-          cy.waitForSave();
+      cy.findByRole('heading', { name: /^State Staff$/i })
+        .next()
+        .next()
+        .children()
+        .then(children => {
+          if (children.length > 1) {
+            staffExpensesPage.deleteStaff(0);
+          }
         });
-      });
 
-      it('Verify data for expenses after editing', () => {
-        const expenses = activityData.expenses.slice(0, 2);
-        expenses.forEach((expense, i) => {
-          staffExpensesPage.verifyExpense(
-            i,
-            expense.category,
-            expense.costs,
-            expense.description
-          );
-        });
-      });
+      cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 1);
 
-      it('Delete the first expense', () => {
-        cy.findByRole('heading', { name: /^Other State Expenses$/i })
-          .next()
-          .next()
-          .children()
-          .then(children => {
-            if (children.length > 1) {
-              staffExpensesPage.deleteExpense(0);
-              cy.waitForSave();
-            }
-          });
-      });
+      // Check that the first staff on the page (index 0) has the second
+      // staff's info
+      staffExpensesPage.verifyStaff(
+        0,
+        stateStaff[1].title,
+        stateStaff[1].description,
+        stateStaff[1].costs,
+        stateStaff[1].ftes
+      );
 
-      it('Pressing delete at delete confirmation model did delete expense', () => {
-        // If there are just two delete buttons, then an expense has been deleted;
-        // the other delete button is from the remaining staff.
-        cy.findAllByRole('button', { name: /Delete/i }).should(
-          'have.length',
-          2
+      staffExpensesPage.addExpense();
+      staffExpensesPage.addExpense();
+
+      const expenses = activityData.expenses.slice(0, 2);
+      expenses.forEach((expense, i) => {
+        staffExpensesPage.fillExpense(
+          i,
+          expense.category,
+          expense.costs,
+          expense.description
         );
-      });
 
-      it('Confirm the second expense created is now the first expense', () => {
-        const expense = activityData.expenses[1];
-        // Check that the first expense on the page (index 0) has the second
-        // expense's info
         staffExpensesPage.verifyExpense(
-          0,
+          i,
           expense.category,
           expense.costs,
           expense.description
         );
       });
+
+      cy.findByRole('heading', { name: /^Other State Expenses$/i })
+        .next()
+        .next()
+        .children()
+        .then(children => {
+          if (children.length > 1) {
+            staffExpensesPage.deleteExpense(0);
+          }
+        });
+
+      // If there are just two delete buttons, then an expense has been deleted;
+      // the other delete button is from the remaining staff.
+      cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 2);
+
+      staffExpensesPage.verifyExpense(
+        0,
+        expenses[1].category,
+        expenses[1].costs,
+        expenses[1].description
+      );
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
+    });
+
+    it('should display the default activity overview in the export view', () => {
+      const exportPage = new ExportPage();
+      cy.goToExportView();
+
+      const { name } = activityData.activityOverview[0];
+      const staff = activityData.staff.slice(1, 2);
+      const expenses = activityData.expenses.slice(1, 2);
+
+      exportPage.checkStateStaff({
+        activityHeader: `Activity 1: ${name}`,
+        staff,
+        years
+      });
+      exportPage.checkStateExpenses({
+        activityHeader: `Activity 1: ${name}`,
+        expenses,
+        years
+      });
+
+      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
     });
   });
 
   describe('Activity 2', () => {
     beforeEach(() => {
       cy.goToStateStaffAndExpenses(1);
+    });
+
+    it('fills out state staff and expenses in activity 2', () => {
       cy.findByRole('heading', {
         name: /Activity 2:/i,
         level: 2
@@ -238,74 +186,71 @@ export const testStateStaffAndExpensesWithData = () => {
         name: /State Staff and Expenses/i,
         level: 3
       }).should('exist');
+
+      staffExpensesPage.addStaff();
+      staffExpensesPage.addStaff();
+
+      const stateStaff = activityData.staff.slice(2);
+      stateStaff.forEach((staff, i) => {
+        staffExpensesPage.fillStaff(
+          i,
+          staff.title,
+          staff.description,
+          staff.costs,
+          staff.ftes
+        );
+        staffExpensesPage.verifyStaff(
+          i,
+          staff.title,
+          staff.description,
+          staff.costs,
+          staff.ftes
+        );
+      });
+
+      staffExpensesPage.addExpense();
+      staffExpensesPage.addExpense();
+
+      const expenses = activityData.expenses.slice(2);
+      expenses.forEach((expense, i) => {
+        staffExpensesPage.fillExpense(
+          i,
+          expense.category,
+          expense.costs,
+          expense.description
+        );
+        staffExpensesPage.verifyExpense(
+          i,
+          expense.category,
+          expense.costs,
+          expense.description
+        );
+      });
+
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.waitForSave();
     });
 
-    describe('State staff', () => {
-      it('Create two new state staff', () => {
-        staffExpensesPage.addStaff();
-        staffExpensesPage.addStaff();
+    it('should display the default activity overview in the export view', () => {
+      const exportPage = new ExportPage();
+      cy.goToExportView();
+
+      const { name } = activityData.activityOverview[1];
+      const staff = activityData.staff.slice(2);
+      const expenses = activityData.expenses.slice(2);
+
+      exportPage.checkStateStaff({
+        activityHeader: `Activity 2: ${name}`,
+        staff,
+        years
+      });
+      exportPage.checkStateExpenses({
+        activityHeader: `Activity 2: ${name}`,
+        expenses,
+        years
       });
 
-      it('Fill in data for staff', () => {
-        const stateStaff = activityData.staff.slice(2);
-        stateStaff.forEach((staff, i) => {
-          staffExpensesPage.fillStaff(
-            i,
-            staff.title,
-            staff.description,
-            staff.costs,
-            staff.ftes
-          );
-          cy.waitForSave();
-        });
-      });
-
-      it('Verify data for staff after editing', () => {
-        const stateStaff = activityData.staff.slice(2);
-        stateStaff.forEach((staff, i) => {
-          staffExpensesPage.verifyStaff(
-            i,
-            staff.title,
-            staff.description,
-            staff.costs,
-            staff.ftes
-          );
-        });
-      });
-    });
-
-    describe('State expenses', () => {
-      it('Create two new state expenses', () => {
-        staffExpensesPage.addExpense();
-        staffExpensesPage.addExpense();
-      });
-
-      it('Fill in data for expenses', () => {
-        const expenses = activityData.expenses.slice(2);
-        expenses.forEach((expense, i) => {
-          staffExpensesPage.fillExpense(
-            i,
-            expense.category,
-            expense.costs,
-            expense.description
-          );
-          cy.waitForSave();
-        });
-      });
-
-      it('Verify data for expenses after editing', () => {
-        const expenses = activityData.expenses.slice(2);
-        expenses.forEach((expense, i) => {
-          staffExpensesPage.verifyExpense(
-            i,
-            expense.category,
-            expense.costs,
-            expense.description
-          );
-        });
-      });
+      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
     });
   });
 };
-
-export const testStateStaffAndExpensesExportViewWithData = () => {};
