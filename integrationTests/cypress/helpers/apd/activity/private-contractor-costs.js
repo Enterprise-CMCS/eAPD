@@ -75,7 +75,6 @@ export const testPrivateContractorCostsWithData = years => {
         });
       });
 
-      cy.log('delete a private contractor');
       cy.findAllByText('Delete').eq(0).click();
       cy.contains('Delete Private Contractor?').should('exist');
       cy.get('.ds-c-button--danger').click();

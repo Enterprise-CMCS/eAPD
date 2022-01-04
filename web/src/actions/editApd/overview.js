@@ -1,5 +1,23 @@
-import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from './symbols';
+import { ADD_APD_YEAR, EDIT_APD, EDIT_APD_NAME, REMOVE_APD_YEAR } from './symbols';
 import { updateBudget } from '../budget';
+
+/**
+ * Rename an apd
+ * @param {String} name The new apd name
+ */
+ export const setApdName = (name) => (dispatch, getState) => {
+  dispatch({
+    type: EDIT_APD,
+    path: `/name`,
+    value: name,
+    state: getState()
+  });
+  dispatch({
+    type: EDIT_APD_NAME,
+    id: getState().apd.data.id,
+    name
+  })
+};
 
 /**
  * Add a fiscal year to the APD

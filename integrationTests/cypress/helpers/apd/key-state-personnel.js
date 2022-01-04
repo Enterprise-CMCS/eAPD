@@ -74,7 +74,6 @@ export const testKeyStatePersonnelWithData = years => {
     cy.url().should('include', '/state-profile');
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
 
-    cy.log('State Director and Office Address');
     cy.fixture('users').then(userData => {
       cy.get('input[name="apd-state-profile-mdname"]')
         .clear()
@@ -108,7 +107,6 @@ export const testKeyStatePersonnelWithData = years => {
         .invoke('val', 'AL')
         .trigger('change');
 
-      cy.log('Primary Point of Contact');
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
 
       cy.get('input[name="apd-state-profile-pocname0"]')
@@ -125,7 +123,6 @@ export const testKeyStatePersonnelWithData = years => {
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      cy.log('Key Personnel');
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
       cy.get('.ds-c-review__heading')
@@ -141,7 +138,6 @@ export const testKeyStatePersonnelWithData = years => {
         });
       cy.findByRole('button', { name: /Done/i }).click();
 
-      cy.log('Key Personnel (hourly)');
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
       // Toggle to see if the FFY cost prompts appear/disappear
@@ -163,9 +159,12 @@ export const testKeyStatePersonnelWithData = years => {
       .eq(0)
       .click();
     cy.get('.ds-c-button--danger').click();
-    cy.findAllByRole('button', { name: /Edit/i }).should('have.length', 2);
+    cy.get('.form-and-review-list')
+      .findAllByRole('button', { name: /Edit/i })
+      .should('have.length', 2);
 
-    cy.findAllByRole('button', { name: /Edit/i }).eq(1).click();
+    cy.get('.form-and-review-list')
+      .findAllByRole('button', { name: /Edit/i }).eq(1).click();
 
     cy.fixture('users').then(userData => {
       cy.get('input[name="apd-state-profile-pocname1"]')
@@ -181,7 +180,6 @@ export const testKeyStatePersonnelWithData = years => {
         .type(userData[2].username);
 
       cy.findByRole('button', { name: /Done/i }).click();
-      cy.log('Values entered in form remain on page');
 
       cy.get('.ds-c-review__heading')
         .contains('2.')
@@ -207,7 +205,6 @@ export const testKeyStatePersonnelWithData = years => {
       .as('personnel');
 
     cy.fixture('users').then(userData => {
-      cy.log('Medicaid director');
       cy.get('@personnel')
         .findByRole('heading', { name: /Medicaid director/i })
         .next()
@@ -219,7 +216,6 @@ export const testKeyStatePersonnelWithData = years => {
         );
 
       // Default state is Alabama
-      cy.log('Medicaid office address');
       cy.get('@personnel')
         .findByRole('heading', { name: /Medicaid office address/i })
         .next()
@@ -233,7 +229,6 @@ export const testKeyStatePersonnelWithData = years => {
         );
 
       // Check text data for the first personnel
-      cy.log('Primary APD Point of Contact');
       cy.get('@personnel')
         .findByRole('heading', {
           name: /Key Personnel and Program Management/i
@@ -252,7 +247,6 @@ export const testKeyStatePersonnelWithData = years => {
         .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
         .join('');
 
-      cy.log('Key Personnel');
       cy.get('@personnel')
         .findByRole('heading', {
           name: /Key Personnel and Program Management/i
