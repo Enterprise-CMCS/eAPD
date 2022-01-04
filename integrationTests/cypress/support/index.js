@@ -37,9 +37,8 @@ Cypress.Cookies.debug(true, { verbose: true });
 
 commandTimings();
 
+// eslint-disable-next-line no-unused-vars
 Cypress.on('uncaught:exception', err => {
-  cy.log(err.message);
-  cy.log(err.stack);
   // returning false here prevents Cypress from
   // failing the test
   return false;
