@@ -77,7 +77,7 @@ const config = {
       template: 'src/index.html'
     })
   ],
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: './src',
     historyApiFallback: true,
