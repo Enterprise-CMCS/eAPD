@@ -186,8 +186,8 @@
     "storybook-addon-designs": "^6.2.0",
     "style-loader": "^2.0.0",
     "topojson-client": "^3.1.0",
-    "webpack": "^5.3.2",
-    "webpack-cli": "^4.1.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^3.11.2",
     "yaml-loader": "^0.6.0"
   }
