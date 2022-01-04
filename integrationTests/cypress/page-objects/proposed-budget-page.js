@@ -106,12 +106,9 @@ class ProposedBudgetPage {
     expected
   }) => {
     _.forEach(years, (ffy, ffyIndex) => {
-      cy.log(`ffy ${ffy}, ffyIndex ${ffyIndex}`);
       _.forEach(activityList, (activityName, index) => {
-        cy.log(`activityName ${activityName}, index ${index}`);
         const { expenses, totalComputableMedicaidCost } =
           expected[ffyIndex].activities[index];
-        cy.log(`expenses ${JSON.stringify(expenses)}`);
         _.forEach(expenses, (items, expense) => {
           // TODO: Add this back once the default test is truly default
           this.getBreakdownByFFYAndActivityAndExpense({

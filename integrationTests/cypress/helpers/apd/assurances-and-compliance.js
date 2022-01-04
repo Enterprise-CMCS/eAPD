@@ -90,7 +90,6 @@ export const testAssurancesAndComplianceWithData = () => {
       .as('assurancesComplianceDiv');
 
     categories.forEach(category => {
-      cy.log(`${category}`);
       const val = assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {

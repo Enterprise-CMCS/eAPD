@@ -57,7 +57,6 @@ export const testAPDOverviewWithData = () => {
     cy.url().should('include', '/apd-overview');
     cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
 
-    cy.log('test adding and removing FFYs');
     const allYears = [];
     cy.get("[class='ds-c-choice']").each(($el, index, list) => {
       allYears.push(list[index].value);
@@ -114,19 +113,15 @@ export const testAPDOverviewWithData = () => {
 
     // must be done as a chunk because the tinyMCE fields don't have
     // time to load if they are done individually
-    cy.log('Program Introduction');
     cy.setTinyMceContent(
       'program-introduction-field',
       apdOverview.introduction
     );
 
-    cy.log('HIT');
     cy.setTinyMceContent('hit-overview-field', apdOverview.HIT);
 
-    cy.log('HIE');
     cy.setTinyMceContent('hie-overview-field', apdOverview.HIE);
 
-    cy.log('MMIS');
     cy.setTinyMceContent('mmis-overview-field', apdOverview.MMIS);
 
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
