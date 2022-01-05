@@ -29,7 +29,12 @@
     "1005291": {
       "advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
       "module": "trim",
-      "affects": ["@mdx-js/loader@1.6.22 - used by storybook"]
+      "affects": ["@storybook/addon-docs@6.4.9 - storybook"]
+    },
+    "1004967": {
+      "advisory": "https://github.com/advisories/GHSA-rp65-9cf3-cjxr",
+      "module": "nth-check",
+      "affects": ["cssnano@4.1.11 - used to build css, not used in production"]
     }
   },
   "registry": "https://registry.npmjs.org"
