@@ -231,17 +231,19 @@ const getHumanTimestamp = iso8601 => {
   })}`;
 };
 
-export const getKeyPersonnel = (years = [], isPrimary = false) => ({
-  costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
-  email: '',
-  expanded: true,
-  hasCosts: false,
-  isPrimary,
-  fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
-  name: '',
-  position: '',
-  key: generateKey()
-});
+export const getKeyPersonnel = (years = [], isPrimary = false) => {
+  return {
+    costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
+    email: '',
+    expanded: true,
+    hasCosts: false,
+    isPrimary,
+    fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
+    name: '',
+    position: '',
+    key: generateKey()    
+  }
+};
 
 export const getAPDId = ({
   apd: {

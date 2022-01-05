@@ -3,10 +3,9 @@ import { updateBudget } from '../budget';
 import { getKeyPersonnel } from '../../reducers/apd.js';
 
 /**
- * Add a new key person to the APD
+ * Create a new key person to the APD
  */
-export const createKeyPerson = (years, isPrimary) => {
-  console.log("create key person called with:", {years, isPrimary})
+export const createKeyPerson = ({years, isPrimary}) => {
   return getKeyPersonnel(years, isPrimary);
 };
 
@@ -17,10 +16,8 @@ export const saveKeyPerson = (index, data) => (dispatch, getState) => {
   const previousState = getState();
   
   // Use the provided index unless we are creating a new item in the array
-  // If its a newly created item set it to the length which will be the latest
-  // added item
+  // If its a newly created item set it to the length which will be last item
   let indexCalculated = index;
-  console.log("index", index);
   
   if(previousState.apd.data.keyPersonnel[index] === undefined) {
     indexCalculated = previousState.apd.data.keyPersonnel.length;
@@ -38,13 +35,6 @@ export const saveKeyPerson = (index, data) => (dispatch, getState) => {
   });
   
   dispatch(updateBudget());
-};
-
-/**
- * Edit person to the APD
- */
-export const editKeyPerson = () => () => {
-  console.log("edit Key Person")
 };
 
 /**

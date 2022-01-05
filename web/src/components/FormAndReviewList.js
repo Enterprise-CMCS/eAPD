@@ -8,9 +8,8 @@ const FormAndReviewItem = ({
   extraButtons,
   index,
   initialExpanded,
-  onCancel,
   item,
-  years,
+  onCancelClick,
   ...rest
 }) => {
   const container = useRef(null);
@@ -26,19 +25,24 @@ const FormAndReviewItem = ({
     setCollapsed(true);
   }, []);
   const expand = useCallback(() => setCollapsed(false), []);
-
+  
+  const handleCancel = () => {
+    onCancelClick();
+    collapse();
+  }
+  
   if (collapsed) {
     return (
       <div ref={container} className="form-and-review-list--item__collapsed">
-        <Collapsed index={index} years={years} item={item} {...rest} expand={expand} />
+        <Collapsed index={index} item={item} {...rest} expand={expand} />
       </div>
     );
   }
 
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
-      <Expanded index={index} ref={formRef} years={years} item={item} {...rest} collapse={collapse} />
-      <Button onClick={() => collapse()} className="ds-u-margin-right--2">
+      <Expanded index={index} ref={formRef} item={item} {...rest} collapse={collapse} />
+      <Button onClick={() => handleCancel()} className="ds-u-margin-right--2">
         Cancel
       </Button>
       <Button
@@ -117,6 +121,10 @@ const FormAndReviewList = ({
     const newListItem = createNew(years, false); // this wont work since its specific to keyPersonnel
     setLocalList([...localList, newListItem]);
   };
+  
+  const onCancel = e => {
+    setLocalList(list);
+  };
 
   return (
     <div className={combinedClassName}>
@@ -132,12 +140,12 @@ const FormAndReviewList = ({
             index={index}
             initialExpanded={hasAdded && index === localList.length - 1}
             item={item}
-            onDoneClick={onDoneClick}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
                 ? () => onDeleteClick(index)
                 : null
             }
+            onCancelClick={onCancel}
             years={years}
             {...rest}
           />

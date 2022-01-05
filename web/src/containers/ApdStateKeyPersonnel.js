@@ -3,15 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { ApdKeyPersonForm, ApdKeyPersonReview } from './ApdKeyPerson';
-import { createKeyPerson, saveKeyPerson, editKeyPerson, removeKeyPerson } from '../actions/editApd';
+import { createKeyPerson, saveKeyPerson, removeKeyPerson } from '../actions/editApd';
 import FormAndReviewList from '../components/FormAndReviewList';
 import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 
-// Should we move this to a helper function since it's no longer
-// connected to redux? It's just creating the boilerplate object
-import { getKeyPersonnel } from '../reducers/apd';
-
-const ApdStateKeyPersonnel = ({ save, edit, poc, remove, years }) => {  
+const ApdStateKeyPersonnel = ({ create, save, remove, poc, years }) => {
   return (
     <FormAndReviewList
       addButtonText={
@@ -20,8 +16,8 @@ const ApdStateKeyPersonnel = ({ save, edit, poc, remove, years }) => {
       list={poc}
       collapsed={ApdKeyPersonReview}
       expanded={ApdKeyPersonForm}
-      createNew={getKeyPersonnel}
-      onSaveClick={() => save()}
+      createNew={createKeyPerson}
+      onSaveClick={(index, data) => save(index, data)}
       onDeleteClick={index => remove(index)}
       years={years}
     />
@@ -29,10 +25,10 @@ const ApdStateKeyPersonnel = ({ save, edit, poc, remove, years }) => {
 };
 
 ApdStateKeyPersonnel.propTypes = {
+  create: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
-  edit: PropTypes.func.isRequired,
-  poc: PropTypes.arrayOf(PropTypes.object).isRequired,
   remove: PropTypes.func.isRequired,
+  poc: PropTypes.arrayOf(PropTypes.object).isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
@@ -41,10 +37,9 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
-// Todo: Add an edit
 const mapDispatchToProps = {
+  create: createKeyPerson,
   save: saveKeyPerson,
-  edit: editKeyPerson,
   remove: removeKeyPerson
 };
 

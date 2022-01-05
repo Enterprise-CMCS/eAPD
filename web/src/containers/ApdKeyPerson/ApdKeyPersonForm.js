@@ -12,6 +12,8 @@ import {
   saveKeyPerson
 } from '../../actions/editApd';
 
+import { selectApdYears } from '../../reducers/apd.selectors';
+
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
 const PersonForm = forwardRef(
@@ -19,15 +21,11 @@ const PersonForm = forwardRef(
     {
       index,
       item,
-      years,
-      savePerson
+      savePerson,
+      years
     },
     ref
   ) => {
-    useEffect(() => {  
-      console.log("years", years);
-    }, [])
-      
     const initialState = item;
     
     function reducer(state, action) {
@@ -64,8 +62,6 @@ const PersonForm = forwardRef(
     
     const handleSubmit = e => {
       e.preventDefault();
-      console.log("item", item);
-      console.log("handling submit with state:", state);
       savePerson(index, state);
     };
 
@@ -187,6 +183,10 @@ PersonForm.propTypes = {
 const mapDispatchToProps = {
   savePerson: saveKeyPerson
 };
+
+const mapStateToProps = state => ({
+  years: selectApdYears(state)
+});
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
   PersonForm
