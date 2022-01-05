@@ -1,12 +1,35 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1005174, 1004946, 1004967, 1005024, 1005029, 1005154, 1005291],
+  "allowlist": [1005174, 1005024, 1005029, 1005154, 1005291],
   "_comment": {
     "1005174": {
       "advisory": "https://github.com/advisories/GHSA-w8qv-6jwh-64r5",
       "module": "browserslist",
-      "affects": ["@storybook/react@6.4.9 - storybook"]
+      "affects": ["@storybook/builder-webpack5@6.4.9 - storybook"]
+    },
+    "1005024": {
+      "advisory": "https://github.com/advisories/GHSA-c36v-fmgq-m8hx",
+      "module": "immer",
+      "affects": ["@storybook/builder-webpack5@6.4.9 - storybook"]
+    },
+    "1005029": {
+      "advisory": "https://github.com/advisories/GHSA-33f9-j839-rf8h",
+      "module": "immer",
+      "affects": ["@storybook/builder-webpack5@6.4.9 - storybook"]
+    },
+    "1005154": {
+      "advisory": "https://github.com/advisories/GHSA-ww39-953v-wcq6",
+      "module": "glob-parent",
+      "affects": [
+        "@storybook/addon-docs@6.4.9 - storybook",
+        "@storybook/react@6.4.9 - storybook"
+      ]
+    },
+    "1005291": {
+      "advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
+      "module": "trim",
+      "affects": ["@mdx-js/loader@1.6.22 - used by storybook"]
     }
   },
   "registry": "https://registry.npmjs.org"
