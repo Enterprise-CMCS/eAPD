@@ -106,7 +106,7 @@ const FormAndReviewList = ({
           {errorCheck === true ? (
             <Alert variation="error">{noDataOptions}</Alert>
           ) : (
-            <p>
+            <p className="ds-u-margin-top--4">
               {noDataOptions}
             </p>
           )}

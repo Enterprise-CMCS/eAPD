@@ -17,11 +17,17 @@ const OutcomeAndMetricForm = ({
   setOutcome,
   removeMetric
 }) => {
-  const addMissingTextAlert = (e, p) => {
+  const addMissingTextAlert = (e, p, n) => {
     const lastDiv = p.lastChild;
     const missTextError = 'missing-text-error';
     const div = document.createElement('div');
-    div.innerHTML = 'Provide a metric';
+    // div.innerHTML = `Provide a ${n}`;
+
+    if (n === 'outcome') {
+      div.innerHTML = `Provide an ${n}`;
+    } else {
+      div.innerHTML = `Provide a ${n}`;
+    }
     
     if (!lastDiv.classList.contains(missTextError)) {
       const doneBtn = document.getElementById('form-and-review-list--done-btn')
@@ -59,8 +65,9 @@ const OutcomeAndMetricForm = ({
     const element = e.currentTarget;
     const text = element.innerHTML.trim();
     const parent = element.parentNode;
+    const elName = element.name;
     
-    return text === '' ? addMissingTextAlert(element, parent) : removeMissingTextAlert(element, parent);
+    return text === '' ? addMissingTextAlert(element, parent, elName) : removeMissingTextAlert(element, parent);
   }
 
   return (
@@ -76,6 +83,7 @@ const OutcomeAndMetricForm = ({
         multiline
         rows="4"
         onChange={changeOutcome}
+        onBlur={checkForText}
       />
 
       {metrics.map(({ key, metric }, i) => (
