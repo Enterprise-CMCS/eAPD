@@ -169,6 +169,12 @@ div.form--computed-value__input-aligned {
   bottom: 34px;
 }
 
+.align-content-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
 .full-width-label {
   max-width: initial;
 }

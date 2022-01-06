@@ -37,8 +37,9 @@ const OutcomeAndMetricForm = ({
     const lastDiv = p.lastChild;
     const missTextError = 'missing-text-error';
     const div = document.createElement('div');
+    const vowels = ("aeiouAEIOU");
 
-    if (n === 'outcome') {
+    if (vowels.indexOf(n[0]) !== -1) {
       div.innerHTML = `Provide an ${n}`;
     } else {
       div.innerHTML = `Provide a ${n}`;

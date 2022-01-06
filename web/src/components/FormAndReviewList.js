@@ -2,6 +2,8 @@ import { Alert, Button } from '@cmsgov/design-system';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon, { faPlusCircle } from './Icons';
+
 const FormAndReviewItem = ({
   collapsedComponent: Collapsed,
   expandedComponent: Expanded,
@@ -33,6 +35,18 @@ const FormAndReviewItem = ({
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
       <Expanded index={index} {...rest} collapse={collapse} />
+      <p className='align-content-right ds-u-margin-y--0' style={{ width: '485px' }}>
+        {extraButtons.map(({ onClick, text }) => (
+          <Button
+            key={text}
+            className="ds-c-button ds-c-button--transparent"
+            onClick={() => onClick(index)}
+          >
+            <Icon icon={faPlusCircle} className='ds-u-margin-right--1' />
+            {text}
+          </Button>
+        ))}
+      </p>
       <Button
         id="form-and-review-list--done-btn"
         variation="primary"
@@ -40,15 +54,6 @@ const FormAndReviewItem = ({
       >
         Done
       </Button>
-      {extraButtons.map(({ onClick, text }) => (
-        <Button
-          key={text}
-          className="ds-u-margin-left--2"
-          onClick={() => onClick(index)}
-        >
-          {text}
-        </Button>
-      ))}
     </div>
   );
 };
