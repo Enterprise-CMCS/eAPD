@@ -139,7 +139,6 @@
     "@storybook/manager-webpack5": "^6.4.9",
     "@storybook/react": "^6.4.9",
     "@storybook/source-loader": "^6.4.9",
-    "@storybook/storybook-deployer": "^2.8.10",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
@@ -195,10 +194,5 @@
     "webpack-dev-server": "^4.7.2",
     "yaml-jest": "^1.2.0",
     "yaml-loader": "^0.6.0"
-  },
-  "storybook-deployer": {
-    "gitUsername": "thetif",
-    "gitEmail": "tforkner@fearless.tech",
-    "commitMessage": "Deploy Storybook to GitHub Pages"
   }
 }
