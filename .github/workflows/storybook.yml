@@ -25,6 +25,6 @@ jobs:
       - name: Install and Build
         run: |
           cd web
-          npm install
+          npm ci
           npm run prebuild:storybook
-          npm run deploy-storybook -- --ci --source-branch ${{ env.GITHUB_REF_NAME }} --host-token-env-variable=${{ secrets.GH_TOKEN }}
+          npm run deploy-storybook -- --ci --source-branch $GITHUB_REF_NAME --host-token-env-variable=${{ secrets.GH_TOKEN }}
