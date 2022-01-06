@@ -101,6 +101,7 @@ const OutcomeAndMetricForm = ({
             rows="4"
             onChange={changeOutcome}
             onBlur={checkForText}
+            onKeyUp={checkForText}
           />
 
           {metrics.map(({ key, metric }, i) => (
