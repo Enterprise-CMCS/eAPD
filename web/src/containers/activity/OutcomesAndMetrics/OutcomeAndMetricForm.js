@@ -17,11 +17,26 @@ const OutcomeAndMetricForm = ({
   setOutcome,
   removeMetric
 }) => {
+  const outcomeContainer = `activite${activityIndex}-outcome${index}`;
+
+  const disableButton = () => {
+    const container = document.getElementById(outcomeContainer).parentElement;
+    const doneBtn = container.querySelector('#form-and-review-list--done-btn');
+
+    if (document
+          .getElementById(outcomeContainer)
+          .querySelectorAll('.missing-text-alert')
+          .length > 0) {
+          doneBtn.disabled = true;
+        } else {
+          doneBtn.disabled = false;
+        }
+  }
+
   const addMissingTextAlert = (e, p, n) => {
     const lastDiv = p.lastChild;
     const missTextError = 'missing-text-error';
     const div = document.createElement('div');
-    // div.innerHTML = `Provide a ${n}`;
 
     if (n === 'outcome') {
       div.innerHTML = `Provide an ${n}`;
@@ -30,12 +45,12 @@ const OutcomeAndMetricForm = ({
     }
     
     if (!lastDiv.classList.contains(missTextError)) {
-      const doneBtn = document.getElementById('form-and-review-list--done-btn')
       div.classList.add('missing-text-error')
       e.classList.add('missing-text-alert')
       p.appendChild(div)
-      doneBtn.disabled = true;
     }
+
+    disableButton();
   }
 
   const removeMissingTextAlert = (e, p) => {
@@ -44,10 +59,10 @@ const OutcomeAndMetricForm = ({
     e.classList.remove('missing-text-alert')
     
     if (lastDiv.classList.contains(missTextError)) {
-      const doneBtn = document.getElementById('form-and-review-list--done-btn')
       p.removeChild(lastDiv);
-      doneBtn.disabled = false;
     }
+
+    disableButton();
   }
 
   const changeOutcome = useMemo(
@@ -72,45 +87,47 @@ const OutcomeAndMetricForm = ({
 
   return (
     <Fragment key={`activity${activityIndex}-index${index}-form`}>
-      <TextField
-        key={`activity${activityIndex}-index${index}`}
-        autoFocus
-        name="outcome"
-        className="data-entry-box"
-        label="Outcome"
-        hint="Describe a distinct and measurable improvement for this system."
-        value={outcome}
-        multiline
-        rows="4"
-        onChange={changeOutcome}
-        onBlur={checkForText}
-      />
+        <div id={outcomeContainer}>
+          <TextField
+            key={`activity${activityIndex}-index${index}`}
+            autoFocus
+            name="outcome"
+            className="data-entry-box"
+            label="Outcome"
+            hint="Describe a distinct and measurable improvement for this system."
+            value={outcome}
+            multiline
+            rows="4"
+            onChange={changeOutcome}
+            onBlur={checkForText}
+          />
 
-      {metrics.map(({ key, metric }, i) => (
-        <Review
-          key={key}
-          onDeleteClick={() => removeMetric(index, i)}
-          ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
-          objType="Metric"
-        >
-          <div
-            key={key}
-            className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-          >
-            <TextField
-              id={`${activityIndex}-metric${index}`}
-              name="metric"
-              label="Metric"
-              hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-              value={metric}
-              multiline
-              rows="4"
-              onChange={changeMetric(i)}
-              onBlur={checkForText}
-            />
-          </div>
-        </Review>
-      ))}
+          {metrics.map(({ key, metric }, i) => (
+            <Review
+              key={key}
+              onDeleteClick={() => removeMetric(index, i)}
+              ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
+              objType="Metric"
+            >
+              <div
+                key={key}
+                className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+              >
+                <TextField
+                  id={`${activityIndex}-metric${index}`}
+                  name="metric"
+                  label="Metric"
+                  hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+                  value={metric}
+                  multiline
+                  rows="4"
+                  onChange={changeMetric(i)}
+                  onBlur={checkForText}
+                />
+              </div>
+            </Review>
+          ))}
+      </div>
     </Fragment>
   );
 };
