@@ -27,4 +27,4 @@ jobs:
           cd web
           npm ci
           npm run prebuild:storybook
-          npm run deploy-storybook -- --ci --source-branch $GITHUB_REF_NAME --host-token-env-variable=${{ secrets.GH_TOKEN }}
+          npm run deploy-storybook -- --ci --source-branch ${{ github.head_ref }} --host-token-env-variable=${{ secrets.GH_TOKEN }}
