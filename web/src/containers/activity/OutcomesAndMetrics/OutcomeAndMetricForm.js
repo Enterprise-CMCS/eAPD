@@ -125,6 +125,7 @@ const OutcomeAndMetricForm = ({
                   rows="4"
                   onChange={changeMetric(i)}
                   onBlur={checkForText}
+                  onKeyUp={checkForText}
                 />
               </div>
             </Review>
