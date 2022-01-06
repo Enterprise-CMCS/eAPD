@@ -1,22 +1,12 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from './symbols';
 import { updateBudget } from '../budget';
-import { getKeyPersonnel } from '../../reducers/apd.js';
 
 /**
- * Create a new key person to the APD
+ * Save key personnel to the APD
  */
-export const createKeyPerson = ({years, isPrimary}) => {
-  return getKeyPersonnel(years, isPrimary);
-};
-
-/**
- * Save key person to the APD
- */
-export const saveKeyPerson = (index, data) => (dispatch, getState) => {
+export const saveKeyPersonnel = (index, data) => (dispatch, getState) => {
   const previousState = getState();
-  
-  // Use the provided index unless we are creating a new item in the array
-  // If its a newly created item set it to the length which will be last item
+
   let indexCalculated = index;
   
   if(previousState.apd.data.keyPersonnel[index] === undefined) {
@@ -38,11 +28,11 @@ export const saveKeyPerson = (index, data) => (dispatch, getState) => {
 };
 
 /**
- * Remove a key person from the APD
+ * Remove a key personnel from the APD
  * @param {Number} index Index of the key person to remove
  * @param {Object} di Dependency injection object
  */
-export const removeKeyPerson = index => dispatch => {
+export const removeKeyPersonnel = index => dispatch => {
   dispatch({
     type: REMOVE_APD_ITEM,
     path: `/keyPersonnel/${index}`

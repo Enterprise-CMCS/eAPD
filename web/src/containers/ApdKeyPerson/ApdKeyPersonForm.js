@@ -9,7 +9,7 @@ import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
 
 import {
-  saveKeyPerson
+  saveKeyPersonnel
 } from '../../actions/editApd';
 
 import { selectApdYears } from '../../reducers/apd.selectors';
@@ -65,20 +65,16 @@ const PersonForm = forwardRef(
       savePerson(index, state);
     };
 
-//     const setPersonHasCosts = newHasCosts => () => {
-//       setHasCosts(index, newHasCosts);
-//     };
-// 
+    const setPersonHasCosts = newHasCosts => () => {
+      setHasCosts(index, newHasCosts);
+    };
+
     const setCostForYear = (year, value) => {
-      console.log("value", value)
       dispatch({ type: 'updateCosts', field: 'costs', year: year, value: value })
-      // setCost(index, year, value);
     };
 
     const setFTEForYear = (year, value) => {
-      console.log("value", value)
       dispatch({ type: 'updateFte', field: 'fte', year: year, value: +value })
-      // setTime(index, year, +value);
     };
 
     const primary = index === 0;
@@ -181,12 +177,8 @@ PersonForm.propTypes = {
 };
 
 const mapDispatchToProps = {
-  savePerson: saveKeyPerson
+  savePerson: saveKeyPersonnel
 };
-
-const mapStateToProps = state => ({
-  years: selectApdYears(state)
-});
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
   PersonForm

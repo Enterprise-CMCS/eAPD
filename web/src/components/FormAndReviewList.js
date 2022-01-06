@@ -95,21 +95,13 @@ const FormAndReviewList = ({
   extraItemButtons,
   list,
   noDataMessage,
-  onDoneClick,
   onAddClick,
-  onDeleteClick,
   onCancelClick,
-  years,
+  onDeleteClick,
   ...rest
 }) => {
 
   const [hasAdded, setHasAdded] = useState(false);
-
-  const [localList, setLocalList] = useState(list);
-  
-  useEffect(() => {
-    setLocalList(list)
-  }, [list])
   
   const combinedClassName = useMemo(
     () => ['form-and-review-list', className].join(' '),
@@ -118,35 +110,29 @@ const FormAndReviewList = ({
 
   const addClick = e => {
     setHasAdded(true);
-    const newListItem = createNew(years, false); // this wont work since its specific to keyPersonnel
-    setLocalList([...localList, newListItem]);
-  };
-  
-  const onCancel = e => {
-    setLocalList(list);
+    onAddClick();
   };
 
   return (
     <div className={combinedClassName}>
-      {localList.length === 0 && noDataMessage !== false ? (
+      {list.length === 0 && noDataMessage !== false ? (
         <Alert variation="error">{noDataMessage || 'This list is empty'}</Alert>
       ) : (
-        localList.map((item, index) => (
+        list.map((item, index) => (
           <FormAndReviewItem
             key={item.key}
             collapsedComponent={collapsed}
             expandedComponent={expanded}
             extraButtons={extraItemButtons}
             index={index}
-            initialExpanded={hasAdded && index === localList.length - 1}
+            initialExpanded={hasAdded && index === list.length - 1}
             item={item}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
                 ? () => onDeleteClick(index)
                 : null
             }
-            onCancelClick={onCancel}
-            years={years}
+            onCancelClick={onCancelClick}
             {...rest}
           />
         ))

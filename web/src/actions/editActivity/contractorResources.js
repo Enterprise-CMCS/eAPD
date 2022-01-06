@@ -1,6 +1,30 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 import { updateBudget } from '../budget';
 
+
+export const saveContractor = (activityIndex, index, data) => (dispatch, getState) => {
+  const previousState = getState();
+  
+  let indexCalculated = index;
+  
+  if(previousState.apd.data.keyPersonnel[index] === undefined) {
+    indexCalculated = previousState.apd.data.keyPersonnel.length;
+    dispatch({
+      type: ADD_APD_ITEM,
+      path: `/activities/${activityIndex}/contractorResource/-`,
+      state: getState()
+    });
+  }
+  
+  dispatch({
+    type: EDIT_APD,
+    path: `/activities/${activityIndex}/contractorResource/${activityIndex}`,
+    value: data
+  });
+  
+  dispatch(updateBudget());  
+}
+
 /**
  * Add a new contractor resource to an activity
  * @param {Number} activityIndex Index of the activity to add the contractor to
