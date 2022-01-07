@@ -14,6 +14,7 @@ export const selectApdYears = ({
 export const selectSummary = ({
   apd: {
     data: {
+      name,
       narrativeHIE,
       narrativeHIT,
       narrativeMMIS,
@@ -23,6 +24,7 @@ export const selectSummary = ({
     }
   }
 }) => ({
+  name,
   narrativeHIE,
   narrativeHIT,
   narrativeMMIS,

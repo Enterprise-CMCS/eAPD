@@ -32,15 +32,19 @@ tap.test('me GET endpoint', async endpointTest => {
     const extractor = sinon.stub();
     const eapdTokenVerifier = sinon.stub();
     const updateFromOkta = sinon.stub();
+    const checkExpired = sinon.stub();
 
     extractor.withArgs(req).returns(req.jwt);
 
     eapdTokenVerifier.withArgs(req.jwt).resolves(claims);
+    
+    checkExpired.withArgs(claims).resolves(claims);
 
     getEndpoint(app, {
       extractor,
       verifier: eapdTokenVerifier,
-      updateFromOkta
+      updateFromOkta,
+      checkExpired
     });
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 

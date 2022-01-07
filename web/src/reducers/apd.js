@@ -21,6 +21,7 @@ import {
   ADD_APD_ITEM,
   ADD_APD_YEAR,
   EDIT_APD,
+  EDIT_APD_NAME,
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } from '../actions/editApd';
@@ -343,6 +344,19 @@ const reducer = (state = initialState, action) => {
             value: action.value
           }
         ])
+      };
+    }
+
+    case EDIT_APD_NAME: {
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            name: action.name
+          }
+        }
       };
     }
 

@@ -2,6 +2,7 @@
 
 exports[`single activity entry page renders correctly 1`] = `
 <div
+  className="remove-clearfix"
   id="activity-entry-page"
 >
   <h2>

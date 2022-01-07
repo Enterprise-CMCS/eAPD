@@ -9,7 +9,6 @@ module.exports = (app, {changeState = cs } = {}) => {
     if (Object.keys(user.states).includes(stateId)){
       const jwt = await changeState(user, stateId)
       res.send({jwt})
-
     }
     else{
       res.status(403).send()
