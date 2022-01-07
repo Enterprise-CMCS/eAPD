@@ -52,8 +52,8 @@ const config = {
         ]
       },
       {
-        test: /\.(woff2?|ttf|otf|eot|svg)$/,
-        loader: 'file-loader'
+        test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+        type: 'asset/resource'
       },
       {
         test: /\.yaml$/,
@@ -86,7 +86,8 @@ const config = {
     historyApiFallback: true,
     host: '0.0.0.0',
     hot: true,
-    port: '8001'
+    port: '8001',
+    allowedHosts: 'auto'
   }
 };
 
